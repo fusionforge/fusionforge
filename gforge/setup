@@ -10,95 +10,95 @@ getval(){
 }
 
 computedefault(){
-echo "Calculating defaults"
-# This is used to make a default working gforge.conf
-DEFAULTsystem_name=Gforge
-DEFAULTdomain_name=`hostname -f`
-DEFAULTserver_admin=webmaster@$DEFAULTdomain_name
-DEFAULTdb_host=`hostname -i`
-DEFAULTdb_name=gforge
-DEFAULTdb_user=gforge
-DEFAULTdb_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-DEFAULTip_address=`hostname -i`
-DEFAULTcvs_host=cvs.$DEFAULTdomain_name
-DEFAULTshell_host=shell.$DEFAULTdomain_name
-DEFAULTusers_host=users.$DEFAULTdomain_name
-DEFAULTlists_host=lists.$DEFAULTdomain_name
-DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
-DEFAULTjabber_host=jabber.$DEFAULTdomain_name
-DEFAULTdownload_host=download.$DEFAULTdomain_name
-DEFAULTupload_host=upload.$DEFAULTdomain_name
-DEFAULTstatsadmin_groupid=2
-DEFAULTnewsadmin_groupid=3
-DEFAULTpeerrating_groupid=4
-DEFAULTadmin_login=admin
-DEFAULTadmin_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-DEFAULTskill_list="Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
-DEFAULTdefault_trove_cat=18
-DEFAULTldap_host=localhost
-DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
-DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-DEFAULTcgidir=`pwd`/utils
-DEFAULTcronolog_path=`type cronolog | cut -d' ' -f3`
-DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
-DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
-DEFAULTgforge_chroot=""
-DEFAULTgforge_etc=`pwd`/etc
-DEFAULTgroupdir=`pwd`/home/groups
-DEFAULThomedir=`pwd`/home
-DEFAULTuploaddir=`pwd`/var/lib/gforge/download/
-DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-DEFAULTusr_share_gforge=`pwd`
-DEFAULTvar_lib_gforge=`pwd`/var/lib
-DEFAULTvar_log_gforge=`pwd`/var/log
-DEFAULTsys_show_source=0
-DEFAULTsys_force_login=0
-DEFAULTsys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
-DEFAULTsys_theme=gforge
-DEFAULTsys_lang=English
-DEFAULTsys_use_ldap=0
-DEFAULTsys_use_jabber=0
-DEFAULTsys_use_auth_ldap=1
-DEFAULTsys_ldap_auth_host=localhost
-DEFAULTsys_ldap_auth_port=389
-DEFAULTsys_ldap_auth_version=3
-DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
-DEFAULTsys_use_cvs=true
-DEFAULTsys_use_tracker=true
-DEFAULTsys_use_forum=true
-DEFAULTsys_use_pm=true
-DEFAULTsys_use_docman=true
-DEFAULTsys_use_news=true
-DEFAULTsys_use_mail=true
-DEFAULTsys_use_survey=true
-DEFAULTsys_use_file=true
-DEFAULTsys_use_ftp=true
-DEFAULTsys_use_trove=true
-DEFAULTsys_use_snippet=true
-DEFAULTsys_use_ssl=false
-DEFAULTsys_use_people=true
-DEFAULTsys_project_reg_restricted=true
-DEFAULTsys_localization_enable_caching=true
-DEFAULTsys_localization_cache_path=`pwd`/var/cache/gforge/
-DEFAULTsys_localization_enable_timestamp_checking=true
-DEFAULTsys_localinc=`pwd`/etc/local.inc
-DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-#
-# TODO
-#usr_lib_gforge=`pwd`
-#vhost_name
-#docdir
+	echo "Calculating defaults"
+	# This is used to make a default working gforge.conf
+	DEFAULTsystem_name=Gforge
+	DEFAULTdomain_name=`hostname -f`
+	DEFAULTserver_admin=webmaster@$DEFAULTdomain_name
+	DEFAULTdb_host=`hostname -i`
+	DEFAULTdb_name=gforge
+	DEFAULTdb_user=gforge
+	DEFAULTdb_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTip_address=`hostname -i`
+	DEFAULTcvs_host=cvs.$DEFAULTdomain_name
+	DEFAULTshell_host=shell.$DEFAULTdomain_name
+	DEFAULTusers_host=users.$DEFAULTdomain_name
+	DEFAULTlists_host=lists.$DEFAULTdomain_name
+	DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
+	DEFAULTjabber_host=jabber.$DEFAULTdomain_name
+	DEFAULTdownload_host=download.$DEFAULTdomain_name
+	DEFAULTupload_host=upload.$DEFAULTdomain_name
+	DEFAULTstatsadmin_groupid=2
+	DEFAULTnewsadmin_groupid=3
+	DEFAULTpeerrating_groupid=4
+	DEFAULTadmin_login=admin
+	DEFAULTadmin_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTskill_list="Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
+	DEFAULTdefault_trove_cat=18
+	DEFAULTldap_host=localhost
+	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
+	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTcgidir=$GFGDIR/utils
+	DEFAULTcronolog_path=`type cronolog | cut -d' ' -f3`
+	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
+	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
+	DEFAULTgforge_chroot=""
+	DEFAULTgforge_etc=$GFGDIR/$ETCDIR
+	DEFAULTgroupdir=$GFGDIR/home/groups
+	DEFAULThomedir=$GFGDIR/home
+	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
+	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTusr_share_gforge=$GFGDIR/
+	DEFAULTvar_lib_gforge=$GFGDIR/var/lib
+	DEFAULTvar_log_gforge=$GFGDIR/var/log
+	DEFAULTsys_show_source=0
+	DEFAULTsys_force_login=0
+	DEFAULTsys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
+	DEFAULTsys_theme=gforge
+	DEFAULTsys_lang=English
+	DEFAULTsys_use_ldap=0
+	DEFAULTsys_use_jabber=0
+	DEFAULTsys_use_auth_ldap=1
+	DEFAULTsys_ldap_auth_host=localhost
+	DEFAULTsys_ldap_auth_port=389
+	DEFAULTsys_ldap_auth_version=3
+	DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
+	DEFAULTsys_use_cvs=true
+	DEFAULTsys_use_tracker=true
+	DEFAULTsys_use_forum=true
+	DEFAULTsys_use_pm=true
+	DEFAULTsys_use_docman=true
+	DEFAULTsys_use_news=true
+	DEFAULTsys_use_mail=true
+	DEFAULTsys_use_survey=true
+	DEFAULTsys_use_file=true
+	DEFAULTsys_use_ftp=true
+	DEFAULTsys_use_trove=true
+	DEFAULTsys_use_snippet=true
+	DEFAULTsys_use_ssl=false
+	DEFAULTsys_use_people=true
+	DEFAULTsys_project_reg_restricted=true
+	DEFAULTsys_localization_enable_caching=true
+	DEFAULTsys_localization_cache_path=$GFGDIR/var/cache/gforge/
+	DEFAULTsys_localization_enable_timestamp_checking=true
+	DEFAULTsys_localinc=$GFGDIR/etc/local.inc
+	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	#
+	# TODO
+	#usr_lib_gforge=$GFGDIR
+	#vhost_name
+	#docdir
 }
 
 writedefault(){
-# Here is the fun
-# This create a default conf file in $1 
-tmpfile=$1.$$computedefault
-echo "cat >$1<<-EOF" > $tmpfile
-cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/\1=\${DEFAULT\1}/' >> $tmpfile
-echo 'EOF' >> $tmpfile
-. $tmpfile
-rm -f $tmpfile
+	# Here is the fun
+	# This create a default conf file in $1 
+	tmpfile=$1.$$computedefault
+	echo "cat >$1<<-EOF" > $tmpfile
+	cat $0 | grep "^	DEFAULT" | sed 's/	DEFAULT\(.[^=]*\)=.*/\1=\${DEFAULT\1}/' >> $tmpfile
+	echo 'EOF' >> $tmpfile
+	. $tmpfile
+	rm -f $tmpfile
 }
 
 readdefault() {
@@ -109,93 +109,93 @@ readdefault() {
 
 setupinout(){
 
-computedefault
+	computedefault
 
-writedefault etc/gforge.conf.new
+	writedefault $CONFFILEIN.new
 
-if [ -f $CONFFILEIN ]
-then
-	echo "Reading defaults from $CONFFILEIN"
-	readdefault $CONFFILEIN
-else
-	readdefault etc/gforge.conf.new
-fi
-
-if [ "$interact" == true ]
-then
-	echo "Enter values or type enter for defaults:"
-	# Here is the fun II
-	# This ask for change of default
-	tmpfile=$1.$$getval
-	cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' > $tmpfile
-else
-	cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/\1="\${DEFAULT\1}"/' > $tmpfile
-fi
-. $tmpfile
-rm -f $tmpfile
-
-echo "Creating $CONFFILEOUT"
-[ ! -d `dirname $CONFFILEOUT` ] && (mkdir -p `dirname $CONFFILEOUT` || (echo "Could not create `dirname $CONFFILEOUT`" && exit 1))
-writedefault etc/gforge.conf.new
-mv etc/gforge.conf.new $CONFFILEOUT
-#cat $0 | grep '^DEFAULT' | sed 's/^DEFAULT\(.[^=]*\)=.*/DEFAULT\1 \1/' | while read defvar var
-#do
-#	echo $defvar $var 
-#done
-
-
-# Remove trailing space
-cat $CONFFILEIN | sed 's/ *$//' > etc/gforge.conf.new
-mv etc/gforge.conf.new $CONFFILEIN
-
-# Fill in the blanks
-for i in etc/httpd.d/[0-4][0-9]* etc/httpd.d/httpd.secrets
-do
-	utils/fill-in-the-blanks.pl $i etc/`basename $i`.tmp $CONFFILEOUT
-done
-echo "Creating $HTTPDCONF"
-ls etc/[0-9][0-9]*.tmp | sort | xargs cat > $HTTPDCONF
-rm etc/[0-9][0-9]*.tmp
-echo "Creating $HTTPDSECRETS"
-cat etc/httpd.secrets.tmp > $HTTPDSECRETS
-rm etc/httpd.secrets.tmp
-
-echo "Creating $LOCALINC"
-for i in etc/local.d/01* etc/local.d/10*simple etc/local.d/[2-9]*
-do
-	utils/fill-in-the-blanks.pl $i etc/`basename $i` $CONFFILEOUT
-done
-ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > $LOCALINC
-rm etc/01* etc/10*simple etc/[2-9]*
-
-
-if [ -f `pwd`/$HTTPDCONF ] 
-then
-	# Set full path
-	GFORGE_ETC_SEARCH=`pwd`/$HTTPDCONF
-else
-	# Full path already
-	GFORGE_ETC_SEARCH=$HTTPDCONF
-fi
-export GFORGE_ETC_SEARCH
-if [ -f $APACHECONF ] ; then
-	if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
-		utils/install-apache.sh setup
-	else 
-		echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
+	if [ -f $CONFFILEIN ]
+	then
+		echo "Reading defaults from $CONFFILEIN"
+		readdefault $CONFFILEIN
+	else
+		readdefault $CONFFILEIN.new
 	fi
-fi
+	
+	if [ "$interact" == true ]
+	then
+		echo "Enter values or type enter for defaults:"
+		# Here is the fun II
+		# This ask for change of default
+		tmpfile=$1.$$getval
+		cat $0 | grep "^	DEFAULT" | sed 's/	DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' > $tmpfile
+	else
+		cat $0 | grep "^	DEFAULT" | sed 's/	DEFAULT\(.[^=]*\)=.*/\1="\${DEFAULT\1}"/' > $tmpfile
+	fi
+	. $tmpfile
+	rm -f $tmpfile
+	
+	echo "Creating $CONFFILEOUT"
+	[ ! -d `dirname $CONFFILEOUT` ] && (mkdir -p `dirname $CONFFILEOUT` || (echo "Could not create `dirname $CONFFILEOUT`" && exit 1))
+	writedefault $CONFFILEOUT.new
+	mv $CONFFILEOUT.new $CONFFILEOUT
+	
+	
+	# Remove trailing space
+	cat $CONFFILEIN | sed 's/ *$//' > $CONFFILEIN.new
+	mv $CONFFILEIN.new $CONFFILEIN
+	
+	# Fill in the blanks
+	for i in $ETCDIR/httpd.d/[0-4][0-9]* $ETCDIR/httpd.d/httpd.secrets
+	do
+		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.tmp $CONFFILEOUT
+	done
+	
+	echo "Creating $HTTPDCONF"
+	ls $ETCDIR/[0-9][0-9]*.tmp | sort | xargs cat > $HTTPDCONF
+	rm $ETCDIR/[0-9][0-9]*.tmp
+	echo "Creating $HTTPDSECRETS"
+	cat $ETCDIR/httpd.secrets.tmp > $HTTPDSECRETS
+	rm $ETCDIR/httpd.secrets.tmp
+	
+	echo "Creating $LOCALINC"
+	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10*simple $ETCDIR/local.d/[2-9]*
+	do
+		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
+	done
+	ls $ETCDIR/01* $ETCDIR/10*simple $ETCDIR/[2-9]* | sort | xargs cat > $LOCALINC
+	rm $ETCDIR/01* $ETCDIR/10*simple $ETCDIR/[2-9]*
+	
+	
+	if [ -f $GFGDIR/$HTTPDCONF ] 
+	then
+		# Set full path
+		GFORGE_ETC_SEARCH=$GFGDIR/$HTTPDCONF
+	else
+		# Full path already
+		GFORGE_ETC_SEARCH=$HTTPDCONF
+	fi
+	export GFORGE_ETC_SEARCH
+	if [ -f $APACHECONF ] ; then
+		if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
+			$BINDIR/install-apache.sh setup
+		else 
+			echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
+		fi
+	fi
 }
-
 
 APACHECONF=/etc/apache/httpd.conf
 export APACHECONF
-CONFFILEIN=etc/gforge.conf
-CONFFILEOUT=etc/gforge.conf
-LOCALINC=etc/local.inc
-HTTPDCONF=etc/httpd.conf
-HTTPDSECRETS=etc/httpd.secrets
-export CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS
+
+ETCDIR=etc
+BINDIR=utils
+GFGDIR=`pwd`
+CONFFILEIN=$ETCDIR/gforge.conf
+CONFFILEOUT=$ETCDIR/gforge.conf
+LOCALINC=$ETCDIR/local.inc
+HTTPDCONF=$ETCDIR/httpd.conf
+HTTPDSECRETS=$ETCDIR/httpd.secrets
+export ETCDIR BINDIR GFGDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS
 
 while [ $# -ne 0 ]
 do
@@ -237,11 +237,11 @@ do
 			HTTPDSECRETS=$1/httpd.secrets
 			;;
 		-example )
-			CONFFILEIN=etc/gforge.conf.example
-			CONFFILEOUT=etc/gforge.conf.example
-			LOCALINC=etc/local.inc.example
-			HTTPDCONF=etc/httpd.conf.example
-			HTTPDSECRETS=etc/httpd.secrets.example
+			CONFFILEIN=$ETCDIR/gforge.conf.example
+			CONFFILEOUT=$ETCDIR/gforge.conf.example
+			LOCALINC=$ETCDIR/local.inc.example
+			HTTPDCONF=$ETCDIR/httpd.conf.example
+			HTTPDSECRETS=$ETCDIR/httpd.secrets.example
 			;;
 		-clean )
 			[ -f $CONFFILEIN ] && echo Removing $CONFFILEIN && rm -f $CONFFILEIN
