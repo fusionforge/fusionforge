@@ -1,4 +1,4 @@
-sourceforge (2.5-25+) unstable; urgency=medium
+sourceforge (2.5-26) unstable; urgency=medium
 
   * [Christian] Made big changes in install-ldap.sh to be ok with
     slapd config.
