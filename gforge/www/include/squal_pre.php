@@ -42,7 +42,7 @@ require_once('common/include/PluginManager.class') ;
 require_once('squal_exit.php');
 
 //needed for logging / logo
-require_once('browser.php');
+//require_once('browser.php');
 
 $sys_datefmt = "m/d/y H:i";
 
