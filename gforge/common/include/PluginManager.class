@@ -11,26 +11,12 @@
  *
  */
 
-/**
- *  plugin_manager_get_object() - Get the Plugin Manager object.
- */
-function &plugin_manager_get_object() {
-	// echo "Entered plugin_manager_get_object " ;
-	global $PLUGINMANAGER_OBJ;
-	if (!isset($PLUGINMANAGER_OBJ)) {
-		// echo "Creating object " ;
-		$PLUGINMANAGER_OBJ = new PluginManager() ;
-	}
-	return $PLUGINMANAGER_OBJ ;
-}
-
 class PluginManager extends Error {
 	var $plugins_objects ;
 	var $plugins_to_hooks ;
 	var $hooks_to_plugins ;
 
 	function PluginManager () {
-		// echo "Entered PluginManager " ;
 		$this->Error() ;
 		$this->plugins_objects = array () ;
 		$this->plugins_to_hooks = array () ;
@@ -62,38 +48,19 @@ class PluginManager extends Error {
 		return false ;
 	}
 
-	function RegisterPlugin ($pluginname, $pluginobject) {
-		global $PLUGINMANAGER_OBJ ;
-		// echo "Registering plugin $pluginname " ;
-		$PLUGINMANAGER_OBJ->plugins_objects[$pluginname] = $pluginobject ;
-		// echo count($PLUGINMANAGER_OBJ->plugins_objects) . " objects in plugins_objects " ;
-		// echo "<br>--- " . serialize($this) . " ---<br>" ;
-	}
-
 	function LoadPlugins () {
-		// echo "Entered LoadPlugins " ;
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = "/usr/lib/sourceforge/plugins/" ;
 		foreach ($plugins_data as $p_id => $p_name) {
 			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
-			// echo "Trying $filename " ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
 			}
 		}
+		return true ;
 	}
 
 	function SetupHooks () {
-		global $PLUGINMANAGER_OBJ ;
-		// echo "Entered SetupHooks " ;
-		// echo count($this->plugins_objects) . " objects in plugins_objects " ;
-		// echo "<br>--- " . serialize($this) . " ---<br>" ;
-		$this->plugins_to_hooks = array ();
-		foreach ($this->plugins_objects as $p_name => $p_obj) {
-			// echo "Reading hooks for plugin $p_name " ;
-			$this->plugins_to_hooks [$p_name] = $p_obj->GetHooks () ;
-		}
-		$this->hooks_to_plugins = array () ;
 		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
 			foreach ($hook_list as $hook_name) {
 				if (!isset ($this->hooks_to_plugins[$hook_name])) {
@@ -102,17 +69,20 @@ class PluginManager extends Error {
 				$this->hooks_to_plugins[$hook_name][] = $p_name ;
 			}
 		}
+		return true ;
 	}
 
-	function Init () {
-		// echo "Entered Init " ;
-		$this->LoadPlugins () ;
-		// echo count($this->plugins_objects) . " objects in plugins_objects " ;
-		// echo "<br>--- " . serialize($this) . " ---<br>" ;
-		$this->SetupHooks () ;
+	function RegisterPlugin (&$pluginobject) {
+		if (!$pluginobject->GetName ()) {
+			exit_error ("Some plugin did not provide a name.  I'd gladly tell you which one, but obviously I can't.  Sorry.") ;
+		}
+		$p_name = $pluginobject->GetName () ;
+		$this->plugins_objects [$p_name] =& $pluginobject ;
+		$this->plugins_to_hooks [$p_name] = $pluginobject->GetHooks () ;
+		return true ;
 	}
 
-	function RunHooks ($hookname, $params=false) {
+	function RunHooks ($hookname, $params) {
 		echo "\n<!-- Starting hook $hookname -->" ;
 		$p_list = $this->hooks_to_plugins[$hookname] ;
 		if (isset ($p_list)) {
@@ -124,12 +94,36 @@ class PluginManager extends Error {
 			}
 		}
 		echo "<!-- End of hook $hookname -->\n" ;
+		return true ;
 	}
 }
 
-plugin_manager_get_object() ;
+function &plugin_manager_get_object() {
+	global $PLUGINMANAGER_OBJ;
+	if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
+		$PLUGINMANAGER_OBJ = new PluginManager ;
+	}
+	return $PLUGINMANAGER_OBJ ;
+}
 
-$PLUGINMANAGER_OBJ->Init () ;
+function register_plugin (&$pluginobject) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->RegisterPlugin ($pluginobject) ;
+}
+
+function plugin_hook ($hookname, $params=false) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->RunHooks ($hookname, $params) ;
+}
+
+function setup_plugin_manager () {
+	$pm =& plugin_manager_get_object() ;
+	$pm->LoadPlugins () ;
+	$pm->SetupHooks () ;
+	return true ;
+}
+
+setup_plugin_manager () ;
 
 // Local Variables:
 // mode: php

@@ -12,16 +12,21 @@
  */
 
 class Plugin extends Error {
-	var $plugin_name ;
+	var $name ;
 	var $hooks ;
 
 	function Plugin () {
 		$this->Error() ;
+		$this->name = false ;
 		$this->hooks = array () ;
 	}
 
 	function GetHooks () {
 		return $this->hooks ;
+	}
+
+	function GetName () {
+		return $this->name ;
 	}
 
 	function CallHook ($hookname, $params) {
