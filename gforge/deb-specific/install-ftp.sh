@@ -47,7 +47,8 @@ FIN
     update)
 	(cd $GRPHOME; ls) | while read group ; do
 	    if [ ! -d $FTPROOT/pub/$group ] ; then
-		install -o sfftp -g $group -m 2775 -d $FTPROOT/pub/$group
+	    	gid=`ls -lnd $GRPHOME/$group | xargs | cut -d" " -f4`
+		install -o sfftp -g $gid -m 2775 -d $FTPROOT/pub/$group
 	    fi
 	done
 	;;
