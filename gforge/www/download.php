@@ -30,11 +30,18 @@ if (db_numrows($res) < 1) {
 $group_name=db_result($res,0,'unix_group_name');
 $filename=db_result($res,0,'filename');
 
+/*
+echo $group_name.'|'.$filename.'|'.$sys_upload_dir.$group_name.'/'.$filename;
+if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
+	echo '<BR>file exists';
+	passthru($sys_upload_dir.$group_name.'/'.$filename);
+}
+*/
 Header("Content-disposition: filename=".$filename);
 Header("Content-type: application/binary");
 
 if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
-	passthru($sys_upload_dir.$group_name.'/'.$filename);
+	readfile($sys_upload_dir.$group_name.'/'.$filename);
 	$res=db_query("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day) 
 		VALUES ('$REMOTE_ADDR','$file_id','".date('m')."','".date('d')."')");
 }

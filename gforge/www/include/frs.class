@@ -646,7 +646,7 @@ class FRS extends Error {
 				filemodule_monitor.filemodule_id='$package_id' AND 
 				frs_package.group_id='$group_id'";
 		$result=db_query($sql);
-
+echo db_error();
 		if ($result && db_numrows($result) > 0) {
 			//send the email
 			$array_emails=result_column_to_array($result);
@@ -690,8 +690,7 @@ class FRS extends Error {
 
 			return $result;
 		} else {
-			$this->setError(' FRS Send Notice Failed ');
-			return false;
+			return true;
 		}
 	}
 
