@@ -1,4 +1,4 @@
-gforge (3.1-3+) unstable; urgency=low
+gforge (3.1-4+) unstable; urgency=low
 
   * [Christian] corrected stupid chmod error in user_dump_update.pl
     that was making unwritable htdocs dir to the group
@@ -6,12 +6,24 @@ gforge (3.1-3+) unstable; urgency=low
     updated to last cvsweb version
   * [Christian] added setup and cleanup target in install-ldap.sh
     and fill crypted password
+
+ -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2003 17:54:43 +0100
+
+gforge (3.1-4) unstable; urgency=low
+
+  * [Roland] Fixed multiline inline Perl script for gforge-mta-postfix's
+    configuration process (I know, I know) (closes: #219379).
+  * [Roland] install-apache.sh now uses the new "modules-config" mechanism
+    provided by Apache packages to enable/disable modules, instead of
+    uncommenting LoadModules lines by script (closes: #219745).
+  * [Roland] Fixed update-user-group-cvs.sh's handling of lockfiles
+    (closes: #219957).
   * [Christian] corrected SYSLOGD warning to 'you must have
     SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in
     /etc/init.d/sysklogd', since the old advice might have break
     your syslogd, sorry for this but this is makejail advice.
 
- -- Christian Bayle <bayle@debian.org>  Thu, 13 Nov 2003 18:46:28 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:21:26 +0100
 
 gforge (3.1-3) unstable; urgency=low
 
