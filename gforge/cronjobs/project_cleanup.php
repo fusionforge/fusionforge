@@ -12,10 +12,6 @@
 
 require ('squal_pre.php');
 
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-        exit_permission_denied();
-}*/
-
 db_begin();
 
 #one hour ago for projects
@@ -32,8 +28,8 @@ echo db_error();
 db_query("DELETE FROM users WHERE status='P' and add_date < '$then'");
 echo db_error();
 
-#one week ago for sessions
-$then=(time()-604800);
+#30 days ago for sessions
+$then=(time()-(30*60*60*24));
 db_query("DELETE FROM session WHERE time < '$then'");
 echo db_error();
 

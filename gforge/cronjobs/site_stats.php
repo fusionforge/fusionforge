@@ -34,7 +34,7 @@ $rel = db_query($sql);
 echo db_error();
 $sql = "INSERT INTO stats_agg_logo_by_day 
 	SELECT day, count(*) 
-	FROM activity_log_old WHERE type=1 AND day='$yesterday_formatted' GROUP BY day";
+	FROM activity_log WHERE type=1 AND day='$yesterday_formatted' GROUP BY day";
 $rel = db_query($sql);
 echo db_error();
 
@@ -49,7 +49,7 @@ $rel = db_query($sql);
 echo db_error();
 $sql = "INSERT INTO stats_agg_logo_by_group 
 	SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) 
-	FROM activity_log_old WHERE type=1 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
+	FROM activity_log WHERE type=1 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);
 echo db_error();
 
@@ -64,7 +64,7 @@ $rel = db_query($sql);
 echo db_error();
 $sql = "INSERT INTO stats_agg_site_by_group 
 	SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,COUNT(*) 
-	FROM activity_log_old WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
+	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);
 echo db_error();
 
@@ -78,7 +78,7 @@ $rel = db_query($sql);
 echo db_error();
 $sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views)
 	SELECT '$year$month'::int AS month, '$day'::int AS newday, count(*) 
-	FROM activity_log_old WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday";
+	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday";
 $rel = db_query($sql);
 echo db_error();
 
