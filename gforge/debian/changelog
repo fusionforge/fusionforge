@@ -1,12 +1,13 @@
-gforge (3.0-1) unstable; urgency=low
+gforge (3rc2-4+) unstable; urgency=low
 
-  * [Roland] The much-awaited 3.0 release!  Yay!  (No other changes.)
+  * [Roland] The much-awaited 3.0 release!  Yay!
   * [Roland] This Debian release is dedicated to Christian and his wife,
     whose marriage was five years old on the 20th of June.
   * [Roland] Do not take the availability of mod_userdir.c for granted.
     Patch from Tomas Pospisek <tpo_deb@sourcepole.ch> (closes: #197606).
+  * [Roland] Bumped Standards-Version: to 3.5.10 (no changes needed).
 
- -- Roland Mas <lolando@debian.org>  Mon, 23 Jun 2003 20:42:32 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 23 Jun 2003 22:16:03 +0200
 
 gforge (3rc2-4) unstable; urgency=low
 
