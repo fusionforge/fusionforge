@@ -6,7 +6,18 @@
 
 	* Adding the sys_use_ssl option
 	* www/account/login.php: Check the sys_use_ssl variable.
-	
+
+2004-01-16  Guillaume Smet  <guillaume-gforge@smet.org>
+
+	* Optimized BaseLanguage.class
+	* Implemented a localization caching system
+
+2004-01-15  Guillaume Smet  <guillaume-gforge@smet.org>
+
+	* Rewrote mailing lists manager (OO and localizable)
+	* Fixed security problems in docman and frs (bug #649)
+	* Updated tracker french localization
+
 2003-12-30  Tim Perdue  <tim@perdue.net>
 
 	* Adding cvs history_parse.php written by Brett N DiFrischia (orderthruchaos)
