@@ -20,11 +20,14 @@ ALTER TABLE project_group_list ADD COLUMN send_all_posts_to text;
 --
 --	Each task can be assigned a category
 --
+CREATE SEQUENCE "project_categor_category_id_seq" ;
 CREATE TABLE project_category (
-category_id serial,
+category_id integer DEFAULT nextval('project_categor_category_id_seq'::text) NOT NULL,
 group_project_id int 
 	CONSTRAINT projcat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
-category_name text);
+category_name text,
+	CONSTRAINT "project_category_pkey" Primary Key ("category_id")
+);
 CREATE INDEX projectcategory_groupprojectid ON project_category(group_project_id);
 INSERT INTO project_category VALUES ('100','1','None');
 SELECT SETVAL('project_categor_category_id_seq',100);

@@ -4,10 +4,10 @@ gforge (3rc1-0+) experimental; urgency=low
   * [Christian] Removed .htaccess and put appropriate lines in httpd template
   * [Christian] Renamed sf-(un)register functions in (un)register
   * [Christian] Some cvs improvement 
-  * [Roland] [From 2.6] Fixed a database upgrading bug.
+  * [Roland] Fixed several database upgrading bugs.
   * [Roland] Don't fail or hang in postinst with recent ssh.
 
- -- Roland Mas <lolando@debian.org>  Tue, 11 Mar 2003 22:03:19 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 11 Mar 2003 23:32:38 +0100
 
 gforge (3pre9-0+2) experimental; urgency=low
 

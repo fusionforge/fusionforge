@@ -187,8 +187,14 @@ EOF
     restore)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
+	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if dpkg --compare-versions $pg_version lt 7.3 ; then
+	    localtrust="local all trust"
+	else
+	    localtrust="local all all trust"
+	fi
 	echo "### Next line inserted by GForge restore" > $newpg
-	echo "local all  trust" >> $newpg
+	echo "$localtrust" >> $newpg
 	#echo "host all 127.0.0.1 255.255.255.255 trust" >> $newpg
 	cat /etc/postgresql/pg_hba.conf >> $newpg
 	mv $newpg /etc/postgresql/pg_hba.conf
@@ -204,8 +210,8 @@ EOF
 	su -s /bin/sh postgres -c "createdb gforge"  || true
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE gforge"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
-        perl -pi -e "s/local all  trust\n//" /etc/postgresql/pg_hba.conf
+        perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf
         #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
-	/etc/init.d/postgresql restart
+	/etc/init.d/postgresql reload
 	;;
 esac
