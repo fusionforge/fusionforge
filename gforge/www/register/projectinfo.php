@@ -40,24 +40,23 @@ if ($submit) {
 	*/
 
 	if (strlen($full_name)<3) {
-		$feedback .= "Invalid Full Name";
+		$feedback .= $Language->getText('register','invalid_full_name');
 	} else if (!account_groupnamevalid($unix_name)) {
-		$feedback .= "Invalid Unix Name";
+		$feedback .= $Language->getText('register','invalid_unix_name');
 	} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
-		$feedback .= "Unix group name already taken";
+		$feedback .= $Language->getText('register','unix_group_name_already_taken');
 	} else if (strlen($purpose)<20) {
-		$feedback .= "Please describe your
-			Registration Purpose in a more comprehensive manner";
+		$feedback .= $Language->getText('register','describe_registration');
 	} else if (strlen($description)<10) {
-		$feedback .= "Please use more comprehensive Project Description";
+		$feedback .= $Language->getText('register','comprehensive_description');
 	} else if (strlen($description)>255) {
-		$feedback .= "Maximum length for Project Description is 255 chars.";
+		$feedback .= $Language->getText('register','maximum_description');
 	} else if (!$license) {
-		$feedback .= "You have not chosen a license";
+		$feedback .= $Language->getText('register','no_license_chosen');
 	} else if ($license!="other" && $license_other) {
-		$feedback .= "Conflicting licenses choice";
+		$feedback .= $Language->getText('register','conflicting_licenses_choice');
 	} else if ($license=="other" && strlen($license_other)<50) {
-		$feedback .= "Please give more comprehensive licensing description";
+		$feedback .= $Language->getText('register','more_license_description');
 	} else {
 		$group = new Group();
 		$u =& session_get_user();
@@ -74,16 +73,11 @@ if ($submit) {
 		if (!$res) {
 			$feedback .= $group->getErrorMessage();
 		} else {
-			$HTML->header(array('title'=>'Registration Complete','pagename'=>'register_complete'));
+			$HTML->header(array('title'=>$Language->getText('register','registration_complete'),'pagename'=>'register_complete'));
 
 			?>
 
-			<p>Your project has been submitted to the <?php echo $GLOBALS['sys_name']; ?> administrators.
-			Within 72 hours, you will receive notification of their decision and further
-			instructions.
-			</p>
-			<p>
-			Thank you for choosing <?php echo $GLOBALS['sys_name']; ?>.
+			<p><?php echo $Language->getText('register','project_submitted',array($GLOBALS['sys_name']))?>
 			</p>
 
 			<?php
@@ -97,44 +91,19 @@ if ($submit) {
 	session_redirect("/");
 }
 
-site_header(array('title'=>'Project Information','pagename'=>'register_projectinfo'));
+site_header(array('title'=>$Language->getText('register','project_information'),'pagename'=>'register_projectinfo'));
 ?>
 
-<p>
-To apply for project registration, you should fill in basic information
-about it. Please read descriptions below carefully and provide complete
-and comprehensive data. All fields below are mandatory.
+<p><?php echo $Language->getText('register','apply_for_registration') ?>
 </p>
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 
-</h3>1. Project Full Name</h3>
+<?php echo $Language->getText('register','project_full_name') ?>
 
-
-<p>
-You should start with specifying the name of your project.
-The "Full Name" is descriptive, and has no arbitrary restrictions (except
-a 40 character limit).
-</p>
-
-
-Full Name:
-<br />
 <input size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
 
-<h3>2. Project Purpose and Summarization</h3>
-<p>
-<strong></strong>
-<p>
-<strong>
-Please provide detailed, accurate description of your project and
-what <?php echo $GLOBALS['sys_name']; ?> resources and in which way you plan to use. This
-description will be the basis for the approval or rejection of
-your project's hosting on <?php echo $GLOBALS['sys_name']; ?>, and later, to ensure that
-you are using the services in the intended way. This description
-will not be used as a public description of your project. It must
-be written in English.
-</strong>
+<h3><?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
 <p>
 <font size="-1">
 <textarea name="purpose" wrap="virtual" cols="70" rows="10">
@@ -142,36 +111,7 @@ be written in English.
 </textarea>
 </font>
 
-<h3>3. License</h3>
-
-<p><strong><em>If you are applying for a website-only project, please
-select "website-only" from the choices below and proceed.</em></strong>
-
-<p><?php echo $GLOBALS['sys_name']; ?> was created to advance Open Source software development.
-To keep things simple, we are relying on the outstanding work
-of the <a href="http://www.opensource.org">Open Source Initiative</a>
-for our licensing choices.
-
-<p>We realize, however that there may be other licenses out there
-that may better fit your needs. If you wish to use a license that is
-not OSI Certified, please let us know why you wish to use another
-license.
-
-<p>Choosing a license is a serious decision. Please take some time
-to read the text (and our explanations) of several licenses before
-making a choice about your project.
-
-<p>You may change the license for your project at a
-later date, so long as you have a legal capability to do so, your file
-release clearly relates this change, and your filemap categorization is
-updated appropriately. <em>Please note that license changes are not
-retroactive (i.e. do not apply to products already released under
-OpenSource license).</em>
-
-<p><?php echo $GLOBALS['sys_name']; ?> is not responsible for legal discrepencies regarding
-your license.
-
-<p><strong>Licenses</strong>
+<?php echo $Language->getText('register','project_license', array($GLOBALS['sys_name'])) ?>
 
 <ul>
 <li><a href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License (GPL)</a>
@@ -197,15 +137,8 @@ your license.
 <li><a href="http://www.opensource.org/licenses/nethack.html" target="_blank">Nethack General Public License</a>
 <li><a href="http://oss.software.ibm.com/developerworks/opensource/license-cpl.html" target="_blank">IBM Common Public License</a>
 <li><a href="http://www.opensource.apple.com/apsl/" target="_blank">Apple Public Source License</a>
-<li><a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/register/publicdomain.txt" target="_blank">Public Domain</a>
-<li>Website Only
-<li>Other/Proprietary License
-
-</ul>
-
-<p><strong>License for This Project</strong>
-
-<strong>Your License:</strong><br />
+<li><a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/register/publicdomain.txt" target="_blank">
+<?php echo $Language->getText('register','license_type') ?>
 <?php
 
 // create SELECT based on $LICENSE array in common/include/vars.php
@@ -223,25 +156,14 @@ your license.
 
 ?>
 <p>
-If you selected "other", please provide an explanation along
-with a description of your license. Realize that other licenses may
-not be approved. Also, it may take additional time to make a decision
-for such project, since we will need to check that license is compatible
-with the OpenSource definition.
+<?php echo $Language->getText('register','other_license') ?>
 <br />
 <textarea name="license_other" wrap=virtual cols=60 rows=5>
 <?php echo stripslashes($license_other); ?>
 </textarea>
 <p>
 
-
-<h3>4. Project Public Description</h3>
-<p>
-This is the description of your project which will be shown on
-the Project Summary page, in search results, etc. It should not
-be as comprehensive and formal as Project Purpose description
-(step 2), so feel free to use concise and catchy wording. Maximum
-length is 255 chars.
+<?php echo $Language->getText('register','project_description')?>
 </p>
 <font size="-1">
 <textarea name="description" wrap="virtual" cols="70" rows="5">
@@ -249,41 +171,12 @@ length is 255 chars.
 </textarea>
 </font>
 
-<h3>5. Project Unix Name</h3>
-<p>
-In addition to full project name, you will need to choose short,
-"Unix" name for your project.
-</p>
+<?php echo $Language->getText('register','project_unix_name',array($GLOBALS['sys_default_domain'])) ?>
 
-<p> The "Unix Name" has several restrictions because it is
-used in so many places around the site. They are:
-
-<ul>
-<li>Cannot match the unix name of any other project
-<li>Must be between 3 and 15 characters in length
-<li>Must be in lower case
-<li>Can only contain characters, numbers, and dashes
-<li>Must be a valid unix username
-<li>Cannot match one of our reserved domains
-<li>Unix name will never change for this project
-</ul>
-
-<p>Your unix name is important, however, because it will be used for
-many things, including:
-
-<ul>
-<li>A web site at <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<li>Shell access to <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<li>Search engines throughout the site
-</ul>
-
-<p>Unix Name:
-<br />
 <input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo $unix_name; ?>">
 
 <div align="center">
-<input type=submit name="submit" value="I AGREE"> <input type=submit name="i_disagree" value="I DISAGREE">
+<input type=submit name="submit" value="<?php echo $Language->getText('register','i_agree') ?>"> <input type=submit name="i_disagree" value="<?php echo $Language->getText('register','i_disagree') ?>">
 </div>
 
 </form>
