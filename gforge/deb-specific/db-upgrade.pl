@@ -223,6 +223,14 @@ eval {
 	$dbh->commit () ;
     }
 
+    $query = "select value from debian_meta_data where key = 'db-version'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    $version = $array [0] ;
+
     if (is_lesser $version, "2.5-25") {
 	debug "Found version $version lesser than 2.5-25, adding row to supported_languages." ;
 	$query = "INSERT INTO supported_languages VALUES (15, 'Korean', 'Korean.class', 'Korean', 'kr')" ;
