@@ -37,13 +37,13 @@ $res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_
 
 if (!$res) {
     echo db_error();
-    exit();
+    exit(1);
 }
 
 if (db_numrows($res) == 0) {
     // There are no Admins yet, aborting without failing
     echo "SUCCESS\n";
-    exit();
+    exit(0);
 }
 
 $id=db_result($res,0,0);
@@ -63,13 +63,13 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	if (!$g || !is_object($g)) {
 		echo "\nCould Not Get Group: $group_id";
 		db_rollback();
-		exit;
+		exit(2);
 	}
 	$at = new ArtifactType($g,$gaid);
 	if (!$at || !is_object($at)) {
 		echo "\nCould Not Get ArtifactType: $gaid";
 		db_rollback();
-		exit;
+		exit(3);
 	}
 	//
 	//	Convert ArtifactCategory To Extra Field
@@ -80,7 +80,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	if (!$catbox_id) {
 		echo "\nCould Not Get New Category Box ID: $gaid ".$aef->getErrorMessage();
 		db_rollback();
-		exit;
+		exit(4);
 	}
 	$resc=db_query("SELECT * FROM artifact_category WHERE group_artifact_id='$gaid'");
 	for ($j=0; $j<db_numrows($resc); $j++) {
@@ -93,7 +93,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		if (!$efe_id) {
 			echo "\nDid Not Get efe_id";
 			db_rollback();
-			exit;
+			exit(5);
 		}
 		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$catbox_id FROM artifact 
@@ -101,14 +101,14 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		if (!$res2) {
 			echo "Could Not Insert AEFD for category " . db_error();
 			db_rollback();
-			exit;
+			exit(6);
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$cat_name',field_name='Category'
 			WHERE old_value='$cat_id' AND field_name='category_id'");
 		if (!$res3) {
 			echo "Could Not update history category " . db_error();
 			db_rollback();
-			exit;
+			exit(7);
 		}
 	}
 
@@ -121,7 +121,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	if (!$groupbox_id) {
 		echo "\nCould Not Get groupbox_id ".$aef->getErrorMessage();
 		db_rollback();
-		exit;
+		exit(8);
 	}
 	$resc=db_query("SELECT * FROM artifact_group WHERE group_artifact_id='$gaid'");
 	for ($j=0; $j<db_numrows($resc); $j++) {
@@ -134,7 +134,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		if (!$efe_id) {
 			echo "\nDid Not Get efe_id";
 			db_rollback();
-			exit;
+			exit(9);
 		}
 		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact 
@@ -142,14 +142,14 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		if (!$res2) {
 			echo "Could Not Insert AEFD for artifactgroup " . db_error();
 			db_rollback();
-			exit;
+			exit(10);
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$group_name',field_name='Group'
 			WHERE old_value='$artgroup_id' AND field_name='artifact_group_id'");
 		if (!$res3) {
 			echo "Could Not update history artifactgroup " . db_error();
 			db_rollback();
-			exit;
+			exit(11);
 		}
 	}
 
@@ -163,7 +163,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		if (!$resolutionbox_id) {
 			echo "\nCould Not Get resolutionbox_id ".$aef->getErrorMessage();
 			db_rollback();
-			exit;
+			exit(12);
 		}
 		$resc=db_query("SELECT * FROM artifact_resolution");
 		for ($j=0; $j<db_numrows($resc); $j++) {
@@ -176,7 +176,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			if (!$efe_id) {
 				echo "\nDid Not Get efe_id";
 				db_rollback();
-				exit;
+				exit(13);
 			}
 			$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact 
@@ -184,14 +184,14 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			if (!$res2) {
 				echo "Could Not Insert AEFD for resolution " . db_error();
 				db_rollback();
-				exit;
+				exit(14);
 			}
 		$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
 			WHERE old_value='$resolution_id' AND field_name='resolution_id'");
 		if (!$res3) {
 			echo "Could Not update history resolution " . db_error();
 			db_rollback();
-			exit;
+			exit(15);
 		}
 		}
 	}
