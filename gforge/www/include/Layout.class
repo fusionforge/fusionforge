@@ -31,7 +31,7 @@ class Layout extends Error {
 	var $COLOR_LTBACK1= '#eeeeef';
 	var $COLOR_LTBACK2= '#fafafa';
 	var $COLOR_SELECTED_TAB= '#e0e0e0';
-	var $COLOR_HTMLBOX_TITLE = '#d5d5d7';
+	var $COLOR_HTMLBOX_TITLE = '#bbbbbb';
 	var $COLOR_HTMLBOX_BACK = '#eaecef';
 	var $FONT_CONTENT = 'helvetica';
 	var $FONT_HTMLBOX_TITLE = 'helvetica';
@@ -167,7 +167,7 @@ class Layout extends Error {
 		margin-left: 3;
 		margin-right: 3;
 		margin-bottom: 3;
-		background: #01004e;
+		background-image: url("<?php echo $this->imgroot; ?>theme-top-blue.png");
 	}
 	ol,ul,p,body,td,tr,th,form { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>;
 		color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
@@ -190,9 +190,9 @@ class Layout extends Error {
 	a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:visited { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:hover { text-decoration: none; color: black; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink { color: #00007e; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink:visited { color: #00007e; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink:hover { text-decoration: none; color: #00007e; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	<?php plugin_hook ("cssstyle",$this) ; ?>
 	-->
 </style>
@@ -289,28 +289,6 @@ if (isset($params['group']) && $params['group']) {
 
 	<?php
 
-/*
-
-	if ($params['titlevals']) {
-		$title =		$Language->getText($params['pagename'],'title',$params['titlevals']);
-	} else {
-		$title =		$Language->getText($params['pagename'],'title');
-	}
-
-	if ($params['sectionvals']) {
-		$section =	  $Language->getText($params['pagename'],'section',$params['sectionvals']);
-	} else {
-		$section =	  $Language->getText($params['pagename'],'section');
-	}
-
-	if ($section) {
-		print "<strong>$section</strong>\n";
-	}
-
-	if ($title) {
-		   print "<h2>$title</h2>\n";
-	}
-*/
 	}
 
 	function footer($params) {
@@ -376,14 +354,21 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxTop($title) {
 		return '
-		<table cellspacing="0" cellpadding="1" width="100%" border="0" bgcolor="' .$this->COLOR_HTMLBOX_TITLE.'">
-		<tr><td>
-			<table cellspacing="0" cellpadding="2" width="100%" border="0" bgcolor="'. $this->COLOR_HTMLBOX_BACK.'">
-				<tr style="background-color:'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
-				</tr>
+		<!-- Box Top Start -->
+
+		<table cellspacing="0" cellpadding="0" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
+		<tr align="center">
+			<td valign="top" align="right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20"></td>
+			<td width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
+			<td valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20"></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+			<table cellspacing="2" cellpadding="2" width="100%" border="0">
 				<tr align="left">
-					<td colspan="2">';
+					<td colspan="2">
+
+		<!-- Box Top End -->';
 	}
 
 	/**
@@ -394,26 +379,15 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxMiddle($title) {
 		return '
+		<!-- Box Middle Start -->
 					</td>
 				</tr>
-				<tr style="background-color:'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
+				<tr align="center">
+					<td colspan="2" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
 				</tr>
-				<tr align="left" style="background-color:'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan="2">';
-	}
-
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param			   int			 Row number
-	 */
-	function boxGetAltRowStyle($i) {
-		if ($i % 2 == 0) {
-			return 'style="background-color:white"';
-		} else {
-			return 'style="background-color:' . $this->COLOR_LTBACK1 . '"';
-		}
+				<tr align="left">
+					<td colspan="2">
+		<!-- Box Middle End -->';
 	}
 
 	/**
@@ -423,11 +397,27 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxBottom() {
 		return '
+			<!-- Box Bottom Start -->
 					</td>
 				</tr>
 			</table>
-		</td></tr>
-		</table><p>&nbsp;</p>';
+			</td>
+		</tr>
+		</table><br />
+		<!-- Box Bottom End -->';
+	}
+
+	/**
+	 * boxGetAltRowStyle() - Get an alternating row style for tables
+	 *
+	 * @param			   int			 Row number
+	 */
+	function boxGetAltRowStyle($i) {
+		if ($i % 2 == 0) {
+			return 'background="'.$this->imgroot.'vert-grad.png"';
+		} else {
+			return 'background="'.$this->imgroot.'box-grad.png"';
+		}
 	}
 
 	/**
@@ -438,10 +428,12 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function listTableTop ($title_arr,$links_arr=false) {
 		$return = '
-		<table cellspacing="0" cellpadding="1" width="100%" border="0" style="background-color:' .$this->COLOR_HTMLBOX_TITLE.'">
-		<tr><td>
+		<table cellspacing="0" cellpadding="0" width="100%" border="0">
+		<tr align="center">
+	<!--		<td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75"></td> -->
+			<td background="'.$this->imgroot.'box-grad.png">
 		<table width="100%" border="0" cellspacing="1" cellpadding="2">
-			<tr style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'">';
+			<tr>';
 
 		$count=count($title_arr);
 		if ($links_arr) {
@@ -461,7 +453,9 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function listTableBottom() {
-		return '</table></td></tr></table>';
+		return '</table></td>
+			<!-- <td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75"></td> -->
+			</tr></table>';
 	}
 
 	function outerTabs($params) {
@@ -662,9 +656,6 @@ if (isset($params['group']) && $params['group']) {
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 
-		$dark='style="background-color:#BBBBBB"';
-		$light='style="background-color:'. $sel_tab_bgcolor .'"';
-
 		$count=count($TABS_DIRS);
 		$width=intval((100/$count));
 		
@@ -677,11 +668,61 @@ if (isset($params['group']) && $params['group']) {
 		<table border="0" cellpadding="0" cellspacing="0" width="'.$total_width.'">
 		<tr>';
 		if ($nested) {
-			$inner='-inner';
+			$inner='bottomtab';
 		} else {
-			$inner='';
+			$inner='toptab';
 		}
 		for ($i=0; $i<$count; $i++) {
+			if ($i == 0) {
+				//
+				//	this is the first tab, choose an image with end-name
+				//
+				$wassel=false;
+				$issel=($selected==$i);
+				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+				$return .= '
+					<td rowspan="2" valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png">'.
+						'<img src="'.$this->imgroot . 'clear.png" height="25" width="10" alt="" /></td>'.
+						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+			} elseif ($i==$count-1) {
+				//
+				//	this is the last tab, choose an image with name-end
+				//
+				$wassel=($selected==$i-1);
+				$issel=($selected==$i);
+				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+				//
+				//	Build image between current and prior tab
+				//
+				$return .= '
+					<td rowspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
+						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+				//
+				//	Last graphic on right-side
+				//
+				$return .= '
+					<td rowspan="2" valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png">'.
+						'<img src="'.$this->imgroot . 'clear.png" height="2" width="10" alt="" /></td>';
+
+			} else {
+				//
+				//	middle tabs
+				//
+				$wassel=($selected==$i-1);
+				$issel=($selected==$i);
+				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+				//
+				//	Build image between current and prior tab
+				//
+				$return .= '
+					<td rowspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
+						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+
+			}
+		}
+/*
 			$bgcolor=(($selected==$i)?$light:$dark);
 			$imgcolor=(($selected==$i)?'':'-dark');
 			$return .= '
@@ -712,7 +753,7 @@ if (isset($params['group']) && $params['group']) {
 			$bgcolor=(($selected==$i)?$light:'style="background-color:#999999"');
 			$return .= '<td '.$bgcolor.' colspan="4"><img src="'.$this->imgroot . 'clear.png" height="2" width="1" alt="" /></td>';
 		}
-
+*/
 		return $return.'
 		</tr>
 		</table>';

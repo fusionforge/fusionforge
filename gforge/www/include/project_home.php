@@ -145,7 +145,7 @@ if ($project->usesFRS()) {
 
 	echo '
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
-		<tr style="background-color:'.$HTML->COLOR_LTBACK1.'">
+		<tr>
 		<td align="left">
 			'.$Language->getText('frs','file_package').'
 		</td>
@@ -190,7 +190,7 @@ if ($project->usesFRS()) {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<tr bgcolor="'.$HTML->COLOR_LTBACK1.'"><td colspan="5"><strong>'.$Language->getText('group', 'norelease').'</strong></td></tr>';
+			echo '<tr><td colspan="5"><strong>'.$Language->getText('group', 'norelease').'</strong></td></tr>';
 
 		} else {
 			/*
@@ -203,7 +203,7 @@ if ($project->usesFRS()) {
 				} else {
 					$rel_date = getdate(db_result($res_files,$f,'release_date'));
 					echo '
-					<tr style="background-color:'.$HTML->COLOR_LTBACK1.'" align="center">
+					<tr align="center">
 					<td align="left">
 					<strong>' . db_result($res_files,$f,'package_name'). '</strong></td>';
 					// Releases to display
@@ -233,7 +233,7 @@ if ($project->usesFRS()) {
 <p />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td valign="top">
+		<td valign="top" width="50%">
 
 <?php
 
@@ -386,7 +386,7 @@ if ($project->usesNews()) {
 
 		</td>
 		<td width="15">&nbsp;</td>
-		<td valign="top">
+		<td valign="top" width="50%">
 
 	<?php
 	// ############################# Latest News
