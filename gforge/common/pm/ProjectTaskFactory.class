@@ -185,15 +185,25 @@ class ProjectTaskFactory extends Error {
 			$cat_str="AND project_task_vw.category_id='".$this->category."'";
 		}
 
+		//
+		//	sort using an external ID useful only to something like MS Project
+		//
+		if ($this->order=='external_id') {
+			$ext_str='natural left join project_task_external_order';
+			$ext_fld_str=',project_task_external_order.external_id';
+		} else {
+			$ext_str='';
+		}
+
 /*
 select project_task_vw.*,project_assigned_to.* FROM project_task_vw,project_assigned_to 
 WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 */
-		$sql="SELECT project_task_vw.*
-			FROM project_task_vw $assigned_str2 
+		$sql="SELECT project_task_vw.* $ext_fld_str
+			FROM project_task_vw $ext_str $assigned_str2 
 			WHERE $assigned_str3 project_task_vw.group_project_id='". $this->ProjectGroup->getID() ."' 
 			$assigned_str $status_str $cat_str 
-			ORDER BY project_task_vw.".$this->order.(($this->order=='priority') ? ' DESC ':' ');
+			ORDER BY ".$this->order.(($this->order=='priority') ? ' DESC ':' ');
 
 //echo $sql;
 	
