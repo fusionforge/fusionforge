@@ -103,7 +103,7 @@ if (db_numrows($res_admin) > 0) {
 	<span class="develtitle"><?php echo $Language->getText('group','project_admins'); ?>:</span><br />
 	<?php
 		while ($row_admin = db_fetch_array($res_admin)) {
-			print $GLOBALS['HTML']->createLinkToUserHome($row_admin[user_name], $row_admin[realname])."<br />";
+			print $GLOBALS['HTML']->createLinkToUserHome($row_admin['user_name'], $row_admin['realname'])."<br />";
 		}
 	?>
 	<hr width="100%" size="1" />
