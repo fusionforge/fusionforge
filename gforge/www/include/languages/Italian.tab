@@ -2469,3 +2469,7 @@ users	peerinfo2	La casella delle valutazioni visualizza tutte le valutazioni per
 users	title	Sommario utente
 users	user_not_exist_text	Utente non valido
 users	user_not_exist_title	L'utente non esiste
+send_pending_items_mail	pm_subject	Notifica di attività scadute
+send_pending_items_mail	pm_message	Questa mail viene inviata per ricordare che ci sono attività scadute. \nL'attività  #$1 è scaduta: \nSommario: $2\nInserito da: $4\nStato:$5\nPercentuale completamento: $6\n\nClicca qui per andare all'attività $3
+send_pending_items_mail	tracker_subject	Notifica di elementi del tracker scaduti
+send_pending_items_mail	tracker_message	Questa mail viene inviata per ricordare che ci sono elementi del tracker scaduti. L'elemento #$1 è scaduto: \nSommario: $3\nStato: $5\nData inserimento:$6\nAssegnato a: $7\nInserito da: $8\nDettagli: $9\n\n\nClicca qui per andare all'elemento: $4

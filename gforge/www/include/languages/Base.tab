@@ -1845,12 +1845,12 @@ rbac_vals	forum2	Admin
 rbac_vals	tracker-1	No Access
 rbac_vals	tracker0	Read
 rbac_vals	tracker1	Tech
-rbac_vals	tracker2	Tech &amp; Admin
+rbac_vals	tracker2	Tech & Admin
 rbac_vals	tracker3	Admin Only
 rbac_vals	pm-1	No Access
 rbac_vals	pm0	Read
 rbac_vals	pm1	Tech
-rbac_vals	pm2	Tech &amp; Admin
+rbac_vals	pm2	Tech & Admin
 rbac_vals	pm3	Admin Only
 rbac_vals	docman0	Read/Post
 rbac_vals	docman1	Admin
@@ -2681,3 +2681,7 @@ users	peerinfo2	The Peer rating box shows all rating averages (and response leve
 users	title	User Summary
 users	user_not_exist_text	Invalid User
 users	user_not_exist_title	That user does not exist.
+send_pending_items_mail	pm_subject	Pending task manager items notification
+send_pending_items_mail	pm_message	This mail is sent to you to remind you of pending/overdue tasks. \nThe task manager item  #$1 is pending: \nTask Summary: $2\nSubmitted by: $4\nStatus:$5\nPercent Complete: $6\n\nClick here to visit the item $3
+send_pending_items_mail	tracker_subject	Pending tracker  items notification
+send_pending_items_mail	tracker_message	This mail is sent to you to remind you of pending/overdue tracker items. The item #$1 is pending: \nSummary: $3\nStatus: $5\nOpen Date:$6\nAssigned To: $7\nSubmitted by: $8\nDetails: $9\n\n\nClick here to visit the item: $4
