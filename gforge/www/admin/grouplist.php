@@ -18,7 +18,8 @@ if (!$form_catroot) {
 	$form_catroot = 1;
 }
 
-print "<br><a href=\"groupedit-add.php\">[Add Group]</a>";
+//CB removed from 2.6 and 2.5 was link to a page saying to use new project
+//print "<br><a href=\"groupedit-add.php\">[Add Group]</a>";
 print "<p>".$GLOBALS['system_name']." Group List for Category: ";
 
 if ($form_catroot == 1) {
