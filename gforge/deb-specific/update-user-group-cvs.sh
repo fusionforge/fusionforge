@@ -24,8 +24,8 @@ else
 	/usr/lib/gforge/bin/user_dump_update.pl
 	/usr/lib/gforge/bin/group_dump_update.pl
 	/usr/lib/gforge/bin/ssh_dump_update.pl
-	[ -f /usr/lib/gforge/bin/cvs_dump.pl ] && su -s /bin/sh gforge -c /usr/lib/gforge/bin/cvs_dump.pl
-	[ -f /usr/lib/gforge/bin/cvs_update.pl ] && /usr/lib/gforge/bin/cvs_update.pl
+	[ -f /usr/lib/gforge/bin/cvs_dump.pl ] && su -s /bin/sh gforge -c /usr/lib/gforge/bin/cvs_dump.pl || true
+	[ -f /usr/lib/gforge/bin/cvs_update.pl ] && /usr/lib/gforge/bin/cvs_update.pl || true
 
 	#CB#su gforge -c /usr/lib/gforge/bin/dump_database.pl -s /bin/sh
 	#CB#su gforge -c /usr/lib/gforge/bin/ssh_dump.pl -s /bin/sh

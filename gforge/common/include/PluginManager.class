@@ -61,6 +61,16 @@ class PluginManager extends Error {
 	}
 
 	/**
+	 * GetPluginObject() - get a particular plugin object
+	 *
+         * @param pluginname - name of plugin
+	 * @return a plugin object
+	 */
+	function GetPluginObject ($pluginname) {
+		return $this->plugins_objects [$pluginname] ;
+	}
+
+	/**
 	 * PluginIsInstalled() - is a plugin installed?
 	 *
 	 * @param pluginname - name of plugin
@@ -82,7 +92,7 @@ class PluginManager extends Error {
 	 */
 	function LoadPlugins () {
 		$plugins_data = $this->GetPlugins() ;
-		$include_path = "/usr/lib/gforge/plugins/" ;
+		$include_path = $GLOBALS['sys_plugins_path'] ;
 		foreach ($plugins_data as $p_id => $p_name) {
 			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
@@ -139,6 +149,21 @@ class PluginManager extends Error {
 		}
 		return true ;
 	}
+
+	/**
+	 * CountHookListeners() - number of listeners on a particular hook
+	 *
+	 * @param hookname - name of the hook
+	 */
+	function CountHookListeners ($hookname) {
+		if (isset($this->hooks_to_plugins[$hookname])) {
+			$p_list = $this->hooks_to_plugins[$hookname];
+			return count ($p_list) ;
+		} else {
+			return 0 ;
+		}
+		
+	}
 }
 
 /**
@@ -152,6 +177,17 @@ function &plugin_manager_get_object() {
 		$PLUGINMANAGER_OBJ = new PluginManager ;
 	}
 	return $PLUGINMANAGER_OBJ ;
+}
+
+/**
+ * plugin_get_object() - get a particular Plugin object
+ *
+ * @param pluginname - a plugin name
+ * @return the Plugin object
+ */
+function &plugin_get_object ($pluginname) {
+	global $PLUGINMANAGER_OBJ;
+	return $PLUGINMANAGER_OBJ->Getpluginobject ($pluginname) ;
 }
 
 /**
@@ -173,6 +209,16 @@ function register_plugin (&$pluginobject) {
 function plugin_hook ($hookname, $params=false) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RunHooks ($hookname, $params) ;
+}
+
+/**
+ * plugin_hook_listeners () - count the number of listeners on a hook
+ *
+ * @param hookname - name of the hook
+ */
+function plugin_hook_listeners ($hookname, $params=false) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->CountHookListeners ($hookname) ;
 }
 
 /**

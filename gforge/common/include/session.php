@@ -133,6 +133,11 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	$hook_params['passwd'] = $passwd ;
 	plugin_hook ("session_before_login", $hook_params) ;
 
+	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;}
+
+function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
+	global $feedback,$Language;
+
 	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
 		SELECT user_id,status,unix_pw
@@ -167,7 +172,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 			$res = db_query ("UPDATE users
 				SET user_pw='" . md5($passwd) . "'
 				WHERE user_id='".$usr['user_id']."'");
-			return session_login_valid($loginname, $passwd, $allowpending) ;
+			return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
 		}
 	} else {
 		// If we're here, then the user has typed a password matching the (MD5) user_pw
@@ -183,7 +188,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 				$res = db_query ("UPDATE users
 					SET unix_pw='" . account_genunixpw($passwd) . "'
 					WHERE user_id='".$usr['user_id']."'");
-				return session_login_valid($loginname, $passwd, $allowpending) ;
+				return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
 			} else {
 				// Invalidate (MD5) user_pw, refuse authentication
 				$res = db_query ("UPDATE users

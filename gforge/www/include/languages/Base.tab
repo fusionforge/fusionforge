@@ -36,7 +36,7 @@ account_change_pw	update	Update password
 account_change_pw_changed	return_to	You should now $1 Return to UserPrefs $2.
 account_change_pw_changed	title	Successfully Changed Password
 account_editsshkeys	section	Account Preferences
-account_editsshkeys	title	Edit CVS/SSH Shared Keys
+account_editsshkeys	title	Edit SSH Shared Keys
 account_first	about_blurb	<p>You are now a registered user on $1, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in $1, sign on as a project developer, or even start your own project.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve $1.</p><p>--the $1 staff.</p>
 account_first	title	Welcome to $1
 account_login	cookiewarn	Cookies must be enabled past this point.
@@ -133,7 +133,7 @@ account_register	siteupdate	Receive Email about Site Updates <i>(Very low traffi
 account_register	timezone	Timezone:
 account_register	title	New Account Registration
 account_register	update	Update
-account_shell	autorized_keys	CVS/SSH Shared Authorized Keys
+account_shell	autorized_keys	SSH Shared Authorized Keys
 account_shell	edit_keys	Edit Keys
 account_shell	shell_box	Shell box
 account_shell	title	Shell Account Information
@@ -1455,7 +1455,9 @@ project_admin	homepage_link	Homepage Link:&nbsp;
 project_admin	mail_admin	Mail Admin
 project_admin	news_admin	News Admin
 project_admin	packages	Packages
+project_admin	plugins_admin	Plugins Admin
 project_admin	project_information	Misc. Project Information
+project_admin	scm_admin	SCM Admin
 project_admin	section	Project: $1
 project_admin	shell_server	Group shell (SSH) server:&nbsp;
 project_admin	shell_server_group_directory	Group directory on shell server:&nbsp; 
@@ -1902,7 +1904,7 @@ scm_index	history	Repository History
 scm_index	modulename	modulename
 scm_index	nohistory	This project has no CVS history.
 scm_index	section	Project: $1
-scm_index	title	CVS
+scm_index	title	SCM
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#

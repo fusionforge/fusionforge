@@ -48,6 +48,10 @@ function activate_group($group_id) {
 		return false;
 	}
 
+	$hook_params = array () ;
+	$hook_params['group_id'] = $group_id ;
+	plugin_hook ("group_approved", $hook_params) ;
+
 	return true;
 }
 

@@ -52,7 +52,7 @@ account_change_pw	update	Mise à jour du mot de passe
 account_change_pw_changed	return_to	Vous devriez maintenant $1 Retourner aux préférences utilisateur $2.
 account_change_pw_changed	title	Changement de mot de passe réussi.
 account_editsshkeys	section	Mes préférences
-account_editsshkeys	title	Édition des clefs publiques CVS/SSH
+account_editsshkeys	title	Édition des clefs publiques SSH
 account_first	about_blurb	<p>Vous êtes maintenant un utilisateur enregistré dans $1, environnement de développement de logiciels libres.</p><p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site. Vous pouvez maintenant adresser des messages dans les forums des projets, faire remonter des bogues dans $1, vous proposer comme développeur d'un projet, et même lancer votre propre projet.</p><p>Profitez du site et n'hésitez pas à nous faire part de vos remarques sur la manière d'améliorer $1.</p><p>-- L'équipe de $1</p>
 account_first	title	Bienvenue sur $1
 account_login	cookiewarn	Vous devez activer les cookies pour aller plus loin.
@@ -149,7 +149,7 @@ account_register	theme	Thème :
 account_register	timezone	Fuseau horaire :
 account_register	title	Nouvelle inscription
 account_register	update	Mettre à jour
-account_shell	autorized_keys	Clés publiques CVS/SSH autorisées
+account_shell	autorized_keys	Clés publiques SSH autorisées
 account_shell	edit_keys	Éditer les clés
 account_shell	shell_box	Serveur shell
 account_shell	title	Informations relatives au compte shell
@@ -1837,7 +1837,7 @@ scm_index	history	Historique du dépôt
 scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
 scm_index	section	Projet : $1
-scm_index	title	CVS
+scm_index	title	SCM
 search	artifact_author	Soumis par
 search	artifact_date	Date
 search	artifact_id	#

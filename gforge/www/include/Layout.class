@@ -612,12 +612,21 @@ if (isset($params['group']) && $params['group']) {
 			(($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
-		// CVS
+		// SCM systems
 		if ($project->usesCVS()) {
 			$TABS_DIRS[]='/scm/?group_id='.$group;
 			$TABS_TITLES[]=$Language->getText('group','short_cvs');
 			(($toptab == 'scm_index') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
+
+		// groupmenu_after_scm hook
+		$hookParams['DIRS'] = &$TABS_DIRS;
+		$hookParams['TITLES'] = &$TABS_TITLES;
+		$hookParams['toptab'] = &$toptab;
+		$hookParams['selected'] = &$selected;
+		$hookParams['group_id'] = $group ;
+				
+		plugin_hook ("groupmenu_scm", $hookParams) ; 
 
 		// Downloads
 		if ($project->usesFRS()) {
@@ -625,7 +634,8 @@ if (isset($params['group']) && $params['group']) {
 			$TABS_TITLES[]=$Language->getText('group','short_files');
 			(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
-		// groupmenu Hook
+
+		// groupmenu hook
 		$hookParams['DIRS'] = &$TABS_DIRS;
 		$hookParams['TITLES'] = &$TABS_TITLES;
 		$hookParams['toptab'] = &$toptab;
@@ -633,6 +643,7 @@ if (isset($params['group']) && $params['group']) {
 		$hookParams['group'] = $group;
 				
 		plugin_hook ("groupmenu", $hookParams) ; 
+
 		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,true,$selected,'white','100%');
 
 	}
@@ -870,5 +881,10 @@ if (isset($params['group']) && $params['group']) {
 	 }
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

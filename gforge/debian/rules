@@ -121,22 +121,18 @@ install: build
 	#
 	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	
 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
 	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
 	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/install-db.sh     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/db-upgrade.pl     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 644 deb-specific/sqlparser.pm      $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
-	install -m 755 deb-specific/sf-add-skill      $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/register-theme    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/unregister-theme  $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/register-plugin   $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+	install -m 644 deb-specific/sqlhelper.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/register-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/unregister-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+
+	install -m 755 deb-specific/register-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/unregister-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
 	install -m 644 deb-specific/view_bug.sql      $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
@@ -158,19 +154,6 @@ install: build
 
 	# gforge-shell-ldap
 	cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
-
-	# gforge-cvs
-	install -m 755 deb-specific/stats_cvs.pl $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-cvs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-cvs/bin/cvssh 
-	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cgi-bin/cvsweb.cgi
-	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/cvsweb.cgi
-	install -m 644 etc/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
-	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvs_dump.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvs_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 www/tarballs.php $(CURDIR)/debian/gforge-cvs/usr/share/gforge/cvs
 
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/

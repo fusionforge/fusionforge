@@ -213,12 +213,13 @@ class User extends Error {
 	 * @param	string	The users fax.
 	 * @param	string	The users title.
 	 * @param	char(2)	The users ISO country_code.
+	 * @param	bool	Whether to send an email or not
 	 * @returns The newly created user ID
 	 *
 	 */
 	function create($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
-		$unix_box='shell',$address='',$address2,$phone='',$fax='',$title='',$ccode='US') {
+		$unix_box='shell',$address='',$address2='',$phone='',$fax='',$title='',$ccode='US',$send_mail=true) {
 		global $Language;
 		if (!$theme_id) {
 			$this->setError($Language->getText('account_register','err_themeid'));
@@ -329,8 +330,10 @@ class User extends Error {
 			}
 
 			$Language->loadLanguageID($language_id);
-
-			$this->sendRegistrationEmail();
+			
+			if ($send_mail) {
+				$this->sendRegistrationEmail();
+			}
 
 			db_commit();
 			return $id;

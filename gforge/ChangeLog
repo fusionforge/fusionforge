@@ -1,3 +1,8 @@
+2004-05-16  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* SCM pluginification: new SCMPlugin class, SCM pages now call the
+	SCM plugins instead of hardcoding CVS.  More hooks.
+
 2004-05-12  Tom Copeland <tom@infoether.com>
 
 	* www/include/snippet_caching.php: Modified queries to use GROUP BY
@@ -60,6 +65,11 @@
 
 	* www/my/index.php: Fixed bug #788: Site admin's 'my page' shows 
 	news postings from deleted projects
+
+2004-04-25  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* utils/ldap/sql2ldif.pl (dump_header): Added an Unix account for
+	SCM systems such as Subversion.
 
 2004-04-16  Christian Bayle <bayle@debian.org>
 

@@ -193,6 +193,7 @@ echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
 <a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
 <a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
 <a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
+<a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
 
 <?php echo $HTML->boxBottom(); ?>
 
@@ -200,15 +201,33 @@ echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
 
 
 </td>
-
-<td>&nbsp;</td>
-
-
 </tr>
+
+<tr>
+<td>
+<?php
+
+if (plugin_hook_listeners ("project_admin_plugins") > 0) {
+	echo $HTML->boxTop($Language->getText('project_admin','plugins_admin'));
+	$hook_params = array () ;
+	$hook_params['group_id'] = $group_id ;
+	plugin_hook ("project_admin_plugins", $hook_params) ;
+
+	echo $HTML->boxBottom();
+}
+?>
+</td>
+</tr>
+
 </table>
 
 <?php
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

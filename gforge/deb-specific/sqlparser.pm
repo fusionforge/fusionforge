@@ -38,7 +38,7 @@ sub parse_sql_file ( $ ) ;
 
 sub parse_sql_file ( $ ) {
     my $f = shift ;
-    open F, $f || die "Could not open file $f: $!\n" ;
+    open F, $f or die "Could not open file $f: $!\n" ;
 
     # This is a state machine to parse potentially complex SQL files
     # into individual SQL requests/statements

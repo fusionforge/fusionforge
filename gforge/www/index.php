@@ -24,4 +24,9 @@ include ( $HTML->getRootIndex() );
 
 $HTML->footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

@@ -107,6 +107,9 @@ if (!$conn) {
 require_once('common/include/Plugin.class') ;
 require_once('common/include/PluginManager.class') ;
 
+// SCM-specific plugins subsystem
+require_once('common/include/SCM.class') ;
+
 setup_plugin_manager () ;
 
 //determine if they're logged in

@@ -1,3 +1,9 @@
+gforge (3.3.0+scm-0+1) experimental; urgency=low
+
+  * [Roland] First try at the pluginification of SCM.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 25 Apr 2004 21:12:11 +0200
+
 gforge (3.3.0-4woody9) stable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
@@ -37,8 +43,11 @@ gforge (3.2.1-2) experimental; urgency=low
     patch from Hidenari Miwa and Tsutomu Tominaga.
   * [Roland] Also use 20031126.sql, for the "cron manager" feature.
   * [Roland] Also use 20031205.sql.
+  * [Christian] Now use setup script (wrapped in gforge-config)
+  * [Christian] Added dependencies in control file so all package of the same version are
+    installed when you apt-get install gforge
 
- -- Roland Mas <lolando@debian.org>  Tue,  2 Mar 2004 23:23:04 +0100
+ -- Christian Bayle <bayle@debian.org>  Wed,  3 Mar 2004 10:08:06 +0100
 
 gforge (3.1-12) unstable; urgency=low
 

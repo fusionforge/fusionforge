@@ -22,16 +22,12 @@ use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
     $skill_list/ ;
 
-sub is_lesser ( $$ ) ;
-sub is_greater ( $$ ) ;
-sub debug ( $ ) ;
-sub parse_sql_file ( $ ) ;
-
 require ("/etc/gforge/local.pl") ; 
 require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # Our SQL functions
 
-debug "You'll see some debugging info during this installation." ;
-debug "Do not worry unless told otherwise." ;
+&debug ("You'll see some debugging info during this installation.") ;
+&debug ("Do not worry unless told otherwise.") ;
 
 if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
 $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
@@ -61,7 +57,7 @@ eval {
     if ($array [0] == 0) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
 	$action = "installation" ;
-	debug "Creating initial Sourceforge database from files." ;
+	&debug ("Creating initial Sourceforge database from files.") ;
 
 	&create_metadata_table ("2.5.9999") ;
 
@@ -72,14 +68,14 @@ eval {
 	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
 	if ($array[0] == 0) {
-	    debug "Updating debian_meta_data table." ;
+	    &debug ("Updating debian_meta_data table.") ;
 	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
 	    # debug $query ;
 	    $sth = $dbh->prepare ($query) ;
 	    $sth->execute () ;
 	    $sth->finish () ;
 	}
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
 
     } else {			# A 'groups' table exists
@@ -99,8 +95,8 @@ eval {
 	}
 
 	$version = &get_db_version ;
-	if (is_lesser $version, "2.5.9999") {
-	    debug "Found an old (2.5) database, will upgrade to 2.6" ;
+	if (&is_lesser ($version, "2.5.9999")) {
+	    &debug ("Found an old (2.5) database, will upgrade to 2.6") ;
 
 	    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
 	    # debug $query ;
@@ -110,13 +106,13 @@ eval {
 	    $sth->finish () ;
 
 	    if ($array[0] == 0) {
-		# debug "Updating debian_meta_data table." ;
+		# &debug ("Updating debian_meta_data table.") ;
 		$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
 		# debug $query ;
 		$sth = $dbh->prepare ($query) ;
 		$sth->execute () ;
 		$sth->finish () ;
-		debug "Committing." ;
+		&debug ("Committing.") ;
 		$dbh->commit () ;
 	    }
 	}
@@ -146,12 +142,12 @@ eval {
       ($path eq 'scratch-to-2.6') && do {
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+global+data+done" ;
-	  if (is_lesser $version, $target) {
+	  if (&is_lesser ($version, $target)) {
 	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
 	      # TODO: user_rating.sql
 
 	      foreach my $file (@filelist) {
-		  debug "Processing $file" ;
+		  &debug ("Processing $file") ;
 		  @reqlist = @{ &parse_sql_file ($file) } ;
 
 		  foreach my $s (@reqlist) {
@@ -165,14 +161,14 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.2+local+data+done" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding local data." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Adding local data.") ;
 
 	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
@@ -211,14 +207,14 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.3+skills+done" ;
-	  if (is_lesser $version, $target) {
-	      debug "Inserting skills." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Inserting skills.") ;
 
 	      foreach my $skill (split /;/, $skill_list) {
 		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
@@ -234,14 +230,14 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.6-0+checkpoint+1" ;
-	  if (is_lesser $version, $target) {
-	      debug "Updating debian_meta_data table." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Updating debian_meta_data table.") ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
 	      $sth = $dbh->prepare ($query) ;
@@ -249,7 +245,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -260,36 +256,36 @@ eval {
 
 	  $version = &get_db_version ;
 	  $target = "2.5-8" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding row to people_job_category." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Adding row to people_job_category.") ;
 	      $query = "INSERT INTO people_job_category VALUES (100, 'Undefined', 0)" ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5-25" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding row to supported_languages." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Adding row to supported_languages.") ;
 	      $query = "INSERT INTO supported_languages VALUES (15, 'Korean', 'Korean.class', 'Korean', 'kr')" ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5-27" ;
-	  if (is_lesser $version, $target) {
-	      debug "Fixing unix_box entries." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Fixing unix_box entries.") ;
 
 	      $query = "update groups set unix_box = 'shell'" ;
 	      $sth = $dbh->prepare ($query) ;
@@ -301,20 +297,20 @@ eval {
 	      $sth->execute () ;
 	      $sth->finish () ;
 
-	      debug "Also fixing a few sequences." ;
+	      &debug ("Also fixing a few sequences.") ;
 
-	      &bump_sequence_to ("bug_pk_seq", 100) ;
-	      &bump_sequence_to ("project_task_pk_seq", 100) ;
+	      &bump_sequence_to ($dbh, "bug_pk_seq", 100) ;
+	      &bump_sequence_to ($dbh, "project_task_pk_seq", 100) ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
  	  $version = &get_db_version ;
  	  $target = "2.5-30" ;
- 	  if (is_lesser $version, $target) {
- 	      debug "Adding rows to supported_languages." ;
+ 	  if (&is_lesser ($version, $target)) {
+ 	      &debug ("Adding rows to supported_languages.") ;
 	      @reqlist = (
 			  "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian','bg')",
 			  "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek','el')",
@@ -335,14 +331,14 @@ eval {
 	      @reqlist = () ;
 
  	      &update_db_version ($target) ;
- 	      debug "Committing." ;
+ 	      &debug ("Committing.") ;
  	      $dbh->commit () ;
  	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5-32" ;
-	  if (is_lesser $version, $target) {
-	      debug "Fixing unix_uid entries." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Fixing unix_uid entries.") ;
 
 	      $query = "UPDATE users SET unix_uid = nextval ('unix_uid_seq') WHERE unix_status != 'N' AND status != 'P' AND unix_uid = 0" ;
 	      $sth = $dbh->prepare ($query) ;
@@ -350,14 +346,14 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+temp+data+dropped" ;
-	  if (is_lesser $version, $target) {
-	      debug "Preparing to upgrade your database - dropping temporary tables" ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Preparing to upgrade your database - dropping temporary tables") ;
 
 	      my @tables = qw/ user_metric_tmp1_1 user_metric_tmp1_2
 		  user_metric_tmp1_3 user_metric_tmp1_4
@@ -383,30 +379,30 @@ eval {
 		  user_metric_history_date_userid / ;
 
 	      foreach my $table (@tables) {
-		  &drop_table_if_exists ($table) ;
+		  &drop_table_if_exists ($dbh, $table) ;
 	      }
 
 	      foreach my $sequence (@sequences) {
-		  &drop_sequence_if_exists ($sequence) ;
+		  &drop_sequence_if_exists ($dbh, $sequence) ;
 	      }
 
 	      foreach my $index (@indexes) {
-		  &drop_index_if_exists ($index) ;
+		  &drop_index_if_exists ($dbh, $index) ;
 	      }
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.2+data+upgraded" ;
-	  if (is_lesser $version, $target) {
-	      debug "Upgrading your database scheme from 2.5" ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Upgrading your database scheme from 2.5") ;
 
 	      my $pg_version = &get_pg_version ;
 
-	      if (is_lesser $pg_version, "7.3") {
+	      if (&is_lesser ($pg_version, "7.3")) {
 		  @reqlist = (
 			      "DROP INDEX groups_pkey",
 			      "DROP INDEX users_pkey",
@@ -436,14 +432,14 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.3+artifact+transcoded" ;
-	  if (is_lesser $version, $target) {
-	      debug "Transcoding the artifact data fields" ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Transcoding the artifact data fields") ;
 
 	      $query = "SELECT id,bin_data FROM artifact_file ORDER BY id ASC" ;
 	      # debug $query ;
@@ -464,14 +460,14 @@ eval {
 
 	      @reqlist = () ;
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.4+groups+inserted" ;
-	  if (is_lesser $version, $target) {
-	      debug "Inserting missing groups" ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Inserting missing groups") ;
 
 	      @reqlist = (
 			  "INSERT INTO groups (group_name, homepage,
@@ -511,14 +507,14 @@ eval {
 	      }
 	      @reqlist = () ;
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.6-0+checkpoint+1" ;
-	  if (is_lesser $version, $target) {
-	      debug "Database has successfully been converted." ;
+	  if (&is_lesser ($version, $target)) {
+	      &debug ("Database has successfully been converted.") ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
 	      $sth = $dbh->prepare ($query) ;
@@ -526,7 +522,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      debug "Committing." ;
+	      &debug ("Committing.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -536,8 +532,8 @@ eval {
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+2" ;
-    if (is_lesser $version, $target) {
-	debug "Updating permissions on system groups." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Updating permissions on system groups.") ;
 	$query = "UPDATE groups SET group_name='Site Admin', is_public=1 WHERE group_id=1" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
@@ -550,14 +546,14 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+3" ;
-    if (is_lesser $version, $target) {
-	debug "Creating table group_cvs_history." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Creating table group_cvs_history.") ;
 	$query = "CREATE TABLE group_cvs_history (
             id integer DEFAULT nextval('group_cvs_history_pk_seq'::text) NOT NULL,
             group_id integer DEFAULT '0' NOT NULL,
@@ -573,14 +569,14 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+4" ;
-    if (is_lesser $version, $target) {
-	debug "Registering Savannah themes." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Registering Savannah themes.") ;
 
 	$query = "SELECT max(theme_id) FROM themes" ;
 	# debug $query ;
@@ -590,7 +586,7 @@ eval {
 	$sth->finish () ;
 	my $maxid = $array [0] ;
 
-	&bump_sequence_to ("themes_pk_seq", $maxid) ;
+	&bump_sequence_to ($dbh, "themes_pk_seq", $maxid) ;
 
 	@reqlist = (
 		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX')",
@@ -614,14 +610,14 @@ eval {
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+5" ;
-    if (is_lesser $version, $target) {
-	debug "Registering yet another Savannah theme." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Registering yet another Savannah theme.") ;
 
 	$query = "INSERT INTO themes (dirname, fullname) VALUES ('savannah_darkslate', 'Savannah Dark Slate')";
 	# debug $query ;
@@ -630,14 +626,14 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+6" ;
-    if (is_lesser $version, $target) {
-	debug "Updating language codes." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Updating language codes.") ;
 
 	@reqlist = (
 		    "UPDATE supported_languages SET language_code='en' where classname='English'",
@@ -672,21 +668,21 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+7" ;
-    if (is_lesser $version, $target) {
-	debug "Fixing artifact-related views." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Fixing artifact-related views.") ;
 
-	&drop_view_if_exists ("artifact_file_user_vw") ;
-	&drop_view_if_exists ("artifact_history_user_vw") ;
-	&drop_view_if_exists ("artifact_message_user_vw") ;
-	&drop_view_if_exists ("artifactperm_artgrouplist_vw") ;
-	&drop_view_if_exists ("artifactperm_user_vw") ;
-	&drop_view_if_exists ("artifact_vw") ;
+	&drop_view_if_exists ($dbh, "artifact_file_user_vw") ;
+	&drop_view_if_exists ($dbh, "artifact_history_user_vw") ;
+	&drop_view_if_exists ($dbh, "artifact_message_user_vw") ;
+	&drop_view_if_exists ($dbh, "artifactperm_artgrouplist_vw") ;
+	&drop_view_if_exists ($dbh, "artifactperm_user_vw") ;
+	&drop_view_if_exists ($dbh, "artifact_vw") ;
 
 	@reqlist = (
 		    "CREATE VIEW artifact_file_user_vw as SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname FROM artifact_file af, users WHERE (af.submitted_by = users.user_id)",
@@ -705,14 +701,14 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+8" ;
-    if (is_lesser $version, $target) {
-	debug "Adding integrity constraints between the Trove map tables." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Adding integrity constraints between the Trove map tables.") ;
 
 	@reqlist = (
 		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
@@ -731,14 +727,14 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+9" ;
-    if (is_lesser $version, $target) {
-	debug "Adding extra fields to the groups table." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Adding extra fields to the groups table.") ;
 
 	@reqlist = (
 		    "ALTER TABLE groups ADD COLUMN use_ftp integer",
@@ -769,18 +765,18 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+10" ;
-    if (is_lesser $version, $target) {
- 	debug "Updating supported_languages table." ;
+    if (&is_lesser ($version, $target)) {
+ 	&debug ("Updating supported_languages table.") ;
 	
 	my $pg_version = &get_pg_version ;
 
-	if (is_lesser $pg_version, "7.3") {
+	if (&is_lesser ($pg_version, "7.3")) {
 	    @reqlist = (
 			"ALTER TABLE supported_languages RENAME TO supported_languages_old",
 			"CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
@@ -809,14 +805,14 @@ eval {
  	}
  	@reqlist = () ;
  	&update_db_version ($target) ;
- 	debug "Committing." ;
+ 	&debug ("Committing.") ;
  	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+11" ;
-    if (is_lesser $version, $target) {
- 	debug "Adding tables for the plugin subsystem." ;
+    if (&is_lesser ($version, $target)) {
+ 	&debug ("Adding tables for the plugin subsystem.") ;
 
  	@reqlist = (
 		    "CREATE SEQUENCE plugins_pk_seq",
@@ -835,14 +831,14 @@ eval {
  	}
  	@reqlist = () ;
  	&update_db_version ($target) ;
- 	debug "Committing." ;
+ 	&debug ("Committing.") ;
  	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+12" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021125.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021125.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125.sql") } ;
       foreach my $s (@reqlist) {
@@ -855,14 +851,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+13" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021212.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021212.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021212.sql") } ;
       foreach my $s (@reqlist) {
@@ -875,14 +871,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+14" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021213.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021213.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021213.sql") } ;
       foreach my $s (@reqlist) {
@@ -895,14 +891,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+15" ;
-    if (is_lesser $version, $target) {
-      debug "Transcoding documentation data fields" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Transcoding documentation data fields") ;
       $query = "SELECT docid,data FROM doc_data ORDER BY docid ASC" ;
       # debug $query ;
       $sth = $dbh->prepare ($query) ;
@@ -924,14 +920,14 @@ eval {
 
       @reqlist = () ;
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+16" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021214.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021214.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021214.sql") } ;
       foreach my $s (@reqlist) {
@@ -944,14 +940,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+17" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021215.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021215.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021215.sql") } ;
       foreach my $s (@reqlist) {
@@ -964,14 +960,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+18" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021216.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021216.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216.sql") } ;
       foreach my $s (@reqlist) {
@@ -984,14 +980,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+19" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021223.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20021223.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021223.sql") } ;
       foreach my $s (@reqlist) {
@@ -1004,14 +1000,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+20" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030102.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030102.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030102.sql") } ;
       foreach my $s (@reqlist) {
@@ -1024,14 +1020,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+21" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030105.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030105.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030105.sql") } ;
       foreach my $s (@reqlist) {
@@ -1044,14 +1040,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+22" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030107.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030107.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030107.sql") } ;
       foreach my $s (@reqlist) {
@@ -1064,14 +1060,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+23" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030109.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030109.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030109.sql") } ;
       foreach my $s (@reqlist) {
@@ -1084,15 +1080,15 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+24" ;
-    if (is_lesser $version, $target) {
+    if (&is_lesser ($version, $target)) {
 
-      debug "Adjusting language sequense" ;
+      &debug ("Adjusting language sequences") ;
 
 	$query = "SELECT max(language_id) FROM supported_languages" ;
 	$sth = $dbh->prepare ($query) ;
@@ -1100,9 +1096,9 @@ eval {
 	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
 	my $maxid = $array [0] ;
-	&bump_sequence_to ("supported_languages_pk_seq", $maxid) ;
+	&bump_sequence_to ($dbh, "supported_languages_pk_seq", $maxid) ;
 
-      debug "Upgrading with 20030112.sql" ;
+      &debug ("Upgrading with 20030112.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030112.sql") } ;
       foreach my $s (@reqlist) {
@@ -1115,14 +1111,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+25" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030113.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030113.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030113.sql") } ;
       foreach my $s (@reqlist) {
@@ -1135,14 +1131,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+26" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030131.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030131.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030131.sql") } ;
       foreach my $s (@reqlist) {
@@ -1155,14 +1151,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+27" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030209.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030209.sql") ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030209.sql") } ;
       foreach my $s (@reqlist) {
@@ -1175,18 +1171,18 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+28" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030312.sql" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Upgrading with 20030312.sql") ;
 
       my $pg_version = &get_pg_version ;
       
-      if (is_lesser $pg_version, "7.3") {
+      if (&is_lesser ($pg_version, "7.3")) {
 	  @reqlist = (
 		      "DROP TRIGGER projtask_insert_depend_trig ON project_task",
 		      "DROP FUNCTION projtask_insert_depend ()",
@@ -1226,14 +1222,14 @@ END;
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      debug "Committing $target." ;
+      &debug ("Committing $target.") ;
       $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+29" ;
-    if (is_lesser $version, $target) {
-	debug "Registering KDE theme." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Registering KDE theme.") ;
 
 	$query = "INSERT INTO themes (dirname, fullname) VALUES ('kde', 'KDE')";
 	# debug $query ;
@@ -1242,15 +1238,15 @@ END;
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+30" ;
-    if (is_lesser $version, $target) {
-	debug "Registering Dark Aqua theme." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Registering Dark Aqua theme.") ;
 
 	$query = "INSERT INTO themes (dirname, fullname) VALUES ('darkaqua', 'Dark Aqua')";
 	# debug $query ;
@@ -1259,15 +1255,15 @@ END;
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+31" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20030513.sql" ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20030513.sql") ;
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030513.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1280,26 +1276,26 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
 
     $version = &get_db_version ;
     $target = "3.0-1" ;
-    if (is_lesser $version, $target) {
-	debug "Database schema is now version 3.0-1." ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Database schema is now version 3.0-1.") ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
 
     $version = &get_db_version ;
     $target = "3.0-7" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20030822.sql" ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20030822.sql") ;
 
 	@reqlist = (
 		    "DROP TRIGGER artifactgroup_update_trig ON artifact",
@@ -1317,14 +1313,14 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.1-0+1" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20031105.sql" ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20031105.sql") ;
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031105.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1335,7 +1331,7 @@ END;
 	    $sth->finish () ;
 	}
 
-	debug "Upgrading with 20031124.sql" ;
+	&debug ("Upgrading with 20031124.sql") ;
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031124.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1348,14 +1344,14 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.1-0+2" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20031129.sql" ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20031129.sql") ;
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031129.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1368,17 +1364,17 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.1-0+3" ;
-    if (is_lesser $version, $target) {
+    if (&is_lesser ($version, $target)) {
 	# Yes, I know.  20031126 < 20031129, yet we apply that change later.
 	# Blame tperdue for late committing.
 	# They are independent anyway.
-	debug "Upgrading with 20031126.sql" ; 
+	&debug ("Upgrading with 20031126.sql") ; 
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031126.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1391,14 +1387,14 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.2.1-0+2" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20031205.sql" ; 
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20031205.sql") ; 
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031205.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1411,14 +1407,14 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
     
     $version = &get_db_version ;
     $target = "3.2.1-0+3" ;
-    if (is_lesser $version, $target) {
-	debug "Upgrading with 20040130.sql" ; 
+    if (&is_lesser ($version, $target)) {
+	&debug ("Upgrading with 20040130.sql") ; 
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040130.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1431,14 +1427,14 @@ END;
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	debug "Committing." ;
+	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.2.1-0+4" ;
-    if (is_lesser $version, $target) {
-        debug "Upgrading with 20040204.sql" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20040204.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040204.sql") } ;
         foreach my $s (@reqlist) {
@@ -1451,14 +1447,14 @@ END;
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        debug "Committing." ;
+        &debug ("Committing.") ;
         $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.2.1-0+5" ;
-    if (is_lesser $version, $target) {
-        debug "Upgrading with 20040315.sql" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20040315.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040315.sql") } ;
         foreach my $s (@reqlist) {
@@ -1471,14 +1467,14 @@ END;
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        debug "Committing." ;
+        &debug ("Committing.") ;
         $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.3.0-0+0" ;
-    if (is_lesser $version, $target) {
-        debug "Upgrading with 20040325.sql" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20040325.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040325.sql") } ;
         foreach my $s (@reqlist) {
@@ -1491,14 +1487,14 @@ END;
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        debug "Committing." ;
+        &debug ("Committing.") ;
         $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.3.0-0+1" ;
-    if (is_lesser $version, $target) {
-        debug "Upgrading with 200403252.sql" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 200403252.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/200403252.sql") } ;
         foreach my $s (@reqlist) {
@@ -1511,14 +1507,14 @@ END;
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        debug "Committing." ;
+        &debug ("Committing.") ;
         $dbh->commit () ;
     }
 
     $version = &get_db_version ;
     $target = "3.3.0-0+3" ;
-    if (is_lesser $version, $target) {
-        debug "Upgrading with 20040507.sql" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20040507.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040507.sql") } ;
         foreach my $s (@reqlist) {
@@ -1531,12 +1527,12 @@ END;
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        debug "Committing." ;
+        &debug ("Committing.") ;
         $dbh->commit () ;
     }
 
-    debug "It seems your database $action went well and smoothly.  That's cool." ;
-    debug "Please enjoy using Gforge." ;
+    &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
+    &debug ("Please enjoy using Gforge.") ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
@@ -1546,54 +1542,30 @@ END;
 
 if ($@) {
     warn "Transaction aborted because $@" ;
-    debug "Transaction aborted because $@" ;
-    debug "Last SQL query was:\n$query\n(end of query)" ;
+    &debug ("Transaction aborted because $@") ;
+    &debug ("Last SQL query was:\n$query\n(end of query)") ;
     $dbh->rollback ;
     my $version = &get_db_version ; 
     if ($version) {
-	debug "Your database schema is at version $version" ;
+	&debug ("Your database schema is at version $version") ;
     } else {
-	debug "Couldn't get your database schema version." ;
+	&debug ("Couldn't get your database schema version.") ;
     }
-    debug "Please report this bug on the Debian bug-tracking system." ;
-    debug "Please include the previous messages as well to help debugging." ;
-    debug "You should not worry too much about this," ;
-    debug "your DB is still in a consistent state and should be usable." ;
+    &debug ("Please report this bug on the Debian bug-tracking system.") ;
+    &debug ("Please include the previous messages as well to help debugging.") ;
+    &debug ("You should not worry too much about this,") ;
+    &debug ("your DB is still in a consistent state and should be usable.") ;
     exit 1 ;
 }
 
 $dbh->rollback ;
 $dbh->disconnect ;
 
-sub is_lesser ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
-
-    my $rc = system "dpkg --compare-versions $v1 lt $v2" ;
-
-    return (! $rc) ;
-}
-
-sub is_greater ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
-
-    my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
-
-    return (! $rc) ;
-}
-
 sub get_pg_version () {
     my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
     my $version = qx($command) ;
     chomp $version ;
     return $version ;
-}
-
-sub debug ( $ ) {
-    my $v = shift ;
-    chomp $v ;
-    print STDERR "$v\n" ;
 }
 
 sub create_metadata_table ( $ ) {
@@ -1610,7 +1582,7 @@ sub create_metadata_table ( $ ) {
     # Let's create this table if we have it not
 
     if ($array [0] == 0) {
-	debug "Creating debian_meta_data table." ;
+	&debug ("Creating debian_meta_data table.") ;
 	$query = "CREATE TABLE debian_meta_data (key varchar primary key, value text not null)" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
@@ -1628,7 +1600,7 @@ sub create_metadata_table ( $ ) {
     # Empty table?  We'll have to fill it up a bit
 
     if ($array [0] == 0) {
-	debug "Inserting first data into debian_meta_data table." ;
+	&debug ("Inserting first data into debian_meta_data table.") ;
 	$query = "INSERT INTO debian_meta_data (key, value) VALUES ('db-version', '$v')" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
@@ -1640,7 +1612,7 @@ sub create_metadata_table ( $ ) {
 sub update_db_version ( $ ) {
     my $v = shift or die "Not enough arguments" ;
 
-    debug "Updating debian_meta_data table." ;
+    &debug ("Updating debian_meta_data table.") ;
     $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
@@ -1659,91 +1631,4 @@ sub get_db_version () {
     my $version = $array [0] ;
 
     return $version ;
-}
-
-sub drop_table_if_exists ( $ ) {
-    my $tname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping table $tname" ;
-	$query = "DROP TABLE $tname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_sequence_if_exists ( $ ) {
-    my $sname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping sequence $sname" ;
-	$query = "DROP SEQUENCE $sname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_index_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping index $iname" ;
-	$query = "DROP INDEX $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_view_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='v'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping view $iname" ;
-	$query = "DROP VIEW $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub bump_sequence_to ( $$ ) {
-    my ($sth, @array, $seqname, $targetvalue) ;
-
-    $seqname = shift ;
-    $targetvalue = shift ;
-
-    do {
-	$query = "select nextval ('$seqname')" ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-    } until $array[0] >= $targetvalue ;
 }

@@ -16,6 +16,8 @@
     Include   {gforge_etc}/httpd.secrets
   </Directory>
 
+  ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
+
   # Debian Sourceforge without the DNS delegation
   # Project home pages are in a virtual /www/<group> location
   AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
