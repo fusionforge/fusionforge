@@ -33,7 +33,7 @@ account_register	title	SourceForge New Account Registration
 account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
-account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account willthen be activated for normal logins.</p>
+account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
@@ -171,7 +171,7 @@ menu	software_map	Software Map
 menu	top_projects	Top Projects
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
-my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices viaemail, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
+my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
 my	no_monitored_forums	<H3>You are not monitoring any forums</H3><P>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.<P>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.<BR>&nbsp;
 my	no_open_tasks	You have no open tasks assigned to you.
 my	no_projects	You're not a member of any active projects
@@ -356,7 +356,7 @@ tracker_admin_add_cat	title	Add Categories To: $1
 tracker_admin_add_group	section	Tracker Administration
 tracker_admin_add_group	title	Add Groups To: $1
 tracker_admin_update_canned	section	Tracker Administration
-tracker_admin_update_canned	title	Modify Canned Respnses In: $1
+tracker_admin_update_canned	title	Modify Canned Responses In: $1
 tracker_admin_update_cat	section	Tracker Administration
 tracker_admin_update_cat	title	Modify Category In: $1
 tracker_admin_update_group	section	Tracker Administration
