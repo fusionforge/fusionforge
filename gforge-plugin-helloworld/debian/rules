@@ -33,27 +33,29 @@ clean:
 
 	dh_clean
 
+DESTDIR=$(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)
+
 install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
 
-	cp -r bin/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/
-	cp -r include/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/
-	# cp -r lib/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/
-	# cp -r cgi-bin/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/
-	cp -r etc/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/etc/sourceforge/plugins/$(PLUGIN)/
-	cp -r www/* $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/
-	install -m 0644 httpd.conf $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/etc/sourceforge/httpd.conf.d/50$(PLUGIN)
-	# install -m 0600 httpd.secrets $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/etc/sourceforge/httpd.secrets.d/50$(PLUGIN)
-	find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/ -name CVS -type d | xargs rm -rf
-	find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
-	# find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
-	# find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
-	find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/etc/sourceforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
-	find $(CURDIR)/debian/sourceforge-plugin-$(PLUGIN)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	cp -r bin/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/
+	cp -r include/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/
+	# cp -r lib/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/
+	# cp -r cgi-bin/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/
+	cp -r etc/* $(DESTDIR)/etc/sourceforge/plugins/$(PLUGIN)/
+	cp -r www/* $(DESTDIR)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/
+	install -m 0644 httpd.conf $(DESTDIR)/etc/sourceforge/httpd.conf.d/50$(PLUGIN)
+	# install -m 0600 httpd.secrets $(DESTDIR)/etc/sourceforge/httpd.secrets.d/50$(PLUGIN)
+	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
+	find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
+	find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
+	# find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	# find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
+	find $(DESTDIR)/etc/sourceforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 
 
 # Build architecture-independent files here.
