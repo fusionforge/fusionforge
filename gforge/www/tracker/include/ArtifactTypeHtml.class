@@ -1,0 +1,219 @@
+<?php
+/**
+  *
+  * SourceForge Generic Tracker facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+
+require_once('common/tracker/ArtifactType.class');
+
+class ArtifactTypeHtml extends ArtifactType {
+
+	/**
+	 *  ArtifactType() - constructor
+	 *
+	 *  @param $Group object
+	 *  @param $artifact_type_id - the id # assigned to this artifact type in the db
+	 */
+	function ArtifactTypeHtml(&$Group,$artifact_type_id=false) {
+		return $this->ArtifactType($Group,$artifact_type_id);
+	}
+
+	function header($params) {
+		global $DOCUMENT_ROOT;
+
+		$group_id= $this->Group->getID();
+
+		//required by new site_project_header
+		$params['group']=$group_id;
+		$params['toptab']='tracker';
+		$params['tabtext']=$this->getName();
+
+		site_project_header($params);
+
+		echo '<B><A HREF="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">Submit New</A>';
+		echo ' | <A HREF="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">Browse</A>';
+		if (user_isloggedin()) {
+			echo ' | <A HREF="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">Reporting</A>';
+		}
+		echo ' | <A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A>';
+
+		echo '</B><P>';
+		//echo '<HR NoShade SIZE="1" SIZE="90%">';
+	}
+
+	function footer($params) {
+		site_project_footer($params);
+	}
+
+	function adminHeader($params) {
+		echo $this->header($params);
+		$group_id= $this->Group->getID();
+		echo '<B>Admin Functions: <A HREF="/tracker/admin/?group_id='.$group_id.'">Add/Browse Artifact Types</A>';
+		echo ' | <A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">Edit/Update Options in: '. $this->getName() .'</A></B>';
+	}
+
+	function categoryBox ($name='category_id',$checked='xzxz',$text_100='None') {
+		return html_build_select_box ($this->getCategories(),$name,$checked,true,$text_100);
+	}
+
+	function artifactGroupBox ($name='artifact_group_id',$checked='xzxz',$text_100='None') {
+		return html_build_select_box ($this->getGroups(),$name,$checked,true,$text_100);
+	}
+
+	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='None') {
+		return html_build_select_box ($this->getTechnicians(),$name,$checked,$show_100,$text_100);
+	}
+
+	function cannedResponseBox ($name='canned_response',$checked='xzxz') {
+		return html_build_select_box ($this->getCannedResponses(),$name,$checked);
+	}
+
+	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='None') {
+		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
+	}
+
+	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='None') {
+		return html_build_select_box($this->getResolutions(),$name,$checked,$show_100,$text_100);
+	}
+
+	function showBrowseList ($result,$offset,$set='open') {
+		global $sys_datefmt,$PHP_SELF;
+		$group_id=$this->Group->getID();
+
+		$title_arr=array();
+		$title_arr[]='Request ID';
+		$title_arr[]='Summary';
+		$title_arr[]='Date';
+		$title_arr[]='Assigned To';
+		$title_arr[]='Submitted By';
+
+		$IS_ADMIN=$this->userIsAdmin();
+
+
+		if ($IS_ADMIN) {
+			echo '
+			<FORM NAME="artifactList" ACTION="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$this->getID().'" METHOD="POST">
+			<INPUT TYPE="HIDDEN" NAME="func" VALUE="massupdate">';
+		}
+
+		echo html_build_list_table_top ($title_arr);
+
+		$then=(time()-$this->getDuePeriod());
+		$rows=db_numrows($result);
+		for ($i=0; $i < $rows; $i++) {
+			echo '
+			<TR BGCOLOR="'. get_priority_color(db_result($result, $i, 'priority')) .'">'.
+			'<TD NOWRAP>'.
+			($IS_ADMIN?'<INPUT TYPE="CHECKBOX" NAME="artifact_id_list[]" VALUE="'.
+			db_result($result, $i, 'artifact_id') .'"> ':'').
+					db_result($result, $i, 'artifact_id') .
+					'</TD>'.
+			'<TD><A HREF="'.$PHP_SELF.'?func=detail&aid='. 
+			db_result($result, $i, 'artifact_id').
+			'&group_id='. $group_id .'&atid='.
+			$this->getID().'">'. 
+			db_result($result, $i, 'summary').
+			'</A></TD>'.
+			'<TD>'. (($set != 'closed' && db_result($result, $i, 'date') < $then)?'<B>* ':'&nbsp; ') . date($sys_datefmt,db_result($result, $i, 'date')) .'</TD>'.
+			'<TD>'. make_user_link ( db_result($result, $i, 'assigned_to') ) .'</TD>'.
+			'<TD>'. make_user_link ( db_result($result, $i, 'submitted_by') ) .'</TD></TR>';
+		}
+
+		/*
+			Show extra rows for <-- Prev / Next -->
+		*/
+		if (($offset > 0) || ($rows >= 50)) {
+			echo '
+				<TR><TD COLSPAN="2">';
+			if ($offset > 0) {
+				echo '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset-50).'"><B><-- Previous 50</B></A>';
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</TD><TD>&nbsp;</TD><TD COLSPAN="2">';
+	
+			if ($rows >= 50) {
+				echo '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset+50).'"><B>Next 50 --></B></A>';
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</TD></TR>';
+		}
+
+		/*
+			Mass Update Code
+		*/
+		if ($IS_ADMIN) {
+			echo '<script language="JavaScript">
+	<!-- 
+	function checkAll(val) {
+		al=document.artifactList;
+		len = al.elements.length;
+		var i=0;
+		for( i=0 ; i<len ; i++) {
+			if (al.elements[i].name==\'artifact_id_list[]\') {
+				al.elements[i].checked=val;
+			}
+		}
+	}
+	//-->
+	</script>
+			<TR><TD COLSPAN="5">
+<font size=1>
+<a href="javascript:checkAll(1)">Check&nbsp;All</a>
+-
+ <a href="javascript:checkAll(0)">Clear&nbsp;All</a>
+</font>
+<P>
+
+			<FONT COLOR="#FF0000"><B>Admin:</B></FONT>  If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+			<TABLE WIDTH="100%" BORDER="0">
+
+			<TR>
+			<TD><B>Category: <A href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><b>(?)</b></a></B><BR>'. $this->categoryBox ('category_id','xzxz','No Change') .'</TD>
+			<TD><B>Group: <A href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><b>(?)</b></a></B><BR>'. $this->artifactGroupBox ('artifact_group_id','xzxz','No Change') .'</TD>
+			</TR>
+
+			<TR>
+			<TD><B>Priority: <A href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><b>(?)</b></a></B><BR>';
+			echo build_priority_select_box ('priority', '5', true);
+			echo '</TD><TD>';
+			if ($this->useResolution()) {
+				echo '
+				<B>Resolution: <A href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><b>(?)</b></a></B><BR>';
+				echo $this->resolutionBox('resolution_id','xzxz',true,'No Change');
+			} else { 
+				echo '&nbsp;
+				<INPUT TYPE="HIDDEN" NAME="resolution_id" VALUE="100">';
+			}
+
+			echo '</TD>
+			</TR>
+
+			<TR>
+			<TD><B>Assigned To: <A href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><b>(?)</b></a></B><BR>'. $this->technicianBox ('assigned_to','xzxz',true,'No Change') .'</TD>
+			<TD><B>Status: <A href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><b>(?)</b></a></B><BR>'. $this->statusBox ('status_id','xzxz',true,'No Change') .'</TD>
+			</TR>
+
+			<TR><TD COLSPAN="2"><B>Canned Response: <A href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><b>(?)</b></a></B><BR>'. $this->cannedResponseBox ('canned_response') .'</TD></TR>
+
+			<TR><TD COLSPAN="3" ALIGN="MIDDLE"><INPUT TYPE="SUBMIT" name="submit" VALUE="Mass Update"></TD></TR>
+
+			</TABLE>		
+		</FORM>
+			</TD></TR>';
+		}
+		echo '</TABLE>';
+	}
+
+}
+
+?>

@@ -1,0 +1,88 @@
+#/**
+#  *
+#  * Swedish message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Christian Rose <menthos@users.sourceforge.net>
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-17  Christian Rose  <menthos@users.sourceforge.net>
+#	* Initial translation
+# 2001-03-23  Christian Rose  <menthos@users.sourceforge.net>
+#	* Updates
+#
+about_foundries	about_blurb	Om Foundries
+menu	about_sourceforge	Om SourceForge
+menu	account_maintenance	Kontounderh&aring;ll
+menu	bookmark_page	L&auml;gg till bokm&auml;rke
+home	breaking_down_barriers	Bryter ner gr&auml;nserna f&ouml;r open source-utveckling
+menu	change_my_theme	Byt mitt tema
+menu	code_snippet_library	Kodbibliotek
+menu	compile_farm	Kompileringsverkstad
+menu	contact_us	Kontakta oss
+group	developers	Utvecklare
+group	developer_info	Utvecklarinformation
+menu	discussion_forums	Diskussionsforum
+menu	documentation	Webbplatsdokumentation
+frs	file_download	H&auml;mta
+frs	file_monitor	Bevaka
+frs	file_notes	Anteckningar
+frs	file_package	Paket
+frs	file_version	Version
+group	long_bugs	Felr&auml;ttning
+group	long_cvs	CVS-f&ouml;rvar
+group	long_docman	DocManager: Projektdokumentation
+group	long_forum	&Ouml;ppna forum
+group	long_ftp	Anonymt FTP-utrymme
+group	long_homepage	Projekthemsida
+group	long_mail	S&auml;ndlistor
+group	long_news	Senaste nyheterna
+group	long_patch	Administrera felr&auml;ttelser
+group	long_pm	Projektstyrning
+group	long_support	Administrera anv&auml;ndarsupport
+group	long_survey	Unders&ouml;kningar
+group	short_bugs	Buggar
+group	short_cvs	CVS
+group	short_docman	Dokumentation
+group	short_files	Filesgroup	short_forum	Forum
+group	short_homepage	Hemsida
+group	short_mail	Listor
+group	short_main 	Huvudsida
+group	short_news	Nyheter
+group	short_patch	Felr&auml;ttningar
+group	short_pm	Uppgifter
+group	short_summary	Sammanfattning
+group	short_support	Support
+group	short_survey	Unders&ouml;kningar
+home	highest_ranked_users	H&ouml;gst rankade anv&auml;ndare
+home	about_blurb	 		SourceForge &auml;r en <B>fri tj&auml;nst f&ouml;r 		<A href="http://www.opensource.org">open source</A>-utvecklare 		</B>som erbjuder enkel tillg&aring;ng till det b&auml;sta i 		CVS, s&auml;ndlistor, felhantering, meddelandeforum, 		uppgiftshantering, webbplatsutrymme, permanent filarkivering, 		fullst&auml;ndiga backuper, och en helt webbaserad 		administration. 		<A href="/docman/display_doc.php?docid=753&group_id=1"> 		<font size="-1">[ mer ]</font></A> 		<A href="/docman/display_doc.php?docid=756&group_id=1"> 		<font size="-1">[ fr&aring;gor och svar ]</font></A><BR>&nbsp; 		<P> 		<B>Deltagande och synpunkter p&aring; webbplatsen</B> 		<P> 		F&ouml;r att f&aring; ut det mesta av SourceForge m&aring;ste 		du <A href="/account/register.php">registrera dig som en 		webbplatsanv&auml;ndare</A>. 		Det g&ouml;r att du kan deltaga i allt vi har att erbjuda. Du 		kan naturligtvis surfa p&aring; webbplatsen utan att att 		registrera dig, men du kommer d&aring; inte att kunna deltaga 		i allt. 		<P> 		&nbsp; 		<BR> 		<B>Skapa ditt eget projekt</B> 		<P> 		<A href="/account/register.php">Registrera dig som en 		webbplatsanv&auml;ndare</A>, <A HREF="/account/login.php"> 		logga sedan in</A> och till sist <A HREF="/register/"> 		registrerar du ditt projekt.</A> 		<P> 		Tack... och ha det s&aring; trevligt p&aring; webbplatsen.
+frs	latest_file_releases	Senaste filutg&aring;vorna
+menu	login	Logga in via SSL
+menu	logout	Logga ut
+home	most_active_this_week	Mest aktiva denna vecka
+menu	my_personal_page	Min personliga sida
+menu	new_project	Registrera nytt projekt
+menu	new_releases	Nya utg&aring;vor
+menu	new_user	Ny anv&auml;ndare via SSL
+menu	other_site_mirrors	Andra webbplatsspeglar
+menu	project_admin	Projektadministrat&ouml;r
+group	project_admins	Projektadministrat&ouml;rer
+menu	project_help_wanted	Projekthj&auml;lp s&ouml;kes
+menu	project_summary	Projektsammanfattning
+group	public_area	&Ouml;ppet utrymme
+menu	search	S&ouml;k
+menu	software_map	Programvaru&ouml;versikt
+home	sourceforge_statistics	SourceForge-statistik
+menu	top_projects	Topprojekt
+home	top_project_downloads	Projekt med flest h&auml;mtningar
+conf	content_encoding	iso-8859-1
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	sv
+conf	language_id	10

@@ -1,0 +1,1454 @@
+<?php   
+/**
+ *	Group object
+ *
+ *	Sets up database results and preferences for a group and abstracts this info.
+ *
+ *	Foundry.class and Project.class call this.
+ *
+ *	Project.class contains all the deprecated API from the old group.php file
+ *
+ *	DEPENDS on user.php being present and setup properly
+ *
+ *	GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
+ *	USE group_get_object() to instantiate properly
+ *
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ * @author Tim Perdue <tperdue@valinux.com>
+ * @date 2000-08-28
+ *
+ */
+
+require_once('common/tracker/ArtifactTypes.class');
+require_once('www/include/frs.class');
+
+$GROUP_OBJ=array();
+
+/**
+ *  group_get_object() - Get the group object.
+ *
+ *  group_get_object() is useful so you can pool group objects/save database queries
+ *  You should always use this instead of instantiating the object directly.
+ *
+ *  You can now optionally pass in a db result handle. If you do, it re-uses that query
+ *  to instantiate the objects.
+ *
+ *  IMPORTANT! That db result must contain all fields
+ *  from groups table or you will have problems
+ *
+ *  @param		int		Required
+ *  @param		int		Result set handle ("SELECT * FROM groups WHERE group_id=xx")
+ *  @return a group object or false on failure
+ */
+function &group_get_object($group_id,$res=false) {
+	//create a common set of group objects
+	//saves a little wear on the database
+
+	//automatically checks group_type and 
+	//returns appropriate object
+	
+	global $GROUP_OBJ;
+	if (!isset($GROUP_OBJ["_".$group_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res=db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$GROUP_OBJ["_".$group_id."_"]=false;
+		} else {
+			/*
+				check group type and set up object
+			*/
+			if (db_result($res,0,'type')==1) {
+				//project
+				$GROUP_OBJ["_".$group_id."_"]= new Project($group_id,$res);
+			} else if (db_result($res,0,'type')==2) {
+				//foundry
+				$GROUP_OBJ["_".$group_id."_"]= new Foundry($group_id,$res);
+			} else {
+				//invalid
+				$GROUP_OBJ["_".$group_id."_"]=false;
+			}
+		}
+	}
+	return $GROUP_OBJ["_".$group_id."_"];
+}
+
+class Group extends Error {
+	/**
+	 * Associative array of data from db
+	 * 
+	 * @var array $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The group ID
+	 *
+	 * @var int $group_id
+	 */
+	var $group_id;
+
+	/** 
+	 * Database result set handle
+	 *
+	 * @var int $db_result
+	 */
+	var $db_result;
+
+	/**
+	 * Permissions data row from db
+	 * 
+	 * @var array $perm_data_array
+	 */
+	var $perm_data_array;
+
+	/**
+	 * Whether the use is an admin/super user of this project
+	 *
+	 * @var bool $is_admin
+	 */
+	var $is_admin;
+
+	/**
+	 * Artifact types result handle
+	 * 
+	 * @var int $types_res;
+	 */
+	var $types_res;
+
+	/**
+	 *	Group() - Group object constructor - use group_get_object() to instantiate
+	 *
+	 *	@param	int		Required - group_id of the group you want to instantiate
+	 *	@param	int		Database result from select query
+	 */
+	function Group($id=false, $res=false) {
+		$this->Error();
+		if (!$id) {
+			//setting up an empty object
+			//probably going to call create()
+			return true;
+		}
+		$this->group_id=$id;
+		if (!$res) {
+			$this->db_result=db_query("SELECT * FROM groups WHERE group_id='$id'");
+		} else {
+			$this->db_result=$res;
+		}
+		if (db_numrows($this->db_result) < 1) {
+			//function in class we extended
+			$this->setError('Group Not Found');
+			$this->data_array=array();
+		} else {
+			//set up an associative array for use by other functions
+
+			db_reset_result($this->db_result);
+
+			$this->data_array=db_fetch_array($this->db_result);
+		}
+	}
+
+
+	/**
+	 *	getData()
+	 *
+	 *	Generally should NOT be used - here for supporting deprecated group.php
+	 *	@return a database result set handle
+	 *	@access private
+	 */
+	function getData() {
+		db_reset_result($this->db_result);
+		return $this->db_result;
+	}
+
+	/**
+	 *	refreshGroupData() - May need to refresh database fields if an update occurred
+	 */
+	function refreshGroupData() {
+		$this->db_result=db_query("SELECT * FROM groups WHERE group_id='". $this->getID() ."'");
+		$this->data_array=db_fetch_array($this->db_result);
+	}
+
+
+	/**
+	 *	create() - Create new group
+	 *
+	 *	This method should be called on empty Group object
+	 *  
+	 *  @param	object	The User object
+	 *  @param	string	The full name of the user
+	 *  @param	string	The Unix name of the user
+	 *  @param	string	The new group description
+	 *  @param	int		The ID of the license to use
+	 *  @param	string	The 'other' license to use if any
+	 *  @param	string	The purpose of the group
+	 */
+	function create(&$user, $full_name, $unix_name, $description,
+		$license, $license_other, $purpose) {
+
+		// $user is ignored - anyone can create pending group
+
+		if ($this->getID()!=0) {
+			$this->setError("Group::create: Group object already exists");
+			return false;
+		}
+
+		srand((double)microtime()*1000000);
+		$random_num = rand(0,1000000);
+
+		db_begin();
+
+		$res = db_query("
+			INSERT INTO groups (
+				group_name,
+				is_public,
+				unix_group_name,
+				short_description,
+				http_domain,
+				homepage,
+				status,
+				unix_box,
+				cvs_box,
+				license,
+				register_purpose,
+				register_time,
+				license_other,
+				rand_hash
+			)
+			VALUES (
+				'$full_name',
+				1,
+				'$unix_name',
+				'$description',
+				'$unix_name.".$GLOBALS['sys_default_domain']."',
+				'$unix_name.".$GLOBALS['sys_default_domain']."',
+				'P',
+				'shell1',
+				'cvs1',
+				'$license',
+				'".htmlspecialchars($purpose)."',
+				".time().",
+				'".htmlspecialchars($license_other)."',
+				'".md5($random_num)."'
+			)
+		");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: Could not create group: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		$this->group_id = db_insertid($res, 'groups', 'group_id');
+
+		//
+		// Now, make the user an admin
+		//
+		$res = db_query("
+			INSERT INTO user_group (
+				user_id,
+				group_id,
+				admin_flags,
+				cvs_flags,
+				artifact_flags,
+				forum_flags
+			)
+			VALUES (
+				".$user->getID().",
+				".$this->getID().",
+				'A',
+				1,
+				2,
+				2
+			)
+		");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: Could not add admin to newly created group: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		db_commit();
+		$this->refreshGroupData();
+		return true;
+	}
+
+
+	/**
+	 *	updateAdmin($user) - Update core properties of group object
+	 *
+	 *	This function require site admin privilege
+	 *
+	 *	@param	object	User requesting operation (for access control)
+	 *	@param	bool	Whether group is publicly accessible (0/1)
+	 *	@param	string	Project's license (string ident)
+	 *	@param	int		Group type (1-project, 2-foundry)
+	 *	@param	string	Machine on which group's home directory located
+	 *	@param	string	Domain which serves group's WWW
+	 *	@return status
+	 *	@access public
+	 */
+	function updateAdmin(&$user, $is_public, $license, $type, $unix_box, $http_domain) {
+
+		$perm =& $this->getPermission($user);
+
+		if (!$perm || !is_object($perm)) {
+			$this->setError('Could not get permission');
+			return false;
+		}
+
+		if (!$perm->isSuperUser()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		db_begin();
+
+		$res = db_query("
+			UPDATE groups
+			SET is_public='$is_public',
+				license='$license',type='$type',
+				unix_box='$unix_box',http_domain='$http_domain'
+			WHERE group_id='".$this->getID()."'
+		");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: DB: Could not change group properties: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		/*
+			If this is a foundry, see if they have a preferences row, if not, create one
+		*/
+		if ($type=='2') {
+
+			$res = db_query("
+				SELECT *
+				FROM foundry_data
+				WHERE foundry_id='".$this->getID()."'
+			");
+
+			if (db_numrows($res) < 1) {
+				$res = db_query("
+					INSERT INTO foundry_data (foundry_id)
+					VALUES ('".$this->getID()."')
+				");
+
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setError('Could not insert foundry_data row: '.db_error());
+					db_rollback();
+					return false;
+				}
+			}
+		}
+
+		db_commit();
+
+		// Log the audit trail
+		if ($is_public != $this->isPublic()) {
+			$this->addHistory('is_public', $this->isPublic());
+		}
+		if ($license != $this->data_array['license']) {
+			$this->addHistory('license', $this->data_array['license']);
+		}
+		if ($type != $this->data_array['type']) {
+			$this->addHistory('type', $this->data_array['type']);
+		}
+		if ($unix_box != $this->data_array['unix_box']) {
+			$this->addHistory('unix_box', $this->data_array['unix_box']);
+		}
+		if ($http_domain != $this->data_array['http_domain']) {
+			$this->addHistory('http_domain', $this->data_array['http_domain']);
+		}
+
+		$this->refreshGroupData();
+		return true;
+	}
+
+	/**
+	 *	update() - Update number of common properties
+	 *
+	 *	Unlike updateAdmin(), this function accessible to project
+	 *	admin.
+	 *
+	 *	@param	object	User requesting operation (for access control)
+	 *	@param	bool	Whether group is publicly accessible (0/1)
+	 *	@param	string	Project's license (string ident)
+	 *	@param	int		Group type (1-project, 2-foundry)
+	 *	@param	string	Machine on which group's home directory located
+	 *	@param	string	Domain which serves group's WWW
+	 *	@return status
+	 *	@access public
+	 */
+	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
+		$use_pm,$use_pm_depend_box,$use_cvs,$use_news,$use_docman,
+		$new_task_address,$send_all_tasks,$logo_image_id) {
+
+		$perm =& $this->getPermission($user);
+
+		if (!$perm || !is_object($perm)) {
+			$this->setError('Could not get permission');
+			return false;
+		}
+
+		if (!$perm->isAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		// Validate some values
+		if (!$group_name) {
+			$this->setError('Invalid Group Name');
+			return false;
+		}
+
+		if ($new_task_address && !validate_email($new_task_address)) {
+			$this->setError('Task Address Appeared Invalid');
+			return false;
+		}
+
+		// in the database, these all default to '1',
+		// so we have to explicity set 0
+		if (!$use_mail) {
+			$use_mail=0;
+		}
+		if (!$use_survey) {
+			$use_survey=0;
+		}
+		if (!$use_forum) {
+			$use_forum=0;
+		}
+		if (!$use_pm) {
+			$use_pm=0;
+		}
+		if (!$use_pm_depend) {
+			$use_pm_depend=0;
+		}
+		if (!$use_cvs) {
+			$use_cvs=0;
+		}
+		if (!$use_news) {
+			$use_news=0;
+		}
+		if (!$use_docman) {
+			$use_docman=0;
+		}
+		if (!$send_all_tasks) {
+			$send_all_tasks=0;
+		}
+
+		if (!$homepage) {
+			$homepage='http://'.$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
+		}
+
+		$res = db_query("
+			UPDATE groups
+			SET 
+				group_name='$group_name',
+				homepage='$homepage',
+				short_description='$short_description',
+				use_mail='$use_mail',
+				use_survey='$use_survey',
+				use_forum='$use_forum',
+				use_pm='$use_pm',
+				use_pm_depend_box='$use_pm_depend_box',
+				use_cvs='$use_cvs',
+				use_news='$use_news',
+				use_docman='$use_docman',
+				new_task_address='$new_task_address',
+				send_all_tasks='$send_all_tasks'".
+// XXX: not active yet
+//				logo_image_id='$logo_image_id' 
+			"
+			WHERE group_id='".$this->getID()."'
+		");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error updating project information: '.db_error());
+			return false;
+		}
+
+		// Log the audit trail
+		$this->addHistory('Changed Public Info', '');
+
+		$this->refreshGroupData();
+		return true;
+	}
+
+	/**
+	 *	getID() - Simply return the group_id for this object
+	 *
+	 *	@return integer group_id
+	 */
+	function getID() {
+		return $this->group_id;
+	}
+
+	/**
+	 *	getType() - Foundry, project, etc
+	 *
+	 *	@return the type flag from the database
+	 */
+	function getType() {
+		return $this->data_array['type'];
+	}
+
+
+	/**
+	 *	getStatus()
+	 *
+	 *	Statuses include I,H,A,D
+	 */
+	function getStatus() {
+		return $this->data_array['status'];
+	}
+
+	/**
+	 *	setStatus($user, $status)
+	 *
+	 *	Statuses include I,H,A,D
+	 *
+	 *	@param	object	User requesting operation (for access control)
+	 *	@param	string	Status value
+	 *
+	 *	@access public
+	 */
+	function setStatus(&$user, $status) {
+
+		$perm =& $this->getPermission($user);
+
+		if (!$perm || !is_object($perm)) {
+			$this->setError('Could not get permission');
+			return false;
+		}
+
+		if (!$perm->isSuperUser()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		//	Projects in 'A' status can only go to 'H' or 'D'
+		//	Projects in 'D' status can only go to 'A'
+		//	Projects in 'P' status can only go to 'A' OR 'D'
+		//	Projects in 'I' status can only go to 'P'
+		//	Projects in 'H' status can only go to 'A' OR 'D'
+		$allowed_status_changes = array(
+			'AH'=>1,'AD'=>1,'DA'=>1,'PA'=>1,'PD'=>1,
+			'IP'=>1,'HA'=>1,'HD'=>1
+		);              
+
+		// Check that status transition is valid
+		if ($this->getStatus() != $status
+		    && !$allowed_status_changes[$this->getStatus().$status]) {
+			$this->setError('Invalid Status Change');
+			return false;
+		}
+
+		db_begin();
+
+		$res = db_query("
+			UPDATE groups
+			SET status='$status'
+			WHERE group_id='". $this->getID()."'
+		");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: DB: Could not change group status: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		if ($status=='A') {
+			// Activate LDAP group, if not yet
+			if (!sf_ldap_check_group($this->getID())) {
+
+				if (!sf_ldap_create_group($this->getID())) {
+					$this->setError(sf_ldap_get_error_msg());
+					db_rollback();
+					return false;
+				}
+
+				if (!$this->activateUsers()) {
+					db_rollback();
+					return false;
+				}
+			}
+
+		/* Otherwise, the group is not active, and make sure that
+		   LDAP group is not active either */
+		} else if (sf_ldap_check_group($this->getID())) {
+
+			if (!sf_ldap_remove_group($this->getID())) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+
+		}
+
+		// Make sure that active group have default trackers
+		if ($status=='A') {
+			$ats = new ArtifactTypes($this);
+			if (!$ats || !is_object($ats)) {
+				$this->setError('Error creating ArtifactTypes object');
+				db_rollback();
+				return false;
+			} else if ($ats->isError()) {
+				$this->setError($ats->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			if (!$ats->createTrackers()) {
+				$this->setError($ats->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+		}
+
+		db_commit();
+
+		// Log the audit trail
+		if ($status != $this->getStatus()) {
+			$this->addHistory('status', $this->getStatus());
+		}
+
+		$this->data_array['status'] = $status;
+		return true;
+	}
+
+	/**
+	 *	isFoundry() - Simple boolean test to see if it's a foundry or not
+	 *
+	 *	@return true/false
+	 */
+	function isFoundry() {
+		if ($this->getType()==2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *	isProject() - Simple boolean test to see if it's a project or not
+	 *
+	 *	@return true/false
+	 */
+	function isProject() {
+		if ($this->getType()==1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *	isPublic() - Simply returns the is_public flag from the database
+	 *
+	 *	@return true/false
+	 */
+	function isPublic() {
+		return $this->data_array['is_public'];
+	}
+
+	/**
+	 *	isActive() - Database field status of 'A' returns true
+	 *
+	 *	@return true/false
+	 */
+	function isActive() {
+		if ($this->getStatus()=='A') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *  getUnixName()
+	 *
+	 *  @return text unix_name
+	 */
+	function getUnixName() {
+		return strtolower($this->data_array['unix_group_name']);
+	}
+
+	/**
+	 *  getPublicName()
+	 *
+	 *  @return text group_name
+	 */
+	function getPublicName() {
+		return htmlspecialchars($this->data_array['group_name']);
+	}
+
+	/**
+	 *  getDescription()
+	 *
+	 *  @return text description
+	 */
+	function getDescription() {
+		return $this->data_array['short_description'];
+	}
+
+	/**
+	 *  getStartDate()
+	 *
+	 *  @return integer (unix time) of registration
+	 */
+	function getStartDate() {
+		return $this->data_array['register_time'];
+	}
+
+	/**
+	 *  getLogoImageID()
+	 *
+	 *  @return ID of logo image in db_images table (or 100 if none)
+	 */
+	function getLogoImageID() {
+		return $this->data_array['logo_image_id'];
+	}
+
+	/**
+	 *  getUnixBox()
+	 *
+	 *  @return name of the unix machine for the group
+	 */
+	function getUnixBox() {
+		return $this->data_array['unix_box'];
+	}
+
+	/**
+	 *  getDomain()
+	 *
+	 *  @return name of the group [web] domain
+	 */
+	function getDomain() {
+		return $this->data_array['http_domain'];
+	}
+
+	/**
+	 *  getLicense()
+	 *
+	 *  @return string ident of group license
+	 */
+	function getLicense() {
+		return $this->data_array['license'];
+	}
+
+	/**
+	 *  getLicenseOther()
+	 *
+	 *  @return text custom license
+	 */
+	function getLicenseOther() {
+		if ($this->getLicense() == 'other') {
+			return $this->data_array['license_other'];
+		} else {
+			return '';
+		}
+	}
+
+	/**
+	 *  getRegistrationPurpose()
+	 *
+	 *  @return text application for project hosting
+	 */
+	function getRegistrationPurpose() {
+		return $this->data_array['register_purpose'];
+	}
+
+
+
+
+
+	/*
+
+		Common Group preferences for tools
+
+	*/
+
+	/**
+	 *	usesCVS() - whether or not this group has opted to use CVS
+	 *
+	 *	@return true/false
+	 */
+	function usesCVS() {
+		return $this->data_array['use_cvs'];
+	}
+
+	/**
+	 *	usesMail() - whether or not this group has opted to use mailing lists
+	 *
+	 *	@return true/false
+	 */
+	function usesMail() {
+		return $this->data_array['use_mail'];
+	}
+
+	/**
+	 * 	usesNews() - whether or not this group has opted to use news
+	 *
+	 *	@return true/false
+	 */
+	function usesNews() {
+		return $this->data_array['use_news'];
+	}
+
+	/**
+	 *	usesForum() - whether or not this group has opted to use discussion forums
+	 *
+	 *  @return true/false
+	 */
+	function usesForum() {
+		return $this->data_array['use_forum'];
+	}	   
+
+	/**
+	 *  usesDocman() - whether or not this group has opted to use docman
+	 *
+	 *  @return true/false
+	 */
+	function usesDocman() {
+		return $this->data_array['use_docman'];
+	}
+
+	/**
+	 *  usesSurvey() - whether or not this group has opted to use surveys
+	 *
+	 *  @return true/false
+	 */
+	function usesSurvey() {
+		return $this->data_array['use_survey'];
+	}	   
+
+	/**
+	 *  usesPM() - whether or not this group has opted to Project Manager
+	 *
+	 *  @return true/false
+	 */
+	function usesPM() {
+		return $this->data_array['use_pm'];
+	}
+
+	/**
+	 *  usesPMDependencies() - whether or not this group has opted to use task dependencies
+	 *
+	 *  @return true/false
+	 */
+	function usesPMDependencies() {
+		return $this->data_array['use_pm_depend'];
+	}
+
+	// Warning: names for 2 functions below were choosen to be
+	// consistent with trackers code
+
+	/**
+	 *  PMEmailAddress() - get email address to send PM notifications to
+	 *
+	 *  @return true/false
+	 */
+	function PMEmailAddress() {
+		return $this->data_array['new_task_address'];
+	}
+
+	/**
+	 *  PMEmailAll() - whether or not this group has opted to use task dependencies
+	 *
+	 *  @return true/false
+	 */
+	function PMEmailAll() {
+		return $this->data_array['send_all_tasks'];
+	}
+
+
+	/**
+	 *	getHomePage() - The URL for this project's home page
+	 *
+	 *	@return text homepage URL
+	 */
+	function getHomePage() {
+		return $this->data_array['homepage'];
+	}
+
+	/**
+	 *	getArtifactTypes() - Get all Artifact types for this group
+	 *
+	 *	@return result set
+	 */
+	function getArtifactTypes() {
+		if (!isset($this->types_res)) {
+			$sql="SELECT group_artifact_id,name
+				FROM artifact_group_list
+				WHERE group_id='".$this->getID()."'
+				ORDER BY name";
+			$this->types_res=db_query($sql);
+		}
+		return $this->types_res;
+	}
+
+	/**
+	 *	getPermission() - Return a Permission for this Group and the specified User
+	 *
+	 *	@param	object	The user you wish to get permission for (usually the logged in user)
+	 *	@return permission
+	 */
+	function &getPermission(&$_user) {
+		return permission_get_object(&$this, &$_user);
+	}
+
+	/*
+
+
+		Basic functions to add/remove users to/from a group
+		and update their permissions
+
+
+	*/
+
+	/**
+	 *	addUser() - controls adding a user to a group
+	 *  
+	 *  @param	string	Unix name of the user to add
+	 *	@return true/false
+	 *	@access public
+	 */
+	function addUser($user_unix_name) {
+		/*
+			Admins can add users to groups
+		*/
+?><?php
+//TODO should not assume logged in user only - $user should be passed in or $perm passed in
+		$perm =& $this->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
+			$this->setError('You Are Not An Admin For This Group');
+			return false;
+		}
+
+		db_begin();
+		
+		/*
+			get user id for this user's unix_name
+		*/
+		$res_newuser = db_query("SELECT * FROM users WHERE user_name='" . strtolower($user_unix_name) . "'");
+
+		if (db_numrows($res_newuser) > 0) {
+			//
+			//	make sure user is active
+			//
+			if (db_result($res_newuser,0,'status') != 'A') {
+				$this->setError('User is not active. Only active users can be added.');
+				db_rollback();
+				return false;
+			}
+
+			//
+			//	user was found - set new user_id var
+			//
+			$form_newuid = db_result($res_newuser,0,'user_id');
+
+			//
+			//	if not already a member, add them
+			//
+			$res_member = db_query("SELECT user_id FROM user_group ".
+				"WHERE user_id='$form_newuid' AND group_id='". $this->getID() ."'");
+
+			if (db_numrows($res_member) < 1) {
+				//
+				//	user was not already a member
+				//
+				//	if no unix account, give them a unix_uid
+				//
+				if ( !db_result($res_newuser,0,'unix_uid') ) {
+					$user=&user_get_object($form_newuid,$res_newuser);
+					if (!$user->setUpUnixUID()) {
+						$this->setError('ERROR: Cannot assign UNIX uid to the user');
+						db_rollback();
+						return false;
+					}
+					if (!sf_ldap_create_user($form_newuid)) {
+						$this->setError(sf_ldap_get_error_msg());
+						db_rollback();
+						return false;
+					}
+				} else {
+					//
+					//	User already had unix account
+					//
+					if (!sf_ldap_check_create_user($form_newuid)) {
+						$this->setError(sf_ldap_get_error_msg());
+						db_rollback();
+						return false;
+					}
+				}
+				//
+				//	Create this user's row in the user_group table
+				//
+				$res=db_query("INSERT INTO user_group 
+					(user_id,group_id,admin_flags,forum_flags,project_flags,
+					doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
+					VALUES ('$form_newuid','". $this->getID() ."','','0','0','0','1','100','0','0')");
+
+				//verify the insert worked
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setError('ERROR: Could Not Add User To Group');
+					db_rollback();
+					return false;
+				}
+				//
+				//	set up their ldap info
+				//
+				if (!sf_ldap_group_add_user($this->getID(),$form_newuid)) {
+					$this->setError(sf_ldap_get_error_msg());
+					db_rollback();
+					return false;
+				}
+
+			} else {
+				//
+				//	user was already a member
+				//	make sure they are set up with a unix_uid,
+				//	LDAP entry and membership
+				//
+				$user=&user_get_object($form_newuid,$res_newuser);
+				if (!$user->setUpUnixUID()) {
+					$this->setError('ERROR: could not set up unix_uid for user: '.$user->getErrorMessage());
+					db_rollback();
+					return false;
+				} else {
+					$user->refreshUserData();
+					if (!sf_ldap_check_create_user($form_newuid)) {
+						$this->setError(sf_ldap_get_error_msg());
+						db_rollback();
+						return false;
+					}
+						if (!sf_ldap_group_add_user($this->getID(),$form_newuid)) {
+						$this->setError(sf_ldap_get_error_msg());
+						db_rollback();
+						return false;
+					}
+					db_commit();
+					return true;
+				}
+			}
+		} else {
+			//
+			//	user doesn't exist
+			//
+			$this->setError('ERROR: User does not exist on SourceForge');
+			db_rollback();
+			return false;
+		}
+		//
+		//	audit trail
+		//
+		$this->addHistory('Added User',$user_unix_name);
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *  removeUser() - controls removing a user from a group
+	 * 
+	 *  Users can remove themselves
+	 *
+	 *  @param	int		The ID of the user to remove
+	 *	@return true/false
+	 */ 
+	function removeUser($user_id) {
+
+		if ($user_id==user_getid()) {
+			//users can remove themselves
+			//everyone else must be a project admin
+		} else {
+//TODO should not assume logged in user only - $user should be passed in or $perm passed in
+			$perm =& $this->getPermission( session_get_user() );
+
+			if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
+				$this->setError('You Are Not An Admin For This Group');
+				return false;
+			}
+		}
+		
+		$res=db_query("SELECT * FROM user_group ".
+			"WHERE group_id='".$this->getID()."' AND user_id='$user_id' AND admin_flags = 'A'");
+		if (db_numrows($res) > 0) {
+			$this->setError('Cannot remove admin');
+			return false;
+		}
+
+		db_begin();
+		$res=db_query("DELETE FROM user_group ".
+			"WHERE group_id='".$this->getID()."' AND user_id='$user_id' AND admin_flags <> 'A'");
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: DB: User not removed.');
+			db_rollback();
+			return false;
+		} else {
+			//
+			//	remove them from artifact types
+			//
+			db_query("DELETE FROM artifact_perm 
+				WHERE group_artifact_id 
+				IN (SELECT group_artifact_id 
+				FROM artifact_group_list 
+				WHERE group_id='".$this->getID()."') 
+				AND user_id='$user_id'");
+
+			if (!sf_ldap_group_remove_user($this->getID(),$user_id)) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+
+			//audit trail
+			$this->addHistory('removed user',$user_id);
+		}
+		db_commit();
+		return true;
+	}
+
+	/**	 
+	 *  updateUser() - controls updating a user's perms in this group
+	 *
+	 *	NOTE - bug_flags,patch_flags,support flags are deprecated
+	 *
+	 *  @param	int		The ID of the user
+	 *  @param	string	The admin flag for the user
+	 *  @param	int		The bug flag for the user  DEPRECATED
+	 *  @param	int		The forum flag for the user
+	 *  @param	int		The project flag for the user
+	 *  @param	int		The patch flag for the user  DEPRECATED
+	 *  @param	int		The support flag for the user  DEPRECATED
+	 *  @param	int		The doc flag for the user
+	 *  @param	int		The CVS flag for the user
+	 *  @param	int		The release flag for the user
+	 *	@param	int		The member role for the user
+	 *	@param	int		The artifact flags for the user
+	 *	@return true/false
+	 */	 
+	function updateUser($user_id,$admin_flags='',$bug_flags=1,$forum_flags=0,$project_flags=1,$patch_flags=1,$support_flags=1,$doc_flags=0,$cvs_flags=1,$release_flags=1,$member_role=100,$artifact_flags=0) {
+
+//TODO should not assume logged in user only - $user should be passed in or $perm passed in
+	$perm =& $this->getPermission( session_get_user() );
+
+	if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
+			$this->setError('You Are Not An Admin For This Group');
+			return false;
+		}
+
+		if (user_getid() == $user_id) {
+			$admin_flags='A';
+		}
+
+		db_begin();
+		$res = db_query("UPDATE user_group SET
+			admin_flags='$admin_flags',
+			forum_flags='$forum_flags',
+			project_flags='$project_flags', 
+			doc_flags='$doc_flags', 
+			cvs_flags='$cvs_flags', 
+			release_flags='$release_flags', 
+			artifact_flags='$artifact_flags', 
+			member_role='$member_role' 
+			WHERE user_id='$user_id' AND group_id='". $this->getID() ."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('ERROR: Could Not Change Member Permissions: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		//
+		//	If user acquired admin access to CVS,
+		//	one to be given normal shell on CVS machine,
+		//	else - restricted.
+		//
+		if ($cvs_flags>1) {
+			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/bash")) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+		} else {
+			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/cvssh")) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+		}
+
+		//
+		//	If user acquired at least commit access to CVS,
+		//	one to be promoted to CVS group, else, demoted.
+		//
+		if ($cvs_flags>0) {
+			if (!sf_ldap_group_add_user($this->getID(),$user_id,1)) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+		} else {
+			if (!sf_ldap_group_remove_user($this->getID(),$user_id,1)) {
+				$this->setError(sf_ldap_get_error_msg());
+				db_rollback();
+				return false;
+			}
+		}
+
+
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *	addHistory() - Makes an audit trail entry for this project
+	 *
+	 *  @param	string	The name of the field
+	 *  @param	string	The Old Value for this $field_name
+	 *	@return database result handle
+	 *	@access public
+	 */
+	function addHistory($field_name, $old_value) {
+		$sql="
+			INSERT INTO group_history(group_id,field_name,old_value,mod_by,date) 
+			VALUES ('". $this->getID() ."','$field_name','$old_value','". user_getid() ."','".time()."')
+		";
+		return db_query($sql);
+	}		  
+
+	/**
+	 *	activateUsers() - Make sure that group members have unix accounts
+	 *
+	 *	Setup unix accounts for group members. Can be called even
+	 *	if members are already active. 
+	 *
+	 *	@access private
+	 *
+	 */
+	function activateUsers() {
+
+		/*
+			Activate member(s) of the project
+		*/
+
+		$member_res = db_query("
+			SELECT *
+			FROM users,user_group
+			WHERE user_group.group_id='".$this->getID()."'
+			AND users.user_id=user_group.user_id
+		");
+
+		$rows = db_numrows($member_res);
+
+		if ($rows > 0) {
+
+			for ($i=0; $i<$rows; $i++) {
+
+				$member =& user_get_object(db_result($member_res,$i,'user_id'));
+
+				if (!$member || !is_object($member)) {
+					$this->setError('Error getting member object');
+					return false;
+				} else if ($member->isError()) {
+					$this->setError('Error getting member object: '.$member->getErrorMessage());
+					return false;
+				}
+
+				if (!$this->addUser($member->getUnixName())) {
+					return false;
+				}
+			}
+
+		 }
+
+		 return true;
+	}
+
+	/**
+	 *	approve() - Approve pending project
+	 *
+	 *  @param	object	The User object
+	 *	@access public
+	 *
+	 */
+	function approve(&$user) {
+
+		if ($this->getStatus()=='A') {
+			$this->setError("Group already active");
+			return false;
+		}
+
+		db_begin();
+
+		// Step 1: Activate group and create LDAP entries
+		if (!$this->setStatus($user, 'A')) {
+			db_rollback();
+			return false;
+		}
+
+		// Step 2: Setup forums for this group
+		forum_create_forum($this->getID(),'Open Discussion',1,'General Discussion');
+		forum_create_forum($this->getID(),'Help',1,'Get Help');
+		forum_create_forum($this->getID(),'Developers',0,'Project Developer Discussion');
+
+		// Step 3: Setup default DocManager doc_group
+		db_query("
+			INSERT INTO doc_groups(groupname,group_id) 
+			VALUES ('Uncategorized Submissions',".$this->getID().")
+		");
+
+		// Step 4: Setup default filerelease package
+		$frs = new FRS($this->getID());
+		$frs->frsCreatePackage($this->getUnixName());
+
+		db_commit();
+
+		$this->sendApprovalEmail();
+		$this->addHistory('approved', 'x');
+
+		return true;
+	}
+
+
+
+	/**
+	 *	sendApprovalEmail() - Send new project email 
+	 *
+	 *	@return completion status
+	 *	@access public
+	 *
+	 */
+	function sendApprovalEmail() {
+
+		$res_admins = db_query("
+			SELECT users.user_name,users.email
+			FROM users,user_group
+			WHERE users.user_id=user_group.user_id
+			AND user_group.group_id='".$this->getID()."'
+			AND user_group.admin_flags='A'
+		");
+
+		if (db_numrows($res_admins) < 1) {
+			$this->setEror("Group does not have any administrators.");
+			return false;
+		}
+
+		// send one email per admin
+		while ($row_admins = db_fetch_array($res_admins)) {
+
+			$message = 
+'Your project registration for SourceForge has been approved. 
+
+Project Full Name:  '.$this->getPublicName().'
+Project Unix Name:  '.$this->getUnixName().'
+CVS Server:         cvs.'.$this->getUnixName().'.'.$GLOBALS['sys_default_domain'].'
+Shell/Web Server:   '.$this->getUnixName().'.'.$GLOBALS['sys_default_domain'].'
+
+Your DNS will take up to a day to become active on our site.
+While waiting for your DNS to resolve, you may try shelling into 
+'. $GLOBALS['sys_shell_host']. ' and pointing CVS to '. $GLOBALS['sys_cvs_host'].'.
+
+If after 6 hours your shell/CVS accounts still do not work, please
+open a support ticket so that we may take a look at the problem.
+Please note that all shell/CVS accounts are closed to telnet and only
+work with SSH1.
+
+Your web site is accessible through your shell account. Please read
+site documentation (see link below) about intended usage, available 
+services, and directory layout of the account.
+
+Please take some time to read the site documentation about project
+administration (http://'.$GLOBALS['sys_default_domain'].'/docs/site/). If you visit your 
+own project page in SourceForge while logged in, you will find 
+additional menu functions to your left labeled \'Project Admin\'. 
+
+We highly suggest that you now visit SourceForge and create a public
+description for your project. This can be done by visiting your project
+page while logged in, and selecting \'Project Admin\' from the menus
+on the left (or by visiting https://'.$GLOBALS['sys_default_domain'].'/project/admin/?group_id='.$this->getID().'
+after login).
+
+Your project will also not appear in the Trove Software Map (primary
+list of projects hosted on SourceForge which offers great flexibility in
+browsing and search) until you categorize it in the project administration 
+screens. So that people can find your project, you should do this now. 
+Visit your project while logged in, and select \'Project Admin\' from the 
+menus on the left.
+
+Enjoy the system, and please tell others about SourceForge. Let us know
+if there is anything we can do to help you.
+
+ -- the SourceForge crew';
+	
+			mail($row_admins['email'],"SourceForge Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+			usleep(250000); // TODO: This is dirty. If sendmail required pause, let send_new... handle it
+
+		}
+
+		return true;
+	}
+
+
+	/*
+	 *	sendRejectionEmail() - Send project rejection email
+	 *
+	 *	This function sends out a rejection message to a user who
+	 *	registered a project.
+	 *
+	 *  @param	int		The id of the response to use
+	 *	@param	string	The rejection message
+	 *	@return completion status
+	 *	@access public
+	 *
+	 */
+	function sendRejectionEmail($response_id, $message="zxcv") {
+
+		// Get the email addr of the user who wants to register the project.
+		$email = db_result(db_query("
+			SELECT u.email AS email
+			FROM users u, user_group ug
+			WHERE ug.group_id='".$this->getID()."'
+			AND u.user_id=ug.user_id;
+		"), 0, "email");
+	
+		$response = 
+'Your project registration for SourceForge has been denied. 
+
+Project Full Name:  '.$this->getPublicName().'
+Project Unix Name:  '.$this->getUnixName().'
+
+Reasons for negative decision:
+
+';
+
+
+		// Check to see if they want to send a custom rejection response
+		if ($response_id == 0) {
+			$response .= $message;
+		} else {
+			$response .= db_result(db_query("
+				SELECT response_text
+				FROM canned_responses
+				WHERE response_id='$response_id'
+			"), 0, "response_text");
+		}
+
+		mail($email, "SourceForge Project Denied", $response, "From: noreply@sourceforge.net");
+
+		return true;
+	}
+
+}
+
+?>

@@ -1,0 +1,89 @@
+#/**
+#  *
+#  * Korean message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Kim SeungBaeck <kongsi@users.sourceforge.net>
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2001-01-15  Kim SeungBaeck  <kongsi@users.sourceforge.net>
+#	* Initial translation
+#
+about_foundries	about_blurb	창설자에 대하여
+menu	about_sourceforge	SourceForge에 대하여
+menu	account_maintenance	접속 유지
+menu	bookmark_page	책갈피
+home	breaking_down_barriers	열린소스 개발로 장벽을 허물었습니다.
+menu	change_my_theme	테마 변경
+menu	code_snippet_library	간단한 라이브러리코드화
+menu	compile_farm	편집자 양성
+menu	contact_us	SourceForge와 교제
+group	developers	개발자
+group	developer_info	개발자 정보
+menu	discussion_forums	토론회
+menu	documentation	사이트 문서
+frs	file_download	받기
+frs	file_monitor	감시
+frs	file_notes	주석
+frs	file_package	꾸러미
+frs	file_rel_date	날짜
+frs	file_version	판번호
+group	long_bugs	벌레잡이
+group	long_cvs	CVS 저장소
+group	long_docman	문서관리자: 일거리 문서화
+group	long_forum	열린 토론장
+group	long_foundries	SourceForge 개발 공간
+group	long_ftp	익명 FTP 공간
+group	long_homepage	홈페이지
+group	long_mail	메일링 리스트
+group	long_news	최근 소식
+group	long_patch	패치 관리자
+group	long_pm	작업 관리자
+group	long_support	기술지원 관리자
+group	long_survey	투표
+group	short_bugs	벌레
+group	short_cvs	CVS
+group	short_docman	문서
+group	short_files	Filesgroup	short_forum	토론장
+group	short_homepage	홈페이지
+group	short_mail	목록
+group	short_main 	메인
+group	short_memberlist	개발자들
+group	short_news	새소식
+group	short_patch	패치
+group	short_pm	작업
+group	short_summary	요약
+group	short_support	지원
+group	short_survey	투표
+home	highest_ranked_users	가장 많은 참여자 그룹
+home	about_blurb	  SourceForge 는 <B> <A href="http://www.opensource.org">열린 소스</A> 개발자</B>에게 쉽게 접근할수 있는 CVS,  메일링리스트, 벌레잡이, 게시판/토론장, 작업관리, 호스팅,영구적인 화일 저장, 백업등  웹기반 관리등을 무료로 지원 합니다.  <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 더 ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ 잦은질답 ]</font></A> <BR> &nbsp; <P> <B>사이트의 의견와 참여</B> <P> SourceForge의 질서를 위해서, 당신이 원하하시면  먼저 <A href="/account/register.php">사용자로 등록 하십시오</A>.  이것으로 당신은 우리와 함께하게 될것이며, 우리가 할 수 있는 모든 지원 할것입니다. 당신은 등록하지않고도 볼수 있으나, 모두 사용 할 수는 없습니다. <P> &nbsp; <BR> <B>당신만의 프로젝트를 만드세요</B> <P> <A href="/account/register.php">사이트의 사용자로 등록하시고</A>,  <A HREF="/account/login.php">접속</A>하시면, <A HREF="/register/">당신의 프로젝트를 등록할 수 있습니다.</A> 감사합니다... 즐거운 시간 되십시오.
+frs	latest_file_releases	마지막 화일 발표
+menu	login	SSL을 사용한 접속
+menu	logout	접속해제
+home	most_active_this_week	금주 가장활발한 프로젝트
+menu	my_personal_page	개인 페이지
+menu	new_project	새 일거리 등록
+menu	new_releases	새로운 배포판
+menu	new_user	SSL을 사용한 새 사용자
+menu	other_site_mirrors	다른 미러 사이트
+menu	project_admin	프로젝트 관리자
+group	project_admins	일거리 관리자
+menu	project_help_wanted	도움을 원하는 프로젝트
+menu	project_summary	일거리 요약
+group	public_area	열린공간
+menu	search	검색
+menu	software_map	응용프로그램 목록
+home	sourceforge_statistics	SourceForge 통계
+menu	top_projects	상위 프로젝트
+home	top_project_downloads	가장 많이 받은 그룹
+conf	content_encoding	EUC-KR
+conf	default_font	gulim,verdana,arial,helvetica,sans-serif
+conf	language_code	ko
+conf	language_id	22

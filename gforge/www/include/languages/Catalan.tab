@@ -1,0 +1,90 @@
+#/**
+#  *
+#  * Catalan message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Enric Mart­nez
+#  *
+#  */
+# 
+# ChangeLog:
+#
+# 2000-09-23  Enric Mart­nez
+#	* Initial translation
+# 2000-10-16  Evilio del Rio
+#	* Corrections:
+#        Els meus criteris de correcciã s'han basat en els
+#        segìents punts:
+#
+#                . Correciã ortogr fica (catal  central)
+#                . Correciã teminolâgica (programari, etc.)
+#                . Nom©s hi majêscules a la lletra inicial i noms propis.
+#                . D'altres criteris trets de Soft Catal  (utilitzaciã del "vos").
+#
+menu	account_maintenance	Manteniment de compte
+menu	bookmark_page	Página de marcadors
+home	breaking_down_barriers	Trencant les barreres per al desenvolupament de codi obert
+menu	change_my_theme	Canviar el meu tema
+menu	code_snippet_library	Biblioteca de bocinets de codi
+menu	compile_farm	Granja de compilació
+menu	contact_us	Contacteu
+group	developers	Desenvolupadors
+group	developer_info	Informació del desenvolupador
+menu	discussion_forums	 Fòrums de discussiò 
+menu	documentation	Documentació local
+frs	file_download	Descàrrega
+frs	file_monitor	Monitor
+frs	file_notes	Notes
+frs	file_package	Paquet
+frs	file_version	Versió
+group	long_bugs	Seguiment d'errors
+group	long_cvs	Repositori CVS
+group	long_docman	Gestor de documents
+group	long_forum	 Fòrums públics
+group	long_ftp	Espai de FTP anònim
+group	long_homepage	Pàgina d'inici del projecte
+group	long_mail	Llistas de correu
+group	long_news	Últimes notícies
+group	long_patch	Gestor de pegats
+group	long_pm	Gestor de tasques
+group	long_support	Gestor de suport tècnic
+group	long_survey	Enquestes
+group	short_bugs	Errades
+group	short_cvs	CVS
+group	short_docman	Documents
+group	short_files	Filesgroup	short_forum	Fòrums
+group	short_homepage	Pàgina de inici
+group	short_mail	Llistes
+group	short_news	Notícies
+group	short_patch	Pegats
+group	short_pm	Tasques
+group	short_summary	Sumari
+group	short_support	Suport tècnic
+group	short_survey	Enquestes
+home	highest_ranked_users	Usuaris més actius
+home	about_blurb	  SourceForge és un<B>servei gratuït per a desenvolupadors de<A href="http://www.opensource.org">Codi obert</A></B> oferint fàçil accés als millors repositoris CVS, llistes de discussió, seguiment d'errors, taulers de anuncis, fòrums, gestió de tasques, hostatge de llocs web, arxius permanent de fitxers, còpies de seguretat completes i administració totalment basada en web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ mes ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Retorn i participació</B> <P> Per poder obtenir el màxim de SourceForge, haureu  d'<A href="/account/register.php">enregistrar-vos com a  usuari del lloc</A>. Això us permetrà participar plenament en tot el que tenim per oferir. Podreu, és clar, navegar pel lloc sense enregistrar-vos, però no tindreu l'opció de participar plenament. <P> &nbsp; <BR> <B>Feu el vostre propi projecte</B> <P> <A href="/account/register.php">Enregistreu-vos com a usuari del lloc</A>,  <A HREF="/account/login.php"entreu </A>amb el vostre usuari i finalment, <A HREF="/register/">Doneu d'alta el vostre projecte.</A> <P> Moltes Gràcies... i gaudiu del lloc.
+frs	latest_file_releases	Últimes versions dels arxius
+menu	login	Accés via SSL
+menu	logout	Sortir
+home	most_active_this_week	El més actiu aquesta setmana
+menu	my_personal_page	La meva pàgina personal
+menu	new_project	Enregistrar un projecte nou
+menu	new_releases	Noves sortides
+menu	new_user	Usuari nou via SSL
+menu	other_site_mirrors	Miralls d'altres llocs
+menu	project_admin	Admininstració de projectes
+group	project_admins	Administradors del projecte
+menu	project_help_wanted	Es necessita ajuda per projectes
+menu	project_summary	Sumari de projectes
+group	public_area	Área pública
+menu	search	Cercar
+menu	software_map	Mapa de programari
+home	sourceforge_statistics	Estadístiques de SourceForge
+menu	top_projects	Projectes senyers
+home	top_project_downloads	Projectes més descarregats
+conf	language_code	ca
+conf	language_id	14

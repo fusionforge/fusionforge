@@ -1,0 +1,95 @@
+#/**
+#  *
+#  * Simplified Chinese message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Hunte Swee <hunte@users.sourceforge.net>
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-11-11  Hunte Swee <hunte@users.sourceforge.net>
+#	* Translated from the Chinese.class(Big5)
+# 2001-02-20  Hunte Swee <hunte@users.sourceforge.net>
+#	* Change the font to BaseLanguage default
+#	* Change the language code from zh-CN to zh-cn
+#	* Add some new variables that BaseLanguage added
+#
+about_foundries	about_blurb	关于 Foundries
+menu	about_sourceforge	关于 SourceForge
+menu	account_maintenance	帐号维护
+menu	bookmark_page	书签
+home	breaking_down_barriers	为开放源码的发展开辟一条坦途
+menu	change_my_theme	更换外观
+menu	code_snippet_library	代码片断
+menu	compile_farm	编译工厂
+menu	contact_us	联系我们
+group	developers	开发者
+group	developer_info	开发者信息
+menu	discussion_forums	论坛
+menu	documentation	文档
+frs	file_download	下载
+frs	file_monitor	跟踪
+frs	file_notes	备注
+frs	file_package	软件包
+frs	file_rel_date	日期
+frs	file_version	版本
+group	long_bugs	BUG跟踪
+group	long_cvs	CVS仓库
+group	long_docman	项目文档
+group	long_forum	公共论坛
+group	long_ftp	匿名FTP
+group	long_homepage	项目首页
+group	long_mail	邮件列表
+group	long_news	最新消息
+group	long_patch	补丁管理
+group	long_pm	任务管理
+group	long_support	技术支持
+group	long_survey	调查
+group	short_admin	管理
+group	short_bugs	BUG
+group	short_cvs	CVS
+group	short_docman	文档
+group	short_files	Filesgroup	short_forum	论坛
+group	short_homepage	首页
+group	short_mail	电子邮件
+group	short_main 	主要
+group	short_memberlist	开发者
+group	short_news	新闻
+group	short_patch	补丁
+group	short_pm	任务
+group	short_summary	摘要
+group	short_support	支持
+group	short_survey	调查
+group	short_tracker	跟踪
+home	highest_ranked_users	用户评价排行榜
+home	about_blurb	 SourceForge为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 更多 ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ 常见问题 ]</font></A> <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用SourceForge所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
+frs	latest_file_releases	最新发布项目
+menu	login	通过SSL登录
+menu	logout	退出登录
+home	most_active_this_week	本周活动力最强排行榜
+menu	my_personal_page	我的首页
+menu	new_project	登记新项目
+menu	new_releases	新发布软件
+menu	new_user	新用户通过SSL注册
+menu	other_site_mirrors	其它网站镜像
+menu	project_admin	项目维护
+group	project_admins	项目管理员
+menu	project_help_wanted	寻求协助
+menu	project_summary	项目摘要
+group	public_area	公共区域
+menu	search	查找
+menu	site_status	站点状态
+menu	software_map	软件分类表
+home	sourceforge_statistics	SourceForge统计资料
+menu	top_projects	热点项目
+home	top_project_downloads	项目下载排行榜
+conf	content_encoding	gb2312
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	zh-cn
+conf	language_id	23

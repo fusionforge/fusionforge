@@ -1,0 +1,84 @@
+#/**
+#  *
+#  * Greek message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Simos Xenitellis
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-15  Simos Xenitellis
+#	* Initial translation
+#
+menu	account_maintenance	Ενημέρωση Λογαριασμού
+menu	bookmark_page	Σελίδα Αγαπημένων
+home	breaking_down_barriers	Καταλύωντας τους φραγμούς στην Ανάπτυξη Ελεύθερου Λογισμικού
+menu	change_my_theme	Αλλαγή του Θέματός Μου
+menu	code_snippet_library	Βιβλιοθήκη Ψηγμάτων Κώδικα
+menu	compile_farm	Φάρμα Μεταγλώττισης
+menu	contact_us	Επικοινωνίστε μαζί μας
+group	developers	Προγραμματιστές
+group	developer_info	Πληροφορίες Προγραμματιστή
+menu	discussion_forums	Βήμα Συζητήσεων
+menu	documentation	Τεκμηρίωση Συστήματος
+frs	file_download	Μεταφόρτωση
+frs	file_monitor	Παρακολούθηση
+frs	file_notes	Σημειώσεις
+frs	file_package	Πακέτο
+frs	file_version	Έκδοση
+group	long_bugs	Παρακολούθηση Σφαλμάτων
+group	long_cvs	Αποθήκη CVS
+group	long_docman	DocManager: Project Documentation
+group	long_forum	Δημόσια Βήματα
+group	long_ftp	Χώρος Ανώνυμου FTP
+group	long_homepage	Αρχική Σελίδα Έργου
+group	long_mail	Λίστες Συνδρομητών
+group	long_news	Τελευταία Νέα
+group	long_patch	Διαχειριστής Επιρραμάτων
+group	long_pm	Διαχειριστής Εργασιών
+group	long_support	Διαχειριστής Υποστήριξης Προγράμματος
+group	long_survey	Έρευνες
+group	short_bugs	Σφάλματα
+group	short_cvs	CVS
+group	short_docman	Τεκμηρίωση
+group	short_files	Filesgroup	short_forum	Βήματα
+group	short_homepage	Πρώτη Σελίδα
+group	short_mail	Λίστες
+group	short_main 	Κύριο
+group	short_news	Νέα
+group	short_patch	Επιρράματα
+group	short_pm	Εργασίες
+group	short_summary	Περιλήψη
+group	short_support	Υποστήριξη
+group	short_survey	Έρευνες
+home	highest_ranked_users	Χρήστες Μεγαλύτερης Αξιολόγησης
+home	about_blurb	  Το SourceForge είναι μια <B>ελεύθερη υπηρεσία για <A href="http://www.opensource.org">Open Source</A> προγραμματιστές</B> που προσφέρει εύκολη πρόσβαση στα καλύτερα χαρακτηριστικά του CVS, των λιστών συνδρομητών, της παρακολούθησης σφαλμάτων,  των βημάτων συζητήσεων, της διαχείρησης εργασιών, της εξυπηρέτησης δικτυακών τόπων, της μόνιμης αρχειοθέτησης αρχείων,  της δημιουργίας πλήρων αντιγράφων ασφαλείας και της ολικής διαχείρισης μέσα από το WWW. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Ανάδραση Δικτυακού Τόπου και Συμμετοχή</B> <P> Για να επωφεληθείτε τα μέγιστα από το SourceForge, θα πρέπει να <A href="/account/register.php"> εγγραφείτε ως χρήστης συστήματος</A>.  Αυτό θα σας επιτρέψει να συμμετάσχετε πλήρως σε όλα όσα έχουμε να προσφέρουμε. Φυσικά, μπορείτε να περιηγηθήτε σε αυτό το δικτυακό τόπο χωρίς εγγραφή, ωστόσο δε θα έχετε πρόσβαση να συμμετάσχετε πλήρως. <P> &nbsp; <BR> <B>Εκκίνηση του Δικού σας Έργου</B> <P> <A href="/account/register.php">Εγγραφείτε ως χρήστης συστήματος</A>, έπειτα <A HREF="/account/login.php">Σύνδεθείτε</A> και τέλος, <A HREF="/register/">Εγγράψετε το Έργο σας.</A> <P> Ευχαριστούμε... και να περάσετε καλά στο δικτυακό σας τόπο.
+frs	latest_file_releases	Τελευταίες Εκδόσεις Αρχείων
+menu	login	Σύνδεση μέσω SSL
+menu	logout	Αποσύνδεση
+home	most_active_this_week	Περισσότερο Ενεργό για Αυτήν την Εβδομάδα
+menu	my_personal_page	Η Προσωπική μου Σελίδα
+menu	new_project	Καταχώριση Νέου Έργου
+menu	new_releases	Νέες Εκδόσεις
+menu	new_user	Νέος Χρήσης μέσω SSL
+menu	other_site_mirrors	Άλλα Συστήματα Καθεπτρισμού
+menu	project_admin	Διαχειριστής Έργου
+group	project_admins	Διαχειριστές Έργου
+menu	project_help_wanted	Ζητείτε Βοήθεια Έργου
+menu	project_summary	Περίληψη Έργου
+group	public_area	Δημόσιες Περιοχές
+menu	search	Αναζήτηση
+menu	software_map	Χάρτης Λογισμικού
+home	sourceforge_statistics	Στατιστικά SourceForge
+menu	top_projects	Κορυφαία Έργα
+home	top_project_downloads	Κορυφαίες Μεταφορτώσεις Έργων
+conf	content_encoding	iso-8859-7
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	el
+conf	language_id	19

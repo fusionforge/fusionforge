@@ -1,0 +1,84 @@
+#/**
+#  *
+#  * German message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Matthias Bauer
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-15  Matthias Bauer
+#	* Initial translation
+#
+menu	about_sourceforge	&Uuml;ber SourceForge
+menu	account_maintenance	Accountverwaltung
+menu	bookmark_page	Lesezeichen
+home	breaking_down_barriers	Wir reissen die Mauern zu Open-Source-Entwicklung nieder
+menu	change_my_theme	Theme &auml;ndern
+menu	code_snippet_library	Codeschnipsel-Sammlung
+menu	compile_farm	Compile-Farm
+menu	contact_us	Kontakt
+group	developers	Entwickler
+group	developer_info	Entwicklerinformationen
+menu	discussion_forums	Diskussionsforen
+menu	documentation	Dokumentation
+frs	file_download	Downloaden
+frs	file_monitor	&Uuml;berwachen
+frs	file_notes	Anmerkungen
+frs	file_package	Paket
+frs	file_version	Version
+group	long_bugs	Bugtracking
+group	long_cvs	CVS-Baum
+group	long_docman	DocManager: Projekt-Dokumentation
+group	long_forum	&Ouml;ffentliche Foren
+group	long_ftp	Anonymer FTP-Zugriff
+group	long_homepage	Projekthomepage
+group	long_mail	Mailinglisten
+group	long_news	Letzte Neuigkeiten
+group	long_patch	Patch-Verwaltung
+group	long_pm	Aufgaben-Verwaltung
+group	long_support	Support-Verwaltung
+group	long_survey	Umfragen
+group	short_bugs	Bugs
+group	short_cvs	CVS
+group	short_docman	Dokumentation
+group	short_files	Filesgroup	short_forum	Foren
+group	short_homepage	Homepage
+group	short_mail	Mailinglisten
+group	short_news	Neuigkeiten
+group	short_patch	Patches
+group	short_pm	Aufgaben
+group	short_summary	&Uuml;berblick
+group	short_support	Support
+group	short_survey	Umfragen
+home	highest_ranked_users	Am h&ouml;chsten eingestufte Benutzer
+home	about_blurb	  SourceForge ist ein <b>freier Dienst</b> f&uuml;r <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollst&auml;ndige Verwaltung per Web-Interface.  <a href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ mehr ]</font></A> <a href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <br> &nbsp; <p> <b>Feedback und Teilnahme an der Site</b> <p> Um SourceForge bestm&ouml;glich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount k&ouml;nnen Sie am vollen Spektrum der Website teilhaben. Nat&uuml;rlich k&ouml;nnen Sie SourceForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p> &nbsp; <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr gl&uuml;cklich. 
+frs	latest_file_releases	Letzte Dateireleases
+menu	login	Einloggen (SSL)
+menu	logout	Ausloggen
+home	most_active_this_week	Aktivste Projekte in dieser Woche
+menu	my_personal_page	Personalisierte Seite
+menu	new_project	Neues Projekt
+menu	new_releases	Neue Releases
+menu	new_user	Neuer Benutzer (SSL)
+menu	other_site_mirrors	Mirrors
+menu	project_admin	Projektadministrator
+group	project_admins	Projektbetreuer
+menu	project_help_wanted	Projekthilfe gesucht
+menu	project_summary	Projekt&uuml;bersicht
+group	public_area	&Ouml;ffentliche Bereiche
+menu	search	Suche
+menu	software_map	Softwarekarte
+home	sourceforge_statistics	SourceForge Statistieken
+menu	top_projects	Top-Projekte
+home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
+conf	content_encoding	iso-8859-1
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	de
+conf	language_id	6

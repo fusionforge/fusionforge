@@ -1,0 +1,86 @@
+#/**
+#  *
+#  * French message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Olivier Gerard
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-25  Olivier Gerard
+#	* Initial translation
+# 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>
+#	* Translation and correction
+#
+menu	account_maintenance	Gestion du Compte
+menu	bookmark_page	Favoris
+home	breaking_down_barriers	Abaisser les barri&egrave;res du d&eacute;veloppement Open Source
+menu	change_my_theme	Changement du Th&egrave;me
+menu	code_snippet_library	Biblioth&egrave;que de Code
+menu	compile_farm	Ferme de Compilation
+menu	contact_us	Contact
+group	developers	D&eacute;veloppeurs
+group	developer_info	Informations pour D&eacute;veloppeurs
+menu	discussion_forums	Forums de Discussion
+menu	documentation	Documentation
+frs	file_download	T&eacute;l&eacute;chargement
+frs	file_monitor	Surveillance
+frs	file_notes	Remarques
+frs	file_package	Package
+frs	file_version	Version
+group	long_bugs	Gestion des Bugs
+group	long_cvs	R&eacute;f&eacute;rentiel CVS
+group	long_docman	Gestion de la Documentation
+group	long_forum	Forums de Discussion
+group	long_ftp	Espace FTP Anonyme
+group	long_homepage	Page d'Accueil
+group	long_mail	Listes de Diffusion
+group	long_news	Derni&egrave;res nouveaut&eacute;s
+group	long_patch	Gestion des Corrections
+group	long_pm	Gestion de Projet
+group	long_support	Support Technique
+group	long_survey	Sondages
+group	short_bugs	Bugs
+group	short_cvs	CVS
+group	short_docman	Documentation
+group	short_files	Filesgroup	short_forum	Forums
+group	short_homepage	Accueil
+group	short_mail	Mailing-listes
+group	short_main 	Ecran Principal
+group	short_news	Nouveaut&eacute;s
+group	short_patch	Patches
+group	short_pm	T&acirc;ches
+group	short_summary	Survol
+group	short_support	Support
+group	short_survey	Sondages
+home	highest_ranked_users	Les D&eacute;veloppeurs les Mieux Class&eacute;s
+home	about_blurb	 SourceForge est un <b>service gratuit pour les d&eacute;veloppeurs <A href="http://www.opensource.org">Open Source</A></b>. SourceForge offre l'acc&egrave;s le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des t&acirc;ches, h&eacute;bergement de site, archivage de fichiers, sauvegardes compl&egrave;tes, etc. via une interface d'administration enti&egrave;rement par le web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ plus ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Participation des d&eacute;veloppeurs</B> <P>  Pour pouvoir utiliser SourceForge au mieux, il est nec&eacute;ssaire de <A href="/account/register.php">s'enregistrer comme un d&eacute;veloppeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons &agrave; vous offrir. Vous pouvez bien entendu parcourir  le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Cr&eacute;er un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme d&eacute;veloppeur</A>, then <A HREF="/account/login.php">Connectez-vous</A> puis, <A HREF="/register/">Enregistrez votre Projet.</A> <P> Merci... et nous esp&eacute;rons que vous aimerez SourceForge!
+frs	latest_file_releases	Derni&egrave;res r&eacute;visions des fichiers
+menu	login	Connexion via SSL
+menu	logout	Sortir
+home	most_active_this_week	Les Plus Actifs cette Semaine
+menu	my_personal_page	Ma Page Personnelle
+menu	new_project	Nouveau Projet
+menu	new_releases	Nouvelles R&eacute;visions
+menu	new_user	Nouvel Utilisateur via SSL
+menu	other_site_mirrors	Mirroirs d'Autres Sites
+menu	project_admin	Admin. du Projet
+group	project_admins	Admins. du Projet
+menu	project_help_wanted	Demande d'Aide
+menu	project_summary	R&eacute;sum&eacute; du Projet
+group	public_area	Zones Publiques
+menu	search	Recherche
+menu	software_map	Rech. Th&eacute;matique
+home	sourceforge_statistics	Statistiques de SourceForge
+menu	top_projects	Meilleurs Projets
+home	top_project_downloads	Projets les plus T&eacute;l&eacute;charg&eacute;s
+conf	content_encoding	iso-8859-1
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	fr
+conf	language_id	7
