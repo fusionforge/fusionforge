@@ -6,6 +6,7 @@
 	%xinclude;
 
 	<!ENTITY howto_contribute "include/howto_contribute.xml">
+	<!ENTITY cvs_repository "include/cvs_repository.xml">
 	<!ENTITY coding_standards "include/coding_standards.xml">
 	<!ENTITY templating "include/templating.xml">
 	<!ENTITY howto_documentation "include/howto_documentation.xml">
@@ -18,11 +19,13 @@
 		<authorgroup>
 			&roland_mas;
 			&tim_perdue;
+			&guillaume_smet;
 			&reinhard_spisser;
 		</authorgroup>
 	</articleinfo>
 
 	<xi:include href="&howto_contribute;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&cvs_repository;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="&coding_standards;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="&templating;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="&howto_documentation;" xmlns:xi="http://www.w3.org/2001/XInclude" />
