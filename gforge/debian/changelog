@@ -1,3 +1,11 @@
+sourceforge (2.6-0+5) unstable; urgency=low
+
+  * [Christian] Added dependency to php4-mcrypt
+  * [Christian] Temporary workaround for libmcrypt bug in local.inc.template
+  * [Christian] Removed mcrypt-test.sh 
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Sun, 27 Jan 2002 18:43:43 +0100
+
 sourceforge (2.6-0+4) unstable; urgency=low
 
   * [Christian] Removed unjustified warning in intall-ldap.sh.
