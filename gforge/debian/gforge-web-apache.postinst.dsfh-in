@@ -57,7 +57,7 @@ case "$1" in
 	propose_update_install /etc/php4/cgi/php.ini
 
         # Setup our Apache
-	[ -f /var/lib/gforge/etc/httpd.vhosts ] && \
+	touch /var/lib/gforge/etc/httpd.vhosts  && \
 		chown gforge:gforge /var/lib/gforge/etc/httpd.vhosts && \
 		/usr/lib/gforge/bin/create-vhosts.sh
 	/usr/lib/gforge/bin/install-apache.sh configure
