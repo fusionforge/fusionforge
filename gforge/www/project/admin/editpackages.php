@@ -70,7 +70,7 @@ project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group
 
 ?>
 <h3>QRS:</h3>
-<?
+<?php
 echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
 
 $user_unix_name=user_getname();
@@ -105,7 +105,7 @@ A release of a package can contain multiple files.
 <P>
 You can create new releases of packages by clicking on <B>Add/Edit Releases</B> next to your package name.
 <P>
-<?
+<?php
 /*
 
 	Show a list of existing packages

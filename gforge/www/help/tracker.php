@@ -88,6 +88,6 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 </tr>
 </table>
 
-<?
+<?php
 help_footer();
 ?>

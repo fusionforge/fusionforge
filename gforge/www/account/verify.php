@@ -78,12 +78,12 @@ if ($GLOBALS['error_msg']) {
 
 <form action="<?php echo $PHP_SELF; ?>" method="POST">
 
-<p><? echo $Language->getText('account_verify', 'loginname'); ?>
+<p><?php echo $Language->getText('account_verify', 'loginname'); ?>
 <br><input type="text" name="loginname">
-<p><? echo $Language->getText('account_verify', 'password'); ?>
+<p><?php echo $Language->getText('account_verify', 'password'); ?>
 <br><input type="password" name="passwd">
 <INPUT type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>">
-<p><input type="submit" name="submit" value="<? echo $Language->getText('account_verify', 'login'); ?>">
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_verify', 'login'); ?>">
 </form>
 
 <?php

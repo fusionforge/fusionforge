@@ -78,7 +78,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 ?>
 
 <P>
-<? echo $Language->getText('sendmessage', 'about_blurb'); ?>
+<?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
 <P>
 <FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="toaddress" VALUE="<?php echo $toaddress; ?>">
