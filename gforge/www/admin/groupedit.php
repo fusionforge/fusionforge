@@ -37,7 +37,7 @@ if ($group->isError()) {
 
 // This function performs very update
 function do_update(&$group, $is_public, $status, $license,
-		   1, $unix_box, $http_domain) {
+		   $group_type, $unix_box, $http_domain) {
 	global $feedback;
 
 	db_begin();
@@ -65,7 +65,7 @@ function do_update(&$group, $is_public, $status, $license,
 if ($submit) {
 
 	do_update($group, $form_public, $form_status, $form_license,
-		  $group_type, $form_box, $form_domain);
+		  1, $form_box, $form_domain);
 
 } else if ($resend) {
 
