@@ -41,6 +41,7 @@ UPDATE project_task SET category_id=100;
 --
 --	Convenience view required for ProjectTask object
 --
+DROP VIEW project_task_vw;
 CREATE VIEW project_task_vw AS 
 SELECT project_task.*,project_category.category_name,project_status.status_name 
 FROM project_task 
