@@ -814,7 +814,7 @@ general	no	Non
 general	no_valid_filename	Nom de fichier invalide
 general	no_valid_group	Groupe sélectionné invalide $1
 general	no_valid_group_object	Groupe d'objet non valide $1
-general	open	Ouvrir
+general	open	Ouvert(s)
 general	permdenied	Accés Interdit.
 general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
 general	permnotget	Accés non permis
