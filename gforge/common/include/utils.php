@@ -628,67 +628,76 @@ Function GraphIt($name_string,$value_string,$title) {
  * ShowResultSet() - Show a generic result set
  * Very simple, plain way to show a generic result set
  *
- * @param		int		The result set ID
- * @param		string	The title of the result set
- * @param		bool	The option to turn URL's into links
- * @param		bool	The option to display headers
- * @param		array	The db field name -> label mapping
+ * @param	int		The result set ID
+ * @param	string	The title of the result set
+ * @param	bool	The option to turn URL's into links
+ * @param	bool	The option to display headers
+ * @param	array	The db field name -> label mapping
+ * @param	array   Don't display these cols
  *
  */
-function  ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array())  {
+function  ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array(), $excludedCols=array())  {
 	global $group_id,$HTML;
 
-	if  ($result)  {
+	if($result)  {
 		$rows  =  db_numrows($result);
 		$cols  =  db_numfields($result);
 
-		echo '
-			<table border="0" width="100%">';
-
-		/*  Create the title  */
-		if(strlen($title) > 0) {
-			$cell_data=array();
-			$cell_data[] = array($title, 'colspan="'.$cols.'"');
-			echo $HTML->multiTableRow('',$cell_data, TRUE);
-		}
+		echo '<table border="0" width="100%">';
 
 		/*  Create  the  headers  */
-		$cell_data=array();
+		$headersCellData = array();
+		$colsToKeep = array();
 		for ($i=0; $i < $cols; $i++) {
-			$fieldName = db_fieldname($result,$i);
+			$fieldName = db_fieldname($result, $i);
+			if(in_array($fieldName, $excludedCols)) {
+				continue;
+			}
+			$colsToKeep[] = $i;
 			if(isset($headerMapping[$fieldName])) {
-				$cell_data[] = $headerMapping[$fieldName];
+				$headersCellData[] = $headerMapping[$fieldName];
 			}
 			else {
-				$cell_data[] = array($fieldName);
+				$headersCellData[] = array($fieldName);
 			}
 		}
-		echo $HTML->multiTableRow('',$cell_data, TRUE);
+		
+		/*  Create the title  */
+		if(strlen($title) > 0) {
+			$titleCellData = array();
+			$titleCellData[] = array($title, 'colspan="'.count($headersCellData).'"');
+			echo $HTML->multiTableRow('', $titleCellData, TRUE);
+		}
+		
+		/* Display the headers */
+		echo $HTML->multiTableRow('', $headersCellData, TRUE);
 
 		/*  Create the rows  */
-		for ($j = 0; $j < $rows; $j++) {
+ 		for ($j = 0; $j < $rows; $j++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 			for ($i = 0; $i < $cols; $i++) {
-				if ($linkify && $i == 0) {
-					$link = '<a href="'.$PHP_SELF.'?';
-					$linkend = '</a>';
-					if ($linkify == "bug_cat") {
-						$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
-					} else if($linkify == "bug_group") {
-						$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
-					} else if($linkify == "patch_cat") {
-						$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
-					} else if($linkify == "support_cat") {
-						$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
-					} else if($linkify == "pm_project") {
-						$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
+				if(in_array($i, $colsToKeep)) {
+					if ($linkify && $i == 0) {
+						$link = '<a href="'.$PHP_SELF.'?';
+						$linkend = '</a>';
+						if ($linkify == "bug_cat") {
+							$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
+						} else if($linkify == "bug_group") {
+							$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
+						} else if($linkify == "patch_cat") {
+							$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
+						} else if($linkify == "support_cat") {
+							$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
+						} else if($linkify == "pm_project") {
+							$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
+						} else {
+							$link = $linkend = '';
+						}
 					} else {
 						$link = $linkend = '';
 					}
-				} else {
-					$link = $linkend = '';
+					echo '<td>'.$link . db_result($result,  $j,  $i) . $linkend.'</td>';
 				}
-				echo '<td>'.$link . db_result($result,  $j,  $i) . $linkend.'</td>';
 			}
 			echo '</tr>';
 		}
