@@ -4,12 +4,21 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     dpkg-source can build a .diff.gz from the .orig.tar.gz.  debian/rules
     changed accordingly to uudecode the *.uu files at build time, and to
     remove the resulting files at clean time.
-  * [Christian] Made trove cat more editable
+  * [Christian] Made trove cat more editable 
+  * [Roland] Added integrity constraints between the tables related to the
+    Trove map.
+  * [Roland] Bumped Standards-Version to 3.5.7 and DH_COMPAT to 4.
+    Changed Build-Depends-Indep accordingly.
+  * [Roland] Applied patch from Vicente Ruiz <vjrj@ourproject.org> to fix
+    LDAP installation.
+  * [Roland] Added an <IfModule apache_ssl.c> test in sf-httpd.conf so
+    that SSL is enabled on Apache-SSL (as opposed to Apache / mod_ssl)
+    servers.  Thanks, Kees Louwen <keeslouwen@hotmail.com>.
   * [Christian] Added delete capability in trove map edit
   * [Christian] Added setup_onevar_mainfile function in dsf helper to add 
     vars in sourceforge.conf not managed by debconf
 
- -- Christian Bayle <bayle@debian.org>  Sun, 13 Oct 2002 22:13:48 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 14 Oct 2002 10:35:31 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
