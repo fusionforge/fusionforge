@@ -99,8 +99,8 @@ for ($i=0; $i<$rows; $i++) {
 	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? ($pt_arr[$i]->getPercentComplete()/100) : 0));
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
 
-	global $sys_gantt_task_font_family,$sys_gantt_task_font_style,$sys_gantt_task_font_size;
-	settitlefont($activity[$i],$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
+//	global $sys_gantt_task_font_family,$sys_gantt_task_font_style,$sys_gantt_task_font_size;
+//	settitlefont($activity[$i],$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
 	// Finally add the bar to the graph
 	$graph->Add( $activity[$i] );
 }
@@ -113,10 +113,5 @@ $graph->Add( $todayline);
 
 // Display the Gantt chart
 $graph->Stroke();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
 
 ?>
