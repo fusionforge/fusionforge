@@ -1,30 +1,3 @@
-# /*		
-#  *		
-#  * GForge French message catalog		
-#  *
-#  * Copyright 1999-2001 (c) VA Linux Systems		
-#  * Copyright 2002-2004 (c) Christian Bayle, Roland Mas, Benoit Sibaud, Guillaume Smet
-#  * http://gforge.org
-#  *
-#  * @version   $Id$
-#  * @author Olivier Gerard, Alexandre Aufrere, Roland Mas, Christian Bayle, Benoit Sibaud, Guillaume Smet
-#  *
-#  */		
-#		
-# ChangeLog:		
-#		
-# 2000-09-25  Olivier Gerard		
-#	* Initial translation	
-# 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>		
-#	* Translation and correction	
-# 2002-04-10 Roland Mas <lolando@debian.org>		
-#	* Translation from Base.tab	
-# 2002-04-17 Roland Mas <lolando@debian.org>		
-#	* Added about/about_blurb, plus a few minor fixes	
-# 2002-09-25 Christian Bayle <bayle@debian.org>		
-#	* Added more account_register/blurb	
-#	* Added all Base.tab strings
-# Please check global Changelog file or CVS logs for more recent changes
 account	title	Préférences de votre compte
 account	updated	Mis à jour
 account_change_email	desc	<p>Modifier votre adresse e-mail nécessite une confirmation de votre nouvelle adresse, afin que nous puissions vérifier que nous enregistrons une adresse valide. </p><p>Nous avons besoin d'une adresse valide pour chaque utilisateur en raison du niveau d'accès accordé via ce compte. Si nous avons besoin de joindre un utilisateur à cause de problèmes en provenance d'un compte shell ou projet, il est important que nous puissions le faire.</p><p>Valider le formulaire déclenchera l'envoi d'une URL de confirmation à votre nouvelle adresse e-mail. Cliquer sur ce lien finalisera la modification d'adresse.</p>
@@ -109,9 +82,9 @@ account_options	user_id	Identifiant utilisateur :
 account_options	view_developer_profile	Voir mon profil de développeur
 account_options	welcome	Bienvenue
 account_register	Preferences	Préférences
+account_register	ccode	Pays :
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <i>(Faible trafic)</i>
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.</p><p>Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte.</p>
-account_register	ccode	Pays :
 account_register	emailaddr	Adresse e-mail : <span><font color="red">*</font></span><br /><i>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</i>
 account_register	err_badinsert	L'insertion a échouée.
 account_register	err_email	Adresse e-mail non valide
@@ -213,24 +186,25 @@ admin_add_language	classname	Nom de classe :
 admin_add_language	existing_language	Langue existante
 admin_add_language	name	Nom :
 admin_add_language	submit	Valider
-admin_approve_pending	add_this_custom_response	Ajouter cette réponse personnalisée aux réponses possibles.
+admin_approve_pending	add_this_custom_response	Ajouter cette réponse personnalisée aux réponses types
 admin_approve_pending	admin_approve_pending	Activer
 admin_approve_pending	approve	Approuver
 admin_approve_pending	approve_all_on_this_page	Tout approuver sur cette page
-admin_approve_pending	approving_group	Groupe à approuver :
+admin_approve_pending	approving_group	Projet(s) approuvé(s) :&nbsp;
 admin_approve_pending	approving_pending_projects	Projets en attente d'approbation
+admin_approve_pending	canned_responses	Réponses types
 admin_approve_pending	custom_response_title	Personnaliser le titre et le texte de la réponse
 admin_approve_pending	edit_project_details	[Éditer les informations du projet]
 admin_approve_pending	error_creating_group	Erreur lors de la création d'un objet groupe
-admin_approve_pending	error_group_rejection	Erreur lors du refus d'un groupe
-admin_approve_pending	home_box	Interpréteur maison :
+admin_approve_pending	error_group_rejection	Erreur lors du refus d'un projet
+admin_approve_pending	home_box	Serveur shell :
 admin_approve_pending	manage_responses	(Gérer les réponses)
-admin_approve_pending	no_pending_projects_to_approve	Pas de projet en attente
-admin_approve_pending	none_found	Introuvable
+admin_approve_pending	no_pending_projects_to_approve	Il n'y a pas de projet en attente d'approbation.
+admin_approve_pending	none_found	Pas de projet en attente
 admin_approve_pending	other_information	Autres informations
 admin_approve_pending	pending_projects	Projets en attente :
 admin_approve_pending	pending_reason	Motif de l'attente :
-admin_approve_pending	project_admin	Administration du projet
+admin_approve_pending	project_admin	[Administration du projet]
 admin_approve_pending	submitted_description	Description proposée :
 admin_approve_pending	unix_group_name	Nom du groupe Unix :
 admin_approve_pending	view_edit_project_members	[Voir/Éditer les membres du projet]
@@ -272,12 +246,14 @@ admin_grouplist	groups_that_begin_with	Groupes commençant par :
 admin_grouplist	license	Licence
 admin_grouplist	members	Membres
 admin_grouplist	public	Public ?
+admin_grouplist	register_time	Date d'enregistrement
 admin_grouplist	status	Statut
 admin_grouplist	unix_name	Nom Unix
 admin_index	active_projects_count	Projets actifs : <strong>$1</strong>
 admin_index	active_users_count	Utilisateurs actifs : <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier les types de fichiers
 admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier les langues disponibles
+admin_index	add_edit_delete_licenses	Ajouter, Supprimer ou Modifier les licences
 admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier les processeurs
 admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier les thèmes
 admin_index	add_to_trove_map	Ajouter à l'arbre des projets
@@ -527,6 +503,7 @@ calendar	june	Juin
 calendar	march	Mars
 calendar	may	Mai
 calendar	monday	Lundi
+calendar	monthdatefmt	m/Y
 calendar	november	Novembre
 calendar	october	Octobre
 calendar	onemonth	Un mois
@@ -617,6 +594,7 @@ docman_admin_editdocs	section	Gestionnaire de documents : Administration
 docman_admin_editdocs	state	Etat
 docman_admin_editdocs	title	Modifier des documents
 docman_admin_editdocs	upload	Optionnel : Uploader un nouveau fichier
+docman_admin_editdocs	upload_url	Spécifier une URL externe pour le fichier
 docman_admin_editgroups	add_group	Ajouter un groupe&nbsp;
 docman_admin_editgroups	description	Le nom du groupe sera utilisé comme titre. Il doit donc être formaté en conséquence.
 docman_admin_editgroups	edit_group	Modifier un groupe
@@ -653,6 +631,7 @@ docman_new	submit	Soumettre les informations
 docman_new	submitted_successfully	Le document a été soumis avec succès
 docman_new	title	Gestionnaire de documents : Soumettre un nouveau document
 docman_new	upload_file	Télécharger vers le serveur
+docman_new	upload_url	OU spécifier une URL externe pour le fichier
 error	error_creating	Erreur de création
 error	not_found	PAGE NON TROUVEE
 error	title	La page demandée  n'a pas été trouvée (Erreur 404)
@@ -677,8 +656,14 @@ forum	html	Les balises HTML de votre message seront affichées comme du texte.
 forum	section	Projet : $1
 forum	title	Forums
 forum_admin	add_forum	Ajouter un forum
+forum_admin	delete	Supprimer
+forum_admin	delete_forum	Supprimer le forum et tout son contenu
 forum_admin	delete_message	Effacer le message
+forum_admin	delete_warning	Vous êtes sur le point de supprimer irrémediablement ce forum ainsi que tout son contenu !
+forum_admin	deleted	Supprimé avec succès
+forum_admin	really_sure	Je confirme vraiment
 forum_admin	section	Projet : $1
+forum_admin	sure	Je confirme
 forum_admin	title	Forums : Administration
 forum_admin	update_forum	Mettre à jour les informations et le statut du forum
 forum_admin_addforum	add_forum	Ajouter ce forum
@@ -708,6 +693,7 @@ forum_admin_delete_message	title	Supprimer un message
 forum_admin_delete_message	warning	ATTENTION ! Vous allez détruire un message et tous les messages qui lui sont rattachés !!
 forum_admin_delete_messages	messages_deleted	$1 messages effacés
 forum_common	error_adding_forum	Erreur lors de l'ajout d'un forum
+forum_common	error_illegal_characters	Caractères interdits dans le nom du forum
 forum_common	error_min_desc_length	La description d'un forum doit compter au moins 10 caractères
 forum_common	error_min_name_length	Le nom d'un forum doit compter au moins 3 caractères
 forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cette position sans être identifié
@@ -824,6 +810,12 @@ frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Derniers fichiers publiés
+frs_admin	delete	Supprimer
+frs_admin	delete_package_warning	Vous êtes sur le point de supprimer irrémédiablement ce paquet, toutes ses versions et tous ses fichiers !
+frs_admin	delete_release_warning	Vous êtes sur le point de supprimer irrémédiablement cette version et tous ses fichiers !
+frs_admin	deleted	Supprimé
+frs_admin	really_sure	Je confirme vraiment
+frs_admin	sure	Je confirme
 frs_file	error_already_exists	Un fichier portant ce nom existe déjà dans ce projet
 frs_file	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
 frs_file	error_invalid_file	Le fichier semble invalide
@@ -881,6 +873,7 @@ general	sitename	$1
 general	submit	Valider
 general	submit_edit	Valider
 general	submitted_successfully	$1 a été envoyé avec succès
+general	to	à
 general	total	total
 general	turned_off	Ce projet a désactivé le $1
 general	update	Mettre à jour
@@ -892,7 +885,6 @@ group	activitystat	Voir les <a href="/project/stats/?group_id=$1">statistiques d
 group	developer_info	Equipe-Projet
 group	developers	Développeurs&nbsp;
 group	long_bugs	Gestion des bugs
-group	long_scm	Référentiel SCM
 group	long_docman	Gestion de documents : Documentation du projet
 group	long_forum	Forums de discussion
 group	long_ftp	Espace FTP anonyme
@@ -901,6 +893,7 @@ group	long_mail	Listes de diffusion
 group	long_news	Dernières annonces
 group	long_patch	Gestionnaire de corrections
 group	long_pm	Gestion des tâches
+group	long_scm	Référentiel SCM
 group	long_support	Support technique
 group	long_survey	Sondages
 group	long_tracker	Outils de suivi
@@ -911,7 +904,6 @@ group	public_area	Zones publiques
 group	registered	Enregistré le&nbsp;:&nbsp;
 group	short_admin	Administration
 group	short_bugs	Bugs
-group	short_scm	SCM
 group	short_docman	Documents
 group	short_files	Fichiers
 group	short_forum	Forums
@@ -922,6 +914,7 @@ group	short_memberlist	Développeurs
 group	short_news	Annonces
 group	short_patch	Patchs
 group	short_pm	Tâches
+group	short_scm	SCM
 group	short_summary	En bref
 group	short_support	Support
 group	short_survey	Sondages
@@ -1056,6 +1049,7 @@ menu	project_help_wanted	Demande d'aide
 menu	project_summary	Résumé du projet
 menu	projectree	Arbre des projets
 menu	register_project	Enregistrer un projet
+menu	reporting	Statistiques
 menu	search	Recherche
 menu	site_status	État du site
 menu	software_map	Recherche thématique
@@ -1163,7 +1157,7 @@ news_submit	title	Soumettre une annonce pour $1
 news_utils	archive	Archive des annonces
 news_utils	comment_1	commentaire
 news_utils	comment_2	commentaires
-news_utils	nonews	Pas d'annonces
+news_utils	nonews	Pas d'annonce
 news_utils	readmore	Lire la suite/Commenter
 news_utils	submit	Proposer une annonce
 people	about_blurb	<p>Le système « Demande d'aide » est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>
@@ -1344,6 +1338,10 @@ pm_admin_projects	change_project_intro	Vous pouvez modifier un projet existant e
 pm_admin_projects	change_project_title	Changer le statut du gestionnaire de projet/tâche
 pm_admin_projects	col_project_id	Numéro du projet
 pm_admin_projects	col_project_name	Nom du projet
+pm_admin_projects	delete	Supprimer
+pm_admin_projects	delete_info	Supprimer irrémédiablement ce sous-projet and toutes ses données.
+pm_admin_projects	delete_warning	Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et toutes ses données !
+pm_admin_projects	deleted	Supprimé avec succès
 pm_admin_projects	description	Description
 pm_admin_projects	edit_update	Éditer/Mettre à jour le projet
 pm_admin_projects	existing_subprojects	Sous projets existants
@@ -1357,8 +1355,10 @@ pm_admin_projects	project_inserted	Projet ajouté
 pm_admin_projects	project_name	Nom du projet
 pm_admin_projects	project_title	Titre
 pm_admin_projects	projects_intro	Ajouter un nouveau projet au Projet/gestionnaire de tâches. <strong>Ce n'est pas la même chose que l'ajout d'une tâche à un projet.</strong>
+pm_admin_projects	really_sure	Je confirme vraiment
 pm_admin_projects	section	Administration du gestionnaire de projets
 pm_admin_projects	send_updates	Envoyer toutes les mises à jour à
+pm_admin_projects	sure	Je confirme
 pm_admin_projects	title	Ajout de sous-projets
 pm_browse_custom	section	Gestion de projet
 pm_browse_custom	title	Naviguer dans les tâches
@@ -1455,6 +1455,9 @@ pm_reporting	tasks_by_technician	Tâches par technicien
 pm_reporting	title	Rapports sur les tâches
 pm_task	create_successfully	Tâche crée avec succès
 project_admin	add_user	Ajouter un utilisateur
+project_admin	addfromlist	Ajouter des utilisateurs à partir de la liste
+project_admin	addfromlist1	Cochez la case à côté du nom de l'utilisateur que vous souhaitez ajouter. Vos sélections seront conservées si vous cliquez sur une des lettres ci-dessous. Quand vous avez terminé votre sélection, cliquez sur "Finir" pour choisir les rôles pour les utilisateurs que vous ajoutez.
+project_admin	addfromlist2	Choisissez un rôle pour chaque utilisateur et cliquez sur "Ajouter Tous".
 project_admin	docmanager_admin	Administration de la documentation
 project_admin	download_tarball	Télécharger une archive de votre CVS (mise à jour chaque nuit)
 project_admin	edit_file_releases	Éditer/Ajouter Versions de fichier
@@ -1467,6 +1470,7 @@ project_admin	homepage_link	Lien vers la page d'accueil&nbsp;:&nbsp;
 project_admin	mail_admin	Administration des listes de diffusion
 project_admin	news_admin	Administration des annonces
 project_admin	packages	Paquet&nbsp;
+project_admin	plugins_admin	Administration des plugins
 project_admin	project_information	Informations diverses sur le projet
 project_admin	scm_admin	Administration de la Gestion de configuration
 project_admin	section	Projet : $1
@@ -1481,6 +1485,8 @@ project_admin	trove_categorization	Classement du projet dans l'arbre&nbsp;:&nbsp
 project_admin	unix_name	Nom Unix&nbsp;
 project_admin	user_added	Utilisateur ajouté avec succès
 project_admin	user_removed	Utilisateur supprimé avec succès
+project_admin	user_updated	Utilisateur mis à jour avec succès
+project_admin	userrealname	Nom complet
 project_admin	www_directory	Répertoire de service du site web (www)&nbsp;:&nbsp;
 project_admin_database	add_new_database	Ajouter une nouvelle base de données
 project_admin_database	add_new_database_info	'Créer' programmera la création de la base de donnée, et enverra les détails aux administrateurs du projet.
@@ -1511,7 +1517,6 @@ project_admin_editgroupinfo	new_doc_info	Si vous le désirez, vous pouvez fourni
 project_admin_editgroupinfo	send_on_all_updates	(envoi pour toutes les mises à jour)
 project_admin_editgroupinfo	short_description	Courte description (255 caractères maximum)
 project_admin_editgroupinfo	title	Édition des infos publiques
-project_admin_editgroupinfo	use_scm	SCM
 project_admin_editgroupinfo	use_docman	Gestionnaire de documents
 project_admin_editgroupinfo	use_forums	Forums
 project_admin_editgroupinfo	use_frs	Publication de fichiers (avec version)
@@ -1519,6 +1524,7 @@ project_admin_editgroupinfo	use_ftp	FTP
 project_admin_editgroupinfo	use_mailing_lists	Listes de diffusion
 project_admin_editgroupinfo	use_news	News
 project_admin_editgroupinfo	use_pm	Gestionnaire de tâches
+project_admin_editgroupinfo	use_scm	SCM
 project_admin_editgroupinfo	use_stats	Statistiques
 project_admin_editgroupinfo	use_surveys	Sondages
 project_admin_editgroupinfo	use_tracker	Suivi
@@ -1547,11 +1553,14 @@ project_admin_editpackages	add_release	Ajouter une version
 project_admin_editpackages	added_package	Paquet ajouté
 project_admin_editpackages	create_package	Créer ce paquet
 project_admin_editpackages	edit_releases	Éditer les versions
+project_admin_editpackages	is_public	Visible par le public
 project_admin_editpackages	new_package_name	Nouveau nom de paquet
 project_admin_editpackages	no_packages_defined	Vous n'avez aucun paquet défini
 project_admin_editpackages	no_packages_status	Statut
 project_admin_editpackages	package_name	Nom du paquet
 project_admin_editpackages	packages_info	<h3>Paquets</h3><p>Vous pouvez utiliser les paquets pour grouper différentes versions de fichiers ensemble, ou les utiliser comme bon vous semble. <p><H4>Un exemple de paquets&nbsp;:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Vos paquets&nbsp;:</H4><p><ol><li>Définissez vos paquets</li><li>Créer de nouvelles versions de paquets</li></ol><p><h3>Version de paquets</h3><p>Une version de paquet peut contenir de multiple fichiers.<p><H4>Exemples de versions</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Vous pouvez créer de nouvelles versions de paquets en cliquant sur <strong>Ajouter/Éditer versions</strong> à coté du nom de votre paquet.<p>
+project_admin_editpackages	private	Privé
+project_admin_editpackages	public	Public
 project_admin_editpackages	qrs	NVR&nbsp;
 project_admin_editpackages	qrs_a_file	Cliquer ici pour faire une $1 Nouvelle Version Rapide $2 de vos paquets
 project_admin_editpackages	releases	Versions
@@ -1713,6 +1722,7 @@ project_filemodule_monitor	stop_monitor_body	Le suivi a été arrété
 project_filemodule_monitor	stop_monitor_title	Suivi arrétè
 project_home	cvs_commits	<strong>$1</strong> remontées (commits), <strong>$2</strong> ajouts (adds)
 project_home	forum_messages	<strong>$1</strong> message(s) dans <strong>$2</strong> forum(s)
+project_home	forum_messages_only_one_forum	<strong>$1</strong> messages dans <strong>$2</strong> forum
 project_home	forums	Forums
 project_home	help_wanted	NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des
 project_home	help_wanted_multiple	Pour remplir plusieurs fonctions dans $1
@@ -1793,7 +1803,86 @@ project_stats_utils	support	Aides
 project_stats_utils	tasks	Tâches
 projects	section	Projet : $1
 projects	title	Résumé
+rbac_edit	addrole	Ajouter un rôle
+rbac_edit	docman	Gestionnaire de documents
+rbac_edit	editrole	Modifier le rôle
+rbac_edit	editroles	Modifier les rôles
+rbac_edit	forum	Forum
+rbac_edit	forumadmin	Administration des forums du projetProject-wide Forum Admin
+rbac_edit	forumpublic	Privilèges sur les forums
+rbac_edit	frs	Système de publication de fichiers
+rbac_edit	intro	Utilisez cette page pour modifier les rôles de votre projet. Notez que chaque membre a au moins l'accès Observateur. Par exemple, si l'Observateur peut lire le CVS, tous les autres rôles du projet le peuvent également.
+rbac_edit	newrole	Nouveau rôle
+rbac_edit	observer	Modifier Observateur
+rbac_edit	observerintro	Utilisez cette page pour modifier les permissions et les droits d'accès des utilisateurs non membres de votre projet. Les utilisateurs non membres incluent les personnes qui ne sont pas identifiées.
+rbac_edit	observerusername	Observateur
+rbac_edit	pgtitle	Modifier le rôle
+rbac_edit	pm	Gestionnaire de tâches
+rbac_edit	pmadmin	Administration du gestionnaire de tâchesProject-wide Task Manager Admin
+rbac_edit	pmpublic	Privilèges sur le gestionnaire de tâches
+rbac_edit	projectadmin	Administration du projet
+rbac_edit	projectpublic	Privilèges sur le projet
+rbac_edit	projectpublicnote	Remarque : si le projet entier est défini comme privé, les utilisateurs non membres ne peuvent accéder aux fonctionnalités même si vous les rendez disponibles.
+rbac_edit	remove	Enlever
+rbac_edit	role	Rôle
+rbac_edit	rolename	Nom du rôle
+rbac_edit	scm	SCM - Référentiel de code source
+rbac_edit	scmpublic	Privilèges sur le SCM
+rbac_edit	title1	Section
+rbac_edit	title2	Sous-section
+rbac_edit	title3	Paramètrage
+rbac_edit	tracker	Tracker
+rbac_edit	trackeradmin	Administration du suivi du projet
+rbac_edit	trackerpublic	Privilèges sur le suivi
+rbac_edit	update	Mettre à jour
+rbac_vals	docman0	Lire/Poster
+rbac_vals	docman1	Administration
+rbac_vals	forum-1	Pas d'accès
+rbac_vals	forum0	Lire
+rbac_vals	forum1	Poster
+rbac_vals	forum2	Administrer
+rbac_vals	forumadmin0	Aucun
+rbac_vals	forumadmin2	Administrer
+rbac_vals	forumanon0	Pas de message anonyme
+rbac_vals	forumanon1	Autoriser les messages anonymes
+rbac_vals	forumpublic0	Privé
+rbac_vals	forumpublic1	Public
+rbac_vals	frs0	Lire
+rbac_vals	frs1	Ecrire
+rbac_vals	frspackage	Système de publication de fichiers
+rbac_vals	frspackage0	Privé
+rbac_vals	frspackage1	Public
+rbac_vals	pm-1	Pas d'accès
+rbac_vals	pm0	Lire
+rbac_vals	pm1	Technicien
+rbac_vals	pm2	Technicien & Administrateur
+rbac_vals	pm3	Administrateur seulement
+rbac_vals	pmadmin0	Aucun
+rbac_vals	pmadmin2	Administrer
+rbac_vals	pmpublic0	Privé
+rbac_vals	pmpublic1	Public
+rbac_vals	projectadmin0	Aucun
+rbac_vals	projectadminA	Administrer
+rbac_vals	projectpublic0	Privé
+rbac_vals	projectpublic1	Public
+rbac_vals	scm-1	Aucun accès
+rbac_vals	scm0	Lire
+rbac_vals	scm1	Ecrire
+rbac_vals	scmpublic0	Privé
+rbac_vals	scmpublic1	Public (PServer)
+rbac_vals	tracker-1	Aucun accès
+rbac_vals	tracker0	Lire
+rbac_vals	tracker1	Technicien
+rbac_vals	tracker2	Technicien & Administrateur
+rbac_vals	tracker3	Administrateur seulement
+rbac_vals	trackeradmin0	Aucun
+rbac_vals	trackeradmin2	Administrer
+rbac_vals	trackeranon0	Pas de message anonyme
+rbac_vals	trackeranon1	Autoriser les messages anonymes
+rbac_vals	trackerpublic0	Privé
+rbac_vals	trackerpublic1	Public
 register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous devez remplir un certain nombre d'information de base à son propos. Veuillez lire attentivement les descriptions ci-dessous et fournir des données précises et complètes. Tous les champs sont obligatoires.
+register	choose_scm	<h3>6. Gestion de sources</h3><p>Vous pouvez choisir parmi différents gestionnaires de sources pour votre projet mais seulement un seul. Merci de choisir avec soin le gestionnaire de sources que vous souhaitez utiliser.</p> <p><strong>Vous ne pourrez plus le changer une fois le projet enregistré !</strong></p>
 register	comprehensive_description	Décrivez de manière plus complète votre projet
 register	conflicting_licenses_choice	Conflit dans le choix de licence
 register	describe_registration	Veuillez décrire de manière plus précise l'objet de votre enregistrement.
@@ -1805,15 +1894,17 @@ register	license_type	Domaine public</a><li>site web seulement<li>Autre/Licence 
 register	maximum_description	La longueur maximum pour une description de projet est de 255 caractères
 register	more_license_description	Veuillez fournir une description plus précise de la licence.
 register	no_license_chosen	Vous n'avez pas choisi de licence
+register	one_scm	Comme il n'existe qu'un seul gestionnaire de sources, il sera sélectionné automatiquement. <strong>$1</strong> sera sélectionné.
 register	other_license	Si vous avez choisi 'Autre', veuillez founir une explication ainsi qu'une description de votre licence. Sachez que d'autres licences peuvent ne pas être acceptées. Cela peut aussi prendre plus de temps de prendre une décision d'agrément pour un tel projet, puisque nous devrons vérifier que cette licence est compatible avec la définition de l'OpenSource.
 register	project_description	<h3>4. Description publique du projet</h3><p>C'est la description de votre projet qui apparaîtra sur la page 'résumé du projet', dans les résultats des recherches, etc. Elle ne doit pas être aussi précise et étendue que la description du projet (étape 2), donc permettez-vous des formulation concises et des abréviations. La longueur maximale est de 255 caractères.
 register	project_full_name	<h3>1. Nom complet du projet</h3><p>Vous devez commencer par indiquer le nom de votre projet. Le nom complet est descriptif, et n'est pas contraint (il est toutefois limité à 40 caractères).</p>Nom complet :<br/>
 register	project_information	Information du projet
 register	project_license	<h3>3. Licence</h3> <p><strong><em>Si vous déposez un projet qui est un site web seulement, choisissez 'site web seulement' parmi les choix ci-dessous. et continuez.</em></strong><p>$1 est consacré à faire avancer le développement de logiciels en Open Source. Pour faire simple, nous sommes reliés à l'oeuvre extraordinaire de l'<a href="http://www.opensource.org">Open Source Initiative</a> pour les choix de licences. <p>Nous avons conscience, toutefois, qu'il peut y avoir d'autres licences en dehors de cela qui peuvent être meilleures pour vous. Si vous souhaitez utiliser une licence qui n'est pas certifiée OSI, faites-nous savoir pourquoi.<p>Le choix d'une licence est une décision sérieuse. Prenez le temps de lire le texte (et nos explications) de quelques licences avant de faire un choix pour votre projet. <p>Vous pouvez changer de licence plus tard, à condition d'avoir la possibilité légale de le faire, les versions de vos fichiers traduiront intégreront clairement ce changement relates this change, et votre classement dans l'arbre des projets sera mis à jour de manière appropriée. <em>Notez que ces changements de licence ne sont pas rétrocatifs (i.e. ne s'appliqueront pas aux productions déjà réalisées sous licence OpenSource).</em> <p>$1 n'est pas responsable des incohérences de licences.<p><strong>Licences</strong></s>
 register	project_submitted	Votre projet a été soumis aux administrateurs de $1. Dans les 72 heures, vous recevrez la notification de leur décision, et des instructions supplémentaires.</p><p>Merci d'avoir choisi $1.
-register	project_unix_name	<h3>5. Nom unix du projet</h3><p>En plus du nom complet du projer vous aurez besoin de choisir un nom court, un nom 'Unix' pour votre projet.</p><p> Le 'nom Unix' a plusieurs contraintes parce qu'il est utilisé à beaucoup d'occasion sur le site. Ces contraintes sont :<ul><li>Doit être différent du 'nom unix' de tous les autres projets<li>doit avoir une longueur comprise entre 3 et 15 caractères<li>doit être en minuscules<li>peut seulement contenir des lettres, des nombres, et des tirets<li>doit être un 'username' unix valide<li>ne peut pas être un de nos doamines réservés<li>le nom unix ne changera jamais pour ce projet</ul><p>Votre 'nom unix' est important. parce qu'il sera utilisé pour de nombreuses choses, parmi lesquelles :<ul><li>un site wev à <tt>'nom unix'.$1</tt><li>un dépot racine CVS de <tt>/cvsroot/'nom unix'</tt> sur <tt>cvs.'nom unix'.$1</tt><li>un compte Shell sur <tt>'nom unix'.$1</tt><li>Les moteurs de recherche parcourant le site</ul><p>Nom Unix :<br/></s>
+register	project_unix_name	<h3>5. Nom unix du projet</h3><p>En plus du nom complet du projet vous aurez besoin de choisir un nom court, un nom 'Unix' pour votre projet.</p><p> Le 'nom Unix' a plusieurs contraintes parce qu'il est utilisé à beaucoup d'occasion sur le site. Ces contraintes sont :<ul><li>Doit être différent du 'nom unix' de tous les autres projets<li>doit avoir une longueur comprise entre 3 et 15 caractères<li>doit être en minuscules<li>peut seulement contenir des lettres, des nombres, et des tirets<li>doit être un 'username' unix valide<li>ne peut pas être un de nos doamines réservés<li>le nom unix ne changera jamais pour ce projet</ul><p>Votre 'nom unix' est important. parce qu'il sera utilisé pour de nombreuses choses, parmi lesquelles :<ul><li>un site wev à <tt>'nom unix'.$1</tt><li>un dépot racine CVS de <tt>/cvsroot/'nom unix'</tt> sur <tt>cvs.'nom unix'.$1</tt><li>un compte Shell sur <tt>'nom unix'.$1</tt><li>Les moteurs de recherche parcourant le site</ul><p>Nom Unix :<br/></s>
 register	purpose_and_summarization	<h3>2. Buts et résumé du projet</h3><p><p><strong> Veuillez fournir une description précise et détaillée de votre projet, quelles resources de $1 vous prévoyez d'utiliser, et de quelle manière . L'approbation ou le rejet de l'hébergement de votre projet sur $1 reposera sur cette description, comme plus tard son maintien, conditionné par l'usage approprié des services. Cette description ne sera pas utilisée comme description publique de votre projet. Elle doit être rédigée en anglais.</strong></s>
 register	registration_complete	Enregistrement complet
+register	scm_not_selected	Le site a activé la gestion de sources mais aucun gestionnaire de sources n'a été choisi.
 register	title	Nouveau projet
 register	unix_group_name_already_taken	Nom Unix déjà pris
 register_complete	section	Nouveau projet
@@ -1824,11 +1915,112 @@ register_requirements	section	Nouveau projet
 register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
 register_tos	title	Accord sur les conditions générales
+reporting	add	Ajouter
+reporting	administrative	Administration
+reporting	area	Outil
+reporting	cumulative_users	Utilisateurs cumulés (graphique)
+reporting	cumulative_users_title	Utilisateurs cumulés
+reporting	daily	Quotidien
+reporting	end	Fin
+reporting	feature_req	Demandes de fonctionnalités
+reporting	forum_messages	Messages dans les forums
+reporting	initialize	Initialiser/Reconstruire les tables des statistiques
+reporting	manage	Gérer les catégories de suivi temporel
+reporting	monthly	Mensuel
+reporting	next	Suivant
+reporting	other_trackers	Autres outils de suivi
+reporting	project	Projet
+reporting	project_activity	Activité (graphique)
+reporting	project_activity_title	Activité du projet
+reporting	project_specific	Statistiques spécifiques au projet : Suivi, Tâches, Forums, Documents, Téléchargements
+reporting	projects	Projets
+reporting	refresh	Rafraîchir
+reporting	report	Rapport
+reporting	site_wide	Global
+reporting	site_wide_activity	Activité globale
+reporting	site_wide_line	Linéaire (graphique)
+reporting	site_wide_pie	Camembert (graphique)
+reporting	site_wide_reports	Statistiques globales : Suivi, Tâches, Forums, Documents, Téléchargements
+reporting	site_wide_time_tracking	Suivi temporel global
+reporting	start	Début
+reporting	subtitle	Statistiques de $1
+reporting	time	Temps
+reporting	time_tracking	Suivi temporel
+reporting	time_tracking_projecttime	Statistiques individuelles par projet (graphique)
+reporting	time_tracking_sitetime	Statistiques globales (graphique)
+reporting	time_tracking_sitetimebar	Total global des heures (graphique)
+reporting	time_tracking_usersummary	Liste globale des tâches et des heures (rapport)
+reporting	time_tracking_usertime	Statistiques individuelles par utilisateur (graphique)
+reporting	title	Statistiques
+reporting	type	Type
+reporting	update	Mettre à jour
+reporting	user	Utilisateur
+reporting	user_activity	Activité (graphique)
+reporting	user_activity_title	Activité d'un utilisateur
+reporting	users	Utilisateurs
+reporting	users_added_title	Utilisateurs ajoutés
+reporting	users_added_weekly	Utilisateurs ajoutés (graphique)
+reporting	week	Semaine
+reporting	weekly	Hebdomadaire
+reporting_pie	end	Fin
+reporting_pie	start	Début
+reporting_pie	title	Outil de génération de camemberts
+reporting_pie	trackers	Outil de suivi
+reporting_rebuild	iamsure	Je confirme
+reporting_rebuild	message	  <h3>Initialisation du système de reporting</h3><p>De temps en temps, si un cronjob échoue ou si la base est endommagée, il peut être nécessaire de reconstruire les tables de statistiques.</p><p>Si vous êtes sûr de vouloir reconstruire toutes les tables de statistiques, cochez la case "Je confirme" et cliquez sur le bouton ci-dessous.</p><p>Ceci peut prendre quelques minutes, ne cliquez qu'UNE SEULE FOIS sur le bouton.</p>
+reporting_rebuild	pressonlyonce	Cliquer UNE SEULE FOIS
+reporting_rebuild	title	Page principale
+reporting_ta	add_entry	Ajouter une entrée
+reporting_ta	add_entry_description	Choisissez un projet/sous-projet dans le gestionnaire de tâches. Vous aurez à choisir une tâche et une catégorie pour y enregistrer le temps passé.
+reporting_ta	cancel	Annuler
+reporting_ta	category	Catégorie
+reporting_ta	change_week	Changer de semaine
+reporting_ta	choose_entry	Choisissez une semaine pour enregistrer ou modifier le temps passé.
+reporting_ta	choose_entry_description	Après avoir choisi une semaine, il vous sera demandé de choisir un projet/sous-projet dans le Gestionnaire de Tâches.
+reporting_ta	date	Date
+reporting_ta	delete	Supprimer
+reporting_ta	error_field_required	Tous les champs sont obligatoires.
+reporting_ta	hours	Heures
+reporting_ta	project_task	Projet/Tâche
+reporting_ta	successfully_added	Ajouté avec succès
+reporting_ta	successfully_deleted	Supprimé avec succès
+reporting_ta	task_mgr_project	Projet du Gestionnaire de Tâches
+reporting_ta	time_entries	Entrées pour la semaine de démarrage $1
+reporting_ta	title	Suivi temporel
+reporting_ta	total_hours	Total des heures
+reporting_ta	week_starting	Semaine de démarrage
+reporting_tc	category_name	Nom de la catégorie
+reporting_tc	description	Vous pouvez créer des catégories pour pouvoir qualifier les heures consommées pour une tâche donnée. On peut par example définir : "Réunion", "Développement", "Test".
+reporting_tc	successful	Avec succès
+reporting_tc	time_code	Identifiant
+reporting_tc	title	Page principale
+reporting_tc	title2	Gérer les catégories de suivi temporel
+reporting_ttbp	bycategory	Par catégorie
+reporting_ttbp	bysubproject	Par sous-projet
+reporting_ttbp	bytask	Par tâche
+reporting_ttbp	byuser	Par utilisateur
+reporting_ttbp	title	Suivi du temps par projet
+reporting_ua	description	Choisissez la <strong>première lettre</strong> du nom de la personne sur laquelle vous souhaitez obtenir des statistiques.</p>
+reporting_us	any	Tous
+reporting_us	closed	fermé
+reporting_us	cum_hrs	Heures cumulées
+reporting_us	description	Choisissez l'intervalle à l'aide des listes déroulantes ci-dessous. Le rapport va lister toutes les tâches avec une date d'ouverture dans cet intervalle.
+reporting_us	end_date	Date de fin
+reporting_us	name	Nom
+reporting_us	no_matches	Aucune correspondance trouvée
+reporting_us	open	Ouvert
+reporting_us	rem_hrs	Heures restantes
+reporting_us	status	Etat
+reporting_us	task	Tâche
+reporting_us	task_status	Etat de la tâche
+reporting_us	title	Résumé des statistiques d'un utilisateur
+reporting_ut	description	Choisissez la <strong>première lettre</strong> du nom de la personne sur laquelle vous souhaitez obtenir des statistiques.</p>
+reporting_ut	title	Statistiques sur le temps consommé par les utilisateurs
+scm_index	admin	Administration
 scm_index	anoncvs	<p><b>Accès CVS anonyme</b></p><p>Ce dépôt CVS peut-être récupéré (check out) anonymement (avec la méthode pserver) à l'aide des instructions suivantes. Le module que vous voulez récupérer doit être spécifié comme <i>modulename</i>. Lorsqu'on vous demande un mot de passe pour <i>anonymous</i>, tapez simplement 'Entrée'.</p>
 scm_index	anoncvsup	Les mises à jour (update) ne nécessite pas l'utilisation du paramètre -d quand on se trouve à l'intérieur du répertoire du module.
 scm_index	browseit	Parcourir le dépôt CVS
 scm_index	browsetree	<hr /><b>Parcourir l'arbre CVS</b><p>Parcourir l'arbre CVS vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
-scm_index	scm_repository	dépôt SCM
 scm_index	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
@@ -1837,9 +2029,9 @@ scm_index	error_this_project_has_turned_off	Erreur : ce projet a désactivé son
 scm_index	history	Historique du dépôt
 scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
+scm_index	scm_repository	dépôt SCM
 scm_index	section	Projet : $1
 scm_index	title	SCM
-scm_index	admin	Administration
 search	artifact_author	Soumis par
 search	artifact_date	Date
 search	artifact_id	#
@@ -1872,6 +2064,10 @@ searchbox	search	Rechercher
 searchbox	skill	Savoir-faire
 searchbox	softwaregroup	Logiciel/Groupe
 searchbox	task	Tâches
+send_pending_items_mail	pm_message	Ce courrier électronique vous est envoyé pour vous rappeler des tâches en attente ou en retard. \nLa tâche  #$1 est en attente : \nRésumé : $2\nSoumis par : $4\nEtat :$5\nPourcentage d'avancement : $6\n\nCliquez ici pour accéder à la tâche $3 .
+send_pending_items_mail	pm_subject	Notification de tâches en attente
+send_pending_items_mail	tracker_message	Ce courrier électronique vous est envoyé pour vous rappeler que des éléments que vous suivez sont en attente ou en retard. L'élément #$1 est en attente : \nRésumé : $3\nEtat : $5\nDate d'ouverture :$6\nAssigné à : $7\nSoumis par : $8\nDétails: $9\n\n\nCliquez ici pour accéder à cet élément : $4
+send_pending_items_mail	tracker_subject	Pending tracker  items notification
 sendmessage	about_blurb	Afin de limiter le spam
 sendmessage	contact	Conatct
 sendmessage	email	Votre adresse e-mail
@@ -2229,6 +2425,7 @@ survey_index	survey_number_questions	Nombre de questions
 survey_index	survey_number_votes	Nombre de votes
 survey_index	survey_questions	Questions
 survey_index	survey_result	Résultats
+survey_index	survey_result_comments	Résultats avec graphique et commentaires
 survey_index	survey_result_graph	Résultats avec graphique
 survey_index	survey_title	Titre du sondage
 survey_index	survey_vote	Voter
@@ -2298,6 +2495,7 @@ survey_utils	error_this_group_has_turned_off	ERREUR
 survey_utils	show_results	Voir les résultats
 system	datefmt	d/m/Y H:i
 system	locale	fr
+system	shortdatefmt	d/m/Y
 system	strftimefmt	%e %B %Y %H:%M
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
@@ -2410,13 +2608,19 @@ tracker_admin	category_inserted	Catégorie ajoutée
 tracker_admin	category_name	Nom de catégorie
 tracker_admin	category_updated	Categorie mise à jour
 tracker_admin	choose_datatype	Choisissez un outil de suivi et vous pourrez en modifier les préférences, catégories, groupes, membres, et permissions
+tracker_admin	delete	Supprimer
+tracker_admin	delete_warning	Vous êtes sur le point de supprimer irrémédiablement cet outil de suivi et tout son contenu !
+tracker_admin	deleted	Supprimé avec succès
 tracker_admin	error_inserting	Erreur d'insertion
 tracker_admin	error_updating	Erreur de mise à jour
 tracker_admin	group_inserted	Groupe inséré
 tracker_admin	group_name	Nouveau nom de groupe
 tracker_admin	group_updated	Groupe mis à jour
 tracker_admin	intro	<h3>Créer un nouvel outil de suivi</h3><p>Vous pouvez utiliser ce système pour suivre la trace de n'importe quel type de données, chaque outil de suivi ayant ses listes séparées d'utilisateurs, de groupes, de catégories et de permissions. Vous pouvez facilement déplacer des éléments à suivre entre les outils quand vous le voulez.</p><p>Les outils de suivi sont désignés comme étant des "types" et les parties individuelles de données sont des "éléments". Ainsi, "Bugs" pourrait être un type, alors qu'un rapport de bug sera un élément. Vous pouvez créer autant d'outils de suivi que vous voulez, mais rappelez-vous qu'administrer les catégories, groupes et permissions pour chaque type peut rapidement prendre beaucoup de temps.</p>
+tracker_admin	permanently_delete_info	Supprimer irrémédiablement cet outil de suivi
+tracker_admin	really_sure	Je confirme vraiment
 tracker_admin	section	Outil de suivi&nbsp;
+tracker_admin	sure	Je confirme
 tracker_admin	title	Administration
 tracker_admin	tracker_id	Identifiant de l'outil de suivi
 tracker_admin	tracker_title	Titre
