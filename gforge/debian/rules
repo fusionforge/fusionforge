@@ -48,7 +48,6 @@ install: build
 	# (sourceforge is a meta-package and needs no files)
 
 	# sourceforge-common
-	install -m 644 deb-specific/common-utils.sh $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/lib/
 	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
 	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
@@ -69,6 +68,9 @@ install: build
 
 	# sourceforge-web-apache
 	cp -r www $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
+	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/clear.png deb-specific/clear.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
 	cp -r common $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/ -name CVS -type d | xargs rm -rf
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www -type d -exec chmod 0755 {} \;
@@ -76,9 +78,6 @@ install: build
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/common -type f -exec chmod 0644 {} \;
 	install -o www-data -m 755 -d $(CURDIR)/debian/sourceforge-web-apache/var/cache/sourceforge
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/clear.png deb-specific/clear.png.uu
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/bin/
 
 	# sourceforge-db-postgresql
@@ -104,7 +103,7 @@ install: build
 	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/sqlparser.pm $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
+	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
 	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 
@@ -120,11 +119,17 @@ install: build
 	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/sourceforge-cvs/bin/cvssh 
 	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cgi-bin/
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png deb-specific/cvsweb/icons/back.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png deb-specific/cvsweb/icons/dir.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png deb-specific/cvsweb/icons/minidir.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png deb-specific/cvsweb/icons/text.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png deb-specific/cvsweb/icons/miniback.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png
 	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png deb-specific/cvsweb/icons/minitext.png.uu
+	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge-cvs/etc/sourceforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
 
@@ -157,7 +162,7 @@ binary-indep: build install
 	#dh_installpam
 	#dh_installinit
 	dh_installcron
-	dh_installman -p sourceforge-common
+	dh_installman
 	#dh_installinfo
 	#dh_undocumented
 	dh_installchangelogs ChangeLog
@@ -174,7 +179,7 @@ binary-indep: build install
 	dh_builddeb
 
 binary-arch: build install
-	# (No architecture-dependent files for Sourceforge)
+	# (No architecture-dependent files for Sourceforge, doing nothing here)
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install configure
