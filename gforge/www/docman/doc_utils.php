@@ -28,7 +28,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 		."order by groupname";
 		$result = db_query($query);
 
-		echo html_build_select_box ($result,'doc_group',$checkedval);
+		echo html_build_select_box ($result,'doc_group',$checkedval,false);
 
 	} //end else
 
@@ -197,9 +197,9 @@ function doc_droplist_count($l_group_id, $language_id) {
 }
 
 
-function doc_get_state_box() {
+function doc_get_state_box($checkedval='xzxz') {
 	$res_states=db_query("select * from doc_states;");
-	echo html_build_select_box ($res_states, 'stateid', $row['stateid']);
+	echo html_build_select_box ($res_states,'stateid',$checkedval,false);
 
 }
 

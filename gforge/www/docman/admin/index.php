@@ -100,8 +100,7 @@ function main_page($group_id) {
 				        <th>State:</th>
 				        <td>';
 
-		$res_states=db_query("select * from doc_states;");
-		echo html_build_select_box ($res_states, 'stateid', $row['stateid']);
+		doc_get_state_box($row['stateid']);
 
 		echo '
        				</td>
