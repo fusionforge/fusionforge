@@ -13,7 +13,7 @@
 This document is intended to be a guide for administering projects on 
 GForge. It is not intended to describe how to administer the 
 GForge site itself. It is assumed that the reader will have also read 
-the GForge Users Guide before reading this document.
+the GForge User's Guide before reading this document.
 </p>
 </section>
 <section name="What is GForge?">
@@ -30,9 +30,9 @@ Traditionally it was used for software projects, although there is really no
 reason why it cannot be used to develop hardware or silicon projects also. 
 <br/><br/>
 
-Generally the world and it's mother have read access to the data associated 
+Generally, everyone needs to have read access to the data associated 
 with a project, with (some of) the developers having write access to the data. 
-Usually there is a maintainer(s) of the code (the project leader or 
+Usually there is a maintainer of the code (the project leader or 
 the person who registered the project) and contributers who email  
 any changes to the code that they developed - bug fixes, additional functionality - 
 which the maintainer adds to the code in the 
@@ -51,9 +51,7 @@ include:
 <li>Bug tracking</li>
 <li>A web interface to CVS</li>
 <li>Task lists</li>
-<li>A website which provides some statistics, including the members of the 
-    project, the number of mailing lists, the number of CVS checkins/
-    checkouts/adds, the number of items in the discussion forums, etc.</li>
+<li>A website which provides some usage statistics, including the project members, the number of mailing lists, CVS statistics, the number of items in the discussion forums, etc.</li>
 </ol>
 <br/><br/>
 </p>
@@ -85,10 +83,10 @@ steps involved are:
     created - usually by an overnight cronjob.</li>
 </ol>
 <br/><br/>
-Once you have received the email confirming the project has been accepted, 
+Once you have received the email confirming project acceptance, 
 you will be able to find your project through the search box by entering
-your project's name or details. Clicking on the project link provided will 
-bring you to the project summary page, the default starting point for all 
+your project's name or details. Clicking on the link provided will 
+bring you to the project summary page which is the default starting point for all 
 the project administration.
 </p>
 </section>
@@ -129,10 +127,9 @@ CVS GUI you are using, such as WinCVS.
 
 In your UNIX home directory there exists a file called <code>.rhosts</code>. This file 
 requires special permissions, namely :<br/>
-<source><![CDATA[
-
+<source>
 	-rw-r--r--   .rhosts
-]]></source>
+</source>
 
 
 If this is not correct, you will encounter problems trying to access CVS. If 
@@ -152,10 +149,9 @@ which you are accessing CVS. The format of the file is as follows:<br/>
 It is recommended that fully qualified domain names are used, or IP addresses, 
 as this seems to solve problems arising due to machines in different offices 
 accessing each other. The last line of the file may optionally be<br/>
-<source><![CDATA[
-
+<source>
 	+ username 
-]]></source>
+</source>
 
 <br/>
 
@@ -175,12 +171,10 @@ top level for the directory structure of the repository.
 
 This is done using the cvs import command. The following steps show how it 
 can be done.<br/>
-<source><![CDATA[
-
-	$ cd &amp;lt;top of tree&amp&gt;>;
-	$ cvs import <&amp&lt;module-name&ampgt; &lt;vendor-tag&gt; &lt;release-tag&gt;
-
-]]></source>
+<source>
+	$ cd &amp;&lt;top of tree&amp;&gt;>;
+	$ cvs import &amp;&lt;module-name&amp;gt; &lt;vendor-tag&gt; &lt;release-tag&gt;
+</source>
 <br/>
 
 e.g. suppose we wish to import a directory structure called myproject, which was 
