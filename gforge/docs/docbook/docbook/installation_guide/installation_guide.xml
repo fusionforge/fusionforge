@@ -490,13 +490,6 @@ DirectoryIndex index.php cvsweb.cgi index.html index.htm
 			<orderedlist>
 				<listitem><para>Login as <literal>root</literal> user</para></listitem>
 				<listitem>
-					<para>Create a directory <filename class="directory">gforge-files</filename>:</para>
-					<screen># mkdir /var/www/gforge-files</screen>
-					<para>Make this directory writeable by Apache:</para>
-					<screen># chown -R apache.apache /var/www/gforge-files</screen>
-					<para>This directory will contain all files/patches uploaded to your gforge site.</para>
-				</listitem>
-				<listitem>
 					<para>Create a directory <filename class="directory">/etc/gforge</filename></para>
 				</listitem>
 				<listitem>
