@@ -71,7 +71,20 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
 	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="approve-pending.php"><strong>P</strong> <?php echo $Language->getText('admin_index','pending_status'); ?></a> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></li>
-	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="search.php?groupsearch=1&amp;search=%&amp;status=D"><strong>D</strong> <?php echo $Language->getText('admin_index','deleted_status'); ?></a></li>
+	<li>
+	<?php echo $Language->getText('admin_index','groups_with_status'); ?>
+	<form name="projectsearch" action="search.php">
+	<select name="status">
+			<option value="D">D</option>
+			<option value="A">A</option>
+			<option value="H">H</option>
+			<option value="P">P</option>
+	</select>
+	<input type="hidden" name="groupsearch" value="1">
+	<input type="hidden" name="search" value="%">
+	<input type="submit" value="<?php echo $Language->getText('general','submit');?> "/>
+	</form>
+	</li>
 	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>
 </ul>
 
