@@ -76,27 +76,30 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$assignedArtifacts =& $artifactsForUser->getAssignedArtifactsByGroup();
 	if (count($assignedArtifacts) > 0) {
 		foreach($assignedArtifacts as $art) {
-			echo '</td></tr>';
-			if ($art->ArtifactType->getID() != $last_group) {
+			if($art->ArtifactType->Group->getStatus() == 'A') {
+				echo '</td></tr>';
+				if ($art->ArtifactType->getID() != $last_group) {
+					echo '
+					<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
+					$art->ArtifactType->Group->getID().'&atid='.
+					$art->ArtifactType->getID().'">'.
+					$art->ArtifactType->Group->getPublicName().' - '.
+					$art->ArtifactType->getName().'</a></strong></td></tr>';
+	
+				}
 				echo '
-				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
-				$art->ArtifactType->Group->getID().'&atid='.
-				$art->ArtifactType->getID().'">'.
-				$art->ArtifactType->Group->getPublicName().' - '.
-				$art->ArtifactType->getName().'</a></strong></td></tr>';
-
+				<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
+				<td width="10%">'.$art->getID().'</td>
+				<td><a href="/tracker/?func=detail&amp;aid='.
+				$art->getID().
+				'&amp;group_id='.$art->ArtifactType->Group->getID().
+				'&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() . '</a>';
+	
+				$last_group = $art->ArtifactType->getID();
 			}
-			echo '
-			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
-			<td width="10%">'.$art->getID().'</td>
-			<td><a href="/tracker/?func=detail&amp;aid='.
-			$art->getID().
-			'&amp;group_id='.$art->ArtifactType->Group->getID().
-			'&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() . '</a>';
-
-			$last_group = $art->ArtifactType->getID();
 		}
-	} else {
+	}
+	if($last_group == '0') {
 		echo '
 			<strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong>';
 	}
@@ -106,26 +109,29 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
 		foreach ($submittedArtifacts as $art) {
-			echo '</td></tr>';
-			if ($art->ArtifactType->getID() != $last_group) {
+			if($art->ArtifactType->Group->getStatus() == 'A') {
+				echo '</td></tr>';
+				if ($art->ArtifactType->getID() != $last_group) {
+					echo '
+					<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
+					$art->ArtifactType->Group->getID().'&atid='.
+					$art->ArtifactType->getID().'">'.
+					$art->ArtifactType->Group->getPublicName().' - '.
+					$art->ArtifactType->getName().'</a></strong></td></tr>';
+				}
 				echo '
-				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
-				$art->ArtifactType->Group->getID().'&atid='.
-				$art->ArtifactType->getID().'">'.
-				$art->ArtifactType->Group->getPublicName().' - '.
-				$art->ArtifactType->getName().'</a></strong></td></tr>';
+				<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
+				<td width="10%">'.$art->getID().'</td>
+				<td><a href="/tracker/?func=detail&amp;aid='.
+	      $art->getID().
+	      '&amp;group_id='.$art->ArtifactType->Group->getID().
+	      '&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() .'</a>';
+	
+				$last_group = $art->ArtifactType->getID();
 			}
-			echo '
-			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
-			<td width="10%">'.$art->getID().'</td>
-			<td><a href="/tracker/?func=detail&amp;aid='.
-      $art->getID().
-      '&amp;group_id='.$art->ArtifactType->Group->getID().
-      '&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() .'</a>';
-
-			$last_group = $art->ArtifactType->getID();
 		}
-	} else {
+	}
+	if($last_group == '0') {
 		echo '
 		<strong>'.$Language->getText('my', 'no_tracker_items_submitted').'</strong>';
 	}
