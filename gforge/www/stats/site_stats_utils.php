@@ -422,7 +422,7 @@ function stats_site_projects_monthly() {
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_months',array($GLOBALS['valid_months'])); ?>;</strong></p>
+		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_months',array($valid_months)); ?></strong></p>
 
 		<p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
