@@ -1,4 +1,4 @@
-gforge (3.1-4+4) unstable; urgency=low
+gforge (3.1-4+5) unstable; urgency=low
 
   * [Roland] Tightened the versioned dependency on Apache so that we can
     rely on modules-config (closes: #220872).
@@ -13,8 +13,11 @@ gforge (3.1-4+4) unstable; urgency=low
     $PATH does not include /usr/sbin.
   * [Roland] Remove .ssh/authorized_keys when they are set to empty,
     instead of just leaving them as they are.
+  * [Roland] Added support for apache-perl too.
+  * [Roland] Fixed the way we use modules-config so that gforge-web-apache
+    does not hang on install (closes: #221172).
 
- -- Roland Mas <lolando@debian.org>  Sat, 22 Nov 2003 17:12:03 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 22 Nov 2003 18:23:06 +0100
 
 gforge (3.1-4) unstable; urgency=low
 

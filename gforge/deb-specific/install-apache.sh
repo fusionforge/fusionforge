@@ -70,6 +70,12 @@ case "$1" in
 	    /usr/sbin/modules-config apache enable mod_env
 	    /usr/sbin/modules-config apache enable mod_vhost_alias
 	fi
+	if [ -e /etc/apache-perl/httpd.conf ] ; then
+	    /usr/sbin/modules-config apache-perl enable mod_php4
+	    /usr/sbin/modules-config apache-perl enable mod_ssl
+	    /usr/sbin/modules-config apache-perl enable mod_env
+	    /usr/sbin/modules-config apache-perl enable mod_vhost_alias
+	fi
 	if [ -e /etc/apache-ssl/httpd.conf ] ; then
 	    /usr/sbin/modules-config apache-ssl enable mod_php4
 	    /usr/sbin/modules-config apache-ssl enable mod_env
@@ -77,6 +83,9 @@ case "$1" in
 	fi
 	if [ -x /usr/sbin/apache ]; then
 		invoke-rc.d apache restart || true
+	fi
+	if [ -x /usr/sbin/apache-perl ]; then
+		invoke-rc.d apache-perl restart || true
 	fi
 	if [ -x /usr/sbin/apache-ssl ]; then
 		invoke-rc.d apache-ssl restart || true
@@ -96,6 +105,9 @@ case "$1" in
     purge)
 	if [ -x /usr/sbin/apache ]; then
 		invoke-rc.d apache restart || true
+	fi
+	if [ -x /usr/sbin/apache-perl ]; then
+		invoke-rc.d apache-perl restart || true
 	fi
 	if [ -x /usr/sbin/apache-ssl ]; then
 		invoke-rc.d apache-ssl restart || true
