@@ -12,6 +12,10 @@
 	* Made some cleanup in Group.class so everything concerning System is
 	done in System.class
 	* Applied  Mathieu Peltier patch [#993] that generate scm snapshot
+	* Removal of sys_default_theme_id in setup and register.php where it
+	was only used.
+	* Reorganisation of file in etc/httpd.d to handle multiple scm (SVN and
+	CVS tested) on the same box
 	
 2004-12-11  Guillaume Smet <guillaume-gforge@smet.org>
 
