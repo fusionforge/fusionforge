@@ -354,17 +354,17 @@ general	open	aperti
 general	total	totale
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
-group	long_cvs	CVS Repository
-group	long_docman	DocManager: Project Documentation
-group	long_forum	Forum Pubblico
-group	long_ftp	Anonymous FTP Space
+group	long_cvs	Repository CVS
+group	long_docman	DocManager: Documentazione progetto
+group	long_forum	Forum Pubblici
+group	long_ftp	Spazio FTP anonimo
 group	long_homepage	Homepage del progetto
 group	long_mail	Mailing List
 group	long_news	Ultime News
-group	long_pm	Task Manager
+group	long_pm	Attivit&agrave;
 group	long_survey	Sondaggi
 group	project_admins	Amministratori progetto
-group	public_area	Public Areas
+group	public_area	Aree pubbliche
 group	short_admin	Amministrazione
 group	short_cvs	CVS
 group	short_docman	Documentazione
@@ -637,6 +637,10 @@ project_home	public_mailing_lists	mailing list pubbliche
 project_home	messages_in	messaggi in
 project_home	forums	forum
 project_home	surveys	sondaggi
+project_home	tracker_open	$1 aperti/ $2 totale
+project_home	forum_messages	$1 messaggi in $2 forum
+project_home	cvs_commits	<strong>$1</strong> commit, <strong>$2</strong> aggiunte
+
 project_showfiles	error_no_packages_defined_title	Nessun package definito
 project_showfiles	error_no_packages_defined_text	Non &egrave; stato definito alcun package per questo progetto.
 project_showfiles	title	File rilasciati per il progetto
@@ -1059,7 +1063,55 @@ stats_index	site_graphs	Statistiche sul sito aggregate
 stats_index	other_statistics	Altre statistiche :<ul><li><a href="lastlogins.php">Login pi&ugrave; recenti</a></li><li><a href="i18n.php">Statistiche sulle lingue</a></li></ul>
 stats_lastlogins	no_records	Nessun record trovato
 stats_lastlogins	last_logins	Ultimi login
-stats_lastlogins	most_recent_open	Sessioni pi&ugrave; aperte di recente
+stats_lastlogins	most_recent_open	Sessioni aperte pi&ugrave; di recente
 stats_lastlogins	date	Data
 stats_lastlogins	username	Nome utente
 stats_lastlogins	source_ip	Indirizzo IP
+stats_projects	project_comparision	Comparazioni statistiche dei progetti
+stats_site_utils	all_projects	Tutti i progetti
+stats_site_utils	special_project_list	Special Project List
+stats_site_utils	returned_no_category	returned no category name
+stats_site_utils 	in_trove_category	Projects in trove category:
+stats_site_utils	or_special_project_list	OR enter Special Project List: 
+stats_site_utils 	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	report	Report: 
+stats_site_utils	last_30 ultimi 30
+stats_site_utils	all	tutti
+stats_site_utils	view_by	Visualizza per: 
+stats_site_utils	generate_report	Genera Report
+stats_site_utils	group_name	Group Name
+stats_site_utils	page_views	Page Views
+stats_site_utils	downloads	Downloads
+stats_site_utils	bugs	Bug
+stats_site_utils	support	Support
+stats_site_utils	patches	Patch
+stats_site_utils	all_trkr	Tutti i tracker
+stats_site_utils	tasks	Attivit&agrave;
+stats_site_utils	cvs	CVS
+stats_site_utils	site	Sito
+stats_site_utils	subdomain	Sottodominio
+stats_site_utils	total	Totale
+stats_site_utils	opn	Aperto
+stats_site_utils	cls	Cls
+stats_site_utils	cos	CO's
+stats_site_utils	comms	Comm's
+stats_site_utils	adds	Aggiunte
+stats_site_utils	no_valid_data	Query returned no valid data.
+stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
+stats_site_utils	day	Giorno
+stats_site_utils	site_views	Viste del sito
+stats_site_utils	subdomain_views	Vista per sottodomino
+stats_site_utils	no_data	Nessun dato
+stats_site_utils        statistics_for_the_past_months Statistiche per gli ultimi $1 mesi
+stats_site_utils	month	Month
+stats_site_utils	current_statistic_all_time	Statistiche aggregate 
+stats_site_utils	developers	Sviluppatori
+stats_site_utils	projects	Progetti
+stats_user_graph	new_additions_by_day	Nuove aggiunte, per giorno
+stats_user_graph	new_user_projects	Nuovi Utenti (ROSSO), Nuovi Progetti (BLU)
+stats_user_graph	date	Date
+stats_user_graph	user_projects	Utenti (ROSSO) / Progetto (BLU)
+stats_view_graph	page_views	Pagine viste di Gforge
+stats_view_graph	total_views	Numero di pagine totale viste (ROSSO) ($1 giorni)
+stats_view_graph	views	Viste (ROSSO)
+stats_view_graph	date	Data
