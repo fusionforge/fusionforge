@@ -3,13 +3,13 @@
 /**
  * Massmail backend cron script
  * This is mass mailing backend script which actually sends messages 
- * of the mailings scheduled via the web frontend. It does so by 
- * spooling messages directly to mail server via SMTP protocol.
+ * of the mailings scheduled via the web frontend.
  * Mailing types, for which this is applicable, have trailer
  * appended with individual URL for unsubscription from future
  * mailings.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2003 (c) GForge, LLC
  *
  * @version   $Id$
  *
@@ -33,20 +33,11 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-// SMTP server to connect to
-//$MAILSERVER = "sf-list1";
-$MAILSERVER = "localhost";
-// Whether to feed batch on its entirety and ignore responces or
-// *talk* with server. I decided against using pipelining.
-$PIPELINE = 0;
-// Number of users to mail during single run
-$CHUNK = 2000;
-// Size of SMTP batch (so many messages are sent in one connection)
-$BATCH = 20;
-// Pause between batches, sec
-$SLEEP = 10;
-// Dump batches to file instead sending them over socket
-$TEST = 0;
+//bad hack to get around Roland's misuse of Language in utils.php
+$Language = new BaseLanguage();
+
+// Pause between messages, sec
+$SLEEP = 1;
 
 // This tables maps mailing types to tables which required to perform it
 $table_mapping = array(
@@ -54,7 +45,7 @@ $table_mapping = array(
 	'SITE'	=> "users",
 	'COMMNTY' => "users",
 	'DVLPR'   => "users,user_group",
-	'ADMIN'   => "users,user_group",
+	'ADMIN'   => "users,user_group,groups",
 	'SFDVLPR' => "users,user_group",
 );
 
@@ -65,13 +56,9 @@ $cond_mapping = array(
 	'SITE'	=> "AND mail_siteupdates=1",
 	'COMMNTY' => "AND mail_va=1",
 	'DVLPR'   => "AND users.user_id=user_group.user_id",
-	'ADMIN'   => "AND users.user_id=user_group.user_id AND user_group.admin_flags='A'",
+	'ADMIN'   => "AND users.user_id=user_group.user_id AND user_group.admin_flags='A' AND groups.status='A' AND groups.group_id=user_group.group_id",
 	'SFDVLPR' => "AND users.user_id=user_group.user_id AND user_group.group_id=1"
 );
-
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-	exit_permission_denied();
-}*/
 
 $mail_res = db_query("SELECT *
 	FROM massmail_queue
@@ -94,8 +81,7 @@ if (!$mail_res) {
 			."database table. Please take appropriate actions.\n"
 		);
 	}
-
-	exit(1);
+	cron_entry(6,$err);
 }
 
 // $err .= "Got ".db_numrows($mail_res)." rows\n";
@@ -108,7 +94,8 @@ if (db_numrows($mail_res)<1) {
 $type = db_result($mail_res, 0, 'type');
 if (!$table_mapping[$type]) {
 	$err .= "Unknown mailing type\n";
-	exit(1);
+	cron_entry(6,$err);
+	exit();
 }
 
 $subj = db_result($mail_res, 0, 'subject');
@@ -116,17 +103,17 @@ $mail_id = db_result($mail_res, 0, 'id');
 
 //$err .= "Got mail to send: ".$subj."\n";
 
-$sql = "SELECT users.user_id,user_name,realname,email,confirm_hash
-	FROM ".$table_mapping[$type]."
+$sql = "SELECT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
+	FROM $table_mapping[$type]
 	WHERE users.user_id>".db_result($mail_res, 0, 'last_userid')."
-	AND status='A'
+	AND users.status='A'
 	".$cond_mapping[$type]."
 	ORDER BY users.user_id";
 
 //$err .= $sql;
 
 // Get next chunk of users to mail
-$users_res = db_query($sql, $CHUNK);
+$users_res = db_query($sql);
 
 $err .= "Mailing ".db_numrows($users_res)." users.\n";
 
@@ -134,13 +121,9 @@ $err .= "Mailing ".db_numrows($users_res)." users.\n";
 if ($users_res && db_numrows($users_res)==0) {
 	db_query("UPDATE massmail_queue
 		SET failed_date=0,finished_date='".time()."'
-		WHERE id=$mail_id");
+		WHERE id='$mail_id'");
 	exit();
 }
-
-$batch_no = 0;
-$count = 0;
-$last_userid = 0;
 
 // These mailing types should include unsubscription info
 if ($type=='SITE' || $type=='COMMNTY') {
@@ -153,135 +136,30 @@ if ($type=='SITE' || $type=='COMMNTY') {
 		   ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
 }
 $body = db_result($mail_res, 0, 'message');
-//$lines = explode("\n", $body);
-//$crlf_body = implode("\r\n", $lines);
-
-// Get SMTP response
-function get_resp() {
-	global $out;
-	global $response;
-	
-	$response = fgets($out, 500);
-//	$err .= ">$response";
-	return substr($response, 0, 3);
-}
-
-// Expect given response, fail with $diag otherwise
-function expect($diag, $resp) {
-	global $PIPELINE;
-	global $response;
-	
-	if (!$PIPELINE) {
-		if (get_resp()!=$resp) {
-			$err .= "Error: $diag: $response";
-			exit(1);
-		}
-	}
-}
-
-// Start new batch
-function start_batch() {
-	global $out;
-	global $batch_no;
-	global $sys_default_domain;
-	global $MAILSERVER;
-	global $TEST;
-
-	if ($TEST) {
-		$out = fopen("!batch.$batch_no","wb");
-	} else {
-		$out = fsockopen($MAILSERVER, 25, $errno, $errstr);
-	}
-	
-	if (!$out) {
-		$err .= "Error connecting to SMTP: $errstr\n";
-		exit(1);
-	}
-	if (!$TEST) {
-		$resp = fgets($out,200);
-		if (substr($resp,0,3)!="220") {
-			$err .= "Server is not ready to receive messages\n";
-			exit(1);
-		}
-	}
-	fputs($out,"HELO $sys_default_domain\r\n");
-	expect("HELO", "250");
-}
-
-// Finish new batch
-function flush_batch() {
-	global $out;
-	global $count;
-	global $last_userid;
-	global $mail_id;
-	global $TEST;
-
-	if ($count) {
-		fputs($out,"QUIT\r\n");
-		if (!$TEST) {
-//			fpassthru($out);
-			while (!feof($out)) {
-				fgets($out, 200);
-			}
-			fclose($out);
-		} else {
-			fclose($out);
-		}
-		$count = 0;
-
-		$sql="UPDATE massmail_queue
-			SET failed_date=0,
-			last_userid=$last_userid
-			WHERE id=$mail_id";
-//		$err .= $sql;
-		db_query($sql);
-
-		sleep($SLEEP);
-	}
-}
-
 
 // Actual mailing loop
-while ($row = db_fetch_array($users_res)) {
+while ($row =& db_fetch_array($users_res)) {
 
-	if (!$count) {
-		$batch_no++;
-		start_batch();
-	}
+	util_send_message($row['email'],$subj,$body."\r\n".sprintf( $tail,$row['confirm_hash'] ),'noreply@'.$sys_default_domain );
+//echo "$row[email],$subj,$body.\r\n".sprintf( $tail,$row['confirm_hash'] ).",'noreply@'.$sys_default_domain";
 
-//	$err .= "Sending for: ".$row['user_id']."\n";
-
-//	$row['email'] = 'test@email';
-
-	fputs($out,"MAIL FROM: noreply@$sys_default_domain\r\n");
-	expect("MAIL", "250");
-	fputs($out,"RCPT TO: ".$row['email']."\r\n");
-	expect("RCPT", "250");
-	fputs($out,"DATA\r\n");
-	expect("DATA", "354");
-	fputs(
-		$out,
-		"From: Mailer <noreply@$sys_default_domain>\r\n"
-		."To: \"".strtr($row['realname'],'"',"'")."\" <".$row['email'].">\r\n"
-		."Subject: ".$subj."\r\n"
-		."\r\n"
-		.$body
-		."\r\n"
-		.s$err .=f($tail,$row['confirm_hash'] )
-		."\r\n.\r\n"
-	);
-	expect("DATA end", "250");
+echo "\n".$row['email'].$row['user_id'];
 
 	$last_userid = $row['user_id'];
 
-	if (++$count == $BATCH) {
-		flush_batch();
-	}
+	sleep($SLEEP);
 }
 
-flush_batch();
+$sql="UPDATE massmail_queue
+	SET failed_date=0,
+	last_userid='999999999'
+	WHERE id='$mail_id'";
 
-// $err .= "end\n";
+db_query($sql);
+
+if (db_error()) {
+	$err .= $sql.db_error();
+}
 
 cron_entry(6,$err);
 
