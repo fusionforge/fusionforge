@@ -17,6 +17,9 @@ if (isset($group_id) && $group_id) {
 	$log_group=$group_id;
 } else if (isset($form_grp) && $form_grp) {
 	$log_group=$form_grp;
+} else if (isset($group_name) && $group_name) {
+	$group =& group_get_object_by_name($group_name);
+	if ($group) $log_group=$group->getID();
 } else {
 	//
 	//
