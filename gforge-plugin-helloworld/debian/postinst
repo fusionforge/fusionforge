@@ -26,6 +26,7 @@ set -e
 case "$1" in
     configure)
 	/usr/lib/sourceforge/bin/sf-register-plugin helloworld "Hello world"
+	invoke-rc.d apache reload
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
