@@ -1,5 +1,5 @@
 nothing:
-	echo "What do you want I do?
+	echo "What do you want I do?"
 
 clean:
 	find | grep "~$$"	
