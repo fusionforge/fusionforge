@@ -30,6 +30,7 @@ CREATE TABLE "trove_cat" (
 	Constraint "trove_cat_pkey" Primary Key ("trove_cat_id")
 );
 
+INSERT INTO trove_cat VALUES (0,2000010101,0,0,'root','Root Category','Root Category',0,0,'Root Category',0);
 --
 -- Data for TOC Entry ID 538 (OID 21761)
 --
