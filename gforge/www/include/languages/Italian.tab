@@ -32,42 +32,42 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
+account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email::\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
 account_change_email	subject	$1 verifica
-account_change_email	mailsent	<P>Un messaggio di posta elettronica &egrave; stato inviato al nuovo indirizzo. Follow the instructions in the email to complete the email change. <P><A href="/">[ Home ]</A> 
-account_change_email	desc	<P>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.
+account_change_email	mailsent	<P>Un messaggio di posta elettronica &egrave; stato inviato al nuovo indirizzo. Seguire le istruzioni contenute nel messaggio per completare il cambio di email. <P><A href="/">[ Home ]</A> 
+account_change_email	desc	<P>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.  <P>&Egrave; necessario mantenere un indirizzo email corretto per ogni utente dato gli accessi che consentiamo a questo account. Se &egrave; necessario raggiungere un utente per argomenti relativi ad un account shell oppure di progetto, &egrave; necessario che siamo in grado di farlo.  <P>Cliccando su Invia nel form invier&agrave; un messaggio contenente un URL per confermare il nuovo indirizzo di posta elettronica. Il cambio sar&agrave; completato quando il link di conferma sar&agrave; visitato.
 account_change_pw	confirmation	<h2>$1 Conferma di cambio password</h2>	<p>	Congratulazioni, la password &egrave; stata cambiata.	</p>
-account_first	about_blurb	Sei un utente registrato su $1, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message Forum, post bugs for software in $1, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of $1.<P>Enjoy the site, and please provide us with feedback on ways that we can improve $1.<P>--the $1 staff
-account_login	deleted_account	<p>Il tuo account $1 &egrave; stato rimosso dal team di $1. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
-account_login	pending_account	<P>Il tuo account &egrave; in attesa di approvazione di conferma via email.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
+account_first	about_blurb	Sei un utente registrato su $1, l'ambiente di sviluppo online per progetti Open Source.<P>Come utente registrato, puoi partecipare pienamente a tutte le attivit&agrave; del sito. Potrai inserire messaggi nei forum dei progetti, inserire bug in $1, farti registrare come sviluppatore oppure iniziare il tuo progetto.<P>Dovresti prenderti un po' di tempo per leggere la <A href="/docs/site/"><b>Documentazione del sito</b></A> in modo tale da poter sfruttare pienamente $1.<P>Grazie per esserti registrato e forniscici un feedback in modo tale che noi possiamo migliorare il sito$1.<P>--il team $1 
+account_login	deleted_account	<p>Il tuo account $1 &egrave; stato rimosso dal team di $1. Questo pu&ograve; accadere per due ragioni: 1) hai richiesto che il tuo account venga rimosso  2) sono state effettuate delle azioni non concesse dal tuo account. 
+account_login	pending_account	<P>Il tuo account &egrave; in attesa di approvazione di conferma via email.	Il tuo account verr&agrave; attivato quando visiterai il link indicato in questo messaggio. <P>Cliccando sotto il messaggio di conferma ti verr&agrave; nuovamente inviato.		<P><A href="pending-resend.php?form_user=$1">[Re-invia email di conferma]</A>		<br><hr>		<p>
 account_login	cookiewarn	I Cookie devono essere abilitati 
 account_login	loginname	Login:
 account_login	passwd	Password:
 account_login	login	Login con SSL
 account_login	lostpw	[Hai perso la password?]
 account_login	newaccount	[Nuovo Utente]
-account_lostpw	message	Qualcuno (presumibilmente te) sul sito $3 ha richiesto\n un cambio di password tramite verifica email. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
-account_lostpw	subject	$1 Verification
+account_lostpw	message	Qualcuno (presumibilmente te) sul sito $3 ha richiesto\n un cambio di password tramite verifica email. Se non sei stato tu,\nignora questo messaggio, non succeder&agrave; nulla.\n\nSe hai richiesto la verifica, visita il link seguente \nper cambiare la tua password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- il team $3\n
+account_lostpw	subject	$1 Verifica
 account_lostpw	notify	<P>Un email &egrave; stata inviata all'indirizzo indicato nel database. Seguire le istruzioni nell'email per cambiare la password. <P><A href="/">[ Home ]</A>
-account_lostpw	warn	<P>Attenzione... perdere la propria password &egrave; una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero. <P>Cliccando su "Invia Hash di password persa" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
+account_lostpw	warn	<P>Attenzione... perdere la propria password &egrave; una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero. <P>Cliccando su "Invia Hash di password persa" verr&agrave; inviato un link all'indirizzo email registrato. Questo link contiene un hash di conferma a 128-bit per il tuo account. Visitando il link indicato nella email sarai in grado di cambiare la password online.
 account_lostpw	sendhash	Invia Hash di password persa
 account_lostlogin	severalconfirm	Il hash di conferma esiste pi&ugrave; volte.
 account_lostlogin	invalidconfirm	Il hash di conferma non &egrave; valido.
 account_lostlogin	sixchars	La password deve essere valida  (minimo 6 caratteri).
 account_lostlogin	notmatch	Le password non corrispondono.
-account_lostlogin	passwdchanged	<h2>Password changed</h2><p>Congratulations, you have re-set your account password.You may <a href="/account/login.php">login</a> to the sitenow.</p>
-account_lostlogin	welcome	<h2>Lost Password Login</h2><P>Welcome, $1. You may now change your password.
+account_lostlogin	passwdchanged	<h2>Password cambiata</h2><p>La password &egrave; stata re-impostata. Puoi <a href="/account/login.php">loggarti</a> al sito.</p>
+account_lostlogin	welcome	<h2>Login di password persa</h2><P>Benvenuto, $1. Adesso puoi cambiare la tua password.
 account_lostlogin	newpasswd	Nuova Password (minimo 6 caratteri)
 account_lostlogin	newpasswd2	Conferma nuova password
 account_lostlogin	update	Aggiorna
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.  <p> Ti verr&agrave; inviata una email di conferma per verificare il tuo indirizzo email. Collegati al link indicato nella email per abilitarti.
-account_register	loginname	Login (non usare maiuscole)*:
+account_register	loginname	Login (non usare maiuscole) *:
 account_register	password	Password (minimo 6 caratteri) *:
 account_register	password2	Conferma password *:
 account_register	realname	Nome intero *:
 account_register	language	Lingua di preferenza:
 account_register	timezone	Timezone:
-account_register	emailaddr	Indirizzo email *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	emailaddr	Indirizzo email *: <BR><I>Questo indirizzo email sar&agrave; verificato prima dell'attivazione dell'account e non verr&agrave; visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che rimander&agrave; le mail a questo indirizzo.</I>
 account_register	jabberaddr	Indirizzo Jabber:
 account_register	jabberonly	Invia notifiche solo a questo indirizzo
 account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito  <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione).</I>
@@ -86,7 +86,7 @@ account_register	err_userexist	Il nome &egrave; gi&agrave; usato da un altro ute
 account_register	err_mailexist	Sul sistema esiste gi&agrave; un utente con questo indirizzo di posta elettronica - usa la ricerca persone per recuperare la tua login.
 account_register	err_badinsert	Inserimento fallito
 account_register	message_header	Registrazione Account Gforge
-account_register	message_body	Grazie per la tua registrazione. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
+account_register	message_body	Grazie per la tua registrazione. \nE' stato creato un account con nome utente $1.\nPer completare la registrazione, visita l'URL: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(se non vedi alcuni link, è probabile che esista un bug nel tuo sistema di email.\nUsa il seguente, assicurandoti che tutto venga inserito in una riga sola.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\\nGrazie.\n\n-- il team\n
 account_register	partecipate_peer_ratings	Partecipa alle quotazioni. <I>(Permette di quotare altri utenti utilizzando criteri diversi ed essere quotato da altri. Se avete intenzione di partecipare alle quotazione, potete ottenere maggiori informazioni sulla vostra $1 homepage </a>).
 account_register	remember_me	"Ricordami". <I>(Permette di accedere alla $1 pagina personale </a> senza essere loggato. &Egrave; comunque necessario loggarsi prima di fare qualsiasi modifica).</I>
 account_register	update	Applica Modifiche
@@ -177,7 +177,7 @@ docman_admin_editgroups	edit_group	Modifica un gruppo
 docman_admin_editgroups	description	Il nome del gruppo sar&agrave; utilizzato come titolo.
 docman_admin_editgroups	group_name	Nome gruppo
 docman_admin_editgroups	group_id	ID gruppo
-docman_admin_groupdelete	title	Delete Document Group
+docman_admin_groupdelete	title	Cancella gruppi di documenti
 docman_common	error_min_title_length	Il titolo del documento deve essere almeno di 5 caratteri
 docman_common	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
 docman_common	no_docs	Nessun documento trovato
@@ -318,11 +318,11 @@ frs	latest_file_releases	Ultimi rilasci
 frs	file_monitor	Notifica
 frs_release	email_title	[Rilascio $1 Release]: $2
 frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
-frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
-frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
-frs_file	error_invalid_file	FRSFile Appears to be invalid
+frs_file	error_min_name_length	FRSFile La lunghezza minima del nome &egrave; di 3 caratteri
+frs_file	error_name_format	Il nome del file dovrebbe seguire un formato simile a: gforge-3.0.tar.bz2
+frs_file	error_invalid_file	Il file sembra non essere valido
 frs_file	error_already_exists	Il nome del file esiste gi&agrave; all'interno di questo progetto
-frs_file	error_cannot_move	File cannot be moved to the permanent location
+frs_file	error_cannot_move	Il file non pu&ograve; essere spostato nella directory finale
 general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Impossibile recuparare il permesso
@@ -549,7 +549,7 @@ pm_admin_projects	add_edit_categories	Aggiungi/modifica categorie
 pm_admin_projects	admin_title	Amministrazione Progetto/Attivit&agrave;
 pm_admin_projects	add_project	Aggiungi un progetto
 pm_admin_projects	add_project_intro	Aggiungi un progetto, che contiene un insieme di attivit&agrave. Questo &egrave; diverso che aggiungere una attivit&agrave; al progetto
-pm_admin_projects	no_projects_found	<h2>Nessun progetto trovato</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.
+pm_admin_projects	no_projects_found	<h2>Nessun progetto trovato</h2><p>. &Egrave; possibile aggiungere nuovi progetti usando il link "Aggiungi un progetto".
 pm_admin_projects	edit_update	Modifica/aggiorna progetto
 pm_admin_projects	project_title	Titolo
 pm_admin_projects	add_categories_to	Aggiungi categorie a
@@ -577,7 +577,6 @@ pm_detailtask	assigned_to	Assegnato a:
 pm_detailtask	dependend_on_task	Dipende da attivit&agrave;
 pm_detailtask	hours	Ore
 pm_detailtask	status	Stato
-
 pm_modtask	title	Modifica attivit&agrave;
 pm_modtask	submitted_by	Inserito da
 pm_modtask	original_comment	Commento originale
@@ -586,19 +585,18 @@ pm_reporting	title	Sistemi di reportistica per le attivit&agrave;
 pm_reporting	aging_report	Aging Report
 pm_reporting	by_tech	Report per tecnico
 pm_reporting	by_subproject	Report per sottoprogetto
-pm_reporting	average_duration	Average duration for closed tasks (days)
+pm_reporting	average_duration	Durata media per attivit&agrave; chiuse (giorni)
 pm_reporting	started_tasks	Numero di attivit&agrave; iniziate
 pm_reporting	not_completed	Numero di attivit&agrave; non ancora completate
 pm_reporting	tasks_by_category	Attivit&agrave; per categoria
 pm_reporting	open_tasks_by_category	Attivit&agrave; aperte per categoria
-pm_reporting	all_tasks_by_category	All Tasks By Category
-pm_reporting	not_completed	Number of Tasks Still Not Completed
-pm_reporting	started_tasks	Number of Tasks Started
-pm_reporting	average_duration	Average Duration For Closed Tasks (days)
-pm_reporting	tasks_by_technician	Tasks By Technician
-pm_reporting	open_tasks_by_technician	Open Tasks By Technician
-pm_reporting	all_tasks_by_technician	All Tasks By Technician
-pm_reporting	report_note	Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
+pm_reporting	all_tasks_by_category	Tutte le attivit&agrave; per categoria
+pm_reporting	not_completed	Numero di attivit&agrave; non ancora completate
+pm_reporting	started_tasks	Numero di attivit&agrave; iniziate
+pm_reporting	tasks_by_technician	Attivit&agrave; per tecnico
+pm_reporting	open_tasks_by_technician	Attivi&agrave; aperte per tecnico
+pm_reporting	all_tasks_by_technician	Tutte le attivi&agrave; per tecnico
+pm_reporting	report_note	Un attivit&agrave; pu&ograve; essere assegnata a pi&ugrave; tecnici; queste attivit&agrave; sar&agrave; conteggiata per ognuno degli assegnatari.</p>
 pm_include_grouphtml	project	Progetto
 pm_include_grouphtml	add_task	Aggiungi attivit&agrave;
 pm_include_grouphtml	browse_task	Elenca attivit&agrave;
@@ -645,7 +643,7 @@ pm_projecttask	mail_followups_body	\nData: $1\nDa: $2\n\nCommento:\n$3
 pm_projecttask	mail_followups_footer	Per maggiori informazioni, collegati a:
 pm_projecttask	mail_followups_subject	Attività #
 project_home	title	Informazioni progetto
-project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
+project_home	holding_note	NOTA: Questo progetto &egrave; mantenuto dal team di $1, non &egrave; per&ograve; il sito ufficiale di questo progetto. Ulteriori informazioni sul copyright possono essere trovate sulla homepage del progetto.
 project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
 project_home	help_wanted_multiple	persone che occupano $1 posizioni diverse</a>
 project_home	view_members	Visualizza membri
@@ -693,9 +691,9 @@ project_memberlist	username	utente
 project_memberlist	role	Ruolo/Posizione
 project_memberlist	skills	Competenze
 project_memberlist	view	Visualizza
-sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>
+sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p>Compila tutti i campi oppure il destinatario non sar&agrave; in grado di rispondere.<P><FONT COLOR="RED"><B>SE STAI CERCANDO AIUTO:</B> Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</FONT>
 users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri. <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
-users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non. <ul> <li> Il campo The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users. <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only. <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight. </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non. <ul> <li> Il campo The "Posizione globale"  mostra la posizione dell'utente rispetto a tutti gli altri utenti quotati di $1 . <li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted". <li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sar&agrave; dato alle quotazioni di altri utenti  -- quotazioni di utenti pi&ugrave; quotati avranno un peso maggiore. </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
 users	optout	Hai selezionato di non partecipare alle quotazioni, perci&ograve; non puoi quotare questo utente. Vai a <a href="/account/">opzioni utente </a> per maggiori informazioni.
 users	user_not_exist_title	L'utente non esiste
 users	no_user_name	Nessun nome utente specificato
@@ -705,8 +703,8 @@ user_home	skills_profile	Profilo delle competenze
 user_home	user_id	Id Utente
 user_home	login_name	Login 
 user_home	real_name	Nome
-user_home	email	Email Addr.
-user_home	jabber_address	Jabber Address
+user_home	email	Indirizzo email:
+user_home	jabber_address	Indirizzo jabber:
 user_home	personal_information	Informazioni utente
 user_home	site_member_since	Registrato il:
 user_home	contact	Contatto
@@ -719,7 +717,7 @@ user_home	send_a_message	Invia un messaggio a
 user_home	peer_rating	Quotazioni
 user_home	peer_rating_disabled	L'utente ha selezionato di non partecipare alle quotazioni
 user_home	diary_notes	Diario e Note
-user_home	diary_notes_entries	Diary/Note entries:
+user_home	diary_notes_entries	Elementi Diario/Note:
 user_home	diary_notes_view	Visualizza Diario e Note
 user_home	diary_notes_monitor	Notifica questo diario
 user_home	project_info	Informazioni progetto
@@ -761,13 +759,13 @@ session	deleted	Utente cancellato
 session	notactive	Utente non attivo
 global	error	ERROR
 common_include_account	sixchar	La lunghezza della password deve essere di almeno 6 caratteri.
-common_include_account	nospace	There cannot be any spaces in the login name.
+common_include_account	nospace	Nel nome login non possono esserci spazi
 common_include_account	tooshort	Nome troppo corto, la lunghezza minima &egrave; di 3 caratteri.
 common_include_account	toolong	Nome troppo lungo, la lunghezza massima &egrave; di 15 caratteri.
 common_include_account	illegal	Illegal character in name.
 common_include_account	cvsreserved	Il nome &egrave; riservato per CVS.
 common_include_account	dnsreserved	Il nome &egrave; riservato per DNS.
-common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
+common_include_account	nounderscore	Il nome del gruppo non pu&ograve; contenere caratteri sottolineato (_)
 calendar	title	Calendario
 calendar	view	Visualizza
 calendar	january	gennaio
@@ -796,7 +794,7 @@ calendar	comingyear	L'anno prossimo
 calendar	fordate	Per la data:
 calendar	update	Applica Modifiche
 calendar	todaysdate	Oggi.
-calendar	view	View:
+calendar	view	Visualizza
 calendar	selecteddate	La data scelta (se &egrave; differente da quella odierna).
 calendar	task_link_title	Sommario attivit&agrave;: $1
 calendar	task_begins	Termine attivit&agrave; $1 
@@ -810,7 +808,7 @@ calendar	invaliddayexplain	Il giorno deve essere compreso tra 1 e 31.
 calendar	invaliddate	Data non valida
 calendar	invaliddateexplain	$1 non &egrave; una data valida.
 calendar	invalidtype	"Type" non valida
-calendar	invalidtypeexplain	Il "type" &egrave; invalida.
+calendar	invalidtypeexplain	Il "type" non &egrave; valido
 searchbox	softwaregroup	Software/Gruppo
 searchbox	skill	Competenza
 searchbox	people	Persone
@@ -864,24 +862,24 @@ register	project_unix_name	<h3>5. Nome unix del progetto</h3><p>In addition to f
 register	i_agree	Approvo
 register	i_disagree	Non approvo
 register	title	Registrazione nuovo progetto
-register_complete	section	New Project Registration
+register_complete	section	Registrazione nuovo progetto
 register_complete	title	Registrazione completata
-register_projectinfo	section	New Project Registration
-register_projectinfo	title	Project Information
-register_requirements	section	New Project Registration
+register_projectinfo	section	Registrazione nuovo progetto
+register_projectinfo	title	Informazioni progetto
+register_requirements	section	Registrazione nuovo progetto
 register_requirements	title	Services & Requirements
-register_tos	section	New Project Registration
+register_tos	section	Registrazione nuovo progetto
 register_tos	title	Terms Of Service Agreement
-tracker	title	Trackers
+tracker	title	Tracker
 tracker	choose	Seleziona un tracker e puoi visualizzare/aggiungere o modificare elementi.
 tracker	item_created	Elemento creato con successo
 tracker	updated_successful	Aggiornato con successo
 tracker	tracker_item	Tracker Item
-tracker	file_upload_successful	File Upload: Successful
-tracker	file_delete_upload	File Upload
-tracker	file_delete	File Delete: 
-tracker	file_delete_successful	File Delete: Successful
-tracker	comment_added	Comment Added
+tracker	file_upload_successful	Upload file eseguito
+tracker	file_delete_upload	Upload file
+tracker	file_delete	Cancellazione file:
+tracker	file_delete_successful	Cancellazione file eseguita
+tracker	comment_added	Commento aggiunto
 tracker	reporting	Reportistica
 tracker	admin	Amministra
 tracker_add	submit		Invia
@@ -916,7 +914,6 @@ tracker	category_any	Tutte
 tracker	group_any	Tutti
 tracker	no_trackers	Nessun tracker trovato
 tracker	no_trackers_text	Non &egrave; stato creato nessun tracker oppure non hai le autorizzazioni per visualizzarlo.<p><FONT COLOR=RED>L'amministratore del progetto pu&ograve; creare tracker utilizzando la pagina di $1 amministrazione $2</FONT></strong>
-
 tracker_browse	sort_by	Ordina per
 tracker_browse	request_id	Request ID
 tracker_browse	previous	Indietro
@@ -931,8 +928,8 @@ tracker_browse	mass_update	Aggiornamento multiplo
 tracker_browse	old_requests	* indica richieste pi&ugrave; di > $1 giorni
 tracker_browse	no_items	Nessun elemento trovato
 tracker_detail	title	Dettaglio
-tracker_detail	build_task_relation	Build Task Relation
-tracker_detail	add_comment	Add A Comment
+tracker_detail	build_task_relation	Costruisci relazione con attivi&agrave;
+tracker_detail	add_comment	Aggiungi commento
 tracker_detail	security_note	NON inserire password e informazioni confidenziali!
 tracker_detail	attached_files	File inseriti
 tracker_detail	name	Name
@@ -960,7 +957,7 @@ tracker_mod	description	Descrizione
 tracker_mod	download	Download
 tracker_mod	no_files	Nessun file inserito
 tracker_mod	changelog	Change Log
-tracker_mod	build_task_relation	Costruisce relazione con attivit&agrave;
+tracker_mod	build_task_relation	Costruisci relazione con attivit&agrave;
 tracker_artifacthtml	date	Data
 tracker_artifacthtml	sender	Autore
 tracker_artifacthtml	no_followups	Non sono stati inseriti commenti
@@ -1032,7 +1029,7 @@ tracker_admin_update_group	warning	Non &egrave; raccomandato che si cambia il gr
 tracker_admin_update_type	title	Aggiorna $1
 tracker_admin_update_type	name	<strong> Nome:</strong> (esempio: verbali, risultati di test, documenti, etc.)
 tracker_admin_update_type	description	Descrizione
-tracker_admin_update_type	publicy_available	Publico
+tracker_admin_update_type	publicy_available	Pubblico
 tracker_admin_update_type	allow_anonymous	Permetti inserimenti anonimi
 tracker_admin_update_type	display_resolution	Visualizza la casella "Risoluzione"
 tracker_admin_update_type	send_submissions	Invia email per nuovi inserimenti all'indirizzo
@@ -2057,3 +2054,14 @@ survey_show_results	title	Risultati sondaggi
 survey_show_results	permission_denied	Utente non autorizzato
 survey_show_results	found	trovato
 survey_show_results	view_aggregate_responses	Visualizza risposte aggregate
+new	title	Nuovi file rilasciati
+new	no_new_release_found	Nessun nuovo rilascio trovato
+new	released_by	Rilasciato da: 
+new	module	Modulo: 
+new	version	Versione: 
+new	this_project_has_not	Questo progetto non ha ancora inserito una descrizione
+new	download	Scarica
+new	projects_total	Totali progetto:
+new	notes_changes	Note di rilascio & Changelog
+new	newer_releases	Nuovo rilasci
+new	older_releases	Rilasci precedenti
