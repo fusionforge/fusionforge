@@ -1,0 +1,11 @@
+diff -ruN /tmp/phpdocumentor-1.3.0rc3/phpDocumentor.ini /home/bayle/tmp/phpdocumentor-1.3.0rc3/phpDocumentor.ini
+--- /tmp/phpdocumentor-1.3.0rc3/phpDocumentor.ini	2004-01-11 04:25:39.000000000 +0100
++++ /home/bayle/tmp/phpdocumentor-1.3.0rc3/phpDocumentor.ini	2005-01-04 22:24:30.000000000 +0100
+@@ -26,6 +26,7 @@
+ php4
+ phtml
+ inc
++class
+ 
+ ;; deprecated in 1.2
+ ;; this list is informational only - the following tags will be parsed as
