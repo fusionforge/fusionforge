@@ -118,3 +118,7 @@ MAILTO=""
 #
 #08 * * * * $PHP $GFORGE/cronjobs/mail/mailaliases.php
 
+#
+#   Send email to users with pending tasks
+#
+30 5 * * 1,2,3,4,5 $PHP $GFORGE/cronjobs/daily_task_email.php
