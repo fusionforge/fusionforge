@@ -3,20 +3,20 @@
 //server to use for updates and reads
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
 //to the database.
-$sys_dbhost="{db_host}";
+$sys_dbhost='{db_host}';
 //whether or not to use replication
 $sys_db_use_replication=false;
 $sys_dbreadhost='localhost';
 $sys_dbreaddb='stats';
-$sys_dbname="{db_name}";
-$sys_dbuser="{db_user}";
+$sys_dbname='{db_name}';
+$sys_dbuser='{db_user}';
 // You can also specify a database port if you're using something other than 5432
-//$sys_dbport="4242";
-$sys_server="pgsql";
+//$sys_dbport='4242';
+$sys_server='pgsql';
 
 //
 // Passwords
 //
-$sys_dbpasswd="{db_password}";
-$sys_ldap_passwd="{ldap_web_add_password}";
-$sys_jabber_pass="{sys_jabber_pass}";
+$sys_dbpasswd='{db_password}';
+$sys_ldap_passwd='{ldap_web_add_password}';
+$sys_jabber_pass='{sys_jabber_pass}';
