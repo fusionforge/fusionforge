@@ -1526,7 +1526,7 @@ project_admin	addfromlist2	Choose the role for each user and then press &quot;Ad
 project_admin	choose_first_letter	<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>
 project_admin	user_updated	User Updated Successfully
 project_admin	docmanager_admin	DocManager Admin
-project_admin	download_tarball	Download Your Nightly CVS Tree Tarball
+project_admin	download_tarball	Download Your Nightly SCM Tree Tarball
 project_admin	edit_file_releases	Edit/Add File Releases
 project_admin	edit_member_permissions	Edit Member Permissions
 project_admin	file_releases	File Releases

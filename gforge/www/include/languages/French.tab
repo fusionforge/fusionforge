@@ -1541,7 +1541,7 @@ project_admin	addfromlist1	Cochez la case à côté du nom de l'utilisateur que 
 project_admin	addfromlist2	Choisissez un rôle pour chaque utilisateur et cliquez sur "Ajouter Tous".
 project_admin	choose_first_letter	<p>Choisissez la <strong>première lettre</strong> du nom de la personne que vous souhaitez ajouter.</p>
 project_admin	docmanager_admin	Administration de la documentation
-project_admin	download_tarball	Télécharger une archive de votre CVS (mise à jour chaque nuit)
+project_admin	download_tarball	Télécharger une archive de votre code source (mise à jour chaque nuit)
 project_admin	edit_file_releases	Éditer/Ajouter Versions de fichier
 project_admin	edit_member_permissions	Éditer les permissions des membres
 project_admin	file_releases	Versions de fichier

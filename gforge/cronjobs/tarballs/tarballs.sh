@@ -26,8 +26,8 @@ case "$1" in
     generate)
 	cd $CVSROOT
 	ls | while read dir ; do
-	    tar czf $CVSTARDIR/${dir}-cvsroot.tar.gz.new ${dir}
-	    mv $CVSTARDIR/${dir}-cvsroot.tar.gz.new $CVSTARDIR/${dir}-cvsroot.tar.gz
+	    tar czf $CVSTARDIR/${dir}-scmroot.tar.gz.new ${dir}
+	    mv $CVSTARDIR/${dir}-scmroot.tar.gz.new $CVSTARDIR/${dir}-scmroot.tar.gz
 	done
 	;;
     
