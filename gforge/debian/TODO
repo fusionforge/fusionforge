@@ -38,6 +38,9 @@ here have been transferred onto the Savannah project, at
 * [RM] Search and replace "sourceforge.net" with the appropriate
   hostname in all files.  Ditto with "valinux.com".
 
+* [CB] Integrate Sourceforge Timesheet System 
+  http://sourceforge.net/projects/dts
+
 # Local variables:
 # mode: indented-text
 # End:
