@@ -9,7 +9,7 @@ clean: cleangf cleancvs cleansvn   # Clean gforge and svn and cvs plugins #
 allor: orig origcvs origsvn        # Build gforge and svn and cvs orig tarballs #
 cleanor:                           # Clean all gforge orig tarballs #
 	rm -f gforge*orig.tar.gz
-allgf: cleangf build               # Build gforge #
+allgf: orig cleangf build          # Build gforge #
 allcvs: origcvs cleancvs buildcvs  # Build cvs plugins #
 allsvn: origsvn cleansvn buildsvn  # Build svn plugins #
 allup: upload uploadcvs uploadsvn  # Upload all using dput and optional where=<server> #
@@ -21,9 +21,9 @@ debuildopts=-us -uc
 gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
 cvsversion=$(shell head -1 gforge-plugin-scmcvs/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
 svnversion=$(shell head -1 gforge-plugin-scmsvn/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
-where=local
 where=g-rouille
 where=mercure
+where=local
 documentor_path=/tmp
 documentor_vers=phpdocumentor-1.3.0rc3
 
@@ -40,7 +40,8 @@ build:			# Build debian gforge packages                               #
 upload:			# Upload gforge packages on where=<server> using dput        #
 	dput $(where) gforge*.changes
 
-orig:                   # Make gforge orig file                                      #
+orig: gforge_$(gfversion).orig.tar.gz                                 # Make gforge orig file                                      #
+gforge_$(gfversion).orig.tar.gz:
 	cd gforge ; debclean; find . -type f | grep -v '/CVS/' | grep -v rpm-specific | grep -v contrib | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(gfversion)
 	tar cvzf gforge_$(gfversion).orig.tar.gz gforge-$(gfversion)
 	rm -rf gforge-$(gfversion)
@@ -94,4 +95,12 @@ $(documentor_path)/$(documentor_vers)/patched:
 gforge/docs/phpdoc/docs:
 	cd gforge/docs/phpdoc/ && ./makedoc.sh
 
-
+chris:
+	make allgf dchcmd="dch -i" debuildopts=""
+	make upload 
+chrisc:
+	make allcvs dchcmd="dch -i" debuildopts=""
+	make uploadcvs
+chriss:
+	make allsvn dchcmd="dch -i" debuildopts=""
+	make uploadsvn
