@@ -139,15 +139,15 @@ switch ($func) {
 					$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 				} else {
 
-					$summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
-					$details='';
-					$priority=(($priority != 100) ? $priority : $pt->getPriority());
-					$hours=$pt->getHours();
-					$start_date=$pt->getStartDate();
-					$end_date=$pt->getEndDate();
-					$status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
-					$category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
-					$percent_complete=$pt->getPercentComplete();
+					$mass_summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
+					$mass_details='';
+					$mass_priority=(($priority != 100) ? $priority : $pt->getPriority());
+					$mass_hours=$pt->getHours();
+					$mass_start_date=$pt->getStartDate();
+					$mass_end_date=$pt->getEndDate();
+					$mass_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
+					$mass_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
+					$mass_percent_complete=$pt->getPercentComplete();
 
 					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 					//conflicts with the "no change" ID! Sorry for messy use of 100.1
@@ -156,20 +156,20 @@ switch ($func) {
 					// other means assigned to ...
 
 					if ($assigned_to == '100') {
-					    $assigned_to = $pt->getAssignedTo();
+					    $mass_assigned_to = $pt->getAssignedTo();
 					} else if ($assigned_to == '100.1') {
-					    $assigned_to = array('100');
+					    $mass_assigned_to = array('100');
 					} else {
-					    $assigned_to = array($assigned_to);
+					    $mass_assigned_to = array($assigned_to);
 					} 			
 
-					$dependent_on=$pt->getDependentOn();
-					$new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
-					$duration=$pt->getDuration();
-					$parent_id=$pt->getParentID();
+					$mass_dependent_on=$pt->getDependentOn();
+					$mass_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
+					$mass_duration=$pt->getDuration();
+					$mass_parent_id=$pt->getParentID();
 
-					if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
-							$status_id,$category_id,$percent_complete,$assigned_to,$dependent_on,$new_group_project_id,$duration,$parent_id)) {
+					if (!$pt->update($mass_summary,$mass_details,$mass_priority,$mass_hours,$mass_start_date,$mass_end_date,
+							$mass_status_id,$mass_category_id,$mass_percent_complete,$mass_assigned_to,$mass_dependent_on,$mass_new_group_project_id,$mass_duration,$mass_parent_id)) {
 						$was_error=true;
 						$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 
