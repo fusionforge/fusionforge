@@ -1520,19 +1520,16 @@ project_admin_userpermedit	add_to_tracker	Add To Tracker
 project_admin_userpermedit	admin	Admin
 project_admin_userpermedit	admin_only	Admin Only
 project_admin_userpermedit	admin_tech	Admin & Tech
-<<<<<<< Base.tab
-project_admin_userpermedit	not_available	Not available
-project_admin_userpermedit	file_release_role	Role in File releases
-=======
-project_admin_userpermedit	no_permissions	No permissions
->>>>>>> 1.100
 project_admin_userpermedit	developer_not_found	Developer Not Found In This Group
 project_admin_userpermedit	docman	Documentation Manager
 project_admin_userpermedit	editing_permissions	You are editing permissions for user $1 ($2)
 project_admin_userpermedit	editor	Editor
+project_admin_userpermedit	file_release_role	Role in File releases
 project_admin_userpermedit	forums	Forums
 project_admin_userpermedit	invalid_user	Invalid user
 project_admin_userpermedit	moderator	Moderator
+project_admin_userpermedit	no_permissions	No permissions
+project_admin_userpermedit	not_available	Not available
 project_admin_userpermedit	permissions_updated	Permissions Updated
 project_admin_userpermedit	pm	Project/Task Manager
 project_admin_userpermedit	project_admin	Project Admin
