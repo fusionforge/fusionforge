@@ -14,7 +14,8 @@ user_group tables. See the postgres manual for information on managing
 database users and permissions.
 
 To use these files, you should first create any default users/groups you 
-want on your machine. Then copy /etc/group to /etc/group.org, and do the 
+want on your machine. YOU MUST CREATE A USER CALLED "anonymous" with /bin/false 
+as its shell. Then copy /etc/group to /etc/group.org, and do the 
 same for /etc/shadow -> /etc/shadow.org /etc/passwd -> /etc/passwd.org
 
 The usergroup.php script will build on the .org file and place them in .new

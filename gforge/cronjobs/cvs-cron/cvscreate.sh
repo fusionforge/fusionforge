@@ -38,8 +38,8 @@ chmod 775 /cvsroot/$1
 
 # turn off pserver writers, on anonymous readers
 echo "" > /cvsroot/$1/CVSROOT/writers
-echo "anonymous" > /cvsroot/$1/CVSROOT/readers
-echo "anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_$1" > /cvsroot/$1/CVSROOT/passwd 
+echo "anonymous::anonymous" > /cvsroot/$1/CVSROOT/readers
+echo "anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous" > /cvsroot/$1/CVSROOT/passwd 
 
 # setup loginfo to make group ownership every commit
 echo "ALL chgrp -R $1 /cvsroot/$1" > /cvsroot/$1/CVSROOT/loginfo
