@@ -53,8 +53,8 @@ function addProjectRepositories() {
 			if(db_result($res,$i,'enable_anonscm')) {
 				$repositoryMode = 02775;
 				if (db_result($res,$i,'enable_pserver')) {
-					$readersContent = 'anonymous::anonymous';
-					$passwdContent = 'anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous';
+					$readersContent = 'anonymous';
+					$passwdContent = 'anonymous:8Z8wlZezt48mY';
 				}
 			} else {
 				$repositoryMode = 02770;
