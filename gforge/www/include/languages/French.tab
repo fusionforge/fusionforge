@@ -17,71 +17,369 @@
 #	* Initial translation
 # 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>
 #	* Translation and correction
-#
-menu	account_maintenance	Gestion du Compte
-menu	bookmark_page	Favoris
-home	breaking_down_barriers	Abaisser les barri&egrave;res du d&eacute;veloppement Open Source
-menu	change_my_theme	Changement du Th&egrave;me
-menu	code_snippet_library	Biblioth&egrave;que de Code
-menu	compile_farm	Ferme de Compilation
-menu	contact_us	Contact
-group	developers	D&eacute;veloppeurs
-group	developer_info	Informations pour D&eacute;veloppeurs
-menu	discussion_forums	Forums de Discussion
-menu	documentation	Documentation
-frs	file_download	T&eacute;l&eacute;chargement
-frs	file_monitor	Surveillance
-frs	file_notes	Remarques
-frs	file_package	Package
-frs	file_version	Version
-group	long_bugs	Gestion des Bugs
-group	long_cvs	R&eacute;f&eacute;rentiel CVS
-group	long_docman	Gestion de la Documentation
-group	long_forum	Forums de Discussion
-group	long_ftp	Espace FTP Anonyme
-group	long_homepage	Page d'Accueil
-group	long_mail	Listes de Diffusion
-group	long_news	Derni&egrave;res nouveaut&eacute;s
-group	long_patch	Gestion des Corrections
-group	long_pm	Gestion de Projet
-group	long_support	Support Technique
-group	long_survey	Sondages
-group	short_bugs	Bugs
-group	short_cvs	CVS
-group	short_docman	Documentation
-group	short_files	Filesgroup
-group	short_forum	Forums
-group	short_homepage	Accueil
-group	short_mail	Mailing-listes
-group	short_main 	Ecran Principal
-group	short_news	Nouveaut&eacute;s
-group	short_patch	Patches
-group	short_pm	T&acirc;ches
-group	short_summary	Survol
-group	short_support	Support
-group	short_survey	Sondages
-home	highest_ranked_users	Les D&eacute;veloppeurs les Mieux Class&eacute;s
-home	about_blurb	 SourceForge est un <b>service gratuit pour les d&eacute;veloppeurs <A href="http://www.opensource.org">Open Source</A></b>. SourceForge offre l'acc&egrave;s le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des t&acirc;ches, h&eacute;bergement de site, archivage de fichiers, sauvegardes compl&egrave;tes, etc. via une interface d'administration enti&egrave;rement par le web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ plus ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Participation des d&eacute;veloppeurs</B> <P>  Pour pouvoir utiliser SourceForge au mieux, il est nec&eacute;ssaire de <A href="/account/register.php">s'enregistrer comme un d&eacute;veloppeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons &agrave; vous offrir. Vous pouvez bien entendu parcourir  le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Cr&eacute;er un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme d&eacute;veloppeur</A>, then <A HREF="/account/login.php">Connectez-vous</A> puis, <A HREF="/register/">Enregistrez votre Projet.</A> <P> Merci... et nous esp&eacute;rons que vous aimerez SourceForge!
-frs	latest_file_releases	Derni&egrave;res r&eacute;visions des fichiers
-menu	login	Connexion via SSL
-menu	logout	Sortir
-home	most_active_this_week	Les Plus Actifs cette Semaine
-menu	my_personal_page	Ma Page Personnelle
-menu	new_project	Nouveau Projet
-menu	new_releases	Nouvelles R&eacute;visions
-menu	new_user	Nouvel Utilisateur via SSL
-menu	other_site_mirrors	Mirroirs d'Autres Sites
-menu	project_admin	Admin. du Projet
-group	project_admins	Admins. du Projet
-menu	project_help_wanted	Demande d'Aide
-menu	project_summary	R&eacute;sum&eacute; du Projet
-group	public_area	Zones Publiques
-menu	search	Recherche
-menu	software_map	Rech. Th&eacute;matique
-home	sourceforge_statistics	Statistiques de SourceForge
-menu	top_projects	Meilleurs Projets
-home	top_project_downloads	Projets les plus T&eacute;l&eacute;charg&eacute;s
+# 2002-04-10 Roland Mas <lolando@debian.org>
+#	* Translation from Base.tab
+
+about_foundries	about_blurb	Les Fonderies de Sourceforge sont des endroits dédiés aux développeurs pour qu'ils s'y regroupent, qu'ils puissent échanger leur expertise, des informations et des conseils, et plus généralement pour qu'ils puissent s'aider les uns les autres a développer de meilleurs logiciels plus efficacement (après tout, il s'agit ici de logiciel libre).<br>&nbsp;<br>Si vous voulez vous porter volontaire pour aider ou créer une Fonderie, ou si vous avez des suggestions, des idées, ou des récriminations, n'hésitez pas à <a href="/contact.php">contacter Sourceforge</a>.
+about_foundries	foundries_list	Voici la liste des fonderies du système.  Certaines sont plus avancées que d'autres.  Si vous voulez contribuer à l'une d'entre elles, contactez les administrateurs de cette fonderie.
+account	title	Préférences de votre compte
+account_change_email	message	Vous avez demandé un changement d'adresse e-mail pour votre compte sur Sourceforge.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- l'équipe Sourceforge
+account_change_email	section	Préférences de votre compte
+account_change_email	subject	Sourceforge -- vérification
+account_change_email	title	Changement d'adresse e-mail
+account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
+account_change_pw	section	Préférences de votre compte
+account_change_pw	title	Changement de mot de passe
+account_editsshkeys	section	Préférences de votre compte
+account_editsshkeys	title	Édition des clefs CVS/SSH
+account_first	about_blurb	Vous êtes maintenant un utilisateur enregistré de Sourceforge, l'environnement de dévelopement en ligne pour les projets de logiciels libres.<p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site.  Vous pouvez maintenant poster des messages dans les forums des projets, rapporter des bogues aux logiciels hébergés par Sourceforge, vous enregistrer pour faire partie de projets, ou même démarrer votre propre projet.<p>Nous vous conseillons de prendre le temps de lire la <a href="/docs/site/"><b>documentation du site</b></a> pour tirer pleinement parti de Sourceforge.<p>Profitez bien du site, et n'hésitez pas à nous faire part de vos remarques et de vos idées d'amélioration pour Sourceforge.<p> -- l'équipe Sourceforge
+account_first	title	Bienvenue sur Sourceforge !
+account_login	deleted_account	<p>Votre compte sur Sourceforge a été supprimé par l'équipe Sourceforge.  Ceci peut être dû à deux raisons : soit vous avez demandé à ce que votre compte soit supprimé, soit votre compte a été utilisé à des fins non autorisées et nous avons dû le fermer.  Si vous avez des questions ou des remarques à ce propos, veuillez soumettre une <a href="/support/?group_id=1">requête au support</a>.<p>Merci.<p> -- l'équipe Sourceforge
+account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyé à l'adresse que vous avez donnée pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
+account_login	title	Connexion à Sourceforge
+account_lostpw	message	  Quelqu'un, probablement vous, a demandé un changement de mot de passe par\nvérification d'adresse e-mail.  Si ce n'était pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandé cette vérification, visitez la page à l'adresse suivante\npour que votre demande soit prise en compte :\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- l'équipe Sourceforge
+account_lostpw	subject	Sourceforge -- vérification
+account_lostpw	title	Oublié votre mot de passe ?
+account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
+account_unsubscribe	all_mailings	toutes les notifications concernant Sourceforge
+account_unsubscribe	site_mailings	les messages concernant le site Sourceforge
+account_verify	title	Vérification de votre compte Sourceforge
+account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activé pour les connexions ultérieures.
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
 conf	language_id	7
+contact	about_blurb	<p>Ceci est la page de contacts pour <b>Sourceforge</b>.  Si vous avez un problème concernant un projet que nous hébergeons, veuillez soumettre vos questions et/ou vos informations à l'outil de suivi de bogues ou de support de ce projet.  Ces outils sont accessibles en visitant la page d'accueil du projet et en choisissant l'outil approprié.<p>Si vous avez une requête de support, un bogue à soumettre sur Sourceforge, ou si vous voulez communiquer avec <a href="staff.php">l'équipe Sourceforge</a>, veuillez prendre soin de choisir le canal le plus approprié :</p><ul><li>Pour demander de l'aide par rapport à votre projet ou votre compte, utilisez l'outil de <a href="/support/?func=addsupport&group_id=1">gestion de support</a>.</li><li>Si vous avez trouvé un bogue dans Sourceforge, veuillez utiliser l'outil de <a href="/bugs/?func=addbug&group_id=1">suivi de bogues</a>.</li></ul>
+contact	title	Contacter Sourceforge
+cvs	section	Projet : $1
+cvs	title	CVS
+docman	section	Projet : $1
+docman	title	Gestionnaire de documentation
+docman_admin	section	$1
+docman_admin	title	Gestionnaire de documentation : administration
+docman_admin_docedit	section	Gestionnaire de documentation
+docman_admin_docedit	title	Édition d'un document
+docman_admin_editdocs	section	Gestionnaire de documentation : administration
+docman_admin_editdocs	title	Édition de documents
+docman_admin_editgroups	section	Gestionnaire de documentation : administration
+docman_admin_editgroups	title	Édition des groupes de documents
+docman_admin_groupdelete	section	Gestionnaire de documentation : administration
+docman_admin_groupdelete	title	Suppression d'un groupe de documents
+docman_admin_groupedit	section	Gestionnaire de documentation : administration
+docman_admin_groupedit	title	Renommage d'un groupe de documents
+docman_display_doc	section	Projet : $1
+docman_display_doc	title	Gestionnaire de documentation : affichage d'un document
+docman_new	section	Projet : $1
+docman_new	title	Gestionnaire de documentation : soumission d'un nouveau document
+forum	section	Projet : $1
+forum	title	Forums
+forum_admin	section	Projet : $1
+forum_admin	title	Forums : administration
+forum_admin_addforum	section	Administration des forums
+forum_admin_addforum	title	Ajout d'un forum
+forum_admin_changestatus	section	Administration des forums
+forum_admin_changestatus	title	Changement d'état du forum
+forum_admin_delete	section	Administration des forums
+forum_admin_delete	title	Suppression d'un forum
+forum_forum	section	Projet : $1
+forum_forum	title	Forums : affichage d'un forum
+forum_forum_thread	section	Forums
+forum_forum_thread	title	Affichage d'une discussion
+forum_message	section	Forums
+forum_message	title	Affichage d'un message
+foundry	section	Fonderie : $1
+foundry	title	Résumé
+foundry_admin	section	Fonderie : $1
+foundry_admin	title	Fonderie : administration
+foundry_html_admin	section	Administration d'une fonderie
+foundry_html_admin	title	Administration HTML d'une fonderie
+foundry_news	section	Administration d'une fonderie
+foundry_news	title	Résumé des nouvelles de la fonderie
+frs	file_download	Téléchargement
+frs	file_monitor	Surveillance
+frs	file_notes	Remarques
+frs	file_package	Paquet
+frs	file_rel_date	Date
+frs	file_version	Version
+frs	latest_file_releases	Sorties récentes
+general	return	[Retour à Sourceforge]
+general	sitename	Sourceforge
+group	developer_info	Information sur un développeur
+group	developers	Développeurs
+group	long_bugs	Gestion des bogues
+group	long_cvs	Référentiel CVS
+group	long_docman	Gestionnnaire de documentation
+group	long_forum	Forums de discussion
+group	long_foundries	Fonderies de développement Sourceforge
+group	long_ftp	Espace FTP anonyme
+group	long_homepage	Page d'accueil
+group	long_mail	Listes de diffusion
+group	long_news	Dernières nouveautés
+group	long_patch	Gestionnnaire de corrections
+group	long_pm	Gestio de projet
+group	long_support	Support technique
+group	long_survey	Sondages
+group	project_admins	Administrateurs du projet
+group	public_area	Zones publiques
+group	short_admin	Administration
+group	short_bugs	Bogues
+group	short_cvs	CVS
+group	short_docman	Documentation
+group	short_files	Fichiers
+group	short_forum	Forums
+group	short_homepage	Accueil
+group	short_mail	Mailing-listes
+group	short_main 	Écran principal
+group	short_memberlist	Développeurs
+group	short_news	Nouveautés
+group	short_patch	Patches
+group	short_pm	Tâches
+group	short_summary	Survol
+group	short_support	Support
+group	short_survey	Sondages
+group	short_tracker	Tracker
+home	about_blurb	Sourceforge est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. Sourceforge offre l'accès le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tâches, hébergement de site, archivage de fichiers, sauvegardes complètes, etc. via une interface d'administration entièrement par le web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ plus ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Participation des développeurs</B> <P>  Pour pouvoir utiliser SourceForge au mieux, il est nécéssaire de <A href="/account/register.php">s'enregistrer comme un développeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Créer un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme développeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espérons que vous aimerez Sourceforge !
+home	breaking_down_barriers	Abaisser les barrièezs du développement open source
+home	highest_ranked_users	Les développeurs les mieux classés
+home	most_active_this_week	Lesp lus actifs cette semaine
+home	sfos	Sourceforge On-Site
+home	sourceforge_statistics	Statistiques de Sourceforge
+home	top_project_downloads	Projets les plus téléchargés
+mail	provided_by	<p>Les listes de diffusion sont fournies par <a href="http://www.list.org/">GNU Mailman</a>.  Merci aux équipes de Mailman et de <a href="http://www.python.org/">Python</a> pour leurs excellents logiciels.
+mail	section	Projet : $1
+mail	title	Listes de diffusion
+mail_admin	section	Listes de diffusion
+mail_admin	title	Administration des listes de diffusion
+mail_admin_add_list	section	Administration des listes de diffusion
+mail_admin_add_list	title	Ajout d'une liste
+mail_admin_change_status	section	Administration des listes de diffusion
+mail_admin_change_status	title	Administration / modification des listes
+menu	about_foundries	À propos des fonderies
+menu	about_sourceforge	À propos de Sourceforge
+menu	account_maintenance	Gestion du compte
+menu	bookmark_page	Ajouter aux favoris
+menu	change_my_theme	Changer de thème
+menu	code_snippet_library	Bibliothèque de code
+menu	compile_farm	Ferme de compilation
+menu	contact_us	Contacter Sourceforge
+menu	discussion_forums	Forums de discussion
+menu	documentation	Documentations sur le site
+menu	foundry_admin	Administration de la fonderie
+menu	foundry_summary	Résumé de la fonderie
+menu	login	Connexion via SSL
+menu	logout	Sortir
+menu	my_personal_page	Ma page personnelle
+menu	new_project	Nouveau projet
+menu	new_releases	Sorties récentes
+menu	new_user	Nouvel utilisateur via SSL
+menu	other_site_mirrors	Miroirs d'autres sites
+menu	project_admin	Admin. du projet
+menu	project_help_wanted	Demande d'aide
+menu	project_summary	Résumé du projet
+menu	search	Recherche
+menu	site_status	État du site
+menu	software_map	Recherche thématique
+menu	top_projects	Meilleurs projets
+my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
+my	no_bookmarks	Vous n'avez pas encore de favoris
+my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>
+my	no_monitored_forums	<h3>>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant également un lien vers le message.<p>Vous pouvez déclencher la surveillance d'un forum en cliquant sur le lien adéquat dans un forum quelconque.<br>
+my	no_open_tasks	Aucune tâche ne vous est assignée.
+my	no_projects	Vous ne faites partie d'aucun projet.
+my	no_tracker_items_assigned	Aucun objet de tracker ne vous est assigné.
+my	no_tracker_items_submitted	Vous n'avez soumis aucun objet de tracker.
+my	title	Page personnelle de $1
+my_bookmark_add	section	Ma page personnelle
+my_bookmark_add	title	Ajout d'un favori
+my_bookmark_delete	section	Ma page personnelle
+my_bookmark_delete	title	Suppression d'un favori
+my_bookmark_edit	section	Ma page personnelle
+my_bookmark_edit	title	Édition d'un favori
+my_diary	section	Ma page personnelle
+my_diary	title	Journal et notes
+new	title	Sorties récentes
+news	section	Projet : $1
+news	title	Nouveautés
+news_admin	section	Nouveautés
+news_admin	title	Administration des nouveautés
+news_main	title	Nouveautés de Sourceforge
+news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe de Sourceforge pour apparaître sur la page d'accueil de Sourceforge.
+news_submit	section	Nouveautés
+news_submit	title	Soumettre une nouveauté pour $1
+partners	about_blurb	<p>Sourceforge est fier d'être partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchères inversées, permettant aux clients et aux développeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
+people	about_blurb	<p>Le système « Besoin d'aide » de Sourceforge est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'émetteur décide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions précédentes ont expiré.<p>Naviguez dans le menu des catégories pour trouver les projets qui ont besoin de vous.<p>Si vous êtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catégories de postes, soumettez une requête par le gestionnaire de support technique.
+people	section	Besoin d'aide
+people	title	Les projets ayant besoin d'aide
+people_admin	section	Besoin d'aide
+people_admin	title	Administration des offres
+people_admin_people_cat	section	Administration des offres
+people_admin_people_cat	title	Ajout de catégories de postes
+people_admin_people_skills	section	Administration des offres
+people_admin_people_skills	title	Ajout de compétences
+people_cat	section	Besoin d'aide
+people_cat	title	Liste des offres par catégorie
+people_createjob	section	Besoin d'aide
+people_createjob	title	Création d'une nouvelle offre
+people_editjob	section	Besoin d'aide
+people_editjob	title	Édition d'une offre
+people_editprofile	section	Besoin d'aide
+people_editprofile	title	Édition de votre profil
+people_helpwanted_latest	section	Besoin d'aide
+people_helpwanted_latest	title	Dernières offres
+people_proj	section	Besoin d'aide
+people_proj	title	Besoin d'aide pour $1
+people_viewjob	section	Besoin d'aide
+people_viewjob	title	On recherche $1 pour $2
+people_viewprofile	section	Information sur un utilisateur
+people_viewprofile	title	Affichage d'un profil de développeur
+pm	section	Projet : $1
+pm	title	Gestion de projet : sous-projets et tâches
+pm_addtask	section	Gestion de projet
+pm_addtask	title	Ajout d'une tâche
+pm_admin	section	$1
+pm_admin	title	Gestion de projet : administration
+pm_admin_change_status	section	Administration du gestionnaire de projets
+pm_admin_change_status	title	Modifier une information
+pm_admin_projects	section	Administration du gestionnaire de projets
+pm_admin_projects	title	Ajout de sous-projets
+pm_browse_custom	section	Gestion de projet
+pm_browse_custom	title	Naviguer dans les tâches
+pm_browse_my	section	Gestion de projet pour $1
+pm_browse_my	title	Mes tâches
+pm_browse_open	section	Gestion de projet
+pm_browse_open	title	Tâches ouvertes
+pm_detailtask	section	Gestion de projet
+pm_detailtask	title	Détails d'une tâche
+pm_modtask	section	Gestion de projet
+pm_modtask	title	Modification d'une tâche
+pm_reporting	section	Gestion de projet
+pm_reporting	title	Rapports sur les tâches
+project_admin	section	Projet : $1
+project_admin	title	Résumé de l'administration
+project_admin_database	section	Projet $1 -- administration
+project_admin_database	title	Information sur les bases de données
+project_admin_editgroupinfo	section	Projet $1 -- administration
+project_admin_editgroupinfo	title	Édition des infos publiques
+project_admin_editimages	section	Projet $1 -- administration
+project_admin_editimages	title	Édition des données multimédia
+project_admin_editpackages	section	Projet $1 -- administration
+project_admin_editpackages	title	Édition des paquets
+project_admin_editreleases	section	Projet $1 -- administration
+project_admin_editreleases	title	Édition des révisions
+project_admin_history	section	Projet $1 -- administration
+project_admin_history	title	Historique
+project_admin_newrelease	section	Projet $1 -- administration
+project_admin_newrelease	title	Création d'une révision
+project_admin_qrs	section	Projet $1 -- administration
+project_admin_qrs	title	Système de publication rapide
+project_admin_userpermedit	section	Projet $1 -- administration
+project_admin_userpermedit	title	Édition des droits des développeurs
+project_admin_userperms	section	Projet $1 -- administration
+project_admin_userperms	title	Liste des droits des développeurs
+project_admin_vhost	section	Projet $1 -- administration
+project_admin_vhost	title	Gestion des hôtes virtuels
+project_memberlist	joining	<P>Si vous désirez contribuer à ce projet, contactez un des administrateurs du projet, ci-dessous en gras.<br><br>
+project_showfiles	section	Projet : $1
+project_showfiles	title	Liste de fichiers
+project_shownotes	section	Projet : $1
+project_shownotes	title	Remarques sur les révisions
+projects	section	Projet : $1
+projects	title	Résumé
+register	title	Nouveau projet
+register_complete	section	Nouveau projet
+register_complete	title	Enregistrement terminé
+register_projectinfo	section	Nouveau projet
+register_projectinfo	title	Informations sur le projet
+register_requirements	section	Nouveau projet
+register_requirements	title	Services et conditions requises
+register_tos	section	Nouveau projet
+register_tos	title	Accord sur les conditions générales
+search	title	Recherche
+sendmessage	about_blurb	Afin de limiter le spam, nous utilisons ce formulaire pour l'envoi d'e-mails.<p>Remplissez-le consciencieusement, faute de quoi le destinataire risque de ne pas pouvoir vous répondre.<p><b>Si vous avez besoin d'aide :</b> avez-vous lu la documentation du site, avez-vous inclus votre <b>user_id</b> et votre <b>user_name</b> ?  Si vous écrivez à propos d'un projet particulier, incluez aussi le <b>group_id</b> et le nom de ce projet.
+sendmessage	title	Envoi d'un message à $1
+snippet	title	Bibliothèque de code
+snippet_add_snippet_to_package	section	Bibliothèque de code
+snippet_add_snippet_to_package	title	Ajout d'un bout de code à un paquet
+snippet_addversion	section	Bibliothèque de code
+snippet_addversion	title	Publier une nouvelle version
+snippet_browse	section	Bibliothèque de code
+snippet_browse	title	Navigation dans la bibliothèque
+snippet_delete	section	Bibliothèque de code
+snippet_delete	title	Suppression un bout de code
+snippet_detail	section	Bibliothèque de code
+snippet_detail	title	Affichage des détails d'un bout de code
+snippet_package	section	Bibliothèque de code
+snippet_package	title	Création d'un paquet de bouts de code
+snippet_submit	section	Bibliothèque de code
+snippet_submit	title	Soumission d'un bout de code
+softwaremap	title	Recherche thématique
+staff	about_blurb	<P><h2>SourceForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">SourceForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for SourceForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on SourceForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the SourceForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for SourceForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the SourceForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
+survey	title	Sondages pour $1
+survey_admin	section	Outil de sondages
+survey_admin	title	Administration
+survey_admin_add_question	section	Administration des sondages
+survey_admin_add_question	title	Ajout d'une question
+survey_admin_add_survey	section	Administration des sondages
+survey_admin_add_survey	title	Ajout d'un sondage
+survey_admin_edit_question	section	Administration des sondages
+survey_admin_edit_question	title	Édition d'une question
+survey_admin_edit_survey	section	Administration des sondages
+survey_admin_edit_survey	title	Édition d'un sondage
+survey_admin_show_questions	section	Administration des sondages
+survey_admin_show_questions	title	Affichage des questions dans un sondage
+survey_admin_show_results	section	Administration des sondages
+survey_admin_show_results	title	Affichage des résultats
+survey_admin_show_results_aggregate	section	Administration des sondages
+survey_admin_show_results_aggregate	title	Affichage des résultats d'un sondage
+survey_admin_show_results_comments	section	Administration des sondages
+survey_admin_show_results_comments	title	Affichage des commentaires
+survey_admin_show_results_individual	section	Administration des sondages
+survey_admin_show_results_individual	title	Affichage des commentaires d'un sondage
+survey_survey	section	Outil de sondages
+survey_survey	title	Affichage d'un sondage
+survey_survey_resp	section	Outil de sondages
+survey_survey_resp	title	Réponse à un sondage
+thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
+themes	section	Préférences de votre compte
+themes	title	Changer de thème
+top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichés ici.
+top	active_all_time	Les plus actifs de tous les temps
+top	active_weekly	Les plus actifs cette semaine
+top	downloads	Les plus téléchargés
+top	downloads_7_days	Les plus téléchargés cette semaine
+top	forum_posts	Les forums les plus actifs
+top	pageviews	Les projets les plus visités
+top	title	Les meilleurs projets
+top_mostactive	section	Les meilleurs projets
+top_mostactive	title	Les projets les plus actifs : $1
+top_toplist	section	Les meilleurs projets
+top_toplist	title	Listes des meilleurs projets
+tracker	section	Projet : $1
+tracker	title	Trackers
+tracker_add	section	$1
+tracker_add	title	Soumission d'un objet de tracker
+tracker_admin	section	Tracker
+tracker_admin	title	Administration
+tracker_admin_add_canned	section	Administration d'un tracker
+tracker_admin_add_canned	title	Ajout d'une réponse-type à $1
+tracker_admin_add_cat	section	Administration d'un tracker
+tracker_admin_add_cat	title	Ajout d'une catégorie à $1
+tracker_admin_add_group	section	Administration d'un tracker
+tracker_admin_add_group	title	Ajout de groups à $1
+tracker_admin_update_canned	section	Administration d'un tracker
+tracker_admin_update_canned	title	Modification des réponses-types de $1
+tracker_admin_update_cat	section	Administration d'un tracker
+tracker_admin_update_cat	title	Modification d'une catagorie de $1
+tracker_admin_update_group	section	Administration d'un tracker
+tracker_admin_update_group	title	Modification d'un groupe de $1
+tracker_admin_update_type	section	Administration d'un tracker
+tracker_admin_update_type	title	Mise à jour de $1
+tracker_admin_update_users	section	Administration d'un tracker
+tracker_admin_update_users	title	Édition des permissions des utilisateurs
+tracker_browse	section	Projet : $1
+tracker_browse	title	Navigation dans $1
+tracker_detail	section	$1
+tracker_detail	title	Vue détaillée d'un tracker
+tracker_reporting	section	$1
+tracker_reporting	title	Rapports sur les trackers
+users	title	Résumé d'un utilisateur
