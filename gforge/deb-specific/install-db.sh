@@ -42,7 +42,7 @@ case "$target" in
 	fi
 	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/gforge_passwd > /dev/null" <<-EOF
-sourceforge
+gforge
 $db_passwd
 $db_passwd
 EOF
@@ -52,9 +52,9 @@ EOF
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser gforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE USER: user name "sourceforge" already exists' ] ; then
+	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE USER: user name "gforge" already exists' ] ; then
 	    # Creation OK or user already existing -- no problem here
 	    echo -n ""
 	else
@@ -69,9 +69,9 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createdb sourceforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createdb gforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "sourceforge" already exists' ] ; then
+	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "gforge" already exists' ] ; then
 	    # Creation OK or database already existing -- no problem here
 	    echo -n ""
 	else
@@ -96,8 +96,8 @@ EOF
         fi
 	;;
     purge)
-	su -s /bin/sh postgres -c "dropdb sourceforge" > /dev/null 2>&1 || true
-	su -s /bin/sh postgres -c "dropuser sourceforge" > /dev/null 2>&1 || true
+	su -s /bin/sh postgres -c "dropdb gforge" > /dev/null 2>&1 || true
+	su -s /bin/sh postgres -c "dropuser gforge" > /dev/null 2>&1 || true
 	rm -f /var/lib/postgres/data/gforge_passwd
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	;;
@@ -108,7 +108,7 @@ EOF
 		DUMPFILE=/var/lib/gforge/dumps/db_dump
 	fi
 	echo "Dumping in $DUMPFILE"
-	su -s /bin/sh sourceforge -c /usr/lib/postgresql/bin/pg_dump sourceforge > $DUMPFILE
+	su -s /bin/sh gforge -c /usr/lib/postgresql/bin/pg_dump gforge > $DUMPFILE
 	;;
     restore)
 	pattern=$(basename $0).XXXXXX
@@ -126,9 +126,9 @@ EOF
 		RESTFILE=/var/lib/gforge/dumps/db_dump
 	fi
 	echo "Restoring $RESTFILE"
-	su -s /bin/sh postgres -c "dropdb sourceforge" || true
-	su -s /bin/sh postgres -c "createdb sourceforge"  || true
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE sourceforge"
+	su -s /bin/sh postgres -c "dropdb gforge" || true
+	su -s /bin/sh postgres -c "createdb gforge"  || true
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE gforge"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
         perl -pi -e "s/local all  trust\n//" /etc/postgresql/pg_hba.conf
         #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
