@@ -39,7 +39,7 @@ debug "Do not worry unless told otherwise." ;
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($query, $sth, @array, $version, $action) ;
+    my ($query, $sth, @array, $version, $action, $path) ;
 
     # Do we have at least the basic schema?
 
@@ -57,137 +57,231 @@ eval {
 	$action = "installation" ;
 	debug "Creating initial Sourceforge database from files." ;
 
-	&create_metadata_table ("2.5-9999+just+before+2+6") ;
+	&create_metadata_table ("2.5.9999") ;
 
-	my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
-	# TODO: user_rating.sql
-			      
-	foreach my $file (@filelist) {
-	    debug "Processing $file" ;
-	    @reqlist = @{ &parse_sql_file ($file) } ;
-	    
- 	    foreach my $s (@reqlist) {
- 		$query = $s ;
-		# debug $query ;
- 		$sth = $dbh->prepare ($query) ;
-  		$sth->execute () ;
-  		$sth->finish () ;
- 	    }
- 	}
-	@reqlist = () ;
+	debug "Updating debian_meta_data table." ;
+	$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+	debug "Committing." ;
+	$dbh->commit () ;
 
-	debug "Adding local data." ;
-	
-	do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
-
-	my ($login, $pwd, $md5pwd, $email, $shellbox, $noreplymail, $date) ;
-
-	$login = $admin_login ;
-	$pwd = $admin_password ;
-	$md5pwd=qx/echo -n $pwd | md5sum/ ;
-	chomp $md5pwd ;
-	$email = $server_admin ;
-	$shellbox = $domain_name ;
-	$noreplymail="noreply\@$domain_name" ;
-	$date = time () ;
-
- 	@reqlist = (
-            "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = 1",
-            "UPDATE groups SET homepage = '$domain_name/news/' where group_id = 2",
-            "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = 3",
-            "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = 4",
-            "UPDATE users SET email = '$noreplymail' where user_id = 100",
- 	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
-            "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 4, 'A')"
-        ) ;
-
- 	foreach my $s (@reqlist) {
- 	    $query = $s ;
-	    # debug $query ;
- 	    $sth = $dbh->prepare ($query) ;
- 	    $sth->execute () ;
- 	    $sth->finish () ;
- 	}
-	@reqlist = () ;
-
-	debug "Inserting skills." ;
-
-	foreach my $skill (split /;/, $skill_list) {
-	    push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
-	}
-
- 	foreach my $s (@reqlist) {
- 	    $query = $s ;
-	    # debug $query ;
- 	    $sth = $dbh->prepare ($query) ;
- 	    $sth->execute () ;
- 	    $sth->finish () ;
- 	}
-	@reqlist = () ;
-
-	&update_db_version ("2.6-0") ;
- 	debug "Committing." ;
- 	$dbh->commit () ;
     } else {
 	$action = "upgrade" ;
 
-	&create_metadata_table ('2.5-7+just+before+8') ;
- 	debug "Committing." ;
- 	$dbh->commit () ;
-    }
-
-    # At this point we have the metadata table with at least the "db-version" key
-    # We can continue our work based on the associated value
-    
-    $version = &get_db_version ;
-    
-    if (is_lesser $version, "2.5.9999.1+data+upgraded") {
-	debug "Upgrading your database scheme from 2.5" ;
-
-	@reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
+	$version = &get_db_version ;
+	if (is_lesser $version, "2.5.9999") {
+	    debug "Upgrading your database scheme from 2.5" ;
+	    
+	    debug "Updating debian_meta_data table." ;
+	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
 	    # debug $query ;
 	    $sth = $dbh->prepare ($query) ;
 	    $sth->execute () ;
 	    $sth->finish () ;
+	    debug "Committing." ;
+	    $dbh->commit () ;
 	}
-	@reqlist = () ;
-
-	&update_db_version ("2.5.9999.1+data+upgraded") ;
- 	debug "Committing." ;
- 	$dbh->commit () ;
     }
 
-    if (is_lesser $version, "2.5.9999.2+artifact+transcoded") {
-	debug "Transcoding the artifact data fields" ;
+    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
+    # debug $query ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
 
-	$query = "SELECT id,bin_data FROM artifact_file ORDER BY id ASC" ;
+    if ($array[0] == 0) {
+	$path = "" ;
+    } else {
+	$query = "SELECT value from debian_meta_data where key = 'current-path'";
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
-	while (@array = $sth->fetchrow_array) {
-	    my $query2 = "UPDATE artifact_file SET bin_data='" ;
-	    $query2 .= encode_base64 (decode_entities ($array [1])) ;
-	    $query2 .= "' WHERE id=" ;
-	    $query2 .= $array [0] ;
-	    $query2 .= "" ;
-	    # debug $query2 ;
-	    my $sth2 =$dbh->prepare ($query2) ;
-	    $sth2->execute () ;
-	    $sth2->finish () ;
-	}
+	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
-
-	&update_db_version ("2.5.9999.2+artifact+transcoded") ;
-	debug "Committing." ;
-	$dbh->commit () ;
+	
+	$path = $array[0] ;
     }
 
+  PATH_SWITCH: {
+      ($path eq 'scratch-to-2.6') && do {
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.1+global+data+done") {
+	      my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
+	      # TODO: user_rating.sql
+
+	      foreach my $file (@filelist) {
+		  debug "Processing $file" ;
+		  @reqlist = @{ &parse_sql_file ($file) } ;
+		  
+		  foreach my $s (@reqlist) {
+		      $query = $s ;
+		      # debug $query ;
+		      $sth = $dbh->prepare ($query) ;
+		      $sth->execute () ;
+		      $sth->finish () ;
+		  }
+	      }
+	      @reqlist = () ;
+	      
+	      &update_db_version ("2.5.9999.1+global+data+done") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.2+local+data+done") {
+	      debug "Adding local data." ;
+	      
+	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
+	      
+	      my ($login, $pwd, $md5pwd, $email, $shellbox, $noreplymail, $date) ;
+	      
+	      $login = $admin_login ;
+	      $pwd = $admin_password ;
+	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
+	      chomp $md5pwd ;
+	      $email = $server_admin ;
+	      $shellbox = $domain_name ;
+	      $noreplymail="noreply\@$domain_name" ;
+	      $date = time () ;
+	      
+	      @reqlist = (
+			  "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = 1",
+			  "UPDATE groups SET homepage = '$domain_name/news/' where group_id = 2",
+			  "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = 3",
+			  "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = 4",
+			  "UPDATE users SET email = '$noreplymail' where user_id = 100",
+			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+			  "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
+			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
+			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
+			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",
+			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 4, 'A')"
+			  ) ;
+	      
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  # debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
+	      
+	      &update_db_version ("2.5.9999.2+local+data+done") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+	  
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.3+skills+done") {
+	      debug "Inserting skills." ;
+	      
+	      foreach my $skill (split /;/, $skill_list) {
+		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
+	      }
+	      
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  # debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
+	      
+	      &update_db_version ("2.5.9999.3+skills+done") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.6-0") {
+	      debug "Updating debian_meta_data table." ;
+	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
+	      # debug $query ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      &update_db_version ("2.6-0") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  last PATH_SWITCH ;
+      } ;
+
+      ($path eq '2.5-to-2.6') && do {
+	  
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.1+data+upgraded") {
+	      debug "Upgrading your database scheme from 2.5" ;
+
+	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  # debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
+
+	      &update_db_version ("2.5.9999.1+data+upgraded") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.2+artifact+transcoded") {
+	      debug "Transcoding the artifact data fields" ;
+
+	      $query = "SELECT id,bin_data FROM artifact_file ORDER BY id ASC" ;
+	      # debug $query ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      while (@array = $sth->fetchrow_array) {
+		  my $query2 = "UPDATE artifact_file SET bin_data='" ;
+		  $query2 .= encode_base64 (decode_entities ($array [1])) ;
+		  $query2 .= "' WHERE id=" ;
+		  $query2 .= $array [0] ;
+		  $query2 .= "" ;
+		  # debug $query2 ;
+		  my $sth2 =$dbh->prepare ($query2) ;
+		  $sth2->execute () ;
+		  $sth2->finish () ;
+	      }
+	      $sth->finish () ;
+
+	      &update_db_version ("2.5.9999.2+artifact+transcoded") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.6-0") {
+	      debug "Updating debian_meta_data table." ;
+	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
+	      # debug $query ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      &update_db_version ("2.6-0") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  last PATH_SWITCH ;
+      } ;
+  }
+    
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     
@@ -445,7 +539,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	  }			# END_SQL_STATE_SWITCH
-	      last STATE_SWITCH ;
+	    last STATE_SWITCH ;
 	} ;			# End of END_SQL state
 
 	$state == $states{QUOTE_SCAN} && do {
@@ -553,7 +647,7 @@ sub parse_sql_file ( $ ) {
 		  $state = $states{IN_COPY} ;
 		  last START_COPY_STATE_SWITCH ;
 	      } ;
-     
+	      
 	      ( 1 ) && do {
 		  debug "Unknown event in START_COPY state." ;
 		  $state = $states{ERROR} ;
@@ -652,7 +746,7 @@ sub create_metadata_table ( $ ) {
 	$sth->execute () ;
 	$sth->finish () ;
     }
-	
+    
     $query = "SELECT count(*) from debian_meta_data where key = 'db-version'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
