@@ -7,3 +7,16 @@
 [type: gettext/rfc822deb] gforge-mta-postfix.templates.dsfh-in
 [type: gettext/rfc822deb] gforge-shell-ldap.templates.dsfh-in
 [type: gettext/rfc822deb] gforge-web-apache.templates.dsfh-in
+[type: gettext/rfc822deb] dsf-helper/common-variables.templates
+[type: gettext/rfc822deb] dsf-helper/cvshost-variables.templates
+[type: gettext/rfc822deb] dsf-helper/dbhost-variables.templates
+[type: gettext/rfc822deb] dsf-helper/dbpasswd-variables.templates
+[type: gettext/rfc822deb] dsf-helper/downloadhost-variables.templates
+[type: gettext/rfc822deb] dsf-helper/groupid-variables.templates
+[type: gettext/rfc822deb] dsf-helper/host-variables.templates
+[type: gettext/rfc822deb] dsf-helper/ldap-variables.templates
+[type: gettext/rfc822deb] dsf-helper/lists-variables.templates
+[type: gettext/rfc822deb] dsf-helper/replace-files.templates
+[type: gettext/rfc822deb] dsf-helper/shellhost-variables.templates
+[type: gettext/rfc822deb] dsf-helper/users-variables.templates
+[type: gettext/rfc822deb] dsf-helper/web-variables.templates

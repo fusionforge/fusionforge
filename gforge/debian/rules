@@ -10,11 +10,14 @@
 # This is the debhelper compatability version to use.
 export DH_COMPAT=4
 
-configure: configure-stamp
+configure: configure-stamp debian/po/templates.pot
 configure-stamp:
 	dh_testdir
 
 	touch configure-stamp
+
+debian/po/templates.pot: $(wildcard debian/*.templates) $(wildcard debian/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+	@debconf-updatepo
 
 build: configure-stamp build-stamp
 build-stamp:

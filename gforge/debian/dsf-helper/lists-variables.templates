@@ -1,8 +1,5 @@
 Template: gforge/shared/lists_host
 Type: string
-Description: Your mailing-lists server
- The hostname of the server that will host your Gforge mailing-lists. 
- It should not be the same as your main SF host.
-Description-fr.UTF-8: Votre serveur de listes de diffusion
- Le nom du serveur qui hébergera vos listes de diffusion de Gforge.
- Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+_Description: Your mailing-lists server
+ The hostname of the server that will host your Gforge mailing-lists. It
+ should not be the same as your main SF host.
