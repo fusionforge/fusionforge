@@ -1,4 +1,4 @@
-gforge (3.3.0-51) unstable; urgency=low
+gforge (3.3.0-57) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in
     db-upgrade
@@ -12,14 +12,18 @@ gforge (3.3.0-51) unstable; urgency=low
   * [Roland] Added views for NSS-PGSQL (form Wichert Akkerman).
   * [Christian] Added 20040914.sql, 20041005.sql, 20041006.sql.
   * [Hal] Maded changes to support apache2
-  * [Roland] Removing LDAP dependency, to be replaced with direct
-    PostgreSQL lookups: new database views, new pgsql.class, new NSS
-    configuration, new configuration for Exim4 and Postfix.
+  * [Roland] Removing LDAP dependency, now replaced with direct PostgreSQL
+    lookups: new database views, new pgsql.class, new NSS configuration,
+    new configuration for Exim4 and Postfix.
   * [Roland] Cleaned up the generated packages a bit: no more sourceforge
     packages, fixed dependencies to take into account the LDAP->PGSQL
     migration.
+  * [Roland] libphp-jpgraph goes from suggested to recommended.
+  * [Roland] Don't die in install-db.sh if postgresql is not running, but
+    start it instead.
+  * [Roland] Various fixes in several scripts.
 
- -- Roland Mas <lolando@debian.org>  Sun, 31 Oct 2004 15:45:47 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Nov 2004 15:33:27 +0100
 
 gforge (3.3.0-12) unstable; urgency=low
 
