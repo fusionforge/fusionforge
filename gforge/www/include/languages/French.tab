@@ -2092,14 +2092,23 @@ search	artifact_author	Soumis par
 search	artifact_date	Date
 search	artifact_id	#
 search	artifact_summary	Résumé
+search	docs_description	Description
+search	docs_id	#
+search	docs_title	Titre
 search	error_criteria_not_specified	Saisissez les mots à rechercher ci-dessus
 search	error_invalid_search	Erreur - Recherche non valide
 search	error_search_minlength	Le critère de recherche doit compter au moins 3 caractères
 search	forum_author	Auteur
 search	forum_date	Date
 search	forum_thread	Discussion
+search	frs_post_date	Date
+search	frs_posted_by	Posté par
+search	frs_release_name	Nom de version
 search	group_description	Description
 search	group_name	Nom du groupe
+search	news_post_date	Date
+search	news_posted_by	Posté par
+search	news_summary	Résumé
 search	next_results	Résultats suivants
 search	no_matches_found	Aucun résultat trouvé pour <em>$1</em>
 search	people_real_name	Nom complet
@@ -2113,13 +2122,25 @@ search	skill_name	Nom
 search	skill_title	Titre
 search	skill_to	Date de fin
 search	skill_type	Type
+search	tasks_completed	Complété
+search	tasks_created_by	Créé par
+search	tasks_end_date	Date de fin
+search	tasks_start_date	Date de début
+search	tasks_summary	Résumé
 search	title	Recherche
+search	tasks_id	#
+searchbox	docs	Les documents de ce projet
 searchbox	forum	Ce forum
+searchbox	forums	Les forums de ce projet
+searchbox	frs	Les fichiers de ce projet
+searchbox	news	Les annonces de ce projet
 searchbox	people	Personne
 searchbox	search	Rechercher
 searchbox	skill	Savoir-faire
 searchbox	softwaregroup	Logiciel/Groupe
 searchbox	task	Tâches
+searchbox	tasks	Les tâches de ce projet
+searchbox	trackers	Le suivi de ce projet
 send_pending_items_mail	pm_message	Ce courrier électronique vous est envoyé pour vous rappeler des tâches en attente ou en retard. \nLa tâche  #$1 est en attente : \nRésumé : $2\nSoumis par : $4\nEtat :$5\nPourcentage d'avancement : $6\n\nCliquez ici pour accéder à la tâche $3 .
 send_pending_items_mail	pm_subject	Notification de tâches en attente
 send_pending_items_mail	tracker_message	Ce courrier électronique vous est envoyé pour vous rappeler que des éléments que vous suivez sont en attente ou en retard. L'élément #$1 est en attente : \nRésumé : $3\nEtat : $5\nDate d'ouverture :$6\nAssigné à : $7\nSoumis par : $8\nDétails: $9\n\n\nCliquez ici pour accéder à cet élément : $4

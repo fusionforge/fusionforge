@@ -2106,7 +2106,7 @@ search	skill_name	Name
 search	skill_title	Title
 search	skill_to	To
 search	skill_type	Type
-search  tasks_id        #
+search	tasks_id	#
 search	tasks_summary	Summary
 search	tasks_start_date	Start Date
 search	tasks_end_date	End Date
