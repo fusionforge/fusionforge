@@ -97,8 +97,13 @@ while ($ln = pop(@group_array)) {
 		# Let's create a CVS repository for this group
 
 		# Firce create the repository
-		# Let's make this more paranoia, cvsweb has to be modified to get access
-		mkdir $cvs_dir, 0770;
+		# Unix right will lock access to all users not in the group including cvsweb
+		# when anoncvs is not enabled
+		if ($enable_anoncvs){
+			mkdir $cvs_dir, 0775;
+		} else {
+			mkdir $cvs_dir, 0770;
+		}
 		system("/usr/bin/cvs -d$cvs_dir init");
 	
 		system("echo \"\" > $cvs_dir/CVSROOT/val-tags");
@@ -127,10 +132,14 @@ while ($ln = pop(@group_array)) {
 			# turn on anonymous readers
 			system("echo \"anonymous\" > $cvs_dir/CVSROOT/readers");
 			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_${group_name}\" > $cvs_dir/CVSROOT/passwd");
+			# This will give access to all users and cvsweb
+			chmod 0775, "$cvs_dir";
 		} else {
 			# turn off anonymous readers
 			system("echo \"\" > $cvs_dir/CVSROOT/readers");
 			system("echo \"\" > $cvs_dir/CVSROOT/passwd");
+			# This will lock all access from users not in the group and cvsweb
+			chmod 0770, "$cvs_dir";
 		}
 	}
 }
