@@ -55,11 +55,12 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     is the proper spelling for it.
   * [Roland] Also, added a foreign key constraint: the doc_data table
     references a language_id.
-  * [Christian] Made project admin menu themeable 
-  * [Christian] Made news menu themeable 
+  * [Christian] Made project admin menu themeable
+  * [Christian] Made news menu themeable
   * [Christian] A lot of i18n in forum_utils
+  * [Christian] You can now customize date format in language tab files
 
- -- Christian Bayle <bayle@debian.org>  Tue, 29 Oct 2002 22:49:08 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue,  5 Nov 2002 01:46:29 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

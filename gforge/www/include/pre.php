@@ -95,7 +95,7 @@ require_once('www/include/menu.php');
 //theme functions like get_themename, etc
 require_once('www/include/theme.php');
 
-$sys_datefmt = "Y-m-d H:i";
+//$sys_datefmt = "Y-m-d H:i";
 
 // #### Connect to db
 
@@ -177,6 +177,9 @@ if (user_isloggedin()) {
 	$Language->loadLanguage($classname);
 }
 
+setlocale (LC_TIME, $Language->getText('system','locale'));
+$sys_strftimefmt = $Language->getText('system','strftimefmt');
+$sys_datefmt = $Language->getText('system','datefmt');
 
 //ob_start(ob_gzhandler);
 
