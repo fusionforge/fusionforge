@@ -1,5 +1,7 @@
 2003-01-04  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Base.tab: Bug 123: tabify "conf" entries.
+
 	* www/my/index.php: Bug 120: fix link to unmonitor file
 
 	* www/pm/task.php www/forum/save.php www/forum/new.php
