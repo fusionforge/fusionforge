@@ -347,7 +347,7 @@ function session_require($req) {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $G_SESSION,$session_ser;
+	global $G_SESSION,$session_ser,$Language;
 
 	// set session cookie
   //
