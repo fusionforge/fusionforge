@@ -257,7 +257,7 @@ function db_numfields($lhandle) {
 }
 
 /**
- *  db_fieldname() - Returns the number of rows changed in the last query.
+ *  db_fieldname() - Returns the name of a particular field in the result set
  *
  *	@param		int		Query result set handle.
  *  @param		int		Column number.
