@@ -1,5 +1,8 @@
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/themes/osx/Theme.class: Localised Log In/Log Out/My Account/New
+	Account texts for the OSX theme.
+
 	* www/include/Layout.class: Use /etc/gforge/custom/index_std.php
 	if it exists (patch #525 by Francisco Gimeno).
 

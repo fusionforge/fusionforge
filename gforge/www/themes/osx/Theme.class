@@ -272,13 +272,13 @@ class Theme extends Layout {
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<a href="/account/logout.php">Logout</a><br />
-				<a href="/account/">My Account</a>
+				<b><a style="color: #FFFFFF" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
+				<b><a style="color: #FFFFFF" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
 				<?php
 			} else {
 				?>
-				<a href="/account/login.php">Login</a><br />
-				<a href="/account/register.php">New Account</a>
+				<b><a style="color: #FFFFFF" href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
+				<b><a style="color: #FFFFFF" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 				<?php
 			}
 
@@ -591,4 +591,10 @@ class Theme extends Layout {
 	 }
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
