@@ -27,9 +27,9 @@ if ($GLOBALS['submit']) {
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)
 			VALUES (
-				'."htmlspecialchars($form_shortname)."',
-				'."htmlspecialchars($form_fullname)."',
-				'."htmlspecialchars($form_description)."',
+				'".htmlspecialchars($form_shortname)."',
+				'".htmlspecialchars($form_fullname)."',
+				'".htmlspecialchars($form_description)."',
 				'$form_parent',
 				'".date("Ymd",time())."01',
 				'$newroot'
@@ -56,7 +56,7 @@ site_admin_header(array('title'=>'Site Admin: Trove - Add Node'));
 <h3>Add New Trove Category</h3>
 
 <form action="trove_cat_add.php" method="post">
-<p>Parent Category:
+<p>Parent Category:<?php echo utils_requiredField(); ?>
 <br /><select name="form_parent">
 
 <?php
@@ -70,11 +70,11 @@ while ($row_cat = db_fetch_array($res_cat)) {
 ?>
 
 </select></p>
-<p>New category short name (no spaces, unix-like):
+<p>New category short name (no spaces, unix-like):<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_shortname" /></p>
-<p>New category full name (VARCHAR 80):
+<p>New category full name (VARCHAR 80):<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_fullname" /></p>
-<p>New category description (VARCHAR 255):
+<p>New category description (VARCHAR 255):<?php echo utils_requiredField(); ?>
 <br /><input type="text" size="80" name="form_description" />
 <br /><input type="submit" name="submit" value="Add" /></p>
 </form>
