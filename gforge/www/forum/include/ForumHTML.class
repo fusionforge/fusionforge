@@ -56,7 +56,7 @@ function forum_header($params) {
 				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'date')).'<br />
 				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a>
 				<p>
-				'. nl2br (util_make_links(db_result($result,0,'details')));
+				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
 				echo '<p>';
 			}
