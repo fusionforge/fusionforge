@@ -66,7 +66,7 @@ eval {
  	    foreach my $s (@reqlist) {
  		$query = $s ;
 		debug $query ;
-  		$sth = $dbh->prepare ($query) ;
+ 		$sth = $dbh->prepare ($query) ;
   		$sth->execute () ;
   		$sth->finish () ;
  	    }
@@ -89,52 +89,69 @@ eval {
 	$noreplymail="noreply\@$domain_name" ;
 	$date = time () ;
 	
- 	@reqlist = (
- 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
-			http_domain, short_description, cvs_box, license, register_purpose,
-			license_other, register_time, rand_hash, use_mail, use_survey,
-			use_forum, use_pm, use_cvs, use_news, 
-			type, use_docman, 
-			new_task_address, send_all_tasks,
-			use_pm_depend_box)
- 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', 'shell1', 
-			NULL, NULL, 'cvs1', 'website', NULL,
-			NULL, 0, 0, 1, 0,
-			0, 0, 0, 1,
-			1, 1,
-			'', 0,
-			0)",
- 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
-			http_domain, short_description, cvs_box, license, register_purpose,
-			license_other, register_time, rand_hash, use_mail, use_survey,
-			use_forum, use_pm, use_cvs, use_news, 
-			type, use_docman, 
-			new_task_address, send_all_tasks,
-			use_pm_depend_box)
- 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', 'shell1',
-			NULL, NULL, 'cvs1', 'website', NULL,
-			NULL, 0, 0, 1, 0,
-			0, 0, 0, 1,
-			1, 0,
-			'', 0,
-			0)",
- 	    "INSERT INTO users (user_id, user_name, email, user_pw)  
- 		    VALUES (100,'None','$noreplymail','*********')", 
- 	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
- 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, $newsadmin_groupid, 'A')",
-# 	    "INSERT INTO bug_category (bug_category_id, group_id, category_name) VALUES (100,1,'None')",
-# 	    "INSERT INTO bug_group (bug_group_id, group_id, group_name) VALUES (100,1,'None')",
+# 	@reqlist = (
+#DONE 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
+#			http_domain, short_description, cvs_box, license, register_purpose,
+#			license_other, register_time, rand_hash, use_mail, use_survey,
+#			use_forum, use_pm, use_cvs, use_news, 
+#			type, use_docman, 
+#			new_task_address, send_all_tasks,
+#			use_pm_depend_box)
+# 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', 'shell1', 
+#			NULL, NULL, 'cvs1', 'website', NULL,
+#			NULL, 0, 0, 1, 0,
+#			0, 0, 0, 1,
+#			1, 1,
+#			'', 0,
+#			0)",
+#TODO       "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = '1'",
+#DONE 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
+#			http_domain, short_description, cvs_box, license, register_purpose,
+#			license_other, register_time, rand_hash, use_mail, use_survey,
+#			use_forum, use_pm, use_cvs, use_news, 
+#			type, use_docman, 
+#			new_task_address, send_all_tasks,
+#			use_pm_depend_box)
+# 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', 'shell1',
+#			NULL, NULL, 'cvs1', 'website', NULL,
+#			NULL, 0, 0, 1, 0,
+#			0, 0, 0, 1,
+#			1, 0,
+#			'', 0,
+#			0)",
+#TODO       "UPDATE groups SET homepage = '$domain_name/news/' where group_id = '3'",
+#DONE 	    "INSERT INTO users (user_id, user_name, email, user_pw)  
+# 		    VALUES (100,'None','$noreplymail','*********')", 
+#TODO       "UPDATE users SET email = '$noreplymail' where user_id = '100'",
+#TODO       "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+#TODO       "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
+#TODO       "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, $newsadmin_groupid, 'A')",
+#NOMORE     "INSERT INTO bug_category (bug_category_id, group_id, category_name) VALUES (100,1,'None')",
+#NOMORE	    "INSERT INTO bug_group (bug_group_id, group_id, group_name) VALUES (100,1,'None')",
 # 	    "INSERT INTO bug (bug_id,group_id,status_id,category_id,bug_group_id,submitted_by,assigned_to,resolution_id)
 # 		    VALUES (100,1,100,100,100,100,100,100)",
 # 	    "INSERT INTO patch_category (patch_category_id, group_id, category_name) VALUES (100,1,'None')",
 # 	    "INSERT INTO patch (group_id,patch_status_id,patch_category_id,submitted_by,assigned_to)
 # 		    VALUES (1,100,100,100,100)",
- 	    "INSERT INTO project_group_list (group_project_id,group_id) VALUES (1,1)",
- 	    "INSERT INTO project_task (group_project_id,created_by,status_id)
- 		    VALUES (1,100,100)",
-# 	    "INSERT INTO support_category VALUES ('100','1','None')"
- 		    ) ;
+#DONE 	    "INSERT INTO project_group_list (group_project_id,group_id) VALUES (1,1)",
+#DONE 	    "INSERT INTO project_task (group_project_id,created_by,status_id)
+# 		    VALUES (1,100,100)",
+#NOMORE	    "INSERT INTO support_category VALUES ('100','1','None')"
+# 		    ) ;
+
+ 	debug "Committing." ;
+ 	$dbh->commit () ;
+
+ 	@reqlist = (
+            "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = '1'",
+            "UPDATE groups SET homepage = '$domain_name/news/' where group_id = '3'",
+            "UPDATE users SET email = '$noreplymail' where user_id = '100'",
+ 	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 4, 'A')"
+        ) ;
 
  	foreach my $s (@reqlist) {
  	    $query = $s ;
