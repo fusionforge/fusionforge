@@ -4,6 +4,7 @@
 	documents (inside GROUP) - proposal
 	* www/include/project_home.php: Fixed a little plural/singular problem - i.e.,
 	"x messages in 1 forums" becomes "x messages in 1 forum".
+	* www/stats/site_stats_utils.php: Fixed "Statistics for the past x days." msg.
 
 2004-04-19  Tim Perdue  <tim@perdue.net>
 

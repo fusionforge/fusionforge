@@ -367,7 +367,7 @@ function stats_site_projects_daily( $span ) {
 	if ( ($valid_days = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_days',array($GLOBALS['valid_days'])) ?>;</strong></p>
+		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_days',array($valid_days)); ?></strong></p>
 
 		<p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">

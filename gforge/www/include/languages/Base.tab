@@ -2164,8 +2164,8 @@ stats_site_utils	returned_no_category	returned no category name
 stats_site_utils	site	Site
 stats_site_utils	site_views	Site Views
 stats_site_utils	special_project_list	Special Project List
-stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
-stats_site_utils	statistics_for_the_past_months	Statistics for the past $1 months.
+stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days
+stats_site_utils	statistics_for_the_past_months	Statistics for the past $1 months
 stats_site_utils	subdomain	Subdomain
 stats_site_utils	subdomain_views	Subdomain Views
 stats_site_utils	support	Support
