@@ -49,7 +49,7 @@ if ($submit) {
 	}
 */
 	// Refresh page if language changed
-	if ($language != $u->getLanguage()) {
+	if ($language != $u->getLanguage() || $theme_id != $u->getThemeID()) {
 		$refresh = 1;
 	}
 
