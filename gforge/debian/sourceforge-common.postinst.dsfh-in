@@ -32,7 +32,7 @@ case "$1" in
 	
 	# "Fill in the blanks" in main config file
 	create_mainconffile
-	vars=""
+	vars="system_name"
         update_mainconffile $vars
 	/usr/sbin/sourceforge-config
     ;;

@@ -27,10 +27,12 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Soon-Son] removed all links to nonexistent document
   * [Soon-Son] more i18n effort including patch # 283
   * [Soon-Son] removed dtd definition for bug # 120
-  * [Christian] Repared trove map count 
+  * [Christian] Repared trove map count
   * [Roland] Fixed invocation of tarballs.sh in crontab.
+  * [Christian] Added system_name in sourceforge-common.postinst.dsfh-in vars
+    not sure it's done in DSF helper spirit, but this solves the missing var
 
- -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 20:58:51 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 25 May 2002 00:27:57 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
