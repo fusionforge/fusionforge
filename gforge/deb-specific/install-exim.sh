@@ -44,7 +44,7 @@ while (($l = <>) !~ /^\s*local_domains/) {
   $seen_sf_domains = 1 if ($l =~ /\s*SOURCEFORGE_DOMAINS=/) ;
 };
 # hide pgsql_servers = "localhost/gforge/some_user/some_password"
-print "SOURCEFORGE_DOMAINS=users.$domain_name:$sys_lists_host\n" unless $seen_sf_domains ;
+print "SOURCEFORGE_DOMAINS=$sys_users_host:$sys_lists_host\n" unless $seen_sf_domains ;
 chomp $l ;
 $l .= ":SOURCEFORGE_DOMAINS" unless ($l =~ /^[^#]*SOURCEFORGE_DOMAINS/) ;
 print "$l\n" ;
@@ -60,7 +60,7 @@ $sf_block = "# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #
 # keep it in the Directors Configuration section (between the second and the
 # third occurences of a line containing only the word \"end\")
 forward_for_gforge:
-  domains = users.$domain_name
+  domains = $sys_users_host
   driver = aliasfile
   file_transport = address_file
   query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?debGforgeForwardEmail\"
