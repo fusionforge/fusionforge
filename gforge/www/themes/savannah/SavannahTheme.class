@@ -185,7 +185,7 @@ class SavannahTheme extends Layout {
 		if ($sys_show_source) {
 			global $SCRIPT_NAME;
 			echo("\n");
-			echo('<a href="/source.php?file=' . $SCRIPT_NAME . ">Show Source</a>\n");
+			echo('<a href="/source.php?file=' . $SCRIPT_NAME . "\">Show Source</a>\n");
 		}
 		echo("\n</body>\n</html>\n");
 	}
