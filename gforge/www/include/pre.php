@@ -31,13 +31,6 @@ if (is_file($sys_localinc)) {
 	}
 }
 
-//
-//	This file contains a few variables that override the etc/local.inc vars
-//	This allows you to override such things as $sys_name, dbname, etc if you 
-//	have multiple installs on one server.
-//
-require('overrides.inc');
-
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
