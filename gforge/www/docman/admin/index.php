@@ -75,15 +75,16 @@ function main_page($group_id) {
 
 			</tr>
 			<tr>
+				<th>File:</th>
+				<td><a target="_blank" href="../display_doc.php/'.$row['docid'].'/'.$row['filename'].'">'.$row['title'].'</A>
+			</tr>
+			<tr>
 				<th>Language:</th>
 				<td>';
 
 		echo html_get_language_popup($Language,'language_id',$row['language_id']);
 
 		echo	'
-
-//TDP	DISPLAY LINK TO DOC
-
 			<tr>
 			        <th>Group doc belongs in:</th>
         			<td>';

@@ -1,15 +1,13 @@
 <?php
 /**
-  *
-  * SourceForge Documentaion Manager
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge Documentaion Manager
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 /*
 		by Quentin Cregan, SourceForge 06/2000
@@ -25,8 +23,8 @@ $docid=$arr[3];
 if ($docid) {
 	$query = "select data,doc_group,filetype,filename
 		from doc_data 
-		where docid = '$docid' 
-		and stateid = '1'";
+		where docid = '$docid'";
+		//and stateid = '1'";
 		// stateid = 1 == active
 	$result = db_query($query);
 	if (db_numrows($result) < 1) {
@@ -41,8 +39,12 @@ if ($docid) {
 		exit_error('Error',$g->getErrorMessage());
 	}
 
-//	Header ("Content-disposition: filename=$row[filename]");
-//	Header ("Content-type: $row[filetype]");
+	Header ("Content-disposition: filename=$row[filename]");
+	if (strstr($row['filetype'],'app')) {
+		Header ("Content-type: application/binary");
+	} else {
+		Header ("Content-type: $row[filetype]");
+	}
 	echo base64_decode($row['data']);
 
 } else {

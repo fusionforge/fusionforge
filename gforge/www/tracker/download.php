@@ -21,6 +21,12 @@ require_once('common/tracker/ArtifactType.class');
 require_once('common/include/Group.class');
 require_once('common/include/Project.class');
 
+$arr=explode('/',$REQUEST_URI);
+$group_id=$arr[3];
+$atid=$arr[4];
+$aid=$arr[5];
+$file_id=$arr[6];
+
 if (!$group_id) {
 	exit_no_group();
 }

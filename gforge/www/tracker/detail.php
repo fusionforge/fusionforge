@@ -108,7 +108,7 @@ if (session_loggedin()) {
 			echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<TD>'. $file_list[$i]->getName() .'</TD>
 			<TD>'.  $file_list[$i]->getDescription() .'</TD>
-			<TD><A HREF="/tracker/download.php?group_id='.$group_id.'&atid='. $ath->getID().'&file_id='.$file_list[$i]->getID().'&aid='. $ah->getID() .'">Download</A></TD>
+			<TD><A HREF="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">Download</A></TD>
 			</TR>';
 		}
 

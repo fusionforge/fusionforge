@@ -41,6 +41,8 @@ if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
 if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
 	Header("Content-disposition: filename=".$filename);
 	Header("Content-type: application/binary");
+	$length = filesize($sys_upload_dir.$group_name.'/'.$filename);
+	Header("Content-length: $length");
 
 	readfile($sys_upload_dir.$group_name.'/'.$filename);
 	$res=db_query("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day) 
