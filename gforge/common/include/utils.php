@@ -141,28 +141,32 @@ function util_prep_string_for_sendmail($body) {
 function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabbers='') {
 	$address=array();
 
-	$res=db_query("SELECT jabber_address,email,jabber_only
-		FROM users WHERE user_id IN (". implode($id_arr,',') .")");
-	$rows=db_numrows($res);
+	if (count($id_arr) < 1) {
+		
+	} else {
+		$res=db_query("SELECT jabber_address,email,jabber_only
+			FROM users WHERE user_id IN (". implode($id_arr,',') .")");
+		$rows=db_numrows($res);
 
-	for ($i=0; $i<$rows; $i++) {
-		//
-		//  Build arrays of the jabber address
-		//
-		if (db_result($res,$i,'jabber_address')) {
-			$address['jabber_address'][]=db_result($res,$i,'jabber_address');
-			if (db_result($res,$i,'jabber_only') != 1) {
+		for ($i=0; $i<$rows; $i++) {
+			//
+			//  Build arrays of the jabber address
+			//
+			if (db_result($res,$i,'jabber_address')) {
+				$address['jabber_address'][]=db_result($res,$i,'jabber_address');
+				if (db_result($res,$i,'jabber_only') != 1) {
+					$address['email'][]=db_result($res,$i,'email');
+				}
+			} else {
 				$address['email'][]=db_result($res,$i,'email');
 			}
-		} else {
-			$address['email'][]=db_result($res,$i,'email');
 		}
-	}
-	if (count($address['email']) > 0) {
-		$extra_email1=implode($address['email'],',').',';
-	}
-	if (count($address['jabber_address']) > 0) {
-		$extra_jabber1=implode($address['jabber_address'],',').',';
+		if (count($address['email']) > 0) {
+			$extra_email1=implode($address['email'],',').',';
+		}
+		if (count($address['jabber_address']) > 0) {
+			$extra_jabber1=implode($address['jabber_address'],',').',';
+		}
 	}
 	if ($extra_email1 || $extra_emails) {
 		util_send_message('',$subject,$body,'',$extra_email1.$extra_emails);
