@@ -1,1 +1,1 @@
-35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include
+35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include

@@ -51,7 +51,7 @@ Use it in the following way.
 1.2.3 Install the cron file
    	You should install a cron file in /etc/cron.d/gforge-plugin-cvstracker like this:
 
-   35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include
+   35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include
 
 1.2.4 Configure the plugin
 
