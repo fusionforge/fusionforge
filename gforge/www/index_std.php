@@ -42,13 +42,18 @@ echo $HTML->boxTop('Getting GForge');
 <a href="http://jabberd.jabberstudio.org/">Jabber Server *</a><br />
 * optional
 <p>
+<strong>Get Help</strong><br />
+<a href="http://gforge.org/forum/forum.php?forum_id=6"><strong>Help Board</strong></a><br />
+<a href="http://gforge.org/docman/?group_id=1"><strong>Online Docs</strong></a><br />
+<p>
 <strong>Contribute!</strong><br />
 <a href="http://gforge.org/projects/gforge/"><strong>GForge Project Page</strong></a><br />
-<a href="http://gforge.org/forum/forum.php?forum_id=6"><strong>Help Board</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=5"><strong>Developer Board</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=29"><strong>Oracle Board</strong></a><br />
+<a href="http://gforge.org/forum/forum.php?forum_id=44"><strong>SOAP API</strong></a><br />
 <a href="http://gforge.org/tracker/?atid=105&group_id=1&func=browse"><strong>Bug Tracker</strong></a><br />
-<a href="http://gforge.org/tracker/?func=browse&group_id=1&atid=106"><strong>Patch Submissions</strong></a>
+<a href="http://gforge.org/tracker/?func=browse&group_id=1&atid=106"><strong>Patch Submissions</strong></a><br />
+<a href="http://gforge.org/tracker/?func=browse&group_id=1&atid=119"><strong>Feature Requests</strong></a>
 <p>
 <a href="http://www.debian.org/"><strong>Debian Users</strong></a> can simply add 
 "http://people.debian.org/~bayle/" to /etc/apt/sources.list and type 
