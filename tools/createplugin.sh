@@ -813,7 +813,7 @@ set -e
 
 case "\$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/sf-unregister-plugin $minus
+	/usr/lib/gforge/bin/unregister-plugin $minus
 	invoke-rc.d apache reload
 	/usr/lib/gforge/plugins/$minus/bin/db-delete.pl
         ;;
