@@ -1,3 +1,6 @@
+-- Roland Mas 20020307
+create unique index group_unix_uniq on groups (unix_group_name);
+
 -- 20001209
 -- drop index downloads_idx;
 -- create index frsdlstatsgroupagg_day_dls on  frs_dlstats_group_agg (day,downloads);
@@ -44,9 +47,15 @@ CREATE TABLE project_sums_agg (
 CREATE INDEX projectsumsagg_groupid ON project_sums_agg (group_id);
 
 -- 20010112
-ALTER TABLE groups ADD COLUMN bug_due_period int NOT NULL DEFAULT 2592000;
-ALTER TABLE groups ADD COLUMN patch_due_period int NOT NULL DEFAULT 5184000;
-ALTER TABLE groups ADD COLUMN support_due_period int NOT NULL DEFAULT 1296000;
+ALTER TABLE groups ADD COLUMN bug_due_period int ;
+ALTER TABLE groups ALTER COLUMN bug_due_period SET DEFAULT 2592000;
+UPDATE groups SET bug_due_period = 2592000 ;
+ALTER TABLE groups ADD COLUMN patch_due_period int ;
+ALTER TABLE groups ALTER COLUMN patch_due_period SET DEFAULT 5184000;
+UPDATE groups SET patch_due_period = 5184000;
+ALTER TABLE groups ADD COLUMN support_due_period int ;
+ALTER TABLE groups ALTER COLUMN support_due_period SET DEFAULT 1296000;
+UPDATE groups SET support_due_period = 1296000;
 
 -- 20010126
 CREATE TABLE prdb_dbs (
@@ -89,8 +98,10 @@ CREATE INDEX idx_vhost_groups ON prweb_vhost (group_id);
 CREATE UNIQUE INDEX idx_vhost_hostnames ON prweb_vhost(vhost_name);
 
 -- 20010206
-ALTER TABLE db_images ADD COLUMN upload_date int NOT NULL;
-ALTER TABLE db_images ADD COLUMN version int NOT NULL;
+ALTER TABLE db_images ADD COLUMN upload_date int ;
+ALTER TABLE db_images ALTER COLUMN upload_date SET DEFAULT 0 ;
+ALTER TABLE db_images ADD COLUMN version int ;
+ALTER TABLE db_images ALTER COLUMN version SET DEFAULT 0 ;
 CREATE UNIQUE INDEX usergroup_uniq_groupid_userid ON user_group(group_id,user_id);
 
 -- 20010301
@@ -108,7 +119,8 @@ ALTER TABLE user_preferences RENAME COLUMN preference_value TO dead1;
 ALTER TABLE user_preferences ADD COLUMN preference_value TEXT;
 UPDATE user_preferences SET preference_value=dead1;
 UPDATE user_preferences SET dead1='';
-ALTER TABLE user_group ADD COLUMN artifact_flags INT NOT NULL DEFAULT 0;
+ALTER TABLE user_group ADD COLUMN artifact_flags INT ;
+ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
 UPDATE user_group SET artifact_flags=0;
 CREATE TABLE artifact_group_list (
   group_artifact_id serial primary key,
@@ -434,7 +446,8 @@ SELECT group_id+300000,user_id,patch_flags
 FROM user_group;
 INSERT INTO artifact_category (id,group_artifact_id,category_name,auto_assign_to)
 SELECT patch_category_id+300000,group_id+300000,category_name,100 FROM patch_category;
-ALTER TABLE patch ADD COLUMN resolution_id INT NOT NULL DEFAULT 100;
+ALTER TABLE patch ADD COLUMN resolution_id INT ;
+ALTER TABLE patch ALTER COLUMN resolution_id SET DEFAULT 100;
 UPDATE patch SET resolution_id=patch_status_id;
 -- vacuum analyze patch;
 update patch set patch_status_id=2 where patch_status_id > 3;
@@ -653,7 +666,6 @@ alter table groups rename column patch_due_period to dead12;
 alter table groups rename column support_due_period to dead13;
 
 drop index groups_unix; 
-create unique index group_unix_uniq on groups (unix_group_name);
 
 -- 20010313
 create unique index users_namename_uniq on users(user_name);
@@ -924,10 +936,12 @@ CREATE UNIQUE INDEX statssite_month_day on stats_site(month,day);
 -- GRANT ALL ON stats_subd_pages TO stats;
 
 -- 20010412
-ALTER TABLE groups ADD COLUMN logo_image_id int NOT NULL DEFAULT 100;
+ALTER TABLE groups ADD COLUMN logo_image_id int ;
+ALTER TABLE groups ALTER COLUMN logo_image_id SET DEFAULT 100;
 
 -- 20010507
-ALTER TABLE users ADD COLUMN block_ratings int NOT NULL DEFAULT 0;
+ALTER TABLE users ADD COLUMN block_ratings int ;
+ALTER TABLE users ALTER COLUMN block_ratings SET DEFAULT 0;
 
 -- 20010509
 INSERT INTO frs_filetype VALUES (100,'None');
