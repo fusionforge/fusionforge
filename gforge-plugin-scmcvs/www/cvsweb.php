@@ -62,6 +62,7 @@ if ($projectName) {
 	}
 	if (in_array($contentType, $supportedContentTypes)) {
 		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
+		echo '<div id="cvsweb">';
 	} else {
 		header("Content-type: $contentType" );
 	}
@@ -81,6 +82,7 @@ if ($projectName) {
 	echo $content;
 	
 	if (in_array($contentType, $supportedContentTypes)) {
+		echo '</div>';
 		scm_footer(array());
 	}
 } else {
