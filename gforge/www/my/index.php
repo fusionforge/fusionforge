@@ -341,7 +341,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->getText('my', 'no_open_tasks').'</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->getText('my', 'no_bookmarks').'</B></TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -374,7 +374,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "AND groups.status='A'");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<TR><TD COLSPAN=\"2\"><B>'.$Language->getText('my', 'no_open_tasks').'</B></TD></TR>';
+		echo '<TR><TD COLSPAN=\"2\"><B>'.$Language->getText('my', 'no_projects').'</B></TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
