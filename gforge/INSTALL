@@ -78,24 +78,96 @@ WEB SETUP
 Move the GForge tarball into position and make the www/ directory the
 "Document Root".
 
-Apache's http.conf file should have these values:
+The following are sample Apache 2.0 httpd.conf entries:
 
+NameVirtualHost 192.168.1.1
+
+#
+#	Primary GForge vhost
+#
+<VirtualHost 192.168.1.1>
+ServerName gforge.company.com
+ServerAdmin webmaster@gforge.company.com
+DocumentRoot /var/www/gforge3/www
 ErrorDocument 404 /404.php
-php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
-php_admin_value default_charset "UTF-8"
-php_flag register_globals on
-php_flag file_uploads on
-<Location /projects>
-  ForceType application/x-httpd-php
-</Location>
-<Location /users>
-  ForceType application/x-httpd-php
-</Location>
-
-If you are using Apache 2, you should also add:
-
+php_value include_path ".:/var/www/gforge3/:/var/www/gforge3/www/include/"
+<Files projects>
+SetOutputFilter PHP
+SetInputFilter PHP
 AcceptPathInfo on
+</Files>
+<Files users>
+SetOutputFilter PHP
+SetInputFilter PHP
+AcceptPathInfo on
+</Files>
+<Files *.php>
+    SetOutputFilter PHP
+    SetInputFilter PHP
+    AcceptPathInfo On
+    LimitRequestBody 2097152
+</Files>
+#
+#	LOCATION may have to be used instead of FILES
+#
+#<Location /projects>
+#  ForceType application/x-httpd-php
+#</Location>
+#<Location /users>
+#  ForceType application/x-httpd-php
+#</Location>
+DirectoryIndex index.php index.cgi index.html index.htm
+</VirtualHost>
 
+#
+#	Lists vhosts - where mailman lives
+#
+<VirtualHost 192.168.1.1>
+ServerName lists.gforge.company.com
+ServerAdmin mailman@lists.gforge.company.com
+DocumentRoot /var/www/mailman
+ScriptAlias   /mailman/ /var/mailman/cgi-bin/
+Alias /pipermail/ /var/mailman/archives/public/
+DirectoryIndex index.php index.cgi index.html index.htm
+</VirtualHost>
+
+#
+#	CVS Vhost - allows viewing of CVSWeb for each project
+#
+<VirtualHost 192.168.1.1>
+ServerName cvs.gforge.company.com
+ServerAdmin webmaster@cvs.gforge.company.com
+DocumentRoot /var/www/cvs
+DirectoryIndex index.php index.cgi index.html index.htm
+</VirtualHost>
+
+#
+#	*.gforge.company.com vhosts
+#	Each project can have its own vhost
+#
+#	WARNING - security is degraded by having this
+#	on the same machine as the primary GForge
+#
+<VirtualHost 192.168.1.1>
+  ServerName projects.gforge.company.com
+  ServerAlias *.gforge.company.com
+  DocumentRoot /var/www/homedirs/groups
+  VirtualDocumentRoot /var/www/homedirs/groups/%1
+  <Directory /var/www/homedirs/groups>
+    Options Indexes
+#
+#	WARNING - turning on php will allow any user
+#	to upload a php file to your server, and include 
+#	the gforge local.inc file and get your password to 
+#	connect to the database and have total control.
+#
+    php_flag engine off
+    AllowOverride None
+    order allow,deny
+    allow from all
+  </Directory>
+  DirectoryIndex index.html index.htm
+</VirtualHost>
 
 PHP setup
 ---------
