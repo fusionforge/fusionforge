@@ -18,7 +18,7 @@ if ($submit) {
 	if (!$u->setThemeID($new_theme_id)) {
 		exit_error('Error',$u->getErrorMessage());
 	} else {
-		$feedback='Successful';
+		header("Location: /themes/?feedback=Successful");
 	}
 }
 
