@@ -1,6 +1,6 @@
 sourceforge (2.5-25+) unstable; urgency=low
 
-  * 
+  * [Roland] Removed unused dir /usr/lib/sourceforge/templates.
 
  --
 
