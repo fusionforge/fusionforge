@@ -15,6 +15,8 @@
 #
 # 2000-09-26  Ragnvald Larsen  <ragnvald@users.sourceforge.net>
 #	* Initial translation. Norsk  bokmaal oversettelse.
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * Fixed files/forum tab
 #
 menu	account_maintenance	Vedlikehold av brukerinformasjon
 menu	bookmark_page	Bokmerke
@@ -46,7 +48,8 @@ group	long_survey	Sp&oslash;rreunders&oslash;kelser
 group	short_bugs	Feil
 group	short_scm	SCM
 group	short_docman	Dokumentasjon
-group	short_files	Filesgroup	short_forum	Fora
+group	short_files	Files
+group	short_forum	Fora
 group	short_homepage	Hjemmeside
 group	short_mail	Epostlister
 group	short_main	Topp

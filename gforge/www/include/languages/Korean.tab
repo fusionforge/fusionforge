@@ -24,7 +24,6 @@
 #						Changed fontname from gulim to 굴림체 to 
 #						prevent ugly screen on mozilla
 # 
-
 account	title	사용자 등록 정보
 account	updated	갱신되었습니다.
 account_change_email	desc	<p>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부터 확인하는 절차를 밟아야 합니다. </p><p>제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 중요한 일입니다. </p><p>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다.</p>

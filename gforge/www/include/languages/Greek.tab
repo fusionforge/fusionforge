@@ -12,9 +12,10 @@
 #  */
 #
 # ChangeLog:
-#
 # 2000-10-15  Simos Xenitellis
 #	* Initial translation
+# 2005-01-13  Tobias Rötschke
+#   * Fixed files / forum tab
 #
 menu	account_maintenance	Ενημέρωση Λογαριασμού
 menu	bookmark_page	Σελίδα Αγαπημένων
@@ -46,7 +47,8 @@ group	long_survey	Έρευνες
 group	short_bugs	Σφάλματα
 group	short_scm	SCM
 group	short_docman	Τεκμηρίωση
-group	short_files	Filesgroup	short_forum	Βήματα
+group	short_files	Files
+group	short_forum	Βήματα
 group	short_homepage	Πρώτη Σελίδα
 group	short_mail	Λίστες
 group	short_main	Κύριο

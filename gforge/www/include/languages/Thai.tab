@@ -18,6 +18,8 @@
 #	National Electronic and Computer Technology Center.
 #	Sorry that I can't translate all of them... There seems no standard translation
 #	for Software Development Vocab. Some thai may even prefer English than translation.
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * Fixed files/forum tab
 #
 menu	account_maintenance	ดูแลบัญชีผู้ใช้
 menu	bookmark_page	ใส่ที่คั่นหน้า
@@ -47,7 +49,8 @@ group	long_support	บริการทางเทคนิก
 group	long_survey	แบบสำรวจ
 group	short_bugs	บั๊ก
 group	short_docman	เอกสาร
-group	short_files	Filesgroup	short_forum	สนทนา
+group	short_files	Files
+group	short_forum	สนทนา
 group	short_homepage	โฮมเพจ
 group	short_mail	จดหมาย
 group	short_news	ข่าว

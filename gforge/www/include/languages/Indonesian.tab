@@ -15,6 +15,8 @@
 #
 # 2000-10-17  Antonio Wawolangi  <scientist@catholic.org>
 #	* Initial translation
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * Fixed files/forum tab
 #
 menu	account_maintenance	Pemeliharaan Account
 menu	bookmark_page	Halaman Bookmark
@@ -46,7 +48,8 @@ group	long_survey	Survey
 group	short_bugs	Bugs
 group	short_scm	SCM
 group	short_docman	Dokumentasi
-group	short_files	Filesgroup	short_forum	Forum
+group	short_files	Files
+group	short_forum	Forum
 group	short_homepage	Home Page
 group	short_mail	Daftar
 group	short_main	Utama

@@ -24,6 +24,8 @@
 #                . Correciã teminolâgica (programari, etc.)
 #                . Nom©s hi majêscules a la lletra inicial i noms propis.
 #                . D'altres criteris trets de Soft Catal  (utilitzaciã del "vos").
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * Fixed files/forum tab
 #
 menu	account_maintenance	Manteniment de compte
 menu	bookmark_page	Página de marcadors
@@ -55,7 +57,8 @@ group	long_survey	Enquestes
 group	short_bugs	Errades
 group	short_scm	SCM
 group	short_docman	Documents
-group	short_files	Filesgroup	short_forum	Fòrums
+group	short_files	Files
+group	short_forum	Fòrums
 group	short_homepage	Pàgina de inici
 group	short_mail	Llistes
 group	short_news	Notícies

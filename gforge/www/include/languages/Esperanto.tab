@@ -18,6 +18,8 @@
 # 2000-10-26  FAGOT Alain  <kameleono@users.sourceforge.net>
 #	* surbaze de jam ekzistanta traduko, gxustigoj laux
 #	Komputada Leksikono (spelling/lexical corrections)
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * fixed files/forum tab
 #
 about_foundries	about_blurb	Pri fandejoj
 menu	about_gforge	Pri GForge
@@ -51,7 +53,8 @@ group	long_survey	Demandilo
 group	short_bugs	Cimoj
 group	short_scm	SCM
 group	short_docman	Dokumentoj
-group	short_files	Filesgroup	short_forum	Forumoj
+group	short_files	Dosieraj
+group	short_forum	Forumoj
 group	short_homepage	Hejmpaĝo
 group	short_mail	Listoj
 group	short_main	Ĉefa paĝo

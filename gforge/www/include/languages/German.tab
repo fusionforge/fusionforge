@@ -29,7 +29,6 @@
 # 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
 #   * corrected submit_new and depend_info
 #
-
 account	title	Account Einstellungen
 account	updated	Aktualisiert
 account_change_email	desc	<p>Das Ändern Ihrer EMail-Adresse erfordert eine Bestätigung von Ihrem neu angegebenen EMail-Konto aus, damit wir sicherstellen können, dass wir eine korrekte EMail-Adresse gespeichert haben.</p><p>Wir müssen für jeden Benutzer eine korrekte EMail-Adresse pflegen, weil wir über diese die Zugriffsberechtigung regeln. Falls wir aus projektbezogenen Gründen einen Benutzer erreichen müssen, ist es wichtig, dass uns das auch möglich ist.</p>  <p>Durch das Abschicken des unten stehenden Formulars wird Ihnen eine EMail mit einem Bestätigungs-Link  an Ihre neue EMail-Adresse zugeschickt. Das Besuchen dieses Links wird die Änderung der EMail-Adresse endgültig übernehmen.</p>

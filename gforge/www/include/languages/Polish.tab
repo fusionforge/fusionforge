@@ -17,6 +17,8 @@
 #	* Initial translation
 # 2000-10-16  Max Gilead  <gilead@linart.pl>
 #	* Better translation, added new strings
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * Fixed files/forum tab
 #
 about_foundries	about_blurb	O działach
 menu	about_gforge	About GForge
@@ -50,7 +52,8 @@ group	long_survey	Sondaże
 group	short_bugs	Pluskwy
 group	short_scm	SCM
 group	short_docman	Dokumentacja
-group	short_files	Filesgroup	short_forum	Forum
+group	short_files	Pliki
+group	short_forum	Forum
 group	short_homepage	Strona domowa
 group	short_mail	Listy dyskusyjne
 group	short_main	Główna

@@ -1,4 +1,3 @@
-﻿#/**
 #  *
 #  * Spanish message catalog
 #  *
@@ -2775,7 +2774,7 @@ tracker_artifact	are_you_sure_delete	¿Está seguro que desea borrar este regist
 tracker_artifact	confirm_delete	Sí, deseo borrar este registro
 tracker_artifact	delete_failed	Falló el borrado del registro
 tracker_artifact	delete_failed_confirm	Falló la confirmación. Registro no borrado.
-tracker_artifact	delete_text Borrar este registro
+tracker_artifact	delete_text	Borrar este registro
 tracker_artifact	deleted_successfully	Registro borrado correctamente.
 tracker_artifact	deleted_title	Borrar un Registro
 tracker_artifact	double_submit	Está intentando enviar dos veces este registro. Por favor, evite pulsar dos veces.
