@@ -3,7 +3,7 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id: replication-master.sql,v 1.7 2001/06/27 00:11:20 tperdue Exp $	
+--	$Id$	
 --
 
 COPY stats_site WITH OIDS TO '/home/tperdue/dumpfiles/stats_site.dump';

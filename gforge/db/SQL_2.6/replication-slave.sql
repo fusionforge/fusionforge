@@ -3,7 +3,7 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id: replication-slave.sql,v 1.8 2001/06/27 00:11:20 tperdue Exp $	
+--	$Id$	
 --
 
 CREATE TABLE "stats_site" (

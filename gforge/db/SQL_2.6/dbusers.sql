@@ -3,7 +3,7 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id: dbusers.sql,v 1.3 2001/06/19 16:50:06 jbyers Exp $	
+--	$Id$	
 --
 
 CREATE USER backend WITH PASSWORD 'xxxxx' NOCREATEDB NOCREATEUSER;
