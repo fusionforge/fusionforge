@@ -82,7 +82,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	
 	print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
 	<a href="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
-		html_image('ic/mail16w.png','20','20',array('alt'=>$Language->getText('project_showfiles','monitor_package').'Monitor This Package')) .
+		html_image('ic/mail16w.png','20','20',array('alt'=>$Language->getText('project_showfiles','monitor_package'))) .
 		'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 	   // get the releases of the package

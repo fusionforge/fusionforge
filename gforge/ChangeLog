@@ -2,6 +2,9 @@
 
 	* www/search/index.php:
 	Fixed bug [ #477 ] www/search/index.php ignores $limit
+	
+	* www/project/showfiles.php
+	Fixed bug [ #377 ] OSX Theme: text is displayed twice
 
 2003-08-05 Tom Copeland  <tom@infoether.com>
 
