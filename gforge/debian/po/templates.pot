@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-04 23:56+0200\n"
+"POT-Creation-Date: 2003-07-07 22:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,7 +194,7 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
-msgid "Answering \"yes\" here will perform that redirection."
+msgid "Accepting this option will perform that redirection."
 msgstr ""
 
 #. Description

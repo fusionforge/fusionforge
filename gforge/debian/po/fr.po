@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-04 23:56+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2003-07-07 22:34+0200\n"
+"PO-Revision-Date: 2003-07-07 21:54+0200\n"
+"Last-Translator: Denis Barbier <barbier@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: ../gforge-db-postgresql.templates.dsfh-in:9
 #, fuzzy
 msgid "Your shell server"
-msgstr "Votre serveur de telechargement"
+msgstr "Votre serveur d'accès"
 
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9
@@ -41,7 +41,7 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:18
 msgid "Your download server"
-msgstr "Votre serveur de telechargement"
+msgstr "Votre serveur de téléchargement"
 
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:18
@@ -219,8 +219,8 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
-msgid "Answering \"yes\" here will perform that redirection."
-msgstr "Répondre \"oui\" ici mettra en place cette redirection."
+msgid "Accepting this option will perform that redirection."
+msgstr "Accepter cette proposition mettra en place cette redirection."
 
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:74
@@ -303,7 +303,7 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:109
 #, fuzzy
 msgid "Do you want a simple DNS setup?"
-msgstr "Voulez-vous mettre à jour ${file} ?"
+msgstr "Voulez-vous une gestion DNS simplifiée ?"
 
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:109

@@ -13,4 +13,4 @@ _Description: Do you want mail to ${noreply} to be deleted?
  It is advised that you let the package direct e-mail to that address to a
  black hole (/dev/null), unless you have another use for that address.
  .
- Answering "yes" here will perform that redirection.
+ Accepting this option will perform that redirection.
