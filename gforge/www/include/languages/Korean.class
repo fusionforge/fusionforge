@@ -24,6 +24,9 @@
 
 	Soon-Son Kwon, 2002/06/11
 	*added more strings
+
+	Soon-Son Kwon, 2002/06/12
+	*added more strings
 */
 
 class Korean extends BaseLanguage {
@@ -211,6 +214,18 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 
 	$this->USERS_PEERINFO1='만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> 이 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것이며, 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.';
 	$this->USERS_PEERINFO2='Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 이곳의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul></i></p>';
+
+    // New strings added on 2002/06/11 by Soon-Son Kwon
+	$this->MY_about_blurb='여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.';
+	$this->MY_no_bookmarks='현재 저장된 책갈피가 없습니다.';
+	$this->MY_no_monitored_filemodules='<H3>모니터하고 있는 파일이 없습니다.</H3><P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;';
+	$this->MY_no_monitored_forums='<H3>모니터하고 있는 게시판이 없습니다.</H3><P>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;';
+	$this->MY_no_survey='진행중인 설문조사가 없습니다.';
+	$this->MY_no_open_bugs='내가 제출했거나, 혹은 나에게 할당되어 있는 버그가 없습니다.';
+	$this->MY_no_open_request='내가 제출했거나, 혹은 나에게 할당되어 있는 기술지원 요청 항목이 없습니다.';
+	$this->MY_no_task='나에게 할당되어 있는 임무가 없습니다.';
+	$this->MY_no_projects='아직 어떤 프로젝트에도 소속되어 있지 않습니다.';
+
 
 	}
 }

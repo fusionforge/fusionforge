@@ -35,10 +35,9 @@ if (user_isloggedin() || $sf_user_hash) {
 	echo site_user_header(array('title'=>'My Personal Page'));
 	?>
 
-	<H3>Personal Page for: <?php print $G_SESSION->getUnixName(); ?></H3>
+	<H3><?php echo $Language->MY_PERSONAL_PAGE; ?>: <?php print $G_SESSION->getUnixName(); ?></H3>
 	<P>
-	Your personal page contains lists of bugs and tasks that 
-	you are assigned, plus a list of groups that you are a member of.
+	<?php echo $Language->MY_about_blurb; ?>
 	<P>
 	<TABLE width="100%" border="0">
 	<TR><TD VALIGN="TOP" WIDTH="50%">
@@ -61,7 +60,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>No Open Bugs are assigned to you or were submitted by you</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_open_bugs.'</B></TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -97,7 +96,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>No open support requests are assigned to you or were submitted by you</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_open_request.'</B></TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -130,16 +129,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2">
-			<H3>You are not monitoring any forums</H3>
-			<P>
-			If you monitor forums, you will be sent new posts in 
-			the form of an email, with a link to the new message.
-			<P>
-			You can monitor forums by clicking &quot;Monitor Forum&quot; in 
-			any given discussion forum.
-			<BR>&nbsp;
-		</TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_monitored_forums.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -177,16 +167,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2">
-			<H3>You are not monitoring any files</H3>
-			<P>
-			If you monitor files, you will be sent new release notices via
-			email, with a link to the new file on our download server.
-			<P>
-			You can monitor files by visiting a project\'s &quot;Summary Page&quot; 
-			and clicking on the check box in the files section.
-			<BR>&nbsp
-		</TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_monitored_filemodules.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -263,7 +244,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<TR><TD COLSPAN="2"><B>You have no open tasks assigned to you.</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_task.'</B></TD></TR>';
 		echo db_error();
 	}
 
@@ -327,7 +308,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>You currently do not have any bookmarks saved</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_bookmarks.'</B></TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -360,7 +341,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "AND groups.status='A' AND groups.is_public=1");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo "<TR><TD COLSPAN=\"2\"><B>You're not a member of any public projects</B></TD></TR>";
+		echo "<TR><TD COLSPAN=\"2\"><B>'.$Language->MY_no_projects.'</B></TD></TR>";
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {

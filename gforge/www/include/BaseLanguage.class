@@ -8,24 +8,23 @@
 
 /*
 	Tim Perdue, September 7, 2000
+	*Base class for adding multilingual support to SF.net
 
-
-	Base class for adding multilingual support to SF.net
-
-	Contains variables which can be overridden optionally by other
+	*Contains variables which can be overridden optionally by other
 	language files.
 
-	Base language is english - an english class will extend this one,
+	*Base language is english - an english class will extend this one,
 	but won't override anything
 
-	As new languages are added, they can override what they wish, and 
+	*As new languages are added, they can override what they wish, and 
 		as we extend our class, other languages can follow suit
 		as they are translated without holding up our progress
 
 	Soon-Son Kwon, June 11, 2002
-	
+	*Added more strings
 
-	Added more strings
+	Soon-Son Kwon, June 12, 2002
+	*Added more strings
 */
 
 class BaseLanguage {
@@ -221,6 +220,17 @@ Content owned by VA Linux Systems is copyright
 
 	var $USERS_PEERINFO1='If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The SourceForge Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.';
 	var $USERS_PEERINFO2='The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user\'s rank compared to all ranked SourceForge users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.  </ul>';
+
+	// New strings added on 2002/06/12 by Soon-Son Kwon
+	var $MY_about_blurb='Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.';
+	var $MY_no_bookmarks='You currently do not have any bookmarks saved';
+	var $MY_no_monitored_filemodules='<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project\'s &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp';
+	var $MY_no_monitored_forums='<H3>You are not monitoring any forums</H3><P>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.<P>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.<BR>&nbsp;';
+	var $MY_no_survey='Survey Not Found';
+	var $MY_no_open_bugs='No Open Bugs assigned to you or were submitted by you.';
+	var $MY_no_open_request='No Open Support Requests are assigned to you or were submitted by you.';
+	var $MY_no_task='You have no open tasks assigned to you.';
+	var $MY_no_projects='You\'re not a member of any active projects';
 
 	/*
 		returns database result
