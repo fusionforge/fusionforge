@@ -1,5 +1,9 @@
-2004-04-08  Tom Copeland <tom@infoether.com>
+2004-04-13  Tom Copeland <tom@infoether.com>
 	
+	* www/admin/userlist.php: Added sorting by user_name and add_date.
+	
+2004-04-08  Tom Copeland <tom@infoether.com>
+
 	* www/forum/include/ForumHTML.class: SQL optimization - replaced a 'select *'
 	with explicit field selection.  This really didn't save that much, since only
 	only field was unused, but every little bit helps.
@@ -7,7 +11,7 @@
 	a 'select count(*)'.  This query ranked # 22 (executed 364 times) on an 
 	overnight SQL analysis run, so this optimization should help a fair bit.
 
-2004-04-08
+2004-04-08  Christian Bayle <bayle@debian.org>
 
 	* Better management of symlink in apache config (install-apache.sh and
 	setup)

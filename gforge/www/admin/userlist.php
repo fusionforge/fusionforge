@@ -31,7 +31,7 @@ function show_users_list ($result) {
 		<font color="red">' .$Language->getText('admin_userlist','suspended'). '</font> '
 		.$Language->getText('admin_userlist','pending').'</p>';
 
-	$tableHeaders = array(
+	$headers = array(
 		$Language->getText('admin_userlist', 'login'),
 		$Language->getText('admin_userlist', 'add_date'),
 		'&nbsp;',
@@ -40,10 +40,18 @@ function show_users_list ($result) {
 		'&nbsp;'
 	);
 
-	echo $GLOBALS['HTML']->listTableTop($tableHeaders);
+	$headerLinks = array(
+	  '?sortorder=user_name',
+	  '?sortorder=add_date',
+	  '?sortorder=user_name',
+	  '?sortorder=user_name',
+	  '?sortorder=user_name',
+	  '?sortorder=user_name'
+	);
+
+	echo $GLOBALS['HTML']->listTableTop($headers, $headerLinks);
 
 	$count = 0;
-
 	while ($usr = db_fetch_array($result)) {
 		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td bgcolor="';
 		if ($usr['status'] == 'A') print "#00ff00";
@@ -61,7 +69,6 @@ function show_users_list ($result) {
 		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
 		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
 		echo '</tr>';
-		
 		$count ++;
 	}
 	
@@ -79,16 +86,12 @@ if ($action=='delete') {
 	performAction('S', "SUSPENDED", $user_id);
 }
 
-/*
-	Add a user to this group
-*/
+// Add a user to this group
 if ($action=='add_to_group') {
 	echo "ACTION NOT SUPPORTED";
 }
 
-/*
-	Show list of users
-*/
+//	Show list of users
 print "<p>" .$Language->getText('admin_userlist','user_list_for_group');
 if (!$group_id) {
 	print "<strong>" .$Language->getText('admin_userlist','all_groups'). "</strong>";
@@ -97,7 +100,11 @@ if (!$group_id) {
 	if ($user_name_search) {
 		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' ORDER BY user_name");
 	} else {
-		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY user_name");
+		$sortorder = $_GET['sortorder'];
+		if (!isset($sortorder) || empty($sortorder)) {
+		  $sortorder = "user_name";
+		}
+		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY ".$sortorder);
 	}
 	show_users_list ($result);
 } else {
