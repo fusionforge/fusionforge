@@ -1,4 +1,4 @@
-sourceforge (2.5-31+) unstable; urgency=low
+sourceforge (2.5-32) unstable; urgency=low
 
   * [Roland] www/admin/useredit.php: Fixed Unix UID attribution, so that
     accounts activated by the admin are given an UID too.  Previously only
@@ -12,8 +12,10 @@ sourceforge (2.5-31+) unstable; urgency=low
   * [Soon-Son] fixed an error when rating a user. The error message was
     as follows: (Fatal error: Call to a member function on a non-object 
     in /usr/lib/sourceforge/www/include/User.class on line 666)
+  * [Roland] Hot news!  ProFTPd is now in main!  Sourceforge migrated back
+    from non-US to main.  Ftpmasters: sorry about all the fuss.
 
- --
+ -- Roland Mas <lolando@debian.org>  Sun,  1 Sep 2002 18:35:18 +0200
 
 sourceforge (2.5-31) unstable; urgency=low
 
