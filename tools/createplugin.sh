@@ -21,6 +21,7 @@ else
 		mkdir $plugdir/etc
 		mkdir $plugdir/debian
 		mkdir $plugdir/include
+		mkdir $plugdir/include/languages
 		mkdir $plugdir/lib
 		mkdir $plugdir/www
 
@@ -626,7 +627,7 @@ echo Creating $plugdir/debian/dirs
 cat > $plugdir/debian/dirs <<FIN
 etc
 etc/gforge
-etc/gforge/httpd.conf.d
+etc/gforge/httpd.d
 etc/gforge/httpd.secrets.d
 etc/gforge/plugins
 etc/gforge/plugins/$minus
@@ -637,6 +638,7 @@ usr/lib/gforge/plugins/
 usr/lib/gforge/plugins/$minus
 usr/lib/gforge/plugins/$minus/bin
 usr/lib/gforge/plugins/$minus/include
+usr/lib/gforge/plugins/$minus/include/languages
 usr/lib/gforge/plugins/$minus/lib
 usr/lib/gforge/cgi-bin
 usr/share
@@ -881,7 +883,7 @@ install: build
 	# cp -r cgi-bin/* \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/cgi-bin/
 	cp -r etc/* \$(DESTDIR)/etc/gforge/plugins/\$(PLUGIN)/
 	cp -r www/* \$(DESTDIR)/usr/share/gforge/www/plugins/\$(PLUGIN)/
-	install -m 0644 httpd.conf \$(DESTDIR)/etc/gforge/httpd.conf.d/50\$(PLUGIN)
+	install -m 0644 httpd.conf \$(DESTDIR)/etc/gforge/httpd.d/50\$(PLUGIN)
 	# install -m 0600 httpd.secrets \$(DESTDIR)/etc/gforge/httpd.secrets.d/50\$(PLUGIN)
 	find \$(DESTDIR)/ -name CVS -type d | xargs rm -rf
 	find \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/bin/ -type f | xargs chmod 0755
