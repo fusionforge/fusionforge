@@ -37,7 +37,7 @@ if ($submit){
 		exit_error($Language->getText('general','error'),$Language->getText('general','no_valid_group',array('Document')));
 	}
 
-	if (!$title || !$description) { 
+	if (!$title || !$description) {
 		exit_missing_param();
 	}
 
@@ -67,31 +67,31 @@ if ($submit){
 	docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'),'docman','',$g->getPublicName());
 	?>
 	<p>
-	<?php echo $Language->getText('docman_new','intro') ?> 
-	<br />
+	<?php echo $Language->getText('docman_new','intro') ?>
+	</p>
 
-	<form name="adddata" action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="POST" enctype="multipart/form-data">
+	<form name="adddata" action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post" enctype="multipart/form-data">
 
 	<table border="0" width="75%">
 
 	<tr>
 		<td>
 		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?></strong> <?php echo utils_requiredField(); ?> <br />
-		<input type="text" name="title" size="40" maxlength="255">
+		<input type="text" name="title" size="40" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td>
 		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="description" size="50" maxlength="255">
+		<input type="text" name="description" size="50" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td>
 		<strong>	<?php echo $Language->getText('docman_new','upload_file') ?> :</strong><?php echo utils_requiredField(); ?><br />
-		<input type="file" name="uploaded_data" size="30">
+		<input type="file" name="uploaded_data" size="30" />
 		</td>
 	</tr>
 
@@ -114,7 +114,7 @@ if ($submit){
 	</tr>
 
 	</table>
-	<input type="submit" name="submit" value="	<?php echo $Language->getText('docman_new','submit') ?> ">
+	<input type="submit" name="submit" value="	<?php echo $Language->getText('docman_new','submit') ?> " />
 	</form>
 	<?php
 	docman_footer(array());

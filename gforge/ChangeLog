@@ -1,5 +1,15 @@
 2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/docman/index.php: valid XHTML 1.0 Transitional.
+
+	* www/docman/new.php: ditto.
+
+	* www/docman/admin/index.php: ditto.
+
+	* www/docman/include/doc_utils.php(docman_header): valid
+	XHTML 1.0 Transitional.
+	(doc_droplist_count): ditto.
+
 	* www/include/languages/Base.tab:
 	developer_monitor:monitor_using_expl: add missing </p>.
 
