@@ -2,8 +2,11 @@ gforge (3.1-4+1) unstable; urgency=low
 
   * [Roland] Tightened the versioned dependency on Apache so that we can
     rely on modules-config (closes: #220872).
+  * [Roland] Escape special characters like @ and $ before passing strings
+    containing them to a Perl script, for instance e-mail addresses.
+    Should help fix the administrator's e-mail.
 
- -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2003 17:49:12 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 16 Nov 2003 20:57:47 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
