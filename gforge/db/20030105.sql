@@ -14,3 +14,8 @@ ALTER TABLE user_group RENAME COLUMN bug_flags to dead1;
 ALTER TABLE user_group RENAME COLUMN patch_flags to dead2;
 ALTER TABLE user_group RENAME COLUMN support_flags to dead3;
 drop INDEX bug_flags_idx;
+
+--
+-- Change Admin user realname if it's 'Sourceforge admin'
+--
+UPDATE users SET realname='Local GForge Admin' where user_id=101 and realname='Sourceforge admin';
