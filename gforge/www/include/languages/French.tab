@@ -2238,8 +2238,8 @@ sendmessage	subject	Sujet
 sendmessage	title	Envoi d'un message à $1
 session	cannotinit	ERREUR - Impossible d'initialiser la session
 session	deleted	Compte supprimé
-session	invalidpasswd	Mot de passe ou Login non valide
-session	missingpasswd	Mot de passe ou Login manquant
+session	invalidpasswd	Nom du compte ou mot de passe non valide
+session	missingpasswd	Nom du compte ou mot de passe manquant
 session	notactive	Compte non actif
 session	pending	Compte en attente
 session	suspended	Compte suspendu
