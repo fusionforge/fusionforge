@@ -31,7 +31,7 @@ class SurveyHTML extends Error {
 	 * Show survey header 
 	 */
 	function header($params) {
-		global $group_id,$is_admin_page,$DOCUMENT_ROOT,$Language,$sys_use_survey;
+		global $group_id,$is_admin_page,$HTML,$DOCUMENT_ROOT,$Language,$sys_use_survey;
 
 		if (!$sys_use_survey) {
 			exit_disabled();
@@ -47,15 +47,39 @@ class SurveyHTML extends Error {
 			
 			site_project_header($params);
 			
-			echo "<p><strong><a href=\"/survey/admin/?group_id=$group_id\">".$Language->getText('survey_utils','admin')."</a>";
-			
 			if ($is_admin_page && $group_id) {
-				echo " | <a href=\"/survey/admin/survey.php?group_id=$group_id\">".$Language->getText('survey_utils','add_edit_survey')."</a>";
-				echo " | <a href=\"/survey/admin/question.php?group_id=$group_id\">".$Language->getText('survey_utils','add_edit_question')."</a>";
-				echo " | <a href=\"/survey/admin/show_results.php?group_id=$group_id\">".$Language->getText('survey_utils','show_results')."</a></strong>";
+				echo ($HTML->subMenu(
+					array(
+						$Language->getText('group','short_survey'),
+						$Language->getText('survey_utils','admin'),
+						$Language->getText('survey_utils','add_survey'),
+						$Language->getText('survey_utils','edit_survey'),
+						$Language->getText('survey_utils','add_question'),
+						$Language->getText('survey_utils','edit_questions'),
+						$Language->getText('survey_utils','show_results')
+					),
+					array(
+						'/survey/?group_id='.$group_id,
+						'/survey/admin/?group_id='.$group_id,
+						'/survey/admin/add_survey.php?group_id='.$group_id,
+						'/survey/admin/edit_survey.php?group_id='.$group_id,
+						'/survey/admin/add_question.php?group_id='.$group_id,
+						'/survey/admin/show_questions.php?group_id='.$group_id,
+						'/survey/admin/show_results.php?group_id='.$group_id
+					)
+				));
+			} else {
+				echo ($HTML->subMenu(
+					array(
+						$Language->getText('group','short_survey'),
+						$Language->getText('survey_utils','admin')
+					),
+					array(
+						'/survey/?group_id='.$group_id,
+						'/survey/admin/?group_id='.$group_id
+					)
+				));
 			}
-			
-			echo "</p>";
 		}// end if (valid group id)
 	}
 	
