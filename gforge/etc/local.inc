@@ -155,6 +155,7 @@ $sys_images_secure_url = "";
 $sys_news_group=3;
 $sys_stats_group=2;
 $sys_peer_rating_group=4;
+$default_trove_cat=18;
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

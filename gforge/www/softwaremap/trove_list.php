@@ -16,7 +16,6 @@ require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/include/trove.php');
 
-$HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
 
 echo'
 	<HR NoShade>';
@@ -40,6 +39,9 @@ if (db_numrows($res_trove_cat) < 1) {
 		'That Trove category does not exist: '.db_error()
 	);
 }
+
+$HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
+
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
 // #####################################
