@@ -1,18 +1,23 @@
 gforge (3.3.0-49) unstable; urgency=low
 
-  * [Christian] Added a call to migrateform.php and migraterbac.php in db-upgrade
+  * [Christian] Added a call to migrateform.php and migraterbac.php in
+    db-upgrade
   * [Christian] Added 20040804.sql and 20040826.sql to db-upgrade.pl
-  * [Christian] Removed dc: field in install-ldap.sh  since this generate
-  an attribute 'dc' not allowed at install
+  * [Christian] Removed dc: field in install-ldap.sh since this generate
+    an attribute 'dc' not allowed at install
   * [Christian] Create an empty /var/lib/gforge/etc/httpd.vhosts if necessary
-  * [Christian] Changed default sys_theme to gforge, so web frontend is not
-    broken when theme pack is not installed
+  * [Christian] Changed default sys_theme to gforge, so web frontend is
+    not broken when theme pack is not installed
   * [Christian] sys_project_reg_restricted=false by default
   * [Roland] Added views for NSS-PGSQL (form Wichert Akkerman).
   * [Christian] Added 20040914.sql, 20041005.sql, 20041006.sql.
   * [Hal] Maded changes to support apache2
+  * [Roland] Added pgsql.class for nss-pgsql interaction (rather than
+    LDAP).
+  * [Roland] Started removing LDAP dependency (to be replaced with direct
+    PostgreSQL lookups).
 
- -- Christian Bayle <bayle@debian.org>  Mon, 25 Oct 2004 16:04:20 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Oct 2004 22:18:31 +0200
 
 gforge (3.3.0-12) unstable; urgency=low
 

@@ -11,11 +11,10 @@
 [ -f /etc/default/apache2 ] && . /etc/default/apache2
 if [ "x$NO_START" == "x0" ]
 then
-	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP -nolisten80
+	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system pgsql -nolisten80
 else
-	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP -listen80
+	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system pgsql -listen80
 fi	
-
 
 [ -f /etc/gforge/local.inc ] && chmod 644 /etc/gforge/local.inc
 [ -f /etc/gforge/httpd.conf ] && chmod 644 /etc/gforge/httpd.conf

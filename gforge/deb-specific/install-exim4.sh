@@ -96,6 +96,8 @@ my $gf_block = "# BEGIN GFORGE BLOCK -- DO NOT EDIT #
 # You may move this block around to accomodate your local needs as long as you
 # keep it in the Directors Configuration section (between the second and the
 # third occurences of a line containing only the word \"end\")
+
+hide pgsql_servers = $db_host/$db_name/gforge_nss/''
 forward_for_gforge:
   domains = users.$domain_name
   driver = redirect

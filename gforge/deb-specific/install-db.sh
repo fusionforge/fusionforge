@@ -64,8 +64,8 @@ EOF
             # PostgreSQL configuration for versions from 7.3 on
 	    echo "Configuring for PostgreSQL 7.3"
 	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    cur=$(mktemp /tmp/$pattern)
 	    if ! grep -q 'BEGIN GFORGE BLOCK -- DO NOT EDIT' /etc/postgresql/pg_hba.conf.gforge-new ; then
-		cur=$(mktemp /tmp/$pattern)
 		# Make sure our configuration is inside a delimited BLOCK
 		if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
 		    perl -e "open F, \"/etc/postgresql/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host.*gforge_passwd\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
@@ -78,6 +78,10 @@ EOF
 		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 		fi
 	    fi
+	    echo "### BEGIN GFORGE BLOCK -- DO NOT EDIT" > $cur
+	    echo "### END GFORGE BLOCK -- DO NOT EDIT" >> $cur
+	    cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
+	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 	    rm -f $cur
 	    
 	    cur=$(mktemp /tmp/$pattern)
