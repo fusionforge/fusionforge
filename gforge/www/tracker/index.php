@@ -226,7 +226,7 @@ if ($group_id && $atid) {
 			} else if ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
-				$ah->setMonitor($user_email);
+				$ah->setMonitor();
 				$feedback=$ah->getErrorMessage();
 				include '../tracker/browse.php';
 			}
@@ -237,7 +237,6 @@ if ($group_id && $atid) {
 			break;
 		}
 		case 'download' : {
-			$CACHE_ON=0;
 			Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
 			break;
 		}

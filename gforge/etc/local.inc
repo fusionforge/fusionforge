@@ -116,12 +116,6 @@ $sys_jabber_pass='temp123';
 //
 $sys_upload_dir='/path/to/uploads/';
 
-// Where files are placed when uploaded
-//$FTPINCOMING_DIR = "/nfs/remission/u7/ftp/incoming";
-// Where the released files are located
-//$FTPFILES_DIR = "/nfs/garbage/sourceforge";
-
- 
 // Where the SourceForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
 //             that points to the www directory of the SourceForge

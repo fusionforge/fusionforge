@@ -69,6 +69,9 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}
+	if (!$to) {
+		$to='noreply@'.$GLOBALS['sys_default_domain'];
+	}
 	$body = "To: $to".
 		"\nFrom: $from".
 		"\nBCC: $BCC".
@@ -77,6 +80,40 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
 	      "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
+}
+
+function util_send_jabber($to,$subject,$body) {
+	if (!$GLOBALS['sys_use_jabber']) {
+		return;
+	}
+	$JABBER = new Jabber();
+	if (!$JABBER->Connect()) {
+		echo '<BR>Unable to connect';
+		return false;
+	}
+	//$JABBER->SendAuth();
+	//$JABBER->AccountRegistration();
+	if (!$JABBER->SendAuth()) {
+		echo '<BR>Auth Failure';
+		$JABBER->Disconnect();
+		return false;
+		//or die("Couldn't authenticate!");
+	}
+	$JABBER->SendPresence(NULL, NULL, "online");
+
+	$body=htmlspecialchars($body);
+	$to_arr=explode(',',$to);
+	for ($i=0; $i<count($to_arr); $i++) {
+		if ($to_arr[$i]) {
+			//echo '<BR>Sending Jabbers To: '.$to_arr[$i];
+			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body))) {
+				echo '<BR>Error Sending to '.$to_arr[$i];
+			}
+			$JABBER->CruiseControl(1);
+		}
+	}
+
+	$JABBER->Disconnect();
 }
 
 /**
@@ -92,6 +129,51 @@ function util_prep_string_for_sendmail($body) {
 	$body=str_replace("\"","\\\"",$body);
 	$body=str_replace("\$","\\\$",$body);
 	return $body;
+}
+
+/**
+ *	util_handle_message() - a convenience wrapper which sends messages
+ *	to either a jabber account or email account or both, depending on 
+ *	user preferences
+ *
+ *	@param	array	array of user_id's from the user table
+ *	@param	string	subject of the message
+ *	@param	string	the message body
+ *	@param	string	a comma-separated list of email address
+ *	@param	string	a comma-separated list of jabber address
+ */
+function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabbers='') {
+	$address=array();
+
+	$res=db_query("SELECT jabber_address,email,jabber_only
+		FROM users WHERE user_id IN (". implode($id_arr,',') .")");
+	$rows=db_numrows($res);
+
+	for ($i=0; $i<$rows; $i++) {
+		//
+		//  Build arrays of the jabber address
+		//
+		if (db_result($res,$i,'jabber_address')) {
+			$address['jabber_address'][]=db_result($res,$i,'jabber_address');
+			if (db_result($res,$i,'jabber_only') != 1) {
+				$address['email'][]=db_result($res,$i,'email');
+			}
+		} else {
+			$address['email'][]=db_result($res,$i,'email');
+		}
+	}
+	if (count($address['email']) > 0) {
+		$extra_email1=implode($address['email'],',').',';
+	}
+	if (count($address['jabber_address']) > 0) {
+		$extra_jabber1=implode($address['jabber_address'],',').',';
+	}
+	if ($extra_email1 || $extra_emails) {
+		util_send_message('',$subject,$body,'',$extra_email1.$extra_emails);
+	}
+	if ($extra_jabber1 || $extra_jabbers) {
+		util_send_jabber($extra_jabber1.$extra_jabbers,$subject,$body);
+	}
 }
 
 /**
@@ -164,7 +246,7 @@ function util_result_column_to_array($result, $col=0) {
 }
 
 /**
- * resutl_column_to_array() - DEPRECATED; DO NOT USE!
+ * result_column_to_array() - DEPRECATED; DO NOT USE!
  *
  * @param		int		The result set ID
  * @param		int		The column
@@ -261,10 +343,10 @@ function util_make_links ($data='') {
 
 	$lines = split("\n",$data);
 	while ( list ($key,$line) = each ($lines)) {
-	        // When we come here, we usually have form input
-	        // encoded in entities. Our aim is to NOT include
-	        // angle brackets in the URL
-	        // (RFC2396; http://www.w3.org/Addressing/URL/5.1_Wrappers.html)
+		// When we come here, we usually have form input
+		// encoded in entities. Our aim is to NOT include
+		// angle brackets in the URL
+		// (RFC2396; http://www.w3.org/Addressing/URL/5.1_Wrappers.html)
 		$line = str_replace('&gt;', "\1", $line);
 		$line = eregi_replace("([ \t]|^)www\."," http://www.",$line);
 		$text = eregi_replace("([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])", "<a href=\"\\1://\\2\\3\" target=\"_blank\" target=\"_new\">\\1://\\2\\3</a>", $line);

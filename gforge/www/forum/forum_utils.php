@@ -616,15 +616,14 @@ function handle_monitoring($forum_id,$msg_id) {
 		If someone is, it sends them the message in email format
 	*/
 
-	$sql="SELECT users.email from forum_monitored_forums,users ".
-		"WHERE forum_monitored_forums.user_id=users.user_id AND forum_monitored_forums.forum_id='$forum_id'";
+	$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='$forum_id'";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 
 	if (($result && $rows > 0) || $send_all_posts_to) {
 
-		$tolist=$send_all_posts_to . ', ' . implode(result_column_to_array($result),', ');
+		$tolist=result_column_to_array($result);
 
 		$sql="SELECT groups.unix_group_name,users.user_name,forum_group_list.forum_name,".
 			"forum.group_forum_id,forum.thread_id,forum.subject,forum.date,forum.body ".
@@ -654,10 +653,9 @@ function handle_monitoring($forum_id,$msg_id) {
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
 			*/
 
-			util_send_message("noreply@$GLOBALS[sys_default_domain]",
-				"[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject')),
-				$body,"noreply@$GLOBALS[sys_default_domain]",
-				$tolist);
+			$subject="[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject'));
+			util_handle_message(array_unique($tolist),$subject,$body,$send_all_posts_to);
+
 			$feedback .= ' '.$Language->getText('forum_utils', 'mailsent').' ';
 		} else {
 			$feedback .= ' '.$Language->getText('forum_utils', 'mailnotsent').' ';

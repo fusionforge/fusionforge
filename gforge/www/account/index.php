@@ -37,7 +37,8 @@ if ($submit) {
 		setcookie("sf_user_hash",'',0,'/');
 	}
 
-	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings)) {
+	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings, 
+		$jabber_address,$jabber_only)) {
 		$feedback .= $u->getErrorMessage().'<br>';
 	} else {
 		$feedback .= 'Updated<br>';
@@ -102,6 +103,20 @@ to view your developer/consultant profiles and ratings.
 <br><A href="change_email.php">[Change Email Addr]</A>
 </TD>
 </TR>
+
+<?php
+if ($sys_use_jabber) {
+    echo '<TR VALIGN=top>
+<TD>Jabber Address:</TD>
+<TD>
+    <INPUT size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'"><P>
+	<INPUT type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'CHECKED' : '' ).'>
+	Send auto-generated notices only to this address.
+</TD></TR>';
+
+}
+?>
+
 
 <TR>
 <TD COLSPAN=2>

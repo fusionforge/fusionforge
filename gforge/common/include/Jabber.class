@@ -151,7 +151,7 @@ class Jabber
 
 		$this->username				= $GLOBALS['sys_jabber_user'];
 		$this->password				= $GLOBALS['sys_jabber_pass'];
-		$this->resource				= NULL;
+		$this->resource				= 'home';
 		
 		$this->enable_logging		= FALSE;
 		$this->logfile				= array();

@@ -27,6 +27,7 @@ day int
 
 DROP TABLE cache_store;
 ALTER TABLE users ADD COLUMN jabber_address text;
+ALTER TABLE users ADD COLUMN jabber_only int;
 DROP TABLE top_group;
 drop table intel_agreement;
 drop table stats_ftp_downloads;

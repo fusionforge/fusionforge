@@ -19,8 +19,6 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('pre.php');
 
-$CACHE_TIME = -1;
-
 /*
 
 if (!session_issecure()) {

@@ -52,6 +52,7 @@ the "Document Root".
 
 Apache's http.conf file should have these values:
 
+ErrorDocument 404 /404.php
 php_value include_path ".:/path/to/:/path/to/www/include/"
 <Location /projects>
   ForceType application/x-httpd-php

@@ -22,14 +22,6 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 			<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
 		<TR>
 			<TD COLSPAN=2">
-			<?php
-			if (!session_loggedin()) {
-				?>
-				<B>Email:</B> &nbsp;
-				<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">
-				<?php
-			}
-			?>
 			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Monitor">&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
 			</FORM>
 			</TD>

@@ -121,16 +121,16 @@ for ($i=0; $i<$count; $i++) {
 			average
 		*/
 		if ($response_count > 0){
-			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
+			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response::int IN (1,2,3,4,5)";
 			$result2=db_query($sql);
 			if (!$result2 || db_numrows($result2) < 1) {
 				echo "error";
 				echo db_error();
 			} else {
-				echo "<B>".db_result($result2, 0, 'avg')."</B> Average";
+				echo "<B>". number_format(db_result($result2, 0, 'avg'),2) ."</B> Average";
 			}
 			
-			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' GROUP BY response";
+			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response::int IN (1,2,3,4,5) GROUP BY response";
 			
 			$result2=db_query($sql);
 			if (!$result2 || db_numrows($result2) < 1) {
@@ -184,7 +184,7 @@ for ($i=0; $i<$count; $i++) {
 			echo "error";
 			echo db_error();
 		} else {
-			echo "<B>".db_result($result2, 0, 0)."</B> Average";
+			echo "<B>".number_format(db_result($result2, 0, 0),2)."</B> Average";
 		}
 
 		/*

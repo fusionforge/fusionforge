@@ -24,7 +24,7 @@ if ($submit) {
 	*/
 	$new_user = new User();
 	$register = $new_user->create($unix_name,$realname,$password1,$password2,
-		$email,$mail_site,$mail_va,$language_id,$timezone);
+		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
 
@@ -70,6 +70,15 @@ if ($feedback) {
 <P>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
 <BR><INPUT size=30 type="text" name="email" value="<?php print($email); ?>">
+<p>
+<?php
+if ($sys_use_jabber) {
+	echo 'Jabber Address:<BR>
+	<INPUT size=30 type="text" name="jabber_address" value="'. $jabber_address .'"><BR>
+    <INPUT type="checkbox" name="jabber_only" value="1">
+    Send auto-generated notices only to Jabber address.';
+}
+?>
 <P>
 <INPUT type="checkbox" name="mail_site" value="1" checked>
 <?php echo $Language->getText('account_register','siteupdate'); ?>
