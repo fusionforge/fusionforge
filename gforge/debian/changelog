@@ -7,9 +7,12 @@ sourceforge (2.5-24+) unstable; urgency=low
   * [Christian] Added do_config template
   * [Roland] Wrote the code behind the do_config debconf variable.
   * [Roland] Also, do not completely replace the existing configuration in
-    /etc/nsswitch.conf.  Only add 'ldap' in there.
+    /etc/nsswitch.conf.  Only add 'ldap' in there.  This, and the two
+    previous entries, makes the package well-behaved (closes: #134058).
+  * [Roland] Moved template files to /etc/sourceforge/templates
+    (Policy for conffiles) (closes: #134724).
 
- -- Roland Mas <lolando@debian.org>  Thu, 21 Feb 2002 20:52:39 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 11:14:33 +0100
 
 sourceforge (2.5-24) unstable; urgency=low
 

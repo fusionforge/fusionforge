@@ -8,7 +8,7 @@
 filenames="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
 for i in $filenames ; do
     /usr/lib/sourceforge/bin/fill-in-the-blanks.pl \
-	/usr/lib/sourceforge/templates/${i}.template \
+	/etc/sourceforge/templates/${i}.template \
 	/etc/sourceforge/$i
 done
 chmod 644 /etc/sourceforge/local.inc
