@@ -424,16 +424,17 @@ if ($params['toptab'] && $params['group']) {
 	}
 
 	function outerTabs($params) {
+		global $Language;
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/softwaremap/';
 		$TABS_DIRS[]='/my/';
 		$TABS_DIRS[]='/snippet/';
 		$TABS_DIRS[]='/admin/';
-		$TABS_TITLES[]='Home';
-		$TABS_TITLES[]='Project&nbsp;Tree';
-		$TABS_TITLES[]='My&nbsp;Page';
-		$TABS_TITLES[]='Code&nbsp;Snippets';
-		$TABS_TITLES[]='Admin';
+		$TABS_TITLES[]=$Language->getText('menu','home');
+		$TABS_TITLES[]=$Language->getText('menu','projectree');
+		$TABS_TITLES[]=$Language->getText('menu','mypage');
+		$TABS_TITLES[]=$Language->getText('menu','code_snippet');
+		$TABS_TITLES[]=$Language->getText('menu','admin');
 
 		if ($params['group']) {
 			// get group info using the common result set

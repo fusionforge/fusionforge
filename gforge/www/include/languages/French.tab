@@ -323,6 +323,11 @@ menu	software_map	Recherche thématique
 menu	top_projects	Meilleurs projets
 menu	admin	Gérer
 menu	submit	Proposer
+menu	home	Accueil
+menu	projectree	Arbre des projets
+menu	mypage	Ma page
+menu	code_snippet	Bibliothèque
+menu	admin	Administration
 my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
 my	no_bookmarks	Vous n'avez pas encore de favoris
 my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>

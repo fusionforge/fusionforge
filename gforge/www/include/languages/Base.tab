@@ -316,6 +316,11 @@ menu	software_map	Software Map
 menu	top_projects	Top Projects
 menu	admin	Admin
 menu	submit	Submit
+menu	home	Home
+menu	projectree	Project&nbsp;Tree
+menu	mypage	My&nbsp;Page
+menu	code_snippet	Code&nbsp;Snippets
+menu	admin	Admin
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
 my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
