@@ -151,7 +151,8 @@ for ($i=1; $i<9; $i++) {
 
 	// echo '<BR>Starting Final Metric';
 
-	db_drop_table_if_exists ("user_metric$i");
+	db_drop_table_if_exists ("user_metric".$i);
+	db_drop_sequence_if_exists ("user_metric".$i."_ranking_seq");
 
 	$sql="CREATE TABLE user_metric$i (
 		ranking serial,

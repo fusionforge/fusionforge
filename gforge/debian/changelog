@@ -30,8 +30,9 @@ sourceforge (2.5-10+11) unstable; urgency=low
   * [Christian] Added ldap check in apache/php config.
   * [Christian] Ldap online support enabled.  Requires intensive testing
     and probably security enhancements similar to database.
+  * Fixed possible infinite loop in cronjobs/calculate_user_metric.php.
 
- -- Roland Mas <lolando@debian.org>  Fri, 14 Sep 2001 22:30:18 +0200
+ -- Roland Mas <lolando@debian.org>  Sat, 15 Sep 2001 16:35:09 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
