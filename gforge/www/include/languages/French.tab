@@ -918,6 +918,7 @@ general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment les infor
 general	go	Continuer
 general	invalid_email	Adresse de messagerie non valide
 general	language	Langue
+general	min_characters	($1 caractères minimum)
 general	more	Plus...
 general	no	Non
 general	no_valid_filename	Pas de nom de fichier valide

@@ -81,23 +81,23 @@ if ($submit){
 
 	<tr>
 		<td>
-		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?></strong> <?php echo utils_requiredField(); ?> (min 5 chars) <br />
+		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?> :</strong> <?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(5)) ?><br />
 		<input type="text" name="title" size="40" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong><?php echo utils_requiredField(); ?> (min 10 chars) <br />
+		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong> <?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(10)) ?><br />
 		<input type="text" name="description" size="50" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>	<?php echo $Language->getText('docman_new','upload_file') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','upload_file') ?> :</strong> <?php echo utils_requiredField(); ?><br />
 		<input type="file" name="uploaded_data" size="30" /><br /><br />
-		<strong>	<?php echo $Language->getText('docman_new','upload_url') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','upload_url') ?> :</strong> <?php echo utils_requiredField(); ?><br />
 		<input type="text" name="file_url" size="50" />
 		</td>
 		</td>

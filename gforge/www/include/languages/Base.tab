@@ -897,6 +897,7 @@ general	footer	This is $1.  For more about it, including copyright info, see <a 
 general	go	Go
 general	invalid_email	Invalid Email Address
 general	language	Language
+general	min_characters	(min $1 chars)
 general	more	More
 general	no	No
 general	no_valid_filename	No valid Filename
