@@ -31,7 +31,7 @@ if (!$report) {
 
 print '<div align="center">';
 print '<span style="font-size:bigger"><strong>Usage Statistics </strong></span><br />';
-print '<img src="stats_graph.png?group_id='.$group_id.'&amp;report='. $report .'" />';
+print '<img src="stats_graph.php?group_id='.$group_id.'&amp;report='. $report .'" />';
 print '</div>';
 
 if ( $report == 'last_7' ) {
