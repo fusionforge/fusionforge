@@ -22,8 +22,16 @@ echo'
 	<HR NoShade>';
 
 // assign default. 18 is 'topic'
-if (!$form_cat) 
-	$form_cat = 18;
+if (!$form_cat) {
+	$res=db_query('SELECT MIN(trove_cat_id) AS trove_max FROM trove_cat WHERE parent=0 AND trove_cat_id!=0');
+	//$form_cat = 18;
+	if (db_numrows($res) < 1) {
+		exit_error('Categories not defined','Please define categories in admin interface');
+	} else {
+		$row_child = db_fetch_array($res);
+		$form_cat = $row_child['trove_max'];
+	}
+}
 
 $form_cat = intval($form_cat);
 
@@ -31,7 +39,7 @@ $form_cat = intval($form_cat);
 $res_trove_cat = db_query("
 	SELECT *
 	FROM trove_cat
-	WHERE trove_cat_id='$form_cat'");
+	WHERE trove_cat_id='$form_cat' ORDER BY fullname");
 
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(
