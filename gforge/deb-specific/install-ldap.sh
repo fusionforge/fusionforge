@@ -321,7 +321,7 @@ FIN
     check_server
 
     ldapmodify -v -c -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" > /dev/null 2>&1 <<-FIN
-dn: $sf_ldap_base_dn
+dn: cn=SF_robot,$sf_ldap_base_dn
 changetype: modify
 replace: userPassword
 userPassword: $sf_cryptedpasswd
