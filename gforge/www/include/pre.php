@@ -82,6 +82,7 @@ require_once('www/include/exit.php');
 //various html libs like button bar, themable
 require_once('www/include/html.php');
 
+
 // #### Connect to db
 
 db_connect();
@@ -99,6 +100,12 @@ setup_plugin_manager () ;
 
 //determine if they're logged in
 session_set();
+
+//mandatory login
+if (!session_loggedin() && $sys_force_login == 1 ) {
+        $expl_pathinfo = explode('/',$REQUEST_URI);
+        if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account') exit_not_logged_in();
+}
 
 //insert this page view into the database
 require_once('www/include/logger.php');
