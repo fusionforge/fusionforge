@@ -1,3 +1,6 @@
+2004-08-24  Tom Copeland <tom@infoether.com>
+	* www/docman/index.php - Silenced a PHP 'notice' warning.
+
 2004-08-20  Francisco Gimeno <kikov@kikov.org>
 	* www/register/projectinfo.php: Solved a bug on [#856] that prevents
 	new projects to be created with conditions:

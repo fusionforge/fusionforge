@@ -61,8 +61,8 @@ if (!$d_arr || count($d_arr) < 1) {
 	doc_droplist_count($group_id, $language_id, $g);
 
 	print "\n<ul>";
+	$last_group = "";
 	for ($i=0; $i<count($d_arr); $i++) {
-
 		//
 		//	If we're starting a new "group" of docs, put in the
 		//	docGroupName and start a new <ul>
