@@ -50,6 +50,7 @@ computedefault(){
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTusr_share_gforge=$SHAREDIR
+	DEFAULTusr_lib_gforge=$LIBDIR
 	DEFAULTvar_lib_gforge=$GFGDIR/var/lib/gforge
 	DEFAULTvar_log_gforge=$GFGDIR/var/log/gforge
 	DEFAULTsys_show_source=0
@@ -174,12 +175,12 @@ setupinout(){
 	rm $ETCDIR/httpd.secrets.gforge-new
 	
 	echo "Creating $LOCALINC"
-	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/1[1-9]* $ETCDIR/local.d/[2-9]*
+	for i in $ETCDIR/local.d/0* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/1[1-9]* $ETCDIR/local.d/[2-9]*
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
 	done
-	ls $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]* | sort | xargs cat > $LOCALINC
-	rm $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]*
+	ls $ETCDIR/0* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]* | grep -v dpkg | sort | xargs cat > $LOCALINC
+	rm $ETCDIR/0* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]*
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
@@ -228,6 +229,7 @@ CHROOT=''
 HOMEPATH=/home
 GROUPPATH=/home/groups
 SHAREDIR=`pwd`
+LIBDIR=`pwd`
 CONFFILEIN=$ETCDIR/gforge.conf
 CONFFILEOUT=$ETCDIR/gforge.conf
 LOCALINC=$ETCDIR/local.inc
@@ -293,6 +295,7 @@ do
 			GROUPPATH=/home/groups
 			CHROOT=/var/lib/gforge/chroot
 			SHAREDIR=/usr/share/gforge
+			LIBDIR=/usr/lib/gforge
 			CONFFILEIN=/etc/gforge/gforge.conf
 			CONFFILEOUT=/etc/gforge/gforge.conf
 			LOCALINC=/etc/gforge/local.inc
