@@ -258,10 +258,6 @@ class pgsql extends System {
 		$group =& group_get_object($group_id);
 		if (!$group){
 			return false;
-		} else {
-			if ($group.getUnixGID()==0) {
-				return false;
-			}
 		}
 		return true;
 	}
