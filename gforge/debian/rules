@@ -47,6 +47,8 @@ install: build
 	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
 	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
+	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
+	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/sourceforge-config $(CURDIR)/debian/sourceforge-common/usr/sbin/
@@ -72,8 +74,6 @@ install: build
 	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
 	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/clear.png deb-specific/clear.png.uu
 	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
-	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge-web-apache/etc/sourceforge/templates/
-	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge-web-apache/etc/sourceforge/templates/
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/bin/
 
 	# sourceforge-db-postgresql
