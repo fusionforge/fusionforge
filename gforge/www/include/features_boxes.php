@@ -118,7 +118,7 @@ function show_sitestats() {
 function show_newest_projects() {
 	global $Language;
 	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
-		"WHERE is_public=1 AND status='A' AND type=1 AND register_time > 0 " .
+		"WHERE is_public=1 AND status='A' AND type_id=1 AND register_time > 0 " .
 		"ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
 
@@ -166,7 +166,7 @@ function show_highest_ranked_projects() {
 		"FROM groups,project_weekly_metric ".
 		"WHERE groups.group_id=project_weekly_metric.group_id ".
 		"AND groups.is_public=1 ".
-		"AND groups.type=1  ".
+		"AND groups.type_id=1  ".
 		"AND groups.status != 'D'  ".
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
