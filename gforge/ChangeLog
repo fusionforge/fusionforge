@@ -4,6 +4,9 @@
 	common/pm/ProjectTasksForUser.class, common/tracker/ArtifactsForUser.class
 	Applied patch #349: Refactoring of the www/my/index.php page. Thanks to
 	Jeff Fynboh for the code.
+	
+	* www/top/toplist.php,index.php:
+	Made the "Top forum posts" work again.
 
 2003-05-19 Tom Copeland <tom@infoether.com>
 

@@ -35,10 +35,10 @@ $HTML->header(array('title'=>$Language->getText('top','title')));
 Measured by impressions of the <?php echo $GLOBALS['sys_name']?> 'button' logo
 <li><a href="toplist.php?type=pageviews_proj"><?php echo $Language->getText('top','pageviews',$GLOBALS['sys_name']); ?></a> 
 <br />&nbsp;
-<li><a href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></a>
 <br />&nbsp;
 <li><a href="topusers.php"><?php echo $Language->getText('top','highest_ranked_users'); ?></a>
 -->
+<li><a href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></a>
 </ul>
 
 <?php
