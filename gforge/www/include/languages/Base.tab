@@ -258,6 +258,7 @@ admin_grouplist	members	Members
 admin_grouplist	public	Public?
 admin_grouplist	status	Status
 admin_grouplist	unix_name	Unix Name
+admin_grouplist	register_time	Register Time
 cronman	date	Date
 cronman	job	Job
 cronman	message	Message

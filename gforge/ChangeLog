@@ -1,3 +1,7 @@
+2004-06-03  Tom Copeland <tom@infoether.com>
+
+	* www/admin/grouplist.php: Added "Register time" to the field list.
+
 2004-06-01  Tom Copeland <tom@infoether.com>
 
 	* www/account/register.php: Moved "title" field up a bit.

@@ -29,23 +29,22 @@ if (!isset($sortorder) || empty($sortorder)) {
 if ($form_catroot == 1) {
 	if (isset($group_name_search)) {
 		echo "<strong>" .$Language->getText('admin_grouplist','groups_that_begin_with'). "$group_name_search</strong>\n";
-		$res = db_query("SELECT group_name,unix_group_name,groups.group_id,is_public,status,license,COUNT(user_group.group_id) AS members "
+		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license,COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id WHERE group_name ILIKE '$group_name_search%' "
-			. "GROUP BY group_name,unix_group_name,groups.group_id,is_public,status,license "
+			. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license "
 			. ($form_pending?"AND WHERE status='P' ":"")
 			. " ORDER BY $sortorder");
 	} else {
 		echo "<strong>All Categories</strong>\n";
-		$res = db_query("SELECT group_name,unix_group_name,groups.group_id,is_public,status,license, COUNT(user_group.group_id) AS members "
+		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license, COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id "
 			. ($status?"WHERE status='$status' ":"")
-			. "GROUP BY group_name,unix_group_name,groups.group_id,is_public,status,license "
+			. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license "
 			. "ORDER BY $sortorder");
 	}
 } else {
 	echo "<strong>" . category_fullname($form_catroot) . "</strong>\n";
-
-	$res = db_query("SELECT groups.group_name,groups.unix_group_name,groups.group_id,"
+	$res = db_query("SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,"
 		. "groups.is_public,"
 		. "groups.license,"
 		. "groups.status "
@@ -53,7 +52,7 @@ if ($form_catroot == 1) {
 		. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category "
 		. "WHERE groups.group_id=group_category.group_id AND "
 		. "group_category.category_id=$GLOBALS[form_catroot] "
-		. "GROUP BY group_name,unix_group_name,groups.group_id,is_public,status,license "
+		. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license "
 		. "ORDER BY $sortorder");
 }
 
@@ -62,6 +61,7 @@ if ($form_catroot == 1) {
 <?php
 $headers = array(
 	$Language->getText('admin_grouplist','group_name_click_to_edit'),
+	$Language->getText('admin_grouplist','register_time'),
 	$Language->getText('admin_grouplist','unix_name'),
 	$Language->getText('admin_grouplist','status'),
 	$Language->getText('admin_grouplist','public'),
@@ -71,6 +71,7 @@ $headers = array(
 
 $headerLinks = array(
 	'?sortorder=group_name',
+	'?sortorder=register_time',
 	'?sortorder=unix_group_name',
 	'?sortorder=status',
 	'?sortorder=is_public',
@@ -81,10 +82,14 @@ $headerLinks = array(
 echo $HTML->listTableTop($headers, $headerLinks);
 
 $i = 0;
-
 while ($grp = db_fetch_array($res)) {
+	$time_display = "";
+	if ($grp['register_time'] != 0) {
+		$time_display = date($sys_datefmt,$grp['register_time']);
+	}
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 	echo '<td><a href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';
+	echo '<td>'.$time_display.'</td>';
 	echo '<td>'.$grp['unix_group_name'].'</td>';
 	echo '<td>'.$grp['status'].'</td>';
 	echo '<td>'.$grp['is_public'].'</td>';
