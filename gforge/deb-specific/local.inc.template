@@ -112,7 +112,7 @@ $groupdir_prefix="/var/lib/gforge/chroot/home/groups";
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot="/usr/lib/gforge/www/";
+$sys_urlroot="/usr/share/gforge/www/";
  
 // Cache location -- this is needed by include/cache.php
 // This directory must be world reachable, but writable only by the web-server
