@@ -26,8 +26,11 @@ sourceforge (2.6-0+8+) unstable; urgency=low
     series.
   * [Roland] Added a totally rewritten Korean language translation file
     provided by Soon-Son Kwon <kss@kldp.org>.  Many thanks to him.
+  * [Roland] Also rewrote the French language translation file, so as to
+    not be lagging behind the Koreans :-)
+  * [Roland] Also fixed a few typoes in the English language.
 
- -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 17:09:16 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 11 Apr 2002 14:17:40 +0200
 
 sourceforge (2.6-0+8) unstable; urgency=low
 
