@@ -161,7 +161,7 @@ function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
  * @return	string	The html select box.
  */
 function html_get_ccode_popup ($title='ccode',$selected='xzxz') {
-	$res=db_query("SELECT ccode,country_name FROM country_code ORDER BY ccode");
+	$res=db_query("SELECT ccode,country_name FROM country_code ORDER BY country_name");
 	return html_build_select_box ($res,$title,$selected,false);
 }
 
