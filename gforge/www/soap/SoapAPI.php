@@ -127,42 +127,7 @@ $server->register(
 	array('helloResponse'=>'xsd:string'),
 	$uri);
 
-$server->register(
-	'getSiteStats',
-	null,
-	array('siteStats'=>'tns:ArrayOfSiteStatsDataPoint'),
-	$uri);
-
-$server->register(
-	'group',
-	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
-	array('groupResponse'=>'tns:ArrayOfGroupObject'),
-	$uri);
-
-$server->register(
-	'getNumberOfHostedProjects',
-	null,
-	array('hostedProjects'=>'xsd:string'),
-	$uri);
-
-$server->register(
-	'getNumberOfActiveUsers',
-	null,
-	array('activeUsers'=>'xsd:string'),
-	$uri);
-
-$server->register(
-	'getPublicProjectNames',
-	null,
-	array('projectNames'=>'tns:ArrayOfstring'),
-	$uri);
-
-$server->register(
-	'user',
-	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
-	array('userResponse'=>'tns:ArrayOfstring'),
-	$uri);
-
+// bugs
 $server->register(
 	'bugFetch',
 	array('sessionkey'=>'xsd:string','project'=>'xsd:string','bugid'=>'xsd:string'),
@@ -186,7 +151,13 @@ $server->register(
 	array('sessionkey'=>'xsd:string','project'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
 	array('bugUpdateResponse'=>'xsd:string'),
 	$uri);
+// bugs
 
+// RFEs
+
+// RFEs
+
+// session/authentication
 $server->register(
 	'login',
 	array('userid'=>'xsd:string','passwd'=>'xsd:string'),
@@ -198,7 +169,47 @@ $server->register(
 	null,
 	array('logoutResponse'=>'xsd:string'),
 	$uri);
+// session/authentication
 
+// statistics
+$server->register(
+	'getSiteStats',
+	null,
+	array('siteStats'=>'tns:ArrayOfSiteStatsDataPoint'),
+	$uri);
+
+$server->register(
+	'getNumberOfHostedProjects',
+	null,
+	array('hostedProjects'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'getNumberOfActiveUsers',
+	null,
+	array('activeUsers'=>'xsd:string'),
+	$uri);
+// statistics
+
+// miscellaneous
+$server->register(
+	'getPublicProjectNames',
+	null,
+	array('projectNames'=>'tns:ArrayOfstring'),
+	$uri);
+
+$server->register(
+	'group',
+	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
+	array('groupResponse'=>'tns:ArrayOfGroupObject'),
+	$uri);
+
+$server->register(
+	'user',
+	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
+	array('userResponse'=>'tns:ArrayOfstring'),
+	$uri);
+// miscellaneous
 
 $wsdl_data = $server->wsdl->serialize();
 
@@ -224,6 +235,7 @@ function continueSession($sessionKey) {
 	session_set();
 }
 
+// session/authentication
 /**
  * login - Logs in a SOAP client
  * 
@@ -261,7 +273,9 @@ function logout($sessionkey) {
 	setcookie("session_ser", "", time() - 3600, "/", 0);
     	return new soapval('tns:soapVal','string',"OK");
 }
+// session/authentication
 
+// statistics
 /**
  * getNumberOfHostedProjects - gets the number of active projects
  *
@@ -296,15 +310,7 @@ function getNumberOfActiveUsers() {
 	$gforge = new GForge();
 	return new soapval('tns:soapVal', 'string', $gforge->getNumberOfActiveUsers());
 }
-
-/**
- * getPublicProjectNames - gets a list of public project names
- *
- */
-function getPublicProjectNames() {
-	$gforge = new GForge();
-	return new soapval('tns:ArrayOfString', 'ArrayOfstring', $gforge->getPublicProjectNames());
-}
+// statistics
 
 /**
  * bugList - Lists all open bugs for a project
@@ -438,10 +444,22 @@ function bugAdd($sessionkey, $project, $summary, $details) {
 	}
 	return new soapval('tns:soapVal','string',$artifact->getID());
 }
+// bugs
 
+// miscellaneous
 function hello($inputString){
 return new soapval('tns:soapVal','string',$inputString.' echoed back to you');
 }
+
+/**
+ * getPublicProjectNames - gets a list of public project names
+ *
+ */
+function getPublicProjectNames() {
+	$gforge = new GForge();
+	return new soapval('tns:ArrayOfString', 'ArrayOfstring', $gforge->getPublicProjectNames());
+}
+
 
 function user($func, $params){
 	if ($func == "get") {
@@ -503,6 +521,7 @@ function group($func, $params){
 	} 
 	return new soap_fault ('1001', 'user', 'Unknown Function('.$func.') Must be \'get\'', 'No Detail');
 }
+// miscellaneous
 
 
 // 4. call the service method to initiate the transaction and send the response
