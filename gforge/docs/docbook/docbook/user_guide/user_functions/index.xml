@@ -18,7 +18,7 @@
 			<varlistentry>
 				<term>My Submitted Items</term>
 				<listitem>
-					<para>This list shows the Tracker items assigned to you. Only items in the open state will be listed here. Clicking on the number of the item, you'll go to the detail of the item. The items are ordered by priority.</para>
+					<para>This list shows the Tracker items submitted by you. Only items in the open state will be listed here. Clicking on the number of the item, you'll go to the detail of the item. The items are ordered by priority.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -42,19 +42,19 @@
 			<varlistentry>
 				<term>My Bookmarks</term>
 				<listitem>
-					<para>This list shows your  bookmarked pages. When you click on a bookmark, you'll go direct to the page you bookmarked. When you click on Edit, you can edit or delete the bookmark.</para>
+					<para>This list shows your bookmarked pages. When you click on a bookmark, you'll go direct to the page you bookmarked. When you click on Edit, you can edit or delete the bookmark.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>My Projects</term>
 				<listitem>
-					<para>This list shows you the active projects you're participating. When you click on a project, you'll go direct to the project summary.</para>
+					<para>This list shows you the active projects you are participating. When you click on a project, you will go to the project summary.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>Pending Projects</term>
 				<listitem>
-					<para>This section lists the new projects registered on gforge. This section is available only to administrators of the gforge site. It will be displayed only when pending projects needs to be approved.</para>
+					<para>This section lists the new projects registered on GForge. This section is available only to administrators of the GForge site. It will be displayed only when pending projects needs to be approved.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -73,7 +73,7 @@
 		<itemizedlist>
 			<listitem><para>Registration date (Member since)</para></listitem>
 			<listitem><para>User Id</para></listitem>
-			<listitem><para>login name</para></listitem>
+			<listitem><para>Login name</para></listitem>
 		</itemizedlist>
 	</section>
 	<section>
@@ -112,7 +112,7 @@
 			The Diary and Notes section allows you to simulate a basic agenda. You can insert a subject and a description of the item and select if the item is public or private.
 		</para>
 		<para>
-			If the item is public, every user of gforge can view and monitor this item.
+			If the item is public, every user of GForge can view and monitor this item.
 		</para>
 	</section>
 </section>

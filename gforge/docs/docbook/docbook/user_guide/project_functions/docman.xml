@@ -1,7 +1,7 @@
 <section id="ug_project_docman">
 	<title>Document Manager</title>
 	<para>
-		The Document Manager provided with Gforge gives you a simple way to publish documents on the site. 
+		The Document Manager provided with GForge gives you a simple way to publish documents on the site. 
 	</para>
 	<section>
 		<title>Submit new documentation</title>
@@ -12,7 +12,7 @@
 			<varlistentry>
 				<term>Document Title</term>
 				<listitem>
-					<para>The document title refers to the relatively brief title of th document</para>
+					<para>The document title refers to the relatively brief title of the document</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -36,7 +36,7 @@
 			<varlistentry>
 				<term>Group that document belongs in</term>
 				<listitem>
-					<para>You should select here the group of the document.</para>
+					<para>You should select here the group of the document. This feature is used to categorize documents.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
@@ -47,11 +47,11 @@
 	<section>
 		<title>Viewing existing docs</title>
 		<para>
-			The viewing existing docs shows you a list of documents published and approved for viewing; grouped by Document groups. You can click on a document to view the entire content.
+			The View Documentation page shows you a list of documents published and approved for viewing; grouped by Document groups. You can click on a document to view the entire content.
 		</para>
 	</section>
 	<section>
-		<title>Admin Doc</title>
+		<title>Admin</title>
 		<para>
 			Clicking on this will present you with a page showing pending and active documents. In order to allow users to submit a document, you must first set up the document groups for the project.
 		</para>
@@ -62,7 +62,7 @@
 			<varlistentry>
 				<term>Approve/publish pending submissions</term>
 				<listitem>
-					<para>The Pendig Submissions list shows the list of submissions that are waiting for your approval. Clicking on the Document name, the Edit Document form will be displayed.</para>
+					<para>The Pending Submissions list shows the list of submissions that are waiting for your approval. Clicking on the document name, the Edit Document form will be displayed.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -73,7 +73,7 @@
 						<varlistentry>
 							<term>Active Documents</term>
 							<listitem>
-								<para>Active Documents are displayed in the View Documentation list</para>
+								<para>Active Documents are displayed in the View Documentation list.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
@@ -85,7 +85,7 @@
 						<varlistentry>
 							<term>Hidden Documents</term>
 							<listitem>
-								<para>Hidden documents are not displayed</para>
+								<para>Hidden documents are not displayed.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
@@ -97,7 +97,7 @@
 						<varlistentry>
 							<term>Private Documents</term>
 							<listitem>
-								<para>Private documents are displayed only for members of the project</para>
+								<para>Private documents are displayed only for members of the project.</para>
 							</listitem>
 						</varlistentry>
 					</variablelist>
@@ -107,7 +107,7 @@
 				<term>Edit Document Groups</term>
 				<listitem>
 					<para>
-						Clicking on this will present you with a box and a button to add document groups, and it also shows the document groups associated with this project. Submit as many document classes as you wish - eg Howto, Release notes, FAQ, etc. These groups will be the catagories the documents will fall into when users submit documents.
+						Clicking on this will present you with a box and a button to add document groups, and it also shows the document groups associated with this project. Submit as many document categories as you wish - eg Howto, Release notes, FAQ, etc. These groups will be the categories the documents will fall into when users submit documents.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -119,7 +119,7 @@
 			When you select a document from one of the lists, a form will be displayed. In this form you can change the Document Title, the Short Description, the Language, the Document Group and the State.
 		</para>
 		<para>
-			If the Document is a text file with .txt, .html or .htm extension, a textbox appreas where you can edit the content of the document.
+			If the Document is a text file with .txt, .html or .htm extension, a textbox appears where you can edit the content of the document.
 		</para>
 		<para>
 			If the Document is a binary document, you can upload a new version of the document.

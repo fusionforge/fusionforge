@@ -1,10 +1,10 @@
 <section id="ug_sitewide_snippet">
 	<title>Snippet Library</title>
 	<para>
-		The Snippet Library function of gforge is very interesting; it allows to collect all the type of information/knowledge which is not a complete piece of code and which is usually difficult to organize/share.
+		The Snippet Library function of GForge is very interesting; it allows to collect all the type of information/knowledge which is not a complete piece of code and which is usually difficult to organize/share.
 	</para>
 	<para>
-		A typical example are sophicistated shell commands, javascript functions, perl one-liner, SQL expressions that perform special queries, an algorithm, etc.
+		A typical example are sophisticated shell commands, javascript functions, perl one-liner, SQL expressions that perform special queries, an algorithm, etc.
 	</para>
 	<section>
 		<title>Inserting a new snippet</title>
@@ -24,7 +24,7 @@
 			<varlistentry>
 				<term>Description</term>
 				<listitem>
-					<para>Insert the description of the snippet. </para>
+					<para>Insert the description of the snippet.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -42,7 +42,7 @@
 			<varlistentry>
 				<term>Language</term>
 				<listitem>
-					<para>Select the language of the snippet (if it is language dependant).</para>
+					<para>Select the language of the snippet (if it is language dependent).</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>

@@ -1,7 +1,7 @@
 <section id="ug_sitewide_search">
-	<title>Searching in gforge</title>
+	<title>Searching in GForge</title>
 	<para>
-		You can search in gforge for the following arguments:
+		You can search in GForge for the following arguments:
 	</para>
 	<variablelist>
 		<varlistentry>
@@ -24,7 +24,7 @@
 		</varlistentry>
 	</variablelist>
 	<para>
-		You can search for People or Software groups by selecting the item in the combo box and inserting the search text in the text box. 
+		You can search for People or Software groups by selecting the item in the combo box and inserting the search text in the text box.
 	</para>
 	<para>
 		If the user is inside one of the Trackers, a voice Tracker appears in the combo box.

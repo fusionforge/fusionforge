@@ -49,7 +49,7 @@
 			<varlistentry>
 				<term>Task Details</term>
 				<listitem>
-					<para>You should insert here the most detailed description possibile of the task.</para>
+					<para>You should insert here the most detailed description possible of the task.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -106,7 +106,7 @@
 		</para>
 		<variablelist>
 			<varlistentry>
-				<term>create new subprojects</term>
+				<term>Add a project</term>
 				<listitem>
 					<para>You can select if the subproject is public (visibile to everyone) or not (visibile only to project memebers).</para>
 					<para>This allows you to add a subproject to a project, such as modules, documentation, etc.</para>
@@ -114,9 +114,9 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>update information</term>
+				<term>Update information</term>
 				<listitem>
-					<para>Here you can select if the project is public, private or deleted (visibile to nobody) and update the name and description of the subjproject.</para>
+					<para>Here you can select if the project is public, private or deleted (visible to nobody) and update the name and description of the subproject.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

@@ -12,7 +12,7 @@
 			The Project admin page is available by clicking on the Admin tab.
 		</para>
 		<para>
-			Clicking here will present you with links to Admin, User Permissions, Edit Public Info, Project History, VHOSTS, Edit/Release Files, Post Jobs, Edit Jobs, Edit MultiMedia Data, Database Admin and Stats. The Project Admin page is only accessible to members of the project who have been granted administrator privileges. By default, the person who registers the project is given admin privileges. Other members can be granted admin rights by the project administrator(s).
+			Clicking here will present you with links to Admin, User Permissions, Edit Public Info, Project History, VHOSTS, Post Jobs, Edit Jobs, Edit MultiMedia Data, Database Admin and Stats. The Project Admin page is only accessible to members of the project who have been granted administrator privileges. By default, the person who registers the project is given admin privileges. Other members can be granted admin rights by the project administrator(s).
 		</para>
 	</section>
 	<section>
@@ -34,7 +34,7 @@
 						In order for people to be able to find the project, it must be classified in the Trove Map. This is basically a set of categories in which like projects are grouped.
 					</para>
 					<para>
-						Clicking on Edit Trove Categorization presets a page which allows you to select the category(s) to which the project belongs (select as many as possible).
+						Clicking on Edit Trove Categorization presets a page which allows you to select the category(s) to which the project belongs (select as many as needed).
 					</para>
 					<para>
 						Clicking Submit All Category Changes will set the categorizations, and you will be returned to the Project Admin page. You can change the trove categorizations during the lifetime of the project by following the above steps, as the project moves through its life.
@@ -64,7 +64,7 @@
 	<section>
 		<title>Edit Public Info</title>
 		<para>
-			This page enables the project admin to select the information that is visible to members of the public and the project. It is possible to select the utilities that are used, by the project, so that any that are not desired are not presented on the web page. Specifically it is possible to disable/enable:
+			This page enables the project admin to select the information that is visible to the public and to the members of the project. It is possible to select the utilities that are used by the project, so that any that are not desired are not presented on the web page. Specifically it is possible to disable/enable:
 		</para>
 		<itemizedlist>
 			<listitem><para>Mailing Lists</para></listitem>

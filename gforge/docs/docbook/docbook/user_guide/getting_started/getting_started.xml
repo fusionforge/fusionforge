@@ -3,7 +3,7 @@
 	<section>
 		<title>GForge homepage</title>
 		<para>
-			Connect with your browser to GForge. This can be either <ulink url="http://gforge.org">gforge.org</ulink> or a locally-installed version of the software.
+			Connect with your browser to GForge. This can be either <ulink url="http://gforge.org">http://gforge.org</ulink> or a locally-installed version of the software.
 		</para>
 	</section>
 	<section>
@@ -19,7 +19,7 @@
 				<term>Login Name</term>
 				<listitem>
 					<para>
-						You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. juser for John User.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a GForge user named 'root'.
+						You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. jdoe for John Doe.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a GForge user named 'root'.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -41,7 +41,7 @@
 			<varlistentry>
 				<term>Language Choice</term>
 				<listitem>
-					<para>Select here your preferred language. This choice does not influence only the language in which gforge will speak to you, but also some local specific data display, like dates, etc.</para>
+					<para>Select here your preferred language. This choice does not influence only the language in which GForge will speak to you, but also some local specific data display, like dates, etc.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -54,14 +54,14 @@
 				<term>Email Address</term>
 				<listitem>
 					<para>You should insert your email address here.</para>
-					<para>The email address should be correct, gforge will send you a confirmation email for your subscription. If the email address you're inserting here is wrong, you'll never receive the confirmation email and the account you're registering will never be activated.</para>
-					<para>When you receive the confirmation email, you must connect to gforge using the provided URL in the email. This is the only way to become a registered user.</para>
+					<para>The email address should be correct, GForge will send you a confirmation email for your subscription. If the email address you're inserting here is wrong, you'll never receive the confirmation email and the account you're registering will never be activated.</para>
+					<para>When you receive the confirmation email, you must connect to GForge using the provided URL in the email. This is the only way to become a registered user.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>Receive Email about Site Updates</term>
 				<listitem>
-					<para>If you check this, you'll periodically receive information about the gforge site. The traffic is very low, it is recommended that you activate this option.</para>
+					<para>If you check this, you'll periodically receive information about the GForge site. The traffic is very low, it is recommended that you activate this option.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -74,7 +74,7 @@
 	</section>
 	<section>
 		<title>Registering a new project</title>
-		<para>To register a new project, connect to your gforge and add the register/path to the URL</para>
+		<para>To register a new project, connect to your GForge , login and go to My Page section. You have a Register Project link in the menu at the top of the page.</para>
 		<para>You need to insert the following information to register a project:</para>
 		<variablelist>
 			<varlistentry>
@@ -111,23 +111,23 @@
 						<listitem><para>it must be in lowercase</para></listitem>
 						<listitem><para>only characters, numbers and dashes are accepted</para></listitem> 
 					</orderedlist>
-					<para>The unix name will be used for your website, the CVS Repository and the shell access for gforge.</para>
+					<para>The unix name will be used for your website, the CVS Repository and the shell access for GForge.</para>
 					<note>
 						<para>the unix name will never change. Once a project is set up with its unix name, the name cannot be changed.</para>
 					</note>
 				</listitem>
 			</varlistentry>
 		</variablelist>
-		<para>Click on the I agree button to register the project. Your project is now registered on gforge; but you cannot yet access it. It has to be approved from the site administrators.</para>
-		<para>When the project is approved, you'll receive an email from gforge confirming that the project is active.</para>
+		<para>Click on the I agree button to register the project. Your project is now registered on GForge; but you cannot yet access it. It has to be approved from the site administrators.</para>
+		<para>When the project is approved, you'll receive an email from GForge confirming that the project is active.</para>
 	</section>
 	<section id="ug_getting_started_login">
 		<title>Login</title>
-		<para>You can login by clicking the Login image in the top-right border of the browser window.</para>
+		<para>You can login by clicking the Login link in the top-right border of the browser window.</para>
 		<para>The form requires that you insert your username and your password to access the site. If the data is correct, the user homepage will be displayed.</para>
 	</section>
 	<section>
 		<title>Logout</title>
-		<para>To log out from gforge, click on the Logout button on the top right of your browser window.</para>
+		<para>To log out from GForge, click on the Logout link on the top right of your browser window.</para>
 	</section>
 </section>

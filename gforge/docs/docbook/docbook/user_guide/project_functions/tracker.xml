@@ -6,16 +6,16 @@
 			The Tracker is a generic system where you can store items like bugs, feature requests, patch submissions, etc.
 		</para>
 		<para>
-			In previous versions of the software, these items were handled in separate software modules. Bugs, Enhancement Requests, Support Requests and Patches handle the same type of data, so it was logical to create an unique software module that can handle this types of data. New types of trackers can be created when needed, e.g. Test Results, meeting minutes, etc.
+			In previous versions of the software, these items were handled in separate software modules. Bugs, Enhancement Requests, Support Requests and Patches handle the same type of data, so it was logical to create an unique software module that can handle these types of data. New types of trackers can be created when needed, e.g. Test Results, meeting minutes, etc.
 		</para>
 		<para>
 			You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.
 		</para>
 		<para>
-			Trackers are referred to as <quote>Artifact Types</quote> and individual pieces of data are <quote>Artifacts</quote>. <quote>Bugs</quote> might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
+			Trackers are referred to as <quote>Artifact Types</quote> and individual pieces of data are <quote>Artifacts</quote>. <quote>Bugs</quote> might be an Artifact Type, while a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
 		</para>
 		<para>
-			When a project is created, gforge creates automatically 4 trackers:
+			When a project is created, GForge creates automatically 4 trackers:
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -68,7 +68,7 @@
 			<varlistentry>
 				<term>Category</term>
 				<listitem>
-					<para>The Category is generally used to describe the function/module in which the bug appears. E.g for gforge, this might be the items <quote>User Login</quote>, <quote>File releases</quote>, <quote>Forums</quote>, <quote>Tracker</quote>, etc.</para>
+					<para>The Category is generally used to describe the function/module in which the bug appears. E.g for GForge, this might be the items <quote>User Login</quote>, <quote>File releases</quote>, <quote>Forums</quote>, <quote>Tracker</quote>, etc.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -160,7 +160,7 @@
 			</varlistentry>
 		</variablelist>
 		<para>
-			The Changelog on the bottom of the page shows in cronological order the changes applied to the item. Also all followups can be viewed.
+			The Changelog on the bottom of the page shows in chronological order the changes applied to the item. Also all followups can be viewed.
 		</para>
 	</section>
 	<section>
@@ -240,13 +240,13 @@
 						<varlistentry>
 							<term>Name</term>
 							<listitem>
-								<para>The name of the Tracker. This is the name displayed in the tracker list, e.g. Bug Submittions.</para>
+								<para>The name of the Tracker. This is the name displayed in the tracker list, e.g. Bug Submissions.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
 							<term>Description</term>
 							<listitem>
-								<para>The descriptions of the Tracker. E.g. This is the tracker dedicated to the Bugs of the project</para>
+								<para>The description of the Tracker. E.g. This is the tracker dedicated to the Bugs of the project</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
@@ -271,7 +271,7 @@
 						<varlistentry>
 							<term>Send email on new submission to address</term>
 							<listitem>
-								<para>All new items be sent to the address inserted in the text box.</para>
+								<para>All new items will be sent to the address inserted in the text box.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
@@ -293,13 +293,13 @@
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term>Free form text for the <guimenuitem>submit new item</guimenuitem> page</term>
+							<term>Free form text for the <guimenuitem>Submit new item</guimenuitem> page</term>
 							<listitem>
 								<para>This allows you to put a specific introduction on the <guimenuitem>submit new item</guimenuitem> page.</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term>Free form text for the <guimenuitem>browse items</guimenuitem> page</term>
+							<term>Free form text for the <guimenuitem>Browse items</guimenuitem> page</term>
 							<listitem>
 								<para>This allows you to put a specific introduction on the <guimenuitem>Browse items</guimenuitem> page.</para>
 							</listitem>
@@ -330,7 +330,7 @@
 			When this function is enabled, a checkbox will appear at the left side of each bug id. You can check one or more of the ids, select one or more of the values in the Mass Update combo boxes and click Mass Update.
 		</para>
 		<para>
-			All bugs will be modified with these new value(s). This function is very useful if you need to change the same information for more bugs; e.g. assigning 5 bugs to one developer or closing 10 bugs.
+			All selected bugs will be modified with these new value(s). This function is very useful if you need to change the same information for more bugs; e.g. assigning 5 bugs to one developer or closing 10 bugs.
 		</para>
 	</section>
 	<section>
@@ -374,7 +374,7 @@
 	<section>
 		<title>Searching for bugs</title>
 		<para>
-			When using a tracker, a voice with the name of the tracker  will appear in the search combo box. The search will be done on the description, summary, the username of the submitter and the username of the assignee.
+			When using a tracker, a voice with the name of the tracker will appear in the search combo box. The search will be done on the description, the summary, the username of the submitter and the username of the assignee.
 		</para>
 	</section>
 </section>
