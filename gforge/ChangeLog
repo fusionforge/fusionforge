@@ -1,3 +1,8 @@
+2004-09-09  Francisco Gimeno <kikov@kikov.org>
+
+	* www/include/languages/chinese.tab: updated. Applied patch [#890].
+	Thx to Finjon Kiang.
+
 2004-08-30  Francisco Gimeno <kikov@kikov.org>
 
 	* www/reporting/toolpie_graph.php: Change Forum.date to 
