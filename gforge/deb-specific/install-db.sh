@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure exim for GForge
-# Roland Mas, debian-sf (GForge for Debian)
+# Configure postgresql database for GForge
+# Roland Mas, gforge
 
 set -e
 
@@ -28,25 +28,28 @@ case "$target" in
 	# Tell PostgreSQL to let us use the database
 	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
 	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbhost\n";')
+	db_name=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n";')
+	db_user=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbuser\n";')
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
             # PostgreSQL configuration for versions prior to 7.3
 	    echo "Configuring for PostgreSQL 7.2"
 	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    # if previous string, else no previous string
 	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*gforge_passwd$/host gforge $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
+		perl -pi -e "s/^host.*gforge_passwd$/host $db_name $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
 	    else
 		cur=$(mktemp /tmp/$pattern)
 		echo "### Next line inserted by GForge install" > $cur
-		echo "host gforge $ip_address 255.255.255.255 password gforge_passwd" >> $cur
+		echo "host $db_name $ip_address 255.255.255.255 password gforge_passwd" >> $cur
 		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
 		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 		rm -f $cur
 	    fi
 	    su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
 	    su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/gforge_passwd > /dev/null" <<-EOF
-gforge
+$db_user
 $db_passwd
 $db_passwd
 EOF
@@ -54,19 +57,22 @@ EOF
             # PostgreSQL configuration for versions from 7.3 on
 	    echo "Configuring for PostgreSQL 7.3"
 	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    # if 7.2 formatted string, elseif 7.3 string, else no previous string
 	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*gforge_passwd$/host gforge gforge $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
-	    elif grep -q "^host gforge gforge.*password$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host gforge gforge.*password$/host gforge gforge $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
+		perl -pi -e "s/^host.*gforge_passwd$/host $db_name $db_user $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
+            # the below could cause issues if gforge's line isnt at the top of the file, but its
+	    # the only way to allow changing of the db_name.
+	    elif grep -q "^host.*password$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		perl -pi -e "s/^host.*password$/host $db_name $db_user $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
 	    else
 		cur=$(mktemp /tmp/$pattern)
 		echo "### Next line inserted by GForge install" > $cur
-		echo "host gforge gforge $ip_address 255.255.255.255 password" >> $cur
+		echo "host $db_name $db_user $ip_address 255.255.255.255 password" >> $cur
 		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
 		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 		rm -f $cur
 	    fi
-	    # Remove old password file
+	    # Remove old password file, created by 7.2, not used by 7.3
 	    if [ -e /var/lib/postgres/data/gforge_passwd ] ; then
 		rm -f /var/lib/postgres/data/gforge_passwd
 	    fi
@@ -76,13 +82,16 @@ EOF
     configure)
 	# Create the appropriate database user
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	db_name=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n";')
+	db_user=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbuser\n";')
+	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
-	    if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser gforge" 1> $tmp1 2> $tmp2 \
+	    if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser $db_user" 1> $tmp1 2> $tmp2 \
 		&& [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-		|| grep -q '^ERROR:  CREATE USER: user name "gforge" already exists$' $tmp2 ; then
+		|| grep -q '^ERROR:  CREATE USER: user name "$db_user" already exists$' $tmp2 ; then
 	        # Creation OK or user already existing -- no problem here
 		rm -f $tmp1 $tmp2
 	    else
@@ -98,9 +107,8 @@ EOF
 		exit 1
 	    fi
 	else
-	    db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
 	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
-CREATE USER gforge WITH PASSWORD '$db_passwd' ;
+CREATE USER $db_user WITH PASSWORD '$db_passwd' ;
 EOF
 		then
 		rm -f $tmp1 $tmp2
@@ -121,9 +129,9 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE gforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    || grep -q '^ERROR:  CREATE DATABASE: database "gforge" already exists$' $tmp2 ; then
+	    || grep -q "ERROR:  CREATE DATABASE: database \"$db_name\" already exists" $tmp2 ; then
 	    # Creation OK or database already existing -- no problem here
 	    echo -n ""
 	    rm -f $tmp1 $tmp2
@@ -143,9 +151,9 @@ EOF
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/enable_lang plpgsql gforge" 1> $tmp1 2> $tmp2 \
-	    || grep -q '^plpgsql added to gforge$' $tmp1 \
-	    || grep -q '^plpgsql is already enabled in gforge$' $tmp1 ; then
+	if su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/enable_lang plpgsql $db_name" 1> $tmp1 2> $tmp2 \
+	    || grep -q "plpgsql added to $db_name" $tmp1 \
+	    || grep -q "plpgsql is already enabled in $db_name" $tmp1 ; then
 	    # Creation OK or user already existing -- no problem here
 	    echo -n ""
 	    rm -f $tmp1 $tmp2
@@ -176,17 +184,22 @@ EOF
         if grep -q "### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new
         then
 	    perl -pi -e "s/### Next line inserted by GForge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
-	    perl -pi -e "s/^host gforge gforge.*password\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    # same problem below with gforge required to be the first host that
+	    # uses password, required for allowing change of db_name.
+	    perl -pi -e "s/^host.*password\n//" /etc/postgresql/pg_hba.conf.gforge-new
 	    perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
         fi
 	;;
     purge)
-	su -s /bin/sh postgres -c "dropdb gforge" > /dev/null 2>&1 || true
-	su -s /bin/sh postgres -c "dropuser gforge" > /dev/null 2>&1 || true
+	db_name=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n";')
+	db_user=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbuser\n";')
+	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
+	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
 	rm -f /var/lib/postgres/data/gforge_passwd
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	;;
     dump)
+    	db_name=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n";')
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
 	else
@@ -195,12 +208,13 @@ EOF
 	if [ "x$3" != "x" ] ;then
 		DB=$3
 	else
-		DB=gforge
+		DB=$db_name
 	fi
 	echo "Dumping $DB database in $DUMPFILE"
 	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
 	;;
     restore)
+	db_name=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n";')
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
@@ -222,9 +236,9 @@ EOF
 		RESTFILE=/var/lib/gforge/dumps/db_dump
 	fi
 	echo "Restoring $RESTFILE"
-	su -s /bin/sh postgres -c "dropdb gforge" || true
-	su -s /bin/sh postgres -c "createdb gforge"  || true
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE gforge"
+	su -s /bin/sh postgres -c "dropdb $db_name" || true
+	su -s /bin/sh postgres -c "createdb $db_name"  || true
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
         perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf
         #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf

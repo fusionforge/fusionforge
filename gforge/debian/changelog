@@ -1,3 +1,10 @@
+gforge (3.0-9+1) unstable; urgency=low
+
+  * [Roland] Patch #558 from Patrick McFarland to fix hardwiring problem
+    in install-db.sh.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 19 Oct 2003 21:55:23 +0200
+
 gforge (3.0-9) unstable; urgency=low
 
   * [Roland] New CVS snapshot, including fix for a bug that prevented
