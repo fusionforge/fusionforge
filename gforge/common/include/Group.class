@@ -238,7 +238,7 @@ class Group extends Error {
 	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $cvs_box='cvs1') {
+	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1') {
 
 		// $user is ignored - anyone can create pending group
 
@@ -262,7 +262,7 @@ class Group extends Error {
 				homepage,
 				status,
 				unix_box,
-				cvs_box,
+				scm_box,
 				license,
 				register_purpose,
 				register_time,
@@ -278,7 +278,7 @@ class Group extends Error {
 				'$unix_name.".$GLOBALS['sys_default_domain']."',
 				'P',
 				'$unix_box',
-				'$cvs_box',
+				'$scm_box',
 				'$license',
 				'".htmlspecialchars($purpose)."',
 				".time().",
@@ -420,7 +420,7 @@ class Group extends Error {
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
 		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
 		$new_doc_address,$send_all_docs,$logo_image_id,
-		$enable_pserver,$enable_anoncvs,
+		$enable_pserver,$enable_anonscm,
 		$use_ftp,$use_tracker,$use_frs,$use_stats) {
 		global $Language;
 
@@ -476,12 +476,6 @@ class Group extends Error {
 		if (!$send_all_tasks) {
 			$send_all_tasks=0;
 		}
-		if (!$enable_pserver) {
-			$enable_pserver=0;
-		}
-		if (!$enable_anoncvs) {
-			$enable_anoncvs=0;
-		}
 		if (!$use_ftp) {
 			$use_ftp=0;
 		}
@@ -521,13 +515,23 @@ class Group extends Error {
 				use_forum='$use_forum',
 				use_pm='$use_pm',
 				use_pm_depend_box='$use_pm_depend_box',
-				use_cvs='$use_scm',
+				use_scm='$use_scm',
 				use_news='$use_news',
 				use_docman='$use_docman',
 				new_doc_address='$new_doc_address',
 				send_all_docs='$send_all_docs',
+		";
+		if ($enable_pserver != '') {
+		$sql .= "
 				enable_pserver='$enable_pserver',
-				enable_anoncvs='$enable_anoncvs',
+		";
+		}
+		if ($enable_anonscm != '') {
+		$sql .= "
+				enable_anonscm='$enable_anonscm',
+		";
+		}
+		$sql .= "
 				use_ftp='$use_ftp',
 				use_tracker='$use_tracker',
 				use_frs='$use_frs',
@@ -872,13 +876,13 @@ class Group extends Error {
 	*/
 
 	/**
-	 *	enableAnonCVS - whether or not this group has opted to enable Anonymous CVS.
+	 *	enableAnonSCM - whether or not this group has opted to enable Anonymous SCM.
 	 *
-	 *	@return boolean enable_cvs.
+	 *	@return boolean enable_scm.
 	 */
-	function enableAnonCVS() {
+	function enableAnonSCM() {
 		if ($this->usesSCM()) {
-			return $this->data_array['enable_anoncvs'];
+			return $this->data_array['enable_anonscm'];
 		} else {
 			return false;
 		}
@@ -900,12 +904,12 @@ class Group extends Error {
 	/**
 	 *	usesSCM - whether or not this group has opted to use SCM.
 	 *
-	 *	@return	boolean	uses_cvs.
+	 *	@return	boolean	uses_scm.
 	 */
 	function usesSCM() {
 		global $sys_use_scm;
 		if ($sys_use_scm) {
-			return $this->data_array['use_cvs'];
+			return $this->data_array['use_scm'];
 		} else {
 			return false;
 		}
