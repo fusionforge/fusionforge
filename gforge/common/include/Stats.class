@@ -31,6 +31,10 @@ class Stats extends Error {
 		return true;
 	}
 
+	/**
+	 * Returns a resultset consisting of the month, day, total_users, and sessions
+	 * from the stats_site table
+	 */
 	function getSiteStats() {
 		$res = db_query("select month, day, total_users, sessions from stats_site");
 		if (!$res) {
