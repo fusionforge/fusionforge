@@ -95,29 +95,29 @@ sub parse_history {
         		GROUP BY year,month,day,cvsgroup
 		) agg
 		LEFT JOIN (
-        	SELECT cvsgroup,COUNT(*) AS commits
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS commits
         	FROM deb_cvs_dump
 		WHERE type='A'
         	GROUP BY year,month,day,cvsgroup
-		) c USING (cvsgroup)
+		) c USING (cvsgroup,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,COUNT(*) AS adds
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS adds
         	FROM deb_cvs_dump
 		WHERE type='M'
         	GROUP BY year,month,day,cvsgroup
-		) a USING (cvsgroup)
+		) a USING (cvsgroup,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,COUNT(*) AS checkouts
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS checkouts
         	FROM deb_cvs_dump
 		WHERE type='O'
         	GROUP BY year,month,day,cvsgroup
-		) ch USING (cvsgroup)
+		) ch USING (cvsgroup,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,COUNT(*) AS errors
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS errors
         	FROM deb_cvs_dump
 		WHERE type='E'
         	GROUP BY year,month,day,cvsgroup
-		) e USING (cvsgroup)
+		) e USING (cvsgroup,year,month,day)
 	";
 	$dbh->do( $sql );
 }
@@ -136,9 +136,9 @@ sub print_stats {
 # main      #
 #############
 &db_connect;
-#&drop_tables;
-#&create_dump_table;
-#&dump_history;
-#&parse_history;
+&drop_tables;
+&create_dump_table;
+&dump_history;
+&parse_history;
 &print_stats;
 
