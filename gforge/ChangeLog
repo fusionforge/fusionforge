@@ -1,3 +1,8 @@
+2004-03-18  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/docman/index.php: Sort documents by doc_group first, then
+	title inside a doc_group.
+
 2004-03-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/Catalan.tab: Catalan update by Jordi
