@@ -15,6 +15,12 @@ in both utils and deb-specific dir at the moment
 etc/local.inc is generated from files in etc/local.d
 etc/httpd.conf is generated from files in etc/httpd.d
 
+local.inc.example was generated doing:
+./setup -input etc/gforge.conf.example -output etc/gforge.conf.example
+mv etc/local.inc etc/local.inc.example
+
+./setup -help will give you all available switch
+
 Let me know if this was usefull and the change you had to do to make it run
 on your system
 

@@ -2,8 +2,13 @@
 apacheconf=/etc/apache/httpd.conf
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug]"
+	echo "$0: [-interact] [-help] [-debug] [-input conffile] [-output conffile] [-example] [-clean]"
 }
+
+CONFFILEIN=etc/gforge.conf
+CONFFILEOUT=etc/gforge.conf
+LOCALINC=etc/local.inc
+HTTPDCONF=etc/httpd.conf
 
 while [ $# -ne 0 ]
 do
@@ -16,6 +21,27 @@ do
 			usage
 			exit 0
 			;;
+		-input )
+			shift
+			CONFFILEIN=$1
+			;;
+		-output )
+			shift
+			CONFFILEOUT=$1
+			;;
+		-example )
+			CONFFILEIN=etc/gforge.conf.example
+			CONFFILEOUT=etc/gforge.conf.example
+			LOCALINC=etc/local.inc.example
+			HTTPDCONF=etc/httpd.conf.example
+			;;
+		-clean )
+			rm -f $HTTPDCONF
+			rm -f etc/httpd.secrets
+			rm -f $LOCALINC
+			rm -f $CONFFILEIN
+			exit 0
+			;;
 		-debug )
 			set -x
 			;;
@@ -24,7 +50,6 @@ do
 			usage
 			;;
 	esac
-	echo "$#"
 	shift
 done
 
@@ -63,6 +88,8 @@ DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 DEFAULTcgidir=`pwd`/utils
 DEFAULTcronolog_path=`type cronolog | cut -d' ' -f3`
+DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
+DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
 DEFAULTgforge_chroot=""
 DEFAULTgforge_etc=`pwd`/etc
 DEFAULTgroupdir=`pwd`/home/groups
@@ -125,9 +152,10 @@ echo "Setting defaults"
 
 computedefault
 writedefault etc/gforge.conf.new
-if [ -f etc/gforge.conf ]
+if [ -f $CONFFILEIN ]
 then
-	readdefault etc/gforge.conf
+	readdefault $CONFFILEIN
+	echo "Red default from $CONFFILEIN"
 else
 	readdefault etc/gforge.conf.new
 fi
@@ -146,7 +174,7 @@ fi
 rm -f $tmpfile
 
 writedefault etc/gforge.conf.new
-mv etc/gforge.conf.new etc/gforge.conf
+mv etc/gforge.conf.new $CONFFILEOUT
 #cat $0 | grep '^DEFAULT' | sed 's/^DEFAULT\(.[^=]*\)=.*/DEFAULT\1 \1/' | while read defvar var
 #do
 #	echo $defvar $var 
@@ -154,23 +182,23 @@ mv etc/gforge.conf.new etc/gforge.conf
 
 
 # Remove trailing space
-cat etc/gforge.conf | sed 's/ *$//' > etc/gforge.conf.new
-mv etc/gforge.conf.new etc/gforge.conf
+cat $CONFFILEIN | sed 's/ *$//' > etc/gforge.conf.new
+mv etc/gforge.conf.new $CONFFILEIN
 
-echo "Create etc/httpd.conf and etc/httpd.secrets"
+echo "Create $HTTPDCONF and etc/httpd.secrets"
 for i in etc/httpd.d/[0-4][0-9]* etc/httpd.d/httpd.secrets
 do
-	utils/fill-in-the-blanks.pl $i etc/`basename $i` etc/gforge.conf
+	utils/fill-in-the-blanks.pl $i etc/`basename $i` $CONFFILEOUT
 done
-ls etc/[0-9][0-9]* | sort | xargs cat > etc/httpd.conf
+ls etc/[0-9][0-9]* | sort | xargs cat > $HTTPDCONF
 rm etc/[0-9][0-9]*
 
-echo "Create etc/local.inc"
+echo "Create $LOCALINC"
 for i in etc/local.d/01* etc/local.d/10*simple etc/local.d/[2-9]*
 do
-	utils/fill-in-the-blanks.pl $i etc/`basename $i` etc/gforge.conf
+	utils/fill-in-the-blanks.pl $i etc/`basename $i` $CONFFILEOUT
 done
-ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > etc/local.inc
+ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > $LOCALINC
 rm etc/01* etc/10*simple etc/[2-9]*
 
 
