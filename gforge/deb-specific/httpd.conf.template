@@ -178,6 +178,14 @@ Include /etc/gforge/httpd.common
     Include /etc/gforge/httpd.secrets
   </Directory>
 
+  # Projects an Users script
+  <Location /projects>
+    ForceType application/x-httpd-php
+  </Location>
+  <Location /users>
+    ForceType application/x-httpd-php
+  </Location>
+
   # This for cvsweb 
   ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
 

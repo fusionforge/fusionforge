@@ -1,8 +1,9 @@
-gforge (3rc1-2) experimental; urgency=low
+gforge (3rc1-2+) experimental; urgency=low
 
-  * [Roland] Corrected a bug in exim install script 
+  * [Roland] Corrected a bug in exim install script
+  * [Christian] Added location on projects and users for ssl part
 
- -- Christian Bayle <bayle@debian.org>  Tue, 18 Mar 2003 20:31:33 +0100
+ -- Christian Bayle <bayle@debian.org>  Wed, 19 Mar 2003 00:58:26 +0100
 
 gforge (3rc1-1) experimental; urgency=low
 
