@@ -32,7 +32,8 @@ case "$1" in
 	pattern=$(basename $0).XXXXXX
 	
 	# "Fill in the blanks" in config files
-        files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
+        # files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
+        files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
         vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list"
         
 	# Invoke our magic script
@@ -46,7 +47,7 @@ case "$1" in
 	chmod 640 /etc/sourceforge/database.inc
 	chown sourceforge:sourceforge /etc/sourceforge/local.pl
 	chmod 640 /etc/sourceforge/local.pl
-	chmod 644 /etc/sourceforge/exim.directors
+	# chmod 644 /etc/sourceforge/exim.directors
     	
 	# Create the appropriate database user
 	tmp1=$(mktemp /tmp/$pattern)
@@ -158,65 +159,52 @@ EOF
 	[ -x /usr/bin/newaliases ] && newaliases
 
 
-	db_get sourceforge/web_only
-	if [ "$RET" = "true" ] ; then
+	# Install the chroot environment
+	/usr/lib/sourceforge/bin/install-chroot.sh
+	
+	# Create the DNS zone
+	echo "Installing Sourceforge DNS zone"
+	db_get sourceforge/domain_name
+	domain_name=$RET
+	db_get sourceforge/ip_address
+	ip_address=$RET
+	/usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
+	
+        # Setup our CVS
+	/usr/lib/sourceforge/bin/install-cvs.sh configure
 
-	    db_stop
-	    /etc/init.d/apache restart
+        # Setup our LDAP
+	/usr/lib/sourceforge/bin/install-ldap.sh
 
-	else
+        # Setup our SSH
+	/usr/lib/sourceforge/bin/install-ssh.sh
 
-	    # Install the chroot environment
-	    /usr/lib/sourceforge/bin/install-chroot.sh
+        # Setup our mail forwarding
+	/usr/lib/sourceforge/bin/install-exim.sh configure # Not ready yet
 
-	    # Create the DNS zone
-	    echo "Installing Sourceforge DNS zone"
-	    db_get sourceforge/domain_name
-	    domain_name=$RET
-	    db_get sourceforge/ip_address
-	    ip_address=$RET
-	    /usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
+        # Setup our FTP
+	/usr/lib/sourceforge/bin/install-ftp.sh configure 
 
-            # Setup our CVS
-	    /usr/lib/sourceforge/bin/install-cvs.sh configure
+        # Setup our FRS
+	chown root:root /var/lib/sourceforge/download
 
-            # Setup our LDAP
-	    /usr/lib/sourceforge/bin/install-ldap.sh
+	# Setup our CVS
+	# Making user group and cvs update from database 
+	/usr/lib/sourceforge/bin/update-user-group-cvs.sh
+	# logs
+	chown root:sourceforge /var/log/sourceforge/cvs
+	chmod 775 /var/log/sourceforge/cvs
 
-            # Setup our SSH
-	    /usr/lib/sourceforge/bin/install-ssh.sh
+	# Clean after ourselves
+	db_stop
 
-            # Setup our mail forwarding
-	    /usr/lib/sourceforge/bin/install-exim.sh configure # Not ready yet
-
-            # Setup our FTP
-	    /usr/lib/sourceforge/bin/install-ftp.sh configure 
-
-            # Setup our FRS
-	    chown root:root /var/lib/sourceforge/download
-
-	    # Setup our CVS
-	    # Making user group and cvs update from database 
-	    /usr/lib/sourceforge/bin/update-user-group-cvs.sh
-	    # logs
-	    chown root:sourceforge /var/log/sourceforge/cvs
-	    chmod 775 /var/log/sourceforge/cvs
-
-	    # Clean after ourselves
-	    db_stop
-
-	    # Restart some services
-	    /etc/init.d/bind9 restart
-	    # This is equivalent but require some signature, not always there
-	    #/usr/sbin/rndc reload
-	    /etc/init.d/ssh start
-	    /etc/init.d/apache restart
-	    
-	    # Activate the cron jobs
-	    perl -pi -e "s:^#* *web_only=.*:web_only=false:" /etc/cron.d/sourceforge
-	    
-	fi
-
+	# Restart some services
+	/etc/init.d/bind9 restart
+	# This is equivalent but require some signature, not always there
+	#/usr/sbin/rndc reload
+	/etc/init.d/ssh start
+	/etc/init.d/apache restart
+	
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
