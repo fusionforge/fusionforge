@@ -144,10 +144,10 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	</table>
 
 	<p>
-	<strong><?php echo $Language->getText('admin','license'); ?><?php echo $row_grp['license']; ?></strong>
+	<strong><?php echo $Language->getText('admin','license')." "; print $row_grp['license']; ?></strong>
 
-	<br /><strong><?php echo $Language->getText('admin_approve_pending','home_box'); ?><?php print $row_grp['unix_box']; ?></strong>
-	<br /><strong><?php echo $Language->getText('admin','http_domain'); ?><?php print $row_grp['http_domain']; ?></strong>
+	<br /><strong><?php echo $Language->getText('admin_approve_pending','home_box')." "; print $row_grp['unix_box']; ?></strong>
+	<br /><strong><?php echo $Language->getText('admin','http_domain')." "; print $row_grp['http_domain']; ?></strong>
 
 	<br />
 	&nbsp;</p>
@@ -156,7 +156,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	// ########################## OTHER INFO
 
 	print "<p><strong>" .$Language->getText('admin_approve_pending','other_information')."</strong></p>";
-	print "<p>" .$Language->getText('admin_approve_pending','unix_group_name'). "$row_grp[unix_group_name]</p>";
+	print "<p>" .$Language->getText('admin_approve_pending','unix_group_name'). " $row_grp[unix_group_name]</p>";
 
 	print "<p>" .$Language->getText('admin_approve_pending','submitted_description'). "</p><blockquote>$row_grp[register_purpose]</blockquote>";
 

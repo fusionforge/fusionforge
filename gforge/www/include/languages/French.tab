@@ -213,7 +213,7 @@ admin_approve_pending	pending_projects	Projets en attente :
 admin_approve_pending	pending_reason	Motif :
 admin_approve_pending	project_admin	Administrateur de projet
 admin_approve_pending	submitted_description	Description proposée :
-admin_approve_pending	unix_group_name	Nom du groupe Unix
+admin_approve_pending	unix_group_name	Nom du groupe Unix :
 admin_approve_pending	view_edit_project_members	[Voir/Editer les membres du projet]
 admin_database	add_an_already_active_database	Ajouter un base de données déjà active
 admin_database	added_already_active_database	Base de données déjà active ajoutée
