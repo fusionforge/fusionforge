@@ -10,17 +10,13 @@
 * @version   $Id$ 
 */
 
-require_once('www/include/vote_function.php');
 require_once('www/news/news_utils.php');
 require_once('www/include/trove.php');
 require_once('www/include/project_summary.php');
 
-// Icons theming
-$imgproj=$HTML->imgproj;
+$title = $Language->getText('project_home','title');
 
-$title = $Language->getText('project_home','title').'- '. $project->getPublicName();
-
-site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home','pagename'=>'projects','sectionvals'=>array(group_getname($group_id))));
+site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 
 
 // ########################################### end top area

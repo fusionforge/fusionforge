@@ -88,8 +88,7 @@ function html_dbimage($id, $args=0) {
  * @param		int 	height of the image
  * @param		array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
  */
-function html_abs_image($url, $width, $height, $args)
-{
+function html_abs_image($url, $width, $height, $args) {
 	$return = ('<img src="' . $url . '"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
@@ -136,7 +135,7 @@ function html_image($src,$width,$height,$args,$display=1) {
  * @param		string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_language_popup ($Language,$title='language_id',$selected='xzxzxz') {
+function html_get_language_popup ($Language,$title='language_id',$selected='xzxz') {
 	$res=$Language->getLanguages();
 	return html_build_select_box ($res,$title,$selected,false);
 }
@@ -531,6 +530,8 @@ function site_project_header($params) {
 		//only SF group can view non-active, non-holding groups
 		session_require(array('group'=>'1'));
 	}
+
+	$params['title']=$project->getPublicName().': '.$params['title'];
 
 	echo $HTML->header($params);
 	
