@@ -50,14 +50,14 @@ pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_projec
 
   	<tr>
 		<td colspan="2">
-		<strong>Task Summary:</strong><br />
+		<strong>Task Summary:<?php echo utils_requiredField(); ?></strong><br />
 		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $related_artifact_summary; ?>">
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>Task Details:</strong><br />
+		<strong>Task Details:<?php echo utils_requiredField(); ?></strong><br />
 		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea></td>
 	</tr>
 
@@ -110,7 +110,7 @@ pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_projec
 
 	<tr>
 		<td>
-		<strong>Estimated Hours:</strong><br />
+		<strong>Estimated Hours:<?php echo utils_requiredField(); ?></strong><br />
 		<input type="text" name="hours" size="5">
 		</td>
 
