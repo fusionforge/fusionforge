@@ -163,7 +163,7 @@ if ($group_id) {
 			if ($farr[$j]->isError()) {
 				echo $farr->getErrorMessage();
 			} else {
-				echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+				echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="/forum/forum.php?forum_id='. $farr[$j]->getID() .'">'.
 					html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 					'&nbsp;' .
 					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'</td></tr>';
