@@ -6,6 +6,8 @@
 	on the snippet package page
 	* cronjobs/massmail.php: Fixed bug #837: Mass mailing 
 	sends duplicate emails.
+	* www/include/languages/Spanish.tab: Applied patch #
+	843 Spanish.tab patch updated to 2004-07.
 
 2004-07-20  Christian Bayle <bayle@aist.enst.fr>
 
