@@ -430,7 +430,7 @@ function people_show_job_list($result) {
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
-		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><h2>'.$Language->getText('people','none_found').'</h2>'. db_error() .'</td></tr>';
+		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="4"><h2>'.$Language->getText('people','none_found').'</h2>'. db_error() .'</td></tr>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			$return .= '

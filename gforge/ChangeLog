@@ -1,4 +1,8 @@
 2003-07-02 Christian Bayle	<bayle@debian.org>
+	* Corrected bad colspan in www/people/people_utils.php close patch
+	#482 from Paul Gibbbs (djpaul)
+	
+2003-07-02 Christian Bayle	<bayle@debian.org>
 	* common/include/account.php
 	Check if the unix user account exist with a exec(getent...) and refuse
 	to create if exists
