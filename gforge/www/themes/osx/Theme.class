@@ -102,12 +102,12 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		global $Language;
+		global $Language, $sys_name;
 
 		if (!$params['title']) {
-			$params['title'] = "GForge";
+			$params['title'] = "$sys_name";
 		} else {
-			$params['title'] = "GForge: " . $params['title'];
+			$params['title'] = "$sys_name: " . $params['title'];
 		}
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
@@ -201,6 +201,22 @@ class Theme extends Layout {
 		color: #000000; 
 		font-weight: bold; 
 		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	}
+
+	A.showsource {
+		color: #000000;
+		text-decoration: none;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
+	}
+	A.showsource:visited {
+		color: #000000;
+		text-decoration: none;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
+	}
+	A.showsource:hover {
+		color: #000000;
+		text-decoration: none;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
 	-->
 </style>
@@ -333,6 +349,14 @@ if ($params['group']) {
 		<TD HEIGHT=100>&nbsp;</TD>
 	</TR>
 </TABLE>
+<?php
+	global $sys_show_source;
+	if ($sys_show_source) {
+		global $SCRIPT_NAME;
+		print '<a class=showsource href="/source.php?file=' . SCRIPT_NAME . '">Show Source</A>';
+	}
+?>
+
 </body>
 </html>
 <?php
