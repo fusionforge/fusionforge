@@ -15,7 +15,6 @@ require ('common/include/cron_utils.php');
 
 $ARGV = $GLOBALS['argv'];
 $verbose = 1;
-$base_log_dir = "/home/bnd/cvs_log";
 $cvsroot = "/cvsroot";
 
 if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
