@@ -1,3 +1,12 @@
+sourceforge (2.5-14+) unstable; urgency=low
+
+  * Made ldap cleanup:
+    Added access to userPassword for SF_robot (Thanks to Justin Richer)
+    Made a clean ldap purge
+    Made install-ldap.sh more silent and backport from 2.6
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Thu,  8 Nov 2001 00:55:39 +0100
+
 sourceforge (2.5-14) unstable; urgency=low
 
   * Made install-dns.sh a bit more silent.
@@ -7,8 +16,9 @@ sourceforge (2.5-14) unstable; urgency=low
     permissions.  Cleaned new_parse.pl a bit, accordingly.
   * Changed Priority: from optional to extra to avoid overrides.
   * Various fixes and cleanups.
+  * 2.5-14+
 
- -- Roland Mas <lolando@debian.org>  Wed,  7 Nov 2001 19:01:59 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Thu,  8 Nov 2001 00:55:35 +0100
 
 sourceforge (2.5-13) unstable; urgency=low
 
