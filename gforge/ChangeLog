@@ -1,5 +1,10 @@
 2004-03-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/BaseLanguage.class: Trim the last part of the *.tab
+	lines, instead of just right-trimming it.  This makes it possible
+	to have pretty aligned third columns in these files without
+	causing bugs.
+
 	* www/docman/include/doc_utils.php: If the user did select "All
 	languages", then keep that choice the default selection.
 

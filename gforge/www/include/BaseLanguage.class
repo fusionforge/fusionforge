@@ -50,7 +50,7 @@ class BaseLanguage {
 				$this->loadLanguageFile($dir."/".$matches[1].".tab");
 			} else {
 				$line = explode("\t", $ary[$i], 3);
-				$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+				$this->text_array[$line[0]][$line[1]] = trim($line[2]);
 			}
 		}
 	}
