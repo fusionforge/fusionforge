@@ -130,7 +130,7 @@ function show_newest_projects() {
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			$return .= "<strong>(" . date($Language->getText('home','recently_registered_date_format'),$row_newproj['register_time'])  . ")</strong> "
-				. '<a href="/projects/.'.$row_newproj['unix_group_name'].'/">'
+				. '<a href="/projects/'.$row_newproj['unix_group_name'].'/">'
 				. $row_newproj['group_name'].'</a><br />';
 		}
 	}
