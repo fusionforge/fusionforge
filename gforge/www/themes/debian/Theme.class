@@ -148,7 +148,7 @@ class Theme extends Layout {
 <table border=0 width="100%" cellspacing="0" cellpadding=0>
 
 	<tr>
-		<td><a href="/"><?php echo html_image('logo.png',75,75,array('border'=>'0')); ?></a></td>
+		<td><a href="/"><?php echo html_image('logo.png',275,75,array('border'=>'0')); ?></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
 		<td align="RIGHT"><?php
 			if (session_loggedin()) {
