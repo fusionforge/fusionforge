@@ -1,0 +1,6 @@
+<?
+	$sys_dbhost="{domain_name}";
+	$sys_dbname="sourceforge";
+	$sys_dbuser="sourceforge";
+	$sys_dbpasswd="{db_password}";
+?>

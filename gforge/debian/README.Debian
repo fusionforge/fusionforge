@@ -1,0 +1,213 @@
+Sourceforge for Debian
+======================
+
+Status
+------
+
+Want to know what the status of this package is?  Read
+/usr/share/doc/sourceforge/TODO.Debian or (even better)
+<http://savannah.gnu.org/support/?group_id=259>.  If you miss a
+feature, or find a bug, or want to help, don't hesitate to contact me
+(Roland Mas <lolando@debian.org>) .  Plenty of features are missing,
+I'm working on some, but if you don't tell me which ones you miss the
+most I might process them in the wrong order for you.
+
+  Please read the bug reports on the Debian bug-tracking system (at
+<URL:http://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=sourceforge>)
+before submitting new ones.  Be warned that bug reports describing a
+problem precisely and/or offering a solution will probably be
+processed faster :-)
+
+
+Installation notes
+------------------
+  Sourceforge is a big piece of software.  It's far-reaching.  It
+fiddles with many different parts of the system.  As automated as I
+have tried to make its installation, there are still things that need
+to be done by hand, maybe even by a system administrator.
+
+  First, you'll need a hostname.  Get the sourceforge.<your-domain>
+DNS name to be created, pointing on the IP address of the host you're
+installing Sourceforge on.  The "sourceforge" part isn't required, you
+can call it however you like.  However, I'll assume you chose
+"sourceforge" from now on; substitute as needed.
+
+  If you want to use the Apache virtual hosting service, you'll even
+need a delegation of a subdomain.  Get your system administrator to
+delegate you the SOA for the sourceforge.<your-domain> subdomain.
+This will allow Sourceforge to create new hostnames for projects when
+needed (foo.sourceforge.<your-domain>, for instance), as well as some
+hostnames needed by the system (for mailing-lists or CVS, for
+instance).  This is if you choose web_only to be false when
+configuring Sourceforge.
+
+  The LDAP server is hosted on the same host and automatically
+managed, therefore you should not have to worry too much about it.
+You might be able to access it from another host, but I'm not sure
+you'll be able to modify the entries in it.  I would advise not to in
+any case, since it would make the data contained in the LDAP directory
+inconsistent with the real data stored in the PostgreSQL database.
+
+  You'll need a configured MTA for Sourceforge.  Depending on whether
+the Sourceforge users are local or remote, you might need to set up a
+smarthost or something else.  Sourceforge depends on a working mail
+system, and you won't be able to create user accounts without it.  I'm
+not sure yet what advanced tricks need to be done with the MTA.  There
+might be some stuff to do with virtual domains for mailing-lists or
+user email forwarding...  I haven't fully investigated it yet.  Your
+contribution will be most welcome.
+
+  Depending on the targeted audience, you might want to get a real
+SSL/TLS certificate from some certification authority, whether it be a
+professional one or your personal one (or the one in your company).
+Otherwise, just use mod-ssl-makecert as advised during the
+configuration phase, and get your own custom certificate.
+
+  Do *not* delete the /etc/sourceforge/*.template files.  They are
+needed.  Do not alter them either unless you *know* what you're doing.
+
+
+Packaging roadmap
+-----------------
+  This section sketches a roadmap of the steps that needed to be taken
+before any official release of Sourceforge in Debian was possible.
+
+  It is completely outdated, and wrong.  I once followed this roadmap,
+but it turned out that some things came before others and some came
+after, I switched to SF 2.5, that sort of stuff.  The latest scheme
+was 2.5-0+x (up to 2.5-0+15) before upload, 2.5-1 being the first
+upload to Debian unstable.  Current scheme is a classical "2.5-x" for
+released packages (the ones I upload to Debian).  Inter-release
+versioning scheme, for the packages I use internally before uploading,
+uses `+' (the current development package is 2.5-9+5).
+
+  I keep the original roadmap only for reference, and it might just
+get deleted altogether in the near future.  Here it comes:
+
+,----
+| I'll use a pre-release numbering scheme similar to Branden Robinson's,
+| except I'll use more phases.
+| 
+| Phase 1 (package revisions 2.0-0phase1v1 to 2.0-0phase1v<$BIGNUM>)
+| ------------------------------------------------------------------
+| This phase will concentrate on the web services that only involve PHP
+| and the database.  This includes account and project creation and
+| management, the bug-tracking system, the task manager, the forums, the
+| support manager, the user's page and the software map.  Probably also
+| the patch manager and the news system, maybe the doc manager.
+| 
+|   These packages will probably break everything everytime you'll
+| install them, so I won't even try to provide smooth upgrades.  Yet
+| I'll provide an apt-get'able directory for the brave.
+| 
+| Phase 2 (2.0-0phase2v*)
+| -----------------------
+| This phase will get into the system a bit more and end by proposing
+| features that require access to real files and services on the system:
+| the end of phase2 will offer all the items marked "maybe" in phase1,
+| plus the FTP and file releases services, as well as integration with
+| the MTA.
+| 
+|   At this stage I'll try and stabilize the package a bit, so that from
+| phase3 Sourceforge can be cleanly upgraded with a reasonably low risk
+| of breakage.
+| 
+| Phase 3 (2.0-0phase3*)
+| ----------------------
+| This phase will take care of the services that require modifications
+| to existing software (in particular, CVS and CVS-Web will have to be
+| patched) or deep meddling with the system (DNS and web virtual
+| hosting, Unix account creation with libnss-probably-mysql).  Mailing
+| lists should be operational by the end of phase3 if not earlier.
+| 
+| Phase 4 (2.0-0phase4*)
+| ----------------------
+| That one should wrap it up before the big show, completing all the
+| tidbits that were previously overlooked: the software foundries, the
+| search engine, and basically everything I can think of that I forgot
+| before.
+| 
+| Face it, I've got to get it out sometime
+| ----------------------------------------
+|   By that time, I should (hopefully) be a full-fledged Debian
+| developer and I'll upload to unstable.  If I'm not yet, I'll call for
+| some thick-skinned volunteer to sponsor me and upload it for me.  That
+| could be called -0phase5, but it'll be high time to call it
+| sourceforge-2.0-1.  And -2.0-2 and -2.0-3 and so on, 'cause I suspect
+| there will be bugs.
+| 
+|   I'm not yet sure if the BTS can be used to track bugs on a package
+| that's not in Debian yet, but if it can I will probably encourage its
+| use even for very early packages, and take into consideration all the
+| reports I find there.  The only exception will be for bug-reports
+| telling me that the upstream codebase I'm packaging is out-of-date,
+| see next paragraph.  These ones will get closed immediately (well, as
+| soon as I see them anyway), with minimal comment, or merged with the
+| first one that happened.
+| 
+|   I choose to package the Sourceforge released code (labeled 2.0 by
+| the SF crew).  I know that the development version has since the 2.0
+| release been made accessible by anonymous CVS.  I know that tremendous
+| enhancements have been committed into this CVS, not the least of which
+| are internationalisation and localisation.  I know that bugs have been
+| fixed.  Yet I don't feel like packaging a big piece of intrusive
+| software like Sourceforge while running after the backlog and tracking
+| its evolution at the same time.  Don't be alarmed, I will eventually
+| follow the upstream evolution, but only after the sourceforge-2.0-*
+| has stabilised a bit and the bugs in the BTS are only (or mostly) bugs
+| that have already been fixed upstream instead of problems coming from
+| the packaging.
+| 
+|   Of course, I'll be interested in feedback from users.  I just love
+| receiving email...  There are, however, some items of feedback I'd
+| *NOT* be grateful for:
+| 
+| - aesthetic comments: except for the top banner that I did, the look
+| and design of the site have been made by the SF crew upstream.  If it
+| doesn't please you, there are several (currently two) themes.  If
+| these themes do not please you, propose your own upstream.  If it
+| makes it into upstream, it'll make it into the package.
+| 
+| - "not up-to-date" reminders.  See three paragraphs above.
+| 
+| - "speed up, you're late" comments.  You'll notice I deliberately did
+| not state any date in this roadmap.  I have no clue how long it will
+| take, what with the NM queue and real-life and stuff, and any date
+| you'd get out of my mouth would be heavily smelling of alcohol (thus
+| being void).  If you feel I'm late, help me.
+| 
+|   On the contrary, here are some examples of interaction and help I'd
+| *very much* be interested in:
+| 
+| - security advice, with explanations (and patches if possible).  I am
+| absolutely no security guru, and I suspect that there are many ways SF
+| could be exploited.
+| 
+| - help with the BTS: I haven't focused really on all the evolutions of
+| SF since the 2.0 release.  I expect many people will file reports for
+| bugs that have already been fixed upstream.  Keeping the two BTS as
+| synchronous as possible would be a big help.
+| 
+|  -- Roland Mas <99.roland.mas@aist.enst.fr>, 2000-12-04
+`---- 
+
+
+Thanks
+------
+  Apart from the Sourceforge crew at VA Linux, who did (and still do)
+a great job with SF, I'd like to send my thanks to Guillaume Morin,
+who wrote a very thorough Sourceforge installation guide.  That guide
+gives step-by-step instructions for the installation procedure, and a
+big part of the packaging task was to turn these instructions into
+automated scripts.
+
+  Thanks also to all who tested packages and helped correct many
+errors of mine.
+
+  And mega-thanks to Christian Bayle.  That guy single-handedly
+adapted and fixed all the scripts related to CVS, DNS, SSH accounts,
+and probably more.
+
+# Local Variables:
+# mode: text
+# End:

@@ -8,7 +8,7 @@
 
 require "pre.php";    
 session_require(array('group'=>'1','admin_flags'=>'A'));
-$HTML->header(array('title'=>'Alexandria: User List'));
+$HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
 
 function show_users_list ($result) {
 	echo '<P>Key:

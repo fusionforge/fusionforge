@@ -346,7 +346,7 @@ class User extends Error {
 	 *	@returns this user's language_id
 	 */
 	function getLanguage() {
-		return $this->data_array['language'];
+		return $this->data_array['language_id'];
 	}
 
 	/**

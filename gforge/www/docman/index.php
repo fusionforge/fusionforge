@@ -12,7 +12,7 @@
         by Quentin Cregan, SourceForge 06/2000
 */
 
-require('doc_utils.php');
+require('../docman/doc_utils.php');
 require('pre.php');
 
 if ($group_id) {

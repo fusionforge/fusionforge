@@ -85,7 +85,7 @@ if($group_id) {
 			<br>
 			<b> Description: </b> A brief description to be placed just under the title.<br>
 
-			<form name="adddata" action="new.php?mode=add&group_id='.$group_id.'" method="POST" enctype="multipart/form-data">
+			<form name="adddata" action="new.php?mode=add&group_id='.$group_id.'" method="GET" enctype="multipart/form-data">
 
 			<table border="0" width="75%">
 

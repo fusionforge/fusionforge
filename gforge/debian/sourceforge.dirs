@@ -1,0 +1,17 @@
+bin
+etc/sourceforge
+usr/lib/sourceforge/bin
+usr/lib/sourceforge/db
+usr/lib/sourceforge/lib
+usr/lib/sourceforge/www
+usr/lib/sourceforge/cvs
+usr/lib/sourceforge/cvs/icons
+usr/lib/sourceforge/cgi-bin
+var/lib/sourceforge
+var/lib/sourceforge/bind
+var/lib/sourceforge/chroot
+var/lib/sourceforge/download
+var/lib/sourceforge/ftp
+var/lib/sourceforge/ftp/incoming
+var/lib/sourceforge/tmp
+

@@ -1,0 +1,161 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatability version to use.
+export DH_COMPAT=3
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# Add here commands to configure the package.
+
+	touch configure-stamp
+
+build: configure-stamp build-stamp
+	gcc -o  utils/cvssh utils/grap.c
+build-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	#$(MAKE) build
+
+	#/usr/bin/docbook-to-man debian/sourceforge.sgml > sourceforge.1
+	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	rm -f utils/cvssh
+	rm -f cvssh.1
+
+	# Add here commands to clean up after the build process.
+	#$(MAKE) clean
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Add here commands to install the package into debian/tmp.
+	#$(MAKE) install DESTDIR=`pwd`/debian/sourceforge
+
+	cp -r www $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/
+	install -m 644 db/SourceForge.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 db/trove_defaults.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 db/user_rating.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/init-sequences.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/init-extra.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/sfdocs.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -o www-data -m 755 -d $(CURDIR)/debian/sourceforge/var/cache/sourceforge
+	#install -o www-data -g ftp -m 750 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp
+	#install -o www-data -g ftp -m 777 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp/incoming
+	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/site_stats.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+
+	install -m 755 cronjobs/populate_foundries.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	#install -m 755 cronjobs/ $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	#install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_top_groups_calc.pl
+	#install utils/underworld-root/stats_nightly.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/stats_nightly.sh
+	#install utils/underworld-root/db_stats_prepare.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_prepare.pl
+	#install utils/underworld-root/db_stats_projects_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_projects_nightly.pl
+	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/clear.gif deb-specific/clear.gif.uu
+	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 644 utils/include.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/lib/
+
+	# DNS stuff
+	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/sourceforge/var/lib/sourceforge/bind/
+	install utils/underworld-dummy/dns_conf.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+
+	# SSH stuff
+	install utils/underworld-dummy/ssh_dump.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install utils/ssh_create.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+
+	# CVS stuff
+	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install utils/new_parse.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 utils/cvssh $(CURDIR)/debian/sourceforge/bin/cvssh 
+
+	# SSH and CVS in one
+	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+
+	# CVSWEB
+	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cgi-bin/
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/back.gif deb-specific/cvsweb/icons/back.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/dir.gif deb-specific/cvsweb/icons/dir.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minidir.gif deb-specific/cvsweb/icons/minidir.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/text.gif deb-specific/cvsweb/icons/text.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/miniback.gif deb-specific/cvsweb/icons/miniback.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minitext.gif deb-specific/cvsweb/icons/minitext.gif.uu
+	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge/etc/sourceforge/
+
+	# LDAP
+	install -m 755 utils/sql2ldif.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/install-ldap.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 644 deb-specific/sourceforge.schema $(CURDIR)/debian/sourceforge/etc/sourceforge/
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+#	dh_testversion
+	dh_testdir
+	dh_testroot
+	dh_installdebconf	
+	dh_installdocs
+	#dh_installexamples
+	#dh_installmenu
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installinit
+	dh_installcron
+	dh_installmanpages
+	#dh_installinfo
+#	dh_undocumented
+	dh_installchangelogs ChangeLog
+#	dh_link
+	dh_strip
+	dh_compress
+	#dh_fixperms
+	# You may want to make some executables suid here.
+	#dh_suidregister
+#	dh_makeshlibs
+	dh_installdeb
+#	dh_perl
+	#dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

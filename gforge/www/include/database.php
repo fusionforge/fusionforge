@@ -233,4 +233,15 @@ function db_error() {
 	return @pg_errormessage($conn);
 }
 
+function db_drop_table_if_exists ($tn) {
+  $sql = "SELECT COUNT(*) FROM pg_class WHERE relname='$tn';";
+  $rel = db_query($sql);
+  echo db_error();
+  $count = db_result($rel,0,0);
+  if ($count != 0) {
+    $sql = "DROP TABLE $tn;";
+    $rel = db_query ($sql);
+    echo db_error();
+  }
+}
 ?>
