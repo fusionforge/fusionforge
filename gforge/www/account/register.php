@@ -77,7 +77,7 @@ if (!isset($ccode) || empty($ccode)) {
 <input size=30 type="text" name="lastname" value="<?php print($lastname); ?>">
 <p>
 <?php echo $Language->getText('account_register','language'); ?><br />
-<?php echo html_get_language_popup ($Language,'language_id',1); ?>
+<?php echo html_get_language_popup ($Language,'language_id',$Language->getLanguageId()); ?>
 <p>
 <?php echo $Language->getText('account_register','timezone'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
