@@ -68,7 +68,7 @@ if (!$d_arr || count($d_arr) < 1) {
 		//	docGroupName and start a new <ul>
 		//
 		if ($d_arr[$i]->getDocGroupID() != $last_group) {
-			print (($i==0) ? '' : '</ul></li>');
+			print (($i==0) ? '' : '</ul></li><br />');
 			print "\n\n<li><strong>". $d_arr[$i]->getDocGroupName() ."</strong></li><li style=\"list-style: none\"><ul>";
 			$last_group=$d_arr[$i]->getDocGroupID();
 		}
