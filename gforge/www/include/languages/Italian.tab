@@ -1,5 +1,3 @@
-using file containing greps: texts with tabfile www/include/languages/Italian.tab
-Printing to STDOUT
 #/**
 #  *
 #  * Italian Message catalog
@@ -9,6 +7,12 @@ Printing to STDOUT
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
+#  * 
+#  * Changelog:
+#  * 2002-12-15 rspisser <reinhard@spisser.it>
+#  *		Translation from Base.tab
+#  * 2003-01-04 rspisser <reinhard@spisser.it>
+#  * 		removed all not used entries
 #  *
 #  */
 system	locale	it_IT
