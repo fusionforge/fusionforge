@@ -1,4 +1,3 @@
-DROP TABLE deleted_mailing_lists;
 CREATE TABLE deleted_mailing_lists (
         mailing_list_name varchar(30),
         delete_date int,
@@ -12,7 +11,6 @@ FROM mail_group_list WHERE status=9;
 
 DELETE FROM mail_group_list WHERE status=9;
 
-DROP TABLE deleted_groups;
 CREATE TABLE deleted_groups (
 	unix_group_name varchar(30),
 	delete_date int,
