@@ -30,12 +30,13 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	print "done.  Let's try it out.\n" ;
 
 	if ($user->usesPlugin("helloworld")) {
-		print $HTML->boxTop("$user_name now says Hello!");
+		print $HTML->boxMiddle("$user_name now says Hello!");
 	} else {
-		print $HTML->boxTop("$user_name now does not say Hello...");
+		print $HTML->boxMiddle("$user_name now does not say Hello...");
 	}
 	print '<A HREF="index.php?user_id='.$user_id.'">Back to index.</A>' ;
 	print $HTML->boxBottom();
+	print $HTML->footer(array());
 }
 
 // Local Variables:

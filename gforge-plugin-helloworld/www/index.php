@@ -29,6 +29,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	print "This is the helloworld plugin.  I hope you enjoy it." ;
 	print '<A HREF="/my/">Back to My Peronal Page.</A>' ;
 	print $HTML->boxBottom();
+	print $HTML->footer(array());
 }
 
 // Local Variables:
