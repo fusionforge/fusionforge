@@ -31,12 +31,12 @@ $res_trove_cat = db_query("
 
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(
-		'Invalid Trove Category',
-		'That Trove category does not exist: '.db_error()
+		$Language->getText('trove_list','invalid_category_title'),
+		$Language->getText('trove_list','invalid_category_text').': '.db_error()
 	);
 }
 
-$HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
+$HTML->header(array('title'=>$Language->getText('trove_list','title'),'pagename'=>'softwaremap'));
 
 echo'
 	<HR NoShade>';
@@ -103,15 +103,14 @@ if ($discrim) {
 	}
 
 	// build text for top of page on what viewier is seeing
-	$discrim_desc = '<span style="color:red;font-size:smaller">
-Now limiting view to projects in the following categories:
+	$discrim_desc = '<span style="color:red;font-size:smaller">'.$Language->getText('trove_list','limiting_view').':
 </span>';
 	
 	for ($i=0;$i<sizeof($expl_discrim);$i++) {
 		$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
 			.trove_getfullpath($expl_discrim[$i])
 			.' <a href="/softwaremap/trove_list.php?form_cat='.$form_cat
-			.$discrim_url_b[$i].'">[Remove This Filter]'
+			.$discrim_url_b[$i].'">['.$Language->getText('trove_list','remove_filter').']'
 			.'</a>';
 	}
 	$discrim_desc .= "<hr />\n";
@@ -171,9 +170,10 @@ while ($row_sub = db_fetch_array($res_sub)) {
 	}
 	print ('<a href="trove_list.php?form_cat='.$row_sub['trove_cat_id'].$discrim_url.'">');
 	echo html_image("ic/cfolder15.png",'15','13',array());
-	print ('&nbsp; '.$row_sub['fullname'].'</a> <em>('
-		.($row_sub['subprojects']?$row_sub['subprojects']:'0')
-		.' projects)</em><br />');
+	print ('&nbsp; '.$row_sub['fullname'].'</a> <em>('.
+		$Language->getText('trove_list','projects',array($row_sub['subprojects']?$row_sub['subprojects']:'0'))
+		.')</em><br />');
+		
 }
 // ########### right column: root level
 print '</span></td><td><span style="font-family:arial,helvetica">';
@@ -186,7 +186,7 @@ $res_rootcat = db_query("
 	ORDER BY fullname");
 echo db_error();
 
-print 'Browse by:';
+print $Language->getText('trove_list','browse_by').':';
 while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	// print open folder if current, otherwise closed
 	// also make anchor if not current
@@ -231,9 +231,12 @@ if (!$page) {
 
 // store this as a var so it can be printed later as well
 $html_limit = '<span style="text-align:center;font-size:smaller">';
-if ($querytotalcount == $TROVE_HARDQUERYLIMIT)
+if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 	$html_limit .= 'More than ';
-$html_limit .= '<strong>'.$querytotalcount.'</strong> projects in result set.';
+	$html_limit .= $Language->getText('trove_list','more_than',array($querytotalcount));
+	
+	}
+$html_limit .= $Language->getText('trove_list','number_of_projects',array($querytotalcount));
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
