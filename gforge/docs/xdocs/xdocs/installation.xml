@@ -317,7 +317,7 @@ psql -U gforge -d gforge &lt; gforge3.sql
 </ol>
 
 
-<b>Mandrake 9 installation notes (thanks to Francois ELIE)</b>
+<b>Mandrake 9 installation notes (thanks to Francois Elie)</b>
 
 <ul>
  <li>Edit /var/lib/pgsql/data/postgresql.conf:<br/>
@@ -339,8 +339,6 @@ psql -U gforge -d gforge &lt; gforge3.sql
 <li>Then restart the server <code>/etc/rc.d/init.d/postgresql restart</code></li>
 
 </ol>
-
-
 
 </subsection>
 
@@ -410,7 +408,7 @@ tar -zxvf cvsweb-1.112.tar.gz
 <code>mkdir /var/www/gforge3-files</code>
 
 <br/>
-make this directory writeable by apache<br/>
+Make this directory writeable by Apache<br/>
 <code>
 chown -R apache.apache /var/www/gforge3-files
 </code>
@@ -459,7 +457,7 @@ should contain the domain of your server, e.g. gforge.org.
 
 
 </li>
-<li>Restart apache:
+<li>Restart Apache:
 <code>/etc/init.d/httpd restart</code>
 </li>
 </ol>
@@ -470,24 +468,18 @@ should contain the domain of your server, e.g. gforge.org.
 </section>
 <section name="Verifying the installation">
 <p>
-To verify if everything was installed correctly, use the browser
-and connect to gforge. 
-
-
-You should see the homepage of the gforge software.
-
-If you get an error:
+To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an error:
 
 <br/>
 <code> Could Not Connect to Database:</code>
 <br/>
-check if you have followed all installation instructions for the database.
+Check if you have followed all installation instructions for the database.
 </p>
 
     </section>
 <section name="Creating the admin user">
 <p>
-Connect to the gforge, and register a new account.
+Connect to GForge and register a new account.
 <br/>
 
 

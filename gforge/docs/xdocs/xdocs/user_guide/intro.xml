@@ -3,14 +3,14 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
-    <title>Gforge 3.0 User Guide - Introduction</title>
+    <title>GForge 3.0 User Guide - Introduction</title>
   </properties>
 
   <body>
 
 <section name="Introduction">
 <p>
-This manual explains how to use the gforge software.
+This manual explains how to use the GForge software.
 <p/>
 The manual is divided in 4 parts:
 <ol>
@@ -24,7 +24,7 @@ The manual is divided in 4 parts:
 </section>
 <section name="Getting Started">
           <p>
-This section explains how to register as a new user, how to register a new project and explains the users home page.
+This section explains how to register as a new user, how to register a new project and explains the user's home page.
  
       </p>
 
@@ -41,14 +41,14 @@ This section explains how to register as a new user, how to register a new proje
 
 <section name="User specific functions">
           <p>
-This section describes the functions of gforge that are relative to the users section.
+This section describes the functions of GForge that are relative to the user's section.
       </p>
 
           <table>
           <tr><th>Document</th><th>Description</th></tr>
           <tr><td><a href="user_functions/index.html">User functions</a></td>
             <td>
-           This document describes the user Homepage, how to modify User settings, how to handle user ratings, skill profiles and Diary and Notes
+           This document describes the user's homepage, how to modify user settings, how to handle user ratings, skill profiles and Diary and Notes
             </td>
  </tr>
          
@@ -60,7 +60,7 @@ This section describes the functions of gforge that are relative to the users se
 
 <section name="Project specific functions">
           <p>
-This section explains the project specific functions of the gforge software.
+This section explains the project specific functions of the GForge software.
  
       </p>
 
@@ -68,7 +68,7 @@ This section explains the project specific functions of the gforge software.
           <tr><th>Document</th><th>Description</th></tr>
           <tr><td><a href="project_functions/project_summary.html">Project Summary</a></td>
             <td>
-           This document describes the Project Summary of every project in gforge.
+           This document describes the Project Summary page for your project.
             </td>
           </tr>
 
@@ -143,7 +143,7 @@ This section explains the project specific functions of the gforge software.
 
    <tr><td><a href="side_wide/project_help.html">Project Help</a></td>
             <td>
-            This document describes how to use the Project help function of gforge.
+            This document describes how to use the Project help function of GForge.
             </td>
 
 

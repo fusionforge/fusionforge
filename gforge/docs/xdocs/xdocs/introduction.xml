@@ -3,7 +3,7 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
-    <title>Gforge 3.0 - Introduction</title>
+    <title>GForge 3.0 - Introduction</title>
   </properties>
 
   <body>
@@ -13,9 +13,9 @@
       <p>
 <!--<img src="/images/logo.png"/>-->
 <p/>
-Gforge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for comunication between members of a development team.  The tools provided by Gforge allows team members to comunicate and organize their work; this allows the creation of a  knowledgebase.
+GForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for comunication between members of a development team.  The tools provided by GForge allows team members to comunicate and organize their work; this allows the creation of a  knowledgebase.
 </p><p>
-A complete configurated Gforge system will give you the following features:
+A complete configurated GForge system will give you the following features:
 
 <ol>
 <li><b>A Web site for every project</b><br/>
@@ -70,7 +70,7 @@ The system provides also  a classification system of the projects and a user pro
 <p>
 GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software).
 <br/>
-<a href="http://gforge.org">Gforge.org</a> is not a project hosting platform, it is merely an implementation of the GForge code, which is available for public download on the right hand side of this page. 
+<a href="http://gforge.org">gforge.org</a> is not a project hosting platform, it is merely an implementation of the GForge code, which is available for public download on the right hand side of this page. 
 <br/>
 We believe that the GForge functionality is important not only to the Open Source community, but to the wider business community. Since VA has not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase.
 <br/>
