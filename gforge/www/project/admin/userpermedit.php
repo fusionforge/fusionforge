@@ -76,6 +76,7 @@ if ($submit || $form_unix_name) {
 		}
 
 		$user_id = $u->getID();
+
 	} elseif ($addtotracker) {
 
 		$u =& user_get_object($user_id);
@@ -246,17 +247,11 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 		$i++
 	);
 
-/*
 	render_row(
-		'CVS Access',
-		html_build_select_box_from_arrays(
-			array(0,1,2),
-			array('Read-only','Write','Admin'),
-			'cvs_flags',$row_dev['cvs_flags'],false
-		),
+		'CVS Commit',
+		html_build_checkbox('cvs_flags', '1', $row_dev['cvs_flags']==1),
 		$i++
 	);
-*/
 
 	render_row(
 		$Language->getText('project_admin_userpermedit','tracker_manager'),
