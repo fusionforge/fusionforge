@@ -42,30 +42,37 @@ function project_admin_header($params) {
 	}
 
 	site_project_header($params);
-
-	echo ($HTML->subMenu(
-		array(
-		$Language->getText('project_admin_utils','admin'),
-		$Language->getText('project_admin_utils','user_permissions'),
-		$Language->getText('project_admin_utils','edit_public_info'),
-		$Language->getText('project_admin_utils','project_history'),
-		$Language->getText('project_admin_utils','vhosts'),
-		$Language->getText('project_admin_utils','post_jobs'),
-		$Language->getText('project_admin_utils','edit_jobs'),
-		$Language->getText('project_admin_utils','multimedia_data'),
-		$Language->getText('project_admin_utils','database_admin'),
-		$Language->getText('project_admin_utils','stats')),
-		array   (
-		'/project/admin/?group_id='.$group_id,
-		'/project/admin/userperms.php?group_id='.$group_id,
-		'/project/admin/editgroupinfo.php?group_id='.$group_id,
-		'/project/admin/history.php?group_id='.$group_id,
-		'/project/admin/vhost.php?group_id='.$group_id,
-		'/people/createjob.php?group_id='.$group_id,
-		'/people/?group_id='.$group_id,
-		'/project/admin/editimages.php?group_id='.$group_id,
-		'/project/admin/database.php?group_id='.$group_id,
-		'/project/stats/?group_id='.$group_id)));
+	
+	$labels = array();
+	$links = array();
+	
+	$labels[] = $Language->getText('project_admin_utils','admin');
+	$labels[] = $Language->getText('project_admin_utils','user_permissions');
+	$labels[] = $Language->getText('project_admin_utils','edit_public_info');
+	$labels[] = $Language->getText('project_admin_utils','project_history');
+	$labels[] = $Language->getText('project_admin_utils','vhosts');
+	if($GLOBALS['$sys_use_people']) {
+		$labels[] = $Language->getText('project_admin_utils','post_jobs');
+		$labels[] = $Language->getText('project_admin_utils','edit_jobs');
+	}
+	$labels[] = $Language->getText('project_admin_utils','multimedia_data');
+	$labels[] = $Language->getText('project_admin_utils','database_admin');
+	$labels[] = $Language->getText('project_admin_utils','stats');
+	
+	$links[] = '/project/admin/?group_id='.$group_id;
+	$links[] = '/project/admin/userperms.php?group_id='.$group_id;
+	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
+	$links[] = '/project/admin/history.php?group_id='.$group_id;
+	$links[] = '/project/admin/vhost.php?group_id='.$group_id;
+	if($GLOBALS['$sys_use_people']) {
+		$links[] = '/people/createjob.php?group_id='.$group_id;
+		$links[] = '/people/?group_id='.$group_id;
+	}
+	$links[] = '/project/admin/editimages.php?group_id='.$group_id;
+	$links[] = '/project/admin/database.php?group_id='.$group_id;
+	$links[] = '/project/stats/?group_id='.$group_id;
+	
+	echo $HTML->subMenu($labels, $links);
 }
 
 /*
