@@ -3,6 +3,8 @@
 	* Added setup README.setup to generate etc/local.inc and etc/httpd.conf
 	from etc/gforge.conf and etc/local.d/* etc/httpd.d/* template files
 	Also added utils/install-apache.sh and utils/fill-in-the-blank.pl
+	* Copied www/themes/osx/images/ic/msg.png from gforge theme (closes
+	bug #580
 
 2003-11-24  Roland Mas  <99.roland.mas@aist.enst.fr>
 
