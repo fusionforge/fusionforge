@@ -61,13 +61,19 @@ install: build
 	# (gforge is a meta-package and needs no files)
 
 	# gforge-common
-	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/httpd.common.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/httpd.vhosts.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/httpd.common.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/httpd.vhosts.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+#	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 etc/httpd.d/[0-9][0-9]* $(CURDIR)/debian/gforge-common/etc/gforge/httpd.d/
+	install -m 644 etc/httpd.d/httpd* $(CURDIR)/debian/gforge-common/etc/gforge/httpd.d/
+	install -m 644 etc/local.d/[0-9][0-9]* $(CURDIR)/debian/gforge-common/etc/gforge/local.d/
+	install -m 644 etc/templates/*\.* $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 755 setup $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	#
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 utils/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
@@ -166,8 +172,8 @@ install: build
 	install -m 755 deb-specific/install-cvs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-cvs/bin/cvssh 
-	install -m 755 utils/cvsweb $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cgi-bin/cvsweb.cgi
-	install -m 755 utils/cvsweb $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/cvsweb
+	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cgi-bin/cvsweb.cgi
+	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/cvsweb
 	install -m 644 etc/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvs_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/

@@ -20,7 +20,7 @@ close CONF ;
 
 &db_connect;
 
-$ifile = '/etc/gforge/templates/httpd.vhosts.template' ;
+$ifile = '/etc/gforge/templates/httpd.vhosts' ;
 $ofile = '/var/lib/gforge/etc/httpd.vhosts' ;
 
 open (IFILE, $ifile)

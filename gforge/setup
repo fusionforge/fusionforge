@@ -1,7 +1,7 @@
 #! /bin/sh
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example] [-clean]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath]"
 }
 
 getval(){
@@ -38,17 +38,17 @@ computedefault(){
 	DEFAULTldap_host=localhost
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-	DEFAULTcgidir=$GFGDIR/utils
+	DEFAULTcgidir=$CGIDIR
 	DEFAULTcronolog_path=`type cronolog | cut -d' ' -f3`
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
 	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
-	DEFAULTgforge_chroot=""
-	DEFAULTgforge_etc=$GFGDIR/$ETCDIR
-	DEFAULTgroupdir=$GFGDIR/home/groups
-	DEFAULThomedir=$GFGDIR/home
+	DEFAULTgforge_chroot=$CHROOT
+	DEFAULTgforge_etc=$ETCDIR
+	DEFAULTgroupdir=$GROUPPATH
+	DEFAULThomedir=$HOMEPATH
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-	DEFAULTusr_share_gforge=$GFGDIR/
+	DEFAULTusr_share_gforge=$SHAREDIR
 	DEFAULTvar_lib_gforge=$GFGDIR/var/lib
 	DEFAULTvar_log_gforge=$GFGDIR/var/log
 	DEFAULTsys_show_source=0
@@ -71,7 +71,7 @@ computedefault(){
 	DEFAULTsys_use_news=true
 	DEFAULTsys_use_mail=true
 	DEFAULTsys_use_survey=true
-	DEFAULTsys_use_file=true
+	DEFAULTsys_use_frs=true
 	DEFAULTsys_use_ftp=true
 	DEFAULTsys_use_trove=true
 	DEFAULTsys_use_snippet=true
@@ -81,7 +81,7 @@ computedefault(){
 	DEFAULTsys_localization_enable_caching=true
 	DEFAULTsys_localization_cache_path=$GFGDIR/var/cache/gforge/
 	DEFAULTsys_localization_enable_timestamp_checking=true
-	DEFAULTsys_localinc=$GFGDIR/etc/local.inc
+	DEFAULTsys_localinc=$ETCDIR/local.inc
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	#
 	# TODO
@@ -145,64 +145,73 @@ setupinout(){
 	mv $CONFFILEIN.new $CONFFILEIN
 	
 	# Fill in the blanks
-	for i in $ETCDIR/httpd.d/[0-4][0-9]* $ETCDIR/httpd.d/httpd.secrets
+	if [ "$dovhost" == true ]
+	then
+		VHOST=$ETCDIR/httpd.d/55vhost
+	fi
+	for i in $ETCDIR/httpd.d/[0-4][0-9]* $VHOST $ETCDIR/httpd.d/httpd.secrets
 	do
-		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.tmp $CONFFILEOUT
+		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
 	
 	echo "Creating $HTTPDCONF"
-	ls $ETCDIR/[0-9][0-9]*.tmp | sort | xargs cat > $HTTPDCONF
-	rm $ETCDIR/[0-9][0-9]*.tmp
+	ls $ETCDIR/[0-9][0-9]*.gforge-new | sort | xargs cat > $HTTPDCONF
+	rm $ETCDIR/[0-9][0-9]*.gforge-new
 	echo "Creating $HTTPDSECRETS"
-	cat $ETCDIR/httpd.secrets.tmp > $HTTPDSECRETS
-	rm $ETCDIR/httpd.secrets.tmp
+	cat $ETCDIR/httpd.secrets.gforge-new > $HTTPDSECRETS
+	rm $ETCDIR/httpd.secrets.gforge-new
 	
 	echo "Creating $LOCALINC"
-	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10*simple $ETCDIR/local.d/[2-9]*
+	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/[2-9]*
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
 	done
-	ls $ETCDIR/01* $ETCDIR/10*simple $ETCDIR/[2-9]* | sort | xargs cat > $LOCALINC
-	rm $ETCDIR/01* $ETCDIR/10*simple $ETCDIR/[2-9]*
+	ls $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/[2-9]* | sort | xargs cat > $LOCALINC
+	rm $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/[2-9]*
+}
 	
-	
-	if [ -f $GFGDIR/$HTTPDCONF ] 
-	then
-		# Set full path
-		GFORGE_ETC_SEARCH=$GFGDIR/$HTTPDCONF
-	else
-		# Full path already
-		GFORGE_ETC_SEARCH=$HTTPDCONF
-	fi
+doapache() {	
+	APACHECONF=/etc/apache/httpd.conf
+	GFORGE_ETC_SEARCH=$HTTPDCONF
 	export GFORGE_ETC_SEARCH
 	if [ -f $APACHECONF ] ; then
-		if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
-			$BINDIR/install-apache.sh setup
-		else 
-			echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
+		if [ ! -f /etc/apache/conf.d/gforge.httpd.conf ] ; then
+			if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
+				$BINDIR/install-apache.sh setup
+			else 
+				echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
+			fi
+		else
+			echo "Found /etc/apache/conf.d/gforge.httpd.conf"
 		fi
 	fi
 }
 
-APACHECONF=/etc/apache/httpd.conf
-export APACHECONF
 
-ETCDIR=etc
-BINDIR=utils
+ETCDIR=`pwd`/etc
+BINDIR=`pwd`/utils
+CGIDIR=`pwd`/cgi-bin
 GFGDIR=`pwd`
+CHROOT=''
+HOMEPATH=/home
+GROUPPATH=/home/groups
+SHAREDIR=`pwd`
 CONFFILEIN=$ETCDIR/gforge.conf
 CONFFILEOUT=$ETCDIR/gforge.conf
 LOCALINC=$ETCDIR/local.inc
 HTTPDCONF=$ETCDIR/httpd.conf
 HTTPDSECRETS=$ETCDIR/httpd.secrets
-export ETCDIR BINDIR GFGDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS
+export ETCDIR BINDIR GFGDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE
+interact=false
+noapache=false
+database=env
+dovhost=false
 
 while [ $# -ne 0 ]
 do
 	case "$1" in
 		-interact )
 			interact=true
-			shift
 			;;
 		-help )
 			usage
@@ -235,13 +244,50 @@ do
 			LOCALINC=$1/local.inc
 			HTTPDCONF=$1/httpd.conf
 			HTTPDSECRETS=$1/httpd.secrets
+			echo Using $1 as config directory
+			;;
+		-fhs )
+			shift
+			ETCDIR=/etc/gforge
+			BINDIR=/usr/lib/gforge/bin
+			CGIDIR=/usr/lib/gforge/cgi-bin
+			GFGDIR=''
+			HOMEPATH=/home/users
+			GROUPPATH=/home/groups
+			CHROOT=/var/lib/gforge/chroot
+			SHAREDIR=/usr/share/gforge
+			CONFFILEIN=/etc/gforge/gforge.conf
+			CONFFILEOUT=/etc/gforge/gforge.conf
+			LOCALINC=/etc/gforge/local.inc
+			HTTPDCONF=/etc/gforge/httpd.conf
+			HTTPDSECRETS=/etc/gforge/httpd.secrets
+			;;
+		-simple )
+			database=simple
+			;;
+		-noapache )
+			noapache=true
+			;;
+		-dovhost )
+			dovhost=true
 			;;
 		-example )
+			shift
 			CONFFILEIN=$ETCDIR/gforge.conf.example
 			CONFFILEOUT=$ETCDIR/gforge.conf.example
 			LOCALINC=$ETCDIR/local.inc.example
 			HTTPDCONF=$ETCDIR/httpd.conf.example
 			HTTPDSECRETS=$ETCDIR/httpd.secrets.example
+			database=simple
+			noapache=true
+			;;
+		-home )
+			shift
+			HOMEPATH=$1
+			;;
+		-group )
+			shift
+			GROUPPATH=$1
 			;;
 		-clean )
 			[ -f $CONFFILEIN ] && echo Removing $CONFFILEIN && rm -f $CONFFILEIN
@@ -263,3 +309,4 @@ do
 	shift
 done
 setupinout
+[ "$noapache" != true ] && doapache

@@ -104,7 +104,7 @@ case "$1" in
 	# Make sure Apache sees us
 	for apacheconffile in $APACHE_ETC_LIST
 	do
-		APACHE_ETC_DIR=`basename $apacheconffile`
+		APACHE_ETC_DIR=`dirname $apacheconffile`
 		if [ -d "$APACHE_ETC_DIR/conf.d" ]
 		then
 			# New apache conf	
@@ -133,10 +133,11 @@ case "$1" in
 		fi
 	done
 	# Make sure pgsql, ldap and gd are enabled in the PHP config files
+	
 	for phpconffile in $PHP_ETC_LIST
 	do
 		cp -a $phpconffile $phpconffile.gforge-new
-		if [ -f $etcphp4apache/php.ini.gforge-new ]; then
+		if [ -f $phpconffile.gforge-new ]; then
 	    		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" $phpconffile.gforge-new; then
 				echo "Enabling pgsql in $phpconffile"
 				echo "extension=pgsql.so" >> $phpconffile.gforge-new
@@ -198,20 +199,26 @@ case "$1" in
 
     setup)
     	$0 configure-files
-	for apacheconffile in $APACHE_ETC_LIST
+	for conffile in $APACHE_ETC_LIST $PHP_ETC_LIST
 	do
-		cp $apacheconffile $apacheconffile.gforge-old
-		mv $apacheconffile.gforge-new $apacheconffile
+		if [ -f $conffile.gforge-new ] 
+		then
+			cp $conffile $conffile.gforge-old
+			mv $conffile.gforge-new $conffile
+		fi
 	done
 	$0 configure
 	;;
 
     cleanup)
     	$0 purge-files
-	for apacheconffile in $APACHE_ETC_LIST
+	for conffile in $APACHE_ETC_LIST $PHP_ETC_LIST
 	do
-		cp $apacheconffile $apacheconffile.gforge-old
-		mv $apacheconffile.gforge-new $apacheconffile
+		if [ -f $conffile.gforge-new ] 
+		then
+			cp $conffile $conffile.gforge-old
+			mv $conffile.gforge-new $conffile
+		fi
 	done
 	$0 purge
 	;;

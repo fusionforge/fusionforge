@@ -29,6 +29,7 @@ NameVirtualHost 10.GF.OR.GE:443
   ServerAlias www.gforge.company.com
   ServerAdmin webmaster@gforge.company.com
   DocumentRoot /path/to/gforge/www
+  Alias /images/ /path/to/gforge/www/images/
   DirectoryIndex index.html index.php
   <IfModule mod_userdir.c>
     UserDir disabled
@@ -60,7 +61,7 @@ NameVirtualHost 10.GF.OR.GE:443
   </Location>
 
   # This for cvsweb 
-  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  ScriptAlias /cgi-bin/ /path/to/cgidir/
 
   # 404 Error document
   ErrorDocument 404 /404.php
@@ -79,6 +80,7 @@ NameVirtualHost 10.GF.OR.GE:443
   ServerAdmin webmaster@gforge.company.com
   DocumentRoot /path/to/gforge/www
   DirectoryIndex index.html index.php
+  Alias /images/ /path/to/gforge/www/images/
   <IfModule mod_userdir.c>
     UserDir disabled
   </IfModule>
@@ -116,7 +118,7 @@ NameVirtualHost 10.GF.OR.GE:443
   </Location>
 
   # This for cvsweb 
-  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  ScriptAlias /cgi-bin/ /path/to/cgidir/
 
   # 404 Error document
   ErrorDocument 404 /404.php
@@ -139,7 +141,7 @@ NameVirtualHost 10.GF.OR.GE:443
 <VirtualHost 10.GF.OR.GE:80>
   ServerName cvs.gforge.company.com
   DocumentRoot /path/to/gforge/cvs
-  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  ScriptAlias /cgi-bin/ /path/to/cgidir/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
   CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
@@ -169,7 +171,7 @@ NameVirtualHost 10.GF.OR.GE:443
   </IfModule>
 
   DocumentRoot /path/to/gforge/cvs
-  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  ScriptAlias /cgi-bin/ /path/to/cgidir/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
   CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers

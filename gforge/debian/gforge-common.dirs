@@ -1,5 +1,7 @@
 etc/gforge
 etc/gforge/templates
+etc/gforge/local.d
+etc/gforge/httpd.d
 usr/bin
 usr/lib/gforge/bin
 usr/lib/gforge/lib

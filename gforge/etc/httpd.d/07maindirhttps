@@ -5,6 +5,7 @@
   ServerAdmin {server_admin}
   DocumentRoot {usr_share_gforge}/www
   DirectoryIndex index.html index.php
+  Alias /images/ {usr_share_gforge}/www/images/
   <IfModule mod_userdir.c>
     UserDir disabled
   </IfModule>
@@ -42,7 +43,7 @@
   </Location>
 
   # This for cvsweb 
-  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  ScriptAlias /cgi-bin/ {cgidir}/
 
   # 404 Error document
   ErrorDocument 404 /404.php
