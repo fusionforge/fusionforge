@@ -4,7 +4,7 @@ drop table themes;
 --      Re-add themes table, which I hastily dropped in 3pre2
 --
 CREATE TABLE themes (
-theme_id SERIAL,
+theme_id SERIAL UNIQUE,
 dirname character varying(80),
 fullname character varying(80)
 );

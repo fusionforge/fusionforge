@@ -1,3 +1,7 @@
+DROP TRIGGER artifactgroup_update_trig ON artifact;
+
+DROP FUNCTION artifactgroup_update_agg();
+
 CREATE OR REPLACE FUNCTION artifactgroup_update_agg () RETURNS OPAQUE AS '
 BEGIN
 	--
@@ -82,3 +86,5 @@ BEGIN
 	RETURN NEW;
 END;
 ' LANGUAGE 'plpgsql';
+
+CREATE TRIGGER "artifactgroup_update_trig" AFTER UPDATE ON "artifact"  FOR EACH ROW EXECUTE PROCEDURE "artifactgroup_update_agg" ();

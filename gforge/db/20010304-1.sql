@@ -11,7 +11,10 @@ COMMIT;
 --
 --	user_group permissions flag
 --
-ALTER TABLE user_group ADD COLUMN artifact_flags INT NOT NULL DEFAULT 0;
+ALTER TABLE user_group ADD COLUMN artifact_flags INT;
+ALTER TABLE user_group ALTER COLUMN artifact_flags SET NOT NULL;
+ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
+
 UPDATE user_group SET artifact_flags=0;
 
 --

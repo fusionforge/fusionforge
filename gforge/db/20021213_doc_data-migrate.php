@@ -14,11 +14,16 @@ require ('squal_pre.php');
 // drop and recreate page cache
 //
 //SELECT * FROM doc_data WHERE filename is null;
-$res=db_query("SELECT * FROM doc_data WHERE filename IS NULL");
-$rows=db_numrows($res);
-echo $rows;
-
 db_begin();
+
+$res=db_query("SELECT * FROM doc_data WHERE filename IS NULL");
+if (!$res) {
+	echo db_error();
+	db_rollback();
+	exit();
+}	 
+$rows=db_numrows($res);
+
 for ($i=0; $i<$rows; $i++) {
 
 	$res2=db_query("UPDATE doc_data 
@@ -32,9 +37,8 @@ for ($i=0; $i<$rows; $i++) {
 		db_rollback();
 		exit;
 	}
-
 }
 
 db_commit();
-
+echo "SUCCESS\n";
 ?>

@@ -32,7 +32,11 @@ require_once('www/include/squal_pre.php');
 //
 db_begin();
 $res=db_query("SELECT group_forum_id,forum_name FROM forum_group_list");
-echo db_error();
+if (!$res) {
+	echo db_error();
+	db_rollback();
+	exit();
+}
 
 for ($i=0; $i<db_numrows($res); $i++) {
 
@@ -40,17 +44,26 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		SET forum_name='". ereg_replace('[^_\.0-9a-z-]','-', strtolower(db_result($res,$i,'forum_name')) )."' 
 		WHERE group_forum_id='".db_result($res,$i,'group_forum_id')."'";
 	$res2=db_query($sql);
-	echo db_error();
-
+	if (!$res2) {
+		echo db_error();
+		db_rollback();
+		exit();
+	}
 }
 
 //
 //	Long-standing oddity in GForge - 
 //	forums were ZERO-pen Discussion, not Oh-pen Discussion
 //
-db_query("UPDATE forum_group_list SET forum_name='open-discussion' 
+$res = db_query("UPDATE forum_group_list SET forum_name='open-discussion' 
 	WHERE forum_name='0pen-discussion'");
 
-db_commit();
+if (!$res) {
+	echo db_error();
+	db_rollback();
+	exit();
+}
 
+db_commit();
+echo "SUCCESS\n";
 ?>

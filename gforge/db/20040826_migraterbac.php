@@ -31,7 +31,21 @@ require_once('common/include/Role.class');
 //
 //	Set up this script to run as the site admin
 //
-$id=db_result(db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'"),0,0);
+
+$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+
+if (!$res) {
+	echo db_error();
+	exit();
+}
+
+if (db_numrows($res) == 0) {
+	// There are no Admins yet, aborting without failing
+	echo "SUCCESS\n";
+	exit();
+}
+
+$id=db_result($res,0,0);
 session_set_new($id);
 
 //
@@ -60,9 +74,10 @@ for ($i=0; $i<count($arr); $i++) {
 			$this->setError($role->getErrorMessage());
 			db_rollback();
 			echo "Could Not Create Default Roles: ".$arr[$i];
+			exit();
 		}
 	}
 }
 db_commit();
-
+echo "SUCCESS\n";
 ?>

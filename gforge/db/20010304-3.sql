@@ -50,10 +50,7 @@ ALTER TABLE artifact_message ADD CONSTRAINT artifactmessage_artifactid_fk
 ALTER TABLE artifact_message ADD CONSTRAINT artifactmessage_submittedby_fk
         FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
 
-ALTER TABLE artifact_monitor ADD CONSTRAINT artifactmonitor_artifactid_fk
-        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
-
-SELECT setval('artifact_grou_group_artifac_seq',(SELECT max(group_artifact_id) FROM artifact_group_list));
+SELECT setval('artifact_group_list_group_artifact_id_seq',(SELECT max(group_artifact_id) FROM artifact_group_list));
 --SELECT setval('artifact_perm_id_seq',(SELECT max(id) FROM artifact_perm));
 SELECT setval('artifact_category_id_seq',(SELECT max(id) FROM artifact_category));
 SELECT setval('artifact_group_id_seq',(SELECT max(id) FROM artifact_group));

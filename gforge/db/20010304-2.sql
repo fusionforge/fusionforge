@@ -58,6 +58,7 @@ DELETE FROM bug_status WHERE status_id=3;
 
 UPDATE bug SET close_date=0 WHERE close_date is NULL;
 UPDATE bug SET summary=0 WHERE summary is NULL;
+UPDATE bug SET details='' WHERE details is NULL;
 
 INSERT INTO artifact 
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
@@ -173,6 +174,9 @@ SELECT support_category_id+200000,group_id+200000,category_name,100 FROM support
 DELETE FROM support WHERE NOT EXISTS 
 (SELECT group_id FROM groups WHERE support.group_id=groups.group_id);
 
+UPDATE patch SET summary=0 WHERE summary is NULL;
+UPDATE patch SET details='' WHERE details is NULL;
+
 INSERT INTO artifact
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
 submitted_by,assigned_to,open_date,close_date,summary,details,resolution_id)
@@ -276,7 +280,11 @@ SELECT patch_category_id+300000,group_id+300000,category_name,100 FROM patch_cat
 --
 --	moving the odd patch statuses to resolutions
 --
-ALTER TABLE patch ADD COLUMN resolution_id INT NOT NULL DEFAULT 100;
+ALTER TABLE patch ADD COLUMN resolution_id INT;
+UPDATE patch SET resolution_id = 0;
+ALTER TABLE patch ALTER COLUMN resolution_id SET NOT NULL;
+ALTER TABLE patch ALTER COLUMN resolution_id SET DEFAULT 100;
+
 UPDATE patch SET resolution_id=patch_status_id;
 vacuum analyze patch;
 update patch set patch_status_id=2 where patch_status_id > 3;

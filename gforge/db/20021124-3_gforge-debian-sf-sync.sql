@@ -86,7 +86,7 @@ CREATE TABLE supported_languages (
 	classname text,
 	language_code character(5));
 INSERT INTO supported_languages SELECT * FROM supported_languages_old;
-SELECT SETVAL('supported_langu_language_id_seq',(select max(language_id) FROM supported_languages));
+SELECT SETVAL('supported_languages_language_id_seq',(select max(language_id) FROM supported_languages));
 DROP TABLE supported_languages_old;
 ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id);
 ALTER TABLE users ADD CONSTRAINT users_languageid_fk

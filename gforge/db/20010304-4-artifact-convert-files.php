@@ -22,8 +22,11 @@ for ($i=0; $i<$rows; $i++) {
 }
 
 db_commit();
-echo "Done: ".db_error();
-
+if (db_error()) {
+	echo db_error()."\n";
+} else {
+	echo "SUCCESS\n";
+}
 db_query("vacuum analyze;");
 
 ?>
