@@ -5,7 +5,7 @@
 %{!?release:%define release 1}
 
 Summary: LDAP external authentication plugin for GForge CDE
-Name: gforge-plugin-ldapextauth
+Name: gforge-plugin-%{plugin}
 Version: 4.1
 Release: %{release}
 BuildArch: noarch
