@@ -1,9 +1,9 @@
 <?php
 
 /**
- * GForge Mailing Lists Facility
+ * GForge escaping library
  *
- * Copyright 2003 Guillaume Smet
+ * Copyright 2003-2004 Guillaume Smet
  * http://gforge.org/
  *
  * @version   $Id$
@@ -24,6 +24,28 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+/**
+ * getIntFromRequest - get an int from REQUEST
+ *
+ * @param string $key key of the wanted value
+ * @param int $defaultValue if we can't find the wanted value, it returns the default value
+ * @return int the value
+ */
+function getIntFromRequest($key, $defaultValue = 0) {
+	return _getIntFromArray(_getRequestArray(), $key, $defaultValue);
+}
+
+/**
+ * getStringFromRequest - get a string from REQUEST
+ *
+ * @param string $key key of the wanted value
+ * @param string $defaultValue if we can't find the wanted value, it returns the default value
+ * @return string the value
+ */
+function getStringFromRequest($key, $defaultValue = '') {
+	return _getStringFromArray(_getRequestArray(), $key, $defaultValue);
+}
 
 /**
  * getIntFromPost - get an int from POST
@@ -181,6 +203,19 @@ function & _getPredefinedArray($superGlobalName, $oldName) {
 		$array = array();
 	}
 	return $array;
+}
+
+/**
+ * _getRequestArray - wrapper to get the request array
+ *
+ * @return array the REQUEST array
+ */
+function & _getRequestArray() {
+	if(isset($_REQUEST)) {
+		return $_REQUEST;
+	} else {
+		return array_merge($GLOBALS['HTTP_GET_VARS'], $GLOBALS['HTTP_POST_VARS'], $GLOBALS['HTTP_COOKIE_VARS']);
+	}
 }
 
 /**
