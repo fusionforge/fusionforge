@@ -97,6 +97,12 @@ SVN are in cronjobs/dav-svn/ and so are sample httpd.conf VHOST settings.
 Each of these cronjobs has configuration parameters which you may have to 
 edit manually for your specific system.
 
+  Configuring svnserv for svn-over-ssh:
+  http://svnbook.red-bean.com/en/1.0/ch06s03.html
+  http://www.logemann.org/day/archives/000099.html
+  http://bitworking.org/news/Getting_subversion_svn_ssh____to_work_with_PuTTY
+
+
   CVSTracker Overview
   -------------------
   The cvstracker plugin allows for some integration between CVS 
