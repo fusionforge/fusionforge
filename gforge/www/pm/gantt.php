@@ -74,6 +74,10 @@ for ($i=0; $i<$rows; $i++) {
 }
 
 //echo $rows;
+$todayline = new GanttVLine(date('Y-m-d',time()),"Today");
+$todayline ->SetDayOffset (0.5);
+$graph->Add( $todayline);
+
 
 // Display the Gantt chart
 $graph->Stroke();
