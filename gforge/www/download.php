@@ -19,7 +19,7 @@ $arr=explode('/',$REQUEST_URI);
 $file_id=$arr[2];
 
 $res=db_query("SELECT frs_file.filename,frs_file.file_id,groups.unix_group_name
-	FROM frs_package,frs_release,frs_file
+	FROM frs_package,frs_release,frs_file,groups
 	WHERE frs_release.release_id=frs_file.release_id
 	AND groups.group_id=frs_package.group_id
 	AND frs_release.package_id=frs_package.package_id
