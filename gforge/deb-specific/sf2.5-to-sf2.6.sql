@@ -656,10 +656,10 @@ ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk
 	FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
 -- ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk
 --	FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
-ALTER TABLE forum_group_list ADD CONSTRAINT forum_group_list_group_id_fk
-	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
-ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk
-	FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
+-- ALTER TABLE forum_group_list ADD CONSTRAINT forum_group_list_group_id_fk
+--	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
+-- ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk
+-- 	FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
 ALTER TABLE users ADD CONSTRAINT users_languageid_fk
 	FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
 
@@ -1400,6 +1400,11 @@ CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree
 CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
 
 -- Add two new themes
-
 INSERT INTO themes (dirname, fullname) VALUES ('debian', 'Debian') ;
 INSERT INTO themes (dirname, fullname) VALUES ('savannah', 'Savannah') ;
+
+-- Constraints
+ALTER TABLE project_group_list ADD CONSTRAINT project_group_list_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
+ALTER TABLE user_group ADD CONSTRAINT user_group_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;

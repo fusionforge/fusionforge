@@ -5679,32 +5679,8 @@ CREATE  INDEX "troveagg_trovecatid_ranking" on "trove_agg" using btree ( "trove_
 ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk
 	FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
 
---
--- TOC Entry ID 650 (OID 24185)
---
--- Name: "RI_ConstraintTrigger_24184" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 629 (OID 24187)
---
--- Name: "RI_ConstraintTrigger_24186" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 630 (OID 24189)
---
--- Name: "RI_ConstraintTrigger_24188" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
-
-
-ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE user_group ADD CONSTRAINT user_group_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 600 (OID 24197)
@@ -5730,53 +5706,8 @@ CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER DELETE ON "forum_group
 
 CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER UPDATE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
---
--- TOC Entry ID 605 (OID 24203)
---
--- Name: "RI_ConstraintTrigger_24202" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER INSERT OR UPDATE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 631 (OID 24205)
---
--- Name: "RI_ConstraintTrigger_24204" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 632 (OID 24207)
---
--- Name: "RI_ConstraintTrigger_24206" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 601 (OID 24209)
---
--- Name: "RI_ConstraintTrigger_24208" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
---
--- TOC Entry ID 655 (OID 24211)
---
--- Name: "RI_ConstraintTrigger_24210" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
---
--- TOC Entry ID 656 (OID 24213)
---
--- Name: "RI_ConstraintTrigger_24212" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+ALTER TABLE forum_group_list ADD CONSTRAINT forum_group_list_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 602 (OID 24215)
@@ -5808,23 +5739,8 @@ CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER UPDATE ON "forum_group
 -- Name: "RI_ConstraintTrigger_24220" Type: TRIGGER Owner: tperdue
 --
 
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER INSERT OR UPDATE ON "project_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 633 (OID 24223)
---
--- Name: "RI_ConstraintTrigger_24222" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 634 (OID 24225)
---
--- Name: "RI_ConstraintTrigger_24224" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE project_group_list ADD CONSTRAINT project_group_list_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 644 (OID 24227)
