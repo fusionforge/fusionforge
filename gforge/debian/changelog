@@ -8,8 +8,13 @@ gforge (3rc2-3+) unstable; urgency=low
     (iso.org.dod.internet.private.enterprise.Debian.package.gforge)
     instead.  That means a global s/debSf/debGforge/ in attribute types
     and object classes, in all the files that use LDAP.
+  * [Roland] Lots of fixes in the Debconf variable handling.  It should be
+    more straightforward now, more logical (variables have been moved to
+    their proper package), more policy-compliant (gforge.conf is read and
+    Debconf is initialised from it as much as possible), and it even
+    actually seems to work.
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 May 2003 10:24:46 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 30 May 2003 22:03:06 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 
