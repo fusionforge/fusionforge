@@ -1,3 +1,9 @@
+2003-11-20 Tom Copeland  <tom@infoether.com>
+
+	* www/project/admin/index.php
+	Removed some empty space btwn the "Add Member" and "File Releases"
+	sections.
+
 2003-11-17 Tom Copeland  <tom@infoether.com>
 
 	* www/account/register.php, login.php, pending-resend.php,

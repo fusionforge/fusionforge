@@ -165,10 +165,28 @@ if ($is_admin) {
 }
 ?>
  
+
+</td>
+<td width="50%">
+<?php echo $HTML->boxTop($Language->getText('project_admin','file_releases')); ?>
+	&nbsp;<br />
+	<div align="center">
+	<a href="editpackages.php?group_id=<?php print $group_id; ?>"><strong>[<?php echo $Language->getText('project_admin','edit_file_releases') ?>]</strong></a>
+	</div>
+	<hr />
+	<strong><?php echo $Language->getText('project_admin','packages') ?>:</strong>
+	<p>
+	<?php
+	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
+	while ($row_module = db_fetch_array($res_module)) {
+		print "$row_module[name]<br />";
+	}
+	echo $HTML->boxBottom();
+	?>
+</p>
+</td>
 <?php echo $HTML->boxBottom();?>
-
-
-</td></tr>
+</tr>
 
 <tr valign="top"><td width="50%">
 
@@ -199,29 +217,7 @@ echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
 
 <td>&nbsp;</td>
 
-<td width="50%">
 
-<?php echo $HTML->boxTop($Language->getText('project_admin','file_releases')); ?>
-	&nbsp;<br />
-	<div align="center">
-	<a href="editpackages.php?group_id=<?php print $group_id; ?>"><strong>[<?php echo $Language->getText('project_admin','edit_file_releases') ?>]</strong></a>
-	</div>
-
-	<hr />
-	<strong><?php echo $Language->getText('project_admin','packages') ?>:</strong>
-
-	<p>
-
-	<?php
-
-	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
-	while ($row_module = db_fetch_array($res_module)) {
-		print "$row_module[name]<br />";
-	}
-
-	echo $HTML->boxBottom();
-	?>
-</p></td>
 </tr>
 </table>
 
