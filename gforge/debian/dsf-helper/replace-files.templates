@@ -2,7 +2,7 @@ Template: gforge/shared/replace_file_install
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
- In order for Sourceforge to fully work, some changes must be made to
+ In order for Gforge to fully work, some changes must be made to
  the ${file} file.
  .
  I can either do them for you (and backup the current version in
@@ -12,7 +12,7 @@ Description: Do you want ${file} to be updated?
  .
  Shall I modify ${file} automatically?
 Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
- Pour que Sourceforge fonctionne complètement, des modifications
+ Pour que Gforge fonctionne complètement, des modifications
  doivent être apportées au fichier ${file}.
  .
  Je peux soit les faire automatiquement (en sauvegardant la version
@@ -26,7 +26,7 @@ Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
- In order for Sourceforge to be fully deinstalled, some changes must
+ In order for Gforge to be fully deinstalled, some changes must
  be made to the ${file} file.
  .
  I can either do them for you (and backup the current version in
@@ -36,7 +36,7 @@ Description: Do you want ${file} to be updated?
  .
  Shall I modify the ${file} automatically?
 Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
- Pour désinstaller complètement Sourceforge, des modifications
+ Pour désinstaller complètement Gforge, des modifications
  doivent être apportées au fichier ${file}.
  .
  Je peux soit les faire automatiquement (en sauvegardant la version
@@ -49,13 +49,13 @@ Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
 Template: gforge/shared/file_changed
 Type: note
 Description: Please check ${file}
- You have chosen not to let the Sourceforge package update the
+ You have chosen not to let the Gforge package update the
  ${file} file.  Very well, I have not changed it.  Instead,
  I have written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
 Description-fr_FR.UTF-8: Veuillez vérifier ${file}
- Vous avez choisi de ne pas laisser le paquet Sourceforge modifier
+ Vous avez choisi de ne pas laisser le paquet Gforge modifier
  le fichier ${file}.  Conformément à ce choix, les modifications ont
  été sauvegardées dans ${file}.gforge-new.  Veuillez vérifier
  ce fichier et appliquer les changements adéquats à ${file},

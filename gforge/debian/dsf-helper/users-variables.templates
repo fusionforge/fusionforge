@@ -1,7 +1,7 @@
 Template: gforge/shared/users_host
 Type: string
 Description: Your user mail redirector server
- The hostname of the server that will host your Sourceforge user mail redirector.
+ The hostname of the server that will host your Gforge user mail redirector.
  It should not be the same as your main SF host.
 Description-fr_FR.UTF-8: Votre redirecteur d'e-mail
  Le nom du serveur qui hébergera le redirecteur d'e-mail de vos uilisateurs.

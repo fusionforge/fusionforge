@@ -1,9 +1,9 @@
 Template: gforge/shared/ip_address
 Type: string
 Description: Your IP address
- The IP address of the server that will host your Sourceforge installation.
+ The IP address of the server that will host your Gforge installation.
  This is needed for the Apache virtualhosting configuration.
 Description-fr_FR.UTF-8: Votre adresse IP
- L'adresse IP du serveur qui hébergera votre installation de Sourceforge.
+ L'adresse IP du serveur qui hébergera votre installation de Gforge.
  Cette information est requise pour la configuration des hôtes virtuels
  d'Apache.

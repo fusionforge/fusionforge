@@ -3,12 +3,12 @@ Type: string
 Default: 2
 Default-fr_FR.UTF-8: 2
 Description: The news admin group id
- Members of the news admin group can approve news for the Sourceforge main
+ Members of the news admin group can approve news for the Gforge main
  page.  This group id MUST NOT be 1. You only need to touch this group if
  you upgrade from a previous version and want to keep your data.
 Description-fr_FR.UTF-8: Le numéro du groupe d'administration des nouvelles
  Les membres du groupe d'administration des nouvelles peuvent approuver des
- nouvelles pour les publier sur la page d'accueil de Sourceforge.  Le numéro
+ nouvelles pour les publier sur la page d'accueil de Gforge.  Le numéro
  de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
  mettez à jour une installation précédente et voulez garder vos données.
 
