@@ -42,8 +42,8 @@ if ($submit) {
 		$new_doc_address,
 		$send_all_docs,
 		100,
-		$enable_pserver,
-		$enable_anoncvs,
+		'',
+		'',
 		$use_ftp,
 		$use_tracker,
 		$use_frs,
@@ -189,28 +189,10 @@ if($sys_use_scm) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesSCM()); ?> ><br />
+ <input type="CHECKBOX" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> ><br />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>
-</td>
-</tr>
-
-<tr>
-<td>
- <input type="CHECKBOX" name="enable_pserver" value="1" <?php echo c($group->enablePserver()); ?> ><br />
-</td>
-<td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_pserver') ?></strong>
-</td>
-</tr>
-
-<tr>
-<td>
- <input type="CHECKBOX" name="enable_anoncvs" value="1" <?php echo c($group->enableAnonCVS()); ?> ><br />
-</td>
-<td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
 </td>
 </tr>
 <?php
