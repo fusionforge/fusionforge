@@ -18,9 +18,18 @@
 
 	Soon-Son Kwon, 2002/06/09
 	*fine-tuned expressions
+<<<<<<< Korean.class
+
+	Soon-Son Kwon, 2002/06/10
+	*added more strings including .../www/account/login.php
+
+	Soon-Son Kwon, 2002/06/11
+	*added more strings .../www/account/first.php
+=======
 
 	Soon-Son Kwon, 2002/06/10
 	*added more strings
+>>>>>>> 1.1.2.3
 */
 
 class Korean extends BaseLanguage {
@@ -155,6 +164,7 @@ class Korean extends BaseLanguage {
 <A HREF="/register/">여러분의 프로젝트를 등록</A>하실 수 있습니다.
 감사합니다. 즐거운 시간 되십시오.';
 
+<<<<<<< Korean.class
     // New strings added on 2002/06/10 by Soon-Son Kwon
 	$this->FOOTER='
 <font face="굴림체, arial, helvetica" size="1" color="#cccccc">
@@ -176,6 +186,44 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 	$this->USESSL='로그인후 SSL 계속 사용';
 	$this->SSLNOTICE='<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>';
 
+    // New strings added on 2002/06/11 by Soon-Son Kwon
+	$this->FIRSTBLURB='
+<P><B>환영합니다!</B>
+<P>여러분은 이제 등록 사용자가 되셨습니다.
+<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 게시판에 글을 올릴 수도 있고, 이곳에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. 
+<P>이곳에서 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.
+<P>부디 좋은 시간이 되시기를 바라며, 저희가 이곳을 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>';
+
+	$this->ANONCVS='<P><B>익명 CVS 사용 방법</B> <P>다음 방법을 사용하시면 익명으로 이 프로젝트의 CVS 저장소로부터 소스코드를 체크아웃하실 수 있습니다. 체크아웃하고자 하는 모듈을 반드시 <I>modulename</I>부분에 써 주셔야 합니다. <I>anonymous</I>에 대한 비밀번호를 물어보면 그냥 Enter를 누르시면 됩니다.';
+	$this->ANONCVSUP='해당 모듈 디렉토리 안에서 업데이트를 할 때는 -d 옵션이 필요 없습니다.';
+	$this->DEVCVS='<P><B>SSH를 통한 개발자의 CVS 사용 방법</B> <P>프로젝트의 개발자로 지정된 사람만이 이 방법을 사용할 수 있습니다. SSH1이 클라이언트 측에 반드시 설치되어 있어야 합니다. <I>modulename</I>과 <I>developername</I> 부분을 상황에 맞게 바꾸어 주십시오. 비밀번호는 사이트 이용시 지정한 비밀번호와 동일합니다.';
+	$this->CVSHISTORY='저장소 히스토리';
+	$this->BROWSETREE='<HR><B>CVS 트리 살펴보기</B> <P>CVS 트리를 살펴보시면 이 프로젝트의 소스코드가 어떻게 운영되고 있는지 잘 알 수 있습니다. 또한 저장소 내의 모든 파일에 대한 완전한 히스토리도 살펴보실 수 있습니다.';
+	$this->BROWSEIT='CVS 저장소(Repository)';
+
+=======
+    // New strings added on 2002/06/10 by Soon-Son Kwon
+	$this->FOOTER='
+<font face="굴림체, arial, helvetica" size="1" color="#cccccc">
+SourceForge는 VA Software의 등록 상표입니다. 
+Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
+저작권은 해당 소유자에게 있습니다.
+컨텐트에 대한 소유 정보와 사용에 대한 자세한 사항은 
+<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>를 
+참고하십시오. 개인 정보 보호 정책은
+<a href="/tos/privacy.php" class="legallink">SourceForge Privacy Policy</a>를
+참고하십시오. Content owned by VA Software is copyright
+1999-2002 VA Software, Inc.  All rights reserved.
+</font>';
+
+	$this->IEWARN='<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>';
+	$this->MACWARN='<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>';
+	$this->ACCOUNTLOGIN='사이트 로그인';
+	$this->COOKIEWARN='여기서부터는 쿠키를 사용합니다.';
+	$this->USESSL='로그인후 SSL 계속 사용';
+	$this->SSLNOTICE='<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>';
+
+>>>>>>> 1.1.2.3
 	}
 }
 
