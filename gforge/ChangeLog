@@ -1,3 +1,12 @@
+2003-05-02  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/pm/include/ProjectTaskHTML.class,
+	common/pm/ProjectTask.class:
+	bug 319: warning in task manager
+
+	* www/include/languages/Italian.tab:
+	translations
+
 2003-05-01 Tom Copeland <tom@infoether.com>
 	
 	* www/mail/admin/index.php: 
