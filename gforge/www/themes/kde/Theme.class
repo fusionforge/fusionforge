@@ -59,7 +59,7 @@ class Theme extends Layout {
 		// The content font color
 		$this->FONTCOLOR_CONTENT = '#202020';
 		//The smaller font size
-		$this->FONTSIZE_SMALLER='small';
+		$this->FONTSIZE_SMALLER='smaller';
 		//The smallest font size
 		$this->FONTSIZE_SMALLEST='x-small';
 		//The HTML box title font size
@@ -150,8 +150,41 @@ class Theme extends Layout {
 	}
 
 	TD.projectname {
-		font-size: large;
+		font-size: x-large;
 		font-style: italic;
+		font-variant: small-caps;
+		text-align: center;
+	}
+
+	TD.logo {
+		text-align: left;
+	}
+
+	TD.searchcell {
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	TD.toolbar {
+		text-align: right;
+	}
+
+	TR.toolbar {
+		vertical-align: middle;
+	}
+
+	INPUT.searchbutton {
+		vertical-align: middle;
+	}
+
+	SELECT.searchbox {
+		vertical-align: baseline;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
+	}
+
+	INPUT.searchbox {
+		veritcal-align: baseline;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
 
 /* give the rule a bit of extra space (above and below), since its being used to divide
@@ -238,56 +271,92 @@ class Theme extends Layout {
 <!-- Toolbar at very top -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 
-	<tr>
+	<tr class="toolbar">
 		<!-- Logo on the left -->
-		<td><a href="/" title="Homepage"><img name="logo" border="0" src="<?php echo $this->imgroot.'toolbar/logo.png'; ?>" alt="GForge Logo" /></a></td>
+		<td class="logo">
+			<a href="/" title="Homepage"><img name="logo" border="0" src="<?php echo $this->imgroot.'toolbar/logo.png'; ?>" alt="GForge Logo" /></a>
+		</td>
 		<!-- Search box in the middle -->
-		<td align="center"><?php echo $this->searchBox(); ?></td>
-		<!-- Toolbar on right -->
-		<td>
-			<a href="/" title="Homepage"><img src="<?php echo $this->imgroot.'toolbar/homepage.png'; ?>" alt="Homepage" border="0" /></a>
-			<?php
-			if (session_loggedin()) {
-				echo '
-			<a href="/my/" title="My Page"><img src="'.$this->imgroot.'toolbar/my_page.png" alt="My Page" border="0" /></a>';
-				echo '
-			<a href="/account/" title="My Account"><img src="'.$this->imgroot.'toolbar/my_account.png" alt="My Account" border="0" /></a>';
+		<td class="searchcell">
+			<?php echo $this->searchBox(); ?>
 
+		</td>
+		<!-- Toolbar on right -->
+		<td class="toolbar"><?php
+			global $Language;
+			$hint = $Language->getText('group','short_homepage');
+			echo $this->makeToolbarIcon("/", $hint, "homepage.png");
+			if (session_loggedin()) {
+				$hint = $Language->getText('menu',
+							   'mypage');
+				echo $this->makeToolbarIcon("/my/",
+							    $hint,
+							    "my_page.png");
+				$hint = $Language->getText('menu',
+							   'my_account');
+				echo $this->makeToolbarIcon("/account/",
+							    $hint,
+							    "my_account.png");
 				if ($GLOBALS['HTTP_POST_VARS']) {
+					$hint = $Language->getText('menu',
+								  'bookmark_not_allowed');
 					echo '
-			<img src="'.$this->imgroot.'toolbar/bookmark_add_dark.png" alt="Bookmark (Not Allowed) border="0" /></a>';
+			<img src="'.$this->imgroot.'toolbar/bookmark_add_dark.png" alt="'.$hint.'" border="0" /></a>';
 				} else {
 					$bookmark_title=urlencode(str_replace($sys_name.': ', '', $params['title'] ? $params['title'] : "Untitled"));
-					echo '
-			<a href="/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&amp;bookmark_title='.$bookmark_title.'" title="Bookmark This Page"><img src="'.$this->imgroot.'toolbar/bookmark_add.png" alt="Bookmark This Page" border="0" /></a>';
+					$hint = $Language->getText('menu',
+								   'bookmark_page');
+					echo $this->makeToolbarIcon("/my/bookmark_add.php?bookmark_url=".urlencode($GLOBALS['REQUEST_URI'])."&amp;bookmark_title=$bookmark_title",
+								    $hint,
+								    "bookmark_add.png");
 				}
 				if (user_ismember(1,'A')) {
-					echo '
-			<a href="/admin/" title="Admin"><img src="'.$this->imgroot.'toolbar/admin.png" alt="Admin" border="0" /></a>';
+					$hint = $Language->getText('group',
+								   'short_admin');
+					echo $this->makeToolbarIcon("/admin/",
+								    $hint,
+								    "admin.png");
 				}
 			}
-			?>
-			<a href="/softwaremap/" title="Project Tree"><img src="<?php echo $this->imgroot.'toolbar/project_tree.png'; ?>" alt="Project Tree" border="0" /></a>
-			<a href="/snippet/" title="Code Snippets"><img src="<?php echo $this->imgroot.'toolbar/snippets.png'; ?>" alt="Code Snippets" border="0" /></a>
-			<a href="/people/" title="Project Openings"><img src="<?php echo $this->imgroot.'toolbar/project_help.png'; ?>" alt="Project Openings" border="0" /></a>
-			<?php
+			$hint = $Language->getText('menu',
+						   'software_map');
+			echo $this->makeToolbarIcon("/softwaremap/",
+						    $hint,
+						    "project_tree.png");
+			$hint = $Language->getText("menu",
+						   "code_snippet");
+			echo $this->makeToolbarIcon("/snippet/",
+						    $hint,
+						    "snippets.png");
+			$hint = $Language->getText("menu",
+						   "project_help_wanted");
+			echo $this->makeToolbarIcon("/people/",
+						    $hint,
+						    "project_help.png");
+
 			if (session_loggedin()) {
-
-			?>
-
-				<a href="/account/logout.php" title="Logout"><img src="<?php echo $this->imgroot.'toolbar/logout.png'; ?>" alt="Logout" border="0" /></a>
-			<?php
+				$hint = $Language->getText("menu",
+							   "logout");
+				echo $this->makeToolbarIcon("/account/logout.php",
+							    $hint,
+							    "logout.png");
 			} else {
-			?>
-				<a href="/account/login.php" title="Login"><img src="<?php echo $this->imgroot.'toolbar/login.png'; ?>" alt="Login" border="0" /></a>
-				<a href="/account/register.php" title="New Account"><img src="<?php echo $this->imgroot.'toolbar/new_account.png';  ?>" alt="New Account" border="0" /></a>
-				<?php
+				$hint = $Language->getText("menu",
+							   "login");
+				echo $this->makeToolbarIcon("/account/login.php",
+							    $hint,
+							    "login.png");
+				$hint = $Language->getText("menu",
+							   "newaccount");
+				echo $this->makeToolbarIcon("/account/register.php",
+							    $hint,
+							    "new_account.png");
 			}
 
-		?></td>
-		<td>&nbsp;&nbsp;</td>
-	</tr>
+			?>
 
+		</td>
+	</tr>
 </table>		<!-- End of top toolbar -->
 
 <!-- Page body -->
@@ -307,7 +376,7 @@ class Theme extends Layout {
 
 ?>
 			<tr>
-				<td align="center" colspan="3" class="projectname">
+				<td colspan="3" class="projectname">
 				<?php
 					$project =& group_get_object($params['group']);
 					if ($project && is_object($project)
@@ -642,6 +711,76 @@ class Theme extends Layout {
 		return '
 			<td><a href="'.$url.'" title="'.$hint.'"><img src="'.$this->imgroot.'project_icons/'.$img.'" alt="'.$hint.'" border="0" /></a></td>';
 	}
+
+	function makeToolbarIcon($url, $hint, $img) {
+		return '
+			<a href="'.$url.'" title="'.$hint.'"><img src="'.$this->imgroot.'toolbar/'.$img.'" alt="'.$hint.'" border="0" height="32" /></a>';
+	}
+
+	function searchBox() {
+		global $Language,$words,$forum_id,$group_id,
+			$group_project_id,$atid,$exact,$type_of_search;
+
+		// if there is no search currently, set the default
+		if ( ! isset($type_of_search) ) {
+			$exact = 1;
+		}
+
+		print '<form action="/search/" method="post"'.$new_window.'>
+			<select name="type_of_search" class="searchbox">';
+
+		if ($atid && $group_id) {
+			$group =& group_get_object($group_id);
+			if ($group && is_object($group)) {
+				$ath = new ArtifactTypeHtml($group,$atid);
+				if ($ath && is_object($ath)) {
+				print '
+				<option value="artifact"'.( $type_of_search == 'artifact' ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
+				}
+			}
+		} else if ($group_id && $forum_id) {
+			print '
+				<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</OPTION>';
+		} else if ($group_id && $group_project_id) {
+			print '
+				<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
+		}
+
+		print '
+				<option value="soft"'.( $type_of_search == 'soft' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
+		print '
+				<option value="skill"'.( $type_of_search == 'skill' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
+		print '
+				<option value="people"'.( $type_of_search == 'people' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
+		print '
+			</select>&nbsp;';
+
+		print '
+			<input type="text" size="12" name="words" value="'.$words.'" class="searchbox" />&nbsp;';
+		print '
+			<input type="image" name="Search" value="'.$Language->getText('searchbox','search').'" src="'.$this->imgroot.'toolbar/search.png" alt="'.$Language->getText('searchbox','search').'" class="searchbutton" />';
+
+		if ( isset($forum_id) ) {
+			print '
+			<input type="hidden" value="'.$forum_id.'" name="forum_id" />';
+		}
+		if ( isset($group_id) ) {
+			print '
+			<input type="hidden" value="'.$group_id.'" name="group_id" />';
+		}
+		if ( isset($atid) ) {
+			print '
+			<input type="hidden" value="'.$atid.'" name="atid" />';
+		}
+		if ( isset($group_project_id) ){
+			print '
+			<input type="hidden" value="'.$group_project_id.'" name="group_project_id" />';
+		}
+		print '
+			</form>';
+	}
+
+
 
 	/**
 	 * multiTableRow() - create a mutlilevel row in a table

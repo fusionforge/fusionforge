@@ -222,6 +222,7 @@ gforge/www/themes/kde/images/ic/tracker20w.png svneol=native#unset
 gforge/www/themes/kde/images/ic/trash-x.png svneol=native#unset
 gforge/www/themes/kde/images/ic/trash.png svneol=native#unset
 gforge/www/themes/kde/images/ic/write16w.png svneol=native#unset
+gforge/www/themes/kde/images/ic/xmail16w.png svneol=native#unset
 gforge/www/themes/kde/images/project_icons/admin.png svneol=native#unset
 gforge/www/themes/kde/images/project_icons/admin_dark.png svneol=native#unset
 gforge/www/themes/kde/images/project_icons/cvs.png svneol=native#unset
@@ -256,6 +257,7 @@ gforge/www/themes/kde/images/toolbar/my_page.png svneol=native#unset
 gforge/www/themes/kde/images/toolbar/new_account.png svneol=native#unset
 gforge/www/themes/kde/images/toolbar/project_help.png svneol=native#unset
 gforge/www/themes/kde/images/toolbar/project_tree.png svneol=native#unset
+gforge/www/themes/kde/images/toolbar/search.png svneol=native#unset
 gforge/www/themes/kde/images/toolbar/snippets.png svneol=native#unset
 gforge/www/themes/osx/images/background.png -text
 gforge/www/themes/osx/images/clear.png -text
