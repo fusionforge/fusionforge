@@ -111,14 +111,16 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     bug_dump.php and patch_dump.php
   * [Christian] Added the supposed userIsAdmin() function in Group class
     used in bug_dump.php and patch_dump.php
-  * [Christian] Made some change in bug_dump.php and patch_dump.php to
-    make them work (partially), this need actually to manually create two
-    views since in 2.6 patch and bug tables don't exist, scripts creating
-    views are view_bug.sql and view_patch.sql.
+  * [Christian] Made some change in bug_dump.php and patch_dump.php to make
+    them work (partially), this need actually to manually create two views since in 2.6
+    patch and bug tables don't exist, scripts creating views are view_bug.sql and
+    view_patch.sql.
   * [Roland] Make HTTPS harder to leave, and make it the default in links
     sent as e-mails (should fix Savannah bug #1401).
+  * [Christian] applied paddington patch #644 missing rotate_activity.php,
+    generate artifact stats
 
- -- Roland Mas <lolando@debian.org>  Sun, 10 Nov 2002 19:52:49 +0100
+ -- Christian Bayle <bayle@debian.org>  Mon, 11 Nov 2002 16:36:57 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

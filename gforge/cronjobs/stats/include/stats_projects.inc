@@ -38,14 +38,14 @@ SELECT
 	r.count AS release_count,
 	fmcount.count AS msg_posted,
 	fucount.count AS msg_uniq_auth,
---	obug.count AS bugs_opened,
---	cbug.count AS bugs_closed,
---	osupport.count AS support_opened,
---	csupport.count AS support_closed,
---	opatches.count AS patches_opened,
---	cpatches.count AS patches_closed,
---	oartifact.count AS artifacts_opened,
---	cartifact.count AS artifacts_closed,
+	obug.count AS bugs_opened,
+	cbug.count AS bugs_closed,
+	osupport.count AS support_opened,
+	csupport.count AS support_closed,
+	opatches.count AS patches_opened,
+	cpatches.count AS patches_closed,
+	oartifact.count AS artifacts_opened,
+	cartifact.count AS artifacts_closed,
 	otask.count AS tasks_opened,
 	ctask.count AS tasks_closed,
 	helpr.count AS help_requests
@@ -94,112 +94,112 @@ LEFT JOIN (
 --
 --	Create tmp table of groups and opened bugs
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.open_date > '$day_begin'
---		AND a.open_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='1'
---	GROUP BY agl.group_id
---	) obug USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.open_date > '$day_begin'
+		AND a.open_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='1'
+	GROUP BY agl.group_id
+	) obug USING (group_id)
 
 --
 --	Create tmp table of groups and closed bugs
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.close_date > '$day_begin'
---		AND a.close_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='1'
---	GROUP BY agl.group_id
---	) cbug USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.close_date > '$day_begin'
+		AND a.close_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='1'
+	GROUP BY agl.group_id
+	) cbug USING (group_id)
 
 --
 --	Create tmp table of groups and opened support
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.open_date > '$day_begin'
---		AND a.open_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='2'
---	GROUP BY agl.group_id
---	) osupport USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.open_date > '$day_begin'
+		AND a.open_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='2'
+	GROUP BY agl.group_id
+	) osupport USING (group_id)
 
 --
 --	Create tmp table of groups and closed support
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.close_date > '$day_begin'
---		AND a.close_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='2'
---	GROUP BY agl.group_id
---	) csupport USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.close_date > '$day_begin'
+		AND a.close_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='2'
+	GROUP BY agl.group_id
+	) csupport USING (group_id)
 
 --
 --	Create tmp table of groups and opened patches
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.open_date > '$day_begin'
---		AND a.open_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='3'
---	GROUP BY agl.group_id
---	) opatches USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.open_date > '$day_begin'
+		AND a.open_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='3'
+	GROUP BY agl.group_id
+	) opatches USING (group_id)
 
 --
 --	Create tmp table of groups and closed patches
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.close_date > '$day_begin'
---		AND a.close_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---		AND agl.datatype='3'
---	GROUP BY agl.group_id
---	) cpatches USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.close_date > '$day_begin'
+		AND a.close_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+		AND agl.datatype='3'
+	GROUP BY agl.group_id
+	) cpatches USING (group_id)
 
 --
 --	Create tmp table of groups and opened total artifacts
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.open_date > '$day_begin'
---		AND a.open_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---	GROUP BY agl.group_id
---	) oartifact USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.open_date > '$day_begin'
+		AND a.open_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+	GROUP BY agl.group_id
+	) oartifact USING (group_id)
 
 --
 --	Create tmp table of groups and closed total artifacts
 --
---LEFT JOIN (
---	SELECT agl.group_id,count(*) AS count
---	FROM artifact_group_list agl,artifact a
---	WHERE
---		a.close_date > '$day_begin'
---		AND a.close_date < '$day_end'
---		AND a.group_artifact_id=agl.group_artifact_id
---	GROUP BY agl.group_id
---	) cartifact USING (group_id)
+LEFT JOIN (
+	SELECT agl.group_id,count(*) AS count
+	FROM artifact_group_list agl,artifact a
+	WHERE
+		a.close_date > '$day_begin'
+		AND a.close_date < '$day_end'
+		AND a.group_artifact_id=agl.group_artifact_id
+	GROUP BY agl.group_id
+	) cartifact USING (group_id)
 
 --
 --	Create tmp table of groups that opened tasks
@@ -248,14 +248,14 @@ WHERE
 release_count > 0 
 OR msg_posted > 0
 OR msg_uniq_auth > 0
---OR bugs_opened > 0
---OR bugs_closed > 0
---OR support_opened > 0
---OR support_closed > 0
---OR patches_opened > 0
---OR patches_closed > 0
---OR artifacts_opened > 0
---OR artifacts_closed > 0
+OR bugs_opened > 0
+OR bugs_closed > 0
+OR support_opened > 0
+OR support_closed > 0
+OR patches_opened > 0
+OR patches_closed > 0
+OR artifacts_opened > 0
+OR artifacts_closed > 0
 OR tasks_opened > 0
 OR tasks_closed > 0
 OR help_requests > 0;";
