@@ -2,6 +2,8 @@
 
 	* www/pm/calendar.php: show tasks in calendar.
 
+	* www/pm/{add_task,mod_task}.php: update link to View Calendar.
+
 	* www/include/languages/{Base,Spanish}.tab: new entries for
 	calendar tasks.
 

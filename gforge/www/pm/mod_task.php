@@ -78,7 +78,7 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 		?><br>
 		The system will modify your start/end dates if you attempt to create a start date
 		earlier than the end date of any tasks you depend on.
-		<br><a href="calendar.php" target="_blank">View Calendar</a>
+		<br><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank">View Calendar</a>
 		</td>
 	</tr>
 
