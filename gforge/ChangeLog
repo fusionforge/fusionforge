@@ -4,6 +4,8 @@
 	* fixed two parse errors in SVNPlugin
 	* translated SVN plugin in French
 	* finalized Grand Unified Search work based on Dominik Haas' patch [#833]
+	* applied [#1012] Updated Dutch.tab (based on Gforge 3.3)
+	* fixed RPM packaging and released new test RPMs
 
 2004-12-12  Christian Bayle <bayle@aist.enst.fr>
 
