@@ -894,6 +894,8 @@ general	done	Done
 general	edit	Edit
 general	error	Error
 general	error_creating	Error Creating $1
+general	error_creating_group	Error Creating Group Object
+general	error_creating_perm	Error Creating Permission Object
 general	error_getting	Error Getting $1
 general	error_getting_new	Error Getting New $1
 general	error_group_id	Group_id in db result does not match Group Object

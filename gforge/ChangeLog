@@ -1,3 +1,7 @@
+2005-03-25  Christian Bayle <bayle@debian.org>
+
+	* Removal of exit_assert_object function and replacement of all calls
+
 2005-03-16  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* docs/docbook/docbook/installation_guide/installation_guide.xml: 

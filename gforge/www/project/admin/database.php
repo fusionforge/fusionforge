@@ -41,7 +41,12 @@ if (!$sys_use_project_database) {
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
-exit_assert_object($group, 'Group');
+if (!$group || !is_object($group)) {
+	exit_error($Language->getText('general','error'),
+		$Language->getText('error','error_creating_group'));
+} else if ($group->isError()) {
+	exit_error($Language->getText('general','error'), $group->getErrorMessage());
+}
 
 if ($createdb) {
 

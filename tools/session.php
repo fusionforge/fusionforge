@@ -325,10 +325,23 @@ function session_require($req) {
 
 	if ($req['group']) {
 		$group =& group_get_object($req['group']);
-		exit_assert_object($group,'Group');
+
+		if (!$group || !is_object($group)) {
+			exit_error($Language->getText('general','error'),
+				$Language->getText('error','error_creating_group'));
+		} else if ($group->isError()) {
+			exit_error($Language->getText('general','error'),
+				$group->getErrorMessage());
+		}
 
 		$perm =& $group->getPermission( session_get_user() );
-		exit_assert_object($perm,'Permission');
+		if (!$perm || !is_object($perm)) {
+			exit_error($Language->getText('general','error'),
+				$Language->getText('error','error_creating_perm'));
+		} else if ($perm->isError()) {
+			exit_error($Language->getText('general','error'),
+				$perm->getErrorMessage());
+		}
 
 		if ($req['admin_flags']) {
 			//$query .= " AND admin_flags = '$req[admin_flags]'";	

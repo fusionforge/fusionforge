@@ -74,24 +74,4 @@ function exit_disabled() {
 	exit_error($Language->getText('exit','disabled_title'),$Language->getText('exit','disabled_body'));
 }
 
-/**
-/**
- *	exit_assert_object() - Assert validity of Error-derived object
- *
- *	Should be used at the beginning of the code, when
- *	instantiating object and before any HTML output.
- *
- *	@param		object	Object of subclass of Error class
- *	@param		string	Name of the class object should belong to
- *	@return will not return if object is not valid
- */
-function exit_assert_object($obj, $expected_class) {
-	global $Language;
-	if (!$obj || !is_object($obj)) {
-		exit_error($Language->getText('general','error'), $Language->getText('error','error_creating').$expected_class.' object');
-	} else if ($obj->isError()) {
-		exit_error($Language->getText('general','error'), $obj->getErrorMessage());
-	}
-}
-
 ?>

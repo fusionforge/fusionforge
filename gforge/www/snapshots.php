@@ -24,7 +24,13 @@ session_require(array('group'=>$group_id));
 
 // get current information
 $group =& group_get_object($group_id);
-exit_assert_object($group,'Group');
+if (!$group || !is_object($group)) {
+	exit_error($Language->getText('general','error'),
+		$Language->getText('error','error_creating_group'));
+} else if ($group->isError()) {
+	exit_error($Language->getText('general','error'),
+		$group->getErrorMessage());
+}
 
 $group_name=$group->getUnixName();
 
