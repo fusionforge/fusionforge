@@ -3,23 +3,15 @@
 
 require_once('squal_pre.php');
 
+$res=db_query("SELECT user_name,user_id,authorized_keys FROM users WHERE authorized_keys != ''");
+
+for ($i=0; $i<db_numrows($res); $i++) {
+	$ssh_key=db_result($res,$i,'authorized_keys');
+	$username=db_result($res,$i,'user_name');
+	$uid=db_result($res,$i,'user_id');
 /*
-
-//NEEDS TO BE TRANSLATED FROM PERL
-
-
-my @ssh_key_file = open_array_file($file_dir."dumps/ssh_dump");
-my ($username, $ssh_keys, $ssh_dir);
-
-#print("\n\n	Processing Users\n\n");
-while ($ln = pop(@ssh_key_file)) {
-	chop($ln);
-
-	($username, $uid, $ssh_key) = split(":", $ln);
-
 	$ssh_key =~ s/\#\#\#/\n/g;
-	$username =~ tr/[A-Z]/[a-z]/;
-	$uid += $uid_add;
+	$uid += 1000;
 
 	push @user_authorized_keys, $ssh_key . "\n";
 
@@ -40,5 +32,7 @@ while ($ln = pop(@ssh_key_file)) {
 	#print ("Done\n");
 
 	undef @user_authorized_keys;
-}
 */
+}
+
+?>
