@@ -28,6 +28,8 @@ EOF
 	;;
     configure)
   	echo "Creating /var/lib/sourceforge/bind/dns.head"
+	domain_name=$(perl -e'require "/etc/sourceforge/local.pl"; print "$domain_name\n";')
+	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
   	serial=`date '+%Y%m%d'`01
   	# cvs_host lists_host are useless for now
   	for i in domain_name ip_address serial ; do
