@@ -77,7 +77,6 @@ fi
 %doc README
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/config.php
 %{pluginlibdir}/include
-%{pluginlibdir}/rpm-specific
 
 %changelog
 * Sun Mar 05 2005 Guillaume Smet <guillaume-gforge@smet.org>
