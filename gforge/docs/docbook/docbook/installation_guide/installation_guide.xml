@@ -169,7 +169,7 @@ AddModule mod_php.c
 </Files>
 ]]></programlisting>
 									<para>
-										The LimitRequestBody directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size >512Kb. With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the upload_max_filesize directive in php.conf.
+													The LimitRequestBody directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size >512Kb. With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the upload_max_filesize directive in php.ini.
 									</para>
 								</listitem>
 								<listitem>
