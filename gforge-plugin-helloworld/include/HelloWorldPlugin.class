@@ -16,7 +16,7 @@ class HelloWorldPlugin extends Plugin {
 			} else {
 				$text .= ' [off]' ;
 			}
-			echo $HTML->PrintSubMenu (array ($text),
+			echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId()));
 		} elseif ($hookname == "blahblahblah") {
 			// ...

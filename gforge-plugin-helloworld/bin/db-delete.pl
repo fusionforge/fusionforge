@@ -28,8 +28,8 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/sourceforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -87,7 +87,7 @@ eval {
 
 
     debug "It seems your database deletion went well and smoothly.  That's cool." ;
-    debug "Please enjoy using Debian Sourceforge." ;
+    debug "Please enjoy using Debian GForge." ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.

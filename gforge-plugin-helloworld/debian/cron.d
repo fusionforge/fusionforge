@@ -1,1 +1,1 @@
-0 0 * * * sourceforge [ -x /usr/lib/sourceforge/plugins/helloworld/bin/sayhello ] && /usr/lib/sourceforge/plugins/helloworld/bin/sayhello > /dev/null 2>&1
+0 0 * * * gforge [ -x /usr/lib/gforge/plugins/helloworld/bin/sayhello ] && /usr/lib/gforge/plugins/helloworld/bin/sayhello > /dev/null 2>&1

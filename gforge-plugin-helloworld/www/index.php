@@ -21,14 +21,14 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	$user_name = $user->getRealName();
 
 	if ($user->usesPlugin("helloworld")) {
-		print $HTML->box1_top("$user_name says Hello!");
+		print $HTML->boxTop("$user_name says Hello!");
 	} else {
-		print $HTML->box1_top("$user_name does not say Hello...");
+		print $HTML->boxTop("$user_name does not say Hello...");
 	}
 	print '<A HREF="toggle.php?user_id='.$user_id.'">Toggle!</A>' ;
 	print "This is the helloworld plugin.  I hope you enjoy it." ;
 	print '<A HREF="/my/">Back to My Peronal Page.</A>' ;
-	print $HTML->box1_bottom();
+	print $HTML->boxBottom();
 }
 
 // Local Variables:

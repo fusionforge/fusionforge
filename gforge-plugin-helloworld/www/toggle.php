@@ -21,21 +21,21 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	$user_name = $user->getRealName();
 
 	if ($user->usesPlugin("helloworld")) {
-		print $HTML->box1_top("$user_name says Hello!");
+		print $HTML->boxTop("$user_name says Hello!");
 	} else {
-		print $HTML->box1_top("$user_name does not say Hello...");
+		print $HTML->boxTop("$user_name does not say Hello...");
 	}
 	print "And now, I'm toggling the use of the Hello World plugin...\n" ;
 	$user->setPluginUse("helloworld", !$user->usesPlugin("helloworld")) ;
 	print "done.  Let's try it out.\n" ;
 
 	if ($user->usesPlugin("helloworld")) {
-		print $HTML->box1_top("$user_name now says Hello!");
+		print $HTML->boxTop("$user_name now says Hello!");
 	} else {
-		print $HTML->box1_top("$user_name now does not say Hello...");
+		print $HTML->boxTop("$user_name now does not say Hello...");
 	}
 	print '<A HREF="index.php?user_id='.$user_id.'">Back to index.</A>' ;
-	print $HTML->box1_bottom();
+	print $HTML->boxBottom();
 }
 
 // Local Variables:

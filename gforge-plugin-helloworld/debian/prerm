@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for sourceforge-plugin-helloworld
+# prerm script for gforge-plugin-helloworld
 #
 # see: dh_installdeb(1)
 
@@ -19,9 +19,9 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-	/usr/lib/sourceforge/bin/sf-unregister-plugin helloworld
+	/usr/lib/gforge/bin/sf-unregister-plugin helloworld
 	invoke-rc.d apache reload
-	/usr/lib/sourceforge/plugins/helloworld/bin/db-delete.pl
+	/usr/lib/gforge/plugins/helloworld/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

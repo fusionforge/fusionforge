@@ -1,5 +1,5 @@
 #! /bin/sh
-# preinst script for sourceforge-plugin-helloworld
+# preinst script for gforge-plugin-helloworld
 #
 # see: dh_installdeb(1)
 
@@ -20,8 +20,8 @@ case "$1" in
 #        if [ "$1" = "upgrade" ]
 #        then
 #            start-stop-daemon --stop --quiet --oknodo  \
-#                --pidfile /var/run/sourceforge-plugin-helloworld.pid  \
-#                --exec /usr/sbin/sourceforge-plugin-helloworld 2>/dev/null || true
+#                --pidfile /var/run/gforge-plugin-helloworld.pid  \
+#                --exec /usr/sbin/gforge-plugin-helloworld 2>/dev/null || true
 #        fi
     ;;
 

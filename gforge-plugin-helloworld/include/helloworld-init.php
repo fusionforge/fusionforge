@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/usr/lib/sourceforge/plugins/helloworld/include/HelloWorldPlugin.class') ;
+require_once ('/usr/lib/gforge/plugins/helloworld/include/HelloWorldPlugin.class') ;
 
 $HelloWorldPluginObject = new HelloWorldPlugin ;
 

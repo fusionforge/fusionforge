@@ -28,8 +28,8 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/sourceforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -50,7 +50,7 @@ eval {
     $version = &get_db_version ;
     $target = "0.1" ;
     if (is_lesser $version, $target) {
-	my @filelist = ( "/usr/lib/sourceforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
+	my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
 	
 	foreach my $file (@filelist) {
 	    debug "Processing $file" ;
@@ -76,7 +76,7 @@ eval {
     if (is_lesser $version, $target) {
 	debug "Adding local data." ;
 	
-	do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
+	do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 	
 	my $ip_address = qx/host $domain_name | awk '{print \$3}'/ ;
 	
@@ -99,7 +99,7 @@ eval {
     }
 
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
-    debug "Please enjoy using Debian Sourceforge." ;
+    debug "Please enjoy using Debian GForge." ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.

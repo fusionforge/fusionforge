@@ -2,8 +2,8 @@
 
 my $world ;
 
-do "/etc/sourceforge/plugins/helloworld/world.conf"
-    or die "Cannot read /etc/sourceforge/plugins/helloworld/world.conf" ;
+do "/etc/gforge/plugins/helloworld/world.conf"
+    or die "Cannot read /etc/gforge/plugins/helloworld/world.conf" ;
 
 print STDOUT "Hello $world on STDOUT!\n" ;
 print STDERR "Hello $world on STDERR!\n" ;

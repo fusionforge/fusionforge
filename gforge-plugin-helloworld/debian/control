@@ -1,13 +1,13 @@
-Source: sourceforge-plugin-helloworld
+Source: gforge-plugin-helloworld
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Build-Depends-Indep: debhelper (>> 4.0.0)
 Standards-Version: 3.5.8
 
-Package: sourceforge-plugin-helloworld
+Package: gforge-plugin-helloworld
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, sourceforge-web-apache | sourceforge-web
-Description: The Hello World plugin for Sourceforge
- This is intended as an example for developers of Sourceforge plugins,
- as well as an experimental area for the Sourceforge plugin subsystem.
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web
+Description: The Hello World plugin for GForge
+ This is intended as an example for developers of GForge plugins,
+ as well as an experimental area for the GForge plugin subsystem.

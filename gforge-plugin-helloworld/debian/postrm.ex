@@ -1,5 +1,5 @@
 #! /bin/sh
-# postrm script for sourceforge-plugin-helloworld
+# postrm script for gforge-plugin-helloworld
 #
 # see: dh_installdeb(1)
 

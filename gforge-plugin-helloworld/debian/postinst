@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for sourceforge-plugin-helloworld
+# postinst script for gforge-plugin-helloworld
 #
 # see: dh_installdeb(1)
 
@@ -25,8 +25,8 @@ set -e
 
 case "$1" in
     configure)
-	/usr/lib/sourceforge/plugins/helloworld/bin/db-upgrade.pl
-	/usr/lib/sourceforge/bin/sf-register-plugin helloworld "Hello world"
+	/usr/lib/gforge/plugins/helloworld/bin/db-upgrade.pl
+	/usr/lib/gforge/bin/register-plugin helloworld "Hello world"
 	invoke-rc.d apache reload
     ;;
 
