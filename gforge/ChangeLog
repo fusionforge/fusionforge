@@ -1,5 +1,8 @@
 2003-09-21  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/account/editsshkeys.php: Mentioned the delay in updating the
+	authorized_keys file.
+
 	* www/include/languages/Base.tab and other *.tab files: Fixed a
 	few strings appearing in the project registration pages.
 

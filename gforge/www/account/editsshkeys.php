@@ -37,6 +37,8 @@ if ($submit) {
 	To avoid having to type your password every time for your CVS/SSH
 	developer account, you may upload your public key(s) here and they
 	will be placed on the CVS server in your ~/.ssh/authorized_keys file.
+        This is done by a cron job, so it may not happen immediately.  Please allow
+        for a one hour delay.
 	</p>
 	<p>
 	To generate a public key, run the program 'ssh-keygen' (you can use
