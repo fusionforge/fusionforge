@@ -1,64 +1,47 @@
-<?php   
-/**
- * Base theme class.
- *
- * SourceForge: Breaking Down the Barriers to Open Source Development
- * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
- *
- * @version   $Id$
- */
+<?php
 
-class Theme extends Layout {
+//
+// Copyright 1999-2000 (c) The SourceForge Crew
+//
+//  This is a modified version made by the Savannah Project
+//  Copyright 2000-2001 (c) Free Software Foundation
+//
+//  Further modified by rts for GForge.
+//  Copyright 2003 (c) GForge Development Team.
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+//
+// http://sourceforge.net
+//
+// $Id$
 
-	/**
-	 * Theme() - Constructor
-	 */
+// Base class for all Savannah themes.
+require_once('www/themes/savannah/SavannahTheme.class');
+
+class Theme extends SavannahTheme {
+
 	function Theme() {
 		// Parent constructor
-		$this->Layout();
+		$this->SavannahTheme();
 
 		// The root location for images
-		$this->imgroot = 'themes/savannah/images/';
+		$this->imgroot = "/themes/savannah/images/";
 
-		// The content background color
-		//$this->COLOR_CONTENT_BACK= '#FFFFFF';
-		$this->COLOR_CONTENT_BACK= '#EAC164';
-
-		// The background color
-		$this->COLOR_BACK= '#FFFFFF';
-
-		// The primary light background color
-		//$this->COLOR_LTBACK1= '#EAECEF';
-		$this->COLOR_LTBACK1= '#FFF4A8';
-
-		// The secondary light background color
-		//$this->COLOR_LTBACK2= '#FAFAFA';
-		$this->COLOR_LTBACK2= '#FFF4A8';
-
-		// The HTML box title color
-		$this->COLOR_HTMLBOX_TITLE = '#DAD5D7';
-
-		// The HTML box background color
-		//$this->COLOR_HTMLBOX_BACK = '#EAECEF';
-		$this->COLOR_HTMLBOX_BACK = '#FFF4A8';
-
-		// Font Face Constants
-		// The content font
-		$this->FONT_CONTENT = 'Helvetica';
-		// The HTML box title font
-		$this->FONT_HTMLBOX_TITLE = 'Helvetica';
-		// The HTML box title font color
-		$this->FONTCOLOR_HTMLBOX_TITLE = '#333333';
-		// The content font color
-		$this->FONTCOLOR_CONTENT = '#333333';
-		//The smaller font size
-		$this->FONTSIZE_SMALLER='x-small';
-		//The smallest font size
-		$this->FONTSIZE_SMALLEST='xx-small';
-		//The HTML box title font size
-		$this->FONTSIZE_HTMLBOX_TITLE = 'small';
-
+		// Stylesheet for this theme.
+		$this->stylesheet = "/themes/savannah/debiansf.css";
 	}
 }
 ?>
