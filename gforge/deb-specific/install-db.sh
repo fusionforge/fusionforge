@@ -5,6 +5,12 @@
 # Configure postgresql database for GForge
 # Roland Mas, gforge
 
+# Simple function to know if a db exists
+exist_db(){
+	export db_name=$1
+	su -s /bin/sh postgres -c "psql $1 >/dev/null 2>&1 </dev/null"
+}
+
 set -e
 
 if [ $(id -u) != 0 ] ; then
@@ -182,23 +188,25 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
-	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    || grep -q "ERROR: .* database \"$db_name\" already exists" $tmp2 ; then
-	    # Creation OK or database already existing -- no problem here
-	    echo -n ""
-	    rm -f $tmp1 $tmp2
-	else
-	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
-	    echo "Maybe a problem in your PostgreSQL configuration?"
-	    echo "Please report a bug to the Debian bug tracking system"
-	    echo "Please include the following output:"
-	    echo "createdb's STDOUT:"
-	    cat $tmp1
-	    echo "createdb's STDERR:"
-	    cat $tmp2
-	    rm -f $tmp1 $tmp2
-	    exit 1
+	if ! exist_db $db_name ; then
+		if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
+	    	&& [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
+	    	; then
+	    	# Creation OK 
+	    	echo -n ""
+	    	rm -f $tmp1 $tmp2
+		else
+	    	echo "Cannot create PostgreSQL database...  This shouldn't have happened."
+	    	echo "Maybe a problem in your PostgreSQL configuration?"
+	    	echo "Please report a bug to the Debian bug tracking system"
+	    	echo "Please include the following output:"
+	    	echo "createdb's STDOUT:"
+	    	cat $tmp1
+	    	echo "createdb's STDERR:"
+	    	cat $tmp2
+	    	rm -f $tmp1 $tmp2
+	    	exit 1
+		fi
 	fi
 
 	pattern=$(basename $0).XXXXXX
