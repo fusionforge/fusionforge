@@ -1,0 +1,98 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=4
+
+
+export PLUGIN=eirc
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# Add here commands to configure the package.
+	tar xvzf EIRC-1.0.2.tar.gz EIRC-1.0.2/EIRC-gfx.jar EIRC-1.0.2/EIRC.jar
+	touch configure-stamp
+
+
+build: build-stamp
+
+build-stamp: configure-stamp
+	dh_testdir
+
+	touch build-stamp
+
+DESTDIR=$(CURDIR)/debian/gforge-plugin-$(PLUGIN)
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	rm -f $(CURDIR)/EIRC-1.0.2/*.jar
+	[ -d $(CURDIR)/EIRC-1.0.2 ] && rmdir $(CURDIR)/EIRC-1.0.2 || true
+	rm -f $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/*.jar
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
+	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
+	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+	# cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
+	cp -r etc/* $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/
+	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
+	cp $(CURDIR)/EIRC-1.0.2/*.jar $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
+	install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.conf.d/50$(PLUGIN)
+	# install -m 0600 httpd.secrets $(DESTDIR)/etc/gforge/httpd.secrets.d/50$(PLUGIN)
+	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
+	find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+#	dh_installdebconf
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+	dh_installcron
+	dh_installman
+	dh_installinfo
+#	dh_undocumented
+	dh_installchangelogs 
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_makeshlibs
+	dh_installdeb
+#	dh_perl
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

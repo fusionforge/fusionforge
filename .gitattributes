@@ -1,4 +1,5 @@
 * text=auto !eol
+gforge-plugin-eirc/EIRC-1.0.2.tar.gz -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
