@@ -47,6 +47,7 @@ class Layout extends Error {
 	//Define all the icons for this theme
 	var $icons = array(
 		'Summary' => '/images/ic/anvil24.png',
+		'Admin' => '/images/ic/anvil24.png',
 		'Homepage' => '/images/ic/home.png',
 		'Forums' => '/images/ic/notes.png',
 		'Bugs' => '/images/ic/bug.png',
@@ -122,7 +123,7 @@ class Layout extends Error {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		}
 		$return = '<TABLE cellspacing="1" cellpadding="5" width="100%" border="0" bgcolor="'.$this->COLOR_HTMLBOX_BACK.'">
-			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
+			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="http:'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
 				<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
 			</TR>';
 
@@ -332,7 +333,7 @@ osdn_print_navbar();
 	<tr>
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
-		<td><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
+		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
 	</tr>
 	<tr>
 		<td width="17" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>leftbar1.png" align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
