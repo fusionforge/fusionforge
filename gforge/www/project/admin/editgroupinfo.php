@@ -36,7 +36,7 @@ if ($submit) {
 		$use_forum,
 		$use_pm,
 		1,
-		$use_cvs,
+		$use_scm,
 		$use_news,
 		$use_docman,
 		$new_doc_address,
@@ -189,10 +189,10 @@ if($sys_use_scm) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesCVS()); ?> ><br />
+ <input type="CHECKBOX" name="use_scm" value="1" <?php echo c($group->usesCVS()); ?> ><br />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_cvs') ?></strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>
 </td>
 </tr>
 

@@ -1423,7 +1423,7 @@ project_admin_editgroupinfo	new_doc_info	Om du så önskar, kan du ange standard
 project_admin_editgroupinfo	send_on_all_updates	(skicka vid alla uppdateringar)
 project_admin_editgroupinfo	short_description	Kort beskrivning (255 tecken Max, HTML kommer att tas bort från denna beskrivning)
 project_admin_editgroupinfo	title	Redigera gruppinfo
-project_admin_editgroupinfo	use_cvs	Använd CVS
+project_admin_editgroupinfo	use_scm	Använd SCM
 project_admin_editgroupinfo	use_docman	Använd dokumentation
 project_admin_editgroupinfo	use_forums	Använd forum
 project_admin_editgroupinfo	use_frs	Använd filutgåvosystemet

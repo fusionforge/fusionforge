@@ -1025,7 +1025,7 @@ project_admin_database	operations	Operationen
 project_admin_database	state	Status
 project_admin_database	title	Datenbank Information
 project_admin_editgroupinfo	active_features	Aktive Features
-project_admin_editgroupinfo	use_cvs	Benutze CVS
+project_admin_editgroupinfo	use_scm	Benutze SCM
 project_admin_editgroupinfo	use_docman	Benutze Doc Mgr
 project_admin_editgroupinfo	use_forums	Benutze Foren
 project_admin_editgroupinfo	use_frs	Benutze Datei Release System

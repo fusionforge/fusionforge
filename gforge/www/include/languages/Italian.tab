@@ -1423,7 +1423,7 @@ project_admin_editgroupinfo	new_doc_info	È possibile inserire un indirizzo emai
 project_admin_editgroupinfo	send_on_all_updates	(invia per tutti gli aggiornamenti)
 project_admin_editgroupinfo	short_description	Descrizione breve (al massimo 255 caratteri, verranno eliminate istruzioni HTML presenti).
 project_admin_editgroupinfo	title	Modifica informazioni progetto
-project_admin_editgroupinfo	use_cvs	Usa CVS
+project_admin_editgroupinfo	use_scm	Usa SCM
 project_admin_editgroupinfo	use_docman	Usa Gestore documentazione
 project_admin_editgroupinfo	use_forums	Usa Forum
 project_admin_editgroupinfo	use_frs	Usa il sistema per i rilasci di file

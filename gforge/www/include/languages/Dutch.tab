@@ -1396,7 +1396,7 @@ project_admin_database	new_password	Nieuw Wachtwoord
 #project_admin_editgroupinfo	send_on_all_updates	(send on all updates)
 #project_admin_editgroupinfo	short_description	Short Description (255 Character Max, HTML will be stripped from this description)
 #project_admin_editgroupinfo	title	Edit Group Info
-#project_admin_editgroupinfo	use_cvs	Use CVS
+#project_admin_editgroupinfo	use_scm	Use SCM
 #project_admin_editgroupinfo	use_docman	Use Doc Mgr
 #project_admin_editgroupinfo	use_forums	Use Forums
 #project_admin_editgroupinfo	use_frs	Use File Release System

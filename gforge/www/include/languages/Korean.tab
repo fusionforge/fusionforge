@@ -1433,7 +1433,7 @@ project_admin_editgroupinfo	section	프로젝트 $1 - 관리
 project_admin_editgroupinfo	send_on_all_updates	(갱신될 때마다 이메일 보냄)
 project_admin_editgroupinfo	short_description	간략한 설명(최대 255자. HTML태그는 허용되지 않습니다.)
 project_admin_editgroupinfo	title	공개 정보 편집하기
-project_admin_editgroupinfo	use_cvs	CVS 사용
+project_admin_editgroupinfo	use_scm	SCM 사용
 project_admin_editgroupinfo	use_docman	문서 관리자 사용
 project_admin_editgroupinfo	use_forums	게시판 사용
 project_admin_editgroupinfo	use_frs	파일 릴리즈 시스템 사용

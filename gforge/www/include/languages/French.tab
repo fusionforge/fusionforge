@@ -1511,7 +1511,7 @@ project_admin_editgroupinfo	new_doc_info	Si vous le désirez, vous pouvez fourni
 project_admin_editgroupinfo	send_on_all_updates	(envoi pour toutes les mises à jour)
 project_admin_editgroupinfo	short_description	Courte description (255 caractères maximum)
 project_admin_editgroupinfo	title	Édition des infos publiques
-project_admin_editgroupinfo	use_cvs	CVS
+project_admin_editgroupinfo	use_scm	SCM
 project_admin_editgroupinfo	use_docman	Gestionnaire de documents
 project_admin_editgroupinfo	use_forums	Forums
 project_admin_editgroupinfo	use_frs	Publication de fichiers (avec version)

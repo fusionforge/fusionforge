@@ -1273,7 +1273,7 @@ project_admin_editgroupinfo	new_doc	Novos Documentos Submetidos
 project_admin_editgroupinfo	new_doc_info	Se você quiser, pode fornecer um e-mail default para o qual serão enviadas as novas submissões
 project_admin_editgroupinfo	short_description	Descrição Curta (255 Caracteres no Máximo, HTML não pode ser usado nesta descrição)
 project_admin_editgroupinfo	title	Editar Informações de Grupo
-project_admin_editgroupinfo	use_cvs	Use CVS
+project_admin_editgroupinfo	use_scm	Use SCM
 project_admin_editgroupinfo	use_docman	Use Doc Mgr
 project_admin_editgroupinfo	use_forums	Use Forums
 project_admin_editgroupinfo	use_frs	Use Sistema de Release de Arquivos

@@ -1502,7 +1502,7 @@ project_admin_editgroupinfo	new_doc_info	Nahi baduzu, lehentasunezko posta kontu
 project_admin_editgroupinfo	send_on_all_updates	(eguneratze guztietan bidali)
 project_admin_editgroupinfo	short_description	Deskribapen laburra (gehienez 255 karaktere, HTML kodea badago deskribapenetik ihes egingo du)
 project_admin_editgroupinfo	title	Informazio publikoa argitaratu
-project_admin_editgroupinfo	use_cvs	CVS-a erabili
+project_admin_editgroupinfo	use_scm	SCM-a erabili
 project_admin_editgroupinfo	use_docman	Dokumentazio kudeatzailea erabili
 project_admin_editgroupinfo	use_forums	Foroak erabili
 project_admin_editgroupinfo	use_frs	Fitxeroak argitaratzeko sistema erabili
