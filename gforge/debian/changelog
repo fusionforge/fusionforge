@@ -1,3 +1,10 @@
+gforge (3.1-26) unstable; urgency=high
+
+  * Disabled controller.php and controlleroo.php because of security
+    risks, hence the high urgency upload (closes: #291718).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 23 Jan 2005 12:59:25 +0100
+
 gforge (3.1-25) unstable; urgency=low
 
   * Moved db_stop back a bit later in gforge-web-apache.postinst, because
