@@ -124,7 +124,6 @@ while ($l = <>) { print $l; };
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
 	perl -e '
-require ("/etc/sourceforge/local.pl") ;
 while (($l = <>) !~ /^\s*local_domains/) {
   print $l unless ($l =~ /\s*SOURCEFORGE_DOMAINS=/) ;
 };
@@ -137,7 +136,6 @@ while ($l = <>) { print $l; };
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
-require ("/etc/sourceforge/local.pl") ;
 while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
 print $l ;
 while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
