@@ -155,8 +155,7 @@ echo license_selectbox('license',$license);
 		echo '<input type=\'hidden\' name=\'scm\' value=\''. $scm_plugins[0].'\'/>';
 	} else {
 		$checked=true;
-		foreach($scm_plugins as $scm)
-		{
+		foreach($scm_plugins as $scm) {
 			$myPlugin= plugin_get_object($scm);
 			echo '<p><input type=\'radio\' name=\'scm\' ';
 			if ($checked) {
