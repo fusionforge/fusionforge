@@ -75,7 +75,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 }
 
 //
-// LDAP configurataion
+// LDAP configuration
 //
 // enable ldap use altogether
 $sys_use_ldap=1;
