@@ -30,12 +30,16 @@ $sys_db_row_pointer=array(); //current row for each result set
  */
 function db_connect() {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,
-		$sys_dbname,$sys_db_use_replication,$sys_dbreaddb,$sys_dbreadhost;
+		$sys_dbname,$sys_db_use_replication,$sys_dbport,$sys_dbreaddb,$sys_dbreadhost;
+	$db_port=$sys_dbport;
+	if ($db_port==""){
+		$db_port="5432";
+	}
 
 	//
 	//	Connect to primary database
 	//
-	$conn = @pg_pconnect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
+	$conn = @pg_pconnect("user=$sys_dbuser port=$db_port dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
 
 	//
 	//	If any replication is configured, connect
