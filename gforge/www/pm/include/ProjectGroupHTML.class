@@ -47,11 +47,30 @@ function pm_header($params) {
 	echo "<p><strong>";
 
 	if ($group_project_id) {
+		$gantt_height=680;
+		$gantt_width=820;
+		$gantt_url="/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
+		$gantt_title=$Language->getText('pm_include_grouphtml','gantt_chart');
+		$gantt_winopt='scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
+
+		echo  '<script language="JavaScript" type="text/javascript">' 
+			.'<!-- ' . "\n"
+			.'function gantt_window() {'
+			.'GanttWin = window.open(\''
+			. $gantt_url
+			. '\', \''
+			. $gantt_title
+			. '\', \''
+			. $gantt_winopt . '\');'
+			. '}' . "\n"
+			. ' -->'
+			. '</script>';
+
 		if (session_loggedin()) {
 			echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
 		}
 		echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=browse\">".$Language->getText('pm_include_grouphtml','browse_task')."</a> | ";
-		echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=ganttpage\" target=\"_blank\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
+		echo "<a href=\"javascript:gantt_window()\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
 	}
 	echo '
 		<a href="/pm/reporting/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','reporting').'</a> |
