@@ -1,7 +1,0 @@
-# !/bin/sh
-if [ $# -eq 0 ] 
-then
-	grep '{.*}' * | grep -v LogFormat | sed 's/}.*{/}\n{/g' | sed 's/.*\({.*}\).*/\1/g' | sort -u
-else
-	grep '{.*}' $@ | grep -v LogFormat | sed 's/}.*{/}\n{/g' | sed 's/.*\({.*}\).*/\1/g' | sort -u
-fi

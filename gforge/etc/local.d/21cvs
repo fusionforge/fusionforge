@@ -1,5 +1,0 @@
-//
-// CVS configuration
-//
-// Path to CVS tarballs directory
-$sys_cvs_tarballs_path='{sys_cvs_tarballs_path}';
