@@ -1,3 +1,9 @@
+sourceforge (2.6-0+12+) unstable; urgency=low
+
+  * [Christian] Added a dump and restore option to install-db.sh
+
+ -- Christian Bayle <bayle@debian.org>  Fri, 28 Jun 2002 16:02:35 +0200
+
 sourceforge (2.6-0+12) unstable; urgency=low
 
   * [Roland] Added support for local overloading of the default

@@ -7,7 +7,12 @@
 
 set -e
 
-if [ $# != 1 ] 
+if [ $(id -u) != 0 ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1 $2"
+fi
+
+if [ $# = 0 ] 
     then 
     exec $0 default
 else
@@ -95,5 +100,38 @@ EOF
 	su -s /bin/sh postgres -c "dropuser sourceforge" 2>&1 > /dev/null || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
+	;;
+    dump)
+	if [ "x$2" != "x" ] ;then
+		DUMPFILE=$2
+	else
+		DUMPFILE=/var/lib/sourceforge/dumps/db_dump
+	fi
+	echo "Dumping in $DUMPFILE"
+	su -s /bin/sh sourceforge -c /usr/lib/postgresql/bin/pg_dump sourceforge > $DUMPFILE
+	;;
+    restore)
+	pattern=$(basename $0).XXXXXX
+	newpg=$(mktemp /tmp/$pattern)
+	echo "### Next line inserted by Sourceforge restore" > $newpg
+	echo "local all  trust" >> $newpg
+	#echo "host all 127.0.0.1 255.255.255.255 trust" >> $newpg
+	cat /etc/postgresql/pg_hba.conf >> $newpg
+	mv $newpg /etc/postgresql/pg_hba.conf
+	chmod 644 /etc/postgresql/pg_hba.conf
+	/etc/init.d/postgresql restart
+	if [ "x$2" != "x" ] ;then
+		RESTFILE=$2
+	else
+		RESTFILE=/var/lib/sourceforge/dumps/db_dump
+	fi
+	echo "Restoring $RESTFILE"
+	su -s /bin/sh postgres -c "dropdb sourceforge" || true
+	su -s /bin/sh postgres -c "createdb sourceforge"  || true
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE sourceforge"
+        perl -pi -e "s/### Next line inserted by Sourceforge restore\n//" /etc/postgresql/pg_hba.conf
+        perl -pi -e "s/local all  trust\n//" /etc/postgresql/pg_hba.conf
+        #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
+	/etc/init.d/postgresql restart
 	;;
 esac
