@@ -19,7 +19,10 @@
 #	* Translation and correction
 # 2002-04-10 Roland Mas <lolando@debian.org>
 #	* Translation from Base.tab
+# 2002-04-17 Roland Mas <lolando@debian.org>
+#	* Added about/about_blurb, plus a few minor fixes
 
+about	about_blurb	<h2>À propos de Sourceforge</h2>Ce site tourne avec Debian Sourceforge, un dérivatif du code sous lequel tourne <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  Les informations présentes sur cette page ne documentent que Debian Sourceforge.  Veuillez vous référer à <a href="http://www.sourceforge.net/">Sourceforge.net</a> pour obtenir des informations sur leur code.<br><br><b>Auteurs</b><br><a href="staff.php">L'équipe</a> Sourceforge a travaillé dur pour que le projet Sourceforge aboutisse.  Si vous voulez savoir qui est derrière ce projet, en voici l'occasion.<br><br><b>Remerciements</b><br>Nous devons beaucoup aux auteurs du code qui permet à Sourceforge de tourner, mais nous aimerions également étendre notre gratitude aux personnes et organisations listées <a href="thanks.php">ici</a> pour l'aide qu'elles nous ont apportée.<br><br><b>Pour plus d'information</b><br>Si vous avez d'autres questions, contactez la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">liste de diffusion des utilisateurs de Debian Sourceforge</a>.  Vous pouvez également jeter un oeil sur la <a href="http://savannah.gnu.org/projects/debian-sf/">page du projet</a> Debian Sourceforge sur Savannah (un autre dérivé de Sourceforge, hébergé par le projet GNU et la FSF).<br><br><b>Copyrights</b><br>Le code originel de Sourceforge a été écrit par la société VA Linux Systems (qui a depuis changé son nom en VA Software) et publié sous la licence publique générale (GPL) GNU.  Le copyright leur appartient donc en grande partie.<br>Le code qui permet de faire fonctionner ce site, en revanche, est Debian Sourceforge, une version modifiée pour fonctionner sur des systèmes Debian.  Les changements visibles sont principalement des corrections typographiques et des bugs, mais nous avons également développé un système d'installation: Debian Sourceforge est facile à installer, configurer et exploiter dès que vous avez un système Debian.  Debian Sourceforge a été réalisé par Christian Bayle et roland mas, avec diverses contributions ponctuelles apportées par diverses personnes.<br><br><b>Marques déposées et autres</b><br>VA Linux Systems et Sourceforge sont des marques de la société VA Linux Systems (actuellement VA Software).  Linux est une marque déposée de Linus Torvalds.  Les autres marques déposées et copyrights sont les propriétés de leurs propriétaires respectifs.  Le contenu appartenant à VA Linux Systems est copyright 1999-2001 VA Linux Systems, tous droits réservés.<br><br>
 about_foundries	about_blurb	Les Fonderies de Sourceforge sont des endroits dédiés aux développeurs pour qu'ils s'y regroupent, qu'ils puissent échanger leur expertise, des informations et des conseils, et plus généralement pour qu'ils puissent s'aider les uns les autres a développer de meilleurs logiciels plus efficacement (après tout, il s'agit ici de logiciel libre).<br>&nbsp;<br>Si vous voulez vous porter volontaire pour aider ou créer une Fonderie, ou si vous avez des suggestions, des idées, ou des récriminations, n'hésitez pas à <a href="/contact.php">contacter Sourceforge</a>.
 about_foundries	foundries_list	Voici la liste des fonderies du système.  Certaines sont plus avancées que d'autres.  Si vous voulez contribuer à l'une d'entre elles, contactez les administrateurs de cette fonderie.
 account	title	Préférences de votre compte
@@ -104,6 +107,7 @@ frs	file_version	Version
 frs	latest_file_releases	Sorties récentes
 general	return	[Retour à Sourceforge]
 general	sitename	Sourceforge
+general	footer	Vous êtes sur Debian Sourceforge.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
 group	developer_info	Information sur un développeur
 group	developers	Développeurs
 group	long_bugs	Gestion des bogues
@@ -183,7 +187,7 @@ menu	top_projects	Meilleurs projets
 my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
 my	no_bookmarks	Vous n'avez pas encore de favoris
 my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>
-my	no_monitored_forums	<h3>>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant également un lien vers le message.<p>Vous pouvez déclencher la surveillance d'un forum en cliquant sur le lien adéquat dans un forum quelconque.<br>
+my	no_monitored_forums	<h3>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant également un lien vers le message.<p>Vous pouvez déclencher la surveillance d'un forum en cliquant sur le lien adéquat dans un forum quelconque.<br>
 my	no_open_tasks	Aucune tâche ne vous est assignée.
 my	no_projects	Vous ne faites partie d'aucun projet.
 my	no_tracker_items_assigned	Aucun objet de tracker ne vous est assigné.
@@ -339,7 +343,7 @@ survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
 survey_survey_resp	title	Réponse à un sondage
-thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
+thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements ::<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
 top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichés ici.
