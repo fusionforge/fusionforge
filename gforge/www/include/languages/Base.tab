@@ -789,6 +789,7 @@ pm	any	Any
 pm	tech_any	Any
 pm	admin	admin
 pm	cat_any	Any
+pm	cat_none	None
 pm	no_tasks_found	No Matching Tasks found
 pm	no_tasks_found_text	Add tasks using the link above
 pm_addtask	title	Add a new Task
