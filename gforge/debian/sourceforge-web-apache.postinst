@@ -30,8 +30,8 @@ case "$1" in
     	
         # Patch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh configure-files
-	[ -e /etc/apache/httpd.conf ] && propose_update /etc/apache/httpd.conf
-	[ -e /etc/apache-ssl/httpd.conf ] && propose_update /etc/apache-ssl/httpd.conf
+	[ -e /etc/apache/httpd.conf ] && propose_update_install /etc/apache/httpd.conf
+	[ -e /etc/apache-ssl/httpd.conf ] && propose_update_install /etc/apache-ssl/httpd.conf
 	propose_update_install /etc/php4/apache/php.ini
 	propose_update_install /etc/php4/cgi/php.ini
 
