@@ -196,12 +196,14 @@ admin	are_you_sure_delete	Etes vous sûr de vouloir effacer ceci ?
 admin	cancel	Annuler
 admin	delete	Supprimer
 admin	edit	Éditer
+admin	home_box	Serveur shell :
 admin	http_domain	Domaine HTTP :
 admin	license	Licence :
 admin	license_other	Autre licence :
 admin	na	N/A
 admin	other	Autre
 admin	reject	Rejeter
+admin	scm_box	Serveur de sources :
 admin	site_admin_home	Accueil de l'administration
 admin	submit_changes	Soumettre les modifications
 admin	submit_new	Proposer une annonce

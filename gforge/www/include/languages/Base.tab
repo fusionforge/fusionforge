@@ -181,11 +181,13 @@ admin	cancel	Cancel
 admin	delete	Delete
 admin	edit	Edit
 admin	http_domain	HTTP Domain:
+admin	home_box	Home Box:
 admin	license	License:
 admin	license_other	License Other:
 admin	na	N/A
 admin	other	Other
 admin	reject	Reject
+admin	scm_box	SCM Box:
 admin	site_admin_home	Site Admin Home
 admin	submit_changes	Submit Changes
 admin	submit_new	Submit New
