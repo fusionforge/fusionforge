@@ -1345,6 +1345,9 @@ pm_index	short_name	Subproject Name
 pm_index	open	Open
 pm_index	total	Total
 pm_index	description	Description
+pm_uploadcsv	explain	This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.
+pm_uploadcsv	choose_file	Choose a file in the proper .csv format for uploading.
+pm_uploadcsv	title	Upload data into the task manager.
 pm	admin	admin
 pm	any	Any
 pm	assigned_to	Assigned To
@@ -1457,6 +1460,9 @@ pm_ganttpage	resolution	Resolution
 pm_ganttpage	size	Size
 pm_ganttpage	sort_on	Sort On
 pm_ganttpage	weeks	Weeks
+pm_include_grouphtml	downloadcsv	Download as CSV
+pm_include_grouphtml	uploadcsv	Upload CSV
+pm_include_grouphtml	add_task	Add Task
 pm_include_grouphtml	add_task	Add Task
 pm_include_grouphtml	admin	Admin
 pm_include_grouphtml	browse_task	Browse Tasks
