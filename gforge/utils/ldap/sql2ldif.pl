@@ -144,7 +144,7 @@ objectClass: organizationalUnit
 cn: $listname
 ou: mailingList
 debGforgeListPostAddress: \"|/var/lib/mailman/mail/mailman post $listname\"
-debGforgeListOwnerAddress: \"|/var/lib/mailman/mail/mailman mailowner $listname\"
+debGforgeListOwnerAddress: \"|/var/lib/mailman/mail/mailman owner $listname\"
 debGforgeListRequestAddress: \"|/var/lib/mailman/mail/mailman mailcmd $listname\"
 debGforgeListAdminAddress: \"|/var/lib/mailman/mail/mailman admin $listname\"
 debGforgeListBouncesAddress: \"|/var/lib/mailman/mail/mailman bounces $listname\"
