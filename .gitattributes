@@ -130,6 +130,10 @@ gforge/www/themes/gforge/images/ic/trash-x.png -text
 gforge/www/themes/gforge/images/ic/trash.png -text
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
+gforge/www/themes/gforge/images/it_login.png -text
+gforge/www/themes/gforge/images/it_logout.png -text
+gforge/www/themes/gforge/images/it_myaccount.png -text
+gforge/www/themes/gforge/images/it_newaccount.png -text
 gforge/www/themes/gforge/images/login.png svneol=native#unset
 gforge/www/themes/gforge/images/logo.png -text
 gforge/www/themes/gforge/images/logout.png svneol=native#unset
