@@ -668,6 +668,8 @@ class ArtifactType extends Error {
 
 		$email_all = ((!$email_all) ? 0 : $email_all); 
 		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution); 
+		$allow_anon = ((!$allow_anon) ? 0 : $allow_anon); 
+		$is_public = ((!$is_public) ? 0 : $is_public); 
 
 		$sql="UPDATE artifact_group_list SET 
 			name='$name',
