@@ -38,7 +38,7 @@ if( $submit ) {
 		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
-	} else 	if (!$userfile) {
+	} else 	if (!$userfile || $userfile == 'none') {
 		$feedback .= $Language->getText('project_admin_qrs','required_file');
 	} else 	if (!$type_id || $type_id == "100") {
 		$feedback .= $Language->getText('project_admin_qrs','required_file_type');
@@ -88,9 +88,9 @@ if( $submit ) {
 							exit_error('Error',$frsf->getErrorMessage());
 						}
 						$frsr->sendNotice();
-						$feedback=$Language->getText('project_admin_qrs','file_released');
+						$feedback .= $Language->getText('project_admin_qrs','file_released');
 
-						project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						//project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
@@ -105,11 +105,14 @@ if( $submit ) {
 				}
 
 			} else {
-
+				exit_error('Error','Could Not Upload User File: '.$userfile);
 			}
+
 		}
+
 	}
-} else {
+
+}
 
 project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 
@@ -149,7 +152,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','release_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-			<input type="text" name="release_name" />
+			<input type="text" name="release_name" value="<?php echo $release_name ?>" />
 		</td>
 	</tr>
 	<tr>
@@ -157,7 +160,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','release_date') ?>:</h4>
 		</td>
 		<td>
-			<input type="text" name="release_date" value="<?php echo date('Y-m-d-G-i-s'); ?>" size="20" maxlength="20" />
+			<input type="text" name="release_date" value="<?php echo date('Y-m-d'); ?>" size="10" maxlength="10" />
 		</td>
 	</tr>
 	<tr>
@@ -175,7 +178,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 		</td>
 		<td>
 <?php
-	print frs_show_filetype_popup ($name='type_id') . "<br />";
+	print frs_show_filetype_popup ('type_id',$type_id) . "<br />";
 ?>
 		</td>
 	</tr>
@@ -185,7 +188,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 		</td>
 		<td>
 <?php
-	print frs_show_processor_popup ($name='processor_id');
+	print frs_show_processor_popup ('processor_id',$processor_id);
 ?>		
 		</td>
 	</tr>
@@ -194,7 +197,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','release_notes') ?>:</h4>
 		</td>
 		<td>
-			<textarea name="release_notes" rows="7" cols="50"></textarea>
+			<textarea name="release_notes" rows="7" cols="50"><?php echo $release_notes; ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -202,7 +205,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','changelog') ?>:</h4>
 		</td>
 		<td>
-			<textarea name="release_changes" rows="7" cols="50"></textarea>
+			<textarea name="release_changes" rows="7" cols="50"><?php echo $release_changes; ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -215,7 +218,6 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 </form>
 
 <?php
-}
 
 project_admin_footer(array());
 ?>

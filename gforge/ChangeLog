@@ -1,3 +1,13 @@
+2003-07-29 Christian Bayle	<bayle@debian.org>
+
+	* Don't allow to go in QRS if no package is defined or activ
+	in www/project/admin/editpackages.php
+	Before you could go to qrs.php with no package
+	defined, what was rather confusing, the only choice was to come back
+	on editpackages.php by a non obvious link.
+	* Some enhancement/correction when qrs.php fails (Try to keep as much 
+	as possible already given datas)
+
 2003-07-28 Tom Copeland  <tom@infoether.com>
 
 	* www/snippet/detail.php:

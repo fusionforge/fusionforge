@@ -68,10 +68,12 @@ if ($submit) {
 
 project_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
-?>
-<h3><?php echo $Language->getText('project_admin_editpackages','qrs') ?>:</h3>
-<?php
-echo $Language->getText('project_admin_editpackages','qrs_a_file', array('<a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">','</a>') ).'<br />';
+$res=db_query("SELECT status_id,package_id,name AS package_name FROM frs_package WHERE group_id='$group_id' AND status_id=1");
+$rows=db_numrows($res);
+if ($res && $rows > 0) {
+	echo '<h3>'.$Language->getText('project_admin_editpackages','qrs').'</h3>';
+	echo $Language->getText('project_admin_editpackages','qrs_a_file', array('<a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">','</a>') ).'<br />';
+}
 ?>
 <?php echo  $Language->getText('project_admin_editpackages','packages_info') ?>
 <p>
