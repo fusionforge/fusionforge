@@ -117,8 +117,8 @@ install: build
 	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	#
 	install -m 755 cronjobs/site_stats.php        $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/stats_site.inc        $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
-	install -m 755 cronjobs/stats_projects.inc    $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
+	install -m 644 cronjobs/stats_site.inc        $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
+	install -m 644 cronjobs/stats_projects.inc    $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
 	#
 	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
