@@ -44,5 +44,8 @@ web_only=true
 # Mailing-list creation
 55 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl
 
+# FTP update
+0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update
+
 # CVS/user/group update
 0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh

@@ -12,8 +12,8 @@ else
 	        su -c "$0 $target"
 	else
 		case "$target" in
-			default)
-				adduser --system --group --home $FTPROOT sfftp
+			default|configure)
+				adduser --quiet --system --group --home $FTPROOT sfftp
 				mkdir -p $FTPROOT/pub
 				cat >$FTPROOT/welcome.msg<<-FIN
 Welcome, archive user %U@%R !

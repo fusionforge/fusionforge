@@ -186,6 +186,9 @@ EOF
             # Setup our mail forwarding
 	    /usr/lib/sourceforge/bin/install-exim.sh configure # Not ready yet
 
+            # Setup our FTP
+	    /usr/lib/sourceforge/bin/install-ftp.sh configure 
+
 	    # Setup our CVS
 	    # Making user group and cvs update from database 
 	    /usr/lib/sourceforge/bin/update-user-group-cvs.sh

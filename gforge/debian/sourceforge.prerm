@@ -42,6 +42,9 @@ case "$1" in
                 perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf
         fi
 	
+        # FTP config removal
+	/usr/lib/sourceforge/bin/install-ftp.sh purge
+
         # DNS config removal
 	/usr/lib/sourceforge/bin/install-dns.sh purge
 
