@@ -16,20 +16,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 // get constants used for flags or status
 require('common/include/constants.php');
 
-// Defines all of the GForge hosts, databases, etc.
-// This needs to be loaded first because the lines below depend upon it.
-$sys_localinc=getenv('sys_localinc');
-if (is_file($sys_localinc)) {
-	require($sys_localinc);
-} else {
-	if (is_file('/etc/gforge/local.inc')) {
-		require ('/etc/gforge/local.inc');
-	} else {
-		if (is_file('etc/local.inc')) {
-			require('etc/local.inc');
-		}
-	}
-}
+require('local.inc');
 
 /*
 	redirect to proper hostname to get around certificate problem on IE 5

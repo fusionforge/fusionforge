@@ -267,9 +267,9 @@ if (count($reqs) < 1) {
 		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo $user->getRealName(); ?></td>
-		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?></td>
-			<td><input type="submit" name="acceptpending" value="<?php echo $Language->getText('project_admin','acceptpending') ?>" />
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>
+		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
+			<input type="submit" name="acceptpending" value="<?php echo $Language->getText('project_admin','acceptpending') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo $Language->getText('project_admin','rejectpending') ?>" /></td>
 			</tr></form>
 		

@@ -122,6 +122,10 @@ SELECT project_task_id, to_tsvector('default', coalesce(summary,'') ||'
 '|| coalesce(details,'')) AS vectors
 FROM project_task ORDER BY project_task_id;
 
+--
+--	TODO project_messages
+--
+
 CREATE INDEX project_task_idxFTI ON project_task_idx USING gist(vectors);
 
 INSERT INTO skills_data_idx (skills_data_id, vectors)
@@ -382,7 +386,7 @@ CREATE OR REPLACE FUNCTION artifact_search(text, int) RETURNS SETOF artifact_res
 	ORDER BY idx.total DESC, rank(ai.vectors, q) DESC'
 LANGUAGE 'SQL';
 
-CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS SETOF users_results AS '
+CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS SETOF doc_data_results AS '
 	DECLARE
 	data users_results;
 	BEGIN

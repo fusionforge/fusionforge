@@ -1876,7 +1876,7 @@ project_shownotes	section	Project: $1
 project_shownotes	title	File Release Notes and Changelog
 project_joinrequest	join_notice_subject	Request to Join Project $1
 project_joinrequest	request_link	Request to join
-project_joinrequest	join_notice_body	$1 has requested to join your project. You can approve this request on the <a href="http://$2/project/admin/?group_id=$3">project admin page</a>.
+project_joinrequest	join_notice_body	$1 has requested to join your project. \nYou can approve this request here: http://$2/project/admin/?group_id=$3 .
 project_joinrequest	submitted	Your request has been submitted.
 project_joinrequest	title	Request to join project
 project_joinrequest	joining	You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.

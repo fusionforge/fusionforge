@@ -20,7 +20,7 @@ if (!$no_gz_buffer) {
     ob_start("ob_gzhandler");
 }
 
-require_once('/etc/gforge/local.inc');
+require_once('local.inc');
 require('common/include/constants.php');
 require_once('common/include/database.php');
 require_once('common/include/session.php');
