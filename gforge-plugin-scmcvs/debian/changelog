@@ -1,6 +1,15 @@
+gforge-plugin-scmcvs (0.1-9) unstable; urgency=low
+
+  * Removed cvssh that collide with gforge version and is not really cvs
+    specific 
+  * Added CVS Tab using groupmenu_scm hook
+  * Make that the project cvs tab is well selected
+
+ -- Christian Bayle <bayle@debian.org>  Fri,  9 Jul 2004 15:22:33 +0200
+
 gforge-plugin-scmcvs (0.1-1) unstable; urgency=low
 
   * Initial packaging.
 
- -- Roland Mas <lolando@debian.org>  Sun, 16 May 2004 18:54:46 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri,  9 Jul 2004 12:11:49 +0200
 

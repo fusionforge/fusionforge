@@ -37,7 +37,7 @@ install: build
 	dh_installdirs
 
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/cvssh $(DESTDIR)/bin/
+	#ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/cvssh $(DESTDIR)/bin/
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
@@ -55,6 +55,8 @@ install: build
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	# find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	# clean CVS dir
+	find $(DESTDIR) -type d -name CVS | xargs rm -rf
 
 
 # Build architecture-independent files here.

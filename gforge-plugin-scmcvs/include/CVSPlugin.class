@@ -6,11 +6,13 @@ class CVSPlugin extends SCM {
 	function CVSPlugin () {
 		$this->SCM () ;
 		$this->name = "scmcvs";
+		$this->text = "CVS";
 		$this->hooks[] = "scm_page";
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "group_approved";
+		//$this->hooks[] = "groupmenu_scm";
 
                 require_once('/etc/gforge/plugins/scmcvs/config.php') ;
 		
@@ -40,6 +42,9 @@ class CVSPlugin extends SCM {
 			break;
 		case "group_approved":
 			$this->group_approved ($params) ;
+			break;
+		case "groupmenu_scm":
+			$this->display_groupmenu_scm ($params) ;
 			break;
 		default:
 			// Forgot something
@@ -185,6 +190,21 @@ if ($this->UsesAnonCVS ($group_id)) {
 		}
 		echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 		
+	}
+	function display_groupmenu_scm($params) {
+		$group_id = $params['group_id'] ;
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) 
+			return;
+		if ($project->isError())
+		        return;
+		if (!$project->isProject())
+		        return;
+		if ( $project->usesPlugin ( $this->name ) ) {
+	        	$params['DIRS'][]='/plugins/scmcvs/?group_id=' . $group_id;
+			$params['TITLES'][]=$this->text;
+			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+		}
 	}
 
 	function group_approved ($params) {
