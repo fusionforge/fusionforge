@@ -1,0 +1,12 @@
+diff -u gforge/db/20050130.sql gforge-rpm/db/20050130.sql
+--- gforge/db/20050130.sql	2005-01-30 18:25:28.000000000 +0100
++++ gforge-rpm/db/20050130.sql	2005-02-20 18:57:55.846685056 +0100
+@@ -1,7 +1,7 @@
+ ALTER TABLE artifact ADD COLUMN last_modified_date integer;
+ ALTER TABLE project_task ADD COLUMN last_modified_date integer;
+ 
+-update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
++--update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
+ update artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
+ 
+ CREATE FUNCTION "update_last_modified_date" () RETURNS OPAQUE AS '

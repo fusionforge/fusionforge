@@ -38,6 +38,7 @@ URL: http://www.gforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Patch1000: gforge-4.0-deb_rpm.patch
+Patch1001: gforge-4.1-project_task_sql.patch
 
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
@@ -76,6 +77,7 @@ web-based administration.
 %prep
 %setup
 %patch1000 -p1
+%patch1001 -p1
 
 %build
 
@@ -265,6 +267,7 @@ fi
 %changelog
 * Sun Feb 20 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - added a dependency on gforge-lib-jpgraph
+- added gforge-4.1-project_task_sql.patch
 * Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - 4.1
 - forced the vhost on port 80
