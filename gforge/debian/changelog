@@ -1,4 +1,4 @@
-sourceforge (2.5-24+) unstable; urgency=low
+sourceforge (2.5-25) unstable; urgency=low
 
   * [Roland] Rewrote the setup_vars() function in install-ldap.sh for more
     robustness.
@@ -16,7 +16,7 @@ sourceforge (2.5-24+) unstable; urgency=low
   * [Roland] Added Korean language class provided by Soon-Son Kwon
     <kss@kldp.org>, many thanks to him.
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 16:42:42 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 17:43:19 +0100
 
 sourceforge (2.5-24) unstable; urgency=low
 
