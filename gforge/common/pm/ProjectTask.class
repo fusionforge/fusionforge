@@ -544,20 +544,6 @@ class ProjectTask extends Error {
 			return false;
 		}
 
-		if ($this->getStatusID() == 3) {
-			//no need to update project_counts_agg
-		} else {
-			if ($this->getStatusID() == 2) {
-				db_query("UPDATE project_counts_agg
-					SET count=count-1
-					WHERE group_project_id='".$this->ProjectGroup->getID()."'");
-			} else {
-				db_query("UPDATE project_counts_agg
-					SET count=count-1, open_count=open_count-1
-					WHERE group_project_id='".$this->ProjectGroup->getID()."'");
-				
-			}
-		}
 		db_commit();
 		return true;
 	}
