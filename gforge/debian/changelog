@@ -7,8 +7,10 @@ gforge (3pre8-0+) experimental; urgency=low
   * [Roland] Stricter dependency on debconf, to fix a Lintian warning.
   * [Roland] Die on error when installing the DB.
   * [Roland] Do not forget 20021213.sql...
+  * [Roland] Generate a random password for the LDAP stuff if the user
+    doesn't provide one.
 
- -- Roland Mas <lolando@debian.org>  Sun,  5 Jan 2003 21:27:08 +0100
+ -- Roland Mas <lolando@debian.org>  Mon,  6 Jan 2003 12:33:16 +0100
 
 gforge (3.0-0+8) experimental; urgency=low
 

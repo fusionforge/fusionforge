@@ -4,5 +4,6 @@
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:get-pw-from-debconf#
+#DSFHELPER:create-random-pw#
 #DSFHELPER:common-variables#
 #DSFHELPER:ldap-variables#
