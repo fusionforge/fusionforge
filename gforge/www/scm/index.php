@@ -117,7 +117,6 @@ if ($project->enableAnonCVS() || !$anonymous) {
 		<LI><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb)</b></a>
 		</UL>
-
 		<UL>
 		<LI>Ronald Petty contrib<BR><a href=/scm/controller.php?group_id=<?php echo $group_id; ?> >
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php)</b></a>

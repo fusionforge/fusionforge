@@ -165,7 +165,6 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
  *
  */
 function stats_site_project_result( $report, $orderby, $projects, $trove ) {
-
 	//
 	//	Determine if we are looking at ALL projects, 
 	//	a trove category, or a specific list
@@ -187,6 +186,10 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 				AND g.group_id=trove_group_link.group_id) ";
 	}
 */
+
+	if (!$orderby) {
+		$orderby = "group_name";
+	}
 
 	if ($report == 'last_30') {
 
@@ -239,7 +242,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		WHERE 
 			s.group_id = g.group_id
 			$grp_str
-		ORDER BY g.group_name DESC ";
+		ORDER BY $orderby DESC ";
 	}
 
 	return db_query( $sql, 30, 0, SYS_DB_STATS);
