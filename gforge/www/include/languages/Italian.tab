@@ -318,6 +318,11 @@ frs	latest_file_releases	Ultimi rilasci
 frs	file_monitor	Notifica
 frs_release	email_title	[Rilascio $1 Release]: $2
 frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
+frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
+frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
+frs_file	error_invalid_file	FRSFile Appears to be invalid
+frs_file	error_already_exists	Il nome del file esiste gi&agrave; all'interno di questo progetto
+frs_file	error_cannot_move	File cannot be moved to the permanent location
 general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Impossibile recuparare il permesso
@@ -348,6 +353,7 @@ general	more	Altri
 general	browse	Visualizza
 general	open	aperti
 general	total	totale
+general	reset	Annulla
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	Repository CVS
@@ -1081,7 +1087,13 @@ artifact_category	required_fields	Nome e assegnatario sono campi obbligatori
 tracker_artifactfile	required_fields	Nome file, tipo, dimensione e data sono campi obbligatori
 tracker_artifactgroup	required_field	Nome &egrave; un campo obbligatorio
 tracker_artifacttype	required_fields	Nome, descrizione, fuori tempo e tempo scaduto sono campi obbligatori
-
+stats	title	Statistiche del sito su $1
+stats_i18n	title	$1 I18n Statistics
+stats_i18n	language	Lingua
+stats_i18n	users	Utenti
+stats_i18n	language_distribution	Distribuzione delle lingue
+stats_i18n	total_non_english	Totale non inglesi
+stats_i18n	language_text	Questo &egrave; un elenco delle lingue che gli utenti hanno selezionato nelle proprie preferenze; non include lingue impostate tramite browser oppure cookie.
 stats_graph	sitewide_statistics_graphs      Statistiche sul sito
 stats_graph	overview_stats	Sommario sulle statistiche
 stats_graph	project_stats	Statistiche del progetto
@@ -1516,4 +1528,276 @@ admin_massmail	type	Type
 admin_massmail	subject	Subject
 admin_massmail	date	Date
 admin_massmail	last_user_id_mailed	Last user_id mailed
+project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn\'t have specific permission (currently equivalent to \'-\')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>
+project_admin_utils	admin	Amministra
+project_admin_utils	user_permissions	Permessi utente
+project_admin_utils	edit_public_info	Modifica informazioni pubbliche
+project_admin_utils	project_history	Cronologia delle modifiche
+project_admin_utils	vhosts	Host virtuali
+project_admin_utils	edit_release_files	Modifica/rilascia file
+project_admin_utils	post_jobs	Inserisci posizioni
+project_admin_utils	edit_jobs	Modifica posizioni
+project_admin_utils	multimedia_data	Modifica dati multimediali
+project_admin_utils	database_admin	Amministrazione database
+project_admin_utils	stats	Statistiche
+project_admin_utils	change_history	Cronologia cambiamenti sul gruppo
+project_admin_utils	field	Campo
+project_admin_utils	old_value	Valore precedente
+project_admin_utils	date	Data
+project_admin_utils	by	Da
+project_admin	title	Amministrazione progetto: $1
+project_admin	user_added	Utente aggiunto
+project_admin	user_removed	Utente eliminato
+project_admin	project_information	Informazioni sul progetto
+project_admin	short_description	Descrizione breve
+project_admin	homepage_link	Homepage 
+project_admin	shell_server	Server shell SSH
+project_admin	shell_server_group_directory	Directory sul serverr shell: 
+project_admin	www_directory	Directory www WWW sul server shell
+project_admin	download_tarball	Scarica l'archivio CVS creato giornalmente
+project_admin	trove_categorization	Categoria Trove:
+project_admin	group_members	Membri del gruppo
+project_admin	add_user	Aggiungi utente
+project_admin	edit_member_permissions	Modifica permessi utente
+project_admin	tool_admin	Amministrazione tool
+project_admin	tracker_admin	Amministrazione Tracker
+project_admin	docmanager_admin	Amministrazione DocManager 
+project_admin	mail_admin	Amministrazione Mail 
+project_admin	news_admin	Amministrazione News 
+project_admin	task_manager_admin	Amministrazione Attivit&agrave;
+project_admin	forum_admin	Amministrazione Forum 
+project_admin	file_releases	Amministrazione rilasci di file
+project_admin	edit_file_releases	Aggiungi/modifica rilasci di file
+project_admin	packages	Package
+project_admin	unix_name	Nome unix
+project_admin_database	title	Amministrazione database progetto
+project_admin_database	confirm_deletion	Clicca per confermare la cancellazione
+project_admin_database	confirm_delete	CONFERMA CANCELLAZIONE
+project_admin_database	add_new_database	Aggiungi nuovo database
+project_admin_database	add_new_database_info	Cliccando su "crea" verr&agrave; impostata la schedulazione della creazione del database e l'invio dell'email agli amministratori del progetto.
+project_admin_database	database_type	Tipo database
+project_admin_database	db_type	Tipo DB 
+project_admin_database	state	Stato
+project_admin_database	new_password	Nuova password
+project_admin_database	confirm_new	Conferma
+project_admin_database	operations	Operazioni
+project_admin_database	update	Aggiorna
+project_admin_database	current_databases	Database esistenti
+project_admin_database	no_databases	Nessun database attualmente disponibile per il progetto
+project_admin_database	maximum_databases_allocated	Il numero massimo di database di tutti i tipi sono gi&agrave; stati allocati.
+project_admin_database	cannot_add	Impossibile aggiungere database
+project_admin_database	create	Crea
+project_admin_database	database_created	Database schedulato per la creazione
+project_admin_editgroupinfo	title	Modifica informazioni progetto
+project_admin_editgroupinfo	group_updated	Informazioni progetto aggiornate
+project_admin_editgroupinfo	group_name	Nome descrittivo del gruppo
+project_admin_editgroupinfo	short_description	Descrizione breve (al massimo 255 caratteri, verranno eliminate istruzioni HTML presenti).
+project_admin_editgroupinfo	homepage_link	Homepage
+project_admin_editgroupinfo	active_features	Funzionalit&agrave; attive;
+project_admin_editgroupinfo	use_mailing_lists	Usa Mailing Lists
+project_admin_editgroupinfo	use_surveys	Usa sondaggi
+project_admin_editgroupinfo	use_forums	Usa Forum
+project_admin_editgroupinfo	use_pm	Usa Attivit&agrave;
+project_admin_editgroupinfo	use_pm	Usa CVS
+project_admin_editgroupinfo	enable_pserver	Abilita pserver
+project_admin_editgroupinfo	enable_anonymous_cvs	Abilita CVS anonimo
+project_admin_editgroupinfo	use_news	Usa News
+project_admin_editgroupinfo	use_docman	Usa Gestore documentazione
+project_admin_editgroupinfo	use_ftp	Usa FTP
+project_admin_editgroupinfo	use_tracker	Usa Tracker
+project_admin_editgroupinfo	use_frs	Usa il sistema per i rilasci di file
+project_admin_editgroupinfo	use_stats	Usa Statistics
+project_admin_editgroupinfo	new_doc_info	&Egrave; possibile inserire un indirizzo email al quale verranno inviate tutti i nuovi inserimenti
+project_admin_editgroupinfo	new_doc	Nuovi inserimenti 
+project_admin_editgroupinfo	send_on_all_updates	(invia per tutti gli aggiornamentisend on all updates)
+project_admin_editpackages	title	Modifica rilasci file
+project_admin_editpackages	qrs	QRS
+project_admin_editpackages	qrs_a_file	Clicca qui per rilasciare $1 un file $2
+project_admin_editpackages	packages_info	<h3>Package</h3><p>Si possono utilizzare package per raggruppare i file oppure in qualsiasi modo. <p><H4>Esempio di package:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>I tuoi package:</H4><p><ol><li>Definisce i tuoi package</li><li>Crea una nuova release dei package</li></ol><p><h3>Rilasci di package</h3><p>Un rilascio di un package pu&ograve; contenere diversi file.<p><H4>Esempi di rilasci</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Si possono creare nuovo rilasci di package cliccando sul pulsante <strong>Crea/modifica rilasci</strong> vicino al nome del package interessato.<p>
+project_admin_editpackages	no_packages_defined	Non ci sono package definiti
+project_admin_editpackages	releases	Rilasci
+project_admin_editpackages	package_name	Nome package
+project_admin_editpackages	no_packages_status	Stato
+project_admin_editpackages	add_release	Aggiungi rilascio
+project_admin_editpackages	edit_releases	Modifica rilascio
+project_admin_editpackages	new_package_name	Nuovo nome package
+project_admin_editpackages	create_package	Crea package
+project_admin_editpackages	updated_package	Package aggiornato
+project_admin_editpackages	added_package	Package aggiunto
+project_admin_qrs	title	Quick Release System
+project_admin_qrs	required_release_name	&Egrave; necessario definire un nome di rilascio
+project_admin_qrs	required_package	Egrave; necessario selezionare un package
+project_admin_qrs	required_file	Egrave; necessario selezionare un file.
+project_admin_qrs	required_file_type	Egrave; necessario selezionare un tipo file.
+project_admin_qrs	required_processor_type	Egrave; necessario selezionare un tipo processore
+project_admin_qrs	title	Rilascia nuova versione di file
+project_admin_qrs	qrs_info	Adesso &egrave; possibile $1 aggiungere file $2 al rilascio.</p> <p>Si noti che i file non potrebbero non comparire immediatamente nella pagina di $3 download $4. Potrebbero passare diverse ore prima che sia disponibile.
+project_admin_qrs	no_file_types_available	Nessun tipo file disponibile
+project_admin_qrs	create_new_package	oppure $1 crea un nuovo package $2
+project_admin_qrs	release_name	Nome rilascio
+project_admin_qrs	release_date	Data rilascio
+project_admin_qrs	file_name	Nome file
+project_admin_qrs	release_note	NOTA: in alcuni browser &egrave; necessario selezionare il file nella casella di upload e cliccare "OK".  Cliccare due volte non registra il file.
+project_admin_qrs	upload_new_file	Upload di un nuovo file
+project_admin_qrs	file_type	Tipo file
+project_admin_qrs	processor_type	Tipo processore
+project_admin_qrs	release_notes	Note di rilascio
+project_admin_qrs	changelog	Change Log
+project_admin_qrs	preserve_text	Preserva il testo pre-formattato
+project_admin_qrs	release_file	Rilascia file
+project_admin_qrs	package_id	ID pacakge
+project_admin_qrs	file_released	File rilasciato: adesso &egrave; possbile modificare il file rilasciato
+project_admin_editrelease	title	Modifica rilasci
+project_admin_editrelease	release_notes_too_small	Le note di rilascio sono troppo corte
+project_admin_editrelease	changelog_too_small	Il changelog &egrave; troppo corto
+project_admin_editrelease	data_saved	Dati salvati
+project_admin_editrelease	file_released	File rilasciato
+project_admin_editrelease	file_deleted	File cancellato
+project_admin_editrelease	step_1	Fase 1:&nbsp;&nbsp; Modifica rilasci
+project_admin_editrelease	release_date	Data rilascio
+project_admin_editrelease	release_name	Nome rilascio
+project_admin_editrelease	status	Stato
+project_admin_editrelease	note	Modifica le note di rilascio o il changelog per questo rilascio. Questi cambi verranno applicati a tutti i file di questo rilascio.<br />You can either upload the release notes and change log individually, or paste them in together below.
+project_admin_editrelease	upload_release_notes	Upload note di rilascio
+project_admin_editrelease	upload_change_log	Upload Change Log
+project_admin_editrelease	paste_release_notes	Incolla le note di rilascio
+project_admin_editrelease	paste_changelog	Incolla il changelog
+project_admin_editrelease	preserve_preformatted	Mantieni il testo preformattato
+project_admin_editrelease	submit_refresh	Invia/Refresh
+project_admin_editrelease	step_2	Fase 2: Aggiungi file a questo rilascio</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>
+project_admin_editrelease	add_files_note	NOTE: In alcuni browser &egrave; necessario selezionare il file nella casella di upload e cliccare "OK".  Double-clicking doesn't register the file.</strong></span>
+project_admin_editrelease	upload_new_file	Upload di un nuovo file
+project_admin_editrelease	file_type	Tipo file
+project_admin_editrelease	processor_type	Tipo processore
+project_admin_editrelease	add_file	Aggiungi questo file
+project_admin_editrelease	step_3	Fase 3: Modifica file in questo rilascio
+project_admin_editrelease	no_files_in_release	Nessun file in questo rilascio
+project_admin_editrelease	file_list_note	Una volta aggiunto file a questo rilascio, &egrave; <strong>necessario</strong> aggiornare ogni file con le informazioni corrette, altimenti non compariranno sul sommario dei download.
+project_admin_editrelease	filename_release	Nome file<br />Rilascio
+project_admin_editrelease	processor_update	Processore<br />Data di rilascio
+project_admin_editrelease	file_type_update	Tipo file<br />Aggiornamento
+project_admin_editrelease	update_refresh	Aggiorna/refresh
+project_admin_editrelease	delete_file	Cancella file
+project_admin_editrelease	i_am_sure	Sono sicuro
+project_admin_editrelease	file_updated	File aggiornato
+project_admin_editimages	title	Modifica dati multimediali
+project_admin_editimages	error_length	ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte
+project_admin_editimages	file_uploaded	File multimediale inserito
+project_admin_editimages	required_fields	Nome file e descrizione sono obbligatori
+project_admin_editimages	file_deleted	File multimediale cancellato
+project_admin_editimages	file_description_required	File description is required
+project_admin_editimages	properties_updated	Propriet&agrave; aggiornate
+project_admin_editimages	intro	Si possono memorizzare nel database fino a $1 MB di dati multimediali (immagini bitmap e vettoriali, suoni, modelli tridimensionali).
+project_admin_editimages	replace	Sostituisci con nuovo file (opzionale)
+project_admin_editimages	description	Descrizione
+project_admin_editimages	mime_type	MIME Type
+project_admin_editimages	add_data	Aggiungi dati multimediali
+project_admin_editimages	local_filename	Local filename
+project_admin_editimages	add_file	Aggiungi file
+project_admin_editimages	edit	Modifica
+project_admin_editimages	id	ID
+project_admin_editimages	uploaded	Inserito
+project_admin_editimages	name	Nome
+project_admin_editimages	mime_type	MIME Type
+project_admin_editimages	size	Dimensioni
+project_admin_editimages	dims	Dims
+project_admin_editimages	description	Descrizione
+project_admin_editimages	del	Cancella
+project_admin_group_trove	title	Informazioni trove del progetto
+project_admin_group_trove	intro	<h3>Modifica categorie trove</h3><p>Selezionare fino a tre voci per ogni categoria. Se nel progetto non &egrave; presente alcuna voce, selezionare "None Selected".</p><p> IMPORTANTE: I progetti dovrebbero essere classificati nelle categorie pi&ugrave; dettagliate. Se si seleziona sia una categoria padre che figlio solo la categoria figlio verr&agrave; inserita.
+project_admin_group_trove	update_changes	Aggiorna tutte i cambiamenti delle categorie
+project_admin_rmuser	title Rimuovi utente
+project_admin_rmuser	cancel	Annulla
+project_admin_rmuser	remove	Rimuovi
+project_admin_rmuser	info	<h3>Eliminazione utente</h3><p>Si sta per eliminare l'utente dal progetto. Confermare l'azione:</p>
+project_admin_rmuser	operation_not_permitted	Operazione non permessa
+project_admin_rmuser	cannot_remove_admin	Non &egrave; possibile eliminare un amministratore di progetto
+project_admin_showreleases	no_release	Non sono disponibili rilasci per il package
+project_admin_showreleases	title	Rilascia nuova versione di un file
+project_admin_showreleases	package_name	Nome package
+project_admin_showreleases	release_name	Nome rilascio
+project_admin_showreleases	date	Data
+project_admin_userpermedit	title	Modifica permessi utente
+project_admin_userpermedit	undefined	Non definito
+project_admin_userpermedit	invalid_user	Utente non valido
+project_admin_userpermedit	user_does_not_exist	L'utente non esiste
+project_admin_userpermedit	user_added	User Added Successfully
+project_admin_userpermedit	permissions_updated	Permessi aggiornati
+project_admin_userpermedit	editing_permissions	Stai modificando i permessi per l'utente $1 ($2)
+project_admin_userpermedit	developer_not_found	Utente non trovato in questo progetto
+project_admin_userpermedit	property	Propriet&agrave;
+project_admin_userpermedit	value	Valore
+project_admin_userpermedit	project_role	Ruolo nel progetto
+project_admin_userpermedit	project_admin	Amministratore progetto
+project_admin_userpermedit	release_technician	Tecnico per i rilasci
+project_admin_userpermedit	tracker_manager	Tracker Manager
+project_admin_userpermedit	technician	Tecnico
+project_admin_userpermedit	admin_tech	Amministratore e tecnico
+project_admin_userpermedit	admin	Amministratore
+project_admin_userpermedit	pm	Gestore Attivit&agrave;
+project_admin_userpermedit	forums	Forum
+project_admin_userpermedit	moderator	Moderatore
+project_admin_userpermedit	docman	Gestore documentazione
+project_admin_userpermedit	editor	Amministratore
+project_admin_userpermedit	admin_only	Solo amministratore
+project_admin_userpermedit	remove	Rimuovi
+project_admin_userpermedit	update_permissions	Aggiorna permessi utente
+project_admin_userpermedit	reset_changes	Annulla
+project_admin_userpermedit	tracker_info	<h3>Aggiungi utenti ai tracker:</h3><p>	Si possono selezionare i tracker ai quali l'utente ha accesso oppure si possono aggiungere gli utenti a tutti i tracker selezionando "Aggiungi a tutti".</p>
+project_admin_userpermedit	add_to_tracker	Aggiungi al tracker
+project_admin_userpermedit	add_to_all	Aggiungi a tutti
+project_admin_userperms	title	Elenco permessi utente
+project_admin_userperms	rel_tech	Tecnico per i rilasci
+project_admin_userperms	moderator	Moderatore
+project_admin_userperms	editor	Amministratore
+project_admin_userperms	info	Selezionare un nome utente per modificare i permessi
+project_admin_userperms	general	Generale
+project_admin_userperms	tracker_manager	Gestore tracker
+project_admin_userperms	task_manager	Gestore attivit&agrave;
+project_admin_userperms	forums	Forum
+project_admin_userperms	docman	Gestore documentazione
+project_admin_userperms	no_developers	Nessun utente trovato
+project_admin_vhost	title	Gestione host virtuali
+project_admin_vhost	vhost_scheduled	Host virtuale schedulato per la creazione
+project_admin_vhost	not_valid_hostname	Nome host non valido - $1
+project_admin_vhost	vhost_deleted	Host virtuale cancellato
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Aggiungi nuovo virtual host</span></strong><p>Per aggiungere un nuovo virtualhost, inserisci un <strong>CNAME</strong> per il tuo <em>yourhost.org</em> a <strong>$1.$2</strong>.  $3 attualmente non ospita mail (non pu&ograve; essere un MX) oppure DNS</strong>.  <p>Cliccando su "crea" la creazione del virtual host verr&agrave; schedulata.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>$4.$5</em>.
+project_admin_vhost	create	Crea
+project_admin_vhost	vhost	Host virtuale
+project_admin_vhost	operations	Operazioni
+project_admin_vhost	no_vhosts	Nessun host virtuale definito
+project_admin_vhost	name	Nuovo host virtuale <em>(esempio: vhost.org)</em>
+project_admin_vhost	delete	Cancella
+project_stats	title	Statistiche progetto
+project_stats	usage_statistics	Statistiche sull'utilizzo
+project_stats	last_7_days	Ultimi 7 giorni
+project_stats	last_30_days	Ultimi 30 giorni
+project_stats	monthly	Mensile
+project_stats	view_reports	Visualizza report
+project_stats	change_stats_view	Cambia vista 
+project_stats	detailed_statistics	Statistiche dettagliate per
+project_stats	tracker	Tracker
+project_stats	tasks	Attivit&agrave;
+project_stats_utils	stats_for_days Statistiche per gli ultimi $1 giorni
+project_stats_utils	date	Data
+project_stats_utils	rank	Posizione
+project_stats_utils	page_views	Pagine visitate
+project_stats_utils	dl	D/l
+project_stats_utils	bugs	Bug
+project_stats_utils	support	Supporto
+project_stats_utils	patches	Patch
+project_stats_utils	all_tracker	Tutti i tracker
+project_stats_utils	tasks	Attivit&agrave;
+project_stats_utils	CVS	CVS
+project_stats_utils	project_did_not_exits	Il progetto non esisteva in quella data
+project_stats_utils	stats_for_months	Statistiche per gli ultimi $1 mesi
+project_stats_utils	month	Mese
+project_stats_utils	stats_all_time	Statistiche per l'intera durata del progetto
+project_stats_utils	month	Durate
+project_stats_utils	days	Giorni
+project_stats_graph	statistics	$1 statistiche sul progetto: $1
+project_stats_graph	page_view_days	Pagine visualizzate (rosso) e download (blu) per gli ultimi $1 giorni
+project_stats_graph	page_view_months	Pagine visualizzate (rosso) e download (blu) per gli ultimi $1 mesi
+project_stats_graph	date	Data
+project_stats_graph	views	Viste (rosso) / Download (blu)
 
