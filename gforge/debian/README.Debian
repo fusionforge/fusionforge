@@ -3,7 +3,6 @@ Sourceforge for Debian
 
 Status
 ------
-
 Want to know what the status of this package is?  Read
 /usr/share/doc/sourceforge/TODO.Debian or (even better)
 <http://savannah.gnu.org/support/?group_id=259>.  If you miss a
@@ -65,6 +64,29 @@ configuration phase, and get your own custom certificate.
 
   Do *not* delete the /etc/sourceforge/*.template files.  They are
 needed.  Do not alter them either unless you *know* what you're doing.
+
+
+Adminning notes
+---------------
+  Once Sourceforge is setup, it pretty much runs by itself.  There
+should be relatively few things to do for the administrator.  The
+following are random notes trying to document them.
+
+  If you need to add skills to the database after installation, you
+can use the sf-add-skill script.  Give it a skill (or a list of
+skills) and it'll insert it into the databse.  This script is located
+in /usr/lib/sourceforge/bin/.
+
+  If you would like to add a theme to your Sourceforge, you'll first
+have to compose it.  Take example on the ones present in
+/usr/lib/sourceforge/www/themes/ and adapt them to your needs.  When
+it's done, you'll have to register it into the database.  Use the
+sf-register-theme script for that purpose.  This script is located in
+/usr/lib/sourceforge/bin/ too.
+
+  You'll need to periodically check the Approve Pending Projects page
+as well as the Approve News Bytes one, and take appropriate action.
+That can be done by the `admin' user via the web interface.
 
 
 Packaging roadmap
@@ -194,12 +216,12 @@ get deleted altogether in the near future.  Here it comes:
 
 Thanks
 ------
-  Apart from the Sourceforge crew at VA Linux, who did (and still do)
-a great job with SF, I'd like to send my thanks to Guillaume Morin,
-who wrote a very thorough Sourceforge installation guide.  That guide
-gives step-by-step instructions for the installation procedure, and a
-big part of the packaging task was to turn these instructions into
-automated scripts.
+  Apart from the Sourceforge crew at VA Linux, who did (and probably
+still do) a great job with SF, I'd like to send my thanks to Guillaume
+Morin, who wrote a very thorough Sourceforge installation guide.  That
+guide gives step-by-step instructions for the installation procedure,
+and a big part of the packaging task was to turn these instructions
+into automated scripts.
 
   Thanks also to all who tested packages and helped correct many
 errors of mine.
@@ -207,6 +229,8 @@ errors of mine.
   And mega-thanks to Christian Bayle.  That guy single-handedly
 adapted and fixed all the scripts related to CVS, DNS, SSH accounts,
 and probably more.
+
+  -- Roland Mas <lolando@debian.org>, 2001
 
 # Local Variables:
 # mode: text

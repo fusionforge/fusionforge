@@ -1,5 +1,6 @@
 bin
 etc/sourceforge
+usr/bin
 usr/lib/sourceforge/bin
 usr/lib/sourceforge/db
 usr/lib/sourceforge/lib
