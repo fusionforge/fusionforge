@@ -218,7 +218,7 @@ while ($row_memb=db_fetch_array($res_memb)) {
 			<input type="hidden" name="submit" value="y" />
 			<input type="hidden" name="user_id" value="'.$row_memb['user_id'].'" />
 			<input type="hidden" name="group_id" value="'. $group_id .'" />
-			<td>'.$row_memb['realname'].'</td>
+			<td>'.$row_memb['realname'].' ('.$row_memb['user_name'].')</td>
 			<td>'.role_box($group_id,'role_id',$row_memb['role_id']).'</td>
 			<td><input type="submit" name="updateuser" value="'.$Language->getText('rbac_edit','update').'"></td>
 			<td><input type="submit" name="rmuser" value="'.$Language->getText('rbac_edit','remove').'"></td>
