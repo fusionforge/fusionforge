@@ -49,18 +49,22 @@ function news_header($params) {
 		$HTML->header($params);
 	}
 	if ($group_id && ($group_id != $sys_news_group)) {
-		echo ($HTML->subMenu(
-			array(
-				$Language->getText('group','short_news'),
-				$Language->getText('menu','submit'),
-				$Language->getText('menu','admin')
-			),
-			array(
-				'/news/?group_id='.$group_id,
-				'/news/submit.php?group_id='.$group_id,
-				'/news/admin/?group_id='.$group_id)
-			)
-		);
+		$menu_texts=array();
+		$menu_links=array();
+
+		$menu_texts[]=$Language->getText('menu','submit');
+		$menu_links[]='/news/submit.php?group_id='.$group_id;
+		if (session_loggedin()) {
+			$project =& group_get_object($params['group']);
+			if ($project && is_object($project) && !$project->isError()) {
+				$perm =& $project->getPermission(session_get_user());
+				if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
+					$menu_texts[]=$Language->getText('menu','admin');
+					$menu_links[]='/news/admin/?group_id='.$group_id;
+				}
+			}
+		}
+		echo $HTML->subMenu($menu_texts,$menu_links);
 	}
 }
 

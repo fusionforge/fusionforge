@@ -28,16 +28,19 @@ function mail_header($params) {
 
 
 		site_project_header($params);
-		echo $HTML->subMenu(
-			array(
-				$Language->getText('group','short_mail'),
-				$Language->getText('mail_utils', 'admin')
-			),
-			array(
-				'/mail/?group_id='.$group_id,
-				'/mail/admin/?group_id='.$group_id
-			)
-		);
+		if (session_loggedin()) {
+			$perm =& $project->getPermission(session_get_user());
+			if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
+				echo $HTML->subMenu(
+					array(
+						$Language->getText('mail_utils', 'admin')
+					),
+					array(
+						'/mail/admin/?group_id='.$group_id
+					)
+				);
+			}
+		}
 	} else {
 		exit_no_group();
 	}

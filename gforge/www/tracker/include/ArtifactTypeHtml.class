@@ -59,9 +59,12 @@ class ArtifactTypeHtml extends ArtifactType {
 				$labels[] = $Language->getText('tracker_monitor','monitor');
 			}
 			$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor';
+
+			if ($this->userIsAdmin()) {
+				$labels[] = $Language->getText('tracker_artifacttype','admin');
+				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
+			}
 		}
-		$labels[] = $Language->getText('tracker_artifacttype','admin');
-		$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
 
 		echo $HTML->subMenu($labels,$links);
 	}

@@ -1,3 +1,10 @@
+2005-02-16  Tim Perdue <tim@gforge.org>
+
+	* for menus in docs, forums, news, scm, frs, tracker, task manager, surveys,
+	hide the admin link if they are not an admin
+	* when creating a new project, the trackers are by default set to allow_anon=0
+	* www/pm/add_task.php move hours up on the page as it is required
+
 2005-02-15  Tim Perdue <tim@gforge.org>
 
 	* /docman/new.php - specifying the min sizes for title and description

@@ -70,16 +70,20 @@ function survey_header($params) {
 				)
 			));
 		} else {
-			echo ($HTML->subMenu(
-				array(
-					$Language->getText('group','short_survey'),
-					$Language->getText('survey_utils','admin')
-				),
-				array(
-					'/survey/?group_id='.$group_id,
-					'/survey/admin/?group_id='.$group_id
-				)
-			));
+    		if (session_loggedin()) {
+				$perm =& $project->getPermission(session_get_user());
+				if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
+
+					echo ($HTML->subMenu(
+					array(
+						$Language->getText('survey_utils','admin')
+					),
+					array(
+						'/survey/admin/?group_id='.$group_id
+					)
+					));
+				}
+			}
 		}
 	}// end if (valid group id)
 }

@@ -65,6 +65,13 @@ echo notepad_func();
 
 	<tr>
 		<td colspan="2">
+		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
+		<input type="text" name="hours" size="5" />
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
 		<strong><?php echo $Language->getText('pm','start_date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('start_month',date('m', time()));
@@ -109,12 +116,7 @@ echo notepad_func();
 	</tr>
 
 	<tr>
-		<td>
-		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="hours" size="5" />
-		</td>
-
-		<td>
+		<td colspan="2">
 		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
 	</tr>

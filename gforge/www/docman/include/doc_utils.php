@@ -68,20 +68,25 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));
 
-	echo ($HTML->subMenu(
-		array(
-			$Language->getText('group','short_docman'),
-			$Language->getText('docman','submit_new'),
-			$Language->getText('docman','view_doc'),
-			$Language->getText('docman','admin')
-		),
-		array(
-			'/docman/?group_id='.$group_id,
-			'/docman/new.php?group_id='.$group_id,
-			'/docman/index.php?group_id='.$group_id,
-			'/docman/admin/index.php?group_id='.$group_id
-		)
-	));
+	$menu_text=array();
+	$menu_links=array();
+
+	$menu_text[]=$Language->getText('docman','submit_new');
+	$menu_links[]='/docman/new.php?group_id='.$group_id;
+	$menu_text[]=$Language->getText('docman','view_doc');
+	$menu_links[]='/docman/index.php?group_id='.$group_id;
+
+	if (session_loggedin()) {
+		$perm =& $project->getPermission(session_get_user());
+		if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
+			$menu_text[]=$Language->getText('docman','admin');
+			$menu_links[]='/docman/admin/index.php?group_id='.$group_id;
+		}
+	}
+	echo $HTML->subMenu(
+		$menu_text,
+		$menu_links
+	);
 }
 
 function doc_droplist_count($l_group_id, $language_id, $g) {

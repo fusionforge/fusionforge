@@ -110,7 +110,7 @@ class ArtifactTypes extends Error {
 			$this->setError('Error Creating ArtifactType for Bug Tracker');
 			return false;
 		} else {
-			if ($at->create('Bugs','Bug Tracking System',1,1,0,'',30,1,'','',1)) {
+			if ($at->create('Bugs','Bug Tracking System',1,0,0,'',30,1,'','',1)) {
 				//
 				//	create a default category
 				//	
@@ -142,7 +142,7 @@ class ArtifactTypes extends Error {
 			$this->setError('Error Creating ArtifactType for support Tracker');
 			return false;
 		} else {
-			if ($at->create('Support Requests','Tech Support Tracking System',1,1,0,'',15,0,'','',2)) {
+			if ($at->create('Support Requests','Tech Support Tracking System',1,0,0,'',15,0,'','',2)) {
 				//
 				//  create a default category
 				//  
@@ -177,7 +177,7 @@ class ArtifactTypes extends Error {
 			$this->setError('Error Creating ArtifactType for patch Tracker');
 			return false;
 		} else {
-			if ($at->create('Patches','Patch Tracking System',1,1,0,'',15,1,'','',3)) {
+			if ($at->create('Patches','Patch Tracking System',1,0,0,'',15,1,'','',3)) {
 				//
 				//  create a default category
 				//
@@ -212,7 +212,7 @@ class ArtifactTypes extends Error {
 			$this->setError('Error Creating ArtifactType for feature Tracker');
 			return false;
 		} else {
-			if ($at->create('Feature Requests','Feature Request Tracking System',1,1,0,'',45,0,'','',4)) {
+			if ($at->create('Feature Requests','Feature Request Tracking System',1,0,0,'',45,0,'','',4)) {
 				//
 				//  create a default category
 				//

@@ -82,23 +82,21 @@ function forum_header($params) {
 		site_project_header($params);
 	}
 
-
-	echo $HTML->subMenu(
-		array(
-			$Language->getText('group','short_forum'),
-			$Language->getText('forum_utils','admin')
-		),
-		array(
-			'/forum/?group_id='.$group_id,
-			'/forum/admin/?group_id='.$group_id
-		)
-	);
-
-	/*
-		Show horizontal forum links
-	*/
+	$menu_text=array();
+	$menu_links=array();
 	if ($f && $forum_id) {
-		echo '<h3>'.$Language->getText('forum_utils','discussionforum').' <a href="/forum/forum.php?forum_id='.$forum_id.'">'.$f->getName().'</a></h3>';
+		$menu_text[]=$Language->getText('forum_utils','discussionforum') . $f->getName();
+		$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
+	}
+	if ($f && $f->userIsAdmin()) {
+		$menu_text[]=$Language->getText('forum_utils','admin');
+		$menu_links[]='/forum/admin/?group_id='.$group_id;
+	}
+	if (count($menu_text) > 0) {
+		echo $HTML->subMenu(
+			$menu_text,
+			$menu_links
+		);
 	}
 
 	if (session_loggedin() ) {

@@ -75,22 +75,28 @@ function frs_header($params) {
 		exit_disabled();
 	}
 
+	$project =& group_get_object($group_id);
+	if (!$project || !is_object($project)) {
+		exit_no_group();
+	}
+
 	$params['toptab']='frs';
 	$params['group']=$group_id;
 	site_project_header($params);
 
-	echo ($HTML->subMenu(
-		array(
-			$Language->getText('group','short_files'),
-			$Language->getText('project_admin_utils','admin')
-		),
-		array(
-			'/frs/?group_id='.$group_id,
-			'/frs/admin/?group_id='.$group_id
-		)
-		)
-	);
-
+	if (session_loggedin()) {
+		$perm =& $project->getPermission(session_get_user());
+		if ($perm && is_object($perm) && !$perm->isError() && $perm->isReleaseTechnician()) {
+			echo $HTML->subMenu(
+				array(
+					$Language->getText('project_admin_utils','admin')
+				),
+				array(
+					'/frs/admin/?group_id='.$group_id
+				)
+			);
+		}
+	}
 }
 
 function frs_footer() {

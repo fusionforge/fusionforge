@@ -45,16 +45,19 @@ function scm_header($params) {
 	/*
 		Show horizontal links
 	*/
-	echo $HTML->subMenu(
-		array(
-			$Language->getText('scm_index','title'),
-			$Language->getText('scm_index','admin')
-		),
-		array(
-			'/scm/?group_id='.$params['group'],
-			'/scm/admin/?group_id='.$params['group']
-		)
-	);
+	if (session_loggedin()) {
+		$perm =& $project->getPermission(session_get_user());
+		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
+				echo $HTML->subMenu(
+				array(
+					$Language->getText('scm_index','admin')
+				),
+				array(
+					'/scm/admin/?group_id='.$params['group']
+				)
+			);
+		}
+	}
 }
 
 function scm_footer() {

@@ -78,11 +78,12 @@ function pm_header($params) {
 		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
 		$links[]  = 'javascript:gantt_window()';
 	}
-	$labels[] = $Language->getText('pm_include_grouphtml','reporting');
-	$links[]  = '/pm/reporting/?group_id='.$group_id;
-	$labels[] = $Language->getText('pm_include_grouphtml','admin');
-	$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
-
+	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
+		$labels[] = $Language->getText('pm_include_grouphtml','reporting');
+		$links[]  = '/pm/reporting/?group_id='.$group_id;
+		$labels[] = $Language->getText('pm_include_grouphtml','admin');
+		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
+	}
 	echo ($HTML->subMenu($labels,$links));
 
 }
