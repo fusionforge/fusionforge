@@ -1,4 +1,4 @@
-sourceforge (2.6-0+12+) unstable; urgency=low
+sourceforge (2.6-0+12+) experimental; urgency=low
 
   * [Christian] Added a dump and restore option to install-db.sh
   * [Christian] Added themeable main page support
@@ -54,8 +54,13 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Christian] more i18n for account register
   * [Christian] cosmetics/i18n in bugtracker
   * [Christian] removed multi record bug in software map
+  * [Roland] Dropped and recreated the views related to the artifact
+    manager, to fix the artifact bug (couldn't submit new artifacts,
+    couldn't add new comments to existing ones, couldn't attach files).
+    Thanks to Andreas Schrattenecker <andreas.schrattenecker@aon.at> for
+    the bug report and analysis.
 
- -- Christian Bayle <bayle@debian.org>  Tue,  8 Oct 2002 00:46:36 +0200
+ -- Roland Mas <lolando@debian.org>  Wed,  9 Oct 2002 19:33:39 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

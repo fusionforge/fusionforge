@@ -642,6 +642,40 @@ eval {
 	$dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+7" ;
+    if (is_lesser $version, $target) {
+	debug "Fixing artifact-related views." ;
+
+	&drop_view_if_exists ("artifact_file_user_vw") ;
+	&drop_view_if_exists ("artifact_history_user_vw") ;
+	&drop_view_if_exists ("artifact_message_user_vw") ;
+	&drop_view_if_exists ("artifactperm_artgrouplist_vw") ;
+	&drop_view_if_exists ("artifactperm_user_vw") ;
+	&drop_view_if_exists ("artifact_vw") ;
+
+	@reqlist = (
+		    "CREATE VIEW artifact_file_user_vw as SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname FROM artifact_file af, users WHERE (af.submitted_by = users.user_id)",
+		    "CREATE VIEW artifact_history_user_vw as SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name FROM artifact_history ah, users WHERE (ah.mod_by = users.user_id)",
+		    "CREATE VIEW artifact_message_user_vw as SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname FROM artifact_message am, users WHERE (am.submitted_by = users.user_id)",
+		    "CREATE VIEW artifactperm_artgrouplist_vw as SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level FROM artifact_perm ap, artifact_group_list agl WHERE (ap.group_artifact_id = agl.group_artifact_id)",
+		    "CREATE VIEW artifactperm_user_vw as SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname FROM artifact_perm ap, users WHERE (users.user_id = ap.user_id)",
+		    "CREATE VIEW artifact_vw as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name FROM users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id))"
+		    ) ;
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     
@@ -802,6 +836,24 @@ sub drop_index_if_exists ( $ ) {
     if ($array [0] != 0) {
 	# debug "Dropping index $iname" ;
 	$query = "DROP INDEX $iname" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+}
+
+sub drop_view_if_exists ( $ ) {
+    my $iname = shift or die  "Not enough arguments" ;
+    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='v'" ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    my @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    if ($array [0] != 0) {
+	# debug "Dropping view $iname" ;
+	$query = "DROP VIEW $iname" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
