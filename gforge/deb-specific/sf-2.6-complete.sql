@@ -3402,17 +3402,17 @@ COPY "supported_languages"  FROM stdin;
 8	Italian	Italian.class	Italian	it
 9	Norwegian	Norwegian.class	Norwegian	no
 10	Swedish	Swedish.class	Swedish	sv
+11	Trad.Chinese	Chinese.class	Chinese	zh
 12	Dutch	Dutch.class	Dutch	nl
 13	Esperanto	Esperanto.class	Esperanto	eo
 14	Catalan	Catalan.class	Catalan	ca
 15	Polish	Polish.class	Polish	pl
-11	Trad.Chinese	Chinese.class	Chinese	zh
+16	Pt. Brazillian	PortugueseBrazillian.class	PortugueseBrazillian	pt
 17	Russian	Russian.class	Russian	ru
 18	Portuguese	Portuguese.class	Portuguese	pt
 19	Greek	Greek.class	Greek	el
 20	Bulgarian	Bulgarian.class	Bulgarian	bg
 21	Indonesian	Indonesian.class	Indonesian	id
-16	Pt. Brazillian	PortugueseBrazillian.class	PortugueseBrazillian	pt
 22	Korean	Korean.class	Korean	ko
 23	Smpl.Chinese	SimplifiedChinese.class	SimplifiedChinese	zn
 \.
