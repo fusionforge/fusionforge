@@ -36,8 +36,17 @@ function news_header($params) {
 	}
 	if ($group_id && ($group_id != $sys_news_group)) {
 		echo ($HTML->subMenu(
-			array($Language->getText('menu','submit'),$Language->getText('menu','admin')),
-			array('/news/submit.php?group_id='.$group_id,'/news/admin/?group_id='.$group_id)));
+			array(
+				$Language->getText('group','short_news'),
+				$Language->getText('menu','submit'),
+				$Language->getText('menu','admin')
+			),
+			array(
+				'/news/?group_id='.$group_id,
+				'/news/submit.php?group_id='.$group_id,
+				'/news/admin/?group_id='.$group_id)
+			)
+		);
 	}
 }
 

@@ -11,7 +11,7 @@
 
 
 function mail_header($params) {
-	global $Language, $group_id;
+	global $Language, $HTML, $group_id;
 
 	if ($group_id) {
 		//required for site_project_header
@@ -28,10 +28,27 @@ function mail_header($params) {
 
 
 		site_project_header($params);
-		echo '<p><strong><a href="/mail/admin/?group_id='.$group_id.'">'.$Language->getText('mail_utils', 'admin').'</a></strong></p>';
+		echo $HTML->subMenu(
+			array(
+				$Language->getText('group','short_mail'),
+				$Language->getText('mail_utils', 'admin')
+			),
+			array(
+				'/mail/?group_id='.$group_id,
+				'/mail/admin/?group_id='.$group_id
+			)
+		);
 	} else {
 		$params['toptab'] = 'mail';
 		site_project_header($params);
+		echo $HTML->subMenu(
+			array(
+				$Language->getText('group','short_mail'),
+			),
+			array(
+				'/mail/?group_id='.$group_id,
+			)
+		);
 	}
 }
 

@@ -706,7 +706,19 @@ if ($group_id && $atid) {
 	$params['sectionvals']=array(group_getname($group_id));
 	
 	echo site_project_header($params);
-	echo '<strong><a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_admin','admin').'</a></strong>';
+	echo $HTML->subMenu(
+		array(
+			$Language->getText('group','short_tracker'),
+			$Language->getText('tracker','reporting'),
+			$Language->getText('tracker','admin')
+		),
+		array(
+			'/tracker/?group_id='.$group_id,
+			'/tracker/reporting/?group_id='.$group_id,
+			'/tracker/admin/?group_id='.$group_id
+			
+		)
+	);
 
 	if (!$at_arr || count($at_arr) < 1) {
 		echo "<h1>".$Language->getText('tracker_admin','no_trackers_found')."</h1>";

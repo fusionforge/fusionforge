@@ -19,7 +19,7 @@
 require_once('common/pm/ProjectGroup.class');
 
 function pm_header($params) {
-	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg,$Language,$sys_use_pm;
+	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$DOCUMENT_ROOT,$order,$pg,$Language,$sys_use_pm;
 
 	if (!$sys_use_pm) {
 		exit_disabled();
@@ -39,11 +39,6 @@ function pm_header($params) {
 		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
 	}
 
-	site_project_header($params);
-
-	if ($pg) {
-		echo "<h3>".$Language->getText('pm_include_grouphtml','project').": ". $pg->getName() ."</h3>";
-	}
 
 	if ($group_project_id) {
 		$gantt_width=820;
@@ -68,19 +63,34 @@ function pm_header($params) {
 			. ' -->'
 			. '</script>';
 	}
+	site_project_header($params);
 
-	echo "<p><strong>";
+	$labels = array();
+	$links = array();
+
+	$labels[] = $Language->getText('group','short_pm');
+	$links[]  = '/pm/?group_id='.$group_id;
 
 	if ($group_project_id) {
 		if (session_loggedin()) {
-			echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
+			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
+			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
-		echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=browse\">".$Language->getText('pm_include_grouphtml','browse_task')."</a> | ";
-		echo "<a href=\"javascript:gantt_window()\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
+		$labels[] = $Language->getText('pm_include_grouphtml','browse_task');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
+		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
+		$links[]  = 'javascript:gantt_window()';
 	}
-	echo '
-		<a href="/pm/reporting/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','reporting').'</a> |
-		<a href="/pm/admin/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','admin').'</a> </strong></p>';
+	$labels[] = $Language->getText('pm_include_grouphtml','reporting');
+	$links[]  = '/pm/reporting/?group_id='.$group_id;
+	$labels[] = $Language->getText('pm_include_grouphtml','admin');
+	$links[]  = '/pm/admin/?group_id='.$group_id;
+
+	echo ($HTML->subMenu($labels,$links));
+
+	if ($pg) {
+		echo "<h3>".$Language->getText('pm_include_grouphtml','project').": ". $pg->getName() ."</h3>";
+	}
 }
 
 function pm_footer($params) {

@@ -29,19 +29,32 @@ exit_assert_object($perm, 'Permission');
 
 function reporting_header($group_id) {
 	global $atid,$perm,$group_id;
-	global $Language;
-    if ($perm->isAdmin()) {
-        $alevel=' >= 0';
-    } else {
-        $alevel=' > 1';
-    }
-    $sql="SELECT agl.group_artifact_id,agl.name
-        FROM artifact_group_list agl,artifact_perm ap
-        WHERE agl.group_artifact_id=ap.group_artifact_id
-        AND ap.user_id='". user_getid() ."'
-        AND ap.perm_level $alevel
-        AND agl.group_id='$group_id'";
-    $res=db_query($sql);
+	global $Language,$HTML;
+	echo $HTML->subMenu(
+		array(
+			$Language->getText('group','short_tracker'),
+			$Language->getText('tracker','reporting'),
+			$Language->getText('tracker','admin')
+		),
+		array(
+			'/tracker/?group_id='.$group_id,
+			'/tracker/reporting/?group_id='.$group_id,
+			'/tracker/admin/?group_id='.$group_id
+			
+		)
+	);
+	if ($perm->isAdmin()) {
+		$alevel=' >= 0';
+	} else {
+		$alevel=' > 1';
+	}
+	$sql="SELECT agl.group_artifact_id,agl.name
+        	FROM artifact_group_list agl,artifact_perm ap
+        	WHERE agl.group_artifact_id=ap.group_artifact_id
+        	AND ap.user_id='". user_getid() ."'
+        	AND ap.perm_level $alevel
+        	AND agl.group_id='$group_id'";
+	$res=db_query($sql);
 
 	
 	reports_header(

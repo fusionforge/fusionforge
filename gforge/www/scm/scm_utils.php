@@ -45,14 +45,16 @@ function scm_header($params) {
 	/*
 		Show horizontal links
 	*/
-	$labels = array();
-	$links = array();
-
-	$labels[] = $Language->getText('scm_index','title');
-	$labels[] = $Language->getText('project_admin','scm_admin');
-	$links[] = '/scm/?group_id='.$params['group'];
-	$links[] = '/scm/admin/?group_id='.$params['group'];
-	echo $HTML->subMenu($labels, $links);
+	echo $HTML->subMenu(
+		array(
+			$Language->getText('scm_index','title'),
+			$Language->getText('project_admin','scm_admin')
+		),
+		array(
+			'/scm/?group_id='.$params['group'],
+			'/scm/admin/?group_id='.$params['group']
+		)
+	);
 }
 
 function scm_footer() {
