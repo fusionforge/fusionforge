@@ -2375,6 +2375,7 @@ survey	permission_denied	Permission refusée
 survey	survey_not_found	Sondage non trouvé
 survey	survey_privacy	Quid de la confidentialité ?
 survey	title	Sondages pour $1
+survey	warning_double_vote	Attention : vous êtes sur le point de voter une seconde fois pour ce sondage.
 survey_add_question	add_this_question	Ajouter cette question
 survey_add_question	error_insert_question	Erreur lors de la création de la question
 survey_add_question	question	Question
