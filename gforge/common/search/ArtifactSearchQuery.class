@@ -59,8 +59,8 @@ class ArtifactSearchQuery extends SearchQuery {
 				. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
 				. 'AND users.user_id=a.submitted_by '
 				. 'AND (('.$this->getIlikeCondition('a.details', $this->words).') ' 
-				. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).')) '
-				. 'OR ('.$this->getIlikeCondition('am.body', $this->words).') '
+				. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).') '
+				. 'OR ('.$this->getIlikeCondition('am.body', $this->words).')) '
 				. 'ORDER BY group_artifact_id ASC, a.artifact_id ASC';
 		}
 		return $sql;

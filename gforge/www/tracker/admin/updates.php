@@ -189,7 +189,7 @@
 			} elseif ($ac->isError()) {
 				$feedback .= $ac->getErrorMessage();
 			} else {
-				$ao = new ArtifactExtraFieldElement($ath,$id);
+				$ao = new ArtifactExtraFieldElement($ac,$id);
 				if (!$ao || !is_object($ao)) {
 					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
 				} elseif ($ao->isError()) {

@@ -36,8 +36,7 @@ if ($submit) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
 		if (!$aq->create($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
-			$feedback .= 'Error Creating query: '.$aq->getErrorMessage();				
-			$aq->clearError();
+			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
 		}
@@ -66,7 +65,7 @@ if ($submit) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
 		if (!$aq->update($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
-			$feedback .= $aq->getErrorMessage();
+			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
 		}
@@ -105,8 +104,6 @@ if ($submit) {
 	}
 	$aq->makeDefault();
 }
-
-echo $feedback;
 
 //
 //  setup the query
@@ -186,6 +183,8 @@ $res=db_query("SELECT artifact_query_id,query_name
 //
 echo '<html>
 <title>Query</title><body>
+<h1>'. $feedback .'</h1>
+
 <table border="3" cellpadding="4" rules="groups" frame="box">
 	<form action="'.$PHP_SELF.'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<tr>
@@ -198,7 +197,7 @@ echo '<html>
 	</tr>
 	<tr>
 		<td><span style="font-size:">
-		<input type="radio" name="query_action" value="1">'.$Language->getText('tracker','query_name').'<br />
+		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'.$Language->getText('tracker','query_name').'<br />
 		<input type="radio" name="query_action" value="4">'.$Language->getText('tracker','query_load').'<br />';
 	if ($query_id) {
 		echo '
