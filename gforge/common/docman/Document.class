@@ -97,11 +97,11 @@ class Document extends Error {
 
 		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError($Language->getText('docman_common','error_min_title_lenght'));
+			$this->setError($Language->getText('docman_common','error_min_title_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('docman_common','error_min_desc_lenght'));
+			$this->setError($Language->getText('docman_common','error_min_desc_length'));
 			return false;
 		}
 
@@ -347,11 +347,11 @@ class Document extends Error {
 	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
 		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError($Language->getText('docman_common','error_min_title_lenght'));
+			$this->setError($Language->getText('docman_common','error_min_title_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('docman_common','error_min_desc_lenght'));
+			$this->setError($Language->getText('docman_common','error_min_desc_length'));
 			return false;
 		}
 

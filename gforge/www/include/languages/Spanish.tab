@@ -270,8 +270,8 @@ forum_admin_changestatus	update_successful	Información del Foro Actualizado con
 forum_admin_delete	section	Administración de foros
 forum_admin_delete	title	Borrar un foro
 forum_common	error_adding_forum	Fue un error creando el foro.
-forum_common	error_min_desc_lenght	La descripción del foro tiene que tener al menos 10 carácteres.
-forum_common	error_min_name_lenght	El nombre del foro tiene que tener al menos 3 carácteres.
+forum_common	error_min_desc_length	La descripción del foro tiene que tener al menos 10 carácteres.
+forum_common	error_min_name_length	El nombre del foro tiene que tener al menos 3 carácteres.
 forum_common	error_save_when_logged_in	Solo puede guardar su lugar si está autenticado.
 forum_common	error_set_monitor	Solo puede monitorizar si está autenticado.
 forum_common	error_unable_to_add_monitor	Error - no puede monitorizar.

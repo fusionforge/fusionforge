@@ -109,11 +109,11 @@ class Forum extends Error {
 	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
-			$this->setError($Language->getText('forum_common','error_min_name_lenght'));
+			$this->setError($Language->getText('forum_common','error_min_name_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('forum_common','error_min_desc_lenght'));
+			$this->setError($Language->getText('forum_common','error_min_desc_length'));
 			return false;
 		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
@@ -462,11 +462,11 @@ class Forum extends Error {
 	function update($forum_name,$description,$is_public=1,$send_all_posts_to='',$allow_anonymous=0) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
-			$this->setError($Language->getText('forum_common','error_min_name_lenght'));
+			$this->setError($Language->getText('forum_common','error_min_name_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('forum_common','error_min_desc_lenght'));
+			$this->setError($Language->getText('forum_common','error_min_desc_length'));
 			return false;
 		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {

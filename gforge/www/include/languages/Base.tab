@@ -204,8 +204,8 @@ docman_new	submit	Submit Information
 docman_new	file	File
 docman_new	state	State
 docman_new	error_blank_document	Error getting blank document
-docman_common	error_min_title_lenght	Title Must Be At Least 5 Characters
-docman_common	error_min_desc_lenght	Document Description Must Be At Least 10 Characters
+docman_common	error_min_title_length	Title Must Be At Least 5 Characters
+docman_common	error_min_desc_length	Document Description Must Be At Least 10 Characters
 docman_common	no_docs	No Documents Found
 exit	exiting_with_error	Exiting with error
 exit	choose_a_group	Error - Choose A group
@@ -226,8 +226,8 @@ forum	error_invalid_group_forum_id	$1:: Invalid group_forum_id
 forum	error_forum_not_found	Forum Not Found
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
-forum_common	error_min_name_lenght	Forum Name Must Be At Least 3 Characters
-forum_common	error_min_desc_lenght	Forum Description Must Be At Least 10 Characters
+forum_common	error_min_name_length	Forum Name Must Be At Least 3 Characters
+forum_common	error_min_desc_length	Forum Description Must Be At Least 10 Characters
 forum_common	error_set_monitor	You can Only Monitor If You Are Logged In
 forum_common	error_unable_to_add_monitor	Unable To Add Monitor
 forum_common	welcome_to	Welcome to
@@ -368,18 +368,18 @@ frs	file_package	Package
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
-frs_file	error_min_name_lenght	FRSFile Name Must Be At Least 3 Characters
+frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
 frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
 frs_file	error_invalid_file	FRSFile Appears to be invalid
 frs_file	error_already_exists	That filename already exists in this project space 
 frs_file	error_cannot_move	File cannot be moved to the permanent location
-frs_package	error_min_name_lenght	FRSPackage Name Must Be At Least 3 Characters
+frs_package	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
 frs_package	error_name_format	FRSPackage::Update: Package Name can only be alphanumeric
 frs_package	error_invalid_file	FRSFile Appears to be invalid
 frs_package	error_already_exists	That filename already exists in this project space 
 frs_package	error_cannot_move	File cannot be moved to the permanent location
 frs_package	error_set_monitor	You Can Only Monitor If You Are Logged In
-frs_release	error_min_name_lenght	FRSPackage Name Must Be At Least 3 Characters
+frs_release	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
 frs_release	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
 frs_release	error_invalid_file	FRSFile Appears to be invalid
 frs_release	error_already_exists	That filename already exists in this project space 
@@ -727,8 +727,8 @@ pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	open_tasks_by_technician	Open Tasks By Technician
 pm_reporting	all_tasks_by_technician	All Tasks By Technician
 pm_reporting	report_note	Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
-pm_projectgroup	error_min_name_lenght	Title Must Be At Least 5 Characters
-pm_projectgroup	error_min_desc_lenght	Document Description Must Be At Least 10 Characters
+pm_projectgroup	error_min_name_length	Title Must Be At Least 5 Characters
+pm_projectgroup	error_min_desc_length	Document Description Must Be At Least 10 Characters
 pm_projectgroup	none_found	No ProjectGroups Found
 pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
 pm_projecttask	circular_dependency	Circular Dependency Detected'

@@ -76,7 +76,7 @@ class FRSFile extends Error {
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_file','error_min_name_lenght'));
+			$this->setError($Language->getText('frs_file','error_min_name_length'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {

@@ -180,8 +180,8 @@ docman_admin_groupdelete	title	Delete Document Group
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
 docman_admin_groupedit	group_name	Nome gruppo
-docman_common	error_min_title_lenght	Il titolo del documento deve essere almeno di 5 caratteri
-docman_common	error_min_desc_lenght	La descrizione del documento deve essere almeno di 10 caratteri
+docman_common	error_min_title_length	Il titolo del documento deve essere almeno di 5 caratteri
+docman_common	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
 docman_common	no_docs	Nessun documento trovato
 docman_display_doc	section	Progetto: $1 
 docman_display_doc	title	Document Manager: Visualizza documenti
@@ -240,8 +240,8 @@ forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da canc
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_invalid_group_forum_id	Forum:: Invalid group_forum_id
 forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
-forum_common	error_min_name_lenght	Il nome del forum deve essere almeno di 3 caratteri
-forum_common	error_min_desc_lenght	La descrizione del forum deve essere almeno di 10 caratteri
+forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
+forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
 forum_common	error_set_monitor	Puoi richiedere la notifica di un forum solo se sei collegato
 forum_common	error_unable_to_add_monitor	Impossibile notificare
 forum_common	welcome_to	Benvenuto a
@@ -611,8 +611,8 @@ pm_ganttpage	sort_on	Ordina per
 pm_ganttpage	resolution	Risoluzione
 pm_ganttpage	size	Dimensioni
 pm_ganttpage	assignee	Assegnatario
-pm_projectgroup	error_min_name_lenght	Il titolo deve essere almeno di 5 caratteri
-pm_projectgroup	error_min_desc_lenght	La descrizione del documento deve essere almeno di 10 caratteri
+pm_projectgroup	error_min_name_length	Il titolo deve essere almeno di 5 caratteri
+pm_projectgroup	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
 pm_projectgroup	none_found	Nessun ProjectGroups found
 pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
 pm_projecttask	circular_dependency	&Egrave; stata rilevata una dipendenza circolare

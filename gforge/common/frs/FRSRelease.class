@@ -77,7 +77,7 @@ class FRSRelease extends Error {
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_release','error_min_name_lenght'));
+			$this->setError($Language->getText('frs_release','error_min_name_length'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
@@ -260,7 +260,7 @@ class FRSRelease extends Error {
 
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_release','error_min_name_lenght'));
+			$this->setError($Language->getText('frs_release','error_min_name_length'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {

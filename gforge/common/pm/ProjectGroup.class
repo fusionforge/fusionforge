@@ -97,11 +97,11 @@ class ProjectGroup extends Error {
 		global $Language;
 		
 		if (strlen($project_name) < 3) {
-			$this->setError($Language->getText('pm_projectgroup','error_min_name_lenght'));
+			$this->setError($Language->getText('pm_projectgroup','error_min_name_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('pm_projectgroup','error_min_desc_lenght'));
+			$this->setError($Language->getText('pm_projectgroup','error_min_desc_length'));
 			return false;
 		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
@@ -276,11 +276,11 @@ class ProjectGroup extends Error {
 
 		global $Language;
 		if (strlen($project_name) < 3) {
-			$this->setError($Language->getText('pm_projectgroup','error_min_name_lenght'));
+			$this->setError($Language->getText('pm_projectgroup','error_min_name_length'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('pm_projectgroup','error_min_desc_lenght'));
+			$this->setError($Language->getText('pm_projectgroup','error_min_desc_length'));
 			return false;
 		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {

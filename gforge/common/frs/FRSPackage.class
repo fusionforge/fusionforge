@@ -75,7 +75,7 @@ class FRSPackage extends Error {
 	function create($name) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_package','error_min_name_lenght'));
+			$this->setError($Language->getText('frs_package','error_min_name_length'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
@@ -259,7 +259,7 @@ class FRSPackage extends Error {
 	function update($name,$status) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_package','error_min_name_lenght'));
+			$this->setError($Language->getText('frs_package','error_min_name_length'));
 			return false;
 		}
 
