@@ -1,3 +1,10 @@
+2003-04-20  Roland Mas  <lolando@debian.org>
+
+	* common/include/Group.class: Send new project registration,
+	approval, and rejection emails in the language of the recipient
+	rather than the language of the user causing the email to be sent
+	(project registrator or armin approving/rejecting the project).
+
 2003-04-09  Christian Bayle	<bayle@debian.org>
 
 	* rewrote tarballs download in such a way that only project admins can
