@@ -278,8 +278,13 @@ class LDAP extends System {
 	 *
 	 */
 	function sys_create_user($user_id) {
-		$user = &user_get_object($user_id);
-		return $this->gf_ldap_create_user_from_object($user);
+		// Check even if the user shouldn't exist
+		// It can be created by a cron
+		if (!$this->sys_check_user($user_id)){
+			$user = &user_get_object($user_id);
+			return $this->gf_ldap_create_user_from_object($user);
+		}
+		return true;
 	}
 	
 	/**
