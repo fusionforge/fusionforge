@@ -47,8 +47,7 @@ done;
 
 # installing configuration file
 install -m 755 -d ${PLUGIN_CONF_DIR}
-install -m 664 etc/config.php $PLUGIN_CONF_DIR/
-install -m 664 etc/mapping.php $PLUGIN_CONF_DIR/
+cp -p etc/plugins/%{plugin}/* $PLUGIN_CONF_DIR/
 
 %pre
 
@@ -82,6 +81,8 @@ fi
 %{pluginlibdir}/rpm-specific
 
 %changelog
+* Thu Mar 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- config files have moved
 * Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - 4.1
 - redirects register-plugin output to /dev/null
