@@ -16,8 +16,8 @@
 $LIMIT = 50;
 
 require_once('pre.php');
-require_once('common/include/vars.php');
 require_once('common/include/account.php');
+require_once('common/include/license.php');
 require_once('www/include/proj_email.php');
 require_once('www/include/canned_responses.php');
 require_once('www/admin/admin_utils.php');
@@ -148,7 +148,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	</table>
 
 	<p>
-	<strong><?php echo $Language->getText('admin','license')." "; print $row_grp['license']; ?></strong>
+	<strong><?php echo $Language->getText('admin','license')." "; print license_getname($row_grp['license']); ?></strong>
 
 	<br /><strong><?php echo $Language->getText('admin_approve_pending','home_box')." "; print $row_grp['unix_box']; ?></strong>
 	<br /><strong><?php echo $Language->getText('admin','http_domain')." "; print $row_grp['http_domain']; ?></strong>
