@@ -3,7 +3,9 @@
 
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
+require_once('/etc/gforge/local.inc');
 
+$use_cvs_acl = false;
 $maincvsroot = "/cvsroot/";
 
 //the directory exists
@@ -36,8 +38,26 @@ function writeFile($filePath, $content) {
 	fclose($file);
 }
 
+/**
+*addsyncmail
+*Copyright GForge 2004
+*addsyncmail write to /CVSROOT/loginfo unix_name-commits@lists.gforge.company.com
+*
+*@autor Luis A. Hurtado A. luis@gforgegroup.com
+*@param $unix_group_name Name Group
+*@return void
+*@date 2004-10-25
+*/
+function addsyncmail($unix_group_name) {
+	global $sys_lists_host;
+	global $maincvsroot;
+	$pathsyncmail = $unix_group_name." ".dirname($_SERVER['SCRIPT_FILENAME'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
+	writeFile($maincvsroot.'/CVSROOT/loginfo',$pathsyncmail);
+}
+
 function addProjectRepositories() {
 	global $maincvsroot;
+	global $use_cvs_acl;
 
 	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver 
 	FROM groups, plugins, group_plugin
@@ -68,10 +88,19 @@ function addProjectRepositories() {
 			writeFile($repositoryPath.'/CVSROOT/writers', $writersContent);
 			writeFile($repositoryPath.'/CVSROOT/readers', $readersContent);
 			writeFile($repositoryPath.'/CVSROOT/passwd', $passwdContent);
+			addsyncmail(db_result($res,$i,'unix_group_name'));
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
 			system('./cvscreate.sh '.db_result($res,$i,'unix_group_name').' '.(db_result($res,$i,'group_id')+50000).' '.db_result($res,$i,'enable_anonscm').' '.db_result($res,$i,'enable_pserver'));
+			addsyncmail(db_result($res,$i,'unix_group_name'));
+
+ 			if ($use_cvs_acl == true) {
+ 				system ("cp ".dirname($_SERVER['SCRIPT_FILENAME'])."/aclconfig.default ".$repositoryPath.'/CVSROOT/aclconfig');
+ 				$res_admins = db_query("SELECT users.user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND user_group.group_id='".db_result($res,$i,'group_id')."'");
+ 				$useradmin_group = db_result($res_admins,0,'user_name');
+ 				system("cvs -d ".$repositoryPath." racl ".$useradmin_group.":p -r ALL -d ALL");
+ 			}
 		}
 	}
 }

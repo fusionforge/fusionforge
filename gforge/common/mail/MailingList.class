@@ -114,10 +114,14 @@ class MailingList extends Error {
 	 *
 	 *	@return	boolean	success.
 	 */
-	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
+	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false) {
 		global $Language;
 		
-		if(! MailingListFactory::userCanAdminMailingLists($this->Group)) {
+		if (!$creator_id) {
+			$creator_id=user_getid();
+		}
+
+		if(! $this->userCanAdminMailingLists($this->Group)) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -149,7 +153,7 @@ class MailingList extends Error {
 			. "'".$realListName."',"
 			. "'".$isPublic."',"
 			. "'".$listPassword."',"
-			. "'".user_getid()."',"
+			. "'".$creator_id."',"
 			. "'".MAIL__MAILING_LIST_IS_REQUESTED."',"
 			. "'".$description."')";
 		
@@ -165,7 +169,7 @@ class MailingList extends Error {
 		$this->groupMailingListId = db_insertid($result, 'mail_group_list', 'group_list_id');
 		$this->fetchData($this->groupMailingListId);
 		
-		$user = &session_get_user();
+		$user = user_get_object($creator_id);
 		$userEmail = $user->getEmail();
 		if(empty($userEmail) || !validate_email($userEmail)) {
 			db_rollback();
@@ -212,7 +216,7 @@ class MailingList extends Error {
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
 		global $Language;
 		
-		if(! MailingListFactory::userCanAdminMailingLists($this->Group)) {
+		if(! $this->userCanAdminMailingLists($this->Group)) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -333,6 +337,22 @@ class MailingList extends Error {
 		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
 	}
 
+	/**
+	 * userCanAdminMailingList - use this function to know if the user can administrate mailing lists
+	 *
+	 * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
+	 *
+	 * @param object $Group group object
+	 * @return boolean true if the user can administrate mailing lists
+	 */
+	function userCanAdminMailingLists(& $Group) {
+		$perm = & $Group->getPermission(session_get_user());
+		if ($perm && is_object($perm) && $perm->isAdmin()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 ?>

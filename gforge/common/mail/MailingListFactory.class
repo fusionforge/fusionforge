@@ -98,7 +98,7 @@ class MailingListFactory extends Error {
 		$perm = & $this->Group->getPermission(session_get_user());
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
-			if($admin && $this->userCanAdminMailingLists($this->Group)) {
+			if($admin && MailingList::userCanAdminMailingLists($this->Group)) {
 				$public_flag .= ', '.MAIL__MAILING_LIST_IS_DELETED;
 			}
 		}
@@ -123,24 +123,6 @@ class MailingListFactory extends Error {
 		}
 		return $this->mailingLists;
 	}
-
-	/**
-	 * userCanAdminMailingList - use this function to know if the user can administrate mailing lists
-	 *
-	 * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
-	 *
-	 * @param object $Group group object
-	 * @return boolean true if the user can administrate mailing lists
-	 */
-	function userCanAdminMailingLists(& $Group) {
-		$perm = & $Group->getPermission(session_get_user());
-		if ($perm && is_object($perm) && $perm->isAdmin()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 }
 
 ?>

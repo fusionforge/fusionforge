@@ -25,7 +25,7 @@ if ($group_id) {
 		exit_no_group();
 	}
 	
-	if(! MailingListFactory::userCanAdminMailingLists($Group)) {
+	if(! MailingList::userCanAdminMailingLists($Group)) {
 		exit_permission_denied();
 	}
 	

@@ -40,6 +40,7 @@ require_once('common/pm/ProjectGroup.class');
 require_once('common/include/Role.class');
 require_once('common/frs/FRSPackage.class');
 require_once('common/docman/DocumentGroup.class');
+require_once('common/mail/MailingList.class');
 require_once('www/include/BaseLanguage.class');
 
 //the license_id of "Other/proprietary" license
@@ -1234,7 +1235,7 @@ class Group extends Error {
 	 *	@return	object	The Permission.
 	 */
 	function &getPermission(&$_user) {
-		return permission_get_object($this, $_user);
+		return permission_get_object(&$this, &$_user);
 	}
 
 
@@ -1747,6 +1748,24 @@ class Group extends Error {
 				return false;
 			}
 		}
+
+		//
+		//
+		//	Create MailingList
+		//
+		//
+		$mlist = new MailingList($this);
+		$admin_group = db_query("SELECT user_id FROM user_group 
+		WHERE group_id=".$this->getID()." AND admin_flags='A'");
+		if (db_numrows($admin_group) > 0) {
+			$idadmin_group = db_result($admin_group,0,'user_id');
+		}
+		if (!$mlist->create('commits','cvs commits',1,$idadmin_group)) {
+			$this->setError('MailingList:'.$pg->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+
 		db_commit();
 
 		$this->sendApprovalEmail();
