@@ -11,7 +11,7 @@
 
 <section name="Hardware requirements">
 <p>
-Hardware Requirements are largely dependent on the number of users that will use the system. A previous version of the software, SourceForge 2.5, has been running successfully for over a year on a Linux system based on a Pentium 133Mhz, 64MB Ram and 30 registered users.
+Hardware requirements are dependent on the number of users that will use the system and how active those users are.  One installation of GForge 3.1 hosts over 360 users and over 110 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
 </p>
 </section>
 <section name="Software requirements">
@@ -58,21 +58,18 @@ RedHat Linux 7.3:
 <p>
 <b>Note for Debian users</b>:<br/>
 Debian Users can simply add <a href="http://people.debian.org/~bayle/">http://people.debian.org/~bayle</a>
- to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge-3.0 system, thanks to Christian Bayle and the Debian-SF project.
+ to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge system, thanks to Christian Bayle and the Debian-SF project.
 <p/>
 To install GForge, follow these steps:
 <ol>
 <li>Login as root user</li>
 <li>cd to <code>/var/www/</code></li>
-<li>Extract the content of gforge-3.0b1.tar.bz2 to the current directory:<br/>
+<li>Extract the content of gforge-3.1.tar.bz2 to the current directory:<br/>
 <code>
-bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
+bzip2 -dc gforge-3.1.tar.bz2 | tar xvf -
 <br/>
 </code>
-
 </li>
-<li>Now there's a directory /var/www/gforge-3.0b1</li>
-<li>Rename this directory to /var/www/gforge-3.0/ - <code>mv /var/www/gforge3.0b1/ /var/www/gforge-3.0</code></li>
 </ol>
 
 </p>
@@ -86,7 +83,7 @@ bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
 <li>Change the DocumentRoot to point to the <code>www</code> directory:
 <code><br/>
 <br/>
-DocumentRoot "/var/www/gforge-3.0/www"
+DocumentRoot "/var/www/gforge-3.1/www"
 <br/>
 <br/></code>
 
@@ -95,7 +92,7 @@ DocumentRoot "/var/www/gforge-3.0/www"
 Change the Directory directive following the DocumentRoot as follows:
 
 <source><![CDATA[
-<Directory "/var/www/gforge-3.0/www">
+<Directory "/var/www/gforge-3.1/www">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -105,11 +102,11 @@ Change the Directory directive following the DocumentRoot as follows:
 ]]></source>
 <p/>
 </li>
-<li>Change the ScriptAlias to <code>/var/www/gforge-3.0/cgi-bin</code>
+<li>Change the ScriptAlias to <code>/var/www/gforge-3.1/cgi-bin</code>
 </li>
 <li>Change the Directory configuration following the ScriptAlias directive as follows:
 <source><![CDATA[
-<Directory "/var/www/gforge-3.0/cgi-bin">
+<Directory "/var/www/gforge-3.1/cgi-bin">
     AllowOverride All
     Options None
     Order allow,deny
@@ -308,7 +305,7 @@ Now it's time to install the database. The steps are:
 
 <ol>
 
-<li>cd to <code>/var/www/gforge-3.0/db</code></li>
+<li>cd to <code>/var/www/gforge-3.1/db</code></li>
 <li>
 <code>
 psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
@@ -353,8 +350,8 @@ Verify the version of PHP installed on your system:
 <br><code>register_globals = On</code></br>
 </li>
 <li> and configure the include_path directive as follows:
-<br/><code>include_path=".:/var/www/gforge-3.0/:/var/www/gforge-3.0/common/include:<br/>
- /var/www/gforge-3.0/www/include:/var/www/gforge-3.0/etc/</code>:
+<br/><code>include_path=".:/var/www/gforge-3.1/:/var/www/gforge-3.1/common/include:<br/>
+ /var/www/gforge-3.1/www/include:/var/www/gforge-3.1/etc/</code>:
 <br/>
 
 </li>
@@ -391,7 +388,7 @@ tar -zxvf cvsweb-1.112.tar.gz
 </subsection>
 
 
-<subsection name="Configuring GForge 3.0">
+<subsection name="Configuring GForge">
 <p>
 <ol>
 <li>login as root user</li>
@@ -433,7 +430,7 @@ Change the value of the $sys_upload_dir to:
 </li>
 <li>
 Change the value of the $sys_urlroot to:<br/>
-<code>$sys_urlroot="/var/www/gforge-3.0/www/";</code>
+<code>$sys_urlroot="/var/www/gforge-3.1/www/";</code>
 <br/>
 </li>
 

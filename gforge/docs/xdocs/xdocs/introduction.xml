@@ -55,26 +55,17 @@ We believe that the GForge functionality is important not only to the Open Sourc
 <br/>
 The GForge project was formed and is maintained by Tim Perdue, the original author of much of the original SourceForge web code.
 <br/>
-Major changes are present in the current GForge 3.0 codebase:
+Major changes are present in the current GForge codebase:
 <ul>
-<li><b>Jabber Support</b><br/>
- System events, such as bug submissions, are optionally sent via jabber and email
-</li>
-<li><b>Radically easier to install</b><br/>
- By removing SF.net-specific code, like caching and image servers, many install dependencies have been eliminated.
-</li>
-<li><b>New interface</b><br/>
- The interface makes it easier to navigate as well as know your present location.
-</li>
-<li><b>Code cleanup</b><br/>
- Since GForge does not need to scale to 500,000+ users, many hacks and optimizations have been removed
-</li>
-<li><b>Foundries and related nonsense have been removed</b><br/> 
-</li>
+<li><b>Jabber Support</b><br/>System events, such as bug submissions, are optionally sent via jabber and email</li>
+<li><b>Radically easier to install</b><br/>By removing SF.net-specific code, like caching and image servers, many install dependencies have been eliminated.</li>
+<li><b>New interface</b><br/>The interface makes it easier to navigate as well as know your present location.</li>
+<li><b>Code cleanup</b><br/>Since GForge does not need to scale to 500,000+ users, many hacks and optimizations have been removed</li>
+<li><b>Foundries and related nonsense have been removed</b><br/></li>
 </ul>
 
 </p>
 
 </section>
-  </body>
+</body>
 </document>
