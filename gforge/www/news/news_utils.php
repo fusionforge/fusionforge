@@ -100,8 +100,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					<BR>&nbsp;';
                         	$return .= '
                                 &nbsp;&nbsp;&nbsp;<I>'. db_result($result,$i,'user_name') .' - '.
-					date($sys_datefmt,db_result($result,$i,'date')) .' <A HREF="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'">'. $proj_name . '</A></I>
-				'. $summ_txt .'<HR width="100%" size="1" noshade>';
+					date($sys_datefmt,db_result($result,$i,'date')) . $proj_name . '</I>' . $summ_txt .'<HR width="100%" size="1" noshade>';
 			}
 
                         if ($limit==1 && $tail_headlines) $return .= "<ul>";
