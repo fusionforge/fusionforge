@@ -2,14 +2,14 @@
 
   <!-- Fill in your name for FIRSTNAME and SURNAME. -->
   <!ENTITY dhfirstname "<firstname>Christian</firstname>">
-  <!ENTITY dhsurname   "<surname>BAYLE</surname>">
+  <!ENTITY dhsurname   "<surname>Bayle</surname>">
   <!-- Please adjust the date whenever revising the manpage. -->
   <!ENTITY dhdate      "<date>may 14, 2001</date>">
   <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
        allowed: see man(7), man(1). -->
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
   <!ENTITY dhemail     "<email>bayle@aist.enst.fr</email>">
-  <!ENTITY dhusername  "Christian BAYLE">
+  <!ENTITY dhusername  "Christian Bayle">
   <!ENTITY dhucpackage "<refentrytitle>Sourceforge</refentrytitle>">
   <!ENTITY dhpackage   "cvssh">
 
@@ -80,15 +80,17 @@
       with long options starting with two dashes (`-').  A summary of
       options is included below. 
 
-    cvssh, in full force, is called as:  &lt;cvssh&gt; &lt;option&gt; "&lt;command&gt; &lt;arguments
-     list ... &gt; Where &lt;cvssh&gt; is this program, &lt;option&gt; is an optional trap
-    for a single option (like "-e" or "-c" used by programs that call shells,
-    subject to the approval list below), &lt;command&gt; is the command wished to
-    be run (subject to the approval list below), and &lt;arguments list .. &gt; is
-    the list of args passed to &lt;command&gt;  All are optional, allowing for
-    forms such as:
-    cvssh -e "foo"   cvssh "foo bar"  cvssh -e "foo -c foo -f bar"
-    &lt;g     &gt;&lt;o &gt;&lt;cmd&gt;   &lt;g     &gt; &lt;cmd/args&gt; &lt;g     &gt;&lt;o&gt; &lt;cmd/  args       &gt;
+    cvssh, in full force, is called as: &lt;cvssh&gt; &lt;option&gt;
+    "&lt;command&gt; &lt;arguments list ... &gt;" where &lt;cvssh&gt;
+    is this program, &lt;option&gt; is an optional trap for a single
+    option (like "-e" or "-c" used by programs that call shells,
+    subject to the approval list below), &lt;command&gt; is the
+    command wished to be run (subject to the approval list below), and
+    &lt;arguments list .. &gt; is the list of args passed to
+    &lt;command&gt; All are optional, allowing for forms such as:
+    cvssh -e "foo" cvssh "foo bar" cvssh -e "foo -c foo -f bar" &lt;g
+    &gt;&lt;o &gt;&lt;cmd&gt; &lt;g &gt; &lt;cmd/args&gt; &lt;g
+    &gt;&lt;o&gt; &lt;cmd/ args &gt;
     
     &lt;options&gt; and &lt;command&gt; need to be exact matched to those in the
     acceptance list.
