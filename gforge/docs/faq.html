@@ -5,7 +5,7 @@
 <body>
 
 <h2><center>GForge 3.0 FAQ</center></h2>
-<h3><center>Updated 4/29/2003</center></h3>
+<h3><center>Updated 4/30/2003</center></h3>
 <h3><center>Suggestions are <a href="http://gforge.org/forum/forum.php?forum_id=6">welcome</a>.</center></h3>
 
 <br/><a href="#users">Users FAQ</a>
@@ -193,8 +193,6 @@ VACUUM
 
 <br></br>
 
-</li>
-
 <li>
 <b>To quote from a user who saw this problem: &quot;I've been verifying the functions of my gforge installation. I've been able to create projects, add users, and get cvsweb working. I've successfully added to the Forums, Lists, Surveys, and News. I have not been able to make any additions to any of the Tracker categories, i.e. Bugs, Support Requests, etc. I'm able to fill out the template, but the information doesn't seem to make it into the database. Searches for bugs that I just created turn up no records.&quot;</b>
 <p>Check your php.ini file - ensure file_uploads = On.
@@ -205,7 +203,13 @@ VACUUM
 <p>Yup, it should, as long as <code>/usr/sbin/sendmail</code> is a symbolically linked to <code>/var/qmail/bin/sendmail</code>, which is the way qmail is usually installed.</p>
 </li>
 
+<li>
+<b>How do I add a new license?</b>
+<p>Go to the site admin page and click on "Add to the Trove Map".  Then select "License" in the top drop-down box and type in the rest of the information on your license in the other boxes.  Then you can go to a project and select "Admin" and "Trove Categorization::Edit" to change the project to the new license.</p>
+</li>
+
 </ol>
+
 <a name="developers"></a>
 <h2>Developers</h2>
 <ol>
