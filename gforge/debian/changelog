@@ -25,7 +25,7 @@ gforge (3rc2-4) unstable; urgency=low
   * [Roland] Stopped trying to create/modify the base DN of the LDAP
     directory if it already exists.
 
- -- Roland Mas <lolando@debian.org>  Fri, 20 Jun 2003 13:14:36 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 20 Jun 2003 13:31:38 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 
