@@ -1,3 +1,12 @@
+gforge (3.1-26+2) unstable; urgency=low
+
+  * Fixed a bug in include.pl, where db_drop_table_if_exists would check
+    for the existence of a table then promptly do nothing about it.
+  * Fixed stats_cvs.pl so it actually does something useful, and enabled
+    it in crontab, so it does so every night (closes: #215920).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 19 Feb 2005 19:06:29 +0100
+
 gforge (3.1-26) unstable; urgency=high
 
   * Disabled controller.php and controlleroo.php because of security

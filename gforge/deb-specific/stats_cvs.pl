@@ -45,12 +45,13 @@ sub create_dump_table {
 }
 
 sub dump_history {
-	my ($year, $month, $day, $day_begin, $day_end);
+	my ($year, $month, $day);
 	
 	print "Running tree at $cvsroot/\n";
 	
 	chdir( "$cvsroot" ) || die("Unable to make $cvsroot the working directory.\n");
 	
+	$old_date = time() - 28 * 86400 ;
 	foreach $group ( glob("*") ) {
 		next if ( ! -d "$group" );
 		my ($cvs_co, $cvs_commit, $cvs_add, %usr_commit, %usr_add );
@@ -68,15 +69,18 @@ sub dump_history {
 			## log others  $type neq "A"  neq "M"
 			$type = substr($cvstime, 0, 1);
 			$time_parsed = hex( substr($cvstime, 1, 8) );
-			$year	= strftime("%Y", gmtime( $time_parsed ) );
-			$month	= strftime("%m", gmtime( $time_parsed ) );
-			$day	= strftime("%d", gmtime( $time_parsed ) );
-			$sql = "INSERT INTO deb_cvs_dump 
-			(type,year,month,day,time,cvsuser,cvsgroup)
-			VALUES ('$type','$year','$month','$day','$time_parsed','$user','$group')";
+			if ( ($time_parsed >= $old_date) && ($user ne 'anonymous')
+				&& ( ($type eq '0') || ($type eq 'M') || ($type eq 'A') )){
+				$year	= strftime("%Y", gmtime( $time_parsed ) );
+				$month	= strftime("%m", gmtime( $time_parsed ) );
+				$day	= strftime("%d", gmtime( $time_parsed ) );
+				$sql = "INSERT INTO deb_cvs_dump 
+				(type,year,month,day,time,cvsuser,cvsgroup)
+				VALUES ('$type','$year','$month','$day','$time_parsed','$user','$group')";
 			
-			#print "$sql";
-			$dbh->do( $sql );
+       				# print "$sql\n" if $verbose;
+				$dbh->do( $sql );
+			}
 		}
 		close( HISTORY );
 	}
@@ -129,22 +133,42 @@ sub parse_history {
 	$dbh->do( $sql );
 }
 
-sub print_stats {
+sub load_groupids {
+	my ($sql,$res) ;
+	$sql = "SELECT group_id, unix_group_name from groups";
+        $res = $dbh->prepare($sql);
+        $res->execute();
+        while ( my ($group_id, $group_name) = $res->fetchrow()) {
+		# print "$group_name -> $group_id\n" ;
+		$gids{$group_name} = $group_id ;
+        }
+}
+
+
+sub setup_stats {
 	my ($sql,$res,$temp);
+	$dbh->do("delete from stats_cvs_group");
 	$sql = "SELECT * FROM deb_cvs_group_user order by year, month, day";
+	# print "$sql\n" if $verbose;
 	$res = $dbh->prepare($sql);
 	$res->execute();
 	while ( my ($cvsgroup, $cvsuser, $year, $month, $day, $total, $modified, $added, $others) = $res->fetchrow()) {
-		print "$cvsgroup $cvsuser $year $month $day $total=$modified+$added+$others\n";
+		# print "$cvsgroup $cvsuser $year $month $day $total=$modified+$added+$others\n";
 	}
 	print "-----------------------------------------------------\n";
-	print "cvsgroup\tcvsuser\tmodified\tadded\tothers\n";
+	print "cvsgroup(id):yearmonth:day:modified:added:others\n";
 	print "-----------------------------------------------------\n";
-	$sql = "SELECT cvsgroup, cvsuser, SUM(modified), SUM(added), SUM(others) FROM deb_cvs_group_user group by cvsgroup,cvsuser";
+	$sql = "SELECT cvsgroup, SUM(modified), SUM(added), SUM(others), year||month AS ym,day FROM deb_cvs_group_user group by cvsgroup,ym,day order by cvsgroup,ym,day" ;
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $cvsuser, $modified, $added, $others) = $res->fetchrow()) {
-		print "$cvsgroup\t$cvsuser\t$modified\t$added\t$others\n";
+	while ( my ($cvsgroup, $modified, $added, $others, $ym, $day) = $res->fetchrow()) {
+		$modified = 0 unless defined $modified ;
+		$added = 0 unless defined $added ;
+		$others = 0 unless defined $others ;
+		$ym =~ s/^(....)(.)$/$1-0-$2/ ;
+		$ym =~ s/-//g ;
+		print "$cvsgroup($gids{$cvsgroup}):$ym:$day:$modified:$added:$others\n";
+		$dbh->do("INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds) VALUES ($ym, $day, $gids{$cvsgroup}, $others, $modified, $added)") ;
 	}
 	print "-----------------------------------------------------\n";
 }
@@ -155,8 +179,9 @@ sub print_stats {
 &db_connect;
 &drop_tables;
 &create_dump_table;
+&load_groupids;
 &dump_history;
 &parse_history;
-&print_stats;
+&setup_stats;
 &drop_tables;
 
