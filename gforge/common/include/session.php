@@ -136,7 +136,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;}
 
 function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
-	global $feedback,$Language;
+	global $feedback,$userstatus,$Language;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
@@ -203,6 +203,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 		// Let's check the status of this user
 
 		// if allowpending (for verify.php) then allow
+		$userstatus=$usr['status'];
 		if ($allowpending && ($usr['status'] == 'P')) {
 			//1;
 		} else {

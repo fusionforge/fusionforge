@@ -71,14 +71,12 @@ $HTML->header(array('title'=>'Login','pagename'=>'account_login'));
 
 if ($login && !$success) {
 		
-	if ($feedback == "Account Pending") {
-
+	// Account Pending
+	if ($userstatus == "P") {
 		echo $Language->getText('account_login', 'pending_account', array($form_loginname));
-
 	} else {
-		
 		echo '<h2 style="color:red">'. $feedback .'</h2>';
-		if (stristr($feedback, "deleted")) {
+		if ($userstatus == "D") {
 			echo $Language->getText('account_login', 'deleted_account', $GLOBALS[sys_name]);
 		}
 	} //end else

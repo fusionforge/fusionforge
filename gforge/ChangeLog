@@ -1,6 +1,8 @@
-2004-07-10  Christian Bayle <bayle@aist.enst.fr>
+2004-07-15  Christian Bayle <bayle@aist.enst.fr>
 
 	* reorganisation of submenu with intensive use of $HTML->subMenu()
+	* change way of dealing with login error, not using a string
+	comparison in $feedback, but a proper userstatus global
 
 2004-07-07  Tom Copeland <tom@infoether.com>
 
