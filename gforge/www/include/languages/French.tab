@@ -541,7 +541,7 @@ survey_admin_show_results_individual	title	Affichage des commentaires d'un sonda
 survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
-survey_survey_resp	title	Réponse √† un sondage
+survey_survey_resp	title	Réponse à un sondage
 thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
@@ -557,7 +557,7 @@ top	title	Les meilleurs projets
 top	view_other_top_category	Voir les autres catégories
 top	top_project	Les meilleurs projets de $1
 top	NA	Pas disponible
-top	same	M√™me chose
+top	same	Même chose
 top	up	Monte $1
 top	down	Descend $1
 top_mostactive	section	Les meilleurs projets
@@ -565,7 +565,7 @@ top_mostactive	title	Les projets les plus actifs: $1
 top_mostactive	rank	Ranc
 top_mostactive	project_name	Nom du projet
 top_mostactive	percentile	Pourcentage
-top_mostactive	updated_daily	Mis √† jour quotidiennement
+top_mostactive	updated_daily	Mis à jour quotidiennement
 top_toplist	section	Les meilleurs projets
 top_toplist	title	Listes des meilleurs projets
 top_toplist	rank	Ranc
