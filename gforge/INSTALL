@@ -8,14 +8,14 @@ just about any Linux admin.
 *
 *  If you need professional support, customization,  
 *  or advanced reporting tools for GForge, visit 
-*  http://gforge.org/pro/
+*  http://gforgegroup.com/
 *
 
 BASICS OF INSTALLATION
 ----------------------
 
 You will need: 
-	PostgreSQL 7.1 or higher ( http://postgresql.org/ )
+	PostgreSQL 7.3 or higher ( http://postgresql.org/ )
 	PHP 4.x or higher ( http://www.php.net/ )
 	Apache 1.2x or higher ( http://www.apache.org/ )
 
