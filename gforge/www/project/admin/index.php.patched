@@ -90,7 +90,7 @@ Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_
 <p>
 Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?>
 <p>
-Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774&group_id=1">(how to upload)</a>:
+Project WWW directory on shell server:
 <b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
 
 <P align=center>
@@ -103,15 +103,31 @@ Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774
 <A href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
 [Edit]</A></H4>
 <P>
+<HR NOSHADE>
+<P>
+<H4>Showing The <?php echo $GLOBALS['sys_name']; ?> Logo:</H4>
+<p>
+<font size=-1>
+If you use <?php echo $GLOBALS['sys_name']; ?> services, we ask you to display our logo
+on your project homepage.
+</a>
+</font>
+</p>
+<P>
 <?php
+echo htmlspecialchars('<A href="http://'.$GLOBALS['sys_default_domain'].'"> 
+<IMG src="http://'.$GLOBALS['sys_default_domain'].'/sflogo.php?group_id='. $group_id .'" width="88" height="31"
+border="0" alt="'.$GLOBALS['sys_name'].' Logo"></A>');
 
-echo $HTML->boxBottom(); 
+echo '<P>'.html_image('images/sflogo-88-1.png','88','31',array(),0);
+
+$HTML->box1_bottom(); 
 
 echo '
 </TD><TD>&nbsp;</TD><TD width=50%>';
 
 
-echo $HTML->boxTop("Group Members");
+$HTML->box1_top("Group Members");
 
 /*
 
@@ -122,7 +138,7 @@ echo $HTML->boxTop("Group Members");
 $res_memb = db_query("SELECT users.realname,users.user_id,users.user_name,user_group.admin_flags ".
 		"FROM users,user_group ".
 		"WHERE users.user_id=user_group.user_id ".
-		"AND user_group.group_id=$group_id");
+		"AND user_group.group_id='$group_id'");
 
 print '<TABLE WIDTH="100%" BORDER="0">';
 
@@ -210,20 +226,26 @@ echo $HTML->boxTop('Tool Admin');
 
 <TD width=50%>
 
-<?php echo $HTML->boxTop("File Releases"); ?>
+<?php
+/*
+	Show filerelease info
+*/
+?>
+
+<?php $HTML->box1_top("File Releases"); ?>
 	&nbsp;<BR>
 	<CENTER>
 	<A href="editpackages.php?group_id=<?php print $group_id; ?>"><B>[Edit/Add File Releases]</B></A>
 	</CENTER>
 
 	<HR>
-	<B>Packages:</B>
+	<B>Packages:</B> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 	<P>
 
 	<?php
 
-	$res_module = db_query("SELECT * FROM frs_package WHERE group_id=$group_id");
+	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
 	while ($row_module = db_fetch_array($res_module)) {
 		print "$row_module[name]<BR>";
 	}

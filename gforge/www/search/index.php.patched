@@ -123,7 +123,7 @@ if ($type_of_search == "soft") {
 	if (!$rss) {
 		$sql = "SELECT group_name,unix_group_name,type,group_id,short_description "
 			   ."FROM groups "
-			   ."WHERE status='A' "
+			   ."WHERE status IN ('A','H') "
 			   ."AND is_public='1' "
 			   ."AND (($words1) OR ($words2) OR ($words3))";
 	} else {
@@ -134,7 +134,7 @@ if ($type_of_search == "soft") {
 			$sql = "SELECT group_name,unix_group_name,type,groups.group_id, "
 				   ."short_description,license,register_time "
 				   ."FROM groups "
-				   ."WHERE status='A' "
+				   ."WHERE status IN ('A','H') "
 					   ."AND is_public='1' "
 				   ."AND groups.short_description<>'' "
 				   ."AND (($words1) OR ($words2) OR ($words3))";
@@ -156,10 +156,11 @@ if ($type_of_search == "soft") {
 		include_once('www/export/rss_utils.inc');
 		function callback($data_row) {
                         // trove_cat_root=18 - Topic subtree
+			// [CB] now $default_trove_cat defined in local.inc
 			$res = db_query("
 				SELECT trove_cat.fullpath 
 				FROM trove_group_link,trove_cat 
-				WHERE trove_group_link.trove_cat_root=18 
+				WHERE trove_group_link.trove_cat_root=$default_trove_cat 
 				AND trove_group_link.trove_cat_id=trove_cat.trove_cat_id 
 				AND group_id='".$data_row['group_id']."'");
 			$ret = ' | date registered: '.date('M jS Y',$data_row['register_time']);
@@ -206,7 +207,7 @@ if ($type_of_search == "soft") {
 			
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/$what/"
 				. db_result($result, $i, 'unix_group_name')."/\">"
-				. html_image("/images/msg.gif","10","12",array("BORDER"=>"0")) 
+				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) 
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
 		}
@@ -256,7 +257,7 @@ if ($type_of_search == "soft") {
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
-				. html_image("/images/msg.gif","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
+				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
 				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
 		}
 		echo "</TABLE>\n";
@@ -303,7 +304,7 @@ if ($type_of_search == "soft") {
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/forum/message.php?msg_id="
 				. db_result($result, $i, "msg_id")."\">"
-				. html_image("/images/msg.gif","10","12",array("BORDER"=>"0"))
+				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "subject")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>".date($sys_datefmt,db_result($result,$i,"date"))."</TD></TR>\n";
@@ -374,7 +375,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 				. db_result($result, $i, "group_artifact_id") 
 				. "&func=detail&aid="
 				. db_result($result, $i, "artifact_id")."\"> "
-				. html_image("/images/msg.gif","10","12",array("BORDER"=>"0"))
+				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "summary")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
@@ -399,7 +400,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 	if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
 		echo "<A HREF=\"javascript:history.back()\"><B>" 
-			. html_image("/images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
+			. html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
 			. " Previous Results </A></B></FONT>";
 	} else {
 		echo "&nbsp;";
@@ -414,7 +415,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 		if ( $type_of_search == 'forums' ) {
 			echo "&group_id=$group_id&forum_id=$forum_id";
 		}
-		echo "\"><B>Next Results " . html_image("/images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
+		echo "\"><B>Next Results " . html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
 	} else {
 		echo "&nbsp;";
 	}

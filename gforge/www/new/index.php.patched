@@ -36,7 +36,7 @@ $query	= "SELECT groups.group_name,"
 	. "frs_package.name AS module_name, "
 	. "frs_dlstats_grouptotal_agg.downloads "
 	. "FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_agg "
-	. "WHERE ( frs_release.release_date > $start_time "
+	. "WHERE ( frs_release.release_date > '$start_time' "
 	. "AND frs_release.package_id = frs_package.package_id "
 	. "AND frs_package.group_id = groups.group_id "
 	. "AND frs_release.released_by = users.user_id "
@@ -50,7 +50,7 @@ $query	= "SELECT groups.group_name,"
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	echo $query . "<BR><BR>";
+	// echo $query . "<BR><BR>";
 	echo db_error();
 	echo "<H1>No new releases found. </H1>";
 } else {
@@ -111,7 +111,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
         	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
-			html_image("/images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+			html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
 			" Newer Releases</A></B></FONT>";
         } else {
         	echo "&nbsp;";
@@ -121,7 +121,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	if (db_numrows($res_new)>$rows) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
 		echo "<A HREF=\"/new/?offset=".($offset+20)."\"><B>Older Releases " .
-		html_image("/images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+		html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
 		"</A></B></FONT>";
 	} else {
 		echo "&nbsp;";
