@@ -789,3 +789,57 @@ sub get_db_version () {
 
     return $version ;
 }
+
+sub drop_table_if_exists ( $ ) {
+    my $tname = shift or die  "Not enough arguments" ;
+    my $query = "select count(*) from pg_class where relname='$tname'" ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    my @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    if ($array [0] != 0) {
+	# debug "Dropping table $tname" ;
+	$query = "drop table $tname" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+}
+
+sub drop_sequence_if_exists ( $ ) {
+    my $sname = shift or die  "Not enough arguments" ;
+    my $query = "select count(*) from pg_class where relname='$sname'" ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    my @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    if ($array [0] != 0) {
+	# debug "Dropping sequence $sname" ;
+	$query = "drop sequence $sname" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+}
+
+sub drop_index_if_exists ( $ ) {
+    my $iname = shift or die  "Not enough arguments" ;
+    my $query = "select count(*) from pg_class where relname='$iname'" ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    my @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    if ($array [0] != 0) {
+	# debug "Dropping index $iname" ;
+	$query = "drop index $iname" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+}
