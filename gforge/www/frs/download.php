@@ -28,11 +28,14 @@
 $no_gz_buffer=true;
 
 require_once('pre.php');
+require_once('common/frs/FRSPackage.class');
+require_once('common/frs/FRSRelease.class');
+require_once('common/frs/FRSFile.class');
 
 $arr=explode('/',$REQUEST_URI);
 $file_id=$arr[3];
 
-$res=db_query("SELECT frs_file.filename,frs_package.is_public,
+$res=db_query("SELECT frs_file.filename,frs_package.is_public,frs_package.package_id
 	frs_file.file_id,groups.unix_group_name,groups.group_id
 	FROM frs_package,frs_release,frs_file,groups
 	WHERE frs_release.release_id=frs_file.release_id
@@ -45,43 +48,49 @@ if (db_numrows($res) < 1) {
 	exit;
 }
 
-$is_public =db_result($res,0,'is_public');
-$group_name=db_result($res,0,'unix_group_name');
-$filename = db_result($res,0,'filename');
-$release_id=db_result($res,0,'release_id');
 $group_id = db_result($res,0,'group_id');
+$package_id = db_result($res,0,'package_id');
+$release_id=db_result($res,0,'release_id');
 
 $Group =& group_get_object($group_id);
 if (!$Group || !is_object($Group) || $Group->isError()) {
 	exit_no_group();
 }
 
-if(!$Group->isPublic()) {
-	session_require(array('group' => $group_id));
+$Package = new FRSPackage($Group,$package_id);
+if (!$Package || !is_object($Package) || $Package->isError()) {
+	exit_error('Error','Error Getting Package');
 }
+$is_public = $Package->isPublic();
+
+$Release = new FRSRelease($Package,$release_id);
+if (!$Release || !is_object($Release) || $Release->isError()) {
+	exit_error('Error','Error Getting Release');
+}
+
+$File = new FRSFile($Release,$file_id);
+if (!$File || !is_object($File) || $File->isError()) {
+	exit_error('Error','Error Getting File');
+}
+$filename = $File->getName();
+
 
 //  Members of projects can see all packages
 //  Non-members can only see public packages
 if(!$is_public) {
-	if (!session_loggedin() || (!user_ismember($group_id) && !user_ismember(1,'A'))) {
+	if (!session_loggedin() || !user_ismember($group_id)) {
 		exit_permission_denied();
 	}
 }
 
-/*
-echo $group_name.'|'.$filename.'|'.$sys_upload_dir.$group_name.'/'.$filename;
-if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
-	echo '<br />file exists';
-	passthru($sys_upload_dir.$group_name.'/'.$filename);
-}
-*/
-if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
+$file=$sys_upload_dir.'/'.$Group->getUnixName.'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$file->getName();
+if (file_exists($file)) {
 	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/binary");
-	$length = filesize($sys_upload_dir.$group_name.'/'.$filename);
+	$length = filesize($file);
 	Header("Content-length: $length");
 
-	readfile($sys_upload_dir.$group_name.'/'.$filename);
+	readfile($file);
 
 	if (session_loggedin()) {
 		$s =& session_get_user();

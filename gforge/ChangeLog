@@ -1,3 +1,7 @@
+2005-01-27  Tim Perdue <tim@gforge.org>
+
+	* FRS file reorganization - files are stored in /group_name/package_name/release_name/
+
 2005-01-20  Greg Hudson <ghudson@mit.edu>
 
 	* Updated priority help text (maximum priority is now 5, not 9)

@@ -114,6 +114,12 @@ class FRSRelease extends Error {
 		if (!$release_date) {
 			$release_date=time();
 		}
+		$res=db_query("SELECT * FROM frs_release WHERE package_id='".$this->FRSPackage->getID()."'
+			AND name='".htmlspecialchars($name)."'");
+		if (db_numrows($res)) {
+			$this->setError('FRSRelease::create() Error Adding Release: Name Already Exists');
+			return false;
+		}
 
 		$sql="INSERT INTO frs_release(package_id,notes,changes,
 				preformatted,name,release_date,released_by,status_id)
@@ -132,6 +138,8 @@ class FRSRelease extends Error {
 			db_rollback();
 			return false;
 		} else {
+			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$this->getFileName();
+			exec("/bin/mkdir $newdirlocation",$out);
 			db_commit();
 			return true;
 		}
@@ -180,6 +188,16 @@ class FRSRelease extends Error {
 	 *  @return string  The name of this release.
 	 */
 	function getName() {
+		return $this->data_array['name'];
+	}
+
+	/**
+	 *  getFileName - get the filename of this release.
+	 *
+	 *  @return string  The filename of this release.
+	 */
+	function getFileName() {
+		eregi_replace("[-A-Z0-9_\.]",'',$this->data_array['name']);
 		return $this->data_array['name'];
 	}
 

@@ -118,25 +118,27 @@ class FRSFile extends Error {
 		}
 
 		//
-		//	Filename must be unique in this project space
+		//	Filename must be unique in this release
 		//
-		$resfile=db_query("SELECT frs_file.filename 
-			FROM frs_file,frs_release,frs_package
-			WHERE frs_file.release_id=frs_release.release_id 
-			AND frs_release.package_id=frs_package.package_id 
-			AND frs_file.filename='$name'
-			AND frs_package.group_id='".$this->FRSRelease->FRSPackage->Group->getId()."'");
+		$resfile=db_query("SELECT filename 
+			FROM frs_file
+			WHERE 
+			filename='$name'
+			AND release_id='".$this->FRSRelease->getId()."'");
 		if (!$resfile || db_numrows($resfile) > 0) {
 			$this->setError($Language->getText('frs_file','error_already_exists').' '.db_error());
 			return false;
 		}
 
 		$file_location=escapeshellcmd($file_location);
-		$newfilelocation = $GLOBALS['sys_upload_dir'].$this->FRSRelease->FRSPackage->Group->getUnixName().'/';
+		$newfilelocation = $GLOBALS['sys_upload_dir'].'/'.
+			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
+			$this->FRSRelease->FRSPackage->getFileName().'/'.
+			$this->FRSRelease->getFileName().'/';
 
-		exec("/bin/mkdir $newfilelocation",$out);
+		//exec("/bin/mkdir $newfilelocation",$out);
 		//print_r($out);
-		exec("/bin/mkdir $newfilelocation",$out);
+		//exec("/bin/mkdir $newfilelocation",$out);
 		//print_r($out);
 		$cmd="/bin/mv $file_location $newfilelocation$name";
 		exec($cmd,$out);

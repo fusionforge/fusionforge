@@ -26,6 +26,17 @@
 
 require_once('common/include/Error.class');
 
+function &get_frs_packages($Group) {
+	$res=db_query("SELECT * FROM frs_package WHERE group_id='".$Group->getID()."'");
+	if (db_numrows($res) < 1) {
+		return false;
+	}
+	while($arr = db_fetch_array($res)) {
+		$ps[]=new FRSPackage($Group,$arr['package_id'],$arr);
+	}
+	return $ps;
+}
+
 class FRSPackage extends Error {
 
 	/**
@@ -106,6 +117,13 @@ class FRSPackage extends Error {
 			return false;
 		}
 
+		$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->Group->getID()."'
+			AND name='".htmlspecialchars($name)."'");
+		if (db_numrows($res)) {
+			$this->setError('FRSPackage::create() Error Adding Package: Name Already Exists');
+			return false;
+		}
+
 		$sql="INSERT INTO frs_package(group_id,name,status_id,is_public)
 			VALUES ('".$this->Group->getId()."','".htmlspecialchars($name)."','1','$is_public')";
 
@@ -121,6 +139,8 @@ class FRSPackage extends Error {
 			db_rollback();
 			return false;
 		} else {
+			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->getFileName();
+			exec("/bin/mkdir $newdirlocation",$out);
 			db_commit();
 			return true;
 		}
@@ -169,6 +189,16 @@ class FRSPackage extends Error {
 	 *  @return string  The name of this package.
 	 */
 	function getName() {
+		return $this->data_array['name'];
+	}
+
+	/**
+	 *  getFileName - get the filename of this package.
+	 *
+	 *  @return string  The name of this package.
+	 */
+	function getFileName() {
+		eregi_replace("[-A-Z0-9_\.]",'',$this->data_array['name']);
 		return $this->data_array['name'];
 	}
 
