@@ -29,8 +29,9 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Soon-Son] removed dtd definition for bug # 120
   * [Christian] Repared trove map count
   * [Roland] Fixed invocation of tarballs.sh in crontab.
+  * [Roland] [From 2.5] Fixed mailing-lists entries in LDAP.
 
- -- Roland Mas <lolando@debian.org>  Fri, 31 May 2002 09:57:59 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 31 May 2002 10:00:30 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
