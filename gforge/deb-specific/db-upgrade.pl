@@ -499,6 +499,36 @@ eval {
 	$dbh->commit () ;
     }
     
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+4" ;
+    if (is_lesser $version, $target) {
+	debug "Registering Savannah themes." ;
+	@reqlist = (
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_sad', 'Savannah Sad') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_savannah', 'Savannah Original') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_slashd', 'Savannah SlashDot') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_startrek', 'Savannah StarTrek') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_transparent', 'Savannah Transparent') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_water', 'Savannah Water') ;",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_www.gnu.org', 'Savannah www.gnu.org') ;"
+		    ) ;
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+    
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     
