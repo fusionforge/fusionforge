@@ -450,6 +450,11 @@ class Group extends Error {
 			$homepage='http://'.$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
 		}
 
+		if (strlen($short_description)>255) {
+			$this->setError('Error updating project information: Maximum length for Project Description is 255 chars.');
+			return false;
+		}
+
 		$res = db_query("
 			UPDATE groups
 			SET 
