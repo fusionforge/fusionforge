@@ -768,7 +768,9 @@ class User extends Error {
 	 */
 	function setAuthorizedKeys($keys) {
 		$keys = trim($keys);
-		$keys = ereg_replace("(\r\n)|(\n)", "###", $keys);
+		$keys = ereg_replace("\r\n", "\n", $keys); // Convert to Unix EOL
+		$keys = ereg_replace("\n+", "\n", $keys); // Remove empty lines
+		$keys = ereg_replace("\n", "###", $keys); // Convert EOL to marker
 
 		$res=db_query("
 			UPDATE users 
