@@ -315,7 +315,7 @@ menu	documentation	Site Docs
 menu	foundry_admin	Foundry Admin
 menu	foundry_summary	Foundry Summary
 menu	hosted_projects_list	Hosted Projects List
-menu	logged_in_as	Logged in as
+menu	logged_in_as	Logged in as $1
 menu	login	Login
 menu	login_ssl	Login via SSL
 menu	logout	Logout
