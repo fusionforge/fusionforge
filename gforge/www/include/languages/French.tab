@@ -259,7 +259,7 @@ forum_forum	topicstarter	Initiateur
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	msg	Poster un message dans cette file de message:
-forum_message	receive_followups	Recevoir les réactions par mailmenu	contact_us	Contacter $1
+forum_message	receive_followups	Recevoir les suites par mail
 forum_message	section	Forums
 forum_message	thread	Commencer une nouvelle file de message
 forum_message	title	Affichage d'un message
@@ -411,6 +411,7 @@ menu	bookmark_page	Ajouter aux favoris
 menu	change_my_theme	Changer de thème
 menu	code_snippet	Bibliothèque
 menu	code_snippet_library	Bibliothèque de code
+menu	contact_us	Contacter $1
 menu	compile_farm	Ferme de compilation
 menu	diary_notes	Journal et notes
 menu	discussion_forums	Forums de discussion
