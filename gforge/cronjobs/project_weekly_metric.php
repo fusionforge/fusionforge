@@ -42,8 +42,6 @@ print "\n\nthis_week: $this_week $this_day";
 
 db_drop_table_if_exists ("project_counts_weekly_tmp");
 print "\n\nDROP TABLE project_counts_weekly_tmp" ;
-db_drop_table_if_exists ("project_metric_weekly_tmp");
-print "\n\nDROP TABLE project_metric_weekly_tmp" ;
 db_drop_table_if_exists ("project_metric_weekly_tmp1");
 print "\n\nDROP TABLE project_metric_weekly_tmp1" ;
 
@@ -243,14 +241,8 @@ if (!$rel) {
 }
 db_commit();
 
-$sql="INSERT INTO project_metric_weekly_tmp (ranking,percentile,group_id)
-SELECT ranking,(100-(100*((ranking-1)/$counts))),group_id 
-FROM project_metric_weekly_tmp1 ORDER BY ranking ASC";
-//print "\n\n".$sql;
-$rel = db_query($sql);
-
 $sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id)
-SELECT ranking,to_char((100-(100*((ranking::float-1)/$counts))), '999D9999'),group_id
+SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id
 FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
 $rel = db_query($sql);
