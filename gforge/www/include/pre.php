@@ -23,7 +23,7 @@ if (is_file('/etc/gforge/custom/pre.php')){
 // get constants used for flags or status
 require('common/include/constants.php');
 
-// Defines all of the Source Forge hosts, databases, etc.
+// Defines all of the GForge hosts, databases, etc.
 // This needs to be loaded first because the lines below depend upon it.
 if (is_file('/etc/gforge/local.inc')) {
 	require ('/etc/gforge/local.inc');
