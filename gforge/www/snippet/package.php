@@ -123,29 +123,29 @@ then add them using the new window link shown above.
 
 	<table>
 
-	<tr><td colspan="2"><strong>Title:</strong><br />
+	<tr><td colspan="2"><strong>Title:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="name" size="45" maxlength="60" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong>Description:</strong><br />
+	<tr><td colspan="2"><strong>Description:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="description" rows="5" cols="45" wrap="soft"></textarea>
 	</td></tr>
 
 	<tr>
-	<td><strong>Language:</strong><br />
+	<td><strong>Language:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
 		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Language</a>
 	</td>
 
-	<td><strong>Category:</strong><br />
+	<td><strong>Category:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
 		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Category</a>
 	</td>
 	</tr>
  
-	<tr><td colspan="2"><strong>Version:</strong><br />
+	<tr><td colspan="2"><strong>Version:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
 
