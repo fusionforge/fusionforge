@@ -31,8 +31,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Roland] Fix email delivery to users, patch from Vicente Ruiz.
   * [Otavio] Now the browser accepted language are only read if set.
   * [Christian] i18n for project Approval/Rejection/Submission mail
+  * [Paddington] preserve release date mm:hh in "Edit Releases" 
 
- -- Christian Bayle <bayle@debian.org>  Sat, 19 Oct 2002 02:22:55 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 19 Oct 2002 20:51:45 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

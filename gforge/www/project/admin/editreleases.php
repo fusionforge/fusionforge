@@ -208,7 +208,7 @@ Edit Existing Release
 ?>
 <tr>
 	<td width="10%"><b>Release Date:<b></td>
-	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',db_result($result,0,'release_date')) ?>" size="10" maxlength="10"></td>
+	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',db_result($result,0,'release_date')) ?>" size="16" maxlength="16"></td>
 </tr>
 <tr>
 	<td><b>Release Name:<b></td>
@@ -358,7 +358,7 @@ When you are done uploading, just hit the refresh button to see the new files.
 					</td>
 					<td>
 						<font size="-1">
-							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10">
+							<input type="text" name="release_time" value="<?php echo date('Y-m-d H:i',db_result($res,$x,'release_time')); ?>" size="16" maxlength="16">
 						</font>
 					</td>
 					<td><font size="-1"><input type="submit" name="submit" value="Update/Refresh"></td>

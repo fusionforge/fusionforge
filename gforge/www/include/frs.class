@@ -247,13 +247,13 @@ class FRS extends Error {
 			return false;
 		}
 
-		$date_list = split("-",$release_time,3);
+		$date_list = split('[- :]',$release_time,5);
 //
 //
 //	date validation?
 //
 //
-		$unix_release_time = mktime(0,0,0,$date_list[1],$date_list[2],$date_list[0]);
+		$unix_release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 		$res=db_query("UPDATE 
 							frs_file 
 					   SET 
@@ -328,8 +328,8 @@ class FRS extends Error {
 			$this->setError(' FRS Change Release Failed: ' . $this->getErrorMessage());
 			return false;
 		} else {
-			$date_expl = explode("-",$release_date);
-		    $release_date = mktime(0,0,0,$date_expl[1],$date_expl[2],$date_expl[0]);
+			$date_expl = split('[- :]',$release_date,5);
+		    $release_date = mktime($date_expl[3],$date_expl[4],0,$date_expl[1],$date_expl[2],$date_expl[0]);
 //
 //
 //	date validation

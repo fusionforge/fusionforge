@@ -226,7 +226,7 @@ if( $submit ) {
 			<H4>Release Date:</H4>
 		</TD>
 		<TD>
-			<INPUT TYPE="TEXT" NAME="release_date" VALUE="<?php echo date('Y-m-d'); ?>" SIZE="10" MAXLENGTH="10">
+			<INPUT TYPE="TEXT" NAME="release_date" VALUE="<?php echo date('Y-m-d H:i'); ?>" SIZE="16" MAXLENGTH="16">
 		</TD>
 	</TR>
 	<TR>
