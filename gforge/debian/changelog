@@ -1,3 +1,9 @@
+sourceforge (2.5-28+) unstable; urgency=low
+
+  * 
+
+ --
+
 sourceforge (2.5-28) unstable; urgency=low
 
   * [Roland] Fixed problem with Apache-SSL: the config file is
