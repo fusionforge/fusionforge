@@ -39,6 +39,7 @@ modify_libnss_ldap(){
 	# This seems to be necessary to display uid/gid
 	# Should be cn=admin,ou=People,dc=...
 	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-old
 	    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
 		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
 		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf
@@ -49,6 +50,7 @@ modify_libnss_ldap(){
 # Purge /etc/libnss-ldap.conf
 purge_libnss_ldap(){
 	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-old
 	    perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf
 	    perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
 	fi
@@ -61,6 +63,7 @@ modify_slapd(){
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
 	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-old
 	    # Debian config by default only include core schema
 	    if ! grep -q "Sourceforge" /etc/ldap/slapd.conf ; then
 		rm -f /etc/ldap/slapd.conf.sourceforge
@@ -117,6 +120,7 @@ access to */" /etc/ldap/slapd.conf
 # Purge /etc/ldap/slapd.conf
 purge_slapd(){
     if [ "$do_config" = "true" ] ; then
+	cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-old
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
 	if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
@@ -150,6 +154,7 @@ FIN
 modify_nsswitch()
 {
     if [ "$do_config" = "true" ] ; then
+	cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-old
 	# This is sensitive file
 	if ! grep -q '^passwd:.*ldap' /etc/nsswitch.conf ; then
 	    perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf
@@ -167,6 +172,7 @@ modify_nsswitch()
 purge_nsswitch()
 {
     if [ "$do_config" = "true" ] ; then
+	cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-old
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/nsswitch.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf
     fi
