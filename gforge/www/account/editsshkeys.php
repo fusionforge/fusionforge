@@ -37,11 +37,14 @@ if ($submit) {
 	To avoid having to type your password every time for your CVS/SSH
 	developer account, you may upload your public key(s) here and they
 	will be placed on the CVS server in your ~/.ssh/authorized_keys file.
-	<p>
-	To generate a public key, run the program 'ssh-keygen' (or ssh-keygen1).
-	The public key will be placed at '~/.ssh/identity.pub'. Read the ssh
-	documentation for further information on sharing keys.
-	</p>
+	</P>
+	<P>
+	To generate a public key, run the program 'ssh-keygen' (you can use
+	both protocol 1 or 2). The public key will be placed at
+	'~/.ssh/identity.pub' (protocole 1) and '~/.ssh/id_dsa.pub' or
+	'~/.ssh/id_rsa.pub' (protocole 2). Read the ssh documentation for
+	further information on sharing keys.
+	</P>
 
 <form action="<?php echo $PHP_SELF; ?>" method="POST">
 <p>Authorized keys:
