@@ -23,8 +23,9 @@ modify_pam_ldap(){
 modify_libnss_ldap(){
 	dn=$1
 	# Check if DN is correct
-	if ! grep -q "^base.[ 	]*$dc=" /etc/libnss-ldap.conf ; then
+	if ! grep -q "^base[ 	]*$dn" /etc/libnss-ldap.conf ; then
 		echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
+		grep 
 	fi
 	# Check bindpw
 	# Should contain the secret
@@ -42,7 +43,7 @@ modify_libnss_ldap(){
 	    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-old
 	    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
 		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
-		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf
+		echo "rootbinddn cn=admin,$dn" >>/etc/libnss-ldap.conf
 	    fi
 	fi
 }
@@ -94,19 +95,19 @@ access to attribute=userPassword
 
 		perl -pi -e "s/access to \*/# Next lines added by Sourceforge install
 access to dn=\".*,ou=People,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=People,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=Group,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=cvsGroup,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 # End of sourceforge add
@@ -204,8 +205,8 @@ load_ldap(){
 		# authentication.
 		# -r Replace existing values by default.
 		# add with -r don't modify and modify don't add so i do add and modify
- 		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
- 		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+ 		ldapadd $VERBOSE -r -c -D "cn=admin,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+ 		ldapmodify $VERBOSE -r -c -D "cn=admin,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
 		rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/lapd.secret file"
@@ -215,33 +216,35 @@ load_ldap(){
 
 print_ldif_default(){
 	dn=$1
+	dc=`echo $1 | sed 's/dc=\(.[^,]*\),.*/\1/'`
 	cryptedpasswd=$2
 	cat <<-FIN
 dn: $dn
-objectClass: top
-objectClass: domain
-dc: rd
+objectClass: dcObject
+dc: $dc
 
-dn: ou=People, $dn
-objectClass: top
+dn: cn=admin,$dn
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: admin
+userPassword: $cryptedpasswd
+description: LDAP administrator
+
+dn: ou=People,$dn
 objectClass: organizationalUnit
 ou: People
 
-dn: cn=admin, ou=People, $dn
-objectClass: top
-userPassword: $cryptedpasswd
-cn: admin
-
-dn: ou=Roaming, $dn
-objectClass: top
+dn: ou=Roaming,$dn
 objectCLass: organizationalUnit
+ou: Roaming
 FIN
 }
 
 setup_vars() {
 	sys_ldap_base_dn=$(grep ^ldap_base_dn= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+	[ "x$sys_ldap_base_dn" == "x" ] && sys_ldap_base_dn=`grep suffix /etc/ldap/slapd.conf | cut -d\" -f2`
 	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
-	sys_ldap_admin_dn="cn=admin,ou=People,${sys_ldap_base_dn}"
+	sys_ldap_admin_dn="cn=admin,${sys_ldap_base_dn}"
 	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
 	sys_ldap_bind_dn="cn=SF_robot,${sys_ldap_base_dn}"
 	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
@@ -254,6 +257,13 @@ setup_vars() {
 
 }
 
+# Check Server
+check_server() {
+	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && 	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	[ "x$naming_context" == "x" ] && echo "LDAP Server KO" || echo "LDAP Server OK : dn=$naming_context"
+}
+
 # Setup SF_robot Passwd
 setup_robot() {
 	setup_vars
@@ -261,24 +271,23 @@ setup_robot() {
 	# The first account is only used in a multiserver SF
 	echo "Adding robot accounts"
 
-	{ ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
+	{ ldapadd -r -c -D $sys_ldap_admin_dn -x -w"$secret" || true ;  } <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
+description: Replicator the Robot
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+userPassword: {crypt}xxxxx
 cn: Replicator
-sn: Replicator the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
 
 dn: cn=SF_robot,$sys_ldap_base_dn
+description: SF the Robot
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+userPassword: {crypt}xxxxx
 cn: SF_robot
-sn: SF the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
 FIN
 
+	check_server
 	echo "Changing SF_robot passwd using admin account"
 	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
 dn: $sys_ldap_bind_dn
@@ -286,9 +295,9 @@ changetype: modify
 replace: userPassword
 userPassword: $cryptedpasswd
 FIN
-
+	
+	check_server
 	echo "Testing LDAP"
-	#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 	echo "Changing dummy cn using SF_robot account"
 	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
@@ -371,6 +380,9 @@ case "$1" in
 		slapadd -l /tmp/ldif$$
 		rm -f /tmp/ldif$$
 		;;
+	check)
+		check_server
+		;;
 	test)	
 		setup_robot
 		;;
@@ -379,57 +391,3 @@ case "$1" in
 		exit 1
 		;;
 esac
-
-# Ancient ldaptest follow
-
-# All info found in /usr/share/doc/openldap-guide
-
-# This is testing local ldap server
-##echo "============ LDAP SEARCH ==================="
-##ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts
-##echo "============ LDAP SEARCH ==================="
-
-# Then you need LDIF file and run ldapadd
-# To fill this you need to get your namingContexts
-# This do this and should be used a the sourceforge base DN
-##naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-##echo "Naming Context is: ===>$naming_context<=="
-
-# Un fichier ldif d'exemple
-##echo "============ Example ldif file =============="
-##tee /tmp/example.ldif <<-FIN
-##dn: cn=Bob Smith,ou=People,$naming_context
-##objectClass: person
-##cn: Bob Smith
-##sn: Smith
-##FIN
-##echo "============ Example ldif file =============="
-##echo "============ Adding this to the database ===="
-#/usr/sbin/slapadd -v -d2 -l /tmp/example.ldif
-#ldapadd -U admin -D "cn=admin,ou=People,$naming_context" -W -f /tmp/example.ldif
-#ldapadd -v -D "cn=admin,ou=People,$naming_context" -X u:admin  -f /tmp/example.ldif
-##ldapadd -v -D "cn=admin,ou=People,$naming_context" -x -W -f /tmp/example.ldif
-##echo "============ Checking the database =========="
-##ldapsearch -x -b "$naming_context" '(objectclass=*)'
-
-##Un ACL exemple pour la partie web
-#access to dn=".*,ou=People,dc=dragoninc,dc=on,dc=ca" 
-#attr=userpassword,ntpassword,lmpassword 
-#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
-#        by * none 
-#
-#access to dn=".*,ou=Group,dc=dragoninc,dc=on,dc=ca" attr=userpassword 
-#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
-#        by * none
-#
-# La mine d'or http://www.bayour.com/LDAPv3-HOWTO.html
-# http://www.ameritech.net/users/mhwood/ldap-sec-setup.html
-# A lire /usr/share/doc/openssl/README.Debian
-# /usr/share/doc/libsasl7/sysadmin.html
-# 
-# To create the certificate that OpenLDAP will use, we issue the command openssl like this:
-# openssl req -new -x509 -nodes -out server.pem -keyout server.pem -days 365
-# openssl x509 -in server.pem -text
-#
-#
-# Until this work:  ldapsearch -b "dc=g-tt,dc=rd,dc=francetelecom,dc=fr" '(objectclass=*)'
