@@ -13,7 +13,7 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("../include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/utils/include.pl");  # Include all the predefined functions
 &db_connect;
 
 my ($logfile, $sql, $res, $temp, %groups, $group_id, $errors );

@@ -48,27 +48,24 @@ $HTML->header(array('title'=>'License'));
 <P><B><I>If you are applying for a website-only project, please
 select "website-only" from the choices below and proceed.</I></B>
 
-<P>SourceForge was created to advance Open Source software development.
-To keep things simple, we are relying on the outstanding work
-of the <A href="http://www.opensource.org">Open Source Initiative</A>
-for our licensing choices.
+<P>
+SourceForge was created to advance Open Source software development.
+To keep things simple, the original SourceForge crew are relying on
+the outstanding work of the <A href="http://www.opensource.org">Open
+Source Initiative</A> for their licensing choices.
 
-<P>We realize, however that there may be other licenses out there
-that may better fit your needs. If you wish to use a license that is 
-not OSI Certified, please let us know why you wish to use another
-license.
+<p>Local policy may require the availability of other licenses,
+though.  This should be handled by the local Sourceforge
+administrator.  If you wish to use a license that is not listed here,
+please let the administrator know why you wish to use another license.
 
-<P>Choosing a license is a serious decision. Please take some time
-to read the text (and our explanations) of several licenses before
-making a choice abour your project.
+<P>Choosing a license is a serious decision. Please take some time to
+read the text (and our explanations) of several licenses before making
+a choice abour your project.
 
-<P>For many legal reasons, 
-you may not change a project's license once it has been set. If you
-feel that you have a special case and legal capability to do this,
-we will work with you on a case-by-case basis.
-
-<P>SourceForge is not responsible for legal discrepencies regarding 
-your license.
+<P>For many legal reasons, you may not change a project's license once
+it has been set. If you feel that you have a special case and legal
+capability to do this, we will work with you on a case-by-case basis.
 
 <P><B>Licenses</B>
 

@@ -332,7 +332,7 @@ if ($project->usesCVS()) {
 
 if ($project->isActive()) {
 	print '<HR SIZE="1" NoShade>';
-	print "<A href=\"ftp://" . $project->getUnixName() . ".sourceforge.net/pub/". $project->getUnixName() ."/\">";
+	print "<A href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
 	print html_image("images/ic/ftp16b.png",'20','20',array('alt'=>$Language->GROUP_LONG_FTP));
 	print $Language->GROUP_LONG_FTP."</A>";
 }

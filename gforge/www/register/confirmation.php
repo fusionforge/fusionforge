@@ -113,11 +113,13 @@ if ($show_confirm) {
 	?>
 
 	<H1>Registration Complete!</H1>
-	<P>Your project has been submitted to the SourceForge admininstrators. 
-	Within 24 hours, you will receive decision notification and further 
-	instructions.
+
+	<P>Your project has been submitted to the Sourceforge
+	admininstrators.  Within 24 hours, you should receive decision
+	notification and further instructions.
+
 	<P>
-	Thank you for choosing SourceForge.
+	Thank you for using Sourceforge.
 	<P>
 
 	<?php

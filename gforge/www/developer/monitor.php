@@ -13,7 +13,7 @@ if (user_isloggedin()) {
 		User obviously has to be logged in to monitor
 	*/
 
-	if ($user) {
+	if ($user_id) {
 		/*
 			First check to see if they are already monitoring
 			If they are, unmonitor by deleting row.
@@ -25,7 +25,7 @@ if (user_isloggedin()) {
 		echo '
 			<H2>Monitor a User</H2>';
 
-		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user';";
+		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user_id';";
 
 		$result = db_query($sql);
 
@@ -34,7 +34,7 @@ if (user_isloggedin()) {
 				User is not already monitoring thread, so 
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ('$user','".user_getid()."')";
+			$sql="INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ('$user_id','".user_getid()."')";
 
 			$result = db_query($sql);
 
@@ -48,7 +48,7 @@ if (user_isloggedin()) {
 
 		} else {
 
-			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user';";
+			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user_id';";
 			$result = db_query($sql);
 			echo "<FONT COLOR=\"RED\"><H3>Monitoring has been turned off</H3></FONT>";
 			echo "<P>You will not receive any more emails from this user.";
