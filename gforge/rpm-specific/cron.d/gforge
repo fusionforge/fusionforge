@@ -104,11 +104,6 @@ MAILTO=""
 #20 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/cvs.php
 
 #
-#	Create CVS repositories tarballs
-#
-#40 1 * * * root $PHP $GFORGE/cronjobs/tarballs/tarballs.php
-
-#
 #       Daily stats collection
 #
 ###incomplete 20 1 * * * root $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
