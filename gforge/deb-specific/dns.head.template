@@ -13,6 +13,7 @@ $TTL	604800
 ;NS
 @			IN	NS	{domain_name}.
 @			IN	MX	10 mail
+@	             	IN      A	{ip_address}
 
 localhost               IN      A       127.0.0.1
 www             	IN      A	{ip_address}
