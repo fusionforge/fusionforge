@@ -42,6 +42,7 @@ case "$1" in
 
 	add_onevar_mainconfile default_trove_cat 18
 	add_onevar_mainconfile sys_show_source 0
+	add_onevar_mainconfile newsadmin_groupid 2
 	add_onevar_mainconfile sys_session_key $sys_session_key
 
 	/usr/sbin/gforge-config
