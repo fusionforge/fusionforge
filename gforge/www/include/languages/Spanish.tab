@@ -535,6 +535,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	es
 conf	language_id	4
+conf	mail_charset	ISO-8859-1
 contact	about_blurb	<p>Ésta es la página de contacto de <b>$1</b> -- si está teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/información al encargado de soporte y problemas de ese proyecto. Se puede acceder a esta funcionalidad visitando la página principal de un proyecto en: <tt>http://$2/projects/&lt;nombre del proyecto&gt;</tt> y pulsando en la herramienta apropiada.</p><p>Si tiene una petición de soporte, un reporte de error o quiere comunicarse directamente con el equipo de $1, por favor visite <a href="/projects/sourceforge">la página del proyecto de $1</a>.</p>
 contact	title	Contacta $1
 developer	body	Apunte
