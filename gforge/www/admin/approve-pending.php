@@ -19,7 +19,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 function activate_group($group_id) {
 	global $feedback;
-echo("activate_group($group_id)<br>");	
+	//echo("activate_group($group_id)<br>");	
 
 	if (sf_ldap_create_group($group_id,0)) {
 		db_query("UPDATE groups ".

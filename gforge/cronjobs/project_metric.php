@@ -1,143 +1,130 @@
+#! /usr/bin/php4 -f
 <?php
 
 require ('squal_pre.php');
 
-if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-        exit_permission_denied();
-}
+// if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
+//         exit_permission_denied();
+// }
 
 $last_week=(time()-604800);
 $this_week=time();
 
-#print "\nlast_week: ". $last_week;
-#print "\n\nthis_week: ". $this_week;
+//#print "\nlast_week: ". $last_week;
+//#print "\n\nthis_week: ". $this_week;
 
-$sql="DROP TABLE IF EXISTS project_counts_tmp";
-$rel = db_query($sql);
+db_drop_table_if_exists ("project_counts_tmp");
+db_drop_table_if_exists ("project_metric_tmp");
+db_drop_table_if_exists ("project_metric_tmp1");
 
-
-
-$sql="DROP TABLE IF EXISTS project_metric_tmp";
-$rel = db_query($sql);
-
-
-
-$sql="DROP TABLE IF EXISTS project_metric_tmp1";
-$rel = db_query($sql);
-
-
-
-#create a table to put the aggregates in
+//#create a table to put the aggregates in
 $sql="CREATE TABLE project_counts_tmp (group_id int,type text,count float(8,5))";
 $rel = db_query($sql);
 
 
-#forum messages
+//#forum messages
 $sql="INSERT INTO project_counts_tmp 
 SELECT forum_group_list.group_id,'forum',log(3*count(forum.msg_id)) AS count 
 FROM forum,forum_group_list 
 WHERE forum.group_forum_id=forum_group_list.group_forum_id 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
-
-#project manager tasks
+//#project manager tasks
 $sql="INSERT INTO project_counts_tmp 
 SELECT project_group_list.group_id,'tasks',log(4*count(project_task.project_task_id)) AS count 
 FROM project_task,project_group_list 
 WHERE project_task.group_project_id=project_group_list.group_project_id 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
 
-#bugs
+//#bugs
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'bugs',log(3*count(*)) AS count 
 FROM bug 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
-
-#patches
+//#patches
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'patches',log(10*count(*)) AS count 
 FROM patch 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
 
-#support
+//#support
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'support',log(5*count(*)) AS count 
 FROM support 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
 
-#cvs commits
+//#cvs commits
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'cvs',log(sum(cvs_commits)) AS count 
 FROM group_cvs_history 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
-
-#developers
+//#developers
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'developers',log(5*count(*)) AS count FROM user_group GROUP BY group_id";
 $rel = db_query($sql);
 
 
 /*
-#file releases
+//#file releases
 $sql="INSERT INTO project_counts_tmp 
 select group_id,'filereleases',log(5*count(*)) 
 FROM filerelease 
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 */
 
 
-#file downloads
+//#file downloads
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'downloads',log(.3*sum(downloads)) 
 FROM filerelease
 GROUP BY group_id";
 
-#print "\n\n".$sql;
+//#print "\n\n".$sql;
 
 $rel = db_query($sql);
 
 
 
-#create a new table to insert the final records into
+//#create a new table to insert the final records into
 $sql="CREATE TABLE project_metric_tmp1 (ranking int not null primary key auto_increment,
 group_id int not null,
 value float (8,5))";
@@ -145,7 +132,7 @@ $rel = db_query($sql);
 
 
 
-#insert the rows into the table in order, adding a sequential rank #
+//#insert the rows into the table in order, adding a sequential rank #
 $sql="INSERT INTO project_metric_tmp1 (group_id,value) 
 SELECT project_counts_tmp.group_id,(survey_rating_aggregate.response * sum(project_counts_tmp.count)) AS value 
 FROM project_counts_tmp,survey_rating_aggregate 
@@ -158,14 +145,14 @@ $rel = db_query($sql);
 
 
 
-#numrows in the set
+//#numrows in the set
 $sql="SELECT count(*) FROM project_metric_tmp1";
 $rel = db_query($sql);
 
 $counts = db_result($rel,0,0);
-#print "\n\nCounts: ".$counts;
+//#print "\n\nCounts: ".$counts;
 
-#create a new table to insert the final records into
+//#create a new table to insert the final records into
 $sql="CREATE TABLE project_metric_tmp (ranking int not null primary key auto_increment,
 percentile float(8,2), group_id int not null)";
 $rel = db_query($sql);
@@ -178,19 +165,17 @@ $rel = db_query($sql);
 
 
 
-#create an index
+//#create an index
 $sql="create index idx_project_metric_group on project_metric_tmp(group_id)";
 $rel = db_query($sql);
 
 
 
-#drop the old metrics table
-$sql="DROP TABLE IF EXISTS project_metric";
-$rel = db_query($sql);
+//#drop the old metrics table
+db_drop_table_if_exists ("project_metric");
 
 
-
-#move the new ratings to the correct table name
+//#move the new ratings to the correct table name
 $sql="alter table project_metric_tmp rename as project_metric";
 $rel = db_query($sql);
 

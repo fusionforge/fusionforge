@@ -75,9 +75,9 @@ $HTML->header(array('title'=>'Developer Profile'));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo 'Diary/Note Entries: '.db_result($res,0,0).'
 	<P>
-	<A HREF="/developer/diary.php?user='. $user_id .'">View Diary & Notes</A>
+	<A HREF="/developer/diary.php?user_id='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?user='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?user_id='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>

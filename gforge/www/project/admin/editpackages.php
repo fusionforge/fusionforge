@@ -60,7 +60,8 @@ project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group
 echo '<h3>QRS:</h3>';
 echo 'Click here for to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
 
-echo '<H3>Packages</H3>
+$user_unix_name=user_getname();
+echo "<H3>Packages</H3>
 <P>
 You can use packages to group different file releases together, or use them however you like. 
 <P>
@@ -73,7 +74,7 @@ You can use packages to group different file releases together, or use them howe
 <h4>Your Packages:</H4>
 <P>
 Start by defining your packages, then you can upload files with FTP to the <B>incoming</B> directory on 
-<B>upload.sourceforge.net</B>. Once you have the files uploaded, you can then <B>create releases</B> 
+<B><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></B>. Once you have the files uploaded, you can then <B>create releases</B> 
 of your packages.
 <P>
 Once you have have packages defined, you can start creating new <B>releases of packages.</B>
@@ -89,7 +90,7 @@ A release of a package can contain multiple files.
 <B>3.22.3</B><BR>
 <P>
 You can create new releases of packages by clicking on <B>Add/Edit Releases</B> next to your package name.
-<P>';
+<P>";
 
 /*
 
