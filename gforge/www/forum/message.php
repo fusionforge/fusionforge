@@ -56,21 +56,21 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','Forum'));
+		exit_error($Language->getText('general','error'),$Language->getText('forum_message','error_getting_new_forum'));
 	} elseif ($f->isError()) {
 		exit_error($Language->getText('general','error'),$f->getErrorMessage());
 	}
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumMessage'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
 	} elseif ($fm->isError()) {
 		exit_error($Language->getText('general','error'),$fm->getErrorMessage());
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumMessageFactory'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessagefactory'));
 	} elseif ($fmf->isError()) {
 		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
 	}
@@ -82,7 +82,7 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumHTML'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
 	} elseif ($fh->isError()) {
 		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}

@@ -34,12 +34,12 @@ if ($group_id) {
         exit_error($Language->getText('general','error'),$ff->getErrorMessage());
     }
 
-	forum_header(array('title'=>$Language->getText('forum','forums_for').' '. $g->getPublicName() ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
+	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
 
 	$farr =& $ff->getForums();
 	
 	if ($ff->isError() || count($farr) < 1) {
-		echo '<h1>'.$Language->getText('forum','error_no_forums_found').' '. $g->getPublicName() .'</h1>';
+		echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
 		echo $ff->getErrorMessage();
 		forum_footer(array());
 		exit;

@@ -323,8 +323,9 @@ class ForumHTML extends Error {
 
 		} else {
 			echo "<CENTER>";
-			echo '<h3><FONT COLOR="RED">'.$Language->getText('forum_utils','couldpostif').' '.
-				'<a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></FONT></h3>';
+			echo '<h3><FONT COLOR="RED">';
+			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).' ">','</a>'));
+			echo '</FONT></h3>';
 			echo "</CENTER>";
 		}
 
