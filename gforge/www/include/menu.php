@@ -196,7 +196,6 @@ function menu_project($grp) {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('Project: ' . group_getname($grp));
 		$HTML->menu_entry('/projects/'. group_getunixname($grp) .'/',$Language->getText('menu','project_summary'));
-		print '<P>';
 		$HTML->menu_entry('/project/admin/?group_id='.$grp,$Language->getText('menu','project_admin'));
 	$HTML->menuhtml_bottom();
 }
