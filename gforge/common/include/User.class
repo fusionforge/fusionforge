@@ -644,6 +644,7 @@ class User extends Error {
 	 */
 	function setShell($shell) {
 		$shells = file('/etc/shells');
+		$shells[count($shells)] = "/bin/cvssh";
 		$out_shells = array();
 		foreach ($shells as $s) {
 			if (substr($s, 0, 1) == '#') {
