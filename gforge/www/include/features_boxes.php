@@ -41,7 +41,7 @@ function show_top_downloads() {
 		frs_dlstats_grouptotal_vw.downloads
 		FROM frs_dlstats_grouptotal_vw,groups
 		WHERE
-		frs_dlstats_grouptotal_vw.group_id=groups.group_id
+		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.is_public='1'
 		ORDER BY downloads DESC
 	", 10, 0, SYS_DB_STATS);
 //	echo db_error();
