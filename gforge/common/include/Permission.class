@@ -216,7 +216,7 @@ class Permission extends Error {
 			WHERE user_id='". $this->User->getID() ."'
 			AND group_id='1'
 			AND admin_flags='A'");
-		$row_count = db_fetch_array($result);
+		$row_count = db_fetch_array($res);
 		$this->is_site_admin = $res && $row_count['count'] > 0;
 		db_free_result($res);
 
