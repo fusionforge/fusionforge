@@ -57,7 +57,7 @@ if (!$rss) {
 		$HTML->header(array('title'=>'Search','pagename'=>'search'));
 	}
 
-	echo "<p align="center">";
+	echo "<p align=\"center\">";
 
 	// show search box which will return results on
 	// this very page (default is to open new window)
