@@ -515,6 +515,7 @@ mail_admin_change_status	section	Mailing List Admin
 mail_admin_change_status	title	Admin / Update Lists
 menu	about_sourceforge	About $1
 menu	account_maintenance	Account Maintenance
+menu	register_project	Register Project
 menu	bookmark_page	Bookmark Page
 menu	change_my_theme	Change My Theme
 menu	code_snippet_library	Code Snippet Library
@@ -980,7 +981,7 @@ project_admin_editgroupinfo	use_mailing_lists	Use Mailing Lists
 project_admin_editgroupinfo	use_surveys	Use Surveys
 project_admin_editgroupinfo	use_forums	Use Forums
 project_admin_editgroupinfo	use_pm	Use Project/Task Manager
-project_admin_editgroupinfo	use_pm	Use CVS
+project_admin_editgroupinfo	use_cvs	Use CVS
 project_admin_editgroupinfo	enable_pserver	Enable pserver
 project_admin_editgroupinfo	enable_anonymous_cvs	Enable anonymous CVS
 project_admin_editgroupinfo	use_news	Use News
