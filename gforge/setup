@@ -1,16 +1,9 @@
 #! /bin/sh
 apacheconf=/etc/apache/httpd.conf
 
-readdefault(){
-	
-	echo `grep $1 etc/gforge.conf | sed 's/.[^=]*=\(.*\)/\1/'`
-}
 getval(){
 	echo -n $1 \[$2\] ?
 	read $1
-}
-askdefault (){
-	echo bid
 }
 
 # This is used to make a default working gforge.conf
@@ -38,7 +31,7 @@ DEFAULTadmin_login=admin
 DEFAULTadmin_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 DEFAULTskill_list="Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
 DEFAULTdefault_trove_cat=18
-DEFAULTldap_host=ldap.$DEFAULTdomain_name
+DEFAULTldap_host=localhost
 DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 DEFAULTcgidir=`pwd`/utils
@@ -59,11 +52,18 @@ DEFAULTsys_theme=gforge
 DEFAULTsys_lang=English
 DEFAULTsys_use_ldap=0
 DEFAULTsys_use_jabber=0
+DEFAULTsys_use_auth_ldap=1
+DEFAULTsys_ldap_auth_host=localhost
+DEFAULTsys_ldap_auth_port=389
+DEFAULTsys_ldap_auth_version=3
+DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 # TODO
 #usr_lib_gforge=`pwd`
 #vhost_name
 #docdir
+}
 
+writedefault(){
 # Here is the fun
 # This create a default conf file in $1 
 tmpfile=$1.$$computedefault
@@ -82,22 +82,25 @@ readdefault() {
 
 echo "Setting defaults"
 
+computedefault
+writedefault etc/gforge.conf.new
 if [ -f etc/gforge.conf ]
 then
 	readdefault etc/gforge.conf
 else
-	computedefault etc/gforge.conf
-	readdefault etc/gforge.conf
+	readdefault etc/gforge.conf.new
 fi
 
 echo "Enter values or type enter for defaults:"
 # Here is the fun II
 # This ask for change of default
 tmpfile=$1.$$getval
-cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' >> $tmpfile
+cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' > $tmpfile
 . $tmpfile
 rm -f $tmpfile
 
+writedefault etc/gforge.conf.new
+mv etc/gforge.conf.new etc/gforge.conf
 #cat $0 | grep '^DEFAULT' | sed 's/^DEFAULT\(.[^=]*\)=.*/DEFAULT\1 \1/' | while read defvar var
 #do
 #	echo $defvar $var 
