@@ -1,0 +1,5 @@
+plugin_scmcvs	cvs_repository	Repositório CVS
+plugin_scmcvs	error_only_projects_can_use_cvs	Erro, Apenas Projetos Podem Usar CVS
+plugin_scmcvs	error_this_project_has_turned_off	Erro, Este Projeto Desabilitou o CVS
+plugin_scmcvs	section	Projeto: $1
+plugin_scmcvs	title	CVS

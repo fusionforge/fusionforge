@@ -1,0 +1,15 @@
+#plugin_scmcvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
+#plugin_scmcvs	anoncvsup	Updates from within the module's directory do not need the -d parameter.
+#plugin_scmcvs	browseit	Browse CVS Repository
+#plugin_scmcvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
+plugin_scmcvs	cvs_repository	CVS Repository
+#plugin_scmcvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
+#plugin_scmcvs	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
+plugin_scmcvs	developername	ontwikkelaarnaam
+#plugin_scmcvs	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
+#plugin_scmcvs	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
+plugin_scmcvs	history	Repository Historie
+plugin_scmcvs	modulename	modulenaam
+plugin_scmcvs	nohistory	Dit project heeft geen CVS historie.
+plugin_scmcvs	section		Project: $1
+plugin_scmcvs	title		CVS
