@@ -145,7 +145,7 @@ class FRSFile extends Error {
 		//echo $cmd;
 		//print_r($out);
 		if (!file_exists("$newfilelocation$name")) {
-			$this->setError($Language->getText('frs_file','error_cannot_move').':'.$newfilelocation.$name);
+			$this->setError($Language->getText('frs_file','error_cannot_move').': '.$newfilelocation.$name);
 			return false;
 		}
 
@@ -333,6 +333,7 @@ class FRSFile extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
+		global $Language;
 
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
@@ -341,6 +342,7 @@ class FRSFile extends Error {
 			return false;
 		}
 
+		// Sanity checks 
 		if ( $release_id ) {
 			// Check that the new FRSRelease id exists
 			if ($FRSRelease=frsrelease_get_object($release_id)) {
@@ -358,6 +360,8 @@ class FRSFile extends Error {
 			$release_id = $this->FRSRelease->getID();
 		}
 
+		// Update database
+		db_begin();
 		$res=db_query("UPDATE frs_file SET
 			type_id='$type_id',
 			processor_id='$processor_id',
@@ -370,6 +374,32 @@ class FRSFile extends Error {
 			return false;
 		}
 
+		// Move physically file if needed
+		if ($release_id != $this->FRSRelease->getID()) {
+			$old_file_location = $GLOBALS['sys_upload_dir'].'/'.
+				$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
+				$this->FRSRelease->FRSPackage->getFileName().'/'.
+				$this->FRSRelease->getFileName().'/'.
+				$this->data_array['filename'];
+			$new_file_location = $GLOBALS['sys_upload_dir'].'/'.
+				$FRSRelease->FRSPackage->Group->getUnixName().'/'.
+				$FRSRelease->FRSPackage->getFileName().'/'.
+				$FRSRelease->getFileName().'/'.
+				$this->data_array['filename'];
+			if (file_exists($new_file_location)) {
+				db_rollback();
+				$this->setError($Language->getText('frs_file','error_already_exists'));
+				return false;
+			}
+			$cmd="/bin/mv $old_file_location $new_file_location";
+			exec($cmd,$out);
+			if (!file_exists($new_file_location)) {
+				db_rollback();
+				$this->setError($Language->getText('frs_file','error_cannot_move').': '.$new_file_location);
+				return false;
+			}
+		}
+		db_commit();
 		return true;
 	}
 }
