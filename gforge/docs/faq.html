@@ -5,7 +5,7 @@
 <body>
 
 <h2><center>GForge 3.0 FAQ</center></h2>
-<h3><center>Updated 4/24/2003</center></h3>
+<h3><center>Updated 4/29/2003</center></h3>
 <h3><center>Suggestions are <a href="http://gforge.org/forum/forum.php?forum_id=6">welcome</a>.</center></h3>
 
 <br/><a href="#users">Users FAQ</a>
@@ -264,17 +264,15 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
 <br></br>
 <li>
 <b>I've modified the documentation; how do I generate the PDF files?</b>
-<p>GForge uses the <a href="http://jakarta.apache.org/turbine/maven/">Maven</a> project to generate PDF files.  To use it:
+<p>GForge uses <a href="http://maven.apache.org/">Maven</a> to generate the documentation.  To use it:
 <ol>
-<li>Get the latest Maven code from the Jakarta <a href="http://jakarta.apache.org/site/cvsindex.html">CVS repo</a>.
+<li>Install the latest Maven release.
 <li>Set up an environmental variable <code>MAVEN_HOME</code> to whereever you checked out the Maven code
 <li>Add $MAVEN_HOME/bin to your PATH
 <li>Run the build-bootstrap.xml Ant build script, i.e., <code>ant -f build-bootstrap.xml</code>
-<li>When that's done, cd over into gforge/docs/xdocs, and run Maven with the pdf goal, i.e., <code>maven pdf:pdf</code>
-<li>A PDF file will be generated and placed in the docs/ directory.
-<li>To generate nice looking HTML browsable documentation, you can run the default goal of maven, i.e., <code>maven</code>
+<li>When that's done, run <code>gforge/docs/xdocs/generate_docs.sh</code>.
+<li>Now you've got a PDF file and a zip file full of HTML in the <code>gforge/docs/xdocs/</code> directory.  Yay!
 </ol>
-<p>We recognize that this is a pain - i.e., having to check out and compile the Maven source.  We have to do that, though, because the PDF plugin is broken in the current Maven release (beta7).  When beta8 comes out, these instructions should become a bit simpler.
 </li>
 
 
