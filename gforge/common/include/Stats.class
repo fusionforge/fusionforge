@@ -76,6 +76,8 @@ class Stats extends Error {
 		return db_query("select g.unix_group_name, g.group_name, sum(s.msg_posted) as items "
       ." from stats_project s, groups g "
       ." where s.group_id = g.group_id "
+      ." and g.is_public=1 "
+      ." and g.status='A' "
       ." group by g.unix_group_name, g.group_name "
       ." order by items desc", 100);
 	}
@@ -84,6 +86,8 @@ class Stats extends Error {
 		return db_query("select g.group_name, g.unix_group_name, sum(s.page_views) as items "
 			." from stats_project_months s, groups g "
 			." where s.group_id = g.group_id "
+      ." and g.is_public=1 "
+      ." and g.status='A' "
 			." group by g.group_name, g.unix_group_name "
 			." order by items desc", 100);
 	}
