@@ -20,7 +20,7 @@ export SYNC_FILE
 
 if [ $DO_DB == 1 ] 
 then 
-	if [ GET_REMOTE == 1 ]
+	if [ $GET_REMOTE == 1 ]
 	then
 		ssh root@$OLDSFSERVER "su -s /bin/sh $OLDDB -c \"/usr/lib/postgresql/bin/pg_dump $OLDDB\"" > /root/db_dump_$OLDDB
 		[ -f /root/db_dump_$OLDDB ] && echo "Adjusting /root/db_dump.tar" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /root/db_dump_$OLDDB
