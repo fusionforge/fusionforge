@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-helloworld
+# prerm script for gforge
 #
 # see: dh_installdeb(1)
 
@@ -13,21 +13,33 @@ set -e
 #        * <deconfigured's-prerm> `deconfigure' `in-favour'
 #          <package-being-installed> <version> `removing'
 #          <conflicting-package> <version>
-# for details, see http://www.debian.org/doc/debian-policy/ or
-# the debian-policy package
+# for details, see /usr/share/doc/packaging-manual/
 
+. /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 case "$1" in
-    remove|deconfigure)
-	/usr/lib/gforge/bin/unregister-plugin helloworld
-	invoke-rc.d apache reload
-	/usr/lib/gforge/plugins/helloworld/bin/db-delete.pl
-        ;;
-    upgrade|failed-upgrade)
+    remove)
+	db_title "Unconfiguring Gforge"
+
+	# Unpatch Exim configuration files
+	/usr/lib/gforge/bin/install-exim4.sh purge-files
+	propose_update_remove /etc/aliases
+	propose_update_remove /etc/exim4/exim4.conf
+	propose_update_remove /etc/exim4/exim4.conf.template
+	propose_update_remove /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+
+	# Clean debconf after ourselves
+	db_stop
+
+        # Exim config removal
+	/usr/lib/gforge/bin/install-exim4.sh purge
+	;;
+    upgrade|deconfigure|failed-upgrade)
         ;;
     *)
         echo "prerm called with unknown argument \`$1'" >&2
-        exit 1
+        exit 0
     ;;
 esac
 
@@ -37,5 +49,3 @@ esac
 #DEBHELPER#
 
 exit 0
-
-
