@@ -194,6 +194,9 @@ $default_trove_cat = {default_trove_cat};
 //	JPGRAPH Package
 $sys_path_to_jpgraph='/usr/share/jpgraph/';
 
+//      CVSWEB
+$sys_path_to_cvsweb='/usr/lib/gforge/bin/';
+
 // Force Login
 $sys_force_login = {sys_force_login};
 

@@ -114,6 +114,9 @@ if ($project->enableAnonCVS() || !$anonymous) {
 	echo $Language->getText('scm_index', 'browsetree');
 ?>
 		<UL>
+		<LI>Christian Bayle did it<BR><a href=/scm/cvsweb.php/?cvsroot=<?php print $project->getUnixName(); ?> >
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb php wrapper)</b></a>
+		</UL>
 		<LI><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb)</b></a>
 		</UL>

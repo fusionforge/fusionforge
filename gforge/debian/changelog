@@ -1,9 +1,11 @@
 gforge (3.1-3+) unstable; urgency=low
 
   * [Christian] corrected stupid chmod error in user_dump_update.pl
-  that was making unwritable htdocs dir to the group
+    that was making unwritable htdocs dir to the group
+  * [Christian] added support for cvsweb.php a cvsweb wrapper 
+    updated to last cvsweb version
 
- -- Christian Bayle <bayle@debian.org>  Fri,  7 Nov 2003 00:01:09 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun,  9 Nov 2003 20:16:48 +0100
 
 gforge (3.1-3) unstable; urgency=low
 

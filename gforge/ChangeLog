@@ -1,3 +1,14 @@
+2003-11-04  Christian Bayle <bayle@debian.org>
+
+	* added cvsweb.php a cvsweb wrapper
+	This requires the following files from cvsweb
+	Copyright terms are the BSD license, with the removal of condition 3,
+	the advertising clause.
+	utils/cvsweb
+	etc/cvsweb.conf
+	www/images/cvsweb/*.png
+	* Applied Mitch Murphy patch [ #583 ] CVS commit checkbox update fix
+
 2003-11-04  Tim Perdue <tim @ perdue.net>
 
 	* www/pm added "mass update" for task manager
