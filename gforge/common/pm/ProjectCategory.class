@@ -94,7 +94,7 @@ class ProjectCategory extends Error {
 			return false;
 		}
 		$sql="INSERT INTO project_category (group_project_id,category_name) 
-			VALUES ('".$this->ProjectGroup->getID()."','$name')";
+			VALUES ('".$this->ProjectGroup->getID()."','".htmlspecialchars($name)."')";
 
 		$result=db_query($sql);
 

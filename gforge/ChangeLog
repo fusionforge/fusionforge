@@ -1,5 +1,8 @@
 2003-01-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* common/pm/ProjectCategory.class: Audit: escape special characters
+	from user input before submitting to database.
+
 	* www/include/bookmarks.php: Audit: escape special characters from
 	user input before submitting to database.
 
