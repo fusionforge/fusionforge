@@ -83,7 +83,7 @@ class PluginManager extends Error {
 	 */
 	function LoadPlugins () {
 		$plugins_data = $this->GetPlugins() ;
-		$include_path = "/usr/lib/sourceforge/plugins/" ;
+		$include_path = "/usr/lib/gforge/plugins/" ;
 		foreach ($plugins_data as $p_id => $p_name) {
 			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
