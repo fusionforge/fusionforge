@@ -8,6 +8,7 @@ etc/gforge/plugins/scmcvs
 usr
 usr/lib
 usr/lib/gforge
+usr/lib/gforge/bin
 usr/lib/gforge/plugins/
 usr/lib/gforge/plugins/scmcvs
 usr/lib/gforge/plugins/scmcvs/bin
