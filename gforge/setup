@@ -76,6 +76,7 @@ DEFAULTsys_use_ftp=true
 DEFAULTsys_use_trove=true
 DEFAULTsys_use_snippet=true
 DEFAULTsys_use_ssl=false
+DEFAULTsys_use_people=true
 DEFAULTsys_project_reg_restricted=true
 DEFAULTsys_localization_enable_caching=true
 DEFAULTsys_localization_cache_path=`pwd`/var/cache/gforge/
