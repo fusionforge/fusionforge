@@ -7,16 +7,16 @@ psql -U sourceforge -h `hostname -s` sourceforge 2>&1 > $DESCDIR/$1 <<-FIN
 $DBPASS
 \\$2
 FIN
-cat $DESCDIR/$1 | grep "^ [a-z]" | sed "s/^ \([a-z].[^|]*\)|.*/\1/" | sort -u > $DESCDIR/$1.tmp
+cat $DESCDIR/$1 | grep "^ [a-z]" | sed "s/^ \([a-z].[^ |]*\). *|.*/\1/" | sort -u > $DESCDIR/$1.tmp
 mv $DESCDIR/$1.tmp $DESCDIR/$1
 [ ! -d $DESCDIR/$1.dump ] && mkdir $DESCDIR/$1.dump
-cat  $DESCDIR/$1 | while read tablename
-do
-	pg_dump --no-owner --no-reconnect -h `hostname -s` sourceforge -u -c -d -t $tablename -f $DESCDIR/$1.dump/$tablename <<-FIN
-sourceforge
-$DBPASS
-FIN
-done
+#cat  $DESCDIR/$1 | while read tablename
+#do
+#	pg_dump --no-owner --no-reconnect -h `hostname -s` sourceforge -u -c -d -t $tablename -f $DESCDIR/$1.dump/$tablename <<-FIN
+#sourceforge
+#$DBPASS
+#FIN
+#done
 }
 
 [ "x$DESCDIR" == "x" ] && DESCDIR=desc
