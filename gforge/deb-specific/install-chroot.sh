@@ -49,10 +49,13 @@ case "$1" in
 	    /usr/sbin/sshd \
 	    /usr/bin/cvs \
 	    /bin/ls \
+	    /bin/sh \
 	    /bin/bash \
 	    /bin/chgrp ; do
-	  echo "$binary"
-	  ldd $binary | cut -d" " -f3
+	  if [ -x "$binary" ] ; then
+	      echo "$binary"
+	      ldd $binary | cut -d" " -f3
+	  fi
 	done \
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
