@@ -43,7 +43,8 @@ if ($send_mail) {
 	
 	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection	
 	$name = util_remove_CRLF($name);
-	$email = util_remove_CRLF($email);
+	// Really don't see what wrong could happen with CRLF in message body
+	//$email = util_remove_CRLF($email);
 	$subject = util_remove_CRLF($subject);
 
 	if ($toaddress) {
