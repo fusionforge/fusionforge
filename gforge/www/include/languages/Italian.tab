@@ -129,7 +129,7 @@ conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-contact	about_blurb	<p>Questa è la pagina di contatto per <b>$1</b> -- se c'è problema con un progetto qui per piacere visitare la pagina per quel progetto a: <tt>http://$2/projects/&lt;nome di progetto&gt;</tt>.</p><p>Se c'è problema con $1, per piacere visitare <a href="/projects/sourceforge">la pagina di $1</a></p>.
+contact	about_blurb	<p>Questa &egrave; la pagina di contatto per <b>$1</b> -- se c'&egrave; problema con un progetto qui per piacere visitare la pagina per quel progetto a: <tt>http://$2/projects/&lt;nome di progetto&gt;</tt>.</p><p>Se c'&egrave; problema con $1, per piacere visitare <a href="/projects/sourceforge">la pagina di $1</a></p>.
 contact	title	Contattare $1
 cvs	section	Progetto: $1
 cvs	title	CVS
@@ -247,7 +247,7 @@ frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
 general	return	[Return to $1]
 general	sitename	$1
-general	footer	Questo è $1.  Per sapere più, inclusa la informazione di copyright, visitare <a href="/about.php">questa pagina</a>.
+general	footer	Questo &egrave; $1.  Per sapere pi&ugrave;, inclusa la informazione di copyright, visitare <a href="/about.php">questa pagina</a>.
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Could not get permission
 general	permexcuse	This project's administrator will have to grant you permission to view this page.
