@@ -11,8 +11,6 @@ sourceforge-common +
                    |
                    +- sourceforge-dns-bind9 | sourceforge-dns 
                    |
-                   +- sourceforge-lists-mailman | sourceforge-lists 
-                   |
                    +- sourceforge-ldap-openldap | sourceforge-ldap +
                                                                    |
                                                                    +- sourceforge-shell-ldap | sourceforge-shell 
@@ -20,4 +18,6 @@ sourceforge-common +
                                                                    +- sourceforge-cvs 
                                                                    |
                                                                    +- sourceforge-ftp-proftpd | sourceforge-ftp 
+                                                                   |
+                                                                   +- sourceforge-lists-mailman | sourceforge-lists 
 
