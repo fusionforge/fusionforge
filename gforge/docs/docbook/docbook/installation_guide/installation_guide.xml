@@ -87,9 +87,9 @@
 			<title>Installing GForge</title>
 			<section>
 				<title>Directory Layout</title>
-				<para>Instructions below assume that gforge is unpacked into <filename class="directory">/var/www/gforge</filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
+				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/var/www/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
 				<note>
-					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/lib/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/local/lib/gforge</filename>.</para>
+					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/lib/gforge</filename>.</para>
 				</note>
 			</section>
 			<section>
@@ -97,7 +97,7 @@
 				<para>To install GForge, follow these steps (as root):</para>
 				<screen>
 # <userinput>bzip2 -dc gforge-4.1.tar.bz2 | tar xvf -</userinput>
-# <userinput>mv gforge-4.1 /var/www/gforge</userinput>
+# <userinput>mv gforge-4.1 <replaceable>/var/www/gforge</replaceable></userinput>
 </screen>
 			</section>
 			<section>
@@ -105,7 +105,7 @@
 				<para>In the GForge distribution, you will find <filename>etc/local.inc</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable>):</para>
 				<programlisting>
 # <userinput>mkdir /etc/gforge</userinput>
-# <userinput>cp /var/www/gforge/etc/local.inc /etc/gforge</userinput>
+# <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc /etc/gforge</userinput>
 # <userinput>chown -R root: /etc/gforge</userinput>
 # <userinput>chmod -R 644 /etc/gforge</userinput>
 # <userinput>chown <replaceable>apache-user</replaceable> /etc/gforge/local.inc</userinput>
@@ -120,7 +120,7 @@
 						<para>Create a directory <filename class="directory">/etc/gforge</filename></para>
 					</listitem>
 					<listitem>
-						<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory">/var/www/gforge/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
+						<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory"><replaceable>/var/www/gforge</replaceable>/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
 					</listitem>
 					<listitem>
 						<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
@@ -141,7 +141,7 @@ $sys_server="postgres"
 							</listitem>
 							<listitem>
 								<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
-<programlisting>$sys_urlroot="/var/www/gforge/www/";</programlisting>
+<programlisting>$sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";</programlisting>
 							</listitem>
 							<listitem>
 								<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
@@ -210,10 +210,54 @@ $ <userinput>createlang plpgsql gforge</userinput>
 </screen>
 				<para>Finally, install the database:</para>
 <screen>
-$ <userinput>cd /var/www/gforge/db</userinput>
-$ <userinput>psql -a -U gforge gforge -f gforge.sql &amp;&gt; /tmp/gforge.sql.log</userinput>
+$ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
+$ <userinput>psql -a -U gforge -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
 </screen>
 			</section>
+		</section>
+		<section>
+			<title>Configuring DNS Server (BIND)</title>
+			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums &ndash; consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
+			<para>New subdomain in <replaceable>company.com</replaceable> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
+<screen>
+gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
+ns.gforge       IN      A       <replaceable>1.2.3.4</replaceable>
+</screen>
+			<para>New zone file for <literal>gforge.<replaceable>company.com</replaceable></literal> may look like this:</para>
+<screen>
+$TTL    2d
+@       IN      SOA     gforge.<replaceable>example.com</replaceable>. hostmaster.gforge.<replaceable>example.com</replaceable>. (
+                              1         ; Serial
+                         172800         ; Refresh
+                            900         ; Update retry
+                        2419200         ; Expire
+                           3600 )       ; Negative Cache TTL
+;
+@               IN      NS      ns.gforge.<replaceable>example.com</replaceable>.
+@               IN      A       <replaceable>1.2.3.4</replaceable>
+ns              IN      A       <replaceable>1.2.3.4</replaceable>
+
+download        IN      A       <replaceable>1.2.3.4</replaceable>
+upload          IN      A       <replaceable>1.2.3.4</replaceable>
+shell           IN      A       <replaceable>1.2.3.4</replaceable>
+users           IN      A       <replaceable>1.2.3.4</replaceable>
+gfdocs          IN      A       <replaceable>1.2.3.4</replaceable>
+lists           IN      A       <replaceable>1.2.3.4</replaceable>
+cvs             IN      A       <replaceable>1.2.3.4</replaceable>
+svn             IN      A       <replaceable>1.2.3.4</replaceable>
+scm             IN      A       <replaceable>1.2.3.4</replaceable>
+ldap            IN      A       <replaceable>1.2.3.4</replaceable>
+jabber          IN      A       <replaceable>1.2.3.4</replaceable>
+images          IN      A       <replaceable>1.2.3.4</replaceable>
+</screen>
+			<para>The new zone must be added in main BIND configuration file:</para>
+<screen>
+zone "gforge.<replaceable>example.com</replaceable>" {
+        type master;
+        file "<replaceable>/dist-specific/path/to/zone-file</replaceable>";
+};
+</screen>
+			<para>Of course, changes will take effect after reloading BIND.</para>
 		</section>
 		<section>
 			<title>Configuring PHP</title>
@@ -245,7 +289,7 @@ magic_quotes_gpc = On
 				<listitem>
 					<para>and configure the <literal>include_path</literal> directive as follows (on one line):</para>
 <programlisting>
-include_path=".:/var/www/gforge:/var/www/gforge/www/include:/etc/gforge"
+include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
 </programlisting>
 				</listitem>
 			</orderedlist>
@@ -303,7 +347,7 @@ ServerAdmin webmaster@gforge.company.com
 				<listitem>
 					<para>Change the <literal>DocumentRoot</literal> to point to the <filename class="directory">www</filename> directory:</para>
 <programlisting>
-DocumentRoot "/var/www/gforge/www"
+DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
 </programlisting>
 				</listitem>
 				<listitem>
@@ -612,13 +656,13 @@ mkdir /cvsroot
 
 # Optional - Set up basic index.php file for CVS vhost if desired
 mkdir /var/www/cvs
-cp /var/www/gforge/cronjobs/cvs-cron/www/* /var/www/cvs/
+cp <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/www/* /var/www/cvs/
 
 #copy the scmcvs plugin config to /etc/gforge/
-cp -R /var/www/gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
+cp -R <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/etc/plugins/ /etc/gforge/
 
 #make sure the cvs crons are executable
-cd /var/www/gforge/cronjobs/cvs-cron/
+cd <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/
 chmod 755 *.php *.sh
 </programlisting>
 				<para>You will likely have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
@@ -727,7 +771,7 @@ mkdir /var/svn
 
 # Optional - Set up some basic files for SVN-over-DAV only
 mkdir /var/www/svn
-cp /var/www/gforge/cronjobs/dav-svn/www/* /var/www/svn/
+cp <replaceable>/var/www/gforge</replaceable>/cronjobs/dav-svn/www/* /var/www/svn/
 
 #copy the scmsvn config files to /etc/gforge/
 cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
@@ -744,9 +788,9 @@ cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
 			<title>Installation</title>
 <programlisting>
 #copy the cvstracker config files to /etc/gforge/
-cd /var/www/gforge/plugins/cvstracker/
+cd <replaceable>/var/www/gforge</replaceable>/plugins/cvstracker/
 cp -R etc/plugins/cvstracker/ /etc/gforge/plugins/
-cp -R www/ /var/www/gforge/www/plugins/cvstracker/
+cp -R www/ <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
 </programlisting>
 		</section>
 	</section>
