@@ -324,7 +324,7 @@ psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
  <li>Edit /var/lib/pgsql/data/pg_hba.conf:<br/>
  <ul>
   <li>Set for example access right to</li>
-  <li><code>host     all     0.0.0.0   0 0.0.0   md5</code></li>
+  <li><code>host     all     0.0.0.0   0.0.0.0   md5</code></li>
  </ul>
 </li>
 </ul>
@@ -346,9 +346,10 @@ Verify the version of PHP installed on your system:
 <br><code>register_globals = On</code></br>
 </li>
 <li> and configure the include_path directive as follows:
-<br/><code>include_path=".:/var/www/gforge-3.1/:/var/www/gforge-3.1/common/include:<br/>
- /var/www/gforge-3.1/www/include:/var/www/gforge-3.1/etc/</code>:
-<br/>
+<source>
+include_path=".:/var/www/gforge-3.1/:/var/www/gforge-3.1/common/include:
+/var/www/gforge-3.1/www/include:/var/www/gforge-3.1/etc/"
+</source>
 
 </li>
 </ol>
@@ -403,19 +404,19 @@ This directory will contain all files/patches uploaded to your gforge site.
 </li>
 
 <li>Create a directory<code> /etc/gforge</code><br/></li>
-<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge/etc/</code> to <code>/etc/gforge/</code> </li>
+<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.0/etc/</code> to <code>/etc/gforge/</code> </li>
 <li>Open <code>/etc/gforge/local.inc</code>, configuring the following basic parameters:
 <ol>
 <li>
 Database configuration:
 
-<source><![CDATA[
+<source>
 $sys_dbhost="localhost"
 $sys_dbname="gforge"
 $sys_dbuser="gforge"
 $sys_dbpasswd="gforge"
 $sys_server="postgres"
-      ]]></source>
+</source>
 
 <p/>
 </li>
@@ -458,7 +459,7 @@ should contain the domain of your server, e.g. gforge.org.
 Alias /pipermail/ /usr/local/mailman/archives/public/
 ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 </source>
-<p>Run the script <code>gforge/cronjobs/mailing_lists_create.php</code>; this creates any lists that are already in the database.</p>
+<p>Run the script <code>gforge/cronjobs/mail/mailing_lists_create.php</code>; this creates any lists that are already in the database.</p>
 </subsection>
 
 <subsection name="Configuring CVS">
