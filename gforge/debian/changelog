@@ -10,15 +10,25 @@ sourceforge (2.5-25+) unstable; urgency=low
     changed).
   * [Roland] Fixed cleaning of LDAP-related files on purge.
   * [Roland] Also fixed cleaning of LDAP directory on remove.
-  * [Roland] Fixed SGML in sourceforge-config.sgml.
   * [Roland] Updated debian/TODO a bit.  It seems we mostly have "can wait
     until / will be done in / already done in the 2.6 series" entries now,
     which is cool.
   * [Roland] Removed an invalid (and useless) request from
     approve-pending.php.  Should remove a few lines in PostgreSQL error
     logs.
+  * [Roland] A few changes here and there to get Sourceforge working with
+    the recently uploaded PostgreSQL 7.2, see items tagged [PG7.2] below.
+  * [Roland] [PG7.2] Send HUP signal to postmaster in postinst and prerm
+    scripts.  This because PostgreSQL now only re-reads the pg_hba.conf
+    file upon receiving this signal (and no more on each connection).
+  * [Roland] [PG7.2] Fixed insertion of over-long hostnames in the
+    database (db-upgrade.pl).
+  * [Roland] Also in db-upgrade.pl: fixed the (probably truncated)
+    existing unix_box entries.
+  * [Roland] Various minor fixes here and there: Debconf templates,
+    install-dap.sh, sourceforge-config.sgml.
 
- -- Roland Mas <lolando@debian.org>  Thu, 28 Feb 2002 23:01:55 +0100
+ -- Roland Mas <lolando@debian.org>  Mon,  4 Mar 2002 23:28:52 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 
