@@ -53,7 +53,7 @@ $err .= db_error();
 
 #3 weeks ago for jobs
 $then=(time()-604800*3);
-db_query("UPDATE people_job SET status_id = '3' where date < '$then'");
+db_query("UPDATE people_job SET status_id = '3' where post_date < '$then'");
 $err .= db_error();
 
 db_commit();
