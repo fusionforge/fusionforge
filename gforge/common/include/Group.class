@@ -440,10 +440,6 @@ class Group extends Error {
 		if (!$use_stats) {
 			$use_stats=0;
 		}
-		
-		if (!$new_doc_address) {
-			$new_doc_address='';
-		}
 		if (!$send_all_docs) {
 			$send_all_docs=0;
 		}
