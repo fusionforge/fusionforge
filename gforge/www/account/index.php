@@ -164,10 +164,10 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 // ############################### Shell Account
 
 if ($u->getUnixStatus() == 'A') {
-	echo $HTML->boxTop("Shell Account Information");
+	echo $HTML->boxTop($Language->getText('account_shell','title')."");
 	print '&nbsp;
-<br />Shell box: <strong>'.$u->getUnixBox().'</strong>
-<br />CVS/SSH Shared Authorized Keys: <strong>';
+<br />'.$Language->getText('account_shell','shell_box').': <strong>'.$u->getUnixBox().'</strong>
+<br />'.$Language->getText('account_shell','autorized_keys').': <strong>';
 	// get shared key count from db
 	$expl_keys = explode("\n", $u->getAuthorizedKeys());
 	if ($expl_keys[0]) {
@@ -175,7 +175,7 @@ if ($u->getUnixStatus() == 'A') {
 	} else {
 		print '0';
 	}
-	print '</strong> <a href="editsshkeys.php">[Edit Keys]</a>';
+	print '</strong> <a href="editsshkeys.php">['.$Language->getText('account_shell','edit_keys').']</a>';
 	echo $HTML->boxBottom();
 }
 ?>
