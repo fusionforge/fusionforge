@@ -1,4 +1,4 @@
-sourceforge (2.6-0+8+) unstable; urgency=low
+sourceforge (2.6-0+9) unstable; urgency=low
 
   * Let's continue
   * [Christian] Added dependancy on rcs for our patched cvsweb
@@ -29,10 +29,11 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Roland] Also rewrote the French language translation file, so as to
     not be lagging behind the Koreans :-)
   * [Roland] Also fixed a few typoes in the English language.
-  * [Christian] Removed confusing unused image from archive and put in unused 
+  * [Christian] Removed confusing unused image from archive and put in unused
     directory in cvs, preparing easy Theming
+  * [Christian] Theming should be easier though not complete
 
- -- Roland Mas <lolando@debian.org>  Thu, 11 Apr 2002 14:17:40 +0200
+ -- Christian Bayle <bayle@debian.org>  Tue, 16 Apr 2002 22:14:28 +0200
 
 sourceforge (2.6-0+8) unstable; urgency=low
 
