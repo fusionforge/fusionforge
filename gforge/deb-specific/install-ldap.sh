@@ -186,6 +186,7 @@ configure_slapd(){
 	exit 1
     fi
     cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
+    purge_slapd_new
 
     # Maybe should comment referral line too
     echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
@@ -261,7 +262,10 @@ purge_slapd(){
 	exit 1
     fi
     cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
+    purge_slapd_new
+}
 
+purge_slapd_new(){
     perl -pi -e "s/^.*#Added by GForge install\n//" /etc/ldap/slapd.conf.gforge-new
     perl -pi -e "s/#Comment by GForge install#//" /etc/ldap/slapd.conf.gforge-new
     if grep -q "# Next second line added by GForge install" /etc/ldap/slapd.conf.gforge-new ; then
@@ -322,9 +326,9 @@ load_ldap(){
 	tmpldifadd=$(mktemp $tmpfile_pattern)
 	tmpldifmod=$(mktemp $tmpfile_pattern)
 	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
+#dc: $dc
 	cat >> $tmpldif <<EOF
 dn: $sys_ldap_base_dn
-#dc: $dc
 objectClass: top
 objectClass: domain
 objectClass: domainRelatedObject
@@ -387,11 +391,11 @@ EOF
 
 print_ldif_default(){
     dc=`echo $slapd_base_dn | sed 's/dc=\(.[^,]*\),.*/\1/'`
+#dc: $dc
     cat <<-FIN
 dn: $slapd_base_dn
 objectClass: dcObject
 objectClass: domain
-#dc: $dc
 
 dn: cn=admin,$slapd_base_dn
 objectClass: organizationalRole
@@ -423,10 +427,10 @@ setup_robot() {
 	tmpldif=$(mktemp $tmpfile_pattern)
 	tmpldifadd=$(mktemp $tmpfile_pattern)
 	tmpldifmod=$(mktemp $tmpfile_pattern)
+#dc: $dc
 	cat > $tmpldif <<-FIN
 dn: $gforge_base_dn
 objectClass: organization
-#dc: $dc
 
 dn: ou=People,$gforge_base_dn
 ou: People
