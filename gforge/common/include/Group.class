@@ -1488,7 +1488,6 @@ class Group extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-
 		db_begin();
 		
 		/*
@@ -1522,16 +1521,6 @@ class Group extends Error {
 				WHERE user_id='$user_id' AND group_id='". $this->getID() ."'");
 
 			if (db_numrows($res_member) < 1) {
-				//
-				//	user was not already a member
-				//
-				//	check and create if user doesn't exists
-				//
-				if (!$SYS->sysCheckCreateUser($user_id)) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
 				//
 				//	Create this user's row in the user_group table
 				//
@@ -1586,6 +1575,27 @@ class Group extends Error {
 					return false;
 				}
 
+				//
+				//	check and create if group doesn't exists
+				//
+//echo "<h2>Group::addUser SYS->sysCheckCreateGroup(".$this->getID().")</h2>";
+				if (!$SYS->sysCheckCreateGroup($this->getID())){
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+				//
+				//	check and create if user doesn't exists
+				//
+//echo "<h2>Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
+				if (!$SYS->sysCheckCreateUser($user_id)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+				//
+				//	Role setup
+				//
 				$role = new Role($this,$role_id);
 				if (!$role || !is_object($role)) {
 					$this->setError('Error Getting Role Object');
@@ -1596,16 +1606,9 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
+//echo "<h2>Group::addUser role->setUser($user_id)</h2>";
 				if (!$role->setUser($user_id)) {
 					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				//
-				//	set up their system info
-				//
-				if (!$SYS->sysGroupAddUser($this->getID(),$user_id)) {
-					$this->setError('addUser::ld3::'.$SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
@@ -1626,6 +1629,7 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
+//echo "<h2>Already Member Group::addUser role->setUser($user_id)</h2>";
 				if (!$role->setUser($user_id)) {
 					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
 					db_rollback();
@@ -1634,6 +1638,7 @@ class Group extends Error {
 				//
 				//	set up their system info
 				//
+//echo "<h2>Already Member Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
 				if (!$SYS->sysCheckCreateUser($user_id)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
@@ -1741,6 +1746,7 @@ class Group extends Error {
 			//
 			//	Remove user from system
 			//
+//echo "<h2>Group::addUser SYS->sysGroupRemoveUser(".$this->getID().",$user_id)</h2>";
 			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
@@ -1778,21 +1784,12 @@ class Group extends Error {
 			$this->setError('Role: '.$role->getErrorMessage());
 			return false;
 		}
+//echo "<h3>Group::updateUser role->setUser($user_id)</h3>";
 		if (!$role->setUser($user_id)) {
 			$this->setError('Role: '.$role->getErrorMessage());
 			return false;
 		}
-		//
-		//	Update user in system
-		//
-		db_begin();
-		if (!$SYS->sysGroupUpdateUser($this->getID(),$user_id)) {
-			$this->setError($SYS->getErrorMessage());
-			db_rollback();
-			return false;
-		}
 		$this->addHistory('updated user',$user_id);
-		db_commit();
 		return true;
 	}
 

@@ -570,64 +570,56 @@ class Role extends Error {
 					if ($usection_name == 'frs') {
 						$update_usergroup=true;
 					} elseif ($usection_name == 'scm') {
-						//$update_usergroup=true;
-
-						//iterate all users with this role
-						$res=db_query("SELECT user_id
-							FROM user_group 
-							WHERE role_id='".$this->getID()."'");
-						for ($z=0; $z<db_numrows($res); $z++) {
-
-							//TODO - Shell should be separate flag
-							//  If user acquired admin access to CVS,
-							//  one to be given normal shell on CVS machine,
-							//  else - restricted.
-							//
-							$cvs_flags=$this->getVal('scm',0);
-							$sql="UPDATE user_group
-								SET cvs_flags=".$cvs_flags." 
-								WHERE user_id=".db_result($res,$z,'user_id');
-							//echo '<h1>'.$cvs_flags.'::'.$sql.'</h1>';
-							$res2=db_query($sql);
-							if (!$res2) {
-								$this->setError('update::scm::'.db_error());
+						//TODO - Shell should be separate flag
+						//  If user acquired admin access to CVS,
+						//  one to be given normal shell on CVS machine,
+						//  else - restricted.
+						//
+						$cvs_flags=$this->getVal('scm',0);
+						$sql="UPDATE user_group
+							SET cvs_flags=".$cvs_flags." 
+							WHERE user_id=".$user_id;
+						//echo '<h1>'.$cvs_flags.'::'.$sql.'</h1>';
+						$res2=db_query($sql);
+						if (!$res2) {
+							$this->setError('update::scm::'.db_error());
+							db_rollback();
+							return false;
+						}
+						if ($cvs_flags>1) {
+							if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
+								$this->setError($SYS->getErrorMessage());
 								db_rollback();
 								return false;
 							}
-							if ($cvs_flags>1) {
-								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							} else {
-								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
+						} else {
+							if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
+								$this->setError($SYS->getErrorMessage());
+								db_rollback();
+								return false;
 							}
-
-							//
-							//  If user acquired at least commit access to CVS,
-							//  one to be promoted to CVS group, else, demoted.
-							//
-							if ($uvalue>0) {
-								if (!$SYS->sysGroupAddUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							} else {
-								if (!$SYS->sysGroupRemoveUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError($SYS->getErrorMessage());
-									db_rollback();
-									return false;
-								}
-							}
-
-
 						}
+
+						//
+						//  If user acquired at least commit access to CVS,
+						//  one to be promoted to CVS group, else, demoted.
+						//
+						if ($uvalue>0) {
+//echo "<h3>Role::setUser SYS->sysGroupAddUser(".$this->Group->getID().",$user_id,1)</h3>";
+							if (!$SYS->sysGroupAddUser($this->Group->getID(),$user_id,0)) {
+								$this->setError($SYS->getErrorMessage());
+								db_rollback();
+								return false;
+							}
+						} else {
+//echo "<h3>Role::setUser SYS->sysGroupRemoveUser(".$this->Group->getID().",$user_id,1)</h3>";
+							if (!$SYS->sysGroupRemoveUser($this->Group->getID(),$user_id,1)) {
+								$this->setError($SYS->getErrorMessage());
+								db_rollback();
+								return false;
+							}
+						}
+
 //
 //	If we decide to use a "RBAC Group" to define template roles
 //	The next 3 items will have to be modified to remap IDs for each project

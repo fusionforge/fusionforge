@@ -371,12 +371,14 @@ class pgsql extends System {
  	*/
 	function sysRemoveGroup($group_id) {
 		$query="DELETE FROM nss_usergroups WHERE group_id=$group_id";
+//echo "<h2>SYS::sysRemoveGroup: $query</h2>";
 		$res1=db_query($query);
 		if (!$res1) {
 			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
 			return false;
 		}
 		$query="DELETE FROM nss_groups WHERE group_id=$group_id ";
+//echo "<h2>SYS::sysRemoveGroup: $query</h2>";
 		$res3=db_query($query);
 	              	if (!$res3) {
 	                      	$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
@@ -395,36 +397,19 @@ class pgsql extends System {
  	*
  	*/
 	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
-		$query="DELETE FROM nss_usergroups WHERE user_id=$user_id AND group_id=$group_id";
+		if ($cvs_only) {
+			$query="DELETE FROM nss_usergroups WHERE user_id=$user_id AND group_id=$group_id
+			AND unix_group_name LIKE 'scm_%'";
+		} else {
+			$query="DELETE FROM nss_usergroups WHERE user_id=$user_id AND group_id=$group_id";
+		}
+//echo "<h2>SYS::sysGroupAddUser DELETE: $query</h2>";
 		$res0=db_query($query);
 		if (!$res0) {
 			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
 			return false;
 		}
 		$query="INSERT INTO nss_usergroups (
-			SELECT
-				users.unix_uid AS uid,
-				groups.group_id + ".$this->GID_ADD." AS gid,
-				users.user_id AS user_id,
-				groups.group_id AS group_id,
-				users.user_name AS user_name,
-				groups.unix_group_name AS unix_group_name
-			FROM users,groups,user_group
-			WHERE 
-				users.user_id=user_group.user_id
-			AND
-				groups.group_id=user_group.group_id
-			AND
-				users.user_id=$user_id
-			AND
-				groups.group_id=$group_id
-			AND
-				groups.status = 'A'
-			AND
-				users.unix_status='A'
-			AND
-				users.status = 'A'
-			UNION
 			SELECT
 				users.unix_uid AS uid,
 				groups.group_id + ".$this->SCM_UID_ADD." AS gid,
@@ -448,13 +433,48 @@ class pgsql extends System {
 			AND
 				users.status = 'A'
 			AND
-				user_group.cvs_flags > 0)
-		";
+				user_group.cvs_flags > 0) ";
+//echo "<h2>SYS::sysGroupAddUser ADDCVS: $query</h2>";
 		$res1=db_query($query);
 		if (!$res1) {
-			$this->setError('ERROR - Could Not Add Group Member(s): '.db_error());
+			$this->setError('ERROR - Could Not Add SCM Member(s): '.db_error());
 			return false;
 		}
+
+		if ($cvs_only) {
+			return true;
+		}
+
+		$query="INSERT INTO nss_usergroups (
+			SELECT
+				users.unix_uid AS uid,
+				groups.group_id + ".$this->GID_ADD." AS gid,
+				users.user_id AS user_id,
+				groups.group_id AS group_id,
+				users.user_name AS user_name,
+				groups.unix_group_name AS unix_group_name
+			FROM users,groups,user_group
+			WHERE 
+				users.user_id=user_group.user_id
+			AND
+				groups.group_id=user_group.group_id
+			AND
+				users.user_id=$user_id
+			AND
+				groups.group_id=$group_id
+			AND
+				groups.status = 'A'
+			AND
+				users.unix_status='A'
+			AND
+				users.status = 'A') ";
+//echo "<h2>SYS::sysGroupAddUser ADDSYS: $query</h2>";
+		$res2=db_query($query);
+		if (!$res2) {
+			$this->setError('ERROR - Could Not Add Shell Group Member(s): '.db_error());
+			return false;
+		}
+
 		return true;
 	}
 
@@ -468,7 +488,13 @@ class pgsql extends System {
  	*
  	*/
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
-		$query="DELETE FROM nss_usergroups WHERE group_id=$group_id AND user_id=$user_id";
+		if ($cvs_only) {
+			$query="DELETE FROM nss_usergroups WHERE group_id=$group_id AND user_id=$user_id
+			AND unix_group_name LIKE 'scm_%'";
+		} else {
+			$query="DELETE FROM nss_usergroups WHERE group_id=$group_id AND user_id=$user_id";
+		}
+//echo "<h2>SYS::sysGroupRemoveUser REM: $query</h2>";
 		$res1=db_query($query);
 		if (!$res1) {
 			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
