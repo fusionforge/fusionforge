@@ -1,0 +1,35 @@
+-- ---- Here is a function that I use to list fk(triggers) on a table.  Execute the
+-- ---- function to get the trigger name and then - drop trigger "trigger_name" on
+-- ---- table_name;
+-- -- Version 1.0, June 2002
+-- -- Marie G. Tuite
+-- -- Function lists FK by table.
+-- -- To execute:
+-- -- begin;select fn_list_fk('table_name');
+-- -- fetch all from "<cursor_name>"; end;
+-- create or replace function fn_list_fk(name)
+--     returns refcursor as
+-- '
+-- declare
+--     table_in alias for $1;
+--     rc refcursor;
+-- begin
+--     open rc for
+--         select tgname as trigger_name_sys
+--                ,tgconstrname  as trigger_name_given
+--                ,b.relname as table_name
+--                ,tgisconstraint as ri
+--                ,c.relname as parent_table
+--             from pg_trigger a,
+--                  pg_class b,
+--                  pg_class c
+--             where a.tgrelid=b.oid and b.relname=table_in
+--             and tgconstrrelid = c.oid;
+--     return rc;
+-- end;
+-- '
+-- language 'plpgsql'
+-- ;
+-- select tgname as trigger_name_sys, tgconstrname  as trigger_name_given, b.relname as table_name ,tgisconstraint as ri ,c.relname as parent_table from pg_trigger a, pg_class b, pg_class c where a.tgrelid=b.oid and b.relname=table_in and tgconstrrelid = c.oid;
+-- For project_task table
+select tgname as trigger_name_sys, tgconstrname  as trigger_name_given, b.relname as table_name ,tgisconstraint as ri ,c.relname as parent_table from pg_trigger a, pg_class b, pg_class c where a.tgrelid=b.oid and b.relname='project_task' and tgconstrrelid = c.oid;
