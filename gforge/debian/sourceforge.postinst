@@ -33,7 +33,7 @@ case "$1" in
 	
 	# "Fill in the blanks" in config files
         files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
-        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host newsadmin_groupid ldap_host ldap_base_dn skill_list"
+        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list"
         
 	# Invoke our magic script
 	# Parameters are input file, output file, debconf prefix, list of vars
