@@ -1,5 +1,9 @@
 2004-05-05  Tim Perdue  <tim@perdue.net>
 
+	* docman can down support upload of URLs rather than files
+
+2004-05-05  Tim Perdue  <tim@perdue.net>
+
 	* fixed default_page.php after bugs were introduced
 	* added proper checks to /exports/ files
 

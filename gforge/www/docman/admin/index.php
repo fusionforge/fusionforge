@@ -50,13 +50,17 @@ if ($submit) {
 		if ($d->isError()) {
 			exit_error($Language->getText('general','error'),$d->getErrorMessage());
 		}
-		if ($uploaded_data_name) {
+		if ($uploaded_data) {
 			if (!is_uploaded_file($uploaded_data)) {
 				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data));
 			}
 			$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
 			$filename=$uploaded_data_name;
 			$filetype=$uploaded_data_type;
+		} elseif ($file_url) {
+			$data = '';
+			$filename=$file_url;
+			$filetype='URL';
 		} else {
 			$filename=addslashes($d->getFileName());
 			$filetype=addslashes($d->getFileType());
@@ -130,7 +134,11 @@ if ($editdoc && $docid) {
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('docman_new','file')?></strong><br />
+		<?php if ($d->isURL()) {
+			echo '<a href="'.$d->getFileName().'">[View File URL]</a>';
+		} else { ?>
 		<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.$d->getFileName() ?>"><?php echo $d->getName(); ?></a>
+		<?php } ?>
 		</td>
 	</tr>
 
@@ -146,7 +154,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','group') ?>:</strong><br />
+		<strong><?php echo $Language->getText('docman_new','group') ?></strong><br />
 		<?php
 
 			echo display_groups_option($group_id,$d->getDocGroupID());
@@ -166,6 +174,7 @@ if ($editdoc && $docid) {
 
 	<?php
 
+/*
 	//	if this is a text/html doc, display an edit box
 	if (strstr($d->getFileType(),'ext')) {
 
@@ -177,12 +186,17 @@ if ($editdoc && $docid) {
 		</td>
 	</tr>';
 	}
-
+*/
 	?>
 	<tr>
 		<td>
+		<?php if ($d->isURL()) { ?>
+		<strong><?php echo $Language->getText('docman_admin_editdocs','upload_url') ?> :</strong><?php echo utils_requiredField(); ?><br />
+        <input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
+		<?php } else { ?>
 		<strong><?php echo $Language->getText('docman_admin_editdocs','upload') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" />
+		<?php } ?>
 		</td>
 	</tr>
 	</table>
@@ -324,7 +338,7 @@ if ($editdoc && $docid) {
 				$last_state=$d_arr[$i]->getStateID();
 			}
 			print "\n<li><a href=\"index.php?editdoc=1&amp;docid=".$d_arr[$i]->getID()."&amp;group_id=$group_id\">".
-				$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
+				$d_arr[$i]->getName()." [ ".((!$d_arr[$i]->isURL()) ? $d_arr[$i]->getFileName() : 'URL')." ]</a>".
 				"\n<br /><em>".$Language->getText('docman_new','description').":</em> ".$d_arr[$i]->getDescription()."</li>\n";
 		}
 		print "\n</ul></li></ul>\n";

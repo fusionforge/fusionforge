@@ -26,8 +26,10 @@ if (!$group_id) {
 	exit_no_group();
 }
 $g =& group_get_object($group_id);
-if (!$g || !is_object($g) || $g->isError()) {
-	exit_no_group();
+if (!$g || !is_object($g)) {
+	exit_error('Error','Could Not Get Group');
+} elseif ($g->isError()) {
+	exit_error('Error',$g->getErrorMessage());
 }
 
 if ($submit){
@@ -37,17 +39,10 @@ if ($submit){
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
 
-	if (!$title || !$description) {
+	if (!$title || !$description || (!$uploaded_data && !$file_url)) {
 		exit_missing_param();
 	}
 
-	if (!$uploaded_data) {
-		exit_missing_param();
-	}
-
-	if (!is_uploaded_file($uploaded_data)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
-	}
 	$d = new Document($g);
 	if (!$d || !is_object($d)) {
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
@@ -55,7 +50,17 @@ if ($submit){
 		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	}
 
-	$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
+	if ($uploaded_data) {
+		if (!is_uploaded_file($uploaded_data)) {
+			exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
+		}
+		$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
+		$file_url='';
+	} elseif ($file_url) {
+		$data = '';
+		$uploaded_data_name=$file_url;
+		$uploaded_data_type='URL';
+	}
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
 		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	} else {
@@ -91,7 +96,10 @@ if ($submit){
 	<tr>
 		<td>
 		<strong>	<?php echo $Language->getText('docman_new','upload_file') ?> :</strong><?php echo utils_requiredField(); ?><br />
-		<input type="file" name="uploaded_data" size="30" />
+		<input type="file" name="uploaded_data" size="30" /><br /><br />
+		<strong>	<?php echo $Language->getText('docman_new','upload_url') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<input type="text" name="file_url" size="50" />
+		</td>
 		</td>
 	</tr>
 
