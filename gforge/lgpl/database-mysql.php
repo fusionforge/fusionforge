@@ -1,16 +1,32 @@
 <?php
-
 /**
- *	DATABASE ABSTRACTION LAYER.
+ * DATABASE ABSTRACTION LAYER.
  *
- *	Originally written by Tim Perdue, December 1998 
- *	Simply replaces calls to mysql_* with db_*
- *	To achieve basic database portability.
+ * Originally written by Tim Perdue, December 1998 
+ * Simply replaces calls to mysql_* with db_*
+ * To achieve basic database portability.
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
+
 function db_connect() {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd, $conn;
 
-	$conn = @mysql_pconnect($sys_dbhost,$sys_dbuser,$sys_dbpasswd);
+	$conn = @mysql_connect($sys_dbhost,$sys_dbuser,$sys_dbpasswd);
 }
 
 function db_query($qstring,$limit='-1',$offset=0) {
