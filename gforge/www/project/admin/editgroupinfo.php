@@ -189,7 +189,7 @@ if($sys_use_scm) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> ><br />
+ <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesSCM()); ?> ><br />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>

@@ -897,7 +897,7 @@ class Group extends Error {
 	function usesSCM() {
 		global $sys_use_scm;
 		if ($sys_use_scm) {
-			return $this->data_array['use_scm'];
+			return $this->data_array['use_cvs'];
 		} else {
 			return false;
 		}
