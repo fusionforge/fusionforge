@@ -177,7 +177,7 @@ class ProjectCategory extends Error {
 			return false;
 		}   
 		$sql="UPDATE project_category 
-			SET category_name='$name'
+			SET category_name='".htmlspecialchars($name)."'
 			WHERE category_id='". $this->getID() ."' 
 			AND group_project_id='".$this->ProjectGroup->getID()."'";
 		$result=db_query($sql);
