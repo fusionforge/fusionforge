@@ -9,14 +9,14 @@ require("/etc/gforge/local.pl");  # Include all the predefined functions
 
 %hash = () ;
 
-open CONF, "/etc/gforge/gforge.conf" ;
-while ($line = <CONF>) {
-    chomp $line ;
-    next if $line =~ m/^\s*#/ ;
-    ($key, $val) = split ('=', $line, 2) ;
-    $hash{$key} = $val ;
-}
-close CONF ;
+#open CONF, "/etc/gforge/gforge.conf" ;
+#while ($line = <CONF>) {
+#    chomp $line ;
+#    next if $line =~ m/^\s*#/ ;
+#    ($key, $val) = split ('=', $line, 2) ;
+#    $hash{$key} = $val ;
+#}
+#close CONF ;
 
 if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
 $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
