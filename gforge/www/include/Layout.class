@@ -748,7 +748,7 @@ if ($params['group']) {
 		$return= '
 		<tr '.$row_attr;
 		if ( $istitle ) {
-			$return .=' align="middle" bgcolor="'. $this->COLOR_HTMLBOX_TITLE .'"';
+			$return .=' align="center" bgcolor="'. $this->COLOR_HTMLBOX_TITLE .'"';
 		}
 		$return .= '>';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
