@@ -472,6 +472,49 @@ sourceforge (2.6-0+1) unstable; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 20:05:11 +0100
 
+sourceforge (2.5-34) unstable; urgency=low
+
+  * [Christian] made that adduser don't break postinst
+  * [Otavio] Added the possibility to change default language using a
+    system variable called $sys_lang (look in /etc/sourceforge/local.inc).
+  * [Otavio] Added the commentary in /etc/sourceforge/local.inc about
+    $sys_theme.
+  * [Christian] Applied Otavio patch and updated postinst consequantly
+  * [Roland] Bumped Standards-Version to 3.5.7 and DH_COMPAT to 4.
+  * [Otavio] Patch to fix user deletion (closes: #162793).
+  * [Roland] Sort documentations by title.
+  * [Roland] Updated language codes in the database.
+  * [Roland] Otavio's patch #552: better handling of the browser language
+    preferences. 
+
+ -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 19:22:05 +0100
+
+sourceforge (2.5-33) unstable; urgency=low
+
+  * [Roland] Fixed the fix in db-upgrade.pl, which caused an error to
+    occur when upgrading (closes: #159277).
+
+ -- Roland Mas <lolando@debian.org>  Tue,  3 Sep 2002 13:38:06 +0200
+
+sourceforge (2.5-32) unstable; urgency=low
+
+  * [Roland] www/admin/useredit.php: Fixed Unix UID attribution, so that
+    accounts activated by the admin are given an UID too.  Previously only
+    the accounts that were entering a group got given an UID, and that
+    could result in people existing in the LDAP database and having a
+    shell account yet no UID.  Thanks to Otavio Salvador
+    <otavio@debian.org> for the report and help in fixing.
+  * [Roland] deb-specific/db-upgrade.pl: Fixed the backlog of wrong UIDs.
+  * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
+    <manik.surtani@conchango.com> fixing a few paths.
+  * [Soon-Son] fixed an error when rating a user. The error message was
+    as follows: (Fatal error: Call to a member function on a non-object 
+    in /usr/lib/sourceforge/www/include/User.class on line 666)
+  * [Roland] Hot news!  ProFTPd is now in main!  Sourceforge migrated back
+    from non-US to main.  Ftpmasters: sorry about all the fuss.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  1 Sep 2002 18:35:18 +0200
+
 sourceforge (2.5-31) unstable; urgency=low
 
   * [Soon-Son] added method="post" to massmail.php which was missing so
@@ -542,6 +585,18 @@ sourceforge (2.5-30) unstable; urgency=high
     Permission denied 
 
  -- Roland Mas <lolando@debian.org>  Fri, 19 Jul 2002 20:46:00 +0200
+
+sourceforge (2.5-29.1) stable; urgency=low
+
+  * [Roland] Maintenance release for Debian 3.0r1, the first update of
+    Woody.  Only fixing really major bugs, so that the stable release
+    manager may accept this package.
+  * [Roland] Moved back to non-us, since proftpd is not in main in Woody.
+  * [Roland] Backported fix from 2.5-30 so that uninstalling will not
+    completely remove the LDAP directory, but only the entries generated
+    from our database.  This fixes bug #153032 in Woody.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 19:09:24 +0100
 
 sourceforge (2.5-29) unstable; urgency=low
 
