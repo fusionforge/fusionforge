@@ -239,7 +239,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/cvs/?group_id='.$group_id.'">';
+		$return .= '<A href="/scm/?group_id='.$group_id.'">';
 		$return .= html_image("ic/cvs16b.png","20","20",array("BORDER"=>"0","ALT"=>"CVS"));
 		$return .= "&nbsp;CVS&nbsp;Tree</A>";
 

@@ -569,7 +569,7 @@ if ($params['group']) {
 
 		// CVS
 		if ($project->usesCVS()) {
-			$TABS_DIRS[]='/cvs/?group_id='.$group;
+			$TABS_DIRS[]='/scm/?group_id='.$group;
 			$TABS_TITLES[]=$Language->getText('group','short_cvs');
 			(($toptab == 'cvs') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}

@@ -335,7 +335,7 @@ if ($project->usesSurvey()) {
 // ######################### CVS 
 
 if ($project->usesCVS()) {
-	print '<HR SIZE="1" NoShade><A href="/cvs/?group_id='.$group_id.'">';
+	print '<HR SIZE="1" NoShade><A href="/scm/?group_id='.$group_id.'">';
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_cvs')));
 	print " ".$Language->getText('group','long_cvs')."</A>";
 

@@ -150,7 +150,7 @@ function menu_project_info($group) {
 		}
 		// CVS
 		if ($project->usesCVS()) {
-			$HTML->menu_entry('/cvs/?group_id='.$group, $Language->getText('group', 'short_cvs'));
+			$HTML->menu_entry('/scm/?group_id='.$group, $Language->getText('group', 'short_cvs'));
 		}
 		// Downloads
 		$HTML->menu_entry('/project/showfiles.php?group_id='.$group, $Language->getText('group', 'short_files'));
