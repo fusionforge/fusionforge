@@ -566,6 +566,7 @@ class ArtifactType extends Error {
 	 */
 	function getExtraFields() {
 		if (!isset($this->extra_fields)) {
+			$this->extra_fields = array();
 			$sql="select *
 				FROM artifact_extra_field_list 
 				WHERE group_artifact_id='".$this->getID() ."'
