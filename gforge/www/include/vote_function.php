@@ -113,7 +113,7 @@ function show_survey ($group_id,$survey_id) {
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE survey_id='$survey_id'";
+$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' and group_id = '$group_id'";
 
 $result=db_query($sql);
 

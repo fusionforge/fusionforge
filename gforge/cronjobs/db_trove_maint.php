@@ -1,4 +1,4 @@
-#!/usr/local/bin/php
+#! /usr/bin/php4 -f
 <?php
 //
 // SourceForge: Breaking Down the Barriers to Open Source Development
@@ -18,15 +18,15 @@
 require ('squal_pre.php');    
 
 /*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-	exit_permission_denied();
-}*/
+  exit_permission_denied();
+  }*/
 
 /*
-
-	Rebuild the trove_agg table, which saves us
-	from doing really expensive queries in trove
-	each time of the trove map is viewed
-
+  
+  Rebuild the trove_agg table, which saves us
+  from doing really expensive queries in trove
+  each time of the trove map is viewed
+  
 */
 
 db_begin();
@@ -34,24 +34,18 @@ db_begin();
 db_query("DELETE FROM trove_agg;");
 
 $sql="INSERT INTO trove_agg
-        SELECT 
-            tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, 
-            project_metric.percentile, project_metric.ranking 
-        FROM groups g
-        LEFT JOIN project_metric USING (group_id) , 
-        trove_group_link tgl 
-        WHERE 
-        tgl.group_id=g.group_id 
-        AND (g.is_public=1) 
-        AND (g.type=1) 
-        AND (g.status='A') 
-        ORDER BY g.group_name;";
-
-db_query($sql);
-echo db_error();
+      (SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, project_metric.percentile, project_metric.ranking
+       FROM groups g
+       LEFT JOIN project_metric USING(group_id), trove_group_link tgl 
+       WHERE tgl.group_id=g.group_id 
+       AND g.is_public=1
+       AND g.type=1
+       AND g.status='A'
+       ORDER BY g.group_name);";
+      
+      db_query($sql);
 
 db_commit();
-
 
 /*
 
@@ -72,24 +66,30 @@ database inside of a transaction
 $cat_counts=array();
 $parent_list=array();
 
-$res=db_query("SELECT trove_cat.trove_cat_id,trove_cat.parent,count(*) AS count
+$q = "SELECT trove_cat.trove_cat_id,trove_cat.parent
+      FROM trove_cat
+      GROUP BY trove_cat.trove_cat_id,trove_cat.parent;" ;
+$res=db_query($q);
+$rows=db_numrows($res);
+
+for ($i=0; $i<$rows; $i++) {
+  $parent_list[db_result($res,$i,'parent')][]=db_result($res,$i,'trove_cat_id');
+}
+
+$res=db_query("SELECT trove_cat.trove_cat_id,trove_cat.parent,count(trove_cat.trove_cat_id) AS count
 	FROM trove_cat,trove_group_link,groups 
 	WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id 
 	AND groups.group_id=trove_group_link.group_id 
 	AND groups.status='A' 
 	AND groups.type='1' 
 	AND groups.is_public='1' 
-	GROUP BY trove_cat.trove_cat_id,trove_cat.parent");
+	GROUP BY trove_cat.trove_cat_id,trove_cat.parent;");
 
 $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {
-
 	$cat_counts[db_result($res,$i,'trove_cat_id')][0]=db_result($res,$i,'parent');
 	$cat_counts[db_result($res,$i,'trove_cat_id')][1]=db_result($res,$i,'count');
-
-	$parent_list[db_result($res,$i,'parent')][]=db_result($res,$i,'trove_cat_id');
-
 }
 
 $sum_totals=array();
@@ -99,7 +99,8 @@ function get_trove_sub_projects($cat_id) {
 
 	//number of groups that were in this trove_cat
 	$count=$cat_counts[$cat_id][1];
-
+        if ($count == '') { $count = 0 ; }
+ 
 	//number of children of this trove_cat
 	$rows=count( $parent_list[$cat_id] );
 
@@ -111,7 +112,7 @@ function get_trove_sub_projects($cat_id) {
 }
 
 //start the recursive function at the top of the trove tree
-get_trove_sub_projects(18);
+get_trove_sub_projects(0);
 
 db_begin();
 db_query("DELETE FROM trove_treesums");
