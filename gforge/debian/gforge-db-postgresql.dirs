@@ -8,4 +8,5 @@ usr/lib/gforge/lib
 var/lib/gforge
 var/lib/gforge/tmp
 var/lib/gforge/etc
+var/lib/gforge/db
 usr/share/lintian/overrides
