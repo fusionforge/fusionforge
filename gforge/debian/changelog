@@ -1,3 +1,9 @@
+sourceforge (2.6-0+9+) unstable; urgency=low
+
+  * Corrected wrong link in menu.php for lastlogin.php
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 17 Apr 2002 00:27:54 +0200
+
 sourceforge (2.6-0+9) unstable; urgency=low
 
   * Let's continue

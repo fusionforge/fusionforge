@@ -206,7 +206,7 @@ function menu_site_admin() {
 	$HTML->menuhtml_top('Site Admin');
 		$HTML->menu_entry('/admin/','Site Admin Home');
 		$HTML->menu_entry('/admin/approve-pending.php','Approve Pending Projects');
-		$HTML->menu_entry('/admin/lastlogins.php','View Last Logins');
+		$HTML->menu_entry('/stats/lastlogins.php','View Last Logins');
 	$HTML->menuhtml_bottom();
 }
 
