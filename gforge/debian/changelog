@@ -1,9 +1,9 @@
-sourceforge (2.5-18+) unstable; urgency=low
+sourceforge (2.5-19) unstable; urgency=low
 
   * [Roland] user_home.php: Fixed email addresses on /users/<blah>.
   * [Roland] sendmessage.php: Fixed a few typos.
 
- --
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 14:44:49 +0100
 
 sourceforge (2.5-18) unstable; urgency=low
 
