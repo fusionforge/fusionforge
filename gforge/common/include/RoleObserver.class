@@ -131,7 +131,7 @@ class RoleObserver extends Error {
 		//
 		//	AnonCVS
 		//
-		$this->setting_array['scmpublic'][0]=$this->Group->enableAnonCVS();
+		$this->setting_array['scmpublic'][0]=$this->Group->enableAnonSCM();
 		$this->setting_array['projectpublic'][0]=$this->Group->isPublic();
 //echo '<html><body><pre>'.print_r($this->setting_array).'</pre>';
 //exit;
