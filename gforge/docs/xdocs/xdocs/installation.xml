@@ -54,18 +54,16 @@ RedHat Linux 7.3:
     <section name="Installation">
 <subsection name="Installing the software">
 <p>
-<b>Note for Debian users</b>:<br/>
-Debian Users can simply add <a href="http://people.debian.org/~bayle/">http://people.debian.org/~bayle</a>
- to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge system, thanks to Christian Bayle and the Debian-SF project.
-<p/>
+<b>Note for Debian users</b>: You can simply add <a href="http://people.debian.org/~bayle/">http://people.debian.org/~bayle</a> to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge system, thanks to Christian Bayle and the Debian-SF project.</p>
+
+<p>
 To install GForge, follow these steps:
 <ol>
 <li>Login as root user</li>
 <li>cd to <code>/var/www/</code></li>
-<li>Extract the content of gforge-3.21.tar.bz2 to the current directory:<br/>
+<li>Extract the content of gforge-3.21.tar.bz2 to the current directory:
 <code>
 bzip2 -dc gforge-3.21.tar.bz2 | tar xvf -
-<br/>
 </code>
 </li>
 </ol>
@@ -79,11 +77,9 @@ bzip2 -dc gforge-3.21.tar.bz2 | tar xvf -
 <ol>
 <li>Open <code> /etc/httpd/conf/httpd.conf </code>:</li>
 <li>Change the DocumentRoot to point to the <code>www</code> directory:
-<code><br/>
-<br/>
+<code>
 DocumentRoot "/var/www/gforge-3.21/www"
-<br/>
-<br/></code>
+</code>
 
 </li>
 <li>
@@ -347,7 +343,14 @@ Verify the version of PHP installed on your system:
 <ol>
 <li>open <code>/etc/php.ini</code></li>
 <li>if the PHP version you're using is 4.2.0 or later, enable the register_globals variable:
-<br><code>register_globals = On</code></br>
+<source>
+register_globals = On
+</source>
+</li>
+<li>Ensure that file uploads are allowed:
+<source>
+file_uploads = On
+</source>
 </li>
 <li> and configure the include_path directive as follows:
 <source>
