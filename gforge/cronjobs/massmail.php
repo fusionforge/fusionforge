@@ -103,6 +103,11 @@ $mail_id = db_result($mail_res, 0, 'id');
 
 //$err .= "Got mail to send: ".$subj."\n";
 
+// While using DISTINCT is usually evil (because you're fetching rows
+// and then discarding them), in this case it's actually good.  Running 
+// EXPLAIN ANALYZE on this query on my GForge server (1000 users, 380 projects) 
+// shows that it takes about 25 ms.  But after rewriting it to use an uncorrelated subquery,
+// it takes around 650 ms.  So I think we'll leave it the way it is :-)
 $sql = "SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
 	FROM $table_mapping[$type]
 	WHERE users.user_id>".db_result($mail_res, 0, 'last_userid')."
