@@ -4,8 +4,17 @@ sourceforge (2.5-26+) unstable; urgency=low
     (closes: #137183).
   * [Christian] Added dependency on rcs for cvsweb (closes: #137811).
     Yes, we need to have our own cvsweb, since it's a patched version.
+  * [Roland] Bumped the sequences for bug and task ids so that they are
+    greater than 100.  If they are not, the 100th task/bug will have a
+    wrong list or reverse dependencies (since 100 is the id of "None", and
+    all tasks and bugs depend on this "None" by default.  This patch
+    should prevent that from happening if it hasn't already.  It won't fix
+    existing sites where the 100th bug/task already exists, though.  If
+    you are in such a situation, I'm afraid there's nothing I can do for
+    you.  Your best bet would be to declare that bug/task closed and
+    recreate another, identical, one.
 
- -- Roland Mas <lolando@debian.org>  Tue, 12 Mar 2002 12:17:15 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Mar 2002 13:25:26 +0100
 
 sourceforge (2.5-26) unstable; urgency=medium
 

@@ -35,7 +35,7 @@ eval {
 
     # Do we have at least the basic schema?
 
-    $query = "SELECT count(*) from pg_class where relname = 'groups'";
+    $query = "SELECT count(*) FROM pg_class WHERE relname = 'groups'";
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     @array = $sth->fetchrow_array () ;
@@ -166,7 +166,7 @@ eval {
 
     # Do we have the metadata table?
 
-    $query = "SELECT count(*) from pg_class where relname = 'debian_meta_data'";
+    $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data'";
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     @array = $sth->fetchrow_array () ;
@@ -269,6 +269,11 @@ eval {
 	$sth->execute () ;
 	$sth->finish () ;
 
+	debug "Also fixing a few sequences." ;
+
+	&bump_sequence_to ("bug_pk_seq", 100) ;
+	&bump_sequence_to ("project_task_pk_seq", 100) ;
+	
 	debug "Updating debian_meta_data table." ;
 	$query = "UPDATE debian_meta_data SET value = '2.5-27' where key = 'db-version'" ;
 	$sth = $dbh->prepare ($query) ;
@@ -425,4 +430,19 @@ sub parse_sql_file ( $ ) {
     close F ;
     
     return \@sql_list ;
+}
+
+sub bump_sequence_to ( $$ ) {
+    my ($query, $sth, @array, $seqname, $targetvalue) ;
+
+    $seqname = shift ;
+    $targetvalue = shift ;
+
+    do {
+	$query = "select nextval ('$seqname')" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+    } until $array[0] >= $targetvalue ;
 }
