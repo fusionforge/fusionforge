@@ -33,7 +33,8 @@ case "$1" in
 	/usr/lib/gforge/bin/install-cvs.sh configure
 
 	# Making user group and cvs update from database 
-	/usr/lib/gforge/bin/update-user-group-cvs.sh
+	#/usr/lib/gforge/bin/update-user-group-cvs.sh
+	/usr/lib/gforge/bin/cvs_dump_update.pl
 
 	# logs
 	chown root:gforge /var/log/gforge/cvs
@@ -42,8 +43,8 @@ case "$1" in
 	db_stop
 
 	# Restart some services
-	[ -d /etc/ssh ] && invoke-rc.d ssh start || true
-	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree start || true
+	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true
+	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree restart || true
 	
     ;;
 
