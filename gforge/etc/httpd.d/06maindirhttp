@@ -40,6 +40,9 @@
 	# This for cgi not on vhosts
 	ScriptAlias /cgi-bin/ {cgidir}/
 
+	# For cvsweb icons and css
+	Alias /cvsweb/ /usr/share/cvsweb/
+
 	# 404 Error document
 	ErrorDocument 404 /404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
