@@ -30,7 +30,7 @@ $c->execute();
 if($verbose) {print ("\nGetting user list per group");}
 while(my ($group_id, $group_name, $status, $use_cvs, $enable_pserver, $enable_anoncvs) = $c->fetchrow()) {
 
-	my $new_query = "SELECT users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND group_id=$group_id";
+	my $new_query = "SELECT users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND cvs_flags=1 AND group_id=$group_id";
 	my $d = $dbh->prepare($new_query);
 	$d->execute();
 
