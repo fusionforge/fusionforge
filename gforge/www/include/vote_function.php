@@ -247,9 +247,7 @@ if (db_numrows($result) > 0) {
 	<?php
 
 } else {
-	echo "<TR><TD COLSPAN='2'>";
-	echo "<H3>".$Language->MY_no_survey."</H3>";
-	echo "</TD></TR>";
+	echo "<TR><TD COLSPAN='2'>".$Language->MY_no_survey."</TD></TR>";
 }
 
 }

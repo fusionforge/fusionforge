@@ -60,7 +60,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_open_bugs.'</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_open_bugs.'</TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -96,7 +96,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_open_request.'</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_open_request.'</TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -244,7 +244,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_task.'</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_task.'</TD></TR>';
 		echo db_error();
 	}
 
@@ -308,7 +308,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->MY_no_bookmarks.'</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_bookmarks.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -341,7 +341,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "AND groups.status='A' AND groups.is_public=1");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo "<TR><TD COLSPAN=\"2\"><B>'.$Language->MY_no_projects.'</B></TD></TR>";
+		echo "<TR><TD COLSPAN=\"2\">'.$Language->MY_no_projects.'</TD></TR>";
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
