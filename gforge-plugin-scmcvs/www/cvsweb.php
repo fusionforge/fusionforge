@@ -18,10 +18,15 @@ if (!$sys_use_scm) {
 	exit_disabled();
 }
 
+// content types with html output
 $supportedContentTypes = array('text/html', 'text/x-cvsweb-markup');
+
 $plainTextDiffTypes = array('c', 's', 'u', '');
 
 $contentType = 'text/html';
+
+// we analyze the query to find the needed information
+// this will allow us to determine the project name and the content type
 if(getStringFromGet('cvsroot') && strpos(getStringFromGet('cvsroot'), ';') === false) {
 	$projectName = getStringFromGet('cvsroot');
 	if(getStringFromGet('r1') && getStringFromGet('r2') && in_array(getStringFromGet('f'), $plainTextDiffTypes)) {
@@ -42,9 +47,10 @@ if(getStringFromGet('cvsroot') && strpos(getStringFromGet('cvsroot'), ';') === f
 		}
 	}
 }
-// Remove eventual leading /cvsroot/ or cvsroot/
+// remove eventual leading /cvsroot/ or cvsroot/
 $projectName = ereg_replace('^..[^/]*/','', $projectName);
 
+// we found a project name in the query
 if ($projectName) {
 	$Group =& group_get_object_by_name($projectName);
 	if (!$Group || !is_object($Group) || $Group->isError()) {
@@ -60,6 +66,7 @@ if ($projectName) {
 	if ((!$Group->enableAnonSCM() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_scmweb']) || !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb')) {
 		exit_permission_denied();
 	}
+	// should we output html ?
 	$isHtml = in_array($contentType, $supportedContentTypes);
 	if ($isHtml) {
 		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
@@ -69,10 +76,12 @@ if ($projectName) {
 	}
 	
 	ob_start();
+	// call to CVSWeb cgi. We use environment variables to pass parameters to the cgi.
 	passthru('PHP_WRAPPER="1" SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" PATH_INFO="'.getStringFromServer('PATH_INFO').'" QUERY_STRING="'.getStringFromServer('QUERY_STRING').'" '.$GLOBALS['sys_path_to_scmweb'].'/cvsweb 2>&1');
 	$content = ob_get_contents();
 	ob_end_clean();
 	
+	// if we output html and we found the mbstring extension, we should try to encode the output of CVSWeb in UTF-8
 	if($isHtml && extension_loaded('mbstring')) {
 		$encoding = mb_detect_encoding($content);
 		if($encoding != 'UTF-8') {
