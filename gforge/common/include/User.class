@@ -178,7 +178,7 @@ class User extends Error {
 	 *
 	 */
 	function create($unix_name,$realname,$password1,$password2,$email,
-		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only) {
+		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$unix_box='shell') {
 		global $Language;
 		if (!$unix_name) {
 			//$this->setError('You must supply a username');
@@ -241,7 +241,7 @@ class User extends Error {
 		$confirm_hash = substr(md5($session_hash . $password1 . time()),0,16);
 		db_begin();
 		$result=db_query("INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,
-			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only) 
+			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box) 
 			VALUES ('$unix_name',
 			'". md5($password1) . "',
 			'". account_genunixpw($password1) . "',
@@ -255,7 +255,8 @@ class User extends Error {
 			'$language_id',
 			'$timezone',
 			'$jabber_address',
-			'$jabber_only')");
+			'$jabber_only',
+			'$unix_box')");
 		$id = db_insertid($result,'users','user_id');
 	
 		if (!$result || !$id) {
