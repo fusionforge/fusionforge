@@ -64,14 +64,20 @@ db_begin();
 db_query("DELETE FROM user_metric0");
 echo db_error();
 
+db_query("select setval('user_metric0_pk_seq',1)");
+echo db_error();
+
 db_query("INSERT INTO user_metric0 
 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
-SELECT user_id,5,1.25,1,0,0,1.25
+SELECT user_id,5,1.25,3,0,0,1.25
 FROM user_group
 WHERE
 user_group.group_id='$sys_peer_rating_group'
 AND user_group.admin_flags='A';");
+
 echo db_error();
+
+db_query("UPDATE user_metric0 SET ranking=ranking-1");
 
 db_query("UPDATE user_metric0 SET
 metric=(log(times_ranked::float)*avg_rating::float)::float,
