@@ -211,6 +211,7 @@ Description: Sourceforge to Gforge data transition
  to your gforge package.
 
 Package: sourceforge
+Priority: extra
 Architecture: all
 Depends: gforge-sourceforge-transition
 Description: Empty package to help with Sourceforge to Gforge transition
