@@ -3087,8 +3087,8 @@ COPY "group_type"  FROM stdin;
 
 
 COPY "groups"  FROM stdin;
-1	Master Group	\N	0	A	sourceforge	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
-2	News Group	\N	0	A	news	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+1	Master Group	\N	0	A	siteadmin	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+2	News Group	\N	0	A	newsadmin	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
 3	Stats Group	\N	0	A	stats	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
 4	Peer Ratings Group	\N	0	A	peerrating	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
 \.
