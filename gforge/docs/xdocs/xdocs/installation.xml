@@ -213,43 +213,37 @@ AcceptPathInfo on
 <subsection name="Configuring the database">
 <ol>
 <li>Configuring PostgreSQL
-<p>Check if your postgres accept connections on TCP/IP sockets. On RedHat 8.0, this is by default disabled.  To verify this, type the following command:
+<p>Check to see if your PostgreSQL installation accepts connections on TCP/IP sockets. On RedHat 8.0, this is by default disabled.  To verify this, type the following command:
 <br/>
-<code>
+<source>
 psql -h localhost template1
-</code>
+</source>
 <p/>
 
 If you get an error like this:<br/>
-<code>
+<source>
 psql: could not connect to server: Connection refused<br/>
         Is the server running on host localhost and accepting<br/>
         TCP/IP connections on port 5432?<br/>
-</code>
+</source>
 
-you need to:
+you need to add the -i option to the pg_ctl command so that the result is:
 <br/>
-cd to:
-<code>
-/etc/init.d/<br/>
+<source>
+cd /etc/init.d/
 vi postgresql
-</code>
+su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
+</source>
 
-<p/>
-add the -i option to the pg_ctl command so that the result is:
-
-<br/>
-<code>
- su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
-</code>
 <p/>
 On some systems, PostgreSQL is configured with the ident clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.  You should either create a user called gforge on your server or disable this feature:
 <br/>
 <code>
 su - postgres<br/>
 </code>
-open <code>/var/lib/pgsql/data/pg_hba.conf</code> and insert the following lines:
-<br></br>
+
+<p/>Open <code>/var/lib/pgsql/data/pg_hba.conf</code> and insert the following lines:
+<br/>
 For PostgreSQL 7.3:
 <source>
 local all all trust
@@ -266,10 +260,16 @@ and comment out all other directives.
 <br/>
 Restart the PostgreSQL server as root user:
 <br/>
-<code>/etc/init.d/postgresql restart</code>
+<source>/etc/init.d/postgresql restart</source>
 <br/>
 
-Create the database user:
+<p/>Now, initialize the database (if you haven't done so already):<br/>
+<source>
+# su - postgres
+# initdb
+</source>
+
+<p/>Create the database user:
 <br/>
 <source>
 su - postgres
@@ -277,8 +277,7 @@ createuser gforge -W
 </source>
 <br/>
 
-<br/>
-Answer the following two questions:
+<br/>Answer the following two questions:
 
 <source>
 Shall the new user be allowed to create databases? (y/n) y
@@ -286,15 +285,12 @@ Shall the new user be allowed to create more new users? (y/n) n
 </source>
 and insert a password for the user to be created.
 
-<p/>
-Create the database using the command:<br/>
-<code>
-createdb -U gforge gforge<br/>
-</code>
+<p/>Create the database using the command:
+<source>
+createdb -U gforge gforge
+</source>
 
-<p/>
-</p>
-
+<p/></p>
 </li>
 
 <li>Installing the database
