@@ -1,5 +1,18 @@
 2003-02-03 Reinhard Spisser <reinhard@spisser.it>
 
+	* www/include/vote_function.php:
+	<b> to <strong> for xhtml compliance
+	
+	* common/pm/ProjectTask.class:
+	removing localized and buggy version of the
+	notify message
+	
+	* www/include/languages/Base.class
+	inserted missing strings for registration
+	
+	
+2003-02-03 Reinhard Spisser <reinhard@spisser.it>
+
 	* www/tracker/reporting/index.php,
 	www/include/languages/Base.tab,
 	www/include/languages/Italian.tab,
