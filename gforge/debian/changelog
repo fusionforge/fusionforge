@@ -1,8 +1,9 @@
 sourceforge (2.5-35+) unstable; urgency=low
 
-  * 
+  * Fixed bug in Site Admin where you couldn't edit a user after searching
+    for him.
 
- -- Roland Mas <lolando@debian.org>  Wed, 13 Nov 2002 19:34:08 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Nov 2002 21:17:45 +0100
 
 sourceforge (2.5-35) unstable; urgency=low
 

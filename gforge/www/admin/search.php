@@ -39,7 +39,7 @@ if ($usersearch) {
 		print "<tr><th>UserName</th><th>User's Name</th></tr>\n\n";
 
 		while ($row = db_fetch_array($result)) {
-			print "<tr><td><a href=\"usergroup.php?user_id=$row[user_id]\">$row[user_name]</a></td><td>$row[realname]</td></tr>\n"; 
+			print "<tr><td><a href=\"userlist.php?user_id=$row[user_id]\">$row[user_name]</a></td><td>$row[realname]</td></tr>\n"; 
 		}
 		print "</table>";
 
