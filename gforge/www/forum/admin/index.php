@@ -25,6 +25,11 @@ require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
+function showAdminRow() {
+	$tablearr=array($Language->getText('forum_admin_addforum','existing_forums'));
+	echo $HTML->listTableTop($tablearr);
+}
+
 if ($group_id) {
 	//
 	//  Set up local objects
@@ -145,7 +150,9 @@ if ($group_id) {
 		
 		$farr =& $ff->getForums();
 
-		if ($ff->isError() || count($farr) < 1) {
+		if ($ff->isError()) {
+			$tablearr=array($Language->getText('forum_admin_addforum','existing_forums'));
+			echo $HTML->listTableTop($tablearr);
 			echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
 			echo $ff->getErrorMessage();
 			forum_footer(array());
@@ -210,18 +217,25 @@ if ($group_id) {
 		$farr =& $ff->getForums();
 
 		$rows=count($farr);
-		if ($ff->isError() || count($farr) < 1) {
+		if ($ff->isError()) {
 			exit_error($Language->getText('general','error'),$Language->getText('forum_admin_changestatus','no_forums_found').$ff->getErrorMessage());
 		} else {
-			forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status'),'pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
-			echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'.</p>';
-
-			$title_arr=array();
-			$title_arr[]=$Language->getText('forum_admin_changestatus','forum');
-			$title_arr[]=$Language->getText('forum_admin_changestatus','status');
-			$title_arr[]=$Language->getText('forum_admin_changestatus','update');
-
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		
+			if ($rows > 0) {
+				$title_arr=array();
+				forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status'),'pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
+				echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'.</p>';
+				$title_arr[]=$Language->getText('forum_admin_changestatus','forum');
+				$title_arr[]=$Language->getText('forum_admin_changestatus','status');
+				$title_arr[]=$Language->getText('forum_admin_changestatus','update');
+				echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			} else {
+  			global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f;
+ 		 		$params['group']=$group_id;
+		  	$params['toptab']='forums';
+				site_project_header($params);
+				echo '<strong><a href="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</a></strong>';
+			}
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '

@@ -13,6 +13,9 @@
 	* www/include/features_boxes.php:
 	Refactoring some SQL into the new GForge.class.
 
+	* www/forum/admin/index.php, common/forum/ForumFactory.class:
+	Fixed bug #327: Add problems when you don't have forums
+
 2003-05-02  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/pm/include/ProjectTaskHTML.class,

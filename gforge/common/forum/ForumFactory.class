@@ -115,7 +115,7 @@ class ForumFactory extends Error {
 
 		$rows = db_numrows($result);
 
-		if (!$result || $rows < 1) {
+		if (!$result) {
 			$this->setError($Language->getText('forum_common_forumfactory','error_no_forums_found').db_error());
 			return false;
 		} else {
