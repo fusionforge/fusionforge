@@ -70,7 +70,7 @@ $arr['subproject']='By Subproject';
 $arr['user']='By User';
 
 $graph->title->Set("Time Report ".$arr[$type]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set($sys_name);
 
 report_pie_arr($report->labels,$report->getData());
 

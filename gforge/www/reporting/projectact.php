@@ -31,6 +31,8 @@ require_once('common/reporting/Report.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -42,20 +44,20 @@ if (!$start) {
 }
 
 
-echo report_header('Project Activity');
+echo report_header($Language->getText('reporting','project_activity_title'));
 
 ?>
-<h3>Project Activity</h3>
+<h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <table><tr>
-<td><strong>Project:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
-<td><strong>Area:</strong><br /><?php echo report_area_box('area',$area); ?></td>
-<td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><strong><?php echo $Language->getText('reporting','project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
+<td><strong><?php echo $Language->getText('reporting','area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
+<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

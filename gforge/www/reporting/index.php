@@ -54,10 +54,10 @@ echo report_header('Main Page');
 <p>
 <h3><?php echo $Language->getText('reporting','time_tracking'); ?></h3>
 <p>
-<a href="usertime.php"><?php echo $Language->getText('reporting','time_tracking_usertime'); ?></a> <a href="usertime.php?typ=r">(report)</a><br />
-<a href="projecttime.php"><?php echo $Language->getText('reporting','time_tracking_projecttime'); ?></a> <a href="projecttime.php?typ=r">(report)</a><br />
-<a href="sitetime.php"><?php echo $Language->getText('reporting','time_tracking_sitetime'); ?></a> <a href="sitetime.php?typ=r">(report)</a><br />
-<a href="sitetimebar.php"><?php echo $Language->getText('reporting','time_tracking_sitetimebar'); ?></a> <a href="sitetimebar.php?typ=r">(report)</a><br />
+<a href="usertime.php"><?php echo $Language->getText('reporting','time_tracking_usertime'); ?></a> <a href="usertime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
+<a href="projecttime.php"><?php echo $Language->getText('reporting','time_tracking_projecttime'); ?></a> <a href="projecttime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
+<a href="sitetime.php"><?php echo $Language->getText('reporting','time_tracking_sitetime'); ?></a> <a href="sitetime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
+<a href="sitetimebar.php"><?php echo $Language->getText('reporting','time_tracking_sitetimebar'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
 <a href="usersummary.php"><?php echo $Language->getText('reporting','time_tracking_usersummary'); ?></a><br />
 <p>
 <h3><?php echo $Language->getText('reporting','administrative'); ?></h3>

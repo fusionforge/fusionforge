@@ -129,7 +129,7 @@ if ($area=='tracker') {
 //	Titles
 //
 $graph->title->Set("Site-Wide Activity (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set($sys_name);
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

@@ -30,6 +30,7 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
 session_require( array('group'=>$sys_stats_group) );
+global	$Language;
 
 $report=new Report();
 if ($report->isError()) {
@@ -41,17 +42,17 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-echo report_header('Site-Wide Time Tracking');
+echo report_header($Language->getText('reporting','site_wide_time_tracking'));
 
 ?>
-<h3>Site-Wide Time Tracking</h3>
+<h3><?php echo $Language->getText('reporting','site_wide_time_tracking'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>">
 <table><tr>
-<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>
@@ -76,7 +77,8 @@ if ($typ=='r') {
 	$report->setData($res,1);
 	$data=$report->getData();
 	$labels=$report->getDates();
-	echo $HTML->listTableTop (array('Week','Time'));
+	echo $HTML->listTableTop (array($Language->getText('reporting','week'),
+			$Language->getText('reporting','time')));
 
 	for ($i=0; $i<count($labels); $i++) {
 

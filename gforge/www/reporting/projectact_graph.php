@@ -142,7 +142,7 @@ if ($area=='tracker') {
 //
 $graph->title->Set("Project Activity For: ".$g->getPublicName(). 
 	" (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set($sys_name);
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

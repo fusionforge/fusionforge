@@ -31,6 +31,8 @@ require_once('common/reporting/Report.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -47,28 +49,27 @@ if (!$tstat) {
 	$tstat='1';
 }
 
-$n[]='Any';
-$n[]='Open';
-$n[]='Closed';
+$n[]=$Language->getText('reporting_us','any');
+$n[]=$Language->getText('reporting_us','open');
+$n[]=$Language->getText('reporting_us','closed');
 
 $l[]='1,2';
 $l[]='1';
 $l[]='2';
 
-echo report_header('User Summary Report');
+echo report_header($Language->getText('reporting_us','title'));
 
 	?>
-	<h3>User Summary Report</h3>
+	<h3><?php echo $Language->getText('reporting_us','title'); ?></h3>
 	<p>
-	Choose the range from the pop-up boxes below. The report will list all tasks with an open 
-	date in that range.
+	<?php echo $Language->getText('reporting_us','description'); ?>
 	<p>
     <form action="<?php echo $PHP_SELF; ?>" method="get">
     <table><tr>
-    <td><strong>Start:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
-    <td><strong>End:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
-	<td><strong>Task Status:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
-    <td><input type="submit" name="submit" value="Refresh"></td>
+    <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
+    <td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
+	<td><strong><?php echo $Language->getText('reporting_us','task_status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
+    <td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 	</tr></table>
 	</form>
 	<p>
@@ -93,17 +94,17 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 
 $res=db_query($sql);
 if (!$res || db_numrows($res) < 1) {
-	echo 'No Matches Found'.db_error();
+	echo $Language->getText('reporting_us','no_matches').db_error();
 } else {
 
 	echo '<table border="1">
 			<tr>
-				<td><strong>Name</strong></td>
-				<td><strong>Task</strong></td>
-				<td><strong>Status</strong></td>
-				<td><strong>Cum. Hrs</strong></td>
-				<td><strong>Rem. Hrs</strong></td>
-				<td><strong>End Date</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','name').'</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','task').'</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','status').'</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','cum_hrs').'</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','rem_hrs').'</strong></td>
+				<td><strong>'.$Language->getText('reporting_us','end_date').'</strong></td>
 			</tr>';
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$name=db_result($res,$i,'realname');

@@ -118,7 +118,7 @@ $arr['group']='By Group';
 $arr['resolution']='By Resolution';
 $arr['technician']='By Tecnician';
 $graph->title->Set($arr[$area]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set($sys_name);
 
 // Create the tracker open plot
 report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1));

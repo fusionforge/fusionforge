@@ -31,6 +31,8 @@ require_once('common/reporting/Report.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -41,10 +43,10 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-echo report_header('User Activity');
+echo report_header($Language->getText('reporting','user_activity_title'));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-echo "Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>";
+echo $Language->getText('reporting_ua','description');
 for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
@@ -55,17 +57,17 @@ for ($i=0; $i<count($abc_array); $i++) {
 
 if ($sw) {
 	?>
-	<h3>User Activity</h3>
+	<h3><?php echo $Language->getText('reporting','user_activity_title'); ?></h3>
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="get">
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>">
 	<table><tr>
-	<td><strong>User:</strong><br /><?php echo report_useract_box('dev_id',$dev_id,$sw); ?></td>
-	<td><strong>Area:</strong><br /><?php echo report_area_box('area',$area); ?></td>
-	<td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-	<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-	<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-	<td><input type="submit" name="submit" value="Refresh"></td>
+	<td><strong><?php echo $Language->getText('reporting','user'); ?>:</strong><br /><?php echo report_useract_box('dev_id',$dev_id,$sw); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+	<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 	</tr></table>
 	</form>
 	<p>

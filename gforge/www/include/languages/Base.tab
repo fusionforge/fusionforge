@@ -1923,28 +1923,107 @@ rbac_edit	addrole	Add Role
 rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
-reporting	users	Users
-reporting	users_added_weekly	Users Added Weekly (graph)
+reporting	add	Add
+reporting	administrative	Administrative
+reporting	area	Areas
 reporting	cumulative_users	Cumulative Users Weekly (graph)
-reporting	user_activity	Activity (graph)
+reporting	cumulative_users_title	Cumulative Users
+reporting	daily	Daily
+reporting	end	End
+reporting	feature_req	Feature Requests
+reporting	forum_messages	Forum Messages
+reporting	initialize	Initialize / Rebuild Reporting Tables
+reporting	manage	Manage Time Tracker Categories
+reporting	monthly	Monthly
+reporting	next	Next
+reporting	other_trackers	Other Trackers
+reporting	project	Project
 reporting	projects	Projects
 reporting	project_specific	Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads
 reporting	project_activity	Activity (graph)
+reporting	project_activity_title	Project Activity
+reporting	refresh	Refresh
+reporting	report	report
 reporting	site_wide	Site-Wide
-reporting	site_wide_reports	Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads
-reporting	site_wide_pie	Pie (graph)
+reporting	site_wide_activity	Site-Wide Activity
 reporting	site_wide_line	Line (graph)
+reporting	site_wide_pie	Pie (graph)
+reporting	site_wide_reports	Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads
+reporting	site_wide_time_tracking	Site-Wide Time Tracking
+reporting	subtitle	$1 Reporting
+reporting	start	Start
+reporting	time	Time
 reporting	time_tracking	Time-Tracking
-reporting	time_tracking_usertime	Individual User Time Report (graph)
 reporting	time_tracking_projecttime	Individual Project Time Report (graph)
 reporting	time_tracking_sitetime	Site-Wide Time Report (graph)
 reporting	time_tracking_sitetimebar	Site-Wide Total Hours Graph (graph)
 reporting	time_tracking_usersummary	Site-Wide Task &amp; Hours (report)
-reporting	administrative	Administrative
-reporting	initialize	Initialize / Rebuild Reporting Tables
-reporting	manage	Manage Time Tracker Categories
-reporting	file_support	File Support Request
-reporting	file_feature	File Feature Request
+reporting	time_tracking_usertime	Individual User Time Report (graph)
+reporting	title	Reporting
+reporting	type	Type
+reporting	update	Update
+reporting	user_activity	Activity (graph)
+reporting	user_activity_title	User Activity
+reporting	user	User
+reporting	users	Users
+reporting	users_added_weekly	Users Added Weekly (graph)
+reporting	users_added_title	Users Added
+reporting	week	Week
+reporting	weekly	Weekly
+reporting_pie	title	Tool Pie Graphs
+reporting_pie	trackers	Trackers
+reporting_pie	start	Start
+reporting_pie	end	End
+reporting_rebuild	iamsure	I'm SURE
+reporting_rebuild	message	  <h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I'm Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>
+reporting_rebuild	pressonlyonce	Press ONLY ONCE
+reporting_rebuild	title	Main Page
+reporting_ta	add_entry	Add Entry
+reporting_ta	add_entry_description	Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in.
+reporting_ta	cancel	Cancel
+reporting_ta	category	Category
+reporting_ta	change_week	Change Week
+reporting_ta	choose_entry	Choose A Week to Record Or Edit Your Time.
+reporting_ta	choose_entry_description	After you choose a week, you will be prompted to choose a Project/Subproject in the Task Manager.
+reporting_ta	date	Date
+reporting_ta	delete	Delete
+reporting_ta	error_field_required	All Fields Are Required.
+reporting_ta	hours	Hours
+reporting_ta	project_task	Project/Task
+reporting_ta	successfully_deleted	Successfully Deleted
+reporting_ta	successfully_added	Successfully Added
+reporting_ta	task_mgr_project	Task Manager Project
+reporting_ta	title	Time Tracking
+reporting_ta	time_entries	Time Entries For The Week Starting $1
+reporting_ta	total_hours	Total Hours
+reporting_ta	week_starting	Week Starting
+reporting_tc	category_name	Category Name
+reporting_tc	description	You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".
+reporting_tc	successful	Successful
+reporting_tc	time_code	Time Code
+reporting_tc	title	Main Page
+reporting_tc	title2	Manage Time Tracker Categories
+reporting_ttbp	bycategory	By Category
+reporting_ttbp	bytask	By Task
+reporting_ttbp	bysubproject	By Subproject
+reporting_ttbp	byuser	By User
+reporting_ttbp	title	Time Tracking By Project
+reporting_ua	description	Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>
+reporting_us	any	Any
+reporting_us	closed	closed
+reporting_us	cum_hrs	Cum. Hrs
+reporting_us	description	Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.
+reporting_us	end_date	End Date
+reporting_us	name	Name
+reporting_us	no_matches	No matches Found
+reporting_us	open	Open
+reporting_us	rem_hrs	Rem. Hrs
+reporting_us	status	Status
+reporting_us	task	Task
+reporting_us	task_status	Task Status
+reporting_us	title	User Summary Report
+reporting_ut	description	Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>
+reporting_ut	title	User Time Reporting
 scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	browseit	Browse CVS Repository

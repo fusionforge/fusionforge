@@ -33,6 +33,8 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error('Error',$report->getErrorMessage());
@@ -69,7 +71,7 @@ if ($submit) {
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
-				$feedback='Successfully Deleted';
+				$feedback=$Language->getText('reporting_ta','successfully_deleted');
 			}
 		} else {
 			echo "$project_task_id && $report_date && $old_time_code";
@@ -87,11 +89,11 @@ if ($submit) {
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
-				$feedback='Successfully Added';
+				$feedback.=$Language->getText('reporting_ta','successfully_added');
 			}
 		} else {
 			echo "$project_task_id && $week && $days_adjust && $time_code && $hours";
-			exit_error('Error','All Field Are Required.');
+			exit_error('Error',$Language->getText('reporting_ta','error_field_required'));
 		}
 
 	}
@@ -99,7 +101,7 @@ if ($submit) {
 
 if ($week) {
 
-	report_header('Time Tracking');
+	report_header($Language->getText('reporting_ta','title'));
 
 	if (!$group_project_id) {
 		$respm=db_query("SELECT pgl.group_project_id,g.group_name || '**' || pgl.project_name
@@ -110,7 +112,7 @@ if ($week) {
 		ORDER BY group_name,project_name");
 	}
 	?>
-	<h3>Time Entries For The Week Starting <?php echo date('Y-m-d',$week); ?></h3>
+	<h3><?php echo $Language->getText('reporting_ta','time_entries',date('Y-m-d',$week)); ?></h3>
 	<p>
 	<?php
 	$res=db_query("SELECT pt.project_task_id, pgl.project_name || '**' || pt.summary AS name, 
@@ -127,10 +129,10 @@ if ($week) {
 	$rows=db_numrows($res);
 	if ($group_project_id || $rows) {
 
-		$title_arr[]='Project/Task';
-		$title_arr[]='Date';
-		$title_arr[]='Hours';
-		$title_arr[]='Category';
+		$title_arr[]=$Language->getText('reporting_ta','project_task');
+		$title_arr[]=$Language->getText('reporting_ta','date');
+		$title_arr[]=$Language->getText('reporting_ta','hours');
+		$title_arr[]=$Language->getText('reporting_ta','category');
 		$title_arr[]=' ';
 
 		echo $HTML->listTableTop ($title_arr);
@@ -146,7 +148,7 @@ if ($week) {
 				<td align="middle"><!-- <input type="text" name="hours" value="'. $r['hours'] .'" size="3" maxlength="3" /> -->'.$r['hours'].'</td>
 				<td align="middle"><!-- '.report_time_category_box('time_code',$r['time_code']).' -->'.$r['category_name'].'</td>
 				<td align="middle"><!-- <input type="submit" name="update" value="Update" /> -->
-				<input type="submit" name="delete" value="Delete" /></td>
+				<input type="submit" name="delete" value="'. $Language->getText('reporting_ta','delete').'" /></td>
 			</tr></form>';
 			$total_hours += $r['hours'];
 		}
@@ -161,29 +163,29 @@ if ($week) {
 				<td align="middle"><input type="text" name="report_date" value="'. date('Y-m-d',$week) .'" size="10" maxlength="10" /></td>
 				<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 				<td align="middle">'.report_time_category_box('time_code',false).'</td>
-				<td align="middle"><input type="submit" name="add" value="Add" /><input type="submit" name="cancel" value="Cancel" /></td>
+				<td align="middle"><input type="submit" name="add" value="'.
+				$Language->getText('reporting','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('reporting_ta','cancel').'" /></td>
 			</tr></form>';
 
 		}
-		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>Total Hours:</strong></td><td><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
+		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'.$Language->getText('reporting_ta','total_hours').':</strong></td><td><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
 		echo $HTML->listTableBottom();
 
 	}
 	if (!$group_project_id) {
 		?>
 		<p>
-		<h3>Add Entry</h3>
+		<h3><?php echo $Language->getText('reporting_ta','add_entry'); ?></h3>
 		<p>
-		Choose a Project/Subproject in the Task Manager. You will then have to choose 
-		a Task and category to record your time in.
+		<?php echo $Language->getText('reporting_ta','add_entry_description'); ?>
 		<p>
 		<form action="<?php echo $PHP_SELF; ?>" method="get" />
 		<input type="hidden" name="week" value="<?php echo $week; ?>" />
 		<table>
 		<tr>
-			<td><strong>Task Manager Project:</strong></td>
+			<td><strong><?php echo $Language->getText('reporting_ta','task_mgr_project'); ?>:</strong></td>
 			<td><?php echo html_build_select_box ($respm,'group_project_id',false,false); ?></td>
-			<td><input type="submit" name="submit" value="Next" /></td>
+			<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','next'); ?>" /></td>
 		</tr>
 		</table>
 		</form>
@@ -191,7 +193,7 @@ if ($week) {
 		<h3>Change Week</h3>
 		<p>
 		<form action="<?php echo $PHP_SELF; ?>" method="get" />
-		<?php echo report_weeks_box($report,'week'); ?><input type="submit" name="submit" value="Change Week" />
+		<?php echo report_weeks_box($report,'week'); ?><input type="submit" name="submit" value="<?php echo $Language->getText('reporting_ta','change_week'); ?>" />
 		</form>
 		<?php
 	}
@@ -200,19 +202,18 @@ if ($week) {
 //
 } else {
 
-	report_header('Time Tracking');
+	report_header($Language->getText('reporting_ta','title'));
 
 	?>
-	<h3>Choose A Week to Record Or Edit Your Time.</h3>
+	<h3><?php echo $Language->getText('reporting_ta','choose_entry'); ?></h3>
 	<p>
-	After you choose a week, you will be prompted to choose a Project/Subproject in the 
-	Task Manager.
+	<?php echo $Language->getText('reporting_ta','choose_entry_description'); ?>
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="get" />
-	<strong>Week Starting:</strong><br />
+	<strong><?php echo $Language->getText('reporting_ta','week_starting'); ?>:</strong><br />
 	<?php echo report_weeks_box($report,'week'); ?>
 	<p>
-	<input type="submit" name="submit" value="Next" />
+	<input type="submit" name="submit" value="<?php echo $Language->getText('reporting','next'); ?>" />
 	</form>
 	<?php
 

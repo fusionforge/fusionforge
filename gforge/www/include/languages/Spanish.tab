@@ -679,8 +679,14 @@ forum	html	No está permitido HTML. Los tags HTML se visualizarán como texto
 forum	section	Proyecto: $1
 forum	title	Foros
 forum_admin	add_forum	Crear foro
+forum_admin	delete	Eliminar
+forum_admin	delete_forum	Eliminar el foro y todos sus contenidos
 forum_admin	delete_message	Borrar mensaje
+forum_admin	delete_warning	Está a punto de borrar irrevocablemente el foro y todos sus contenidos
+forum_admin	deleted	Eliminación exitosa
+forum_admin	really_sure	Estoy completamente Seguro
 forum_admin	section	Proyecto: $1
+forum_admin	sure	Estoy seguro
 forum_admin	title	Foros: Administración
 forum_admin	update_forum	Cambiar estado/información del foro
 forum_admin_addforum	add_forum	Añadir este Foro
@@ -827,6 +833,12 @@ frs	file_package	Paquetes
 frs	file_rel_date	Día
 frs	file_version	Versión
 frs	latest_file_releases	Últimas Publicaciones de Ficheros
+frs_admin	delete	Eliminar
+frs_admin	delete_package_warning	Está a punto de borrar permanentemente e irrevocablemente este paquete con todas sus liberaciones y todos sus ficheros
+frs_admin	delete_release_warning	Está a punto de borrar permanentemente e irrevocablemente esta liberación y sus ficheros
+frs_admin	deleted	Borrado
+frs_admin	really_sure	Estoy complemetamente seguro
+frs_admin	sure	Estoy seguro
 frs_file	error_already_exists	Ese nombre de fichero ya existe en el espacio de este proyecto
 frs_file	error_cannot_move	El fichero no puede moverse a la posición permanete
 frs_file	error_invalid_file	FRSFile Parece no ser válido
@@ -1348,6 +1360,10 @@ pm_admin_projects	change_project_intro	Puede modificar un Subproyecto existente 
 pm_admin_projects	change_project_title	Cambia el Estado de Subproyecto/Tarea
 pm_admin_projects	col_project_id	Identificador de proyecto
 pm_admin_projects	col_project_name	Nombre de proyecto
+pm_admin_projects	delete	Eliminar
+pm_admin_projects	delete_info	Borrar permanentemente este subproyecto y todos sus datos.
+pm_admin_projects	delete_warning	Está a punto de borrar permanentemente e irrevocablemente este subproyecto y todos sus datos asociados
+pm_admin_projects	deleted	Eliminación exitosa
 pm_admin_projects	description	Descripción
 pm_admin_projects	edit_update	Editar/Actualizar Subproyecto
 pm_admin_projects	existing_subprojects	Subproyectos Existentes
@@ -1361,8 +1377,10 @@ pm_admin_projects	project_inserted	Proyecto Insertado
 pm_admin_projects	project_name	Nuevo Nombre del Subproyecto
 pm_admin_projects	project_title	Titulo
 pm_admin_projects	projects_intro	Añadir un nuevo subproyecto al Gestor de Subproyectos/Tareas. <strong>Esto es diferente a añadir una tarea al subproyecto.</strong>
+pm_admin_projects	really_sure	Estoy completamente seguro
 pm_admin_projects	section	Administración de Tareas
 pm_admin_projects	send_updates	Enviar Todas las Actualizaciones a
+pm_admin_projects	sure	Estoy seguro
 pm_admin_projects	title	Crear un subproyecto
 pm_browse_custom	section	Administrador de Tareas
 pm_browse_custom	title	Hojear las tareas
@@ -1919,6 +1937,107 @@ register_requirements	section	Registro de un Nuevo Proyecto
 register_requirements	title	Servicios y Requisitos
 register_tos	section	Registro de un Nuevo Proyecto
 register_tos	title	Términos del Contrato de Servicio
+reporting	add	Añadir
+reporting	administrative	Administración
+reporting	area	Áreas
+reporting	cumulative_users	Usuarios Totales por Semanas (gráfica)
+reporting	cumulative_users_title	Usuarios Totales
+reporting	daily	Diario
+reporting	end	Fin
+reporting	feature_req	Petición de Funcionalidad
+reporting	forum_messages	Mensajes en Foros
+reporting	initialize	Inicializar / Reconstruir Tablas de Informes
+reporting	manage	Administrar categorías de Registro Temporal
+reporting	monthly	Mensual
+reporting	next	Siguiente
+reporting	other_trackers	Otros registros
+reporting	project	Proyecto
+reporting	project_activity	Actividad (gráfica)
+reporting	project_activity_title	Actividad de Proyecto
+reporting	project_specific	Informes específicos de Proyecto: Registro, Tareas, Foros, Gestor de documentación, Descargas
+reporting	projects	Proyectos
+reporting	refresh	Actualizar
+reporting	report	informe
+reporting	site_wide	De todo el Sistema
+reporting	site_wide_activity	Actividades de todo el Sistema
+reporting	site_wide_line	Líneas (gráfica)
+reporting	site_wide_pie	Tarta (gráfica)
+reporting	site_wide_reports	Informes de todo el Sistema: Registro, Tareas, Foros, Gestor de documentación, Descargas
+reporting	site_wide_time_tracking	Seguimiento temportal del todo el Sistema
+reporting	start	Comienzo
+reporting	subtitle	Informes de $1
+reporting	time	Hora
+reporting	time_tracking	Seguimiento Temporal
+reporting	time_tracking_projecttime	Seguimiento Temporal por Proyecto (gráfica)
+reporting	time_tracking_sitetime	Informe de Horas de todo el sistema (gráfica)
+reporting	time_tracking_sitetimebar	Horas totales de todo el sistema (gráfica)
+reporting	time_tracking_usersummary	Tares y Horas de todo el sistema (informe)
+reporting	time_tracking_usertime	Informe de Horas de Usuario (gráfica)
+reporting	title	Informes
+reporting	type	Tipo
+reporting	update	Actualizar
+reporting	user	Usuario
+reporting	user_activity	Actividad (gráfica)
+reporting	user_activity_title	Actividad de usuario
+reporting	users	Usuarios
+reporting	users_added_title	Usuarios Añadidos
+reporting	users_added_weekly	Usuarios Añadidos por semanas (gráfica)
+reporting	week	Semana
+reporting	weekly	Semanal
+reporting_pie	end	Fin
+reporting_pie	start	Comienzo
+reporting_pie	title	Gráfico de Tarta
+reporting_pie	trackers	Registros
+reporting_rebuild	iamsure	Estoy SEGURO
+reporting_rebuild	message	  <h3>Inicialización del Sistema de Informes</h3><p>A veces, si una tarea programada falló o la base de datos está dañada, puede reconstruir las tablas de informe.<p>Si está seguro de que quiere reconstruirlas, haga click en la marca "Estoy SEGURO" y haga click en el botón de abajo.<p>Esta operación puede llevar varios minutos, así que NO HAGA CLICK MÁS DE UNA VEZ.<p>
+reporting_rebuild	pressonlyonce	Haga Click una ÚNICA VEZ
+reporting_rebuild	title	Página Principal
+reporting_ta	add_entry	Añadir Entrada
+reporting_ta	add_entry_description	Elegir un Proyecto/Subproyecto en el gestor de tareas. Luego tendrá que elegir una tarea o categoría para grabar sus horas ahí.
+reporting_ta	cancel	Cancelar
+reporting_ta	category	Categoría
+reporting_ta	change_week	Cambiar Semana
+reporting_ta	choose_entry	Cambiar una semana a almacenar or editar sus Horas.
+reporting_ta	choose_entry_description	Después de elegir una semana, se le pedirá un proyecto/subproyecto en el administrador de tareas.
+reporting_ta	date	Fecha
+reporting_ta	delete	Eliminar
+reporting_ta	error_field_required	Se requieren todos los campos.
+reporting_ta	hours	Horas
+reporting_ta	project_task	Proyecto/Tarea
+reporting_ta	successfully_added	Añadido con éxito
+reporting_ta	successfully_deleted	Eliminado con éxito
+reporting_ta	task_mgr_project	Gestor de Tareas del Proyecto
+reporting_ta	time_entries	 Entradas de horas para la semana empezando por $1
+reporting_ta	title	Seguimiento de Horas
+reporting_ta	total_hours	Horas totales
+reporting_ta	week_starting	Comienzo de Semana
+reporting_tc	category_name	Nombre de la categoría
+reporting_tc	description	Puede crear categorías para describir cómo se utilizó el tiempo cuando se completa una tarea. Algunos ejemplos de categorías son "Reunión", "Programación", "Pruebas".
+reporting_tc	successful	Éxito
+reporting_tc	time_code	Horas programando
+reporting_tc	title	Página Principal
+reporting_tc	title2	Administrar las categorías del gestor de seguimiento de tiempos
+reporting_ttbp	bycategory	Por Categoría
+reporting_ttbp	bysubproject	Por Subproyecto
+reporting_ttbp	bytask	Por Tarea
+reporting_ttbp	byuser	Por Usuario
+reporting_ttbp	title	Seguimiento de Horas por Proyecto
+reporting_ua	description	Elige la <strong>Primera Letra</strong> del apellido de la persona que desea ver el informe.<p>
+reporting_us	any	Cualquiera
+reporting_us	closed	Cerrado
+reporting_us	cum_hrs	Horas Acumuladas
+reporting_us	description	Elige el rango en la lista de abajo. El informe listará todas las tareas con fecha de apertura en ese rango.
+reporting_us	end_date	Fecha Final
+reporting_us	name	Nombre
+reporting_us	no_matches	Ninguna tarea encontrada
+reporting_us	open	Abierto
+reporting_us	rem_hrs	Horas Restantes
+reporting_us	status	Estado
+reporting_us	task	Tarea
+reporting_us	task_status	Estado de la Tarea
+reporting_us	title	Resumen del Informe de Usuario
+reporting_ut	description	Elija la <strong>Primera Letra</strong> del apellido de la persona que desea conocer el informe.<p>
+reporting_ut	title	Informe de Horas de Usuario
 scm_index	admin	Administración
 scm_index	anoncvs	<P><B>Acceso Anónimo por CVS</B> <P>El repositorio CVS de este proyecto puede obtenerse (<I>check out</I>) a través de un servidor anónimo CVS (pserver) con las siguientes instrucciones. El módulo que quieres obtener debe ser especificado como el <I>modulename</I>. Cuando te pregunte por una password para <I>anonymous</I>, simplemente pulsa la tecla Enter.
 scm_index	anoncvsup	Actualizaciones dentro del directorio del módulo no necesitan el parámetro -d.
@@ -2510,13 +2629,19 @@ tracker_admin	category_inserted	Categoría Insertada
 tracker_admin	category_name	Nombre de Categoría
 tracker_admin	category_updated	Categoría Actualizada
 tracker_admin	choose_datatype	Escoje un tipo de datos para introducir preferencias, categorías, grupos, usuarios y permisos
+#TO_TRANSLATE#tracker_admin	delete	Delete.
+#TO_TRANSLATE#tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
+#TO_TRANSLATE#tracker_admin	deleted	Successfully Deleted.
 tracker_admin	error_inserting	Error al insertar
 tracker_admin	error_updating	Error al actualizar
 tracker_admin	group_inserted	Grupo Insertado
 tracker_admin	group_name	Nuevo Nombre de grupo
 tracker_admin	group_updated	Grupo Actualizado
 tracker_admin	intro	<h3>Crear nuevo Registro</h3><p>Puede utilizar este sistema para registrar clases de datos, ya que cada registro incluye separadamente usuario, grupo, categoría y lista de permisos. Puede cambiar fácilmente items entre registros si es necesario.</p><p>Los Registros pueden agruparse en "Tipos de Registros" y un dato individual es un "Registro".Por ejemplo: "Bugs" es un Tipo de Registros, y el informe de un bug es un Registro. Puede crear tantos "Tipos de Registros" como desee, pero recuerde que necesita crear categorías, grupos y permisos para cada tipo, con el consiguiente consumo de tiempo
+#TO_TRANSLATE#tracker_admin	permanently_delete_info	Permanently delete this tracker.
+#TO_TRANSLATE#tracker_admin	really_sure	I'm Really Sure.
 tracker_admin	section	Registro
+#TO_TRANSLATE#tracker_admin	sure	I'm Sure.
 tracker_admin	title	Administración
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	Título

@@ -29,6 +29,8 @@ require_once('pre.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -41,21 +43,21 @@ if (!$start) {
 
 session_require( array('group'=>$sys_stats_group) );
 
-echo report_header('Tool Pie Graphs');
+echo report_header($Language->getText('reporting_pie','title'));
 
 if (!isset($datatype)) {
 	$datatype=1;
 }
 
 ?>
-<h3>Tool Pie Graphs</h3>
+<h3><?php echo $Language->getText('reporting_pie','title'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <table><tr>
-<td><strong>Trackers:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>
-<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><strong><?php echo $Language->getText('reporting_pie','trackers'); ?>:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>
+<td><strong><?php echo $Language->getText('reporting_pie','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo $Language->getText('reporting_pie','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

@@ -26,10 +26,10 @@
  */
 
 function report_header($title) {
-	global $HTML,$report_company_name,$sys_name;
-	echo $HTML->header(array('title'=>" Reporting: " . $title));
+	global $HTML,$sys_name,$Language;
+	echo $HTML->header(array('title'=>" ".$Language->getText('reporting','title').": " . $title));
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo "<h2>$report_company_name Reporting</h2><p>";
+	echo "<h2>".$Language->getText('reporting','subtitle',$sys_name)."</h2><p>";
 }
 
 function report_footer() {
@@ -39,12 +39,16 @@ function report_footer() {
 }
 
 function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
+	global $Language;
 	if ($suppress_daily) {
 		$vals=array(2,3);
-		$titles=array('Weekly','Monthly');
+		$titles=array($Language->getText('reporting','weekly'),
+			$Language->getText('reporting','monthly'));
 	} else {
 		$vals=array(1,2,3);
-		$titles=array('Daily','Weekly','Monthly');
+		$titles=array($Language->getText('reporting','daily'),
+			$Language->getText('reporting','weekly'),
+			$Language->getText('reporting','monthly'));
 	}
 	return html_build_select_box_from_arrays ($vals,$titles,$name,$selected,false);
 }
@@ -62,7 +66,7 @@ function report_weeks_box($Report, $name='week', $selected=false) {
 }
 
 function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
-
+	global $Language;
 	$days[]='0.0';
 	$days[]='1';
 	$days[]='2';
@@ -70,13 +74,13 @@ function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
 	$days[]='4';
 	$days[]='5';
 	$days[]='6';
-	$names[]='Sunday';
-	$names[]='Monday';
-	$names[]='Tuesday';
-	$names[]='Wednesday';
-	$names[]='Thursday';
-	$names[]='Friday';
-	$names[]='Saturday';
+	$names[]=$Language->getText('calendar','sunday');
+	$names[]=$Language->getText('calendar','monday');
+	$names[]=$Language->getText('calendar','tuesday');
+	$names[]=$Language->getText('calendar','wednesday');
+	$names[]=$Language->getText('calendar','thursday');
+	$names[]=$Language->getText('calendar','friday');
+	$names[]=$Language->getText('calendar','saturday');
 	return html_build_select_box_from_arrays ($days,$names,$name,$selected,false);
 
 //	return html_build_select_box_from_arrays (array_reverse(array_values($Report->adjust_days)),array_reverse(array_keys($Report->adjust_days)),$name,$selected,false);
@@ -127,29 +131,31 @@ function report_group_box($name='g_id', $selected='1') {
 }
 
 function report_area_box($name='area', $selected='1') {
+	global $Language;
 	$arr[]='tracker';
 	$arr[]='forum';
 	$arr[]='docman';
 	$arr[]='taskman';
 	$arr[]='downloads';
 
-	$arr2[]='Tracker';
-	$arr2[]='Forum';
-	$arr2[]='Docman';
-	$arr2[]='Taskman';
-	$arr2[]='Downloads';
+	$arr2[]=$Language->getText('group','short_tracker');
+	$arr2[]=$Language->getText('group','short_forum');
+	$arr2[]=$Language->getText('group','short_docman');
+	$arr2[]=$Language->getText('group','short_pm');
+	$arr2[]=$Language->getText('stats_site_utils','downloads');
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
-	$arr[]='Bugs';
-	$arr[]='Support';
-	$arr[]='Patches';
-	$arr[]='Feature Requests';
-	$arr[]='Other Trackers';
-	$arr[]='Forum Messages';
-	$arr[]='Tasks';
-	$arr[]='Downloads';
+	global $Language;
+	$arr[]=$Language->getText('group','short_bugs');
+	$arr[]=$Language->getText('group','short_support');
+	$arr[]=$Language->getText('group','short_patch');
+	$arr[]=$Language->getText('reporting','feature_req');
+	$arr[]=$Language->getText('reporting','other_trackers');
+	$arr[]=$Language->getText('reporting','forum_messages');
+	$arr[]=$Language->getText('group','short_pm');
+	$arr[]=$Language->getText('stats_site_utils','downloads');
 
 	$arr2[]='1';
 	$arr2[]='2';

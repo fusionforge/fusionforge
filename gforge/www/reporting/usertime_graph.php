@@ -69,7 +69,7 @@ $arr['category']='By Category';
 $arr['subproject']='By Subproject';
 
 $graph->title->Set("Time Report ".$arr[$type]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set($report_company_name);
+$graph->subtitle->Set($sys_name);
 
 // Create the tracker open plot
 //$data  =& $report->getData();

@@ -30,6 +30,7 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
 session_require( array('group'=>$sys_stats_group) );
+global $Language;
 
 $report=new Report();
 if ($report->isError()) {
@@ -42,10 +43,10 @@ if (!$start) {
 }
 
 
-echo report_header('Site-Wide Activity');
+echo report_header($Language->getText('reporting','site_wide_activity'));
 
 ?>
-<h3>Site-Wide Activity</h3>
+<h3><?php echo $Language->getText('reporting','site_wide_activity'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <table><tr>
@@ -53,7 +54,7 @@ echo report_header('Site-Wide Activity');
 <td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

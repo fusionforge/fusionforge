@@ -31,6 +31,8 @@ require_once('common/reporting/ReportProjectTime.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+global $Language;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -41,12 +43,12 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-echo report_header('Time Tracking By Project');
+echo report_header($Language->getText('reporting_ttbp','title'));
 
-$a[]='By Task';
-$a[]='By Category';
-$a[]='By Subproject';
-$a[]='By User';
+$a[]=$Language->getText('reporting_ttbp','bytask');
+$a[]=$Language->getText('reporting_ttbp','bycategory');
+$a[]=$Language->getText('reporting_ttbp','bysubproject');
+$a[]=$Language->getText('reporting_ttbp','byuser');
 
 $a2[]='tasks';
 $a2[]='category';
@@ -54,17 +56,17 @@ $a2[]='subproject';
 $a2[]='user';
 
 ?>
-<h3>Time Tracking By Project</h3>
+<h3><?php echo $Language->getText('reporting_ttbp','title'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>">
 <table><tr>
-<td><strong>Project:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
-<td><strong>Type:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
-<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><strong><?php echo $Language->getText('reporting','project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
+<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
+<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>
@@ -75,7 +77,8 @@ $a2[]='user';
 		$labels = $report->labels;
 	    $data = $report->getData();
 
-	    echo $HTML->listTableTop (array('Type','Time'));
+	    echo $HTML->listTableTop (array($Language->getText('reporting','type'),
+	    		$Language->getText('reporting','time')));
 
 	    for ($i=0; $i<count($labels); $i++) {
 

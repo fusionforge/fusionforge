@@ -30,7 +30,7 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/ReportSetup.class');
 
 session_require( array('group'=>$sys_stats_group,'A') );
-
+global $Language;
 
 if ($submit) {
 	if ($add) {
@@ -39,7 +39,7 @@ if ($submit) {
 		if (!$r->addTimeCode($category_name)) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
-			$feedback="Successful";
+			$feedback=$Language->getText('reporting_tc','successful');
 		}
 
 	} elseif ($update) {
@@ -49,7 +49,7 @@ if ($submit) {
 		if (!$r->updateTimeCode($time_code,$category_name)) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
-			$feedback="Successful";
+			$feedback=$Language->getText('reporting_tc','successful');
 		}
 
 		$time_code=false;
@@ -58,7 +58,7 @@ if ($submit) {
 
 }
 
-echo report_header('Main Page');
+echo report_header($Language->getText('reporting_tc','title'));
 
 if ($time_code) {
 	$res1=db_query("SELECT * FROM rep_time_category WHERE time_code='$time_code'");
@@ -66,8 +66,8 @@ if ($time_code) {
 }
 $res=db_query("SELECT * FROM rep_time_category");
 
-$arr[]='Time Code';
-$arr[]='Category Name';
+$arr[]=$Language->getText('reporting_tc','time_code');
+$arr[]=$Language->getText('reporting_tc','category_name');
 
 echo $HTML->listTableTop($arr);
 
@@ -79,10 +79,9 @@ for ($i=0; $i<db_numrows($res); $i++) {
 echo $HTML->listTableBottom();
 
 ?>
-<h3>Manage Time Tracker Categories</h3>
+<h3><?php echo $Language->getText('reporting_tc','title2'); ?></h3>
 <p>
-You can create categories for how time might be spent when completing a particular task.
-Examples of categories include "Meeting", "Coding", "Testing".
+<?php echo $Language->getText('reporting_tc','description'); ?>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="submit" value="1" />
@@ -93,9 +92,9 @@ Examples of categories include "Meeting", "Coding", "Testing".
 <?php
 
 if ($time_code) { 
-	echo '<input type="submit" name="update" value="Update" />';
+	echo '<input type="submit" name="update" value="'.$Language->getText('reporting','update').'" />';
 } else {
-	echo '<input type="submit" name="add" value="Add" />';
+	echo '<input type="submit" name="add" value="'.$Language->getText('reporting','add').'" />';
 }
 
 ?>
