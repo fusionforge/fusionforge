@@ -177,7 +177,8 @@ function account_shellselects($current) {
  *	@return home directory path
  */
 function account_user_homedir($user) {
-	return '/home/users/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
+	//return '/home/users/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
+	return $GLOBALS['homedir_prefix'].'/'.$user;
 }
 
 /**
@@ -187,7 +188,8 @@ function account_user_homedir($user) {
  *	@return home directory path
  */
 function account_group_homedir($group) {
-	return '/home/groups/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
+	//return '/home/groups/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
+	return $GLOBALS['groupdir_prefix'].'/'.$group;
 }
 
 /**

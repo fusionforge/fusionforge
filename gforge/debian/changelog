@@ -1,8 +1,10 @@
 sourceforge (2.6-0+2+) unstable; urgency=low
 
-  * Added proper chmod for cp -r www and common 
+  * Added proper chmod for cp -r www and common
+  * Added homedir_prefix and groupdir_prefix in local.inc.template
+    and made the change in account.php to take this in account 
 
- -- Christian Bayle <bayle@aist.enst.fr>  Sat, 24 Nov 2001 17:51:29 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Thu, 29 Nov 2001 20:38:01 +0100
 
 sourceforge (2.6-0+2) unstable; urgency=low
 

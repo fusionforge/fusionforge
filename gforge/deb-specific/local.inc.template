@@ -101,6 +101,10 @@ $FTPINCOMING_DIR = "/var/lib/sourceforge/chroot/home/users/<USER>/incoming";
 
 // Where the released files are located
 $FTPFILES_DIR = "/var/lib/sourceforge/download/<GROUP>";
+
+// groups and homes dir prefix
+$homedir_prefix="/var/lib/sourceforge/chroot/home/users";
+$groupdir_prefix="/var/lib/sourceforge/chroot/home/groups";
  
 // Where the SourceForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
