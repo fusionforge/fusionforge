@@ -455,7 +455,7 @@ FIN
 dn: uid=dummy,ou=People,$gforge_base_dn
 objectClass: posixAccount
 objectClass: debGforgeAccount
-objectClass: person
+objectClass: account
 cn: Dummy User (untested)
 uid: dummy
 uidNumber: 9999

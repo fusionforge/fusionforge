@@ -5,8 +5,10 @@ gforge (3.0-5) unstable; urgency=low
     (closes: #203341).
   * [Roland] Fixed the *-owner alias for Mailman lists.  Patch from Igor
     Genibel again (closes: #203522).
+  * [Roland] Changed the objectclass: person to objectclass: account,
+    since person requires an additional field.
 
- -- Roland Mas <lolando@debian.org>  Thu, 21 Aug 2003 20:49:18 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Aug 2003 12:24:35 +0200
 
 gforge (3.0-4) unstable; urgency=low
 
