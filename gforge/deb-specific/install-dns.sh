@@ -54,7 +54,7 @@ EOF
   	echo "	-Suppose that all servers are in the same box"
   	echo "	-Wizards advices are welcome"
 
-	invoke-rc.d bind9 restart
+	/usr/sbin/invoke-rc.d bind9 restart
 	# This is equivalent but require some signature, not always there
 	# /usr/sbin/rndc reload
 
@@ -68,7 +68,7 @@ EOF
 	fi
 	;;
     purge)
-	invoke-rc.d bind9 restart
+	/usr/sbin/invoke-rc.d bind9 restart
 	;;
 
     *)
