@@ -30,6 +30,17 @@ $server->wsdl->addComplexType(
 	'xsd:string'
 );
 
+$server->wsdl->addComplexType(
+	'ArrayOfInteger',
+	'complexType',
+	'array',
+	'',
+	'',
+	array(),
+	array(array('ref'=>'SOAP-ENC:Array','wsdl:arrayType'=>'integer[]')),
+	'xsd:integer'
+);
+
 // session/authentication
 $server->register(
 	'login',
@@ -53,6 +64,20 @@ require_once('www/soap/common/group.php');
 //
 require_once('www/soap/common/user.php');
 
+//
+//	Include tracker Functions
+//
+require_once('www/soap/tracker/tracker.php');
+
+//
+//	Include task manager Functions
+//
+require_once('www/soap/pm/pm.php');
+
+//
+//	Include frs Functions
+//
+//require_once('www/soap/frs/frs.php');
 
 
 $wsdl_data = $server->wsdl->serialize();

@@ -42,6 +42,7 @@ $server->wsdl->addComplexType(
 	'status' => array('name'=>'status', 'type' => 'xsd:string'),
 	'unix_group_name' => array('name'=>'unix_group_name', 'type' => 'xsd:string'),
 	'short_description' => array('name'=>'short_description', 'type' => 'xsd:string'),
+	'scm_box' => array('name'=>'scm_box', 'type' => 'xsd:string'),
 	'register_time' => array('name'=>'register_time', 'type' => 'xsd:integer') ) );
 
 // Array of groups
@@ -106,6 +107,7 @@ function &groups_to_soap($grps) {
 			'status'=>$grps[$i]->data_array['status'],
 			'unix_group_name'=>$grps[$i]->data_array['unix_group_name'],
 			'short_description'=>$grps[$i]->data_array['short_description'],
+			'scm_box'=>$grps[$i]->data_array['scm_box'],
 			'register_time'=>$grps[$i]->data_array['register_time']);
 		}
 
