@@ -1,16 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
 
+/**
+ * GForge Localization Facility
+ *
+ * Portions Copyright 1999-2000 (c) VA Linux Systems
+ * The rest Copyright 2003 (c) Guillaume Smet
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
 
 /*
 
 	Tim Perdue, September 7, 2000
-
 
 	Base class for adding multilingual support to SF.net
 
@@ -23,47 +26,131 @@
 	As new languages are added, they can override what they wish, and
 		as we extend our class, other languages can follow suit
 		as they are translated without holding up our progress
-
 */
 
 class BaseLanguage {
 
-	//array to hold the string values
-	var $text_array ;
-	var $lang, $name, $id, $code ;
+	/**
+	 * associative array to hold the string value
+	 *
+	 * @var array $textArray
+	 */
+	var $textArray ;
+	
+	/**
+	 * selected language
+	 *
+	 * @var string $lang
+	 */
+	var $lang;
+	
+	/**
+	 * name of the current language
+	 *
+	 * @var string $name
+	 */
+	var $name;
+	
+	/**
+	 * language id
+	 *
+	 * @var int $id
+	 */
+	var $id;
+	
+	/**
+	 * language code
+	 *
+	 * @var string $code
+	 */
+	var $code;
+	
+	/**
+	 * result set handle for supported languages
+	 *
+	 * @var resource $languagesRes
+	 */
+	var $languagesRes;
+	
+	/**
+	 * array containing dependencies of the cache file
+	 *
+	 * @var array $cacheDependencies
+	 */
+	var $cacheDependencies = array();
 
+	/**
+	 * Constructor
+	 */
 	function BaseLanguage() {
-		$this->loadLanguage('Base');
 	}
 
+	/**
+	 * loadLanguageFile - load the localized strings from a file
+	 *
+	 * @param $fname file name
+	 */
 	function loadLanguageFile($fname) {
-		$ary = file($fname,1);
-		for( $i=0; $i<sizeof($ary); $i++) {
-			if (substr($ary[$i], 0, 1) == '#') {
+		
+		$lines = file($fname, 1);
+
+		$this->cacheDependencies[] = $fname;
+		
+		for( $i=0, $max = sizeof($lines); $i < $max; $i++) {
+			$currentLine = $lines[$i];
+			if (substr($currentLine, 0, 1) == '#') {
 				continue;
 			}
 			// Language files can include others for defaults.
 			// e.g. an English-Canada.tab file might "include English" first,
 			// then override all those whacky American spellings.
-			if (preg_match("/^include ([a-zA-Z]+)/", $ary[$i], $matches)) {
+			if (preg_match("/^include ([a-zA-Z]+)/", $currentLine, $matches)) {
 				$dir = dirname($fname);
-				$this->loadLanguageFile($dir."/".$matches[1].".tab");
+				$fileName = $dir.'/'.$matches[1].'.tab';
+				if(file_exists($fileName)) {
+					$this->loadLanguageFile($fileName);
+				}
 			} else {
-				$line = explode("\t", $ary[$i], 3);
-				$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+				$line = explode("\t", $currentLine, 3);
+				$this->textArray[$line[0]][$line[1]] = chop($line[2]);
 			}
 		}
 	}
 
-	function loadLanguageID($language_id) {
-		$res=db_query("SELECT * FROM supported_languages WHERE language_id='$language_id'");
-		$this->loadLanguage(db_result($res,0,'classname'));
+	/**
+	 * loadLanguageID - load the selected language
+	 *
+	 * @param int $languageId language id
+	 */
+	function loadLanguageID($languageId) {
+		$res = db_query('SELECT * FROM supported_languages WHERE language_id=\''.$languageId.'\'');
+		$this->loadLanguage(db_result($res, 0, 'classname'));
 	}
 
+	/**
+	 * loadLanguage - load localized strings of the selected language
+	 *
+	 * @param string $lang language name
+	 */
 	function loadLanguage($lang) {
 		global $sys_theme, $sys_urlroot;
-		// Customization by language in $sys_urlroot/languages/<Language>.tab
-		$fname = 'languages/'.$lang.'.tab' ;
+
+		$cachePath = $this->getLocalizationCachePath($lang);
+
+		if($GLOBALS['sys_localization_enable_caching'] && file_exists($cachePath)) {
+			$this->textArray =& $this->getLocalizationCache($cachePath);
+			$this->lang = $lang ;
+			if(!$GLOBALS['sys_localization_enable_timestamp_checking'] || !$this->isCacheOutdated($cachePath)) {
+				return;
+			}
+		}
+
+		if($lang != 'Base') {
+			$this->loadLanguage('Base');
+		}
+
+		// Customization by language in $sys_urlroot/include/languages/<Language>.tab
+		$fname = $sys_urlroot.'/include/languages/'.$lang.'.tab';
 		$this->loadLanguageFile($fname) ;
 		// Customization by theme by language in $sys_urlroot/themes/<theme_name>/<Language>.tab
 		$ftname = $sys_urlroot.'/themes/'.$sys_theme.'/'.$lang.'.tab' ;
@@ -81,38 +168,47 @@ class BaseLanguage {
 			$this->loadLanguageFile($fltname) ;
 		}
 		$this->lang = $lang ;
+		if($GLOBALS['sys_localization_enable_caching']) {
+			$this->writeLocalizationCache($cachePath);
+		}
 	}
 
-	function getText($pagename, $category, $args="") {
-		/*
-			args is an array which will replace the $1, $2, etc
-			in the text_array string before it is returned
-		*/
+	/**
+	 * getText - get a localized string
+	 *
+	 * @param string $pagename name of the current page
+	 * @param string $category key
+	 * @param mixed $args array which will replace the $1, $2, etc before it is returned
+	 */
+	function getText($pagename, $category, $args = '') {
 		if ($args) {
-			for ($i=1; $i<=sizeof($args)+1; $i++) {
+			for ($i=1, $max = sizeof($args)+1; $i <= $max; $i++) {
 				$patterns[] = '/\$'.$i.'/';
 			}
-			$tstring = preg_replace($patterns, $args, $this->text_array[$pagename][$category]);
+			$tstring = preg_replace($patterns, $args, $this->textArray[$pagename][$category]);
 		} else {
-			$tstring = $this->text_array[$pagename][$category];
+			$tstring = $this->textArray[$pagename][$category];
 		}
 		return $tstring;
 	}
 
-	//result set handle for supported langauges
-	var $language_res;
-
-	/*
-		returns database result
-		of supported languages
-	*/
+	/**
+	 * getLanguages - returns database result of supported languages
+	 *
+	 * @return resource supported languages
+	 */
 	function getLanguages() {
-		if (!$this->text_array['conf']['language_res']) {
-			$this->text_array['conf']['language_res']=db_query("SELECT * FROM supported_languages ORDER BY name ASC");
+		if (!isset($this->languagesRes)) {
+			$this->languagesRes = db_query('SELECT * FROM supported_languages ORDER BY name ASC');
 		}
-		return $this->text_array['conf']['language_res'];
+		return $this->languagesRes;
 	}
 
+	/**
+	 * getLanguageId - returns the language id corresponding to the language name
+	 *
+	 * @return int language id
+	 */
 	function getLanguageId() {
 		if (!$this->id) {
 			$this->id = db_result(db_query("SELECT language_id FROM supported_languages WHERE classname='".$this->lang."'"), 0, 0) ;
@@ -120,6 +216,11 @@ class BaseLanguage {
 		return $this->id ;
 	}
 
+	/**
+	 * getLanguageName - returns the language name corresponding to the language id
+	 *
+	 * @return string language name
+	 */
 	function getLanguageName() {
 		if (!$this->name) {
 			$id = $this->getLanguageId () ;
@@ -128,6 +229,11 @@ class BaseLanguage {
 		return $this->name ;
 	}
 
+	/**
+	 * getLanguageCode - returns the language code corresponding to the language id
+	 *
+	 * @return string language code
+	 */
 	function getLanguageCode() {
 		if (!$this->code) {
 			$id = $this->getLanguageId () ;
@@ -136,13 +242,98 @@ class BaseLanguage {
 		return $this->code ;
 	}
 
+	/**
+	 * getEncoding - returns the content encoding for the selected language
+	 *
+	 * @return string content encoding
+	 */
 	function getEncoding() {
-		return $this->text_array['conf']['content_encoding'];
+		if(isset($this->textArray['conf']['content_encoding'])) {
+			return $this->textArray['conf']['content_encoding'];
+		}
+		else {
+			return '';
+		}
 	}
 
+	/**
+	 * getFont - returns the default font for selected language if exists
+	 *
+	 * @return string the default font
+	 */
 	function getFont() {
-		return $this->text_array['conf']['default_font'];
+		if(isset($this->textArray['conf']['default_font'])) {
+			return $this->textArray['conf']['default_font'];
+		}
+		else {
+			return '';
+		}
 	}
+
+
+	/* Localization Caching System */
+	
+	/**
+	 * getLocalizationCache - get the localization strings array from cache
+	 *
+	 * @param string $path path of the cache file
+	 * @return array an array containing localization string
+	 */
+	function & getLocalizationCache($cachePath) {
+		$fp = fopen($cachePath, 'r');
+		flock($fp, LOCK_SH);
+		$array = unserialize(fread($fp, filesize($cachePath)));
+		fclose($fp);
+		$this->cacheDependencies =& $array['dependencies'];
+		return $array['text'];
+	}
+
+	/**
+	 * writeLocalizationCache - caches the localization array to filesystem
+	 *
+	 * @param string $path path of the cache file
+	 */
+	function writeLocalizationCache($cachePath) { 
+		$content = array();
+		$content['dependencies'] =& $this->cacheDependencies;
+		$content['text'] =& $this->textArray;
+		$fp = fopen($cachePath, 'a');
+		flock($fp, LOCK_EX);
+		ftruncate($fp, 0);
+		$content = serialize($content);
+		fwrite($fp, $content, strlen($content));
+		fclose($fp);
+	}
+
+	/**
+	 * getLocalizationCachePath - get the path to the localization cache for the selected language
+	 *
+	 * @param string $lang language
+	 * @return string path to the cache file
+	 */
+	function getLocalizationCachePath($lang) {
+		return $GLOBALS['sys_localization_cache_path'].$lang.'.cache';
+	}
+
+	/**
+	 * isCacheOutdated - test if the localization cache is deprecated
+	 *
+	 * @param string $path path of the cache file
+	 * @return boolean true if the cache is deprecated, false if it's still valid
+	 */
+	function isCacheOutdated($cachePath) {
+		if(!empty($this->cacheDependencies)) {
+			$cacheTimestamp = filemtime($cachePath);
+			$cacheDependencies =& $this->cacheDependencies;
+			for($i = 0, $max = sizeof($cacheDependencies); $i < $max; $i++) {
+				if(file_exists($cacheDependencies[$i]) && $cacheTimestamp < filemtime($cacheDependencies[$i])) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }
 
 function language_code_to_result($alang) {

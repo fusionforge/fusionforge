@@ -1,0 +1,16 @@
+
+//
+// Localization caching Configuration
+//
+
+// Enable localization caching system
+$sys_localization_enable_caching = {sys_localization_enable_caching};
+
+// Create a directory, which is writable by your webserver, but not
+// within its document root (does not fall under www/ in the tarball)
+// Your php.ini file may have to be modified to allow writing outside
+// the webserver's directory
+$sys_localization_cache_path = {sys_localization_cache_path};
+
+// Enable timestamp checking (if disabled, you have to remove manually cache files on update)
+$sys_localization_enable_timestamp_checking = {sys_localization_enable_timestamp_checking};
