@@ -31,10 +31,13 @@
 
 2004-08-04  Francisco Gimeno <kikov@kikov.org>
 	Fixes [#861]
-	* www/reporting/index.php: changed hardcoded string to 
+	* www/reporting/index.php: changed hardcoded strings to 
 	$Language->getText()
-	* www/include/languages/Base.tab: add new strings for 
-	reporting module
+	* www/include/languages/Base.tab: add new strings for reporting module
+	* www/reporting/*.php: changed hardcoded strings to
+	$Language->getText()
+	* common/reporting/report_utils: changed hardcoded strings to
+	$Language->getText(), changed $reporting_system_name to $sys_name
 
 	Fixes [#862]
 	* common/include/reporting/report_utils.php: changed realname by
