@@ -1,4 +1,4 @@
-gforge (3.0-3+) unstable; urgency=low
+gforge (3.0-4) unstable; urgency=low
 
   * [Roland] Make sure the $gforge_base_dn, ou=People,$gforge_base_dn and
     other needed LDAP records exist before we try to insert new
