@@ -70,7 +70,7 @@ class DocumentGroupHTML extends Error {
 					$doc_group->getID().'&amp;group_id='.$doc_group->Group->getID().'">'.
 					$doc_group->getName().'</a></td></tr>';
 			// Show childs (if any)
-			$this->showTableNestedGroups(&$group_arr, &$rowno, $doc_group->getID(), $level+1);
+			$this->showTableNestedGroups($group_arr, $rowno, $doc_group->getID(), $level+1);
 		}
 	}
 	
@@ -95,7 +95,7 @@ class DocumentGroupHTML extends Error {
 		}
 		
 		// Recursively build the document group tree
-		$this->buildArrays(&$group_arr, &$id_array, &$text_array, &$dont_display);
+		$this->buildArrays($group_arr, $id_array, $text_array, $dont_display);
 		
 		echo html_build_select_box_from_arrays($id_array,$text_array,$select_name,$selected_id,false);
 	}
@@ -126,7 +126,7 @@ class DocumentGroupHTML extends Error {
 			$text_array[] = $margin.$doc_group->getName();
 			
 			// Show childs (if any)
-			$this->buildArrays(&$group_arr, &$id_array, &$text_array, &$dont_display, $doc_group->getID(), $level+1);
+			$this->buildArrays($group_arr, $id_array, $text_array, $dont_display, $doc_group->getID(), $level+1);
 		}
 
 	}
