@@ -3,9 +3,9 @@ Here is a simple dependency graph
 
 sourceforge-common +
                    |
-                   +- sourceforge-web-apache | sourceforge-web 
-                   |
-                   +- sourceforge-db-postgresql | sourceforge-db 
+                   +- sourceforge-db-postgresql | sourceforge-db   +
+                   |                                               |
+                   |                                               +- sourceforge-web-apache | sourceforge-web 
                    |
                    +- sourceforge-mta-exim | sourceforge-mta 
                    |
