@@ -296,7 +296,7 @@ if ($forum_id) {
 					show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
-				'<td>'. $row['user_name'] .'</td>'.
+				'<td>'. $row['realname'] .'</td>'.
 				'<td>'. $row['followups'] .'</td>'.
 				'<td>'.date($sys_datefmt,$row['recent']).'</td></tr>';
 			$i++;
