@@ -32,5 +32,5 @@ you have to register the plugin in GForge :
 
 This plugin adds a new search engine to your GForge site. It allows your users to search your GForge site
 through external search engines which have indexed it.
-You can change define search engines you want to use in the config file.
+You can define search engines you want to use in the config file.
 
