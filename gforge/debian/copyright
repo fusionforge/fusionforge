@@ -1,19 +1,28 @@
 This package was first debianized on Wed, 22 Nov 2000 22:06:35 +0100
 by Roland Mas <lolando@debian.org>.  Work has been constant since
-then, and the package evolved a great deal.  It started working, for a
+then, and the package evolved a great deal.  It began to work, for a
 start.
 
-The original sources were downloaded from http://www.sourceforge.net/
+Copyright info for the Sourceforge software:
+,----
+| The original sources were downloaded from http://www.sourceforge.net/
+| 
+| Authors: The Sourceforge crew at VA Linux.  They are many, they
+| change as time goes by, and they are listed on the Sourceforge
+| website.  Let them be thanked for their work.
+| 
+| Copyright:
+| 
+| This software is copyright (c) 1999-2000 by VA Linux.
+| 
+| You are free to distribute this software under the terms of the GNU
+| General Public License.
+`----
 
-Authors: The Sourceforge crew at VA Linux.  They are many, they
-change as time goes by, and they are listed on the Sourceforge
-website.  Let them be thanked for their work.
-
-Copyright:
-
-This software is copyright (c) 1999-2000 by VA Linux.
-
-You are free to distribute this software ubder the terms of the GNU
+The packaging and installing scripts (in the debian/ and deb-specific/
+directories amongst others) are copyright (c) 2000-2001 by Christian
+Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
+are free to use and redistribute them under the terms of the GNU
 General Public License.
 
 On Debian systems, the complete text of the GNU General Public License
