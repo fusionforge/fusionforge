@@ -9,8 +9,6 @@ here have been transferred onto the Savannah project, at
   wait for smooth DB upgrade.  [RM] Even though, most of the
   documentation is VA-centric and should not be used as is.
 
-* [CB] Create CVS tarballs.  [RM] Done, it seems.
-
 * [CB] ViewCVS instead of CVSWEB?
 
 * [CB] Find how to use libnss-lwres.  [RM] ???
@@ -22,18 +20,6 @@ here have been transferred onto the Savannah project, at
 
 * [CB] language_code is missing in language table.  [RM] Probably a
   matter of data.  Has to wait for smooth DB upgrade.
-
-* [RM] Check permissions on the ftp directory, in accordance with
-  section 4.9 of the Policy.
-
-* [RM] Think about where to put the FTP root directory:
-  /var/lib/sourceforge/ftp or /usr/lib/sourceforge/ftp or maybe
-  /home/sourceforge/ftp?
-
-* [RM] Check the PHP warnings in the projects statistics page.  [RM]
-  That's an old item, is it still current?
-
-* [RM] Do not create CVS repositories if the projet does not use CVS.
 
 * [RM] Decide on whether to use a chroot or not.
 
