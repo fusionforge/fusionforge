@@ -50,6 +50,8 @@ if ($submit) {
 			Registration Purpose in a more comprehensive manner";
 	} else if (strlen($description)<10) {
 		$feedback .= "Please use more comprehensive Project Description";
+	} else if (strlen($description)>255) {
+		$feedback .= "Maximum length for Project Description is 255 chars.";
 	} else if (!$license) {
 		$feedback .= "You have not chosen a license";
 	} else if ($license!="other" && $license_other) {
