@@ -1,3 +1,11 @@
+2003-01-28 Tom Copeland <tom@infoether.com>
+
+	* www/soap/*: Added new operations to support authentication and
+	adding/updated bugs
+	
+	* common/tracker/ArtifactTypeFactory.class: Added some new DAOish
+	functions.
+
 2003-01-26  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* common/include/utils.php(util_send_message): remove duplicated

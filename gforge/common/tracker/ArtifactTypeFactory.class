@@ -28,6 +28,13 @@ class ArtifactTypeFactory extends Error {
 	var $ArtifactTypes;
 
 	/**
+	 * The data type (DAO)
+	 *
+  	 * @var 	string dataType
+	 */
+	var $dataType;
+
+	/**
 	 *  Constructor.
 	 *
 	 *	@param	object	The Group object to which this ArtifactTypeFactory is associated
@@ -58,28 +65,13 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 * getArtifactType - get a particular artifact type
+	 *	setDataType - set the data type (DAO)
 	 *
-	 * @param 	int 	the datatype for the ArtifactType - see common/tracker/ArtifactType.class for a list
-	 *
-	 * @param	ArtifactType	the requested ArtifactType
-	 */
-	function &getArtifactType($typeID) {
-		if (!$this->ArtifactTypes) {
-			$this->getArtifactTypes();
-			if (!$this->ArtifactTypes) {
-				return false;
-			}
-		}
-
-		foreach ($this->ArtifactTypes as $aType) {
-			if ($aType->getDataType() == $typeID) {
-				return $aType;
-			}
-		}
-		$this->setError("Unable to find that data type!");
-		return false;
-	}	 
+	 * 	@param	string	the data type
+	 */	
+	function &setDataType($newDataType) {
+		$this->dataType = $newDataType;
+	}
 
 	/**
 	 *	getArtifactTypes - return an array of ArtifactType objects.
@@ -94,6 +86,7 @@ class ArtifactTypeFactory extends Error {
 		$sql="SELECT * FROM artifact_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."'
 			AND is_public IN (".$this->getPublicFlag().")
+			AND datatype ".$this->getDataTypeWhereClause()."
 			ORDER BY group_artifact_id ASC";
 
 		$result = db_query ($sql);
@@ -109,6 +102,18 @@ class ArtifactTypeFactory extends Error {
 			}
 		}
 		return $this->ArtifactTypes;
+	}
+
+	/**
+	 * getDataTypeWhereClause - utility method to formulate the WHERE clause to include data types
+	 *
+	 * @return	string 	A segment of a WHERE clause 
+	 */
+	function &getDataTypeWhereClause() {
+		if ($this->dataType) {
+			return "='".$this->dataType."' ";
+		}
+		return " LIKE '%' ";
 	}
 
 	/**

@@ -190,12 +190,13 @@ function bugUpdate($sessionkey, $groupid, $bugid, $comment) {
 	}
 	
 	$atf = new ArtifactTypeFactory($group);
-	$artifactType = $atf->getArtifactType(1); // TODO use a constant or something
+	$atf->setDataType("1"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
 	if (!$artifactType) {
     		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
 	}
 
-	$bug = new Artifact($artifactType, $bugid);
+	$bug = new Artifact($artifactType[0], $bugid);
 	if (!$bug) {
     		return new soapval('tns:soapVal','string',"Couldn't fetch bug");
 	}
@@ -209,7 +210,7 @@ function bugUpdate($sessionkey, $groupid, $bugid, $comment) {
 			$bug->getSummary(),
 			'100',
 			$comment,
-			$artifactType->getID())) {
+			$artifactType[0]->getID())) {
     		return new soapval('tns:soapVal','string',"Couldn't update bug: ".$bug->getErrorMessage());
 	}
     	return new soapval('tns:soapVal','string',"new comment: ".$comment);
@@ -231,8 +232,9 @@ function bugAdd($sessionkey, $groupid, $summary, $details) {
     		return new soapval('tns:soapVal','string',"Couldn't create group using id ".$groupid);
 	}
 
-	$artifactTypeFactory = new ArtifactTypeFactory($group);
-	$artifactType = $artifactTypeFactory->getArtifactType(1); // TODO reference a constant or something here
+	$atf = new ArtifactTypeFactory($group);
+	$atf->setDataType("1"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
 	if (!$artifactType) {
     		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$artifactTypeFactory->getErrorMessage());
 	}
