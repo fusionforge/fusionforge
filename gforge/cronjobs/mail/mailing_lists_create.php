@@ -41,7 +41,6 @@ $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
         mail_group_list.group_list_id 
 	FROM mail_group_list,users
         WHERE mail_group_list.list_admin=users.user_id
-        AND mail_group_list.status = ".MAIL__MAILING_LIST_IS_REQUESTED."
         ");
 $err .= db_error();
 
@@ -60,16 +59,15 @@ for ($i=0; $i<$rows; $i++) {
 	$listpassword = db_result($res,$i,'password');
 	$grouplistid = db_result($res,$i,'group_list_id');
 
-	if (! in_array($listname,$mailing_lists)) {
+	if (! in_array($listname,$mailing_lists) && db_result($res,$i,'status') == MAIL__MAILING_LIST_IS_REQUESTED) {
 		$err .= "Creating Mailing List: $listname\n";
-		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
+		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname@$sys_lists_host $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		$fp = popen($lcreate_cmd,"r");
 		pclose($fp);
+		$mailingListIds[] = $grouplistid;
 	}
 	
-	$mailingListIds[] = $grouplistid;
-
 	$list_str =
 $listname.':              "|'.MAILMAN_DIR.'mail/mailman post '.$listname.'"'."\n"
 .$listname.'-admin:        "|'.MAILMAN_DIR.'mail/mailman admin '.$listname.'"'."\n"
@@ -106,7 +104,9 @@ $listname.':              "|'.MAILMAN_DIR.'mail/mailman post '.$listname.'"'."\n
 }
 
 // Update status
-db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' where group_list_id IN('.implode(',', $mailingListIds).')');
+if(!empty($mailingListIds)) {
+	db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' where group_list_id IN('.implode(',', $mailingListIds).')');
+}
 
 fclose($h1);
 
