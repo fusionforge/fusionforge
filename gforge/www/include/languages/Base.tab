@@ -1431,3 +1431,319 @@ scm_index	cvs_repository	CVS Repository
 scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
 scm_index	developername	developername
 scm_index	modulename	modulename
+admin   successfully_added      Successfully Added
+admin   are_you_sure_delete     Are you sure you want to delete this
+admin	delete	Delete
+admin   cancel  Cancel
+admin   successfully_deleted    Successfully Deleted.
+admin   submit_changes  Submit Changes
+admin	submit_new      Submit New
+admin	successfully_modified   successfully modified
+admin	add_new [add new]
+admin	edit    [edit]
+admin	site_admin_home Site Admin Home
+admin	yes	yes
+admin	reject	Reject
+admin	license	License:
+admin	add	Add
+admin	na	N/A
+admin	other	Other
+admin	edit	Edit
+admin	http_domain	HTTP Domain:
+admin	license_other	License Other:
+admin_add_language      add_new_language        Add New Languages
+admin_add_language      existing_language       Existing Language
+admin_add_language      add_new_language        Add New Language
+admin_add_language      name    Name:
+admin_add_language      class_filename  Class Filename:
+admin_add_language      classname       Classname:
+admin_add_language      submit  Submit
+admin_tabfiles	modify_the      Modify the $1 below:
+admin_tabfiles	language        Language
+admin_tabfiles	delete_lang     [delete]
+admin_tabfiles	edit_the_language       Edit The Language
+admin_tabfiles	language        Language
+admin_tabfiles	edit_the_langfile       Edit The $1 Language
+admin_table	edit_the	Edit The
+admin_table	table	Table
+admin_approve_pending	error_creating_group	Error creating group object
+admin_approve_pending	approving_group		Approving Group:
+admin_approve_pending	error_group_rejection	Error during group rejection
+admin_approve_pending	approving_pending_projects	Approving Pending Projects
+admin_approve_pending	none_found	None Found
+admin_approve_pending	no_pending_projects_to_approve	No Pending Projects to Approve
+admin_approve_pending	pending_projects	Pending projects:
+admin_approve_pending	edit_project_details	[Edit Project Details]
+admin_approve_pending	project_admin	Project Admin
+admin_approve_pending	view_edit_project_members	[View/Edit Project Members]
+admin_approve_pending	approve	Approve
+admin_approve_pending	manage_responses	(manage responses)
+admin_approve_pending	custom_response_title	Custom response title and text
+admin_approve_pending	add_this_custom_response	Add this custom response to canned responses	
+admin_approve_pending	home_box	Home Box:
+admin_approve_pending	other_information	Other Information
+admin_approve_pending	unix_group_name	Unix Group Name:
+admin_approve_pending	submitted_description	Submitted Description:
+admin_approve_pending	pending_reason	Pending reason:
+admin_approve_pending	admin_approve_pending	Activate
+admin_approve_pending	approve_all_on_this_page	Approve All On This Page
+admin_database	error_adding_database	Error Adding Database
+admin_database	group	Group
+admin_database	added_already_active_database	added already active database
+admin_database	unable_to_insert	Unable to insert already active database.
+admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
+admin_database	statistics_for_project_database	Statistics for Project Databases
+admin_database	type	Type
+admin_database	count	Count
+admin_database	no_databases_defined	No databases defined
+admin_database	display_database_type	Displaying Databases of Type:
+admin_database	add_an_already_active_database	Add an already active database
+admin_database	group_unix_name	Group Unix Name:
+admin_groupedit	error	Error
+admin_groupedit	error_creating_group_object	Error creating group object
+admin_groupedit	updated	Updated
+admin_groupedit	instruction_email_sent	Instruction email sent
+admin_groupedit	title	Site Admin: Group Info
+admin_groupedit	project_admin	[Project Admin]
+admin_groupedit	I	I
+admin_groupedit	A	A
+admin_groupedit	P	P
+admin_groupedit	H	H
+admin_groupedit	D	D
+admin_groupedit	incomplete	Incomplete (I)
+admin_groupedit	active	Active (A)
+admin_groupedit	pending	Pending (P)
+admin_groupedit	holding	Holding (H)
+admin_groupedit	deleted	Deleted (D)
+admin_groupedit	0	0
+admin_groupedit	1	1
+admin_groupedit	no	No
+admin_groupedit	yes	Yes
+admin_groupedit	unix_group_name	Unix Group Name:
+admin_groupedit	registration_application	Registration Application:
+admin_groupedit	new_project_instruction_email	Resend New Project Instruction Email
+admin_groupedit	update	Update
+admin_groupedit	public	Public?
+admin_groupedit	status	Status
+admin_grouplist	group_list	Group List
+admin_grouplist	group_list_for_category	Group List for Category:
+admin_grouplist	groups_that_begin_with	Groups that begin with
+admin_grouplist	group_name_click_to_edit	Group Name (click to edit)
+admin_grouplist unix_name	Unix Name
+admin_grouplist	status	Status
+admin_grouplist	public	Public?
+admin_grouplist	license	License
+admin_grouplist	members	Members
+admin_loadtabfile	title	Site Admin
+admin_loadtabfile	reload_all_language_files	(Re)Load all language files
+admin_loadtabfile	purge_loaded_data	Purge loaded data
+admin_loadtabfile	tables_loaded	Tables loaded
+admin_loadtabfile	see_translations	[see translations]
+admin_loadtabfile	see_untranslated	[see untranslated]
+admin_loadtabfile	edit_dont_work	[edit(don t work)]
+admin_loadtabfile	availaible_tables	Available Tables:
+admin_massmail_execute	receive_post	Received Post. Making Query.
+admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
+admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
+admin_massmail_execute	user_id	User id:
+admin_massmail_execute	sending_to	sending to
+admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
+admin_responses	title	Site Admin: Edit Rejection Responses
+admin_responses	you_cant	You can't $1 \"None\", bozo!
+admin_responses	yes_im_sure	Yes, I'm sure
+admin_responses	existing_responses	Existing Responses: 
+admin_responses	edit_response	Edited Response
+admin_responses	edit_response_other	Edit Response: 
+admin_responses	response_title	Response Title: 
+admin_responses	response_text	Response Text:
+admin_responses	go	go
+admin_responses	deleted_resposes	Deleted Response
+admin_responses	not_sure_dont_click	If you're aren't sure then why did you click 'Delete'?
+admin_responses	by_the_way	By the way, I didn't delete... just in case...
+admin_responses	add_response	Added Response
+admin_responses	create_new_response	Create New Response:
+admin_responses	create	Create
+admin_search	index	Admin Search Results
+admin_search	refusing_to_display_whole_db	Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.
+admin_search	user_search_criteria	User search with criteria
+admin_search	matches	matches
+admin_search	id	ID
+admin_search	username	Username
+admin_search	real_name	Real Name
+admin_search	email	Email
+admin_search	member_since	Member since
+admin_search	status	Status (Web/Unix)
+admin_search	group_search_criteria	Group search with criteria
+admin_search	unix_name	UNIX Name
+admin_search	full_name	Full Name
+admin_search	registered	Registered
+admin_search	status	Status
+admin_unsubscribe	title	Site Mailings Subscription Maintenance
+admin_unsubscribe	unsubscribe_user	Unsubscribe user:
+admin_unsubscribe	you_can_unsubscribe	You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).
+admin_unsubscribe	unsubscribe	Unsubscribe
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	all	ALL
+admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
+admin_unsubscribe	all_site_mailing	All site mailings
+admin_unsubscribe	error_unsubscribe_user	Error, Could not unsubscribe user: 
+admin_unsubscribe	user_unsubscribed	User unsubscribed
+admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
+admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
+admin_unsubscribe	show_user_matching	Show users matching pattern
+admin_unsubscribe	user_id	user_id
+admin_unsubscribe	username	Username
+admin_unsubscribe	real_name	Real Name
+admin_unsubscribe	email	Email
+admin_unsubscribe	site_mail	Site Mail.
+admin_unsubscribe	comm_mail	Comm. Mail.
+admin_useredit	no_unix_account	No Unix account (N)
+admin_useredit	active	Active (A)
+admin_useredit	suspended	Suspended (S)
+admin_useredit	deleted	Deleted (D)
+admin_useredit	could_not_complete_operation	Could Not Complete Operation
+admin_useredit	updated	Updated
+admin_useredit	title	Site Admin: User Info
+admin_useredit	account_info	Account Information
+admin_useredit	user_id	User ID:
+admin_useredit	user_name	User name:
+admin_useredit	real_name	Real name
+admin_useredit	web_account_status	Web account status
+admin_useredit	pending	Pending (P)
+admin_useredit	active	Active (A)
+admin_useredit	suspended	Suspended (S)
+admin_useredit	deleted	Deleted (D)
+admin_useredit	unix_account_status	Unix Account Status
+admin_useredit	unix_shell	Unix Shell:
+admin_useredit	email	Email:
+admin_useredit	current_confirm_bash	Current confirm hash:
+admin_useredit	update	Update
+admin_useredit	this_page_allows	This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).
+admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web status, unless it has value 'No unix account (N)'
+admin_useredit	group_memerbership	Groups Membership
+admin_useredit	name	Name
+admin_useredit	unix_name Unix Name
+admin_useredit	operations	Operations
+admin_useredit	project_admin	Project Admin
+admin_useredit	membership_permissions	Member Permissions
+admin_vhost	error_adding_vhost	Error adding VHOST: 
+admin_vhost	virtual_host	Virtual Host
+admin_vhost	scheduled_for_creation	scheduled for creation on group
+admin_vhost	the_provided_group	The provided group name does not exist
+admin_vhost	error_updating_vhost	Error updating VHOST entry: 
+admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
+admin_vhost	title	Site Admin
+admin_vhost	virtual_host_administration	Virtual Host Administration
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	group_unix_name	Group Unix Name
+admin_vhost	virtual_host_name	Virtual Host Name
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	tweak_directories	Tweak Directories
+admin_vhost	virtual_host	Virtual Host:
+admin_vhost	get_info	Get Info
+admin_vhost	update_record	Update Record:
+admin_vhost	vhost_id	VHOST ID
+admin_vhost	vhost_name	VHOST Name
+admin_vhost	group	Group
+admin_vhost	htdocs_dir	Htdocs Dir
+admin_vhost	cgi_dir	CGI Dir
+admin_vhost	operations	Operations
+admin_vhost	update	Update
+admin_vhost	no_such_host	No such VHOST:
+admin_trove_cat_list	edit	Edit
+admin_trove_cat_list	title	Site Admin: Trove - Category List
+admin_trove_cat_list	browse_trove_tree	Browse Trove Tree
+admin_userlist	userlist	: User List
+admin_userlist	user_updated	User updated to $1 status
+admin_userlist	key	Key
+admin_userlist	active	Active
+admin_userlist	deleted	Deleted
+admin_userlist	suspended	Suspended
+admin_userlist	pending	(*)Pending
+admin_userlist	devprofile	DevProfile
+admin_userlist	activate	Activate
+admin_userlist	delete	Delete
+admin_userlist	suspend	Suspend
+admin_userlist	user_list_for_group	User list for group:
+admin_userlist	all_groups	All Groups
+admin_userlist	submit	Submit
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
+admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	no_such_category	No Such Category, That trove cat does not exist
+admin_trove_cat_edit	title	Site Admin: Trove - Edit Category
+admin_trove_cat_edit	edit_trove_category	Edit Trove Category
+admin_trove_cat_edit	parent_category	Parent Category:
+admin_trove_cat_edit	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_edit	update	Update
+admin_trove_cat_edit	delete	Delete
+admin_trove_cat_add	error_in_trove_openration Error	In Trove Operation
+admin_trove_cat_add	title	Site Admin: Trove - Add Node
+admin_trove_cat_add	add_new_trove_category	Add New Trove Category
+admin_trove_cat_add	parent_category	Parent Category
+admin_trove_cat_add	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_add	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_add	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_add	add	Add
+admin_index	title	Site Admin
+admin_index	user_maintaince	User Maintenance
+admin_index	display_full_user_list	Display Full User List/Edit Users
+admin_index	display_user_beginning_with	Display Users Beginning with :
+admin_index	get	get
+admin_index	group_maintaince	Group Maintenance
+admin_index	display_full_group	Display Full Group List/Edit Groups
+admin_index	display_groups_beginning_with	Display Groups Beginning with :
+admin_index	register_new_project	Register New Project
+admin_index	groups_with	Groups with
+admin_index	pending_status	 (pending) Status
+admin_index	new_project_approval	(New Project Approval)
+admin_index	groups_with	Groups with
+admin_index	deleted_status	(deleted) Status
+admin_index	private_groups	Private Groups
+admin_index	news	News
+admin_index	approve_reject	Approve/Reject
+admin_index	front_page_news	Front-page news
+admin_index	stats	Stats
+admin_index	site_wide_stats	Site-Wide Stats
+admin_index	trove_project_tree	Trove Project Tree
+admin_index	display_trove_map	Display Trove Map
+admin_index	add_to_trove_map	Add to the Trove Map
+admin_index	site_utilities	Site Utilities
+admin_index	mail_engine	Mail Engine for $1 Subscribers
+admin_index	site_mailing_maintaince	Site Mailings Maintenance
+admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
+admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
+admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
+admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
+admin_index	translation_file_tool	Translation file tool
+admin_index	virtual_host_admin_tool	Virtual Host Admin Tool
+admin_index	project_database_administration	Project Database Administration
+admin_massmail	missing_parameter_select_target	Missing parameter, You must select target audience for mailing
+admin_massmail	missing_parameter_empty_message	Missing parameter, You are trying to send empty message
+admin_massmail	missing_parameter_proper_subject	Missing parameter, You must give proper subject to the mailing
+admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
+admin_massmail	title	Administrative Mass Mail Engine
+admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
+admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
+admin_massmail	active_deliveries	Active deliveries
+admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	select	(select)
+admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
+admin_massmail 	subscribers_to_additional_community Subscribers to "Additional Community Mailings"
+admin_massmail	all_project_developers	All Project Developers
+admin_massmail	all_project_admins	All Project Admins
+admin_massmail	all_users	All Users
+admin_massmail	developers_test	Developers (test)
+admin_massmail	subject	Subject
+admin_massmail	text_of_message	Text of Message
+admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
+admin_massmail	schedule_for_mailing	Schedule for Mailing
+admin_massmail	id	ID
+admin_massmail	type	Type
+admin_massmail	subject	Subject
+admin_massmail	date	Date
+admin_massmail	last_user_id_mailed	Last user_id mailed
+admin_massmail	active_deliveries	Active Deliveries

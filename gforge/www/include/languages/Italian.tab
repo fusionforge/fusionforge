@@ -1177,4 +1177,319 @@ scm_index	cvs_repository	Repository CVS
 scm_index	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
 scm_index	developername	nomesviluppatore
 scm_index	modulename	nomemodulo
+admin   successfully_added      Aggiunto con successo
+admin   are_you_sure_delete     Sei sicuro di voler cancellare
+admin	delete	Cancella
+admin   cancel  Annulla
+admin   successfully_deleted    Cancellato
+admin   submit_changes  Invia modifiche
+admin	submit_new      Invia
+admin	successfully_modified   modificato con successo
+admin	add_new [aggiungi nuovo]
+admin	edit    [modifica]
+admin	site_admin_home Site Admin Home
+admin	yes	s&igrave;
+admin	reject	Rigetta
+admin	license	Licenza:
+admin	add	Aggiungi
+admin	na	Non disp.
+admin	other	Altri
+admin	edit	Modifica
+admin	http_domain	Dominio HTTP
+admin	license_other	Licenza diversa
+admin_add_language      add_new_language        Add New Languages
+admin_add_language      existing_language       Existing Language
+admin_add_language      add_new_language        Add New Language
+admin_add_language      name    Name:
+admin_add_language      class_filename  Class Filename:
+admin_add_language      classname       Classname:
+admin_add_language      submit  Submit
+admin_tabfiles	modify_the      Modify the $1 below:
+admin_tabfiles	language        Language
+admin_tabfiles	delete_lang     [delete]
+admin_tabfiles	edit_the_language       Edit The Language
+admin_tabfiles	language        Language
+admin_tabfiles	edit_the_langfile       Edit The $1 Language
+admin_table	edit_the	Edit The
+admin_table	table	Table
+admin_approve_pending	error_creating_group	Error creating group object
+admin_approve_pending	approving_group		Approvazione gruppo
+admin_approve_pending	error_group_rejection	Error during group rejection
+admin_approve_pending	approving_pending_projects	Approvazione progetto in attesa
+admin_approve_pending	none_found	Nessun progetto trovato
+admin_approve_pending	no_pending_projects_to_approve	No Pending Projects to Approve
+admin_approve_pending	pending_projects	Progetti in attesa di approvazione:
+admin_approve_pending	edit_project_details	[Modifica dettaglio progetto]
+admin_approve_pending	project_admin	Amministrazione progetti
+admin_approve_pending	view_edit_project_members	[Visualizza/modifica membri progetto]
+admin_approve_pending	approve	Approva
+admin_approve_pending	manage_responses	(gestisci risposte predefinite)
+admin_approve_pending	custom_response_title	Risposte: titolo e testo
+admin_approve_pending	add_this_custom_response	Aggiungi questa risposta alle risposte predefinite
+admin_approve_pending	home_box	Home Box:
+admin_approve_pending	other_information	Altre informazioni
+admin_approve_pending	unix_group_name	Unix Group Name:
+admin_approve_pending	submitted_description	Submitted Description:
+admin_approve_pending	pending_reason	Pending reason:
+admin_approve_pending	admin_approve_pending	Attiva
+admin_approve_pending	approve_all_on_this_page	Approva tutto
+admin_database	error_adding_database	Error Adding Database
+admin_database	group	Group
+admin_database	added_already_active_database	added already active database
+admin_database	unable_to_insert	Unable to insert already active database.
+admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
+admin_database	statistics_for_project_database	Statistics for Project Databases
+admin_database	type	Type
+admin_database	count	Count
+admin_database	no_databases_defined	No databases defined
+admin_database	display_database_type	Displaying Databases of Type:
+admin_database	add_an_already_active_database	Add an already active database
+admin_database	group_unix_name	Group Unix Name:
+admin_groupedit	error	Errore
+admin_groupedit	error_creating_group_object	Error creating group object
+admin_groupedit	updated	Aggiornato
+admin_groupedit	instruction_email_sent	Instruction email sent
+admin_groupedit	title	Site Admin: Group Info
+admin_groupedit	project_admin	[Amministrzione progetto]
+admin_groupedit	I	I
+admin_groupedit	A	A
+admin_groupedit	P	P
+admin_groupedit	H	H
+admin_groupedit	D	D
+admin_groupedit	incomplete	Incompleto (I)
+admin_groupedit	active	Attivo (A)
+admin_groupedit	pending	In attesa di approvazione (P)
+admin_groupedit	holding	non attivo (H)
+admin_groupedit	deleted	cancellato (D)
+admin_groupedit	0	0
+admin_groupedit	1	1
+admin_groupedit	no	no
+admin_groupedit	yes	S&igrave;
+admin_groupedit	unix_group_name	Nome unix:
+admin_groupedit	registration_application	Registration Application:
+admin_groupedit	new_project_instruction_email	Invia email con istruzioni per il progetto
+admin_groupedit	update	Aggiorna
+admin_groupedit	public	Pubblico?
+admin_groupedit	status	Stato
+admin_grouplist	group_list	Elenco gruppi
+admin_grouplist	group_list_for_category	Elenco gruppi per la categoria:
+admin_grouplist	groups_that_begin_with	Gruppi che iniziano per 
+admin_grouplist	group_name_click_to_edit	Nome gruppo (selezionare il nome per modificare)
+admin_grouplist unix_name	Nome unix
+admin_grouplist	status	Stato
+admin_grouplist	public	Pubblico?
+admin_grouplist	license	Licenza
+admin_grouplist	members	Membri
+admin_loadtabfile	title	Site Admin
+admin_loadtabfile	reload_all_language_files	(Re)Load all language files
+admin_loadtabfile	purge_loaded_data	Purge loaded data
+admin_loadtabfile	tables_loaded	Tables loaded
+admin_loadtabfile	see_translations	[see translations]
+admin_loadtabfile	see_untranslated	[see untranslated]
+admin_loadtabfile	edit_dont_work	[edit(don t work)]
+admin_loadtabfile	availaible_tables	Available Tables:
+admin_massmail_execute	receive_post	Received Post. Making Query.
+admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
+admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
+admin_massmail_execute	user_id	User id:
+admin_massmail_execute	sending_to	sending to
+admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
+admin_responses	title	Amministrazione sito: Modifica risposte per il rigetto 
+admin_responses	you_cant	You can't $1 \"None\", bozo!
+admin_responses	yes_im_sure	S&igrave; sono sicuro
+admin_responses	existing_responses	Risposte esistenti:
+admin_responses	edit_response	Edited Response
+admin_responses	edit_response_other	modifica risposte
+admin_responses	response_title	Titolo risposta:
+admin_responses	response_text	Testo risposta
+admin_responses	go	vai
+admin_responses	deleted_resposes	Risposta cancellata
+admin_responses	not_sure_dont_click	If you're aren't sure then why did you click 'Delete'?
+admin_responses	by_the_way	By the way, I didn't delete... just in case...
+admin_responses	add_response	Aggiungi risposte
+admin_responses	create_new_response	Crea nuova risposta:
+admin_responses	create	Crea
+admin_search	index	Risultato di ricerca 
+admin_search	refusing_to_display_whole_db	Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.
+admin_search	user_search_criteria	Ricerca utente con criterio
+admin_search	matches	corrisponde a
+admin_search	id	ID
+admin_search	username	Nome utente
+admin_search	real_name	Nome reale
+admin_search	email	email
+admin_search	member_since	Registrato il
+admin_search	status	Stato (Web/Unix)
+admin_search	group_search_criteria	Group search with criteria
+admin_search	unix_name	Nome UNIX
+admin_search	full_name	Nome completo
+admin_search	registered	Registrato
+admin_search	status	Stato
+admin_unsubscribe	title	Site Mailings Subscription Maintenance
+admin_unsubscribe	unsubscribe_user	Unsubscribe user:
+admin_unsubscribe	you_can_unsubscribe	You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).
+admin_unsubscribe	unsubscribe	Unsubscribe
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	all	ALL
+admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
+admin_unsubscribe	all_site_mailing	All site mailings
+admin_unsubscribe	error_unsubscribe_user	Error, Could not unsubscribe user: 
+admin_unsubscribe	user_unsubscribed	User unsubscribed
+admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
+admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
+admin_unsubscribe	show_user_matching	Show users matching pattern
+admin_unsubscribe	user_id	user_id
+admin_unsubscribe	username	Username
+admin_unsubscribe	real_name	Real Name
+admin_unsubscribe	email	Email
+admin_unsubscribe	site_mail	Site Mail.
+admin_unsubscribe	comm_mail	Comm. Mail.
+admin_useredit	no_unix_account	Nessun account UNIX (N)
+admin_useredit	active	Attivo (A)
+admin_useredit	suspended	Sospeso (S)
+admin_useredit	deleted	Cancellato (D)
+admin_useredit	could_not_complete_operation	Impossibile completare l'operazione
+admin_useredit	updated	Aggiornato
+admin_useredit	title	Amministrazione sito: informazione utente
+admin_useredit	account_info	Informazione account
+admin_useredit	user_id	ID Utente:
+admin_useredit	user_name	Nome utente:
+admin_useredit	real_name	Nome reale:
+admin_useredit	web_account_status	Stato account Web:
+admin_useredit	pending	In attesa di approvazione (P)
+admin_useredit	active	attivo (A)
+admin_useredit	suspended	sospeso (S)
+admin_useredit	deleted	cancellato (D)
+admin_useredit	unix_account_status	Stato account Unix
+admin_useredit	unix_shell	Shell unix:
+admin_useredit	email	Email:
+admin_useredit	current_confirm_bash	Current confirm hash:
+admin_useredit	update	Aggiorna
+admin_useredit	this_page_allows	Questa pagina permette di cambiare di cambiare solo attributi diretti di un oggetto. To edit properties pertinent to user within specific group, visit admin page of that group (below).
+admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web status, unless it has value 'No unix account (N)'
+admin_useredit	group_memerbership	Groups Membership
+admin_useredit	name	Nome
+admin_useredit	unix_name Nome unix
+admin_useredit	operations	Operations
+admin_useredit	project_admin	Amministrazione progetto
+admin_useredit	membership_permissions	Permessi dei membri
+admin_vhost	error_adding_vhost	Error adding VHOST: 
+admin_vhost	virtual_host	Virtual Host
+admin_vhost	scheduled_for_creation	scheduled for creation on group
+admin_vhost	the_provided_group	The provided group name does not exist
+admin_vhost	error_updating_vhost	Error updating VHOST entry: 
+admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
+admin_vhost	title	Site Admin
+admin_vhost	virtual_host_administration	Virtual Host Administration
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	group_unix_name	Group Unix Name
+admin_vhost	virtual_host_name	Virtual Host Name
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	tweak_directories	Tweak Directories
+admin_vhost	virtual_host	Virtual Host:
+admin_vhost	get_info	Get Info
+admin_vhost	update_record	Update Record:
+admin_vhost	vhost_id	VHOST ID
+admin_vhost	vhost_name	VHOST Name
+admin_vhost	group	Group
+admin_vhost	htdocs_dir	Htdocs Dir
+admin_vhost	cgi_dir	CGI Dir
+admin_vhost	operations	Operations
+admin_vhost	update	Update
+admin_vhost	no_such_host	No such VHOST:
+admin_trove_cat_list	edit	Modifica
+admin_trove_cat_list	title	Amministrazione sito: Trove - Lista delle categorie
+admin_trove_cat_list	browse_trove_tree	Visualizza albero Trove
+admin_userlist	userlist	: User List
+admin_userlist	user_updated	User updated to $1 status
+admin_userlist	key	Key
+admin_userlist	active	Attivo
+admin_userlist	deleted	Cancellato
+admin_userlist	suspended	Sospeso
+admin_userlist	pending	(*)In attesa di approvazione
+admin_userlist	devprofile	Profilo sviluppatore
+admin_userlist	activate	Attiva
+admin_userlist	delete	Cancella
+admin_userlist	suspend	Sospendi
+admin_userlist	user_list_for_group	Elenca utenti per gruppo
+admin_userlist	all_groups	Tutti i gruppi
+admin_userlist	submit	Invia
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
+admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	no_such_category	No Such Category, That trove cat does not exist
+admin_trove_cat_edit	title	Amministrazione site: Trove - Modifica categoria
+admin_trove_cat_edit	edit_trove_category	Modifica categoria trove
+admin_trove_cat_edit	parent_category	Categoria padre
+admin_trove_cat_edit	new_category_short_name	Nome breve categoria (nessuno spazio, simile allo nome unix)
+admin_trove_cat_edit	new_category_full_name	Nome completo categoria (VARCHAR 80)
+admin_trove_cat_edit	new_category_description	Descrizione categoria (VARCHAR 255)
+admin_trove_cat_edit	update	Aggiorna
+admin_trove_cat_edit	delete	Cancella
+admin_trove_cat_add	error_in_trove_openration Error	In Trove Operation
+admin_trove_cat_add	title	Amministrazione Sito: Trove - Add Node
+admin_trove_cat_add	add_new_trove_category	Add New Trove Category
+admin_trove_cat_add	parent_category	Categoria padre
+admin_trove_cat_add	new_category_short_name	Nome breve categoria (nessuno spazio, simile allo nome unix)
+admin_trove_cat_add	new_category_full_name	Nome completo categoria (VARCHAR 80)
+admin_trove_cat_add	new_category_description	Descrizione categoria (VARCHAR 255)
+admin_trove_cat_add	add	Aggiungi
+admin_index	title	Amministrazione sito
+admin_index	user_maintaince	Manutenzione utenti
+admin_index	display_full_user_list	Visualizza elenco completo degli utenti
+admin_index	display_user_beginning_with	Visualizza utenti che iniziano con
+admin_index	get	visualizza
+admin_index	group_maintaince	Manutenzione gruppi
+admin_index	display_full_group	Visualizza elenco ceompleto dei gruppi
+admin_index	display_groups_beginning_with	Visualizza gruppi che iniziano con
+admin_index	register_new_project	Registra nuovo progetto
+admin_index	groups_with	Gruppo con
+admin_index	pending_status	 Stato (pendente) 
+admin_index	new_project_approval	(Approvazione nuovi progetti)
+admin_index	groups_with	Gruppi con 
+admin_index	deleted_status	stato (cancellato)
+admin_index	private_groups	Private Groups
+admin_index	news	News
+admin_index	approve_reject	Approva/rigetta
+admin_index	front_page_news	News di prima pagina
+admin_index	stats	Statistiche
+admin_index	site_wide_stats	Statistiche del sito
+admin_index	trove_project_tree	Albero dei progetti Trove 
+admin_index	display_trove_map	Visualizza mappa Trove 
+admin_index	add_to_trove_map	Aggiungi alla mappa Trove
+admin_index	site_utilities	Utility 
+admin_index	mail_engine	Engine di mail per utenti sottoscritti a $1 
+admin_index	site_mailing_maintaince	Site Mailings Maintenance
+admin_index	add_delete_edit_laguage	Gestisci lingue supportate
+admin_index	add_delete_edit_file_types	Gestisci tipi file supportati
+admin_index	add_edit_delete_processors	Gestisci processori
+admin_index	add_edit_delete_themes	Gestisci temi
+admin_index	translation_file_tool	Strumento per la traduzione 
+admin_index	virtual_host_admin_tool	Strumento per l'amministrazione dei virtual host
+admin_index	project_database_administration	Amministrazione database per i progetti
+admin_massmail	missing_parameter_select_target	Missing parameter, You must select target audience for mailing
+admin_massmail	missing_parameter_empty_message	Missing parameter, You are trying to send empty message
+admin_massmail	missing_parameter_proper_subject	Missing parameter, You must give proper subject to the mailing
+admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
+admin_massmail	title	Administrative Mass Mail Engine
+admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
+admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
+admin_massmail	active_deliveries	Active deliveries
+admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	select	(seleziona)
+admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
+admin_massmail 	subscribers_to_additional_community Subscribers to "Additional Community Mailings"
+admin_massmail	all_project_developers	All Project Developers
+admin_massmail	all_project_admins	All Project Admins
+admin_massmail	all_users	All Users
+admin_massmail	developers_test	Developers (test)
+admin_massmail	subject	Subject
+admin_massmail	text_of_message	Text of Message
+admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
+admin_massmail	schedule_for_mailing	Schedule for Mailing
+admin_massmail	id	ID
+admin_massmail	type	Type
+admin_massmail	subject	Subject
+admin_massmail	date	Date
+admin_massmail	last_user_id_mailed	Last user_id mailed
 
