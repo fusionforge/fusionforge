@@ -25,7 +25,6 @@ class Theme extends Layout {
 		// The content background color
 		// sky blue
 		$this->COLOR_CONTENT_BACK= '#BBDDFF';
-		//pink #C79FA9;
 
 		// The background color
 		$this->COLOR_BACK= '#FFFFFF';
@@ -35,11 +34,9 @@ class Theme extends Layout {
 		$this->COLOR_LTBACK1= '#C79FA9';
 
 		// The secondary light background color
-		$this->COLOR_LTBACK2= '#C79FA9';
+		$this->COLOR_LTBACK2= '#E0E0E0';
 
 		// The HTML box title color
-		// Red
-		//$this->COLOR_HTMLBOX_TITLE = '#DF0451';
 		$this->COLOR_HTMLBOX_TITLE = '#C70036';
 
 		// The HTML box background color
@@ -90,6 +87,7 @@ class Theme extends Layout {
 			$GLOBALS['sys_default_domain'] : 'http://'.$GLOBALS['sys_default_domain']); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
+	<?php plugin_hook ("javascript",false) ; ?>
 	</SCRIPT>
 <?php
 /*
@@ -182,19 +180,19 @@ class Theme extends Layout {
 	</tr>
 
 	<tr>
-		<td align=LEFT bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height=9 width=9></td>
-		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
-		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
-		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
-		<td align=RIGHT bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height=9 width=9></td>
+		<td align=LEFT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height=9 width=9></td>
+		<td bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td bgcolor="<?php echo $this->COLOR_LTBACK2; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
+		<td bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td align=RIGHT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height=9 width=9></td>
 	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
-		<td valign=TOP width="99%" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" colspan=3>
+		<td bgcolor="<?php echo $this->COLOR_LTBACK2; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
+		<td valign=TOP width="99%" bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" colspan=3>
 
 			<!-- Inner Tabs / Shell -->
 
@@ -222,14 +220,14 @@ if ($params['group']) {
 
 ?>
 			<tr>
-				<td align=LEFT bgcolor="#FFFFFF" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height=9 width=9></td>
-				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
-				<td align=RIGHT bgcolor="#FFFFFF" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height=9 width=9></td>
+				<td align=LEFT bgcolor="<?php echo $this->COLOR_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height=9 width=9></td>
+				<td bgcolor="<?php echo $this->COLOR_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
+				<td align=RIGHT bgcolor="<?php echo $this->COLOR_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height=9 width=9></td>
 			</tr>
 
 			<tr>
-				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
-				<td valign=TOP width="99%" bgcolor="WHITE">
+				<td bgcolor="<?php echo $this->COLOR_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
+				<td valign=TOP width="99%" bgcolor="<?php echo $this->COLOR_LTBACK2; ?>">
 
 	<?php
 
@@ -265,24 +263,24 @@ if ($params['group']) {
 
 
 				</td>
-				<td width=10 bgcolor="WHITE"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+				<td width=10 bgcolor="<?php echo $this->COLOR_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
 			</tr>
 			<tr>
-				<td align=LEFT bgcolor="#E0E0E0" width=10"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height=11 width=11></td>
-				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
-				<td align=RIGHT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height=11 width=11></td>
+				<td align=LEFT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height=11 width=11></td>
+				<td bgcolor="<?php echo $this->COLOR_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+				<td align=RIGHT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height=11 width=11></td>
 			</tr>
 			</TABLE>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width=10 bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+		<td width=10 bgcolor="<?php echo $this->COLOR_LTBACK2; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
 	</tr>
 	<tr>
-		<td align=LEFT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height=9 width=9></td>
-		<td bgcolor="#E0E0E0" colspan=3><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
-		<td align=RIGHT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height=9 width=9></td>
+		<td align=LEFT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height=9 width=9></td>
+		<td bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" colspan=3><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+		<td align=RIGHT bgcolor="<?php echo $this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height=9 width=9></td>
 	</tr>
 </TABLE>
 </body>
