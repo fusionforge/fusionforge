@@ -29,6 +29,8 @@ if ($submit) {
 		);
 	}
 
+/*
+//needs security audit
 	if ($remember_user) {
 		// set cookie, expire in 3 months
 		setcookie("sf_user_hash",$u->getID().'_'.substr($u->getMD5Passwd(),0,16),time()+90*24*60*60,'/');
@@ -36,7 +38,7 @@ if ($submit) {
 		// remove cookie
 		setcookie("sf_user_hash",'',0,'/');
 	}
-
+*/
 	// Refresh page if language changed
 	if ($language != $u->getLanguage()) {
 		$refresh = 1;
@@ -73,6 +75,7 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <?php echo $Language->getText('account_options', 'intro'); ?>
 </p>
 <ul>
+<li><a href="/reporting/timeadd.php"><strong>Time Tracking</strong></a>
 <li><a href="/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></strong></a></li>
 <li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
 <li><a href="/themes/"><strong><?php echo $Language->getText('menu', 'change_my_theme'); ?></strong></a></li>

@@ -20,12 +20,13 @@ require_once('common/pm/ProjectTasksForUser.class');
 
 global $G_SESSION;
 
-if (session_loggedin() || $sf_user_hash) {
+if (session_loggedin()) { // || $sf_user_hash) {
 
 	/*
+//needs security audit
 	 *  If user has valid "remember-me" hash, instantiate not-logged in
 	 *  session for one.
-	 */
+	 * /
 	if (!session_loggedin()) {
 			list($user_id,$hash)=explode('_',$sf_user_hash);
 			$sql="SELECT *
@@ -40,7 +41,7 @@ if (session_loggedin() || $sf_user_hash) {
 		$user_id=db_result($result,0,'user_id');
 		$G_SESSION=user_get_object($user_id,$result);
 	}
-
+*/
 	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname()),'pagename'=>'my','titlevals'=>array(user_getname())));
 	?>
 
@@ -55,11 +56,11 @@ if (session_loggedin() || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'assigneditems'));
-	$artifactsForUser = new ArtifactsForUser($G_SESSION);
+	$artifactsForUser = new ArtifactsForUser(session_get_user());
 	$assignedArtifacts = $artifactsForUser->getAssignedArtifactsByGroup();
 	if (count($assignedArtifacts) > 0) {
 		foreach($assignedArtifacts as $art) {
-		        echo '</td></tr>';
+			echo '</td></tr>';
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
@@ -81,7 +82,7 @@ if (session_loggedin() || $sf_user_hash) {
 			$last_group = $art->ArtifactType->getID();
 		}
 	} else {
-	                echo '
+		echo '
 			<strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong>';
 	}
 
@@ -92,7 +93,7 @@ if (session_loggedin() || $sf_user_hash) {
 		foreach ($submittedArtifacts as $art) {
 			echo '</td></tr>';
 			if ($art->ArtifactType->getID() != $last_group) {
-                                echo '
+				echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
@@ -268,53 +269,46 @@ if (session_loggedin() || $sf_user_hash) {
 	exit_assert_object($admingroup,'Group');
 	$perm =& $admingroup->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
-                $sql="SELECT group_name FROM groups where status='P';";
-                $result=db_query($sql);
-                $rows=db_numrows($result);
-                if ($rows) {
-                        echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
+		$sql="SELECT group_name FROM groups where status='P';";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if ($rows) {
+			echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
 
 			if ($rows==1){
-			  echo $Language->getText('my','pending_projects_1');
-			}
-			else{
-			  echo $Language->getText('my','pending_projects_2',$rows);
+				echo $Language->getText('my','pending_projects_1');
+			} else {
+				echo $Language->getText('my','pending_projects_2',$rows);
 			}
 
 			/*    echo (($rows!=1)?"are ": "is "). "$rows project";
-                        echo (($rows!=1)?"s":"");
+			echo (($rows!=1)?"s":"");
 			*/
-                        echo " <a href=\"/admin/approve-pending.php\">";
+			echo " <a href=\"/admin/approve-pending.php\">";
 			echo $Language->getText('my','pending_projects_3');
-                        echo "</a>.";
-                }
+			echo "</a>.";
+		}
 	}
 	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
 	exit_assert_object($newsgroup,'Group');
 	$perm =& $newsgroup->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
-                $sql="SELECT * FROM news_bytes WHERE is_approved=0";
-                $result=db_query($sql);
-                $rows=db_numrows($result);
-                if ($rows) {
-                        echo $HTML->boxMiddle($Language->getText('my','pending_news_bytes'), false, false);
-
+		$sql="SELECT * FROM news_bytes WHERE is_approved=0";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if ($rows) {
+			echo $HTML->boxMiddle($Language->getText('my','pending_news_bytes'), false, false);
 
 			if ($rows==1){
-			  echo $Language->getText('my','pending_news_bytes_1');
+				echo $Language->getText('my','pending_news_bytes_1');
+			} else{
+				echo $Language->getText('my','pending_news_bytes_2',$rows);
 			}
-			else{
-			  echo $Language->getText('my','pending_news_bytes_2',$rows);
-			}
-
 
 			echo " <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
 
 			echo $Language->getText('my','pending_news_bytes_3');
-                        echo "</a>.";
-
-
-
+			echo "</a>.";
 		}
 	}
 	/*
