@@ -157,7 +157,7 @@ case "$1" in
 	;;
 	
     configure)
-	[ -f $gforgebin/prepare-vhosts-file.pl ] && $gforgebin/prepare-vhosts-file.pl
+	[ -f $gforgebin/prepare-vhosts-file.pl ] && su -s /bin/sh gforge -c $gforgebin/prepare-vhosts-file.pl
 	if [ -f /usr/sbin/modules-config ] ; then
 		for flavour in apache apache-perl apache-ssl ; do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
