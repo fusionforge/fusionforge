@@ -4,11 +4,8 @@ function plugin_ldapextauth_mapping ($entry) {
 	global $Language;
 	$result = array () ;
 	
-	$realname = $entry['gecos'][0] ;
-	$rnarray = explode (' ', $realname, 2) ;
-
-	$result['firstname'] = $rnarray[0] ;
-	$result['lastname'] = $rnarray[1] ;
+	$result['firstname'] = $entry['givenname'][0] ;
+	$result['lastname'] = $entry['sn'][0] ;
 	$result['email'] = $entry['uid'][0] . '@' . $GLOBALS['sys_default_domain'] ;
 	//$result['email'] = $entry['mail'][0] ; // AD
 	// You may also want to customise $result['language_id']
