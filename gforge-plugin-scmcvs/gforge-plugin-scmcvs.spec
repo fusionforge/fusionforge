@@ -50,7 +50,7 @@ install -m 644 rpm-specific/cron.d/%{name} ${CONF_DIR}/cron.d/
 
 # copying all needed stuff to $PLUGIN_LIB_DIR
 install -m 755 -d $PLUGIN_LIB_DIR
-for dir in cgi-bin cronjobs include lib  rpm-specific www; do
+for dir in cgi-bin include lib  rpm-specific www; do
 	cp -rp $dir ${PLUGIN_LIB_DIR}/
 done;
 
@@ -98,7 +98,6 @@ fi
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/cvsweb.conf
 %{pluginconfdir}/languages
 %{pluginlibdir}/cgi-bin
-%{pluginlibdir}/cronjobs
 %{pluginlibdir}/include
 %{pluginlibdir}/lib
 %{pluginlibdir}/rpm-specific

@@ -79,6 +79,7 @@ fi
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/config.php
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/mapping.php
 %{pluginlibdir}/include
+%{pluginlibdir}/rpm-specific
 
 %changelog
 * Fri Nov 26 2004  Dassault Aviation <guillaume.smet@openwide.fr>
