@@ -1,10 +1,10 @@
-gforge (3.1-10+exim4+10) unstable; urgency=low
+gforge (3.1-11) unstable; urgency=low
 
   * [Roland] Added exim4 support, patch from Guillem Jover
     <guillem@debian.org>.  Thanks! (closes: #234684).  Also made it the
     default, since exim4 is the new default MTA for Sarge.
 
- -- Roland Mas <lolando@debian.org>  Mon,  1 Mar 2004 16:43:08 +0100
+ -- Roland Mas <lolando@debian.org>  Mon,  1 Mar 2004 16:46:57 +0100
 
 gforge (3.1-10) unstable; urgency=low
 
