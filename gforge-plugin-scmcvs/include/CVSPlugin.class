@@ -415,7 +415,7 @@ if ($displayCvsBrowser){
 	 */
 	function account_group_cvsweb_url($group_id) {
 		$project =& group_get_object($group_id);
-		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
+		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot='.$project->getUnixName();
 	}
 
 /*
