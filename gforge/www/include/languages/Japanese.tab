@@ -51,7 +51,8 @@ group	long_survey	調査
 group	short_bugs	バグ
 group	short_cvs	CVS
 group	short_docman	ドキュメント
-group	short_files	Filesgroup	short_forum	フォーラム
+group	short_files	Files
+group	short_forum	フォーラム
 group	short_homepage	ホームページ
 group	short_mail	リスト
 group	short_main 	メイン
@@ -85,3 +86,23 @@ home	top_project_downloads	プロジェクトダウンロード数
 conf	content_encoding	EUC-JP
 conf	language_code	ja
 conf	language_id	2
+calendar	january	一月
+calendar	february	二月
+calendar	march	三月
+calendar	april	四月
+calendar	may	五月
+calendar	june	六月
+calendar	july	七月
+calendar	august	八月
+calendar	september	九月
+calendar	october	十月
+calendar	november	十一月
+calendar	december	十二月
+calendar	sunday	日
+calendar	monday	月
+calendar	tuesday	火
+calendar	wednesday	水
+calendar	thursday	木
+calendar	friday	金
+calendar	saturday	土
+calendar	todaysdate	今日
