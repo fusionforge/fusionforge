@@ -10,8 +10,6 @@
   * @version   $Id$
   *
   */
-
-
 require_once('pre.php');
 require_once('site_stats_utils.php');
 
@@ -19,10 +17,6 @@ require_once('site_stats_utils.php');
 session_require( array('group'=>$sys_stats_group) );
 
 $HTML->header(array('title'=>$Language->getText('stats','title',array($GLOBALS['sys_name']))));
-
-//
-// BEGIN PAGE CONTENT CODE
-//
 
 echo "\n\n";
 
@@ -41,8 +35,6 @@ print '<h3>'.$Language->getText('stats_graph','sitewide_statistics_graphs').'</h
 
 <hr />
 
-<br /><br />
-<img src="views_graph.php" alt="" />
 <br /><br />
 <img src="views_graph.php?monthly=1" alt="" />
 <br /><br />
