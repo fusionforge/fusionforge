@@ -6,7 +6,6 @@
 %define hostname		localhost
 %define systemname		MyGForge
 
-%define adminusername	siteadmin
 %define httpduser		apache
 %define gfuser			gforge
 %define gfgroup			gforge
@@ -23,6 +22,7 @@ Source0: %{name}-%{version}.tar.bz2
 Patch1000: gforge-4.0-deb_rpm.patch
 
 AutoReqProv: off
+Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
 Requires: httpd
 Requires: php, php-mbstring, php-pgsql
@@ -39,8 +39,8 @@ web-based administration.
 # Macro for generating an environment variable (%1) with %2 random characters
 %define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
 
-# Change password for %adminusername
-%define changepassword() echo "UPDATE users SET user_pw = '%1' WHERE user_name = '%adminusername'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
+# Change password for admin user
+%define changepassword() echo "UPDATE users SET user_pw='%1' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
 
 %prep
 %setup
@@ -112,15 +112,15 @@ if [ $1 -eq 1 ]; then
 
 	# generating and updating site admin password
 	%randstr SITEADMIN_PASSWORD 8
+
 	echo "$SITEADMIN_PASSWORD" > %{_sysconfdir}/gforge/siteadmin.pass
 	chmod 0600 %{_sysconfdir}/gforge/siteadmin.pass
 	SITEADMIN_PASSWORD=`echo -n $SITEADMIN_PASSWORD | md5sum | awk '{print $1}'`
-	%changepassword $SITEADMIN_PASSWORD
 
 	# creating gforge database user
 	%randstr GFORGEDATABASE_PASSWORD 8
 
-	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" template1"
+	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
@@ -154,38 +154,40 @@ if [ $1 -eq 1 ]; then
 	perl -pi -e "s/HOST_NAME/%{hostname}/g" /etc/httpd/conf.d/gforge.conf
 	
 	# initializing configuration
-	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache
+	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
 	
 	# creating the database
-	su -l %{gfuser} -c %{_libdir}/gforge/bin/db-upgrade.pl
-	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname}"
+	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
+	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
+	%changepassword $SITEADMIN_PASSWORD
 
-	service httpd graceful
+	service httpd graceful >/dev/null 2>&1
 else
-	# Upgrade
-	su %{gfuser} -c %{_libdir}/gforge/bin/db-upgrade.pl
+	# upgrading database
+	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
+
+	# updating configuration
+        cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
 fi
 
 %postun
 if [ $1 -eq 0 ]; then
 	# Uninstall everything
-	su -l postgres -s /bin/sh -c "dropuser %{dbuser} ; dropdb %{dbname}"
-	rm -f %{_sysconfdir}/gforge/siteadmin.pass
-
+	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropdb %{dbname} >/dev/null 2>&1"
+	rm -f %{_sysconfdir}/gforge/siteadmin.pass %{_sysconfdir}/gforge/local.pl
+	rm -f %{_sysconfdir}/gforge/httpd.*
+	rm -f %{_sysconfdir}/gforge/*.inc
 	# Remove PostgreSQL access
 	if grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
-		perl -ni -e 'm@^ *host.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf
+		perl -ni -e 'm@^ *host.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1
+		perl -ni -e 'm@^ *local.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1
 	fi
-
 	# Remove user/group
 	if id -u %{gfuser} >/dev/null 2>&1; then
-		userdel %{gfuser}
-		groupdel %{gfgroup} 2>/dev/null
+		userdel %{gfuser} >/dev/null 2>&1
+		groupdel %{gfgroup} >/dev/null 2>&1
 	fi
-
-else
-	# Upgrade
-	:
+	exit 0
 fi
 
 %clean
@@ -198,11 +200,12 @@ fi
 %attr(0660, apache, gforge) %config(noreplace) %{_sysconfdir}/gforge/gforge.conf
 %attr(0640, apache, apache) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
 %attr(0775, apache, apache) %dir /var/lib/gforge/upload
-%{_sysconfdir}/gforge
 %{_datadir}/gforge
 %{_libdir}/gforge
 %{_sysconfdir}/cron.d/gforge
 /var/cache/gforge
-/var/lib/gforge
+/var/lib/gforge/scmtarballs
 
 %changelog
+* Wed Nov 03 2004 Guillaume Smet <guillaume-gforge@smet.org>
+- new RPM packaging
