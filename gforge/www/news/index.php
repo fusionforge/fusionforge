@@ -1,23 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge News Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../forum/forum_utils.php');
 
-global $group_id;
+require_once('pre.php');
+require_once('www/forum/forum_utils.php');
 
-if (!$group_id) {
-	$group_id = $GLOBALS['sys_news_group'];
-}
+news_header(array('title'=>'News','pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
 
-news_header(array('title'=>'News'));
-
-echo '<H3>News</H3>
+echo '
 	<P>Choose a News item and you can browse, search, and post messages.<P>';
 
 /*
