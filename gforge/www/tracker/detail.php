@@ -106,8 +106,8 @@ if (session_loggedin()) {
 
 		for ($i=0; $i<$count; $i++) {
 			echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<TD>'. $file_list[$i]->getName() .'</TD>
-			<TD>'.  $file_list[$i]->getDescription() .'</TD>
+			<TD>'. htmlspecialchars($file_list[$i]->getName()) .'</TD>
+			<TD>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</TD>
 			<TD><A HREF="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">Download</A></TD>
 			</TR>';
 		}
