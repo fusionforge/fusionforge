@@ -70,6 +70,9 @@ if (!isset($ccode) || empty($ccode)) {
 <?php echo $Language->getText('account_register','password2'); echo utils_requiredField(); ?><br />
 <input type="password" name="password2">
 <p>
+<?php echo $Language->getText('account_options', 'title2'); ?><br />
+<input type="text" name="title" value="<?php echo $title; ?>" size="10">
+<p>
 <?php echo $Language->getText('account_register','firstname'); echo utils_requiredField(); ?><br />
 <input size=30 type="text" name="firstname" value="<?php print($firstname); ?>">
 <p>
@@ -111,9 +114,6 @@ if ($sys_use_jabber) {
 <p>
 <?php echo $Language->getText('account_options', 'fax'); ?><br />
 <input type="text" name="fax" value="<?php echo $fax; ?>" size="20">
-<p>
-<?php echo $Language->getText('account_options', 'title2'); ?><br />
-<input type="text" name="title" value="<?php echo $title; ?>" size="10">
 <p>
 <input type="checkbox" name="mail_site" value="1" checked>
 <?php echo $Language->getText('account_register','siteupdate'); ?>

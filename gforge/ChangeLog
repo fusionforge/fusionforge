@@ -1,3 +1,7 @@
+2004-06-01  Tom Copeland <tom@infoether.com>
+
+	* www/account/register.php: Moved "title" field up a bit.
+
 2004-05-16  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* SCM pluginification: new SCMPlugin class, SCM pages now call the
