@@ -387,12 +387,12 @@ EOF
 
 print_ldif_default(){
     dc=`echo $slapd_base_dn | sed 's/dc=\(.[^,]*\),.*/\1/'`
-    cat <<-FIN
-dn: $slapd_base_dn
-objectClass: dcObject
-objectClass: domain
-dc: $dc
+#dn: $slapd_base_dn
+#objectClass: dcObject
+#objectClass: domain
+#dc: $dc
 
+    cat <<-FIN
 dn: cn=admin,$slapd_base_dn
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
