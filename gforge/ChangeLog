@@ -1,3 +1,8 @@
+2003-06-23 Tom Copeland  <tom@infoether.com>
+
+	* www/project/stats_graph.php:
+	Fixed bug that I introduced into graphs - y axis data was backwards.
+	
 2003-06-19 Tom Copeland  <tom@infoether.com>
 
 	* www/stats/lastlogins.php:

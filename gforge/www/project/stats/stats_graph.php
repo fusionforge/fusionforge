@@ -48,8 +48,6 @@ if ( $report == 'last_7' ) {
 	}
 	$xdata = array_reverse($xdata);
 	$xlabel = array_reverse($xlabel);
-	$ydata1 = array_reverse($ydata1);
-	$ydata2 = array_reverse($ydata2);
 } elseif ( $report == 'last_30' ) {
 	$res=db_query("
 		SELECT month,day,downloads, subdomain_views as views,site_views as views2 
@@ -67,8 +65,6 @@ if ( $report == 'last_7' ) {
 	}
 	$xdata = array_reverse($xdata);
 	$xlabel = array_reverse($xlabel);
-	$ydata1 = array_reverse($ydata1);
-	$ydata2 = array_reverse($ydata2);
 } elseif ( $report == 'months' ) {
 	$res = db_query("
 		SELECT month,'15',downloads,subdomain_views as views,site_views as views2 
