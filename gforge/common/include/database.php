@@ -90,10 +90,10 @@ function db_connect() {
 	//	Now map the physical database connections to the
 	//	"virtual" list that is used to distribute load in db_query()
 	//
-	define(SYS_DB_PRIMARY,$conn);
-	define(SYS_DB_STATS,$conn2);
-	define(SYS_DB_TROVE,$conn2);
-	define(SYS_DB_SEARCH,$conn2);
+	define('SYS_DB_PRIMARY', $conn);
+	define('SYS_DB_STATS', $conn2);
+	define('SYS_DB_TROVE', $conn2);
+	define('SYS_DB_SEARCH', $conn2);
 
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error
@@ -287,6 +287,9 @@ function db_affected_rows($qhandle) {
  */
 function db_fetch_array($qhandle) {
 	global $sys_db_row_pointer;
+	if(!isset($sys_db_row_pointer[$qhandle])) {
+		$sys_db_row_pointer[$qhandle] = 0;
+	}
 	$sys_db_row_pointer[$qhandle]++;
 	return @pg_fetch_array($qhandle,($sys_db_row_pointer[$qhandle]-1));
 }
