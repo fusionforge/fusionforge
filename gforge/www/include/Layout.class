@@ -105,9 +105,9 @@ class Layout extends Error {
 		global $Language;
 
 		if (!$params['title']) {
-			$params['title'] = "GForge";
+			$params['title'] =  $GLOBALS['sys_name'];
 		} else {
-			$params['title'] = "GForge: " . $params['title'];
+			$params['title'] =  $GLOBALS['sys_name'] . ":" . $params['title'];
 		}
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
