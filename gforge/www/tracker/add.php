@@ -95,4 +95,9 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 
 	$ath->footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

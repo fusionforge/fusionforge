@@ -1681,7 +1681,6 @@ function &group_get_result($group_id=0) {
 	}
 }
 
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -350,4 +350,9 @@ if ($group_id && $atid) {
 
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

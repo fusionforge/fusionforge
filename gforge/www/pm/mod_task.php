@@ -176,4 +176,9 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 
 pm_footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

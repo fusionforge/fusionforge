@@ -74,5 +74,9 @@ function notepad_anchor($str, $form) {
         return notepad_button_raw($str, $form, "SOFT", "45", "80");
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -356,4 +356,9 @@ class ForumHTML extends Error {
 			util_handle_message(array_unique($tolist),$subject,$body,$send_all_posts_to);
 */
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

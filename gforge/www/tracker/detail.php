@@ -151,4 +151,9 @@ if (session_loggedin()) {
 
 $ath->footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

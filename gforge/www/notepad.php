@@ -116,4 +116,9 @@ if ($form != '') {
 
 <?php
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
