@@ -171,7 +171,7 @@ class Layout extends Error {
 <TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
 
 	<TR>
-		<TD><A HREF="/"><?php echo html_image('logo.png',190,49,array('border'=>'0')); ?></A></TD>
+		<TD><A HREF="/"><?php echo html_image('logo.png',134,50,array('border'=>'0')); ?></A></TD>
 		<TD><?php echo $this->searchBox(); ?></TD>
 		<TD ALIGN="RIGHT"><?php
 			if (session_loggedin()) {

@@ -35,7 +35,7 @@ function db_connect() {
 	//
 	//	Connect to primary database
 	//
-	$conn = @pg_pconnect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
+	$conn = @pg_connect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
 
 	//
 	//	If any replication is configured, connect
