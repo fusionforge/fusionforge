@@ -100,7 +100,7 @@ while ( $row =& db_fetch_array($res) ) {
 */
 function addsvnmail($filePath,$unix_group_name) {
 	global $sys_lists_host;
-	$pathsvnmail = dirname($_SERVER['SCRIPT_FILENAME']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host;
+	$pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host;
 	writeFile($filePath.'/hooks/post-commit',$pathsvnmail);
 }
 
@@ -146,4 +146,5 @@ system("chown $file_owner -R $svn");
 system("cd $svn/ ; find -type d -exec chmod 700 {} \;");
 system("cd $svn/ ; find -type f -exec chmod 600 {} \;");
 
+cron_entry(21,$err);
 ?>
