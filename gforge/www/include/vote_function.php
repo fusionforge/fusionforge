@@ -243,7 +243,7 @@ if (db_numrows($result) > 0) {
 
 			echo '&nbsp;<br /><strong>'.util_make_links(stripslashes(db_result($result, 0, 'question'))).'</strong>';
 			echo '
-				<input type="radio" name="_'.$quest_array[$i].'" value="-666" />';
+				<input type="hidden" name="_'.$quest_array[$i].'" value="-666" />';
 
 		} else if ($question_type == '5') {
 			/*
