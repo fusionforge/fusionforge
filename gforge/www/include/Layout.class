@@ -25,6 +25,7 @@ class Layout extends Error {
 	 * @var		string	$imgroot
 	 */
 	var $imgroot = 'themes/forged/images/';
+	var $imgproj = 'images/ic/';
 
 	// Color Constants
 	/**

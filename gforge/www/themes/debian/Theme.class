@@ -19,7 +19,8 @@ class Theme extends Layout {
 		$this->Layout();
 
 		// The root location for images
-		$this->imgroot = '/themes/debian/images/';
+		$this->imgroot = 'themes/debian/images/';
+		$this->imgproj = 'themes/debian/images/proj/';
 
 		// The content background color
 		// sky blue
@@ -79,7 +80,7 @@ class Theme extends Layout {
 			print 'class=tabs ';
 		}
 		//print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
-		print 'href="'. $url .'"><img src="' . $this->imgroot . $icon . '">' . $title . '</A>';
+		print 'href="'. $url .'"><img src="/' . $this->imgroot . $icon . '">' . $title . '</A>';
 	}
 }
 ?>
