@@ -1,6 +1,6 @@
 sourceforge (2.5-17+) unstable; urgency=low
 
-  * 
+  * [Roland] Fixed speling error in Description: field (closes: #125372).
 
  --
 
