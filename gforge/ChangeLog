@@ -1,7 +1,8 @@
 2004-02-26  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #685 ] Translation to PortugueseBrasilian
 	* SQL optimization: Replaced 'select *' in PluginManager.class
-	with explicit column names.
+	and BaseLanguage.class with explicit column names.
+	* Added some PHPDocs to BaseLanguage.class.
 
 2004-02-19  Tom Copeland <tom@infoether.com>
 	* Fixed bug [ #693 ] News dates showing up as Jan 1 1970
