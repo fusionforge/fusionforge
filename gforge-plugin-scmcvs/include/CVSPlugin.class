@@ -10,7 +10,7 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = "scm_page";
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
-// to be revised		$this->hooks[] = "scm_stats";
+		$this->hooks[] = "scm_stats";
 
 		$this->hooks[] = "scm_plugin";
 //		$this->hooks[] = "group_approved";
@@ -188,15 +188,14 @@ if ($displayCvsBrowser){
 	}
 
 	function display_stats ($params) {
-/*
 		global $Language ;
 		$group_id = $params['group_id'] ;
 		$result = db_query("
-			SELECT commits, adds
-			FROM plugin_scmcvs_stats
+			SELECT sum(commits) AS commits, sum(adds) AS adds
+			FROM stats_cvs_group
 			WHERE group_id='$group_id'");
-		$commit_num = db_result($result,0,0);
-		$add_num    = db_result($result,0,1);
+		$commit_num = db_result($result,0,'commits');
+		$add_num    = db_result($result,0,'adds');
 		if (!$commit_num) {
 			$commit_num=0;
 		}
@@ -209,7 +208,6 @@ if ($displayCvsBrowser){
 		<br /> &nbsp; -
 			<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>';
         }
-*/
 	}
 
 	/**
