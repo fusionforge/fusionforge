@@ -16,10 +16,6 @@ require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/include/trove.php');
 
-
-echo'
-	<HR NoShade>';
-
 // assign default. 18 is 'topic'
 if (!$form_cat) {
 	$form_cat = $default_trove_cat;
@@ -41,6 +37,9 @@ if (db_numrows($res_trove_cat) < 1) {
 }
 
 $HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
+
+echo'
+	<HR NoShade>';
 
 $row_trove_cat = db_fetch_array($res_trove_cat);
 

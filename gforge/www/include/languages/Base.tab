@@ -67,8 +67,8 @@ account_register	realname	Full/Real Name *:
 account_register	language	Language Choice:
 account_register	timezone	Timezone:
 account_register	emailaddr	Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
-account_register	jabberaddr	Email Address:
-account_register	jabberonly	Send auto-generated notices only to this address
+account_register	jabberaddr	Jabber Address:
+account_register	jabberonly	Send auto-generated notices only to my Jabber address
 account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
 account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
 account_register	mandatory	Fields marked with * are mandatory.
