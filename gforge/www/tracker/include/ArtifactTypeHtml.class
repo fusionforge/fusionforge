@@ -79,12 +79,16 @@ class ArtifactTypeHtml extends ArtifactType {
 
 //TODO - add code for "display only" such as mod-limited and detail.php pages
 
+		echo '
+			<!-- Start Extra Fields Rendering -->
+			<tr>';
 		$col_count=0;
 		for ($i=0; $i<$count; $i++) {
+//echo "|||$col_count***".$efarr[$i]['attribute2'];
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
 				echo '
-					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
 						$this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 
@@ -93,19 +97,41 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
 				echo '
-					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
 						$this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
 
+				//text fields might be really wide, so need a row to themselves.
+				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
+					$col_count = 0;
+					$colspan=2;
+					echo '
+					<td>&nbsp;</td>
+				</tr>
+				<tr>';
+				} else {
+					$colspan=1;
+				}
 				echo '
-					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
 						$this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
+				//text areas might be really wide, so need a row to themselves.
+				if (($col_count == 1) && ($efarr[$i]['attribute2'] > 30)) {
+					$col_count = 0;
+					$colspan=2;
+					echo '
+					<td>&nbsp;</td>
+				</tr>
+				<tr>';
+				} else {
+					$colspan=1;
+				}
 				echo '
-					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
 						$this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
 //			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
@@ -115,11 +141,19 @@ class ArtifactTypeHtml extends ArtifactType {
 			$col_count++;
 			//we've done two columns - if there are more to do, start a new row
 			if (($col_count == 2) && ($i != $count-1)) {
+				$col_count = 0;
 				echo '
 				</tr>
 				<tr>';
 			}
 		}
+		if ($col_count == 1) {
+			echo '
+					<td>&nbsp;</td>';
+		}
+		echo '
+			</tr>
+			<!-- End Extra Fields Rendering -->';
 	}
 
 	/**

@@ -45,9 +45,12 @@
 			
 				echo '</td>';
 				echo '<td>';
-				echo '<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
-					$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-					$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
+				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT || $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
+					echo '<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
+						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
+						$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
+				}
+				echo '</td>';
 			}
 			echo   '</tr>';
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -61,6 +64,18 @@
 		<input type="hidden" name="add_extrafield" value="y" />
 		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_type') ?>:</strong><br />
+		<input type="radio" name="field_type" value="1"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_select'); ?><br />
+		<input type="radio" name="field_type" value="3"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_radio'); ?><br />
+		<input type="radio" name="field_type" value="4"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_text'); ?><br />
+		<input type="radio" name="field_type" value="6"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_textarea'); ?><br />
+		<p>
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizerows'); ?><br />
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr1'); ?>
+			<input type="text" name="attribute1" value="0" size="2" maxlength="2"><br />
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr2'); ?>
+			<input type="text" name="attribute2" value="0" size="2" maxlength="2">
 		<p>
 		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></strong></p>
 		<p>

@@ -25,6 +25,10 @@
 			<p>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
 			<input type="text" name="name" value="<?php echo $ac->getName(); ?>" /></p>
+		<p>
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizerows'); ?><br />
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr1'); ?> <input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2"><br />
+		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr2'); ?> <input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2">
 			<p>
 			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
 				</span></strong></p>

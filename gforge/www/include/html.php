@@ -473,7 +473,7 @@ function build_priority_select_box ($name='priority', $checked_val='5', $nochang
  * @param		string	The value to be checked
  * @param		bool	Whether to make 'No Change' selected.
  */
-function html_build_priority_select_box ($name='priority', $checked_val='5', $nochange=false) {
+function html_build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
 	global $Language;
 ?>
 	<select name="<?php echo $name; ?>">

@@ -2693,6 +2693,14 @@ tracker_admin_add_users	technician	Technician
 tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
 tracker_admin_add_users	update_permissions	Update Developer Permissions
 tracker_admin_add_users	user_name	User Name
+tracker_admin_build_boxes	box_type_select	Select Box
+tracker_admin_build_boxes	box_type_radio	Radio Buttons
+tracker_admin_build_boxes	box_type_text	Text Field
+tracker_admin_build_boxes	box_type_textarea	Text Area
+tracker_admin_build_boxes	box_type	Type of extra field
+tracker_admin_build_boxes	box_sizerows	Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.
+tracker_admin_build_boxes	box_sizeattr1	Text Field Size/Text Area Rows
+tracker_admin_build_boxes	box_sizeattr2	Text Field Maxlength/Text Area Columns
 tracker_admin_build_boxes	title	 Add/Update Extra Fields
 tracker_admin_build_boxes	edit	Edit
 tracker_admin_build_boxes	opt_title	Add/Update Extra Field Elements in: $1

@@ -11,7 +11,7 @@
 //			} elseif ($ab->isError())
 //				$feedback .= $ab->getErrorMessage();			
 			} else {
-				if (!$ab->create($name)) {
+				if (!$ab->create($name,$field_type,$attribute1,$attribute2)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_box').': '.$ab->getErrorMessage();
 					$ab->clearError();
 				} else {
@@ -203,7 +203,7 @@
 			} elseif ($ac->isError()) {
 				$feedback .= $ac->getErrorMessage();
 			} else {
-				if (!$ac->update($name)) {
+				if (!$ac->update($name,$attribute1,$attribute2)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {

@@ -88,10 +88,13 @@ class ArtifactExtraField extends Error {
 	 *	a tracker.  This function is only used to create rows for boxes 
 	 *	configured by the admin.
 	 *
-	 *	@param	string	Name of the box.
+	 *	@param	string	Name of the extra field.
+	 *	@param	int	The type of field - radio, select, text, textarea
+	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
+	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
 	 *  @return 	true on success / false on failure.
 	 */
-	function create($name) {
+	function create($name,$field_type,$attribute1,$attribute2) {
 		global $Language;
 		
 		//
@@ -105,8 +108,9 @@ class ArtifactExtraField extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name) 
-			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."')";
+		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2) 
+			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."',
+			'$field_type','$attribute1','$attribute2')";
 
 		$result=db_query($sql);
 
@@ -117,14 +121,14 @@ class ArtifactExtraField extends Error {
 			$this->setError(db_error());
 			return false;
 		}
-			//
-			//	Now set up our internal data structures
-			//
-			if (!$this->fetchData($id)) {
-				return false;
-			} 
-
+		//
+		//	Now set up our internal data structures
+		//
+		if (!$this->fetchData($id)) {
+			return false;
+		} 
 	}
+
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactExtraField from the database.
 	 *
@@ -172,21 +176,59 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
+	 *	getAttribute1 - get the attribute1 field.
+	 *
+	 *	@return int	The first attribute.
+	 */
+	function getAttribute1() {
+		return $this->data_array['attribute1'];
+	}
+
+	/**
+	 *	getAttribute2 - get the attribute2 field.
+	 *
+	 *	@return int	The second attribute.
+	 */
+	function getAttribute2() {
+		return $this->data_array['attribute2'];
+	}
+
+	/**
+	 *	getAvailableTypes - the types of text fields and their names available.
+	 *
+	 *	@return	array	types.
+	 */
+	function getAvailableTypes() {
+		global $Language;
+		return array(
+			1=>$Language->getText('tracker_admin_build_boxes','box_type_select'),
+			3=>$Language->getText('tracker_admin_build_boxes','box_type_radio'),
+			4=>$Language->getText('tracker_admin_build_boxes','box_type_text'),
+			6=>$Language->getText('tracker_admin_build_boxes','box_type_textarea')
+		);
+	}
+
+	/**
 	 *  update - update a row in the table used to store box names 
 	 *  for a tracker.  This function is only to update rowsf
 	 *  for boxes configured by
 	 *  the admin.
 	 *
-	 *  @param	string	Name of the box.
+	 *  @param	string	Name of the field.
+	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
+	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
 	 *  @return	boolean	success.
 	 */
-	function update($name) {
+	function update($name,$attribute1,$attribute2) {
 		if (!$this->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}   
 		$sql="UPDATE artifact_extra_field_list 
-			SET field_name='".htmlspecialchars($name)."' 
+			SET 
+			field_name='".htmlspecialchars($name)."',
+			attribute1='$attribute1',
+			attribute2='$attribute2'
 			WHERE extra_field_id='". $this->getID() ."' 
 			AND group_artifact_id='".$this->ArtifactType->getID()."'";
 		$result=db_query($sql);

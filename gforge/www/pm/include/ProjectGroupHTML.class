@@ -68,29 +68,23 @@ function pm_header($params) {
 	$labels = array();
 	$links = array();
 
-	$labels[] = $Language->getText('group','short_pm');
-	$links[]  = '/pm/?group_id='.$group_id;
-
 	if ($group_project_id) {
+		$labels[] = (($pg) ? $pg->getName() .': ' : '') .$Language->getText('pm_include_grouphtml','browse_task');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		if (session_loggedin()) {
 			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
-		$labels[] = $Language->getText('pm_include_grouphtml','browse_task');
-		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
 		$links[]  = 'javascript:gantt_window()';
 	}
 	$labels[] = $Language->getText('pm_include_grouphtml','reporting');
 	$links[]  = '/pm/reporting/?group_id='.$group_id;
 	$labels[] = $Language->getText('pm_include_grouphtml','admin');
-	$links[]  = '/pm/admin/?group_id='.$group_id;
+	$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
 
 	echo ($HTML->subMenu($labels,$links));
 
-	if ($pg) {
-		echo "<h3>".$Language->getText('pm_include_grouphtml','project').": ". $pg->getName() ."</h3>";
-	}
 }
 
 function pm_footer($params) {
@@ -254,8 +248,6 @@ class ProjectGroupHTML extends ProjectGroup {
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 
-
-
 			echo '
 			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
 			'<td><a href="/pm/task.php?func=detailtask'.
@@ -269,16 +261,9 @@ class ProjectGroupHTML extends ProjectGroup {
 				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
 			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 
-
-
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
-
-
-
-
-
 	}
 
 }
