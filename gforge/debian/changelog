@@ -7,9 +7,10 @@ gforge (3rc2-1+) unstable; urgency=low
     Adullact <michel.bondaz@linac.org>
   * [Roland] Applied patch #330 fixing LDAP schema.  Thanks, Alwyn
     Schoeman <alwyn@smart.com.ph>.
-  * [Christian] Moved kde theme in gforge-theme-kde dir 
+  * [Christian] Moved <name> theme in gforge-theme-<name> dir where name not 
+    gforge or osx
 
- -- Christian Bayle <bayle@debian.org>  Fri, 16 May 2003 00:19:22 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri, 16 May 2003 02:33:22 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 
