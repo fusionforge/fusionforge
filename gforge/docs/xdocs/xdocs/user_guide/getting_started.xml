@@ -12,7 +12,7 @@
 
 <section name="GForge homepage">
 <p>
-Connect with your browser to the gforge. This can be either gforg.org or a local installed version of the software.
+Connect with your browser to GForge. This can be either gforge.org or a locally-installed version of the software.
 
 </p>
 </section>
@@ -80,7 +80,7 @@ You need to insert the following information to register a project:
 <li><b>Project Full Name</b><br/>
 The Name of the Project: eg. Gforge Master project</li>
 <li><b>Project Purpose and Summarization</b><br/>
-A brief summaryy of the Project</li>
+A brief summary of the Project</li>
 <li><b>License</b><br/>
 You must select a License for your software.
 </li>
