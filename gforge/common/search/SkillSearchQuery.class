@@ -32,16 +32,18 @@ class SkillSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT * '
-			. 'FROM skills_data, users, skills_data_types '
-			. 'WHERE (('.$this->getIlikeCondition('skills_data.title', $this->words).') '
-			. 'OR ('.$this->getIlikeCondition('skills_data.keywords', $this->words).')) '
-			. 'AND (skills_data.user_id=users.user_id) '
-			. 'AND (skills_data.type=skills_data_types.type_id) '
-			. 'ORDER BY finish DESC';
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM skills_data_search('".$this->formatWords()."')";
+		} else {
+			$sql = 'SELECT * '
+				. 'FROM skills_data, users, skills_data_types '
+				. 'WHERE (('.$this->getIlikeCondition('skills_data.title', $this->words).') '
+				. 'OR ('.$this->getIlikeCondition('skills_data.keywords', $this->words).')) '
+				. 'AND (skills_data.user_id=users.user_id) '
+				. 'AND (skills_data.type=skills_data_types.type_id) '
+				. 'ORDER BY finish DESC';
+		}
 		return $sql;
 	}
-	
 }
-
 ?>

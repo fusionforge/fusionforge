@@ -52,21 +52,33 @@ class DocsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname'
-			.' FROM doc_data, doc_groups'
-			.' WHERE doc_data.doc_group = doc_groups.doc_group'
-			.' AND doc_data.group_id ='.$this->groupId;
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= ' AND doc_groups.doc_group IN ('.$this->sections.') ';
-		}
-		if ($this->showNonPublic) {
-			$sql .= ' AND doc_data.stateid IN (1, 4, 5)';
+		if ($sys_use_fti) {
+			$nonPublic = 'false';
+			$sections = '';
+			if ($this->showNonPublic) {
+				$nonPublic = 'true';
+			}
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sections = $this->sections;
+			}
+			$sql = "SELECT * FROM doc_data_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
 		} else {
-			$sql .= ' AND doc_data.stateid = 1';
+			$sql = 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname'
+				.' FROM doc_data, doc_groups'
+				.' WHERE doc_data.doc_group = doc_groups.doc_group'
+				.' AND doc_data.group_id ='.$this->groupId;
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sql .= ' AND doc_groups.doc_group IN ('.$this->sections.') ';
+			}
+			if ($this->showNonPublic) {
+				$sql .= ' AND doc_data.stateid IN (1, 4, 5)';
+			} else {
+				$sql .= ' AND doc_data.stateid = 1';
+			}
+			$sql .= ' AND (('.$this->getIlikeCondition('title', $this->words).')' 
+				.' OR ('.$this->getIlikeCondition('description', $this->words).'))'
+				.' ORDER BY doc_groups.groupname, doc_data.docid';
 		}
-		$sql .= ' AND (('.$this->getIlikeCondition('title', $this->words).')' 
-			.' OR ('.$this->getIlikeCondition('description', $this->words).'))'
-			.' ORDER BY doc_groups.groupname, doc_data.docid';
 		return $sql;
 	}
 	

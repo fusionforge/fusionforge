@@ -52,22 +52,33 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name '
-			. 'FROM forum, users, forum_group_list '
-			. 'WHERE users.user_id = forum.posted_by '
-			. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
-			. 'AND forum_group_list.is_public <> 9 '			
-			. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
+		if ($sys_use_fti) {
+			$nonPublic = 'false';
+			$sections = '';
+			if ($this->showNonPublic) {
+				$nonPublic = 'true';
+			}
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sections = $this->sections;
+			}
+			$sql = "SELECT * FROM forums_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+		} else {
+			$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name '
+				. 'FROM forum, users, forum_group_list '
+				. 'WHERE users.user_id = forum.posted_by '
+				. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
+				. 'AND forum_group_list.is_public <> 9 '			
+				. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
+			}
+			if (!$this->showNonPublic) {
+				$sql .= 'AND forum_group_list.is_public = 1 ';
+			}
+			$sql .= 'AND (('.$this->getIlikeCondition('forum.body', $this->words).') '
+				. 'OR ('.$this->getIlikeCondition('forum.subject', $this->words).')) '
+				. 'ORDER BY forum_group_list.forum_name, forum.msg_id';
 		}
-		if (!$this->showNonPublic) {
-			$sql .= 'AND forum_group_list.is_public = 1 ';
-		}
-		$sql .= 'AND (('.$this->getIlikeCondition('forum.body', $this->words).') '
-			. 'OR ('.$this->getIlikeCondition('forum.subject', $this->words).')) '
-			. 'ORDER BY forum_group_list.forum_name, forum.msg_id';
-		
 		return $sql;
 	}
 

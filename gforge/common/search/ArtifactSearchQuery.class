@@ -51,15 +51,18 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname '
-			. 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users ' 
-			. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
-			. 'AND users.user_id=a.submitted_by '
-			. 'AND (('.$this->getIlikeCondition('a.details', $this->words).') ' 
-			. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).')) '
-			. 'OR ('.$this->getIlikeCondition('am.body', $this->words).') '
-			. 'ORDER BY group_artifact_id ASC, a.artifact_id ASC';
-
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM artifact_search('".$this->getFormattedWords()."', ".$this->artifactId.")";
+		} else {
+			$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname '
+				. 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users ' 
+				. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
+				. 'AND users.user_id=a.submitted_by '
+				. 'AND (('.$this->getIlikeCondition('a.details', $this->words).') ' 
+				. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).')) '
+				. 'OR ('.$this->getIlikeCondition('am.body', $this->words).') '
+				. 'ORDER BY group_artifact_id ASC, a.artifact_id ASC';
+		}
 		return $sql;
 	}
 

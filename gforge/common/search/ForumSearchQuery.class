@@ -51,14 +51,17 @@ class ForumSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname '
-			. 'FROM forum,users '
-			. 'WHERE users.user_id=forum.posted_by '
-			. 'AND (('.$this->getIlikeCondition('forum.body', $this->words).') '
-			. 'OR ('.$this->getIlikeCondition('forum.subject', $this->words).')) '
-			. 'AND forum.group_forum_id=\''.$this->forumId.'\' '
-			. 'GROUP BY msg_id, subject, post_date, realname';
-
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM forum_search('".$this->getFormattedWords()."', ".$this->forumId.")";
+		} else {
+			$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname '
+				. 'FROM forum,users '
+				. 'WHERE users.user_id=forum.posted_by '
+				. 'AND (('.$this->getIlikeCondition('forum.body', $this->words).') '
+				. 'OR ('.$this->getIlikeCondition('forum.subject', $this->words).')) '
+				. 'AND forum.group_forum_id=\''.$this->forumId.'\' '
+				. 'GROUP BY msg_id, subject, post_date, realname';
+		}
 		return $sql;
 	}
 	

@@ -32,12 +32,16 @@ class PeopleSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT user_name,user_id,realname ' 
-			. 'FROM users ' 
-			. 'WHERE (('.$this->getIlikeCondition('user_name', $this->words).') ' 
-			. 'OR ('.$this->getIlikeCondition('realname', $this->words).')) ' 
-			. 'AND (status=\'A\') ' 
-			. 'ORDER BY user_name';
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM users_search('".$this->formatWords()."')";
+		} else {
+			$sql = 'SELECT user_name,user_id,realname ' 
+				. 'FROM users ' 
+				. 'WHERE (('.$this->getIlikeCondition('user_name', $this->words).') ' 
+				. 'OR ('.$this->getIlikeCondition('realname', $this->words).')) ' 
+				. 'AND (status=\'A\') ' 
+				. 'ORDER BY user_name';
+		}
 		return $sql;
 	}
 }

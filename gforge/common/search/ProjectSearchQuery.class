@@ -32,16 +32,19 @@ class ProjectSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
-		$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
-		$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
-		
-		$sql = 'SELECT group_name, unix_group_name, type_id, group_id, short_description '
-			.'FROM groups '
-			.'WHERE status IN (\'A\', \'H\') '
-			.'AND is_public=\'1\' '
-			.'AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
-
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM groups_search('".$this->formatWords()."')";
+		} else {
+			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
+			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
+			$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
+			
+			$sql = 'SELECT group_name, unix_group_name, type_id, group_id, short_description '
+				.'FROM groups '
+				.'WHERE status IN (\'A\', \'H\') '
+				.'AND is_public=\'1\' '
+				.'AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+		}
 		return $sql;
 	}
 	

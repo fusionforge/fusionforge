@@ -40,12 +40,16 @@ class NewsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname'
-			. ' FROM news_bytes, users'
-			. ' WHERE (group_id='.$this->groupId.' AND is_approved <> \'4\' AND news_bytes.submitted_by = users.user_id' 
-			. ' AND (('.$this->getIlikeCondition('summary', $this->words).')' 
-			. ' OR ('.$this->getIlikeCondition('details', $this->words).')))'
-			. ' ORDER BY post_date DESC';
+		if ($sys_use_fti) {
+			$sql = "SELECT * FROM news_bytes_search('".$this->getFormattedWords()."', ".$this->groupId.")";
+		} else {
+			$sql = 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname'
+				. ' FROM news_bytes, users'
+				. ' WHERE (group_id='.$this->groupId.' AND is_approved <> \'4\' AND news_bytes.submitted_by = users.user_id' 
+				. ' AND (('.$this->getIlikeCondition('summary', $this->words).')' 
+				. ' OR ('.$this->getIlikeCondition('details', $this->words).')))'
+				. ' ORDER BY post_date DESC';
+		}
 		return $sql;
 	}
 }

@@ -51,26 +51,37 @@ class FrsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		$sql = 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname'
-			. ' FROM frs_file, frs_release, users, frs_package'
-			. ' WHERE frs_release.released_by = users.user_id'
-			. ' AND frs_package.package_id = frs_release.package_id'
-			. ' AND frs_file.release_id=frs_release.release_id'
-			. ' AND frs_package.group_id='.$this->groupId;
-		
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
+		if ($sys_use_fti) {
+			$nonPublic = 'false';
+			$sections = '';
+			if ($this->showNonPublic) {
+				$nonPublic = 'true';
+			}
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sections = $this->sections;
+			}
+			$sql = "SELECT * FROM frs_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+		} else {
+			$sql = 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname'
+				. ' FROM frs_file, frs_release, users, frs_package'
+				. ' WHERE frs_release.released_by = users.user_id'
+				. ' AND frs_package.package_id = frs_release.package_id'
+				. ' AND frs_file.release_id=frs_release.release_id'
+				. ' AND frs_package.group_id='.$this->groupId;
+			
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
+			}
+			if(!$this->showNonPublic) {
+				$sql .= ' AND is_public=1';
+			}
+	
+			$sql .= ' AND (('.$this->getIlikeCondition('frs_release.changes', $this->words).')' 
+				. ' OR ('.$this->getIlikeCondition('frs_release.notes', $this->words).')'
+				. ' OR ('.$this->getIlikeCondition('frs_release.name', $this->words).')'
+				. ' OR ('.$this->getIlikeCondition('frs_file.filename', $this->words).'))'
+				. ' ORDER BY frs_package.name, frs_release.name';
 		}
-		if(!$this->showNonPublic) {
-			$sql .= ' AND is_public=1';
-		}
-
-		$sql .= ' AND (('.$this->getIlikeCondition('frs_release.changes', $this->words).')' 
-			. ' OR ('.$this->getIlikeCondition('frs_release.notes', $this->words).')'
-			. ' OR ('.$this->getIlikeCondition('frs_release.name', $this->words).')'
-			. ' OR ('.$this->getIlikeCondition('frs_file.filename', $this->words).'))'
-			. ' ORDER BY frs_package.name, frs_release.name';
-
 		return $sql;
 	}
 	

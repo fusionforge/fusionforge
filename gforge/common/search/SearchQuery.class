@@ -242,6 +242,15 @@ class SearchQuery extends Error {
 		}
 	}
 
+	/**
+	 * getFormattedWords - get words formatted in order to be used in the FTI stored procedures
+	 *
+	 * @return string words we are searching for, separated by a pipe
+	 */	
+	function getFormattedWords() {
+		$words = implode('|', $this->words);
+		return $words;
+	}
 }
 
 ?>
