@@ -66,6 +66,7 @@ install: build
 	install -m 644 etc/local.d/[0-9][0-9]* $(CURDIR)/debian/gforge-common/etc/gforge/local.d/
 	install -m 644 etc/templates/*\.* $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 755 setup $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-common/bin/cvssh
 	#
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
