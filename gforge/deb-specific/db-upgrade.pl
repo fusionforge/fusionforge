@@ -1653,6 +1653,66 @@ END;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "3.3.0-2+4" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20040914.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040914.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "3.3.0-2+5" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041005.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041005.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "3.3.0-2+6" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041006.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041006.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
 
     &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
     &debug ("Please enjoy using Gforge.") ;
