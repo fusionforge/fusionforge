@@ -55,7 +55,7 @@ function exit_no_group() {
  * exit_missing_param() - Exit with missing required parameters error
  */
 function exit_missing_param() {
-	exit_error('Error - Missing Params','ERROR - Missing Required Parameteres.');
+	exit_error('Error - Missing parameters','ERROR - Missing required parameters.');
 }
 
 /**
