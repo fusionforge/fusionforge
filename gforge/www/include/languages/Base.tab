@@ -20,19 +20,35 @@ conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
 account	title	Account Preferences
+account	updated	Updated
 account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
 account_change_email	section	Account Preferences
 account_change_email	subject	$1 Verification
 account_change_email	title	Change Email Address
 account_change_email	mailsent	<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href="/">[ Home ]</a> 
 account_change_email	desc	<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>
+account_change_email	invalid_email	Invalid email address
+account_change_email_confirm	title	Email Change Confirmation
+account_change_email	new_address	New Email Address:
+account_change_email	send_confirmation	Send Confirmation to New Address
+account_change_email-complete	title	Email Change Complete
+account_change_email-complete	confirm	Welcome, $1. Your email change is complete. Your new email address on file is <strong>$2</strong>. Mail sent to $3 will now be forwarded to this account.
 account_change_pw	confirmation	<h2>$1 Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>
 account_change_pw	section	Account Preferences
 account_change_pw	title	Change Password
+account_change_pw	old_password_incorrect	Old password is incorrect
+account_change_pw	not_valid_password	You must supply valid password (at least 6 chars)
+account_change_pw	passwords_dont_match	New passwords do not match.
+account_change_pw_changed	title	Successfully Changed Password
+account_change_pw_changed	return_to	You should now $1 Return to UserPrefs $2.
+account_change_pw	old_password	Old Password
+account_change_pw	new_password	New Password (at least 6 chars)
+account_change_pw	new_password_repeat	New Password (repeat)
+account_change_pw	update	Update password
 account_editsshkeys	section	Account Preferences
 account_editsshkeys	title	Edit CVS/SSH Shared Keys
 account_first	about_blurb	<p>You are now a registered user on $1, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in $1, sign on as a project developer, or even start your own project.</p><p>You should take some time to read through the <a href="/docs/site/"><b>Site Documentation</b></a> so that you may take full advantage of $1.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve $1.</p><p>--the $1 staff.</p>
-account_first	title	Welcome!
+account_first	title	Welcome to $1
 account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
 account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
 account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
@@ -52,6 +68,8 @@ account_lostpw	title	Lost Your Password?
 account_lostpw	notify	<p>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.</p><p><a href="/">[ Home ]</a></p>
 account_lostpw	warn	<p>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.</p><p>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.</p>
 account_lostpw	sendhash	Send Lost PW Hash
+account_lostpw	invalid_user	Invalid user
+account_lostpw	user_dont_exist	That user does not exist.
 account_lostlogin	title	Lost Password Confirmation
 account_lostlogin	severalconfirm	This confirm hash exists more than once.
 account_lostlogin	invalidconfirm	Invalid confirmation hash
