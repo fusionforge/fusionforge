@@ -49,6 +49,7 @@ if ($submit) {
 site_user_header(array('title'=>"Account Maintenance",'pagename'=>'account'));
 
 echo '<FORM action="'.$PHP_SELF.'" method="post">';
+
 echo $HTML->boxTop("Account Maintenance: " . $u->getUnixName()); ?>
 
 <p>Welcome, <b><?php print $u->getUnixName(); ?></b>. 
@@ -58,7 +59,7 @@ to view your developer/consultant profiles and ratings.
 <UL>
 <LI><A href="/users/<?php print $u->getUnixName(); ?>/"><B>View My Developer Profile</B></A>
 <LI><A HREF="/people/editprofile.php"><B>Edit My Skills Profile</B></A>
-<LI><A HREF="/themes/"><B>Change My Theme</B></A>
+<!-- <LI><A HREF="/themes/"><B>Change My Theme</B></A> -->
 </UL>
 <?php echo $HTML->boxBottom(); ?>
 
