@@ -5,9 +5,11 @@ gforge (3.0-1) experimental; urgency=low
   * [Christian] Applied Francisco Gimeno alias kikov supposed corrected patch
   * [Christian] Big renaming from sourceforge to gforge
   * [Christian] gforge-common and gforge-web-apache are now installable
-  * [Christian] Added Jabber related French translation 
+  * [Christian] Added Jabber related French translation
+  * [Christian] Added Jabber stuffs in local.inc.template
+  * [Christian] Added ldap stuffs in gforge-web-apache config and template files 
 
- -- Christian Bayle <bayle@debian.org>  Sat,  7 Dec 2002 00:07:16 +0100
+ -- Christian Bayle <bayle@debian.org>  Sat,  7 Dec 2002 00:31:34 +0100
 
 sourceforge (gforge-1) experimental; urgency=low
 
