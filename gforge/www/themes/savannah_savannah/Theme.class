@@ -157,7 +157,7 @@ class Theme extends Layout {
 	// NOW we stop to use favico.ico read http://bugzilla.mozilla.org/show_bug.cgi?id=110296
 	?>
     <link rel="stylesheet" type="text/css" href="/themes/savannah_savannah/debiansf.css">
-    <link rel="icon" type="image/png" href="/images/icon.png">
+    <link rel="icon" type="image/png" href="/images/debian-sf-icon.png">
 <?php
 	}
 
