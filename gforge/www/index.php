@@ -86,15 +86,16 @@ echo $HTML->box1_bottom();
 
 </TD>
 
-<?php
+<TD width="35%" VALIGN="TOP">
 
-echo '<TD width="35%" VALIGN="TOP">';
+<?php
 
 echo cache_display('show_features_boxes','show_features_boxes()',3600);
 
 ?>
 
-</TD></TR></TABLE>
+</TD></TR>
+</TABLE>
 
 <?php
 
