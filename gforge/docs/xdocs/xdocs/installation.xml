@@ -72,6 +72,7 @@ bzip2 -dc gforge-3.0pre8.tar.bz2 | tar xvf -
 
 </li>
 <li>Now there's a directory /var/www/gforge-3.0pre8</li>
+<li>Rename this directory to /var/www/gforge-3.0/ - <code>mv /var/www/gforge3.0pre8/ /var/www/gforge-3.0</code></li>
 </ol>
 
 </p>
@@ -214,8 +215,8 @@ AcceptPathInfo on
 </subsection>
 <subsection name="Configuring the database">
 <ol>
-<li>Configuring Postgres
-<p>Check if your postgres accept connections on TCP-IP sockets. On RedHat 8.0, this is by default disabled.  To verify this, type the following command:
+<li>Configuring PostgreSQL
+<p>Check if your postgres accept connections on TCP/IP sockets. On RedHat 8.0, this is by default disabled.  To verify this, type the following command:
 <br/>
 <code>
 psql -h localhost template1
@@ -245,9 +246,9 @@ add the -i option to the pg_ctl command so that the result is:
  su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
 </code>
 <p/>
-On some systems, postgres is configured with the ident clause, allowing you only to access to the database if the username/password of you unix box is identical to the database username/password.
+On some systems, PostgreSQL is configured with the ident clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.
 
-You should either create a user called gforge on your unix box or disable this feature:
+You should either create a user called gforge on your server or disable this feature:
 <br/>
 <code>
 su - postgres<br/>
@@ -263,16 +264,15 @@ host all 127.0.0.1 255.255.255.255 crypt
 </code>
 
 <p/>
-and comment all other directives.
-
+and comment out all other directives.
 </p>
 <br/>
-Restart now the postgresql server as root user:
+Restart the PostgreSQL server as root user:
 <br/>
 <code>/etc/init.d/postgresql restart</code>
 <br/>
 
-Create now the database user:
+Create the database user:
 <br/>
 <code>
 su - postgres<br/>
@@ -289,7 +289,7 @@ Shall the new user be allowed to create more new users? (y/n) n<br/>
 and insert a password for the user to be created.
 
 <p/>
-Create now the database using the command:<br/>
+Create the database using the command:<br/>
 <code>
 createdb -U gforge gforge<br/>
 </code>
@@ -297,7 +297,6 @@ createdb -U gforge gforge<br/>
 <p/>
 
 </li>
-
 
 <li>Installing the database
 
@@ -315,7 +314,6 @@ psql -U gforge -d gforge &lt; gforge3.sql
 <br/>
 </li>
 </ol>
-
 
 <b>Mandrake 9 installation notes (thanks to Francois Elie)</b>
 
@@ -441,7 +439,7 @@ Change the value of the $sys_upload_dir to:
 </li>
 <li>
 Change the value of the $sys_urlroot to:<br/>
-<code>$sys_urlroot="/var/www/gforge3/www";</code>
+<code>$sys_urlroot="/var/www/gforge-3.0/www";</code>
 <br/>
 </li>
 
