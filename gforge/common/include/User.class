@@ -1167,6 +1167,11 @@ class User extends Error {
 		return !$this->data_array['block_ratings'];
 	}
 
+	/**
+	 *  getPlugins -  get a list of all available user plugins
+	 *
+	 *  @return array array containing plugin_id => plugin_name
+	 */
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
@@ -1185,6 +1190,12 @@ class User extends Error {
 		return $this->plugins_data ;
 	}
 
+	/**
+	 *  usesPlugin - returns true if the user uses a particular plugin 
+	 *
+	 *  @param	string	name of the plugin
+	 *  @return	boolean	whether plugin is being used or not
+	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins() ;
 		foreach ($plugins_data as $p_name) {
@@ -1195,6 +1206,13 @@ class User extends Error {
 		return false ;
 	}
 
+	/**
+	 *  setPluginUse - enables/disables plugins for the user
+	 *
+	 *  @param	string	name of the plugin
+	 *  @param	boolean	the new state
+	 *  @return	string	database result
+	 */
 	function setPluginUse($pluginname, $val=true) {
 		if ($val == $this->usesPlugin($pluginname)) {
 			// State is already good, returning
