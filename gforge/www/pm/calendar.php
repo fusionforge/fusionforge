@@ -93,24 +93,24 @@ function display_month($m, $y) {
 	$m = $date['mon'];
 	$y = $date['year'];
 ?>
-	<TABLE ALIGN="CENTER" CELLPADDING=1 CELLSPACING=1 BORDER=1 WIDTH=100%>
-		<TR>
-			<TH COLSPAN=7><?php echo $Language->getText("calendar", $months[$m]) . " $y"; ?></TH>
-		</TR>
-		<TR>
+	<table align="center" cellpadding="1" cellspacing="1" border="1" width="100%">
+		<tr>
+			<th colspan="7"><?php echo $Language->getText("calendar", $months[$m]) . " $y"; ?></th>
+		</tr>
+		<tr>
 <?php
 	reset($dow);
 	while (list ($key, $val) = each ($dow)) {
-		print "\t\t\t<TH WIDTH=14%>" . $Language->getText("calendar", $val) . "</TH>\n";
+		print "\t\t\t<th width=\"14%\">" . $Language->getText("calendar", $val) . "</th>\n";
 	}
 ?>
-		</TR>
+		</tr>
 <?php
 	$curr_dow = 0;
 	$curr_date = 1;
-	print "\t\t<TR>\n";
+	print "\t\t<tr>\n";
 	while ($curr_dow != $first_dow) {
-		print "\t\t\t<TD></TD>\n";
+		print "\t\t\t<td></td>\n";
 		$curr_dow++;
 	}
 	while ($curr_date <= $days_in_month) {
@@ -120,105 +120,109 @@ function display_month($m, $y) {
 				if ($curr_date == $today['mday']
 				    && $y == $today['year']
 				    && $m == $today['mon']) {
-					$colour = " BGCOLOR=\"RED\"";
+					$colour = " bgcolor=\"red\"";
 				} elseif ($curr_date == $day
 					  && $y == $year
 					  && $m == $month) {
-					$colour = " BGCOLOR=\"GRAY\"";
+					$colour = " bgcolor=\"gray\"";
 				}
-				print "\t\t\t<TD" . $colour . ">$curr_date<BR><BR><BR></TD>\n";
+				print "\t\t\t<td" . $colour . ">$curr_date<br /><br /><br /></td>\n";
 			} else {
-				print "\t\t\t<TD></TD>\n";
+				print "\t\t\t<td></td>\n";
 			}
 			$curr_dow++;
 			$curr_date++;
 		}
-		print "\t\t</TR>\n";
+		print "\t\t</tr>\n";
+		if ($curr_date <= $days_in_month) {
+			print "\t\t<tr>\n";
+		}
 		$curr_dow = 0;
 	}
 ?>
 
-	</TABLE>
+	</table>
 
 <?php
 }
 
 ?>
-	<FORM ACTION="/pm/calendar.php" METHOD="GET">
-	<TABLE WIDTH=100%>
-		<TR>
-			<TD><?php echo $Language->getText("calendar", "view"); ?><BR>
-				<SELECT NAME="type">
+	<form action="/pm/calendar.php" method="get">
+	<table width="100%">
+		<tr>
+			<td><?php echo $Language->getText("calendar", "view"); ?><br />
+				<select name="type">
 <?php
 	print '
-				<OPTION VALUE="onemonth"' . ($type == 'onemonth' ? ' SELECTED' : '') . '>'. $Language->getText("calendar", "onemonth") . '</OPTION>';
+				<option value="onemonth"' . ($type == 'onemonth' ? ' selected="selected"' : '') . '>'. $Language->getText("calendar", "onemonth") . '</option>';
 	print '
-				<OPTION VALUE="threemonth"' . ($type == 'threemonth' ? ' SELECTED' : '') . '>'. $Language->getText("calendar", "threemonth") . '</OPTION>';
+				<option value="threemonth"' . ($type == 'threemonth' ? ' selected="selected"' : '') . '>'. $Language->getText("calendar", "threemonth") . '</option>';
 	print '
-				<OPTION VALUE="currentyear"' . ($type == 'currentyear' ? ' SELECTED' : '') . '>' . $Language->getText("calendar", "currentyear") . '</OPTION>';
+				<option value="currentyear"' . ($type == 'currentyear' ? ' selected="selected"' : '') . '>' . $Language->getText("calendar", "currentyear") . '</option>';
 	print '
-				<OPTION VALUE="comingyear"' . ($type == 'comingyear' ? ' SELECTED' : '') . '>' . $Language->getText("calendar", "comingyear") . '</OPTION>';
+				<option value="comingyear"' . ($type == 'comingyear' ? ' selected="selected"' : '') . '>' . $Language->getText("calendar", "comingyear") . '</option>';
 ?>
-				</SELECT>
-			</TD>
-			<TD><?php echo $Language->getText("calendar", "fordate"); ?><BR>
-				<SELECT NAME="year">
+				</select>
+			</td>
+			<td><?php echo $Language->getText("calendar", "fordate"); ?><br />
+				<select name="year">
 <?php
 
 	for ($i = 1990; $i < 2020; $i++) {
-		print "\t\t\t\t<OPTION VALUE=\"$i\"" . ($year == $i ? ' SELECTED' : '') . ">$i</OPTION>\n";
+		print "\t\t\t\t<option value=\"$i\"" . ($year == $i ? ' selected="selected"' : '') . ">$i</option>\n";
 	}
 ?>
-				</SELECT>
-				<SELECT NAME="month">
+				</select>
+				<select name="month">
 <?php
 	for ($i = 1; $i <= 12; $i++) {
-		print "\t\t\t\t<OPTION VALUE=\"$i\"" . ($month == $i ? ' SELECTED' : '') . ">" . $Language->getText("calendar", $months[$i]) . "</OPTION>\n";
+		print "\t\t\t\t<option value=\"$i\"" . ($month == $i ? ' selected="selected"' : '') . ">" . $Language->getText("calendar", $months[$i]) . "</option>\n";
 	}
 ?>
-				</SELECT>
-				<SELECT NAME="day">
+				</select>
+				<select name="day">
 <?php
 	for ($i = 1; $i <= 31; $i++) {
-		print "\t\t\t\t<OPTION VALUE=\"$i\"" . ($day == $i ? ' SELECTED' : '') . ">$i</OPTION>\n";
+		print "\t\t\t\t<option value=\"$i\"" . ($day == $i ? ' selected="selected"' : '') . ">$i</option>\n";
 	}
 ?>
-				</SELECT>
-			</TD>
-			<TD>
-				<INPUT TYPE="submit" VALUE="<?php echo $Language->getText("calendar", "update") ?>">
-			</TD>
-		</TR>
-	</TABLE>
-	<TABLE WIDTH=100%>
-		<TR>
-			<TD WIDTH=20px BGCOLOR="RED"></TD>
-			<TD><?php echo $Language->getText("calendar", "todaysdate") ?></TD>
-		</TR>
-		<TR>
-			<TD WIDTH=20px BGCOLOR="GRAY"</TD>
-			<TD><?php echo $Language->getText("calendar", "selecteddate") ?></TD>
-		</TR>
-	</TABLE>
+				</select>
+			</td>
+			<td>
+				<input type="submit" value="<?php echo $Language->getText("calendar", "update") ?>" />
+			</td>
+		</tr>
+	</table>
+	</form>
+	<table width="100%">
+		<tr>
+			<td width="20px" bgcolor="red"></td>
+			<td><?php echo $Language->getText("calendar", "todaysdate") ?></td>
+		</tr>
+		<tr>
+			<td width="20px" bgcolor="gray"></td>
+			<td><?php echo $Language->getText("calendar", "selecteddate") ?></td>
+		</tr>
+	</table>
 <?php
 
 if ($type == 'onemonth') {
 	display_month($month, $year);
 } elseif ($type == 'threemonth') {
 	display_month($month - 1, $year);
-	print "\t<BR>\n\n";
+	print "\t<br />\n\n";
 	display_month($month, $year);
-	print "\t<BR>\n\n";
+	print "\t<br />\n\n";
 	display_month($month + 1, $year);
 } elseif ($type == 'currentyear') {
 	for ($i = 1; $i <= 12; $i++) {
 		display_month($i, $year);
-		print "\t<BR>\n\n";
+		print "\t<br />\n\n";
 	}
 } elseif ($type == 'comingyear') {
 	for ($i = 0; $i < 12; $i++) {
 		display_month($month + $i, $year);
-		print "\t<BR>\n\n";
+		print "\t<br />\n\n";
 	}
 }
 
