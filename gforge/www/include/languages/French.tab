@@ -954,7 +954,7 @@ group	long_mail	Listes de diffusion
 group	long_news	Dernières annonces
 group	long_patch	Gestionnaire de corrections
 group	long_pm	Gestion des tâches
-group	long_scm	Référentiel SCM
+group	long_scm	Gestion de sources
 group	long_support	Support technique
 group	long_survey	Sondages
 group	long_tracker	Outils de suivi
@@ -975,7 +975,7 @@ group	short_memberlist	Développeurs
 group	short_news	Annonces
 group	short_patch	Patchs
 group	short_pm	Tâches
-group	short_scm	SCM
+group	short_scm	Sources
 group	short_summary	En bref
 group	short_support	Support
 group	short_survey	Sondages
@@ -1618,7 +1618,7 @@ project_admin_editgroupinfo	use_ftp	FTP
 project_admin_editgroupinfo	use_mailing_lists	Listes de diffusion
 project_admin_editgroupinfo	use_news	News
 project_admin_editgroupinfo	use_pm	Gestionnaire de tâches
-project_admin_editgroupinfo	use_scm	SCM
+project_admin_editgroupinfo	use_scm	Gestion de sources
 project_admin_editgroupinfo	use_stats	Statistiques
 project_admin_editgroupinfo	use_surveys	Sondages
 project_admin_editgroupinfo	use_tracker	Suivi
@@ -1920,8 +1920,8 @@ rbac_edit	projectpublicnote	Remarque : si le projet entier est défini comme pri
 rbac_edit	remove	Enlever
 rbac_edit	role	Rôle
 rbac_edit	rolename	Nom du rôle
-rbac_edit	scm	SCM - Référentiel de code source
-rbac_edit	scmpublic	Privilèges sur le SCM
+rbac_edit	scm	Gestion de sources
+rbac_edit	scmpublic	Privilèges sur les sources
 rbac_edit	title1	Section
 rbac_edit	title2	Sous-section
 rbac_edit	title3	Paramètrage
@@ -2127,9 +2127,9 @@ scm_index	error_this_project_has_turned_off	Erreur : ce projet a désactivé son
 scm_index	history	Historique du dépôt
 scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
-scm_index	scm_repository	dépôt SCM
+scm_index	scm_repository	dépôt de sources
 scm_index	section	Projet : $1
-scm_index	title	SCM
+scm_index	title	Sources
 search	artifact_author	Soumis par
 search	artifact_date	Date
 search	artifact_id	#
