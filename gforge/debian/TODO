@@ -9,7 +9,9 @@ here have been transferred onto the Savannah project, at
   wait for smooth DB upgrade.  [RM] Even though, most of the
   documentation is VA-centric and should not be used as is.
 
-* [CB] ViewCVS instead of CVSWEB?
+* [CB] ViewCVS instead of CVSWEB?  [RM] Chora might be even better,
+  since it's in PHP and could be more easily hacked to include
+  permission checking.
 
 * [CB] When a project is private, cvsweb access should be too, this means
   implementing access control a la sourceforge in perl for CVSWEB or python 
@@ -28,10 +30,10 @@ here have been transferred onto the Savannah project, at
   released file afterwards.  Maybe.  [RM] Already supposed to work
   (edit releases), needs testing.
 
-* [RM] Modify /project/admin/userpermedit.php so that it displays what
-  user is edited.
-
 * [RM] Browse through everything and find out things to add here.
+
+* [RM] Get the Unix status to be updated (as seems to be the normal
+  case, cf. footnote 2 in /admin/useredit.php).
 
 # Local variables:
 # mode: indented-text

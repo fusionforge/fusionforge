@@ -199,6 +199,13 @@ if ($submit || $form_unix_name) {
 
 project_admin_header(array('title'=>'Project Developer Permissions','group'=>$group_id,'pagename'=>'project_admin_userpermedit','sectionvals'=>array(group_getname($group_id))));
 
+$u =& user_get_object($user_id);
+if ($u && is_object($u)){
+	print "You are editing permissions for user " . $u->getUnixName()
+		. " (" . $u->getRealName() . ").</p>
+<p>" ;
+}
+
 // Show description of roles/permissions
 echo permissions_blurb();
 
