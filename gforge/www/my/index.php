@@ -73,7 +73,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'assigneditems'));
 	$artifactsForUser = new ArtifactsForUser(session_get_user());
-	$assignedArtifacts = $artifactsForUser->getAssignedArtifactsByGroup();
+	$assignedArtifacts =& $artifactsForUser->getAssignedArtifactsByGroup();
 	if (count($assignedArtifacts) > 0) {
 		foreach($assignedArtifacts as $art) {
 			echo '</td></tr>';
@@ -88,12 +88,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
+			<td width="10%">'.$art->getID().'</td>
 			<td><a href="/tracker/?func=detail&amp;aid='.
 			$art->getID().
 			'&amp;group_id='.$art->ArtifactType->Group->getID().
-			'&amp;atid='.$art->ArtifactType->getID().'">'.
-			$art->getID().'</td>
-			<td>' . $art->getSummary();
+			'&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() . '</a>';
 
 			$last_group = $art->ArtifactType->getID();
 		}
@@ -104,7 +103,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 	$last_group="0";
 	echo $HTML->boxMiddle($Language->getText('my', 'submitteditems'),false,false);
-	$submittedArtifacts = $artifactsForUser->getSubmittedArtifactsByGroup();
+	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
 		foreach ($submittedArtifacts as $art) {
 			echo '</td></tr>';
@@ -118,7 +117,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
-			<td>'.$art->getID().'</td>
+			<td width="10%">'.$art->getID().'</td>
 			<td><a href="/tracker/?func=detail&amp;aid='.
       $art->getID().
       '&amp;group_id='.$art->ArtifactType->Group->getID().
@@ -238,12 +237,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color($task->getPriority()).'">
+			<td width="10%">'.$task->getID().'</td>
 			<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
 			$task->getID().
 			'&amp;group_id='.$group->getID().
-			'&amp;group_project_id='.$projectGroup->getID().'">'.
-			$task->getID().'</td>
-			<td>'.$style_begin.$task->getSummary().$style_end;
+			'&amp;group_project_id='.$projectGroup->getID().'">'.$style_begin.$task->getSummary().$style_end.'</a>';
 
 			$last_group = $projectGroup->getID();
 		}

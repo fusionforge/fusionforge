@@ -52,7 +52,7 @@ class ArtifactsForUser extends Error {
 	*	@param	sql	The sql that returns artifact_id
 	*	@return	Artifact[]	The array of Artifacts
 	*/
-	function getArtifactsFromSQL($sql) {
+	function & getArtifactsFromSQL($sql) {
 		$artifacts = array();
 		$result=db_query($sql);
 		$rows=db_numrows($result);
@@ -77,7 +77,7 @@ class ArtifactsForUser extends Error {
 	*	getAssignedArtifacts	- Get the users's assigned artifacts
 	*	@return	Artifact[]	The array of Artifacts
 	*/
-	function getAssignedArtifactsByGroup() {
+	function & getAssignedArtifactsByGroup() {
 		$sql="SELECT * FROM artifact_vw av WHERE av.assigned_to=".$this->User->getID()."
 			AND av.status_id='1' ORDER BY av.group_artifact_id, av.artifact_id DESC";
 		return $this->getArtifactsFromSQL($sql);
@@ -88,7 +88,7 @@ class ArtifactsForUser extends Error {
 	*
 	*	@return Artifact[] The array of Artifacts
 	*/
-	function getSubmittedArtifactsByGroup() {
+	function & getSubmittedArtifactsByGroup() {
 		$sql="SELECT *
 			FROM artifact_vw av
 			WHERE av.submitted_by=".$this->User->getID()."
