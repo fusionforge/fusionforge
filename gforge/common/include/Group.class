@@ -1004,6 +1004,17 @@ class Group extends Error {
 		return permission_get_object(&$this, &$_user);
 	}
 
+
+	/**
+	 *	userIsAdmin() - Return if for this Group the User is admin
+	 *
+	 *	@return bool
+	 */
+	function userIsAdmin() {
+		$perm =& $this->getPermission( session_get_user() );
+		return $perm->isAdmin();
+	}
+
 	/*
 
 

@@ -96,7 +96,7 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     www/include/Layout.class.
   * [Mathieu] Removed 'Edit' and '?' links for root trove category in the
     trove map.
-  * [Christian] you can now have a customized pre.php in 
+  * [Christian] you can now have a customized pre.php in
     /etc/sourceforge/custom/pre.php
   * [Roland] Changed the authentication system: the authoritative password
     field is now unix_pw, even for authenticating web sessions.  We keep
@@ -106,8 +106,13 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     systems (for instance, if you want to inject some existing accounts
     into the database...).
   * [Roland] A little i18n in the user's homepage.
+  * [Christian] added James Michael DuPont proposed files from
+    http://introspector.sourceforge.net/sfexport.tgz . This means 2 files:
+    bug_dump.php and patch_dump.php
+  * [Christian] Added the supposed userIsAdmin() function in Group class
+    used in bug_dump.php and patch_dump.php
 
- -- Roland Mas <lolando@debian.org>  Fri,  8 Nov 2002 21:40:02 +0100
+ -- Christian Bayle <bayle@debian.org>  Sat,  9 Nov 2002 22:03:41 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
