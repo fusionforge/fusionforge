@@ -205,7 +205,7 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row' defaults to none
  */
-function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none', $pos_100='top') {
+function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none') {
 	global $Language;
 	if ($text_100=='none'){
 		$text_100=$Language->getText('include_html','none');
@@ -214,7 +214,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		<select name="'.$select_name.'">';
 
 	//we don't always want the default 100 row shown
-	if ($show_100 && $pos_100=='top') {
+	if ($show_100) {
 		$return .= '
 		<option value="100">'. $text_100 .'</option>';
 	}
@@ -245,11 +245,6 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		$return .= '
 		<option value="'.$checked_val.'" selected="selected">'.$Language->getText('include_html','no_change').'</option>';
 	}
-	if ($show_100 && $pos_100=='bottom') {
-		$return .= '
-		<option value="100">'. $text_100 .'</option>';
-	}
-
 
 	$return .= '
 		</select>';
