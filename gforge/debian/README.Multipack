@@ -1,0 +1,23 @@
+Here is a simple dependency graph
+
+
+sourceforge-common +
+                   |
+                   +- sourceforge-web-apache | sourceforge-web 
+                   |
+                   +- sourceforge-db-postgresql | sourceforge-db 
+                   |
+                   +- sourceforge-mta-exim | sourceforge-mta 
+                   |
+                   +- sourceforge-dns-bind9 | sourceforge-dns 
+                   |
+                   +- sourceforge-lists-mailman | sourceforge-lists 
+                   |
+                   +- sourceforge-ldap-openldap | sourceforge-ldap +
+                                                                   |
+                                                                   +- sourceforge-shell-ldap | sourceforge-shell 
+                                                                   |
+                                                                   +- sourceforge-cvs 
+                                                                   |
+                                                                   +- sourceforge-ftp-proftpd | sourceforge-ftp 
+
