@@ -128,9 +128,6 @@ case "$1" in
 	# echo "Purging /etc/nss-pgsql.conf"
 	purge_libnss_pgsql
 	;;
-    purge)
-	$0 empty
-	;;
     test|check)
 	setup_vars
 	show_vars
@@ -146,14 +143,13 @@ case "$1" in
 	;;
     cleanup)
 	$0 purge-files
-	$0 purge
 	cp /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-old
 	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
 	mv /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
 	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
 	;;
     *)
-	echo "Usage: $0 {configure|configure-files|purge|purge-files|test|setup|cleanup}"
+	echo "Usage: $0 {configure|configure-files|purge-files|test|setup|cleanup}"
 	exit 1
 	;;
 esac

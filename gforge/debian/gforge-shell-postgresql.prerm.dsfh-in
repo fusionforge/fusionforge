@@ -29,10 +29,6 @@ case "$1" in
 
 	# Clean debconf after ourselves
 	db_stop
-
-        # LDAP config removal
-	/usr/lib/gforge/bin/install-nsspgsql.sh purge
-	;;
     upgrade|deconfigure|failed-upgrade)
         ;;
     *)
