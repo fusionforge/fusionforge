@@ -96,7 +96,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	<tr>
 		<td colspan="2">
 		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" />
-		<a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a><br />
+		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
 		<p>
 		<input type="file" name="input_file" size="30" /></p>
 		<p>
