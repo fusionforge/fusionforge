@@ -1,3 +1,19 @@
+2003-02-13  Reinhard Spisser <reinhard@spisser.it>
+	
+	* www/tracker/browse.php:
+	i18n of some missing strings, added category_any,
+	status_any and group_any strings
+
+	* www/tracker/add.php, www/tracker/detail.php,
+	www/tracker/admin.php,
+	www/pm/add_task.php, www/pm/browse_task.php,
+	www/pm/ganttpage.php,
+	www/include/languages/Base.tab:
+	i18n of some missing strings
+
+	* www/include/languages/Italian.tab:
+	l10n of new strings
+	
 2003-02-12  Reinhard Spisser <reinhard@spisser.it>
 
 	* common/forum/Forum.class:
