@@ -465,6 +465,28 @@ should contain the domain of your server, e.g. gforge.org.
 
 </subsection>
 </section>
+
+<subsection name="Setting up GNU Mailman">
+<p>GNU Mailman is used to help manage the GForge mailing lists.  To install it:</p>
+<ul>
+<li>Install the 2.0.13 RPM (TODO add compilation instructions)</li>
+<li>su to root and set the mailman password</li>
+<li>Add the following to the httpd.conf
+<br/>
+<code>
+Alias /pipermail/ /usr/local/mailman/archives/public/
+<br/>
+ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
+</code>
+</li>
+<li>Run the script <code>gforge/cronjobs/mailing_lists_create.php</code>; this creates any lists that are already in the database.</li>
+</ul>
+</subsection>
+
+<subsection name="Setting up CVS">
+<p>TODO</p>
+</subsection>
+
 <section name="Verifying the installation">
 <p>
 To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an error:
@@ -508,7 +530,7 @@ insert into user_group (user_id,group_id,admin_flags) values (102,1,'A');
 </li>
 </ol>
 </p>
-
 </section>
+
   </body>
 </document>
