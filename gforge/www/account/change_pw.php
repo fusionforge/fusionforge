@@ -1,83 +1,76 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Change user's password
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
-require "account.php";
+require_once('pre.php');
+require_once('common/include/account.php');
 
-// ###### function register_valid()
-// ###### checks for valid register from form post
+session_require(array('isloggedin'=>1));
+$u =& user_get_object(user_getid());
+exit_assert_object($u, 'User');
 
-function register_valid()	{
+if ($submit) {
 
-	if (!$GLOBALS["Update"]) {
-		return 0;
+	if ($u->getMD5Passwd() != md5($old_passwd)) {
+		exit_error(
+			'Error',
+			'Old password is incorrect.'
+		);
 	}
 	
-	// check against old pw
-	$res=db_query("SELECT user_pw, status FROM users WHERE user_id=" . user_getid());
-	$row_pw = db_fetch_array($res);
-	if ($row_pw[user_pw] != md5($GLOBALS[form_oldpw])) {
-		$GLOBALS[register_error] = "Old password is incorrect.";
-		return 0;
-	}
-
-	if ($row_pw[status] != 'A') {
-		$GLOBALS[register_error] = "Account must be active to change password.";
-		return 0;
-	}
-
-	if (!$GLOBALS[form_pw]) {
-		$GLOBALS[register_error] = "You must supply a password.";
-		return 0;
-	}
-	if ($GLOBALS[form_pw] != $GLOBALS[form_pw2]) {
-		$GLOBALS[register_error] = "Passwords do not match.";
-		return 0;
-	}
-	if (!account_pwvalid($GLOBALS[form_pw])) {
-		return 0;
+	if (strlen($passwd)<6) {
+		exit_error(
+			'Error',
+			'You must supply valid password (at least 6 chars).'
+		);
 	}
 	
-	// if we got this far, it must be good
-        $user=&user_get_object(user_getid());
-        if (!$user->setPasswd($GLOBALS['form_pw'])) {
-                $GLOBALS['register_error'] = $user->getErrorMessage();
-                return 0;
+	if ($passwd != $passwd2) {
+		exit_error(
+			'Error',
+			'New passwords do not match.'
+		);
+	}
+
+        if (!$u->setPasswd($passwd)) {
+		exit_error(
+			'Error',
+			'Could not change password: '.$u->getErrorMessage()
+		);
         }
-        return 1;
-}
 
-// ###### first check for valid login, if so, congratulate
-
-if (register_valid()) {
-	site_user_header(array(title=>"Successfully Changed Password"));
+	site_user_header(array(title=>"Successfully Changed Password",'pagename'=>'account_change_pw'));
 	?>
-	<p><b>SourceForge Change Confirmation</b>
+
+	<?php echo $Language->getText('account_change_pw', 'confirmation'); ?>
+
 	<p>
-	Congratulations. You have changed your password.
-	This change is immediate on the web site, but will not take
-	effect on your shell/cvs account until the next cron update,
-	which will happen within the next 6 hours.
-	<p>You should now <a href="/account/">Return to UserPrefs</a>.
+	You should now <a href="/account/">Return to UserPrefs</a>.
+	</p>
+	
 	<?php
-} else { // not valid registration, or first time to page
-	site_user_header(array(title=>"Change Password"));
+} else { 
+	// Show change form
+	site_user_header(array(title=>"Change Password",'pagename'=>'account_change_pw'));
 	?>
-	<p><b>SourceForge Password Change</b>
-	<?php if ($register_error) print "<p>$register_error"; ?>
-	<form action="change_pw.php" method="post">
+
+	<form action="<?php echo $PHP_SELF; ?>" method="POST">
 	<p>Old Password:
-	<br><input type="password" name="form_oldpw">
-	<p>New Password:
-	<br><input type="password" name="form_pw">
+	<br><input type="password" name="old_passwd">
+	<p>New Password (at least 6 chars):
+	<br><input type="password" name="passwd">
 	<p>New Password (repeat):
-	<br><input type="password" name="form_pw2">
-	<p><input type="submit" name="Update" value="Update">
+	<br><input type="password" name="passwd2">
+	<p><input type="submit" name="submit" value="Update">
 	</form>
 	<?php
 }

@@ -1,16 +1,27 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge login page
+  *
+  * This is main SF login page. It takes care of different account states
+  * (by disallowing logging in with non-active account, with appropriate
+  * notice).
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
 Header( "Cache-Control: no-cache"); 
 Header( "Cache-Control: must-revalidate"); 
 
-require ('pre.php');
+require_once('pre.php');
+
+$CACHE_TIME = -1;
 
 /*
 
@@ -35,8 +46,17 @@ if ($login) {
 			$ssl_='';
 		}
 		if ($return_to) {
-			header ("Location: http".$ssl_."://". $HTTP_HOST . $return_to);
-			exit;
+
+			// check for external redirection 
+			//
+			if (substr($return_to, 0, 4) == "http") {
+				header ("Location: " . $return_to);
+				exit;
+			} else {
+				header ("Location: http".$ssl_."://". $HTTP_HOST . $return_to);
+				exit;
+			}
+
 		} else {
 			header ("Location: http".$ssl_."://". $HTTP_HOST ."/my/");
 			exit;
@@ -46,38 +66,26 @@ if ($login) {
 
 if ($session_hash) {
 	//nuke their old session
-	session_cookie('session_hash','');
-	db_query("DELETE FROM session WHERE session_hash='$session_hash'");
+	session_logout();
 }
 
 //echo "\n\n$session_hash";
 //echo "\n\nlogged in: ".user_isloggedin();
 
-$HTML->header(array('title'=>'Login'));
+$HTML->header(array('title'=>'Login','pagename'=>'account_login'));
 
 if ($login && !$success) {
 		
 	if ($feedback == "Account Pending") {
 
-		?>
-		<P><B>Pending Account</B>
+		echo $Language->getText('account_login', 'pending_account', array($form_loginname));
 
-		<P>Your account is currently pending your email confirmation.
-		Visiting the link sent to you in this email will activate your account.
-
-		<P>If you need this email resent, please click below and a confirmation
-		email will be sent to the email address you provided in registration.
-
-		<P><A href="pending-resend.php?form_user=<?php print $form_loginname; ?>">[Resend Confirmation Email]</A>
-
-		<br><hr>
-		<p>
-
-
-		<?php
 	} else {
 		
 		echo '<h2><FONT COLOR="RED">'. $feedback .'</FONT></H2>';
+		if (stristr($feedback, "deleted")) {
+			echo $Language->getText('account_login', 'deleted_account');
+		}
 	} //end else
 
 }
@@ -95,8 +103,6 @@ if (browser_is_ie() && browser_is_mac()) {
 
 ?>
 	
-<p>
-<b>SourceForge Site Login</b>
 <p>
 <font color="red"><B>Cookies must be enabled past this point.</B></font>
 <P>

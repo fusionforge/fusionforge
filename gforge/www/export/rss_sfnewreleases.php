@@ -1,7 +1,20 @@
 <?php
-// ## export sf front page news in RSS
-include "pre.php";
-include "rss_utils.inc";
+/**
+  *
+  * SourceForge Exports: Export new releases info in RSS
+  *
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+require_once('pre.php');
+require_once('rss_utils.inc');
+
 header("Content-Type: text/plain");
 print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">
@@ -11,25 +24,23 @@ print '<?xml version="1.0"?>
 if (!$limit) $limit = 10;
 if ($limit > 100) $limit = 100;
 
-$res = db_query("SELECT groups.group_name AS group_name,"
-	. "groups.group_id AS group_id,"
-	. "groups.unix_group_name AS unix_group_name,"
-	. "groups.short_description AS short_description,"
-	. "groups.license AS license,"
-	. "groups.file_downloads AS file_downloads,"
-	. "users.user_name AS user_name,"
-	. "users.user_id AS user_id,"
-	. "filemodule.filemodule_id AS filemodule_id,"
-	. "filemodule.module_name AS module_name,"
-	. "filerelease.release_time AS release_time,"
-	. "filerelease.filename AS filename,"
-	. "filerelease.release_version AS release_version,"
-	. "filerelease.filerelease_id AS filerelease_id "
-	. "FROM users,filerelease,filemodule,groups WHERE "
-	. "filerelease.user_id=users.user_id AND "
-	. "filerelease.group_id=groups.group_id AND "
-	. "filerelease.filemodule_id=filemodule.filemodule_id "
-	. "ORDER BY filerelease.release_time DESC",($limit * 3));
+$res=db_query("SELECT 
+					groups.group_id,
+					groups.group_name,
+					groups.unix_group_name,
+					groups.type,
+					news_bytes.forum_id,
+					news_bytes.summary,
+					news_bytes.date,
+					news_bytes.details 
+				FROM 
+					news_bytes,
+					groups 
+				WHERE 
+					news_bytes.group_id=groups.group_id 
+				ORDER BY 
+					date 
+				DESC",($limit * 3));
 
 
 // ## one time output
@@ -47,8 +58,8 @@ while ($row = db_fetch_array($res)) {
 	if (!$G_RELEASE["$row[group_id]"]) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row[group_name])."</title>\n";
-		print "   <link>http://$GLOBALS[sys_default_domain]/project/filelist.php?group_id=$row[group_id]</link>\n";
-		print "   <description>".rss_description($row[short_description])."</description>\n";
+		print "   <link>http://$GLOBALS[sys_default_domain]/project/showfiles.php?group_id=$row[group_id]</link>\n";
+		print "   <description>".rss_description($row[summary])."</description>\n";
 		print "  </item>\n";
 		$outputtotal++;
 	}

@@ -1,12 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Top-Statistics main page
+  *
+  * This page gives links to pages which show project/users
+  * highest ranked by defferent criteria, like doenloads, rating, etc.
+  * Most of these pages show dynamics of changes also.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
+
+require_once('pre.php');
+
 $HTML->header(array('title'=>'Top Project Listings'));
 ?>
 
@@ -26,6 +37,8 @@ the top ranked projects in several categories.
 Measured by impressions of the SourceForge 'button' logo
 <BR>&nbsp;
 <LI><A href="toplist.php?type=forumposts_week">Top Forum Post Counts</A>
+<BR>&nbsp;
+<LI><A href="topusers.php">Highest Ranked Users</A>
 </UL>
 
 <?php

@@ -1,19 +1,39 @@
 <?php
+/**
+  *
+  * SourceForge Developer's Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('vote_function.php');
+
+require_once('pre.php');
+require_once('vote_function.php');
 
 if (user_isloggedin()) {
 
-	$user=user_getid();
-	if ($rated_user != $user) {
+	$me = session_get_user();
+	if (!$me->usesRatings()) {
+		exit_error(
+			'Ratings turned off',
+			'You chose not to participate in the peer rating system'
+		);
+	}
+
+	$ruser = $me->getID();
+	if ($rated_user != $ruser) {
 		//how many questions can they be rated on?
 		$count=count($USER_RATING_QUESTIONS);
 
 		//now iterate and insert each response
 		for ($i=1; $i<=$count; $i++) {
 			$resp="Q_$i";
-			$rating=$$resp;
+			$rating = $$resp;
 			if ($rating==100) {
 				//unrated on this criteria
 			} else {
@@ -22,15 +42,17 @@ if (user_isloggedin()) {
 					$feedback .= ' ERROR - invalid rating value ';
 				} else {
 					if ($rating) {
+						// get rid of 0.1 thing
+						$rating = (int)$rating;
 						//user did answer this question, so insert into db
 						$res=db_query("SELECT * FROM user_ratings ".
-							"WHERE rated_by='$user' AND user_id='$rated_user' AND rate_field='$i'");
+							"WHERE rated_by='$ruser' AND user_id='$rated_user' AND rate_field='$i'");
 						if ($res && db_numrows($res) > 0) {
 							$res=db_query("DELETE FROM user_ratings ".
-								"WHERE rated_by='$user' AND user_id='$rated_user' AND rate_field='$i'");
+								"WHERE rated_by='$ruser' AND user_id='$rated_user' AND rate_field='$i'");
 						}
 						$res=db_query("INSERT INTO user_ratings (rated_by,user_id,rate_field,rating) ".
-							"VALUES ('$user','$rated_user','$i','$rating')");
+							"VALUES ('$ruser','$rated_user','$i','$rating')");
 						echo db_error();
 					}
 				}

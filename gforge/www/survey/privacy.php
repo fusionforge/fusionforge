@@ -1,14 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('vote_function.php');
-require('../survey/survey_utils.php');
+
+require_once('pre.php');
+require_once('vote_function.php');
+require_once('www/survey/survey_utils.php');
+
 echo $HTML->header(array('title'=>'Survey'));
 
 ?>

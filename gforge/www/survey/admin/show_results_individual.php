@@ -1,15 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require($DOCUMENT_ROOT.'/survey/survey_utils.php');
+
+require_once('pre.php');
+require_once('www/survey/survey_utils.php');
+
 $is_admin_page='y';
-survey_header(array('title'=>'Results'));
+survey_header(array('title'=>'Results','pagename'=>'survey_admin_show_results_individual'));
 
 if (!user_isloggedin() || !user_ismember($group_id,'A')) {
         echo "<H1>Permission Denied</H1>";
@@ -36,7 +43,7 @@ echo "\n<H2>".db_result($result, 0, "survey_title")."</H2><P>";
 */
 
 $questions=db_result($result, 0, "survey_questions");
-
+$questions=str_replace(" ", "", $questions);
 $quest_array=explode(',', $questions);
 
 $count=count($quest_array);
@@ -69,7 +76,7 @@ for ($i=0; $i<$count; $i++) {
 
 	$sql="select questions.question_type,questions.question,questions.question_id,responses.response ".
 		"from questions,responses where questions.question_id='".$quest_array[$i]."' and ".
-		"questions.question_id=responses.question_id and responses.customer_id=$customer_id AND responses.survey_id=$survey_id";
+		"questions.question_id=responses.question_id and responses.customer_id='$customer_id' AND responses.survey_id='$survey_id'";
 
 	$result=db_query($sql);
 
@@ -79,7 +86,7 @@ for ($i=0; $i<$count; $i++) {
 */
 	if (!$result || db_numrows($result) < 1) {
 
-		#$result=db_query("select * from responses where question_id='".$quest_array[$i]."' and survey_id=$survey_id AND customer_id=$customer_id");
+		#$result=db_query("select * from responses where question_id='".$quest_array[$i]."' and survey_id='$survey_id' AND customer_id='$customer_id'");
 
 		#echo "\n\n<!-- falling back 1 -->";
 	

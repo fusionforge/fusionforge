@@ -1,15 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-pm_header(array('title'=>'Add a New Task'));
+pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_project_id'=>$group_project_id));
 
 ?>
-<H2>Add A Task To <?php echo  pm_data_get_group_name($group_project_id); ?></H2>
 
 <FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="func" VALUE="postaddtask">

@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
+
+require_once('squal_pre.php');
 
 $sql="SELECT * FROM snippet_version WHERE snippet_version_id='$id'";
 $result=db_query($sql);

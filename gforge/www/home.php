@@ -1,10 +1,15 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: home.php,v 1.5 2000/08/06 21:41:06 tperdue Exp $
+/**
+  *
+  * Deprecated Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: home.php,v 1.6 2001/05/22 21:39:30 pfalcon Exp $
+  *
+  */
 
 $expl_pathinfo = explode('/',$PATH_INFO);
 

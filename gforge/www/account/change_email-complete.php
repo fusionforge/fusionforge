@@ -1,16 +1,25 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Commit user's email change
+  *
+  * This page should be accessed with confirmation URL sent to user in email
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
-require "account.php";
+require_once('pre.php');    
+require_once('common/include/account.php');
 
-// ###### function register_valid()
-// ###### checks for valid register from form post
+if (!$confirm_hash) {
+	$confirm_hash = $ch;
+}
+$confirm_hash = html_clean_hash_string($confirm_hash);
 
 $res_user = db_query("SELECT * FROM users WHERE confirm_hash='$confirm_hash'");
 if (db_numrows($res_user) > 1) {
@@ -19,26 +28,33 @@ if (db_numrows($res_user) > 1) {
 if (db_numrows($res_user) < 1) {
 	exit_error("Error","Invalid confirmation hash.");
 }
-$row_user = db_fetch_array($res_user);
+$u =& user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
+exit_assert_object($u, 'User');
 
-db_query("UPDATE users SET "
-	. "email='" . $row_user['email_new'] . "',"
-	. "confirm_hash='none',"
-	. "email_new='" . $row_user['email'] . "' WHERE "
-	. "confirm_hash='$confirm_hash'");
+if (!$u->setEmail($u->getNewEmail())) {
+	exit_error(
+		'Could Not Complete Operation',
+		$u->getErrorMessage()
+	);
+}
 
-site_user_header(array('title'=>"Email Change Complete"));
+site_user_header(array('title'=>"Email Change Complete",'pagename'=>'account_change_email'));
 ?>
-<p><b>Email Change Complete</b>
-<P>Welcome, <?php print $row_user[user_name]; ?>. Your email
-change is complete. Your new email address on file is 
-<B><?php print $row_user[email_new]; ?></B>. Mail sent to
-<?php print $row_user['user_name']; ?>@<?php print $GLOBALS['sys_users_host']; ?> will now
-be forwarded to this account.
 
-<P><A href="/">[Return to SourceForge]</A>
+<p>
+Welcome, <?php print $u->getUnixName(); ?>. Your email
+change is complete. Your new email address on file is 
+<B>&lt;<?php print $u->getEmail(); ?>&gt;</B>. 
+
+Mail sent to
+&lt;<?php print $u->getUnixName(); ?>@<?php print $GLOBALS['sys_users_host']; ?>&gt; 
+will now be forwarded to this account.
+</p>
+
+<p><A href="/"><?php echo $Language->getText('account_change_email', 'return'); ?></A></p>
 
 <?php
+
 site_user_footer(array());
 
 ?>

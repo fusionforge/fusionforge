@@ -1,33 +1,160 @@
 <?php
+/**
+ * Graphing class
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 class Graph {
-
+	/**
+	 * x coordinate title
+	 *
+	 * @var		string		$xtitle
+	 */
 	var $xtitle;
-	var $ytitle;
-	var $im;
-	var $color;
-	var $xmin;
-	var $xmax;
-	var $ymin;
-	var $ymax;
-	var $xdata_diff;
-	var $ydata_diff;
-	var $graph_height;
-	var $graph_width;
-	var $xpad;
-	var $ypad;
-	var $image_height;
-	var $image_width;
-	var $data_set;
-	var $num_data_sets;
-	var $num_points;
-	var $strDebug;
-
 
 	/**
+	 * y coordinate title
+	 *
+	 * @var		string	$ytitle
+	 */
+	var $ytitle;
+
+	/**
+	 * @var		?	$im
+	 */
+	var $im;
+
+	/**
+	 * @var		string	$color
+	 */
+	var $color;
+
+	/**
+	 * x coordinate minimum
+	 *
+	 * @var		int		$xmin
+	 */
+	var $xmin;
+
+	/**
+	 * x coordinate maximum
+	 *
+	 * @var		int		$xmax
+	 */
+	var $xmax;
+
+	/**
+	 * y coordinate minimum
+	 *
+	 * @var		int		$ymin
+	 */
+	var $ymin;
+
+	/**
+	 * y coordinate maximum
+	 *
+	 * @var		int		$ymax
+	 */
+	var $ymax;
+
+	/**
+	 * x coordinate data diff
+	 *
+	 * @var		?		$xdata_diff
+	 */
+	var $xdata_diff;
+
+	/**
+	 * y coordinate data diff
+	 *
+	 * @var		?		$ydata_diff
+	 */
+	var $ydata_diff;
+
+	/**
+	 * Overall graph height
+	 *
+	 * @var		int		$graph_height
+	 */
+	var $graph_height;
+
+	/**
+	 * Overall graph width
+	 *
+	 * @var		int		$graph_width
+	 */
+	var $graph_width;
+
+	/**
+	 * x coordinate pad
+	 *
+	 * @var		?		$xpad
+	 */
+	var $xpad;
+
+	/**
+	 * y coordinate pad
+	 *
+	 * @var		?		$ypad
+	 */
+	var $ypad;
+
+	/**
+	 * Image height
+	 *
+	 * @var		int		$image_height
+	 */
+	var $image_height;
+
+	/**
+	 * Image width 
+	 *
+	 * @var		int		$image_width
+	 */
+	var $image_width;
+
+	/**
+	 * Data set
+	 *
+	 * @var		?		$data_set
+	 */
+	var $data_set;
+
+	/**
+	 *  Number of data sets
+	 *
+	 * @var		int		$num_data_sets
+	 */
+	var $num_data_sets;
+
+	/**
+	 * Number of points
+	 *
+	 * @var		int		$num_points
+	 */
+	var $num_points;
+
+	/**
+	 * Debug string
+	 *
+	 * @var		string $strDebug
+	 */
+	var $strDebug;
+
+	/**
+	 * Graph() - Constructor
+	 *
 	 * The function constructor sets up the basic vars needed to draw a graph.  
 	 * It sets up the geometry for the graph
 	 * as well as any data extents that need to be set.
+	 *
+	 * @param	int		Width of the graph
+	 * @param	int		Height of the graph
 	 */
 	function Graph( $width = 640, $height = 480 ) {
 
@@ -60,10 +187,10 @@ class Graph {
 
 
 	/**
-	 * SetPad redefines the x and y padding distances on the object.
+	 * SetPad() - Redefines the x and y padding distances on the object.
 	 *
-	 * @param $xpad the x distance on either side reserved for markings. 
-	 * @param $ypad the y distance on the top and bottom reserved for markings.
+	 * @param	int		The x distance on either side reserved for markings. 
+	 * @param	int		The y distance on the top and bottom reserved for markings.
 	 */
 	function SetPads( $xpad = 50, $ypad = 40 ) {
 		$this->xpad = $xpad;
@@ -74,10 +201,11 @@ class Graph {
 	}
 
 	/**
-	 * AddData adds an array of prefetched data to this object.
+	 * AddData() - Adds an array of prefetched data to this object.
 	 *
-	 * @param $xdata The x data to add
-	 * @param $ydata The y data to add
+	 * @param	string	The x data to add
+	 * @param	string	The y data to add
+	 * @param	string	The x label to add
 	 */
 	function AddData( $xdata, $ydata, $xlabel = 0 ) {
 		$this->num_data_sets++;
@@ -127,13 +255,13 @@ class Graph {
 
 
 	/**
-	 * translate shifts the $x and $y arguments from points in the world space to
+	 * translate() - Translate shifts the $x and $y arguments from points in the world space to
 	 * pixels in graph plane space.
 	 *
-	 * @param &$x The x position in world coordinates
-	 * @param &$y The y position in world coordinates
-	 * @param &$xpos The x position in screen pixels
-	 * @param &$ypos The y position in screen pixels
+	 * @param	int		The x position in world coordinates
+	 * @param	int		The y position in world coordinates
+	 * @param	int		The x position in screen pixels
+	 * @param	int		The y position in screen pixels
 	 */
 	function translate( &$x, &$y, &$xpos, &$ypos ) {
 		$xpos = $this->xdata_diff ? ($this->graph_width / $this->xdata_diff) * ($x - $this->xmin) + $this->xpad : 0 + $this->xpad;
@@ -142,12 +270,12 @@ class Graph {
 
 
 	/**
-	 * adjustNum makes a number better for axis spacing.
+	 * adjustNum() - Makes a number better for axis spacing.
 	 * Instead of having something like .12452314 it should be closer to .12 for presentability
 	 *
-	 * @param $num This is the number you want to adjust
-	 * @param $data_diff This is the total range of values that are spanned by this axis
-	 * @param $num_divisions How many divisions will there be?
+	 * @param	int		This is the number you want to adjust
+	 * @param	int		This is the total range of values that are spanned by this axis
+	 * @param	int		How many divisions will there be?
 	 */
 	function adjustNum ( $num, $data_diff, $num_divisions ) {
 
@@ -179,14 +307,14 @@ class Graph {
 
 
 	/**
-	 * DrawLine draws a line with point value inputs.
+	 * DrawLine() - Draws a line with point value inputs.
 	 * This translates the input coordinates into screen space and draws a line
 	 *
-	 * @param $x1 The first point's x coordinate (in the world coordinate view)
-	 * @param $y1 The first point's y coordinate (in the world coordinate view)
-	 * @param $x2 The second point's x coordinate (in the world coordinate view)
-	 * @param $y2 The second point's y coordinate (in the world coordinate view)
-	 * @param $color The color to draw the line
+	 * @param	int		The first point's x coordinate (in the world coordinate view)
+	 * @param	int		The first point's y coordinate (in the world coordinate view)
+	 * @param	int		The second point's x coordinate (in the world coordinate view)
+	 * @param	int		The second point's y coordinate (in the world coordinate view)
+	 * @param	string	The color to draw the line
 	 */
 	function DrawLine ( $x1, $y1, $x2, $y2, $color ) {
 
@@ -200,10 +328,10 @@ class Graph {
 
 
 	/**
-	 * DrawFilledPolygon is a wrapper to the imageFilledPolygon GD function.
+	 * DrawFilledPolygon() - Is a wrapper to the imageFilledPolygon GD function.
 	 *
-	 * @param $verts The vertices for the polygon
-	 * @param $color The color you want the polygon to be
+	 * @param	array	The vertices for the polygon
+	 * @param	string	The color you want the polygon to be
 	 */
 	function DrawFilledPolygon ( $verts, $color ) {
 
@@ -216,11 +344,11 @@ class Graph {
 
 
 	/**
-	 * DrawShadowedPolygon is a wrapper to the imageFilledPolygon GD function that 
+	 * DrawShadowedPolygon() - Is a wrapper to the imageFilledPolygon GD function that 
 	 * first creates a drop shadow.
 	 *
-	 * @param $verts The vertices for the polygon
-	 * @param $color The color you want the polygon to be
+	 * @param	array	The vertices for the polygon
+	 * @param	string	The color you want the polygon to be
 	 */
 	function DrawShadowedPolygon ( $verts, $color, $color ) {
 
@@ -233,15 +361,15 @@ class Graph {
 
 
 	/**
-	 * DrawDashedLine draws a dashed line from the start coordinate to the end coordinate
+	 * DrawDashedLine() - Draws a dashed line from the start coordinate to the end coordinate
 	 *
-	 * @param $x1 The first point's x coordinate (in the world coordinate view)
-	 * @param $y1 The first point's y coordinate (in the world coordinate view)
-	 * @param $x2 The second point's x coordinate (in the world coordinate view)
-	 * @param $y2 The second point's y coordinate (in the world coordinate view)
-	 * @param $dash_length The length of a dash on the dashed line
-	 * @param $dash_space The length of a space in the dashed line
-	 * @param $color
+	 * @param	int		The first point's x coordinate (in the world coordinate view)
+	 * @param	int		The first point's y coordinate (in the world coordinate view)
+	 * @param	int		The second point's x coordinate (in the world coordinate view)
+	 * @param	int		The second point's y coordinate (in the world coordinate view)
+	 * @param	int		The length of a dash on the dashed line
+	 * @param	int		The length of a space in the dashed line
+	 * @param	string	The line color
 	 */
 	function DrawDashedLine ($x1,$y1,$x2,$y2,$dash_length,$dash_space,$color) {
 	
@@ -269,9 +397,9 @@ class Graph {
 	}
 
 	/**
-	 * DrawGrid draws the grid lines for the graph
+	 * DrawGrid() - Draws the grid lines for the graph
 	 *
-	 * @param $color The color to draw the grid lines in. 
+	 * @param	string	The color to draw the grid lines in. 
 	 */
 	function DrawGrid( $color ) {
 		
@@ -338,7 +466,7 @@ class Graph {
 
 	
 	/**
-	 * DrawAxis draws the x-axis and the y-axis for the graph
+	 * DrawAxis() - Draws the x-axis and the y-axis for the graph
 	 */
 	function DrawAxis() {
 		$this->DrawLine($this->xmin,$this->ymin,$this->xmax,$this->ymin,$this->color['black']);
@@ -347,9 +475,11 @@ class Graph {
 
 
 	/**
-	 * LineGraph draws a line graph from the data set that gets passed in.
+	 * LineGraph() - Draws a line graph from the data set that gets passed in.
 	 * This takes in 2 arrays and loops until the end of the smallest one.
 	 *
+	 * @param	string	The dataset
+	 * @param	string	The line color
 	 */
 	function LineGraph ($dataset,$color) {
 
@@ -368,11 +498,11 @@ class Graph {
 
 
 	/**
-	 * FilledLineGraph draws a filled line graph for the data.
+	 * FilledLineGraph() - Draws a filled line graph for the data.
 	 *
-	 * @param $xdata The array of x-data.
-	 * @param $ydata The array of y-data.
-	 * @param $color The color you want the graph drawn.
+	 * @param	array	The array of x-data.
+	 * @param	array	The array of y-data.
+	 * @param	string	The color you want the graph drawn.
 	 */
 	function FilledLineGraph( $dataset, $color, $colortwo = 0 ) {
 		
@@ -406,7 +536,7 @@ class Graph {
 
 
 	/**
-	 * addDebug allows the appending of debug information to the graph from the calling script
+	 * addDebug() - Allows the appending of debug information to the graph from the calling script
 	 */
 	function addDebug( $message ) {
 		$this->strDebug[] = $message;
@@ -414,7 +544,7 @@ class Graph {
 
 
 	/**
-	 * showDebug shows debugging text on the graph in case you want to show data on the graph that never usually gets output.
+	 * showDebug() - Shows debugging text on the graph in case you want to show data on the graph that never usually gets output.
 	 */
 	function showDebug() {
 		$lines = 0;
@@ -435,9 +565,9 @@ class Graph {
 
 
 	/**
-	 * SetTitle draws a title on the graph.
+	 * SetTitle() - Draws a title on the graph.
 	 *
-	 * @param $title The title of the graph.
+	 * @param	string	The title of the graph.
 	 */
 	function SetTitle($title) {
 
@@ -448,9 +578,9 @@ class Graph {
 
 
 	/**
-	 * SetSubTitle draws a sub title on the graph in smaller text below the main title.
+	 * SetSubTitle() - Draws a sub title on the graph in smaller text below the main title.
 	 *
-	 * @param $subtitle The title of the graph.
+	 * @param	string	The title of the graph.
 	 */
 	function SetSubTitle($subtitle) {
 		$text_left = ($this->image_width / 2) - (strlen($subtitle) * 2.4);
@@ -459,7 +589,7 @@ class Graph {
 
 
 	/**
-	 * SetxTitle sets a title below the x-axis.
+	 * SetxTitle() - Sets a title below the x-axis.
 	 */
 	function SetxTitle($xtitle) {
 		$text_left = ($this->image_width / 2) - (strlen($xtitle) * 2.4);
@@ -468,7 +598,7 @@ class Graph {
 
 
 	/**
-	 * SetyTitle sets a title to the left of the y-axis.
+	 * SetyTitle() - Sets a title to the left of the y-axis.
 	 */
 	function SetyTitle($ytitle) {
 		$text_left = 10;
@@ -478,7 +608,7 @@ class Graph {
 
 
 	/**
-	 * ShowGraph sets the header type and displays the graph.
+	 * ShowGraph() - Sets the header type and displays the graph.
 	 */
 	function ShowGraph( $type = "png" ) {
 

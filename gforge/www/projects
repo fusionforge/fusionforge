@@ -1,52 +1,60 @@
 <?php
+/**
+  *
+  * Projects Redirector
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+
+require_once('pre.php');    
+
 //
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
+//	IMPORTANT NOTE!!
+//	Setting up the $project object is all being 
+//	handled in the logger now
+//	This was done so the logger would accurately record these pages
 //
-// $Id$
-
-require ('pre.php');    
-
-/*
-//
-//	This is all being handled in the logger now
-//
-$expl_pathinfo = explode('/',$REQUEST_URI);
-
-//project name wasn't passed in the URL
-
-if (!$expl_pathinfo[2]) {
-	exit_no_group();
-}
-
-//get the group_id based on the group_name in the URL
-
-$res_grp=db_query("SELECT * FROM groups WHERE unix_group_name='$expl_pathinfo[2]'");
-
-//group was not found
-
-if (db_numrows($res_grp) < 1) {
-
-	echo db_error();
-	exit_error("Invalid Group","That group does not exist.");
-
-} else {
-
-	//set up the group_id
-	$group_id=db_result($res_grp,0,'group_id');
-
-	$project=group_get_object($group_id,$res_grp);
-*/
 
 //
 //	test to see if the logger was successful in setting up the objects
 //
-	if (!$group_id || !$project) {
-		exit_error("Invalid Project","Invalid Project");
-	} else {
-		//now show the project page
-		include ('project_home.php');
+if (!$group_id || !$project) {
+	exit_error("Invalid Project","Invalid Project");
+} else {
+	if ($subpage == "admin") {
+//		include('www/project/admin/index.php');
+		session_redirect("/project/admin/?group_id=$group_id");
+		exit();
+	} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
+		if ($subpage2 == "release") {
+			session_redirect("/project/admin/qrs.php?group_id=$group_id");
+		} else {
+//			include('www/project/showfiles.php');
+			session_redirect("/project/showfiles.php?group_id=$group_id");
+		}
+		exit();
+	} else if ($subpage == "cvs") {
+		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
+		exit();
+	} else if ($subpage == "bug" || $subpage == "bugs") {
+		session_redirect("/bugs/?group_id=$group_id");
+		exit();
+	} else if ($subpage == "patch") {
+		session_redirect("/patch/?group_id=$group_id");
+		exit();
+	} else if ($subpage == "support") {
+		session_redirect("/support/?group_id=$group_id");
+		exit();
+	}  else {
+		//show the project summary page
+		include('project_home.php');
 	}
+}
 
 ?>

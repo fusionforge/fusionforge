@@ -1,23 +1,28 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
+
+require_once('pre.php');
+require_once('www/people/people_utils.php');
 
 if ($group_id && (user_ismember($group_id, 'A'))) {
 
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'Create a job for your project'));
+	people_header(array('title'=>'Create a job for your project','pagename'=>'people_createjob'));
 
 	echo '
-		<H2>Create a New Job</H2>
 		<P>
 		Start by filling in the fields below. When you click continue, you 
 		will be shown a list of skills and experience levels that this job requires.

@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: filemodule_monitor.php,v 1.4 2000/12/07 17:50:11 tperdue Exp $
+/**
+  *
+  * Package Monitor Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: filemodule_monitor.php,v 1.6 2001/05/22 19:42:19 pfalcon Exp $
+  *
+  */
 
-require('pre.php');
+
+require_once('pre.php');
 
 if (user_isloggedin()) {
 	/*

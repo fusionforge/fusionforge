@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: users_graph.png,v 1.2 2000/08/31 23:15:04 msnelham Exp $
-require('pre.php');
-require("graph_lib.php");
+/**
+  *
+  * SourceForge Sitewide Statistics
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: change_email.php,v 1.12 2001/05/13 17:53:29 pfalcon Exp $
+  *
+  */
+
+
+require_once('pre.php');
+require_once('graph_lib.php');
 
    // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );

@@ -1,16 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: tos.php,v 1.5 2000/08/31 06:11:36 gherteg Exp $
+/**
+  *
+  * SourceForge Terms of Service Agreement
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: tos.php,v 1.7 2001/05/22 15:47:25 pfalcon Exp $
+  *
+  */
 
-require("pre.php");  // Initial db and session library, opens session
+require_once('pre.php');
 
 $HTML->header( array( title=>"Terms of Service Agreement" ) );
 
-include("tos_text.php");
+include_once('tos_text.php');
 
 $HTML->footer( array() );
 

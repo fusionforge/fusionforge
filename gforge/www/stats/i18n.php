@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$ 
-require('pre.php');
-require('site_stats_utils.php');
+/**
+  *
+  * SourceForge Sitewide Statistics
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+
+require_once('pre.php');
+require_once('site_stats_utils.php');
 
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
@@ -29,7 +36,8 @@ $total=db_result(db_query($sql),0,'total');
 $sql='
 SELECT supported_languages.name AS lang,count(user_name) AS cnt
 FROM supported_languages LEFT JOIN users ON language_id=users.language
-GROUP BY language_id
+GROUP BY language_id,name
+ORDER BY cnt DESC
 ';
 $res=db_query($sql);
 $non_english=0;

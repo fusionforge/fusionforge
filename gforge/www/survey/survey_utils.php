@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
 
 /*
 	Survey System
@@ -17,26 +23,25 @@ function survey_header($params) {
 	$params['toptab']='surveys';
 	$params['group']=$group_id;
 
-	$project=project_get_object($group_id);
-
-	if (!$project->usesSurvey()) {
-		exit_error('Error','This Group Has Turned Off Surveys');
-	}
-
-	site_project_header($params);
-
-	echo "<P><B><A HREF=\"/survey/admin/?group_id=$group_id\">Admin</A>";
-
-	if ($is_admin_page && $group_id) {
-		echo " | <A HREF=\"/survey/admin/add_survey.php?group_id=$group_id\">Add Surveys</A>";
-		echo " | <A HREF=\"/survey/admin/edit_survey.php?group_id=$group_id\">Edit Surveys</A>";
-		echo " | <A HREF=\"/survey/admin/add_question.php?group_id=$group_id\">Add Questions</A>";
-		echo " | <A HREF=\"/survey/admin/show_questions.php?group_id=$group_id\">Edit Questions</A>";
-		echo " | <A HREF=\"/survey/admin/show_results.php?group_id=$group_id\">Show Results</A></B>";
-	}
-
-	echo "<P>";
-
+	if ($project =& group_get_object($group_id)){
+		if (!$project->usesSurvey()) {
+			exit_error('Error','This Group Has Turned Off Surveys');
+		}
+		
+		site_project_header($params);
+		
+		echo "<P><B><A HREF=\"/survey/admin/?group_id=$group_id\">Admin</A>";
+		
+		if ($is_admin_page && $group_id) {
+			echo " | <A HREF=\"/survey/admin/add_survey.php?group_id=$group_id\">Add Surveys</A>";
+			echo " | <A HREF=\"/survey/admin/edit_survey.php?group_id=$group_id\">Edit Surveys</A>";
+			echo " | <A HREF=\"/survey/admin/add_question.php?group_id=$group_id\">Add Questions</A>";
+			echo " | <A HREF=\"/survey/admin/show_questions.php?group_id=$group_id\">Edit Questions</A>";
+			echo " | <A HREF=\"/survey/admin/show_results.php?group_id=$group_id\">Show Results</A></B>";
+		}
+		
+		echo "<P>";
+	}// end if (valid group id)
 }
 
 function survey_footer($params) {

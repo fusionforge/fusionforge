@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people_utils.php');
+
+require_once('pre.php');
+require_once('../people_utils.php');
 
 if (user_ismember(1,'A')) {
 
@@ -71,9 +77,7 @@ if (user_ismember(1,'A')) {
 		/*
 			Show categories and blank row
 		*/
-		people_header(array ('title'=>'Add/Change Categories'));
-
-		echo "<H2>Add Job Categories</H2>";
+		people_header(array ('title'=>'Add/Change Categories','pagename'=>'people_admin_people_cat'));
 
 		/*
 			List of possible categories for this group
@@ -89,8 +93,6 @@ if (user_ismember(1,'A')) {
 			echo db_error();
 		}
 		?>
-		<P>
-		<H3>Add a new job category:</H3>
 		<P>
 		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="people_cat" VALUE="y">
@@ -110,9 +112,7 @@ if (user_ismember(1,'A')) {
 		/*
 			Show people_groups and blank row
 		*/
-		people_header(array ('title'=>'Add/Change People Skills'));
-
-		echo '<H2>Add Job Skills</H2>';
+		people_header(array ('title'=>'Add/Change People Skills','pagename'=>'people_admin_people_skills'));
 
 		/*
 			List of possible people_groups for this group
@@ -127,8 +127,6 @@ if (user_ismember(1,'A')) {
 			echo "\n<H2>No Skills Found</H2>";
 		}
 		?>
-		<P>
-		<H3>Add a new skill:</H3>
 		<P>
 		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="people_skills" VALUE="y">
@@ -149,10 +147,7 @@ if (user_ismember(1,'A')) {
 			Show main page
 		*/
 
-		people_header(array ('title'=>'People Administration'));
-
-		echo '
-			<H2>Help Wanted Administration</H2>';
+		people_header(array ('title'=>'People Administration','pagename'=>'people_admin'));
 
 		echo '<P>
 			<A HREF="'.$PHP_SELF.'?people_cat=1">Add Job Categories</A><BR>';

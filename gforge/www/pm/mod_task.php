@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-pm_header(array('title'=>'Modify A Task'));
+
+pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 $sql="SELECT * FROM project_task ".
 	"WHERE project_task_id='$project_task_id' AND group_project_id='$group_project_id'";
@@ -14,7 +20,6 @@ $sql="SELECT * FROM project_task ".
 $result=db_query($sql);
 
 ?>
-<H2>Modify A Task In <?php echo  pm_data_get_group_name($group_project_id); ?></H2>
 
 <FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="func" VALUE="postmodtask">
@@ -135,12 +140,6 @@ $result=db_query($sql);
 		</TD>
 	</TR>
 
-	<TR>
-		<TD COLSPAN="2">
-			<?php echo pm_show_dependent_bugs ($project_task_id,$group_id,$group_project_id); ?>
-		</TD>
-	</TR>
- 
 	<TR>
 		<TD COLSPAN="2">
 			<?php echo pm_show_task_details ($project_task_id); ?>

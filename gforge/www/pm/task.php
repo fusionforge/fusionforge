@@ -1,25 +1,35 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../pm/pm_utils.php');
-require('../pm/pm_data.php');
+
+require_once('pre.php');
+require_once('www/pm/pm_utils.php');
+require_once('common/pm/pm_data.php');
 
 if ($group_id && $group_project_id) {
 
 	$project=&group_get_object($group_id);
+
+	if (user_isloggedin()) {
+		$perm =& $project->getPermission( session_get_user() );
+	}
 
 	/*
 		Verify that this group_project_id falls under this group
 	*/
 
 	//can this person view these tasks? they may have hacked past the /pm/index.php page
-	if (user_isloggedin() && user_ismember($group_id)) {
+	if (user_isloggedin() && $perm->isMember()) {
 		$public_flag='0,1';
 	} else {
 		$public_flag='1';
@@ -44,7 +54,7 @@ if ($group_id && $group_project_id) {
 	switch ($func) {
 
 		case 'addtask' : {
-			if ($project->userIsPMAdmin()) {
+			if (user_isloggedin() && $perm->isPMAdmin()) {
 				include '../pm/add_task.php';
 			} else {
 				exit_permission_denied();
@@ -53,7 +63,7 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'postaddtask' : {
-			if ($project->userIsPMAdmin()) {
+			if (user_isloggedin() && $perm->isPMAdmin()) {
 				if (pm_data_create_task ($group_project_id,$start_month,$start_day,$start_year,
 					$end_month,$end_day,$end_year,$summary,$details,$percent_complete,
 					$priority,$hours,$assigned_to,$dependent_on)) {
@@ -69,7 +79,7 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'postmodtask' : {
-			if ($project->userIsPMAdmin()) {
+			if (user_isloggedin() && $perm->isPMAdmin()) {
 				if (pm_data_update_task ($group_project_id,$project_task_id,$start_month,$start_day,
 					$start_year,$end_month,$end_day,$end_year,$summary,$details,
 					$percent_complete,$priority,$hours,$status_id,$assigned_to,
@@ -91,7 +101,7 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'detailtask' : {
-			if ($project->userIsPMAdmin()) {
+			if (user_isloggedin() && $perm->isPMAdmin()) {
 				include '../pm/mod_task.php';
 			} else {
 				include '../pm/detail_task.php';

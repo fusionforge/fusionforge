@@ -1,15 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * SourceForge Jobs (aka Help Wanted) Board 
+ *
+ * Job/People finder 
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @athor		Tim Perdue <tperdue@valinux.com>
+ * @version		$Id$
+ *
+ */
 
-/*
-	Job/People finder 
-	By Tim Perdue, Sourceforge, March 2000
-*/
 function people_header($params) {
 	global $group_id,$job_id,$DOCUMENT_ROOT,$HTML;
 
@@ -20,10 +23,7 @@ function people_header($params) {
 	} else {
 		echo $HTML->header($params);
 	}
-	echo '
-		<H2>Project Help Wanted</H2>
-		<P><B>
-	<A HREF="/people/admin/">Admin</A>';
+
 	if ($group_id && $job_id) {
 		echo ' | <A HREF="/people/editjob.php?group_id='. $group_id .'&job_id='. $job_id .'">Edit Job</A>';
 	}

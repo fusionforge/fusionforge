@@ -28,156 +28,56 @@
 
 class BaseLanguage {
 
-	function BaseLanguage() {
+    //array to hold the string values
+    var $text_array;
 
+	function BaseLanguage() {
+		$this->loadLanguage('Base');
 	}
+
+	function loadLanguage($lang) {
+		$ary = file('languages/'.$lang.'.tab',1);
+		for( $i=0; $i<sizeof($ary); $i++) {
+			if (substr($ary[$i], 0, 1) == '#') {
+				continue;
+			}
+			$line = explode("\t", $ary[$i], 3);
+			$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+		}
+	}
+
+	function getText($pagename, $category, $args="") {
+		/* 
+			args is an array which will replace the $1, $2, etc
+			in the text_array string before it is returned
+		*/
+		if ($args) {
+			for ($i=1; $i<=sizeof($args)+1; $i++) {
+				$patterns[] = '/\$'.$i.'/';
+			}
+			$tstring = preg_replace($patterns, $args, $this->text_array[$pagename][$category]);
+		} else {
+			$tstring = $this->text_array[$pagename][$category];
+		}
+		return $tstring;
+	}
+
 	//result set handle for supported langauges
 	var $language_res;
-
-	//what content encoding scheme are we using?
-	var $content_encoding='iso-8859-1';
-
-	//english has an ID of 1 in the database
-	var $language_id=1;
-
-	//two letter language code
-	var $language_code='en';
-
-	//default font which can be overridden on a language-by-language basis
-	var $default_font='verdana,arial,helvetica,sans-serif';
-
-	//navigation menu strings
-	var $SEARCH='Search';
-	var $LOGOUT='Logout';
-	var $LOGIN='Login via SSL';
-	var $NEW_USER='New User via SSL';
-	var $NEW_PROJECT='Register New Project';
-	var $ACCOUNT_MAINTENANCE='Account Maintenance';
-	var $CHANGE_MY_THEME='Change My Theme';
-	var $MY_PERSONAL_PAGE='My Personal Page';
-	var $BOOKMARK_PAGE='Bookmark Page';
-	var $PROJECT_SUMMARY='Project Summary';
-	var $PROJECT_ADMIN='Project Admin';
-	var $FOUNDRY_SUMMARY='Foundry Summary';
-	var $FOUNDRY_ADMIN='Foundry Admin';
-	var $SOFTWARE_MAP='Software Map';
-	var $NEW_RELEASES='New Releases';
-	var $OTHER_SITE_MIRRORS='Other Site Mirrors';
-	var $CODE_SNIPPET_LIBRARY='Code Snippet Library';
-	var $DOCUMENTATION='Site Docs';
-	var $DISCUSSION_FORUMS='Discussion Forums';
-	var $PROJECT_HELP_WANTED='Project Help Wanted';
-	var $TOP_PROJECTS='Top Projects';
-	var $COMPILE_FARM='Compile Farm';
-	var $CONTACT_US='Contact SourceForge';
-
-        // 2000-11-24
- 	var $ABOUT_SOURCEFORGE='About SourceForge';
- 	var $ABOUT_FOUNDRIES='About Foundries';
-
-	//tool short names as in HTML_TABS()
-	var $GROUP_SHORT_MAIN ='Main';
-	var $GROUP_SHORT_SUMMARY='Summary';
-	var $GROUP_SHORT_HOMEPAGE='Home Page';
-	var $GROUP_SHORT_FORUM='Forums';
-	var $GROUP_SHORT_BUGS='Bugs';
-	var $GROUP_SHORT_SUPPORT='Support';
-	var $GROUP_SHORT_PATCH='Patches';
-	var $GROUP_SHORT_MAIL='Lists';
-	var $GROUP_SHORT_PM='Tasks';
-	var $GROUP_SHORT_DOCMAN='Docs';
-	var $GROUP_SHORT_SURVEY='Surveys';
-	var $GROUP_SHORT_NEWS='News';
-	var $GROUP_SHORT_CVS='CVS';
-	var $GROUP_SHORT_FILES='Files';
-        // 2000-11-24
-	var $GROUP_SHORT_MEMBERLIST='Developers';
-
-	//tool long names for summary page
-	var $LATEST_FILE_RELEASES='Latest File Releases';
-	var $FILE_PACKAGE='Package';
-	var $FILE_VERSION='Version';
-	var $FILE_REL_DATE='Date';
-	var $FILE_MONITOR='Monitor';
-	var $FILE_NOTES='Notes';
-	var $FILE_DOWNLOAD='Download';
-
-	var $DEVELOPER_INFO='Developer Info';
-	var $PROJECT_ADMINS='Project Admins';
-	var $DEVELOPERS='Developers';
-	var $PUBLIC_AREA='Public Areas';
-
-	var $GROUP_LONG_HOMEPAGE='Project Home Page';
-	var $GROUP_LONG_FORUM='Public Forums';
-	var $GROUP_LONG_BUGS='Bug Tracking';
-	var $GROUP_LONG_SUPPORT='Tech Support Manager';
-	var $GROUP_LONG_PATCH='Patch Manager';
-	var $GROUP_LONG_MAIL='Mailing Lists';
-	var $GROUP_LONG_PM='Task Manager';
-	var $GROUP_LONG_DOCMAN='DocManager: Project Documentation';
-	var $GROUP_LONG_SURVEY='Surveys';
-	var $GROUP_LONG_NEWS='Latest News';	
-	var $GROUP_LONG_CVS='CVS Repository';
-	var $GROUP_LONG_FTP='Anonymous FTP Space';
-	var $GROUP_LONG_FOUNDRIES='SourceForge Development Foundries';
-
-
-	//
-	// New strings for home page added 10/1
-	//
-	var $BREAKING_DOWN_BARRIERS='Breaking Down the Barriers to Open Source Development';
-	var $SOURCEFORGE_STATISTICS='SourceForge Statistics';
-	var $TOP_PROJECT_DOWNLOADS='Top Project Downloads';
-	var $HIGHEST_RANKED_USERS='Highest Ranked Users';
-	var $MOST_ACTIVE_THIS_WEEK='Most Active This Week';
-	var $SFOS='SourceForge OnSite';
-
-
-//temporary hack until
-//content manager is ready
-
-	var $HOME_PAGE_ABOUT_BLURB='
-
-SourceForge is a <B>free service to
-<A href="http://www.opensource.org">Open Source</A> developers</B> offering
-easy access to the best in CVS, mailing lists, bug tracking, message boards/forums,
-task management, site hosting, permanent file archival, full backups,
-and total web-based administration. 
-<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A>
-<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
-<BR>
-&nbsp;
-<P>
-<B>Site Feedback and Participation</B>
-<P>
-In order to get the most out of SourceForge, you\'ll need
-to <A href="/account/register.php">register as a
-site user</A>. This will allow you to participate fully in all we have to
-offer. You may of course browse the site without registering, but will
-not have access to participate fully.
-<P>
-&nbsp;
-<BR>
-<B>Set Up Your Own Project</B>
-<P>
-<A href="/account/register.php">Register as a site user</A>,
-then <A HREF="/account/login.php">Login</A> and finally,
-<A HREF="/register/">Register Your Project.</A>
-Thanks... and enjoy the site.';
 
 	/*
 		returns database result
 		of supported languages
 	*/
 	function getLanguages() {
-		if (!$this->language_res) { 
-			$this->language_res=db_query("SELECT * FROM supported_languages ORDER BY name ASC");
+		if (!$this->text_array['conf']['language_res']) {
+			$this->text_array['conf']['language_res']=db_query("SELECT * FROM supported_languages ORDER BY name ASC");
 		}
-		return $this->language_res;
+		return $this->text_array['conf']['language_res'];
 	}
 
 	function getLanguageId() {
-		return $this->language_id;
+		return $this->text_array['conf']['language_id'];
 	}
 
 	function getLanguageName($id=false) {
@@ -188,16 +88,17 @@ Thanks... and enjoy the site.';
 	}
 
 	function getEncoding() {
-		return $this->content_encoding;
+		return $this->text_array['conf']['content_encoding'];
 	}
 
 	function getFont() {
-		return $this->default_font;
+		return $this->text_array['conf']['default_font'];
 	}
 
 	function getLanguageCode() {
-		return $this->language_code;
+		return $this->text_array['conf']['language_code'];
 	}
+
 }
 
 
@@ -235,6 +136,15 @@ function language_code_to_result($alang) {
 			$res = db_query("select * from supported_languages where language_code = '$lang_code'");
 			if (db_numrows($res) > 0) {
 				return $res;
+			}
+			// If that didn't work, check if we have sublanguage specifier
+			// If so, try to strip it and look for for main language only
+			if (strstr($lang_code, '-')) {
+				$lang_code = substr($lang_code, 0, 2);
+				$res = db_query("select * from supported_languages where language_code = '$lang_code'");
+				if (db_numrows($res) > 0) {
+					return $res;
+				}
 			}
 		}
 		return db_query("select * from supported_languages where language_id='1'"); // default to english

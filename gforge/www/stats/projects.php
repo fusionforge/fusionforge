@@ -1,29 +1,30 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$ 
-require('pre.php');
-require('site_stats_utils.php');
+/**
+  *
+  * SourceForge Sitewide Statistics
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-   // require you to be a member of the sfstats group (group_id = 11084)
+
+
+require_once('pre.php');
+require_once('site_stats_utils.php');
+
+// require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 
 $HTML->header(array('title'=>"SourceForge Site Statistics "));
 
-//
-// BEGIN PAGE CONTENT CODE
-//
-
-echo "\n\n";
-
-print '<DIV ALIGN="CENTER">' . "\n";
-print '<font size="+1"><b>Project Statistical Comparisons</b></font><BR>' . "\n";
-print '</DIV>' . "\n";
-
 ?>
+<DIV ALIGN="CENTER">
+<font size="+1"><b>Project Statistical Comparisons</b></font><BR>
+</DIV>
 
 <HR>
 
@@ -40,46 +41,26 @@ print '</DIV>' . "\n";
 <?php
 
 
-if ( isset( $span ) ) {
+if ( isset( $report ) ) {
 
-	if ( !isset($orderby) ) {
-		$orderby = "downloads";
-	}
+	// Print the form, passing it the params, so it can save state.
+	stats_site_projects_form( $report, $orderby, $projects, $trovecatid );
 
-	if ( isset( $trovecatid ) && $trovecatid > 0 ) {
-		$project_list = stats_generate_trove_grouplist( $trovecatid );
-	} 
+	?>
+	<DIV ALIGN="CENTER">
+	<BR><BR>
+	<?php
 
-	if ( $span < 1 ) {
-		$span = 21;
-	}
+	stats_site_projects( $report, $orderby, $projects, $trovecatid );
 
-	if ( !isset($offset) ) {
-		$offset = 0;
-	}
-
-	if ( $projects != "" ) {
-		$project_list = explode(" ", $projects );
-		$trovecatid = -1;
-	} 
-
-	if ( $trovecatid == 0 ) {
-		$project_list = 0;
-	}
-
-	   // Print the form, passing it the params, so it can save state.
-	stats_site_projects_form( $span, $orderby, $offset, $projects, $trovecatid );
-
-	print '<DIV ALIGN="CENTER">' . "\n";
-	print '<BR><BR>' . "\n";
-	stats_site_projects( $span, $orderby, $offset, $project_list, $trovecatid );
-	print '<BR><BR>' . "\n";
-	print '</DIV>' . "\n";
+	?>
+	<BR><BR>
+	</DIV>
+	<?php
 
 } else { 
 
-	   // Print the form, passing it the params, so it can save state.
-	stats_site_projects_form( $span, $orderby, $offset, $projects, $trovecatid );
+	stats_site_projects_form( );
 
 }
 

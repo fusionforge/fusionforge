@@ -1,15 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM): Reporting Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../pm_utils.php');
-require('../../project/stats/project_stats_utils.php');
-require('tool_reports.php');
+
+require_once('pre.php');
+require_once('www/pm/pm_utils.php');
+require_once('www/project/stats/project_stats_utils.php');
+require_once('www/include/tool_reports.php');
 
 $page_title="Task Reporting System";
 $bar_colors=array("pink","violet");
@@ -24,7 +30,7 @@ function pm_reporting_header($group_id) {
 function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$comment="") {
         global $bar_colors;
 
-       	pm_header(array ("title"=>$title));
+       	pm_header(array ("title"=>$title,'pagename'=>'pm_reporting'));
        	pm_reporting_header($group_id);
        	echo "\n<H1>$title</H1>";
 
@@ -38,7 +44,7 @@ function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$com
 
 if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 
-	include ($DOCUMENT_ROOT.'/include/HTML_Graphs.php');
+	include_once('www/include/HTML_Graphs.php');
 
 	if ($what) {
 		/*
@@ -49,7 +55,7 @@ if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 
 		if ($what=="aging") {
 
-			pm_header(array ("title"=>"Aging Report"));
+			pm_header(array ("title"=>"Aging Report",'pagename'=>'pm_reporting'));
 			pm_reporting_header($group_id);
 			echo "\n<H1>Aging Report</H1>";
 
@@ -73,7 +79,7 @@ if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 				$sql="SELECT avg((end_date-start_date)/(24*60*60)) ".
                                      "FROM project_task,project_group_list ".
                                      "WHERE end_date > 0 ".
-                                     "AND (start_date >= $start AND start_date <= $end) ".
+                                     "AND (start_date >= '$start' AND start_date <= '$end') ".
                                      "AND project_task.status_id=2 ".
        			             "AND project_group_list.group_project_id=project_task.group_project_id ".
                                      "AND project_group_list.group_id='$group_id' ";
@@ -96,8 +102,8 @@ if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 
 				$sql="SELECT count(*) ".
                                      "FROM project_task,project_group_list ".
-                                     "WHERE start_date >= $start ".
-                                     "AND start_date <= $end ".
+                                     "WHERE start_date >= '$start' ".
+                                     "AND start_date <= '$end' ".
        			             "AND project_group_list.group_project_id=project_task.group_project_id ".
                                      "AND project_group_list.group_id='$group_id' ";
 
@@ -118,8 +124,8 @@ if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 
 				$sql="SELECT count(*) ".
                                      "FROM project_task,project_group_list ".
-                                     "WHERE start_date <= $end ".
-                                     "AND (end_date >= $end OR end_date < 1 OR end_date is null) ".
+                                     "WHERE start_date <= '$end' ".
+                                     "AND (end_date >= '$end' OR end_date < 1 OR end_date is null) ".
        			             "AND project_group_list.group_project_id=project_task.group_project_id ".
                                      "AND project_group_list.group_id='$group_id' ";
 
@@ -196,9 +202,8 @@ if ($group_id && user_ismember($group_id/*,"P2"*/)) {
 		/*
 			Show main page
 		*/
-		pm_header(array ("title"=>$page_title));
+		pm_header(array ("title"=>$page_title,'pagename'=>'pm_reporting'));
 
-		echo "\n<H1>$page_title</H1>";
 		pm_reporting_header($group_id);
 
 		pm_footer(array());

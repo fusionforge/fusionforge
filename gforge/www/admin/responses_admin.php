@@ -1,22 +1,30 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Site Admin page to edit canned responces for project rejection
+  *
+  * This page is linked from approve-pending.php
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require("pre.php");
-require("vars.php");
-require("account.php");
-require("proj_email.php");
-require("canned_responses.php");
-require($DOCUMENT_ROOT.'/admin/admin_utils.php');
-require($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
-global $feedback;
+
+require_once('pre.php');
+require_once('common/include/vars.php');
+require_once('common/include/account.php');
+require_once('www/include/proj_email.php');
+require_once('www/include/canned_responses.php');
+require_once('www/admin/admin_utils.php');
+require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
-site_admin_header(array('title'=>'Approving Pending Projects'));
+
+site_admin_header(array('title'=>'Site Admin: Edit Rejection Responses'));
 
 function check_select_value($value, $type)
 {
@@ -62,7 +70,7 @@ Response Text:<br>
 
 <?php
 	}
-} elseif( $action == "Delete" ) {
+} else if ( $action == "Delete" ) {
 	// Delete Response
 	check_select_value($response_id, $action);
 	if( $sure == "yes" ) {
@@ -72,7 +80,7 @@ Response Text:<br>
 		print("If you're aren't sure then why did you click 'Delete'?<br>");
 		print("<i>By the way, I didn't delete... just in case...</i><br>\n");
 	}
-} elseif( $action == "Create" ) {
+} else if ( $action == "Create" ) {
 	// New Response
 	add_canned_response($response_title, $response_text);
 	print(" <b>Added Response</b> ");
@@ -88,8 +96,9 @@ Response Text:<br>
 <input type="submit" name="action" value="Create">
 </form>
 
-<?
+<?php
 }
 
 site_admin_footer(array());
+
 ?>

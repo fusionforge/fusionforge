@@ -1,9 +1,16 @@
+#
+# .htaccess to force image MIME types on php scripts
+# 
+# SourceForge: Breaking Down the Barriers to Open Source Development
+# Copyright 1999-2001 (c) VA Linux Systems
+# http://sourceforge.net
+#
+# @version   $Id: .htaccess,v 1.6 2001/06/19 16:54:32 jbyers Exp $
+#
+
 <Files views_graph.png>
-ForceType application/x-httpd-php
+  ForceType application/x-httpd-php
 </Files>
 <Files users_graph.png>
-ForceType application/x-httpd-php
-</Files>
-<Files weekly_views.png>
-ForceType application/x-httpd-php
+  ForceType application/x-httpd-php
 </Files>

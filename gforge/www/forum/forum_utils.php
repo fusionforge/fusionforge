@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: forum_utils.php,v 1.201 2000/12/13 22:32:50 dbrogdon Exp $
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: forum_utils.php,v 1.205 2001/05/22 19:42:19 pfalcon Exp $
+  *
+  */
+
 
 /*
 
@@ -15,7 +21,7 @@
 
 */
 
-require($DOCUMENT_ROOT.'/news/news_utils.php');
+require_once('www/news/news_utils.php');
 
 function forum_header($params) {
 	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$thread_id,$msg_id,$forum_id,$REQUEST_URI,$sys_datefmt,$et,$et_cookie,$sys_news_group;
@@ -158,13 +164,11 @@ function get_forum_name($id) {
 
 }
 
-function forum_show_a_nested_message ($result) {
+function forum_show_a_nested_message ( &$result ) {
 	/*
 	
 		accepts a database result handle to display a single message
 		in the format appropriate for the nested messages
-
-		second param is which row in that result set to use
 
 	*/
 	global $sys_datefmt;
@@ -199,7 +203,7 @@ function forum_show_a_nested_message ($result) {
 	return $ret_val;
 }       
 
-function forum_show_nested_messages ($msg_arr,$msg_id) {
+function forum_show_nested_messages ( &$msg_arr, $msg_id ) {
 	global $total_rows,$sys_datefmt;
 
 	$rows=count($msg_arr[$msg_id]);
@@ -216,7 +220,7 @@ function forum_show_nested_messages ($msg_arr,$msg_id) {
 			for each message, recurse to show any submessages
 
 		*/
-		for ($i=0; $i < $rows; $i++) {
+		for ($i=($rows-1); $i >= 0; $i--) {
 			//      increment the global total count
 			$total_rows++;
 
@@ -237,7 +241,7 @@ function forum_show_nested_messages ($msg_arr,$msg_id) {
 	return $ret_val;
 }
 
-function show_thread($thread_id) {
+function show_thread( $thread_id ) {
 	/*
 		Takes a thread_id and fetches it, then invokes show_submessages to nest the threads
 
@@ -278,7 +282,7 @@ function show_thread($thread_id) {
 		$ret_val .= html_build_list_table_top ($title_arr);
 
 		reset($msg_arr["0"]);
-		$thread=$msg_arr["0"][0];
+		$thread =& $msg_arr["0"][0];
 
 		//echo "<BR>count: ". count($msg_arr["0"]) ." thread: ". $thread['thread_id'];
 
@@ -321,7 +325,7 @@ function show_submessages($msg_arr, $msg_id, $level) {
 	$rows=count($msg_arr[$msg_id]);
 
 	if ($rows > 0) {
-		for ($i=0; $i<$rows; $i++) {
+		for ($i=($rows-1); $i >= 0; $i--) {
 			/*
 				Is this row's background shaded or not?
 			*/
@@ -629,11 +633,7 @@ function handle_monitoring($forum_id,$msg_id) {
 		$result = db_query ($sql);
 
 		if ($result && db_numrows($result) > 0) {
-			$body = "To: noreply@$GLOBALS[HTTP_HOST]".
-				"\nBCC: $tolist".
-				"\nSubject: [" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] " . 
-					util_unconvert_htmlspecialchars(db_result($result,0,'subject')).
-				"\n\nRead and respond to this message at: ".
+			$body = "\nRead and respond to this message at: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$msg_id.
 				"\nBy: " . db_result($result,0, 'user_name') .
 				"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body'))).
@@ -642,8 +642,10 @@ function handle_monitoring($forum_id,$msg_id) {
 				"\nTo stop monitoring this forum, login to SourceForge and visit: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
 
-			exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -fnoreply@$GLOBALS[HTTP_HOST] -t -i >& /dev/null &");
-
+			util_send_mail("noreply@$GLOBALS[sys_default_domain]",
+				"[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject')),
+				$body,"noreply@$GLOBALS[sys_default_domain]",
+				$tolist);
 			$feedback .= ' email sent - people monitoring ';
 		} else {
 			$feedback .= ' email not sent - people monitoring ';

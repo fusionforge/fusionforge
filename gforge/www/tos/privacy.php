@@ -1,13 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: privacy.php,v 1.2 2000/08/31 06:11:36 gherteg Exp $
+/**
+  *
+  * SourceForge Privacy Policy
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: privacy.php,v 1.4 2001/05/22 15:47:25 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    // Initial db and session library, opens session
-$HTML->header(array(title=>"Terms of Service Agreement"));
+
+require_once('pre.php');
+
+$HTML->header(array(title=>'SourceForge Privacy Policy'));
 ?>
 
 <p>

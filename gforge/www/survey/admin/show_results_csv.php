@@ -1,15 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 
-require('pre.php');
-require('HTML_Graphs.php');
-require($DOCUMENT_ROOT.'/survey/survey_utils.php');
+require_once('pre.php');
+require_once('HTML_Graphs.php');
+require_once('www/survey/survey_utils.php');
 
 if (!user_isloggedin() || !user_ismember($group_id,'A')) {
         echo "<H1>Permission Denied</H1>";
@@ -33,6 +38,7 @@ $result=db_query($sql);
 */
 
 $questions=db_result($result, 0, "survey_questions");
+$questions=str_replace(" ", "", $questions);
 $quest_array=explode(',', $questions);
 $count=count($quest_array);
 

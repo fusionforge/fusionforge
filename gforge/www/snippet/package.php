@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('../snippet/snippet_utils.php');
+
+require_once('pre.php');
+require_once('www/snippet/snippet_utils.php');
 
 if (user_isloggedin()) {
 
@@ -25,7 +31,7 @@ if (user_isloggedin()) {
 			if (!$result) {
 				//error in database
 				$feedback .= ' ERROR DOING SNIPPET PACKAGE INSERT! ';
-				snippet_header(array('title'=>'Submit A New Snippet Package'));
+				snippet_header(array('title'=>'Submit A New Snippet Package','pagename'=>'snippet_package'));
 				echo db_error();
 				snippet_footer(array());
 				exit;
@@ -43,7 +49,7 @@ if (user_isloggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= ' ERROR DOING SNIPPET PACKAGE VERSION INSERT! ';
-					snippet_header(array('title'=>'Submit A New Snippet Package'));
+					snippet_header(array('title'=>'Submit A New Snippet Package','pagename'=>'snippet_package'));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -54,7 +60,7 @@ if (user_isloggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>'Add Snippets to Package'));
+					snippet_header(array('title'=>'Add Snippets to Package','pagename'=>'snippet_package'));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -73,7 +79,6 @@ function show_add_snippet_box() {
 </script>
 <BODY onLoad="show_add_snippet_box()">
 
-<H2>Now add snippets to your package</H2>
 <P>
 <FONT COLOR="RED"><B>IMPORTANT!</B></FONT>
 <P>
@@ -97,10 +102,9 @@ then add them using the new window link shown above.
 		}
 
 	}
-	snippet_header(array('title'=>'Submit A New Snippet Package'));
+	snippet_header(array('title'=>'Submit A New Snippet Package','pagename'=>'snippet_package'));
 
 	?>
-	<H1>Create a New Code Package</H2>
 	<P>
 	You can group together existing snippets into a package using this interface. Before 
 	creating your package, make sure all your snippets are in place and you have made a note 

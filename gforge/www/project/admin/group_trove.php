@@ -1,26 +1,37 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Project Admin page to edit Trove categorization of the project
+  *
+  * This page is linked from index.php
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
-require "trove.php";
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
+require_once('pre.php');    
+require_once('trove.php');
+require_once('www/project/admin/project_admin_utils.php');
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 // Check for submission. If so, make changes and redirect
 
-if ($GLOBALS['Submit'] && $root1) {
+if ($GLOBALS['submit'] && $root1) {
 	group_add_history ('Changed Trove',$rm_id,$group_id);
 
 	// there is at least a $root1[xxx]
 	while (list($rootnode,$value) = each($root1)) {
 		// check for array, then clear each root node for group
-		db_query('DELETE FROM trove_group_link WHERE group_id='.$group_id
-			.' AND trove_cat_root='.$rootnode);
+		db_query("
+			DELETE FROM trove_group_link
+			WHERE group_id='$group_id'
+			AND trove_cat_root='$rootnode'
+		");
 		
 		for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
 			$varname = 'root'.$i;
@@ -35,24 +46,37 @@ if ($GLOBALS['Submit'] && $root1) {
 
 project_admin_header(array('title'=>'Group Trove Information','group'=>$group_id));
 
-print '<P>Select up to three locations for this project in each of the
+?>
+
+<h3>Edit Trove Categorization</h3>
+
+<p>
+Select up to three locations for this project in each of the
 Trove root categories. If the project does not require any or all of these
 locations, simply select "None Selected".
+</p>
 
-<P>IMPORTANT: Projects should be categorized in the most specific locations
+<p>
+IMPORTANT: Projects should be categorized in the most specific locations
 available in the map. Simulteneous categorization in a specific category
 AND a parent category will result in only the more specific categorization
 being accepted.
-';
+</p>
 
-print "\n<FORM method=\"post\">";
+<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
+
+<?php
 
 $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
 	print "\n<HR>\n<P><B>$fullname</B> ".help_button('trove_cat',$catroot)."\n";
 
-	$res_grpcat = db_query('SELECT trove_cat_id FROM trove_group_link WHERE '
-		.'group_id='.$group_id.' AND trove_cat_root='.$catroot);
+	$res_grpcat = db_query("
+		SELECT trove_cat_id
+		FROM trove_group_link
+		WHERE group_id='$group_id'
+		AND trove_cat_root='$catroot'");
+
 	for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
 		// each drop down, consisting of all cats in each root
 		$name= "root$i"."[$catroot]";
@@ -66,8 +90,14 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 	}
 }
 
-print '<P><INPUT type="submit" name="Submit" value="Submit All Category Changes">';
-print '</FORM>';
+?>
+
+<INPUT type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<P><INPUT type="submit" name="submit" value="Update All Category Changes">
+</FORM>
+
+<?php
 
 project_admin_footer(array());
+
 ?>

@@ -1,41 +1,47 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: newrelease.php,v 1.5 2000/12/13 18:59:06 dbrogdon Exp $
+/**
+  *
+  * Project Admin: Create a New Release
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: newrelease.php,v 1.10 2001/05/22 19:48:40 pfalcon Exp $
+  *
+  */
 
-ob_start();
 
-require ('pre.php');    
-require ('frs.class');
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
-session_require(array('group'=>$group_id));
+require_once('pre.php');    
+require_once('frs.class');
+require_once('www/project/admin/project_admin_utils.php');
+
 $project=&group_get_object($group_id);
-if (!$project->userIsReleaseTechnician()) exit_permission_denied();
 
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id));
+exit_assert_object($project,'Project');
+
+$perm =& $project->getPermission(session_get_user());
+
+if (!$perm->isReleaseTechnician()) {
+    exit_permission_denied();
+}
 
 // Create a new FRS object
 $frs = new FRS($group_id);
 
 if( $submit ) {
+
 	$release_id = $frs->frsAddRelease($release_name, $package_id);
 	if( !$frs->isError() ) {
 		header("Location: editreleases.php?package_id=$package_id&release_id=$release_id&group_id=$group_id");
-		ob_end_flush();
-?>
-
-<h3>Release Added!</h3>
-Click here to <a href="editreleases.php?package_id=<?php echo $package_id; ?>&release_id=<?php echo $release_id; ?>&group_id=<?php echo $group_id; ?>">edit this release</a>.
-
-<?php
 	}
+
 } else {
+
+project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_newrelease','sectionvals'=>array(group_getname($group_id))));
+
 ?>
 
-<h3>Create New Release:</h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
@@ -55,7 +61,9 @@ Click here to <a href="editreleases.php?package_id=<?php echo $package_id; ?>&re
 </form>
 
 <?php
+
 }
 
 project_admin_footer(array());
+
 ?>

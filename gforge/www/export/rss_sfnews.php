@@ -1,7 +1,20 @@
 <?php
-// ## export sf front page news in RSS
-include "pre.php";
-include "rss_utils.inc";
+/**
+  *
+  * SourceForge Exports: Export front page news in RSS
+  *
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+require_once('pre.php');
+require_once('rss_utils.inc');
+
 header("Content-Type: text/plain");
 print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">

@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('../snippet/snippet_utils.php');
+
+require_once('pre.php');
+require_once('www/snippet/snippet_utils.php');
 
 /*
 
@@ -26,7 +32,7 @@ if ($type=='snippet') {
 
 	*/
 
-	snippet_header(array('title'=>'Snippet Library'));
+	snippet_header(array('title'=>'Snippet Library','pagename'=>'snippet_detail'));
 
 	snippet_show_snippet_details($id);
 
@@ -120,7 +126,7 @@ if ($type=='snippet') {
 
 	*/
 
-	snippet_header(array('title'=>'Snippet Library'));
+	snippet_header(array('title'=>'Snippet Library','pagename'=>'snippet_detail'));
 
 	snippet_show_package_details($id);
 
@@ -207,7 +213,7 @@ if ($type=='snippet') {
 		Show a specific version of a package and its specific snippet versions
 	*/
 	
-	snippet_header(array('title'=>'Snippet Library'));
+	snippet_header(array('title'=>'Snippet Library','pagename'=>'snippet_detail'));
 
 	snippet_show_package_details($id);
 

@@ -1,18 +1,29 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Help Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
 
-$res_cat = db_query("SELECT * FROM trove_cat WHERE trove_cat_id=$trove_cat_id");
+require_once('pre.php');
+
+$res_cat = db_query("
+	SELECT *
+	FROM trove_cat
+	WHERE trove_cat_id='$trove_cat_id'");
+
 if (db_numrows($res_cat)<1) {
 	print "No such trove category";
 	exit;
 }
+
 $row_cat = db_fetch_array($res_cat);
 
 help_header("Trove Category - ".$row_cat['fullname']);
@@ -24,4 +35,5 @@ print "</TABLE>\n";
 print '<P>Description:<BR><I>'.$row_cat['description'].'</I>'."\n";
 
 help_footer();
+
 ?>

@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: shownotes.php,v 1.5 2000/08/31 21:58:49 tperdue Exp $
+/**
+  *
+  * Show Release Notes/ChangeLog Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: shownotes.php,v 1.8 2001/05/22 19:42:19 pfalcon Exp $
+  *
+  */
 
-require ('pre.php');
+
+require_once('pre.php');
 
 $result=db_query("SELECT frs_release.notes,frs_release.changes,frs_release.preformatted,frs_release.name,frs_package.group_id ".
 		"FROM frs_release,frs_package ".
@@ -19,7 +25,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	$group_id=db_result($result,0,'group_id');
 
-	site_project_header(array('title'=>"File Release Notes and Changelog",'group'=>$group_id,'toptab'=>'downloads'));
+	site_project_header(array('title'=>"File Release Notes and Changelog",'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
 
 	$HTML->box1_top('Notes');
 

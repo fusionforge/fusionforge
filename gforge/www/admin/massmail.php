@@ -1,86 +1,152 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Site Admin page for setting up massmailings.
+  *
+  * This is frontend of SF massmail facility, which allows to prepare
+  * messages for delivery to target categories of site users. very
+  * delivery is performed via cronjob.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
+require_once('pre.php');
+require_once('www/admin/admin_utils.php');
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
-$HTML->header(array('title'=>"Administrative Mass Mail Engine"));
 
-// get numbers of users for each mailing
-$res_count = db_query("SELECT count(*) AS count FROM users WHERE status='A' AND mail_va=1");
-$row_count = db_fetch_array($res_count);
-$count_comm = $row_count[count];
-$res_count = db_query("SELECT count(*) AS count FROM users WHERE status='A' AND mail_siteupdates=1");
-$row_count = db_fetch_array($res_count);
-$count_sf = $row_count[count];
-$res_count = db_query("SELECT count(*) AS count FROM users WHERE status='A'");
-$row_count = db_fetch_array($res_count);
-$count_all = $row_count[count];
-$res_count = db_query("SELECT count(*) AS count FROM users,user_group WHERE "
-	."users.user_id=user_group.user_id AND users.status='A' AND user_group.admin_flags='A'");
-$row_count = db_fetch_array($res_count);
-$count_admin = $row_count[count];
-$res_count = db_query("SELECT count(*) AS count FROM users,user_group WHERE "
-	."users.user_id=user_group.user_id AND users.status='A'");
-$row_count = db_fetch_array($res_count);
-$count_devel = $row_count[count];
-$res_count = db_query("SELECT count(*) AS count FROM users,user_group WHERE "
-	."users.user_id=user_group.user_id AND users.status='A' AND user_group.group_id=1");
-$row_count = db_fetch_array($res_count);
-$count_sfadmin = $row_count[count];
+if ($submit) {
 
-print '<P><B>Mail Engine for SourceForge Subscribers (MESS)</B>
+	if (!$mail_type) {
+		exit_error(
+			'Missing parameter',
+			'You must select target audience for mailing'
+		);
+	}
+
+	if (!trim($mail_message)) {
+		exit_error(
+			'Missing parameter',
+			'You are trying to send empty message'
+		);
+	}
+
+	if (trim($mail_subject) == '[SourceForge]') {
+		exit_error(
+			'Missing parameter',
+			'You must give proper subject to the mailing'
+		);
+	}
+
+	$res = db_query("
+		INSERT INTO massmail_queue(type,subject,message,queued_date)
+		VALUES ('$mail_type','$mail_subject','$mail_message',".time().")
+	");
+
+	if (!$res || db_affected_rows($res)<1) {
+		exit_error(
+			'Error Scheduling Mailing',
+			'Could not schedule mailing, database error: '.db_error()
+		);
+	}
+
+	site_admin_header(array('title'=>"Administrative Mass Mail Engine"));
+	print "<p>Mailing successfully scheduled for delivery</p>";
+	site_admin_footer(array());
+	exit();
+}
+
+site_admin_header(array('title'=>"Administrative Mass Mail Engine"));
+
+print '
+<h4>
+Mail Engine for SourceForge Subscribers (MESS)
+</h4>
+';
+
+print '
+<p>
+<a href="#active">Active deliveries</a>
+</p>
 
 <P>Be <FONT color=#FF0000><B>VERY</B></FONT> careful with this form,
-because sutmitting it WILL send email to lots of users.
+because submitting it WILL lead to sending email to lots of users.
+</p>
+';
 
-<FORM action="massmail_execute.php">
-<INPUT type="radio" name="destination" value="comm">
-Send only to users subscribed to "Additional Community Mailings" ('
-.$count_comm
-.')<BR><INPUT type="radio" name="destination" value="sf">
-Send only to users that agreed to receive "Site Updates" ('
-.$count_sf
-.')<BR><INPUT type="radio" name="destination" value="devel">
-Send only to project developers ('
-.$count_devel
-.')<BR><INPUT type="radio" name="destination" value="admin">
-Send only to project administrators ('
-.$count_admin
-.')<BR><INPUT type="radio" name="destination" value="sfadmin">
-Send only to SourceForge administrators (test) ('
-.$count_sfadmin
-.')<BR><INPUT type="radio" name="destination" value="all">
-Send to all users, regardless of their preferences ('
-.$count_all
-.')
-<P><B>Start With User ID:</B> (for use when the process quits)
-<BR><INPUT type="text" name="first_user" value="0">
+print '
+<FORM action="'.$PHP_SELF.'" method="POST">'
+.'<b>Target Audience:</b><br>'.html_build_select_box_from_arrays(
+	array(0,'SITE','COMMUNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
+	array(
+		'(select)',
+		'Subscribers to "Site Updates"',
+		'Subscribers to "Additional Community Mailings"',
+		'All Project Developers',
+		'All Project Admins',
+		'All Users',
+		'SourceForge Developers (test)'
+	),
+	'mail_type',false,false
+)
+.'<br>';
+
+
+print '
+
 <P>
-Subject:
-<BR><INPUT type="text" name="mail_subject" value="SourceForge: ">
+<b>Subject:</b>
+<BR><INPUT type="text" name="mail_subject" size="50" value="[SourceForge] ">
 
-<P>Text of Message:
-<PRE>
-<BR><TEXTAREA name="mail_message" cols="70" rows="40" wrap="physical">
-
----------------------
-This email was sent from '. $GLOBALS['sys_default_domain'] .'. To change your email receipt
-preferences, please visit the site and edit your account via the
-"Account Maintenance" link.
-
-Direct any questions to admin@'. $GLOBALS['sys_default_domain'].', or reply to this email.
+<P><b>Text of Message:</b> (will be appended with unsubscription
+information, if applicable)
+<pre><TEXTAREA name="mail_message" cols="70" rows="20" wrap="physical">
 </TEXTAREA>
 </PRE>
-<P><INPUT type="submit" name="Submit" value="Submit">
+
+<P><INPUT type="submit" name="submit" value="Schedule for Mailing">
 
 </FORM>
 ';
 
-$HTML->footer(array());
+
+$res = db_query("
+	SELECT *
+	FROM massmail_queue
+	WHERE finished_date=0
+");
+
+$title=array();
+$title[]='&nbsp;';
+$title[]='ID';
+$title[]='Type';
+$title[]='Subject';
+$title[]='Date';
+$title[]='Last user_id mailed';
+
+print '<a name="active">Active Deliveries:</a>';
+echo html_build_list_table_top($title);
+
+while ($row = db_fetch_array($res)) {
+	echo '
+	<tr bgcolor="'.html_get_alt_row_color($i++).'">
+	<td>&nbsp;<a href="massmail-del.php?id='.$row['id'].'"></a></td>
+	<td>'.$row['id'].'</td>
+	<td>'.$row['type'].'</td>
+	<td>'.$row['subject'].'</td>
+	<td>'.date($sys_datefmt, $row['queued_date']).'</td>
+	<td> '.$row['last_userid'].'</td>
+	</tr>
+	';
+}
+
+echo '</table>';
+
+site_admin_footer(array());
 
 ?>

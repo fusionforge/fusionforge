@@ -1,12 +1,21 @@
 <?php
+/**
+ * Foundry home page
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: foundry_home.php,v 1.48 2001/07/03 17:41:47 dbrogdon Exp $
+ */
 
-require($DOCUMENT_ROOT.'/news/news_utils.php');
-require('features_boxes.php');
-require('cache.php');
+require_once('www/news/news_utils.php');
+require_once('www/include/features_boxes.php');
+require_once('www/include/cache.php');
 
 //we already know $foundry is set up from the master page
 
-$HTML->header(array('title'=>$foundry->getUnixName().' - Foundry','group'=>$group_id));
+$HTML->header(array('title'=>$foundry->getUnixName().' - Foundry','group'=>$group_id,'pagename'=>'foundry','titlevals'=>array($foundry->getPublicName()),'sectionvals'=>array($foundry->getPublicName())));
 
 echo'	<TABLE cellspacing="0" cellpadding="10" border="0" width="100%">
 	      <TR>
@@ -94,7 +103,7 @@ echo '</TD><TD VALIGN="TOP" WIDTH="30%">';
 
 echo $foundry->getSponsorHTML1();
 
-echo cache_display('foundry'.$group_id.'_features_boxes','foundry_features_boxes()',3600);
+echo cache_display('foundry'.$group_id.'_features_boxes','foundry_features_boxes()',(24*3600));
 
 echo '</TD></TR></TABLE>';
 

@@ -1,14 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('vote_function.php');
-require('../forum/forum_utils.php');
+
+require_once('pre.php');
+require_once('vote_function.php');
+require_once('www/forum/forum_utils.php');
 
 if ($msg_id) {
  
@@ -19,6 +25,14 @@ if ($msg_id) {
 		"forum_group_list.allow_anonymous,forum_group_list.forum_name,forum.group_forum_id,forum.thread_id ".
 		"FROM forum_group_list,forum WHERE forum_group_list.group_forum_id=forum.group_forum_id AND forum.msg_id='$msg_id'");
 
+	if (!$result || db_numrows($result) < 1) {
+		/*
+			Message not found
+		*/
+                exit_error("Message Not Found",
+                           "This message does not (any longer) exist.");
+	}
+
 	$group_id=db_result($result,0,'group_id');
 	$forum_id=db_result($result,0,'group_forum_id');
 	$thread_id=db_result($result,0,'thread_id');
@@ -26,7 +40,7 @@ if ($msg_id) {
 	$allow_anonymous=db_result($result,0,'allow_anonymous');
 	$send_all_posts_to=db_result($result,0,'send_all_posts_to');
 
-	forum_header(array('title'=>db_result($result,0,'subject')));
+	forum_header(array('title'=>db_result($result,0,'subject'),'pagename'=>'forum_message','forum_id'=>$forum_id));
 
 	echo "<P>";
 
@@ -74,7 +88,7 @@ if ($msg_id) {
 
 } else {
 
-	forum_header(array('title'=>'Must choose a message first'));
+	forum_header(array('title'=>'Must choose a message first','pagename'=>'forum_message'));
 	echo '<h1>You must choose a message first</H1>';
 
 }

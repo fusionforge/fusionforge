@@ -1,6 +1,6 @@
 <?php
 
-require('squal_pre.php');
+require_once('squal_pre.php');
 
 $query = "SELECT COUNT(*) FROM users";
 

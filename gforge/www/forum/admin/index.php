@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../forum_utils.php');
+
+require_once('pre.php');
+require_once('../forum_utils.php');
 $is_admin_page='y';
 
 if ($group_id && (user_ismember($group_id, 'F2'))) {
@@ -73,11 +79,9 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 		/*
 			Show page for deleting messages
 		*/
-		forum_header(array('title'=>'Delete a message'));
+		forum_header(array('title'=>'Delete a message','pagename'=>'forum_admin_delete','sectionvals'=>group_getname($group_id)));
 
 		echo '
-			<H2>Delete a message</H2>
-
 			<FONT COLOR="RED" SIZE="3">WARNING! You are about to permanently delete a 
 			message and all of its followups!!</FONT>
 			<FORM METHOD="POST" ACTION="'.$PHP_SELF.'">
@@ -95,15 +99,13 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 		/*
 			Show the form for adding forums
 		*/
-		forum_header(array('title'=>'Add a Forum'));
+		forum_header(array('title'=>'Add a Forum','pagename'=>'forum_admin_addforum','sectionvals'=>group_getname($group_id)));
 
 		$sql="SELECT forum_name FROM forum_group_list WHERE group_id='$group_id'";
 		$result=db_query($sql);
 		ShowResultSet($result,'Existing Forums');
 
 		echo '
-			<P>
-			<H2>Add a Forum</H2>
 
 			<FORM METHOD="POST" ACTION="'.$PHP_SELF.'">
 			<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
@@ -128,7 +130,7 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 		/*
 			Change a forum to public/private
 		*/
-		forum_header(array('title'=>'Change Forum Status'));
+		forum_header(array('title'=>'Change Forum Status','pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
 
 		$sql="SELECT * FROM forum_group_list WHERE group_id='$group_id'";
 		$result=db_query($sql);
@@ -136,12 +138,9 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 
 		if (!$result || $rows < 1) {
 			echo '
-				<H2>No Forums Found</H2>
-				<P>
-				None found for this project';
+				<P>No forums found for this project';
 		} else {
 			echo '
-			<H2>Update Forum Information</H2>
 			<P>
 			You can adjust forum features from here. Please note that private forums 
 			can still be viewed by members of your project, not the general public.<P>';
@@ -201,10 +200,9 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 			Show main page for choosing 
 			either moderotor or delete
 		*/
-		forum_header(array('title'=>'Forum Administration'));
+		forum_header(array('title'=>'Forum Administration','pagename'=>'forum_admin','sectionvals'=>group_getname($group_id)));
 
 		echo '
-			<H2>Forum Administration</H2>
 			<P>
 			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&add_forum=1">Add Forum</A><BR>
 			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&delete=1">Delete Message</A><BR>

@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Exports
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
+
+require_once('pre.php');
+
 $HTML->header(array(title=>"Exports Available"));
 ?>
 <P>SourceForge data is exported in a variety of standard formats. Many of
@@ -25,6 +32,7 @@ XML Exports
 <LI><A href="rss_sfnewreleases.php">SourceForge New Releases</A>
 (<A href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</A>,
 <A href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</A>)
+<LI><A href="rss_osdnnews.php">Misc SF Statistics</A>
 </UL>
 
 <h4>Site Information</h4>

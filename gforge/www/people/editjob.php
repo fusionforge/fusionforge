@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
+
+require_once('pre.php');
+require_once('www/people/people_utils.php');
 
 if ($group_id && (user_ismember($group_id, 'A'))) {
 
@@ -115,7 +121,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'Edit a job for your project'));
+	people_header(array('title'=>'Edit a job for your project','pagename'=>'people_editjob'));
 
 	//for security, include group_id
 	$sql="SELECT * FROM people_job WHERE job_id='$job_id' AND group_id='$group_id'";
@@ -127,7 +133,6 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	} else {
 
 		echo '
-		<H3>Select Required Skills</H3>
 		<P>
 		Now you can edit/change the list of skills attached to this posting. 
 		Developers will be able to match their skills with your requirements. 

@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: mail_nav.php,v 1.4 2000/12/13 22:33:25 dbrogdon Exp $
+/**
+  *
+  * SourceForge Mailing Lists Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: mail_nav.php,v 1.5 2001/05/22 18:52:31 pfalcon Exp $
+  *
+  */
+
 
 echo "\n\n<TABLE BORDER=0 WIDTH=\"100%\">".
 	"\n<TR><TD NOWRAP>";

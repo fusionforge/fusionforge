@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('../snippet/snippet_utils.php');
+
+require_once('pre.php');
+require_once('www/snippet/snippet_utils.php');
 
 if (user_isloggedin()) {
 	if ($type=='snippet') {
@@ -47,10 +53,9 @@ if (user_isloggedin()) {
 			}
 
 		}
-		snippet_header(array('title'=>'Submit A New Snippet Version'));
+		snippet_header(array('title'=>'Submit A New Snippet Version','pagename'=>'snippet_addversion'));
 
 		?>
-		<H1>Post a New Code Snippet Version</H2>
 		<P>
 		If you have modified a version of a snippet and you feel it 
 		is significant enough to share with others, please do so.
@@ -114,7 +119,7 @@ if (user_isloggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= ' ERROR DOING SNIPPET PACKAGE VERSION INSERT! ';
-					snippet_header(array('title'=>'Submit A New Snippet Package'));
+					snippet_header(array('title'=>'Submit A New Snippet Package','pagename'=>'snippet_addversion'));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -125,7 +130,7 @@ if (user_isloggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>'Add Snippets to Package'));
+					snippet_header(array('title'=>'Add Snippets to Package','pagename'=>'snippet_addversion'));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -143,7 +148,6 @@ function show_add_snippet_box() {
 </script>
 <BODY onLoad="show_add_snippet_box()">
 
-<H2>Now add snippets to your package</H2>
 <P>
 <FONT COLOR="RED"><B>IMPORTANT!</B></FONT>
 <P>
@@ -167,10 +171,9 @@ then add them using the new window link shown above.
 			}
 
 		}
-		snippet_header(array('title'=>'Submit A New Snippet Version'));
+		snippet_header(array('title'=>'Submit A New Snippet Version','pagename'=>'snippet_addversion'));
 
 		?>
-		<H1>Post a New Package Version</H2>
 		<P>
 		If you have modified a version of a package and you feel it
 		is significant enough to share with others, please do so.

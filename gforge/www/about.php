@@ -1,12 +1,17 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: about.php,v 1.29 2000/09/01 19:16:45 q Exp $
+/**
+  *
+  * About SourceForge Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: about.php,v 1.31 2001/05/22 21:39:30 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    
+require_once('pre.php');
 $HTML->header(array(title=>"About SourceForge"));
 ?>
 

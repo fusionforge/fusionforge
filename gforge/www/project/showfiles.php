@@ -1,14 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Project File Information/Download Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');    
 
-$sql = "SELECT * FROM frs_package WHERE group_id='$group_id' AND status_id='1'";
+require_once('pre.php');    
+
+$sql = "SELECT * "
+       ."FROM frs_package "
+       ."WHERE group_id='$group_id' AND status_id='1' "
+       ."ORDER BY name";
 $res_package = db_query( $sql );
 $num_packages = db_numrows( $res_package );
 
@@ -16,7 +25,7 @@ if ( $num_packages < 1) {
 	exit_error("No File Packages","There are no file packages defined for this project.");
 }
 
-site_project_header(array('title'=>'Project Filelist','group'=>$group_id,'toptab'=>'downloads'));
+site_project_header(array('title'=>'Project Filelist','group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_showfiles','sectionvals'=>group_getname($group_id)));
 
 echo '
 <p>
@@ -46,6 +55,7 @@ $group_unix_name=group_getunixname($group_id);
 //echo html_build_list_table_top($title_arr) . "\n";
 function col_heading($title)
 {
+  global $HTML;
   return '<FONT COLOR="'.
 	$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title.'</B></FONT>';
 }
@@ -76,7 +86,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 	   // get the releases of the package
 	$sql	= "SELECT * FROM frs_release WHERE package_id='". db_result($res_package,$p,'package_id') . "' "
-		. "AND status_id=1 ORDER BY release_date DESC";
+		. "AND status_id=1 ORDER BY release_date DESC, name ASC";
 	$res_release = db_query( $sql );
 	$num_releases = db_numrows( $res_release );
 
@@ -114,7 +124,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 				. "AND frs_filetype.type_id=frs_file.type_id "
 				. "AND frs_processor.processor_id=frs_file.processor_id "
                                 . "ORDER BY filename";
-			$res_file = db_query( $sql );
+			$res_file = db_query($sql, -1, 0, SYS_DB_STATS);
 			$num_files = db_numrows( $res_file );
 
 			$proj_stats['files'] += $num_files;
@@ -130,7 +140,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 						. '<A HREF="http://'.$sys_download_host.'/'.$group_unix_name.'/'.$file_release['filename'].'">'
 						. $file_release['filename'] .'</A></TD>'
 						. '<TD align="right">'. $file_release['file_size'] .' </TD>'
-						. '<TD align="right">'. ($file_release['downloads'] ? $file_release['downloads'] : '0') .' </TD>'
+						. '<TD align="right">'. ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0') .' </TD>'
 						. '<TD>'. $file_release['processor'] .'</TD>'
 						. '<TD>'. $file_release['type'] .'</TD>'
 						//. '<TD>'. /*date( 'Y-m-d H:i', $file_release['release_time'] ) .*/'&nbsp;</TD>'
@@ -148,10 +158,10 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 if ( $proj_stats['size'] ) {
 	print '<TR><TD COLSPAN="8">&nbsp;</TR>'."\n";
 	print '<TR><TD><B>Project Totals: </B></TD>'
-		. '<TD><B><I>' . $proj_stats['releases'] . '</I></B></TD>'
-		. '<TD><B><I>' . $proj_stats['files'] . '</I></B></TD>'
-		. '<TD><B><I>' . $proj_stats['size'] . '</I></B></TD>'
-		. '<TD><B><I>' . $proj_stats['downloads'] . '</I></B></TD>'
+		. '<TD align="right"><B><I>' . $proj_stats['releases'] . '</I></B></TD>'
+		. '<TD align="right"><B><I>' . $proj_stats['files'] . '</I></B></TD>'
+		. '<TD align="right"><B><I>' . $proj_stats['size'] . '</I></B></TD>'
+		. '<TD align="right"><B><I>' . $proj_stats['downloads'] . '</I></B></TD>'
 		. '<TD COLSPAN="3">&nbsp;</TD></TR>'."\n";
 }
 

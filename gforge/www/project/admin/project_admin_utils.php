@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Project Admin: Module of common functions
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
 
 /*
 
@@ -15,29 +21,44 @@
 function project_admin_header($params) {
 	global $DOCUMENT_ROOT,$group_id,$feedback;
 
-	$params['toptab']='home';
+	$params['toptab']='admin';
 	$params['group']=$group_id;
 	site_project_header($params);
-	$project=&group_get_object($group_id);
-	$is_admin=$project->userIsAdmin();
+
+	$project =& group_get_object($group_id);
+	exit_assert_object($project,'Group');
+
+	$perm =& $project->getPermission( session_get_user() );
+	exit_assert_object($perm,'Permission');
+
+	$is_admin=$perm->isAdmin();
 
 	echo '
 	<P><B>
 	<A HREF="/project/admin/?group_id='.$group_id.'">Admin</A> | ';
-        if ($is_admin)
-	echo '<A HREF="/project/admin/userperms.php?group_id='.$group_id.'">User Permissions</A> | 
-	<A HREF="/project/admin/editgroupinfo.php?group_id='.$group_id.'">Edit Public Info</A> |
-	<A HREF="/project/admin/history.php?group_id='.$group_id.'">Project History</A>
-        <br>';
+
+	// We should show most of the admin menu only to the admins
+	if ($is_admin) {
+		echo '<A HREF="/project/admin/userperms.php?group_id='.$group_id.'">User Permissions</A> | 
+		<A HREF="/project/admin/editgroupinfo.php?group_id='.$group_id.'">Edit Public Info</A> |
+		<A HREF="/project/admin/history.php?group_id='.$group_id.'">Project History</A> |
+		<A HREF="/project/admin/vhost.php?group_id='.$group_id.'">VHOSTs</A> |
+		<br>';
+	}
+
 	echo '
 	<A HREF="/project/admin/editpackages.php?group_id='.$group_id.'">Edit/Release Files</A>';
-        if ($is_admin)
-        echo '
-        | <A HREF="/people/createjob.php?group_id='.$group_id.'">Post Jobs</A> | 
-	<A HREF="/people/?group_id='.$group_id.'">Edit Jobs</A> |
-	<A HREF="/project/admin/editimages.php?group_id='.$group_id.'">Edit Screenshots</A>
-	</B>
-	<P>';
+
+	// We should show most of the admin menu only to the admins
+	if ($is_admin) {
+		echo '
+		| <A HREF="/people/createjob.php?group_id='.$group_id.'">Post Jobs</A> | 
+		<A HREF="/people/?group_id='.$group_id.'">Edit Jobs</A> |
+		<A HREF="/project/admin/editimages.php?group_id='.$group_id.'">Edit Multimedia Data</A> | 
+		<A HREF="/project/admin/database.php?group_id='.$group_id.'">Database Admin</A>
+		</B>
+		<P>';
+	}
 }
 
 /*
@@ -235,5 +256,102 @@ function show_grouphistory ($group_id) {
 		<H3>No Changes Have Been Made to This Group</H3>';
 	}       
 }       
+
+/*
+	prdb_namespace_seek - check that a projects' potential db name hasn't
+	already been used.  If it has - add a 1..20 to the end of it.  If it 
+	iterates through twenty times and still fails - namespace depletion - 
+	throw an error.
+
+ */
+function prdb_namespace_seek($namecheck) {
+
+	$query = "select * "
+		."from prdb_dbs "
+		."where dbname = '$namecheck'";
+
+	$res_dbl = db_query($query);
+
+	if (db_numrows($res_dbl) > 0) {
+		//crap, we're going to have issues
+		$curr_num = 1;
+
+		while ((db_numrows($res_dbl) > 0) && ($curr_num < 20)) {
+			
+			$curr_num++;
+			$namecheck .= "$namecheck"."$curr_num";
+					
+			$query = "select * "
+				."from prdb_dbs "
+				."where dbname = '$namecheck'";
+
+			$res_dbl = db_query($query);
+		}
+
+		// if we reached 20, then the namespace is depleted - eject eject
+		if ($curr_num == 20) {
+			exit_error("Namespace Failure","Failed to find namespace for database");
+		}
+
+	}
+	return $namecheck;
+
+} //end prdb_namespace_seek()
+
+function random_pwgen() {
+
+	srand ( (double) microtime()*10000000); 
+	$rnpw = "";
+
+	for ($i = 0; $i < 10; $i++) {
+
+		$rn = rand(1,2);
+
+		if ($rn == 1) {
+			$rnpw .= rand(1,9);
+		} else {
+			$rnpw .= chr(rand(65,122));
+		}
+
+	}
+	return rnpw;
+}
+
+function permissions_blurb() {
+	return '
+	<B>NOTE:</B>
+
+	<dl>
+	<dt><B>Project Admins (bold)</B></dt>
+	<dd>can access this page and other project administration pages</dd>
+
+	<dt><B>Release Technicians</B></dt>
+	<dd>can make the file releases (any project admin also a release technician)</dd>
+	'.
+
+	/*
+	'<dt><B>CVS Admins</B></dt>
+	<dd><!-- can --> <i>will</i> be able to access repository files directly (in addition to standard write access)</dd>
+	'.
+	*/
+
+	'<dt><B>Tool Technicians (T)</B></dt>
+	<dd>can be assigned Bugs/Tasks/Patches</dd>
+
+	<dt><B>Tool Admins (A)</B></dt>
+	<dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd>
+
+	<dt><B>Tool No Permission (N/A)</B></dt>
+	<dd>Developer doesn\'t have specific permission (currently
+	equivalent to \'-\')</dd>
+
+	<dt><B>Moderators</B> (forums)</dt>
+	<dd>can delete messages from the project forums</dd>
+
+	<dt><B>Editors</B> (doc. manager)</dt>
+	<dd>can update/edit/remove documentation from the project.</dd>
+	</dl>
+	';
+}
 
 ?>
