@@ -1,9 +1,9 @@
-gforge (3.1-27+1) unstable; urgency=low
+gforge (3.1-28) unstable; urgency=low
 
   * Updated Czech Debconf translations (mostly fuzziness) from Miroslav
     Kure (closes: #298747).
 
- -- Roland Mas <lolando@debian.org>  Thu, 10 Mar 2005 13:21:09 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 13 Mar 2005 23:37:09 +0100
 
 gforge (3.1-27) unstable; urgency=low
 
