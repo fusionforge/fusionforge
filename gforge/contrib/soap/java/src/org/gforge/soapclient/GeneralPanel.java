@@ -34,16 +34,7 @@ public class GeneralPanel extends JPanel {
 
     public GeneralPanel() {
         super();
-
-        JPanel stats = new JPanel(new GridLayout(3,1));
-        stats.add(new JLabel("Projects: " + projectCount));
-        stats.add(new JLabel("Users: " + userCount));
-        JButton refreshButton = new JButton("Refresh");
-        refreshButton.setMnemonic('r');
-        refreshButton.addActionListener(new RefreshListener());
-        stats.add(refreshButton);
-
-        add(stats);
+        refresh();
     }
 
     private void refresh() {
