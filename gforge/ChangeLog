@@ -1,6 +1,8 @@
 2004-02-09  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* Implemented a new search engine architecture
+	* Applied patch [ #616 ]
+	* Fixed bug [ #409 ] Scm index.php was not XHTML valid
 
 2004-02-06  Tom Copeland <tom@infoether.com>
 	* Implemented RFE [ #672 ] X people are monitoring this package
