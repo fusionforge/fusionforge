@@ -63,7 +63,11 @@ if ($add_to_task) {
 	$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
 		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
-	echo '<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+	echo '
+		<h3>Build Relationship Between Tracker Items and Task Manager</h3>
+		<p>
+		<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+		<b>Tracker Item:</b> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
 		<b>Task Manager Project:</b><br>';
 	echo $pg->getName().'
 		<input type="hidden" name="group_project_id" value="'.$pg->getID().'">
@@ -111,14 +115,16 @@ if ($add_to_task) {
 	$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
 		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
-	echo '<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+	echo '<h3>Build Relationship Between Tracker Items and Task Manager</h3>
+		<p><form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+		<b>Tracker Item:</b> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
 		<b>Task Manager Project:</b><br>
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {
 		echo '<option value="'.$pg_arr[$i]->getID().'">'.$pg_arr[$i]->getName().'</option>';
 	}
 	echo '</select><br>
-		<input type="submit" name="add_to_task" value="Add To Existing Task"><br>
+		<input type="submit" name="add_to_task" value="Add Relation To Existing Task"><br>
 		<input type="submit" name="new_task" value="Create New Task">
 		</form>';
 
