@@ -6,7 +6,7 @@
 
 Summary: CVS Plugin for GForge CDE
 Name: gforge-plugin-scmcvs
-Version: 4.0.2
+Version: 4.1
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -64,7 +64,7 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $PLUGIN_CONF_DIR/
 
 # installing installation specific language files
 mkdir -p $PLUGIN_CONF_DIR/languages
-if [ -f rpm-specific/languages/*.tab ]; then
+if [ ls rpm-specific/languages/*.tab &> /dev/null ]; then
 	cp rpm-specific/languages/*.tab $PLUGIN_CONF_DIR/languages/
 fi
 
@@ -73,7 +73,7 @@ fi
 %post
 if [ "$1" = "1" ] ; then
 	# register plugin in database
-	%{_libdir}/gforge/bin/register-plugin %{plugin} CVS
+	%{_libdir}/gforge/bin/register-plugin %{plugin} CVS &> /dev/null
 else
 	# upgrade
 	:
@@ -105,6 +105,10 @@ fi
 /etc/cron.d/%{name}
 
 %changelog
+* Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- 4.1
+- replaced -f test with ls
+- redirects register-plugin output to /dev/null
 * Mon Jan 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - it's now possible to add specific language files in the RPM
 * Sun Sep 26 2004  Guillaume Smet <guillaume-gforge@smet.org>

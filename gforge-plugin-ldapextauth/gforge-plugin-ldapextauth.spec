@@ -6,7 +6,7 @@
 
 Summary: LDAP external authentication plugin for GForge CDE
 Name: gforge-plugin-ldapextauth
-Version: 4.0.2
+Version: 4.1
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -55,7 +55,7 @@ install -m 664 etc/mapping.php $PLUGIN_CONF_DIR/
 %post
 if [ "$1" = "1" ] ; then
 	# register plugin in database
-	%{_libdir}/gforge/bin/register-plugin %{plugin} "LDAP external authentication"
+	%{_libdir}/gforge/bin/register-plugin %{plugin} "LDAP external authentication" &> /dev/null
 else
 	# upgrade
 	:
@@ -82,5 +82,8 @@ fi
 %{pluginlibdir}/rpm-specific
 
 %changelog
+* Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- 4.1
+- redirects register-plugin output to /dev/null
 * Fri Nov 26 2004  Dassault Aviation <guillaume.smet@openwide.fr>
 Initial RPM packaging
