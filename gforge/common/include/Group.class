@@ -1518,8 +1518,10 @@ class Group extends Error {
 			//	reassign open tasks to id=100
 			//
 			db_query("UPDATE project_assigned_to SET assigned_to_id='100' 
-				WHERE project_task_id IN (SELECT project_task_id 
-				FROM project_task WHERE status_id='1') 
+				WHERE project_task_id IN (SELECT pt.project_task_id 
+				FROM project_task pt, project_group_list pgl 
+				WHERE pt.group_project_id = pgl.group_project_id 
+				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."') 
 				AND assigned_to_id='$user_id'");
 
 			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
