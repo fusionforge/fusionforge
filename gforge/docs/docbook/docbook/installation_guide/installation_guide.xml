@@ -95,7 +95,7 @@
 			<section>
 				<title>Unpacking</title>
 				<para>To install GForge, follow these steps (as root):</para>
-				<screen>
+<screen>
 # <userinput>bzip2 -dc gforge-4.1.tar.bz2 | tar xvf -</userinput>
 # <userinput>mv gforge-4.1 <replaceable>/var/www/gforge</replaceable></userinput>
 </screen>
@@ -103,7 +103,7 @@
 			<section>
 				<title>GForge Config File</title>
 				<para>In the GForge distribution, you will find <filename>etc/local.inc</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable>):</para>
-				<programlisting>
+<programlisting>
 # <userinput>mkdir /etc/gforge</userinput>
 # <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc /etc/gforge</userinput>
 # <userinput>chown -R root: /etc/gforge</userinput>
@@ -128,7 +128,7 @@
 							<listitem>
 								<para>Database configuration:</para>
 <programlisting>
-$sys_dbhost="localhost" # some folks suggest setting this to "", your mileage may vary
+$sys_dbhost="localhost"
 $sys_dbname="gforge"
 $sys_dbuser="gforge"
 $sys_dbpasswd="gforge"
@@ -137,11 +137,15 @@ $sys_server="postgres"
 							</listitem>
 							<listitem>
 								<para>Change the value of the <varname>$sys_upload_dir</varname> to:</para>
-								<programlisting>$sys_upload_dir='/var/www/download/';</programlisting>
+<programlisting>
+$sys_upload_dir='/var/www/download/';
+</programlisting>
 							</listitem>
 							<listitem>
 								<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
-<programlisting>$sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";</programlisting>
+<programlisting>
+$sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";
+</programlisting>
 							</listitem>
 							<listitem>
 								<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
@@ -211,7 +215,7 @@ $ <userinput>createlang plpgsql gforge</userinput>
 				<para>Finally, install the database:</para>
 <screen>
 $ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
-$ <userinput>psql -a -U gforge -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
+$ <userinput>psql -a -U gforge -W -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
 </screen>
 			</section>
 		</section>
@@ -261,112 +265,79 @@ zone "gforge.<replaceable>example.com</replaceable>" {
 		</section>
 		<section>
 			<title>Configuring PHP</title>
-			<para>The cronjobs require PHP CLI or PHP CGI to be installed and the <filename>php.ini</filename> file to be properly configured with your <varname>include_path</varname>.  In some systems, one configuration is used for mod_php and PHP CLI (e.g. <filename>/etc/php.ini</filename> in Fedora Core).  In others, there are separate configurations (e.g. <filename>/etc/php4/apache/php.ini</filename> and <filename>/etc/php4/cli/php.ini</filename> in Debian). In the latter case, both configuration files should have correct <literal>include_path</literal>.  Check what <filename>php.ini</filename> is used by PHP CLI by running <command>php4 -i | fgrep php.ini</command>.</para>
-			<para>In addition, you may have to symlink <filename>/usr/bin/php</filename> to <filename>/usr/bin/php4</filename>, which is where the cronjobs expect your PHP CLI to be located.</para>
+			<para>PHP is used in two ways:</para>
 			<orderedlist>
 				<listitem>
-					<para>Verify the version of PHP installed on your system: <command>php -v</command></para>
-				</listitem>
-				<listitem><para>Open <filename>/etc/php.ini</filename>.</para></listitem>
-				<listitem>
-					<para>If the PHP version you're using is 4.2.0 or later, enable the <literal>register_globals</literal> variable:</para>
+					<para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by GForge:</para>
 <programlisting>
 register_globals = On
-</programlisting>
-				</listitem>
-				<listitem>
-					<para>Ensure that file uploads are allowed:</para>
-<programlisting>
-file_uploads = On
-</programlisting>
-				</listitem>
-				<listitem>
-					<para>Add magic quotes to form fields passed to PHP:</para>
-<programlisting>
 magic_quotes_gpc = On
-</programlisting>
-				</listitem>
-				<listitem>
-					<para>and configure the <literal>include_path</literal> directive as follows (on one line):</para>
-<programlisting>
+file_uploads = On
 include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
 </programlisting>
 				</listitem>
-			</orderedlist>
-			<note>
-				<para>If you want to use other applications on the server hosting your GForge, you may be interested in having GForge specific configuration in the GForge vhost directive.</para>
-				<example>
-					<title>gforge.conf vhost configuration</title>
-<programlisting><![CDATA[
-<VirtualHost *>
-	DocumentRoot /var/www/gforge/www
-	ServerName gforge.company.com
-	ErrorDocument 404 /404.php
-	php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
-	php_flag register_globals On
-	php_flag magic_quotes_gpc On
-	php_flag file_uploads On
-	AddDefaultCharset UTF-8
-	AcceptPathInfo On
-	<Location /projects>
-		ForceType application/x-httpd-php
-	</Location>
-	<Location /users>
-		ForceType application/x-httpd-php
-	</Location>
-</VirtualHost>
-]]></programlisting>
-				</example>
-			</note>
-			<note>
-				<para>To run scripts in command line, you need to invoke the PHP interpreter with the <literal>-f</literal> flag, e.g.:</para>
+				<listitem>
+					<para><emphasis>Cron jobs and some scripts</emphasis> require PHP Command-Line Interface (CLI). All scripts are invoked with command like this (split into some lines for readability):</para>
 <screen>
-# php -f cronjobs/mailing_lists_create.php
+$ <userinput>php4
+  -d include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
+  -f cronjobs/mailing_lists_create.php</userinput>
 </screen>
-			</note>
+					<note>
+						<para>The <literal>-f</literal> is optional when using PHP CLI but it's required when PHP CGI executable is used.</para>
+					</note>
+					<para>Instead of using <literal>-d include_path=...</literal>, you may want to set <varname>include_path</varname> in PHP CLI <filename>php.ini</filename>, like already shown above. To find where <filename>php.ini</filename> is located, use the following command:</para>
+<screen>
+$ <userinput>php4 -i | fgrep php.ini</userinput>
+</screen>
+				</listitem>
+			</orderedlist>
 		</section>
 		<section id="web-server">
 			<title>Configuring the Web Server (Apache)</title>
+			<para>First, you should decide where to put GForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.  Use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to GForge virtual host configuration for Apache.  All is inside the following template:</para>
+<programlisting>
+NameVirtualHost <replaceable>1.2.3.4</replaceable>
+&lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
+
+<replaceable># Put the rest of the directives here.</replaceable>
+
+&lt;/VirtualHost&gt;
+</programlisting>
 			<orderedlist>
 				<listitem>
-					<para>Open <filename>/etc/httpd/conf/httpd.conf</filename> or better create a <filename>gforge.conf</filename> file in <filename class="directory">/etc/httpd/conf.d/</filename>.  These files and directories may have different names depending on distribution.</para>
-					<para>You may want to copy <filename>etc/gforge-httpd.conf.example</filename> to <filename>/etc/httpd/conf.d/gforge.conf</filename> and edit it, instead of entering manually the examples below.</para>
-				</listitem>
-				<listitem><para>Create the primary virtual host and fill the rest of the directives in it:</para>
-<programlisting><![CDATA[
-NameVirtualHost 192.168.1.1
-<VirtualHost 192.168.1.1>
-ServerName gforge.company.com
-ServerAdmin webmaster@gforge.company.com
-
-# Put the rest of the directives here.
-
-</VirtualHost>
-]]></programlisting>
-				</listitem>
-				<listitem>
-					<para>Change the <literal>DocumentRoot</literal> to point to the <filename class="directory">www</filename> directory:</para>
+					<para>Set basic virtual host settings:</para>
 <programlisting>
-DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
+ServerName  gforge.<replaceable>company.com</replaceable>
+ServerAdmin webmaster@gforge.<replaceable>company.com</replaceable>
 </programlisting>
 				</listitem>
 				<listitem>
-					<para>Create a <literal>Directory</literal> directive following the <literal>DocumentRoot</literal> as follows:</para>
-<programlisting><![CDATA[
-<Directory "/var/www/gforge/www">
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Order allow,deny
-    Allow from all
-    ErrorDocument 404 /404.php
-</Directory>
-]]></programlisting>
-				</listitem>
-				<listitem><para>If you wish to set up a server with HTTPS, you need to configure the <literal>VirtualHost:443</literal> section of <filename>httpd.conf</filename>.</para></listitem>
-				<listitem>
-					<para>Add several new filenames to the <literal>DirectoryIndex</literal> directive:</para>
+					<para>Define log files:</para>
 <programlisting>
-DirectoryIndex index.html index.php
+CustomLog "<replaceable>/var/log/gforge</replaceable>/access.log" combined
+ErrorLog  "<replaceable>/var/log/gforge</replaceable>/error.log"  combined
+</programlisting>
+					<para>Usual practice is to use <command>logrotate</command> on these files.  Alternative is to pipe logs to <command>cronolog</command> which will automatically make directory with <filename>access.log</filename> and <filename>error.log</filename> for each day:</para>
+<programlisting>
+CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
+ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"  combined
+</programlisting>
+					<note>
+						<para>In FHS-compliant install, you may want to use <filename class="directory">/var/local/log/gforge</filename> instead of <filename class="directory">/var/log/gforge</filename>.</para>
+					</note>
+				</listitem>
+				<listitem>
+					<para>Set up document root:</para>
+<programlisting>
+DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
+&lt;Directory "<replaceable>/var/www/gforge</replaceable>/www"&gt;
+    Options        FollowSymLinks
+    AllowOverride  None
+    Order          allow,deny
+    Allow from all
+    ErrorDocument  404 /404.php
+&lt;/Directory&gt;
 </programlisting>
 				</listitem>
 				<listitem>
@@ -375,73 +346,70 @@ DirectoryIndex index.html index.php
 					<itemizedlist>
 						<listitem>
 							<para>Configuring PHP for Apache 1.3</para>
-							<orderedlist>
-								<listitem>
-									<para>Open <filename>/etc/httpd/conf/httpd.conf</filename> or <filename>/etc/httpd/conf.d/gforge.conf</filename> and put the rest of the directives in the primary virtual host.</para>
-								</listitem>
-								<listitem>
-									<para>Insert the following instructions after the <literal>DocumentRoot</literal> directive:</para>
-<programlisting><![CDATA[
-<Location /projects>
+							<para>Insert the following instructions after the <literal>DocumentRoot</literal> directive:</para>
+<programlisting>
+&lt;Location /projects&gt;
   ForceType application/x-httpd-php
-</Location>
-<Location /users>
+&lt;/Location&gt;
+&lt;Location /users&gt;
   ForceType application/x-httpd-php
-</Location> 
-]]></programlisting>
-									<para>Ensure the following lines are present and not commented out in <filename>/etc/httpd/conf/httpd.conf</filename>:</para>
+&lt;/Location&gt;
+</programlisting>
+							<para>Ensure the following lines are present and not commented out in Apache configuration:</para>
 <programlisting>
 LoadModule php_module	modules/libphp.so
 AddModule mod_php.c
 </programlisting>
-								</listitem>
-							</orderedlist>
 						</listitem>
 						<listitem>
 							<para>Configuring PHP for Apache 2.0</para>
 							<para>For newer versions of Apache 2.0 (RedHat 9 or above), please follow Apache 1.3 instructions above.</para>
-							<orderedlist>
-								<listitem>
-									<para>Open <filename>/etc/httpd/conf.d/php.conf</filename> and put the rest of the directives in the primary virtual host.</para>
-								</listitem>
-								<listitem>
-									<para>Change the existing <literal>Files</literal> directive to:</para>
-<programlisting><![CDATA[
-<Files *.php>
+							<para>Change the existing <literal>Files</literal> directive to:</para>
+<programlisting>
+&lt;Files *.php&gt;
     SetOutputFilter PHP
     SetInputFilter PHP
     AcceptPathInfo On
     LimitRequestBody 2097152
-</Files>
-]]></programlisting>
-									<para>
-										The <literal>LimitRequestBody</literal> directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size &gt;512Kb. With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the <literal>upload_max_filesize</literal> directive in <filename>php.ini</filename>.
-									</para>
-								</listitem>
-								<listitem>
-									<para>Add the following lines:</para>
-<programlisting><![CDATA[
-<Files projects>
+&lt;/Files&gt;
+</programlisting>
+							<para>The <literal>LimitRequestBody</literal> directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size greater than 512Kb. With this directive, we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the <literal>upload_max_filesize</literal> directive in PHP configuration file.</para>
+							<para>Add the following lines:</para>
+<programlisting>
+&lt;Files projects&gt;
 SetOutputFilter PHP
 SetInputFilter PHP
 AcceptPathInfo on
-</Files>
+&lt;/Files&gt;
 
-<Files users>
+&lt;Files users&gt;
 SetOutputFilter PHP
 SetInputFilter PHP
 AcceptPathInfo on
-</Files>
-]]></programlisting>
-								</listitem>
-							</orderedlist>
+&lt;/Files&gt;
+</programlisting>
 						</listitem>
 					</itemizedlist>
 				</listitem>
 				<listitem>
-					<para>Restart the Apache server: <command>/etc/init.d/httpd restart</command></para>
+					<para>Set up PHP module:</para>
+<programlisting>
+php_flag   register_globals On
+php_flag   gpc_magic_quotes On
+php_flag   files_uploads    On
+php_value  include_path     ".:/etc/gforge:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include"
+php_value  default_charset  "UTF-8"
+
+</programlisting>
+				</listitem>
+				<listitem>
+					<para>Set up directory index script name:</para>
+<programlisting>
+DirectoryIndex index.php
+</programlisting>
 				</listitem>
 			</orderedlist>
+			<para>Of couse, all changes will take effect only after reloading or restarting Apache.</para>
 			<section>
 				<title>Project webs</title>
 				<para>Each project can have its own vhost.  Module <literal>vhost_alias</literal> should be enabled and the following directives should be added to <filename>httpd.conf</filename>:</para>
@@ -471,7 +439,7 @@ AcceptPathInfo on
   DirectoryIndex index.html index.htm
 </VirtualHost>
 ]]></programlisting>
-		      </section>
+			</section>
 		</section>
 		<section>
 			<title>Configuring Mail Transport Agent (Any)</title>
@@ -584,7 +552,8 @@ gforge=> SELECT user_id FROM users WHERE user_name='<replaceable>YOUR USER NAME<
 				<listitem>
 					<para>Now set up the newly added user to be a GForge administrator:</para>
 <screen>
-gforge=> INSERT INTO user_group (user_id,group_id,admin_flags) VALUES (102,1,'A');
+gforge=> <userinput>INSERT INTO user_group (user_id,group_id,admin_flags)</userinput>
+gforge-> <userinput>VALUES (<replaceable>102</replaceable>,1,'A');</userinput>
 </screen>
 				</listitem>
 			</orderedlist>
@@ -604,7 +573,7 @@ gforge=> INSERT INTO user_group (user_id,group_id,admin_flags) VALUES (102,1,'A'
 # mv jpgraph-1.17/src/* /var/www/jpgraph
 </screen>
 				<para>When you get your preferred version of JPGraph installed, you will have to edit one setting in <filename>jpgraph.php</filename>:</para>
-				<programlisting>
+<programlisting>
 DEFINE("USE_CACHE", false);
 </programlisting>
 				<warning>
@@ -615,7 +584,7 @@ DEFINE("USE_CACHE", false);
 				<title>Perl</title>
 				<para>If you want to use some of the Perl scripts that access the database, you'll need the <literal>DBI</literal> and <literal>DBD::Pg</literal> Perl modules.  On Red Hat systems (and variants), you can get them by installing the <literal>libdbi</literal> and <literal>libdbd-pgsql</literal> packages.  On Debian systems (and variants), the packages are called <literal>libdbi-perl</literal> and <literal>libdbd-pg-perl</literal>.</para>
 				<para>You'll also need to install <filename>utils/include.pl</filename> to <filename class="directory">/usr/lib/gforge/lib/</filename>, and put some configuration variables into <filename class="directory">/etc/gforge/local.pl</filename>.  In particular, you'll need something like the following in <filename>local.pl</filename>:</para>
-				<programlisting>
+<programlisting>
 $sys_default_domain = 'gforge.company.com' ;
 $sys_dbhost = '192.168.12.34' ;
 $sys_dbname = 'gforge' ;
@@ -680,8 +649,8 @@ chmod 755 *.php *.sh
 				<para>Ensure the following info is in <filename>/etc/services</filename>:</para>
 				<screen>
 $ grep cvspserver /etc/services
-cvspserver      2401/tcp                        # CVS client/server operations
-cvspserver      2401/udp                        # CVS client/server operations
+cvspserver  2401/tcp  # CVS client/server operations
+cvspserver  2401/udp  # CVS client/server operations
 </screen>
 				<para>Ensure the following info is in <filename>/etc/xinetd.d/cvspserver</filename> (if it doesn't exist, create a new file with the following text to enable anonymous access):</para>
 <programlisting>
