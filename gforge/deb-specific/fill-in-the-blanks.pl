@@ -2,29 +2,30 @@
 
 use strict ;
 
-use vars qw/$ifile $ofile $prefix $tmpfile %hash $cur $code $line $token/ ;
+use vars qw/$ifile $ofile $prefix $tmpfile %hash $key $val $cur $code $line $token/ ;
 
 # use Debconf::Client::ConfModule ':all';
 
-if ($#ARGV < 2) {
+if ($#ARGV < 1) {
     print STDERR "Missing parameter.\n\n" ;
-    print STDERR "Usage: fill-in-the-blanks.pl <in-template> <out-file> <prefix> [ <variable> ... ]\n" ;
+    print STDERR "Usage: fill-in-the-blanks.pl <in-template> <out-file>\n" ;
     exit 1 ;
 }
 
 $ifile = shift @ARGV ;
 $ofile = shift @ARGV ;
-$prefix = shift @ARGV ;
 %hash = () ;
 
-foreach $cur (@ARGV) {
-    ($code, $hash{$cur}) = get ($prefix.$cur) ;
-    if ($code) {
-	exit 1 ;
-    }
+open CONF, "/etc/sourceforge/sourceforge.conf" ;
+while ($line = <CONF>) {
+    chomp $line ;
+    next if $line =~ m/^\s*#/ ;
+    ($key, $val) = split ('=', $line, 2) ;
+    $hash{$key} = $val ;
 }
+close CONF ;
 
-umask 077 ;
+umask 0077 ;
 open (IFILE, $ifile)
     or die "Can't open input file '$ifile'" ;
 if (-e $ofile) {
@@ -35,12 +36,12 @@ open (OFILE, "> $ofile")
     or die "Can't open output file '$ofile'" ;
 
 while ($line = <IFILE>) {
+    chomp $line ;
     foreach $cur (keys %hash) {
 	$token = "{$cur}" ;
 	$line =~ s/$token/$hash{$cur}/g ;
     }
-    print OFILE $line;
+    print OFILE "$line\n";
 }
-
 close IFILE ;
 close OFILE ;
