@@ -173,8 +173,8 @@ plugin_foo_page / item (as compared to the current page / item model
 used for "core" Sourceforge i18n strings).
 
 - A plugin should register itself into the database using the provided
-sf-register-plugin script on its installation, and unregister itself
-using sf-unregister-plugin on removal.  When unregistering, be careful
+register-plugin script on its installation, and unregister itself
+using unregister-plugin on removal.  When unregistering, be careful
 to delete all the rows in tables that contain a reference to your
 plugin_id, so that the unregistration process (which deletes your row
 in the plugins table) does not fail due to referential integrity errors.

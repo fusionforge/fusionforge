@@ -1,34 +1,28 @@
 #!/usr/bin/perl -w
 #
-# Debian-specific script to register a new theme into the SF database
+# Debian-specific script to unregister a plugin from the SF database
 
 use DBI ;
 use strict ;
 use diagnostics ;
 
-use vars qw/$dbh @reqlist $thdir $thname/ ;
+use vars qw/$dbh @reqlist $plugin_name $plugin_desc $plugin_id/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions
 
 &db_connect ;
 
-if ($#ARGV < 1) {
-    debug "Usage: sf-register-theme <dirname> <theme name>" ;
-    debug "The theme must be in /usr/lib/gforge/www/themes/<dirname>/" ;
+if ($#ARGV < 0) {
+    debug "Usage: unregister-plugin <plugin name>" ;
     exit 1 ;
 }
 
-$thdir = $ARGV [0] ;
-$thname = $ARGV [1] ;
+$plugin_name = $ARGV [0] ;
 
-unless (-d "/usr/lib/gforge/www/themes/$thdir") {
-    debug "The directory /usr/lib/gforge/www/themes/$thdir does not exist" ;
-    exit 1 ;
-}
-unless (-e "/usr/lib/gforge/www/themes/$thdir/Theme.class") {
-    debug "The file /usr/lib/gforge/www/themes/$thdir/Theme.class does not exist" ;
+if ($plugin_name =~ /[^a-z]/) {
+    debug "Error: the plugin name must contain only [a-z] characters" ;
     exit 1 ;
 }
 
@@ -37,19 +31,26 @@ $dbh->{RaiseError} = 1;
 eval {
     my ($query, $sth, @array, $version, $action) ;
 
-    $thdir = $dbh->quote ($thdir) ;
-    $thname = $dbh->quote ($thname) ;
-
-    $query = "INSERT INTO themes (dirname, fullname) VALUES ('$thdir', '$thname')" ;
-
-    # debug $query ;
-
+    $query = "SELECT count(*) FROM plugins WHERE plugin_name = '$plugin_name'" ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
     $sth->finish () ;
 
-    # debug "Committing." ;
-    $dbh->commit () ;
+    if ($array[0] == 1) {
+	$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	$plugin_id = $array[0] ;
+	debug "Plugin '$plugin_name' successfully unregistered." ;
+
+	# debug "Committing." ;
+	$dbh->commit () ;
+    } else {
+	debug "No plugin '$plugin_name' found, skipping." ;
+    }
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
