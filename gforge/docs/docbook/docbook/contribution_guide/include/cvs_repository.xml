@@ -1,0 +1,70 @@
+<section id="cg_cvs_repository">
+	<title id="cg_cvs_repository.title">GForge CVS repository</title>
+	<section>
+		<title>Anonymous access</title>
+		<para>You can check out the GForge CVS repository through anonymous CVS with the following instructions.</para>
+		<para>
+			The module you wish to check out must be specified as the &lt;modulename&gt;.
+			When prompted for a password for anonymous, simply press the <keycap>Enter</keycap> key.
+		</para>
+<programlisting><![CDATA[
+export CVSROOT=:pserver:anonymous@cvs.gforge.org:/cvsroot/gforge
+cvs login
+cvs co <modulename>
+]]></programlisting>
+	</section>
+	<section>
+		<title>Modules in CVS repository</title>
+		<para>The following CVS modules are available in GForge repository.</para>
+		<variablelist>
+			<varlistentry>
+				<term>gforge</term>
+				<listitem>
+					<para>Main module. Contains GForge software.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>tools</term>
+				<listitem>
+					<para>Contains tools which may be useful for GForge developers, translators and administrators.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-plugin-helloworld</term>
+				<listitem>
+					<para>Helloworld plugin to help developers understand plugin management in GForge.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-plugin-eirc</term>
+				<listitem>
+					<para>EIRC plugin for GForge (java based IRC client in GForge).</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-plugin-ldapextauth</term>
+				<listitem>
+					<para>Authentification on external LDAP directory plugin. Still a work in progress.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-theme-helloworld</term>
+				<listitem>
+					<para>Simple theme example.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-theme-starterpack</term>
+				<listitem>
+					<para>Themes debian package information.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>gforge-theme-(classic|darkaqua|debian|forged|kde|querencia|savannah|ultralite)</term>
+				<listitem>
+					<para>Themes for GForge. They may be outdated.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</section>
