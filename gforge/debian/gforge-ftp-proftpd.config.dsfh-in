@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
+
+propose_update_install /etc/proftpd.conf
+db_stop
