@@ -7,6 +7,8 @@
 	* reordered records in French.tab
 	* Made a beautiful table to list exixting forums in forum add
 	* Added darkaqua theme from Patrick McFarland (diablod3)
+	* Applied patch from Vincente Ruiz that fix Browser language selection
+	if you are not logged in
 
 2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
 
