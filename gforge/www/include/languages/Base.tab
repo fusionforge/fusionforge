@@ -1529,17 +1529,17 @@ pm_projecttask	mail_followups_title	\n\nFollow-Ups
 pm_projecttask	mail_notice			Task # $1 has been updated\n\nProject: $2\nSubproject: $3\nSummary: $4\nComplete: $5\nStatus: $6\n\nDescription: $7
 pm_reporting	aging_report	Aging Report
 pm_reporting	all_tasks_by_category	All Tasks By Category
-pm_reporting	all_tasks_by_technician	All Tasks By Technician
+pm_reporting	all_tasks_by_technician	All Tasks By Assignee
 pm_reporting	average_duration	Average duration for closed tasks (days)
 pm_reporting	by_subproject	Report by Subproject
-pm_reporting	by_tech	Report by Technician
+pm_reporting	by_tech	Report by Assignee
 pm_reporting	not_completed	Number of tasks still not completed
 pm_reporting	open_tasks_by_category	Open Tasks By Category
-pm_reporting	open_tasks_by_technician	Open Tasks By Technician
+pm_reporting	open_tasks_by_technician	Open Tasks By Assignee
 pm_reporting	report_note	<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
 pm_reporting	started_tasks	Number of started tasks
 pm_reporting	tasks_by_category	Tasks By Category
-pm_reporting	tasks_by_technician	Tasks By Technician
+pm_reporting	tasks_by_technician	Tasks By Assignee
 pm_reporting	title	Task Reporting System
 pm_task	create_successfully	Task Created Successfully
 frs_admin	delete	Delete
@@ -2950,19 +2950,19 @@ tracker_reporting	aging_report	Aging Report
 tracker_reporting	all_by_group	All Items By Artifact Group
 tracker_reporting	all_by_resolution	All Items By Resolution
 tracker_reporting	all_by_technician	All Items By Category
-tracker_reporting	all_items_by_technician	All Items By Technician
+tracker_reporting	all_items_by_technician	All Items By Assignee
 tracker_reporting	artifact_type	Artifact Type: 
 tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
 tracker_reporting	dist_by_category	Distribution by Category
 tracker_reporting	dist_by_group	Distribution by Group
 tracker_reporting	dist_by_resolution	Distribution by Resolution
-tracker_reporting	dist_by_technician	Distribution by Technician
+tracker_reporting	dist_by_technician	Distribution by Assignee
 tracker_reporting	items_open	Number of Items Still Open
 tracker_reporting	items_submitted	Number of Items Submitted
 tracker_reporting	open_by_group	Open By Artifact Group
 tracker_reporting	open_items_by_category	Open Items By Category
 tracker_reporting	open_items_by_resolution	Open Items By Resolution
-tracker_reporting	open_items_by_technician	Open Items By Technician
+tracker_reporting	open_items_by_technician	Open Items By Assignee
 tracker_reporting	title	Artifact Reporting System
 tracker_taskmgr	add_relation_to_task	Add Relation To Existing Task.
 tracker_taskmgr	add_relationship	Add Relationship To Selected Task

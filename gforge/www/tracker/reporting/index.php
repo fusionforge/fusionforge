@@ -75,14 +75,17 @@ echo db_error();
 //
 //	Build list of reports
 //
+$vals=array();
+$labels=array();
 $vals[]='activity'; $labels[]='Response Time';
 $vals[]='category'; $labels[]='By Category';
 $vals[]='group'; $labels[]='By Group';
 $vals[]='resolution'; $labels[]='By Resolution';
-$vals[]='technician'; $labels[]='By Tecnician';
+$vals[]='assignee'; $labels[]='By Assignee';
 
 
 //required params for site_project_header();
+$params=array();
 $params['group']=$group_id;
 $params['toptab']='tracker';
 $params['pagename']='tracker';

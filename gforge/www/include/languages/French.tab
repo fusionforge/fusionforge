@@ -1545,17 +1545,17 @@ pm_projecttask	mail_followups_title	Commentaire
 pm_projecttask	mail_notice	notification
 pm_reporting	aging_report	Ordre chronologique
 pm_reporting	all_tasks_by_category	Toutes les tâches par catégorie
-pm_reporting	all_tasks_by_technician	Toutes les tâches par technicien
+pm_reporting	all_tasks_by_technician	Toutes les tâches par responsable
 pm_reporting	average_duration	Durée moyenne pour achever une tâche (en jour)
 pm_reporting	by_subproject	Rapport d'activité par sous-projet
-pm_reporting	by_tech	Rapport d'activité par technicien
+pm_reporting	by_tech	Rapport d'activité par responsable
 pm_reporting	not_completed	Nombre de tâches toujours inachevées
 pm_reporting	open_tasks_by_category	Tâches commencées par catégorie
-pm_reporting	open_tasks_by_technician	Tâches commencées par le technicien
-pm_reporting	report_note	<p>Notez que des tâches peuvent être assignées à plusieurs techniciens. Ces tâches leur seront attribuées à chacun.</p>
+pm_reporting	open_tasks_by_technician	Tâches commencées par le responsable
+pm_reporting	report_note	<p>Notez que des tâches peuvent être assignées à plusieurs responsables. Ces tâches leur seront attribuées à chacun.</p>
 pm_reporting	started_tasks	Nombre de tâches commencées
 pm_reporting	tasks_by_category	Tâches par catégorie
-pm_reporting	tasks_by_technician	Tâches par technicien
+pm_reporting	tasks_by_technician	Tâches par responsable
 pm_reporting	title	Rapports sur les tâches
 pm_task	create_successfully	Tâche créée avec succès
 pm_uploadcsv	choose_file	Choisissez un fichier au format CSV à charger.
