@@ -4,8 +4,6 @@ require_once ('/usr/lib/sourceforge/plugins/helloworld/include/HelloWorldPlugin.
 
 $HelloWorldPluginObject = new HelloWorldPlugin () ;
 
-// echo "Initialising helloworld-plugin " ;
-
 $pm = plugin_manager_get_object() ;
 
 $pm->RegisterPlugin ("helloworld", $HelloWorldPluginObject) ;
