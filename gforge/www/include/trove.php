@@ -47,6 +47,34 @@ function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
 	}
 }
 
+// ##################################
+
+/**
+ * trove_updaterootparent() - Regenerates full path entries for $node and all subnodes
+ *
+ * @param		int		The node
+ * @param		int		The root parent node
+ */
+function trove_updaterootparent($mynode,$rootnode) {
+	// first generate own path
+	if($mynode!=$rootnode) $res_update = db_query('UPDATE trove_cat SET root_parent=' .$rootnode. ' WHERE trove_cat_id='.$mynode);
+	else $res_update = db_query('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id='.$mynode);
+	// now generate paths for all children by recursive call
+	if($mynode!=0)
+	{
+		$res_child = db_query("
+			SELECT trove_cat_id
+			FROM trove_cat
+			WHERE parent='$mynode'
+			AND trove_cat_id!=0;
+		", -1, 0, SYS_DB_TROVE);
+
+		while ($row_child = db_fetch_array($res_child)) {
+			trove_updaterootparent($row_child['trove_cat_id'],$rootnode);
+		}
+	}
+}
+
 // #########################################
 
 /**
