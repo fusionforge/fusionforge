@@ -782,7 +782,6 @@ if (isset($params['group']) && $params['group']) {
 		}
 */
 		return $return.'
-		</tr>
 		</table> 
 
 		<!-- end tabs -->
