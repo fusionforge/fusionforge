@@ -949,7 +949,7 @@ class Group extends Error {
 			$this->plugins_data = array () ;
 			$sql="SELECT group_plugin.plugin_id, plugins.plugin_name
 							  FROM group_plugin, plugins
-				  WHERE group_plugin.group_id='".$this->getID()."
+				  WHERE group_plugin.group_id=".$this->getID()."
 								AND group_plugin.plugin_id = plugins.plugin_id" ;
 			$res=db_query($sql);
 			$rows = db_numrows($res);
