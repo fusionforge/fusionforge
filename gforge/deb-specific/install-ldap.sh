@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # 
 # $Id$
 #
@@ -48,6 +48,38 @@ show_vars () {
     echo "cryptedpasswd = '$cryptedpasswd'"
     echo "ldap_suffix = '$ldap_suffix'"
     echo "tmpfile_pattern = '$tmpfile_pattern'"
+}
+
+check_base_dn() {
+    server_base_dn=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" | grep "namingContexts:" | cut -d" " -f2)
+    echo "sf_ldap_base_dn = $sf_ldap_base_dn"
+    echo "server_base_dn = $server_base_dn"
+    if echo $sf_ldap_base_dn | grep -q "$server_base_dn\$" ; then
+	echo Gforge base DN is under the existing server base DN -- OK
+    else
+	echo Gforge base DN is *not* under the existing server base DN -- fail
+	exit 2
+    fi
+
+    addon=$(echo $sf_ldap_base_dn | sed "s/$server_base_dn\$//")
+    echo "addon = $addon"
+    if [ -z "$addon" ] ; then
+	echo Gforge base DN is equal to server base DN -- strange but OK
+	return 0
+    elif [ -z $(echo $addon | cut -d, -f2-) ] ; then
+	echo Gforge base DN is just a level under the server base DN -- OK
+	return 0
+    else
+	echo Gforge base DN is at least two levels under the server base DN -- continuing investigations
+    fi
+    
+    needednc=$(echo $sf_ldap_base_dn | cut -d, -f2-)
+    if slapcat | grep -q "dn: $needednc" ; then
+	echo Found existing object in which to create our directory -- OK
+    else
+	echo No existing object in which to create our directory -- fail
+	exit 3
+    fi
 }
 
 # Check Server
@@ -345,6 +377,7 @@ case "$1" in
 	invoke-rc.d slapd restart
 	sleep 5		# Sometimes it takes a bit of time to get out of bed
 	check_server
+	check_base_dn
 	# echo "Load ldap"
 	load_ldap
 	# echo "Setup SF_robot account"

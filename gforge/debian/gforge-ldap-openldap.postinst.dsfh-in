@@ -43,8 +43,46 @@ case "$1" in
 	db_stop
 
         # Setup our LDAP
-	/usr/lib/gforge/bin/install-ldap.sh configure || echo "WARNING WARNING WARNING: LDAP Configuration Failed"
-	
+	/usr/lib/gforge/bin/install-ldap.sh configure
+	err=$?
+	case $err in
+	    0)
+		exit $err
+		;;
+	    1)
+		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
+		echo "It seems the LDAP server can't be started, for some reason."
+		echo "Please report this bug, and include the previous messages, if any."
+		exit $err
+		;;
+	    2)
+		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
+		sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
+		server_base_dn=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" | grep "namingContexts:" | cut -d" " -f2)
+		echo "It seems the LDAP base DN you provided ($sf_ldap_base_dn) is not"
+		echo "under the base DN of your LDAP directory ($server_base_dn)."
+		echo "Please reconfigure slapd or gforge-ldap-openldap according to what you wish to change."
+		perl -pi -e "s/^ldap_base_dn=.*\n// /etc/gforge/gforge.conf"
+		db_fset seen false
+		exit $err
+		;;
+	    3)
+		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
+		sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
+		needednc=$(echo $sf_ldap_base_dn | cut -d, -f2-)
+		echo "It seems the LDAP base DN you provided ($sf_ldap_base_dn) cannot be used."
+		echo "Please make sure the father node ($needednc) exists in your directory."
+		perl -pi -e "s/^ldap_base_dn=.*\n// /etc/gforge/gforge.conf"
+		db_fset gforge/shared/ldap_base_dn seen false
+		exit $err
+		;;
+	    *)
+		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
+		echo "An unknown error happened."
+		echo "Please report this bug, and include the previous messages, if any."
+		exit $err
+		;;
+	esac
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -6,8 +6,11 @@ gforge (3rc1-0+) experimental; urgency=low
   * [Christian] Some cvs improvement 
   * [Roland] Fixed several database upgrading bugs.
   * [Roland] Don't fail or hang in postinst with recent ssh.
+  * [Roland] Added a few diagnostic tests in the LDAP isntallation
+    scripts.  That should help pointing out errors caused by the user
+    inputting invalid data.
 
- -- Roland Mas <lolando@debian.org>  Tue, 11 Mar 2003 23:32:38 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 16 Mar 2003 15:57:16 +0100
 
 gforge (3pre9-0+2) experimental; urgency=low
 
