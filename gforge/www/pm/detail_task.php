@@ -21,6 +21,11 @@ pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_projec
 ?>
 
 <table border="0" width="100%">
+
+        <tr>
+                <TD><B>Submitted By:</B><br><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</TD>
+        </tr>
+
 	<tr>
 		<td colspan="2">
 		<b>Category:</b><br>

@@ -26,6 +26,10 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 
 <table border="0" width="100%">
 
+	<tr>
+		<TD><B>Submitted By:</B><br><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</TD>
+	</tr>
+
 	<tr>	
 		<td>
 		<b>Category:</b><br>
@@ -47,6 +51,9 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 		<b>Priority:</b><br>
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
+
+
+
 	</tr>
 
   	<tr>

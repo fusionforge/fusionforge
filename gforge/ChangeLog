@@ -1,3 +1,8 @@
+2003-01-07 Tom Copeland <tom@infoether.com>
+
+	* Added "submitted by" info to the task detail view.  Modified project_task_vw 
+	to include user name and realname from user table.
+
 2003-01-06  Richard Offer
 
 	* www/include/Layout.class, www/project/showfiles.php: patch #134:

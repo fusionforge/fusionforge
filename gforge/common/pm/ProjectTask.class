@@ -162,7 +162,7 @@ class ProjectTask extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($project_task_id) {
-		$res=db_query("SELECT * FROM project_task
+		$res=db_query("SELECT * FROM project_task_vw
 			WHERE project_task_id='$project_task_id'
 			AND group_project_id='". $this->ProjectGroup->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
@@ -190,6 +190,24 @@ class ProjectTask extends Error {
 	 */
 	function getID() {
 		return $this->data_array['project_task_id'];
+	}
+
+	/**
+	 *	getSubmittedRealName - get the real name of the person who created this task.
+	 *
+	 *	@return	string	The real name person who created this task.
+	 */
+	function getSubmittedRealName() {
+		return $this->data_array['realname'];
+	}
+	
+	/**
+	 *	getSubmittedUnixName - get the unix name of the person who created this task.
+	 *
+	 *	@return	string	The unix name of the person who created this task.
+	 */
+	function getSubmittedUnixName() {
+		return $this->data_array['user_name'];
 	}
 
 	/**

@@ -1686,9 +1686,12 @@ CREATE TABLE "project_category" (
 	"category_name" text
 );
 
-
-CREATE VIEW "project_task_vw" as SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name FROM ((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) NATURAL JOIN project_status);
-
+CREATE VIEW project_task_vw AS
+SELECT project_task.*,project_category.category_name,project_status.status_name,users.user_name,users.realname
+FROM project_task
+FULL JOIN project_category ON (project_category.category_id=project_task.category_id)
+FULL JOIN users ON (users.user_id=project_task.created_by)
+NATURAL JOIN project_status;
 
 CREATE TABLE "project_task_artifact" (
 	"project_task_id" integer,
