@@ -224,7 +224,12 @@ if (session_loggedin()) {
 		</FORM>
 	</TD></TR>
 
-	</TABLE>
+	<tr>
+		<td colspan=2><b>Task Manager Integration:</b>
+			<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><b>Create New Task Or Attach To Existing Task</b></a>
+		</td>
+	</tr>
+	</table>
 
 <?php
 

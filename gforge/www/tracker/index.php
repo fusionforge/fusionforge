@@ -233,6 +233,10 @@ if ($group_id && $atid) {
 			}
 			break;
 		}
+		case 'taskmgr' : {
+			include 'taskmgr.php';
+			break;
+		}
 		case 'browse' : {
 			include 'browse.php';
 			break;

@@ -122,7 +122,8 @@ if ($_group && ($_group != 100)) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
+$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
+	'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
 /**
  *

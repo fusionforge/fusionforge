@@ -1,5 +1,10 @@
 2003-01-02  Tim Perdue <tim@gforge.org>
 
+	* Added interface to tracker so you can build relationships w/Task
+	manager.
+
+2003-01-02  Tim Perdue <tim@gforge.org>
+
 	* Complete rewrite of doc mgr in GForge coding guidelines.
 
 2003-01-02  Ryan T. Sammartino  <ryants@shaw.ca>

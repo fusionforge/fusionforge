@@ -109,6 +109,7 @@ class Layout extends Error {
 		} else {
 			$params['title'] =  $GLOBALS['sys_name'] . ":" . $params['title'];
 		}
+
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 
@@ -119,8 +120,7 @@ class Layout extends Error {
 	<SCRIPT language="JavaScript">
 	<!--
 	function help_window(helpurl) {
-		HelpWin = window.open( '<?php echo ((session_issecure()) ? 'https://'.
-			$GLOBALS['sys_default_domain'] : 'http://'.$GLOBALS['sys_default_domain']); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+		HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
 	</SCRIPT>

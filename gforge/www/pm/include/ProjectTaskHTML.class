@@ -80,7 +80,9 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function showRelatedArtifacts() {
-		$res=getRelatedArtifacts;
+		global $sys_datefmt;
+		$res=$this->getRelatedArtifacts();
+
 		$rows=db_numrows($res);
 		if ($rows > 0) {
 			$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
@@ -104,7 +106,6 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-//?func=detail&aid=21&group_id=1&atid=105
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td><a href="/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id').'">'.db_result($res,$i,'summary').'</A></td>

@@ -336,7 +336,7 @@ class ProjectTask extends Error {
 		for ($i=0; $i<count($art_array); $i++) {
 			$res=db_query("DELETE FROM project_task_artifact
 				WHERE project_task_id='".$this->getID()."'
-				AND artifact_id='".$art_array[$i]."')");
+				AND artifact_id='".$art_array[$i]."'");
 			if (!$res) {
 				$this->setError('Error deleting artifact relationship: '.db_error());
 				return false;
