@@ -1,3 +1,8 @@
+2004-06-29  Tom Copeland <tom@infoether.com>
+
+	* common/pm/ProjectTask.class: Applied patch #825:
+	pg_atoi error in Tasks
+
 2004-06-09  Tom Copeland <tom@infoether.com>
 
 	* www/include/languages/PortugueseBrazilian.tab: Applied patch #811:

@@ -564,8 +564,8 @@ class ProjectTask extends Error {
 		$this->dependon =& $arr2;
 
 		if (count($arr) || count($arr2)) {
-			$add_arr = array_diff ($arr, $arr2);
-			$del_arr = array_diff ($arr2, $arr);
+			$add_arr = array_values (array_diff ($arr, $arr2));
+			$del_arr = array_values (array_diff ($arr2, $arr));
 			for ($i=0; $i<count($del_arr); $i++) {
 				db_query("DELETE FROM project_dependencies 
 					WHERE project_task_id='".$this->getID()."'
@@ -631,8 +631,8 @@ class ProjectTask extends Error {
 			$arr=array('100');
 		}
 		if (count($arr) || count($arr2)) {
-			$add_arr = array_diff ($arr, $arr2);
-			$del_arr = array_diff ($arr2, $arr);
+			$add_arr = array_values(array_diff ($arr, $arr2));
+			$del_arr = array_values(array_diff ($arr2, $arr));
 			for ($i=0; $i<count($del_arr); $i++) {
 				db_query("DELETE FROM project_assigned_to
 					WHERE project_task_id='".$this->getID()."'
