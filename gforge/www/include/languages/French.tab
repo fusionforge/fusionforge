@@ -23,7 +23,7 @@
 #	* Added about/about_blurb, plus a few minor fixes
 # 2002-09-25 Christian Bayle <bayle@debian.org>
 #	* Added more account_register/blurb
-
+#
 about	about_blurb	<h2>À propos de Sourceforge</h2>Ce site tourne avec Debian Sourceforge, un dérivatif du code sous lequel tourne <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  Les informations présentes sur cette page ne documentent que Debian Sourceforge.  Veuillez vous référer à <a href="http://www.sourceforge.net/">Sourceforge.net</a> pour obtenir des informations sur leur code.<br><br><b>Auteurs</b><br><a href="staff.php">L'équipe</a> Sourceforge a travaillé dur pour que le projet Sourceforge aboutisse.  Si vous voulez savoir qui est derrière ce projet, en voici l'occasion.<br><br><b>Remerciements</b><br>Nous devons beaucoup aux auteurs du code qui permet à Sourceforge de tourner, mais nous aimerions également étendre notre gratitude aux personnes et organisations listées <a href="thanks.php">ici</a> pour l'aide qu'elles nous ont apportée.<br><br><b>Pour plus d'information</b><br>Si vous avez d'autres questions, contactez la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">liste de diffusion des utilisateurs de Debian Sourceforge</a>.  Vous pouvez également jeter un oeil sur la <a href="http://savannah.gnu.org/projects/debian-sf/">page du projet</a> Debian Sourceforge sur Savannah (un autre dérivé de Sourceforge, hébergé par le projet GNU et la FSF).<br><br><b>Copyrights</b><br>Le code originel de Sourceforge a été écrit par la société VA Linux Systems (qui a depuis changé son nom en VA Software) et publié sous la licence publique générale (GPL) GNU.  Le copyright leur appartient donc en grande partie.<br>Le code qui permet de faire fonctionner ce site, en revanche, est Debian Sourceforge, une version modifiée pour fonctionner sur des systèmes Debian.  Les changements visibles sont principalement des corrections typographiques et des bugs, mais nous avons également développé un système d'installation: Debian Sourceforge est facile à installer, configurer et exploiter dès que vous avez un système Debian.  Debian Sourceforge a été réalisé par Christian Bayle et Roland Mas, avec diverses contributions ponctuelles apportées par diverses personnes.<br><br><b>Marques déposées et autres</b><br>VA Linux Systems et Sourceforge sont des marques de la société VA Linux Systems (actuellement VA Software).  Linux est une marque déposée de Linus Torvalds.  Les autres marques déposées et copyrights sont les propriétés de leurs propriétaires respectifs.  Le contenu appartenant à VA Linux Systems est copyright 1999-2001 VA Linux Systems, tous droits réservés.<br><br>
 about_foundries	about_blurb	Les Fonderies de Sourceforge sont des endroits dédiés aux développeurs pour qu'ils s'y regroupent, qu'ils puissent échanger leur expertise, des informations et des conseils, et plus généralement pour qu'ils puissent s'aider les uns les autres a développer de meilleurs logiciels plus efficacement (après tout, il s'agit ici de logiciel libre).<br>&nbsp;<br>Si vous voulez vous porter volontaire pour aider ou créer une Fonderie, ou si vous avez des suggestions, des idées, ou des récriminations, n'hésitez pas à <a href="/contact.php">contacter Sourceforge</a>.
 about_foundries	foundries_list	Voici la liste des fonderies du système.  Certaines sont plus avancées que d'autres.  Si vous voulez contribuer à l'une d'entre elles, contactez les administrateurs de cette fonderie.
@@ -130,10 +130,16 @@ forum_admin_delete	section	Administration des forums
 forum_admin_delete	title	Suppression d'un forum
 forum_forum	section	Projet : $1
 forum_forum	title	Forums : affichage d'un forum
+forum_forum	thread	File de message
+forum_forum	author	Auteur
+forum_forum	date	Date
+forum_forum	changeview	Changer de visualisation
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	section	Forums
 forum_message	title	Affichage d'un message
+forum_message	msg	Poster un message dans cette file de message:
+forum_message	thread	Commencer une nouvelle file de message:
 forum_utils	news	Nouveautés
 forum_utils	discussionforum	Forums de discution:
 forum_utils	nonewsitem	Erreur - Cette nouveauté n'a pas été trouvée
@@ -312,10 +318,19 @@ news	nonewsfor	Aucune nouveauté trouvée pour: $1
 news	noitems	Aucun enregistrement trouvé
 news_admin	section	Nouveautés
 news_admin	title	Administration des nouveautés
+news_admin	permdeniedtitle	Accés Interdit.
+news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
 news_main	title	Nouveautés de Sourceforge
 news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe de Sourceforge pour apparaître sur la page d'accueil de Sourceforge.
 news_submit	section	Nouveautés
 news_submit	title	Soumettre une nouveauté pour $1
+news_submit	cannot	Vous ne pouvez soumettre une nouveauté sans être administrateur de ce projet
+news_submit	forproject	Pour le projet
+news_submit	subject	Sujet
+news_submit	details	Detail
+news_submit	errorinsert	ERREUR d'insertion
+news_submit	errorboth	ERREUR - le sujet et le corps sont requis
+news_submit	newsadded	Nouveauté ajoutée.
 news_utils	nonews	<H3>Pas de nouveauté<H3>
 news_utils	archive	Archive des nouveautés
 news_utils	submit	Proposer une nouveauté

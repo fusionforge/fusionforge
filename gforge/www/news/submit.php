@@ -18,8 +18,7 @@ require_once('www/forum/forum_utils.php');
 if (user_isloggedin()) {
 
 	if (!user_ismember($group_id,'A')) {
-		exit_permission_denied('You cannot submit news '.
-                	'for a project unless you are an admin on that project');
+		exit_permission_denied($Language->getText('news_submit','cannot'));
         }
 
 	if ($post_changes) {
@@ -40,12 +39,12 @@ if (user_isloggedin()) {
        				" VALUES ('$group_id','".user_getid()."','0','".time()."','$new_id','".htmlspecialchars($summary)."','".htmlspecialchars($details)."')";
        			$result=db_query($sql);
        			if (!$result) {
-       				$feedback .= ' ERROR doing insert ';
+       				$feedback .= ' '.$Language->getText('news_submit', 'errorinsert').' ';
        			} else {
-       				$feedback .= ' News Added. ';
+       				$feedback .= ' '.$Language->getText('news_submit', 'newsadded').' ';
        			}
 		} else {
-			$feedback .= ' ERROR - both subject and body are required ';
+			$feedback .= ' '.$Language->getText('news_submit', 'errorboth').' ';
 		}
 	}
 
@@ -69,13 +68,13 @@ if (user_isloggedin()) {
 		<P>
 		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-		<B>For Project: '. group_getname($group_id) .'</B>
+		<B>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</B>
 		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 		<P>
-		<B>Subject:</B><BR>
+		<B>'.$Language->getText('news_submit', 'subject').':</B><BR>
 		<INPUT TYPE="TEXT" NAME="summary" VALUE="" SIZE="30" MAXLENGTH="60">
 		<P>
-		<B>Details:</B><BR>
+		<B>'.$Language->getText('news_submit', 'details').':</B><BR>
 		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT"></TEXTAREA><BR>
 		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
 		</FORM>';

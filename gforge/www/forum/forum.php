@@ -189,7 +189,7 @@ if ($forum_id) {
 			<TR><TD><FONT SIZE="-1">'. $forum_popup .
 				'</TD><TD><FONT SIZE="-1">'. $options_popup .
 				'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
-				'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Change View">
+				'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.$Language->getText('forum_forum','changeview').'">
 			</TD></TR>
 		</TABLE></FORM>';
 	}
@@ -259,9 +259,9 @@ if ($forum_id) {
 		}
 
 		$title_arr=array();
-		$title_arr[]='Thread';
-		$title_arr[]='Author';
-		$title_arr[]='Date';
+		$title_arr[]=$Language->getText('forum_forum','thread');
+		$title_arr[]=$Language->getText('forum_forum','author');
+		$title_arr[]=$Language->getText('forum_forum','date');
 
 		$ret_val .= html_build_list_table_top ($title_arr);
 

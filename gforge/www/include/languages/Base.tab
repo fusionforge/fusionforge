@@ -125,6 +125,10 @@ forum_forum	section	Project: $1
 forum_forum	title	Forums: View Forum
 forum_forum_thread	section	Forums
 forum_forum_thread	title	View Thread
+forum_forum	thread	Thread
+forum_forum	author	Author
+forum_forum	date	Date
+forum_forum	changeview	Change View
 forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:
@@ -307,10 +311,19 @@ news	nonewsfor	No News Found For $1
 news	noitems	No items were found
 news_admin	section	News
 news_admin	title	News Admin
+news_admin	permdeniedtitle	Permission Denied.
+news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
 news_main	title	News
 news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the $1 home page.
 news_submit	section	News
 news_submit	title	Submit News for $1
+news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
+news_submit	forproject	For Project
+news_submit	subject	Subject
+news_submit	details	Details
+news_submit	errorinsert	ERROR doing insert
+news_submit	errorboth	ERROR - both subject and body are required
+news_submit	newsadded	News Added.
 news_utils	nonews	No News Items Found
 news_utils	archive	News archive
 news_utils	submit	Submit News
