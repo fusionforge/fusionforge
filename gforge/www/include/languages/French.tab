@@ -1419,13 +1419,13 @@ pm_admin_projects	delete_warning	Vous êtes sur le point de supprimer irrémédi
 pm_admin_projects	deleted	Supprimé avec succès
 pm_admin_projects	description	Description
 pm_admin_projects	edit_update	Éditer/Mettre à jour le projet
-pm_admin_projects	existing_subprojects	Sous projets existants
+pm_admin_projects	existing_subprojects	Sous-projets existants
 pm_admin_projects	id	Numéro d'identifiant
 pm_admin_projects	is_public	Public ?
 pm_admin_projects	modify_category	Modifier une catégorie en
 pm_admin_projects	no_categories	Aucune catégorie définie
 pm_admin_projects	no_projects_found	<h2>Aucun projet trouvé</h2><p>Rien n'a été trouvé pour ce groupe. Vous pouvez ajouter un nouveau projet en utilisant le lien 'Ajouter un projet' ci-dessus.</p>
-pm_admin_projects	no_subprojects	Pas de sous projet dans ce groupe
+pm_admin_projects	no_subprojects	Pas de sous-projet dans ce groupe
 pm_admin_projects	project_inserted	Projet ajouté
 pm_admin_projects	project_name	Nom du projet
 pm_admin_projects	project_title	Titre
@@ -1466,17 +1466,17 @@ pm_detailtask	submitted_by	Soumis par
 pm_detailtask	subproject	Sous-projet
 pm_detailtask	task_summary	Sommaire des tâches
 pm_detailtask	title	Détails d'une tâche
-pm_ganttpage	assignee	responsable
+pm_ganttpage	assignee	Responsable
 pm_ganttpage	days	Jours
 pm_ganttpage	months	Mois
-pm_ganttpage	resolution	précision
+pm_ganttpage	resolution	Précision
 pm_ganttpage	size	Taille
 pm_ganttpage	sort_on	Trier par
 pm_ganttpage	weeks	Semaines
 pm_include_grouphtml	add_task	Ajouter une tâche
 pm_include_grouphtml	admin	Administration
 pm_include_grouphtml	browse_task	Afficher les tâches
-pm_include_grouphtml	error_disabled	Ce projet a désactivité le gestionnaire de tâche.
+pm_include_grouphtml	error_disabled	Ce projet a désactivé le gestionnaire de tâches.
 pm_include_grouphtml	gantt_chart	Diagramme de Gant
 pm_include_grouphtml	not_started	Non débuté
 pm_include_grouphtml	project	Projet
@@ -1486,18 +1486,18 @@ pm_include_taskhtml	comment	Commentaire
 pm_include_taskhtml	date	Date
 pm_include_taskhtml	depend_info	Tâches qui dépendent de cette tâche
 pm_include_taskhtml	field	Champ
-pm_include_taskhtml	followups	Passage de témoin (follow-ups)
+pm_include_taskhtml	followups	Commentaires
 pm_include_taskhtml	no_changes	Aucun changement n'a été effectué
 pm_include_taskhtml	no_comments	Aucun commentaire n'a été ajouté
 pm_include_taskhtml	no_depend_info	Aucune tâche ne dépend de cette tâche
-pm_include_taskhtml	no_followups	Pas de passage de témoin
-pm_include_taskhtml	no_tracker_items	Aucune trace liée n'a été ajoutée
+pm_include_taskhtml	no_followups	Pas de commentaire
+pm_include_taskhtml	no_tracker_items	Aucun élément à suivre lié n'a été ajoutée
 pm_include_taskhtml	old_value	Ancienne valeur
 pm_include_taskhtml	open_date	Date de début
-pm_include_taskhtml	related_items	traces liées
+pm_include_taskhtml	related_items	éléments à suivre liés
 pm_include_taskhtml	remove_relation	Supprimer la relation
-pm_include_taskhtml	task_history	Historique de tâche
-pm_include_taskhtml	tracker	Traceur
+pm_include_taskhtml	task_history	Historique de la tâche
+pm_include_taskhtml	tracker	Outil de suivi
 pm_index	description	Description
 pm_index	open	Ouvert(s)
 pm_index	short_name	Nom du sous-projet
@@ -1514,12 +1514,12 @@ pm_projectgroup	error_min_name_length	Le tire doit avoir au moins 5 caratères
 pm_projectgroup	none_found	Aucun groupe de projet trouvé
 pm_projecttask	circular_dependency	Référence circulaire détéctée
 pm_projecttask	mail_followups_body	\nDate : $1\nPar : $2\n\nCommentaire :\n$3</s>
-pm_projecttask	mail_followups_footer	Plus d'indformations
+pm_projecttask	mail_followups_footer	Plus d'informations
 pm_projecttask	mail_followups_subject	Tâche #
-pm_projecttask	mail_followups_title	Passage de témoin
+pm_projecttask	mail_followups_title	Commentaire
 pm_projecttask	mail_notice	notification
 pm_reporting	aging_report	Ordre chronologique
-pm_reporting	all_tasks_by_category	Toutes les tâches par catégories
+pm_reporting	all_tasks_by_category	Toutes les tâches par catégorie
 pm_reporting	all_tasks_by_technician	Toutes les tâches par technicien
 pm_reporting	average_duration	Durée moyenne pour achever une tâche (en jour)
 pm_reporting	by_subproject	Rapport d'activité par sous-projet
@@ -1529,10 +1529,10 @@ pm_reporting	open_tasks_by_category	Tâches commencées par catégorie
 pm_reporting	open_tasks_by_technician	Tâches commencées par le technicien
 pm_reporting	report_note	<p>Notez que des tâches peuvent être assignées à plusieurs techniciens. Ces tâches leur seront attribuées à chacun.</p>
 pm_reporting	started_tasks	Nombre de tâches commencées
-pm_reporting	tasks_by_category	Tâches par catégories
+pm_reporting	tasks_by_category	Tâches par catégorie
 pm_reporting	tasks_by_technician	Tâches par technicien
 pm_reporting	title	Rapports sur les tâches
-pm_task	create_successfully	Tâche crée avec succès
+pm_task	create_successfully	Tâche créée avec succès
 project_admin	add_user	Ajouter un utilisateur
 project_admin	addfromlist	Ajouter des utilisateurs à partir de la liste
 project_admin	addfromlist1	Cochez la case à côté du nom de l'utilisateur que vous souhaitez ajouter. Vos sélections seront conservées si vous cliquez sur une des lettres ci-dessous. Quand vous avez terminé votre sélection, cliquez sur "Finir" pour choisir les rôles pour les utilisateurs que vous ajoutez.
