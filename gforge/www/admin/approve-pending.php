@@ -134,7 +134,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
-	Canned responses<br />
+	<?php echo $Language->getText('admin_approve_pending','canned_responses'); ?><br />
 	<?php print get_canned_responses(); ?> <a href="responses_admin.php"><?php echo $Language->getText('admin_approve_pending','manage_responses'); ?></a>
 	<br /><br />
 	<?php echo $Language->getText('admin_approve_pending','custom_response_title'); ?><br />

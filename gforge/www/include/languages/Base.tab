@@ -203,6 +203,7 @@ admin_approve_pending	approve	Approve
 admin_approve_pending	approve_all_on_this_page	Approve All On This Page
 admin_approve_pending	approving_group		Approving Group:
 admin_approve_pending	approving_pending_projects	Approving Pending Projects
+admin_approve_pending	canned_responses	Canned responses
 admin_approve_pending	custom_response_title	Custom response title and text
 admin_approve_pending	edit_project_details	[Edit Project Details]
 admin_approve_pending	error_creating_group	Error creating group object
