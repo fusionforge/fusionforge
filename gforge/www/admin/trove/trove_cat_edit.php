@@ -30,9 +30,9 @@ if ($GLOBALS["submit"]) {
 	if ($GLOBALS[form_shortname]) {
 		$res = db_query("
 			UPDATE trove_cat 
-			SET	shortname='$form_shortname',
-				fullname='$form_fullname',
-				description='$form_description',
+			SET	shortname='".htmlspecialchars($form_shortname)."',
+				fullname='".htmlspecialchars($form_fullname)."',
+				description='".htmlspecialchars($form_description)."',
 				parent='$form_parent',
 				version='".date("Ymd",time())."01',
 				root_parent='$newroot'

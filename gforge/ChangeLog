@@ -1,15 +1,15 @@
 2003-01-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
-	* common/pm/ProjectCategory.class: Audit: escape special characters
-	from user input before submitting to database.
-
-	* www/include/bookmarks.php: Audit: escape special characters from
-	user input before submitting to database.
+	* www/admin/trove/trove_cat_edit.php,
+	www/admin/trove/trove_cat_add.php,
+	common/pm/ProjectCategory.class, www/include/bookmarks.php: Audit:
+	escape special characters from user input before submitting to
+	database.
 
 2003-01-07 Tom Copeland <tom@infoether.com>
 
 	* Added "submitted by" info to the task detail view.  Modified project_task_vw
-	to include user name and realname from user table.  [tom] DB changes are in 
+	to include user name and realname from user table.  [tom] DB changes are in
 	20030107.sql.
 
 2003-01-06  Richard Offer

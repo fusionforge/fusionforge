@@ -27,9 +27,9 @@ if ($GLOBALS['submit']) {
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)
 			VALUES (
-				'$form_shortname',
-				'$form_fullname',
-				'$form_description',
+				'."htmlspecialchars($form_shortname)."',
+				'."htmlspecialchars($form_fullname)."',
+				'."htmlspecialchars($form_description)."',
 				'$form_parent',
 				'".date("Ymd",time())."01',
 				'$newroot'
