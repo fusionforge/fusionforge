@@ -284,26 +284,34 @@ function menu_loggedin($page_title) {
 	GLOBAL $HTML, $Language;
 		
 	$HTML->menuhtml_top('Logged In: '.user_getname());
-		$HTML->menu_entry('/account/logout.php',$Language->getText('menu','logout'));
-		$HTML->menu_entry('/register/',$Language->getText('menu','new_project'));
-		$HTML->menu_entry('/account/',$Language->getText('menu','account_maintenance'));
+	$HTML->menu_entry('/account/logout.php',$Language->getText('menu','logout'));
+	$HTML->menu_entry('/register/',$Language->getText('menu','new_project'));
+	$HTML->menu_entry('/account/',$Language->getText('menu','account_maintenance'));
+	print '<P>';
+	$HTML->menu_entry('/themes/',$Language->getText('menu','change_my_theme'));
+	$HTML->menu_entry('/my/',$Language->getText('menu','my_personal_page'));
+	
+	if (!$GLOBALS['HTTP_POST_VARS']) {
+		$bookmark_title = urlencode( str_replace('SourceForge: ', '', $page_title));
 		print '<P>';
-		$HTML->menu_entry('/themes/',$Language->getText('menu','change_my_theme'));
-		$HTML->menu_entry('/my/',$Language->getText('menu','my_personal_page'));
+		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
+		
+	}
 
-		if (!$GLOBALS['HTTP_POST_VARS']) {
-			$bookmark_title = urlencode( str_replace('SourceForge: ', '', $page_title));
-			print '<P>';
-			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
-		}
-	$HTML->menuhtml_bottom();
-
-	if (user_ismember(1, 'A')) {
+	$admingroup = group_get_object (1) ;
+	exit_assert_object($admingroup,'Group');
+	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
+	exit_assert_object($newsgroup,'Group');
+	$perm =& $admingroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
 		menu_site_admin();
-	}		
-	if (user_ismember($GLOBALS['sys_news_group'], 'A')) {
+	}
+	$perm =& $newsgroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
 		menu_news_admin();
-	}		
+	}
+	
+	$HTML->menuhtml_bottom();
 }
 
 function menu_notloggedin() {
