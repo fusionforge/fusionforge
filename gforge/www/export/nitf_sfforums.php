@@ -31,7 +31,7 @@ if (db_numrows($res_grp) < 1) {
 }
 
 print '<?xml version="1.0"?>
-<!DOCTYPE sf_forum SYSTEM "http://".$GLOBALS[sys_default_domain]."/exports/sf_forum_0.1.dtd">
+<!DOCTYPE sf_forum SYSTEM "http://'.$GLOBALS[sys_default_domain].'/exports/sf_forum_0.1.dtd">
 ';
 print "<group name=\"$row_grp[group_name]\">";
 
