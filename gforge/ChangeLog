@@ -1,3 +1,8 @@
+2003-01-25  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/snippet/browse.php: remove extra line feed at top of file,
+	fix bug #185.
+
 2003-01-25  Reinhard Spisser   <reinhard@spisser.it>
 
 	* www/pm/reporting/index.php,
@@ -5,30 +10,30 @@
 	common/pm/*, www/include/html.php, www/include/Layout.class,
 	www/include/html.php, www/source.php
 	Localization
-	
+
 2003-01-24  Reinhard Spisser   <reinhard@spisser.it>
 
 	* www/404.php, www/sendmessage.php, www/users,
 	www/include/user_home,php, www/include/exit.php,
-	common/docman/Document.class, 
+	common/docman/Document.class,
 	common/docman/DocumentGroup.class,
 	common/frs/FRSFile.class, common/frs/FRSRelease.class
-	common/frs/FRSPackage.class, 
+	common/frs/FRSPackage.class,
 	www/project/filemodule_monitor.php, www/project/memberlist.php
 	Localization
-	
+
 	* www/pm/index.php, www/pm/browse_task.php, www/pm/add_task.php,
 	www/pm/mod_task.php, www/include/ProjectGroupHTML.class,
-	www/pm/include/ProjectTaskHTML.class, www/pm/task.php, 
+	www/pm/include/ProjectTaskHTML.class, www/pm/task.php,
 	www/pm/ganttpage.php:
 	Localization
-	 
-	 
+
+
 	* www/project/showfiles.php: removed unused code, Localization
-	
+
 	* common/include/Error.class: new setMissingParamsError()
-	 
-	 
+
+
 2003-01-24  Michael Jennings  <mej@eterm.org>
 
 	* gforge.spec:  New spec file for GForge.  This is, of course,
@@ -68,7 +73,7 @@
 	www/developer/diary.php:
 	Localization
 
-	
+
 	* www/developer/monitor.php: correctly escaped strings, localization
 
 2003-01-20  Ryan T. Sammartino  <ryants@shaw.ca>
