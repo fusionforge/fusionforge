@@ -1,12 +1,15 @@
-gforge (3.1-4+1) unstable; urgency=low
+gforge (3.1-4+2) unstable; urgency=low
 
   * [Roland] Tightened the versioned dependency on Apache so that we can
     rely on modules-config (closes: #220872).
   * [Roland] Escape special characters like @ and $ before passing strings
     containing them to a Perl script, for instance e-mail addresses.
     Should help fix the administrator's e-mail.
+  * [Roland] install-db.sh now uses grep and cut (instead of Perl) to
+    extract the configuration variables from the configuration file, which
+    should help gforge-sourceforge-transition work better.
 
- -- Roland Mas <lolando@debian.org>  Sun, 16 Nov 2003 20:57:47 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 17 Nov 2003 15:06:44 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
