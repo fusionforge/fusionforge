@@ -20,6 +20,12 @@ if (session_loggedin()) {
 	$u =& session_get_user();
 
 	if ($submit) {
+		// set $is_public
+		if ($is_public) {
+			$is_public = '1';
+		} else {
+			$is_public = '0';
+		}
 		//make changes to the database
 		if ($update) {
 			//updating an existing diary entry

@@ -1,5 +1,7 @@
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/my/diary.php: bug 158: pg_atoi when inserting diary entry.
+
 	* common/include/utils.php(util_make_links): exclude <> from
 	URL regexp to avoid sucking in the <br /> tag.
 
