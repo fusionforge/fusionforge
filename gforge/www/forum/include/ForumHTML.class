@@ -157,8 +157,7 @@ class ForumHTML extends Error {
 			<tr>
 				<td bgcolor="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'. 
-					$msg->getPosterName() .'</a>'.
-					' ( '. $msg->getPosterRealName() . ' ) '.
+					$msg->getPosterRealName() .'</a>'.
 					'<br /><a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.
 					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
