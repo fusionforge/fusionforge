@@ -506,7 +506,7 @@ osdn_print_navbar();
 	?>
 
 	<CENTER>
-	<a href="/"><?php echo html_image($this->imgroot . "sflogo.png","","",array()); ?></A>
+	<a href="/"><?php echo html_image($this->imgroot . "sflogo.png","150","150",array()); ?></A>
 	</CENTER>
 	<P>
 	<!-- menus -->
