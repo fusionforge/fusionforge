@@ -1,3 +1,8 @@
+2004-06-07  Tom Copeland <tom@infoether.com>
+
+	* www/stats/i18n.php: Fixed bug #807: i18n.php had 
+	a typo in the SQL query
+
 2004-06-03  Tom Copeland <tom@infoether.com>
 
 	* www/admin/grouplist.php: Added "Register time" to the field list.

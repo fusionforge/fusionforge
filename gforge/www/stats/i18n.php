@@ -10,8 +10,6 @@
   * @version   $Id$
   *
   */
-
-
 require_once('pre.php');
 require_once('site_stats_utils.php');
 
@@ -19,26 +17,16 @@ require_once('site_stats_utils.php');
 session_require( array('group'=>$sys_stats_group) );
 
 $HTML->header(array($Language->getText('stats_i18n','title',array($GLOBALS['sys_name']))));
-
-//
-// BEGIN PAGE CONTENT CODE
-//
-
 echo $GLOBALS['HTML']->listTableTop(array($Language->getText('stats_i18n','language')."",$Language->getText('stats_i18n','users')."","%"));
 echo "<h1>".$Language->getText('stats_i18n','language_distribution',array($GLOBALS['sys_name']))." </h1>";
 
-$sql='
-SELECT count(user_name) AS total
-FROM users
-';
+$sql='SELECT count(user_name) AS total FROM users';
 $total=db_result(db_query($sql),0,'total');
 
-$sql='
-SELECT supported_languages.name AS lang,count(user_name) AS cnt
+$sql='SELECT supported_languages.name AS lang,count(user_name) AS cnt
 FROM supported_languages LEFT JOIN users ON language_id=users.language
-GROUP BY language_id,name
-ORDER BY cnt DESC
-';
+GROUP BY lang,language_id,name
+ORDER BY cnt DESC';
 $res=db_query($sql);
 $non_english=0;
 $i=0;
@@ -54,12 +42,7 @@ echo '<tr><td><strong>'.$Language->getText('stats_i18n','total_non_english').'</
 '<td align="right"><strong>'.sprintf("%.2f",$non_english*100/$total).' </strong></td></tr>';
 
 echo $GLOBALS['HTML']->listTableBottom();
-
 echo "<p>".$Language->getText('stats_i18n','language_text');
-
-//
-// END PAGE CONTENT CODE
-//
 
 $HTML->footer( array() );
 ?>
