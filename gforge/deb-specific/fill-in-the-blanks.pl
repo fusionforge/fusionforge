@@ -37,7 +37,7 @@ open (OFILE, "> $ofile")
 while ($line = <IFILE>) {
     foreach $cur (keys %hash) {
 	$token = "{$cur}" ;
-	$line =~ s/$token/$hash{$cur}/ ;
+	$line =~ s/$token/$hash{$cur}/g ;
     }
     print OFILE $line;
 }
