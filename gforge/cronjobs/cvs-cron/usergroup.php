@@ -6,11 +6,12 @@ require_once('squal_pre.php');
 //
 //	Default values for the script
 //
-define('DEFAULT_SHELL','/bin/grap');
+define('DEFAULT_SHELL','/bin/false'); //use /bin/grap for cvs-only
 define('USER_ID_ADD',10000);
 define('GROUP_ID_ADD',50000);
 define('USER_DEFAULT_GROUP','users');
-
+define('FILE_EXTENSION',''); // use .new when testing
+define('CVS_ROOT','/cvsroot/');
 //
 //	Get the users' unix_name and password out of the database
 //	ONLY USERS WITH CVS COMMIT PRIVS ARE ADDED
@@ -37,7 +38,7 @@ $passwdlines = explode("\n",$passwdcontents);
 //
 //	Write the "default" users to a temp file
 //
-$h2 = fopen("/etc/passwd.new","w");
+$h2 = fopen("/etc/passwd".FILE_EXTENSION,"w");
 for($k = 0; $k < count($passwdlines); $k++) {
 	$passwdline = explode(":",$passwdlines[$k]);
 	$def_users[$passwdline[0]]=1;
@@ -75,7 +76,7 @@ $shadowlines = explode("\n",$shadowcontents);
 //
 //	Write the "default" shadow to a temp file
 //
-$h4 = fopen("/etc/shadow.new","w");
+$h4 = fopen("/etc/shadow".FILE_EXTENSION,"w");
 for($k = 0; $k < count($shadowlines); $k++) {
     $shadowline = explode(":",$shadowlines[$k]);
     $def_shadow[$shadowline[0]]=1;
@@ -113,7 +114,7 @@ $grouplines = explode("\n",$groupcontents);
 //
 //	Write the "default" groups to a temp file
 //
-$h6 = fopen("/etc/group.new","w");
+$h6 = fopen("/etc/group".FILE_EXTENSION,"w");
 for($k = 0; $k < count($grouplines); $k++) {
     $groupline = explode(":",$grouplines[$k]);
     $def_group[$groupline[0]]=1;
@@ -150,8 +151,8 @@ fclose($h6);
 //
 //	have to re-read the group file since we just modified it
 //
-$h7 = fopen("/etc/group.new","r");
-$groupcontent = fread($h7,filesize("/etc/group.new"));
+$h7 = fopen("/etc/group".FILE_EXTENSION,"r");
+$groupcontent = fread($h7,filesize("/etc/group".FILE_EXTENSION));
 fclose($h7);
 
 $grouplines = explode("\n",$groupcontent);
@@ -190,9 +191,20 @@ for($i = 0; $i < count($users); $i++) {
 	}
 }
 
-$h8 = fopen("/etc/group.new","w");
+$h8 = fopen("/etc/group".FILE_EXTENSION,"w");
 foreach($grouplines as $line)
 fwrite($h8,$line."\n");
+
+#anoncvs_sourceforge:x:10129:50001::/cvsroot/sourceforge:/bin/false
+$res7=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND is_public='1'");
+echo db_error();
+$rows = db_numrows($res7);
+echo $rows;
+for($k = 0; $k < $rows; $k++) {
+	$group_id = db_result($res7,$k,'group_id');
+	$group = db_result($res7,$k,'unix_group_name');
+	fwrite($h8,"anoncvs_$group:x:10129:".($group_id+GROUP_ID_ADD)."::".CVS_ROOT."$group:/bin/false\n");
+}
 fclose($h8);
 
 //
@@ -203,8 +215,9 @@ foreach($users as $user) {
 		
 	} else {
 		@mkdir("/home/".$user);
-		system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
+//		system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
 	}
+	system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
 }
 
 ?>

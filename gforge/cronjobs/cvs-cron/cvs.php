@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#! /usr/bin/php4 -f
 <?php
 
 require ('squal_pre.php');
@@ -26,23 +26,23 @@ if(is_dir($maincvsroot)) {
 function addProjectRepositories() {
 	global $maincvsroot;
 
-	$res = db_query("select group_id,unix_group_name from groups where status='A'");
+	$res = db_query("select group_id,unix_group_name from groups where status='A' AND group_id NOT IN (2,3,4)");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
 			Simply call cvscreate.sh
 		*/
-		if (is_dir("$maincvsroot/".db_result($res,$i,'unix_group_name'))) {
+		if (is_dir("$maincvsroot".db_result($res,$i,'unix_group_name'))) {
 
 			//already exists
 
-		} else(is_file("$maincvsroot/".db_result($res,$i,'unix_group_name'))) {
+		} elseif (is_file("$maincvsroot".db_result($res,$i,'unix_group_name'))) {
 
-			echo "$maincvsroot/".db_result($res,$i,'unix_group_name')." Already Exists As A File";
+			echo "$maincvsroot".db_result($res,$i,'unix_group_name')." Already Exists As A File";
 
 		} else {
 
-			system("cvscreate.sh ".db_result($res,$i,'unix_group_name')." ".(db_result($res,$i,'group_id')+50000));
+			system("./cvscreate.sh ".db_result($res,$i,'unix_group_name')." ".(db_result($res,$i,'group_id')+50000));
 
 		}
 	}

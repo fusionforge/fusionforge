@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#! /usr/bin/php4 -f
 <?php
 
 require_once('squal_pre.php');
@@ -9,11 +9,13 @@ $res=db_query("SELECT user_name,user_id,authorized_keys
 	AND status='A'");
 
 for ($i=0; $i<db_numrows($res); $i++) {
+
+
 	$ssh_key=db_result($res,$i,'authorized_keys');
 	$username=db_result($res,$i,'user_name');
 	$uid=db_result($res,$i,'user_id');
 
-	$ssh_key str_replace('###',"\n",$ssh_key);
+	$ssh_key=str_replace('###',"\n",$ssh_key);
 	$uid += 1000;
 
 	$ssh_dir = "$homedir_prefix$username/.ssh";

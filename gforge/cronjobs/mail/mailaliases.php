@@ -1,39 +1,73 @@
-#! /usr/bin/php -f
+#! /usr/bin/php4 -f
 <?php
 
 require ('squal_pre.php');
 
+//
+//	Write out all the aliases
+//
+$fp = fopen("/etc/aliases","w");
+if (!($fp)) {
+	print ("ERROR: unable to open target file\n");
+	exit;
+}
+
+//
+//	Read in the "default" aliases
+//
+$h = fopen("/etc/aliases.org","r");
+$aliascontents = fread($h,filesize("/etc/aliases.org"));
+$aliaslines = explode("\n",$aliascontents);
+for($k = 0; $k < count($aliaslines); $k++) {
+	$aliasline = explode(":",$aliaslines[$k]);
+	$def_aliases[strtolower($aliasline[0])]=1;
+	fwrite($fp,$aliaslines[$k]."\n");
+}
+echo "\n$k Alias Lines";
+fclose($h);
+
+//
+//	Read in the mailman aliases
+//
+$h2 = fopen("/tmp/mailman-aliases","r");
+$mailmancontents = fread($h2,filesize("/tmp/mailman-aliases"));
+$mailmanlines = explode("\n",$mailmancontents);
+for($k = 0; $k < count($mailmanlines); $k++) {
+	$mailmanline = explode(":",$mailmanlines[$k]);
+	if ($def_aliases[strtolower($mailmanline[0])]) {
+		//alias is already taken - perhaps by default
+	} else {
+		$def_aliases[strtolower($mailmanline[0])]=1;
+		fwrite($fp,$mailmanlines[$k]."\n");
+	}
+}
+echo "\n$k Mailman Lines";
+fclose($h2);
+
+
+//
+//	Write out the user aliases
+//
 $res=db_query("SELECT user_name,email FROM users WHERE status = 'A' AND email != ''");
 echo db_error();
 
 $rows=db_numrows($res);
 
-$fp = fopen("/etc/mail/aliases.gforge","w");
-if (!($fp)) {
-        print ("ERROR: unable to open target file\n");
-        exit;
-}
-
-$allusers = "gforge-users: ";
-$first = 1;
 
 for ($i=0; $i<$rows; $i++) {
 	$user = db_result($res,$i,0);
-        $email = db_result($res,$i,1);
-	fputs($fp, $user . ": " . $email . "\n");
-	if ($first == 1) {
-		$first = 0;
+    $email = db_result($res,$i,1);
+	if ($def_aliases[$user]) {
+		//alias is already taken - perhaps by default or by a mailing list
+	} else {
+		fwrite($fp, $user . ": " . $email . "\n");
 	}
-	else {
-		$allusers = $allusers . ", ";
-	}
-	$allusers = $allusers . $user;
 }
-fputs($fp,"\n");
-fputs($fp,$allusers . "\n");
+
 fclose($fp);
 
 db_free_result($res);
 $ok = `newaliases`;
 echo $ok;
+
 ?>

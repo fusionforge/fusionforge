@@ -48,8 +48,8 @@ chmod 664 /cvsroot/$1/CVSROOT/val-tags
 
 # set group ownership, anonymous group user 
 chown -R nobody:$2 /cvsroot/$1
-cat /etc/passwd | grep -v anoncvs_$1 > newpasswd 
-cp newpasswd /etc/passwd
-rm -f newpasswd
-/usr/sbin/adduser -M -g $2 -d/cvsroot/$1 -s /bin/false -n anoncvs_$1
+#cat /etc/passwd | grep -v anoncvs_$1 > newpasswd 
+#cp newpasswd /etc/passwd
+#rm -f newpasswd
+#/usr/sbin/adduser -M -g $2 -d/cvsroot/$1 -s /bin/false -n anoncvs_$1
 
