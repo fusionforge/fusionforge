@@ -36,43 +36,43 @@ if ($group_id && $job_id) {
 		people_header(array('title'=>'View a Job','pagename'=>'people_viewjob'));
 		echo db_error();
 		$feedback .= ' POSTING fetch FAILED ';
-		echo '<H2>No Such Posting For This Project</H2>';
+		echo '<h2>No Such Posting For This Project</h2>';
 	} else {
 
 		people_header(array('title'=>'View a Job','pagename'=>'people_viewjob','titlevals'=>array(db_result($result,0,'category_name'),db_result($result,0,'group_name')),'sectionvals'=>array(db_result($result,0,'group_name'))));
-//		<H2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</H2>
+//		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '
-		<P>
-		<TABLE BORDER="0" WIDTH="100%">
-                <TR><TD COLSPAN="2">
-			<B>'. db_result($result,0,'title') .'</B>
-		</TD></TR>
+		<p>
+		<table border="0" width="100%">
+                <tr><td colspan="2">
+			<strong>'. db_result($result,0,'title') .'</strong>
+		</td></tr>
 
-		<TR><TD>
-			<B>Contact Info:<BR>
-			<A HREF="/sendmessage.php?touser='. db_result($result,0,'user_id') .'&subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</A></B>
-		</TD><TD>
-			<B>Status:</B><BR>
+		<tr><td>
+			<strong>Contact Info:<br />
+			<a href="/sendmessage.php?touser='. db_result($result,0,'user_id') .'&subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
+		</td><td>
+			<strong>Status:</strong><br />
 			'. db_result($result,0,'status_name') .'
-		</TD></TR>
+		</td></tr>
 
-		<TR><TD>
-			<B>Open Date:</B><BR>
+		<tr><td>
+			<strong>Open Date:</strong><br />
 			'. date($sys_datefmt,db_result($result,0,'date')) .'
-		</TD><TD>
-			<B>For Project:<BR>
-			<A HREF="/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</A></B>
-		</TD></TR>
+		</td><td>
+			<strong>For Project:<br />
+			<a href="/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
+		</td></tr>
 
-		<TR><TD COLSPAN="2">
-			<B>Long Description:</B><P>
-			'. nl2br(db_result($result,0,'description')) .'
-		</TD></TR>
-		<TR><TD COLSPAN="2">
-		<H2>Required Skills:</H2>';
+		<tr><td colspan="2">
+			<strong>Long Description:</strong><p>
+			'. nl2br(db_result($result,0,'description')) .'</p>
+		</td></tr>
+		<tr><td colspan="2">
+		<h2>Required Skills:</h2>';
 
 		//now show the list of desired skills
-		echo '<P>'.people_show_job_inventory($job_id).'</TD></TR></TABLE>';
+		echo '<p>'.people_show_job_inventory($job_id).'</p></td></tr></table></p>';
 	}
 
 	people_footer(array());

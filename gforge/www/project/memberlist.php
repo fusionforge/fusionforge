@@ -44,14 +44,14 @@ $res_memb = db_query($query);
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	print "<tr ".$HTML->boxGetAltRowStyle($i++).">";
 	if ( trim($row_memb['admin_flags'])=='A' ) {
-		print "\t\t<td><b>$row_memb[realname]</b></td>\n";
+		print "\t\t<td><strong>$row_memb[realname]</strong></td>\n";
 	} else {
 		print "\t\t<td>$row_memb[realname]</td>\n";
 	}
 	print "
-		<td align=\"middle\"><A href=\"/users/$row_memb[user_name]/\">$row_memb[user_name]</A></td>
-		<td align=\"middle\">$row_memb[role]</td>
-		<td align=\"middle\"><A href=\"/people/viewprofile.php?user_id=$row_memb[user_id]\">View</a></td>
+		<td align=\"center\"><a href=\"/users/$row_memb[user_name]/\">$row_memb[user_name]</a></td>
+		<td align=\"center\">$row_memb[role]</td>
+		<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=$row_memb[user_id]\">View</a></td>
 	</tr>";
 }
 

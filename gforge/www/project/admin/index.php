@@ -75,38 +75,38 @@ project_admin_header(array('title'=>"Project Admin: ".$group->getPublicName(),'g
 
 ?>
 
-<TABLE width=100% cellpadding=2 cellspacing=2 border=0>
-<TR valign=top><TD width=50%>
+<table width="100%" cellpadding="2" cellspacing="2" border="0">
+<tr valign="top"><td width="50%">
 
 <?php echo $HTML->boxTop("Misc. Project Information");  ?>
 
 &nbsp;
-<BR>
+<br />
 Short Description: <?php echo $group->getDescription(); ?>
-<P>
-Homepage Link: <b><?php echo $group->getHomepage(); ?></b>
 <p>
-Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></b>
-<p>
-Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?></b>
-<p>
+Homepage Link: <strong><?php echo $group->getHomepage(); ?></strong>
+</p><p>
+Group shell (SSH) server: <strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong>
+</p><p>
+Group directory on shell server: <strong><?php echo account_group_homedir($group->getUnixName()); ?></strong>
+</p><p>
 Project WWW directory on shell server:
-<b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
+<strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
 
-<P align=center>
-<A HREF="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</A>
-<P>
-<HR NOSHADE>
-<P>
-<H4>Trove Categorization:
-<A href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
-[Edit]</A></H4>
-<P>
+<p align="center">
+<a href="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</a></p>
+<p>&nbsp;</p>
+<hr noshade="noshade" />
+<p>&nbsp;</p>
+<h4>Trove Categorization:
+<a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
+[Edit]</a></h4>
+<p>
 <?php
 echo $HTML->boxBottom(); 
 
 echo '
-</TD><TD>&nbsp;</TD><TD width=50%>';
+</td><td>&nbsp;</td><td width="50%">';
 
 
 echo $HTML->boxTop("Group Members");
@@ -122,7 +122,7 @@ $res_memb = db_query("SELECT users.realname,users.user_id,users.user_name,user_g
 		"WHERE users.user_id=user_group.user_id ".
 		"AND user_group.group_id='$group_id'");
 
-print '<TABLE WIDTH="100%" BORDER="0">';
+print '<table width="100% border="0">';
 
 while ($row_memb=db_fetch_array($res_memb)) {
 
@@ -132,19 +132,19 @@ while ($row_memb=db_fetch_array($res_memb)) {
 		$img="trash.png";
 	}
 	if ($is_admin) {
-		$button='<INPUT TYPE="IMAGE" NAME="DELETE" SRC="/images/ic/'.$img.'" HEIGHT="16" WIDTH="16" BORDER="0">';
+		$button='<input type="image" name="DELETE" src="/images/ic/'.$img.'" height="16" width="16" border="0" />';
 	} else {
 		$button='&nbsp;';
 	}
 	print '
-		<FORM ACTION="rmuser.php" METHOD="POST"><INPUT TYPE="HIDDEN" NAME="func" VALUE="rmuser">'.
-		'<INPUT TYPE="HIDDEN" NAME="return_to" VALUE="'.$REQUEST_URI.'">'.
-		'<INPUT TYPE="HIDDEN" NAME="rm_id" VALUE="'.$row_memb['user_id'].'">'.
-		'<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'. $group_id .'">'.
-		'<TR><TD ALIGN="MIDDLE">'.$button.'</TD></FORM>'.
-		'<TD><A href="/users/'.$row_memb['user_name'].'/">'.$row_memb['realname'].'</A></TD></TR>';
+		<form action="rmuser.php" method="post"><input type="hidden" name="func" value="rmuser" /'.
+		'<input type="hidden" name="return_to" value="'.$REQUEST_URI.'" />'.
+		'<input type="hidden" name="rm_id" value="'.$row_memb['user_id'].'" />'.
+		'<input type="hidden" name="group_id" value="'. $group_id .'" />'.
+		'<tr><td align="center">'.$button.'</td></form>'.
+		'<td><a href="/users/'.$row_memb['user_name'].'/">'.$row_memb['realname'].'</a></td></tr>';
 }
-print '</TABLE>';
+print '</table>';
 
 /*
 	Add member form
@@ -154,19 +154,19 @@ if ($is_admin) {
 
 	// After adding user, we go to the permission page for one
 ?>
-	<HR NoShade SIZE="1">
-	<FORM ACTION="userpermedit.php?group_id=<?php echo $group->getID(); ?>" METHOD="POST">
-	<INPUT TYPE="hidden" NAME="func" VALUE="adduser">
-	<TABLE WIDTH="100%" BORDER="0">
-	<TR><TD><B>Unix Name:</B></TD><TD><INPUT TYPE="TEXT" NAME="form_unix_name" SIZE=10 VALUE=""></TD></TR>
-	<TR><TD COLSPAN="2" ALIGN="CENTER"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Add User"></TD></TR></FORM>
-	</TABLE>
+	<hr noshade="noshade size="1" />
+	<form action="userpermedit.php?group_id=<?php echo $group->getID(); ?>" method="post">
+	<input type="hidden" name="func" value="adduser" />
+	<table width="100%" border="0">
+	<tr><td><strong>Unix Name:</strong></td><td><input type="text" name="form_unix_name" size="10" value="" /></td></tr>
+	<tr><td colspan="2" align="center"><input type="submit" name="submit" value="Add User" /></td></tr></form>
+	</table>
 
-	<HR NoShade SIZE="1">
+	<hr noshade="noshade size="1" />
 	<div align="center">
-	<A href="/project/admin/userperms.php?group_id=<?php echo $group->getID(); ?>">[Edit Member Permissions]</A>
+	<a href="/project/admin/userperms.php?group_id=<?php echo $group->getID(); ?>">[Edit Member Permissions]</a>
 	</div>
-	</TD></TR>
+	</td></tr>
 
 <?php
 }
@@ -175,9 +175,9 @@ if ($is_admin) {
 <?php echo $HTML->boxBottom();?>
 
 
-</TD></TR>
+</td></tr>
 
-<TR valign=top><TD width=50%>
+<tr valign="top"><td width="50%">
 
 <?php
 
@@ -189,48 +189,48 @@ echo $HTML->boxTop('Tool Admin');
 
 ?>
 
-<BR>
-<A HREF="/tracker/admin/?group_id=<?php echo $group->getID(); ?>">Tracker Admin</A><BR>
-<A HREF="/docman/admin/?group_id=<?php echo $group->getID(); ?>">DocManager Admin</A><BR>
-<A HREF="/mail/admin/?group_id=<?php echo $group->getID(); ?>">Mail Admin</A><BR>
-<A HREF="/news/admin/?group_id=<?php echo $group->getID(); ?>">News Admin</A><BR>
-<A HREF="/pm/admin/?group_id=<?php echo $group->getID(); ?>">Task Manager Admin</A><BR>
-<A HREF="/forum/admin/?group_id=<?php echo $group->getID(); ?>">Forum Admin</A><BR>
+<br />
+<a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>">Tracker Admin</a><br />
+<a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>">DocManager Admin</a><br />
+<a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>">Mail Admin</a><br />
+<a href="/news/admin/?group_id=<?php echo $group->getID(); ?>">News Admin</a><br />
+<a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>">Task Manager Admin</a><br />
+<a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>">Forum Admin</a><br />
 
 <?php echo $HTML->boxBottom(); ?>
 
 
 
 
-</TD>
+</td>
 
-<TD>&nbsp;</TD>
+<td>&nbsp;</td>
 
-<TD width=50%>
+<td width="50%">
 
 <?php echo $HTML->boxTop("File Releases"); ?>
-	&nbsp;<BR>
-	<CENTER>
-	<A href="editpackages.php?group_id=<?php print $group_id; ?>"><B>[Edit/Add File Releases]</B></A>
-	</CENTER>
+	&nbsp;<br />
+	<div align="center">
+	<a href="editpackages.php?group_id=<?php print $group_id; ?>"><strong>[Edit/Add File Releases]</strong></a>
+	</div>
 
-	<HR>
-	<B>Packages:</B>
+	<hr />
+	<strong>Packages:</strong>
 
-	<P>
+	<p>
 
 	<?php
 
 	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
 	while ($row_module = db_fetch_array($res_module)) {
-		print "$row_module[name]<BR>";
+		print "$row_module[name]<br />";
 	}
 
 	echo $HTML->boxBottom();
 	?>
-</TD>
-</TR>
-</TABLE>
+</p></td>
+</tr>
+</table>
 
 <?php
 

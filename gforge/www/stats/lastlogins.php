@@ -40,11 +40,11 @@ $title[]='Source IP';
 echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_logins = db_fetch_array($res_logins)) {
-	print '<TR>';
-	print '<TD>'.date($sys_datefmt, $row_logins['time']).'</TD>';
-	print '<TD>'.$row_logins['user_name'].'</TD>';
-	print '<TD>'.$row_logins['ip_addr'].'</TD>';
-	print '</TR>';
+	print '<tr>';
+	print '<td>'.date($sys_datefmt, $row_logins['time']).'</td>';
+	print '<td>'.$row_logins['user_name'].'</td>';
+	print '<td>'.$row_logins['ip_addr'].'</td>';
+	print '</tr>';
 }
 
 echo $GLOBALS['HTML']->listTableBottom();

@@ -73,21 +73,21 @@ if (session_loggedin()) {
 	news_header(array('title'=>'News','pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
 
 	echo '
-		<P>
-		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'
-		<P>
-		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-		<B>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</B>
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<P>
-		<B>'.$Language->getText('news_submit', 'subject').':</B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" VALUE="" SIZE="30" MAXLENGTH="60">
-		<P>
-		<B>'.$Language->getText('news_submit', 'details').':</B><BR>
-		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT"></TEXTAREA><BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.$Language->getText('news_submit', 'submit').'">
-		</FORM>';
+		<p>
+		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>
+		<p>
+		<form action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<strong>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</strong>
+		<input type="hidden" name="post_changes" value="y" /></p>
+		<p>
+		<strong>'.$Language->getText('news_submit', 'subject').':</strong><br />
+		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
+		<p>
+		<strong>'.$Language->getText('news_submit', 'details').':</strong><br />
+		<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />
+		<input type="submit" name="submit" value="'.$Language->getText('news_submit', 'submit').'" />
+		</form></p>';
 
 	news_footer(array());
 

@@ -95,14 +95,14 @@ $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order'
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '<table width="10%" BORDER="0">
+echo '<table width="10%" border="0">
 	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'" method="post">
 	<input type="hidden" name="set" value="custom">
 	<tr>
-		<td><font size="-1">Assignee:<br>'. $tech_box .'</td>
-		<td><font size="-1">Status:<br>'. $pg->statusBox('_status',$_status,'Any') .'</td>
-		<td><font size="-1">Category:<br>'. $cat_box .'</td>
-		<td><font size="-1">Sort On:<br>'. $order_box .'</td>
+		<td><font size="-1">Assignee:<br />'. $tech_box .'</td>
+		<td><font size="-1">Status:<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td><font size="-1">Category:<br />'. $cat_box .'</td>
+		<td><font size="-1">Sort On:<br />'. $order_box .'</td>
 		<td><font size="-1"><input type="SUBMIT" name="SUBMIT" value="Browse"></td>
 	</tr></form></table><p>';
 
@@ -113,7 +113,7 @@ if ($rows < 1) {
 	echo '
 		<h1>No Matching Tasks found</h1>
 		<p>
-		<b>Add tasks using the link above</b>';
+		<strong>Add tasks using the link above</strong>';
 	echo db_error();
 } else {
 
@@ -138,10 +138,10 @@ if ($rows < 1) {
 			'&project_task_id='. $pt_arr[$i]->getID() .
 			'&group_id='.$group_id.
 			'&group_project_id='. $group_project_id .'">'.
-			$pt_arr[$i]->getID() .'</A></td>'.
+			$pt_arr[$i]->getID() .'</a></td>'.
 			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
 			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
-			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<b>* ':'&nbsp; ') .
+			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
 				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
 			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 
@@ -154,7 +154,7 @@ if ($rows < 1) {
 	if ($offset > 0) {
 		echo '<a href="/pm/task.php?func=browse&group_project_id='.
 			$group_project_id.'&group_id='.$group_id.'&offset='.($offset-50).'">
-			<b><-- Previous 50</b></A>';
+			<strong><-- Previous 50</strong></a>';
 	} else {
 		echo '&nbsp;';
 	}
@@ -163,7 +163,7 @@ if ($rows < 1) {
 	if ($rows==50) {
 		echo '<a href="/pm/task.php?func=browse&group_project_id='.
 			$group_project_id.'&group_id='.$group_id.'&offset='.($offset+50).
-			'"><b>Next 50 --></b></A>';
+			'"><strong>Next 50 --></strong></a>';
 	} else {
 		echo '&nbsp;';
 	}

@@ -24,16 +24,16 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
 
 	        global $PHP_SELF,$HTML;
 
-		echo '<TR '. $HTML->boxGetAltRowStyle($i) . '><td>';
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
        		if ($selectable) {
        			echo '<input type="checkbox" '
        			     .'name="news_id[]" value="'
-       			     .db_result($result, $i, 'id').'">';
+       			     .db_result($result, $i, 'id').'" />';
        		}
        		echo date('Y-m-d', db_result($result,$i,'date')).'</td>
        		<td>';
        		echo '
-       		<a href="'.$PHP_SELF.'?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A>
+       		<a href="'.$PHP_SELF.'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
        		</td>
 
        		<td>
@@ -55,21 +55,21 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$result=db_query($sql_pending);
        	$rows=db_numrows($result);
 
-       	echo '<form ACTION="'. $PHP_SELF .'" METHOD="POST">';
-       	echo '<input type="hidden" name="mass_reject" value="1">';
-       	echo '<input type="hidden" name="post_changes" value="y">';
+       	echo '<form action="'. $PHP_SELF .'" method="post">';
+       	echo '<input type="hidden" name="mass_reject" value="1" />';
+       	echo '<input type="hidden" name="post_changes" value="y" />';
 
        	if ($rows < 1) {
        		echo '
-       			<H4>No Queued Items Found</H4>';
+       			<h4>No Queued Items Found</h4>';
        	} else {
-       		echo '<H4>These items need to be approved (total: '.$rows.')</H4>';
+       		echo '<h4>These items need to be approved (total: '.$rows.')</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,true);
        		}
        		echo $GLOBALS['HTML']->listTableBottom();
-       		echo '<br><input type="submit" name="submit" value="Reject Selected">';
+       		echo '<br /><input type="submit" name="submit" value="Reject Selected" />';
        	}
        	echo '</form>';
 
@@ -81,9 +81,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<H4>No rejected items found for this week</H4>';
+       			<h4>No rejected items found for this week</h4>';
        	} else {
-       		echo '<H4>These items were rejected this past week (total: '.$rows.')</H4>';
+       		echo '<h4>These items were rejected this past week (total: '.$rows.')</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,false);
@@ -99,9 +99,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<H4>No approved items found for this week</H4>';
+       			<h4>No approved items found for this week</h4>';
        	} else {
-       		echo '<H4>These items were approved this past week (total: '.$rows.')</H4>';
+       		echo '<h4>These items were approved this past week (total: '.$rows.')</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,true,false);

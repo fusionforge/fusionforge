@@ -23,23 +23,22 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	people_header(array('title'=>'Create a job for your project','pagename'=>'people_createjob'));
 
 	echo '
-		<P>
-		Start by filling in the fields below. When you click continue, you 
-		will be shown a list of skills and experience levels that this job requires.
-		<P>
-		<FORM ACTION="/people/editjob.php" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-		<B>Category:</B><BR>
+		<p>Start by filling in the fields below. When you click continue, you
+		will be shown a list of skills and experience levels that this job requires.</p>
+		<p>
+		<form action="/people/editjob.php" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<strong>Category:</strong><br /></p>
 		'. people_job_category_box('category_id') .'
-		<P>
-		<B>Short Description:</B><BR>
-		<INPUT TYPE="TEXT" NAME="title" VALUE="" SIZE="40" MAXLENGTH="60">
-		<P>
-		<B>Long Description:</B><BR>
-		<TEXTAREA NAME="description" ROWS="10" COLS="60" WRAP="SOFT"></TEXTAREA>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="add_job" VALUE="Continue >>">
-		</FORM>';
+		<p>
+		<strong>Short Description:</strong><br />
+		<input type="text" name="title" value="" size="40" maxlength="60" /></p>
+		<p>
+		<strong>Long Description:</strong><br />
+		<textarea name="description" rows="10" cols="60" wrap="soft"></textarea></p>
+		<p>
+		<input type="submit" name="add_job" value="Continue >>" />
+		</form></p>';
 
 	people_footer(array());
 

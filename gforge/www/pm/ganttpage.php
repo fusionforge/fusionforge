@@ -98,16 +98,16 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '<table width="10%" BORDER="0">
+echo '<table width="10%" border="0">
 	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=ganttpage" method="post">
 	<input type="hidden" name="set" value="custom">
 	<tr>
-		<td><font size="-1">Assignee:<br>'. $tech_box .'</td>
-		<td><font size="-1">Status:<br>'. $pg->statusBox('_status',$_status,'Any') .'</td>
-		<td><font size="-1">Category:<br>'. $cat_box .'</td>
-		<td><font size="-1">Sort On:<br>'. $order_box .'</td>
-		<td><font size="-1">Resolution:<br>'. $dispres_box .'</td>
-		<td><font size="-1">Size:<br>'. $size_box .'</td>
+		<td><font size="-1">Assignee:<br />'. $tech_box .'</td>
+		<td><font size="-1">Status:<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td><font size="-1">Category:<br />'. $cat_box .'</td>
+		<td><font size="-1">Sort On:<br />'. $order_box .'</td>
+		<td><font size="-1">Resolution:<br />'. $dispres_box .'</td>
+		<td><font size="-1">Size:<br />'. $size_box .'</td>
 		<td><font size="-1"><input type="SUBMIT" name="SUBMIT" value="Browse"></td>
 	</tr></form></table>';
 

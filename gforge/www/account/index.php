@@ -39,9 +39,9 @@ if ($submit) {
 
 	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings, 
 		$jabber_address,$jabber_only)) {
-		$feedback .= $u->getErrorMessage().'<br>';
+		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
-		$feedback .= 'Updated<br>';
+		$feedback .= 'Updated<br />';
 	}
 
 }
@@ -51,104 +51,104 @@ site_user_header(array('title'=>$Language->getText('account_options', 'title'),'
 
 
 
-echo '<FORM action="'.$PHP_SELF.'" method="post">';
+echo '<form action="'.$PHP_SELF.'" method="post">';
 
 
 echo $HTML->boxTop($Language->getText('account_options', 'title'));
 ?>
  
 
-<p> <?php echo $Language->getText('account_options', 'welcome'); ?> <b><?php print $u->getUnixName(); ?></b>. 
+<p> <?php echo $Language->getText('account_options', 'welcome'); ?> <strong><?php print $u->getUnixName(); ?></strong>. 
 <p>
 
 <?php echo $Language->getText('account_options', 'intro'); ?> 
 
-<UL>
-<LI><A href="/users/<?php print $u->getUnixName(); ?>/"><B><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></B></A>
-<LI><A HREF="/people/editprofile.php"><B><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></B></A>
-<LI><A HREF="/themes/"><B>Change My Theme</B></A>
-</UL>
+<ul>
+<li><a href="/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></strong></a>
+<li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a>
+<li><a href="/themes/"><strong>Change My Theme</strong></a>
+</ul>
 <?php echo $HTML->boxBottom(); ?>
 
-&nbsp;<BR>
-<TABLE width=100% border=0>
+&nbsp;<br />
+<table width=100% border=0>
 
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'member_since'); ?> </TD>
-<TD><B><?php print date($sys_datefmt,$u->getAddDate()); ?></B></TD>
-</TR>
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'user_id'); ?> </TD>
-<TD><B><?php print $u->getID(); ?></B></TD>
-</TR>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'member_since'); ?> </td>
+<td><strong><?php print date($sys_datefmt,$u->getAddDate()); ?></strong></td>
+</tr>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'user_id'); ?> </td>
+<td><strong><?php print $u->getID(); ?></strong></td>
+</tr>
 
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'login_name'); ?> </TD>
-<TD><B><?php print $u->getUnixName(); ?></B>
-<br><A href="change_pw.php">[<?php echo $Language->getText('account_options', 'change_password'); ?>]</A></TD>
-</TR>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'login_name'); ?> </td>
+<td><strong><?php print $u->getUnixName(); ?></strong>
+<br /><a href="change_pw.php">[<?php echo $Language->getText('account_options', 'change_password'); ?>]</a></td>
+</tr>
 
-<TD><?php echo $Language->getText('account_options', 'real_name'); ?></TD>
-<TD><input type="text" name="realname" value="<?php print $u->getRealName(); ?>"></B>
-</TD>
-</TR>
+<td><?php echo $Language->getText('account_options', 'real_name'); ?></td>
+<td><input type="text" name="realname" value="<?php print $u->getRealName(); ?>"></strong>
+</td>
+</tr>
 
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'language'); ?> </TD>
-<TD><?php echo html_get_language_popup ($Language,'language',$u->getLanguage()); ?>
-</TD>
-</TR>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'language'); ?> </td>
+<td><?php echo html_get_language_popup ($Language,'language',$u->getLanguage()); ?>
+</td>
+</tr>
 
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'timezone'); ?> </TD>
-<TD><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
-</TD>
-</TR>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'timezone'); ?> </td>
+<td><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
+</td>
+</tr>
 
-<TR valign=top>
-<TD><?php echo $Language->getText('account_options', 'email_address'); ?> </TD>
-<TD><B><?php print $u->getEmail(); ?></B>
-<br><A href="change_email.php">[<?php echo $Language->getText('account_options', 'change_email_address'); ?>]</A>
-</TD>
-</TR>
+<tr valign=top>
+<td><?php echo $Language->getText('account_options', 'email_address'); ?> </td>
+<td><strong><?php print $u->getEmail(); ?></strong>
+<br /><a href="change_email.php">[<?php echo $Language->getText('account_options', 'change_email_address'); ?>]</a>
+</td>
+</tr>
 
 <?php
 if ($sys_use_jabber) {
-    echo '<TR VALIGN=top>
-<TD>'. $Language->getText('account_register','jabberaddr') .'</TD>
-<TD>
-    <INPUT size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'"><P>
-	<INPUT type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'CHECKED' : '' ).'>
+    echo '<tr valign=top>
+<td>'. $Language->getText('account_register','jabberaddr') .'</td>
+<td>
+    <input size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'"><p>
+	<input type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'CHECKED' : '' ).'>
 	'.$Language->getText('account_register','jabberonly').'.
-</TD></TR>';
+</td></tr>';
 
 }
 ?>
 
 
-<TR>
-<TD COLSPAN=2>
+<tr>
+<td colspan=2>
 <?php 
 // ############################# Preferences
 echo $HTML->boxTop("Preferences"); ?>
 
-<INPUT type="checkbox" name="mail_site" value="1"<?php 
+<input type="checkbox" name="mail_site" value="1"<?php 
 	if ($u->getMailingsPrefs('site')) print " checked"; ?>> 
 	<?php echo $Language->getText('account_register','siteupdate'); ?>
 
-<P><INPUT type="checkbox"  name="mail_va" value="1"<?php
+<p><input type="checkbox"  name="mail_va" value="1"<?php
 	if ($u->getMailingsPrefs('va')) print " checked"; ?>> 
 	<?php echo $Language->getText('account_register','communitymail'); ?>
 
-<P><INPUT type="checkbox"  name="remember_user" value="1"<?php
+<p><input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked"; ?> > 
 <?php echo $Language->getText('account_register','remember_me','<a href="/my/">');?>
 
-<P><INPUT type="checkbox"  name="use_ratings" value="1"<?php
+<p><input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked"; ?> > 
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
 
-</I>
+</em>
 
 <P align=center>
 <?php echo $HTML->boxBottom(); 
@@ -158,8 +158,8 @@ echo $HTML->boxTop("Preferences"); ?>
 if ($u->getUnixStatus() == 'A') {
 	echo $HTML->boxTop("Shell Account Information"); 
 	print '&nbsp;
-<BR>Shell box: <b>'.$u->getUnixBox().'</b>
-<BR>CVS/SSH Shared Authorized Keys: <B>';
+<br />Shell box: <strong>'.$u->getUnixBox().'</strong>
+<br />CVS/SSH Shared Authorized Keys: <strong>';
 	// get shared key count from db
 	$expl_keys = explode("\n", $u->getAuthorizedKeys());
 	if ($expl_keys[0]) {
@@ -167,21 +167,21 @@ if ($u->getUnixStatus() == 'A') {
 	} else {
 		print '0';
 	}
-	print '</B> <A href="editsshkeys.php">[Edit Keys]</A>';
+	print '</strong> <a href="editsshkeys.php">[Edit Keys]</a>';
 	echo $HTML->boxBottom(); 
 } 
 ?>
 
-</TD>
-</TR>
+</td>
+</tr>
 
 </TABLE>
 
 <CENTER>
-<INPUT type="submit" name="submit" value="<?php echo $Language->getText('account_register','update'); ?>">
-<INPUT type="reset" name="reset" value="<?php echo $Language->getText('account_register','reset'); ?>">
+<input type="submit" name="submit" value="<?php echo $Language->getText('account_register','update'); ?>">
+<input type="reset" name="reset" value="<?php echo $Language->getText('account_register','reset'); ?>">
 </CENTER>
-</FORM>
+</form>
 
 <?php
 site_user_footer(array());

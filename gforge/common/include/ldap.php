@@ -119,7 +119,7 @@ function sf_ldap_connect() {
 		sf_ldap_reset_error_msg();
 		$ldap_conn = @ldap_connect($sys_ldap_host,$sys_ldap_port);
 		if (!$ldap_conn) {
-			sf_ldap_set_error_msg('ERROR: Cannot connect to LDAP server<br>');
+			sf_ldap_set_error_msg('ERROR: Cannot connect to LDAP server<br />');
 			return false;
 		}
 		ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
@@ -356,7 +356,7 @@ function sf_ldap_create_user_from_object(&$user) {
 		return true;
 	}
 
-//echo "sf_ldap_create_user_from_object(".$user->getUnixName().")<br>";
+//echo "sf_ldap_create_user_from_object(".$user->getUnixName().")<br />";
 	if (!sf_ldap_connect()) {
 		return false;
 	}
@@ -382,7 +382,7 @@ function sf_ldap_create_user_from_object(&$user) {
 
 	if (!sf_ldap_add($dn,$entry)) {
 		sf_ldap_set_error_msg("ERROR: cannot add LDAP user entry '".
-			 $user->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $user->getUnixName()."': ".sf_ldap_error()."<br />");
 		return false;
 	}
 	return true;
@@ -431,7 +431,7 @@ function sf_ldap_create_user_from_props($username, $cn, $crypt_pw,
 
 	if (!sf_ldap_add($dn,$entry)) {
 		sf_ldap_set_error_msg("ERROR: cannot add LDAP user entry '".
-			 $username."': ".sf_ldap_error()."<br>");
+			 $username."': ".sf_ldap_error()."<br />");
 		return false;
 	}
 	return true;
@@ -460,7 +460,7 @@ function sf_ldap_remove_user($user_id) {
 
 	if (!sf_ldap_delete($dn)) {
 	    sf_ldap_set_error_msg("ERROR: cannot delete LDAP user entry '".
-			 $user->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $user->getUnixName()."': ".sf_ldap_error()."<br />");
 	    return false;
 	}
 	return true;
@@ -484,7 +484,7 @@ function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 	}
 
 	$user = &user_get_object($user_id);
-//echo "sf_ldap_user_set_attribute(".$user->getUnixName().",".$attr.",".$value.")<br>";
+//echo "sf_ldap_user_set_attribute(".$user->getUnixName().",".$attr.",".$value.")<br />";
 	if (!sf_ldap_connect()) {
 		return false;
 	}
@@ -493,7 +493,7 @@ function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 
 	if (!sf_ldap_modify_if_exists($dn, $entry)) {
 	    sf_ldap_set_error_msg("ERROR: cannot change LDAP attribute '$attr' for user '".
-			 $user->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $user->getUnixName()."': ".sf_ldap_error()."<br />");
 	    return false;
 	}
 	return true;
@@ -521,7 +521,7 @@ function sf_ldap_check_group($group_id) {
 
 	$group = &group_get_object($group_id);
 	if (!$group) {
-		sf_ldap_set_error_msg("ERROR: Cannot find group [$group_id]<br>");
+		sf_ldap_set_error_msg("ERROR: Cannot find group [$group_id]<br />");
 		return false;
 	}
 	if (!sf_ldap_connect()) {
@@ -570,7 +570,7 @@ function sf_ldap_create_group($group_id) {
 	
 	if (!sf_ldap_add($dn,$entry)) {
 	    sf_ldap_set_error_msg("ERROR: cannot add LDAP group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 	    // If there's error, that's bad. But don't stop.
 	    $ret_val=false;
 	}
@@ -592,7 +592,7 @@ function sf_ldap_create_group($group_id) {
 
 	if (!sf_ldap_add($dn,$entry)) {
 		sf_ldap_set_error_msg("ERROR: cannot add LDAP CVS group entry '"
-			 .$group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 .$group->getUnixName()."': ".sf_ldap_error()."<br />");
 		$ret_val=false;
 	}
 
@@ -607,7 +607,7 @@ function sf_ldap_create_group($group_id) {
 						$group_id+$GID_ADD+$ANONCVS_UID_ADD,
 						$group_id+$GID_ADD, "/dev/null")) {
 		sf_ldap_set_error_msg("ERROR: cannot add LDAP AnonCVS user entry '"
-			 .$group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 .$group->getUnixName()."': ".sf_ldap_error()."<br />");
 		$ret_val=false;
 	}
 
@@ -643,7 +643,7 @@ function sf_ldap_remove_group($group_id) {
 
 	if (!sf_ldap_delete($dn)) {
 	    sf_ldap_set_error_msg("ERROR: cannot delete LDAP group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 	    $ret_val = false;
 	}
 
@@ -655,7 +655,7 @@ function sf_ldap_remove_group($group_id) {
 
 	if (!sf_ldap_delete($dn)) {
 	    sf_ldap_set_error_msg("ERROR: cannot delete LDAP CVS group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 	    $ret_val = false;
 	}
 
@@ -666,7 +666,7 @@ function sf_ldap_remove_group($group_id) {
 	$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 	if (!sf_ldap_delete($dn)) {
 	    sf_ldap_set_error_msg("ERROR: cannot delete LDAP AnonCVS user entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 	    $ret_val = false;
 	}
 
@@ -706,7 +706,7 @@ function sf_ldap_group_add_user($group_id,$user_id,$cvs_only=0) {
 
 	$res=sf_ldap_read($cvs_dn,"memberUid=".$user->getUnixName(),array("cn"));
 	if ($res && ldap_count_entries($ldap_conn,$res)>0) {
-		//echo "already a member of CVS<br>";
+		//echo "already a member of CVS<br />";
 	} else {
 		//
 		//	No, add one
@@ -714,7 +714,7 @@ function sf_ldap_group_add_user($group_id,$user_id,$cvs_only=0) {
 
 		if (!sf_ldap_mod_add($cvs_dn,$entry)) {
 			sf_ldap_set_error_msg("ERROR: cannot add member to LDAP CVS group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 			return false;
 		}
 	}
@@ -731,7 +731,7 @@ function sf_ldap_group_add_user($group_id,$user_id,$cvs_only=0) {
 	$res = sf_ldap_read($dn, "memberUid=".$user->getUnixName(), array("cn"));
 
 	if ($res && ldap_count_entries($ldap_conn,$res)>0) {
-		//echo "already a member<br>";
+		//echo "already a member<br />";
 	} else {
 		//
 		//	No, add one
@@ -739,7 +739,7 @@ function sf_ldap_group_add_user($group_id,$user_id,$cvs_only=0) {
 
 		if (!sf_ldap_mod_add($dn,$entry)) {
 			sf_ldap_set_error_msg("ERROR: cannot add member to LDAP group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."<br />");
 			return false;
 		}
 	}
@@ -780,7 +780,7 @@ function sf_ldap_group_remove_user($group_id,$user_id,$cvs_only=0) {
 
 	if (!sf_ldap_mod_del($cvs_dn,$entry) && !sf_ldap_does_not_exist()) {
 		sf_ldap_set_error_msg("ERROR: cannot remove member from LDAP CVS group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."(".sf_ldap_errno().")"."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."(".sf_ldap_errno().")"."<br />");
 		$ret_val=false;
 	}
 	
@@ -790,7 +790,7 @@ function sf_ldap_group_remove_user($group_id,$user_id,$cvs_only=0) {
 
 	if (!sf_ldap_mod_del($dn,$entry) && !sf_ldap_does_not_exist()) {
 		sf_ldap_set_error_msg("ERROR: cannot remove member from LDAP group entry '".
-			 $group->getUnixName()."': ".sf_ldap_error()."(".sf_ldap_errno().")"."<br>");
+			 $group->getUnixName()."': ".sf_ldap_error()."(".sf_ldap_errno().")"."<br />");
 		$ret_val=false;
 	}
 	

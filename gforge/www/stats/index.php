@@ -26,36 +26,36 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
 
 echo "\n\n";
 
-print '<DIV ALIGN="CENTER">' . "\n";
-print '<font size="+1"><b>Sitewide Agregate Statistics </b></font><BR>' . "\n";
+print '<div align="center">' . "\n";
+print '<h3>Sitewide Agregate Statistics </h3><br />' . "\n";
 ?>
 
-<HR>
+<hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td align="center"><B>OVERVIEW STATS</B></td>
-<td align="center"><a href="projects.php">PROJECT STATS</a></td>
-<td align="center"><a href="graphs.php">SITE GRAPHS</a></td>
+<tr align="center">
+<td><strong>OVERVIEW STATS</strong></td>
+<td><a href="projects.php">PROJECT STATS</a></td>
+<td><a href="graphs.php">SITE GRAPHS</a></td>
 </tr>
 </table>
 
-<HR>
+<hr />
 
 <?php
 
 stats_site_agregate();
-print '<BR><BR>';
+print '<br /><br />';
 stats_site_projects_daily( 7 );
-print '<BR><BR>';
+print '<br /><br />';
 stats_site_projects_monthly( );
-print '<BR><BR>' . "\n";
-print '</DIV>' . "\n";
+print '<br /><br />' . "\n";
+print '</div>' . "\n";
 echo '
 <p>Other statistics:
 <ul>
-<li><a href="lastlogins.php">Most Recent Logins</A>
-<li><a href="i18n.php">I18n Statistics</a>
+<li><a href="lastlogins.php">Most Recent Logins</a></li>
+<li><a href="i18n.php">I18n Statistics</a></li>
 </ul>
 </p>
 ';

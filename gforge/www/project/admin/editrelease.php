@@ -170,23 +170,21 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
  */
 ?>
 
-<h3>
-Step 1:&nbsp;&nbsp; Edit Release
-</h3>
+<h3>Step 1:&nbsp;&nbsp; Edit Release</h3>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
-<input type="hidden" name="step1" value="1">
+<input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><b>Release Date:<b></td>
-	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',$frsr->getReleaseDate()) ?>" size="10" maxlength="10"></td>
+	<td width="10%"><strong>Release Date:<strong></td>
+	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',$frsr->getReleaseDate()) ?>" size="10" maxlength="10" /></td>
 </tr>
 <tr>
-	<td><b>Release Name:<b></td>
-	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>"></td>
+	<td><strong>Release Name:<strong></td>
+	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
-	<td><b>Status:</b></td>
+	<td><strong>Status:</strong></td>
 	<td>
 		<?php 
 			echo frs_show_status_popup('status_id',$frsr->getStatus()); 
@@ -195,73 +193,69 @@ Step 1:&nbsp;&nbsp; Edit Release
 </tr>
 <tr>
 	<td colspan="2">
-		<br>
-		Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br>
-		You can either upload the release notes and change log individually, or paste them in together below.<br>
+		<br />
+		Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br />
+		You can either upload the release notes and change log individually, or paste them in together below.<br />
 	</td>
 </tr>
 <tr>
-	<td><b>Upload Release Notes:</b></td>
-	<td><input type="file" name="uploaded_notes" size="30"></td>
+	<td><strong>Upload Release Notes:</strong></td>
+	<td><input type="file" name="uploaded_notes" size="30" /></td>
 </tr>
 <tr>
-	<td><b>Upload Change Log:</b></td>
-	<td><input type="file" name="uploaded_changes" size="30"></td>
+	<td><strong>Upload Change Log:</strong></td>
+	<td><input type="file" name="uploaded_changes" size="30" /></td>
 </tr>
 <tr>
-	<td COLSPAN=2>
-		<b>Paste The Notes In:</b><br>
+	<td colspan="2">
+		<strong>Paste The Notes In:</strong><br />
 		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getNotes()); ?></textarea>
 	</td>
-</TR>
-<TR>
-	<td COLSPAN=2>
-		<b>Paste The Change Log In:</b><br>
+</tr>
+<tr>
+	<td colspan="2">
+		<strong>Paste The Change Log In:</strong><br />
 		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getChanges()); ?></textarea>
 	</td>
 </tr>
-<TR>
-	<TD>
-		<br>
-		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked':''); ?>> Preserve my pre-formatted text.
+<tr>
+	<td>
+		<br />
+		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> Preserve my pre-formatted text.
 		<p>
-		<input type="submit" name="submit" value="Submit/Refresh">
+		<input type="submit" name="submit" value="Submit/Refresh"/></p>
 	</td>
 </tr>
 </table>
 </form>
-<P>
-<hr noshade>
-<P>
+<p>&nbsp;</p>
+<hr noshade="noshade" />
 <h3>Step 2: Add Files To This Release</h3>
-<P>
-Now, choose a file to upload into the system. The maximum file size is determined by
-the site administrator, but defaults to 2MB. If you need to upload large files, 
-contact your site administrator.
-<P>
-<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
-<input type="hidden" name="step2" value="1">
-<font color="red"><b>NOTE: In some browsers you must select the file in
-the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</b></font><br>
-Upload a new file: <input type="file" name="userfile"  size="30">
-<P>
-<H4>File Type:</H4>
-<P>
+<p>Now, choose a file to upload into the system. The maximum file size is determined by
+the site administrator, but defaults to 2MB. If you need to upload large files,
+contact your site administrator.</p>
+<p>
+<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
+<input type="hidden" name="step2" value="1" />
+<span style="color:red"><strong>NOTE: In some browsers you must select the file in
+the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</strong></span><br />
+Upload a new file: <input type="file" name="userfile"  size="30" />
+<p>&nbsp;</p>
+<h4>File Type:</h4>
 <?php
-	print frs_show_filetype_popup ('type_id') . "<br>";
+	print frs_show_filetype_popup ('type_id') . "<br />";
 ?>
-<P>
-<H4>Processor Type:</H4>
-<P>
+<p>&nbsp;</p>
+<h4>Processor Type:</h4>
 <?php
 	print frs_show_processor_popup ('processor_id');
 ?>
-<P>
-<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Add This File">
-</FORM>
-<P>
-<hr noshade>
-<P>
+<p>
+<input type="submit" name="submit" value="Add This File" /></p>
+</form></p>
+<p>&nbsp;</p>
+<hr noshade="noshade" />
+<p>&nbsp;</p>
 <h3>Step 3: Edit Files In This Release</h3>
 
 <?php
@@ -269,53 +263,53 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 	$res=db_query("SELECT * FROM frs_file WHERE release_id='$release_id'");
 	$rows=db_numrows($res);
 	if($rows < 1) {
-		print("<H4>No Files In This Release</H4>\n");
+		print("<h4>No Files In This Release</h4>\n");
 	} else {
-		print("Once you have added files to this release you <b>must</b> update each of these files with the correct information or they will not appear on your download summary page.\n");
-		$title_arr[]='Filename<BR>Release';
-		$title_arr[]='Processor<BR>Release Date';
-		$title_arr[]='File Type<BR>Update';
+		print("Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.\n");
+		$title_arr[]='Filename<br />Release';
+		$title_arr[]='Processor<br />Release Date';
+		$title_arr[]='File Type<br />Update';
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for($x=0; $x<$rows; $x++) {
 ?>
 			<form action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>" method="post">
-				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>">
-				<input type="hidden" name="step3" value="1">
+				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>" />
+				<input type="hidden" name="step3" value="1" />
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-					<td nowrap><font size="-1"><?php echo db_result($res,$x,'filename'); ?></td>
-					<td><font size="-1"><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></td>
-					<td><font size="-1"><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></td>
+					<td nowrap="nowrap"><span style="font-size:smaller"><?php echo db_result($res,$x,'filename'); ?></span></td>
+					<td><span style="font-size:smaller"><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></span></td>
+					<td><span style="font-size:smaller"><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></span></td>
 				</tr>
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td>
-						<font size="-1">
+						<span style="font-size:smaller">
 							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
-						</font>
+						</span>
 					</td>
 					<td>
-						<font size="-1">
-							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10">
-						</font>
+						<span style="font-size:smaller">
+							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10" />
+						</span>
 					</td>
-					<td><font size="-1"><input type="submit" name="submit" value="Update/Refresh"></td>
+					<td><input type="submit" name="submit" value="Update/Refresh" /></td>
 				</tr>
 				</form>
 
 			<form action="<?php echo $PHP_SELF; ?>" method="post">
-				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-				<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
-				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
-				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>">
-				<input type="hidden" name="step3" value="Delete File">
+				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+				<input type="hidden" name="release_id" value="<?php echo $release_id; ?>" />
+				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>" />
+				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>" />
+				<input type="hidden" name="step3" value="Delete File" />
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-					<td><font size="-1">&nbsp;</td>
-					<td><font size="-1">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
 					<td>
-						<font size="-1">
-							<input type="submit" name="submit" value="Delete File"> <input type="checkbox" name="im_sure" value="1"> I'm Sure
-						</font>
+						<span style="font-size:smaller">
+							<input type="submit" name="submit" value="Delete File" /> <input type="checkbox" name="im_sure" value="1" /> I'm Sure
+						</span>
 					</td>
 				</tr>
 			</form>

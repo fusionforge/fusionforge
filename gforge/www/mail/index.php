@@ -32,39 +32,39 @@ if ($group_id) {
 
 	if (!$result || $rows < 1) {
 		echo '
-			<H1>No Lists found for '.group_getname($group_id).'</H1>';
+			<h1>No Lists found for '.group_getname($group_id).'</h1>';
 		echo '
-			<P>Project administrators use the admin link to request mailing lists.';
+			<p>Project administrators use the admin link to request mailing lists.</p>';
 		$HTML->footer(array());
 		exit;
 	}
 
 	echo $Language->getText('mail', 'provided_by');
-	echo "<P>Choose a list to browse, search, and post messages.<P>\n";
+	echo "<p>Choose a list to browse, search, and post messages.</p>\n";
 
 	/*
 		Put the result set (list of mailing lists for this group) into a column with folders
 	*/
 
-	echo "<table WIDTH=\"100%\" border=0>\n".
-		"<TR><TD VALIGN=\"TOP\">\n"; 
+	echo "<table width=\"100%\" border=\"0\">\n".
+		"<tr><td valign=\"top\">\n";
 
 	for ($j = 0; $j < $rows; $j++) {
-		echo '<A HREF="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.
+		echo '<a href="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.
 			db_result($result, $j, 'list_name').'/">' . 
-			html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp; '.
-			db_result($result, $j, 'list_name').' Archives</A>'; 
-		echo ' (go to <A HREF="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.
-			db_result($result, $j, 'list_name').'">Subscribe/Unsubscribe/Preferences</A>)<BR>';
-		echo '&nbsp;'.  db_result($result, $j, 'description') .'<P>';
+			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp; '.
+			db_result($result, $j, 'list_name').' Archives</a>';
+		echo ' (go to <a href="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.
+			db_result($result, $j, 'list_name').'">Subscribe/Unsubscribe/Preferences</a>)<br />';
+		echo '&nbsp;'.  db_result($result, $j, 'description') .'<p>';
 	}
-	echo '</TD></TR></TABLE>';
+	echo '</td></tr></table>';
 
 } else {
 	mail_header(array('title'=>'Choose a Group First','pagename'=>'mail'));
 	require_once('../mail/mail_nav.php');
 	echo '
-		<H1>Error - choose a group first</H1>';
+		<h1>Error - choose a group first</h1>';
 }
 mail_footer(array()); 
 

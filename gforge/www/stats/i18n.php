@@ -49,9 +49,9 @@ while ($lang_stat = db_fetch_array($res)) {
         if ($lang_stat['lang']!='English') $non_english+=$lang_stat['cnt'];
 }
 
-echo '<tr><td><b>Total Non-English</b></td>'.
-'<td align="right"><b>'.$non_english.' </td>'.
-'<td align="right"><b>'.sprintf("%.2f",$non_english*100/$total).' </td></tr>';
+echo '<tr><td><strong>Total Non-English</strong></td>'.
+'<td align="right"><strong>'.$non_english.' </strong></td>'.
+'<td align="right"><strong>'.sprintf("%.2f",$non_english*100/$total).' </strong></td></tr>';
 
 echo $GLOBALS['HTML']->listTableBottom();
 

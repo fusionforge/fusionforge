@@ -94,12 +94,12 @@ if ($msg_id) {
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	echo "<TR><TD BGCOLOR=\"E3E3E3\">\n";
-	echo "BY: ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<BR>";
-	echo "DATE: ". date($sys_datefmt, $fm->getPostDate()) ."<BR>";
-	echo "SUBJECT: ". $fm->getSubject() ."<P>";
+	echo "<td><td style=\"background-color:#e3e3e3\">\n";
+	echo "BY: ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
+	echo "DATE: ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
+	echo "SUBJECT: ". $fm->getSubject() ."<p>&nbsp;</p>";
 	echo util_make_links(nl2br( $fm->getBody() ));
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
 	echo $GLOBALS['HTML']->listTableBottom();
 
@@ -108,8 +108,8 @@ if ($msg_id) {
 		Show entire thread
 
 	*/
-	echo '<BR>&nbsp;<P>
-		<H3>Thread View</H3>';
+	echo '<br /><br />
+		<h3>Thread View</h3>';
 
 	$msg_arr =& $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
 	if ($fmf->isError()) {
@@ -136,22 +136,22 @@ if ($msg_id) {
 		$total_rows++;
 
 		if ($fm->getID() != $msg->getID()) {
-			$ah_begin='<A HREF="/forum/message.php?msg_id='.$msg->getID().'">';
-			$ah_end='</A>';
+			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().'">';
+			$ah_end='</a>';
 		} else {
 			$ah_begin='';
 			$ah_end='';
 		}
-		$ret_val .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
-			<TD>'. $ah_begin .
-			html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
+		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+			<td>'. $ah_begin .
+			html_image('ic/msg.png',"10","12",array("border"=>"0"));
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
 		*/
 		if ($f->getSavedDate() < $msg->getPostDate()) {
-			$bold_begin . '<B>';
-			$bold_end . '<B>';
+			$bold_begin . '<strong>';
+			$bold_end . '</strong>';
 		} else {
 			$bold_begin='';
 			$bold_end='';
@@ -159,9 +159,9 @@ if ($msg_id) {
 		/*
 			show the subject and poster
 		*/
-		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</TD>'.
-			'<TD>'. $msg->getPosterRealName() .'</TD>'.
-			'<TD>'. date($sys_datefmt,$msg->getPostDate()) .'</TD></TR>';
+		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</td>'.
+			'<td>'. $msg->getPosterRealName() .'</td>'.
+			'<td>'. date($sys_datefmt,$msg->getPostDate()) .'</td></tr>';
 
 		if ($msg->hasFollowups()) {
 			$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
@@ -177,15 +177,15 @@ if ($msg_id) {
 		Show post followup form
 	*/
 
-	echo '<P>&nbsp;<P>';
-	echo '<CENTER><h3>Post a followup to this message</h3></CENTER>';
+	echo '<p>&nbsp;<p>';
+	echo '<div align="center"><h3>Post a followup to this message</h3></div>';
 
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 
 } else {
 
 	forum_header(array('title'=>'Must choose a message first','pagename'=>'forum_message'));
-	echo '<h1>You must choose a message first</H1>';
+	echo '<h1>You must choose a message first</h1>';
 
 }
 

@@ -52,21 +52,21 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 		ORDER BY fullpath");
 	
 	print '
-		<SELECT name="trovecatid">';
+		<select name="trovecatid">';
 
 		print '
-			<OPTION VALUE="-2">All Projects</OPTION>
-			<OPTION VALUE="-1">Special Project List</OPTION>';
+			<option value="-2">All Projects</option>
+			<option value="-1">Special Project List</option>';
 
 	while ( $row = db_fetch_array($res) ) {
 		print	'
-			<OPTION value="' . $row['trove_cat_id'] . '"'
-			. ( $selected_id == $row["trove_cat_id"] ? " SELECTED" : "" )
-			. ">" . $row["fullpath"] . '</OPTION>';
+			<option value="' . $row['trove_cat_id'] . '"'
+			. ( $selected_id == $row["trove_cat_id"] ? " selected=\"selected\"" : "" )
+			. ">" . $row["fullpath"] . '</option>';
 	}
 
 	print '
-		</SELECT>';
+		</select>';
 }
 
 
@@ -107,18 +107,18 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 
 function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
 	
-	print '<FORM action="projects.php" method="get">' . "\n";
-	print '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#eeeeee">' . "\n";
+	print '<form action="projects.php" method="get">' . "\n";
+	print '<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#eeeeee">' . "\n";
 
-	print '<tr><td><b>Projects in trove category: </b></td><td>';
+	print '<tr><td><strong>Projects in trove category: </strong></td><td>';
 	stats_generate_trove_pulldown( $trovecat );
 	print '</td></tr>';
 
-	print '<tr><td><b>OR enter Special Project List: </b></td>';
-	print '<td> <INPUT type="text" width="100" name="projects" value="'. $projects . '">';
-	print '  (<B>comma separated</B> group_id\'s) </td></tr>';
+	print '<tr><td><strong>OR enter Special Project List: </strong></td>';
+	print '<td> <input type="text" width="100" name="projects" value="'. $projects . '" />';
+	print '  (<strong>comma separated</strong> group_id\'s) </td></tr>';
 
-	print '<tr><td><b>Report: </b></td><td>';
+	print '<tr><td><strong>Report: </strong></td><td>';
 
 	$reports_ids=array();
 	$reports_ids[]='last_30';
@@ -132,7 +132,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 
 	print ' </td></tr>';
 
-	print '<tr><td><b>View By: </b></td><td>';
+	print '<tr><td><strong>View By: </strong></td><td>';
 	$orderby_vals = array("downloads",
 				"site_views",
 				"subdomain_views",
@@ -152,10 +152,10 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print html_build_select_box_from_arrays ( $orderby_vals, $orderby_vals, "orderby", $orderby, false );
 	print '</td></tr>';
 
-	print '<tr><td colspan="2" align="center"> <INPUT type="submit" value="Generate Report"> </td></tr>';
+	print '<tr><td colspan="2" align="center"> <input type="submit" value="Generate Report" /> </td></tr>';
 
 	print '</table>' . "\n";
-	print '</FORM>' . "\n";
+	print '</form>' . "\n";
 
 }
 
@@ -252,86 +252,86 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>
-		<P><TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
+		<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
 
-		<TR valign="top" bgcolor="#eeeeee">
-			<TD><B>Group Name</B></TD>
-			<TD align="right" COLSPAN="2"><B>Page Views</B></TD>
-			<TD align="right"><B>Downloads</B></TD>
-			<TD align="right" COLSPAN="2"><B>Bugs</B></TD>
-			<TD align="right" COLSPAN="2"><B>Support</B></TD>
-			<TD align="right" COLSPAN="2"><B>Patches</B></TD>
-			<TD align="right" COLSPAN="2"><B>All Trkr</B></TD>
-			<TD align="right" COLSPAN="2"><B>Tasks</B></TD>
-			<TD align="right" COLSPAN="3"><B>CVS</B></TD>
-		</TR>
+		<tr valign="top" align="right" style="bgcolor:#eeeeee">
+			<td><strong>Group Name</strong></td>
+			<td colspan="2"><strong>Page Views</strong></td>
+			<td><strong>Downloads</strong></td>
+			<td colspan="2"><strong>Bugs</strong></td>
+			<td colspan="2"><strong>Support</strong></td>
+			<td colspan="2"><strong>Patches</strong></td>
+			<td colspan="2"><strong>All Trkr</strong></td>
+			<td colspan="2"><strong>Tasks</strong></td>
+			<td colspan="3"><strong>CVS</strong></td>
+		</tr>
 
 		<?php
 
 		// Build the query string to resort results.
 		$uri_string = "projects.php?report=" . $report;
 		if ( $trove_cat > 0 ) {
-			$uri_string .= "&trovecatid=" . $trove_cat;
+			$uri_string .= "&amp;trovecatid=" . $trove_cat;
 		}
 		if ( $trove_cat == -1 ) { 
-			$uri_string .= "&projects=" . urlencode( implode( " ", $projects) );
+			$uri_string .= "&amp;projects=" . urlencode( implode( " ", $projects) );
 		}
-		$uri_string .= "&orderby=";
+		$uri_string .= "&amp;orderby=";
 
 		?>
-		<TR valign="top" bgcolor="#eeeeee">
-			<TD align="right">&nbsp;</TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>site_views">Site</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>subdomain_views">Subdomain</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>downloads">Total</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>bugs_opened">Opn</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>bugs_closed">Cls</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>support_opened">Opn</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>support_closed">Cls</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>patches_opened">Opn</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>patches_closed">Cls</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>artifacts_opened">Opn</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>artifacts_closed">Cls</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>tasks_opened">Opn</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>tasks_closed">Cls</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>cvs_checkouts">CO's</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>cvs_commits">Comm's</A></TD>
-			<TD align="right"><A HREF="<?php echo $uri_string; ?>cvs_adds">Adds</A></TD>
-			</TR>
+		<tr valign="top" align="right" style="bgcolor:#eeeeee">
+			<td>&nbsp;</td>
+			<td><a href="<?php echo $uri_string; ?>site_views">Site</a></td>
+			<td><a href="<?php echo $uri_string; ?>subdomain_views">Subdomain</a></td>
+			<td><a href="<?php echo $uri_string; ?>downloads">Total</a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_opened">Opn</a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_closed">Cls</a></td>
+			<td><a href="<?php echo $uri_string; ?>support_opened">Opn</a></td>
+			<td><a href="<?php echo $uri_string; ?>support_closed">Cls</a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_opened">Opn</a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_closed">Cls</a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_opened">Opn</a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_closed">Cls</a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_opened">Opn</a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_closed">Cls</a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_checkouts">CO's</a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_commits">Comm's</a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_adds">Adds</a></td>
+			</tr>
 		<?php
 	
 		$i = $offset;	
 		while ( $row = db_fetch_array($res) ) {
-			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
-				. '<TD>' . ($i + 1) . '. <A HREF="/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</A></TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["bugs_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["bugs_closed"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["support_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["support_closed"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["patches_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["patches_closed"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["artifacts_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["artifacts_closed"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["cvs_checkouts"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["cvs_commits"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</TD>'
-				. '</TR>' . "\n";
+			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
+				. '<td>' . ($i + 1) . '. <a href="/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</a></td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["bugs_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["bugs_closed"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["support_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["support_closed"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_closed"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_closed"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_checkouts"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_commits"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</td>'
+				. '</tr>' . "\n";
 			$i++;
 			$sum = stats_util_sum_array( $sum, $row );
 		}
 
 		?>
-		</TABLE>
+		</table></p>
 		<?php
 
 	} else {
 		echo "Query returned no valid data.\n";
-		echo "<BR><HR><BR>\n $sql \n<BR><HR><BR>\n\n";
+		echo "<br /><hr /><br />\n $sql \n<br /><hr /><br />\n\n";
 		echo db_error();
 	}
 
@@ -363,41 +363,41 @@ function stats_site_projects_daily( $span ) {
 	if ( ($valid_days = db_numrows( $res )) > 1 ) {
 
 		?>
-		<P><B>Statistics for the past <?php echo $valid_days; ?> days.</B></P>
+		<p><strong>Statistics for the past <?php echo $valid_days; ?> days.</strong></p>
 
-		<P>
-		<TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-			<TR valign="top">
-			<TD><B>Day</B></TD>
-			<TD align="right"><B>Site Views</B></TD>
-			<TD align="right"><B>Subdomain Views</B></TD>
-			<TD align="right"><B>Downloads</B></TD>
-			<TD align="right"><B>Bugs</B></TD>
-			<TD align="right"><B>Support</B></TD>
-			<TD align="right"><B>Patches</B></TD>
-			<TD align="right"><B>Tasks</B></TD>
-			<TD align="right"><B>CVS</B></TD>
-			</TR>
+		<p>
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr valign="top" align="right">
+			<td><strong>Day</strong></td>
+			<td><strong>Site Views</strong></td>
+			<td><strong>Subdomain Views</strong></td>
+			<td><strong>Downloads</strong></td>
+			<td><strong>Bugs</strong></td>
+			<td><strong>Support</strong></td>
+			<td><strong>Patches</strong></td>
+			<td><strong>Tasks</strong></td>
+			<td><strong>CVS</strong></td>
+			</tr>
 		<?php
 
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
-				. '<TD>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</TD>'
-				. '<TD align="right">' . number_format( $row["site_page_views"],0 ) . '</TD>'
-				. '<TD align="right">' . number_format( $row["subdomain_views"],0 ) . '</TD>'
-				. '<TD align="right">' . number_format( $row["downloads"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . " (" . number_format($row["tasks_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["cvs_checkouts"],0) . " (" . number_format($row["cvs_commits"],0) . ')</TD>'
-				. '</TR>' . "\n";
+			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
+				. '<td>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</td>'
+				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
+				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'
+				. '<td>' . number_format( $row["downloads"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . " (" . number_format($row["tasks_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["cvs_checkouts"],0) . " (" . number_format($row["cvs_commits"],0) . ')</td>'
+				. '</tr>' . "\n";
 		}
 
 		?>
-		</TABLE>
+		</table></p>
 		<?php
 
 	} else {
@@ -418,43 +418,43 @@ function stats_site_projects_monthly() {
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
 
 		?>
-		<P><B>Statistics for the past <?php echo $valid_months; ?> months.</B></P>
+		<p><strong>Statistics for the past <?php echo $valid_months; ?> months.</strong></p>
 
-		<P>
-		<TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-			<TR valign="top">
-			<TD><B>Month</B></TD>
-			<TD align="right"><B>Site Views</B></TD>
-			<TD align="right"><B>Subdomain Views</B></TD>
-			<TD align="right"><B>Downloads</B></TD>
-			<TD align="right"><B>Bugs</B></TD>
-			<TD align="right"><B>Support</B></TD>
-			<TD align="right"><B>Patches</B></TD>
-			<TD align="right"><B>All Trkr</B></TD>
-			<TD align="right"><B>Tasks</B></TD>
-			<TD align="right"><B>CVS</B></TD>
-			</TR>
+		<p>
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr valign="top" align="right">
+			<td><strong>Month</strong></td>
+			<td><strong>Site Views</strong></td>
+			<td><strong>Subdomain Views</strong></td>
+			<td><strong>Downloads</strong></td>
+			<td><strong>Bugs</strong></td>
+			<td><strong>Support</strong></td>
+			<td><strong>Patches</strong></td>
+			<td><strong>All Trkr</strong></td>
+			<td><strong>Tasks</strong></td>
+			<td><strong>CVS</strong></td>
+			</tr>
 		<?php
 
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
-				. '<TD>' . $row['month'] . '</TD>'
-				. '<TD align="right">' . number_format( $row["site_page_views"],0 ) . '</TD>'
-				. '<TD align="right">' . number_format( $row["subdomain_views"],0 ) . '</TD>'
-				. '<TD align="right">' . number_format( $row["downloads"],0 ) . '</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["artifacts_opened"],0) . " (" . number_format($row["artifacts_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . " (" . number_format($row["tasks_closed"],0) . ')</TD>'
-				. '<TD align="right">&nbsp;&nbsp;' . number_format($row["cvs_checkouts"],0) . " (" . number_format($row["cvs_commits"],0) . ')</TD>'
-				. '</TR>' . "\n";
+			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . 'align="right">'
+				. '<td>' . $row['month'] . '</td>'
+				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
+				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'
+				. '<td>' . number_format( $row["downloads"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["artifacts_opened"],0) . " (" . number_format($row["artifacts_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . " (" . number_format($row["tasks_closed"],0) . ')</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["cvs_checkouts"],0) . " (" . number_format($row["cvs_commits"],0) . ')</td>'
+				. '</tr>' . "\n";
 		}
 
 		?>
-		</TABLE>
+		</table></p>
 		<?php
 
 	} else {
@@ -477,26 +477,26 @@ function stats_site_agregate( ) {
 	
 
 	?>
-	<P><B>Current Agregate Statistics for All Time</B></P>
+	<p><strong>Current Agregate Statistics for All Time</strong></p>
 
-	<P><TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-	<TR valign="top">
-		<TD><B>Site Views</B></TD>
-		<TD><B>Subdomain Views</B></TD>
-		<TD><B>Downloads</B></TD>
-		<TD><B>Developers</B></TD>
-		<TD><B>Projects</B></TD>
-	</TR>
+	<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr valign="top">
+		<td><strong>Site Views</strong></td>
+		<td><strong>Subdomain Views</strong></td>
+		<td><strong>Downloads</strong></td>
+		<td><strong>Developers</strong></td>
+		<td><strong>Projects</strong></td>
+	</tr>
 
-	<TR>
-		<TD><?php echo number_format( $site_totals["site_page_views"],0 ); ?></TD>
-		<TD><?php echo number_format( $site_totals["subdomain_views"],0 ); ?></TD>
-		<TD><?php echo number_format( $site_totals["downloads"],0 ); ?></TD>
-		<TD><?php echo number_format( $users["count"],0 ); ?></TD>
-		<TD><?php echo number_format( $groups["count"],0 ); ?></TD>
-		</TR>
+	<tr>
+		<td><?php echo number_format( $site_totals["site_page_views"],0 ); ?></td>
+		<td><?php echo number_format( $site_totals["subdomain_views"],0 ); ?></td>
+		<td><?php echo number_format( $site_totals["downloads"],0 ); ?></td>
+		<td><?php echo number_format( $users["count"],0 ); ?></td>
+		<td><?php echo number_format( $groups["count"],0 ); ?></td>
+		</tr>
 
-	</TABLE>
+	</table></p>
 	<?php
 }
 

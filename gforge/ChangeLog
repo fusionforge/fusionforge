@@ -1,3 +1,9 @@
+2003-01-10  Edward Ritter
+
+	* Gargantuan patch to lower-case and bring our entire HTML 
+	within the realm of being XHTML-compliant. Significant refinement 
+	is still necessary to be 100% compliant.
+
 2003-01-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* common/include/session.php(session_issecure, session_redirect):

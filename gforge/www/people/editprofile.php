@@ -61,7 +61,7 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					echo db_error();
 					$feedback .= 'Failed to add the skill ';
-					echo '<H2>Failed to add the skill</H2>';
+					echo '<h2>Failed to add the skill<h2>';
 				} else {		  
 					$feedback = "Skill added successfully";
 				}
@@ -102,14 +102,14 @@ if (session_loggedin()) {
 				
 			} else	/* not confirmed multiedit */ {
 				people_header(array('title'=>'Skills edit','pagename'=>'people_editskills'));
-				echo '<H2><Font color="ff0000">Edit Skills</font></H2>';
+				echo '<h2><span style="color:red">Edit Skills</span><h2>';
 				echo 'Change the required fields, and press "Done" at the bottom of the page';
-				echo '<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">';
+				echo '<form action="'.$PHP_SELF.'" method="post">';
 				handle_multi_edit($skill_edit);
-				echo '<INPUT TYPE="hidden" name="confirmMultiEdit" value="1">';
-				echo '<INPUT TYPE="submit" name="MultiEdit" value="Done">'; 
-				echo '<INPUT TYPE="submit" name="cancelMultiEdit" value="Cancel">';
-				echo '</FORM>';
+				echo '<input type="hidden" name="confirmMultiEdit" value="1" />';
+				echo '<input type="submit" name="MultiEdit" value="Done" />';
+				echo '<input type="submit" name="cancelMultiEdit" value="Cancel" />';
+				echo '</form>';
 				people_footer(array());
 				return;
 			}
@@ -133,7 +133,7 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					echo db_error();
 					$feedback .= 'Failed to delete any skills ';
-					echo '<H2>Failed to delete the skill</H2>';
+					echo '<h2>Failed to delete the skill<h2>';
 				} else {		  
 					$feedback = "Skill".(db_affected_rows($result)>1?"s":"")." deleted successfully ";
 				}
@@ -151,22 +151,22 @@ if (session_loggedin()) {
 				} else {		  
 					people_header(array('title'=>'Confirm skill delete','pagename'=>'people_editskills'));
 
-					echo '<H2><FONT COLOR="#ff0000">Confirm Delete</font></H2>';
-					echo "You are about to delete the following skill".($rows > 1?"s":"").":<br><br>";
+					echo '<h2><span style="color:red">Confirm Delete</span><h2>';
+					echo "You are about to delete the following skill".($rows > 1?"s":"").":<br /><br />";
 					for($i = 0; $i < $rows; $i++) {
-						echo "<B>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</b><br>";
+						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
 					}
-					echo "<br>from the skills database. This action cannot be undone.<br><br>";
-					echo "Are you <B>sure</b> you wish to continue? ";
+					echo "<br />from the skills database. This action cannot be undone.<br /><br />";
+					echo "Are you <strong>sure</strong> you wish to continue? ";
 					
-					echo '<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">';
+					echo '<form action="'.$PHP_SELF.'" method="post">';
 					for($i = 0; $i < $rows; $i ++) {
-						echo '<INPUT TYPE="hidden" name="skill_delete[]" value="'.$skill_delete[$i].'">';
+						echo '<input type="hidden" name="skill_delete[]" value="'.$skill_delete[$i].'">';
 					}
-					echo '<INPUT TYPE="hidden" name="confirmMultiDelete" value="1">';
-					echo '<INPUT TYPE="submit" name="MultiDelete" value="Confirm">';
-					echo '<INPUT TYPE="submit" name="MultiDeleteCancel" value="Cancel">';
-					echo '</FORM>';
+					echo '<input type="hidden" name="confirmMultiDelete" value="1" />';
+					echo '<input type="submit" name="MultiDelete" value="Confirm" />';
+					echo '<input type="submit" name="MultiDeleteCancel" value="Cancel" />';
+					echo '</form>';
 					people_footer(array());
 				}
 				return;
@@ -189,31 +189,31 @@ if (session_loggedin()) {
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= ' User fetch FAILED ';
-		echo '<H2>No Such User</H2>';
+		echo '<h2>No Such User<h2>';
 	} else {
 
 		echo '
-		<H2>Edit Public Permissions</H2>
-		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
+		<h2>Edit Public Permissions<h2>
+		<form action="'.$PHP_SELF.'" method="post">
 		The following option determines if others can see your skills. If they can\'t, you
 		can still enter your skills.
-		<P>
-		<B>Publicly Viewable:</B><BR>
-		<INPUT TYPE="RADIO" NAME="people_view_skills" VALUE="0" '. ((db_result($result,0,'people_view_skills')==0)?'CHECKED':'') .'> <B>No</B><BR>
-		<INPUT TYPE="RADIO" NAME="people_view_skills" VALUE="1" '. ((db_result($result,0,'people_view_skills')==1)?'CHECKED':'') .'> <B>Yes</B><BR>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="update_profile" VALUE="Update Permissions">
-		</FORM>';
+		<p>
+		<strong>Publicly Viewable:</strong><br />
+		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>No</strong><br />
+		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>Yes</strong><br /></p>
+		<p>
+		<input type="submit" name="update_profile" value="Update Permissions"></p>
+		</form>';
 
 		//now show the list of desired skills
-		//echo '<P>'.people_edit_skill_inventory( user_getid() );
+		//echo '<p>'.people_edit_skill_inventory( user_getid() );
 	   
 		$sql="SELECT * FROM skills_data_types WHERE type_id > 0";
 		$skills=db_query($sql);
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= ' No skill types in database (skills_data_types table) ';
-			echo '<H2>No skill types in database - inform system administrator</H2>';
+			echo '<h2>No skill types in database - inform system administrator<h2>';
 		}
 		
 		$yearArray = array();
@@ -230,55 +230,55 @@ if (session_loggedin()) {
 	   
 		
 		/* add skills. */
-		echo "<H2>Add a new skill</H2>";
-		echo "You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.<br>".
-			 "<FONT COLOR=\"#ff0000\"><I><B>All fields are required!</I></B></FONT>";
-	   	echo '<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">';
+		echo "<h2>Add a new skill</h2>";
+		echo "You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.<br />".
+			 "<FONT COLOR=\"#ff0000\"><em><strong>All fields are required!</em></strong></FONT>";
+	   	echo '<form action="'.$PHP_SELF.'" METHOD="POST">';
 		$cell_data = array();
 		$cell_data[] = array('Type');
 		$cell_data[] = array('Start Date');
 		$cell_data[] = array('End Date');
-		echo "<Table BORDER=0 >".
+		echo "<table border=0 >".
 
 				$HTML->multiTableRow('',$cell_data,TRUE);
 
-		echo	"<TR>".
-					"<TD>".html_build_select_box($skills, "type", 1, false, "")."</TD>".
-					"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</TD>".
-					"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</TD>".
-				"</TR>".
+		echo	"<tr>".
+					"<td>".html_build_select_box($skills, "type", 1, false, "")."</td>".
+					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
+						html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</td>".
+					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
+						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>".
+				"</tr>".
 			"</TABLE>".
 				
-				"<TABLE BORDER=0 >";
+				"<table border=0 >";
 
 				$cell_data = array();
 				$cell_data[] = array('Title (max 100 chaacters)');
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
 
-				echo "<TR>".
-						"<TD><INPUT TYPE=text name=\"title\" size=100></TD>".
-					"</TR>";
+				echo "<tr>".
+						"<td><input type=text name=\"title\" size=100></td>".
+					"</tr>";
 				$cell_data = array();
 				$cell_data[] = array('Keywords (max 255 chaacters)');
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
-				echo "<TR>".
-						"<TD><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></TEXTAREA></TD>".
-					"</TR>".
-					"<TR>".
-						"<TD><INPUT TYPE=submit name=\"AddSkill\" value=\"Add This Skill\"></TD>".
-					"</TR>".
+				echo "<tr>".
+						"<td><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></textarea></td>".
+					"</tr>".
+					"<tr>".
+						"<td><input type=submit name=\"AddSkill\" value=\"Add This Skill\"></td>".
+					"</tr>".
 				 "</table>";
 		
-		echo '</FORM>';
+		echo '</form>';
 		
 		
-		echo '<H2>Edit/Delete Your Skills</H2>
-		<TABLE BORDER="0" WIDTH="100%">';
-		echo '<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">';
+		echo '<h2>Edit/Delete Your Skills</h2>
+		<table border="0" width="100%">';
+		echo '<form action="'.$PHP_SELF.'" METHOD="POST">';
 		displayUserSkills(user_getid(), 1); 
-		echo '</FORM>';				
+		echo '</form>';				
 		echo '</TABLE>';
 
 	}

@@ -29,19 +29,19 @@ site_admin_header(array('title'=>'Site Admin: Edit Rejection Responses'));
 function check_select_value($value, $type)
 {
 	if( $value == "100" ) {
-		print("<span style='color: Red'><b>You can't $type \"None\", bozo!</b></span><br>\n");
+		print("<span style=\"color:red\"><strong>You can't $type \"None\", bozo!</strong></span><br />\n");
 	}
 }
 ?>
 
 <form method="post" action="<?php echo $PHP_SELF; ?>">
 Existing Responses: <?php echo get_canned_responses(); ?>
-<input name="action" type="submit" value="Edit">
-<input name="action" type="submit" value="Delete">
-<input type="checkbox" name="sure" value="yes">Yes, I'm sure
+<input name="action" type="submit" value="Edit" />
+<input name="action" type="submit" value="Delete" />
+<input type="checkbox" name="sure" value="yes" />Yes, I'm sure
 </form>
 
-<br><br>
+<br /><br />
 
 <?php
 
@@ -50,7 +50,7 @@ if( $action == "Edit" ) {
 	check_select_value($response_id, $action);
 	if( $action2 ) {
 		db_query("UPDATE canned_responses SET response_title='$response_title', response_text='$response_text' WHERE response_id='$response_id'");
-		print(" <b>Edited Response</b> ");
+		print(" <strong>Edited Response</strong> ");
 	} else {
 		$res = db_query("SELECT * FROM canned_responses WHERE response_id='$response_id'");
 		$row = db_fetch_array($res);
@@ -58,14 +58,14 @@ if( $action == "Edit" ) {
 		$response_text=$row[2];
 ?>
 
-Edit Response:<br>
+Edit Response:<br />
 <form method="post" action="<?php echo $PHP_SELF; ?>">
-Response Title: <input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>"><br>
-Response Text:<br>
+Response Title: <input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
+Response Text:<br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
-<input type="hidden" name="response_id" value="<?php echo $response_id; ?>">
-<input type="hidden" name="action2" value="go">
-<input type="submit" name="action" value="Edit">
+<input type="hidden" name="response_id" value="<?php echo $response_id; ?>" />
+<input type="hidden" name="action2" value="go" />
+<input type="submit" name="action" value="Edit" />
 </form>
 
 <?php
@@ -75,25 +75,25 @@ Response Text:<br>
 	check_select_value($response_id, $action);
 	if( $sure == "yes" ) {
 		db_query("DELETE FROM canned_responses WHERE response_id='$response_id'");
-		print(" <b>Deleted Response</b> ");
+		print(" <strong>Deleted Response</strong> ");
 	} else {
-		print("If you're aren't sure then why did you click 'Delete'?<br>");
-		print("<i>By the way, I didn't delete... just in case...</i><br>\n");
+		print("If you're aren't sure then why did you click 'Delete'?<br />");
+		print("<em>By the way, I didn't delete... just in case...</em><br />\n");
 	}
 } else if ( $action == "Create" ) {
 	// New Response
 	add_canned_response($response_title, $response_text);
-	print(" <b>Added Response</b> ");
+	print(" <strong>Added Response</strong> ");
 } else {
 ?>
 
-Create New Response:<br>
+Create New Response:<br />
 <form method="post" action="<?php echo $PHP_SELF; ?>">
-Response Title: <input type="text" name="response_title" size="30" maxlength="25"><br>
-Response Text:<br>
+Response Title: <input type="text" name="response_title" size="30" maxlength="25" /><br />
+Response Text:<br />
 <textarea name="response_text" cols="50" rows="10"></textarea>
-<br>
-<input type="submit" name="action" value="Create">
+<br />
+<input type="submit" name="action" value="Create" />
 </form>
 
 <?php

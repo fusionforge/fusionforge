@@ -25,14 +25,14 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		$j=0;
 		for ($i=0; $i<$rows; $i++) {
-			//echo $i." - ".($i%7)."<BR>";
+			//echo $i." - ".($i%7)."<br />";
 			if ($i % 7 == 0) {
-				//echo $i."<BR>";
+				//echo $i."<br />";
 				//increment the new weekly array
 				//and set the beginning date for this week
 				$j++;
@@ -48,7 +48,7 @@ function stats_sf_stats() {
 		GraphIt($name_string,$vals,'Page Views By Week');
 	}
 
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 /*
 	pages/hour
@@ -59,12 +59,12 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		GraphResult($result,'Page Views By Hour');
 	}
-	echo '<P>';
+	echo '<p>';
 */
 
 /*
@@ -75,7 +75,7 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		$count=array();
@@ -88,7 +88,7 @@ function stats_sf_stats() {
 		}
 		GraphIt($dates,$count,'New Projects Added Each Week');
 	}
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 /*
 	Users added by week
@@ -98,7 +98,7 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		$count=array();
@@ -111,7 +111,7 @@ function stats_sf_stats() {
 		}
 		GraphIt($dates,$count,'New Users Added Each Week');
 	}
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 }
 
@@ -129,13 +129,13 @@ function stats_project_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		GraphResult($result,'Logo Showings By Day');
 	}
 
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 /*
 	logo impressions/group
@@ -146,13 +146,13 @@ function stats_project_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		GraphResult($result,'Logo Showings By Project');
 	}
 
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 }
 
@@ -170,12 +170,12 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		GraphResult($result,'Page Views By Browser');
 	}
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 /*
 	Platform
@@ -186,12 +186,12 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		GraphResult($result,'Page Views By Platform');
 	}
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 
 /*
 	Browser/ver
@@ -202,12 +202,12 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<H1>Stats Problem</H1>';
+		echo '<h1>Stats Problem</h1>';
 		echo db_error();
 	} else {
 		ShowResultSet($result,'Page Views By Platform/Browser Version');
 	}
-	echo '<P>';
+	echo '<p>&nbsp;</p>';
 }
 
 ?>

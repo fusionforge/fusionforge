@@ -19,7 +19,7 @@ function handle_add_exit() {
 	global $suppress_nav;
         if ($suppress_nav) {
                 echo '
-                </BODY></HTML>';
+                </body></html>';
         } else {
                 snippet_footer(array());
         }
@@ -30,15 +30,15 @@ if (session_loggedin()) {
 
 	if ($suppress_nav) {
 		echo '
-		<HTML>
-		<BODY BGCOLOR="#FFFFFF">';
+		<html>
+		<body style="background-color:white">';
 	} else {
 		snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_add_snippet_to_package'));
 	}
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<H1>Error - snippet_package_version_id missing</H1>';
+		echo '<h1>Error - snippet_package_version_id missing</h1>';
 		handle_add_exit();
 	}
 
@@ -54,7 +54,7 @@ if (session_loggedin()) {
 				"WHERE submitted_by='".user_getid()."' AND ".
 				"snippet_package_version_id='$snippet_package_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<H1>Error - Only the creator of a package version can add snippets to it.</H1>';
+				echo '<h1>Error - Only the creator of a package version can add snippets to it.</h1>';
 				handle_add_exit();
 			}
 
@@ -63,8 +63,8 @@ if (session_loggedin()) {
 			*/
 			$result=db_query("SELECT * FROM snippet_version WHERE snippet_version_id='$snippet_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<H1>Error - That snippet doesn\'t exist.</H1>';
-				echo '<A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</A>';
+				echo '<h1>Error - That snippet doesn\'t exist.</h1>';
+				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
 				handle_add_exit();
 			}
 
@@ -75,8 +75,8 @@ if (session_loggedin()) {
 				"WHERE snippet_package_version_id='$snippet_package_version_id' ".
 				"AND snippet_version_id='$snippet_version_id'");
 			if ($result && db_numrows($result) > 0) {
-				echo '<H1>Error - That snippet was already added to this package.</H1>';
-				echo '<A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</A>';
+				echo '<h1>Error - That snippet was already added to this package.</h1>';
+				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
 				handle_add_exit();
 			}
 
@@ -94,8 +94,8 @@ if (session_loggedin()) {
 				$feedback .= ' Snippet Version Added Successfully. ';
 			}
 		} else {
-			echo '<H1>Error - Go back and fill in all the information</H1>';
-			echo '<A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</A>';
+			echo '<h1>Error - Go back and fill in all the information</h1>';
+			echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
 			handle_add_exit();
 		}
 
@@ -107,33 +107,30 @@ if (session_loggedin()) {
 			"AND snippet_package_version.snippet_package_version_id='$snippet_package_version_id'");
 
 	?>
-	<P>
-	<B>Package:</B><BR>
-	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?>
-	<P>
-	You can use this form repeatedly to keep adding snippets to your package.
-	<P>
-	The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet 
-	on the browse pages.
-	<P>
-	<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-	<INPUT TYPE="HIDDEN" NAME="snippet_package_version_id" VALUE="<?php echo $snippet_package_version_id; ?>">
-	<INPUT TYPE="HIDDEN" NAME="suppress_nav" VALUE="<?php echo $suppress_nav; ?>">
+	<p>
+	<strong>Package:</strong><br />
+	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
+	<p>You can use this form repeatedly to keep adding snippets to your package.</p>
+	<p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet
+	on the browse pages.</p>
+	<p>
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="snippet_package_version_id" value="<?php echo $snippet_package_version_id; ?>" />
+	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />
 
-	<TABLE>
-	<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-		<B>Add This Snippet Version ID:</B><BR>
-		<INPUT TYPE="TEXT" NAME="snippet_version_id" SIZE="6" MAXLENGTH="7">
-	</TD></TR>
+	<table>
+	<tr><td colspan="2" align="center">
+		<strong>Add This Snippet Version ID:</strong><br />
+		<input type="text" name="snippet_version_id" size="6" maxlength="7" />
+	</td></tr>
 
-	<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-		<B>Make sure all info is complete and accurate</B>
-		<BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-	</TD></TR>
-	</FORM>
-	</TABLE>
+	<tr><td colspan="2" align="center">
+		<strong>Make sure all info is complete and accurate</strong>
+		<br />
+		<input type="submit" name="submit" value="SUBMIT" />
+	</td></tr>
+	</table></form></p>
 	<?php
 	/*
 		Show the snippets in this package
@@ -147,26 +144,25 @@ if (session_loggedin()) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-		<P>
-		No Snippets Are In This Package Yet';
+		<p>No Snippets Are In This Package Yet</p>';
 	} else {
 		echo $HTML->boxTop('Snippets In This Package');
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE">
-				<A HREF="/snippet/delete.php?type=frompackage&snippet_version_id='.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td align="center">
+				<a href="/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.
-				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD><TD WIDTH="99%">'.
-				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</TD></TR>";
+				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td><td width="99%">'.
+				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
 			$last_group=db_result($result,$i,'group_id');
 		}
 		echo $HTML->boxBottom();
 	}
 	echo '
-	<P>
-	<H2><FONT COLOR="RED">'.$feedback.'</FONT></H2>';
+	<p>&nbsp;</p>
+	<h2><span style="color:red">'.$feedback.'</span></h2>';
 
 	handle_add_exit();
 

@@ -26,7 +26,7 @@ $title = 'Choose Your Theme';
 echo site_user_header(array('title'=>$title,'pagename'=>'themes'));
 
 ?>
-<p>Welcome!</b>
+<p>Welcome!</strong>
 <p>
 You can change your theme from here. 
 <p>

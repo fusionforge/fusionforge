@@ -66,10 +66,10 @@ if (session_loggedin()) {
 	echo $HTML->header(array('title'=>'User Ratings Page'));
 
 	echo '
-	<H3>Ratings Recorded</H3>
-	<P>
-	You can re-rate this person by simply returning to their ratings page and re-submitting the info.
-	<P>';
+	<h3>Ratings Recorded</h3>
+	<p>
+	You can re-rate this person by simply returning to their ratings page and re-submitting the info.</p>
+	<p>&nbsp;</p>';
 
 	echo $HTML->footer(array());
 

@@ -19,7 +19,7 @@ site_user_header(array("title"=>"Delete Bookmark",'pagename'=>'my_bookmark_delet
 
 if ($bookmark_id) {
 	bookmark_delete ($bookmark_id);
-	print "Bookmark deleted.<P><A HREF=\"/my/\">Return</A>";
+	print "Bookmark deleted.<p><a href=\"/my/\">Return</a></p>";
 }
 
 site_user_footer(array());

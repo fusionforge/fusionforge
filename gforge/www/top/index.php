@@ -21,25 +21,25 @@ require_once('pre.php');
 $HTML->header(array('title'=>'Top Project Listings'));
 ?>
 
-<P><B>Top <?php echo $GLOBALS['sys_name']?>  Projects</B></P>
+<p><strong>Top <?php echo $GLOBALS['sys_name']?>  Projects</strong></P>
 
-<P>We track many project usage statistics on <?php echo $GLOBALS['sys_name']?>, and display here
+<p>We track many project usage statistics on <?php echo $GLOBALS['sys_name']?>, and display here
 the top ranked projects in several categories.
 
-<UL>
-<LI><A href="mostactive.php?type=week">Most Active This Week</A>
-<LI><A href="mostactive.php">Most Active All Time</A>
-<BR>&nbsp;
-<LI><A href="toplist.php?type=downloads">Top Downloads</A>
-<LI><A href="toplist.php?type=downloads_week">Top Downloads (Past 7 Days)</A>
-<BR>&nbsp;
-<LI><A href="toplist.php?type=pageviews_proj">Top Project Pageviews</A> -
+<ul>
+<li><a href="mostactive.php?type=week">Most Active This Week</a>
+<li><a href="mostactive.php">Most Active All Time</a>
+<br />&nbsp;
+<li><a href="toplist.php?type=downloads">Top Downloads</a>
+<li><a href="toplist.php?type=downloads_week">Top Downloads (Past 7 Days)</a>
+<br />&nbsp;
+<li><a href="toplist.php?type=pageviews_proj">Top Project Pageviews</a> -
 Measured by impressions of the <?php echo $GLOBALS['sys_name']?> 'button' logo
-<BR>&nbsp;
-<LI><A href="toplist.php?type=forumposts_week">Top Forum Post Counts</A>
-<BR>&nbsp;
-<LI><A href="topusers.php">Highest Ranked Users</A>
-</UL>
+<br />&nbsp;
+<li><a href="toplist.php?type=forumposts_week">Top Forum Post Counts</a>
+<br />&nbsp;
+<li><a href="topusers.php">Highest Ranked Users</a>
+</ul>
 
 <?php
 $HTML->footer(array());

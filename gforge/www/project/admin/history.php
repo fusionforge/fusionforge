@@ -21,9 +21,7 @@ project_admin_header(array('title'=>'Project History','group'=>$group_id,'pagena
 
 ?>
 
-<P>
-This log will show who made significant changes to your project and when.
-<P>
+<p>This log will show who made significant changes to your project and when.</p>
 <?php
 echo show_grouphistory($group_id);
 

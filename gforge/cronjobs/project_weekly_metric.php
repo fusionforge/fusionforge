@@ -42,7 +42,7 @@ type text,
 count float(8))";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -58,7 +58,7 @@ GROUP BY group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -74,7 +74,7 @@ print "\n\n".$sql;
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -93,7 +93,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -112,7 +112,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -131,7 +131,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -145,7 +145,7 @@ GROUP BY group_id";
 print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -167,7 +167,7 @@ GROUP BY frs_package.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -199,7 +199,7 @@ group_id int not null,
 value float (10))";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -215,7 +215,7 @@ GROUP BY group_id ORDER BY value DESC";
 print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -224,7 +224,7 @@ $sql="SELECT count(*) FROM project_metric_weekly_tmp1";
 print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -236,7 +236,7 @@ db_begin();
 $sql="DELETE FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -253,7 +253,7 @@ FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 
@@ -268,7 +268,7 @@ SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentil
 FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<P>$sql<P>".db_error();
+	echo "<p>$sql<p>".db_error();
 	echo db_error();
 }
 

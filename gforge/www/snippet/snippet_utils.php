@@ -82,12 +82,12 @@ function snippet_header($params) {
 	/*
 		Show horizontal links
 	*/
-	echo '<FONT face="arial, helvetica">';
-	echo '<P><B>';
-	echo '<A HREF="/snippet/">Browse</A>
-		 | <A HREF="/snippet/submit.php">Submit A New Snippet</A>
-		 | <A HREF="/snippet/package.php">Create A Package</A></B>';
-	echo '<P>';
+	echo '<span style="font-family:arial, helvetica">';
+	echo '<p><strong>';
+	echo '<a href="/snippet/">Browse</a>
+		 | <a href="/snippet/submit.php">Submit A New Snippet</a>
+		 | <a href="/snippet/package.php">Create A Package</a></strong></p></span>';
+	echo '<p>&nbsp;</p>';
 }
 
 function snippet_footer($params) {
@@ -109,9 +109,9 @@ function snippet_show_package_snippets($version) {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	echo '
-	<P>
-	<H3>Snippets In This Package:</H3>
-	<P>';
+	<p>&nbsp;</p>
+	<h3>Snippets In This Package:</h3>
+	<p>&nbsp;</p>';
 
 	$title_arr=array();
 	$title_arr[]='Snippet ID';
@@ -124,7 +124,7 @@ function snippet_show_package_snippets($version) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-			<TR><TD COLSPAN="4"><H3>No Snippets Are In This Package Yet</H3></TD></TR>';
+			<tr><td colspan="4"><h3>No Snippets Are In This Package Yet</h3></td></tr>';
 	} else {
 
 		//get the newest version, so we can display it's code
@@ -132,12 +132,12 @@ function snippet_show_package_snippets($version) {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'snippet_version_id').
-				'</TD><TD><A HREF="/snippet/download.php?type=snippet&id='.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+				'</td><td><a href="/snippet/download.php?type=snippet&amp;id='.
 				db_result($result,$i,'snippet_version_id').'">'.
-				db_result($result,$i,'version').'</A></TD><TD>'.
-				db_result($result,$i,'name').'</TD><TD>'.
-				db_result($result,$i,'user_name').'</TD></TR>';
+				db_result($result,$i,'version').'</a></td><td>'.
+				db_result($result,$i,'name').'</td><td>'.
+				db_result($result,$i,'user_name').'</td></tr>';
 		}
 	}
 
@@ -152,28 +152,28 @@ function snippet_show_package_details($id) {
 	$result=db_query($sql);
 
 	echo '
-	<P>
-	<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
+	<p>
+	<table width="100%" border="0" cellspacing="1" cellpadding="2">
 
-	<TR><TD COLSPAN="2">
-	<H2>'. db_result($result,0,'name').'</H2>
-	</TD></TR>
+	<tr><td colspan="2">
+	<h2>'. db_result($result,0,'name').'</h2>
+	</td></tr>
 
-	<TR>
-		<TD><B>Category:</B><BR>
+	<tr>
+		<td><strong>Category:</strong><br />
 		'.$SCRIPT_CATEGORY[db_result($result,0,'category')].'
-		</TD>
+		</td>
 
-		<TD><B>Language:</B><BR>
+		<td><strong>Language:</strong><br />
 		'.$SCRIPT_LANGUAGE[db_result($result,0,'language')].'
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR><TD COLSPAN="2">&nbsp;<BR><B>Description:</B><BR>
+	<tr><td colspan="2">&nbsp;<br /><strong>Description:</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
-	</TD></TR>
+	</td></tr>
 
-	</TABLE>';
+	</table></p>';
 
 }
 
@@ -184,31 +184,31 @@ function snippet_show_snippet_details($id) {
 	$result=db_query($sql);
 
 	echo '
-	<P>
-	<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
+	<p>
+	<table width="100%" border="0" cellspacing="1" cellpadding="2">
 
-	<TR><TD COLSPAN="2">
-	<H2>'. db_result($result,0,'name').'</H2>
-	</TD></TR>
+	<tr><td colspan="2">
+	<h2>'. db_result($result,0,'name').'</h2>
+	</td></tr>
 
-	<TR><TD><B>Type:</B><BR>
-		'.$SCRIPT_TYPE[db_result($result,0,'type')].'</TD>
-	<TD><B>Category:</B><BR>
+	<tr><td><strong>Type:</strong><br />
+		'.$SCRIPT_TYPE[db_result($result,0,'type')].'</td>
+	<td><strong>Category:</strong><br />
 		'.$SCRIPT_CATEGORY[db_result($result,0,'category')].'
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD><B>License:</B><BR>
-		'.$SCRIPT_LICENSE[db_result($result,0,'license')].'</TD>
-	<TD><B>Language:</B><BR>
+	<tr><td><strong>License:</strong><br />
+		'.$SCRIPT_LICENSE[db_result($result,0,'license')].'</td>
+	<td><strong>Language:</strong><br />
 		'.$SCRIPT_LANGUAGE[db_result($result,0,'language')].'
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD COLSPAN="2">&nbsp;<BR>
-	<B>Description:</B><BR>
+	<tr><td colspan="2">&nbsp;<br />
+	<strong>Description:</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
-	</TD></TR>
+	</td></tr>
 
-	</TABLE>';
+	</table></p>';
 }
 
 ?>

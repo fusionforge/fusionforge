@@ -68,13 +68,13 @@ $title_arr[]='Date';
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<TR "'. $HTML->boxGetAltRowStyle($i) .'">
-			<TD>'.db_result($res,$i,'package_name').'</TD>
-			<TD><A HREF="editrelease.php?group_id='.$group_id
-				.'&package_id='.$package_id
-				.'&release_id='.db_result($res,$i,'release_id').'">'. 
-				db_result($res,$i,'name').' [edit]</A></TD><TD>'.
-				date('Y-m-d',db_result($res,$i,'release_date')).'<TD></TR>';
+	echo '<tr "'. $HTML->boxGetAltRowStyle($i) .'">
+			<td>'.db_result($res,$i,'package_name').'</td>
+			<td><a href="editrelease.php?group_id='.$group_id
+				.'&amp;package_id='.$package_id
+				.'&amp;release_id='.db_result($res,$i,'release_id').'">'. 
+				db_result($res,$i,'name').' [edit]</a></td><td>'.
+				date('Y-m-d',db_result($res,$i,'release_date')).'</td></tr>';
 }
 
 echo $GLOBALS['HTML']->listTableBottom();

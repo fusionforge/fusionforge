@@ -27,15 +27,15 @@ site_admin_header(array('title'=>'Admin Search Results'));
 
 function format_name($name, $status) {
 	if ($status == 'D') {
-		return "<b><strike>$name</strike></b>";
+		return "<strong><strike>$name</strike></strong>";
 	} else if ($status == 'S') {
-		return "<b><u>$name</u></b>";
+		return "<strong><span style=\"text-decoration:underline\">$name</span></strong>";
 	} else if ($status == 'H') {
-		return "<b><u>$name</u></b>";
+		return "<strong><span style=\"text-decoration:underline\">$name</span></strong>";
 	} else if ($status == 'P') {
-		return "<b><i>$name</i></b>";
+		return "<strong><em>$name</em></strong>";
 	} else if ($status == 'I') {
-		return "<b><i>$name</i></b>";
+		return "<strong><em>$name</em></strong>";
 	}
 
 	return $name;
@@ -67,8 +67,8 @@ if ($usersearch) {
 	    OR realname ILIKE '%$search%'
 	"); 
 
-	print '<p><b>User search with criteria "<i>'.$search.'</i>": '
-	      .db_numrows($result).' matches.</b></p>';
+	print '<p><strong>User search with criteria "<em>'.$search.'</em>": '
+	      .db_numrows($result).' matches.</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();
@@ -127,8 +127,8 @@ if ($groupsearch) {
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";
 	}
-	print '<p><b>Group search with criteria "<i>'.$search.'</i>" '.$crit_desc.': '
-	      .db_numrows($result).' matches.</b></p>';
+	print '<p><strong>Group search with criteria "<em>'.$search.'</em>" '.$crit_desc.': '
+	      .db_numrows($result).' matches.</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();

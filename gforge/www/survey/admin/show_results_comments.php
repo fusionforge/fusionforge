@@ -20,7 +20,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Survey Aggregate Results','pagename'=>'survey_admin_show_results_comments'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -32,37 +32,37 @@ Function  ShowResultComments($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 
 	for($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo "</tr>";
 
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 		if ($j%2==0) {
-			$row_bg="#FFFFFF";
+			$row_bg="white";
 		} else {
 			$row_bg="$GLOBALS[COLOR_LTBACK1]";
 		}
 
-		echo "<tr BGCOLOR=\"$row_bg\">\n";
+		echo "<tr style=\"background-color:$row_bg\">\n";
 
 		for ($i = 0; $i < $cols; $i++) {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>";
+	echo "</table>"; //</td></tr></TABLE>";
 }
 
 $sql="SELECT question FROM survey_questions WHERE question_id='$question_id'";
 $result=db_query($sql);
-echo "<h2>Question: ".db_result($result,0,"question")."</H2>";
-echo "<P>";
+echo "<h2>Question: ".db_result($result,0,"question")."</h2>";
+echo "<p>&nbsp;</p>";
 
 $sql="SELECT DISTINCT response FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$question_id' AND group_id='$group_id'";
 $result=db_query($sql);

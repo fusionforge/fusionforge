@@ -18,7 +18,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Add A Question','pagename'=>'survey_admin_add_question'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -34,7 +34,7 @@ if ($post_changes) {
 }
 
 ?>
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 var timerID2 = null;
 
@@ -46,15 +46,15 @@ function show_questions() {
 // -->
 </script>
 
-<P>
-<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="Y">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-Question:<BR>
-<INPUT TYPE="TEXT" NAME="question" VALUE="" SIZE="60" MAXLENGTH="150">
-<P>
+<p>
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+<input type="hidden" name="post_changes" value="Y" />
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+Question:<br />
+<input type="text" name="question" value="" size="60" maxlength="150" />
+<p>
 
-Question Type:<BR>
+Question Type:<br />
 <?php
 
 $sql="SELECT * from survey_question_types";
@@ -62,15 +62,15 @@ $result=db_query($sql);
 echo html_build_select_box($result,'question_type','xzxz',false);
 
 ?>
-<P>
+</p>
 
-<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Add This Question">
-</FORM>  
+<p><input type="submit" name="submit" value="Add This Question"></p>
+</form></p>
 
-<P>
-<FORM>
-<INPUT TYPE="BUTTON" NAME="none" VALUE="Show Existing Questions" ONCLICK="show_questions()">
-</FORM>
+<p>
+<form>
+<input type="button" name="none" value="Show Existing Questions" onclick="show_questions()" />
+</form></p>
 
 <?php
 

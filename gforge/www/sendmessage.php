@@ -77,29 +77,29 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 
 ?>
 
-<P>
+<p>
 <?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
-<P>
-<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="toaddress" VALUE="<?php echo $toaddress; ?>">
-<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $touser; ?>">
+<p>
+<form action="<?php echo $PHP_SELF; ?>" METHOD="POST">
+<input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>">
+<input type="hidden" name="touser" value="<?php echo $touser; ?>">
 
-<B>Your Email Address:</B><BR>
-<INPUT TYPE="TEXT" NAME="email" SIZE="30" MAXLENGTH="40" VALUE="">
-<P>
-<B>Your Name:</B><BR>
-<INPUT TYPE="TEXT" NAME="name" SIZE="30" MAXLENGTH="40" VALUE="">
-<P>
-<B>Subject:</B><BR>
-<INPUT TYPE="TEXT" NAME="subject" SIZE="30" MAXLENGTH="40" VALUE="<?php echo $subject; ?>">
-<P>
-<B>Message:</B><BR>
-<TEXTAREA NAME="body" ROWS="15" COLS="60" WRAP="HARD"></TEXTAREA>
-<P>
+<strong>Your Email Address:</strong><br />
+<input type="TEXT" name="email" SIZE="30" MAXLENGTH="40" value="">
+<p>
+<strong>Your Name:</strong><br />
+<input type="TEXT" name="name" SIZE="30" MAXLENGTH="40" value="">
+<p>
+<strong>Subject:</strong><br />
+<input type="TEXT" name="subject" SIZE="30" MAXLENGTH="40" value="<?php echo $subject; ?>">
+<p>
+<strong>Message:</strong><br />
+<textarea name="body" ROWS="15" COLS="60" WRAP="HARD"></textarea>
+<p>
 <CENTER>
-<INPUT TYPE="SUBMIT" NAME="send_mail" VALUE="Send Message">
+<input type="SUBMIT" name="send_mail" value="Send Message">
 </CENTER>
-</FORM>
+</form>
 <?php
 $HTML->footer(array());
 

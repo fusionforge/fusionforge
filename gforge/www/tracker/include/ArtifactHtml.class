@@ -41,17 +41,17 @@ class ArtifactHtml extends Artifact {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><PRE>
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><PRE>
 Date: '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
 Sender: '. db_result($result,$i,'user_name') . '
-'. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></TD></TR>';
+'. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
 			echo '
-				<H3>No Followups Have Been Posted</H3>';
+				<h3>No Followups Have Been Posted</h3>';
 		}
 	}
 
@@ -75,7 +75,7 @@ Sender: '. db_result($result,$i,'user_name') . '
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				echo '
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
 
@@ -118,16 +118,16 @@ Sender: '. db_result($result,$i,'user_name') . '
 					echo db_result($result, $i, 'old_value');
 
 				}
-				echo '</TD>'.
-					'<TD>'. date($sys_datefmt,db_result($result, $i, 'entrydate')) .'</TD>'.
-					'<TD>'. db_result($result, $i, 'user_name'). '</TD></TR>';
+				echo '</td>'.
+					'<td>'. date($sys_datefmt,db_result($result, $i, 'entrydate')) .'</td>'.
+					'<td>'. db_result($result, $i, 'user_name'). '</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
 			echo '
-			<H3>No Changes Have Been Made to This Item</H3>';
+			<h3>No Changes Have Been Made to This Item</h3>';
 		}
 
 	}

@@ -84,26 +84,26 @@ if (user_ismember(1,'A')) {
 		*/
 		$sql="select category_id,name from people_job_category";
 		$result=db_query($sql);
-		echo "<P>";
+		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,'Existing Categories','people_cat');
 		} else {
 			echo '
-				<H1>No job categories</H1>';
+				<h1>No job categories</h1>';
 			echo db_error();
 		}
 		?>
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="people_cat" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<H4>New Category Name:</H4>
-		<INPUT TYPE="TEXT" NAME="cat_name" VALUE="" SIZE="15" MAXLENGTH="30"><BR>
-		<P>
-		<B><FONT COLOR="RED">Once you add a category, it cannot be deleted</FONT></B>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>
+		<p>
+		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<input type="hidden" name="people_cat" value="y" />
+		<input type="hidden" name="post_changes" value="y" />
+		<h4>New Category Name:</h4>
+		<input type="text" name="cat_name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><span style="color:red">Once you add a category, it cannot be deleted</span></strong></p>
+		<p>
+		<input type="submit" name="submit" value="SUBMIT"></p>
+		</form></p>
 		<?php
 
 		people_footer(array());
@@ -119,25 +119,25 @@ if (user_ismember(1,'A')) {
 		*/
 		$sql="select skill_id,name from people_skill";
 		$result=db_query($sql);
-		echo "<P>";
+		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,"Existing Skills","people_skills");
 		} else {
 			echo db_error();
-			echo "\n<H2>No Skills Found</H2>";
+			echo "\n<h2>No Skills Found</h2>";
 		}
 		?>
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="people_skills" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<H4>New Skill Name:</H4>
-		<INPUT TYPE="TEXT" NAME="skill_name" VALUE="" SIZE="15" MAXLENGTH="30"><BR>
-		<P>
-		<B><FONT COLOR="RED">Once you add a skill, it cannot be deleted</FONT></B>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>
+		<p>
+		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<input type="hidden" name="people_skills" value="y" />
+		<input type="hidden" name="post_changes" value="y" />
+		<h4>New Skill Name:</h4>
+		<input type="text" name="skill_name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><span style="color:red">Once you add a skill, it cannot be deleted</span></strong></p>
+		<p>
+		<input type="submit" name="submit" value="SUBMIT"></p>
+		</form></p>
 		<?php
 
 		people_footer(array());
@@ -149,12 +149,12 @@ if (user_ismember(1,'A')) {
 
 		people_header(array ('title'=>'People Administration','pagename'=>'people_admin'));
 
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?people_cat=1">Add Job Categories</A><BR>';
-	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<P>";
+		echo '<p>
+			<a href="'.$PHP_SELF.'?people_cat=1">Add Job Categories</a><br />';
+	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
 
-		echo "\n<A HREF=\"$PHP_SELF?people_skills=1\">Add Job Skills</A><BR>";
-	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<P>";
+		echo "\n<a href=\"$PHP_SELF?people_skills=1\">Add Job Skills</a><br />";
+	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 
 		people_footer(array());
 	}

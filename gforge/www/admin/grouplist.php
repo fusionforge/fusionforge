@@ -19,13 +19,13 @@ if (!$form_catroot) {
 }
 
 //CB removed from 2.6 and 2.5 was link to a page saying to use new project
-//print "<br><a href=\"groupedit-add.php\">[Add Group]</a>";
+//print "<br /><a href=\"groupedit-add.php\">[Add Group]</a>";
 print "<p>".$GLOBALS['system_name']." Group List for Category: ";
 
 if ($form_catroot == 1) {
 
 	if (isset($group_name_search)) {
-		print "<b>Groups that begin with $group_name_search</b>\n";
+		print "<strong>Groups that begin with $group_name_search</strong>\n";
 		// [RM] LIKE is case-sensitive, and we don't want that
 		// $res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
 		// . "FROM groups WHERE group_name LIKE '$group_name_search%' "
@@ -36,14 +36,14 @@ if ($form_catroot == 1) {
 			. ($form_pending?"AND WHERE status='P' ":"")
 			. " ORDER BY group_name");
 	} else {
-		print "<b>All Categories</b>\n";
+		print "<strong>All Categories</strong>\n";
 		$res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
 			. "FROM groups "
 			. ($status?"WHERE status='$status' ":"")
 			. "ORDER BY group_name");
 	}
 } else {
-	print "<b>" . category_fullname($form_catroot) . "</b>\n";
+	print "<strong>" . category_fullname($form_catroot) . "</strong>\n";
 
 	$res = db_query("SELECT groups.group_name,groups.unix_group_name,groups.group_id,"
 		. "groups.is_public,"
@@ -54,17 +54,17 @@ if ($form_catroot == 1) {
 		. "group_category.category_id=$GLOBALS[form_catroot] ORDER BY groups.group_name");
 }
 ?>
-
-<P>
-<TABLE width=100% border=1>
-<TR>
-<TD><b>Group Name (click to edit)</b></TD>
-<TD><b>UNIX Name</b></TD>
-<TD><b>Status</b></TD>
-<TD><b>Public?</b></TD>
-<TD><b>License</b></TD>
-<TD><B>Members</B></TD>
-</TR>
+</p>
+<p>
+<table width="100%" border="1">
+<tr>
+<td><strong>Group Name (click to edit)</strong></td>
+<td><strong>UNIX Name</strong></td>
+<td><strong>Status</strong></td>
+<td><strong>Public?</strong></td>
+<td><strong>License</strong></td>
+<td><strong>Members</strong></td>
+</tr>
 
 <?php
 while ($grp = db_fetch_array($res)) {
@@ -77,13 +77,13 @@ while ($grp = db_fetch_array($res)) {
 	
 	// members
 	$res_count = db_query("SELECT user_id FROM user_group WHERE group_id=$grp[group_id]");
-	print "<TD>" . db_numrows($res_count) . "</TD>";
+	print "<td>" . db_numrows($res_count) . "</td>";
 
 	print "</tr>\n";
 }
 ?>
 
-</TABLE>
+</table></p>
 
 <?php
 site_admin_footer(array());

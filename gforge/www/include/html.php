@@ -18,7 +18,7 @@ function html_feedback_top($feedback) {
 	if (!$feedback) 
 		return '';
 	print '
-		<H3><FONT COLOR="RED">'.$feedback.'</FONT></H3>';
+		<h3><span style="color:red">'.$feedback.'</span></h3>';
 }
 
 /**
@@ -43,7 +43,7 @@ function html_feedback_bottom($feedback) {
 	if (!$feedback) 
 		return '';
 	print '
-		<H3><FONT COLOR="RED">'.$feedback.'</FONT></H3>';
+		<h3><span style="color:red">'.$feedback.'</span></h3>';
 }
 
 /**
@@ -52,7 +52,7 @@ function html_feedback_bottom($feedback) {
  * @param		string	The group name.
  */
 function html_a_group($grp) {
-	print '<A /project/?group_id='.$grp.'>' . group_getname($grp) . '</A>';
+	print '<a /project/?group_id='.$grp.'>' . group_getname($grp) . '</a>';
 }
 
 /**
@@ -62,7 +62,7 @@ function html_a_group($grp) {
  * @param		int		The width of the image
  */
 function html_blankimage($height,$width) {
-	return '<img src="/images/blank.png" width="' . $width . '" height="' . $height . '" alt="">';
+	return '<img src="/images/blank.png" width="' . $width . '" height="' . $height . '" alt="" />';
 }
 
 /**
@@ -101,14 +101,14 @@ function html_dbimage($id, $args=0) {
 function html_image($src,$width,$height,$args,$display=1) {
 	global $sys_images_url,$sys_images_secure_url,$HTML;
 	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
-	$return = ('<IMG src="' . $s . $HTML->imgroot . $src .'"');
+	$return = ('<img src="' . $s . $HTML->imgroot . $src .'"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
 	}
 
 	// ## insert a border tag if there isn't one
-	if (!$args['border']) $return .= (" border=0");
+	if (!$args['border']) $return .= (" border=\"0\"");
 
 	// ## add image dimensions
 	$return .= " width=" . $width;
@@ -166,26 +166,26 @@ function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
  */
 function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz',$samevals = 0) {
 	$return .= '
-		<SELECT NAME="'.$select_name.'">';
+		<select name="'.$select_name.'">';
 
 	$rows=count($vals);
 
 	for ($i=0; $i<$rows; $i++) {
 		if ( $samevals ) {
-			$return .= "\n\t\t<OPTION VALUE=\"" . $vals[$i] . "\"";
+			$return .= "\n\t\t<option value=\"" . $vals[$i] . "\"";
 			if ($vals[$i] == $checked_val) {
-				$return .= ' SELECTED';
+				$return .= ' selected="selected"';
 			}
 		} else {
-			$return .= "\n\t\t<OPTION VALUE=\"" . $i .'"';
+			$return .= "\n\t\t<option value=\"" . $i .'"';
 			if ($i == $checked_val) {
-				$return .= ' SELECTED';
+				$return .= ' selected="selection"';
 			}
 		}
-		$return .= '>'.$vals[$i].'</OPTION>';
+		$return .= '>'.$vals[$i].'</option>';
 	}
 	$return .= '
-		</SELECT>';
+		</select>';
 
 	return $return;
 }
@@ -208,12 +208,12 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  */
 function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='None') {
 	$return .= '
-		<SELECT NAME="'.$select_name.'">';
+		<select name="'.$select_name.'">';
 
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
-		<OPTION VALUE="100">'. $text_100 .'</OPTION>';
+		<option value="100">'. $text_100 .'</option>';
 	}
 
 	$rows=count($vals);
@@ -226,12 +226,12 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
-				<OPTION VALUE="'.$vals[$i].'"';
+				<option value="'.$vals[$i].'"';
 			if ($vals[$i] == $checked_val) {
 				$checked_found=true;
-				$return .= ' SELECTED';
+				$return .= ' selected="selected"';
 			}
-			$return .= '>'.$texts[$i].'</OPTION>';
+			$return .= '>'.$texts[$i].'</option>';
 		}
 	}
 	//
@@ -240,10 +240,10 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<OPTION VALUE="'.$checked_val.'" SELECTED>No Change</OPTION>';
+		<option value="'.$checked_val.'" selected="selected">No Change</option>';
 	}
 	$return .= '
-		</SELECT>';
+		</select>';
 	return $return;
 }
 
@@ -273,19 +273,19 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
 function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',$show_100=true) {
 	$checked_count=count($checked_array);
 	$return .= '
-		<SELECT NAME="'.$name.'" MULTIPLE SIZE="'.$size.'">';
+		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		/*
 			Put in the default NONE box
 		*/
 		$return .= '
-		<OPTION VALUE="100"';
+		<option value="100"';
 		for ($j=0; $j<$checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
-				$return .= ' SELECTED';
+				$return .= ' selected="selected"';
 			}
 		}
-		$return .= '>None</OPTION>';
+		$return .= '>None</option>';
 	}
 
 	$rows=db_numrows($result);
@@ -293,21 +293,21 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 	for ($i=0; $i<$rows; $i++) {
 		if ((db_result($result,$i,0) != '100') || (db_result($result,$i,0) == '100' && !$show_100)) {
 			$return .= '
-				<OPTION VALUE="'.db_result($result,$i,0).'"';
+				<option value="'.db_result($result,$i,0).'"';
 			/*
 				Determine if it's checked
 			*/
 			$val=db_result($result,$i,0);
 			for ($j=0; $j<$checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
-					$return .= ' SELECTED';
+					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$val.'-'. substr(db_result($result,$i,1),0,35). '</OPTION>';
+			$return .= '>'.$val.'-'. substr(db_result($result,$i,1),0,35). '</option>';
 		}
 	}
 	$return .= '
-		</SELECT>';
+		</select>';
 	return $return;
 }
 
@@ -322,7 +322,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 function html_build_checkbox($name, $value, $checked) {
 	return '<input type="checkbox" name="'.$name.'"'
 		.' value="'.$value.'"'
-		.($checked ? 'checked' : '').'>';
+		.($checked ? 'checked="checked"' : '').'>';
 }
 
 /**
@@ -373,20 +373,20 @@ function build_priority_select_box ($name='priority', $checked_val='5', $nochang
  */
 function html_build_priority_select_box ($name='priority', $checked_val='5', $nochange=false) {
 ?>
-	<SELECT NAME="<?php echo $name; ?>">
+	<select name="<?php echo $name; ?>">
 <?php if($nochange) { ?>
-	<OPTION VALUE="100"<?php if ($nochange) {echo " SELECTED";} ?>>No Change</OPTION>
+	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>>No Change</option>
 <?php }  ?>
-	<OPTION VALUE="1"<?php if ($checked_val=="1") {echo " SELECTED";} ?>>1 - Lowest</OPTION>
-	<OPTION VALUE="2"<?php if ($checked_val=="2") {echo " SELECTED";} ?>>2</OPTION>
-	<OPTION VALUE="3"<?php if ($checked_val=="3") {echo " SELECTED";} ?>>3</OPTION>
-	<OPTION VALUE="4"<?php if ($checked_val=="4") {echo " SELECTED";} ?>>4</OPTION>
-	<OPTION VALUE="5"<?php if ($checked_val=="5") {echo " SELECTED";} ?>>5 - Medium</OPTION>
-	<OPTION VALUE="6"<?php if ($checked_val=="6") {echo " SELECTED";} ?>>6</OPTION>
-	<OPTION VALUE="7"<?php if ($checked_val=="7") {echo " SELECTED";} ?>>7</OPTION>
-	<OPTION VALUE="8"<?php if ($checked_val=="8") {echo " SELECTED";} ?>>8</OPTION>
-	<OPTION VALUE="9"<?php if ($checked_val=="9") {echo " SELECTED";} ?>>9 - Highest</OPTION>
-	</SELECT>
+	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - Lowest</option>
+	<option value="2"<?php if ($checked_val=="2") {echo " selected=\"selected\"";} ?>>2</option>
+	<option value="3"<?php if ($checked_val=="3") {echo " selected=\"selected\"";} ?>>3</option>
+	<option value="4"<?php if ($checked_val=="4") {echo " selected=\"selected\"";} ?>>4</option>
+	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - Medium</option>
+	<option value="6"<?php if ($checked_val=="6") {echo " selected=\"selected\"";} ?>>6</option>
+	<option value="7"<?php if ($checked_val=="7") {echo " selected=\"selected\"";} ?>>7</option>
+	<option value="8"<?php if ($checked_val=="8") {echo " selected=\"selected\"";} ?>>8</option>
+	<option value="9"<?php if ($checked_val=="9") {echo " selected=\"selected\"";} ?>>9 - Highest</option>
+	</select>
 <?php
 
 }
@@ -404,13 +404,13 @@ function html_buildcheckboxarray($options,$name,$checked_array) {
 
 	for ($i=1; $i<=$option_count; $i++) {
 		echo '
-			<BR><INPUT type="checkbox" name="'.$name.'" value="'.$i.'"';
+			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
 		for ($j=0; $j<$checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
-				echo ' CHECKED';
+				echo ' checked="checked"';
 			}
 		}
-		echo '> '.$options[$i];
+		echo ' /> '.$options[$i];
 	}
 }
 

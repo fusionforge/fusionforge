@@ -24,7 +24,7 @@ if (!session_loggedin()) {
 survey_header(array('title'=>'Survey','pagename'=>'survey_survey'));
 
 if (!$survey_id || !$group_id) {
-	echo "<H1>For some reason, the Group ID or Survey ID did not make it to this page</H1>";
+	echo "<h1>For some reason, the Group ID or Survey ID did not make it to this page</h1>";
 } else {
 	show_survey($group_id,$survey_id);
 }

@@ -14,9 +14,9 @@
 echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'pagename'=>'tracker_detail','atid'=>$ath->getID(),'sectionvals'=>array($ath->getName())));
 
 ?>
-	<H2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></H2>
+	<h2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h2>
 
-	<TABLE CELLPADDING="0" WIDTH="100%">
+	<table cellpadding="0" width="100%">
 <?php
 if (session_loggedin()) {
 ?>
@@ -30,73 +30,73 @@ if (session_loggedin()) {
 					$key="monitor";
 				}
 				echo '
-				<A href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><b>'.
-					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</b></a>';
-				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><b>(?)</b></a>
+				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
+				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
 			<td>
 				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo
-					html_image('ic/taskman20w.png','20','20',array()); ?><b>Build Task Relation</b></a>
+					html_image('ic/taskman20w.png','20','20',array()); ?><strong>Build Task Relation</strong></a>
 			</td>
 		</tr>
 <?php } ?>
-		<TR>
-			<TD><B>Date:</B><BR><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></TD>
-			<TD><B>Priority:</B><BR><?php echo $ah->getPriority(); ?></TD>
-		</TR>
+		<tr>
+			<td><strong>Date:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
+			<td><strong>Priority:</strong><br /><?php echo $ah->getPriority(); ?></td>
+		</tr>
 
-		<TR>
-			<TD><B>Submitted By:</B><BR><?php echo $ah->getSubmittedRealName(); ?> (<?php echo $ah->getSubmittedUnixName(); ?>)</TD>
-			<TD><B>Assigned To:</B><BR><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</TD>
-		</TR>
+		<tr>
+			<td><strong>Submitted By:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<?php echo $ah->getSubmittedUnixName(); ?>)</td>
+			<td><strong>Assigned To:</strong><br /><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
+		</tr>
 
-		<TR>
-			<TD><B>Category:</B><BR><?php echo $ah->getCategoryName(); ?></TD>
-			<TD><B>Status:</B><BR><?php echo $ah->getStatusName(); ?></TD>
-		</TR>
+		<tr>
+			<td><strong>Category:</strong><br /><?php echo $ah->getCategoryName(); ?></td>
+			<td><strong>Status:</strong><br /><?php echo $ah->getStatusName(); ?></td>
+		</tr>
 
-		<TR><TD COLSPAN="2"><B>Summary:</B><BR><?php echo $ah->getSummary(); ?></TD></TR>
+		<tr><td colspan="2"><strong>Summary:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
 
-		<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
+		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 
-		<TR><TD COLSPAN="2">
+		<tr><td colspan="2">
 			<?php echo nl2br( $ah->getDetails() ); ?>
-			<INPUT TYPE="HIDDEN" NAME="func" VALUE="postaddcomment">
-			<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
-			<P>
-			<B>Add A Comment:</B><BR>
-			<TEXTAREA NAME="details" ROWS="10" COLS="60" WRAP="HARD"></TEXTAREA>
-		</TD></TR>
+			<input type="hidden" name="func" value="postaddcomment">
+			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+			<p>
+			<strong>Add A Comment:</strong><br />
+			<textarea name="details" ROWS="10" COLS="60" WRAP="HARD"></textarea>
+		</td></tr>
 
-		<TR><TD COLSPAN="2">
+		<tr><td colspan="2">
 	<?php
 
 	if (!session_loggedin()) {
 		?>
-		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</A></FONT></h3><BR>
-		If you <B>cannot</B> login, then enter your email address here:<P>
-		<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">
+		<h3><FONT COLOR="RED">Please <a href="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</a></FONT></h3><br />
+		If you <strong>cannot</strong> login, then enter your email address here:<p>
+		<input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
 		<?php
 	}
 	?>
-		<P>
-		<H3>DO NOT enter passwords or confidential information in your message!</H3>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>
-	</TD></TR>
+		<p>
+		<h3>DO NOT enter passwords or confidential information in your message!</h3>
+		<p>
+		<input type="SUBMIT" name="SUBMIT" value="SUBMIT">
+		</form>
+	</td></tr>
 
-	<TR><TD COLSPAN="2">
-	<H3>Followups:</H3>
-	<P>
+	<tr><td colspan="2">
+	<h3>Followups:</h3>
+	<p>
 	<?php
 
 	echo $ah->showMessages();
 
 	?>
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD COLSPAN=2>
+	<tr><td colspan=2>
 	<H4>Attached Files:</H4>
 	<?php
 	//
@@ -115,33 +115,33 @@ if (session_loggedin()) {
 	if ($count > 0) {
 
 		for ($i=0; $i<$count; $i++) {
-			echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<TD>'. htmlspecialchars($file_list[$i]->getName()) .'</TD>
-			<TD>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</TD>
-			<TD><A HREF="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">Download</A></TD>
-			</TR>';
+			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
+			<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
+			<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">Download</a></td>
+			</tr>';
 		}
 
 	} else {
-		echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
+		echo '<tr><td colspan=3>No Files Currently Attached</td></tr>';
 	}
 	
 	echo $GLOBALS['HTML']->listTableBottom();
 
 	?>
-	</TD></TR>
+	</td></tr>
 
-	<TR>
-	<TD COLSPAN="2">
-	<H3>Changes:</H3>
-	<P>
+	<tr>
+	<td colspan="2">
+	<h3>Changes:</h3>
+	<p>
 	<?php
 
 	echo $ah->showHistory();
 
 	?>
-	</TD>
-	</TR>
+	</td>
+	</tr>
 </TABLE>
 <?php
 

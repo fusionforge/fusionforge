@@ -27,20 +27,20 @@ function displayUserSkills($user_id, $allowEdit) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 		$feedback .= 'No skills listed ';
-		echo '<TR><TD>This user has not entered any skills.</TD></TR>';
+		echo '<tr><td>This user has not entered any skills.</td></tr>';
 	} else {
 		
-		echo '<TR bgcolor="#D0D0D0">';				 /* headings for the columns */
+		echo '<tr style="background-color:#D0D0D0" align="center">';				 /* headings for the columns */
 		if($allowEdit) {
-			echo '<TD ALIGN="middle"><B>Edit</b></TD>'.
-				 '<TD ALIGN="middle"><B>Delete</B></TD>';
+			echo '<td><strong>Edit</strong></td>'.
+				 '<td><strong>Delete</strong></td>';
 		}
-		echo '<TD ALIGN="middle"><B>Type</B></TD>'.
-			 '<TD ALIGN="middle"><B>Title</B></TD>'.
-			 '<TD ALIGN="middle"><B>Start Date</B></TD>'.
-			 '<TD ALIGN="middle"><B>End Date</B></TD>'.
-			 '<TD ALIGN="middle"><B>Keywords</B></TD>'.
-			 '</TR>';
+		echo '<td><strong>Type</strong></td>'.
+			 '<td><strong>Title</strong></td>'.
+			 '<td><strong>Start Date</strong></td>'.
+			 '<td><strong>End Date</strong></td>'.
+			 '<td><strong>Keywords</strong></td>'.
+			 '</tr>';
 
 		for ($i = 0; $i < $rows; $i++)  /* for each entry in the database */ {
 			/* set up some variables to make things easier.... */
@@ -67,30 +67,30 @@ function displayUserSkills($user_id, $allowEdit) {
 			}
 			
 			/* now print out the row, formatted nicely */
-			echo '<TR '. $HTML->boxGetAltRowStyle($i+1) . '>';
+			echo '<tr '. $HTML->boxGetAltRowStyle($i+1) . '>';
 			if($allowEdit) {
-				echo '<TD><INPUT TYPE="CHECKBOX" NAME="skill_edit[]" VALUE="'.db_result($result, $i, 'skills_data_id').'"></TD>';
-				echo '<TD><INPUT TYPE="CHECKBOX" NAME="skill_delete[]" VALUE="'.db_result($result, $i, 'skills_data_id').'"></TD>';
+				echo '<td><input type="checkbox" name="skill_edit[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
+				echo '<td><input type="checkbox" name="skill_delete[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
 			}
 			if($typesDescs[$typeID]) {
-				echo '<TD>'.$typesDescs[$typeID]."</TD>\n";
+				echo '<td>'.$typesDescs[$typeID]."</td>\n";
 			} else {
-				echo '<TD>'.$typeID ."</TD>\n";
+				echo '<td>'.$typeID ."</td>\n";
 			}
 
-			echo '<TD>'.db_result($result, $i, 'title') ."</TD>\n";
-			echo '<TD>'.$startStr."</TD>\n";
-			echo '<TD>'.$finishStr."</TD>\n";
-			echo '<TD>'.db_result($result, $i, 'keywords') ."</TD>\n";
+			echo '<td>'.db_result($result, $i, 'title') ."</td>\n";
+			echo '<td>'.$startStr."</td>\n";
+			echo '<td>'.$finishStr."</td>\n";
+			echo '<td>'.db_result($result, $i, 'keywords') ."</td>\n";
 			echo "</tr>";
 
 		}
 
 		if($allowEdit) {
-			echo '<TR>';
-			echo '<TD><INPUT TYPE="Submit" NAME="MultiEdit" VALUE="Edit"></TD>';
-			echo '<TD><INPUT TYPE="Submit" NAME="MultiDelete" VALUE="Delete"></TD>';
-			echo '</TR>';
+			echo '<tr>';
+			echo '<td><input type="submit" name="MultiEdit" value="Edit" /></td>';
+			echo '<td><input type="submit" name="MultiDelete" value="Delete" /></td>';
+			echo '</tr>';
 		}
 
 	}
@@ -115,7 +115,7 @@ function handle_multi_edit($skill_ids) {
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= ' User fetch FAILED ';
-			echo '<H2>No Such User</H2>';
+			echo '<h2>No Such User</h2>';
 		}
 		
 		$yearArray = array();
@@ -142,46 +142,45 @@ function handle_multi_edit($skill_ids) {
 			$finishY = substr($finish, 0, 4);
 			$finishM = substr($finish, 4, 2);
 							   
-			echo "<TABLE BORDER=0>".
-				"<TR ".$HTML->boxGetAltRowStyle($i+1).">".
-				"<TD><H3>".db_result($result, $i,'title')."</H3></TD></TR>".
-				"<TR><TD>".
-				"<Table BORDER=0 >".
-					"<TR>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Type</TD>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Start Date</TD>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">End Date</TD>".
-					"</TR>";
-			echo "<TR ".$HTML->boxGetAltRowStyle($i+1).">".
-						"<TD>".html_build_select_box($skills, "type[]",db_result($result, $i,'type') , false, "")."</TD>".
-						"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM[]", $startM, false, "").
-							html_build_select_box_from_arrays($yearArray,$yearArray, "startY[]", $startY, false, "")."</TD>".
-						"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM[]", $finishM, false, "").
-							html_build_select_box_from_arrays($yearArray,$yearArray, "endY[]", $finishY, false, "")."</TD>".
-					"</TR>".
-				"</TABLE>".
-				"</TD></TR>".
+			echo "<table border=\"0\">".
+				"<tr ".$HTML->boxGetAltRowStyle($i+1).">".
+				"<td><h3>".db_result($result, $i,'title')."</h3></td></tr>".
+				"<tr><td>".
+				"<table border=\"0\" >".
+					"<tr>".
+						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Type</td>".
+						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Start Date</td>".
+						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">End Date</td>".
+					"</tr>";
+			echo "<tr ".$HTML->boxGetAltRowStyle($i+1).">".
+						"<td>".html_build_select_box($skills, "type[]",db_result($result, $i,'type') , false, "")."</td>".
+						"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM[]", $startM, false, "").
+							html_build_select_box_from_arrays($yearArray,$yearArray, "startY[]", $startY, false, "")."</td>".
+						"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM[]", $finishM, false, "").
+							html_build_select_box_from_arrays($yearArray,$yearArray, "endY[]", $finishY, false, "")."</td>".
+					"</tr>".
+				"</table>".
+				"</td></tr>".
 				
-				"<TR ".$HTML->boxGetAltRowStyle($i+1)."><TD>".
-				"<TABLE BORDER=0 >".
-					"<TR>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Title (max 100 characters)</TD>".
-					"</TR>".
-					"<TR>".
-						"<TD><INPUT TYPE=\"hidden\" name=\"skill_edit[]\" value=\"".db_result($result, $i,'skills_data_id')."\">".
-						"<INPUT TYPE=text name=\"title[]\" size=100 value=\"".db_result($result, $i,'title')."\"></TD>".
-					"</TR>".
-					"<TR>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Keywords (max 255 characters)</TD>".
-					"</TR>".
-					"<TR>".
-						"<TD><textarea name=\"keywords[]\" rows=\"3\" cols=\"85\" wrap=\"soft\">".db_result($result, $i,'keywords')."</TEXTAREA></TD>".
-					"</TR>".
+				"<tr ".$HTML->boxGetAltRowStyle($i+1)."><td>".
+				"<table border=\"0\">".
+					"<tr>".
+						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Title (max 100 characters)</td>".
+					"</tr>".
+					"<tr>".
+						"<td><input type=\"hidden\" name=\"skill_edit[]\" value=\"".db_result($result, $i,'skills_data_id')."\" />".
+						"<input type=\"text\" name=\"title[]\" size=\"100\" value=\"".db_result($result, $i,'title')."\" /></td>".
+					"</tr>".
+					"<tr>".
+						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Keywords (max 255 characters)</td>".
+					"</tr>".
+					"<tr>".
+						"<td><textarea name=\"keywords[]\" rows=\"3\" cols=\"85\" wrap=\"soft\">".db_result($result, $i,'keywords')."</textarea></td>".
+					"</tr>".
 					
 				 "</table>";
-				 "</TD></TR>";
-			echo "</TABLE><br>";					
-										
+				 "</td></tr>";
+			echo "</table><br />";
 		}
 	}
 }

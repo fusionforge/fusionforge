@@ -56,36 +56,34 @@ if (session_loggedin()) {
 		snippet_header(array('title'=>'Submit A New Snippet Version','pagename'=>'snippet_addversion'));
 
 		?>
-		<P>
-		If you have modified a version of a snippet and you feel it 
-		is significant enough to share with others, please do so.
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="type" VALUE="snippet">
-		<INPUT TYPE="HIDDEN" NAME="snippet_id" VALUE="<?php echo $id; ?>">
-		<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?php echo $id; ?>">
+		<p>If you have modified a version of a snippet and you feel it
+		is significant enough to share with others, please do so.</p>
+		<p>
+		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<input type="hidden" name="post_changes" value="y" />
+		<input type="hidden" name="type" value="snippet" />
+		<input type="hidden" name="snippet_id" value="<?php echo $id; ?>" />
+		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
-		<TABLE>
-		<TR><TD COLSPAN="2"><B>Version:</B><BR>
-			<INPUT TYPE="TEXT" NAME="version" SIZE="10" MAXLENGTH="15">
-		</TD></TR>
+		<table>
+		<tr><td colspan="2"><strong>Version:</strong><br />
+			<input type="text" name="version" size="10" maxlength="15" />
+		</td></tr>
 
-		<TR><TD COLSPAN="2"><B>Changes:</B><BR>
-			<TEXTAREA NAME="changes" ROWS="5" COLS="45"></TEXTAREA>
-		</TD></TR>
+		<tr><td colspan="2"><strong>Changes:</strong><br />
+			<textarea name="changes" rows="5" cols="45"></textarea>
+		</td></tr>
   
-		<TR><TD COLSPAN="2"><B>Paste the Code Here:</B><BR>
-			<TEXTAREA NAME="code" ROWS="30" COLS="85" WRAP="SOFT"></TEXTAREA>
-		</TD></TR>
+		<tr><td colspan="2"><strong>Paste the Code Here:</strong><br />
+			<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
+		</td></tr>
  
-		<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-			<B>Make sure all info is complete and accurate</B>
-			<BR>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</TD></TR>
-		</FORM>
-		</TABLE>
+		<tr><td colspan="2" align="center">
+			<strong>Make sure all info is complete and accurate</strong>
+			<br />
+			<input type="submit" name="submit" value="SUBMIT" />
+		</td></tr>
+		</table></form></p>
 		<?php
 
 		snippet_footer(array());
@@ -137,7 +135,7 @@ if (session_loggedin()) {
 */
 					?>
 
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 function show_add_snippet_box() {
 	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
@@ -146,19 +144,17 @@ function show_add_snippet_box() {
 }
 // -->
 </script>
-<BODY onLoad="show_add_snippet_box()">
+<body onLoad="show_add_snippet_box()">
 
-<P>
-<FONT COLOR="RED"><B>IMPORTANT!</B></FONT>
-<P>
+<p><span style="color:red"><strong>IMPORTANT!</strong></span></p>
+<p>
 If a new window opened, use it to add snippets to your package.
-If a new window did not open, use the following link to add to your package BEFORE you leave this page.
-<P>
-<A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" TARGET="_blank">Add Snippets To Package</A>
-<P>
-<B>Browse the library</B> to find the snippets you want to add,
-then add them using the new window link shown above.
-<P>
+If a new window did not open, use the following link to add to your package BEFORE you leave this page.</p>
+<p>
+<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank">Add Snippets To Package</a></p>
+<p><strong>Browse the library</strong> to find the snippets you want to add,
+then add them using the new window link shown above.</p>
+<p>
 
 					<?php
 
@@ -174,32 +170,31 @@ then add them using the new window link shown above.
 		snippet_header(array('title'=>'Submit A New Snippet Version','pagename'=>'snippet_addversion'));
 
 		?>
-		<P>
-		If you have modified a version of a package and you feel it
-		is significant enough to share with others, please do so.
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="type" VALUE="package">
-		<INPUT TYPE="HIDDEN" NAME="snippet_package_id" VALUE="<?php echo $id; ?>">
-		<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?php echo $id; ?>">
+		</p>
+		<p>If you have modified a version of a package and you feel it
+		is significant enough to share with others, please do so.</p>
+		<p>
+		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<input type="hidden" name="post_changes" value="y" />
+		<input type="hidden" name="type" value="package" />
+		<input type="hidden" name="snippet_package_id" value="<?php echo $id; ?>" />
+		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
-		<TABLE>
-		<TR><TD COLSPAN="2"><B>Version:</B><BR>
-			<INPUT TYPE="TEXT" NAME="version" SIZE="10" MAXLENGTH="15">
-		</TD></TR>
+		<table>
+		<tr><td colspan="2"><strong>Version:</strong><br />
+			<input type="text" name="version" size="10" maxlength="15" />
+		</td></tr>
 
-		<TR><TD COLSPAN="2"><B>Changes:</B><BR>
-			<TEXTAREA NAME="changes" ROWS="5" COLS="45"></TEXTAREA>
-		</TD></TR>
+		<tr><td colspan="2"><strong>Changes:</strong><br />
+			<textarea name="changes" rows="5" cols="45"></textarea>
+		</td></tr>
 
-		<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-			<B>Make sure all info is complete and accurate</B>
-			<BR>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</TD></TR>
-		</FORM>
-		</TABLE>
+		<tr><td colspan="2" align="center">
+			<strong>Make sure all info is complete and accurate</strong>
+			<br />
+			<input type="submit" name="submit" value="SUBMIT" />
+		</td></tr>
+		</table></form></p>
 		<?php
 
 		snippet_footer(array());

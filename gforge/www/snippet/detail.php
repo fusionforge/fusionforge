@@ -47,11 +47,11 @@ if ($type=='snippet') {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<H3>Error - no versions found</H3>';
+		echo '<h3>Error - no versions found</h3>';
 	} else {
 		echo '
-		<H3>Versions Of This Snippet:</H3>
-		<P>';
+		<h3>Versions Of This Snippet:</h3>
+		<p>';
 		$title_arr=array();
 		$title_arr[]='Snippet ID';
 		$title_arr[]='Download Version';
@@ -68,28 +68,28 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'snippet_version_id').
-				'</TD><TD><A HREF="/snippet/download.php?type=snippet&id='.
-				db_result($result,$i,'snippet_version_id').'"><B>'.
-				db_result($result,$i,'version').'</B></A></TD><TD>'. 
-				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.
-				db_result($result,$i,'user_name').'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/delete.php?type=snippet&snippet_version_id='.
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+				'</td><td><a href="/snippet/download.php?type=snippet&amp;id='.
+				db_result($result,$i,'snippet_version_id').'"><strong>'.
+				db_result($result,$i,'version').'</strong></a></td><td>'. 
+				date($sys_datefmt,db_result($result,$i,'date')).'</td><td>'.
+				db_result($result,$i,'user_name').'</td><td align="center"><a href="/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
-				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
-					<TR'.$row_color.'><TD COLSPAN=5>Changes since last version:<BR>'.
-					nl2br(db_result($result,$i,'changes')).'</TD></TR>';
+					<tr'.$row_color.'><td colspan="5">Changes since last version:<br />'.
+					nl2br(db_result($result,$i,'changes')).'</td></tr>';
 				}
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		<P>
-		Download a raw-text version of this code by clicking on &quot;<B>Download Version</B>&quot;
-		<P>';
+		</p><p>
+		Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;
+		</p>';
 	}
 	/*
 		show the latest version of this snippet's code
@@ -97,23 +97,21 @@ if ($type=='snippet') {
 	$result=db_query("SELECT code,version FROM snippet_version WHERE snippet_version_id='$newest_version'");	
 
 	echo '
-		<P>
-		<HR>
-		<P>
-		<H2>Latest Snippet Version: '.db_result($result,0,'version').'</H2>
-		<P>
-		<PRE><FONT SIZE="-1">
-'. db_result($result,0,'code') .'
-		</FONT></PRE>
-		<P>';
+		<p>&nbsp;</p>
+		<hr />
+		<h2>Latest Snippet Version: '.db_result($result,0,'version').'</h2>
+		<p>
+		<pre><span style="font-size:smaller">
+		'. db_result($result,0,'code') .'
+		</span></pre>
+		</p>';
 	/*
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<H3><A HREF="/snippet/addversion.php?type=snippet&id='.$id.'"><FONT COLOR="RED">Submit a new version</FONT></A></H3>
-	<P>
-	You can submit a new version of this snippet if you have modified it 
-	and you feel it is appropriate to share with others.';
+	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.$id.'"><span style="color:red">Submit a new version</span></a></h3>
+	<p>You can submit a new version of this snippet if you have modified it
+	and you feel it is appropriate to share with others.</p>';
 
 	snippet_footer(array());
 
@@ -143,11 +141,11 @@ if ($type=='snippet') {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<H3>Error - no versions found</H3>';
+		echo '<h3>Error - no versions found</h3>';
 	} else {
 		echo '
-		<H3>Versions Of This Package:</H3>
-		<P>';
+		<h3>Versions Of This Package:</h3>
+		<p>';
 		$title_arr=array();
 		$title_arr[]='Package Version';
 		$title_arr[]='Date Posted';
@@ -164,25 +162,24 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/snippet/detail.php?type=packagever&id='.
-				db_result($result,$i,'snippet_package_version_id').'"><B>'.
-				db_result($result,$i,'version').'</B></A></TD><TD>'.
-				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/snippet/detail.php?type=packagever&amp;id='.
+				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
+				db_result($result,$i,'version').'</strong></a></td><td>'.
+				date($sys_datefmt,db_result($result,$i,'date')).'</td><td>'.
 				db_result($result,$i,'user_name').
-				'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
+				'</td><td align="center"><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("ic/pencil.png","20","25",array("BORDER"=>"0")) . 
-				'</A> &nbsp; &nbsp; &nbsp; <A HREF="/snippet/delete.php?type=package&snippet_package_version_id='.
+				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
+				'</a> &nbsp; &nbsp; &nbsp; <a href="/snippet/delete.php?type=package&snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		<P>
-		Download a raw-text version of this code by clicking on &quot;<B>Download Version</B>&quot;
-		<P>';
+		</p><p>Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;
+		</p>';
 	}
 
 	/*
@@ -191,22 +188,20 @@ if ($type=='snippet') {
 	*/
 
 	echo '
-		<P>
-		<HR>
-		<P>
-		<H2>Latest Package Version: '.db_result($result,0,'version').'</H2>
-		<P>
-		<P>';
+		<p>&nbsp;</p>
+		<hr />
+		<h2>Latest Package Version: '.db_result($result,0,'version').'</h2>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>';
 	snippet_show_package_snippets($newest_version);
 
 	/*
 		Show a form so you can add a new version of this package
 	*/
 	echo '
-	<H3><A HREF="/snippet/addversion.php?type=package&id='.$id.'"><FONT COLOR="RED">Submit a new version</FONT></A></H3>
-	<P>
-	You can submit a new version of this package if you have modified it
-	and you feel it is appropriate to share with others.';
+	<h3><a href="/snippet/addversion.php?type=package&amp;id='.$id.'"><span style="color:red">Submit a new version</span></a></h3>
+	<p>You can submit a new version of this package if you have modified it
+	and you feel it is appropriate to share with others.</p>';
 
 	snippet_footer(array());
 

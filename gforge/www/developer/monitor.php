@@ -29,7 +29,7 @@ if (session_loggedin()) {
 		$HTML->header (array('title'=>'Monitor a User'));
 
 		echo '
-			<H2>Monitor a User</H2>';
+			<h2>Monitor a User</h2>';
 
 		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 
@@ -45,25 +45,25 @@ if (session_loggedin()) {
 			$result = db_query($sql);
 
 			if (!$result) {
-				echo "<FONT COLOR=\"RED\">Error inserting into user_diary_monitor</FONT>";
+				echo "<span style="color:red">Error inserting into user_diary_monitor</span>";
 			} else {
-				echo "<FONT COLOR=\"RED\"><H3>User is now being monitored</H3></FONT>";
-				echo "<P>You will now be emailed this user's diary entries.";
-				echo "<P>To turn off monitoring, simply click the <B>Monitor user</B> link again.";
+				echo "<h3 style="color:red">User is now being monitored</h3>";
+				echo "<p>You will now be emailed this user's diary entries.</p>";
+				echo "<p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>";
 			}
 
 		} else {
 
 			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 			$result = db_query($sql);
-			echo "<FONT COLOR=\"RED\"><H3>Monitoring has been turned off</H3></FONT>";
-			echo "<P>You will not receive any more emails from this user.";
+			echo "<h3 style="color:red">Monitoring has been turned off</h3>";
+			echo "<p>You will not receive any more emails from this user.</p>";
 		}
 		$HTML->footer (array());
 	} else {
 		$HTML->header (array('title'=>'Choose a user First'));
 		echo '
-			<H1>Error - Choose a User To Monitor First</H1>';
+			<h1>Error - Choose a User To Monitor First</h1>';
 		$HTML->footer (array());
 	} 
 

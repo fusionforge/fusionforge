@@ -46,9 +46,9 @@ $query	= "SELECT groups.group_name,"
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	// echo $query . "<BR><BR>";
+	// echo $query . "<br /><br />";
 	echo db_error();
-	echo "<H1>No new releases found. </H1>";
+	echo "<h1>No new releases found. </h1>";
 } else {
 
 	if ( db_numrows($res_new) > 20 ) {
@@ -57,72 +57,72 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		$rows = db_numrows($res_new);
 	}
 
-	print "\t<TABLE width=100% cellpadding=0 cellspacing=0 border=0>";
+	print "\t<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
 	for ($i=0; $i<$rows; $i++) {
 		$row_new = db_fetch_array($res_new);
 		// avoid dupulicates of different file types
 		if (!($G_RELEASE["$row_new[group_id]"])) {
-			print "<TR valign=top>";
-			print "<TD colspan=2>";
-			print "<A href=\"/projects/$row_new[unix_group_name]/\"><B>$row_new[group_name]</B></A>"
-				. "\n</TD><TD nowrap><I>Released by: <A href=\"/users/$row_new[user_name]/\">"
-				. "$row_new[user_name]</A></I></TD></TR>\n";	
+			print "<tr valign=\"top\">";
+			print "<td colspan=\"2\">";
+			print "<a href=\"/projects/$row_new[unix_group_name]/\"><strong>$row_new[group_name]</strong></a>"
+				. "\n</td><td nowrap=\"nowrap\"><em>Released by: <a href=\"/users/$row_new[user_name]/\">"
+				. "$row_new[user_name]</a></em></td></tr>\n";	
 
-			print "<TR><TD>Module: $row_new[module_name]</TD>\n";
-			print "<TD>Version: $row_new[release_version]</TD>\n";
-			print "<TD>" . date("M d, h:iA",$row_new[release_date]) . "</TD>\n";
-			print "</TR>";
+			print "<tr><td>Module: $row_new[module_name]</td>\n";
+			print "<td>Version: $row_new[release_version]</td>\n";
+			print "<td>" . date("M d, h:iA",$row_new[release_date]) . "</td>\n";
+			print "</tr>";
 
-			print "<TR valign=top>";
-			print "<TD colspan=2>&nbsp;<BR>";
+			print "<tr valign=\"top\">";
+			print "<td colspan=\"2\">&nbsp;<br />";
 			if ($row_new['short_description']) {
-				print "<I>$row_new[short_description]</I>";
+				print "<em>$row_new[short_description]</em>";
 			} else {
-				print "<I>This project has not submitted a description.</I>";
+				print "<em>This project has not submitted a description.</em>";
 			}
-			// print "<P>Release rating: ";
+			// print "<p>Release rating: ";
 			// print vote_show_thumbs($row_new[filerelease_id],2);
-			print "</TD>";
-			print '<TD align=center nowrap border=1>';
-			// print '&nbsp;<BR>Rate this Release!<BR>';
+			print "</td>";
+			print '<td align="center" nowrap="nowrap" border="1">';
+			// print '&nbsp;<br />Rate this Release!<br />';
 			// print vote_show_release_radios($row_new[filerelease_id],2);
-			print "&nbsp;</TD>";
-			print "</TR>";
+			print "&nbsp;</td>";
+			print "</tr>";
 
-			print '<TR><TD colspan=3>';
+			print '<tr><td colspan="3">';
 			// link to whole file list for downloads
-			print "&nbsp;<BR><A href=\"/project/showfiles.php?group_id=$row_new[group_id]&release_id=$row_new[release_id]\">";
-			print "Download</A> ";
+			print "&nbsp;<br /><a href=\"/project/showfiles.php?group_id=$row_new[group_id]&release_id=$row_new[release_id]\">";
+			print "Download</a> ";
 			print '(Project Total: '.$row_new['downloads'].') | ';
 			// notes for this release
-			print "<A href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
-			print "Notes & Changes</A>";
-			print '<HR></TD></TR>';
+			print "<a href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
+			print "Notes & Changes</a>";
+			print '<hr /></td></tr>';
 
 			$G_RELEASE["$row_new[group_id]"] = 1;
 		}
 	}
 
-	echo "<TR BGCOLOR=\"#EEEEEE\"><TD>";
+	echo "<tr style=\"background-color:#eeeeee\"><td>";
         if ($offset != 0) {
-		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
-        	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
-			html_image("t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
-			" Newer Releases</A></B></FONT>";
+		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
+        	echo "<a href=\"/new/?offset=".($offset-20)."\">" .
+			html_image("t2.png","15","15",array("border"=>"0","align"=>"middle")) .
+			" <strong>Newer Releases</strong></a></span>";
         } else {
         	echo "&nbsp;";
         }
 
-	echo "</TD><TD COLSPAN=\"2\" ALIGN=\"RIGHT\">";
+	echo "</td><td colspan=\"2\" align=\"right\">";
 	if (db_numrows($res_new)>$rows) {
-		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
-		echo "<A HREF=\"/new/?offset=".($offset+20)."\"><B>Older Releases " .
-		html_image("t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
-		"</A></B></FONT>";
+		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
+		echo "<a href=\"/new/?offset=".($offset+20)."\"><strong>Older Releases</strong> " .
+		html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) .
+		"</a></span>";
 	} else {
 		echo "&nbsp;";
 	}
-	echo "</TD></TR></TABLE>";
+	echo "</td></tr></table>";
 
 }
 

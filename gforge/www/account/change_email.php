@@ -52,13 +52,13 @@ site_user_header(array('title'=>"Change Email Address",'pagename'=>'account_chan
 echo $Language->getText('account_change_email', 'desc');
 ?>
 
-<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 New Email Address:
-<INPUT type="text" name="newemail">
-<INPUT type="submit" name="submit" value="Send Confirmation to New Address">
-</FORM>
+<input type="text" name="newemail" maxlength="255" />
+<input type="submit" name="submit" value="Send Confirmation to New Address" />
+</form>
 
-<P><A href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></A>
+<p><a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></a></p>
 
 <?php
 site_user_footer(array());

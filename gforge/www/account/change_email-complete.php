@@ -44,14 +44,14 @@ site_user_header(array('title'=>"Email Change Complete",'pagename'=>'account_cha
 <p>
 Welcome, <?php print $u->getUnixName(); ?>. Your email
 change is complete. Your new email address on file is 
-<B>&lt;<?php print $u->getEmail(); ?>&gt;</B>. 
+<strong>&lt;<?php print $u->getEmail(); ?>&gt;</strong>.
 
 Mail sent to
 &lt;<?php print $u->getUnixName(); ?>@<?php print $GLOBALS['sys_users_host']; ?>&gt; 
 will now be forwarded to this account.
 </p>
 
-<p><A href="/"><?php echo $Language->getText('account_change_email', 'return'); ?></A></p>
+<p><a href="/"><?php echo $Language->getText('account_change_email', 'return'); ?></a></p>
 
 <?php
 

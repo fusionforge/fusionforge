@@ -21,7 +21,7 @@ if (!$survey_id || !$group_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo "<H1>Error - For some reason group_id and/or survey_id did not make it here</H1>";
+	echo "<h1>Error - For some reason group_id and/or survey_id did not make it here</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -30,20 +30,20 @@ if (!session_loggedin()) {
 	/*
 		Tell them they need to be logged in
 	*/
-	echo "<H1>You need to be logged in</H1>";
-	echo "Unfortunately, you have to be logged in to participate in surveys.";
+	echo "<h1>You need to be logged in</h1>";
+	echo "<p>Unfortunately, you have to be logged in to participate in surveys.</p>";
 	survey_footer(array());
 	exit;
 }
 
 ?>
 
-Thank you for taking time to complete this survey.
-<P>
+<p>Thank you for taking time to complete this survey.</p>
+<p>&nbsp;</p>
 Regards,
-<P>
-<B>The <?php echo $GLOBALS['sys_name']; ?> Crew</B>
-<P>
+<p>&nbsp;</p>
+<strong>The <?php echo $GLOBALS['sys_name']; ?> Crew</strong>
+<p>&nbsp;</p>
 <?php
 /*
 	Delete this customer's responses in case they had back-arrowed

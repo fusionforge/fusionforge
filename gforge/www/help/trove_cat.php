@@ -28,11 +28,11 @@ $row_cat = db_fetch_array($res_cat);
 
 help_header("Trove Category - ".$row_cat['fullname']);
 
-print '<TABLE width="100%" cellpadding="0" cellspacing="0" border="0">'."\n";
-print '<TR><TD>Full Category Name:</TD><TD><B>'.$row_cat['fullname']."</B></TD>\n";
-print '<TR><TD>Short Name:</TD><TD><B>'.$row_cat['shortname']."</B></TD>\n";
-print "</TABLE>\n"; 
-print '<P>Description:<BR><I>'.$row_cat['description'].'</I>'."\n";
+print '<table width="100%" cellpadding="0" cellspacing="0" border="0">'."\n";
+print '<tr><td>Full Category Name:</td><td><strong>'.$row_cat['fullname']."</strong></td>\n";
+print '<tr><td>Short Name:</td><td><strong>'.$row_cat['shortname']."</strong></td>\n";
+print "</table>\n";
+print '<p>Description:<br /><em>'.$row_cat['description'].'</em>'."</p>\n";
 
 help_footer();
 

@@ -84,14 +84,14 @@ if ($forum_id) {
 		exit_error('Error',$fmf->getErrorMessage());
 	}
 
-//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
+//echo "<br /> style: $style|max_rows: $max_rows|offset: $offset+";
 	$fmf->setUp($offset,$style,$max_rows,$set);
 
 	$style=$fmf->getStyle();
 	$max_rows=$fmf->max_rows;
 	$offset=$fmf->offset;
 
-//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
+//echo "<br /> style: $style|max_rows: $max_rows|offset: $offset+";
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
@@ -137,17 +137,17 @@ if ($forum_id) {
 
 	//now show the popup boxes in a form
 	$ret_val .= '
-	<TABLE BORDER="0" WIDTH="33%">
-	<FORM ACTION="'. $PHP_SELF .'" METHOD="GET">
-	<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
-	<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
-		<TR><TD><FONT SIZE="-1">'. $options_popup .
-			'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
-			'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.
-			$Language->getText('forum_forum','changeview').'">
-		</TD></TR>
-	</TABLE></FORM>
-	<P>';
+	<table border="0" width="33%">
+	<form action="'. $PHP_SELF .'" method="get">
+	<input type="hidden" name="set" value="custom" />
+	<input type="hidden" name="forum_id" value="'.$forum_id.'" . />
+		<tr><td><span style="font-size:-1">'. $options_popup .
+			'</span></td><td><span style="font-size:-1">'. $max_row_popup .
+			'</span></td><td><span style="font-size:-1"><input type="submit" name="submit" value="'.
+			$Language->getText('forum_forum','changeview').'" />
+		</span></td></tr>
+	</table></form>
+	<p>&nbsp;</p>';
 
 	if ($style=='nested') {
 
@@ -171,12 +171,12 @@ if ($forum_id) {
 				New slashdot-inspired nested threads,
 				showing all submessages and bodies
 			*/
-			$ret_val .= $fh->showNestedMessage ( $msg_arr["0"][$i] ).'<BR>';
+			$ret_val .= $fh->showNestedMessage ( $msg_arr["0"][$i] ).'<br />';
 				
 			if ( $msg_arr["0"][$i]->hasFollowups() ) {
 				//show submessages for this message
 				$tempid=$msg_arr["0"][$i]->getID();
-//				echo "<P>before showNestedMessages() $tempid | ". count( $msg_arr["$tempid"] );
+//				echo "<p>before showNestedMessages() $tempid | ". count( $msg_arr["$tempid"] );
 				$ret_val .= $fh->showNestedMessages ( $msg_arr, $tempid );
 			}
 			$i++;
@@ -206,16 +206,16 @@ if ($forum_id) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
 
-			$ret_val .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
-				<TD><A HREF="/forum/message.php?msg_id='.$msg->getID().'">'.
-				html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
+			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+				<td><a href="/forum/message.php?msg_id='.$msg->getID().'">'.
+				html_image('ic/msg.png',"10","12",array("border"=>"0"));
 			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
 			*/
 			if ($f->getSavedDate() < $msg->getPostDate()) {
-				$bold_begin='<B>';
-				$bold_end='</B>';
+				$bold_begin='<strong>';
+				$bold_end='</strong>';
 			} else {
 				$bold_begin='';
 				$bold_end='';
@@ -223,9 +223,9 @@ if ($forum_id) {
 			/*	  
 				show the subject and poster
 			*/
-			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</A></TD>'.
-				'<TD>'. $msg->getPosterRealName() .'</TD>'.
-				'<TD>'. date($sys_datefmt,$msg->getPostDate()) .'</TD></TR>';
+			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
+				'<td>'. $msg->getPosterRealName() .'</td>'.
+				'<td>'. date($sys_datefmt,$msg->getPostDate()) .'</td></tr>';
 				 
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
@@ -244,7 +244,7 @@ if ($forum_id) {
 		$avail_rows=$fmf->fetched_rows;
 
 		for ($i=0; ($i<count($msg_arr) && ($i < $max_rows)); $i++) {
-			$ret_val .= $fh->showNestedMessage ( $msg_arr[$i] ).'<BR>';
+			$ret_val .= $fh->showNestedMessage ( $msg_arr[$i] ).'<br />';
 		}
 
 	} else {
@@ -278,16 +278,16 @@ if ($forum_id) {
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/forum/forum.php?thread_id='.
-				$row['thread_id'].'&forum_id='.$forum_id.'">'.
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/forum/forum.php?thread_id='.
+				$row['thread_id'].'&amp;forum_id='.$forum_id.'">'.
 				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*	  
 					See if this message is new or not
 					If so, highlite it in bold
 			*/
 			if ($f->getSavedDate() < $row['recent']) {
-				$bold_begin='<B>';
-				$bold_end='</B>';
+				$bold_begin='<strong>';
+				$bold_end='</strong>';
 			} else {
 				$bold_begin='';
 				$bold_end='';
@@ -295,10 +295,10 @@ if ($forum_id) {
 			/* 
 					show the subject and poster
 			*/
-			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</A></TD>'.
-				'<TD>'. $row['user_name'] .'</TD>'.
-				'<TD>'. $row['followups'] .'</TD>'.
-				'<TD>'.date($sys_datefmt,$row['recent']).'</TD></TR>';
+			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
+				'<td>'. $row['user_name'] .'</td>'.
+				'<td>'. $row['followups'] .'</td>'.
+				'<td>'.date($sys_datefmt,$row['recent']).'</td></tr>';
 			$i++;
 		}
 
@@ -309,38 +309,38 @@ if ($forum_id) {
 	/*
 		This code puts the nice next/prev.
 	*/
-	$ret_val .= '<TABLE WIDTH="100%" BORDER="0">
-		<TR BGCOLOR="#EEEEEE"><TD WIDTH="50%">';
+	$ret_val .= '<table width="100%" border="0">
+		<tr bgcolor="#eeeeee"><td width="50%">';
 	if ($offset != 0) {
-		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
-		<A HREF="javascript:history.back()"><B>' .
-		html_image('t2.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
+		<a href="javascript:history.back()"><strong>' .
+		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</a></strong></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
 
-	$ret_val .= '</TD><TD>&nbsp;</TD><TD ALIGN="RIGHT" WIDTH="50%">';
+	$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
 
 	if ($avail_rows > $max_rows) {
-		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
-		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
-		<B>Next Messages ' .
-		html_image('t.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
+		<a href="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
+		<strong>Next Messages ' .
+		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
 
-	$ret_val .= '</TABLE>';
+	$ret_val .= '</table>';
 
 	echo $ret_val;
 /*
-	echo '<P>&nbsp;<P>';
+	echo '<p>&nbsp;<p>';
 
 	if (!$thread_id) {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
+		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</h3></CENTER>';
 		$fh->showPostForm();
 	}
 */

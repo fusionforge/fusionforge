@@ -56,7 +56,7 @@ if ($forum_id && $group_id) {
 		} else {
 			forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
 				'sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
-			echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
+			echo '<div align="center"><h3>'.$Language->getText('forum_message', 'thread').'</h3></div>';
 			$fh->showPostForm();
 			forum_footer(array());
 		}

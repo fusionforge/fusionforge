@@ -29,19 +29,19 @@ function admin_table_add($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 	       
 		echo 'Create a new '.$unit.' below:
-			<FORM NAME="add" ACTION="'.$PHP_SELF.'?function=postadd" METHOD="POST">
-			<TABLE>';
+			<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
+			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
 			$fieldname = db_fieldname($result, $i);
 
-			echo '<TR><TD><B>'.$fieldname.'</B></TD>';
-			echo '<TD><INPUT TYPE="text" NAME="'.$fieldname.'" VALUE=""></TD></TR>';
+			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
+			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
 		}
-		echo '</TABLE><INPUT TYPE="submit" VALUE="Submit New '.ucwords($unit).'"></FORM>
-			<FORM NAME="cancel" ACTION="'.$PHP_SELF.'" method="POST">
-			<INPUT TYPE="submit" VALUE="Cancel">
-			</FORM>';
+		echo '</table><input type="submit" value="Submit New '.ucwords($unit).'" /></form>
+			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<input type="submit" value="Cancel" />
+			</form>';
 	} else {
 		echo db_error();
 	}
@@ -87,17 +87,17 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		$cols = db_numfields($result);
 
 		echo 'Are you sure you want to delete this '.$unit.'?
-			<UL>';
+			<ul>';
 		for ($i = 0; $i < $cols; $i++) {
-			echo '<LI><B>'.db_fieldname($result,$i).'</B> '.db_result($result,0,$i).'</LI>';
+			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
-		echo '</UL>
-			<FORM NAME="delete" ACTION="'.$PHP_SELF.'?function=delete&id='.$id.'" method="POST">
-			<INPUT TYPE="submit" VALUE="Delete">
-			</FORM>
-			<FORM NAME="cancel" ACTION="'.$PHP_SELF.'" method="POST">
-			<INPUT TYPE="submit" VALUE="Cancel">
-			</FORM>';
+		echo '</ul>
+			<form name="delete" action="'.$PHP_SELF.'?function=delete&id='.$id.'" method="post">
+			<input type="submit" value="Delete" />
+			</form>
+			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<input type="submit" value="Cancel" />
+			</form>';
 	} else {
 		echo db_error();
 	}
@@ -136,25 +136,25 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 		$cols = db_numfields($result);
 	       
 		echo 'Modify the '.$unit.' below:
-			<FORM NAME="edit" ACTION="'.$PHP_SELF.'?function=postedit&id='.$id.'" METHOD="POST">
-			<TABLE>';
+			<form name="edit" action="'.$PHP_SELF.'?function=postedit&id='.$id.'" method="post">
+			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
 			$fieldname = db_fieldname($result, $i);
 			$value = db_result($result, 0, $i);
 
-			echo '<TR><TD><B>'.$fieldname.'</B></TD>';
+			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
 			
 			if ($fieldname == $primary_key) {
-				echo "<TD>$value</TD></TR>";
+				echo "<td>$value</td></tr>";
 			} else {
-				echo '<TD><INPUT TYPE="text" NAME="'.$fieldname.'" VALUE="'.$value.'"></TD></TR>';
+				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'" /></td></tr>';
 			}
 		}
-		echo '</TABLE><INPUT TYPE="submit" VALUE="Submit Changes"></FORM>
-			<FORM NAME="cancel" ACTION="'.$PHP_SELF.'" method="POST">
-			<INPUT TYPE="submit" VALUE="Cancel">
-			</FORM>';
+		echo '</table><input type="submit" value="Submit Changes" /></form>
+			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<input type="submit" value="Cancel" />
+			</form>';
 	} else {
 		echo db_error();
 	}
@@ -197,7 +197,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit) {
         global $HTML, $PHP_SELF;
 
-	//CB// echo "<H1>SELECT * FROM $table $whereclause</H1>";
+	//CB// echo "<h1>SELECT * FROM $table $whereclause</h1>";
         $result = db_query("SELECT $columns FROM $table $whereclause;");
 
 	if ($result) {
@@ -205,32 +205,32 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 		$cols = db_numfields($result);
 		if (! $edit) $cols .=-1;
 
-                echo '<TABLE BORDER="0" WIDTH="100%">
-		<TR BGCOLOR="'.$HTML->COLOR_HTMLBOX_TITLE.'">
-		<TD COLSPAN="'.($cols+1).'"><B><FONT COLOR="'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</FONT></B>';
-		if ($edit) echo '<A HREF="'.$PHP_SELF.'?function=add">[add new]</A>';
-		echo '</TD></TR>';
+                echo '<table border="0" width="100%">
+		<tr bgcolor="'.$HTML->COLOR_HTMLBOX_TITLE.'">
+		<td colspan="'.($cols+1).'"><strong><span style="color:'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</span></strong>';
+		if ($edit) echo '<a href="'.$PHP_SELF.'?function=add">[add new]</a>';
+		echo '</td></tr>';
 
 		if ($edit) echo '
-			<TR><TD WIDTH="5%"></TD>';
+			<tr><td width="5%"></td>';
 
                 for ($i = 0; $i < $cols; $i++) {
-			echo '<TD><B>'.db_fieldname($result,$i).'</B></TD>';
+			echo '<td><strong>'.db_fieldname($result,$i).'</strong></td>';
 		}
-		echo '</TR>';
+		echo '</tr>';
 
                 for ($j = 0; $j < $rows; $j++) {
-			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '">';
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '">';
 
                         $id = db_result($result,$j,0);
-                        if ($edit) echo '<TD><A HREF="'.$PHP_SELF.'?function=edit&id='.$id.'">[edit]</A>';
-                        if ($edit) echo '<A HREF="'.$PHP_SELF.'?function=confirmdelete&id='.$id.'">[delete]</A> </TD>';
+                        if ($edit) echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">[edit]</a>';
+                        if ($edit) echo '<a href="'.$PHP_SELF.'?function=confirmdelete&amp;id='.$id.'">[delete]</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
-				echo '<TD>'. db_result($result, $j, $i) .'</TD>';
+				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}
-			echo '</TR>';
+			echo '</tr>';
 		}
-		echo '</TABLE>';
+		echo '</table>';
 	} else {
 		echo db_error();
 	}
@@ -242,9 +242,9 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $HTML->header(array('title'=>'Edit the '. $lang .' Language '. ucwords($unit) .'s'));
 
-echo '<H3>Edit the '. $lang .' Language ' . ucwords($unit) .'s</H3>
-<P><A HREF="/admin/">Site Admin Home</A>
-<P>';
+echo '<h3>Edit the '. $lang .' Language ' . ucwords($unit) .'s</h3>
+<p><a href="/admin/">Site Admin Home</a></p>
+<p>&nbsp;</p>';
 
 switch ($function) {
 	case 'add' : {

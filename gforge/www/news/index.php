@@ -40,34 +40,34 @@ if ($rows>$limit) {
 
 if ($rows < 1) {
 	if ($group_id) {
-		echo '<H2>'.$Language->getText('news', 'nonewsfor', group_getname($group_id)).'</H2>';
+		echo '<h2>'.$Language->getText('news', 'nonewsfor', group_getname($group_id)).'</h2>';
 	} else {
-		echo '<H2>'.$Language->getText('news', 'nonews').'</H2>';
+		echo '<h2>'.$Language->getText('news', 'nonews').'</h2>';
 	}
 	echo '
-		<P>' . $Language->getText('news', 'noitems');;
+		<p>' . $Language->getText('news', 'noitems') . '</p>';;
 	echo db_error();
 } else {
-	echo '<table WIDTH="100%" border=0>
-		<TR><TD VALIGN="TOP">'; 
+	echo '<table width="100%" border="0">
+		<tr><td valign="top">';
 
 	for ($j = 0; $j < $rows; $j++) { 
 		echo '
-		<A HREF="/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id').'">'.
-			html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
-			stripslashes(db_result($result, $j, 'summary')).'</A> ';
+		<a href="/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id').'">'.
+			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp;'.
+			stripslashes(db_result($result, $j, 'summary')).'</a> ';
 		echo '
-		<BR>';
+		<br />';
 	}
 
         if ($more) {
-        	echo '<br><a href="'
-                     .'?group_id='.$group_id.'&limit='.$limit
-                     .'&offset='. (string)($offset+$limit) .'">[Older headlines]</a>';
+        	echo '<br /><a href="'
+                     .'?group_id='.$group_id.'&amp;limit='.$limit
+                     .'&amp;offset='. (string)($offset+$limit) .'">[Older headlines]</a>';
         }
 
         echo '
-	</TD></TR></TABLE>';
+	</td></tr></table>';
 }
 
 news_footer(array());

@@ -69,7 +69,7 @@ function menu_show_search_box() {
 	} else if ($group_id && $forum_id) {
 		print "\tThis Forum<input type=\"radio\" name=\"type_of_search\" value=\"forums\"".( $type_of_search == "forums" ? ' checked="checked"' : "" )." />&nbsp;&nbsp;&nbsp;&nbsp;<br />\n";
 	}
-//	print "\tRequire All Words<input type=\"checkbox\" name=\"exact\" value=\"1\"".( $exact ? " checked" : " unchecked" ).">&nbsp;&nbsp;&nbsp;&nbsp;<br>\n";
+//	print "\tRequire All Words<input type=\"checkbox\" name=\"exact\" value=\"1\"".( $exact ? " checked" : " unchecked" ).">&nbsp;&nbsp;&nbsp;&nbsp;<br />\n";
 
 	if ( isset($forum_id) ) {
 		print "\t<input type=\"hidden\" value=\"$forum_id\" name=\"forum_id\" />\n";

@@ -33,10 +33,10 @@ else {
 
 $HTML->header(array('title'=>$title));
 
-print '<P><B><FONT size="+1">'.$title.'</FONT></B>
-<BR><I>(Updated Daily)</I>
+print '<p><strong><FONT size="+1">'.$title.'</FONT></strong>
+<br /><em>(Updated Daily)</em>
 
-<P><A href="/top/">[View Other Top Categories]</A>
+<p><a href="/top/">[View Other Top Categories]</a>
 ';
 
 $arr=array('Rank','Project Name',"$column1",'Last Rank','Change');
@@ -54,13 +54,13 @@ echo db_error();
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top["rank_$rankfield"]
-		.'</TD><TD><A href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
-		.stripslashes($row_top['group_name'])."</A>"
-		.'</TD><TD align="right">'.$row_top["$rankfield"]
-		.'&nbsp;&nbsp;&nbsp;</TD><TD align="right">'.$row_top["rank_$rankfield"."_old"]
-		.'&nbsp;&nbsp;&nbsp;</TD>'
-		.'<TD align="right">';
+	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top["rank_$rankfield"]
+		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
+		.stripslashes($row_top['group_name'])."</a>"
+		.'</td><td align="right">'.$row_top["$rankfield"]
+		.'&nbsp;&nbsp;&nbsp;</td><td align="right">'.$row_top["rank_$rankfield"."_old"]
+		.'&nbsp;&nbsp;&nbsp;</td>'
+		.'<td align="right">';
 
 	// calculate change
 	$diff = $row_top["rank_$rankfield"."_old"] - $row_top["rank_$rankfield"];
@@ -77,7 +77,7 @@ while ($row_top = db_fetch_array($res_top)) {
 		print "<FONT color=\"#CC0000\">Down ".(0-$diff)."</FONT>";
 	}
 
-	print '&nbsp;&nbsp;&nbsp;</TD></TR>
+	print '&nbsp;&nbsp;&nbsp;</td></tr>
 ';
 }
 

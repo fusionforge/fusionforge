@@ -29,27 +29,27 @@ if (!$result || db_numrows($result) < 1) {
 
 	echo $HTML->boxTop('Notes');
 
-	echo '<h3>Release Name: <A HREF="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</A></H3>
-		<P>';
+	echo '<h3>Release Name: <a href="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
+		<p>';
 
 /*
 	Show preformatted or plain notes/changes
 */
 	if (db_result($result,0,'preformatted')) {
-		echo '<PRE><B>Notes:</B>
+		echo '<pre><strong>Notes:</strong>
 '.db_result($result,0,'notes').'
 
-<HR NOSHADE>
-<B>Changes:</B>
-'.db_result($result,0,'changes').'</PRE>';
+<hr noshade="noshade" />
+<strong>Changes:</strong>
+'.db_result($result,0,'changes').'</pre>';
 
 	} else {
-		echo '<B>Notes:</B>
+		echo '<strong>Notes:</strong>
 '.db_result($result,0,'notes').'
 
-<HR NOSHADE>
-<B>Changes:</B>
-'.db_result($result,0,'changes');
+<hr noshade="noshade" />
+<strong>Changes:</strong>
+'.db_result($result,0,'changes') . '</p>';
 
 	}
 

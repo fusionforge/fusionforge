@@ -209,7 +209,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> Connect() #1";
+					$this->logfile[] = "<strong>Error:</strong> Connect() #1";
 				}
 
 				return FALSE;
@@ -218,7 +218,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> Connect() #2";
+				$this->logfile[] = "<strong>Error:</strong> Connect() #2";
 			}
 
 			return FALSE;
@@ -266,7 +266,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendAuth() #1";
+				$this->logfile[] = "<strong>Error:</strong> SendAuth() #1";
 			}
 
 			return FALSE;
@@ -331,7 +331,7 @@ class Jabber
 		if ($this->CONNECTOR->WriteToSocket($this->connection, $xml)) {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>SEND:</b> " . nl2br(htmlspecialchars($xml));
+				$this->logfile[] = "<strong>SEND:</strong> " . nl2br(htmlspecialchars($xml));
 			}
 
 			return TRUE;
@@ -339,7 +339,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendPacket() #1";
+				$this->logfile[] = "<strong>Error:</strong> SendPacket() #1";
 			}
 
 			return FALSE;
@@ -359,7 +359,7 @@ class Jabber
 		$incoming = trim($incoming);
 
 		if ($this->enable_logging && $incoming != "") {
-			$this->logfile[] = "<b>RECV:</b> " . nl2br(htmlspecialchars($incoming));
+			$this->logfile[] = "<strong>RECV:</strong> " . nl2br(htmlspecialchars($incoming));
 		}
 
 		if ($incoming != "") {
@@ -412,7 +412,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> SendMessage() #1";
+					$this->logfile[] = "<strong>Error:</strong> SendMessage() #1";
 				}
 
 				return FALSE;
@@ -421,7 +421,7 @@ class Jabber
 		} else {
 		
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendMessage() #2";
+				$this->logfile[] = "<strong>Error:</strong> SendMessage() #2";
 			}
 
 			return FALSE;
@@ -450,7 +450,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendPresence() #1";
+				$this->logfile[] = "<strong>Error:</strong> SendPresence() #1";
 			}
 
 			return FALSE;
@@ -504,7 +504,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> RosterUpdate() #1";
+					$this->logfile[] = "<strong>Error:</strong> RosterUpdate() #1";
 				}
 
 				return FALSE;
@@ -513,7 +513,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> RosterUpdate() #2";
+				$this->logfile[] = "<strong>Error:</strong> RosterUpdate() #2";
 			}
 
 			return FALSE;
@@ -542,7 +542,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> RosterAddUser() #2";
+					$this->logfile[] = "<strong>Error:</strong> RosterAddUser() #2";
 				}
 
 				return FALSE;
@@ -551,7 +551,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> RosterAddUser() #1";
+				$this->logfile[] = "<strong>Error:</strong> RosterAddUser() #1";
 			}
 
 			return FALSE;
@@ -574,7 +574,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> RosterRemoveUser() #2";
+					$this->logfile[] = "<strong>Error:</strong> RosterRemoveUser() #2";
 				}
 
 				return FALSE;
@@ -583,7 +583,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> RosterRemoveUser() #1";
+				$this->logfile[] = "<strong>Error:</strong> RosterRemoveUser() #1";
 			}
 
 			return FALSE;
@@ -663,7 +663,7 @@ class Jabber
 			} elseif ($this->enable_logging) {
 
 				$this->Handler_NOT_IMPLEMENTED($packet);
-				$this->logfile[] = "<b>Error:</b> CallHandler() #1 - neither method nor function $funcmeth() available";
+				$this->logfile[] = "<strong>Error:</strong> CallHandler() #1 - neither method nor function $funcmeth() available";
 
 			}
 		}
@@ -726,7 +726,7 @@ class Jabber
 			unset($type);
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendIq() #2 - type must be 'get', 'set', 'result' or 'error'";
+				$this->logfile[] = "<strong>Error:</strong> SendIq() #2 - type must be 'get', 'set', 'result' or 'error'";
 			}
 			
 			return FALSE;
@@ -750,7 +750,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> SendIq() #1 - to, id and xmlns are mandatory";
+				$this->logfile[] = "<strong>Error:</strong> SendIq() #1 - to, id and xmlns are mandatory";
 			}
 
 			return FALSE;
@@ -776,7 +776,7 @@ class Jabber
 		$incoming = trim($incoming);
 
 		if ($this->enable_logging && $incoming != "") {
-			$this->logfile[] = "<b>RECV:</b> " . nl2br(htmlspecialchars($incoming));
+			$this->logfile[] = "<strong>RECV:</strong> " . nl2br(htmlspecialchars($incoming));
 		}
 
 		return $this->xmlize($incoming);
@@ -802,7 +802,7 @@ class Jabber
 			} else {
 
 				if ($this->enable_logging) {
-					$this->logfile[] = "<b>Error:</b> _check_connected() #1";
+					$this->logfile[] = "<strong>Error:</strong> _check_connected() #1";
 				}
 
 				return FALSE;
@@ -811,7 +811,7 @@ class Jabber
 		} else {
 
 			if ($this->enable_logging) {
-				$this->logfile[] = "<b>Error:</b> _check_connected() #2";
+				$this->logfile[] = "<strong>Error:</strong> _check_connected() #2";
 			}
 
 			return FALSE;
@@ -1006,7 +1006,7 @@ class Jabber
 	function Handler_message_normal($packet)
 	{
 		$from = $packet["message"]["@"]["from"];
-		$this->logfile[] = "<b>message</b> (type normal) from $from";
+		$this->logfile[] = "<strong>message</strong> (type normal) from $from";
 	}
 
 
@@ -1014,7 +1014,7 @@ class Jabber
 	function Handler_message_chat($packet)
 	{
 		$from = $packet["message"]["@"]["from"];
-		$this->logfile[] = "<b>message</b> (type chat) from $from";
+		$this->logfile[] = "<strong>message</strong> (type chat) from $from";
 	}
 
 
@@ -1022,7 +1022,7 @@ class Jabber
 	function Handler_message_groupchat($packet)
 	{
 		$from = $packet["message"]["@"]["from"];
-		$this->logfile[] = "<b>message</b> (type groupchat) from $from";
+		$this->logfile[] = "<strong>message</strong> (type groupchat) from $from";
 	}
 
 
@@ -1030,7 +1030,7 @@ class Jabber
 	function Handler_message_headline($packet)
 	{
 		$from = $packet["message"]["@"]["from"];
-		$this->logfile[] = "<b>message</b> (type headline) from $from";
+		$this->logfile[] = "<strong>message</strong> (type headline) from $from";
 	}
 
 
@@ -1038,7 +1038,7 @@ class Jabber
 	function Handler_message_error($packet)
 	{
 		$from = $packet["message"]["@"]["from"];
-		$this->logfile[] = "<b>message</b> (type error) from $from";
+		$this->logfile[] = "<strong>message</strong> (type error) from $from";
 	}
 
 
@@ -1056,7 +1056,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:autoupdate</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:autoupdate</strong> from $from";
 	}
 
 
@@ -1068,7 +1068,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:agent</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:agent</strong> from $from";
 	}
 
 
@@ -1080,7 +1080,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:agents</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:agents</strong> from $from";
 	}
 
 
@@ -1092,7 +1092,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:auth</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:auth</strong> from $from";
 	}
 
 
@@ -1104,7 +1104,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:oob</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:oob</strong> from $from";
 	}
 
 
@@ -1116,7 +1116,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:private</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:private</strong> from $from";
 	}
 
 
@@ -1128,7 +1128,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:register</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:register</strong> from $from";
 	}
 
 
@@ -1140,7 +1140,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:roster</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:roster</strong> from $from";
 	}
 
 
@@ -1152,7 +1152,7 @@ class Jabber
 		$id		= $this->GetInfoFromIqId($packet);
 		
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>jabber:iq:search</b> from $from";
+		$this->logfile[] = "<strong>jabber:iq:search</strong> from $from";
 	}
 
 
@@ -1174,7 +1174,7 @@ class Jabber
 			$this->SendIq($from, "result", $id, "jabber:iq:time", $payload);
 		}
 
-		$this->logfile[] = "<b>jabber:iq:time</b> (type $type) from $from";
+		$this->logfile[] = "<strong>jabber:iq:time</strong> (type $type) from $from";
 	}
 
 
@@ -1196,7 +1196,7 @@ class Jabber
 			$this->SendIq($from, "result", $id, "jabber:iq:version", $payload);
 		}
 
-		$this->logfile[] = "<b>jabber:iq:version</b> (type $type) from $from";
+		$this->logfile[] = "<strong>jabber:iq:version</strong> (type $type) from $from";
 	}
 
 
@@ -1214,7 +1214,7 @@ class Jabber
 		$show_status = $this->GetInfoFromPresenceStatus($packet) . " / " . $this->GetInfoFromPresenceShow($packet);
 		$show_status = ($show_status != " / ") ? " ($addendum)" : "";
 
-		$this->logfile[] = "<b>Presence:</b> (type: available) - $from is available $show_status";
+		$this->logfile[] = "<strong>Presence:</strong> (type: available) - $from is available $show_status";
 	}
 
 
@@ -1226,7 +1226,7 @@ class Jabber
 		$show_status = $this->GetInfoFromPresenceStatus($packet) . " / " . $this->GetInfoFromPresenceShow($packet);
 		$show_status = ($show_status != " / ") ? " ($addendum)" : "";
 
-		$this->logfile[] = "<b>Presence:</b> (type: unavailable) - $from is unavailable $show_status";
+		$this->logfile[] = "<strong>Presence:</strong> (type: unavailable) - $from is unavailable $show_status";
 	}
 
 
@@ -1237,7 +1237,7 @@ class Jabber
 		$this->subscription_queue[] = $from;
 		$this->RosterUpdate();
 
-		$this->logfile[] = "<b>Presence:</b> (type: subscribe) - Subscription request from $from, was added to \$this->subscription_queue, roster updated";
+		$this->logfile[] = "<strong>Presence:</strong> (type: subscribe) - Subscription request from $from, was added to \$this->subscription_queue, roster updated";
 	}
 
 
@@ -1247,7 +1247,7 @@ class Jabber
 		$from = $this->GetInfoFromPresenceFrom($packet);
 		$this->RosterUpdate();
 
-		$this->logfile[] = "<b>Presence:</b> (type: subscribed) - Subscription allowed by $from, roster updated";
+		$this->logfile[] = "<strong>Presence:</strong> (type: subscribed) - Subscription allowed by $from, roster updated";
 	}
 
 
@@ -1258,7 +1258,7 @@ class Jabber
 		$this->SendPresence("unsubscribed", $from);
 		$this->RosterUpdate();
 
-		$this->logfile[] = "<b>Presence:</b> (type: unsubscribe) - Request to unsubscribe from $from, was automatically approved, roster updated";
+		$this->logfile[] = "<strong>Presence:</strong> (type: unsubscribe) - Request to unsubscribe from $from, was automatically approved, roster updated";
 	}
 
 
@@ -1268,7 +1268,7 @@ class Jabber
 		$from = $this->GetInfoFromPresenceFrom($packet);
 		$this->RosterUpdate();
 
-		$this->logfile[] = "<b>Presence:</b> (type: unsubscribed) - Unsubscribed from $from's presence";
+		$this->logfile[] = "<strong>Presence:</strong> (type: unsubscribed) - Unsubscribed from $from's presence";
 	}
 
 
@@ -1287,7 +1287,7 @@ class Jabber
 		$id				= call_user_func(array(&$this, "GetInfoFrom" . ucfirst($packet_type) . "Id"), $packet);
 
 		$this->SendError($from, $id, 501);
-		$this->logfile[] = "<b>Unrecognized &lt;$packet_type/&gt;</b> from $from";
+		$this->logfile[] = "<strong>Unrecognized &lt;$packet_type/&gt;</strong> from $from";
 	}
 
 

@@ -19,11 +19,11 @@ $res=db_query("SELECT id,bin_data FROM db_images ORDER BY id ASC",50,$offset);
 
 $rows=db_numrows($res);
 
-echo "<BR>affect users: $rows<BR>";
+echo "<br />affect users: $rows<br />";
 
 for ($i=0; $i<$rows; $i++) {
 
-	echo "<BR>fixing: ".db_result($res,$i,'id');
+	echo "<br />fixing: ".db_result($res,$i,'id');
 
 	$data=addslashes(base64_encode(db_result($res,$i,'bin_data')));
 	$res2=db_query("UPDATE db_images SET bin_data='$data' WHERE id='". db_result($res,$i,'id') ."'");

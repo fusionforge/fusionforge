@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.5 2003/01/03 22:34:18 bigdisk Exp
+  * @version   index.php,v 1.6 2003/01/10 14:44:28 bigdisk Exp
   *
   */
 
@@ -47,9 +47,9 @@ function reporting_header($group_id) {
 		$group_id,
 		array('aging','tech','category','group','resolution'),
 		array('Aging Report','Distribution by Technician','Distribution by Category','Distribution by Group','Distribution by Resolution'),
-		'<b>Artifact Type: </b>'
+		'<strong>Artifact Type: </strong>'
 		 .html_build_select_box($res,'atid',$atid,false)
-		 .'<br><br>'
+		 .'<br /><br />'
 	);
 }
 
@@ -59,7 +59,7 @@ function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
 	$group_name=array(group_getname($group_id));
 	echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
 	reporting_header($group_id);
-	echo "\n<H1>$title</H1>";
+	echo "\n<h1>$title</h1>";
 
 	reports_quick_graph($subtitle1,$sql1,$sql2,$bar_colors);
 
@@ -80,10 +80,10 @@ if ($perm->isMember()) {
 			$group_name=array(group_getname($group_id));
 			site_project_header(array ("title"=>"Aging Report",'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
 			reporting_header($group_id);
-			echo "\n<H1>Aging Report</H1>";
+			echo "\n<h1>Aging Report</h1>";
 
 			$time_now=time();
-//			echo $time_now."<P>";
+//			echo $time_now."<p>";
 
 			if (!$period || $period=="lifespan") {
 				$period="month";
@@ -116,7 +116,7 @@ if ($perm->isMember()) {
 				"Average Turnaround Time For Closed Items (days)"
 			);
 
-			echo "<P>";
+			echo "<p>&nbsp;</p>";
 
 			for ($counter=1; $counter<=$span; $counter++) {
 
@@ -138,7 +138,7 @@ if ($perm->isMember()) {
 
 			GraphIt($names, $values, "Number of Items Submitted");
 
-			echo "<P>";
+			echo "<p>";
 
 			for ($counter=1; $counter<=$span; $counter++) {
 
@@ -160,7 +160,7 @@ if ($perm->isMember()) {
 
 			GraphIt($names, $values, "Number of Items Still Open");
 
-			echo "<P>";
+			echo "<p>&nbsp;</p>";
 
 			site_project_footer(array());
 

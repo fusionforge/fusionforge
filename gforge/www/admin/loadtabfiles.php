@@ -43,7 +43,7 @@ if ($loadall) {
 				$tmpid++;
 				$res=db_query($query);
 				if (!$res){
-					echo '<BR>'.$query.'<BR>'. db_error();
+					echo '<br />'.$query.'<br />'. db_error();
 				}
 			}
 		}
@@ -56,8 +56,8 @@ site_admin_header(array('title'=>"Site Admin"));
 
 <form name="mload" method="post" action="<?php echo $PHP_SELF; ?>">
 
-<input type="submit" name="loadall" value="<? echo "(Re)Load all language files"; ?>">
-<input type="submit" name="purgeall" value="<? echo "Purge loaded data"; ?>">
+<input type="submit" name="loadall" value="<? echo "(Re)Load all language files"; ?>" />
+<input type="submit" name="purgeall" value="<? echo "Purge loaded data"; ?>" />
 
 </form>
 
@@ -67,9 +67,9 @@ site_admin_header(array('title'=>"Site Admin"));
 $result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
 if (db_numrows($result)>0) {
 ?>
-	<H3 color=red>Tables loaded:</H3>
+	<h3 style="color:red">Tables loaded:</h3>
 <?
-	echo "<TABLE border=0>";
+	echo "<table border="0">";
 	$maxtrans=0;
 	for ($i=0; $i<db_numrows($result) ; $i++) {
 		$howmany=db_result($result, $i, 'count');
@@ -79,24 +79,24 @@ if (db_numrows($result)>0) {
 		$howmany=db_result($result,$i,'count');
 		$rate=$howmany * 100 / $maxtrans;
 		$language_id=db_result($result,$i,'language_id');
-		echo "\n<TR><TD>$language_id</TD>";
-		printf("<TD>(%d)</TD><TD>[%3.2f",$howmany,$rate);
-		echo "%]</TD>"
+		echo "\n<tr><td>$language_id</td>";
+		printf("<td>(%d)</td><td>[%3.2f",$howmany,$rate);
+		echo "%]</td>"
 ?>
-<TD><A HREF=/admin/seetabfiles.php?lang=<? echo "$language_id"; ?>>[see translations]</A>
-</TD>
-<TD><A HREF=/admin/notranstabfiles.php?lang=<? echo "$language_id"; ?>>[see untranslated]</A>
-</TD>
-<TD><A HREF=/admin/edittabfiles.php?lang=<? echo "$language_id"; ?>>[edit(don t work)]</A>
-</TD>
+<td><a href=/admin/seetabfiles.php?lang=<? echo "$language_id"; ?>>[see translations]</a>
+</td>
+<td><a href=/admin/notranstabfiles.php?lang=<? echo "$language_id"; ?>>[see untranslated]</a>
+</td>
+<td><a href=/admin/edittabfiles.php?lang=<? echo "$language_id"; ?>>[edit(don t work)]</a>
+</td>
 <?
-		echo "</TR>";
+		echo "</tr>";
 	}
-	echo "\n</TABLE>";
+	echo "\n</table>";
 } else {
 ?>
-	<H3 color=red>Available Tables:</H3>
-		<TABLE border=0>
+	<h3 style="color:red">Available Tables:</h3>
+		<table border="0">
 <?
 	$rep= $sys_urlroot . 'include/languages/';
 	//chdir($rep);
@@ -104,11 +104,11 @@ if (db_numrows($result)>0) {
 	while($file = readdir($dir)) {
 		if(ereg("(.*)\.tab$",$file,$regs)){
 			$language_id=$regs[1];
-			echo "\n<TR><TD>$language_id</TD>";
-			echo "<TR>";
+			echo "\n<tr><td>$language_id</td>";
+			echo "<tr>";
 		}
 	}
-	echo "\n</TABLE>";
+	echo "\n</table></p>";
 }
 
 site_admin_footer(array());

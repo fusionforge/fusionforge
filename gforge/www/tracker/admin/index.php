@@ -11,6 +11,7 @@ require_once('common/tracker/Artifact.class');
 require_once('common/tracker/ArtifactFile.class');
 require_once('www/tracker/include/ArtifactFileHtml.class');
 require_once('common/tracker/ArtifactType.class');
+require_once('common/tracker/ArtifactTypeFactory.class');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/tracker/include/ArtifactHtml.class');
 require_once('common/tracker/ArtifactGroup.class');
@@ -243,13 +244,13 @@ if ($group_id && $atid) {
 //
 		$ath->adminHeader(array ('title'=>'Add Categories to: '.$ath->getName()));
 
-		echo "<H1>Add Categories to: ". $ath->getName() ."</H1>";
+		echo "<h1>Add Categories to: ". $ath->getName() ."</h1>";
 
 		/*
 			List of possible categories for this ArtifactType
 		*/
 		$result=$ath->getCategories();
-		echo "<P>";
+		echo "<p>&nbsp;</p>";
 		$rows=db_numrows($result);
 		if ($result && $rows > 0) {
 			$title_arr=array();
@@ -259,32 +260,32 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<TD>'.db_result($result, $i, 'id').'</TD>'.
-					'<TD><A HREF="'.$PHP_SELF.'?update_cat=1&id='.
-						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
-						db_result($result, $i, 'category_name').'</A></TD></TR>';
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+					'<td>'.db_result($result, $i, 'id').'</td>'.
+					'<td><a href="'.$PHP_SELF.'?update_cat=1&amp;id='.
+						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						db_result($result, $i, 'category_name').'</a></td></tr>';
 			}		   
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo "\n<H1>No categories defined</H1>";
+			echo "\n<h1>No categories defined</h1>";
 		}
 		?>
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="add_cat" VALUE="y">
-		<B>New Category Name:</B><BR>
-		<INPUT TYPE="TEXT" NAME="name" VALUE="" SIZE="15" MAXLENGTH="30"><BR>
-		<P>
-		<B>Auto-Assign To:</B><BR>
-		<?php echo $ath->technicianBox('assign_to'); ?>
-		<P>
-		<B><FONT COLOR="RED">Once you add a category, it cannot be deleted</FONT></B>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-		</FORM>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_cat" value="y" />
+		<strong>New Category Name:</strong><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong>Auto-Assign To:</strong><br />
+		<?php echo $ath->technicianBox('assign_to'); ?></p>
+		<p>
+		<strong><span style="color:red">Once you add a category, it cannot be deleted</span></strong></p>
+		<p>
+		<input type="submit" name="post_changes" value="SUBMIT" /></p>
+		</form></p>
 		<?php
 
 		$ath->footer(array());
@@ -299,7 +300,7 @@ if ($group_id && $atid) {
 			List of possible groups for this ArtifactType
 		*/
 		$result=$ath->getGroups();
-		echo "<P>";
+		echo "<p>";
 		$rows=db_numrows($result);
 		if ($result && $rows > 0) {
 			$title_arr=array();
@@ -309,29 +310,29 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<TD>'.db_result($result, $i, 'id').'</TD>'.
-					'<TD><A HREF="'.$PHP_SELF.'?update_group=1&id='.
-						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
-						db_result($result, $i, 'group_name').'</A></TD></TR>';
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+					'<td>'.db_result($result, $i, 'id').'</td>'.
+					'<td><a href="'.$PHP_SELF.'?update_group=1&amp;id='.
+						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						db_result($result, $i, 'group_name').'</a></td></tr>';
 			}		   
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo "\n<H1>No groups defined</H1>";
+			echo "\n<h1>No groups defined</h1>";
 		}
 		?>
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="add_group" VALUE="y">
-		<B>New group Name:</B><BR>
-		<INPUT TYPE="TEXT" NAME="name" VALUE="" SIZE="15" MAXLENGTH="30"><BR>
-		<P>
-		<B><FONT COLOR="RED">Once you add a group, it cannot be deleted</FONT></B>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-		</FORM>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_group" value="y" />
+		<strong>New group Name:</strong><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><span style="color:red">Once you add a group, it cannot be deleted</span></strong></p>
+		<p>
+		<input type="submit" name="post_changes" value="SUBMIT" /></p>
+		</form></p>
 		<?php
 
 		$ath->footer(array());
@@ -342,20 +343,20 @@ if ($group_id && $atid) {
 //
 		$ath->adminHeader(array ('title'=>'Add/Change Canned Responses to: '.$ath->getName()));
 
-		echo "<H1>Add Canned Responses to: ". $ath->getName() ."</H1>";
+		echo "<h1>Add Canned Responses to: ". $ath->getName() ."</h1>";
 
 		/*
 			List of existing canned responses
 		*/
 		$result=$ath->getCannedResponses();
 		$rows=db_numrows($result);
-		echo "<P>";
+		echo "<p>&nbsp;</p>";
 
 		if ($result && $rows > 0) {
 			//code to show existing responses and link to update page
 			echo '
-			<H2>Existing Responses:</H2>
-			<P>';
+			<h2>Existing Responses:</h2>
+			<p>&nbsp;</p>';
 			$title_arr=array();
 			$title_arr[]='ID';
 			$title_arr[]='Title';
@@ -363,33 +364,32 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<TD>'.db_result($result, $i, 'id').'</TD>'.
-					'<TD><A HREF="'.$PHP_SELF.'?update_canned=1&id='.
-						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
-						db_result($result, $i, 'title').'</A></TD></TR>';
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+					'<td>'.db_result($result, $i, 'id').'</td>'.
+					'<td><a href="'.$PHP_SELF.'?update_canned=1&amp;id='.
+						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						db_result($result, $i, 'title').'</a></td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo "\n<H1>No responses set up in this group</H1>";
+			echo "\n<h1>No responses set up in this group</h1>";
 		}
 		?>
-		<P>
-		Creating useful generic messages can save you a lot of time when 
-		handling common artifact requests.
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="add_canned" VALUE="y">
-		<b>Title:</b><BR>
-		<INPUT TYPE="TEXT" NAME="title" VALUE="" SIZE="50" MAXLENGTH="50">
-		<P>
-		<B>Message Body:</B><BR>
-		<TEXTAREA NAME="body" ROWS="30" COLS="65" WRAP="HARD"></TEXTAREA>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-		</FORM>
+		<p>Creating useful generic messages can save you a lot of time when
+		handling common artifact requests.</p>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_canned" value="y" />
+		<strong>Title:</strong><br />
+		<input type="text" name="title" value="" size="50" maxlength="50" />
+		<p>
+		<strong>Message Body:</strong><br />
+		<textarea name="body" rows="30" cols="65" wrap="hard"></textarea></p>
+		<p>
+		<input type="submit" name="post_changes" value="SUBMIT" /></p>
+		</form></p>
 		<?php
 
 		$ath->footer(array());
@@ -405,22 +405,21 @@ if ($group_id && $atid) {
 		$res=db_query($sql);
 
 		if (!$res || db_numrows($res) < 1) {
-			echo '<H2>No Developers Found</H2>';
+			echo '<h2>No Developers Found</h2>';
 		} else {
 			?>
-			<P>
-			Each tracker that you define has separate user lists and user permissions.
-			<P>
-			Simply add developers to this tracker, then update their permissions.
-			<P>
-			<dt><B>Technicians</B></dt>
+			<p>Each tracker that you define has separate user lists and user permissions.</p>
+
+			<p>Simply add developers to this tracker, then update their permissions.</p>
+			<p><dl>
+			<dt><strong>Technicians</strong></dt>
 			<dd>can be assigned items</dd>
 
-			<dt><B>Admins</B></dt>
+			<dt><strong>Admins</strong></dt>
 			<dd>can make changes to items</dd>
-
-			<FORM action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
-			<INPUT TYPE="HIDDEN" NAME="update_users" VALUE="y">
+			</dl></p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_users" value="y" />
 			<?php
 
 			$arr=array();
@@ -436,37 +435,36 @@ if ($group_id && $atid) {
 			//
 			while ($row_dev = db_fetch_array($res)) {
 				print '
-				<INPUT TYPE="HIDDEN" NAME="updateids['.$i.'][0]" VALUE="'.$row_dev['user_id'].'">
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<TD><INPUT TYPE="CHECKBOX" NAME="deleteids[]" VALUE="'.$row_dev['user_id'].'"> Delete</TD>
+				<input type="hidden" name="updateids['.$i.'][0]" value="'.$row_dev['user_id'].'" />
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td><input type="checkbox" name="deleteids[]" value="'.$row_dev['user_id'].'" /> Delete</td>
 
-				<TD>'.$row_dev['realname'].' ( '. $row_dev['user_name'] .' )</TD>
+				<td>'.$row_dev['realname'].' ( '. $row_dev['user_name'] .' )</td>
 
-				<TD><FONT size="-1"><SELECT name="updateids['.$i.'][1]">
-				<OPTION value="0"'.(($row_dev['perm_level']==0)?" selected":"").'>-
-				<OPTION value="1"'.(($row_dev['perm_level']==1)?" selected":"").'>Technician
-				<OPTION value="2"'.(($row_dev['perm_level']==2)?" selected":"").'>Tech & Admin
-				<OPTION value="3"'.(($row_dev['perm_level']==3)?" selected":"").'>Admin Only
-				</SELECT></FONT></TD>
+				<td><span style="font-size:smaller"><select name="updateids['.$i.'][1]">
+				<option value="0"'.(($row_dev['perm_level']==0)?" selected=\"selected\"":"").'>-</option>
+				<option value="1"'.(($row_dev['perm_level']==1)?" selected=\"selected\"":"").'>Technician</option>
+				<option value="2"'.(($row_dev['perm_level']==2)?" selected=\"selected\"":"").'>Tech & Admin</option>
+				<option value="3"'.(($row_dev['perm_level']==3)?" selected=\"selected\"":"").'>Admin Only</option>
+				</select></span></td>
 
-				</TR>';
+				</tr>';
 				$i++;
 			}
-			echo '<TR><TD COLSPAN=3 ALIGN=MIDDLE><INPUT type="submit" name="post_changes" value="Update Developer Permissions">
-			</FORM></TD></TR>';
+			echo '<tr><td colspan="3" align="center"><input type="submit" name="post_changes" value="Update Developer Permissions" />
+			</form></td></tr>';
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		}
 		?>
-		<P>
-		<h3>Add These Users:</H3>
-		<P>
-		You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".
-		<P>
-		<CENTER>
-		<FORM action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
-		<INPUT TYPE="HIDDEN" NAME="add_users" VALUE="y">
+		<p>&nbsp;</p>
+		<h3>Add These Users:</h3>
+
+		<p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
+		<div align="center">
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_users" value="y" />
 		<?php
 		$sql="SELECT u.user_id, u.realname 
 			FROM users u,user_group ug
@@ -479,10 +477,10 @@ if ($group_id && $atid) {
 		$res=db_query($sql);
 		echo db_error();
 		echo html_build_multiple_select_box ($res,'addids[]',array(),8,false);
-		echo '<P>
-		<INPUT type="submit" name="post_changes" value="Add Users">&nbsp;<INPUT type="checkbox" name="add_all"> Add All Users
-		</FORM>
-		</CENTER>';
+		echo '<p>
+		<input type="submit" name="post_changes" value="Add Users" />&nbsp;<input type="checkbox" name="add_all" /> Add All Users</p>
+		</form>
+		</div>';
 
 		$ath->footer(array());
 
@@ -492,7 +490,7 @@ if ($group_id && $atid) {
 //
 		$ath->adminHeader(array ('title'=>'Update Canned Responses in: '.$ath->getName()));
 
-		echo "<H1>Update Canned Responses ". $ath->getName() ."</H1>";
+		echo "<h1>Update Canned Responses ". $ath->getName() ."</h1>";
 
 		$acr = new ArtifactCanned($ath,$id);
 		if (!$acr || !is_object($acr)) {
@@ -501,21 +499,20 @@ if ($group_id && $atid) {
 			$feedback .= $acr->getErrorMessage();
 		} else {
 			?>
-			<P>
-			Creating useful generic messages can save you a lot of time when
-			handling common requests.
-			<P>
-			<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="update_canned" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?php echo $acr->getID(); ?>">
-			<b>Title:</b><BR>
-			<INPUT TYPE="TEXT" NAME="title" VALUE="<?php echo $acr->getTitle(); ?>" SIZE="50" MAXLENGTH="50">
-			<P>
-			<B>Message Body:</B><BR>
-			<TEXTAREA NAME="body" ROWS="30" COLS="65" WRAP="HARD"><?php echo $acr->getBody(); ?></TEXTAREA>
-			<P>
-			<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-			</FORM>
+			<p>Creating useful generic messages can save you a lot of time when
+			handling common requests.</p>
+			<p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_canned" value="y" />
+			<input type="hidden" name="id" value="<?php echo $acr->getID(); ?>" />
+			<strong>Title:</strong><br />
+			<input type="text" name="title" value="<?php echo $acr->getTitle(); ?>" size="50" maxlength="50" />
+			<p>
+			<strong>Message Body:</strong><br />
+			<textarea name="body" rows="30" cols="65" wrap="hard"><?php echo $acr->getBody(); ?></textarea></p>
+			<p>
+			<input type="submit" name="post_changes" value="SUBMIT" /></p>
+			</form></p>
 			<?php
 		}
 		$ath->footer(array());
@@ -530,7 +527,7 @@ if ($group_id && $atid) {
 		$ath->adminHeader(array('title'=>'Change an Category in: '.$ath->getName()));
 
 		echo '
-			<H1>Modify an Category in: '. $ath->getName() .'</H1>';
+			<h1>Modify an Category in: '. $ath->getName() .'</h1>';
 
 		$ac = new ArtifactCategory($ath,$id);
 		if (!$ac || !is_object($ac)) {
@@ -539,23 +536,23 @@ if ($group_id && $atid) {
 			$feedback .= $ac->getErrorMessage();
 		} else {
 			?>
-			<P>
-			<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="update_cat" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?php echo $ac->getID(); ?>">
-			<P>
-			<B>Category Name:</B><BR>
-			<INPUT TYPE="TEXT" NAME="name" VALUE="<?php echo $ac->getName(); ?>">
-			<P>
-			<B>Auto-Assign To:</B><BR>
-			<?php echo $ath->technicianBox('assign_to',$ac->getAssignee()); ?>
-			<P>
-			<B><FONT COLOR="RED">It is not recommended that you change the artifact 
-				category name because other things are dependent upon it. When you change 
-				the category name, all related items will be changed to the new name.</FONT></B>
-			<P>
-			<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-			</FORM>
+			<p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_cat" value="y" />
+			<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
+			<p>
+			<strong>Category Name:</strong><br />
+			<input type="text" name="name" value="<?php echo $ac->getName(); ?>" /></p>
+			<p>
+			<strong>Auto-Assign To:</strong><br />
+			<?php echo $ath->technicianBox('assign_to',$ac->getAssignee()); ?></p>
+			<p>
+			<strong><span style="color:red">It is not recommended that you change the artifact
+				category name because other things are dependent upon it. When you change
+				the category name, all related items will be changed to the new name.</span></strong></p>
+			<p>
+			<input type="submit" name="post_changes" value="SUBMIT" /></p>
+			</form></p>
 			<?php
 		}
 
@@ -577,20 +574,20 @@ if ($group_id && $atid) {
 			$feedback .= $ag->getErrorMessage();
 		} else {
 			?>
-			<P>
-			<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="update_group" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="id" VALUE="<?php echo $ag->getID(); ?>">
-			<P>
-			<B>Group Name:</B><BR>
-			<INPUT TYPE="TEXT" NAME="name" VALUE="<?php echo $ag->getName(); ?>">
-			<P>
-			<B><FONT COLOR="RED">It is not recommended that you change the artifact 
-				group name because other things are dependent upon it. When you change 
-				the group name, all related items will be changed to the new name.</FONT></B>
-			<P>
-			<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-			</FORM>
+			<p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_group" value="y" />
+			<input type="hidden" name="id" value="<?php echo $ag->getID(); ?>" />
+			<p>
+			<strong>Group Name:</strong><br />
+			<input type="text" name="name" value="<?php echo $ag->getName(); ?>" /></p>
+			<p>
+			<strong><span style="color:red">It is not recommended that you change the artifact
+				group name because other things are dependent upon it. When you change
+				the group name, all related items will be changed to the new name.</span></strong></p>
+			<p>
+			<input type="submit" name="post_changes" value="SUBMIT" /></p>
+			</form></p>
 			<?php
 		}
 
@@ -603,53 +600,53 @@ if ($group_id && $atid) {
 		$ath->adminHeader(array ('title'=>'Tracker Administration: '.$ath->getName(),'pagename'=>'tracker_admin_update_type','titlevals'=>array($ath->getName())));
 
 		?>
-		<P>
-		<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="update_type" VALUE="y">
-		<P>
-		<B>Name:</B> (examples: meeting minutes, test results, RFP Docs)<BR>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="update_type" value="y" />
+		<p>
+		<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)<br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getName();
 		} else { 
 			?>
-			<INPUT TYPE="TEXT" NAME="name" VALUE="<?php echo $ath->getName(); ?>">
+			<input type="text" name="name" value="<?php echo $ath->getName(); ?>" /></p>
 			<?php 
 		} 
 		?>
-		<P>
-		<B>Description:</B><BR>
+		<p>
+		<strong>Description:</strong><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getDescription();
 		} else {
 			?>
-			<INPUT TYPE="TEXT" NAME="description" VALUE="<?php echo $ath->getDescription(); ?>" SIZE="50">
+			<input type="text" name="description" value="<?php echo $ath->getDescription(); ?>" size="50" /></p>
 			<?php 
 		} 
 		?>
-		<P>
-		<INPUT TYPE=CHECKBOX NAME="is_public" VALUE="1" <?php echo (($ath->isPublic())?'CHECKED':''); ?>> <B>Publicly Available</B><BR>
-		<INPUT TYPE=CHECKBOX NAME="allow_anon" VALUE="1" <?php echo (($ath->allowsAnon())?'CHECKED':''); ?>> <B>Allow non-logged-in postings</B><BR>
-		<INPUT TYPE=CHECKBOX NAME="use_resolution" VALUE="1" <?php echo (($ath->useResolution())?'CHECKED':''); ?>> <B>Display the "Resolution" box</B>
-		<P>
-		<B>Send email on new submission to address:</B><BR>
-		<INPUT TYPE="TEXT" NAME="email_address" VALUE="<?php echo $ath->getEmailAddress(); ?>">
-		<P>
-		<INPUT TYPE=CHECKBOX NAME="email_all" VALUE="1" <?php echo (($ath->emailAll())?'CHECKED':''); ?>> <B>Send email on all changes</B><BR>
-		<P>
-		<B>Days till considered overdue:</B><BR>
-		<INPUT TYPE="TEXT" NAME="due_period" VALUE="<?php echo ($ath->getDuePeriod() / 86400); ?>">
-		<P>
-		<B>Days till pending tracker items time out:</B><BR>
-		<INPUT TYPE="TEXT" NAME="status_timeout"  VALUE="<?php echo($ath->getStatusTimeout() / 86400); ?>">
-		<P>
-		<B>Free form text for the "submit new item" page:</B><BR>
-		<TEXTAREA NAME="submit_instructions" ROWS="10" COLS="55" WRAP="HARD"><?php echo $ath->getSubmitInstructions(); ?></TEXTAREA>
-		<P>
-		<B>Free form text for the "browse items" page:</B><BR>
-		<TEXTAREA NAME="browse_instructions" ROWS="10" COLS="55" WRAP="HARD"><?php echo $ath->getBrowseInstructions(); ?></TEXTAREA>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-		</FORM>
+		<p>
+		<input type="checkbox" name="is_public" value="1" <?php echo (($ath->isPublic())?'checked="checked"':''); ?> /> <strong>Publicly Available</strong><br />
+		<input type="checkbox" name="allow_anon" value="1" <?php echo (($ath->allowsAnon())?'checked="checked"':''); ?> /> <strong>Allow non-logged-in postings</strong><br />
+		<input type="checkbox" name="use_resolution" value="1" <?php echo (($ath->useResolution())?'checked="checked"':''); ?> /> <strong>Display the "Resolution" box</strong></p>
+		<p>
+		<strong>Send email on new submission to address:</strong><br />
+		<input type="text" name="email_address" value="<?php echo $ath->getEmailAddress(); ?>" /></p>
+		<p>
+		<input type="checkbox" name="email_all" value="1" <?php echo (($ath->emailAll())?'checked="checked"':''); ?> /> <strong>Send email on all changes</strong><br /></p>
+		<p>
+		<strong>Days till considered overdue:</strong><br />
+		<input type="text" name="due_period" value="<?php echo ($ath->getDuePeriod() / 86400); ?>" /></p>
+		<p>
+		<strong>Days till pending tracker items time out:</strong><br />
+		<input type="text" name="status_timeout"  value="<?php echo($ath->getStatusTimeout() / 86400); ?>" /></p>
+		<p>
+		<strong>Free form text for the "submit new item" page:</strong><br />
+		<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getSubmitInstructions(); ?></textarea></p>
+		<p>
+		<strong>Free form text for the "browse items" page:</strong><br />
+		<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getBrowseInstructions(); ?></textarea></p>
+		<p>
+		<input type="submit" name="post_changes" value="SUBMIT" /></p>
+		</form></p>
 		<?php
 
 		$ath->footer(array());
@@ -661,21 +658,21 @@ if ($group_id && $atid) {
 
 		$ath->adminHeader(array ('title'=>'Tracker Administration: '.$ath->getName(),'pagename'=>'tracker_admin','titlevals'=>array($ath->getName())));
 
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'&add_cat=1"><B>Add/Update Categories</B></A><BR>
-			Add categories like, \'mail module\',\'gant chart module\',\'cvs\', etc<P>';
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'&add_group=1"><B>Add/Update Groups</B></A><BR>
-			Add groups like, \'v1.2\',\'unsupported\',\'unverified\', etc<P>';
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1"><B>Add/Update Canned Responses</B></A><BR>
-			Create/Change generic response messages for the tracker.<P>';
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'&update_users=1"><B>Add/Update Users &amp; Permissions</B></A><BR>
-			Add/remove users to/from this tracker.<P>';
-		echo '<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'&update_type=1"><B>Update preferences</B></A><BR>
-			Set up prefs like expiration times, email addresses, etc.<P>';
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_cat=1"><strong>Add/Update Categories</strong></a><br />
+			Add categories like, \'mail module\',\'gant chart module\',\'cvs\', etc</p>';
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_group=1"><strong>Add/Update Groups</strong></a><br />
+			Add groups like, \'v1.2\',\'unsupported\',\'unverified\', etc</p>';
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_canned=1"><strong>Add/Update Canned Responses</strong></a><br />
+			Create/Change generic response messages for the tracker.</p>';
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_users=1"><strong>Add/Update Users &amp; Permissions</strong></a><br />
+			Add/remove users to/from this tracker.</p>';
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_type=1"><strong>Update preferences</strong></a><br />
+			Set up prefs like expiration times, email addresses, etc.</p>';
 
 		$ath->footer(array());
 	}
@@ -709,7 +706,13 @@ if ($group_id && $atid) {
 		}
 	}
 
-	$sql="SELECT * FROM artifact_group_list WHERE group_id='$group_id' ORDER BY group_artifact_id";
+
+	$atf = new ArtifactTypeFactory($group);
+	if (!$group || !is_object($group) || $group->isError()) {
+		exit_error('Error','Could Not Get ArtifactTypeFactory');
+	}
+
+	$at_arr =& $atf->getArtifactTypes();
 
 	//required params for site_project_header();
 	$params['group']=$group_id;
@@ -719,79 +722,75 @@ if ($group_id && $atid) {
 	$params['sectionvals']=array(group_getname($group_id));
 	
 	echo site_project_header($params);
-	echo '<B><A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A></B><P>';
+	echo '<strong><a href="/tracker/admin/?group_id='.$group_id.'">Admin</a></strong>';
 
-	$result = db_query ($sql);
-	$rows = db_numrows($result);
-	if (!$result || $rows < 1) {
-		echo "<H1>No Trackers Found</H1>";
-		echo "<P>";
+	if (!$at_arr || count($at_arr) < 1) {
+		echo "<h1>No Trackers Found</h1>";
+		echo "<p>&nbsp;</p>";
 	} else {
 
 		echo '
-		<P>
-		Choose a data type and you can set up prefs, categories, groups, users, and permissions.
-		<P>';
+		<p>Choose a data type and you can set up prefs, categories, groups, users, and permissions.</p>';
 
 		/*
 			Put the result set (list of forums for this group) into a column with folders
 		*/
 
-		for ($j = 0; $j < $rows; $j++) {
+		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
-			<A HREF="/tracker/admin/?atid='.db_result($result, $j, 'group_artifact_id').
-			'&group_id='.$group_id.'">' .
-			html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
-			db_result($result, $j, 'name').'</A><BR>'.
-			db_result($result, $j, 'description').'<P>';
+			<p><a href="/tracker/admin/?atid='. $at_arr[$j]->getID() .
+			'&amp;group_id='.$group_id.'">' .
+			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
+			$at_arr[$j]->getName() .'</a><br />'.
+			$at_arr[$j]->getDescription() .'</p>';
 		}
 	}
 
 	?>
-	<H3>Create a new tracker</H3>
-	<P>
-	You can use this system to track virtually any kind of data, with each 
-	tracker having separate user, group, category, and permission lists. You 
-	can also easily move items between trackers when needed.
-	<P>
-	Trackers are referred to as "Artifact Types" and individual pieces of data
-	are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be 
-	an Artifact. You can create as many Artifact Types as you want, but remember 
-	you need to set up categories, groups, and permission for each type, which 
-	can get time-consuming.
-	<P>
-	<FORM ACTION="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="add_at" VALUE="y">
-	<P>
-	<B>Name:</B> (examples: meeting minutes, test results, RFP Docs)<BR>
-	<INPUT TYPE="TEXT" NAME="name" VALUE="">
-	<P>
-	<B>Description:</B><BR>
-	<INPUT TYPE="TEXT" NAME="description" VALUE="" SIZE="50">
-	<P>
-	<INPUT TYPE=CHECKBOX NAME="is_public" VALUE="1"> <B>Publicly Available</B><BR>
-	<INPUT TYPE=CHECKBOX NAME="allow_anon" VALUE="1"> <B>Allow non-logged-in postings</B><BR>
-	<INPUT TYPE=CHECKBOX NAME="use_resolution" VALUE="1"> <B>Display the "Resolution" box</B>
-	<P>
-	<B>Send email on new submission to address:</B><BR>
-	<INPUT TYPE="TEXT" NAME="email_address" VALUE="">
-	<P>
-	<INPUT TYPE=CHECKBOX NAME="email_all" VALUE="1"> <B>Send email on all changes</B><BR>
-	<P>
-	<B>Days till considered overdue:</B><BR>
-	<INPUT TYPE="TEXT" NAME="due_period" VALUE="30">
-	<P>
-	<B>Days till pending tracker items time out:</B><BR>
-	<INPUT TYPE="TEXT" NAME="status_timeout" VALUE="14">
-	<P>
-	<B>Free form text for the "submit new item" page:</B><BR>
-	<TEXTAREA NAME="submit_instructions" ROWS="10" COLS="55" WRAP="HARD"></TEXTAREA>
-	<P>
-	<B>Free form text for the "browse items" page:</B><BR>
-	<TEXTAREA NAME="browse_instructions" ROWS="10" COLS="55" WRAP="HARD"></TEXTAREA>
-	<P>
-	<INPUT TYPE="SUBMIT" NAME="post_changes" VALUE="SUBMIT">
-	</FORM>
+	<h3>Create a new tracker</h3>
+
+	<p>You can use this system to track virtually any kind of data, with each
+	tracker having separate user, group, category, and permission lists. You
+	can also easily move items between trackers when needed.</p>
+
+	<p>Trackers are referred to as "Artifact Types" and individual pieces of data
+	are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be
+	an Artifact. You can create as many Artifact Types as you want, but remember
+	you need to set up categories, groups, and permission for each type, which
+	can get time-consuming.</p>
+	<p>
+	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+	<input type="hidden" name="add_at" value="y" />
+	<p>
+	<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)<br />
+	<input type="text" name="name" value=""></p>
+	<p>
+	<strong>Description:</strong><br />
+	<input type="text" name="description" value="" size="50" /></p>
+	<p>
+	<input type="checkbox" name="is_public" value="1" /> <strong>Publicly Available</strong><br />
+	<input type="checkbox" name="allow_anon" value="1" /> <strong>Allow non-logged-in postings</strong><br />
+	<input type="checkbox" name="use_resolution" value="1" /> <strong>Display the "Resolution" box</strong></p>
+	<p>
+	<strong>Send email on new submission to address:</strong><br />
+	<input type="text" name="email_address" value="" /></p>
+	<p>
+	<input type="checkbox" name="email_all" value="1" /> <strong>Send email on all changes</strong><br /></p>
+	<p>
+	<strong>Days till considered overdue:</strong><br />
+	<input type="text" name="due_period" value="30" /></p>
+	<p>
+	<strong>Days till pending tracker items time out:</strong><br />
+	<input type="text" name="status_timeout" value="14" /></p>
+	<p>
+	<strong>Free form text for the "submit new item" page:</strong><br />
+	<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
+	<p>
+	<strong>Free form text for the "browse items" page:</strong><br />
+	<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
+	<p>
+	<input type="submit" name="post_changes" value="SUBMIT" /></p>
+	</form></p>
 	<?php
 
 	echo site_project_footer(array());

@@ -39,7 +39,7 @@ if ($group_id) {
 	$farr =& $ff->getForums();
 	
 	if ($ff->isError() || count($farr) < 1) {
-		echo '<H1>No forums found for '. $g->getPublicName() .'</H1>';
+		echo '<h1>No forums found for '. $g->getPublicName() .'</h1>';
 		echo $ff->getErrorMessage();
 		forum_footer(array());
 		exit;
@@ -58,13 +58,13 @@ if ($group_id) {
 		if ($farr[$j]->isError()) {
 			echo $farr->getErrorMessage();
 		} else {
-			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
-				html_image("ic/forum20w.png","20","20",array("BORDER"=>"0")) . 
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+				html_image("ic/forum20w.png","20","20",array("border"=>"0")) . 
 				'&nbsp;' .
-				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>
-				<TD ALIGN=CENTER>'.$farr[$j]->getThreadCount().'</TD>
-				<TD ALIGN=CENTER>'. $farr[$j]->getMessageCount() .'</TD>
-				<TD>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</TD></TR>';
+				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'</td>
+				<td align=CENTER>'.$farr[$j]->getThreadCount().'</td>
+				<td align=CENTER>'. $farr[$j]->getMessageCount() .'</td>
+				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();

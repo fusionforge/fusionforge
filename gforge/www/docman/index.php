@@ -52,7 +52,7 @@ if (!$_arr || count($d_arr) <1){
 docman_header('Project Documentation','Project Documentation','docman','',$g->getPublicName());
 
 if (!$d_arr || count($d_arr) < 1) {
-	print "<b>This project has no visible documents.</b><p>";
+	print "<strong>This project has no visible documents.</strong><p>";
 } else { 
 	doc_droplist_count($group_id, $language_id);
 
@@ -65,12 +65,12 @@ if (!$d_arr || count($d_arr) < 1) {
 		//
 		if ($d_arr[$i]->getDocGroupID() != $last_group) {
 			print (($i==0) ? '' : '</ul>');
-			print "\n\n<li><b>". $d_arr[$i]->getDocGroupName() ."</b></li><ul>";
+			print "\n\n<li><strong>". $d_arr[$i]->getDocGroupName() ."</strong></li><ul>";
 			$last_group=$d_arr[$i]->getDocGroupID();
 		}
 		print "\n<li><a href=\"view.php/$group_id/".$d_arr[$i]->getID()."/".$d_arr[$i]->getFileName()."\">". 
 			$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
-			"\n<BR><i>Description:</i> ".$d_arr[$i]->getDescription();
+			"\n<br /><em>Description:</em> ".$d_arr[$i]->getDescription();
 
 	}
 	print "\n</ul>\n";

@@ -247,78 +247,78 @@ class Theme extends Layout {
 <BODY TOPMARGIN="3" MARGINHEIGHT="3" MARGINWIDTH="3" LEFTMARGIN="3" RIGHTMARGIN="3" 
 	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
 
-<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0 
+<table border=0 width="100%" cellspacing="0" cellpadding=0 
 	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
 
-	<TR>
-		<TD><A HREF="/" 
+	<tr>
+		<td><a href="/" 
 			onMouseOver="imgOver('logo')" 
-			onMouseOut="imgOff('logo')"><IMG NAME="logo" BORDER=0 HEIGHT=60 WIDTH=180 
-				SRC="<?php echo $this->imgroot.'logo.png'; ?>"</A></TD>
-		<TD><?php echo $this->searchBox(); ?></TD>
-		<TD ALIGN="RIGHT"><?php
+			onMouseOut="imgOff('logo')"><img name="logo" border=0 height=60 width=180 
+				SRC="<?php echo $this->imgroot.'logo.png'; ?>"</a></td>
+		<td><?php echo $this->searchBox(); ?></td>
+		<td align="RIGHT"><?php
 			if (session_loggedin()) {
 				?>
-				<A HREF="/account/logout.php">Logout</A><BR>
-				<A HREF="/account/">My Account</A>
+				<a href="/account/logout.php">Logout</a><br />
+				<a href="/account/">My Account</a>
 				<?php
 			} else {
 				?>
-				<A HREF="/account/login.php">Login</A><BR>
-				<A HREF="/account/register.php">New Account</A>
+				<a href="/account/login.php">Login</a><br />
+				<a href="/account/register.php">New Account</a>
 				<?php
 			}
 
-		?></TD>
-		<TD>&nbsp;&nbsp;</TD>
-	</TR>
+		?></td>
+		<td>&nbsp;&nbsp;</td>
+	</tr>
 
 </TABLE>
 
-<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0 
+<table border=0 width="100%" cellspacing="0" cellpadding=0 
 	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
 
-	<TR>
+	<tr>
 		
 <?php echo $this->outerTabs($params); ?>
 
-	</TR>
-	<TR>
+	</tr>
+	<tr>
 			<!-- Inner Tabs / Shell -->
 
-			<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
+			<table border=0 width="100%" cellspacing="0" cellpadding=0>
 <?php
 
 
 if ($params['group']) {
 
 			?>
-			<TR>
-				<TD>&nbsp;</TD>
-				<TD>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
 				<?php
 
 				echo $this->projectTabs($params['toptab'],$params['group']);
 
 				?>
-				</TD>
-				<TD>&nbsp;</TD>
-			</TR>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
 			<?php
 
 }
 
 ?>
 
-			<TR>
-				<TD BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><IMG 
-					SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH="99%" HEIGHT=10></TD>
-			</TR>
+			<tr>
+				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
+					SRC="<?php echo $this->imgroot; ?>clear.png" width="99%" height=10></td>
+			</tr>
 
-			<TR>
-				<TD BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><IMG 
-					SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=10 HEIGHT=1></TD>
-				<TD VALIGN=TOP WIDTH="99%" BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"">
+			<tr>
+				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
+					SRC="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
+				<td valign=TOP width="99%" BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"">
 	<?php
 	}
 
@@ -329,31 +329,31 @@ if ($params['group']) {
 			<!-- end main body row -->
 
 
-				</TD>
-				<TD WIDTH=10 BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><IMG 
-					SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></TD>
-			</TR>
-			<TR>
-				<TD BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><IMG 
-					SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH="1" HEIGHT=1></TD>
-			</TR>
+				</td>
+				<td width=10 BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
+					SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+			</tr>
+			<tr>
+				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
+					SRC="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+			</tr>
 			</TABLE>
 
 		<!-- end inner body row -->
 
-		</TD>
-		<TD WIDTH=10 BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></TD>
-	</TR>
-	<TR>
+		</td>
+		<td width=10 bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+	</tr>
+	<tr>
 		<!-- some extra space to make it look nicer -->
-		<TD HEIGHT=100>&nbsp;</TD>
-	</TR>
+		<td height=100>&nbsp;</td>
+	</tr>
 </TABLE>
 <?php
 	global $sys_show_source;
 	if ($sys_show_source) {
 		global $SCRIPT_NAME;
-		print '<a class=showsource href="/source.php?file=' . $SCRIPT_NAME . '">Show Source</A>';
+		print '<a class=showsource href="/source.php?file=' . $SCRIPT_NAME . '">Show Source</a>';
 	}
 ?>
 
@@ -374,15 +374,15 @@ if ($params['group']) {
 	function boxTop($title) {
 		return '
 		<!-- boxTop -->
-		<TABLE cellspacing="2" cellpadding="0" width="100%" border="0" >
-		<TR><TD>
+		<table cellspacing="2" cellpadding="0" width="100%" border="0" >
+		<tr><td>
 
-			<TABLE cellspacing="2" cellpadding="0" width="100%" border="0" >
-				<TR>
-					<TD COLSPAN="2"><SPAN class=titlebar>'.$title.'</SPAN></TD>
-				</TR>
-				<TR HEIGHT=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<TD colspan=2 HEIGHT=1></TD><TR align=left><TD colspan=2>';
+			<table cellspacing="2" cellpadding="0" width="100%" border="0" >
+				<tr>
+					<td colspan="2"><SPAN class=titlebar>'.$title.'</SPAN></td>
+				</tr>
+				<tr height=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+					<td colspan=2 height=1></td><tr align=left><td colspan=2>';
 	}
 
 	/**
@@ -394,14 +394,14 @@ if ($params['group']) {
 	function boxMiddle($title) {
 		return '
 				<!-- boxMiddle -->
-				</TD>
-				</TR>
-				<TR><TD HEIGHT=20 COLSPAN=2>&nbsp;</TD></TR>
-				<TR>
-					<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
-				</TR>
-				<TR align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<TD colspan=2 HEIGHT=1></TD></TR><TR><TD COLSPAN=2>';
+				</td>
+				</tr>
+				<tr><td height=20 colspan=2>&nbsp;</td></tr>
+				<tr>
+					<td colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+				</tr>
+				<tr align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+					<td colspan=2 height=1></td></tr><tr><td colspan=2>';
 	}
 
 	/**
@@ -427,12 +427,12 @@ if ($params['group']) {
 	 */
 	function boxBottom() {
 		return '<!-- boxBottom -->
-					</TD>
-				</TR>
+					</td>
+				</tr>
 			</TABLE>
-		</TD></TR>
-		<TR><TD HEIGHT=20 COLSPAN=2>&nbsp;</TD></TR>
-		</TABLE><P>';
+		</td></tr>
+		<tr><td height=20 colspan=2>&nbsp;</td></tr>
+		</TABLE><p>';
 	}
 		
 	/**
@@ -444,28 +444,28 @@ if ($params['group']) {
 	function listTableTop ($title_arr,$links_arr=false) {
 		$return = '
 		<!-- listTableTop -->
-		<TABLE cellspacing="0" cellpadding="1" width="100%" border="0">
-        <TR><TD>
-		<TABLE WIDTH="100%" BORDER="0" CELLSPACING="2" CELLPADDING="0">
-			<TR>';
+		<table cellspacing="0" cellpadding="1" width="100%" border="0">
+        <tr><td>
+		<table width="100%" border="0" cellspacing="2" cellpadding="0">
+			<tr>';
 
 		$count=count($title_arr);
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<TD align=left><a class=titlebar href="'.$links_arr[$i].'">'.$title_arr[$i].'</A></TD>';
+				<td align=left><a class=titlebar href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<TD ALIGN="left">'.$title_arr[$i].'</TD>';
+				<td align="left">'.$title_arr[$i].'</td>';
 			}
 		}
 		$return .= '
-		</TR>
-		<TR height=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-			<TD colspan='.$count.' HEIGHT=1><IMG SRC="'.$this->imgroot.'clear.png" HEIGHT=1 WIDTH=1></TD>
-		</TR>';
+		</tr>
+		<tr height=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+			<td colspan='.$count.' height=1><img src="'.$this->imgroot.'clear.png" height=1 width=1></td>
+		</tr>';
 		return $return;			
 	}
 
@@ -483,9 +483,9 @@ if ($params['group']) {
 
 		<!-- tabGenerator -->
 
-		<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH="'.$total_width.'">
-		<TR>
-			<TD><IMG SRC="'.$this->imgroot.'clear.png" HEIGHT='.$this->TAB_HEIGHT.' WIDTH="'.$space.'%"></TD>';
+		<table border=0 cellpadding=0 cellspacing=0 width="'.$total_width.'">
+		<tr>
+			<td><img src="'.$this->imgroot.'clear.png" height='.$this->TAB_HEIGHT.' width="'.$space.'%"></td>';
 		if ($nested) {
 			$inner='-inner';
 		} else {
@@ -496,37 +496,37 @@ if ($params['group']) {
 			$bgimg=(($selected==$i)?$select_tab:$deselect_tab);
 			$cornerimg=(($selected==$i)?'select':'deselect');
 			$return .= '
-				<TD HEIGHT='.$this->TAB_HEIGHT.' WIDTH=5
-					BACKGROUND="'.$this->imgroot.'tabs/left'.$cornerimg.'.png"></TD>
-				<TD '.$bgimg.' HEIGHT='.$this->TAB_HEIGHT.' width="'.$width.'%"  ALIGN="MIDDLE">'.
-				'<A class="'. (($selected==$i)?'tabsellink':'tablink') .'" HREF="'. $TABS_DIRS[$i] .'">'. $TABS_TITLES[$i] .'</A></TD>
-				<TD HEIGHT='.$this->TAB_HEIGHT.' WIDTH=5
-					BACKGROUND="'.$this->imgroot.'tabs/right'.$cornerimg.'.png"</TD>';
+				<td height='.$this->TAB_HEIGHT.' width=5
+					BACKGROUND="'.$this->imgroot.'tabs/left'.$cornerimg.'.png"></td>
+				<td '.$bgimg.' height='.$this->TAB_HEIGHT.' width="'.$width.'%"  align="MIDDLE">'.
+				'<A class="'. (($selected==$i)?'tabsellink':'tablink') .'" HREF="'. $TABS_DIRS[$i] .'">'. $TABS_TITLES[$i] .'</a></td>
+				<td height='.$this->TAB_HEIGHT.' width=5
+					BACKGROUND="'.$this->imgroot.'tabs/right'.$cornerimg.'.png"</td>';
 		}
 
 		$return .= '
-			<TD><IMG SRC="'.$this->imgroot.'clear.png" HEIGHT='.$this->TAB_HEIGHT.' WIDTH="'.$space.'%"></TD>
-		</TR>
-		<TR>
-		<TD BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  ALIGN="MIDDLE"><IMG 
-			SRC="'.$this->imgroot.'clear.png" HEIGHT=8 WIDTH="'.$space.'%"></TD>';
+			<td><img src="'.$this->imgroot.'clear.png" height='.$this->TAB_HEIGHT.' width="'.$space.'%"></td>
+		</tr>
+		<tr>
+		<td BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  align="MIDDLE"><img 
+			SRC="'.$this->imgroot.'clear.png" height=8 width="'.$space.'%"></td>';
 		for ($i=0; $i<$count; $i++) {
 			$bgimg=(($selected==$i)?$select_rule:$deselect_rule);
 			$blendimg=(($selected==$i)?'select':'deselect');
 			$return .= '
-				<TD BACKGROUND="'.$this->imgroot.'tabs/leftblend'.$blendimg.'.png"><IMG 
-					SRC="'.$this->imgroot . 'clear.png" HEIGHT=8 WIDTH=5></TD>
-				<TD '.$bgimg.' width="'.$width.'%"  ALIGN="MIDDLE"><IMG 
-					SRC="'.$this->imgroot . 'clear.png" HEIGHT=8 WIDTH=1></TD>
-				<TD BACKGROUND="'.$this->imgroot.'tabs/rightblend'.$blendimg.'.png"><IMG 
-					SRC="'.$this->imgroot . 'clear.png" HEIGHT=8 WIDTH=5></TD>';
+				<td BACKGROUND="'.$this->imgroot.'tabs/leftblend'.$blendimg.'.png"><img 
+					SRC="'.$this->imgroot . 'clear.png" height=8 width=5></td>
+				<td '.$bgimg.' width="'.$width.'%"  align="MIDDLE"><img 
+					SRC="'.$this->imgroot . 'clear.png" height=8 width=1></td>
+				<td BACKGROUND="'.$this->imgroot.'tabs/rightblend'.$blendimg.'.png"><img 
+					SRC="'.$this->imgroot . 'clear.png" height=8 width=5></td>';
 		}
 		
 		return $return .= '
-		<TD BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  ALIGN="MIDDLE"><IMG 
-			SRC="'.$this->imgroot.'clear.png" HEIGHT=8 WIDTH="'.$space.'%"></TD>
-		</TR>
-		<TR><TD HEIGHT=10>&nbsp;</TD><TR>
+		<td BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  align="MIDDLE"><img 
+			SRC="'.$this->imgroot.'clear.png" height=8 width="'.$space.'%"></td>
+		</tr>
+		<tr><td height=10>&nbsp;</td><tr>
 		</TABLE> 
 		<!-- end tabGenerator -->';
 	}

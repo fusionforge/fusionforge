@@ -57,7 +57,7 @@ if (!$rss) {
 		$HTML->header(array('title'=>'Search','pagename'=>'search'));
 	}
 
-	echo "<P><CENTER>";
+	echo "<p align="center">";
 
 	// show search box which will return results on
 	// this very page (default is to open new window)
@@ -75,7 +75,7 @@ if ($words && (strlen($words) < 3)) {
 	if ($rss) {
 		error_while_in_rss('Search must be at least three characters');
 	} else {
-		echo "<H2>Search must be at least three characters</H2>";
+		echo "<h2>Search must be at least three characters</h2>";
 		$HTML->footer(array());
 		exit;
 	}
@@ -85,7 +85,7 @@ if (!$words) {
 	if ($rss) {
 		error_while_in_rss('Search criteria are not specified');
 	} else {
-		echo "<BR>Enter Your Search Words Above</CENTER><P>";
+		echo "<br />Enter Your Search Words Above</p>";
 		$HTML->footer(array());
 		exit;
 	}
@@ -179,7 +179,7 @@ if ($type_of_search == "soft") {
 
 	if (!$result || $rows < 1) {
 		$no_rows = 1;
-		echo "<H2>No matches found for $words</H2>";
+		echo "<h2>No matches found for $words</h2>";
 		echo db_error();
 //		echo $sql;
 	} else {
@@ -188,7 +188,7 @@ if ($type_of_search == "soft") {
 			$rows = 25;
 		}
 
-		echo "<H3>Search results for $words</H3><P>\n\n";
+		echo "<h3>Search results for $words</h3><p>\n\n";
 
 		$title_arr = array();
 		$title_arr[] = 'Group Name';
@@ -203,11 +203,11 @@ if ($type_of_search == "soft") {
 				$what = 'projects';
 			}
 			
-			print	"<TR ". $HTML->boxGetAltRowStyle($i)."><TD><A HREF=\"/$what/"
+			print	"<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\"/$what/"
 				. db_result($result, $i, 'unix_group_name')."/\">"
-				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) 
-				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
-				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
+				. html_image("ic/msg.png","10","12",array("border"=>"0"))
+				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</a></td>"
+				. "<td>".highlight_target_words($array,db_result($result,$i,'short_description'))."</td></tr>\n";
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
@@ -237,7 +237,7 @@ if ($type_of_search == "soft") {
 
 	if (!$result || $rows < 1) {
 		$no_rows = 1;
-		echo "<H2>No matches found for $words</H2>";
+		echo "<h2>No matches found for $words</h2>";
 		echo db_error();
 	} else {
 
@@ -245,7 +245,7 @@ if ($type_of_search == "soft") {
 			$rows = 25;
 		}
 
-		echo "<H3>Search results for $words</H3><P>\n\n";
+		echo "<h3>Search results for $words</h3><p>\n\n";
 
 		$title_arr = array();
 		$title_arr[] = 'User Name';
@@ -254,12 +254,12 @@ if ($type_of_search == "soft") {
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
-				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
-				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
+			print	"<tr ". $HTML->boxGetAltRowStyle($i) ."><td><a href=\"/users/".db_result($result, $i, 'user_name')."/\">"
+				. html_image("ic/msg.png","10","12",array("border"=>"0")) . db_result($result, $i, 'user_name')."</a></td>"
+				. "<td>".db_result($result,$i,'realname')."</td></tr>\n";
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $GLOBALS['HTML']->listTableBottom() . '</p>';
 
 	}
 
@@ -282,7 +282,7 @@ if ($type_of_search == "soft") {
 
 	if (!$result || $rows < 1) {
 		$no_rows = 1;
-		echo "<H2>No matches found for $words</H2>";
+		echo "<h2>No matches found for $words</h2>";
 		echo db_error();
 	} else {
 
@@ -290,7 +290,7 @@ if ($type_of_search == "soft") {
 			$rows = 25;
 		}
 
-		echo "<H3>Search results for $words</H3><P>\n\n";
+		echo "<h3>Search results for $words</h3><p>\n\n";
 
 		$title_arr = array();
 		$title_arr[] = 'Thread';
@@ -300,15 +300,15 @@ if ($type_of_search == "soft") {
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/forum/message.php?msg_id="
+			print	"<tr ". $HTML->boxGetAltRowStyle($i) ."><td><a href=\"/forum/message.php?msg_id="
 				. db_result($result, $i, "msg_id")."\">"
-				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
-				. db_result($result, $i, "subject")."</A></TD>"
-				. "<TD>".db_result($result, $i, "user_name")."</TD>"
-				. "<TD>".date($sys_datefmt,db_result($result,$i,"date"))."</TD></TR>\n";
+				. html_image("ic/msg.png","10","12",array("border"=>"0"))
+				. db_result($result, $i, "subject")."</a></td>"
+				. "<td>".db_result($result, $i, "user_name")."</td>"
+				. "<td>".date($sys_datefmt,db_result($result,$i,"date"))."</td></tr>\n";
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $GLOBALS['HTML']->listTableBottom() . '</p>';
 
 	}
 
@@ -348,7 +348,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 
 	if ( !$result || $rows < 1) {
 		$no_rows = 1;
-		echo "<H2>No matches found for $words</H2>";
+		echo "<h2>No matches found for $words</h2>";
 		echo db_error();
 	} else {
 
@@ -356,7 +356,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 			$rows = 25;
 		}
 
-		echo "<H3>Search results for $words</H3><P>\n";
+		echo "<h3>Search results for $words</h3><p>\n";
 
 		$title_arr = array();
 		$title_arr[] = '#';
@@ -367,19 +367,19 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"\n<TR ". $HTML->boxGetAltRowStyle($i) .">
+			print	"\n<tr ". $HTML->boxGetAltRowStyle($i) .">
 				<td>".db_result($result, $i, "artifact_id")."</td>
-				<TD><A HREF=\"/tracker/?group_id=$group_id&atid="
+				<td><a href=\"/tracker/?group_id=$group_id&amp;atid="
 				. db_result($result, $i, "group_artifact_id") 
-				. "&func=detail&aid="
+				. "&amp;func=detail&aid="
 				. db_result($result, $i, "artifact_id")."\"> "
-				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
-				. db_result($result, $i, "summary")."</A></TD>"
-				. "<TD>".db_result($result, $i, "user_name")."</TD>"
-				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
+				. html_image("ic/msg.png","10","12",array("border"=>"0"))
+				. db_result($result, $i, "summary")."</a></td>"
+				. "<td>".db_result($result, $i, "user_name")."</td>"
+				. "<td>". date($sys_datefmt,db_result($result,$i,"open_date"))."</td></tr>";
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $GLOBALS['HTML']->listTableBottom() . '</p>';
 
 	}
 
@@ -403,7 +403,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 
 	if (!$result || $rows < 1) {
 		$no_rows = 1;
-		echo "<H2>No matches found for '$words'</H2>";
+		echo "<h2>No matches found for '$words'</h2>";
 		echo db_error();
 //		echo $sql;
 	} else {
@@ -412,7 +412,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 			$rows = 25;
 		}
 */
-		echo "<H3>Search results for <B><I>$words</I></B></H3><P>\n\n";
+		echo "<h3>Search results for <strong><em>$words</em></strong></h3><p>\n\n";
 
 		$title_arr = array();
 		$title_arr[] = 'Name';
@@ -439,59 +439,59 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		   $finishY = substr($finish, 0, 4);
 		   $finishM = substr($finish, 4, 2);
 				
-		   echo '<TR '.$HTML->boxGetAltRowStyle($i+1).'>';
-		   echo '<TD><A HREF="/users/'.db_result($result, $i, 'user_name').'/">'.
-				  db_result($result, $i, 'realname').'</a></TD>';
-		   echo '<TD>'.db_result($result, $i, 'type_name').'</TD>';
-		   echo '<TD>'.db_result($result, $i, 'title').'</TD>';
-		   echo '<TD>'.db_result($result, $i, 'keywords').'</TD>';
-		   echo '<TD>'.$monthArray[$startM-1].' '.$startY.'</TD>';
-		   echo '<TD>'.$monthArray[$finishM-1].' '.$finishY.'</TD>';
-		   echo '<TR>';
+		   echo '<tr '.$HTML->boxGetAltRowStyle($i+1).'>';
+		   echo '<td><a href="/users/'.db_result($result, $i, 'user_name').'/">'.
+				  db_result($result, $i, 'realname').'</a></td>';
+		   echo '<td>'.db_result($result, $i, 'type_name').'</td>';
+		   echo '<td>'.db_result($result, $i, 'title').'</td>';
+		   echo '<td>'.db_result($result, $i, 'keywords').'</td>';
+		   echo '<td>'.$monthArray[$startM-1].' '.$startY.'</td>';
+		   echo '<td>'.$monthArray[$finishM-1].' '.$finishY.'</td>';
+		   echo '<tr>';
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
+		echo $GLOBALS['HTML']->listTableBottom() . '</p>';
 
 	}
 
 } else {
 
-	echo "<H1>Invalid Search - ERROR!!!!</H1>";
+	echo "<h1>Invalid Search - ERROR!!!!</h1>";
 
 }
 
    // This code puts the nice next/prev.
 if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 
-	echo "<BR>\n";
+	echo "<br />\n";
 
-	echo "<TABLE BGCOLOR=\"#EEEEEE\" WIDTH=\"100%\" CELLPADDING=\"5\" CELLSPACING=\"0\">\n";
-	echo "<TR>\n";
-	echo "\t<TD ALIGN=\"left\">";
+	echo "<table style=\"background-color:#eeeeee\" width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">\n";
+	echo "<tr>\n";
+	echo "\t<td align=\"left\">";
 	if ($offset != 0) {
-		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
-		echo "<A HREF=\"javascript:history.back()\"><B>" 
-			. html_image("t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
-			. " Previous Results </A></B></FONT>";
+		echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
+		echo "<a href=\"javascript:history.back()\">"
+			. html_image("t2.png","15","15",array("border"=>"0","align"=>"middle"))
+			. " <strong>Previous Results</strong></a></span>";
 	} else {
 		echo "&nbsp;";
 	}
-	echo "</TD>\n\t<TD ALIGN=\"right\">";
+	echo "</td>\n\t<td align=\"right\">";
 	if ( $rows_returned > $rows) {
-		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
-		echo "<A HREF=\"/search/?type=$type_of_search&exact=$exact&q=".urlencode($words)."&offset=".($offset+25);
+		echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
+		echo "<a href=\"/search/?type=$type_of_search&amp;exact=$exact&amp;q=".urlencode($words)."&amp;offset=".($offset+25);
 		if ( $type_of_search == 'artifact' ) {
-			echo "&group_id=$group_id&atid=$atid";
+			echo "&amp;group_id=$group_id&amp;atid=$atid";
 		} 
 		if ( $type_of_search == 'forums' ) {
-			echo "&group_id=$group_id&forum_id=$forum_id";
+			echo "&amp;group_id=$group_id&amp;forum_id=$forum_id";
 		}
-		echo "\"><B>Next Results " . html_image("t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
+		echo "\"><strong>Next Results " . html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) . "</strong></a></span>";
 	} else {
 		echo "&nbsp;";
 	}
-	echo "</TD>\n</TR>\n";
-	echo "</TABLE>\n";
+	echo "</td>\n</tr>\n";
+	echo "</table>\n";
 }
 
 $HTML->footer(array());

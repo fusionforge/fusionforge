@@ -20,7 +20,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Survey Aggregate Results','pagename'=>'survey_admin_show_results_aggregate'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -34,10 +34,10 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 $sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
 $result=db_query($sql);
 
-echo "<H2>".db_result($result, 0, "survey_title")."</H2><P>";
+echo "<h2>".db_result($result, 0, "survey_title")."</h2><p>&nbsp;</p>";
 
 /*
-echo "<H3><A HREF=\"show_results_csv.php?survey_id=$survey_id&group_id=$group_id\">.CSV File</A></H3><P>";
+echo "<h3><a href=\"show_results_csv.php?survey_id=$survey_id&group_id=$group_id\">.CSV File</a></h3><p>";
 */
 
 /*
@@ -49,7 +49,7 @@ $questions=str_replace(" ", "", $questions);
 $quest_array=explode(',', $questions);
 $count=count($quest_array);
 
-echo "\n\n<TABLE>";
+echo "\n\n<table>";
 
 $q_num=1;
 
@@ -70,11 +70,11 @@ for ($i=0; $i<$count; $i++) {
 			Don't show question number if it's just a comment
 		*/
 
-		echo "\n<TR><TD VALIGN=TOP>&nbsp;</TD>\n<TD>"; 
+		echo "\n<tr><td valign=\"top\">&nbsp;</td>\n<td>";
 
 	} else {
 
-		echo "\n<TR><TD VALIGN=TOP><B>";
+		echo "\n<tr><td valign=\"top\"><strong>";
 
 		/*
 			If it's a 1-5 question box and first in series, move Quest
@@ -82,10 +82,10 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if (($question_type != $last_question_type) && (($question_type == "1") || ($question_type == "3"))) {
-			echo "&nbsp;<P>";
+			echo "&nbsp;<p>&nbsp;</p>";
 		}
 
-		echo $q_num."&nbsp;&nbsp;&nbsp;&nbsp;<BR></TD>\n<TD>";
+		echo $q_num."&nbsp;&nbsp;&nbsp;&nbsp;<br /></td>\n<td>";
 		$q_num++;
 
 	}
@@ -96,11 +96,11 @@ for ($i=0; $i<$count; $i++) {
 			This is a rædio-button question. Values 1-5.	
 		*/
 
-		# Show the 1-5 markers only if this is the first in a series
+		// Show the 1-5 markers only if this is the first in a series
 
 		if ($question_type != $last_question_type) {
-			echo "\n<B>1 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 5</B>\n";
-			echo "<BR>";
+			echo "\n<strong>1 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 5</strong>\n";
+			echo "<br />";
 
 		}
 
@@ -115,7 +115,7 @@ for ($i=0; $i<$count; $i++) {
 			echo db_error();
 		} else {
 			$response_count = db_result($result2, 0, 'count');
-			echo "<B>" . $response_count . "</B> Responses<BR>";
+			echo "<strong>" . $response_count . "</strong> Responses<br />";
 		}
 		/*
 			average
@@ -127,7 +127,7 @@ for ($i=0; $i<$count; $i++) {
 				echo "error";
 				echo db_error();
 			} else {
-				echo "<B>". number_format(db_result($result2, 0, 'avg'),2) ."</B> Average";
+				echo "<strong>". number_format(db_result($result2, 0, 'avg'),2) ."</strong> Average";
 			}
 			
 			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response::int IN (1,2,3,4,5) GROUP BY response";
@@ -145,9 +145,9 @@ for ($i=0; $i<$count; $i++) {
 			This is a text-area question.
 		*/
 
-		echo db_result($result, 0, "question")."<BR>\n";
+		echo db_result($result, 0, "question")."<br />\n";
 
-		echo "<A HREF=\"show_results_comments.php?survey_id=$survey_id&question_id=$quest_array[$i]&group_id=$group_id\">View Comments</A>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">View Comments</a>";
 
 	} else if ($question_type == "3") {
 		/*
@@ -159,7 +159,7 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if ($question_type != $last_question_type) {
-			echo "<B>Yes / No</B><BR>\n";
+			echo "<strong>Yes / No</strong><br />\n";
 		}
 
 		/*
@@ -172,7 +172,7 @@ for ($i=0; $i<$count; $i++) {
 			echo "error";
 			echo db_error();
 		} else {
-			echo "<B>".db_result($result2, 0, 0)."</B> Responses<BR>";
+			echo "<strong>".db_result($result2, 0, 0)."</strong> Responses<br />";
 		}
 		/*
 			average
@@ -184,7 +184,7 @@ for ($i=0; $i<$count; $i++) {
 			echo "error";
 			echo db_error();
 		} else {
-			echo "<B>".number_format(db_result($result2, 0, 0),2)."</B> Average";
+			echo "<strong>".number_format(db_result($result2, 0, 0),2)."</strong> Average";
 		}
 
 		/*
@@ -225,8 +225,8 @@ for ($i=0; $i<$count; $i++) {
 			This is a comment only.
 		*/
 
-		echo "&nbsp;<P><B>".db_result($result, 0, "question")."</B>\n";
-		echo "<INPUT TYPE=\"HIDDEN\" NAME=\"_".$quest_array[$i]."\" VALUE=\"-666\">";
+		echo "&nbsp;<p><strong>".db_result($result, 0, "question")."</strong></p>\n";
+		echo "<input type=\"hidden\" name=\"_".$quest_array[$i]."\" value=\"-666\" />";
 
 	} else if ($question_type == "5") {
 
@@ -234,19 +234,19 @@ for ($i=0; $i<$count; $i++) {
 			This is a text-field question.
 		*/
 
-		echo db_result($result, 0, "question")."<BR>\n";
+		echo db_result($result, 0, "question")."<br />\n";
 
-		echo "<A HREF=\"show_results_comments.php?survey_id=$survey_id&question_id=$quest_array[$i]&group_id=$group_id\">View Comments</A>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">View Comments</a>";
 
 	}
 
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
 	$last_question_type=$question_type;
 
 }
 
-echo "\n\n</TABLE>";
+echo "\n\n</table>";
 
 survey_footer(array());
 

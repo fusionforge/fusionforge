@@ -47,7 +47,7 @@ if ($action == "update_user") {
 	if ($u->isError()) {
 		$feedback .= $u->getErrorMessage();
 	} else {
-		$feedback .= 'Updated<br>';
+		$feedback .= 'Updated<br />';
 	}
 
 }
@@ -58,9 +58,9 @@ site_admin_header(array('title'=>'Site Admin: User Info'));
 ?>
 <h3>Account Information <sup>1</sup></h3>
 
-<FORM method="post" action="<?php echo $PHP_SELF; ?>">
-<INPUT type="hidden" name="action" value="update_user">
-<INPUT type="hidden" name="user_id" value="<?php print $user_id; ?>">
+<form method="post" action="<?php echo $PHP_SELF; ?>">
+<input type="hidden" name="action" value="update_user" />
+<input type="hidden" name="user_id" value="<?php print $user_id; ?>" />
 
 <table>
 <tr>
@@ -131,7 +131,7 @@ Unix Shell:
 Email:
 </td>
 <td>
-<input type="TEXT" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="55">
+<input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="55" />
 </td>
 </tr>
 
@@ -147,7 +147,7 @@ Current confirm hash:
 
 </table>
 
-<input type="submit" name="submit" value="Update">
+<input type="submit" name="submit" value="Update" />
 
 <p>
 <sup>1</sup> This pages allows to change only direct properties of user object. To edit
@@ -159,9 +159,9 @@ group (below).
 value 'No unix account (N)'.
 </p>
 
-</FORM>
+</form>
 
-<HR>
+<hr />
 
 <p>
 <h3>Groups Membership</h3>

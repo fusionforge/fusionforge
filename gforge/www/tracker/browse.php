@@ -183,23 +183,23 @@ $sort_arr[]='DESC';
 //
 
 echo '
-<TABLE WIDTH="10%" BORDER="0">
-	<FORM ACTION="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
-	<TR>
-		<TD><FONT SIZE="1">Assignee:&nbsp;<A href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><B>(?)</B></A><BR>'. $tech_box .'</TD>'.
-	'<TD><FONT SIZE="1">Status:&nbsp;<A href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><B>(?)</B></A><BR>'. $ath->statusBox('_status',$_status,true,'Any') .'</TD>'.
-	'<TD><FONT SIZE="1">Category:&nbsp;<A href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><B>(?)</B></A><BR>'. $ath->categoryBox ('_category',$_category,'Any') .'</TD>'.
-	'<TD><FONT SIZE="1">Group:&nbsp;<A href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><B>(?)</B></A><BR>'. $ath->artifactGroupBox ('_group',$_group,'Any') .'</TD>
-	</TR>
-	<TR>
-		<TD ALIGN="RIGHT"><FONT SIZE="1">Sort By:&nbsp;<A href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><B>(?)</B></A></TD>'.
-		'<TD><FONT SIZE="1">'. 
-		html_build_select_box_from_arrays($order_arr,$order_name_arr,'order',$_sort_col,false) .'</TD>'.
-		'<TD><FONT SIZE="1">'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'sort',$_sort_ord,false) .'</TD>'.
-		'<TD><FONT SIZE="1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Browse"></TD>
-	</TR>
-	</FORM></TABLE>';
+<table width="10%" border="0">
+	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
+	<input type="hidden" name="set" value="custom" />
+	<tr>
+		<td><span style="font-size:smaller">Assignee:&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
+	'<td><span style="font-size:smaller">Status:&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,'Any') .'</span></td>'.
+	'<td><span style="font-size:smaller">Category:&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,'Any') .'</span></td>'.
+	'<td><span style="font-size:smaller">Group:&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,'Any') .'</span></td>
+	</tr>
+	<tr>
+		<td align="right"><span style="font-size:smaller">Sort By:&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
+		'<td><span style="font-size:smaller">'. 
+		html_build_select_box_from_arrays($order_arr,$order_name_arr,'order',$_sort_col,false) .'</td>'.
+		'<td><span style="font-size:smaller">'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'sort',$_sort_ord,false) .'</td>'.
+		'<td><span style="font-size:smaller"><input type="submit" name="submit" value="Browse" /></td>
+	</tr>
+	</form></table>';
 
 /*
 	Show the free-form text submitted by the project admin
@@ -234,7 +234,7 @@ if ($result && db_numrows($result) > 0) {
 } else {
 
 	echo '
-		<H1>No Items Match Your Criteria</H1>';
+		<h1>No Items Match Your Criteria</h1>';
 	echo db_error();
 	//echo "<!-- $sql -->";
 

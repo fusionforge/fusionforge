@@ -30,17 +30,17 @@ function survey_header($params) {
 		
 		site_project_header($params);
 		
-		echo "<P><B><A HREF=\"/survey/admin/?group_id=$group_id\">Admin</A>";
+		echo "<p><strong><a href=\"/survey/admin/?group_id=$group_id\">Admin</a>";
 		
 		if ($is_admin_page && $group_id) {
-			echo " | <A HREF=\"/survey/admin/add_survey.php?group_id=$group_id\">Add Surveys</A>";
-			echo " | <A HREF=\"/survey/admin/edit_survey.php?group_id=$group_id\">Edit Surveys</A>";
-			echo " | <A HREF=\"/survey/admin/add_question.php?group_id=$group_id\">Add Questions</A>";
-			echo " | <A HREF=\"/survey/admin/show_questions.php?group_id=$group_id\">Edit Questions</A>";
-			echo " | <A HREF=\"/survey/admin/show_results.php?group_id=$group_id\">Show Results</A></B>";
+			echo " | <a href=\"/survey/admin/add_survey.php?group_id=$group_id\">Add Surveys</a>";
+			echo " | <a href=\"/survey/admin/edit_survey.php?group_id=$group_id\">Edit Surveys</a>";
+			echo " | <a href=\"/survey/admin/add_question.php?group_id=$group_id\">Add Questions</a>";
+			echo " | <a href=\"/survey/admin/show_questions.php?group_id=$group_id\">Edit Questions</a>";
+			echo " | <a href=\"/survey/admin/show_results.php?group_id=$group_id\">Show Results</a></strong>";
 		}
 		
-		echo "<P>";
+		echo "</p>";
 	}// end if (valid group id)
 }
 

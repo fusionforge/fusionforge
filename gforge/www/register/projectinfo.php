@@ -106,9 +106,9 @@ about it. Please read descriptions below carefully and provide complete
 and comprehensive data. All fields below are mandatory.
 </p>
 
-<form action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 
-<H3>1. Project Full Name</H3>
+</h3>1. Project Full Name</h3>
 
 
 <p>
@@ -119,14 +119,14 @@ a 40 character limit).
 
 
 Full Name:
-<BR>
-<INPUT size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
+<br />
+<input size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
 
-<H3>2. Project Purpose and Summarization</H3>
-<P>
-<B></B>
-<P>
-<b>
+<h3>2. Project Purpose and Summarization</h3>
+<p>
+<strong></strong>
+<p>
+<strong>
 Please provide detailed, accurate description of your project and
 what <?php echo $GLOBALS['sys_name']; ?> resources and in which way you plan to use. This
 description will be the basis for the approval or rejection of
@@ -134,86 +134,86 @@ your project's hosting on <?php echo $GLOBALS['sys_name']; ?>, and later, to ens
 you are using the services in the intended way. This description
 will not be used as a public description of your project. It must
 be written in English.
-</b>
-<P>
+</strong>
+<p>
 <font size="-1">
-<TEXTAREA name="purpose" wrap="virtual" cols="70" rows="10">
+<textarea name="purpose" wrap="virtual" cols="70" rows="10">
 <?php echo stripslashes($purpose); ?>
-</TEXTAREA>
+</textarea>
 </font>
 
 <h3>3. License</h3>
 
-<P><B><I>If you are applying for a website-only project, please
-select "website-only" from the choices below and proceed.</I></B>
+<p><strong><em>If you are applying for a website-only project, please
+select "website-only" from the choices below and proceed.</em></strong>
 
-<P><?php echo $GLOBALS['sys_name']; ?> was created to advance Open Source software development.
+<p><?php echo $GLOBALS['sys_name']; ?> was created to advance Open Source software development.
 To keep things simple, we are relying on the outstanding work
-of the <A href="http://www.opensource.org">Open Source Initiative</A>
+of the <a href="http://www.opensource.org">Open Source Initiative</a>
 for our licensing choices.
 
-<P>We realize, however that there may be other licenses out there
+<p>We realize, however that there may be other licenses out there
 that may better fit your needs. If you wish to use a license that is
 not OSI Certified, please let us know why you wish to use another
 license.
 
-<P>Choosing a license is a serious decision. Please take some time
+<p>Choosing a license is a serious decision. Please take some time
 to read the text (and our explanations) of several licenses before
 making a choice about your project.
 
-<P>You may change the license for your project at a
+<p>You may change the license for your project at a
 later date, so long as you have a legal capability to do so, your file
 release clearly relates this change, and your filemap categorization is
-updated appropriately. <i>Please note that license changes are not
+updated appropriately. <em>Please note that license changes are not
 retroactive (i.e. do not apply to products already released under
-OpenSource license).</i>
+OpenSource license).</em>
 
-<P><?php echo $GLOBALS['sys_name']; ?> is not responsible for legal discrepencies regarding
+<p><?php echo $GLOBALS['sys_name']; ?> is not responsible for legal discrepencies regarding
 your license.
 
-<P><B>Licenses</B>
+<p><strong>Licenses</strong>
 
-<UL>
-<LI><A href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License (GPL)</A>
-<LI><A href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library Public License (LGPL)</A>
-<LI><A href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</A>
-<LI><A href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</A>
-<LI><A href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</A>
-<LI><A href="http://www.opensource.org/licenses/mozilla1.0.html" target="_blank">Mozilla Public License 1.0 (MPL)</A>
-<LI><A href="http://www.opensource.org/licenses/qtpl.html" target="_blank">Q Public License (QPL)</A>
-<LI><A href="http://www.opensource.org/licenses/ibmpl.html" target="_blank">IBM Public License 1.0</A>
-<LI><A href="http://www.opensource.org/licenses/mitrepl.html" target="_blank">MITRE Collaborative Virtual Workspace License (CVW License)</A>
-<LI><A href="http://www.opensource.org/licenses/ricohpl.html" target="_blank">Ricoh Source Code Public License 1.0</A>
-<LI><A href="http://www.opensource.org/licenses/pythonpl.html" target="_blank">Python License</A>
-<LI><A href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</A>
-<LI><A href="http://www.opensource.org/licenses/apachepl.html" target="_blank">Apache Software License</A>
-<LI><A href="http://www.opensource.org/licenses/vovidapl.html" target="_blank">Vovida Software License 1.0</A>
-<LI><A href="http://www.opensource.org/licenses/sisslpl.html" target="_blank">Sun Internet Standards Source License (SISSL)</A>
-<LI><A href="http://www.opensource.org/licenses/intel-open-source-license.html" target="_blank">Intel Open Source License</A>
-<LI><A href="http://www.opensource.org/licenses/mozilla1.1.html" target="_blank">Mozilla Public License 1.1 (MPL 1.1)</A>
-<LI><A href="http://www.opensource.org/licenses/jabberpl.html" target="_blank">Jabber Open Source License</A>
-<LI><A href="http://www.opensource.org/licenses/nokia.html" target="_blank">Nokia Open Source License</A>
-<LI><A href="http://www.opensource.org/licenses/sleepycat.html" target="_blank">Sleepycat License</A>
-<LI><A href="http://www.opensource.org/licenses/nethack.html" target="_blank">Nethack General Public License</A>
-<LI><A href="http://oss.software.ibm.com/developerworks/opensource/license-cpl.html" target="_blank">IBM Common Public License</A>
-<LI><A href="http://www.opensource.apple.com/apsl/" target="_blank">Apple Public Source License</A>
-<LI><A href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/register/publicdomain.txt" target="_blank">Public Domain</A>
-<LI>Website Only
-<LI>Other/Proprietary License
+<ul>
+<li><a href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License (GPL)</a>
+<li><a href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library Public License (LGPL)</a>
+<li><a href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</a>
+<li><a href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</a>
+<li><a href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</a>
+<li><a href="http://www.opensource.org/licenses/mozilla1.0.html" target="_blank">Mozilla Public License 1.0 (MPL)</a>
+<li><a href="http://www.opensource.org/licenses/qtpl.html" target="_blank">Q Public License (QPL)</a>
+<li><a href="http://www.opensource.org/licenses/ibmpl.html" target="_blank">IBM Public License 1.0</a>
+<li><a href="http://www.opensource.org/licenses/mitrepl.html" target="_blank">MITRE Collaborative Virtual Workspace License (CVW License)</a>
+<li><a href="http://www.opensource.org/licenses/ricohpl.html" target="_blank">Ricoh Source Code Public License 1.0</a>
+<li><a href="http://www.opensource.org/licenses/pythonpl.html" target="_blank">Python License</a>
+<li><a href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</a>
+<li><a href="http://www.opensource.org/licenses/apachepl.html" target="_blank">Apache Software License</a>
+<li><a href="http://www.opensource.org/licenses/vovidapl.html" target="_blank">Vovida Software License 1.0</a>
+<li><a href="http://www.opensource.org/licenses/sisslpl.html" target="_blank">Sun Internet Standards Source License (SISSL)</a>
+<li><a href="http://www.opensource.org/licenses/intel-open-source-license.html" target="_blank">Intel Open Source License</a>
+<li><a href="http://www.opensource.org/licenses/mozilla1.1.html" target="_blank">Mozilla Public License 1.1 (MPL 1.1)</a>
+<li><a href="http://www.opensource.org/licenses/jabberpl.html" target="_blank">Jabber Open Source License</a>
+<li><a href="http://www.opensource.org/licenses/nokia.html" target="_blank">Nokia Open Source License</a>
+<li><a href="http://www.opensource.org/licenses/sleepycat.html" target="_blank">Sleepycat License</a>
+<li><a href="http://www.opensource.org/licenses/nethack.html" target="_blank">Nethack General Public License</a>
+<li><a href="http://oss.software.ibm.com/developerworks/opensource/license-cpl.html" target="_blank">IBM Common Public License</a>
+<li><a href="http://www.opensource.apple.com/apsl/" target="_blank">Apple Public Source License</a>
+<li><a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/register/publicdomain.txt" target="_blank">Public Domain</a>
+<li>Website Only
+<li>Other/Proprietary License
 
-</UL>
+</ul>
 
-<P><B>License for This Project</B>
+<p><strong>License for This Project</strong>
 
-<B>Your License:</B><BR>
+<strong>Your License:</strong><br />
 <?php
 
 // create SELECT based on $LICENSE array in common/include/vars.php
 //
-	echo '<SELECT NAME="license">';
-	echo '<OPTION value="">(select)'."\n";
+	echo '<select name="license">';
+	echo '<option value="">(select)'."\n";
 	while (list($k,$v) = each($LICENSE)) {
-		print "<OPTION value=\"$k\"";
+		print "<option value=\"$k\"";
 		if ($license == $k) {
 			print " SELECTED";
 		}
@@ -222,17 +222,17 @@ your license.
 	echo '</SELECT>';
 
 ?>
-<P>
+<p>
 If you selected "other", please provide an explanation along
 with a description of your license. Realize that other licenses may
 not be approved. Also, it may take additional time to make a decision
 for such project, since we will need to check that license is compatible
 with the OpenSource definition.
-<BR>
-<TEXTAREA name="license_other" wrap=virtual cols=60 rows=5>
+<br />
+<textarea name="license_other" wrap=virtual cols=60 rows=5>
 <?php echo stripslashes($license_other); ?>
-</TEXTAREA>
-<P>
+</textarea>
+<p>
 
 
 <h3>4. Project Public Description</h3>
@@ -244,46 +244,46 @@ be as comprehensive and formal as Project Purpose description
 length is 255 chars.
 </p>
 <font size="-1">
-<TEXTAREA name="description" wrap="virtual" cols="70" rows="5">
+<textarea name="description" wrap="virtual" cols="70" rows="5">
 <?php echo stripslashes($description); ?>
-</TEXTAREA>
+</textarea>
 </font>
 
-<H3>5. Project Unix Name</H3>
+<h3>5. Project Unix Name</h3>
 <p>
 In addition to full project name, you will need to choose short,
 "Unix" name for your project.
 </p>
 
-<P> The "Unix Name" has several restrictions because it is
+<p> The "Unix Name" has several restrictions because it is
 used in so many places around the site. They are:
 
-<UL>
-<LI>Cannot match the unix name of any other project
-<LI>Must be between 3 and 15 characters in length
-<LI>Must be in lower case
-<LI>Can only contain characters, numbers, and dashes
-<LI>Must be a valid unix username
-<LI>Cannot match one of our reserved domains
-<LI>Unix name will never change for this project
-</UL>
+<ul>
+<li>Cannot match the unix name of any other project
+<li>Must be between 3 and 15 characters in length
+<li>Must be in lower case
+<li>Can only contain characters, numbers, and dashes
+<li>Must be a valid unix username
+<li>Cannot match one of our reserved domains
+<li>Unix name will never change for this project
+</ul>
 
-<P>Your unix name is important, however, because it will be used for
+<p>Your unix name is important, however, because it will be used for
 many things, including:
 
-<UL>
-<LI>A web site at <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<LI>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<LI>Shell access to <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
-<LI>Search engines throughout the site
-</UL>
+<ul>
+<li>A web site at <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
+<li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
+<li>Shell access to <tt>unixname.<?php echo $GLOBALS['sys_default_domain']; ?></tt>
+<li>Search engines throughout the site
+</ul>
 
-<P>Unix Name:
-<BR>
+<p>Unix Name:
+<br />
 <input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo $unix_name; ?>">
 
 <div align="center">
-<input type=submit name="submit" value="I AGREE"> <INPUT type=submit name="i_disagree" value="I DISAGREE">
+<input type=submit name="submit" value="I AGREE"> <input type=submit name="i_disagree" value="I DISAGREE">
 </div>
 
 </form>

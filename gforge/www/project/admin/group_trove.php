@@ -63,13 +63,13 @@ AND a parent category will result in only the more specific categorization
 being accepted.
 </p>
 
-<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 
 <?php
 
 $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
-	print "\n<HR>\n<P><B>$fullname</B> ".help_button('trove_cat',$catroot)."\n";
+	print "\n<hr />\n<p><strong>$fullname</strong> ".help_button('trove_cat',$catroot)."</p>\n";
 
 	$res_grpcat = db_query("
 		SELECT trove_cat_id
@@ -92,9 +92,9 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 
 ?>
 
-<INPUT type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-<P><INPUT type="submit" name="submit" value="Update All Category Changes">
-</FORM>
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<p><input type="submit" name="submit" value="Update All Category Changes" /></p>
+</form>
 
 <?php
 

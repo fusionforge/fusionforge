@@ -222,7 +222,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 	$stmt=ociparse($conn,$qstring);
 	
 	if (!$stmt) {
-		echo $qstring.'<br>';
+		echo $qstring.'<br />';
 		return 0;
 	} else {
 		
@@ -235,7 +235,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 		$res = ociexecute($stmt,$sys_db_oci_commit_mode);
 		
 		if ( !$res ) {
-			echo $qstring.'<br>';
+			echo $qstring.'<br />';
 			return 0;
 		}
 		else if ( strcmp(ocistatementtype($stmt),"SELECT")==0 ) {

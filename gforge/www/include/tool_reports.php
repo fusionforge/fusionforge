@@ -33,7 +33,7 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 		}
 
 /*	       	for ($i=0; $i<db_numrows($result1); $i++) {
-			echo "$titles[$i]=>$opened[$i]/$all[$i]<br>";
+			echo "$titles[$i]=>$opened[$i]/$all[$i]<br />";
 		}
 */
 		$scale=graph_calculate_scale(array($opened,$all),400);
@@ -49,13 +49,13 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 			$props
 		);
 		end_graph();
-		print '<p><br>';
-		print '<table cellspacing=0 border=0><tr align="center"><td width="15%">Key:</td><td width="5%">(</td><td width="35%" bgcolor="'.$bar_colors[0].'">Open </td>'.
-		      '<td width="5%">/</td><td width="35%" bgcolor="'.$bar_colors[1].'">All </td><td width="5%">)</td></tr></table>';
+		print '<p><br />';
+		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">Key:</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">Open </td>'.
+		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">All </td><td width="5%">)</td></tr></table>';
 		print '</p>';
 //      		GraphResult($result,$title);
 	} else {
-		echo "<H2>No data found to report</H2>";
+		echo "<h2>No data found to report</h2>";
 	}
 }
 
@@ -92,8 +92,8 @@ function reports_header($group_id, $vals, $titles, $html='') {
 		'span',$span,false);
 	print html_build_select_box_from_arrays ($vals,$texts,'period',$period,false);
 
-	print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\">";
-	print ' <input type="submit" value="Show">';
+	print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\" />";
+	print ' <input type="submit" value="Show" />';
 	print "</form>\n";
 }
 

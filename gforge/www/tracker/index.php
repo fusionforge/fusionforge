@@ -159,10 +159,10 @@ if ($group_id && $atid) {
 							exit_error("Error","Invalid filename");
 						}
 						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
-							$feedback .= ' <BR>File Upload: '.$afh->getErrorMessage();
+							$feedback .= ' <br />File Upload: '.$afh->getErrorMessage();
 							$was_error=true;
 						} else {
-							$feedback .= ' <BR>File Upload: Successful ';
+							$feedback .= ' <br />File Upload: Successful ';
 						}
 					}
 				}
@@ -180,10 +180,10 @@ if ($group_id && $atid) {
 							$feedback .= $afh->getErrorMessage().'::'.$delete_file[$i];
 						} else {
 							if (!$afh->delete()) {
-								$feedback .= ' <BR>File Delete: '.$afh->getErrorMessage();
+								$feedback .= ' <br />File Delete: '.$afh->getErrorMessage();
 								$was_error=true;
 							} else {
-								$feedback .= ' <BR>File Delete: Successful ';
+								$feedback .= ' <br />File Delete: Successful ';
 							}
 						}
 					}
@@ -293,18 +293,18 @@ if ($group_id && $atid) {
 	$params['sectionvals']=array($group->getPublicName());
 	
 	echo site_project_header($params);
-	echo '<B><A HREF="/tracker/reporting/?group_id='.$group_id.'">Reporting</A> | '
-		 .'<A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A>'
-		 .'</B><P>';
+	echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">Reporting</a> | '
+		 .'<a href="/tracker/admin/?group_id='.$group_id.'">Admin</a>'
+		 .'</strong><p>';
 
 	if (!$at_arr || count($at_arr) < 1) {
-		echo "<H1>No Accessible Trackers Found</H1>";
-		echo "<P>
-			<B>No trackers have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project ".
-			"will have to set up data types using the <A HREF=\"/tracker/admin/?group_id=$group_id\">admin page</A></FONT></B>";
+		echo "<h1>No Accessible Trackers Found</h1>";
+		echo "<p>
+			<strong>No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project ".
+			"will have to set up data types using the <a href=\"/tracker/admin/?group_id=$group_id\">admin page</a></FONT></strong>";
 	} else {
 
-		echo '<P>'.$Language->getText('tracker', 'choose').'<P>';
+		echo '<p>'.$Language->getText('tracker', 'choose').'<p>';
 
 		/*
 			Put the result set (list of trackers for this group) into a column with folders
@@ -312,12 +312,12 @@ if ($group_id && $atid) {
 
 		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
-			<A HREF="/tracker/?atid='. $at_arr[$j]->getID() .
+			<a href="/tracker/?atid='. $at_arr[$j]->getID() .
 			'&group_id='.$group_id.'&func=browse">' .
-			html_image("ic/tracker20w.png","20","20",array("BORDER"=>"0")) . ' &nbsp;'.
-			$at_arr[$j]->getName() .'</A> 
-			( <B>'. $at_arr[$j]->getOpenCount() .' open / '. $at_arr[$j]->getTotalCount() .' total</B> )<BR>'.
-			$at_arr[$j]->getDescription() .'<P>';
+			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
+			$at_arr[$j]->getName() .'</a> 
+			( <strong>'. $at_arr[$j]->getOpenCount() .' open / '. $at_arr[$j]->getTotalCount() .' total</strong> )<br />'.
+			$at_arr[$j]->getDescription() .'<p>';
 		}
 	}
 

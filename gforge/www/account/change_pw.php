@@ -63,14 +63,14 @@ if ($submit) {
 	site_user_header(array(title=>"Change Password",'pagename'=>'account_change_pw'));
 	?>
 
-	<form action="<?php echo $PHP_SELF; ?>" method="POST">
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<p>Old Password:
-	<br><input type="password" name="old_passwd">
+	<br /><input type="password" name="old_passwd" /></p>
 	<p>New Password (at least 6 chars):
-	<br><input type="password" name="passwd">
+	<br /><input type="password" name="passwd" /></p>
 	<p>New Password (repeat):
-	<br><input type="password" name="passwd2">
-	<p><input type="submit" name="submit" value="Update">
+	<br /><input type="password" name="passwd2" /></p>
+	<p><input type="submit" name="submit" value="Update" /></p>
 	</form>
 	<?php
 }

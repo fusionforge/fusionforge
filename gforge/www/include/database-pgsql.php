@@ -53,7 +53,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 	}
 
 	if ($GLOBALS['IS_DEBUG']) 
-		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<P><BR>\n";
+		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<p><br />\n";
 	global $conn;
 	return @pg_exec($conn,$qstring);
 }

@@ -1,3 +1,4 @@
+
 <?php
 /**
   *
@@ -27,7 +28,7 @@ if ($by=='lang') {
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.language='$lang'";
 
-	echo '<H2>Snippets by language: '.$SCRIPT_LANGUAGE[$lang].'</H2>';
+	echo '<h2>Snippets by language: '.$SCRIPT_LANGUAGE[$lang].'</h2>';
 
 } else if ($by=='cat') {
 
@@ -39,7 +40,7 @@ if ($by=='lang') {
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.category='$cat'";
 
-	echo '<H2>Snippets by category: '.$SCRIPT_CATEGORY[$cat].'</H2>';
+	echo '<h2>Snippets by category: '.$SCRIPT_CATEGORY[$cat].'</h2>';
 
 } else {
 
@@ -54,7 +55,7 @@ $result2=db_query($sql2);
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
-	echo '<H2>No snippets found</H2>';
+	echo '<h2>No snippets found</h2>';
 } else {
 
 	$title_arr=array();
@@ -69,17 +70,17 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	*/
 	if ($rows2 > 0) {
 		echo '
-			<TR BGCOLOR="EFEFEF"><TD COLSPAN="3"><B>Packages Of Snippets</B></TD>';
+			<tr style="background-color:#efefef"><td colspan="3"><strong>Packages Of Snippets</strong><td';
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=package&id='.
-			db_result($result2,$i,'snippet_package_id').'"><B>'.
-			db_result($result2,$i,'snippet_package_id').'</B></A></TD><TD><B>'.
-			db_result($result2,$i,'name').'</TD><TD>'.
-			db_result($result2,$i,'user_name').'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2"><a href="/snippet/detail.php?type=package&amp;id='.
+			db_result($result2,$i,'snippet_package_id').'"><strong>'.
+			db_result($result2,$i,'snippet_package_id').'</strong></a></td><td><strong>'.
+			db_result($result2,$i,'name').'</td><td>'.
+			db_result($result2,$i,'user_name').'</td></tr>';
 		echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
 	}
 
 
@@ -89,17 +90,17 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 
 	if ($rows > 0) {
 		echo '
-			<TR BGCOLOR="EFEFEF"><TD COLSPAN="3"><B>Snippets</B></TD>';
+			<tr style="background-color:#efefef"><td colspan="3"><strong>Snippets</strong></td>';
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=snippet&id='.
-			db_result($result,$i,'snippet_id').'"><B>'.
-			db_result($result,$i,'snippet_id').'</B></A></TD><TD><B>'.
-			db_result($result,$i,'name').'</TD><TD>'.
-			db_result($result,$i,'user_name').'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2"><a href="/snippet/detail.php?type=snippet&amp;id='.
+			db_result($result,$i,'snippet_id').'"><strong>'.
+			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong>'.
+			db_result($result,$i,'name').'</td><td>'.
+			db_result($result,$i,'user_name').'</td></tr>';
 		echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
 	}
 
 	echo $GLOBALS['HTML']->listTableBottom();

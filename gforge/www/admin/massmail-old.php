@@ -34,40 +34,40 @@ $res_count = db_query("SELECT count(*) AS count FROM users,user_group WHERE "
 $row_count = db_fetch_array($res_count);
 $count_sfadmin = $row_count[count];
 
-print '<P><B>Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</B>
+print '<p><strong>Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</strong>
 
-<P>Be <FONT color=#FF0000><B>VERY</B></FONT> careful with this form,
+<p>Be <span style="color:red"><strong>VERY</strong></span> careful with this form,
 because sutmitting it WILL send email to lots of users.
 
-<FORM action="massmail_execute.php">
-<INPUT type="radio" name="destination" value="comm">
+<form action="massmail_execute.php">
+<input type="radio" name="destination" value="comm" />
 Send only to users subscribed to "Additional Community Mailings" ('
 .$count_comm
-.')<BR><INPUT type="radio" name="destination" value="sf">
+.')<br /><input type="radio" name="destination" value="sf" />
 Send only to users that agreed to receive "Site Updates" ('
 .$count_sf
-.')<BR><INPUT type="radio" name="destination" value="devel">
+.')<br /><input type="radio" name="destination" value="devel" />
 Send only to project developers ('
 .$count_devel
-.')<BR><INPUT type="radio" name="destination" value="admin">
+.')<br /><input type="radio" name="destination" value="admin" />
 Send only to project administrators ('
 .$count_admin
-.')<BR><INPUT type="radio" name="destination" value="sfadmin">
+.')<br /><input type="radio" name="destination" value="sfadmin" />
 Send only to <?php echo $GLOBALS['sys_name']; ?> administrators (test) ('
 .$count_sfadmin
-.')<BR><INPUT type="radio" name="destination" value="all">
+.')<br /><input type="radio" name="destination" value="all" />
 Send to all users, regardless of their preferences ('
 .$count_all
 .')
-<P><B>Start With User ID:</B> (for use when the process quits)
-<BR><INPUT type="text" name="first_user" value="0">
-<P>
+<p><strong>Start With User ID:</strong> (for use when the process quits)
+<br /><input type="text" name="first_user" value="0" /></p>
+<p>
 Subject:
-<BR><INPUT type="text" name="mail_subject" value="<?php echo $GLOBALS['sys_name']; ?>: ">
+<br /><input type="text" name="mail_subject" value="<?php echo $GLOBALS['sys_name']; ?>: " /></p>
 
-<P>Text of Message:
-<PRE>
-<BR><TEXTAREA name="mail_message" cols="70" rows="40" wrap="physical">
+<p>Text of Message:
+<pre>
+<br /><textarea name="mail_message" cols="70" rows="40" wrap="physical">
 
 ---------------------
 This email was sent from '. $GLOBALS['sys_default_domain'] .'. To change your email receipt
@@ -75,11 +75,11 @@ preferences, please visit the site and edit your account via the
 "Account Maintenance" link.
 
 Please direct any questions to admin@'. $GLOBALS['sys_default_domain'].' .
-</TEXTAREA>
-</PRE>
-<P><INPUT type="submit" name="Submit" value="Submit">
+</textarea>
+</pre></p>
+<p><input type="submit" name="Submit" value="Submit" /></p>
 
-</FORM>
+</form>
 ';
 
 $HTML->footer(array());

@@ -19,7 +19,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Edit A Question','pagename'=>'survey_admin_edit_question'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -45,7 +45,7 @@ if ($result) {
 }
 
 ?>
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 var timerID2 = null;
 
@@ -57,25 +57,24 @@ function show_questions() {
 // -->
 </script>
 
-<H2>Editing Question #<?php echo $question_id; ?></H2>
+<h2>Editing Question #<?php echo $question_id; ?></h2>
 
-<H3><FONT COLOR="RED">WARNING! It is a bad idea to change a question after responses to it have been submitted</FONT></H2> 
-<P>
-If you change a question after responses have been posted, your results pages may be misleading.
-<P>
+<h3><span style="color:red">WARNING! It is a bad idea to change a question after responses to it have been submitted</span></h3>
 
-<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="Y">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-<INPUT TYPE="HIDDEN" NAME="question_id" VALUE="<?php echo $question_id; ?>">
+<p>If you change a question after responses have been posted, your results pages may be misleading.</p>
+
+<p>
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+<input type="hidden" name="post_changes" value="Y" />
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>"/>
+<input type="hidden" name="question_id" value="<?php echo $question_id; ?>" />
 
 Question:
-<BR>
-<INPUT TYPE="TEXT" NAME="question" VALUE="<?php echo $question; ?>" SIZE="60" MAXLENGTH="150">
+<br />
+<input type="text" name="question" value="<?php echo $question; ?>" size="60" maxlength="150" />
 
-<P>
-Question Type:
-<BR>
+<p>Question Type:
+<br />
 <?php
 
 $sql="SELECT * FROM survey_question_types";
@@ -83,15 +82,15 @@ $result=db_query($sql);
 echo html_build_select_box($result,'question_type',$question_type,false);
 
 ?>
-<P>
+</p>
 
-<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Submit Changes">
-</FORM>  
+<p><input type="submit" name="submit" value="Submit Changes"></p>
+</form></p>
 
-<P>
-<FORM>
-<INPUT TYPE="BUTTON" NAME="none" VALUE="Show Existing Questions" ONCLICK="show_questions()">
-</FORM>
+<p>
+<form>
+<input type="button" name="none" value="Show Existing Questions" onclick="show_questions()" />
+</form></p>
 
 <?php
 

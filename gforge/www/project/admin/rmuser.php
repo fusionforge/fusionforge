@@ -34,7 +34,7 @@ if ($group->getType()==2) {
 	$passed_group_id = '';
 } else {
 	$type = 'project';
-	$passed_group_id = '<input type="hidden" name="group_id" value="'.$group_id.'">';
+	$passed_group_id = '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 }
 
 // Need to check if user being removed is admin
@@ -55,26 +55,24 @@ project_admin_header(array('title'=>"Project Admin: ".group_getname($group_id),'
 ?>
 
 <h3>Removing Developer from <?php echo ucfirst($type); ?></h3>
-<p>
-You are about to remove developer from the <?php echo $type; ?>. Please
-confirm your action:
-</p>
+<p>You are about to remove developer from the <?php echo $type; ?>. Please
+confirm your action:</p>
 
 <table>
 <tr><td>
 
-<form action="<?php echo $return_to; ?>" method="POST">
-<input type="hidden" name="func" value="rmuser">
+<form action="<?php echo $return_to; ?>" method="post">
+<input type="hidden" name="func" value="rmuser" />
 <?php echo $passed_group_id; ?>
-<input type="hidden" name="rm_id" value="<?php echo $rm_id; ?>">
-<input type="submit" value="Remove">
+<input type="hidden" name="rm_id" value="<?php echo $rm_id; ?>" />
+<input type="submit" value="Remove" />
 </form>
 
 </td><td>
 
-<form action="<?php echo $return_to; ?>" method="GET">
+<form action="<?php echo $return_to; ?>" method="get">
 <?php echo $passed_group_id; ?>
-<input type="submit" value="Cancel">
+<input type="submit" value="Cancel" />
 </form>
 
 </td></tr>

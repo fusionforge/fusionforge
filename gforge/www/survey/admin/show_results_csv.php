@@ -17,7 +17,7 @@ require_once('HTML_Graphs.php');
 require_once('www/survey/survey_utils.php');
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<H1>Permission Denied</H1>";
+        echo "<h1>Permission Denied</h1>";
 	exit;
 }
 
@@ -42,8 +42,8 @@ $questions=str_replace(" ", "", $questions);
 $quest_array=explode(',', $questions);
 $count=count($quest_array);
 
-echo "<HTML><PRE>";
-
+echo "<html><pre>";
+/*
 #
 #
 #
@@ -53,7 +53,7 @@ echo "<HTML><PRE>";
 #
 #
 #
-
+*/
 
 echo "cust_id,first_name,field_1,email,field2,phone,field3,field4,field5,year,month,day,";
 

@@ -37,16 +37,16 @@ class ArtifactTypeHtml extends ArtifactType {
 		$params['tabtext']=$this->getName();
 
 		site_project_header($params);
-		echo '<H3>Tracker: <A HREF="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</A></H3><P>';
+		echo '<h3>Tracker: <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
 
-		echo '<B><A HREF="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">Submit New</A>';
-		echo ' | <A HREF="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">Browse</A>';
+		echo '<strong><a href="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">Submit New</a>';
+		echo ' | <a href="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">Browse</a>';
 		if (session_loggedin()) {
-			echo ' | <A HREF="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">Reporting</A>';
+			echo ' | <a href="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">Reporting</a>';
 		}
-		echo ' | <A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A>';
+		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'">Admin</a>';
 
-		echo '</B><P>';
+		echo '</strong><p>';
 		//echo '<HR NoShade SIZE="1" SIZE="90%">';
 	}
 
@@ -57,8 +57,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	function adminHeader($params) {
 		echo $this->header($params);
 		$group_id= $this->Group->getID();
-		echo '<B>Admin Functions: <A HREF="/tracker/admin/?group_id='.$group_id.'">Add/Browse Artifact Types</A>';
-		echo ' | <A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">Edit/Update Options in: '. $this->getName() .'</A></B>';
+		echo '<strong>Admin Functions: <a href="/tracker/admin/?group_id='.$group_id.'">Add/Browse Artifact Types</a>';
+		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">Edit/Update Options in: '. $this->getName() .'</a></strong>';
 	}
 
 	function categoryBox ($name='category_id',$checked='xzxz',$text_100='None') {
@@ -101,8 +101,8 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($IS_ADMIN) {
 			echo '
-			<FORM NAME="artifactList" ACTION="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$this->getID().'" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="func" VALUE="massupdate">';
+			<form name="artifactList" action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$this->getID().'" METHOD="POST">
+			<input type="hidden" name="func" value="massupdate">';
 		}
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -111,21 +111,21 @@ class ArtifactTypeHtml extends ArtifactType {
 		$rows=db_numrows($result);
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. get_priority_color(db_result($result, $i, 'priority')) .'">'.
-			'<TD NOWRAP>'.
-			($IS_ADMIN?'<INPUT TYPE="CHECKBOX" NAME="artifact_id_list[]" VALUE="'.
+			<tr bgcolor="'. get_priority_color(db_result($result, $i, 'priority')) .'">'.
+			'<td NOWRAP>'.
+			($IS_ADMIN?'<input type="CHECKBOX" name="artifact_id_list[]" value="'.
 			db_result($result, $i, 'artifact_id') .'"> ':'').
 					db_result($result, $i, 'artifact_id') .
-					'</TD>'.
-			'<TD><A HREF="'.$PHP_SELF.'?func=detail&aid='. 
+					'</td>'.
+			'<td><a href="'.$PHP_SELF.'?func=detail&aid='. 
 			db_result($result, $i, 'artifact_id').
 			'&group_id='. $group_id .'&atid='.
 			$this->getID().'">'. 
 			db_result($result, $i, 'summary').
-			'</A></TD>'.
-			'<TD>'. (($set != 'closed' && db_result($result, $i, 'date') < $then)?'<B>* ':'&nbsp; ') . date($sys_datefmt,db_result($result, $i, 'date')) .'</TD>'.
-			'<TD>'. make_user_link ( db_result($result, $i, 'assigned_to') ) .'</TD>'.
-			'<TD>'. make_user_link ( db_result($result, $i, 'submitted_by') ) .'</TD></TR>';
+			'</a></td>'.
+			'<td>'. (($set != 'closed' && db_result($result, $i, 'date') < $then)?'<strong>* ':'&nbsp; ') . date($sys_datefmt,db_result($result, $i, 'date')) .'</td>'.
+			'<td>'. make_user_link ( db_result($result, $i, 'assigned_to') ) .'</td>'.
+			'<td>'. make_user_link ( db_result($result, $i, 'submitted_by') ) .'</td></tr>';
 		}
 
 		/*
@@ -133,20 +133,20 @@ class ArtifactTypeHtml extends ArtifactType {
 		*/
 		if (($offset > 0) || ($rows >= 50)) {
 			echo '
-				<TR><TD COLSPAN="2">';
+				<tr><td colspan="2">';
 			if ($offset > 0) {
-				echo '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset-50).'"><B><-- Previous 50</B></A>';
+				echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset-50).'"><strong><-- Previous 50</strong></a>';
 			} else {
 				echo '&nbsp;';
 			}
-			echo '</TD><TD>&nbsp;</TD><TD COLSPAN="2">';
+			echo '</td><td>&nbsp;</td><td colspan="2">';
 	
 			if ($rows >= 50) {
-				echo '<A HREF="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset+50).'"><B>Next 50 --></B></A>';
+				echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$this->getID().'&set='.$set.'&offset='.($offset+50).'"><strong>Next 50 --></strong></a>';
 			} else {
 				echo '&nbsp;';
 			}
-			echo '</TD></TR>';
+			echo '</td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
@@ -169,49 +169,49 @@ class ArtifactTypeHtml extends ArtifactType {
 	//-->
 	</script>
 
-			<TABLE WIDTH="100%" BORDER="0">
-			<TR><TD COLSPAN="2">
+			<table width="100%" border="0">
+			<tr><td colspan="2">
 <font size=1>
 <a href="javascript:checkAll(1)">Check&nbsp;All</a>
 -
  <a href="javascript:checkAll(0)">Clear&nbsp;All</a>
 </font>
-<P>
-<FONT COLOR="#FF0000"><B>Admin:</B></FONT>  If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
-			</TD></TR>
+<p>
+<FONT COLOR="#FF0000"><strong>Admin:</strong></FONT>  If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+			</td></tr>
 
-			<TR>
-			<TD><B>Category: <A href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><b>(?)</b></a></B><BR>'. $this->categoryBox ('category_id','xzxz','No Change') .'</TD>
-			<TD><B>Group: <A href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><b>(?)</b></a></B><BR>'. $this->artifactGroupBox ('artifact_group_id','xzxz','No Change') .'</TD>
-			</TR>
+			<tr>
+			<td><strong>Category: <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a></strong><br />'. $this->categoryBox ('category_id','xzxz','No Change') .'</td>
+			<td><strong>Group: <a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a></strong><br />'. $this->artifactGroupBox ('artifact_group_id','xzxz','No Change') .'</td>
+			</tr>
 
-			<TR>
-			<TD><B>Priority: <A href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><b>(?)</b></a></B><BR>';
+			<tr>
+			<td><strong>Priority: <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
 			echo build_priority_select_box ('priority', '100', true);
-			echo '</TD><TD>';
+			echo '</td><td>';
 			if ($this->useResolution()) {
 				echo '
-				<B>Resolution: <A href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><b>(?)</b></a></B><BR>';
+				<strong>Resolution: <a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a></strong><br />';
 				echo $this->resolutionBox('resolution_id','xzxz',true,'No Change');
 			} else { 
 				echo '&nbsp;
-				<INPUT TYPE="HIDDEN" NAME="resolution_id" VALUE="100">';
+				<input type="hidden" name="resolution_id" value="100">';
 			}
 
-			echo '</TD>
-			</TR>
+			echo '</td>
+			</tr>
 
-			<TR>
-			<TD><B>Assigned To: <A href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><b>(?)</b></a></B><BR>'. $this->technicianBox ('assigned_to','xzxz',true,'No Change') .'</TD>
-			<TD><B>Status: <A href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><b>(?)</b></a></B><BR>'. $this->statusBox ('status_id','xzxz',true,'No Change') .'</TD>
-			</TR>
+			<tr>
+			<td><strong>Assigned To: <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />'. $this->technicianBox ('assigned_to','xzxz',true,'No Change') .'</td>
+			<td><strong>Status: <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong><br />'. $this->statusBox ('status_id','xzxz',true,'No Change') .'</td>
+			</tr>
 
-			<TR><TD COLSPAN="2"><B>Canned Response: <A href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><b>(?)</b></a></B><BR>'. $this->cannedResponseBox ('canned_response') .'</TD></TR>
+			<tr><td colspan="2"><strong>Canned Response: <a href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><strong>(?)</strong></a></strong><br />'. $this->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<TR><TD COLSPAN="3" ALIGN="MIDDLE"><INPUT TYPE="SUBMIT" name="submit" VALUE="Mass Update"></TD></TR>
+			<tr><td colspan="3" align="MIDDLE"><input type="SUBMIT" name="submit" value="Mass Update"></td></tr>
 
 			</TABLE>		
-		</FORM>';
+		</form>';
 		}
 
 

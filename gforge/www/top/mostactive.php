@@ -31,10 +31,10 @@ if ($type == 'week') {
 
 $HTML->header(array('title'=>$title));
 
-print '<P><B><FONT size="+1">'.$title.'</FONT></B>
-<BR><I>(Updated Daily)</I>
+print '<p><strong><FONT size="+1">'.$title.'</FONT></strong>
+<br /><em>(Updated Daily)</em>
 
-<P><A href="/top/">[View Other Top Categories]</A>';
+<p><a href="/top/">[View Other Top Categories]</a>';
 
 $arr=array('Rank','Project Name','Percentile');
 
@@ -45,16 +45,16 @@ $rows=db_numrows($res_top);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</TD><TD><A href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
-		.$row_top['group_name']."</A>"
-		.'</TD><TD align="right">'.$row_top['percentile'].'</TD></TR>';
+	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
+		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
+		.$row_top['group_name']."</a>"
+		.'</td><td align="right">'.$row_top['percentile'].'</td></tr>';
 }
 
 if ($i<$rows) {
-print '<TR BGCOLOR="'.$HTML->COLOR_LTBACK2.'"><TD>'.(($offset>0)?'<A HREF="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><B><-- More</B></A>':'&nbsp;').'</TD>
-	<TD>&nbsp;</TD>
-	<TD ALIGN="RIGHT"><A HREF="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><B>More --></B></A></TD></TR>';
+print '<tr bgcolor="'.$HTML->COLOR_LTBACK2.'"><td>'.(($offset>0)?'<a href="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><strong><-- More</strong></a>':'&nbsp;').'</td>
+	<td>&nbsp;</td>
+	<td align="RIGHT"><a href="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><strong>More --></strong></a></td></tr>';
 }
 
 echo $HTML->listTableBottom();

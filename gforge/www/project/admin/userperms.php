@@ -48,7 +48,7 @@ function show_permissions_row($i, $row_dev) {
 
 	// Show admins in bold
 	if (stristr($row_dev['admin_flags'],'A')) {
-		$name = '<b>'.$row_dev['user_name'].' ('.$row_dev['realname'].')</b>';
+		$name = '<strong>'.$row_dev['user_name'].' ('.$row_dev['realname'].')</strong>';
 	} else {
 		$name = $row_dev['user_name'].' ('.$row_dev['realname'].')';
 	}
@@ -57,7 +57,7 @@ function show_permissions_row($i, $row_dev) {
 	<tr align="center" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 	.'<td align="left">'
 	.'<a href="userpermedit.php?group_id='.$group_id
-	.'&user_id='.$row_dev['user_id'].'">'.$name.'</a><br>'
+	.'&amp;user_id='.$row_dev['user_id'].'">'.$name.'</a><br />'
 	.role_id2str($row_dev['member_role'])
 	.(($row_dev['release_flags']==1)?', Rel.Tech.':'')
 	.'</td>';
@@ -65,27 +65,27 @@ function show_permissions_row($i, $row_dev) {
 /*
 	// cvs permissions
 	$cvs2perm = array(0=>'Read', 1=>'Write', 2=>'Admin');
-	print '<TD>'.$cvs2perm[$row_dev['cvs_flags']].'</td>'."\n";
+	print '<td>'.$cvs2perm[$row_dev['cvs_flags']].'</td>'."\n";
 */
 
 	// artifact manager permissions
 	$art2perm = array(0=>'-',2=>'A');
-	print '<TD>'.$art2perm[$row_dev['artifact_flags']].'</td>';
+	print '<td>'.$art2perm[$row_dev['artifact_flags']].'</td>';
 
 	// project/task manager permissions
 	$flag2perm = array(0=>'-',1=>'T',2=>'A&T',3=>'A');
-	print '<TD>'.$flag2perm[$row_dev['project_flags']].'</td>';
+	print '<td>'.$flag2perm[$row_dev['project_flags']].'</td>';
 
 	// forum permissions
 	$forum2perm = array(0=>'-',2=>'Moderator');
-	print '<TD>'.$forum2perm[$row_dev['forum_flags']].'</td>';
+	print '<td>'.$forum2perm[$row_dev['forum_flags']].'</td>';
 
 	// documenation manager permissions
 	$forum2perm = array(0=>'-',1=>'Editor');
 
-	print '<TD>'.$forum2perm[$row_dev['doc_flags']].'</td>';
+	print '<td>'.$forum2perm[$row_dev['doc_flags']].'</td>';
 
-	print '</TR>';
+	print '</tr>';
 }
 
 
@@ -100,22 +100,22 @@ project_admin_header(array('title'=>'Project Developer Permissions','group'=>$gr
 
 ?>
 
-<P>
+<p>&nbsp;</p>
 <p>Click developer's name below to edit permissions.</p>
-<P>
+<p>&nbsp;</p>
 
-<TABLE width="100%" cellspacing=0 cellpadding=2 border=0>
+<table width="100%" cellspacing="0" cellpadding="2" border="0">
 
-<TR align=center>
-<TD><font size="-1"><B>General</B></font></TD>
+<tr align="center">
+<td><span style="font-size:smaller"><strong>General</strong></span></td>
 <?php /*
-<TD><font size="-1"><B>CVS</B></font></TD>
+<td><font size="-1"><strong>CVS</strong></font></td>
 */ ?>
-<TD><font size="-1"><B>Tracker<br>Manager</B></font></TD>
-<TD><font size="-1"><B>Task<br>Manager</B></font></TD>
-<TD><font size="-1"><B>Forums</B></font></TD>
-<TD><font size="-1"><B>Doc.<br>Manager</B></font></TD>
-</TR>
+<td><span style="font-size:smaller"><strong>Tracker<br />Manager</strong></span></td>
+<td><span style="font-size:smaller"><strong>Task<br />Manager</strong></span></td>
+<td><span style="font-size:smaller"><strong>Forums</strong></span></td>
+<td><span style="font-size:smaller"><strong>Doc.<br />Manager</strong></span></td>
+</tr>
 <?php
 
 	$res_dev = db_query("
@@ -137,7 +137,7 @@ project_admin_header(array('title'=>'Project Developer Permissions','group'=>$gr
 	");
 
 	if (!$res_dev || db_numrows($res_dev) < 1) {
-		echo '<H2>No Developers Found</H2>';
+		echo '<h2>No Developers Found</h2>';
 	} else {
 		$i = 0;
 
@@ -150,7 +150,7 @@ project_admin_header(array('title'=>'Project Developer Permissions','group'=>$gr
 
 ?>
 
-</TABLE>
+</table>
 
 <?php
 project_admin_footer(array());

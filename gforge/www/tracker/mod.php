@@ -15,9 +15,9 @@
 $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),'pagename'=>'tracker','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName()) ));
 
 ?>
-	<H2>[ #<?php echo $ah->getID(); ?> ] <?php echo $ah->getSummary(); ?></H2>
+	<h2>[ #<?php echo $ah->getID(); ?> ] <?php echo $ah->getSummary(); ?></h2>
 
-	<TABLE WIDTH="100%">
+	<table width="100%">
 <?php
 if (session_loggedin()) {
 ?>
@@ -31,37 +31,37 @@ if (session_loggedin()) {
 					$key="monitor";
 				}
 				echo '
-				<A href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><b>'.
-					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</b></a>';
-				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><b>(?)</b></a>
+				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
+				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
 			<td>
 				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo 
-					html_image('ic/taskman20w.png','20','20',array()); ?><b>Build Task Relation</b></a>
+					html_image('ic/taskman20w.png','20','20',array()); ?><strong>Build Task Relation</strong></a>
 			</td>
-		</TR>
+		</tr>
 <?php } ?>
-	<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
-	<INPUT TYPE="HIDDEN" NAME="func" VALUE="postmod">
-	<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
+	<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<input type="hidden" name="func" value="postmod">
+	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 
-	<TR>
-		<TD><B>Submitted By:</B><BR><?php echo $ah->getSubmittedRealName(); ?> (<tt><?php echo $ah->getSubmittedUnixName(); ?></tt>)</TD>
-		<TD><B>Date Submitted:</B><BR>
+	<tr>
+		<td><strong>Submitted By:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<tt><?php echo $ah->getSubmittedUnixName(); ?></tt>)</td>
+		<td><strong>Date Submitted:</strong><br />
 		<?php
 		echo date($sys_datefmt, $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
-			echo '<BR><B>Date Closed:</B><BR>'
+			echo '<br /><strong>Date Closed:</strong><br />'
 				 .date($sys_datefmt, $close_date);
 		}
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD><B>Data Type: <A href="javascript:help_window('/help/tracker.php?helpname=data_type')"><B>(?)</B></A></B><BR>
+	<tr>
+		<td><strong>Data Type: <a href="javascript:help_window('/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 //
@@ -84,111 +84,111 @@ if (session_loggedin()) {
 	echo html_build_select_box ($res,'new_artfact_type_id',$ath->getID(),false);
 
 		?>
-		</TD>
-		<TD>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Submit Changes">
-		</TD>
-	</TR>
+		</td>
+		<td>
+			<input type="submit" name="submit" value="Submit Changes" />
+		</td>
+	</tr>
 
-	<TR>
-		<TD><B>Category: <A href="javascript:help_window('/help/tracker.php?helpname=category')"><b>(?)</b></a></B><BR>
+	<tr>
+		<td><strong>Category: <a href="javascript:help_window('/help/tracker.php?helpname=category')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->categoryBox('category_id', $ah->getCategoryID() );
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_cat=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_cat=1">(admin)</a>';
 
 		?>
-		</TD>
-		<TD><B>Group: <A href="javascript:help_window('/help/tracker.php?helpname=group')"><b>(?)</b></a></B><BR>
+		</td>
+		<td><strong>Group: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
 		<?php
 		
 		echo $ath->artifactGroupBox('artifact_group_id', $ah->getArtifactGroupID() );
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_group=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_group=1">(admin)</a>';
 		
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD><B>Assigned To: <A href="javascript:help_window('/help/tracker.php?helpname=assignee')"><b>(?)</b></a></B><BR>
+	<tr>
+		<td><strong>Assigned To: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&update_users=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">(admin)</a>';
 		?>
-		</TD><TD>
-		<B>Priority: <A href="javascript:help_window('/help/tracker.php?helpname=priority')"><b>(?)</b></a></B><BR>
+		</td><td>
+		<strong>Priority: <a href="javascript:help_window('/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
 		<?php
 		/*
 			Priority of this request
 		*/
 		build_priority_select_box('priority',$ah->getPriority());
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD>
-		<B>Status: <A href="javascript:help_window('/help/tracker.php?helpname=status')"><b>(?)</b></a></B><BR>
+	<tr>
+		<td>
+		<strong>Status: <a href="javascript:help_window('/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->statusBox ('status_id', $ah->getStatusID() );
 
 		?>
-		</TD>
-		<TD>
+		</td>
+		<td>
 		<?php
 		if ($ath->useResolution()) {
 			echo '
-			<B>Resolution: <A href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><b>(?)</b></a></B><BR>';
+			<strong>Resolution: <a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a></strong><br />';
 			echo $ath->resolutionBox('resolution_id',$ah->getResolutionID());
 		} else {
 			echo '&nbsp;
-			<INPUT TYPE="HIDDEN" NAME="resolution_id" VALUE="100">';
+			<input type="hidden" name="resolution_id" value="100">';
 		}
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2"><B>Summary: <A href="javascript:help_window('/help/tracker.php?helpname=summary')"><b>(?)</b></a></B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" SIZE="45" VALUE="<?php 
+	<tr>
+		<td colspan="2"><strong>Summary: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<input type="text" name="summary" size="45" value="<?php
 			echo $ah->getSummary(); 
-			?>" MAXLENGTH="60">
-		</TD>
-	</TR>
+			?>" maxlength="60" />
+		</td>
+	</tr>
 
-	<TR><TD COLSPAN="2">
+	<tr><td colspan="2">
 		<?php echo nl2br($ah->getDetails()); ?>
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD COLSPAN="2">
-		<B>Use Canned Response: <A href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><b>(?)</b></a></B><BR>
+	<tr><td colspan="2">
+		<strong>Use Canned Response: <a href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_canned=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">(admin)</a>';
 		?>
-		<P>
-		<B>OR Attach A Comment: <A href="javascript:help_window('/help/tracker.php?helpname=comment')"><b>(?)</b></a></B><BR>
-		<TEXTAREA NAME="details" ROWS="7" COLS="60" WRAP="HARD"></TEXTAREA>
-		<P>
-		<H3>Followups:</H3>
-		<P>
+		<p>
+		<strong>OR Attach A Comment: <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
+		<p>&nbsp;</p>
+		<h3>Followups:</h3>
+		<p>&nbsp;</p>
 		<?php
 			echo $ah->showMessages(); 
 		?>
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD COLSPAN=2>
-		<B>Check to Upload &amp; Attach File:</B> <input type="checkbox" name="add_file" VALUE="1"> 
-		<A href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><b>(?)</b></a><BR>
-		<P>
-		<input type="file" name="input_file" size="30">
-		<P>
-		<B>File Description:</B><BR>
-		<input type="text" name="file_description" size="40" maxlength="255">
-		<P>
-		<H4>Existing Files:</H4>
+	<tr><td colspan="2">
+		<strong>Check to Upload &amp; Attach File:</strong> <input type="checkbox" name="add_file" value="1" />
+		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
+		<p>
+		<input type="file" name="input_file" size="30" /></p>
+		<p>
+		<strong>File Description:</strong><br />
+		<input type="text" name="file_description" size="40" maxlength="255" /></p>
+		<p>&nbsp;</p>
+		<h4>Existing Files:</h4>
 		<?php
 		//
 		//	print a list of files attached to this Artifact
@@ -208,32 +208,32 @@ if (session_loggedin()) {
 
 			for ($i=0; $i<$count; $i++) {
 				echo '
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><INPUT TYPE="CHECKBOX" NAME="delete_file[]" VALUE="'. $file_list[$i]->getID() .'"> Delete</TD>'.
-				'<TD>'. htmlspecialchars($file_list[$i]->getName()) .'</TD>
-				<TD>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</TD>
-				<TD><A HREF="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">Download</A></TD>
-				</TR>';
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'"> Delete</td>'.
+				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
+				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
+				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">Download</a></td>
+				</tr>';
 			}
 
 		} else {
-			echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
+			echo '<tr><td colspan=3>No Files Currently Attached</td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
 		?>
-	</TD><TR>
+	</td><tr>
 
-	<TR><TD COLSPAN="2">
+	<tr><td colspan="2">
 		<H4>Change Log:</H4>
 		<?php 
 			echo $ah->showHistory(); 
 		?>
-	</TD></TR>
+	</td></tr>
 
-	<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Submit Changes">
-		</FORM>
-	</TD></TR>
+	<tr><td colspan="2" align="MIDDLE">
+		<input type="SUBMIT" name="SUBMIT" value="Submit Changes">
+		</form>
+	</td></tr>
 
 	</table>
 

@@ -143,93 +143,93 @@ class Theme extends Layout {
 
 </head>
 
-<BODY TOPMARGIN="3" MARGINHEIGHT="3" MARGINWIDTH="3" LEFTMARGIN="3" RIGHTMARGIN="3" BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>">
+<BODY TOPMARGIN="3" MARGINHEIGHT="3" MARGINWIDTH="3" LEFTMARGIN="3" RIGHTMARGIN="3" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>">
 
-<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
+<table border=0 width="100%" cellspacing="0" cellpadding=0>
 
-	<TR>
-		<TD><A HREF="/"><?php echo html_image('logo.png',75,75,array('border'=>'0')); ?></A></TD>
-		<TD><?php echo $this->searchBox(); ?></TD>
-		<TD ALIGN="RIGHT"><?php
+	<tr>
+		<td><a href="/"><?php echo html_image('logo.png',75,75,array('border'=>'0')); ?></a></td>
+		<td><?php echo $this->searchBox(); ?></td>
+		<td align="RIGHT"><?php
 			if (session_loggedin()) {
 				?>
-				<A HREF="/account/logout.php">Logout</A><BR>
-				<A HREF="/account/">My Account</A>
+				<a href="/account/logout.php">Logout</a><br />
+				<a href="/account/">My Account</a>
 				<?php
 			} else {
 				?>
-				<A HREF="/account/login.php">Login</A><BR>
-				<A HREF="/account/register.php">New Account</A>
+				<a href="/account/login.php">Login</a><br />
+				<a href="/account/register.php">New Account</a>
 				<?php
 			}
 
-		?></TD>
-		<TD>&nbsp;&nbsp;</TD>
-	</TR>
+		?></td>
+		<td>&nbsp;&nbsp;</td>
+	</tr>
 
 </TABLE>
 
-<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
+<table border=0 width="100%" cellspacing="0" cellpadding=0>
 
-	<TR>
-		<TD>&nbsp;</TD>
-		<TD COLSPAN=3>
+	<tr>
+		<td>&nbsp;</td>
+		<td colspan=3>
 
 <?php echo $this->outerTabs($params); ?>
 
-		</TD>
-		<TD>&nbsp;</TD>
-	</TR>
+		</td>
+		<td>&nbsp;</td>
+	</tr>
 
-	<TR>
-		<TD ALIGN=LEFT BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/topleft.png" HEIGHT=9 WIDTH=9></TD>
-		<TD BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>" WIDTH=30><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=30 HEIGHT=1></TD>
-		<TD BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>"><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=1 HEIGHT=1></TD>
-		<TD BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>" WIDTH=30><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=30 HEIGHT=1></TD>
-		<TD ALIGN=RIGHT BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/topright.png" HEIGHT=9 WIDTH=9></TD>
-	</TR>
+	<tr>
+		<td align=LEFT bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height=9 width=9></td>
+		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
+		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=30><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td align=RIGHT bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height=9 width=9></td>
+	</tr>
 
-	<TR>
+	<tr>
 
 		<!-- Outer body row -->
 
-		<TD BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>"><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=10 HEIGHT=1></TD>
-		<TD VALIGN=TOP WIDTH="99%" BGCOLOR="<?php echo $this->COLOR_CONTENT_BACK; ?>" COLSPAN=3>
+		<td bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>"><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
+		<td valign=TOP width="99%" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" colspan=3>
 
 			<!-- Inner Tabs / Shell -->
 
-			<TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
+			<table border=0 width="100%" cellspacing="0" cellpadding=0>
 <?php
 
 
 if ($params['group']) {
 
 			?>
-			<TR>
-				<TD>&nbsp;</TD>
-				<TD>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
 				<?php
 
 				echo $this->projectTabs($params['toptab'],$params['group']);
 
 				?>
-				</TD>
-				<TD>&nbsp;</TD>
-			</TR>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
 			<?php
 
 }
 
 ?>
-			<TR>
-				<TD ALIGN=LEFT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" HEIGHT=9 WIDTH=9></TD>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=1 HEIGHT=1></TD>
-				<TD ALIGN=RIGHT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/topright-inner.png" HEIGHT=9 WIDTH=9></TD>
-			</TR>
+			<tr>
+				<td align=LEFT bgcolor="#FFFFFF" width=10><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height=9 width=9></td>
+				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width=1 height=1></td>
+				<td align=RIGHT bgcolor="#FFFFFF" width=10><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height=9 width=9></td>
+			</tr>
 
-			<TR>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH=10 HEIGHT=1></TD>
-				<TD VALIGN=TOP WIDTH="99%" BGCOLOR="WHITE">
+			<tr>
+				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
+				<td valign=TOP width="99%" bgcolor="WHITE">
 
 	<?php
 
@@ -248,7 +248,7 @@ if ($params['group']) {
 	}
 
 	if ($section) {
-		print "<b>$section</b>\n";
+		print "<strong>$section</strong>\n";
 	}
 
 	if ($title) {
@@ -264,26 +264,26 @@ if ($params['group']) {
 			<!-- end main body row -->
 
 
-				</TD>
-				<TD WIDTH=10 BGCOLOR="WHITE"><IMG SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></TD>
-			</TR>
-			<TR>
-				<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10"><IMG SRC="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" HEIGHT=11 WIDTH=11></TD>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH="1" HEIGHT=1></TD>
-				<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" HEIGHT=11 WIDTH=11></TD>
-			</TR>
+				</td>
+				<td width=10 bgcolor="WHITE"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+			</tr>
+			<tr>
+				<td align=LEFT bgcolor="#E0E0E0" width=10"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height=11 width=11></td>
+				<td bgcolor=WHITE><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+				<td align=RIGHT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height=11 width=11></td>
+			</tr>
 			</TABLE>
 
 		<!-- end inner body row -->
 
-		</TD>
-		<TD WIDTH=10 BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></TD>
-	</TR>
-	<TR>
-		<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/bottomleft.png" HEIGHT=9 WIDTH=9></TD>
-		<TD BGCOLOR="#E0E0E0" COLSPAN=3><IMG SRC="<?php echo $this->imgroot; ?>clear.png" WIDTH="1" HEIGHT=1></TD>
-		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/bottomright.png" HEIGHT=9 WIDTH=9></TD>
-	</TR>
+		</td>
+		<td width=10 bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+	</tr>
+	<tr>
+		<td align=LEFT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height=9 width=9></td>
+		<td bgcolor="#E0E0E0" colspan=3><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+		<td align=RIGHT bgcolor="#E0E0E0" width=10><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height=9 width=9></td>
+	</tr>
 </TABLE>
 </body>
 </html>
@@ -301,14 +301,14 @@ if ($params['group']) {
 	 */
 	function boxTop($title) {
 		return '
-		<TABLE cellspacing="0" cellpadding="1" width="100%" border="0" bgcolor="' .$this->COLOR_HTMLBOX_TITLE.'">
-		<TR><TD>
-			<TABLE cellspacing="0" cellpadding="2" width="100%" border="0" bgcolor="'. $this->COLOR_HTMLBOX_BACK.'">
-				<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
-				</TR>
-				<TR align=left>
-					<TD colspan=2>';
+		<table cellspacing="0" cellpadding="1" width="100%" border="0" bgcolor="' .$this->COLOR_HTMLBOX_TITLE.'">
+		<tr><td>
+			<table cellspacing="0" cellpadding="2" width="100%" border="0" bgcolor="'. $this->COLOR_HTMLBOX_BACK.'">
+				<tr bgcolor="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
+					<td colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+				</tr>
+				<tr align=left>
+					<td colspan=2>';
 	}
 
 	/**
@@ -319,13 +319,13 @@ if ($params['group']) {
 	 */
 	function boxMiddle($title) {
 		return '
-					</TD>
-				</TR>
-				<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
-				</TR>
-				<TR align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<TD colspan=2>';
+					</td>
+				</tr>
+				<tr bgcolor="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
+					<td colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+				</tr>
+				<tr align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+					<td colspan=2>';
 	}
 
 	/**
@@ -348,11 +348,11 @@ if ($params['group']) {
 	 */
 	function boxBottom() {
 		return '
-					</TD>
-				</TR>
+					</td>
+				</tr>
 			</TABLE>
-		</TD></TR>
-		</TABLE><P>';
+		</td></tr>
+		</TABLE><p>';
 	}
 
 }

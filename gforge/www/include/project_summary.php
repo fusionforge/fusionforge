@@ -111,14 +111,14 @@ function project_summary($group_id,$mode,$no_table) {
 	if (!$no_table) {
 		$return .= '
 
-		<TABLE BORDER=0 WIDTH="100%"><TR><TD BGCOLOR="#EAECEF">';
+		<table border=0 width="100%"><tr><td bgcolor="#EAECEF">';
 	}
 
 	// ################## ArtifactTypes
 
-	$return .= '<A href="/tracker/?group_id='.$group_id.'">';
+	$return .= '<a href="/tracker/?group_id='.$group_id.'">';
 	$return .= html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-	$return .= ' Tracker</A>';
+	$return .= ' Tracker</a>';
 
 	if ($mode != 'compact') {
 		$result=db_query("SELECT agl.*,aca.count,aca.open_count
@@ -131,14 +131,14 @@ function project_summary($group_id,$mode,$no_table) {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$return .= '<BR><I>There are no public trackers available</I>';
+			$return .= '<br /><em>There are no public trackers available</em>';
 		} else {
 			for ($j = 0; $j < $rows; $j++) {
-				$return .= '<P>
-				&nbsp;-&nbsp;<A HREF="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
-				'&group_id='.$group_id.'&func=browse">'. db_result($result, $j, 'name') .'</A> 
-				( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
-				db_result($result, $j, 'description');
+				$return .= '<p>
+				&nbsp;-&nbsp;<a href="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
+				'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
+				( <strong>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</strong> )<br />'.
+				db_result($result, $j, 'description') . '</p>';
 			}   
 		}
 	}
@@ -147,13 +147,13 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/forum/?group_id='.$group_id.'">';
-		$return .= html_image("ic/forum20g.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
-		$return .= '&nbsp;Forums</A>';
+		$return .= '<a href="/forum/?group_id='.$group_id.'">';
+		$return .= html_image("ic/forum20g.png","20","20",array("border"=>"0","ALT"=>"Forums"));
+		$return .= '&nbsp;Forums</a>';
 
 		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
-			$return .= "<B>". project_get_public_forum_count($group_id) ."</B> forums )\n";
+			$return .= " ( <strong>". project_get_public_forum_message_count($group_id) ."</strong> messages in ";
+			$return .= "<strong>". project_get_public_forum_count($group_id) ."</strong> forums )\n";
 		}
 	}
 
@@ -162,10 +162,10 @@ function project_summary($group_id,$mode,$no_table) {
 	if ($project->usesDocman()) {
 		$return .= '
 
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/docman/?group_id='.$group_id.'">';
-		$return .= html_image("ic/docman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Docs"));
-		$return .= '&nbsp;Doc&nbsp;Manager</A>';
+			<hr size="1" noshade="noshade" />';
+		$return .= '<a href="/docman/?group_id='.$group_id.'">';
+		$return .= html_image("ic/docman16b.png","20","20",array("border"=>"0","alt"=>"Docs"));
+		$return .= '&nbsp;Doc&nbsp;Manager</a>';
 	}
 
 	// ##################### Mailing lists
@@ -173,13 +173,13 @@ function project_summary($group_id,$mode,$no_table) {
 	if ($project->usesMail()) {
 		$return .= '
 
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/mail/?group_id='.$group_id.'">';
-		$return .= html_image("ic/mail16b.png","20","20",array("BORDER"=>"0","ALT"=>"Mail Lists"));
-		$return .= '&nbsp;Mailing&nbsp;Lists</A>';
+			<hr size="1" noshade="noshade" />';
+		$return .= '<a href="/mail/?group_id='.$group_id.'">';
+		$return .= html_image("ic/mail16b.png","20","20",array("border"=>"0","alt"=>"Mail Lists"));
+		$return .= '&nbsp;Mailing&nbsp;Lists</a>';
 
 		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_mail_list_count($group_id) ."</B> public lists )";
+			$return .= " ( <strong>". project_get_mail_list_count($group_id) ."</strong> public lists )";
 		}
 	}
 
@@ -189,9 +189,9 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/pm/?group_id='.$group_id.'">';
-		$return .= html_image("ic/taskman20g.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
-		$return .= '&nbsp;Task&nbsp;Manager</A>';
+		$return .= '<a href="/pm/?group_id='.$group_id.'">';
+		$return .= html_image("ic/taskman20g.png","20","20",array("border"=>"0","ALT"=>"Tasks"));
+		$return .= '&nbsp;Task&nbsp;Manager</a>';
 
 		if ($mode != 'compact') {
 			//get a list of publicly available projects
@@ -199,12 +199,12 @@ function project_summary($group_id,$mode,$no_table) {
 			$result = db_query ($sql);
 			$rows = db_numrows($result);
 			if (!$result || $rows < 1) {
-				$return .= '<BR><I>There are no public subprojects available</I>';
+				$return .= '<br /><em>There are no public subprojects available</em>';
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$return .= '
-					<BR> &nbsp; - <A HREF="/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
-					'&group_id='.$group_id.'&func=browse">'.db_result($result, $j, 'project_name').'</A>';
+					<br /> &nbsp; - <a href="/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
+					'&amp;group_id='.$group_id.'&amp;func=browse">'.db_result($result, $j, 'project_name').'</a>';
 				}
 				db_free_result($result);
 			}
@@ -216,12 +216,12 @@ function project_summary($group_id,$mode,$no_table) {
 	if ($project->usesSurvey()) {
 		$return .= '
 
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/survey/?group_id='.$group_id.'">';
-		$return .= html_image("ic/survey16b.png","20","20",array("BORDER"=>"0","ALT"=>"Surveys"));
-		$return .= "&nbsp;Surveys</A>";
+			<hr size="1" noshade="noshade" />';
+		$return .= '<a href="/survey/?group_id='.$group_id.'">';
+		$return .= html_image("ic/survey16b.png","20","20",array("border"=>"0","alt"=>"Surveys"));
+		$return .= "&nbsp;Surveys</a>";
 		if ($mode != 'compact') {
-			$return .= ' ( <B>'. project_get_survey_count($group_id) .'</B> surveys )';
+			$return .= ' ( <strong>'. project_get_survey_count($group_id) .'</strong> surveys )';
 		}
 	}
 
@@ -231,14 +231,14 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/scm/?group_id='.$group_id.'">';
-		$return .= html_image("ic/cvs16b.png","20","20",array("BORDER"=>"0","ALT"=>"CVS"));
-		$return .= "&nbsp;CVS&nbsp;Tree</A>";
+		$return .= '<a href="/scm/?group_id='.$group_id.'">';
+		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"CVS"));
+		$return .= "&nbsp;CVS&nbsp;Tree</a>";
 
 		if ($mode != 'compact') {
 			$sql = "SELECT SUM(commits) AS commits,SUM(adds) AS adds from stats_cvs_group where group_id='$group_id'";
 			$result = db_query($sql);
-			$return .= ' ( <B>'.db_result($result,0,0).'</B> commits, <B>'.db_result($result,0,1).'</B> adds )';
+			$return .= ' ( <strong>'.db_result($result,0,0).'</strong> commits, <strong>'.db_result($result,0,1).'</strong> adds )';
 		}
 	}
 
@@ -247,16 +247,16 @@ function project_summary($group_id,$mode,$no_table) {
 	if ($project->isActive()) {
 		$return .= '
 
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="/project/showfiles.php?group_id='.$group_id.'">';
-		$return .= html_image("ic/ftp16b.png","20","20",array("BORDER"=>"0","ALT"=>"FTP"));
-		$return .= "&nbsp;Released&nbsp;Files</A>";
+			<hr size="1" noshade="noshade" />';
+		$return .= '<a href="/project/showfiles.php?group_id='.$group_id.'">';
+		$return .= html_image("ic/ftp16b.png","20","20",array("border"=>"0","alt"=>"FTP"));
+		$return .= "&nbsp;Released&nbsp;Files</a>";
 	}
 
 	if (!$no_table) {
 		$return .= '
 
-		</TD></TR></TABLE>';
+		</td></tr></table>';
 	}
 
 	return $return;

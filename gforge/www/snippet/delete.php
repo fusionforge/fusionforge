@@ -33,7 +33,7 @@ if (session_loggedin()) {
 			"WHERE submitted_by='".user_getid()."' AND ".
 			"snippet_package_version_id='$snippet_package_version_id'");
 		if (!$result || db_numrows($result) < 1) {
-			echo '<H1>Error - Only the creator of a package version can delete snippets from it.</H1>';
+			echo '<h1>Error - Only the creator of a package version can delete snippets from it.</h1>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -43,11 +43,11 @@ if (session_loggedin()) {
 				"WHERE snippet_version_id='$snippet_version_id' ".
 				"AND snippet_package_version_id='$snippet_package_version_id'");
 			if (!$result || db_affected_rows($result) < 1) {
-				echo '<H1>Error - That snippet doesn\'t exist in this package.</H1>';
+				echo '<h1>Error - That snippet doesn\'t exist in this package.</h1>';
 				snippet_footer(array());
 				exit;
 			} else {
-				echo '<H1>Item Removed From Package</H1>';
+				echo '<h1>Item Removed From Package</h1>';
 				snippet_footer(array());
 				exit;
 			}
@@ -62,7 +62,7 @@ if (session_loggedin()) {
 		$result=db_query("SELECT * FROM snippet_version ".
 			"WHERE snippet_version_id='$snippet_version_id' AND submitted_by='".user_getid()."'");
 		if (!$result || db_numrows($result) < 1) {
-			echo '<H1>Error - That snippet doesn\'t exist.</H1>';
+			echo '<h1>Error - That snippet doesn\'t exist.</h1>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -80,7 +80,7 @@ if (session_loggedin()) {
 				$result=db_query("DELETE FROM snippet WHERE snippet_id='$snippet_id'");
 			}
 
-			echo '<H1>Snippet Removed</H1>';
+			echo '<h1>Snippet Removed</h1>';
 			snippet_footer(array());
 			exit;
 		}
@@ -97,7 +97,7 @@ if (session_loggedin()) {
 			"snippet_package_version_id='$snippet_package_version_id'");
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
-			echo '<H1>Error - Only the creator of a package version can delete it.</H1>';
+			echo '<h1>Error - Only the creator of a package version can delete it.</h1>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -120,7 +120,7 @@ if (session_loggedin()) {
 				//delete the main package even if the user didn't create it
 				$result=db_query("DELETE FROM snippet_package WHERE snippet_package_id='$snippet_package_id'");
 			}
-			echo '<H1>Package Removed</H1>';
+			echo '<h1>Package Removed</h1>';
 			snippet_footer(array());
 			exit;
 		}

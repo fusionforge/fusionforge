@@ -33,14 +33,14 @@ function activate_group($group_id) {
 	$group =& group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
-		$feedback .= 'Error creating group object<br> ';
+		$feedback .= 'Error creating group object<br /> ';
 		return false;
 	} else if ($group->isError()) {
 		$feedback .= $group->getErrorMessage();
 		return false;
 	}
 
-	$feedback .= '<BR>Approving Group: '.$group->getUnixName().' ';
+	$feedback .= '<br />Approving Group: '.$group->getUnixName().' ';
 
 	if (!$group->approve(session_get_user())) {
 		$feedback .= $group->getErrorMessage();
@@ -106,68 +106,68 @@ if ($rows > $LIMIT) {
 while ($row_grp = db_fetch_array($res_grp)) {
 
 	?>
-	<H2><?php echo $row_grp['group_name']; ?></H2>
+	<h2><?php echo $row_grp['group_name']; ?></h2>
 
 	<p>
-	<A href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><H3>[Edit Project Details]</H3></A>
+	<a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><h3>[Edit Project Details]</h3></a>
 
 	<p>
-	<A href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><H3>[Project Admin]</H3></A>
+	<a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><h3>[Project Admin]</h3></a>
 
-	<P>
-	<A href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><H3>[View/Edit Project Members]</H3></A>
+	<p>
+	<a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><h3>[View/Edit Project Members]</h3></a>
 
 	<p>
 	<table><tr><td>
-	<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
-	<INPUT TYPE="HIDDEN" NAME="action" VALUE="activate">
-	<INPUT TYPE="HIDDEN" NAME="list_of_groups" VALUE="<?php print $row_grp['group_id']; ?>">
-	<INPUT type="submit" name="submit" value="Approve">
-	</FORM>
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="action" value="activate" />
+	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
+	<input type="submit" name="submit" value="Approve" />
+	</form>
 	</td></tr>
 	<tr><td>
-	<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
-	<INPUT TYPE="HIDDEN" NAME="action" VALUE="delete">
-	<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php print $row_grp['group_id']; ?>">
-	Canned responses<br>
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="action" value="delete" />
+	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
+	Canned responses<br />
 	<?php print get_canned_responses(); ?> <a href="responses_admin.php">(manage responses)</a>
-	<br><br>
-	Custom response title and text<br>
-	<input type="text" name="response_title" size="30" max="25"><br>
+	<br /><br />
+	Custom response title and text<br />
+	<input type="text" name="response_title" size="30" maxlength="25" /><br />
 	<textarea name="response_text" rows="10" cols="50"></textarea>
-	<input type="checkbox" name="add_to_can" value="yes">Add this custom response to canned responses
-	<br>
-	<INPUT type="submit" name="submit" value="Reject">
-	</FORM>
+	<input type="checkbox" name="add_to_can" value="yes" />Add this custom response to canned responses
+	<br />
+	<input type="submit" name="submit" value="Reject" />
+	</form>
 	</td></tr>
 	</table>
 
-	<P>
-	<B>License: <?php echo $row_grp['license']; ?></B>
+	<p>
+	<strong>License: <?php echo $row_grp['license']; ?></strong>
 
-	<BR><B>Home Box: <?php print $row_grp['unix_box']; ?></B>
-	<BR><B>HTTP Domain: <?php print $row_grp['http_domain']; ?></B>
+	<br /><strong>Home Box: <?php print $row_grp['unix_box']; ?></strong>
+	<br /><strong>HTTP Domain: <?php print $row_grp['http_domain']; ?></strong>
 
-	<br>
-	&nbsp;
+	<br />
+	&nbsp;</p>
 	<?php
 
 	// ########################## OTHER INFO
 
-	print "<P><B>Other Information</B>";
-	print "<P>Unix Group Name: $row_grp[unix_group_name]";
+	print "<p><strong>Other Information</strong></p>";
+	print "<p>Unix Group Name: $row_grp[unix_group_name]</p>";
 
-	print "<P>Submitted Description:<blockquote>$row_grp[register_purpose]</blockquote>";
+	print "<p>Submitted Description:<blockquote>$row_grp[register_purpose]</blockquote></p>";
 
 	if ($row_grp[license]=="other") {
-		print "<P>License Other: <blockquote>$row_grp[license_other]</blockquote>";
+		print "<p>License Other: <blockquote>$row_grp[license_other]</blockquote></p>";
 	}
 	
 	if ($row_grp[status_comment]) {
-		print "<P>Pending reason: <font color=red>$row_grp[status_comment]</font>";
+		print "<p>Pending reason: <span style=\"color:red\">$row_grp[status_comment]</span>";
 	}
 
-	echo "<P><HR><P>";
+	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";
 
 }
 
@@ -176,12 +176,12 @@ $arr=result_column_to_array($res_grp,0);
 $group_list=implode($arr,',');
 
 echo '
-	<CENTER>
-	<FORM action="'.$PHP_SELF.'" method="POST">
-	<INPUT TYPE="HIDDEN" NAME="action" VALUE="activate">
-	<INPUT TYPE="HIDDEN" NAME="list_of_groups" VALUE="'.$group_list.'">
-	<INPUT type="submit" name="submit" value="Approve All On This Page">
-	</FORM>
+	<div align="center">
+	<form action="'.$PHP_SELF.'" method="post">
+	<input type="hidden" name="action" value="activate" />
+	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
+	<input type="submit" name="submit" value="Approve All On This Page" />
+	</form></div>
 	';
 	
 site_admin_footer(array());

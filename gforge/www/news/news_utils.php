@@ -71,16 +71,16 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$return .= db_error();
 	} else {
 		echo '
-			<DL COMPACT>';
+			<dl compact="compact">';
 		for ($i=0; $i<$rows; $i++) {
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
 				$arr=explode("\n",db_result($result,$i,'details'));
 				//if the first paragraph is short, and so are following paragraphs, add the next paragraph on
 				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
-					$summ_txt='<BR>'. util_make_links( $arr[0].'<BR>'.$arr[1].'<BR>'.$arr[2] );
+					$summ_txt='<br />'. util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
 				} else {
-					$summ_txt='<BR>'. util_make_links( $arr[0] );
+					$summ_txt='<br />'. util_make_links( $arr[0] );
 				}
 				//show the project name 
 				if (db_result($result,$i,'type')==2) {
@@ -88,7 +88,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$group_type='/projects/';
 				}
-				$proj_name=' &nbsp; - &nbsp; <A HREF="'.$group_type. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</A>';
+				$proj_name=' &nbsp; - &nbsp; <a href="'.$group_type. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
@@ -96,25 +96,25 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 			if (!$limit) {
 				if ($show_forum) {
-					$return .= '<li><A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+					$return .= '<li><a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a></li>';
 				} else {
-					$return .= '<li><B>'. db_result($result,$i,'summary') . '</B>';
+					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong></li>';
 				}
-				$return .= ' &nbsp; <I>'. date($sys_datefmt,db_result($result,$i,'date')).'</I><br>';
+				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'date')).'</em><br />';
 			} else {
 				if ($show_forum) {
 					$return .= '
-					<A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+					<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
 				} else {
 					$return .= '
-					<B>'. db_result($result,$i,'summary') . '</B>';
+					<strong>'. db_result($result,$i,'summary') . '</strong>';
 				}
 				if (!$flat) {
 					$return .= '
-					<BR>&nbsp;';
+					<br />&nbsp;';
 				}
-				$return .= '&nbsp;&nbsp;&nbsp;<I>'. db_result($result,$i,'user_name') .' - '. 
-					date($sys_datefmt,db_result($result,$i,'date')). '</I>' . 
+				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'user_name') .' - '. 
+					date($sys_datefmt,db_result($result,$i,'date')). '</em>' . 
 					$proj_name . $summ_txt;
 				
 				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
@@ -132,9 +132,9 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				}
 
 				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><HR width="100%" size="1" noshade>';
+					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" noshade="noshade" />';
 				} else {
-					$return .= '<HR width="100%" size="1" noshade>';
+					$return .= '<hr width="100%" size="1" noshade="noshade" />';
 				}
 			}
 
@@ -155,7 +155,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	if ($show_forum) {
 		if ($tail_headlines) {
-			$return .= '</ul><HR width="100%" size="1" noshade>'."\n";
+			$return .= '</ul><hr width="100%" size="1" noshade="noshade" />'."\n";
 		}
 
 		$return .= '<div align="center">'
@@ -167,7 +167,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	if ($allow_submit && $group_id != $sys_news_group) {
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center"><A HREF="/news/submit.php?group_id='.$group_id.'"><FONT SIZE="-1">[' . $Language->getText('news_utils', 'submit') . ']</FONT></A></center>';
+		$return .= '<div align="center"><a href="/news/submit.php?group_id='.$group_id.'"><span style="font-size:smaller">[' . $Language->getText('news_utils', 'submit') . ']</span></a></center>';
 	}
 
 	return $return;
@@ -192,7 +192,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		$return .= '<H3>' . $Language->getText('news_utils', 'nonews') . '</H3>';
+		$return .= '<h3>' . $Language->getText('news_utils', 'nonews') . '</h3>';
 		$return .= db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -200,22 +200,22 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 				//get the first paragraph of the story
 				$arr=explode("\n",db_result($result,$i,'details'));
 				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
-					$summ_txt=util_make_links( $arr[0].'<BR>'.$arr[1].'<BR>'.$arr[2] );
+					$summ_txt=util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
 				} else {
 					$summ_txt=util_make_links( $arr[0] );
 				}
 
 				//show the project name
-				$proj_name=' &nbsp; - &nbsp; <A HREF="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</A>';
+				$proj_name=' &nbsp; - &nbsp; <a href="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
 			}
 			$return .= '
-				<A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>
-				<BR><I>'. db_result($result,$i,'user_name') .' - '.
-					date($sys_datefmt,db_result($result,$i,'date')) . $proj_name . '</I>
-				'. $summ_txt .'<HR WIDTH="100%" SIZE="1">';
+				<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
+				<br /><em>'. db_result($result,$i,'user_name') .' - '.
+					date($sys_datefmt,db_result($result,$i,'date')) . $proj_name . '</em>
+				'. $summ_txt .'<hr width="100%" size="1" />';
 		}
 	}
 	return $return;

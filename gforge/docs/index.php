@@ -10,8 +10,8 @@
 <table width="100%">
   <tr>
     <td>
-      <b><font size=+1>SourceForge: Engine Team Documentation</font></b><br>
-      <font size="-1">$Id$<br>
+      <strong><font size=+1>SourceForge: Engine Team Documentation</font></strong><br />
+      <font size="-1">$Id$<br />
       SourceForge Engine Team [<a href="mailto:alexandria-devel@sourceforge.net">email</a>]</font>
     </td>
     <td>
@@ -21,7 +21,7 @@
 </table>
 
 <!-- ------------------------ MENU ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
 <dd>
   <a href="#0">0. Quick Links</a>
@@ -44,26 +44,26 @@
 </dd>
 
 <p>
-  <b>Note:</b> revision histories in bold denote changes in the last week.
+  <strong>Note:</strong> revision histories in bold denote changes in the last week.
 </p>
 
 <!-- ------------------------ SECTION 0 ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
-<a NAME="0"></a><b>0. Quick Links</b>
+<a name="0"></a><strong>0. Quick Links</strong>
 
 <p>
-  <b>List Archives:</b>&nbsp;|&nbsp;alexandria-devel&nbsp;|&nbsp;alexandria-cvs&nbsp;|&nbsp;<a href="https://lists.valinux.com/archives/sf-engine/">sf-engine</a>&nbsp;|&nbsp;<a href="https://lists.valinux.com/archives/sf-onsite/">sf-onsite</a>|<br>
-  <b>Sandboxes:</b>&nbsp;|&nbsp;<a href="http://webdev.tperdue.sourceforge.net">tperdue</a>&nbsp;|&nbsp;<a href="http://webdev.dbrogdon.sourceforge.net">dbrogdon</a>&nbsp;|&nbsp;<a href="http://webdev.pfalcon.sourceforge.net">pfalcon</a>&nbsp;|&nbsp;<a href="http://webdev.jbyers.sourceforge.net">jbyers</a>&nbsp;|<br>
-  <b>Reference:</b>&nbsp;|&nbsp;<a href="http://webdev.sourceforge.net/cgi-bin/viewcvs.cgi/">ViewCVS</a>&nbsp;|&nbsp;<a href="https://vaweb.valinux.com/Marketing/SourceForge/">product marketing</a>&nbsp;|<br>
+  <strong>List Archives:</strong>&nbsp;|&nbsp;alexandria-devel&nbsp;|&nbsp;alexandria-cvs&nbsp;|&nbsp;<a href="https://lists.valinux.com/archives/sf-engine/">sf-engine</a>&nbsp;|&nbsp;<a href="https://lists.valinux.com/archives/sf-onsite/">sf-onsite</a>|<br />
+  <strong>Sandboxes:</strong>&nbsp;|&nbsp;<a href="http://webdev.tperdue.sourceforge.net">tperdue</a>&nbsp;|&nbsp;<a href="http://webdev.dbrogdon.sourceforge.net">dbrogdon</a>&nbsp;|&nbsp;<a href="http://webdev.pfalcon.sourceforge.net">pfalcon</a>&nbsp;|&nbsp;<a href="http://webdev.jbyers.sourceforge.net">jbyers</a>&nbsp;|<br />
+  <strong>Reference:</strong>&nbsp;|&nbsp;<a href="http://webdev.sourceforge.net/cgi-bin/viewcvs.cgi/">ViewCVS</a>&nbsp;|&nbsp;<a href="https://vaweb.valinux.com/Marketing/SourceForge/">product marketing</a>&nbsp;|<br />
 </p>
 
 </table>
 
 <!-- ------------------------ SECTION 1 ------------------------ newer than-->
-<p><hr><p>
+<p><hr /><p>
 
-<a NAME="1"></a><b>1. Background</b>
+<a name="1"></a><strong>1. Background</strong>
 
 <ul>
 <table border="1" cellpadding="2" cellspacing="2">
@@ -88,9 +88,9 @@
 </ul>
 
 <!-- ------------------------ SECTION 2 ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
-<a NAME="1"></a><b>2. Project Management</b>
+<a name="1"></a><strong>2. Project Management</strong>
 
 <ul>
 <table border="1" cellpadding="2" cellspacing="2">
@@ -145,9 +145,9 @@
 </ul>
 
 <!-- ------------------------ SECTION 3 ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
-<a NAME="1"></a><b>3. Requirements, Design, Implementation</b>
+<a name="1"></a><strong>3. Requirements, Design, Implementation</strong>
 
 <ul>
 <table border="1" cellpadding="2" cellspacing="2">
@@ -178,9 +178,9 @@
 </ul>
 
 <!-- ------------------------ SECTION 4 ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
-<a NAME="1"></a><b>4. Projects</b>
+<a name="1"></a><strong>4. Projects</strong>
 
 <ul>
 <table border="1" cellpadding="2" cellspacing="2">
@@ -241,7 +241,7 @@
 </ul>
 
 <!-- ------------------------ FOOTER ------------------------ -->
-<p><hr><p>
+<p><hr /><p>
 
 <p align="right">
   <font size="-1">
@@ -249,7 +249,7 @@
   </font>
 </body>
 </html>
-<br>
+<br />
 
 
 

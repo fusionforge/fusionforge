@@ -20,11 +20,11 @@ echo $HTML->header(array('title'=>"Change Language"));
 
 ?>
 
-<H2>Language Updated</H2>
-<P>
-Your language preference has been saved in a cookie and will be 
+<h2>Language Updated</h2>
+<p>
+Your language preference has been saved in a cookie and will be
 remembered next time you visit the site.
-</P>
+</p>
 
 <?php
 

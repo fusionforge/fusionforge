@@ -44,32 +44,32 @@ if (!$res_top || db_numrows($res_top)<1) {
 $HTML->header(array('title'=>'Highest Ranked Users'));
 
 print '<h1>Highest Ranked Users</h1>
-<BR><I>(Updated Daily)</I>
+<br /><em>(Updated Daily)</em>
 
-<P><A href="/top/">[View Other Top Categories]</A>
+<p><a href="/top/">[View Other Top Categories]</a>
 
-<P><TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-<TR valign="top">
-<TD><B>Rank</B></TD>
-<TD><B>User Name<BR>&nbsp;</B></TD>
-<TD><B>Real Name<BR>&nbsp;</B></TD>
-<TD align="right"><B>Rating</B></TD>
-<TD align="right"><B>Last Rank</B></TD>
-<TD align="right"><B>Change</B>&nbsp;&nbsp;&nbsp;</TD></TR>
+<p><table width="100%" cellpadding=0 cellspacing=0 border=0>
+<tr valign="top">
+<td><strong>Rank</strong></td>
+<td><strong>User Name<br />&nbsp;</strong></td>
+<td><strong>Real Name<br />&nbsp;</strong></td>
+<td align="right"><strong>Rating</strong></td>
+<td align="right"><strong>Last Rank</strong></td>
+<td align="right"><strong>Change</strong>&nbsp;&nbsp;&nbsp;</td></tr>
 ';
 $arr=array('Rank','User Name','Real Name','Rating','Last Rank','Change');
 echo $HTML->listTableTop($arr);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</TD><TD><A href="/users/'. $row_top['user_name'] .'/">'
-		.$row_top['user_name'].'</A></td>'
+	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
+		.'</td><td><a href="/users/'. $row_top['user_name'] .'/">'
+		.$row_top['user_name'].'</a></td>'
 		.'<td>'.$row_top['realname'].'</td>'
-		.'</TD><TD align="right">'.sprintf('%.2f', $row_top['metric'])
-		.'&nbsp;&nbsp;&nbsp;</TD><TD align="right">'.$row_top['old_ranking']
-		.'&nbsp;&nbsp;&nbsp;</TD>'
-		.'<TD align="right">';
+		.'</td><td align="right">'.sprintf('%.2f', $row_top['metric'])
+		.'&nbsp;&nbsp;&nbsp;</td><td align="right">'.$row_top['old_ranking']
+		.'&nbsp;&nbsp;&nbsp;</td>'
+		.'<td align="right">';
 
 	// calculate change
 	$diff = $row_top["old_ranking"] - $row_top["ranking"];
@@ -86,16 +86,16 @@ while ($row_top = db_fetch_array($res_top)) {
 		print "<FONT color=\"#CC0000\">Down ".(0-$diff)."</FONT>";
 	}
 
-	print '&nbsp;&nbsp;&nbsp;</TD></TR>
+	print '&nbsp;&nbsp;&nbsp;</td></tr>
 ';
 }
 
 echo $HTML->listTableBottom();
 
 /*
-	<TR BGCOLOR="'.$HTML->COLOR_LTBACK2.'">
-        <TD>'.(($offset>=$LIMIT)?'<A HREF="topusers.php?&offset='.($offset-50).'"><B><-- More</B></A>':'&nbsp;').'</TD>
-	<TD ALIGN="RIGHT"><A HREF="topusers.php?offset='.($offset+50).'"><B>More --></B></A></TD></TR>
+	<tr bgcolor="'.$HTML->COLOR_LTBACK2.'">
+        <td>'.(($offset>=$LIMIT)?'<a href="topusers.php?&offset='.($offset-50).'"><strong><-- More</strong></a>':'&nbsp;').'</td>
+	<td align="RIGHT"><a href="topusers.php?offset='.($offset+50).'"><strong>More --></strong></a></td></tr>
 ';*/
 
 $HTML->footer(array());

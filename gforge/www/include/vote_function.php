@@ -48,7 +48,7 @@ function vote_show_thumbs($id,$flag) {
 	*/
 	$rating=vote_get_rating ($id,$flag);
 	if ($rating==0) {
-		return "<B>(unrated)</B>";
+		return "<strong>(unrated)</strong>";
 	} else {
 		return vote_number_to_stars($rating).'('.$rating.')';
 	}
@@ -94,29 +94,29 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	
 	global $REQUEST_URI;
 	?>
-	<FONT SIZE="-2">
-	<FORM ACTION="/survey/rating_resp.php" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="vote_on_id" VALUE="<?php echo $vote_on_id; ?>">
-	<INPUT TYPE="HIDDEN" NAME="redirect_to" VALUE="<?php echo urlencode($REQUEST_URI); ?>">
-	<INPUT TYPE="HIDDEN" NAME="flag" VALUE="<?php echo $flag; ?>">
-	<CENTER>
+	<span style="font-size:smaller">
+	<form action="/survey/rating_resp.php" method="post">
+	<input type="radio" name="vote_on_id" value="<?php echo $vote_on_id; ?>" />
+	<input type="radio" name="redirect_to" value="<?php echo urlencode($REQUEST_URI); ?>" />
+	<input type="radio" name="flag" value="<?php echo $flag; ?>" />
+	<div align="center">
 	<?php echo html_image("rateit.png","100","9",array()); ?>
-	<BR>
+	<br />
 	<?php 
 		echo html_blankimage(1,$rating);
 		echo html_image("ic/caret.png","9","6",array());
 	?>
-	<BR>
-	<INPUT TYPE="RADIO" NAME="response" VALUE=1>
-	<INPUT TYPE="RADIO" NAME="response" VALUE=2>
-	<INPUT TYPE="RADIO" NAME="response" VALUE=3>
-	<INPUT TYPE="RADIO" NAME="response" VALUE=4>
-	<INPUT TYPE="RADIO" NAME="response" VALUE=5>
-	<BR>
-	<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Rate">
-	</CENTER>
-	</FORM>
-	</FONT>
+	<br />
+	<input type="radio" name="response" value="1" />
+	<input type="radio" name="response" value="2" />
+	<input type="radio" name="response" value="3" />
+	<input type="radio" name="response" value="4" />
+	<input type="radio" name="response" value="5" />
+	<br />
+	<input type="submit" name="submit" value="Rate" />
+	</div>
+	</form>
+	</span>
 	<?php
 
 }
@@ -130,9 +130,9 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 function show_survey ($group_id,$survey_id) {
 
 ?>
-<FORM ACTION="/survey/survey_resp.php" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-<INPUT TYPE="HIDDEN" NAME="survey_id" VALUE="<?php echo $survey_id; ?>">
+<form action="/survey/survey_resp.php" method="post">
+<input type="radio" name="group_id" value="<?php echo $group_id; ?>" />
+<input type="radio" name="survey_id" value="<?php echo $survey_id; ?>" />
 <?php
 
 /*
@@ -145,7 +145,7 @@ $result=db_query($sql);
 
 if (db_numrows($result) > 0) {
 	echo '
-		<H3>'.db_result($result, 0, 'survey_title').'</H3>';
+		<h3>'.db_result($result, 0, 'survey_title').'</h3>';
 	/*
 		Select the questions for this survey
 	*/
@@ -154,7 +154,7 @@ if (db_numrows($result) > 0) {
 	$quest_array=explode(',', $questions);
 	$count=count($quest_array);
 	echo '
-		<TABLE BORDER=0>';
+		<table border="0">';
 	$q_num=1;
 
 	for ($i=0; $i<$count; $i++) {
@@ -172,20 +172,20 @@ if (db_numrows($result) > 0) {
 			*/
 
 			echo '
-				<TR><TD VALIGN=TOP>&nbsp;</TD><TD>';
+				<tr><td valign="top">&nbsp;</td><td>';
 
 		} else {
 			echo '
-				<TR><TD VALIGN=TOP><B>';
+				<tr><td valign="top"><strong>';
 			/*
 				If it's a 1-5 question box and first in series, move Quest
 				number down a bit
 			*/
 			if (($question_type != $last_question_type) && (($question_type == '1') || ($question_type == '3'))) {
-				echo '&nbsp;<BR>';
+				echo '&nbsp;<br />';
 			}
 
-			echo $q_num.'&nbsp;&nbsp;&nbsp;&nbsp;<BR></TD><TD>';
+			echo $q_num.'&nbsp;&nbsp;&nbsp;&nbsp;<br /></td><td>';
 			$q_num++;
 		}
 
@@ -197,14 +197,14 @@ if (db_numrows($result) > 0) {
 
 			if ($question_type != $last_question_type) {
 				echo '
-					<b>1</b> low &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>5</b> high';
-				echo '<BR>';
+					<strong>1</strong> low &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong> high';
+				echo '<br />';
 
 			}
 
 			for ($j=1; $j<=5; $j++) {
 				echo '
-					<INPUT TYPE="RADIO" NAME="_'.$quest_array[$i].'" VALUE="'.$j.'">';
+					<input type="radio" name="_'.$quest_array[$i].'" value="'.$j.'" />';
 			}
 
 			echo '&nbsp; '.stripslashes(db_result($result, 0, 'question'));
@@ -214,9 +214,9 @@ if (db_numrows($result) > 0) {
 				This is a text-area question.
 			*/
 
-			echo stripslashes(db_result($result, 0, 'question')).'<BR>';
+			echo stripslashes(db_result($result, 0, 'question')).'<br />';
 			echo '
-				<textarea name="_'.$quest_array[$i].'" rows=5 cols=60 wrap="soft"></textarea>';
+				<textarea name="_'.$quest_array[$i].'" rows="5" cols="60" wrap="soft"></textarea>';
 
 		} else if ($question_type == '3') {
 			/*
@@ -226,13 +226,13 @@ if (db_numrows($result) > 0) {
 			//Show the Yes/No only if this is the first in a series
 
 			if ($question_type != $last_question_type) {
-				echo '<B>Yes / No</B><BR>';
+				echo '<strong>Yes / No</strong><br />';
 			}
 
 			echo '
-				<INPUT TYPE="RADIO" NAME="_'.$quest_array[$i].'" VALUE="1">';
+				<input type="radio" name="_'.$quest_array[$i].'" value="1" />';
 			echo '
-				<INPUT TYPE="RADIO" NAME="_'.$quest_array[$i].'" VALUE="5">';
+				<input type="radio" name="_'.$quest_array[$i].'" value="5" />';
 
 			echo '&nbsp; '.stripslashes(db_result($result, 0, 'question'));
 
@@ -241,45 +241,45 @@ if (db_numrows($result) > 0) {
 				This is a comment only.
 			*/
 
-			echo '&nbsp;<BR><B>'.util_make_links(stripslashes(db_result($result, 0, 'question'))).'</B>';
+			echo '&nbsp;<br /><strong>'.util_make_links(stripslashes(db_result($result, 0, 'question'))).'</strong>';
 			echo '
-				<INPUT TYPE="HIDDEN" NAME="_'.$quest_array[$i].'" VALUE="-666">';
+				<input type="type="radio"" name="_'.$quest_array[$i].'" value="-666" />';
 
 		} else if ($question_type == '5') {
 			/*
 				This is a text-field question.
 			*/
 
-			echo stripslashes(db_result($result, 0, 'question')).'<BR>';
+			echo stripslashes(db_result($result, 0, 'question')).'<br />';
 			echo '
-				<INPUT TYPE="TEXT" name="_'.$quest_array[$i].'" SIZE=20 MAXLENGTH=70>';
+				<input type="text" name="_'.$quest_array[$i].'" size="20" maxlength="70" />';
 
 		}
 		else {
 			// no answers, just show question
-			echo stripslashes(db_result($result, 0, 'question')).'<BR>';
+			echo stripslashes(db_result($result, 0, 'question')).'<br />';
 		}
 
-		echo '</TD></TR>';
+		echo '</td></tr>';
 
 		$last_question_type=$question_type;
 	}
 
 	?>
-	<TR><TD ALIGN="MIDDLE" COLSPAN="2">
+	<tr><td align="center" colspan="2">
 
-	<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-	<BR>
-	<A HREF="/survey/privacy.php">Survey Privacy</A>
-	</TD></TR>
-	</FORM>
-	</TABLE>
+	<input type="submit" name="submit" value="SUBMIT" />
+	<br />
+	<a href="/survey/privacy.php">Survey Privacy</a>
+	</td></tr>
+	</form>
+	</table>
 	<?php
 
 } else {
-	echo "<TR><TD COLSPAN='2'>";
-	echo "<H3>Survey Not Found</H3>";
-	echo "</TD></TR>";
+	echo '<tr><td colspan="2">';
+	echo "<h3>Survey Not Found</h3>";
+	echo "</td></tr>";
 }
 
 }
@@ -292,18 +292,18 @@ if (db_numrows($result) > 0) {
  */
 function vote_show_a_question ($question,$element_name) {
 	echo '
-	<TR><TD COLSPAN="2" NOWRAP>
-	<INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="-3">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="-2">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="-1">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="0.1">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="1">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="2">
-	&nbsp; <INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="3">
-	</TD></TR>
+	<tr><td colspan="2" nowrap="nowrap">
+	<input type="radio" name="Q_'. $element_name .'" value="-3">
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="-2" />
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="-1" />
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="0.1" />
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="1" />
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="2" />
+	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="3" />
+	</td></tr>
 
-	<TR><TD COLSPAN=2>'.$question.'
-		<BR>&nbsp;</TD></TR>';
+	<tr><td colspan="2">'.$question.'
+		<br />&nbsp;</td></tr>';
 
 }
 
@@ -394,21 +394,21 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 	
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
 	echo '
-	<TABLE BORDER=0>
-		<FORM ACTION="/developer/rate.php" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="rated_user" VALUE="'.$user_id.'">';
+	<table border="0">
+		<form action="/developer/rate.php" method="post">
+		<input type="hidden" name="rated_user" value="'.$user_id.'" />';
 
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
-		echo '<TR>
-		<TD COLSPAN=2><B>'. $USER_RATING_QUESTIONS[$i] .':</B><BR> '
-		.html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</TD></TR>';
+		echo '<tr>
+		<td colspan="2"><strong>'. $USER_RATING_QUESTIONS[$i] .':</strong><br /> '
+		.html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</td></tr>';
 	}
 
 	echo '
-		<TR><TD COLSPAN="2"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Rate User"></TD></TR>
-		</TABLE>
-	</FORM>';
+		<tr><td colspan="2"><input type="submit" name="submit" value="Rate User" /></td></tr>
+		</table>
+	</form>';
 }
 
 /**
@@ -426,27 +426,27 @@ function vote_show_user_rating($user_id) {
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
 
-		echo '<TR><TD COLSPAN=2><H4>Not Yet Rated</H4></TD></TR>';
+		echo '<tr><td colspan="2"><h4>Not Yet Rated</h4></td></tr>';
 
 	} else {
-		echo '<TR><TD COLSPAN="2">
-			<H4>Current Ratings</H4>
-			<P>
-			Includes untrusted ratings.</TD></TR>';
+		echo '<tr><td colspan="2">
+			<h4>Current Ratings</h4>
+			<p>
+			Includes untrusted ratings.</p></td></tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR><TD>'.$USER_RATING_QUESTIONS[db_result($res,$i,'rate_field')].'</TD>
-			<TD>'.db_result($res,$i,'avg_rating').' (By '. db_result($res,$i,'count') .' Users)</TD></TR>';
+			<tr><td>'.$USER_RATING_QUESTIONS[db_result($res,$i,'rate_field')].'</td>
+			<td>'.db_result($res,$i,'avg_rating').' (By '. db_result($res,$i,'count') .' Users)</td></tr>';
 		}
 
 		$res=db_query("SELECT ranking,metric,importance_factor FROM user_metric WHERE user_id='$user_id'");
 		if ($res && db_numrows($res) > 0) {
-			echo '<TR><TD COLSPAN=2><B>Trusted Overall Rating</B></TD></TR>';
-			echo '<TR><TD>Sitewide Ranking:</TD><TD><B>'. db_result($res,0,'ranking') .'</B></TD></TR>
-				<TR><TD>Aggregate Score:</TD><TD><B>'. number_format (db_result($res,0,'metric'),3) .'</B></TD></TR>
-				<TR><TD>Personal Importance:</TD><TD><B>'. number_format (db_result($res,0,'importance_factor'),3) .'</B></TD></TR>';
+			echo '<tr><td colspan="2"><strong>Trusted Overall Rating</strong></td></tr>';
+			echo '<tr><td>Sitewide Ranking:</td><td><strong>'. db_result($res,0,'ranking') .'</strong></td></tr>
+				<tr><td>Aggregate Score:</td><td><strong>'. number_format (db_result($res,0,'metric'),3) .'</strong></td></tr>
+				<tr><td>Personal Importance:</td><td><strong>'. number_format (db_result($res,0,'importance_factor'),3) .'</strong></td></tr>';
 		} else {
-			echo '<TR><TD COLSPAN=2><H4>Not Yet Included In Trusted Rankings</H4></TD></TR>';
+			echo '<tr><td colspan="2"><h4>Not Yet Included In Trusted Rankings</h4></td></tr>';
 		}
 	}
 }

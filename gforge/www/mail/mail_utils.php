@@ -28,7 +28,7 @@ function mail_header($params) {
 
 	site_project_header($params);
 	echo '
-		<P><B><A HREF="/mail/admin/?group_id='.$group_id.'">Admin</A></B><P>';
+		<p><strong><a href="/mail/admin/?group_id='.$group_id.'">Admin</a></strong></p>';
 }
 
 function mail_footer($params) {

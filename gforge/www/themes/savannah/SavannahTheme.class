@@ -214,9 +214,9 @@ class SavannahTheme extends Layout {
 
 <?php
         if (!session_issecure()) {
-                //print '<IMG src="/images/clear.png" width=140 height=1 alt="Counter"><BR>';
+                //print '<img src="/images/clear.png" width=140 height=1 alt="Counter"><br />';
         } else {
-                //print html_blankimage(1,140) . '<br>';
+                //print html_blankimage(1,140) . '<br />';
         }
 ?>
 

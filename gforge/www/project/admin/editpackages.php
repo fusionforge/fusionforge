@@ -71,40 +71,40 @@ project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group
 ?>
 <h3>QRS:</h3>
 <?php
-echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
+echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br />';
 
 $user_unix_name=user_getname();
 ?>
-<H3>Packages</H3>
-<P>
+<h3>Packages</h3>
+<p>
 You can use packages to group different file releases together, or use them however you like. 
-<P>
+<p>
 <H4>An example of packages:</h4>
-<P>
-<B>Mysql-win</B><BR>
-<B>Mysql-unix</B><BR>
-<B>Mysql-odbc</B>
-<P>
+<p>
+<strong>Mysql-win</strong><br />
+<strong>Mysql-unix</strong><br />
+<strong>Mysql-odbc</strong>
+<p>
 <h4>Your Packages:</H4>
-<P>
-Start by defining your packages, then you can upload files with FTP to the <B>incoming</B> directory on 
-<B><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></B>. Once you have the files uploaded, you can then <B>create releases</B> 
+<p>
+Start by defining your packages, then you can upload files with FTP to the <strong>incoming</strong> directory on 
+<strong><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></strong>. Once you have the files uploaded, you can then <strong>create releases</strong> 
 of your packages.
-<P>
-Once you have packages defined, you can start creating new <B>releases of packages.</B>
-<P>
-<H3>Releases of Packages</H3>
-<P>
+<p>
+Once you have packages defined, you can start creating new <strong>releases of packages.</strong>
+<p>
+<h3>Releases of Packages</h3>
+<p>
 A release of a package can contain multiple files.
-<P>
+<p>
 <H4>Examples of Releases</h4>
-<P>
-<B>3.22.1</B><BR>
-<B>3.22.2</B><BR>
-<B>3.22.3</B><BR>
-<P>
-You can create new releases of packages by clicking on <B>Add/Edit Releases</B> next to your package name.
-<P>
+<p>
+<strong>3.22.1</strong><br />
+<strong>3.22.2</strong><br />
+<strong>3.22.3</strong><br />
+<p>
+You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.
+<p>
 <?php
 /*
 
@@ -128,28 +128,28 @@ if (!$res || $rows < 1) {
 
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-		<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-		<INPUT TYPE="HIDDEN" NAME="func" VALUE="update_package">
-		<INPUT TYPE="HIDDEN" NAME="package_id" VALUE="'. db_result($res,$i,'package_id') .'">
-		<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<TD NOWRAP ALIGN="center">
-				<FONT SIZE="-1">
-					<A HREF="qrs.php?package_id='. 
-						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Add Release]</B>
-					</A>
-				</FONT>
-				<FONT SIZE="-1">
-					<A HREF="showreleases.php?package_id='. 
-						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Edit Releases]</B>
-					</A>
-				</FONT>
+		<form action="'. $PHP_SELF .'" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<input type="hidden" name="func" value="update_package" />
+		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
+		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+			<td nowrap="nowrap" align="center">
+				<span style="font-size:smaller">
+					<a href="qrs.php?package_id='. 
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>[Add Release]</strong>
+					</a>
+				</span>
+				<span style="font-size:smaller">
+					<a href="showreleases.php?package_id='. 
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>[Edit Releases]</strong>
+					</a>
+				</span>
 
-			</TD>
-			<TD><FONT SIZE="-1"><INPUT TYPE="TEXT" NAME="package_name" VALUE="'.db_result($res,$i,'package_name') .'" SIZE="20" MAXLENGTH="30"></TD>
-			<TD><FONT SIZE="-1">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</TD>
-			<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>
-			</TR></FORM>';
+			</td>
+			<td><span style="font-size:smaller"><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="30" /></span></td>
+			<td><span style="font-size:smaller">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
+			<td><input type="submit" name="submit" value="Update" /></td>
+			</tr></form>';
 	}
 
 	echo $GLOBALS['HTML']->listTableBottom();
@@ -163,16 +163,15 @@ if (!$res || $rows < 1) {
 */
 
 ?>
-<P>
+</p>
 <h3>New Package Name:</h3>
-<P>
-<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-<INPUT TYPE="HIDDEN" NAME="func" VALUE="add_package">
-<INPUT TYPE="TEXT" NAME="package_name" VALUE="" SIZE="20" MAXLENGTH="30">
-<P>
-<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Create This Package">
-</FORM>
+<p>
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<input type="hidden" name="func" value="add_package" />
+<input type="text" name="package_name" value="" size="20" maxlength="30" />
+<p><input type="submit" name="submit" value="Create This Package" /></p>
+</form></p>
 
 <?php
 

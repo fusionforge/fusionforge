@@ -59,7 +59,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 		$qstring=$qstring." LIMIT $offset,$limit";
 	}
 	if ($GLOBALS['IS_DEBUG'])
-		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<P><BR>\n";
+		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<p><br />\n";
 
 	//
 	//are we configured to try to use replication?

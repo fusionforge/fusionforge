@@ -46,11 +46,11 @@ if ($add) {
 			if (!$res || db_affected_rows($res) < 1) {
 				$feedback .= 'Error adding VHOST: '.db_error();
 			} else {
-				$feedback .= "Virtual Host <b>".$vhost_name."</b> scheduled for creation on group <i>".$group->getUnixName()."</i>";
+				$feedback .= "Virtual Host <strong>".$vhost_name."</strong> scheduled for creation on group <em>".$group->getUnixName()."</em>";
 			}
 		} else {
 
-			$feedback .=	"<b>The provided group name does not exist.</b>";
+			$feedback .=	"<strong>The provided group name does not exist.</strong>";
 
 		}
 			
@@ -82,39 +82,39 @@ site_admin_header(array('title'=>"Site Admin"));
 
 <form name="madd" method="post" action="<?php echo $PHP_SELF; ?>">
 
-<b>Add Virtual Host</b>
+<strong>Add Virtual Host</strong>
 
 <table border="0">
 
 <tr>
 <td>Group Unix Name</td>
-<td><input type="text" name="groupname"></td>
+<td><input type="text" name="groupname" /></td>
 </tr>
 
 <tr>
 <td>Virtual Host Name</td>
-<td><input type="text" name="vhost_name"></td>
+<td><input type="text" name="vhost_name" /></td>
 </tr>
 </table>
 
-<input type="submit" name="add" value="Add Virtual Host">
+<input type="submit" name="add" value="Add Virtual Host" />
 </form>
 
-<p>
+<p>&nbsp;</p>
 
-
-<hr>
-<b>Tweak Directories</b>
-<br>
+<hr />
+<strong>Tweak Directories</strong>
+<br />
 
 <form name="tweak" method="post" action="<?php echo $PHP_SELF; ?>">
 <table border="0">
 <tr>
-   <td>Virtual Host: </td><td><input type="text" name="vhost_name"></td><td><input type="submit" value="Get Info"></td>
+   <td>Virtual Host: </td><td><input type="text" name="vhost_name" /></td>
+   <td><input type="submit" value="Get Info" /></td>
 </tr>
 </table>
 
-<input type="hidden" name="tweak" value="1">
+<input type="hidden" name="tweak" value="1" />
 
 </form>
 
@@ -134,7 +134,7 @@ if ($tweak) {
 
 		$row_vh = db_fetch_array($res_vh);
 	
-		print '<p><b>Update Record:</b><hr>';
+		print '<p><strong>Update Record:</strong></p><hr />';
 
 		$title=array();
 		$title[]='VHOST ID';
@@ -151,12 +151,12 @@ if ($tweak) {
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
 			<td><a href="/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
-			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'"></td>
-			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'"></td><td><input maxlength="255" type="submit" value="Update"></tr>
+			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
+			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="Update" /></tr>
 			'.$GLOBALS['HTML']->listTableBottom().'
 
-			<input type="hidden" name="tweakcommit" value="1">
-			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'">
+			<input type="hidden" name="tweakcommit" value="1" />
+			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />
 			</form>
 		';
 	} else {

@@ -116,16 +116,16 @@ if ($group_id) {
 		forum_header(array('title'=>'Delete a message','pagename'=>'forum_admin_delete','sectionvals'=>group_getname($group_id)));
 
 		echo '
-			<FONT COLOR="RED" SIZE="3">WARNING! You are about to permanently delete a 
-			message and all of its followups!!</FONT>
-			<FORM METHOD="POST" ACTION="'.$PHP_SELF.'">
-			<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="delete" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-			<B>Enter the Message ID</B><BR>
-			<INPUT TYPE="TEXT" NAME="msg_id" VALUE="">
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-			</FORM>';
+			<span style="color:red">WARNING! You are about to permanently delete a
+			message and all of its followups!!</span>
+			<form method="post" action="'.$PHP_SELF.'">
+			<input type="hidden" name="post_changes" value="y" />
+			<input type="hidden" name="delete" value="y" />
+			<input type="hidden" name="group_id" value="'.$group_id.'" />
+			<strong>Enter the Message ID</strong><br />
+			<input type="text" name="msg_id" value="" />
+			<input type="submit" name="submit" value="submit" />
+			</form>';
 
 		forum_footer(array());
 
@@ -140,27 +140,27 @@ if ($group_id) {
 		ShowResultSet($result,'Existing Forums');
 
 		echo '
-			<FORM METHOD="POST" ACTION="'.$PHP_SELF.'">
-			<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="add_forum" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-			<B>Forum Name:</B><BR>
-			<INPUT TYPE="TEXT" NAME="forum_name" VALUE="" SIZE="20" MAXLENGTH="30"><BR>
-			<B>Description:</B><BR>
-			<INPUT TYPE="TEXT" NAME="description" VALUE="" SIZE="40" MAXLENGTH="80"><BR>
-			<B>Is Public?</B><BR>
-			<INPUT TYPE="RADIO" NAME="is_public" VALUE="1" CHECKED> Yes<BR>
-			<INPUT TYPE="RADIO" NAME="is_public" VALUE="0"> No<P>
-			<P>
-			<B>Allow Anonymous Posts?</B><BR>
-			<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="1"> Yes<BR>
-			<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="0" CHECKED> No<BR>
-			<P>
-			<B>Email All Posts To:</B><BR>
-			<INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="" SIZE="30" MAXLENGTH="50">
-			<P>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Add This Forum">
-			</FORM>';
+			<form method="post" action="'.$PHP_SELF.'">
+			<input type="hidden" name="post_changes" value="y" />
+			<input type="hidden" name="add_forum" value="y" />
+			<input type="hidden" name="group_id" value="'.$group_id.'" />
+			<strong>Forum Name:</strong><br />
+			<input type="text" name="forum_name" value="" size="20" maxlength="30" /><br />
+			<strong>Description:</strong><br />
+			<input type="text" name="description" value="" size="40" maxlength="80" /><br />
+			<strong>Is Public?</strong><br />
+			<input type="radio" name="is_public" value="1" checked="checked"="checked="checked"" /> Yes<br />
+			<input type="radio" name="is_public" value="0" /> No
+			<br  /><br />
+			<strong>Allow Anonymous Posts?</strong><br />
+			<input type="radio" name="allow_anonymous" value="1" /> Yes<br />
+			<input type="radio" name="allow_anonymous" value="0" checked="checked"="checked="checked"" /> No
+			<br /><br />
+			<strong>Email All Posts To:</strong><br />
+			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
+			<p>
+			<input type="submit" name="submit" value="Add This Forum" />
+			</form>';
 
 		forum_footer(array());
 
@@ -181,9 +181,9 @@ if ($group_id) {
 		} else {
 			forum_header(array('title'=>'Change Forum Status','pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
 			echo '
-			<P>
+			<p>
 			You can adjust forum features from here. Please note that private forums 
-			can still be viewed by members of your project, not the general public.<P>';
+			can still be viewed by members of your project, not the general public.<p>';
 
 			$title_arr=array();
 			$title_arr[]='Forum';
@@ -194,42 +194,42 @@ if ($group_id) {
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3"><B>'. $farr[$i]->getName() .'</B></TD></TR>';
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><strong>'. $farr[$i]->getName() .'</strong></td></tr>';
 				echo '
-					<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-					<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-					<INPUT TYPE="HIDDEN" NAME="change_status" VALUE="y">
-					<INPUT TYPE="HIDDEN" NAME="group_forum_id" VALUE="'. $farr[$i]->getID() .'">
-					<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<TD>
-						<FONT SIZE="-1">
-						<B>Allow Anonymous Posts?</B><BR>
-						<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="1"'.(($farr[$i]->AllowAnonymous() == 1)?' CHECKED':'').'> Yes<BR>
-						<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="0"'.(($farr[$i]->AllowAnonymous() == 0)?' CHECKED':'').'> No<BR>
-						</FONT>
-					</TD>
-					<TD>
-						<FONT SIZE="-1">
-						<B>Is Public?</B><BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="1"'.(($farr[$i]->isPublic() == 1)?' CHECKED':'').'> Yes<BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="0"'.(($farr[$i]->isPublic() == 0)?' CHECKED':'').'> No<BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="9"'.(($farr[$i]->isPublic() == 9)?' CHECKED':'').'> Deleted<BR>
-					</TD><TD>
-						<FONT SIZE="-1">
-						<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Update Info">
-					</TD></TR>
-					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>
-						<B>Forum Name:</B><BR>
-						<INPUT TYPE="TEXT" NAME="forum_name" VALUE="'. $farr[$i]->getName() .'" SIZE="20" MAXLENGTH="30">
-					</TD><TD COLSPAN="2">
-						<B>Email All Posts To:</B><BR>
-						<INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="'. $farr[$i]->getSendAllPostsTo() .'" SIZE="30" MAXLENGTH="50">
-					</TD></TR>
-					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3">
-						<B>Description:</B><BR>
-						<INPUT TYPE="TEXT" NAME="description" VALUE="'. $farr[$i]->getDescription() .'" SIZE="40" MAXLENGTH="80"><BR>
-					</TD></TR></FORM>';
+					<form action="'.$PHP_SELF.'" method="post">
+					<input type="hidden" name="post_changes" value="y" />
+					<input type="hidden" name="change_status" value="y" />
+					<input type="hidden" name="group_forum_id" value="'. $farr[$i]->getID() .'" />
+					<input type="hidden" name="group_id" value="'.$group_id.'" />
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+					<td>
+						<span style="font-size:-1">
+						<strong>Allow Anonymous Posts?</strong><br />
+						<input type="radio" name="allow_anonymous" value="1"'.(($farr[$i]->AllowAnonymous() == 1)?' checked="checked"':'').' /> Yes<br />
+						<input type="radio" name="allow_anonymous" value="0"'.(($farr[$i]->AllowAnonymous() == 0)?' checked="checked"':'').'/> No<br />
+						</span>
+					</td>
+					<td>
+						<span style="font-size:-1">
+						<strong>Is Public?</strong><br />
+						<input type="radio" name="is_public" value="1"'.(($farr[$i]->isPublic() == 1)?' checked="checked"':'').' /> Yes<br />
+						<input type="radio" name="is_public" value="0"'.(($farr[$i]->isPublic() == 0)?' checked="checked"':'').' /> No<br />
+						<input type="radio" name="is_public" value="9"'.(($farr[$i]->isPublic() == 9)?' checked="checked"':'').' /> Deleted<br />
+					</span></td><td>
+						<span style="font-size:-1">
+						<input type="submit" name="submit" value="Update Info" /></span>
+					</td></tr>
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>
+						<strong>Forum Name:</strong><br />
+						<input type="text" name="forum_name" value="'. $farr[$i]->getName() .'" size="20" maxlength="30" />
+					</td><td colspan="2">
+						<strong>Email All Posts To:</strong><br />
+						<input type="text" name="send_all_posts_to" value="'. $farr[$i]->getSendAllPostsTo() .'" size="30" maxlength="50" />
+					</td></tr>
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3">
+						<strong>Description:</strong><br />
+						<input type="text" name="description" value="'. $farr[$i]->getDescription() .'" size="40" maxlength="80" /><br />
+					</td></tr></form>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -246,10 +246,10 @@ if ($group_id) {
 		forum_header(array('title'=>'Forum Administration','pagename'=>'forum_admin','sectionvals'=>group_getname($group_id)));
 
 		echo '
-			<P>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&add_forum=1">Add Forum</A><BR>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&delete=1">Delete Message</A><BR>
-			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&change_status=1">Update Forum Info/Status</A>';
+			<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&add_forum=1">Add Forum</a><br />
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&delete=1">Delete Message</a><br />
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&change_status=1">Update Forum Info/Status</a></p>';
 
 		forum_footer(array());
 	}

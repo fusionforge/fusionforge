@@ -17,7 +17,7 @@ require_once('pre.php');
 $HTML->header(array('title'=>'Voting'));
 
 if (!session_loggedin()) {
-	echo "<H2>You must be logged in to vote</H2>";
+	echo "<h2>You must be logged in to vote</h2>";
 } else {
 	if ($vote_on_id && $response && $flag) {
 		/*
@@ -34,16 +34,16 @@ if (!session_loggedin()) {
 		$result=db_query($sql);
 		if (!$result) {
 			$feedback .= " ERROR ";
-			echo "<H1>Error in insert</H1>";
+			echo "<h1>Error in insert</h1>";
 			echo db_error();
 		} else {
 			$feedback .= " Vote registered ";
-			echo "<H2>Vote Registered</H2>";
-			echo "<A HREF=\"javascript:history.back()\"><B>Click to return to previous page</B></A>".
-				"<P>If you vote again, your old vote will be erased.";
+			echo "<h2>Vote Registered</h2>";
+			echo "<a href=\"javascript:history.back()\"><strong>Click to return to previous page</strong></a>".
+				"<p>If you vote again, your old vote will be erased.</p>";
 		}
 	} else {
-		echo "<H1>ERROR!!! MISSING PARAMS</H1>";
+		echo "<h1>ERROR!!! MISSING PARAMS</h1>";
 	}
 }
 $HTML->footer(array());

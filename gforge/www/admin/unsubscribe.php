@@ -37,14 +37,14 @@ if ($submit && $user_name) {
 		(admin-initiated and automated mailings, like forum
 		and file release notifications).
 		</p>
-		<form action="<?php echo $PHP_SELF; ?>" method="POST">
-		<input type="hidden" name="user_name" value="<?php echo $user_name?>">
+		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<input type="hidden" name="user_name" value="<?php echo $user_name?>" />
 		Unsubscription type: <?php echo html_build_select_box_from_arrays(
 			array('MAIL','ALL'),
 			array('Admin-initiated mailings','All site mailings'),
 			'type',false,false
 		); ?>
-		<input type="submit" name="submit" value="Unsubscribe">
+		<input type="submit" name="submit" value="Unsubscribe" />
 		</form>         
 
 		<?php
@@ -65,7 +65,7 @@ if ($submit && $user_name) {
 			);
 		}
 
-		$feedback .= 'User unsubscribed<br>';
+		$feedback .= 'User unsubscribed<br />';
 	}
 }
 
@@ -85,9 +85,9 @@ to specify 0 or more arbitrary characters). Click on the username
 to unsubscribe user from site mailings (new form will appear).
 </p>
 
-<form action="<?php echo $PHP_SELF; ?>" method="POST">
-Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>"> 
-<input type="submit" name="submit" value="Show users matching pattern">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>" />
+<input type="submit" name="submit" value="Show users matching pattern" />
 </form>
 
 <?php

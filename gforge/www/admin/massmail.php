@@ -74,14 +74,14 @@ print '
 <a href="#active">Active deliveries</a>
 </p>
 
-<P>Be <FONT color=#FF0000><B>VERY</B></FONT> careful with this form,
+<p>Be <span style="color:red"><strong>VERY</strong></span> careful with this form,
 because submitting it WILL lead to sending email to lots of users.
 </p>
 ';
 
 print '
-<FORM action="'.$PHP_SELF.'" method="POST">'
-.'<b>Target Audience:</b><br>'.html_build_select_box_from_arrays(
+<form action="'.$PHP_SELF.'" method="post">'
+.'<strong>Target Audience:</strong><br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMUNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
 		'(select)',
@@ -94,24 +94,24 @@ print '
 	),
 	'mail_type',false,false
 )
-.'<br>';
+.'<br />';
 
 
 print '
 
-<P>
-<b>Subject:</b>
-<BR><INPUT type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] ">
+<p>
+<strong>Subject:</strong>
+<br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
 
-<P><b>Text of Message:</b> (will be appended with unsubscription
+<p><strong>Text of Message:</strong> (will be appended with unsubscription
 information, if applicable)
-<pre><TEXTAREA name="mail_message" cols="70" rows="20" wrap="physical">
-</TEXTAREA>
-</PRE>
+<pre><textarea name="mail_message" cols="70" rows="20" wrap="physical">
+</textarea>
+</pre></p>
 
-<P><INPUT type="submit" name="submit" value="Schedule for Mailing">
+<p><input type="submit" name="submit" value="Schedule for Mailing" /></p>
 
-</FORM>
+</form>
 ';
 
 

@@ -25,9 +25,9 @@ function people_header($params) {
 	}
 
 	if ($group_id && $job_id) {
-		echo ' | <A HREF="/people/editjob.php?group_id='. $group_id .'&job_id='. $job_id .'">Edit Job</A>';
+		echo ' | <a href="/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id .'">Edit Job</a>';
 	}
-	echo '</B>';
+	echo '</strong>';
 }
 
 function people_footer($params) {
@@ -99,7 +99,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			$feedback .= ' ERROR - skill already in your inventory ';
 		}
 	} else {
-		echo '<H1>You must be logged in first</H1>';
+		echo '<h1>You must be logged in first</h1>';
 	}
 }
 
@@ -122,15 +122,15 @@ function people_show_skill_inventory($user_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<H2>No Skill Inventory Set Up</H2>';
+			<h2>No Skill Inventory Set Up</h2>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<TD>'.db_result($result,$i,'skill_name').'</TD>
-				<TD>'.db_result($result,$i,'level_name').'</TD>
-				<TD>'.db_result($result,$i,'year_name').'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td>'.db_result($result,$i,'skill_name').'</td>
+				<td>'.db_result($result,$i,'level_name').'</td>
+				<td>'.db_result($result,$i,'year_name').'</td></tr>';
 
 		}
 	}
@@ -154,20 +154,20 @@ function people_edit_skill_inventory($user_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<TR><TD COLSPAN="4"><H2>No Skill Inventory Set Up</H2></TD></TR>';
+			<tr><td colspan="4"><h2>No Skill Inventory Set Up</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="skill_inventory_id" VALUE="'.db_result($result,$i,'skill_inventory_id').'">
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<TD><FONT SIZE="-1">'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</TD>
-				<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</TD>
-				<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</TD>
-				<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="update_skill_inventory" VALUE="Update"> &nbsp; 
-					<INPUT TYPE="SUBMIT" NAME="delete_from_skill_inventory" VALUE="Delete"></TD>
-				</TR></FORM>';
+			<form action="'.$PHP_SELF.'" method="post">
+			<input type="hidden" name="skill_inventory_id" value="'.db_result($result,$i,'skill_inventory_id').'" />
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</span></td>
+				<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
+				<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
+				<td nowrap="nowrap"><input type="submit" name="update_skill_inventory" value="Update" /> &nbsp;
+					<input type="submit" name="delete_from_skill_inventory" value="Delete" /></td>
+				</tr></form>';
 		}
 
 	}
@@ -175,14 +175,14 @@ function people_edit_skill_inventory($user_id) {
 	$i++; //for row coloring
 	
 	echo '
-	<TR><TD COLSPAN="4"><H3>Add A New Skill</H3></TD></TR>
-	<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-	<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-		<TD><FONT SIZE="-1">'. people_skill_box('skill_id'). '</TD>
-		<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id'). '</TD>
-		<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id'). '</TD>
-		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_skill_inventory" VALUE="Add Skill"></TD>
-	</TR></FORM>';
+	<tr><td colspan="4"><h3>Add A New Skill</h3></td></tr>
+	<form action="'.$PHP_SELF.'" method="post">
+	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
+		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
+		<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
+		<td nowrap="nowrap"><input type="submit" name="add_to_skill_inventory" value="Add Skill" /></td>
+	</tr></form>';
 
 	echo $GLOBALS['HTML']->listTableBottom();
 
@@ -211,7 +211,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 		}
 
 	} else {
-		echo '<H1>You must be logged in first</H1>';
+		echo '<h1>You must be logged in first</h1>';
 	}
 }
 
@@ -234,15 +234,15 @@ function people_show_job_inventory($job_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<H2>No Skill Inventory Set Up</H2>';
+			<h2>No Skill Inventory Set Up</h2>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<TD>'.db_result($result,$i,'skill_name').'</TD>
-				<TD>'.db_result($result,$i,'level_name').'</TD>
-				<TD>'.db_result($result,$i,'year_name').'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td>'.db_result($result,$i,'skill_name').'</td>
+				<td>'.db_result($result,$i,'level_name').'</td>
+				<td>'.db_result($result,$i,'year_name').'</td></tr>';
 
 		}
 	}
@@ -297,22 +297,22 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<TR><TD COLSPAN="4"><H2>No Skill Inventory Set Up</H2></TD></TR>';
+			<tr><td colspan="4"><h2>No Skill Inventory Set Up</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="job_inventory_id" VALUE="'. db_result($result,$i,'job_inventory_id') .'">
-			<INPUT TYPE="HIDDEN" NAME="job_id" VALUE="'. db_result($result,$i,'job_id') .'">
-			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<TD><FONT SIZE="-1">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</TD>
-				<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</TD>
-				<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</TD>
-				<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="update_job_inventory" VALUE="Update"> &nbsp; 
-					<INPUT TYPE="SUBMIT" NAME="delete_from_job_inventory" VALUE="Delete"></TD>
-				</TR></FORM>';
+			<form action="'.$PHP_SELF.'" method="post">
+			<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
+			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
+			<input type="hidden" name="group_id" value="'.$group_id.'" />
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</span></td>
+				<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
+				<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
+				<td nowrap="nowrap"><input type="submit" name="update_job_inventory" value="Update" /> &nbsp;
+					<input type="submit" name="delete_from_job_inventory" value="Delete" /></td>
+				</tr></form>';
 		}
 
 	}
@@ -320,16 +320,16 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$i++; //for row coloring
 
 	echo '
-	<TR><TD COLSPAN="4"><H3>Add A New Skill</H3></TD></TR>
-	<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="job_id" VALUE="'. $job_id .'">
-	<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-	<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-		<TD><FONT SIZE="-1">'. people_skill_box('skill_id'). '</TD>
-		<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id'). '</TD>
-		<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id'). '</TD>
-		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_job_inventory" VALUE="Add Skill"></TD>
-	</TR></FORM>';
+	<tr><td colspan="4"><h3>Add A New Skill</h3></td></tr>
+	<form action="'.$PHP_SELF.'" method="post">
+	<input type="hidden" name="job_id" value="'. $job_id .'" />
+	<input type="hidden" name="group_id" value="'.$group_id.'" />
+	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
+		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
+		<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
+		<td nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="Add Skill" /></td>
+	</tr></form>';
 
 	echo $GLOBALS['HTML']->listTableBottom();
 }
@@ -361,13 +361,13 @@ function people_show_category_table() {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		$return .= '<TR><TD><H2>No Categories Found</H2></TD></TR>';
+		$return .= '<tr><td><h2>No Categories Found</h2></td></tr>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo db_error();
-			$return .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/people/?category_id='. 
+			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/people/?category_id='.
 				db_result($result,$i,'category_id') .'">'. 
-				db_result($result,$i,'name') .'</A> ('. db_result($result,$i,'total') .')</TD></TR>';
+				db_result($result,$i,'name') .'</a> ('. db_result($result,$i,'total') .')</td></tr>';
 		}
 	}
 	$return .= $GLOBALS['HTML']->listTableBottom();
@@ -416,19 +416,19 @@ function people_show_job_list($result) {
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
-		$return .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3"><H2>None Found</H2>'. db_error() .'</TD></TR>';
+		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><h2>None Found</h2>'. db_error() .'</td></tr>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {	
 			$return .= '
-				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
-					'><TD><A HREF="/people/viewjob.php?group_id='. 
-					db_result($result,$i,'group_id') .'&job_id='. 
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
+					'><td><a href="/people/viewjob.php?group_id='.
+					db_result($result,$i,'group_id') .'&amp;job_id='.
 					db_result($result,$i,'job_id') .'">'. 
-					db_result($result,$i,'title') .'</A></TD><TD>'. 
-					db_result($result,$i,'category_name') .'</TD><TD>'. 
+					db_result($result,$i,'title') .'</a></td><td>'.
+					db_result($result,$i,'category_name') .'</td><td>'. 
 					date($sys_datefmt,db_result($result,$i,'date')) .
-					'</TD><TD><a href="/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
-					db_result($result,$i,'group_name') .'</a></TD></TR>';
+					'</td><td><a href="/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
+					db_result($result,$i,'group_name') .'</a></td></tr>';
 		}
 	}
 

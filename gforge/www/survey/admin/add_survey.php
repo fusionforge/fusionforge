@@ -18,7 +18,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Add A Survey','pagename'=>'survey_admin_add_survey'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -35,7 +35,7 @@ if ($post_changes) {
 }
 
 ?>
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 var timerID2 = null;
 
@@ -48,24 +48,24 @@ function show_questions() {
 </script>
 
 
-<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 
-<B>Name of Survey:</B>
-<BR>
-<INPUT TYPE="TEXT" NAME="survey_title" VALUE="" LENGTH="60" MAXLENGTH="150"><P>
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-List question numbers, in desired order, separated by commas. <B>Refer to your list of questions</B> so you can view
-the question id's. Do <B>not</B> include spaces or end your list with a comma.
-<BR>
+<strong>Name of Survey:</strong>
+<br />
+<input type="text" name="survey_title" value="" length="60" maxlength="150" /><p>
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<input type="hidden" name="post_changes" value="y" />
+List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view
+the question id's. Do <strong>not</strong> include spaces or end your list with a comma.
+<br />
 Ex: 1,2,3,4,5,6,7
-<BR><INPUT TYPE="TEXT" NAME="survey_questions" VALUE="" LENGTH="90" MAXLENGTH="1500"><P>
-<B>Is Active</B>
-<BR><INPUT TYPE="RADIO" NAME="is_active" VALUE="1" CHECKED> Yes
-<BR><INPUT TYPE="RADIO" NAME="is_active" VALUE="0"> No
-<P>
-<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Add This Survey">
-</FORM>  
+<br /><input type="text" name="survey_questions" value="" length="90" maxlength="1500" /></p>
+<p><strong>Is Active</strong>
+<br /><input type="radio" name="is_active" value="1" checked="checked" /> Yes
+<br /><input type="radio" name="is_active" value="0" /> No</p>
+<p>
+<input type="submit" name="SUBMIT" value="Add This Survey" /></p>
+</form></p>
 
 <?php
 
@@ -75,31 +75,31 @@ Function  ShowResultsEditSurvey($result) {
 	$cols  =  db_NumFields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 	for ($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo "</tr>";
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
 		if ($j%2==0) {
-			$row_bg="#FFFFFF";
+			$row_bg="white";
 		} else {
 			$row_bg="$GLOBALS[COLOR_LTBACK1]";
 		}
 
-		echo "<tr BGCOLOR=\"$row_bg\">\n";
-		echo "<TD><A HREF=\"edit_survey.php?group_id=$group_id&survey_id=".db_result($result,$j,0)."\">".db_result($result,$j,0)."</A></TD>";
+		echo "<tr style=\"background-color:$row_bg\">\n";
+		echo "<td><a href=\"edit_survey.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,0)."\">".db_result($result,$j,0)."</a></td>";
 		for ($i = 1; $i < $cols; $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>";
+	echo "</table>"; //</td></tr></TABLE>";
 }
 
 /*
@@ -111,13 +111,13 @@ $sql="SELECT * FROM surveys WHERE group_id='$group_id'";
 $result=db_query($sql);
 
 ?>
-<FORM>
-<INPUT TYPE="BUTTON" NAME="none" VALUE="Show Existing Questions" ONCLICK="show_questions()">
-</FORM>
+<form>
+<input type="button" name="none" value="Show Existing Questions" onclick="show_questions()" />
+</form>
 
-<P>
-<H2>Existing Surveys</H2>
-<P>
+<p>&nbsp;</p>
+<h2>Existing Surveys</h2>
+<p>&nbsp;</p>
 <?php
 ShowResultsEditSurvey($result);
 

@@ -48,11 +48,11 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));
 
-	print "<p><b><a href=\"/docman/new.php?group_id=".$group_id."\">Submit new documentation</a> | ".
+	print "<p><strong><a href=\"/docman/new.php?group_id=".$group_id."\">Submit new documentation</a> | ".
 		"<a href=\"/docman/index.php?group_id=".$group_id."\">View Documentation</a> | ".
-		"<a href=\"/docman/admin/index.php?group_id=".$group_id."\">Admin</a></b>"; 
+		"<a href=\"/docman/admin/index.php?group_id=".$group_id."\">Admin</a></strong>"; 
 	
-	print("<BR>");
+	print("<br />");
 }
 
 function doc_droplist_count($l_group_id, $language_id) {
@@ -71,7 +71,7 @@ function doc_droplist_count($l_group_id, $language_id) {
 	if (db_numrows($gresult) >= 1) {
 
 		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"POST\"><table border=\"0\">"
-			." <tr><td valign=\"center\"><b>Language:</b></td>"
+			." <tr><td valign=\"center\"><strong>Language:</strong></td>"
 			." <td valign=\"center\"><select name=\"language_id\">\n\n"; 
 		print "<option value=\"0\">All Languages</option>";
 		while($grow = db_fetch_array($gresult)) {

@@ -57,7 +57,7 @@ $threshhold='1.6';
 	exit_permission_denied();
 }*/
 
-// echo '<BR>Starting... ';
+// echo '<br />Starting... ';
 
 db_begin();
 
@@ -89,7 +89,7 @@ importance_factor=(1+((percentile::float/100)*.5))::float;");
 echo db_error();
 
 for ($i=1; $i<9; $i++) {
-	// echo '<BR>Starting round: '.$i;
+	// echo '<br />Starting round: '.$i;
 
 	$j=($i-1);
 
@@ -107,7 +107,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
         if (!$res) {
                 echo "Error in round $i inserting final data: ";
-                echo '<P>'.$sql.'<P>';
+                echo '<p>'.$sql.'<p>';
                 echo db_error();
                 exit;
         }
@@ -127,7 +127,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
 	if (!$res) {
 		echo "Error in round $i inserting average ratings: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 		
@@ -143,7 +143,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
 	if (!$res) {
 		echo "Error in round $i calculating metric: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 		
@@ -153,7 +153,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
 	if (!$res) {
                 echo "Error in round $i deleting < threshhold ids: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
                 echo db_error();
                 exit;
                 
@@ -175,7 +175,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
         if (!$res) {
                 echo "Error in round $i inserting final data: ";
-                echo '<P>'.$sql.'<P>';
+                echo '<p>'.$sql.'<p>';
                 echo db_error();
                 exit;
         }
@@ -186,7 +186,7 @@ for ($i=1; $i<9; $i++) {
 		Create the final table, then insert the data
 	*/
 
-	// echo '<BR>Starting Final Metric';
+	// echo '<br />Starting Final Metric';
 
 	db_drop_table_if_exists ("user_metric".$i);
 	db_drop_sequence_if_exists ("user_metric".$i."_ranking_seq");
@@ -204,7 +204,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
 	if (!$res) {
                 echo "Error in round $i inserting final data: ";
-                echo '<P>'.$sql.'<P>';
+                echo '<p>'.$sql.'<p>';
                 echo db_error();
                 exit;
         }
@@ -220,7 +220,7 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query($sql);
 	if (!$res) {
 		echo "Error in round $i inserting final data: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 	}
@@ -231,12 +231,12 @@ for ($i=1; $i<9; $i++) {
 	$res=db_query("SELECT COUNT(*) FROM user_metric$i");
 	if (!$res) {
 		echo "Error in round $i getting row count: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 	}
 
-	//echo '<BR>Issuing Final Update';
+	//echo '<br />Issuing Final Update';
 	// Only do final percentile if row count is not zero
 	if (db_result($res,0,0)) {
 
@@ -248,7 +248,7 @@ for ($i=1; $i<9; $i++) {
 	    $res=db_query($sql);
 	    if (!$res || db_affected_rows($res) < 1) {
 		echo "Error in round $i setting percentile: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 	    }
@@ -257,7 +257,7 @@ for ($i=1; $i<9; $i++) {
 	    $res=db_query($sql);
 	    if (!$res || db_affected_rows($res) < 1) {
 		echo "Error in round $i setting importance factor: ";
-		echo '<P>'.$sql.'<P>';
+		echo '<p>'.$sql.'<p>';
 		echo db_error();
 		exit;
 	    }
@@ -267,12 +267,12 @@ for ($i=1; $i<9; $i++) {
 db_commit();
 db_query("DELETE FROM user_metric;");
 db_query("INSERT INTO user_metric SELECT * FROM user_metric".($i-1).";");
-//echo '<P>'.db_error().'<P>';
+//echo '<p>'.db_error().'<p>';
 
 /*
 	Now run through and drop the tmp tables
 */
-// echo "<P>Cleaning up tables<P>";
+// echo "<p>Cleaning up tables<p>";
 
 for ($i=1; $i<9; $i++) {
 	db_drop_table_if_exists ("user_metric_tmp1_".$i);

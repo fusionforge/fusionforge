@@ -129,37 +129,34 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= ' POSTING fetch FAILED ';
-		echo '<H2>No Such posting For This Project</H2>';
+		echo '<h2>No Such posting For This Project</h2>';
 	} else {
 
 		echo '
-		<P>
-		Now you can edit/change the list of skills attached to this posting. 
-		Developers will be able to match their skills with your requirements. 
-		<P>
-		All postings are automatically closed after two weeks.
-		<P>
-		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-		<INPUT TYPE="HIDDEN" NAME="job_id" VALUE="'.$job_id.'">
-		<B>Category:</B><BR>
+		<p>Now you can edit/change the list of skills attached to this posting.
+		Developers will be able to match their skills with your requirements.</p>
+		<p>All postings are automatically closed after two weeks.</p>
+		<p><form action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<input type="hidden" name="job_id" value="'.$job_id.'" />
+		<strong>Category:</strong><br />
 		'. people_job_category_box('category_id',db_result($result,0,'category_id')) .'
-		<P>
-		<B>Status:</B><BR>
-		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'
-		<P>
-		<B>Short Description:</B><BR>
-		<INPUT TYPE="TEXT" NAME="title" VALUE="'. db_result($result,0,'title') .'" SIZE="40" MAXLENGTH="60">
-		<P>
-		<B>Long Description:</B><BR>
-		<TEXTAREA NAME="description" ROWS="10" COLS="60" WRAP="SOFT">'. db_result($result,0,'description') .'</TEXTAREA>
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="update_job" VALUE="Update Descriptions">
-		</FORM>';
+		<p>
+		<strong>Status:</strong><br />
+		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'</p>
+		<p>
+		<strong>Short Description:</strong><br />
+		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" /></p>
+		<p>
+		<strong>Long Description:</strong><br />
+		<textarea name="description" rows="10" cols="60" wrap="soft">'. db_result($result,0,'description') .'</textarea></p>
+		<p>
+		<input type="submit" name="update_job" value="Update Descriptions" />
+		</form></p>';
 
 		//now show the list of desired skills
-		echo '<P>'.people_edit_job_inventory($job_id,$group_id);
-		echo '<P><FORM ACTION="/people/" METHOD="POST"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Finished"></FORM>';
+		echo '<p>'.people_edit_job_inventory($job_id,$group_id) . '</p>';
+		echo '<p><form action="/people/" method="post"><input type="submit" name="submit" value="Finished" /></form>';
 
 	}
 

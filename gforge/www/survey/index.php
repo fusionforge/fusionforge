@@ -17,7 +17,7 @@ require_once('vote_function.php');
 require_once('www/survey/survey_utils.php');
 
 if (!$group_id) {
-	echo "<H1>For some reason, the Group ID or Survey ID did not make it to this page</H1>";
+	echo "<h1>For some reason, the Group ID or Survey ID did not make it to this page</h1>";
 }
 
 survey_header(array('title'=>'Survey','pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
@@ -37,11 +37,11 @@ Function  ShowResultsGroupSurveys($result) {
 
 		echo "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n";
 
-		echo "<TD><A HREF=\"survey.php?group_id=$group_id&survey_id=".db_result($result,$j,"survey_id")."\">".
-			db_result($result,$j,"survey_id")."</TD>";
+		echo "<td><a href=\"survey.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">".
+			db_result($result,$j,"survey_id")."</a></td>";
 
 		for ($i=1; $i<$cols; $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
@@ -56,7 +56,7 @@ $sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND 
 $result=db_query($sql);
 
 if (!$result || db_numrows($result) < 1) {
-	echo "<H2>This Group Has No Active Surveys</H2>";
+	echo "<h2>This Group Has No Active Surveys</h2>";
 	echo db_error();
 } else {
 	ShowResultsGroupSurveys($result);

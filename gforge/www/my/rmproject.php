@@ -65,16 +65,16 @@ confirm your action:
 <table>
 <tr><td>
 
-<form action="'.$PHP_SELF.'" method="POST">
-<input type="hidden" name="confirm" value="1">
-<input type="hidden" name="group_id" value="'.$group_id.'">
-<input type="submit" value="Remove">
+<form action="'.$PHP_SELF.'" method="post">
+<input type="hidden" name="confirm" value="1" />
+<input type="hidden" name="group_id" value="'.$group_id.'" />
+<input type="submit" value="Remove" />
 </form>
 
 </td><td>
 
-<form action="/my/" method="GET">
-<input type="submit" value="Cancel">
+<form action="/my/" method="get">
+<input type="submit" value="Cancel" />
 </form>
 
 </td></tr>

@@ -354,13 +354,13 @@ function html_graph_init()
 */
 function start_graph($vals, $names)
    {
-    print "<!-- Start Inner Graph Table -->\n\n<TABLE";
-    print ' CELLPADDING="' . $vals["cellpadding"] . '"';
-    print ' CELLSPACING="' . $vals["cellspacing"] . '"';
-    print ' BORDER="' . $vals["border"] . '"';
+    print "<!-- Start Inner Graph Table -->\n\n<table";
+    print ' cellpadding="' . $vals["cellpadding"] . '"';
+    print ' cellspacing="' . $vals["cellspacing"] . '"';
+    print ' border="' . $vals["border"] . '"';
 
-    if ($vals["width"] != 0) { print ' WIDTH="' . $vals["width"] . '"'; }
-    if ($vals["background"]) { print ' BACKGROUND="' . $vals["background"] . '"'; }
+    if ($vals["width"] != 0) { print ' width="' . $vals["width"] . '"'; }
+    if ($vals["background"]) { print ' background="' . $vals["background"] . '"'; }
 
     print '>';
 
@@ -377,25 +377,25 @@ function start_graph($vals, $names)
             $colspan = SizeOf($names) + 1; 
            }
 
-        print '<TR><TD ALIGN=CENTER VALIGN="CENTER" ';
+        print '<tr><td align="center" valign="center" ';
 
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print 'BGCOLOR="' . $vals["hbgcolor"] . '"'; }
+        if (! $vals["background"]) { print 'style="background-color:' . $vals["hbgcolor"] . '"'; }
 
-        print ' COLSPAN="' . $colspan . '">';
-        print '<FONT COLOR="' . $vals["hfcolor"] . '" STYLE="' . $vals["hfstyle"] . '">';
-        print "<B>" . $vals["hlabel"] . "</B>";
-        print '</FONT></TD></TR>';
+        print ' colspan="' . $colspan . '">';
+		print '<span style="color:' . $vals["hfcolor"] . '; ' . $vals["hfstyle"] . '">';
+        print "<strong>" . $vals["hlabel"] . "</strong>";
+        print '</span></td></tr>';
 
-        print '<TR><TD ALIGN="CENTER" VALIGN="CENTER" ';
+        print '<tr><td align="center" valign="center" ';
 
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print 'BGCOLOR="' . $vals["vbgcolor"] . '"'; }
+        if (! $vals["background"]) { print 'style="background-color:' . $vals["vbgcolor"] . '"'; }
 
-        print ' ROWSPAN="' . $rowspan . '">';
-        print '<FONT COLOR="' . $vals["vfcolor"] . '" STYLE="' . $vals["vfstyle"] . '">';
-        print "<B>" . $vals["vlabel"] . "</B>";
-        print '</FONT></TD>';
+        print ' rowspan="' . $rowspan . '">';
+        print '<span style="color:' . $vals["vfcolor"] . '; ' . $vals["vfstyle"] . '">';
+        print "<strong>" . $vals["vlabel"] . "</strong>";
+        print '</span></td>';
        }
    }
 
@@ -410,7 +410,7 @@ function start_graph($vals, $names)
 */
 function end_graph()
    {
-    print "\n</TABLE>\n\n<!-- end inner graph table -->\n\n";
+    print "\n</table>\n\n<!-- end inner graph table -->\n\n";
    }
 
 /*
@@ -426,14 +426,14 @@ function hv_graph_defaults($vals)
    {
     if (! $vals["vfcolor"]) { $vals["vfcolor"]="#000000"; }
     if (! $vals["hfcolor"]) { $vals["hfcolor"]="#000000"; }
-    if (! $vals["vbgcolor"]) { $vals["vbgcolor"]="#FFFFFF"; }
-    if (! $vals["hbgcolor"]) { $vals["hbgcolor"]="#FFFFFF"; }
+    if (! $vals["vbgcolor"]) { $vals["vbgcolor"]="#ffffff"; }
+    if (! $vals["hbgcolor"]) { $vals["hbgcolor"]="#ffffff"; }
     if (! $vals["cellpadding"]) { $vals["cellpadding"]=0; }
     if (! $vals["cellspacing"]) { $vals["cellspacing"]=0; }
     if (! $vals["border"]) { $vals["border"]=0; }
     if (! $vals["scale"]) { $vals["scale"]=1; }
-    if (! $vals["namebgcolor"]) { $vals["namebgcolor"]="#FFFFFF"; }
-    if (! $vals["valuebgcolor"]) { $vals["valuebgcolor"]="#FFFFFF"; }
+    if (! $vals["namebgcolor"]) { $vals["namebgcolor"]="#ffffff"; }
+    if (! $vals["valuebgcolor"]) { $vals["valuebgcolor"]="#ffffff"; }
     if (! $vals["namefcolor"]) { $vals["namefcolor"]="#000000"; }
     if (! $vals["valuefcolor"]) { $vals["valuefcolor"]="#000000"; }
     if (! $vals["doublefcolor"]) { $vals["doublefcolor"]="#886666"; }
@@ -456,23 +456,23 @@ function horizontal_graph($names, $values, $bars, $vals)
        { 
 ?>
 
-	<TR>
-	<TD ALIGN="RIGHT" <?php
+	<tr>
+	<td align="right" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>>
-		<FONT SIZE="-1" COLOR="<?php 
-			echo $vals["namefcolor"]; 
-		?>" STYLE="<?php 
-			echo $vals["namefstyle"]; 
+		<span style="font-size: -1;color:"<?php
+			echo $vals["namefcolor"];
+		?>;<?php
+			echo $vals["namefstyle"];
 	echo "\">";
         echo "\n".$names[$i]; ?>
-		</FONT>
-	</TD>
+		</span>
+	</td>
 
-	<TD  ALIGN="LEFT" <?php
+	<td  align="left" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
 
 	echo ">";
 
@@ -481,27 +481,27 @@ function horizontal_graph($names, $values, $bars, $vals)
            { 
 ?>
 
-		<TABLE ALIGN="LEFT" CELLPADDING=0 CELLSPACING=0  BGCOLOR="<?php echo $bars[$i] ?>" WIDTH="<?php echo $values[$i] * $vals["scale"] ?>">
-			<TR><TD>&nbsp;</TD></TR>
-		</TABLE>
+		<table align="left" cellpadding="0" cellspacing="0" style="background-color:<?php echo $bars[$i] ?>" width="<?php echo $values[$i] * $vals["scale"] ?>">
+			<tr><td>&nbsp;</td></tr>
+		</table>
 
 <?php
             }
          else
             {
-             print '<IMG SRC="' . $bars[$i] . '"';
-             print ' HEIGHT=10 WIDTH="' . $values[$i] * $vals["scale"] . '">';
+             print '<img src="' . $bars[$i] . '"';
+             print ' height="10" width="' . $values[$i] * $vals["scale"] . '" alt= "" />';
             }
         if (! $vals["noshowvals"])
            {
-            print '		<I><FONT SIZE="-2" COLOR="' . $vals["valuefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $values[$i] . ")</FONT></I>";
+            print '		<em><span style="font-size: -2;color:' . $vals["valuefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $values[$i] . ")</span></em>";
            }
 ?>
 
-	</TD> 
-	</TR>
+	</td>
+	</tr>
 <?php
        } // endfor
 
@@ -518,26 +518,26 @@ function horizontal_graph($names, $values, $bars, $vals)
 */
 function vertical_graph($names, $values, $bars, $vals) 
    {
-    print "<TR>";
+    print "<tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
        { 
 
-        print '<TD  ALIGN="CENTER" VALIGN="BOTTOM" ';
+        print '<td  align="center" valign="bottom" ';
 
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
         print ">";
 
         if (! $vals["noshowvals"])
            {
-            print '<I><FONT SIZE="-2" COLOR="' . $vals["valuefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $values[$i] . ")</FONT></I><BR>";
+            print '<em><span style="font-size: -2;color:' . $vals["valuefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $values[$i] . ")</span></em><br />";
            }
 ?>
 
-         <IMG SRC="<?php echo $bars[$i] ?>" WIDTH=5 HEIGHT="<?php 
+         <img src="<?php echo $bars[$i] ?>" width="5" height="<?php
 
         // Values of zero are displayed wrong because a image height of zero 
         // gives a strange behavior in Netscape. For this reason the height 
@@ -550,28 +550,28 @@ function vertical_graph($names, $values, $bars, $vals)
            { 
             echo "1";
            } 
-?>">
+?>" alt="" />
 
-         </TD> 
+         </td>
 <?php
        } // endfor
 
-    print "</TR><TR>";
+    print "</tr><tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
        { 
 ?>
-        <TD ALIGN="CENTER" VALIGN="TOP" 
+        <td align="center" valign="top"
 
 <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>
          >
-         <FONT SIZE="-1" COLOR="<?php echo $vals["namefcolor"] ?>" STYLE="<?php echo $vals["namefstyle"] ?>">
+		 <span style="font-size: -1;color:<?php echo $vals["namefcolor"] ?>;<?php echo $vals["namefstyle"] ?>">
          <?php echo $names[$i] ?>
-         </FONT>
-        </TD>
+         </span>
+        </td>
 <?php
        } // endfor
 
@@ -592,70 +592,70 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
     for( $i=0;$i<SizeOf($values);$i++ )
        { 
 ?>
-       <TR>
-        <TD ALIGN=RIGHT 
+       <tr>
+        <td align="right"
 <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>
          >
-         <FONT SIZE="-1" COLOR="<?php echo $vals["namefcolor"] ?>" STYLE="<?php echo $vals["namefstyle"] ?>">
+		 <span style="font-size: -1;color:<?php echo $vals["namefcolor"] ?>;<?php echo $vals["namefstyle"] ?>">
          <?php echo $names[$i] ?>
-         </FONT>
-        </TD>
-        <TD  ALIGN=LEFT 
+         </span>
+        </td>
+        <td  align="left"
 <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
 ?>
          >
-         <TABLE ALIGN="LEFT" CELLPADDING=0 CELLSPACING=0 WIDTH="<?php echo $dvalues[$i] * $vals["scale"] ?>">
-          <TR><TD 
+         <table align="left" cellpadding="0" cellspacing="0" width="<?php echo $dvalues[$i] * $vals["scale"] ?>">
+          <tr><td
 <?php
         // Set background to a color if it starts with # or
         // an image otherwise.
-        if (ereg("^#", $dbars[$i])) { print 'BGCOLOR="' . $dbars[$i] . '">'; }
-        else { print 'BACKGROUND="' . $dbars[$i] . '">'; }
+        if (ereg("^#", $dbars[$i])) { print 'style="background-color:' . $dbars[$i] . '">'; }
+        else { print 'background="' . $dbars[$i] . '">'; }
 ?>
-           <NOWRAP>
+           <nowrap>
 <?php
         // Decide if the value in bar is a color code or image.
         if (ereg("^#", $bars[$i]))
            { 
 ?>
-            <TABLE ALIGN="LEFT" CELLPADDING=0 CELLSPACING=0 
-             BGCOLOR="<?php echo $bars[$i] ?>" 
-             WIDTH="<?php echo $values[$i] * $vals["scale"] ?>">
-             <TR><TD>&nbsp</TD></TR>
-            </TABLE>
+            <table align="left" cellpadding="0" cellspacing="0"
+             style="background-color:"<?php echo $bars[$i] ?>"
+             width="<?php echo $values[$i] * $vals["scale"] ?>">
+             <tr><td>&nbsp</td></tr>
+            </table>
 <?php
             }
          else
             {
-             print '<IMG SRC="' . $bars[$i] . '"';
-             print ' HEIGHT=10 WIDTH="' . $values[$i] * $vals["scale"] . '">';
+             print '<img src="' . $bars[$i] . '"';
+             print ' height="10" width="' . $values[$i] * $vals["scale"] . '" alt="" />';
             }          
 
         if (! $vals["noshowvals"])
            {
-            print '<I><FONT SIZE="-3" COLOR="' . $vals["valuefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $values[$i] . ")</FONT></I>";
+            print '<em><span style="font-size: -3:color:' . $vals["valuefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $values[$i] . ")</span></em>";
            }
 ?>
-           </NOWRAP>
-          </TD></TR>
-         </TABLE>
+           </nowrap>
+          </td></tr>
+         </table>
 <?php
         if (! $vals["noshowvals"])
            {
-            print '<I><FONT SIZE="-3" COLOR="' . $vals["doublefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $dvalues[$i] . ")</FONT></I>";
+            print '<em><span style="font-size:-3;color:' . $vals["doublefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $dvalues[$i] . ")</span></em>";
            }
 ?>
-        </TD> 
-       </TR>
+        </td>
+       </tr>
 <?php
        } // endfor
 
@@ -674,71 +674,71 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
 */
 function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars) 
    {
-   // print "<TR>";
+   // print "<tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
        { 
 
-        print '<TD  ALIGN="CENTER" VALIGN="BOTTOM" ';
+        print '<td align="center" valign="bottom" ';
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
         print ">";
 
-	print '<TABLE><TR><TD ALIGN="CENTER" VALIGN="BOTTOM" ';
+	print '<table><tr><td align="center" valign="bottom" ';
 
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
         print ">";
 
         if (! $vals["noshowvals"])
            {
-            print '<I><FONT SIZE="-2" COLOR="' . $vals["valuefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $values[$i] . ")</FONT></I><BR>";
+            print '<em><span style="font-size:-2;color:' . $vals["valuefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $values[$i] . ")</span></em><br />";
            }
 ?>
 
-         <IMG SRC="<?php echo $bars[$i] ?>" WIDTH=10 HEIGHT="<?php if ($values[$i]!=0){
+         <img src="<?php echo $bars[$i] ?>" width="10" height="<?php if ($values[$i]!=0){
 		echo $values[$i] * $vals["scale"];
-		} else { echo "1";} ?>">
-         </TD><TD ALIGN="CENTER" VALIGN="BOTTOM"
+		} else { echo "1";} ?>" alt="" />
+         </td><td align="center" valign="bottom"
 <?php
          // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
         print ">";
 
         if (! $vals["noshowvals"])
            {
-            print '<I><FONT SIZE="-2" COLOR="' . $vals["doublefcolor"] . '" ';
-            print ' STYLE="' . $vals["valuefstyle"] . '">('; 
-            print $dvalues[$i] . ")</FONT></I><BR>";
+            print '<em><span style="font-size:-2;color:' . $vals["doublefcolor"] . ';'
+            . $vals["valuefstyle"] . '">(';
+            print $dvalues[$i] . ")</span></em><br />";
            }
 ?>
 
-         <IMG SRC="<?php echo $dbars[$i] ?>" WIDTH=10 HEIGHT="<?php if ($dvalues[$i]!=0){
+         <img src="<?php echo $dbars[$i] ?>" width="10" height="<?php if ($dvalues[$i]!=0){
 		echo $dvalues[$i] * $vals["scale"];
-		} else { echo "1";} ?>">
-         </TD></TR></TABLE>
-	 </TD>
+		} else { echo "1";} ?>" alt="" />
+         </td></tr></table>
+	 </td>
 <?php
        } // endfor
 
-    print "</TR><TR>";
+    print "</tr><tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
        { 
 ?>
-        <TD ALIGN="CENTER" VALIGN="TOP" 
+        <td align="center" valign="top"
 
 <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>
          >
-         <FONT SIZE="-1" COLOR="<?php echo $vals["namefcolor"] ?>" STYLE="<?php echo $vals["namefstyle"] ?>">
+		 <span style="font-size:-1;color:<?php echo $vals["namefcolor"] ?>;<?php echo $vals["namefstyle"] ?>">
          <?php echo $names[$i] ?>
-         </FONT>
-        </TD>
+         </span>
+        </td>
 <?php
        } // endfor
 
@@ -771,27 +771,24 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
        {
 ?>
 
-	<TR>
-	<TD ALIGN="RIGHT" <?php
+	<tr>
+	<td align="right" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["namebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>>
-		<FONT SIZE="-1" COLOR="<?php
-			echo $vals["namefcolor"];
-		?>" STYLE="<?php
-			echo $vals["namefstyle"];
-	echo "\">";
+		<span style="font-size:-1;color:<?php echo $vals["namefcolor"]; ?>;<?php echo $vals["namefstyle"]; ?>">
+<?php
         echo "\n".$names[$i]; ?>
-		</FONT>
-	</TD>
+		</span>
+	</td>
 
-	<TD  ALIGN="LEFT" <?php
+	<td  align="left" <?php
         // If a background was choosen don't print cell BGCOLOR
-        if (! $vals["background"]) { print ' BGCOLOR="' . $vals["valuebgcolor"] . '"'; }
+        if (! $vals["background"]) { print ' style="background-color:' . $vals["valuebgcolor"] . '"'; }
 
 	echo ">";
 
-        echo '<TABLE ALIGN="LEFT" BORDER=0 CELLPADDING=0 CELLSPACING=0><TR>'."\n";
+        echo '<table align="left" border="0" cellpadding="0" cellspacing="0"><tr>'."\n";
         $prev_val=0;
         $shown=0;
 	for( $j=0;$j<$subbars_num;$j++ ) {
@@ -802,24 +799,24 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
                 $shown=1;
                 $prev_val=$multi_rows[$j][$i];
                 $pix_width=$width * $vals["scale"];
-                echo "<td bgcolor=\"".$colors[$j]."\" width=\"".$pix_width."\">&nbsp;</td>";
+                echo "<td style=\"background-color:".$colors[$j]."\" width=\"".$pix_width."\">&nbsp;</td>";
         }
-        echo '</TR></TABLE>';
+        echo '</tr></table>';
 
         if (! $vals["noshowvals"])
            {
-                print '		<I><FONT SIZE="-2" COLOR="' . $vals["valuefcolor"] . '" ';
-                print ' STYLE="' . $vals["valuefstyle"] . '">&nbsp;(';
+                print '		<em><span style="font-size:-2;color:' . $vals["valuefcolor"] . ';'
+                . $vals["valuefstyle"] . '">&nbsp;(';
         	for( $j=0;$j<SizeOf($multi_rows);$j++ ) {
                         if ($j) print "/";
                         print $multi_rows[$j][$i];
                 }
-                print ")</FONT></I>";
+                print ")</span></em>";
            }
 ?>
 
-	</TD>
-	</TR>
+	</td>
+	</tr>
 <?php
        } // endfor
 

@@ -34,12 +34,12 @@ if (!strstr($REMOTE_ADDR,'192.168.1.')) {
 //get all the tasks
 $result=db_query("SELECT * FROM frs_release WHERE release_id > 9290 ORDER BY release_id ASC");
 $rows=db_numrows($result);
-echo "\n<BR>Rows: $rows\n";
+echo "\n<br />Rows: $rows\n";
 flush();
 
 for ($i=0; $i<$rows; $i++) {
 	flush();
-	echo "\n<BR>Release :: ".db_result($result,$i,'release_id');
+	echo "\n<br />Release :: ".db_result($result,$i,'release_id');
 
 	/*
 		Get the files from the old system for this release
@@ -53,7 +53,7 @@ for ($i=0; $i<$rows; $i++) {
 		/*
 			no matches for this release
 		*/
-		echo "\n<BR>Warning - deleting release!";
+		echo "\n<br />Warning - deleting release!";
 		db_query ("DELETE FROM frs_release WHERE release_id='". db_result($result,$i,'release_id') ."'");
 	} else {
 		$release_id=db_result($result,$i,'release_id');
@@ -69,7 +69,7 @@ for ($i=0; $i<$rows; $i++) {
 			"release_date='". db_result($res2,0,'release_time') ."' ".
 			"WHERE release_id='$release_id'");
 
-		echo "\n<BR>Update Release: $release_id :: ".db_error();
+		echo "\n<br />Update Release: $release_id :: ".db_error();
 
 		for ($f=0; $f<$rows2; $f++) {
 			/*
@@ -78,7 +78,7 @@ for ($i=0; $i<$rows; $i++) {
 			db_query("INSERT INTO frs_file (file_id,filename,release_id,processor_id,release_time,file_size,post_date,type_id) VALUES ".
 				"('". db_result($res2,$f,'filerelease_id') ."','". db_result($res2,$f,'filename') ."','$release_id',".
 				"'9999','". db_result($res2,$f,'release_time') ."','". db_result($res2,$f,'file_size') ."','". db_result($res2,$f,'post_time') ."','9999')");
-			echo "\n<BR>File: ". db_result($res2,$f,'filerelease_id') ." :: ".db_error();
+			echo "\n<br />File: ". db_result($res2,$f,'filerelease_id') ." :: ".db_error();
 		}
 	}
 }

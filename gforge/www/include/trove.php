@@ -199,8 +199,8 @@ function trove_getallroots() {
  * @param		string	THe select-box name
  */
 function trove_catselectfull($node,$selected,$name) {
-	print "<BR><SELECT name=\"$name\">";
-	print '  <OPTION value="0">None Selected'."\n";
+	print "<br /><select name=\"$name\">";
+	print '  <option value="0">None Selected'."</option>\n";
 	$res_cat = db_query("
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
@@ -208,11 +208,11 @@ function trove_catselectfull($node,$selected,$name) {
 		ORDER BY fullpath");
 
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print '  <OPTION value="'.$row_cat['trove_cat_id'].'"';
-		if ($selected == $row_cat['trove_cat_id']) print (' selected');
-		print '>'.$row_cat['fullpath']."\n";
+		print '  <option value="'.$row_cat['trove_cat_id'].'"';
+		if ($selected == $row_cat['trove_cat_id']) print (' selected="selected"');
+		print '>'.$row_cat['fullpath']."</option>\n";
 	}
-	print "</SELECT>\n";
+	print "</select>\n";
 }
 
 /**
@@ -240,23 +240,23 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	$return = '';
 	if (db_numrows($res_trovecat) < 1) {
 		$return .= $Language->getText('trove','not_categorized')
-			.' <A href="/softwaremap/trove_list.php">'
+			.' <a href="/softwaremap/trove_list.php">'
 			. $Language->getText('trove','title')
-			.'</A>.';
+			.'</a>.';
 	}
 
 	// first unset the vars were using here
 	$proj_discrim_used='';
 	$isfirstdiscrim = 1;
-	$return .= '<UL>';
+	$return .= '<ul>';
 	while ($row_trovecat = db_fetch_array($res_trovecat)) {
 		$folders = explode(" :: ",$row_trovecat['fullpath']);
 		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
 		$folders_len = count($folders);
 		// if first in discrim print root category
 		if (!$proj_discrim_used[$folders_ids[0]]) {
-			if (!$isfirstdiscrim) $return .= '<BR>';
-				$return .= ('<LI> '.$folders[0].': ');
+			if (!$isfirstdiscrim) $return .= '<br />';
+				$return .= ('<li> '.$folders[0].': </li>');
 		}
 
 		// filter links, to add discriminators
@@ -269,29 +269,29 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 			// then print the stuff
 			if ($proj_discrim_used[$folders_ids[0]]) $return .= ', ';
 
-			if ($a_cats) $return .= '<A href="/softwaremap/trove_list.php?form_cat='
+			if ($a_cats) $return .= '<a href="/softwaremap/trove_list.php?form_cat='
 				.$folders_ids[$folders_len-1].$discrim_url.'">';
 			$return .= ($folders[$folders_len-1]);
-			if ($a_cats) $return .= '</A>';
+			if ($a_cats) $return .= '</a>';
 
 			if ($a_filter) {
 				if ($filterisalreadyapplied) {
-					$return .= ' <b>(Now Filtering)</b> ';
+					$return .= ' <strong>(Now Filtering)</strong> ';
 				} else {
-					$return .= ' <A href="/softwaremap/trove_list.php?form_cat='
+					$return .= ' <a href="/softwaremap/trove_list.php?form_cat='
 						.$form_cat;
 					if ($discrim_url) {
 						$return .= $discrim_url.','.$folders_ids[$folders_len-1];
 					} else {
-						$return .= '&discrim='.$folders_ids[$folders_len-1];
+						$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
 					}
-					$return .= '">[Filter]</A> ';
+					$return .= '">[Filter]</a> ';
 				}
 			}
 		$proj_discrim_used[$folders_ids[0]] = 1;
 		$isfirstdiscrim = 0;
 	}
-	$return .= '</UL>';
+	$return .= '</ul>';
 	return $return;
 }
 

@@ -51,7 +51,7 @@ class ProjectTaskHTML extends ProjectTask {
 		if ($rows > 0) {
 			echo '
 			<h3>Tasks That Depend on This Task</h3>
-			<P>';
+			<p>';
 
 			$title_arr=array();
 			$title_arr[]='Task ID';
@@ -62,7 +62,7 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i=0; $i < $rows; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td><A HREF="/pm/task.php?func=detailtask&project_task_id='.
+					<td><a href="/pm/task.php?func=detailtask&project_task_id='.
 					db_result($result, $i, 'project_task_id').
 					'&group_id='. $this->ProjectGroup->Group->getID() .
 					'&group_project_id='. $this->ProjectGroup->getID() .'">'.
@@ -95,7 +95,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 			echo '
 			<h3>Related Tracker Items</h3>
-			<P>';
+			<p>';
 
 			$title_arr=array();
 			$title_arr[]='Summary';
@@ -108,7 +108,7 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i=0; $i < $rows; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td><a href="/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id').'">'.db_result($res,$i,'summary').'</A></td>
+					<td><a href="/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id').'">'.db_result($res,$i,'summary').'</a></td>
 					<td>'. db_result($res,$i,'name') .'</td>
 					<td>'. date($sys_datefmt,db_result($res,$i,'open_date')) .'</td>'.
 					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'"></td>' : '').
@@ -133,7 +133,7 @@ class ProjectTaskHTML extends ProjectTask {
 		if ($rows > 0) {
 			echo '
 			<h3>Followups</h3>
-			<P>';
+			<p>';
 
 			$title_arr=array();
 			$title_arr[]='Comment';
@@ -146,8 +146,8 @@ class ProjectTaskHTML extends ProjectTask {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'. nl2br(db_result($result, $i, 'body')).'</td>
-					<td VALIGN="TOP">'.date($sys_datefmt,db_result($result, $i, 'postdate')).'</td>
-					<td VALIGN="TOP">'.db_result($result, $i, 'user_name').'</td></tr>';
+					<td valign="TOP">'.date($sys_datefmt,db_result($result, $i, 'postdate')).'</td>
+					<td valign="TOP">'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -173,7 +173,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 			echo '
 			<h3>Task Change History</h3>
-			<P>';
+			<p>';
 
 			$title_arr=array();
 			$title_arr[]='Field';

@@ -27,7 +27,7 @@ function check_file_size($size) {
 		return true;
 	} else {
 		//too big or small
-		$feedback .= ' ERROR - file must be > 20 bytes and < 256000 bytes in length<br>';
+		$feedback .= ' ERROR - file must be > 20 bytes and < 256000 bytes in length<br />';
 		return false;
 	}
 }
@@ -75,7 +75,7 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 		}	
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot store mutimedia file<br>';
+			$feedback .= 'ERROR: DB: Cannot store mutimedia file<br />';
 			echo db_error();
 		} else {
 			$feedback .= ' Multimedia File Uploaded ';
@@ -111,7 +111,7 @@ if ($submit) {
 		$res=db_query("DELETE FROM db_images WHERE id='$id' AND group_id='$group_id'");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot delete mutimedia file<br>';
+			$feedback .= 'ERROR: DB: Cannot delete mutimedia file<br />';
 			echo db_error();
 		} else {
 			$feedback .= ' Multimedia File Deleted ';
@@ -119,7 +119,7 @@ if ($submit) {
 
 	} else if ($edit) {
 		if ($description == "") {
-			$feedback .= 'File description is required<br>';
+			$feedback .= 'File description is required<b />';
 		} else {
 			if ($input_file=="none" || $input_file=="") {
 
@@ -132,10 +132,10 @@ if ($submit) {
 						AND id='$id' ");
 
 				if (!$res || db_affected_rows($res) < 1) {
-					$feedback .= 'ERROR: DB: Cannot update mutimedia file<br>';
+					$feedback .= 'ERROR: DB: Cannot update mutimedia file<br />';
 					echo db_error();
 				} else {
-					$feedback .= 'Multimedia File Properties Updated<br>';
+					$feedback .= 'Multimedia File Properties Updated<br />';
 				}
 
 			} else {
@@ -168,12 +168,12 @@ if ($submit) {
 project_admin_header(array('title'=>'Edit Your Multimedia Data','pagename'=>'project_admin_editimages','sectionvals'=>array(group_getname($group_id))));
 
 echo '
-	<P>
+	<p>
 	You can store up to '.sprintf("%.2f",$QUOTA/(1024*1024)).'MB 
 	of multimedia data (bitmap and vector
 	graphics, sound clips, 3D models) in our database. Use this
-	page to add/delete your project multimedia data.
-	<P>
+	page to add/delete your project multimedia data.</p>
+	<p>
 ';
 
 if ($mode == "edit") {
@@ -183,33 +183,33 @@ if ($mode == "edit") {
 				AND id='$id'");
 
 	if (!$result || db_numrows($result)!=1) {
-		$feedback .= "Cannot edit multimedia file<br>";
+		$feedback .= "Cannot edit multimedia file<br />";
 		project_admin_footer(array());
 		exit();
 	}
 
-	echo '<H4>Edit Multimedia Data</H4>
-	<P>
-	<FORM ACTION="'. $PHP_SELF .'" METHOD="POST" enctype="multipart/form-data">
-	<input type="hidden" name="group_id" VALUE="'.$group_id.'">
-	<input type="hidden" name="id" VALUE="'.$id.'">
+	echo '</p><h4>Edit Multimedia Data</h4>
+	<p>
+	<form action="'. $PHP_SELF .'" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="group_id" value="'.$group_id.'" />
+	<input type="hidden" name="id" value="'.$id.'" />
 
-	<B>Replace with new file (optional):</B><BR>
-	<input type="file" name="input_file" size="30">
-	<P>
+	<strong>Replace with new file (optional):</strong><br />
+	<input type="file" name="input_file" size="30" />
+	<p>
 
-	<B>Description ("alt"):</B><BR>
-	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'"><P>
+	<strong>Description ("alt"):</strong><br />
+	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'" />
+	</p>
+	<p>
+	<strong>MIME Type:</strong><br />
+	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'" />
 
-	<P>
-	<B>MIME Type:</B><BR>
-	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'"><P>
+	<input type="hidden" name="edit" value="1" />
 
-	<input type="hidden" name="edit" VALUE="1">
-
-	<input type="submit" value="Submit Changes" NAME="submit">
-	<input type="reset" value="Undo"><BR>
-	</form>
+	<input type="submit" value="Submit Changes" name="submit" />
+	<input type="reset" value="Undo" /><br />
+	</form></p>
 	';
 } else {
 	$result=db_query("	SELECT * 
@@ -217,18 +217,18 @@ if ($mode == "edit") {
 				WHERE group_id='$group_id' 
 				ORDER BY id");
 
-	echo '<H4>Add Multimedia Data</H4>
-	<P>
-	<FORM ACTION="'. $PHP_SELF .'" METHOD="POST" enctype="multipart/form-data">
-	<input type="hidden" name="group_id" VALUE="'.$group_id.'">
-	<B>Local filename:</B><BR>
-	<input type="file" name="input_file" size="30">
-	<P>
-	<B>Description ("alt"):</B><BR>
-	<input type="text" name="description" size="40" maxlength="255"><P>
-	<input type="hidden" name="add" VALUE="1">
-	<input type="submit" value="Add File" NAME="submit"><BR>
-	</form>
+	echo '<h4>Add Multimedia Data</h4>
+	<p>
+	<form action="'. $PHP_SELF .'" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="group_id" value="'.$group_id.'" />
+	<strong>Local filename:</strong><br />
+	<input type="file" name="input_file" size="30" />
+	<p>
+	<strong>Description ("alt"):</strong><br />
+	<input type="text" name="description" size="40" maxlength="255" /></p><p>
+	<input type="hidden" name="add" value="1" />
+	<input type="submit" value="Add File" name="submit" /><br /></p>
+	</form></p>
 	';
 }
 
@@ -257,27 +257,27 @@ for ($i=0; $i<$rows; $i++) {
 	}
 
 	echo '	  
-	<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-	.'<TD ALIGN="MIDDLE">'
-	 .'<A HREF="'. $PHP_SELF .'?submit=1&group_id='.$group_id.'&remove=1&id='
+	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
+	.'<td align="center">'
+	 .'<a href="'. $PHP_SELF .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
 	 .db_result($result,$i,'id').'">'
-	 .'[Del]'.'</A>'
-	 .'<A HREF="'. $PHP_SELF .'?submit=1&group_id='.$group_id.'&mode=edit&id='
+	 .'[Del]'.'</a>'
+	 .'<a href="'. $PHP_SELF .'?submit=1&amp;group_id='.$group_id.'&amp;mode=edit&amp;id='
 	 .db_result($result,$i,'id').'"> '
-	 .'[Edit]'.'</A>'
-	.'</TD>'
+	 .'[Edit]'.'</a>'
+	.'</td>'
 
-	.'<TD>'.db_result($result,$i,'id').'</TD>'
+	.'<td>'.db_result($result,$i,'id').'</td>'
 
-	.'<TD>'.date('Y-m-d', db_result($result, $i, 'upload_date')).'</TD>'
+	.'<td>'.date('Y-m-d', db_result($result, $i, 'upload_date')).'</td>'
 
-	.'<TD><a href="/dbimage.php?id='.db_result($result,$i,'id').'">'
-	     .stripslashes(db_result($result,$i,'filename')).'</a></TD>'
-	.'<TD>'.db_result($result,$i,'filetype').'</TD>'
-	.'<TD align=right>'.db_result($result,$i,'filesize').'</TD>'
-	.'<TD align=right>'.$dims.'</TD>'
-	.'<TD>'.stripslashes(db_result($result,$i,'description')).'</TD>'
-	.'</TR>';
+	.'<td><a href="/dbimage.php?id='.db_result($result,$i,'id').'">'
+	     .stripslashes(db_result($result,$i,'filename')).'</a></td>'
+	.'<td>'.db_result($result,$i,'filetype').'</td>'
+	.'<td align="right">'.db_result($result,$i,'filesize').'</td>'
+	.'<td align="right">'.$dims.'</td>'
+	.'<td>'.stripslashes(db_result($result,$i,'description')).'</td>'
+	.'</tr>';
 }
 
 echo $GLOBALS['HTML']->listTableBottom();

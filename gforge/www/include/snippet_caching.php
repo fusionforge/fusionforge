@@ -15,31 +15,31 @@
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
 
-	$return .= 
-	'<FONT face="arial, helvetica">
-	<P>
-	The purpose of this archive is to let you share your code snippets, scripts, 
-	and functions with the Open Source Software Community.
-	<P>
-	You can create a "new snippet", then post additional versions of that 
-	snippet quickly and easily.
-	<P>
-	Once you have snippets posted, you can then create a "Package" of snippets. 
-	That package can contain multiple, specific versions of other snippets.
-	<P>
-	<H3>Browse Snippets</H3>
-	<P>
-	You can browse the snippet library quickly:
-	<BR>
-	<P>
-	<TABLE WIDTH="100%" BORDER="0">
-	<TR><TD>
+	$return .=
+	'<div style="font-family:arial,helvetica">
 
-	</TD></TR>
+	<p>The purpose of this archive is to let you share your code snippets, scripts,
+	and functions with the Open Source Software Community.</p>
 
-	<TR><TD>
-	<B>Browse by Language:</B>
-	<P>';
+	<p>You can create a "new snippet", then post additional versions of that
+	snippet quickly and easily.</p>
+
+	<p>Once you have snippets posted, you can then create a "Package" of snippets.
+	That package can contain multiple, specific versions of other snippets.</p>
+	<p>&nbsp;</p>
+	<h3>Browse Snippets</h3>
+	
+	<p>You can browse the snippet library quickly:</p>
+	<br />
+	<p>
+	<table width="100%" border="0">
+	<tr><td>
+
+	</td></tr>
+
+	<tr><td>
+	<strong>Browse by Language:</strong>
+	<p>';
 
 	$count=count($SCRIPT_LANGUAGE);
 	for ($i=1; $i<$count; $i++) {
@@ -47,14 +47,14 @@ function snippet_mainpage() {
 		$result = db_query ($sql);
 
 		$return .= '
-		<LI><A HREF="/snippet/browse.php?by=lang&lang='.$i.'">'.$SCRIPT_LANGUAGE[$i].'</A> ('.db_result($result,0,0).')<BR>';
+		<li><a href="/snippet/browse.php?by=lang&lang='.$i.'">'.$SCRIPT_LANGUAGE[$i].'</a> ('.db_result($result,0,0).')</li>';
 	}
 
 	$return .= 	
-	'</TD>
-	<TD>
-	<B>Browse by Category:</B>
-	<P>';
+	'</p></td>
+	<td>
+	<strong>Browse by Category:</strong>
+	<p>';
 
 	$count=count($SCRIPT_CATEGORY);
 	for ($i=1; $i<$count; $i++) {
@@ -62,14 +62,14 @@ function snippet_mainpage() {
 		$result = db_query ($sql);
 
 		$return .= '
-		<LI><A HREF="/snippet/browse.php?by=cat&cat='.$i.'">'.$SCRIPT_CATEGORY[$i].'</A> ('.db_result($result,0,0).')<BR>';
+		<li><a href="/snippet/browse.php?by=cat&cat='.$i.'">'.$SCRIPT_CATEGORY[$i].'</a> ('.db_result($result,0,0).')</li>';
 	}
 
 
 	$return .=
-	'</TD>
-	</TR>
-	</TABLE>';
+	'</p></td>
+	</tr>
+	</table></div>';
 
 	return $return;
 

@@ -56,68 +56,66 @@ if (session_loggedin()) {
 	snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_submit'));
 
 	?>
-	<P>
-	You can post a new code snippet and share it with other people around the world. 
-	Just fill in this information. <B>Give a good description</B> and <B>comment your code</B> 
-	so others can read and understand it.
-	<P>
-	<FONT COLOR="RED"><B>Note:</B></FONT> You can submit a new version of an existing snippet by 
-	browsing the library. You should only use this page if you are submitting an 
-	entirely new script or function.
-	<P>
-	<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-	<INPUT TYPE="HIDDEN" NAME="changes" VALUE="First Posted Version">
+	<p>You can post a new code snippet and share it with other people around the world.
+	Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong>
+	so others can read and understand it.</p>
+	
+	<p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by
+	browsing the library. You should only use this page if you are submitting an
+	entirely new script or function.</p>
+	<p>
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="changes" value="First Posted Version" />
 
-	<TABLE>
+	<table>
 
-	<TR><TD COLSPAN="2"><B>Title:</B><BR>
-		<INPUT TYPE="TEXT" NAME="name" SIZE="45" MAXLENGTH="60">
-	</TD></TR>
+	<tr><td colspan="2"><strong>Title:</strong><br />
+		<input type="text" name="name" size="45" maxlength="60" />
+	</td></tr>
 
-	<TR><TD COLSPAN="2"><B>Description:</B><BR>
-		<TEXTAREA NAME="description" ROWS="5" COLS="45" WRAP="SOFT"></TEXTAREA>
-	</TD></TR>
+	<tr><td colspan="2"><strong>Description:</strong><br />
+		<textarea name="description" rows="5" cols="45" wrap="soft"></textarea>
+	</td></tr>
 
-	<TR>
-	<TD><B>Type:</B><BR>
+	<tr>
+	<td><strong>Type:</strong><br />
 		<?php echo html_build_select_box_from_array($SCRIPT_TYPE,'type'); ?>
-	</TD>
+	</td>
 
-	<TD><B>License:</B><BR>
+	<td><strong>License:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LICENSE,'license'); ?>
-	</TD>
-	</TR>
+	</td>
+	</tr>
 
-	<TR>
-	<TD><B>Language:</B><BR>
+	<tr>
+	<td><strong>Language:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
-		<BR>
-		<A HREF="/support/?func=addsupport&group_id=1">Suggest a Language</A>
-	</TD>
+		<br />
+		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Language</a>
+	</td>
 
-	<TD><B>Category:</B><BR>
+	<td><strong>Category:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
-                <BR>
-                <A HREF="/support/?func=addsupport&group_id=1">Suggest a Category</A>
-	</TD>
-	</TR>
+                <br />
+                <a href="/support/?func=addsupport&amp;group_id=1">Suggest a Category</a>
+	</td>
+	</tr>
  
-	<TR><TD COLSPAN="2"><B>Version:</B><BR>
-		<INPUT TYPE="TEXT" NAME="version" SIZE="10" MAXLENGTH="15">
-	</TD></TR>
+	<tr><td colspan="2"><strong>Version:</strong><br />
+		<input type="text" name="version" size="10" maxlength="15" />
+	</td></tr>
   
-	<TR><TD COLSPAN="2"><B>Paste the Code Here:</B><BR>
-		<TEXTAREA NAME="code" ROWS="30" COLS="85" WRAP="SOFT"></TEXTAREA>
-	</TD></TR>
+	<tr><td colspan="2"><strong>Paste the Code Here:</strong><br />
+		<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
+	</td></tr>
  
-	<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-		<B>Make sure all info is complete and accurate</B>
-		<BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-	</TD></TR>
-	</FORM>
-	</TABLE>
+	<tr><td colspan="2" align="center">
+		<strong>Make sure all info is complete and accurate</strong>
+		<br />
+		<input type="submit" name="submit" value="SUBMIT" />
+	</td></tr>
+	</table></form></p>
 	<?php
 	snippet_footer(array());
 

@@ -46,25 +46,25 @@ function forum_header($params) {
 
 			$HTML->header($params);
 
-			echo '<TABLE><TR><TD VALIGN="TOP">';
+			echo '<table><tr><td valign="TOP">';
 			if (!$result || db_numrows($result) < 1) {
 				echo '
 					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
 				echo '
-				<B>'.$Language->getText('forum_utils','postedby').':</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
-				<B>'.$Language->getText('forum_utils','date').':</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
-				<B>'.$Language->getText('forum_utils','summary').':</B> <A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
-				<P>
+				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.user_getname( db_result($result,0,'submitted_by')).'<br />
+				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'date')).'<br />
+				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a>
+				<p>
 				'. nl2br (util_make_links(db_result($result,0,'details')));
 
-				echo '<P>';
+				echo '<p>';
 			}
-			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
+			echo '</td><td valign="TOP" width="35%">';
 			echo $HTML->boxTop($Language->getText('forum_utils','latest'));
 			echo news_show_latest($sys_news_group,5,false);
 			echo $HTML->boxBottom();
-			echo '</TD></TR></TABLE>';
+			echo '</td></tr></TABLE>';
 		} else {
 			site_project_header($params);
 		}
@@ -77,31 +77,31 @@ function forum_header($params) {
 		Show horizontal forum links
 	*/
 	if ($f && $forum_id) {
-		echo '<H3>'.$Language->getText('forum_utils','discussionforum').' <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$f->getName().'</A></H3>';
+		echo '<h3>'.$Language->getText('forum_utils','discussionforum').' <a href="/forum/forum.php?forum_id='.$forum_id.'">'.$f->getName().'</a></h3>';
 	}
-	echo '<P><B>';
+	echo '<p><strong>';
 
 	if (session_loggedin() ) {
 		if ($f) {
 			if ($f->isMonitoring()) {
-				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1">' . 
-				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
+				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1">' .
+				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</a> | ';
 			} else {
-				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1">' . 
-				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</A> | ';
+				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
+				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</a> | ';
 			}
-			echo '<A HREF="/forum/save.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
-			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</A> | ';
+			echo '<a href="/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
+			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</a> | ';
 		}
 	}
 
 	if ($f && $forum_id) {
-		echo '<A HREF="/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
+		echo '<a href="/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
 			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
-			$Language->getText('forum_message','thread').'</A> | ';
+			$Language->getText('forum_message','thread').'</a> | ';
 	}
-	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</A></B>';
-	echo '<P>';
+	echo '  <a href="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</a></strong>';
+	echo '</p>';
 }
 
 function forum_footer($params) {
@@ -149,29 +149,29 @@ class ForumHTML extends Error {
 			If so, highlite it in bold
 		*/
 		if ($this->Forum->getSavedDate() < $msg->getPostDate()) {
-			$bold_begin='<B>';
-			$bold_end='</B>';
+			$bold_begin='<strong>';
+			$bold_end='</strong>';
 		}
 		$ret_val = '
-		<TABLE BORDER="0">
-			<TR>
-				<TD BGCOLOR="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <A HREF="/users/'.
+		<table border="0">
+			<tr>
+				<td bgcolor="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'. 
-					$msg->getPosterName() .'</A>'.
+					$msg->getPosterName() .'</a>'.
 					' ( '. $msg->getPosterRealName() . ' ) '.
-					'<BR><A HREF="/forum/message.php?msg_id='.
+					'<br /><a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.
-					html_image('ic/msg.png',"10","12",array("BORDER"=>"0")) .
-					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</A> &nbsp; '.
-					'<BR>'. date($sys_datefmt,$msg->getPostDate()) .'
-				</TD>   
-			</TR>
-			<TR>
-				<TD>
+					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
+					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</a> &nbsp; '.
+					'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
+				</td>   
+			</tr>
+			<tr>
+				<td>
 					'. util_make_links( nl2br( $msg->getBody() ) ) .'
-				</TD>
-			</TR>
-		</TABLE>';
+				</td>
+			</tr>
+		</table>';
 		return $ret_val;
 	}
 
@@ -183,7 +183,7 @@ class ForumHTML extends Error {
 
 		if ($msg_arr["$msg_id"] && $rows > 0) {
 			$ret_val .= '
-			<UL>';
+			<ul>';
 
 			/*
 
@@ -197,7 +197,7 @@ class ForumHTML extends Error {
 				$total_rows++;
 
 				//	  show the actual nested message
-				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<P>';
+				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<p>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
 					//	  Call yourself if there are followups
@@ -205,9 +205,9 @@ class ForumHTML extends Error {
 				}
 			}
 			$ret_val .= '
-			</UL>';
+			</ul>';
 		} else {
-			//$ret_val .= "<P><B>no messages actually follow up to $msg_id</B>";
+			//$ret_val .= "<p><strong>no messages actually follow up to $msg_id</strong>";
 		}
 
 		return $ret_val;
@@ -223,7 +223,7 @@ class ForumHTML extends Error {
 		global $total_rows,$sys_datefmt,$forum_id,$current_message;
 
 		$rows=count($msg_arr["$msg_id"]);
-//echo "<P>ShowSubmessages() $msg_id | $rows";
+//echo "<p>ShowSubmessages() $msg_id | $rows";
 		if ($rows > 0) {
 			for ($i=($rows-1); $i >= 0; $i--) {
 				/*
@@ -232,7 +232,7 @@ class ForumHTML extends Error {
 				$total_rows++;
 
 				$ret_val .= '
-					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><TD NOWRAP>';
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td nowrap="nowrap">';
 				/*
 					How far should it indent?
 				*/
@@ -244,29 +244,29 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 				*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<A HREF="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'">';
-					$ah_end='</A>';
+					$ah_begin='<a href="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'">';
+					$ah_end='</a>';
 				} else {
 					$ah_begin='';
 					$ah_end='';
 				}
 
 				$ret_val .= $ah_begin .
-					html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
+					html_image('ic/msg.png',"10","12",array("border"=>"0"));
 				/*
 					See if this message is new or not
 				*/
 				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) { 
-					$bold_begin='<B>';
-					$bold_end='</B>';
+					$bold_begin='<strong>';
+					$bold_end='</strong>';
 				} else {
 					$bold_begin='';
 					$bold_end='';
 				}
 
-				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</TD>'.
-					'<TD>'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</TD>'.
-					'<TD>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</TD></TR>';
+				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
+					'<td>'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</td>'.
+					'<td>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
 					/*
@@ -292,39 +292,39 @@ class ForumHTML extends Error {
 
 			?>
 			<CENTER>
-			<FORM ACTION="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="post_message" VALUE="y">
-			<INPUT TYPE="HIDDEN" NAME="thread_id" VALUE="<?php echo $thread_id; ?>">
-			<INPUT TYPE="HIDDEN" NAME="msg_id" VALUE="<?php echo $is_followup_to; ?>">
-			<INPUT TYPE="HIDDEN" NAME="is_followup_to" VALUE="<?php echo $is_followup_to; ?>">
-			<TABLE>
-			<TR>
-			<TD><B><?php echo $Language->getText('forum_utils','subject'); ?></B><BR>
-				<INPUT TYPE="TEXT" NAME="subject" VALUE="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
-			</TD></TR>
-			<TR><TD><B><?php echo $Language->getText('forum_utils','message'); ?></B><BR>
-				<TEXTAREA NAME="body" VALUE="" ROWS="10" COLS="50" WRAP="SOFT"></TEXTAREA>
-			</TD></TR>
-			<TR><TD ALIGN="MIDDLE">
-				<B><FONT COLOR="RED"><?php echo $Language->getText('forum_utils','htmltag'); ?></FONT></B>
-				<P>
+			<form action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" METHOD="POST">
+			<input type="hidden" name="post_message" value="y">
+			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
+			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>">
+			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>">
+			<table>
+			<tr>
+			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><br />
+				<input type="TEXT" name="subject" value="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
+			</td></tr>
+			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><br />
+				<textarea name="body" value="" ROWS="10" COLS="50" WRAP="SOFT"></textarea>
+			</td></tr>
+			<tr><td align="MIDDLE">
+				<strong><FONT COLOR="RED"><?php echo $Language->getText('forum_utils','htmltag'); ?></FONT></strong>
+				<p>
 			<?php 
 			if (!session_loggedin()) {
-				echo '<B><FONT COLOR="RED">'.$Language->getText('forum_utils','postanon').' <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></B>';
+				echo '<strong><FONT COLOR="RED">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></FONT></strong>';
 			} 
 			?>
-			<BR>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>"><?php
+			<br />
+			<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>"><?php
 				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor">&nbsp;Receive followups via email.' : ''); ?>
-			</TD></TR></TABLE>
-			</FORM>
+			</td></tr></TABLE>
+			</form>
 			</CENTER>
 			<?php
 
 		} else {
 			echo "<CENTER>";
-			echo '<H3><FONT COLOR="RED">'.$Language->getText('forum_utils','couldpostif').' '.
-				'<A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></H3>';
+			echo '<h3><FONT COLOR="RED">'.$Language->getText('forum_utils','couldpostif').' '.
+				'<a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></FONT></h3>';
 			echo "</CENTER>";
 		}
 

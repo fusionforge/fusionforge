@@ -84,9 +84,9 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<P>\n";
+	$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<p>\n";
 	$res = @pg_exec($dbserver,$qstring);
-	//echo "<BR>|*| ".db_error().$qstring;
+	//echo "<br />|*| ".db_error().$qstring;
 	return $res;
 }
 
@@ -127,7 +127,7 @@ function db_commit($dbserver=SYS_DB_PRIMARY) {
 
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
-		echo "COMMIT underflow<br>";
+		echo "COMMIT underflow<br />";
 		return false;
 	}
 
@@ -152,7 +152,7 @@ function db_rollback($dbserver=SYS_DB_PRIMARY) {
 
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
-		echo "ROLLBACK underflow<br>";
+		echo "ROLLBACK underflow<br />";
 		return false;
 	}
 

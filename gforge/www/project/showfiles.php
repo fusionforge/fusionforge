@@ -40,7 +40,7 @@ echo 'Before downloading, you may want to read Release Notes and ChangeLog
 
 $title_arr = array();
 $title_arr[] = 'Package';
-$title_arr[] = 'Release<BR>&amp; Notes';
+$title_arr[] = 'Release<br />&amp; Notes';
 $title_arr[] = 'Filename';
 $title_arr[] = 'Size';
 $title_arr[] = 'D/L';
@@ -55,7 +55,7 @@ echo '
 <table width="100%" border="0" cellspacing="1" cellpadding="1">';
 $cell_data=array();
 $cell_data[] = array('Package','rowspan=2');
-$cell_data[] = array('Release<BR>&amp; Notes','rowspan=2');
+$cell_data[] = array('Release<br />&amp; Notes','rowspan=2');
 $cell_data[] = array('Filename','rowspan=2');
 $cell_data[] = array('Date','colspan=4');
 
@@ -75,10 +75,10 @@ $proj_stats['packages'] = $num_packages;
 for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 	
-	print '<TR '.$cur_style.'><TD colspan="3"><H3>'.db_result($res_package,$p,'name').'
-	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
+	print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
+	<a href="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
 		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
-		'</A></H3></TD><TD COLSPAN="4">&nbsp;</TD></TR>';
+		'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 	   // get the releases of the package
 	$sql	= "SELECT * FROM frs_release WHERE package_id='". db_result($res_package,$p,'package_id') . "' "
@@ -89,7 +89,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	$proj_stats['releases'] += $num_releases;
 
 	if ( !$res_release || $num_releases < 1 ) {
-		print '<TR '.$cur_style.'><TD colspan="3">&nbsp;&nbsp;<i>No Releases</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+		print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>No Releases</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
 	} else {
 		   // iterate and show the releases of the package
 		for ( $r = 0; $r < $num_releases; $r++ ) {
@@ -104,12 +104,12 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 		      	} else {
 		      		$bgstyle = $cur_style;
 		      	}
-		    $cell_data[] = array('&nbsp;<B>
-				<A HREF="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</A></B>',
+		    $cell_data[] = array('&nbsp;<strong>
+				<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
 				"colspan=3");
 
-		    $cell_data[] = array('&nbsp;<B>
-				'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</b>',
+		    $cell_data[] = array('&nbsp;<strong>
+				'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</strong>',
 				'colspan=4 align="middle"');
 		    
 		    print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
@@ -133,7 +133,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 			$proj_stats['files'] += $num_files;
 
 			if ( !$res_file || $num_files < 1 ) {
-				print '<TR '.$bgstyle.'><TD colspan="3"><dd><i>No Files</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+				print '<tr '.$bgstyle.'><td colspan="3"><dd><em>No Files</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
 			} else {
 				   // now iterate and show the files in this release....
 				for ( $f = 0; $f < $num_files; $f++ ) {
@@ -142,8 +142,8 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 					$cell_data=array();
 					
 					$cell_data[] = array('<dd>
-						<A HREF="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
-						. $file_release['filename'] .'</A>',
+						<a href="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
+						. $file_release['filename'] .'</a>',
 						'colspan=3');
 						
 					$cell_data[] = array($file_release['file_size'],'align="right"');
@@ -164,16 +164,16 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 }
 
 if ( $proj_stats['size'] ) {
-	print '<TR><TD COLSPAN="8">&nbsp;</TR>'."\n";
-	print '<TR><TD><B>Project Totals: </B></TD>'
-		. '<TD align="right"><B><I>' . $proj_stats['releases'] . '</I></B></TD>'
-		. '<TD align="right"><B><I>' . $proj_stats['files'] . '</I></B></TD>'
-		. '<TD align="right"><B><I>' . $proj_stats['size'] . '</I></B></TD>'
-		. '<TD align="right"><B><I>' . $proj_stats['downloads'] . '</I></B></TD>'
-		. '<TD COLSPAN="3">&nbsp;</TD></TR>'."\n";
+	print '<tr><td colspan="8">&nbsp;</tr>'."\n";
+	print '<tr><td><strong>Project Totals: </strong></td>'
+		. '<td align="right"><strong><em>' . $proj_stats['releases'] . '</em></strong></td>'
+		. '<td align="right"><strong><em>' . $proj_stats['files'] . '</em></strong></td>'
+		. '<td align="right"><strong><em>' . $proj_stats['size'] . '</em></strong></td>'
+		. '<td align="right"><strong><em>' . $proj_stats['downloads'] . '</em></strong></td>'
+		. '<td colspan="3">&nbsp;</td></tr>'."\n";
 }
 
-print "</TABLE>\n\n";
+print "</table>\n\n";
 
 site_project_footer(array());
 

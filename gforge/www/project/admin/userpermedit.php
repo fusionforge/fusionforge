@@ -71,7 +71,7 @@ if ($submit || $form_unix_name) {
 		if (!$group->addUser($u->getUnixName())) {
 			exit_error('Error', $group->getErrorMessage());
 		} else {
-			$feedback = ' User Added Successfully<br>';
+			$feedback = ' User Added Successfully<br />';
 		}
 
 		$user_id = $u->getID();
@@ -173,7 +173,7 @@ if ($submit || $form_unix_name) {
 			//if no errors occurred, show just one feedback message
 			//instead of the coredump of messages;
 			if (!$was_error) {
-				$feedback = ' Permissions Updated<br>';
+				$feedback = ' Permissions Updated<br />';
 			}
 		} else {
 			$feedback .= $group->getErrorMessage();
@@ -213,12 +213,12 @@ $res_dev = db_query("
 ");
 
 if (!$res_dev || db_numrows($res_dev) < 1) {
-	echo '<H2>Developer Not Found In This Group</H2>';
+	echo '<h2>Developer Not Found In This Group</h2>';
 	echo db_error();
 } else {
 	echo '
-	<P>
-	<FORM action="'.$PHP_SELF.'?group_id='.$group_id.'&user_id='. $user_id .'" method="post">';
+	<p>
+	<form action="'.$PHP_SELF.'?group_id='.$group_id.'&user_id='. $user_id .'" method="post">';
 
 	$row_dev = db_fetch_array($res_dev);
 
@@ -314,40 +314,39 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	// Iterate over all trackers of the group
 	for ($i=0; $i<$rows; $i++) {
 		print '
-		<INPUT TYPE="HIDDEN" NAME="updateperms['.$i.'][0]" VALUE="'. db_result($res,$i,'group_artifact_id').'">
-		<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+		<input type="hidden" name="updateperms['.$i.'][0]" value="'. db_result($res,$i,'group_artifact_id').'" />
+		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 
-		<TD>'. db_result($res,$i,'name') .'</TD>
+		<td>'. db_result($res,$i,'name') .'</td>
 
-		<TD><FONT size="-1"><SELECT name="updateperms['.$i.'][1]">
-		<OPTION value="0"'.((db_result($res,$i,'perm_level')==0)?' selected':'').'>-
-		<OPTION value="1"'.((db_result($res,$i,'perm_level')==1)?' selected':'').'>Technician
-		<OPTION value="2"'.((db_result($res,$i,'perm_level')==2)?' selected':'').'>Tech & Admin
-		<OPTION value="3"'.((db_result($res,$i,'perm_level')==3)?' selected':'').'>Admin Only
-		</SELECT></FONT>  <INPUT TYPE="CHECKBOX" NAME="deletefrom[]" VALUE="'. db_result($res,$i,'group_artifact_id').'"> Remove</TD>
+		<td><select name="updateperms['.$i.'][1]" style="font-size:smaller">
+		<option value="0"'.((db_result($res,$i,'perm_level')==0)?' selected="selected"':'').'>-</option>
+		<option value="1"'.((db_result($res,$i,'perm_level')==1)?' selected="selected"':'').'>Technician</option>
+		<option value="2"'.((db_result($res,$i,'perm_level')==2)?' selected="selected"':'').'>Tech & Admin</option>
+		<option value="3"'.((db_result($res,$i,'perm_level')==3)?' selected="selected"':'').'>Admin Only</option>
+		</select>  <input type="checkbox" name="deletefrom[]" value="'. db_result($res,$i,'group_artifact_id').'" /> Remove</td>
 
-		</TR>';
+		</tr>';
 	}
 
 	?>
 
-	<TR><TD COLSPAN=2><p align="center">
-		<INPUT type="submit" name="submit" value="Update Developer Permissions">
-		<INPUT type="reset" value="Reset Changes">
-		</FORM>
-	</TD></TR>
+	<tr><td colspan="2"><p align="center">
+		<input type="submit" name="submit" value="Update Developer Permissions" />
+		<input type="reset" value="Reset Changes" />
+		</form></p>
+	</td></tr>
 
 	<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
 
-	<P> 
-	<h3>Add User To These Trackers:</H3>
-	<P>
-	You can pick and choose which trackers this user has any privileges in, 
-	or simply add the user to all trackers by checking "Add To All".
-	<P> 
-	<CENTER>
-	<FORM action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&user_id='.$user_id ?>" method="post">
-	<INPUT TYPE="HIDDEN" NAME="addtotracker" VALUE="y">
+	<p>&nbsp;</p>
+	<h3>Add User To These Trackers:</h3>
+	<p>
+	You can pick and choose which trackers this user has any privileges in,
+	or simply add the user to all trackers by checking "Add To All".</p>
+	<div align="center">
+	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&user_id='.$user_id ?>" method="post">
+	<input type="hidden" name="addtotracker" value="y" />
 	<?php
 	$sql="SELECT group_artifact_id,name 
 		FROM artifact_group_list
@@ -360,10 +359,9 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	$res=db_query($sql);
 	echo db_error();
 	echo html_build_multiple_select_box ($res,'addtoids[]',array(),8,false);
-	echo '<P>
-	<INPUT type="submit" name="submit" value="Add To Tracker">&nbsp;<INPUT type="checkbox" name="add_all"> Add To All
-	</FORM>
-	</CENTER>';
+	echo '<p>
+	<input type="submit" name="submit" value="Add To Tracker" />&nbsp;<input type="checkbox" name="add_all" /> Add To All</p>
+	</form></div>';
 
 }
 

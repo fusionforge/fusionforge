@@ -109,7 +109,7 @@ project_admin_header(array('title'=>'Editing Database Info','group'=>$group_id,'
 
 if ($deletedb == 1) {
 
-	print "<hr><b><center>Click to confirm deletion [ <a href=\"".$PHP_SELF."?deletedbconfirm=1&group_id=".$group_id."&dbid=$dbid\">CONFIRM DELETE</a> ] </center></b> <hr>";
+	print "<hr /><strong><div align=\"center\">Click to confirm deletion [ <a href=\"".$PHP_SELF."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">CONFIRM DELETE</a> ] </div></strong> <hr />";
 
 }
 
@@ -129,21 +129,14 @@ if (db_numrows($res_db) > 0) {
 
 	print '
 
-		<p>
+		<p><strong><span style="text-decoration:underline">Add New Database</span></strong></p>
+		<p><em>Clicking on "create" will schedule the creation of the database, and email the
+		details to the project administrators.</em></p>
 
-		<b><u>Add New Database</u></b>
-		<p>
-		<i>Clicking on "create" will schedule the creation of the database, and email the
-		details to the project administrators.</i>
-
-		<p>
-		<b>Database Type:</b>
-		<p>
-
-		<FORM action="'.$PHP_SELF.'" method="post">
-		<INPUT type="hidden" name="createdb" value="1">
-		<INPUT type="hidden" name="group_id" value="'.$group_id.'">
-
+		<p><strong>Database Type:</strong></p>
+		<p><form action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="createdb" value="1" />
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<select name="newdbtypeid">
 
 	';
@@ -156,11 +149,8 @@ if (db_numrows($res_db) > 0) {
 	print '
 
 		</select>
-
-		&nbsp; <INPUT type="submit" name="Create" value="Create">
-
-		</p>
-		</form>
+		&nbsp; <input type="submit" name="Create" value="Create" />
+		</form></p>
 	';	
 
 } else {
@@ -203,13 +193,13 @@ if (db_numrows($res_db) > 0) {
 		
 		if (($row_db['state'] == 1) || ($row_db['state'] == 4) || ($row_db['state'] == 2)) {
 
-			print '<form name="dbupdate" method="POST" action="'.$PHP_SELF.'?group_id='.$group_id.'">
-				     <input type="hidden" name="dbid" value="'.$row_db['dbid'].'">
-				     <input type="hidden" name="updatedbrec" value="1">
-				     <td><input type="text" name="pw" size="8" maxlength="16"> </td>
-				     <td><input type="text" name="pwconfirm" size="8" maxlength="16"> </td>
+			print '<form name="dbupdate" method="post" action="'.$PHP_SELF.'?group_id='.$group_id.'">
+				     <input type="hidden" name="dbid" value="'.$row_db['dbid'].'" />
+				     <input type="hidden" name="updatedbrec" value="1" />
+				     <td><input type="text" name="pw" size="8" maxlength="16" /></td>
+				     <td><input type="text" name="pwconfirm" size="8" maxlength="16" /></td>
 				     <td>
-				       <input type="submit" name="submit" value="Update">
+				       <input type="submit" name="submit" value="Update" />
 				     </td>
 				  </form> 
 			';
@@ -230,7 +220,7 @@ if (db_numrows($res_db) > 0) {
 
 } else {
 
-	print '<b><u>Current Databases</u></b><p>There are no databases currently allocated to this group.';
+	print '<strong><span style="text-decoration:underline">Current Databases</span></strong><p>There are no databases currently allocated to this group.</p>';
 
 }
 

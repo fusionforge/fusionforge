@@ -84,13 +84,13 @@ function util_send_jabber($to,$subject,$body) {
 	}
 	$JABBER = new Jabber();
 	if (!$JABBER->Connect()) {
-		echo '<BR>Unable to connect';
+		echo '<br />Unable to connect';
 		return false;
 	}
 	//$JABBER->SendAuth();
 	//$JABBER->AccountRegistration();
 	if (!$JABBER->SendAuth()) {
-		echo '<BR>Auth Failure';
+		echo '<br />Auth Failure';
 		$JABBER->Disconnect();
 		return false;
 		//or die("Couldn't authenticate!");
@@ -101,9 +101,9 @@ function util_send_jabber($to,$subject,$body) {
 	$to_arr=explode(',',$to);
 	for ($i=0; $i<count($to_arr); $i++) {
 		if ($to_arr[$i]) {
-			//echo '<BR>Sending Jabbers To: '.$to_arr[$i];
+			//echo '<br />Sending Jabbers To: '.$to_arr[$i];
 			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body,"subject"=>$subject))) {
-				echo '<BR>Error Sending to '.$to_arr[$i];
+				echo '<br />Error Sending to '.$to_arr[$i];
 			}
 		}
 	}
@@ -363,13 +363,13 @@ function util_make_links ($data='') {
  */
 function show_priority_colors_key() {
 
-	echo '<P><B>Priority Colors:</B><BR>
+	echo '<p><strong>Priority Colors:</strong><br />
 
-		<TABLE BORDER=0><TR>';
+		<table border=0><tr>';
 
 	for ($i=1; $i<10; $i++) {
 		echo '
-			<TD BGCOLOR="'.get_priority_color($i).'">'.$i.'</TD>';
+			<td bgcolor="'.get_priority_color($i).'">'.$i.'</td>';
 	}
 	echo '</tr></table>';
 }
@@ -388,7 +388,7 @@ function utils_buildcheckboxarray($options,$name,$checked_array) {
 
 	for ($i=1; $i<=$option_count; $i++) {
 		echo '
-			<BR><INPUT type="checkbox" name="'.$name.'" value="'.$i.'"';
+			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
 		for ($j=0; $j<$checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
 				echo ' CHECKED';
@@ -486,7 +486,7 @@ Function GraphIt($name_string,$value_string,$title) {
 	$title_arr[]=$title;
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
-	echo '<TR><TD>';
+	echo '<tr><td>';
 	/*
 		Create an associate array to pass in. I leave most of it blank
 	*/
@@ -523,7 +523,7 @@ Function GraphIt($name_string,$value_string,$title) {
 	html_graph($name_string,$value_string,$bars,$vals);
 
 	echo '
-		</TD></TR>
+		</td></tr>
 		<!-- end outer graph table -->';
 	echo $GLOBALS['HTML']->listTableBottom();
 }
@@ -545,7 +545,7 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 		$cols  =  db_numfields($result);
 
 		echo '
-			<TABLE BORDER="0" WIDTH="100%">';
+			<table border="0" width="100%">';
 
 		/*  Create the title  */
 
@@ -562,11 +562,11 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 		
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '>';
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 			for ($i = 0; $i < $cols; $i++) {
 				if ($linkify && $i == 0) {
-					$link = '<A HREF="'.$PHP_SELF.'?';
-					$linkend = '</A>';
+					$link = '<a href="'.$PHP_SELF.'?';
+					$linkend = '</a>';
 					if ($linkify == "bug_cat") {
 						$link .= 'group_id='.$group_id.'&bug_cat_mod=y&bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
 					} else if($linkify == "bug_group") {

@@ -23,49 +23,49 @@ pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_projec
 <table border="0" width="100%">
 
         <tr>
-                <TD><B>Submitted By:</B><br><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</TD>
+                <td><strong>Submitted By:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
         </tr>
 
 	<tr>
 		<td colspan="2">
-		<b>Category:</b><br>
+		<strong>Category:</strong><br />
 		<?php echo $pt->getCategoryName(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Percent Complete:</b><br>
+		<strong>Percent Complete:</strong><br />
 		<?php echo $pt->getPercentComplete(); ?>%
 		</td>
 
 		<td>
-		<b>Priority:</b><br>
+		<strong>Priority:</strong><br />
 		<?php echo $pt->getPriority(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Start Date:</b><br>
+		<strong>Start Date:</strong><br />
 		<?php echo date('Y-m-d', $pt->getStartDate() ); ?>
 		</td>
 		<td>
-		<b>End Date:</b><br>
+		<strong>End Date:</strong><br />
 		<?php echo date('Y-m-d', $pt->getEndDate() ); ?>
 		</td>
 	</tr>
 
   	<tr>
 		<td colspan="2">
-		<b>Task Summary:</b><br>
+		<strong>Task Summary:</strong><br />
 		<?php echo $pt->getSummary(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<b>Original Comment:</b><br>
+		<strong>Original Comment:</strong><br />
 		<?php echo nl2br($pt->getDetails()); ?>
 		</td>
 	</tr>
@@ -98,12 +98,12 @@ pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_projec
 
 	<tr>
 		<td>
-		<b>Hours:</b><br>
+		<strong>Hours:</strong><br />
 		<?php echo $pt->getHours(); ?>
 		</td>
 
 		<td>
-		<b>Status:</b><br>
+		<strong>Status:</strong><br />
 		<?php
 		echo $pt->getStatusName();
 		?>

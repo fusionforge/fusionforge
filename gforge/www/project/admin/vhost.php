@@ -86,26 +86,26 @@ project_admin_header(array('title'=>'Editing Virtual Host Info','group'=>$group-
 
 ?>
 
-<p>
+<p>&nbsp;</p>
 
-<b><u>Add New Virtual Host</u></b>
+<strong><span style="text-decoration:underline">Add New Virtual Host</span></strong>
 <p>
-To add a new virtual host - simply point a <b>CNAME</b> for <i>yourhost.org</i> at
-<b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></b>.  <?php echo $GLOBALS['sys_name']; ?> does not currently host mail (i.e. cannot be an MX)
-or DNS</b>.  
+To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at
+<strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong>.  <?php echo $GLOBALS['sys_name']; ?> does not currently host mail (i.e. cannot be an MX)
+or DNS</strong>.  
 <p>
 Clicking on "create" will schedule the creation of the Virtual Host.  This will be
-synced to the project webservers - such that <i>yourhost.org</i> will display the 
-material at <i><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></i>.
+synced to the project webservers - such that <em>yourhost.org</em> will display the 
+material at <em><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></em>.
 
 <p>
 
 <form name="new_vhost" action="<?php echo $PHP_SELF.'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
-<table border = 0>
+<table border="0">
 <tr>
-	<td> New Virtual Host <i>(e.g. vhost.org)</i> </td>
-	<td> <input type="text" size="15" maxlength="255" name="vhost_name"> </td>
-	<td> <input type="submit" value="Create"> </td>
+	<td> New Virtual Host <em>(e.g. vhost.org)</em> </td>
+	<td> <input type="text" size="15" maxlength="255" name="vhost_name" /> </td>
+	<td> <input type="submit" value="Create" /> </td>
 </tr>
 </table>
 </form>
@@ -129,7 +129,7 @@ if (db_numrows($res_db) > 0) {
 
 		print '	<tr>
 			<td>'.$row_db['vhost_name'].'</td>
-			<td>[ <b><a href="'.$PHP_SELF.'?group_id='.$group->getID().'&vhostid='.$row_db['vhostid'].'&deletevhost=1">Delete</a> </b>]
+			<td>[ <strong><a href="'.$PHP_SELF.'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">Delete</a></strong>]
 			</tr>	
 		';
 

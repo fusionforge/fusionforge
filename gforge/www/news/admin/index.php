@@ -80,27 +80,27 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 
 		echo '
-		<H3>Approve a NewsByte For Project: '.group_getname($group_id).'</H3>
-		<P>
-		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.db_result($result,0,'group_id').'">
-		<INPUT TYPE="HIDDEN" NAME="id" VALUE="'.db_result($result,0,'id').'">
+		<h3>Approve a NewsByte For Project: '.group_getname($group_id).'</h3>
+		<p>
+		<form action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
+		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
 
-		<B>Submitted by:</B> '.user_getname(db_result($result,0,'submitted_by')).'<BR>
-		<INPUT TYPE="HIDDEN" NAME="approve" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
+		<strong>Submitted by:</strong> '.user_getname(db_result($result,0,'submitted_by')).'<br />
+		<input type="hidden" name="approve" value="y" />
+		<input type="hidden" name="post_changes" value="y" />
 
-		<B>Status:</B><BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="0" CHECKED> Displayed<BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="4"> Delete<BR>
+		<strong>Status:</strong><br />
+		<input type="radio" name="status" value="0" checked="checked" /> Displayed<br />
+		<input type="radio" name="status" value="4" /> Delete<br />
  
-		<B>Subject:</B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" VALUE="'.db_result($result,0,'summary').'" SIZE="30" MAXLENGTH="60"><BR>
-		<B>Details:</B><BR>
-		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT">'.db_result($result,0,'details').'</TEXTAREA><P>
-		<B>If this item is on the '.$GLOBALS['sys_name'].' home page and you edit it, it will be removed from the home page.</B><BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>';
+		<strong>Subject:</strong><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
+		<strong>Details:</strong><br />
+		<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><p>
+		<strong>If this item is on the '.$GLOBALS['sys_name'].' home page and you edit it, it will be removed from the home page.</strong><br /></p>
+		<input type="submit" name="submit" value="SUBMIT">
+		</form></p>';
 
 	} else {
 		/*
@@ -112,16 +112,16 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$rows=db_numrows($result);
 		if ($rows < 1) {
 			echo '
-				<H4>'.$Language->getText('news_admin','noqueued').': '.group_getname($group_id).'</H4>';
+				<h4>'.$Language->getText('news_admin','noqueued').': '.group_getname($group_id).'</h4>';
 		} else {
 			echo '
-				<H4>'.$Language->getText('news_admin','queued').': '.group_getname($group_id).'</H4>
-				<P>';
+				<h4>'.$Language->getText('news_admin','queued').': '.group_getname($group_id).'</h4>
+				<p>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-				<A HREF="/news/admin/?approve=1&id='.db_result($result,$i,'id').'&group_id='.
+				<a href="/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.
 					db_result($result,$i,'group_id').'">'.
-					db_result($result,$i,'summary').'</A><BR>';
+					db_result($result,$i,'summary').'</a><br /></p>';
 			}
 		}
 
@@ -204,24 +204,24 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 
 		echo '
-		<H3>Approve a NewsByte</H3>
-		<P>
-		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-		<INPUT TYPE="HIDDEN" NAME="for_group" VALUE="'.db_result($result,0,'group_id').'">
-		<INPUT TYPE="HIDDEN" NAME="id" VALUE="'.db_result($result,0,'id').'">
-		<B>Submitted for group:</B> <a href="/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.group_getname(db_result($result,0,'group_id')).'</a><BR>
-		<B>Submitted by:</B> '.user_getname(db_result($result,0,'submitted_by')).'<BR>
-		<INPUT TYPE="HIDDEN" NAME="approve" VALUE="y">
-		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-		<INPUT TYPE="RADIO" NAME="status" VALUE="1"> Approve For Front Page<BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="0"> Do Nothing<BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="2" CHECKED> Delete<BR>
-		<B>Subject:</B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" VALUE="'.db_result($result,0,'summary').'" SIZE="30" MAXLENGTH="60"><BR>
-		<B>Details:</B><BR>
-		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT">'.db_result($result,0,'details').'</TEXTAREA><BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>';
+		<h3>Approve a NewsByte</h3>
+		<p>
+		<form action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
+		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
+		<strong>Submitted for group:</strong> <a href="/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.group_getname(db_result($result,0,'group_id')).'</a><br />
+		<strong>Submitted by:</strong> '.user_getname(db_result($result,0,'submitted_by')).'<br />
+		<input type="hidden" name="approve" value="y" />
+		<input type="hidden" name="post_changes" value="y" />
+		<input type="radio" name="status" value="1" /> Approve For Front Page<br />
+		<input type="radio" name="status" value="0" /> Do Nothing<br />
+		<input type="radio" name="status" value="2" checked="checked" /> Delete<br />
+		<strong>Subject:</strong><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
+		<strong>Details:</strong><br />
+		<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />
+		<input type="submit" name="submit" value="SUBMIT" />
+		</form></p>';
 
 	} else {
 

@@ -17,7 +17,7 @@ for ($i=0; $i<$rows; $i++) {
 		WHERE id='". db_result($rel,$i,'id') ."'");
 
 	echo db_error();
-	echo "<BR>Num: $i | id: ".db_result($rel,$i,'id');
+	echo "<br />Num: $i | id: ".db_result($rel,$i,'id');
 
 }
 

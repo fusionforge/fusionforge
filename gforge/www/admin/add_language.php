@@ -32,21 +32,20 @@ $res=db_query($sql);
 echo ShowResultSet($res,'Existing Languages');
 
 echo '
-<P>
+<p>&nbsp;</p>
 <h3>Add New Language</h3>
-<P>
-<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-<B>Name:</B><BR>
-<INPUT TYPE="TEXT" NAME="name" VALUE="">
-<P>
-<B>Class Filename:</B><BR>
-<INPUT TYPE="TEXT" NAME="filename" VALUE=".class">
-<P>
-<B>Classname:</B><BR>
-<INPUT TYPE="TEXT" NAME="classname" VALUE="">
-<P>
-<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Submit">
-</FORM>
+<form action="'. $PHP_SELF .'" method="post">
+<p><strong>Name:</strong><br />
+<input type="text" name="name" value="" /></p>
+<p>
+<strong>Class Filename:</strong><br />
+<input type="text" name="filename" value=".class" /></p>
+<p>
+<strong>Classname:</strong><br />
+<input type="text" name="classname" value="" /></p>
+<p>
+<input type="submit" name="submit" value="Submit"></p>
+</form>
 ';
 
 $HTML->footer(array());

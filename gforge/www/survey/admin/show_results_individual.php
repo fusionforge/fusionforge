@@ -19,14 +19,14 @@ $is_admin_page='y';
 survey_header(array('title'=>'Results','pagename'=>'survey_admin_show_results_individual'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<H1>Permission Denied</H1>";
+        echo "<h1>Permission Denied</h1>";
         survey_footer(array());
 	exit;
 }
 
 ?>
 
-<FORM ACTION="NONE">
+<form action="none">
 <?php
 
 /*
@@ -36,7 +36,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 $sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
 $result=db_query($sql);
 
-echo "\n<H2>".db_result($result, 0, "survey_title")."</H2><P>";
+echo "\n<h2>".db_result($result, 0, "survey_title")."</h2><p>&nbsp;</p>";
 
 /*
 	Select the questions for this survey
@@ -57,14 +57,14 @@ $sql="select * from people where cust_id='$customer_id'";
 
 $result=db_query($sql);
 
-echo "\n<B>Name: </B>".db_result($result, 0, "first_name")." ".db_result($result, 0, "last_name")."<BR>";
-echo "\n<B>Email: </B>".db_result($result, 0, "email")." / ".db_result($result, 0, "email2")."<BR>";
-echo "\n<B>Phone: </B>".db_result($result, 0, "phone")."<BR>";
-echo "\n<B>Beeper: </B>".db_result($result, 0, "beeper")."<BR>";
-echo "\n<B>Cell: </B>".db_result($result, 0, "cell")."<P>";
+echo "\n<strong>Name: </strong>".db_result($result, 0, "first_name")." ".db_result($result, 0, "last_name")."<br />";
+echo "\n<strong>Email: </strong>".db_result($result, 0, "email")." / ".db_result($result, 0, "email2")."<br />";
+echo "\n<strong>Phone: </strong>".db_result($result, 0, "phone")."<br />";
+echo "\n<strong>Beeper: </strong>".db_result($result, 0, "beeper")."<br />";
+echo "\n<strong>Cell: </strong>".db_result($result, 0, "cell")."<p>";
 */
 
-echo "\n\n<TABLE>";
+echo "\n\n<table>";
 
 $q_num=1;
 
@@ -86,23 +86,23 @@ for ($i=0; $i<$count; $i++) {
 */
 	if (!$result || db_numrows($result) < 1) {
 
-		#$result=db_query("select * from responses where question_id='".$quest_array[$i]."' and survey_id='$survey_id' AND customer_id='$customer_id'");
+		//$result=db_query("select * from responses where question_id='".$quest_array[$i]."' and survey_id='$survey_id' AND customer_id='$customer_id'");
 
-		#echo "\n\n<!-- falling back 1 -->";
+		//echo "\n\n<!-- falling back 1 -->";
 	
-		#if (!$result || db_numrows($result) < 1) {
-		#	echo "\n\n<!-- falling back 2 -->";
+		//if (!$result || db_numrows($result) < 1) {
+		//	echo "\n\n<!-- falling back 2 -->";
 			$result=db_query("select * from survey_questions where question_id='".$quest_array[$i]."'");
 			$not_found=1;
-		#} else {
-                #	$not_found=0;
-		#}
+		//} else {
+                //	$not_found=0;
+		//}
 
 	} else {
 		$not_found=0;
 	}
 
-		#echo "\n\nnotfound: '$not_found'";
+		//echo "\n\nnotfound: '$not_found'";
 
 	$question_type=db_result($result, 0, "question_type");
 
@@ -111,11 +111,11 @@ for ($i=0; $i<$count; $i++) {
 			Don't show question number if it's just a comment
 		*/
 
-		echo "\n<TR><TD VALIGN=TOP>&nbsp;</TD>\n<TD>"; 
+		echo "\n<tr><td valign=\"top\">&nbsp;</td>\n<td>"; 
 
 	} else {
 
-		echo "\n<TR><TD VALIGN=TOP><B>";
+		echo "\n<tr><td valign=\"top\"><strong>";
 
 		/*
 			If it's a 1-5 question box and first in series, move Quest
@@ -123,10 +123,10 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if (($question_type != $last_question_type) && (($question_type == "1") || ($question_type == "3"))) {
-			echo "&nbsp;<P>";
+			echo "&nbsp;<p>&nbsp;</p>";
 		}
 
-		echo $q_num."&nbsp;&nbsp;&nbsp;&nbsp;<BR></TD>\n<TD>";
+		echo $q_num."&nbsp;&nbsp;&nbsp;&nbsp;<br /></td>\n<td>";
 		$q_num++;
 
 	}
@@ -138,21 +138,21 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 
-		# Show the 1-5 markers only if this is the first in a series
+		// Show the 1-5 markers only if this is the first in a series
 
 		if ($question_type != $last_question_type) {
-			echo "\n<B>1 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 5</B>\n";
-                        echo "\n<BR>";
+			echo "\n<strong>1 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 5</strong>\n";
+                        echo "\n<br />";
 
 		}
 
 		for ($j=1; $j<=5; $j++) {
-			echo "\n<INPUT TYPE=\"RADIO\" NAME=\"_".$quest_array[$i]."\" VALUE=\"$j\"";
+			echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"$j\"";
 			/*
 				add the checked statement if this was the response
 			*/
-			if (($not_found==0) && db_result($result, 0, "response")=="$j") { echo " checked"; }
-			echo ">\n";
+			if (($not_found==0) && db_result($result, 0, "response")=="$j") { echo " checked=\"checked\""; }
+			echo " />\n";
 		}
 
 		echo "&nbsp; ".db_result($result, 0, "question")."\n";
@@ -163,8 +163,8 @@ for ($i=0; $i<$count; $i++) {
 			This is a text-area question.
 		*/
 
-		echo db_result($result, 0, "question")."<BR>\n";
-		echo "\n<textarea name=\"_".$quest_array[$i]."\" rows=5 cols=60 wrap=\"soft\">";
+		echo db_result($result, 0, "question")."<br />\n";
+		echo "\n<textarea name=\"_".$quest_array[$i]."\" rows=\"5\" cols=\"60\" wrap=\"soft\">";
 
 		/*
 			Show the person's response if there was one
@@ -186,25 +186,25 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if ($question_type != $last_question_type) {
-	                echo "<B>Yes / No</B><BR>\n";
+	                echo "<strong>Yes / No</strong><br />\n";
 		}
 
-		echo "\n<INPUT TYPE=\"RADIO\" NAME=\"_".$quest_array[$i]."\" VALUE=\"1\"";
+		echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"1\"";
 
                 /*
                 	add the checked statement if this was the response
                 */
 
-		if (($not_found==0) && db_result($result, 0, "response")=="1") { echo " checked"; }
-		echo ">";
-                echo "\n<INPUT TYPE=\"RADIO\" NAME=\"_".$quest_array[$i]."\" VALUE=\"5\"";
+		if (($not_found==0) && db_result($result, 0, "response")=="1") { echo " checked=\"checked\""; }
+		echo " />";
+                echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"5\"";
 
                 /*
                         add the checked statement if this was the response
                 */
-                if (($not_found==0) && db_result($result, 0, "response")=="5") { echo " checked"; }
+                if (($not_found==0) && db_result($result, 0, "response")=="5") { echo " checked=\"checked\""; }
 
-                echo ">";
+                echo " />";
  
 		echo "&nbsp; ".db_result($result, 0, "question")."\n";
 
@@ -214,8 +214,8 @@ for ($i=0; $i<$count; $i++) {
 			This is a comment only.
 		*/
 
-		echo "\n&nbsp;<P><B>".db_result($result, 0, "question")."</B>\n";
-		echo "\n<INPUT TYPE=\"HIDDEN\" NAME=\"_".$quest_array[$i]."\" VALUE=\"-666\">";
+		echo "\n&nbsp;<p><strong>".db_result($result, 0, "question")."</strong></p>\n";
+		echo "\n<input type=\"hidden\" name=\"_".$quest_array[$i]."\" value=\"-666\" />";
 
         } else if ($question_type == "5") {
 
@@ -223,8 +223,8 @@ for ($i=0; $i<$count; $i++) {
                         This is a text-field question.
                 */
 
-		echo db_result($result, 0, "question")."<BR>\n";
-                echo "\n<INPUT TYPE=\"TEXT\" name=\"_".$quest_array[$i]."\" SIZE=20 MAXLENGTH=70i VALUE=\"";
+		echo db_result($result, 0, "question")."<br />\n";
+                echo "\n<input type=\"text\" name=\"_".$quest_array[$i]."\" size=\"20\" maxlength=\"70\" value=\"";
 
 		/*
 			Show the person's response if there was one
@@ -232,20 +232,20 @@ for ($i=0; $i<$count; $i++) {
 		if ($not_found==0) {
 		 	echo db_result($result, 0, "response");
 		}
-		echo "\">";
+		echo "\" />";
 
         }
 
-	echo "</TD></TR>";
+	echo "</td></tr>";
 
 	$last_question_type=$question_type;
 
 }
 
-echo "\n\n</TABLE>";
+echo "\n\n</table>";
 
 ?>
-</FORM>
+</form>
 
 <?php
 

@@ -88,8 +88,8 @@ if( $submit ) {
 						project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 						?>
 						<p>
-						You can now <A HREF="/project/admin/editrelease.php?release_id=<?php echo $frsr->getID()."&group_id=$group_id&package_id=$package_id"; ?>"><B>Add Files To This Release</B></A> if you wish, 
-						or edit the release.
+						You can now <a href="/project/admin/editrelease.php?release_id=<?php echo $frsr->getID()."&amp;group_id=$group_id&amp;package_id=$package_id"; ?>"><strong>Add Files To This Release</strong></a> if you wish,
+						or edit the release.</p>
 						<p>
 						Please note that file(s) may not appear immediately
 						on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
@@ -113,104 +113,103 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 
 ?>
 
-<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF."?group_id=$group_id"; ?>">
-	<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="2">
-	<TR>
-		<TD>
-			<H4>Package ID:</H4>
-		</TD>
-		<TD>
+<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>">
+	<table border="0" cellpadding="2" cellspacing="2">
+	<tr>
+		<td>
+			<h4>Package ID:</h4>
+		</td>
+		<td>
 <?php
 	$sql="SELECT * FROM frs_package WHERE group_id='$group_id' AND status_id='1'";
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
-		echo '<H4>No File Types Available</H4>';
+		echo '<h4>No File Types Available</h4>';
 	} else {
 		
-		echo '<SELECT NAME="package_id">';
+		echo '<select name="package_id">';
 		for ($i=0; $i<$rows; $i++) {
-			echo '<OPTION VALUE="' . db_result($res,$i,'package_id') . 
-				((db_result($res,$i,'package_id') ==$package_id) ? '" SELECTED' : '"').'>' . 
-				db_result($res,$i,'name') . '</OPTION>';
+			echo '<option value="' . db_result($res,$i,'package_id') .
+				((db_result($res,$i,'package_id') ==$package_id) ? '" selected="selected"' : '"').'>' .
+				db_result($res,$i,'name') . '</option>';
 		}
-		echo '</SELECT>';
+		echo '</select>';
 	}
 ?>
 			&nbsp;&nbsp;Or, <a href="editpackages.php?group_id=<?php echo $group_id; ?>">create a new package</a>.
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>Release Name:</H4>
-		</TD>
-		<TD>
-			<INPUT TYPE="TEXT" name="release_name">
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>Release Date:</H4>
-		</TD>
-		<TD>
-			<INPUT TYPE="TEXT" NAME="release_date" VALUE="<?php echo date('Y-m-d'); ?>" SIZE="10" MAXLENGTH="10">
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>File Name:</H4>
-		</TD>
-		<TD>
-		<font color="red"><b>NOTE: In some browsers you must select the file in 
-		the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</b></font><br>
-		Upload a new file: <input type="file" name="userfile"  size="30">
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>File Type:</H4>
-		</TD>
-		<TD>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Release Name:</h4>
+		</td>
+		<td>
+			<input type="text" name="release_name" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Release Date:</h4>
+		</td>
+		<td>
+			<input type="text" name="release_date" value="<?php echo date('Y-m-d'); ?>" size="10" maxlength="10" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>File Name:</h4>
+		</td>
+		<td>
+		<span style="color:red"><strong>NOTE: In some browsers you must select the file in
+		the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</strong></span><br />
+		Upload a new file: <input type="file" name="userfile"  size="30" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>File Type:</h4>
+		</td>
+		<td>
 <?php
-	print frs_show_filetype_popup ($name='type_id') . "<br>";
+	print frs_show_filetype_popup ($name='type_id') . "<br />";
 ?>
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>Processor Type:</H4>
-		</TD>
-		<TD>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Processor Type:</h4>
+		</td>
+		<td>
 <?php
 	print frs_show_processor_popup ($name='processor_id');
 ?>		
-		</TD>
-	</TR>
-	<TR>
-		<TD VALIGN="TOP">
-			<H4>Release Notes:</H4>
-		</TD>
-		<TD>
-			<TEXTAREA NAME="release_notes" ROWS="7" COLS="50"></TEXTAREA>
-		</TD>
-	</TR>
-	<TR>
-		<TD VALIGN="TOP">
-			<H4>Change Log:</H4>
-		</TD>
-		<TD>
-			<TEXTAREA NAME="release_changes" ROWS="7" COLS="50"></TEXTAREA>
-		</TD>
-	</TR>
-	<TR>
-		<TD COLSPAN="2" ALIGN="CENTER">
-			<input type="checkbox" name="preformatted" value="1" > Preserve my pre-formatted text.
-			<p>
-			<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Release File">
-		</TD>
-	</TR>
-	</TABLE>
-</FORM>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<h4>Release Notes:</h4>
+		</td>
+		<td>
+			<textarea name="release_notes" rows="7" cols="50"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			<h4>Change Log:</h4>
+		</td>
+		<td>
+			<textarea name="release_changes" rows="7" cols="50"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="checkbox" name="preformatted" value="1" /> Preserve my pre-formatted text.
+			<p><input type="submit" name="submit" value="Release File" /></p>
+		</td>
+	</tr>
+	</table>
+</form>
 
 <?php
 }

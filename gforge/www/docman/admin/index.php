@@ -112,28 +112,28 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<b>Document Title:</b><br>
+		<strong>Document Title:</strong><br />
 		<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>">
-		<br>(e.g. How to use the download server)</td>
+		<br />(e.g. How to use the download server)</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Short Description:</b><br>
+		<strong>Short Description:</strong><br />
 		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>">
-		<br>(e.g. http://www.linux.com/)</td>
+		<br />(e.g. http://www.linux.com/)</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>File:</b><br>
+		<strong>File:</strong><br />
 		<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.$d->getFileName() ?>"><?php echo $d->getName(); ?></a>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Language:</b><br>
+		<strong>Language:</strong><br />
 		<?php
 
 			echo html_get_language_popup($Language,'language_id',$d->getLanguageID());
@@ -143,7 +143,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<b>Group doc belongs in:</b><br>
+		<strong>Group doc belongs in:</strong><br />
 		<?php
 
 			echo display_groups_option($group_id,$d->getDocGroupID());
@@ -153,7 +153,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<br>State:</b><br>
+		<br />State:</strong><br />
 		<?php
 
 			doc_get_state_box($d->getStateID());
@@ -169,7 +169,7 @@ if ($editdoc && $docid) {
 		echo	'
 	<tr>
 		<td>
-		<b>Document Contents:</b><br>
+		<strong>Document Contents:</strong><br />
 		<textarea cols="80" rows="20" name="data">'. htmlspecialchars( $d->getFileData() ).'</textarea>
 		</td>
 	</tr>';
@@ -178,7 +178,7 @@ if ($editdoc && $docid) {
 	?>
 	<tr>
 		<td>
-		<b>OPTIONAL: Upload New File:</b><br>
+		<strong>OPTIONAL: Upload New File:</strong><br />
 		<input type="file" name="uploaded_data" size="30">
 		</td>
 	</tr>
@@ -231,7 +231,7 @@ if ($editdoc && $docid) {
 	}
 
 	?>
-	<p><b> Add a group:</b>
+	<p><strong> Add a group:</strong>
 	<form name="addgroup" action="index.php?addgroup=1&group_id=<?php echo $group_id; ?>" method="POST">
 	<table>
 		<tr>
@@ -263,7 +263,7 @@ if ($editdoc && $docid) {
 
 	docman_header('Group Edit', 'Group Edit','docman_admin_editgroups','admin',$g->getPublicName(),'');
 	?>
-	<p><b>Edit a group:</b>
+	<p><strong>Edit a group:</strong>
 	<form name="editgroup" action="index.php?editgroup=1&group_id=<?php echo $group_id; ?>" method="POST">
 	<input type="hidden" name="doc_group" value="<?php echo $doc_group; ?>">
 	<table>
@@ -306,7 +306,7 @@ if ($editdoc && $docid) {
 	<?php
 
 	if (!$d_arr || count($d_arr) < 1) {
-		print "<b>This project has no visible documents.</b><p>";
+		print "<strong>This project has no visible documents.</strong><p>";
 	} else {
 	//	  doc_droplist_count($group_id, $language_id);
 
@@ -319,12 +319,12 @@ if ($editdoc && $docid) {
 			//
 			if ($d_arr[$i]->getStateID() != $last_state) {
 				print (($i==0) ? '' : '</ul>');
-				print "\n\n<li><b>". $d_arr[$i]->getStateName() ."</b></li><ul>";
+				print "\n\n<li><strong>". $d_arr[$i]->getStateName() ."</strong></li><ul>";
 				$last_state=$d_arr[$i]->getStateID();
 			}
 			print "\n<li><a href=\"index.php?editdoc=1&docid=".$d_arr[$i]->getID()."&group_id=$group_id\">".
 				$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
-				"\n<BR><i>Description:</i> ".$d_arr[$i]->getDescription();
+				"\n<br /><em>Description:</em> ".$d_arr[$i]->getDescription();
 
 		}
 		print "\n</ul>\n";

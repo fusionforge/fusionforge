@@ -22,13 +22,13 @@ if (session_issecure()) {
 	echo "<a href=\"http://$GLOBALS[sys_default_domain]\">";
 }
 
-echo "<CENTER><H1>PAGE NOT FOUND</H1>";
+echo "<center><h1>PAGE NOT FOUND</h1>";
 
-echo "<P>";
+echo "<p>";
 
 echo $HTML->searchBox();
 
-echo "<P></CENTER>";
+echo "<p></center>";
 
 $HTML->footer(array());
 

@@ -57,26 +57,26 @@ site_admin_header(array('title'=>'Site Admin: Trove - Add Node'));
 
 <form action="trove_cat_add.php" method="post">
 <p>Parent Category:
-<br><select name="form_parent">
+<br /><select name="form_parent">
 
 <?php
 
 // generate list of possible parents
 $res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
 while ($row_cat = db_fetch_array($res_cat)) {
-	print ('<OPTION value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."\n");
+	print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
 }
 
 ?>
 
-</select>
+</select></p>
 <p>New category short name (no spaces, unix-like):
-<br><input type="text" name="form_shortname">
+<br /><input type="text" name="form_shortname" /></p>
 <p>New category full name (VARCHAR 80):
-<br><input type="text" name="form_fullname">
+<br /><input type="text" name="form_fullname" /></p>
 <p>New category description (VARCHAR 255):
-<br><input type="text" size="80" name="form_description">
-<br><input type="submit" name="submit" value="Add">
+<br /><input type="text" size="80" name="form_description" />
+<br /><input type="submit" name="submit" value="Add" /></p>
 </form>
 
 <?php

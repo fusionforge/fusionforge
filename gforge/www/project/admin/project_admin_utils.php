@@ -240,8 +240,8 @@ function show_grouphistory ($group_id) {
 	if ($rows > 0) {
 	
 		echo '
-		<H3>Group Change History</H3>
-		<P>';
+		<h3>Group Change History</h3>
+		<p>';
 		$title_arr=array();
 		$title_arr[]='Field';
 		$title_arr[]='Old Value';
@@ -253,23 +253,23 @@ function show_grouphistory ($group_id) {
 		for ($i=0; $i < $rows; $i++) { 
 			$field=db_result($result, $i, 'field_name');
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
 			
 			if ($field=='removed user') {
 				echo user_getname(db_result($result, $i, 'old_value'));
 			} else {
 				echo db_result($result, $i, 'old_value');
 			}			
-			echo '</TD>'.
-				'<TD>'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>'.
-				'<TD>'.db_result($result, $i, 'user_name').'</TD></TR>';
+			echo '</td>'.
+				'<td>'.date($sys_datefmt,db_result($result, $i, 'date')).'</td>'.
+				'<td>'.db_result($result, $i, 'user_name').'</td></tr>';
 		}		   
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
 		echo '  
-		<H3>No Changes Have Been Made to This Group</H3>';
+		<h3>No Changes Have Been Made to This Group</h3>';
 	}	   
 }	   
 
@@ -335,36 +335,36 @@ function random_pwgen() {
 
 function permissions_blurb() {
 	return '
-	<B>NOTE:</B>
+	<strong>NOTE:</strong>
 
 	<dl>
-	<dt><B>Project Admins (bold)</B></dt>
+	<dt><strong>Project Admins (bold)</strong></dt>
 	<dd>can access this page and other project administration pages</dd>
 
-	<dt><B>Release Technicians</B></dt>
+	<dt><strong>Release Technicians</strong></dt>
 	<dd>can make the file releases (any project admin also a release technician)</dd>
 	'.
 
 	/*
-	'<dt><B>CVS Admins</B></dt>
-	<dd><!-- can --> <i>will</i> be able to access repository files directly (in addition to standard write access)</dd>
+	'<dt><strong>CVS Admins</strong></dt>
+	<dd><!-- can --> <em>will</em> be able to access repository files directly (in addition to standard write access)</dd>
 	'.
 	*/
 
-	'<dt><B>Tool Technicians (T)</B></dt>
+	'<dt><strong>Tool Technicians (T)</strong></dt>
 	<dd>can be assigned Bugs/Tasks/Patches</dd>
 
-	<dt><B>Tool Admins (A)</B></dt>
+	<dt><strong>Tool Admins (A)</strong></dt>
 	<dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd>
 
-	<dt><B>Tool No Permission (N/A)</B></dt>
+	<dt><strong>Tool No Permission (N/A)</strong></dt>
 	<dd>Developer doesn\'t have specific permission (currently
 	equivalent to \'-\')</dd>
 
-	<dt><B>Moderators</B> (forums)</dt>
+	<dt><strong>Moderators</strong> (forums)</dt>
 	<dd>can delete messages from the project forums</dd>
 
-	<dt><B>Editors</B> (doc. manager)</dt>
+	<dt><strong>Editors</strong> (doc. manager)</dt>
 	<dd>can update/edit/remove documentation from the project.</dd>
 	</dl>
 	';

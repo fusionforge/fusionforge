@@ -17,8 +17,8 @@
  */
 function help_button($type,$helpid) {
 	if ($type == 'trove_cat') {
-		return ('<A href="javascript:help_window(\'/help/trove_cat.php'
-			.'?trove_cat_id='.$helpid.'\')"><B>(?)</B></A>');
+		return ('<a href="javascript:help_window(\'/help/trove_cat.php'
+			.'?trove_cat_id='.$helpid.'\')"><strong>(?)</strong></a>');
 	}
 }
 
@@ -29,14 +29,14 @@ function help_button($type,$helpid) {
  */
 function help_header($title) {
 ?>
-<HTML>
-<HEAD>
-<TITLE><?php print $title; ?></TITLE>
-</HEAD>
-<BODY bgcolor="#FFFFFF">
-<H4><?php echo $GLOBALS['sys_name']; ?> Site Help System:</H4>
-<H2><?php print $title; ?></H2>
-<HR>
+<html>
+<head>
+<title><?php print $title; ?></title>
+</head>
+<body style="background-color:white">
+<h4><?php echo $GLOBALS['sys_name']; ?> Site Help System:</h4>
+<h2><?php print $title; ?></h2>
+<hr />
 <?php
 }
 
@@ -46,8 +46,8 @@ function help_header($title) {
  */
 function help_footer() {
 ?>
-</BODY>
-</HTML>
+</body>
+</html>
 <?php
 }
 

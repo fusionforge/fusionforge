@@ -136,7 +136,7 @@ if ($add_cat && $group_project_id) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
 	pm_header(array ('title'=>'Add Categories','pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
-	echo "<H1>Add Categories to: ". $pg->getName() ."</H1>";
+	echo "<h1>Add Categories to: ". $pg->getName() ."</h1>";
 
 	/*
 		List of possible categories for this ArtifactType
@@ -162,7 +162,7 @@ if ($add_cat && $group_project_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<H1>No categories defined</H1>";
+		echo "\n<h1>No categories defined</h1>";
 	}
 
 	?>
@@ -170,10 +170,10 @@ if ($add_cat && $group_project_id) {
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_cat" value="y">
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
-	<b>New Category Name:</b><br>
-	<input type="text" name="name" value="" size="15" maxlength="30"><br>
+	<strong>New Category Name:</strong><br />
+	<input type="text" name="name" value="" size="15" maxlength="30"><br />
 	<p>
-	<b><font COLOR="RED">Once you add a category, it cannot be deleted</font></b>
+	<strong><font COLOR="RED">Once you add a category, it cannot be deleted</font></strong>
 	<p>
 	<input type="SUBMIT" name="post_changes" value="SUBMIT">
 	</form>
@@ -199,7 +199,7 @@ if ($add_cat && $group_project_id) {
 	pm_header(array ('title'=>'Add Categories','pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
 
 	echo '
-		<H1>Modify an Category in: '. $pg->getName() .'</H1>';
+		<h1>Modify an Category in: '. $pg->getName() .'</h1>';
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -214,12 +214,12 @@ if ($add_cat && $group_project_id) {
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>">
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
 		<p>
-		<b>Category Name:</b><br>
+		<strong>Category Name:</strong><br />
 		<input type="text" name="name" value="<?php echo $ac->getName(); ?>">
 		<p>
-		<b><font COLOR="RED">It is not recommended that you change the artifact
+		<strong><font COLOR="RED">It is not recommended that you change the artifact
 			category name because other things are dependent upon it. When you change
-			the category name, all related items will be changed to the new name.</font></b>
+			the category name, all related items will be changed to the new name.</font></strong>
 		<p>
 		<input type="SUBMIT" name="post_changes" value="SUBMIT">
 		</form>
@@ -244,30 +244,30 @@ if ($add_cat && $group_project_id) {
 	if ($result && db_numrows($result) > 0) {
 		ShowResultSet($result,"Existing Subprojects");
 	} else {
-		echo "\n<H1>No Subprojects in this group</H1>";
+		echo "\n<h1>No Subprojects in this group</h1>";
 	}
 	?>
 	<p>
-	Add a new project to the Project/Task Manager. <b>This is different than
-	 adding a task to a project.</b>
+	Add a new project to the Project/Task Manager. <strong>This is different than
+	 adding a task to a project.</strong>
 	<p>
 	<form action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>" method="post">
 	<input type="hidden" name="addproject" value="y">
 	<input type="hidden" name="post_changes" value="y">
 	<p>
-	<b>Is Public?</b><br>
-	<input type="radio" name="is_public" value="1" checked> Yes<br>
+	<strong>Is Public?</strong><br />
+	<input type="radio" name="is_public" value="1" checked> Yes<br />
 	<input type="radio" name="is_public" value="0"> No<p>
 	<p>
-	<H3>New Project Name:</H3>
+	<h3>New Project Name:</h3>
 	<p>
 	<input type="text" name="project_name" value="" size="15" maxlength="30">
 	<p>
-	<b>Description:</b><br>
+	<strong>Description:</strong><br />
 	<input type="text" name="description" value="" size="40" maxlength="80">
 	<p>
-	<b>Send All Updates To:</b><br>
-	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80"><br>
+	<strong>Send All Updates To:</strong><br />
+	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80"><br />
 	<p>
 	<input type="SUBMIT" name="SUBMIT" value="SUBMIT">
 	</form>
@@ -298,32 +298,32 @@ if ($add_cat && $group_project_id) {
 	<table border="0">
 	<tr>
 		<td>
-			<b>Is Public?</b><br>
-			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked':''); ?>> Yes<br>
-			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked':''); ?>> No<br>
-			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked':''); ?>> Deleted<br>
+			<strong>Is Public?</strong><br />
+			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked':''); ?>> Yes<br />
+			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked':''); ?>> No<br />
+			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked':''); ?>> Deleted<br />
 		</td>
 	</tr>
 	<tr>
-		<td><b>Project Name:</b><br>
+		<td><strong>Project Name:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<b>Description:</b><br>
-			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80"><br>
+			<strong>Description:</strong><br />
+			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80"><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<b>Send All Updates To:</b><br>
-			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80"><br>
+			<strong>Send All Updates To:</strong><br />
+			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80"><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<b><a href="<?php echo $PHP_SELF."?group_id=$group_id&add_cat=1&group_project_id=".$pg->getID(); ?>">Add/Edit Categories</a></b><br>
+			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&add_cat=1&group_project_id=".$pg->getID(); ?>">Add/Edit Categories</a></strong><br />
 		</td>
 	</tr>
 	<tr>
@@ -346,7 +346,7 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p>
-	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&addproject=1">Add A Project</a><br>
+	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&addproject=1">Add A Project</a><br />
 	Add a project, which can contain a set of tasks. This is different than creating a new task.
 	<p>
 	<?php
@@ -367,7 +367,7 @@ if ($add_cat && $group_project_id) {
         echo db_error();
     } else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1">Edit/Update Project: <b>'.$pg_arr[$i]->getName().'</b></a><p>';
+			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1">Edit/Update Project: <strong>'.$pg_arr[$i]->getName().'</strong></a><p>';
 		}
 
 	}

@@ -32,7 +32,7 @@ if ($group->isError()) {
 	// If group object was created, but has error condition,
 	// don't treat this as fatal - this page is supposed to be
 	// "repair" page for such circumstances.
-	$feedback .= $group->getErrorMessage().'<br> ';
+	$feedback .= $group->getErrorMessage().'<br /> ';
 }
 
 // This function performs very update
@@ -56,7 +56,7 @@ function do_update(&$group, $is_public, $status, $license,
 
 	db_commit();
 
-	$feedback .= 'Updated<br> ';
+	$feedback .= 'Updated<br /> ';
 
 	return true;
 }
@@ -70,19 +70,19 @@ if ($submit) {
 } else if ($resend) {
 
 	$group->sendApprovalEmail();
-	$feedback .= 'Instruction email sent<br> ';
+	$feedback .= 'Instruction email sent<br /> ';
 
 }
 
 site_admin_header(array('title'=>'Site Admin: Group Info'));
 
-echo '<H2>'.$group->getPublicName().'</H2>' ;?>
+echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 <p>
-<?php print "<A href=\"/project/admin/?group_id=$group_id\"><H3>[Project Admin]</H3></A>"; ?></b>
+<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>[Project Admin]</h3></a>"; ?></p>
 
 <p>
-<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 
 
 <table>
@@ -127,17 +127,17 @@ Unix Group Name:
 License:
 </td>
 <td>
-<SELECT name="form_license">
-<OPTION value="none">N/A
-<OPTION value="other">Other
+<select name="form_license">
+<option value="none">N/A</option>
+<option value="other">Other</option>
 <?php
 	while (list($k,$v) = each($LICENSE)) {
-		print "<OPTION value=\"$k\"";
-		if ($k == $group->getLicense()) print " selected";
-		print ">$v\n";
+		print "<option value=\"$k\"";
+		if ($k == $group->getLicense()) print " selected=\"selected\"";
+		print ">$v</option>\n";
 	}
 ?>
-</SELECT>
+</select>
 </td>
 </tr>
 
@@ -146,7 +146,7 @@ License:
 Home Box:
 </td>
 <td>
-<INPUT type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>">
+<input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
 </td>
 </tr>
 
@@ -155,7 +155,7 @@ Home Box:
 HTTP Domain:
 </td>
 <td>
-<INPUT size=40 type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>">
+<input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
 </td>
 </tr>
 
@@ -184,11 +184,11 @@ if ($group->getLicense() == 'other') {
 
 </table>
 
-<INPUT type="hidden" name="group_id" value="<?php print $group_id; ?>">
+<input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
 
-<BR><INPUT type="submit" name="submit" value="Update">
-&nbsp;&nbsp;&nbsp; <INPUT type="submit" name="resend" value="Resend New Project Instruction Email">
-</FORM>
+<br /><input type="submit" name="submit" value="Update" />
+&nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="Resend New Project Instruction Email" />
+</form></p>
 
 <?php
 

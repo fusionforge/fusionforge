@@ -44,9 +44,9 @@ function filechecks_targz($filename) {
 	exec("tar -ztvf $GLOBALS[FTPINCOMING_DIR]/" . EscapeShellCmd($filename),$output,$ret);
 	if ($ret) {
 		for ($i=0;$i<count($output);$i++) {
-			$exitout .= "<BR>" . $output[$i] . "\n";
+			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error("Failed tar/gz integrity check.","Output follows: <P>$exitout");
+		exit_error("Failed tar/gz integrity check.","Output follows: <p>$exitout</p>");
 	}
 }
 
@@ -59,9 +59,9 @@ function filechecks_gz($filename) {
 	exec("gunzip -t $GLOBALS[FTPINCOMING_DIR]/" . EscapeShellCmd($filename),$output,$ret);
 	if ($ret) {
 		for ($i=0;$i<count($output);$i++) {
-			$exitout .= "<BR>" . $output[$i] . "\n";
+			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error("Failed gzip integrity check.","Output follows: <P>$exitout");
+		exit_error("Failed gzip integrity check.","Output follows: <p>$exitout</p>");
 	}
 }
 

@@ -64,7 +64,7 @@ if ($login && !$success) {
 
 	} else {
 		
-		echo '<h2><FONT COLOR="RED">'. $feedback .'</FONT></H2>';
+		echo '<h2 style="color:red">'. $feedback .'</h2>';
 		if (stristr($feedback, "deleted")) {
 			echo $Language->getText('account_login', 'deleted_account', $GLOBALS[sys_name]);
 		}
@@ -75,24 +75,23 @@ if ($login && !$success) {
 ?>
 	
 <p>
-<font color="red"><B><?php echo $Language->getText('account_login', 'cookiewarn'); ?></B></font>
-<P>
+<span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span></p>
+<p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
-<INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">
+<input type="hidden" name="return_to" value="<?php echo $return_to; ?>" /></p>
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
-<br><input type="text" name="form_loginname" VALUE="<?php echo $form_loginname; ?>">
+<br /><input type="text" name="form_loginname" value="<?php echo $form_loginname; ?>" /></p>
 <p>
 <?php echo $Language->getText('account_login', 'passwd'); ?>
-<br><input type="password" name="form_pw">
-<P>
-</FONT></B>
-<input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>">
-</form>
-<P>
-<A href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></A>
-<P>
-<A HREF="register.php"><?php echo $Language->getText('account_login', 'newaccount'); ?></A>
+<br /><input type="password" name="form_pw"></p>
+<p>
+<input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>" />
+</form></p>
+<p>
+<a href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></a></p>
+<p>
+<a href="register.php"><?php echo $Language->getText('account_login', 'newaccount'); ?></a></p>
 
 <?php
 

@@ -15,83 +15,82 @@
 $ath->header(array ('title'=>'Submit','pagename'=>'tracker_add','sectionvals'=>array($ath->getName())));
 
 	echo '
-	<P>';
+	<p>&nbsp;</p>';
 	/*
 	    Show the free-form text submitted by the project admin
 	*/
 	echo $ath->getSubmitInstructions();
 
-	echo '<P>
-	<FORM ACTION="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST" enctype="multipart/form-data">
-	<INPUT TYPE="HIDDEN" NAME="func" VALUE="postadd">
-	<TABLE>
-	<TR><TD VALIGN="TOP" COLSPAN="2"><B>For Project:</B><BR>'.$group->getPublicName().'</TD></TR>
-	<TR><TD VALIGN="TOP"><B>Category: <A href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><B>(?)</B></A></B><BR>';
+	echo '<p>
+	<form action="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="func" value="postadd" />
+	<table>
+	<tr><td <valign="top" colspan="2"><strong>For Project:</strong><br />'.$group->getPublicName().'</td></tr>
+	<tr><td <valign="top"><strong>Category: <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a></strong><br />';
 
 		echo $ath->categoryBox('category_id');
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_cat=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_cat=1">(admin)</a>';
 	?>
-	</TD><TD><B>Group: <A href="javascript:help_window('/help/tracker.php?helpname=group')"><b>(?)</b></a></B><BR>
+	</td><td><strong>Group: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
 	<?php
 		echo $ath->artifactGroupBox('artifact_group_id');
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_group=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_group=1">(admin)</a>';
 	?>
-	</TD></TR>
+	</td></tr>
 	<?php 
 	if ($ath->userIsAdmin()) {
-		echo '<TR><TD><B>Assigned To: <A href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><b>(?)</b></a></B><BR>';
+		echo '<tr><td><strong>Assigned To: <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
 		echo $ath->technicianBox ('assigned_to');
-		echo '&nbsp;<A HREF="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&update_users=1">(admin)</A>';
+		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">(admin)</a>';
 
-		echo '</TD><TD><B>Priority: <A href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><b>(?)</b></a></B><BR>';
+		echo '</td><td><strong>Priority: <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
 		echo build_priority_select_box('priority');
-		echo '</TD></TR>';
+		echo '</td></tr>';
 	}
 	?>
-	<TR><TD COLSPAN="2"><B>Summary: <A href="javascript:help_window('/help/tracker.php?helpname=summary')"><b>(?)</b></a></B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" SIZE="35" MAXLENGTH="40">
-	</TD></TR>
+	<tr><td colspan="2"><strong>Summary: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<input type="text" name="summary" size="35" maxlength="40" />
+	</td></tr>
 
-	<TR><TD COLSPAN="2">
-		<B>Detailed Description:</B>
-		<P>
-		<TEXTAREA NAME="details" ROWS="30" COLS="55" WRAP="HARD"></TEXTAREA>
-	</TD></TR>
+	<tr><td colspan="2">
+		<strong>Detailed Description:</strong>
+		<p>
+		<textarea name="details" rows="30" cols="55" wrap="hard"></textarea></p>
+	</td></tr>
 
-	<TR><TD COLSPAN="2">
+	<tr><td colspan="2">
 	<?php 
 	if (!session_loggedin()) {
 		echo '
-		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">log in!</A></FONT></h3><BR>
-		If you <B>cannot</B> login, then enter your email address here:<P>
-		<INPUT TYPE="TEXT" NAME="user_email" SIZE="30" MAXLENGTH="35">
+		<h3><span style="color:red">Please <a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">log in!</a></span></h3><br />
+		If you <strong>cannot</strong> login, then enter your email address here:<p>
+		<input type="text" name="user_email" size="30" maxlength="35" /></p>
 		';
 
 	} 
 	?>
-		<P>
-		<H3><FONT COLOR=RED>DO NOT enter passwords or other confidential information!</FONT></H3>
-		<P>
-	</TD></TR>
+		<p>&nbsp;</p>
+		<h3><span style="color:red">DO NOT enter passwords or other confidential information!</span></h3>
+		<p>&nbsp;</p>
+	</td></tr>
 
-	<TR><TD COLSPAN=2>
-		<B>Check to Upload &amp; Attach File:</B> <input type="checkbox" name="add_file" VALUE="1"> 
-		<A href="javascript:help_window('/help/tracker.php?helpname=comment')"><b>(?)</b></a><BR>
-		<P>
-		<input type="file" name="input_file" size="30">
-		<P>
-		<B>File Description:</B><BR>
-		<input type="text" name="file_description" size="40" maxlength="255">
-		<P>
-	</TD><TR>
+	<tr><td colspan="2">
+		<strong>Check to Upload &amp; Attach File:</strong> <input type="checkbox" name="add_file" value="1" />
+		<a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a><br />
+		<p>
+		<input type="file" name="input_file" size="30" /></p>
+		<p>
+		<strong>File Description:</strong><br />
+		<input type="text" name="file_description" size="40" maxlength="255" /></p>
+		<p>&nbsp;</p>
+	</td><tr>
 
-	<TR><TD COLSPAN=2>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-		</FORM>
-		<P>
-	</TD></TR>
+	<tr><td colspan="2">
+		<input type="submit" name="submit" value="SUBMIT" />
+		<p>&nbsp;</p>
+	</td></tr>
 
-	</TABLE>
+	</table></form></p>
 
 	<?php
 

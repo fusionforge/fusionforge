@@ -22,7 +22,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {
-	print ('<BR>');
+	print ('<br />');
 
 	for ($i=0;$i<$GLOBALS[depth];$i++) {
 		print "&nbsp; &nbsp; ";
@@ -31,7 +31,7 @@ function printnode ($nodeid,$text) {
 	print html_image('ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
 	if ($nodeid != 0) {
-                print ('<A href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</A> ');
+                print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</a> ');
                 print (help_button('trove_cat',$nodeid)."\n");
         }
 

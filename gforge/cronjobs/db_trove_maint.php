@@ -155,7 +155,7 @@ db_begin(SYS_DB_TROVE);
 db_query("DELETE FROM trove_treesums", -1, 0, SYS_DB_TROVE);
 echo db_error(SYS_DB_TROVE);
 
-//echo "<TABLE>";
+//echo "<table>";
 while (list($k,$v) = each($sum_totals)) {
 	$res = db_query("
 		INSERT INTO trove_treesums (trove_cat_id,subprojects) 
@@ -164,7 +164,7 @@ while (list($k,$v) = each($sum_totals)) {
 	if (!$res || db_affected_rows($res)!=1) {
 		echo db_error(SYS_DB_TROVE);
 	}
-//	echo "<TR><TD>$k</TD><TD>$v</TD></TR>\n";
+//	echo "<tr><td>$k</td><td>$v</td></tr>\n";
 
 }
 //echo "</TABLE>";

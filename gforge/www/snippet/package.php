@@ -68,7 +68,7 @@ if (session_loggedin()) {
 
 					?>
 
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 function show_add_snippet_box() {
 	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
@@ -77,19 +77,18 @@ function show_add_snippet_box() {
 }
 // -->
 </script>
-<BODY onLoad="show_add_snippet_box()">
+<body onload="show_add_snippet_box()">
 
-<P>
-<FONT COLOR="RED"><B>IMPORTANT!</B></FONT>
-<P>
-If a new window opened, use it to add snippets to your package. 
-If a new window did not open, use the following link to add to your package BEFORE you leave this page.
-<P>
-<A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" TARGET="_blank">Add Snippets To Package</A>
-<P>
-<B>Browse the library</B> to find the snippets you want to add, 
+<p>
+<span style="color:red"><strong>IMPORTANT!</strong></span>
+<p>If a new window opened, use it to add snippets to your package.
+If a new window did not open, use the following link to add to your package BEFORE you leave this page.</p>
+
+<p><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank">Add Snippets To Package</a></p>
+
+<p><strong>Browse the library</strong> to find the snippets you want to add,
 then add them using the new window link shown above.
-<P>
+<p>
 
 					<?php
 
@@ -105,59 +104,58 @@ then add them using the new window link shown above.
 	snippet_header(array('title'=>'Submit A New Snippet Package','pagename'=>'snippet_package'));
 
 	?>
-	<P>
-	You can group together existing snippets into a package using this interface. Before 
-	creating your package, make sure all your snippets are in place and you have made a note 
-	of the snippet ID's.
-	<P>
-	<OL>
-	<LI>Create the package using this form.
-	<LI><B>Then</B> use the "Add Snippets to Package" link to add files to your package.
-	</OL>
-	<P>
-	<FONT COLOR="RED"><B>Note:</B></FONT> You can submit a new version of an existing package by 
+	</p>
+	<p>You can group together existing snippets into a package using this interface. Before
+	creating your package, make sure all your snippets are in place and you have made a note
+	of the snippet ID's.</p>
+	<p>
+	<ol>
+	<li>Create the package using this form.</li>
+	<li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li>
+	</ol></p>
+	<p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by
 	browsing the library and using the link on the existing package. You should only use this 
-	page if you are submitting an entirely new package.
-	<P>
-	<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
-	<INPUT TYPE="HIDDEN" NAME="changes" VALUE="First Posted Version">
+	page if you are submitting an entirely new package.</p>
+	<p>
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="changes" value="First Posted Version" />
 
-	<TABLE>
+	<table>
 
-	<TR><TD COLSPAN="2"><B>Title:</B><BR>
-		<INPUT TYPE="TEXT" NAME="name" SIZE="45" MAXLENGTH="60">
-	</TD></TR>
+	<tr><td colspan="2"><strong>Title:</strong><br />
+		<input type="text" name="name" size="45" maxlength="60" />
+	</td></tr>
 
-	<TR><TD COLSPAN="2"><B>Description:</B><BR>
-		<TEXTAREA NAME="description" ROWS="5" COLS="45" WRAP="SOFT"></TEXTAREA>
-	</TD></TR>
+	<tr><td colspan="2"><strong>Description:</strong><br />
+		<textarea name="description" rows="5" cols="45" wrap="soft"></textarea>
+	</td></tr>
 
-	<TR>
-	<TD><B>Language:</B><BR>
+	<tr>
+	<td><strong>Language:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
-		<BR>
-		<A HREF="/support/?func=addsupport&group_id=1">Suggest a Language</A>
-	</TD>
+		<br />
+		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Language</a>
+	</td>
 
-	<TD><B>Category:</B><BR>
+	<td><strong>Category:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
-		<BR>
-		<A HREF="/support/?func=addsupport&group_id=1">Suggest a Category</A>
-	</TD>
-	</TR>
+		<br />
+		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Category</a>
+	</td>
+	</tr>
  
-	<TR><TD COLSPAN="2"><B>Version:</B><BR>
-		<INPUT TYPE="TEXT" NAME="version" SIZE="10" MAXLENGTH="15">
-	</TD></TR>
-  
-	<TR><TD COLSPAN="2" ALIGN="MIDDLE">
-		<B>Make sure all info is complete and accurate</B>
-		<BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
-	</TD></TR>
+	<tr><td colspan="2"><strong>Version:</strong><br />
+		<input type="text" name="version" size="10" maxlength="15" />
+	</td></tr>
 
-	</TABLE>
+	<tr><td colspan="2" align="center">
+		<strong>Make sure all info is complete and accurate</strong>
+		<br />
+		<input type="submit" name="submit" value="SUBMIT" />
+	</td></tr>
+
+	</table></form></p>
 	<?php
 	snippet_footer(array());
 

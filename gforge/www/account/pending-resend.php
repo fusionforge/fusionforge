@@ -37,9 +37,9 @@ in this email to complete the registration process.
 </p>
 
 <p>
-<A href="/">[Return to <?php print($GLOBALS['sys_name']) ?>]</A>
+<a href="/">[Return to <?php print($GLOBALS['sys_name']) ?>]</a>
 </p>
- 
+
 <?php
 
 $HTML->footer(array());

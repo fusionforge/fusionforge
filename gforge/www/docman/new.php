@@ -67,10 +67,10 @@ if ($submit){
 	docman_header('Add documentation','Add documentation','docman_new','',$g->getPublicName());
 	?>
 	<p>
-	<b> Document Title: </b> Refers to the relatively brief title of the document 
+	<strong> Document Title: </strong> Refers to the relatively brief title of the document 
 	(e.g. How to use the download server)
-	<br>
-	<b> Description: </b> A brief description to be placed just under the title.<br>
+	<br />
+	<strong> Description: </strong> A brief description to be placed just under the title.<br />
 
 	<form name="adddata" action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="POST" enctype="multipart/form-data">
 
@@ -78,28 +78,28 @@ if ($submit){
 
 	<tr>
 		<td>
-		<b>Document Title:</b><br>
+		<strong>Document Title:</strong><br />
 		<input type="text" name="title" size="40" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Description:</b><br>
+		<strong>Description:</strong><br />
 		<input type="text" name="description" size="50" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Upload File:</b><br>
+		<strong>Upload File:</strong><br />
 		<input type="file" name="uploaded_data" size="30">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<b>Language:</b><br>
+		<strong>Language:</strong><br />
 		<?php
 			echo html_get_language_popup($Language,'language_id',1);
 		?>
@@ -108,7 +108,7 @@ if ($submit){
 
 	<tr>
 		<td>
-		<b>Group that document belongs in:</b><br>
+		<strong>Group that document belongs in:</strong><br />
 		<?php
 			display_groups_option($group_id);
 		?>

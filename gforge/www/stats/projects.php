@@ -22,21 +22,21 @@ session_require( array('group'=>$sys_stats_group) );
 $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
 
 ?>
-<DIV ALIGN="CENTER">
-<font size="+1"><b>Project Statistical Comparisons</b></font><BR>
-</DIV>
+<div align="center">
+<h3>Project Statistical Comparisons</h3><br />
+</div>
 
-<HR>
+<hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td align="center"><a href="index.php">OVERVIEW STATS</a></td>
-<td align="center"><B>PROJECT STATS</B></td>
-<td align="center"><a href="graphs.php">SITE GRAPHS</a></td>
+<tr align="center">
+<td><a href="index.php">OVERVIEW STATS</a></td>
+<td><strong>PROJECT STATS</strong></td>
+<td><a href="graphs.php">SITE GRAPHS</a></td>
 </tr>
 </table>
 
-<HR>
+<hr />
 
 <?php
 
@@ -47,15 +47,15 @@ if ( isset( $report ) ) {
 	stats_site_projects_form( $report, $orderby, $projects, $trovecatid );
 
 	?>
-	<DIV ALIGN="CENTER">
-	<BR><BR>
+	<div align="center">
+	<br /><br />
 	<?php
 
 	stats_site_projects( $report, $orderby, $projects, $trovecatid );
 
 	?>
-	<BR><BR>
-	</DIV>
+	<br /><br />
+	</div>
 	<?php
 
 } else { 

@@ -12,7 +12,7 @@ if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
         exit_permission_denied();
 }
 
-echo "Patching patches<br>";
+echo "Patching patches<br />";
 
 # If some patch is not opened, set its close date one month after open
 $res=db_query("
@@ -21,14 +21,14 @@ SET close_date=open_date+60*60*24*30
 WHERE close_date=0 AND patch_status_id NOT IN (0,1)
 ");
 
-if (!$res) print "error<br>";
+if (!$res) print "error<br />";
 
-echo "Affected rows: ",db_affected_rows($res),"<br><br>";
-
-
+echo "Affected rows: ",db_affected_rows($res),"<br /><br />";
 
 
-echo "Patching sup reqs<br>";
+
+
+echo "Patching sup reqs<br />";
 
 $res=db_query("
 UPDATE support
@@ -36,8 +36,8 @@ SET close_date=open_date+60*60*24*30
 WHERE close_date=0 AND support_status_id NOT IN (0,1)
 ");
 
-if (!$res) print "error<br>";
+if (!$res) print "error<br />";
 
-echo "Affected rows: ",db_affected_rows($res),"<br><br>";
+echo "Affected rows: ",db_affected_rows($res),"<br /><br />";
 
 ?>

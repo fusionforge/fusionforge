@@ -28,18 +28,18 @@ if ($result) {
 	$bookmark_title = db_result($result,0,'bookmark_title');
 }
 ?>
-<FORM METHOD="POST">
-Bookmark URL:<br>
-<input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>">
-<p>
-Bookmark Title:<br>
-<input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>">
-<p>
-<input type="submit" value=" Submit Form ">
+<form method="post">
+<p>Bookmark URL:<br />
+<input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
+</p>
+<p>Bookmark Title:<br />
+<input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
+</p>
+<p><input type="submit" value=" Submit Form "></p>
 </form>
 <?php
 
-print "<P><A HREF=\"/my/\">Return</A>";
+print "<p><a href=\"/my/\">Return</a>";
 
 site_user_footer(array());
 

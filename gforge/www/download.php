@@ -36,7 +36,7 @@ $filename=db_result($res,0,'filename');
 /*
 echo $group_name.'|'.$filename.'|'.$sys_upload_dir.$group_name.'/'.$filename;
 if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
-	echo '<BR>file exists';
+	echo '<br />file exists';
 	passthru($sys_upload_dir.$group_name.'/'.$filename);
 }
 */

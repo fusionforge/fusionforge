@@ -49,10 +49,10 @@ function show_top_downloads() {
 	// print each one
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0) 
-			$return .= "(" . number_format($row_topdown[downloads], 0) . ") <A href=\"/projects/$row_topdown[unix_group_name]/\">"
-			. "$row_topdown[group_name]</A><BR>\n";
+			$return .= "(" . number_format($row_topdown[downloads], 0) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
+			. "$row_topdown[group_name]</a><br />\n";
 	}
-	$return .= '<CENTER><A href="/top/">[ More ]</A></CENTER>';
+	$return .= '<div align="center"><a href="/top/">[ More ]</a></div>';
 	
 	return $return;
 
@@ -120,8 +120,8 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	$return .= 'Hosted Projects: <B>'.number_format(stats_getprojects_active()).'</B>';
-	$return .= '<BR>Registered Users: <B>'.number_format(stats_getusers()).'</B>';
+	$return .= 'Hosted Projects: <strong>'.number_format(stats_getprojects_active()).'</strong>';
+	$return .= '<br />Registered Users: <strong>'.number_format(stats_getusers()).'</strong>';
 	return $return;
 }
 
@@ -137,8 +137,8 @@ function show_newest_projects() {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			if ( $row_newproj['register_time'] ) {
 				$return .= "(" . date("m/d",$row_newproj['register_time'])  . ") "
-				. "<A href=\"/projects/$row_newproj[unix_group_name]/\">"
-				. "$row_newproj[group_name]</A><BR>";
+				. "<a href=\"/projects/$row_newproj[unix_group_name]/\">"
+				. "$row_newproj[group_name]</a><br />";
 			}
 		}
 	}
@@ -158,7 +158,7 @@ function show_highest_ranked_users() {
 		return 'None Found. '.db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <A HREF="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</A><BR>'; 
+			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />'; 
 		}
 	}
 	$return .= '<div align="center"><a href="/top/topusers.php">[ More ]</a></div>';
@@ -178,11 +178,11 @@ function show_highest_ranked_projects() {
 		return "No Stats".db_error();
 	} else {
 		while ($row=db_fetch_array($result)) {
-			$return .= '<B>( '.$row['percentile'].'% )</B>'
-				.' <A HREF="/projects/'.$row['unix_group_name'].
-			'/">'.$row['group_name'].'</A><BR>';
+			$return .= '<strong>( '.$row['percentile'].'% )</strong>'
+				.' <a href="/projects/'.$row['unix_group_name'].
+			'/">'.$row['group_name'].'</a><br />';
 		}
-		$return .= '<CENTER><A href="/top/mostactive.php?type=week">[ More ]</A></CENTER>';
+		$return .= '<div align="center"><a href="/top/mostactive.php?type=week">[ More ]</a></div>';
 	}
 	return $return;
 }

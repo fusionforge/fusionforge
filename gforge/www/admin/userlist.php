@@ -11,31 +11,31 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 $HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
 
 function show_users_list ($result) {
-	echo '<P>Key:
-		<B>Active</B>
-		<I>Deleted</I>
+	echo '<p>Key:
+		<strong>Active</strong>
+		<em>Deleted</em>
 		Suspended
-		(*)Pending
-		<P>
-		<TABLE width=100% cellspacing=0 cellpadding=0 BORDER="1">';
+		(*)Pending</p>
+		<p>
+		<table width="100%" cellspacing="0" cellpadding="0" border="1">';
 
 	while ($usr = db_fetch_array($result)) {
-		print "\n<TR><TD><a href=\"useredit.php?user_id=$usr[user_id]\">";
-		if ($usr[status] == 'A') print "<B>";
-		if ($usr[status] == 'D') print "<I>";
+		print "\n<tr><td><a href=\"useredit.php?user_id=$usr[user_id]\">";
+		if ($usr[status] == 'A') print "<strong>";
+		if ($usr[status] == 'D') print "<em>";
 		if ($usr[status] == 'P') print "*";
-		print "$usr[user_name]</A>";
-		if ($usr[status] == 'A') print "</B></TD>";
-		if ($usr[status] == 'D') print "</I></TD>";
-		if ($usr[status] == 'S') print "</TD>";
-		if ($usr[status] == 'P') print "</TD>";
-		print "\n<TD><A HREF=\"/developer/?form_dev=$usr[user_id]\">[DevProfile]</A></TD>";
-		print "\n<TD><A HREF=\"userlist.php?action=activate&user_id=$usr[user_id]\">[Activate]</A></TD>";
-		print "\n<TD><A HREF=\"userlist.php?action=delete&user_id=$usr[user_id]\">[Delete]</A></TD>";
-		print "\n<TD><A HREF=\"userlist.php?action=suspend&user_id=$usr[user_id]\">[Suspend]</A></TD>";
-		print "</TR>";
+		print "$usr[user_name]</a>";
+		if ($usr[status] == 'A') print "</strong></td>";
+		if ($usr[status] == 'D') print "</em></td>";
+		if ($usr[status] == 'S') print "</td>";
+		if ($usr[status] == 'P') print "</td>";
+		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[DevProfile]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=activate&user_id=$usr[user_id]\">[Activate]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=delete&user_id=$usr[user_id]\">[Delete]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=suspend&user_id=$usr[user_id]\">[Suspend]</a></td>";
+		print "</td>";
 	}
-	print "</TABLE>";
+	print "</table></p>";
 
 }
 
@@ -46,7 +46,7 @@ function show_users_list ($result) {
 */
 if ($action=='delete') {
 	db_query("UPDATE users SET status='D' WHERE user_id='$user_id'");
-	echo '<H2>User Updated to DELETE Status</H2>';
+	echo '<h2>User Updated to DELETE Status</h2>';
 }
 
 /*
@@ -54,7 +54,7 @@ if ($action=='delete') {
 */
 if ($action=='activate') {
 	db_query("UPDATE users SET status='A' WHERE user_id='$user_id'");
-	echo '<H2>User Updated to ACTIVE status</H2>';
+	echo '<h2>User Updated to ACTIVE status</h2>';
 }
 
 /*
@@ -62,7 +62,7 @@ if ($action=='activate') {
 */
 if ($action=='suspend') {
 	db_query("UPDATE users SET status='S' WHERE user_id='$user_id'");
-	echo '<H2>User Updated to SUSPEND Status</H2>';
+	echo '<h2>User Updated to SUSPEND Status</h2>';
 }
 
 /*
@@ -77,7 +77,7 @@ if ($action=='add_to_group') {
 */
 print "<p>Alexandria user List for Group: ";
 if (!$group_id) {
-	print "<b>All Groups</b>";
+	print "<strong>All Groups</strong>";
 	print "\n<p>";
 	
 	if ($user_name_search) {
@@ -92,7 +92,7 @@ if (!$group_id) {
 	/*
 		Show list for one group
 	*/
-	print "<b>" . group_getname($group_id) . "</b>";
+	print "<strong>" . group_getname($group_id) . "</strong>";
 	
 	print "\n<p>";
 
@@ -106,15 +106,15 @@ if (!$group_id) {
         	Show a form so a user can be added to this group
 	*/
 	?>
-	<hr>
-	<P>
+	<hr />
+	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
-	<input type="HIDDEN" name="action" VALUE="add_to_group">
+	<input type="hidden" name="action" value="add_to_group">
 	<input name="user_id" type="TEXT" value="">
 	<p>
 	Add User to Group (<?php print group_getname($group_id); ?>):
-	<br>
-	<input type="HIDDEN" name="group_id" VALUE="<?php print $group_id; ?>">
+	<br />
+	<input type="hidden" name="group_id" value="<?php print $group_id; ?>">
 	<p>
 	<input type="submit" name="Submit" value="Submit">
 	</form>

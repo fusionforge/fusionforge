@@ -20,11 +20,11 @@ $res=db_query("SELECT * FROM users WHERE unix_uid=1");
 
 $rows=db_numrows($res);
 
-echo "<BR>affect users: $rows<BR>";
+echo "<br />affect users: $rows<br />";
 
 for ($i=0; $i<$rows; $i++) {
 
-	echo "<BR>fixing: ".db_result($res,$i,'user_id');
+	echo "<br />fixing: ".db_result($res,$i,'user_id');
 
 	$user=user_get_object(db_result($res,$i,'user_id'));
 	if (!$user->setUpUnixUID()) {

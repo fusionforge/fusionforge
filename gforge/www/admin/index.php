@@ -27,7 +27,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 ?>
  
-<p><b>User Maintenance</b>
+<p><strong>User Maintenance</strong>
 <ul>
 	<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
 	<li>Display Users Beginning with : 
@@ -36,9 +36,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo "<a href=\"search.php?usersearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
 	}
 ?>
-<br>
+<br />
 <form name="usersrch" action="search.php" method="POST">
-Search <i>(userid, username, realname, email)</i>:
+Search <em>(userid, username, realname, email)</em>:
   <input type="text" name="search">
   <input type="hidden" name="substr" value="1">
   <input type="hidden" name="usersearch" value="1">
@@ -46,7 +46,7 @@ Search <i>(userid, username, realname, email)</i>:
 </form>
 </ul>
 <p>
-<b>Group Maintenance</b>
+<strong>Group Maintenance</strong>
 <p>
 <ul>
 	<li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
@@ -58,7 +58,7 @@ Search <i>(userid, username, realname, email)</i>:
 	}
 ?>
 <form name="gpsrch" action="search.php" method="POST">
-Search <i>(groupid, group unix name, full name)</i>:
+Search <em>(groupid, group unix name, full name)</em>:
   <input type="text" name="search">
   <input type="hidden" name="substr" value="1">
   <input type="hidden" name="groupsearch" value="1">
@@ -69,36 +69,36 @@ Search <i>(groupid, group unix name, full name)</i>:
 
 
 <li><a href="/register/">Register New Project</a>
-<li>Groups with <a href="approve-pending.php"><b>P</b> (pending) Status</a> <i>(New Project Approval)</i>
-<li>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><b>D</b> (deleted) Status</a>
+<li>Groups with <a href="approve-pending.php"><strong>P</strong> (pending) Status</a> <em>(New Project Approval)</em>
+<li>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><strong>D</strong> (deleted) Status</a>
 <li><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </a>
 </ul>
 
 <p>
-<b>News</b>
+<strong>News</strong>
 <p>
 <ul>
 	<li><a href="/news/admin/">Approve/Reject</a> Front-page news
 </ul>
 
 <p>
-<b>Stats</b>
+<strong>Stats</strong>
 <p>
 <ul>
 	<li><a href="/stats/">Site-Wide Stats</a>
 </ul>
 
 <p>
-<b>Trove Project Tree</b>
+<strong>Trove Project Tree</strong>
 <ul>
 	<li><a href="trove/trove_cat_list.php">Display Trove Map</a>
 	<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a>
 </ul>
 
-<p><b>Site Utilities</b>
+<p><strong>Site Utilities</strong>
 <ul>
-	<li><A href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a>
-	<li><A href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a>
+	<li><a href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a>
+	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a>
 	<li><a href="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</a>
 	<li><a href="edit_frs_filetype.php">Add, Delete, or Edit File Types</a>
 	<li><a href="edit_frs_processor.php">Add, Delete, or Edit Processors</a>
@@ -107,31 +107,31 @@ Search <i>(groupid, group unix name, full name)</i>:
 </ul>
 
 <p>
-<b>Global Admin Tools / Mass Insert Tools</b>
+<strong>Global Admin Tools / Mass Insert Tools</strong>
 <ul>
 	<li><a href="vhost.php">Virtual Host Administration Tool</a>
 	<li><a href="database.php">Project Database Administration</a>
 </ul>
 
-<p><b>Quick Site Statistics</b></p>
+<p><strong>Quick Site Statistics</strong></p>
 
 <?php
 
 $res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 $row = db_fetch_array($res);
-print "<p>Active site users: <b>$row[count]</b>";
+print "<p>Active site users: <strong>$row[count]</strong>";
 
 $res=db_query("SELECT count(*) AS count FROM groups");
 $row = db_fetch_array($res);
-print "<BR>Registered projects: <b>$row[count]</b>";
+print "<br />Registered projects: <strong>$row[count]</strong>";
 
 $res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
 $row = db_fetch_array($res);
-print "<BR>Active projects: <b>$row[count]</b>";
+print "<br />Active projects: <strong>$row[count]</strong>";
 
 $res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
 $row = db_fetch_array($res);
-print "<BR>Pending projects: <b>$row[count]</b>";
+print "<br />Pending projects: <strong>$row[count]</strong>";
 
 site_admin_footer(array());
 

@@ -59,7 +59,7 @@ function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$com
 
 	   	pm_header(array ("title"=>$title,'pagename'=>'pm_reporting'));
 	   	pm_reporting_header($group_id);
-	   	echo "\n<H1>$title</H1>";
+	   	echo "\n<h1>$title</h1>";
 
 		reports_quick_graph($subtitle1,$sql1,$sql2,$bar_colors);
 
@@ -82,10 +82,10 @@ if ($what) {
 
 		pm_header(array ("title"=>"Aging Report",'pagename'=>'pm_reporting'));
 		pm_reporting_header($group_id);
-		echo "\n<H1>Aging Report</H1>";
+		echo "\n<h1>Aging Report</h1>";
 
 		$time_now=time();
-//		echo $time_now."<P>";
+//		echo $time_now."<p>";
 
 		if (!$period || $period=="lifespan") {
 			$period="month";
@@ -96,7 +96,7 @@ if ($what) {
 			$span=1;
 		}
 		$sub_duration=period2seconds($period,1);
-//		echo $sub_duration,"<br>";
+//		echo $sub_duration,"<br />";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -120,7 +120,7 @@ if ($what) {
 		GraphIt($names, $values,
 			"Average Duration For Closed Tasks (days)");
 
-		echo "<P>";
+		echo "<p>";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -142,7 +142,7 @@ if ($what) {
 
 		GraphIt($names, $values, "Number of Tasks Started");
 
-		echo "<P>";
+		echo "<p>";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -164,7 +164,7 @@ if ($what) {
 
 		GraphIt($names, $values, "Number of Tasks Still Not Completed");
 
-		echo "<P>";
+		echo "<p>";
 
 		pm_footer(array());
 

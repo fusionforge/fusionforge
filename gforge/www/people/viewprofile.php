@@ -28,27 +28,27 @@ if ($user_id) {
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= ' User fetch FAILED ';
-		echo '<H2>No Such User</H2>';
+		echo '<h2>No Such User</h2>';
 	} else {
 
 		/*
 			profile set private
 		*/
 		if (db_result($result,0,'people_view_skills') != 1) {
-			echo '<H2>This User Has Set His/Her Profile to Private</H2>';
+			echo '<h2>This User Has Set His/Her Profile to Private</h2>';
 			people_footer(array());
 			exit;
 		}
 
 		echo '
-        <P>
-		<B>Skills profile for : </B>'. db_result($result,0,'realname') .
+        <p>
+		<strong>Skills profile for : </strong>'. db_result($result,0,'realname') .
         ' ('.db_result($result, 0, 'user_name') .
-        ')<br><br> <TABLE BORDER="0" WIDTH="100%">';
+        ')<br /><br /></p> <table border="0" width="100%">';
         
         displayUserSkills($user_id, 0);
         		
-		echo '</TABLE>';
+		echo '</table>';
 	}
 
 	people_footer(array());

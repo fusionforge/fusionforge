@@ -19,18 +19,17 @@ $is_admin_page='y';
 $HTML->header(array('title'=>'Survey Questions','pagename'=>'survey_admin_show_questions'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
 
 ?>
 
-<P>
-You may use any of these questions on your surveys.
-<P>
-<B><FONT COLOR="RED">NOTE: use these question_id's when you create a new survey.</FONT></B>
-<P> 
+<p>You may use any of these questions on your surveys.</p>
+
+<p><strong><span style="red">NOTE: use these question_id's when you create a new survey.</span></strong></p>
+<p>&nbsp;</p>
 <?php
 
 Function  ShowResultsEditQuestion($result) {
@@ -39,26 +38,26 @@ Function  ShowResultsEditQuestion($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 	for($i=0; $i<$cols; $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo( "</tr>");
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
 		echo( "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n");
 
-		echo "<TD><A HREF=\"edit_question.php?group_id=$group_id&question_id=".db_result($result,$j,"question_id")."\">".db_result($result,$j,"question_id")."</A></TD>\n";
+		echo "<td><a href=\"edit_question.php?group_id=$group_id&amp;question_id=".db_result($result,$j,"question_id")."\">".db_result($result,$j,"question_id")."</a></td>\n";
 
 		for($i  =  1;  $i  <  $cols;  $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo( "</tr>");
 	}
-	echo "</table>"; //</TD></TR></TABLE>");
+	echo "</table>"; //</td></tr></TABLE>");
 }
 
 /*

@@ -43,12 +43,12 @@ if ($submit) {
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= 'Error adding databse: '.db_error();
 		} else {
-			$feedback .= "Group <i>".$group->getUnixName()."</i> added already active database";
+			$feedback .= "Group <em>".$group->getUnixName()."</em> added already active database";
 		}
 
 	} else {
 
-		$feedback .=	"<b>Unable to insert already active database..</b>";
+		$feedback .=	"<strong>Unable to insert already active database..</strong>";
 
 	}
 			
@@ -96,7 +96,7 @@ if ($displaydb) {
 
 	$row_db = db_fetch_array($res_db);
 
-	print '<hr><h3>Displaying Databases of Type: '.$row_db['statename'].' </h3>';
+	print '<hr /><h3>Displaying Databases of Type: '.$row_db['statename'].' </h3><ul>';
 
 	$res_db = db_query("
 		SELECT * 
@@ -107,9 +107,10 @@ if ($displaydb) {
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<li><a href="/project/admin/database.php?group_id='.$row_db['group_id'].'">'.$row_db['dbname']."</a>";
+		print '<li><a href="/project/admin/database.php?group_id='.$row_db['group_id'].'">'.$row_db['dbname']."</a></li>";
 
 	}
+	print "</ul>";
 	
 
 }
@@ -117,7 +118,7 @@ if ($displaydb) {
 
 
 ?>
-<hr>
+<hr />
 
 <h3>Add an already active database</h3>
 

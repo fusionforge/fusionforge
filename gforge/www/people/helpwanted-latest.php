@@ -27,7 +27,7 @@ people_header(array('title'=>'Help Wanted Latest Posts','pagename'=>'people_help
 		"AND people_job.status_id=1 ".
                 "ORDER BY date DESC";
 	$result=db_query($sql,30);
-        echo people_show_job_list($result);
+        echo people_show_job_list($result) . '</p>';
 
 }
 

@@ -24,10 +24,10 @@ if ($diary_user) {
 	echo $HTML->header(array('title'=>'My Diary And Notes'));
 
 	echo '
-	<H2>Diary And Notes For: '. $user_obj->getRealName() .'</H2>
-	<P>
+	<h2>Diary And Notes For: '. $user_obj->getRealName() .'</h2>
+	<p>&nbsp;</p>
 
-	<P>';
+	<p>&nbsp;</p>';
 
 	echo $HTML->boxTop('Existing Diary And Note Entries');
 
@@ -35,13 +35,13 @@ if ($diary_user) {
 		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
 		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
-			echo '<TR><TD COLSPAN=2>Entry Not Found For This User.</TD></TR>';
+			echo '<tr><td colspan="2">Entry Not Found For This User.</td></tr>';
 		} else {
-			echo '<TR><TD COLSPAN=2><B>Date:</B> '. date($sys_datefmt, db_result($res,$i,'date_posted')) .'<BR>
-			<B>Subject:</B> '. db_result($res,$i,'summary') .'<P>
-			<B>Body:</B><BR>
+			echo '<tr><td colspan="2"><strong>Date:</strong> '. date($sys_datefmt, db_result($res,$i,'date_posted')) .'<br />
+			<strong>Subject:</strong> '. db_result($res,$i,'summary') .'<p>
+			<strong>Body:</strong><br />
 			'. nl2br(db_result($res,$i,'details')) .'
-			</TD></TR>';
+			</p></td></tr>';
 		}
 	}
 
@@ -57,17 +57,17 @@ if ($diary_user) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<TR><TD COLSPAN=2><B>This User Has No Diary Entries</B></TD></TR>';
+			<tr><td colspan="2"><strong>This User Has No Diary Entries</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="'. $PHP_SELF .'?diary_id='.
-				db_result($result,$i,'id').'&diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</A></TD>'.
-				'<TD>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. $PHP_SELF .'?diary_id='.
+				db_result($result,$i,'id').'&amp;diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</a></td>'.
+				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
-		<TR><TD COLSPAN="2" BGCOLOR="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</TD></TR>';
+		<tr><td colspan="2" bgcolor="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</td></tr>';
 	}
 
 	echo $HTML->boxBottom();

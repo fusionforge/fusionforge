@@ -26,30 +26,30 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics"));
 
 echo "\n\n";
 
-print '<DIV ALIGN="CENTER">' . "\n";
-print '<font size="+1"><b>Sitewide Statistics Graphs</b></font><BR>' . "\n";
+print '<div align="center">' . "\n";
+print '<h3>Sitewide Statistics Graphs</h3><br />' . "\n";
 ?>
 
-<HR>
+<hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td align="center"><a href="index.php">OVERVIEW STATS</a></td>
-<td align="center"><a href="projects.php">PROJECT STATS</a></td>
-<td align="center"><B>SITE GRAPHS</B></td>
+<tr align="center">
+<td><a href="index.php">OVERVIEW STATS</a></td>
+<td><a href="projects.php">PROJECT STATS</a></td>
+<td><strong>SITE GRAPHS</strong></td>
 </tr>
 </table>
 
-<HR>
+<hr />
 
-<BR><BR>
-<IMG SRC="views_graph.png">
-<BR><BR>
-<IMG SRC="views_graph.png?monthly=1">
-<BR><BR>
-<IMG SRC="users_graph.png">
-<BR><BR>
-</DIV>
+<br /><br />
+<img src="views_graph.png" alt="" />
+<br /><br />
+<img src="views_graph.png?monthly=1" alt="" />
+<br /><br />
+<img src="users_graph.png" alt="" />
+<br /><br />
+</div>
 
 <?php
 $HTML->footer( array() );

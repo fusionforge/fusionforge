@@ -40,7 +40,7 @@ if ($project->enableAnonCVS()) {
 	$project->getUnixName().
 	' login<br />&nbsp;<br />cvs -z3 -d:pserver:anonymous@'.
 	$sys_cvs_host.':/cvsroot/'.
-	$project->getUnixName().' co <i>modulename</i></tt></p><p>'.
+	$project->getUnixName().' co <em>modulename</em></tt></p><p>'.
 	$Language->getText('cvs', 'anoncvsup').'</p>';
 }
 else {
@@ -51,7 +51,7 @@ else {
 print $Language->getText('cvs', 'devcvs').' 
 
 <p><tt>export CVS_RSH=ssh
-<br />&nbsp;<br />cvs -z3 -d:ext:<i>developername</i>@'.$sys_cvs_host.':/cvsroot/'.$project->getUnixName().' co <i>modulename</i></tt></p>';
+<br />&nbsp;<br />cvs -z3 -d:ext:<em>developername</em>@'.$sys_cvs_host.':/cvsroot/'.$project->getUnixName().' co <em>modulename</em></tt></p>';
 
 // ################## summary info
 
@@ -65,7 +65,7 @@ if (db_numrows($res_cvshist) < 1) {
 	//print '<p>This project has no CVS history.</p>';
 } else {
 
-print '<p><b>Developer (30 day/Commits) (30 day/Adds)</b><br />&nbsp;';
+print '<p><strong>Developer (30 day/Commits) (30 day/Adds)</strong><br />&nbsp;';
 
 while ($row_cvshist = db_fetch_array($res_cvshist)) {
 	print '<br />'.$row_cvshist['user_name'].' ('.$row_cvshist['cvs_commits_wk'].'/'
@@ -87,7 +87,7 @@ if ($project->enableAnonCVS() || !$anonymous) {
 	print $Language->getText('cvs', 'browsetree').' 
 <ul>
 <li><a href="'.account_group_cvsweb_url($project->getUnixName()).'">
-<b>'.$Language->getText('cvs', 'browseit').'</b></a>';
+<strong>'.$Language->getText('cvs', 'browseit').'</strong></a>';
 }
 
 print $HTML->boxBottom();

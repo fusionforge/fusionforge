@@ -107,34 +107,34 @@ if (session_loggedin()) {
 	echo site_user_header(array('title'=>'My Diary And Notes','pagename'=>'my_diary'));
 
 	echo '
-	<P>
-	<H3>'. $info_str .'</H3>
-	<P>
+	<p>&nbsp;</p>
+	<h3>'. $info_str .'</h3>
+	<p>
 	<table>
-	<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="'. $proc_str .'" VALUE="1">
-	<INPUT TYPE="HIDDEN" NAME="diary_id" VALUE="'. $_diary_id .'">
-	<TR><TD COLSPAN="2"><B>Summary:</B><BR>
-		<INPUT TYPE="TEXT" NAME="summary" SIZE="45" MAXLENGTH="60" VALUE="'. $_summary .'">
-	</TD></TR>
+	<form action="'. $PHP_SELF .'" method="post">
+	<input type="hidden" name="'. $proc_str .'" value="1">
+	<input type="hidden" name="diary_id" value="'. $_diary_id .'">
+	<tr><td colspan="2"><strong>Summary:</strong><br />
+		<input type="text" name="summary" size="45" maxlength="60" value="'. $_summary .'" />
+	</td></tr>
 
-	<TR><TD COLSPAN="2"><B>Details:</B><BR>
-		<TEXTAREA NAME="details" ROWS="15" COLS="60" WRAP="HARD">'. $_details .'</TEXTAREA>
-	</TD></TR>
-	<TR><TD COLSPAN="2">
-		<P>
-		<INPUT TYPE="SUBMIT" NAME="submit" VALUE="SUBMIT ONLY ONCE">
-		&nbsp; <INPUT TYPE="CHECKBOX" NAME="is_public" VALUE="1" '. (($_is_public)?'CHECKED':'') .'> Is Public
-		<P>
-		If marked as public, your entry will be mailed to any 
+	<tr><td colspan="2"><strong>Details:</strong><br />
+		<textarea name="details" rows="15" cols="60" wrap="hard">'. $_details .'</textarea>
+	</td></tr>
+	<tr><td colspan="2">
+		<p>
+		<input type="submit" name="submit" value="SUBMIT ONLY ONCE" />
+		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked=\"checked\"':'') .' /> Is Public
+		</p>
+		<p>If marked as public, your entry will be mailed to any
 		monitoring users when it is first submitted.
-		<P>
-		</FORM>
-	</TD></TR>
+		</p>
+		</form>
+	</td></tr>
 
-	</TABLE>
+	</table></p>
 
-	<P>';
+	<p>';
 
 	echo $HTML->boxTop('Existing Diary And Note Entries');
 
@@ -144,18 +144,18 @@ if (session_loggedin()) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<B>You Have No Diary Entries</B>';
+			<strong>You Have No Diary Entries</strong>';
 		echo db_error();
 	} else {
-		echo '&nbsp;</TD></TR>';
+		echo '&nbsp;</td></tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="'. $PHP_SELF .'?diary_id='.
-				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A></TD>'.
-				'<TD>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</TD></TR>';
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. $PHP_SELF .'?diary_id='.
+				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
+				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
-		<TR><TD COLSPAN="2" BGCOLOR="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</TD></TR>';
+		<tr><td colspan="2" style="background-color:'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</td></tr>';
 	}
 
 	echo $HTML->boxBottom();

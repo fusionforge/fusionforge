@@ -91,7 +91,7 @@ function util_cvs_query($path, $threshold = 604800, $module = "alexandria", $cvs
 		//
 		$result["status"]    = "<font size=\"-2\"><a href=\"" . $result["viewcvs"] . "\">" . $cvsfile . "</a>&nbsp;" . $result["version"] . "&nbsp;" . $result["date_RFC"] . "&nbsp;" . $result["author"] . "</font>";
 		if (time() < ($result["date_UNIX"] + $threshold)) {
-			$result["status"] = "<b><font color=\"#000000\">" . $result["status"] . "</b></font>";
+			$result["status"] = "<strong><font color=\"#000000\">" . $result["status"] . "</strong></font>";
 		} // if
 
 	} // if ... else

@@ -72,13 +72,13 @@ $HTML->header(array('title'=>"Lost Password Login"));
 echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
 ?>
 
-<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <p><?php echo $Language->getText('account_lostlogin','newpasswd'); ?>:
-<br><input type="password" name="passwd">
+<br /><input type="password" name="passwd" /></p>
 <p><?php echo $Language->getText('account_lostlogin','newpasswd2'); ?>:
-<br><input type="password" name="passwd2">
-<input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>">
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_lostlogin','update'); ?>">
+<br /><input type="password" name="passwd2" />
+<input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" /></p>
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_lostlogin','update'); ?>" />
 </form>
 
 <?php

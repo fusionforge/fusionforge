@@ -74,37 +74,37 @@ $images_res = db_query("
 
 ?>
 
-<P>
-<FORM action="<?php echo $PHP_SELF; ?>" method="POST">
-<INPUT type="hidden" name="group_id" value="<?php echo $group->getID(); ?>">
+<p>
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
-<P>Descriptive Group Name:
-<BR><INPUT type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>">
+<p>Descriptive Group Name:
+<br /><input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>"></p>
 
-<P>Short Description (255 Character Max, HTML will be stripped from this description):
-<BR><TEXTAREA cols=80 rows=3 wrap="virtual" name="form_shortdesc">
-<?php echo $group->getDescription(); ?></TEXTAREA>
+<p>Short Description (255 Character Max, HTML will be stripped from this description):
+<br /><textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
+<?php echo $group->getDescription(); ?></textarea></p>
 
-<P>Homepage Link:
-<br><tt>http://</tt><INPUT type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>">
-<br>
+<p>Homepage Link:
+<br /><tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
+<br />
 
 
 <?php
 /* NOT ACTIVE YET
 
-<br>Logo Image:
+<br />Logo Image:
 <?php echo html_build_select_box($images_res, 'logo_image_id', $group->getLogoImageID(), true); ?>
  (first, upload via <a href="editimages.php?group_id='.$group_id.'">Multimedia Manager</a>, 
- dimensions 200x200 max)<br>
+ dimensions 200x200 max)<br />
 */
 
 ?>
 
-<HR>
+<hr />
 
-<H3>Active Features:</H3>
-<P>
+<h3>Active Features:</h3>
+<p>
 
 
 <?php
@@ -127,133 +127,133 @@ function c($v) {
 <table>
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_mail" VALUE="1" <?php echo c($group->usesMail()); ?> ><BR>
+ <input type="CHECKBOX" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> ><br />
 </td>
 <td>
-<B>Use Mailing Lists</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_survey" VALUE="1" <?php echo c($group->usesSurvey()); ?> ><BR>
-</td>
-<td>
-<B>Use Surveys</B>
+<strong>Use Mailing Lists</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_forum" VALUE="1" <?php echo c($group->usesForum()); ?>  ><BR>
+ <input type="CHECKBOX" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> ><br />
 </td>
 <td>
-<B>Use Forums</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_pm" VALUE="1" <?php echo c($group->usesPM()); ?> ><BR>
-</td>
-<td>
-<B>Use Project/Task Manager</B>
+<strong>Use Surveys</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_cvs" VALUE="1" <?php echo c($group->usesCVS()); ?> ><BR>
+ <input type="CHECKBOX" name="use_forum" value="1" <?php echo c($group->usesForum()); ?>  ><br />
 </td>
 <td>
-<B>Use CVS</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="enable_pserver" VALUE="1" <?php echo c($group->enablePserver()); ?> ><BR>
-</td>
-<td>
-<B>Enable pserver</B>
+<strong>Use Forums</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="enable_anoncvs" VALUE="1" <?php echo c($group->enableAnonCVS()); ?> ><BR>
+ <input type="CHECKBOX" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> ><br />
 </td>
 <td>
-<B>Enable anonymous CVS</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_news" VALUE="1" <?php echo c($group->usesNews()); ?> ><BR>
-</td>
-<td>
-<B>Use News</B>
+<strong>Use Project/Task Manager</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_docman" VALUE="1" <?php echo c($group->usesDocman()); ?> >
+ <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesCVS()); ?> ><br />
 </td>
 <td>
-<B>Use Doc Mgr</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_ftp" VALUE="1" <?php echo c($group->usesFTP()); ?> >
-</td>
-<td>
-<B>Use FTP</B>
+<strong>Use CVS</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_tracker" VALUE="1" <?php echo c($group->usesTracker()); ?> >
+ <input type="CHECKBOX" name="enable_pserver" value="1" <?php echo c($group->enablePserver()); ?> ><br />
 </td>
 <td>
-<B>Use Tracker</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_frs" VALUE="1" <?php echo c($group->usesFRS()); ?> >
-</td>
-<td>
-<B>Use File Release System</B>
+<strong>Enable pserver</strong>
 </td>
 </tr>
 
 <tr>
 <td>
- <INPUT TYPE="CHECKBOX" NAME="use_stats" VALUE="1" <?php echo c($group->usesStats()); ?> >
+ <input type="CHECKBOX" name="enable_anoncvs" value="1" <?php echo c($group->enableAnonCVS()); ?> ><br />
 </td>
 <td>
-<B>Use Statistics</B>
+<strong>Enable anonymous CVS</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_news" value="1" <?php echo c($group->usesNews()); ?> ><br />
+</td>
+<td>
+<strong>Use News</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> >
+</td>
+<td>
+<strong>Use Doc Mgr</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> >
+</td>
+<td>
+<strong>Use FTP</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> >
+</td>
+<td>
+<strong>Use Tracker</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> >
+</td>
+<td>
+<strong>Use File Release System</strong>
+</td>
+</tr>
+
+<tr>
+<td>
+ <input type="CHECKBOX" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> >
+</td>
+<td>
+<strong>Use Statistics</strong>
 </td>
 </tr>
 
 </table>
 
 
-<P>
-If you wish, you can provide default email addresses to which new submissions will be sent.<BR>
-<B>New Document Submissions:</B><BR><INPUT TYPE="TEXT" NAME="new_doc_address" VALUE="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
+<p>
+If you wish, you can provide default email addresses to which new submissions will be sent.<br />
+<strong>New Document Submissions:</strong><br /><input type="TEXT" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
 (send on all updates)
-<INPUT TYPE="CHECKBOX" NAME="send_all_docs" VALUE="1" <?php echo c($group->docEmailAll()); ?> ><BR>
+<input type="CHECKBOX" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> ><br />
 
-<HR>
-<P><INPUT type="submit" name="submit" value="Update">
-</FORM>
+<hr />
+<p><input type="submit" name="submit" value="Update">
+</form>
 
 <?php
 

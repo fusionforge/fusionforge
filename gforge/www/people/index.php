@@ -20,21 +20,19 @@ if ($group_id) {
 	people_header(array('title'=>'Help Wanted System','pagename'=>'people_proj','titlevals'=>array(group_getname($group_id))));
 
 	echo '
-	<P>
-	Here is a list of positions available for this project.
-	<P>';
+	<p>Here is a list of positions available for this project.</p>
+	<p>';
 
-	echo people_show_project_jobs($group_id);
+	echo people_show_project_jobs($group_id) . '</p>';
 	
 } else if ($category_id) {
 
 	people_header(array('title'=>'Help Wanted System','pagename'=>'people_cat','titlevals'=>array(people_get_category_name($category_id))));
 
 	echo '
-		<P>
-		Click job titles for more detailed descriptions.
-		<P>';
-	echo people_show_category_jobs($category_id);
+		<p>Click job titles for more detailed descriptions.</p>
+		<p>';
+	echo people_show_category_jobs($category_id) . '</p>';
 
 } else {
 

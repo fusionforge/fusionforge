@@ -18,7 +18,7 @@ $is_admin_page='y';
 survey_header(array('title'=>'Survey Results','pagename'=>'survey_admin_show_results'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<H1>Permission Denied</H1>";
+	echo "<h1>Permission Denied</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -29,34 +29,34 @@ Function  ShowResultsSurvey($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background=color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 
 	for($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo "</tr>";
 
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
 		if ($j%2==0) {
-			$row_bg="#FFFFFF";
+			$row_bg="white";
 		} else {
 			$row_bg="$GLOBALS[COLOR_LTBACK1]";
 		}
 
-		echo "<tr BGCOLOR=\"$row_bg\">\n";
+		echo "<tr style=\"background-color:$row_bg\">\n";
 
-		echo "<TD><A HREF=\"$PHP_SELF?group_id=$group_id&survey_id=".db_result($result,$j,"survey_id")."\">".db_result($result,$j,"survey_id")."</A></TD>\n";
+		echo "<td><a href=\"$PHP_SELF?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">".db_result($result,$j,"survey_id")."</a></td>\n";
 
 		for($i  =  1;  $i  <  $cols;  $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>";
+	echo "</table>"; //</td></tr></TABLE>";
 }
 
 
@@ -66,34 +66,34 @@ Function  ShowResultsAggregate($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background=color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 
 	for($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo "</tr>";
 
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
 		if ($j%2==0) {
-			$row_bg="#FFFFFF";
+			$row_bg="white";
 		} else {
 			$row_bg="$GLOBALS[COLOR_LTBACK1]";
 		}
 
-		echo "<tr BGCOLOR=\"$row_bg\">\n";
+		echo "<tr style=\"background-color:$row_bg\">\n";
 
-		echo "<TD><A HREF=\"show_results_aggregate.php?group_id=$group_id&survey_id=".db_result($result,$j,"survey_id")."\">".db_result($result,$j,"survey_id")."</A></TD>\n";
+		echo "<td><a href=\"show_results_aggregate.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">".db_result($result,$j,"survey_id")."</a></td>\n";
 
 		for($i  =  1;  $i  <  $cols;  $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>";
+	echo "</table>"; //</td></tr></TABLE>";
 }
 
 
@@ -104,34 +104,34 @@ Function  ShowResultsCustomer($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<TABLE BGCOLOR=\"NAVY\"><TR><TD BGCOLOR=\"NAVY\">*/ "<table border=0>\n";
+	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr BGCOLOR=\"$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr style=\"background=color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
 
 	for($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><FONT COLOR=\"WHITE\"><B>%s</th>\n",  db_fieldname($result,$i));
+		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 	}
 	echo "</tr>";
 
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
 		if ($j%2==0) {
-			$row_bg="#FFFFFF";
+			$row_bg="white";
 		} else {
 			$row_bg="$GLOBALS[COLOR_LTBACK1]";
 		}
 
-		echo "<tr BGCOLOR=\"$row_bg\">\n";
+		echo "<tr style=\"background-color:$row_bg\">\n";
 
-		echo "<TD><A HREF=\"show_results_individual.php?group_id=$group_id&survey_id=$survey_id&customer_id=".db_result($result,$j,"cust_id")."\">".db_result($result,$j,"cust_id")."</A></TD>\n";
+		echo "<td><a href=\"show_results_individual.php?group_id=$group_id&amp;survey_id=$survey_id&amp;customer_id=".db_result($result,$j,"cust_id")."\">".db_result($result,$j,"cust_id")."</a></td>\n";
 
 		for($i  =  1;  $i  <  $cols;  $i++)  {
-			printf("<TD>%s</TD>\n",db_result($result,$j,$i));
+			printf("<td>%s</td>\n",db_result($result,$j,$i));
 		}
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>";
+	echo "</table>"; //</td></tr></TABLE>";
 }
 
 

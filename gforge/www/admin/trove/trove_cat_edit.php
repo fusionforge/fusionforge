@@ -104,34 +104,34 @@ site_admin_header(array('title'=>'Site Admin: Trove - Edit Category'));
 <form action="trove_cat_edit.php" method="post">
 
 <p>Parent Category:
-<br><SELECT name="form_parent">
+<br /><select name="form_parent">
 
 <?php
 // generate list of possible parents
 $res_parent = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
 
 while ($row_parent = db_fetch_array($res_parent)) {
-	print ('<OPTION value="'.$row_parent["trove_cat_id"].'"');
-	if ($row_cat["parent"] == $row_parent["trove_cat_id"]) print ' selected';
-	print ('>'.$row_parent["fullname"]."\n");
+	print ('<option value="'.$row_parent["trove_cat_id"].'"');
+	if ($row_cat["parent"] == $row_parent["trove_cat_id"]) print ' selected="selected"';
+	print ('>'.$row_parent["fullname"]."</option>\n");
 }
 
 ?>
-</SELECT>
+</select>
 
 <input type="hidden" name="form_trove_cat_id" value="<?php
-  print $GLOBALS['trove_cat_id']; ?>">
+  print $GLOBALS['trove_cat_id']; ?>" /></p>
 
 <p>New category short name (no spaces, unix-like):
-<br><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>">
+<br /><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>" /></p>
 
 <p>New category full name (VARCHAR 80):
-<br><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>">
+<br /><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>" /></p>
 
 <p>New category description (VARCHAR 255):
-<br><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>">
+<br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
-<br><input type="submit" name="submit" value="Update"><input type="submit" name="delete" value="Delete">
+<br /><input type="submit" name="submit" value="Update" /><input type="submit" name="delete" value="Delete" /></p>
 </form>
 
 <?php

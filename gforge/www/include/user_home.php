@@ -18,46 +18,46 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 
 ?>
 
-<P>
-<TABLE width=100% cellpadding=2 cellspacing=2 border=0><TR valign=top>
-<TD width=50%>
+<p>
+<table width="100%" cellpadding="2" cellspacing="2" border="0"><tr valign="top">
+<td width="50%">
 
 <?php echo $HTML->boxTop("Personal Information"); ?>
-<TR>
-	<TD>User ID: </TD>
-	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>
-</TR>
+<tr>
+	<td>User ID: </td>
+	<td><strong><?php print $user_id; ?></strong> ( <a href="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><strong>Skills Profile</strong></a> )</td>
+</tr>
 
-<TR valign=top>
-	<TD>Login Name: </TD>
-	<TD><B><?php print $user->getUnixName(); ?></B></TD>
-</TR>
+<tr valign="top">
+	<td>Login Name: </td>
+	<td><strong><?php print $user->getUnixName(); ?></strong></td>
+</tr>
 
-<TR valign=top>
-	<TD>Real Name: </TD>
-	<TD><B><?php print $user->getRealName(); ?></B></TD>
-</TR>
+<tr valign="top">
+	<td>Real Name: </td>
+	<td><strong><?php print $user->getRealName(); ?></strong></td>
+</tr>
 
-<TR valign=top>
-	<TD>Email Addr: </TD>
-	<TD>
-	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
-	</TD>
-</TR>
+<tr valign="top">
+	<td>Email Addr: </td>
+	<td>
+	<strong><a href="/sendmessage.php?touser=<?php print $user_id; 
+		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></a></strong>
+	</td>
+</tr>
 <?php if ($user->getJabberAddress()) { ?>
-<TR valign=top>
-	<TD>Jabber Addr: </TD>
-	<TD>
-	<A HREF="jabber:<?php print $user->getJabberAddress().'"><B>'.$user->getJabberAddress().'</B></A>'; ?>
-	</TD>
-</TR>
+<tr valign="top">
+	<td>Jabber Addr: </td>
+	<td>
+	<a href="jabber:<?php print $user->getJabberAddress().'"><strong>'.$user->getJabberAddress().'</strong></a>'; ?>
+	</td>
+</tr>
 <?php } ?>
-<TR>
-	<TD>
+<tr>
+	<td>
 	Site Member Since: 
-	</TD>
-	<TD><B><?php print date($sys_datefmt, $user->getAddDate()); ?></B>
+	</td>
+	<td><strong><?php print date($sys_datefmt, $user->getAddDate()); ?></strong>
 	<?php
 
 	echo $HTML->boxMiddle('Peer Rating',false,false);
@@ -79,17 +79,17 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	$res=db_query("SELECT count(*) from user_diary ".
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo 'Diary/Note Entries: '.db_result($res,0,0).'
-	<P>
-	<A HREF="/developer/diary.php?diary_user='. $user_id .'">View Diary & Notes</A>
-	<P>
-	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<p>
+	<a href="/developer/diary.php?diary_user='. $user_id .'">View Diary & Notes</a><?p>
+	<p>
+	<a href="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .'Monitor This Diary</a></p>';
 
 	?>
-</TD></TR>
+</td></tr>
 
-<TR><TD COLSPAN=2>
-	<H4>Project Info</H4>
-	<P>
+<tr><td colspan="2">
+	<h4>Project Info</h4>
+	<p>
 <?php
 	// now get listing of groups for that user
 	$res_cat = db_query("SELECT groups.group_name, 
@@ -103,22 +103,22 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {
 	?>
-	<p>This developer is not a member of any projects.
+	<p>This developer is not a member of any projects.</p>
 	<?php
 } else { // endif no groups
-	print "<p>This developer is a member of the following groups:<BR>&nbsp;";
+	print "<p>This developer is a member of the following groups:<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ("<BR>" . "<A href=\"/projects/$row_cat[unix_group_name]/\">$row_cat[group_name]</A>\n");
+		print ("<br />" . "<a href=\"/projects/$row_cat[unix_group_name]/\">$row_cat[group_name]</a>\n");
 	}
-	print "</ul>";
+	print "</ul></p>";
 } // end if groups
 
 echo $HTML->boxBottom(); ?>
 
-</TD>
+</td>
 
 
-<TD>
+<td>
 
 <?php 
 $me = session_get_user(); 
@@ -127,29 +127,30 @@ if ($user->usesRatings() && (!$me || $me->usesRatings())) {
 echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 ?>
 
-	<CENTER>
+	<div align="center">
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
-	</CENTER>
+	</div>
 
 <?php echo $Language->getText('users','peerinfo2', $GLOBALS[sys_name]);
 
 } else if ($me && !$me->usesRatings()) { ?>
 <p>
-<i>
+<em>
 <?php echo $Language->getText('users','optout'); ?>
-</i>
+</em>
 </p>
 <?php } ?>
-</TD>
+</td>
 
 
-</TR>
-</TABLE>
+</tr>
+</table>
+</p>
+<p>
+<table width="100%" cellpadding="2" cellspacing="2" border="0"><tr valign="top">
+<tr><td colspan="2">
 
-<TABLE width=100% cellpadding=2 cellspacing=2 border=0><TR valign=top>
-<TR><TD COLSPAN="2">
-
-<?php 
+<?php
 
 if (session_loggedin()) {
 
@@ -157,42 +158,42 @@ if (session_loggedin()) {
 
 	?>
 	&nbsp;
-	<P>
-	<H3>Send a Message to <?php echo $user->getRealName(); ?></H3>
-	<P>
-	<FORM ACTION="/sendmessage.php" METHOD="POST">
-	<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $user_id; ?>">
+	<p>&nbsp;</p>
+	<h3>Send a Message to <?php echo $user->getRealName(); ?></h3>
+	<p>
+	<form action="/sendmessage.php" method="post">
+	<input type="hidden" name="touser" value="<?php echo $user_id; ?>" />
 
-	<B>Your Email Address:</B><BR>
-	<B><?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?></B>
-	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?>">
-	<P>
-	<B>Your Name:</B><BR>
-	<B><?php echo $u->getRealName(); ?></B>
-	<INPUT TYPE="HIDDEN" NAME="name" VALUE="<?php echo $u->getRealName(); ?>">
-	<P>
-	<B>Subject:</B><BR>
-	<INPUT TYPE="TEXT" NAME="subject" SIZE="30" MAXLENGTH="40" VALUE="">
-	<P>
-	<B>Message:</B><BR>
-	<TEXTAREA NAME="body" ROWS="15" COLS="50" WRAP="HARD"></TEXTAREA>
-	<P>
-	<CENTER>
-	<INPUT TYPE="SUBMIT" NAME="send_mail" VALUE="Send Message">
-	</CENTER>
-	</FORM>
+	<strong>Your Email Address:</strong><br />
+	<strong><?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?></strong>
+	<input type="hidden" name="email" value="<?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?>" />
+	<p>
+	<strong>Your Name:</strong><br />
+	<strong><?php echo $u->getRealName(); ?></strong>
+	<input type="hidden" name="name" value="<?php echo $u->getRealName(); ?>" /></p>
+	<p>
+	<strong>Subject:</strong><br />
+	<input type="TEXT" name="subject" size="30" maxlength="40" value="" /></p>
+	<p>
+	<strong>Message:</strong><br />
+	<textarea name="body" rows="15" cols="50" wrap="hard"></textarea></p>
+	<p>
+	<div align="center">
+	<input type="submit" name="send_mail" value="Send Message" />
+	</div></p>
+	</form></p>
 	<?php
 
 } else {
 
-	echo '<H3>You Could Send a Message if you were logged in</H3>';
+	echo '<h3>You Could Send a Message if you were logged in</h3>';
 
 }
 
 ?>
 
-</TD></TR>
-</TABLE>
+</td></tr>
+</table></p>
 
 <?php
 

@@ -40,7 +40,7 @@ function pm_header($params) {
 	if ($pg) {
 		echo "<h3>Project: ". $pg->getName() ."</h3>";
 	}
-	echo "<p><b>";
+	echo "<p><strong>";
 
 	if ($group_project_id) {
 		if (session_loggedin()) {
@@ -51,7 +51,7 @@ function pm_header($params) {
 	}
 	echo '
 		<a href="/pm/reporting/?group_id='.$group_id.'">Reporting</a> | 
-		<a href="/pm/admin/?group_id='.$group_id.'">Admin</a> </b>';
+		<a href="/pm/admin/?group_id='.$group_id.'">Admin</a> </strong>';
 }
 
 function pm_footer($params) {
