@@ -16,19 +16,19 @@ require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functi
 
 if ($#ARGV < 1) {
     debug "Usage: register-theme <dirname> <theme name>" ;
-    debug "The theme must be in /usr/lib/gforge/www/themes/<dirname>/" ;
+    debug "The theme must be in /usr/share/gforge/www/themes/<dirname>/" ;
     exit 1 ;
 }
 
 $thdir = $ARGV [0] ;
 $thname = $ARGV [1] ;
 
-unless (-d "/usr/lib/gforge/www/themes/$thdir") {
-    debug "The directory /usr/lib/gforge/www/themes/$thdir does not exist" ;
+unless (-d "/usr/share/gforge/www/themes/$thdir") {
+    debug "The directory /usr/share/gforge/www/themes/$thdir does not exist" ;
     exit 1 ;
 }
-unless (-e "/usr/lib/gforge/www/themes/$thdir/Theme.class") {
-    debug "The file /usr/lib/gforge/www/themes/$thdir/Theme.class does not exist" ;
+unless (-e "/usr/share/gforge/www/themes/$thdir/Theme.class") {
+    debug "The file /usr/share/gforge/www/themes/$thdir/Theme.class does not exist" ;
     exit 1 ;
 }
 

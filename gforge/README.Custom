@@ -81,7 +81,7 @@ variables are defined by the script and there's no simple way of
 knowing what they are apart from looking at the script itself.  To
 find out exactly what these variables are filled out with, search for
 the "getText('<pagename>','<category'>" string in the scripts
-contained in the /usr/lib/gforge/www/ directory.  This is not
+contained in the /usr/share/gforge/www/ directory.  This is not
 always easy to do.
 
   Your best bet is to guess the meaning of the $1, $2, etc. variables
@@ -110,7 +110,7 @@ following:
    Foobaric.tab);
 2. Copy and paste the appropriate line (including the "handle" -- the
    first two fields) in /etc/gforge/languages-local/Foobaric.tab;
-   or /usr/lib/gforge/www/themes/<theme_name>/Foobaric.tab 
+   or /usr/share/gforge/www/themes/<theme_name>/Foobaric.tab 
    (For this last one the modification will only apply on a given theme)
 3. Read it to find out about the $n variables;
 4. Replace the third field with my own customised version.

@@ -6,7 +6,7 @@ Server Setup
 1. Extract the tar file into the root GForge directory.  For example, if
 your root diectory is /usr/share/gforge/www, then
 
-	cd /usr/lib/gforge/www ; tar xvf {tarfile}
+	cd /usr/share/gforge/www ; tar xvf {tarfile}
 
 should work.  This will create a soap directory underneath the root directory
 and there should be 5 files plus one sub-directory:
