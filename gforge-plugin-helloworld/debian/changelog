@@ -1,3 +1,9 @@
+sourceforge-plugin-helloworld (0.2-2) experimental; urgency=low
+
+  * Moved to experimental.
+
+ -- Roland Mas <lolando@debian.org>  Sat,  7 Dec 2002 10:49:22 +0100
+
 sourceforge-plugin-helloworld (0.2-1) unstable; urgency=low
 
   * Rewrote to use the new hooks system.

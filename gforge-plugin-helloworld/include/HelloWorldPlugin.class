@@ -3,7 +3,7 @@
 class HelloWorldPlugin extends Plugin {
 	function HelloWorldPlugin () {
 		$this->Plugin() ;
-		$this->hooks = array () ;
+		$this->name = "helloworld" ;
 		$this->hooks[] = "usermenu" ;
 	}
 
@@ -17,16 +17,9 @@ class HelloWorldPlugin extends Plugin {
 				echo ' [off]' ;
 			}
 			echo '</A>' ;
-		} elseif ($hookname == "blah") {
-			// Blah
+		} elseif ($hookname == "blahblahblah") {
+			// ...
 		}
-	}
-
-	function GetHooks () {
-		// echo "Entered HelloWorldPlugin->GetHooks" ;
-		$hooks = array () ;
-		$hooks [] = "usermenu" ;
-		return $hooks ;
 	}
 }
 
