@@ -19,6 +19,8 @@
         <jar href="commons-logging.jar"/>
         <jar href="jaxrpc.jar"/>
         <jar href="saaj.jar"/>
+        <jar href="jfreechart-0.9.8.jar"/>
+        <jar href="jcommon-0.8.0.jar"/>
     </resources>
     <application-desc main-class="org.gforge.soapclient.GUI"/>
 </jnlp>

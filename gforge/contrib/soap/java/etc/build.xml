@@ -41,7 +41,10 @@
     <target name="uploadscreenshot">
         <echo message="Uploading screenshot"/>
         <exec executable="scp" os="Linux">
-            <arg line=" /home/tom/soapclient_screenshot.png tom@infoether.com:public_html/gforge/"/>
+            <arg line=" /home/tom/soapclient_screenshot.png tom@infoether.com:public_html/gforge/soapclient/"/>
+        </exec>
+        <exec executable="scp" os="Linux">
+            <arg line=" /home/tom/soapclient_screenshot2.png tom@infoether.com:public_html/gforge/soapclient/"/>
         </exec>
     </target>
 
@@ -57,7 +60,14 @@
 	<target name="clean" depends="delete,compile">
 	</target>
 
-    <target name="deployjnlp" depends="clean,jar">
+    <target name="deployjnlpwebpage">
+        <echo message="Uploading index.html"/>
+        <exec executable="scp" os="Linux">
+            <arg line=" /home/tom/gforge/dev/gforge/contrib/soap/java/docs/index.html tom@infoether.com:public_html/gforge/soapclient"/>
+        </exec>
+    </target>
+
+    <target name="deployjnlp" depends="clean,jar,deployjnlpwebpage">
         <signjar jar="${lib}/${jarname}" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
         <echo message="Uploading jar file"/>
         <exec executable="scp" os="Linux">
@@ -66,10 +76,6 @@
         <echo message="Uploading gforgesoapclient.jnlp"/>
         <exec executable="scp" os="Linux">
             <arg line=" /home/tom/gforge/dev/gforge/contrib/soap/java/etc/gforgesoapclient.jnlp tom@infoether.com:public_html/gforge/soapclient"/>
-        </exec>
-        <echo message="Uploading index.html"/>
-        <exec executable="scp" os="Linux">
-            <arg line=" /home/tom/gforge/dev/gforge/contrib/soap/java/docs/index.html tom@infoether.com:public_html/gforge/soapclient"/>
         </exec>
     </target>
 
@@ -86,6 +92,7 @@
         <signjar jar="tmp/commons-discovery.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
         <signjar jar="tmp/jaxrpc.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
         <signjar jar="tmp/jfreechart-0.9.8.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/jcommon-0.8.0.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
     </target>
 
 </project>
