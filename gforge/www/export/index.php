@@ -52,12 +52,15 @@ project property, require project admin privilege.
 </p>
 
 <ul>
-<li><a href="nitf_sfforums.php">Project Forums</a>
-(<a href="sf_forum_0.1.dtd">&lt;sf_forum_0.1.dtd&gt;</a>)</li>
+<li><a href="forum.php">Project Forums</a>
+(<a href="forum_0.1.dtd">&lt;forum_0.1.dtd&gt;</a>)</li>
+</ul>
+
+<ul>
 <li><a href="bug_dump.php">Project Bugs</a>
-(<a href="sf_bugs_0.1.dtd">&lt;sf_bugs_0.1.dtd&gt;</a>)</li>
+(<a href="bug_0.1.dtd">&lt;bug_0.1.dtd&gt;</a>)</li>
 <li><a href="patch_dump.php">Project Patches</a>
-(<a href="sf_patches_0.1.dtd">&lt;sf_patches_0.1.dtd&gt;</a>)</li>
+(<a href="patch_0.1.dtd">&lt;patch_0.1.dtd&gt;</a>)</li>
 </ul>
 
 <h3>
