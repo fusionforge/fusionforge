@@ -49,8 +49,8 @@ computedefault(){
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTusr_share_gforge=$SHAREDIR
-	DEFAULTvar_lib_gforge=$GFGDIR/var/lib
-	DEFAULTvar_log_gforge=$GFGDIR/var/log
+	DEFAULTvar_lib_gforge=$GFGDIR/var/lib/gforge
+	DEFAULTvar_log_gforge=$GFGDIR/var/log/gforge
 	DEFAULTsys_show_source=0
 	DEFAULTsys_force_login=0
 	DEFAULTsys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
@@ -149,7 +149,7 @@ setupinout(){
 	then
 		VHOST=$ETCDIR/httpd.d/55vhost
 	fi
-	for i in $ETCDIR/httpd.d/[0-4][0-9]* $VHOST $ETCDIR/httpd.d/httpd.secrets
+	for i in $ETCDIR/httpd.d/[0-4][0-9]* $VHOST $ETCDIR/httpd.d/[6-9][0-9]* $ETCDIR/httpd.d/httpd.secrets
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
