@@ -198,7 +198,7 @@ if (db_numrows($result) > 0) {
 
 			if ($question_type != $last_question_type) {
 				echo '
-					<strong>1</strong> low &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong> high';
+					<strong>1</strong>'.$Language->getText('survey','low').'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' .$Language->getText('survey','high');
 				echo '<br />';
 
 			}
@@ -269,9 +269,9 @@ if (db_numrows($result) > 0) {
 	?>
 	<tr><td align="center" colspan="2">
 
-	<input type="submit" name="submit" value="SUBMIT" />
+	<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
 	<br />
-	<a href="/survey/privacy.php">Survey Privacy</a>
+	<a href="/survey/privacy.php"><?php echo $Language->getText('survey','survey_privacy') ?></a>
 	</td></tr>
 	</form>
 	</table>
