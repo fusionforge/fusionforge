@@ -39,33 +39,18 @@ if ($newemail) {
 	mail($newemail,$Language->getText('account_change_email', 'subject', $GLOBALS[sys_name]),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 	site_user_header(array('title'=>"Email Change Confirmation",'pagename'=>'account_change_email'));
-?>
 
-<P>An email has been sent to the new address. Follow
-the instructions in the email to complete the email change.
+	echo $Language->getText('account_change_email', 'mailsent');
 
-<P><A href="/">[ Home ]</A>
-
-<?php
 	site_user_footer(array());
 	exit();
 }
 
 
 site_user_header(array('title'=>"Change Email Address",'pagename'=>'account_change_email'));
+
+echo $Language->getText('account_change_email', 'desc');
 ?>
-
-<P>Changing your email address will require confirmation from your 
-new email address, so that we can ensure we have a good email address
-on file.
-
-<P>We need to maintain an accurate email address for each user due
-to the level of access we grant via this account. If we need to reach a user
-for issues arriving from a shell or project account, it is important that
-we be able to do so.
-
-<P>Submitting the form below will mail a confirmation URL to the new
-email address. Visiting this link will complete the email change.
 
 <FORM action="<?php echo $PHP_SELF; ?>" method="POST">
 New Email Address:
@@ -73,7 +58,7 @@ New Email Address:
 <INPUT type="submit" name="submit" value="Send Confirmation to New Address">
 </FORM>
 
-<P><A href="/"><?php echo $Language->getText('general', 'return'); ?></A>
+<P><A href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></A>
 
 <?php
 site_user_footer(array());

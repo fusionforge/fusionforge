@@ -174,7 +174,7 @@ echo $HTML->box1_top($Language->getText('frs','latest_file_releases'));
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="4"><B>This Project Has Not Released Any Files</B></TD></TR>';
+			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="4"><B>'.$Language->getText('general', 'norelease').'</B></TD></TR>';
 
 		} else {
 			/*

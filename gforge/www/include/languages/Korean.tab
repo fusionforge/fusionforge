@@ -42,6 +42,9 @@
 #   * 도움을 기다리는 프로젝트-->멤버 구함, 
 #     Code Snippet Library-->코드 라이브러리 로 변경
 #
+# 2002-05-25	Soon-Son Kwon	<kss@kldp.org>
+#   * Added a few more trivial message translation
+#
 about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
@@ -49,6 +52,8 @@ account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을
 account_change_email	section	사용자 등록 정보
 account_change_email	subject	$1 확인
 account_change_email	title	이메일 주소 변경
+account_change_email	mailsent	<P>새로 입력하신 이메일 주소로 메일이 전송되었습니다. 이메일 주소 변경을 완료하시려면 지금 보내드린 이메일 내용을 잘 읽어 보시기 바랍니다. <P><A href="/">[ 홈으로 되돌아가기 ]</A>
+account_change_email	desc	<P>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부터 확인하는 절차를 밟아야 합니다. <P>제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 중요한 일입니다. <P>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다.
 account_change_pw	confirmation	<h2>$1 비밀번호 변경 확인</h2>	<p>	축하합니다. 비밀번호가 변경되었습니다.	</p>
 account_change_pw	section	사용자 등록 정보
 account_change_pw	title	비밀번호 변경
@@ -151,7 +156,7 @@ frs	file_package	패키지
 frs	file_rel_date	날짜
 frs	file_version	버전
 frs	latest_file_releases	최근 파일 릴리즈
-general	return	[SourceForge로 되돌아가기]
+general	return	[$1로 되돌아가기]
 general	sitename	SourceForge
 general	footer	이것은 Debian에서 작동하는 SourceForge입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
 group	developer_info	개발자 정보
@@ -188,6 +193,7 @@ group	short_summary	요약
 group	short_support	지원
 group	short_survey	설문조사
 group	short_tracker	문제점 추적
+group	norelease	이 프로젝트에서는 아직 릴리즈된 파일이 없습니다.
 home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
