@@ -124,13 +124,13 @@ function show_add_snippet_box() {
 	<td><strong><?php echo $Language->getText('snippet_package','language') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_language'); ?></a>
+		<!--<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_language'); ?></a>-->
 	</td>
 
 	<td><strong><?php echo $Language->getText('snippet_package','category') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
-		<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_category'); ?></a>
+		<!-- <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_category'); ?></a>-->
 	</td>
 	</tr>
  
