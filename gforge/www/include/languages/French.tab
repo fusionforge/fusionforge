@@ -143,7 +143,7 @@ group	short_support	Support
 group	short_survey	Sondages
 group	short_tracker	Tracker
 home	about_blurb	Sourceforge est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. Sourceforge offre l'accès le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tâches, hébergement de site, archivage de fichiers, sauvegardes complètes, etc. via une interface d'administration entièrement par le web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ plus ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Participation des développeurs</B> <P>  Pour pouvoir utiliser SourceForge au mieux, il est nécéssaire de <A href="/account/register.php">s'enregistrer comme un développeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Créer un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme développeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espérons que vous aimerez Sourceforge !
-home	breaking_down_barriers	Abaisser les barrièezs du développement open source
+home	breaking_down_barriers	Abaisser les barrières du développement open source
 home	highest_ranked_users	Les développeurs les mieux classés
 home	most_active_this_week	Lesp lus actifs cette semaine
 home	sfos	Sourceforge On-Site
