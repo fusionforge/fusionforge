@@ -24,9 +24,28 @@ require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
 require_once('common/tracker/ArtifactResolution.class');
 
-header("Content-Type: text/plain");
+function beginDocument() {
+	global $sys_default_domain;
+	header("Content-Type: text/plain");
+	echo '<tracker version="1.0" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://'.$sys_default_domain.'/export/tracker.xsd">'."\n";
+}
+
+function displayError($errorMessage) {
+	echo '<error>'.$errorMessage.'</error>'."\n";
+}
+
+function endDocument() {
+	echo '</tracker>';
+	exit();
+}
+
+function endOnError($errorMessage) {
+	displayError($errorMessage);
+	endDocument();
+}
+
+
 ?>
-<tracker version="1.0" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://<?php echo $sys_default_domain; ?>/export/tracker.xsd">
 <?php
 
 $group_id = $_GET['group_id'];
@@ -37,11 +56,12 @@ if ($group_id && $atid) {
 	//	get the Group object
 	//
 	$group =& group_get_object($group_id);
+	
+	beginDocument();
 	if (!$group || !is_object($group)) {
-		echo "<error>Could not get the Group object</error>\n";
+		endOnError('Could not get the Group object');
 	} elseif ($group->isError()) {
-		echo("	<error>".$group->getErrorMessage()."</error>\n";
-		$errors = true;
+		endOnError($group->getErrorMessage());
 	}
 
 	//
@@ -49,22 +69,20 @@ if ($group_id && $atid) {
 	//
 	if (!$group->isPublic()) {
 		if (!session_loggedin()) {
-			exit_permission_denied();
+			endOnError('Permission Denied');
+			$errors = true;
 		} elseif (!user_ismember($group_id)) {
-			exit_permission_denied();
+			endOnError('Permission Denied');
 		}
 	}
-
 	//
 	//	Create the ArtifactType object
 	//
 	$ath = new ArtifactType($group,$atid);
 	if (!$ath || !is_object($ath)) {
-		echo("	<error>ArtifactType could not be created</error>\n");
-		$errors = true;
+		endOnError('ArtifactType could not be created');
 	} elseif ($ath->isError()) {
-		echo('	<error>' . $ath->getErrorMessage() . "</error>\n");
-		$errors = true;
+		endOnError($ath->getErrorMessage());
 	}
 
 	//
@@ -72,25 +90,22 @@ if ($group_id && $atid) {
 	//
 	$artifacts = new Artifacts($ath);	
 	if (!$artifacts || !is_object($ath)) {
-		echo("	<error>Artifacts could not be created</error>\n");
-		$errors = true;
+		endOnError('Artifacts could not be created');
 	}
 	if ($artifacts->isError()) {
-		echo('	<error>' . $artifacts->getErrorMessage() . "</error>\n");
-		$errors = true;
+		endOnError($artifacts->getErrorMessage());
 	}
 
 	//
 	// Loop through each artifact object and show the results
 	//
 	if (!$alist =& $artifacts->getArtifacts($offset)) {
-		echo('	<error>' . $artifacts->getErrorMessage() . "</error>\n");
+		displayError($artifacts->getErrorMessage());
 		$errors = true;
 	}
 
 	if ($errors) {
-		echo ('</tracker>');
-		exit;
+		endDocument();
 	}
 
 	for ($i=0; $i<count($alist); $i++) {
@@ -175,10 +190,12 @@ if ($group_id && $atid) {
 	}
 ?>
 	</artifact>
+</tracker>
 <?php
 	}
 } else {
-	print("	<error>Group ID Not Set</error>\n");
+	beginDocument();
+	displayError('Group ID or Artifact ID Not Set');
+	endDocument();
 }
 ?>
-</tracker>
