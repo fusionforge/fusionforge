@@ -14,6 +14,26 @@
  * Auxilary functions
  */
 
+/**
+ *	asciize() - Replace non-ascii characters with question marks
+ *
+ *	LDAP expects utf-8 encoded character string. Since we cannot
+ *	know which encoding 8-bit characters in database use, we
+ *	just replace them with question marks.
+ *
+ *  @param		string	UTF-8 encoded character string.
+ *	@return string which contains only ascii characters
+ */
+function asciize($str) {
+	if (!$str) {
+		// LDAP don't allow empty strings for some attributes
+		return '?';
+	}
+
+	return ereg_replace("[\x80-\xff]","?",$str);
+}
+ 
+
 /*
  * Error message passing facility
  */
@@ -173,8 +193,8 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['objectClass'][3]='shadowAccount';
 	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$user->getUnixName();
-	$entry['cn']=$user->getRealName();
-	$entry['gecos']=$user->getRealName();
+	$entry['cn']=asciize($user->getRealName());
+	$entry['gecos']=asciize($user->getRealName());
 	$entry['userPassword']='{crypt}'.$user->getUnixPasswd();
 	$entry['homeDirectory']="/home/users/".$user->getUnixName();
 	$entry['loginShell']=$user->getShell();
