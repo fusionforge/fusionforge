@@ -71,7 +71,7 @@ if ($projectName) {
 	$content = ob_get_contents();
 	ob_end_clean();
 	
-	if(extension_loaded('mb_string')) {
+	if(extension_loaded('mbstring')) {
 		$encoding = mb_detect_encoding($content);
 		if($encoding != 'UTF-8') {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
