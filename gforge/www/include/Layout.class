@@ -330,6 +330,7 @@ if (isset($params['group']) && $params['group']) {
 </table>
 
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<br />
 <center>
 <a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
 </center>
