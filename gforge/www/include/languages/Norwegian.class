@@ -1,0 +1,136 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Norwegian.class,v 1.5 2000/10/16 17:26:34 tperdue Exp $
+
+/*
+
+	Tim Perdue, September 7, 2000 (original English version)
+	Ragnvald Larsen, September 26, 2000 (Norsk  bokmaal oversettelse)
+	ragnvald@users.sourceforge.net
+
+*/
+
+class Norwegian extends BaseLanguage {
+
+	function Norwegian() {
+		$this->BaseLanguage();
+
+		$this->content_encoding='iso-8859-1'; // is this needed?
+
+		$this->language_id=9;
+
+		//navigation menu strings
+		$this->SEARCH='S&oslash;k';
+		$this->LOGOUT='Logg av';
+		$this->LOGIN='Logg inn via SSL';
+		$this->NEW_USER='Ny bruker via SSL';
+		$this->NEW_PROJECT='Meld inn et nytt prosjekt';
+		$this->ACCOUNT_MAINTENANCE='Vedlikehold av brukerinformasjon';
+		$this->CHANGE_MY_THEME='Nytt webtema';
+		$this->MY_PERSONAL_PAGE='Min side';
+		$this->BOOKMARK_PAGE='Bokmerke';
+		$this->PROJECT_SUMMARY='Prosjektoversikt';
+		$this->PROJECT_ADMIN='Prosjektadministrator';
+		$this->FOUNDRY_ADMIN='Kodebibliotek administrering';
+		$this->SOFTWARE_MAP='Programvareoversikt';
+		$this->NEW_RELEASES='Nye utgaver';
+		$this->OTHER_SITE_MIRRORS='Speil';
+		$this->CODE_SNIPPET_LIBRARY='Kodebibliotek';
+		$this->DOCUMENTATION='Dokumentasjon';
+		$this->DISCUSSION_FORUMS='Diskusjonsfora';
+		$this->PROJECT_HELP_WANTED='Prosjekthjelp s&oslash;kes';
+		$this->TOP_PROJECTS='Topp-prosjekter';
+		$this->COMPILE_FARM='Komplieringsverksted';
+		$this->CONTACT_US='Kontakt oss';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN ='Topp';
+		$this->GROUP_SHORT_SUMMARY='Overblikk';
+		$this->GROUP_SHORT_HOMEPAGE='Hjemmeside';
+		$this->GROUP_SHORT_FORUM='Fora';
+		$this->GROUP_SHORT_BUGS='Feil';
+		$this->GROUP_SHORT_SUPPORT='Brukerst&oslash;tte';
+		$this->GROUP_SHORT_PATCH='Rettinger';
+		$this->GROUP_SHORT_MAIL='Epostlister';
+		$this->GROUP_SHORT_PM='Oppgaver';
+		$this->GROUP_SHORT_DOCMAN='Dokumentasjon';
+		$this->GROUP_SHORT_SURVEY='Sp&oslash;rreunders&oslash;kelser';
+		$this->GROUP_SHORT_NEWS='Nyheter';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='Filer';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Nyeste filutgivelser';
+		$this->FILE_PACKAGE='Pakke';
+		$this->FILE_VERSION='Versjon';
+		$this->FILE_MONITOR='Overv&aring;k';
+		$this->FILE_NOTES='Notater';
+		$this->FILE_DOWNLOAD='Last ned';
+
+		$this->DEVELOPER_INFO='Utviklerinformasjon';
+		$this->PROJECT_ADMINS='Prosjektadministratorer';
+		$this->DEVELOPERS='Utvikler';
+		$this->PUBLIC_AREA='Fellesområde';
+
+		$this->GROUP_LONG_HOMEPAGE='Prosjektside';
+		$this->GROUP_LONG_FORUM='&Aring;pne fora';
+		$this->GROUP_LONG_BUGS='Feilretting';
+		$this->GROUP_LONG_SUPPORT='Administrere brukerst&oslash;tte';
+		$this->GROUP_LONG_PATCH='Administrere retting';
+		$this->GROUP_LONG_MAIL='Epostlister';
+		$this->GROUP_LONG_PM='Prosjektstyring';
+		$this->GROUP_LONG_DOCMAN='Administrere prosjektdokumentsjon';
+		$this->GROUP_LONG_SURVEY='Sp&oslash;rreunders&oslash;kelser';
+		$this->GROUP_LONG_NEWS='Siste nyheter';	
+		$this->GROUP_LONG_CVS='CVS-repository';
+		$this->GROUP_LONG_FTP='Anonym FTP-tilgang';
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='Gj&oslash;r det lettere &aring; utvikle Open Source programvare';
+		$this->SOURCEFORGE_STATISTICS='SourceForge statistikk';
+		$this->TOP_PROJECT_DOWNLOADS='Flest nedlastinger';
+		$this->HIGHEST_RANKED_USERS='H&oslash;yest rangerte brukere';
+		$this->MOST_ACTIVE_THIS_WEEK='Mest aktive denne uken';
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge er en <B>fri tjeneste som tilbys utviklere av
+<A href="http://www.opensource.org">Open Source</A>-programvare</B>. Her f&aring;r du
+enkel tilgang til det beste innen CVS, epostlister, feilkontroll, meldingsforum,
+prosjektstyring, webhosting, filarkiver, backup-l&oslash;sninger og web-basert
+administrering.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ mer
+]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ
+]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>Tilbakemelding og deltakelse</B>
+<P>
+For &aring; f&aring; mest igjen fra Sourceforge m&aring; du
+<A href="/account/register.php">registrere deg som bruker hos oss</A>.
+Da kan du ta del i alt vi kan tilby. Du kan selvsagt bla deg
+gjennom sidene uten &aring; v&aelig;re registrert, men du vil ikke kunne
+delta p&aring; linje med registrerte brukere.
+<P>
+&nbsp;
+<BR>
+<B>Sett opp dine egne prosjekter</B>
+<P>
+<A href="/account/register.php">Registrer deg som bruker</A>,
+then <A HREF="/account/login.php">Login</A> til slutt,
+<A HREF="/register/">Registrer ditt eget prosjekt.</A>
+<P>
+Takk... og velkommen som bruker';
+
+	}
+}
+
+?>

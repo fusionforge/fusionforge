@@ -1,0 +1,148 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: German.class,v 1.5 2000/10/16 17:26:34 tperdue Exp $
+
+/*
+
+	Tim Perdue, September 7, 2000 (original English version)
+	Matthias Bauer, Sept 25 - Oct 15, 2000 (German translation)
+
+
+	Dies ist die deutsche Klasse, die BaseLanguage überlagert
+
+	Jede Sprache erweitert BaseLanguage
+
+*/
+
+class German extends BaseLanguage {
+
+	function German() {
+		$this->BaseLanguage();
+
+		$this->content_encoding='iso-8859-1'; // usually not needed, but better to have it
+
+		$this->language_id=6;
+
+		//two letter language code
+		$this->language_code='de';
+	
+		//default font which can be overridden on a language-by-language basis
+		$this->default_font='verdana,arial,helvetica,sans-serif';
+
+		//navigation menu strings
+		$this->SEARCH='Suche';
+		$this->LOGOUT='Ausloggen';
+		$this->LOGIN='Einloggen (SSL)';
+		$this->NEW_USER='Neuer Benutzer (SSL)';
+		$this->NEW_PROJECT='Neues Projekt';
+		$this->ACCOUNT_MAINTENANCE='Accountverwaltung';
+		$this->CHANGE_MY_THEME='Theme &auml;ndern';
+		$this->MY_PERSONAL_PAGE='Personalisierte Seite';
+		$this->BOOKMARK_PAGE='Lesezeichen';
+		$this->PROJECT_SUMMARY='Projekt&uuml;bersicht';
+		$this->PROJECT_ADMIN='Projektadministrator';
+		$this->FOUNDRY_SUMMARY='Foundry-&Uuml;bersicht';
+		$this->FOUNDRY_ADMIN='Foundry-Administration';
+		$this->SOFTWARE_MAP='Softwarekarte';
+		$this->NEW_RELEASES='Neue Releases';
+		$this->OTHER_SITE_MIRRORS='Mirrors';
+		$this->CODE_SNIPPET_LIBRARY='Codeschnipsel-Sammlung';
+		$this->DOCUMENTATION='Dokumentation';
+		$this->DISCUSSION_FORUMS='Diskussionsforen';
+		$this->PROJECT_HELP_WANTED='Projekthilfe gesucht';
+		$this->TOP_PROJECTS='Top-Projekte';
+		$this->COMPILE_FARM='Compile-Farm';
+		$this->CONTACT_US='Kontakt';
+		$this->ABOUT_SOURCEFORGE='&Uuml;ber SourceForge';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_SUMMARY='&Uuml;berblick';
+		$this->GROUP_SHORT_HOMEPAGE='Homepage';
+		$this->GROUP_SHORT_FORUM='Foren';
+		$this->GROUP_SHORT_BUGS='Bugs';
+		$this->GROUP_SHORT_SUPPORT='Support';
+		$this->GROUP_SHORT_PATCH='Patches';
+		$this->GROUP_SHORT_MAIL='Mailinglisten';
+		$this->GROUP_SHORT_PM='Aufgaben';
+		$this->GROUP_SHORT_DOCMAN='Dokumentation';
+		$this->GROUP_SHORT_SURVEY='Umfragen';
+		$this->GROUP_SHORT_NEWS='Neuigkeiten';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='Dateien';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Letzte Dateireleases';
+		$this->FILE_PACKAGE='Paket';
+		$this->FILE_VERSION='Version';
+		$this->FILE_MONITOR='&Uuml;berwachen';
+		$this->FILE_NOTES='Anmerkungen';
+		$this->FILE_DOWNLOAD='Downloaden';
+
+		$this->DEVELOPER_INFO='Entwicklerinformationen';
+		$this->PROJECT_ADMINS='Projektbetreuer';
+		$this->DEVELOPERS='Entwickler';
+		$this->PUBLIC_AREA='&Ouml;ffentliche Bereiche';
+
+		$this->GROUP_LONG_HOMEPAGE='Projekthomepage';
+		$this->GROUP_LONG_FORUM='&Ouml;ffentliche Foren';
+		$this->GROUP_LONG_BUGS='Bugtracking';
+		$this->GROUP_LONG_SUPPORT='Support-Verwaltung';
+		$this->GROUP_LONG_PATCH='Patch-Verwaltung';
+		$this->GROUP_LONG_MAIL='Mailinglisten';
+		$this->GROUP_LONG_PM='Aufgaben-Verwaltung';
+		$this->GROUP_LONG_DOCMAN='DocManager: Projekt-Dokumentation';
+		$this->GROUP_LONG_SURVEY='Umfragen';
+		$this->GROUP_LONG_NEWS='Letzte Neuigkeiten';	
+		$this->GROUP_LONG_CVS='CVS-Baum';
+		$this->GROUP_LONG_FTP='Anonymer FTP-Zugriff';
+
+		// neue strings für die homepage, hinzugefügt 1. 10.
+		$this->BREAKING_DOWN_BARRIERS='Wir reissen die Mauern zu Open-Source-Entwicklung nieder';
+		$this->SOURCEFORGE_STATISTICS='SourceForge Statistiken';
+		$this->TOP_PROJECT_DOWNLOADS='Popul&auml;rste Downloads (nach Projekten)';
+		$this->HIGHEST_RANKED_USERS='Am h&ouml;chsten eingestufte Benutzer';
+		$this->MOST_ACTIVE_THIS_WEEK='Aktivste Projekte in dieser Woche';
+		
+		// Homepage About BLURB, temporär, bis der Content-Manager fertig ist
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge ist ein <b>freier Dienst</b> f&uuml;r
+<a href="http://www.opensource.org">Open Source</a> Entwickler und bietet
+einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking,
+Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte
+Dateiarchivierung, Backups und vollst&auml;ndige Verwaltung per
+Web-Interface.
+
+<a href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ mehr ]</font></A>
+<a href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+<br>
+&nbsp;
+<p>
+<b>Feedback und Teilnahme an der Site</b>
+<p>
+Um SourceForge bestm&ouml;glich zu nutzen, sollten Sie sich
+<a href="/account/register.php">als Benutzer anmelden</a>. Mit einem
+Benutzeraccount k&ouml;nnen Sie am vollen Spektrum der Website teilhaben.
+Nat&uuml;rlich k&ouml;nnen Sie SourceForge auch ohne Registrierung nutzen,
+haben dann allerdings nicht auf alle Bereiche vollen Zugriff.
+<p>
+&nbsp;
+<br>
+<b>Starten Sie Ihr eigenes Projekt</b>
+<p>
+<a href="/account/register.php">Melden Sie sich als Benutzer an</a>,
+<a href="/account/login.php">loggen Sie sich ein</a> und
+<a href="/register/">registrieren Sie Ihr Projekt</a>!
+<p>
+Vielen Dank. Sie machen eine einfache Webseite sehr gl&uuml;cklich.
+';
+	// end of BLURB
+
+	}
+}
+
+?>

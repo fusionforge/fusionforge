@@ -1,0 +1,151 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Chinese.class,v 1.3 2000/10/16 17:26:34 tperdue Exp $
+
+
+/*
+
+	Yu-Jui Lee, October 1, 2000
+
+
+	This is the Chinese class that overrides BaseLanguage
+
+	Each Language extends BaseLanguage
+
+
+*/
+
+class Chinese extends BaseLanguage {
+
+	function Chinese() {
+		$this-> BaseLanguage();
+
+		$this->content_encoding = 'BIG5';
+
+		$this->language_id=11; // I don't know the language id of Chinese.
+
+		//two letter language code
+		$this->language_code='zh';
+
+		//default font which can be overridden on a language-by-language basis
+		//$this->default_font='verdana,arial,helvetica,sans-serif';
+
+
+		//example of how to override
+		//the vars in BaseLanguage
+		//you must do this for every var
+
+		//navigation menu strings
+		$this->SEARCH='搜尋';
+		$this->LOGOUT='登出';
+		$this->LOGIN='經由SSL登入';
+		$this->NEW_USER='經由SSL新用戶註冊';
+		$this->NEW_PROJECT='新專案登錄';
+		$this->ACCOUNT_MAINTENANCE='帳號維護';
+		$this->CHANGE_MY_THEME='主題變更';
+		$this->MY_PERSONAL_PAGE='我的首頁';
+		$this->BOOKMARK_PAGE='書籤';
+		$this->PROJECT_SUMMARY='專案摘要';
+		$this->PROJECT_ADMIN='專案維護';
+		$this->FOUNDRY_SUMMARY='Foundry摘要';
+		$this->FOUNDRY_ADMIN='Foundry維護';
+		$this->SOFTWARE_MAP='軟體分類表';
+		$this->NEW_RELEASES='新發表軟體';
+		$this->OTHER_SITE_MIRRORS='其它映射網站';
+		$this->CODE_SNIPPET_LIBRARY='小片斷源碼程式庫';
+		$this->DOCUMENTATION='文件';
+		$this->DISCUSSION_FORUMS='論壇';
+		$this->PROJECT_HELP_WANTED='徵求協助';
+		$this->TOP_PROJECTS='熱門專案';
+		$this->COMPILE_FARM='編譯主機群';
+		$this->CONTACT_US='聯絡我們';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN='主要';
+		$this->GROUP_SHORT_SUMMARY='摘要';
+		$this->GROUP_SHORT_HOMEPAGE='首頁';
+		$this->GROUP_SHORT_FORUM='論譠';
+		$this->GROUP_SHORT_BUGS='臭虫';
+		$this->GROUP_SHORT_SUPPORT='支援';
+		$this->GROUP_SHORT_PATCH='修補';
+		$this->GROUP_SHORT_MAIL='電子郵件';
+		$this->GROUP_SHORT_PM='工件';
+		$this->GROUP_SHORT_DOCMAN='文件';
+		$this->GROUP_SHORT_SURVEY='調查';
+		$this->GROUP_SHORT_NEWS='新聞';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='檔案';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='最新檔案發表';
+		$this->FILE_PACKAGE='檔案包裹';
+		$this->FILE_VERSION='檔案版本';
+		$this->FILE_MONITOR='監看';
+		$this->FILE_NOTES='附註';
+		$this->FILE_DOWNLOAD='檔案下載';
+
+		$this->DEVELOPER_INFO='開發者資訊';
+		$this->PROJECT_ADMINS='專案管理者';
+		$this->DEVELOPERS='開發者';
+		$this->PUBLIC_AREA='公共區域';
+
+		$this->GROUP_LONG_HOMEPAGE='專案首頁';
+		$this->GROUP_LONG_FORUM='公共論壇';
+		$this->GROUP_LONG_BUGS='臭虫追蹤';
+		$this->GROUP_LONG_SUPPORT='技術支援管理者';
+		$this->GROUP_LONG_PATCH='修補管理者';
+		$this->GROUP_LONG_MAIL='電子郵件討論群';
+		$this->GROUP_LONG_PM='工作管理者';
+		$this->GROUP_LONG_DOCMAN='專案文件';
+		$this->GROUP_LONG_SURVEY='調查';
+		$this->GROUP_LONG_NEWS='最新消息';
+		$this->GROUP_LONG_CVS='CVS程式庫';
+		$this->GROUP_LONG_FTP='匿名FTP空間';
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='為開放源碼的發展開闢一條坦途';
+		$this->SOURCEFORGE_STATISTICS='SourceForge統計資料';
+		$this->TOP_PROJECT_DOWNLOADS='熱門專案下載排行榜';
+		$this->HIGHEST_RANKED_USERS='最高評價用戶排行榜';
+		$this->MOST_ACTIVE_THIS_WEEK='本週活動力最強排行榜';
+
+
+//temporary hack until
+//content manager is ready
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge為一<B>提供免費服務給
+<A href="http://www.opensource.org">開放源碼</A>發展者的網站</B> 包括了CVS, 郵件討論群, 臭虫追蹤系統, 訊息論壇, 工作管理, 網站空間, 檔案儲存, 完整的檔案備份, 且完全以web-based來管理.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>請立即加入並不吝指教</B>
+<P>
+為充分利用SourceForge所提供的服務,
+<A href="/account/register.php">請立即註冊成為
+本站用戶</A>. 您將能充分參與本站所提供的各項活動, 您若尚未註冊成為用戶, 仍能瀏覽本站, 但無權充份參與本站活動. 
+<P>
+&nbsp;
+<BR>
+<B>設置您自己的專案</B>
+<P>
+<A href="/account/register.php">註冊成為本站用戶</A>,
+接著 <A HREF="/account/login.php">登入</A> 最後,
+<A HREF="/register/">註冊您的專案.</A>
+<P>
+謝謝您... 並祝使用本站愉快.';
+
+	}
+
+}
+
+?>

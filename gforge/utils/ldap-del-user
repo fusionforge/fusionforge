@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+#
+#  Delete user entry from LDAP
+#  by pfalcon@users.sourceforge.net 2000-10-18
+#  $Id: ldap-del-user,v 1.5 2000/12/14 17:53:54 pfalcon Exp $
+#
+
+require("include.pl");  # Include all the predefined functions
+&parse_local_inc;
+
+if (!($#ARGV+1)) {
+	print "Usage: $0 <user_name>\n";
+	exit;
+}
+
+$cmd = "${ldap_prefix}ldapdelete -D '$sys_ldap_admin_dn' -W -C 'uid=$ARGV[0],ou=People,$sys_ldap_base_dn'";
+#print "$cmd\n";
+system($cmd);

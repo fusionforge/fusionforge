@@ -1,0 +1,150 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Bulgarian.class,v 1.1 2000/10/16 17:26:34 tperdue Exp $
+
+
+/*
+
+	Tim Perdue, September 7, 2000 (original English version)
+	Delyan Toshev, October 14, 2000 (Bulgarian translation)
+	
+	This is the bulgarian class that overrides BaseLanguage
+
+	Each Language extends BaseLanguage
+
+*/
+
+class Bulgarian extends BaseLanguage {
+
+	function Bulgarian() {
+
+		$this->content_encoding='windows-1251';
+
+		$this->language_id=20;
+
+		//two letter language code
+		$this->language_code='bg';
+
+		//default font which can be overridden on a language-by-language basis
+		$this->default_font='verdana,arial,helvetica,sans-serif';
+
+		//navigation menu strings
+		$this->SEARCH='Търсене';
+		$this->LOGOUT='Изход';
+		$this->LOGIN='Вход (SSL защитена връзка)';
+		$this->NEW_USER='Нов потребител (SSL защитена връзка)';
+		$this->NEW_PROJECT='Регистриране на нов проект';
+		$this->ACCOUNT_MAINTENANCE='Профил';
+		$this->CHANGE_MY_THEME='Външен вид';
+		$this->MY_PERSONAL_PAGE='Лична страница';
+		$this->BOOKMARK_PAGE='Отбележи страницата';
+		$this->PROJECT_SUMMARY='Обща информация за проекта';
+		$this->PROJECT_ADMIN='Администриране на проект';
+		$this->FOUNDRY_SUMMARY='Foundry Резюме';
+		$this->FOUNDRY_ADMIN='Foundry Администриране';
+		$this->SOFTWARE_MAP='Карта на софтуера';
+		$this->NEW_RELEASES='Новоизлезли';
+		$this->OTHER_SITE_MIRRORS='Огледални копия';
+		$this->CODE_SNIPPET_LIBRARY='Софтуерна библиотека';
+		$this->DOCUMENTATION='Документи';
+		$this->DISCUSSION_FORUMS='Дискусионни форуми';
+		$this->PROJECT_HELP_WANTED='Проекти търсещи помощ';
+		$this->TOP_PROJECTS='Топ проекти';
+		$this->COMPILE_FARM='Фабрика за компилиране';
+		$this->CONTACT_US='Връзка с нас';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN ='Основно';
+		$this->GROUP_SHORT_SUMMARY='Резюме';
+		$this->GROUP_SHORT_HOMEPAGE='Начало';
+		$this->GROUP_SHORT_FORUM='Форуми';
+		$this->GROUP_SHORT_BUGS='Грешки';
+		$this->GROUP_SHORT_SUPPORT='Поддръжка';
+		$this->GROUP_SHORT_PATCH='Поправки';
+		$this->GROUP_SHORT_MAIL='Получатели';
+		$this->GROUP_SHORT_PM='Задачи';
+		$this->GROUP_SHORT_DOCMAN='Документи';
+		$this->GROUP_SHORT_SURVEY='Проучвания';
+		$this->GROUP_SHORT_NEWS='Новини';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='Файлове';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Последните излезли файлове';
+		$this->FILE_PACKAGE='Модул';
+		$this->FILE_VERSION='Версия';
+		$this->FILE_MONITOR='Наблюдение';
+		$this->FILE_NOTES='Бележки';
+		$this->FILE_DOWNLOAD='Изтегли';
+
+		$this->DEVELOPER_INFO='Участници в проекта';
+		$this->PROJECT_ADMINS='Администратори';
+		$this->DEVELOPERS='Разработчици';
+		$this->PUBLIC_AREA='Общодостъпни места';
+
+		$this->GROUP_LONG_HOMEPAGE='Начална страница на проекта';
+		$this->GROUP_LONG_FORUM='Публични форуми';
+		$this->GROUP_LONG_BUGS='Проследяване на грешки';
+		$this->GROUP_LONG_SUPPORT='Управляване на поддръжката';
+		$this->GROUP_LONG_PATCH='Управляване на поправките';
+		$this->GROUP_LONG_MAIL='Списъци с получатели';
+		$this->GROUP_LONG_PM='Управляване на задачите';
+		$this->GROUP_LONG_DOCMAN='Проектна документация';
+		$this->GROUP_LONG_SURVEY='Допитване';
+		$this->GROUP_LONG_NEWS='Последни новини';	
+		$this->GROUP_LONG_CVS='CVS хранилище';
+		$this->GROUP_LONG_FTP='Анонимно FTP пространство';
+
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='Да премахнем пречките пред разработването на софтуер с отворен код';
+		$this->SOURCEFORGE_STATISTICS='SourceForge статистика';
+		$this->TOP_PROJECT_DOWNLOADS='Най-популярните проекти';
+		$this->HIGHEST_RANKED_USERS='Най-популярните потребители';
+		$this->MOST_ACTIVE_THIS_WEEK='Най-активни през тази седмица';
+
+
+		//temporary hack until
+		//content manager is ready
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge е <B>безплатна услуга за разработващите софтуер с 
+<A href="http://www.opensource.org">отворен код</A></B>, 
+предлагаща лесен достъп до най-доброто от CVS, дискусионни форуми, 
+проследяване на грешки, управление на задачи, 
+безплатно уеб пространство, постоянно архивиране на файловете, 
+пълно резервно подсигуряване на проекта, 
+и напълно уеб базирано администриране.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ повече ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>Включване и обратна връзка</B>
+<P>
+За да може да използвате най-ефективно SourceForge, ще трябва да се 
+<A href="/account/register.php">регистрирате</A> като потребител. 
+Това ще ви позволи да участвате напълно във всичко, което предлагаме. 
+Разбира се, можете да разглеждате всичко и без регистриране, но така ще 
+се лишите от възможността за пълно включване в различните услуги.
+<P>
+&nbsp;
+<BR>
+<B>Създайте свой проект</B>
+<P>
+<A href="/account/register.php">Регистрирайте се като потребител</A>, 
+след което <A HREF="/account/login.php">влезте</A> в своят профил и накрая 
+<A HREF="/register/">регистрирайте вашият проект.</A>
+<P>
+Благодарим ви... и приятно ползване на услугите ни.';
+
+		}
+	}
+?>

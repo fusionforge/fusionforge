@@ -1,0 +1,165 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Dutch.class,v 1.3 2000/10/03 21:30:20 tperdue Exp $
+
+
+/*
+
+	Tim Perdue, September 7, 2000
+
+
+	Base class for adding multilingual support to SF.net
+
+	Contains variables which can be overridden optionally by other
+	language files.
+
+	Base language is english - an english class will extend this one,
+	but won't override anything
+
+	As new languages are added, they can override what they wish, and 
+		as we extend our class, other languages can follow suit
+		as they are translated without holding up our progress
+
+*/
+
+/* This translation is made on: 01/10/2000 21:22  {dd/mm/yyyy hh/mm} */
+/* It is based on CVS revision 1.15 of BaseLanguage.class            */
+
+
+class Dutch extends BaseLanguage {
+
+	function Dutch() {
+		$this-> BaseLanguage();
+	
+	
+		//what content encoding scheme are we using?
+		$this->content_encoding='iso-8859-1';
+	
+		//english has an ID of 1 in the database
+		$this->language_id=1;
+	
+		//two letter language code
+		$this->language_code='nl';
+
+		//default font which can be overridden on a language-by-language basis
+		$this->default_font='verdana,arial,helvetica,sans-serif';
+
+		//navigation menu strings
+		$this->SEARCH='Zoeken';
+		$this->LOGOUT='Uitloggen';
+		$this->LOGIN='Inloggen via SSL';
+		$this->NEW_USER='Nieuwe gebruiker via SSL';
+		$this->NEW_PROJECT='Nieuw project registreren';
+		$this->ACCOUNT_MAINTENANCE='Account onderhouden';
+		$this->CHANGE_MY_THEME='Mijn thema wijzigen';
+		$this->MY_PERSONAL_PAGE='Mijn persoonlijke pagina';
+		$this->BOOKMARK_PAGE='Bladwijzer van deze pagina maken';
+		$this->PROJECT_SUMMARY='Projectsamenvatting';
+		$this->PROJECT_ADMIN='Projectadministratie';
+		$this->FOUNDRY_SUMMARY='Foundry-samenvatting';
+		$this->FOUNDRY_ADMIN='Foundry-administratie';
+		$this->SOFTWARE_MAP='Software kaart';
+		$this->NEW_RELEASES='Nieuwe uitgaves';
+		$this->OTHER_SITE_MIRRORS='Andere site mirrors';
+		$this->CODE_SNIPPET_LIBRARY='Code-knipsels bibliotheek';
+		$this->DOCUMENTATION='Site documentatie';
+		$this->DISCUSSION_FORUMS='Discussie forums';
+		$this->PROJECT_HELP_WANTED='Hulp gevraagd bij projecten';
+		$this->TOP_PROJECTS='Top Projecten';
+		$this->COMPILE_FARM='Compilatie boerderij';
+		$this->CONTACT_US='Neem contact met ons op';
+	
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN ='Hoofd';
+		$this->GROUP_SHORT_SUMMARY='Samenvatting';
+		$this->GROUP_SHORT_HOMEPAGE='Homepage';
+		$this->GROUP_SHORT_FORUM='Forums';
+		$this->GROUP_SHORT_BUGS='Bugs';
+		$this->GROUP_SHORT_SUPPORT='Ondersteuning';
+		$this->GROUP_SHORT_PATCH='Patches';
+		$this->GROUP_SHORT_MAIL='Lijsten';
+		$this->GROUP_SHORT_PM='Taken';
+		$this->GROUP_SHORT_DOCMAN='Documentatie';
+		$this->GROUP_SHORT_SURVEY='Enquêtes';
+		$this->GROUP_SHORT_NEWS='Nieuws';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='Bestanden';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Laatste bestandsuitgaven';
+		$this->FILE_PACKAGE='Pakket';
+		$this->FILE_VERSION='Versie';
+		$this->FILE_MONITOR='Monitor';
+		$this->FILE_NOTES='Notitites';
+		$this->FILE_DOWNLOAD='Downloaden';
+
+		$this->DEVELOPER_INFO='Ontwikkelaar Info';
+		$this->PROJECT_ADMINS='Project administrators';
+		$this->DEVELOPERS='Ontwikkelaars';
+		$this->PUBLIC_AREA='Publieke gebieden';
+	
+		$this->GROUP_LONG_HOMEPAGE='Homepage van project';
+		$this->GROUP_LONG_FORUM='Publieke Forums';
+		$this->GROUP_LONG_BUGS='Bug Tracking';
+		$this->GROUP_LONG_SUPPORT='Technische ondersteuningsmanager';
+		$this->GROUP_LONG_PATCH='Patch Manager';
+		$this->GROUP_LONG_MAIL='Mailing Lijsen';
+		$this->GROUP_LONG_PM='Takenmanager';
+		$this->GROUP_LONG_DOCMAN='DocManager: documentatie van project';
+		$this->GROUP_LONG_SURVEY='Enquêtes';
+		$this->GROUP_LONG_NEWS='Laatste nieuws';	
+		$this->GROUP_LONG_CVS='CVS Repository';
+		$this->GROUP_LONG_FTP='Anonieme FTP-ruimte';
+
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='Breaking Down the Barriers to Open Source Development';
+		$this->SOURCEFORGE_STATISTICS='SourceForge Statistieken';
+		$this->TOP_PROJECT_DOWNLOADS='Top projectendownloads';
+		$this->HIGHEST_RANKED_USERS='Gebruikers met de hoogste rang';
+		$this->MOST_ACTIVE_THIS_WEEK='Meest actief deze week';
+
+
+		//temporary hack until
+		//content manager is ready
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+		SourceForge is een <B>gratis service voor
+		<A href="http://www.opensource.org">Open Source</A> ontwikkelaars</B> die
+		gemakkelijke toegang tot het beste in CVS, mailing lijsen, bug tracking, berichtborden/forums,
+		task management, site hosting, permanent file archival, full backups,
+		en totale web-gebaseerde administratie geeft. 
+		<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ meer ]</font></A>
+		<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+		<BR>
+		&nbsp;
+		<P>
+		<B>Site feedback en hoe mee te doen</B>
+		<P>
+		Om het meeste uit SourceForge te halen, moet u naar
+		<A href="/account/register.php">registreren als een site
+		gebruiker</A> gaan. Dit stelt u in staat om volledig mee te doen met alles
+		wat we te bieden hebben. U kan natuurlijk de site doorkijken zonder te
+		registreren, maar u kan niet volledig meedoen.
+		<P>
+		&nbsp;
+		<BR>
+		<B>Uw eigen project opzetten</B>
+		<P>
+		<A href="/account/register.php">Registreren als een site
+		gebruiker</A>,
+		dan <A HREF="/account/login.php">Inloggen</A> en uiteindelijk,
+		<A HREF="/register/">Nieuw project registreren.</A>
+		<P>
+		Bendankt... en veel succes met de site.';
+	}
+}
+
+?>

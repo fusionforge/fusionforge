@@ -1,0 +1,66 @@
+
+SourceForge 2.5 Installation notes
+----------------------------------
+
+ALL INSTALL QUESTIONS SHOULD BE ASKED IN THE FORUM:
+http://sourceforge.net/forum/forum.php?forum_id=21304
+
+
+The most important change you will notice in the 2.5 code 
+release is that we now require PostgreSQL 7.1beta or higher.
+Mysql does NOT support transactions or subselects, so the 
+site will not function correctly. Foundries depend on 
+subselects - if you don't need foundries you can still use 
+MySQL. Future versions of the code will be completely 
+dependent on subselects, views, etc.
+
+You can see in the www/include/ directory that there are 
+database abstraction layers for pgsql, mysql and Oracle 8.
+The oracle 8 layer is COMPLETELY untested. It hasn't been 
+executed even once.
+
+
+Migrating an existing install:
+------------------------------
+
+Moving to 2.5 from 2.0x (mysql) is complex, but not impossible. 
+Here's how we did it on SourceForge.net:
+
+-Download, install, and configure PostgreSQL 7.1+
+-Apply all changes to your existing MySQL database 
+	(mysql -u root -p db_name < SQL_diff-2.0-to-2.5.sql)
+-Dump your MySQL database using mysqldump with the --tab option:
+	mysqldump -q --tab=/tmp/dbfiles/ -u root -p db_name
+-Create a new PostgreSQL database:
+	createdb db_name
+-Create the tables and sequences in your new database:
+	psql db_name < pgport/Sourceforge.sql92
+-Edit the file in pgport/Sourceforge.init and change the 
+	COPY TABLE commands to draw the files from wherever
+	you dumped them to in the mysqldump step
+-Run the Sourceforge.init script into your new database:
+	psql db_name < pgport/Sourceforge.init
+-Then vacuum the postgres database:
+	psql db_name
+	% vacuum analyze;
+-Edit your /etc/local.inc to set the right params to connect 
+	to your new postgresql database
+
+
+Setting up a new install:
+-------------------------
+-Download, install, and configure PostgreSQL 7.1+
+-Create a new PostgreSQL database:
+        createdb db_name
+­Run the Sourceforge.sql script into your new database:
+	psql db_name < Sourceforge.sql
+-Then vacuum the postgres database:
+	psql db_name
+	% vacuum analyze;
+-Install and edit the etc/local.inc to set the right params to connect
+	to your new postgresql database, host vars, etc
+-Import the default values file into the database.
+	psql db_name < DefaultValues.sql
+	Constraints and other problems may prevent this from working 
+	seamlessly.
+

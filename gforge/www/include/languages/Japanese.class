@@ -1,0 +1,156 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Japanese.class,v 1.11 2000/11/01 23:49:23 kingdon Exp $
+
+
+/*
+
+	Atsushi Kamoshida, September 24, 2000
+	Hirotaka Mizutani, October 28, 2000
+
+
+	This is the Japanese class that overrides BaseLanguage
+
+	Each Language extends BaseLanguage
+
+
+*/
+
+class Japanese extends BaseLanguage {
+
+	function Japanese() {
+		$this-> BaseLanguage();
+
+		$this->content_encoding = 'EUC-JP';
+
+		$this->language_id=2;
+
+		//example of how to override
+		//the vars in BaseLanguage
+		//you must do this for every var
+
+		//navigation menu strings
+		$this->SEARCH='検索';
+		$this->LOGOUT='ログアウト';
+		$this->LOGIN='SSL経由でログイン';
+		$this->NEW_USER='SSL経由で新規ユーザ作成';
+		$this->NEW_PROJECT='新規プロジェクトの登録';
+		$this->ACCOUNT_MAINTENANCE='アカウント管理';
+		$this->CHANGE_MY_THEME='テーマの変更';
+		$this->MY_PERSONAL_PAGE='自分のページ';
+		$this->BOOKMARK_PAGE='ブックマーク';
+		$this->PROJECT_SUMMARY='プロジェクトサマリ';
+		$this->PROJECT_ADMIN='プロジェクト管理';
+		$this->FOUNDRY_SUMMARY='ファンドリーサマリ';
+		$this->FOUNDRY_ADMIN='ファンドリー管理';
+		$this->SOFTWARE_MAP='ソフトウェアマップ';
+		$this->NEW_RELEASES='新規リリース';
+		$this->OTHER_SITE_MIRRORS='他のミラーサイト';
+		$this->CODE_SNIPPET_LIBRARY='Code Snippet Library';
+		$this->DOCUMENTATION='サイトドキュメント';
+		$this->DISCUSSION_FORUMS='ディスカッションフォーラム';
+		$this->PROJECT_HELP_WANTED='プロジェクト協力者募集';
+		$this->TOP_PROJECTS='トッププロジェクト';
+		$this->COMPILE_FARM='コンパイル環境';
+		$this->CONTACT_US='連絡先';
+
+		// not in BaseLanguage.class, but we have the strings
+		// when BaseLanguage.class is ready...
+		$this->ABOUT_SOURCEFORGE='SourceForgeについて';
+
+		$this->ABOUT_FOUNDRIES='ファンドリーについて';
+		$this->FOUNDRY_3D='3D';
+		$this->FOUNDRY_GAMES='ゲーム';
+		$this->FOUNDRY_JAVA='Java';
+		$this->FOUNDRY_PRINTING='印刷';
+		$this->FOUNDRY_STORAGE='記憶装置';
+		// end strings not in BaseLanguage.class
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN='メイン';
+		$this->GROUP_SHORT_SUMMARY='サマリ';
+		$this->GROUP_SHORT_HOMEPAGE='ホームページ';
+		$this->GROUP_SHORT_FORUM='フォーラム';
+		$this->GROUP_SHORT_BUGS='バグ';
+		$this->GROUP_SHORT_SUPPORT='サポート';
+		$this->GROUP_SHORT_PATCH='パッチ';
+		$this->GROUP_SHORT_MAIL='リスト';
+		$this->GROUP_SHORT_PM='タスク';
+		$this->GROUP_SHORT_DOCMAN='ドキュメント';
+		$this->GROUP_SHORT_SURVEY='調査';
+		$this->GROUP_SHORT_NEWS='ニュース';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='ファイル';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='最新の File リリース';
+		$this->FILE_PACKAGE='パッケージ';
+		$this->FILE_VERSION='バージョン';
+		$this->FILE_MONITOR='監視';
+		$this->FILE_NOTES='注意';
+		$this->FILE_DOWNLOAD='ダウンロード';
+
+		$this->DEVELOPER_INFO='開発者情報';
+		$this->PROJECT_ADMINS='プロジェクト管理者';
+		$this->DEVELOPERS='開発者';
+		$this->PUBLIC_AREA='公開エリア';
+
+		$this->GROUP_LONG_HOMEPAGE='プロジェクトホームページ';
+		$this->GROUP_LONG_FORUM='一般向けフォーラム';
+		$this->GROUP_LONG_BUGS='バグ追跡';
+		$this->GROUP_LONG_SUPPORT='技術サポートマネージャ';
+		$this->GROUP_LONG_PATCH='パッチマネージャ';
+		$this->GROUP_LONG_MAIL='メーリングリスト';
+		$this->GROUP_LONG_PM='タスクマネージャ';
+		$this->GROUP_LONG_DOCMAN='ドキュメントマネージャ';
+		$this->GROUP_LONG_SURVEY='調査';
+		$this->GROUP_LONG_NEWS='最新ニュース';	
+		$this->GROUP_LONG_CVS='CVSリポジトリ';
+		$this->GROUP_LONG_FTP='匿名 FTP スペース';
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='Breaking Down the Barriers to Open Source Development';
+		$this->SOURCEFORGE_STATISTICS='SourceForge統計';
+		$this->TOP_PROJECT_DOWNLOADS='プロジェクトダウンロード数';
+		$this->HIGHEST_RANKED_USERS='ユーザ別ランキング';
+		$this->MOST_ACTIVE_THIS_WEEK='最近一週間で活発なプロジェクト';
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+SourceForgeとは<a href="http://www.opensource.org/">オープンソース</A>開
+発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、
+ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース
+の総合的な管理への容易で最高な利用を提供する無料のサービスです。
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 詳細 ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>サイトへの意見と参加</B>
+<P>
+SourceForgeを最大限活用するには<a
+href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必
+要があります。そうすることによりわれわれが提供するすべてのサービスに参加
+することができます。もちろん登録しなくともサイトを閲覧することはできます
+が、利用に制限があります。
+<P>
+&nbsp;
+<BR>
+<B>自分のプロジェクトを作る</B>
+<P>
+まず<a href="http://sourceforge.net/account/register.php">ユーザ登録
+</a>し、<a href="http://sourceforge.net/account/login.php">ログイン
+</a>します。そして<a href="http://sourceforge.net/register/">プロジェク
+トを登録</a>します。
+<P>
+ありがとうございます。そしてこのサイトでぜひ楽しんでください。';
+	}
+
+}
+
+?>

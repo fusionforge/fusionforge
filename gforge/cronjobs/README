@@ -1,0 +1,66 @@
+#
+#
+#	PRODUCTION CRONTAB FILE
+#
+#
+#
+#       grab projects from trove map and put into foundry_projects table
+#
+15 1 * * * ~/alexandria/cronjobs/populate_foundries.php
+
+#
+#       recalculate user popularity metric
+#
+25 1 * * * ~/alexandria/cronjobs/calculate_user_metric.php
+
+#
+#   daily recalculate of the sums under the trove map
+#
+30 1 * * * ~/alexandria/cronjobs/db_trove_maint.php
+
+#
+#   daily deletion of sessions, closing jobs, etc
+#
+35 1 * * * ~/alexandria/cronjobs/project_cleanup.php
+
+#
+#  daily crunching of survey data and other associated ratings
+#
+40 1 * * * ~/alexandria/cronjobs/rating_stats.php
+
+#
+#	VACUUM should be done after ALL OTHER JOBS
+#
+0 2 * * * ~/alexandria/cronjobs/vacuum.php
+
+#
+#       daily rotation of the activity_log
+#
+0 0 * * * ~/alexandria/cronjobs/rotate_activity.php
+
+#
+#       daily aggregating of the numbers
+#
+15 0 * * * ~/alexandria/cronjobs/site_stats.php
+
+#
+#  the cvs_history calculations are still "broken" and need to be implented in
+#  separate tables instead of updating the master groups table
+#  temporary fix is to run daily instead of hourly
+#
+##50 0 * * * /root/bin/cron_db_cvs_history.sh
+
+#
+#  recalc each project's ratings daily
+#
+##14 2 * * * 
+
+#
+#  daily calc of the top groups
+#       (broken for months now)
+##27 1 * * * /root/bin/db_top_groups_calc.sh > /var/log/db_top_groups_calc
+
+#
+#  twice daily database dump
+#
+##7 8,20 * * * /root/bin/db_dump.sh

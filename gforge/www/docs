@@ -1,0 +1,3 @@
+<?php
+header ("Location: /docman/?group_id=1");
+?>

@@ -1,0 +1,133 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Hebrew.class,v 1.6 2000/10/05 14:58:21 tperdue Exp $
+
+
+/*
+	
+	Sagi Bashari , 24/09/2000 <sagi@users.sourceforge.net>
+
+	This is the hebrew class that overrides BaseLanguage
+
+*/
+
+
+class Hebrew extends BaseLanguage {
+
+	function Hebrew() {
+		$this->BaseLanguage();
+
+		$this->language_id=3;
+
+		$this->content_encoding='iso-8859-8';
+
+		$this->default_font='xxzx-random-font\" size=\"1';
+
+		//navigation menu strings
+		$this->SEARCH='שופיח';
+		$this->LOGOUT='האיצי';
+		$this->LOGIN='חטבואמ תרש ךרד הסינכ';
+		$this->NEW_PROJECT='שדח טקיורפ םושר';
+		$this->ACCOUNT_MAINTENANCE='ןובשח תקוזחת';
+		$this->CHANGE_MY_THEME='רתאה הארמ תא הנש';
+		$this->MY_PERSONAL_PAGE='ישיא דומע';
+		$this->BOOKMARK_PAGE='םיפדעומ';
+		$this->PROJECT_SUMMARY='טקיורפ תוצמת';
+		$this->PROJECT_ADMIN='טקיורפ להנמ';
+		$this->SOFTWARE_MAP='תונכות תפמ';
+		$this->NEW_RELEASES='תושדח תואסרג';
+		$this->CODE_SNIPPET_LIBRARY='דוק יעטק תיירפס';
+		$this->DOCUMENTATION='םינוש םיכמסמ';
+		$this->DISCUSSION_FORUMS='םימורופ';
+		$this->PROJECT_HELP_WANTED='םיטקיורפל םישורד';
+		$this->COMPILE_FARM='היצילפמוק תווח';
+		$this->CONTACT_US='רשק רוצ';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_SUMMARY='םיטרפ';
+		$this->GROUP_SHORT_HOMEPAGE='תיב רתא';
+		$this->GROUP_SHORT_FORUM='םימורופ';
+		$this->GROUP_SHORT_BUGS='תולקת';
+		$this->GROUP_SHORT_SUPPORT='הכימת';
+		$this->GROUP_SHORT_PATCH='םינוקית';
+		$this->GROUP_SHORT_MAIL='תומישר';
+		$this->GROUP_SHORT_PM='תומישמ';
+		$this->GROUP_SHORT_DOCMAN='םיכמסמ';
+		$this->GROUP_SHORT_SURVEY='תוריקס';
+		$this->GROUP_SHORT_NEWS='תושדח';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='םיצבק';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='תונורחא הנכות תואסרג';
+		$this->FILE_PACKAGE='תוליבח';
+		$this->FILE_VERSION='תואסרג';
+		$this->FILE_MONITOR='חיגשמ';
+		$this->FILE_NOTES='תורעה';
+		$this->FILE_DOWNLOAD='הדרוה';
+
+		$this->DEVELOPER_INFO='חתפמה יטרפ';
+		$this->PROJECT_ADMINS='םיטקיורפ ילהנמ';
+		$this->DEVELOPERS='םיחתפמ';
+	
+		$this->GROUP_LONG_HOMEPAGE='טקיורפה רתא';
+		$this->GROUP_LONG_FORUM='םיחותפ םימורופ';
+		$this->GROUP_LONG_BUGS='תולקת רחא בקעמ';
+		$this->GROUP_LONG_SUPPORT='תינכט הכימת להנמ';
+		$this->GROUP_LONG_PATCH='םינוקית להנמ';
+		$this->GROUP_LONG_MAIL='רוויד תומישר';
+		$this->GROUP_LONG_PM='תומישמ להנמ';
+		$this->GROUP_LONG_DOCMAN='םיכמסמ להנמ';
+		$this->GROUP_LONG_SURVEY='תוריקס';
+		$this->GROUP_LONG_NEWS='תונורחא תושדח';	
+		$this->GROUP_LONG_CVS='CVS רגאמ';
+		$this->GROUP_LONG_FTP='ימינונא יפיטפא תורש';
+
+		$this->BREAKING_DOWN_BARRIERS='ישפוח דוק חותיפל םוסחמה תא םירבוש';
+		$this->SOURCEFORGE_STATISTICS='SourceForge תוקיטסיטס';
+		$this->TOP_PROJECT_DOWNLOADS='םיליעפ יכה םיטקיורפה';
+		$this->HIGHEST_RANKED_USERS='םיליעפ יכה םישמתשמה';
+		$this->MOST_ACTIVE_THIS_WEEK='עובשה םיליעפ יכה';
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+<P ALIGN="right">
+<BR>.ישפוח רוקמ דוק יחתפמל תורש אוה SourceForge
+<BR> ,םימורופ ,םיגאב רחא בקעמ ,רוויד תומישר ,CVS ל הטושפו הבוט השיג םיקפסמ ונחנא
+<BR>.בווהמ לוהינל השיגו ,םיאלמ םייוביג ,עובק םיצבק רגאמ ,םירתא תנסחא ,תומישמ ילהנמ
+<BR><A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[
+תובושתו תולאש ]</font></A>
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[
+דוע ]</font></A>
+</P>
+
+&nbsp;
+<P ALIGN="RIGHT">
+<B>תופתתשהו בושמ</B>
+<P ALIGN="RIGHT">
+ךרתצת התא SourceForge מ רתויב בוטה תא לבקל ליבשב
+<BR>.םיעיצמ ונחנאש המ לכל האלמ השיג ךל איבי הז
+<A href="/account/register.php">.רתאב שמתשמכ םשרהל</A>
+<BR>.האלמ השיג ךל היהת אל לבא ,םשריהל ילב רתאב שולגל ןבומכ לוכי התא
+
+<P ALIGN="RIGHT" > 
+&nbsp;
+<BR>
+<B>ךלש טקיורפה תא םושר</B>
+<P ALIGN="RIGHT">
+<A HREF="/register/">.ךלש טקיורפה תא םושר</A> ףוסבלו
+ ,<A HREF="/account/login.php">סנכת</A> זאו <A href="/account/register.php">רתאב שמתשימכ םשרה</A>
+<BR>
+<P ALIGN="RIGHT">
+.רתאה ךתייהשמ הנהתו ..הדות
+</P>
+';
+	}
+
+}
+
+?>

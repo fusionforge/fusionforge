@@ -1,0 +1,138 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Italian.class,v 1.2 2000/10/08 22:51:04 tperdue Exp $
+
+
+/*
+
+	Dakkar, September 23, 2000
+
+
+	This is the italian class that overrides BaseLanguage
+
+	Each Language extends BaseLanguage
+
+
+*/
+
+class Italian extends BaseLanguage {
+
+	function Italian() {
+		$this-> BaseLanguage();
+
+		$this->content_encoding='iso-8859-1';
+
+		$this->language_id=8;
+
+		$this->SEARCH='Ricerca';
+		$this->LOGOUT='Fine sessione';
+		$this->LOGIN='Accesso via SSL';
+		$this->NEW_USER='Nuovo utente';
+		$this->NEW_PROJECT='Registra un nuovo progetto';
+		$this->ACCOUNT_MAINTENANCE='Gestione account';
+		$this->CHANGE_MY_THEME='Cambia il tema';
+		$this->MY_PERSONAL_PAGE='La mia pagina personale';
+		$this->BOOKMARK_PAGE='Segna pagina';
+		$this->PROJECT_SUMMARY='Sommario del Progetto';
+		$this->PROJECT_ADMIN='Amministrazione Progetto';
+		$this->FOUNDRY_SUMMARY='Sommario Foundry';
+		$this->FOUNDRY_ADMIN='Amminstrazione Foundry';
+		$this->SOFTWARE_MAP='Mappa Programmi';
+		$this->NEW_RELEASES='Nuove Release';
+		$this->OTHER_SITE_MIRRORS='Mirror di altri siti';
+		$this->CODE_SNIPPET_LIBRARY='Raccolta frammenti di codice';
+		$this->DOCUMENTATION='Documentazione';
+		$this->DISCUSSION_FORUMS='Aree di Discussione';
+		$this->PROJECT_HELP_WANTED='Progetti in cerca di aiuto';
+		$this->TOP_PROJECTS='Classifica Progetti';
+		$this->COMPILE_FARM='Compile Farm';
+		$this->CONTACT_US='Contattaci';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_MAIN ='Principale';
+		$this->GROUP_SHORT_SUMMARY='Sommario';
+		$this->GROUP_SHORT_HOMEPAGE='Home Page';
+		$this->GROUP_SHORT_FORUM='Discussioni';
+		$this->GROUP_SHORT_BUGS='Bug';
+		$this->GROUP_SHORT_SUPPORT='Supporto';
+		$this->GROUP_SHORT_PATCH='Patch';
+		$this->GROUP_SHORT_MAIL='ML';
+		$this->GROUP_SHORT_PM='Attivit&agrave;';
+		$this->GROUP_SHORT_DOCMAN='Doc.';
+		$this->GROUP_SHORT_SURVEY='Sondaggi';
+		$this->GROUP_SHORT_NEWS='Notizie';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='File';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Ultime Release';
+		$this->FILE_PACKAGE='Pacchetto';
+		$this->FILE_VERSION='Versione';
+		$this->FILE_MONITOR='Controlla';
+		$this->FILE_NOTES='Note';
+		$this->FILE_DOWNLOAD='Scarica';
+
+		$this->DEVELOPER_INFO='Informazioni sugli Sviluppatori';
+		$this->PROJECT_ADMINS='Amministratori di Progetto';
+		$this->DEVELOPERS='Sviluppatori';
+		$this->PUBLIC_AREA='Aree Pubbliche';
+
+		$this->GROUP_LONG_HOMEPAGE='Home Page del progetto';
+		$this->GROUP_LONG_FORUM='Aree di Discussione pubbliche';
+		$this->GROUP_LONG_BUGS='Gestione Bug';
+		$this->GROUP_LONG_SUPPORT='Gestione supporto tecnico';
+		$this->GROUP_LONG_PATCH='Gestione Patch';
+		$this->GROUP_LONG_MAIL='Mailing List';
+		$this->GROUP_LONG_PM='Gestione attivit&agrave;';
+		$this->GROUP_LONG_DOCMAN='Gestione Documentazione';
+		$this->GROUP_LONG_SURVEY='Sondaggi';
+		$this->GROUP_LONG_NEWS='Ultime notizie';	
+		$this->GROUP_LONG_CVS='Repository CVS';
+		$this->GROUP_LONG_FTP='Spazio FTP anonimo';
+
+		$this->BREAKING_DOWN_BARRIERS='Abbattere le barriere allo sviluppo Open Source';
+		$this->SOURCEFORGE_STATISTICS='Statistiche SourceForge';
+		$this->TOP_PROJECT_DOWNLOADS='Progetti pi&ugrave; scaricati';
+		$this->HIGHEST_RANKED_USERS='I Migliori';
+		$this->MOST_ACTIVE_THIS_WEEK='I pi&ugrave; attivi della settimana';
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+SourceForge &egrave; un <B>servizio gratuito per gli sviluppatori
+<A href="http://www.opensource.org">Open Source</A></B>
+che offre un facile accesso ai migliori strumenti per
+ CVS, mailing list, gestione bug, aree di discussione,
+gestione attivit&agrave;, pubblicazione su web, archiviazione permanente dei file, backup completi,
+e amministrazione totalmente via web.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[
+per saperne di pi&ugrave; ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[
+FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>Partecipate!</B>
+<P>
+Per ottenere il massimo da SourceForge, dovete
+<A href="/account/register.php">registrarvi come utente
+</A>. Questo vi permetter&agrave; di partecipare appieno a quello che abbiamo da offrirvi.
+Ovviamente potete visitare il sito senza registrarvi, ma non avrete la possibilit&agrave; di partecipare.
+<P> 
+&nbsp;
+<BR>
+<B>Avviate il vostro progetto</B>
+<P>
+<A href="/account/register.php">Registratevi come utenti</A>,
+quindi <A HREF="/account/login.php">accedete</A> e finalmente
+<A HREF="/register/">registrate il vostro progetto.</A> 
+<P>
+Grazie... e divertitevi.';
+
+	}
+
+}
+
+?>

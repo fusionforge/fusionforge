@@ -1,0 +1,155 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id: Catalan.class,v 1.8 2000/10/16 17:26:34 tperdue Exp $
+
+
+/*
+
+	Tim Perdue, September 7, 2000 (original English version)
+	Enric Martínez, September 23, 2000 (translation)
+	Evilio del Rio, October 16, 2000 (corrections)
+
+
+	Aixo es la clase per a Català que substitueix a BaseLanguage
+
+	Cadascun dels Llenguatges extendeix BaseLanguage
+
+	EdR: Els meus criteris de correcció s'han basat en els
+	següents punts:
+
+		. Correció ortogràfica (català central)
+		. Correció teminològica (programari, etc.)
+		. Només hi majúscules a la lletra inicial i noms propis.
+		. D'altres criteris trets de Soft Català (utilització del "vos").
+
+
+
+*/
+
+class Catalan extends BaseLanguage {
+
+	function Catalan() {
+		$this->BaseLanguage();
+
+		$this->language_id=14;
+
+		$this->language_code='ca';
+
+		$this->SEARCH='Cercar';
+		$this->LOGOUT='Sortir';
+		$this->LOGIN='Accés via SSL';
+		$this->NEW_PROJECT='Enregistrar un projecte nou';
+		$this->ACCOUNT_MAINTENANCE='Manteniment de compte';
+		$this->CHANGE_MY_THEME='Canviar el meu tema';
+		$this->MY_PERSONAL_PAGE='La meva pàgina personal';
+		$this->BOOKMARK_PAGE='Página de marcadors';
+		$this->PROJECT_SUMMARY='Sumari de projectes';
+		$this->PROJECT_ADMIN='Admininstració de projectes';
+		$this->SOFTWARE_MAP='Mapa de programari' ;
+		$this->NEW_RELEASES='Noves sortides';
+		$this->CODE_SNIPPET_LIBRARY='Biblioteca de bocinets de codi';
+		$this->DOCUMENTATION='Documentació local';
+		$this->DISCUSSION_FORUMS=' Fòrums de discussiò ';
+		$this->PROJECT_HELP_WANTED='Es necessita ajuda per projectes';
+		$this->COMPILE_FARM='Granja de compilació';
+		$this->CONTACT_US='Contacteu';
+
+		$this->PUBLIC_AREA='Área pública';
+		$this->OTHER_SITE_MIRRORS='Miralls d\'altres llocs';
+		$this->TOP_PROJECTS='Projectes senyers';
+		$this->FOUNDRY_SUMMARY='Sumari de fundició';
+		$this->FOUNDRY_ADMIN='Administració de fundició';
+		$this->NEW_USER='Usuari nou via SSL';
+
+		//tool short names as in HTML_TABS()
+		$this->GROUP_SHORT_SUMMARY='Sumari';
+		$this->GROUP_SHORT_HOMEPAGE='Pàgina de inici';
+		$this->GROUP_SHORT_FORUM='Fòrums';
+		$this->GROUP_SHORT_BUGS='Errades';
+		$this->GROUP_SHORT_SUPPORT='Suport tècnic';
+		$this->GROUP_SHORT_PATCH='Pegats';
+		$this->GROUP_SHORT_MAIL='Llistes';
+		$this->GROUP_SHORT_PM='Tasques';
+		$this->GROUP_SHORT_DOCMAN='Documents';
+		$this->GROUP_SHORT_SURVEY='Enquestes';
+		$this->GROUP_SHORT_NEWS='Notícies';
+		$this->GROUP_SHORT_CVS='CVS';
+		$this->GROUP_SHORT_FILES='Arxius';
+
+		//tool long names for summary page
+		$this->LATEST_FILE_RELEASES='Últimes versions dels arxius';
+		$this->FILE_PACKAGE='Paquet';
+		$this->FILE_VERSION='Versió';
+		$this->FILE_MONITOR='Monitor';
+		$this->FILE_NOTES='Notes';
+		$this->FILE_DOWNLOAD='Descàrrega';
+
+		$this->DEVELOPER_INFO='Informació del desenvolupador';
+		$this->PROJECT_ADMINS='Administradors del projecte';
+		$this->DEVELOPERS='Desenvolupadors';
+
+		$this->GROUP_LONG_HOMEPAGE='Pàgina d\'inici del projecte';
+		$this->GROUP_LONG_FORUM=' Fòrums públics';
+		$this->GROUP_LONG_BUGS='Seguiment d\'errors';
+		$this->GROUP_LONG_SUPPORT='Gestor de suport tècnic';
+		$this->GROUP_LONG_PATCH='Gestor de pegats';
+		$this->GROUP_LONG_MAIL='Llistas de correu';
+		$this->GROUP_LONG_PM='Gestor de tasques';
+		$this->GROUP_LONG_DOCMAN='Gestor de documents';
+		$this->GROUP_LONG_SURVEY='Enquestes';
+		$this->GROUP_LONG_NEWS='Últimes notícies';	
+		$this->GROUP_LONG_CVS='Repositori CVS';
+		$this->GROUP_LONG_FTP='Espai de FTP anònim';
+
+		//
+		// New strings for home page added 10/1
+		//
+		$this->BREAKING_DOWN_BARRIERS='Trencant les barreres per al desenvolupament de codi obert';
+		$this->SOURCEFORGE_STATISTICS='Estadístiques de SourceForge';
+		$this->TOP_PROJECT_DOWNLOADS='Projectes més descarregats';
+		$this->HIGHEST_RANKED_USERS='Usuaris més actius';
+		$this->MOST_ACTIVE_THIS_WEEK='El més actiu aquesta setmana';
+
+		$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge és un<B>servei gratuït per a
+desenvolupadors de<A href="http://www.opensource.org">Codi obert</A></B>
+oferint fàçil accés als millors repositoris CVS, llistes de discussió,
+seguiment d\'errors, taulers de anuncis, fòrums,
+gestió de tasques, hostatge de llocs web, arxius permanent de fitxers,
+còpies de seguretat completes i
+administració totalment basada en web.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[
+mes ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[
+FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>Retorn i participació</B>
+<P>
+Per poder obtenir el màxim de SourceForge, haureu 
+d\'<A href="/account/register.php">enregistrar-vos com a 
+usuari del lloc</A>.
+Això us permetrà participar plenament en tot el que tenim
+per oferir.
+Podreu, és clar, navegar pel lloc sense enregistrar-vos,
+però no tindreu l\'opció de participar plenament.
+<P>
+&nbsp;
+<BR>
+<B>Feu el vostre propi projecte</B>
+<P>
+<A href="/account/register.php">Enregistreu-vos com a usuari del lloc</A>,
+ <A HREF="/account/login.php"entreu </A>amb el vostre usuari i finalment,
+<A HREF="/register/">Doneu d\'alta el vostre projecte.</A>
+<P>
+Moltes Gràcies... i gaudiu del lloc.';
+	}
+}
+
+?>

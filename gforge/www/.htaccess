@@ -1,0 +1,12 @@
+<Files projects>
+ForceType application/x-httpd-php
+</Files>
+<Files users>
+ForceType application/x-httpd-php
+</Files>
+<Files docs>
+ForceType application/x-httpd-php
+</Files>
+<Files foundry>
+ForceType application/x-httpd-php
+</Files>

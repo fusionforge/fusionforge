@@ -1,0 +1,492 @@
+
+copy activity_log from '/home/tperdue/dbfiles/activity_log.txt';
+
+copy activity_log_old from '/home/tperdue/dbfiles/activity_log_old.txt';
+
+copy activity_log_old_old from '/home/tperdue/dbfiles/activity_log_old_old.txt';
+
+copy bug from '/home/tperdue/dbfiles/bug.txt';
+select setval ('bug_pk_seq', (select max(bug_id) from bug));
+create index bug_group_id on bug (group_id);
+
+copy bug_bug_dependencies from '/home/tperdue/dbfiles/bug_bug_dependencies.txt';
+select setval ('bug_bug_dependencies_pk_seq', (select max(bug_depend_id) from bug_bug_dependencies));
+create index bug_bug_dependencies_bug_id on bug_bug_dependencies (bug_id);
+create index bug_bug_is_dependent_on_task_id on bug_bug_dependencies (is_dependent_on_bug_id);
+
+copy bug_canned_responses from '/home/tperdue/dbfiles/bug_canned_responses.txt';
+select setval ('bug_canned_responses_pk_seq', (select max(bug_canned_id) from bug_canned_responses));
+create index bug_canned_response_group_id on bug_canned_responses (group_id);
+
+copy bug_category from '/home/tperdue/dbfiles/bug_category.txt';
+select setval ('bug_category_pk_seq', (select max(bug_category_id) from bug_category));
+create index bug_category_group_id on bug_category (group_id);
+
+copy bug_filter from '/home/tperdue/dbfiles/bug_filter.txt';
+select setval ('bug_filter_pk_seq', (select max(filter_id) from bug_filter));
+
+copy bug_group from '/home/tperdue/dbfiles/bug_group.txt';
+select setval ('bug_group_pk_seq', (select max(bug_group_id) from bug_group));
+create index bug_group_group_id on bug_group (group_id);
+
+copy bug_history from '/home/tperdue/dbfiles/bug_history.txt';
+select setval ('bug_history_pk_seq', (select max(bug_history_id) from bug_history));
+create index bug_history_bug_id on bug_history (bug_id);
+
+copy bug_resolution from '/home/tperdue/dbfiles/bug_resolution.txt';
+select setval ('bug_resolution_pk_seq', (select max(resolution_id) from bug_resolution));
+
+copy bug_status from '/home/tperdue/dbfiles/bug_status.txt';
+select setval ('bug_status_pk_seq', (select max(status_id) from bug_status));
+
+copy bug_task_dependencies from '/home/tperdue/dbfiles/bug_task_dependencies.txt';
+select setval ('bug_task_dependencies_pk_seq', (select max(bug_depend_id) from bug_task_dependencies));
+create index bug_task_dependencies_bug_id on bug_task_dependencies (bug_id);
+create index bug_task_is_dependent_on_task_id on bug_task_dependencies (is_dependent_on_task_id);
+
+copy canned_responses from '/home/tperdue/dbfiles/canned_responses.txt';
+select setval ('canned_responses_pk_seq', (select max(response_id) from canned_responses));
+
+copy db_images from '/home/tperdue/dbfiles/db_images.txt';
+select setval ('db_images_pk_seq', (select max(id) from db_images));
+create index db_images_group on db_images (group_id);
+
+copy doc_data from '/home/tperdue/dbfiles/doc_data.txt';
+select setval ('doc_data_pk_seq', (select max(docid) from doc_data));
+create index doc_group_doc_group on doc_data (doc_group);
+
+copy doc_groups from '/home/tperdue/dbfiles/doc_groups.txt';
+select setval ('doc_groups_pk_seq', (select max(doc_group) from doc_groups));
+create index doc_groups_group on doc_groups (group_id);
+
+copy doc_states from '/home/tperdue/dbfiles/doc_states.txt';
+select setval ('doc_states_pk_seq', (select max(stateid) from doc_states));
+
+copy filemodule_monitor from '/home/tperdue/dbfiles/filemodule_monitor.txt';
+select setval ('filemodule_monitor_pk_seq', (select max(id) from filemodule_monitor));
+create index filemodule_monitor_id on filemodule_monitor (filemodule_id);
+
+copy forum from '/home/tperdue/dbfiles/forum.txt';
+select setval ('forum_pk_seq', (select max(msg_id) from forum));
+create index forum_forumid_msgid on forum (group_forum_id,msg_id);
+create index forum_group_forum_id on forum (group_forum_id);
+create index forum_forumid_isfollowupto on forum (group_forum_id,is_followup_to);
+create index forum_thread_id on forum (thread_id);
+create index forum_forumid_threadid_mostrecent on forum (group_forum_id,thread_id,most_recent_date);
+create index forum_threadid_isfollowupto on forum (thread_id,is_followup_to);
+create index forum_forumid_isfollto_mostrecentdate on forum (group_forum_id,is_followup_to,most_recent_date);
+
+copy forum_agg_msg_count from '/home/tperdue/dbfiles/forum_agg_msg_count.txt';
+
+copy forum_group_list from '/home/tperdue/dbfiles/forum_group_list.txt';
+select setval ('forum_group_list_pk_seq', (select max(group_forum_id) from forum_group_list));
+create index forum_group_list_group_id on forum_group_list (group_id);
+
+copy forum_monitored_forums from '/home/tperdue/dbfiles/forum_monitored_forums.txt';
+select setval ('forum_monitored_forums_pk_seq', (select max(monitor_id) from forum_monitored_forums));
+create index forum_monitor_combo_id on forum_monitored_forums (forum_id,user_id);
+create index forum_monitor_thread_id on forum_monitored_forums (forum_id);
+
+copy forum_saved_place from '/home/tperdue/dbfiles/forum_saved_place.txt';
+select setval ('forum_saved_place_pk_seq', (select max(saved_place_id) from forum_saved_place));
+
+copy forum_thread_id from '/home/tperdue/dbfiles/forum_thread_id.txt';
+select setval ('forum_thread_id_pk_seq', (select max(thread_id) from forum_thread_id));
+
+copy foundry_data from '/home/tperdue/dbfiles/foundry_data.txt';
+
+copy foundry_news from '/home/tperdue/dbfiles/foundry_news.txt';
+select setval ('foundry_news_pk_seq', (select max(foundry_news_id) from foundry_news));
+create index foundry_news_foundry_approved_date on foundry_news (foundry_id,is_approved,approve_date);
+create index foundry_news_foundry_approved on foundry_news (foundry_id,is_approved);
+create index foundry_news_foundry on foundry_news (foundry_id);
+
+copy foundry_preferred_projects from '/home/tperdue/dbfiles/foundry_preferred_projects.txt';
+select setval ('foundry_preferred_projec_pk_seq', (select max(foundry_project_id) from foundry_preferred_projects));
+create index foundry_project_group_rank on foundry_preferred_projects (group_id,rank);
+create index foundry_project_group on foundry_preferred_projects (group_id);
+
+copy foundry_projects from '/home/tperdue/dbfiles/foundry_projects.txt';
+select setval ('foundry_projects_pk_seq', (select max(id) from foundry_projects));
+create index foundry_projects_foundry on foundry_projects (foundry_id);
+
+copy frs_dlstats_agg from '/home/tperdue/dbfiles/frs_dlstats_agg.txt';
+create index downloads_http_idx on frs_dlstats_agg (downloads_http);
+create index downloads_ftp_idx on frs_dlstats_agg (downloads_ftp);
+create index file_id_idx on frs_dlstats_agg (file_id);
+create index day_idx on frs_dlstats_agg (day);
+
+copy frs_dlstats_file_agg from '/home/tperdue/dbfiles/frs_dlstats_file_agg.txt';
+create index dlstats_file_down on frs_dlstats_file_agg (downloads);
+create index dlstats_file_file_id on frs_dlstats_file_agg (file_id);
+create index dlstats_file_day on frs_dlstats_file_agg (day);
+
+copy frs_dlstats_filetotal_agg from '/home/tperdue/dbfiles/frs_dlstats_filetotal_agg.txt';
+create index stats_agr_tmp_fid on frs_dlstats_filetotal_agg (file_id);
+
+copy frs_dlstats_filetotal_agg_old from '/home/tperdue/dbfiles/frs_dlstats_filetotal_agg_old.txt';
+create index frs_dlstats_filetotal_agg_old_file_id on frs_dlstats_filetotal_agg_old (file_id);
+
+copy frs_dlstats_group_agg from '/home/tperdue/dbfiles/frs_dlstats_group_agg.txt';
+create index group_id_idx on frs_dlstats_group_agg (group_id);
+create index downloads_idx on frs_dlstats_group_agg (downloads);
+create index frs_dlstats_group_agg_day on frs_dlstats_group_agg (day);
+
+copy frs_dlstats_grouptotal_agg from '/home/tperdue/dbfiles/frs_dlstats_grouptotal_agg.txt';
+create index stats_agr_tmp_gid on frs_dlstats_grouptotal_agg (group_id);
+
+copy frs_file from '/home/tperdue/dbfiles/frs_file.txt';
+select setval ('frs_file_pk_seq', (select max(file_id) from frs_file));
+create index frs_file_name on frs_file (filename);
+create index frs_file_date on frs_file (post_date);
+create index frs_file_processor on frs_file (processor_id);
+create index frs_file_release_id on frs_file (release_id);
+create index frs_file_type on frs_file (type_id);
+
+copy frs_filetype from '/home/tperdue/dbfiles/frs_filetype.txt';
+select setval ('frs_filetype_pk_seq', (select max(type_id) from frs_filetype));
+
+copy frs_package from '/home/tperdue/dbfiles/frs_package.txt';
+select setval ('frs_package_pk_seq', (select max(package_id) from frs_package));
+create index package_group_id on frs_package (group_id);
+
+copy frs_processor from '/home/tperdue/dbfiles/frs_processor.txt';
+select setval ('frs_processor_pk_seq', (select max(processor_id) from frs_processor));
+
+copy frs_release from '/home/tperdue/dbfiles/frs_release.txt';
+select setval ('frs_release_pk_seq', (select max(release_id) from frs_release));
+create index frs_release_package on frs_release (package_id);
+create index frs_release_date on frs_release (release_date);
+create index frs_release_by on frs_release (released_by);
+
+copy frs_status from '/home/tperdue/dbfiles/frs_status.txt';
+select setval ('frs_status_pk_seq', (select max(status_id) from frs_status));
+
+copy group_cvs_history from '/home/tperdue/dbfiles/group_cvs_history.txt';
+select setval ('group_cvs_history_pk_seq', (select max(id) from group_cvs_history));
+create index group_cvs_history_group_id on group_cvs_history (group_id);
+create index user_name_idx on group_cvs_history (user_name);
+
+copy group_history from '/home/tperdue/dbfiles/group_history.txt';
+select setval ('group_history_pk_seq', (select max(group_history_id) from group_history));
+create index group_history_group_id on group_history (group_id);
+
+copy group_type from '/home/tperdue/dbfiles/group_type.txt';
+select setval ('group_type_pk_seq', (select max(type_id) from group_type));
+
+copy groups from '/home/tperdue/dbfiles/groups.txt';
+select setval ('groups_pk_seq', (select max(group_id) from groups));
+create index groups_unix on groups (unix_group_name);
+create index groups_type on groups (type);
+create index groups_public on groups (is_public);
+create index groups_status on groups (status);
+
+copy intel_agreement from '/home/tperdue/dbfiles/intel_agreement.txt';
+
+copy mail_group_list from '/home/tperdue/dbfiles/mail_group_list.txt';
+select setval ('mail_group_list_pk_seq', (select max(group_list_id) from mail_group_list));
+create index mail_group_list_group on mail_group_list (group_id);
+
+copy news_bytes from '/home/tperdue/dbfiles/news_bytes.txt';
+select setval ('news_bytes_pk_seq', (select max(id) from news_bytes));
+create index news_bytes_group on news_bytes (group_id);
+create index news_bytes_approved on news_bytes (is_approved);
+create index news_bytes_forum on news_bytes (forum_id);
+
+copy patch from '/home/tperdue/dbfiles/patch.txt';
+select setval ('patch_pk_seq', (select max(patch_id) from patch));
+create index patch_group_id on patch (group_id);
+
+copy patch_category from '/home/tperdue/dbfiles/patch_category.txt';
+select setval ('patch_category_pk_seq', (select max(patch_category_id) from patch_category));
+create index patch_group_group_id on patch_category (group_id);
+
+copy patch_history from '/home/tperdue/dbfiles/patch_history.txt';
+select setval ('patch_history_pk_seq', (select max(patch_history_id) from patch_history));
+create index patch_history_patch_id on patch_history (patch_id);
+
+copy patch_status from '/home/tperdue/dbfiles/patch_status.txt';
+select setval ('patch_status_pk_seq', (select max(patch_status_id) from patch_status));
+
+copy people_job from '/home/tperdue/dbfiles/people_job.txt';
+select setval ('people_job_pk_seq', (select max(job_id) from people_job));
+
+copy people_job_category from '/home/tperdue/dbfiles/people_job_category.txt';
+select setval ('people_job_category_pk_seq', (select max(category_id) from people_job_category));
+
+copy people_job_inventory from '/home/tperdue/dbfiles/people_job_inventory.txt';
+select setval ('people_job_inventory_pk_seq', (select max(job_inventory_id) from people_job_inventory));
+
+copy people_job_status from '/home/tperdue/dbfiles/people_job_status.txt';
+select setval ('people_job_status_pk_seq', (select max(status_id) from people_job_status));
+
+copy people_skill from '/home/tperdue/dbfiles/people_skill.txt';
+select setval ('people_skill_pk_seq', (select max(skill_id) from people_skill));
+
+copy people_skill_inventory from '/home/tperdue/dbfiles/people_skill_inventory.txt';
+select setval ('people_skill_inventory_pk_seq', (select max(skill_inventory_id) from people_skill_inventory));
+
+copy people_skill_level from '/home/tperdue/dbfiles/people_skill_level.txt';
+select setval ('people_skill_level_pk_seq', (select max(skill_level_id) from people_skill_level));
+
+copy people_skill_year from '/home/tperdue/dbfiles/people_skill_year.txt';
+select setval ('people_skill_year_pk_seq', (select max(skill_year_id) from people_skill_year));
+
+copy project_assigned_to from '/home/tperdue/dbfiles/project_assigned_to.txt';
+select setval ('project_assigned_to_pk_seq', (select max(project_assigned_id) from project_assigned_to));
+create index project_assigned_to_assigned_to on project_assigned_to (assigned_to_id);
+create index project_assigned_to_task_id on project_assigned_to (project_task_id);
+
+copy project_counts_tmp from '/home/tperdue/dbfiles/project_counts_tmp.txt';
+
+copy project_counts_weekly_tmp from '/home/tperdue/dbfiles/project_counts_weekly_tmp.txt';
+
+copy project_dependencies from '/home/tperdue/dbfiles/project_dependencies.txt';
+select setval ('project_dependencies_pk_seq', (select max(project_depend_id) from project_dependencies));
+create index project_is_dependent_on_task_id on project_dependencies (is_dependent_on_task_id);
+create index project_dependencies_task_id on project_dependencies (project_task_id);
+
+copy project_group_list from '/home/tperdue/dbfiles/project_group_list.txt';
+select setval ('project_group_list_pk_seq', (select max(group_project_id) from project_group_list));
+create index project_group_list_group_id on project_group_list (group_id);
+
+copy project_history from '/home/tperdue/dbfiles/project_history.txt';
+select setval ('project_history_pk_seq', (select max(project_history_id) from project_history));
+create index project_history_task_id on project_history (project_task_id);
+
+copy project_metric from '/home/tperdue/dbfiles/project_metric.txt';
+select setval ('project_metric_pk_seq', (select max(ranking) from project_metric));
+create index project_metric_group on project_metric (group_id);
+
+copy project_metric_tmp1 from '/home/tperdue/dbfiles/project_metric_tmp1.txt';
+select setval ('project_metric_tmp1_pk_seq', (select max(ranking) from project_metric_tmp1));
+
+copy project_metric_weekly_tmp1 from '/home/tperdue/dbfiles/project_metric_weekly_tmp1.txt';
+select setval ('project_metric_weekly_tm_pk_seq', (select max(ranking) from project_metric_weekly_tmp1));
+
+copy project_status from '/home/tperdue/dbfiles/project_status.txt';
+select setval ('project_status_pk_seq', (select max(status_id) from project_status));
+
+copy project_task from '/home/tperdue/dbfiles/project_task.txt';
+select setval ('project_task_pk_seq', (select max(project_task_id) from project_task));
+create index project_task_group_project_id on project_task (group_project_id);
+
+copy project_weekly_metric from '/home/tperdue/dbfiles/project_weekly_metric.txt';
+select setval ('project_weekly_metric_pk_seq', (select max(ranking) from project_weekly_metric));
+create index project_metric_weekly_group on project_weekly_metric (group_id);
+
+copy session from '/home/tperdue/dbfiles/session.txt';
+create index session_user_id on session (user_id);
+create index session_time on session (time);
+
+copy snippet from '/home/tperdue/dbfiles/snippet.txt';
+select setval ('snippet_pk_seq', (select max(snippet_id) from snippet));
+create index snippet_language on snippet (language);
+create index snippet_category on snippet (category);
+
+copy snippet_package from '/home/tperdue/dbfiles/snippet_package.txt';
+select setval ('snippet_package_pk_seq', (select max(snippet_package_id) from snippet_package));
+create index snippet_package_language on snippet_package (language);
+create index snippet_package_category on snippet_package (category);
+
+copy snippet_package_item from '/home/tperdue/dbfiles/snippet_package_item.txt';
+select setval ('snippet_package_item_pk_seq', (select max(snippet_package_item_id) from snippet_package_item));
+create index snippet_package_item_pkg_ver on snippet_package_item (snippet_package_version_id);
+
+copy snippet_package_version from '/home/tperdue/dbfiles/snippet_package_version.txt';
+select setval ('snippet_package_version_pk_seq', (select max(snippet_package_version_id) from snippet_package_version));
+create index snippet_package_version_pkg_id on snippet_package_version (snippet_package_id);
+
+copy snippet_version from '/home/tperdue/dbfiles/snippet_version.txt';
+select setval ('snippet_version_pk_seq', (select max(snippet_version_id) from snippet_version));
+create index snippet_version_snippet_id on snippet_version (snippet_id);
+
+copy stats_agg_logo_by_day from '/home/tperdue/dbfiles/stats_agg_logo_by_day.txt';
+
+copy stats_agg_logo_by_group from '/home/tperdue/dbfiles/stats_agg_logo_by_group.txt';
+
+copy stats_agg_pages_by_browser from '/home/tperdue/dbfiles/stats_agg_pages_by_browser.txt';
+
+copy stats_agg_pages_by_day from '/home/tperdue/dbfiles/stats_agg_pages_by_day.txt';
+create index pages_by_day_day on stats_agg_pages_by_day (day);
+
+copy stats_agg_pages_by_day_old from '/home/tperdue/dbfiles/stats_agg_pages_by_day_old.txt';
+
+copy stats_agg_site_by_day from '/home/tperdue/dbfiles/stats_agg_site_by_day.txt';
+
+copy stats_agg_site_by_group from '/home/tperdue/dbfiles/stats_agg_site_by_group.txt';
+
+copy stats_agr_filerelease from '/home/tperdue/dbfiles/stats_agr_filerelease.txt';
+create index stats_agr_filerelease_group_id on stats_agr_filerelease (group_id);
+create index stats_agr_filerelease_filerelease_id on stats_agr_filerelease (filerelease_id);
+
+copy stats_agr_project from '/home/tperdue/dbfiles/stats_agr_project.txt';
+create index project_agr_log_group on stats_agr_project (group_id);
+
+copy stats_ftp_downloads from '/home/tperdue/dbfiles/stats_ftp_downloads.txt';
+create index ftpdl_group_id on stats_ftp_downloads (group_id);
+create index ftpdl_fid on stats_ftp_downloads (filerelease_id);
+create index ftpdl_day on stats_ftp_downloads (day);
+
+copy stats_http_downloads from '/home/tperdue/dbfiles/stats_http_downloads.txt';
+create index httpdl_group_id on stats_http_downloads (group_id);
+create index httpdl_fid on stats_http_downloads (filerelease_id);
+create index httpdl_day on stats_http_downloads (day);
+
+copy stats_project from '/home/tperdue/dbfiles/stats_project.txt';
+create index archive_project_monthday on stats_project (month,day);
+create index project_log_group on stats_project (group_id);
+create index archive_project_week on stats_project (week);
+create index archive_project_day on stats_project (day);
+create index archive_project_month on stats_project (month);
+
+copy stats_project_tmp from '/home/tperdue/dbfiles/stats_project_tmp.txt';
+create index stats_project_tmp_group_id on stats_project_tmp (group_id);
+create index project_stats_week on stats_project_tmp (week);
+create index project_stats_month on stats_project_tmp (month);
+create index project_stats_day on stats_project_tmp (day);
+
+copy stats_site from '/home/tperdue/dbfiles/stats_site.txt';
+create index stats_site_monthday on stats_site (month,day);
+create index stats_site_week on stats_site (week);
+create index stats_site_day on stats_site (day);
+create index stats_site_month on stats_site (month);
+
+copy support from '/home/tperdue/dbfiles/support.txt';
+select setval ('support_pk_seq', (select max(support_id) from support));
+create index support_group_id on support (group_id);
+
+copy support_canned_responses from '/home/tperdue/dbfiles/support_canned_responses.txt';
+select setval ('support_canned_responses_pk_seq', (select max(support_canned_id) from support_canned_responses));
+create index support_canned_response_group_id on support_canned_responses (group_id);
+
+copy support_category from '/home/tperdue/dbfiles/support_category.txt';
+select setval ('support_category_pk_seq', (select max(support_category_id) from support_category));
+create index support_group_group_id on support_category (group_id);
+
+copy support_history from '/home/tperdue/dbfiles/support_history.txt';
+select setval ('support_history_pk_seq', (select max(support_history_id) from support_history));
+create index support_history_support_id on support_history (support_id);
+
+copy support_messages from '/home/tperdue/dbfiles/support_messages.txt';
+select setval ('support_messages_pk_seq', (select max(support_message_id) from support_messages));
+create index support_messages_support_id on support_messages (support_id);
+
+copy support_status from '/home/tperdue/dbfiles/support_status.txt';
+select setval ('support_status_pk_seq', (select max(support_status_id) from support_status));
+
+copy supported_languages from '/home/tperdue/dbfiles/supported_languages.txt';
+select setval ('supported_languages_pk_seq', (select max(language_id) from supported_languages));
+create index supported_languages_code on supported_languages (language_code);
+
+copy survey_question_types from '/home/tperdue/dbfiles/survey_question_types.txt';
+select setval ('survey_question_types_pk_seq', (select max(id) from survey_question_types));
+
+copy survey_questions from '/home/tperdue/dbfiles/survey_questions.txt';
+select setval ('survey_questions_pk_seq', (select max(question_id) from survey_questions));
+create index survey_questions_group on survey_questions (group_id);
+
+copy survey_rating_aggregate from '/home/tperdue/dbfiles/survey_rating_aggregate.txt';
+create index survey_rating_aggregate_type_id on survey_rating_aggregate (type,id);
+
+copy survey_rating_response from '/home/tperdue/dbfiles/survey_rating_response.txt';
+create index survey_rating_responses_user_type_id on survey_rating_response (user_id,type,id);
+create index survey_rating_responses_type_id on survey_rating_response (type,id);
+
+copy survey_responses from '/home/tperdue/dbfiles/survey_responses.txt';
+create index survey_responses_group_id on survey_responses (group_id);
+create index survey_responses_user_survey_question on survey_responses (user_id,survey_id,question_id);
+create index survey_responses_user_survey on survey_responses (user_id,survey_id);
+create index survey_responses_survey_question on survey_responses (survey_id,question_id);
+
+copy surveys from '/home/tperdue/dbfiles/surveys.txt';
+select setval ('surveys_pk_seq', (select max(survey_id) from surveys));
+create index surveys_group on surveys (group_id);
+
+copy system_history from '/home/tperdue/dbfiles/system_history.txt';
+select setval ('system_history_pk_seq', (select max(id) from system_history));
+
+copy system_machines from '/home/tperdue/dbfiles/system_machines.txt';
+select setval ('system_machines_pk_seq', (select max(id) from system_machines));
+
+copy system_news from '/home/tperdue/dbfiles/system_news.txt';
+select setval ('system_news_pk_seq', (select max(id) from system_news));
+
+copy system_services from '/home/tperdue/dbfiles/system_services.txt';
+select setval ('system_services_pk_seq', (select max(id) from system_services));
+
+copy system_status from '/home/tperdue/dbfiles/system_status.txt';
+select setval ('system_status_pk_seq', (select max(id) from system_status));
+
+copy theme_prefs from '/home/tperdue/dbfiles/theme_prefs.txt';
+
+copy themes from '/home/tperdue/dbfiles/themes.txt';
+select setval ('themes_pk_seq', (select max(theme_id) from themes));
+
+copy tmp_projs_releases_tmp from '/home/tperdue/dbfiles/tmp_projs_releases_tmp.txt';
+
+copy top_group from '/home/tperdue/dbfiles/top_group.txt';
+create index rank_forumposts_week_idx on top_group (rank_forumposts_week);
+create index rank_downloads_week_idx on top_group (rank_downloads_week);
+create index pageviews_proj_idx on top_group (pageviews_proj);
+create index rank_userrank_idx on top_group (rank_userrank);
+create index rank_downloads_all_idx on top_group (rank_downloads_all);
+
+copy trove_cat from '/home/tperdue/dbfiles/trove_cat.txt';
+select setval ('trove_cat_pk_seq', (select max(trove_cat_id) from trove_cat));
+create index parent_idx on trove_cat (parent);
+create index root_parent_idx on trove_cat (root_parent);
+create index version_idx on trove_cat (version);
+
+copy trove_group_link from '/home/tperdue/dbfiles/trove_group_link.txt';
+select setval ('trove_group_link_pk_seq', (select max(trove_group_id) from trove_group_link));
+create index trove_group_link_group_id on trove_group_link (group_id);
+create index trove_group_link_cat_id on trove_group_link (trove_cat_id);
+
+copy trove_treesums from '/home/tperdue/dbfiles/trove_treesums.txt';
+select setval ('trove_treesums_pk_seq', (select max(trove_treesums_id) from trove_treesums));
+
+copy unix_uids from '/home/tperdue/dbfiles/unix_uids.txt';
+select setval ('unix_uids_pk_seq', (select max(id) from unix_uids));
+
+copy user_bookmarks from '/home/tperdue/dbfiles/user_bookmarks.txt';
+select setval ('user_bookmarks_pk_seq', (select max(bookmark_id) from user_bookmarks));
+create index user_bookmark_user_id on user_bookmarks (user_id);
+
+copy user_diary from '/home/tperdue/dbfiles/user_diary.txt';
+select setval ('user_diary_pk_seq', (select max(id) from user_diary));
+create index user_diary_user on user_diary (user_id);
+create index user_diary_user_date on user_diary (user_id,date_posted);
+create index user_diary_date on user_diary (date_posted);
+
+copy user_diary_monitor from '/home/tperdue/dbfiles/user_diary_monitor.txt';
+select setval ('user_diary_monitor_pk_seq', (select max(monitor_id) from user_diary_monitor));
+create index user_diary_monitor_user on user_diary_monitor (user_id);
+create index user_diary_monitor_monitored_user on user_diary_monitor (monitored_user);
+
+copy user_group from '/home/tperdue/dbfiles/user_group.txt';
+select setval ('user_group_pk_seq', (select max(user_group_id) from user_group));
+create index user_group_group_id on user_group (group_id);
+create index bug_flags_idx on user_group (bug_flags);
+create index project_flags_idx on user_group (project_flags);
+create index user_group_user_id on user_group (user_id);
+create index admin_flags_idx on user_group (admin_flags);
+create index forum_flags_idx on user_group (forum_flags);
+
+copy user_metric from '/home/tperdue/dbfiles/user_metric.txt';
+select setval ('user_metric_pk_seq', (select max(ranking) from user_metric));
+
+copy user_metric0 from '/home/tperdue/dbfiles/user_metric0.txt';
+select setval ('user_metric0_pk_seq', (select max(ranking) from user_metric0));
+create index user_metric0_user_id on user_metric0 (user_id);
+
+copy user_preferences from '/home/tperdue/dbfiles/user_preferences.txt';
+create index user_pref_user_id on user_preferences (user_id);
+
+copy user_ratings from '/home/tperdue/dbfiles/user_ratings.txt';
+create index user_ratings_rated_by on user_ratings (rated_by);
+create index user_ratings_user_id on user_ratings (user_id);
+
+copy users from '/home/tperdue/dbfiles/users.txt';
+select setval ('users_pk_seq', (select max(user_id) from users));
+create index user_user on users (status);
