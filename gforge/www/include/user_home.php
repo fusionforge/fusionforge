@@ -45,7 +45,14 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
 	</TD>
 </TR>
-
+<?php if ($user->getJabberAddress()) { ?>
+<TR valign=top>
+	<TD>Jabber Addr: </TD>
+	<TD>
+	<A HREF="jabber:<?php print $user->getJabberAddress().'"><B>'.$user->getJabberAddress().'</B></A>'; ?>
+	</TD>
+</TR>
+<?php } ?>
 <TR>
 	<TD>
 	Site Member Since: 
