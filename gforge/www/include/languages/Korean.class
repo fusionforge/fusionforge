@@ -85,7 +85,7 @@ class Korean extends BaseLanguage {
 	$this->GROUP_SHORT_MAIL='메일링리스트';
 	$this->GROUP_SHORT_PM='프로젝트';
 	$this->GROUP_SHORT_DOCMAN='문서';
-	$this->GROUP_SHORT_SURVEY='여론조사';
+	$this->GROUP_SHORT_SURVEY='설문조사';
 	$this->GROUP_SHORT_NEWS='새소식';
 	$this->GROUP_SHORT_CVS='CVS';
 	$this->GROUP_SHORT_FILES='파일';
@@ -215,7 +215,7 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 	$this->USERS_PEERINFO1='만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> 이 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것이며, 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.';
 	$this->USERS_PEERINFO2='Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 이곳의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul></i></p>';
 
-    // New strings added on 2002/06/11 by Soon-Son Kwon
+    // New strings added on 2002/06/12 by Soon-Son Kwon
 	$this->MY_about_blurb='여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.';
 	$this->MY_no_bookmarks='현재 저장된 책갈피가 없습니다.';
 	$this->MY_no_monitored_filemodules='모니터하고 있는 파일이 없습니다.<P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;';
@@ -226,6 +226,35 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 	$this->MY_no_task='나에게 할당되어 있는 임무가 없습니다.';
 	$this->MY_no_projects='아직 어떤 프로젝트에도 소속되어 있지 않습니다.';
 
+	$this->DIARY_add='새로운 항목 작성하기';
+	$this->DIARY_update='기존 항목 고치기';
+	$this->DIARY_public='공개하기';
+	$this->DIARY_mark_public='공개하기를 선택하시면 입력하신 내용이 이곳을 모니터링하고 있는 사용자들에게 메일로 전송됩니다.';
+	$this->DIARY_list_title='일기 및 메모 항목들';
+	$this->DIARY_noentry='저장된 내용이 없습니다.';
+
+	$this->ACCOUNT_welcome='
+		<P>환영합니다!<P>
+		여러분의 계정과 관련된 사항들을 이곳에서 확인하시거나 변경하실 수 있습니다. 개발자 프로필 정보 역시 보실 수 있으며 다른 사람들에 의한 평가 결과 역시 이곳에서 확인하실 수 있습니다.';
+
+	$this->ACCOUNT_rememberme='
+		"Remember me".
+		<I>(로그인하지 않도고 여러분의 <a href="/my/">개인 페이지</a>에 접근할 수 있도록 합니다. 수정할 사항이 있을 때는 로그인을 하셔야 합니다.)</I>';
+
+	$this->MEMBER_SINCE='사용자 등록 일자';
+	$this->USER_ID='일련번호';
+	$this->LOGIN_NAME='로그인네임';
+	$this->PASSWORD='비밀번호';
+	$this->TIMEZONE='시간대';
+	$this->LANGUAGE='언어';
+	$this->REALNAME='이름';
+	$this->EMAILADDR='이메일 주소';
+
+	$this->ACCOUNT_LOSTPW_title='계정 비밀번호 분실';
+	$this->ACCOUNT_LOSTPW_desc='
+	<P><B>비밀번호를 잊으셨습니까?</B>
+	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. 
+	<P>아래 "Send Lost PW Hash" 를 누르시면 여러분에게 할당되어 있는 이메일 주소로 URL을 알려 드리겠습니다. 그 URL은 여러분의 계정에 할당되어 있는 128-bit 해쉬 정보입니다. 그 URL을 방문하시면 비밀번호를 변경하시고 사이트에 다시 로그인하실 수 있습니다.';
 
 	}
 }

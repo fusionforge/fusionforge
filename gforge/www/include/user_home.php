@@ -30,22 +30,22 @@ $HTML->header(array('title'=>'Developer Profile'));
 
 <?php echo $HTML->box1_top("Personal Information",true,false,false); ?>
 <TR>
-	<TD>User ID: </TD>
+	<TD><?php echo $Language->USER_ID; ?>: </TD>
 	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>
 </TR>
 
 <TR valign=top>
-	<TD>Login Name: </TD>
+	<TD><?php echo $Language->LOGIN_NAME; ?>: </TD>
 	<TD><B><?php print $user->getUnixName(); ?></B></TD>
 </TR>
 
 <TR valign=top>
-	<TD>Real Name: </TD>
+	<TD><?php echo $Language->REALNAME; ?>: </TD>
 	<TD><B><?php print $user->getRealName(); ?></B></TD>
 </TR>
 
 <TR valign=top>
-	<TD>Email Addr: </TD>
+	<TD><?php echo $Language->EMAILADDR; ?>: </TD>
 	<TD>
 	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
 		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
@@ -54,7 +54,7 @@ $HTML->header(array('title'=>'Developer Profile'));
 
 <TR>
 	<TD>
-	Site Member Since: 
+	<?php echo $Language->MEMBER_SINCE; ?>: 
 	</TD>
 	<TD><B><?php print date($sys_datefmt, $user->getAddDate()); ?></B>
 	<?php
@@ -63,7 +63,7 @@ $HTML->header(array('title'=>'Developer Profile'));
 
 	echo vote_show_user_rating($user_id);
 
-	echo $HTML->box1_middle('Diary And Notes');
+	echo $HTML->box1_middle($Language->DIARY);
  
 	/*
 

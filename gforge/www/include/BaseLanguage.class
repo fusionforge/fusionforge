@@ -232,6 +232,36 @@ Content owned by VA Linux Systems is copyright
 	var $MY_no_task='You have no open tasks assigned to you.';
 	var $MY_no_projects='You\'re not a member of any active projects';
 
+	var $DIARY_add='Add a New Entry';
+	var $DIARY_update='Update an Entry';
+	var $DIARY_public='Is Public';
+	var $DIARY_mark_public='If marked as public, your entry will be mailed to any monitoring users when it is first submitted.';
+	var $DIARY_list_title='Existing Diary And Note Entries';
+	var $DIARY_noentry='You Have No Diary Entries';
+
+	var $ACCOUNT_welcome='
+		<p>Welcome!
+		<p>You can view/change all of your account features from here. You may also wish to view your developer/consultant profiles and ratings.';
+
+	var $ACCOUNT_rememberme='
+		"Remember me".
+		<I>(Allows to access your <a href="/my/">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>';
+
+	var $MEMBER_SINCE='Site Member Since';
+	var $USER_ID='User ID';
+	var $LOGIN_NAME='Login Name';
+	var $PASSWORD='Password';
+	var $TIMEZONE='Timezone';
+	var $LANGUAGE='Language';
+	var $REALNAME='Real Name';
+	var $EMAILADDR='Email Address';
+
+	var $ACCOUNT_LOSTPW_title='Lost Account Password';
+	var $ACCOUNT_LOSTPW_desc='
+		<P><B>Lost Your Password?</B>
+		<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. 
+		<P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.';
+
 	/*
 		returns database result
 		of supported languages

@@ -82,10 +82,10 @@ if (user_isloggedin()) {
 		if (!$res || db_numrows($res) < 1) {
 			$feedback .= ' Entry not found or does not belong to you ';
 			$proc_str='add';
-			$info_str='Add a New Entry';
+			$info_str=$Language->DIARY_add;
 		} else {
 			$proc_str='update';
-			$info_str='Update an Entry';
+			$info_str=$Language->DIARY_update;
 			$_summary=db_result($res,0,'summary');
 			$_details=db_result($res,0,'details');
 			$_is_public=db_result($res,0,'is_public');
@@ -93,13 +93,13 @@ if (user_isloggedin()) {
 		}
 	} else {
 		$proc_str='add';
-		$info_str='Add a New Entry';
+		$info_str=$Language->DIARY_add;
 	}
 
-	echo site_user_header(array('title'=>'My Diary And Notes'));
+	echo site_user_header(array('title'=>$Language->DIARY));
 
 	echo '
-	<H2>Diary And Notes</H2>
+	<H2>'.$Language->DIARY.'</H2>
 	<P>
 	<H3>'. $info_str .'</H3>
 	<P>
@@ -117,11 +117,8 @@ if (user_isloggedin()) {
 	<TR><TD COLSPAN="2">
 		<P>
 		<INPUT TYPE="SUBMIT" NAME="submit" VALUE="SUBMIT ONLY ONCE">
-		&nbsp; <INPUT TYPE="CHECKBOX" NAME="is_public" VALUE="1" '. (($_is_public)?'CHECKED':'') .'> Is Public
-		<P>
-		If marked as public, your entry will be mailed to any 
-		monitoring users when it is first submitted.
-		<P>
+		&nbsp; <INPUT TYPE="CHECKBOX" NAME="is_public" VALUE="1" '. (($_is_public)?'CHECKED':'') .'>'.$Language->DIARY_public.' 
+		<P>'.$Language->DIARY_mark_public.'<P>
 		</FORM>
 	</TD></TR>
 
@@ -129,15 +126,14 @@ if (user_isloggedin()) {
 
 	<P>';
 
-	echo $HTML->box1_top('Existing Diary And Note Entries');
+	echo $HTML->box1_top($Language->DIARY_list_title);
 
 	$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' ORDER BY id DESC";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-			<B>You Have No Diary Entries</B>';
+		echo '<B>'.$Language->DIARY_noentry.'</B>';
 		echo db_error();
 	} else {
 		echo '&nbsp;</TD></TR>';

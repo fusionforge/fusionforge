@@ -101,20 +101,20 @@ if (browser_is_ie() && browser_is_mac()) {
 <form action="https://<?php echo $HTTP_HOST; ?>/account/login.php" method="post">
 <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">
 <p>
-Login Name:
+<?php echo $Language->LOGIN_NAME; ?>:
 <br><input type="text" name="form_loginname" VALUE="<?php echo $form_loginname; ?>">
 <p>
-Password:
+<?php echo $Language->PASSWORD; ?>:
 <br><input type="password" name="form_pw">
 <P>
 <INPUT TYPE="CHECKBOX" NAME="stay_in_ssl" VALUE="1" <?php echo ((browser_is_ie() && browser_get_version() < '5.5')?'':'CHECKED') ?>><?php echo $Language->USESSL; ?> 
 <?php echo $Language->SSLNOTICE; ?>
-<input type="submit" name="login" value="Login With SSL">
+<input type="submit" name="login" value="<?php echo $Language->LOGIN; ?>">
 </form>
 <P>
-<A href="lostpw.php">[Lost your password?]</A>
+<A href="lostpw.php">[<?php echo $Language->ACCOUNT_LOSTPW_title; ?>?]</A>
 <P>
-<A HREF="register.php">[New Account]</A>
+<A HREF="register.php">[<?php echo $Language->NEW_USER; ?>]</A>
 
 <?php
 

@@ -18,10 +18,7 @@ $row_user = db_fetch_array($res_user);
 
 $HTML->box1_top($Language->ACCOUNT_MAINTENANCE.": " . $user->getRealName()); ?>
 
-<p>Welcome, <b><?php print $user->getUnixName(); ?></b>. 
-<p>You can view/change all of your account features from here. You may also wish
-to view your developer/consultant profiles and ratings.
-
+<?php echo $Language->ACCOUNT_welcome; ?>
 <UL>
 <LI><A href="/users/<?php print strtolower($row_user['user_name']); ?>/"><B>View My Developer Profile</B></A>
 <LI><A HREF="/people/editprofile.php"><B>Edit My Skills Profile</B></A>
@@ -32,33 +29,33 @@ to view your developer/consultant profiles and ratings.
 <TABLE width=100% border=0>
 
 <TR valign=top>
-<TD>Member Since: </TD>
+<TD><?php echo $Language->MEMBER_SINCE; ?>: </TD>
 <TD><B><?php print date($sys_datefmt,$row_user['add_date']); ?></B></TD>
 </TR>
 <TR valign=top>
-<TD>User ID: </TD>
+<TD><?php echo $Language->USER_ID; ?>: </TD>
 <TD><B><?php print $row_user['user_id']; ?></B></TD>
 </TR>
 
 <TR valign=top>
-<TD>Login Name: </TD>
+<TD><?php echo $Language->LOGIN_NAME; ?>: </TD>
 <TD><B><?php print strtolower($row_user['user_name']); ?></B>
 <BR><A href="change_pw.php">[Change Password]</A></TD>
 </TR>
 
 <TR valign=top>
-<TD>Timezone/Language: </TD>
+<TD><?php echo $Language->TIMEZONE; ?>/<?php echo $Language->LANGUAGE; ?>: </TD>
 <TD><B><?php print $row_user['timezone']; ?></B> / <B><?php echo $Language->getLanguageName($row_user['language']); ?></B>
 <BR><A href="change_timezone.php">[Change]</A></TD>
 </TR>
 
-<TD>Real Name: </TD>
+<TD><?php echo $Language->REALNAME; ?>: </TD>
 <TD><B><?php print $row_user['realname']; ?></B>
 <BR><A href="change_realname.php">[Change Real Name]</A></TD>
 </TR>
 
 <TR valign=top>
-<TD>Email Addr: </TD>
+<TD><?php echo $Language->EMAILADDR; ?>: </TD>
 <TD><B><?php print $row_user['email']; ?></B>
 <BR><A href="change_email.php">[Change Email Addr]</A>
 </TD>
@@ -77,17 +74,16 @@ $HTML->box1_top("Preferences"); ?>
 <FORM action="updateprefs.php" method="post">
 
 <INPUT type="checkbox" name="form_mail_site" value="1"<?php 
-	if ($row_user['mail_siteupdates']) print " checked"; ?>> Receive Email for Site Updates
-<I>(This is very low traffic and will include security notices. Highly recommended.)</I>
+	if ($row_user['mail_siteupdates']) print " checked"; ?>> 
+	<?php echo $Language->ACCOUNTREGISTER_siteupdate; ?>
 
 <P><INPUT type="checkbox"  name="form_mail_va" value="1"<?php
-	if ($row_user['mail_va']) print " checked"; ?>> Receive additional community mailings. 
-<I>(Low traffic.)</I>
+	if ($row_user['mail_va']) print " checked"; ?>>
+	<?php echo $Language->ACCOUNTREGISTER_communitymail; ?>
 
 <P><INPUT type="checkbox"  name="form_remember_user" value="1"<?php
-	if ($sf_user_hash) print " checked"; ?>> "Remember me".
-<I>(Allows to access your <a href="/my/">personal page</a> without being logged
-in. You will still need to login explicitly before making any changes.)</I>
+	if ($sf_user_hash) print " checked"; ?>>
+	<?php echo $Language->ACCOUNT_rememberme; ?>
 
 <P align=center><CENTER><INPUT type="submit" name="Update" value="Update"></CENTER>
 </FORM>
