@@ -94,6 +94,7 @@ GFORGE_CONF_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/gforge
 GFORGE_LIB_DIR=$RPM_BUILD_ROOT/%{_libdir}/gforge
 PLUGINS_DIR=$GFORGE_LIB_DIR/plugins
 CROND_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/cron.d
+SBIN_DIR=$RPM_BUILD_ROOT/%{_sbindir}
 
 # installing gforge
 mkdir -p $GFORGE_DIR $GFORGE_LIB_DIR
@@ -126,7 +127,7 @@ install -m 644 rpm-specific/conf/vhost.conf $HTTPD_CONF_DIR/conf.d/gforge.conf
 # configuring GForge
 mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
-install -m 750 rpm-specific/scripts/gforge-config %{_sbindir}/
+install -m 750 rpm-specific/scripts/gforge-config $SBIN_DIR/
 mkdir -p $GFORGE_CONF_DIR/languages-local
 if ls rpm-specific/languages/*.tab &> /dev/null; then
 	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
