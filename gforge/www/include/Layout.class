@@ -401,6 +401,18 @@ class Layout extends Error {
 	}
 
 	/**
+	 *	user_menu() - "theme" top of page
+	 *
+	 * @param	array	Header parameters array
+	 */
+	function user_menu($params){
+		echo '
+		<P>
+		<A HREF="/my/">My Personal Page</A> | <A HREF="/my/diary.php">Diary &amp; Notes</A> | <A HREF="/account/">Account Options</A>
+		<P>';
+	}
+
+	/**
 	 *	header() - "theme" top of page
 	 *
 	 * @param	array	Header parameters array

@@ -4,7 +4,7 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     dpkg-source can build a .diff.gz from the .orig.tar.gz.  debian/rules
     changed accordingly to uudecode the *.uu files at build time, and to
     remove the resulting files at clean time.
-  * [Christian] Made trove cat more editable 
+  * [Christian] Made trove cat more editable
   * [Roland] Added integrity constraints between the tables related to the
     Trove map.
   * [Roland] Bumped Standards-Version to 3.5.7 and DH_COMPAT to 4.
@@ -18,8 +18,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Christian] Added setup_onevar_mainfile function in dsf helper to add
     vars in sourceforge.conf not managed by debconf
   * [Christian] More i18n in /my and /account
+  * [Christian] Make user menu themeable 
 
- -- Christian Bayle <bayle@debian.org>  Mon, 14 Oct 2002 17:12:00 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 14 Oct 2002 18:37:13 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

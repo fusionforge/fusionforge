@@ -555,11 +555,7 @@ function site_user_header($params) {
 	*/
 	echo $HTML->header($params);
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo '
-	<P>
-	<A HREF="/my/">My Personal Page</A> | <A HREF="/my/diary.php">Diary &amp; Notes</A> | <A HREF="/account/">Account Options</A>
-	<P>';
-
+	echo $HTML->user_menu($params);
 }
 
 /** 
