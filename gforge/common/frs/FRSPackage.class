@@ -139,7 +139,7 @@ class FRSPackage extends Error {
 			db_rollback();
 			return false;
 		} else {
-			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->getFileName();
+			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$this->getFileName();
 			exec("/bin/mkdir $newdirlocation",$out);
 			db_commit();
 			return true;
