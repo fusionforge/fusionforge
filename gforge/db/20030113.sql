@@ -4,7 +4,6 @@ DROP TABLE stats_project_all;
 DROP TABLE stats_project_developers_last30;
 DROP TABLE stats_project_last_30;
 
-DROP VIEW stats_project_vw;
 CREATE VIEW stats_project_vw AS
 SELECT spd.group_id,
     spd.month,
@@ -44,7 +43,6 @@ FROM stats_project_developers spd
     LEFT JOIN frs_dlstats_group_vw fdga USING (month,day,group_id)
 ;
 
-DROP VIEW stats_project_all_vw;
 CREATE VIEW stats_project_all_vw AS
 SELECT group_id,
     AVG(developers)::int AS developers,
@@ -75,7 +73,6 @@ SELECT group_id,
     FROM stats_project_months
     GROUP BY group_id;
 
-DROP VIEW stats_site_vw;
 CREATE VIEW stats_site_vw AS 
 SELECT p.month,
     p.day,
@@ -102,7 +99,6 @@ SELECT p.month,
     GROUP BY p.month, p.day, sspbd.site_page_views;
 
 
-DROP VIEW stats_site_all_vw;
 CREATE VIEW stats_site_all_vw AS
 SELECT
     SUM(site_page_views) AS site_page_views,
