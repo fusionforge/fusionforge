@@ -140,7 +140,7 @@ if ($group_id && $atid) {
 			} else {
 				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id)) {
-					$feedback =$Language->getText('tracker','tracker_item'). 'Tracker Item: '.$ah->getErrorMessage();
+					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
 				}
@@ -298,11 +298,9 @@ if ($group_id && $atid) {
 		 .'</strong><p>';
 
 	if (!$at_arr || count($at_arr) < 1) {
-		echo "<h1>No Accessible Trackers Found</h1>";
-		echo "<p>
-			<strong>No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project ".
-			"will have to set up data types using the <a href=\"/tracker/admin/?group_id=$group_id\">admin page</a></FONT></strong>";
-	} else {
+		echo "<h1>".$Language->getText('tracker','no_trackers')."</h1>";
+		echo "<p><strong>".$Language->getText('tracker','no_trackers_text',array('<a href="/tracker/admin/?group_id='.$group_id.'">','</a>'))."</strong>";
+		} else {
 
 		echo '<p>'.$Language->getText('tracker', 'choose').'<p>';
 

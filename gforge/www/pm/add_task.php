@@ -29,7 +29,7 @@ pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'p
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
-		<?php echo $pg->categoryBox('category_id'); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&add_cat=1&group_project_id=$group_project_id"; ?>">(admin)</a>
+		<?php echo $pg->categoryBox('category_id'); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&add_cat=1&group_project_id=$group_project_id"; ?>">(<?php echo $Language->getText('pm','admin') ?>)</a>
 		</td>
 
 		<td><font size="-1">

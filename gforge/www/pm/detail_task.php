@@ -16,56 +16,56 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'pagename'=>'pm_detailtask','group_project_id'=>$group_project_id));
 
 ?>
 
 <table border="0" width="100%">
 
         <tr>
-                <td><strong>Submitted By:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+                <td><strong><?php echo $Language->getText('pm_detailtask','submitted_by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
         </tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>Category:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','category') ?>:</strong><br />
 		<?php echo $pt->getCategoryName(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Percent Complete:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','pct_complete') ?>:</strong><br />
 		<?php echo $pt->getPercentComplete(); ?>%
 		</td>
 
 		<td>
-		<strong>Priority:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','priority') ?>:</strong><br />
 		<?php echo $pt->getPriority(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Start Date:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','start_date') ?>:</strong><br />
 		<?php echo date('Y-m-d', $pt->getStartDate() ); ?>
 		</td>
 		<td>
-		<strong>End Date:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','end_date') ?>:</strong><br />
 		<?php echo date('Y-m-d', $pt->getEndDate() ); ?>
 		</td>
 	</tr>
 
   	<tr>
 		<td colspan="2">
-		<strong>Task Summary:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','task_summary') ?>:</strong><br />
 		<?php echo $pt->getSummary(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>Original Comment:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','original_comment') ?>:</strong><br />
 		<?php echo nl2br($pt->getDetails()); ?>
 		</td>
 	</tr>
@@ -80,7 +80,7 @@ pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_projec
 
 		$result2=db_query("SELECT users.user_name AS User_Name FROM users,project_assigned_to ".
 			"WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
-		ShowResultSet($result2,'Assigned To');
+		ShowResultSet($result2,$Language->getText('pm_detailtask','assigned_to'));
 		?>
 		</td>
 		<td valign="top">
@@ -91,19 +91,19 @@ pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_projec
 		*/
 		$result2=db_query("SELECT project_task.summary FROM project_dependencies,project_task ".
 			"WHERE is_dependent_on_task_id=project_task.project_task_id AND project_dependencies.project_task_id='$project_task_id'");
-		ShowResultSet($result2,'Dependent On Task');
+		ShowResultSet($result2,$Language->getText('pm_detailtask','dependend_on_task'));
 		?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Hours:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','hours') ?>:</strong><br />
 		<?php echo $pt->getHours(); ?>
 		</td>
 
 		<td>
-		<strong>Status:</strong><br />
+		<strong><?php echo $Language->getText('pm_detailtask','status') ?>:</strong><br />
 		<?php
 		echo $pt->getStatusName();
 		?>

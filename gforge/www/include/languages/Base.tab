@@ -659,6 +659,11 @@ pm	view_calendar	View Calendar
 pm	dependent_note			You should choose only tasks which must be completed before this task can start.
 pm	unassigned	Unassigned
 pm	any	Any
+pm	tech_any	Any
+pm	admin	admin
+pm	cat_any	Any
+pm	no_tasks_found	No Matching Tasks found
+pm	no_tasks_found_text	Add tasks using the link above
 pm_addtask	title	Add a new Task
 pm_admin	title	Task Manager: Administration
 pm_admin_change_status	section	Task Manager Administration
@@ -712,6 +717,18 @@ pm_browsetask	next	next 50
 pm_browsetask	overdue_tasks	* Denotes overdue tasks
 pm_detailtask	section	Task Manager
 pm_detailtask	title	Task Detail
+pm_detailtask	submitted_by	Submitted By
+pm_detailtask	category	Category
+pm_detailtask	pct_complete	Percent Complete
+pm_detailtask	priority	Priority
+pm_detailtask	start_date	Start Date
+pm_detailtask	end_date	End Date
+pm_detailtask	task_summary	Task Summary
+pm_detailtask	original_comment	Original Comment
+pm_detailtask	assigned_to	Assigned To
+pm_detailtask	dependend_on_task	Dependent On Task
+pm_detailtask	hours	Hours
+pm_detailtask	status	Status
 pm_modtask	title	Modify Task
 pm_modtask	submitted_by	Submitted By
 pm_modtask	original_comment	Original Comment
@@ -1326,6 +1343,14 @@ tracker	comment_added	Comment Added
 tracker	reporting	Report
 tracker	resolution	Resolution
 tracker	admin	Admin
+tracker	please_login	Please $1 login $2
+tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here:
+tracker	status_any	Any
+tracker	category_any	Any
+tracker	group_any	Any
+tracker	no_trackers	No Accessible Trackers Found
+tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project will have to set up data types using the $1 admin page $2</FONT></strong>
+
 tracker_add	submit		Submit
 tracker_add	for_project	For project
 tracker	category	Category
@@ -1367,7 +1392,6 @@ tracker_browse	no_items	No items found
 tracker_detail	title	Detail
 tracker_detail	build_task_relation	Build Task Relation
 tracker_detail	add_comment	Add A Comment
-tracker_detail	please_login	Please $1 log in!</a></FONT></h3><br />If you <strong>cannot</strong> login, then enter your email address here:<p>
 tracker_detail	attached_files	Attached Files
 tracker_detail	name	Name
 tracker_detail	description	Description

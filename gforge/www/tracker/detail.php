@@ -74,8 +74,9 @@ if (session_loggedin()) {
 	if (!session_loggedin()) {
 		?>
 		<h3><FONT COLOR="RED">
-		Please <a href="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</a></FONT></h3><br />
-		If you <strong>cannot</strong> login, then enter your email address here:<p>
+		<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3><br />
+		<?php echo $Language->getText('tracker','insert_email') ?>
+		<p>
 		<input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
 		<?php
 	}

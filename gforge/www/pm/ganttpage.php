@@ -32,7 +32,7 @@ $tech_id_arr=util_result_column_to_array($res_tech,0);
 $tech_id_arr[]='0';  //this will be the 'any' row
 
 $tech_name_arr=util_result_column_to_array($res_tech,1);
-$tech_name_arr[]=$Language->getText('pm','any');
+$tech_name_arr[]=$Language->getText('pm','tech_any');
 
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,$Language->getText('pm','unassigned'));
 
@@ -46,7 +46,7 @@ $cat_id_arr=util_result_column_to_array($res_cat,0);
 $cat_id_arr[]='0';  //this will be the 'any' row
 
 $cat_name_arr=util_result_column_to_array($res_cat,1);
-$cat_name_arr[]=$Language->getText('pm','any');
+$cat_name_arr[]=$Language->getText('pm','cat_any');
 
 $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,$Language->getText('pm','none').$Language->getText('pm','none'));
 
