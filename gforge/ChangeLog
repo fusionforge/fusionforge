@@ -1,3 +1,9 @@
+2004-07-25  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/include/languages/Base.tab:
+	Bug [455]: removed link to /docs/site
+
+
 2003-07-24  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/Dutch.tab: Dutch language update from
