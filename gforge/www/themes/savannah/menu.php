@@ -142,7 +142,7 @@ function menu_project_info($group) {
 		}
 		// Surveys
 		if ($project->usesSurvey()) {
-			$HTML->menu_entry('/survey/$group_id='.$group, $Language->getText('group', 'short_survey'));
+			$HTML->menu_entry('/survey/?group_id='.$group, $Language->getText('group', 'short_survey'));
 		}
 		//newsbytes
 		if ($project->usesNews()) {
