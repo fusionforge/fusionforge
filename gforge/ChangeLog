@@ -1,3 +1,17 @@
+2003-02-28  Reinhard Spisser <reinhard@spisser.i>
+
+	* www/help/*
+	submitting Reiner Jung's i18n of /help/
+
+	* www/snippet/*
+	submitting Reiner Jung's i18n of snippet
+	
+	* www/include/snippet_caching.php:
+	i18n 
+	
+	* www/include/languages/Italian.tab:
+	translations of /snippet
+	
 2003-02-23  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/mail/admin/index.php: valid XHTML 1.0 Transitional.
