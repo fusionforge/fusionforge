@@ -86,15 +86,18 @@ class LdapextauthPlugin extends Plugin {
 				// Password from form is valid in LDAP
 				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
 					// Also according to DB
+					$GLOBALS['ldap_auth_failed']=false;
 					return true ;
 				} else {
 					// Passwords mismatch, update DB's
 					$u->setPasswd ($passwd) ;
+					$GLOBALS['ldap_auth_failed']=false;
 					return true ;
 				}
 			} else {
 				// Wrong password according to LDAP
 				$feedback=$Language->getText('session','invalidpasswd');
+				$GLOBALS['ldap_auth_failed']=true;
 				return false ;
 			}
 		} else {
@@ -170,15 +173,24 @@ class LdapextauthPlugin extends Plugin {
 					$ccode = $mappedinfo['ccode'] ;
 				}
 
-				$u->create ($unix_name,$firstname,$lastname,$password1,$password2,$email,
+				if (!$u->create ($unix_name,$firstname,$lastname,$password1,$password2,$email,
 					    $mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
-					    $unix_box, $address, $address2, $phone, $fax, $title, $ccode, $send_mail) ;
+					    $unix_box, $address, $address2, $phone, $fax, $title, $ccode, $send_mail)) {
+					$GLOBALS['ldap_auth_failed']=true;
+					echo "<br>Error Creating User: ".$u->getErrorMessage();
+					return false;
+				}
 
-
-
-				$u->setStatus ('A') ;
+				if (!$u->setStatus ('A')) {
+					$GLOBALS['ldap_auth_failed']=true;
+					echo "<br>Error Activating User: ".$u->getErrorMessage();
+					return false;
+				}
+				$GLOBALS['ldap_auth_failed']=false;
+				$GLOBALS['ldap_first_login']=true;
 				return true ;
 			} else {
+				$GLOBALS['ldap_auth_failed']=true;
 				$feedback=$Language->getText('session','invalidpasswd');
 				return false ; // Probably ignored, but just in case
 			}
