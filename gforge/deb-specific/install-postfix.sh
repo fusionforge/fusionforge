@@ -35,9 +35,9 @@ case "$1" in
 
 	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
-	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/' \
-	    -e's/BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT/BEGIN GFORGE BLOCK -- DO NOT EDIT/' \
-	    -e's/END SOURCEFORGE BLOCK/END GFORGE BLOCK/' /etc/postfix/main.cf.gforge-new
+	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/;' \
+            -e's/BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT/BEGIN GFORGE BLOCK -- DO NOT EDIT/;' \
+            -e's/END SOURCEFORGE BLOCK/END GFORGE BLOCK/;' /etc/postfix/main.cf.gforge-new
 
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
