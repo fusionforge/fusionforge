@@ -1,11 +1,12 @@
-gforge (3.1-19+1) unstable; urgency=low
+gforge (3.1-20) unstable; urgency=low
 
   * [Roland] The "I can only assume you're being facetious" release.
   * [Roland] Fallback to doing debconf-related stuff in
     sourceforge.postinst instead of sourceforge.preinst if needed.  I
     refuse to add a Pre-Depends to an empty package (closes: #263784).
+  * [Roland] Fixed a couple of Lintian warnings and errors too.
 
- -- Roland Mas <lolando@debian.org>  Thu,  5 Aug 2004 22:29:25 +0200
+ -- Roland Mas <lolando@debian.org>  Thu,  5 Aug 2004 22:39:31 +0200
 
 gforge (3.1-19) unstable; urgency=medium
 

@@ -1,3 +1,5 @@
+#! /usr/bin/php4 -f
+
 <?php
 /**
   *
