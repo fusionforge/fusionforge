@@ -86,7 +86,7 @@ account_register	err_badinsert	Insert Failed
 account_register	message_header	$1 Account Registration
 account_register	partecipate_peer_ratings	Participate in peer ratings. <I>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings).
 account_register	remember_me	"Remember me". <I>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>
-account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
+account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	update	Update
 account_register	reset	Reset Changes
 account_unsubscribe	all_mailings	all GForge mailings and notifications
