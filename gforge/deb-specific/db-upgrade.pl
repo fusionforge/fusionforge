@@ -488,7 +488,7 @@ eval {
             cvs_commits_wk integer DEFAULT '0' NOT NULL,
             cvs_adds integer DEFAULT '0' NOT NULL,
             cvs_adds_wk integer DEFAULT '0' NOT NULL,
-            PRIMARY KEY (id)";
+            PRIMARY KEY (id))";
     	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
