@@ -96,9 +96,13 @@ class FRSRelease extends Error {
 			return false;
 		}
 		$this->release_id=db_insertid($result,'frs_release','release_id');
-		$this->fetchData($this->release_id);
-		db_commit();
-		return true;
+		if (!$this->fetchData($this->release_id)) {
+			db_rollback();
+			return false;
+		} else {
+			db_commit();
+			return true;
+		}
 	}
 
 	/**

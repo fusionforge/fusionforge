@@ -129,9 +129,12 @@ class FRSFile extends Error {
 			return false;
 		}
 		$this->file_id=db_insertid($result,'frs_file','file_id');
-		$this->fetchData($this->file_id);
-		db_commit();
-		return true;
+		if (!$this->fetchData($this->file_id)) {
+			return false;
+		} else {
+			db_commit();
+			return true;
+		}
 	}
 
 	/**
