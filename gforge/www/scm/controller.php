@@ -136,13 +136,14 @@
 	*	@return	an array of dirs/files/
 	*/
 	function retrieveDir($rootdirpath) {
+		$array = array();
 		if($dir = @opendir($rootdirpath)) {
 			$array[] = $rootdirpath;	
 			while(($file = readdir($dir)) !== false) {
 				$array[] = $rootdirpath."/".$file;
 			}
+			closedir($dir);
 		}
-		closedir($dir);
 		return $array;
 	}
 
@@ -221,6 +222,7 @@
 	*	@return	an array of files
 	*/
 	function retrieveDirs($rootdirpath) {
+		$array = array();
 		if ($dir = @opendir($rootdirpath)) {
 			$array[] = $rootdirpath;
 			while (($file = readdir($dir)) !== false) {
