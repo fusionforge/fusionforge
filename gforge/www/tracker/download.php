@@ -13,7 +13,7 @@
 
 $no_gz_buffer=true;
 
-require_once('squal_pre.php');
+require_once('pre.php');
 require_once('common/tracker/Artifact.class');
 require_once('common/tracker/ArtifactFile.class');
 //require_once('www/tracker/include/ArtifactFileHtml.class');

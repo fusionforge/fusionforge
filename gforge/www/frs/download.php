@@ -13,7 +13,7 @@
 
 $no_gz_buffer=true;
 
-require_once('squal_pre.php');
+require_once('pre.php');
 
 $arr=explode('/',$REQUEST_URI);
 $file_id=$arr[3];
