@@ -361,9 +361,9 @@ function util_make_links ($data='') {
  */
 function show_priority_colors_key() {
 	global $Language;
-	echo '<p><strong> '.$Language->getText('common_utils','priority_colors').':</strong><br />
+	echo '<p /><strong> '.$Language->getText('common_utils','priority_colors').':</strong><br />
 
-		<table border=0><tr>';
+		<table border="0"><tr>';
 
 	for ($i=1; $i<10; $i++) {
 		echo '
