@@ -74,12 +74,18 @@ fi
 if [ "$1" = "1" ] ; then
 	# register plugin in database
 	%{_libdir}/gforge/bin/register-plugin %{plugin} CVS
+else
+	# upgrade
+	:
 fi
 
 %postun
 if [ "$1" = "0" ] ; then
 	# unregister plugin in database
 	%{_libdir}/gforge/bin/unregister-plugin %{plugin}
+else
+	# upgrade
+	:
 fi
 
 %clean

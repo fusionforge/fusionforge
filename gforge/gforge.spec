@@ -178,7 +178,7 @@ else
 	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
 
 	# updating configuration
-        cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
+	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
 fi
 
 %postun
@@ -197,9 +197,8 @@ if [ "$1" -eq "0" ]; then
 	# Remove user/group
 	if id -u %{gfuser} >/dev/null 2>&1; then
 		userdel %{gfuser} >/dev/null 2>&1
-		groupdel %{gfgroup} >/dev/null 2>&1
+		groupdel %{gfgroup} 2>/dev/null || :
 	fi
-	exit 0
 fi
 
 %clean
