@@ -1,13 +1,3 @@
-# MySQL dump 8.8
-#
-# Host: localhost    Database: alexandria
-#--------------------------------------------------------
-# Server version	3.23.22-beta
-
-#
-# Dumping data for table 'trove_cat'
-#
-
 INSERT INTO trove_cat VALUES (1,2000031601,0,0,'audience','Intended Audience','The main class of people likely to be interested in this resource.',0,0,'Intended Audience','1');
 INSERT INTO trove_cat VALUES (2,2000032401,1,1,'endusers','End Users/Desktop','Programs and resources for software end users. Software for the desktop.',0,0,'Intended Audience :: End Users/Desktop','1 :: 2');
 INSERT INTO trove_cat VALUES (3,2000041101,1,1,'developers','Developers','Programs and resources for software developers, to include libraries.',0,0,'Intended Audience :: Developers','1 :: 3');
