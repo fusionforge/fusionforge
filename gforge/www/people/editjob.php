@@ -22,17 +22,17 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			create a new job
 		*/
 		if (!$title || !$description || $category_id==100) {
-			exit_error('Error - missing information','Fill in all required fields');
+			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
 		$sql="INSERT INTO people_job (group_id,created_by,title,description,date,status_id,category_id) ".
 			"VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$feedback .= ' JOB insert FAILED ';
+			$feedback .= $Language->getText('people_editjob','job_insert_failed');
 			echo db_error();
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
-			$feedback .= ' JOB inserted successfully ';
+			$feedback .= $Language->getText('people_editjob','job_insert_ok');
 		}
 
 	} else if ($update_job) {
@@ -41,17 +41,17 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if (!$title || !$description || $category_id==100 || $status_id==100 || !$job_id) {
 			//required info
-			exit_error('error - missing info','Fill in all required fields');
+			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
 
 		$sql="UPDATE people_job SET title='".htmlspecialchars($title)."',description='".htmlspecialchars($description)."',status_id='$status_id',category_id='$category_id' ".
 			"WHERE job_id='$job_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$feedback .= ' JOB update FAILED ';
+			$feedback .= $Language->getText('people_editjob','job_update_no');
 			echo db_error();
 		} else {
-			$feedback .= ' JOB updated successfully ';
+			$feedback .= $Language->getText('people_editjob','job_update_ok');
 		}
 
 	} else if ($add_to_job_inventory) {
@@ -60,14 +60,14 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if ($skill_id == "xyxy" || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
 			//required info
-			exit_error('Error - Missing information','Fill in all required fields');
+			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
 			people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id);
-			$feedback .= ' JOB update successful ';
+			$feedback .= $Language->getText('people_editjob','job_update_ok');
 		} else {
-			$feedback .= ' JOB update failed - wrong project_id ';
+			$feedback .= $Language->getText('people_editjob','job_update_no_wrong_id');
 		}
 
 	} else if ($update_job_inventory) {
@@ -76,7 +76,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if ($skill_level_id==100 || $skill_year_id==100  || !$job_id || !$job_inventory_id) {
 			//required info
-			exit_error('error - missing info','Fill in all required fields');
+			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
@@ -84,13 +84,13 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 				"WHERE job_id='$job_id' AND job_inventory_id='$job_inventory_id'";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' JOB skill update FAILED ';
+				$feedback .= $Language->getText('people_editjob','job_skill_update_no');
 				echo db_error();
 			} else {
-				$feedback .= ' JOB skill updated successfully ';
+				$feedback .= $Language->getText('people_editjob','job_skill_update_ok');
 			}
 		} else {
-			$feedback .= ' JOB skill update failed - wrong project_id ';
+			$feedback .= $Language->getText('people_editjob','job_skill_update_no_wrong_id');
 		}
 
 	} else if ($delete_from_job_inventory) {
@@ -99,20 +99,20 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if (!$job_id) {
 			//required info
-			exit_error('error - missing info','Fill in all required fields');
+			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
 			$sql="DELETE FROM people_job_inventory WHERE job_id='$job_id' AND job_inventory_id='$job_inventory_id'";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' JOB skill delete FAILED ';
+				$feedback .= $Language->getText('people_editjob','job_skill_delete_no');
 				echo db_error();
 			} else {
-				$feedback .= ' JOB skill deleted successfully ';
+				$feedback .= $Language->getText('people_editjob','job_skill_delete_ok');
 			}
 		} else {
-			$feedback .= ' JOB skill delete failed - wrong project_id ';
+			$feedback .= $Language->getText('people_editjob','job_skill_delete_no_wrong_id');
 		}
 
 	}
@@ -120,42 +120,40 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'Edit a job for your project','pagename'=>'people_editjob'));
+	people_header(array('title'=>$Language->getText('people_editjob','title'),'pagename'=>'people_editjob'));
 
 	//for security, include group_id
 	$sql="SELECT * FROM people_job WHERE job_id='$job_id' AND group_id='$group_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
-		$feedback .= ' POSTING fetch FAILED ';
-		echo '<h2>No Such posting For This Project</h2>';
+		$feedback .= $Language->getText('people_editjob','posting_fetch_failed');
+		echo '<h2>'.$Language->getText('people_editjob','no_such').'</h2>';
 	} else {
 
-		echo '
-		<p>Now you can edit/change the list of skills attached to this posting.
-		Developers will be able to match their skills with your requirements.</p>
-		<p>All postings are automatically closed after two weeks.</p>
+		echo $Language->getText('people_editjob','skill_explains').'
+		
 		<p><form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
-		<strong>Category:</strong><br />
+		<strong>'.$Language->getText('people','category').':</strong><br />
 		'. people_job_category_box('category_id',db_result($result,0,'category_id')) .'
 		<p>
-		<strong>Status:</strong><br />
+		<strong>'.$Language->getText('people','status').':</strong><br />
 		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'</p>
 		<p>
-		<strong>Short Description:</strong><br />
+		<strong>'.$Language->getText('people','short_description').':</strong><br />
 		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" /></p>
 		<p>
-		<strong>Long Description:</strong><br />
+		<strong>'.$Language->getText('people','long_description').':</strong><br />
 		<textarea name="description" rows="10" cols="60" wrap="soft">'. db_result($result,0,'description') .'</textarea></p>
 		<p>
-		<input type="submit" name="update_job" value="Update Descriptions" />
+		<input type="submit" name="update_job" value="'.$Language->getText('people_editjob','update_description').'" />
 		</form></p>';
 
 		//now show the list of desired skills
 		echo '<p>'.people_edit_job_inventory($job_id,$group_id) . '</p>';
-		echo '<p><form action="/people/" method="post"><input type="submit" name="submit" value="Finished" /></form>';
+		echo '<p><form action="/people/" method="post"><input type="submit" name="submit" value="'.$Language->getText('people_editjob','finished').'" /></form>';
 
 	}
 

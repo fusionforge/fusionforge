@@ -10,7 +10,7 @@
  */
 
 function displayUserSkills($user_id, $allowEdit) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $Language;
 	$sql = "SELECT * FROM skills_data_types ORDER BY type_id ASC";
 	$result=db_query($sql);
 	$rows = db_numrows($result);
@@ -32,14 +32,14 @@ function displayUserSkills($user_id, $allowEdit) {
 		
 		echo '<tr style="background-color:#D0D0D0" align="center">';				 /* headings for the columns */
 		if($allowEdit) {
-			echo '<td><strong>Edit</strong></td>'.
-				 '<td><strong>Delete</strong></td>';
+			echo '<td><strong>'.$Language->getText('general','edit').'</strong></td>'.
+				 '<td><strong>'.$Language->getText('general','delete').'</strong></td>';
 		}
-		echo '<td><strong>Type</strong></td>'.
-			 '<td><strong>Title</strong></td>'.
-			 '<td><strong>Start Date</strong></td>'.
-			 '<td><strong>End Date</strong></td>'.
-			 '<td><strong>Keywords</strong></td>'.
+		echo '<td><strong>'.$Language->getText('people_editprofile','type').'</strong></td>'.
+			 '<td><strong>'.$Language->getText('people_editprofile','profile_title').'</strong></td>'.
+			 '<td><strong>'.$Language->getText('people_editprofile','start_date').'</strong></td>'.
+			 '<td><strong>'.$Language->getText('people_editprofile','end_date').'</strong></td>'.
+			 '<td><strong>'.$Language->getText('people_editprofile','keywords').'</strong></td>'.
 			 '</tr>';
 
 		for ($i = 0; $i < $rows; $i++)  /* for each entry in the database */ {
@@ -88,8 +88,8 @@ function displayUserSkills($user_id, $allowEdit) {
 
 		if($allowEdit) {
 			echo '<tr>';
-			echo '<td><input type="submit" name="MultiEdit" value="Edit" /></td>';
-			echo '<td><input type="submit" name="MultiDelete" value="Delete" /></td>';
+			echo '<td><input type="submit" name="MultiEdit" value="'.$Language->getText('general','edit').'" /></td>';
+			echo '<td><input type="submit" name="MultiDelete" value="'.$Language->getText('general','delete').'" /></td>';
 			echo '</tr>';
 		}
 
@@ -97,7 +97,7 @@ function displayUserSkills($user_id, $allowEdit) {
 }
 
 function handle_multi_edit($skill_ids) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $Language;
 	$numSkills = count($skill_ids);
 	$SQL = "select * from skills_data where skills_data_id in(".$skill_ids[0];
 	for($i = 1; $i < $numSkills; $i++) {
@@ -114,8 +114,8 @@ function handle_multi_edit($skill_ids) {
 		$skills=db_query($sql);
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
-			$feedback .= ' User fetch FAILED ';
-			echo '<h2>No Such User</h2>';
+			$feedback .= $Language->getText('people_editprofile','user_fetch_failed');
+			echo '<h2>'.$Language->getText('people_editprofile','no_such_user').'<h2>';
 		}
 		
 		$yearArray = array();
@@ -142,45 +142,45 @@ function handle_multi_edit($skill_ids) {
 			$finishY = substr($finish, 0, 4);
 			$finishM = substr($finish, 4, 2);
 							   
-			echo "<table border=\"0\">".
-				"<tr ".$HTML->boxGetAltRowStyle($i+1).">".
-				"<td><h3>".db_result($result, $i,'title')."</h3></td></tr>".
-				"<tr><td>".
-				"<table border=\"0\" >".
-					"<tr>".
-						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Type</td>".
-						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Start Date</td>".
-						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">End Date</td>".
-					"</tr>";
-			echo "<tr ".$HTML->boxGetAltRowStyle($i+1).">".
-						"<td>".html_build_select_box($skills, "type[]",db_result($result, $i,'type') , false, "")."</td>".
-						"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM[]", $startM, false, "").
-							html_build_select_box_from_arrays($yearArray,$yearArray, "startY[]", $startY, false, "")."</td>".
-						"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM[]", $finishM, false, "").
-							html_build_select_box_from_arrays($yearArray,$yearArray, "endY[]", $finishY, false, "")."</td>".
-					"</tr>".
-				"</table>".
-				"</td></tr>".
+			echo '<table border="0">'.
+				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
+				'<tr><td>'.
+				'<table border="0" >'.
+					'<tr>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'>'.$Language->getText('people_editprofile','type').'</td>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'>'.$Language->getText('people_editprofile','start_date').'</td>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'>'.$Language->getText('people_editprofile','end_date').'</td>'.
+					'</tr>';
+			echo '<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+						'<td>'.html_build_select_box($skills, 'type[]',db_result($result, $i,'type') , false, '').'</td>'.
+						'<td>'.html_build_select_box_from_arrays($monthArrayVals,$monthArray, 'startM[]', $startM, false, '').
+							html_build_select_box_from_arrays($yearArray,$yearArray, 'startY[]', $startY, false, '').'</td>'.
+						'<td>'.html_build_select_box_from_arrays($monthArrayVals,$monthArray, 'endM[]', $finishM, false, '').
+							html_build_select_box_from_arrays($yearArray,$yearArray, 'endY[]', $finishY, false, '').'</td>'.
+					'</tr>'.
+				'</table>'.
+				'</td></tr>'.
 				
-				"<tr ".$HTML->boxGetAltRowStyle($i+1)."><td>".
-				"<table border=\"0\">".
-					"<tr>".
-						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Title (max 100 characters)</td>".
-					"</tr>".
-					"<tr>".
-						"<td><input type=\"hidden\" name=\"skill_edit[]\" value=\"".db_result($result, $i,'skills_data_id')."\" />".
-						"<input type=\"text\" name=\"title[]\" size=\"100\" value=\"".db_result($result, $i,'title')."\" /></td>".
-					"</tr>".
-					"<tr>".
-						"<td style=\"background-color:".$HTML->COLOR_HTMLBOX_TITLE.">Keywords (max 255 characters)</td>".
-					"</tr>".
-					"<tr>".
-						"<td><textarea name=\"keywords[]\" rows=\"3\" cols=\"85\" wrap=\"soft\">".db_result($result, $i,'keywords')."</textarea></td>".
-					"</tr>".
+				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
+				'<table border="0">'.
+					'<tr>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'">'.$Language->getText('people_editprofile','title_max_100_chars').'</td>'.
+					'</tr>'.
+					'<tr>'.
+						'<td><input type="hidden" name="skill_edit[]" value="'.db_result($result, $i,'skills_data_id').'" />'.
+						'<input type="text" name="title[]" size="100" value="'.db_result($result, $i,'title').'" /></td>'.
+					'</tr>'.
+					'<tr>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'>'.$Language->getText('people_editprofile','keywords_max_255_chars').'</td>'.
+					'</tr>'.
+					'<tr>'.
+						'<td><textarea name="keywords[]" rows="3" cols="85" wrap="soft">'.db_result($result, $i,'keywords').'</textarea></td>'.
+					'</tr>'.
 					
-				 "</table>";
-				 "</td></tr>";
-			echo "</table><br />";
+				 '</table>';
+				 '</td></tr>';
+			echo '</table><br />';
 		}
 	}
 }

@@ -418,10 +418,13 @@ general	submit	Submit
 general	yes	Yes
 general	no	No
 general	deleted	Deleted
+general	delete	Delete
 general	update	Update
 general	remove	Remove
 general	cancel	Cancel
+general	done	Done
 general	more	More
+general	confirm	Confirm
 general	error_on_update	Error On Update: 
 general	error_group_id	Group_id in db result does not match Group Object
 general	error_no_valid_group_object	$1:: No Valid Group Object
@@ -616,7 +619,33 @@ news_utils	submit	Submit News
 news_utils	readmore	Read&nbsp;More/Comment
 people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted
-people	title	Projects Needing Help
+people	title	Help Wanted System
+people	here_is_list_position	Here is a list of positions available for this project.
+people	click_job_titles	Click job titles for more detailed descriptions.
+people	last_posts	Last posts
+people	more_latest_posts	more latest posts
+people	category	Category
+people	short_description	Short Description
+people	long_description	Long Description
+people	status	Status
+people	error_inserting	ERROR inserting into skill inventory
+people	added_skill	Added to skill inventory
+people	error_skill_already	ERROR - skill already in your inventory
+people	must_be_loggin	You must be logged in first
+people	must_select_a_skill	Must select a skill ID
+people	skill	Skill
+people	level	Level
+people	experience	Experience
+people	no_skill_inventory_setup_up	No Skill Inventory Set Up
+people	action	Action
+people	add_new_skill	Add A New Skill
+people	add_skill	Add Skill
+people	invalid_id	Invalid ID
+people	no_categories_found	No Categories Found
+people	date_opened	Date Opened
+people	title_array	Title
+people	project	$1 project
+people	none_found	None Found
 people_admin	section	Project Help Wanted
 people_admin	title	Help Wanted Administration
 people_admin_people_cat	section	Help Wanted Administration
@@ -627,18 +656,95 @@ people_cat	section	Help Wanted
 people_cat	title	List Jobs By Category
 people_createjob	section	Project Help Wanted
 people_createjob	title	Create A New Job
+people_createjob	explains	Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires.
+people_createjob	continue	Continue >>
 people_editjob	section	Project Help Wanted
 people_editjob	title	Edit Job
+people_editjob	error_missing	error - missing info
+people_editjob	fill_in	Fill in all required fields
+people_editjob	job_insert_failed	JOB insert FAILED
+people_editjob	job_insert_ok	JOB inserted successfully
+people_editjob	job_update_no	JOB update FAILED 
+people_editjob	job_update_ok	JOB updated successfully
+people_editjob	job_update_no_wrong_id	JOB update failed - wrong project_id
+people_editjob	job_skill_update_no	JOB skill update FAILED
+people_editjob	job_skill_update_ok	JOB skill updated successfully
+people_editjob	job_skill_update_no_wrong_id	JOB skill update failed - wrong project_id
+people_editjob	job_skill_delete_no	JOB skill delete FAILED
+people_editjob	job_skill_delete_ok	JOB skill deleted successfully
+people_editjob	job_skill_delete_no_wrong_id	JOB skill delete failed - wrong project_id
+people_editjob	posting_fetch_failed	POSTING fetch FAILED
+people_editjob	no_such	No Such posting For This Project
+people_editjob	skill_explains	<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>
+people_editjob	update_description	Update Descriptions
+people_editjob	finished	Finished
 people_editprofile	section	Project Help Wanted
+people_editprofile	update_failed	User update FAILED
+people_editprofile	update_ok	User updated successfully
 people_editprofile	title	Edit Your Profile
+people_editprofile	error	error - missing info
+people_editprofile	fill_all_required_fields	Fill in all required fields
+people_editprofile	failed_to_add_skill	Failed to add the skill
+people_editprofile	skill_added_ok	Skill added successfully
+people_editprofile	no_skills_selected	No skills selected to edit.
+people_editprofile	failed_update_skills	Failed to update skills
+people_editprofile	fill_all_required_fields	Skill$1 updated successfully
+people_editprofile	skills_edit	Skills edit
+people_editprofile	edit_skills	Edit Skills
+people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
+people_editprofile	cancel_skills_update	Cancelled skills update
+people_editprofile	no_skills_selected_to_delete	No skills selected to delete.
+people_editprofile	failed_delete_skills	Failed to delete any skills
+people_editprofile	skill_delete_successfully	Skill$1 deleted successfully 
+people_editprofile	confirm_skill_delete	Confirm skill delete
+people_editprofile	confirm_delete	Confirm Delete
+people_editprofile	about_to_delete	You are about to delete the following skill$1
+people_editprofile	from_skills_database	from the skills database. This action cannot be undone.
+people_editprofile	are_you_sure	Are you <strong>sure</strong> you wish to continue?
+people_editprofile	skill_deletion_cancelled	Skill deletion cancelled
+people_editprofile	edit_your_profile	Edit Your Profile
+people_editprofile	user_fetch_failed	User fetch FAILED
+people_editprofile	no_such_user	No Such User
+people_editprofile	edit_public_permissions	Edit Public Permissions
+people_editprofile	following_options	The following option determines if others can see your skills. If they can't, you can still enter your skills.
+people_editprofile	publicly_viewable	Publicly Viewable
+people_editprofile	update_permission	Update Permissions
+people_editprofile	no_skill_types_in_database	No skill types in database (skills_data_types table)
+people_editprofile	no_skill_types_in_database_inform	No skill types in database - inform system administrator
+people_editprofile	add_new_skill	Add a new skill
+people_editprofile	you_can_enter_new_skills	You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.
+people_editprofile	all_fields_required	All fields are required!
+people_editprofile	add_this_skill	Add This Skill
+people_editprofile	edit_delete_your_skills	Edit/Delete Your Skills
+people_editprofile	type	Type
+people_editprofile	profile_title	Title
+people_editprofile	start_date	Start Date
+people_editprofile	end_date	End Date
+people_editprofile	keywords	Keywords
+people_editprofile	title_max_100_chars	Title (max 100 characters)
+people_editprofile	keywords_max_255_chars	Keywords (max 255 characters)
+people_help_wanted_latest	title	Help Wanted Latest Posts
 people_helpwanted_latest	section	Project Help Wanted
 people_helpwanted_latest	title	Last Posts
 people_proj	section	Project Help Wanted
 people_proj	title	Project Help Wanted For $1
 people_viewjob	section	Project Help Wanted
 people_viewjob	title	$1 wanted for $2
+people_viewjob	posting_id_not_found	Posting ID not found
+people_viewjob	view_a_job	View a Job
+people_viewjob	fetch_failed	POSTING fetch FAILED
+people_viewjob	no_such_posting	No Such Posting For This Project
+people_viewjob	view_a_job	View a Job
+people_viewjob	contact_info	Contact Info
+people_viewjob	open_date	Open Date
+people_viewjob	for_project	For Project
+people_viewjob	required_skills	Required Skills
 people_viewprofile	section	User Info
-people_viewprofile	title	View Developer Profile
+people_viewprofile	title	View a User Profile
+people_viewprofile	user_fetch_failed	User fetch FAILED
+people_viewprofile	no_such_user	No Such User
+people_viewprofile	set_private	This User Has Set His/Her Profile to Private
+people_viewprofile	skills_profile_for	Skills profile for
 pm	section	Project: $1 
 pm	title	Project/Task Manager: Subprojects And Tasks
 pm	intro	Choose a Subproject and you can browse/edit/add tasks to it.

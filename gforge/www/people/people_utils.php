@@ -79,11 +79,11 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 }
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback;
+	global $feedback, $Language;
 	if (session_loggedin()) {
 		// check required fields
 		if (!$skill_id || $skill_id == "xyxy") {
-			$feedback .= " Must select a skill ID";
+			$feedback .= $Language->getText('people','must_select_a_skill');
 		} else {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_skill_inventory WHERE user_id='". user_getid() ."' AND skill_id='$skill_id'";
@@ -94,21 +94,22 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 				"VALUES ('". user_getid() ."','$skill_id','$skill_level_id','$skill_year_id')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' ERROR inserting into skill inventory ';
+				$feedback .= $Language->getText('people','error_inserting');
 				echo db_error();
 			} else {
-				$feedback .= ' Added to skill inventory ';
+				$feedback .= $Language->getText('people','added_skill');
 			}
 		} else {
-			$feedback .= ' ERROR - skill already in your inventory ';
+			$feedback .= $Language->getText('people','error_skill_already');
 		}
 		}
 	} else {
-		echo '<h1>You must be logged in first</h1>';
+		echo '<h1>'.$Language->getText('people','must_be_loggin').'</h1>';
 	}
 }
 
 function people_show_skill_inventory($user_id) {
+	global $Language;
 	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
 		"FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory ".
 		"WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id ".
@@ -118,16 +119,17 @@ function people_show_skill_inventory($user_id) {
 	$result=db_query($sql);
 
 	$title_arr=array();
-	$title_arr[]='Skill';
-	$title_arr[]='Level';
-	$title_arr[]='Experience';
+	$title_arr[]=$Language->getText('people','skill');
+	$title_arr[]=$Language->getText('people','level');
+	$title_arr[]=$Language->getText('people','experience');
+
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<h2>No Skill Inventory Set Up</h2>';
+			<h2>'.$Language->getText('people','no_skill_inventory_setup_up').'</h2>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
@@ -144,22 +146,22 @@ function people_show_skill_inventory($user_id) {
 }
 
 function people_edit_skill_inventory($user_id) {
-	global $PHP_SELF;
+	global $PHP_SELF, $Language;
 	$sql="SELECT * FROM people_skill_inventory WHERE user_id='$user_id'";
 	$result=db_query($sql);
 
 	$title_arr=array();
-	$title_arr[]='Skill';
-	$title_arr[]='Level';
-	$title_arr[]='Experience';
-	$title_arr[]='Action';
+	$title_arr[]=$Language->getText('people','skill');
+	$title_arr[]=$Language->getText('people','level');
+	$title_arr[]=$Language->getText('people','experience');
+	$title_arr[]=$Language->getText('people','action');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<tr><td colspan="4"><h2>No Skill Inventory Set Up</h2></td></tr>';
+			<tr><td colspan="4"><h2>'.$Language->getText('people','no_skill_setupup').'</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
@@ -170,8 +172,8 @@ function people_edit_skill_inventory($user_id) {
 				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</span></td>
 				<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
 				<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
-				<td nowrap="nowrap"><input type="submit" name="update_skill_inventory" value="Update" /> &nbsp;
-					<input type="submit" name="delete_from_skill_inventory" value="Delete" /></td>
+				<td nowrap="nowrap"><input type="submit" name="update_skill_inventory" value="'.$Language->getText('general','update').'" /> &nbsp;
+					<input type="submit" name="delete_from_skill_inventory" value="'.$Language->getText('general','delete').'" /></td>
 				</tr></form>';
 		}
 
@@ -180,13 +182,13 @@ function people_edit_skill_inventory($user_id) {
 	$i++; //for row coloring
 	
 	echo '
-	<tr><td colspan="4"><h3>Add A New Skill</h3></td></tr>
+	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
 	<form action="'.$PHP_SELF.'" method="post">
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
 		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
 		<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
-		<td nowrap="nowrap"><input type="submit" name="add_to_skill_inventory" value="Add Skill" /></td>
+		<td nowrap="nowrap"><input type="submit" name="add_to_skill_inventory" value="'.$Language->getText('people','add_skill').'" /></td>
 	</tr></form>';
 
 	echo $GLOBALS['HTML']->listTableBottom();
@@ -195,7 +197,7 @@ function people_edit_skill_inventory($user_id) {
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback;
+	global $feedback, $Language;
 	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id' AND skill_id='$skill_id'";
@@ -206,21 +208,22 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 				"VALUES ('$job_id','$skill_id','$skill_level_id','$skill_year_id')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' ERROR inserting into skill inventory ';
+				$feedback .= $Language->getText('people','error_inserting');
 				echo db_error();
 			} else {
-				$feedback .= ' Added to skill inventory ';
+				$feedback .= $Language->getText('people','added_skill');
 			}
 		} else {
-			$feedback .= ' ERROR - skill already in your inventory ';
+			$feedback .= $Language->getText('people','error_skill_already');
 		}
 
 	} else {
-		echo '<h1>You must be logged in first</h1>';
+		echo '<h1>'.$Language->getText('people','must_be_loggin').'</h1>';
 	}
 }
 
 function people_show_job_inventory($job_id) {
+	global $Language;
 	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
 		"FROM people_skill_year,people_skill_level,people_skill,people_job_inventory ".
 		"WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id ".
@@ -230,16 +233,17 @@ function people_show_job_inventory($job_id) {
 	$result=db_query($sql);
 
 	$title_arr=array();
-	$title_arr[]='Skill';
-	$title_arr[]='Level';
-	$title_arr[]='Experience';
-			
+	$title_arr=array();
+	$title_arr[]=$Language->getText('people','skill');
+	$title_arr[]=$Language->getText('people','level');
+	$title_arr[]=$Language->getText('people','experience');
+	
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<h2>No Skill Inventory Set Up</h2>';
+			<h2>'.$Language->getText('people','no_skill_inventory_setup_up').'</h2>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
@@ -267,10 +271,11 @@ function people_verify_job_group($job_id,$group_id) {
 }
 
 function people_get_skill_name($skill_id) {
+	global $Language;
 	$sql="SELECT name FROM people_skill WHERE skill_id='$skill_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
-		return 'Invalid ID';
+		return $Language->getText('people','invalid_id');
 	} else {
 		return db_result($result,0,'name');
 	}
@@ -287,22 +292,22 @@ function people_get_category_name($category_id) {
 }
 
 function people_edit_job_inventory($job_id,$group_id) {
-	global $PHP_SELF;
+	global $PHP_SELF, $Language;
 	$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id'";
 	$result=db_query($sql);
 
 	$title_arr=array();
-	$title_arr[]='Skill'.utils_requiredField();
-	$title_arr[]='Level'.utils_requiredField();
-	$title_arr[]='Experience'.utils_requiredField();
-	$title_arr[]='Action';
+	$title_arr[]=$Language->getText('people','skill').utils_requiredField();
+	$title_arr[]=$Language->getText('people','level').utils_requiredField();
+	$title_arr[]=$Language->getText('people','experience').utils_requiredField();
+	$title_arr[]=$Language->getText('people','action');
 			
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<tr><td colspan="4"><h2>No Skill Inventory Set Up</h2></td></tr>';
+			<tr><td colspan="4"><h2>'.$Language->getText('people','no_skill_inventory_setup_up').'</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
@@ -315,8 +320,8 @@ function people_edit_job_inventory($job_id,$group_id) {
 				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</span></td>
 				<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
 				<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
-				<td nowrap="nowrap"><input type="submit" name="update_job_inventory" value="Update" /> &nbsp;
-					<input type="submit" name="delete_from_job_inventory" value="Delete" /></td>
+				<td nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'.$Language->getText('general','update').'" /> &nbsp;
+					<input type="submit" name="delete_from_job_inventory" value="'.$Language->getText('general','delete').'" /></td>
 				</tr></form>';
 		}
 
@@ -325,7 +330,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$i++; //for row coloring
 
 	echo '
-	<tr><td colspan="4"><h3>Add A New Skill</h3></td></tr>
+	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
 	<form action="'.$PHP_SELF.'" method="post">
 	<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -333,19 +338,20 @@ function people_edit_job_inventory($job_id,$group_id) {
 		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
 		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
 		<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
-		<td nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="Add Skill" /></td>
+		<td nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'.$Language->getText('people','add_skill').'" /></td>
 	</tr></form>';
 
 	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 function people_show_category_table() {
+	global $Language;
 
 	//show a list of categories in a table
 	//provide links to drill into a detail page that shows these categories
 
 	$title_arr=array();
-	$title_arr[]='Category';
+	$title_arr[]=$Language->getText('people','category');;
 
 	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -366,7 +372,7 @@ function people_show_category_table() {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		$return .= '<tr><td><h2>No Categories Found</h2></td></tr>';
+		$return .= '<tr><td><h2>'.$Language->getText('people','no_categories_found').'</h2></td></tr>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo db_error();
@@ -406,22 +412,22 @@ function people_show_category_jobs($category_id) {
 }
 
 function people_show_job_list($result) {
-	global $sys_datefmt;
+	global $sys_datefmt, $Language;
 	//takes a result set from a query and shows the jobs
 
 	//query must contain 'group_id', 'job_id', 'title', 'category_name' and 'status_name'
 
 	$title_arr=array();
-	$title_arr[]='Title';
-	$title_arr[]='Category';
-	$title_arr[]='Date Opened';
-	$title_arr[]='SF Project';
+	$title_arr[]=$Language->getText('people','title_array');
+	$title_arr[]=$Language->getText('people','category');
+	$title_arr[]=$Language->getText('people','date_opened');
+	$title_arr[]= $Language->getText('people','project',$GLOBALS['sys_name']);
 
 	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
-		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><h2>None Found</h2>'. db_error() .'</td></tr>';
+		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><h2>'.$Language->getText('people','none_found').'</h2>'. db_error() .'</td></tr>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {	
 			$return .= '
