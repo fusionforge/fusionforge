@@ -1223,7 +1223,7 @@ news_submit	errorboth	ERREUR - le sujet et le corps sont requis
 news_submit	errorinsert	ERREUR d'insertion
 news_submit	forproject	Pour le projet&nbsp;
 news_submit	newsadded	Annonce ajoutée.
-news_submit	post_blurb	Vous pouvez publier une annonce concernant votre projet si vous en êtes administrateur. Vous pouvez également publier des annonces si votre projet a besoin d'aide.</p><p>Toutes les annonces <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet. Les annonces d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.</p><p>Vous pouvez inclure des URLs dans vos annonces.
+news_submit	post_blurb	Vous pouvez publier une annonce concernant votre projet si vous en êtes administrateur. Vous pouvez également publier des annonces si votre projet a besoin d'aide.</p><p>Toutes les annonces <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet. Les annonces d'intérêt général peuvent être sélectionnées par l'équipe de $1 pour apparaître sur la page d'accueil de $1.</p><p>Vous pouvez inclure des URLs dans vos annonces, mais pas de HTML.</p><p>Les URLs qui commencent par http:// sont rendues cliquables.
 news_submit	section	Annonces
 news_submit	subject	Sujet&nbsp;
 news_submit	title	Proposer une annonce pour $1
