@@ -17,8 +17,9 @@ _Description: Migrate to Gforge?
 Template: gforge/sourceforge_empty_package
 Type: note
 _Description: Sourceforge is no more
- Sourceforge has been renamed Gforge, and is no longer maintained as
- free software. This "sourceforge" package is only here to help you
+ Sourceforge has been renamed Gforge, and the software known as
+ Sourceforge is no longer maintained as free software.  This
+ "sourceforge" package is only here to help you
  upgrade to Gforge.  Once you have installed this package and the one
  it depends on (gforge-sourceforge-transition), your data have been
  saved, and you can safely uninstall the "sourceforge" package and

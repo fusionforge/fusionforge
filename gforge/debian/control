@@ -215,9 +215,10 @@ Priority: extra
 Architecture: all
 Depends: gforge-sourceforge-transition
 Description: Empty package to help with Sourceforge to Gforge transition
- Sourceforge has been renamed Gforge, and is no longer maintained.
- This package is only here to help you upgrade to Gforge.  Once you
- have installed this package and the one it depends on
+ Sourceforge has been renamed Gforge, and the software known as
+ Sourceforge is no longer maintained as free software.  This package
+ is only here to help you upgrade to Gforge.  Once you have installed
+ this package and the one it depends on
  (gforge-sourceforge-transition), your data have been saved, and you
  can safely uninstall the "sourceforge" package and proceed to install
  Gforge.  Your data will be migrated.

@@ -14,8 +14,11 @@ set -e
 # for details, see http://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
 
-
-. /usr/share/debconf/confmodule
+if [ -e /usr/share/debconf/confmodule ] ; then
+    . /usr/share/debconf/confmodule
+else
+    exit 0
+fi
 
 case "$1" in
     install|upgrade)
