@@ -192,6 +192,7 @@ class Layout extends Error {
 	a.tabsellink { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tabsellink:visited { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tabsellink:hover { text-decoration: none; color: black; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	<?php plugin_hook ("cssstyle",$this) ; ?>
 	-->
 </style>
 
