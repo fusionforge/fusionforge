@@ -1,11 +1,11 @@
-gforge (3.1-2+2) unstable; urgency=low
+gforge (3.1-3) unstable; urgency=low
 
   * [Roland] Added a lock feature to update-user-group-cvs.sh.  That adds
     a dependency on lockfile-progs.
   * [Roland] Fixed install-postfix.sh for gforge-mta-postfix's
     deconfiguration process (closes: #218637).
 
- -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 20:57:10 +0100
+ -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 23:16:44 +0100
 
 gforge (3.1-2) unstable; urgency=low
 
