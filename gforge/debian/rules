@@ -46,6 +46,7 @@ clean: remove-binary-files
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
+	chmod g-s debian
 	dh_clean
 
 install: build
