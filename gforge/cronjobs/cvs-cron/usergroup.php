@@ -336,7 +336,7 @@ for($k = 0; $k < $rows; $k++) {
 	system("mv -f $sys_cvsroot/$deleted_group_name/*.* $sys_cvsroot/.deleted/$deleted_group_name");
 	
 	
-	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" )
+	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
 	$err .= db_error();
 }
 
