@@ -256,8 +256,8 @@ setup_vars() {
 	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/database.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
-	#cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
-	echo "=====>$cryptedpasswd"
+	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
+	#echo "=====>$cryptedpasswd"
 }
 # Check Server
 check_server() {
@@ -278,14 +278,14 @@ dn: cn=Replicator,$sys_ldap_base_dn
 description: Replicator the Robot
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
-userPassword: {crypt}xxxxx
+userPassword: {CRYPT}xxxxx
 cn: Replicator
 
 dn: cn=SF_robot,$sys_ldap_base_dn
 description: SF the Robot
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
-userPassword: {crypt}xxxxx
+userPassword: {CRYPT}xxxxx
 cn: SF_robot
 FIN
 	check_server
