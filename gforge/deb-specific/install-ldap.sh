@@ -104,13 +104,7 @@ access to dn=\"ou=cvsGroup,$dn\"
 # End of sourceforge add
 access to */" /etc/ldap/slapd.conf
 
-		# Then this SASL things I was looking for several days
-		# But that is useless in fact ;-)
-		#cat >> /etc/ldap/slapd.conf <<-FIN
-#sasl-realm	localhost	#Added by Sourceforge install
-#sasl-host	localhost	#Added by Sourceforge install
-#FIN
-		#/etc/init.d/slapd restart
+		# invoke-rc.d slapd restart
 	fi	
 }
 
@@ -118,13 +112,20 @@ access to */" /etc/ldap/slapd.conf
 purge_slapd(){
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
-if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
+if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
 then
 	vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next second line added by Sourceforge install
 :d
 /SF_robot
 :d
+:w
+:x
+FIN
+fi
+if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
+then
+	vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
 /# End of sourceforge add
@@ -173,7 +174,7 @@ load_ldap(){
 		# Only if the ldap server is local
 		# Maybe ask for the password, but will simple athentication
 		# Be allowed on remote server ?
-		#VERBOSE=-v
+		# VERBOSE=-v
 		# -v Use  verbose mode, with many diagnostics written to
 		# standard output.
 		# -c Continuous  operation  mode. Errors are reported,
@@ -184,12 +185,9 @@ load_ldap(){
 		# authentication.
 		# -r Replace existing values by default.
 		# add with -r don't modify and modify don't add so i do add and modify
-	
-		set +e
-		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1
-		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1
-		set -e
-		rm -f $tmpldif
+ 		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+ 		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+		# rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/lapd.secret file"
 		echo "AFAIK  : This file should be installed by libpam-ldap"
@@ -241,8 +239,8 @@ setup_robot() {
 
 	# The first account is only used in a multiserver SF
 	echo "Adding robot accounts"
-	set +e
-	ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" >/dev/null 2>&1 <<-FIN
+
+	{ ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
 cn: Replicator
 sn: Replicator the Robot
@@ -259,10 +257,9 @@ objectClass: top
 objectClass: person
 userPassword: {crypt}x
 FIN
-	set -e
 
 	echo "Changing SF_robot passwd using admin account"
-	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" >/dev/null <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -272,13 +269,12 @@ FIN
 	echo "Testing LDAP"
 	#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 	echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" >/dev/null <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
 cn: Dummy User Tested
 FIN
-	set +x
 }
 
 # Main
@@ -293,11 +289,11 @@ case "$1" in
 		modify_libnss_ldap $dn
 		echo "Modifying /etc/nsswitch.conf"
 		modify_nsswitch
+		# Restarting ldap 
+		invoke-rc.d slapd restart
+		sleep 5		# Sometimes it takes a bit of time to get out of bed
 		echo "Load ldap"
 		load_ldap $dn "$secret"
-		# Restarting ldap 
-		/etc/init.d/slapd restart
-		sleep 5
 		echo "Setup SF_robot account"
 		setup_robot
 		;;
@@ -315,7 +311,7 @@ case "$1" in
 		purge_nsswitch
 		echo "Purging /etc/libnss-ldap.conf"
 		purge_libnss_ldap
-		$0 init
+		$0 empty
 		;;
 	list)
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
@@ -324,26 +320,32 @@ case "$1" in
 		;;
 	empty)
 	        setup_vars
-		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) 
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-		# This should work with SASL auth if i find how to make it work
-		# See saslpasswd, /usr/share/doc/libsasl7/sysadmin.html
-		# The command will be 
-		# ldapdelete -D "cn=admin,ou=People,$naming_context" -W -r "$naming_context"
-		#
-		for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup cn=SF_robot cn=Replicator ou=People 
-		do 
-			echo "Destroying LDAP database $target, $naming_context ..."
-			set +e
-			ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
-			set -e
-		done
+		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
+		admin_regexp="^cn=admin, *ou=People, *$regexp"
+		get_our_entries () {
+		    slapcat \
+			| grep "^dn:" \
+			| sed 's/^dn: *//' \
+			| grep -v "^dc=" \
+			| grep -v "^ou=" \
+			| grep -v "$admin_regexp"
+		    slapcat \
+			| grep "^dn:" \
+			| sed 's/^dn: *//' \
+			| grep -v "^dc=" \
+			| grep -v "^ou=People," \
+			| grep -v "^ou=Roaming," \
+			| grep -v "$admin_regexp"
+		}
+		get_our_entries
+		get_our_entries | ldapdelete -D "cn=admin,ou=People,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
-	init)
-		/etc/init.d/slapd stop
-		rm -f /var/lib/ldap/*.dbb
+	reset)
 		setup_vars
-		/etc/init.d/slapd start
+		invoke-rc.d slapd stop
+		rm -f /var/lib/ldap/*.dbb
+		invoke-rc.d slapd start
 		print_ldif_default $sys_ldap_base_dn $cryptedpasswd > /tmp/ldif$$ 
 		slapadd -l /tmp/ldif$$
 		rm -f /tmp/ldif$$
@@ -352,7 +354,7 @@ case "$1" in
 		setup_robot
 		;;
 	*)
-		echo "Usage: $0 {configure|update|purge|list|empty|init}"
+		echo "Usage: $0 {configure|update|purge|list|empty|reset}"
 		exit 1
 		;;
 esac
