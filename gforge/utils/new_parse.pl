@@ -62,7 +62,7 @@ while ($ln = pop(@userdump_array)) {
 		delete_user($username);
 	
 	} elsif ($status eq 'D' && !$user_exists) {
-		print("Error trying to delete user: $username\n");
+		#print("Error trying to delete user: $username\n");
 		
 	} elsif ($status eq 'S' && $user_exists) {
 		suspend_user($username);
@@ -208,9 +208,9 @@ sub delete_user {
 	my $alreadydone=(-f "/var/lib/sourceforge/tmp/$username.tar.gz");
 	if (!$alreadydone){
 	print("Deleting User : $username\n");
-		echo("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
+		print("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
 		system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
-		echo("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
+		print("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
 		system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
 	}
 }
