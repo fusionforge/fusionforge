@@ -16,7 +16,7 @@
 # etc/httpd.conf is generated from files in etc/httpd.d
 #
 # local.inc.example was generated doing:
-./setup -input etc/gforge.conf.example -output etc/gforge.conf.example
+./setup -input etc/gforge.conf.example -output etc/gforge.conf.example -noapache -simple
 #
 # I did
 mv etc/local.inc etc/local.inc.example
