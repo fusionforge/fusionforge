@@ -18,8 +18,10 @@ sourceforge (2.6-0+4) unstable; urgency=low
   * [Roland] [From 2.5] Fixed email addresses on the users' home page.
   * [Roland] Added the login name and real name of the user whose
     permissions in a project are being edited.
+  * [Roland] Replaced a call to /etc/init.d/bind9 restart by a (more
+    appropriate) reload.  Used the policy-defined invoke-rc.d, too.
 
- -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 20:03:06 +0100
+ -- Roland Mas <lolando@debian.org>  Sat,  5 Jan 2002 20:13:31 +0100
 
 sourceforge (2.6-0+3) unstable; urgency=low
 
