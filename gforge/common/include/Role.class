@@ -280,6 +280,7 @@ class Role extends Error {
 	 *	@return	boolean	True on success or false on failure.
 	 */
 	function update($role_name,$data) {
+		global $SYS;
 		//
 		//	Cannot update role_id=1
 		//
@@ -351,49 +352,53 @@ class Role extends Error {
 						$update_usergroup=true;
 
 						//iterate all users with this role
-						$res=db_query("SELECT user_id 
+						$res=db_query("SELECT user_id
 							FROM user_group 
 							WHERE role_id='".$this->getID()."'");
 						for ($z=0; $z<db_numrows($res); $z++) {
-						/*
-							//TODO - this code is not active in RBAC - settings must be created first
+
 							//TODO - Shell should be separate flag
 							//  If user acquired admin access to CVS,
 							//  one to be given normal shell on CVS machine,
 							//  else - restricted.
 							//
+/*
+							//$cvs_flags=db_result($res,$z,'cvs_flags');
+							$cvs_flags=$this->getVal('scm',0);
 							if ($cvs_flags>1) {
-								if (!sf_ldap_user_set_attribute($user_id,"debGforgeCvsShell","/bin/bash")) {
-									$this->setError(sf_ldap_get_error_msg());
+								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
+									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
 								}
 							} else {
-								if (!sf_ldap_user_set_attribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
-									$this->setError(sf_ldap_get_error_msg());
+								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
+									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
 								}
-							}*/
+							}
+*/
 
 							//
 							//  If user acquired at least commit access to CVS,
 							//  one to be promoted to CVS group, else, demoted.
 							//
+/*
 							if ($uvalue>0) {
-	/*							if (!sf_ldap_group_add_user($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError(sf_ldap_get_error_msg());
+								if (!$SYS->sysGroupAddUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
+									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
 								}
-	*/						} else {
-	/*							if (!sf_ldap_group_remove_user($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
-									$this->setError(sf_ldap_get_error_msg());
+							} else {
+								if (!$SYS->sysGroupRemoveUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
+									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
 								}
-	*/						}
-
+							}
+*/
 
 						}
 //
