@@ -15,10 +15,10 @@ SELECT forum_group_list.*, forum_agg_msg_count.count as total,
 --
 --	Skills system additions by John Maguire
 --
-DROP SEQUENCE "skills_data_pk_seq";
-DROP SEQUENCE "skills_data_types_pk_seq";
-DROP TABLE "skills_data";
-DROP TABLE "skills_data_types";
+-- DROP SEQUENCE "skills_data_pk_seq";
+-- DROP SEQUENCE "skills_data_types_pk_seq";
+-- DROP TABLE "skills_data";
+-- DROP TABLE "skills_data_types";
 
 CREATE SEQUENCE "skills_data_pk_seq";
 

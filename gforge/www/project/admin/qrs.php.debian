@@ -100,7 +100,7 @@ if( $submit ) {
 					// I know.  I tried it.
 					// [RM]
 					putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
-					exec ("/usr/lib/sourceforge/bin/tmpfilemove.pl ".escapeshellarg($userfile). " ".escapeshellarg($userfile_name)." ".escapeshellarg($user_unix_name)." 2>&1",$exec_res);
+					exec ("/usr/lib/gforge/bin/tmpfilemove.pl ".escapeshellarg($userfile). " ".escapeshellarg($userfile_name)." ".escapeshellarg($user_unix_name)." 2>&1",$exec_res);
 					putenv ('sys_dbpasswd=') ;
 					if ($exec_res[0]) {
 						echo '<H3>' . $exec_res[0],$exec_res[1] . '</H3><P>';
@@ -142,7 +142,7 @@ if( $submit ) {
 						  // I know.  I tried it.
 						  // [RM]
 						  putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
-						  exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($file_name)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1",$exec_res);
+						  exec ("/usr/lib/gforge/bin/fileforge.pl ".escapeshellarg($file_name)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1",$exec_res);
 						  putenv ('sys_dbpasswd=') ;
 							if ($exec_res[0]) {
 								echo '<h3>'.$exec_res[0],$exec_res[1],$exec_res[2].'</H3><P>';
