@@ -8,9 +8,11 @@ gforge (3pre9-0+2) experimental; urgency=low
   * [Christian] pre9 package db upgrade
   * [Christian] Removed stricter dependency on debconf, to be able to run on
     woody
-  * [Christian] removed dns.head for simple config and added test in dns cron 
+  * [Christian] removed dns.head for simple config and added test in dns cron
+  * [Christian] applied Jim Nutt (jimnutt) patch [ #183 ] Fixes an ip address
+    in dns config
 
- -- Christian Bayle <bayle@debian.org>  Sat, 25 Jan 2003 14:13:59 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun, 26 Jan 2003 02:13:44 +0100
 
 gforge (3pre8-0+) experimental; urgency=low
 

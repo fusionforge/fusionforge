@@ -30,5 +30,6 @@ $statsadmin_groupid = '{statsadmin_groupid}' ;
 $peerrating_groupid = '{peerrating_groupid}' ;
 $noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
 $sys_simple_dns = '{simple_dns}';
+$sys_ip_address = '{ip_address}';
 
 1;
