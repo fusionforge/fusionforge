@@ -1,4 +1,4 @@
-gforge (3.1-5+13) unstable; urgency=low
+gforge (3.1-6) unstable; urgency=low
 
   * [Roland] Detection of wrong passwords, with a message describing how
     to fix (closes: #223693, #215577, #224257).
@@ -13,7 +13,7 @@ gforge (3.1-5+13) unstable; urgency=low
     /etc/$flavour/conf.d/ directory (thus removing the hack that changed
     the /etc/$flavour/httpd.conf file).
 
- -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:17:17 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:41:21 +0100
 
 gforge (3.1-5) unstable; urgency=low
 
