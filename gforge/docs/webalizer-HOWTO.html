@@ -1,36 +1,40 @@
 <html>
 <head>
 <title>Webalizer HOWTO</title>
+<style type="text/css">
+h2, h3 { text-align: center; }
+pre { width: 90%; background: silver; overflow: auto; }
+</style>
 </head>
 <body>
 
-<h2><center>Webalizer HOWTO</center></h2>
-<h3><center>Updated 05/20/03</center></h3>
+<h2>Webalizer HOWTO</h2>
+<h3>Updated 05/20/03</h3>
 
 <p><a href="http://www.mrunix.net/webalizer/">Webalizer</a> is a tool for creating <a href="http://cougaarforge.cougaar.org/usage/">nice graphs</a> of web site usage.  It's not too hard to set up, but hopefully this document will show how <a href="http://cougaarforge.cougaar.org">CougaarForge</a> uses Webalizer to create usage graphs for each virtual host and a combined usage page as well.
 
 <p>First, when I add a new project to CougaarForge, I create a new virtual host entry in httpd.conf with a log file for that host:
 <pre>
-<VirtualHost *>
+&lt;VirtualHost *&gt;
  ServerName csmart.cougaarforge.cougaar.org
  DocumentRoot /var/www/gforge-3.0/csmart
  CustomLog /usr/local/var/httpd/log/csmart-access_log common
  ErrorLog /usr/local/var/httpd/log/csmart-error_log
-</VirtualHost>
+&lt;/VirtualHost&gt;
 </pre>
 
-<p>Then I create a $project/usage/ directory and put a placeholder page in there.  Like this:
+<p>Then I create a <samp>$project/usage/</samp> directory and put a placeholder page in there.  Like this:
 <pre>
-    mkdir "/var/www/gforge-3.0/$project/usage/"
-    cp /var/www/gforge-3.0/www/usage/msfree.png /var/www/gforge-3.0/$project/usage/
-    cp /root/webalizer/index.html /var/www/gforge-3.0/$project/usage/
+# mkdir "/var/www/gforge-3.0/$project/usage/"
+# cp /var/www/gforge-3.0/www/usage/msfree.png /var/www/gforge-3.0/$project/usage/
+# cp /root/webalizer/index.html /var/www/gforge-3.0/$project/usage/
 </pre>
 
-<p>Note that I also copied the msfree.png file in there to prevent future broken links.
+<p>Note that I also copied the <samp>msfree.png</samp> file in there to prevent future broken links.
 
-<p>Next, I create a webalizer.conf file specifically for this host.  This can usually be done by cranking another site's webalizer.conf thru sed:
+<p>Next, I create a <samp>webalizer.conf</samp> file specifically for this host.  This can usually be done by cranking another site's <samp>webalizer.conf</samp> thru <samp>sed</samp>:
 <pre>
-sed -e "s/project_one/project_two/g" /etc/webalizer/project_one-webalizer.conf > /etc/webalizer/project_two-webalizer.conf
+# sed -e "s/project_one/project_two/g" /etc/webalizer/project_one-webalizer.conf > /etc/webalizer/project_two-webalizer.conf
 </pre>
 
 <p>I've got a shell script set up that runs every night and runs Webalizer against all those log files, like this:
