@@ -1,4 +1,4 @@
-gforge (4.0.2-5h) unstable; urgency=low
+gforge (4.0.2-5i) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in 

@@ -6,7 +6,8 @@
 	
 	* added 'Nice' Patch to add Detail view to Task Manager [#1025]
 	proposed by  Steel City Phantom, Thanks
-	* Rever TaskDetailView patch until I find a better solution
+	* Revert TaskDetailView patch until I find a better solution
+	* Finally found a better solution...
 
 2005-01-16  Tim Perdue <tim@gforge.org>
 
