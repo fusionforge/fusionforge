@@ -9,6 +9,9 @@ sourceforge (2.5-31+) unstable; urgency=low
   * [Roland] deb-specific/db-upgrade.pl: Fixed the backlog of wrong UIDs.
   * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
     <manik.surtani@conchango.com> fixing a few paths.
+  * [Soon-Son] fixed an error when rating a user. The error message was
+    as follows: (Fatal error: Call to a member function on a non-object 
+    in /usr/lib/sourceforge/www/include/User.class on line 666)
 
  --
 
