@@ -1,3 +1,8 @@
+2004-03-02  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Applied patch [ #706 ] to improve German localization
+	* Improved language_file_merger.php (tools module) 
+
 2004-02-26  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #685 ] Translation to PortugueseBrasilian
 	* SQL optimization: Replaced 'select *' in PluginManager.class,
@@ -12,12 +17,6 @@
 	* Added a general graph module for Survey results
 
 2004-02-19  Guillaume Smet <guillaume-gforge@smet.org>
-	
-	* merged [ #690 ] by Benoît Sibaud with French.tab cvs version
-	* updated french localization again
-	* improved localization of task manager
-	* fixed ShowResultSet function
-
 	
 	* merged [ #690 ] by Benoît Sibaud with French.tab cvs version
 	* updated french localization again
