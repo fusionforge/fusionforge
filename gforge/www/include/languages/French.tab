@@ -287,6 +287,7 @@ admin_groupedit	unix_group_name	Nom Unix du groupe :
 admin_groupedit	update	Mettre à jour
 admin_groupedit	updated	Mise à jour effectuée
 admin_groupedit	yes	Oui
+admin_grouplist	all_categories	Toutes les catégories
 admin_grouplist	group_list	Liste des groupes
 admin_grouplist	group_list_for_category	Liste des groupes de la catégorie :
 admin_grouplist	group_name_click_to_edit	Nom du groupe (cliquez pour modifier)
@@ -321,7 +322,6 @@ admin_index	mail_engine	Moteur de messagerie pour les adhérents à $1
 admin_index	new_project_approval	(Approbation d'un nouveau projet)
 admin_index	news	Annonces
 admin_index	pending_projects_count	Projets en attente : <strong>$1</strong>
-admin_index	pending_status	(en attente) Statut
 admin_index	private_groups	Groupes privés
 admin_index	project_active	Actif (A)
 admin_index	project_database_administration	Administration de la base de données du projet
@@ -2364,7 +2364,7 @@ stats_i18n	title	statistiques I18n de $1
 stats_i18n	total_non_english	total non-anglais
 stats_i18n	users	Utilisateurs
 stats_index	other_statistics	Autres statistiques<ul><li><a href="lastlogins.php">Dernières connexions</a></li><li><a href="i18n.php">Statistiques I18n</a></li></ul>
-stats_index	overview_stats	STATSITIQUES GENERALES
+stats_index	overview_stats	STATISTIQUES GENERALES
 stats_index	project_stats	STATISTIQUES PROJET
 stats_index	site_graphs	GRAPHIQUES
 stats_index	sitewide_aggregate_statistics	Statistiques agrégées pour tout le site

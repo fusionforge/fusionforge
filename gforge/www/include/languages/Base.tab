@@ -310,7 +310,6 @@ admin_index	mail_engine	Mail Engine for $1 Subscribers
 admin_index	new_project_approval	(New Project Approval)
 admin_index	news	News
 admin_index	pending_projects_count	Pending projects: <strong>$1</strong>
-admin_index	pending_status	 (pending) Status
 admin_index	private_groups	Private Groups
 admin_index	project_active	Active (A)
 admin_index	project_deleted	Deleted (D)
