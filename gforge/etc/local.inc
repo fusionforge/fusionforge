@@ -77,7 +77,10 @@ $sys_dbreaddb='stats';
 $sys_dbname="alexandria";
 $sys_dbuser="www";
 $sys_dbpasswd="";
+// You can also specify a database port if you're using something other than 5432
+//$sys_dbport="4242";
 $sys_server="pgsql";
+
 
 // 
 // LDAP configurataion
