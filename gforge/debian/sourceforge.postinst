@@ -203,8 +203,9 @@ EOF
 	    db_stop
 
 	    # Restart some services
-	    # /etc/init.d/bind9 restart # Not yet
-	    /usr/sbin/rndc reload
+	    /etc/init.d/bind9 restart
+	    # This is equivalent but require some signature, not always there
+	    #/usr/sbin/rndc reload
 	    /etc/init.d/ssh start
 	    /etc/init.d/apache restart
 	    
