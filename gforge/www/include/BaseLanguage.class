@@ -337,7 +337,11 @@ class BaseLanguage {
 		$array = unserialize(fread($fp, filesize($cachePath)));
 		fclose($fp);
 		$this->cacheDependencies =& $array['dependencies'];
-		$this->pluginDependencies =& $array['pluginDependencies'];
+		if(isset($array['pluginDependencies'])) {
+			$this->pluginDependencies =& $array['pluginDependencies'];
+		} else {
+			$this->pluginDependencies = array();
+		}
 		return $array['text'];
 	}
 
