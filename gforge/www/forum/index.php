@@ -31,7 +31,7 @@ if ($group_id) {
 
 	$ff=new ForumFactory($g);
     if (!$ff || !is_object($ff) || $ff->isError()) {
-        exit_error('Error',$ff->getErrorMessage());
+        exit_error($Language->getText('general','error'),$ff->getErrorMessage());
     }
 
 	forum_header(array('title'=>'Forums for '. $g->getPublicName() ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
@@ -47,7 +47,7 @@ if ($group_id) {
 
 //	echo $Language->getText('forum', 'choose');
 
-	$tablearr=array('Forum','Threads','Posts','Last Post');
+	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'));
 	echo $HTML->listTableTop($tablearr);
 
 	/*

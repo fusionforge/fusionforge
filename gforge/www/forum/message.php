@@ -90,14 +90,14 @@ if ($msg_id) {
 	forum_header(array('title'=>db_result($result,0,'subject'),'pagename'=>'forum_message','forum_id'=>$forum_id));
 
 	$title_arr=array();
-	$title_arr[]='Message: '.$msg_id;
+	$title_arr[]=$Language->getText('forum_message','message').': '.$msg_id;
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
-	echo "BY: ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
-	echo "DATE: ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
-	echo "SUBJECT: ". $fm->getSubject() ."<p>&nbsp;</p>";
+	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
+	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
+	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
 	echo util_make_links(nl2br( $fm->getBody() ));
 	echo "</td></tr>";
 
@@ -109,7 +109,7 @@ if ($msg_id) {
 
 	*/
 	echo '<br /><br />
-		<h3>Thread View</h3>';
+		<h3>'.$Language->getText('forum_message','thread_view').'</h3>';
 
 	$msg_arr =& $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
 	if ($fmf->isError()) {
@@ -178,7 +178,7 @@ if ($msg_id) {
 	*/
 
 	echo '<p>&nbsp;<p>';
-	echo '<div align="center"><h3>Post a followup to this message</h3></div>';
+	echo '<div align="center"><h3>'.$Language->getText('forum_message','post_followup').'</h3></div>';
 
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 

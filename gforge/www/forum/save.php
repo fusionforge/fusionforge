@@ -39,15 +39,15 @@ if (session_loggedin()) {
 
 		$f=new Forum($g,$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error('Error','Error Getting Forum');
+			exit_error($Language->getText('general','error'),'Error Getting Forum');
 		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($Language->getText('general','error'),$f->getErrorMessage());
 		}
 
 		if (!$f->savePlace()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($Language->getText('general','error'),$f->getErrorMessage());
 		} else {
-			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Position Saved. New messages will be highlighted when you return"));
+			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_save','saved')));
 		}
 	} else {
 		exit_missing_param();

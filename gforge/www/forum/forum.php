@@ -125,13 +125,13 @@ if ($forum_id) {
 	//create a pop-up select box showing options for viewing threads
 
 	$vals=array('nested','flat','threaded','ultimate');
-	$texts=array('Nested','Flat','Threaded','Ultimate');
+	$texts=array($Language->getText('forum_forum','nested'), $Language->getText('forum_forum','flat'), $Language->getText('forum_forum','threaded'), $Language->getText('forum_forum','ultimate'));
 
 	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
 
 	//create a pop-up select box showing options for max_row count
 	$vals=array(25,50,75,100);
-	$texts=array('Show 25','Show 50','Show 75','Show 100');
+	$texts=array($Language->getText('forum_forum','show').' 25',$Language->getText('forum_forum','show').' 50',$Language->getText('forum_forum','show').' 75',$Language->getText('forum_forum','show').' 100');
 
 	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
@@ -314,7 +314,7 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
 		<a href="javascript:history.back()"><strong>' .
-		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</a></strong></span>';
+		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . $Language->getText('forum_forum','previous_messages').'</a></strong></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -324,7 +324,7 @@ if ($forum_id) {
 	if ($avail_rows > $max_rows) {
 		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
 		<a href="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
-		<strong>Next Messages ' .
+		<strong> '.$Language->getText('forum_forum','next_messages') .
 		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
 	} else {
 		$ret_val .= '&nbsp;';
@@ -348,7 +348,7 @@ if ($forum_id) {
 
 } else {
 
-	exit_error('ERROR','No Forum Chosen');
+	exit_error($Language->getText('general','error'),$Language->getText('forum_forum','no_forum_chosen'));
 
 }
 

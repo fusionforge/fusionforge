@@ -44,13 +44,13 @@ if (session_loggedin()) {
 			if (!$f->stopMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Monitoring Deactivated"));
+				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_monitor','deactivated')));
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Monitoring Started"));
+				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_monitor','activated')));
 			}
 		}
 	} else {
