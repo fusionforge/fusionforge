@@ -80,7 +80,7 @@ if (!$mail_res) {
 			"This is automatically generated message from\n"
 			."the mass mailing cron script of SourceForge\n"
 			."installation. There was error querying massmail_queue\n"
-			."database table. Please take appropriate actions.\n",
+			."database table. Please take appropriate actions.\n"
 		);
 	}
 
