@@ -1,3 +1,12 @@
+2004-03-25  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* implemented some new config flags to enable/disable partially implemented
+	features (vhost, multimedia, database)
+	* added a new cronjob called tarballs.php to generate CVS tarballs. It uses a
+	modified version of deb-specific/tarballs.sh (not added yet in README.root)
+	* added $sys_cvs_tarballs_path in config to make tarballs generation and
+	download work in mainstream
+
 2004-03-24  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* implemented a correct management of $sys_use_people flag in all GForge
