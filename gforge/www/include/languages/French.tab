@@ -326,6 +326,7 @@ mail_admin_change_status	section	Administration des listes de diffusion
 mail_admin_change_status	title	Administration / modification des listes
 menu	about_sourceforge	À propos de $1
 menu	account_maintenance	Gestion du compte
+menu	register_project	Enregistrer un projet
 menu	bookmark_page	Ajouter aux favoris
 menu	change_my_theme	Changer de thème
 menu	code_snippet_library	Bibliothèque de code
