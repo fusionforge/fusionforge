@@ -80,10 +80,7 @@ function menu_sourceforge() {
 		$HTML->menu_entry('/people/',$Language->PROJECT_HELP_WANTED);
 		$HTML->menu_entry('/top/',$Language->TOP_PROJECTS);
 		print '<P>';
-		// $HTML->menu_entry('/compilefarm/',$Language->COMPILE_FARM);
-		// print '<P>';
-		// $HTML->menu_entry('/contact.php',$Language->CONTACT_US);
-		// $HTML->menu_entry('/about.php',$Language->ABOUT_SOURCEFORGE);
+		$HTML->menu_entry('/about.php',$Language->ABOUT_SOURCEFORGE);
 	$HTML->menuhtml_bottom();
 }
 
