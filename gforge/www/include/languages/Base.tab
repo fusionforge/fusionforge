@@ -1905,6 +1905,28 @@ rbac_edit	addrole	Add Role
 rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
+reporting	users	Users
+reporting	users_added_weekly	Users Added Weekly (graph)
+reporting	cumulative_users	Cumulative Users Weekly (graph)
+reporting	user_activity	Activity (graph)
+reporting	projects	Projects
+reporting	project_specific	Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads
+reporting	project_activity	Activity (graph)
+reporting	site_wide	Site-Wide
+reporting	site_wide_reports	Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads
+reporting	site_wide_pie	Pie (graph)
+reporting	site_wide_line	Line (graph)
+reporting	time_tracking	Time-Tracking
+reporting	time_tracking_usertime	Individual User Time Report (graph)
+reporting	time_tracking_projecttime	Individual Project Time Report (graph)
+reporting	time_tracking_sitetime	Site-Wide Time Report (graph)
+reporting	time_tracking_sitetimebar	Site-Wide Total Hours Graph (graph)
+reporting	time_tracking_usersummary	Site-Wide Task &amp; Hours (report)
+reporting	administrative	Administrative
+reporting	initialize	Initialize / Rebuild Reporting Tables
+reporting	manage	Manage Time Tracker Categories
+reporting	file_support	File Support Request
+reporting	file_feature	File Feature Request
 scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	browseit	Browse CVS Repository
