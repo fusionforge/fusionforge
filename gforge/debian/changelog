@@ -3,8 +3,10 @@ sourceforge (2.5-24+) unstable; urgency=low
   * [Roland] Rewrote the setup_vars() function in install-ldap.sh for more
     robustness.
   * [Roland] Added manpage for sourceforge-config (fixes lintian error).
+  * [Christian] Added : in /etc/nsswitch.conf
+    added dont_touch_config template
 
- -- Roland Mas <lolando@debian.org>  Fri, 15 Feb 2002 13:16:53 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Fri, 15 Feb 2002 23:31:13 +0100
 
 sourceforge (2.5-24) unstable; urgency=low
 
