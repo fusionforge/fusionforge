@@ -13,7 +13,7 @@ GFORGE="/usr/share/gforge"
 # Change paths to the GForge directory.
 # Don't reference $GFORGE because this won't work!
 # You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
 
 # Don't mail command output to anyone.
 MAILTO=""
@@ -21,67 +21,67 @@ MAILTO=""
 #
 #       recalculate user popularity metric
 #
-10 1 * * * $PHP $GFORGE/cronjobs/calculate_user_metric.php
+10 1 * * * root $PHP $GFORGE/cronjobs/calculate_user_metric.php
 
 #
 #  daily project_weekly_metric recalc
 #
-12 1 * * * $PHP $GFORGE/cronjobs/project_weekly_metric.php
+12 1 * * * root $PHP $GFORGE/cronjobs/project_weekly_metric.php
 
 #
 #   daily deletion of sessions, closing jobs, etc
 #
-15 1 * * * $PHP $GFORGE/cronjobs/project_cleanup.php
+15 1 * * * root $PHP $GFORGE/cronjobs/project_cleanup.php
 
 #
 #  daily crunching of survey data and other associated ratings
 #
-41 1 * * * $PHP $GFORGE/cronjobs/rating_stats.php
+41 1 * * * root $PHP $GFORGE/cronjobs/rating_stats.php
 
 #
 #  daily crunching of project summary data (counts)
 #
-45 1 * * * $PHP $GFORGE/cronjobs/db_project_sums.php
+45 1 * * * root $PHP $GFORGE/cronjobs/db_project_sums.php
 
 #
 #   daily recalculate of the sums under the trove map
 #
-50 1 * * * $PHP $GFORGE/cronjobs/db_trove_maint.php
+50 1 * * * root $PHP $GFORGE/cronjobs/db_trove_maint.php
 
 #
 #	daily close pending artifacts
 #
-57 1 * * * $PHP $GFORGE/cronjobs/check_stale_tracker_items.php
+57 1 * * * root $PHP $GFORGE/cronjobs/check_stale_tracker_items.php
 
 #
 #       VACUUM should be done after ALL OTHER JOBS
 #
-0 2 * * *  $PHP $GFORGE/cronjobs/vacuum.php
+0 2 * * *  root $PHP $GFORGE/cronjobs/vacuum.php
 
 #
 #       Stats aggregation work
 #
-15 7 * * * $PHP $GFORGE/cronjobs/db_stats_agg.php
+15 7 * * * root $PHP $GFORGE/cronjobs/db_stats_agg.php
 
 #
 #       daily rotation of the activity_log
 #
-0 0 * * *  $PHP $GFORGE/cronjobs/rotate_activity.php
+0 0 * * *  root $PHP $GFORGE/cronjobs/rotate_activity.php
 
 #
 #       daily aggregating of the numbers
 #
-15 0 * * * $PHP $GFORGE/cronjobs/site_stats.php
+15 0 * * * root $PHP $GFORGE/cronjobs/site_stats.php
 
 #
 # Hourly send pending massmailings, if any
 #
-47 * * * * $PHP $GFORGE/cronjobs/massmail.php
+47 * * * * root $PHP $GFORGE/cronjobs/massmail.php
 
 #
 #       Reporting Process
 #
-25 7 * * * $PHP $GFORGE/cronjobs/reporting_cron.php
+25 7 * * * root $PHP $GFORGE/cronjobs/reporting_cron.php
 
 #
 #
@@ -91,30 +91,35 @@ MAILTO=""
 #
 #       Create the /etc/* files
 #
-#10 * * * * $PHP $GFORGE/cronjobs/cvs-cron/usergroup.php
+#10 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/usergroup.php
 
 #
 #       Upload the SSH key files
 #
-#15 * * * * $PHP $GFORGE/cronjobs/cvs-cron/ssh_create.php
+#15 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/ssh_create.php
 
 #
 #       Create the blank cvs trees
 #
-#20 * * * * $PHP $GFORGE/cronjobs/cvs-cron/cvs.php
+#20 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/cvs.php
+
+#
+#	Create CVS repositories tarballs
+#
+#40 1 * * * root $PHP $GFORGE/cronjobs/tarballs/tarballs.php
 
 #
 #       Daily stats collection
 #
-###incomplete 20 1 * * * $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
+###incomplete 20 1 * * * root $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
 
 #
 #       Create the new mailing lists
 #
-#06 * * * * $PHP $GFORGE/cronjobs/mail/mailing_lists_create.php
+#06 * * * * root $PHP $GFORGE/cronjobs/mail/mailing_lists_create.php
 
 #
 #       Create the /etc/aliases file
 #
-#08 * * * * $PHP $GFORGE/cronjobs/mail/mailaliases.php
+#08 * * * * root $PHP $GFORGE/cronjobs/mail/mailaliases.php
 
