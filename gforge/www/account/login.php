@@ -19,9 +19,19 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('pre.php');
 
+//
+//	Validate return_to
+//
+if ($return_to) {
+	$tmpreturn=explode('?',$return_to);
+	if (!is_file($sys_urlroot.$tmpreturn[0]) && !is_dir($sys_urlroot.$tmpreturn[0])) {
+		$return_to='';
+	}
+}
+
 if ($sys_use_ssl && !session_issecure()) {
 	//force use of SSL for login
-	header('Location: https://'.$HTTP_HOST.'/account/login.php');
+	header('Location: https://'.$HTTP_HOST.$REQUEST_URI);
 }
 
 // Decide login button based on session.
