@@ -26,6 +26,7 @@ $admin_password = '{admin_password}' ;
 $server_admin = '{server_admin}' ;
 $domain_name = '{domain_name}' ;
 $newsadmin_groupid = '{newsadmin_groupid}' ;
+$statsadmin_groupid = '{statsadmin_groupid}' ;
 $noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
 
 1;

@@ -120,6 +120,13 @@ Description-fr: Le numéro du groupe d'administration des nouvelles
  de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
  mettez à jour une installation précédente et voulez garder vos données.
 
+Template: sourceforge/statsadmin_groupid
+Type: string
+Default: 3
+Default-fr: 3
+Description: The stats admin group id
+Description-fr: Le numéro du groupe d'administration des statistiques
+
 Template: sourceforge/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL

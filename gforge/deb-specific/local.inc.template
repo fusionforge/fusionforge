@@ -111,6 +111,25 @@ $sf_cache_dir = "/var/cache/sourceforge";
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="{system_name}";
  
+// session cookie settings
+//
+$sys_session_key        = "foobar";
+$sys_session_expire     = 60 * 60 * 24 * 7; 
+$sys_session_cypher     = MCRYPT_TWOFISH;
+$sys_session_cyphermode = MCRYPT_MODE_ECB;
+
+// username cookie settings
+//
+$sys_username_cookie_key        = "frobaz";
+$sys_username_cookie_urlspace   = ".{domain_name}";
+$sys_username_cookie_expiration = 60 * 60 * 24 * 7;
+$sys_username_cookie_plaintext  = true;
+$sys_username_cookie_cypher     = MCRYPT_BLOWFISH;
+$sys_username_cookie_cyphermode = MCRYPT_MODE_ECB;
+
+// Require that user give unique (not yet existent in db) email upon
+// registration
+$sys_require_unique_email=0;
  
 // Part III - GUI modifications (menu colors, etc.)
 //    See the top of the file include/html.php, this is where the menu colors
@@ -129,7 +148,7 @@ $sys_images_url="//{domain_name}/";
 //  are based on special group_id numbers
 //  group_id #1 is the super-user group of sitewide admins
 $sys_news_group = {newsadmin_groupid};
-//$sys_stats_group=11084;
+$sys_stats_group = {statsadmin_groupid};
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
