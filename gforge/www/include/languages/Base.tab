@@ -1778,7 +1778,7 @@ project_home	tracker_open	<strong>$1</strong> open /<strong>$2</strong> total
 project_home	view_members	View Members
 project_home	view_project_files	View All Project Files
 project_memberlist	developer	Developer
-project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
+project_memberlist	joining	<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>
 project_memberlist	role	Role/Position
 project_memberlist	skills	Skills
 project_memberlist	title	Project Member List
