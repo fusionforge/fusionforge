@@ -33,13 +33,17 @@ case "$1" in
 
 	# "Fill in the blanks" in config files
         # files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
-        files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
         vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket"
         
+	files=""
+        etcfiles="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
+	for i in $etcfiles ; do
+	    files="$files /etc/sourceforge/$i"
+	done
 	# Invoke our magic script
 	# Parameters are input file, output file, debconf prefix, list of vars
 	for i in $files ; do
-	    perl -w '-MDebconf::Client::ConfModule qw/:all/' /usr/lib/sourceforge/bin/fill-in-the-blanks.pl /etc/sourceforge/$i.template /etc/sourceforge/$i sourceforge/ $vars
+	    perl -w '-MDebconf::Client::ConfModule qw/:all/' /usr/lib/sourceforge/bin/fill-in-the-blanks.pl $i.template $i sourceforge/ $vars
 	done
 	chmod 644 /etc/sourceforge/local.inc
 	chmod 644 /etc/sourceforge/sf-httpd.conf
@@ -92,7 +96,7 @@ case "$1" in
 	chmod 775 /var/log/sourceforge/cvs
 
 	# Restart some services
-	/etc/init.d/ssh start
+	invoke-rc.d ssh start
 	
     ;;
 
