@@ -7,6 +7,16 @@ Description-fr: Votre nom de domaine
  Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
  leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
 
+Template: sourceforge/shell_host
+Type: string
+Description: Your shell server
+ The hostname of the server that will host your Sourceforge shell accounts
+
+Template: sourceforge/users_host
+Type: string
+Description: Your user server
+ The hostname of the server that will host your Sourceforge user accounts and mail
+
 Template: sourceforge/cvs_host
 Type: string
 Description: Your CVS server

@@ -42,8 +42,8 @@ $sys_upload_host = "upload.{domain_name}";
 //  N.B. to the SourceForge Crew: What's the difference between the user
 // host and the shell host?  They are clearly two different hostnames
 // in the source code, but they seem to serve the same purpose..?
-$sys_shell_host = "{domain_name}";
-$sys_users_host = "{domain_name}";
+$sys_shell_host = "{shell_host}";
+$sys_users_host = "{users_host}";
  
 // Machine that hosts docs (such as the FAQs and the various software
 // licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same

@@ -64,7 +64,7 @@ case "$1" in
 	. /usr/share/debconf/confmodule
 
 	# "Fill in the blanks" in main config file
-        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket"
+        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password shell_host users_host cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket"
 	mainconffile=/etc/sourceforge/sourceforge.conf
         if [ ! -e $mainconffile ] ; then
 	    touch $mainconffile
