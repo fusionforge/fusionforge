@@ -1,3 +1,11 @@
+2005-02-28  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed an array initialization bug in ArtifactType
+	* made feedback themable
+	* fixed minor issues in RPM packaging
+	* updated French translation
+	* fixed minor layout problems
+
 2005-02-27  Tim Perdue <tim@gforge.org>
 
 	* Trying to enhance INSTALL file with detailed manual installation
