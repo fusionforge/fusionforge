@@ -60,6 +60,12 @@ class SearchQuery extends Error {
 	 * @var boolean $isExact
 	 */
 	 var $isExact = false;
+	/**
+	 * sections to search in
+	 *
+	 * @var array $sections
+	 */	
+	var $sections = SEARCH__ALL_SECTIONS;
 
 	/**
 	 * Constructor
@@ -217,6 +223,22 @@ class SearchQuery extends Error {
 	 */
 	function getWords() {
 		return $this->words;
+	}
+	
+	/**
+	 * setSections - set the sections list
+	 *
+	 * @param $sections mixed array of sections or SEARCH__ALL_SECTIONS
+	 */
+	function setSections($sections) {
+		if(is_array($sections)) {
+			//make a comma separated string from the sections array
+			foreach($sections as $key => $section) 
+				$sections[$key] = '\''.$section.'\'';
+			$this->sections = implode(', ', $sections);
+		} else {
+			$this->sections = $sections;
+		}
 	}
 
 }

@@ -11,17 +11,10 @@
  * @version $Id$
  */
 
-require_once('www/search/include/HtmlSearchRenderer.class');
+require_once('www/search/include/HtmlGroupSearchRenderer.class');
 require_once('common/search/ArtifactSearchQuery.class');
 
-class ArtifactHtmlSearchRenderer extends HtmlSearchRenderer {
-	
-	/**
-	 * group id
-	 *
-	 * @var int $groupId
-	 */
-	var $groupId;
+class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	
 	/**
 	 * artifact id
@@ -45,7 +38,7 @@ class ArtifactHtmlSearchRenderer extends HtmlSearchRenderer {
 		
 		$searchQuery = new ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId);
 		
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery);
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
 		
 		$this->tableHeaders = array(
 			$this->Language->getText('search', 'artifact_id'),
@@ -53,15 +46,6 @@ class ArtifactHtmlSearchRenderer extends HtmlSearchRenderer {
 			$this->Language->getText('search', 'artifact_author'),
 			$this->Language->getText('search', 'artifact_date')
 		);
-	}
-
-	/**
-	 * writeHeader - write the header of the output
-	 * artifact search has a specific header
-	 */
-	function writeHeader() {
-		site_project_header(array('title' => $this->Language->getText('search', 'project_search'), 'group' => $this->groupId, 'pagename' => 'search', 'toptab' => 'tracker'));
-		parent::writeHeader();
 	}
 	
 	/**
@@ -97,7 +81,7 @@ class ArtifactHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string url to previous results page
 	 */
 	function getPreviousResultsUrl() {
-		return parent::getPreviousResultsUrl().'&amp;group_id='.$this->groupId.'&amp;atid='.$this->artifactId;
+		return parent::getPreviousResultsUrl().'&amp;atid='.$this->artifactId;
 	}
 	
 	/**
@@ -106,7 +90,7 @@ class ArtifactHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string url to next results page
 	 */
 	function getNextResultsUrl() {
-		return parent::getNextResultsUrl().'&amp;group_id='.$this->groupId.'&amp;atid='.$this->artifactId;
+		return parent::getNextResultsUrl().'&amp;atid='.$this->artifactId;
 	}
 	
 	/**

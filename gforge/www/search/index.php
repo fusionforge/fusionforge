@@ -60,6 +60,36 @@ if($type_of_search == SEARCH__TYPE_IS_SOFTWARE) {
 	require('include/SkillHtmlSearchRenderer.class');
 	$searchQuery = new SkillHtmlSearchRenderer($words, $offset, $exact);
 	
+} elseif ($type_of_search == SEARCH__TYPE_IS_DOCS && $group_id) {
+	
+	require('include/DocsHtmlSearchRenderer.class');
+	$searchQuery = new DocsHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
+} elseif ($type_of_search == SEARCH__TYPE_IS_NEWS && $group_id) {
+	
+	require('include/NewsHtmlSearchRenderer.class');
+	$searchQuery = new NewsHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
+} elseif ($type_of_search == SEARCH__TYPE_IS_FORUMS && $group_id) {
+	
+	require('include/ForumsHtmlSearchRenderer.class');
+	$searchQuery = new ForumsHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
+} elseif ($type_of_search == SEARCH__TYPE_IS_TRACKERS && $group_id) {
+	
+	require('include/TrackersHtmlSearchRenderer.class');
+	$searchQuery = new TrackersHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
+} elseif ($type_of_search == SEARCH__TYPE_IS_TASKS && $group_id) {
+	
+	require('include/TasksHtmlSearchRenderer.class');
+	$searchQuery = new TasksHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
+} elseif ($type_of_search == SEARCH__TYPE_IS_FRS && $group_id) {
+	
+	require('include/FrsHtmlSearchRenderer.class');
+	$searchQuery = new FrsHtmlSearchRenderer($words, $offset, $exact, $group_id);
+	
 }
 
 if(isset($searchQuery)) {

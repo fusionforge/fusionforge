@@ -803,22 +803,27 @@ if (isset($params['group']) && $params['group']) {
 		<div align="center" style="font-size:smaller">
 
 		<select name="type_of_search">';
-
-		if ($atid && $group_id) {
-			$group =& group_get_object($group_id);
-			if ($group && is_object($group)) {
-				$ath = new ArtifactTypeHtml($group,$atid);
-				if ($ath && is_object($ath)) {
-				print '
-				<option value="'.SEARCH__TYPE_IS_ARTIFACT.'"'.( $type_of_search == SEARCH__TYPE_IS_ARTIFACT ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
-				}
+		if($group_id) {
+			$Group =& group_get_object($group_id);
+			if($Group && is_object($Group) && !$Group->isError()) {
+				if ($atid) {
+					$ath = new ArtifactTypeHtml($group,$atid);
+					if ($ath && is_object($ath)) {
+						print '<option value="'.SEARCH__TYPE_IS_ARTIFACT.'"'.( $type_of_search == SEARCH__TYPE_IS_ARTIFACT ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
+					}
+				} elseif ($forum_id) {
+					print '<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
+				}/* else if ($group_id && $group_project_id) {
+					print '<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
+				}*/
+		
+				print '<option value="'.SEARCH__TYPE_IS_TRACKERS.'"'.( $type_of_search == SEARCH__TYPE_IS_TRACKERS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','trackers').'</option>';
+				print '<option value="'.SEARCH__TYPE_IS_FORUMS.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUMS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forums').'</option>';
+				print '<option value="'.SEARCH__TYPE_IS_TASKS.'"'.( $type_of_search == SEARCH__TYPE_IS_TASKS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','tasks').'</option>';
+				print '<option value="'.SEARCH__TYPE_IS_FRS.'"'.( $type_of_search == SEARCH__TYPE_IS_FRS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','frs').'</option>';
+				print '<option value="'.SEARCH__TYPE_IS_DOCS.'"'.( $type_of_search == SEARCH__TYPE_IS_DOCS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','docs').'</option>';
+				print '<option value="'.SEARCH__TYPE_IS_NEWS.'"'.( $type_of_search == SEARCH__TYPE_IS_NEWS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','news').'</option>';
 			}
-		} else if ($group_id && $forum_id) {
-			print '
-			<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
-		} else if ($group_id && $group_project_id) {
-			print '
-			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
 		}
 
 		print '

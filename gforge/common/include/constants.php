@@ -4,12 +4,18 @@
 
 define('SEARCH__TYPE_IS_ARTIFACT', 'artifact');
 define('SEARCH__TYPE_IS_SOFTWARE', 'soft');
-define('SEARCH__TYPE_IS_FORUM', 'forums');
+define('SEARCH__TYPE_IS_FORUM', 'forum');
 define('SEARCH__TYPE_IS_PEOPLE', 'people');
 define('SEARCH__TYPE_IS_SKILL', 'skill');
-define('SEARCH__TYPE_IS_DOCUMENT', 'document');
+define('SEARCH__TYPE_IS_DOCS', 'docs');
+define('SEARCH__TYPE_IS_TRACKERS', 'trackers');
+define('SEARCH__TYPE_IS_TASKS', 'tasks');
+define('SEARCH__TYPE_IS_FORUMS', 'forums');
+define('SEARCH__TYPE_IS_NEWS', 'news');
+define('SEARCH__TYPE_IS_FRS', 'frs');
 
 define('SEARCH__DEFAULT_ROWS_PER_PAGE', 25);
+define('SEARCH__ALL_SECTIONS', 'all');
 
 /* Mailing lists */
 

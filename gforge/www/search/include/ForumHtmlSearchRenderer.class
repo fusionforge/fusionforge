@@ -11,17 +11,10 @@
  * @version $Id$
  */
 
-require_once('www/search/include/HtmlSearchRenderer.class');
+require_once('www/search/include/HtmlGroupSearchRenderer.class');
 require_once('common/search/ForumSearchQuery.class');
 
-class ForumHtmlSearchRenderer extends HtmlSearchRenderer {
-	
-	/**
-	 * group id
-	 *
-	 * @var int $groupId
-	 */
-	var $groupId;
+class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	
 	/**
 	 * forum id
@@ -40,26 +33,17 @@ class ForumHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @param int $forumId forum id
 	 */
 	function ForumHtmlSearchRenderer($words, $offset, $isExact, $groupId, $forumId) {
-		$this->groupId = $groupId;
 		$this->forumId = $forumId;
 		
 		$searchQuery = new ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId);
 		
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery);
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
 		
 		$this->tableHeaders = array(
 			$this->Language->getText('search', 'forum_thread'),
 			$this->Language->getText('search', 'forum_author'),
 			$this->Language->getText('search', 'forum_date')
 		);
-	}
-
-	/**
-	 * writeHeader - write the header of the output
-	 */
-	function writeHeader() {
-		site_project_header(array('title' => $this->Language->getText('search', 'project_search'), 'group' => $this->groupId, 'pagename' => 'search', 'toptab' => 'forums'));
-		parent::writeHeader();
 	}
 	
 	/**
@@ -90,7 +74,7 @@ class ForumHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string url to previous results page
 	 */
 	function getPreviousResultsUrl() {
-		return parent::getPreviousResultsUrl().'&amp;group_id='.$this->groupId.'&amp;forum_id='.$this->forumId;
+		return parent::getPreviousResultsUrl().'&amp;forum_id='.$this->forumId;
 	}
 	
 	/**
@@ -99,7 +83,7 @@ class ForumHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string url to next results page
 	 */
 	function getNextResultsUrl() {
-		return parent::getNextResultsUrl().'&amp;group_id='.$this->groupId.'&amp;forum_id='.$this->forumId;
+		return parent::getNextResultsUrl().'&amp;forum_id='.$this->forumId;
 	}
 
 	/**

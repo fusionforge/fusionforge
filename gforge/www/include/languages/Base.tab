@@ -1,9 +1,10 @@
-#/**#  *
+#/**
 #  * Default message catalog (English)
 #  *
-#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * GForge
 #  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://sourceforge.net
+#  * Copyright 2002-2004 (c) GForge Team
+#  * http://gforge.org
 #  *
 #  * @version   $Id$
 #  *
@@ -2074,15 +2075,24 @@ scm_index	admin	Administration
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#
-search	artifact_summary	Bug Summary
+search	artifact_summary	Summary
+search	docs_id	#
+search	docs_title	Title
+search	docs_description	Description
 search	error_criteria_not_specified	Enter Your Search Words Above
 search	error_invalid_search	Error - Invalid search
 search	error_search_minlength	Search must be at least three characters
 search	forum_author	Author
 search	forum_date	Date
 search	forum_thread	Thread
+search	frs_release_name	Release Name
+search	frs_posted_by	Posted By
+search	frs_post_date	Post Date
 search	group_name	Group Name
 search	group_description	Description
+search	news_summary	Summary 
+search	news_posted_by	Posted By
+search	news_post_date	Post Date
 search	next_results	Next Results
 search	no_matches_found	No matches found for <em>$1</em>
 search	people_real_name	Real Name
@@ -2096,13 +2106,25 @@ search	skill_name	Name
 search	skill_title	Title
 search	skill_to	To
 search	skill_type	Type
+search  tasks_id        #
+search	tasks_summary	Summary
+search	tasks_start_date	Start Date
+search	tasks_end_date	End Date
+search	tasks_created_by	Created By
+search	tasks_completed	Completed
 search	title	Search
+searchbox	docs	This project's documents
 searchbox	forum	This forum
+searchbox	forums	This project's forums
+searchbox	frs	This project's releases
+searchbox	news	This project's news
 searchbox	people	People
 searchbox	search	Search
 searchbox	skill	Skill
 searchbox	softwaregroup	Software/Group
 searchbox	task	Tasks
+searchbox	tasks	This project's tasks
+searchbox	trackers	This project's trackers
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><font color="red"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</font>
 sendmessage	contact	Contact
 sendmessage	email	Your Email Address

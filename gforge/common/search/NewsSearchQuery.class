@@ -1,0 +1,53 @@
+<?php
+/**
+ * GForge Search Engine
+ *
+ * Copyright 2004 (c) Dominik Haas, GForge Team
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('common/search/SearchQuery.class');
+
+class NewsSearchQuery extends SearchQuery {
+	
+	/**
+	* group id
+	*
+	* @var int $groupId
+	*/
+	var $groupId;
+	
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param int $groupId group id
+	 */
+	function NewsSearchQuery($words, $offset, $isExact, $groupId) {	
+		$this->groupId = $groupId;
+		
+		$this->SearchQuery($words, $offset, $isExact);
+	}
+
+	/**
+	 * getQuery - get the sql query built to get the search results
+	 *
+	 * @return string sql query to execute
+	 */
+	function getQuery() {
+		$sql = 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname'
+			. ' FROM news_bytes, users'
+			. ' WHERE (group_id='.$this->groupId.' AND is_approved <> \'4\' AND news_bytes.submitted_by = users.user_id' 
+			. ' AND (('.$this->getIlikeCondition('summary', $this->words).')' 
+			. ' OR ('.$this->getIlikeCondition('details', $this->words).')))'
+			. ' ORDER BY post_date DESC';
+		return $sql;
+	}
+}
+
+?>
