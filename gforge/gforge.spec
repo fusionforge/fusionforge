@@ -99,7 +99,9 @@ mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
 install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/
 mkdir -p $GFORGE_CONF_DIR/languages-local
-cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
+if [ -f rpm-specific/languages/*.tab ]; then
+	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
+fi
 
 # setting crontab
 mkdir -p $CROND_DIR
