@@ -23,15 +23,7 @@ echo'
 
 // assign default. 18 is 'topic'
 if (!$form_cat) {
-	//$res=db_query('SELECT MIN(trove_cat_id) AS trove_cat_id FROM trove_cat WHERE parent=0 AND trove_cat_id!=0');
-	$res=db_query('SELECT trove_cat_id FROM trove_cat WHERE fullname=(select MAX(fullname) FROM trove_cat WHERE trove_cat_id!=0 AND parent=0)');
-	//$form_cat = 18;
-	if (db_numrows($res) < 1) {
-		exit_error('Categories not defined','Please define categories in admin interface');
-	} else {
-		$row_child = db_fetch_array($res);
-		$form_cat = $row_child['trove_cat_id'];
-	}
+	$form_cat = $default_trove_cat;
 }
 
 $form_cat = intval($form_cat);

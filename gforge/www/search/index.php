@@ -162,10 +162,11 @@ if ($type_of_search == "soft") {
 		include_once('www/export/rss_utils.inc');
 		function callback($data_row) {
                         // trove_cat_root=18 - Topic subtree
+			// [CB] now $default_trove_cat defined in local.inc
 			$res = db_query("
 				SELECT trove_cat.fullpath 
 				FROM trove_group_link,trove_cat 
-				WHERE trove_group_link.trove_cat_root=18 
+				WHERE trove_group_link.trove_cat_root=$default_trove_cat 
 				AND trove_group_link.trove_cat_id=trove_cat.trove_cat_id 
 				AND group_id='".$data_row['group_id']."'");
 			$ret = ' | date registered: '.date('M jS Y',$data_row['register_time']);
