@@ -25,13 +25,16 @@ require('common/include/constants.php');
 
 // Defines all of the GForge hosts, databases, etc.
 // This needs to be loaded first because the lines below depend upon it.
-if (is_file('/etc/gforge/local.inc')) {
-	require ('/etc/gforge/local.inc');
+$sys_localinc=getenv('sys_localinc');
+if (is_file($sys_localinc)) {
+	require($sys_localinc);
 } else {
-	if (is_file('etc/local.inc')) {
-		require('etc/local.inc');
+	if (is_file('/etc/gforge/local.inc')) {
+		require ('/etc/gforge/local.inc');
 	} else {
-		require(getenv('sys_localinc'));
+		if (is_file('etc/local.inc')) {
+			require('etc/local.inc');
+		}
 	}
 }
 
