@@ -18,7 +18,7 @@ require_once('squal_pre.php');
 $arr=explode('/',$REQUEST_URI);
 $file_id=$arr[2];
 
-$res=db_query("SELECT frs_file.filename,frs_file.file_id,groups.unix_group_name
+$res=db_query("SELECT frs_file.filename,frs_file.file_id,groups.unix_group_name,groups.group_id
 	FROM frs_package,frs_release,frs_file,groups
 	WHERE frs_release.release_id=frs_file.release_id
 	AND groups.group_id=frs_package.group_id
@@ -33,6 +33,16 @@ if (db_numrows($res) < 1) {
 $group_name=db_result($res,0,'unix_group_name');
 $filename=db_result($res,0,'filename');
 $release_id=db_result($res,0,'release_id');
+$group_id = db_result($res,0,'group_id');
+
+$Group =& group_get_object($group_id);
+if (!$Group || !is_object($Group) || $Group->isError()) {
+	exit_no_group();
+}
+
+if(!$Group->isPublic()) {
+	session_require(array('group' => $group_id));
+}
 
 /*
 echo $group_name.'|'.$filename.'|'.$sys_upload_dir.$group_name.'/'.$filename;
