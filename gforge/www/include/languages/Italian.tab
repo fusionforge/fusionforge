@@ -32,26 +32,26 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
+account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
 account_change_email	subject	$1 verifica
-account_change_email	mailsent	<P>An email has been sent to the new address. Follow the instructions in the email to complete the email change. <P><A href="/">[ Home ]</A> 
-account_change_email	desc	<P>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.
-account_change_pw	confirmation	<h2>$1 Password Change Confirmation</h2>	<p>	Congratulations. You have changed your password.	</p>
-account_first	about_blurb	You are now a registered user on $1, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message Forum, post bugs for software in $1, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of $1.<P>Enjoy the site, and please provide us with feedback on ways that we can improve $1.<P>--the $1 staff
-account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
-account_login	pending_account	<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
+account_change_email	mailsent	<P>Un messaggio di posta elettronica &egrave; stato inviato al nuovo indirizzo. Follow the instructions in the email to complete the email change. <P><A href="/">[ Home ]</A> 
+account_change_email	desc	<P>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.
+account_change_pw	confirmation	<h2>$1 Conferma di cambio password</h2>	<p>	Congratulazioni, la password &egrave; stata cambiata.	</p>
+account_first	about_blurb	Sei un utente registrato su $1, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message Forum, post bugs for software in $1, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of $1.<P>Enjoy the site, and please provide us with feedback on ways that we can improve $1.<P>--the $1 staff
+account_login	deleted_account	<p>Il tuo account $1 &egrave; stato rimosso dal team di $1. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
+account_login	pending_account	<P>Il tuo account &egrave; in attesa di approvazione di conferma via email.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
 account_login	cookiewarn	I Cookie devono essere abilitati 
 account_login	loginname	Login:
 account_login	passwd	Password:
 account_login	login	Login con SSL
 account_login	lostpw	[Hai perso la password?]
 account_login	newaccount	[Nuovo Utente]
-account_lostpw	message	Someone (presumably you) on the $3 site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
+account_lostpw	message	Qualcuno (presumibilmente te) sul sito $3 ha richiesto\n un cambio di password tramite verifica email. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
 account_lostpw	subject	$1 Verification
-account_lostpw	notify	<P>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password. <P><A href="/">[ Home ]</A>
-account_lostpw	warn	<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. <P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
-account_lostpw	sendhash	Send Lost PW Hash
-account_lostlogin	severalconfirm	This confirm hash exists more than once.
+account_lostpw	notify	<P>Un email &egrave; stata inviata all'indirizzo indicato nel database. Seguire le istruzioni nell'email per cambiare la password. <P><A href="/">[ Home ]</A>
+account_lostpw	warn	<P>Attenzione... perdere la propria password &egrave; una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero. <P>Cliccando su "Invia Hash di password persa" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
+account_lostpw	sendhash	Invia Hash di password persa
+account_lostlogin	severalconfirm	Il hash di conferma esiste pi&ugrave; volte.
 account_lostlogin	invalidconfirm	Il hash di conferma non &egrave; valido.
 account_lostlogin	sixchars	La password deve essere valida  (minimo 6 caratteri).
 account_lostlogin	notmatch	Le password non corrispondono.
@@ -100,7 +100,7 @@ account_verify	password	Password:
 account_verify	login		Login
 account_verify	missingparam	Parametro mancante
 account_verify	usermandatory	Nome utente obbligatorio.
-account_verify	invaliduser	Invalid user
+account_verify	invaliduser	Utente non valido
 account_verify	nouser	L'utente non esiste.
 account_verify	invalidop	Operazione non valida
 account_verify	accountactive	Utente gi&agrave; attivo.
@@ -435,8 +435,9 @@ my	pending_projects_1	C'e' un progetto in attesa di approvazione.
 my	pending_projects_2	Ci sono $1 progetti in attesa di approvazione.
 my	pending_projects_3	Premere qui
 my	pending_news_bytes_1	C'e' una news in attesa di approvazione
-my	pending_news_bytes_2	Ci sono  $1 news in attesa di approvazione
+my	pending_news_bytes_2	Ci sono $1 news in attesa di approvazione
 my	pending_news_bytes_3	Premere qui.
+my	survey_taken	Hai gi&agrave; partecipato al sondaggio
 my_bookmark	return	Ritorna
 my_bookmark_add	section	Pagina Personale
 my_bookmark_add	title	Aggiungi segnalibro
@@ -664,7 +665,7 @@ project_showfiles	error_no_packages_defined_title	Nessun package definito
 project_showfiles	error_no_packages_defined_text	Non &egrave; stato definito alcun package per questo progetto.
 project_showfiles	title	File rilasciati per il progetto
 project_showfiles	intro	Qui trovi l'elenco di tutti i file del progetto.
-project_showfiles	intro2	Prima di scaricare il file, leggi le note di rilascio e il Changelog  (accessibile cliccando sulla versione della release).
+project_showfiles	intro2	Prima di scaricare il file, leggi le note di rilascio e il Changelog (accessibile cliccando sulla versione della release).
 project_showfiles	release_highlighted	La release selezionata &egrave; <span style="background-color:pink">evidenziata</span>.
 project_showfiles	package	Package
 project_showfiles	release_notes	Note <br />di rilascio 
@@ -693,8 +694,8 @@ project_memberlist	role	Ruolo/Posizione
 project_memberlist	skills	Competenze
 project_memberlist	view	Visualizza
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>
-users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.  <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
-users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non.  <ul> <li> Il campo The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri. <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
+users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non. <ul> <li> Il campo The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users. <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only. <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight. </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
 users	optout	Hai selezionato di non partecipare alle quotazioni, perci&ograve; non puoi quotare questo utente. Vai a <a href="/account/">opzioni utente </a> per maggiori informazioni.
 users	user_not_exist_title	L'utente non esiste
 users	no_user_name	Nessun nome utente specificato
@@ -736,7 +737,7 @@ trove_list	limiting_view	Filtro impostato sulle seguenti categorie
 trove_list	number_of_projects	<strong>$1</strong> progetti
 trove_list	more_than	Pi&ugrave; di <strong>$1</strong> progetti
 trove_list	browse_by	Visualizza per
-classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\nServer CVS:         cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto: $1\nUnix Name del progetto: $2\nServer CVS:      cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
 classgroup	rejectedproject	Il tuo progetto $3 &egrave; stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
 classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
 classgroup	acceptedprojecttitle	Progetto $1 approvato
@@ -833,7 +834,7 @@ include_toolreport	all	Tutti
 include_toolreport	key	Legenda
 include_toolreport	open	Aperti
 source	show_source	Visualizza sorgente
-source	source_of	Sorgente di  $1
+source	source_of	Sorgente di $1
 source	missing_file	Argomento di file mancante
 source	missing_file_text	Deve essere specificato un nome file
 source	invalid_argument	Argomento file non valido
@@ -922,7 +923,7 @@ tracker_browse	previous	Indietro
 tracker_browse	next	Avanti 
 tracker_browse	check_all	Seleziona&nbsp;tutti
 tracker_browse	clear_all	Deseleziona&nbsp;tutti
-tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT>  Se vuoi fare dei cambiamenti a tutti gli elementi elencati, usa i campi sottostanti per cambiare le propriet&agrave; e seleziona "Aggiornamento multiplo".
+tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi fare dei cambiamenti a tutti gli elementi elencati, usa i campi sottostanti per cambiare le propriet&agrave; e seleziona "Aggiornamento multiplo".
 tracker_browse	no_change	No Change
 tracker_browse	resolution	Resolution 
 tracker_browse	canned_response	Canned Response
@@ -1094,7 +1095,7 @@ stats_i18n	users	Utenti
 stats_i18n	language_distribution	Distribuzione delle lingue
 stats_i18n	total_non_english	Totale non inglesi
 stats_i18n	language_text	Questo &egrave; un elenco delle lingue che gli utenti hanno selezionato nelle proprie preferenze; non include lingue impostate tramite browser oppure cookie.
-stats_graph	sitewide_statistics_graphs      Statistiche sul sito
+stats_graph	sitewide_statistics_graphs	Statistiche sul sito
 stats_graph	overview_stats	Sommario sulle statistiche
 stats_graph	project_stats	Statistiche del progetto
 stats_graph	site_graphs	Grafici del sito
@@ -1144,7 +1145,7 @@ stats_site_utils	day	Giorno
 stats_site_utils	site_views	Viste del sito
 stats_site_utils	subdomain_views	Vista per sottodomino
 stats_site_utils	no_data	Nessun dato
-stats_site_utils        statistics_for_the_past_months Statistiche per gli ultimi $1 mesi
+stats_site_utils	statistics_for_the_past_months Statistiche per gli ultimi $1 mesi
 stats_site_utils	month	Month
 stats_site_utils	current_statistic_all_time	Statistiche aggregate 
 stats_site_utils	developers	Sviluppatori
@@ -1213,17 +1214,17 @@ scm_index	cvs_repository	Repository CVS
 scm_index	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
 scm_index	developername	nomesviluppatore
 scm_index	modulename	nomemodulo
-admin   successfully_added      Aggiunto con successo
-admin   are_you_sure_delete     Sei sicuro di voler cancellare
+admin	successfully_added	Aggiunto con successo
+admin	are_you_sure_delete	Sei sicuro di voler cancellare
 admin	delete	Cancella
-admin   cancel  Annulla
-admin   successfully_deleted    Cancellato
-admin   submit_changes  Invia modifiche
-admin	submit_new      Invia
-admin	successfully_modified   modificato con successo
-admin	add_new [aggiungi nuovo]
-admin	edit    [modifica]
-admin	site_admin_home Site Admin Home
+admin	cancel	Annulla
+admin	successfully_deleted	Cancellato
+admin	submit_changes	Invia modifiche
+admin	submit_new	Invia
+admin	successfully_modified	modificato con successo
+admin	add_new	[aggiungi nuovo]
+admin	edit	[modifica]
+admin	site_admin_home	Site Admin Home
 admin	yes	s&igrave;
 admin	reject	Rigetta
 admin	license	Licenza:
@@ -1233,19 +1234,19 @@ admin	other	Altri
 admin	edit	Modifica
 admin	http_domain	Dominio HTTP
 admin	license_other	Licenza diversa
-admin_add_language      add_new_language        Add New Languages
-admin_add_language      existing_language       Existing Language
-admin_add_language      add_new_language        Add New Language
-admin_add_language      name    Name:
-admin_add_language      class_filename  Class Filename:
-admin_add_language      classname       Classname:
-admin_add_language      submit  Submit
-admin_tabfiles	modify_the      Modify the $1 below:
-admin_tabfiles	language        Language
-admin_tabfiles	delete_lang     [delete]
-admin_tabfiles	edit_the_language       Edit The Language
-admin_tabfiles	language        Language
-admin_tabfiles	edit_the_langfile       Edit The $1 Language
+admin_add_language	add_new_language	Add New Languages
+admin_add_language	existing_language	Existing Language
+admin_add_language	add_new_language	Add New Language
+admin_add_language	name	Name:
+admin_add_language	class_filename	Class Filename:
+admin_add_language	classname	Classname:
+admin_add_language	submit	Submit
+admin_tabfiles	modify_the	Modify the $1 below:
+admin_tabfiles	language	Language
+admin_tabfiles	delete_lang	[delete]
+admin_tabfiles	edit_the_language	Edit The Language
+admin_tabfiles	language	Language
+admin_tabfiles	edit_the_langfile	Edit The $1 Language
 admin_table	edit_the	Edit The
 admin_table	table	Table
 admin_approve_pending	error_creating_group	Error creating group object
@@ -1928,4 +1929,131 @@ people_viewprofile	user_fetch_failed	User fetch FAILED
 people_viewprofile	no_such_user	L'utente non esiste
 people_viewprofile	set_private	L'utente ha impostato il suo profilo a privato
 people_viewprofile	skills_profile_for	Profilo delle competenze
-
+survey	title	Sondaggi
+survey	for_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non &egrave; arrivato a questa pagina.
+survey	permission_denied	Utente non autorizzato
+survey	low	bassa
+survey	high	alta
+survey	survey_privacy	Privacy del sondaggio
+survey_add_question	title	Aggiungi domanda
+survey_add_question	question_added	Domanda aggiunta
+survey_add_question	error_insert_question	Errore nell'inserimento di questa domanda
+survey_add_question	add_this_question	Aggiungi questa domanda
+survey_add_question	show_existing_questions	Visualizza domande esistenti
+survey_add_question	question	Domanda
+survey_add_question	question_type	Tipo domanda
+survey_add_survey	title	Aggiungi sondaggio
+survey_add_survey	title_is_required	Il titolo del sondaggio &egrave; un parametro obbligatorio
+survey_add_survey	survey_inserted	Sondaggio inserito
+survey_add_survey	error_in_insert	Errore nell'inserimento del sondaggio
+survey_add_survey	name_of_survey	Nome del sondaggio
+survey_add_survey	list_questions_numbers	Elenca il numero di domane, nell'ordine desiderato, separato da virgole. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
+survey_add_survey	yes	S&igrave;
+survey_add_survey	no	No
+survey_add_survey	is_active	attivo?
+survey_add_survey	add_this_survey	Aggiungi questo sondaggio
+survey_add_survey	show_existing_question	Visualizza domande esistenti
+survey_add_survey	existing_surveys	Sondaggi esistenti:
+survey_admin_utils	found	$1 sondaggi trovati
+survey_admin_utils	survey_id	ID sondaggio
+survey_admin_utils	group_id	ID progetto
+survey_admin_utils	survey_title	Titolo del sondaggio
+survey_admin_utils	survey_questions	Domande
+survey_edit_question	title	Modifica una domanda
+survey_edit_question	permission_denied	Utente non autorizzato
+survey_edit_question	update_failed	AGGIORNAMENTO FALLITO
+survey_edit_question	update_successful	AGGIORNAMENTO EFFETTUATO
+survey_edit_question	error_finding_question	Error finding question
+survey_edit_question	editing_question	Editing Question
+survey_edit_question	warning_change_after_response	ATTENZIONE! Non &egrave; una buona idea cambiare una domanda quando sono state inserite risposte a questa domanda.
+survey_edit_question	if_you_change_after	Se cambi una domanda dopo che una risposta &egrave; stata inserita have been posted, i risultati potrebbe essere fuorviante.
+survey_edit_question	question	Domanda
+survey_edit_question	question_type	Tipo domanda
+survey_edit_question	submit_changes	Invia
+survey_edit_question	show_existing_question	Visualizza domande esistenti
+survey_edit	tilte	Modifica sondaggio
+survey_edit	permission_denied	Utente non autorizzato
+survey_edit	survey_title_required	AGGIORNAMENTO FALLITO: titolo del sondaggio obbligatorio
+survey_edit	survey_question_required	AGGIORNAMENTO FALLITO: domande necessarie
+survey_edit	missing_date	AGGIORNAMENTO FALLITO: dati mancati
+survey_edit	update_failed	AGGIORNAMENTO FALLITO: 
+survey_edit	update_successful	AGGIORNAMENTO EFFETTUATO
+survey_edit	warning_survey_after_response	ATTENZIONE! &Egrave; generalmente una cattiva idea modificare un sondaggio dopo che sono state inserite risposte
+survey_edit	change_after_already_response	I risultati dei sondaggi potrebbero essere sviati o non corretti se si cambia un sondaggio dopo che sono gi&agrave; state inserite risposte.
+survey_edit	name_off_survey	Nome del sondaggio
+survey_edit	question	Domande
+survey_edit	list_question_numbers	Elenca il numero delle domande, nell'ordine desiderato (separate da virgole). <strong>Fare riferimento all'elenco delle domande</strong> per vedere l'id delle singole domande. <strong>Non</strong> includere spazi o chiudere l'elenco con una virgola.<br /> Ex: 1,2,3,4,5,6,7
+survey_edit	is_active	Attivo
+survey_edit	yes	S&igrave;
+survey_edit	no	No
+survey_edit	submit_changes	Invia
+survey_edit	show_existing_questions	Visualizza domande esistenti
+survey_edit	existing_surveys	Sondaggi esistenti
+survey_utils	error_this_group_has_turned_off	Errore, questo progetto ha disabilitato i sondaggi
+survey_utils	add_survey	Aggiungi sondaggio
+survey_utils	edit_survey	Modifica sondaggio
+survey_utils	add_question	Aggiungi domanda
+survey_utils	edit_questions	Modifica domanda
+survey_utils	show_results	Visualizza risultati
+survey_utils	admin	Amministra
+survey_resp	title	Sondaggio completo
+survey_resp	error_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non &egrave; arrivato a questa pagina.
+survey_resp	you_nedd_to_be_logged_in	You need to be logged in
+survey_resp	unfortunately_you_have_to_be	Unfortunately, you have to be logged in to participate in surveys.
+survey_resp	thank_you	Grazie per aver partecipato al sondaggio
+survey_resp	regards	Saluti
+survey_resp	the_crew	Il team $1
+survey_resp	error	Errore
+survey_rating_resp	title	Voting
+survey_rating_resp	you_must_be_logged_in	You must be logged in to vote
+survey_rating_resp	error	ERROR
+survey_rating_resp	error_in_insert	Error in insert
+survey_rating_resp	vote_reg	Vote registered
+survey_rating_resp	vote_regsitered	Vote Registered
+survey_rating_resp	click_to_resturn	Click to return to previous page
+survey_rating_resp	if_you_vote_again	If you vote again, your old vote will be erased.
+survey_rating_resp	error_missing	ERROR!!! MISSING PARAMS
+survey_privacy	title	Sondaggio
+survey_privacy	survey_privacy	Privacy del sondaggio
+survey_privacy	the_privacy_information	<p>Le informazioni raccolte in questi sondaggi non saranno mai vendute a terze parti oppure utilizzate per sollecitare l'acquisto di prodotti o servizi.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
+survey_privacy	the_team	Il team $1 
+survey_index	for_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non &egrave; arrivato a questa pagina.
+survey_index	title	Sondaggio
+survey_index	survey_id	Id sondaggio
+survey_index	survey_title	Titolo sondaggio
+survey_index	this_group_has	Questo gruppo non ha sondaggi attivi
+survey_admin_index	title	Amministrazione sondaggi
+survey_admin_index	permission_denied	Utente non autorizzato
+survey_admin_index	add_survey	Aggiungi sondaggi
+survey_admin_index	edir_existing_survey	Modifica sondaggi esistenti
+survey_admin_index	add_question	Aggiungi domande
+survey_admin_index	edit_existing_question	Modifica domande esistenti
+survey_admin_index	show_results	Visualizza risultati sondaggi
+survey_admin_index	its_simple_to_create	<p>&Egrave; semplice aggiiungere un sondaggio.<ol><li>Crea domande e commenti utilizzando i form.</li><li>Crea un sondaggio, elenca le domande (seleziona dal <strong>tuo</strong> elenco di domande).</li><li>Linka al sondaggio usando il formato: $1 dove XX &egrave; il numero del sondaggio
+survey_admin_index	you_can_now_activate	&Egrave; adesso possibile attivare/disattivare i sondaggi sulla pagina di $1 Modifica sondaggi esistenti $2
+survey_show_result_comment	title	RisuSurvey Aggregate Results
+survey_show_result_comment	permission_denied	Utente non autorizzato
+survey_show_result_comment	found	Found
+survey_show_result_comment	question	Domanda
+survey_show_results_csv	permission_denied	Utente non autorizzato
+survey_show_questions	title	Domande sondaggi
+survey_show_questions	permission_denied	Utente non autorizzato
+survey_show_questions	you_may_use_any_of_these	Le domande elencate possono essere utilizzate in tutti i sondaggi
+survey_show_questions	note_use_these_questions_id	NOTA: usare questi id domande quando si crea un nuovo sondaggio
+survey_show_questions	found	$1 domande trovate
+survey_show_results_aggregate	title	Visualizza risultati aggregati
+survey_show_results_aggregate	permission_denied	Utente non autorizzato
+survey_show_results_aggregate	error	errore
+survey_show_results_aggregate	responses	Risposte
+survey_show_results_aggregate	average	Media
+survey_show_results_aggregate	view_comments	Visualizza commenti
+survey_show_results_aggregate	yes_no	S&igrave/no
+survey_show_results_aggregate	yes	S&igrave;
+survey_show_results_aggregate	no	No
+survey_show_results_individual	title	Risultati
+survey_show_results_individual	permission_denied	Utente non autorizzato
+survey_show_results_individual	yes_no	S&igrave / No
+survey_show_results	title	Risultati sondaggi
+survey_show_results	permission_denied	Utente non autorizzato
+survey_show_results	found	trovato
+survey_show_results	view_aggregate_responses	Visualizza risposte aggregate
