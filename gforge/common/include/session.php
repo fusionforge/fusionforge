@@ -319,15 +319,16 @@ function session_require($req) {
 
 	if ($req['group']) {
 		$group =& group_get_object($req['group']);
-		if (!$group || !is_object($group) || $group->isError()) {
-			exit_no_group();
+		if (!$group || !is_object($group)) {
+			exit_error('Error','Could Not Get Group');
+		} elseif ($group->isError()) {
+			exit_error('Error',$group->getErrorMessage());
 		}
 
 		$perm =& $group->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm) || $perm->isError()) {
 			exit_permission_denied();
 		}
-
 
 		if ($req['admin_flags']) {
 			if (!$perm->isAdmin()) {

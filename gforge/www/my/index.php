@@ -278,46 +278,56 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	 * Pending projects and news bytes
 	 */
 	$admingroup = group_get_object (1) ;
-	exit_assert_object($admingroup,'Group');
-	$perm =& $admingroup->getPermission( session_get_user() );
-	if ($perm && is_object($perm) && $perm->isAdmin()) {
-		$sql="SELECT group_name FROM groups where status='P';";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows) {
-			echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
+	if (!$admingroup || !is_object($admingroup)) {
+		//don't have perm to see this
+	} elseif ($admingroup->isError()) {
+		//don't have perm to see this
+	} else {
+		$perm =& $admingroup->getPermission( session_get_user() );
+		if ($perm && is_object($perm) && $perm->isAdmin()) {
+			$sql="SELECT group_name FROM groups where status='P';";
+			$result=db_query($sql);
+			$rows=db_numrows($result);
+			if ($rows) {
+				echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
 
-			if ($rows==1){
-				echo $Language->getText('my','pending_projects_1');
-			} else {
-				echo $Language->getText('my','pending_projects_2',$rows);
-			}
+				if ($rows==1){
+					echo $Language->getText('my','pending_projects_1');
+				} else {
+					echo $Language->getText('my','pending_projects_2',$rows);
+				}
 			
-			echo " <a href=\"/admin/approve-pending.php\">";
-			echo $Language->getText('my','pending_projects_3');
-			echo "</a>.";
+				echo " <a href=\"/admin/approve-pending.php\">";
+				echo $Language->getText('my','pending_projects_3');
+				echo "</a>.";
+			}
 		}
 	}
 	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
-	exit_assert_object($newsgroup,'Group');
-	$perm =& $newsgroup->getPermission( session_get_user() );
-	if ($perm && is_object($perm) && $perm->isAdmin()) {
-		$sql="SELECT * FROM news_bytes nb, groups g WHERE nb.is_approved=0 and nb.group_id = g.group_id and g.status = 'A'";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows) {
-			echo $HTML->boxMiddle($Language->getText('my','pending_news_bytes'), false, false);
+	if (!$newsgroup || !is_object($newsgroup)) {
+		//don't have perm to see this
+	} elseif ($newsgroup->isError()) {
+		//don't have perm to see this
+	} else {
+		$perm =& $newsgroup->getPermission( session_get_user() );
+		if ($perm && is_object($perm) && $perm->isAdmin()) {
+			$sql="SELECT * FROM news_bytes nb, groups g WHERE nb.is_approved=0 and nb.group_id = g.group_id and g.status = 'A'";
+			$result=db_query($sql);
+			$rows=db_numrows($result);
+			if ($rows) {
+				echo $HTML->boxMiddle($Language->getText('my','pending_news_bytes'), false, false);
 
-			if ($rows==1){
-				echo $Language->getText('my','pending_news_bytes_1');
-			} else{
-				echo $Language->getText('my','pending_news_bytes_2',$rows);
+				if ($rows==1){
+					echo $Language->getText('my','pending_news_bytes_1');
+				} else{
+					echo $Language->getText('my','pending_news_bytes_2',$rows);
+				}
+
+				echo " <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
+
+				echo $Language->getText('my','pending_news_bytes_3');
+				echo "</a>.";
 			}
-
-			echo " <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
-
-			echo $Language->getText('my','pending_news_bytes_3');
-			echo "</a>.";
 		}
 	}
 	/*
