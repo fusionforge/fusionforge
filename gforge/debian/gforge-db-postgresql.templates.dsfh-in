@@ -48,7 +48,7 @@ _Description: The Gforge administrator password - again
 
 Template: gforge/shared/skill_list
 Type: string
-_Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 _Description: The initial list of skills
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of

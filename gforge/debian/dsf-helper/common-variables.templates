@@ -12,6 +12,6 @@ _Description: The SF admin email address.
 
 Template: gforge/shared/system_name
 Type: string
-_Default: Gforge
+Default: Gforge
 _Description: The Gforge system name
  This name is used in various places throughout the system.

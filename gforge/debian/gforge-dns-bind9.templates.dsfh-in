@@ -10,7 +10,7 @@
 Template: gforge/shared/db_password
 Type: password
 _Description: Password used for the database
- The connecton to the DB system requires a password.  Please choose a
+ The connection to the DB system requires a password.  Please choose a
  password here.
 
 Template: gforge/shared/db_password_confirm
@@ -39,7 +39,7 @@ _Description: The Gforge administrator password - again
 
 Template: gforge/shared/skill_list
 Type: string
-_Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 _Description: The initial list of skills
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of

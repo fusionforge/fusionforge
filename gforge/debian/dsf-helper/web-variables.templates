@@ -1,13 +1,13 @@
 Template: gforge/shared/sys_lang
-Type: string
-_Default: English
+Type: select
+__Choices: English, Bulgarian, Catalan, Chinese, Dutch, Esperanto, French, German, Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, Polish, PortugueseBrazilian, Portuguese, Russian, SimplifiedChinese, Spanish, Swedish, Thai
+_DefaultChoice: English
 _Description: Default language
- Here is the default language for web pages, be carreful to enter a valid
- language.
+ Here is the default language for web pages.
 
 Template: gforge/shared/sys_theme
 Type: string
-_Default: debian
+Default: debian
 _Description: Default theme
  Here is the default theme for web pages, be carreful to enter a valid
  name.

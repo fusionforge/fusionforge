@@ -1,6 +1,6 @@
 Template: gforge/shared/newsadmin_groupid
 Type: string
-_Default: 2
+Default: 2
 _Description: The news admin group id
  Members of the news admin group can approve news for the Gforge main
  page.  This group id MUST NOT be 1. You only need to touch this group if
@@ -8,10 +8,10 @@ _Description: The news admin group id
 
 Template: gforge/shared/statsadmin_groupid
 Type: string
-_Default: 3
+Default: 3
 _Description: The stats admin group id
 
 Template: gforge/shared/peerrating_groupid
 Type: string
-_Default: 4
+Default: 4
 _Description: The peer rating admin group id

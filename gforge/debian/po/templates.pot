@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 23:17+0200\n"
+"POT-Creation-Date: 2003-07-24 21:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,12 +111,6 @@ msgstr ""
 msgid "Please re-type the password for confirmation."
 msgstr ""
 
-#. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:51
-#: ../gforge-dns-bind9.templates.dsfh-in:42
-msgid "Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
-msgstr ""
-
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:52
 #: ../gforge-dns-bind9.templates.dsfh-in:43
@@ -141,9 +135,8 @@ msgstr ""
 
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12
-#: ../dsf-helper/dbpasswd-variables.templates:3
 msgid ""
-"The connecton to the DB system requires a password.  Please choose a "
+"The connection to the DB system requires a password.  Please choose a "
 "password here."
 msgstr ""
 
@@ -367,11 +360,6 @@ msgid ""
 "a problem occurs."
 msgstr ""
 
-#. Default
-#: ../dsf-helper/common-variables.templates:15
-msgid "Gforge"
-msgstr ""
-
 #. Description
 #: ../dsf-helper/common-variables.templates:16
 msgid "The Gforge system name"
@@ -418,11 +406,6 @@ msgid ""
 "needed for virtually all the subpackages."
 msgstr ""
 
-#. Default
-#: ../dsf-helper/dbhost-variables.templates:16
-msgid "gforge"
-msgstr ""
-
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:17
 msgid "Your database admin username"
@@ -436,15 +419,17 @@ msgid ""
 msgstr ""
 
 #. Description
+#: ../dsf-helper/dbpasswd-variables.templates:3
+msgid ""
+"The connecton to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+
+#. Description
 #: ../dsf-helper/downloadhost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge packages. It should "
 "not be the same as your main SF host."
-msgstr ""
-
-#. Default
-#: ../dsf-helper/groupid-variables.templates:3
-msgid "2"
 msgstr ""
 
 #. Description
@@ -460,19 +445,9 @@ msgid ""
 "upgrade from a previous version and want to keep your data."
 msgstr ""
 
-#. Default
-#: ../dsf-helper/groupid-variables.templates:11
-msgid "3"
-msgstr ""
-
 #. Description
 #: ../dsf-helper/groupid-variables.templates:12
 msgid "The stats admin group id"
-msgstr ""
-
-#. Default
-#: ../dsf-helper/groupid-variables.templates:16
-msgid "4"
 msgstr ""
 
 #. Description
@@ -516,26 +491,134 @@ msgid ""
 "It should not be the same as your main SF host."
 msgstr ""
 
-#. Default
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
+msgid "Bulgarian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Catalan"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Chinese"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Dutch"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Esperanto"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "French"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "German"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Greek"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Hebrew"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Indonesian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Italian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Japanese"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Korean"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Latin"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Norwegian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Polish"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "PortugueseBrazilian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Portuguese"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Russian"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "SimplifiedChinese"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Spanish"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Swedish"
+msgstr ""
+
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Thai"
+msgstr ""
+
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:4
 msgid "English"
 msgstr ""
 
 #. Description
-#: ../dsf-helper/web-variables.templates:4
+#: ../dsf-helper/web-variables.templates:5
 msgid "Default language"
 msgstr ""
 
 #. Description
-#: ../dsf-helper/web-variables.templates:4
-msgid ""
-"Here is the default language for web pages, be carreful to enter a valid "
-"language."
-msgstr ""
-
-#. Default
-#: ../dsf-helper/web-variables.templates:10
-msgid "debian"
+#: ../dsf-helper/web-variables.templates:5
+msgid "Here is the default language for web pages."
 msgstr ""
 
 #. Description
