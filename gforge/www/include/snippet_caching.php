@@ -14,22 +14,10 @@
  */
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
-
+	global $Language;
 	$return .=
 	'<div style="font-family:arial,helvetica">
-
-	<p>The purpose of this archive is to let you share your code snippets, scripts,
-	and functions with the Open Source Software Community.</p>
-
-	<p>You can create a "new snippet", then post additional versions of that
-	snippet quickly and easily.</p>
-
-	<p>Once you have snippets posted, you can then create a "Package" of snippets.
-	That package can contain multiple, specific versions of other snippets.</p>
-	<p>&nbsp;</p>
-	<h3>Browse Snippets</h3>
-	
-	<p>You can browse the snippet library quickly:</p>
+	'.$Language->getText('snippet_caching','intro').'
 	<br />
 	<p>
 	<table width="100%" border="0">
@@ -38,7 +26,7 @@ function snippet_mainpage() {
 	</td></tr>
 
 	<tr><td>
-	<strong>Browse by Language:</strong>
+	<strong>'.$Language->getText('snippet_caching','browse_by_language').':</strong>
 	<p>';
 
 	$count=count($SCRIPT_LANGUAGE);
@@ -53,7 +41,7 @@ function snippet_mainpage() {
 	$return .= 	
 	'</p></td>
 	<td>
-	<strong>Browse by Category:</strong>
+	<strong>'.$Language->getText('snippet_caching','browse_by_category').':</strong>
 	<p>';
 
 	$count=count($SCRIPT_CATEGORY);
