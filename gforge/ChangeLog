@@ -10,6 +10,10 @@
 	* www/mail/admin/index.php
 	Applied patch [ #497 ] Patch for problems mailing feedback
 	 on new project registration (actually, new list creation)
+
+	* www/forum/new.php
+	Applied patch [ #502 ] Patch to permit anonymous users to 
+	post in forum
 	
 2003-08-22  Roland Mas  <99.roland.mas@aist.enst.fr>
 

@@ -51,7 +51,7 @@ if ($forum_id && $group_id) {
 	}
 
 	if (session_loggedin() || $f->allowAnonymous()) {
-		if (!$f->savePlace()) {
+		if (!$f->allowAnonymous() && !$f->savePlace()) {
 			exit_error('Error',$f->getErrorMessage());
 		} else {
 			forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
