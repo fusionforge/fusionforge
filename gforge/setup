@@ -169,7 +169,6 @@ setupinout(){
 	echo "Creating $HTTPDSECRETS"
 	cat $ETCDIR/httpd.secrets.gforge-new > $HTTPDSECRETS
 	rm $ETCDIR/httpd.secrets.gforge-new
-	chmod 600 $HTTPDSECRETS
 	
 	echo "Creating $LOCALINC"
 	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/[2-9]*
@@ -185,6 +184,9 @@ setupinout(){
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
 	done
+	chmod 600 $HTTPDSECRETS $CONFFILEIN $CONFFILEOUT
+	chmod 640 $ETCDIR/local.pl $ETCDIR/database.inc
+	chown gforge:gforge $ETCDIR/local.pl $ETCDIR/database.inc
 }
 	
 doapache() {	
