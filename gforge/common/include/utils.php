@@ -25,8 +25,8 @@
 
 
 /**
- * removeCRLF() - remove any Cariage Return-Line Feed from a string. 
- * That function is usefull to remove the possibility of a CRLF Injection when sending mail
+ * removeCRLF() - remove any Carriage Return-Line Feed from a string. 
+ * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
  *
  * @param	   string  The string that we want to empty from any CRLF 
@@ -94,6 +94,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}
+	
 
 	$charset = $Language->getText('conf','mail_charset');
 	if (!$charset) {
