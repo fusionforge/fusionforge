@@ -5,8 +5,9 @@ sourceforge (2.5-30+) unstable; urgency=low
   * [Roland] Revamped install-ftp.sh more or less thoroughly in order to
     finally get rid of the sneaky LDAP problems.  From what I can see, it
     works.  Yay!
+  * [Roland] Various other cleanings in install-ldap.sh.
 
- -- Roland Mas <lolando@debian.org>  Sun, 28 Jul 2002 19:59:30 +0200
+ -- Roland Mas <lolando@debian.org>  Fri,  2 Aug 2002 22:18:46 +0200
 
 sourceforge (2.5-30) unstable; urgency=high
 
