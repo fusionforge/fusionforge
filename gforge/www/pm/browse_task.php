@@ -120,7 +120,7 @@ if ($rows < 1) {
 	/*
 		Now display the tasks in a table with priority colors
 	*/
-	$IS_ADMIN=($pg->userIsPMAdmin());
+	$IS_ADMIN=($pg->userIsAdmin());
 
 	if ($IS_ADMIN) {
 		echo '
