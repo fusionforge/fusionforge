@@ -32,3 +32,12 @@
 
 # Daily aggregating of the numbers
 15 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/site_stats.php ] && /usr/lib/sourceforge/bin/site_stats.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include > /dev/null 2>&1
+
+# Daily sweep of the HTTP log files for stats information
+25 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/stats_logparse.sh] && /usr/lib/sourceforge/bin/stats_logparse.sh > /dev/null 2>&1
+
+# Daily sweep of the stats into final tables
+45 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/db_stats_agg.php ] && /usr/lib/sourceforge/bin/db_stats_agg.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include > /dev/null 2>&1
+
+# Daily sweep of the HTTP log files for project activity
+15 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/stats_projects_logparse.pl ] && /usr/lib/sourceforge/bin/stats_projects_logparse.pl -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include > /dev/null 2>&1

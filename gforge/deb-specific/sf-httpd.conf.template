@@ -47,6 +47,8 @@ NameVirtualHost {ip_address}:443
 
   # 404 Error document
   ErrorDocument 404 /404.php
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -54,11 +56,15 @@ NameVirtualHost {ip_address}:443
   DocumentRoot /usr/lib/sourceforge/cvs
   ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
   Alias /cvstarballs/ /var/lib/sourceforge/cvstarballs/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
   ServerName {download_host}
   DocumentRoot /var/lib/sourceforge/download
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -80,6 +86,8 @@ NameVirtualHost {ip_address}:443
   </Location>
 
   RedirectMatch permanent ^/$ http://{lists_host}/cgi-bin/mailman/listinfo
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>
@@ -114,6 +122,8 @@ NameVirtualHost {ip_address}:443
   </Location>
 
   RedirectMatch permanent ^/$ https://{lists_host}/cgi-bin/mailman/listinfo
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>
@@ -157,6 +167,8 @@ NameVirtualHost {ip_address}:443
 
   # 404 Error document
   ErrorDocument 404 /404.php
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 # This is magic for virtual hosting!
@@ -177,6 +189,8 @@ UseCanonicalName Off
 		order allow,deny
 		allow from all
 	</Directory>
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
 #This may be used 
@@ -195,4 +209,6 @@ UseCanonicalName Off
                order allow,deny
                allow from all
        </Directory>
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
+  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>

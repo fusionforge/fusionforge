@@ -12,13 +12,13 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("../../../utils/include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 
 #######################
 ##  CONF VARS
 
 	my $verbose = 1;
-	my @chronolog_dirs = ("/home/ftp1", "/home/ftp2", "/home/ftp3");
+	my @chronolog_dirs = ("/var/log/sourceforge");
 
 ##
 #######################
@@ -50,6 +50,7 @@ $query  = "SELECT frs_file.file_id,groups.group_id,groups.unix_group_name,frs_fi
 	. "AND frs_release.release_id = frs_file.release_id )";
 $rel = $dbh->prepare($query);
 $rel->execute();
+
 while( $filerel = $rel->fetchrow_arrayref() ) {
 	$file_ident = ${$filerel}[2] . ":" . ${$filerel}[3];
 	$filerelease{$file_ident} = ${$filerel}[0];
@@ -60,8 +61,8 @@ print " done.\n" if $verbose;
 
 for $chronolog_basedir (@chronolog_dirs) {
 
-$file = "$chronolog_basedir/$year/" . sprintf("%02d",$month) . "/http_combined_$year"
-        . sprintf("%02d%02d", $month, $day) . ".log";
+$file = "$chronolog_basedir/$year/" . sprintf("%02d",$month) . "/"
+        . sprintf("%02d", $day) . "/sourceforge.log";
 
 print "Running year $year, month $month, day $day from \'$file\'\n" if $verbose;
 
@@ -74,12 +75,10 @@ if ( -f $file ) {
 }
 
 while (<LOGFILE>) {
-
 	$_ =~ m/^([\d\.]+).*\[(.+)\]\s\"GET (.+) HTTP.+(\d\d\d)\s(\d+)/;
 
 	$filepath = $3;
 	$code = $4;
-
 	if ( $code =~ m/2\d\d/ ) {
 
 
@@ -92,7 +91,6 @@ while (<LOGFILE>) {
 			$filename = $1;
 
 			$file_ident = $basedir . ":" . $filename;
-
 			if ( $filerelease{$file_ident} ) {
 				$downloads{$filerelease{$file_ident}}++;
 			} 

@@ -89,13 +89,22 @@ for ($i=1; $i<9; $i++) {
 		Now grab/average trusted ratings into this table
 	*/
 
-	$sql="INSERT INTO user_metric_tmp1_$i
-		SELECT user_ratings.user_id,count(*) AS count,
+	if ($j) {
+	    $sql="INSERT INTO user_metric_tmp1_$i
+	    	SELECT user_ratings.user_id,count(*) AS count,
 		avg(user_metric$j.importance_factor),
 		avg(user_ratings.rating),0
 		FROM user_ratings,user_metric$j
 		WHERE user_ratings.rated_by=user_metric$j.user_id
 		GROUP BY user_ratings.user_id";
+	} else {
+	    $sql="INSERT INTO user_metric_tmp1_$i
+		SELECT user_ratings.user_id,count(*) AS count,
+		1.6,
+		avg(user_ratings.rating),0
+		FROM user_ratings
+		GROUP BY user_ratings.user_id";
+	}
 
 	$res=db_query($sql);
 	if (!$res) {
@@ -209,36 +218,39 @@ for ($i=1; $i<9; $i++) {
 		exit;
 	}
 
-	// echo '<BR>Issuing Final Update';
+	//echo '<BR>Issuing Final Update';
+	// Only do final percentile if row count is not zero
+	if (db_result($res,0,0)) {
 
-	/*
-		Update with final percentile and importance
-	*/
-	$sql="UPDATE user_metric$i SET
+	    /*
+	    	Update with final percentile and importance
+	    */
+	    $sql="UPDATE user_metric$i SET
 		percentile=(100-(100*((ranking::float-1)/". db_result($res,0,0) .")))";
-	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	    $res=db_query($sql);
+	    if (!$res || db_affected_rows($res) < 1) {
 		echo "Error in round $i setting percentile: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
 		exit;
-	}
-	$sql="UPDATE user_metric$i SET
+	    }
+	    $sql="UPDATE user_metric$i SET
 		importance_factor=(1+((percentile/100)*.5));";
-	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	    $res=db_query($sql);
+	    if (!$res || db_affected_rows($res) < 1) {
 		echo "Error in round $i setting importance factor: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
 		exit;
+	    }
 	}
 }
 
+db_commit();
 db_query("DELETE FROM user_metric;");
 db_query("INSERT INTO user_metric SELECT * FROM user_metric".($i-1).";");
 //echo '<P>'.db_error().'<P>';
 
-db_commit();
 /*
 	Now run through and drop the tmp tables
 */
@@ -257,6 +269,7 @@ $ts_month = date('Ym', $t);
 $ts_day = date('d', $t);
 
 db_begin();
+db_query("DELETE FROM user_metric_history WHERE month='$ts_month' AND day='$ts_day'");
 db_query("
 	INSERT INTO user_metric_history
 	SELECT '$ts_month','$ts_day',user_id,ranking,metric

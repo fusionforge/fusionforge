@@ -55,13 +55,30 @@ while ( $row = db_fetch_array($res) ) {
 }
 
 $graph = new Graph( 750, 550 );
+//
+// Need at least 2 data points
+//
+if ($i == 0) {
+    $xdata[0] = 0;
+    $xlabel[0] = "";
+    $ydata1[1] = 0;
+    $xdata[1] = 1;
+    $xlabel[1] = "";
+    $ydata1[1] = 0;
+}
 
-$data1 = $graph->AddData( $xdata, $ydata1, $xlabel );
-
-$graph->DrawGrid('gray');
-$graph->LineGraph($data1,'red');
+if ($i == 1) {
+    $xdata[1] = 1;
+    $xlabel[1] = $xlabel[0];
+    $ydata1[1] = $ydata1[0];
+}
 $graph->SetTitle( "Sourceforge Page Views" );
 $graph->SetSubTitle("Total Page Views (RED) ( $i $grouping )");
+
+$data1 = $graph->AddData( $xdata, $ydata1, $xlabel );
+$graph->LineGraph($data1,'red');
+
+$graph->DrawGrid('gray');
 $graph->SetxTitle('Date');
 $graph->SetyTitle('Views (RED)');
 $graph->DrawAxis();

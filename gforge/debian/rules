@@ -94,11 +94,18 @@ install: build
 	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/site_stats.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/populate_foundries.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/stats/download/stats_ftp_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/stats/download/stats_http_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/stats/download/stats_logparse.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/stats/download/stats_sum.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
+	install -m 755 cronjobs/stats/subdomains/stats_projects_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	#install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_top_groups_calc.pl
+	install -m 755 cronjobs/stats/include/stats_site.inc $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
+	install -m 755 cronjobs/stats/include/stats_projects.inc $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
+	install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_top_groups_calc.pl
 	#install utils/underworld-root/stats_nightly.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/stats_nightly.sh
 	#install utils/underworld-root/db_stats_prepare.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_prepare.pl
 	#install utils/underworld-root/db_stats_projects_nightly.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_projects_nightly.pl

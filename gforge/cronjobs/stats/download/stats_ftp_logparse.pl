@@ -12,7 +12,7 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("../../../utils/include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 
 $|++;
 

@@ -11,7 +11,7 @@
   */
 
 require_once('squal_pre.php');
-include_once('include/stats_projects.inc');
+include_once('/usr/lib/sourceforge/lib/stats_projects.inc');
 
 $i=0;
 

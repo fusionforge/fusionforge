@@ -230,7 +230,6 @@ if (!$rel) {
 
 $counts = db_result($rel,0,0);
 print "\n\nCounts: ".$counts;
-
 db_begin();
 
 #drop the old metrics table
@@ -241,6 +240,7 @@ if (!$rel) {
 	echo db_error();
 }
 
+db_commit();
 $sql="INSERT INTO project_metric_weekly_tmp (ranking,percentile,group_id)
 SELECT ranking,(100-(100*((ranking-1)/$counts))),group_id 
 FROM project_metric_weekly_tmp1 ORDER BY ranking ASC";
@@ -272,7 +272,6 @@ if (!$rel) {
 	echo db_error();
 }
 
-db_commit();
 echo db_error();
 
 db_drop_sequence_if_exists ("project_metric_weekly_seq") ;

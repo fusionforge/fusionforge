@@ -103,7 +103,7 @@ echo "\n\nError: ".db_error();
 //	populate stats_site table
 //
 echo "\n\nBeginning stats_site ".date('Ymd H:i:s',time());
-include('include/stats_site.inc');
+include('/usr/lib/sourceforge/lib/stats_site.inc');
 site_stats_day($year,$month,$day);
 
 //

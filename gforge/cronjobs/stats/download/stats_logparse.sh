@@ -11,7 +11,7 @@
 
 
 ## parse each logfile set 
-./stats_ftp_logparse.pl $*
-./stats_http_logparse.pl $*
-./stats_sum.pl $*
+/usr/lib/sourceforge/bin/stats_ftp_logparse.pl $*
+/usr/lib/sourceforge/bin/stats_http_logparse.pl $*
+/usr/lib/sourceforge/bin/stats_sum.pl $*
 

@@ -37,6 +37,27 @@ while ( $row = db_fetch_array($res) ) {
         $ydata2[$i]         = $row["new_projects"];
         ++$i;
 }
+//
+// Need at least 2 data points
+//
+if ($i == 0) {
+    $xdata[0] = 0;
+    $xlabel[0] = "";
+    $ydata1[0] = 0;
+    $ydata2[0] = 0;
+
+    $xdata[1] = 1;
+    $xlabel[1] = "";
+    $ydata1[1] = 0;
+    $ydata2[1] = 0;
+}
+if ($i == 1) {
+    $xdata[1] = 1;
+    $xlabel[1] = $xlabel[0];
+    $ydata1[1] = $ydata1[0];
+    $ydata2[1] = $ydata2[0];
+}
+
 
 $graph = new Graph( 750, 550 );
 

@@ -3,12 +3,14 @@
 # $Id: db_top_groups_calc.pl,v 1.9 2000/12/06 19:04:51 tperdue Exp $
 #
 # use strict;
-use DBI;
+require ('squal_pre.php');
+
+db_begin();
+
 use Time::Local;
 use POSIX qw( strftime );
 
 require("../include.pl");
-&db_connect();
 
 #my ($sql, $rel);
 my ($day_begin, $day_end, $mday, $year, $mon, $week, $day);
@@ -44,11 +46,10 @@ print "Running week $week, day $day month $mon year $year \n" if $verbose;
 
 # get all groups, and group_names
 $query = "SELECT group_id,group_name FROM groups WHERE type=1 AND status='A' AND is_public='1'";
-$rel = $dbh->prepare($query);
-$rel->execute();
 
-while( ($group_id,$group_name) = $rel->fetchrow() ) {
-	$top[$group_id][0] = $group_name;
+$rel = db_query($query);
+
+while( ($group_id,$group_name) = $rel->fetchrow() ) { $top[$group_id][0] = $group_name;
 	if ( $group_id > $max_group_id ) {
 		$max_group_id = $group_id;
 	}
@@ -61,8 +62,7 @@ $query = "SELECT forum_group_list.group_id AS group_id,
     WHERE forum.group_forum_id=forum_group_list.group_forum_id 
     GROUP BY forum_group_list.group_id 
     ORDER BY count DESC";
-my $rel = $dbh->prepare($query);
-$rel->execute();
+my $rel = db_query($query);
 
 $currentrank = 1;
 while(my ($group_id,$count) = $rel->fetchrow()) {
@@ -74,10 +74,10 @@ while(my ($group_id,$count) = $rel->fetchrow()) {
 ##
 ##	wrap this process inside a transaction
 ##
-my $rel = $dbh->do("BEGIN WORK;");
+my $rel = db_query("BEGIN WORK;");
 
 my $query = "DELETE FROM top_group";
-my $rel = $dbh->do($query);
+my $rel = db_query($query);
 
 # store new data
 for ($i=1;$i<$max_group_id;$i++) {
@@ -91,8 +91,7 @@ for ($i=1;$i<$max_group_id;$i++) {
 		."'$top[$i][7]','$top[$i][8]','$top[$i][2]',"
 		."'0','0','$top[$i][3]','$top[$i][12]','$top[$i][13]','$top[$i][4]',"
 		."'$top[$i][10]','$top[$i][11]','$top[$i][9]')";
-	my $rel = $dbh->prepare($query);
-	$rel->execute();
+	my $rel = db_query($query);
 
 #	print "Group ID $i: $top[$i][0], $top[$i][1], $top[$i][2], $top[$i][3], $top[$i][4], "
 #		."$top[$i][5], $top[$i][6]\n";
@@ -101,5 +100,5 @@ for ($i=1;$i<$max_group_id;$i++) {
 ##
 ##      wrap this process inside a transaction
 ##
-my $rel = $dbh->do("COMMIT WORK;");
+my $rel = db_query("COMMIT WORK;");
 

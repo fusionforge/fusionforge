@@ -376,7 +376,7 @@ case "$1" in
     empty)
 	setup_vars
 	check_server
-	admin_regexp=$(echo $sf_ldap_base_dn | sed 's/, */, */g')
+	admin_regexp=$(echo $sf_ldap_base_dn | sed 's/, */, /g')
 	admin_regexp="^cn=admin, *$admin_regexp"
 	get_our_entries () {
 	    {		# List candidates...

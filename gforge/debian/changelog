@@ -59,8 +59,32 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Christian] Made news menu themeable
   * [Christian] A lot of i18n in forum_utils
   * [Christian] You can now customize date format in language tab files
+  * [Roland] Applied patch #617 from Robert Lamoureux.  Stats should now
+    work!  Changes are detailed below, with a [Bob] prefix.
+  * [Bob] Fixed initial pass problem with calculate_user_metric.php so
+    user ratings statistics now run.
+  * [Bob] Fixed db_ commit() error in project_weekly_metric.php.  Project
+    statistics now work.
+  * [Bob] Fixed stats_http_logparse.pl to look for HTTP access log entries
+    in the right place (/var/log/sourceforge).
+  * [Bob] Changed sf-httpd.conf to have all sourceforge Virtual Web
+    servers log all activity to /var/log/sourceforge.  Introduced a
+    dependency on cronolog.  The stats Perl files all assume a YYYY/MM/DD
+    directory structure for the log files.
+  * [Bob] Fixed rules file to install cron jobs into /bin directory.
+  * [Bob] Changed sourceforge-db-postgresql cron file to call the stats
+    jobs every night.
+  * [Bob] Changed the views_graph.png and users_graph.png files to
+    generate an empty graph when no data is present rather than a broken
+    image icon.  Also, fixed a bug that would break the graph if there was
+    0 or only 1 row in the database.
+  * [Bob] Changed stats_logparse.sh to have the full path to the scripts.
+    We cannot assume we will be in the right directory when it runs.
+  * [Bob] Fixed relative paths to utils/include.pl since all cronjobs seem
+    to installed in the bin directory.  The old path was 3 levels down in
+    the cronjobs directory which is not part of the install hierarchy
 
- -- Christian Bayle <bayle@debian.org>  Tue,  5 Nov 2002 01:46:29 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  7 Nov 2002 13:03:22 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

@@ -12,23 +12,14 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("../../../utils/include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 
 #######################
 ##  CONF VARS
 
 	my $verbose = 1;
-	my $chronolog_basedir = "/home/logs";
-	my @webservers = ("old/bush",
-			  "old/delerium",
-			  "old/nirvana",
-			  "old/oakenfold",
-						  "pr-web1",
-						  "pr-web2",
-						  "pr-web3",
-						  "pr-web4",
-						  "pr-web5"
-			 );
+	my $chronolog_basedir = "/var/log";
+	my @webservers = ("sourceforge");
 
 ##
 #######################
@@ -55,17 +46,19 @@ print "Running year $year, month $month, day $day.\n" if $verbose;
 
    ## It's makes things a whole lot faster for us if we cache the filerelease/group info beforehand.
 print "Caching group information out of the database..." if $verbose;
-$query = "SELECT group_id,unix_group_name,http_domain FROM groups";
+$query = "SELECT group_id,unix_group_name,http_domain FROM groups WHERE http_domain != ''";
 $rel = $dbh->prepare( $query );
 $rel->execute();
 while( $info = $rel->fetchrow_arrayref() ) {
+        print "\nCaching {${$info}[2]}" if $verbose;
+
 	$group{${$info}[2]} = ${$info}[0];
 }
 print " done.\n" if $verbose;
 
 foreach $server ( @webservers ) {
 
-	$file = "$chronolog_basedir/$server/$year/" . sprintf("%02d",$month) . "/" . sprintf("%02d",$day) . "/access_log"; 
+	$file = "$chronolog_basedir/$server/$year/" . sprintf("%02d",$month) . "/" . sprintf("%02d",$day) . "/sourceforge.log"; 
 
 	if ( -f $file ) {
 		open(LOGFILE, "< $file" ) || die "Cannot open $file";
@@ -79,16 +72,21 @@ foreach $server ( @webservers ) {
 
 	print "Begining processing for logfile \'$file\'..." if $verbose;
 
+	$valid_hits = 0;
+
 	while (<LOGFILE>) {
 		chomp($_);
 		$lines++;
 	
-		   ## 1=ip  2=date 3=file_uri 4=return_code 5=bytes 6=referer 7=browser 8=domain
-		$_ =~ m/^([\d\.]+).*\[(.+)\]\s\"GET (.+) HTTP.+\" (\d\d\d) (\d+|\-) \"([^\"]+)\" \"([^\"]+)\"\ *(.*)$/;
+		   ## 1=ip  2=date 3=file_uri 4=return_code 5=bytes 6=referer 
+
+		$_ =~ m/^([\d\.]+).*\[(.+)\]\s\"GET (.+) HTTP.+\" (\d\d\d) (\d+|\-) \"([^\"]+)\/\/(.*)\/$\"/;
 
 		$filepath = $3;
 		$code = $4;
-		$host = $8;
+		$host = $7;
+		## strip out everything but domain
+		$host =~ s/\/.*//;
 
 		next if ( !($filepath || $code) );
 
@@ -96,13 +94,13 @@ foreach $server ( @webservers ) {
 
 			   ## strip off any GET params.
 			$filepath =~ s/\?.*$//;
-
 			   ## We'll have our pageview filter to allow -> deny.
 			if ( $filepath =~ m/\/$/ || $filepath !~ m/\.(gif|png|jpg|jpeg|css)$/ ) {
+
 				if ( $group{$host} && $host ) {
 					$page_views{$group{$host}}++;
+					$valid_hits++;
 				} 
-				$valid_hits++;
 			} 
 		}
 	}
