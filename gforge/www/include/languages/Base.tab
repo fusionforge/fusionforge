@@ -2254,7 +2254,7 @@ survey_utils	edit_questions	Edit Questions
 survey_utils	edit_survey	Edit Survey
 survey_utils	error_this_group_has_turned_off	Error, This Group Has Turned Off Surveys
 survey_utils	show_results	Show Results
-survey_error	min_question_length Question is too short
+survey_error	min_question_length	Question is too short
 survey_error	error_no_valid_group_object	No valid Group Object
 survey_error	error_no_valid_survey_object	No valid Survey Object
 survey_error	error_no_valid_question_object	No valid Question Object
