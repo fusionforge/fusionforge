@@ -1,0 +1,203 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge/common/pm/ProjectTaskFactory.class /tmp/dpep.Ehrjl0/gforge/common/pm/ProjectTaskFactory.class
+--- gforge/common/pm/ProjectTaskFactory.class	2004-11-27 23:28:20.000000000 +0100
++++ /tmp/dpep.Ehrjl0/gforge/common/pm/ProjectTaskFactory.class	2005-01-20 01:13:33.000000000 +0100
+@@ -34,6 +34,7 @@
+ 
+ require_once('common/include/Error.class');
+ require_once('common/pm/ProjectTask.class');
++require_once('www/pm/include/ProjectTaskHTML.class');
+ 
+ class ProjectTaskFactory extends Error {
+ 
+@@ -57,6 +58,7 @@
+ 	var $offset;
+ 	var $max_rows;
+ 	var $fetched_rows;
++	var $view_type;
+ 
+ 	/**
+ 	 *  Constructor.
+@@ -90,8 +92,9 @@
+ 	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
+ 	 *	@param	int	Include this param if you want to limit to a certain assignee.
+ 	 *	@param	int	Include this param if you want to limit to a certain category.
++	 *	@param	string	What view mode the screen should be in.
+ 	 */
+-	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id) {
++	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view) {
+ //echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
+ 		if ((!$offset) || ($offset < 0)) {
+ 			$this->offset=0;
+@@ -126,7 +129,7 @@
+ 			/*
+ 				if this custom set is different than the stored one, reset preference
+ 			*/
+-			$pref_=$_assigned_to.'|'.$_status.'|'.$_category_id;
++			$pref_=$_assigned_to.'|'.$_status.'|'.$_category_id.'|'.$_view;
+ 			if (session_loggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$this->ProjectGroup->Group->getID()))) {
+ 				//echo 'setting pref';
+ 				$u->setPreference('pm_brow_cust'.$this->ProjectGroup->Group->getID(),$pref_);
+@@ -138,12 +141,14 @@
+ 					$_assigned_to=$prf_arr[0];
+ 					$_status=$prf_arr[1];
+ 					$_category_id=$prf_arr[2];
++					$_view=$prf_arr[3];
+ 				}
+ 			}
+ 		}
+ 		$this->status=$_status;
+ 		$this->assigned_to=$_assigned_to;
+ 		$this->category=$_category_id;
++		$this->view_type=$_view;
+ 
+ 		if (!$max_rows || $max_rows < 5) {
+ 			$max_rows=50;
+@@ -155,8 +160,9 @@
+ 	 *	getTasks - get an array of ProjectTask objects.
+ 	 *
+ 	 *	@return	array	The array of ProjectTask objects.
++	 *	@param	bool	True will create an array of ProjectTaskHTML instead of ProjectTask objects.
+ 	 */
+-	function &getTasks() {
++	function &getTasks($htmlobjs=false) {
+ 		if ($this->project_tasks) {
+ 			return $this->project_tasks;
+ 		}
+@@ -215,7 +221,10 @@
+ 			return false;
+ 		} else {
+ 			while ($arr =& db_fetch_array($result)) {
+-				$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
++				if (!$htmlobjs)
++					$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
++				else
++					$this->project_tasks[] = new ProjectTaskHTML($this->ProjectGroup,$arr['project_task_id']);
+ 			}
+ 		}
+ 		return $this->project_tasks;
+diff -urNad gforge/www/include/languages/Base.tab /tmp/dpep.Ehrjl0/gforge/www/include/languages/Base.tab
+--- gforge/www/include/languages/Base.tab	2005-01-19 00:18:04.000000000 +0100
++++ /tmp/dpep.Ehrjl0/gforge/www/include/languages/Base.tab	2005-01-20 01:13:33.000000000 +0100
+@@ -1387,6 +1387,9 @@
+ pm	title	Project/Task Manager: Subprojects And Tasks
+ pm	unassigned	Unassigned
+ pm	view_calendar	View Calendar
++pm	view_type	Detail View
++pm	view_type_summary	Summary
++pm	view_type_detail	Detailed
+ pm_addtask	task_added_relationship	Successfully Added Tracker Relationship
+ pm_addtask	task_created_successfully	Task Created Successfully
+ pm_addtask	task_updated_successfully	Task Updated Successfully
+diff -urNad gforge/www/pm/browse_task.php /tmp/dpep.Ehrjl0/gforge/www/pm/browse_task.php
+--- gforge/www/pm/browse_task.php	2005-01-19 22:18:50.000000000 +0100
++++ /tmp/dpep.Ehrjl0/gforge/www/pm/browse_task.php	2005-01-20 01:13:33.000000000 +0100
+@@ -30,12 +30,11 @@
+ 	exit_error('Error',$ptf->getErrorMessage());
+ }
+ 
+-$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
++$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view);
+ if ($ptf->isError()) {
+ 	exit_error('Error',$ptf->getErrorMessage());
+ }
+-
+-$pt_arr =& $ptf->getTasks();
++$pt_arr =& $ptf->getTasks(true);
+ if ($ptf->isError()) {
+ 	exit_error('Error',$ptf->getErrorMessage());
+ }
+@@ -44,6 +43,7 @@
+ $_status=$ptf->status;
+ $_order=$ptf->order;
+ $_category_id=$ptf->category;
++$_view=$ptf->view_type;
+ 
+ pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
+ 
+@@ -88,6 +88,17 @@
+ $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
+ 
+ /*
++	Creating View array
++*/
++$view_arr=array();
++$view_arr[]=$Language->getText('pm','view_type_summary');
++$view_arr[]=$Language->getText('pm','view_type_detail');
++
++$order_col_arr=array();
++$view_col_arr[]='summary';
++$view_col_arr[]='detail';
++$view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_view,false);
++/*
+ 	Show the new pop-up boxes to select assigned to and/or status
+ */
+ echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'" method="post">
+@@ -98,6 +109,7 @@
+ 		<td><font size="-1">'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</font></td>
+ 		<td><font size="-1">'.$Language->getText('pm','category').'<br />'. $cat_box .'</font></td>
+ 		<td><font size="-1">'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</font></td>
++		<td><font size="-1">'.$Language->getText('pm','view_type').'<br />'. $view_box .'</font></td>
+ 		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></font></td>
+ 	</tr></table></form><p />';
+ 
+@@ -134,17 +146,42 @@
+ 
+ 	for ($i=0; $i < $rows; $i++) {
+ 		$url = "/pm/task.php?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
+-		echo '
+-			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+-			'<td>'.
+-			($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
+-			$pt_arr[$i]->getID() .'"> ':'').
+-			$pt_arr[$i]->getID() .'</td>'.
+-			'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
+-			'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
+-			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
+-				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
+-			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
++		
++		if (($_view == "summary")||($_view == "")) //show the summary view
++		{
++			echo '
++				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
++				'<td>'.
++				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
++				$pt_arr[$i]->getID() .'"> ':'').
++				$pt_arr[$i]->getID() .'</td>'.
++				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
++				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
++				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
++					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
++				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
++		}
++		else if ($_view == "detail") //show the Detail view
++		{
++			echo '
++				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
++				'<td>'.
++				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
++				$pt_arr[$i]->getID() .'"> ':'').
++				$pt_arr[$i]->getID() .'</td>'.
++				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
++				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
++				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
++					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
++				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
++				echo '
++				<tr>'.
++					'<td>&nbsp;</td>'.
++					'<td colspan="4">';
++				echo nl2br( $pt_arr[$i]->getDetails() );
++				$pt_arr[$i]->showMessages();
++				echo '</td></tr>';
++		}
+ 
+ 	}
+ 

@@ -9,6 +9,7 @@ gforge (4.0.2-5h) unstable; urgency=low
     At postinst, if conffile.dpkg-old exists conffile is
     replaced with conffile.dpkg-new
   * [Christian] Added 20041124.sql to db-upgrade.pl
+  * [Christian] Added dpatch support
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
