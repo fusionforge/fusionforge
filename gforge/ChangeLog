@@ -3,7 +3,7 @@
 	* db/20041031.sql: New file, containing views to be used by the
 	MTAs.
 	* continued work on replacing LDAP by direct PostgreSQL lookups:
-	Exim4 done.
+	Exim4 and Postfix done.
 
 2004-10-27  Guillaume Smet <guillaume-gforge@smet.org>
 

@@ -66,41 +66,24 @@ $gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 #You may move this block around to accomodate your local needs as long as you
 # keep it in an appropriate position, where \"appropriate\" is defined by you.
 
-ldap_gforge_users_server_host = $sys_ldap_host
-ldap_gforge_users_server_port = 389
-ldap_gforge_users_query_filter = (uid=\%s,ou=People)
-ldap_gforge_users_result_attribute = debGforgeForwardEmail
-ldap_gforge_users_search_base = $sys_ldap_base_dn
-ldap_gforge_users_bind = no
-ldap_gforge_users_domain = users.$domain_name
+pgsql_gforge_users_host = $sys_dbhost
+pgsql_gforge_users_user = gforge_mta
+pgsql_gforge_users_password = 
+pgsql_gforge_users_dbname = $sys_dbname
+pgsql_gforge_users_domain = users.$domain_name
+pgsql_gforge_users_select_field = email
+pgsql_gforge_users_table = mta_users
+pgsql_gforge_users_where_field = login
 
-ldap_gforge_lists_server_host = $sys_ldap_host
-ldap_gforge_lists_server_port = 389
-ldap_gforge_lists_query_filter = (cn=\%s,ou=mailingList)
-ldap_gforge_lists_result_attribute = debGforgeListPostAddress
-ldap_gforge_lists_search_base = $sys_ldap_base_dn
-ldap_gforge_lists_bind = no
-ldap_gforge_lists_domain = lists.$domain_name
+pgsql_gforge_lists_host = $sys_dbhost
+pgsql_gforge_lists_user = gforge_mta
+pgsql_gforge_lists_password = 
+pgsql_gforge_lists_dbname = $sys_dbname
+pgsql_gforge_lists_domain = lists.$domain_name
+pgsql_gforge_lists_select_field = post_address
+pgsql_gforge_lists_table = mta_lists
+pgsql_gforge_lists_where_field = list_name
 
-#forward_for_gforge_lists_admin:
-# domains = $sys_lists_host
-# suffix = -owner : -admin
-# driver = aliasfile
-# pipe_transport = address_pipe
-# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListOwnerAddress\"
-# search_type = ldap
-# user = nobody
-# group = nogroup
-
-#forward_for_gforge_lists_request:
-# domains = $sys_lists_host
-# suffix = -request
-# driver = aliasfile
-# pipe_transport = address_pipe
-# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListRequestAddress\"
-# search_type = ldap
-# user = nobody
-# group = nogroup
 ### END GFORGE BLOCK ###
 ";
 $seen_gf_block = 0;
@@ -108,8 +91,8 @@ $seen_vritual_maps = 0;
 while ($l = <>) {
 	if ($l =~ /^\s*virtual_maps/) {
 		chomp $l;
-		$l .= ", ldap:ldap_gforge_users" unless ($l =~ /^[^#]*ldap:ldap_gforge_users/);
-		$l .= ", ldap:ldap_gforge_lists" unless ($l =~ /^[^#]*ldap:ldap_gforge_lists/);
+		$l .= ", pgsql:pgsql_gforge_users" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_users/);
+		$l .= ", pgsql:pgsql_gforge_lists" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_lists/);
 		print "$l\n";
 		$seen_virtual_maps = 1;
 	} else {
@@ -127,7 +110,7 @@ if ($seen_gf_block == 0) {
 
 if ($seen_virtual_maps == 0) {
 	print "### GFORGE ADDITION - The following line can be moved and this line removed ###\n";
-	print "virtual_maps = ldap:ldap_gforge_users, ldap:ldap_gforge_lists\n";
+	print "virtual_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists\n";
 };
 ' < $tmp1 > $tmp2
 	rm $tmp1
