@@ -902,7 +902,7 @@ CREATE TABLE "project_metric" (
 -- Name: project_metric_tmp1_pk_seq Type: SEQUENCE Owner: tperdue
 --
 
-CREATE SEQUENCE "project_metric_tmp1_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+-- CREATE SEQUENCE "project_metric_tmp1_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 
 --
 -- TOC Entry ID 216 (OID 20727)
@@ -910,12 +910,12 @@ CREATE SEQUENCE "project_metric_tmp1_pk_seq" start 1 increment 1 maxvalue 214748
 -- Name: project_metric_tmp1 Type: TABLE Owner: tperdue
 --
 
-CREATE TABLE "project_metric_tmp1" (
-	"ranking" integer DEFAULT nextval('project_metric_tmp1_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"value" double precision,
-	Constraint "project_metric_tmp1_pkey" Primary Key ("ranking")
-);
+-- CREATE TABLE "project_metric_tmp1" (
+--	"ranking" integer DEFAULT nextval('project_metric_tmp1_pk_seq'::text) NOT NULL,
+-- 	"group_id" integer DEFAULT '0' NOT NULL,
+-- 	"value" double precision,
+-- 	Constraint "project_metric_tmp1_pkey" Primary Key ("ranking")
+-- );
 
 --
 -- TOC Entry ID 80 (OID 20744)
@@ -991,7 +991,8 @@ CREATE SEQUENCE "project_weekly_metric_pk_seq" start 1 increment 1 maxvalue 2147
 CREATE TABLE "project_weekly_metric" (
 	"ranking" integer DEFAULT nextval('project_weekly_metric_pk_seq'::text) NOT NULL,
 	"percentile" double precision,
-	"group_id" integer DEFAULT '0' NOT NULL
+	"group_id" integer DEFAULT '0' NOT NULL,
+	Constraint "project_weekly_metric_pkey" Primary Key ("ranking")
 );
 
 --
@@ -1722,7 +1723,7 @@ CREATE TABLE "project_sums_agg" (
 -- Name: project_metric_wee_ranking1_seq Type: SEQUENCE Owner: tperdue
 --
 
-CREATE SEQUENCE "project_metric_wee_ranking1_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+-- CREATE SEQUENCE "project_metric_wee_ranking1_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 
 --
 -- TOC Entry ID 144 (OID 22369)
@@ -2571,8 +2572,8 @@ CREATE TABLE "frs_dlstats_filetotal_agg" (
 --
 
 CREATE TABLE "frs_dlstats_grouptotal_agg" (
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"downloads" integer DEFAULT 0 NOT NULL
+	"group_id" integer DEFAULT '0' NOT NULL,
+	"downloads" integer DEFAULT '0' NOT NULL
 );
 
 --
@@ -2583,9 +2584,9 @@ CREATE TABLE "frs_dlstats_grouptotal_agg" (
 
 CREATE TABLE "frs_dlstats_group_agg" (
 	"group_id" integer DEFAULT '0' NOT NULL,
-	"month" integer DEFAULT '0' NOT NULL,
 	"day" integer DEFAULT '0' NOT NULL,
-	"downloads" integer DEFAULT '0' NOT NULL
+	"downloads" integer DEFAULT '0' NOT NULL,
+	"month" integer DEFAULT '0'
 );
 
 --
@@ -2827,7 +2828,7 @@ CREATE TABLE "trove_agg" (
 -- Name: trove_treesum_trove_treesum_seq Type: SEQUENCE Owner: tperdue
 --
 
-CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+-- CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 
 --
 -- TOC Entry ID 306 (OID 26069)
@@ -2836,7 +2837,7 @@ CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2
 --
 
 CREATE TABLE "trove_treesums" (
-	"trove_treesums_id" integer DEFAULT nextval('"trove_treesum_trove_treesum_seq"'::text) NOT NULL,
+	"trove_treesums_id" integer DEFAULT nextval('trove_treesums_pk_seq'::text) NOT NULL,
 	"trove_cat_id" integer DEFAULT '0' NOT NULL,
 	"limit_1" integer DEFAULT '0' NOT NULL,
 	"subprojects" integer DEFAULT '0' NOT NULL,
@@ -3254,8 +3255,8 @@ COPY "project_metric"  FROM stdin;
 --
 
 
-COPY "project_metric_tmp1"  FROM stdin;
-\.
+-- COPY "project_metric_tmp1"  FROM stdin;
+-- \.
 --
 -- Data for TOC Entry ID 515 (OID 20782)
 --
@@ -5671,29 +5672,8 @@ CREATE  INDEX "troveagg_trovecatid" on "trove_agg" using btree ( "trove_cat_id" 
 
 CREATE  INDEX "troveagg_trovecatid_ranking" on "trove_agg" using btree ( "trove_cat_id" "int4_ops", "ranking" "int4_ops" );
 
---
--- TOC Entry ID 649 (OID 24179)
---
--- Name: "RI_ConstraintTrigger_24178" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
-
---
--- TOC Entry ID 651 (OID 24181)
---
--- Name: "RI_ConstraintTrigger_24180" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
-
---
--- TOC Entry ID 652 (OID 24183)
---
--- Name: "RI_ConstraintTrigger_24182" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
+ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk
+	FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 650 (OID 24185)
@@ -5719,29 +5699,8 @@ CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER DELETE ON "groups"  NOT
 
 CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
---
--- TOC Entry ID 599 (OID 24191)
---
--- Name: "RI_ConstraintTrigger_24190" Type: TRIGGER Owner: tperdue
---
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
---
--- TOC Entry ID 653 (OID 24193)
---
--- Name: "RI_ConstraintTrigger_24192" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
-
---
--- TOC Entry ID 654 (OID 24195)
---
--- Name: "RI_ConstraintTrigger_24194" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 600 (OID 24197)
@@ -5893,23 +5852,8 @@ CREATE CONSTRAINT TRIGGER "project_task_group_project_id_f" AFTER UPDATE ON "pro
 -- Name: "RI_ConstraintTrigger_24232" Type: TRIGGER Owner: tperdue
 --
 
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER INSERT OR UPDATE ON "project_task"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
-
---
--- TOC Entry ID 657 (OID 24235)
---
--- Name: "RI_ConstraintTrigger_24234" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
-
---
--- TOC Entry ID 658 (OID 24237)
---
--- Name: "RI_ConstraintTrigger_24236" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
+ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk
+	FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
 
 --
 -- TOC Entry ID 646 (OID 24239)
@@ -5941,527 +5885,56 @@ CREATE CONSTRAINT TRIGGER "project_task_status_id_fk" AFTER UPDATE ON "project_s
 -- Name: "RI_ConstraintTrigger_24244" Type: TRIGGER Owner: tperdue
 --
 
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER INSERT OR UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
-
---
--- TOC Entry ID 647 (OID 24247)
---
--- Name: "RI_ConstraintTrigger_24246" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER DELETE ON "supported_languages"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
-
---
--- TOC Entry ID 648 (OID 24249)
---
--- Name: "RI_ConstraintTrigger_24248" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER UPDATE ON "supported_languages"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
-
---
--- TOC Entry ID 723 (OID 24251)
---
--- Name: "RI_ConstraintTrigger_24250" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_monitor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 699 (OID 24253)
---
--- Name: "RI_ConstraintTrigger_24252" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 700 (OID 24255)
---
--- Name: "RI_ConstraintTrigger_24254" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 676 (OID 24257)
---
--- Name: "RI_ConstraintTrigger_24256" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER INSERT OR UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 635 (OID 24259)
---
--- Name: "RI_ConstraintTrigger_24258" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 636 (OID 24261)
---
--- Name: "RI_ConstraintTrigger_24260" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 688 (OID 24263)
---
--- Name: "RI_ConstraintTrigger_24262" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER INSERT OR UPDATE ON "artifact_perm"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
-
---
--- TOC Entry ID 660 (OID 24265)
---
--- Name: "RI_ConstraintTrigger_24264" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
-
---
--- TOC Entry ID 661 (OID 24267)
---
--- Name: "RI_ConstraintTrigger_24266" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
-
---
--- TOC Entry ID 689 (OID 24269)
---
--- Name: "RI_ConstraintTrigger_24268" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER INSERT OR UPDATE ON "artifact_perm"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 677 (OID 24271)
---
--- Name: "RI_ConstraintTrigger_24270" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 678 (OID 24273)
---
--- Name: "RI_ConstraintTrigger_24272" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 690 (OID 24275)
---
--- Name: "RI_ConstraintTrigger_24274" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER INSERT OR UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 679 (OID 24277)
---
--- Name: "RI_ConstraintTrigger_24276" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 680 (OID 24279)
---
--- Name: "RI_ConstraintTrigger_24278" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 691 (OID 24281)
---
--- Name: "RI_ConstraintTrigger_24280" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER INSERT OR UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
---
--- TOC Entry ID 662 (OID 24283)
---
--- Name: "RI_ConstraintTrigger_24282" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
---
--- TOC Entry ID 663 (OID 24285)
---
--- Name: "RI_ConstraintTrigger_24284" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
---
--- TOC Entry ID 694 (OID 24287)
---
--- Name: "RI_ConstraintTrigger_24286" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER INSERT OR UPDATE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 681 (OID 24289)
---
--- Name: "RI_ConstraintTrigger_24288" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 682 (OID 24291)
---
--- Name: "RI_ConstraintTrigger_24290" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 701 (OID 24293)
---
--- Name: "RI_ConstraintTrigger_24292" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 683 (OID 24295)
---
--- Name: "RI_ConstraintTrigger_24294" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 684 (OID 24297)
---
--- Name: "RI_ConstraintTrigger_24296" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
---
--- TOC Entry ID 702 (OID 24299)
---
--- Name: "RI_ConstraintTrigger_24298" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
-
---
--- TOC Entry ID 697 (OID 24301)
---
--- Name: "RI_ConstraintTrigger_24300" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER DELETE ON "artifact_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
-
---
--- TOC Entry ID 698 (OID 24303)
---
--- Name: "RI_ConstraintTrigger_24302" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER UPDATE ON "artifact_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
-
---
--- TOC Entry ID 703 (OID 24305)
---
--- Name: "RI_ConstraintTrigger_24304" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
---
--- TOC Entry ID 692 (OID 24307)
---
--- Name: "RI_ConstraintTrigger_24306" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER DELETE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
---
--- TOC Entry ID 693 (OID 24309)
---
--- Name: "RI_ConstraintTrigger_24308" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
---
--- TOC Entry ID 704 (OID 24311)
---
--- Name: "RI_ConstraintTrigger_24310" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
---
--- TOC Entry ID 695 (OID 24313)
---
--- Name: "RI_ConstraintTrigger_24312" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER DELETE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
---
--- TOC Entry ID 696 (OID 24315)
---
--- Name: "RI_ConstraintTrigger_24314" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER UPDATE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
---
--- TOC Entry ID 705 (OID 24317)
---
--- Name: "RI_ConstraintTrigger_24316" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 664 (OID 24319)
---
--- Name: "RI_ConstraintTrigger_24318" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 665 (OID 24321)
---
--- Name: "RI_ConstraintTrigger_24320" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 706 (OID 24323)
---
--- Name: "RI_ConstraintTrigger_24322" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
-
---
--- TOC Entry ID 666 (OID 24325)
---
--- Name: "RI_ConstraintTrigger_24324" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
-
---
--- TOC Entry ID 667 (OID 24327)
---
--- Name: "RI_ConstraintTrigger_24326" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
-
---
--- TOC Entry ID 707 (OID 24329)
---
--- Name: "RI_ConstraintTrigger_24328" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
-
---
--- TOC Entry ID 686 (OID 24331)
---
--- Name: "RI_ConstraintTrigger_24330" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER DELETE ON "artifact_resolution"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
-
---
--- TOC Entry ID 687 (OID 24333)
---
--- Name: "RI_ConstraintTrigger_24332" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER UPDATE ON "artifact_resolution"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
-
---
--- TOC Entry ID 717 (OID 24335)
---
--- Name: "RI_ConstraintTrigger_24334" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_history"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 708 (OID 24337)
---
--- Name: "RI_ConstraintTrigger_24336" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 709 (OID 24339)
---
--- Name: "RI_ConstraintTrigger_24338" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 718 (OID 24341)
---
--- Name: "RI_ConstraintTrigger_24340" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER INSERT OR UPDATE ON "artifact_history"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
-
---
--- TOC Entry ID 668 (OID 24343)
---
--- Name: "RI_ConstraintTrigger_24342" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
-
---
--- TOC Entry ID 669 (OID 24345)
---
--- Name: "RI_ConstraintTrigger_24344" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
-
---
--- TOC Entry ID 719 (OID 24347)
---
--- Name: "RI_ConstraintTrigger_24346" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 710 (OID 24349)
---
--- Name: "RI_ConstraintTrigger_24348" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 711 (OID 24351)
---
--- Name: "RI_ConstraintTrigger_24350" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 720 (OID 24353)
---
--- Name: "RI_ConstraintTrigger_24352" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 670 (OID 24355)
---
--- Name: "RI_ConstraintTrigger_24354" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 671 (OID 24357)
---
--- Name: "RI_ConstraintTrigger_24356" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 721 (OID 24359)
---
--- Name: "RI_ConstraintTrigger_24358" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_message"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 712 (OID 24361)
---
--- Name: "RI_ConstraintTrigger_24360" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 713 (OID 24363)
---
--- Name: "RI_ConstraintTrigger_24362" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 722 (OID 24365)
---
--- Name: "RI_ConstraintTrigger_24364" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact_message"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 672 (OID 24367)
---
--- Name: "RI_ConstraintTrigger_24366" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 673 (OID 24369)
---
--- Name: "RI_ConstraintTrigger_24368" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
-
---
--- TOC Entry ID 724 (OID 24371)
---
--- Name: "RI_ConstraintTrigger_24370" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_monitor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 714 (OID 24373)
---
--- Name: "RI_ConstraintTrigger_24372" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
-
---
--- TOC Entry ID 715 (OID 24375)
---
--- Name: "RI_ConstraintTrigger_24374" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE users ADD CONSTRAINT users_languageid_fk
+	FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
+
+ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
+
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
+        FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk 
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
+
+ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_autoassignto_fk
+        FOREIGN KEY (auto_assign_to) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_groupartifactid_fk
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
+
+ALTER TABLE artifact_group ADD CONSTRAINT artifactgroup_groupartifactid_fk
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
+
+ALTER TABLE artifact ADD CONSTRAINT artifact_artifactgroupid_fk
+        FOREIGN KEY (artifact_group_id) REFERENCES artifact_group(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_assignedto_fk
+        FOREIGN KEY (assigned_to) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_categoryid_fk
+        FOREIGN KEY (category_id) REFERENCES artifact_category(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_groupartifactid_fk
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_resolutionid_fk
+        FOREIGN KEY (resolution_id) REFERENCES artifact_resolution(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_statusid_fk
+        FOREIGN KEY (status_id) REFERENCES artifact_status(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_submittedby_fk
+        FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
+
+ALTER TABLE artifact_history ADD CONSTRAINT artifacthistory_artifactid_fk
+        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
+ALTER TABLE artifact_history ADD CONSTRAINT artifacthistory_modby_fk
+        FOREIGN KEY (mod_by) REFERENCES users(user_id) MATCH FULL;
+
+ALTER TABLE artifact_file ADD CONSTRAINT artifactfile_artifactid_fk
+        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
+ALTER TABLE artifact_file ADD CONSTRAINT artifactfile_submittedby_fk
+        FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
+
+ALTER TABLE artifact_message ADD CONSTRAINT artifactmessage_artifactid_fk
+        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
+ALTER TABLE artifact_message ADD CONSTRAINT artifactmessage_submittedby_fk
+        FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
+
+ALTER TABLE artifact_monitor ADD CONSTRAINT artifactmonitor_artifactid_fk
+        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
 
 --
 -- TOC Entry ID 685 (OID 24376)
@@ -6487,197 +5960,24 @@ CREATE TRIGGER "artifactgroup_update_trig" AFTER UPDATE ON "artifact"  FOR EACH 
 
 CREATE TRIGGER "forumgrouplist_insert_trig" AFTER INSERT ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "forumgrouplist_insert_agg" ();
 
---
--- TOC Entry ID 609 (OID 24380)
---
--- Name: "RI_ConstraintTrigger_24379" Type: TRIGGER Owner: tperdue
---
+ALTER TABLE frs_file ADD CONSTRAINT frsfile_processorid_fk
+	FOREIGN KEY (processor_id) REFERENCES frs_processor(processor_id) MATCH FULL;
+ALTER TABLE frs_file ADD CONSTRAINT frsfile_releaseid_fk
+	FOREIGN KEY (release_id) REFERENCES frs_release(release_id) MATCH FULL;
+ALTER TABLE frs_file ADD CONSTRAINT frsfile_typeid_fk
+	FOREIGN KEY (type_id) REFERENCES frs_filetype(type_id) MATCH FULL;
 
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
+ALTER TABLE frs_package ADD CONSTRAINT frspackage_statusid_fk
+	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
+ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
---
--- TOC Entry ID 620 (OID 24382)
---
--- Name: "RI_ConstraintTrigger_24381" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER DELETE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
-
---
--- TOC Entry ID 621 (OID 24384)
---
--- Name: "RI_ConstraintTrigger_24383" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
-
---
--- TOC Entry ID 610 (OID 24386)
---
--- Name: "RI_ConstraintTrigger_24385" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
-
---
--- TOC Entry ID 612 (OID 24388)
---
--- Name: "RI_ConstraintTrigger_24387" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER DELETE ON "frs_filetype"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
-
---
--- TOC Entry ID 613 (OID 24390)
---
--- Name: "RI_ConstraintTrigger_24389" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER UPDATE ON "frs_filetype"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
-
---
--- TOC Entry ID 611 (OID 24392)
---
--- Name: "RI_ConstraintTrigger_24391" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
-
---
--- TOC Entry ID 618 (OID 24394)
---
--- Name: "RI_ConstraintTrigger_24393" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER DELETE ON "frs_processor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
-
---
--- TOC Entry ID 619 (OID 24396)
---
--- Name: "RI_ConstraintTrigger_24395" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER UPDATE ON "frs_processor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
-
---
--- TOC Entry ID 614 (OID 24398)
---
--- Name: "RI_ConstraintTrigger_24397" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER INSERT OR UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 637 (OID 24400)
---
--- Name: "RI_ConstraintTrigger_24399" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 638 (OID 24402)
---
--- Name: "RI_ConstraintTrigger_24401" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
-
---
--- TOC Entry ID 615 (OID 24404)
---
--- Name: "RI_ConstraintTrigger_24403" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER INSERT OR UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 625 (OID 24406)
---
--- Name: "RI_ConstraintTrigger_24405" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER DELETE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 626 (OID 24408)
---
--- Name: "RI_ConstraintTrigger_24407" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER UPDATE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 622 (OID 24410)
---
--- Name: "RI_ConstraintTrigger_24409" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
-
---
--- TOC Entry ID 616 (OID 24412)
---
--- Name: "RI_ConstraintTrigger_24411" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER DELETE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
-
---
--- TOC Entry ID 617 (OID 24414)
---
--- Name: "RI_ConstraintTrigger_24413" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
-
---
--- TOC Entry ID 623 (OID 24416)
---
--- Name: "RI_ConstraintTrigger_24415" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 627 (OID 24418)
---
--- Name: "RI_ConstraintTrigger_24417" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER DELETE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 628 (OID 24420)
---
--- Name: "RI_ConstraintTrigger_24419" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER UPDATE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
-
---
--- TOC Entry ID 624 (OID 24422)
---
--- Name: "RI_ConstraintTrigger_24421" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
-
---
--- TOC Entry ID 674 (OID 24424)
---
--- Name: "RI_ConstraintTrigger_24423" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
-
---
--- TOC Entry ID 675 (OID 24426)
---
--- Name: "RI_ConstraintTrigger_24425" Type: TRIGGER Owner: tperdue
---
-
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
+ALTER TABLE frs_release ADD CONSTRAINT frsrelease_packageid_fk
+	FOREIGN KEY (package_id) REFERENCES frs_package(package_id) MATCH FULL;
+ALTER TABLE frs_release ADD CONSTRAINT frsrelease_releasedby_fk
+	FOREIGN KEY (released_by) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE frs_release ADD CONSTRAINT frsrelease_statusid_fk
+	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
 
 --
 -- TOC Entry ID 725 (OID 24427)
@@ -7010,7 +6310,7 @@ SELECT setval ('"project_metric_pk_seq"', 1, 'f');
 -- Name: project_metric_tmp1_pk_seq Type: SEQUENCE SET Owner: 
 --
 
-SELECT setval ('"project_metric_tmp1_pk_seq"', 1, 'f');
+-- SELECT setval ('"project_metric_tmp1_pk_seq"', 1, 'f');
 
 --
 -- TOC Entry ID 81 (OID 20744)
@@ -7266,7 +6566,7 @@ SELECT setval ('"forum_thread_seq"', 1, 'f');
 -- Name: project_metric_wee_ranking1_seq Type: SEQUENCE SET Owner: 
 --
 
-SELECT setval ('"project_metric_wee_ranking1_seq"', 1, 'f');
+-- SELECT setval ('"project_metric_wee_ranking1_seq"', 1, 'f');
 
 --
 -- TOC Entry ID 145 (OID 22369)
@@ -7394,6 +6694,6 @@ SELECT setval ('"massmail_queue_id_seq"', 1, 'f');
 -- Name: trove_treesum_trove_treesum_seq Type: SEQUENCE SET Owner: 
 --
 
-SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, 'f');
+-- SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, 'f');
 
 ---- From now on, everything comes from Debian-SF

@@ -44,7 +44,7 @@ eval {
 
     # Do we have at least the basic schema?
 
-    $query = "SELECT count(*) from pg_class where relname = 'groups'";
+    $query = "SELECT count(*) from pg_class where relname = 'groups' and relkind = 'r'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -53,7 +53,7 @@ eval {
 
     # Create Sourceforge database
 
-    if ($array [0] == 0) {
+    if ($array [0] == 0) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
 	$action = "installation" ;
 	debug "Creating initial Sourceforge database from files." ;
@@ -69,8 +69,21 @@ eval {
 	debug "Committing." ;
 	$dbh->commit () ;
 
-    } else {
+    } else {			# A 'groups' table exists
 	$action = "upgrade" ;
+	
+	$query = "SELECT count(*) from pg_class where relname = 'debian_meta_data' and relkind = 'r'";
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+
+	if ($array[0] == 0) {	# No 'debian_meta_data' table
+	    # If we're here, we're upgrading from 2.5-7 or earlier
+	    # We therefore need to create the table
+	    &create_metadata_table ("2.5-7+just+before+8") ;
+	}
 	
 	$version = &get_db_version ;
 	if (is_lesser $version, "2.5.9999") {
@@ -232,7 +245,105 @@ eval {
       ($path eq '2.5-to-2.6') && do {
 	  
 	  $version = &get_db_version ;
-	  $target = "2.5.9999.1+data+upgraded" ;
+	  $target = "2.5-8" ;
+	  if (is_lesser $version, $target) {
+	      debug "Adding row to people_job_category." ;
+	      $query = "INSERT INTO people_job_category VALUES (100, 'Undefined', 0)" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  $target = "2.5-25" ;
+	  if (is_lesser $version, $target) {
+	      debug "Adding row to supported_languages." ;
+	      $query = "INSERT INTO supported_languages VALUES (15, 'Korean', 'Korean.class', 'Korean', 'kr')" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  $target = "2.5-27" ;
+	  if (is_lesser $version, $target) {
+	      debug "Fixing unix_box entries." ;
+	      
+	      $query = "update groups set unix_box = 'shell'" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      $query = "update users set unix_box = 'shell'" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      debug "Also fixing a few sequences." ;
+
+	      &bump_sequence_to ("bug_pk_seq", 100) ;
+	      &bump_sequence_to ("project_task_pk_seq", 100) ;
+
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  $target = "2.5.9999.1+temp+data+dropped" ;
+	  if (is_lesser $version, $target) {
+	      debug "Preparing to upgrade your database - dropping temporary tables" ;
+
+	      my @tables = qw/ user_metric_tmp1_1 user_metric_tmp1_2
+		  user_metric_tmp1_3 user_metric_tmp1_4
+		  user_metric_tmp1_5 user_metric_tmp1_6
+		  user_metric_tmp1_7 user_metric_tmp1_8 user_metric1
+		  user_metric2 user_metric3 user_metric4 user_metric5
+		  user_metric6 user_metric7 user_metric8
+		  project_counts_tmp project_metric_tmp
+		  project_metric_tmp1 project_counts_weekly_tmp
+		  project_metric_weekly_tmp project_metric_weekly_tmp1
+		  / ;
+
+	      my @sequences = qw/ user_metric1_ranking_seq
+		  user_metric2_ranking_seq user_metric3_ranking_seq
+		  user_metric4_ranking_seq user_metric5_ranking_seq
+		  user_metric6_ranking_seq user_metric7_ranking_seq
+		  user_metric8_ranking_seq project_metric_weekly_seq
+		  trove_treesum_trove_treesum_seq
+		  project_metric_tmp1_pk_seq / ;
+
+	      my @indexes = qw/ idx_project_metric_group
+		  idx_project_metric_weekly_group
+		  user_metric_history_date_userid / ;
+
+	      foreach my $table (@tables) {
+		  &drop_table_if_exists ($table) ;
+	      }
+
+	      foreach my $sequence (@sequences) {
+		  &drop_sequence_if_exists ($sequence) ;
+	      }
+
+	      foreach my $index (@indexes) {
+		  &drop_index_if_exists ($index) ;
+	      }
+
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
+	  $target = "2.5.9999.2+data+upgraded" ;
 	  if (is_lesser $version, $target) {
 	      debug "Upgrading your database scheme from 2.5" ;
 
@@ -252,7 +363,7 @@ eval {
 	  }
 
 	  $version = &get_db_version ;
-	  $target = "2.5.9999.2+artifact+transcoded" ;
+	  $target = "2.5.9999.3+artifact+transcoded" ;
 	  if (is_lesser $version, $target) {
 	      debug "Transcoding the artifact data fields" ;
 
@@ -280,7 +391,7 @@ eval {
 	  }
 
 	  $version = &get_db_version ;
-	  $target = "2.5.9999.3+groups+inserted" ;
+	  $target = "2.5.9999.4+groups+inserted" ;
 	  if (is_lesser $version, $target) {
 	      debug "Inserting missing groups" ;
 
@@ -321,24 +432,6 @@ eval {
 		  $sth->finish () ;
 	      }
 	      @reqlist = () ;
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.4+sequences+bumped" ;
-	  if (is_lesser $version, $target) {
-	      debug "Fixing sequence for task ids" ;
-
-	      do {
-		  $query = "select nextval ('project_task_pk_seq')" ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  @array = $sth->fetchrow_array () ;
-		  $sth->finish () ;
-	      } until $array[0] >= 100 ;
-
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
@@ -414,7 +507,7 @@ sub create_metadata_table ( $ ) {
     my $v = shift || "2.5-7+just+before+8" ;
     # Do we have the metadata table?
 
-    my $query = "SELECT count(*) from pg_class where relname = 'debian_meta_data'";
+    my $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data' and relkind = 'r'";
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -432,7 +525,7 @@ sub create_metadata_table ( $ ) {
 	$sth->finish () ;
     }
     
-    $query = "SELECT count(*) from debian_meta_data where key = 'db-version'";
+    $query = "SELECT count(*) FROM debian_meta_data WHERE key = 'db-version'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -455,7 +548,7 @@ sub update_db_version ( $ ) {
     my $v = shift or die "Not enough arguments" ;
 
     debug "Updating debian_meta_data table." ;
-    my $query = "UPDATE debian_meta_data SET value = '$v' where key = 'db-version'" ;
+    my $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -463,7 +556,7 @@ sub update_db_version ( $ ) {
 }
 
 sub get_db_version () {
-    my $query = "select value from debian_meta_data where key = 'db-version'" ;
+    my $query = "SELECT value FROM debian_meta_data WHERE key = 'db-version'" ;
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -477,7 +570,7 @@ sub get_db_version () {
 
 sub drop_table_if_exists ( $ ) {
     my $tname = shift or die  "Not enough arguments" ;
-    my $query = "select count(*) from pg_class where relname='$tname'" ;
+    my $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -485,8 +578,8 @@ sub drop_table_if_exists ( $ ) {
     
     if ($array [0] != 0) {
 	# debug "Dropping table $tname" ;
-	$query = "drop table $tname" ;
-	# debug $query ;
+	$query = "DROP TABLE $tname" ;
+	debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
@@ -495,7 +588,7 @@ sub drop_table_if_exists ( $ ) {
 
 sub drop_sequence_if_exists ( $ ) {
     my $sname = shift or die  "Not enough arguments" ;
-    my $query = "select count(*) from pg_class where relname='$sname'" ;
+    my $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -503,8 +596,8 @@ sub drop_sequence_if_exists ( $ ) {
     
     if ($array [0] != 0) {
 	# debug "Dropping sequence $sname" ;
-	$query = "drop sequence $sname" ;
-	# debug $query ;
+	$query = "DROP SEQUENCE $sname" ;
+	debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
@@ -513,7 +606,7 @@ sub drop_sequence_if_exists ( $ ) {
 
 sub drop_index_if_exists ( $ ) {
     my $iname = shift or die  "Not enough arguments" ;
-    my $query = "select count(*) from pg_class where relname='$iname'" ;
+    my $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -521,10 +614,25 @@ sub drop_index_if_exists ( $ ) {
     
     if ($array [0] != 0) {
 	# debug "Dropping index $iname" ;
-	$query = "drop index $iname" ;
-	# debug $query ;
+	$query = "DROP INDEX $iname" ;
+	debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
     }
+}
+
+sub bump_sequence_to ( $$ ) {
+    my ($query, $sth, @array, $seqname, $targetvalue) ;
+
+    $seqname = shift ;
+    $targetvalue = shift ;
+
+    do {
+	$query = "select nextval ('$seqname')" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+    } until $array[0] >= $targetvalue ;
 }

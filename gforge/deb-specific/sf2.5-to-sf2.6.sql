@@ -54,17 +54,21 @@ ALTER TABLE groups ALTER COLUMN support_due_period SET DEFAULT 1296000;
 UPDATE groups SET support_due_period = 1296000;
 
 -- 20010126
-CREATE TABLE prdb_dbs (
-  dbid SERIAL PRIMARY KEY, 
-  group_id INT NOT NULL,
-  dbname TEXT NOT NULL,
-  dbusername TEXT NOT NULL,
-  dbuserpass TEXT NOT NULL,
-  requestdate INT NOT NULL,
-  dbtype INT NOT NULL,
-  created_by INT NOT NULL,
-  state INT NOT NULL
+CREATE SEQUENCE "prdb_dbs_dbid_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+CREATE TABLE "prdb_dbs" (
+	"dbid" integer DEFAULT nextval('"prdb_dbs_dbid_seq"'::text) NOT NULL,
+	"group_id" integer NOT NULL,
+	"dbname" text NOT NULL,
+	"dbusername" text NOT NULL,
+	"dbuserpass" text NOT NULL,
+	"requestdate" integer NOT NULL,
+	"dbtype" integer NOT NULL,
+	"created_by" integer NOT NULL,
+	"state" integer NOT NULL,
+	Constraint "prdb_dbs_pkey" Primary Key ("dbid")
 );
+
 CREATE TABLE prdb_states (
   stateid INT NOT NULL,
   statename TEXT
@@ -83,21 +87,23 @@ CREATE TABLE prdb_types (
   dbsoftware TEXT NOT NULL
 );
 INSERT INTO prdb_types VALUES ('1','pr-db1','mysql');
-CREATE TABLE prweb_vhost (
-  vhostid SERIAL PRIMARY KEY, 
-  vhost_name TEXT,        
-  docdir TEXT,
-  cgidir TEXT,	
-  group_id INT NOT NULL
+CREATE SEQUENCE "prweb_vhost_vhostid_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "prweb_vhost" (
+	"vhostid" integer DEFAULT nextval('"prweb_vhost_vhostid_seq"'::text) NOT NULL,
+	"vhost_name" text,
+	"docdir" text,
+	"cgidir" text,
+	"group_id" integer NOT NULL,
+	Constraint "prweb_vhost_pkey" Primary Key ("vhostid")
 );
 CREATE INDEX idx_vhost_groups ON prweb_vhost (group_id);
 CREATE UNIQUE INDEX idx_vhost_hostnames ON prweb_vhost(vhost_name);
 
 -- 20010206
 ALTER TABLE db_images ADD COLUMN upload_date int ;
-ALTER TABLE db_images ALTER COLUMN upload_date SET DEFAULT 0 ;
+ALTER TABLE db_images ALTER COLUMN upload_date SET DEFAULT '0' ;
 ALTER TABLE db_images ADD COLUMN version int ;
-ALTER TABLE db_images ALTER COLUMN version SET DEFAULT 0 ;
+ALTER TABLE db_images ALTER COLUMN version SET DEFAULT '0' ;
 CREATE UNIQUE INDEX usergroup_uniq_groupid_userid ON user_group(group_id,user_id);
 
 -- 20010301
@@ -118,33 +124,47 @@ UPDATE user_preferences SET dead1='';
 ALTER TABLE user_group ADD COLUMN artifact_flags INT ;
 ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT '0';
 UPDATE user_group SET artifact_flags=0;
-CREATE TABLE artifact_group_list (
-  group_artifact_id serial primary key,
-  group_id int not null,
-  name text,
-  description text,
-  is_public int not null default 0,
-  allow_anon int not null default 0,
-  email_all_updates int not null default 0,
-  email_address text not null,
-  due_period int not null default 2592000,
-  use_resolution int not null default 0,
-  submit_instructions text,
-  browse_instructions text,
-  datatype int not null default 0
+
+CREATE SEQUENCE "artifact_grou_group_artifac_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+--
+-- TOC Entry ID 256 (OID 22552)
+--
+-- Name: artifact_group_list Type: TABLE Owner: tperdue
+--
+
+CREATE TABLE "artifact_group_list" (
+	"group_artifact_id" integer DEFAULT nextval('"artifact_grou_group_artifac_seq"'::text) NOT NULL,
+	"group_id" integer NOT NULL,
+	"name" text,
+	"description" text,
+	"is_public" integer DEFAULT 0 NOT NULL,
+	"allow_anon" integer DEFAULT 0 NOT NULL,
+	"email_all_updates" integer DEFAULT 0 NOT NULL,
+	"email_address" text NOT NULL,
+	"due_period" integer DEFAULT 2592000 NOT NULL,
+	"use_resolution" integer DEFAULT 0 NOT NULL,
+	"submit_instructions" text,
+	"browse_instructions" text,
+	"datatype" integer DEFAULT 0 NOT NULL,
+	Constraint "artifact_group_list_pkey" Primary Key ("group_artifact_id")
 );
 CREATE INDEX artgrouplist_groupid on artifact_group_list (group_id);
 CREATE INDEX artgrouplist_groupid_public on artifact_group_list (group_id,is_public);
-CREATE TABLE artifact_resolution (
-  id serial primary key,
-  resolution_name text
+CREATE SEQUENCE "artifact_resolution_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_resolution" (
+	"id" integer DEFAULT nextval('"artifact_resolution_id_seq"'::text) NOT NULL,
+	"resolution_name" text,
+	Constraint "artifact_resolution_pkey" Primary Key ("id")
 );
 INSERT INTO artifact_resolution SELECT * FROM bug_resolution;
-CREATE TABLE artifact_perm (
-  id serial primary key,
-  group_artifact_id int not null,
-  user_id int not null,
-  perm_level int not null DEFAULT 0
+CREATE SEQUENCE "artifact_perm_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_perm" (
+	"id" integer DEFAULT nextval('"artifact_perm_id_seq"'::text) NOT NULL,
+	"group_artifact_id" integer NOT NULL,
+	"user_id" integer NOT NULL,
+	"perm_level" integer DEFAULT 0 NOT NULL,
+	Constraint "artifact_perm_pkey" Primary Key ("id")
 );
 CREATE INDEX artperm_groupartifactid on artifact_perm (group_artifact_id);
 CREATE UNIQUE INDEX artperm_groupartifactid_userid on artifact_perm (group_artifact_id,user_id);
@@ -156,37 +176,45 @@ CREATE VIEW artifactperm_artgrouplist_vw AS
 SELECT agl.group_artifact_id,agl.name,agl.description,agl.group_id,ap.user_id, ap.perm_level
 FROM artifact_perm ap, artifact_group_list agl
 WHERE ap.group_artifact_id=agl.group_artifact_id;
-CREATE TABLE artifact_category (
-  id serial primary key,
-  group_artifact_id int NOT NULL,
-  category_name text NOT NULL,
-  auto_assign_to int not null DEFAULT 100
+CREATE SEQUENCE "artifact_category_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_category" (
+	"id" integer DEFAULT nextval('"artifact_category_id_seq"'::text) NOT NULL,
+	"group_artifact_id" integer NOT NULL,
+	"category_name" text NOT NULL,
+	"auto_assign_to" integer DEFAULT 100 NOT NULL,
+	Constraint "artifact_category_pkey" Primary Key ("id")
 );
 CREATE INDEX artcategory_groupartifactid on artifact_category (group_artifact_id);
-CREATE TABLE artifact_group (
-  id serial primary key,
-  group_artifact_id int NOT NULL,
-  group_name text NOT NULL
+CREATE SEQUENCE "artifact_group_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_group" (
+	"id" integer DEFAULT nextval('"artifact_group_id_seq"'::text) NOT NULL,
+	"group_artifact_id" integer NOT NULL,
+	"group_name" text NOT NULL,
+	Constraint "artifact_group_pkey" Primary Key ("id")
 );
 CREATE INDEX artgroup_groupartifactid on artifact_group (group_artifact_id);
-CREATE TABLE artifact_status (
-  id serial primary key,
-  status_name text NOT NULL
+CREATE SEQUENCE "artifact_status_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_status" (
+	"id" integer DEFAULT nextval('"artifact_status_id_seq"'::text) NOT NULL,
+	"status_name" text NOT NULL,
+	Constraint "artifact_status_pkey" Primary Key ("id")
 );
-CREATE TABLE artifact (
-  artifact_id serial primary key,
-  group_artifact_id int NOT NULL,
-  status_id int DEFAULT '1' NOT NULL,
-  category_id int DEFAULT '100' NOT NULL,
-  artifact_group_id int DEFAULT '0' NOT NULL,
-  resolution_id int not null default '100',
-  priority int DEFAULT '5' NOT NULL,
-  submitted_by int DEFAULT '100' NOT NULL,
-  assigned_to int DEFAULT '100' NOT NULL,
-  open_date int DEFAULT '0' NOT NULL,
-  close_date int DEFAULT '0' NOT NULL,
-  summary text NOT NULL,
-  details text NOT NULL
+CREATE SEQUENCE "artifact_artifact_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact" (
+	"artifact_id" integer DEFAULT nextval('"artifact_artifact_id_seq"'::text) NOT NULL,
+	"group_artifact_id" integer NOT NULL,
+	"status_id" integer DEFAULT '1' NOT NULL,
+	"category_id" integer DEFAULT '100' NOT NULL,
+	"artifact_group_id" integer DEFAULT '0' NOT NULL,
+	"resolution_id" integer DEFAULT '100' NOT NULL,
+	"priority" integer DEFAULT '5' NOT NULL,
+	"submitted_by" integer DEFAULT '100' NOT NULL,
+	"assigned_to" integer DEFAULT '100' NOT NULL,
+	"open_date" integer DEFAULT '0' NOT NULL,
+	"close_date" integer DEFAULT '0' NOT NULL,
+	"summary" text NOT NULL,
+	"details" text NOT NULL,
+	Constraint "artifact_pkey" Primary Key ("artifact_id")
 );
 CREATE INDEX art_groupartid ON artifact (group_artifact_id);
 CREATE INDEX art_groupartid_statusid ON artifact (group_artifact_id,status_id);
@@ -217,13 +245,15 @@ AND artifact.status_id=artifact_status.id
 AND artifact.category_id=artifact_category.id 
 AND artifact.artifact_group_id=artifact_group.id
 AND artifact.resolution_id=artifact_resolution.id;
-CREATE TABLE artifact_history (
-  id serial primary key,
-  artifact_id int DEFAULT '0' NOT NULL,
-  field_name text DEFAULT '' NOT NULL,
-  old_value text DEFAULT '' NOT NULL,
-  mod_by int DEFAULT '0' NOT NULL,
-  entrydate int DEFAULT '0' NOT NULL
+CREATE SEQUENCE "artifact_history_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_history" (
+	"id" integer DEFAULT nextval('"artifact_history_id_seq"'::text) NOT NULL,
+	"artifact_id" integer DEFAULT '0' NOT NULL,
+	"field_name" text DEFAULT '' NOT NULL,
+	"old_value" text DEFAULT '' NOT NULL,
+	"mod_by" integer DEFAULT '0' NOT NULL,
+	"entrydate" integer DEFAULT '0' NOT NULL,
+	Constraint "artifact_history_pkey" Primary Key ("id")
 );
 CREATE INDEX arthistory_artid on artifact_history(artifact_id);
 CREATE INDEX arthistory_artid_entrydate on artifact_history(artifact_id,entrydate);
@@ -231,16 +261,18 @@ CREATE VIEW artifact_history_user_vw AS
 SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
 FROM artifact_history ah, users 
 WHERE ah.mod_by=users.user_id; 
-CREATE TABLE artifact_file (
-  id serial primary key,
-  artifact_id int NOT NULL,
-  description text NOT NULL,
-  bin_data text NOT NULL,
-  filename text NOT NULL,
-  filesize int NOT NULL,
-  filetype text NOT NULL,
-  adddate int not null DEFAULT '0',
-  submitted_by int not null
+CREATE SEQUENCE "artifact_file_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_file" (
+	"id" integer DEFAULT nextval('"artifact_file_id_seq"'::text) NOT NULL,
+	"artifact_id" integer NOT NULL,
+	"description" text NOT NULL,
+	"bin_data" text NOT NULL,
+	"filename" text NOT NULL,
+	"filesize" integer NOT NULL,
+	"filetype" text NOT NULL,
+	"adddate" integer DEFAULT '0' NOT NULL,
+	"submitted_by" integer NOT NULL,
+	Constraint "artifact_file_pkey" Primary Key ("id")
 );
 CREATE INDEX artfile_artid on artifact_file(artifact_id);
 CREATE INDEX artfile_artid_adddate on artifact_file(artifact_id,adddate);
@@ -249,13 +281,15 @@ SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.files
 	af.adddate, af.submitted_by, users.user_name, users.realname
 FROM artifact_file af,users 
 WHERE af.submitted_by=users.user_id;
-CREATE TABLE artifact_message (
-  id serial primary key,
-  artifact_id int NOT NULL,
-  submitted_by int not null,
-  from_email text NOT NULL,
-  adddate int DEFAULT '0' NOT NULL,
-  body text NOT NULL
+CREATE SEQUENCE "artifact_message_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_message" (
+	"id" integer DEFAULT nextval('"artifact_message_id_seq"'::text) NOT NULL,
+	"artifact_id" integer NOT NULL,
+	"submitted_by" integer NOT NULL,
+	"from_email" text NOT NULL,
+	"adddate" integer DEFAULT '0' NOT NULL,
+	"body" text NOT NULL,
+	Constraint "artifact_message_pkey" Primary Key ("id")
 );
 CREATE INDEX artmessage_artid on artifact_message(artifact_id);
 CREATE INDEX artmessage_artid_adddate on artifact_message(artifact_id,adddate);
@@ -264,34 +298,36 @@ SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate,
 users.user_id, users.email, users.user_name, users.realname
 FROM artifact_message am,users 
 WHERE am.submitted_by=users.user_id;
-CREATE TABLE artifact_monitor (
-id serial primary key,
-artifact_id int NOT NULL,
-user_id int not null,
-email text
+CREATE SEQUENCE "artifact_monitor_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_monitor" (
+	"id" integer DEFAULT nextval('"artifact_monitor_id_seq"'::text) NOT NULL,
+	"artifact_id" integer NOT NULL,
+	"user_id" integer NOT NULL,
+	"email" text,
+	Constraint "artifact_monitor_pkey" Primary Key ("id")
 );
 CREATE INDEX artmonitor_artifactid on artifact_monitor(artifact_id);
 
-ALTER TABLE artifact_monitor ADD CONSTRAINT artifactmonitor_artifactid_fk
-        FOREIGN KEY (artifact_id) REFERENCES artifact(artifact_id) MATCH FULL;
 INSERT INTO artifact_group_list VALUES (100,1,'Default','Default Data - Dont Edit',3,0,0,'0',0);
 INSERT INTO artifact_category VALUES (100,100,'None',100);
 INSERT INTO artifact_group VALUES (100,100,'None');
 INSERT INTO artifact_status VALUES (1,'Open');
 INSERT INTO artifact_status VALUES (2,'Closed');
 INSERT INTO artifact_status VALUES (3,'Deleted');
-CREATE TABLE artifact_canned_responses (
-  id serial primary key,
-  group_artifact_id int NOT NULL,
-  title text NOT NULL,
-  body text NOT NULL
+CREATE SEQUENCE "artifact_canned_response_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+CREATE TABLE "artifact_canned_responses" (
+	"id" integer DEFAULT nextval('"artifact_canned_response_id_seq"'::text) NOT NULL,
+	"group_artifact_id" integer NOT NULL,
+	"title" text NOT NULL,
+	"body" text NOT NULL,
+	Constraint "artifact_canned_responses_pkey" Primary Key ("id")
 );
 
 CREATE INDEX artifactcannedresponses_groupid ON artifact_canned_responses (group_artifact_id);
 
 CREATE TABLE artifact_counts_agg (
-group_artifact_id int not null,
-count int not null
+	group_artifact_id int not null,
+	count int not null
 );
 CREATE INDEX artifactcountsagg_groupartid ON artifact_counts_agg(group_artifact_id);
 ----- TODO
@@ -569,7 +605,6 @@ FROM old_groups ;
 DROP TABLE old_groups ;
 
 ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
-ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
 CREATE UNIQUE INDEX group_unix_uniq ON groups USING BTREE (unix_group_name varchar_ops);
 CREATE INDEX groups_type ON groups USING BTREE (type int4_ops);
@@ -617,10 +652,16 @@ FROM old_users ;
 
 DROP TABLE old_users ;
 
-ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
-ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
-ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
-ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
+ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk
+	FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
+-- ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk
+--	FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE forum_group_list ADD CONSTRAINT forum_group_list_group_id_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
+ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk
+	FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE users ADD CONSTRAINT users_languageid_fk
+	FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
 
 CREATE INDEX users_status ON users USING BTREE (status bpchar_ops);
 CREATE INDEX idx_users_username ON users USING BTREE (user_name text_ops);
@@ -630,37 +671,37 @@ CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
 -----
 
 -- artifact-fkeys
-ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
-        FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 DELETE from artifact_perm 
 	where not exists (select group_artifact_id 
 	from artifact_group_list 
 	where artifact_perm.group_artifact_id=artifact_group_list.group_artifact_id);
+ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
+        FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_groupartifactid_fk 
         FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 
-ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_groupartifactid_fk
-        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_autoassignto_fk
         FOREIGN KEY (auto_assign_to) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE artifact_category ADD CONSTRAINT artifactcategory_groupartifactid_fk
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 
 ALTER TABLE artifact_group ADD CONSTRAINT artifactgroup_groupartifactid_fk
         FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 
-ALTER TABLE artifact ADD CONSTRAINT artifact_groupartifactid_fk
-        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
-ALTER TABLE artifact ADD CONSTRAINT artifact_statusid_fk
-        FOREIGN KEY (status_id) REFERENCES artifact_status(id) MATCH FULL;
-ALTER TABLE artifact ADD CONSTRAINT artifact_categoryid_fk
-        FOREIGN KEY (category_id) REFERENCES artifact_category(id) MATCH FULL;
 ALTER TABLE artifact ADD CONSTRAINT artifact_artifactgroupid_fk
         FOREIGN KEY (artifact_group_id) REFERENCES artifact_group(id) MATCH FULL;
-ALTER TABLE artifact ADD CONSTRAINT artifact_submittedby_fk
-        FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
 ALTER TABLE artifact ADD CONSTRAINT artifact_assignedto_fk
         FOREIGN KEY (assigned_to) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_categoryid_fk
+        FOREIGN KEY (category_id) REFERENCES artifact_category(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_groupartifactid_fk
+        FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) MATCH FULL;
 ALTER TABLE artifact ADD CONSTRAINT artifact_resolutionid_fk
         FOREIGN KEY (resolution_id) REFERENCES artifact_resolution(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_statusid_fk
+        FOREIGN KEY (status_id) REFERENCES artifact_status(id) MATCH FULL;
+ALTER TABLE artifact ADD CONSTRAINT artifact_submittedby_fk
+        FOREIGN KEY (submitted_by) REFERENCES users(user_id) MATCH FULL;
 
 DELETE FROM artifact_history WHERE NOT EXISTS
 	(SELECT artifact_id FROM artifact WHERE artifact.artifact_id=artifact_history.artifact_id);
@@ -843,15 +884,18 @@ CREATE TRIGGER artifactgroup_update_trig AFTER UPDATE ON artifact
 	FOR EACH ROW EXECUTE PROCEDURE artifactgroup_update_agg();
 
 -- 20010317
-CREATE TABLE massmail_queue (
-  id serial primary key,
-  type varchar(8) not null,
-  subject text not null,
-  message text not null,
-  queued_date int not null,
-  last_userid int not null default 0,
-  failed_date int not null default 0,
-  finished_date int not null default 0
+CREATE SEQUENCE "massmail_queue_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
+
+CREATE TABLE "massmail_queue" (
+	"id" integer DEFAULT nextval('"massmail_queue_id_seq"'::text) NOT NULL,
+	"type" character varying(8) NOT NULL,
+	"subject" text NOT NULL,
+	"message" text NOT NULL,
+	"queued_date" integer NOT NULL,
+	"last_userid" integer DEFAULT 0 NOT NULL,
+	"failed_date" integer DEFAULT 0 NOT NULL,
+	"finished_date" integer DEFAULT 0 NOT NULL,
+	Constraint "massmail_queue_pkey" Primary Key ("id")
 );
 
 -- 20010409
@@ -867,7 +911,6 @@ DROP TABLE stats_agg_pages_by_day_old;
 DROP TABLE stats_agr_filerelease;
 DROP TABLE stats_agr_project;
 DROP TABLE group_cvs_history;
-DROP TABLE project_counts_tmp;
 CREATE TABLE frs_dlstats_file_agg_tmp AS
 SELECT
 	substring(day::text from 1 for 6)::int AS month,
@@ -1042,22 +1085,24 @@ WHERE NOT EXISTS(
 )
 ;
 
+ALTER TABLE frs_file ADD CONSTRAINT frsfile_processorid_fk
+	FOREIGN KEY (processor_id) REFERENCES frs_processor(processor_id) MATCH FULL;
 ALTER TABLE frs_file ADD CONSTRAINT frsfile_releaseid_fk
 	FOREIGN KEY (release_id) REFERENCES frs_release(release_id) MATCH FULL;
 ALTER TABLE frs_file ADD CONSTRAINT frsfile_typeid_fk
 	FOREIGN KEY (type_id) REFERENCES frs_filetype(type_id) MATCH FULL;
-ALTER TABLE frs_file ADD CONSTRAINT frsfile_processorid_fk
-	FOREIGN KEY (processor_id) REFERENCES frs_processor(processor_id) MATCH FULL;
 
 ALTER TABLE frs_package ADD CONSTRAINT frspackage_statusid_fk
 	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
+ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk
+	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
 ALTER TABLE frs_release ADD CONSTRAINT frsrelease_packageid_fk
 	FOREIGN KEY (package_id) REFERENCES frs_package(package_id) MATCH FULL;
-ALTER TABLE frs_release ADD CONSTRAINT frsrelease_statusid_fk
-	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
 ALTER TABLE frs_release ADD CONSTRAINT frsrelease_releasedby_fk
 	FOREIGN KEY (released_by) REFERENCES users(user_id) MATCH FULL;
+ALTER TABLE frs_release ADD CONSTRAINT frsrelease_statusid_fk
+	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
 
 ALTER TABLE artifact_group_list ADD COLUMN status_timeout integer;
 UPDATE artifact_group_list SET status_timeout='1209600' WHERE status_timeout is NULL;
@@ -1071,9 +1116,6 @@ day  int not null,
 user_id int not null,
 ranking int not null,
 metric float not null);
-
-CREATE UNIQUE INDEX user_metric_history_date_userid 
-ON user_metric_history(month,day,user_id);
 
 ---- From now on, everything comes from Debian-SF
 
@@ -1116,7 +1158,6 @@ DROP INDEX httpdl_day ;
 DROP INDEX idx_users_username ;
 DROP INDEX stats_agr_tmp_fid ;
 DROP INDEX stats_agr_tmp_gid ;
-DROP INDEX idx_project_metric_weekly_group ;
 
 -- Add a few missing tables
 CREATE TABLE "cache_store" (
@@ -1318,8 +1359,8 @@ CREATE TABLE "stats_site_pages_by_month" (
 
 -- Add/alter a few columns
 ALTER TABLE frs_dlstats_group_agg ADD COLUMN month integer;
-ALTER TABLE frs_dlstats_group_agg ALTER COLUMN month SET DEFAULT 0;
-ALTER TABLE project_weekly_metric ALTER COLUMN group_id SET DEFAULT 0;
+ALTER TABLE frs_dlstats_group_agg ALTER COLUMN month SET DEFAULT '0';
+ALTER TABLE project_weekly_metric ALTER COLUMN group_id SET DEFAULT '0';
 
 -- Drop an unused table
 DROP TABLE intel_agreement ;
@@ -1331,9 +1372,9 @@ CREATE INDEX frsdlfiletotal_fileid ON frs_dlstats_filetotal_agg USING btree (fil
 CREATE INDEX frsdlgroup_groupid ON frs_dlstats_group_agg USING btree (group_id);
 CREATE INDEX frsdlgroup_month_day_groupid ON frs_dlstats_group_agg USING btree ("month", "day", group_id);
 CREATE INDEX frsdlgrouptotal_groupid ON frs_dlstats_grouptotal_agg USING btree (group_id);
-CREATE INDEX project_metric_group ON project_metric USING btree (group_id);
-CREATE INDEX project_metric_weekly_group ON project_weekly_metric USING btree (group_id);
-CREATE INDEX projectweeklymetric_ranking ON project_weekly_metric USING btree (ranking);
+-- CREATE INDEX project_metric_group ON project_metric USING btree (group_id);
+-- CREATE INDEX project_metric_weekly_group ON project_weekly_metric USING btree (group_id);
+-- CREATE INDEX projectweeklymetric_ranking ON project_weekly_metric USING btree (ranking);
 CREATE INDEX statsproject30_groupid ON stats_project_last_30 USING btree (group_id);
 CREATE INDEX statsprojectall_groupid ON stats_project_all USING btree (group_id);
 CREATE INDEX statsprojectmonths_groupid ON stats_project_months USING btree (group_id);
@@ -1344,6 +1385,18 @@ CREATE INDEX statssitepagesbyday_month_day ON stats_site_pages_by_day USING btre
 CREATE INDEX troveagg_trovecatid_ranking ON trove_agg USING btree (trove_cat_id, ranking);
 CREATE INDEX user_metric_history_date_userid ON user_metric_history USING btree ("month", "day", user_id);
 
+CREATE  INDEX "foundryprojdlsagg_foundryid_dls" on "foundry_project_downloads_agg" using btree ( "foundry_id" "int4_ops", "downloads" "int4_ops" );
+CREATE  INDEX "foundryprojectrankingsagg_found" on "foundry_project_rankings_agg" using btree ( "foundry_id" "int4_ops", "ranking" "int4_ops" );
+
+CREATE UNIQUE INDEX frsdlfileagg_oid ON frs_dlstats_file_agg USING btree (oid);
+CREATE UNIQUE INDEX statsagglogobygrp_oid ON stats_agg_logo_by_group USING btree (oid);
+CREATE UNIQUE INDEX statsaggsitebygrp_oid ON stats_agg_site_by_group USING btree (oid);
+CREATE UNIQUE INDEX statscvsgrp_oid ON stats_cvs_group USING btree (oid);
+CREATE UNIQUE INDEX statsproject_oid ON stats_project USING btree (oid);
+CREATE UNIQUE INDEX statsprojectdevelop_oid ON stats_project_developers USING btree (oid);
+CREATE UNIQUE INDEX statsprojectmetric_oid ON stats_project_metric USING btree (oid);
+CREATE UNIQUE INDEX statssite_oid ON stats_site USING btree (oid);
+CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree (oid);
+CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
+
 -- Sequences
-CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2147483647 minvalue
-1 cache 1;
