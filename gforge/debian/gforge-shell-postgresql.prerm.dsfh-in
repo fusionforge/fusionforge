@@ -29,6 +29,7 @@ case "$1" in
 
 	# Clean debconf after ourselves
 	db_stop
+	;;
     upgrade|deconfigure|failed-upgrade)
         ;;
     *)
