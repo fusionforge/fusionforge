@@ -463,7 +463,7 @@ function stats_site_projects_monthly() {
 	}
 }
 
-function stats_site_agregate( ) {
+function stats_site_aggregate( ) {
 
 	$res = db_query("SELECT * FROM stats_site_all_vw", -1, 0, SYS_DB_STATS);
 	$site_totals = db_fetch_array($res);
@@ -478,7 +478,7 @@ function stats_site_agregate( ) {
 	
 
 	?>
-	<p><strong>Current Agregate Statistics for All Time</strong></p>
+	<p><strong>Current Aggregate Statistics for All Time</strong></p>
 
 	<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">

@@ -27,7 +27,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
 echo "\n\n";
 
 print '<div align="center">' . "\n";
-print '<h3>Sitewide Agregate Statistics </h3><br />' . "\n";
+print '<h3>Sitewide Aggregate Statistics </h3><br />' . "\n";
 ?>
 
 <hr />
@@ -44,7 +44,7 @@ print '<h3>Sitewide Agregate Statistics </h3><br />' . "\n";
 
 <?php
 
-stats_site_agregate();
+stats_site_aggregate();
 print '<br /><br />';
 stats_site_projects_daily( 7 );
 print '<br /><br />';
