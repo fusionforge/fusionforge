@@ -3,6 +3,7 @@ gforge/backend/shell/apache.sh svneol=native#unset
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
 gforge/www/images/favicon.ico svneol=native#unset
+gforge/www/images/gforge.jpg svneol=native#unset
 gforge/www/images/ic/caret.png -text
 gforge/www/images/ic/cfolder15.png -text
 gforge/www/images/ic/check.png -text
@@ -46,5 +47,6 @@ gforge/www/themes/forged/images/valogo5.jpg svneol=native#unset
 gforge/www/themes/gforge/images/ic/mail16w.png -text
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
+gforge/www/themes/gforge/images/logo.png -text
 gforge/www/themes/gforge/images/t.png -text
 gforge/www/themes/gforge/images/t2.png -text
