@@ -90,8 +90,9 @@ if (session_loggedin()) {
 		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 
 		<tr><td colspan="2">
-			<br /><strong><?php echo $Language->getText('tracker','detailed_description')?>:</strong><br />
-			<?php echo nl2br( $ah->getDetails() ); ?>
+			<br />
+			<?php echo $ah->showDetails(); ?>
+
 			<input type="hidden" name="func" value="postaddcomment">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 			<p>

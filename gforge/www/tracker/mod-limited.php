@@ -151,8 +151,8 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr><td colspan="2">
-		<br /><strong><?php echo $Language->getText('tracker','detailed_description')?>:</strong><br />
-		<?php echo nl2br($ah->getDetails()); ?>
+		<br />
+		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 
 	<tr><td colspan="2">

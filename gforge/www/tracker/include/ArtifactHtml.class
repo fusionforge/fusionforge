@@ -29,6 +29,23 @@ class ArtifactHtml extends Artifact {
 		return $this->Artifact($ArtifactType,$artifact_id);
 	}
 
+	/**
+	 * show details preformatted (like followups)
+	 */
+	function showDetails() {
+		global $Language;
+		$result = $this->getDetails();
+
+		$title_arr = array();
+		$title_arr[] = $Language->getText('tracker','detailed_description');
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>'. util_line_wrap ( $result, 120,"\n"). '</pre></td></tr>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+	}
+
+
 	function showMessages() {
 		global $sys_datefmt;
 		global $Language;
