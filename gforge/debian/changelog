@@ -1,4 +1,4 @@
-gforge (3pre9-0+1) experimental; urgency=low
+gforge (3pre9-0+2) experimental; urgency=low
 
   * [Roland] Recoded Debconf templates into UTF-8, as part of the grand
     transition to UTF-8.
@@ -9,7 +9,7 @@ gforge (3pre9-0+1) experimental; urgency=low
   * [Christian] Removed stricter dependency on debconf, to be able to run on
     woody
 
- -- Christian Bayle <bayle@debian.org>  Fri, 24 Jan 2003 00:36:54 +0100
+ -- Christian Bayle <bayle@debian.org>  Fri, 24 Jan 2003 23:36:56 +0100
 
 gforge (3pre8-0+) experimental; urgency=low
 
