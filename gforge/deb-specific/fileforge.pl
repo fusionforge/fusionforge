@@ -3,12 +3,8 @@
 use strict ;
 use vars qw/ $file $user $group $dirty_file $dirty_user $dirty_group
     $src_file $dest_dir $retval / ;
-use subs qw/ &wash_string / ;
+use subs qw/ &fileforge &tmpfilemove &wash_string / ;
 no locale ;
-
-if ($#ARGV != 2) {
-    die "Usage: fileforge.pl file user group" ;
-}
 
 # Clean up our environment
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
@@ -19,44 +15,73 @@ unless ($sys_dbpasswd == $ENV{'sys_dbpassword'}) {
     die "You are not authorized to run this script" ;
 }
 
-# "Parse" command-line options
-$dirty_file = $ARGV [0] ;
-$dirty_user = $ARGV [1] ;
-$dirty_group = $ARGV [2] ;
+# Check which mode we're in
+# Normal fileforge
+if ($0 == "/usr/lib/sourceforge/bin/fileforge.pl") {
+    &fileforge ;
+    exit 0 ;
+}
+# Temporary moving of files (for quick release system)
+if ($0 == "/usr/lib/sourceforge/bin/tmpfilemove.pl") {
+    &tmpfilemove ;
+    exit 0 ;
+}
+# If we're not in one of these two modes, then fail
+print "You must call this script as one of:
+* /usr/lib/sourceforge/bin/fileforge.pl (normal execution)
+* /usr/lib/sourceforge/bin/tmpfilemove.pl (for QRS)" ;
+die "Unauthorized invocation '$0'" ;
 
-# Check and untaint $user and $file here
-$file = &wash_string ($dirty_file, "file") ;
-$user = &wash_string ($dirty_user, "user") ;
+sub &fileforge {
+    if ($#ARGV != 2) {
+	die "Usage: fileforge.pl file user group" ;
+    }
 
-# Compute source file name
-$src_file = "/var/lib/sourceforge/chroot/home/users/" ;
-$src_file .= $user ;
-$src_file .= "/incoming/" ;
-$src_file .= $file ;
+    # "Parse" command-line options
+    $dirty_file = $ARGV [0] ;
+    $dirty_user = $ARGV [1] ;
+    $dirty_group = $ARGV [2] ;
 
-# Check and untaint $group here
-$group = &wash_string ($dirty_group, "group") ;
+    # Check and untaint $user and $file here
+    $file = &wash_string ($dirty_file, "file") ;
+    $user = &wash_string ($dirty_user, "user") ;
 
-# Compute destination file name
-$dest_dir = "/var/lib/sourceforge/download/" ;
-$dest_dir .= $group ;
-$dest_dir .= "/" ;
+    # Compute source file name
+    $src_file = "/var/lib/sourceforge/chroot/home/users/" ;
+    $src_file .= $user ;
+    $src_file .= "/incoming/" ;
+    $src_file .= $file ;
 
-unless ( -d $dest_dir ) {
-    die "Destination directory '$dest_dir' does not exist" ;
+    # Check and untaint $group here
+    $group = &wash_string ($dirty_group, "group") ;
+
+    # Compute destination file name
+    $dest_dir = "/var/lib/sourceforge/download/" ;
+    $dest_dir .= $group ;
+    $dest_dir .= "/" ;
+
+    unless ( -d $dest_dir ) {
+	die "Destination directory '$dest_dir' does not exist" ;
+    }
+
+    # print "Moving '$src_file' to '$dest_dir'.\n" ;
+
+    $retval = system "/bin/echo /bin/mv $src_file $dest_dir" ;
+    if ($retval == -1) {
+	die "Could not execute /bin/mv: $!" ;
+    }
+    if ($retval != 0) {
+	die "Error moving file" ;
+    }
 }
 
-# print "Moving '$src_file' to '$dest_dir'.\n" ;
+sub &tmpfilemove {
+    if ($#ARGV != 2) {
+	die "Usage: tmpfilemove.pl temp_filename real_filename user_unix_name" ;
+    }
 
-$retval = system "/bin/echo /bin/mv $src_file $dest_dir" ;
-if ($retval == -1) {
-    die "Could not execute /bin/mv: $!" ;
+    die "Not implemented yet" ;
 }
-if ($retval != 0) {
-    die "Error moving file" ;
-}
-
-exit 0 ;
 
 sub wash_string {
     my $string = shift ;
