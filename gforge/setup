@@ -63,6 +63,7 @@ computedefault(){
 	DEFAULTsys_ldap_auth_port=389
 	DEFAULTsys_ldap_auth_version=3
 	DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
+	DEFAULTsys_cvs_tarballs_path=$GFGDIR/var/lib/gforge/cvstarballs
 	DEFAULTsys_use_cvs=true
 	DEFAULTsys_use_tracker=true
 	DEFAULTsys_use_forum=true
@@ -77,6 +78,9 @@ computedefault(){
 	DEFAULTsys_use_snippet=true
 	DEFAULTsys_use_ssl=false
 	DEFAULTsys_use_people=true
+	DEFAULTsys_use_project_vhost=true
+	DEFAULTsys_use_project_database=false
+	DEFAULTsys_use_project_multimedia=false
 	DEFAULTsys_project_reg_restricted=true
 	DEFAULTsys_localization_enable_caching=true
 	DEFAULTsys_localization_cache_path=$GFGDIR/var/cache/gforge/

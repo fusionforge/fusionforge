@@ -18,6 +18,13 @@ $sys_use_snippet={sys_use_snippet};
 $sys_use_ssl={sys_use_ssl};
 $sys_use_people={sys_use_people};
 
+// Enable/Disable the ability to add additionnal vhost for a project
+$sys_use_project_vhost={sys_use_project_vhost};
+// Enable/Disable the ability to have database for a project (backend not implemented)
+$sys_use_project_database={sys_use_project_database};
+// Enable/Disable the ability to add images for a project (frontend not implemented)
+$sys_use_project_multimedia={sys_use_project_multimedia};
+
 //
 //	Restricted project registration
 //	If set to true, only a site admin can register projects

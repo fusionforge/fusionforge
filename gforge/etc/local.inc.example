@@ -112,6 +112,12 @@ $sys_ldap_bind_dn="cn=SF_robot,dc=gforge,dc=company,dc=com";
 $sys_ldap_admin_dn="cn=admin,dc=gforge,dc=company,dc=com";
 
 //
+// CVS configuration
+//
+// Path to CVS tarballs directory
+$sys_cvs_tarballs_path='/path/to/cvs/tarballs/';
+
+//
 // Jabber Configuration
 //
 $sys_use_jabber=0;
@@ -140,6 +146,13 @@ $sys_use_trove=true;
 $sys_use_snippet=true;
 $sys_use_ssl=false;
 $sys_use_people=true;
+
+// Enable/Disable the ability to add additionnal vhost for a project
+$sys_use_project_vhost=true;
+// Enable/Disable the ability to have database for a project (backend not implemented)
+$sys_use_project_database = false;
+// Enable/Disable the ability to add images for a project (frontend not implemented)
+$sys_use_project_multimedia = false;
 
 //
 //	Restricted project registration
