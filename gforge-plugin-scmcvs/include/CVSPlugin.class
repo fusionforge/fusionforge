@@ -77,15 +77,15 @@ class CVSPlugin extends SCM {
 
 			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
 
-			// Should cvs browser links to be displayed?
-			$displayCvsBrowser = false;
+			// CVS browser links must be displayed if
+			// project enables anon CVS or if logged-in
+			// user is a member of the group
+			$displayCvsBrowser = $project->enableAnonSCM();
 			if(session_loggedin()) {
 				$perm =& $project->getPermission(session_get_user());
 				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
 					$displayCvsBrowser = true;
 				}
-			} else {
-				$displayCvsBrowser = $project->enableAnonSCM();
 			}
 
 			// ######################## Table for summary info
