@@ -16,10 +16,17 @@ set -e
 #        * <disappearer's-postrm> `disappear' <r>overwrit>r> <new-version>
 # for details, see /usr/share/doc/packaging-manual/
 
+###
+# This variable and this function cannot be taken from the common-utils.sh file
+# since at the postrm phase that file has been erased
+###
+mainconffile=/etc/sourceforge/sourceforge.conf
+delete_mainconffile () {
+    rm -f $mainconffile
+}
+
 case "$1" in
     purge)
-	. /usr/lib/sourceforge/lib/common-utils.sh
-
 	rm -rf /var/lib/sourceforge
 	delete_mainconffile
 	[ -d /etc/sourceforge ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge
