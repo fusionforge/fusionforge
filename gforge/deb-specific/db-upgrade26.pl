@@ -307,7 +307,7 @@ sub parse_sql_file ( $ ) {
 		  'IN_COPY' => 8,
 		  'ERROR' => 666,
 		  'DONE' => 999) ;
-    my ($state, $l, $par_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data) ;
+    my ($state, $l, $par_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field) ;
 
     # Init the state machine
 
@@ -316,14 +316,15 @@ sub parse_sql_file ( $ ) {
     # my $n = 0 ;
     
   STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
-      debug "State = $state" ;
+      # debug "State = $state" ;
     STATE_SWITCH: {		# State machine step processing
 	$state == $states{INIT} && do {
 	    $par_level = 0 ;
 	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
 	    $copy_table = $copy_rest = "" ;
-	    @copy_data = () ;
+	    @copy_data = @copy_data_tmp = () ;
+	    $copy_field = "" ;
 	    
 	    $state = $states{SCAN} ;
 	    last STATE_SWITCH ;
@@ -331,8 +332,8 @@ sub parse_sql_file ( $ ) {
 	
 	$state == $states{SCAN} && do {
 	  SCAN_STATE_SWITCH: {
+	      # debug "SCAN -- \$l = <$l>" ;
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
-		  debug "SCAN -- \$l = <$l>" ;
 		  $l = <F> ;
 		  unless ($l) {
 		      debug "Detected end of file." ;
@@ -354,14 +355,12 @@ sub parse_sql_file ( $ ) {
 		} ;
 	      
 	      ( 1 ) && do {
-		  debug "SCAN -- \$l = <$l>" ;
 		  $sql = "" ;
 
 		  $state = $states{SQL_SCAN} ;
 		  last SCAN_STATE_SWITCH ;
 	      } ;
 
-	      die "Unknown event in SCAN state" ;
 	  }			# SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
 	} ;			# End of SCAN state
@@ -369,7 +368,7 @@ sub parse_sql_file ( $ ) {
 	$state == $states{SQL_SCAN} && do {
 	  SQL_SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
-		  debug "SQLSCAN -- \$l = <$l>" ;
+		  # debug "SQL_SCAN -- \$l = <$l>" ;
 		  $l = <F> ;
 		  unless ($l) {
 		      debug "End of file detected during an SQL statement." ;
@@ -384,7 +383,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
-		  debug "SQLSCAN -- \$l = <$l>" ;
+		  # debug "SQL_SCAN -- \$l = <$l>" ;
 		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
 		  $sql .= $chunk ;
 		  
@@ -399,12 +398,14 @@ sub parse_sql_file ( $ ) {
 	
 	$state == $states{IN_SQL} && do {
 	  IN_SQL_STATE_SWITCH: {
+	      # debug "IN_SQL -- \$rest = <$rest>" ;
 	      ($rest =~ /^\(/) && do {
 		  $par_level += 1 ;
 		  $sql .= '(' ;
 		  $rest = substr $rest, 1 ;
 		  $l = $rest ;
-		  
+
+		  $state = $states{SQL_SCAN} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
 
@@ -414,6 +415,7 @@ sub parse_sql_file ( $ ) {
 		  $rest = substr $rest, 1 ;
 		  $l = $rest ;
 		  
+		  $state = $states{SQL_SCAN} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
 
@@ -437,6 +439,7 @@ sub parse_sql_file ( $ ) {
 		  $rest = substr $rest, 1 ;
 		  $l = $rest ;
 		  
+		  $state = $states{SQL_SCAN} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
 
@@ -466,11 +469,13 @@ sub parse_sql_file ( $ ) {
 	      ($rest =~ /^\'/) && do {
 		  $sql .= '\'' ;
 		  $rest = substr $rest, 1 ;
+		  $l = $rest ;
 		  
 		  $state = $states{IN_QUOTE} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
 	      
+	      # debug "IN_SQL -- \$rest = <$rest>" ;
 	      die "Unknown event in IN_SQL state" ;
 	  }			# IN_SQL_STATE_SWITCH
 	    last STATE_SWITCH ;
@@ -478,8 +483,8 @@ sub parse_sql_file ( $ ) {
 
 	$state == $states{END_SQL} && do {
 	  END_SQL_STATE_SWITCH: {
+	      debug "END_SQL -- \$sql = <$sql>" ;
 	      ($sql =~ /^\s*$/) && do {
-		  debug "END_SQL -- \$sql = <$sql>" ;
 		  debug "Empty request." ;
 		  $sql = "" ;
 		  $l = $rest ;
@@ -489,12 +494,11 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
-		  debug "END_SQL -- \$sql = <$sql>" ;
 		  push @sql_list, $sql ;
 		  $sql = "" ;
 		  $l = $rest ;
 
-		  $state = $states{SQL_SCAN} ;
+		  $state = $states{SCAN} ;
 		  last END_SQL_STATE_SWITCH ;
 	      } ;
 
@@ -504,6 +508,7 @@ sub parse_sql_file ( $ ) {
 
 	$state == $states{QUOTE_SCAN} && do {
 	  QUOTE_SCAN_STATE_SWITCH: {
+	      # debug "QUOTE_SCAN -- \$l = <$l>" ;
 	      ($l eq "") && do {
 		  $sql .= "\n" ;
 		  $l = <F> ;
@@ -531,11 +536,13 @@ sub parse_sql_file ( $ ) {
 	
 	$state == $states{IN_QUOTE} && do {
 	  IN_QUOTE_STATE_SWITCH: {
+	      # debug "IN_QUOTE -- \$rest = <$rest>" ;
 	      ($rest =~ /^\'/) && do {
 		  $sql .= '\'' ;
 		  $rest = substr $rest, 1 ;
+		  $l = $rest ;
 		  
-		  $state = $states{IN_SQL} ;
+		  $state = $states{SQL_SCAN} ;
 		  last IN_QUOTE_STATE_SWITCH ;
 	      } ;
 
@@ -554,15 +561,16 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ($rest eq "") && do {
-		  # Nothing to do
+		  $l = $rest ;
 		  
 		  $state = $states{QUOTE_SCAN} ;
 		  last IN_QUOTE_STATE_SWITCH ;
 	      } ;
 
 	      ( 1 ) && do {
-		  debug "Unknown event in IN_QUOTE state." ;
-		  $state = $states{ERROR} ;
+		  $l = $rest ;
+		  
+		  $state = $states{QUOTE_SCAN} ;
 		  last IN_QUOTE_STATE_SWITCH ;
 	      } ;
 
@@ -611,7 +619,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of START_COPY state
 
 	$state == $states{IN_COPY} && do {
-	  IN_COPY_SWITCH: {
+	  IN_COPY_STATE_SWITCH: {
 	      ($l =~ /^\\\.$/) && do {
 		  $l = $copy_rest ;
 
@@ -620,12 +628,22 @@ sub parse_sql_file ( $ ) {
 	      } ;
 	      
 	      ( 1 ) && do {
-		  @copy_data = split /\t/, $l ;
-		  @copy_data = map { s/\'/\\\'/g } @copy_data ;
-		  @copy_data = map { "'" . $_ . "'" } @copy_data ;
+		  @copy_data = () ;
+		  @copy_data_tmp = split /\t+/, $l ;
+		  foreach $copy_field (@copy_data_tmp) {
+		      if ($copy_field eq '\N') {
+			  $copy_field = 'NULL' ;
+		      } else {
+			  $copy_field =~ s/\'/\\\'/g ;
+			  $copy_field = "'" . $copy_field . "'" ;
+		      }
+		      push @copy_data, $copy_field ;
+		  }
+		  debug "IN_COPY -- \$#copy_data = " . $#copy_data ;
 		  $sql = "INSERT INTO \"$copy_table\" VALUES (" ;
 		  $sql .= join (", ", @copy_data) ;
 		  $sql .= ")" ;
+		  debug "IN_COPY -- \$sql = <$sql>" ;
 		  push @sql_list, $sql ;
 		  $l = <F> ;
 		  unless ($l) {
