@@ -26,9 +26,9 @@ sourceforge (2.5-25+) unstable; urgency=low
   * [Roland] Also in db-upgrade.pl: fixed the (probably truncated)
     existing unix_box entries.
   * [Roland] Various minor fixes here and there: Debconf templates,
-    install-dap.sh, sourceforge-config.sgml.
+    install-dap.sh, sourceforge-config.sgml, qrs.php.
 
- -- Roland Mas <lolando@debian.org>  Mon,  4 Mar 2002 23:28:52 +0100
+ -- Roland Mas <lolando@debian.org>  Wed,  6 Mar 2002 10:44:00 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 
