@@ -8,6 +8,8 @@
 // $Id$
 //
 
+require_once('common/include/GForge.class');
+
 function show_features_boxes() {
 	GLOBAL $HTML,$Language;
 	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS[sys_name]),0);
@@ -70,28 +72,8 @@ function stats_getprojects_active_public() {
 	}
 }
 
-function stats_getprojects_active() {
-	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
-	if (db_numrows($res_count) > 0) {
-		$row_count = db_fetch_array($res_count);
-		return $row_count['count'];
-	} else {
-		return "error";
-	}
-}
-
 function stats_getprojects_total() {
 	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A' OR status='H'");
-	if (db_numrows($res_count) > 0) {
-		$row_count = db_fetch_array($res_count);
-		return $row_count['count'];
-	} else {
-		return "error";
-	}
-}
-
-function stats_getusers() {
-	$res_count = db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 	if (db_numrows($res_count) > 0) {
 		$row_count = db_fetch_array($res_count);
 		return $row_count['count'];
@@ -122,8 +104,9 @@ function stats_downloads_total() {
 
 function show_sitestats() {
 	global $Language;
-	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format(stats_getprojects_active()).'</strong>';
-	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format(stats_getusers()).'</strong>';
+	$gforge = new GForge();
+	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
+	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }
 
