@@ -15,9 +15,10 @@ gforge (3.3.0-49) unstable; urgency=low
   * [Roland] Added pgsql.class for nss-pgsql interaction (rather than
     LDAP).
   * [Roland] Started removing LDAP dependency (to be replaced with direct
-    PostgreSQL lookups).
+    PostgreSQL lookups).  Done: NSS, e-mail forwarding for users.  TODO:
+    mailing-lists, probably PAM.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Oct 2004 22:18:31 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Oct 2004 22:51:45 +0200
 
 gforge (3.3.0-12) unstable; urgency=low
 

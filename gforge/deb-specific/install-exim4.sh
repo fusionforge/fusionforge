@@ -102,7 +102,7 @@ forward_for_gforge:
   domains = users.$domain_name
   driver = redirect
   file_transport = address_file
-  data = \${lookup ldap {ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?debGforgeForwardEmail}}
+  data = \${lookup pgsql {select email from users where user_name=\'\$local_part\'}}
   user = nobody
   group = nogroup
 
