@@ -1143,58 +1143,86 @@ END;
 
 CREATE FUNCTION "artifactgroup_update_agg" () RETURNS opaque AS '
 BEGIN
-    --
-    -- see if they are moving to a new artifacttype
-    -- if so, its a more complex operation
-    --
-    IF NEW.group_artifact_id <> OLD.group_artifact_id THEN
-        --
-        -- transferred artifacts always have a status of 1
-        -- so we will increment the new artifacttypes sums
-        --
-        UPDATE artifact_counts_agg SET count=count+1, open_count=open_count+1 
-            WHERE group_artifact_id=NEW.group_artifact_id;
-        --
-        --  now see how to increment/decrement the old types sums
-        --
-        IF NEW.status_id <> OLD.status_id THEN 
-            IF OLD.status_id = 2 THEN
-                UPDATE artifact_counts_agg SET count=count-1 
-                    WHERE group_artifact_id=OLD.group_artifact_id;
-            --
-            --  no need to do anything if it was in deleted status
-            --
-            END IF;
-        ELSE
-            --
-            --  Was already in open status before
-            --
-            UPDATE artifact_counts_agg SET count=count-1, open_count=open_count-1 
-                WHERE group_artifact_id=OLD.group_artifact_id;
-        END IF;
-    ELSE
-        --
-        -- just need to evaluate the status flag and 
-        -- increment/decrement the counter as necessary
-        --
-        IF NEW.status_id <> OLD.status_id THEN
-            IF new.status_id = 1 THEN
-                UPDATE artifact_counts_agg SET open_count=open_count+1 
-                    WHERE group_artifact_id=new.group_artifact_id;
-            ELSE 
-                IF new.status_id = 2 THEN
-                    UPDATE artifact_counts_agg SET open_count=open_count-1 
-                        WHERE group_artifact_id=new.group_artifact_id;
-                ELSE 
-                    IF new.status_id = 3 THEN
-                        UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1 
-                            WHERE group_artifact_id=new.group_artifact_id;
-                    END IF;
-                END IF;
-            END IF;
-        END IF; 
-    END IF;
-    RETURN NEW;
+	--
+	-- see if they are moving to a new artifacttype
+	-- if so, its a more complex operation
+	--
+	IF NEW.group_artifact_id <> OLD.group_artifact_id THEN
+		--
+		-- transferred artifacts always have a status of 1
+		-- so we will increment the new artifacttypes sums
+		--
+		IF OLD.status_id=3 THEN
+			-- No need to decrement counters on old tracker
+		ELSE 
+			IF OLD.status_id=2 THEN
+				UPDATE artifact_counts_agg SET count=count-1 
+					WHERE group_artifact_id=OLD.group_artifact_id;
+			ELSE 
+				IF OLD.status_id=1 THEN
+					UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1 
+						WHERE group_artifact_id=OLD.group_artifact_id;
+				END IF;
+			END IF;
+		END IF;
+
+		IF NEW.status_id=3 THEN
+			--DO NOTHING
+		ELSE
+			IF NEW.status_id=2 THEN
+					UPDATE artifact_counts_agg SET count=count+1 
+						WHERE group_artifact_id=NEW.group_artifact_id;
+			ELSE
+				IF NEW.status_id=1 THEN
+					UPDATE artifact_counts_agg SET count=count+1, open_count=open_count+1 
+						WHERE group_artifact_id=NEW.group_artifact_id;
+				END IF;
+			END IF;
+		END IF;
+	ELSE
+		--
+		-- just need to evaluate the status flag and 
+		-- increment/decrement the counter as necessary
+		--
+		IF NEW.status_id <> OLD.status_id THEN
+			IF NEW.status_id = 1 THEN
+				IF OLD.status_id=2 THEN
+					UPDATE artifact_counts_agg SET open_count=open_count+1 
+						WHERE group_artifact_id=NEW.group_artifact_id;
+				ELSE 
+					IF OLD.status_id=3 THEN
+						UPDATE artifact_counts_agg SET open_count=open_count+1, count=count+1 
+							WHERE group_artifact_id=NEW.group_artifact_id;
+					END IF;
+				END IF;
+			ELSE
+				IF NEW.status_id = 2 THEN
+					IF OLD.status_id=1 THEN
+						UPDATE artifact_counts_agg SET open_count=open_count-1 
+							WHERE group_artifact_id=NEW.group_artifact_id;
+					ELSE
+						IF OLD.status_id=3 THEN
+							UPDATE artifact_counts_agg SET count=count+1 
+								WHERE group_artifact_id=NEW.group_artifact_id;
+						END IF;
+					END IF;
+				ELSE 
+					IF NEW.status_id = 3 THEN
+						IF OLD.status_id=2 THEN
+							UPDATE artifact_counts_agg SET count=count-1 
+								WHERE group_artifact_id=NEW.group_artifact_id;
+						ELSE
+							IF OLD.status_id=1 THEN
+								UPDATE artifact_counts_agg SET open_count=open_count-1,count=count-1 
+									WHERE group_artifact_id=NEW.group_artifact_id;
+							END IF;
+						END IF;
+					END IF;
+				END IF;
+			END IF;
+		END IF;	
+	END IF;
+	RETURN NEW;
 END;
 ' LANGUAGE 'plpgsql';
 
@@ -1306,32 +1334,6 @@ CREATE TABLE "stats_site" (
 	"total_users" integer,
 	"new_users" integer,
 	"new_projects" integer
-);
-
-
-CREATE TABLE "activity_log_old_old" (
-	"day" integer DEFAULT '0' NOT NULL,
-	"hour" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"ver" double precision DEFAULT '0.00' NOT NULL,
-	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"time" integer DEFAULT '0' NOT NULL,
-	"page" text,
-	"type" integer DEFAULT '0' NOT NULL
-);
-
-
-CREATE TABLE "activity_log_old" (
-	"day" integer DEFAULT '0' NOT NULL,
-	"hour" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"ver" double precision DEFAULT '0.00' NOT NULL,
-	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"time" integer DEFAULT '0' NOT NULL,
-	"page" text,
-	"type" integer DEFAULT '0' NOT NULL
 );
 
 
@@ -1476,7 +1478,8 @@ CREATE SEQUENCE "themes_theme_id_seq" start 1 increment 1 maxvalue 9223372036854
 CREATE TABLE "themes" (
 	"theme_id" integer DEFAULT nextval('"themes_theme_id_seq"'::text) NOT NULL,
 	"dirname" character varying(80),
-	"fullname" character varying(80)
+	"fullname" character varying(80),
+	"enabled" boolean DEFAULT 't'::bool
 );
 
 
@@ -1652,34 +1655,34 @@ END;
 
 CREATE FUNCTION "projtask_insert_depend" () RETURNS opaque AS '
 DECLARE
-    dependon RECORD;
-    delta INTEGER;
+        dependon RECORD;
+        delta INTEGER;
 BEGIN
-    --
-    --  ENFORCE START/END DATE logic
-    --
-    IF NEW.start_date >= NEW.end_date THEN
-        RAISE EXCEPTION ''START DATE CANNOT BE AFTER END DATE'';
-    END IF;
-    --
-    --    First make sure we start on or after end_date of tasks
-    --    that we depend on
-    --
-    FOR dependon IN SELECT * FROM project_dependon_vw
-                WHERE project_task_id=NEW.project_task_id LOOP
         --
-        --    See if the task we are dependon on
-        --    ends after we are supposed to start
+        --  ENFORCE START/END DATE logic
         --
-        IF dependon.end_date > NEW.start_date THEN
-            delta := dependon.end_date-NEW.start_date;
-            RAISE NOTICE ''Bumping Back: % Delta: % '',NEW.project_task_id,delta;
-            NEW.start_date := NEW.start_date+delta;
-            NEW.end_date := NEW.end_date+delta;
+        IF NEW.start_date > NEW.end_date THEN
+                RAISE EXCEPTION ''START DATE CANNOT BE AFTER END DATE'';
         END IF;
+        --
+        --        First make sure we start on or after end_date of tasks
+        --        that we depend on
+        --
+        FOR dependon IN SELECT * FROM project_dependon_vw
+                                WHERE project_task_id=NEW.project_task_id LOOP
+                --
+                --        See if the task we are dependon on
+                --        ends after we are supposed to start
+                --
+                IF dependon.end_date > NEW.start_date THEN
+                        delta := dependon.end_date-NEW.start_date;
+                        RAISE NOTICE ''Bumping Back: % Delta: % '',NEW.project_task_id,delta;
+                        NEW.start_date := NEW.start_date+delta;
+                        NEW.end_date := NEW.end_date+delta;
+                END IF;
 
-    END LOOP;
-    RETURN NEW;
+        END LOOP;
+        RETURN NEW;
 END;
 ' LANGUAGE 'plpgsql';
 
@@ -1691,93 +1694,6 @@ CREATE VIEW "artifact_group_list_vw" as SELECT agl.group_artifact_id, agl.group_
 
 
 CREATE VIEW "project_task_vw" as SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
-
-
-CREATE FUNCTION "project_sums" () RETURNS opaque AS '
-	DECLARE
-		num integer;
-		curr_group integer;
-	BEGIN
-		---
-		--- Get number of things this group has now
-		---
-		IF TG_ARGV[0]=''surv'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM surveys WHERE OLD.group_id=group_id AND is_active=1;
-				curr_group := OLD.group_id;
-			ELSE
-				SELECT INTO num count(*) FROM surveys WHERE NEW.group_id=group_id AND is_active=1;
-				curr_group := NEW.group_id;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''mail'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM mail_group_list WHERE OLD.group_id=group_id AND is_public=1;
-				curr_group := OLD.group_id;
-			ELSE
-				SELECT INTO num count(*) FROM mail_group_list WHERE NEW.group_id=group_id AND is_public=1;
-				curr_group := NEW.group_id;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''fmsg'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO curr_group group_id FROM forum_group_list WHERE OLD.group_forum_id=group_forum_id;
-				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
-			ELSE
-				SELECT INTO curr_group group_id FROM forum_group_list WHERE NEW.group_forum_id=group_forum_id;
-				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''fora'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM forum_group_list WHERE OLD.group_id=group_id AND is_public=1;
-				curr_group = OLD.group_id;
-				--- also need to update message count
-				DELETE FROM project_sums_agg WHERE group_id=OLD.group_id AND type=''fmsg'';
-				INSERT INTO project_sums_agg
-					SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
-					FROM forum, forum_group_list
-					WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
-			ELSE
-				SELECT INTO num count(*) FROM forum_group_list WHERE NEW.group_id=group_id AND is_public=1;
-				curr_group = NEW.group_id;
-				--- fora do not get deleted... they get their status set to 9
-				IF NEW.is_public=9 THEN
-					--- also need to update message count
-					DELETE FROM project_sums_agg WHERE group_id=NEW.group_id AND type=''fmsg'';
-					INSERT INTO project_sums_agg
-						SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
-						FROM forum, forum_group_list
-						WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
-				END IF;
-			END IF;
-		END IF;
-		---
-		--- See if this group already has a row in project_sums_agg for these things
-		---
-		PERFORM * FROM project_sums_agg WHERE curr_group=group_id AND type=TG_ARGV[0];
-
-		IF NOT FOUND THEN
-			---
-			--- Create row for this group
-			---
-			INSERT INTO project_sums_agg
-				VALUES (curr_group, TG_ARGV[0], num);
-		ELSE
-			---
-			--- Update count
-			---
-			UPDATE project_sums_agg SET count=num
-			WHERE curr_group=group_id AND type=TG_ARGV[0];
-		END IF;
-
-		IF TG_OP=''DELETE'' THEN
-			RETURN OLD;
-		ELSE
-			RETURN NEW;
-		END IF;
-	END;
-' LANGUAGE 'plpgsql';
 
 
 CREATE FUNCTION "frs_dlstats_filetotal_insert_ag" () RETURNS opaque AS '
@@ -1840,6 +1756,94 @@ CREATE TABLE "user_plugin" (
 	"plugin_id" integer,
 	Constraint "user_plugin_pkey" Primary Key ("user_plugin_id")
 );
+
+
+CREATE FUNCTION "project_sums" () RETURNS opaque AS '
+	DECLARE
+		num integer;
+		curr_group integer;
+		found integer;
+	BEGIN
+		---
+		--- Get number of things this group has now
+		---
+		IF TG_ARGV[0]=''surv'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM surveys WHERE OLD.group_id=group_id AND is_active=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM surveys WHERE NEW.group_id=group_id AND is_active=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''mail'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM mail_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM mail_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fmsg'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE OLD.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			ELSE
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE NEW.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fora'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM forum_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group = OLD.group_id;
+				--- also need to update message count
+				DELETE FROM project_sums_agg WHERE group_id=OLD.group_id AND type=''fmsg'';
+				INSERT INTO project_sums_agg
+					SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
+					FROM forum, forum_group_list
+					WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
+			ELSE
+				SELECT INTO num count(*) FROM forum_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group = NEW.group_id;
+				--- fora do not get deleted... they get their status set to 9
+				IF NEW.is_public=9 THEN
+					--- also need to update message count
+					DELETE FROM project_sums_agg WHERE group_id=NEW.group_id AND type=''fmsg'';
+					INSERT INTO project_sums_agg
+						SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
+						FROM forum, forum_group_list
+						WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
+				END IF;
+			END IF;
+		END IF;
+		---
+		--- See if this group already has a row in project_sums_agg for these things
+		---
+		SELECT INTO found count(group_id) FROM project_sums_agg WHERE curr_group=group_id AND type=TG_ARGV[0];
+
+		IF found=0 THEN
+			---
+			--- Create row for this group
+			---
+			INSERT INTO project_sums_agg
+				VALUES (curr_group, TG_ARGV[0], num);
+		ELSE
+			---
+			--- Update count
+			---
+			UPDATE project_sums_agg SET count=num
+			WHERE curr_group=group_id AND type=TG_ARGV[0];
+		END IF;
+
+		IF TG_OP=''DELETE'' THEN
+			RETURN OLD;
+		ELSE
+			RETURN NEW;
+		END IF;
+	END;
+' LANGUAGE 'plpgsql';
 
 
 
@@ -1947,10 +1951,10 @@ COPY "group_history" FROM stdin;
 
 
 COPY "groups" FROM stdin;
-1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
 2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
 3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
+1	Master Group	\N	0	A	gforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
 \.
 
 
@@ -2597,14 +2601,6 @@ COPY "stats_site" FROM stdin;
 \.
 
 
-COPY "activity_log_old_old" FROM stdin;
-\.
-
-
-COPY "activity_log_old" FROM stdin;
-\.
-
-
 COPY "activity_log" FROM stdin;
 \.
 
@@ -2646,8 +2642,8 @@ COPY "group_cvs_history" FROM stdin;
 
 
 COPY "themes" FROM stdin;
-1	gforge	Default Theme
-2	osx	OSX
+1	gforge	Default Theme	t
+2	osx	OSX	t
 \.
 
 
@@ -3808,18 +3804,6 @@ CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER DELETE ON "groups"  FROM "do
 CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER UPDATE ON "groups"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
 
-CREATE TRIGGER "surveys_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "surveys"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('surv');
-
-
-CREATE TRIGGER "mail_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "mail_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('mail');
-
-
-CREATE TRIGGER "fmsg_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fmsg');
-
-
-CREATE TRIGGER "fora_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fora');
-
-
 CREATE TRIGGER "frs_file_insert_trig" AFTER INSERT ON "frs_file"  FOR EACH ROW EXECUTE PROCEDURE "frs_dlstats_filetotal_insert_ag" ();
 
 
@@ -3857,6 +3841,18 @@ CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER DELETE ON "plugins"  
 
 
 CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER UPDATE ON "plugins"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE TRIGGER "surveys_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "surveys"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('surv');
+
+
+CREATE TRIGGER "mail_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "mail_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('mail');
+
+
+CREATE TRIGGER "fmsg_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fmsg');
+
+
+CREATE TRIGGER "fora_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fora');
 
 
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
@@ -4098,7 +4094,7 @@ SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, false);
 SELECT setval ('"group_cvs_history_id_seq"', 1, false);
 
 
-SELECT setval ('"themes_theme_id_seq"', 2, true);
+SELECT setval ('"themes_theme_id_seq"', 3, true);
 
 
 SELECT setval ('"supported_langu_language_id_seq"', 24, true);
