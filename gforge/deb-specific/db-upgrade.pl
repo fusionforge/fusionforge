@@ -1614,11 +1614,11 @@ END;
     }
 
     $version = &get_db_version ;
-    $target = "3.3.0-2+3" ;
+    $target = "3.3.0-2+4" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041001.sql") ;
+        &debug ("Upgrading with 20040914.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041001.sql") } ;
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040914.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1634,11 +1634,11 @@ END;
     }
 
     $version = &get_db_version ;
-    $target = "3.3.0-2+4" ;
+    $target = "3.3.0-2+4+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040914.sql") ;
+        &debug ("Upgrading with 20041001.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040914.sql") } ;
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041001.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
