@@ -816,6 +816,8 @@ class ProjectTask extends Error {
 				return false;
 			} else {
 				if (!$this->fetchData($this->getID())) {
+					$this->setError('Error On Update: '.db_error());
+					db_rollback();
 					return false;
 				} else {
 					$this->sendNotice();
