@@ -129,11 +129,12 @@ function html_image($src,$width,$height,$args,$display=1) {
 }
 
 /**
- * html_get_language_popup() - Pop up box of supported languages
+ * html_get_language_popup() - Pop up box of supported languages.
  *
- * @param		object	BaseLanguage object
- * @param		string	The title of the popup box
- * @param		string	Which element of the box is to be selected
+ * @param		object	BaseLanguage object.
+ * @param		string	The title of the popup box.
+ * @param		string	Which element of the box is to be selected.
+ * @return	string	The html select box.
  */
 function html_get_language_popup ($Language,$title='language_id',$selected='xzxzxz') {
 	$res=$Language->getLanguages();
@@ -141,11 +142,24 @@ function html_get_language_popup ($Language,$title='language_id',$selected='xzxz
 }
 
 /**
- * html_get_timezone_popup() - Pop up box of supported Timezones
- * Assumes you have included Timezones array file
+ * html_get_ccode_popup() - Pop up box of supported country_codes.
  *
- * @param		string	The title of the popup box
- * @param		string	Which element of the box is to be selected
+ * @param		string	The title of the popup box.
+ * @param		string	Which element of the box is to be selected.
+ * @return	string	The html select box.
+ */
+function html_get_ccode_popup ($title='ccode',$selected='xzxz') {
+	$res=db_query("SELECT ccode,country_name FROM country_code ORDER BY ccode");
+	return html_build_select_box ($res,$title,$selected,false);
+}
+
+/**
+ * html_get_timezone_popup() - Pop up box of supported Timezones.
+ * Assumes you have included Timezones array file.
+ *
+ * @param		string	The title of the popup box.
+ * @param		string	Which element of the box is to be selected.
+ * @return	string	The html select box.
  */
 function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 	global $TZs;
@@ -156,12 +170,35 @@ function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 	return html_build_select_box_from_arrays ($TZs,$TZs,$title,$selected,false);
 }
 
+
+/**
+ * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
+ *
+ * @param	array	An array of items to use.
+ * @param	string	The name you want assigned to this form element.
+ * @param	string	The value of the item that should be checked.
+ * @param	boolean	Whether we should swap the keys / names.
+ * @param	bool	Whether or not to show the '100 row'.
+ * @param	string	What to call the '100 row' defaults to none.
+ */
+function html_build_select_box_from_assoc ($arr,$select_name,$checked_val='xzxz',$swap=false,$show_100=false,$text_100='None') {
+	if ($swap) {
+		$keys=array_values($arr);
+		$vals=array_keys($arr);
+	} else {
+		$vals=array_values($arr);
+		$keys=array_keys($arr);
+	}
+	return html_build_select_box_from_arrays ($keys,$vals,$select_name,$checked_val,$show_100,$text_100);
+}
+
 /**
  * html_build_select_box_from_array() - Takes one array, with the first array being the "id"
  * or value and the array being the text you want displayed.
  *
- * @param		string	The name you want assigned to this form element
- * @param		string	The value of the item that should be checked
+ * @param	array	An array of items to use.
+ * @param	string	The name you want assigned to this form element.
+ * @param	string	The value of the item that should be checked.
  */
 function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz',$samevals = 0) {
 	$return .= '
