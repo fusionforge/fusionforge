@@ -82,7 +82,7 @@ function osdn_print_navbar() {
   if ($GLOBALS['sys_show_banner_1']) {
     osdn_print_navbar_1 () ;
   }
-  if ($GLOBALS['sys_show_banner_1']) {
+  if ($GLOBALS['sys_show_banner_2']) {
     osdn_print_navbar_2 () ;
   }
 }
@@ -127,11 +127,11 @@ function osdn_print_navbar_2() {
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>' ;
-  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
+  print '<td WIDTH="20%"></td>';
 
-  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" width="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
+  print '<td WIDTH="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
 
-  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
+  print '<td WIDTH="20%"></td>';
 
 	print '</tr>
 </table>
