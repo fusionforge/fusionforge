@@ -14,6 +14,8 @@
 #  *		adding localization strings for forums
 #	* 2003-01-21 rspisser <reinhard@spisser.it>
 #	*		adding localization strings for my, diary, project_homepage
+#	* 2003-01-25 rspisser <reinhard@spisser.it>
+#  *		adding localization strings for pm
 #  */
 
 
@@ -480,7 +482,7 @@ news_utils	submit	Invia per
 news_utils	readmore	<NOBR>Leggi/Scrivi messaggio</NOBR>
 pm	title	Gestore attivit&agrave; Sottoprogetti e Task
 pm	intro	Selezionare un sottoprogetto e puoi visualizzare/modificare e aggiungere attivit&agrave.
-pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project will have to set up projects using the admin page</FONT></B>
+pm	noprj	<H1>Nessun sottoprogetto trovato</H1><P><B>Non &egrave; stato alcun sottoprogetto oppure non sei autorizzato a vedere alcuni sottoprogetti.<P><FONT COLOR=RED>L'amministratore del progetto dovr&agrave; creare dei sottoprogetti utilizzando la funzione di amministrazione</FONT></B>
 pm	category	Categoria
 pm	start_date	Data inizio
 pm	end_date	Data fine
@@ -494,7 +496,7 @@ pm	hours	Ore stimate
 pm	status	Stato
 pm	view_calendar	Visualizza calendario
 pm	date_note		La data inizio e fine dell'attivit&agrave; devono essere superiori alle date di inizio delle attivit&agrave; dalle quali dipende <br/>altrimenti il sistema modificher&agrave; automaticamente le date.
-pm	task_id	Id Task
+pm	task_id	Id attivit&agrave;
 pm	dependent_note			Scegliere solo attivit&agrave; che devono essere completate prima che questa attivit&agrave; parte.
 pm	unassigned	Non assegn.
 pm	any	Tutti
@@ -505,9 +507,42 @@ pm_admin	section	$1
 pm_admin	title	Task Manager: Administration
 pm_admin_change_status	section	Task Manager Administration
 pm_admin_change_status	title	Update Information
-pm_admin_projects	section	Task Manager Administration
-pm_admin_projects	title	Add Subprojects
 pm_browse_custom	section	Task Manager
+pm_admin_projects	section	Amministrazione attivit&agrave;
+pm_admin_projects	title	Aggiungi sottoprogetti
+pm_admin_projects	project_inserted	Progetto inserito
+pm_admin_projects	add_categories_title	Aggiungi categorie
+pm_admin_projects	project_inserted	Progetto inserito
+pm_admin_projects	category_inserted	Categoria inserita
+pm_admin_projects	category_updated	Categoria aggiornata
+pm_admin_projects	updated_successfully	Updated Successfully
+pm_admin_projects	add_categories	Aggiungi categorie a
+pm_admin_projects	id	Id
+pm_admin_projects	no_categories	Nessuna categoria definita
+pm_admin_projects	category_name	Nuovo nome categoria
+pm_admin_projects	category_note	Una volta inserita una categoria non pu&ograve; pi&ugrave; essere cancellata.
+pm_admin_projects	add_categories	Aggiungi categorie
+pm_admin_projects	modify_category	Modifica una categoria in
+pm_admin_projects	category_name	Nome categoria
+pm_admin_projects	category_note2	Non &egrave; consigliato cambiare la categoria perch&egrave; altri elementi dipendono da questa categoria. Quando si cambia una categoria, tutti gli elementi relazionati verranno assegnati automaticamente al nuovo nome della nuova categoria.</font></strong>
+pm_admin_projects	add_subprojects	Aggiungi progetti
+pm_admin_projects	existing_subprojects	Sottoprogetti esistenti
+pm_admin_projects	no_subprojects	Nessun sottoprogetto in questo gruppo
+pm_admin_projects	projects_intro	Aggiungi un nuovo progetto. <strong>Questo &egrave; diverso che aggiungere una attivit&agrave; al progetto.</strong>
+pm_admin_projects	is_public	Progetto pubblico?
+pm_admin_projects	project_name	Nome progetto
+pm_admin_projects	description	Descrizione
+pm_admin_projects	send_updates	Invia tutti gli aggiornamenti a
+pm_admin_projects	change_project_title	Cambia stato di gestore attivit&agrave;
+pm_admin_projects	change_project_intro	Qui puoi cambiare un progetto. Nota che progetti privati possono essere visualizzati dai membri del progetto, ma non dagli altri.<p>
+pm_admin_projects	add_edit_categories	Aggiungi/modifica categorie
+pm_admin_projects	admin_title	Amministrazione Progetto/Attivit&agrave;
+pm_admin_projects	add_project	Aggiungi un progetto
+pm_admin_projects	add_project_intro	Aggiungi un progetto, che contiene un insieme di attivit&agrave. Questo &egrave; diverso che aggiungere una attivit&agrave; al progetto
+pm_admin_projects	no_projects_found	<h2>Nessun progetto trovato</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.
+pm_admin_projects	edit_update	Modifica/aggiorna progetto
+pm_admin_projects	project_title	Titolo
+pm_admin_projects	add_categories_to	Aggiungi categorie a
 pm_browse_custom	title	Browse Custom Tasks
 pm_browse_my	section	Project $1 Task Manager
 pm_browse_my	title	Browse My Tasks
@@ -524,8 +559,23 @@ pm_modtask	title	Modifica attivit&agrave;
 pm_modtask	submitted_by	Inserito da
 pm_modtask	original_comment	Commento originale
 pm_modtask	add_comment	Aggiungi un commento
-pm_reporting	section	Task Manager
-pm_reporting	title	Task Reporting System
+pm_reporting	title	Sistemi di reportistica per le attivit&agrave;
+pm_reporting	aging_report	Aging Report
+pm_reporting	by_tech	Report per tecnico
+pm_reporting	by_subproject	Report per sottoprogetto
+pm_reporting	average_duration	Average duration for closed tasks (days)
+pm_reporting	started_tasks	Numero di attivit&agrave; iniziate
+pm_reporting	not_completed	Numero di attivit&agrave; non ancora completate
+pm_reporting	tasks_by_category	Attivit&agrave; per categoria
+pm_reporting	open_tasks_by_category	Attivit&agrave; aperte per categoria
+pm_reporting	all_tasks_by_category	All Tasks By Category
+pm_reporting	not_completed	Number of Tasks Still Not Completed
+pm_reporting	started_tasks	Number of Tasks Started
+pm_reporting	average_duration	Average Duration For Closed Tasks (days)
+pm_reporting	tasks_by_technician	Tasks By Technician
+pm_reporting	open_tasks_by_technician	Open Tasks By Technician
+pm_reporting	all_tasks_by_technician	All Tasks By Technician
+pm_reporting	report_note	Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
 pm_include_grouphtml	project	Progetto
 pm_include_grouphtml	add_task	Aggiungi attivit&agrave;
 pm_include_grouphtml	browse_task	Elenca attivit&agrave;
@@ -561,6 +611,16 @@ pm_ganttpage	sort_on	Ordina per
 pm_ganttpage	resolution	Risoluzione
 pm_ganttpage	size	Dimensioni
 pm_ganttpage	assignee	Assegnatario
+pm_projectgroup	error_min_name_lenght	Il titolo deve essere almeno di 5 caratteri
+pm_projectgroup	error_min_desc_lenght	La descrizione del documento deve essere almeno di 10 caratteri
+pm_projectgroup	none_found	No ProjectGroups Found
+pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
+pm_projecttask	circular_dependency	&Egrave; stata rilevata una dipendenza circolare
+pm_projecttask	mail_notice			L'attività # $1 è stata aggiornata\n\nProgetto: $2\nSottoprogetto: $3\nSommario: $4\nPerc. Completo: $5\nStato: $6\n\nDescrizione: $7
+pm_projecttask	mail_followups_title	\n\\nCommenti
+pm_projecttask	mail_followups_body	\nData: $1\nDa: $2\n\nCommento:\n$3
+pm_projecttask	mail_followups_footer	Per maggiori informazioni, collegati a:
+pm_projecttask	mail_followups_subject	Attività #
 project_home	title	Informazioni progetto
 project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
 project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
@@ -722,3 +782,22 @@ searchbox	search	Ricerca
 searchbox	forum	Questo forum
 searchbox	task	Attivit&agrave;
 survey	survey_not_found	Sondaggio non trovato
+include_html	no_change	Nessun cambio
+include_html	none	Nessuna
+include_html	priority_medium	Media
+include_html	priority_lowest	Bassa
+include_html	priority_highest	Alta
+include_toolreport	last_days	Ultimi giorni
+include_toolreport	last_weeks	Ultime settimane
+include_toolreport	last_months	Ultimi mesi
+include_toolreport	last_years	Ultimi anni
+include_toolreport	project_lifespan	Durata del progetto
+include_toolreport	show	Visualizza
+source	show_source	Visualizza sorgente
+source	source_of	Sorgente di  $1
+source	missing_file	Argomento di file mancante
+source	missing_file_text	Deve essere specificato un nome file
+source	invalid_argument	Argomento file non valido
+source	invalid_argument_text	L'argomento per il file non &egrave; valido.
+source	file_not_found	File non trovato
+source	file_not_found_text	Il file specificato non &egrave; disponibile.

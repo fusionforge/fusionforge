@@ -72,7 +72,8 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	global $what;
 	global $period;
 	global $span;
-
+	global $Language;
+	
 	print "<form method=\"GET\" action=\"$PHP_SELF#b\">";
 
 	print $html;
@@ -82,7 +83,13 @@ function reports_header($group_id, $vals, $titles, $html='') {
 
 	$periods=array('day'=>'Last day','week'=>'Last week');
 	$vals=array('day','week','month','year','lifespan');
-	$texts=array('Last day(s)','Last week(s)','Last month(s)','Last year(s)','Project lifespan');
+	$texts=array(
+		$Language->getText('include_toolreport','last_days'),
+		$Language->getText('include_toolreport','last_weeks'),
+		$Language->getText('include_toolreport','last_months'),
+		$Language->getText('include_toolreport','last_years'),
+		$Language->getText('include_toolreport','project_lifespan'));
+
 	if (!$period) $period="lifespan";
 
 	print " for ";
@@ -93,7 +100,7 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	print html_build_select_box_from_arrays ($vals,$texts,'period',$period,false);
 
 	print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\" />";
-	print ' <input type="submit" value="Show" />';
+	print ' <input type="submit" value="'.$Language->getText('include_toolreport','show').'" />';
 	print "</form>\n";
 }
 

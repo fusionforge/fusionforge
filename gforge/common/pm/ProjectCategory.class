@@ -80,17 +80,19 @@ class ProjectCategory extends Error {
 	 *  @return	boolean success.
 	 */
 	function create($name) {
+
+		global $Language;
 		//
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError('ProjectCategory: name and assignee are Required');
+			$this->setError($Language->getText('pm_projectcategory','required_fields'));
 			return false;
 		}
 
 		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isPMAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		$sql="INSERT INTO project_category (group_project_id,category_name) 
@@ -169,11 +171,11 @@ class ProjectCategory extends Error {
 	function update($name) {
 		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isPMAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!$name) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}   
 		$sql="UPDATE project_category 

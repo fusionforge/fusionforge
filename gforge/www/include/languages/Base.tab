@@ -652,12 +652,45 @@ pm	dependent_note			You should choose only tasks which must be completed before 
 pm	unassigned	Unassigned
 pm	any	Any
 pm_addtask	title	Add a new Task
-pm_admin	section	$1
 pm_admin	title	Task Manager: Administration
 pm_admin_change_status	section	Task Manager Administration
 pm_admin_change_status	title	Update Information
 pm_admin_projects	section	Task Manager Administration
 pm_admin_projects	title	Add Subprojects
+pm_admin_projects	project_inserted	Project Inserted
+pm_admin_projects	add_categories_title	Add Categories
+pm_admin_projects	project_inserted	Project Inserted 
+pm_admin_projects	category_inserted	Category Inserted
+pm_admin_projects	category_updated	Category Updated
+pm_admin_projects	updated_successfully	Updated Successfully ";
+pm_admin_projects	add_categories_title	Add Categories'
+pm_admin_projects	add_categories	Add Categories to
+pm_admin_projects	id	Id
+pm_admin_projects	no_categories	No categories defined
+pm_admin_projects	category_name	New Category Name
+pm_admin_projects	category_note	Once you add a category, it cannot be deleted
+pm_admin_projects	add_categories	Add Categories
+pm_admin_projects	modify_category	Modify an Category in
+pm_admin_projects	category_name	Category Name
+pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
+pm_admin_projects	add_subprojects	Add Projects
+pm_admin_projects	existing_subprojects	Existing Subprojects
+pm_admin_projects	no_subprojects	No Subprojects in this group	
+pm_admin_projects	projects_intro	Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>
+pm_admin_projects	is_public	Is Public?	
+pm_admin_projects	project_name	New Project Name
+pm_admin_projects	description	Description
+pm_admin_projects	send_updates	Send All Updates To
+pm_admin_projects	change_project_title	Change Project/Task Manager Status
+pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.<p>
+pm_admin_projects	add_edit_categories	Add/Edit Categories
+pm_admin_projects	admin_title	Project/Task Manager Administration
+pm_admin_projects	add_project	Add A Project
+pm_admin_projects	add_project_intro	Add a project, which can contain a set of tasks. This is different than creating a new task.
+pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.
+pm_admin_projects	edit_update	Edit/Update Project
+pm_admin_projects	project_title	Title
+pm_admin_projects	add_categories_to	Add Categories To
 pm_browse_custom	section	Task Manager
 pm_browse_custom	title	Browse Custom Tasks
 pm_browse_my	section	Project $1 Task Manager
@@ -677,8 +710,33 @@ pm_modtask	original_comment	Original Comment
 pm_modtask	add_comment	Add A Comment
 pm_modtask	assignee	Assignee
 pm_modtask	sort_on	Sort On
-pm_reporting	section	Task Manager
 pm_reporting	title	Task Reporting System
+pm_reporting	aging_report	Aging Report
+pm_reporting	by_tech	Report by Technician
+pm_reporting	by_subproject	Report by Subproject
+pm_reporting	average_duration	Average duration for closed tasks (days)
+pm_reporting	started_tasks	Number of started tasks
+pm_reporting	not_completed	Number of tasks still not completed
+pm_reporting	tasks_by_category	Tasks By Category
+pm_reporting	open_tasks_by_category	Open Tasks By Category
+pm_reporting	all_tasks_by_category	All Tasks By Category
+pm_reporting	not_completed	Number of Tasks Still Not Completed
+pm_reporting	started_tasks	Number of Tasks Started
+pm_reporting	average_duration	Average Duration For Closed Tasks (days)
+pm_reporting	tasks_by_technician	Tasks By Technician
+pm_reporting	open_tasks_by_technician	Open Tasks By Technician
+pm_reporting	all_tasks_by_technician	All Tasks By Technician
+pm_reporting	report_note	Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
+pm_projectgroup	error_min_name_lenght	Title Must Be At Least 5 Characters
+pm_projectgroup	error_min_desc_lenght	Document Description Must Be At Least 10 Characters
+pm_projectgroup	none_found	No ProjectGroups Found
+pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
+pm_projecttask	circular_dependency	Circular Dependency Detected'
+pm_projecttask	mail_notice			Task # $1 has been updated\n\nProject: $2\nSubproject: $3\nSummary: $4\nComplete: $5\nStatus: $6\n\nDescription: $7
+pm_projecttask	mail_followups_title	\n\nFollow-Ups
+pm_projecttask	mail_followups_body	\nDate: $1\nBy: $2\n\nComment:\n$3
+pm_projecttask	mail_followups_footer	For more info, visit:
+pm_projecttask	mail_followups_subject	Task #
 pm_include_grouphtml	project	Project
 pm_include_grouphtml	add_task	Add Task
 pm_include_grouphtml	browse_task	Browse Tasks
@@ -790,8 +848,6 @@ project_filemodule_monitor	stop_monitor_title	Monitoring stopped
 project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
 project_filemodule_monitor	start_monitor_title	Monitoring started
 project_filemodule_monitor	start_monitor_body	Monitoring Has Been Started
-
-
 projects	section	Project: $1
 projects	title	Summary
 register	title	New Project Registration
@@ -1017,3 +1073,22 @@ calendar	invaliddate	Invalid date
 calendar	invaliddateexplain	$1 is an invalid date.
 calendar	invalidtype	Invalid type
 calendar	invalidtypeexplain	Type is invalid.
+include_html	no_change	No Change
+include_html	none	None
+include_html	priority_medium	Medium
+include_html	priority_lowest	Lowest
+include_html	priority_highest	Highest
+include_toolreport	last_days	Last day(s)
+include_toolreport	last_weeks	Last week(s)
+include_toolreport	last_months	Last month(s)
+include_toolreport	last_years	Last year(s)
+include_toolreport	project_lifespan	Project lifespan
+include_toolreport	show	Show
+source	show_source	Show source
+source	source_of	Source of $1
+source	missing_file	Missing File Argument
+source	missing_file_text	A file must be specified for this page.
+source	invalid_argument	Invalid File Argument
+source	invalid_argument_text	The file argument is invalid.
+source	file_not_found	File Not Found
+source	file_not_found_text	Cannot find specified file to display.

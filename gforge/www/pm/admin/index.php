@@ -57,7 +57,7 @@ if ($post_changes) {
 		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
-			$feedback .= " project Inserted ";
+			$feedback .= $Language->getText('pm_admin_projects','project_inserted');
 		}
 	} else if ($add_cat) {
 		/*
@@ -77,7 +77,7 @@ if ($post_changes) {
 			if (!$pc->create($name)) {
 				exit_error('Error','Error inserting: '.$pc->getErrorMessage());
 			} else {
-				$feedback .= ' Category Inserted ';
+				$feedback .= $Language->getText('pm_admin_projects','category_inserted');
 			}
 		}
 
@@ -101,7 +101,7 @@ if ($post_changes) {
 			if (!$pc->update($name)) {
 				exit_error('Error','Error updating: '.$pc->getErrorMessage());
 			} else {
-				$feedback .= ' Category Updated ';
+				$feedback .= $Language->getText('pm_admin_projects','category_updated');
 				$update_cat=false;
 				$add_cat=true;
 			}
@@ -117,7 +117,7 @@ if ($post_changes) {
 		if (!$pg->update($project_name,$description,$is_public,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
-			$feedback .= " Updated Successfully ";
+			$feedback .= $Language->getText('general','update_successful');
 		}
 	}
 }
@@ -135,8 +135,8 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	pm_header(array ('title'=>'Add Categories','pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
-	echo "<h1>Add Categories to: ". $pg->getName() ."</h1>";
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories_title'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
+	echo "<h1>".$Language->getText('pm_admin_projects','add_categories_to').": ". $pg->getName() ."</h1>";
 
 	/*
 		List of possible categories for this ArtifactType
@@ -146,8 +146,8 @@ if ($add_cat && $group_project_id) {
 	$rows=db_numrows($result);
 	if ($result && $rows > 0) {
 		$title_arr=array();
-		$title_arr[]='ID';
-		$title_arr[]='Title';
+		$title_arr[]=$Language->getText('pm_admin_projects','id');
+		$title_arr[]=$Language->getText('pm_admin_projects','project_title');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -162,7 +162,7 @@ if ($add_cat && $group_project_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<h1>No categories defined</h1>";
+		echo "\n<h1>".$Language->getText('pm_admin_projects','no_categories')."</h1>";
 	}
 
 	?>
@@ -170,12 +170,12 @@ if ($add_cat && $group_project_id) {
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_cat" value="y">
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
-	<strong>New Category Name:</strong><br />
+	<strong><?php echo $Language->getText('pm_admin_projects','category_name') ?>:</strong><br />
 	<input type="text" name="name" value="" size="15" maxlength="30"><br />
 	<p>
-	<strong><font COLOR="RED">Once you add a category, it cannot be deleted</font></strong>
+	<strong><font COLOR="RED"><?php echo $Language->getText('pm_admin_projects','category_note') ?></font></strong>
 	<p>
-	<input type="SUBMIT" name="post_changes" value="SUBMIT">
+	<input type="SUBMIT" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>">
 	</form>
 	<?php
 
@@ -196,10 +196,10 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	pm_header(array ('title'=>'Add Categories','pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
 
 	echo '
-		<h1>Modify an Category in: '. $pg->getName() .'</h1>';
+		<h1>'.$Language->getText('pm_admin_projects','modify_category').': '. $pg->getName() .'</h1>';
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -214,14 +214,12 @@ if ($add_cat && $group_project_id) {
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>">
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
 		<p>
-		<strong>Category Name:</strong><br />
+		<strong><?php echo $Language->getText('pm_admin_projects','category_name')?>:</strong><br />
 		<input type="text" name="name" value="<?php echo $ac->getName(); ?>">
 		<p>
-		<strong><font COLOR="RED">It is not recommended that you change the artifact
-			category name because other things are dependent upon it. When you change
-			the category name, all related items will be changed to the new name.</font></strong>
+		<strong><font COLOR="RED"><?php echo $Language->getText('pm_admin_projects','category_note2')?></font></strong>
 		<p>
-		<input type="SUBMIT" name="post_changes" value="SUBMIT">
+		<input type="SUBMIT" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>">
 		</form>
 		<?php
 	}
@@ -233,7 +231,7 @@ if ($add_cat && $group_project_id) {
 		Show categories and blank row
 	*/
 
-	pm_header(array ('title'=>'Add Projects','pagename'=>'pm_admin_projects','sectionvals'=>group_getname($group_id)));
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_subprojects_title'),'pagename'=>'pm_admin_projects','sectionvals'=>group_getname($group_id)));
 
 	/*
 		List of possible categories for this group
@@ -242,34 +240,33 @@ if ($add_cat && $group_project_id) {
 	$result=db_query($sql);
 	echo "<p>";
 	if ($result && db_numrows($result) > 0) {
-		ShowResultSet($result,"Existing Subprojects");
+		ShowResultSet($result,$Language->getText('pm_admin_projects','existing_subprojects'));
 	} else {
-		echo "\n<h1>No Subprojects in this group</h1>";
+		echo "\n<h1>".$Language->getText('pm_admin_projects','no_subprojects')."</h1>";
 	}
 	?>
-	<p>
-	Add a new project to the Project/Task Manager. <strong>This is different than
-	 adding a task to a project.</strong>
+	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?>
+
 	<p>
 	<form action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>" method="post">
 	<input type="hidden" name="addproject" value="y">
 	<input type="hidden" name="post_changes" value="y">
 	<p>
-	<strong>Is Public?</strong><br />
-	<input type="radio" name="is_public" value="1" checked> Yes<br />
-	<input type="radio" name="is_public" value="0"> No<p>
+	<strong><?php echo $Language->getText('pm_admin_projects','is_public')?></strong><br />
+	<input type="radio" name="is_public" value="1" checked><?php echo $Language->getText('general','yes') ?><br />
+	<input type="radio" name="is_public" value="0"><?php echo $Language->getText('general','no') ?><p>
 	<p>
-	<h3>New Project Name:</h3>
+	<h3><?php echo $Language->getText('pm_admin_projects','project_name')?></h3>
 	<p>
 	<input type="text" name="project_name" value="" size="15" maxlength="30">
 	<p>
-	<strong>Description:</strong><br />
+	<strong><?php echo $Language->getText('pm_admin_projects','description')?></strong><br />
 	<input type="text" name="description" value="" size="40" maxlength="80">
 	<p>
-	<strong>Send All Updates To:</strong><br />
+	<strong><?php echo $Language->getText('pm_admin_projects','send_updates')?>:</strong><br />
 	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80"><br />
 	<p>
-	<input type="SUBMIT" name="SUBMIT" value="SUBMIT">
+	<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('general','submit') ?>">
 	</form>
 	<?php
 	pm_footer(array());
@@ -284,12 +281,11 @@ if ($add_cat && $group_project_id) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
 
-	pm_header(array('title'=>'Change Project/Task Manager Status','pagename'=>'pm_admin_update_pg','sectionvals'=>$g->getPublicName()));
+	pm_header(array('title'=>$Language->getText('pm_admin_projects','change_project_title'),'pagename'=>'pm_admin_update_pg','sectionvals'=>$g->getPublicName()));
 
 	?>
+	<p><?php echo $Language->getText('pm_admin_projects','change_project_intro') ?>
 	<p>
-	You can modify an existing Project using this form. Please note that private projects
-	can still be viewed by members of your project, but not the general public.<p>
 
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y">
@@ -298,37 +294,37 @@ if ($add_cat && $group_project_id) {
 	<table border="0">
 	<tr>
 		<td>
-			<strong>Is Public?</strong><br />
-			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked':''); ?>> Yes<br />
-			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked':''); ?>> No<br />
-			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked':''); ?>> Deleted<br />
+			<strong><?php echo $Language->getText('pm_admin_projects','is_public')?></strong><br />
+			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked':''); ?>> <?php echo $Language->getText('general','yes') ?><br />
+			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked':''); ?>> <?php echo $Language->getText('general','no') ?><br />
+			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked':''); ?>> <?php echo $Language->getText('general','deleted')?><br />
 		</td>
 	</tr>
 	<tr>
-		<td><strong>Project Name:</strong><br />
+		<td><strong><?php echo $Language->getText('pm_admin_projects','project_name')?>:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong>Description:</strong><br />
+			<strong><?php echo $Language->getText('pm_admin_projects','description')?>:</strong><br />
 			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80"><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong>Send All Updates To:</strong><br />
+			<strong><?php echo $Language->getText('pm_admin_projects','send_updates')?>:</strong><br />
 			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80"><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&add_cat=1&group_project_id=".$pg->getID(); ?>">Add/Edit Categories</a></strong><br />
+			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&add_cat=1&group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="SUBMIT" name="SUBMIT" value="Update">
+			<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('general','update') ?>">
 		</td>
 	</tr>
 	</table>
@@ -342,12 +338,12 @@ if ($add_cat && $group_project_id) {
 	/*
 		Show main page
 	*/
-	pm_header(array('title'=>'Project/Task Manager Administration','pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
+	pm_header(array('title'=>$Language->getText('pm_admin_projects','admin_title'),'pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
 
 	?>
 	<p>
-	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&addproject=1">Add A Project</a><br />
-	Add a project, which can contain a set of tasks. This is different than creating a new task.
+	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
+	<?php echo $Language->getText('pm_admin_projects','add_project_intro') ?>
 	<p>
 	<?php
     $pgf = new ProjectGroupFactory($g);
@@ -360,14 +356,11 @@ if ($add_cat && $group_project_id) {
     $pg_arr =& $pgf->getProjectGroups();
 
     if (count($pg_arr) < 1 || $pg_arr == false) {
-        echo '
-            <h2>No Projects Found</h2>
-            <p>
-            None found for this group. You may add new Projects using the "Add A Project" link above.';
+        echo $Language->getText('pm_admin_projects','no_projects_found');
         echo db_error();
     } else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1">Edit/Update Project: <strong>'.$pg_arr[$i]->getName().'</strong></a><p>';
+			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p>';
 		}
 
 	}

@@ -178,7 +178,7 @@ WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 			ORDER BY project_task_vw.".$this->order.(($this->order=='priority') ? ' DESC ':' ');
 
 //echo $sql;
-
+	
 		$result=db_query($sql,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;

@@ -19,11 +19,11 @@ if (!$sys_show_source) {
 }
 
 if (!$file) {
-	exit_error("Missing File Argument", "A file must be specified for this page.");
+	exit_error($Language->getText('source','missing_file'), $Language->getText('source','missing_file_text'));
 }
 
 if (strstr($file,'..')) {
-	exit_error("Invalid File Argument", "The file argument is invalid.");
+	exit_error($Language->getText('source','invalid_argument'), $Language->getText('source','invalid_argument_text'));
 }
 
 $dir = dirname($file);
@@ -36,10 +36,10 @@ if ($dir) {
 }
 
 if (!file_exists($fname) || @is_dir($fname)) {
-	exit_error("File Not Found", "Cannot find specified file to display.");
+	exit_error($Language->getText('source','file_not_found'), $Language->getText('source','file_not_found_text'));
 }
 
-$HTML->header(array('title'=>"Source of $file",'pagename'=>'viewsource'));
+$HTML->header(array('title'=>$Language->getText('source','source_of',$file),'pagename'=>'viewsource'));
 
 show_source($fname);
 

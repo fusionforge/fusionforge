@@ -71,6 +71,8 @@ class ProjectGroupFactory extends Error {
 	 *	@return	array	The array of ProjectGroups.
 	 */
 	function &getProjectGroups() {
+		
+		global $Language;
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}
@@ -96,7 +98,7 @@ class ProjectGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError('No ProjectGroups Found '.db_error());
+			$this->setError($Language->getText('pm_projectgroup','none_found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

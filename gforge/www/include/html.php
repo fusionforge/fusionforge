@@ -193,6 +193,7 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		string	What to call the '100 row' defaults to none
  */
 function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='None') {
+	global $Language;
 	$return .= '
 		<select name="'.$select_name.'">';
 
@@ -226,7 +227,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<option value="'.$checked_val.'" selected="selected">No Change</option>';
+		<option value="'.$checked_val.'" selected="selected">'.$Language->getText('include_html','no_change').'</option>';
 	}
 	$return .= '
 		</select>';
@@ -257,6 +258,7 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
  * @param		bool	Whether or not to show the '100 row'
  */
 function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',$show_100=true) {
+	global $Language;
 	$checked_count=count($checked_array);
 	$return .= '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
@@ -271,7 +273,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 				$return .= ' selected="selected"';
 			}
 		}
-		$return .= '>None</option>';
+		$return .= '>'.$Language->getText('include_html','none').'</option>';
 	}
 
 	$rows=db_numrows($result);
@@ -349,20 +351,21 @@ function build_priority_select_box ($name='priority', $checked_val='5', $nochang
  * @param		bool	Whether to make 'No Change' selected.
  */
 function html_build_priority_select_box ($name='priority', $checked_val='5', $nochange=false) {
+	global $Language;
 ?>
 	<select name="<?php echo $name; ?>">
 <?php if($nochange) { ?>
-	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>>No Change</option>
+	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo $Language->getText('include_html','no_change') ?></option>
 <?php }  ?>
-	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - Lowest</option>
+	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - <?php echo $Language->getText('include_html','priority_lowest') ?></option>
 	<option value="2"<?php if ($checked_val=="2") {echo " selected=\"selected\"";} ?>>2</option>
 	<option value="3"<?php if ($checked_val=="3") {echo " selected=\"selected\"";} ?>>3</option>
 	<option value="4"<?php if ($checked_val=="4") {echo " selected=\"selected\"";} ?>>4</option>
-	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - Medium</option>
+	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - <?php echo $Language->getText('include_html','priority_medium') ?></option>
 	<option value="6"<?php if ($checked_val=="6") {echo " selected=\"selected\"";} ?>>6</option>
 	<option value="7"<?php if ($checked_val=="7") {echo " selected=\"selected\"";} ?>>7</option>
 	<option value="8"<?php if ($checked_val=="8") {echo " selected=\"selected\"";} ?>>8</option>
-	<option value="9"<?php if ($checked_val=="9") {echo " selected=\"selected\"";} ?>>9 - Highest</option>
+	<option value="9"<?php if ($checked_val=="9") {echo " selected=\"selected\"";} ?>>9 - <?php echo $Language->getText('include_html','priority_highest') ?></option>
 	</select>
 <?php
 

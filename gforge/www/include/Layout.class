@@ -327,9 +327,10 @@ if ($params['group']) {
 </table>
 <?php
 	global $sys_show_source;
+	global $Language;
 	if ($sys_show_source) {
 		global $SCRIPT_NAME;
-		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</a>';
+		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
 	}
 ?>
 
@@ -648,7 +649,7 @@ if ($params['group']) {
 	}
 
 	function searchBox() {
-		global $Language,$words,$forum_id,$group_id,$atid,$exact,$type_of_search;
+		global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
@@ -674,8 +675,12 @@ if ($params['group']) {
 			}
 		} else if ($group_id && $forum_id) {
 			print '
-			<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>This Forum</option>';
+			<OPTION value="forums"'.( $type_of_search == 'forums' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','forum').'</OPTION>';
+		} else if ($group_id && $group_project_id) { 
+			print '
+			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected' : '').'>'.$Language->getText('searchbox','task').'</option>';
 		}
+		
 		print '
 			<option value="soft"'.( $type_of_search == 'soft' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
 		print '
@@ -701,6 +706,10 @@ if ($params['group']) {
 		if ( isset($atid) ) {
 			print '
 			<input type="hidden" value="'.$atid.'" name="atid" />';
+		}
+		if ( isset($group_project_id) ){
+			print '
+			<input type="hidden" value="'.$group_project_id.'" name="group_project_id" />';
 		}
 		print '</td><td>';
 		print '
