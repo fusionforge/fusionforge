@@ -78,7 +78,7 @@ function &group_get_object($group_id,$res=false) {
 			/*
 				check group type and set up object
 			*/
-			if (db_result($res,0,'type')==1) {
+			if (db_result($res,0,'type_id')==1) {
 				//project
 				$GROUP_OBJ["_".$group_id."_"]= new Group($group_id,$res);
 			} else {
@@ -339,7 +339,7 @@ class Group extends Error {
 	 *	@return status.
 	 *	@access public.
 	 */
-	function updateAdmin(&$user, $is_public, $license, $type, $unix_box, $http_domain) {
+	function updateAdmin(&$user, $is_public, $license, $type_id, $unix_box, $http_domain) {
 		global $Language;
 
 		$perm =& $this->getPermission($user);
@@ -359,7 +359,7 @@ class Group extends Error {
 		$res = db_query("
 			UPDATE groups
 			SET is_public='$is_public',
-				license='$license',type='$type',
+				license='$license',type_id='$type_id',
 				unix_box='$unix_box',http_domain='$http_domain'
 			WHERE group_id='".$this->getID()."'
 		");
@@ -377,8 +377,8 @@ class Group extends Error {
 		if ($license != $this->data_array['license']) {
 			$this->addHistory('license', $this->data_array['license']);
 		}
-		if ($type != $this->data_array['type']) {
-			$this->addHistory('type', $this->data_array['type']);
+		if ($type_id != $this->data_array['type_id']) {
+			$this->addHistory('type_id', $this->data_array['type_id']);
 		}
 		if ($unix_box != $this->data_array['unix_box']) {
 			$this->addHistory('unix_box', $this->data_array['unix_box']);
@@ -560,7 +560,7 @@ class Group extends Error {
 	 *	@return	int	The type flag from the database.
 	 */
 	function getType() {
-		return $this->data_array['type'];
+		return $this->data_array['type_id'];
 	}
 
 

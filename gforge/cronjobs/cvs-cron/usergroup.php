@@ -47,7 +47,7 @@ $user_pws =& util_result_column_to_array($res,'unix_pw');
 //
 //	Get anonymous pserver users
 //
-$res7=db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public='1' AND enable_anoncvs='1';");
+$res7=db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public='1' AND enable_anoncvs='1' AND type_id='1';");
 $err .= db_error();
 $rows = db_numrows($res7);
 for($k = 0; $k < $rows; $k++) {
@@ -153,7 +153,7 @@ for($k = 0; $k < count($grouplines); $k++) {
 //
 //	Add the groups from the gforge database
 //
-$res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A'");
+$res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
 for($i = 0; $i < db_numrows($res); $i++) {
     $groups[] = db_result($res,$i,'unix_group_name');
     $gids[db_result($res,$i,'unix_group_name')]=db_result($res,$i,'group_id')+GROUP_ID_ADD;
