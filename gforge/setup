@@ -168,6 +168,12 @@ setupinout(){
 	done
 	ls $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/[2-9]* | sort | xargs cat > $LOCALINC
 	rm $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/[2-9]*
+
+	echo "Creating other includes"
+	for i in $ETCDIR/templates/database.inc $ETCDIR/templates/local.pl
+	do
+		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
+	done
 }
 	
 doapache() {	
