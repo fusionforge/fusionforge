@@ -2267,6 +2267,7 @@ tracker	item_group	Group
 tracker	no_trackers	No Accessible Trackers Found
 tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project will have to set up data types using the $1 admin page $2</FONT></strong>
 tracker	open_date	Open Date
+tracker	pagetitle	Tracker
 tracker	please_login	Please $1 login $2
 tracker	priority	Priority
 tracker	reporting	Report
@@ -2410,6 +2411,7 @@ tracker_browse	request_id	Request ID
 tracker_browse	resolution	Resolution 
 tracker_browse	sort_by	Order by
 tracker_browse	title	Browse $1
+tracker_browse	change_any	Any
 tracker_browse	hour24	Last 24H
 tracker_browse	day7	Last 7days
 tracker_browse	week2	Last 2weeks
