@@ -75,7 +75,7 @@ $listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";
 				continue;
 			}
 			if (stristr($resline,"Entry for aliases file") !== FALSE) {
-				contrinue;
+				continue;
 			}
 			echo "New alias line - $resline\n";
 			fwrite($h1,$resline."\n");
