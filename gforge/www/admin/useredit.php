@@ -26,7 +26,9 @@ if ($action=="update_user") {
 	$user->setEmail($email);
 	$user->setShell($shell);
 	$user->setUnixStatus($unix_status);
-	
+	if ($unix_status != 'N') {
+		$user->setUpUnixUID () ;
+	}
 	if ($user->isError()) {
 		$feedback=$user->getErrorMessage();
 	}

@@ -325,6 +325,41 @@ eval {
  	$dbh->commit () ;
      }
 
+    $query = "select value from debian_meta_data where key = 'db-version'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    $version = $array [0] ;
+
+    if (is_lesser $version, "2.5-32") {
+	debug "Found version $version lesser than 2.5-32, fixing unix_uid entries." ;
+
+	$query = "update groups set unix_box = 'shell'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	$query = "update users set unix_uid = nextval ('unix_uid_seq')
+                  where unix_status != 'N'
+                    and status != 'P'
+                    and unix_uid = 0"
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+	
+	debug "Updating debian_meta_data table." ;
+	$query = "UPDATE debian_meta_data SET value = '2.5-32' where key = 'db-version'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     

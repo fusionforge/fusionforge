@@ -1,6 +1,12 @@
 sourceforge (2.5-31+) unstable; urgency=low
 
-  * 
+  * [Roland] www/admin/useredit.php: Fixed Unix UID attribution, so that
+    accounts activated by the admin are given an UID too.  Previously only
+    the accounts that were entering a group got given an UID, and that
+    could result in people existing in the LDAP database and having a
+    shell account yet no UID.  Thanks to Otavio Salvador
+    <otavio@debian.org> for the report and help in fixing.
+  * [Roland] deb-specific/db-upgrade.pl: Fixed the backlog of wrong UIDs.
 
  --
 
