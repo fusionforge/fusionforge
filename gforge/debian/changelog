@@ -8,8 +8,10 @@ gforge (3rc1-3) experimental; urgency=low
   * [Christian] added darkaqua theme from Patrick McFarland (diablod3)
   * [Chrsitian] added a find for sourceforge owned file in common postinst 
     (Closes: bug#179050)
+  * [Roland] Fixed homedirs for anoncvs_* users.
+  * [Roland] Enabled HTTPS for CVSweb.
 
- -- Christian Bayle <bayle@debian.org>  Mon, 14 Apr 2003 00:32:04 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 22 Apr 2003 21:34:49 +0200
 
 gforge (3rc1-2) experimental; urgency=low
 
