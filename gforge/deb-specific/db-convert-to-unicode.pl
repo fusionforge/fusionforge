@@ -261,8 +261,10 @@ eval {
     convert_column_to_charset ('plugins', 'plugin_name', $from, $to, 32) ;
     convert_column_to_charset ('plugins', 'plugin_desc', $from, $to, -1) ;
 
+    $dbh->commit ();
+
     debug "It seems your database conversion went well and smoothly.  That's cool." ;
-    debug "Please enjoy using Debian Sourceforge." ;
+    debug "Please enjoy using Gforge." ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
