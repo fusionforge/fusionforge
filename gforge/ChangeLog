@@ -1,3 +1,8 @@
+2004-04-21  Tom Copeland <tom@infoether.com>
+
+	* common/docman/DocumentManager.class: Applied patch [ #774 ] Ordering 
+	documents (inside GROUP) - proposal
+
 2004-04-16  Christian Bayle <bayle@debian.org>
 	* Test if Theme.class is really there, keep the default of local.inc if
 	not in  User.class

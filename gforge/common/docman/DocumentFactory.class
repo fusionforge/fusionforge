@@ -54,7 +54,7 @@ class DocumentFactory extends Error {
 	var $stateid;
 	var $languageid;
 	var $docgroupid;
-	var $sort='doc_group';
+	var $sort='doc_group, title';
 
 	/**
 	 *  Constructor.
