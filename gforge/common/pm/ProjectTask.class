@@ -584,6 +584,10 @@ class ProjectTask extends Error {
 				FROM project_dependencies 
 				WHERE project_task_id='".$this->getID()."'"));
 		}
+		/* fix bug 319: if dependentlist is emtpy, set it to 100 (none) */
+		if (!$this->dependon) {
+			$this->dependon[]=100;
+		}
 		return $this->dependon;
 	}
 
@@ -719,7 +723,7 @@ class ProjectTask extends Error {
 			{ for ($tmp=0;$tmp<count($old_assigned);$tmp++)
 				{ $this->addHistory('assigned_to_id',$old_assigned[$tmp]);}
 			}
-		$old_array = &$this->getDependentOn();		
+		$old_array = &$this->getDependentOn();			
 		$diff_array=array_diff($old_array,$depend_arr);
 		if (count($diff_array)>0)
 			{ 
