@@ -197,12 +197,12 @@ if ($rows < 1) {
 				
 					echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
-					for ($i=0; $i < $rows; $i++) {
+					for ($j=0; $j < $rows; $j++) {
 						echo '
-						<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-							<td>'. nl2br(db_result($result, $i, 'body')).'</td>
-							<td valign="TOP">'.date($sys_datefmt,db_result($result, $i, 'postdate')).'</td>
-							<td valign="TOP">'.db_result($result, $i, 'user_name').'</td></tr>';
+						<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($j) .'>
+							<td>'. nl2br(db_result($result, $j, 'body')).'</td>
+							<td valign="TOP">'.date($sys_datefmt,db_result($result, $j, 'postdate')).'</td>
+							<td valign="TOP">'.db_result($result, $j, 'user_name').'</td></tr>';
 					}
 		
 					echo $GLOBALS['HTML']->listTableBottom();
