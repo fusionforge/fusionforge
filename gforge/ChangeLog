@@ -1,3 +1,8 @@
+2003-09-18
+
+	* [Christian] Applied Antoine Nivard suggestion to correct [ #505 ]
+        Removed tracker tab when tracker is disabled in Layout.class
+
 2003-09-17  Bo Jangeborg  <bo@softwave.se>
 
 	* www/include/languages/Swedish.tab: full translation.
