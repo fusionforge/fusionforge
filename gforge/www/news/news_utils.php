@@ -149,22 +149,24 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				$return .= '</ul><hr width="100%" size="1" />'."\n";
 			}
 		}
-	}
+		if ($group_id != $sys_news_group) {
+			$archive_url='/news/?group_id='.$group_id;
+		} else {
+			$archive_url='/news/';
+		}
 
-	if ($group_id != $sys_news_group) {
-		  $archive_url='/news/?group_id='.$group_id;
-	} else {
-		  $archive_url='/news/';
-	}
-
-	if ($show_forum) {
-		$return .= '<div align="center">'
-			   .'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
-	} else {
-		$return .= '<div align="center">.....</div>';
+		if ($show_forum) {
+			$return .= '<div align="center">'
+				.'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
+		} else {
+			$return .= '<div align="center">...</div>';
+		}
 	}
 
 	if ($allow_submit && $group_id != $sys_news_group) {
+		if(!$result || $rows < 1) {
+			$return .= '<hr width="100%" size="1" />';
+		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
 		$return .= '<div align="center"><a href="/news/submit.php?group_id='.$group_id.'"><span style="font-size:smaller">[' . $Language->getText('news_utils', 'submit') . ']</span></a></div>';
