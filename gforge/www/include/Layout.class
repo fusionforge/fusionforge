@@ -29,6 +29,7 @@ class Layout extends Error {
 	var $COLOR_CONTENT_BACK= 'ffffff';
 	var $COLOR_LTBACK1= '#eeeeef';
 	var $COLOR_LTBACK2= '#fafafa';
+	var $COLOR_SELECTED_TAB= '#e0e0e0';
 	var $COLOR_HTMLBOX_TITLE = '#d5d5d7';
 	var $COLOR_HTMLBOX_BACK = '#eaecef';
 	var $FONT_CONTENT = 'helvetica';
@@ -518,7 +519,7 @@ if (isset($params['group']) && $params['group']) {
 		} else {
 			$selected=0;
 		}
-		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,'#E0E0E0','100%');
+		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,$this->COLOR_SELECTED_TAB,'100%');
 
 	}
 
