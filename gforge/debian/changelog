@@ -1,13 +1,16 @@
-gforge (3.0-0+7+) experimental; urgency=low
+gforge (3.0-0+8) experimental; urgency=low
 
   * [Christian] Reintroduce the possibility to define default home page in
     Themes
-  * [Christian] Added subMenu in Layout 
+  * [Christian] Added subMenu in Layout
   * [Roland] Merged in everything that was done on the trunk since
     Branch_gforge was started.  That includes the plugin subsystem.
   * [Roland] Merged Branch_gforge back into the trunk.
+  * [Christian] Removed dependency on php4-mcrypt
+  * [Christian] Applied F. Elie patch theme init #73
+  * [Christian] Applied F. Elie patch image and searchbox localisation #84 #85 
 
- -- Roland Mas <lolando@debian.org>  Mon, 23 Dec 2002 14:21:09 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 31 Dec 2002 13:12:48 +0100
 
 gforge (3.0-0+7) experimental; urgency=low
 

@@ -581,4 +581,12 @@ common_include_account	toolong	Le nom est trop long, il doit comporter au plus 1
 common_include_account	illegal	Caractère interdit dans le nom.
 common_include_account	cvsreserved	Nom réservé pour CVS.
 common_include_account	dnsreserved	Nom réservé pour le DNS.
-common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par la DNS.
+common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par le DNS.
+image	logout	fr_logout.png
+image	login	fr_login.png
+image	myaccount	fr_myaccount.png
+image	newaccount	fr_newaccount.png
+searchbox	softwaregroup	Logiciel/Groupe
+searchbox	skill	Savoir-faire
+searchbox	people	Personne	
+searchbox	search	Rechercher

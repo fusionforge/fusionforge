@@ -186,17 +186,13 @@ class Layout extends Error {
 		<TD ALIGN="RIGHT"><?php
 			if (session_loggedin()) {
 				?>
-				<A HREF="/account/logout.php"><?php echo html_image('logout.png',
-					74,14,array('BORDER'=>'0')); ?></A><BR>
-				<A HREF="/account/"><?php echo html_image('myaccount.png'
-					,74,14,array('BORDER'=>'0')); ?></A>
+				<A HREF="/account/logout.php"><?php echo html_image($Language->getText('image','logout'),74,14,array('BORDER'=>'0')); ?></A><BR>
+				<A HREF="/account/"><?php echo html_image($Language->getText('image','myaccount'),74,14,array('BORDER'=>'0')); ?></A>
 				<?php
 			} else {
 				?>
-				<A HREF="/account/login.php"><?php echo html_image('login.png'
-					,74,14,array('BORDER'=>'0')); ?></A><BR>
-				<A HREF="/account/register.php"><?php echo html_image('newaccount.png'
-					,74,14,array('BORDER'=>'0')); ?></A>
+				<A HREF="/account/login.php"><?php echo html_image($Language->getText('image','login'),74,14,array('BORDER'=>'0')); ?></A><BR>
+				<A HREF="/account/register.php"><?php echo html_image($Language->getText('image','newaccount'),74,14,array('BORDER'=>'0')); ?></A>
 				<?php
 			}
 
@@ -632,7 +628,7 @@ if ($params['group']) {
 	}
 
 	function searchBox() {
-		global $words,$forum_id,$group_id,$atid,$exact,$type_of_search;
+		global $Language,$words,$forum_id,$group_id,$atid,$exact,$type_of_search;
 
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
@@ -662,11 +658,11 @@ if ($params['group']) {
 			<OPTION value="forums"'.( $type_of_search == 'forums' ? ' SELECTED' : '' ).'>This Forum</OPTION>';
 		}
 		print '
-			<OPTION value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>Software/Group</OPTION>';
+			<OPTION value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</OPTION>';
 		print '
-			<OPTION value="skill"'.( $type_of_search == 'skill' ? ' SELECTED' : '' ).'>Skill</OPTION>';
+			<OPTION value="skill"'.( $type_of_search == 'skill' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','skill').'</OPTION>';
 		print '
-			<OPTION value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>People</OPTION>';
+			<OPTION value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','people').'</OPTION>';
 		print '
 			</SELECT>';
 
@@ -692,7 +688,7 @@ if ($params['group']) {
 		<INPUT TYPE="text" SIZE="12" NAME="words" VALUE="'.$words.'">';
 
 		print '</TD><TD>&nbsp;</TD><TD>';
-		print '<INPUT TYPE="submit" NAME="Search" VALUE="Search">';
+		print '<INPUT TYPE="submit" NAME="Search" VALUE="'.$Language->getText('searchbox','search').'">';
 
 		print '
 		</TD></TR></TABLE>';

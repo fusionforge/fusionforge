@@ -17,7 +17,7 @@ if (is_file('/etc/gforge/custom/pre.php')){
 } else {
 
 // Defines all of the Source Forge hosts, databases, etc.
-// This needs to be loaded first becuase the lines below depend upon it.
+// This needs to be loaded first because the lines below depend upon it.
 require ('/etc/gforge/local.inc');
 
 if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
@@ -109,6 +109,10 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
+if ($sys_theme=='') {
+    // to avoid error at first execution
+    $sys_theme='gforge';
+}
 require_once($sys_themeroot.$sys_theme.'/Theme.class');
 
 $HTML=new Theme();
