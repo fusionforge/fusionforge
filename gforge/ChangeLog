@@ -1,3 +1,11 @@
+2004-05-12  Tom Copeland <tom@infoether.com>
+
+	* www/include/snippet_caching.php: Modified queries to use GROUP BY
+	vs repeated queries.  This requires only 2 queries rather than about 20;
+	on my workstation it resulted in about a 20% speedup; should be better
+	than that on large databases or setups where the application server
+	and database server are on separate machines.
+
 2004-05-09  Christian Bayle <bayle@debian.org>
 
 	* Made system management OO (Work in progress)
