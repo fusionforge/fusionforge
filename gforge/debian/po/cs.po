@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-19 14:38+0100\n"
-"PO-Revision-Date: 2004-11-07 14:57+0100\n"
+"PO-Revision-Date: 2005-03-09 18:42+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <provoz@debian.cz>\n"
 "MIME-Version: 1.0\n"
@@ -316,7 +316,6 @@ msgstr "Chcete mít jednoduchou konfiguraci DNS?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
-#, fuzzy
 msgid ""
 "You can have a simple DNS setup which uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
@@ -324,9 +323,9 @@ msgid ""
 "servers or CVS servers."
 msgstr ""
 "Mù¾ete mít buï jednodu¹¹í konfiguraci DNS, která pou¾ívá zástupné znaky, aby "
-"namapovala weby v¹ech projektù na jedinou IP adresu a nasmìrovala v¹echna "
-"cvs úlo¾i¹tì na jediný CVS server, nebo mù¾ete mít komplexní nastavení, je¾ "
-"vám umo¾ní pou¾ít vícero poèítaèù pro webové a CVS servery."
+"namapovala weby v¹ech projektù na jedinou IP adresu a nasmìrovala v¹echny "
+"cvs servery na server jediný, nebo mù¾ete mít komplexní nastavení, je¾ vám "
+"umo¾ní pou¾ít vícero poèítaèù pro webové a CVS servery."
 
 #. Type: boolean
 #. Description
@@ -613,7 +612,6 @@ msgstr "Sourceforge ji¾ neexistuje"
 #. Type: note
 #. Description
 #: ../dsf-helper/migration.templates:19
-#, fuzzy
 msgid ""
 "Sourceforge has been renamed Gforge, and the software known as Sourceforge "
 "is no longer maintained as free software.  This \"sourceforge\" package is "
@@ -622,11 +620,11 @@ msgid ""
 "have been saved, and you can safely uninstall the \"sourceforge\" package "
 "and proceed to install Gforge."
 msgstr ""
-"Sourceforge byl pøejmenovaný Gforge a ji¾ není vyvíjen jako svobodný "
-"software. Balík \"sourceforge\" existuje jenom z dùvodu snadného pøechodu na "
-"Gforge. Poté, co tento balík nainstalujete (a s ním gforge-sourceforge-"
-"transition), budou va¹e data ulo¾ena. Pak mù¾ete balík \"sourceforge\" "
-"odstranit a pokraèovat v instalaci Gforge."
+"Sourceforge byl pøejmenován na Gforge a pùvodní Sourceforge ji¾ není vyvíjen "
+"jako svobodný software. Balík \"sourceforge\" existuje jenom z dùvodu "
+"snadného pøechodu na Gforge. Poté, co tento balík nainstalujete (a s ním "
+"gforge-sourceforge-transition), budou va¹e data ulo¾ena. Pak mù¾ete balík "
+"\"sourceforge\" odstranit a pokraèovat v instalaci Gforge."
 
 #. Type: boolean
 #. Description
@@ -824,9 +822,8 @@ msgstr "Výchozí téma"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:11
-#, fuzzy
 msgid ""
 "Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""
-"Vyberte výchozí téma pro webové stránky. Dejte pozor, abyste zadali platný "
+"Zde je výchozí téma pro webové stránky. Dejte pozor, abyste zadali platný "
 "název."
