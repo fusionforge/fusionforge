@@ -1,4 +1,4 @@
-sourceforge (2.5-10+16+) unstable; urgency=low
+sourceforge (2.5-10+17) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -91,8 +91,11 @@ sourceforge (2.5-10+16+) unstable; urgency=low
     handled.
   * Added a debconf note concerning the way libpam-ldap has to be
     configured.
+  * [Christian] deb-specific/install-ldap.sh: Fixed incorrect upgrade.
+  * Plus a ton of other fixes and cleanups, but this changelog entry is
+    already long enough.
 
- -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 13:25:06 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 14:06:45 +0100
 
 sourceforge (2.5-10) unstable; urgency=low
 
