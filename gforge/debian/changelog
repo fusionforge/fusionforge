@@ -11,8 +11,9 @@ gforge (3rc1-3) experimental; urgency=low
   * [Roland] Fixed homedirs for anoncvs_* users.
   * [Roland] Enabled HTTPS for CVSweb.
   * [Roland] Removed yet a few mentions of Sourceforge.
+  * [Roland] Fixed a few problems with OpenLDAP 2.1.
 
- -- Roland Mas <lolando@debian.org>  Sat, 26 Apr 2003 16:49:45 +0200
+ -- Roland Mas <lolando@debian.org>  Sat, 26 Apr 2003 22:22:39 +0200
 
 gforge (3rc1-2) experimental; urgency=low
 
