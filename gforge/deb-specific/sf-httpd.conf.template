@@ -25,6 +25,19 @@ NameVirtualHost {ip_address}
   DirectoryIndex index.html index.php
   Include /etc/sourceforge/sf-httpd.secrets
   UserDir disabled
+    #
+    # This is done to implement non DNS delegated debian sourceforge
+    # This is for project home pages in a virtual /www/<group> location
+#    AliasMatch ^/www/([^/]*)/(.*) /var/lib/sourceforge/chroot/home/groups/$1/htdocs/$2
+#    ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/lib/sourceforge/chroot/home/groups/$1/cgi-bin/$2
+#    <Directory /var/lib/sourceforge/chroot/home/groups>
+#    Options Indexes FollowSymlinks
+#      AllowOverride All
+#      order allow,deny
+#      allow from all
+#    </Directory>
+    # This for cvsweb 
+#    ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
 </VirtualHost>
 
 <VirtualHost {ip_address}>
