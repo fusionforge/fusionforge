@@ -13,6 +13,8 @@
 	* www/admin/userlist.php: changed realname by lastname in admin
 	module for users list.
 
+	* www/reporting/index.php: removed hardcoded links
+
 2004-08-02  Francisco Gimeno <kikov@kikov.org>
 	Fixes [#856]
 	* www/include/languages/Base.tab: Added three expresion for being
