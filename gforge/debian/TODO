@@ -28,6 +28,11 @@ here have been transferred onto the Savannah project, at
   released file afterwards.  Maybe.  [RM] Already supposed to work
   (edit releases), needs testing.
 
+* [RM] Modify /project/admin/userpermedit.php so that it displays what
+  user is edited.
+
+* [RM] Browse through everything and find out things to add here.
+
 # Local variables:
 # mode: indented-text
 # End:
