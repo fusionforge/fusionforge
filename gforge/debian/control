@@ -1,5 +1,5 @@
 Source: gforge
-Section: non-US
+Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Build-Depends-Indep: debhelper (>= 4.0), sharutils, docbook-to-man

@@ -1,3 +1,9 @@
+gforge (3rc2-3) unstable; urgency=low
+
+  * [Roland] Switched from non-US to main, so that the upload be accepted.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 21 May 2003 00:11:57 +0200
+
 gforge (3rc2-2) unstable; urgency=low
 
   * [Roland] Added db/20030513.sql, to add an "enabled" column to the
