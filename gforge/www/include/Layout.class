@@ -370,13 +370,13 @@ Content owned by VA Linux Systems is copyright
 //  Actual layer call must be outside of table for some reason
 //
 
-if (!session_issecure() && !$GLOBALS['IS_DEBUG']) {
-
-echo '
-<LAYER SRC="http://sfads.osdn.com/1.html" width=468 height=60 visibility=\'hide\' '.
-'onLoad="moveToAbsolute(adlayer.pageX,adlayer.pageY); clip.height=60; clip.width=468; visibility=\'show\';"></LAYER>';
-
-}
+//if (!session_issecure() && !$GLOBALS['IS_DEBUG']) {
+//
+//echo '
+//<LAYER SRC="http://sfads.osdn.com/1.html" width=468 height=60 visibility=\'hide\' '.
+//'onLoad="moveToAbsolute(adlayer.pageX,adlayer.pageY); clip.height=60; clip.width=468; visibility=\'show\';"></LAYER>';
+//
+//}
 
 ?>
 
