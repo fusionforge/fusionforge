@@ -114,7 +114,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 				"colspan=3");
 
 			$cell_data[] = array('&nbsp;<strong>
-				'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</strong>',
+				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
 				'colspan=4 align="middle"');
 			
 			print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);

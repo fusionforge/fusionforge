@@ -39,7 +39,7 @@ function role_id2str($role_id) {
 		} 
 	}
 
-	return '???';
+	return '';
 }
 
 // Render table row of developer's permissions
@@ -78,10 +78,10 @@ function show_permissions_row($i, $row_dev) {
 	$forum2perm = array(0=>'-',2=>$Language->getText('project_admin_userperms','moderator'));
 	print '<td>'.$forum2perm[$row_dev['forum_flags']].'</td>';
 
-	// documenation manager permissions
-	$forum2perm = array(0=>'-',1=>$Language->getText('project_admin_userperms','editor'));
+	// documentation manager permissions
+	$docman2perm = array(0=>'-',1=>$Language->getText('project_admin_userperms','editor'));
 
-	print '<td>'.$forum2perm[$row_dev['doc_flags']].'</td>';
+	print '<td>'.$docman2perm[$row_dev['doc_flags']].'</td>';
 
 	print '</tr>';
 }
@@ -101,53 +101,46 @@ project_admin_header(array('title'=>$Language->getText('project_admin_userperms'
 <p>&nbsp;</p>
 <p><?php echo $Language->getText('project_admin_userperms','info') ?>.</p>
 <p>&nbsp;</p>
-
-<table width="100%" cellspacing="0" cellpadding="2" border="0">
-
-<tr align="center">
-<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','general') ?></strong></span></td>
-<td><font size="-1"><strong>CVS</strong></font></td>
-<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','tracker_manager') ?></strong></span></td>
-<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','task_manager') ?></strong></span></td>
-<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','forums') ?></strong></span></td>
-<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','docman') ?></strong></span></td>
-</tr>
 <?php
+$tableHeaders = array(
+	$Language->getText('project_admin_userperms','general'),
+	'CVS',
+	$Language->getText('project_admin_userperms','tracker_manager'),
+	$Language->getText('project_admin_userperms','task_manager'),
+	$Language->getText('project_admin_userperms','forums'),
+	$Language->getText('project_admin_userperms','docman')
+);
 
-	$res_dev = db_query("
-		SELECT users.user_name AS user_name,
-		users.realname, 
-		users.user_id AS user_id, 
-		user_group.admin_flags, 
-		user_group.forum_flags, 
-		user_group.project_flags, 
-		user_group.doc_flags, 
-		user_group.cvs_flags, 
-		user_group.release_flags, 
-		user_group.artifact_flags, 
-		user_group.member_role 
-		FROM users,user_group 
-		WHERE 
-		users.user_id=user_group.user_id AND user_group.group_id='$group_id'
-		ORDER BY users.user_name
-	");
+echo $HTML->listTableTop($tableHeaders);
 
-	if (!$res_dev || db_numrows($res_dev) < 1) {
-		echo '<h2>'.$Language->getText('project_admin_userperms','no_developers').'</h2>';
-	} else {
-		$i = 0;
+$res_dev = db_query("
+	SELECT users.user_name AS user_name,
+	users.realname, 
+	users.user_id AS user_id, 
+	user_group.admin_flags, 
+	user_group.forum_flags, 
+	user_group.project_flags, 
+	user_group.doc_flags, 
+	user_group.cvs_flags, 
+	user_group.release_flags, 
+	user_group.artifact_flags, 
+	user_group.member_role 
+	FROM users,user_group 
+	WHERE 
+	users.user_id=user_group.user_id AND user_group.group_id='$group_id'
+	ORDER BY users.user_name
+");
 
-		while ($row_dev = db_fetch_array($res_dev)) {
-
-			show_permissions_row($i++, $row_dev);
-
-		}
+if (!$res_dev || db_numrows($res_dev) < 1) {
+	echo '<tr><td colspan="6">'.$Language->getText('project_admin_userperms','no_developers').'</td></tr>';
+} else {
+	$i = 0;
+	while ($row_dev = db_fetch_array($res_dev)) {
+		show_permissions_row($i++, $row_dev);
 	}
+}
 
-?>
+echo $HTML->listTableBottom();
 
-</table>
-
-<?php
 project_admin_footer(array());
 ?>

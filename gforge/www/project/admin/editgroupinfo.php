@@ -266,7 +266,7 @@ if($sys_use_tracker) {
 <?php
 }
 
-if($sys_use_file) {
+if($sys_use_frs) {
 ?>
 <tr>
 <td>

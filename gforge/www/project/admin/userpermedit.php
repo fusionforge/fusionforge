@@ -70,7 +70,7 @@ if ($submit || $form_unix_name) {
 		}
 
 		if (!$group->addUser($u->getUnixName())) {
-			exit_error('Error', $group->getErrorMessage());
+			exit_error($Language->getText('general','error'), $group->getErrorMessage());
 		} else {
 			$feedback = $Language->getText('project_admin_userpermedit','user_added').' <br />';
 		}
