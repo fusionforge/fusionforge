@@ -62,7 +62,9 @@ if ($submit) {
 project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
 
 if ($submit) {
-	plugin_hook("groupisactivecheckboxpost",false);
+	$hookParams['group']=$group_id;
+	plugin_hook("groupisactivecheckboxpost",$hookParams);
+
 }
 
 /* NOT ACTIVE YET
@@ -286,7 +288,10 @@ if($sys_use_frs) {
 </td>
 </tr>
 
-<?php plugin_hook("groupisactivecheckbox", false) ?>
+<?php 
+$hookParams['group']=$group_id;
+plugin_hook("groupisactivecheckbox",$hookParams);
+?>
 
 </table>
 

@@ -6,6 +6,8 @@
 	* Manage a sys_custom_path for gforge customization
 	* Added group param to tab hoook
 	* Added site_admin_option_hook to add new features in admin page
+	* Added group param to hooks in www/project/admin/editgroupinfo.php
+	closes patch 772 from Kikov
 
 2004-04-15  Christian Bayle <bayle@debian.org>
 
