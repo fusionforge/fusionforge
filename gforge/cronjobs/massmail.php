@@ -35,6 +35,7 @@ require ('common/include/cron_utils.php');
 
 //bad hack to get around Roland's misuse of Language in utils.php
 $Language = new BaseLanguage();
+$Language->loadLanguage($sys_lang);
 
 // Pause between messages, sec
 $SLEEP = 1;
