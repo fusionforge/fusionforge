@@ -28,12 +28,12 @@ Description: Collaborative development tool - shared files
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package contains files and program used by several other
+ This package contains files and programs used by several other
  subpackages.
 
 Package: sourceforge-web-apache
 Architecture: all
-Depends: sourceforge-common, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), sourceforge-db-postgresql | sourceforge-db
+Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3)
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-web
 Conflicts: sourceforge-web
@@ -49,7 +49,7 @@ Description: Collaborative development tool - web part (using Apache)
 
 Package: sourceforge-db-postgresql
 Architecture: all
-Depends: sourceforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), php4, php4-pgsql
+Depends: sourceforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), php4, php4-cgi, php4-pgsql
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-db
 Conflicts: sourceforge-db
@@ -65,7 +65,7 @@ Description: Collaborative development tool - database (using PostgreSQL)
 
 Package: sourceforge-mta-exim
 Architecture: all
-Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), exim | exim-tls
+Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), exim | exim-tls
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-mta
 Conflicts: sourceforge-mta
@@ -81,7 +81,7 @@ Description: Collaborative development tool - mail tools (using Exim)
 
 Package: sourceforge-mta-postfix
 Architecture: all
-Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), postfix, postfix-ldap
+Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), postfix, postfix-ldap
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-mta
 Conflicts: sourceforge-mta
@@ -97,7 +97,7 @@ Description: Collaborative development tool - mail tools (using Postfix)
 
 Package: sourceforge-shell-ldap
 Architecture: all
-Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap
+Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-shell
 Conflicts: sourceforge-shell
@@ -113,7 +113,7 @@ Description: Collaborative development tool - shell accounts (using LDAP)
 
 Package: sourceforge-cvs
 Architecture: all
-Depends: sourceforge-common, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap, cvs, rcs
+Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge (<= 2.6-0+11)
 Description: Collaborative development tool - CVS management
  Sourceforge provides many tools to help collaboration in a
@@ -126,7 +126,7 @@ Description: Collaborative development tool - CVS management
 
 Package: sourceforge-ftp-proftpd
 Architecture: all
-Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap, proftpd
+Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, proftpd, perl, debianutils (>= 1.7), debconf (>= 0.5.00), libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-ftp
 Conflicts: sourceforge-ftp
@@ -141,7 +141,7 @@ Description: Collaborative development tool - FTP management (using ProFTPd)
 
 Package: sourceforge-ldap-openldap
 Architecture: all
-Depends: sourceforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), ldap-utils
+Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), ldap-utils
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-ldap
 Conflicts: sourceforge-ldap
@@ -156,7 +156,7 @@ Description: Collaborative development tool - LDAP directory (using OpenLDAP)
 
 Package: sourceforge-dns-bind9
 Architecture: all
-Depends: sourceforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), bind9 
+Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), bind9 
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-dns
 Conflicts: sourceforge-dns
@@ -171,7 +171,7 @@ Description: Collaborative development tool - DNS management (using Bind9)
 
 Package: sourceforge-lists-mailman
 Architecture: all
-Depends: sourceforge-common, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), mailman, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-mta-exim | sourceforge-mta
+Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-mta-exim | sourceforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), mailman
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-lists
 Conflicts: sourceforge-lists
