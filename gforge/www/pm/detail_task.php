@@ -48,11 +48,11 @@ pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'pagename'=
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm_detailtask','start_date') ?>:</strong><br />
-		<?php echo date('Y-m-d', $pt->getStartDate() ); ?>
+		<?php echo date($sys_shortdatefmt, $pt->getStartDate() ); ?>
 		</td>
 		<td>
 		<strong><?php echo $Language->getText('pm_detailtask','end_date') ?>:</strong><br />
-		<?php echo date('Y-m-d', $pt->getEndDate() ); ?>
+		<?php echo date($sys_shortdatefmt, $pt->getEndDate() ); ?>
 		</td>
 	</tr>
 
