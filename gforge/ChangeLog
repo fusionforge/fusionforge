@@ -9,6 +9,7 @@
 	* improved Error.class thanks to an idea of Hidenari Miwa (see [#742])
 	* fixed localization problems in tracker
 	* updated french translation for tracker build boxes feature
+	* applied [#797] Tracker Layout by Oliver Blume
 
 2004-09-09  Francisco Gimeno <kikov@kikov.org>
 
