@@ -57,7 +57,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		$rows = db_numrows($res_new);
 	}
 
-	print "\t<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
+	echo "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
 	for ($i=0; $i<$rows; $i++) {
 		$row_new = db_fetch_array($res_new);
 		// avoid dupulicates of different file types
@@ -71,7 +71,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			print "<tr><td>".$Language->getText('new','module').": "."$row_new[module_name]</td>\n";
 			print "<td>".$Language->getText('new','version').": "."$row_new[release_version]</td>\n";
 			print "<td>" . date("M d, h:iA",$row_new[release_date]) . "</td>\n";
-			print "</tr>";
+			print "</tr>\n";
 
 			print "<tr valign=\"top\">";
 			print "<td colspan=\"2\">&nbsp;<br />";
@@ -83,21 +83,21 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			// print "<p>Release rating: ";
 			// print vote_show_thumbs($row_new[filerelease_id],2);
 			print "</td>";
-			print '<td align="center" nowrap="nowrap" border="1">';
+			print '<td align="center" nowrap="nowrap">';
 			// print '&nbsp;<br />Rate this Release!<br />';
 			// print vote_show_release_radios($row_new[filerelease_id],2);
 			print "&nbsp;</td>";
-			print "</tr>";
+			print "</tr>\n";
 
 			print '<tr><td colspan="3">';
 			// link to whole file list for downloads
-			print "&nbsp;<br /><a href=\"/project/showfiles.php?group_id=$row_new[group_id]&release_id=$row_new[release_id]\">";
+			print "&nbsp;<br /><a href=\"/project/showfiles.php?group_id=$row_new[group_id]&amp;release_id=$row_new[release_id]\">";
 			print $Language->getText('new','download'). "</a> ";
 			print '('.$Language->getText('new','projects_total') .$row_new['downloads'].') | ';
 			// notes for this release
 			print "<a href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
 			print $Language->getText('new','notes_changes'). "</a>";
-			print '<hr /></td></tr>';
+			print "<hr /></td></tr>\n";
 
 			$G_RELEASE["$row_new[group_id]"] = 1;
 		}
@@ -122,7 +122,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	} else {
 		echo "&nbsp;";
 	}
-	echo "</td></tr></table>";
+	echo "</td></tr>\n</table>";
 
 }
 

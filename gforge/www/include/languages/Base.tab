@@ -2297,7 +2297,7 @@ new	version	Version:
 new	this_project_has_not	This project has not submitted a description
 new	download	Download
 new	projects_total	Project Total:
-new	notes_changes	Notes & Changes
+new	notes_changes	Notes &amp; Changes
 new	newer_releases	Newer Releases
 new	older_releases	Older Releases
 add_snippet	title	Submit A New Snippet
