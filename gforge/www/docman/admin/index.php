@@ -102,10 +102,19 @@ function main_page($group_id) {
 
 		echo '
        				</td>
-			</tr>
+			</tr>';
 
+		//	if this is a text/html doc, display an edit box
+		if (strstr($row['filetype'],'ext')) {
 
+			echo    '
+				<tr>
+					<th>Document Information (in html format):</th>
+					<td><textarea cols="80" rows="20" name="data">'. htmlspecialchars(base64_decode($row['data'])).'</textarea></td>
+				</tr>';
+		}
 
+		echo '
 		</table>
 
 		<input type="hidden" name="docid" value="'.$row['docid'].'">
@@ -178,10 +187,13 @@ function main_page($group_id) {
 	
 		if (db_numrows($result) == 1) {	
 
+			if ($data) {
+				$datastring = "data = '". base64_encode($data) ."',";
+			}
 			// data in DB stored in htmlspecialchars()-encoded form
 			$query = "update doc_data "
 				."set title = '".htmlspecialchars($title)."', "
-		//		."data = '".htmlspecialchars($data)."', "
+				.$datastring
 				."updatedate = '".time()."', "
 				."doc_group = '".$doc_group."', "
 				."stateid = '".$stateid."', "
