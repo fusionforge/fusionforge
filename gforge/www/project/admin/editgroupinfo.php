@@ -166,7 +166,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesCVS()); ?> ><br />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_cvs') ?></strong>
 </td>
 </tr>
 
