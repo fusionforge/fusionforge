@@ -97,7 +97,8 @@ if ($forum_id) {
 		exit_error('Error',$fh->getErrorMessage());
 	}
 
-	forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum','sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
+	forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
+	'sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
 
 /**
  *
@@ -161,7 +162,7 @@ if ($forum_id) {
 
 	if ($style=='nested') {
 
-		$msg_arr =& $fmf->nestArray($fmf->getNested($thread_id));
+		$msg_arr =& $fmf->nestArray($fmf->getNested());
 
 		if ($fmf->isError()) {
 			echo $fmf->getErrorMessage();
@@ -247,7 +248,7 @@ if ($forum_id) {
 
 	} else if ($style=='flat' || ($style=='ultimate' && $thread_id)) {
 
-		$msg_arr =& $fmf->getFlat();
+		$msg_arr =& $fmf->getFlat($thread_id);
 		if ($fmf->isError()) {
 			echo $fmf->getErrorMessage();
 		}
@@ -343,7 +344,7 @@ if ($forum_id) {
 	$ret_val .= '</TABLE>';
 
 	echo $ret_val;
-
+/*
 	echo '<P>&nbsp;<P>';
 
 	if (!$thread_id) {
@@ -353,7 +354,7 @@ if ($forum_id) {
 		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
 		$fh->showPostForm();
 	}
-
+*/
 	forum_footer(array());
 
 } else {

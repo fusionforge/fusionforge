@@ -62,6 +62,7 @@ class ForumFactory extends Error {
 		} else {
 			$public_flag='=1';
 		}
+
 		$sql="SELECT *
 			FROM forum_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."' 

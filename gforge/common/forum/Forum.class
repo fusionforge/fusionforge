@@ -259,6 +259,24 @@ class Forum extends Error {
 		return $this->data_array['total'];
 	}
 
+	/**
+	 *	getThreadCount - the total number of threads in this forum.
+	 *
+	 *	@return int	The count.
+	 */
+	function getThreadCount() {
+		return $this->data_array['threads'];
+	}
+
+	/**
+	 *	getMostRecentDate - the most recent date of a post to this board.
+	 *
+	 *	@return int	The most recent date.
+	 */
+	function getMostRecentDate() {
+		return $this->data_array['recent'];
+	}
+
 	function getMonitoringIDs() {
 		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
 		$result=db_query($sql);

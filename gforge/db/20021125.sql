@@ -185,3 +185,15 @@ INSERT INTO artifact_resolution VALUES (103,'Out of Date');
 INSERT INTO artifact_resolution VALUES (104,'Postponed');
 INSERT INTO artifact_resolution VALUES (105,'Rejected');
 
+--
+-- Post pre6 changes
+--
+DROP VIEW forum_group_list_vw;
+CREATE VIEW forum_group_list_vw AS
+SELECT forum_group_list.*, forum_agg_msg_count.count as total,
+    (SELECT max(date) AS recent FROM forum WHERE group_forum_id=forum_group_list.group_forum_id) AS recent,
+    (SELECT count(*) FROM
+        (SELECT thread_id
+            FROM forum
+            WHERE group_forum_id=forum_group_list.group_forum_id GROUP BY thread_id) as tmp) AS threads
+    FROM forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id);

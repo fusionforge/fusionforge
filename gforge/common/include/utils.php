@@ -109,10 +109,10 @@ function util_send_jabber($to,$subject,$body) {
 			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body))) {
 				echo '<BR>Error Sending to '.$to_arr[$i];
 			}
-			$JABBER->CruiseControl(1);
 		}
 	}
 
+	$JABBER->CruiseControl(2);
 	$JABBER->Disconnect();
 }
 

@@ -149,6 +149,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			echo '</TD></TR>';
 		}
 
+		echo $GLOBALS['HTML']->listTableBottom();
 		/*
 			Mass Update Code
 		*/
@@ -167,16 +168,17 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 	//-->
 	</script>
-			<TR><TD COLSPAN="5">
+
+			<TABLE WIDTH="100%" BORDER="0">
+			<TR><TD COLSPAN="2">
 <font size=1>
 <a href="javascript:checkAll(1)">Check&nbsp;All</a>
 -
  <a href="javascript:checkAll(0)">Clear&nbsp;All</a>
 </font>
 <P>
-
-			<FONT COLOR="#FF0000"><B>Admin:</B></FONT>  If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
-			<TABLE WIDTH="100%" BORDER="0">
+<FONT COLOR="#FF0000"><B>Admin:</B></FONT>  If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+			</TD></TR>
 
 			<TR>
 			<TD><B>Category: <A href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><b>(?)</b></a></B><BR>'. $this->categoryBox ('category_id','xzxz','No Change') .'</TD>
@@ -209,11 +211,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			<TR><TD COLSPAN="3" ALIGN="MIDDLE"><INPUT TYPE="SUBMIT" name="submit" VALUE="Mass Update"></TD></TR>
 
 			</TABLE>		
-		</FORM>
-			</TD></TR>';
+		</FORM>';
 		}
 
-		echo $GLOBALS['HTML']->listTableBottom();
 
 	}
 

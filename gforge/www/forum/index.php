@@ -45,7 +45,10 @@ if ($group_id) {
 		exit;
 	}
 
-	echo $Language->getText('forum', 'choose');
+//	echo $Language->getText('forum', 'choose');
+
+	$tablearr=array('Forum','Threads','Posts','Last Post');
+	echo $HTML->listTableTop($tablearr);
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders
@@ -55,14 +58,16 @@ if ($group_id) {
 		if ($farr[$j]->isError()) {
 			echo $farr->getErrorMessage();
 		} else {
-			echo '<A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+			echo '<TR BGCOLOR="'.html_get_alt_row_color($j).'"><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
 				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
 				'&nbsp;' .
-				$farr[$j]->getName() .'</A> ('. $farr[$j]->getMessageCount() .' msgs)
-				<BR>'.
-				$farr[$j]->getDescription() .'<P>';
+				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>
+				<TD>'.$farr[$j]->getThreadCount().'</TD>
+				<TD>'. $farr[$j]->getMessageCount() .'</TD>
+				<TD>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</TD></TR>';
 		}
 	}
+	echo $HTML->listTableBottom();
 
 	forum_footer(array());
 

@@ -17,9 +17,9 @@ class Layout extends Error {
 
 	var $imgroot = '/themes/gforge/images/';
 	var $COLOR_CONTENT_BACK= '#FFFFFF';
-	var $COLOR_LTBACK1= '#EAECEF';
+	var $COLOR_LTBACK1= '#EEEEEF';
 	var $COLOR_LTBACK2= '#FAFAFA';
-	var $COLOR_HTMLBOX_TITLE = '#D1D5D7';
+	var $COLOR_HTMLBOX_TITLE = '#D5D5D7';
 	var $COLOR_HTMLBOX_BACK = '#EAECEF';
 	var $FONT_CONTENT = 'Helvetica';
 	var $FONT_HTMLBOX_TITLE = 'Helvetica';
@@ -390,6 +390,8 @@ if ($params['toptab'] && $params['group']) {
 	 */
 	function listTableTop ($title_arr,$links_arr=false) {
 		$return = '
+		<TABLE cellspacing="0" cellpadding="1" width="100%" border="0" bgcolor="' .$this->COLOR_HTMLBOX_TITLE.'">
+        <TR><TD>
 		<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
 			<TR BGCOLOR="'. $this->COLOR_HTMLBOX_TITLE .'">';
 
@@ -411,7 +413,7 @@ if ($params['toptab'] && $params['group']) {
 	}
 
 	function listTableBottom() {
-		return '</TABLE>';
+		return '</TABLE></TD></TR></TABLE>';
 	}
 
 	function outerTabs($params) {
