@@ -1573,7 +1573,6 @@ class Group extends Error {
 			return false;
 		}
 
-		db_begin();
 		$role = new Role($this,$role_id);
 		if (!$role || !is_object($role)) {
 			$this->setError('Could Not Get Role');
@@ -1589,6 +1588,7 @@ class Group extends Error {
 		//
 		//	Update user in system
 		//
+		db_begin();
 		if (!$SYS->sysGroupUpdateUser($this->getID(),$user_id)) {
 			$this->setError($SYS->getErrorMessage());
 			db_rollback();
