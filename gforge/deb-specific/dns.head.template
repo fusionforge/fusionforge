@@ -26,6 +26,7 @@ mail1             	IN      A	{ip_address}
 users			IN	A	{ip_address}
 lists             	IN      A	{ip_address}
 download            	IN      A	{ip_address}
+upload            	IN      A	{ip_address}
 images			IN	A	{ip_address}
 webdev			IN	A	{ip_address}
 
