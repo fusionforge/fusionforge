@@ -1,5 +1,8 @@
 2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* db/20030209.sql: New file.  Reimplements functionality of
+	20030109.sql in a way that works for all pgsql > 7.0.
+
 	* www/themes/kde/Theme.class(projectTabs): do not display tracker
 	icon, FRS icon if the project is not using them.
 
