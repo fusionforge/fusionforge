@@ -186,7 +186,13 @@ readdefault() {
 			DEFAULTsys_sslkey=$(findkey)
 		fi
 	fi
-	
+	if [ ! -d "$DEFAULTsys_themeroot/$DEFAULTsys_theme" ]
+	then
+		if [ -d "$DEFAULTsys_themeroot/gforge" ]
+		then
+			DEFAULTsys_theme=gforge
+		fi
+	fi
 	rm -f $1.$$readdefault
 }
 
