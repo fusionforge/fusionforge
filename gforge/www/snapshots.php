@@ -15,9 +15,13 @@ require_once('pre.php');
 
 // Get current information
 $group_id=getIntFromGet('group_id');
+if (!$group_id) {
+	exit_no_group();
+}
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_no_group();
+	exit_error($Language->getText('general','error'),
+		$Language->getText('error','error_creating_group'));
 } else if ($group->isError()) {
 	exit_error($Language->getText('general','error'),
 		$group->getErrorMessage());
