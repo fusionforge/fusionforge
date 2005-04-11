@@ -262,7 +262,7 @@ foreach($users as $user) {
 foreach($groups as $group) {
 
 	//create an FTP upload dir for this project
-	if ($sys_use_ftp_upload) { 
+	if ($sys_use_ftpuploads) { 
 		if (!is_dir($sys_ftp_upload_dir.'/'.$group)) {
 			@mkdir($sys_ftp_upload_dir.'/'.$group); 
 		}
