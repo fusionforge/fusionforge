@@ -25,7 +25,7 @@ ldap_host=ldap.gforge.company.com
 ldap_base_dn=dc=gforge,dc=company,dc=com
 ldap_web_add_password=
 cgidir=/path/to/cgidir
-cronolog_path=/usr/bin/cronolog
+cronolog_path=/usr/sbin/cronolog
 sys_path_to_jpgraph=/path/to/jpgraph
 sys_path_to_scmweb=/usr/lib/gforge/bin/
 gforge_chroot=
@@ -91,3 +91,6 @@ sys_jabber_pass=
 sys_plugins_path=/usr/lib/gforge/plugins/
 sys_sslcrt=/etc/apache/ssl.crt/server.crt
 sys_sslkey=/etc/apache/ssl.key/server.key
+noreply_to_bitbucket=true
+sys_apache_user=www-gforge
+sys_apache_group=www-gforge

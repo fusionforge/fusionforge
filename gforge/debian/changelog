@@ -1,4 +1,4 @@
-gforge (4.1-5u) unstable; urgency=low
+gforge (4.1-5w) unstable; urgency=low
 
   * [Christian] nss-pgsql1 integration
   * [Christian] System.class reorganization 
@@ -8,6 +8,8 @@ gforge (4.1-5u) unstable; urgency=low
   * [Christian] Fixed a problem with OID at db upgrade (see db-upgrade.pl)
   * [Christian] Moved some gforge.conf var from include.pl to local.pl
   * [Christian] Update to fit with last sid LDAP
+  * [Christian] Added www-gforge user used as the apache user/group
+    for gforge main vhosts
 
  -- Christian Bayle <bayle@debian.org>  Sat, 19 Feb 2005 17:31:29 +0100
 

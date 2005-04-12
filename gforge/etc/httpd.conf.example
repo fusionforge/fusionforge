@@ -31,6 +31,15 @@ UseCanonicalName Off
 	ServerAlias www.gforge.company.com
 	ServerAdmin webmaster@gforge.company.com
 	DocumentRoot /path/to/gforge/www
+	# Apache 1.3
+	#User www-gforge
+	#Group www-gforge
+	# Apache 2 apache2-mpm-perchild
+	#AssignUserID www-gforge www-gforge
+	# Apache 2 but this is not the same
+	#<IfModule mod_suexec.c>
+	#	SuexecUserGroup www-gforge www-gforge
+	#</IfModule>
 	Alias /images/ /path/to/gforge/www/images/
 	DirectoryIndex index.html index.php
 	<IfModule mod_userdir.c>
@@ -56,7 +65,7 @@ UseCanonicalName Off
 	# 404 Error document
 	ErrorDocument 404 /404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+	CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 
 	# GForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
@@ -80,6 +89,15 @@ UseCanonicalName Off
 	ServerName gforge.company.com
 	ServerAlias www.gforge.company.com
 	ServerAdmin webmaster@gforge.company.com
+	# Apache 1.3
+	#User www-gforge
+	#Group www-gforge
+	# Apache 2 apache2-mpm-perchild
+	#AssignUserID www-gforge www-gforge
+	# Apache 2
+	<IfModule mod_suexec.c>
+		SuexecUserGroup www-gforge www-gforge
+	</IfModule>
 	DocumentRoot /path/to/gforge/www
 	Alias /images/ /path/to/gforge/www/images/
 	DirectoryIndex index.html index.php
@@ -106,7 +124,7 @@ UseCanonicalName Off
 	# 404 Error document
 	ErrorDocument 404 /404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+	CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 
 	<IfModule mod_ssl.c>
 		SSLEngine on
@@ -145,7 +163,7 @@ UseCanonicalName Off
   DocumentRoot /path/to/gforge/scm
   Alias /images/ /path/to/gforge/www/images/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -157,7 +175,7 @@ UseCanonicalName Off
   ServerName cvs.gforge.company.com
   DocumentRoot /path/to/gforge/scm
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 
   <IfModule mod_ssl.c>
     SSLEngine on
@@ -185,7 +203,7 @@ UseCanonicalName Off
   ServerName download.gforge.company.com
   DocumentRoot /path/to/var/lib/gforge/download
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -216,7 +234,7 @@ UseCanonicalName Off
 
   RedirectMatch permanent ^/$ http://lists.gforge.company.com/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -261,7 +279,7 @@ UseCanonicalName Off
 
   RedirectMatch permanent ^/$ https://lists.gforge.company.com/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #
@@ -274,6 +292,8 @@ UseCanonicalName Off
         VirtualScriptAlias /home/groups/%1/cgi-bin
 	DirectoryIndex index.html index.php
 	php_admin_value default_charset "UTF-8"
+	php_admin_value include_path "/path/to/gforge/etc/custom:/etc/gforge:/path/to/gforge:/path/to/gforge/www/include:."
+	Alias /themes/ /usr/share/gforge/www/themes/
         <Directory /home/groups>
                Options Indexes FollowSymlinks
                AllowOverride All
@@ -281,7 +301,7 @@ UseCanonicalName Off
                allow from all
        </Directory>
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/sbin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable

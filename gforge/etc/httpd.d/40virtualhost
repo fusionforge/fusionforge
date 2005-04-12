@@ -8,6 +8,8 @@
         VirtualScriptAlias {gforge_chroot}{groupdir}/%1/cgi-bin
 	DirectoryIndex index.html index.php
 	php_admin_value default_charset "UTF-8"
+	php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www/include:."
+	Alias /themes/ /usr/share/gforge/www/themes/
         <Directory {gforge_chroot}{groupdir}>
                Options Indexes FollowSymlinks
                AllowOverride All

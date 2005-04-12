@@ -106,6 +106,8 @@ computedefault(){
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
 	DEFAULTnoreply_to_bitbucket=true
+	DEFAULTsys_apache_user=$(findapacheowner)
+	DEFAULTsys_apache_group=$(findapacheowner)
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
@@ -147,6 +149,17 @@ findcronolog(){
 		else
 			which cronolog
 		fi
+	fi
+}
+findapacheowner(){
+	if grep 'Red Hat' /etc/issue > /dev/null; then
+		echo apache
+	elif grep SuSE /etc/issue > /dev/null; then
+		echo apache
+	elif grep Debian /etc/issue > /dev/null; then
+		echo www-data
+	else
+		echo apache
 	fi
 }
 

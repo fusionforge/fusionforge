@@ -182,6 +182,7 @@ case "$1" in
 			if [ -e /etc/$flavour/httpd.conf ] ; then
 	    			/usr/sbin/a2enmod php4
     				/usr/sbin/a2enmod ssl
+				/usr/sbin/a2enmod suexec
 				#not enabling env module, part of base in apache2
 	    			/usr/sbin/a2enmod vhost_alias
 
