@@ -1,3 +1,8 @@
+2005-04-12  Christian Bayle <bayle@debian.org>
+	
+	* Added sys_apache_user sys_apache_group vars in local.inc
+	and setup with a default value according to your distro (I hope so)
+
 2005-04-10  Mathieu Peltier  <mathieu.peltier@gmail.com>
 
 	* fixed bug [#1111]  FRSFile - Move to other release doesn't work
