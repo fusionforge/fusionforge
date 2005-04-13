@@ -50,6 +50,7 @@ case "$1" in
 	    echo "can't find cronolog in usual places" >&2
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
+	db_stop
 	
         /usr/sbin/gforge-config
 
@@ -65,7 +66,7 @@ case "$1" in
         # Setup our Apache
 	touch /var/lib/gforge/etc/httpd.vhosts  && \
 		chown gforge:gforge /var/lib/gforge/etc/httpd.vhosts && \
-		/usr/lib/gforge/bin/create-vhosts.sh
+		/usr/lib/gforge/bin/create-vhosts.sh --norestart
 	/usr/lib/gforge/bin/install-apache.sh configure
 
 	# If you want to work with sourceforge-web-apache at the same time

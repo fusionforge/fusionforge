@@ -157,12 +157,20 @@ case "$1" in
 	if [ -f /usr/sbin/modules-config ] ; then
 		for flavour in apache apache-perl apache-ssl ; do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-	    			/usr/sbin/modules-config $flavour enable mod_php4
-				if [ $flavour != apache-ssl ] ; then
-	    				/usr/sbin/modules-config $flavour enable mod_ssl
+				if [ "`/usr/sbin/modules-config $flavour query mod_php4`" == "" ] ; then
+	    				/usr/sbin/modules-config $flavour enable mod_php4
 				fi
-	    			/usr/sbin/modules-config $flavour enable mod_env
-	    			/usr/sbin/modules-config $flavour enable mod_vhost_alias
+				if [ $flavour != apache-ssl ] ; then
+					if [ "`/usr/sbin/modules-config $flavour query mod_ssl`" == "" ] ; then
+	    					/usr/sbin/modules-config $flavour enable mod_ssl
+					fi
+				fi
+				if [ "`/usr/sbin/modules-config $flavour query mod_env`" == "" ] ; then
+	    				/usr/sbin/modules-config $flavour enable mod_env
+				fi
+				if [ "`/usr/sbin/modules-config $flavour query mod_vhost_alias`" == "" ] ; then
+	    				/usr/sbin/modules-config $flavour enable mod_vhost_alias
+				fi
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
@@ -180,11 +188,19 @@ case "$1" in
 	if [ -f /usr/sbin/a2enmod ] ; then
 		for flavour in apache2 ;  do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-	    			/usr/sbin/a2enmod php4
-    				/usr/sbin/a2enmod ssl
-				/usr/sbin/a2enmod suexec
+				if [ "`/usr/sbin/modules-config $flavour query php4`" == "" ] ; then
+	    				/usr/sbin/modules-config $flavour enable php4
+				fi
+				if [ "`/usr/sbin/modules-config $flavour query ssl`" == "" ] ; then
+    					/usr/sbin/modules-config $flavour enable ssl
+				fi
+				if [ "`/usr/sbin/modules-config $flavour query suexec`" == "" ] ; then
+					/usr/sbin/modules-config $flavour enable suexec
+				fi
 				#not enabling env module, part of base in apache2
-	    			/usr/sbin/a2enmod vhost_alias
+				if [ "`/usr/sbin/modules-config $flavour query vhost_alias`" == "" ] ; then
+	    				/usr/sbin/modules-config $flavour enable vhost_alias
+				fi
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
@@ -209,6 +225,8 @@ case "$1" in
 		for flavour in apache2 ;  do
 			if [ -x /usr/sbin/$flavour ]; then
 				invoke-rc.d $flavour restart || true
+				#invoke-rc.d $flavour stop || true
+				#invoke-rc.d $flavour start || true
 			fi
 		done
 	fi
