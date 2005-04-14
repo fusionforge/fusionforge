@@ -841,7 +841,7 @@ class Artifact extends Error {
 		}
 
 		if ($details) {
-			$this->addMessage($details);
+			$this->addMessage($details,'',0);
 			$changes['details'] = 1;
 			$send_message=true;
 		}
@@ -903,7 +903,7 @@ class Artifact extends Error {
 			} else {
 				$body = addslashes($acr->getBody());
 				if ($body) {
-					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),user_getname().'@'.$GLOBALS['sys_users_host'])) {
+					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0)) {
 						db_rollback();
 						return false;
 					} else {
