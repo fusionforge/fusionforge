@@ -35,6 +35,9 @@ case "$target" in
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if [ ! pidof postmaster > /dev/null 2> /dev/null ] ; then
+	    invoke-rc.d postgresql start
+	fi
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
             # PostgreSQL configuration for versions prior to 7.3
 	    echo "Configuring for PostgreSQL 7.2"

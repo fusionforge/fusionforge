@@ -1,9 +1,10 @@
-gforge (3.1-29+1) unstable; urgency=low
+gforge (3.1-29+2) unstable; urgency=low
 
   * Fixed LDAP postinst to account for the new slapd.conf syntax for ACLs
     (closes: #304755).
+  * Start PostgreSQL daemon if needed (closes: #291535).
 
- -- Roland Mas <lolando@debian.org>  Fri, 15 Apr 2005 13:52:24 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 15 Apr 2005 14:12:32 +0200
 
 gforge (3.1-29) unstable; urgency=low
 
