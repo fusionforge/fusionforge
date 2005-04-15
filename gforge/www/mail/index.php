@@ -54,7 +54,7 @@ if ($group_id) {
 			db_result($result, $j, 'list_name').'/">' .
 			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp; '.
 			db_result($result, $j, 'list_name').' Archives</a>';
-		echo ' (go to <a href="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.
+		echo ' (go to <a href="http://'.$GLOBALS['sys_lists_host'].'/cgi-bin/mailman/listinfo/'.
 			db_result($result, $j, 'list_name').'">Subscribe/Unsubscribe/Preferences</a>)<br />';
 		echo '&nbsp;'.  db_result($result, $j, 'description') . '<p />';
 	}
