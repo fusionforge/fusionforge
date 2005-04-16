@@ -139,13 +139,13 @@ findkey(){
 }
 
 findcronolog(){
-	if [ -x /usr/sbin/cronolog ]
+	if [ -x /usr/bin/cronolog ]
 	then 
-		echo /usr/sbin/cronolog
+		echo /usr/bin/cronolog
 	else
 		if [ -x /usr/sbin/cronolog ]
 		then
-			echo /usr/bin/cronolog
+			echo /usr/sbin/cronolog
 		else
 			which cronolog
 		fi
