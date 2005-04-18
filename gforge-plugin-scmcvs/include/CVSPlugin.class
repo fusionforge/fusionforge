@@ -142,6 +142,11 @@ class CVSPlugin extends SCM {
 
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
+		if (!$group || !is_object($group)) {
+			return false;
+		} elseif ($group->isError()) {
+			return false;
+		}
 		if ($group->usesPlugin($this->name)) {
  			if ($params['scmcvs_enable_anoncvs']) {
 				$group->SetUsesAnonSCM(true);
@@ -159,7 +164,7 @@ class CVSPlugin extends SCM {
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
-			return 'checked';
+			return 'checked="checked"';
 		} else {
 			return '';
 		}
@@ -172,9 +177,9 @@ class CVSPlugin extends SCM {
 		if ($group->usesPlugin($this->name)) {
 			?>
 			<p>
-			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?>><strong><?php echo $Language->getText('plugin_scmcvs','enable_anonymous_cvs') ?></strong>
+			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo $Language->getText('plugin_scmcvs','enable_anonymous_cvs') ?></strong>
 			<br />
-			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?>><strong><?php echo $Language->getText('plugin_scmcvs','enable_pserver') ?></strong>
+			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> /><strong><?php echo $Language->getText('plugin_scmcvs','enable_pserver') ?></strong>
 			</p>
 			<?php
 		}
