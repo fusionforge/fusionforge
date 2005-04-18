@@ -175,7 +175,7 @@ class SVNPlugin extends SCM {
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
-			return 'checked';
+			return 'checked="checked"';
 		} else {
 			return '';
 		}
@@ -186,7 +186,7 @@ class SVNPlugin extends SCM {
 		global $Language ;
 		if ( $group->usesPlugin ( $this->name ) ) {
 			?>
-			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> ><strong><?php echo $Language->getText('plugin_scmsvn', 'enable_anonymous_svn') ?></strong></p>
+			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo $Language->getText('plugin_scmsvn', 'enable_anonymous_svn') ?></strong></p>
 			<?php
 		}
 	}
