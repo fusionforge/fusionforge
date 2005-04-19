@@ -41,6 +41,9 @@ case "$target" in
 	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if ! pidof postmaster > /dev/null 2> /dev/null ; then
+		invoke-rc.d postgresql start
+	fi
 	if [ "$db_host" == "127.0.0.1" -o "$db_host" == "localhost" ]
 	then
 		# Otherwise the line wouldn't be used
@@ -232,11 +235,13 @@ EOF
 	fi
 	
 	# Install/upgrade the database contents (tables and data)
-        pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
-        if [ "$pid" = "" ] ; then
+        #pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
+        #if [ "$pid" = "" ] ; then
+	if ! pidof postmaster > /dev/null 2> /dev/null ; then
 	    invoke-rc.d postgresql start
 	else
-	    kill -HUP $pid
+	    #kill -HUP $pid
+	    invoke-rc.d postgresql restart
 	fi
 	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
@@ -246,7 +251,7 @@ EOF
 	# Must be root to reorg these files, but only have to do it once
 	[ ! -f /var/lib/gforge/db/20050127-frs-reorg.done ] &&\
 	(/usr/lib/gforge/db/20050127-frs-reorg.php \
-	-d include_path=/usr/share/gforge/:/usr/share/gforge/www/include &&\
+	-d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include &&\
 	touch /var/lib/gforge/db/20050127-frs-reorg.done) || true
 	# Le last line had the bad idea to create a cache file owned by root
 	rm -f /var/cache/gforge/English.cache
