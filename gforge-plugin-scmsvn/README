@@ -1,19 +1,24 @@
 gforge-plugin-scmsvn
 --------------------
 
-This is the Subversion plugin for Gforge.  It creates Subversion
+This is the Subversion plugin for GForge. It creates Subversion
 repositories and provides some functionality to manage them.
 
 Prerequisites:
 
-- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+- install Perl, DBI and DBD::Pg as per GForge's INSTALL file
 
 - You'll also need to install Subversion, as well as Python and the
-Subversion-Python module (for ViewSVN).  On Red Hat systems, Python is
-available natively, but you may have to fetch Subversion-Python
-packages from <http://subversion.tigris.org/project_packages.html>.
-It seems Mandrake provides the module natively.  Again, on Debian,
-apt's dependencies system will take care of it all.
+Subversion-Python module (if you want to use ViewSVN). On Red Hat
+systems, Python is available natively, but you may have to fetch
+Subversion-Python packages from
+<http://subversion.tigris.org/project_packages.html>. It seems
+Mandrake provides the module natively. Again, on Debian, apt's
+dependencies system will take care of it all.
+
+- ViewCVS (<http://sourceforge.net/projects/viewcvs>): warning only
+latest CVS version supports SVN but Debian provides for example
+ViewCVS packages that supports SVN.
 
 Installation:
 
@@ -38,6 +43,18 @@ want to use SVN
 - /usr/lib/gforge/bin/register-plugin scmsvn "Subversion"
 
  -- Roland Mas <lolando@debian.org>, Tue May 18 22:13:57 2004
+
+Note about ViewCVS wrapper:
+
+ViewCVS CSS static files (www/viewcvs/) and templates
+(etc/plugins/scmsvn/viewcvs/templates/) have been extracted from
+ViewCVS Debian package version 0.9.2+cvs.1.0.dev.2004.07.28-1.4.
+
+Modifications in templates:
+- mainly include/header.ezt and footer.ezt
+- TODO: conversion in XHTML
+
+ -- Mathieu Peltier <mathieu.peltier@gmail.com>, Sun Apr 10 23:13:38 2005
 
 Local Variables:
 mode: readme-debian

@@ -42,18 +42,20 @@ install: build
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
-	cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
+	#cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
+	cp cgi-bin/viewcvs.cgi $(DESTDIR)/usr/lib/gforge/bin/
+	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/viewcvs.cgi
 	cp -r etc/* $(DESTDIR)/etc/gforge/
-	# cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
+	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
 	# install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.conf.d/50$(PLUGIN)
 	# install -m 0600 httpd.secrets $(DESTDIR)/etc/gforge/httpd.secrets.d/50$(PLUGIN)
 	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
+	#find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	# find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
-	# find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 
 
 # Build architecture-independent files here.

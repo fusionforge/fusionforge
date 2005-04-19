@@ -1,0 +1,166 @@
+[# setup page definitions]
+  [define location][rootname][if-any where]: [where][end][end]
+  [define page_title][cfg.general.main_title] - diff - [location][end]
+  [define help_href][docroot]/help_rootview.html[end]
+[# end]
+
+[include "include/header.ezt" "diff"]
+
+<h3 align=center>Diff for /[where] between version [rev1] and [rev2]</h3>
+
+[if-any raw_diff]
+  <pre class="vc_raw_diff">[raw_diff]</pre>
+[else]
+<table border=0 cellspacing=0 cellpadding=0 width="100%">
+  <tr class="vc_diff_header">
+    <th width="50%" valign=top>
+      version [rev1], [date1]
+      [if-any tag1]<br>Tag: [tag1][end]
+    </th>
+    <th width="50%" valign=top>
+      version [rev2], [date2]
+      [if-any tag2]<br>Tag: [tag2][end]
+    </th>
+  </tr>
+
+  [for changes]
+    [is changes.type "header"]
+      <tr class="vc_diff_chunk_header">
+        <td width="50%">
+          <table width="100%" border=1 cellpadding=5>
+            <tr>
+              <td> <b>Line [changes.line1]</b>&nbsp;
+              <span class="vc_diff_chunk_extra">[changes.extra]</span></td>
+            </tr>
+          </table>
+        </td>
+       <td width="50%">
+          <table width="100%" border=1 cellpadding=5>
+            <tr>
+              <td> <b>Line [changes.line2]</b>&nbsp;
+              <span class="vc_diff_chunk_extra">[changes.extra]</span></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    [else]
+      [is changes.type "add"]
+        <tr>
+          <td class="vc_diff_empty">&nbsp;</td>
+          <td class="vc_diff_add">&nbsp;[changes.right]</td>
+        </tr>
+      [else]
+        [is changes.type "remove"]
+          <tr>
+            <td class="vc_diff_remove">&nbsp;[changes.left]</td>
+            <td class="vc_diff_empty">&nbsp;</td>
+          </tr>
+        [else]
+          [is changes.type "change"]
+            <tr>
+              [if-any changes.have_left]
+                <td class="vc_diff_change">&nbsp;[changes.left]</td>
+              [else]
+                <td class="vc_diff_change_empty">&nbsp;</td>
+              [end]
+              [if-any changes.have_right]
+                <td class="vc_diff_change">&nbsp;[changes.right]</td>
+              [else]
+                <td class="vc_diff_change_empty">&nbsp;</td>
+              [end]
+            </tr>
+          [else]
+            [is changes.type "no-changes"]
+              <tr>
+                <td colspan=2>&nbsp;</td>
+              </tr>
+              <tr class="vc_diff_empty">
+                <td colspan=2 align=center><br>
+                <b>- No changes -</b><br>&nbsp; </td>
+              </tr>
+            [else]
+              [is changes.type "binary-diff"]
+                <tr>
+                  <td colspan=2>&nbsp;</td>
+                </tr>
+                <tr class="vc_diff_empty">
+                  <td colspan=2 align=center><br>
+                  <b>- Binary file revisions differ -</b><br>&nbsp; </td>
+                </tr>
+              [else]
+                [is changes.type "error"]
+                  <tr>
+                    <td colspan=2>&nbsp;</td>
+                  </tr>
+                  <tr class="vc_diff_empty">
+                    <td colspan=2 align=center> <br>
+                    <b>- ViewCVS depends on rcsdiff and GNU diff to create 
+                    this page.  ViewCVS cannot find GNU diff. Even if you 
+                    have GNU diff installed, the rcsdiff program must be 
+                    configured and compiled with the GNU diff location.
+                    -</b> <br>&nbsp; </td>
+                  </tr>
+                [else]
+                  <tr>
+                    <td class="vc_diff_nochange">&nbsp;[changes.left]</td>
+                    <td class="vc_diff_nochange">&nbsp;[changes.right]</td>
+                  </tr>
+                [end]
+              [end]
+            [end]
+          [end]
+        [end]
+      [end]
+    [end]
+  [end]
+</table>
+[end]
+
+<br><hr noshade width="100%">
+
+<table border=0 cellpadding=10>
+  <tr>
+    <td>
+      <form method=get action="[diff_format_action]">
+        [diff_format_hidden_values]
+        <input type=checkbox name="makepatch" value="1"> 
+        Generate output suitable for use with a patch program<br>
+        <select name="diff_format" onchange="submit()">
+          <option value="h" [is diff_format "h"]selected[end]>Colored Diff</option>
+          <option value="l" [is diff_format "l"]selected[end]>Long Colored Diff</option>
+          <option value="u" [is diff_format "u"]selected[end]>Unidiff</option>
+          <option value="c" [is diff_format "c"]selected[end]>Context Diff</option>
+          <option value="s" [is diff_format "s"]selected[end]>Side by Side</option>
+        </select>
+        <input type=submit value="Show">
+      </form>
+    </td>
+    <td>
+[if-any raw_diff]
+      &nbsp;
+[else]
+      <table border=1>
+        <tr>
+          <td>Legend:<br>
+            <table border=0 cellspacing=0 cellpadding=1>
+              <tr>
+                <td align=center class="vc_diff_remove">Removed from v.[rev1]</td>
+                <td class="vc_diff_empty">&nbsp;</td>
+              </tr>
+              <tr>
+                <td align=center colspan=2 class="vc_diff_change">changed lines</td>
+              </tr>
+              <tr>
+                <td class="vc_diff_empty">&nbsp;</td>
+                <td align=center class="vc_diff_add">Added in v.[rev2]</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+[end]
+    </td>
+  </tr>
+</table>
+
+[include "include/footer.ezt"]

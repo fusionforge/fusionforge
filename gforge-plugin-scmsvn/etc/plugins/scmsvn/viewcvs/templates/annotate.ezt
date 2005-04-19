@@ -1,0 +1,45 @@
+[# setup page definitions]
+  [define location][rootname][if-any where]: [where][end][end]
+  [define page_title][cfg.general.main_title] - annotate - [location][end]
+  [define help_href][docroot]/help_rootview.html[end]
+[# end]
+
+[include "include/header.ezt" "annotate"]
+
+<hr noshade>
+
+[define class1]vc_row_even[end]
+[define class2]vc_row_odd[end]
+[define last_rev]0[end]
+[define rowclass][class1][end]
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+[for lines]
+  [is lines.rev last_rev]
+  [else]
+    [is rowclass class1]
+      [define rowclass][class2][end]
+    [else]
+      [define rowclass][class1][end]
+    [end]
+  [end]
+
+  <tr class="[rowclass]">
+    <td class="vc_blame_line">[lines.line_number] :</td>
+    <td class="vc_blame_author">
+      [is lines.rev last_rev]&nbsp;[else][lines.author][end]
+    </td>
+    <td class="vc_blame_rev">
+      [is lines.rev last_rev]
+        &nbsp;
+      [else]
+        [if-any lines.diff_url]<a href="[lines.diff_url]">[end][lines.rev][if-any lines.diff_url]</a>[end]
+      [end]
+    </td>
+    <td class="vc_blame_text">[lines.text]</td>
+  </tr>
+  [define last_rev][lines.rev][end]
+[end]
+</table>
+
+[include "include/footer.ezt"]

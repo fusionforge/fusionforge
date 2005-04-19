@@ -6,6 +6,10 @@ gforge-plugin-scmsvn (4.1-5p) unstable; urgency=low
   * [Christian] Splited svn_dump_update in svn_dump and svn_update
   svn_dump is almost identical to cvs_dump
   * [Mathieu] Link to snapshots added
+  * [Mathieu] Integrated ViewCVS PHP wrapper inspired from CodeX and
+  CVSweb's ones
+  * [Mathieu] Created repository with fsfs backend because ViewCVS
+  requires write permission with default SVN backend
 
  -- Christian Bayle <bayle@debian.org>  Sat, 26 Feb 2005 09:13:47 +0100
 

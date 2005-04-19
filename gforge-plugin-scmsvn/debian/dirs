@@ -5,9 +5,12 @@ etc/gforge/httpd.d
 etc/gforge/httpd.secrets.d
 etc/gforge/plugins
 etc/gforge/plugins/scmsvn
+etc/gforge/plugins/scmsvn/viewcvs/templates
+etc/gforge/plugins/scmsvn/viewcvs/templates/include
 usr
 usr/lib
 usr/lib/gforge
+usr/lib/gforge/bin
 usr/lib/gforge/plugins/
 usr/lib/gforge/plugins/scmsvn
 usr/lib/gforge/plugins/scmsvn/bin
@@ -22,6 +25,9 @@ usr/share/gforge
 usr/share/gforge/www
 usr/share/gforge/www/plugins
 usr/share/gforge/www/plugins/scmsvn
+usr/share/gforge/www/plugins/scmsvn/viewcvs
+usr/share/gforge/www/plugins/scmsvn/viewcvs/icons
+usr/share/gforge/www/plugins/scmsvn/viewcvs/images
 usr/share/gforge/scm
 var
 var/log
