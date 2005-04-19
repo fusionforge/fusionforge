@@ -34,9 +34,10 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
 // to be revised		
-// 		$this->hooks[] = "scm_stats";
-// 		$this->hooks[] = "group_approved";
+// 		$this->hooks[] = 'scm_stats';
+// 		$this->hooks[] = 'group_approved';
 		$this->hooks[] = 'scm_plugin';
+		$this->hooks[] = 'cssfile';
 
 		require_once('plugins/scmsvn/config.php') ;
 		
@@ -67,12 +68,15 @@ class SVNPlugin extends SCM {
 		case 'scm_stats':
 			$this->display_stats ($params) ;
 			break;
-// 		case "group_approved":
+// 		case 'group_approved':
 // 			$this->group_approved ($params) ;
 // 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
+			break;
+		case 'cssfile':
+			$this->cssfile_scm ($params) ;
 			break;
 		default:
 			// Forgot something
@@ -115,10 +119,10 @@ class SVNPlugin extends SCM {
 					print $Language->getText('plugin_scmsvn', 'anonsvn');
 					print '<p>';
 					if ($this->use_ssh) {
-						print '<tt>svn checkout svn://' . $project->getSCMBox(). '/'. $this->svn_root .'/'. $project->getUnixName() .'</tt>';
+						print '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
 					}
 					if ($this->use_dav) {
-						print '<tt>http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/'. $this->svn_root .'/'. $project->getUnixName() .'</tt>';
+						print '<tt>svn checkout http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/>';
 					}
 					print '</p>';
 				}
@@ -150,8 +154,9 @@ class SVNPlugin extends SCM {
 				echo $this->display_stats(array('group_id'=>$group_id)).'<p>';
 				if ($displaySvnBrowser) {
 					echo $Language->getText('plugin_scmsvn', 'browsetree');
-					echo '<p>[<a href="http://' . $project->getSCMBox() . '/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=' . $project->getUnixName() . '">' . $Language->getText('plugin_scmsvn', 'browseit') . '</a>]</p>';
+					echo '<p>[<a href="'.$this->account_group_viewcvs_url($group_id).'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
 				}
+
 				echo $HTML->boxBottom();
 				?>
 				</td>
@@ -163,6 +168,11 @@ class SVNPlugin extends SCM {
 
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
+		if (!$group || !is_object($group)) {
+			return false;
+		} elseif ($group->isError()) {
+			return false;
+		}
 		if ( $group->usesPlugin ( $this->name ) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
 				$group->SetUsesAnonSCM(true);
@@ -225,6 +235,21 @@ class SVNPlugin extends SCM {
 			$project->setPluginUse('scmsvn', 0) ;
 		}
 		return true;
+	}
+
+	/**
+	 *      account_group_viewcvs_url() - Returns URL for group's SVN interface WWW.
+	 *
+	 *	@param  int  The group id
+	 *      @return URL to access CVS over HTTP
+	 */
+	function account_group_viewcvs_url($group_id) {
+		$project =& group_get_object($group_id);
+		return 'http://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
+	}
+
+	function cssfile_scm ($layout) {
+		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmsvn/viewcvs/styles.css" />';
 	}
 }
 

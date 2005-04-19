@@ -1,5 +1,5 @@
 plugin_scmsvn	admin	Administration
-plugin_scmsvn	anonsvn	<p><b>Accès Subversion anonyme</b></p><p>Le dépôt Subversion de ce projet peut être récupéré anonymement en suivant les instructions suivantes.</p>
+plugin_scmsvn	anonsvn	<p><b>Accès Subversion anonyme</b></p><p>Le dépôt Subversion de ce projet peut être récupéré anonymement en utilisant la(les) commande(s) suivante(s).</p>
 plugin_scmsvn	browseit	Parcourir le dépôt Subversion
 plugin_scmsvn	browsetree	<b>Parcourir le dépôt Subversion</b><p>Parcourir l'arbre Subversion vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
 plugin_scmsvn	developername	développeur
