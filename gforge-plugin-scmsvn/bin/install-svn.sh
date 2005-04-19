@@ -12,17 +12,19 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
+gforge_chroot=$(grep ^gforge_chroot= /etc/gforge/gforge.conf | cut -d= -f2-)
+
 case "$1" in
     configure)
         echo "Modifying inetd for Subversion server"
         # First, dedupe the commented lines
-        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r /var/lib/gforge/chroot/svnroot" || true
-        update-inetd --add  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r /var/lib/gforge/chroot/svnroot"
+        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
+        update-inetd --add  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot"
 	/usr/lib/gforge/plugins/scmsvn/bin/install-viewcvs.sh
 	;;
 
     purge)
-        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r /var/lib/gforge/chroot/svnroot"
+        update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot"
 	;;
 
     *)
