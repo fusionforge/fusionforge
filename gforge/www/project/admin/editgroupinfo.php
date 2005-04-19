@@ -42,7 +42,6 @@ if (!$group || !is_object($group)) {
 }
 
 // If this was a submission, make updates
-
 if ($submit) {
 
 	$res = $group->update(
@@ -83,7 +82,6 @@ project_admin_header(array('title'=>$Language->getText('project_admin_editgroupi
 if ($submit) {
 	$hookParams['group']=$group_id;
 	plugin_hook("groupisactivecheckboxpost",$hookParams);
-
 }
 
 /* NOT ACTIVE YET
@@ -100,45 +98,48 @@ $images_res = db_query("
 
 ?>
 
-<p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
+
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
-<p><?php echo $Language->getText('project_admin_editgroupinfo','group_name') ?>:
-<br /><input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" maxlength="40"></p>
+<p>
+<?php echo $Language->getText('project_admin_editgroupinfo','group_name') ?>:<br />
+<input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" maxlength="40" />
+</p>
 
-<p><?php echo $Language->getText('project_admin_editgroupinfo','short_description') ?>:
-<br /><textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
-<?php echo $group->getDescription(); ?></textarea></p>
+<p>
+<?php echo $Language->getText('project_admin_editgroupinfo','short_description') ?>:<br />
+<textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
+<?php echo $group->getDescription(); ?>
+</textarea>
+</p>
 
-<p><?php echo $Language->getText('project_admin_editgroupinfo','homepage_link') ?>:
-<br /><tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
-<br />
-
+<p>
+<?php echo $Language->getText('project_admin_editgroupinfo','homepage_link') ?>:<br />
+<tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
+</p>
 
 <?php
 /* NOT ACTIVE YET
-
-<br />Logo Image:
+<p>
+Logo Image:
 <?php echo html_build_select_box($images_res, 'logo_image_id', $group->getLogoImageID(), true); ?>
  (first, upload via <a href="editimages.php?group_id='.$group_id.'">Multimedia Manager</a>, 
- dimensions 200x200 max)<br />
+ dimensions 200x200 max)
+</p>
 */
-
 ?>
 
 <hr />
 
 <h3><?php echo $Language->getText('project_admin_editgroupinfo','active_features') ?>:</h3>
-<p>
-
 
 <?php
 
 // This function is used to render checkboxes below
 function c($v) {
 	if ($v) {
-		return 'CHECKED';
+		return 'checked';
 	} else {
 		return '';
 	}
@@ -156,7 +157,7 @@ if($sys_use_mail) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> ><br />
+<input type="checkbox" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_mailing_lists') ?></strong>
@@ -169,7 +170,7 @@ if($sys_use_survey) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> ><br />
+<input type="checkbox" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_surveys') ?></strong>
@@ -182,7 +183,7 @@ if($sys_use_forum) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_forum" value="1" <?php echo c($group->usesForum()); ?>  ><br />
+<input type="checkbox" name="use_forum" value="1" <?php echo c($group->usesForum()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_forums') ?></strong>
@@ -195,7 +196,7 @@ if($sys_use_pm) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> ><br />
+<input type="checkbox" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
@@ -208,7 +209,7 @@ if($sys_use_scm) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> ><br />
+input type="checkbox" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>
@@ -221,7 +222,7 @@ if($sys_use_news) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_news" value="1" <?php echo c($group->usesNews()); ?> ><br />
+<input type="checkbox" name="use_news" value="1" <?php echo c($group->usesNews()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_news') ?> </strong>
@@ -234,7 +235,7 @@ if($sys_use_docman) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> >
+<input type="checkbox" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_docman') ?></strong>
@@ -247,7 +248,7 @@ if($sys_use_ftp) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> >
+<input type="checkbox" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_ftp') ?></strong>
@@ -260,7 +261,7 @@ if($sys_use_tracker) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> >
+<input type="checkbox" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_tracker') ?></strong>
@@ -273,7 +274,7 @@ if($sys_use_frs) {
 ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> >
+<input type="checkbox" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_frs') ?></strong>
@@ -282,7 +283,7 @@ if($sys_use_frs) {
 <?php } ?>
 <tr>
 <td>
- <input type="CHECKBOX" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> >
+<input type="checkbox" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_stats') ?></strong>
@@ -296,15 +297,19 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 
 </table>
 
-
 <p>
 <?php echo $Language->getText('project_admin_editgroupinfo','new_doc_info') ?>.<br />
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','new_doc') ?>:</strong><br /><input type="TEXT" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','new_doc') ?>:</strong><br />
+<input type="text" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="25" maxlength="250" />
 <?php echo $Language->getText('project_admin_editgroupinfo','send_on_all_updates') ?>
-<input type="CHECKBOX" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> ><br />
+<input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+</p>
 
 <hr />
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('general','update') ?>">
+
+<p>
+<input type="submit" name="submit" value="<?php echo $Language->getText('general','update') ?>" />
+</p>
 </form>
 
 <?php
