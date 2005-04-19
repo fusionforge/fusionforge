@@ -64,7 +64,8 @@ while ($ln = pop(@group_array)) {
 		if ($cvs_exists){
 			system("mkdir -p $cvs_root/cvs-locks/$group_name");
 			system("chown anonscm-gforge:scm_$group_name $cvs_root/cvs-locks/$group_name");
-			system("chmod g+rws $cvs_root/cvs-locks/$group_name");
+			system("chmod g+rw $cvs_root/cvs-locks/$group_name");
+			system("find $cvs_root/cvs-locks/$group_name -type d | xargs chmod g+s");
 			system("chmod o+rw $cvs_root/cvs-locks/$group_name");
 		}
 	}
@@ -83,14 +84,14 @@ while ($ln = pop(@group_array)) {
 		}
 		system("/usr/bin/cvs -d$cvs_dir init");
 
-	
 		system("echo \"\" > $cvs_dir/CVSROOT/val-tags");
 		chmod 0664, "$cvs_dir/CVSROOT/val-tags";
 
 		# set group ownership, anonymous group user
 		system("chown -R $dummy_uid:$cvs_gid $cvs_dir");
 		# s bit to have all owned by group
-		system("chmod -R g+rws $cvs_dir");
+		system("chmod -R g+rw $cvs_dir");
+		system("find $cvs_dir -type d | xargs chmod g+s");
 	}
 	# Change owners
 	my $uid=$dummy_uid;
