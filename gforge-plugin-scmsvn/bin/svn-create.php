@@ -41,8 +41,9 @@ $one_repository = false;
 $repos_co = '/var/svn-co';
 
 //type of repository, whether filepassthru or bdb
-//$repos_type = ' --fs-type fsfs ';
-$repos_type = '';
+//use fsfs to be able to use ViewCVS
+$repos_type = ' --fs-type fsfs ';
+//$repos_type = '';
 
 /*
 	This script create the gforge dav/svn/docman repositories

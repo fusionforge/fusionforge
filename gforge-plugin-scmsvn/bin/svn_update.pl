@@ -41,11 +41,12 @@ while ($ln = pop(@group_array)) {
 
 	$userlist =~ tr/A-Z/a-z/;
 
-	$group_exists = (-d $grpdir_prefix . $group_name);
+	$group_exists = (-d $grpdir_prefix . '/' . $group_name);
 	$svn_exists = (-d "$svn_root/$group_name");
 
 	# SVN repository creation
-	if ($group_exists && !$svn_exists && $status eq 'A' && !(-e "$svn_root/$group_name/format")) {
+	if ($group_exists && !$svn_exists && $use_scm && $status eq 'A' && !(-e "$svn_root/$group_name/format")) {
+
 		# This for the first time
 		if (!(-d "$svn_root")) {
 		    if($verbose){print("Creating $svn_root\n");}
@@ -54,20 +55,28 @@ while ($ln = pop(@group_array)) {
 		if($verbose){print("Creating a Subversion Repository for: $group_name\n");}
 		# Let's create a Subversion repository for this group
 		
-		# Firce create the repository
-		# Unix right will lock access to all users not in the group including cvsweb
-		# when anoncvs is not enabled
-		mkdir $svn_dir, 0775;
-		system("/usr/bin/svnadmin create $svn_dir");
+		# First create the repository
+		# Unix right will lock access to all users not in the
+		# group including ViewCVS when anoncvs is not enabled
+		mkdir $cvs_dir, 0775;
+		# Used fsfs backend because ViewCVS (apache) needs
+		# write permission with default backend
+		system("/usr/bin/svnadmin create --fs-type fsfs $svn_dir");
 		
 		# set group ownership, anonymous group user
 		system("chown -R $svn_uid:$svn_gid $svn_dir");
+		system("chmod -R g+rw $svn_dir");
 		# s bit to have all owned by group
-		system("chmod -R g+rws $svn_dir");
+		system("find $svn_dir -type d | xargs chmod g+s");
+	} else {
+		print("group already exits: $group_name \n\n");
 	}
-    
+
 	# Right management
-	if ($group_exists && $status eq 'A'){
+	if ($group_exists && $use_scm && $status eq 'A'){
 		chmod 02775, "$svn_dir";
+		# TODO restrict permission when $enable_anonscm is
+		# true thanks subversion.conf and maybe unix rights
+		# also
 	}
 }
