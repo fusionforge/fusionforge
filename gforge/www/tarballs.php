@@ -13,9 +13,12 @@ $no_gz_buffer=true;
 
 require_once('pre.php');
 
-session_require(array('group'=>$group_id));
-
 // get current information
+$group_id=getIntFromGet('group_id');
+if (!$group_id) {
+	exit_no_group();
+}
+session_require(array('group'=>$group_id));
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error($Language->getText('general','error'),
