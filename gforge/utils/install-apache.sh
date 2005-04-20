@@ -188,19 +188,11 @@ case "$1" in
 	if [ -f /usr/sbin/a2enmod ] ; then
 		for flavour in apache2 ;  do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-				if [ "`/usr/sbin/modules-config $flavour query php4`" == "" ] ; then
-	    				/usr/sbin/modules-config $flavour enable php4
-				fi
-				if [ "`/usr/sbin/modules-config $flavour query ssl`" == "" ] ; then
-    					/usr/sbin/modules-config $flavour enable ssl
-				fi
-				if [ "`/usr/sbin/modules-config $flavour query suexec`" == "" ] ; then
-					/usr/sbin/modules-config $flavour enable suexec
-				fi
+				/usr/sbin/a2enmod php4
+				/usr/sbin/a2enmod ssl
+				/usr/sbin/a2enmod suexec
 				#not enabling env module, part of base in apache2
-				if [ "`/usr/sbin/modules-config $flavour query vhost_alias`" == "" ] ; then
-	    				/usr/sbin/modules-config $flavour enable vhost_alias
-				fi
+				/usr/sbin/a2enmod vhost_alias
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
@@ -225,8 +217,6 @@ case "$1" in
 		for flavour in apache2 ;  do
 			if [ -x /usr/sbin/$flavour ]; then
 				invoke-rc.d $flavour restart || true
-				#invoke-rc.d $flavour stop || true
-				#invoke-rc.d $flavour start || true
 			fi
 		done
 	fi
