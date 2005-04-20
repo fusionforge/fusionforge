@@ -276,11 +276,9 @@ cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
 cp -R gforge/plugins/cvstracker/etc/plugins/cvstracker/ /etc/gforge/plugins/
 cp -R gforge/plugins/cvstracker/www/ gforge/www/plugins/cvstracker/
 
-#make sure the cvs crons are executable
-cd www/gforge/cronjobs/cvs-cron/
-chmod 755 gforge/cronjobs/cvs-cron/*.php
-chmod 755 gforge/cronjobs/cvs-cron/*.sh
-chown -R apache:apache /var/www
+chown -R root:apache /var/www
+chmod -R 644 gforge/
+chmod -R 700 gforge/cronjobs/
 
 
 The following will provide an example httpd.conf for apache:
