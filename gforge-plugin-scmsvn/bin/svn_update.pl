@@ -69,7 +69,7 @@ while ($ln = pop(@group_array)) {
 		# s bit to have all owned by group
 		system("find $svn_dir -type d | xargs chmod g+s");
 	} else {
-		print("group already exits: $group_name \n\n");
+		if($verbose) {print("group already exits: $group_name \n\n");}
 	}
 
 	# Right management
