@@ -235,13 +235,13 @@ EOF
 	fi
 	
 	# Install/upgrade the database contents (tables and data)
-        #pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
-        #if [ "$pid" = "" ] ; then
-	if ! pidof postmaster > /dev/null 2> /dev/null ; then
+        pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
+        if [ "$pid" = "" ] ; then
+	#if ! pidof postmaster > /dev/null 2> /dev/null ; then
 	    invoke-rc.d postgresql start
 	else
-	    #kill -HUP $pid
-	    invoke-rc.d postgresql restart
+	    kill -HUP $pid
+	    #invoke-rc.d postgresql restart
 	fi
 	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
