@@ -16,7 +16,7 @@
 #	* Initial translation
 # 2004-07-13  Finjon Kiang
 #	* Converted from simplified chinese and base
-# 2005-01-21  Jimou, Lee
+# 2005-04-19  Jimou, Lee
 #
 account	title	帳號設定
 account	updated	更新
@@ -167,7 +167,6 @@ account_verify	password	密碼：
 account_verify	title	$1 帳號確認
 account_verify	usermandatory	您必須輸入帳號。
 account_verify	verify_blurb	<p>為了完成註冊，請現在就登入。然後您的帳號就會啟動成正常的登入模式。</p>
-common_utils	priority_colors	優先權顏色
 add_snippet	add_this_snippet_version_id	新增這個程式碼版本編號：
 add_snippet	back_to_add_page	回到新增頁面
 add_snippet	error_doing_snippet_version_insert	插入程式碼版本時發生錯誤！
@@ -184,6 +183,10 @@ add_snippet	snippets_in_this_package	這個軟體包裝的程式碼
 add_snippet	submit	送出
 add_snippet	title	送出一個新的程式碼
 add_snippet	you_can_use_this_form	您可以重複使用這個表單來新增程式碼到您的軟體包裝中</p><p> "程式碼版本編號" 是一個唯一的編號，它會顯示在網頁上代表一個特定的版本
+admin_groupdelete	title	永久的刪除專案
+admin_groupdelete	permanentlydeleteproject	永久且不能挽回的刪除專案
+admin_groupdelete	delete	確認刪除
+admin_groupdelete	permanentlydelete	永久的刪除
 admin	add	新增
 admin	add_new	[新增]
 admin	are_you_sure_delete	您確定要刪除
@@ -191,11 +194,13 @@ admin	cancel	取消
 admin	delete	刪除
 admin	edit	編輯
 admin	http_domain	HTTP網域：
+admin	home_box	Home Box:
 admin	license	授權方式：
 admin	license_other	其他授權：
-admin	na	無
+admin	na	N/A
 admin	other	其他
 admin	reject	拒絕
+admin	scm_box	SCM Box:
 admin	site_admin_home	網站管理首頁
 admin	submit_changes	送出
 admin	submit_new	送出
@@ -208,7 +213,7 @@ admin_add_language	class_filename	物件檔案名稱：
 admin_add_language	classname	物件名稱：
 admin_add_language	existing_language	已經存在的語言
 admin_add_language	name	名稱：
-admin_add_language	submit	送出
+admin_add_language	submit	提交
 admin_admin_table	add_new	add new
 admin_admin_table	cant_delete_language	因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 $1。
 admin_admin_table	cant_delete_license	因為它現今在一個計畫中被列入參考，你不能刪除授權方式 $1。
@@ -294,8 +299,8 @@ cronman	job	工作
 cronman	message	訊息
 cronman	next	下一個
 cronman	previous	上一個
-admin_index	active_projects_count	進行中專案： <strong>$1</strong>
-admin_index	active_users_count	啟用中的使用者： <strong>$1</strong>
+admin_index	active_projects_count	進行中專案：<strong>$1</strong>
+admin_index	active_users_count	啟用中的使用者：<strong>$1</strong>
 admin_index	add_delete_edit_file_types	新增、刪除或編輯檔案類型
 admin_index	add_delete_edit_laguage	新增、刪除或編輯支援的語言
 admin_index	add_edit_delete_processors	新增、刪除或編輯處理器
@@ -326,9 +331,9 @@ admin_index	project_hold	等候 (H)
 admin_index	project_database_administration	專案資料庫管理
 admin_index	register_new_project	註冊新專案
 admin_index	recent_logins	最近登入
-admin_index	registered_projects_count	已註冊專案： <strong>$1</strong>
-admin_index	search_groups	搜尋 <em>(groupid, group unix name, full name)</em>
-admin_index	search_users	搜尋 <em>(userid, username, realname, email)</em>
+admin_index	registered_projects_count	已註冊專案：<strong>$1</strong>
+admin_index	search_groups	搜尋 <em>(群組編號、群組 unix 名稱、完整名稱)</em>
+admin_index	search_users	搜尋 <em>(會員編號、使用者名稱、真實姓名、Email)</em>
 admin_index	site_mailing_maintaince	網站電子報維護
 admin_index	site_utilities	網站工具
 admin_index	site_wide_stats	全站統計
@@ -355,7 +360,7 @@ admin_massmail	date	日期
 admin_massmail	developers_test	開發者 (測試)
 admin_massmail	error_scheduling_mailing	電子報排程錯誤，無法進行電子報排程，資料庫錯誤：
 admin_massmail	id	編號
-admin_massmail	last_user_id_mailed	最後送出的 user_id
+admin_massmail	last_user_id_mailed	最後送出的會員編號
 admin_massmail	mail_engine_for	$1 的郵件引擎
 admin_massmail	mailing_successfully_scheduled	電子報寄送工作排程成功
 admin_massmail	missing_parameter_empty_message	參數未填，您正嘗試送出空的訊息
@@ -399,7 +404,7 @@ admin_search	index	管理搜尋結果.
 admin_search	matches	符合
 admin_search	member_since	帳號建立日期
 admin_search	real_name	真實姓名
-admin_search	refusing_to_display_whole_db	無法顯示整個資料庫，如果您要這麼做，請使用 CLI 查詢
+admin_search	refusing_to_display_whole_db	無法顯示整個資料庫，如果您要這麼做，請使用客戶端查詢
 admin_search	registered	註冊
 admin_search	status	狀態
 admin_search	unix_name	Unix名稱
@@ -432,16 +437,16 @@ admin_trove_cat_edit	new_category_full_name	新類別完整名稱 (80字元)
 admin_trove_cat_edit	new_category_short_name	新類別縮寫 (沒有空白，像是Unix)
 admin_trove_cat_edit	no_such_category	沒有這個類別，那個軟體類別不存在
 admin_trove_cat_edit	parent_category	上層類別：
-admin_trove_cat_edit	title	網站管理： 軟體 - 編輯類別
+admin_trove_cat_edit	title	網站管理：軟體 - 編輯類別
 admin_trove_cat_edit	update	更新
 admin_trove_cat_list	browse_trove_tree	瀏覽軟體地圖
 admin_trove_cat_list	edit	編輯
 admin_trove_cat_list	add	新增
-admin_trove_cat_list	title	網站管理： 軟體 - 類別清單
+admin_trove_cat_list	title	網站管理：軟體 - 類別清單
 admin_unsubscribe	admin_initiaded_mail	管理組態好的電子報
 admin_unsubscribe	all	所有
 admin_unsubscribe	all_site_mailing	所有網站電子報
-admin_unsubscribe	comm_mail	Comm. Mail.
+admin_unsubscribe	comm_mail	聯絡信箱
 admin_unsubscribe	email	Email
 admin_unsubscribe	error_unsubscribe_user	錯誤，無法取消訂閱的使用者：
 admin_unsubscribe	mail	信件
@@ -460,7 +465,7 @@ admin_unsubscribe	you_can_unsubscribe	您可以在管理網站電子報組態或
 admin_useredit	account_info	帳號資訊
 admin_useredit	active	啟用 (A)
 admin_useredit	could_not_complete_operation	無法完成執行
-admin_useredit	current_confirm_bash	目前確認的hash：
+admin_useredit	current_confirm_bash	目前確認的雜湊：
 admin_useredit	delete	刪除
 admin_useredit	delete_user_confirm	我要刪除這個使用者
 admin_useredit	deleted	刪除 (D)
@@ -517,7 +522,7 @@ admin_vhost	title	網站管理
 admin_vhost	tweak_directories	調整資料夾
 admin_vhost	update	更新
 admin_vhost	update_record	更新記錄：
-admin_vhost	vhost_id	VHOST ID
+admin_vhost	vhost_id	VHOST 編號
 admin_vhost	vhost_name	VHOST 名稱
 admin_vhost	virtual_host	虛擬主機：
 admin_vhost	virtual_host_administration	虛擬主機管理
@@ -533,8 +538,9 @@ advanced_search	select	選擇
 advanced_search	headline	$1 搜尋結果
 advanced_search	no_matches_found	未發現符合項目
 advanced_search	no_matches_found_no_under_section	未發現符合項目 - 沒有部份提供(檢查您的權限)
-artifact_canned	required_fields	預設自訂： 名稱與受託人必填
-artifact_category	required_fields	自訂類別： 名稱與受託人必填
+advanced_search	error_search_minlength	搜尋條件必須至少三個字元
+artifact_canned	required_fields	預設自訂：名稱與受託人必填
+artifact_category	required_fields	自訂類別：名稱與受託人必填
 calendar	april	四月
 calendar	august	八月
 calendar	comingyear	明年
@@ -569,21 +575,21 @@ calendar	september	九月
 calendar	sunday	星期日
 calendar	task_begins	任務 $1 開始
 calendar	task_ends	任務 $1 結束
-calendar	task_link_title	任務摘要： $1
+calendar	task_link_title	任務摘要：$1
 calendar	threemonth	一季
 calendar	thursday	星期四
-calendar	title	專案管理： 行事曆
+calendar	title	專案管理：行事曆
 calendar	todaysdate	今天的日期
 calendar	tuesday	星期二
 calendar	update	更新
 calendar	view	瀏覽：
 calendar	wednesday	星期三
-classgroup	acceptedproject	您在 $7 註冊的專案通過審核了\n\n專案全名：  $1\n專案Unix名稱：  $2\nCVS伺服器：  cvs.$2.$3\n控制/網頁伺服器：  $2.$3\n\n您在我們網站上的DNS資訊可能需要一天的時間才能夠使用，在DNS資訊可以使用前，您可以試著登入 $4 並且指定 CVS 到 $5\n\n如果在6個小時後您的控制介面/CVS帳號仍然無法運作，請開啟一個支援傳票，這樣子我們就會幫您看看問題出在哪裡。請注意所有的控制/CVS帳號無法透過telnet登入而且只能透過SSH1。\n\n您的網站可以透過控制帳號存取，請讀取網站文件 (下面的連結) 來了解操作方式、可以使用的服務與帳號的資料夾配置。\n\n登入後參觀您自己在 $7 的專案頁面，您可以發現左手邊有標示為\'專案管理\'的功能選單。\n\n我們非常建議您現在參觀 $7 並且為您的專案建立一個公開的說明\n (請在登入後瀏覽 http://$3/project/admin/?group_id=$6)\n\n您的專案也不會立即出現在軟體地圖上 (主要的專案列表放在 $7，它在瀏覽與搜尋上具有相當大的彈性)，您必須在管理介面中指定它的分類，這樣一來瀏覽網站的朋友才可以找到您的專案，建議您可以現在進行登入網站後瀏覽您的專案，接著從左邊的標示 \'軟體地圖分類\' 點擊編輯進行分類。\n\n如果有任何問題請聯絡 $7，讓我們知道您需要什麼樣的協助。\n\n--  $7 
+classgroup	acceptedproject	您在 $7 註冊的專案通過審核了\n\n專案全名：$1\n專案Unix名稱：$2\nCVS伺服器：cvs.$2.$3\n控制/網頁伺服器：$2.$3\n\n您在我們網站上的DNS資訊可能需要一天的時間才能夠使用，在DNS資訊可以使用前，您可以試著登入 $4 並且指定 CVS 到 $5\n\n如果在6個小時後您的控制介面/CVS帳號仍然無法運作，請開啟一個支援傳票，這樣子我們就會幫您看看問題出在哪裡。請注意所有的控制/CVS帳號無法透過telnet登入而且只能透過SSH1。\n\n您的網站可以透過控制帳號存取，請讀取網站文件 (下面的連結) 來了解操作方式、可以使用的服務與帳號的資料夾配置。\n\n登入後參觀您自己在 $7 的專案頁面，您可以發現左手邊有標示為\'專案管理\'的功能選單。\n\n我們非常建議您現在參觀 $7 並且為您的專案建立一個公開的說明\n (請在登入後瀏覽 http://$3/project/admin/?group_id=$6)\n\n您的專案也不會立即出現在軟體地圖上 (主要的專案列表放在 $7，它在瀏覽與搜尋上具有相當大的彈性)，您必須在管理介面中指定它的分類，這樣一來瀏覽網站的朋友才可以找到您的專案，建議您可以現在進行登入網站後瀏覽您的專案，接著從左邊的標示 \'軟體地圖分類\' 點擊編輯進行分類。\n\n如果有任何問題請聯絡 $7，讓我們知道您需要什麼樣的協助。\n\n--  $7 
 classgroup	acceptedprojecttitle	$1 專案通過審核了
-classgroup	newprojectnotification	有人註冊了新專案 $1 \n\n專案全名： $2\n註冊說明： $3\n授權方式： $4\n\n請瀏覽下面網址審核這個專案：\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification	有人註冊了新專案 $1 \n\n專案全名：$2\n註冊說明：$3\n授權方式：$4\n\n請瀏覽下面網址審核這個專案：\nhttp://$5/admin/approve-pending.php
 classgroup	newprojectnotification_submitter	新專案 $1 註冊了\n\n專案全名：  $2\n註冊說明： $3\n授權方式： $4\n\n $1 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。
 classgroup	newprojectnotificationtitle	新專案 $1 完成註冊了
-classgroup	rejectedproject	您在 $3 的專案註冊被取消了\n\n專案全名：  $1\n專案 Unix 名稱： $2\n\n原因：\n\n
+classgroup	rejectedproject	您在 $3 的專案註冊被取消了\n\n專案全名：$1\n專案 Unix 名稱：$2\n\n原因：\n\n
 classgroup	rejectedprojecttitle	$1 專案被取消了
 common	login	登入
 common	logout	登出
@@ -603,7 +609,7 @@ conf	mail_charset	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	zh-TW
 conf	language_id	11
-contact	about_blurb	<p>這是 <b>$1</b>的聯繫資訊 -- 如果您對本網站上的專案有任何的問題，請將您的問題/資訊發送到該專案支援/Bug管理員。您可以透過點擊這些專案的首頁來獲取這些資訊： <tt>http://$2/projects/&lt;project name&gt;</tt> 點擊相應的工具。</p><p>如果您需要支援，報告Bug或者想直接和 $1 團隊聯繫，請拜訪<a href="/projects/siteadmin">$1 Master Project</a>.</p>
+contact	about_blurb	<p>這是 <b>$1</b>的聯繫資訊 -- 如果您對本網站上的專案有任何的問題，請將您的問題/資訊發送到該專案支援/Bug管理員。您可以透過點擊這些專案的首頁來獲取這些資訊：<tt>http://$2/projects/&lt;project name&gt;</tt> 點擊相應的工具。</p><p>如果您需要支援，報告Bug或者想直接和 $1 團隊聯繫，請拜訪<a href="/projects/siteadmin">$1 Master Project</a>.</p>
 contact	title	聯繫 $1
 developer	body	內容
 developer	date	時間
@@ -636,8 +642,9 @@ docman	submit_new	送出新的文件
 docman	turned_off	專案關閉了文件管理功能
 docman	view_doc	查看文件
 docman_admin	add_edit_docgroups	增加/編輯文件分組
-docman_admin	section	專案： $1
+docman_admin	section	專案：$1
 docman_admin	title	文件管理：管理
+docman_admin	add_docs	[在這新增文件]
 docman_admin_addgroups	section	文件管理員管理
 docman_admin_addgroups	title	增加文件分組
 docman_admin_docedit	section	文件管理員
@@ -648,27 +655,36 @@ docman_admin_editdocs	section	文件管理員管理
 docman_admin_editdocs	state	狀態
 docman_admin_editdocs	title	編輯文件
 docman_admin_editdocs	upload	可選項：上傳新的文件
+docman_admin_editdocs	upload_ftp	或選擇一個類型 FTP $1
+docman_admin_editdocs	delete_doc	永久的刪除這份文件
 docman_admin_editgroups	add_group	增加新分組
 docman_admin_editgroups	description	分組名稱將被用作標題，所以它應該相應的格式化。
 docman_admin_editgroups	edit_group	編輯分組
 docman_admin_editgroups	group_id	編號
 docman_admin_editgroups	group_name	分組名稱
+docman_admin_editgroups	group_parent	屬於
 docman_admin_editgroups	new_group_name	新分組名稱
+docman_admin_editgroups	new_group_parent	屬於
 docman_admin_editgroups	section	文件管理員管理
 docman_admin_editgroups	title	編輯文件分組
 docman_admin_groupedit	section	文件管理員管理
 docman_admin_groupedit	title	重命名文件分組
+docman_admin_deletedoc	delete_warning	你正要永久地刪除這一份文件。
+docman_admin_deletedoc	sure	我確定
+docman_admin_deletedoc	really_sure	我非常確定
+docman_admin_deletedoc	delete	刪除
 docman_common	error_min_desc_length	文件描述必須至少10個字元
 docman_common	error_min_title_length	標題必須至少5個字元
 docman_common	no_docs	沒有發現文件
 docman_common_doc	invalid_docid	文件：無效的文件編號
 docman_common_docgroup	invalid_id	文件分組：無效的分組編號
+docman_common_docgroup	invalid_parent_id	文件群組：無效的文件群組父編號
 docman_common_docgroup	name_required	文件分組：請輸入名字
 docman_display_doc	all_languages	所有語言
 docman_display_doc	docmoved	文件已經移到 <a href="/docman/view.php/$1/$2">這個新地方</a>
 docman_display_doc	no_document_data_text	沒有文件可顯示 ─ 無效或未啟動的文件編號
 docman_display_doc	no_document_data_title	無文件資料
-docman_display_doc	section	專案： $1 
+docman_display_doc	section	專案：$1 
 docman_display_doc	title	專案管理：顯示文件
 docman_new	upload_url	或者指定一個文件能夠參考的外部URL
 docman_new	description	說明
@@ -682,12 +698,14 @@ docman_new	no_valid_group	沒有選擇有效的文件分組
 docman_new	section	專案：$1 
 docman_new	state	狀態
 docman_new	submit	送出資訊
-docman_new	submitted_successfully	Document submitted sucessfully
+docman_new	submitted_successfully	文件已提交成功
 docman_new	title	文件管理：送出新文件
 docman_new	upload_file	上傳文件
+docman_new	ftpupload_new_file	或者，您能使用FTP上傳一個新的檔案在 $1
+docman_new	ftpupload_choosefile	選擇一個FTP檔案代替上傳：
 error	error_creating	建立錯誤
 error	not_found	頁面不存在
-error	title	頁面不存在（錯誤號 404）
+error	title	頁面不存在（錯誤 404）
 exit	choose_a_group	錯誤 - 請選一個分組
 exit	choose_group_body	沒有選擇分組編號
 exit	choose_group_title	錯誤 - 沒有選擇分組編號
@@ -753,12 +771,12 @@ forum_common	error_save_when_logged_in	只有登入後才能保存位置
 forum_common	error_set_monitor	只有登入後才能監視
 forum_common	error_unable_to_add_monitor	無法新增監視
 forum_common	welcome_to	歡迎來到 $1
-forum_common_forum	error_save_place	討論區： savePlace() 
-forum_common_forummessage	error_cannot_update_master_thread	目前無法更新主線Master Thread parent 
+forum_common_forum	error_save_place	討論區：savePlace() 
+forum_common_forummessage	error_cannot_update_master_thread	目前無法更新 Master Thread parent
 forum_common_forummessage	error_cannot_update_parent	無法更新上層文章
 forum_common_forummessage	error_get_message_id	ForumMessage::create() 無法獲得文章編號
-forum_common_forummessage	error_getting_next_thread	無法獲取下一個thread_id 
-forum_common_forummessage	error_group_forum_id	資料庫中的Group_forum_id 和Forum 物件不一致
+forum_common_forummessage	error_getting_next_thread	無法獲取下一個 thread_id
+forum_common_forummessage	error_group_forum_id	資料庫中的 Group_forum_id 和 Forum 物件不一致
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 無效的文章編號
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() 無效的 ParentMessage 物件
 forum_common_forummessage	error_not_logged	發文章之前必須登入
@@ -773,6 +791,7 @@ forum_forum	changeview	改變瀏覽方式
 forum_forum	date	日期
 forum_forum	flat	展開
 forum_forum	forum	討論區
+forum_forum	description	說明
 forum_forum	lastpost	最後發表時間
 forum_forum	nested	巢狀	
 forum_forum	next_messages	後一頁
@@ -789,7 +808,7 @@ forum_forum	threads	主題
 forum_forum	title	討論區：查看討論區
 forum_forum	topic	主題
 forum_forum	topicstarter	主題發起人
-forum_forum	views	Views
+forum_forum	views	瀏覽數
 forum_forum	ultimate	基本
 forum_forum_thread	section	討論區
 forum_forum_thread	title	查看主題
@@ -802,7 +821,7 @@ forum_message	msg	發表一個文章到這個主題：
 forum_message	must_choose_message_body	您必須先選擇一個文章
 forum_message	must_choose_message_title	必須先選擇一個文章
 forum_message	post_followup	回覆該文章
-forum_message	receive_followups	透過 email 接收所有的回覆
+forum_message	receive_followups	透過 Email 接收所有的回覆
 forum_message	section	討論區
 forum_message	subject	標題
 forum_message	thread	建立新主題
@@ -833,11 +852,11 @@ forum_utils	feedbacklogin	只有登入之後才能張貼文章
 forum_utils	htmltag	您文章中的 HTML 標記將當做普通文字顯示
 forum_utils	latest	最新新聞
 forum_utils	loggedin	登入
-forum_utils	mailmonitor	\n閱讀並回覆該文章： \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\n您收到這封email是因為您選擇監視這個討論區。\n要停止監視討論區，登入到$4 \n並且點擊： $5
+forum_utils	mailmonitor	\n閱讀並回覆該文章：\n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\n您收到這封email是因為您選擇監視這個討論區。\n要停止監視討論區，登入到$4 \n並且點擊：$5
 forum_utils	mailnotsent	郵件沒有發送 － 有人監視討論區
 forum_utils	mailnotsent2	郵件沒有發送 － 無人監視討論區
 forum_utils	mailsent	郵件發送 － 有人監視討論區
-forum_utils	message	消息：
+forum_utils	message	訊息：
 forum_utils	monitor	監視討論區
 forum_utils	mustinclude	必須包括文章標題和內容
 forum_utils	news	新聞
@@ -873,7 +892,7 @@ frs_package	error_already_exists	同樣檔案名稱已存在
 frs_package	error_cannot_move	檔案無法被移到永久保存位置
 frs_package	error_invalid_file	FRSFile 似乎無效
 frs_package	error_min_name_length	FRSPackage 名稱必須至少3個字元
-frs_package	error_name_format	FRSPackage::Update： 軟體的名稱只能是英文字母
+frs_package	error_name_format	FRSPackage::Update：軟體的名稱只能是英文字母
 frs_package	error_set_monitor	只有登入後才能監視
 frs_release	email_text	\n\n專案 "$1" ('$2') 已經  \n 發佈套裝軟體'$3'的新版本 \n您可以透過下面的信箱去下載：\n $4\n\n您收到這封email是因為您\n要求當這個套裝軟體有新版本發佈時通知您。\n 如果您不希望以後再被通知，\n 請登入到 $5 並點擊如下連結：\n $6
 frs_release	email_title	[$1 發佈] $2
@@ -894,9 +913,11 @@ general	done	完成
 general	edit	編輯
 general	error	錯誤
 general	error_creating	建立 $1 時錯誤
+general	error_creating_group	建立群組物件錯誤
+general	error_creating_perm	建立權限物件錯誤
 general	error_getting	取得 $1 時錯誤
 general	error_getting_new	取得新 $1 時錯誤
-general	error_group_id	資料庫中的 Group_id 與 Group 物件不一致
+general	error_group_id	資料庫中的群組編號與群組物件不一致
 general	error_missing_params	缺少參數
 general	error_no_valid_group_object	$1：沒有有效的群組物件
 general	error_on_update	更新時錯誤：
@@ -904,10 +925,11 @@ general	footer	這裏是 $1.  關於更多的資訊，包括版權資訊，請�
 general	go	Go
 general	invalid_email	無效的Email
 general	language	語言
+general	min_characters	(最少 $1 字元)
 general	more	更多
 general	no	否
 general	no_valid_filename	無效的檔案名稱
-general	no_valid_group	沒有選擇有效的 $1 組
+general	no_valid_group	沒有選擇有效的 $1 群組
 general	no_valid_group_object	$1 無效的群組物件
 general	open	啟用
 general	permdenied	許可權不允許
@@ -928,13 +950,13 @@ general	update	更新
 general	update_successful	更新成功
 general	yes	是
 global	error	錯誤
-group	activity	活躍度： 
+group	activity	活躍度：
 group	activitystat	查看專案活動<a href="/project/stats/?group_id=$1">統計</a>
 group	developer_info	開發者資訊
 group	developers	開發者
 group	long_bugs	Bug追蹤
 group	long_scm	SCM Repository
-group	long_docman	DocManager: 專案文件
+group	long_docman	文件管理員：專案文件
 group	long_forum	公共討論區
 group	long_ftp	匿名FTP
 group	long_homepage	專案首頁
@@ -948,8 +970,9 @@ group	long_tracker	追蹤
 group	nodescription	該專案還沒有送出描述
 group	norelease	該專案沒有發佈任何檔案
 group	project_admins	專案管理員
+group	project_developers	開發人員
 group	public_area	公共區域
-group	registered	已註冊： 
+group	registered	已註冊：
 group	short_admin	管理
 group	short_bugs	Bugs
 group	short_scm	SCM
@@ -991,7 +1014,7 @@ help_trove_cat	description	說明
 help_trove_cat	full_category_name	完整的分類名稱
 help_trove_cat	no_such_category	沒有這種分類
 help_trove_cat	short_name	簡短名稱
-home	about_blurb	<P>$1 為<b><a href="http://www.opensource.org/">開放源代碼軟體</a>開發者提供全方面的免費服務</b>，包括CVS檔案庫, 通信論壇, BUG追蹤, 線上討論區, 任務管理, 網站空間, 專案存儲及完整的備份, 並且完全是透過WEB方式來管理的。</P><P><B>請立即加入，並提出您的寶貴意見</B></P><P>為了充分利用 $1 所提供的服務, <A href="/account/register.php">請立即註冊成為 本站會員</A>，這樣您就可以參與本站的各項活動。若您尚不是註冊會員, 仍能瀏覽本站, 但無權參與本站的活動。</P><P><B>開始您自己的專案</B></P><P><A href="/account/register.php">先註冊成為本站會員</A>, 然後<A HREF="/account/login.php">登入</A>最後<A HREF="/register/">開始您的專案。</A></P><P>謝謝參與，請充分享受本站提供的服務吧！</P>
+home	about_blurb	<P>$1 為<B><A href="http://www.opensource.org/">開放源代碼軟體</A>開發者提供全方面的免費服務</B>，包括CVS檔案庫、通信論壇、BUG追蹤、線上討論區、任務管理、網站空間、專案存儲及完整的備份，並且完全是透過WEB方式來管理的。</P><P><B>請立即加入，並提出您的寶貴意見。</B></P><P>為了充分利用 $1 所提供的服務，<A href="/account/register.php">請立即註冊成為 本站會員</A>，這樣您就可以參與本站的各項活動。若您尚不是註冊會員，仍能瀏覽本站，但無權參與本站的活動。</P><P><B>開始您自己的專案</B></P><P><A href="/account/register.php">先註冊成為本站會員</A>，然後<A HREF="/account/login.php">登入</A>最後<A HREF="/register/">開始您的專案。</A></P><P>謝謝參與，請充分享受本站提供的服務吧！</P>
 home	breaking_down_barriers	為開放源碼的發展開闢一條坦途
 home	gforge_statistics	$1 統計資料
 home	highest_ranked_users	會員評價排行榜
@@ -1021,16 +1044,19 @@ include_toolreport	open	開啟
 include_toolreport	project_lifespan	專案期間
 include_toolreport	show	顯示
 index	welcome	歡迎
-mail	archives	$1 Archives
+mail	archives	$1 檔案
 mail	choose_a_list	<p>選一個清單來瀏覽、搜尋與發表訊息</p>
 mail	external_administration	訂閱/取消訂閱/設定
 mail	help_to_request	專案管理員使用管理連結取得通信論壇
 mail	mailinglists_for	 $1 的通信論壇
 mail	no_list_found	 $1 沒有任何通信論壇
-mail	provided_by	<p>通信論壇透過一個GForge版本的<a href="http://www.list.org/">GNU Mailman</a>建置. 感謝Mailman 和<a href="http://www.python.org/">Python</a> 全體工作人員，感謝他們卓越的軟體。</p>
-mail	section	專案： $1
+mail	provided_by	<p>通信論壇透過一個GForge版本的<a href="http://www.list.org/">GNU Mailman</a>建置，感謝Mailman 和<a href="http://www.python.org/">Python</a> 全體工作人員，感謝他們卓越的軟體。</p>
+mail	section	專案：$1
 mail	title	通信論壇
 mail	unable_to_get_lists	無法取得通信論壇
+mail_admin_deletelist	title	永久的刪除通信論壇
+mail_admin_deletelist	confirmdelete	確認刪除
+mail_admin_deletelist	permanentlydelete	永久的刪除
 mail_admin	add_list	新增通信論壇
 mail_admin	admin_in_mailman	管理
 mail_admin	error_getting_list	取得通信論壇時發生錯誤
@@ -1059,7 +1085,7 @@ mail_admin_updatelist	no_list_found	這個專案沒有通信論壇
 mail_admin_updatelist	section	通信論壇管理
 mail_admin_updatelist	status	狀態
 mail_admin_updatelist	title	管理/更新通信論壇
-mail_common	creation_mail_body	通信論壇會在6~24小時內建立於 $1  \n您是通信論壇的管理者\n\n這個通信論壇是： $3@$2 \n\n您的通信論壇資訊在：\n$4 \n\n通信論壇管理介面：\n$5 \n\n通信論壇密碼： $6 \n建議您盡快修改這個密碼\n\n謝謝您將專案建立在 $1\n\n-- $1 工作團隊\n
+mail_common	creation_mail_body	通信論壇會在6~24小時內建立於 $1  \n您是通信論壇的管理者\n\n這個通信論壇是：$3@$2 \n\n您的通信論壇資訊在：\n$4 \n\n通信論壇管理介面：\n$5 \n\n通信論壇密碼：$6 \n建議您盡快修改這個密碼\n\n謝謝您將專案建立在 $1\n\n-- $1 工作團隊\n
 mail_common	creation_mail_subject	$1 新的通信論壇
 mail_common	error_min_name_length	通信論壇的名稱必須大於或等於4個字元
 mail_common	error_invalid_name	錯誤的通信論壇名稱
@@ -1374,6 +1400,7 @@ pm	cat_any	任何
 pm	cat_none	無
 pm	category	分類
 pm	date_note		如果您試圖建立一個依賴於其他任務的新任務，而這個新任務的開始日期比那些任務的結束日期要早，系統將改變您的開始/結束日期。
+pm	day	日
 pm	dependent	依賴於任務
 pm	dependent_note			您應該只選擇那些只有完成了才能開始這個任務的任務。
 pm	details	任務細節
@@ -1393,8 +1420,14 @@ pm	summary	任務摘要
 pm	task_id	任務編號
 pm	tech_any	任何
 pm	title	專案/任務管理：子專案和任務
+pm	total	總共
 pm	unassigned	沒有分配
+pm	user	使用者
 pm	view_calendar	查看日曆
+pm	view_type	詳細檢視
+pm	view_type_summary	摘要
+pm	view_type_detail	詳細的
+pm	week	週
 pm_addtask	task_added_relationship	增加追蹤關係成功
 pm_addtask	task_created_successfully	任務建立成功
 pm_addtask	task_updated_successfully	任務更新成功
@@ -1518,6 +1551,7 @@ pm_modtask	assignee	被指定人
 pm_modtask	original_comment	原始評論
 pm_modtask	sort_on	排序
 pm_modtask	submitted_by	發表人
+pm_modtask	time_tracking	時間追蹤
 pm_modtask	title	修改任務
 pm_projectcategory	required_fields	專案分類：需要名字和被指定人
 pm_projectgroup	error_min_desc_length	文件說明必須至少10個字元
@@ -1531,17 +1565,17 @@ pm_projecttask	mail_followups_title	\n\n回覆
 pm_projecttask	mail_notice			任務 # $1 已被更新\n\n專案：$2\n子專案：$3\n摘要：$4\n完成度：$5\n狀態：$6\n\n說明：$7
 pm_reporting	aging_report	按時間報表
 pm_reporting	all_tasks_by_category	按分類統計的所有任務
-pm_reporting	all_tasks_by_technician	按人統計的所有任務
+pm_reporting	all_tasks_by_technician	按技術人員統計的所有任務
 pm_reporting	average_duration	已完成任務的平均時間（天）
 pm_reporting	by_subproject	按子專案報表
 pm_reporting	by_tech	按人員報表
 pm_reporting	not_completed	未完成的任務數
-pm_reporting	open_tasks_by_category	按分類統計的開放任務
-pm_reporting	open_tasks_by_technician	按人統計的開放任務
+pm_reporting	open_tasks_by_category	按分類統計的啟用任務
+pm_reporting	open_tasks_by_technician	按技術人員統計的啟用任務
 pm_reporting	report_note	請注意，一個任務可能被分配給多個人。這些任務每次都被計算在內。</p>
 pm_reporting	started_tasks	已開始的任務數
 pm_reporting	tasks_by_category	按分類統計的任務
-pm_reporting	tasks_by_technician	按人統計的任務
+pm_reporting	tasks_by_technician	按技術人員統計的任務
 pm_reporting	title	任務報表系統
 pm_task	create_successfully	任務建立成功
 frs_admin	delete	刪除
@@ -1551,6 +1585,8 @@ frs_admin	delete_release_warning	你將永久地刪除這個釋出版本和檔�
 frs_admin	sure	我確定
 frs_admin	really_sure	我非常確定
 project_admin	add_user	增加會員
+project_admin	acceptpending	接受
+project_admin	rejectpending	拒絕
 project_admin	addfromlist	從列表新增使用者
 project_admin	addfromlist1	在您希望增加的使用者旁邊勾選，如果您點擊了下面的任何人，這些選擇將會被保留。完成時點擊 "完成" 來新增您想要的使用者。
 project_admin	addfromlist2	選擇每個使用者的角色後點擊 "Add All"。
@@ -1573,12 +1609,12 @@ project_admin	packages	套裝軟體
 project_admin	plugins_admin	Plugins管理
 project_admin	project_information	專案其他資訊
 project_admin	scm_admin	SCM管理
-project_admin	section	任務： $1
+project_admin	section	任務：$1
 project_admin	shell_server	專案shell(SSH)伺服器：
-project_admin	shell_server_group_directory	shell伺服器上的專案目錄： 
+project_admin	shell_server_group_directory	shell伺服器上的專案目錄：
 project_admin	short_description	簡短說明：
 project_admin	task_manager_admin	任務管理
-project_admin	title	專案管理： $1
+project_admin	title	專案管理：$1
 project_admin	tool_admin	專案管理
 project_admin	tracker_admin	追蹤管理
 project_admin	trove_categorization	軟體地圖分類：
@@ -1678,7 +1714,7 @@ project_admin_editrelease	file_type_update	文件類型<br />更新
 project_admin_editrelease	file_updated	文件更新
 project_admin_editrelease	filename_release	檔案名<br />發佈
 project_admin_editrelease	i_am_sure	我確定
-project_admin_editrelease	monitor_count	There are $1 users monitoring this package.
+project_admin_editrelease	monitor_count	有 $1 個使用者監視這個套裝軟體。
 project_admin_editrelease	no_files_in_release	本次發佈沒有文件
 project_admin_editrelease	note	編輯本套裝軟體本次發佈的通知或者更改日誌。這些改動將被更新到本次發佈中的所有文件中。<br />您可以分別上傳發佈通知和更改日誌，也可以在下面貼在一起。
 project_admin_editrelease	paste_changelog	粘貼更改日誌
@@ -1699,7 +1735,7 @@ project_admin_editrelease	update_refresh	更新/重新整理
 project_admin_editrelease	upload_change_log	上傳更改日誌
 project_admin_editrelease	upload_new_file	上傳一個新文件
 project_admin_editrelease	upload_release_notes	上傳發佈通知
-project_admin_group_trove	intro	<h3>編輯軟體類別</h3><p>最多選擇三個類別，如果您找不到合適的類別，請點擊 "未分類".</p><p> 注意： 專案應該至少選擇一個分類
+project_admin_group_trove	intro	<h3>編輯軟體類別</h3><p>最多選擇三個類別，如果您找不到合適的類別，請點擊 "未分類".</p><p> 注意：專案應該至少選擇一個分類
 project_admin_group_trove	title	專案類別
 project_admin_group_trove	update_changes	更新所有的類別異動
 project_admin_history	info	這個日誌顯示，誰曾經在何時對您的專案做過大的更改
@@ -1729,10 +1765,14 @@ project_admin_qrs	required_processor_type	必須選擇一個處理器類型
 project_admin_qrs	required_release_name	必須定義一個發佈名
 project_admin_qrs	title	快速發佈系統
 project_admin_qrs	upload_new_file	上傳一個新文件
+project_admin_qrs	ftpupload_new_file	或者，您能使用FTP上傳一個新的檔案在 $1
+project_admin_qrs	ftpupload_choosefile	選擇一個FTP檔案代替上傳：
 project_admin_qrs	exceed_file_size	上傳的檔案超過系統限制，您可以聯絡管理員來上傳這個檔案
 project_admin_qrs	partial_file	上傳的檔案並不完整
 project_admin_qrs	unknown_file_error	檔案上傳錯誤
 project_admin_qrs	maximum_file_size	上傳檔案大小上限：
+project_admin_qrs	notify_list	通知列表
+project_admin_qrs	separate_emails	以一個逗號(,)分隔 e-mails
 project_admin_rmuser	cancel	取消
 project_admin_rmuser	cannot_remove_admin	您無法移除 $1 管理員
 project_admin_rmuser	info	<h3>從 $1 移除開發人員</h3><p>您正嘗試從 $1 移除開發人員，請確認您的動作：</p>
@@ -1823,9 +1863,9 @@ project_home	cvs_commits	更新 <strong>$1</strong> 次，新增 <strong>$2</str
 project_home	forum_messages	討論區 <strong>$2</strong> 有 <strong>$1</strong> 篇訊息
 project_home	forum_messages_only_one_forum	<strong>$1</strong> 篇訊息在 <strong>$2</strong> 個討論區
 project_home	forums	討論區
-project_home	help_wanted	需要協助： 這個專案正在找尋
+project_home	help_wanted	需要協助：這個專案正在找尋
 project_home	help_wanted_multiple	能夠勝任 $1 工作的夥伴 </a>
-project_home	holding_note	注意： 這個專案資料是由 $1 團隊所維護，我們並不是這個產品的官方網站，相關版權聲明資訊也許能夠在這個專案的網頁中找到！
+project_home	holding_note	注意：這個專案資料是由 $1 團隊所維護，我們並不是這個產品的官方網站，相關版權聲明資訊也許能夠在這個專案的網頁中找到！
 project_home	messages_in	新訊息
 project_home	monitor_package	訂閱這個集合
 project_home	no_subprojects	目前沒有公開的子專案
@@ -1860,15 +1900,26 @@ project_showfiles	package	集合
 project_showfiles	project_totals	專案檔案總數
 project_showfiles	release_highlighted	您所選擇的項目會有 <span style="background-color:pink">醒目標示</span>.
 project_showfiles	release_notes	釋出記錄
-project_showfiles	section	專案： $1
+project_showfiles	section	專案：$1
 project_showfiles	size	大小
 project_showfiles	title	專案檔案列表
 project_shownotes	changes	異動：
 project_shownotes	error_release_not_found	找不到這個項目
 project_shownotes	notes	記錄：
 project_shownotes	release_name	釋出名稱：
-project_shownotes	section	專案： $1
+project_shownotes	section	專案：$1
 project_shownotes	title	File 釋出與異動記錄
+project_joinrequest	join_notice_subject	請求參與專案 $1
+project_joinrequest	request_link	請求參與
+project_joinrequest	join_notice_body	$1 已經請求參與您的專案。\n你能在這裡核准這一個請求：http://$2/project/admin/?group_id=$3
+project_joinrequest	submitted	您的請求已經被提交。
+project_joinrequest	title	請求參與專案
+project_joinrequest	joining	藉著點擊提交按鈕，您可以請求參與一個專案，透過Email來通知管理人員核准或否決您的請求。
+project_joinrequest	pending_requests	未決定的參與請求
+project_joinrequest	approved	您已經被新增至 $1 專案。
+project_joinrequest	denied	您請求加入 $1 專案被管理人員否決。
+project_joinrequest	pending	未決定的請求
+project_joinrequest	nonepending	沒有未決定的請求
 project_stats	change_stats_view	切換統計瀏覽方式
 project_stats	detailed_statistics	統計細節
 project_stats	last_30_days	最近30天
@@ -1900,7 +1951,7 @@ project_stats_utils	stats_for_days	過去 $1 天的統計
 project_stats_utils	stats_for_months	過去 $1 個月的統計
 project_stats_utils	support	支援
 project_stats_utils	tasks	任務
-projects	section	專案： $1
+projects	section	專案：$1
 projects	title	摘要
 register	apply_for_registration	要同意專案的註冊，您必須填寫一些基本的資訊。請仔細閱讀下面敘述並且提供完整且正確的資料。
 register	comprehensive_description	請詳細說明您的專案目的
@@ -2014,6 +2065,7 @@ rbac_edit	addrole	新增角色
 rbac_edit	update	更新
 rbac_edit	remove	移除
 rbac_edit	role	角色
+rbac_edit	frspackage	套裝軟體特權
 reporting	add	新增
 reporting	administrative	管理
 reporting	area	區域
@@ -2181,6 +2233,7 @@ searchbox	docs	這個專案的說明書
 searchbox	forum	這個討論區
 searchbox	forums	這個專案的討論區
 searchbox	frs	這個專案的釋出版本
+searchbox	full	搜尋整個的專案
 searchbox	news	這個專案的新聞
 searchbox	people	人
 searchbox	search	搜尋
@@ -2219,7 +2272,7 @@ snippet_addversion	error_url_or_form	錯誤, 錯誤 - 網址格式有誤
 snippet_addversion	if_new_window_opened	如果一個新的視窗開啟，使用它來新增片斷程式碼到您的軟體封裝。如果一個新的視窗沒有開啟，在您離開這個頁面之前使用下列連結來新增您的軟體封裝。
 snippet_addversion	if_you_have_modified	如果您已經修改一個軟體封裝的一個版本，而且您感覺它夠重要來和其他人分享，請這麼做。
 snippet_addversion	if_you_have_modified_a_version	如果您已經修改一個片斷程式碼的一個版本，而且您感覺它夠重要來和其他人分享，請這麼做。
-snippet_addversion	important	IMPORTANT!
+snippet_addversion	important	重要！
 snippet_addversion	link_add_snippets_to_package	新增程式碼到這個集合
 snippet_addversion	make_sure_all_info_is_complete	請確認所有資訊是完整且正確的
 snippet_addversion	paste_the_code_here	在這裡貼上程式碼：
@@ -2360,6 +2413,7 @@ source	missing_file	沒有檔案參數
 source	missing_file_text	這個頁面必須指定一個檔案
 source	show_source	顯示程式碼
 source	source_of	 $1 的程式碼
+staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 stats	overview_stats	整體統計
 stats	project_stats	專案統計
 stats	site_graphs	網站統計圖片
@@ -2382,7 +2436,7 @@ stats_index	sitewide_aggregate_statistics	站台合計統計
 stats_lastlogins	date	日期
 stats_lastlogins	last_logins	最近登入
 stats_lastlogins	most_recent_open	最新連線
-stats_lastlogins	no_records	找不到資料","資料庫錯誤： "
+stats_lastlogins	no_records	找不到資料","資料庫錯誤："
 stats_lastlogins	source_ip	來源 IP
 stats_lastlogins	username	帳號
 stats_projects	project_comparision	專案統計比較表
@@ -2500,15 +2554,15 @@ survey_edit	change_after_already_response	如果您在已經有人填寫後修�
 survey_edit	existing_surveys	已經存在的問卷
 survey_edit	is_active	啟用中
 survey_edit	list_question_numbers	以希望的次序列出問題編號，並以逗號分格。<strong>提及您的問題列表</strong> 因此您能瀏覽問題的編號。<strong>不要</strong>包括空白字元或以逗號作為結尾。<br />範例：1,2,3,4,5,6,7
-survey_edit	missing_date	更新錯誤： 沒有資料
+survey_edit	missing_date	更新錯誤：沒有資料
 survey_edit	name_off_survey	問卷名稱
 survey_edit	no	否
 survey_edit	permission_denied	權限不足
 survey_edit	question	問題
 survey_edit	show_existing_questions	顯示已經存在的問題
 survey_edit	submit_changes	送出異動
-survey_edit	survey_question_required	更新錯誤： 必須要有問卷問題
-survey_edit	survey_title_required	更新錯誤： 必須填入問卷標題
+survey_edit	survey_question_required	更新錯誤：必須要有問卷問題
+survey_edit	survey_title_required	更新錯誤：必須填入問卷標題
 survey_edit	title	編輯一個問卷
 survey_edit	update_failed	更新錯誤
 survey_edit	update_successful	更新成功
@@ -2674,7 +2728,16 @@ tracker	changed	已修改
 tracker	check_upload	檢查上傳&附加檔案
 tracker	choose	選擇一個追蹤系統，然後您可以瀏覽/編輯/新增項目給它。
 tracker	close_date	結束日期
-tracker	comment	comment
+tracker	comment	評論
+tracker	saved_queries	套用&執行
+tracker	query_name	命名與儲存查詢
+tracker	query_update	更新查詢
+tracker	query_make_default	使這個查詢作為預設值
+tracker	query_load	載入查詢
+tracker	query_delete	刪除查詢
+tracker	query_default	最新查詢
+tracker_artifacttype	query	查詢
+tracker_artifacttype	csv	下載 .csv
 tracker	comments	評論
 tracker	comment_added	已新增評論
 tracker	date	日期
@@ -2715,6 +2778,7 @@ tracker_add	title	送交追蹤項目
 tracker_admin	permanently_delete_info	永久地刪除這個追蹤系統。
 tracker_admin	deleted	已成功刪除
 tracker_admin	delete_warning	你將永久地刪除這個的追蹤者和它所有的內容，而且不能挽回！
+tracker_admin	delete_extrafieldwarning	您正在永久且不能挽回地刪除這個訂製欄位和它所有的內容！
 tracker_admin	sure	我確定
 tracker_admin	really_sure	我非常確定
 tracker_admin	delete	刪除
@@ -2728,7 +2792,7 @@ tracker_admin	add_permissions	新增/更新 使用者 & 權限
 tracker_admin	add_permissions_info	新增/移除使用者至/從這個追蹤項目
 tracker_admin	admin	管理
 tracker_admin	auto_assign_to	自動指定給
-tracker_admin	build_selection_box	新增/更新 跳出式選單
+tracker_admin	build_selection_box	管理訂製欄位
 tracker_admin	build_selection_box_info	新增新選單像階段(Phases)、品質度量(Quality Metrics)、元件(Components)...等等，只要新增一次，它們可以被使用在其它的選擇式選單(譬如類別或群組)來說明與瀏覽 bugs 或其它的自訂類型。
 tracker_admin	canned_response_inserted	預設回應已插入
 tracker_admin	canned_response_updated	預設回應已更新
@@ -2779,47 +2843,60 @@ tracker_admin_add_users	title	新增/更新追蹤使用者權限至$1
 tracker_admin_add_users	update_permissions	更新開發人員權限
 tracker_admin_add_users	user_name	帳號
 tracker_admin_build_boxes	box_type_select	Select Box
+tracker_admin_build_boxes	box_type_checkbox	Check Box
 tracker_admin_build_boxes	box_type_radio	Radio Buttons
 tracker_admin_build_boxes	box_type_text	Text Field
+tracker_admin_build_boxes	box_type_multiselect	Multi-Select Box
 tracker_admin_build_boxes	box_type_textarea	Text Area
-tracker_admin_build_boxes	box_type	額外欄位類型
+tracker_admin_build_boxes	box_type_status	狀態
+tracker_admin_build_boxes	box_status	狀態
+tracker_admin_build_boxes	box_type	訂製欄位類型
 tracker_admin_build_boxes	box_sizerows	Text Fields 與 Text Areas 需要各自有大小/最大長度和列數/行數的定義。
 tracker_admin_build_boxes	box_sizeattr1	Text Field 大小/Text Area 列數
 tracker_admin_build_boxes	box_sizeattr2	Text Field 最大長度/Text Area 行數
-tracker_admin_build_boxes	title	新增/更新 額外欄位
+tracker_admin_build_boxes	title	管理訂製欄位
 tracker_admin_build_boxes	edit	編輯
-tracker_admin_build_boxes	opt_title	新增/更新 額外欄位組成元素在： $1
+tracker_admin_build_boxes	delete	刪除
+tracker_admin_build_boxes	copy	複製
+tracker_admin_build_boxes	add_field	新增新訂製欄位
+tracker_admin_build_boxes	manage_template	訂製欄位表現樣板
+tracker_admin_build_boxes	upload_template	新增/更新樣板
+tracker_admin_build_boxes	download_template	下載預設樣板
+tracker_admin_build_boxes	delete_template	刪除樣板
+tracker_admin_build_boxes	extrafield_deleted	訂製欄位已刪除
+tracker_admin_build_boxes	opt_title	新增/更新 訂製欄位組成元件在：$1
 tracker_admin_build_boxes	box_add_choices	新增選擇
 tracker_admin_build_boxes	tracker_box_id	編號
 tracker_admin_build_boxes	tracker_choice_id	編號
-tracker_admin_build_boxes	tracker_box_title	額外欄位定義
+tracker_admin_build_boxes	tracker_box_title	訂製欄位定義
 tracker_admin_build_boxes	tracker_box_option_add	新增/更新
-tracker_admin_build_boxes	tracker_box_option_title	組成元素定義
-tracker_admin_build_boxes	box_name	額外欄位名稱
-tracker_admin_build_boxes	opt_add_name	新增新組成元素
-tracker_admin_build_boxes	choice_warning	只要您新增一個新組成元素，它就無法被刪除
-tracker_admin_build_boxes	box_warning	只要您新增一個新額外欄位，它就無法被刪除
+tracker_admin_build_boxes	tracker_box_option_title	組成元件定義
+tracker_admin_build_boxes	tracker_box_type	類型
+tracker_admin_build_boxes	tracker_box_add_options	新增選項
+tracker_admin_build_boxes	box_name	訂製欄位名稱
+tracker_admin_build_boxes	opt_add_name	新增新組成元件
+tracker_admin_build_boxes	choice_warning	只要您新增一個新組成元件，它就無法被刪除
 tracker_admin_build_boxes	required_box_name	一個欄位名稱是必須的
-tracker_admin_build_boxes	required_choice_name	一個組成元素名稱是必須的
-tracker_admin_build_boxes	no_box	您沒有定義任何的額外欄位
-tracker_admin_build_boxes	no_choice	您沒有定義任何的組成元素
-tracker_admin_build_boxes	error_inserting_box	錯誤插入一個額外欄位
-tracker_admin_build_boxes	error_inserting_choice	錯誤插入一個組成元素
-tracker_admin_build_boxes	box_name_inserted	額外欄位已插入
-tracker_admin_build_boxes	choice_inserted	組成元素已插入
-tracker_admin_build_boxes	box_update_title	修改一個額外欄位在： $1
-tracker_admin_build_boxes	opt_update_title	修改一個額外欄位組成元素在： $1
-tracker_admin_build_boxes	opt_name	組成元素
+tracker_admin_build_boxes	required_choice_name	一個組成元件名稱是必須的
+tracker_admin_build_boxes	no_box	您沒有定義任何的訂製欄位
+tracker_admin_build_boxes	no_choice	您沒有定義任何的組成元件
+tracker_admin_build_boxes	error_inserting_box	錯誤插入一個訂製欄位
+tracker_admin_build_boxes	error_inserting_choice	錯誤插入一個組成元件
+tracker_admin_build_boxes	box_name_inserted	訂製欄位已插入
+tracker_admin_build_boxes	choice_inserted	組成元件已插入
+tracker_admin_build_boxes	box_update_title	修改一個訂製欄位在：$1
+tracker_admin_build_boxes	opt_update_title	修改一個訂製欄位組成元件在：$1
+tracker_admin_build_boxes	opt_name	組成元件
 tracker_admin_build_boxes	status_any	任何
-tracker_admin_build_boxes	box_name_updated	額外欄位已更新
-tracker_admin_build_boxes	choice_updated	組成元素已更新	
-tracker_admin_build_boxes	box_change_warning	不建議您改變額外欄位名稱，因為它與其他部份有關聯性。當您改變額外欄位名稱，全部相關項目將被變更至新的額外欄位。
-tracker_admin_build_boxes	choice_change_warning	不建議您改變組成元素名稱，因為它與其他部份有關聯性。當您改變組成元素名稱，全部相關項目將被變更至新的組成元素。
-tracker_admin_build_boxes	error_updating	錯誤更新一個額外欄位名稱
-tracker_admin_copy	copy_choices	點擊這裡來複製這些組成元素到其它追蹤者
-tracker_admin_copy	choices_title	複製選擇從額外欄位 $1
+tracker_admin_build_boxes	box_name_updated	訂製欄位已更新
+tracker_admin_build_boxes	choice_updated	組成元件已更新	
+tracker_admin_build_boxes	box_change_warning	不建議您改變訂製欄位名稱，因為它與其他部份有關聯性。當您改變訂製欄位名稱，全部相關項目將被變更至新的訂製欄位。
+tracker_admin_build_boxes	choice_change_warning	不建議您改變組成元件名稱，因為它與其他部份有關聯性。當您改變組成元件名稱，全部相關項目將被變更至新的組成元件。
+tracker_admin_build_boxes	error_updating	錯誤更新一個訂製欄位名稱
+tracker_admin_copy	copy_choices	點擊這裡來複製這些組成元件到其它追蹤者
+tracker_admin_copy	choices_title	複製選項從訂製欄位 $1
 tracker_admin_copy	from_box	複製從
-tracker_admin_copy	into_box	到追蹤者與額外欄位
+tracker_admin_copy	into_box	到追蹤者與訂製欄位
 tracker_admin_choose	title	追蹤者管理
 tracker_admin_update_canned	title	修改預設回應在：$1
 tracker_admin_update_cat	auto_assign_to	自動指定給
@@ -2856,6 +2933,10 @@ tracker_artifact	error_summary_required	自訂: 訊息摘要是必須的
 tracker_artifact	error_valid_email_required	設定監視::合法Email信箱是必須的
 tracker_artifact	logged_in_no	登入：否
 tracker_artifact	logged_in_yes	登入：是
+tracker_monitor	monitoring_activated	正在監視
+tracker_monitor	monitoring_deactivated	監視已取消
+tracker_monitor	monitor	監視
+tracker_monitor	monitorstop	停止監視
 tracker_artifact	monitoring_activated	正在監視
 tracker_artifact	monitoring_deactivated	監視已取消
 tracker_artifact	nothing_changed	沒有異動 - 取消更新
@@ -2880,6 +2961,7 @@ tracker_artifacttype	none	無
 tracker_artifacttype	reporting	報告
 tracker_artifacttype	required_fields	自訂類型: 名稱，說明，適當期間與狀態暫停是必須的
 tracker_artifacttype	submit_new	新增
+tracker_artifacttype	invalid_emails	E-mail位址明顯無效
 tracker_browse	admin_mass_update	<strong>管理：</strong></FONT> 如果您希望上述圈選的全部項目生效，使用這些控制改變它們的屬性然後點擊一次"大量更新"生效。
 tracker_browse	ascending	升冪
 tracker_browse	canned_response	預設回應
