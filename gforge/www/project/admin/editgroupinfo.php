@@ -209,7 +209,7 @@ if($sys_use_scm) {
 ?>
 <tr>
 <td>
-input type="checkbox" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
+<input type="checkbox" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
 </td>
 <td>
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>
