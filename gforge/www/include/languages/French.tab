@@ -333,6 +333,7 @@ admin_index	project_hold	Réservé (H)
 admin_index	project_pending	En attente (P)
 admin_index	recent_logins	Dernières authentifications
 admin_index	register_new_project	Enregistrer un nouveau projet
+admin_index	register_new_user	Enregistrer un nouvel utilisateur
 admin_index	registered_projects_count	Projets enregistrés : <strong>$1</strong>
 admin_index	search_groups	Rechercher <em>(identifiant, nom unix, nom complet)</em>&nbsp;
 admin_index	search_users	Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</em>&nbsp;

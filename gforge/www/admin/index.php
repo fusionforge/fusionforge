@@ -63,6 +63,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="submit" value="<?php echo $Language->getText('admin_index','get'); ?>" />
 		</form>
 	</li>
+    <li><a href="../account/register.php"><?php
+    echo $Language->getText('admin_index', 'register_new_user');
+    ?></a>
+    </li>
 </ul>
 <p>
 <strong><?php echo $Language->getText('admin_index','group_maintaince'); ?></strong>

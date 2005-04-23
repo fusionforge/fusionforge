@@ -321,6 +321,7 @@ admin_index	project_pending	Pending (P)
 admin_index	project_hold	Hold (H)
 admin_index	project_database_administration	Project Database Administration
 admin_index	register_new_project	Register New Project
+admin_index	register_new_user	Register a New User
 admin_index	recent_logins	Recent logins
 admin_index	registered_projects_count	Registered projects: <strong>$1</strong>
 admin_index	search_groups	Search <em>(groupid, group unix name, full name)</em>
