@@ -215,7 +215,7 @@ function plugin_hook ($hookname, $params = false) {
 }
 
 /**
- * plugin_hook () - run a set of hooks with params passed by reference
+ * plugin_hook_by_reference () - run a set of hooks with params passed by reference
  *
  * @param hookname - name of the hook
  * @param params - parameters for the hook
@@ -236,7 +236,7 @@ function plugin_hook_listeners ($hookname, $params=false) {
 }
 
 /**
- * setup_plugin_manager () - initialise the plugin ingrastructure
+ * setup_plugin_manager () - initialise the plugin infrastructure
  *
  */
 function setup_plugin_manager () {
