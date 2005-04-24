@@ -119,6 +119,8 @@ install: build
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/BaseLanguage.class \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
+	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/vote_function.php \
+		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 
 	# gforge-db-postgresql
 	install -m 644 $(CURDIR)/debian/gforge-db-postgresql.overrides $(CURDIR)/debian/gforge-db-postgresql/usr/share/lintian/overrides/gforge-db-postgresql
