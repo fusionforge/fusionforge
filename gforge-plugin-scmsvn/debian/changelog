@@ -1,4 +1,4 @@
-gforge-plugin-scmsvn (4.1-5p) unstable; urgency=low
+gforge-plugin-scmsvn (4.1-5z01) unstable; urgency=low
 
   * New upstream 
   * [Christian] Added dependancy to php4-cli
@@ -10,6 +10,7 @@ gforge-plugin-scmsvn (4.1-5p) unstable; urgency=low
   CVSweb's ones
   * [Mathieu] Created repository with fsfs backend because ViewCVS
   requires write permission with default SVN backend
+  * [Christian] Reviewed update-inetd 
 
  -- Christian Bayle <bayle@debian.org>  Sat, 26 Feb 2005 09:13:47 +0100
 
