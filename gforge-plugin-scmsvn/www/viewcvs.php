@@ -66,7 +66,7 @@ $content = viewcvs_execute();
 $found = false;
 $line = strtok($content,SEPARATOR);
 while ($line && !$found) {
-	if (preg_match('/^Content-Type:(.*)$/',$line,$matches) !== false) {
+	if (preg_match('/^Content-Type:(.*)$/',$line,$matches)) {
 		header('Content-Type:' . $matches[1]);
  		$found = true;
  	}
