@@ -311,6 +311,15 @@ class Permission extends Error {
 	function &getPermData() {
 		return $this->data_array;
 	}
+
+	/**
+	 *	isCVSReader - checks the cvs_flags field in user_group table.
+	 *
+	 *	@return	boolean	cvs_flags
+	 */
+	function isCVSReader() {
+		return $this->data_array['cvs_flags'];
+	}
 }
 
 ?>
