@@ -838,11 +838,7 @@ class Group extends Error {
 	 *  @return	string	The name of the unix machine for the group.
 	 */
 	function getSCMBox() {
-		if ( $GLOBALS['sys_scm_single_host'] ) {
-			return $GLOBALS['sys_scm_host'];
-		} else {
-			return $this->data_array['scm_box'];
-		}
+		return $this->data_array['scm_box'];
 	}
 	/**
 	 * setSCMBox - the hostname of the scm box where this project is located.
@@ -850,14 +846,14 @@ class Group extends Error {
 	 * @param	string The name of the new SCM_BOX
 	 */
 	function setSCMBox($scm_box) {
-		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
-			$this->setError('Trying to change SCM_BOX when sys_scm_single_host selected');
-			return false;
-		} else {
+		global $Language;
+
+		if ($scm_box) {
 			db_begin();
 			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
 			$res = db_query($sql);
 			if ($res) {
+				$this->addHistory('scm_box', $this->data_array['scm_box']);
 				$this->data_array['scm_box']=$scm_box;
 				db_commit();
 				return true;
@@ -866,6 +862,9 @@ class Group extends Error {
 				$this->setError('Couldn\'t insert SCM_BOX to database');
 				return false;
 			}
+		} else {
+			$this->setError($Language->getText('admin','scm_box_empty'));
+			return false;
 		}
 	}
 
