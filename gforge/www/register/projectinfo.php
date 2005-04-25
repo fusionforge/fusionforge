@@ -60,6 +60,11 @@ if ($submit) {
 	if ($sys_use_scm && !$scm) {
 		$feedback .= $Language->getText('register','scm_not_selected');
 	} else {
+		$scm_host = $sys_cvs_host;
+		if ($sys_use_scm && $scm) {
+				$plugin = plugin_get_object($scm);
+				$scm_host = $plugin->getDefaultServer();
+		}
 		$group = new Group();
 		$u =& session_get_user();
 		$res = $group->create(
@@ -71,7 +76,7 @@ if ($submit) {
 			$license_other,
 			$purpose,
 			'shell1',
-			$sys_cvs_host
+			$scm_host
 		);
 		if ($res && $sys_use_scm) {
 			$res = $group->setPluginUse($scm,true);
