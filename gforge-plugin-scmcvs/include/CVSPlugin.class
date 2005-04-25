@@ -18,11 +18,16 @@ class CVSPlugin extends SCM {
 
 		require_once('plugins/scmcvs/config.php') ;
 
+		$this->default_cvs_server = $default_cvs_server ;
 		//$this->default_cvs_server = $default_cvs_server ;
 		//$this->this_server = $this_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 
 		$this->register () ;
+	}
+	
+	function getDefaultServer() {
+		return $this->default_cvs_server;
 	}
 
 	function CallHook ($hookname, $params) {
