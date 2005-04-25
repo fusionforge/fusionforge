@@ -17,7 +17,7 @@ $svn_path='/usr/local/svn/bin';
 $file_owner='nobody:nogroup';
 
 //	Where is the SVN repository?
-$svn='/var/svn';
+$svn=GLOBAL["$sys_svnroot"];
 
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;
@@ -73,6 +73,8 @@ while ( $row =& db_fetch_array($res) ) {
 		} else {
 			passthru ("[ ! -d $repos_co/".$row["unix_group_name"]." ] && mkdir -p $repos_co/".$row["unix_group_name"]."/ && $svn_path/svn add $repos_co/".$row["unix_group_name"]);
 		}
+		$cmd = 'chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"]." $repos_co";
+		passthru ($cmd);
 	} else {
 		if ($first_letter) {
 			//
@@ -86,6 +88,8 @@ while ( $row =& db_fetch_array($res) ) {
 			svn_hooks("$svn/".$row["unix_group_name"]);
 			addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
 		}
+		$cmd = 'chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"]." $svn";
+		passthru ($cmd);
 	}
 }
 
