@@ -57,7 +57,7 @@ function do_update(&$group, $is_public, $status, $license,
 		return false;
 	}
 
-	if(!$group->setSCMBox($scm_box) && $GLOBALS['sys_scm_single_host'] != '1' && $scm_box!=NULL) {
+	if(!$group->setSCMBox($scm_box)) {
 		$feedback .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -203,7 +203,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 </td>
 </tr>
 <?php
-if ($group->usesSCM() && $GLOBALS['sys_scm_single_host'] != '1' ) {
+if ($group->usesSCM()) {
 ?>
 <tr>
 	<td><?php echo $Language->getText('admin','scm_box'); ?></td>
