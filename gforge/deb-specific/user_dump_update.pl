@@ -44,7 +44,7 @@ while ($ln = pop(@userdump_array)) {
 	chop($ln);
 	($uid, $gid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 	$username =~ tr/A-Z/a-z/;
-	$user_exists = (-d $homedir_prefix . $username || -f "/var/lib/gforge/tmp/$username.tar.gz");
+	$user_exists = (-d $homedir_prefix .'/'. $username || -f "/var/lib/gforge/tmp/$username.tar.gz");
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $gid, $username, $realname, $shell, $passwd);

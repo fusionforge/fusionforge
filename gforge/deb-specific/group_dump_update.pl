@@ -57,7 +57,7 @@ while ($ln = pop(@groupdump_array)) {
 	
 	$userlist =~ tr/A-Z/a-z/;
 
-	$group_exists = (-d $grpdir_prefix . $gname);
+	$group_exists = (-d $grpdir_prefix .'/'. $gname);
 
 	if ($gstatus eq 'A' && $group_exists) {
 		update_group($gid, $gname, $userlist);
