@@ -192,6 +192,7 @@ admin	na	N/A
 admin	other	Other
 admin	reject	Reject
 admin	scm_box	SCM Box:
+admin	scm_box_empty	SCM Box can't be empty
 admin	site_admin_home	Site Admin Home
 admin	submit_changes	Submit Changes
 admin	submit_new	Submit New
