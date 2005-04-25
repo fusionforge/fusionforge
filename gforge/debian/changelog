@@ -13,7 +13,7 @@ gforge (4.1-5z00) unstable; urgency=low
   * [Christian] Hope I solved a long time bug at apache reload, but adding
     more tests in install-apache.sh
   * [Christian] reorganized gforge-shell-* cron so homedirs are created in
-    both ldap and postgresql
+    both ldap and postgresql, update of ldap is done in gforge-ldap
 
  -- Christian Bayle <bayle@debian.org>  Sat, 19 Feb 2005 17:31:29 +0100
 
