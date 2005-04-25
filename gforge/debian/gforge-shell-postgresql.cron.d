@@ -1,6 +1,6 @@
 #
-# Regular cron jobs for the gforge-shell-ldap package
+# Regular cron jobs for the gforge-shell-postgresql package
 #
 
 # CVS/user/group update
-0 * * * * root [ -x /usr/lib/gforge/bin/home-dirs.sh ] && /usr/lib/gforge/bin/home-dirs.sh > /dev/null 2>&1
+0 * * * * root [ -x /usr/lib/gforge/bin/update-user-group-cvs.sh ] && /usr/lib/gforge/bin/update-user-group-cvs.sh > /dev/null 2>&1

@@ -15,7 +15,10 @@ else
         
 	# Fill ldap tables
 	# Should be safe to comment this soon
-	/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
+	# Be sure the system user are created before creating homes
+	# when using nss-ldap
+	[ -x /usr/lib/gforge/bin/install-ldap.sh ] && \
+		/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
 
 	[ -d /var/lib/gforge/dumps ] || \
 	mkdir /var/lib/gforge/dumps && \
