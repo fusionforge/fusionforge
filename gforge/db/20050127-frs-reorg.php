@@ -108,6 +108,10 @@ for ($g=0; $g<count($groups); $g++) {
 		}
 	}
 }
+
+$cmd = '/bin/chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"].' '.$GLOBALS['sys_upload_dir'];
+exec($cmd,$out);
+
 echo "SUCCESS";
 
 ?>
