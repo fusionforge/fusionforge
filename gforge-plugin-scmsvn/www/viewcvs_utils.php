@@ -30,6 +30,19 @@ function viewcvs_is_html() {
 }
 
 /**
+ * make_arg_cmd_safe() - Make strings safe for the command line.
+ *
+ * @param  string  The argument that needs to be cleaned.
+ * @return string  The argument with dangerous shell characters escaped.
+ */
+function make_arg_cmd_safe($arg) {
+    if (get_magic_quotes_gpc()) {
+        $arg = stripslashes($arg);
+    }
+    return escapeshellcmd($arg);
+}
+
+/**
  *      viewcvs_execute() - Call to viewcvs.cgi and returned the output.
  *
  *      @return String the output of the ViewCVS command.
@@ -49,17 +62,20 @@ function viewcvs_execute() {
  			$path .= '/';
  		}
  	}
-	$command = 'HTTP_COOKIE="'.getStringFromServer('HTTP_COOKIE').'" '.
-		'REMOTE_ADDR="'.getStringFromServer('REMOTE_ADDR').'" '.
+ 	$query_string = str_replace('\\&', '&', make_arg_cmd_safe($query_string));
+ 	$query_string = str_replace('\\*', '*', $query_string);
+ 	$path = str_replace('\\*', '*', make_arg_cmd_safe($path));
+	$command = 'HTTP_COOKIE="'.make_arg_cmd_safe(getStringFromServer('HTTP_COOKIE')).'" '.
+		'REMOTE_ADDR="'.make_arg_cmd_safe(getStringFromServer('REMOTE_ADDR')).'" '.
 		'QUERY_STRING="'.$query_string.'" '.
-		'SERVER_SOFTWARE="'.getStringFromServer('SERVER_SOFTWARE').'" '.
-		'SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" '.
-		'HTTP_USER_AGENT="'.getStringFromServer('HTTP_USER_AGENT').'" '.
-		'HTTP_ACCEPT_ENCODING="'.getStringFromServer('HTTP_ACCEPT_ENCODING').'" '.
-		'HTTP_ACCEPT_LANGUAGE="'.getStringFromServer('HTTP_ACCEPT_LANGUAGE').'" '.
+		'SERVER_SOFTWARE="'.make_arg_cmd_safe(getStringFromServer('SERVER_SOFTWARE')).'" '.
+		'SCRIPT_NAME="'.make_arg_cmd_safe(getStringFromServer('SCRIPT_NAME')).'" '.
+		'HTTP_USER_AGENT="'.make_arg_cmd_safe(getStringFromServer('HTTP_USER_AGENT')).'" '.
+		'HTTP_ACCEPT_ENCODING="'.make_arg_cmd_safe(getStringFromServer('HTTP_ACCEPT_ENCODING')).'" '.
+		'HTTP_ACCEPT_LANGUAGE="'.make_arg_cmd_safe(getStringFromServer('HTTP_ACCEPT_LANGUAGE')).'" '.
 		'PATH_INFO="'.$path.'" '.
-		'PATH="'.getStringFromServer('PATH').'" '.
-		'HTTP_HOST="'.getStringFromServer('HTTP_HOST').'" '.
+		'PATH="'.make_arg_cmd_safe(getStringFromServer('PATH')).'" '.
+		'HTTP_HOST="'.make_arg_cmd_safe(getStringFromServer('HTTP_HOST')).'" '.
 		$GLOBALS['sys_path_to_scmweb'].'/viewcvs.cgi 2>&1';
 
 	ob_start();
