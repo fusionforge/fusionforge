@@ -1,8 +1,8 @@
-gforge (4.1-5z00) unstable; urgency=low
+gforge (4.1-5z05) unstable; urgency=low
 
   * [Christian] nss-pgsql1 integration
-  * [Christian] System.class reorganization 
-  * [Christian] Added anonscm-gforge user for anonymous cvs 
+  * [Christian] System.class reorganization
+  * [Christian] Added anonscm-gforge user for anonymous cvs
     and moved lock files in cvsroot/cvs-locks/ dir
   * [Christian] dummy user is now scm-gforge and removed from ldap
   * [Christian] Fixed a problem with OID at db upgrade (see db-upgrade.pl)
@@ -14,8 +14,9 @@ gforge (4.1-5z00) unstable; urgency=low
     more tests in install-apache.sh
   * [Christian] reorganized gforge-shell-* cron so homedirs are created in
     both ldap and postgresql, update of ldap is done in gforge-ldap
+  * [Christian] Added sys_apache_user and sys_apache_group in local.inc
 
- -- Christian Bayle <bayle@debian.org>  Sat, 19 Feb 2005 17:31:29 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 26 Apr 2005 21:28:24 +0200
 
 gforge (4.0.2-7) unstable; urgency=low
 

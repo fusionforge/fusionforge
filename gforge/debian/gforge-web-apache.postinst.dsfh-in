@@ -76,7 +76,8 @@ case "$1" in
 
 	# Set up upload directory
 	#chown www-data:www-data /var/lib/gforge/uploads
-	chown www-data:www-data /var/lib/gforge/download
+	# Next line done in 20050127-frs-reorg.php
+	#chown www-data:www-data /var/lib/gforge/download
 	
     ;;
 

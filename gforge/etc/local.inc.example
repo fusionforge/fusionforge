@@ -185,7 +185,8 @@ $sys_upload_dir='/path/to/uploads/';
 $sys_ftp_upload_dir='{ftpuploaddir}';
 $sys_ftp_upload_host='{ftpuploadhost}';
 //$sys_ftp_upload_chowner='{ftpuploadchowner}';
-//$sys_apache_usergroup='{apapche_usergroup}';
+$sys_apache_user='www-gforge';
+$sys_apache_group='www-gforge';
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
