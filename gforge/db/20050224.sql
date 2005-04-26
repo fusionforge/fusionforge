@@ -177,6 +177,7 @@ CREATE INDEX projectperm_useridgroupprojid ON project_perm(user_id,group_project
 DROP INDEX projectsumsagg_groupid;
 --MAY HAVE TO RUN db_project_sums.php cronjob first
 ALTER TABLE project_sums_agg ALTER type SET NOT NULL;
+DELETE FROM project_sums_agg;
 ALTER TABLE project_sums_agg ADD CONSTRAINT project_sums_agg_pkey PRIMARY KEY (group_id,type);
 
 DROP INDEX project_task_group_project_id;

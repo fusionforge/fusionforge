@@ -2,6 +2,8 @@
 	
 	* Added sys_apache_user and sys_apache_group in local.inc
 	* Fixed a typo in 20050127-frs-reorg.php (GLOBAL instead of GLOBALS)
+	* Added a delete on project_sums_agg to turnaround upgrade bug 
+	on 20050224.sql. Closes bug [#1197] 
 
 2005-04-26  Mathieu Peltier  <mathieu.peltier@gmail.com>
 	
