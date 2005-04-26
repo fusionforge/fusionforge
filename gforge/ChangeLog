@@ -1,3 +1,8 @@
+2005-04-26  Mathieu Peltier  <mathieu.peltier@gmail.com>
+	
+	* Applied [#1196] www/account/register.php xhtml 1.0 compliant
+	patch by Vicente J. Ruiz Jurado
+	
 2005-04-19  Mathieu Peltier  <mathieu.peltier@gmail.com>
 	
 	* Integrated ViewCVS PHP wrapper inspired from CVSweb and CodeX'

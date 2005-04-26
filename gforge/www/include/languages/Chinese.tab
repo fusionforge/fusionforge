@@ -106,7 +106,7 @@ account_options	welcome		歡迎
 account_register	Preferences	設定
 account_register	communitymail	接收附加的公共通信論壇。 <i>(量很小)</i>
 account_register	congrat	<p>恭喜。您已經在 $1 上成功註冊。 <p> 一封確認email已經發送到您的email信箱，以確保您email信箱的正確性。點擊email中的連結就可以啟動您的帳號。
-account_register	emailaddr	Email 信箱：<span><font color="red">*</font></span> <BR><I>在帳號啟動前，這個Email信箱將被用來確認帳號。您將收到一封由 &lt;loginname@$1&gt; 轉寄的信，所有發向該信箱的Email會被轉寄到您真正的email信箱中去。</I>
+account_register	emailaddr	Email 信箱：<span><font color="red">*</font></span><br /><em>在帳號啟動前，這個Email信箱將被用來確認帳號。您將收到一封由 &lt;loginname@$1&gt; 轉寄的信，所有發向該信箱的Email會被轉寄到您真正的email信箱中去。</em>
 account_register	err_badinsert	新增失敗
 account_register	theme	佈景：
 account_register	err_theme	必需填選佈景

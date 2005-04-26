@@ -60,7 +60,7 @@ account_register	password2	パスワード(確認):
 account_register	realname	フルネーム:
 account_register	language	ランゲージ選択:
 account_register	timezone	タイムゾーン:
-account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span><font color="red">*</font></span> <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</i> 
+account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span><font color="red">*</font></span><br /><em>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</em>
 account_register	jabberaddr	Jabberアドレス:
 account_register	jabberonly	(未訳：account_register.jabberonly)Send auto-generated notices only to my Jabber address 
 account_register	siteupdate	サイトの最新情報<i>(セキュリティ情報を含む)</i>に関するメールを受け取る

@@ -97,7 +97,7 @@ account_options	welcome		Welcome
 account_register	Preferences	Preferences
 account_register	communitymail	Receive additional community mailings. <i>(Low traffic.)</i>
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
-account_register	emailaddr	Email Address:<span><font color="red">*</font></span> <BR><I>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	emailaddr	Email Address:<span><font color="red">*</font></span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</em>
 account_register	err_badinsert	Insert Failed 
 account_register	theme	Theme
 account_register	err_theme	Theme is required

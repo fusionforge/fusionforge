@@ -114,7 +114,7 @@ account_register	Preferences	Preferencias
 account_register	ccode	País:
 account_register	communitymail	Recibir correos adicionales de la comunidad. <i>(Bajo tráfico.)</i>
 account_register	congrat	<p>Felicidades. Se ha registrado en $1.</p><p>Ahora recibirá un correo de confirmación para verificar su cuenta de correo. Visitando el enlace que le hemos enviado le activará la cuenta.</p>
-account_register	emailaddr	Cuenta de correo *: <br /><i>Esta cuenta de correo será verificada antes de activar la cuenta. No será mostrada en el portal por motivos de privacidad. Recibirá una cuenta de correo &lt;nombredelacuenta@$1&gt; que se redirigirá a esta dirección.</i>
+account_register	emailaddr	Cuenta de correo *:<br /><em>Esta cuenta de correo será verificada antes de activar la cuenta. No será mostrada en el portal por motivos de privacidad. Recibirá una cuenta de correo &lt;nombredelacuenta@$1&gt; que se redirigirá a esta dirección.</em>
 account_register	err_badinsert	Inserción errónea
 account_register	err_email	Dirección de correo inválida
 account_register	err_firstname	Debe proporcionar un nombre

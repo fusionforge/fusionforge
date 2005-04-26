@@ -103,7 +103,7 @@ account_register	Preferences	Lehentasunak
 account_register	ccode	Herrialdea:
 account_register	communitymail	Komunitatearen posta gehigarriak jaso. <i>(Tráfiko gutxi)</i>
 account_register	congrat	<p>Zorionak.$1.</p><p>Ahora recibirá un correo de confirmación para verificar su cuenta de correo. Visitando el enlace que le hemos enviado le activará la cuenta.</p>
-account_register	emailaddr	Posta kontua *: <br /><i>Lehenik eta behin helbide elektronikoa egiaztatuko dugu kontua aktibatu aurretik. Zure posta ez da atarian erakutsiko pribatutasun arrazoiengatik. Posta kontua jasoko dezu &amp;lt;kontuaren izena@$1&amp;gt; helbide elektroniko honetara berbidaliko dena.</i>
+account_register	emailaddr	Posta kontua *:<br /><em>Lehenik eta behin helbide elektronikoa egiaztatuko dugu kontua aktibatu aurretik. Zure posta ez da atarian erakutsiko pribatutasun arrazoiengatik. Posta kontua jasoko dezu &amp;lt;kontuaren izena@$1&amp;gt; helbide elektroniko honetara berbidaliko dena.</em>
 account_register	err_badinsert	Datu sartze okerra
 account_register	err_email	Helbide elektroniko baliogabea
 account_register	err_firstname	Izena derrigorrezkoa da

@@ -91,7 +91,7 @@ account_register	password2	密码（重复）：
 account_register	realname	完整/真是姓名：
 account_register	language	语言选择：
 account_register	timezone	时区选择：
-account_register	emailaddr	Email 地址<span><font color="red">*</font></span> <BR><I>在帐号激活前，这个email地址将被确认。它不会在这个站点当中显示出来，你在这个站点将使用 &lt;loginname@$1&gt; 做为email地址，所有发向该地址的email会被转发到您真正的email地址当中去。</I>
+account_register	emailaddr	Email 地址<span><font color="red">*</font></span><br /><em>在帐号激活前，这个email地址将被确认。它不会在这个站点当中显示出来，你在这个站点将使用 &lt;loginname@$1&gt; 做为email地址，所有发向该地址的email会被转发到您真正的email地址当中去。</em>
 account_register	jabberaddr	Jabber 地址：
 account_register	jabberonly	自动生成的通知只发送到我的Jabber地址
 account_register	siteupdate	接受关于本站点更新的Email<i>（量非常小，并且包括安全通告，强烈推荐。）</i>

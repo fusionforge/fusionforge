@@ -101,7 +101,7 @@ account_options	welcome		환영합니다
 account_register	Preferences	설정하기
 account_register	communitymail	커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>
 account_register	congrat	<p>축하합니다. $1에 등록하셨습니다. <p> 귀하는 이제 곧 메일 주소를 확인하기 위한 확인 메일을 받으시게 됩니다. 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다.
-account_register	emailaddr	이메일 주소:<span><font color="red">*</font></span> <BR><I>이 이메일 주소는 계정이 활성화되기 전에 확인이 필요합니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname\@$1&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</I>
+account_register	emailaddr	이메일 주소:<span><font color="red">*</font></span><br /><em>이 이메일 주소는 계정이 활성화되기 전에 확인이 필요합니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname\@$1&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</em>
 account_register	err_badinsert	입력 실패
 account_register	err_email	유효하지 않은 이메일 주소
 account_register	err_jabber	유효하지 않은  Jabber 주소

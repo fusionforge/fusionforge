@@ -114,7 +114,7 @@ account_options	welcome		Välkommen
 account_register	Preferences	Inställningar
 account_register	communitymail	Ta emot ytterligare brev från gruppen. <i>(Låg trafik.)</i>
 account_register	congrat	<p>Gratulerar. Du har registrerat dig på $1.  <p> Du får nu ett bekräftelsebrev för att säkerställa att din e-postadress är riktig. Följ länken i detta e-postbrev för att bekräfta ditt nya konto.
-account_register	emailaddr	E-postadress:<span><font color="red">*</font></span> <BR><I>Denna e-postadress skall bekräftas innan kontot aktiveras. Den kommer inte att visas på denna webbplats. Du kommer att få ett e-postkonto på &lt;loginname@$1&gt; som vidarebefordrar e-post till din riktiga e-postadress.</I>
+account_register	emailaddr	E-postadress:<span><font color="red">*</font></span><br /><em>Denna e-postadress skall bekräftas innan kontot aktiveras. Den kommer inte att visas på denna webbplats. Du kommer att få ett e-postkonto på &lt;loginname@$1&gt; som vidarebefordrar e-post till din riktiga e-postadress.</em>
 account_register	err_badinsert	Infogandet misslyckades
 account_register	err_email	Ogiltig e-postadress
 account_register	err_jabber	Ogiltig jabberadress

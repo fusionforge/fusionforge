@@ -105,7 +105,7 @@ account_options	welcome	Benvenuto
 account_register	Preferences	Preferenze
 account_register	communitymail	Desidero ricevere email dalla comunità <I>(poco traffico).</I>
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.</p><p> Ti verrà inviata una email di conferma per verificare il tuo indirizzo email. Visita il link indicato nella email per attivare il tuo account.</p>
-account_register	emailaddr	Indirizzo email:<span><font color="red">*</font></span><BR><I>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</I>
+account_register	emailaddr	Indirizzo email:<span><font color="red">*</font></span><br /><em>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</em>
 account_register	err_badinsert	Inserimento fallito
 account_register	err_email	Indirizzo email non valido
 account_register	err_jabber	Indirizzo Jabber non valido

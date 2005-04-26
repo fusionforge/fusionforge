@@ -87,7 +87,7 @@ account_options	welcome		Bem vindo
 account_register	Preferences	Preferências
 account_register	communitymail	Receber postagens adicionais da comunidade. <i>(Baixo tráfego.)</i>
 account_register	congrat	<p>Congratulações. Você está registrado no $1.  <p> Será enviado a você um e-mail de confirmação para verificar seu endereço de e-mail. Ao visitar o link enviado para você nesse e-mail você irá ativar a sua conta.
-account_register	emailaddr	Endereço de E-mail:<span><font color="red">*</font></span> <BR><I>Esse endereço de e-mail será verificado antes da ativação da conta. Ele não será mostrado no site. Você irá receber uma conta de redirecionamento de e-mail em &lt;loginname@$1&gt; que irá redirecionar para esse endereço.</I>
+account_register	emailaddr	Endereço de E-mail:<span><font color="red">*</font></span><br /><em>Esse endereço de e-mail será verificado antes da ativação da conta. Ele não será mostrado no site. Você irá receber uma conta de redirecionamento de e-mail em &lt;loginname@$1&gt; que irá redirecionar para esse endereço.</em>
 account_register	err_badinsert	Inserção Falhou 
 account_register	err_email	Endereço de E-mail Inválido
 account_register	err_jabber	Endereço do Jabber Inválido

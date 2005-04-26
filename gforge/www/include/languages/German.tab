@@ -106,7 +106,7 @@ account_options	welcome		Willkommen
 account_register	Preferences	Einstellungen
 account_register	communitymail	Erhalte außerplanmäßige Community-Mailings. <i>(Sehr wenige.)</i>
 account_register	congrat	<p>Gratulation. Sie haben sich auf $1 registrieren lassen.</p><p> Ihnen wurde eine Bestätigungs-EMail zugesendet, um Ihre EMail-Adresse zu überprüfen. Das Besuchen des Links, der in dieser EMail steht, wird Ihren Account aktivieren.
-account_register	emailaddr	EMail-Adresse:<span><font color="red">*</font></span> <BR><I>Diese EMail-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungs-Account (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
+account_register	emailaddr	EMail-Adresse:<span><font color="red">*</font></span><br /><em>Diese EMail-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungs-Account (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</em>
 account_register	err_badinsert	Eingabe fehlgeschlagen 
 account_register	err_email	Ungültige EMail-Adresse
 account_register	err_jabber	Ungültige Jabber-Adresse

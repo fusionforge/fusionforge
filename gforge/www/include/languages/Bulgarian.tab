@@ -108,7 +108,7 @@ account_register	Preferences	Предпочитания
 account_register	ccode	Държава:
 account_register	communitymail	Получаване на допълнителни съобщения от общността.
 account_register	congrat	<p>Поздравления. Вие се регистрирахте на $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
-account_register	emailaddr	Електронен пощенски адрес:<span><font color="red">*</font></span> <BR><I>Адресът ще бъде проверен за валидност преди активирането на акаунта. Той няма да се визуализира на сайта. </I>
+account_register	emailaddr	Електронен пощенски адрес:<span><font color="red">*</font></span><br /><em>Адресът ще бъде проверен за валидност преди активирането на акаунта. Той няма да се визуализира на сайта.</em>
 #TO_TRANSLATE#account_register	err_badinsert	Insert Failed
 account_register	err_email	Невалиден ел. пощенски адрес
 account_register	err_firstname	Името е задължително поле

@@ -98,7 +98,7 @@ account_register	Preferences	Voorkeursinstellingen
 account_register	ccode	Land:
 account_register	communitymail	Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>
 account_register	congrat	<p>Gefeliciteerd. Je bent met succes geregistreerd op $1.  <p> Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-mail opgestuurd. Klik op de link in de e-mail om je account te activeren.
-account_register	emailaddr	E-mail adres:<span><font color="red">*</font></span> <BR><I>Dit e-mail adres wordt eerst geverifieerd voordat uw account wordt geactiveerd. Uw e-mail adres verschijnt vooralsnog nog niet op de site. U ontvangt een tijdelijk mail account &lt;loginname@$1&gt; die de e-mails zal forwarden naar uw adres.</I>
+account_register	emailaddr	E-mail adres:<span><font color="red">*</font></span><br /><em>Dit e-mail adres wordt eerst geverifieerd voordat uw account wordt geactiveerd. Uw e-mail adres verschijnt vooralsnog nog niet op de site. U ontvangt een tijdelijk mail account &lt;loginname@$1&gt; die de e-mails zal forwarden naar uw adres.</em>
 account_register	err_badinsert	Aanmelden mislukt
 account_register	err_email	Ongeldig E-mail adres
 account_register	err_firstname	Je moet een voornaam invullen
