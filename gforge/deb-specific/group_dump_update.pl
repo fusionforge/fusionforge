@@ -110,7 +110,7 @@ sub update_group {
 	my ($log_dir, $cgi_dir, $ht_dir);
 	my ($realuid, $realgid);
 	
-	$group_dir = $grpdir_prefix.$gname;
+	$group_dir = $grpdir_prefix.'/'.$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";

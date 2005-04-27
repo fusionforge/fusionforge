@@ -101,7 +101,7 @@ sub update_user {
 	
 	if($verbose){print("Updating Account for: $username\n")};
 	
-        $home_dir = $homedir_prefix.$username;
+        $home_dir = $homedir_prefix.'/'.$username;
 	unless (-d $home_dir.'/incoming') {
 	    mkdir $home_dir.'/incoming', 0755;
 	}
