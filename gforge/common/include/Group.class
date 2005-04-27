@@ -122,6 +122,11 @@ function &group_get_object($group_id,$res=false) {
 
 function &group_get_objects($id_arr) {
 	global $GROUP_OBJ;
+	
+	// Note: if we don't do this, the result may be corrupted
+	$fetch = array();
+	$return = array();
+	
 	for ($i=0; $i<count($id_arr); $i++) {
 		//
 		//	See if this ID already has been fetched in the cache

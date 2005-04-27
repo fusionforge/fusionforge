@@ -249,7 +249,10 @@ class Artifact extends Error {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->updateExtraFields($extra_fields)) {
+				// the changes to the extra fields will be logged in this array.
+				// (we won't use it however)
+				$extra_field_changes = array();
+				if (!$this->updateExtraFields($extra_fields,$extra_field_changes)) {
 					db_rollback();
 					return false;
 				}
@@ -883,11 +886,12 @@ class Artifact extends Error {
 
 		//extra field handling
 		$update=true;
-		if (!$this->updateExtraFields($extra_fields)) {
+		if (!$this->updateExtraFields($extra_fields,$changes)) {
 //TODO - see if anything actually did change
 			db_rollback();
 			return false;
 		}
+		
 		/*
 			handle canned responses
 
@@ -937,9 +941,10 @@ class Artifact extends Error {
 	 *	e.g. the extra fields created and defined by the admin.
 	 *
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
+	 *	@param	array	Array where changes to the extra fields should be logged
 	 *	@return true on success / false on failure
 	 */
-	function updateExtraFields($extra_fields){
+	function updateExtraFields($extra_fields,&$changes){
 /*
 	This is extremely complex code - we have take the passed array
 	and see if we need to insert it into the db, and may have to 
@@ -959,8 +964,9 @@ class Artifact extends Error {
 			return true;
 		}
 		//get a list of extra fields for this artifact_type
-		$ef =& $this->ArtifactType->getExtraFields();
+		$ef = $this->ArtifactType->getExtraFields();
 		$efk=array_keys($ef);
+
 		//now we'll update this artifact for each extra field
 		for ($i=0; $i<count($efk); $i++) {
 			$efid=$efk[$i];
@@ -1001,36 +1007,47 @@ class Artifact extends Error {
 				//
 				//	Compare for history purposes
 				//
-				if ($rows > 1) {
-					//do the array_diff thing that is so complex, 
-					//but required for checkboxes/multi-select
-//currently not adding history for these
-//TODO ADD array_diff and history trail
+				
+				// these types have arrays associated to them, so they need
+				// special handling to check for differences
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+					// check the differences between the old values and the new values
+					$old_values = util_result_column_to_array($resd,"field_data");
+					
+					$added_values = array_diff($extra_fields[$efid], $old_values);
+					$deleted_values = array_diff($old_values, $extra_fields[$efid]);
+					
+					if (!empty($added_values) || !empty($deleted_values))	{	// there are differences...
+						$field_name = $ef[$efid]['field_name'];
+						$changes["extra_fields"][$efid] = 1;
+						
+						// Do a history entry only for deleted values
+						if (!empty($deleted_values)) {
+							$this->addHistory($field_name, $this->ArtifactType->getElementName($deleted_values));
+						}
+						
+
+						$resdel=db_query("DELETE FROM artifact_extra_field_data
+						WHERE
+						artifact_id='".$this->getID()."'
+						AND extra_field_id='".$efid."'");
+					} else {
+						continue;
+					}
+				} elseif (addslashes(db_result($resd,0,'field_data')) == htmlspecialchars($extra_fields[$efid])) {
+					//element did not change
+					continue;
+				} else {
+					//element DID change - do a history entry
+					$field_name = $ef[$efid]['field_name'];
+					$changes["extra_fields"][$efid] = 1;
 					$resdel=db_query("DELETE FROM artifact_extra_field_data
 					WHERE
 					artifact_id='".$this->getID()."'
 					AND extra_field_id='".$efid."'");
-				} else {
-					if (is_array($extra_fields[$efid])) {
-//currently not adding history for these
-//TODO ADD array_diff and history trail
-						$resdel=db_query("DELETE FROM artifact_extra_field_data
-						WHERE
-						artifact_id='".$this->getID()."'
-						AND extra_field_id='".$efid."'");
-					} elseif (addslashes(db_result($resd,0,'field_data')) == htmlspecialchars($extra_fields[$efid])) {
-						//element did not change
-						continue;
-					} else {
-						//element DID change - do a history entry
-						$resdel=db_query("DELETE FROM artifact_extra_field_data
-						WHERE
-						artifact_id='".$this->getID()."'
-						AND extra_field_id='".$efid."'");
-						if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
+					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
 //don't add history for text fields
-							$this->addHistory($ef[$efid]['field_name'],$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
-						}
+						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
 					}
 				}
 			} else {
@@ -1085,7 +1102,7 @@ class Artifact extends Error {
 		if (!isset($this->extra_field_data)) {
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
 				WHERE artifact_id='".$this->getID()."' ORDER BY extra_field_id");
-			$ef =& $this->ArtifactType->getExtraFields();
+			$ef = $this->ArtifactType->getExtraFields();
 			while ($arr =& db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
@@ -1104,8 +1121,10 @@ class Artifact extends Error {
 	 *
 	 *
 	 */
-	function marker($prop_name,$changes) {
-		if ($changes[$prop_name]) {
+	function marker($prop_name,$changes,$extra_field_id=0) {
+		if ($prop_name == 'extra_fields' && $changes[$prop_name][$extra_field_id]) {
+			return '>';
+		} else if ($prop_name != 'extra_fields' && $changes[$prop_name]) {
 			return '>';
 		} else {
 			return '';
@@ -1127,7 +1146,7 @@ class Artifact extends Error {
 		if (!$changes) {
 			$changes=array();
 		}
-
+		
 		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
@@ -1144,8 +1163,14 @@ class Artifact extends Error {
 			 "Assigned to: ". $this->getAssignedRealName() .
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
-			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() );
-			
+			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() )." \n";
+			 
+		// Now display the extra fields
+		$efd = $this->getExtraFieldDataText();
+		foreach ($efd as $efid => $ef) {
+			$body .= $this->marker('extra_fields', $changes, $efid);
+			$body .= $ef["name"].": ".$ef["value"]."\n";
+		}
 			
 		$subject='[ '. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '-' . $this->getID() .' ] '. util_unconvert_htmlspecialchars( $this->getSummary() );
 
@@ -1248,6 +1273,8 @@ class Artifact extends Error {
 				$emails[] = $user->getEmail();
 			}
 		}
+		
+//		print($body);
 
 		//now remove all duplicates from the email list
 		if (count($emails) > 0) {
@@ -1259,6 +1286,46 @@ class Artifact extends Error {
 		//util_handle_message($monitor_ids,$subject,$body,$BCC);
 		
 		return true;
+	}
+	
+	/**
+	* getExtraFieldDataText - Return the extra fields' data in a human-readable form.
+	*
+	* @return array Array containing field ID => field name and value associated to it for
+	*	this artifact
+	*/
+	function getExtraFieldDataText()
+	{
+		global $Language;
+
+		// First we get the list of extra fields and the data
+		// associated to the fields
+		$efs = $this->ArtifactType->getExtraFields();
+		$efd = $this->getExtraFieldData();
+		
+		$return = array();
+
+		foreach ($efs as $efid => $ef) {
+			$name = $ef["field_name"];
+			
+			// Get the value according to the type
+			switch ($ef["field_type"]) {
+				
+			// for these types, the associated value comes straight
+			case ARTIFACT_EXTRAFIELDTYPE_TEXT:
+			case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
+				$value = $efd[$efid];
+				break;
+
+			// the other types have and ID or an array of IDs associated to them
+			default:
+				$value = $this->ArtifactType->getElementName($efd[$efid]);
+			}
+			
+			$return[$efid] = array("name" => $name, "value" => $value);
+		}
+		
+		return $return;
 	}
 
 }

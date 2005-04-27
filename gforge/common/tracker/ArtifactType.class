@@ -67,7 +67,7 @@ class ArtifactType extends Error {
 	 *
 	 * @var		array extra_fields;
 	 */
-	var $extra_fields;
+	var $extra_fields = array();
 
 	/**
 	 * extra_field[extra_field_id] array - the IDs and Names of elements on the extra fields
@@ -605,6 +605,8 @@ class ArtifactType extends Error {
 			$this->extra_fields["$filter"] = array();
 			if ($filter) {
 				$filter_str=" AND field_type IN ($filter) ";
+			} else {
+				$filter_str="";
 			}
 			$sql="select *
 				FROM artifact_extra_field_list 
@@ -612,10 +614,11 @@ class ArtifactType extends Error {
 				$filter_str
 				ORDER BY field_type ASC";
 			$res=db_query($sql);
-			while($arr =& db_fetch_array($res)) {
+			while($arr = db_fetch_array($res)) {
 				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
 			}
 		}
+			
 		return $this->extra_fields["$filter"];
 	}
 
@@ -625,9 +628,9 @@ class ArtifactType extends Error {
 	 *	@param  int 	id of an extra field.
 	 *	@return string	name of extra field.
 	 */
-	function getExtraFieldName($box_id) {
-		$arr =& $this->getExtraFields();
-		return $arr['extra_field_id']['field_name'];
+	function getExtraFieldName($extra_field_id) {
+		$arr = $this->getExtraFields();
+		return $arr[$extra_field_id]['field_name'];
 	}
 
 	/**

@@ -42,7 +42,7 @@ class ArtifactFactory extends Error {
 	 *
 	 * @var  array  artifacts.
 	 */
-	var $artifacts;
+	var $artifacts = array();
 	var $order_col;
 	var $sort;
 	var $status;
@@ -203,7 +203,7 @@ class ArtifactFactory extends Error {
 	 *	@return	array	The array of Artifact objects.
 	 */
 	function &getArtifacts() {
-		if ($this->artifacts) {
+		if (!empty($this->artifacts)) {
 			return $this->artifacts;
 		}
 
@@ -224,7 +224,7 @@ class ArtifactFactory extends Error {
 			$assigned_str='';
 		}
 
-		if (is_array($this->extra_fields)) {
+		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
 			$keys=array_keys($this->extra_fields);
 			$vals=array_values($this->extra_fields);
 			for ($i=0; $i<count($keys); $i++) {

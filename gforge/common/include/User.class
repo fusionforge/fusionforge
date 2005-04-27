@@ -94,6 +94,9 @@ function &user_get_object($user_id,$res=false) {
 
 function &user_get_objects($id_arr) {
 	global $USER_OBJ;
+	$fetch = array();
+	$return = array();
+
 	for ($i=0; $i<count($id_arr); $i++) {
 		//
 		//  See if this ID already has been fetched in the cache

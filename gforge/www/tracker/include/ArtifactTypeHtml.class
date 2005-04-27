@@ -87,7 +87,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='') {
-		$efarr =& $this->getExtraFields($filter);
+		$efarr = $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
 //TODO - add code for "display only" such as mod-limited and detail.php pages
