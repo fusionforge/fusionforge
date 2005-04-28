@@ -44,7 +44,9 @@ if(!isset($sys_scm_root_path)) {
 		}
 		closedir($handle);
 	}
-	$err = implode("\n", $output);
+	if($output) {
+		$err = implode("\n", $output);
+	}
 	if(empty($err)) {
 		$err = 'SCM tarballs generated';
 	}
