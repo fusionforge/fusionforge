@@ -14,36 +14,21 @@ fi
 
 case "$1" in
     configure-files)
-	# Make sure Apache sees us
-	if [ -e /etc/apache/httpd.conf ] ; then
-	    cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.gforge-new
-	    
-	    if ! grep -q "^Include /etc/gforge/httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
-		echo "### Next line inserted by GForge install" >> /etc/apache/httpd.conf.gforge-new
-		echo "Include /etc/gforge/httpd.conf" >> /etc/apache/httpd.conf.gforge-new
+	# Remove old hack to have Apache see us
+	for flavour in apache apache-perl apache-ssl ; do
+	    if [ -e /etc/$flavour/httpd.conf ] && grep -q "Include /etc/gforge/httpd.conf" /etc/$flavour/httpd.conf ; then
+		cp -a /etc/$flavour/httpd.conf /etc/$flavour/httpd.conf.gforge-new
+		pattern=$(basename $0)
+		tmp=$(mktemp /tmp/$pattern.XXXXXX)
+		grep -v "Include /etc/gforge/httpd.conf\|### Next line inserted by GForge install" /etc/$flavour/httpd.conf.gforge-new > $tmp
+		cat $tmp > /etc/$flavour/httpd.conf.gforge-new
+		rm -f $tmp
 	    fi
-	fi
-
-	if [ -e /etc/apache-ssl/httpd.conf ] ; then
-	    cp -a /etc/apache-ssl/httpd.conf /etc/apache-ssl/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
-	    
-	    if ! grep -q "^Include /etc/gforge/httpd.conf" /etc/apache-ssl/httpd.conf.gforge-new ; then
-		echo "### Next line inserted by GForge install" >> /etc/apache-ssl/httpd.conf.gforge-new
-		echo "Include /etc/gforge/httpd.conf" >> /etc/apache-ssl/httpd.conf.gforge-new
-	    fi
-	fi
+	done
 
 	# Make sure pgsql, ldap and gd are enabled in the PHP config files
 	cp -a /etc/php4/apache/php.ini /etc/php4/apache/php.ini.gforge-new
-	cp -a /etc/php4/cgi/php.ini /etc/php4/cgi/php.ini.gforge-new
+	cp -a /etc/php4/cli/php.ini /etc/php4/cli/php.ini.gforge-new
 	if [ -f /etc/php4/apache/php.ini.gforge-new ]; then
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/apache/php.ini.gforge-new; then
 		echo "Enabling pgsql in /etc/php4/apache/php.ini"
@@ -58,41 +43,51 @@ case "$1" in
 		echo "extension=ldap.so" >> /etc/php4/apache/php.ini.gforge-new
 	    fi
 	fi
-	if [ -f /etc/php4/cgi/php.ini.gforge-new ]; then
-	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cgi/php.ini.gforge-new; then
-		echo "Enabling pgsql in /etc/php4/cgi/php.ini"
-		echo "extension=pgsql.so" >> /etc/php4/cgi/php.ini.gforge-new
+	if [ -f /etc/php4/cli/php.ini.gforge-new ]; then
+	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cli/php.ini.gforge-new; then
+		echo "Enabling pgsql in /etc/php4/cli/php.ini"
+		echo "extension=pgsql.so" >> /etc/php4/cli/php.ini.gforge-new
 	    fi
 	fi
 
 	;;
     configure)
 	/usr/lib/gforge/bin/prepare-vhosts-file.pl
-	if [ -x /usr/sbin/apache ]; then
-		invoke-rc.d apache restart || true
-	fi
-	if [ -x /usr/sbin/apache-ssl ]; then
-		invoke-rc.d apache-ssl restart || true
-	fi
+	for flavour in apache apache-perl apache-ssl ; do
+	    if [ -e /etc/$flavour/httpd.conf ] ; then
+		/usr/sbin/modules-config $flavour enable mod_php4
+		if [ $flavour != apache-ssl ] ; then
+		    /usr/sbin/modules-config $flavour enable mod_ssl
+		fi
+		/usr/sbin/modules-config $flavour enable mod_env
+		/usr/sbin/modules-config $flavour enable mod_vhost_alias
+		[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && ln -s /etc/gforge/httpd.conf /etc/$flavour/conf.d/gforge.httpd.conf
+	    fi
+	    if [ -x /usr/sbin/$flavour ]; then
+		invoke-rc.d $flavour restart || true
+	    fi
+	done
 	;;
 
     purge-files)
-	cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.gforge-new
-  	if grep -q "Include /etc/gforge/httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
-	    pattern=$(basename $0)
-	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
-	    grep -v "Include /etc/gforge/httpd.conf\|### Next line inserted by GForge install" /etc/apache/httpd.conf.gforge-new > $tmp
-	    cat $tmp > /etc/apache/httpd.conf.gforge-new
-	    rm -f $tmp
-  	fi
+	for flavour in apache apache-perl apache-ssl ; do
+	    if [ -e /etc/$flavour/httpd.conf ] && grep -q "Include /etc/gforge/httpd.conf" /etc/$flavour/httpd.conf ; then
+		cp -a /etc/$flavour/httpd.conf /etc/$flavour/httpd.conf.gforge-new
+		pattern=$(basename $0)
+		tmp=$(mktemp /tmp/$pattern.XXXXXX)
+		grep -v "Include /etc/gforge/httpd.conf\|### Next line inserted by GForge install" /etc/$flavour/httpd.conf.gforge-new > $tmp
+		cat $tmp > /etc/$flavour/httpd.conf.gforge-new
+		rm -f $tmp
+	    fi
+	done
 	;;
     purge)
-	if [ -x /usr/sbin/apache ]; then
-		invoke-rc.d apache restart || true
-	fi
-	if [ -x /usr/sbin/apache-ssl ]; then
-		invoke-rc.d apache-ssl restart || true
-	fi
+	for flavour in apache apache-perl apache-ssl ; do
+	    [ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && rm -f /etc/$flavour/conf.d/gforge.httpd.conf
+	    if [ -x /usr/sbin/$flavour ]; then
+		invoke-rc.d $flavour restart || true
+	    fi
+	done
 	;;
 
     *)
