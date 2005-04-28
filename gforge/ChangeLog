@@ -1,6 +1,7 @@
 2005-04-27  Christian Bayle <bayle@debian.org>
 
 	* Applied [#1216] httpd.config tweaks and some HTML validation errors
+	* Added sys_simple_dns in setup script
 
 2005-04-27  Marcelo Mottalli <marcelo@gforgegroup.com>
 

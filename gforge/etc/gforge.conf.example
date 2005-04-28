@@ -92,5 +92,6 @@ sys_plugins_path=/usr/lib/gforge/plugins/
 sys_sslcrt=/etc/apache/ssl.crt/server.crt
 sys_sslkey=/etc/apache/ssl.key/server.key
 noreply_to_bitbucket=true
+sys_simple_dns=true
 sys_apache_user=www-gforge
 sys_apache_group=www-gforge

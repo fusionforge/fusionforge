@@ -106,6 +106,7 @@ computedefault(){
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
 	DEFAULTnoreply_to_bitbucket=true
+	DEFAULTsys_simple_dns=true
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
 	#
