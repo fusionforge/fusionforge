@@ -46,6 +46,7 @@ function forum_header($params) {
 			$sql="SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id='$forum_id'";
 			$result=db_query($sql);
 
+			// checks which group the news item belongs to
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
 			$HTML->header($params);
@@ -72,7 +73,7 @@ function forum_header($params) {
 			}
 			echo '</td><td valign="top" width="35%">';
 			echo $HTML->boxTop($Language->getText('forum_utils','latest'));
-			echo news_show_latest($sys_news_group,5,false);
+			echo news_show_latest($params['group'],5,false);
 			echo $HTML->boxBottom();
 			echo '</td></tr></table>';
 		} else {

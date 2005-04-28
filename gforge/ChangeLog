@@ -1,3 +1,10 @@
+2005-04-28	Marcelo Mottalli <marcelo@gforgegroup.com>
+
+	* Bug fix: FRS / File deletion displayed an error when trying to delete a file
+	and not checking the "I'm sure" checkbox.
+	* Bug fix: When reading a news item, the site news were displayed on the
+	right panel instead of the project news.
+
 2005-04-27  Christian Bayle <bayle@debian.org>
 
 	* Applied [#1216] httpd.config tweaks and some HTML validation errors
