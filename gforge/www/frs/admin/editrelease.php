@@ -159,18 +159,22 @@ if ($step2) {
 // Edit/Delete files in a release
 if ($step3) {
 	// If the user chose to delete the file and he's sure then delete the file
-	if( $step3 == "Delete File" && $im_sure ) {
-		$frsf = new FRSFile($frsr,$file_id);
-		if (!$frsf || !is_object($frsf)) {
-			exit_error('Error','Could Not Get FRSFile');
-		} elseif ($frsf->isError()) {
-			exit_error('Error',$frsf->getErrorMessage());
-		} else {
-			if (!$frsf->delete()) {
+	if( $step3 == "Delete File" ) {
+		if ($im_sure) {
+			$frsf = new FRSFile($frsr,$file_id);
+			if (!$frsf || !is_object($frsf)) {
+				exit_error('Error','Could Not Get FRSFile');
+			} elseif ($frsf->isError()) {
 				exit_error('Error',$frsf->getErrorMessage());
 			} else {
-				$feedback .= $Language->getText('project_admin_editrelease','file_deleted');
+				if (!$frsf->delete()) {
+					exit_error('Error',$frsf->getErrorMessage());
+				} else {
+					$feedback .= $Language->getText('project_admin_editrelease','file_deleted');
+				}
 			}
+		} else {
+			exit_error('Error',$Language->getText('general','error_missing_params'));
 		}
 	// Otherwise update the file information
 	} else {
