@@ -1,3 +1,10 @@
+gforge (3.1-30+1) unstable; urgency=low
+
+  * Fixed database creation when PostgreSQL doesn't run in the 'C' locale
+    (closes: #306316).  Thanks for the hint!
+
+ -- Roland Mas <lolando@debian.org>  Thu, 28 Apr 2005 13:36:20 +0200
+
 gforge (3.1-30) unstable; urgency=high
 
   * Fixed LDAP postinst to account for the new slapd.conf syntax for ACLs

@@ -135,11 +135,11 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
-	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
+	if echo "SET LC_MESSAGES to 'C'; CREATE DATABASE $db_name WITH ENCODING 'UNICODE';" | su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 \
+	    && [ "$(tail +2 $tmp1 | head -1)" = 'CREATE DATABASE' ] \
 	    || grep -q "ERROR: .* database \"$db_name\" already exists" $tmp2 ; then
 	    # Creation OK or database already existing -- no problem here
-	    echo -n ""
+	    echo -n "create OK"
 	    rm -f $tmp1 $tmp2
 	else
 	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
