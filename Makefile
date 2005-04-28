@@ -100,10 +100,10 @@ gforge/docs/phpdoc/docs:
 #
 chris:
 	make allgf dchcmd="dch -i" debuildopts=""
-	make upload 
+	make upload where=localgforge
 chrisc:
 	make allcvs dchcmd="dch -i" debuildopts=""
-	make uploadcvs
+	make uploadcvs where=localgforge
 chriss:
 	make allsvn dchcmd="dch -i" debuildopts=""
-	make uploadsvn
+	make uploadsvn where=localgforge
