@@ -1,4 +1,8 @@
-2005-04-27	Marcelo Mottalli <marcelo@gforgegroup.com>
+2005-04-27  Christian Bayle <bayle@debian.org>
+
+	* Applied [#1216] httpd.config tweaks and some HTML validation errors
+
+2005-04-27  Marcelo Mottalli <marcelo@gforgegroup.com>
 
 	* Added code for including custom fields in the mail notification for the
 	tracker.

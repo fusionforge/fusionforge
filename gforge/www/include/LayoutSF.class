@@ -529,7 +529,7 @@ $s = ((session_issecure()) ? 's' : '' );
 	<P>
 	</td>
 
-	<td width="20" background=<?php echo url_image($this->imgroot . "fade1.png"); ?> nowrap>&nbsp;</td>
+	<td width="20" background=<?php echo url_image($this->imgroot . "fade1.png"); ?> nowrap="nowrap">&nbsp;</td>
 	<td valign="top" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width="99%">
 	<BR>
 
