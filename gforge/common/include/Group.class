@@ -1717,50 +1717,90 @@ class Group extends Error {
 			//
 			//	remove them from artifact types
 			//
-			db_query("DELETE FROM artifact_perm 
+			$res=db_query("DELETE FROM artifact_perm 
 				WHERE group_artifact_id 
 				IN (SELECT group_artifact_id 
 				FROM artifact_group_list 
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
+			if (!$res) {
+				$this->setError('ERROR: DB: artifact_perm.'.db_error());
+				db_rollback();
+				return false;
+			}
 			//
 			//	remove them from subprojects
 			//
-			db_query("DELETE FROM project_perm 
+			$res=db_query("DELETE FROM project_perm 
 				WHERE group_project_id 
 				IN (SELECT group_project_id 
 				FROM project_group_list 
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
+			if (!$res) {
+				$this->setError('ERROR: DB: project_perm.'.db_error());
+				db_rollback();
+				return false;
+			}
 			//
 			//	remove them from forums
 			//
-			db_query("DELETE FROM forum_perm 
+			$res=db_query("DELETE FROM forum_perm 
 				WHERE group_forum_id 
 				IN (SELECT group_forum_id 
 				FROM forum_group_list 
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
+			if (!$res) {
+				$this->setError('ERROR: DB: forum_perm.'.db_error());
+				db_rollback();
+				return false;
+			}
 
 			//
 			//	reassign open artifacts to id=100
 			//
-			db_query("UPDATE artifact SET assigned_to='100' 
+			$res=db_query("UPDATE artifact SET assigned_to='100' 
 				WHERE group_artifact_id 
 				IN (SELECT group_artifact_id 
 				FROM artifact_group_list 
 				WHERE group_id='".$this->getID()."') 
 				AND status_id='1' AND assigned_to='$user_id'");
+			if (!$res) {
+				$this->setError('ERROR: DB: artifact.'.db_error());
+				db_rollback();
+				return false;
+			}
 
 			//
 			//	reassign open tasks to id=100
+			//	first have to purge any assignments that would cause 
+			//	conflict with existing assignment to 100
 			//
-			db_query("UPDATE project_assigned_to SET assigned_to_id='100' 
+			$res=db_query("DELETE FROM project_assigned_to
+				WHERE project_task_id IN (SELECT pt.project_task_id 
+				FROM project_task pt, project_group_list pgl, project_assigned_to pat 
+				WHERE pt.group_project_id = pgl.group_project_id 
+				AND pat.project_task_id=pt.project_task_id
+				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."'
+				AND pat.assigned_to_id='$user_id') 
+				AND assigned_to_id='100'");
+			if (!$res) {
+				$this->setError('ERROR: DB: project_assigned_to 1'.db_error());
+				db_rollback();
+				return false;
+			}
+			$res=db_query("UPDATE project_assigned_to SET assigned_to_id='100' 
 				WHERE project_task_id IN (SELECT pt.project_task_id 
 				FROM project_task pt, project_group_list pgl 
 				WHERE pt.group_project_id = pgl.group_project_id 
 				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."') 
 				AND assigned_to_id='$user_id'");
+			if (!$res) {
+				$this->setError('ERROR: DB: project_assigned_to.'.db_error());
+				db_rollback();
+				return false;
+			}
 
 			//
 			//	Remove user from system

@@ -1,3 +1,9 @@
+2005-03-25  Tim Perdue <tim@gforge.org>
+
+	* Bug fix in Group::removeUser - could fail in some cases
+	* tracker - the group_id and tracker_id are optional now
+	* SOAP - add support for the new EXTRA FIELDS
+
 2004-04-29	Marcelo Mottalli <marcelo@gforgegroup.com>
 	
 	* Bug fixes in tracker / mass update:

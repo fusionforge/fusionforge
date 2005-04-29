@@ -69,7 +69,7 @@ $server->register(
 
 $server->register(
 	'logout',
-	array('sessionkey'=>'xsd:string'),
+	array('session_ser'=>'xsd:string'),
 	array('logoutResponse'=>'xsd:string'),
 	$uri,
 	$uri.'#logout');
@@ -154,8 +154,8 @@ function login($userid, $passwd) {
  *
  * @param 	string	sessionkey	The session key
  */
-function logout($sessionkey) {
-	continueSession($sessionkey);
+function logout($session_ser) {
+	continue_session($session_ser);
 	session_logout();
    	return "OK";
 }

@@ -126,8 +126,10 @@ function &userGetGroups($session_ser,$user_id) {
 	Converts an array of User objects to soap data
 */
 function &users_to_soap($usrs) {
+	$return = array();
 	for ($i=0; $i<count($usrs); $i++) {
 		if ($usrs[$i]->isError()) {
+			return new soap_fault ('','User to soap',$usrs[$i]->getErrorMessage(),$usrs[$i]->getErrorMessage());
 			//skip it if it had an error
 		} else {
 			//build an array of just the fields we want

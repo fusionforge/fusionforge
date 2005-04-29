@@ -1295,8 +1295,7 @@ class Artifact extends Error {
 	* @return array Array containing field ID => field name and value associated to it for
 	*	this artifact
 	*/
-	function getExtraFieldDataText()
-	{
+	function getExtraFieldDataText() {
 		global $Language;
 
 		// First we get the list of extra fields and the data

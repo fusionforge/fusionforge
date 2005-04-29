@@ -128,6 +128,8 @@ function &getPublicProjectNames($session_ser) {
 	Converts an array of Group objects to soap data
 */
 function &groups_to_soap($grps) {
+	$return = array();
+
 	for ($i=0; $i<count($grps); $i++) {
 		if ($grps[$i]->isError()) {
 			//skip it if it had an error

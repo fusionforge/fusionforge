@@ -25,6 +25,18 @@ if (!$sys_use_tracker) {
 	exit_disabled();
 }
 
+//if the ATID and GID are not provided, but
+//the artifact_id is, then fetch the other vars
+if ($aid && (!$group_id && !$atid)) {
+	$a =& artifact_get_object($aid);
+	if (!$a || !is_object($a) || $a->isError()) {
+		exit_error('Error','Could Not Get Artifact Object');
+	} else {
+		$group_id=$a->ArtifactType->Group->getID();
+		$atid=$a->ArtifactType->getID();
+		$func='detail';
+	}
+}
 
 if ($group_id && $atid) {
 	include('tracker.php');

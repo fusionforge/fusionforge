@@ -30,9 +30,6 @@ require_once('common/tracker/Artifact.class');
 require_once('common/tracker/ArtifactFactory.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 require_once('common/tracker/Artifacts.class');
-require_once('common/tracker/ArtifactResolution.class');
-require_once('common/tracker/ArtifactCategory.class');
-require_once('common/tracker/ArtifactGroup.class');
 require_once('common/tracker/ArtifactFile.class');
 require_once('common/tracker/ArtifactMessage.class');
 
@@ -53,7 +50,6 @@ $server->wsdl->addComplexType(
 	'is_public' => array('name'=>'is_public', 'type' => 'xsd:int'),
 	'allow_anon' => array('name'=>'allow_anon', 'type' => 'xsd:int'),
 	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
-	'use_resolution' => array('name'=>'use_resolution', 'type' => 'xsd:int'),
 	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
 	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int')
 	)
@@ -76,6 +72,34 @@ $server->register(
 	$uri,
 	$uri.'#getArtifactTypes','rpc','encoded'
 );
+// 
+// Artifact Extra Fields 
+// By remo on 08-Mar-2005
+
+$server->wsdl->addComplexType(
+	'ArtifactExtraFields',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'extra_field_id' => array('name'=>'extra_field_id', 'type' => 'xsd:int'),
+	'field_data' => array('name'=>'field_data', 'type' => 'xsd:string')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfArtifactExtraFields',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactExtraFields[]')),
+	'tns:ArtifactExtraFields'
+);
+
+
 //
 //	Artifacts
 //
@@ -89,19 +113,17 @@ $server->wsdl->addComplexType(
 	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
 	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
 	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
-	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
-	'artifact_group_id' => array('name'=>'artifact_group_id', 'type' => 'xsd:int'),
-	'resolution_id' => array('name'=>'resolution_id', 'type' => 'xsd:int'),
 	'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
 	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
 	'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
 	'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
 	'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
 	'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
-	'details' => array('name'=>'details', 'type' => 'xsd:string')
+	'details' => array('name'=>'details', 'type' => 'xsd:string'),
+	'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFields')
 	)
 );
-
+//ArrayOfArtifactExtraFields
 $server->wsdl->addComplexType(
 	'ArrayOfArtifact',
 	'complexType',
@@ -121,11 +143,10 @@ $server->register(
 		'group_id'=>'xsd:int',
 		'group_artifact_id'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
-		'status'=>'xsd:int',
-		'category'=>'xsd:int',
-		'group'=>'xsd:int'),
+		'status'=>'xsd:int'),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
 	$uri,$uri.'#getArtifacts','rpc','encoded');
+
 
 //addArtifact
 $server->register(
@@ -135,17 +156,16 @@ $server->register(
 		'group_id'=>'xsd:int',
 		'group_artifact_id'=>'xsd:int',
 		'status_id'=>'xsd:int',
-		'category_id'=>'xsd:int',
-		'artifact_group_id'=>'xsd:int',
-		'resolution_id'=>'xsd:int',
 		'priority'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
 		'summary'=>'xsd:string',
-		'details'=>'xsd:string'
+		'details'=>'xsd:string',
+		'extra_fields'=>'tns:ArrayOfArtifactExtraFields'
 	),
 	array('addArtifactResponse'=>'xsd:int'),
 	$uri,$uri.'#addArtifact','rpc','encoded'
 );
+
 
 //updateArtifact
 $server->register(
@@ -156,121 +176,14 @@ $server->register(
 		'group_artifact_id'=>'xsd:int',
 		'artifact_id'=>'xsd:int',
 		'status_id'=>'xsd:int',
-		'category_id'=>'xsd:int',
-		'artifact_group_id'=>'xsd:int',
-		'resolution_id'=>'xsd:int',
 		'priority'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
 		'summary'=>'xsd:string',
-		'details'=>'xsd:string'
+		'details'=>'xsd:string',
+		'extra_fields'=>'tns:ArrayOfArtifactExtraFields'
 	),
 	array('addArtifactResponse'=>'xsd:int'),
 	$uri,$uri.'#updateArtifact','rpc','encoded'
-);
-/*
-$session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,$category_id,
-    $artifact_group_id,$resolution_id,$priority,$assigned_to,$summary,$details
-*/
-//
-//	ArtifactCategory
-//
-$server->wsdl->addComplexType(
-	'ArtifactCategory',
-	'complexType',
-	'struct',
-	'sequence',
-	'',
-	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:int'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string'),
-	'auto_assign_to' => array('name'=>'auto_assign_to', 'type' => 'xsd:int')
-	)
-);
-
-$server->wsdl->addComplexType(
-	'ArrayOfArtifactCategory',
-	'complexType',
-	'array',
-	'',
-	'SOAP-ENC:Array',
-	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactCategory[]')),
-	'tns:ArtifactCategory'
-);
-
-$server->register(
-	'getArtifactCategories',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
-	array('getArtifactCategoriesResponse'=>'tns:ArrayOfArtifactCategory'),
-	$uri,$uri.'#getArtifactCategories','rpc','encoded'
-);
-
-//
-//	ArtifactGroup
-//
-$server->wsdl->addComplexType(
-	'ArtifactGroup',
-	'complexType',
-	'struct',
-	'sequence',
-	'',
-	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:int'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'group_name' => array('name'=>'group_name', 'type' => 'xsd:string')
-	)
-);
-
-$server->wsdl->addComplexType(
-	'ArrayOfArtifactGroup',
-	'complexType',
-	'array',
-	'',
-	'SOAP-ENC:Array',
-	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactGroup[]')),
-	'tns:ArtifactGroup'
-);
-
-$server->register(
-	'getArtifactGroups',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
-	array('getArtifactGroupsResponse'=>'tns:ArrayOfArtifactGroup'),
-	$uri,$uri.'#getArtifactGroups','rpc','encoded'
-);
-
-//
-//	ArtifactResolution
-//
-$server->wsdl->addComplexType(
-	'ArtifactResolution',
-	'complexType',
-	'struct',
-	'sequence',
-	'',
-	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:int'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'resolution_name' => array('name'=>'resolution_name', 'type' => 'xsd:string')
-	)
-);
-
-$server->wsdl->addComplexType(
-	'ArrayOfArtifactResolution',
-	'complexType',
-	'array',
-	'',
-	'SOAP-ENC:Array',
-	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactResolution[]')),
-	'tns:ArtifactResolution');
-
-$server->register(
-	'getArtifactResolutions',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
-	array('getArtifactResolutionsResponse'=>'tns:ArrayOfArtifactResolution'),
-	$uri,$uri.'#getArtifactResolutions','rpc','encoded'
 );
 
 //
@@ -403,6 +316,8 @@ function &getArtifactTypes($session_ser,$group_id) {
 //	convert array of artifact types to soap data structure
 //
 function artifacttype_to_soap($at_arr) {
+	$return = array();
+
 	for ($i=0; $i<count($at_arr); $i++) {
 		if ($at_arr[$i]->isError()) {
 			//skip if error
@@ -415,7 +330,6 @@ function artifacttype_to_soap($at_arr) {
 				'is_public'=>$at_arr[$i]->data_array['is_public'],
 				'allow_anon'=>$at_arr[$i]->data_array['allow_anon'],
 				'due_period'=>$at_arr[$i]->data_array['due_period'],
-				'use_resolution'=>$at_arr[$i]->data_array['use_resolution'],
 				'datatype'=>$at_arr[$i]->data_array['datatype'],
 				'status_timeout'=>$at_arr[$i]->data_array['status_timeout']
 			);
@@ -424,11 +338,26 @@ function artifacttype_to_soap($at_arr) {
 	return $return;
 }
 
+//Arrange the ExtraFields
+function arrangeExtraFields($extra_fields) {
+	$efields=array();
+	$fieldsdata=array();
+	if (is_array($extra_fields)) {
+		while(list($eky,)=each($extra_fields)) {
+			$efields=$extra_fields[$eky];
+			$fieldsdata[$efields['extra_field_id']]=$efields['field_data'];
+		}
+	}
+	return $fieldsdata;
+}
+
 //
 //	addArtifact
 //
-function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,$category_id,
-	$artifact_group_id,$resolution_id,$priority,$assigned_to,$summary,$details) {
+
+function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
+	$priority,$assigned_to,$summary,$details,$extra_fields) {
+
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -450,8 +379,9 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,$cate
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-
-	if (!$a->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority)) {
+	$extra_flds=arrangeExtraFields($extra_fields);
+//	if (!$a->create($artifact_group_id,$summary,$details,$assigned_to,$priority,$extra_flds)) {
+	if (!$a->create($summary,$details,$assigned_to,$priority,$extra_flds)) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
@@ -461,8 +391,8 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,$cate
 //
 //	Update Artifact
 //
-function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,$category_id,
-	$artifact_group_id,$resolution_id,$priority,$assigned_to,$summary,$details) {
+function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,
+	$priority,$assigned_to,$summary,$details,$new_artifact_type_id,$extra_fields) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -484,134 +414,14 @@ function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-
-	if (!$a->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,$assigned_to,
-		$summary,$canned_response,$details,$new_artifact_type_id)) {
+//NOT DONE - $new_artifact_type_id missing, extra_fields missing
+	$extra_flds=arrangeExtraFields($extra_fields);
+	if (!$a->update($priority,$status_id,$assigned_to,
+		$summary,$canned_response,$details,$new_artifact_type_id,$extra_flds)) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
 	}
-}
-
-//
-//	getArtifactCategories
-//
-function &getArtifactCategories($session_ser,$group_id,$group_artifact_id) {
-	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
-	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactCategories','Could Not Get Group','Could Not Get Group');
-	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactCategories',$grp->getErrorMessage(),$grp->getErrorMessage());
-	}
-
-	$at = new ArtifactType($grp,$group_artifact_id);
-	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactCategories','Could Not Get ArtifactType','Could Not Get ArtifactType');
-	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactCategories',$at->getErrorMessage(),$at->getErrorMessage());
-	}
-
-	return artifactcategories_to_soap($at->getCategoryObjects());
-}
-
-//
-//	convert array of artifact categories to soap data structure
-//
-function artifactcategories_to_soap($at_arr) {
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
-				'category_name'=>$at_arr[$i]->data_array['category_name'],
-				'auto_assign_to'=>$at_arr[$i]->data_array['auto_assign_to']
-			);
-		}
-	}
-	return $return;
-}
-
-//
-//	getArtifactGroups
-//
-function &getArtifactGroups($session_ser,$group_id,$group_artifact_id) {
-	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
-	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactGroups','Could Not Get Group','Could Not Get Group');
-	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactGroups',$grp->getErrorMessage(),$grp->getErrorMessage());
-	}
-
-	$at = new ArtifactType($grp,$group_artifact_id);
-	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactGroups','Could Not Get ArtifactType','Could Not Get ArtifactType');
-	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactGroups',$at->getErrorMessage(),$at->getErrorMessage());
-	}
-
-	return artifactgroups_to_soap($at->getGroupObjects());
-}
-
-//
-//	convert array of artifact groups to soap data structure
-//
-function artifactgroups_to_soap($at_arr) {
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'id'=>$at_arr[$i]->data_array['id'],
-				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
-				'group_name'=>$at_arr[$i]->data_array['group_name']
-			);
-		}
-	}
-	return $return;
-}
-
-//
-//	getArtifactResolutions
-//
-function &getArtifactResolutions($session_ser,$group_id,$group_artifact_id) {
-	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
-	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactResolutions','Could Not Get Group','Could Not Get Group');
-	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactResolutions',$grp->getErrorMessage(),$grp->getErrorMessage());
-	}
-
-	$at = new ArtifactType($grp,$group_artifact_id);
-	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactResolutions','Could Not Get ArtifactType','Could Not Get ArtifactType');
-	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactResolutions',$at->getErrorMessage(),$at->getErrorMessage());
-	}
-
-	return artifactresolutions_to_soap($at->getResolutionObjects());
-}
-
-//
-//	convert array of artifact resolutions to soap data structure
-//
-function artifactresolutions_to_soap($at_arr) {
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'id'=>$at_arr[$i]->data_array['id'],
-				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
-				'resolution_name'=>$at_arr[$i]->data_array['resolution_name']
-			);
-		}
-	}
-	return $return;
 }
 
 //
@@ -639,7 +449,7 @@ function &getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 //
 //	getArtifacts
 //
-function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$status,$category,$group) {
+function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$status) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -662,7 +472,9 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
-	$af->setup(0,0,0,0,false,$assigned_to,$status,$category,$group,0);
+//MAY HAVE TO CHANGE PARAMS TO FORCE RETRIEVAL OF RIGHT RECORDS - FOR INSTANCE $set='Custom'
+//NEEDS TO BE TESTED
+	$af->setup(0,'','',0,false,$assigned_to,$status);
 	return artifacts_to_soap($af->getArtifacts());
 
 }
@@ -678,24 +490,52 @@ function getArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id) {
 //	convert array of artifacts to soap data structure
 //
 function artifacts_to_soap($at_arr) {
+	$return = array();
 	for ($i=0; $i<count($at_arr); $i++) {
 		if ($at_arr[$i]->isError()) {
 			//skip if error
 		} else {
+//NEEDS THOROUGH COMMENTS AND EXPLANATION
+	//***********
+	// Retrieving the artifact details
+	//**checks whether there is any artifact details exists for this object, if not continue with next loop
+
+			if(count($at_arr[$i]) < 1) { continue; }
+			$flddata=array();
+			$fldelementdata=array();
+			$extrafieldsdata=array();
+			$extrafieldsdata=$at_arr[$i]->getExtraFieldData();
+
+			//********
+			//** Retrieving the extra field data and the element data
+			//** checks whether there is any extra fields data available for this artifact
+			//** and checks for the extra element data for the multiselect and checkbox type
+			if(is_array($extrafieldsdata) && count($extrafieldsdata)>0) {
+				while(list($ky,$vl)=each($extrafieldsdata)) {
+					$fldarr=array();
+					if(is_array($extrafieldsdata[$ky])) {
+						//** Retrieving the multiselect and checkbox type data element
+						$fldarr=array('extra_field_id'=>$ky,'field_data'=>implode(",",$extrafieldsdata[$ky]));
+					} else {
+						//** Retrieving the extra field data
+						$fldarr=array('extra_field_id'=>$ky,'field_data'=>$vl);
+					}
+					$flddata[]=$fldarr;
+					unset($fldarr);
+				}
+			}
 			$return[]=array(
 				'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
 				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
 				'status_id'=>$at_arr[$i]->data_array['status_id'],
-				'category_id'=>$at_arr[$i]->data_array['category_id'],
-				'artifact_group_id'=>$at_arr[$i]->data_array['artifact_group_id'],
-				'resolution_id'=>$at_arr[$i]->data_array['resolution_id'],
 				'priority'=>$at_arr[$i]->data_array['priority'],
 				'submitted_by'=>$at_arr[$i]->data_array['submitted_by'],
 				'assigned_to'=>$at_arr[$i]->data_array['assigned_to'],
 				'open_date'=>$at_arr[$i]->data_array['open_date'],
 				'close_date'=>$at_arr[$i]->data_array['close_date'],
 				'summary'=>$at_arr[$i]->data_array['summary'],
-				'details'=>$at_arr[$i]->data_array['details']
+				'details'=>$at_arr[$i]->data_array['details'],
+				'extra_fields'=>$flddata
 			);
 		}
 	}
@@ -869,6 +709,188 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 	} else {
 		return $am->getID();
 	}
+}
+
+//*****************************
+//By Remo on 24-03-2005
+//for getProjectData() function
+
+$server->wsdl->addComplexType(
+	'ArtifactTypeData',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'ArtifactType' => array('name'=>'ArtifactType', 'type' => 'tns:ArtifactType'),
+	'technicians' => array('name'=>'technicians', 'type' => 'tns:ArrayOfUser'),
+	'artifacts' => array('name'=>'artifacts', 'type' => 'tns:ArrayOfArtifact')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfArtifactTypeData',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactTypeData[]')),
+	'tns:ArtifactTypeData'
+);
+
+$server->wsdl->addComplexType(
+	'GroupData',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'group' => array('name'=>'groups', 'type' => 'tns:Group'),
+//THIS IS NOT RIGHT - IT WOULD PROBABLY BE ARRAY OF ARTIFACT_TYPE 
+	'artifacttypes' => array('name'=>'artifacttypes', 'type' => 'tns:ArrayOfArtifactTypeData')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ProjectData',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupData[]')),
+	'tns:GroupData'
+);
+
+$server->register(
+	'getProjectData',
+	array('session_ser'=>'xsd:string'),
+	array('getProjectDataResponse'=>'tns:ProjectData'),
+	$uri,$uri.'#getProjectData','rpc','encoded');
+
+
+//********************************************************************
+//
+// getProjectData function is used to retrieve the information like
+// Group details and their related Artifact details, and extra field
+// data and element details which is related to the artifact
+//
+//*******************************************************************
+
+function getProjectData($session_ser) {
+	continue_session($session_ser); 
+	$uid =& user_getid(); // Get the user id
+	if (!$uid) {
+		return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
+	}
+	if($uid) {
+		$usrobj=& session_get_user(); // Get the user object for the current session
+		if (!$usrobj || !is_object($usrobj)) {
+			return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
+		} elseif ($usrobj->isError()) {
+			return new soap_fault ('','getProjectData',$usrobj->getErrorMessage(),$usrobj->getErrorMessage());
+		}
+	}
+
+//NEEDS LOTS OF COMMENTS THROUHOUT
+	//*********
+	//** Retrieve the group objects from the user object for the current session using $usrobj->getGroups() function
+
+	$grpsobj=$usrobj->getGroups(); 
+	reset($grpsobj);
+	$return=array(); //initialize the return array
+
+	//*******
+	// Loop through the group array object
+	// and retrive the ArtifactTypeFactory object from the group object
+	while(list($gky,) = each($grpsobj)) {
+		if (!is_object($grpsobj[$gky])) { 
+			continue; 
+		}
+		if ($grpsobj[$gky]->isError()) {
+		   return new soap_fault('','getProjectData',$grpsobj[$gky]->getErrorMessage(),$grpsobj[$gky]->getErrorMessage());
+			//skip it if it had an error
+		} else {						
+			$grpobj=$grpsobj[$gky];
+			$returnGroup=array();
+			$atobjs=array();
+			$atfobj = new ArtifactTypeFactory($grpobj); //Initialize the ArtifactTypeFactory object from group object
+			if (!$atfobj || !is_object($atfobj)) {
+				return new soap_fault ('','getProjectData','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
+			} elseif ($atfobj->isError()) {
+				return new soap_fault ('','getProjectData',$atfobj->getErrorMessage(),$atf->getErrorMessage());
+			}
+			//********
+			// Retreive the ArtifactType object from the ArtifactTypeFactory object
+			$atobjs=$atfobj->getArtifactTypes();
+			if(!$atobjs) { continue; }
+			$j=0;
+			reset($atobjs);
+			$returnATdata=array();
+			while(list($atky1, )=each($atobjs)) {
+				$returnTechnicians=array();
+				$tmpartifactlist=array();
+				$i=$atky1;
+				if ($atobjs[$i]->isError()) {	
+				   	return new soap_fault('','getProjectData',$atobjs[$i]->getErrorMessage(),$atobjs[$i]->getErrorMessage());
+				} else {
+					$afobj = new ArtifactFactory($atobjs[$i]);
+					if (!$afobj || !is_object($afobj)) {
+						return new soap_fault ('','getProjectData','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
+					} elseif ($afobj->isError()) {
+						return new soap_fault ('','getProjectData',$afobj->getErrorMessage(),$afobj->getErrorMessage());
+					}		
+					$afobj->setup(0,'','',0,false,false,false);
+					$tmpartifactlist=$afobj->getArtifacts();
+					//$returnArtifacts=array();
+					$returnTechnicians=users_to_soap($atobjs[$i]->getTechnicianObjects());
+					$returnArtifacts=artifacts_to_soap($tmpartifactlist);
+
+					$returnArtifactType=array(
+						'group_artifact_id'=>$atobjs[$i]->data_array['group_artifact_id'],
+						'group_id'=>$atobjs[$i]->data_array['group_id'],
+						'name'=>$atobjs[$i]->data_array['name'],
+						'description'=>$atobjs[$i]->data_array['description'],
+						'is_public'=>$atobjs[$i]->data_array['is_public'],
+						'allow_anon'=>$atobjs[$i]->data_array['allow_anon'],
+						'due_period'=>$atobjs[$i]->data_array['due_period'],
+						'datatype'=>$atobjs[$i]->data_array['datatype'],
+			       			'status_timeout'=>$atobjs[$i]->data_array['status_timeout']);
+					$returnATdata[] = array(
+						'ArtifactType' => $returnArtifactType,
+						'technicians' => $returnTechnicians,
+						'artifacts' => $returnArtifacts);
+					$returnTechnicians=array();
+					$returnArtifacts=array();
+					$returnArtifactType=array();
+				}
+			}
+		
+			//mail("remo@wcogs.com","getProjectData-ArtifactType",count($artifact_list1));
+			//$artifact_list1=$tmpartifactlist;
+			//$returnArtifacts=artifacts_to_soap($artifact_list1);
+			
+			$returnGroup = array('group_id'=>$grpobj->data_array['group_id'],
+				'group_name'=>$grpobj->data_array['group_name'],
+				'homepage'=>$grpobj->data_array['homepage'],
+				'is_public'=>$grpobj->data_array['is_public'],
+				'status'=>$grpobj->data_array['status'],
+				'unix_group_name'=>$grpobj->data_array['unix_group_name'],
+				'short_description'=>$grpobj->data_array['short_description'],
+				'scm_box'=>$grpobj->data_array['scm_box'],
+				'register_time'=>$grpobj->data_array['register_time']);
+
+			$return[] = array(
+				'group' => $returnGroup,
+				'artifacttypes' => $returnATdata
+			);
+			$returnATdata=array();
+		}
+	}
+	//$ar = array(array("group"=>array(),"artifacttypes"=>array(array("ArtifactType"=>array(),"artifacts"=>array()))));
+	//return $ar;
+	return $return;
 }
 
 ?>
