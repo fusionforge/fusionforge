@@ -1,3 +1,12 @@
+2004-04-29	Marcelo Mottalli <marcelo@gforgegroup.com>
+	
+	* Bug fixes in tracker / mass update:
+		- when having a custom field of type "status", there was no 
+		"No change" option forcing the user to update the status of all 
+		the artifacts.
+		- when having a custom field of type "checkbox" or "multiselect" and 
+		not selecting any value, the field doesn't get updated.
+
 2005-04-28	Marcelo Mottalli <marcelo@gforgegroup.com>
 
 	* Bug fix: FRS / File deletion displayed an error when trying to delete a file

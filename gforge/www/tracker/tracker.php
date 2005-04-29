@@ -87,7 +87,6 @@ switch ($func) {
 		}
 
 		$artifact_type_id=$ath->getID();
-		$keys=array_keys($extra_fields);
 
 		for ($i=0; $i < $count; $i++) {
 			$ah=new Artifact($ath,$artifact_id_list[$i]);
@@ -107,20 +106,31 @@ switch ($func) {
 				//	get existing extra field data
 				//	we will then override individual elements if needed
 				//
-				$ef =& $ah->getExtraFieldData();
-				for ($k=0; $k<count($keys); $k++) {
-					$f=$extra_fields[$keys[$k]];
-					if (is_array($f)) {
-						if (in_array('100',$f)) {
-							//no change
+				$ef = $ah->getExtraFieldData();
+				$keys = array_keys($ef);
+				foreach ($keys as $efid) {
+					if (is_array($ef[$efid])) {
+						$f = $extra_fields[$efid];
+						// in this case, if $extra_fields is not setted, it
+						// means no option was selected, so we have to delete
+						// the original values
+						if (!is_array($f) || count($f) == 0) {
+							$ef[$efid] = array();
+						} else if (in_array('100', $extra_fields[$efid])) {	// "No change" option selected?
+							// no change
 						} else {
-							$ef[$keys[$k]]=$f;
+							$ef[$efid] = $f;		// replace old values with new values
 						}
 					} else {
-						if ($f == '100') {
-							//no change
-						} else {
-							$ef[$keys[$k]]=$f;
+						// in some cases (ie: textfields) the value is not passed, but
+						// this doesn't mean we must delete the existing value
+						if (array_key_exists($efid, $extra_fields)) {
+							$f = $extra_fields[$efid]; 	
+							if ($f == '100') {
+								// no change
+							} else {
+								$ef[$efid] = $f;
+							}
 						}
 					}
 				}

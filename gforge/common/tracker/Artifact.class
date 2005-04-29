@@ -1100,6 +1100,7 @@ class Artifact extends Error {
 	 */
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
+			$this->extra_field_data = array();
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
 				WHERE artifact_id='".$this->getID()."' ORDER BY extra_field_id");
 			$ef = $this->ArtifactType->getExtraFields();
