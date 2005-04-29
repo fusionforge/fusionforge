@@ -214,18 +214,20 @@ class BaseLanguage {
 	 * @param string $lang language name
 	 */
 	function loadPluginSpecificLanguage($lang, $pluginNames) {
-		foreach($pluginNames AS $pluginName) {
-			$plugin =& plugin_get_object($pluginName);
-			if($plugin && !$plugin->isError()) {
-				$languagePath = $plugin->GetLanguagePath().$lang.'.tab';
-				$specificLanguagePath = $plugin->GetSpecificLanguagePath().$lang.'.tab';
-				if(file_exists($languagePath)) {
-					$this->loadLanguageFile($languagePath);
+		if (is_array($pluginNames)) {
+			foreach($pluginNames AS $pluginName) {
+				$plugin =& plugin_get_object($pluginName);
+				if($plugin && !$plugin->isError()) {
+					$languagePath = $plugin->GetLanguagePath().$lang.'.tab';
+					$specificLanguagePath = $plugin->GetSpecificLanguagePath().$lang.'.tab';
+					if(file_exists($languagePath)) {
+						$this->loadLanguageFile($languagePath);
+					}
+					if(file_exists($specificLanguagePath)) {
+						$this->loadLanguageFile($specificLanguagePath);
+					}
+					$this->pluginDependencies[] = $pluginName;
 				}
-				if(file_exists($specificLanguagePath)) {
-					$this->loadLanguageFile($specificLanguagePath);
-				}
-				$this->pluginDependencies[] = $pluginName;
 			}
 		}
 	}
