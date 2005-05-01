@@ -1201,9 +1201,16 @@ EOF
 <legend>General options</legend>
 <input type="hidden" name="copt" value="1" />
 EOF
-    if ($cvstree ne $cvstreedefault) {
-      print "<input type=\"hidden\" name=\"cvsroot\" value=\"$cvstree\" />\n";
-    }
+    # -- gforge patch --
+    # The cvsroot parameter is always required for gforge in order to
+    # get the group_id. Also the commented next line did not seems to
+    # work, was showing always "gforge" as cvsroot
+    #if ($cvstree ne $cvstreedefault) {
+    #  print "<input type=\"hidden\" name=\"cvsroot\" value=\"$cvstree\" />\n";
+    #}
+    printf("<input type=\"hidden\" name=\"cvsroot\" value=\"%s\" />\n",
+             htmlquote($input{'cvsroot'}));
+    # -- gforge patch --
     print <<EOF;
 <table summary="General options">
 <tr>
