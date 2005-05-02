@@ -151,21 +151,21 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','doc_title') ?>:</strong><br />
+		<strong><?php echo $Language->getText('docman_new','doc_title') ?>: </strong><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(5)) ?><br />
 		<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>" />
 		<br /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','description') ?></strong><br />
+		<strong><?php echo $Language->getText('docman_new','description') ?></strong><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(10)) ?><br />
 		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
 		<br /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','file')?></strong><br />
+		<strong><?php echo $Language->getText('docman_new','file')?></strong><?php echo utils_requiredField(); ?><br />
 		<?php if ($d->isURL()) {
 			echo '<a href="'.$d->getFileName().'">[View File URL]</a>';
 		} else { ?>

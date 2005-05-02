@@ -2930,10 +2930,12 @@ tracker_artifact	logged_in_no	Logged In: NO
 tracker_artifact	logged_in_yes	Logged In: YES
 tracker_monitor	monitoring_activated	Now Monitoring
 tracker_monitor	monitoring_deactivated	Monitoring Deactivated
+tracker_artifacttype	monitoring_activated	Now Monitoring Tracker
+tracker_artifacttype	monitoring_deactivated	Tracker Monitoring Deactivated
 tracker_monitor	monitor	Monitor
 tracker_monitor	monitorstop	Stop Monitor
-tracker_artifact	monitoring_activated	Now Monitoring
-tracker_artifact	monitoring_deactivated	Monitoring Deactivated
+tracker_artifact	monitoring_activated	Now Monitoring Artifact
+tracker_artifact	monitoring_deactivated	Artifact Monitoring Deactivated
 tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
 tracker_artifact	private_error	Artifact: Only group members can view private artifact types
 tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are required
