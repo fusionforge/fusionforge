@@ -104,6 +104,12 @@ class ArtifactQuery extends Error {
 			$this->setError('Must Be Logged In');
 			return false;
 		}
+
+		if ($this->Exist(htmlspecialchars($name))) {
+			$this->setError($Language->getText('artifact_query','exist_query'));
+			return false;
+		}
+
 		$sql="INSERT INTO artifact_query (group_artifact_id,query_name,user_id) 
 			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."','".user_getid()."')";
 
@@ -327,12 +333,17 @@ class ArtifactQuery extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$status,$assignee,$changed_since,$sort_col,$sort_ord,$extra_fields) {
+		global $Language;
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
 		}
 		if (!session_loggedin()) {
 			$this->setError('Must Be Logged In');
+			return false;
+		}
+		if (!$this->Exist(htmlspecialchars($name))) {
+			$this->setError($Language->getText('artifact_query','not_exist_query'));
 			return false;
 		}
 		$sql="UPDATE artifact_query
@@ -379,6 +390,23 @@ class ArtifactQuery extends Error {
             AND preference_name 'art_query".$this->ArtifactType->getID()."'");
 		unset($this->data_array);
 		unset($this->element_array);
+	}
+
+	/**
+	 *  Exist - check if already exist a query with the same name , user_id and artifact_id
+	 *
+	 *  @return	boolean	exist
+	 */
+	function Exist($name) {
+		$user_id = user_getid();
+		$art_id = $this->ArtifactType->getID();
+		$sql = "SELECT * FROM artifact_query WHERE group_artifact_id = '".$art_id."' AND query_name = '".$name."' AND user_id = '".$user_id."'";
+		$res = db_query($sql);
+		if (db_numrows($res)>0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 

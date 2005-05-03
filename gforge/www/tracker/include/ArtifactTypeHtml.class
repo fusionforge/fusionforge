@@ -53,9 +53,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
 
 		if (session_loggedin()) {
-			$labels[] = $Language->getText('tracker_artifacttype','query');
-			$links[]  = 'javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='.  $this->getID().'\')';
-
 			$labels[] = $Language->getText('tracker_artifacttype','reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
 			if ($this->isMonitoring()) {

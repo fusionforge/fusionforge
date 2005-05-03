@@ -534,6 +534,8 @@ advanced_search	no_matches_found_no_under_section	No matches found - No sections
 advanced_search	error_search_minlength	Search must be at least three characters
 artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
+artifact_query	exist_query	Query already exists
+artifact_query	not_exist_query	Query does not exist
 calendar	april	April
 calendar	august	August
 calendar	comingyear	Coming Year
@@ -2724,13 +2726,15 @@ tracker	check_upload	Check to Upload & Attach File
 tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker	close_date	Close Date
 tracker	comment	comment
-tracker	saved_queries	Apply & Run
+tracker	saved_queries	Save Changes
 tracker	query_name	Name and Save Query
 tracker	query_update	Update Query
 tracker	query_make_default	Make this Query the Default
 tracker	query_load	Load Query
 tracker	query_delete	Delete Query
 tracker	query_default	Last Query
+tracker	build_query	Build Query
+tracker	run_query	Run
 tracker_artifacttype	query	Query
 tracker_artifacttype	csv	Download .csv
 tracker	comments	comments

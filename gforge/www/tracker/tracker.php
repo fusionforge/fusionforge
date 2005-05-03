@@ -354,7 +354,6 @@ switch ($func) {
 	}
 	case 'query' : {
 		include ('query.php');
-		include ('opener_tasks.js');
 		break;
 	}
 	case 'downloadcsv' : {

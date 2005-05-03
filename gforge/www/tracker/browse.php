@@ -16,6 +16,17 @@ require_once('common/tracker/ArtifactQuery.class');
 if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
+if($run && $query_id) {
+	$aq = new ArtifactQuery($ath,$query_id);
+	if (!$aq || !is_object($aq)) {
+		exit_error('Error',$aq->getErrorMessage());
+	}
+	$aq->makeDefault();
+	$_sort_col=$aq->getSortCol();
+	$_sort_ord=$aq->getSortOrd();
+	$_status=$aq->getStatus();
+	$_assigned_to=$aq->getAssignee();
+}
 
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
@@ -42,6 +53,11 @@ if (!$art_arr && $af->isError()) {
 //same for status
 $ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
 
+echo '
+<table width="10%" border="0">
+	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
+
+if (!session_loggedin()) {
 /**
  *
  *	Build the powerful browsing options pop-up boxes
@@ -112,13 +128,7 @@ $changed_arr[]= 3600 * 24 * 7; // 1 week
 $changed_arr[]= 3600 * 24 * 14;// 2 week
 $changed_arr[]= 3600 * 24 * 30;// 1 month
 
-//
-//	Show the new pop-up boxes to select assigned to, status, etc
-//
-
 echo '
-<table width="10%" border="0">
-	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="set" value="custom" />
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
@@ -131,8 +141,21 @@ echo '
 		'<td><span style="font-size:smaller">'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>'.
 		'<td><span style="font-size:smaller">'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>'.
-		'<td><span style="font-size:smaller"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></td>
-	</tr>
+		'<td><span style="font-size:smaller"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></td>'
+	.'</tr>'
+	.'<tr>';
+} else {
+	$res=db_query("SELECT artifact_query_id,query_name 
+	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
+
+	if (db_numrows($res)>0) {
+	echo '<tr>'
+		.'<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$query_id,false).'</span></td>'.
+		'<td align="left"><span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input></span></td>';
+	}
+}
+echo '<td align="left"><span style="font-size:smaller"><strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong></span></td>
+		</tr>
 	</form></table>';
 /**
  *

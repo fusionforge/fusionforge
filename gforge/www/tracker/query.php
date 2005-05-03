@@ -114,10 +114,9 @@ $_changed_from=$aq->getChanged();
 $extra_fields =& $aq->getExtraFields();
 $_sort_col=$aq->getSortCol();
 $_sort_ord=$aq->getSortOrd();
-
 //
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox ('_assigned_to',$_assigned_to,true,'none','',$Language->getText('tracker','any'));
+$tech_box=$ath->technicianBox ('_assigned_to',$_assigned_to,true,'none','0',$Language->getText('tracker','any'));
 
 
 //
@@ -191,14 +190,20 @@ echo '<html>
 		<td><span style="font-size:smaller">
 			<input type="submit" name="submit" value="'.$Language->getText('tracker','saved_queries').'" />
 		</td>
-		<td>'
-		. html_build_select_box($res,'query_id',$query_id,false).'</span>
+		<td>';
+	if(db_numrows($res)>0) {
+		echo html_build_select_box($res,'query_id',$query_id,false).'</span>';
+	}
+	echo '
 		</td>
 	</tr>
 	<tr>
 		<td><span style="font-size:">
-		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'.$Language->getText('tracker','query_name').'<br />
+		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'.$Language->getText('tracker','query_name').'<br />';
+	if(db_numrows($res)>0) {
+		echo '
 		<input type="radio" name="query_action" value="4">'.$Language->getText('tracker','query_load').'<br />';
+	}
 	if ($query_id) {
 		echo '
 		<input type="radio" name="query_action" value="3" checked>'.$Language->getText('tracker','query_update').'<br />
