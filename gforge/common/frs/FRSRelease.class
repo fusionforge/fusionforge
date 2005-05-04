@@ -345,11 +345,18 @@ class FRSRelease extends Error {
 				return false;
 			}
 		}
-		$file=$GLOBALS['sys_upload_dir'].'/'.
+		$dir=$GLOBALS['sys_upload_dir'].'/'.
 			$this->FRSPackage->Group->getUnixName() . '/' .
 			$this->FRSPackage->getFileName().'/'.
 			$this->getFileName().'/';
-		unlink($file);
+		
+		// double-check we're not trying to remove root dir
+		if (!preg_match('/[^\\/]/',$dir)) {
+			$this->setError('Release::delete error: trying to delete root dir');
+			return false;
+		}
+		exec('rm -rf '.$dir);
+		
 		db_query("DELETE FROM frs_release WHERE release_id='".$this->getID()."'
 			AND package_id='".$this->FRSPackage->getID()."'");
 		return true;

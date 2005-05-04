@@ -438,10 +438,17 @@ class FRSPackage extends Error {
 				return false;
 			}
 		}
-		$file=$GLOBALS['sys_upload_dir'].'/'.
+		$dir=$GLOBALS['sys_upload_dir'].'/'.
 			$this->Group->getUnixName() . '/' .
 			$this->getFileName().'/';
-		unlink($file);
+
+		// double-check we're not trying to remove root dir
+		if (!preg_match('/[^\\/]/',$dir)) {
+			$this->setError('Package::delete error: trying to delete root dir');
+			return false;
+		}
+		exec('rm -rf '.$dir);
+
 		db_query("DELETE FROM frs_package WHERE package_id='".$this->getID()."'
 			AND group_id='".$this->Group->getID()."'");
 		return true;
