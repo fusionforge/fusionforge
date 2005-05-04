@@ -49,9 +49,9 @@ if( $submit ) {
 		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
-	} else 	if (!$userfile || $userfile == 'none') {
+	} else 	if ((!$userfile || $userfile == 'none') && !$ftp_filename) {
 		// Check errors
-		switch(!$ftp_filename && $_FILES['userfile']['error']) {
+		switch($_FILES['userfile']['error']) {
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
 				$feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
