@@ -43,7 +43,7 @@ echo $HTML->boxBottom();
 <td width="35%" valign="top">
 <?php
 echo $HTML->boxTop('Ad');
-echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
+echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="http://gforge.org/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');
 
 ?>
