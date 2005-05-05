@@ -1,6 +1,7 @@
 list:
 	@echo ======================================================================================
 	@echo '=                    Available target are listed below                               ='
+	@echo '=                    Today only to build debian pakages and orig tarballs            ='
 	@echo ======================================================================================
 	@cat Makefile | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
