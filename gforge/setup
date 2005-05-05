@@ -248,9 +248,10 @@ setupinout(){
 	mv $CONFFILEIN.new $CONFFILEIN
 	
 	# Fill in the blanks
+	EXCLUDEVHOST=' -not -name 55vhost'
 	if [ "$dovhost" == true ]
 	then
-		VHOST=$ETCDIR/httpd.d/55vhost
+		EXCLUDEVHOST='' 		
 	fi
 	rm -f $ETCDIR/httpd.d/10cvs
 	rm -f $ETCDIR/httpd.d/10scmcvs
@@ -259,9 +260,8 @@ setupinout(){
 	rm -f $ETCDIR/httpd.d/11scmcvshttp
 	rm -f $ETCDIR/httpd.d/11scmsvnhttp
 	rm -f $ETCDIR/httpd.d/12scmcvshttp.ssl
-	# Just for emacs afficionados
-	rm -f $ETCDIR/httpd.d/*[a-z]~
-	for i in $(ls -1 $ETCDIR/httpd.d/[0-4][0-9]* 2> /dev/null | grep -v dpkg) $VHOST $(ls -1 $ETCDIR/httpd.d/[6-9][0-9]* 2> /dev/null | grep -v dpkg) $ETCDIR/httpd.d/httpd.secrets
+
+	find $ETCDIR/httpd.d  -type f -regex "$ETCDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
@@ -279,12 +279,12 @@ setupinout(){
 	rm $ETCDIR/httpd.secrets.gforge-new
 	
 	echo "Creating $LOCALINC"
-	for i in $ETCDIR/local.d/0* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/1[1-9]* $ETCDIR/local.d/[2-9]*
+	find $ETCDIR/local.d -type f -regex "$ETCDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i 
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
-	ls $CONFFILEOUTDIR/0* $CONFFILEOUTDIR/10database.$database $CONFFILEOUTDIR/1[1-9]* $CONFFILEOUTDIR/[2-9]* | grep -v dpkg | sort | xargs cat > $LOCALINC
-	rm $CONFFILEOUTDIR/0* $CONFFILEOUTDIR/10database.$database $CONFFILEOUTDIR/1[1-9]* $CONFFILEOUTDIR/[2-9]*
+	(find $CONFFILEOUTDIR  -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | xargs cat ) > $LOCALINC
+	find $CONFFILEOUTDIR  -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" -print0 | xargs -0 rm 
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
