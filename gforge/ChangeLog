@@ -1,3 +1,13 @@
+2005-05-06	Marcelo Mottalli <marcelo@gforgegroup.com>
+
+	* Bug fixes in FRS:
+		- When trying to delete a release or a package, the corresponding 
+		directory didn't get deleted.
+		- Wrong error message displayed when not specifying a file on a release
+		creation.
+	* Feature for replying mail messages sent by a tracker works now. The user
+	must enter his reply between special markers.
+
 2005-05-01  Mathieu Peltier <mathieu.peltier@gmail.com>
 	* Bug fix in cvsweb cgi - "General options" panel was not working
 	

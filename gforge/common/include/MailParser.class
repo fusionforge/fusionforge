@@ -60,14 +60,6 @@ class MailParser extends Error {
 				//
 				if (strlen($lines[$i]) < 2) {
 					$got_headers=true;
-					if ($header['Content-Type']) {
-						if (strpos($header['Content-Type'],'text/plain') !== false) {
-						} else {
-							$this->setError('Error - only text/plain supported at this time');
-							return false;
-						}
-					}
-//echo "\n\n**".$header['Content-Type']."**\n\n";
 				} else {
 					//
 					//	See if line starts with tab, if so ignore it for now
@@ -88,6 +80,18 @@ class MailParser extends Error {
 		}
 		$this->body =& $body;
 		$this->headers =& $header;
+
+		if ($header['Content-Type']) {
+			if (strpos($header['Content-Type'],'text/plain') !== false) {
+			} else {
+				$this->setError('Error - only text/plain supported at this time');
+				return false;
+			}
+		}
+//echo "\n\n**".$header['Content-Type']."**\n\n";
+
+
+
 		unset ($lines);
 //system("echo \"mp: headers".implode("***\n",$header)."\n\" >> /tmp/forum.log");
 //system("echo \"mp: body".$body."\n\" >> /tmp/forum.log");

@@ -26,6 +26,10 @@ require_once('common/include/Error.class');
 require_once('common/tracker/ArtifactMessage.class');
 require_once('common/tracker/ArtifactExtraField.class');
 
+// This string is used when sending the notification mail for identifying the
+// user response
+define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');	
+
 	/**
 	*	Factory method which creates an Artifact from an artifact ID
 	*	
@@ -1153,6 +1157,10 @@ class Artifact extends Error {
 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 				"&aid=". $this->getID() .
 				"&group_id=". $this->ArtifactType->Group->getID() .
+			"\nOr by replying to this e-mail entering your response between the following markers: ".
+			"\n".ARTIFACT_MAIL_MARKER.
+			"\n(enter your response here)".
+			"\n".ARTIFACT_MAIL_MARKER.
 			"\n\n".
 			$this->marker('status',$changes).
 			 "Status: ". $this->getStatusName() ."\n".
@@ -1173,7 +1181,7 @@ class Artifact extends Error {
 			$body .= $ef["name"].": ".$ef["value"]."\n";
 		}
 			
-		$subject='[ '. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '-' . $this->getID() .' ] '. util_unconvert_htmlspecialchars( $this->getSummary() );
+		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '][' . $this->getID() .'] '. util_unconvert_htmlspecialchars( $this->getSummary() );
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType

@@ -47,7 +47,7 @@ class TrackerGateway extends Error {
 	var $Reference = "";
 	var $MsgId = "";
 	var $Sender="";
-	var $Body="";
+	var $Message="";
 	var $IsFollowUp=0;
 	var $ArtifactId=-1;
 	var $Artifact=null;
@@ -117,6 +117,9 @@ class TrackerGateway extends Error {
 			return false;
 		} elseif ($mp->isError()) {
 			$this->setError('Error In MailParser '.$mp->getErrorMessage());
+			// even if it is an error, try to get the address of the sender so we
+			// can send him back the error
+			$this->FromEmail = $mp->getFromEmail();
 			return false;
 		}
 
@@ -138,7 +141,34 @@ class TrackerGateway extends Error {
 			return false;
 		}
 
-		$this->Body =& addslashes($mp->getBody());
+		$body = addslashes($mp->getBody());
+		// find first occurrence of the marker in the message
+		$begin = strpos($body, ARTIFACT_MAIL_MARKER);
+		if ($begin === false) {
+			$this->setError("Response message wasn't found in your mail. Please verify that ".
+							"you entered your message between the correct text markers.".
+							"\nYour message was:".
+							"\n".$mp->getBody());
+			return false;
+		}
+		// get the part of the message located after the marker
+		$body = substr($body, $begin+strlen(ARTIFACT_MAIL_MARKER));
+		// now look for the ending marker
+		$end = strpos($body, ARTIFACT_MAIL_MARKER);
+		if ($end === false) {
+			$this->setError("Response message wasn't found in your mail. Please verify that ".
+							"you entered your message between the correct text markers.".
+							"\nYour message was:".
+							"\n".$mp->getBody());
+			return false;
+		}
+		$message = substr($body, 0, $end);
+		$message = trim($message);
+		
+		// maybe the last line was "> (ARTIFACT_MAIL_MARKER)". In that case, delete the last ">"
+		$message = preg_replace('/>$/', '', $message);
+		$this->Message = $message;
+		
 		return true;
 	}
 	
@@ -172,7 +202,7 @@ class TrackerGateway extends Error {
 		//
 		//	Create artifact message
 		//
-		if ( !$Artifact->addMessage($this->Body,$this->FromName) )
+		if ( !$Artifact->addMessage($this->Message,$this->FromName) )
 		{
 			$this->setError("ArtifactMessage Error:".$Artifact->getErrorMessage());
 			return false;
@@ -248,7 +278,9 @@ function DBG($str) {
 $debug = 0;
 $myTrackerGateway = new TrackerGateway();
 if ($myTrackerGateway->isError()) {
-	mail ($myTrackerGateway->FromEmail,'Forum Post Rejected',$myTrackerGateway->getErrorMessage());
+	if ($myTrackerGateway->FromEmail) {
+		mail ($myTrackerGateway->FromEmail,'Tracker Post Rejected',$myTrackerGateway->getErrorMessage());
+	}
 	DBG('Final Message: '.$myTrackerGateway->getErrorMessage());
 } else {
 //	DBG("Success!!");
