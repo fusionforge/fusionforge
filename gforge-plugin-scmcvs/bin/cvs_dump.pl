@@ -58,3 +58,5 @@ while(my ($group_id, $group_name, $status, $use_scm, $enable_pserver, $enable_an
 # Now write out the files (not necessary, but can give info in case of problems)
 if($verbose) {print ("\nWriting list");}
 write_array_file($scm_file, @group_array);
+system("chmod o-r $scm_file");
+

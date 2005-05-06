@@ -29,6 +29,7 @@ while(my ($uid, $gid, $status, $username, $shell, $passwd, $realname) = $c->fetc
 
 # Now write out the files
 write_array_file($file_dir."/dumps/user_dump", @user_array);
+system("chmod o-r,g-r $file_dir/dumps/user_dump");
 
 my $user_file = $file_dir . "/dumps/user_dump";
 my ($uid, $gid, $status, $username, $shell, $passwd, $realname);
