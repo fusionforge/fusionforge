@@ -122,10 +122,26 @@ MAILTO=""
 #5 2 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
 
 #
+#	Create CVS snapshots
+#
+# CVSROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
+# you'll have to edit the script if necessary.
+#
+#35 2 * * * /bin/sh $GFORGE/plugins/scmcvs/bin/snapshots.sh generate
+
+#
 #	Create SVN tarballs
 #
 #
 #5 3 * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
+
+#
+#	Create SVN snapshots
+#
+# SVNROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
+# you'll have to edit the script if necessary.
+#
+#35 3 * * * /bin/sh $GFORGE/plugins/scmsvn/bin/snapshots.sh generate
 
 #
 #	Daily SVN stats collection
