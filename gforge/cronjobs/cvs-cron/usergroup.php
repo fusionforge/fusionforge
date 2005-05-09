@@ -27,6 +27,18 @@
 
 /*
 
+NOTE - THIS SQL CAN BE USED ON A SEPARATED CVS SERVER TO GRANT ONLY THE NECESSARY PERMS
+
+
+CREATE USER cvsuser WITH ENCRYPTED PASSWORD 'password';
+
+GRANT SELECT ON groups, plugins, group_plugin, users, user_group, deleted_groups TO cvsuser;
+GRANT INSERT, UPDATE ON deleted_groups TO cvsuser;
+
+*/
+
+/*
+
 This file creates user / group permissions by editing 
 the /etc/passwd /etc/shadow and /etc/group files
 

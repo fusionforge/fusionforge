@@ -17,7 +17,7 @@ $svn_path='/usr/local/svn/bin';
 $file_owner='nobody:nogroup';
 
 //	Where is the SVN repository?
-$svn=GLOBAL["$sys_svnroot"];
+$svn=$GLOBALS["sys_svnroot"];
 
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;

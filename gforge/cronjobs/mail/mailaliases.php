@@ -28,6 +28,20 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+
+/*
+
+NOTE - THIS SQL CAN BE USED ON A SECOND SERVER TO GRANT ONLY THE NEEDED PERMS
+
+
+CREATE USER listsuser WITH ENCRYPTED PASSWORD 'password';
+
+GRANT SELECT ON mail_group_list, users, deleted_mailing_lists, forum_group_list, groups, artifact_group_list TO listsuser;
+
+GRANT INSERT, UPDATE ON deleted_mailing_lists TO listsuser;
+
+*/
+
 //
 //	IMPORTANT - modify this to your correct cron path
 //
