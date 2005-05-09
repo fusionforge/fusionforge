@@ -242,7 +242,7 @@ download        IN      A       <replaceable>1.2.3.4</replaceable>
 shell           IN      A       <replaceable>1.2.3.4</replaceable>
 users           IN      A       <replaceable>1.2.3.4</replaceable>
 lists           IN      A       <replaceable>1.2.3.4</replaceable>
-lists           IN      MX      10 <replaceable>1.2.3.4</replaceable>
+lists           IN      MX      10 <replaceable>gforge.company.com</replaceable>
 cvs             IN      A       <replaceable>1.2.3.4</replaceable>
 svn             IN      A       <replaceable>1.2.3.4</replaceable>
 scm             IN      A       <replaceable>1.2.3.4</replaceable>
