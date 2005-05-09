@@ -109,6 +109,7 @@ function isCvsTrackerSet($path) {
 			if(!preg_match("/^#/", $Line) &&
 				preg_match("/cvstracker/",$Line)) {
 				$LineFound = TRUE;
+			}
 		}
 	}
 	fclose($FIn);
