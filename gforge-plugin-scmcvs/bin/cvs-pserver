@@ -2,11 +2,13 @@
 
 # $Debian: cvs/debian/cvs-pserver,v 1.1 2001/04/20 16:00:54 epg Exp $
 
+CHROOTDIR=/var/lib/gforge/chroot
+
 # Execute pserver
-cd /var/lib/gforge/chroot
+cd $CHROOTDIR
 CVS_PSERV_REPOS=$(ls -d cvsroot/*)
 allow_root_opts="--allow-root=/$(echo $CVS_PSERV_REPOS | sed 's: : --allow-root=/:g')"
 
-exec /usr/sbin/chroot /var/lib/gforge/chroot /usr/bin/cvs ${allow_root_opts} pserver
+exec /usr/sbin/chroot $CHROOTDIR /usr/bin/cvs ${allow_root_opts} pserver
 
 # End of file.
