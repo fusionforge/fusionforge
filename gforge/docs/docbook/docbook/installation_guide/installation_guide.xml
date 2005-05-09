@@ -136,12 +136,6 @@ $sys_server="postgres"
 </programlisting>
 							</listitem>
 							<listitem>
-								<para>Change the value of the <varname>$sys_upload_dir</varname> to:</para>
-<programlisting>
-$sys_upload_dir='/var/www/download/';
-</programlisting>
-							</listitem>
-							<listitem>
 								<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
 <programlisting>
 $sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";
@@ -227,26 +221,28 @@ $ <userinput>psql -a -U gforge -W -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql
 gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
 ns.gforge       IN      A       <replaceable>1.2.3.4</replaceable>
 </screen>
+			<note>
+				<para>Do not add the latter resource record (<literal>ns.gforge</literal>) if this DNS server serves both <literal><replaceable>company.com</replaceable></literal> and <literal>gforge.<replaceable>company.com</replaceable></literal>.</para>
+			</note>
 			<para>New zone file for <literal>gforge.<replaceable>company.com</replaceable></literal> may look like this:</para>
 <screen>
 $TTL    2d
-@       IN      SOA     gforge.<replaceable>example.com</replaceable>. hostmaster.gforge.<replaceable>example.com</replaceable>. (
+@       IN      SOA     gforge.<replaceable>company.com</replaceable>. hostmaster.gforge.<replaceable>company.com</replaceable>. (
                               1         ; Serial
                          172800         ; Refresh
                             900         ; Update retry
                         2419200         ; Expire
                            3600 )       ; Negative Cache TTL
 ;
-@               IN      NS      ns.gforge.<replaceable>example.com</replaceable>.
+@               IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
 @               IN      A       <replaceable>1.2.3.4</replaceable>
 ns              IN      A       <replaceable>1.2.3.4</replaceable>
 
 download        IN      A       <replaceable>1.2.3.4</replaceable>
-upload          IN      A       <replaceable>1.2.3.4</replaceable>
 shell           IN      A       <replaceable>1.2.3.4</replaceable>
 users           IN      A       <replaceable>1.2.3.4</replaceable>
-gfdocs          IN      A       <replaceable>1.2.3.4</replaceable>
 lists           IN      A       <replaceable>1.2.3.4</replaceable>
+lists           IN      MX      10 <replaceable>1.2.3.4</replaceable>
 cvs             IN      A       <replaceable>1.2.3.4</replaceable>
 svn             IN      A       <replaceable>1.2.3.4</replaceable>
 scm             IN      A       <replaceable>1.2.3.4</replaceable>
@@ -256,7 +252,7 @@ images          IN      A       <replaceable>1.2.3.4</replaceable>
 </screen>
 			<para>The new zone must be added in main BIND configuration file:</para>
 <screen>
-zone "gforge.<replaceable>example.com</replaceable>" {
+zone "gforge.<replaceable>company.com</replaceable>" {
         type master;
         file "<replaceable>/dist-specific/path/to/zone-file</replaceable>";
 };
@@ -277,16 +273,14 @@ include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www
 </programlisting>
 				</listitem>
 				<listitem>
-					<para><emphasis>Cron jobs and some scripts</emphasis> require PHP Command-Line Interface (CLI). All scripts are invoked with command like this (split into some lines for readability):</para>
+					<para><emphasis>Cron jobs and some scripts</emphasis> require PHP Command-Line Interface (CLI). Scripts are usually invoked with command like this:</para>
 <screen>
-$ <userinput>php4
-  -d include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
-  -f cronjobs/mailing_lists_create.php</userinput>
+$ <userinput>php4 -f cronjobs/mail/mailing_lists_create.php</userinput>
 </screen>
 					<note>
 						<para>The <literal>-f</literal> is optional when using PHP CLI but it's required when PHP CGI executable is used.</para>
 					</note>
-					<para>Instead of using <literal>-d include_path=...</literal>, you may want to set <varname>include_path</varname> in PHP CLI <filename>php.ini</filename>, like already shown above. To find where <filename>php.ini</filename> is located, use the following command:</para>
+					<para>You must set <varname>include_path</varname> in PHP CLI <filename>php.ini</filename>, like already shown above. To find where <filename>php.ini</filename> is located, use the following command:</para>
 <screen>
 $ <userinput>php4 -i | fgrep php.ini</userinput>
 </screen>
@@ -316,12 +310,12 @@ ServerAdmin webmaster@gforge.<replaceable>company.com</replaceable>
 					<para>Define log files:</para>
 <programlisting>
 CustomLog "<replaceable>/var/log/gforge</replaceable>/access.log" combined
-ErrorLog  "<replaceable>/var/log/gforge</replaceable>/error.log"  combined
+ErrorLog  "<replaceable>/var/log/gforge</replaceable>/error.log"
 </programlisting>
 					<para>Usual practice is to use <command>logrotate</command> on these files.  Alternative is to pipe logs to <command>cronolog</command> which will automatically make directory with <filename>access.log</filename> and <filename>error.log</filename> for each day:</para>
 <programlisting>
 CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
-ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"  combined
+ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
 </programlisting>
 					<note>
 						<para>In FHS-compliant install, you may want to use <filename class="directory">/var/local/log/gforge</filename> instead of <filename class="directory">/var/log/gforge</filename>.</para>
@@ -412,18 +406,76 @@ DirectoryIndex index.php
 			<para>Of couse, all changes will take effect only after reloading or restarting Apache.</para>
 			<section>
 				<title>Project webs</title>
-				<para>Each project can have its own vhost.  Module <literal>vhost_alias</literal> should be enabled and the following directives should be added to <filename>httpd.conf</filename>:</para>
-<programlisting><![CDATA[
+				<para>Each project can have its own virtual host <literal><replaceable>projectname</replaceable>.projects.gforge.<replaceable>company.com</replaceable></literal>.  Location of project files is configured with <varname>$groupdir_prefix</varname> variable in GForge configuration file.  Each project has directory with project's name and contains <filename class="directory">htdocs</filename> subdirectory where Web files are placed.  Project directories are created by <filename>cronjobs/cvs-cron/usergroup.php</filename>.</para>
+				<section>
+					<title>DNS Server Configuration (BIND)</title>
+					<para>Project virtual hosts require new DNS zone.  Making this new zone is similar to making DNS zone for GForge itself.</para>
+					<orderedlist>
+						<listitem>
+							<para>Declare new zone in <literal>gforge.<replaceable>company.com</replaceable></literal> zone:</para>
+<programlisting>
+projects        IN      NS      ns.projects.gforge<replaceable>company.com</replaceable>
+</programlisting>
+							<para>If DNS server <emphasis>doesn't</emphasis> serve the new <literal>projects.gforge.<replaceable>company.com</replaceable></literal> zone, add the following line too:</para>
+<programlisting>
+ns.projects     IN      A       <replaceable>1.2.3.4</replaceable>
+</programlisting>
+							<para>Don't forget to change serial number of <literal>gforge.<replaceable>company.com</replaceable></literal> zone!</para>
+						</listitem>
+						<listitem>
+							<para>Create new zone file with following content:</para>
+<programlisting>
+$TTL    2d
+@       IN      SOA     projects.gforge.<replaceable>company.com</replaceable>. hostmaster.gforge.<replaceable>company.com</replaceable>. (
+                              1         ; Serial
+                         172800         ; Refresh
+                            900         ; Update retry
+                        2419200         ; Expire
+                           3600 )       ; Negative Cache TTL
+;
+@               IN      NS      ns.projects.gforge.<replaceable>company.com</replaceable>.
+@               IN      A       <replaceable>1.2.3.4</replaceable>
+ns              IN      A       <replaceable>1.2.3.4</replaceable>
+
+*               IN      A       <replaceable>1.2.3.4</replaceable>
+</programlisting>
+						</listitem>
+						<listitem>
+							<para>The new zone must be added in main BIND configuration file:</para>
+<programlisting>
+zone "projects.gforge.<replaceable>company.com</replaceable>" {
+        type master;
+        file "<replaceable>/dist-specific/path/to/zone-file</replaceable>";
+};
+</programlisting>
+						</listitem>
+						<listitem>
+							<para>Reload BIND and test if all works:</para>
+<screen>
+$ <userinput>host test.projects.gforge.<replaceable>company.com</replaceable></userinput>
+</screen>
+						</listitem>
+					</orderedlist>
+				</section>
+				<section>
+					<title>Web Server Configuration (Apache)</title>
+					<para>Module <literal>vhost_alias</literal> should be enabled and the following directives should be added to <filename>httpd.conf</filename> (<filename class="directory"><replaceable>/var/www/homedirs</replaceable>/groups</filename> is what you have chosen in <varname>$groupdir_prefix</varname>):</para>
+<programlisting>
 #
 #	WARNING - security is degraded by having this
 #	on the same machine as the primary GForge
 #
-<VirtualHost 192.168.1.1>
-  ServerName projects.gforge.company.com
-  ServerAlias *.gforge.company.com
-  DocumentRoot /var/www/homedirs/groups
-  VirtualDocumentRoot /var/www/homedirs/groups/%1
-  <Directory /var/www/homedirs/groups>
+&lt;VirtualHost 192.168.1.1&gt;
+  ServerName        projects.gforge.<replaceable>company.com</replaceable>
+  ServerAlias       *.gforge.<replaceable>company.com</replaceable>
+  UseCanonicalName  Off
+
+  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
+  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
+
+  DocumentRoot        <replaceable>/var/www/homedirs</replaceable>/groups
+  VirtualDocumentRoot <replaceable>/var/www/homedirs</replaceable>/groups/%1/htdocs
+  &lt;Directory <replaceable>/var/www/homedirs</replaceable>/groups&gt;
     Options Indexes
 #
 #	WARNING - turning on php will allow any user
@@ -433,12 +485,16 @@ DirectoryIndex index.php
 #
     php_flag engine off
     AllowOverride None
-    order allow,deny
-    allow from all
-  </Directory>
+    Order allow,deny
+    Allow from all
+  &lt;/Directory&gt;
   DirectoryIndex index.html index.htm
-</VirtualHost>
-]]></programlisting>
+&lt;/VirtualHost&gt;
+</programlisting>
+					<note>
+						<para><filename>cronjobs/cvs-cron/usergroup.php</filename> creates <filename>index.php</filename> file in Web directory (<filename class="directory">htdocs</filename>) of project but the above configuration disables PHP.</para>
+					</note>
+				</section>
 			</section>
 		</section>
 		<section>
@@ -452,16 +508,20 @@ noreply: /dev/null
 		</section>
 		<section>
 			<title>File Release System (FRS)</title>
-			<para>
-				Create a directory (e.g. <filename class="directory">/var/lib/gforge/download</filename>) and make it owned by the webserver user (e.g. <literal>apache</literal>). Usually <command>chown -R apache:apache /var/lib/gforge/download</command> will do the trick.  This directory will be referenced in the GForge Config File <filename>/etc/gforge/local.inc</filename> as <varname>$sys_upload_dir</varname>.
-			</para>
+			<para>Create a directory (e.g. <filename class="directory"><replaceable>/var/lib/gforge</replaceable>/download</filename>) and make it owned by the webserver user.  This directory will be referenced in the GForge Config File <filename>/etc/gforge/local.inc</filename> as <varname>$sys_upload_dir</varname>.</para>
+<screen>
+# <userinput>mkdir <replaceable>/var/lib/gforge</replaceable>/download</userinput>
+# <userinput>chown -R <replaceable>apache-user</replaceable> <replaceable>/var/lib/gforge</replaceable>/download</userinput>
+</screen>
+			<note>
+				<para>For FHS-compliance, use <filename class="directory"><replaceable>/var/local/lib/gforge</replaceable>/download</filename>.</para>
+			</note>
 		</section>
 		<section>
 			<title>Configuring GNU Mailman</title>
-			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/var/mailman/</filename> and the sample vhost shown below will work with this setup without any changes.</para>
-			<para>Cronjobs for Mailman are located in <filename>cronjobs/mail/*</filename>.</para>
-			<para><filename>cronjobs/mail/mailing_lists_create.php</filename> is used obviously to create new mailing lists. You may have to edit the file to change the location of the mailman <filename class="directory">bin/</filename> directory.</para>
-			<para>For all problems with mailman installation and use, contact the mailman mailing lists for help.</para>
+			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/usr/lib/mailman</filename> but sometimes it can be found in <filename class="directory">/var/mailman</filename>.  You must adjust <varname>MAILMAN_DIR</varname> in <filename>cronjobs/mail/mailing_lists_create.php</filename>.  The directory name must end in slash.</para>
+			<para>Cronjobs for Mailman are located in <filename>cronjobs/mail/*</filename>.  <filename>cronjobs/mail/mailing_lists_create.php</filename> is used obviously to create new mailing lists.</para>
+			<para>For all problems with Mailman installation and use, contact the Mailman mailing lists for help.</para>
 			<para>To install it:</para>
 			<orderedlist>
 				<listitem>
@@ -471,25 +531,36 @@ noreply: /dev/null
 					<para><command>su</command> to <literal>root</literal> and set the Mailman password by using the <command>mmsitepass</command> command</para>
 				</listitem>
 				<listitem>
-					<para>Create directory <filename class="directory">/var/www/mailman/</filename>.</para>
+					<para>Create directory <filename class="directory"><replaceable>/var/www</replaceable>/mailman/</filename>.  It will be document root for <literal>lists.gforge.<replaceable>company.com</replaceable>.</literal></para>
 				</listitem>
 				<listitem>
-					<para>Create in <filename>httpd.conf</filename> virtual host for Mailman, adjusting <literal>ScriptAlias</literal> and <literal>Alias</literal> directives:</para>
-<programlisting><![CDATA[
-<VirtualHost 192.168.1.1>
-ServerName lists.gforge.company.com
-ServerAdmin mailman@lists.gforge.company.com
-DocumentRoot /var/www/mailman
-DirectoryIndex index.php index.cgi index.html index.htm
-ScriptAlias   /mailman/ /var/mailman/cgi-bin/
-Alias /pipermail/ /var/mailman/archives/public/
-</VirtualHost>
-]]></programlisting>
+					<para>In Web server configuraton, create virtual host for Mailman, adjusting <literal>ScriptAlias</literal> and <literal>Alias</literal> directives:</para>
+<programlisting>
+&lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
+  ServerName    lists.gforge.<replaceable>company.com</replaceable>
+  ServerAdmin   mailman@lists.gforge.<replaceable>company.com</replaceable>
+  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
+  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
+
+  DocumentRoot  /var/www/mailman
+  DirectoryIndex index.html
+  ScriptAlias   /mailman/ <replaceable>/usr/lib/mailman/cgi-bin/</replaceable>
+  Alias         /pipermail/ <replaceable>/var/lib</replaceable>/mailman/archives/public/
+&lt;/VirtualHost&gt;
+</programlisting>
 				</listitem>
 				<listitem>
 					<para>Run the script <filename>gforge/cronjobs/mail/mailing_lists_create.php</filename> (with <command>php -f</command>). This creates any lists that are already in the database.</para>
 				</listitem>
 			</orderedlist>
+		</section>
+		<section>
+			<title>Source Code Management (SCM)</title>
+			<para>CVS and Subversion (SVN) are popular SCM systems that may be installed as plugins, as shown later.  You'll have to make their needed directories:</para>
+<screen>
+# <userinput>mkdir <replaceable>/var/www</replaceable>/scmtarballs</userinput>
+# <userinput>mkdir <replaceable>/var/www</replaceable>/scmsnapshots</userinput>
+</screen>
 		</section>
 		<section>
 			<title>Cron Jobs</title>
@@ -522,9 +593,7 @@ Alias /pipermail/ /var/mailman/archives/public/
 # crontab -e
 </screen>
 			<caution>
-				<para>
-					The <filename>cronjobs/cvs-cron/usergroup.php</filename> cron script will meddle with your <filename>/etc/passwd</filename>, <filename>/etc/group</filename>, and <filename>/etc/shadow</filename> files. By default, this cron will save these files with a <literal>.new</literal> extension. You will have to edit the cron script to remove the <literal>.new</literal> extension, but you must make sure that it is properly generating your files or your server could be unusable.
-				</para>
+				<para>The <filename>cronjobs/cvs-cron/usergroup.php</filename> cron script will meddle with your <filename>/etc/passwd</filename>, <filename>/etc/group</filename>, and <filename>/etc/shadow</filename> files. By default, this cron will save these files with a <literal>.new</literal> extension. You will have to edit the cron script to remove the <literal>.new</literal> extension, but you must make sure that it is properly generating your files or your server could be unusable.</para>
 			</caution>
 		</section>
 		<section>
@@ -614,102 +683,67 @@ $sys_dbpasswd = 'p455w0rd' ;
 			<title>CVS</title>
 			<section>
 				<title>Overview</title>
-				<para>CVS is now managed via the scmcvs plugin which is included in the <filename class="directory">plugins/</filename> directory in the tarball downloaded from gforge.org. Most of the files in scmcvs are intended for auto-installation on Debian systems and <emphasis role="strong">do not apply</emphasis> to the majority of users. The scmcvs plugin is activated by default in the <filename>gforge.sql</filename> database and all that you have to do is move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and possibly modify the files slightly. In addition, the <filename>scmcvs/www/*</filename> files should be placed in <filename>gforge/www/plugins/scmcvs/*</filename>.</para>
+				<para>CVS is now managed via the scmcvs plugin which is included in the <filename class="directory">plugins/</filename> directory in the tarball downloaded from gforge.org. Most of the files in scmcvs are intended for auto-installation on Debian systems and <emphasis role="strong">do not apply</emphasis> to the majority of users. The scmcvs plugin is activated by default in the <filename>gforge.sql</filename> database and all that you have to do is copy the <filename>plugins/scmcvs/etc/*</filename> directories to <filename class="directory">/etc/gforge</filename> directory and possibly modify the files slightly. In addition, the <filename>plugins/scmcvs/www/*</filename> files should be placed in <filename class="directory">www/plugins/scmcvs</filename> directory.</para>
 				<para>Cronjobs for CVS are included in <filename>cronjobs/crontab.in</filename>, but are commented out by default for your security. <filename>cronjobs/cvs-cron/*</filename> contains the files that are executed hourly to build permissions and create blank cvs trees. Make sure these files are executed as root, and have proper execution bits set.  Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
 			</section>
 			<section>
 				<title>Installation</title>
-<programlisting>
-#Create default location for CVS repositories
-mkdir /cvsroot
-
-# Optional - Set up basic index.php file for CVS vhost if desired
-mkdir /var/www/cvs
-cp <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/www/* /var/www/cvs/
-
-#copy the scmcvs plugin config to /etc/gforge/
-cp -R <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/etc/plugins/ /etc/gforge/
-
-#make sure the cvs crons are executable
-cd <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/
-chmod 755 *.php *.sh
-</programlisting>
-				<para>You will likely have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
+				<orderedlist>
+					<listitem>
+						<para>Create default location for CVS repositories:</para>
 <screen>
-'gforge'  => ['GForge-CVS',       '/home/chroot/cvsroot/'],
+# <userinput>mkdir <replaceable>/cvsroot</replaceable></userinput>
 </screen>
-			</section>
-			<section>
-				<title>Configuring CVS</title>
-				<note>
-					<para>Since GForge 4.0, CVS is integrated by plugin.  Look at the plugins section below for more information.</para>
-				</note>
-				<para>GForge uses CVS via <literal>pserver</literal> for anonymous read only access and <literal>ext</literal> for developers to commit to the repositories.  To set it up:</para>
-				<para>Download and install the latest CVS package for your distribution.</para>
-				<para>Ensure the following info is in <filename>/etc/services</filename>:</para>
-				<screen>
-$ grep cvspserver /etc/services
-cvspserver  2401/tcp  # CVS client/server operations
-cvspserver  2401/udp  # CVS client/server operations
+					</listitem>
+					<listitem>
+						<para><emphasis>Optional:</emphasis> Set up basic index.php file for CVS virtual host if desired:</para>
+<screen>
+# <userinput>mkdir <replaceable>/var/www/cvs</replaceable></userinput>
+# <userinput>cp <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/www/* <replaceable>/var/www/cvs</replaceable></userinput>
 </screen>
-				<para>Ensure the following info is in <filename>/etc/xinetd.d/cvspserver</filename> (if it doesn't exist, create a new file with the following text to enable anonymous access):</para>
+					</listitem>
+					<listitem>
+						<para>Copy the scmcvs plugin config to <filename class="directory">/etc/gforge</filename>:</para>
+<screen>
+# <userinput>cp -R <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/etc/* /etc/gforge</userinput>
+</screen>
+					</listitem>
+					<listitem>
+						<para>Make sure the cvs crons are executable:</para>
+<screen>
+# <userinput>cd <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/</userinput>
+# <userinput>chmod 755 *.php *.sh</userinput>
+</screen>
+					</listitem>
+					<listitem>
+						<para>Edit GForge Config File <filename>/etc/gforge/local.inc</filename> and change <varname>$sys_path_to_scmweb</varname> to be <filename class="directory">/var/www/gforge/plugins/scmcvs/cgi-bin</filename>.</para>
+					</listitem>
+					<listitem>
+						<para>You may have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
+<screen>
+'gforge'  => ['GForge-CVS', '<replaceable>/home/chroot/cvsroot/</replaceable>'],
+</screen>
+					</listitem>
+					<listitem>
+						<para>You may want to user CVS pserver.  First, assure that cvspserver service is defined in <filename>/etc/services</filename>.  It will look like this:</para>
 <programlisting>
-service cvspserver
-{
-        disable = no
-        socket_type  = stream
-        protocol  = tcp
-        wait   = no
-        user    = root
-        server   = /usr/bin/cvs
-        server_args  = -f --allow-root=/path/to/my/cvsroot pserver
-}
+cvspserver      2401/tcp
+cvspserver      2401/udp
 </programlisting>
-				<para>Now add an <literal>anonymous</literal> user to your system with a blank password, or one of <literal>anonymous</literal></para>
-			</section>
-			<section>
-				<title>Configuring CVSWeb</title>
-				<note>
-					<para>Since GForge 4.0, a specific version of CVSWeb is bundled in GForge SCM CVS plugin. You don't need to install CVSWeb anymore.</para>
-					<para>The following instructions are for GForge &lt; 4.0.</para>
-				</note>
-				<para>
-				You can download the latest official CVSWeb release from <ulink url="http://www.freebsd.org/projects/cvsweb.html"/> but you should consider using the one bundled in GForge SCMCVS plugin.
-			</para>
-				<para>Copy the tar.gz file into a tmp directory and unzip it:</para>
-				<screen>
-tar -zxvf cvsweb.tar.gz
+						<para>Add entry for pserver in <filename>/etc/inetd.conf</filename>:</para>
+<programlisting>
+cvspserver stream tcp nowait root <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver cvs-pserver
+</programlisting>
+						<para>Make sure that the wrapper script is executable:</para>
+<screen>
+# <userinput>chmod +x <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver</userinput>
 </screen>
-				<para>CVSWeb consists of a Perl script (<filename>cvsweb.cgi</filename>), a configuration file (<filename>cvsweb.conf</filename>), and some icons (<filename>back.gif</filename>, <filename>dir.gif</filename>, etc).</para>
-				<itemizedlist>
-					<listitem><para>Copy the <filename>cvsweb.cgi</filename> script into Apache's <filename class="directory">cgi-bin</filename> directory</para></listitem>
-					<listitem><para>Copy the <filename>cvsweb.conf</filename> file into Apache's configuration directory (such as <filename class="directory">/etc/httpd/conf.d/</filename> on RedHat 9)</para></listitem>
-					<listitem><para>Edit <filename>cvsweb.conf</filename></para></listitem>
-					<listitem><para>Change <varname>%CVSROOT</varname> hash to include your repositories - note you'll need to have created a repository first, of course.</para></listitem>
-					<listitem><para>Change the <varname>$cvstreedefault</varname> variable to point to a default repository</para></listitem>
-					<listitem><para>With GForge specific CVSWeb, you don't need to add manually projects' repositories.</para></listitem>
-					<listitem><para>Edit <filename>cvsweb.cgi</filename></para></listitem>
-					<listitem><para>Change the <varname>$config</varname> variable to point the <filename>cvsweb.conf</filename> file</para></listitem>
-					<listitem><para>Change the <varname>$PATH</varname> variable in <filename>cvsweb.conf</filename> to point to the directory that contains <command>rlog</command></para></listitem>
-				</itemizedlist>
-				<para>Possible problems:</para>
-				<itemizedlist>
-					<listitem>
-						<para><computeroutput>Error: Configuration not found</computeroutput> - edit <filename>cvsweb.cgi</filename> and point <varname>$config</varname> to the <filename>cvsweb.conf</filename> file</para>
+						<para>The used wrapper script <filename><replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver</filename> assumes that CVS repositories are in chroot environment and you may want to edit the script and change <varname>CHROOTDIR</varname> and <varname>CVSROOT</varname> variables.</para>
+						<warning>
+							<para>CVS pserver has long history of vulnerabilities and its use is highly discouraged.</para>
+						</warning>
 					</listitem>
-					<listitem>
-						<para><computeroutput>Error: Failed to spawn GNU rlog</computeroutput> - ensure <command>rlog</command> is in the directory pointed to by <varname>$ENV{'PATH'}</varname></para>
-					</listitem>
-				</itemizedlist>
-				<para>Create in <filename>httpd.conf</filename> virtual host for viewing of CVSWeb:</para>
-<programlisting><![CDATA[
-<VirtualHost 192.168.1.1>
-ServerName cvs.gforge.company.com
-ServerAdmin webmaster@cvs.gforge.company.com
-DocumentRoot /var/www/cvs
-DirectoryIndex index.php cvsweb.cgi index.html index.htm
-</VirtualHost>
-]]></programlisting>
+				</orderedlist>
 			</section>
 		</section>
 		<section>
