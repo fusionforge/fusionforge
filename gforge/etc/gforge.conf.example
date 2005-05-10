@@ -95,3 +95,4 @@ noreply_to_bitbucket=true
 sys_simple_dns=true
 sys_apache_user=www-gforge
 sys_apache_group=www-gforge
+sys_forum_return_domain=gforge.company.com

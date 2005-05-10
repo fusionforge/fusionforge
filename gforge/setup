@@ -109,6 +109,7 @@ computedefault(){
 	DEFAULTsys_simple_dns=true
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
+	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR

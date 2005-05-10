@@ -30,6 +30,7 @@
 // this is used where ever the "naked" form of the GForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = 'gforge.company.com';
+$sys_forum_return_domain = "gforge.company.com";
 //$sys_fallback_domain = 'gforge2.company.com';
 
 // Machine used for downloading sources/packages
