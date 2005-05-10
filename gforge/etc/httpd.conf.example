@@ -12,6 +12,11 @@ NameVirtualHost 10.GF.OR.GE:80
 NameVirtualHost 10.GF.OR.GE:443
 # This is magic for virtual hosting!
 UseCanonicalName Off
+
+<Directory ~ "/CVS/">
+  ## block web access to CVS directories.
+  deny from all
+</Directory>
 #
 # Main host
 #
@@ -23,8 +28,22 @@ UseCanonicalName Off
   php_admin_value include_path "/path/to/gforge/etc/custom:/etc/gforge:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
   php_flag register_globals "On"
-</Directory>
+  ###
+  ### safe PHP settings
+  ##
+  # report E_ALL errors
+  php_admin_value error_reporting 2047
 
+  # don't echo error to user
+  php_admin_value display_errors 0
+
+  # do log the errors in ErrorLog! why even ask?
+  php_admin_value log_errors 1
+
+  # don't report to syslog! apparently you can't undef error_log to force it to go to
+  # apache's error_log. So make sure error_log isn't defined in php.ini (/etc/php4/apache/php.ini)
+  ##php_admin_value error_log ''
+</Directory>
 # HTTP
 <VirtualHost 10.GF.OR.GE:80>
 	ServerName gforge.company.com
