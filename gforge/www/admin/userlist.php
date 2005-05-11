@@ -24,7 +24,10 @@
  */
 
 require_once('pre.php');
-$HTML->header(array('title'=>$GLOBALS['system_name'].$Language->getText('admin_userlist','userlist')));
+require_once('www/admin/admin_utils.php');
+session_require(array('group'=>'1','admin_flags'=>'A'));
+ 
+$HTML->header(array('title'=>$Language->getText('admin_userlist','userlist')));
 
 /**
  * performAction() - Updates the indicated user status
