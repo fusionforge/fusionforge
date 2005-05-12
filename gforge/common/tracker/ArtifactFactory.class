@@ -27,6 +27,7 @@
 require_once('common/include/Error.class');
 require_once('common/tracker/Artifact.class');
 require_once('common/tracker/ArtifactType.class');
+require_once('common/tracker/ArtifactQuery.class');
 
 class ArtifactFactory extends Error {
 
