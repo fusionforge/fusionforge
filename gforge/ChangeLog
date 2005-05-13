@@ -1,3 +1,8 @@
+2005-05-12  Tom Copeland  <tom@infoether.com>
+
+	* www/include/languages/Swedish.tab: Applied patch 1253 from Lennart
+	Petersson.
+
 2005-05-12  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* www/themes/osx/images/ic/*.png: Overwritten with the same images

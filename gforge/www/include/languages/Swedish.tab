@@ -924,6 +924,8 @@ home	none_found	Hittade inget
 home	registered_users	Registrerade användare
 home	sfos	$1 OnSite
 home	top_project_downloads	Projekt med flest hämtningar
+home  recently_registered     Nyligen registrerade projekt
+home  recently_registered_date_format m/d
 image	login	login.png
 image	logout	logout.png
 image	myaccount	myaccount.png
