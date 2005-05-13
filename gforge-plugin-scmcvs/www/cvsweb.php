@@ -59,24 +59,68 @@ if ($projectName) {
 	if (!$Group->usesSCM()) {
 		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
 	}
+	
+	// check if the scm_box is located in another server
+	$scm_box = $Group->getSCMBox();
+	$external_scm = (strtolower($_SERVER["SERVER_NAME"]) != strtolower($scm_box)); 
+	
 	$perm = & $Group->getPermission(session_get_user());
-	if ((!$Group->enableAnonSCM() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_scmweb']) || !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb')) {
+	// The user can use this script only if:
+	// * the current project has anonymous SCM enabled or
+	// * it is accessing a local repository through cvsweb, and the cvsweb script path (sys_path_to_scmweb) is valid or
+	// * it is accessing a remote repository and sys_path_to_scmweb points to the location of the cvsweb on the remote box 
+	if ((!$Group->enableAnonSCM() && !($perm && is_object($perm) && $perm->isMember())) || 
+			!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb'))) {
 		exit_permission_denied();
 	}
+
 	// should we output html ?
 	$isHtml = in_array($contentType, $supportedContentTypes);
+
+	// If we are accessing an external SCM box, execute the cvsweb script remotely and
+	// pipe the results
+	if ($external_scm) {
+		$server_script = $GLOBALS["sys_path_to_scmweb"];
+		// remove leading / (if any)
+		$server_script = preg_replace("/^\\//", "", $server_script); 
+		
+		// pass the parameters passed to this script to the remote script in the same fashion
+		$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$_SERVER["QUERY_STRING"];
+		$fh = @fopen($script_url, "r");
+		if (!$fh) {
+			exit_error('Error', 'Could not open script <b>'.$script_url.'</b>.');
+		}
+		
+		// start reading the output of the script (in 8k chunks)
+		$content = "";
+		while (!feof($fh)) {
+			$content .= fread($fh, 8192);
+		}
+		
+		if ($isHtml) {
+			// Now, we must replace the occurencies of $server_script with this script
+			// (do this only of outputting HTML)
+			// We must do this because we can't pass the environment variable SCRIPT_NAME
+			// to the cvsweb script (maybe this can be fixed in the future?)
+			$content = str_replace("/".$server_script, $_SERVER["SCRIPT_NAME"], $content);
+		}
+		
+	} else {
+		// SCM Box is the same server as this... execute the cvsweb script locally
+		ob_start();
+		// call to CVSWeb cgi. We use environment variables to pass parameters to the cgi.
+		passthru('PHP_WRAPPER="1" SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" PATH_INFO="'.getStringFromServer('PATH_INFO').'" QUERY_STRING="'.getStringFromServer('QUERY_STRING').'" '.$GLOBALS['sys_path_to_scmweb'].'/cvsweb 2>&1');
+		$content = ob_get_contents();
+		ob_end_clean();
+	}
+	
+
 	if ($isHtml) {
 		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
 		echo '<div id="cvsweb">';
 	} else {
 		header("Content-type: $contentType" );
 	}
-	
-	ob_start();
-	// call to CVSWeb cgi. We use environment variables to pass parameters to the cgi.
-	passthru('PHP_WRAPPER="1" SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" PATH_INFO="'.getStringFromServer('PATH_INFO').'" QUERY_STRING="'.getStringFromServer('QUERY_STRING').'" '.$GLOBALS['sys_path_to_scmweb'].'/cvsweb 2>&1');
-	$content = ob_get_contents();
-	ob_end_clean();
 	
 	// if we output html and we found the mbstring extension, we should try to encode the output of CVSWeb in UTF-8
 	if($isHtml && extension_loaded('mbstring')) {
