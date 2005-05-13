@@ -65,12 +65,22 @@ if ($projectName) {
 	$external_scm = (strtolower($_SERVER["SERVER_NAME"]) != strtolower($scm_box)); 
 	
 	$perm = & $Group->getPermission(session_get_user());
-	// The user can use this script only if:
-	// * the current project has anonymous SCM enabled or
-	// * it is accessing a local repository through cvsweb, and the cvsweb script path (sys_path_to_scmweb) is valid or
-	// * it is accessing a remote repository and sys_path_to_scmweb points to the location of the cvsweb on the remote box 
-	if ((!$Group->enableAnonSCM() && !($perm && is_object($perm) && $perm->isMember())) || 
-			!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb'))) {
+	if (session_loggedin()) {
+		if (user_ismember($Group->getID())) {
+			if (!($perm && is_object($perm) && $perm->isCVSReader()) && !$Group->enableAnonSCM()) {
+				exit_permission_denied();
+			}
+		} else if (!$Group->enableAnonSCM()) {
+			exit_permission_denied();
+		}
+		
+		// User has access to the CVS... check for valid script
+		// (only if we're working on a local CVS server)
+		if (!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb'))) {
+			exit_error('Error',"cvsweb script doesn't exist");
+		}
+
+	} else if (!$Group->enableAnonSCM()) {		// user is not logged in... check if group accepts anonymous CVS
 		exit_permission_denied();
 	}
 
