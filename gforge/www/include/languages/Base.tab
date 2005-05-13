@@ -2102,6 +2102,8 @@ reporting	time_tracking_sitetimebar	Site-Wide Total Hours Graph (graph)
 reporting	time_tracking_usersummary	Site-Wide Task &amp; Hours (report)
 reporting	time_tracking_usertime	Individual User Time Report (graph)
 reporting	title	Reporting
+reporting	tracker_items_opened	Tracker Items Opened
+reporting	tracker_items_closed	Tracker Items Closed
 reporting	type	Type
 reporting	update	Update
 reporting	user_activity	Activity (graph)

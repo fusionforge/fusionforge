@@ -67,8 +67,8 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot2 );
 
 	//	Legends
-	$lineplot->SetLegend ("Trk Open");
-	$lineplot2 ->SetLegend("Trk Close");
+	$lineplot->SetLegend ($Language->getText('reporting','tracker_items_opened'));
+	$lineplot2 ->SetLegend($Language->getText('reporting','tracker_items_closed'));
 
 } elseif ($area=='forum') {
 
