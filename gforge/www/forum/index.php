@@ -58,7 +58,9 @@ if ($group_id) {
 	*/
 
 	for ($j = 0; $j < count($farr); $j++) {
-		if ($farr[$j]->isError()) {
+		if (!is_object($farr[$j])) {
+			//just skip it - this object should never have been placed here
+		} elseif ($farr[$j]->isError()) {
 			echo $farr->getErrorMessage();
 		} else {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.

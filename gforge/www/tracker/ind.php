@@ -34,6 +34,11 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($at_arr); $j++) {
+		if (!is_object($at_arr[$j])) {
+			//just skip it
+		} elseif ($at_arr[$j]->isError()) {
+			echo $at_arr[$j]->getErrorMessage();
+		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td><a href="/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse">'.
@@ -47,6 +52,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			<td align="center">'. (int) $at_arr[$j]->getTotalCount() .'
 			</td>
 		</tr>';
+		}
 	}
 	echo $HTML->listTableBottom();
 }

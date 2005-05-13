@@ -61,9 +61,11 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
-		if ($pg_arr[$j]->isError()) {
+		if (!is_object($pg_arr[$j])) {
+			//just skip it
+		} elseif ($pg_arr[$j]->isError()) {
 			echo $pg_arr[$j]->getErrorMessage();
-		}
+		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse">' .
@@ -73,6 +75,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 			<td align="center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
 			<td align="center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
 		</tr>';
+		}
 	}
 	echo $HTML->listTableBottom();
 
