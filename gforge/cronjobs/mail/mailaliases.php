@@ -42,11 +42,8 @@ GRANT INSERT, UPDATE ON deleted_mailing_lists TO listsuser;
 
 */
 
-//
-//	IMPORTANT - modify this to your correct cron path
-//
-//define("CRON_PATH","/path/to/gforge/cronjobs");
-define("CRON_PATH","/var/www/gforge3/cronjobs");
+// This works only if this file is in cronjobs/mail/
+$path_to_cronjobs = dirname(dirname(__FILE__));
 
 // You should also modify this to the correct PHP path and extra configuration (if needed)
 $php_command = "/usr/bin/php4 -d include_path=".ini_get("include_path");
@@ -94,7 +91,7 @@ if ($sys_use_forum) {
 			//alias is already taken - perhaps by default
 		} else {
 			$def_aliases[$forname]=1;
-			fwrite($fp,"$forname:	|\"".$php_command." ".CRON_PATH."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name'))."\"\n");
+			fwrite($fp,"$forname:	|\"".$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name'))."\"\n");
 		}
 	}
 }
@@ -122,7 +119,7 @@ if ($sys_use_tracker) {
 			//alias is already taken - perhaps by default
 		} else {
 			$def_aliases[$trackername]=1;
-			fwrite($fp,"$trackername:	|\"".$php_command." ".CRON_PATH."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
+			fwrite($fp,"$trackername:	|\"".$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
 		}
 	}
 }
