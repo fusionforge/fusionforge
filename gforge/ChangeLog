@@ -1,3 +1,8 @@
+2005-05-15  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* cronjobs/mail/mailaliases.php: [#1262] __FILE__ is used instead
+	of hard-coded path.
+
 2005-05-14  Francisco Gimeno <kikov@kikov.org>
 
 	* www/favicon.ico: [#1271] Added favicon.ico
