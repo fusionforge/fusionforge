@@ -1,3 +1,8 @@
+2005-05-17  Tom Copeland  <tom@infoether.com>
+
+	* www/include/pre.php: Applied Google Accelerator blocker from Martin
+	Langhoff.
+
 2005-05-15  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* cronjobs/mail/mailaliases.php: [#1262] __FILE__ is used instead
