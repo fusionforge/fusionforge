@@ -1463,9 +1463,12 @@ class Group extends Error {
 		if (!$res) {
 			return false;
 		}
-		unset($this->data_array);
-		exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
-		exec('/bin/rm -rf '.$GLOBALS['sys_ftp_upload_dir'].'/'.$this->getUnixName().'/');
+		if (isset($GLOBALS['sys_upload_dir']) && $this->getUnixName()) {
+			exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
+		}
+		if (isset($GLOBALS['sys_ftp_upload_dir']) && $this->getUnixName()) {
+			exec('/bin/rm -rf '.$GLOBALS['sys_ftp_upload_dir'].'/'.$this->getUnixName().'/');
+		}
 		//
 		//	Delete reporting
 		//
@@ -1475,6 +1478,7 @@ class Group extends Error {
 //echo 'rep_group_act_monthly'.db_error();
 		$res=db_query("DELETE FROM rep_group_act_daily WHERE group_id='".$this->getID()."'");
 //echo 'rep_group_act_daily'.db_error();
+		unset($this->data_array);
 		return true;
 
 	}
