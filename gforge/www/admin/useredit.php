@@ -55,6 +55,7 @@ if ($delete_user != '' && $confirm_delete == '1') {
 
 } elseif ($action == "update_user" && $delete_user == '') {
 
+    //XXX use_shell
 	if (!$u->setEmail($email)
 		|| !$u->setShell($shell)
 		|| !$u->setStatus($status)) {
@@ -140,25 +141,33 @@ if ($u->getStatus() == 'D') {
 </td>
 </tr>
 
+<?php 
+	global $sys_use_shell;
+
+	if ($sys_use_shell) {
+?>    
 <tr>
-<td>
-<?php echo $Language->getText('admin_useredit','unix_account_status'); ?><sup>2</sup>:
-</td>
-<td>
-<?php echo $unix_status2str[$u->getUnixStatus()]; ?>
-</td>
+	<td>
+		<?php echo $Language->getText('admin_useredit','unix_account_status'); ?><sup>2</sup>:
+	</td>
+	<td>
+		<?php echo $unix_status2str[$u->getUnixStatus()]; ?>
+	</td>
 </tr>
 
 <tr>
-<td>
-<?php echo $Language->getText('admin_useredit','unix_shell'); ?>
-</td>
-<td>
+	<td>
+		<?php echo $Language->getText('admin_useredit','unix_shell'); ?>
+	</td>
+	<td>
 <select name="shell">
 <?php account_shellselects($u->getShell()); ?>
 </select>
-</td>
+	</td>
 </tr>
+<?php
+	}  // end of sys_use_shell conditionnal
+?>
 
 <tr>
 <td>
@@ -189,9 +198,18 @@ if ($u->getStatus() == 'D') {
 <p>
 <sup>1</sup><?php echo $Language->getText('admin_useredit','this_page_allows'); ?>
 </p>
+
+<?php 
+	global $sys_use_shell;
+
+	if ($sys_use_shell) {
+?>    
 <p>
 <sup>2</sup><?php echo $Language->getText('admin_useredit','unix_status_updated_mirroring'); ?>
 </p>
+<?php
+	} //end of sys_use_shell condition
+?> 
 
 </form>
 

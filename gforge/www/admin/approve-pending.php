@@ -169,7 +169,14 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<p>
 	<strong><?php echo $Language->getText('admin','license')." "; print license_getname($row_grp['license']); ?></strong>
 
+	<?php
+		global $sys_use_shell;
+		if ($sys_use_shell) {
+	?>  
 	<br /><strong><?php echo $Language->getText('admin_approve_pending','home_box')." "; print $row_grp['unix_box']; ?></strong>
+	<?php
+		} //end of sys_use_shell
+	?> 
 	<br /><strong><?php echo $Language->getText('admin','http_domain')." "; print $row_grp['http_domain']; ?></strong>
 
 	<br />

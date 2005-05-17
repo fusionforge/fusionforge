@@ -136,13 +136,21 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <br />
 <?php echo $Language->getText('project_admin','short_description') ?><?php echo $group->getDescription(); ?>
 <p><?php echo $Language->getText('project_admin','homepage_link') ?><strong><?php echo $group->getHomepage(); ?></strong></p>
+
+<?php
+	global $sys_use_shell;
+	if ($sys_use_shell) {
+?> 
 <p><?php echo $Language->getText('project_admin','shell_server') ?><strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong></p>
 <p><?php echo $Language->getText('project_admin','shell_server_group_directory') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
 <p><?php echo $Language->getText('project_admin','www_directory') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></p>
+<?php
+	} //end of use_shell condition
+?> 
 
-<?php if($sys_use_scm) { ?>
+<?php	if($sys_use_scm) { ?>
 	<p>[ <a href="/tarballs.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText('project_admin', 'download_tarball') ?></a> ]</p>
-<?php } ?>
+<?php	} ?>
 
 <hr />
 <p>

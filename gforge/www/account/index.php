@@ -216,7 +216,7 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 
 // ############################### Shell Account
 
-if ($u->getUnixStatus() == 'A') {
+if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 	echo $HTML->boxTop($Language->getText('account_shell','title')."");
 	print '&nbsp;
 <br />'.$Language->getText('account_shell','shell_box').': <strong>'.$u->getUnixBox().'</strong>

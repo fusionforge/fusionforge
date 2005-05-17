@@ -176,6 +176,10 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 </td>
 </tr>
 <?php } ?> 
+<?php
+	global $sys_use_shell;
+	if ($sys_use_shell) {
+?> 
 <tr>
 <td>
 <?php echo $Language->getText('admin','home_box'); ?>
@@ -184,6 +188,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
 </td>
 </tr>
+<?php	} //end sus_use_shell condition ?>
 
 <tr>
 <td>
