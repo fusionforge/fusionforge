@@ -1,6 +1,7 @@
 2005-04-27  Christian Bayle <bayle@debian.org>
 	
 	* Added the capability to change db port in setup: Closes [#1082] 
+	* Don't ask to choose scm when only one is available
 
 2005-05-17	Marcelo Mottalli <marcelo@gforgegroup.com>
 
