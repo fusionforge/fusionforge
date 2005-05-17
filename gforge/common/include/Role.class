@@ -375,6 +375,8 @@ class Role extends Error {
 								db_rollback();
 								return false;
 							}
+							// I have doubt the following is usefull
+							// This is probably buggy if used
 							if ($cvs_flags>1) {
 								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
 									$this->setError($SYS->getErrorMessage());
@@ -587,6 +589,8 @@ class Role extends Error {
 							db_rollback();
 							return false;
 						}
+						// I have doubt the following is usefull
+						// This is probably buggy if used
 						if ($cvs_flags>1) {
 							if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
 								$this->setError($SYS->getErrorMessage());
