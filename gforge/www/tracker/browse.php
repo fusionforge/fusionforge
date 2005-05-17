@@ -54,7 +54,7 @@ if (!$art_arr && $af->isError()) {
 $ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
 
 echo '
-<table width="10%" border="0">
+<table width="60%" border="0">
 	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
 
 if (!session_loggedin()) {
@@ -136,26 +136,31 @@ echo '
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
 	</tr>';
 
-	echo '<tr>
+	echo '
+	<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
-		'<td><span style="font-size:smaller">'. 
-		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>'.
-		'<td><span style="font-size:smaller">'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>'.
-		'<td><span style="font-size:smaller"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></td>'
-	.'</tr>'
-	.'<tr>';
+		'<td colspan="2"><span style="font-size:smaller">'. 
+		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
+		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
+		'<input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></span></td>
+	</tr>';
 } else {
 	$res=db_query("SELECT artifact_query_id,query_name 
 	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
 
+	echo '
+	<tr>';
 	if (db_numrows($res)>0) {
-	echo '<tr>'
-		.'<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$query_id,false).'</span></td>'.
+	echo '
+		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$query_id,false).'</span></td>'.
 		'<td align="left"><span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input></span></td>';
+	} else {
+		echo '<td colspan="2">&nbsp;</td>';
 	}
-}
 echo '<td align="left"><span style="font-size:smaller"><strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong></span></td>
-		</tr>
+	</tr>';
+}
+echo '
 	</form></table>';
 /**
  *

@@ -201,6 +201,9 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Status: '.db_error());
 			return false;
 		}
+		if (is_array($assignee)) {
+				$assignee=implode(',',$assignee);
+		}
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
 			VALUES ('$id','".ARTIFACT_QUERY_ASSIGNEE."','0','".( (int)$assignee )."')");
@@ -400,7 +403,7 @@ class ArtifactQuery extends Error {
 	function Exist($name) {
 		$user_id = user_getid();
 		$art_id = $this->ArtifactType->getID();
-		$sql = "SELECT * FROM artifact_query WHERE group_artifact_id = '".$art_id."' AND query_name = '".$name."' AND user_id = '".$user_id."'";
+		$sql = "SELECT * FROM artifact_query WHERE group_artifact_id = '$art_id' AND query_name = '$name' AND user_id = '$user_id'";
 		$res = db_query($sql);
 		if (db_numrows($res)>0) {
 			return true;

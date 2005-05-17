@@ -219,7 +219,11 @@ class ArtifactFactory extends Error {
 
 		//if assigned to selected, and more to where clause
 		if ($this->assigned_to) {
-			$assigned_str="AND assigned_to='".$this->assigned_to."'";
+			if (is_array($this->assigned_to)) {
+				$assigned_str="AND assigned_to IN (".implode(',',$this->assigned_to).")";
+			} else {
+				$assigned_str="AND assigned_to='".$this->assigned_to."'";
+			}
 		} else {
 			//no assigned to was chosen, so don't add it to where clause
 			$assigned_str='';
@@ -249,7 +253,7 @@ class ArtifactFactory extends Error {
 		//
 		//  now run the query using the criteria chosen above
 		//
-		$sql="SELECT artifact_vw.* FROM artifact_vw $ef_table_str
+		$sql="SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
 			 $status_str $assigned_str $last_changed_str $ef_where_str

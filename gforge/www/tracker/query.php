@@ -116,7 +116,7 @@ $_sort_col=$aq->getSortCol();
 $_sort_ord=$aq->getSortOrd();
 //
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox ('_assigned_to',$_assigned_to,true,'none','0',$Language->getText('tracker','any'));
+$tech_box=$ath->technicianBox ('_assigned_to',$_assigned_to,true,'none','-1',false,true);
 
 
 //
@@ -226,7 +226,8 @@ echo'
 		}
 		echo '</td>
 	</tr>';
-	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',ARTIFACT_EXTRAFIELD_FILTER_INT);
+	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',ARTIFACT_EXTRAFIELD_FILTER_INT,false,'QUERY');
+	
 echo '
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':</span><br />

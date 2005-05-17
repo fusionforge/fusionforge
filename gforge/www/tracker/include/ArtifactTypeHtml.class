@@ -83,12 +83,20 @@ class ArtifactTypeHtml extends ArtifactType {
 //		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','edit_options').': '. $this->getName() .'</a></strong>';
 	}
 
-	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false) {
+	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false,$mode='') {
 		$efarr = $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
 //TODO - add code for "display only" such as mod-limited and detail.php pages
 		$template = $this->getRenderHTML($filter);
+
+		if ($mode=='QUERY') {
+			$keys=array_keys($efarr);
+			for ($k=0; $k<count($keys); $k++) {
+				$i=$keys[$k];
+				$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTISELECT;
+			}
+		}
 
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
@@ -352,7 +360,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			<textarea name="extra_fields['.$extra_field_id.']" rows="'.$rows.'" cols="'.$cols.'">'.$contents.'</textarea>';
 	}
 
-	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='') {
+	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		global $Language;
 		if ($text_100=='none'){
 			$text_100=$Language->getText('tracker_artifacttype','nobody');
@@ -366,7 +374,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
-		return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+		if ($multiple) {
+			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,15,$show_100,$text_100);
+		} else {
+			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+		}
 	}
 
 	function cannedResponseBox ($name='canned_response',$checked='xzxz') {
