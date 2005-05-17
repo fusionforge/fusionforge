@@ -2,6 +2,7 @@ system_name=MyGForge
 domain_name=gforge.company.com
 server_admin=webmaster@gforge.company.com
 db_host=
+db_port=5432
 db_name=alexandria
 db_user=www
 db_password=
