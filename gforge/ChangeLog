@@ -1,5 +1,7 @@
 2005-05-18  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
+	* www/admin/approve-pending.php: Removed reference to removed
+	www/include/proj_email.php.
 	* [#1131] New configuration variable $sys_path_to_mailman.
 
 2005-04-27  Christian Bayle <bayle@debian.org>
