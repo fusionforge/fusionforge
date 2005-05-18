@@ -25,6 +25,7 @@ default_trove_cat=18
 ldap_host=ldap.gforge.company.com
 ldap_base_dn=dc=gforge,dc=company,dc=com
 ldap_web_add_password=
+sys_path_to_mailman=/usr/lib/mailman
 cgidir=/path/to/cgidir
 cronolog_path=/usr/bin/cronolog
 sys_path_to_jpgraph=/path/to/jpgraph

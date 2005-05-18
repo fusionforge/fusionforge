@@ -200,6 +200,9 @@ $sys_urlroot='/path/to/gforge/www/';
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='MyGForge';
 
+// Mailman base installation directory
+$sys_path_to_mailman='/usr/lib/mailman';
+
 // session cookie settings
 //
 //	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number

@@ -34,6 +34,9 @@ $sys_urlroot='{sys_urlroot}';
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='{system_name}';
 
+// Mailman base installation directory
+$sys_path_to_mailman='{sys_path_to_mailman}';
+
 // session cookie settings
 //
 //	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number

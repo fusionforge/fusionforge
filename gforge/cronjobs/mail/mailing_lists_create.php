@@ -7,10 +7,6 @@
 //	The /tmp/mailman-aliases file will then be read by the mailaliases.php file
 //
 
-//	DEFINE VARS FOR USING THIS SCRIPT
-//
-define('MAILMAN_DIR','/var/mailman/');
-
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
@@ -20,7 +16,7 @@ require ('common/include/cron_utils.php');
 // already exist
 //
 $mailing_lists=array();
-$mlists_cmd = escapeshellcmd(MAILMAN_DIR."bin/list_lists");
+$mlists_cmd = escapeshellcmd($sys_path_to_mailman."/bin/list_lists");
 $err .= "Command to be executed is $mlists_cmd\n";
 $fp = popen ($mlists_cmd,"r");
 while (!feof($fp)) {
@@ -63,12 +59,12 @@ for ($i=0; $i<$rows; $i++) {
 	
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
-	$privatize_cmd = escapeshellcmd(MAILMAN_DIR.'bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
+	$privatize_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
 	
 	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
-		//$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
-		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
+		//$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
+		$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);
 		if($failed) {
@@ -88,26 +84,26 @@ for ($i=0; $i<$rows; $i++) {
 		}
 	}
 	
-	if(file_exists(MAILMAN_DIR.'mail/mailman')) {
+	if(file_exists($sys_path_to_mailman.'/mail/mailman')) {
 		// Mailman 2.1
 		$list_str =
-$listname.':              "|'.MAILMAN_DIR.'mail/mailman post '.$listname.'"'."\n"
-.$listname.'-admin:        "|'.MAILMAN_DIR.'mail/mailman admin '.$listname.'"'."\n"
-.$listname.'-bounces:      "|'.MAILMAN_DIR.'mail/mailman bounces '.$listname.'"'."\n"
-.$listname.'-confirm:      "|'.MAILMAN_DIR.'mail/mailman confirm '.$listname.'"'."\n"
-.$listname.'-join:         "|'.MAILMAN_DIR.'mail/mailman join '.$listname.'"'."\n"
-.$listname.'-leave:        "|'.MAILMAN_DIR.'mail/mailman leave '.$listname.'"'."\n"
-.$listname.'-owner:        "|'.MAILMAN_DIR.'mail/mailman owner '.$listname.'"'."\n"
-.$listname.'-request:      "|'.MAILMAN_DIR.'mail/mailman request '.$listname.'"'."\n"
-.$listname.'-subscribe:    "|'.MAILMAN_DIR.'mail/mailman subscribe '.$listname.'"'."\n"
-.$listname.'-unsubscribe:  "|'.MAILMAN_DIR.'mail/mailman unsubscribe '.$listname.'"'."\n\n"
+$listname.':              "|'.$sys_path_to_mailman.'/mail/mailman post '.$listname.'"'."\n"
+.$listname.'-admin:        "|'.$sys_path_to_mailman.'/mail/mailman admin '.$listname.'"'."\n"
+.$listname.'-bounces:      "|'.$sys_path_to_mailman.'/mail/mailman bounces '.$listname.'"'."\n"
+.$listname.'-confirm:      "|'.$sys_path_to_mailman.'/mail/mailman confirm '.$listname.'"'."\n"
+.$listname.'-join:         "|'.$sys_path_to_mailman.'/mail/mailman join '.$listname.'"'."\n"
+.$listname.'-leave:        "|'.$sys_path_to_mailman.'/mail/mailman leave '.$listname.'"'."\n"
+.$listname.'-owner:        "|'.$sys_path_to_mailman.'/mail/mailman owner '.$listname.'"'."\n"
+.$listname.'-request:      "|'.$sys_path_to_mailman.'/mail/mailman request '.$listname.'"'."\n"
+.$listname.'-subscribe:    "|'.$sys_path_to_mailman.'/mail/mailman subscribe '.$listname.'"'."\n"
+.$listname.'-unsubscribe:  "|'.$sys_path_to_mailman.'/mail/mailman unsubscribe '.$listname.'"'."\n\n"
 ;
 	} else {
 		// Mailman < 2.1
 		$list_str =
-$listname.':		"|'.MAILMAN_DIR.'mail/wrapper post '.$listname.'"'."\n"
-.$listname.'-admin:	"|'.MAILMAN_DIR.'mail/wrapper mailowner '.$listname.'"'."\n"
-.$listname.'-request:	"|'.MAILMAN_DIR.'mail/wrapper mailcmd '.$listname.'"'."\n\n";
+$listname.':		"|'.$sys_path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
+.$listname.'-admin:	"|'.$sys_path_to_mailman.'/mail/wrapper mailowner '.$listname.'"'."\n"
+.$listname.'-request:	"|'.$sys_path_to_mailman.'/mail/wrapper mailcmd '.$listname.'"'."\n\n";
 	}
 
 	fwrite($h1,$list_str);
@@ -130,7 +126,7 @@ $rows	 = db_numrows($res);
 for($k = 0; $k < $rows; $k++) {
 	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
 	
-	passthru(MAILMAN_DIR."bin/rmlist -a $deleted_mail_list", $failed);
+	passthru($sys_path_to_mailman."/bin/rmlist -a $deleted_mail_list", $failed);
 	if(!$failed){
 		$res1 = db_query("UPDATE mailing_list_name SET isdeleted = 1 WHERE mailing_list_name = '$deleted_group_name';" );
 		$err .= db_error();

@@ -39,6 +39,7 @@ computedefault(){
 	DEFAULTldap_host=localhost
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTsys_path_to_mailman=$(if test -d /usr/lib/mailman; then echo /usr/lib/mailman; else echo /var/mailman; fi)
 	DEFAULTcgidir=$CGIDIR
 	DEFAULTcronolog_path=$(findcronolog)
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/

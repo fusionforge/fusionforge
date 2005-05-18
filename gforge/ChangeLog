@@ -1,3 +1,7 @@
+2005-05-18  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* [#1131] New configuration variable $sys_path_to_mailman.
+
 2005-04-27  Christian Bayle <bayle@debian.org>
 	
 	* [#1082] Added the capability to change db port in setup
