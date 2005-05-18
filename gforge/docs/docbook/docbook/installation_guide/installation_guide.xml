@@ -242,13 +242,11 @@ download        IN      A       <replaceable>1.2.3.4</replaceable>
 shell           IN      A       <replaceable>1.2.3.4</replaceable>
 users           IN      A       <replaceable>1.2.3.4</replaceable>
 lists           IN      A       <replaceable>1.2.3.4</replaceable>
-lists           IN      MX      10 <replaceable>gforge.company.com</replaceable>
 cvs             IN      A       <replaceable>1.2.3.4</replaceable>
 svn             IN      A       <replaceable>1.2.3.4</replaceable>
 scm             IN      A       <replaceable>1.2.3.4</replaceable>
 ldap            IN      A       <replaceable>1.2.3.4</replaceable>
 jabber          IN      A       <replaceable>1.2.3.4</replaceable>
-images          IN      A       <replaceable>1.2.3.4</replaceable>
 </screen>
 			<para>The new zone must be added in main BIND configuration file:</para>
 <screen>
@@ -499,12 +497,27 @@ $ <userinput>host test.projects.gforge.<replaceable>company.com</replaceable></u
 		</section>
 		<section>
 			<title>Configuring Mail Transport Agent (Any)</title>
-			<para>
-				Add the following line to <filename>/etc/aliases</filename> and run <command>newaliases</command>:
-			</para>
+			<para>Add the following line to <filename>/etc/aliases</filename> and run <command>newaliases</command>:</para>
 <programlisting>
 noreply: /dev/null
 </programlisting>
+			<para>Make sure that the following domain names are accepted as local destinations by mail transport agent:</para>
+			<itemizedlist>
+				<listitem>
+					<para><literal>gforge.<replaceable>company.com</replaceable></literal></para>
+				</listitem>
+				<listitem>
+					<para><literal>lists.gforge.<replaceable>company.com</replaceable></literal></para>
+				</listitem>
+				<listitem>
+					<para><literal>users.gforge.<replaceable>company.com</replaceable></literal></para>
+				</listitem>
+			</itemizedlist>
+			<para>You may want to consider adding <literal>MX</literal> (mail exchanger) resource records for the above domain names.  This is meaningful only if you want fallback mail routes or if firewall doesn't allow incoming port 25 for the server.</para>
+			<section>
+				<title>Mail gateways to forum and tracker</title>
+				<para>When forum or tracker is monitored, replying to monitor mails are processed by gateways.  These gateways use GForge configuration file <filename>/etc/gforge/local.inc</filename> so that they can access database but the problem is that they run with different user than that of Apache.  So if you want to use these gateways, you'll have to change access mode of <filename>local.inc</filename>.</para>
+			</section>
 		</section>
 		<section>
 			<title>File Release System (FRS)</title>
@@ -553,6 +566,10 @@ noreply: /dev/null
 					<para>Run the script <filename>gforge/cronjobs/mail/mailing_lists_create.php</filename> (with <command>php -f</command>). This creates any lists that are already in the database.</para>
 				</listitem>
 			</orderedlist>
+			<section>
+				<title>Mailing list for commits</title>
+				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal>. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>server.gforge.<replaceable>company.com</replaceable></literal>.</para>
+			</section>
 		</section>
 		<section>
 			<title>Source Code Management (SCM)</title>
@@ -795,6 +812,7 @@ cd <replaceable>/var/www/gforge</replaceable>/plugins/cvstracker/
 cp -R etc/plugins/cvstracker/ /etc/gforge/plugins/
 cp -R www/ <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
 </programlisting>
+			<para><filename>plugins/cvstracker/bin/post.php</filename> is called on each commit and it needs the GForge configuration file <filename>local.inc</filename> so the latter should have relaxed permissions.</para>
 		</section>
 	</section>
 	<section>
