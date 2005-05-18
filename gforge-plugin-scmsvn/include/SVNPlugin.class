@@ -55,6 +55,10 @@ class SVNPlugin extends SCM {
 		return $this->default_svn_server ;
 	}
 
+	function getDefaultServer() {
+		return $this->default_svn_server;
+	}
+
 	function CallHook ($hookname, $params) {
 		global $Language, $HTML ;
 		
