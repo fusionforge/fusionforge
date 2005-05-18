@@ -50,13 +50,9 @@ class SVNPlugin extends SCM {
 
 		$this->register () ;
 	}
-	
-	function getDefaultServer() {
-		return $this->default_svn_server ;
-	}
 
 	function getDefaultServer() {
-		return $this->default_svn_server;
+		return $this->default_svn_server ;
 	}
 
 	function CallHook ($hookname, $params) {
