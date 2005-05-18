@@ -358,15 +358,15 @@ msgstr "Souhaitez-vous une configuration DNS simplifiée ?"
 #: ../gforge-dns-bind9.templates.dsfh-in:109
 msgid ""
 "You can have a simple DNS setup wich uses wildcards to map all project web-"
-"hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
+"hosts to a single IP, and direct all the scm-hosts to a single SCM server, "
 "or a complex setup wich allows you to have many servers as project web "
-"servers or CVS servers."
+"servers or SCM servers."
 msgstr ""
 "Il est possible de mettre en service une gestion DNS simplifiée qui "
 "utilisera des jokers (« wildcards ») pour affecter tous les serveurs web de "
-"vos projets à une seule adresse IP, ainsi que tous les hôtes CVS à un seul "
-"serveur CVS. Une configuration plus complexe est également possible pour "
-"utiliser plusieurs serveurs comme serveurs web ou CVS."
+"vos projets à une seule adresse IP, ainsi que tous les hôtes SCM à un seul "
+"serveur SCM. Une configuration plus complexe est également possible pour "
+"utiliser plusieurs serveurs comme serveurs web ou SCM."
 
 #. Type: boolean
 #. Description
@@ -374,12 +374,12 @@ msgstr ""
 msgid ""
 "Even though you have a simple DNS setup, you can still have seperate boxes "
 "for your project servers, it just assumes you have all the project web dirs "
-"on the same server and a single server for CVS."
+"on the same server and a single server for SCM."
 msgstr ""
 "Même si vous choisissez la configuration DNS simplifiée, vous pourrez "
 "toujours avoir plusieurs environnements distincts pour les serveurs de vos "
 "projets. Ce choix n'apporte qu'une restriction : tous les répertoires web "
-"sont sur un seul serveur, ainsi que tous les entrepôts CVS."
+"sont sur un seul serveur, ainsi que tous les entrepôts SCM."
 
 #. Type: boolean
 #. Description
@@ -452,10 +452,10 @@ msgstr "Nom de domaine ou de sous-domaine Gforge"
 #: ../dsf-helper/common-variables.templates:3
 msgid ""
 "The domain that will host your Gforge installation.  Some services will be "
-"given their own subdomain in that domain (cvs, lists, etc.)."
+"given their own subdomain in that domain (scm, lists, etc.)."
 msgstr ""
 "Il s'agit du nom du domaine qui héberge votre Gforge. Certains services "
-"auront leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, "
+"auront leur propre sous-domaine à l'intérieur de ce domaine (scm, lists, "
 "etc.)."
 
 #. Type: string
@@ -485,22 +485,6 @@ msgstr "Nom du système Gforge"
 #: ../dsf-helper/common-variables.templates:16
 msgid "This name is used in various places throughout the system."
 msgstr "Ce nom est utilisé dans certains endroits du système."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/cvshost-variables.templates:3
-msgid "Your CVS server"
-msgstr "Serveur CVS"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/cvshost-variables.templates:3
-msgid ""
-"The hostname of the server that will host your Gforge CVS repositories.  It "
-"should not be the same as your main Gforge host."
-msgstr ""
-"Il s'agit du nom du serveur CVS pour Gforge. Ce nom ne devrait pas être le "
-"même que celui de votre serveur Gforge principal."
 
 #. Type: string
 #. Description

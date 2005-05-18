@@ -1,5 +1,4 @@
 #DSFHELPER:common-variables#
-#DSFHELPER:cvshost-variables#
 #DSFHELPER:shellhost-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
@@ -108,14 +107,14 @@ Type: boolean
 Default: false
 _Description: Do you want a simple DNS setup?
  You can have a simple DNS setup wich uses wildcards to map all
- project web-hosts to a single IP, and direct all the cvs-hosts
- to a single CVS server, or a complex setup wich allows you to
- have many servers as project web servers or CVS servers.
+ project web-hosts to a single IP, and direct all the scm-hosts
+ to a single SCM server, or a complex setup wich allows you to
+ have many servers as project web servers or SCM servers.
  .
  Even though you have a simple DNS setup, you can still have
  seperate boxes for your project servers, it just assumes you
  have all the project web dirs on the same server and a single
- server for CVS.
+ server for SCM.
 
 Template: gforge/shared/replace_file_remove
 Type: boolean

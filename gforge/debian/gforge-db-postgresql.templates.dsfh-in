@@ -2,8 +2,6 @@
 
 #DSFHELPER:common-variables#
 
-#DSFHELPER:cvshost-variables#
-
 Template: gforge/shared/shell_host
 Type: string
 _Description: Your shell server

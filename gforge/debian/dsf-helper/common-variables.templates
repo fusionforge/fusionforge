@@ -2,7 +2,7 @@ Template: gforge/shared/domain_name
 Type: string
 _Description: Your Gforge domain or subdomain name
  The domain that will host your Gforge installation.  Some services will be
- given their own subdomain in that domain (cvs, lists, etc.).
+ given their own subdomain in that domain (scm, lists, etc.).
 
 Template: gforge/shared/server_admin
 Type: string

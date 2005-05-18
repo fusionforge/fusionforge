@@ -28,7 +28,6 @@ if [ "$RET" = "false" ]; then
 fi
 
 #DSFHELPER:host-variables#
-#DSFHELPER:cvshost-variables#
 #DSFHELPER:shellhost-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#

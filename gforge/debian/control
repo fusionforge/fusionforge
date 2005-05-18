@@ -13,7 +13,7 @@ Depends: debconf (>= 1.0.32), gforge-common (= ${Source-Version}), gforge-web-ap
 Description: collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -26,7 +26,7 @@ Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1),gforge-plugin-scmsvn (<< 4
 Description: collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -42,7 +42,7 @@ Conflicts: gforge-web
 Description: collaborative development tool - web part (using Apache)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -57,7 +57,7 @@ Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -72,7 +72,7 @@ Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Exim 4)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -87,7 +87,7 @@ Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Exim)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -102,7 +102,7 @@ Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Postfix)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -117,7 +117,7 @@ Conflicts: gforge-shell
 Description: collaborative development tool - shell accounts (using LDAP)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -132,24 +132,12 @@ Conflicts: gforge-shell
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This package provides shell accounts authenticated via the PostgreSQL
  database to GForge users.
-
-Package: gforge-cvs
-Architecture: all
-Depends: gforge-common, gforge-shell-postgresql | gforge-shell, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9) | apache-perl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, gforge-plugin-scmcvs
-Description: collaborative development tool - CVS management
- GForge provides many tools to help collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
- .
- This package installs and configures CVS for GForge.
 
 Package: gforge-ftp-proftpd
 Architecture: all
@@ -159,7 +147,7 @@ Conflicts: gforge-ftp
 Description: collaborative development tool - FTP management (using ProFTPd)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -173,7 +161,7 @@ Conflicts: gforge-ldap
 Description: collaborative development tool - LDAP directory (using OpenLDAP)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -187,7 +175,7 @@ Conflicts: gforge-dns
 Description: collaborative development tool - DNS management (using Bind9)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
@@ -201,7 +189,7 @@ Conflicts: gforge-lists
 Description: collaborative development tool - mailing-lists (using Mailman)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
- mailing-lists, CVS repository, forums, support request helper, web
+ mailing-lists, SCM repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .

@@ -10,7 +10,6 @@ create_mainconffile
 init_debconf_from_mainconffile
 
 #DSFHELPER:common-variables#
-#DSFHELPER:cvshost-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 

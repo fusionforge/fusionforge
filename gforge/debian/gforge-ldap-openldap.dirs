@@ -7,8 +7,6 @@ usr/lib/gforge/bin
 usr/lib/gforge/db
 usr/lib/gforge/lib
 usr/lib/gforge/www
-usr/lib/gforge/cvs
-usr/lib/gforge/cvs/icons
 usr/lib/gforge/cgi-bin
 usr/sbin
 var/lib/gforge
@@ -22,4 +20,3 @@ var/lib/gforge/ftp
 var/lib/gforge/ftp/incoming
 var/lib/gforge/tmp
 var/log/gforge
-var/log/gforge/cvs
