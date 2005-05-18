@@ -25,10 +25,16 @@ computedefault(){
 	DEFAULTshell_host=shell.$DEFAULTdomain_name
 	DEFAULTusers_host=users.$DEFAULTdomain_name
 	DEFAULTlists_host=lists.$DEFAULTdomain_name
+	# The following three have to be synced when domain_name changes
 	DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
 	DEFAULTjabber_host=jabber.$DEFAULTdomain_name
-	DEFAULTdownload_host=download.$DEFAULTdomain_name
 	DEFAULTupload_host=upload.$DEFAULTdomain_name
+	#
+	DEFAULTdownload_host=download.$DEFAULTdomain_name
+	# The following is upload host and dir for FRS
+	DEFAULTftpuploadhost=upload.$DEFAULTdomain_name
+	DEFAULTftpuploaddir=$GFGDIR/var/lib/gforge/chroot/ftproot
+	#
 	DEFAULTstatsadmin_groupid=2
 	DEFAULTnewsadmin_groupid=3
 	DEFAULTpeerrating_groupid=4
@@ -51,6 +57,7 @@ computedefault(){
 	DEFAULThomedir=$HOMEPATH
 	DEFAULTcvsdir=$CVSPATH
 	DEFAULTsvndir=$SVNPATH
+	# The place where file uploaded with http are stored for download
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_urlroot=$SHAREDIR/www/
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)

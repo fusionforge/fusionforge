@@ -183,8 +183,8 @@ $sys_chroot='';
 // the webserver's directory
 //
 $sys_upload_dir='/path/to/uploads/';
-$sys_ftp_upload_dir='{ftpuploaddir}';
-$sys_ftp_upload_host='{ftpuploadhost}';
+$sys_ftp_upload_dir='/path/to/frs/upload';
+$sys_ftp_upload_host='upload.gforge.company.com';
 //$sys_ftp_upload_chowner='{ftpuploadchowner}';
 $sys_apache_user='www-gforge';
 $sys_apache_group='www-gforge';
