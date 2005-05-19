@@ -138,10 +138,9 @@ contain a call to register_plugin(), passing it an object of the
 appropriate class.  See the helloworld plugin for an example.
 
   The hooks are managed centrally by the GForge code maintainers.
-If you need one, please ask, we'll add it.  At the time of writing,
-there's only one hook implemented (for the helloworld plugin).  It's
-called "usermenu" and occurs in the user_menu() method of the Layout
-class.  I rely on you plugins developers to provide more ideas :-)
+If you need one, please ask, we'll add it.  The current list of
+hooks is provided at the end of this document.
+I rely on you plugins developers to provide more ideas :-)
 
 - Plugin-specific web pages should reside either in the /plugin/*/
 URL-space (that is, plugin "foo" will probably put its files in
@@ -207,5 +206,181 @@ distribute their plugin do not reuse the same name.
 - helloworld, the plugin provided as an example.
 - extldapauth, a plugin allowing on-the-fly account creation from an
   existing LDAP directory;
+
+CURRENT LIST OF PLUGIN HOOKS
+----------------------------
+
+The following is a list of hooks available in GForge for plugins to utilise.
+Each hook is listed with its name, locations in the source code where the
+hook is called, and parameters that are passed into the hook and a brief
+description. There may be other hooks available, added after this section
+had been written.
+
+  Hook Name  : after_session_set
+  Locations  : www/include/pre.php
+  Description: Called once the GForge session has been initialised.
+               You can use this hook to handle session setup specific
+               to your plugin.
+
+  Hook Name  : artifact_extra_detail
+  Parameters : artifact_id - The ID of a tracker item
+  Locations  : www/tracker/detail.php
+               www/tracker/mod-limited.php
+               www/tracker/mod.php
+  Description: Use this hook to provide additional information about a 
+               tracker item based upon its ID.
+
+  Hook Name  : before_logout_redirect
+  Locations  : www/account/logout.php
+  Description: Called once the GForge user has had their session logged
+               out, and before the user is redirected to the homepage of
+               the site.
+
+  Hook Name  : cssfile
+  Locations  : www/include/Layout.class
+  Description: Used to include a CSS link element to include in the page
+               layout. The hook should return a complete <link> element.
+
+  Hook Name  : cssstyle
+  Locations  : www/include/Layout.class
+  Description: Used to include inline CSS into the page layout. The
+               hook should return pure CSS, without surrounding
+               <style> elements.
+
+  Hook Name  : group_approved
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/admin/approve-pending.php
+  Description: When a group is approved by a site admin, this hook is called.
+
+  Hook Name  : groupisactivecheckboxpost
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/editgroupinfo.php
+  Description: Called when a plugin is activated for a specific group from 
+               the group's Edit Public Info page. Use this to perform
+               actions to initialise the plugin for a specific group.
+
+  Hook Name  : groupisactivecheckbox
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/editgroupinfo.php
+  Description: Used to display a portion of a form on a group's Edit
+               Public Info page. It should return a HTML <tr> line containing
+               two cells. 
+
+  Hook Name  : groupmenu
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+               toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               selected - A reference to an array index of the tabs.
+               group - The numeric ID of the current group
+  Locations  : www/include/Layout.class
+  Description: Used to provide a plugin specific tab in when viewing
+               group pages.
+  [TODO: The use of the 'group' name as a parameter is inconsistent
+   with most other group plugin hooks - which use group_id.]
+
+  Hook Name  : groupmenu_scm
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+               toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               selected - A reference to an array index of the tabs.
+               group_id - The numeric ID of the current group
+  Locations  : www/include/Layout.class
+  Description: Provides a tab for the SCM system in the group pages.
+
+  Hook Name  : javascript
+  Locations  : www/include/Layout.class
+               www/include/LayoutSF.class
+  Description: Provides a place to add inline Javascript into the page.
+               The output of the hook should be pure Javascript, as it will
+               be placed within an existing <script> block.
+  [TODO: The output of the hook appears after the closing SGML comment marker
+   and before the closing </script> element. Is this what is really indended?]
+
+  Hook Name  : project_admin_plugins
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/project/admin/index.php
+  Description: Provides a place for plugin authors to add a link on the
+               group summary page to the admin page for a plugin.
+
+  Hook Name  : project_after_description
+  Locations  : www/include/project_home.php
+  Description: Provides some space for plugin specific text on a group's 
+               summary page.
+  [TODO: This isn't passed in the group_id... is it of any use??]
+
+  Hook Name  : scm_admin_update
+  Parameters : group_id - The numeric ID of the group
+  Parameters : scmradio
+               A number of scm specific values generated from the
+               form fields created by the scm_admin_page hook.
+  Locations  : www/scm/admin/index.php
+  Description: When the SCM admin page is submitted, this hook is called.
+  [TODO: Is scmradio actually used anywhere or is it legacy? A grep through
+   the source code seems to indicate its never used!]
+
+  Hook Name  : scm_admin_page
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/scm/admin/index.php
+  Description: Used to generate an administrative form for the SCM
+               plugin. All the form fields generated by this hook should
+               be named [pluginname]_[fieldname] where [pluginname] is the
+               SCM plugin name and [fieldname] is a field name for the
+               form element. Using this naming scheme ensures the fields
+               are properly passed as parameters to the scm_admin_update hook.
+
+  Hook Name  : scm_page
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/scm/index.php
+  Description: Show a page for the SCM in use by a group.
+
+  Hook Name  : scm_plugin
+  Parameters : scm_plugins - A reference to an array of plugins providing
+                             SCM features. Each element is a plugin string name.
+  Locations  : common/scm/SCMFactory.class
+  Description: This is used by GForge to identify SCM plugins. Any plugin that
+               provides SCM features should add itself to the scm_plugins array
+               when this hook is called.
+ 
+  Hook Name  : scm_stats
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Shows SCM specific statistics on the group's summary page.
+
+  Hook Name  : search_engines
+  Locations  : www/search/include/SearchManager.class
+
+  Hook Name  : session_before_login
+  Parameters : loginname - The login as passed in from the user
+               passwd - The password as passed in from the user
+  Locations  : common/include/session.php
+  Description: Authentication plugins can use this hook to authenticate
+               a user before GForge passes the authentication details on
+               to its own database. The hook should return true if the 
+               authentication succeeds.
+
+  Hook Name  : site_admin_option_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the site wide administrative
+               pages for your plugin. The hook should return HTML within
+               a <li> block and will appear on the Site Admin page in the
+               Site Utilities list.
+
+  Hook Name  : task_extra_detail
+  Parameters : task_id - The numeric ID for a task
+  Locations  : www/pm/detail_task.php
+               www/pm/mod_task.php
+  Description: Provides a place to include extra information about a
+               task. The hook should return a <tr> row containing 2 cells
+               (or colspan'ed to 2).
+  
+  Hook Name  : usermenu
+  Locations  : www/include/html.php
+  Description: Prints out a tab to show when displaying user pages.
+               Unlike the groupmenu hook, this hook should use the PrintSubMenu
+               method to display the tab itself.
+
+
 
   -- Roland Mas <lolando@debian.org>
