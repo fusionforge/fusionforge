@@ -1,3 +1,7 @@
+2005-05-19  Tom Copeland  <tom@infoether.com>
+
+	* docs/README.Plugin: Applied patch from Vittal Aithal.
+
 2005-05-18  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* www/admin/approve-pending.php: Removed reference to removed
