@@ -26,7 +26,8 @@ computedefault(){
 	DEFAULTusers_host=users.$DEFAULTdomain_name
 	DEFAULTlists_host=lists.$DEFAULTdomain_name
 	# The following three have to be synced when domain_name changes
-	DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
+	# and docs_host is supposed not to be used
+	#DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
 	DEFAULTjabber_host=jabber.$DEFAULTdomain_name
 	DEFAULTupload_host=upload.$DEFAULTdomain_name
 	#
@@ -78,7 +79,8 @@ computedefault(){
 	DEFAULTsys_account_manager_type=$SYSTEM
 	DEFAULTsys_use_jabber=0
 	DEFAULTsys_use_auth_ldap=1
-	DEFAULTsys_ldap_auth_host=localhost
+	# Couldn't find where this is used, maybe some rest of ext auth
+	#DEFAULTsys_ldap_auth_host=localhost
 	DEFAULTsys_ldap_auth_port=389
 	DEFAULTsys_ldap_auth_version=3
 	DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
