@@ -96,7 +96,7 @@ class FRSFile extends Error {
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError($Language->getText('frs_file','error_name_format').$name);
+			$this->setError($Language->getText('frs_file','error_name_format'));
 			return false;
 		}
 //

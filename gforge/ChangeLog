@@ -1,3 +1,7 @@
+2005-05-20  Tom Copeland  <tom@infoether.com>
+
+	* common/frs/FRSFile: Small cleanup to error msg.
+
 2005-05-19  Tom Copeland  <tom@infoether.com>
 
 	* docs/README.Plugin: Applied patch from Vittal Aithal.
