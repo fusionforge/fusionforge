@@ -1,3 +1,8 @@
+2005-05-20	Marcelo Mottalli <marcelo@gforgegroup.com>
+
+	* Enabled option for sending a message to the administrators when 
+	requesting joining to a project
+
 2005-05-20  Tom Copeland  <tom@infoether.com>
 
 	* common/frs/FRSFile: Small cleanup to error msg.
