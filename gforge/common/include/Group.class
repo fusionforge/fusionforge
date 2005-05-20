@@ -2192,7 +2192,7 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
+				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
 				util_send_message($admin_email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
 			}
 		}
@@ -2211,7 +2211,7 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification_submitter', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
+				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification_submitter', array($GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
 				
 				util_send_message($email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
 			}

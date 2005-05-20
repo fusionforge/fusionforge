@@ -1908,10 +1908,13 @@ project_shownotes	section	Project: $1
 project_shownotes	title	File Release Notes and Changelog
 project_joinrequest	join_notice_subject	Request to Join Project $1
 project_joinrequest	request_link	Request to join
-project_joinrequest	join_notice_body	$1 has requested to join your project. \nYou can approve this request here: http://$2/project/admin/?group_id=$3 .
+project_joinrequest	join_notice_body	$1 has requested to join your project. \nYou can approve this request here: http://$2/project/admin/?group_id=$3. \n\nComments by the user:\n$4
+project_joinrequest	already_requested	You have already sent a request to the project administrators. Please wait for their reply.
+project_joinrequest	already_member	You are already a member of this project.
 project_joinrequest	submitted	Your request has been submitted.
 project_joinrequest	title	Request to join project
 project_joinrequest	joining	You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.
+project_joinrequest	comments	If you want, you can send a comment to the administrator:
 project_joinrequest	pending_requests	Pending Join Requests
 project_joinrequest	approved	You have been added to the $1 project.
 project_joinrequest	denied	Your request to join the $1 project was denied by the administrator.

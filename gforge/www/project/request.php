@@ -57,9 +57,10 @@ site_project_header(array('title'=>$Language->getText('project_joinrequest','tit
 ?>
 <p><?php echo $Language->getText('project_joinrequest', 'joining'); ?></p>
 <form action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post">
-<!--<p>
+<p>
+<?php echo $Language->getText('project_joinrequest', 'comments'); ?><br>
 <textarea name="comments" rows="15" cols="60"></textarea>
-</p>-->
+</p>
 <p>
 	<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit'); ?>" />
 </p>

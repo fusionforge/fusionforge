@@ -121,6 +121,8 @@ class GroupJoinRequest extends Error {
 	 * @return boolean Success.
 	 */
 	function create($user_id,$comments) {
+		global $Language;
+		
 		$v = new Validator();
 		$v->check($user_id, "user_id");
 		//$v->check($comments, "comments");
@@ -128,13 +130,27 @@ class GroupJoinRequest extends Error {
 			$this->setError($v->formErrorMsg("Must include "));
 			return false;
 		}
-//TODO check if already member
-//TODO check if already pending request
+
+		// Check if user is already a member of the project
+		$perm =& $this->Group->getPermission( user_get_object($user_id) );
+		if ($perm && is_object($perm) && $perm->isMember()) {
+			$this->setError($Language->getText('project_joinrequest','already_member'));
+			return false;
+		}
+
+		// Check if user has already submitted a request
+		$sql = "SELECT * FROM group_join_request WHERE group_id='".$this->Group->getID()."' AND user_id='".$user_id."'";
+		$result = db_query($sql);
+		if (db_numrows($result)) {
+			$this->setError($Language->getText('project_joinrequest','already_requested'));
+			return false;
+		}
+
 		db_begin();
 
 		$sql="INSERT INTO group_join_request (group_id,user_id,comments,request_date)
 			VALUES ('".$this->Group->getID()."','".$user_id."',
-			'".$comments."','".time()."')";
+			'".htmlspecialchars($comments)."','".time()."')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('GroupJoinRequest::create() Posting Failed '.db_error());
@@ -232,7 +248,10 @@ class GroupJoinRequest extends Error {
 		}
 		$email=implode($emails,',');
 		$subject = $Language->getText('project_joinrequest','join_notice_subject',array($this->Group->getPublicName()));
-		$body = $Language->getText('project_joinrequest','join_notice_body',array($user->getRealName(),$GLOBALS['sys_default_domain'],$this->Group->getId()));
+		$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
+		$body = $Language->getText('project_joinrequest','join_notice_body',array($user->getRealName(),$GLOBALS['sys_default_domain'],$this->Group->getId(),$comments));
+		$body = str_replace("\\n","\n",$body);
+
 		return util_send_message($email,$subject,$body);
 	}
 
