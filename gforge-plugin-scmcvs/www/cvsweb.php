@@ -63,10 +63,11 @@ if ($projectName) {
 	// check if the scm_box is located in another server
 	$scm_box = $Group->getSCMBox();
 	$external_scm = (strtolower($_SERVER["SERVER_NAME"]) != strtolower($scm_box)); 
-	
-	$perm = & $Group->getPermission(session_get_user());
+
 	if (session_loggedin()) {
 		if (user_ismember($Group->getID())) {
+			$perm = & $Group->getPermission(session_get_user());
+			
 			if (!($perm && is_object($perm) && $perm->isCVSReader()) && !$Group->enableAnonSCM()) {
 				exit_permission_denied();
 			}
@@ -74,14 +75,15 @@ if ($projectName) {
 			exit_permission_denied();
 		}
 		
-		// User has access to the CVS... check for valid script
-		// (only if we're working on a local CVS server)
-		if (!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb'))) {
-			exit_error('Error',"cvsweb script doesn't exist");
-		}
-
 	} else if (!$Group->enableAnonSCM()) {		// user is not logged in... check if group accepts anonymous CVS
 		exit_permission_denied();
+	}
+
+	// User has access to the CVS... check for valid script
+	// (only if we're working on a local CVS server, if the CVS server is external the variable
+	// $sys_path_to_scmweb points to the path of the cvsweb script on the remote server)
+	if (!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb'))) {
+		exit_error('Error',"cvsweb script doesn't exist");
 	}
 
 	// should we output html ?
