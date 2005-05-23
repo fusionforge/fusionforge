@@ -9,3 +9,12 @@ switch:
 	@echo "make -f Makefile.$(DIST) <target>"
 	@echo "=========================================================================="
 	@make -f Makefile.$(DIST)
+
+all:
+	@make -f Makefile.$(DIST) all
+chris:
+	@make -f Makefile.$(DIST) chris
+chriss:
+	@make -f Makefile.$(DIST) chriss
+chrisc:
+	@make -f Makefile.$(DIST) chrisc
