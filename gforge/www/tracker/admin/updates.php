@@ -243,7 +243,7 @@
 				exit;
 			}
 			$size = @filesize($input_file);
-			$input_data = fread(fopen($input_file, 'r'), $size);
+			$input_data = addslashes(fread(fopen($input_file, 'r'), $size));
 
 			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
 			echo db_error();

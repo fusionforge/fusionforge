@@ -1,3 +1,8 @@
+2005-05-27  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* www/tracker/admin/updates.php: addslashes() before using string
+	in SQL.
+
 2005-05-20	Marcelo Mottalli <marcelo@gforgegroup.com>
 
 	* Enabled option for sending a message to the administrators when 
