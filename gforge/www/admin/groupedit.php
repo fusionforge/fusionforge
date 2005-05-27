@@ -57,7 +57,7 @@ function do_update(&$group, $is_public, $status, $license,
 		return false;
 	}
 
-	if(!$group->setSCMBox($scm_box)) {
+	if($group->usesSCM() && !$group->setSCMBox($scm_box)) {
 		$feedback .= $group->getErrorMessage();
 		db_rollback();
 		return false;

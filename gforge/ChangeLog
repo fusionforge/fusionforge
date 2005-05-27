@@ -1,3 +1,8 @@
+2005-05-27  Tom Copeland  <tom@infoether.com>
+
+	* www/admin/groupedit.php: Applied patch 1296 'Patch to not update SCM
+	in groupedit if this group don't use SCM' from Vincent Ruiz.
+
 2005-05-27  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* www/tracker/admin/updates.php: addslashes() before using string
