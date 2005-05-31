@@ -38,7 +38,21 @@ $HTML->header(array('title'=>$Language->getText('admin_userlist','userlist')));
  */
 function performAction($newStatus, $statusString, $user_id) {
 	global $Language;
-	db_query("UPDATE users set status='".$newStatus."' WHERE user_id='".$user_id."'");
+	$u =& user_get_object($user_id);
+	if (!$u || !is_object($u)) {
+		exit_error('Error','Could Not Get User');
+	} elseif ($u->isError()) {
+		exit_error('Error',$u->getErrorMessage());
+	}
+	if($newStatus=="D") {
+		if(!$u->delete(true)) {
+			exit_error('Error',$u->getErrorMessage());
+		}
+	} else {
+		if(!$u->setStatus($newStatus)) {
+			exit_error('Error',$u->getErrorMessage());
+		}	
+	}
 	echo "<h2>" .$Language->getText('admin_userlist','user_updated',array($GLOBALS['statusString']))."</h2>";
 }
 
