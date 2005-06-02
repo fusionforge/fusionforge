@@ -9,6 +9,8 @@ $use_ssl = true;
 $svn_root = 'svn';
 $enabled_by_default = 0 ;
 
+$svnlook_bin = "/usr/bin/svnlook";
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
