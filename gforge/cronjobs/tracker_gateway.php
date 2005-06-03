@@ -202,7 +202,7 @@ class TrackerGateway extends Error {
 		//
 		//	Create artifact message
 		//
-		if ( !$Artifact->addMessage($this->Message,$this->FromName) )
+		if ( !$Artifact->addMessage($this->Message,$this->FromName,true) )
 		{
 			$this->setError("ArtifactMessage Error:".$Artifact->getErrorMessage());
 			return false;
