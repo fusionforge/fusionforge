@@ -34,6 +34,7 @@ CREATE USER cvsuser WITH ENCRYPTED PASSWORD 'password';
 
 GRANT SELECT ON groups, plugins, group_plugin, users, user_group, deleted_groups TO cvsuser;
 GRANT INSERT, UPDATE ON deleted_groups TO cvsuser;
+GRANT ALL ON stats_cvs_group, stats_cvs_user TO cvsuser;
 
 */
 

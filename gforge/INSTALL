@@ -278,7 +278,9 @@ cp -R gforge/plugins/cvstracker/www/ gforge/www/plugins/cvstracker/
 
 chown -R root:apache /var/www
 chmod -R 644 gforge/
-chmod -R 700 gforge/cronjobs/
+cd gforge
+find -type d | xargs chmod -R 755
+chmod -R 755 cronjobs/
 
 
 The following will provide an example httpd.conf for apache:
