@@ -70,6 +70,10 @@ if (!$frsr || !is_object($frsr)) {
 	exit_error('Error',$frsr->getErrorMessage());
 }
 
+//we make sure we are not receiving $sys_ftp_upload_dir by POST or GET, to prevent security problems
+if (!is_null($_GET["sys_ftp_upload_dir"]) || !is_null($_POST["sys_ftp_upload_dir"])) {
+	exit_error('Error','External sys_ftp_upload_dir detected');
+}
 $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 
 
@@ -126,8 +130,7 @@ if ($step1) {
 if ($step2) {
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
-
-	if ($userfile && (is_uploaded_file($userfile) || ($sys_use_ftpuploads && $ftp_filename))) {
+	if (($userfile && is_uploaded_file($userfile)) || ($sys_use_ftpuploads && $ftp_filename)){
 		if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 			//file was uploaded already via ftp
 			//use setuid prog to chown it
@@ -137,7 +140,6 @@ if ($step2) {
 			$userfile=$upload_dir.'/'.$ftp_filename;
 			//echo $cmd.'***'.$output.'***'.$userfile;
 		}
-
 		//
 		//  Now create the new FRSFile in the db
 		//
