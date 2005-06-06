@@ -56,6 +56,7 @@ if ($submit) {
 	$license_other = trim($license_other);
 	$description = trim($description);
 	$unix_name = strtolower($unix_name);
+	$feedback = "";
 
 	if ($sys_use_scm && !$scm) {
 		$feedback .= $Language->getText('register','scm_not_selected');
@@ -111,13 +112,13 @@ site_header(array('title'=>$Language->getText('register','project_information'),
 
 <?php echo $Language->getText('register','project_full_name') ?>
 
-<input size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
+<input size="40" maxlength="40" type=text name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>">
 
 <?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
 <p>
 <font size="-1">
 <textarea name="purpose" wrap="virtual" cols="70" rows="10">
-<?php echo stripslashes($purpose); ?>
+<?php echo htmlspecialchars(stripslashes($purpose)); ?>
 </textarea>
 </font>
 
@@ -130,7 +131,7 @@ echo license_selectbox('license',$license);
 <?php echo $Language->getText('register','other_license') ?>
 <br />
 <textarea name="license_other" wrap=virtual cols=60 rows=5>
-<?php echo stripslashes($license_other); ?>
+<?php echo htmlspecialchars(stripslashes($license_other)); ?>
 </textarea>
 <p>
 
@@ -138,13 +139,13 @@ echo license_selectbox('license',$license);
 </p>
 <font size="-1">
 <textarea name="description" wrap="virtual" cols="70" rows="5">
-<?php echo stripslashes($description); ?>
+<?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
 </font>
 
 <?php echo $Language->getText('register','project_unix_name',array($GLOBALS['sys_default_domain'])) ?>
 
-<input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo $unix_name; ?>">
+<input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>">
 
 <?php
 	$SCMFactory=new SCMFactory();

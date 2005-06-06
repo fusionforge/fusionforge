@@ -73,7 +73,7 @@ if (!isset($ccode) || empty($ccode)) {
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <p>
 <?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
-<input type="text" name="unix_name" value="<?php print($unix_name); ?>" />
+<input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />
 </p>
 <p>
 <?php echo $Language->getText('account_register','password'); echo utils_requiredField(); ?><br />
@@ -85,15 +85,15 @@ if (!isset($ccode) || empty($ccode)) {
 </p
 ><p>
 <?php echo $Language->getText('account_options', 'title2'); ?><br />
-<input type="text" name="title" value="<?php echo $title; ?>" size="10" />
+<input type="text" name="title" value="<?php echo htmlspecialchars(stripslashes($title)); ?>" size="10" />
 </p>
 <p>
 <?php echo $Language->getText('account_register','firstname'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="firstname" value="<?php print($firstname); ?>" />
+<input size="30" type="text" name="firstname" value="<?php print(htmlspecialchars(stripslashes($firstname))); ?>" />
 </p>
 <p>
 <?php echo $Language->getText('account_register','lastname'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="lastname" value="<?php print($lastname); ?>" />
+<input size="30" type="text" name="lastname" value="<?php print(htmlspecialchars(stripslashes($lastname))); ?>" />
 </p>
 <p>
 <?php echo $Language->getText('account_register','language'); ?><br />
@@ -113,13 +113,14 @@ if (!isset($ccode) || empty($ccode)) {
 </p>
 <p>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS['sys_users_host']); ?>
-<br /><input size="30" type="text" name="email" value="<?php print($email); ?>" />
+<br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars(stripslashes($email))); ?>" />
 </p>
 <p>
 <?php
 if ($sys_use_jabber) {
 	echo $Language->getText('account_register','jabberaddr').'<br />
-	<input size="30" type="text" name="jabber_address" value="'. $jabber_address .'" /><br />
+	<input size="30" type="text" name="jabber_address" value="'. 
+	htmlspecialchars(stripslashes($jabber_address)) .'" /><br />
 	<input type="checkbox" name="jabber_only" value="1" />
 	'.$Language->getText('account_register','jabberonly').'.';
 }
@@ -127,19 +128,19 @@ if ($sys_use_jabber) {
 </p>
 <p>
 <?php echo $Language->getText('account_options', 'address'); ?><br />
-<input type="text" name="address" value="<?php echo $address; ?>" size="80" />
+<input type="text" name="address" value="<?php echo htmlspecialchars(stripslashes($address)); ?>" size="80" />
 </p>
 <p>
 <?php echo $Language->getText('account_options', 'address'); ?><br />
-<input type="text" name="address2" value="<?php echo $address2; ?>" size="80" />
+<input type="text" name="address2" value="<?php echo htmlspecialchars(stripslashes($address2)); ?>" size="80" />
 </p>
 <p>
 <?php echo $Language->getText('account_options', 'phone'); ?><br />
-<input type="text" name="phone" value="<?php echo $phone; ?>" size="20" />
+<input type="text" name="phone" value="<?php echo htmlspecialchars(stripslashes($phone)); ?>" size="20" />
 </p>
 <p>
 <?php echo $Language->getText('account_options', 'fax'); ?><br />
-<input type="text" name="fax" value="<?php echo $fax; ?>" size="20" />
+<input type="text" name="fax" value="<?php echo htmlspecialchars(stripslashes($fax)); ?>" size="20" />
 </p>
 <p>
 <input type="checkbox" name="mail_site" value="1" checked="checked" />

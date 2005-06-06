@@ -102,10 +102,10 @@ if ($login && !$success) {
 <span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span>
 </p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
-<input type="hidden" name="return_to" value="<?php echo $return_to; ?>" />
+<input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
-<br /><input type="text" name="form_loginname" value="<?php echo $form_loginname; ?>" />
+<br /><input type="text" name="form_loginname" value="<?php echo htmlspecialchars(stripslashes($form_loginname)); ?>" />
 </p>
 <p>
 <?php echo $Language->getText('account_login', 'passwd'); ?>
