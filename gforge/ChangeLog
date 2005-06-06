@@ -1,3 +1,8 @@
+2005-06-06	Vittal Aithal	<gforge@aithal.org>
+
+	* [#1279] Fix to cross-site-scripting off project registration page
+	and login page.
+
 2005-05-27  Tom Copeland  <tom@infoether.com>
 
 	* www/admin/groupedit.php: Applied patch 1296 'Patch to not update SCM
