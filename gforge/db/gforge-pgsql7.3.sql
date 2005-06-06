@@ -21,10 +21,10 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 CREATE SEQUENCE canned_responses_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -38,10 +38,10 @@ CREATE TABLE canned_responses (
 
 
 CREATE SEQUENCE db_images_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -63,10 +63,10 @@ CREATE TABLE db_images (
 
 
 CREATE SEQUENCE doc_data_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -90,10 +90,10 @@ CREATE TABLE doc_data (
 
 
 CREATE SEQUENCE doc_groups_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -108,10 +108,10 @@ CREATE TABLE doc_groups (
 
 
 CREATE SEQUENCE doc_states_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -124,10 +124,10 @@ CREATE TABLE doc_states (
 
 
 CREATE SEQUENCE filemodule_monitor_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -141,10 +141,10 @@ CREATE TABLE filemodule_monitor (
 
 
 CREATE SEQUENCE forum_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -172,10 +172,10 @@ CREATE TABLE forum_agg_msg_count (
 
 
 CREATE SEQUENCE forum_group_list_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -193,10 +193,10 @@ CREATE TABLE forum_group_list (
 
 
 CREATE SEQUENCE forum_monitored_forums_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -210,10 +210,10 @@ CREATE TABLE forum_monitored_forums (
 
 
 CREATE SEQUENCE forum_saved_place_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -228,19 +228,19 @@ CREATE TABLE forum_saved_place (
 
 
 CREATE SEQUENCE foundry_news_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE frs_file_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -259,9 +259,9 @@ CREATE TABLE frs_file (
 
 
 CREATE SEQUENCE frs_filetype_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -274,10 +274,10 @@ CREATE TABLE frs_filetype (
 
 
 CREATE SEQUENCE frs_package_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -293,9 +293,9 @@ CREATE TABLE frs_package (
 
 
 CREATE SEQUENCE frs_processor_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -308,10 +308,10 @@ CREATE TABLE frs_processor (
 
 
 CREATE SEQUENCE frs_release_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -331,9 +331,9 @@ CREATE TABLE frs_release (
 
 
 CREATE SEQUENCE frs_status_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -346,10 +346,10 @@ CREATE TABLE frs_status (
 
 
 CREATE SEQUENCE group_history_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -366,9 +366,9 @@ CREATE TABLE group_history (
 
 
 CREATE SEQUENCE groups_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -411,10 +411,10 @@ CREATE TABLE groups (
 
 
 CREATE SEQUENCE mail_group_list_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -433,10 +433,10 @@ CREATE TABLE mail_group_list (
 
 
 CREATE SEQUENCE news_bytes_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -455,10 +455,10 @@ CREATE TABLE news_bytes (
 
 
 CREATE SEQUENCE people_job_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -477,9 +477,9 @@ CREATE TABLE people_job (
 
 
 CREATE SEQUENCE people_job_category_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -493,10 +493,10 @@ CREATE TABLE people_job_category (
 
 
 CREATE SEQUENCE people_job_inventory_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -512,10 +512,10 @@ CREATE TABLE people_job_inventory (
 
 
 CREATE SEQUENCE people_job_status_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -528,10 +528,10 @@ CREATE TABLE people_job_status (
 
 
 CREATE SEQUENCE people_skill_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -544,10 +544,10 @@ CREATE TABLE people_skill (
 
 
 CREATE SEQUENCE people_skill_inventory_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -563,9 +563,9 @@ CREATE TABLE people_skill_inventory (
 
 
 CREATE SEQUENCE people_skill_level_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -578,9 +578,9 @@ CREATE TABLE people_skill_level (
 
 
 CREATE SEQUENCE people_skill_year_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -593,10 +593,10 @@ CREATE TABLE people_skill_year (
 
 
 CREATE SEQUENCE project_assigned_to_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -610,10 +610,10 @@ CREATE TABLE project_assigned_to (
 
 
 CREATE SEQUENCE project_dependencies_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -628,9 +628,9 @@ CREATE TABLE project_dependencies (
 
 
 CREATE SEQUENCE project_group_list_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -647,10 +647,10 @@ CREATE TABLE project_group_list (
 
 
 CREATE SEQUENCE project_history_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -667,10 +667,10 @@ CREATE TABLE project_history (
 
 
 CREATE SEQUENCE project_metric_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -684,10 +684,10 @@ CREATE TABLE project_metric (
 
 
 CREATE SEQUENCE project_metric_tmp1_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -701,10 +701,10 @@ CREATE TABLE project_metric_tmp1 (
 
 
 CREATE SEQUENCE project_status_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -717,9 +717,9 @@ CREATE TABLE project_status (
 
 
 CREATE SEQUENCE project_task_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -745,10 +745,10 @@ CREATE TABLE project_task (
 
 
 CREATE SEQUENCE project_weekly_metric_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -771,10 +771,10 @@ CREATE TABLE user_session (
 
 
 CREATE SEQUENCE snippet_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -793,10 +793,10 @@ CREATE TABLE snippet (
 
 
 CREATE SEQUENCE snippet_package_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -813,10 +813,10 @@ CREATE TABLE snippet_package (
 
 
 CREATE SEQUENCE snippet_package_item_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -830,10 +830,10 @@ CREATE TABLE snippet_package_item (
 
 
 CREATE SEQUENCE snippet_package_version_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -850,10 +850,10 @@ CREATE TABLE snippet_package_version (
 
 
 CREATE SEQUENCE snippet_version_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -885,10 +885,10 @@ CREATE TABLE stats_agg_pages_by_day (
 
 
 CREATE SEQUENCE survey_question_types_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -901,10 +901,10 @@ CREATE TABLE survey_question_types (
 
 
 CREATE SEQUENCE survey_questions_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -949,10 +949,10 @@ CREATE TABLE survey_responses (
 
 
 CREATE SEQUENCE surveys_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -968,17 +968,17 @@ CREATE TABLE surveys (
 
 
 CREATE SEQUENCE themes_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE trove_cat_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1000,10 +1000,10 @@ CREATE TABLE trove_cat (
 
 
 CREATE SEQUENCE trove_group_link_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1019,19 +1019,19 @@ CREATE TABLE trove_group_link (
 
 
 CREATE SEQUENCE trove_treesums_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE user_bookmarks_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1046,10 +1046,10 @@ CREATE TABLE user_bookmarks (
 
 
 CREATE SEQUENCE user_diary_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1066,10 +1066,10 @@ CREATE TABLE user_diary (
 
 
 CREATE SEQUENCE user_diary_monitor_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1083,9 +1083,9 @@ CREATE TABLE user_diary_monitor (
 
 
 CREATE SEQUENCE user_group_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1108,10 +1108,10 @@ CREATE TABLE user_group (
 
 
 CREATE SEQUENCE user_metric_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1130,10 +1130,10 @@ CREATE TABLE user_metric (
 
 
 CREATE SEQUENCE user_metric0_pk_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1171,9 +1171,9 @@ CREATE TABLE user_ratings (
 
 
 CREATE SEQUENCE users_pk_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1219,19 +1219,19 @@ CREATE TABLE users (
 
 
 CREATE SEQUENCE unix_uid_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE forum_thread_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1245,19 +1245,19 @@ CREATE TABLE project_sums_agg (
 
 
 CREATE SEQUENCE project_metric_wee_ranking1_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE prdb_dbs_dbid_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1292,10 +1292,10 @@ CREATE TABLE prdb_types (
 
 
 CREATE SEQUENCE prweb_vhost_vhostid_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1311,9 +1311,9 @@ CREATE TABLE prweb_vhost (
 
 
 CREATE SEQUENCE artifact_grou_group_artifac_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1339,10 +1339,10 @@ CREATE TABLE artifact_group_list (
 
 
 CREATE SEQUENCE artifact_perm_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1367,9 +1367,9 @@ CREATE VIEW artifactperm_artgrouplist_vw AS
 
 
 CREATE SEQUENCE artifact_status_id_seq
-    INCREMENT BY 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1382,10 +1382,10 @@ CREATE TABLE artifact_status (
 
 
 CREATE SEQUENCE artifact_artifact_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1407,10 +1407,10 @@ CREATE TABLE artifact (
 
 
 CREATE SEQUENCE artifact_history_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1432,10 +1432,10 @@ CREATE VIEW artifact_history_user_vw AS
 
 
 CREATE SEQUENCE artifact_file_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1460,10 +1460,10 @@ CREATE VIEW artifact_file_user_vw AS
 
 
 CREATE SEQUENCE artifact_message_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1485,10 +1485,10 @@ CREATE VIEW artifact_message_user_vw AS
 
 
 CREATE SEQUENCE artifact_monitor_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1503,10 +1503,10 @@ CREATE TABLE artifact_monitor (
 
 
 CREATE SEQUENCE artifact_canned_response_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1650,10 +1650,10 @@ END;
 
 
 CREATE SEQUENCE massmail_queue_id_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1883,10 +1883,10 @@ CREATE TABLE trove_agg (
 
 
 CREATE SEQUENCE trove_treesum_trove_treesum_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1911,10 +1911,10 @@ CREATE TABLE frs_dlstats_file (
 
 
 CREATE SEQUENCE group_cvs_history_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1932,9 +1932,9 @@ CREATE TABLE group_cvs_history (
 
 
 CREATE SEQUENCE themes_theme_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1949,9 +1949,9 @@ CREATE TABLE themes (
 
 
 CREATE SEQUENCE supported_langu_language_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -1967,17 +1967,17 @@ CREATE TABLE supported_languages (
 
 
 CREATE SEQUENCE skills_data_pk_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE skills_data_types_pk_seq
-    INCREMENT BY 1
-    NO MAXVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
     MINVALUE 0
     CACHE 1;
 
@@ -2008,9 +2008,9 @@ CREATE VIEW frs_file_vw AS
 
 
 CREATE SEQUENCE project_categor_category_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2036,10 +2036,10 @@ CREATE VIEW project_history_user_vw AS
 
 
 CREATE SEQUENCE project_messa_project_messa_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2209,9 +2209,9 @@ CREATE VIEW stats_site_all_vw AS
 
 
 CREATE SEQUENCE plugins_pk_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2225,9 +2225,9 @@ CREATE TABLE plugins (
 
 
 CREATE SEQUENCE group_plugin_pk_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2241,10 +2241,10 @@ CREATE TABLE group_plugin (
 
 
 CREATE SEQUENCE user_plugin_pk_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2525,28 +2525,28 @@ CREATE TABLE artifact_type_monitor (
 
 
 CREATE SEQUENCE artifact_extra_field_elements_element_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE artifact_extra_field_data_data_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
 
 CREATE SEQUENCE plugin_cvstracker_artifact_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2561,10 +2561,10 @@ CREATE TABLE plugin_cvstracker_data_artifact (
 
 
 CREATE SEQUENCE plugin_cvstracker_master_seq
-    START WITH 1
-    INCREMENT BY 1
+    START 1
+    INCREMENT 1
     MAXVALUE 2147483647
-    NO MINVALUE
+    MINVALUE 1
     CACHE 1;
 
 
@@ -2739,10 +2739,10 @@ CREATE VIEW artifact_vw AS
 
 
 CREATE SEQUENCE artifact_extra_field_list_extra_field_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
     CACHE 1;
 
 
