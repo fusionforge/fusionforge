@@ -91,7 +91,7 @@ if ($sys_use_forum) {
 			//alias is already taken - perhaps by default
 		} else {
 			$def_aliases[$forname]=1;
-			fwrite($fp,"$forname:	|\"".$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name'))."\"\n");
+			fwrite($fp,"$forname:	\"|".$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name'))."\"\n");
 		}
 	}
 }
