@@ -120,61 +120,62 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #
 #	Subversion vhost using mod_auth_gforge
 #
-#<VirtualHost *:80>
-#  ServerName svn.gforge.company.com
-#  RewriteEngine on
-#  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-#</VirtualHost>
-#<VirtualHost *:443>
-#  ServerName svn.gforge.company.com
-#  ServerAdmin webmaster@svn.gforge.company.com
-#  DocumentRoot /var/www/svn
-#  DAVLockDB    /tmp/svn-DAVLockDB
-#  RewriteEngine on
-#  #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-#  RewriteRule ^/svn$ /index.php [PT]
-#  RewriteRule ^/svn/$ /index.php [PT]
-#  RewriteRule ^/svn/index.html$ /index.php [PT]
-#  RewriteRule ^/index.htm$ /index.php [PT]
-#  RewriteRule ^/index.html$ /index.php [PT]
-#  SSLEngine On 
-#  SSLCertificateFile /etc/httpd/ssl/svn.gforge.company.com.crt
-#  SSLCertificateKeyFile /etc/httpd/ssl/svn.gforge.company.com.pem
-#  <Location /svn>
-#    GforgeSysPath       /var/svn
-#    GforgeGroupsRoot	/svn
-#    GforgeAnonClause    "groups.enable_anonscm >= '1'"
-#    GforgeReadClause	"scm_flags >= '0'"
-#    GforgeWriteClause	"scm_flags >= '1'"
-#    DAV svn
-#    SVNParentPath	/var/svn
-#    SVNAutoversioning	on
-#    SVNIndexXSLT        /svnindex.xsl
-#    AuthType            basic
-#    AuthName            "Subversion User Authentication"
-#
-#    #Auth_PG_host        localhost
-#    Auth_PG_database    gforge
-#    Auth_PG_port        5432
-#    Auth_PG_user        gforge
-#
-#    Auth_PG_pwd         gforge
-#    Auth_PG_pwd_table   users
-#    Auth_PG_pwd_field   user_pw
-#    Auth_PG_uid_field   user_name
-#
-#    Auth_PG_grp_table   groups
-#    Auth_PG_gid_field   unix_group_name
-#
-#    Auth_PG_encrypted   on
-#    Auth_PG_hash_type   MD5
-#    Auth_PG_authoritative on
-#
-#    Require valid-user
-#    php_flag    engine off
-#  </Location>
-#  DirectoryIndex index.php
-#</VirtualHost>
+<VirtualHost *:80>
+  ServerName svn.gforge.company.com
+  RewriteEngine on
+  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
+</VirtualHost>
+<VirtualHost *:443>
+  ServerName svn.gforge.company.com
+  ServerAdmin webmaster@svn.gforge.company.com
+  DocumentRoot /var/www/svn
+  DAVLockDB    /tmp/svn-DAVLockDB
+  RewriteEngine on
+  #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
+  RewriteRule ^/svn$ /index.php [PT]
+  RewriteRule ^/svn/$ /index.php [PT]
+  RewriteRule ^/svn/index.html$ /index.php [PT]
+  RewriteRule ^/index.htm$ /index.php [PT]
+  RewriteRule ^/index.html$ /index.php [PT]
+  SSLEngine On 
+  SSLCertificateFile /etc/httpd/ssl/svn.gforge.company.com.crt
+  SSLCertificateKeyFile /etc/httpd/ssl/svn.gforge.company.com.pem
+  <Location /svn>
+  #  GforgeAuthzEnabled on
+    GforgeSysPath       /var/svn
+    GforgeGroupsRoot	/svn
+    GforgeAnonClause    "groups.enable_anonscm >= '1'"
+    GforgeReadClause	"cvs_flags >= '0'"
+    GforgeWriteClause	"cvs_flags >= '1'"
+    DAV svn
+    SVNParentPath	/var/svn
+    SVNAutoversioning	on
+    SVNIndexXSLT        /svnindex.xsl
+    AuthType            basic
+    AuthName            "Subversion User Authentication"
+
+    #Auth_PG_host        localhost
+    Auth_PG_database    gforge
+    Auth_PG_port        5432
+    Auth_PG_user        gforge
+
+    Auth_PG_pwd         gforge
+   Auth_PG_pwd_table   users
+    Auth_PG_pwd_field   user_pw
+    Auth_PG_uid_field   user_name
+
+    Auth_PG_grp_table   groups
+    Auth_PG_gid_field   unix_group_name
+
+    Auth_PG_encrypted   on
+    Auth_PG_hash_type   MD5
+    Auth_PG_authoritative on
+
+    Require valid-user
+    php_flag    engine off
+  </Location>
+  DirectoryIndex index.php
+</VirtualHost>
 
 #
 #	webDAV editing of project vhosts
