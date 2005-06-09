@@ -34,7 +34,7 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
 // to be revised		
-// 		$this->hooks[] = 'scm_stats';
+ 		$this->hooks[] = 'scm_stats';
 // 		$this->hooks[] = 'group_approved';
 		$this->hooks[] = 'scm_plugin';
 		$this->hooks[] = 'cssfile';
@@ -50,7 +50,7 @@ class SVNPlugin extends SCM {
 
 		$this->register () ;
 	}
-
+	
 	function getDefaultServer() {
 		return $this->default_svn_server ;
 	}
@@ -134,11 +134,11 @@ class SVNPlugin extends SCM {
 				// ######################## Developer Access
 				if ($this->use_ssh) {
 					echo $Language->getText('plugin_scmsvn', 'devsvnssh');
-					print '<p><tt>svn checkout svn+ssh://<i>'.$Language->getText('plugin_scmcvs', 'developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+					print '<p><tt>svn checkout svn+ssh://<i>'.$Language->getText('plugin_scmsvn', 'developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
 				}
 				if ($this->use_dav) {
 					echo $Language->getText('plugin_scmsvn', 'devsvndav');
-					print '<p><tt>svn checkout --username <i>'.$Language->getText('plugin_scmcvs', 'developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+					print '<p><tt>svn checkout --username <i>'.$Language->getText('plugin_scmsvn', 'developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
 				}
 
 				// ######################## SVN Snapshot
@@ -155,7 +155,7 @@ class SVNPlugin extends SCM {
 				<?php
 				// ######################## SVN Browsing
 				echo $HTML->boxTop($Language->getText('plugin_scmsvn', 'history'));
-				echo $this->display_stats(array('group_id'=>$group_id)).'<p>';
+				echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
 				if ($displaySvnBrowser) {
 					echo $Language->getText('plugin_scmsvn', 'browsetree');
 					echo '<p>[<a href="'.$this->account_group_viewcvs_url($group_id).'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
@@ -208,9 +208,15 @@ class SVNPlugin extends SCM {
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
+		list($commit_num, $add_num) = $this->get_total_stats($group_id);
+		echo ' (SVN: '.$Language->getText('plugin_scmsvn','svn_updates',array(number_format($commit_num,0),number_format($add_num,0))).')';
+	}
+
+	// Get the total stats for a group
+	function get_total_stats($group_id) {
 		$result = db_query("
-			SELECT commits, adds
-			FROM plugin_scmsvn_stats
+			SELECT SUM(commits) AS commits, SUM(adds) AS adds
+			FROM stats_cvs_group
 			WHERE group_id='$group_id'");
 		$commit_num = db_result($result,0,0);
 		$add_num	= db_result($result,0,1);
@@ -220,7 +226,7 @@ class SVNPlugin extends SCM {
 		if (!$add_num) {
 			$add_num=0;
 		}
-		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).')';
+		return array($commit_num, $add_num);
 	}
 
 	// Not used at the moment and probably useless
@@ -242,18 +248,78 @@ class SVNPlugin extends SCM {
 	}
 
 	/**
-	 *      account_group_viewcvs_url() - Returns URL for group's SVN interface WWW.
+	 *	account_group_viewcvs_url() - Returns URL for group's SVN interface WWW.
 	 *
 	 *	@param  int  The group id
-	 *      @return URL to access CVS over HTTP
+	 *	@return URL to access CVS over HTTP
 	 */
 	function account_group_viewcvs_url($group_id) {
 		$project =& group_get_object($group_id);
-		return 'http://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
+		return 'http'.(($this->use_ssl) ? 's' : '').'://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
 	}
 
 	function cssfile_scm ($layout) {
-		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmsvn/viewcvs/styles.css" />';
+		// Only show the stylesheet if we're actually in the SVN pages.
+		// This stops styles inadvertently clashing with the main site.
+		if (strncmp($_SERVER['REQUEST_URI'], '/plugins/scmsvn/', 16) == 0) {
+			echo '<link rel="stylesheet" type="text/css" href="/plugins/scmsvn/viewcvs/styles.css" />';
+		}
+	}
+
+	function display_detailed_stats ($params) {
+		global $Language, $HTML;
+		$group_id = $params['group_id'] ;
+
+		$result = db_query('
+			SELECT u.realname, u.user_name, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
+			FROM stats_cvs_user s, users u
+			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
+			GROUP BY group_id, realname, user_name
+			ORDER BY combined DESC, realname;
+		');
+
+		if (db_numrows($result) > 0) {
+			$tableHeaders = array(
+				$Language->getText('plugin_scmsvn', 'realname'),
+				$Language->getText('plugin_scmsvn', 'adds'),
+				$Language->getText('plugin_scmsvn', 'commits')
+			);
+			echo $HTML->listTableTop($tableHeaders);
+
+			$i = 0;
+			$total = array('adds' => 0, 'commits' => 0);
+
+			while($data = db_fetch_array($result)) {
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				echo '<td width="50%">' .
+					'<a href="/users/'.$data['user_name'].'/">'.$data['realname'].'</a>' .
+					'</td><td width="25%" align="right">'.$data['adds']. '</td>'.
+					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['commits'] += $data['commits'];
+				$i++;
+			}
+			list($commit_num, $add_num) = $this->get_total_stats($group_id);
+			if ($commit_num > $total['commits'] ||
+				$add_num > $total['adds']) {
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				echo '<td width="50%">' .
+					$Language->getText('plugin_scmsvn', 'unknown') .
+					'</td><td width="25%" align="right">'.
+					($add_num - $total['adds']) . '</td>'.
+					'<td width="25%" align="right">'.
+					($commit_num - $total['commits']) .
+					'</td></tr>';
+				$i++;
+			}
+			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			echo '<td width="50%"><strong>'.$Language->getText('plugin_scmsvn', 'total').':</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$add_num. '</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$commit_num.'</strong></td>';
+			echo '</tr>';
+			echo $HTML->listTableBottom();
+			echo '<hr size="1" />';
+		}
 	}
 }
 

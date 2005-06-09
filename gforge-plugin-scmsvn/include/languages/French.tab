@@ -16,3 +16,9 @@ plugin_scmsvn	nohistory	Ce projet n'a pas de dépôt Subversion.
 plugin_scmsvn	section	Projet : $1
 plugin_scmsvn	title	Sources
 plugin_scmsvn	svn_repository	Dépôt Subversion
+plugin_scmsvn	adds	Ajouts
+plugin_scmsvn	commits	Commits
+plugin_scmsvn	realname	Nom
+plugin_scmsvn	svn_updates	<strong>$1</strong> commits, <strong>$2</strong> ajouts
+plugin_scmsvn	total	Total
+plugin_scmsvn	unknown	Inconnu	

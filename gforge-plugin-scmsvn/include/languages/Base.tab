@@ -16,3 +16,9 @@ plugin_scmsvn	enable_svn	Use Subversion
 plugin_scmsvn	enable_anonymous_svn	Enable Anonymous Access
 plugin_scmsvn	browseit	Browse Subversion Repository
 plugin_scmsvn	browsetree	<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>
+plugin_scmsvn	realname	Name
+plugin_scmsvn	adds	Adds
+plugin_scmsvn	commits	Updates
+plugin_scmsvn	unknown	Unknown
+plugin_scmsvn	total	Total
+plugin_scmsvn	svn_updates	<strong>$1</strong> updates, <strong>$2</strong> adds
