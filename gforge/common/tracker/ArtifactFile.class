@@ -167,7 +167,7 @@ class ArtifactFile extends Error {
 			$this->setError('ArtifactFile: Unable to Delete');
 			return false;
 		} else {
-			$this->Artifact->addHistory('File Deleted',$this->getID().': '.$filename);
+			$this->Artifact->addHistory('File Deleted',$this->getID().': '.$this->getName());
 			return true;
 		}
 	}
