@@ -43,6 +43,8 @@ $sys_download_host = 'download.gforge.company.com';
 $sys_shell_host = 'shell.gforge.company.com';
 $sys_users_host = 'users.gforge.company.com';
 
+$sys_use_shell=true;
+
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = 'lists.gforge.company.com';
