@@ -97,12 +97,10 @@ class ArtifactTypeHtml extends ArtifactType {
 				$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTISELECT;
 			}
 		}
-
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
 			$i=$keys[$k];
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100,$show_any,$text_any);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
@@ -323,9 +321,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
 		global $Language;
 		$arr =& $this->getExtraFieldElements($extra_field_id);
-		if (!$checked || !is_array($checked)) {
+		if (!$checked) {
 			$checked=array();
 		}
+		if (!is_array($checked)) {
+			$checked = explode(',',$checked);
+		}	
 		$keys=array();
 		$vals=array();
 		$arr =& $this->getExtraFieldElements($extra_field_id);
@@ -360,7 +361,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			<textarea name="extra_fields['.$extra_field_id.']" rows="'.$rows.'" cols="'.$cols.'">'.$contents.'</textarea>';
 	}
 
-	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
+	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		global $Language;
 		if ($text_100=='none'){
 			$text_100=$Language->getText('tracker_artifacttype','nobody');
@@ -374,7 +375,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;
 		}
+			
 		if ($multiple) {
+			if (!is_array($checked)) {
+				$checked = explode(',',$checked);
+			}
 			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,15,$show_100,$text_100);
 		} else {
 			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);

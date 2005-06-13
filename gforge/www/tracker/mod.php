@@ -108,7 +108,6 @@ if (session_loggedin()) {
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
-
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
 		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
 		?>

@@ -188,50 +188,72 @@ class ArtifactQuery extends Error {
 	 *
 	 */
 	function insertElements($id,$status,$assignee,$changed_since,$sort_col,$sort_ord,$extra_fields) {
-//echo "$id,$status,$assignee,$changed_since,$sort_col,$sort_ord,$extra_fields";
 		$res=db_query("DELETE FROM artifact_query_fields WHERE artifact_query_id='$id'");
 		if (!$res) {
 			$this->setError('Deleting Old Elements: '.db_error());
 			return false;
 		}
+		$id = intval($id);
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_STATE."','0','".( (int)$status )."')");
+			VALUES ('$id','".ARTIFACT_QUERY_STATE."','0','".intval($status)."')");
 		if (!$res) {
 			$this->setError('Setting Status: '.db_error());
 			return false;
 		}
+	
 		if (is_array($assignee)) {
+				for($e=0; $e<count($assignee); $e++) {
+					$assignee[$e]=intval($assignee[$e]); 
+				}
 				$assignee=implode(',',$assignee);
+		} else {
+			$assignee = intval($assignee);
+		}	
+		
+		if (preg_match("/[^[:alnum:]_]/", $string)) {
+			$this->setError('ArtifactQuery: not valid sort_col');
+			return false;
 		}
+		
+		if (preg_match("/[^[:alnum:]_]/", $string)) {
+			$this->setError('ArtifactQuery: not valid sort_ord');
+			return false;
+		}
+		
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_ASSIGNEE."','0','".( (int)$assignee )."')");
+			VALUES ('$id','".ARTIFACT_QUERY_ASSIGNEE."','0','".$assignee."')");
 		if (!$res) {
 			$this->setError('Setting Assignee: '.db_error());
 			return false;
 		}
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_CHANGED."','0','".( (int)$changed_since )."')");
+			VALUES ('$id','".ARTIFACT_QUERY_CHANGED."','0','".intval($changed_since)."')");
 		if (!$res) {
 			$this->setError('Setting Change Since: '.db_error());
 			return false;
 		}
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_SORTCOL."','0','".( (int)$sort_col )."')");
+			VALUES ('$id','".ARTIFACT_QUERY_SORTCOL."','0','".$sort_col."')");
 		if (!$res) {
 			$this->setError('Setting Sort Col: '.db_error());
 			return false;
 		}
 		$res=db_query("INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_SORTORD."','0','".( (int)$sort_ord )."')");
+			VALUES ('$id','".ARTIFACT_QUERY_SORTORD."','0','".$sort_ord."')");
 		if (!$res) {
 			$this->setError('Setting Sort Order: '.db_error());
 			return false;
 		}
+
+		if (!$extra_fields) {
+			$extra_fields=array();
+		}
+		
 		$keys=array_keys($extra_fields);
 		$vals=array_values($extra_fields);
 		for ($i=0; $i<count($keys); $i++) {
@@ -242,11 +264,16 @@ class ArtifactQuery extends Error {
 			//	Checkboxes and multi-select may be arrays so store it comma-separated
 			//
 			if (is_array($vals[$i])) {
+				for($e=0; $e<count($vals[$i]); $e++) {
+					$vals[$i][$e]=intval($vals[$i][$e]); 
+				}
 				$vals[$i]=implode(',',$vals[$i]);
+			} else {
+				$vals[$i] =	 intval($vals[$i]);
 			}
 			$res=db_query("INSERT INTO artifact_query_fields 
 				(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-				VALUES ('$id','".ARTIFACT_QUERY_EXTRAFIELD."','".((int)$keys[$i]) ."','". ((int)$vals[$i]) ."')");
+				VALUES ('$id','".ARTIFACT_QUERY_EXTRAFIELD."','".((int)$keys[$i]) ."','". $vals[$i] ."')");
 			if (!$res) {
 				$this->setError('Setting values: '.db_error());
 				return false;

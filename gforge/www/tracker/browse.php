@@ -307,7 +307,6 @@ if ($art_arr && count($art_arr) > 0) {
 		}
 	}
 	$ath->renderExtraFields($sel,true,$Language->getText('tracker_browse','no_change'),false,'',ARTIFACT_EXTRAFIELD_FILTER_INT,true);
-
 		echo   '<tr>
 			<td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a>
 				</strong><br />';

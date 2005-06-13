@@ -35,7 +35,7 @@ if ($submit) {
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
-		if (!$aq->create($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
+		if (!$aq->create($query_name,$_status,$_POST["_assigned_to"],$_changed_from,$_sort_col,$_sort_ord,$_POST["extra_fields"])) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
@@ -64,7 +64,7 @@ if ($submit) {
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
-		if (!$aq->update($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
+		if (!$aq->update($query_name,$_status,$_POST["_assigned_to"],$_changed_from,$_sort_col,$_sort_ord,$_POST["extra_fields"])) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
@@ -116,7 +116,7 @@ $_sort_col=$aq->getSortCol();
 $_sort_ord=$aq->getSortOrd();
 //
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox ('_assigned_to',$_assigned_to,true,'none','-1',false,true);
+$tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
 
 
 //
