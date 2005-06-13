@@ -181,7 +181,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 			<h4><?php echo $Language->getText('project_admin_qrs','release_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-			<input type="text" name="release_name" value="<?php echo $release_name ?>" />
+			<input type="text" name="release_name" value="<?php echo htmlspecialchars(stripslashes($release_name)) ?>" />
 		</td>
 	</tr>
 	<tr>
@@ -238,7 +238,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 			<h4><?php echo $Language->getText('project_admin_qrs','release_notes') ?>:</h4>
 		</td>
 		<td>
-			<textarea name="release_notes" rows="7" cols="50"><?php echo $release_notes; ?></textarea>
+			<textarea name="release_notes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_notes)); ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -246,7 +246,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 			<h4><?php echo $Language->getText('project_admin_qrs','changelog') ?>:</h4>
 		</td>
 		<td>
-			<textarea name="release_changes" rows="7" cols="50"><?php echo $release_changes; ?></textarea>
+			<textarea name="release_changes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_changes)); ?></textarea>
 		</td>
 	</tr>
 	<tr>
