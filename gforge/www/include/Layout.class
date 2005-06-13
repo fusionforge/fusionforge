@@ -1085,7 +1085,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 	
 	/**
-	 * feedback() - returns the htmlized feedback string when an action is performed
+	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
 	 * @param string feedback string
 	 * @return string htmlized feedback
@@ -1095,7 +1095,7 @@ if (isset($params['group']) && $params['group']) {
 			return '';
 		} else {
 			return '
-				<h3><span style="color:red">'.$feedback.'</span></h3>';
+				<h3><span style="color:red">'.htmlspecialchars($feedback).'</span></h3>';
 		}
 	}
 
