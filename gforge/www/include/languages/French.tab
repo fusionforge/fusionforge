@@ -2452,8 +2452,8 @@ stats_index	project_stats	STATISTIQUES PROJET
 stats_index	site_graphs	GRAPHIQUES
 stats_index	sitewide_aggregate_statistics	Statistiques agrégées pour tout le site
 stats_lastlogins	date	Date
-stats_lastlogins	last_logins	Dernières connextions
-stats_lastlogins	most_recent_open	Session récentes
+stats_lastlogins	last_logins	Dernières connexions
+stats_lastlogins	most_recent_open	Sessions récentes
 stats_lastlogins	no_records	Pas d'enregistrement trouvé, erreur de base de donnée
 stats_lastlogins	source_ip	IP source
 stats_lastlogins	username	utilisateur
