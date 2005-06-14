@@ -62,7 +62,7 @@ if ($projectName) {
 	
 	// check if the scm_box is located in another server
 	$scm_box = $Group->getSCMBox();
-	$external_scm = (strtolower($_SERVER["SERVER_NAME"]) != strtolower($scm_box)); 
+	$external_scm = (strtolower($sys_default_domain) != strtolower($scm_box)); 
 
 	if (session_loggedin()) {
 		if (user_ismember($Group->getID())) {
