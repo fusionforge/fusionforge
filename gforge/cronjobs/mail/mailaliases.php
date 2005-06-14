@@ -46,7 +46,7 @@ GRANT INSERT, UPDATE ON deleted_mailing_lists TO listsuser;
 $path_to_cronjobs = dirname(dirname(__FILE__));
 
 // You should also modify this to the correct PHP path and extra configuration (if needed)
-$php_command = "/usr/bin/php4 -d include_path=".ini_get("include_path");
+$php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
 
 
 if (!file_exists('/etc/aliases.org')) {
