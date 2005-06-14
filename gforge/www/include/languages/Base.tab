@@ -990,7 +990,7 @@ help	title	Welcome to $1
 help_forum	close_window	Close Window
 help_forum	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
 help_forum	unknown_help_request	UNKNOWN HELP REQUEST:
-help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
+help_tracker	assignee	This drop-down box represents the person to which a tracker item is assigned.
 help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
 help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
 help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.

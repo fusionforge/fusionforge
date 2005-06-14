@@ -1012,7 +1012,7 @@ help	title	Bienvenue sur $1
 help_forum	attach_file	Quand vous souhaitez ajouter une pièce jointe à un message, vous devez cocher cette case avant de valider les modifications
 help_forum	close_window	Fermer la fenêtre
 help_forum	unknown_help_request	Aide inconnue :
-help_tracker	assignee	Cette liste déroulante représente l'administrateur à qui un élément à suivre est confié.
+help_tracker	assignee	Cette liste déroulante représente la personne à qui un élément à suivre est confié.
 help_tracker	attach_file	Si vous souhaitez annexer un fichier à un élément à suivre, vous devez cocher cette case avant de soumettre les changements.
 help_tracker	canned_response	La liste déroulante de réponses types recense les réponses définies par les administrateurs pour réagir à des demandes de support récurrentes ou à des soumissions de bugs.<br /><br /> Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Administration' pour définir vos propres réponses types.
 help_tracker	category	Cette liste déroulante recense les catégories d'élements à suivre qui sont des parties particulières du projet.<br /><br />Choisir 'Tous' pour un choix plus large.
