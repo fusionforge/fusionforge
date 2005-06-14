@@ -204,6 +204,7 @@ admin	na	N/A
 admin	other	Autre
 admin	reject	Rejeter
 admin	scm_box	Serveur de sources :
+admin	scm_box_empty	Le champ Serveur de sources ne peut pas être vide
 admin	site_admin_home	Accueil de l'administration
 admin	submit_changes	Soumettre les modifications
 admin	submit_new	Proposer une annonce
@@ -533,6 +534,7 @@ admin_vhost	virtual_host_entry_updated	Hôte virtuel mis à jour
 admin_vhost	virtual_host_name	Nom de l'hôte virtuel
 advanced_search	all	tous
 advanced_search	and_search	tous les mots
+advanced_search	error_search_minlength	Le mot recherché doit contenir au moins trois charactères
 advanced_search	headline	Résultats de la recherche dans : $1
 advanced_search	no_matches_found	Aucun résultat trouvé
 advanced_search	no_matches_found_no_under_section	Aucun résultat trouvé - Aucune section disponible (vérifiez vos permissions)
@@ -543,6 +545,8 @@ advanced_search	search_in	Chercher dans
 advanced_search	select	Selectionner
 artifact_canned	required_fields	ArtifactCanned : un nom et un responsable sont requis.
 artifact_category	required_fields	ArtifactCategory : un nom et un responsable sont requis.
+artifact_query	exist_query	La requête existe déjà
+artifact_query	not_exist_query	La requête n'existe pas
 calendar	april	Avril
 calendar	august	Août
 calendar	comingyear	Année prochaine
@@ -586,7 +590,7 @@ calendar	tuesday	Mardi
 calendar	update	Mettre à jour
 calendar	view	Voir :
 calendar	wednesday	Mercredi
-classgroup	acceptedproject	La candidature de votre projet sur $7 a été acceptée.\n\nNom complet du projet : $1\nNom Unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nVotre enregistrement DNS mettra jusqu'à une journée pour être actif sur notre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne fonctionne toujours pas, veuillez ouvrir une demande de support afin que nous puissions résoudre votre problème.\nNotez que tous les comptes Shell/CVS fonctionnent seulement avec SSH1 et pas avec Telnet.\n\nVotre site web est accessible à travers votre compte shell. Vous pouvez lire la documentation du site (lien ci-dessous) afin de prendre connaissance des services disponibles, de leur utilisation et de l'arborescence de votre compte.Si vous vous rendez sur la page de votre projet sur $7 en étant identifié, vous trouverez à votre gauche\nun menu appelé \'Administration du projet\' proposant des fonctionnalités supplémentaires.\n\nNous vous recommandons chaudement d'aller sur $7 et de créer une\ndescription publique pour votre projet. Cette opération peut être effectué sur la page\nde votre projet quand vous êtes identifié en sélectionnant \'Administration du projet\' dans le menu\nde gauche (ou en allant sur http://$3/project/admin/?group_id=$6\naprès l'authentification).\n\nVotre projet n'apparaîtra dans l'Arbre des projets (liste\nprincipale des projets hébergés sur $7 qui offre une grande flexibilité de navigation et de recherche) qu'une fois que vous l'aurez classé dans une catégorie dans les écrans\nd'administration du projet. Afin que les autres utilisateurs puissent trouver votre projet, vous devriez le faire immédiatement.\n\nProfitez du site et n'hésitez pas à parler de $7 autour de vous. N'hésitez pas à nous contacter\n : nous sommes à votre disposition pour vous aider.\n\n-- L'équipe de $7
+classgroup	acceptedproject	La candidature de votre projet sur $7 a été acceptée.\n\nNom complet du projet : $1\nNom Unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nVotre enregistrement DNS mettra jusqu'à une journée pour être actif sur notre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne fonctionne toujours pas, veuillez ouvrir une demande de support afin que nous puissions résoudre votre problème.\nNotez que tous les comptes Shell/CVS fonctionnent seulement avec SSH et pas avec Telnet.\n\nVotre site web est accessible à travers votre compte shell. Vous pouvez lire la documentation du site (lien ci-dessous) afin de prendre connaissance des services disponibles, de leur utilisation et de l'arborescence de votre compte.Si vous vous rendez sur la page de votre projet sur $7 en étant identifié, vous trouverez à votre gauche\nun menu appelé \'Administration du projet\' proposant des fonctionnalités supplémentaires.\n\nNous vous recommandons chaudement d'aller sur $7 et de créer une\ndescription publique pour votre projet. Cette opération peut être effectué sur la page\nde votre projet quand vous êtes identifié en sélectionnant \'Administration du projet\' dans le menu\nde gauche (ou en allant sur http://$3/project/admin/?group_id=$6\naprès l'authentification).\n\nVotre projet n'apparaîtra dans l'Arbre des projets (liste\nprincipale des projets hébergés sur $7 qui offre une grande flexibilité de navigation et de recherche) qu'une fois que vous l'aurez classé dans une catégorie dans les écrans\nd'administration du projet. Afin que les autres utilisateurs puissent trouver votre projet, vous devriez le faire immédiatement.\n\nProfitez du site et n'hésitez pas à parler de $7 autour de vous. N'hésitez pas à nous contacter\n : nous sommes à votre disposition pour vous aider.\n\n-- L'équipe de $7
 classgroup	acceptedprojecttitle	$1 - Projet approuvé
 classgroup	newprojectnotification	Un nouveau projet a été soumis sur $1\n\nNom long du projet :  $2\nDescription fournie : $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou refuser ce projet:\nhttp://$5/admin/approve-pending.php
 classgroup	newprojectnotification_submitter	Un nouveau projet a été soumis sur $1\n\nNom long du projet :  $2\nDescription fournie : $3\nLicense: $4\n\L'équipe d'administration de $1 va maintenant examiner votre\ncandidature. Vous serez tenu informé de sa décision.
@@ -648,13 +652,19 @@ docman	error_no_groups_defined	Aucun groupe de document défini
 docman	submit_new	Soumettre un nouveau document
 docman	turned_off	Ce projet a désactivé la gestion de documents
 docman	view_doc	Voir les documents
+docman_admin	add_docs	[ Ajouter un document ici ]
 docman_admin	add_edit_docgroups	Ajouter/Éditer des groupes de documents
 docman_admin	section	Projet : $1
 docman_admin	title	Gestionnaire de documents : Administration
 docman_admin_addgroups	section	Administration de la gestion de documents
 docman_admin_addgroups	title	Ajouter des groupes de documents
+docman_admin_deletedoc	delete	Supprimer
+docman_admin_deletedoc	delete_warning	Vous êtes sur le point de supprimer définitivement ce document.
+docman_admin_deletedoc	really_sure	Je confirme vraiment
+docman_admin_deletedoc	sure	Je confirme
 docman_admin_docedit	section	Gestionnaire de documents
 docman_admin_docedit	title	Modifier un document
+docman_admin_editdocs	delete_doc	Permanently delete this document
 docman_admin_editdocs	doc_contents	Contenu du document
 docman_admin_editdocs	section	Gestionnaire de documents : Administration
 docman_admin_editdocs	state	Etat
@@ -667,7 +677,9 @@ docman_admin_editgroups	description	Le nom du groupe sera utilisé comme titre. 
 docman_admin_editgroups	edit_group	Modifier un groupe
 docman_admin_editgroups	group_id	Identifiant
 docman_admin_editgroups	group_name	Nom du groupe
+docman_admin_editgroups	group_parent	Appartient à
 docman_admin_editgroups	new_group_name	Nouveau nom du groupe&nbsp;
+docman_admin_editgroups	new_group_parent	Appartient à
 docman_admin_editgroups	section	Gestionnaire de documents : Administration
 docman_admin_editgroups	title	Édition des groupes de documents
 docman_admin_groupedit	section	Gestionnaire de documents : Administration
@@ -677,6 +689,7 @@ docman_common	error_min_title_length	Le titre doit avoir au moins 5 caractères
 docman_common	no_docs	Aucun document trouvé
 docman_common_doc	invalid_docid	Document : n° de document invalide
 docman_common_docgroup	invalid_id	Groupe de documents : n° de groupe de documents invalide
+docman_common_docgroup	invalid_parent_id	DocumentGroup: ID parent invalide
 docman_common_docgroup	name_required	Groupe de documents : le nom est obligatoire
 docman_display_doc	all_languages	Toutes les langues
 docman_display_doc	docmoved	Ce document se trouve maintenant <a href="/docman/view.php/$1/$2">ici</a>
@@ -917,6 +930,8 @@ general	done	Effectué
 general	edit	Modifier
 general	error	Erreur
 general	error_creating	Erreur lors de la création de $1
+general	error_creating_group	Erreur lors de la création de l'objet Group
+general	error_creating_perm	Erreur lors de la création de l'objet Permission
 general	error_getting	Erreur en accédant à $1
 general	error_getting_new	Erreur en accédant à un nouvel objet $1
 general	error_group_id	L'identifiant du groupe dans la base de données ne correspond pas à l'objet groupe.
@@ -1872,9 +1887,12 @@ project_home	title	Information sur le projet
 project_home	tracker_open	<strong>$1</strong> ouvert(s) sur un total de <strong>$2</strong>
 project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
+project_joinrequest	already_member	Vous êtes déjà membre de ce projet.
+project_joinrequest	already_requested	Vous avez déjà envoyé une demande aux administrateurs de ce projet. Merci d'attendre leur réponse.
 project_joinrequest	approved	Vous avez été ajouté au projet $1.
+project_joinrequest	comments	Si vous le souhaitez, vous pouvez envoyer un commentaire à l'administrateur :
 project_joinrequest	denied	Votre demande pour rejoindre le projet $1 a été refusé par le(s) administrateur(s).
-project_joinrequest	join_notice_body	$1 a demandé à rejoindre votre projet. Vous pouvez approuver sa demande sur la <a href="http://$2/project/admin/?group_id=$3">page d'administration du projet</a>.
+project_joinrequest	join_notice_body	$1 a demandé à rejoindre votre projet. Vous pouvez approuver sa demande sur la <a href="http://$2/project/admin/?group_id=$3">page d'administration du projet</a>.\n\nCommentaires de l'utilisateur :\n$4
 project_joinrequest	join_notice_subject	Demande pour rejoindre le projet $1
 project_joinrequest	joining	Vous pouvez demander à rejoindre le projet en cliquant sur le bouton Valider. Le(s) administrateur(s) recevra(ont) un courrier électronique pour approuver ou refuser votre demande.
 project_joinrequest	nonepending	Aucune demande en attente
@@ -2101,6 +2119,8 @@ reporting	time_tracking_sitetimebar	Total global des heures (graphique)
 reporting	time_tracking_usersummary	Liste globale des tâches et des heures (rapport)
 reporting	time_tracking_usertime	Statistiques individuelles par utilisateur (graphique)
 reporting	title	Statistiques
+reporting	tracker_items_closed	Eléments fermés
+reporting	tracker_items_opened	Eléments ouverts
 reporting	type	Type
 reporting	update	Mettre à jour
 reporting	user	Utilisateur
@@ -2720,6 +2740,7 @@ tracker	admin	Administration
 tracker	any	Tous
 tracker	assigned_to	Confié à
 tracker	assignee	Responsable
+tracker	build_query	Construire une requête
 tracker	category	Catégorie
 tracker	category_any	Tous
 tracker	changed	Modifié
@@ -2749,8 +2770,16 @@ tracker	open_date	Date d'ouverture
 tracker	pagetitle	Suivi&nbsp;
 tracker	please_login	$1 Identifiez-vous $2
 tracker	priority	Priorité
+tracker	query_default	Dernière requête
+tracker	query_delete	Supprimer la requête
+tracker	query_load	Charger la requête
+tracker	query_make_default	Définir par défaut
+tracker	query_name	Nommer et sauver la requête
+tracker	query_update	Mettre à jour la requête
 tracker	reporting	Affichage
 tracker	resolution	Résolution
+tracker	run_query	Exécuter
+tracker	saved_queries	Sauvegarder les modifications
 tracker	security_note	N'entrez SURTOUT PAS de mot de passe ou d'informations confidentielles dans vos messages !
 tracker	status	Etat
 tracker	status_any	Tous
@@ -2830,6 +2859,7 @@ tracker_admin_add_users	technician	Technicien
 tracker_admin_add_users	title	Ajouter/Mettre à jour les permission d'un utilisateur de traceur pour $1</s>
 tracker_admin_add_users	update_permissions	Mise à jour des permissions de développeur
 tracker_admin_add_users	user_name	Nom d'utilisateur
+tracker_admin_build_boxes	add_field	Ajouter un nouveau champ personnaliséAdd New Custom Field
 tracker_admin_build_boxes	box_add_choices	ajouter des éléments
 tracker_admin_build_boxes	box_change_warning	Il n'est pas recommandé que vous changiez le nom d'un champ car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un champ, tous les éléments concernés seront mis à jour avec le nouveau nom.
 tracker_admin_build_boxes	box_name	Nom du champ
@@ -2838,26 +2868,30 @@ tracker_admin_build_boxes	box_name_updated	Nom du champ modifié
 tracker_admin_build_boxes	box_sizeattr1	Taille du champ texte/Lignes de la zone de texte
 tracker_admin_build_boxes	box_sizeattr2	Longeur maximale du champ texte/Colonne de la zone de texte
 tracker_admin_build_boxes	box_sizerows	Les champs texte et les zones de textes ont besoin d'avoir une taille/longueur maximale et le nombre de lignes/colonnes respectivement définis.
+tracker_admin_build_boxes	box_status	Etat
 tracker_admin_build_boxes	box_type	Type de champ supplémentaire
 tracker_admin_build_boxes	box_type_checkbox	Cases à cocher
 tracker_admin_build_boxes	box_type_multiselect	Liste déroulante à sélection multiple
 tracker_admin_build_boxes	box_type_radio	Boutons radio
 tracker_admin_build_boxes	box_type_select	Liste déroulante
+tracker_admin_build_boxes	box_type_status	Etat
 tracker_admin_build_boxes	box_type_text	Champ texte
 tracker_admin_build_boxes	box_type_textarea	Zone de texte
 tracker_admin_build_boxes	box_update_title	Modifier un champ dans : $1
-tracker_admin_build_boxes	box_warning	Une fois que vous avez ajouté un champ, il ne peut être supprimé.
 tracker_admin_build_boxes	choice_change_warning	Il n'est pas recommandé que vous changiez le nom d'un choix car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un choix, tous les éléments concernés seront mis à jour avec le nouveau nom.
 tracker_admin_build_boxes	choice_inserted	Elément ajouté
 tracker_admin_build_boxes	choice_updated		Elément mis à jour
 tracker_admin_build_boxes	choice_warning	Une fois que vous avez ajouté un nouvel élément, il ne peut être supprimé
 tracker_admin_build_boxes	copy	Copier
 tracker_admin_build_boxes	delete	Supprimer
+tracker_admin_build_boxes	delete_template	Supprimer le modèle
+tracker_admin_build_boxes	download_template	Télécharger le modèle par défaut
 tracker_admin_build_boxes	edit	Modifier
 tracker_admin_build_boxes	error_inserting_box	Erreur lors de l'ajout d'un champ
 tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un élément
 tracker_admin_build_boxes	error_updating	Erreur lors de la mise à jour du nom du champ
 tracker_admin_build_boxes	extrafield_deleted	Champ supplémentaire supprimé
+tracker_admin_build_boxes	manage_template	Modèle de rendu de champ personnalisé
 tracker_admin_build_boxes	no_box	Vous n'avez pas défini de champ.
 tracker_admin_build_boxes	no_choice	Vous n'avez pas défini d'élément.
 tracker_admin_build_boxes	opt_add_name	Ajouter un nouvel élément
@@ -2868,11 +2902,14 @@ tracker_admin_build_boxes	required_box_name	Un nom de champ est nécessaire
 tracker_admin_build_boxes	required_choice_name	Un nom d'élément est nécessaire
 tracker_admin_build_boxes	status_any	Tous
 tracker_admin_build_boxes	title	 Ajouter/Modifier les champs supplémentaires
+tracker_admin_build_boxes	tracker_box_add_options	Ajouter des options
 tracker_admin_build_boxes	tracker_box_id	Identifiant
 tracker_admin_build_boxes	tracker_box_option_add	Ajouter/Modifier
 tracker_admin_build_boxes	tracker_box_option_title	Eléments définis
 tracker_admin_build_boxes	tracker_box_title	Champs supplémentaires définis
+tracker_admin_build_boxes	tracker_box_type	Type
 tracker_admin_build_boxes	tracker_choice_id	Identifiant
+tracker_admin_build_boxes	upload_template	Ajouter/Modifier un modèle
 tracker_admin_choose	title	Administration des traceurs
 tracker_admin_copy	choices_title	Copier les choix à partir du champ supplémentaire $1
 tracker_admin_copy	copy_choices	Cliquer ici pour copier ces éléments dans un autre outil de suivi
@@ -2914,8 +2951,8 @@ tracker_artifact	error_summary_required	Trace : il faut un titre.
 tracker_artifact	error_valid_email_required	Installer le suivi : une adresse e-mail valide est requise.
 tracker_artifact	logged_in_no	non-connecté
 tracker_artifact	logged_in_yes	connecté
-tracker_artifact	monitoring_activated	Suivi activé
-tracker_artifact	monitoring_deactivated	Suivi arrêté
+tracker_artifact	monitoring_activated	Surveillance activée
+tracker_artifact	monitoring_deactivated	Surveillance arrêtée
 tracker_artifact	nothing_changed	Aucun changement - Mise à jour annulée
 tracker_artifact	private_error	Traces : seul un groupe de membres peut voir les traces d'un type privé.
 tracker_artifactfile	required_fields	Fichier-trace : un nom de fichier, un type, une taille, and une donnée sont requis.
@@ -2932,10 +2969,14 @@ tracker_artifacttype	add_artifact_types	Ajouter/Mettre à jour les outils de sui
 tracker_artifacttype	admin	Administration
 tracker_artifacttype	admin_functions	Fonctions d'administration
 tracker_artifacttype	browse	Parcourir
+tracker_artifacttype	csv	Télécharger .csv
 tracker_artifacttype	edit_options	Éditer/Mettre à jour les options de&nbsp;
 tracker_artifacttype	invalid_emails	Une ou plusieurs adresses email semblent invalides
+tracker_artifacttype	monitoring_activated	Surveillance activée
+tracker_artifacttype	monitoring_deactivated	Surveillance arrêtée
 tracker_artifacttype	nobody	Personne
 tracker_artifacttype	none	Aucun(e)
+tracker_artifacttype	query	Requête
 tracker_artifacttype	reporting	Rapport
 tracker_artifacttype	required_fields	Type de trace : nom, description, délai avant retard, persistance.
 tracker_artifacttype	submit_new	Nouveau
