@@ -17,7 +17,7 @@ $svn_path='/usr/local/svn/bin';
 $file_owner='nobody:nogroup';
 
 //	Where is the SVN repository?
-$svn=$GLOBALS["sys_svnroot"];
+$svn=$svndir_prefix;
 
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;
@@ -38,6 +38,13 @@ $repos_type = '';
 
 $err .= "Creating Groups at ". $svn."\n";
 
+if (empty($svn) || !preg_match('/[^\\/]/',$svn)) {
+	$err .=  "Error! svndir_prefix Is Not Set Or Points To The Root Directory!";
+				echo $err;
+				cron_entry(21,$err);
+				exit;
+}
+
 $res = db_query("SELECT is_public,enable_anonscm,unix_group_name 
 	FROM groups, plugins, group_plugin 
 	WHERE groups.status != 'P' 
@@ -48,6 +55,7 @@ $res = db_query("SELECT is_public,enable_anonscm,unix_group_name
 if (!$res) {
 	$err .=  "Error! Database Query Failed: ".db_error();
 	echo $err;
+	cron_entry(21,$err);
 	exit;
 }
 
@@ -57,6 +65,7 @@ if (!$res) {
 if ($one_repository && !is_dir($repos_co)) {
 	$err .= "Error! Checkout Repository Does Not Exist!";
 	echo $err;
+	cron_entry(21,$err);
 	exit;
 } elseif (!is_dir($svn)) {
 	passthru ("mkdir $svn");
@@ -87,7 +96,7 @@ while ( $row =& db_fetch_array($res) ) {
 			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
 			svn_hooks("$svn/".$row["unix_group_name"]);
 			addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
-		}
+		}	
 		$cmd = 'chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"]." $svn";
 		passthru ($cmd);
 	}
