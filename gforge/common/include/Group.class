@@ -1886,7 +1886,7 @@ class Group extends Error {
 			Activate member(s) of the project
 		*/
 
-		$member_res = db_query("SELECT user_id
+		$member_res = db_query("SELECT user_id, role_id
 			FROM user_group
 			WHERE group_id='".$this->getID()."'");
 
@@ -1897,6 +1897,7 @@ class Group extends Error {
 			for ($i=0; $i<$rows; $i++) {
 
 				$member =& user_get_object(db_result($member_res,$i,'user_id'));
+				$roleId = db_result($member_res,$i,'role_id');
 
 				if (!$member || !is_object($member)) {
 					$this->setError('Error getting member object');
@@ -1906,7 +1907,7 @@ class Group extends Error {
 					return false;
 				}
 
-				if (!$this->addUser($member->getUnixName(),1)) {
+				if (!$this->addUser($member->getUnixName(),$roleId)) {
 					return false;
 				}
 			}
