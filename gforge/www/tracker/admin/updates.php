@@ -226,11 +226,9 @@
 
 			if (!$ath->delete($sure,$really_sure)) {
 				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
-				unset($ath);
-				$delete=0;
-				$atid=0;
 			} else {
-				$feedback .= $Language->getText('tracker_admin','deleted');
+				header ("Location: /tracker/admin/?group_id=${group_id}&tracker_deleted=1");
+				exit;
 			}
 
 		//

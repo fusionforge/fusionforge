@@ -118,6 +118,9 @@ if ($group_id && $atid) {
 	}
 
 } elseif ($group_id) {
+	if (isset($_GET['tracker_deleted'])) {
+		$feedback .= $Language->getText('tracker_admin','deleted');
+	}
 
 	include ('ind.php');
 
