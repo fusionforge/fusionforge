@@ -95,6 +95,13 @@ if (!file_exists('/etc/group.org')) {
 	exit;
 }
 
+if (!preg_match('/[^\\/]/',$groupdir_prefix)) {
+	$err .=  "Error! groupdir_prefix Points To Root Directory!";
+	echo $err;
+	cron_entry(16,$err);
+	exit;
+}
+
 //
 //	Get the users' unix_name and password out of the database
 //	ONLY USERS WITH CVS COMMIT PRIVS ARE ADDED
