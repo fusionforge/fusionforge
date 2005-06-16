@@ -129,8 +129,9 @@ class RoleObserver extends Error {
 		}
 
 		//
-		//	AnonCVS
+		//	AnonSCM
 		//
+		$this->Group->fetchData( $this->Group->getID() );
 		$this->setting_array['scmpublic'][0]=$this->Group->enableAnonSCM();
 		$this->setting_array['projectpublic'][0]=$this->Group->isPublic();
 //echo '<html><body><pre>'.print_r($this->setting_array).'</pre>';
@@ -212,19 +213,23 @@ class RoleObserver extends Error {
 				//	See if this setting changed. If so, then update it
 				//
 				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
-					if ($usection_name == 'scmpublic' || $usection_name == 'projectpublic') {
+					if ($usection_name == 'scmpublic' || 
+						$usection_name == 'projectpublic') {
 						if (!$data['scmpublic'][0]) {
 							$data['scmpublic'][0]=0;
 						}
 						if (!$data['projectpublic'][0]) {
 							$data['projectpublic'][0]=0;
+							// Groups cannot be private and have public SCM
+							// so we should always ensure that the scm is 
+							// private if we change a group to private.
+							$data['scmpublic'][0]=0;
 						}
 						$sql="UPDATE groups
 							SET
 							enable_anonscm='".$data['scmpublic'][0]."',
 							is_public='".$data['projectpublic'][0]."'
 							WHERE group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
 							$res=db_query($sql);
 							if (!$res) {
 								$this->setError('update::group::'.db_error());
