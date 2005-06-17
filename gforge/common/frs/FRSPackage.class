@@ -369,32 +369,56 @@ class FRSPackage extends Error {
 			return false;
 		}
 
-		if (!util_is_valid_filename($name)) {
-			$this->setError($Language->getText('frs_package','error_name_format'));
-		}
-
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
 			$this->setPermissionDeniedError();
 			return false;
+		}		
+		if($this->getName()!=htmlspecialchars($name)) {
+			$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->Group->getID()."'
+			AND name='".htmlspecialchars($name)."'");
+			if (db_numrows($res)) {
+				$this->setError('FRSPackage::update() Error Updating Package: Name Already Exists');
+				return false;
+			}
 		}
-
+		db_begin();
 		$res=db_query("UPDATE frs_package SET
 			name='".htmlspecialchars($name)."',
 			status_id='$status'
 			WHERE group_id='".$this->Group->getID()."'
 			AND package_id='".$this->getID()."'");
-
 		if (!$res || db_affected_rows($res) < 1) {
+			db_rollback();
 			$this->setError('FRSPackage::update() Error On Update: '.db_error());
 			return false;
 		}
-
-		$this->fetchData($this->getID());
-
+		$olddirname = $this->getFileName();
+		if(!$this->fetchData($this->getID())){
+			db_rollback();
+			$this->setError('FRSPackage::update() Error Updating Package: Couldn´t fetch data');
+			return false;
+		}
+		$newdirname = $this->getFileName();
+		$olddirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$olddirname;
+		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$newdirname;
+		
+		if(($olddirname!=$newdirname)){
+			if(is_dir($newdirlocation)){
+				db_rollback();
+				$this->setError('FRSPackage::update() Error Updating Package: Directory Already Exists');
+				return false;	
+			} else {
+				if(!@rename($olddirlocation,$newdirlocation)) {
+					db_rollback();
+					$this->setError('FRSPackage::update() Error Updating Package: Couldn´t rename dir');
+					return false;
+				}
+			}
+		}	
+		db_commit();
 		return true;
-
 	}
 
 	/**

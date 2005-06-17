@@ -157,7 +157,6 @@ class FRSFile extends Error {
 			$this->setError($Language->getText('frs_file','error_cannot_move').': '.$newfilelocation.$name);
 			return false;
 		}
-
 		if (!$release_time) {
 			$release_time=time();
 		}
