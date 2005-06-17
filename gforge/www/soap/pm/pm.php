@@ -177,8 +177,12 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
+/*
 	'id' => array('name'=>'id', 'type' => 'xsd:int'),
 	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:int'),
+	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string')
+*/
+	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
 	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string')
 	)
 );
@@ -400,22 +404,24 @@ function &getProjectTaskCategories($session_ser,$group_id,$group_project_id) {
 	} elseif ($at->isError()) {
 		return new soap_fault ('','getProjectTaskCategories',$at->getErrorMessage(),$at->getErrorMessage());
 	}
+	
+	$cat_arr = $at->getCategoryObjects();
 
-	return projectcategories_to_soap($at->getCategoryObjects());
+	return projectcategories_to_soap($cat_arr);
 }
 
 //
 //  convert array of artifact categories to soap data structure
 //
-function projectcategories_to_soap($at_arr) {
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
+function projectcategories_to_soap($cat_arr) {
+	$return = array();
+	for ($i=0; $i<count($cat_arr); $i++) {
+		if ($cat_arr[$i]->isError()) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'group_project_id'=>$at_arr->data_array['group_project_id'],
-				'category_name'=>$at_arr->data_array['category_name']
+				'category_id'=>$cat_arr[$i]->data_array['category_id'],
+				'category_name'=>$cat_arr[$i]->data_array['category_name']
 			);
 		}
 	}
@@ -453,28 +459,31 @@ function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,
 		return new soap_fault ('','getProjectTasks',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
-	$at = new ProjectGroup($grp,$group_project_id);
-	if (!$at || !is_object($at)) {
+	$pg = new ProjectGroup($grp,$group_project_id);
+	if (!$pg || !is_object($pg)) {
 		return new soap_fault ('','getProjectTasks','Could Not Get ProjectGroup','Could Not Get ProjectGroup');
-	} elseif ($at->isError()) {
-		return new soap_fault ('','getProjectTasks',$at->getErrorMessage(),$at->getErrorMessage());
+	} elseif ($pg->isError()) {
+		return new soap_fault ('','getProjectTasks',$pg->getErrorMessage(),$pg->getErrorMessage());
 	}
 
-	$af = new ProjectTaskFactory($at);
-	if (!$af || !is_object($af)) {
+	$ptf = new ProjectTaskFactory($pg);
+	if (!$ptf || !is_object($ptf)) {
 		return new soap_fault ('','getProjectTasks','Could Not Get ProjectTaskFactory','Could Not Get ProjectTaskFactory');
-	} elseif ($af->isError()) {
-		return new soap_fault ('','getProjectTasks',$af->getErrorMessage(),$af->getErrorMessage());
+	} elseif ($ptf->isError()) {
+		return new soap_fault ('','getProjectTasks',$ptf->getErrorMessage(),$ptf->getErrorMessage());
 	}
 
-	$af->setup(0,0,0,0,$assigned_to,$status,$category,$group);
-	return projecttasks_to_soap($af->getProjectTasks());
+	$ptf->setup(0,0,0,0,$assigned_to,$status,$category,$group);
+	$tasks_arr = $ptf->getTasks();
+	return projecttasks_to_soap($tasks_arr);
 }
 
 //
 //  convert array of projecttasks to soap data structure
 //
 function projecttasks_to_soap($at_arr) {
+	$return = array();
+
 	for ($i=0; $i<count($at_arr); $i++) {
 		if ($at_arr[$i]->isError()) {
 			//skip if error
@@ -492,7 +501,7 @@ function projecttasks_to_soap($at_arr) {
 				'status_id'=>$at_arr[$i]->data_array['status_id'],
 				'category_id'=>$at_arr[$i]->data_array['category_id'],
 				'is_dependent_on_task_id'=>$at_arr[$i]->getDependentOn(),
-				'assigned_to'=>$at_arr[$i]->$at_arr[$i]->getAssignedTo()
+				'assigned_to_id'=>$at_arr[$i]->getAssignedTo()
 			);
 		}
 	}
