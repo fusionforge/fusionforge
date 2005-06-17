@@ -14,7 +14,7 @@ require ('squal_pre.php');
 $svn_path='/usr/local/svn/bin';
 
 //	Owner of files - apache
-$file_owner='nobody:nogroup';
+$file_owner=$sys_apache_user.':'.$sys_apache_group;
 
 //	Where is the SVN repository?
 $svn=$svndir_prefix;
@@ -37,6 +37,13 @@ $repos_type = '';
 */
 
 $err .= "Creating Groups at ". $svn."\n";
+
+if (empty($sys_apache_user) || empty($sys_apache_group)) {
+	$err .=  "Error! sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
+				echo $err;
+				cron_entry(21,$err);
+				exit;
+}
 
 if (empty($svn) || !preg_match('/[^\\/]/',$svn)) {
 	$err .=  "Error! svndir_prefix Is Not Set Or Points To The Root Directory!";
