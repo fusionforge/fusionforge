@@ -40,16 +40,16 @@ $err .= "Creating Groups at ". $svn."\n";
 
 if (empty($sys_apache_user) || empty($sys_apache_group)) {
 	$err .=  "Error! sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
-				echo $err;
-				cron_entry(21,$err);
-				exit;
+	echo $err;
+	cron_entry(21,$err);
+	exit;
 }
 
 if (empty($svn) || !preg_match('/[^\\/]/',$svn)) {
 	$err .=  "Error! svndir_prefix Is Not Set Or Points To The Root Directory!";
-				echo $err;
-				cron_entry(21,$err);
-				exit;
+	echo $err;
+	cron_entry(21,$err);
+	exit;
 }
 
 $res = db_query("SELECT is_public,enable_anonscm,unix_group_name 
