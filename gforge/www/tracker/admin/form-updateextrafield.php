@@ -39,6 +39,10 @@
 			<input type="hidden" name="attribute2" value="0" />
 		<?php } ?>
 			<p>
+			<strong><?php echo $Language->getText('tracker_admin_build_boxes','alias') ?>:</strong><br />
+			<input type="text" name="alias" value="<?php echo $ac->getAlias(); ?>" /></p>
+			</p>
+			<p>
 			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
 				</span></strong></p>
 			<p>

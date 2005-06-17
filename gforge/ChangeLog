@@ -1,3 +1,8 @@
+2005-06-17	Marcelo Mottalli	<marcelo@gforgegroup.com>
+
+	* Fixed bugs in the SOAP interface
+	* Added the option of specifying aliases for the extra fields in an artifact
+
 2005-06-06	Vittal Aithal	<gforge@aithal.org>
 
 	* [#1279] Fix to cross-site-scripting off project registration page

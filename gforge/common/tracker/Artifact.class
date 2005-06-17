@@ -214,6 +214,10 @@ class Artifact extends Error {
 		//	accurate
 		//
 		$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
+		if (!$status_id) {
+			$this->setError($Language->getText('tracker_artifact','error_remap_status'));
+			return false;
+		}
 
 		db_begin();
 
@@ -629,9 +633,12 @@ class Artifact extends Error {
 	 */
 	function &getMessageObjects() {
 		$res=$this->getMessages();
-		while ($arr =& db_fetch_array($res)) {
-			$return[]=new ArtifactMessage($arr['artifact_id'],$arr);
+		$return = array();
+		while ($arr = db_fetch_array($res)) {
+			//$return[]=new ArtifactMessage($arr['artifact_id'],$arr);
+			$return[] = new ArtifactMessage($this, $arr);
 		}
+		return $return;
 	}
 
 	/**
@@ -1102,16 +1109,19 @@ class Artifact extends Error {
 	 *
 	 *	@return	array	array of data
 	 */
-	function &getExtraFieldData() {
+	function getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
 				WHERE artifact_id='".$this->getID()."' ORDER BY extra_field_id");
 			$ef = $this->ArtifactType->getExtraFields();
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					//accumulate a sub-array of values in cases where you may have multiple rows
+					if (!is_array($this->extra_field_data[$arr['extra_field_id']])) {
+						$this->extra_field_data[$arr['extra_field_id']] = array();
+					}
 					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
 				} else {
 					$this->extra_field_data[$arr['extra_field_id']]=$arr['field_data'];

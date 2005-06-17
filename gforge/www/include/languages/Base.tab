@@ -2878,9 +2878,14 @@ tracker_admin_build_boxes	tracker_box_option_title	Elements Defined
 tracker_admin_build_boxes	tracker_box_type	Type
 tracker_admin_build_boxes	tracker_box_add_options	Add Options
 tracker_admin_build_boxes	box_name	Custom Field Name
+tracker_admin_build_boxes	alias	Field alias
 tracker_admin_build_boxes	opt_add_name	Add New Element
 tracker_admin_build_boxes	choice_warning	Once you add a new element, it cannot be deleted
 tracker_admin_build_boxes	required_box_name	a field name is required
+tracker_admin_build_boxes	required_alias	The alias is required
+tracker_admin_build_boxes	invalid_alias	The alias contains invalid characters. Only letters, numbers, hypens (-) and underscores (_) allowed.
+tracker_admin_build_boxes	reserved_alias	'$1' is a reserved alias. Please provide another name.
+tracker_admin_build_boxes	conflicting_alias	'$1' conflicts with another alias. Please provide a different name.
 tracker_admin_build_boxes	required_choice_name	an element name is required
 tracker_admin_build_boxes	no_box	You have not defined any custom fields
 tracker_admin_build_boxes	no_choice	You have not defined any elements
@@ -2896,7 +2901,7 @@ tracker_admin_build_boxes	box_name_updated	Custom Field updated
 tracker_admin_build_boxes	choice_updated		Element updated	
 tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name
 tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the element name because other things are dependent upon it. When you change the element name, all related items will be changed to the new name
-tracker_admin_build_boxes	error_updating	Error updating a custom field name
+tracker_admin_build_boxes	error_updating	Error updating a custom field
 tracker_admin_copy	copy_choices	Click here to copy these elements to other trackers
 tracker_admin_copy	choices_title	Copy choices from custom field $1
 tracker_admin_copy	from_box	Copy From 
@@ -2935,6 +2940,7 @@ tracker_artifact	error_body_required	Artifact: Message Body Is Required
 tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
 tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
 tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
+tracker_artifact	error_remap_status	Artifact: Error remapping status
 tracker_artifact	logged_in_no	Logged In: NO
 tracker_artifact	logged_in_yes	Logged In: YES
 tracker_monitor	monitoring_activated	Now Monitoring

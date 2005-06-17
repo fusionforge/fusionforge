@@ -113,7 +113,7 @@ class ArtifactMessage extends Error {
 		}
 
 		$sql="insert into artifact_message (artifact_id,submitted_by,from_email,adddate,body) 
-			VALUES ('". $this->getID() ."','$user_id','$by','". time() ."','". htmlspecialchars($body). "')";
+			VALUES ('". $this->Artifact->getID() ."','$user_id','$by','". time() ."','". htmlspecialchars($body). "')";
 		$res = db_query($sql);
 
 		if (!$res) {

@@ -1121,9 +1121,9 @@ class User extends Error {
 				for ($i=0; $i<db_numrows($result); $i++) {
 					$pref["".db_result($result,$i,'preference_name').""]=db_result($result,$i,'preference_value');
 				}
-				$this->user_pref =& $pref;
+				$this->user_pref = $pref;
 
-				if ($this->user_pref["$preference_name"]) {
+				if (array_key_exists($preference_name,$this->user_pref)) {
 					//we have fetched prefs - return part of array
 					return $this->user_pref["$preference_name"];
 				} else {

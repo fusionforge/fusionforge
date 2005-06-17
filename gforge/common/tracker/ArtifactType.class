@@ -502,15 +502,30 @@ class ArtifactType extends Error {
 	function remapStatus($status_id,$extra_fields) {
 		if ($this->usesCustomStatuses()) {
 			//get the selected element for the extra_field_status element
-			$element_id=$extra_fields[$this->getCustomStatusField()];
-			//convert that element_id into the status_id
-			$res=db_query("SELECT status_id FROM artifact_extra_field_elements WHERE element_id='$element_id'");
-			if (!$res) {
-				$this->setError('Error Remapping Status: '.db_error());
+			$csfield = $this->getCustomStatusField();
+			if (array_key_exists($csfield, $extra_fields)) {
+				$element_id=$extra_fields[$csfield];
+
+				//convert that element_id into the status_id
+				$res=db_query("SELECT status_id FROM artifact_extra_field_elements WHERE element_id='$element_id'");
+				if (!$res) {
+					$this->setError('Error Remapping Status: '.db_error());
+					return false;
+				}
+				$status_id=db_result($res,0,'status_id');
+			} else {
+				// custom status was not passed... use the first status from the database
+				$res = db_query("SELECT status_id FROM artifact_extra_field_elements WHERE extra_field_id='".$csfield."' ORDER BY element_id ASC LIMIT 1 OFFSET 0");
+				if (db_numrows($res) == 0) {		// No values available
+					$this->setError('Error Remapping Status');
+					return false;
+				}
+				$status_id=db_result($res,0,'status_id');
 			}
-			$status_id=db_result($res,0,'status_id');
+			
 			if ($status_id < 1 || $status_id > 4) {
 				echo "INVALID STATUS REMAP: $status_id FROM SELECTED ELEMENT: $element_id";
+				return false;
 			}
 			return $status_id;
 		} else {

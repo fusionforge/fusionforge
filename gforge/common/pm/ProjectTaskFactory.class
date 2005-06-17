@@ -183,10 +183,14 @@ class ProjectTaskFactory extends Error {
 		} else {
 			//no assigned to was chosen, so don't add it to where clause
 			$assigned_str='';
+			$assigned_str2='';
+			$assigned_str3='';
 		}
 
 		if ($this->category) {
 			$cat_str="AND project_task_vw.category_id='".$this->category."'";
+		} else {
+			$cat_str='';
 		}
 
 		//
@@ -197,6 +201,7 @@ class ProjectTaskFactory extends Error {
 			$ext_fld_str=',project_task_external_order.external_id';
 		} else {
 			$ext_str='';
+			$ext_fld_str='';
 		}
 
 /*
@@ -218,6 +223,7 @@ WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 			$this->setError('Database Error: '.db_error().$sql);
 			return false;
 		} else {
+			$this->project_tasks = array();
 			while ($arr =& db_fetch_array($result)) {
 				$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
 			}

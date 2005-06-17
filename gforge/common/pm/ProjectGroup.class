@@ -312,10 +312,11 @@ class ProjectGroup extends Error {
 	 */
 	function &getCategoryObjects() {
 		$res = $this->getCategories();
-		while ($arr =& db_fetch_array($res)) {
-			$cats[] =& new ProjectCategory($this,$arr);
+		$cats = array();
+		while ($arr = db_fetch_array($res)) {
+			$cats[] = new ProjectCategory($this,$arr);
 		}
-		return $cats[];
+		return $cats;
 	}
 
 	/**

@@ -168,7 +168,7 @@
 			} elseif ($ac->isError()) {
 				$feedback .= $ac->getErrorMessage();
 			} else {
-				if (!$ac->update($name,$attribute1,$attribute2,$is_required)) {
+				if (!$ac->update($name,$attribute1,$attribute2,$is_required,$alias)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
