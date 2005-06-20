@@ -267,7 +267,7 @@ function session_check_ip($oldip,$newip) {
  */
 function session_issecure() {
 	global $HTTP_SERVER_VARS;
-	return ($HTTP_SERVER_VARS['SERVER_PORT'] == '443');
+	return (strtoupper($HTTP_SERVER_VARS['HTTPS']) == "ON");
 }
 
 /**
