@@ -1,3 +1,10 @@
+2005-06-22	Vittal Aithal	<gforge@aithal.org>
+
+	* www/include/pre.php and common/include/session.php changed how to
+	determine if the session is SSL'd.
+	* [#1343] Fix link in FRS notification email. A minor formatting fix,
+	and the email now generates https URLs when sys_use_ssl is on.
+
 2005-06-17	Marcelo Mottalli	<marcelo@gforgegroup.com>
 
 	* Fixed bugs in the SOAP interface
