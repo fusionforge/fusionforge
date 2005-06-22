@@ -89,7 +89,7 @@ print '
 print '
 <form action="'.$PHP_SELF.'" method="post">'
 .'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
-	array(0,'SITE','COMMUNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
+	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
 		$Language->getText('admin_massmail','select'),
 		$Language->getText('admin_massmail','subscribers_to_site_updates'),
