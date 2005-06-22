@@ -12,9 +12,9 @@
 // Just say no to link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
 if (!empty($_SERVER['HTTP_X_moz']) && $_SERVER['HTTP_X_moz'] === 'prefetch'){
-  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Prefetch Forbidden');
-  trigger_error('Prefetch request forbidden.');
-  exit;
+	header($_SERVER['SERVER_PROTOCOL'] . ' 404 Prefetch Forbidden');
+	trigger_error('Prefetch request forbidden.');
+	exit;
 }
 
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {
@@ -30,7 +30,7 @@ require('local.inc');
 	redirect to proper hostname to get around certificate problem on IE 5
 */
 if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
-	if ($SERVER_PORT == '443') {
+	if (strtoupper($_SERVER['HTTPS']) == 'ON') {
 		header ("Location: https://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
 	} else {
 		header ("Location: http://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
@@ -116,8 +116,8 @@ plugin_hook('after_session_set');
 
 //mandatory login
 if (!session_loggedin() && $sys_force_login == 1 ) {
-        $expl_pathinfo = explode('/',$REQUEST_URI);
-        if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
+	$expl_pathinfo = explode('/',$REQUEST_URI);
+	if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
 	// Show proj* export even if not logged in when force login
 	// If not default web project page would be broken
 	if ($expl_pathinfo[1]=='export' && !ereg("^proj", $expl_pathinfo[2])) exit_not_logged_in();
