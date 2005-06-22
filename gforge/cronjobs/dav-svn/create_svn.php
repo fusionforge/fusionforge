@@ -9,6 +9,7 @@
  */
 
 require ('squal_pre.php');
+require_once('common/include/cron_utils.php');
 
 //	/path/to/svn/bin/
 $svn_path='/usr/local/svn/bin';
@@ -35,6 +36,8 @@ $repos_type = '';
 /*
 	This script create the gforge dav/svn/docman repositories
 */
+
+
 
 $err .= "Creating Groups at ". $svn."\n";
 
@@ -69,6 +72,8 @@ if (!$res) {
 //
 //	If using a single large repository, create the checkout if necessary
 //
+
+
 if ($one_repository && !is_dir($repos_co)) {
 	$err .= "Error! Checkout Repository Does Not Exist!";
 	echo $err;
@@ -78,7 +83,7 @@ if ($one_repository && !is_dir($repos_co)) {
 	passthru ("mkdir $svn");
 }
 
-while ( $row =& db_fetch_array($res) ) {
+while ( $row =& db_fetch_array($res) ) {	
 	if ($one_repository) {
 		if ($first_letter) {
 			//
@@ -89,7 +94,7 @@ while ( $row =& db_fetch_array($res) ) {
 		} else {
 			passthru ("[ ! -d $repos_co/".$row["unix_group_name"]." ] && mkdir -p $repos_co/".$row["unix_group_name"]."/ && $svn_path/svn add $repos_co/".$row["unix_group_name"]);
 		}
-		$cmd = 'chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"]." $repos_co";
+		$cmd = 'chown -R '.$file_owner.' '.$repos_co;
 		passthru ($cmd);
 	} else {
 		if ($first_letter) {
@@ -104,7 +109,7 @@ while ( $row =& db_fetch_array($res) ) {
 			svn_hooks("$svn/".$row["unix_group_name"]);
 			addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
 		}	
-		$cmd = 'chown -R '.$GLOBAL["sys_apache_user"].':'.$GLOBAL["sys_apache_group"]." $svn";
+		$cmd = 'chown -R '.$file_owner.' '.$svn;
 		passthru ($cmd);
 	}
 }
@@ -163,8 +168,8 @@ if ($one_repository) {
 	passthru ("cd $repos_co && $svn_path/svn commit -m\"\"");
 }
 system("chown $file_owner -R $svn");
-system("cd $svn/ ; find -type d -exec chmod 700 {} \;");
-system("cd $svn/ ; find -type f -exec chmod 600 {} \;");
+system("cd $svn/ && find -type d -exec chmod 700 {} \;");
+system("cd $svn/ && find -type f -exec chmod 600 {} \;");
 
 cron_entry(21,$err);
 ?>
