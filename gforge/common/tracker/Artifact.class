@@ -852,6 +852,13 @@ class Artifact extends Error {
 			$sqlu .= " summary='". htmlspecialchars($summary) ."', ";
 			$changes['summary'] = 1;
 			$update = true;
+
+			// Reset the close_date if bug is re-opened 
+			// (otherwise stat reports will be wrong).
+			if ($status_id == 1) {
+				$sqlu .= " close_date='0', ";
+				$this->addHistory('close_date',0);
+			}
 		}
 
 		if ($details) {
