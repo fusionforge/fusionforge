@@ -11,6 +11,11 @@
  * @version   $ID$
  */
 
+// make sure we're not compressing output if we are making a tarball
+if (getStringFromRequest('view') == 'tar') {
+	$no_gz_buffer=true;
+}
+
 require_once('pre.php');
 require_once('www/scm/include/scm_utils.php');
 require_once('www/plugins/scmsvn/viewcvs_utils.php');
