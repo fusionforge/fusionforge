@@ -42,11 +42,10 @@ Patch1000: gforge-4.0-deb_rpm.patch
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
-Requires: httpd
 Requires: php, php-pgsql
 Requires: gforge-lib-jpgraph
 
-# Distribution specific (fc = Fedora Core - rh9 = Red Hat Linux 9 - el3 = Red Hat Enterprise Linux 3 or CentOS 3)
+# Distribution specific (fc = Fedora Core - rh9 = Red Hat Linux 9 - el3 = Red Hat Enterprise Linux 3 or CentOS 3 - mdk10 = Mandrake Linux 10.x)
 %if "%{dist}" == "fc" 
 Requires: php-mbstring
 %endif
@@ -56,6 +55,11 @@ Requires: rh-postgresql, rh-postgresql-server
 %else
 Requires: postgresql, postgresql-server
 	%define postgresqlservice postgresql
+%endif
+%if "%{dist}" == "mdk10"
+Requires: php-mbstring, webserver
+%else
+Requires: httpd
 %endif
 
 %description
@@ -209,7 +213,7 @@ if [ "$1" -eq "1" ]; then
 	perl -pi -e "s/HOST_NAME/%{hostname}/g" /etc/httpd/conf.d/gforge.conf
 	
 	# initializing configuration
-	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
+	%{_sbindir}/gforge-config
 	
 	# creating the database
 	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
