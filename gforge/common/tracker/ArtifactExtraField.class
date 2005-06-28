@@ -96,9 +96,10 @@ class ArtifactExtraField extends Error {
 	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
 	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
 	 *	@param	int	is_required - true or false whether this is a required field or not.
+	 *	@param	string	alias - alias for this extra field (optional)
 	 *  @return 	true on success / false on failure.
 	 */
-	function create($name,$field_type,$attribute1,$attribute2,$is_required=0) {
+	function create($name,$field_type,$attribute1,$attribute2,$is_required=0,$alias='') {
 		global $Language;
 
 		//
@@ -117,10 +118,15 @@ class ArtifactExtraField extends Error {
 		} else {
 			$is_required=0;
 		}	
+		
+		if (!($alias = $this->generateAlias($alias,$name))) {
+			return false;
+		}
+		
 		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,
-			field_type,attribute1,attribute2,is_required) 
+			field_type,attribute1,attribute2,is_required,alias) 
 			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."',
-			'$field_type','$attribute1','$attribute2','$is_required')";
+			'$field_type','$attribute1','$attribute2','$is_required','$alias')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -353,49 +359,10 @@ class ArtifactExtraField extends Error {
 			$is_required=0;
 		}
 		
-		// these are reserved alias names
-		$reserved_alias = array(
-			"project",
-			"type",
-			"priority",
-			"assigned_to",
-			"summary",
-			"details"
-		);
-		
-		// alias validation
-		if (strlen($alias) == 0) {
-			$this->setError($Language->getText('tracker_admin_build_boxes','required_alias'));
+		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
-		} else if (strlen($alias) > 0) {
-			$alias = strtolower(trim($alias));
-			
-			// invalid chars?
-			if (preg_match("/[^[:alnum:]_\\-]/", $alias)) {
-				$this->setError($Language->getText('tracker_admin_build_boxes','invalid_alias'));
-				return false;
-			} else if (in_array($alias, $reserved_alias)) {	// alias is reserved?
-				$this->setError($Language->getText('tracker_admin_build_boxes','reserved_alias', array($alias)));
-				return false;
-			} else {
-				// check if the name conflicts with another alias in the same artifact type
-				
-				$sql = "SELECT * FROM artifact_extra_field_list ".
-						"WHERE LOWER(alias)='".$alias."' AND ".
-						"group_artifact_id=".$this->ArtifactType->getID()." AND ".
-						"extra_field_id <> ".$this->getID();
-				$res = db_query($sql);
-		
-				if (!$res) {
-					$this->setError(db_error());
-					return false;
-				} else if (db_numrows($res) > 0) {
-					$this->setError($Language->getText('tracker_admin_build_boxes','conflicting_alias', array($alias)));
-					return false;
-				}
-			}
-		}
-		
+		}		
+
 		$sql="UPDATE artifact_extra_field_list 
 			SET 
 			field_name='".htmlspecialchars($name)."',
@@ -465,7 +432,89 @@ class ArtifactExtraField extends Error {
 		}
 
 	}
+	
+	/**
+	 * 	Validate an alias.
+	 *	Note that this function does not check for conflicts.
+	 *	@param	string	alias - alias to validate
+	 *	@return	bool	true if alias is valid, false otherwise and it sets the corresponding error
+	 */
+	function validateAlias($alias) {
+		global $Language;
 
+		// these are reserved alias names
+		static $reserved_alias = array(
+			"project",
+			"type",
+			"priority",
+			"assigned_to",
+			"summary",
+			"details"
+		);
+
+		if (strlen($alias) == 0) return true;		// empty alias
+
+		// invalid chars?
+		if (preg_match("/[^[:alnum:]_\\-]/", $alias)) {
+			$this->setError($Language->getText('tracker_admin_build_boxes','invalid_alias'));
+			return false;
+		} else if (in_array($alias, $reserved_alias)) {	// alias is reserved?
+			$this->setError($Language->getText('tracker_admin_build_boxes','reserved_alias', array($alias)));
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 *	Generate an alias for this field. The alias can be entered by the user or
+	 *	be generated automatically from the name of the field.
+	 *	@param	string	Alias entered by the user
+	 *	@param	string	Name of the field entered by the user (it'll be used when $alias is empty)
+	 *	@return	string
+	 */
+	function generateAlias($alias, $name) {
+		$alias = strtolower(trim($alias));
+		if (strlen($alias) == 0) {		// no alias was entered, generate alias from $name
+			$name = strtolower(trim($name));
+			// Convert the original name to a valid alias (i.e., if the extra field is 
+			// called "Quality test", make an alias called "quality_test").
+			// The alias can be seen as a "unix name" for this field
+			$alias = preg_replace("/ /", "_", $name);
+			$alias = preg_replace("/[^[:alnum:]_]/", "", $alias);
+			$alias = strtolower($alias);
+		} elseif (!$this->validateAlias($alias)) {
+			// alias is invalid...
+			return false;
+		} 
+		// check if the name conflicts with another alias in the same artifact type
+		// in that case append a serial number to the alias
+		$serial = 1;
+		$conflict = false;	
+		do {
+			$sql = "SELECT * FROM artifact_extra_field_list ".
+					"WHERE LOWER(alias)='".$alias."' AND ".
+					"group_artifact_id=".$this->ArtifactType->getID();
+			if ($this->data_array['extra_field_id']) {
+				$sql .= " AND extra_field_id <> ".$this->data_array['extra_field_id'];
+			}
+			$res = db_query($sql);
+
+			if (!$res) {
+				$this->setError(db_error());
+				return false;
+			} else if (db_numrows($res) > 0) {		// found another field with the same alias
+				$conflict = true;
+				$serial++;
+				$alias = $alias.$serial;
+			} else {
+				$conflict = false;
+			}
+		} while ($conflict);
+
+		// at this point, the alias is valid and unique
+		return $alias;
+	}
 }
 
 ?>

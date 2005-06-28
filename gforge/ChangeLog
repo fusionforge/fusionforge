@@ -1,3 +1,9 @@
+2005-06-28	Marcelo Mottalli	<marcelo@gforgegroup.com>
+
+	* Changed the handling of extra fields aliases. Now, when no alias
+		is specified, it automatically generates one, and when there's a 
+		conflict with aliases a new alias is also generated automatically.
+
 2005-06-28	Tim Perdue	<tim@gforge.org>
 
 	* Added a sys_template_group var

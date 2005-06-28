@@ -85,6 +85,10 @@
 		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
 		<p>
+		<strong><?php echo $Language->getText('tracker_admin_build_boxes','alias') ?>:</strong><br />
+		<input type="text" name="alias" value="" size="15" maxlength="30" /><br />
+		<p>
+
 		<strong><?php  echo $Language->getText('tracker_admin_build_boxes','box_type') ?>:</strong><br />
 		<input type="radio" name="field_type" value="1"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_select'); ?><br />
 		<input type="radio" name="field_type" value="2"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_checkbox'); ?><br />

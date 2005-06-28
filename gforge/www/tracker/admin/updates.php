@@ -11,7 +11,7 @@
 //			} elseif ($ab->isError())
 //				$feedback .= $ab->getErrorMessage();			
 			} else {
-				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required)) {
+				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_box').': '.$ab->getErrorMessage();
 					$ab->clearError();
 				} else {
