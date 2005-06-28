@@ -1,3 +1,9 @@
+2005-06-28	Tim Perdue	<tim@gforge.org>
+
+	* Added a sys_template_group var
+	* Added tracking cloning to copy all fields from any tracker in template group
+	* Better navigation in tracker admin
+
 2005-06-22	Vittal Aithal	<gforge@aithal.org>
 
 	* www/include/pre.php and common/include/session.php changed how to
