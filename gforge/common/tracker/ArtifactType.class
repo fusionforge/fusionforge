@@ -638,6 +638,63 @@ class ArtifactType extends Error {
 	}
 
 	/**
+	 *	cloneFieldsFrom - clone all the fields and elements from another tracker
+	 *
+	 *	@return	boolean	true/false on success
+	 */
+	function cloneFieldsFrom($clone_tracker_id) {
+		global $sys_template_group;
+		$g =& group_get_object($sys_template_group);
+		if (!$g || !is_object($g)) {
+			$this->setError('Could Not Get Template Group');
+			return false;
+		} elseif ($g->isError()) {
+			$this->setError('Template Group Error '.$g->getErrorMessage());
+			return false;
+		}
+		$at =& new ArtifactType($g,$clone_tracker_id);
+		if (!$at || !is_object($at)) {
+			$this->setError('Could Not Get Tracker To Clone');
+			return false;
+		} elseif ($at->isError()) {
+			$this->setError('Clone Tracker Error '.$at->getErrorMessage());
+			return false;
+		}
+		$efs =& $at->getExtraFields();
+
+
+		//
+		//	Iterate list of extra fields
+		//
+		db_begin();
+		foreach ($efs as $ef) {
+			//new field in this tracker
+			$nef = new ArtifactExtraField($this);
+			if (!$nef->create( addslashes(util_unconvert_htmlspecialchars($ef['field_name'])), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'])) {
+				db_rollback();
+				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
+				return false;
+			}
+			//
+			//	Iterate the elements
+			//
+			$resel=db_query("SELECT * FROM artifact_extra_field_elements WHERE extra_field_id='".$ef['extra_field_id']."'");
+			while ($el =& db_fetch_array($resel)) {
+				//new element
+				$nel = new ArtifactExtraFieldElement($nef);
+				if (!$nel->create( addslashes(util_unconvert_htmlspecialchars($el['element_name'])), $el['status_id'] )) {
+					db_rollback();
+					$this->setError('Error Creating New Extra Field Element: '.$nel->getErrorMessage());
+					return false;
+				}
+			}
+		}
+		db_commit();
+		return true;
+
+	}
+
+	/**
 	 *	getExtraFieldName - Get a box name using the box ID 
 	 *
 	 *	@param  int 	id of an extra field.

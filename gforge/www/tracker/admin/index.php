@@ -72,6 +72,10 @@ if ($group_id && $atid) {
 
 		include ('form-addcanned.php');
 
+	} elseif ($clone_tracker) {
+
+		include ('form-clonetracker.php');
+
 	} elseif ($uploadtemplate) {
 
 		include ('form-uploadtemplate.php');

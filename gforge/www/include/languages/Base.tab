@@ -2779,13 +2779,23 @@ tracker	updated_successful	Updated Successfully
 tracker_add	for_project	For project
 tracker_add	submit		Submit
 tracker_add	title	Submit Tracker Item
+tracker_admin	choose_tracker	Choose the template tracker to clone. The site administrator will have to set up trackers with default values and set permissions properly so you can access them.
+tracker_admin	clone_warning	WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. You have been warned!
+tracker_admin	add_artifact_types	New Tracker
+tracker_admin	update_artifact_types	Update Settings
+tracker_admin	manage_extrafield	Manage Custom Fields
+tracker_admin	clone_tracker	Clone Tracker
+tracker_admin	add_canned	Add Canned Responses
+tracker_admin	delete	Delete Tracker
+tracker_admin	add_artifact_types
+tracker_admin	add_artifact_types
 tracker_admin	permanently_delete_info	Permanently delete this tracker.
 tracker_admin	deleted	Successfully Deleted.
 tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
 tracker_admin	delete_extrafieldwarning	You are about to permanently and irretrievably delete this custom field and all its contents!
 tracker_admin	sure	I'm Sure.
 tracker_admin	really_sure	I'm Really Sure.
-tracker_admin	delete	Delete.
+tracker_admin	delete	Delete
 tracker_admin	add_canned_responses	Add/Update Canned Responses
 tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
 tracker_admin	add_categories	Add/Update Categories

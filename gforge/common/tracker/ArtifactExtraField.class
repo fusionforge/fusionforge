@@ -140,11 +140,39 @@ class ArtifactExtraField extends Error {
 					db_rollback();
 					return false;
 				} else {
-					db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
+//
+//	Must insert some default statuses for each artifact
+//
+					$reso=db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
 						values ('$id','Open','1')");
-					echo db_error();
-					db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
+					if (!$reso) {
+						echo db_error();
+					} else {
+						$resoid=db_insertid($reso,'artifact_extra_field_elements','element_id');
+						db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+							SELECT artifact_id,$resoid,$id FROM artifact 
+							WHERE group_artifact_id='".$this->ArtifactType->getID()."'
+							AND status_id=1");
+					}
+					$resc=db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id)
 						values ('$id','Closed','2')");
+					if (!$resc) {
+						echo db_error();
+					} else {
+						$rescid=db_insertid($resc,'artifact_extra_field_elements','element_id');
+						db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+							SELECT artifact_id,$rescid,$id FROM artifact 
+							WHERE group_artifact_id='".$this->ArtifactType->getID()."'
+							AND status_id != 1");
+					}
+				}
+			} elseif (strstr(ARTIFACT_EXTRAFIELD_FILTER_INT,$field_type) !== false) {
+//
+//	Must insert some default 100 rows for the data table so None queries will work right
+//
+				$resdefault=db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+					SELECT artifact_id,100,$id FROM artifact WHERE group_artifact_id='".$this->ArtifactType->getID()."'");
+				if (!$resdefault) {
 					echo db_error();
 				}
 			}

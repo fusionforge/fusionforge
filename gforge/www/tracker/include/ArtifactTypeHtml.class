@@ -76,11 +76,33 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function adminHeader($params) {
-		global $Language;
+		global $Language,$HTML;
 		echo $this->header($params);
-//		$group_id= $this->Group->getID();
-//		echo '<strong>'.$Language->getText('tracker_artifacttype','admin_functions').': <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','add_artifact_types').'</a>';
-//		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','edit_options').': '. $this->getName() .'</a></strong>';
+		$group_id= $this->Group->getID();
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id;
+		$title_arr[]=$Language->getText('tracker_admin','add_artifact_types');
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
+		$title_arr[]=$Language->getText('tracker_admin','update_artifact_types');
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
+		$title_arr[]=$Language->getText('tracker_admin','manage_extrafield');
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
+		$title_arr[]=$Language->getText('tracker_admin','clone_tracker');
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
+		$title_arr[]=$Language->getText('tracker_admin','add_canned');
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1';
+		$title_arr[]=$Language->getText('tracker_admin','delete');
+
+		echo $HTML->printSubMenu($title_arr,$links_arr);
+	}
+
+	function adminFooter($params) {
+		echo $this->footer($params);
 	}
 
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false,$mode='') {

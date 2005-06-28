@@ -207,6 +207,21 @@
 			}
 
 		//
+		//	Clone a tracker's elements to this tracker
+		//
+		} elseif ($clone_tracker) {
+
+			if (!$clone_id) {
+				exit_missing_param();
+			}
+			if (!$ath->cloneFieldsFrom($clone_id)) {
+				exit_error('Error','Error cloning fields: '.$ath->getErrorMessage());
+			} else {
+				$feedback .= 'Successfully Cloned Tracker Fields ';
+				$clone_tracker='';
+			}
+
+		//
 		//	Update a tracker
 		//
 		} elseif ($update_type) {
