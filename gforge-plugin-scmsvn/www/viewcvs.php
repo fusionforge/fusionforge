@@ -12,7 +12,7 @@
  */
 
 // make sure we're not compressing output if we are making a tarball
-if (getStringFromRequest('view') == 'tar') {
+if (isset($_GET['view']) && $_GET['view'] == 'tar') {
 	$no_gz_buffer=true;
 }
 
