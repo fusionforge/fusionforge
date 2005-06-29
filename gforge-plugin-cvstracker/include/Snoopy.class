@@ -81,7 +81,7 @@ class Snoopy
 	var $timed_out		=	false;				// if a read operation timed out
 	var	$status			=	0;					// http request status
 	
-	var	$curl_path		=	"/usr/local/bin/curl";
+	var	$curl_path		=	"/usr/bin/curl";
 												// Snoopy will use cURL for fetching
 												// SSL content if a full system path to
 												// the cURL binary is supplied here.
