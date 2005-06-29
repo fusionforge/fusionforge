@@ -1,3 +1,7 @@
+2005-06-29	Marcelo Mottalli	<marcelo@gforgegroup.com>
+
+	* Added the extra field alias to the field cloning procedue
+
 2005-06-28	Marcelo Mottalli	<marcelo@gforgegroup.com>
 
 	* Changed the handling of extra fields aliases. Now, when no alias
