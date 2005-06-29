@@ -1,3 +1,9 @@
+2005-06-28	Tim Perdue	<tim@gforge.org>
+
+	* Added a customizable template file for Group->approve() function
+	which means the number of trackers, fields, and elements in each 
+	tracker can be modified more easily
+
 2005-06-29	Marcelo Mottalli	<marcelo@gforgegroup.com>
 
 	* Added the extra field alias to the field cloning procedue
