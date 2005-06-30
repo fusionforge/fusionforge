@@ -91,8 +91,8 @@ $server->wsdl->addComplexType(
 	'end_date' => array('name'=>'end_date', 'type' => 'xsd:int'),
 	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
 	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
-	'is_dependent_on_task_id' => array('name'=>'is_dependent_on_task_id', 'type' => 'tns:ArrayOfint'),
-	'assigned_to_id' => array('name'=>'assigned_to_id', 'type' => 'tns:ArrayOfint')
+	'dependent_on' => array('name'=>'dependent_on', 'type' => 'tns:ArrayOfint'),
+	'assigned_to' => array('name'=>'assigned_to', 'type' => 'tns:ArrayOfint')
 	)
 );
 
@@ -297,18 +297,19 @@ function &getProjectGroups($session_ser,$group_id) {
 //
 //  convert array of artifact types to soap data structure
 //
-function projectgroups_to_soap($at_arr) {
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
+function projectgroups_to_soap($pg_arr) {
+	$return = array();
+	for ($i=0; $i<count($pg_arr); $i++) {
+		if ($pg_arr[$i]->isError()) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'group_project_id'=>$at_arr->data_array['group_project_id'],
-				'group_id'=>$at_arr->data_array['group_id'],
-				'name'=>$at_arr->data_array['name'],
-				'description'=>$at_arr->data_array['description'],
-				'is_public'=>$at_arr->data_array['is_public'],
-				'send_all_posts_to'=>$at_arr->data_array['send_all_posts_to']
+				'group_project_id'=>$pg_arr[$i]->data_array['group_project_id'],
+				'group_id'=>$pg_arr[$i]->data_array['group_id'],
+				'name'=>$pg_arr[$i]->data_array['project_name'],
+				'description'=>$pg_arr[$i]->data_array['description'],
+				'is_public'=>$pg_arr[$i]->data_array['is_public'],
+				'send_all_posts_to'=>$pg_arr[$i]->data_array['send_all_posts_to']
 			);
 		}
 	}
@@ -341,9 +342,15 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 	} elseif ($a->isError()) {
 		return new soap_fault ('','addProjectTask','$a->getErrorMessage()',$a->getErrorMessage());
 	}
-
+	
+	// transform the $depend_arr (which is an array of ints) to include the link type
+	$depend_map = array();
+	foreach ($depend_arr as $depend_id) {
+		$depend_map[$depend_id] = PM_LINK_DEFAULT;
+	}
+	
 	if (!$a->create($summary,$details,$priority,$hours,$start_date,$end_date,
-            $category_id,$percent_complete,&$assigned_arr,&$depend_arr)) {
+            $category_id,$percent_complete,$assigned_arr,$depend_map)) {
 		return new soap_fault ('','addProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
@@ -355,7 +362,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 //
 function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_task_id,
 	$summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
-    $percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id) {
+    $percent_complete,$assigned_arr,$depend_arr,$new_group_project_id) {
     continue_session($session_ser);
     $grp =& group_get_object($group_id);
     if (!$grp || !is_object($grp)) {
@@ -377,9 +384,15 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
     } elseif ($a->isError()) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
     }
-
+    
+    // transform the $depend_arr (which is an array of ints) to include the link type
+	$depend_map = array();
+	foreach ($depend_arr as $depend_id) {
+		$depend_map[$depend_id] = PM_LINK_DEFAULT;
+	}
+	
     if (!$a->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
-		$percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id)) {
+		$percent_complete,$assigned_arr,$depend_map,$new_group_project_id)) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
     } else {
         return $a->getID();
@@ -481,27 +494,34 @@ function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,
 //
 //  convert array of projecttasks to soap data structure
 //
-function projecttasks_to_soap($at_arr) {
+function projecttasks_to_soap($pt_arr) {
 	$return = array();
 
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
+	for ($i=0; $i<count($pt_arr); $i++) {
+		if ($pt_arr[$i]->isError()) {
 			//skip if error
 		} else {
+			// create the dependent_on array
+			$dependent_on = array();
+			$dependent_on_tmp = $pt_arr[$i]->getDependentOn();
+			foreach ($dependent_on_tmp as $dependent_on_id => $link_type) {
+				$dependent_on[] = $dependent_on_id;
+			}
+
 			$return[]=array(
-				'project_task_id'=>$at_arr[$i]->data_array['project_task_id'],
-				'group_project_id'=>$at_arr[$i]->data_array['group_project_id'],
-				'summary'=>$at_arr[$i]->data_array['summary'],
-				'details'=>$at_arr[$i]->data_array['details'],
-				'percent_complete'=>$at_arr[$i]->data_array['percent_complete'],
-				'priority'=>$at_arr[$i]->data_array['priority'],
-				'hours'=>$at_arr[$i]->data_array['hours'],
-				'start_date'=>$at_arr[$i]->data_array['start_date'],
-				'end_date'=>$at_arr[$i]->data_array['end_date'],
-				'status_id'=>$at_arr[$i]->data_array['status_id'],
-				'category_id'=>$at_arr[$i]->data_array['category_id'],
-				'is_dependent_on_task_id'=>$at_arr[$i]->getDependentOn(),
-				'assigned_to_id'=>$at_arr[$i]->getAssignedTo()
+				'project_task_id'=>$pt_arr[$i]->data_array['project_task_id'],
+				'group_project_id'=>$pt_arr[$i]->data_array['group_project_id'],
+				'summary'=>$pt_arr[$i]->data_array['summary'],
+				'details'=>$pt_arr[$i]->data_array['details'],
+				'percent_complete'=>$pt_arr[$i]->data_array['percent_complete'],
+				'priority'=>$pt_arr[$i]->data_array['priority'],
+				'hours'=>$pt_arr[$i]->data_array['hours'],
+				'start_date'=>$pt_arr[$i]->data_array['start_date'],
+				'end_date'=>$pt_arr[$i]->data_array['end_date'],
+				'status_id'=>$pt_arr[$i]->data_array['status_id'],
+				'category_id'=>$pt_arr[$i]->data_array['category_id'],
+				'dependent_on'=>$dependent_on,
+				'assigned_to'=>$pt_arr[$i]->getAssignedTo()
 			);
 		}
 	}
