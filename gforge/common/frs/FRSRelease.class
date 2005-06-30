@@ -28,23 +28,6 @@
 require_once('common/include/Error.class');
 require_once('common/frs/FRSFile.class');
 
-
-function &get_frs_releases(&$Package) {
-	$sql = "SELECT * FROM frs_release 
-		WHERE package_id='". $Package->getID() . "'
-		AND status_id=1 ORDER BY release_date DESC, name ASC";
-	$res = db_query($sql);
-	
-	if (!$res) {
-		return false;
-	}
-	$ps = array();
-	while($arr = db_fetch_array($res)) {
-		$ps[] =& frsrelease_get_object($arr['release_id']);
-	}
-	return $ps;
-}
-
 /**
  *	  Factory method which creates a FRSRelease from an release id
  *
@@ -335,7 +318,7 @@ class FRSRelease extends Error {
 			$this->release_files=array();
 			$res=db_query("SELECT * FROM frs_file_vw WHERE release_id='".$this->getID()."'");
 			while ($arr = db_fetch_array($res)) {
-				$this->release_files[]=new FRSFile($this,$arr['release_id'],$arr);
+				$this->release_files[]=new FRSFile($this,$arr['file_id'],$arr);
 			}
 		}
 		return $this->release_files;

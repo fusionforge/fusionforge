@@ -260,7 +260,7 @@ function getReleases($session_ser,$group_id,$package_id) {
 		return new soap_fault ('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
-	$release_arr =& get_frs_releases($frsp);
+	$release_arr =& $frsp->getReleases();
 	
 	return releases_to_soap($release_arr); 
 }
