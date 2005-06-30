@@ -97,7 +97,7 @@ require_once('www/soap/pm/pm.php');
 //
 //	Include frs Functions
 //
-//require_once('www/soap/frs/frs.php');
+require_once('www/soap/frs/frs.php');
 
 
 $wsdl_data = $server->wsdl->serialize();

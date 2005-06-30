@@ -32,6 +32,7 @@ function &get_frs_packages($Group) {
 	if (db_numrows($res) < 1) {
 		return false;
 	}
+	$ps = array();
 	while($arr = db_fetch_array($res)) {
 		$ps[]=new FRSPackage($Group,$arr['package_id'],$arr);
 	}
