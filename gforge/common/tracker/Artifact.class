@@ -205,9 +205,9 @@ class Artifact extends Error {
 		if (!$priority) {
 			$priority=3;
 		}
-		if (!$status_id) {
-			$status_id=1;
-		}
+//		if (!$status_id) {
+			$status_id=1;		// on creation, status is set to "open"
+//		}
 		//
 		//	They may be using an extra field "status" box so we have to remap
 		//	the status_id based on the extra field - this keeps the counters
