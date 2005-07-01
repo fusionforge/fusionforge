@@ -193,13 +193,11 @@ function _getStringFromArray(& $array, $key, $defaultValue = '') {
  * @return array a predefined array
  */
 function & _getPredefinedArray($superGlobalName, $oldName) {
-	if(isset($$superGlobalName)) {
-		$array = & $$superGlobalName;
-	}
-	elseif(isset($GLOBALS[$oldName])) {
+	if(isset($GLOBALS[$superGlobalName])) {
+		$array = & $GLOBALS[$superGlobalName];
+	} elseif(isset($GLOBALS[$oldName])) {
 		$array = & $GLOBALS[$oldName];
-	}
-	else {
+	} else {
 		$array = array();
 	}
 	return $array;
