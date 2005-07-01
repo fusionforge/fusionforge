@@ -34,7 +34,7 @@ $res = db_query("
 	AND 
 		status='A' 
     ORDER BY 
-		group_id",$limit);
+		group_id DESC",$limit);
 
 rss_dump_project_result_set($res,$GLOBALS['sys_name'].' Full Project Listing');
 ?>
