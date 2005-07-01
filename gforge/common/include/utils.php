@@ -874,4 +874,35 @@ function &ls($dir,$filter=false) {
 	}
 }
 
+/**
+ * readfile_chunked() - replacement for readfile
+ *
+ * @param		string	The file path
+ * @param		bool    Whether to return bytes served or just a bool
+ *
+ */
+function readfile_chunked($filename, $returnBytes=true) {
+    $chunksize = 1*(1024*1024); // 1MB chunks
+    $buffer = '';
+    $byteCounter = 0;
+    
+    $handle = fopen($filename, 'rb');
+    if ($handle === false) {
+        return false;
+    }
+    
+    while (!feof($handle)) {
+        $buffer = fread($handle, $chunksize);
+        echo $buffer;
+        if ($returnBytes) {
+            $byteCounter += strlen($buffer);
+		}
+    }
+    $status = fclose($handle);
+    if ($returnBytes && $status) {
+        return $byteCounter; // return num. bytes delivered like readfile() does.
+    }
+    return $status;
+}
+
 ?>

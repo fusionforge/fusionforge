@@ -51,7 +51,7 @@ if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
 	$length = filesize($sys_scm_snapshots_path.'/'.$filename);
 	Header('Content-length: '.$length);
 
-	readfile($sys_scm_snapshots_path.'/'.$filename);
+	readfile_chunked($sys_scm_snapshots_path.'/'.$filename);
 } else {
 	session_redirect('/404.php');
 }

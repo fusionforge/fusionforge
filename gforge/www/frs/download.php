@@ -90,7 +90,7 @@ if (file_exists($filepath)) {
 	$length = filesize($filepath);
 	Header("Content-length: $length");
 
-	readfile($filepath);
+	readfile_chunked($filepath);
 
 	if (session_loggedin()) {
 		$s =& session_get_user();
