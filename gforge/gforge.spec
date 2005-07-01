@@ -1,7 +1,6 @@
 %define dbhost			localhost
 %define dbname			gforge
 %define dbuser			gforge
-%define dbpassword		gforge
 
 %if %{?hostname:0}%{!?hostname:1}
 	%define hostname localhost
@@ -18,11 +17,6 @@
 %endif
 %{!?release:%define release 1}
 
-%if %{?dist:0}%{!?dist:1}
-	%define dist fc
-%endif
-
-%define httpduser		apache
 %define gfuser			gforge
 %define gfgroup			gforge
 
@@ -41,25 +35,69 @@ Patch1000: gforge-4.0-deb_rpm.patch
 
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
-Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
-Requires: php, php-pgsql
+Requires: perl, perl-DBI, perl-HTML-Parser
 Requires: gforge-lib-jpgraph
 
-# Distribution specific (fc = Fedora Core - rh9 = Red Hat Linux 9 - el3 = Red Hat Enterprise Linux 3 or CentOS 3 - mdk10 = Mandrake Linux 10.x)
-%if "%{dist}" == "fc" 
-Requires: php-mbstring
-%endif
-%if "%{dist}" == "el3"
-Requires: rh-postgresql, rh-postgresql-server
-	%define postgresqlservice rhdb
-%else
-Requires: postgresql, postgresql-server
-	%define postgresqlservice postgresql
-%endif
-%if "%{dist}" == "mdk10"
-Requires: php-mbstring, webserver
-%else
+# RedHat specific - distribution specific (fc = Fedora Core (or RHEL4 and Centos 4) - rh9 = RHL 9 - el3 = RHEL 3 or CentOS 3)
+%if "%{_vendor}" == "redhat"
+	%if %{?dist:0}%{!?dist:1}
+		%define dist fc
+	%endif
+	
+	%define httpduser		apache
+	%define httpdgroup		apache
+	%define httpddir		httpd
+
 Requires: httpd
+Requires: perl-DBD-Pg, php-pgsql
+	
+	%if "%{dist}" == "fc" 
+Requires: php-mbstring
+	%endif
+	%if "%{dist}" == "el3"
+Requires: rh-postgresql, rh-postgresql-server
+		%define postgresqlservice rhdb
+	%else
+Requires: postgresql, postgresql-server
+		%define postgresqlservice postgresql
+	%endif
+	
+	%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
+	%define reloadpostgresql() service %postgresqlservice reload
+	%define gracefulhttpd() service httpd graceful >/dev/null 2>&1
+%endif
+
+# SuSE specific
+%if "%{_vendor}" == "suse"
+	%define httpduser		wwwrun
+	%define httpdgroup		www
+	%define httpddir		apache2
+	
+Requires: postgresql, postgresql-server
+Requires: pgperl, jpeg
+Requires: php4
+Requires: php4-pgsql, php4-mbstring
+
+		# Start the postgresql service if needed
+		%define startpostgresql() /etc/init.d/postgresql status | grep 'running' >/dev/null 2>&1 || /etc/init.d/postgresql start
+		%define reloadpostgresql() /etc/init.d/postgresql reload >/dev/null 2>&1
+		%define gracefulhttpd() /etc/init.d/httpd graceful >/dev/null 2>&1
+%endif
+
+# Mandrake specific
+%if "%{_vendor}" == "mandrake"
+	%define httpduser		apache
+	%define httpdgroup		apache
+	%define httpddir		httpd
+	%define postgresqlservice postgresql
+	
+Requires: php-mbstring, webserver
+Requires: postgresql, postgresql-server
+Requires: perl-DBD-Pg, php-pgsql
+
+	%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
+	%define reloadpostgresql() service %postgresqlservice reload
+	%define gracefulhttpd() service httpd graceful >/dev/null 2>&1
 %endif
 
 %description
@@ -74,8 +112,21 @@ web-based administration.
 # Change password for admin user
 %define changepassword() echo "UPDATE users SET user_pw='%1', email='%{adminemail}' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
 
-# Start the postgresql service if needed
-%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
+%define GFORGE_DIR		%{_datadir}/gforge
+%define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
+%define GFORGE_LANG_DIR		%{GFORGE_CONF_DIR}/languages-local
+%define GFORGE_LIB_DIR		%{_libdir}/gforge/lib
+%define GFORGE_DB_DIR		%{_libdir}/gforge/db
+%define GFORGE_BIN_DIR		%{_libdir}/gforge/bin
+%define PLUGINS_LIB_DIR		%{_libdir}/gforge/plugins
+%define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
+%define CACHE_DIR		/var/cache/gforge
+%define UPLOAD_DIR		/var/lib/gforge/upload
+%define SCM_TARBALLS_DIR	/var/lib/gforge/scmtarballs
+%define SCM_SNAPSHOTS_DIR	/var/lib/gforge/scmsnapshots
+%define CROND_DIR		/%{_sysconfdir}/cron.d
+%define HTTPD_CONF_DIR		/%{_sysconfdir}/%{httpddir}
+%define SBIN_DIR		%{_sbindir}
 
 %prep
 %setup
@@ -87,61 +138,51 @@ web-based administration.
 # cleaning build environment
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
-# setting paths
-GFORGE_DIR=$RPM_BUILD_ROOT/%{_datadir}/gforge
-CACHE_DIR=$RPM_BUILD_ROOT/var/cache/gforge
-UPLOAD_DIR=$RPM_BUILD_ROOT/var/lib/gforge/upload
-SCM_TARBALLS_DIR=$RPM_BUILD_ROOT/var/lib/gforge/scmtarballs
-SCM_SNAPSHOTS_DIR=$RPM_BUILD_ROOT/var/lib/gforge/scmsnapshots
-HTTPD_CONF_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/httpd
-GFORGE_CONF_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/gforge
-GFORGE_LIB_DIR=$RPM_BUILD_ROOT/%{_libdir}/gforge
-PLUGINS_DIR=$GFORGE_LIB_DIR/plugins
-CROND_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/cron.d
-SBIN_DIR=$RPM_BUILD_ROOT/%{_sbindir}
+# creating required directories
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
+
+install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d
+install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}
 
 # installing gforge
-mkdir -p $GFORGE_DIR $GFORGE_LIB_DIR
 for i in common cronjobs etc rpm-specific utils www ; do
-	cp -rp $i $GFORGE_DIR/
+	cp -rp $i $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 done
-chmod 755 $GFORGE_DIR/utils/fill-in-the-blanks.pl
+install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
 
-install -m 750 setup $GFORGE_DIR/
-cp -rp db $GFORGE_LIB_DIR/
-cp -p deb-specific/sf-2.6-complete.sql $GFORGE_LIB_DIR/db/
-mkdir -p $GFORGE_LIB_DIR/lib $GFORGE_LIB_DIR/bin
+cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
+cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
+
 for i in deb-specific/sqlhelper.pm deb-specific/sqlparser.pm utils/include.pl ; do
-	cp -p $i $GFORGE_LIB_DIR/lib/
+	cp -p $i $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}/
 done
 for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregister-theme ; do
-	install -m 755 deb-specific/$i $GFORGE_LIB_DIR/bin/
+	install -m 755 deb-specific/$i $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
 done
 
-# creating required directories
-mkdir -p $UPLOAD_DIR
-mkdir -p $CACHE_DIR
-mkdir -p $SCM_TARBALLS_DIR
-mkdir -p $PLUGINS_DIR
-mkdir -p $SBIN_DIR
-
 # configuring apache
-mkdir -p $HTTPD_CONF_DIR/conf.d
-install -m 644 rpm-specific/conf/vhost.conf $HTTPD_CONF_DIR/conf.d/gforge.conf
+install -m 644 rpm-specific/conf/vhost.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d/gforge.conf
 
 # configuring GForge
-mkdir -p $GFORGE_CONF_DIR
-install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
-install -m 750 rpm-specific/scripts/gforge-config $SBIN_DIR/
-mkdir -p $GFORGE_CONF_DIR/languages-local
+install -m 600 rpm-specific/conf/gforge.conf $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
+install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
 if ls rpm-specific/languages/*.tab &> /dev/null; then
-	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
+	cp rpm-specific/languages/*.tab $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 fi
-cp -rp rpm-specific/custom $GFORGE_CONF_DIR
+cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
 # setting crontab
-mkdir -p $CROND_DIR
-install -m 664 rpm-specific/cron.d/gforge $CROND_DIR/
+install -m 664 rpm-specific/cron.d/gforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
@@ -155,7 +196,7 @@ if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep 
 fi
 if ! id -u %gfuser >/dev/null 2>&1; then
 	groupadd -r %{gfgroup}
-	useradd -r -g %{gfgroup} -d %{_datadir}/gforge -s /bin/bash -c "GForge User" %{gfuser}
+	useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "GForge User" %{gfuser}
 fi
 
 %post
@@ -168,8 +209,8 @@ if [ "$1" -eq "1" ]; then
 	# generating and updating site admin password
 	%randstr SITEADMIN_PASSWORD 8
 
-	echo "$SITEADMIN_PASSWORD" > %{_sysconfdir}/gforge/siteadmin.pass
-	chmod 0600 %{_sysconfdir}/gforge/siteadmin.pass
+	echo "$SITEADMIN_PASSWORD" > %{GFORGE_CONF_DIR}/siteadmin.pass
+	chmod 0600 %{GFORGE_CONF_DIR}/siteadmin.pass
 	SITEADMIN_PASSWORD=`echo -n $SITEADMIN_PASSWORD | md5sum | awk '{print $1}'`
 
 	# creating gforge database user
@@ -184,7 +225,7 @@ if [ "$1" -eq "1" ]; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
 		echo 'local %{dbname} gforge_nss md5' >> /var/lib/pgsql/data/pg_hba.conf
 		echo 'local %{dbname} gforge_mta md5' >> /var/lib/pgsql/data/pg_hba.conf
-		service %postgresqlservice reload
+		%reloadpostgresql
 	fi
 
 	# adding "noreply" alias
@@ -209,24 +250,24 @@ if [ "$1" -eq "1" ]; then
 		s/DB_PASSWORD/"$GFORGEDATABASE_PASSWORD"/g;
 		s/SYSTEM_NAME/"%{sitename}"/g;
 		s/RANDOM_ID/"$SESSID"/g;
-		s/HOST_NAME/"%{hostname}"/g" %{_sysconfdir}/gforge/gforge.conf
-	perl -pi -e "s/HOST_NAME/%{hostname}/g" /etc/httpd/conf.d/gforge.conf
+		s/HOST_NAME/"%{hostname}"/g" %{GFORGE_CONF_DIR}/gforge.conf
+	perl -pi -e "s/HOST_NAME/%{hostname}/g" %{HTTPD_CONF_DIR}/conf.d/gforge.conf
 	
 	# initializing configuration
-	%{_sbindir}/gforge-config
+	%{SBIN_DIR}/gforge-config
 	
 	# creating the database
-	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
+	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
 	%changepassword $SITEADMIN_PASSWORD
 
-	service httpd graceful >/dev/null 2>&1
+	%gracefulhttpd
 else
 	# upgrading database
-	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
+	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 
 	# updating configuration
-	%{_sbindir}/gforge-config || :
+	%{SBIN_DIR}/gforge-config || :
 fi
 
 %postun
@@ -235,7 +276,7 @@ if [ "$1" -eq "0" ]; then
 	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropuser gforge_nss >/dev/null 2>&1 ; dropuser gforge_mta >/dev/null 2>&1"
 	
 	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
-		rm -f %{_sysconfdir}/gforge/$file
+		rm -f %{GFORGE_CONF_DIR}/$file
 	done
 	# Remove PostgreSQL access
 	if grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
@@ -256,19 +297,27 @@ fi
 %defattr(-, root, root)
 %doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL README*
 %doc docs/*
-%attr(0660, apache, gforge) %config(noreplace) %{_sysconfdir}/gforge/gforge.conf
-%attr(0750, root, root) %{_sbindir}/gforge-config
-%attr(0640, apache, apache) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
-%attr(0664, root, root) %config(noreplace) %{_sysconfdir}/cron.d/gforge
-%attr(0775, apache, apache) %dir /var/lib/gforge/upload
-%attr(0775, apache, apache) %dir /var/cache/gforge
-%{_datadir}/gforge
-%{_libdir}/gforge
-%{_sysconfdir}/gforge/languages-local
-%{_sysconfdir}/gforge/custom
-/var/lib/gforge/scmtarballs
+%attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
+%attr(0750, root, root) %{SBIN_DIR}/gforge-config
+%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
+%attr(0664, root, root) %config(noreplace) %{CROND_DIR}/gforge
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
+%{GFORGE_DIR}
+%{GFORGE_BIN_DIR}
+%{GFORGE_LIB_DIR}
+%{GFORGE_DB_DIR}
+%{GFORGE_LANG_DIR}
+%{GFORGE_CONF_DIR}/custom
+%{SCM_TARBALLS_DIR}
 
 %changelog
+* Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>
+- fixed Xavier's patch
+- added Mandrake support based on patch [#1194] by Kevin R. Bulgrien
+* Wed Apr 27 2005 Rameau Xavier <xrameau@gmail.com> (for e-LaSer : http://www.e-laser.fr)
+- Adding specification for SuSE Linux Enterprise Server 9 (in .spec)
+- Moving all static definitions to global variables (in .spec)
 * Thu Mar 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - removed useless stuff thanks to Christian's work on db-upgrade.pl
 - s/refresh.sh/gforge-config to improve consistency with debian packaging
