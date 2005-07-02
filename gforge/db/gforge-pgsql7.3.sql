@@ -2338,7 +2338,8 @@ CREATE TABLE artifact_extra_field_list (
     field_type integer DEFAULT 1,
     attribute1 integer DEFAULT 0,
     attribute2 integer DEFAULT 0,
-    is_required integer DEFAULT 0 NOT NULL
+    is_required integer DEFAULT 0 NOT NULL,
+    alias text
 );
 
 
@@ -2873,6 +2874,7 @@ COPY groups (group_id, group_name, homepage, is_public, status, unix_group_name,
 3	News Group	\N	0	A	news	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
 1	Master Group	\N	0	A	gforge	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+5	Template Project	\N	1	P	template	shell1	\N	Project to house templates used to build other projects	\N	\N	1120266772	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	\N
 \.
 
 
@@ -4188,7 +4190,7 @@ COPY role_setting (role_id, section_name, ref_id, value) FROM stdin;
 
 
 
-COPY artifact_extra_field_list (extra_field_id, group_artifact_id, field_name, field_type, attribute1, attribute2, is_required) FROM stdin;
+COPY artifact_extra_field_list (extra_field_id, group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias) FROM stdin;
 \.
 
 
@@ -7238,7 +7240,7 @@ SELECT pg_catalog.setval('group_history_pk_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('groups_pk_seq', 4, true);
+SELECT pg_catalog.setval('groups_pk_seq', 5, true);
 
 
 
