@@ -95,6 +95,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		WHERE $wclause 
 		AND users.user_id=news_bytes.submitted_by 
 		AND news_bytes.group_id=groups.group_id 
+		AND groups.status='A'
 		ORDER BY post_date DESC";
 
 	$result=db_query($sql,$limit+$tail_headlines);

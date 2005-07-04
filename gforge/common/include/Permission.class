@@ -318,7 +318,7 @@ class Permission extends Error {
 	 *	@return	boolean	cvs_flags
 	 */
 	function isCVSReader() {
-		return $this->data_array['cvs_flags'];
+		return $this->isMember('cvs_flags',0);
 	}
 }
 

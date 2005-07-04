@@ -77,6 +77,34 @@ for ($i=0; $i<count($arr); $i++) {
 			exit();
 		}
 	}
+
+	$roleid=db_query("SELECT role_id FROM role WHERE group_id='".$arr[$i]."' AND role_name='Admin'");
+	$admin_roleid=db_result($roleid,0,0);
+	$roleid=db_query("SELECT role_id FROM role WHERE group_id='".$arr[$i]."' AND role_name='Junior Developer'");
+	$junior_roleid=db_result($roleid,0,0);
+
+	$rrole=db_query("SELECT user_id,admin_flags FROM user_group WHERE group_id='".$arr[$i]."'");
+	while ($arrole = db_fetch_array($rrole)) {
+
+		$role_id= (( trim($arrole['admin_flags']) == 'A' ) ? $admin_roleid : $junior_roleid );
+		$user_id=$arrole['user_id'];
+
+		$role = new Role($g,$role_id);
+		if (!$role || !is_object($role)) {
+			$this->setError('Error Getting Role Object');
+			db_rollback();
+			return false;
+		} elseif ($role->isError()) {
+			$this->setError('addUser::roleget::'.$role->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		if (!$role->setUser($user_id)) {
+			$this->setError('addUser::role::setUser'.$role->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+	}
 }
 db_commit();
 echo "SUCCESS\n";

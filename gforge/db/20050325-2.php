@@ -65,6 +65,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		db_rollback();
 		exit(2);
 	}
+
 	$at = new ArtifactType($g,$gaid);
 	if (!$at || !is_object($at)) {
 		echo "\nCould Not Get ArtifactType: $gaid";
@@ -86,12 +87,24 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	for ($j=0; $j<db_numrows($resc); $j++) {
 		$cat_id=db_result($resc,$j,'id');
 		$cat_name=addslashes(db_result($resc,$j,'category_name'));
+		if (strlen($cat_name) < 1) {
+			$cat_name='[empty]';
+		}
 
 		$efe=new ArtifactExtraFieldElement($aef);
-		$efe->create($cat_name);
+		#DEBUG
+		#$efe->create($cat_name);
+		if (!$efe->create($cat_name)) {
+			echo 'Group: '.$group_id.' Could not create category element: '.$cat_name.' '.$efe->getErrorMessage();
+			db_rollback();
+			exit(5);
+		}
 		$efe_id=$efe->getID();
+//echo 'Artifact Category: Group: '.$group_id;
+//print_r($efe->data_array);
 		if (!$efe_id) {
-			echo "\nDid Not Get efe_id";
+			#DEBUG echo "\nDid Not Get efe_id";
+			echo "\nDid Not Get efe_id (group_id: $group_id)";
 			db_rollback();
 			exit(5);
 		}
@@ -127,9 +140,19 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	for ($j=0; $j<db_numrows($resc); $j++) {
 		$artgroup_id=db_result($resc,$j,'id');
 		$group_name=addslashes(db_result($resc,$j,'group_name'));
+		if (strlen($group_name) < 1) {
+			$group_name='[empty]';
+		}
 
 		$efe=new ArtifactExtraFieldElement($aef);
-		$efe->create($group_name);
+		//$efe->create($group_name);
+		if (!$efe->create($group_name)) {
+			echo 'Group: '.$group_id.' Could not create group element: '.$group_name.' '.$efe->getErrorMessage();
+			db_rollback();
+			exit(5);
+		}
+//echo 'Artifact Group: Group: '.$group_id;
+//print_r($efe->data_array);
 		$efe_id=$efe->getID();
 		if (!$efe_id) {
 			echo "\nDid Not Get efe_id";
@@ -169,9 +192,18 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		for ($j=0; $j<db_numrows($resc); $j++) {
 			$resolution_id=db_result($resc,$j,'id');
 			$resolution_name=addslashes(db_result($resc,$j,'resolution_name'));
-
+			if (strlen($resolution_name) < 1) {
+				$resolution_name='[empty]';
+			}
 			$efe=new ArtifactExtraFieldElement($aef);
-			$efe->create($resolution_name);
+		//	$efe->create($resolution_name);
+			if (!$efe->create($resolution_name)) {
+				echo 'Group: '.$group_id.' Could not create resolution element: '.$resolution_name.' '.$efe->getErrorMessage();
+				db_rollback();
+				exit(5);
+			}
+//echo 'Artifact Group: Group: '.$group_id;
+//print_r($efe->data_array);
 			$efe_id=$efe->getID();
 			if (!$efe_id) {
 				echo "\nDid Not Get efe_id";
@@ -195,9 +227,9 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			}
 		}
 	}
+	db_commit();
 }
 
-db_commit();
 
 echo "SUCCESS";
 
