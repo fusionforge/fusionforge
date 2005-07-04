@@ -93,3 +93,5 @@ You can see those Logs in the detail page of trackers and tasks.
 
 Edit the file $GFORGE_ETC_DIR/plugins/cvstracker/config.php and set the $cvs_binary_version to
 1.11 or 1.12 depending on the version in the SCM server.
+
+
