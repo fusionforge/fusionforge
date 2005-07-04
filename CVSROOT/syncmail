@@ -289,12 +289,10 @@ def main():
          specs.append(string.join(fileargs[:3], ','))
          fileargs = fileargs[3:]
 
-    print "%s / [%s]" % (str(type(specs)), str(specs))
     if not args[-1]:
 	usage(1, 'No recipients specified')
     people = []
     people.append(args[-1])
-    print "%s / [%s]" % (str(type(people)), str(people))
 
     # The remaining args should be the email addresses
     # Now do the mail command
