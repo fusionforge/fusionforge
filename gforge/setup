@@ -39,6 +39,7 @@ computedefault(){
 	DEFAULTstatsadmin_groupid=2
 	DEFAULTnewsadmin_groupid=3
 	DEFAULTpeerrating_groupid=4
+	DEFAULTtemplate_project=5
 	DEFAULTadmin_login=admin
 	DEFAULTadmin_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTskill_list="Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
@@ -99,6 +100,7 @@ computedefault(){
 	DEFAULTsys_use_ftp=true
 	DEFAULTsys_use_trove=true
 	DEFAULTsys_use_snippet=true
+	DEFAULTsys_use_shell=true
 	DEFAULTsys_use_ssl=false
 	DEFAULTsys_use_people=true
 	DEFAULTsys_use_ftpuploads=false
