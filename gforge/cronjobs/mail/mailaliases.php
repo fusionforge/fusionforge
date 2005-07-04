@@ -28,7 +28,6 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-
 /*
 
 NOTE - THIS SQL CAN BE USED ON A SECOND SERVER TO GRANT ONLY THE NEEDED PERMS
@@ -40,6 +39,10 @@ GRANT SELECT ON mail_group_list, users, deleted_mailing_lists, forum_group_list,
 
 GRANT INSERT, UPDATE ON deleted_mailing_lists TO listsuser;
 
+GRANT UPDATE ON mail_group_list TO listsuser;
+
+GRANT ALL ON project_sums_agg TO cvsuser;
+
 */
 
 // This works only if this file is in cronjobs/mail/
@@ -47,7 +50,6 @@ $path_to_cronjobs = dirname(dirname(__FILE__));
 
 // You should also modify this to the correct PHP path and extra configuration (if needed)
 $php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
-
 
 if (!file_exists('/etc/aliases.org')) {
 	$err .= "CANNOT PROCEED - you must first backup your /etc/aliases file";
@@ -119,7 +121,7 @@ if ($sys_use_tracker) {
 			//alias is already taken - perhaps by default
 		} else {
 			$def_aliases[$trackername]=1;
-			fwrite($fp,"$trackername:	|\"".$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
+			fwrite($fp,"$trackername:	\"|".$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
 		}
 	}
 }

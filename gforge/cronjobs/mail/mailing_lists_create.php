@@ -69,6 +69,7 @@ for ($i=0; $i<$rows; $i++) {
 		passthru($lcreate_cmd, $failed);
 		if($failed) {
 			$err .= 'Failed to create '.$listname.", skipping\n";
+echo $err;
 			continue;
 		} else {
 			// Privatize the new list
@@ -110,9 +111,10 @@ $listname.':		"|'.$sys_path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
 }
 
 // Update status
-if(!empty($mailingListIds)) {
-	db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' where group_list_id IN('.implode(',', $mailingListIds).')');
-}
+//if(!empty($mailingListIds)) {
+	db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' WHERE status=\''.MAIL__MAILING_LIST_IS_REQUESTED.'\'');
+echo db_error();
+//}
 
 fclose($h1);
 
