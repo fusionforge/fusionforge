@@ -15,4 +15,4 @@ LockDir=/cvs-locks
 # Cut down on disk I/O by only logging write operations - rao, 2003-09-09
 LogHistory=TMAR
 
-#UseNewInfoFmtStrings=yes
+UseNewInfoFmtStrings=yes
