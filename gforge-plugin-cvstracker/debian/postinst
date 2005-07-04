@@ -27,7 +27,7 @@ case "$1" in
     configure)
 	/usr/lib/gforge/plugins/cvstracker/bin/db-upgrade.pl
 	/usr/lib/gforge/bin/register-plugin cvstracker "cvstracker"
-	invoke-rc.d apache reload
+	[ -x /etc/init.d/apache2 ] && invoke-rc.d apache2 reload || invoke-rc.d apache reload
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
