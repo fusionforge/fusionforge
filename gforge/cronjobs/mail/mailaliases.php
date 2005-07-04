@@ -41,7 +41,7 @@ GRANT INSERT, UPDATE ON deleted_mailing_lists TO listsuser;
 
 GRANT UPDATE ON mail_group_list TO listsuser;
 
-GRANT ALL ON project_sums_agg TO cvsuser;
+GRANT ALL ON project_sums_agg TO listsuser;
 
 */
 
