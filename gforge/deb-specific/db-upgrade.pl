@@ -2140,6 +2140,57 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.1-7" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050605.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050605.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.1-8" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050617.php") ;
+	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050617.php") == 0
+	or die "system call of 20050325-2.php failed: $?" ;
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.1-9" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050628.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050628.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
     &debug ("Please enjoy using GForge.") ;
 

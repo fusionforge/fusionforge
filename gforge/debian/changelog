@@ -1,3 +1,9 @@
+gforge (4.1-7) unstable; urgency=low
+
+  * [Christian] Added 20050605.sql, 20050617.php, 20050628.sql in db-upgrade
+
+ -- Christian Bayle <bayle@debian.org>  Sun,  3 Jul 2005 17:44:38 +0200
+
 gforge (4.1-5z18) unstable; urgency=low
 
   * [Christian] nss-pgsql1 integration
