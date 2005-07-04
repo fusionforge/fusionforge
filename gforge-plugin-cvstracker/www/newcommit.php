@@ -27,7 +27,6 @@ require_once('plugins/cvstracker/config.php');
 $Config = array();
 $Config['UserName']        = $_POST['UserName'];
 $Config['Repository']      = $_POST['Repository'];
-$Config['Path']            = $_POST['Path'];
 $Config['FileName']        = $_POST['FileName'];
 $Config['PrevVersion']     = $_POST['PrevVersion'];
 $Config['ActualVersion']   = $_POST['ActualVersion'];
@@ -122,7 +121,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 				"(holder_id, cvs_date, log_text, file, prev_version, ".
 				"actual_version, author)".
 				" VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
-				"','".$Config['Path']."/".$Config['FileName']."','".
+				"','".$Config['FileName']."','".
 				$Config['PrevVersion']."','".
 				$Config['ActualVersion']."','".$Config['UserName']."')";
 			$DBRes = db_query($Query);
@@ -178,7 +177,7 @@ function addTaskLog($Config, $GroupId, $Num)
 				"(holder_id, cvs_date, log_text, file, prev_version, ".
 				"actual_version, author)".
 				" VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
-				"','".$Config['Path']."/".$Config['FileName'].
+				"','".$Config['FileName'].
 				"','".$Config['PrevVersion']."','".
 				$Config['ActualVersion']."','".$Config['UserName']."')";
 				$DBRes = db_query($Query);
