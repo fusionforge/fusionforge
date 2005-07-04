@@ -35,6 +35,10 @@ require ('local.inc');
 require ('plugins/cvstracker/config.php');
 require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
+
+if ($cvs_binary_version != "1.12" &&
+	$cvs_binary_version != "1.11" )
+	$cvs_binary_version = "1.12";
 /**
  * It returns the usage and exit program
  *
@@ -42,7 +46,13 @@ require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
  *
  */
 function usage( $argv ) {
-	echo "Usage: $argv[0] <Repository> <Path> [<File> <VersionFrom> <VersionTo>]xN\n";
+	global $cvs_binary_version;
+	if ($cvs_binary_version == "1.12" ) {
+		echo "Usage: $argv[0] <Repository> <Path> [<File> <VersionFrom> <VersionTo>]xN\n";
+	} 
+	if ($cvs_binary_version == "1.11" ) {
+		echo "Usage: $argv[0] <Repository> [<File>,<VersionFrom>,<VersionTo>]xN\n";
+	}
 	exit(0);
 }
 
@@ -105,10 +115,9 @@ function getLog($Input)
 }
 
 $files = array();
-if($argc == 3) {
+if( $cvs_binary_version == "1.11" ) {
 	$repository      = $argv[1];
 	$parameters = explode(' ', $argv[2]);
-	$path = $parameters[0];
 	
 	for($i = 1; $i < count($parameters); $i++) {
 		$filesInformation = explode(',', trim($parameters[$i], ','));
@@ -120,7 +129,8 @@ if($argc == 3) {
 		);
 	}
 	
-} else {
+} 
+if ( $cvs_binary_version == "1.12" ) {
 	if ($argc < 6 ) {
 		usage ( $argv );
 	}
@@ -135,7 +145,7 @@ if($argc == 3) {
 	
 	for ( $i=0; $i < $NumFiles; $i++ ) {
 		$files[] = array(
-			'name' => $argv[3 + 3*$i],
+			'name' => $path."/".$argv[3 + 3*$i],
 			'previous' => $argv[4 + 3*$i],
 			'actual' => $argv[5 + 3*$i]
 		);
@@ -157,7 +167,6 @@ foreach ( $files as $file )
 {
 	$SubmitVars["UserName"]        = $UserName;
 	$SubmitVars["Repository"]      = $repository;
-	$SubmitVars["Path"]            = $path;
 	$SubmitVars["FileName"]        = $file['name'];
 	$SubmitVars["PrevVersion"]     = $file['previous'];
 	$SubmitVars["ActualVersion"]   = $file['actual'];
@@ -172,5 +181,4 @@ foreach ( $files as $file )
 	$snoopy->submit($SubmitUrl,$SubmitVars);
 	print $snoopy->results;
 }
-
 ?>

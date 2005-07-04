@@ -35,15 +35,26 @@ if (!$Res) {
         echo "Error. Couldn't get Group List!\n";
 }
 
+if ($cvs_binary_version != "1.11" &&
+	$cvs_binary_version != "1.12" )
+		$cvs_binary_version = "1.12";
+
 function addCvsTrackerToFile($path) {
-	global $sys_plugins_path, $sys_users_host;
+	global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
 	
 	$FOut = fopen($path, "a");
 	if($FOut) {
 		fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
-		$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-			" ".$sys_plugins_path."/cvstracker/bin/post.php".
-			" %{sVv} )\n";
+		if ( $cvs_binary_version == "1.12" ) {
+			$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" %r %p %{sVv} )\n";
+		} 
+		if ( $cvs_binary_version == "1.11") {
+			$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" %r %{sVv} )\n";
+		}
 		fwrite($FOut,$Line);
 		fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
 		fclose($FOut);
