@@ -283,16 +283,12 @@ def main():
     if not args:
         usage(1, 'No CVS module specified')
     subject = args[0]
-    print "SUBJECT: %s / [%s]" % (str(type(subject)), str(subject))
     fileargs = args[1:-1]
-    print "FILEARGS: %s / [%s]" % (str(type(fileargs)), str(fileargs))
     specs = []
     specs.append(subject)
     while len(fileargs) > 0:
          specs.append(string.join(fileargs[:3], ','))
          fileargs = fileargs[3:]
-
-    print "SPECS: %s / [%s]" % (str(type(specs)), str(specs))
 
     if not args[-1]:
 	usage(1, 'No recipients specified')
