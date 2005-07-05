@@ -11,5 +11,13 @@ This version is restricted to one EMAIL each line in loginfo.
 
 So, you may want to have several lines in loginfo.
 
+UPDATE:
+I have added several files called syncmail-cvs-* for
+supporting different CVS versions.
+
+The 1.11 version is not very well identified, so maybe
+could be 1.12 using -u %1{sSv} options.
+
+
 Francisco Gimeno
 <francisco _aT_ gforgegroup _dOt_ com>
