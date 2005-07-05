@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/Dtd/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   ">
+
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/themes/gforgegroup/images/gforge.css" rel="stylesheet" TYPE="text/css">
+	<title>GForge CDE:Exiting with error</title>
+	<script language="JavaScript" type="text/javascript">
+	<!--
+	function admin_window(adminurl) {
+		AdminWin = window.open( adminurl, 'AdminWindow','scrollbars=yes,resizable=yes, toolbar=yes, height=400, width=400, top=2, left=2');
+		AdminWin.focus();
+	}
+	function help_window(helpurl) {
+		HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+	}
+	// -->
+		</script>
+<style type="text/css">
+	<!--
+	OL,UL,P,BODY,TR,TD,TH,FORM {
+		font-family: arialverdana,arial,helvetica,sans-serif;
+		font-size:13px;
+		color: #202020;
+	}
+H1 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H2 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H3 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H4 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H5 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H6 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+
+P { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; COLOR: #535c5f;}
+
+PRE,TT { font-family: courier,sans-serif }
+.titlebar { FONT-SIZE:13px; color: #000000; text-decoration: none; font-weight: bold; }
+.develtitle {
+	FONT-SIZE: 13px; COLOR: #535c5f; FONT-FAMILY: arial
+}
+
+	-->
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" width="100%" background="/themes/gforgegroup/images/bg_head.gif" border="0">
+	<tbody>
+	<tr>
+		<td width="50%" height=61 rowSpan=2><a href="/"><img src="/themes/gforgegroup/images/logo.jpg" border="0" alt="" width="202" height="61" /></a></td>
+		<td align="right" width="50%" height="30">				<a class="lnkutility" href="/account/login.php">Log In</a>&nbsp;&nbsp;<SPAN
+		class=txtutility>|</SPAN>&nbsp;&nbsp;<a class="lnkutility" href="/account/register.php">New Account</a>
+				&nbsp;&nbsp;</td>
+	<tr>
+		<td align=right height=31>
+		
+		<form action="/search/" method="get">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr><td>
+		<div align="center" style="font-size:smaller"><select name="type_of_search"><option value="soft">Software/Group</option>
+<option value="people">People</option>
+<option value="skill">Skill</option>
+</select></div></td><td>&nbsp;</td><td><input type="text" size="12" name="words" value="" /></td><td>&nbsp;</td><td><input type="submit" name="Search" value="Search" /></td></tr></table></form></td>
+	</tr>
+</table>
+
+
+
+		<!-- start tabs -->
+
+		<table height="30" bgcolor=white border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tbody><tr>
+					<td width="25%" align="center" background=/themes/gforgegroup/images/theme-toptab-selected-bg.gif><img hspace=5 src="/themes/gforgegroup/images/theme-toptab-bullet.gif"><a class=lnkutilitydark href="/">HOME</a></td><td width=2><img src="/themes/gforgegroup/images/theme-toptab-div.gif"></td>
+					<td width="25%" align="center" background=/themes/gforgegroup/images/theme-toptab-notselected-bg.gif><a class=lnkutility
+						href="/my/">MY PAGE</a></td><td width=2><img src="/themes/gforgegroup/images/theme-toptab-div.gif"></td>
+					<td width="25%" align="center" background=/themes/gforgegroup/images/theme-toptab-notselected-bg.gif><a class=lnkutility
+						href="/softwaremap/">PROJECT TREE</a></td><td width=2><img src="/themes/gforgegroup/images/theme-toptab-div.gif"></td>
+					<td width="25%" align="center" background=/themes/gforgegroup/images/theme-toptab-notselected-bg.gif><a class=lnkutility
+						href="/snippet/">CODE SNIPPETS</a></td></tr>
+		</tr>
+		</table>
+
+		<!-- end tabs -->
+
+		<!-- New Table for next tab set -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+		<!-- Outer body row -->
+
+		<td bgcolor="white" valign="top" align="right">
+		</td>
+		<td valign="top" width="99%" bgcolor="#E0E0E0" colspan="3">
+
+			<!-- Inner Tabs / Shell -->
+
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="white">
+			<tr>
+				<td align="left" bgcolor="#ffffff" width="5" height="10"></td>
+				<td bgcolor="#ffffff"><img src="/themes/gforgegroup/images/clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" bgcolor="#ffffff" width="9"></td>
+			</tr>
+
+			<tr>
+				<td bgcolor="#ffffff" width="5"></td>
+				<td valign="top" width="99%" bgcolor="white">
+
+	<h2><span style="color:#FF3333">ERROR - No group_id was chosen</span></h2><p>No group Id was chosen</p>			<center>
+			<a href="http://gforgegroup.com/"><img src="/pro/gfgps_banner_small.gif" height="58" width="468" border="0" alt="GForge Group Professional Services" /></a><br /><br />
+			</center>
+
+			<!-- end main body row -->
+
+
+				</td>
+				<td width="10" bgcolor="#ffffff"><img src="/themes/gforgegroup/images/clear.png" width="2" height="1" alt="" /></td>
+			</tr>
+			<tr>
+			<td colspan="3" bgcolor="#ffffff">
+			<br />
+<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<center>
+<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+</center>
+
+			</td>
+			</tr>
+			<tr>
+				<td align="left" bgcolor="white" width="1"></td>
+				<td bgcolor="#ffffff"></td>
+				<td align="right" bgcolor="white" width="9"></td>
+			</tr>
+			</table>
+
+		<!-- end inner body row -->
+
+		</td>
+		<td width="10" bgcolor="white"><img src="/themes/gforgegroup/images/clear.png" width="2" height="1" alt="" /></td>
+	</tr>
+	
+		<tr>
+		<td align="left" bgcolor="white" width="9"></td>
+		<td bgcolor="white" colspan="3"></td>
+		<td align="right" bgcolor="white" width="9"></td>
+	</tr>
+
+</table>
+
+</body>
+</html>
