@@ -719,6 +719,7 @@ class ArtifactType extends Error {
 			return false;
 		}
 		if (!isset($this->extra_field[$id])) {
+			$this->extra_field[$id] = array();
 			$sql="select element_id,element_name,status_id
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id ='".$id."'  
