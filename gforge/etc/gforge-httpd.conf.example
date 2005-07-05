@@ -44,12 +44,12 @@ SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
 #
 #	LOCATION may have to be used instead of FILES for some installs
 #
-#<Location /projects>
-#  ForceType application/x-httpd-php
-#</Location>
-#<Location /users>
-#  ForceType application/x-httpd-php
-#</Location>
+<Location /projects>
+  ForceType application/x-httpd-php
+</Location>
+<Location /users>
+  ForceType application/x-httpd-php
+</Location>
 DirectoryIndex index.php
 </VirtualHost>
 
@@ -142,13 +142,13 @@ DirectoryIndex index.php index.cgi index.html index.htm
   SSLCertificateKeyFile /etc/httpd/ssl/svn.gforge.company.com.pem
   <Location /svn>
   #  GforgeAuthzEnabled on
-    GforgeSysPath       /var/svn
+    GforgeSysPath       /svnroot
     GforgeGroupsRoot	/svn
     GforgeAnonClause    "groups.enable_anonscm >= '1'"
     GforgeReadClause	"cvs_flags >= '0'"
     GforgeWriteClause	"cvs_flags >= '1'"
     DAV svn
-    SVNParentPath	/var/svn
+    SVNParentPath	/svnroot
     SVNAutoversioning	on
     SVNIndexXSLT        /svnindex.xsl
     AuthType            basic
