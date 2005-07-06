@@ -1,7 +1,7 @@
 <?php
 
-$domain=ereg_replace('[^\.]*\.(.*)$','\1',$GLOBALS['HTTP_HOST']);
-$group_name=ereg_replace('([^\.]*)\..*$','\1',$GLOBALS['HTTP_HOST']);
+$domain=ereg_replace('[^\.]*\.(.*)$','\1',$_SERVER['HTTP_HOST']);
+$group_name=ereg_replace('([^\.]*)\..*$','\1',$_SERVER['HTTP_HOST']);
 
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
