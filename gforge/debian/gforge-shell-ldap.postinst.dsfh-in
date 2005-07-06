@@ -28,6 +28,7 @@ set -e
 #DSFHELPER:replace-files#
 case "$1" in
     configure)
+    	db_stop
 	/usr/sbin/gforge-config
 
         # Patch Slapd configuration files
