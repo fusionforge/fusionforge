@@ -1,4 +1,4 @@
-gforge (4.1-7) unstable; urgency=low
+gforge (4.1-8) unstable; urgency=low
 
   * [Christian] Added 20050605.sql, 20050617.php, 20050628.sql in db-upgrade
 

@@ -196,8 +196,8 @@ class SVNPlugin extends SCM {
 	}
 
 	function display_scm_admin_page ($params) {
-		$group =& group_get_object($params['group_id']);
 		global $Language ;
+		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) ) {
 			?>
 			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo $Language->getText('plugin_scmsvn', 'enable_anonymous_svn') ?></strong></p>
@@ -208,8 +208,17 @@ class SVNPlugin extends SCM {
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
-		list($commit_num, $add_num) = $this->get_total_stats($group_id);
-		echo ' (SVN: '.$Language->getText('plugin_scmsvn','svn_updates',array(number_format($commit_num,0),number_format($add_num,0))).')';
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+
+		if ($project->usesPlugin ($this->name)) {
+			list($commit_num, $add_num) = $this->get_total_stats($group_id);
+			echo ' (SVN: '.$Language->getText('plugin_scmsvn','svn_updates',array(number_format($commit_num,0),number_format($add_num,0))).')';
+		}
 	}
 
 	// Get the total stats for a group

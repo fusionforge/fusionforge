@@ -342,6 +342,7 @@ if ($project->usesSCM()) {
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_scm')));
 	print " ".$Language->getText('group','long_scm')."</a>";
 
+	/*
 	$result = db_query("
 		SELECT sum(commits) AS commits,sum(adds) AS adds
 		FROM stats_cvs_group
@@ -355,6 +356,7 @@ if ($project->usesSCM()) {
 	if (!$cvs_add_num) {
 		$cvs_add_num=0;
 	}
+	*/
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
