@@ -11,5 +11,5 @@
 # Repositories update
 5 * * * * root [ -x /usr/lib/gforge/plugins/scmcvs/bin/cvs_dump.pl ] && su -s /bin/sh gforge -c /usr/lib/gforge/plugins/scmcvs/bin/cvs_dump.pl && [ -x /usr/lib/gforge/plugins/scmcvs/bin/cvs_update.pl ] && /usr/lib/gforge/plugins/scmcvs/bin/cvs_update.pl
 
-# Statistics
-45 4 * * Sun root [ -x /usr/lib/gforge/plugins/scmsvn/bin/svn-stats.pl ] && /usr/lib/gforge/plugins/scmsvn/bin/svn-stats.pl
+# CVS add/commit Statistics
+45 4 * * * root [ -x /usr/lib/gforge/plugins/scmcvs/bin/stats_cvs.pl ] && /usr/lib/gforge/plugins/scmcvs/bin/stats_cvs.pl
