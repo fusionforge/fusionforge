@@ -1,4 +1,4 @@
-gforge-plugin-scmsvn (4.1-8) unstable; urgency=low
+gforge-plugin-scmsvn (4.1-9) unstable; urgency=low
 
   * New upstream 
   * [Christian] Added dependancy to php4-cli

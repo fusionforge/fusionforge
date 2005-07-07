@@ -1,6 +1,7 @@
 2005-07-07  Christian Bayle <bayle@debian.org>
 
 	* Fixed [#1394] duplicate SCM summary in project home page
+	* Fixed [#1325] Error on the index.php of all the projects page
 
 2005-06-30	Marcelo Mottalli	<marcelo@gforgegroup.com>
 

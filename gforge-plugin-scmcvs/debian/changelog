@@ -1,4 +1,4 @@
-gforge-plugin-scmcvs (4.1-8) unstable; urgency=low
+gforge-plugin-scmcvs (4.1-9) unstable; urgency=low
 
   * [Christian] Version taking in account nss
   * [Christian] Make cvs_dump.pl script select only groups that use
