@@ -100,7 +100,9 @@ sub add_group {
 	system("chmod 2775 $log_dir");
 	system("chmod 2775 $cgi_dir");
 	system("chmod 2775 $ht_dir");
+	system("chmod 660 $ht_dir/index.php");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
+	chown $dummy_uid, $gid, ("$ht_dir/index.php");
 }
 
 #############################
