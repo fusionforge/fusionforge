@@ -93,6 +93,8 @@ in /usr/lib/gforge/bin/.
   For cvs to work you have to add a symlink doing
 ln -s /var/lib/gforge/chroot/cvsroot /cvsroot.
 We can't do this for Debian policy reason that forbid this.
+  For svn similar 
+ln -s /var/lib/gforge/chroot/svnroot /svnroot is to be done
 
   Don't forget about adding 
 SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd
