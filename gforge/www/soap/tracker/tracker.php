@@ -915,8 +915,8 @@ $server->wsdl->addComplexType(
 	'',
 	array(
 	'ArtifactType' => array('name'=>'ArtifactType', 'type' => 'tns:ArtifactType'),
-	'technicians' => array('name'=>'technicians', 'type' => 'tns:ArrayOfUser'),
-	'artifacts' => array('name'=>'artifacts', 'type' => 'tns:ArrayOfArtifact')
+	'technicians' => array('name'=>'technicians', 'type' => 'tns:ArrayOfUser')
+//	'artifacts' => array('name'=>'artifacts', 'type' => 'tns:ArrayOfArtifact')
 	)
 );
 
@@ -939,7 +939,6 @@ $server->wsdl->addComplexType(
 	'',
 	array(
 	'group' => array('name'=>'groups', 'type' => 'tns:Group'),
-//THIS IS NOT RIGHT - IT WOULD PROBABLY BE ARRAY OF ARTIFACT_TYPE 
 	'artifacttypes' => array('name'=>'artifacttypes', 'type' => 'tns:ArrayOfArtifactTypeData')
 	)
 );
@@ -1027,7 +1026,7 @@ function getProjectData($session_ser) {
 				if ($atobjs[$i]->isError()) {	
 				   	return new soap_fault('','getProjectData',$atobjs[$i]->getErrorMessage(),$atobjs[$i]->getErrorMessage());
 				} else {
-					$afobj = new ArtifactFactory($atobjs[$i]);
+	/*				$afobj = new ArtifactFactory($atobjs[$i]);
 					if (!$afobj || !is_object($afobj)) {
 						return new soap_fault ('','getProjectData','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
 					} elseif ($afobj->isError()) {
@@ -1036,8 +1035,9 @@ function getProjectData($session_ser) {
 					$afobj->setup(0,'','',0,'custom',false,false);
 					$tmpartifactlist=$afobj->getArtifacts();
 					//$returnArtifacts=array();
+	*/
 					$returnTechnicians=users_to_soap($atobjs[$i]->getTechnicianObjects());
-					$returnArtifacts=artifacts_to_soap($tmpartifactlist);
+//					$returnArtifacts=artifacts_to_soap($tmpartifactlist);
 					
 					// Get list of extra fields for this artifact
 					$extrafields = array();
@@ -1078,10 +1078,10 @@ function getProjectData($session_ser) {
 			       	);
 					$returnATdata[] = array(
 						'ArtifactType' => $returnArtifactType,
-						'technicians' => $returnTechnicians,
-						'artifacts' => $returnArtifacts);
+						'technicians' => $returnTechnicians);
+	//					'artifacts' => $returnArtifacts);
 					$returnTechnicians=array();
-					$returnArtifacts=array();
+	//				$returnArtifacts=array();
 					$returnArtifactType=array();
 				}
 			}
