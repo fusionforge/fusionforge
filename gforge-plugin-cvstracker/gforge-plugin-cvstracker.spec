@@ -1,5 +1,5 @@
 %define plugin		cvstracker
-%{!?release:%define release 1}
+%{!?release:%define release 2}
 
 Summary: CVS Tracker Plugin for GForge CDE
 Name: gforge-plugin-%{plugin}
@@ -103,7 +103,7 @@ fi
 %files
 %defattr(-, root, root)
 %doc AUTHORS COPYING README
-%attr(0660, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF_DIR}/config.php
+%attr(0664, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF_DIR}/config.php
 %{PLUGIN_LIB_DIR}/bin
 %{PLUGIN_LIB_DIR}/include
 %{PLUGIN_LIB_DIR}/lib
@@ -112,6 +112,8 @@ fi
 %{CROND_DIR}/%{name}
 
 %changelog
+* Fri Jul 08 2005  Guillaume Smet <guillaume-gforge@smet.org>
+- config.php is now 664 instead of 660
 * Fri Apr 29 2005 Xavier Rameau <xrameau@gmail.com>
 - Added support for SuSE
 * Sat Mar 05 2005  Guillaume Smet <guillaume-gforge@smet.org>
