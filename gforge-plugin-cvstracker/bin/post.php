@@ -51,7 +51,7 @@ function usage( $argv ) {
 		echo "Usage: $argv[0] <Repository> <Path> [<File> <VersionFrom> <VersionTo>]xN\n";
 	} 
 	if ($cvs_binary_version == "1.11" ) {
-		echo "Usage: $argv[0] <Repository> [<File>,<VersionFrom>,<VersionTo>]xN\n";
+		echo "Usage: $argv[0] <Repository> [<File>,<VersionFrom>,<VersionTo>xN]\n";
 	}
 	exit(0);
 }
@@ -115,7 +115,18 @@ function getLog($Input)
 }
 
 $files = array();
+
+if($cvs_tracker_debug) {
+	echo "Arguments count: ".$argc."\n";
+	echo "Arguments passed to post.php:\n";
+	print_r($argv);
+}
+
 if( $cvs_binary_version == "1.11" ) {
+	if ($argc != 3 ) {
+		usage ( $argv );
+	}
+	
 	$repository      = $argv[1];
 	$parameters = explode(' ', $argv[2]);
 	
@@ -174,6 +185,11 @@ foreach ( $files as $file )
 	$SubmitVars["TaskNumbers"]     = getInvolvedTasks($Log);
 	$SubmitVars["ArtifactNumbers"] = getInvolvedArtifacts($Log);
 	$SubmitVars["CvsDate"]         = time();
+	
+	if($cvs_tracker_debug) {
+		echo "Variables submitted to newcommit.php:\n";
+		print_r($SubmitVars);
+	}
 /*	if (isset($SubmitVars['TaskNumbers']) &&
 		isset($SubmitVars['ArtifactNumbers'])) {
 		exit(0);

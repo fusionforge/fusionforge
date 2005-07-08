@@ -35,6 +35,11 @@ $Config['TaskNumbers']     = $_POST['TaskNumbers'];
 $Config['Log']             = $_POST['Log'];
 $Config['CvsDate']         = $_POST['CvsDate'];
 
+if($cvs_tracker_debug) {
+	echo "Variables received by newcommit.php:\n";
+	print_r($Config);
+}
+
 /**
  * Checks if the commit it's possible and parse arguments
  * Checks if repository, group and user_name are right.
@@ -47,7 +52,7 @@ $Config['CvsDate']         = $_POST['CvsDate'];
  */
 function parseConfig($Config)
 {
-	global $sys_cvsroot_path;
+	global $sys_cvsroot_path, $cvs_tracker_debug;
 	
 	$Result = array();
 	$Result['check'] = true;
@@ -57,10 +62,15 @@ function parseConfig($Config)
 	if($sys_cvsroot_path[strlen($sys_cvsroot_path)]!='/') {
 		$sys_cvsroot_path.='/';
 	}
-	if (strncmp($Repository,$sys_cvsroot_path, strlen($sys_cvsroot_path) )== 0)
-		$GroupName=substr($Repository, strlen($sys_cvsroot_path));
-	echo "GroupName=".$GroupName;
-	echo "CVSRootPath=".$sys_cvsroot_path;
+	if(strncmp($Repository,$sys_cvsroot_path, strlen($sys_cvsroot_path)) == 0) {
+		$GroupName = substr($Repository, strlen($sys_cvsroot_path));
+	} else {
+		$GroupName = $Repository;
+	}
+	if($cvs_tracker_debug) {
+		echo "GroupName = ".$GroupName."\n";
+		echo "CVSRootPath = ".$sys_cvsroot_path."\n";
+	}
 
 	$Result['group']    = group_get_object_by_name($GroupName);
 	$Result['user']     = user_get_object_by_name($UserName);

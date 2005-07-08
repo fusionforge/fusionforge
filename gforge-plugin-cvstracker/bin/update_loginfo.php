@@ -39,7 +39,7 @@ if ($cvs_binary_version != "1.11" &&
 	$cvs_binary_version != "1.12" )
 		$cvs_binary_version = "1.12";
 
-function addCvsTrackerToFile($path) {
+function addCvsTrackerToFile(& $Group, $path) {
 	global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
 	
 	$FOut = fopen($path, "a");
@@ -53,7 +53,7 @@ function addCvsTrackerToFile($path) {
 		if ( $cvs_binary_version == "1.11") {
 			$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
 				" ".$sys_plugins_path."/cvstracker/bin/post.php".
-				" %r %{sVv} )\n";
+				" ".$Group->getUnixName()." %{sVv} )\n";
 		}
 		fwrite($FOut,$Line);
 		fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
@@ -78,7 +78,7 @@ while ($Row = db_fetch_array($Res)) {
 			fclose($FIn);
 			if($LineFound==FALSE) {
 				echo $Group->getUnixName().": loginfo modified\n";
-				addCvsTrackerToFile($sys_cvsroot_path."/".$Row["unix_group_name"]."/CVSROOT/loginfo");
+				addCvsTrackerToFile($Group, $sys_cvsroot_path."/".$Row["unix_group_name"]."/CVSROOT/loginfo");
 			}
 		}
 	}
