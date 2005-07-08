@@ -286,10 +286,10 @@ $server->register(
 
 // This is for retrieving a single file base64-encoded
 $server->register(
-	'getArtifactFile',
+	'getArtifactFileData',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int','file_id'=>'xsd:int'),
-	array('getArtifactFileResponse'=>'xsd:string'),
-	$uri,$uri.'#getArtifactFile','rpc','encoded'
+	array('getArtifactFileDataResponse'=>'xsd:string'),
+	$uri,$uri.'#getArtifactFileData','rpc','encoded'
 );
 
 
@@ -719,34 +719,34 @@ function artifactfiles_to_soap($files_arr) {
 	return $return;
 }
 
-function getArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,$file_id) {
+function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact_id,$file_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactFile','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getArtifactFileData','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault ('','getArtifactFileData',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactFile','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault ('','getArtifactFileData','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactFile',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault ('','getArtifactFileData',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','getArtifactFile','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault ('','getArtifactFileData','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','getArtifactFile',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault ('','getArtifactFileData',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 	
 	$af=new ArtifactFile($a,$file_id);
 	if (!$af || !is_object($af)) {
-		return new soap_fault ('','ArtifactFile','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
+		return new soap_fault ('','getArtifactFileData','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
 	} else if ($af->isError()) {
-		return new soap_fault ('','ArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault ('','getArtifactFileData',$af->getErrorMessage(),$af->getErrorMessage());
 	} 
 	
 	//send file encoded in base64
