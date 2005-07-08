@@ -83,6 +83,10 @@ if [ "$1" = "1" ] ; then
 	%{GFORGE_BIN_DIR}/register-plugin %{plugin} "CVS Tracker" &> /dev/null
 	
 	su -l %{gfuser} -c "%{PLUGIN_LIB_DIR}/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
+	
+	# we have to check the CVS version and change it in the config file
+	CVS_VERSION=`cvs --version | grep 'Concurrent Versions System (CVS)' | sed -r 's/[a-z\(\) ]+ ([0-9]\.[0-9]{2})\.[0-9]{1,2}[a-z\(\)\/ ]+/\1/i'`
+	sed -i "s/1\.12/$CVS_VERSION/" %{PLUGIN_CONF_DIR}/config.php
 else
 	# upgrade
 	su -l %{gfuser} -c "%{PLUGIN_LIB_DIR}/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
@@ -114,6 +118,7 @@ fi
 %changelog
 * Fri Jul 08 2005  Guillaume Smet <guillaume-gforge@smet.org>
 - config.php is now 664 instead of 660
+- we detect the version of CVS and we update the config file accordingly on installation
 * Fri Apr 29 2005 Xavier Rameau <xrameau@gmail.com>
 - Added support for SuSE
 * Sat Mar 05 2005  Guillaume Smet <guillaume-gforge@smet.org>
