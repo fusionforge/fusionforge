@@ -309,6 +309,34 @@ $server->register(
 	$uri,$uri.'#addArtifactFile','rpc','encoded'
 );
 
+//ARTIFACT QUERY DEFINITIONS
+//insertElements($id,$status,$assignee,$changed_since,$sort_col,$sort_ord,$extra_fields)
+
+//
+//	ArtifactFile Delete
+//
+$server->register(
+	'artifactFileDelete',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int','file_id'=>'xsd:int'),
+	array('artifactFileDeleteResponse'=>'tns:boolean'),
+	$uri,$uri.'#artifactFileDeleteResponse','rpc','encoded'
+);
+
+function artifactFileDelete($session_ser,$group_id,$group_artifact_id,$artifact_id,$file_id) {
+	continue_session($session_ser);
+	$a =& artifactfile_get_object($file_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactFileDelete','Could Not Get ArtifactFile','Could Not Get ArtifactFile');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	if (!$a->delete()) {
+		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
+	} else {
+		return true;
+	}
+}
+
 
 //
 //	ArtifactMessage
@@ -366,6 +394,100 @@ $server->register(
 	$uri,$uri.'#getArtifactTechnicians','rpc','encoded'
 );
 
+//
+//	Artifact Monitoring
+//
+$server->register(
+	'artifactSetMonitor',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
+	array('artifactSetMonitorResponse'=>'tns:boolean'),
+	$uri,$uri.'#artifactSetMonitorResponse','rpc','encoded'
+);
+
+$server->register(
+	'artifactIsMonitoring',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
+	array('artifactIsMonitoringResponse'=>'tns:boolean'),
+	$uri,$uri.'#artifactIsMonitoringResponse','rpc','encoded'
+);
+
+function artifactSetMonitor($session_ser,$group_id,$group_artifact_id,$artifact_id) {
+	continue_session($session_ser);
+	$a =& artifact_get_object($artifact_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactSetMonitor','Could Not Get Artifact','Could Not Get Artifact');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	$a->setMonitor();
+	return true;
+}
+
+function artifactIsMonitoring($session_ser,$group_id,$group_artifact_id,$artifact_id) {
+	continue_session($session_ser);
+	$a =& artifact_get_object($artifact_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactIsMonitoring','Could Not Get Artifact','Could Not Get Artifact');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	return $a->isMonitoring();
+}
+
+//
+//	Artifact Delete
+//
+$server->register(
+	'artifactDelete',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
+	array('artifactDeleteResponse'=>'tns:boolean'),
+	$uri,$uri.'#artifactDeleteResponse','rpc','encoded'
+);
+
+function artifactDelete($session_ser,$group_id,$group_artifact_id,$artifact_id) {
+	continue_session($session_ser);
+	$a =& artifact_get_object($artifact_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactDelete','Could Not Get Artifact','Could Not Get Artifact');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	if (!$a->delete()) {
+		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
+	} else {
+		return true;
+	}
+}
+
+$server->register(
+	'artifactTypeIsMonitoring',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
+	array('artifactTypeIsMonitoringResponse'=>'tns:boolean'),
+	$uri,$uri.'#artifactTypeIsMonitoringResponse','rpc','encoded'
+);
+
+function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
+	continue_session($session_ser);
+	$a =& artifacttype_get_object($group_artifact_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactTypeSetMonitor','Could Not Get ArtifactType','Could Not Get ArtifactType');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactTypeSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	$a->setMonitor();
+	return true;
+}
+
+function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
+	continue_session($session_ser);
+	$a =& artifacttype_get_object($group_artifact_id);
+	if (!$a || !is_object($a)) {
+		return new soap_fault ('','artifactTypeIsMonitoring','Could Not Get ArtifactType','Could Not Get ArtifactType');
+	} elseif ($a->isError()) {
+		return new soap_fault ('','artifactTypeIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
+	}
+	return $a->isMonitoring();
+}
 
 //
 //	getArtifactTypes
