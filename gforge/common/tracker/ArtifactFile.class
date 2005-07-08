@@ -24,6 +24,33 @@
  */
 require_once('common/include/Error.class');
 
+/**
+*       Factory method which creates an ArtifactFile from an artifactFile ID
+*
+*       @param int      The artifactFile ID
+*       @param array    The result array, if it's passed in
+*       @return object  Artifact object
+*/
+function &artifactfile_get_object($artifact_file_id,$data=false) {
+	global $ARTIFACTFILE_OBJ;
+	if (!isset($ARTIFACTFILE_OBJ["_".$artifact_file_id."_"])) {
+		if ($data) {
+		//the db result handle was passed in
+		} else {
+			$res=db_query("SELECT * FROM artifact_file_user_vw WHERE id='$artifact_file_id'");
+			if (db_numrows($res) <1 ) {
+				$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]=false;
+				return false;
+			}
+			$data =& db_fetch_array($res);
+		}
+		$Artifact =& artifact_get_object($data["artifact_id"]);
+		$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]= new ArtifactFile($Artifact,$data);
+	}
+	return $ARTIFACTFILE_OBJ["_".$artifact_file_id."_"];
+}
+
+
 class ArtifactFile extends Error {
 
 	/** 
