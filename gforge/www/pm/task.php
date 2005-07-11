@@ -126,6 +126,38 @@ switch ($func) {
 		break;
 	}
 
+	case 'downloadcsv': {
+
+		if ($pg->userIsAdmin()) {
+			include 'downloadcsv.php';
+			exit;
+		} else {
+			exit_permission_denied();
+		}
+
+	}
+
+	case 'uploadcsv': {
+
+		if ($pg->userIsAdmin()) {
+			include 'uploadcsv.php';
+			exit;
+		} else {
+			exit_permission_denied();
+		}
+
+	}
+
+	case 'postuploadcsv': {
+
+		if ($pg->userIsAdmin()) {
+			include 'postuploadcsv.php';
+		} else {
+			exit_permission_denied();
+		}
+
+	}
+
 	case 'massupdate' : {
 		$count=count($project_task_id_list);
 

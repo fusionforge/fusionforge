@@ -77,6 +77,11 @@ function pm_header($params) {
 		}
 		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
 		$links[]  = 'javascript:gantt_window()';
+		//upload/download as CSV files
+		$labels[] = $Language->getText('pm_include_grouphtml','downloadcsv');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
+		$labels[] = $Language->getText('pm_include_grouphtml','uploadcsv');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=uploadcsv';
 	}
 	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
 		$labels[] = $Language->getText('pm_include_grouphtml','reporting');

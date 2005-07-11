@@ -63,7 +63,7 @@ function &projecttask_get_object($project_task_id,$data=false) {
 /*
 	Types of task dependencies
 */
-define('PM_LINK_DEFAULT','SS');
+define('PM_LINK_DEFAULT','FS');
 define('PM_LINK_START_START','SS');
 define('PM_LINK_START_FINISH','SF');
 define('PM_LINK_FINISH_START','FS');
@@ -649,6 +649,9 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function checkCircular($depend_on_id, $original_id) {
+		//for msproject users - ms project has more complex logic than gforge
+		return true;
+
 		global $Language;
 		if ($depend_on_id == $original_id) {
 			$this->setError($Language->getText('pm_projecttask','circular_dependency'));
@@ -675,7 +678,7 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function setDependentOn(&$arr_) {
-//echo "initial arr: ".print_r($arr);
+//printr($arr_,'setDependentOn entry');
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
 //
