@@ -22,7 +22,7 @@ Additional Tools:
 </ul>
 <h3>Professional Services</h3>
 <p>
-The GForge project is supported and mainted by the GForgeGroup:
+The GForge project is supported and maintained by the GForgeGroup:
 </p>
 <ul>
 	<li>Installation</li>
@@ -31,7 +31,31 @@ The GForge project is supported and mainted by the GForgeGroup:
 	<li>Integration into your network, with LDAP authentication</li>
 	<li>See <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a> for more info.</li>
 </ul>
-
+<p>
+<h3>Major New Features</h3>
+<p>
+<strong>Command Line Interface</strong> The unix-style interface to 
+GForge uses the SOAP API to let you access, add, and update Bugs, 
+Tasks, and File Releases. The <a href="http://gforge.org/projects/cli/">CLI Project</a>
+is always looking for enhancements, fixes, and feedback.
+<p>
+<strong>Tinderbox</strong> This widely-known build tool has been 
+integrated with a GForge plugin, allowing project admins to 
+setup and activate tinderbox building for their projects and 
+view the results through the tinderbox plugin in GForge. The 
+<a href="http://gforge.org/projects/tinderbox/">Tinderbox Project</a>
+is always looking for volunteers.
+<p>
+<strong>More Powerful Tracker</strong> Major enhancements in the 
+tracker include powerful new querying capabilities, new bugzilla-like 
+fields by default, a configurable template project, and tracker cloning.
+<p>
+<strong>MS Project Integration</strong> A plugin has been developed 
+for MS Project that allows it to synchronize tasks with GForge 
+task manager subprojects. The 
+<a href="http://gforge.org/projects/msproject/">MS Project Plugin</a> 
+is currently only available under a non-free license.
+<p>
 <?php
 echo $HTML->boxTop($Language->getText('group','long_news'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
@@ -43,18 +67,21 @@ echo $HTML->boxBottom();
 <td width="35%" valign="top">
 <?php
 echo $HTML->boxTop('Ad');
-echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="http://gforge.org/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
+echo '<center><h3>GForge Enterprise CDE 4.5</h3>';
+echo '<p>
+<a href="http://gforgegroup.com/">GForge Enterprise CDE 4.5</a> from the GForge Group includes commercial-grade 
+documentation, online-training, updates, and support.<p>
+<a target="_blank" href="http://gforgegroup.com/training/">
+<img src="http://gforge.org/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');
 
 ?>
 <strong>Download:</strong><br />
-<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge4.0</a><br />
+<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge4.5</a><br />
 <a href="http://postgresql.org/">PostgreSQL</a><br />
 <a href="http://www.php.net/">PHP 4.x</a><br />
 <a href="http://www.apache.org/">Apache</a><br />
 <a href="http://www.gnu.org/software/mailman/">Mailman *</a><br />
-<a href="http://www.python.org/">Python *</a><br />
-<a href="http://jabberd.jabberstudio.org/">Jabber Server *</a><br />
 * optional
 <p />
 <strong>Get Help</strong><br />
