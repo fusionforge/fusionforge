@@ -39,7 +39,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	$ssh_key=db_result($res,$i,'authorized_keys');
 	$username=db_result($res,$i,'user_name');
 	$dir = $homedir_prefix.'/'.$username;
-	if (!preg_match('/[^\\/]/',$dir)) {
+	if (util_is_root_dir($dir)) {
 		$err .=  "Error! homedir_prefix/username Points To Root Directory!";
 		continue;
 	}

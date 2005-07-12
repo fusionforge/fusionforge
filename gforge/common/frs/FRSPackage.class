@@ -468,7 +468,7 @@ class FRSPackage extends Error {
 			$this->getFileName().'/';
 
 		// double-check we're not trying to remove root dir
-		if (!preg_match('/[^\\/]/',$dir)) {
+		if (util_is_root_dir($dir)) {
 			$this->setError('Package::delete error: trying to delete root dir');
 			return false;
 		}

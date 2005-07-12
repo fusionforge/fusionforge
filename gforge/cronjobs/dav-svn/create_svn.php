@@ -48,7 +48,7 @@ if (empty($sys_apache_user) || empty($sys_apache_group)) {
 	exit;
 }
 
-if (empty($svn) || !preg_match('/[^\\/]/',$svn)) {
+if (empty($svn) || util_is_root_dir($svn)) {
 	$err .=  "Error! svndir_prefix Is Not Set Or Points To The Root Directory!";
 	echo $err;
 	cron_entry(21,$err);

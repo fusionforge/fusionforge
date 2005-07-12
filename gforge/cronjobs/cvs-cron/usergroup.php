@@ -95,7 +95,7 @@ if (!file_exists('/etc/group.org')) {
 	exit;
 }
 
-if (!preg_match('/[^\\/]/',$groupdir_prefix)) {
+if (util_is_root_dir($groupdir_prefix)) {
 	$err .=  "Error! groupdir_prefix Points To Root Directory!";
 	echo $err;
 	cron_entry(16,$err);
