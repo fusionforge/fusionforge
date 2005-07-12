@@ -905,4 +905,12 @@ function readfile_chunked($filename, $returnBytes=true) {
     return $status;
 }
 
+/**
+ * util_is_root_dir() - Checks if a directory points to the root dir
+ * @param	string	Directory
+ * @return bool
+ */
+function util_is_root_dir($dir) {
+	return !preg_match('/[^\\/]/',$dir);
+}
 ?>

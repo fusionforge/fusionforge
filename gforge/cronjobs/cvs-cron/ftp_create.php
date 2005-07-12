@@ -49,9 +49,29 @@ if ($sys_use_ftpuploads) {
 	
 		//create an FTP upload dir for this project
 		$destdir = $sys_ftp_upload_dir.'/'.$group;
+		if (util_is_root_dir($destdir)) {
+			$err .= "Trying to access root directory\n";
+			continue;
+		}
+
 		if (!is_dir($destdir)) {
 			if (!@mkdir($destdir)) {
 				$err .= 'Could not create dir: '.$destdir."\n";
+				continue;
+			} 
+			// Unfortunately some versions of PHP don't set the mode properly when 
+			// specified on the mkdir command, so we need to do it here
+			if (!@chmod($destdir, 0770)) {
+				$err .= 'Could not chmod dir: '.$destdir."\n";
+				continue;
+			} 
+			if (!@chown($destdir, $sys_apache_user)) {
+				$err .= 'Could not chown dir: '.$destdir."\n";
+				continue;
+			} 
+			if (!@chgrp($destdir, $sys_apache_group)) {
+				$err .= 'Could not chgrp dir: '.$destdir."\n";
+				continue;
 			} 
 		}
 	}
