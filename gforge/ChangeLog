@@ -1,3 +1,8 @@
+2005-07-18  Francisco Gimeno <francisco@gforgegroup.com>
+
+	* Fixed [#1412] $this in non-class file (migraterbac.php). Added exit
+	functions. Patch by Fernando Usero
+
 2005-07-07  Christian Bayle <bayle@debian.org>
 
 	* Fixed [#1394] duplicate SCM summary in project home page
