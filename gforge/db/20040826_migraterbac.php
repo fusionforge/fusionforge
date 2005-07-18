@@ -71,10 +71,10 @@ for ($i=0; $i<count($arr); $i++) {
 	for ($c=0; $c<count($todo); $c++) {
 		$role = new Role($g);
 		if (!$role->createDefault($todo[$c])) {
-			$this->setError($role->getErrorMessage());
+			echo $role->getErrorMessage();
 			db_rollback();
 			echo "Could Not Create Default Roles: ".$arr[$i];
-			exit();
+			return false;
 		}
 	}
 
@@ -91,16 +91,16 @@ for ($i=0; $i<count($arr); $i++) {
 
 		$role = new Role($g,$role_id);
 		if (!$role || !is_object($role)) {
-			$this->setError('Error Getting Role Object');
+			echo 'Error Getting Role Object';
 			db_rollback();
 			return false;
 		} elseif ($role->isError()) {
-			$this->setError('addUser::roleget::'.$role->getErrorMessage());
+			echo $role->getErrorMessage();
 			db_rollback();
 			return false;
 		}
 		if (!$role->setUser($user_id)) {
-			$this->setError('addUser::role::setUser'.$role->getErrorMessage());
+			echo $role->getErrorMessage();
 			db_rollback();
 			return false;
 		}
@@ -108,4 +108,5 @@ for ($i=0; $i<count($arr); $i++) {
 }
 db_commit();
 echo "SUCCESS\n";
+return true;
 ?>
