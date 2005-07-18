@@ -74,7 +74,7 @@ for ($i=0; $i<count($arr); $i++) {
 			echo $role->getErrorMessage();
 			db_rollback();
 			echo "Could Not Create Default Roles: ".$arr[$i];
-			return false;
+			exit(1);
 		}
 	}
 
@@ -93,16 +93,16 @@ for ($i=0; $i<count($arr); $i++) {
 		if (!$role || !is_object($role)) {
 			echo 'Error Getting Role Object';
 			db_rollback();
-			return false;
+			exit(1);
 		} elseif ($role->isError()) {
 			echo $role->getErrorMessage();
 			db_rollback();
-			return false;
+			exit(1);
 		}
 		if (!$role->setUser($user_id)) {
 			echo $role->getErrorMessage();
 			db_rollback();
-			return false;
+			exit(1);
 		}
 	}
 }
