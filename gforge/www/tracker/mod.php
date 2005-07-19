@@ -35,9 +35,13 @@ if (session_loggedin()) {
 					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
 				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
-			<td>
-				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo 
-					html_image('ic/taskman20w.png','20','20',array()); ?><strong><?php echo $Language->getText('tracker_mod','build_task_relation')?></strong></a>
+			<td><?php
+				if ($group->usesPM()) {
+					echo '
+				<a href="'.$PHP_SELF.'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
+					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
+				}
+				?>
 			</td>
 		</tr>
 <?php } ?>
@@ -167,6 +171,45 @@ if (session_loggedin()) {
 		?>
 	</td></tr>
 
+   <tr><td colspan="2">
+      <h3>
+      <?php echo $Language->getText('tracker','related_tasks'); ?>:
+      </h3>
+      <?php
+      $titles[] = $Language->getText('pm','task_id');
+      $titles[] = $Language->getText('pm','summary');
+      $titles[] = $Language->getText('pm','start_date');
+      $titles[] = $Language->getText('pm','end_date');
+      echo $GLOBALS['HTML']->listTableTop($titles);
+      $result = $ah->getRelatedTasks();
+      if($result) {
+         $taskcount = db_numrows($ah->relatedtasks);
+         if ($taskcount > 0) {
+            for ($i = 0; $i < $taskcount; $i++) {
+               $taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+               $taskid    = $taskinfo['project_task_id'];
+               $projectid = $taskinfo['group_project_id'];
+               $groupid   = $taskinfo['group_id'];
+               $summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+               $startdate = date($sys_datefmt, $taskinfo['start_date']);
+               $enddate   = date($sys_datefmt, $taskinfo['end_date']);
+               echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+                        <td>'.$taskid.'</td>
+                        <td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid.'">'.$summary.'</a></td>
+                        <td>'.$startdate.'</td>
+                        <td>'.$enddate.'</td>
+                     </tr>';
+            }
+         }
+         else {
+            echo '<tr><td colspan="3">'.$Language->getText('tracker','no_related_tasks').'</td></tr>';
+         }
+      }
+      echo $GLOBALS['HTML']->listTableBottom();
+      ?>
+      <p />
+   </td></tr>
+   
 	<tr><td colspan="2">
 		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" />
 		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />

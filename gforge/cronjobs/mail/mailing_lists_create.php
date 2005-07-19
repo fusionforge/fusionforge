@@ -104,7 +104,8 @@ $listname.':              "|'.$sys_path_to_mailman.'/mail/mailman post '.$listna
 		$list_str =
 $listname.':		"|'.$sys_path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
 .$listname.'-admin:	"|'.$sys_path_to_mailman.'/mail/wrapper mailowner '.$listname.'"'."\n"
-.$listname.'-request:	"|'.$sys_path_to_mailman.'/mail/wrapper mailcmd '.$listname.'"'."\n\n";
+.$listname.'-request:	"|'.$sys_path_to_mailman.'/mail/wrapper mailcmd '.$listname.'"'."\n"
+.$listname.'-owner:	'.$listname.'-admin'."\n\n";
 	}
 
 	fwrite($h1,$list_str);

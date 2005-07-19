@@ -33,9 +33,13 @@ if (session_loggedin()) {
 					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
 				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
-			<td>
-				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo 
-					html_image('ic/taskman20w.png','20','20',array()); ?><strong><?php echo $Language->getText('tracker_mod','build_task_relation')?></strong></a>
+			<td><?php
+				if ($group->usesPM()) {
+					echo '
+				<a href="'.$PHP_SELF.'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
+					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
+				}
+				?>
 			</td>
 		</tr>
 <?php } ?>

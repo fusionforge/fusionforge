@@ -93,6 +93,13 @@ class Artifact extends Error {
 	 */
 	var $files; 
 
+   /**
+    * Database result set of related tasks
+    *
+    * @var     result $relatedtasks
+    */
+   var $relatedtasks;
+    
 	/**
 	 *  Artifact - constructor.
 	 *
@@ -663,6 +670,24 @@ class Artifact extends Error {
 		}
 		return $this->files;
 	}
+
+   /**
+    * getRelatedTasks - get array of related tasks
+    *
+    * @return Database result set
+    */
+   function getRelatedTasks() {
+      if (!$this->relatedtasks) {
+         $this->relatedtasks=
+         db_query("SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
+         FROM project_task pt, project_group_list pgl
+         WHERE pt.group_project_id = pgl.group_project_id AND
+            EXISTS (SELECT project_task_id FROM project_task_artifact
+               WHERE project_task_id=pt.project_task_id
+               AND artifact_id = ". $this->getID() . ")");
+      }
+      return $this->relatedtasks;
+   }
 
 	/**
 	 *  addMessage - attach a text message to this Artifact.
