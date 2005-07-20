@@ -2165,7 +2165,7 @@ $dbh->{RaiseError} = 1;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050617.php") ;
 	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050617.php") == 0
-	or die "system call of 20050325-2.php failed: $?" ;
+	or die "system call of 20050617.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
