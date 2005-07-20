@@ -38,23 +38,32 @@ $reserved_alias = array(
 	"details"
 );
 
-db_query("BEGIN WORK");
+// First of all, try to create the "alias" field if it doesn't exist
+$res = db_query("SELECT alias FROM artifact_extra_field_list");
+if (!$res) {		// error, the field doesn't exist
+	$res = db_query("ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT");
+	if (!$res) {
+		echo db_error();
+		exit(1);
+	}
+} 
 
-// First, we add the new column
-$res = db_query("ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT");
-if (!$res) {
-	echo db_error();
-	exit(1);
-}
+// Now fill all the data
+db_query("BEGIN WORK");
 
 $res = db_query("SELECT * FROM artifact_extra_field_list");
 if (!$res) {
 	echo db_error();
-	exit(1);
+	exit(2);
 }
 
 while ($row = db_fetch_array($res)) {
 	$name = $row["field_name"];
+	
+	// for some weird reason the alias was already set... don't try to change it
+	if (array_key_exists("alias", $row) && !empty($row["alias"])) {
+		continue;
+	}
 	
 	// Convert the original name to a valid alias (i.e., if the extra field is 
 	// called "Quality test", make an alias called "quality_test").
@@ -93,7 +102,7 @@ while ($row = db_fetch_array($res)) {
 	$update = db_query("UPDATE artifact_extra_field_list SET alias='".$alias."' WHERE extra_field_id=".$row["extra_field_id"]);
 	if (!$update) {
 		echo db_error();
-		exit(1);
+		exit(3);
 	}	
 }
 db_query("COMMIT WORK");
