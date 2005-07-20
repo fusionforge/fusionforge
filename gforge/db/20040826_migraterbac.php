@@ -26,6 +26,16 @@
  */
 
 require_once('www/include/squal_pre.php');
+
+//system library
+//Required by Role.class to update system
+require_once('common/include/System.class');
+if (!$sys_account_manager_type) {
+	$sys_account_manager_type='UNIX';
+}
+require_once('common/include/system/'.$sys_account_manager_type.'.class');
+$SYS=new $sys_account_manager_type();
+
 require_once('common/include/Role.class');
 
 //
@@ -36,13 +46,13 @@ $res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_
 
 if (!$res) {
 	echo db_error();
-	exit();
+	exit(1);
 }
 
 if (db_numrows($res) == 0) {
 	// There are no Admins yet, aborting without failing
 	echo "SUCCESS\n";
-	exit();
+	exit(0);
 }
 
 $id=db_result($res,0,0);
@@ -74,7 +84,7 @@ for ($i=0; $i<count($arr); $i++) {
 			echo $role->getErrorMessage();
 			db_rollback();
 			echo "Could Not Create Default Roles: ".$arr[$i];
-			exit(1);
+			exit(2);
 		}
 	}
 
@@ -93,20 +103,20 @@ for ($i=0; $i<count($arr); $i++) {
 		if (!$role || !is_object($role)) {
 			echo 'Error Getting Role Object';
 			db_rollback();
-			exit(1);
+			exit(3);
 		} elseif ($role->isError()) {
 			echo $role->getErrorMessage();
 			db_rollback();
-			exit(1);
+			exit(4);
 		}
 		if (!$role->setUser($user_id)) {
 			echo $role->getErrorMessage();
 			db_rollback();
-			exit(1);
+			exit(5);
 		}
 	}
 }
 db_commit();
 echo "SUCCESS\n";
-return true;
+exit(0);
 ?>
