@@ -38,11 +38,13 @@ echo notepad_func();
 				<?php } else { ?>
 
 				<h3><FONT COLOR="RED">
-				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3><br />
+				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3>
+                <?php if ($ath->allowsAnon()) { ?>
                 <?php echo $Language->getText('tracker','insert_email') ?>
+                <br />
                 <p>
                 <input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
-
+                <?php } ?>
 
 				<?php } ?>
 		<p>
@@ -78,6 +80,7 @@ echo notepad_func();
 		<tr><td colspan="2">
 			<br />
 			<?php echo $ah->showDetails(); ?>
+            <?php if ($ath->allowsAnon() || session_loggedin()) { ?>
 
 			<input type="hidden" name="func" value="postmod">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
@@ -85,6 +88,7 @@ echo notepad_func();
 			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong> 
 			<?php echo notepad_button('document.forms[1].details') ?><br />
 			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
+            <?php } ?>
 		</td></tr>
 
 	<tr><td colspan="2">
@@ -138,12 +142,14 @@ echo notepad_func();
 
 	?>
 	</td></tr>
+	<?php if ($ath->allowsAnon() || session_loggedin()) { ?>
 	<tr><td colspan="2">
 		<h3><?php echo $Language->getText('tracker_detail','security_note') ?></h3>
 		<p>
 		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
 		</form>
 	</td></tr>
+	<?php } ?>
 
 	<?php
 		$hookParams['artifact_id']=$aid;

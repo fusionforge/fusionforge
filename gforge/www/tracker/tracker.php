@@ -33,7 +33,11 @@ if ($ath->isError()) {
 switch ($func) {
 
 	case 'add' : {
-		include ('add.php');
+		if (!$ath->allowsAnon() && !session_loggedin()) {
+			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
+		} else {
+			include ('add.php');
+		}
 		break;
 	}
 	case 'postadd' : {
@@ -44,6 +48,8 @@ switch ($func) {
 		$ah=new ArtifactHtml($ath);
 		if (!$ah || !is_object($ah)) {
 			exit_error('ERROR','Artifact Could Not Be Created');
+		} else if (!$ath->allowsAnon() && !session_loggedin()) {
+			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
 		} else {
 			if (empty($user_email)) {
 					$user_email=false;
@@ -165,6 +171,8 @@ switch ($func) {
 			exit_error('ERROR','Artifact Could Not Be Created');
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
+		} else if (!$ath->allowsAnon() && !session_loggedin()) {
+			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
 		} else {
 
 			/*

@@ -714,6 +714,9 @@ class Artifact extends Error {
 			//	we'll store this email even though it will likely never be used - 
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
+		} elseif (!$this->ArtifactType->allowsAnon()) {
+			$this->setError($Language->getText('tracker_artifact','error_no_anonymous'));
+			return false;
 		} else {
 			$user_id=100;
 			if (!$by || !validate_email($by)) {
