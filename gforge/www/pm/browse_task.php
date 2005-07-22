@@ -185,7 +185,7 @@ if ($rows < 1) {
 		if ($display_col['start_date']) 
 			echo '<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>';
 		if ($display_col['end_date']) 
-			echo '<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
+			echo '<td>'. (($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 )?'<strong>* ':'&nbsp; ') .
 				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>';
 		if ($display_col['percent_complete']) 
 			echo '<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>';
