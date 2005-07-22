@@ -1924,7 +1924,8 @@ class Group extends Error {
 	 */
 	function &getMembers() {
 		if (!isset($this->membersArr)) {
-			$res=db_query("SELECT users.* FROM users NATURAL JOIN user_group
+			$res=db_query("SELECT users.* FROM users
+				INNER JOIN user_group ON users.user_id=user_group.user_id
 				WHERE user_group.group_id='".$this->getID()."'");
 			while ($arr =& db_fetch_array($res)) {
 				$this->membersArr[] =& new User($arr['user_id'],$arr);
