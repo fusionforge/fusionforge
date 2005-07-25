@@ -2059,104 +2059,6 @@ CREATE VIEW project_message_user_vw AS
 
 
 
-CREATE FUNCTION projtask_update_depend() RETURNS "trigger"
-    AS '
-DECLARE
-    dependent RECORD;
-    dependon RECORD;
-    delta   INTEGER;
-BEGIN
-    --
-    --  See if tasks that are dependent on us are OK
-    --  See if the end date has changed
-    --
-    IF NEW.end_date > OLD.end_date THEN
-        --
-        --  If the end date pushed back, push back dependent tasks
-        --
-        FOR dependent IN SELECT * FROM project_depend_vw WHERE is_dependent_on_task_id=NEW.project_task_id LOOP
-            --
-            --  Some dependent tasks may not start immediately
-            --
-            IF dependent.start_date > OLD.end_date THEN
-                IF dependent.start_date < NEW.end_date THEN
-                    delta := NEW.end_date-dependent.start_date;
-                    UPDATE project_task
-                        SET start_date=start_date+delta,
-                        end_date=end_date+delta
-                        WHERE project_task_id=dependent.project_task_id;
-                END IF;
-            ELSE
-                IF dependent.start_date = OLD.end_date THEN
-                    delta := NEW.end_date-OLD.end_date;
-                    UPDATE project_task
-                        SET start_date=start_date+delta,
-                        end_date=end_date+delta
-                        WHERE project_task_id=dependent.project_task_id;
-                END IF;
-            END IF;
-        END LOOP;
-    ELSIF NEW.end_date < OLD.end_date THEN
-            --
-            --  If the end date moved up, move up dependent tasks
-            --
-            FOR dependent IN SELECT * FROM project_depend_vw WHERE is_dependent_on_task_id=NEW.project_task_id LOOP
-                IF dependent.start_date = OLD.end_date THEN
-                    --
-                    --  dependent task was constrained by us - bring it forward
-                    --
-                    delta := OLD.end_date-NEW.end_date;
-                    UPDATE project_task
-                        SET start_date=start_date-delta,
-                        end_date=end_date-delta
-                        WHERE project_task_id=dependent.project_task_id;
-                END IF;
-            END LOOP;
-    END IF;
-    RETURN NEW;
-END;
-'
-    LANGUAGE plpgsql;
-
-
-
-CREATE FUNCTION projtask_insert_depend() RETURNS "trigger"
-    AS '
-DECLARE
-        dependon RECORD;
-        delta INTEGER;
-BEGIN
-        --
-        --  ENFORCE START/END DATE logic
-        --
-        IF NEW.start_date > NEW.end_date THEN
-                RAISE EXCEPTION ''START DATE CANNOT BE AFTER END DATE'';
-        END IF;
-        --
-        --        First make sure we start on or after end_date of tasks
-        --        that we depend on
-        --
-        FOR dependon IN SELECT * FROM project_dependon_vw
-                                WHERE project_task_id=NEW.project_task_id LOOP
-                --
-                --        See if the task we are dependon on
-                --        ends after we are supposed to start
-                --
-                IF dependon.end_date > NEW.start_date THEN
-                        delta := dependon.end_date-NEW.start_date;
-                        RAISE NOTICE ''Bumping Back: % Delta: % '',NEW.project_task_id,delta;
-                        NEW.start_date := NEW.start_date+delta;
-                        NEW.end_date := NEW.end_date+delta;
-                END IF;
-
-        END LOOP;
-        RETURN NEW;
-END;
-'
-    LANGUAGE plpgsql;
-
-
-
 CREATE VIEW docdata_vw AS
     SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
 
@@ -6790,20 +6692,6 @@ CREATE CONSTRAINT TRIGGER "<unnamed>"
     NOT DEFERRABLE INITIALLY IMMEDIATE
     FOR EACH ROW
     EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
-
-
-
-CREATE TRIGGER projtask_update_depend_trig
-    AFTER UPDATE ON project_task
-    FOR EACH ROW
-    EXECUTE PROCEDURE projtask_update_depend();
-
-
-
-CREATE TRIGGER projtask_insert_depend_trig
-    BEFORE INSERT OR UPDATE ON project_task
-    FOR EACH ROW
-    EXECUTE PROCEDURE projtask_insert_depend();
 
 
 
