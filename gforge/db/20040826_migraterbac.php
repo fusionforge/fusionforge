@@ -30,9 +30,11 @@ require_once('www/include/squal_pre.php');
 //system library
 //Required by Role.class to update system
 require_once('common/include/System.class');
-if (!$sys_account_manager_type) {
+// Right now the nss tables don't exist so if sys_account_manager_type=pgsql 
+// This will fail UNIX should be safe
+//if (!$sys_account_manager_type) {
 	$sys_account_manager_type='UNIX';
-}
+//}
 require_once('common/include/system/'.$sys_account_manager_type.'.class');
 $SYS=new $sys_account_manager_type();
 
