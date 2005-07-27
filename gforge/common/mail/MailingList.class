@@ -357,7 +357,7 @@ class MailingList extends Error {
 			return false;
 		}
 		$sql="INSERT INTO deleted_mailing_lists (mailing_list_name,
-			delete_date,isdeleted) VALUES ('".$this->getName."','".time()."','0')";
+			delete_date,isdeleted) VALUES ('".$this->getName()."','".time()."','0')";
 		$res=db_query($sql);
 		if (!$res) {
 			$this->setError('Could Not Insert Into Delete Queue: '.db_error());
