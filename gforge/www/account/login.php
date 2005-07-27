@@ -60,6 +60,8 @@ if (session_issecure()) {
 
 // ###### first check for valid login, if so, redirect
 
+$form_loginname=htmlspecialchars($form_loginname);
+
 if ($login) {
 	$success=session_login_valid(strtolower($form_loginname),$form_pw);
 	if ($success) {
