@@ -47,7 +47,7 @@ function exit_not_logged_in() {
 	global $REQUEST_URI;
 	//instead of a simple error page, now take them to the login page
 	header ("Location: /account/login.php?return_to=".urlencode($REQUEST_URI));
-	//exit_error('Not Logged In','Sorry, you have to be <a href="/account/login.php">logged in</a> to view this page.');
+	exit;
 }
 
 /**
