@@ -18,7 +18,7 @@
 function exit_error($title,$text) {
 	global $HTML,$group_id, $Language;
 	$HTML->header(array('title'=>$Language->getText('exit','exiting_with_error'),'group'=>$group_id));
-	print '<h2><span style="color:#FF3333">'.$title.'</span></h2><p>'.$text .'</p>';
+	print '<h2><span style="color:#FF3333">'.$title.'</span></h2><p>'.htmlspecialchars($text) .'</p>';
 	$HTML->footer(array());
 	exit;
 }
@@ -47,7 +47,7 @@ function exit_not_logged_in() {
 	global $REQUEST_URI;
 	//instead of a simple error page, now take them to the login page
 	header ("Location: /account/login.php?return_to=".urlencode($REQUEST_URI));
-	exit;
+	//exit_error('Not Logged In','Sorry, you have to be <a href="/account/login.php">logged in</a> to view this page.');
 }
 
 /**
