@@ -104,7 +104,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.$id.'"><span style="color:red">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
+	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span style="color:red">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
 	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new').'.</p>';
 
 	snippet_footer(array());
