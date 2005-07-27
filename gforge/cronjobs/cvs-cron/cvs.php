@@ -85,7 +85,7 @@ function addsyncmail($unix_group_name) {
 	}
 }
 
-function addCvsTrackerToFile($path) {
+function addCvsTrackerToFile($path, $unix_group_name) {
 	global $sys_plugins_path, $sys_users_host;
 	
 	$FOut = fopen($path, "a");
@@ -93,7 +93,7 @@ function addCvsTrackerToFile($path) {
 		fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 		$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
 			" ".$sys_plugins_path."/cvstracker/bin/post.php".
-			" %{sVv} )\n";
+			" $unix_group_name %{sVv} )\n";
 		fwrite($FOut,$Line);
 		fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
 		fclose($FOut);
@@ -152,7 +152,7 @@ function addProjectRepositories() {
 			if (!isCvsTrackerSet($repositoryPath.'/CVSROOT/loginfo')) {
 				$Group = group_get_object(db_result($res,$i,'group_id'));
 				if ($Group->usesPlugin("cvstracker")) {
-					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo');
+					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo', $Group->getUnixName());
 				}
 			}
 		} elseif (is_file($repositoryPath)) {
@@ -163,7 +163,7 @@ function addProjectRepositories() {
 			if (!isCvsTrackerSet($repositoryPath.'/CVSROOT/loginfo')) {
 				$Group = group_get_object(db_result($res,$i,'group_id'));
 				if ($Group->usesPlugin("cvstracker")) {
-					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo');
+					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo', $Group->getUnixName());
 				}
 			}
  			if ($use_cvs_acl == true) {
