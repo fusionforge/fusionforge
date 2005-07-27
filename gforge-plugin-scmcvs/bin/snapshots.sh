@@ -30,10 +30,12 @@ case "$1" in
                 # Make tgz archive
 		mkdir -p $work_dir/$dir-scm-$today
 		cd $work_dir/$dir-scm-$today
-		cvs -f -Q -d :local:$CVSROOT/$dir co -P .
-		cd $work_dir
-		tar czf $dir-scm-latest.tar.gz $dir-scm-$today
-		mv $dir-scm-latest.tar.gz $SCMSNAPSHOTSDIR
+		if cvs -f -Q -d :local:$CVSROOT/$dir co -P .; then
+		    cd $work_dir
+		    tar czf $dir-scm-latest.tar.gz $dir-scm-$today
+		    mv $dir-scm-latest.tar.gz $SCMSNAPSHOTSDIR
+		    rm -fr $dir-scm-$today
+		fi
 	    fi
         done
 	;;
