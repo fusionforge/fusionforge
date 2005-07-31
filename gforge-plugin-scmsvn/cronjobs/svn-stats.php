@@ -26,6 +26,7 @@ $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php
 $svnroot = "/var/lib/gforge/chroot/svnroot/";
 $ARGV = $GLOBALS['argv'];
+$argvoffset = 4 ;
 $err = '';
 $debug = 0;
 
@@ -55,6 +56,7 @@ $user_list = array();
 // We are only actually interested in LOGENTRY type things, as this is 
 // where we update our commit total
 function endElement($parser, $name) {
+  debug ("endelement $name") ;
 	global $time_ok, $last_tag, $commits, $date_key;
 	if ($name == "LOGENTRY" && $time_ok) {
 		$commits[$date_key]++;
@@ -67,6 +69,7 @@ function endElement($parser, $name) {
 // is doing things and when. We use last_tag to keep track of the
 // last element we were in.
 function charData($parser, $chars) {
+  debug ("chardata $chars") ;
 	global $last_tag, $last_user, $last_time, $start_time,
 			$end_time, $time_ok, $date_key, $user_list;
 	switch ($last_tag) {
@@ -94,6 +97,7 @@ function charData($parser, $chars) {
 			// that the time is OK.
 			// If we do have the start and end time, make sure this event
 			// is within those times.
+			debug ("start $start_time, end $end_time, last $last_time");
 			if (!$start_time && !$end_time) {
 				$time_ok = true;
 			} elseif ($start_time <= $last_time && $last_time <= $end_time) {
@@ -116,6 +120,7 @@ function charData($parser, $chars) {
 }
 
 function startElement($parser, $name, $attrs) {
+  debug ("startelement $name");
     global $last_user, $last_time, $last_tag, $time_ok,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates;
@@ -176,17 +181,19 @@ db_begin();
 
 $pluginid = get_plugin_id($pluginname);
 
-if ($ARGV[1] && $ARGV[2] && $ARGV[3]) {
-	//$ARGV[1] = Year
-	//$ARGV[2] = Month
-	//$ARGV[3] = Day
+debug ($ARGV[$argvoffset+1] ." # ". $ARGV[$argvoffset+2] ." # ". $ARGV[$argvoffset+3]) ;
+
+if ($ARGV[$argvoffset+1] && $ARGV[$argvoffset+2] && $ARGV[$argvoffset+3]) {
+	//$ARGV[$argvoffset+1] = Year
+	//$ARGV[$argvoffset+2] = Month
+	//$ARGV[$argvoffset+3] = Day
 	
-	$day_begin = gmmktime( 0, 0, 0, $ARGV[2], $ARGV[3], $ARGV[1] );
-	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
+	$day_begin = gmmktime( 0, 0, 0, $ARGV[$argvoffset+2], $ARGV[$argvoffset+3], $ARGV[$argvoffset+1] );
+	//	$day_begin = timegm( 0, 0, 0, $ARGV[$argvoffset+2], $ARGV[$argvoffset+1] - 1, $ARGV[$argvoffset+0] - 1900 );
 	$day_end = $day_begin + 86400;
  
 	$rollback = process_day($day_begin, $day_end);
-} else if ($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
+} else if ($ARGV[$argvoffset+1]=='all' && !$ARGV[$argvoffset+2] && !$ARGV[$argvoffset+3]) { 
 	// Do ALL the days
 	debug('Processing all days');
 	$rollback = process_day();

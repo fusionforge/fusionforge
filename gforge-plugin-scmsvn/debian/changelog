@@ -2,8 +2,11 @@ gforge-plugin-scmsvn (4.5-1) unstable; urgency=low
 
   * [Roland] Ported to Gforge 4.5.
   * [Roland] Fixed location of the svn-stats script in crontab.
+  * [Roland] Also in svn-stats.php, added an offset for ARGV[] indices,
+    since the crontab calls that script with additional parameters that
+    should not be interpreted as date specifications.
 
- -- Roland Mas <lolando@debian.org>  Sun, 31 Jul 2005 12:52:08 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 31 Jul 2005 13:47:50 +0200
 
 gforge-plugin-scmsvn (4.1-9) unstable; urgency=low
 
