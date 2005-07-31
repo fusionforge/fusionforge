@@ -1,3 +1,10 @@
+gforge-plugin-scmsvn (4.5-1) unstable; urgency=low
+
+  * [Roland] Ported to Gforge 4.5.
+  * [Roland] Fixed location of the svn-stats script in crontab.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 31 Jul 2005 12:52:08 +0200
+
 gforge-plugin-scmsvn (4.1-9) unstable; urgency=low
 
   * New upstream 

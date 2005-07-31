@@ -24,7 +24,7 @@ require_once ('plugins/scmsvn/config.php');
 
 $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php
-$svnroot = "/var/svn/";
+$svnroot = "/var/lib/gforge/chroot/svnroot/";
 $ARGV = $GLOBALS['argv'];
 $err = '';
 $debug = 0;

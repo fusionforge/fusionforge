@@ -42,6 +42,7 @@ install: build
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
+	chmod 0755 $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/*
 	#cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
 	cp cgi-bin/viewcvs.cgi $(DESTDIR)/usr/lib/gforge/bin/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/viewcvs.cgi
