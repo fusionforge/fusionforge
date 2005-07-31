@@ -26,7 +26,6 @@ $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php
 $svnroot = "/var/lib/gforge/chroot/svnroot/";
 $ARGV = $GLOBALS['argv'];
-$argvoffset = 4 ;
 $err = '';
 $debug = 0;
 
@@ -181,17 +180,17 @@ db_begin();
 
 $pluginid = get_plugin_id($pluginname);
 
-if ($ARGV[$argvoffset+1] && $ARGV[$argvoffset+2] && $ARGV[$argvoffset+3]) {
-	//$ARGV[$argvoffset+1] = Year
-	//$ARGV[$argvoffset+2] = Month
-	//$ARGV[$argvoffset+3] = Day
+if ($ARGV[1] && $ARGV[2] && $ARGV[3]) {
+	//$ARGV[1] = Year
+	//$ARGV[2] = Month
+	//$ARGV[3] = Day
 	
-	$day_begin = gmmktime( 0, 0, 0, $ARGV[$argvoffset+2], $ARGV[$argvoffset+3], $ARGV[$argvoffset+1] );
-	//	$day_begin = timegm( 0, 0, 0, $ARGV[$argvoffset+2], $ARGV[$argvoffset+1] - 1, $ARGV[$argvoffset+0] - 1900 );
+	$day_begin = gmmktime( 0, 0, 0, $ARGV[2], $ARGV[3], $ARGV[1] );
+	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
 	$day_end = $day_begin + 86400;
  
 	$rollback = process_day($day_begin, $day_end);
-} else if ($ARGV[$argvoffset+1]=='all' && !$ARGV[$argvoffset+2] && !$ARGV[$argvoffset+3]) { 
+} else if ($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
 	// Do ALL the days
 	debug('Processing all days');
 	$rollback = process_day();
