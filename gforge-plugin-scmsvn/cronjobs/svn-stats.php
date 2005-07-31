@@ -181,8 +181,6 @@ db_begin();
 
 $pluginid = get_plugin_id($pluginname);
 
-debug ($ARGV[$argvoffset+1] ." # ". $ARGV[$argvoffset+2] ." # ". $ARGV[$argvoffset+3]) ;
-
 if ($ARGV[$argvoffset+1] && $ARGV[$argvoffset+2] && $ARGV[$argvoffset+3]) {
 	//$ARGV[$argvoffset+1] = Year
 	//$ARGV[$argvoffset+2] = Month
