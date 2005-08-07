@@ -1,3 +1,9 @@
+gforge-plugin-scmcvs (4.5-1) unstable; urgency=low
+
+  * [Roland] Remove .arch-ids directories at build time, too.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  7 Aug 2005 17:29:30 +0200
+
 gforge-plugin-scmcvs (4.1-9) unstable; urgency=low
 
   * [Christian] Version taking in account nss
