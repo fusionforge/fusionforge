@@ -85,7 +85,7 @@ Requires: php4-pgsql, php4-mbstring
 %endif
 
 # Mandrake specific
-%if "%{_vendor}" == "mandrake"
+%if "%{_vendor}" == "MandrakeSoft"
 	%define httpduser		apache
 	%define httpdgroup		apache
 	%define httpddir		httpd
