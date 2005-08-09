@@ -210,7 +210,15 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 <p /><input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
+<?php 
+$hookParams['user']= user_get_object(user_getid());
+if (isset($submit)) {//if this is set, then the user has issued an Update
+	plugin_hook("userisactivecheckboxpost", $hookParams);
+} else {
+	plugin_hook("userisactivecheckbox", $hookParams);
+}
 
+?>
 
 <?php echo $HTML->boxBottom();
 
@@ -234,6 +242,8 @@ if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 ?>
 </td>
 </tr>
+
+
 
 </table>
 
