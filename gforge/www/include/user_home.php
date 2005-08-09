@@ -101,7 +101,9 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 	<a href="/developer/diary.php?diary_user='. $user_id .'">'.$Language->getText('user_home','diary_notes_view').'</a><?p>
 	<p>
 	<a href="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .$Language->getText('user_home','diary_notes_monitor').'</a></p>';
-
+	$hookparams['user_id'] = $user_id;
+	plugin_hook("user_personal_links",$hookparams);
+	
 	?>
 </td></tr>
 

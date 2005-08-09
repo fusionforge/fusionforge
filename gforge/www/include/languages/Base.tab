@@ -3091,6 +3091,7 @@ user_home	skills_profile	Skills Profile
 user_home	subject	Subject
 user_home	title	Developer Profile
 user_home	user_id	User Id
+user_home	view_wiki	View Personal Wiki
 users	no_user_name	No User Name Provided
 users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
 users	peerinfo1	<P>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</P><P>The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com/">Advogato.</A> The system has been re-implemented and expanded in a few ways.</P>
