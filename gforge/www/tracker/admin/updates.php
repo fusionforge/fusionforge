@@ -2,7 +2,13 @@
 		//
 		//	Create an extra field
 		//
-		if ($add_extrafield) {
+		if (getStringFromRequest('add_extrafield')) {
+			$name = getStringFromRequest('name');
+			$field_type = getStringFromRequest('field_type');
+			$attribute1 = getStringFromRequest('attribute1');
+			$attribute2 = getStringFromRequest('attribute2');
+			$is_required = getStringFromRequest('is_required');
+			$alias = getStringFromRequest('alias');
 
 			$ab = new ArtifactExtraField($ath);
 		
@@ -21,7 +27,8 @@
 		//
 		//	Delete an extra field and its contents
 		//
-		} elseif ($deleteextrafield) {
+		} elseif (getStringFromRequest('deleteextrafield')) {
+			$id = getStringFromRequest('id');
 			$ab = new ArtifactExtraField($ath,$id);
 		
 			if (!$ab || !is_object($ab)) {
@@ -29,6 +36,8 @@
 			} elseif ($ab->isError()) {
 				$feedback .= $ab->getErrorMessage();			
 			} else {
+				$sure = getStringFromRequest('sure');
+				$really_sure = getStringFromRequest('really_sure');
 				if (!$ab->delete($sure,$really_sure)) {
 					$feedback .= $ab->getErrorMessage();
 				} else {
@@ -40,7 +49,8 @@
 		//
 		//	Add an element to an extra field
 		//
-		} elseif ($add_opt) {
+		} elseif (getStringFromRequest('add_opt')) {
+			$boxid = getStringFromRequest('boxid');
 			$ab = new ArtifactExtraField($ath,$boxid);
 			if (!$ab || !is_object($ab)) {
 				$feedback .= 'Unable to create ArtifactExtraField Object';
@@ -53,6 +63,8 @@
 //				} elseif ($ao->isError())
 //					$feedback .= $ao->getErrorMessage();			
 				} else {
+					$name = getStringFromRequest('name');
+					$status_id = getIntFromRequest('status_id');
 					if (!$ao->create($name,$status_id)) {
 						$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
 						$ao->clearError();
@@ -65,7 +77,9 @@
 		//
 		//	Add a canned response
 		//
-		} elseif ($add_canned) {
+		} elseif (getStringFromRequest('add_canned')) {
+			$title = getStringFromRequest('title');
+			$body = getStringFromRequest('body');
 
 			$acr = new ArtifactCanned($ath);
 			if (!$acr || !is_object($acr)) {
@@ -84,7 +98,10 @@
 		//
 		//	Update a canned response
 		//
-		} elseif ($update_canned) {
+		} elseif (getStringFromRequest('update_canned')) {
+			$id = getStringFromRequest('id');
+			$title = getStringFromRequest('title');
+			$body = getStringFromRequest('body');
 
 			$acr = new ArtifactCanned($ath,$id);
 			if (!$acr || !is_object($acr)) {
@@ -105,7 +122,10 @@
 		//
 		//	Copy Categories
 		//
-		} elseif ($copy_opt) {
+		} elseif (getStringFromRequest('copy_opt')) {
+			$copyid = getStringFromRequest('copyid');
+			$selectid = getStringFromRequest('selectid');
+
 			$copy_rows=count($copyid);
 			if ($copy_rows > 0) {
 				//
@@ -160,7 +180,13 @@
 		//
 		//	Update an extra field
 		//
-		} elseif ($update_box) {
+		} elseif (getStringFromRequest('update_box')) {
+			$id = getStringFromRequest('id');
+			$name = getStringFromRequest('name');
+			$attribute1 = getStringFromRequest('attribute1');
+			$attribute2 = getStringFromRequest('attribute2');
+			$is_required = getStringFromRequest('is_required');
+			$alias = getStringFromRequest('alias');
 
 			$ac = new ArtifactExtraField($ath,$id);
 			if (!$ac || !is_object($ac)) {
@@ -181,7 +207,10 @@
 		//
 		//	Update an Element
 		//
-		} elseif ($update_opt) {
+		} elseif (getStringFromRequest('update_opt')) {
+			$id = getStringFromRequest('id');
+			$name = getStringFromRequest('name');
+			$boxid = getStringFromRequest('boxid');
 
 			$ac = new ArtifactExtraField($ath,$boxid);
 			if (!$ac || !is_object($ac)) {
@@ -195,6 +224,8 @@
 				} elseif ($ao->isError()) {
 					$feedback .= $ao->getErrorMessage();
 				} else {
+					$name = getStringFromRequest('name');
+					$status_id = getIntFromRequest('status_id');
 					if (!$ao->update($name,$status_id)) {
 						$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
 						$ao->clearError();
@@ -209,7 +240,8 @@
 		//
 		//	Clone a tracker's elements to this tracker
 		//
-		} elseif ($clone_tracker) {
+		} elseif (getStringFromRequest('clone_tracker')) {
+			$clone_id = getStringFromRequest('clone_id');
 
 			if (!$clone_id) {
 				exit_missing_param();
@@ -224,7 +256,16 @@
 		//
 		//	Update a tracker
 		//
-		} elseif ($update_type) {
+		} elseif (getStringFromRequest('update_type')) {
+			$name = getStringFromRequest('name');
+			$description = getStringFromRequest('description');
+			$email_all = getStringFromRequest('email_all');
+			$email_address = getStringFromRequest('email_address');
+			$due_period = getStringFromRequest('due_period');
+			$status_timeout = getStringFromRequest('status_timeout');
+			$use_resolution = getStringFromRequest('use_resolution');
+			$submit_instructions = getStringFromRequest('submit_instructions');
+			$browse_instructions = getStringFromRequest('browse_instructions');
 
 			if (!$ath->update($name,$description,$email_all,$email_address,
 				$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
@@ -237,7 +278,9 @@
 		//
 		//	Delete a tracker
 		//
-		} elseif ($delete) {
+		} elseif (getStringFromRequest('delete')) {
+			$sure = getStringFromRequest('sure');
+			$really_sure = getStringFromRequest('really_sure');
 
 			if (!$ath->delete($sure,$really_sure)) {
 				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
@@ -249,14 +292,15 @@
 		//
 		//	Upload template
 		//
-		} elseif ($uploadtemplate) {
+		} elseif (getStringFromTemplate('uploadtemplate')) {
 
+			$input_file = getUploadedFile('input_file');
 			if (!util_check_fileupload($input_file)) {
 				echo ('Invalid filename');
 				exit;
 			}
-			$size = @filesize($input_file);
-			$input_data = addslashes(fread(fopen($input_file, 'r'), $size));
+			$size = $input_file['size'];
+			$input_data = addslashes(fread(fopen($input_file['name'], 'r'), $size));
 
 			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
 			echo db_error();

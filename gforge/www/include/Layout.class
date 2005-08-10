@@ -334,8 +334,7 @@ if (isset($params['group']) && $params['group']) {
 	global $sys_show_source;
 	global $Language;
 	if ($sys_show_source) {
-		global $SCRIPT_NAME;
-		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
+		print '<a class="showsource" href="/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
 	}
 ?>
 
@@ -509,18 +508,18 @@ if (isset($params['group']) && $params['group']) {
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/') || 
-				strstr($GLOBALS['REQUEST_URI'],'/themes/') ) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/my/') || strstr(getStringFromServer('REQUEST_URI'),'/account/') || 
+				strstr(getStringFromServer('REQUEST_URI'),'/themes/') ) {
 			$selected=array_search("/my/", $TABS_DIRS);
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'softwaremap')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'softwaremap')) {
 			$selected=array_search("/softwaremap/", $TABS_DIRS);
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/snippet/')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/snippet/')) {
 			$selected=array_search("/snippet/", $TABS_DIRS);
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/people/')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/people/')) {
 			$selected=array_search("/people/", $TABS_DIRS);
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/reporting/')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/reporting/')) {
 			$selected=array_search('/reporting/',$TABS_DIRS);
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/admin/') && user_ismember(1,'A')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && user_ismember(1,'A')) {
 			$selected=array_search('/admin/',$TABS_DIRS);;
 		} else {
 			$selected=0;

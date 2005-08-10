@@ -35,8 +35,8 @@
 require_once('pre.php');
 require_once('www/news/news_utils.php');
 
-$group_name=$_GET['group_name'];
-$group_id=$_GET['group_id'];
+$group_name = getStringFromRequest('group_name');
+$group_id = getIntFromRequest('group_id');
 
 //
 //  Get group object

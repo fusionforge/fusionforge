@@ -31,7 +31,9 @@ require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($submit && $user_name) {
+$user_name = getStringFromRequest('user_name');
+if (getStringFromRequest('submit') && $user_name) {
+	$type = getStringFromRequest('type');
 
 	if (!$type) {
 
@@ -46,7 +48,7 @@ if ($submit && $user_name) {
 		<p>
 		<?php echo $Language->getText('admin_unsubscribe','you_can_unsubscribe'); ?>
 		</p>
-		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="user_name" value="<?php echo $user_name?>" />
 		Unsubscription type: <?php echo html_build_select_box_from_arrays(
 			array($Language->getText('admin_unsubscribe','mail'),$Language->getText('admin_unsubscribe','all')),
@@ -94,13 +96,14 @@ site_admin_header(array('title'=>$Language->getText('admin_unsubscribe','subscri
 <?php echo $Language->getText('admin_unsubscribe','use_fields_bellow',array($GLOBALS['sys_name'])); ?>
 </p>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>" />
 <input type="submit" name="submit" value="<?php echo $Language->getText('admin_unsubscribe','show_user_matching'); ?>" />
 </form>
 
 <?php
 
+$pattern = getStringFromRequest('pattern');
 if ($pattern) {
 	$res = db_query("
 		SELECT *

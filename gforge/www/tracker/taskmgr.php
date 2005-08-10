@@ -26,6 +26,9 @@ require_once('pre.php');
 require_once('common/pm/ProjectGroupFactory.class');
 require_once('common/pm/ProjectTaskFactory.class');
 
+$group_project_id = getIntFromRequest('group_project_id');
+$aid = getIntFromRequest('aid');
+
 $a=new Artifact($ath,$aid);
 if (!$a || !is_object($a)) {
 	exit_error('ERROR','Artifact Could Not Be Created');
@@ -34,7 +37,16 @@ if (!$a || !is_object($a)) {
 //
 //	Add a relationship from this artifact to an existing task
 //
-if ($add_to_task) {
+if (getStringFromRequest('add_to_task')) {
+	$group = getStringFromRequest('group');
+	$offset = getStringFromRequest('offset');
+	$_order = getStringFromRequest('_order');
+	$max_rows = getStringFromRequest('max_rows');
+	$set = getStringFromRequest('set');
+	$_assigned_to = getStringFromRequest('_assigned_to');
+	$_status = getStringFromRequest('_status');
+	$_category_id = getStringFromRequest('_category_id');
+
 	$pg=new ProjectGroup($group,$group_project_id);
 	if (!$pg || !is_object($pg)) {
 		exit_error('Error','Could Not Get ProjectGroup');
@@ -66,7 +78,7 @@ if ($add_to_task) {
 	echo '
 		<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p>
-		<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
 		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'<p>
 		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />';
 	echo $pg->getName().'
@@ -84,14 +96,14 @@ if ($add_to_task) {
 //
 //	Add the relationship and display finished message
 //
-} elseif ($done_adding) {
+} elseif (getStringFromRequest('done_adding')) {
 
 	Header ('Location: /pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID() );
 
 //
 //	Create a new task and relate it to this artifact
 //
-} elseif ($new_task) {
+} elseif (getStringFromRequest('new_task')) {
 
 	Header ('Location: /pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID() );
 
@@ -116,7 +128,7 @@ if ($add_to_task) {
 		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
 	echo '<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
-		<p><form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
+		<p><form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
 		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'<p>
 		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />
 		<select name="group_project_id">';

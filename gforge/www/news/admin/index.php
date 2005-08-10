@@ -32,7 +32,19 @@ require_once('www/news/news_utils.php');
 //common forum tools which are used during the creation/editing of news items
 require_once('common/forum/Forum.class');
 
+$group_id = getIntFromRequest('group_id');
+$post_changes = getStringFromRequest('post_changes');
+$approve = getStringFromRequest('approve');
+$status = getIntFromRequest('status');
+$summary = getStringFromRequest('summary');
+$details = getStringFromRequest('details');
+
 if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
+	$id = getIntFromRequest('id');
+	$status = getIntFromRequest('status');
+	$summary = getStringFromRequest('summary');
+	$details = getStringFromRequest('details');
+
 	/*
 
 		Per-project admin pages.
@@ -99,7 +111,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		echo '
 		<h3>'.$Language->getText('news_admin', 'approve_newsbyte', array($group->getPublicName())).'</h3>
 		<p />
-		<form action="'.$PHP_SELF.'" method="post">
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />';
 
@@ -194,7 +206,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			*/
 			$approve='';
 			$list_queue='y';
-		} else if ($mass_reject) {
+		} else if (getStringFromRequest('mass_reject')) {
 			/*
 				Move msg to rejected status
 			*/
@@ -232,7 +244,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		echo '
 		<h3>'.$Language->getText('news_admin', 'approve_newsbyte', array($group->getPublicName())).'</h3>
 		<p />
-		<form action="'.$PHP_SELF.'" method="post">
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
 		<strong>'.$Language->getText('news_admin', 'submitted_for_group').':</strong> <a href="/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />

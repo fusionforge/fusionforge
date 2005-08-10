@@ -25,6 +25,10 @@ require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
+$forum_id = getIntFromRequest('forum_id');
+$style = getStringFromRequest('style');
+$thread_id = getIntFromRequest('thread_id');
+
 if ($forum_id) {
 
 	/*
@@ -56,7 +60,11 @@ if ($forum_id) {
 	/*
 		if necessary, insert a new message into the forum
 	*/
-	if ($post_message) {
+	if (getStringFromRequest('post_message')) {
+		$subject = getStringFromRequest('subject');
+		$body = getStringFromRequest('body');
+		$is_followup_to = getStringFromRequest('is_followup_to');
+
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
 			exit_error($Language->getText('general','error'), "Error getting new ForumMessage");
@@ -70,7 +78,7 @@ if ($forum_id) {
 			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
 			$thread_id='';
-			if ($monitor) {
+			if (getStringFromRequest('monitor')) {
 				$f->setMonitor();
 			}
 		}
@@ -137,7 +145,7 @@ if ($forum_id) {
 
 	//now show the popup boxes in a form
 	$ret_val = '
-	<form action="'. $PHP_SELF .'" method="get">
+	<form action="'. getStringFromServer('PHP_SELF') .'" method="get">
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 	<table border="0" width="33%">

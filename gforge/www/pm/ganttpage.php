@@ -154,7 +154,7 @@ if (!$_status) {
 		</script>
 		<?php
 
-echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
+echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
 	<table width="10%" border="0">
 	<tr>
 		<td><font size="-1">'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</font></td>
@@ -166,7 +166,7 @@ echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id
 		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></font></td>
 	</tr></table></form>';
 
-echo '<img src="'. $PHP_SELF .
+echo '<img src="'. getStringFromServer('PHP_SELF') .
 		'?func=ganttchart&amp;group_id='.$group_id.
 		'&amp;group_project_id='.$group_project_id.
 		'&amp;_assigned_to='.$_assigned_to.

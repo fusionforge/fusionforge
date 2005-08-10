@@ -38,6 +38,12 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$g_id = getStringFromRequest('g_id');
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -49,7 +55,7 @@ echo report_header($Language->getText('reporting','project_activity_title'));
 ?>
 <h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting','project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>

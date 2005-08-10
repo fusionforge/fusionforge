@@ -14,7 +14,9 @@ require_once('www/frs/include/frs_utils.php');
 
 
 if (session_loggedin()) {
-	if ($filemodule_id && $group_id) {
+	$group_id = getIntFromRequest('group_id');
+	$filemodule_id = getIntFromRequest('filemodule_id');
+	if ($group_id && $filemodule_id) {
 		//
 		//  Set up local objects
 		//

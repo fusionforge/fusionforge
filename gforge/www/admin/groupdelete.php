@@ -39,7 +39,10 @@ if (!$group || !is_object($group)) {
 }
 
 if (getStringFromPost('submit')) {
-	if (!$group->delete(getIntFromPost('sure'),getIntFromPost('reallysure'),getIntFromPost('reallyreallysure'))) {
+	$sure = getIntFromPost('sure');
+	$reallysure = getIntFromPost('reallysure');
+	$reallyreallysure = getIntFromPost('reallyreallysure');
+	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error('Error',$group->getErrorMessage());
 	} else {
 		header("Location: /admin/?feedback=DELETED");

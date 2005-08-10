@@ -29,6 +29,9 @@ require_once('pre.php');
 require_once('HTML_Graphs.php');
 require_once('www/survey/survey_utils.php');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
         echo "<h1>".$Language->getText('survey_show_results_csv','permission_denied')."</h1>";
 	exit;

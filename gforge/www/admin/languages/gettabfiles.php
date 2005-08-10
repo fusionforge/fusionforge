@@ -13,6 +13,8 @@ require_once('www/include/BaseLanguage.class');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
+$lang = getStringFromRequest('lang');
+
 header('Content-Type: application/octet-stream');
 header("Content-Disposition: attachment; filename=$lang.tab");
 

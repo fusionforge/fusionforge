@@ -111,6 +111,10 @@ function show_users_list ($result) {
 
 // Administrative functions
 
+$group_id = getIntFromRequest('group_id');
+$action = getStringFromRequest('action');
+$user_id = getStringFromRequest('user_id');
+
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
 } else if ($action=='activate') {
@@ -120,13 +124,15 @@ if ($action=='delete') {
 }
 
 // Add a user to this group
-if ($action=='add_to_group') {
+if (getStringFromRequest('action') == 'add_to_group') {
 	echo "ACTION NOT SUPPORTED";
 }
 
 //	Show list of users
 print "<p>" .$Language->getText('admin_userlist','user_list_for_group');
 if (!$group_id) {
+	$user_name_search = getStringFromRequest('user_name_search');
+
 	print "<strong>" .$Language->getText('admin_userlist','all_groups'). "</strong>";
 	print "\n</p>";
 
@@ -159,7 +165,7 @@ if (!$group_id) {
 	?>
 	<hr />
 	<p>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="add_to_group" />
 	<input name="user_id" type="TEXT" value="" />
 	<br />

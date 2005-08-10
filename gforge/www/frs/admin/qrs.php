@@ -14,6 +14,9 @@ require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 require_once('www/frs/include/frs_utils.php');
 
+$group_id = getIntFromRequest('group_id');
+$package_id = getIntFromRequest('package_id');
+
 if (!$group_id) {
 	exit_no_group();
 }
@@ -35,7 +38,17 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 	With much code horked from editreleases.php
 */
 
-if( $submit ) {
+if (getStringFromRequest('submit')) {
+	$release_name = getStringFromRequest('release_name');
+	$userfile = getUploadedFile('userfile');
+	$userfile_name = $userfile['name'];
+	$type_id = getIntFromRequest('type_id');
+	$processor_id = getIntFromRequest('processor_id');
+	$release_date = getStringFromRequest('release_date');
+	$release_notes = getStringFromRequest('release_notes');
+	$release_changes = getStringFromRequest('release_changes');
+	$preformatted = getStringFromRequest('preformatted');
+	$ftp_filename = getStringFromRequest('ftp_filename');
 	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		//file was uploaded already via ftp
 		//use setuid prog to chown it
@@ -49,9 +62,9 @@ if( $submit ) {
 		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
-	} else 	if ((!$userfile || $userfile == 'none') && !$ftp_filename) {
+	} else 	if (!$userfile['tmp_name'] && !$ftp_filename) {
 		// Check errors
-		switch($_FILES['userfile']['error']) {
+		switch($userfile['error']) {
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
 				$feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
@@ -81,7 +94,7 @@ if( $submit ) {
 		} elseif ($frsp->isError()) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			if ($userfile && (is_uploaded_file($userfile) || ($sys_use_ftpuploads && $ftp_filename))) {
+			if ($userfile && (is_uploaded_file($userfile['tmp_name']) || ($sys_use_ftpuploads && $ftp_filename))) {
 				//
 				//	Create a new FRSRelease in the db
 				//
@@ -110,7 +123,7 @@ if( $submit ) {
 					} elseif ($frsf->isError()) {
 						exit_error('Error',$frsf->getErrorMessage());
 					} else {
-						if (!$frsf->create($userfile_name,$userfile,$type_id,$processor_id,$release_date)) {
+						if (!$frsf->create($userfile_name,$userfile['tmp_name'],$type_id,$processor_id,$release_date)) {
 							db_rollback();
 							exit_error('Error',$frsf->getErrorMessage());
 						}
@@ -134,7 +147,7 @@ if( $submit ) {
 				}
 
 			} else {
-				exit_error('Error','Could Not Upload User File: '.$userfile);
+				exit_error('Error','Could Not Upload User File: '.$userfile['name']);
 			}
 
 		}
@@ -147,7 +160,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 
 ?>
 
-<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>">
 	<table border="0" cellpadding="2" cellspacing="2">
 	<tr>
 		<td>

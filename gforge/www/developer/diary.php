@@ -26,7 +26,10 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
+$diary_user = getStringFromRequest('diary_user');
 if ($diary_user) {
+	$diary_id = getStringFromRequest('diary_id');
+  
 	$user_obj=user_get_object($diary_user);
 	if (!$user_obj || $user_obj->isError()) {
 		exit_error('ERROR','User could not be found: '.$user_obj->getErrorMessage());
@@ -77,7 +80,7 @@ if ($diary_user) {
 			</tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. $PHP_SELF .'?diary_id='.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'&amp;diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</a></td>'.
 				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}

@@ -32,9 +32,19 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
-if ($group_id && (user_ismember($group_id, 'A'))) {
+$group_id = getIntFromRequest('group_id');
 
-	if ($add_job) {
+if ($group_id && (user_ismember($group_id, 'A'))) {
+	$title = getStringFromRequest('title');
+	$description = getStringFromRequest('description');
+	$category_id = getStringFromRequest('category_id');
+	$status_id = getStringFromRequest('status_id');
+	$job_id = getStringFromRequest('job_id');
+	$skill_id = getStringFromRequest('skill_id');
+	$skill_level_id = getStringFromRequest('skill_level_id');
+	$skill_year_id = getStringFromRequest('skill_year_id');
+
+	if (getStringFromRequest('add_job')) {
 		/*
 			create a new job
 		*/
@@ -52,7 +62,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			$feedback .= $Language->getText('people_editjob','job_insert_ok');
 		}
 
-	} else if ($update_job) {
+	} else if (getStringFromRequest('update_job')) {
 		/*
 			update the job's description, status, etc
 		*/
@@ -71,7 +81,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			$feedback .= $Language->getText('people_editjob','job_update_ok');
 		}
 
-	} else if ($add_to_job_inventory) {
+} else if (getStringFromRequest('add_to_job_inventory')) {
 		/*
 			add item to job inventory
 		*/
@@ -87,7 +97,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			$feedback .= $Language->getText('people_editjob','job_update_no_wrong_id');
 		}
 
-	} else if ($update_job_inventory) {
+	} else if (getStringFromRequest('update_job_inventory')) {
 		/*
 			Change Skill level, experience etc.
 		*/
@@ -110,7 +120,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			$feedback .= $Language->getText('people_editjob','job_skill_update_no_wrong_id');
 		}
 
-	} else if ($delete_from_job_inventory) {
+	} else if (getStringFromRequest('delete_from_job_inventory')) {
 		/*
 			remove this skill from this job
 		*/
@@ -150,7 +160,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 
 		echo $Language->getText('people_editjob','skill_explains').'
 
-		<p /><form action="'.$PHP_SELF.'" method="post">
+		<p /><form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
 		<strong>'.$Language->getText('people','category').':</strong><br />

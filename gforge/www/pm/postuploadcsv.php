@@ -1,11 +1,10 @@
 <?php
 require_once('common/pm/import_utils.php');
 
-$input_file = $_FILES['userfile']['tmp_name'];
-
-if (is_uploaded_file($input_file)) {
-	$size =	@filesize($input_file);	
-	$handle = fopen($input_file, 'r');
+$input_file = getUploadedFile('userfile');
+if (is_uploaded_file($input_file['tmp_name'])) {
+	$size =	$input_file['size'];
+	$handle = fopen($input_file['tmp_name'], 'r');
 	$tasks = array();
 	
 	while (($cols = fgetcsv($handle, 4096, ",")) !== FALSE) {

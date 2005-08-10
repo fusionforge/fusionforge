@@ -39,7 +39,11 @@ if (!$sys_use_project_vhost) {
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($add) {
+$group_id = getIntFromRequest('group_id');
+
+if (getStringFromRequest('add')) {
+	$groupname = getStringFromRequest('groupname');
+	$vhost_name = getStringFromRequest('vhost_name');
 
 	if ($group_id) {
 
@@ -76,7 +80,10 @@ if ($add) {
 	}			
 }
 
-if ($tweakcommit) {
+if (getStringFromRequest('tweakcommit')) {
+	$vhostid = getIntFromRequest('vhostid');
+	$docdir = getStringFromRequest('docdir');
+	$cgidir = getStringFromRequest('cgidir');
 
 	$res = db_query("
 		UPDATE prweb_vhost 
@@ -99,7 +106,7 @@ site_admin_header(array('title'=>$Language->getText('admin_vhost','title')));
 
 <h3><?php echo $Language->getText('admin_vhost','virtual_host_administration'); ?></h3>
 
-<form name="madd" method="post" action="<?php echo $PHP_SELF; ?>">
+<form name="madd" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 
 <strong><?php echo $Language->getText('admin_vhost','add_virtual_host'); ?></strong>
 
@@ -125,7 +132,7 @@ site_admin_header(array('title'=>$Language->getText('admin_vhost','title')));
 <strong><?php echo $Language->getText('admin_vhost','tweak_directories'); ?></strong>
 <br />
 
-<form name="tweak" method="post" action="<?php echo $PHP_SELF; ?>">
+<form name="tweak" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <table border="0">
 <tr>
    <td><?php echo $Language->getText('admin_vhost','virtual_host'); ?></td><td><input type="text" name="vhost_name" /></td>
@@ -138,8 +145,8 @@ site_admin_header(array('title'=>$Language->getText('admin_vhost','title')));
 </form>
 
 <?php
-if ($tweak) {
-
+if (getStringFromRequest('tweak')) {
+	$vhost_name = getStringFromRequest('vhost_name');
 
 	$res_vh = db_query("
 		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name
@@ -163,7 +170,7 @@ if ($tweak) {
 		$title[]=$Language->getText('admin_vhost','operations');
 
 		print '
-			<form name="update" method="post" action="'.$PHP_SELF.'">
+			<form name="update" method="post" action="'.getStringFromServer('PHP_SELF').'">
 
 			'.$GLOBALS['HTML']->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>

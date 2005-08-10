@@ -29,6 +29,7 @@ require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
@@ -38,6 +39,7 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
+$sw = getStringFromRequest('sw');
 if (!$sw) {
 	$sw='A';
 }
@@ -45,12 +47,14 @@ if (!$sw) {
 $res=db_query("SELECT user_id,user_name,lastname,firstname FROM users 
 	WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ORDER BY lastname,firstname ASC");
 
+$accumulated_ids = getStringFromRequest('accumulated_ids');
 if (!$accumulated_ids) {
 	$accumulated_ids=array();
 } else {
 	$accumulated_ids =& explode(',',$accumulated_ids);
 }
 
+$newids = getStringFromRequest('newids');
 if (count($newids) > 0) {
 	if (count($accumulated_ids) > 0) {
 		$accumulated_ids =& array_merge($accumulated_ids,$newids);
@@ -58,18 +62,19 @@ if (count($newids) > 0) {
 		$accumulated_ids=$newids;
 	}
 }
-if ($finished) {
+if (getStringFromRequest('finished')) {
 	header("Location: massfinish.php?group_id=$group_id&accumulated_ids=".implode(',',$accumulated_ids));
 }
 
 project_admin_header(array('title'=>$Language->getText('rbac_edit','pgtitle'),'group'=>$group_id));
+
 
 echo '
 <h2>'.$Language->getText('project_admin','addfromlist').'</h2>
 <p>
 '.$Language->getText('project_admin','addfromlist1').'
 <p>
-<form action="'.$PHP_SELF.'?group_id='.$group_id.'" method="post">
+<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'">';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');

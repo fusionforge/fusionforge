@@ -25,6 +25,8 @@
 
 require_once('squal_pre.php');
 
+$id = getStringFromRequest('id');
+
 $res=db_query("SELECT * FROM db_images WHERE id='$id'");
 
 $filename=db_result($res,0,'filename');

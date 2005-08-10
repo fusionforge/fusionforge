@@ -35,6 +35,7 @@ $unix_status2str = array(
 	'D'=>$Language->getText('admin_useredit','deleted')
 );
 
+$user_id = getIntFromRequest('user_id');
 $u =& user_get_object($user_id);
 if (!$u || !is_object($u)) {
 	exit_error('Error','Could Not Get User');
@@ -42,7 +43,7 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($delete_user != '' && $confirm_delete == '1') {
+if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_delete') == '1') {
 	// delete user
 	if (!$u->delete(true)) {
 		exit_error(
@@ -53,7 +54,10 @@ if ($delete_user != '' && $confirm_delete == '1') {
 		$feedback .= $Language->getText('admin_useredit','deleted').'<br />';
 	}
 
-} elseif ($action == "update_user" && $delete_user == '') {
+} elseif (getStringFromRequest('action') == "update_user" && getStringFromRequest('delete_user') == '') {
+	$email = getStringFromRequest('email');
+	$shell = getStringFromRequest('shell');
+	$status = getStringFromRequest('status');
 
     //XXX use_shell
 	if (!$u->setEmail($email)
@@ -86,7 +90,7 @@ site_admin_header(array('title'=>$Language->getText('admin_useredit','title')));
 ?>
 <h3><?php echo $Language->getText('admin_useredit','account_info'); ?><sup>1</sup></h3>
 
-<form method="post" action="<?php echo $PHP_SELF; ?>">
+<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <input type="hidden" name="action" value="update_user" />
 <input type="hidden" name="user_id" value="<?php print $user_id; ?>" />
 

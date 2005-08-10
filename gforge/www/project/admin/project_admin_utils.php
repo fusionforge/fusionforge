@@ -33,7 +33,7 @@
 */
 
 function project_admin_header($params) {
-	global $DOCUMENT_ROOT,$group_id,$feedback,$HTML,$Language;
+	global $group_id,$feedback,$HTML,$Language;
 
 	$params['toptab']='admin';
 	$params['group']=$group_id;

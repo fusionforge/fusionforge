@@ -27,16 +27,20 @@
 require_once('pre.php');
 require_once('bookmarks.php');
 
-if ($bookmark_url && $bookmark_title && $bookmark_id) {
-	if (bookmark_edit($bookmark_id, $bookmark_url, $bookmark_title)) {
+$bookmark_id = getIntFromRequest('bookmark_id');
+if (!$bookmark_id) {
+	exit_missing_param();
+}
+
+if (getStringFromRequest('submit')) {
+	$bookmark_url = getStringFromRequest('bookmark_url');
+	$bookmark_title = getStringFromRequest('bookmark_title');
+
+	if ($bookmark_url && $bookmark_title && bookmark_edit($bookmark_id, $bookmark_url, $bookmark_title)) {
 		$feedback = $Language->getText('my_bookmark_edit', 'bookmark_updated');
 	} else {
 		$feedback = $Language->getText('my_bookmark_edit', 'failed_to_update_bookmark');
 	}
-}
-
-if (!$bookmark_id) {
-	exit_missing_param();
 }
 
 site_user_header(array('title'=>$Language->getText('my_bookmark_edit','title')));
@@ -48,7 +52,7 @@ if ($result) {
 	$bookmark_title = db_result($result,0,'bookmark_title');
 }
 ?>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
 <p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
 <input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />

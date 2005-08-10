@@ -32,7 +32,7 @@ require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 
-$arr=explode('/',$REQUEST_URI);
+$arr=explode('/',getStringFromServer('REQUEST_URI'));
 $file_id=$arr[3];
 
 $res=db_query("SELECT frs_file.filename,frs_package.is_public,frs_package.package_id,

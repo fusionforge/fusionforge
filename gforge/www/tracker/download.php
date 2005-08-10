@@ -20,7 +20,7 @@ require_once('common/tracker/ArtifactFile.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('common/tracker/ArtifactType.class');
 
-$arr=explode('/',$REQUEST_URI);
+$arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $atid=$arr[4];
 $aid=$arr[5];

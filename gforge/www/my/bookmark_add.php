@@ -29,7 +29,10 @@ require_once('bookmarks.php');
 
 site_user_header(array("title"=>$Language->getText('my_bookmark_add','section')));
 
-if ($bookmark_url) {
+$bookmark_url = trim(getStringFromRequest('bookmark_url'));
+$bookmark_title = trim(getStringFromRequest('bookmark_title'));
+
+if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
 	print $Language->getText('my_bookmark_add','added_bookmark', array($bookmark_url,$bookmark_title)).".<p>&nbsp;</p>";
 
@@ -39,7 +42,7 @@ if ($bookmark_url) {
 
 } else {
 	?>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
 	<input type="text" name="bookmark_url" value="http://" />
 	</p>

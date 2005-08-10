@@ -74,9 +74,8 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	global $period;
 	global $span;
 	global $Language;
-	global $PHP_SELF;
 
-	print "<form method=\"get\" action=\"$PHP_SELF#b\">";
+	print '<form method="get" action="'.getStringFromServer('PHP_SELF').'#b">';
 
 	print $html;
 

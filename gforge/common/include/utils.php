@@ -39,14 +39,18 @@ function util_remove_CRLF($str) {
 /**
  * util_check_fileupload() - determines if a filename is appropriate for upload
  *
- * @param	   string  The name of the file being uploaded
+ * @param	   array  The uploaded file as returned by getUploadedFile()
  */
-function util_check_fileupload($filename) {
+function util_check_fileupload($file) {
 
 	/* Empty file is a valid file.
 	This is because this function should be called
 	unconditionally at the top of submit action processing
 	and many forms have optional file upload. */
+	if (!$file) {
+		return true;
+	}
+	$filename = $file['tmp_name'];
 	if ($filename == 'none' || $filename == '') {
 		return true;
 	}
@@ -699,7 +703,7 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 			for ($i = 0; $i < $cols; $i++) {
 				if(in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
-						$link = '<a href="'.$PHP_SELF.'?';
+						$link = '<a href="'.getStringFromServer('PHP_SELF').'?';
 						$linkend = '</a>';
 						if ($linkify == "bug_cat") {
 							$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';

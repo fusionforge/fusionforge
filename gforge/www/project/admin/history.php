@@ -29,6 +29,7 @@
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 project_admin_header(array('title'=>$Language->getText('project_admin_history','title'),'group'=>$group_id,'pagename'=>'project_admin_history','sectionvals'=>array(group_getname($group_id))));

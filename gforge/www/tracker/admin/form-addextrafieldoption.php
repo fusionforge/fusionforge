@@ -3,6 +3,7 @@
 //
 //  FORM TO ADD ELEMENTS TO EXTRA FIELD
 //
+	$boxid = getIntFromRequest('boxid');
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		exit_error('Error','Unable to create ArtifactExtraField Object');
@@ -24,7 +25,7 @@
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<td><a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
+					'<td><a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 					$efearr[$i]['element_id'].'&amp;boxid='.			
 					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 					$efearr[$i]['element_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a></td>';
@@ -36,7 +37,7 @@
 		}
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_opt" value="y" />
 		<strong><?php echo $Language->getText('tracker_admin_build_boxes','opt_add_name') ?>:</strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" /> <br \>

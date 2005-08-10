@@ -35,7 +35,10 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$old_passwd = getStringFromRequest('old_passwd');
+	$passwd = getStringFromRequest('passwd');
+	$passwd2 = getStringFromRequest('passwd2');
 
 	if ($u->getMD5Passwd() != md5($old_passwd)) {
 		exit_error(
@@ -80,7 +83,7 @@ if ($submit) {
 	site_user_header(array('title'=>$Language->getText('account_change_pw','title')));
 	?>
 
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<p><?php echo $Language->getText('account_change_pw','old_password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>
 	<p><?php echo $Language->getText('account_change_pw','new_password') ?>:

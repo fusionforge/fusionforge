@@ -40,7 +40,10 @@ if (!$sys_use_project_database) {
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$group_id = getIntFromRequest('group_id');
+	$groupname = getStringFromRequest('groupname');
+	$dbname = getStringFromRequest('dbname');
 
 	if ($group_id) {
 
@@ -99,7 +102,7 @@ if (db_numrows($res_db) > 0) {
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<tr><td align="center"><a href="'.$PHP_SELF.'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td align="center">'.$row_db['count'].'</td></tr>';
+		print '<tr><td align="center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td align="center">'.$row_db['count'].'</td></tr>';
 
 	}
 
@@ -146,7 +149,7 @@ if ($displaydb) {
 
 <h3><?php echo $Language->getText('admin_database','add_an_already_active_database'); ?></h3>
 
-<form name="madd" method="post" action="<?php  echo $PHP_SELF; ?>">
+<form name="madd" method="post" action="<?php  echo getStringFromServer('PHP_SELF'); ?>">
 
 <table>
 

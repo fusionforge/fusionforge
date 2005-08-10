@@ -29,6 +29,8 @@ require_once('pre.php');
 require_once('www/survey/include/SurveyHTML.class');
 
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
 $sh->header(array('title'=>$Language->getText('survey_admin_index','title'),'pagename'=>'survey_admin'));
 

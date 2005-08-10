@@ -30,6 +30,7 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 
+$group_id = getIntFromRequest('group_id');
 
 if (session_loggedin()) {
 
@@ -37,11 +38,16 @@ if (session_loggedin()) {
 		exit_permission_denied($Language->getText('news_submit','cannot'));
 	}
 
+	$group_id = getIntFromRequest('group_id');
+
 	if ($group_id == $sys_news_group) {
 		exit_permission_denied($Language->getText('news_submit','cannotadmin'));
 	}
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
+		$summary = getStringFromRequest('summary');
+		$details = getStringFromRequest('details');
+
 		//check to make sure both fields are there
 		if ($summary && $details) {
 			/*
@@ -92,7 +98,7 @@ if (session_loggedin()) {
 		<p>
 		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
 		'<p>
-		<form action="'.$PHP_SELF.'" method="post">
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<strong>'.$Language->getText('news_submit', 'forproject').': '.$group->getPublicName().'</strong>
 		<input type="hidden" name="post_changes" value="y" /></p>

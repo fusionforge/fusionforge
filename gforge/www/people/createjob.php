@@ -33,6 +33,8 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
+
 if ($group_id && (user_ismember($group_id, 'A'))) {
 
 	project_admin_header(array());

@@ -25,7 +25,9 @@
 
 require_once('pre.php');
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$loginname = getStringFromRequest('loginname');
+
 	$u = user_get_object_by_name($loginname);
 	if (!$u || !is_object($u)) {
 		exit_error('Error','Could Not Get User');
@@ -58,7 +60,7 @@ $HTML->header(array('title'=>'Pending-resend'));
 echo $Language->getText('account_login', 'resend_pending_directions');
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p><?php echo $Language->getText('account_verify', 'loginname'); ?>
 <br /><input type="text" name="loginname" /></p>
 <p><input type="submit" name="submit" value="<?php echo "Submit"; ?>" /></p>

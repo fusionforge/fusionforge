@@ -20,6 +20,9 @@ require_once('www/snippet/snippet_utils.php');
 	or a specific version of a package
 */
 
+$type = getStringFromRequest('type');
+$id = getIntFromRequest('id');
+
 if ($type=='snippet') {
 	/*
 		View a snippet and show its versions

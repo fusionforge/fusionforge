@@ -29,6 +29,10 @@
 require ('pre.php');    
 require_once ('common/include/Stats.class');    
 
+$offset = getIntFromRequest('offset');
+$type = getStringFromRequest('type');
+$limit = getStringFromRequest('limit');
+
 if (!$offset || $offset < 0) {
 	$offset=0;
 }

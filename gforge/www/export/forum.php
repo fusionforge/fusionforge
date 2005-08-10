@@ -18,6 +18,8 @@ require_once('pre.php');
 
 header("Content-Type: text/plain");
 
+$group_id = getIntFromRequest('group_id');
+
 // ## group_id must be specified
 $res_grp = db_query("
 	SELECT group_id,group_name

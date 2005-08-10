@@ -19,7 +19,8 @@
 require_once('common/pm/ProjectGroup.class');
 
 function pm_header($params) {
-	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$DOCUMENT_ROOT,$order,$pg,$Language,$sys_use_pm;
+	// XXX ogi: What to do with these?
+	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$order,$pg,$Language,$sys_use_pm;
 
 	if (!$sys_use_pm) {
 		exit_disabled();

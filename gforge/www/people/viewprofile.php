@@ -18,6 +18,10 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
+$job_id = getStringFromRequest('job_id');
+
+$user_id = getStringFromRequest('user_id');
 if ($user_id) {
 
 	/*

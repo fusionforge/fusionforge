@@ -4,7 +4,7 @@
 
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="delete" value="y" /><br />
 		<?php echo $Language->getText('tracker_admin','delete_warning'); ?>
 		<p>

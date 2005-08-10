@@ -32,6 +32,10 @@ require_once('common/reporting/ReportGroupAdded.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 //
 //	Create Report
 //

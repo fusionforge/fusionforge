@@ -30,6 +30,8 @@ require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>$Language->getText('survey_show_results_individual','title'),'pagename'=>'survey_admin_show_results_individual'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {

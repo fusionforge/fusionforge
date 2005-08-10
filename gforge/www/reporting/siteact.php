@@ -37,6 +37,11 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -48,7 +53,7 @@ echo report_header($Language->getText('reporting','site_wide_activity'));
 ?>
 <h3><?php echo $Language->getText('reporting','site_wide_activity'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting', 'area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
 <td><strong><?php echo $Language->getText('reporting', 'type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>

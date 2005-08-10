@@ -18,11 +18,14 @@
 
 require_once('note.php');
 
+$related_artifact_id = getIntFromRequest('related_artifact_id');
+$related_artifact_summary = getStringFromRequest('related_artifact_summary');
+
 pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'pm_addtask','group_project_id'=>$group_project_id));
 echo notepad_func();
 ?>
 
-<form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postaddtask" />
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 

@@ -27,6 +27,8 @@
 
 require_once('pre.php');
 
+$trove_cat_id = getIntFromRequest('trove_cat_id');
+
 $res_cat = db_query("
 	SELECT *
 	FROM trove_cat

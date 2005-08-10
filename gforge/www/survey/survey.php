@@ -30,6 +30,8 @@ require_once('pre.php');
 require_once('common/survey/Survey.class');
 require_once('www/survey/include/SurveyHTML.class');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 
 /* We need a group_id */ 
 if (!$group_id) {

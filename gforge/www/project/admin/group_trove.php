@@ -31,15 +31,17 @@ require_once('pre.php');
 require_once('trove.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 // Check for submission. If so, make changes and redirect
 
-if ($GLOBALS['submit'] && $root1) {
+if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
+	// XXX ogi: What's $rm_id?
 	group_add_history ('Changed Trove',$rm_id,$group_id);
 
 	// there is at least a $root1[xxx]
-	while (list($rootnode,$value) = each($root1)) {
+	while (list($rootnode,$value) = each(getStringFromRequest('root1'))) {
 		// check for array, then clear each root node for group
 		db_query("
 			DELETE FROM trove_group_link
@@ -50,8 +52,9 @@ if ($GLOBALS['submit'] && $root1) {
 		for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
 			$varname = 'root'.$i;
 			// check to see if exists first, then insert into DB
-			if (${$varname}[$rootnode]) {
-				trove_setnode($group_id,${$varname}[$rootnode],$rootnode);
+			$category = getStringFromRequest($varname) [$rootnode];
+			if ($category) {
+				trove_setnode($group_id,$category,$rootnode);
 			}
 		}
 	}
@@ -63,7 +66,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_group_trov
 ?>
 <?php echo $Language->getText('project_admin_group_trove','intro') ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <?php
 

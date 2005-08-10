@@ -27,6 +27,9 @@
 
 require_once('pre.php');
 
+$toaddress = getStringFromRequest('toaddress');
+$touser = getStringFromRequest('touser');
+
 if (!$toaddress && !$touser) {
 	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','error_variables'));
 }
@@ -47,7 +50,12 @@ if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
 }
 
 
-if ($send_mail) {
+if (getStringFromRequest('send_mail')) {
+	$subject = getStringFromRequest('subject');
+	$body = getStringFromRequest('body');
+	$name = getStringFromRequest('name');
+	$email = getStringFromRequest('email');
+
 	if (!$subject || !$body || !$name || !$email) {
 		/*
 			force them to enter all vars
@@ -99,7 +107,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 <p />
 <?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
 <p />
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 

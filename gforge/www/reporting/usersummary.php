@@ -38,6 +38,10 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+$tstat = getStringFromRequest('tstat');
+
 if (!$start) {
 	$z =& $report->getWeekStartArr();
 	$start = $z[count($z)-1];
@@ -64,7 +68,7 @@ echo report_header($Language->getText('reporting_us','title'));
 	<p>
 	<?php echo $Language->getText('reporting_us','description'); ?>
 	<p>
-    <form action="<?php echo $PHP_SELF; ?>" method="get">
+    <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
     <table><tr>
     <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
     <td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>

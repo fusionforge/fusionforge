@@ -169,8 +169,8 @@ function menu_valid_html() {
 	$HTML->menuhtml_top(' ');
 	print "<center>";
 	// /check?uri= works better than  /check/referer
-	$valid_server = $GLOBALS['HTTP_HOST'];
-	$valid_page = $GLOBALS['PHP_SELF'];
+	$valid_server = getStringFromServer('HTTP_HOST');
+	$valid_page = getStringFromServer('PHP_SELF');
 	echo "<a href=\"http://validator.w3.org/check?uri=http://".$valid_server.$valid_page."\">";
 	print html_image("valid-html401.png",array('width'=>'88', 'height'=>'31', 'alt'=>'Valid HTML 4.01!'));
 	echo "</a>";
@@ -189,7 +189,7 @@ function menu_loggedin($page_title) {
 	$HTML->menu_entry('/account/',$Language->getText('menu', 'my_account'));
 	if (!$GLOBALS['HTTP_POST_VARS']) {
 		$bookmark_title = urlencode( str_replace($sys_name.': ', '', $page_title));
-		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&amp;bookmark_title='.$bookmark_title,$Language->getText('menu', 'bookmark_page'));
+		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode(getStringFromServer('REQUEST_URI')).'&amp;bookmark_title='.$bookmark_title,$Language->getText('menu', 'bookmark_page'));
 	}
 	$HTML->menu_entry('/account/logout.php',$Language->getText('menu', 'logout'));
 	$HTML->menuhtml_bottom();

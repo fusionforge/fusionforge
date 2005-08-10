@@ -29,6 +29,8 @@ require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>$Language->getText('survey_edit_question','title'),'pagename'=>'survey_admin_edit_question'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
@@ -37,7 +39,11 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-if ($post_changes) {
+if (getStringFromRequest('post_changes')) {
+	$question = getStringFromRequest('question');
+	$question_type = getStringFromRequest('question_type');
+	$question_id = getIntFromRequest('question_id');
+
 	$sql="UPDATE survey_questions SET question='".htmlspecialchars($question)."', question_type='$question_type' where question_id='$question_id' AND group_id='$group_id'";
 	$result=db_query($sql);
         if (db_affected_rows($result) < 1) {
@@ -77,7 +83,7 @@ function show_questions() {
 <p><?php echo $Language->getText('survey_edit_question','if_you_change_after'); ?>.</p>
 
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="post_changes" value="Y" />
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>"/>
 <input type="hidden" name="question_id" value="<?php echo $question_id; ?>" />

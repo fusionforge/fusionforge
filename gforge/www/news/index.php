@@ -33,6 +33,10 @@ news_header(array('title'=>$Language->getText('news', 'title'),'pagename'=>'news
 
 echo $Language->getText('news', 'choose');
 
+$group_id = getIntFromRequest('group_id');
+$limit = getIntFromRequest('limit');
+$offset = getIntFromRequest('offset');
+
 /*
 	Put the result set (list of forums for this group) into a column with folders
 */
@@ -73,7 +77,7 @@ if ($rows < 1) {
 		<br />';
 	}
 
-        if ($more) {
+        if (getStringFromRequest('more')) {
         	echo '<br /><a href="'
                      .'?group_id='.$group_id.'&amp;limit='.$limit
                      .'&amp;offset='. (string)($offset+$limit) .'">['.$Language->getText('news', 'olderheadlines').']</a>';

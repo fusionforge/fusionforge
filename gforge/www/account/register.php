@@ -31,11 +31,32 @@ if ($sys_user_reg_restricted) {
 	session_require(array('group'=>'1','admin_flags'=>'A'));
 }
 
+$unix_name = getStringFromRequest('unix_name');
+$firstname = getStringFromRequest('firstname');
+$lastname = getStringFromRequest('lastname');
+$password1 = getStringFromRequest('password1');
+$password2 = getStringFromRequest('password2');
+$email = getStringFromRequest('email');
+$mail_site = getStringFromRequest('mail_site');
+$mail_va = getStringFromRequest('mail_va');
+$language_id = getIntFromRequest('language_id');
+$timezone = getStringFromRequest('timezone');
+$jabber_address = getStringFromRequest('jabber_address');
+$jabber_only = getStringFromRequest('jabber_only');
+$theme_id = getIntFromRequest('theme_id');
+$address = getStringFromRequest('address');
+$address2 = getStringFromRequest('address2');
+$phone = getStringFromRequest('phone');
+$fax = getStringFromRequest('fax');
+$title = getStringFromRequest('title');
+$ccode = getStringFromRequest('ccode');
+
 if (!$theme_id) {
 	$theme_id=$HTML->getThemeIdFromName($sys_theme);
 }
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+
 	/*
 
 		Adding call to library rather than
@@ -70,7 +91,7 @@ if (!isset($ccode) || empty($ccode)) {
 }
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p>
 <?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
 <input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />

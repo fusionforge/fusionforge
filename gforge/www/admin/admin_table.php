@@ -32,7 +32,7 @@
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_add($table, $unit, $primary_key) {
-	global $PHP_SELF, $Language;
+	global $Language;
 
 	// This query may return no rows, but the field names are needed.
 	$result = db_query('SELECT * FROM '.$table.' WHERE '.$primary_key.'=0');
@@ -41,7 +41,7 @@ function admin_table_add($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		echo $Language->getText('admin_admin_table', 'create_new_below', array(getUnitLabel($unit))).'
-			<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
+			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -51,7 +51,7 @@ function admin_table_add($table, $unit, $primary_key) {
 			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
 		}
 		echo '</table><input type="submit" value="'.$Language->getText('general', 'add').'" /></form>
-			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
 			</form>';
 	} else {
@@ -91,7 +91,7 @@ function admin_table_postadd($table, $unit, $primary_key) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
-	global $PHP_SELF, $Language;
+	global $Language;
 	
 	if ($unit == "processor") {
 		$result = db_numrows(db_query("SELECT processor_id FROM frs_file WHERE processor_id = $id"));
@@ -125,10 +125,10 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
 		echo '</ul>
-			<form name="delete" action="'.$PHP_SELF.'?function=delete&amp;id='.$id.'" method="post">
+			<form name="delete" action="'.getStringFromServer('PHP_SELF').'?function=delete&amp;id='.$id.'" method="post">
 			<input type="submit" value="'.$Language->getText('general', 'delete').'" />
 			</form>
-			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
 			</form>';
 	} else {
@@ -164,7 +164,7 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
-	global $PHP_SELF, $Language;
+	global $Language;
 
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
@@ -172,7 +172,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 		$cols = db_numfields($result);
 
 		echo $Language->getText('admin_admin_table', 'modify_below', array(getUnitLabel($unit))).'
-			<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
+			<form name="edit" action="'.getStringFromServer('PHP_SELF').'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -188,7 +188,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 			}
 		}
 		echo '</table><input type="submit" value="'.$Language->getText('general', 'submit').'" /></form>
-			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
 			</form>';
 	} else {
@@ -231,7 +231,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_show($table, $unit, $primary_key) {
-        global $HTML, $PHP_SELF, $Language;
+        global $HTML, $Language;
 
         $result = db_query("SELECT * FROM $table ORDER BY $primary_key");
 
@@ -240,7 +240,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.$PHP_SELF.'?function=add">['.$Language->getText('admin_admin_table', 'add_new').']</a>',
+		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['.$Language->getText('admin_admin_table', 'add_new').']</a>',
 			'colspan="'.($cols+1).'"');
 
                 echo '<table border="0" width="100%">';
@@ -257,8 +257,8 @@ function admin_table_show($table, $unit, $primary_key) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
-                        echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">['.$Language->getText('general', 'edit').']</a>';
-                        echo '<a href="'.$PHP_SELF.'?function=confirmdelete&amp;id='.$id.'">['.$Language->getText('general', 'delete').']</a> </td>';
+                        echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['.$Language->getText('general', 'edit').']</a>';
+                        echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['.$Language->getText('general', 'delete').']</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
 				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}
@@ -292,7 +292,12 @@ echo '<h3>'.$Language->getText('admin_admin_table', 'title', array(ucwords(getUn
 <p><a href="/admin/">'.$Language->getText('admin_admin_table', 'site_admin_home').'</a></p>
 <p>&nbsp;</p>';
 
-switch ($function) {
+$table = getStringFromRequest('table');
+$unit = getStringFromRequest('unit');
+$primary_key = getStringFromRequest('primary_key');
+$id = getStringFromRequest('id');
+
+switch (getStringFromRequest('function')) {
 	case 'add' : {
 		admin_table_add($table, $unit, $primary_key);
 		break;

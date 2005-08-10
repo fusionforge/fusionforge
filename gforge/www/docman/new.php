@@ -24,6 +24,7 @@ require_once('common/docman/DocumentGroupFactory.class');
 require_once('include/doc_utils.php');
 require_once('include/DocumentGroupHTML.class');
 
+$group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
 }
@@ -36,9 +37,16 @@ if (!$g || !is_object($g)) {
 
 $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 
-if ($submit){
+if (getStringFromRequest('submit')) {
+	$doc_group = getIntFromRequest('doc_group');
+	$title = getStringFromRequest('title');
+	$description = getStringFromRequest('description');
+	$file_url = getStringFromRequest('file_url');
+	$ftp_filename = getStringFromRequest('ftp_filename');
+	$uploaded_data = getUploadedFile('uploaded_data');
+	$language_id = getIntFromRequest('language_id');
 
-	if (!$doc_group || $doc_group ==100) {
+	if (!$doc_group || $doc_group == 100) {
 		//cannot add a doc unless an appropriate group is provided
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
@@ -55,11 +63,13 @@ if ($submit){
 	}
 
 	if ($uploaded_data) {
-		if (!is_uploaded_file($uploaded_data)) {
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 			exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
 		}
-		$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
+		$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 		$file_url='';
+		$uploaded_data_name=$uploaded_data['name'];
+		$uploaded_data_type=$uploaded_data['type'];
 	} elseif ($file_url) {
 		$data = '';
 		$uploaded_data_name=$file_url;
@@ -83,7 +93,7 @@ if ($submit){
 	<?php echo $Language->getText('docman_new','intro') ?>
 	</p>
 
-	<form name="adddata" action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post" enctype="multipart/form-data">
+	<form name="adddata" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post" enctype="multipart/form-data">
 
 	<table border="0" width="75%">
 

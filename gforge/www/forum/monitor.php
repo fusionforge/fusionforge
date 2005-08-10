@@ -24,6 +24,8 @@ require_once('common/forum/Forum.class');
 
 
 if (session_loggedin()) {
+	$forum_id = getIntFromRequest('forum_id');
+	$group_id = getIntFromRequest('group_id');
 	if ($forum_id && $group_id) {
 		//
 		//  Set up local objects
@@ -40,13 +42,13 @@ if (session_loggedin()) {
 			exit_error('Error',$f->getErrorMessage());
 		}
 
-		if ($stop) {
+		if (getStringFromRequest('stop')) {
 			if (!$f->stopMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
 				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_monitor','deactivated')));
 			}
-		} elseif($start) {
+		} elseif(getStringFromRequest('start')) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {

@@ -36,6 +36,7 @@ if (!$sys_use_project_multimedia) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 function check_file_size($size) {
@@ -51,7 +52,7 @@ function check_file_size($size) {
 	}
 }
 
-function store_file($id, $input_file, $input_file_name, $input_file_type) {
+function store_file($id, $input_file) {
 	global $group_id;
 	global $description;
 	global $feedback;
@@ -61,9 +62,10 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 		exit_error("Error","Invalid filename");
 	}
 
-	$dimensions = @getimagesize($input_file);
-	$size = @filesize($input_file);
-	$data = addslashes(base64_encode(fread( fopen($input_file, 'rb'), $size)));
+	$filename = $input_file['tmp_name'];
+	$size = $input_file['size'];
+	$dimensions = @getimagesize($filename);
+	$data = addslashes(base64_encode(fread( fopen($filename, 'rb'), $size)));
 	$width=$dimensions[0];
 	$height=$dimensions[1];
 
@@ -79,16 +81,16 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 					 width,height,upload_date,version)
 					VALUES
 					('$group_id','$description',
-					 '$data','$input_file_name',
-					 '$size','$input_file_type',
+					 '$data','".$input_file['name']."',
+					 '$size','".$input_file['type']."',
 					 '$width','$height','$curtime',1)";
 		} else {
 			$sql="	UPDATE db_images
 					SET description='$description',
 					 bin_data='$data',
-					 filename='$input_file_name',
+					 filename='".$input_file['name']."',
 					 filesize='$size',
-					 filetype='$input_file_type',
+					 filetype='".$input_file['type']."',
 					 width='$width',
 					 height='$height',
 					 upload_date='$curtime',
@@ -108,26 +110,30 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 	}
 }
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$input_file = getUploadedFile('input_file');
+	$id = getIntFromRequest('id');
+	$description = getStringFromRequest('description');
+	$filetype = getStringFromRequest('filetype');
 
 	if (!util_check_fileupload($input_file)) {
 		exit_error("Error","Invalid filename");
 	}
 
-	if ($add) {
-		if ($input_file == "none" || $description == "") {
+	if (getStringFromRequest('add')) {
+		if (!$input_file['tmp_name'] || $description == "") {
 			$feedback .= $Language->getText('project_admin_editimages','required_fields');
 		} else {
 			//see if they have too many data in the system
 			$res=db_query("SELECT sum(filesize) WHERE group_id='$group_id'");
 			if (db_result($res,0,'sum') < $QUOTA) {
-				store_file(0, $input_file, $input_file_name, $input_file_type);
+				store_file(0, $input_file);
 			} else {
 				$feedback .= ' Sorry - you are over your '.$QUOTA.' quota ';
 			}
 		}
 
-	} else if ($remove) {
+	} else if (getStringFromRequest('remove')) {
 
 		$res=db_query("DELETE FROM db_images WHERE id='$id' AND group_id='$group_id'");
 
@@ -142,7 +148,7 @@ if ($submit) {
 		if ($description == "") {
 			$feedback .= $Language->getText('project_admin_editimages','file_description_required').'<b />';
 		} else {
-			if ($input_file=="none" || $input_file=="") {
+			if (!$input_file['tmp_name']) {
 
 				// Just replace description/mime type
 
@@ -170,10 +176,10 @@ if ($submit) {
 						WHERE group_id='$group_id'
 						AND id<>'$id'");
 
-				$size = @filesize($input_file);
+				$size = $input_file['size'];
 				if (db_result($res,0,'sum')+$size < $QUOTA) {
 
-					store_file($id, $input_file, $input_file_name, $input_file_type);
+					store_file($id, $input_file);
 
 				} else {
 
@@ -207,7 +213,7 @@ if ($mode == "edit") {
 
 	echo '</p><h4>'.$Language->getText('project_admin_editimages','title').'</h4>
 	<p>
-	<form action="'. $PHP_SELF .'" method="post" enctype="multipart/form-data">
+	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<input type="hidden" name="id" value="'.$id.'" />
 
@@ -236,7 +242,7 @@ if ($mode == "edit") {
 
 	echo '<h4>'.$Language->getText('project_admin_editimages','add_data').'</h4>
 	<p>
-	<form action="'. $PHP_SELF .'" method="post" enctype="multipart/form-data">
+	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<strong>'.$Language->getText('project_admin_editimages','local_filename').':</strong>'.utils_requiredField().'<br />
 	<input type="file" name="input_file" size="30" />
@@ -276,10 +282,10 @@ for ($i=0; $i<$rows; $i++) {
 	echo '
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 	.'<td align="center">'
-	 .'<a href="'. $PHP_SELF .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
+	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
 	 .db_result($result,$i,'id').'">'
 	 .'['.$Language->getText('project_admin_editimages','del').']'.'</a>'
-	 .'<a href="'. $PHP_SELF .'?submit=1&amp;group_id='.$group_id.'&amp;mode=edit&amp;id='
+	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;mode=edit&amp;id='
 	 .db_result($result,$i,'id').'"> '
 	 .'['.$Language->getText('project_admin_editimages','edit').']'.'</a>'
 	.'</td>'

@@ -41,7 +41,7 @@ function check_select_value($value, $type) {
 }
 ?>
 
-<form method="post" action="<?php echo $PHP_SELF; ?>">
+<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <?php echo $Language->getText('admin_responses','existing_responses'); ?><?php echo get_canned_responses(); ?>
 <!-- Reinhard Spisser: commenting localization, since otherwise it will not work -->
 <!--
@@ -58,7 +58,14 @@ function check_select_value($value, $type) {
 
 <?php
 
+$action = getStringFromRequest('action');
+
 if( $action == "Edit" ) {
+	$response_id = getStringFromRequest('response_id');
+	$action2 = getStringFromRequest('action2');
+	$response_title = getStringFromRequest('response_title');
+	$response_text = getStringFromRequest('response_text');
+
 	// Edit Response
 	check_select_value($response_id, $action);
 	if( $action2 ) {
@@ -72,7 +79,7 @@ if( $action == "Edit" ) {
 ?>
 
 <?php echo $Language->getText('admin_responses','edit_response_other'); ?><br />
-<form method="post" action="<?php echo $PHP_SELF; ?>">
+<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <?php echo $Language->getText('admin_responses','response_title'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
 <?php echo $Language->getText('admin_responses','response_text'); ?><br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
@@ -84,7 +91,11 @@ if( $action == "Edit" ) {
 
 <?php
 	}
+
 } else if ( $action == "Delete" ) {
+	$response_id = getStringFromRequest('response_id');
+	$sure = getStringFromRequest('sure');
+
 	// Delete Response
 	check_select_value($response_id, $action);
 	if( $sure == "yes" ) {
@@ -94,15 +105,20 @@ if( $action == "Edit" ) {
 		print( $Language->getText('admin_responses','not_sure_dont_click')."<br />");
 		print("<em>" .$Language->getText('admin_responses','by_the_way')."</em><br />\n");
 	}
+
 } else if ( $action == "Create" ) {
+	$response_title = getStringFromRequest('response_title');
+	$response_text = getStringFromRequest('response_text');
+
 	// New Response
 	add_canned_response($response_title, $response_text);
 	print(" <strong>" .$Language->getText('admin_responses','add_response')."</strong> ");
+
 } else {
 ?>
 
 <?php echo $Language->getText('admin_responses','create_new_response'); ?><br />
-<form method="post" action="<?php echo $PHP_SELF; ?>">
+<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <?php echo $Language->getText('admin_responses','response_title'); ?><input type="text" name="response_title" size="30" maxlength="25" /><br />
 <?php echo $Language->getText('admin_responses','response_text'); ?><br />
 <textarea name="response_text" cols="50" rows="10"></textarea>

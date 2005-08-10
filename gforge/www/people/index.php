@@ -33,6 +33,9 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
+$category_id = getIntFromRequest('category_id');
+
 if ($group_id) {
 	
 	project_admin_header(array());

@@ -35,15 +35,20 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // ########################################################
 
-if ($GLOBALS["submit"]) {
+if (getStringFromRequest('submit')) {
+	$form_parent = getStringFromRequest('form_parent');
+	$form_shortname = getStringFromRequest('form_shortname');
+	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
+	$form_shortname = getStringFromRequest('form_shortname');
+	$form_fullname = getStringFromRequest('form_fullname');
+	$form_description = getStringFromRequest('form_description');
+	$newroot = trove_getrootcat($form_parent);
 
-	$newroot = trove_getrootcat($GLOBALS['form_parent']);
-
-	if ($GLOBALS['form_shortname']) {
+	if ($form_shortname) {
 		if ($form_trove_cat_id == $form_parent) {
 			exit_error($Language->getText(
-								'admin_trove_cat_edit','error_tove_equal_parent'),
-								db_error()
+					   'admin_trove_cat_edit','error_tove_equal_parent'),
+				   db_error()
 			);
 		} else {
 			$res = db_query("

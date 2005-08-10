@@ -28,8 +28,10 @@
 require_once('pre.php');
 require_once('project_summary.php');
 
-$group_name=$_GET['group_name'];
-$group_id=$_GET['group_id'];
+$group_name = getStringFromRequest('group_name');
+$group_id = getIntFromRequest('group_id');
+$mode = getStringFromRequest('mode');
+$no_table = getStringFromRequest('no_table');
 
 //
 //	Get group object

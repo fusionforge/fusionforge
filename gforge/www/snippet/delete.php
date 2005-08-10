@@ -22,6 +22,9 @@ require_once('www/snippet/snippet_utils.php');
 
 if (session_loggedin()) {
 	snippet_header(array('title'=>'Delete Snippets','pagename'=>'snippet_delete'));
+	$type = getStringFromRequest('type');
+	$snippet_version_id = getIntFromRequest('snippet_version_id');
+	$snippet_package_version_id = getIntFromRequest('snippet_package_version_id');
 
 	if ($type=='frompackage' && $snippet_version_id && $snippet_package_version_id) {
 		/*

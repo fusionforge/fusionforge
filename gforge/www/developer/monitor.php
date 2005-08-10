@@ -31,10 +31,12 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 
 } else {
+
 	/*
 		User obviously has to be logged in to monitor
 	*/
 
+	$diary_user = getStringFromRequest('diary_user');
 	if ($diary_user) {
 		/*
 			First check to see if they are already monitoring

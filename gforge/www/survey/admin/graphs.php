@@ -32,6 +32,10 @@ require_once($sys_path_to_jpgraph.'/jpgraph_bar.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
 
+$type = getStringFromRequest('type');
+$legend = getStringFromRequest('legend');
+$value = getStringFromRequest('value');
+
 if ($type=='pie') {
     ShowPie($legend, $value);
 } else {

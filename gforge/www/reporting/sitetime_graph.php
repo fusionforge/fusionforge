@@ -34,6 +34,10 @@ require_once('common/reporting/report_utils.php');
 
 session_require( array('group'=>$sys_stats_group) );
 
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+$type = getStringFromRequest('type');
+
 //
 //	Create Report
 //
@@ -47,6 +51,7 @@ if ($report->isError()) {
 	exit;
 }
 
+// XXX ogi: Isn't it $type?
 if (!isset($datatype)) {
 	$datatype=1;
 }

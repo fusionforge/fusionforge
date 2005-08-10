@@ -30,6 +30,12 @@ require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once('common/reporting/ReportTrackerAct.class');
 
+$group_id = getIntFromRequest('group_id');
+$atid = getStringFromRequest('atid');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$SPAN) {
 	$SPAN=REPORT_TYPE_MONTHLY;
 }

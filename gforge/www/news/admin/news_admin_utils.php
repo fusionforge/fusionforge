@@ -34,7 +34,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	// function to show single news item
        	// factored out because called 3 time below
        	function show_news_item($result,$i,$approved,$selectable) {
-	        global $PHP_SELF,$HTML, $sys_shortdatefmt;
+	        global $HTML, $sys_shortdatefmt;
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="20%">';
        		if ($selectable) {
@@ -45,7 +45,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		echo date($sys_shortdatefmt, db_result($result,$i,'post_date')).'</td>
        		<td width="45%">';
        		echo '
-       		<a href="'.$PHP_SELF.'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
+       		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
        		</td>
 
        		<td width="35%">
@@ -68,7 +68,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$result=db_query($sql_pending);
        	$rows=db_numrows($result);
 
-       	echo '<form action="'. $PHP_SELF .'" method="post">';
+       	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
        	echo '<input type="hidden" name="mass_reject" value="1" />';
        	echo '<input type="hidden" name="post_changes" value="y" />';
 

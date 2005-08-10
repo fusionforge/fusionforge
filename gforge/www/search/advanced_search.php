@@ -14,6 +14,7 @@ require_once('pre.php');
 require_once('common/include/escapingUtils.php');
 require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class');
 
+$group_id = getIntFromRequest('group_id');
 $offset = getIntFromRequest('offset');
 $words = getStringFromRequest('words');
 $mode = getStringFromRequest('mode', SEARCH__MODE_AND);
@@ -24,7 +25,7 @@ if ($mode == SEARCH__MODE_AND) {
 	$exact = false;
 }
 
-if (!isset($search)) { 
+if (!getStringFromRequest('search')) { 
 	$searchQuery = new AdvancedSearchHtmlSearchRenderer($words, $offset, true, $group_id);
 	//just display the header and footer if search is not set
 	$searchQuery->writeHeader();

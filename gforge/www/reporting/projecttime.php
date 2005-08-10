@@ -38,6 +38,13 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$sw = getStringFromRequest('sw');
+$typ = getStringFromRequest('typ');
+$g_id = getStringFromRequest('g_id');
+$typ = getStringFromRequest('typ');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -58,7 +65,7 @@ $a2[]='user';
 ?>
 <h3><?php echo $Language->getText('reporting_ttbp','title'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>">
 <table><tr>

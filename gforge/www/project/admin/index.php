@@ -35,6 +35,7 @@ require_once('www/include/role_utils.php');
 require_once('common/include/account.php');
 require_once('common/include/GroupJoinRequest.class');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 // get current information
@@ -56,38 +57,46 @@ if (!$perm->isAdmin()) {
 	exit_permission_denied();
 }
 
-if ($submit) {
-	if ($adduser) {
+if (getStringFromRequest('submit')) {
+	if (getStringFromRequest('adduser')) {
 		/*
 			add user to this project
 		*/
+		$form_unix_name = getStringFromRequest('form_unix_name');
+		$role_id = getIntFromRequest('role_id');
 		if (!$group->addUser($form_unix_name,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_added');
 		}
-	} else if ($rmuser) {
+	} else if (getStringFromRequest('rmuser')) {
 		/*
 			remove a user from this group
 		*/
+		$user_id = getIntFromRequest('user_id');
 		if (!$group->removeUser($user_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_removed');
 		}
-	} else if ($updateuser) {
+	} else if (getStringFromRequest('updateuser')) {
 		/*
 			Adjust User Role
 		*/
+		$user_id = getIntFromRequest('user_id');
+		$role_id = getIntFromRequest('role_id');
 		if (!$group->updateUser($user_id,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_updated');
 		}
-	} elseif ($acceptpending) {
+	} elseif (getStringFromRequest('acceptpending')) {
 		/*
 			add user to this project
 		*/
+		$form_userid = getIntFromRequest('form_userid');
+		$form_unix_name = getStringFromRequest('form_unix_name');
+		$role_id = getIntFromRequest('role_id');
 		if (!$group->addUser($form_unix_name,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
@@ -99,10 +108,11 @@ if ($submit) {
 			}
 			$feedback = $Language->getText('project_admin','user_added');
 		}
-	} elseif ($rejectpending) {
+	} elseif (getStringFromRequest('rejectpending')) {
 		/*
 			reject adding user to this project
 		*/
+		$form_userid = getIntFromRequest('form_userid');
 		$gjr=new GroupJoinRequest($group,$form_userid);
 		if (!$gjr || !is_object($gjr) || $gjr->isError()) {
 			$feedback .= 'Error Getting GroupJoinRequest';
@@ -222,7 +232,7 @@ echo $HTML->boxBottom();
 while ($row_memb=db_fetch_array($res_memb)) {
 
 		echo '
-			<form action="'.$PHP_SELF.'" method="post">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="submit" value="y" />
 			<input type="hidden" name="user_id" value="'.$row_memb['user_id'].'" />
 			<input type="hidden" name="group_id" value="'. $group_id .'" />
@@ -243,7 +253,7 @@ while ($row_memb=db_fetch_array($res_memb)) {
 */
 
 ?>
-			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 			<input type="hidden" name="submit" value="y" />
 			<tr><td><input type="text" name="form_unix_name" size="10" value="" /></td>
 			<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?></td>

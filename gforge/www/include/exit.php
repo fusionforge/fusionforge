@@ -44,9 +44,8 @@ function exit_permission_denied($reason_descr='') {
  * exit_not_logged_in() - Exit with not logged in error
  */
 function exit_not_logged_in() {
-	global $REQUEST_URI;
 	//instead of a simple error page, now take them to the login page
-	header ("Location: /account/login.php?return_to=".urlencode($REQUEST_URI));
+	header ("Location: /account/login.php?return_to=".urlencode(getStringFromServer('REQUEST_URI')));
 	exit;
 }
 

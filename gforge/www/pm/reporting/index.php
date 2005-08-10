@@ -27,6 +27,8 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+$group_id = getIntFromRequest('group_id');
+
 if (!$group_id) {
 	exit_no_group();
 }
@@ -73,7 +75,11 @@ function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$com
 
 include_once('www/include/HTML_Graphs.php');
 
+$what = getStringFromRequest('what');
 if ($what) {
+	$period = getStringFromRequest('period');
+	$span = getStringFromRequest('span');
+
 	/*
 		Update the database
 	*/
@@ -81,6 +87,8 @@ if ($what) {
 	$period_clause=period2sql($period,$span,"start_date");
 
 	if ($what=="aging") {
+		$start = getStringFromRequest('start');
+		$end = getStringFromRequest('end');
 
 		pm_header(array ("title"=>$Language->getText('pm_reporting','aging_report'),'pagename'=>'pm_reporting'));
 		pm_reporting_header($group_id);

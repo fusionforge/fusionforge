@@ -33,6 +33,7 @@ if (!$sys_use_project_vhost) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group = &group_get_object($group_id);
@@ -43,7 +44,8 @@ if (!$group || !is_object($group)) {
         exit_error('ERROR',$group->getErrorMessage());
 }
 
-if ($createvhost) {
+if (getStringFromRequest('createvhost')) {
+	$vhost_name = getStringFromRequest('vhost_name');
 
 	$homedir = account_group_homedir($group->getUnixName());
 	$docdir = $homedir.'/htdocs/';
@@ -71,7 +73,8 @@ if ($createvhost) {
 }
 
 
-if ($deletevhost) {
+if (getStringFromRequest('deletevhost')) {
+	$vhostid = getStringFromRequest('vhostid');
 
 	//schedule for deletion
 
@@ -108,7 +111,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_vhost','ti
 <?php echo $Language->getText('project_admin_vhost','info', array($group->getUnixName(),$GLOBALS['sys_default_domain'],$GLOBALS['sys_name'],$group->getUnixName(),$GLOBALS['sys_default_domain']   )) ?>
 <p>
 
-<form name="new_vhost" action="<?php echo $PHP_SELF.'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
+<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
 <table border="0">
 <tr>
 	<td> <?php echo $Language->getText('project_admin_vhost','name') ?> </td>
@@ -137,7 +140,7 @@ if (db_numrows($res_db) > 0) {
 
 		print '	<tr>
 			<td>'.$row_db['vhost_name'].'</td>
-			<td>[ <strong><a href="'.$PHP_SELF.'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'.$Language->getText('project_admin_vhost','delete').'</a></strong>]
+			<td>[ <strong><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'.$Language->getText('project_admin_vhost','delete').'</a></strong>]
 			</tr>	
 		';
 

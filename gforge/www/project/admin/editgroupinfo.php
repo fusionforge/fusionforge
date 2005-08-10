@@ -30,6 +30,7 @@
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
@@ -42,8 +43,25 @@ if (!$group || !is_object($group)) {
 }
 
 // If this was a submission, make updates
-if ($submit) {
-
+if (getStringFromRequest('submit')) {
+	$form_group_name = getStringFromRequest('form_group_name');
+	$form_shortdesc = getStringFromRequest('form_shortdesc');
+	$form_homepage = getStringFromRequest('form_homepage');
+	$logo_image_id = getIntFromRequest('logo_image_id');
+	$use_mail = getStringFromRequest('use_mail');
+	$use_survey = getStringFromRequest('use_survey');
+	$use_forum = getStringFromRequest('use_forum');
+	$use_pm = getStringFromRequest('use_pm');
+	$use_scm = getStringFromRequest('use_scm');
+	$use_news = getStringFromRequest('use_news');
+	$use_docman = getStringFromRequest('use_docman');
+	$use_ftp = getStringFromRequest('use_ftp');
+	$use_tracker = getStringFromRequest('use_tracker');
+	$use_frs = getStringFromRequest('use_frs');
+	$use_stats = getStringFromRequest('use_stats');
+	$new_doc_address = getStringFromRequest('new_doc_address');
+	$send_all_docs = getStringFromRequest('send_all_docs');
+  
 	$res = $group->update(
 		session_get_user(),
 		$form_group_name,
@@ -79,7 +97,7 @@ if ($submit) {
 
 project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
 	$hookParams['group']=$group_id;
 	plugin_hook("groupisactivecheckboxpost",$hookParams);
 }
@@ -98,7 +116,7 @@ $images_res = db_query("
 
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 

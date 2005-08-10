@@ -24,6 +24,7 @@ require_once('common/docman/DocumentFactory.class');
 require_once('common/docman/DocumentGroup.class');
 require_once('common/docman/DocumentGroupFactory.class');
 
+$group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
 }
@@ -38,6 +39,9 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 	exit_permission_denied();
 }
 
+$editdoc = getStringFromRequest('editdoc');
+$docid = getIntFromRequest('docid');
+
 $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 
 //
@@ -46,20 +50,29 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 //
 //
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
 	if ($editdoc) {
+		$doc_group = getStringFromRequest('doc_group');
+		$title = getStringFromRequest('title');
+		$description = getStringFromRequest('description');
+		$language_id = getIntFromRequest('language_id');
+		$data = getStringFromRequest('data');
+		$file_url = getStringFromRequest('file_url');
+		$ftp_filename = getStringFromRequest('ftp_filename');
+		$uploaded_data = getUploadedFile('uploaded_data');
+		$stateid = getIntFromRequest('stateid');
 
 		$d= new Document($g,$docid);
 		if ($d->isError()) {
 			exit_error($Language->getText('general','error'),$d->getErrorMessage());
 		}
 		if ($uploaded_data) {
-			if (!is_uploaded_file($uploaded_data)) {
-				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data));
+			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['tmp_name']));
 			}
-			$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
-			$filename=$uploaded_data_name;
-			$filetype=$uploaded_data_type;
+			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
+			$filename=$uploaded_data['name'];
+			$filetype=$uploaded_data['type'];
 		} elseif ($file_url) {
 			$data = '';
 			$filename=$file_url;
@@ -77,7 +90,10 @@ if ($submit) {
 		}
 		$feedback = $Language->getText('general','update_successful');
 
-	} elseif ($editgroup) {
+	} elseif (getStringFromRequest('editgroup')) {
+		$doc_group = getStringFromRequest('doc_group');
+		$groupname = $groupname;
+		$parent_doc_group = getIntFromRequest('parent_doc_group');
 
 		$dg = new DocumentGroup($g,$doc_group);
 		if ($dg->isError()) {
@@ -89,7 +105,9 @@ if ($submit) {
 		$feedback = $Language->getText('general','update_successful');
 
 
-	} elseif ($addgroup) {
+	} elseif (getStringFromRequest('addgroup')) {
+		$groupname = getStringFromRequest('groupname');
+		$parent_doc_group = getIntFromRequest('parent_doc_group');
 
 		$dg = new DocumentGroup($g);
 		if ($dg->isError()) {
@@ -100,7 +118,7 @@ if ($submit) {
 		}
 		$feedback = $Language->getText('general','create_successful');
 	
-	} elseif ($deletedoc && $docid && $sure && $really_sure) {
+	} elseif (getStringFromRequest('deletedoc') && $docid && getStringFromRequest('sure') && getStringFromRequest('really_sure')) {
 		$d= new Document($g,$docid);
 		if ($d->isError()) {
 			exit_error('Error',$d->getErrorMessage());
@@ -321,7 +339,8 @@ if ($editdoc && $docid) {
 //	Edit a specific doc group
 //
 //
-} elseif ($editgroup && $doc_group) {
+} elseif (getStringFromRequest('editgroup') && getStringFromRequest('doc_group')) {
+	$doc_group = getStringFromRequest('doc_group');
 
 	$dg = new DocumentGroup($g,$doc_group);
 	if ($dg->isError()) {
@@ -366,7 +385,7 @@ if ($editdoc && $docid) {
 	</form>
 	<?php
 	docman_footer(array());
-} else if ($deletedoc && $docid) {
+} else if (getStringFromRequest('deletedoc') && $docid) {
 	$d= new Document($g,$docid);
 	if ($d->isError()) {
 		exit_error('Error',$d->getErrorMessage());

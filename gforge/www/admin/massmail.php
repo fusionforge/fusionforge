@@ -32,7 +32,10 @@ require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$mail_type = getStringFromRequest('mail_type');
+	$mail_message = getStringFromRequest('mail_message');
+	$mail_subject = getStringFromRequest('mail_subject');
 
 	if (!$mail_type) {
 		exit_error(
@@ -87,7 +90,7 @@ print '
 ';
 
 print '
-<form action="'.$PHP_SELF.'" method="post">'
+<form action="'.getStringFromServer('PHP_SELF').'" method="post">'
 .'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(

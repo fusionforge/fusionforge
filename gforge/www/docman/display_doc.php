@@ -11,7 +11,10 @@ require_once('pre.php');
 require_once('include/doc_utils.php');
 require_once('common/docman/Document.class');
 
+$docid = getIntFromRequest('docid');
 if ($docid) {
+	$group_id = getIntFromRequest('group_id');
+
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		exit_no_group();
@@ -28,7 +31,7 @@ if ($docid) {
 
 	docman_header($d->getName(),$d->getName(),'docman','',$g->getPublicName());
 	echo $Language->getText('docman_display_doc','docmoved',array($group_id,$docid));
-  docman_footer(array());
+	docman_footer(array());
 } else {
 	exit_error($Language->getText('docman_display_doc','no_document_data_title'),$Language->getText('docman_display_doc','no_document_data_text'));
 }

@@ -23,12 +23,23 @@ require_once('common/pm/ProjectTaskFactory.class');
 
 $pagename = "pm_browse_custom";
 
+$offset = getIntFromRequest('offset');
+$max_rows = getIntFromRequest('max_rows');
+
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
 	exit_error('Error','Could Not Get ProjectTaskFactory');
 } elseif ($ptf->isError()) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
+
+$offset = getIntFromRequest('offset');
+$_order = getStringFromRequest('_order');
+$set = getStringFromRequest('set');
+$_assigned_to = getIntFromRequest('_assigned_to');
+$_status = getStringFromRequest('_status');
+$_category_id = getIntFromRequest('_category_id');
+$_view = getStringFromRequest('_view');
 
 $ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view);
 if ($ptf->isError()) {
@@ -101,7 +112,7 @@ $view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_v
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'" method="post">
+echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'" method="post">
 	<input type="hidden" name="set" value="custom" />
 	<table width="10%" border="0">
 	<tr>
@@ -136,7 +147,7 @@ if ($rows < 1) {
 
 	if ($IS_ADMIN) {
 		echo '
-		<form name="taskList" action="'. $PHP_SELF .'?group_id='.$group_id.'&group_project_id='.$pg->getID().'" METHOD="POST">
+		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$pg->getID().'" METHOD="POST">
 		<input type="hidden" name="func" value="massupdate">';
 	}
 
@@ -172,7 +183,7 @@ if ($rows < 1) {
 	$now=time();
 
 	for ($i=0; $i < $rows; $i++) {
-		$url = "/pm/task.php?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
+		$url = getStringFromServer('PHP_SELF')."?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
 		
 		echo '
 			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.

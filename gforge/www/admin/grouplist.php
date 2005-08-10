@@ -28,12 +28,17 @@ require_once('www/admin/admin_utils.php');
 
 site_admin_header(array('title'=>$Language->getText('admin_grouplist','group_list')));
 
+$form_catroot = getStringFromRequest('form_catroot');
+$form_pending = getStringFromRequest('form_pending');
+$sortorder = getStringFromRequest('sortorder');
+$group_name_search = getStringFromRequest('group_name_search');
+$status = getStringFromRequest('status');
+
 // start from root if root not passed in
 if (!$form_catroot) {
 	$form_catroot = 1;
 }
 
-$sortorder = $_GET['sortorder'];
 if (!isset($sortorder) || empty($sortorder)) {
 	$sortorder = "group_name";
 }
@@ -63,7 +68,7 @@ if ($form_catroot == 1) {
 		. "COUNT(user_group.group_id) AS members "
 		. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category,licenses "
 		. "WHERE groups.group_id=group_category.group_id AND "
-		. "group_category.category_id=".$GLOBALS['form_catroot']." AND "
+		. "group_category.category_id=".$form_catroot." AND "
 		. "licenses.license_id=groups.license "
 		. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
 		. "ORDER BY $sortorder");

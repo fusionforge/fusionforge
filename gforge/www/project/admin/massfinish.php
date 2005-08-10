@@ -29,6 +29,7 @@ require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
@@ -38,7 +39,8 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-if ($finished) {
+if (getStringFromRequest('finished')) {
+	$addrole = getStringFromRequest('addrole');
 	$keys=array_keys($addrole);
 	for ($i=0; $i<count($keys); $i++) {
 		$group->addUser($keys[$i],$addrole[$keys[$i]]);
@@ -62,7 +64,7 @@ echo '
 <p>
 '.$Language->getText('project_admin','addfromlist2').'
 <p>
-<form action="'.$PHP_SELF.'?group_id='.$group_id.'" method="post">';
+<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
 
 if (!$res || db_numrows($res) < 1) {
 	echo "No Matching Users Found";

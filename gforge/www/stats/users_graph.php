@@ -18,6 +18,9 @@ require_once('graph_lib.php');
    // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 
+$group_id = getIntFromRequest('group_id');
+$year = getIntFromRequest('year');
+
 if ( ! $group_id ) {
 	$group_id = 0;
 }

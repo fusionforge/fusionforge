@@ -18,6 +18,9 @@ require_once('common/tracker/ArtifactCanned.class');
 require_once('common/tracker/ArtifactExtraField.class');
 require_once('common/tracker/ArtifactExtraFieldElement.class');
 
+$group_id = getIntFromRequest('group_id');
+$atid = getIntFromRequest('atid');
+
 if ($group_id && $atid) {
 //
 //		UPDATING A PARTICULAR ARTIFACT TYPE
@@ -50,68 +53,68 @@ if ($group_id && $atid) {
 		exit_permission_denied();
 	}
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
 		include('updates.php');
 	} 
 //
 //		FORMS TO ADD/UPDATE DATABASE
 //
-	if ($add_extrafield) {  
+	if (getStringFromRequest('add_extrafield')) {  
 
 		include ('form-addextrafield.php');
 
-	} elseif ($add_opt) {
+	} elseif (getStringFromRequest('add_opt')) {
 
 		include ('form-addextrafieldoption.php');
 
-	} elseif ($copy_opt) {
+	} elseif (getStringFromRequest('copy_opt')) {
 
 		include ('form-extrafieldcopy.php');
 
-	} elseif ($add_canned) {
+	} elseif (getStringFromRequest('add_canned')) {
 
 		include ('form-addcanned.php');
 
-	} elseif ($clone_tracker) {
+	} elseif (getStringFromRequest('clone_tracker')) {
 
 		include ('form-clonetracker.php');
 
-	} elseif ($uploadtemplate) {
+	} elseif (getStringFromRequest('uploadtemplate')) {
 
 		include ('form-uploadtemplate.php');
 
-	} elseif ($downloadtemplate) {
+	} elseif (getStringFromRequest('downloadtemplate')) {
 
 		echo $ath->getRenderHTML();
 
-	} elseif ($deletetemplate) {
+	} elseif (getStringFromRequest('deletetemplate')) {
 
 		db_query("UPDATE artifact_group_list SET custom_renderer='' WHERE group_artifact_id='".$ath->getID()."'");
 		echo db_error();
 		$feedback .= 'Renderer Deleted';
 		include ('form-addextrafield.php');
 
-	} elseif ($update_canned) {
+	} elseif (getStringFromRequest('update_canned')) {
 
 		include ('form-updatecanned.php');
 
-	} elseif ($update_box) {
+	} elseif (getStringFromRequest('update_box')) {
 
 		include ('form-updateextrafield.php');
 
-	} elseif ($update_opt) {
+	} elseif (getStringFromRequest('update_opt')) {
 
 		include ('form-updateextrafieldelement.php');
 
-	} elseif ($delete) {
+	} elseif (getStringFromRequest('delete')) {
 
 		include ('form-deletetracker.php');
 
-	} elseif ($deleteextrafield) {
+	} elseif (getStringFromRequest('deleteextrafield')) {
 
 		include ('form-deleteextrafield.php');
 
-	} elseif ($update_type) {
+	} elseif (getStringFromRequest('update_type')) {
 
 		include ('form-updatetracker.php');
 
@@ -122,7 +125,7 @@ if ($group_id && $atid) {
 	}
 
 } elseif ($group_id) {
-	if (isset($_GET['tracker_deleted'])) {
+	if (getStringFromRequest('tracker_deleted')) {
 		$feedback .= $Language->getText('tracker_admin','deleted');
 	}
 

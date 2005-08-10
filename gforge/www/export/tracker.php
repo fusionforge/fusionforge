@@ -45,8 +45,9 @@ function endOnError($errorMessage) {
 ?>
 <?php
 
-$group_id = $_GET['group_id'];
-$atid = $_GET['atid'];
+$group_id = getIntFromRequest('group_id');
+$atid = getIntFromRequest('atid');
+$offset = getIntFromRequest('offset');
 
 if ($group_id && $atid) {
 	//

@@ -26,7 +26,10 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-if ($submit) {
+
+$query_id = getIntFromRequest('query_id');
+$query_action = getIntFromRequest('query_action');
+if (getStringFromRequest('submit')) {
 	//
 	//  Create a Saved Query
 	//
@@ -35,7 +38,14 @@ if ($submit) {
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
-		if (!$aq->create($query_name,$_status,$_POST["_assigned_to"],$_changed_from,$_sort_col,$_sort_ord,$_POST["extra_fields"])) {
+		$query_name = getStringFromRequest('query_name');
+		$_status = getStringFromRequest('_status');
+		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_sort_col = getStringFromRequest('_sort_col');
+		$_sort_ord = getStringFromRequest('_sort_ord');
+		$_changed_from = getStringFromRequest('_changed_from');
+		$extra_fields = getStringFromRequest('extra_fields');
+		if (!$aq->create($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
@@ -64,7 +74,14 @@ if ($submit) {
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
-		if (!$aq->update($query_name,$_status,$_POST["_assigned_to"],$_changed_from,$_sort_col,$_sort_ord,$_POST["extra_fields"])) {
+		$query_name = getStringFromRequest('query_name');
+		$_status = getStringFromRequest('_status');
+		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_sort_col = getStringFromRequest('_sort_col');
+		$_sort_ord = getStringFromRequest('_sort_ord');
+		$_changed_from = getStringFromRequest('_changed_from');
+		$extra_fields = getStringFromRequest('extra_fields');
+		if (!$aq->update($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
@@ -185,7 +202,7 @@ echo '<html>
 <h1>'. $feedback .'</h1>
 
 <table border="3" cellpadding="4" rules="groups" frame="box">
-	<form action="'.$PHP_SELF.'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
+	<form action="'.getStringFromServer('PHP_SELF').'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<tr>
 		<td><span style="font-size:smaller">
 			<input type="submit" name="submit" value="'.$Language->getText('tracker','saved_queries').'" />

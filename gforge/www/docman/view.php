@@ -23,7 +23,7 @@ require_once('pre.php');
 require_once('include/doc_utils.php');
 require_once('common/docman/Document.class');
 
-$arr=explode('/',$REQUEST_URI);
+$arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
 

@@ -27,7 +27,7 @@ if (isset($group_id) && $group_id) {
 	//	for foundry and project summary pages
 	//
 	//
-	$expl_pathinfo = explode('/',$REQUEST_URI);
+	$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
 		$res_grp=db_query("
 			SELECT *
@@ -64,7 +64,7 @@ $sql =	"INSERT INTO activity_log "
 	. "(day,hour,group_id,browser,ver,platform,time,page,type) "
 	. "VALUES (" . date('Ymd', mktime()) . ",'" . date('H', mktime())
 	. "','$log_group','" . browser_get_agent() . "','" . browser_get_version() 
-	. "','" . browser_get_platform() . "','" . time() . "','$PHP_SELF','0');";
+	. "','" . browser_get_platform() . "','" . time() . "','".getStringFromServer('PHP_SELF')."','0');";
 
 $res_logger = db_query ( $sql );
 

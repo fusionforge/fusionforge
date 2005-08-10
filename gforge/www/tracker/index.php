@@ -25,6 +25,10 @@ if (!$sys_use_tracker) {
 	exit_disabled();
 }
 
+$aid = getIntFromRequest('aid');
+$group_id = getIntFromRequest('group_id');
+$atid = getIntFromRequest('atid');
+
 //if the ATID and GID are not provided, but
 //the artifact_id is, then fetch the other vars
 if ($aid && (!$group_id && !$atid)) {

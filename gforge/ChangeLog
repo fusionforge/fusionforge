@@ -1,3 +1,7 @@
+2005-08-10  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* [#1022] register_globals=off patch is applied.
+
 2005-07-27  Francisco Gimeno <francisco@gforgegroup.com>
 
 	* Fixed XSS vulnerabilities by adding htmlspecialchars for direct used

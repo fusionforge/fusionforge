@@ -380,8 +380,7 @@ class Theme extends Layout {
 <?php
 	global $sys_show_source;
 	if ($sys_show_source) {
-		global $SCRIPT_NAME;
-		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '">Show Source</a>';
+		print '<a class="showsource" href="/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '">Show Source</a>';
 	}
 ?>
 

@@ -28,7 +28,11 @@
 
 require_once('pre.php');
 
-if ($submit) {
+$confirm_hash = getStringFromRequest('confirm_hash');
+
+if (getStringFromRequest('submit')) {
+	$loginname = getStringFromRequest('loginname');
+	$passwd = getStringFromRequest('passwd');
 
 	if (!$loginname) {
 		exit_error(
@@ -86,7 +90,7 @@ if ($GLOBALS['error_msg']) {
 }
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <p><?php echo $Language->getText('account_verify', 'loginname'); ?>
 <br /><input type="text" name="loginname" /></p>

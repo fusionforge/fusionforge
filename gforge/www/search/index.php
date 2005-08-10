@@ -11,26 +11,36 @@
  * @version $Id$
  */
 
+
+require_once('pre.php');
+require_once('www/tracker/include/ArtifactTypeHtml.class');
+require_once ('www/search/include/SearchManager.class');
+
+$group_id = getIntFromRequest('group_id');
+$atid = getIntFromRequest('atid');
+$forum_id = getIntFromRequest('forum_id');
+$group_project_id = getIntFromRequest('group_project_id');
+
+$words = getStringFromRequest('words');
+$type_of_search = getStringFromRequest('type_of_search');
+$exact = getStringFromRequest('exact');
+
 // Support for short aliases
 
 if (!$words) {
-	$words = $q;
+	$words = getStringFromRequest('q');
 }
 
 if (!$type_of_search) {
-	$type_of_search = $type;
+	$type_of_search = getStringFromRequest('type');
 }
 if (!$type_of_search) {
-	$type_of_search = $t;
+	$type_of_search = getStringFromRequest('t');
 }
 if (!$type_of_search) {
 	$type_of_search = SEARCH__TYPE_IS_SOFTWARE;
 }
 $words=htmlspecialchars($words);
-
-require_once('pre.php');
-require_once('www/tracker/include/ArtifactTypeHtml.class');
-require_once ('www/search/include/SearchManager.class');
 
 $offset = getIntFromGet('offset');
 
@@ -45,7 +55,7 @@ $parameters = array(
 
 $searchManager->setParametersValues($parameters);
 
-if($rss) {
+if (getStringFromRequest('rss')) {
 	$outputFormat = SEARCH__OUTPUT_RSS;
 } else {
 	$outputFormat = SEARCH__OUTPUT_HTML;
@@ -53,7 +63,7 @@ if($rss) {
 
 $renderer = $searchManager->getSearchRenderer($type_of_search, $words, $offset, $exact, $outputFormat);
 
-if($renderer) {
+if ($renderer) {
 	$renderer->flush();
 } else {
 	$HTML->header(array('title'=>$Language->getText('search', 'title'), 'pagename'=>'search'));

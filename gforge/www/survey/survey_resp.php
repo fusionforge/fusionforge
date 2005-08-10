@@ -31,6 +31,9 @@ require_once('common/survey/Survey.class');
 require_once('common/survey/SurveyResponse.class');
 require_once('www/survey/include/SurveyHTML.class');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+
 $g =& group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
     exit_no_group();

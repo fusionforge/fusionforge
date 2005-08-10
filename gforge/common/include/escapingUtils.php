@@ -116,13 +116,24 @@ function getStringFromCookie($key, $defaultValue = '') {
 /**
  * getUploadedFile - get the uploaded file information
  *
+ * The returned array is in the format given by PHP, as described in
+ * http://php.net/manual/en/features.file-upload.php
+ *
+ * If there was no such file upload control in form, empty array is
+ * returned.  If there was file upload control but no file was
+ * entered, then $result['tmp_name'] is empty string.
+ *
  * @param string name of the file
  * @return array uploaded file information
  */
 function getUploadedFile($key) {
 	$filesArray = & _getFilesArray();
 	if(isset($filesArray[$key])) {
-		return $filesArray[$key];
+		$result = $filesArray[$key];
+		if ($result['tmp_name'] == 'none') {
+			$result['tmp_name'] = '';
+		}
+		return $result;
 	}
 	else {
 		return array();

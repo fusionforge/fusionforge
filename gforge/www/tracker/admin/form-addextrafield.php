@@ -26,13 +26,13 @@
 			for ($k=0; $k < $rows; $k++) {
 				$i=$keys[$k];
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<td>'.$efarr[$i]['field_name'].'<a href="'.$PHP_SELF.'?update_box=1&amp;id='.
+					'<td>'.$efarr[$i]['field_name'].'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a>'.
-					'<a href="'.$PHP_SELF.'?deleteextrafield=1&amp;id='.
+					'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
                         $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
                         ' ['.$Language->getText('tracker_admin_build_boxes','delete').']</a>'.
-					'<a href="'.$PHP_SELF.'?copy_opt=1&amp;id='.
+					'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
                         $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
                         ' ['.$Language->getText('tracker_admin_build_boxes','copy').']</a>'.
 					'</td>';
@@ -48,7 +48,7 @@
 					echo '<td>';
 					for ($j=0; $j <$optrows; $j++)
 				
-						echo '<a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
+						echo '<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
 						$elearray[$j]['element_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a><br \>';
@@ -64,7 +64,7 @@
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT 
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-					echo '<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
+					echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
 						$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
 				}
@@ -80,7 +80,7 @@
 		echo "<h2>".$Language->getText('tracker_admin_build_boxes','add_field')."</h2>";
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_extrafield" value="y" />
 		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
@@ -115,9 +115,9 @@
 
 		echo "<h2>".$Language->getText('tracker_admin_build_boxes','manage_template')."</h2><p>";
 
-		echo '<a href="'.$PHP_SELF.'?downloadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','download_template').'</a><br />';
-		echo '<a href="'.$PHP_SELF.'?uploadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','upload_template').'</a><br />';
-		echo '<a href="'.$PHP_SELF.'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','delete_template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?downloadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','download_template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?uploadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','upload_template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','delete_template').'</a><br />';
 
 		$ath->footer(array());
 

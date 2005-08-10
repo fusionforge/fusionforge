@@ -32,7 +32,7 @@
 */
 
 function survey_header($params) {
-	global $group_id,$is_admin_page,$HTML,$DOCUMENT_ROOT,$Language,$sys_use_survey;
+	global $group_id,$is_admin_page,$HTML,$Language,$sys_use_survey;
 
 	if (!$sys_use_survey) {
 		exit_disabled();

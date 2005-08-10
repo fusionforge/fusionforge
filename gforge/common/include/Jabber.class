@@ -163,7 +163,7 @@ class Jabber
 
 		$this->iq_version_name		= "Class.Jabber.PHP by Carlo 'Gossip' Zottmann, gossip@jabber.g-blog.net";
 		$this->iq_version_version	= "0.1.3";
-		$this->iq_version_os		= $_SERVER["SERVER_SOFTWARE"];
+		$this->iq_version_os		= getStringFromServer('SERVER_SOFTWARE');
 
 		$this->connection_class		= "CJP_StandardConnector";
 

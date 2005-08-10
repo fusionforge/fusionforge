@@ -40,6 +40,7 @@ if (!session_loggedin()) {
 		);
 	}
 
+	$rated_user = getStringFromRequest('rated_user');
 	$ruser = $me->getID();
 	if ($rated_user != $ruser) {
 		//how many questions can they be rated on?
@@ -48,7 +49,7 @@ if (!session_loggedin()) {
 		//now iterate and insert each response
 		for ($i=1; $i<=$count; $i++) {
 			$resp="Q_$i";
-			$rating = $$resp;
+			$rating = getStringFromRequest($resp);
 			if ($rating==100) {
 				//unrated on this criteria
 			} else {

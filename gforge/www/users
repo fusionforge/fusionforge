@@ -28,7 +28,7 @@
 require_once('pre.php');    
 require_once('common/include/User.class');    
 
-$expl_pathinfo = explode('/', $REQUEST_URI);
+$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 
 if (!$expl_pathinfo[2]) {
 	exit_error($Language->getText('general','error'),$Language->getText('users','no_user_name'));

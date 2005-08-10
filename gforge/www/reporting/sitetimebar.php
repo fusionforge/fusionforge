@@ -37,6 +37,10 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$typ = getStringFromRequest('typ');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -47,7 +51,7 @@ echo report_header($Language->getText('reporting','site_wide_time_tracking'));
 ?>
 <h3><?php echo $Language->getText('reporting','site_wide_time_tracking'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>">
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>

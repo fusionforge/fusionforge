@@ -34,7 +34,9 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$authorized_keys = getStringFromRequest('authorized_keys');
+
 	if (!$u->setAuthorizedKeys($authorized_keys)) {
 		exit_error(
 			'Error',
@@ -50,7 +52,7 @@ if ($submit) {
 	echo $Language->getText('account_editsshkeys', 'intro');
 	?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p><?php echo $Language->getText('account_editsshkeys', 'authorized_keys'); ?>
 <br />
 <textarea rows="10" name="authorized_keys" style="width:90%;">

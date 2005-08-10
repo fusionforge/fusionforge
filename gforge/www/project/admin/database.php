@@ -38,6 +38,7 @@ if (!$sys_use_project_database) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
@@ -48,7 +49,8 @@ if (!$group || !is_object($group)) {
 	exit_error($Language->getText('general','error'), $group->getErrorMessage());
 }
 
-if ($createdb) {
+if (getStringFromRequest('createdb')) {
+	$newdbtypeid = getIntFromRequest('newdbtypeid');
 
 	//mysql takes issue with database names that have dashes in them - so strip the dashes, replace with ""
 	//e.g. free-mysql becomes freemysql (it's a workaround) 
@@ -76,7 +78,11 @@ if ($createdb) {
 
 }
 
-if ($updatedbrec) {
+if (getStringFromRequest('updatedbrec')) {
+	$dbid = getIntFromRequest('dbid');
+	$pw = getStringFromRequest('pw');
+	$pwconfirm = getStringFromRequest('pwconfirm');
+	$newdbtypeid = getIntFromRequest('newdbtypeid');
 
 	if ($pw == $pwconfirm) {
 
@@ -109,7 +115,8 @@ if ($updatedbrec) {
 
 }
 
-if ($deletedbconfirm) {
+if (getStringFromRequest('deletedbconfirm')) {
+	$dbid = getIntFromRequest('dbid');
 
 	//schedule for deletion
 
@@ -130,9 +137,10 @@ if ($deletedbconfirm) {
 
 project_admin_header(array('title'=>$Language->getText('project_admin_database','title').'','group'=>$group_id,'pagename'=>'project_admin_database','sectionvals'=>array(group_getname($group_id))));
 
+// XXX ogi: where's deletedb defined?
 if ($deletedb == 1) {
 
-	print "<hr /><strong><div align=\"center\">".$Language->getText('project_admin_database','confirm_deletion')."[ <a href=\"".$PHP_SELF."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'.$Language->getText('project_admin_database','confirm_delete').'</a> ] </div></strong> <hr />";
+	print "<hr /><strong><div align=\"center\">".$Language->getText('project_admin_database','confirm_deletion')."[ <a href=\"".getStringFromServer('PHP_SELF')."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'.$Language->getText('project_admin_database','confirm_delete').'</a> ] </div></strong> <hr />";
 
 }
 
@@ -156,7 +164,7 @@ if (db_numrows($res_db) > 0) {
 		<p><em>'.$Language->getText('project_admin_database','add_new_database_info').'</em></p>
 
 		<p><strong>'.$Language->getText('project_admin_database','database_type').':</strong></p>
-		<p><form action="'.$PHP_SELF.'" method="post">
+		<p><form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="createdb" value="1" />
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<select name="newdbtypeid">
@@ -216,7 +224,7 @@ if (db_numrows($res_db) > 0) {
 		
 		if (($row_db['state'] == 1) || ($row_db['state'] == 4) || ($row_db['state'] == 2)) {
 
-			print '<form name="dbupdate" method="post" action="'.$PHP_SELF.'?group_id='.$group_id.'">
+			print '<form name="dbupdate" method="post" action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'">
 				     <input type="hidden" name="dbid" value="'.$row_db['dbid'].'" />
 				     <input type="hidden" name="updatedbrec" value="1" />
 				     <td><input type="text" name="pw" size="8" maxlength="16" /></td>

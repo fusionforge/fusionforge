@@ -66,12 +66,19 @@ function activate_group($group_id) {
 	return true;
 }
 
+$action = getStringFromRequest('action');
 if ($action=='activate') {
+	$list_of_groups = getStringFromRequest('list_of_groups');
 
 	$groups=explode(',', $list_of_groups);
 	array_walk($groups, 'activate_group');
 
 } else if ($action=='delete') {
+	$group_id = getIntFromRequest('group_id');
+	$response_id = getIntFromRequest('response_id');
+	$add_to_can = getStringFromRequest('add_to_can');
+	$response_text = getStringFromRequest('response_text');
+	$response_title = getStringFromRequest('response_title');
 
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
@@ -142,14 +149,14 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	<p />
 	<table><tr><td>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
 	<input type="submit" name="submit" value="<?php echo $Language->getText('admin_approve_pending','approve'); ?>" />
 	</form>
 	</td></tr>
 	<tr><td>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
 	<?php echo $Language->getText('admin_approve_pending','canned_responses'); ?><br />
@@ -207,7 +214,7 @@ $group_list=implode($arr,',');
 
 echo '
 	<div align="center">
-	<form action="'.$PHP_SELF.'" method="post">
+	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
 	<input type="submit" name="submit" value="'.$Language->getText('admin_approve_pending','approve_all_on_this_page').'" />

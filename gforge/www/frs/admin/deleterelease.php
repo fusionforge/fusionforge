@@ -31,6 +31,9 @@ require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 
+$group_id = getIntFromRequest('group_id');
+$package_id = getIntFromRequest('package_id');
+$release_id = getIntFromRequest('release_id');
 if (!$group_id) {
 	exit_no_group();
 }

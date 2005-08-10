@@ -27,6 +27,8 @@
 
 require_once('pre.php');
 
+$helpname = getStringFromRequest('helpname');
+
 help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 ?>
 <table width="100%" cellpadding="0" cellspacing="0" border="0">

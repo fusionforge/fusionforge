@@ -28,7 +28,12 @@
 require_once('pre.php');
 require_once('common/include/account.php');
 
+$passwd = getStringFromRequest('passwd');
+$passwd2 = getStringFromRequest('passwd2');
+$confirm_hash = getStringFromRequest('confirm_hash');
+
 if (!$confirm_hash) {
+	// XXX ogi: What's $ch?
 	$confirm_hash = $ch;
 }
 if (!$confirm_hash) {
@@ -91,7 +96,7 @@ $HTML->header(array('title'=>"Lost Password Login"));
 echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p><?php echo $Language->getText('account_lostlogin','newpasswd'); ?>:
 <br /><input type="password" name="passwd" /></p>
 <p><?php echo $Language->getText('account_lostlogin','newpasswd2'); ?>:

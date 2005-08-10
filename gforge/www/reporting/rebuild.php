@@ -36,7 +36,7 @@ global $Language;
 
 echo report_header($Language->getText('reporting_rebuild','title'));
 
-if ($submit && $im_sure) {
+if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 	$r = new ReportSetup();
 
@@ -49,7 +49,7 @@ if ($submit && $im_sure) {
 }
 	echo $Language->getText('reporting_rebuild','message');
 ?>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="checkbox" name="im_sure" value="1"><?php echo $Language->getText('reporting_rebuild','imsure'); ?><p>
 <p>
 <input type="submit" name="submit" value="<?php echo $Language->getText('reporting_rebuild','pressonlyonce'); ?>">

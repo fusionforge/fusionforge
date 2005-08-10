@@ -11,6 +11,7 @@ require_once('pre.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
+$group_id = getIntFromRequest('group_id');
 if ( !$group_id ) {
 	exit_no_group();
 }
@@ -19,6 +20,11 @@ $report=new Report();
 if ($report->isError()) {
     exit_error($report->getErrorMessage());
 }
+
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
@@ -33,7 +39,7 @@ site_project_header(array('title'=>$Language->getText('reporting','project_activ
 ?>
 <h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting','area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>

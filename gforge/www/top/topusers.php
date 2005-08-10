@@ -30,6 +30,8 @@ $LIMIT = 50;
 
 require_once('pre.php');
 
+$offset = getStringFromRequest('offset');
+
 $yesterday = time()-60*60*24;
 $yd_month = date('Ym', $yesterday);
 $yd_day = date('d', $yesterday);

@@ -31,7 +31,7 @@ require_once ('common/include/cron_utils.php');
 
 site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
-$which = getIntFromGet('which');
+$which = getIntFromRequest('which');
 if (!$which || $which==100) {
 	$which=100;
 } else {
@@ -39,7 +39,7 @@ if (!$which || $which==100) {
 }
 
 ?>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php echo html_build_select_box_from_arrays(array_keys($cron_arr), $cron_arr, 'which', $which,true,'Any'); ?>
 <input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit');?>">
 </form>
@@ -57,7 +57,7 @@ $sql = 'SELECT COUNT(*) AS count FROM cron_history '.$sql_str;
 $res = db_query($sql);
 $totalCount = db_result($res, 0, 'count');
 
-$offset = getIntFromGet('offset');
+$offset = getIntFromRequest('offset');
 if($offset > $totalCount) {
 	$offset = 0;
 }

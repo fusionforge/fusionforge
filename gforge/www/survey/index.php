@@ -28,7 +28,10 @@ require_once('pre.php');
 require_once('common/survey/SurveyFactory.class');
 require_once('www/survey/include/SurveyHTML.class');
 
-/* We need a group_id */ 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+
+ /* We need a group_id */ 
 if (!$group_id) {
     exit_no_group();
 }

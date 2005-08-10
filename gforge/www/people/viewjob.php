@@ -32,6 +32,9 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
+$job_id = getStringFromRequest('job_id');
+
 if ($group_id && $job_id) {
 
 	/*

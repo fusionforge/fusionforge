@@ -16,6 +16,9 @@ require_once('common/survey/SurveyQuestion.class');
 require_once('common/survey/SurveyQuestionFactory.class');
 require_once('www/survey/include/SurveyHTML.class');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+
 /* We need a group_id */ 
 if (!$group_id) {
     exit_no_group();
@@ -38,7 +41,12 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-if ($post=="Y") {
+if (getStringFromRequest('post')=="Y") {
+    $survey_title = getStringFromRequest('survey_title');
+    $to_add = getStringFromRequest('to_add');
+    $to_del = getStringFromRequest('to_del');
+    $is_active = getStringFromRequest('is_active');
+  
     if ($survey_id) { /* Modify */
 	$s->update($survey_title, $to_add, $to_del, $is_active);
 	$feedback = $Language->getText('survey_edit','update_successful');
@@ -49,7 +57,10 @@ if ($post=="Y") {
 }
 
 /* Order changes */
-if ($updown=="Y") {
+if (getStringFromRequest('updown')=="Y") {
+    $question_id = getIntFromRequest('question_id');
+    $is_up = getStringFromRequest('is_up');
+
     $s->updateOrder($question_id, $is_up);
     $feedback = $Language->getText('survey_edit','update_successful');
 }

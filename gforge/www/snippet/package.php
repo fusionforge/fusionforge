@@ -17,7 +17,14 @@ require_once('www/snippet/snippet_utils.php');
 
 if (session_loggedin()) {
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
+		$name = getStringFromRequest('name');
+		$description = getStringFromRequest('description');
+		$language = getIntFromRequest('language');
+		$category = getIntFromRequest('category');
+		$changes = getStringFromRequest('changes');
+		$version = getStringFromRequest('version');
+
 		/*
 			Create a new snippet entry, then create a new snippet version entry
 		*/

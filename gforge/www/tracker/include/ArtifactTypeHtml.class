@@ -29,7 +29,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function header($params) {
-		global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_tracker;
+		global $HTML, $Language, $sys_use_tracker;
 		if (!$sys_use_tracker) {
 			exit_disabled();
 		}

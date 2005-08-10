@@ -33,7 +33,11 @@
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-if(!isset($search) || empty($search)) {
+$search = getStringFromRequest('search');
+$substr = getStringFromRequest('substr');
+$usersearch = getStringFromRequest('usersearch');
+
+if (!$search) {
 	exit_error($Language->getText('general','error'), $Language->getText('admin_search','refusing_to_display_whole_db'));
 }
 
@@ -113,13 +117,16 @@ if ($usersearch) {
 } // end if ($usersearch)
 
 
-if ($groupsearch) {
+if (getStringFromRequest('groupsearch')) {
+	$status = getStringFromRequest('status');
+	$is_public = getStringFromRequest('is_public');
+	$crit_desc = getStringFromRequest('crit_desc');
 
 	if ($status) {
 		$crit_sql  .= " AND status='$status'";
 		$crit_desc .= " status=$status";
 	}
-	if (isset($is_public)) {
+	if ($is_public) {
 		$crit_sql  .= " AND is_public='$is_public'";
 		$crit_desc .= " is_public=$is_public";
 	}

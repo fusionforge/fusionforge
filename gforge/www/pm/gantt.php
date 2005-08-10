@@ -15,6 +15,14 @@ if (!$ptf || !is_object($ptf)) {
 	exit_error('Error getting PTF',$ptf->getErrorMessage());
 }
 
+$offset = getIntFromRequest('offset');
+$_assigned_to = getIntFromRequest('_assigned_to');
+$_status = getStringFromRequest('_status');
+$_order = getStringFromRequest('_order');
+$_resolution = getStringFromRequest('_resolution');
+$_category_id = getIntFromRequest('_category_id');
+$_size = getIntFromRequest('_size');
+
 $ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
 	exit_error('Error in PTF',$ptf->getErrorMessage());

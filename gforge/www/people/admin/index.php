@@ -32,14 +32,18 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
+$group_id = getIntFromRequest('group_id');
+$job_id = getIntFromRequest('job_id');
+
 if (user_ismember(1,'A')) {
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
 		/*
 			Update the database
 		*/
 
-		if ($people_cat) {
+		if (getStringFromRequest('people_cat')) {
+			$cat_name = getStringFromRequest('cat_name');
 
 			$sql="INSERT INTO people_job_category (name) VALUES ('$cat_name')";
 			$result=db_query($sql);
@@ -50,7 +54,8 @@ if (user_ismember(1,'A')) {
 
 			$feedback .= ' Category Inserted ';
 
-		} else if ($people_skills) {
+		} else if (getStringFromRequest('people_skills')) {
+			$skill_name = getStringFromRequest('skill_name');
 
 			$sql="INSERT INTO people_skill (name) VALUES ('$skill_name')";
 			$result=db_query($sql);
@@ -61,7 +66,9 @@ if (user_ismember(1,'A')) {
 
 			$feedback .= ' Skill Inserted ';
 /*
-		} else if ($people_cat_mod) {
+		} else if (getStringFromRequest('people_cat_mod')) {
+			$cat_name = getStringFromRequest('cat_name');
+			$people_cat_id = getIntFromRequest('people_cat_id');
 
 			$sql="UPDATE people_category SET category_name='$cat_name' WHERE people_category_id='$people_cat_id' AND group_id='$group_id'";
 			$result=db_query($sql);
@@ -72,7 +79,10 @@ if (user_ismember(1,'A')) {
 				$feedback .= ' Bug Category Modified ';
 			}
 
-		} else if ($people_group_mod) {
+		} else if (getStringFromRequest('people_group_mod')) {
+			$group_name = getStringFromRequest('group_name');
+			$people_group_id = getIntFromRequest('people_group_id');
+			$group_id = getIntFromRequest('group_id');
 
 			$sql="UPDATE people_group SET group_name = '$group_name' WHERE people_group_id='$people_group_id' AND group_id='$group_id'";
 			$result=db_query($sql);
@@ -90,7 +100,7 @@ if (user_ismember(1,'A')) {
 		Show UI forms
 	*/
 
-	if ($people_cat) {
+	if (getStringFromRequest('people_cat')) {
 		/*
 			Show categories and blank row
 		*/
@@ -111,7 +121,7 @@ if (user_ismember(1,'A')) {
 		}
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<h4>New Category Name:</h4>
@@ -125,7 +135,7 @@ if (user_ismember(1,'A')) {
 
 		people_footer(array());
 
-	} else if ($people_skills) {
+	} else if (getStringFromRequest('people_skills')) {
 		/*
 			Show people_groups and blank row
 		*/
@@ -145,7 +155,7 @@ if (user_ismember(1,'A')) {
 		}
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<h4>New Skill Name:</h4>
@@ -167,10 +177,10 @@ if (user_ismember(1,'A')) {
 		people_header(array ('title'=>'People Administration','pagename'=>'people_admin'));
 
 		echo '<p>
-			<a href="'.$PHP_SELF.'?people_cat=1">Add Job Categories</a><br />';
+			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">Add Job Categories</a><br />';
 	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
 
-		echo "\n<a href=\"$PHP_SELF?people_skills=1\">Add Job Skills</a><br />";
+		echo "\n<a href=\"".getStringFromServer('PHP_SELF')."?people_skills=1\">Add Job Skills</a><br />";
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 
 		people_footer(array());

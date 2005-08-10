@@ -35,6 +35,9 @@ require_once('common/survey/SurveyResponse.class');
 require_once('common/survey/SurveyResponseFactory.class');
 require_once('www/survey/include/SurveyHTML.class');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+
 /* We need a group_id */ 
 if (!$group_id) {
     exit_no_group();
@@ -72,6 +75,7 @@ if ($survey_id) {
     }
 
     /* A specific question */
+    $question_id = getIntFromRequest('question_id');
     if ($question_id) {
 	/* Create a Survey Question for general purpose */
 	$sq = new SurveyQuestion($g, $question_id);

@@ -29,6 +29,9 @@
 	Written by dtype Oct 1999
 */
 
+$user_id = getStringFromRequest('user_id');
+$form_dev = getStringFromRequest('form_dev');
+
 if (!$user_id) {
 	$user_id=$form_dev;
 }

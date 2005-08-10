@@ -26,7 +26,7 @@
  */
 
 function people_header($params) {
-	global $group_id,$job_id,$DOCUMENT_ROOT,$HTML;
+	global $group_id,$job_id,$HTML;
 
 	if ($group_id) {
 		$params['toptab']='people';
@@ -157,7 +157,7 @@ function people_show_skill_inventory($user_id) {
 }
 
 function people_edit_skill_inventory($user_id) {
-	global $PHP_SELF, $Language;
+	global $Language;
 	$sql="SELECT * FROM people_skill_inventory WHERE user_id='$user_id'";
 	$result=db_query($sql);
 
@@ -177,7 +177,7 @@ function people_edit_skill_inventory($user_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<form action="'.$PHP_SELF.'" method="post">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="skill_inventory_id" value="'.db_result($result,$i,'skill_inventory_id').'" />
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</span></td>
@@ -194,7 +194,7 @@ function people_edit_skill_inventory($user_id) {
 
 	echo '
 	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
-	<form action="'.$PHP_SELF.'" method="post">
+	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
 		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
@@ -307,7 +307,7 @@ function people_get_category_name($category_id) {
 // think of a way of turning into valid XHTML without the resulting
 // table looking like poo.
 function people_edit_job_inventory($job_id,$group_id) {
-	global $PHP_SELF, $Language, $HTML;
+	global $Language, $HTML;
 	$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id'";
 	$result=db_query($sql);
 
@@ -328,7 +328,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) . '>
-			<form action="'.$PHP_SELF.'" method="post">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
 			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -347,7 +347,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	echo '
 	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
 	<tr '. $HTML->boxGetAltRowStyle($i) . '>
-	<form action="'.$PHP_SELF.'" method="post">
+	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<td width="25%"><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>

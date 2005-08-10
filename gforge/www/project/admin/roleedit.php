@@ -30,7 +30,11 @@ require_once('www/project/admin/project_admin_utils.php');
 require_once('common/include/Role.class');
 require_once('common/include/RoleObserver.class');
 
+$group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+
+$role_id = getStringFromRequest('role_id');
+$data = getStringFromRequest('data');
 
 //
 //	The observer is a special role, which is actually
@@ -46,7 +50,7 @@ if ($role_id=='observer') {
 		exit_error('Error',$role->getErrorMessage());
 	}
 
-	if ($submit) {
+	if (getStringFromRequest('submit')) {
 		if (!$role->update($data)) {
 			$feedback .= $role->getErrorMessage();
 		} else {
@@ -61,7 +65,8 @@ if ($role_id=='observer') {
 		exit_error('Error',$role->getErrorMessage());
 	}
 
-	if ($submit) {
+	if (getStringFromRequest('submit')) {
+		$role_name = getStringFromRequest('role_name');
 		if (!$role_id) {
 			$role_id=$role->create($role_name,$data);
 			if (!$role_id) {

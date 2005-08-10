@@ -29,6 +29,14 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
+$sw = getStringFromRequest('sw');
+$group_id = getIntFromRequest('group_id');
+$atid = getStringFromRequest('atid');
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -91,7 +99,7 @@ echo site_project_header($params);
 ?>
 <h3>Project Activity</h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 <table><tr>

@@ -15,6 +15,9 @@
 require_once('pre.php');
 require_once('rss_utils.inc');
 
+$limit = getIntFromRequest('limit');
+$group_id = getIntFromRequest('group_id');
+
 header("Content-Type: text/plain");
 print '<?xml version="1.0" encoding="UTF-8"?>
 

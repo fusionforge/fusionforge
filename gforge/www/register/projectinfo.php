@@ -50,12 +50,14 @@ if ($sys_project_reg_restricted) {
 
 session_require(array('isloggedin'=>'1'));
 
-if ($submit) {
-	$full_name = trim($full_name);
-	$purpose = trim($purpose);
-	$license_other = trim($license_other);
-	$description = trim($description);
-	$unix_name = strtolower($unix_name);
+if (getStringFromRequest('submit')) {
+	$full_name = trim(getStringFromRequest('full_name'));
+	$purpose = trim(getStringFromRequest('purpose'));
+	$license = trim(getStringFromRequest('license'));
+	$license_other = trim(getStringFromRequest('license_other'));
+	$description = trim(getStringFromRequest('description'));
+	$unix_name = strtolower(getStringFromRequest('unix_name'));
+	$scm = getStringFromRequest('scm');
 	$feedback = "";
 
 	if ($sys_use_scm && !$scm) {
@@ -98,7 +100,7 @@ if ($submit) {
 			exit();
 		}
 	}
-} else if ($i_disagree) {
+} else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
 }
 
@@ -108,7 +110,7 @@ site_header(array('title'=>$Language->getText('register','project_information'),
 <p><?php echo $Language->getText('register','apply_for_registration') ?>
 </p>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <?php echo $Language->getText('register','project_full_name') ?>
 

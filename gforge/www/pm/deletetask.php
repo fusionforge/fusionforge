@@ -20,7 +20,7 @@ pm_header(array('title'=>$Language->getText('pm_deletetask','title'),'group_proj
 
 ?>
 
-<form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postdeletetask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 

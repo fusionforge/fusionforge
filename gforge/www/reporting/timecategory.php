@@ -32,17 +32,20 @@ require_once('common/reporting/ReportSetup.class');
 session_require( array('group'=>$sys_stats_group,'A') );
 global $Language;
 
-if ($submit) {
-	if ($add) {
+$time_code = getStringFromRequest('time_code');
+$category_name = getStringFromRequest('category_name');
+
+if (getStringFromRequest('submit')) {
+	if (getStringFromRequest('add')) {
 
 		$r = new ReportSetup();
-		if (!$r->addTimeCode($category_name)) {
+		if (!$r->addTimeCode($category_name))) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('reporting_tc','successful');
 		}
 
-	} elseif ($update) {
+	} elseif (getStringFromRequest('update')) {
 
 		$r = new ReportSetup();
 
@@ -83,7 +86,7 @@ echo $HTML->listTableBottom();
 <p>
 <?php echo $Language->getText('reporting_tc','description'); ?>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
 <strong><?php echo $Language->getText('reporting_tc','category_name'); ?>:</strong><br />

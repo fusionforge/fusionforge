@@ -31,7 +31,8 @@
 
 require_once('pre.php');
 
-if ($loginname) {
+if (getStringFromRequest('submit')) {
+	$loginname = getStringFromRequest('loginname');
 
 	$u = user_get_object_by_name($loginname);
 
@@ -48,7 +49,7 @@ if ($loginname) {
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 
-		$message = stripcslashes($Language->getText('account_lostpw', 'message', array($GLOBALS['HTTP_HOST'], $confirm_hash, $GLOBALS['sys_name'])));
+		$message = stripcslashes($Language->getText('account_lostpw', 'message', array(getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name'])));
 
 		util_send_message($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS['sys_name']),$message);
 
@@ -67,7 +68,7 @@ $HTML->header(array('title'=>"Lost Account Password",'pagename'=>'account_lostpw
 echo $Language->getText('account_lostpw','warn');
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
 <br />

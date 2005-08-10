@@ -32,6 +32,8 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+$group_id = getIntFromRequest('group_id');
+
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error('Error','Could Not Get Group');
@@ -39,7 +41,7 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-if ($confirm) {
+if (getStringFromRequest('confirm')) {
 
 	$user_id = user_getid();
 
@@ -75,7 +77,7 @@ echo '
 <table>
 <tr><td>
 
-<form action="'.$PHP_SELF.'" method="post">
+<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 <input type="hidden" name="confirm" value="1" />
 <input type="hidden" name="group_id" value="'.$group_id.'" />
 <input type="submit" value="'.$Language->getText('general','remove').'" />

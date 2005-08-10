@@ -30,6 +30,8 @@ require_once('pre.php');
 require_once('www/frs/include/frs_utils.php');
 require_once('common/frs/FRSPackage.class');
 
+$group_id = getIntFromRequest('group_id');
+$package_id = getIntFromRequest('package_id');
 if (!$group_id) {
 	exit_no_group();
 }

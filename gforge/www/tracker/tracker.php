@@ -30,7 +30,7 @@ if ($ath->isError()) {
 		exit_error($Language->getText('general','error'), $ath->getErrorMessage());
 	}
 }
-switch ($func) {
+switch (getStringFromRequest('func')) {
 
 	case 'add' : {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
@@ -41,6 +41,15 @@ switch ($func) {
 		break;
 	}
 	case 'postadd' : {
+		$user_email = getStringFromRequest('user_email');
+		$category_id = getIntFromRequest('category_id');
+		$artifact_group_id = getIntFromRequest('artifact_group_id');
+		$summary = getStringFromRequest('summary');
+		$details = getStringFromRequest('details');
+		$assigned_to = getStringFromRequest('assigned_to');
+		$priority = getStringFromRequest('priority');
+		$extra_fields = getStringFromRequest('extra_fields');
+
 		/*
 			Create a new Artifact
 
@@ -64,7 +73,10 @@ switch ($func) {
 				//
 				//	Attach file to this Artifact.
 				//
-				if ($add_file) {
+				if (getStringFromRequest('add_file')) {
+					$input_file = getUploadedFile('input_file');
+					$file_description = getStringFromRequest('file_description');
+
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
 						$feedback .= 'Could Not Create File Object';
@@ -86,6 +98,14 @@ switch ($func) {
 		break;
 	}
 	case 'massupdate' : {
+		$artifact_id_list = getStringFromRequest('artifact_id_list');
+		$priority = getStringFromRequest('priority');
+		$status_id = getStringFromRequest('status_id');
+		$category_id = getStringFromRequest('category_id');
+		$artifact_group_id = getStringFromRequest('artifact_group_id');
+		$resolution_id = getStringFromRequest('resolution_id');
+		$assigned_to = getStringFromRequest('assigned_to');
+
 		$count=count($artifact_id_list);
 
 		if (!$ath->userIsAdmin()) {
@@ -161,6 +181,19 @@ switch ($func) {
 		break;
 	}
 	case 'postmod' : {
+		$artifact_id = getIntFromRequest('artifact_id');
+		$priority = getIntFromRequest('priority');
+		$status_id = getIntFromRequest('status_id');
+		$category_id = getIntFromRequest('category_id');
+		$artifact_group_id = getIntFromRequest('artifact_group_id');
+		$resolution_id = getIntFromRequest('resolution_id');
+		$assigned_to = getStringFromRequest('assigned_to');
+		$summary = getStringFromRequest('summary');
+		$canned_response = getStringFromRequest('canned_response');
+		$details = getStringFromRequest('details');
+		$new_artifact_type_id = getIntFromRequest('new_artifact_type_id');
+		$extra_fields = getStringFromRequest('extra_fields');
+	
 		/*
 			Technicians can modify limited fields - to be certain
 			no one is hacking around, we override any fields they don't have
@@ -186,7 +219,7 @@ switch ($func) {
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
-					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
+					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields)) {
 					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
@@ -224,7 +257,10 @@ switch ($func) {
 			//
 			//  Attach file to this Artifact.
 			//
-			if ($add_file) {
+			if (getStringFromRequest('add_file')) {
+				$input_file = getUploadedFile('input_file');
+				$file_description = getStringFromRequest('file_description');
+
 				$afh=new ArtifactFileHtml($ah);
 				if (!$afh || !is_object($afh)) {
 					$feedback .= 'Could Not Create File Object';
@@ -234,7 +270,7 @@ switch ($func) {
 					if (!util_check_fileupload($input_file)) {
 						exit_error("Error","Invalid filename");
 					}
-					if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
+					if (!$afh->upload($input_file,$file_description)) {
 						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {
@@ -246,6 +282,7 @@ switch ($func) {
 			//
 			//	Delete list of files from this artifact
 			//
+			$delete_file = getStringFromRequest('delete_file');
 			if ($delete_file) {
 				$count=count($delete_file);
 				for ($i=0; $i<$count; $i++) {
@@ -275,6 +312,7 @@ switch ($func) {
 		break;
 	}
 	case 'monitor' : {
+		$artifact_id = getIntFromRequest('artifact_id');
 		if ($artifact_id) {
 			$ah=new ArtifactHtml($ath,$artifact_id);
 			if (!$ah || !is_object($ah)) {
@@ -309,6 +347,7 @@ switch ($func) {
 	//
 	case 'deleteartifact' : {
 		if ($ath->userIsAdmin()) {
+			$aid = getStringFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error('ERROR','Artifact Could Not Be Created');
@@ -328,13 +367,14 @@ switch ($func) {
 
 	case 'postdeleteartifact' : {
 		if ($ath->userIsAdmin()) {
+			$aid = getStringFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error('ERROR','Artifact Could Not Be Created');
 			} elseif ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			}
-			if (!$confirm_delete) {
+			if (!getStringFromRequest('confirm_delete')) {
 				$feedback .= $Language->getText('tracker_artifact','delete_failed_confirm');
 			}
 			else {
@@ -368,10 +408,13 @@ switch ($func) {
 		include ('downloadcsv.php');
 	}
 	case 'download' : {
+		$aid = getStringFromRequest('aid');
 		Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
 		break;
 	}
 	case 'detail' : {
+		$aid = getStringFromRequest('aid');
+
 		//
 		//	users can modify their own tickets in a limited way if they submitted them
 		//	even if they are not artifact admins

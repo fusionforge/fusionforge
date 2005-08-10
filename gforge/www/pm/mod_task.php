@@ -26,11 +26,11 @@ if ($report->isError()) {
 }
 echo notepad_func();
 
-pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 ?>
 
-<form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postmodtask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
@@ -72,7 +72,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project
 		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td>
-		<a href="<?php echo "$PHP_SELF?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo $Language->getText('pm_deletetask','delete') ?></a>
+		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo $Language->getText('pm_deletetask','delete') ?></a>
 		</td>
 	</tr>
 

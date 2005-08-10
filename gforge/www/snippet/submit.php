@@ -17,7 +17,16 @@ require_once('www/snippet/snippet_utils.php');
 
 if (session_loggedin()) {
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
+		$name = getStringFromRequest('name');
+		$description = getStringFromRequest('description');
+		$language = getIntFromRequest('language');
+		$license = getStringFromRequest('license');
+		$category = getIntFromRequest('category');
+		$type = getStringFromRequest('type');
+		$version = getStringFromRequest('version');
+		$code = getStringFromRequest('code');
+
 		/*
 			Create a new snippet entry, then create a new snippet version entry
 		*/
@@ -59,7 +68,7 @@ if (session_loggedin()) {
 	<p><?php echo $Language->getText('snippet_submit','you_can_post'); ?>
 	</p>
 	<p>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />
 

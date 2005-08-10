@@ -27,6 +27,8 @@
 require_once('pre.php');
 require_once('bookmarks.php');
 
+$bookmark_id = getStringFromRequest('bookmark_id');
+
 if ($bookmark_id) {
 	bookmark_delete ($bookmark_id);
 	session_redirect('/my/');

@@ -29,6 +29,7 @@
 require_once('pre.php');	
 require_once('www/frs/include/frs_utils.php');
 
+$group_id = getIntFromRequest('group_id');
 $cur_group =& group_get_object($group_id);
 
 if (!$cur_group) {

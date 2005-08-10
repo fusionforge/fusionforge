@@ -2,9 +2,11 @@
 
 		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','delete', $ath->getName())));
 
+		$id = getStringFromRequest('id');
+
 		?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="deleteextrafield" value="y" /><br />
 		<input type="hidden" name="id" value="<?php echo $id; ?>" /><br />
 		<?php echo $Language->getText('tracker_admin','delete_extrafieldwarning'); ?>

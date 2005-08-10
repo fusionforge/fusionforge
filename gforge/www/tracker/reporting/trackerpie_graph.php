@@ -35,6 +35,12 @@ require_once('www/tracker/include/ArtifactTypeHtml.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+$group_id = getIntFromRequest('group_id');
+$atid = getStringFromRequest('atid');
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
 //
 //	Create Report
 //

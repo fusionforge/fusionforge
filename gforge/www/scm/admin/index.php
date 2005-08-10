@@ -31,15 +31,15 @@ require_once('www/scm/include/scm_utils.php');
 // Check permissions
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
+$group_id = getIntFromRequest('group_id');
+
 scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$group_id));
 
-
-
-if ($submit) {
+if (getStringFromRequest('submit')) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
-	$scmvars = array_keys ($_GET) ;
-	foreach ($_GET as $key => $value) {
+	$scmvars = array_keys (_getRequestArray()) ;
+	foreach (_getRequestArray() as $key => $value) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
 				$hook_params[$key] = $value ;
@@ -51,7 +51,7 @@ if ($submit) {
 }
 
 ?>
-<form action="<?php echo $PHP_SELF; ?>">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <?php
 
 	$hook_params = array () ;

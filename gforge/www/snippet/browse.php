@@ -34,11 +34,15 @@ function createPackageQuery($clause) {
 
 snippet_header(array('title'=>$Language->getText('snippet_browse','title'), 'header'=>'','pagename'=>'snippet_browse'));
 
+$by = getStringFromRequest('by');
+
 if ($by=='lang') {
+	$lang = getStringFromRequest('lang');
 	$sql=createSnippetQuery("snippet.language='$lang'");
 	$sql2=createPackageQuery("snippet_package.language='$lang'");
 	echo '<h2>' .$Language->getText('snippet_browse','snippets_by_language', array($SCRIPT_LANGUAGE[$lang])).'</h2>';
 } else if ($by=='cat') {
+	$cat = getStringFromRequest('cat');
 	$sql=createSnippetQuery("snippet.category='$cat'");
 	$sql2=createPackageQuery("snippet_package.category='$cat'");
 	echo '<h2>' .$Language->getText('snippet_browse','snippet_by_category', array($SCRIPT_CATEGORY[$cat])).'</h2>';

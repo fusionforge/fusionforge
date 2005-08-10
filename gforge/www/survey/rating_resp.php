@@ -33,6 +33,10 @@ $HTML->header(array('title'=>$Language->getText('survey_rating_resp','title')));
 if (!session_loggedin()) {
 	echo "<h2>".$Language->getText('survey_rating_resp','you_must_be_logged_in')."</h2>";
 } else {
+	$vote_on_id = getIntFromRequest('vote_on_id');
+	$response = getStringFromRequest('response');
+	$flag = getStringFromRequest('flag');
+
 	if ($vote_on_id && $response && $flag) {
 		/*
 			$flag

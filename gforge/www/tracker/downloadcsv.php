@@ -33,6 +33,15 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
+$offset = getStringFromRequest('offset');
+$_sort_col = getStringFromRequest('_sort_col');
+$_sort_ord = getStringFromRequest('_sort_ord');
+$max_rows = getStringFromRequest('max_rows');
+$set = getStringFromRequest('set');
+$_assigned_to = getStringFromRequest('_assigned_to');
+$_status = getStringFromRequest('_status');
+$_changed_from = getStringFromRequest('_changed_from');
+
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
 
 $at_arr =& $af->getArtifacts();

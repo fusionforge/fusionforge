@@ -15,6 +15,8 @@ $no_gz_buffer=true;
 
 require_once('pre.php');
 
+$id = getIntFromRequest('id');
+
 $sql="SELECT * FROM snippet_version WHERE snippet_version_id='$id'";
 $result=db_query($sql);
 

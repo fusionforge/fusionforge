@@ -32,6 +32,11 @@ require_once('common/reporting/ReportUserAct.class');
 
 session_require( array('group'=>$sys_stats_group) );
 
+$dev_id = getStringFromRequest('dev_id');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 //
 //	Create Report
 //

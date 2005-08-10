@@ -21,6 +21,34 @@ require_once('www/pm/include/ProjectGroupHTML.class');
 require_once('www/pm/include/ProjectTaskHTML.class');
 require_once('common/pm/ProjectGroupFactory.class');
 
+$group_id = getIntFromRequest('group_id');
+$group_project_id = getIntFromRequest('group_project_id');
+$project_task_id = getIntFromRequest('project_task_id');
+$start_hour = getStringFromRequest('start_hour');
+$start_minute = getStringFromRequest('start_minute');
+$start_month = getStringFromRequest('start_month');
+$start_day = getStringFromRequest('start_day');
+$start_year = getStringFromRequest('start_year');
+$end_hour = getStringFromRequest('end_hour');
+$end_minute = getStringFromRequest('end_minute');
+$end_month = getStringFromRequest('end_month');
+$end_day = getStringFromRequest('end_day');
+$end_year = getStringFromRequest('end_year');
+$summary = getStringFromRequest('summary');
+$details = getStringFromRequest('details');
+$priority = getStringFromRequest('priority');
+$hours = getStringFromRequest('hours');
+$start_date = getStringFromRequest('start_date');
+$end_date = getStringFromRequest('end_date');
+$status_id = getStringFromRequest('status_id');
+$category_id = getStringFromRequest('category_id');
+$percent_complete = getStringFromRequest('percent_complete');
+$assigned_to = getStringFromRequest('assigned_to');
+$new_group_project_id = getIntFromRequest('new_group_project_id');
+$dependent_on = getStringFromRequest('dependent_on');
+$duration = getStringFromRequest('duration');
+$parent_id = getIntFromRequest('parent_id');
+
 if (!$group_id || !$group_project_id) {
 	exit_missing_param();
 }
@@ -42,7 +70,7 @@ if (!$pg || !is_object($pg)) {
 /*
 	Figure out which function we're dealing with here
 */
-switch ($func) {
+switch (getStringFromRequest('func')) {
 
 	//
 	//	Show blank form to add new task
@@ -67,6 +95,8 @@ switch ($func) {
 	//
 	case 'postaddtask' : {
 		if ($pg->userIsAdmin()) {
+			$add_artifact_id = getStringFromRequest('add_artifact_id');
+
 			$pt = new ProjectTask($pg);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get Empty ProjectTask');
@@ -99,6 +129,8 @@ switch ($func) {
 	//
 	case 'postmodtask' : {
 		if ($pg->userIsAdmin()) {
+			$rem_artifact_id = getStringFromRequest('rem_artifact_id');
+
 			$pt = new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
@@ -159,6 +191,7 @@ switch ($func) {
 	}
 
 	case 'massupdate' : {
+		$project_task_id_list = getStringFromRequest('project_task_id_list');
 		$count=count($project_task_id_list);
 
 		if ($pg->userIsAdmin()) {
@@ -225,6 +258,8 @@ switch ($func) {
 	//
 	case 'addartifact' : {
 		if ($pg->userIsAdmin()) {
+			$add_artifact_id = getStringFromRequest('add_artifact_id');
+
 			$pt = new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
@@ -274,7 +309,7 @@ switch ($func) {
 			} elseif ($pt->isError()) {
 				exit_error('Error', $pt->getErrorMessage());
 			}
-			if (!$confirm_delete) {
+			if (!getStringFromRequest('confirm_delete')) {
 				$feedback .= $Language->getText('pm_deletetask','task_delete_failed_confirm');
 			} else {
 				$deletion = $pt->delete(true);

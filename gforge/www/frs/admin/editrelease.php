@@ -32,8 +32,15 @@ require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 require_once('www/frs/include/frs_utils.php');
 
+$group_id = getIntFromRequest('group_id');
+$package_id = getIntFromRequest('package_id');
+$release_id = getIntFromRequest('release_id');
 if (!$group_id) {
 	exit_no_group();
+}
+if (!$package_id || !$release_id) {
+	header("Location: /frs/admin/?group_id=$group_id");
+	exit;
 }
 
 $g =& group_get_object($group_id);
@@ -43,11 +50,6 @@ if (!$g || $g->isError()) {
 $perm =& $g->getPermission(session_get_user());
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
-}
-
-if (!$package_id || !$release_id) {
-	header("Location: /frs/admin/?group_id=$group_id");
-	exit;
 }
 
 //
@@ -71,7 +73,8 @@ if (!$frsr || !is_object($frsr)) {
 }
 
 //we make sure we are not receiving $sys_ftp_upload_dir by POST or GET, to prevent security problems
-if (!is_null($_GET["sys_ftp_upload_dir"]) || !is_null($_POST["sys_ftp_upload_dir"])) {
+$sys_ftp_upload_dir = getStringFromRequest("sys_ftp_upload_dir");
+if (!$sys_ftp_upload_dir) {
 	exit_error('Error','External sys_ftp_upload_dir detected');
 }
 $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
@@ -82,15 +85,23 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
  */
 
 // Edit release info
-if ($step1) {
+if (getStringFromRequest('step1')) {
+	$release_date = getStringFromRequest('release_date');
+	$release_name = getStringFromRequest('release_name');
+	$status_id = getIntFromRequest('status_id');
+	$uploaded_notes = getUploadedFile('uploaded_notes');
+	$uploaded_changes = getUploadedFile('uploaded_changes');
+	$release_notes = getStringFromRequest('release_notes');
+	$release_changes = getStringFromRequest('release_changes');
+	$preformatted = getStringFromRequest('preformatted');
 	$exec_changes = true;
 
 	// Check for uploaded release notes
 	if ($uploaded_notes != "" && $uploaded_notes != "none") {
-		if (!is_uploaded_file($uploaded_notes)) {
+		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
-		$notes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_notes']['tmp_name'],'r'),filesize($HTTP_POST_FILES['uploaded_notes']['tmp_name'])));
+		$notes = addslashes(fread(fopen($uploaded_notes['tmp_name'],'r'),$uploaded_notes['size']));
 		if (strlen($notes) < 20) {
 			$feedback .= $Language->getText('project_admin_editrelease','release_notes_too_small');
 			$exec_changes = false;
@@ -100,11 +111,11 @@ if ($step1) {
 	}
 
 	// Check for uploaded change logs
-	if ($uploaded_changes != "" && $uploaded_changes != "none") {
-		if (!is_uploaded_file($uploaded_changes)) {
+	if ($uploaded_changes['tmp_name']) {
+		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
-		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'), filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
+		$changes = addslashes(fread(fopen($uploaded_changes['tmp_name'],'r'), $uploaded_changes['size']));
 		if (strlen($changes) < 20) {
 			$feedback .= $Language->getText('project_admin_editrelease','changelog_too_small');
 			$exec_changes = false;
@@ -127,10 +138,16 @@ if ($step1) {
 }
 
 // Add file(s) to the release
-if ($step2) {
+if (getStringFromRequest('step2')) {
+	$userfile = getUploadedFile('userfile');
+	$userfile_name = $userfile['name'];
+	$type_id = getIntFromRequest('type_id');
+	$processor_id = getStringFromRequest('processor_id');
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
-	if (($userfile && is_uploaded_file($userfile)) || ($sys_use_ftpuploads && $ftp_filename)){
+	$ftp_filename = getStringFromRequest('ftp_filename');
+
+	if (($userfile && is_uploaded_file($userfile['tmp_name'])) || ($sys_use_ftpuploads && $ftp_filename)){
 		if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 			//file was uploaded already via ftp
 			//use setuid prog to chown it
@@ -149,7 +166,7 @@ if ($step2) {
 		} elseif ($frsf->isError()) {
 			exit_error('Error',$frsf->getErrorMessage());
 		} else {
-			if (!$frsf->create($userfile_name,$userfile,$type_id,$processor_id,$release_date)) {
+			if (!$frsf->create($userfile_name,$userfile['tmp_name'],$type_id,$processor_id,$release_date)) {
 				db_rollback();
 				exit_error('Error',$frsf->getErrorMessage());
 			}
@@ -159,7 +176,18 @@ if ($step2) {
 }
 
 // Edit/Delete files in a release
-if ($step3) {
+if (getStringFromRequest('step3')) {
+	$file_id = getIntFromRequest('file_id');
+	$processor_id = getIntFromRequest('processor_id');
+	$type_id = getIntFromRequest('type_id');
+	$new_release_id = getIntFromRequest('new_release_id');
+	$release_time = getStringFromRequest('release_time');
+	$group_id = getIntFromRequest('group_id');
+	$release_id = getIntFromRequest('release_id');
+	$package_id = getIntFromRequest('package_id');
+	$file_id = getIntFromRequest('file_id');
+	$im_sure = getStringFromRequest('im_sure');
+
 	// If the user chose to delete the file and he's sure then delete the file
 	if( $step3 == "Delete File" ) {
 		if ($im_sure) {
@@ -206,7 +234,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 
 <h3><?php echo $Language->getText('project_admin_editrelease','step_1') ?></h3>
 
-<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
@@ -265,7 +293,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <hr />
 <h3><?php echo $Language->getText('project_admin_editrelease','step_2') ?></h3>
 <p>
-<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
 <span style="color:red"><strong>
 <?php echo $Language->getText('project_admin_editrelease','add_files_note') ?>
@@ -321,7 +349,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 
 		for($x=0; $x<$rows; $x++) {
 ?>
-			<form action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>" method="post">
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>" />
 				<input type="hidden" name="step3" value="1" />
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
@@ -344,7 +372,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 				</tr>
 				</form>
 
-			<form action="<?php echo $PHP_SELF; ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 				<input type="hidden" name="release_id" value="<?php echo $release_id; ?>" />
 				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>" />

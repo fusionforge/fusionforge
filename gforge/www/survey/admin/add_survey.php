@@ -29,6 +29,8 @@ require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 require_once('www/survey/admin/survey_utils.php');
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>$Language->getText('survey_add_survey','title'),'pagename'=>'survey_admin_add_survey'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
@@ -37,7 +39,10 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-if ($post_changes) {
+if (getStringFromRequest('post_changes')) {
+	$survey_title = getStringFromRequest('survey_title');
+	$survey_questions = getStringFromRequest('survey_questions');
+
 	if (!$survey_title) {
 		$feedback .= $Language->getText('survey_add_question','title_is_required');
 	} else {
@@ -65,7 +70,7 @@ function show_questions() {
 </script>
 
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <strong><?php echo $Language->getText('survey_add_survey','name_of_survey') ?></strong><?php echo utils_requiredField(); ?>
 <br />

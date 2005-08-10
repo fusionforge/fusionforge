@@ -20,13 +20,23 @@
 
 	$perm =& $group->getPermission( session_get_user() );
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
+		$name = getStringFromRequest('name');
+		$description = getStringFromRequest('description');
+		$is_public = getStringFromRequest('is_public');
+		$allow_anon = getStringFromRequest('allow_anon');
+		$email_all = getStringFromRequest('email_all');
+		$email_address = getStringFromRequest('email_address');
+		$due_period = getStringFromRequest('due_period');
+		$use_resolution = getStringFromRequest('use_resolution');
+		$submit_instructions = getStringFromRequest('submit_instructions');
+		$browse_instructions = getStringFromRequest('browse_instructions');
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 			exit_permission_denied();
 		}
 
-		if ($add_at) {
+		if (getStringFromRequest('add_at')) {
 			$res=new ArtifactTypeHtml($group);
 			if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
@@ -104,7 +114,7 @@
 
 	?><?php echo $Language->getText('tracker_admin','intro') ?>
 	<p>
-	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_at" value="y" />
 	<p>
 	<?php echo $Language->getText('tracker_admin_update_type','name') ?><br />

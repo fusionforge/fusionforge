@@ -31,7 +31,7 @@
 				?>
 				<p><?php echo $Language->getText('tracker_admin','choose_tracker') ?></p>
 				<p>
-				<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+				<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 				<input type="hidden" name="clone_tracker" value="y" />
 				<p><strong><?php echo $Language->getText('tracker_admin','clone_warning') ?></strong></p>
 				<p><?php echo html_build_select_box_from_arrays($ids,$titles,'clone_id','',false); ?></p>

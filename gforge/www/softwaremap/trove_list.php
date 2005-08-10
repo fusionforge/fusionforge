@@ -19,12 +19,12 @@ if (!$sys_use_trove) {
 	exit_disabled();
 }
 
+$form_cat = intval(getIntFromRequest('form_cat'));
+
 // assign default. 18 is 'topic'
-if (!isset($form_cat) || !$form_cat) {
+if (!$form_cat) {
 	$form_cat = $default_trove_cat;
 }
-
-$form_cat = intval($form_cat);
 
 // get info about current folder
 $res_trove_cat = db_query("
@@ -49,10 +49,11 @@ $row_trove_cat = db_fetch_array($res_trove_cat);
 // #####################################
 // this section limits search and requeries if there are discrim elements
 
+$discrim = getStringFromRequest('discrim');
 $discrim_url = '';
 $discrim_desc = '';
 
-if (isset($discrim) && $discrim) {
+if ($discrim) {
 	unset ($discrim_queryalias);
 	unset ($discrim_queryand);
 	unset ($discrim_url_b);
@@ -236,7 +237,9 @@ $querytotalcount = db_numrows($res_grp);
 
 // no funny stuff with get vars
 
-if (!isset($page) || !is_numeric($page)) {
+$page = getStringFromRequest('page');
+
+if (!is_numeric($page)) {
 	$page = 1;
 }
 

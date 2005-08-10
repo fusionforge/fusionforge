@@ -27,6 +27,10 @@ require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
+$group_id = getIntFromRequest('group_id');
+$group_forum_id = getIntFromRequest('group_forum_id');
+$deleteforum = getStringFromRequest('deleteforum');
+
 if ($group_id) {
 	//
 	//  Set up local objects
@@ -41,7 +45,7 @@ if ($group_id) {
 		exit_permission_denied();
 	}
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
 		/*
 			Update the DB to reflect the changes
 		*/
@@ -59,14 +63,15 @@ if ($group_id) {
 			if (!$f->userIsAdmin()) {
 				exit_permission_denied();
 			}
-			if (!$f->delete($sure,$really_sure)) {
+			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('forum_admin','deleted');
 				$group_forum_id=0;
 				$deleteforum=0;
 			}
-		} elseif ($delete) {
+		} elseif (getStringFromRequest('delete')) {
+			$msg_id = getStringFromRequest('msg_id');
 			/*
 				Deleting messages or threads
 			*/
@@ -93,7 +98,12 @@ if ($group_id) {
 				$feedback .= $Language->getText('forum_admin_delete_messages','messages_deleted',$count);
 			}
 
-		} else if ($add_forum) {
+		} else if (getStringFromRequest('add_forum')) {
+			$forum_name = getStringFromRequest('forum_name');
+			$description = getStringFromRequest('description');
+			$is_public = getStringFromRequest('is_public');
+			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
+			$allow_anonymous = getStringFromRequest('allow_anonymous');
 			/*
 				Adding forums to this group
 			*/
@@ -112,7 +122,10 @@ if ($group_id) {
 				$feedback .= $Language->getText('forum_admin_addforum','forum_created');
 			}
 
-		} else if ($change_status) {
+		} else if (getStringFromRequest('change_status')) {
+			$forum_name = getStringFromRequest('forum_name');
+			$description = getStringFromRequest('description');
+			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
 			/*
 				Change a forum
 			*/
@@ -134,7 +147,7 @@ if ($group_id) {
 
 	}
 
-	if ($add_forum) {
+	if (getStringFromRequest('add_forum')) {
 		/*
 			Show the form for adding forums
 		*/
@@ -142,7 +155,7 @@ if ($group_id) {
 
 		echo '
 			<br>
-			<form method="post" action="'.$PHP_SELF.'">
+			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -167,7 +180,7 @@ if ($group_id) {
 
 		forum_footer(array());
 
-	} else if ($change_status) {
+	} else if (getStringFromRequest('change_status')) {
 		/*
 			Change a forum
 		*/
@@ -185,7 +198,7 @@ if ($group_id) {
 		echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'</p>';
 
 		echo '
-			<form action="'.$PHP_SELF.'" method="post">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 				<input type="hidden" name="post_changes" value="y" />
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
@@ -214,8 +227,8 @@ if ($group_id) {
 				<p>
 				<input type="submit" name="submit" value="'.$Language->getText('general','update').'" /></span>
 			</form><p>';
-			echo '<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
-			echo '<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'.$Language->getText('forum_admin','delete_forum').'</a><br />';
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'.$Language->getText('forum_admin','delete_forum').'</a><br />';
 		forum_footer(array());
 
 	} elseif ($deleteforum && $group_forum_id) {
@@ -231,7 +244,7 @@ if ($group_id) {
 		forum_header(array('title'=>$Language->getText('forum_admin','delete')));
 		echo '<p>
 			<strong>'.$Language->getText('forum_admin','delete_warning').'</strong><br />
-			<form method="post" action="'.$PHP_SELF.'">
+			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="deleteforum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -242,7 +255,7 @@ if ($group_id) {
 			</form>';
 		forum_footer(array());
 
-	} elseif ($delete && $group_forum_id) {
+	} elseif (getStringFromRequest('delete') && $group_forum_id) {
 
 		$f = new Forum ($g,$group_forum_id);
 		if (!$f || !is_object($f)) {
@@ -255,7 +268,7 @@ if ($group_id) {
 		forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status')));
 		echo '<p>
 			<strong>'.$Language->getText('general','delete').'</strong><br />
-			<form method="post" action="'.$PHP_SELF.'">
+			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="delete" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -279,7 +292,7 @@ if ($group_id) {
 		if ($p->isForumAdmin()) {
 			echo '
 			<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a><br /></p>';
+			<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a><br /></p>';
 		}
 		//
 		//	Get existing forums
@@ -306,7 +319,7 @@ if ($group_id) {
 			if ($farr[$j]->isError()) {
 				echo $farr->getErrorMessage();
 			} else {
-				echo '<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
 					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<p>';
 			}
 		}

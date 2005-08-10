@@ -16,6 +16,8 @@ require_once('common/tracker/ArtifactQuery.class');
 if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
+$run = getStringFromRequest('run');
+$query_id = getIntFromRequest('query_id');
 if($run && $query_id) {
 	$aq = new ArtifactQuery($ath,$query_id);
 	if (!$aq || !is_object($aq)) {
@@ -34,6 +36,18 @@ if (!$af || !is_object($af)) {
 } elseif ($af->isError()) {
 	exit_error('Error',$af->getErrorMessage());
 }
+
+$offset = getStringFromRequest('offset',$offset);
+$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
+$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
+$max_rows = getStringFromRequest('max_rows',$max_rows);
+$set = getStringFromRequest('set',$set);
+$_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
+$_status = getStringFromRequest('_status',$_status);
+$_category = getStringFromRequest('_category',$_category);
+$_group = getStringFromRequest('_group',$_group);
+$_changed_from = getStringFromRequest('_changed_from',$_changed_from);
+$_resolution = getStringFromRequest('_resolution',$_resolution);
 
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
 $_sort_col=$af->order_col;
@@ -55,7 +69,7 @@ $ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
 
 echo '
 <table width="60%" border="0">
-	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
+	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
 
 if (!session_loggedin()) {
 /**
@@ -179,7 +193,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 	if ($IS_ADMIN) {
 		echo '
-		<form name="artifactList" action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
+		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
 		<input type="hidden" name="func" value="massupdate">';
 	}
 
@@ -219,7 +233,7 @@ if ($art_arr && count($art_arr) > 0) {
 			$art_arr[$i]->getID() .
 			'</td>';
 		if ($display_col['summary'])
-		 echo '<td><a href="'.$PHP_SELF.'?func=detail&aid='.
+		 echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&aid='.
 			$art_arr[$i]->getID() .
 			'&group_id='. $group_id .'&atid='.
 			$ath->getID().'">'.
@@ -246,14 +260,14 @@ if ($art_arr && count($art_arr) > 0) {
 		echo '
 			<tr><td colspan="2">';
 		if ($offset > 0) {
-			echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
 			$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
 		} else {
 			echo '&nbsp;';
 		}
 		echo '</td><td>&nbsp;</td><td colspan="2">';
 		if ($rows >= 50) {
-			echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
 			$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
 		} else {
 			echo '&nbsp;';

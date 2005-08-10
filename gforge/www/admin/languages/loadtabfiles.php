@@ -29,11 +29,11 @@ require_once('www/include/BaseLanguage.class');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($purgeall) {
+if (getStringFromRequest('purgeall')) {
 	db_query("DROP TABLE tmp_lang;");
 }
 
-if ($loadall) {
+if (getStringFromRequest('loadall')) {
 	db_query("DROP TABLE tmp_lang;");
 	db_query("CREATE TABLE tmp_lang (tmpid integer, language_id text, seq integer , pagename text, category text, tstring  text);");
 	//db_commit();
@@ -83,7 +83,7 @@ if ($loadall) {
 site_admin_header(array('title'=>"Site Admin"));
 ?>
 
-<form name="mload" method="post" action="<?php echo $PHP_SELF; ?>">
+<form name="mload" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 
 <input type="submit" name="loadall" value="<?php echo "(Re)Load all language files"; ?>" />
 <input type="submit" name="purgeall" value="<?php echo "Purge loaded data"; ?>" />

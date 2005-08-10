@@ -15,6 +15,8 @@
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
+$suppress_nav = getStringFromRequest('suppress_nav');
+
 function handle_add_exit() {
 	global $suppress_nav;
         if ($suppress_nav) {
@@ -27,6 +29,8 @@ function handle_add_exit() {
 }
 
 if (session_loggedin()) {
+	$snippet_package_version_id = getIntFromRequest('snippet_package_version_id');
+	$snippet_version_id = getIntFromRequest('snippet_version_id');
 
 	if ($suppress_nav) {
 		echo '
@@ -42,7 +46,7 @@ if (session_loggedin()) {
 		handle_add_exit();
 	}
 
-	if ($post_changes) {
+	if (getStringFromRequest('post_changes')) {
 		/*
 			Create a new snippet entry, then create a new snippet version entry
 		*/
@@ -112,7 +116,7 @@ if (session_loggedin()) {
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
 	<p><?php echo $Language->getText('add_snippet','you_can_use_this_form'); ?></p>
 	<p>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="snippet_package_version_id" value="<?php echo $snippet_package_version_id; ?>" />
 	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />

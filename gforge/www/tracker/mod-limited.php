@@ -36,14 +36,14 @@ if (session_loggedin()) {
 			<td><?php
 				if ($group->usesPM()) {
 					echo '
-				<a href="'.$PHP_SELF.'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
+				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
 					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
 				}
 				?>
 			</td>
 		</tr>
 <?php } ?>
-	<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<input type="hidden" name="func" value="postmod">
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 

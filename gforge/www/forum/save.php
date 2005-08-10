@@ -28,6 +28,8 @@ if (session_loggedin()) {
 		User obviously has to be logged in to save place
 	*/
 
+	$forum_id = getIntFromRequest('forum_id');
+	$group_id = getIntFromRequest('group_id');
 	if ($forum_id && $group_id) {
 		//
 		//  Set up local objects

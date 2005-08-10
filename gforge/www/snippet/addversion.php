@@ -16,6 +16,9 @@ require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
 if (session_loggedin()) {
+	$type = getStringFromRequest('type');
+	$id = getIntFromRequest('id');
+
 	if ($type=='snippet') {
 		/*
 			See if the snippet exists first
@@ -28,7 +31,12 @@ if (session_loggedin()) {
 		/*
 			handle inserting a new version of a snippet
 		*/
-		if ($post_changes) {
+		if (getStringFromRequest('post_changes')) {
+			$snippet_id = getStringFromRequest('snippet_id');
+			$changes = getStringFromRequest('changes');
+			$version = getStringFromRequest('version');
+			$code = getStringFromRequest('code');
+
 			/*
 				Create a new snippet entry, then create a new snippet version entry
 			*/
@@ -58,7 +66,7 @@ if (session_loggedin()) {
 		?>
 		<p><?php echo $Language->getText('snippet_addversion','if_you_have_modified_a_version'); ?></p>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="snippet" />
 		<input type="hidden" name="snippet_id" value="<?php echo $id; ?>" />
@@ -100,7 +108,11 @@ if (session_loggedin()) {
 			exit_error($Language->getText('snippet_addversion','error_snippet_package_doesnt_exist'));
 		}
 
-		if ($post_changes) {
+		if (getStringFromRequest('post_changes')) {
+			$snippet_package_id = getIntFromRequest('snippet_package_id');
+			$changes = getStringFromRequest('changes');
+			$version = getStringFromRequest('version');
+
 			/*
 				Create a new snippet entry, then create a new snippet version entry
 			*/
@@ -172,7 +184,7 @@ function show_add_snippet_box() {
 		<p>
 		<?php echo $Language->getText('snippet_addversion','if_you_have_modified'); ?></p>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="package" />
 		<input type="hidden" name="snippet_package_id" value="<?php echo $id; ?>" />

@@ -47,6 +47,10 @@ if ($report->isError()) {
 	exit;
 }
 
+$datatype = getIntFromRequest('datatype');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!isset($datatype)) {
 	$datatype=1;
 }

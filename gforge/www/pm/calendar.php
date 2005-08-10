@@ -15,51 +15,58 @@
 
 require_once('pre.php');
 
+$group_id = getIntFromRequest('group_id');
+$group_project_id = getIntFromRequest('group_project_id');
+$year = getIntFromRequest('year');
+$month = getIntFromRequest('month');
+$day = getIntFromRequest('day');
+$type = getStringFromRequest('type');
+
 // Some sanity checks first.
-if (isset($year) && ($year < 1990 || $year > 2020)) {
+if ($year && ($year < 1990 || $year > 2020)) {
 	exit_error($Language->getText("calendar", "invalidyear"),
 		   $Language->getText("calendar", "invalidyearexplain"));
 }
 
-if (isset($month) && ($month < 1 || $month > 12)) {
+if ($month && ($month < 1 || $month > 12)) {
 	exit_error($Language->getText("calendar", "invalidmonth"),
 		   $Language->getText("calendar", "invalidmonthexplain"));
 }
 
-if (isset($day) && ($day < 1 || $day > 31)) {
+if ($day && ($day < 1 || $day > 31)) {
 	exit_error($Language->getText("calendar", "invalidday"),
 		   $Language->getText("calendar", "invaliddayexplain"));
 }
 
-if (isset($year) && isset($month) && isset($day)) {
+if ($year && isset($month) && isset($day)) {
 	if (!checkdate($month, $day, $year)) {
 		exit_error($Language->getText("calendar", "invaliddate"),
 			   $Language->getText("calendar", "invaliddateexplain", "$year-$month-$day"));
 	}
 }
 
-if (isset($type) && $type != 'onemonth' && $type != 'threemonth' && $type != 'currentyear' && $type != 'comingyear') {
+if ($type && $type != 'onemonth' && $type != 'threemonth' && $type != 'currentyear' && $type != 'comingyear') {
 	exit_error($Language->getText("calendar", "invalidtype"),
 		   $Language->getText("calendar", "invalidtypeexplain"));
 }
 
 // Fill in defaults
-if (!isset($type)) {
+if (!$type) {
 	$type = 'threemonth';
 }
 
 
 $today = getdate(time());
 
-if (!isset($year)) {
+if (!$year) {
 	$year = $today['year'];
 }
 
-if (!isset($month)) {
+if (!$month) {
 	$month = $today['mon'];
 }
 
-if (!isset($day)) {
+if (!$day) {
 	$day = $today['mday'];
 }
 
@@ -67,7 +74,7 @@ if (!isset($day)) {
 $months = array(1 => 'january', 'february', 'march', 'april', 'may', 'june',
 		'july', 'august', 'september', 'october', 'november', 'december');
 
-if (isset($group_id) && isset($group_project_id)) {
+if ($group_id && $group_project_id) {
 	require_once('common/pm/ProjectTaskFactory.class');
 	require_once('common/pm/ProjectGroup.class');
 

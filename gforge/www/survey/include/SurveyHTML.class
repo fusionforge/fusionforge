@@ -31,7 +31,7 @@ class SurveyHTML extends Error {
 	 * Show survey header 
 	 */
 	function header($params) {
-		global $group_id,$is_admin_page,$HTML,$DOCUMENT_ROOT,$Language,$sys_use_survey;
+		global $group_id,$is_admin_page,$HTML,$Language,$sys_use_survey;
 
 		if (!$sys_use_survey) {
 			exit_disabled();
@@ -117,7 +117,7 @@ class SurveyHTML extends Error {
 
 		$ret = '<h2>'. $title. '</h2>';
 		$ret.= $warning;
-		$ret.='<form action="'.$PHP_SELF.'" method="post">';
+		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
@@ -169,7 +169,7 @@ class SurveyHTML extends Error {
 
 		$ret = '<h2>'. $title. '</h2>';
 		$ret.= $warning;
-		$ret.='<form action="'.$PHP_SELF.'" method="post">';
+		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';

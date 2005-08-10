@@ -28,7 +28,8 @@ require_once('pre.php');
 session_require(array('isloggedin'=>1));
 
 
-if ($newemail) {
+if (getStringFromRequest('submit')) {
+	$newemail = getStringFromRequest('newemail');
 
 	if (!validate_email($newemail)) {
 		exit_error($Language->getText('general','error'),$Language->getText('account_change_email','invalid_email'));
@@ -50,7 +51,7 @@ if ($newemail) {
 		);
 	}
 
-	$message = stripcslashes($Language->getText('account_change_email', 'message', array($GLOBALS[HTTP_HOST], $confirm_hash, $GLOBALS['sys_name'])));
+	$message = stripcslashes($Language->getText('account_change_email', 'message', array(getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name'])));
 
 	util_send_message($newemail,$Language->getText('account_change_email', 'subject', $GLOBALS['sys_name']),$message);
 
@@ -68,7 +69,7 @@ site_user_header(array('title'=>$Language->getText('account_change_email','title
 echo $Language->getText('account_change_email', 'desc');
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <?php echo $Language->getText('account_change_email','new_address') ?>
 <input type="text" name="newemail" maxlength="255" />
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />

@@ -35,8 +35,14 @@ require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 
+$group_id = getIntFromRequest('group_id');
+$package_id = getIntFromRequest('package_id');
 if (!$group_id) {
 	exit_no_group();
+}
+if (!$package_id) {
+	header("Location /frs/admin/?group_id=$group_id?feedback=Choose+Package");
+	exit;
 }
 
 $project =& group_get_object($group_id);
@@ -49,11 +55,6 @@ if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }
 
-if (!$package_id) {
-	header("Location /frs/admin/?group_id=$group_id?feedback=Choose+Package");
-	exit;
-}
-
 $frsp = new FRSPackage($project,$package_id);
 if (!$frsp || !is_object($frsp)) {
 	exit_error('Error','Could Not Get FRS Package');
@@ -64,7 +65,11 @@ if (!$frsp || !is_object($frsp)) {
 //
 //
 //
+$release_id = getIntFromRequest('release_id');
 if ($func=='delete_release' && $release_id) {
+	$sure = getStringFromRequest('sure');
+	$really_sure = getStringFromRequest('really_sure');
+
 	$frsr = new FRSRelease($frsp,$release_id);
 	if (!$frsr || !is_object($frsr)) {
 		exit_error('Error','Could Not Get FRS Release');

@@ -33,6 +33,11 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('pre.php');
 
+$return_to = getStringFromRequest('return_to');
+$login = getStringFromRequest('login');
+$form_loginname = getStringFromRequest('form_loginname');
+$form_pw = getStringFromRequest('form_pw');
+
 //
 //	Validate return_to
 //
@@ -48,7 +53,7 @@ if ($return_to) {
 
 if ($sys_use_ssl && !session_issecure()) {
 	//force use of SSL for login
-	header('Location: https://'.$HTTP_HOST.$REQUEST_URI);
+	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
 // Decide login button based on session.
@@ -104,7 +109,7 @@ if ($login && !$success) {
 <p>
 <span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span>
 </p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>

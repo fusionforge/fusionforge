@@ -29,18 +29,20 @@
 require "pre.php";    
 require_once "common/include/Stats.class";    
 
+$type = getStringFromRequest('type');
+
 $stats = new Stats();
 
-if ($GLOBALS['type'] == 'downloads_week') {
+if ($type == 'downloads_week') {
 	$title = $Language->getText('top_toplist','top_download_7_days');
 	$column1 = $Language->getText('top_toplist','download');
 }
-else if ($GLOBALS['type'] == 'pageviews_proj') {
+else if ($type == 'pageviews_proj') {
 	$res_top = $stats->getTopPageViews();
 	$title = $Language->getText('top_toplist','top_weekly_pagesviews',array($GLOBALS['sys_default_domain'],$GLOBALS['sys_name']));
 	$column1 = $Language->getText('top_toplist','pageviews');
 }
-else if ($GLOBALS['type'] == 'forumposts_week') {
+else if ($type == 'forumposts_week') {
 	$res_top = $stats->getTopMessagesPosted();
 	$title = $Language->getText('top_toplist','top_forum_post_count');
 	$column1 = $Language->getText('top_toplist','posts');

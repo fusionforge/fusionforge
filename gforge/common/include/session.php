@@ -24,6 +24,7 @@
  */
 
 require_once('common/include/account.php');
+require_once('common/include/escapingUtils.php');
 
 /**
  * A User object if user is logged in
@@ -33,13 +34,18 @@ require_once('common/include/account.php');
 $G_SESSION = false;
 
 /**
+ * Get session id
+ */
+$session_ser = getStringFromCookie('session_ser');
+
+/**
  *	session_build_session_cookie() - Construct session cookie for the user
  *
  *	@param		int		User_id of the logged in user
  *	@return cookie value
  */
 function session_build_session_cookie($user_id) {
-	$session_serial = $user_id.'-*-'.time().'-*-'.$GLOBALS['REMOTE_ADDR'].'-*-'.$GLOBALS['HTTP_USER_AGENT'];
+	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
 	$session_serial_hash = md5($session_serial.$GLOBALS['sys_session_key']);
 	$session_serial_cookie = base64_encode($session_serial).'-*-'.$session_serial_hash;
 	return $session_serial_cookie;
@@ -76,10 +82,10 @@ function session_check_session_cookie($session_cookie) {
 
 	list($user_id, $time, $ip, $user_agent) = explode('-*-', $session_serial, 4);
 
-	if (!session_check_ip($ip, $GLOBALS['REMOTE_ADDR'])) {
+	if (!session_check_ip($ip, getStringFromServer('REMOTE_ADDR'))) {
 		return false;
 	}
-	if (trim($user_agent) != $GLOBALS['HTTP_USER_AGENT']) {
+	if (trim($user_agent) != getStringFromServer('HTTP_USER_AGENT')) {
 		return false;
 	}
 	if ($time - time() >= $GLOBALS['sys_session_expire']) {
@@ -266,8 +272,7 @@ function session_check_ip($oldip,$newip) {
  *	@access public
  */
 function session_issecure() {
-	global $HTTP_SERVER_VARS;
-	return (strtoupper($HTTP_SERVER_VARS['HTTPS']) == "ON");
+	return (strtoupper(getStringFromServer('HTTPS')) == "ON");
 }
 
 /**
@@ -297,8 +302,7 @@ function session_cookie($name ,$value, $domain = '', $expiration = 0) {
  *	@return never returns
  */
 function session_redirect($loc) {
-	global $HTTP_SERVER_VARS;	
-	header('Location: http' . (session_issecure()?'s':'') . '://' . $HTTP_SERVER_VARS['HTTP_HOST'] . $loc);
+	header('Location: http' . (session_issecure()?'s':'') . '://' . getStringFromServer('HTTP_HOST') . $loc);
 	print("\n\n");
 	exit;
 }
@@ -369,7 +373,7 @@ function session_set_new($user_id) {
 		INSERT INTO user_session (session_hash, ip_addr, time, user_id) 
 		VALUES (
 			'".session_get_session_cookie_hash($cookie)."', 
-			'".$GLOBALS['REMOTE_ADDR']."',
+			'".getStringFromServer('REMOTE_ADDR')."',
 			'".time()."',
 			$user_id
 		)

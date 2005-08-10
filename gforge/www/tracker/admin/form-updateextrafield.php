@@ -11,6 +11,7 @@
 		echo '
 			<h2>'.$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName()).'</h2>';
 
+		$id = getStringFromRequest('id');
 		$ac = new ArtifactExtraField($ath,$id);
 		if (!$ac || !is_object($ac)) {
 			$feedback .= 'Unable to create ArtifactExtraField Object';
@@ -21,7 +22,7 @@
 			<p>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_type').': '.$ac->getTypeName(); ?></strong><br />
 			
-			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID(); ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_box" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 			<input type="hidden" name="is_required" value="0" />

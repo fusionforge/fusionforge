@@ -34,16 +34,19 @@ if (!session_loggedin()) {
 } else {
 
 	$u =& session_get_user();
+	$diary_id = getIntFromRequest('diary_id');
 
-	if ($submit) {
+	if (getStringFromRequest('submit')) {
+		$summary = getStringFromRequest('summary');
+		$details = getStringFromRequest('details');
 		// set $is_public
-		if ($is_public) {
+		if (getStringFromRequest('is_public')) {
 			$is_public = '1';
 		} else {
 			$is_public = '0';
 		}
 		//make changes to the database
-		if ($update) {
+		if (getStringFromRequest('update')) {
 			//updating an existing diary entry
 			$res=db_query("UPDATE user_diary SET summary='". htmlspecialchars($summary) ."',details='". htmlspecialchars($details) ."',is_public='$is_public' ".
 			"WHERE user_id='". user_getid() ."' AND id='$diary_id'");
@@ -53,7 +56,7 @@ if (!session_loggedin()) {
 				echo db_error();
 				$feedback .= $Language->getText('my_diary','nothing_updated');
 			}
-		} else if ($add) {
+		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
 
 			$sql="INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES ".
@@ -132,7 +135,7 @@ if (!session_loggedin()) {
 	<p>&nbsp;</p>
 	<h3>'. $info_str .'</h3>
 	<p />
-	<form action="'. $PHP_SELF .'" method="post">
+	<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table>
@@ -170,7 +173,7 @@ if (!session_loggedin()) {
 		echo '&nbsp;</td></tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. $PHP_SELF .'?diary_id='.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
 				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}

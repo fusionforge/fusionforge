@@ -13,6 +13,11 @@ require_once('common/survey/SurveyQuestion.class');
 require_once('common/survey/SurveyQuestionFactory.class');
 require_once('www/survey/include/SurveyHTML.class');
 
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
+$question_id = getIntFromRequest('question_id');
+$question_type = getStringFromRequest('question_type');
+
 /* We need a group_id */ 
 if (!$group_id) {
     exit_no_group();
@@ -42,7 +47,7 @@ if (!$sq || !is_object($sq)) {
 }
 
 /* Delete a question */
-if ($delete=="Y" && $question_id) {
+if (getStringFromRequest('delete')=="Y" && $question_id) {
      $sq->delete();
 
     /* Error */
@@ -52,7 +57,7 @@ if ($delete=="Y" && $question_id) {
 	$msg = $Language->getText('survey_edit','delete_successful');
     }
     echo "<H3>".$msg ."</H3>";
-} else if ($post=="Y") {
+} else if (getStringFromRequest('post')=="Y") {
     /* Modification */
     if ($question_id) {
 	$sq->update($question, $question_type);

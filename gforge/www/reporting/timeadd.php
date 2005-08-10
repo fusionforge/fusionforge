@@ -40,9 +40,17 @@ if ($report->isError()) {
 	exit_error('Error',$report->getErrorMessage());
 }
 
-if ($submit) {
+$week = getStringFromRequest('week');
+$project_task_id = getStringFromRequest('project_task_id');
+
+if (getStringFromRequest('submit')) {
+	$report_date = getStringFromRequest('report_date');
+	$time_code = getStringFromRequest('time_code');
+	$old_time_code = getStringFromRequest('old_time_code');
+	$hours = getStringFromRequest('hours');
+	
 /*
-	if ($update) {
+	if (getStringFromRequest('update')) {
 		
 		if ($project_task_id && $report_date && $time_code) {
 			$res=db_query("UPDATE rep_time_tracking 
@@ -60,8 +68,7 @@ if ($submit) {
 
 	} else
 */
-	if ($delete) {
-
+	if (getStringFromRequest('delete')) {
 		if ($project_task_id && $report_date && $old_time_code) {
 			$res=db_query("DELETE FROM rep_time_tracking 
 				WHERE user_id='".user_getid()."'
@@ -77,7 +84,9 @@ if ($submit) {
 			echo "$project_task_id && $report_date && $old_time_code";
 		}
 
-	} elseif ($add) {
+	} elseif (getStringFromRequest('add')) {
+		$days_adjust = getStringFromRequest('days_adjust');
+
 		if ($project_task_id && $week && $days_adjust && $time_code && $hours) {
 
 			//$date_list = split('[- :]',$report_date,5);
@@ -100,6 +109,7 @@ if ($submit) {
 }
 
 if ($week) {
+	$group_project_id = getStringFromRequest('group_project_id');
 
 	report_header($Language->getText('reporting_ta','title'));
 
@@ -138,7 +148,7 @@ if ($week) {
 		echo $HTML->listTableTop ($title_arr);
 
 		while ($r=&db_fetch_array($res)) {
-			echo '<form action="'.$PHP_SELF.'?week='.$week.'&project_task_id='.$r['project_task_id'].'" method="post" />
+			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&project_task_id='.$r['project_task_id'].'" method="post" />
 			<input type="hidden" name="submit" value="1" />
 			<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
 			<input type="hidden" name="old_time_code" value="'.$r['time_code'] .'" />
@@ -156,7 +166,7 @@ if ($week) {
 
 			$respt=db_query("SELECT project_task_id,summary FROM project_task WHERE group_project_id='$group_project_id'");
 
-			echo '<form action="'.$PHP_SELF.'?week='.$week.'" method="post" />
+			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post" />
 			<input type="hidden" name="submit" value="1" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td align="middle">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
@@ -179,7 +189,7 @@ if ($week) {
 		<p>
 		<?php echo $Language->getText('reporting_ta','add_entry_description'); ?>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="get" />
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get" />
 		<input type="hidden" name="week" value="<?php echo $week; ?>" />
 		<table>
 		<tr>
@@ -192,7 +202,7 @@ if ($week) {
 		<p>
 		<h3>Change Week</h3>
 		<p>
-		<form action="<?php echo $PHP_SELF; ?>" method="get" />
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get" />
 		<?php echo report_weeks_box($report,'week'); ?><input type="submit" name="submit" value="<?php echo $Language->getText('reporting_ta','change_week'); ?>" />
 		</form>
 		<?php
@@ -209,7 +219,7 @@ if ($week) {
 	<p>
 	<?php echo $Language->getText('reporting_ta','choose_entry_description'); ?>
 	<p>
-	<form action="<?php echo $PHP_SELF; ?>" method="get" />
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get" />
 	<strong><?php echo $Language->getText('reporting_ta','week_starting'); ?>:</strong><br />
 	<?php echo report_weeks_box($report,'week'); ?>
 	<p>

@@ -18,7 +18,7 @@ echo notepad_func();
 
 	<table cellpadding="0" width="100%">
 		<tr>
-		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
+		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 			<td><?php
 				if (session_loggedin()) {

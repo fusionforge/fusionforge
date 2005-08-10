@@ -3,6 +3,7 @@
 //
 //  FORM TO COPY Choices configured by admin for extra_field BOXES 
 //
+		$id = getIntFromRequest('id');
 		$fb= new ArtifactExtraField($ath,$id);
 		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_copy','choices_title',$fb->getName())));
 		echo "<h3>".$Language->getText('tracker_admin_copy','choices_title',$fb->getName())."</h3>";
@@ -26,7 +27,7 @@
 		echo '<td valign=top>';
 		?>
 		
-		<form action="<?php echo $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post" >
+		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post" >
 		<input type="hidden" name="copy_opt" value="copy" >
 		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<?php

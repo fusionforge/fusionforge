@@ -38,6 +38,13 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$sw = getStringFromRequest('sw');
+$dev_id = getStringFromRequest('dev_id');
+$area = getStringFromRequest('area');
+$SPAN = getStringFromRequest('SPAN');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -59,7 +66,7 @@ if ($sw) {
 	?>
 	<h3><?php echo $Language->getText('reporting','user_activity_title'); ?></h3>
 	<p>
-	<form action="<?php echo $PHP_SELF; ?>" method="get">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>">
 	<table><tr>
 	<td><strong><?php echo $Language->getText('reporting','user'); ?>:</strong><br /><?php echo report_useract_box('dev_id',$dev_id,$sw); ?></td>

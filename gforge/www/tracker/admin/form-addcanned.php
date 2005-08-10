@@ -27,7 +27,7 @@
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<td>'.db_result($result, $i, 'id').'</td>'.
-					'<td><a href="'.$PHP_SELF.'?update_canned=1&amp;id='.
+					'<td><a href="'.getStringFromServer('PHP_SELF').'?update_canned=1&amp;id='.
 						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'title').'</a></td></tr>';
 			}
@@ -40,7 +40,7 @@
 		?>
 		<p><?php echo $Language->getText('tracker_admin_add_canned','canned_response_info') ?></p>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_canned" value="y" />
 		<strong><?php echo $Language->getText('tracker_admin_add_canned','canned_response_title') ?>:</strong><br />
 		<input type="text" name="title" value="" size="50" maxlength="50" />

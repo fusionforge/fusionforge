@@ -25,6 +25,9 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+$group_id = getIntFromRequest('group_id');
+$group_project_id = getIntFromRequest('group_project_id');
+
 if (!$group_id) {
 	exit_no_group();
 }
@@ -38,7 +41,12 @@ if (!$g || !is_object($g)) {
 
 $perm =& $g->getPermission( session_get_user() );
 
-if ($post_changes) {
+$update_cat = getStringFromRequest('update_cat');
+$add_cat = getStringFromRequest('add_cat');
+$delete = getStringFromRequest('delete');
+$id = getIntFromRequest('id');
+
+if (getStringFromRequest('post_changes')) {
 	/*
 		Update the database
 	*/
@@ -49,7 +57,12 @@ if ($post_changes) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
 
-	if ($addproject) {
+	if (getStringFromRequest('addproject')) {
+		$project_name = getStringFromRequest('project_name');
+		$description = getStringFromRequest('description');
+		$is_public = getStringFromRequest('is_public');
+		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
+
 		/*
 			Add new subproject
 		*/
@@ -63,6 +76,8 @@ if ($post_changes) {
 		}
 
 	} else if ($add_cat) {
+		$name = getStringFromRequest('name');
+
 		/*
 			Add a project_category
 		*/
@@ -82,6 +97,9 @@ if ($post_changes) {
 		}
 
 	} else if ($update_cat) {
+		$id = getIntFromRequest('id');
+		$name = getStringFromRequest('name');
+
 		/*
 			Update a project_category
 		*/
@@ -104,7 +122,11 @@ if ($post_changes) {
 			}
 		}
 
-	} else if ($update_pg) {
+	} else if (getStringFromRequest('update_pg')) {
+		$project_name = getStringFromRequest('project_name');
+		$description = getStringFromRequest('description');
+		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
+
 		/*
 			Update a subproject
 		*/
@@ -119,6 +141,9 @@ if ($post_changes) {
 		}
 
 	} else if ($delete) {
+		$sure = getStringFromRequest('sure');
+		$really_sure = getStringFromRequest('really_sure');
+
 		/*
 			Delete a subproject
 		*/
@@ -126,12 +151,12 @@ if ($post_changes) {
 			exit_permission_denied();
 		}
 
-		if (!$pg->delete($sure,$really_sure)) {
+		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
 			$feedback .= $Language->getText('pm_admin_projects','deleted');
 			$group_project_id=0;
-			$delete=0;
+			$delete=false;
 		}
 	}
 }
@@ -171,7 +196,7 @@ if ($add_cat && $group_project_id) {
 		for ($i=0; $i < $rows; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 				'<td>'.db_result($result, $i, 'category_id').'</td>'.
-				'<td><a href="'.$PHP_SELF.'?update_cat=1&amp;id='.
+				'<td><a href="'.getStringFromServer('PHP_SELF').'?update_cat=1&amp;id='.
 					db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID() .'">'.
 					db_result($result, $i, 'category_name').'</a></td></tr>';
 		}
@@ -184,7 +209,7 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p />
-	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<strong><?php echo $Language->getText('pm_admin_projects','category_name') ?>:</strong><br />
@@ -228,7 +253,7 @@ if ($add_cat && $group_project_id) {
 	} else {
 		?>
 		<p />
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post" />
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post" />
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -245,7 +270,7 @@ if ($add_cat && $group_project_id) {
 
 	pm_footer(array());
 
-} elseif ($addproject) {
+} elseif (getStringFromRequest('addproject')) {
 	/*
 		Create a new subproject
 	*/
@@ -259,7 +284,7 @@ if ($add_cat && $group_project_id) {
 	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?></p>
 
 	<p />
-	<form action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
 	<p />
@@ -282,8 +307,7 @@ if ($add_cat && $group_project_id) {
 	<?php
 	pm_footer(array());
 
-} else if ($update_pg && $group_project_id) {
-
+} else if (getStringFromRequest('update_pg') && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
@@ -301,7 +325,7 @@ if ($add_cat && $group_project_id) {
 	<p><?php echo $Language->getText('pm_admin_projects','change_project_intro') ?></p>
 	<p />
 
-	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -333,8 +357,8 @@ if ($add_cat && $group_project_id) {
 	</tr>
 	<tr>
 		<td>
-			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&amp;add_cat=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
-			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&amp;delete=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','delete_info')?></a></strong><br />
+			<strong><a href="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;add_cat=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
+			<strong><a href="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;delete=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','delete_info')?></a></strong><br />
 		</td>
 	</tr>
 	<tr>
@@ -364,7 +388,7 @@ if ($add_cat && $group_project_id) {
 	pm_header(array('title'=>$Language->getText('pm_admin_projects','delete')));
 
 	?>
-	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="delete" value="y" /><br />
 	<?php echo $Language->getText('pm_admin_projects','delete_warning'); ?>
@@ -391,7 +415,7 @@ if ($add_cat && $group_project_id) {
 	if ($perm->isPMAdmin()) {
 		?>
 		<p />
-		<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
+		<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
 		<?php echo $Language->getText('pm_admin_projects','add_project_intro') ?>
 		<p />
 		<?php
@@ -411,7 +435,7 @@ if ($add_cat && $group_project_id) {
 		echo db_error();
 	} else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
+			echo '<a href="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
 		}
 
 	}

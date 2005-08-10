@@ -24,14 +24,14 @@
 
 require_once('msp.php');
 
-if ($showform) {
+if (getStringFromRequest('showform')) {
 ?>
 	<html>
 	<title>XML Parser</title>
 	<body>
 	<h2>XML Parser</h2>
 	<p>
-	<form name="xmlparser" method="POST" action="<?php echo $PHP_SELF; ?>">
+	<form name="xmlparser" method="POST" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 	Text: <br>
 	<textarea name="document" cols="50" rows="10"></textarea>
 	<br>
@@ -39,9 +39,9 @@ if ($showform) {
 	<input type="submit" value="Parser">
 	</form>
 	<?php
-} elseif ($_POST["parser"] == "yes") {
+} elseif (getStringFromRequest("parser") == "yes") {
 
-	$data = $_POST["document"];
+	$data = getStringFromRequest("document");
 	//$data = str$data);
 
 } else {

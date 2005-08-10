@@ -30,6 +30,8 @@ require_once('www/survey/survey_utils.php');
 require_once('www/survey/admin/survey_utils.php');
 
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>$Language->getText('survey_edit','tilte'),'pagename'=>'survey_admin_edit_survey'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
@@ -38,7 +40,11 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-if ($post_changes) {
+if (getStringFromRequest('post_changes')) {
+	$survey_title = $survey_title;
+	$survey_questions = $survey_questions;
+	$is_active = $is_active;
+
 	if (!isset($survey_title) || $survey_title == "")
 	{
 		$feedback .= $Language->getText('survey_edit','survey_title_required');
@@ -97,7 +103,7 @@ function show_questions() {
 
 <p><?php echo $Language->getText('survey_edit','change_after_already_response'); ?>.</p>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="post_changes" value="y" />
 <strong><?php echo $Language->getText('survey_edit','name_off_survey'); ?>:</strong>

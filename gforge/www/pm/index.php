@@ -20,6 +20,7 @@ require_once('pre.php');
 require_once('www/pm/include/ProjectGroupHTML.class');
 require_once('common/pm/ProjectGroupFactory.class');
 
+$group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
 }

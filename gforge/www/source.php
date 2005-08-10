@@ -18,6 +18,8 @@ if (!$sys_show_source) {
 	exit_permission_denied();
 }
 
+$file = getStringFromRequest('file');
+
 if (!$file) {
 	exit_error($Language->getText('source','missing_file'), $Language->getText('source','missing_file_text'));
 }
@@ -30,7 +32,7 @@ $dir = dirname($file);
 
 // If this is a legal dir, then it is under the docroot, else use basename
 if ($dir) {
-	$fname = $DOCUMENT_ROOT . $file;
+	$fname = getStringFromServer('DOCUMENT_ROOT') . $file;
 } else {
 	$fname = basename($file);
 }

@@ -30,6 +30,7 @@ require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
+$group_id = getIntFromRequest('group_id');
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error('Error','Could Not Get Group');
@@ -70,12 +71,18 @@ function do_update(&$group, $is_public, $status, $license,
 }
 
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$form_public = getStringFromRequest('form_public');
+	$form_status = getStringFromRequest('form_status');
+	$form_license = getStringFromRequest('form_license');
+	$form_box = getStringFromRequest('form_box');
+	$form_domain = getStringFromRequest('form_domain');
+	$form_scm_box = getStringFromRequest('form_scm_box');
 
 	do_update($group, $form_public, $form_status, $form_license,
 		  1, $form_box, $form_domain, $form_scm_box);
 
-} else if ($resend) {
+} else if (getStringFromRequest('resend')) {
 
 	$group->sendApprovalEmail();
 	$feedback .= $Language->getText('admin_groupedit','instruction_email_sent').'<br /> ';
@@ -91,7 +98,7 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <?php print "<a href=\"groupdelete.php?group_id=$group_id\"><h3>".$Language->getText('admin_groupdelete','title'). "</h3></a>"; ?></p>
 
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 
 <table>

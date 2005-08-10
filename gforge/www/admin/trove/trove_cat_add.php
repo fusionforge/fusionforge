@@ -31,10 +31,15 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // ########################################################
 
-if ($GLOBALS['submit']) {
-	$newroot = trove_getrootcat($GLOBALS['form_parent']);
+if (getStringFromRequest('submit')) {
+	$form_parent = getStringFromRequest('form_parent');
+	$form_shortname = getStringFromRequest('form_shortname');
+	$form_fullname = getStringFromRequest('form_fullname');
+	$form_description = getStringFromRequest('form_description');
 
-	if ($GLOBALS['form_shortname']) {
+	$newroot = trove_getrootcat($form_parent);
+
+	if ($form_shortname) {
 		$res = db_query("
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)

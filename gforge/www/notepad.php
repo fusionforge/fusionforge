@@ -37,7 +37,12 @@ require_once('pre.php');
  *  cols:       Colums
  */
 
-if ($wrap == '') {
+$form = getStringFromRequest('form');
+$wrap = getStringFromRequest('wrap');
+$rows = getIntFromRequest('rows');
+$cols = getIntFromRequest('cols');
+
+if (!$wrap) {
         $wrap = htmlspecialchars("SOFT");
 }
 if (!is_int($rows)) {
@@ -47,7 +52,7 @@ if (!is_int($cols)) {
         $cols = 75;
 }
 $pform = '';
-if ($form != '') {
+if ($form) {
         $pform = "opener.".$form;
 }
 ?>

@@ -32,6 +32,7 @@ require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
 
+$group_id = getIntFromRequest('group_id');
 if (!$group_id) {
 	exit_no_group();
 }
@@ -52,7 +53,13 @@ if (!$perm->isReleaseTechnician()) {
 */
 
 // only admin can modify packages (vs modifying releases of packages)
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$func = getStringFromRequest('func');
+	$package_id = getIntFromRequest('package_id');
+	$package_name = getStringFromRequest('package_name');
+	$status_id = getIntFromRequest('status_id');
+	$is_public = getStringFromRequest('is_public');
+
 	/*
 
 		make updates to the database
@@ -139,7 +146,7 @@ if (!$res || $rows < 1) {
 
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-		<form action="'. $PHP_SELF .'" method="post">
+		<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="func" value="update_package" />
 		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
@@ -183,7 +190,7 @@ if (!$res || $rows < 1) {
 </p>
 <h3><?php echo $Language->getText('project_admin_editpackages','new_package_name') ?>:</h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
 <input type="text" name="package_name" value="" size="20" maxlength="30" />

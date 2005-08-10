@@ -28,6 +28,8 @@
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
+$group_id = getIntFromRequest('group_id');
+$survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>$Language->getText('survey_add_question','title'),'pagename'=>'survey_admin_add_question'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
@@ -36,7 +38,10 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-if ($post_changes) {
+if (getStringFromRequest('post_changes')) {
+	$question = getStringFromRequest('question');
+	$question_type = getStringFromRequest('question_type');
+
 	$sql="INSERT INTO survey_questions (group_id,question,question_type) VALUES ($group_id,'".htmlspecialchars($question)."',$question_type)";
 	$result=db_query($sql);
 	if ($result) {
@@ -60,7 +65,7 @@ function show_questions() {
 </script>
 
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="post_changes" value="Y" />
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <?php echo $Language->getText('survey_add_question','question') ?>:<br />

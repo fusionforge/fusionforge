@@ -23,7 +23,7 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -297,7 +297,7 @@ class ForumHTML extends Error {
 	}
 
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-		global $REQUEST_URI,$Language;
+		global $Language;
 
 		if ($this->Forum->userCanPost()) {
 			if ($subject) {
@@ -327,7 +327,7 @@ class ForumHTML extends Error {
 				<p>
 			<?php
 			if (!session_loggedin()) {
-				echo '<strong><font color="red">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></font></strong>';
+				echo '<strong><font color="red">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['.$Language->getText('forum_utils','loggedin').']</a></font></strong>';
 			}
 			?>
 			<br />
@@ -342,7 +342,7 @@ class ForumHTML extends Error {
 		} elseif ($this->Forum->allowAnonymous()) {
 			echo "<div align=\"center\">";
 			echo '<h3><font color="red">';
-			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).' ">','</a>'));
+			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).' ">','</a>'));
 			echo '</font></h3>';
 			echo "</div>";
 		} else {

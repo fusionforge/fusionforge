@@ -36,7 +36,24 @@ if (!$u || !is_object($u)) {
     exit_error('Error',$u->getErrorMessage());
 }
 
-if ($submit) {
+if (getStringFromRequest('submit')) {
+	$firstname = getStringFromRequest('firstname');
+	$lastname = getStringFromRequest('lastname');
+	$language = getIntFromRequest('language');
+	$timezone = getStringFromRequest('timezone');
+	$theme_id = getIntFromRequest('theme_id');
+	$ccode = getStringFromRequest('ccode');
+	$address = getStringFromRequest('address');
+	$address2 = getStringFromRequest('address2');
+	$phone = getStringFromRequest('phone');
+	$fax = getStringFromRequest('fax');
+	$title = getStringFromRequest('title');
+	$jabber_address = getStringFromRequest('jabber');
+	$jabber_only = getStringFromRequest('jabber');
+	$mail_site = getStringFromRequest('mail_site');
+	$mail_va = getStringFromRequest('mail_va');
+	$remember_user = getStringFromRequest('remember_user');
+	$use_ratings = getStringFromRequest('use_ratings');
 
 /*
 //needs security audit
@@ -48,7 +65,7 @@ if ($submit) {
 		setcookie("sf_user_hash",'',0,'/');
 	}
 */
-	// Refresh page if language changed
+	// Refresh page if language or theme changed
 	if ($language != $u->getLanguage() || $theme_id != $u->getThemeID()) {
 		$refresh = 1;
 	}
@@ -68,7 +85,7 @@ if ($submit) {
 
 site_user_header(array('title'=>$Language->getText('account_options', 'title')));
 
-echo '<form action="'.$PHP_SELF.'" method="post">';
+echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 
 echo $HTML->boxTop($Language->getText('account_options', 'title'));
 
@@ -212,7 +229,7 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
 <?php 
 $hookParams['user']= user_get_object(user_getid());
-if (isset($submit)) {//if this is set, then the user has issued an Update
+if (isset(getStringFromRequest('submit'))) {//if this is set, then the user has issued an Update
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 } else {
 	plugin_hook("userisactivecheckbox", $hookParams);

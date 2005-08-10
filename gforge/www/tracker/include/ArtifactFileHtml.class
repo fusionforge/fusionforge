@@ -29,14 +29,15 @@ class ArtifactFileHtml extends ArtifactFile {
 		return $this->ArtifactFile($Artifact,$data); 
 	}
 
-	function upload($input_file,$input_file_name,$input_file_type,$description) {
+	function upload($input_file,$description) {
 		if (!util_check_fileupload($input_file)) {
 			$this->setError('ArtifactFile: Invalid filename');
 			return false;
 		}
-		$size = @filesize($input_file);
-		$input_data = fread(fopen($input_file, 'r'), $size);
-		return $this->create($input_file_name,$input_file_type,$size,$input_data,$description);
+		$filename = $input_file['tmp_name'];
+		$size = $input_file['size'];
+		$input_data = fread(fopen($filename, 'r'), $size);
+		return $this->create($input_file['name'],$input_file['type'],$size,$input_data,$description);
 	}
 
 }

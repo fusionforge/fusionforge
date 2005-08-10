@@ -15,6 +15,8 @@
 require_once('pre.php');
 require_once('rss_utils.inc');
 
+$limit = getIntFromRequest('limit');
+
 header("Content-Type: text/plain");
 print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">

@@ -25,6 +25,7 @@ require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
+$msg_id = getIntFromRequest('msg_id');
 if ($msg_id) {
 
 	/*

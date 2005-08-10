@@ -45,6 +45,10 @@ session_require( array('group'=>$sys_stats_group) );
 
 echo report_header($Language->getText('reporting_pie','title'));
 
+$datatype = getStringFromRequest('datatype');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!isset($datatype)) {
 	$datatype=1;
 }
@@ -52,7 +56,7 @@ if (!isset($datatype)) {
 ?>
 <h3><?php echo $Language->getText('reporting_pie','title'); ?></h3>
 <p>
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting_pie','trackers'); ?>:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>
 <td><strong><?php echo $Language->getText('reporting_pie','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>

@@ -9,14 +9,18 @@
  * @version   $Id$
  */
 
+// escaping lib
+require_once('common/include/escapingUtils.php');
+
 // Just say no to link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
-if (!empty($_SERVER['HTTP_X_moz']) && $_SERVER['HTTP_X_moz'] === 'prefetch'){
-	header($_SERVER['SERVER_PROTOCOL'] . ' 404 Prefetch Forbidden');
+if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
+	header(getStringFromServer('SERVER_PROTOCOL') . ' 404 Prefetch Forbidden');
 	trigger_error('Prefetch request forbidden.');
 	exit;
 }
 
+$no_gz_buffer = getStringFromRequest('no_gz_buffer');
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
@@ -29,11 +33,11 @@ require('local.inc');
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
-if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
-	if (strtoupper($_SERVER['HTTPS']) == 'ON') {
-		header ("Location: https://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
+if (getStringFromServer('HTTP_HOST') != $GLOBALS['sys_default_domain'] && getStringFromServer('HTTP_HOST') != $GLOBALS['sys_fallback_domain']) {
+	if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
+		header ("Location: https://".$GLOBALS['sys_default_domain'].getStringFromServer('REQUEST_URI'));
 	} else {
-		header ("Location: http://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
+		header ("Location: http://".$GLOBALS['sys_default_domain'].getStringFromServer('REQUEST_URI'));
 	}
 	exit;
 }
@@ -79,9 +83,6 @@ require_once('common/include/Group.class');
 //permission functions
 require_once('common/include/Permission.class');
 
-// escaping lib
-require_once('common/include/escapingUtils.php');
-
 //library to set up context help
 require_once('www/include/help.php');
 
@@ -116,8 +117,8 @@ plugin_hook('after_session_set');
 
 //mandatory login
 if (!session_loggedin() && $sys_force_login == 1 ) {
-	$expl_pathinfo = explode('/',$REQUEST_URI);
-	if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
+	$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
+        if (getStringFromServer('REQUEST_URI')!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
 	// Show proj* export even if not logged in when force login
 	// If not default web project page would be broken
 	if ($expl_pathinfo[1]=='export' && !ereg("^proj", $expl_pathinfo[2])) exit_not_logged_in();
@@ -176,8 +177,8 @@ if (session_loggedin()) {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use default language
-	if ($HTTP_ACCEPT_LANGUAGE) {
-		$classname = getLanguageClassName($HTTP_ACCEPT_LANGUAGE);
+	if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
+		$classname = getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
 	}
 	if (!$classname) {
 		$classname=$sys_lang;
