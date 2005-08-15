@@ -424,11 +424,11 @@ class FRSRelease extends Error {
 			$this->setError('FRSRelease::update() Error On Update: '.db_error());
 			return false;
 		}
-		
+
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
 			db_rollback();
-			$this->setError('FRSRelease::update() Error Updating Release: CouldnÂ´t fetch data');
+			$this->setError('FRSRelease::update() Error Updating Release: Couldn´t fetch data');
 			return false;
 		}
 		$newfilename = $this->getFileName();
@@ -443,7 +443,7 @@ class FRSRelease extends Error {
 			} else {
 				if(!rename($olddirlocation,$newdirlocation)) {
 					db_rollback();
-					$this->setError('FRSRelease::update() Error Updating Release: CouldnÂ´t rename dir');
+					$this->setError('FRSRelease::update() Error Updating Release: Couldn´t rename dir');
 					return false;
 				}
 			}

@@ -52,7 +52,7 @@ if (!$result || db_numrows($result) < 1) {
 		}
 	}
 
-	frs_header(array('title'=>$Language->getText('project_shownotes','title'),'group'=>$group_id,'pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
+	frs_header(array('title'=>$Language->getText('project_shownotes','title'),'group'=>$group_id));
 
 	echo $HTML->boxTop($Language->getText('project_shownotes','notes'));
 

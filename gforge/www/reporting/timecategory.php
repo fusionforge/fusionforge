@@ -39,7 +39,7 @@ if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('add')) {
 
 		$r = new ReportSetup();
-		if (!$r->addTimeCode($category_name))) {
+		if (!$r->addTimeCode($category_name)) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('reporting_tc','successful');

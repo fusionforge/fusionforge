@@ -2,7 +2,7 @@
 //
 //	FORM TO UPDATE ARTIFACT TYPES
 //
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_update_type','title', $ath->getName()),'pagename'=>'tracker_admin_update_type','titlevals'=>array($ath->getName())));
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_update_type','title', $ath->getName())));
 
 		?>
 		<p>

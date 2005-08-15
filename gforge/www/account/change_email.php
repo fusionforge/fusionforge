@@ -29,9 +29,14 @@ session_require(array('isloggedin'=>1));
 
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
 	$newemail = getStringFromRequest('newemail');
 
 	if (!validate_email($newemail)) {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error($Language->getText('general','error'),$Language->getText('account_change_email','invalid_email'));
 	}
 
@@ -39,12 +44,15 @@ if (getStringFromRequest('submit')) {
 
 	$u =& user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
+   		form_release_key($_POST['form_key']);
    		exit_error('Error','Could Not Get User');
 	} elseif ($u->isError()) {
+		form_release_key($_POST['form_key']);
 		exit_error('Error',$u->getErrorMessage());
 	}
 
 	if (!$u->setNewEmailAndHash($newemail, $confirm_hash)) {
+		form_release_key($_POST['form_key']);
 		exit_error(
 			'Could Not Complete Operation',
 			$u->getErrorMessage()
@@ -70,6 +78,7 @@ echo $Language->getText('account_change_email', 'desc');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <?php echo $Language->getText('account_change_email','new_address') ?>
 <input type="text" name="newemail" maxlength="255" />
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />

@@ -395,10 +395,11 @@ class FRSPackage extends Error {
 			$this->setError('FRSPackage::update() Error On Update: '.db_error());
 			return false;
 		}
+
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
 			db_rollback();
-			$this->setError('FRSPackage::update() Error Updating Package: CouldnÂ´t fetch data');
+			$this->setError('FRSPackage::update() Error Updating Package: Couldn´t fetch data');
 			return false;
 		}
 		$newdirname = $this->getFileName();
@@ -413,7 +414,7 @@ class FRSPackage extends Error {
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
 					db_rollback();
-					$this->setError('FRSPackage::update() Error Updating Package: CouldnÂ´t rename dir');
+					$this->setError('FRSPackage::update() Error Updating Package: Couldn´t rename dir');
 					return false;
 				}
 			}

@@ -71,7 +71,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 
 $df->setLanguageID($language_id);
 
-docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'),'docman','',$g->getPublicName());
+docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'));
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1){

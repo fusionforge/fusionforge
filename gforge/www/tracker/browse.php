@@ -65,7 +65,7 @@ if (!$art_arr && $af->isError()) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-$ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
+$ath->header(array('atid'=>$ath->getID()));
 
 echo '
 <table width="60%" border="0">
@@ -194,6 +194,7 @@ if ($art_arr && count($art_arr) > 0) {
 	if ($IS_ADMIN) {
 		echo '
 		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
+		<input type="hidden" name="form_key" value="'.form_generate_key().'">
 		<input type="hidden" name="func" value="massupdate">';
 	}
 

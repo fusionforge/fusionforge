@@ -35,7 +35,7 @@ if (!$sys_use_people) {
 $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
 
-people_header(array('title'=>$Language->getText('people_help_wanted_latest','title'),'pagename'=>'people_helpwanted_latest'));
+people_header(array('title'=>$Language->getText('people_help_wanted_latest','title')));
 
 {
         echo '<p>';

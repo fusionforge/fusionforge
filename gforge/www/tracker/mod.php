@@ -46,6 +46,7 @@ if (session_loggedin()) {
 		</tr>
 <?php } ?>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="func" value="postmod">
 	<input type="hidden" name="$result[]"> 	
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID();

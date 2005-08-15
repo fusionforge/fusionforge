@@ -48,7 +48,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		site_project_header(array('title' => $this->Language->getText('search', 'title'), 'group' => $this->groupId, 'pagename' => 'search', 'toptab' => $this->topTab));
+		site_project_header(array('title' => $this->Language->getText('search', 'title'), 'group' => $this->groupId, 'toptab' => $this->topTab));
 		parent::writeHeader();
 	}
 	

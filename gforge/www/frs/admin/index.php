@@ -113,7 +113,7 @@ if (getStringFromRequest('submit')) {
 }
 
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id));
 
 $res=db_query("SELECT status_id,package_id,name AS package_name 
 	FROM frs_package WHERE group_id='$group_id'");

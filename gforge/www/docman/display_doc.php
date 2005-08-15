@@ -29,7 +29,7 @@ if ($docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 
-	docman_header($d->getName(),$d->getName(),'docman','',$g->getPublicName());
+	docman_header($d->getName(),$d->getName());
 	echo $Language->getText('docman_display_doc','docmoved',array($group_id,$docid));
 	docman_footer(array());
 } else {

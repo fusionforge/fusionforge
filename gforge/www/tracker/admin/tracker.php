@@ -3,7 +3,7 @@
 //  SHOW LINKS TO FUNCTIONS
 //
 
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','title').': '.$ath->getName(),'pagename'=>'tracker_admin','titlevals'=>array($ath->getName())));
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','title').': '.$ath->getName()));
 //
 //	Reference to build a selection box for a tracker like bugs, etc
 //

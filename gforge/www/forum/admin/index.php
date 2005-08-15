@@ -151,7 +151,7 @@ if ($group_id) {
 		/*
 			Show the form for adding forums
 		*/
-		forum_header(array('title'=>$Language->getText('forum_admin_addforum','title'),'pagename'=>'forum_admin_addforum','sectionvals'=>group_getname($group_id)));
+		forum_header(array('title'=>$Language->getText('forum_admin_addforum','title')));
 
 		echo '
 			<br>
@@ -284,7 +284,7 @@ if ($group_id) {
 			Show main page for choosing
 			either moderator or delete
 		*/
-		forum_header(array('title'=>$Language->getText('forum_admin','title'),'pagename'=>'forum_admin','sectionvals'=>group_getname($group_id)));
+		forum_header(array('title'=>$Language->getText('forum_admin','title')));
 
 		//
 		//	Add new forum

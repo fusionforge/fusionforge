@@ -709,6 +709,8 @@ exit	missing_parameters_body	Error - missing required parameters
 exit	missing_parameters_title	Error - missing parameters
 exit	disabled_title	Error - disabled feature.
 exit	disabled_body	The Site Administrator has turned off this feature.
+exit	double_submit_body	You Attempted To Double-submit this item. Please avoid double-clicking.
+exit	double_submit_title	Error - double submit
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	error_forum_not_found	Forum Not Found
 forum	error_invalid_group_forum_id	$1:: Invalid group_forum_id

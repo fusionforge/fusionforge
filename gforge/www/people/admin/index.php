@@ -104,7 +104,7 @@ if (user_ismember(1,'A')) {
 		/*
 			Show categories and blank row
 		*/
-		people_header(array ('title'=>'Add/Change Categories','pagename'=>'people_admin_people_cat'));
+		people_header(array ('title'=>'Add/Change Categories'));
 
 		/*
 			List of possible categories for this group
@@ -139,7 +139,7 @@ if (user_ismember(1,'A')) {
 		/*
 			Show people_groups and blank row
 		*/
-		people_header(array ('title'=>'Add/Change People Skills','pagename'=>'people_admin_people_skills'));
+		people_header(array ('title'=>'Add/Change People Skills'));
 
 		/*
 			List of possible people_groups for this group
@@ -174,7 +174,7 @@ if (user_ismember(1,'A')) {
 			Show main page
 		*/
 
-		people_header(array ('title'=>'People Administration','pagename'=>'people_admin'));
+		people_header(array ('title'=>'People Administration'));
 
 		echo '<p>
 			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">Add Job Categories</a><br />';

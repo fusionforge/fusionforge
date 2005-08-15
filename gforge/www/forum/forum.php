@@ -108,8 +108,7 @@ if ($forum_id) {
 		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}
 
-	forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
-	'sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
+	forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
 
 /**
  *

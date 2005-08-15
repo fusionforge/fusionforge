@@ -84,10 +84,7 @@ if ($group_id) {
 //
 	if(getIntFromGet('add_list')) {
 		mail_header(array(
-			'title' => $Language->getText('mail_admin_addlist', 'pagetitle'),
-			'pagename' => 'mail_admin_addlist'
-		));
-
+			'title' => $Language->getText('mail_admin_addlist', 'pagetitle')));
 		echo $Language->getText('mail_admin_addlist', 'list_information', array($GLOBALS['sys_lists_host']));
 		
 		$mlFactory = new MailingListFactory($Group);
@@ -161,9 +158,7 @@ if ($group_id) {
 		}
    	
 		mail_header(array(
-			'title' => $Language->getText('mail_admin_updatelist', 'pagetitle'),
-			'pagename' => 'mail_admin_updatelist'
-		));
+			'title' => $Language->getText('mail_admin_updatelist', 'pagetitle')));
 		?>
 		<h3><?php echo $mailingList->getName(); ?></h3>
 		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">
@@ -192,8 +187,7 @@ if ($group_id) {
 		}
 
 		mail_header(array(
-			'title' => $Language->getText('mail_admin', 'pagetitle'),
-			'pagename' => 'mail_admin')
+			'title' => $Language->getText('mail_admin', 'pagetitle'))
 		);
 
 		$mlArray =& $mlFactory->getMailingLists();

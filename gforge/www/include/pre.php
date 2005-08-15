@@ -92,6 +92,9 @@ require_once('www/include/exit.php');
 //various html libs like button bar, themable
 require_once('www/include/html.php');
 
+//forms key generation
+require_once('common/include/forms.php');
+
 // #### Connect to db
 
 db_connect();

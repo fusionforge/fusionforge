@@ -130,7 +130,7 @@ if (getStringFromRequest('submit')) {
 						$frsr->sendNotice();
 						$feedback .= $Language->getText('project_admin_qrs','file_released');
 
-						frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id));
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
@@ -156,7 +156,7 @@ if (getStringFromRequest('submit')) {
 
 }
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id));
 
 ?>
 

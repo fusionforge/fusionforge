@@ -36,11 +36,16 @@ if (!$u || !is_object($u)) {
 }
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
 	$old_passwd = getStringFromRequest('old_passwd');
 	$passwd = getStringFromRequest('passwd');
 	$passwd2 = getStringFromRequest('passwd2');
 
 	if ($u->getMD5Passwd() != md5($old_passwd)) {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('general','error'),
 			$Language->getText('account_change_pw','old_password_incorrect')
@@ -48,6 +53,7 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if (strlen($passwd)<6) {
+		form_release_key($_POST['form_key']);
 		exit_error(
 			$Language->getText('general','error'),
 			$Language->getText('account_change_pw','not_valid_password')
@@ -55,6 +61,7 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if ($passwd != $passwd2) {
+		form_release_key($_POST['form_key']);
 		exit_error(
 			$Language->getText('general','error'),
 			$Language->getText('account_change_pw','passwords_dont_match')
@@ -62,6 +69,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if (!$u->setPasswd($passwd)) {
+		form_release_key($_POST['form_key']);
 		exit_error(
 			$Language->getText('general','error'),
 			'Could not change password: '.$u->getErrorMessage()
@@ -84,6 +92,7 @@ if (getStringFromRequest('submit')) {
 	?>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<p><?php echo $Language->getText('account_change_pw','old_password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>
 	<p><?php echo $Language->getText('account_change_pw','new_password') ?>:

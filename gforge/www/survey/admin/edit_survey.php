@@ -32,7 +32,7 @@ require_once('www/survey/admin/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_edit','tilte'),'pagename'=>'survey_admin_edit_survey'));
+survey_header(array('title'=>$Language->getText('survey_edit','title')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<h1>" .$Language->getText('survey_edit','permission_denied')."</h1>";

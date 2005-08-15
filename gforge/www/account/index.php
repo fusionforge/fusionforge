@@ -37,6 +37,11 @@ if (!$u || !is_object($u)) {
 }
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
+
 	$firstname = getStringFromRequest('firstname');
 	$lastname = getStringFromRequest('lastname');
 	$language = getIntFromRequest('language');
@@ -72,6 +77,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {
+		form_release_key($_POST['form_key']);
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= $Language->getText('account','updated').'<br />';
@@ -86,7 +92,7 @@ if (getStringFromRequest('submit')) {
 site_user_header(array('title'=>$Language->getText('account_options', 'title')));
 
 echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-
+echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 echo $HTML->boxTop($Language->getText('account_options', 'title'));
 
 ?>
@@ -229,7 +235,7 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
 <?php 
 $hookParams['user']= user_get_object(user_getid());
-if (isset(getStringFromRequest('submit'))) {//if this is set, then the user has issued an Update
+if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 } else {
 	plugin_hook("userisactivecheckbox", $hookParams);

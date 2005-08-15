@@ -9,10 +9,11 @@
  *
  */
 
-$ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'pagename'=>'tracker','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName()) ));
+$ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 ?>
 
-<form action="<?php echo <?php echo getStringFromServer('PHP_SELF')?>"?aid=$aid&amp;group_id=$group_id"; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF')."?aid=$aid&amp;group_id=$group_id"; ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <input type="hidden" name="func" value="postdeleteartifact" />
 <input type="hidden" name="atid" value="<?php echo $atid; ?>" />
 

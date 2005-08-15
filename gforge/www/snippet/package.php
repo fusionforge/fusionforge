@@ -18,6 +18,9 @@ require_once('www/snippet/snippet_utils.php');
 if (session_loggedin()) {
 
 	if (getStringFromRequest('post_changes')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
 		$name = getStringFromRequest('name');
 		$description = getStringFromRequest('description');
 		$language = getIntFromRequest('language');
@@ -37,8 +40,9 @@ if (session_loggedin()) {
 			$result=db_query($sql);
 			if (!$result) {
 				//error in database
+				form_release_key($_POST['form_key']);
 				$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_insert');
-				snippet_header(array('title'=>$Language->getText('snippet_package','title'),'pagename'=>'snippet_package'));
+				snippet_header(array('title'=>$Language->getText('snippet_package','title')));
 				echo db_error();
 				snippet_footer(array());
 				exit;
@@ -56,7 +60,7 @@ if (session_loggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_version');
-					snippet_header(array('title'=>$Language->getText('snippet_package','title_new_snippet_package'),'pagename'=>'snippet_package'));
+					snippet_header(array('title'=>$Language->getText('snippet_package','title_new_snippet_package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -67,7 +71,7 @@ if (session_loggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>$Language->getText('snippet_package','add_snippet_to_package'),'pagename'=>'snippet_package'));
+					snippet_header(array('title'=>$Language->getText('snippet_package','add_snippet_to_package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -104,16 +108,18 @@ function show_add_snippet_box() {
 				}
 			}
 		} else {
+			form_release_key($_POST['form_key']);
 			exit_error($Language->getText('general','error'),$Language->getText('snippet_package','error_go_back_and_fill'));
 		}
 
 	}
-	snippet_header(array('title'=>$Language->getText('snippet_package','title'),'pagename'=>'snippet_package'));
+	snippet_header(array('title'=>$Language->getText('snippet_package','title')));
 
 	?>
 	</p><?php echo $Language->getText('snippet_package','you_can_group'); ?></p>
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />
 

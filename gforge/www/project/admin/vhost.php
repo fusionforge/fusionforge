@@ -102,7 +102,7 @@ if (getStringFromRequest('deletevhost')) {
 
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_vhost','title'),'group'=>$group->getID(),'pagename'=>'project_admin_vhost','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_vhost','title'),'group'=>$group->getID()));
 
 ?>
 

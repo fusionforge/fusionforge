@@ -41,6 +41,10 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 	case 'postadd' : {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
+
 		$user_email = getStringFromRequest('user_email');
 		$category_id = getIntFromRequest('category_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
@@ -56,6 +60,7 @@ switch (getStringFromRequest('func')) {
 		*/
 		$ah=new ArtifactHtml($ath);
 		if (!$ah || !is_object($ah)) {
+			form_release_key(getStringFromRequest('form_key'));
 			exit_error('ERROR','Artifact Could Not Be Created');
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
@@ -64,10 +69,12 @@ switch (getStringFromRequest('func')) {
 					$user_email=false;
 			} else {
 				if (!validate_email($user_email)) {
+					form_release_key(getStringFromRequest('form_key'));
 					exit_error('ERROR', $Language->getText('general','invalid_email'));
 				}
 			}
 			if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
+				form_release_key(getStringFromRequest('form_key'));
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				//
@@ -98,6 +105,10 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 	case 'massupdate' : {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
+
 		$artifact_id_list = getStringFromRequest('artifact_id_list');
 		$priority = getStringFromRequest('priority');
 		$status_id = getStringFromRequest('status_id');
@@ -199,6 +210,10 @@ switch (getStringFromRequest('func')) {
 			no one is hacking around, we override any fields they don't have
 			permission to change.
 		*/
+		if (!form_key_is_valid($_POST['form_key'])) {
+			exit_form_double_submit();
+		}	
+
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
 			exit_error('ERROR','Artifact Could Not Be Created');
@@ -366,6 +381,9 @@ switch (getStringFromRequest('func')) {
 	//
 
 	case 'postdeleteartifact' : {
+		if (!form_key_is_valid($_POST['form_key'])) {
+			exit_form_double_submit();
+		}
 		if ($ath->userIsAdmin()) {
 			$aid = getStringFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);

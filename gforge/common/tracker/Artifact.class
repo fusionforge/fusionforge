@@ -820,9 +820,7 @@ class Artifact extends Error {
 		//	Get a lock on this row in the database
 		//
 		$lock=db_query("SELECT * FROM artifact WHERE artifact_id='".$this->getID()."' FOR UPDATE");
-
 		$artifact_type_id = $this->ArtifactType->getID();
-
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
 		//	need to instantiate new ArtifactType obj and test perms
@@ -840,6 +838,7 @@ class Artifact extends Error {
 				db_rollback();
 				return false;
 			}
+			
 			//
 			//	Now set Assigned to 100 in the new ArtifactType
 			//
@@ -850,6 +849,8 @@ class Artifact extends Error {
 			$this->ArtifactType =& $newArtifactType;
 			$update = true;
 		}
+		
+		
 
 		$sqlu='';
 

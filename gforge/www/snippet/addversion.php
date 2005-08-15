@@ -32,6 +32,10 @@ if (session_loggedin()) {
 			handle inserting a new version of a snippet
 		*/
 		if (getStringFromRequest('post_changes')) {
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+				exit_form_double_submit();
+			}
+
 			$snippet_id = getStringFromRequest('snippet_id');
 			$changes = getStringFromRequest('changes');
 			$version = getStringFromRequest('version');
@@ -54,6 +58,7 @@ if (session_loggedin()) {
 					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_version_insert');
 					echo db_error();
 				} else {
+					form_release_key($_POST['form_key']);
 					$feedback .= $Language->getText('snippet_addversion','snippet_version_added_successfully');
 				}
 			} else {
@@ -61,12 +66,13 @@ if (session_loggedin()) {
 			}
 
 		}
-		snippet_header(array('title'=>$Language->getText('snippet_addversion','submit_a_new_snippet_version'),'pagename'=>'snippet_addversion'));
+		snippet_header(array('title'=>$Language->getText('snippet_addversion','submit_a_new_snippet_version')));
 
 		?>
 		<p><?php echo $Language->getText('snippet_addversion','if_you_have_modified_a_version'); ?></p>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="snippet" />
 		<input type="hidden" name="snippet_id" value="<?php echo $id; ?>" />
@@ -109,6 +115,10 @@ if (session_loggedin()) {
 		}
 
 		if (getStringFromRequest('post_changes')) {
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+				exit_form_double_submit();
+			}
+
 			$snippet_package_id = getIntFromRequest('snippet_package_id');
 			$changes = getStringFromRequest('changes');
 			$version = getStringFromRequest('version');
@@ -128,7 +138,7 @@ if (session_loggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_package_version_insert');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_submit_a_new_snippet_package'),'pagename'=>'snippet_addversion'));
+					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_submit_a_new_snippet_package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -139,7 +149,7 @@ if (session_loggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_add_snippet_to_package'),'pagename'=>'snippet_addversion'));
+					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_add_snippet_to_package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -173,11 +183,12 @@ function show_add_snippet_box() {
 				}
 
 			} else {
+				form_release_key($_POST['form_key']);
 				exit_error( $Language->getText('snippet_addversion','error_go_back_and_fill_in_all'));
 			}
 
 		}
-		snippet_header(array('title'=>$Language->getText('snippet_addverion','title_submit_a_new_snippet_version'),'pagename'=>'snippet_addversion'));
+		snippet_header(array('title'=>$Language->getText('snippet_addverion','title_submit_a_new_snippet_version')));
 
 		?>
 		</p>
@@ -185,6 +196,7 @@ function show_add_snippet_box() {
 		<?php echo $Language->getText('snippet_addversion','if_you_have_modified'); ?></p>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="package" />
 		<input type="hidden" name="snippet_package_id" value="<?php echo $id; ?>" />

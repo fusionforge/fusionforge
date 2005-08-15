@@ -14,7 +14,7 @@
 
 require_once('vote_function.php');
 
-$HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=>'users'));
+$HTML->header(array('title'=>$Language->getText('user_home','title')));
 
 ?>
 

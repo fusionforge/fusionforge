@@ -90,7 +90,7 @@ if (session_loggedin()) {
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>$Language->getText('news', 'title'),'pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
+	news_header(array('title'=>$Language->getText('news', 'title')));
 
 	$jsfunc = notepad_func();
 	$group = group_get_object($group_id);

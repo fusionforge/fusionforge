@@ -92,7 +92,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>$Language->getText('news_admin', 'title'),'pagename'=>'news_admin'));
+	news_header(array('title'=>$Language->getText('news_admin', 'title')));
 
 	if ($approve) {
 		/*
@@ -223,7 +223,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>$Language->getText('news_admin', 'title'),'pagename'=>'news_admin'));
+	news_header(array('title'=>$Language->getText('news_admin', 'title')));
 
 	if ($approve) {
 		/*

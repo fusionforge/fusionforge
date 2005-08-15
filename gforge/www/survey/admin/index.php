@@ -32,7 +32,7 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_admin_index','title'),'pagename'=>'survey_admin'));
+$sh->header(array('title'=>$Language->getText('survey_admin_index','title')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo '<h1>'.$Language->getText('survey_admin_index','permission_denied').'</h1>';

@@ -32,7 +32,7 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>'Survey Aggregate Results','pagename'=>'survey_admin_show_results_comments'));
+survey_header(array('title'=>'Survey Aggregate Results'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<h1>Permission Denied</h1>";

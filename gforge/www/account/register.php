@@ -63,6 +63,9 @@ if (getStringFromRequest('submit')) {
 		logic that used to be coded in this page
 
 	*/
+	if (!form_key_is_valid($_POST['form_key'])) {
+		exit_form_double_submit();
+	}	
 	$new_user = new User();
 	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
@@ -92,6 +95,7 @@ if (!isset($ccode) || empty($ccode)) {
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <p>
 <?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
 <input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />

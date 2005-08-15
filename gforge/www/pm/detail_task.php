@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'pagename'=>'pm_detailtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'group_project_id'=>$group_project_id));
 
 ?>
 

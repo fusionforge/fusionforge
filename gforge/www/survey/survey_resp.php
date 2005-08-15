@@ -40,7 +40,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_resp','title'),'pagename'=>'survey_survey_resp'));
+$sh->header(array('title'=>$Language->getText('survey_resp','title')));
 
 if (!$survey_id) {
 	/*

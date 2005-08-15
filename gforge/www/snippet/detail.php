@@ -29,7 +29,7 @@ if ($type=='snippet') {
 		Expand and show the code for the latest version
 	*/
 
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title'),'pagename'=>'snippet_detail'));
+	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
 
 	snippet_show_snippet_details($id);
 
@@ -122,7 +122,7 @@ if ($type=='snippet') {
 
 	*/
 
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title'),'pagename'=>'snippet_detail'));
+	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
 
 	snippet_show_package_details($id);
 
@@ -206,7 +206,7 @@ if ($type=='snippet') {
 		Show a specific version of a package and its specific snippet versions
 	*/
 	
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title'),'pagename'=>'snippet_detail'));
+	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
 
 	snippet_show_package_details($id);
 

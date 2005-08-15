@@ -45,7 +45,6 @@ function news_header($params) {
 	if ($group_id && ($group_id != $sys_news_group)) {
 		site_project_header($params);
 	} else {
-		$params['pagename']='news_main';
 		$HTML->header($params);
 	}
 	if ($group_id && ($group_id != $sys_news_group)) {

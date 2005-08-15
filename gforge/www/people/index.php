@@ -48,7 +48,7 @@ if ($group_id) {
 
 } else if ($category_id) {
 
-	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people_cat','titlevals'=>array(people_get_category_name($category_id))));
+	people_header(array('title'=>$Language->getText('people','title')));
 
 	echo '
 		<p>'.$Language->getText('people','click_job_titles').'</p>
@@ -57,7 +57,7 @@ if ($group_id) {
 
 } else {
 
-	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people'));
+	people_header(array('title'=>$Language->getText('people','title')));
 
 	echo $Language->getText('people','about_blurb', $GLOBALS['sys_name']);
 

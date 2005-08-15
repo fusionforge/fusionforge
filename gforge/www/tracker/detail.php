@@ -9,7 +9,7 @@
  * @version   $Id$
  */
 
-echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'pagename'=>'tracker_detail','atid'=>$ath->getID(),'sectionvals'=>array($ath->getName())));
+echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -81,7 +81,7 @@ echo notepad_func();
 			<br />
 			<?php echo $ah->showDetails(); ?>
             <?php if ($ath->allowsAnon() || session_loggedin()) { ?>
-
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 			<input type="hidden" name="func" value="postmod">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 			<p>

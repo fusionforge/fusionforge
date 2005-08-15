@@ -192,7 +192,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editimages','title'),'pagename'=>'project_admin_editimages','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_editimages','title')));
 
 echo '
 	<p>'.$Language->getText('project_admin_editimages','intro', array(sprintf("%.2f",$QUOTA/(1024*1024)))).'</p>

@@ -43,10 +43,7 @@ $form_pw = getStringFromRequest('form_pw');
 //
 if ($return_to) {
 	$tmpreturn=explode('?',$return_to);
-	if (!@is_file($sys_urlroot.$tmpreturn[0]) && 
-	    !@is_dir($sys_urlroot.$tmpreturn[0]) && 
-	    !(strpos($tmpreturn[0],'projects') == 1) && 
-	    !(strpos($tmpreturn[0], "/frs/download.php") == 0)) {
+	if (!@is_file($sys_urlroot.$tmpreturn[0]) && !@is_dir($sys_urlroot.$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1)) {
 		$return_to='';
 	}
 }
@@ -66,6 +63,9 @@ if (session_issecure()) {
 // ###### first check for valid login, if so, redirect
 
 if ($login) {
+	if (!form_key_is_valid($_POST['form_key'])) {
+		exit_form_double_submit();
+	}
 	$success=session_login_valid(strtolower($form_loginname),$form_pw);
 	if ($success) {
 		/*
@@ -89,10 +89,10 @@ if ($session_hash) {
 //echo "\n\n$session_hash";
 //echo "\n\nlogged in: ".session_loggedin();
 
-$HTML->header(array('title'=>'Login','pagename'=>'account_login'));
+$HTML->header(array('title'=>'Login'));
 
 if ($login && !$success) {
-		
+	form_release_key($_POST['form_key']);	
 	// Account Pending
 	if ($userstatus == "P") {
 		$feedback = $Language->getText('account_login', 'pending_account', array(htmlspecialchars($form_loginname)));
@@ -110,6 +110,7 @@ if ($login && !$success) {
 <span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span>
 </p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>

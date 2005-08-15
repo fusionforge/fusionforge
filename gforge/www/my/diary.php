@@ -37,6 +37,10 @@ if (!session_loggedin()) {
 	$diary_id = getIntFromRequest('diary_id');
 
 	if (getStringFromRequest('submit')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
+
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
 		// set $is_public
@@ -53,6 +57,7 @@ if (!session_loggedin()) {
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= $Language->getText('my_diary','diary_updated');
 			} else {
+				form_release_key($_POST['form_key']);
 				echo db_error();
 				$feedback .= $Language->getText('my_diary','nothing_updated');
 			}
@@ -100,6 +105,7 @@ if (!session_loggedin()) {
 					//since this is a private note
 				}
 			} else {
+				form_release_key($_POST['form_key']);
 				$feedback .= $Language->getText('my_diary','error_adding_item');
 				echo db_error();
 			}
@@ -129,13 +135,14 @@ if (!session_loggedin()) {
 		$info_str=$Language->getText('my_diary','add_new_entry');
 	}
 
-	echo site_user_header(array('title'=>$Language->getText('my_diary','title'),'pagename'=>'my_diary'));
+	echo site_user_header(array('title'=>$Language->getText('my_diary','title')));
 
 	echo '
 	<p>&nbsp;</p>
 	<h3>'. $info_str .'</h3>
 	<p />
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
+	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table>

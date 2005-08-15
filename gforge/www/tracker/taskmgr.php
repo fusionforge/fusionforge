@@ -72,8 +72,8 @@ if (getStringFromRequest('add_to_task')) {
 		exit_error('Error',$ptf->getErrorMessage());
 	}
 
-	$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
-		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
+	$ath->header(array('titlevals'=>array($ath->getName()),
+		'atid'=>$ath->getID()));
 
 	echo '
 		<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
@@ -124,8 +124,8 @@ if (getStringFromRequest('add_to_task')) {
 		exit_error('Error',$pgf->getErrorMessage());
 	}
 
-	$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
-		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
+	$ath->header(array('titlevals'=>array($ath->getName()),
+		'atid'=>$ath->getID()));
 
 	echo '<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p><form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">

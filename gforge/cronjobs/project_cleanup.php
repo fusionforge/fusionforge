@@ -27,6 +27,7 @@ require ('common/include/cron_utils.php');
 
 db_begin();
 
+
 #one hour ago for projects
 $then=(time()-3600);
 db_query("DELETE FROM groups WHERE status='I' and register_time < '$then'");
@@ -54,6 +55,11 @@ $err .= db_error();
 #3 weeks ago for jobs
 $then=(time()-604800*3);
 db_query("UPDATE people_job SET status_id = '3' where post_date < '$then'");
+$err .= db_error();
+
+#1 day ago for form keys
+$then=(time()-(60*60*24));
+db_query("DELETE FROM form_keys WHERE creation_date < '$then'");
 $err .= db_error();
 
 db_commit();

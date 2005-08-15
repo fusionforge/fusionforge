@@ -32,11 +32,16 @@
 require_once('pre.php');
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
 	$loginname = getStringFromRequest('loginname');
 
 	$u = user_get_object_by_name($loginname);
 
 	if (!$u || !is_object($u)){
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error($Language->getText('account_lostpw','invalid_user'),$Language->getText('account_lostpw','user_dont_exist'));
 	}
 
@@ -46,6 +51,7 @@ if (getStringFromRequest('submit')) {
 
 	$u->setNewEmailAndHash($u->getEmail(), $confirm_hash);
 	if ($u->isError()) {
+		form_release_key($_POST['form_key']);
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 
@@ -53,7 +59,7 @@ if (getStringFromRequest('submit')) {
 
 		util_send_message($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS['sys_name']),$message);
 
-		$HTML->header(array('title'=>"Lost Password Confirmation",'pagename'=>'account_lostpw'));
+		$HTML->header(array('title'=>"Lost Password Confirmation"));
 
 		echo $Language->getText('account_lostpw','notify');
 
@@ -63,12 +69,13 @@ if (getStringFromRequest('submit')) {
 }
 
 
-$HTML->header(array('title'=>"Lost Account Password",'pagename'=>'account_lostpw'));
+$HTML->header(array('title'=>"Lost Account Password"));
 
 echo $Language->getText('account_lostpw','warn');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
 <br />

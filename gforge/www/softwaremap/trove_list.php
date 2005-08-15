@@ -39,7 +39,7 @@ if (db_numrows($res_trove_cat) < 1) {
 	);
 }
 
-$HTML->header(array('title'=>$Language->getText('trove_list','title'),'pagename'=>'softwaremap'));
+$HTML->header(array('title'=>$Language->getText('trove_list','title')));
 
 echo'
 	<hr />';

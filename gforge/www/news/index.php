@@ -29,7 +29,7 @@ require_once('pre.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 
-news_header(array('title'=>$Language->getText('news', 'title'),'pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
+news_header(array('title'=>$Language->getText('news', 'title')));
 
 echo $Language->getText('news', 'choose');
 

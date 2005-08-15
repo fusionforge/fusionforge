@@ -51,6 +51,10 @@ if ($sys_project_reg_restricted) {
 session_require(array('isloggedin'=>'1'));
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
 	$full_name = trim(getStringFromRequest('full_name'));
 	$purpose = trim(getStringFromRequest('purpose'));
 	$license = trim(getStringFromRequest('license'));
@@ -61,6 +65,7 @@ if (getStringFromRequest('submit')) {
 	$feedback = "";
 
 	if ($sys_use_scm && !$scm) {
+		form_release_key($_POST['form_key']);
 		$feedback .= $Language->getText('register','scm_not_selected');
 	} else {
 		$scm_host = $sys_cvs_host;
@@ -85,9 +90,10 @@ if (getStringFromRequest('submit')) {
 			$res = $group->setPluginUse($scm,true);
 		}
 		if (!$res) {
+			form_release_key($_POST['form_key']);
 			$feedback .= $group->getErrorMessage();
 		} else {
-			$HTML->header(array('title'=>$Language->getText('register','registration_complete'),'pagename'=>'register_complete'));
+			$HTML->header(array('title'=>$Language->getText('register','registration_complete')));
 	
 			?>
 	
@@ -104,14 +110,14 @@ if (getStringFromRequest('submit')) {
 	session_redirect("/");
 }
 
-site_header(array('title'=>$Language->getText('register','project_information'),'pagename'=>'register_projectinfo'));
+site_header(array('title'=>$Language->getText('register','project_information')));
 ?>
 
 <p><?php echo $Language->getText('register','apply_for_registration') ?>
 </p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <?php echo $Language->getText('register','project_full_name') ?>
 
 <input size="40" maxlength="40" type=text name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>">

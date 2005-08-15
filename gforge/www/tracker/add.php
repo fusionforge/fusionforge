@@ -36,6 +36,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 	echo '<p>
 
 	<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<input type="hidden" name="func" value="postadd" />
 	<table>';
 	echo '

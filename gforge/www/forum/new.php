@@ -56,8 +56,7 @@ if ($forum_id && $group_id) {
 		if (!$f->allowAnonymous() && !$f->savePlace()) {
 			exit_error('Error',$f->getErrorMessage());
 		} else {
-			forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
-				'sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
+			forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
 			echo '<div align="center"><h3>'.$Language->getText('forum_message', 'thread').'</h3></div>';
 			$fh->showPostForm();
 			forum_footer(array());

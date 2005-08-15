@@ -73,4 +73,12 @@ function exit_disabled() {
 	exit_error($Language->getText('exit','disabled_title'),$Language->getText('exit','disabled_body'));
 }
 
+/**
+ * exit_form_double_submit() - Exit with double submit error.
+ */
+function exit_form_double_submit() {
+	global $Language;
+	exit_error($Language->getText('exit','double_submit_title'),$Language->getText('exit','double_submit_body'));
+}
+
 ?>

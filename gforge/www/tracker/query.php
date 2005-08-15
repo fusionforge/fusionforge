@@ -33,7 +33,12 @@ if (getStringFromRequest('submit')) {
 	//
 	//  Create a Saved Query
 	//
+		
 	if ($query_action == 1) {
+		if (!form_key_is_valid($_POST['form_key'])) {
+			exit_form_double_submit();
+		}
+		
 		$aq = new ArtifactQuery($ath);
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
@@ -70,6 +75,9 @@ if (getStringFromRequest('submit')) {
 	// Update the name and or fields of the displayed saved query
 	//
 	} elseif ($query_action == 3) {
+		if (!form_key_is_valid($_POST['form_key'])) {
+			exit_form_double_submit();
+		}
 		$aq = new ArtifactQuery($ath,$query_id);
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
@@ -101,6 +109,9 @@ if (getStringFromRequest('submit')) {
 	//	Delete the query
 	//
 	} elseif ($query_action == 5) {
+		if (!form_key_is_valid($_POST['form_key'])) {
+			exit_form_double_submit();
+		}
 		$aq = new ArtifactQuery($ath,$query_id);
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
@@ -203,6 +214,7 @@ echo '<html>
 
 <table border="3" cellpadding="4" rules="groups" frame="box">
 	<form action="'.getStringFromServer('PHP_SELF').'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
+	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<tr>
 		<td><span style="font-size:smaller">
 			<input type="submit" name="submit" value="'.$Language->getText('tracker','saved_queries').'" />

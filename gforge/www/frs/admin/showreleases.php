@@ -94,7 +94,7 @@ if (count($rs) < 1) {
 /*
 	Display a list of releases in this package
 */
-frs_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id));
 
 $title_arr=array();
 $title_arr[]=$Language->getText('project_admin_showreleases','package_name');

@@ -53,15 +53,13 @@ if ($group_id && $job_id) {
 		"AND people_job.job_id='$job_id' AND people_job.group_id='$group_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
-		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job'),'pagename'=>'people_viewjob'));
+		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job')));
 		echo db_error();
 		$feedback .= $Language->getText('people_viewjob','fetch_failed');
 		echo '<h2>'.$Language->getText('people_viewjob','no_such_posting').'</h2>';
 	} else {
 
-		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job'),'pagename'=>'people_viewjob',
-								'titlevals'=>array(db_result($result,0,'category_name'),db_result($result,0,'group_name')),
-								'sectionvals'=>array(db_result($result,0,'group_name'))));
+		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job')));
 
 //		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '

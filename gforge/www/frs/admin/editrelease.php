@@ -226,7 +226,7 @@ if (getStringFromRequest('step3')) {
 	}
 }
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','title'),'group'=>$group_id));
 /*
  * Show the forms for each step
  */

@@ -27,7 +27,7 @@ if ($user_id) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>$Language->getText('people_viewprofile','title'),'pagename'=>'people_viewprofile'));
+	people_header(array('title'=>$Language->getText('people_viewprofile','title')));
 
 	//for security, include group_id
 	$sql="SELECT * FROM users WHERE user_id='$user_id'";

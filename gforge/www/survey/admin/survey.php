@@ -33,7 +33,7 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>$Language->getText('survey_add_survey','title'),'pagename'=>'survey_admin_add_survey'));
+$sh->header(array('title'=>$Language->getText('survey_add_survey','title')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<h1>". $Language->getText('survey_add_question','permission_denied')."</h1>";

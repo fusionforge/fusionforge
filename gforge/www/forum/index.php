@@ -35,7 +35,7 @@ if ($group_id) {
 		exit_error($Language->getText('general','error'),$ff->getErrorMessage());
 	}
 
-	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
+	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ));
 
 	$farr =& $ff->getForums();
 

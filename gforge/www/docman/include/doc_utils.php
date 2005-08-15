@@ -49,7 +49,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 } //end display_groups_option
 
 
-function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='xyz') {
+function docman_header($title,$pagehead,$style='xyz') {
 	
 	global $group_id, $Language, $HTML, $sys_use_docman;
 
@@ -66,7 +66,7 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 		exit_error($Language->getText('general','error'),$Language->getText('docman','turned_off'));
 	}
 
-	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));
+	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
 	$menu_text=array();
 	$menu_links=array();

@@ -37,7 +37,7 @@ if (session_loggedin()) {
 		<html>
 		<body style="background-color:white">';
 	} else {
-		snippet_header(array('title'=>$Language->getText('add_snippet','title'),'pagename'=>'snippet_add_snippet_to_package'));
+		snippet_header(array('title'=>$Language->getText('add_snippet','title')));
 	}
 
 	if (!$snippet_package_version_id) {

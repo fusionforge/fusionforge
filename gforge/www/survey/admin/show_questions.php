@@ -31,7 +31,7 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_show_questions','title'),'pagename'=>'survey_admin_show_questions'));
+survey_header(array('title'=>$Language->getText('survey_show_questions','title')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<h1>".$Language->getText('survey_show_questions','permission_denied')."</h1>";

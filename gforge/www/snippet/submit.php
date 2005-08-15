@@ -18,6 +18,10 @@ require_once('www/snippet/snippet_utils.php');
 if (session_loggedin()) {
 
 	if (getStringFromRequest('post_changes')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
+
 		$name = getStringFromRequest('name');
 		$description = getStringFromRequest('description');
 		$language = getIntFromRequest('language');
@@ -58,17 +62,19 @@ if (session_loggedin()) {
 				}
 			}
 		} else {
+			form_release_key($_POST['form_key']);
 			exit_error('Error','Error - Go back and fill in all the information');
 		}
 
 	}
-	snippet_header(array('title'=>$Language->getText('snippet_submit','title'),'pagename'=>'snippet_submit'));
+	snippet_header(array('title'=>$Language->getText('snippet_submit','title')));
 
 	?>
 	<p><?php echo $Language->getText('snippet_submit','you_can_post'); ?>
 	</p>
 	<p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />
 

@@ -76,7 +76,7 @@ function snippet_mainpage() {
 	return $return;
 }
 
-snippet_header(array('title'=>$Language->getText('snippet_index','title'), 'header'=>'Snippet Library','pagename'=>'snippet'));
+snippet_header(array('title'=>$Language->getText('snippet_index','title'), 'header'=>'Snippet Library'));
 echo snippet_mainpage();
 snippet_footer(array());
 

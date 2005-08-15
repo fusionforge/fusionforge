@@ -21,7 +21,7 @@ require_once('note.php');
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');
 
-pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'pm_addtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_addtask','title'),'group_project_id'=>$group_project_id));
 echo notepad_func();
 ?>
 

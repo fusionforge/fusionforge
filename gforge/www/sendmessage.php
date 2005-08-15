@@ -51,6 +51,10 @@ if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
 
 
 if (getStringFromRequest('send_mail')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+
 	$subject = getStringFromRequest('subject');
 	$body = getStringFromRequest('body');
 	$name = getStringFromRequest('name');
@@ -76,7 +80,7 @@ if (getStringFromRequest('send_mail')) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' .$Language->getText('sendmessage','contact')   ,'pagename'=>'sendmessage','titlevals'=>array($to)));
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' .$Language->getText('sendmessage','contact')   ));
 		echo '<p>'.$Language->getText('sendmessage','message_sent').'.</p>';
 		$HTML->footer(array());
 		exit;
@@ -87,7 +91,7 @@ if (getStringFromRequest('send_mail')) {
 		$to=db_result($result,0,'email');
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '.$Language->getText('sendmessage','contact'),'pagename'=>'sendmessage','titlevals'=>array($touser)));
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '.$Language->getText('sendmessage','contact')));
 		echo '<p>'.$Language->getText('sendmessage','message_sent').'</p>';
 		$HTML->footer(array());
 		exit;
@@ -100,7 +104,7 @@ if ($toaddress) {
 	$titleaddress = db_result($result,0,'user_name');
 }
 
-$HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmessage','titlevals'=>array($titleaddress)));
+$HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
 ?>
 
@@ -108,6 +112,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 <?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
 <p />
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 

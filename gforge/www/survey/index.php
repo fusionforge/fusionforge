@@ -45,7 +45,7 @@ $user_id = user_getid();
 
 /* Show header */
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_index','title'),'pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
+$sh->header(array('title'=>$Language->getText('survey_index','title')));
 
 /* Show list of Servey */
 $sf = new SurveyFactory($g);

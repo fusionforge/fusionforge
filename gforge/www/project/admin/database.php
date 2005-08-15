@@ -135,7 +135,7 @@ if (getStringFromRequest('deletedbconfirm')) {
 
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_database','title').'','group'=>$group_id,'pagename'=>'project_admin_database','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_database','title').'','group'=>$group_id));
 
 // XXX ogi: where's deletedb defined?
 if ($deletedb == 1) {

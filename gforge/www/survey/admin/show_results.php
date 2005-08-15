@@ -52,7 +52,7 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 
 $is_admin_page='y';
-$sh->header(array('title'=>$Language->getText('survey_show_results','title'),'pagename'=>'survey_admin_show_results'));
+$sh->header(array('title'=>$Language->getText('survey_show_results','title')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<h1>".$Language->getText('survey_show_results','permission_denied')."</h1>";

@@ -88,7 +88,7 @@ if ($msg_id) {
 		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}
 
-	forum_header(array('title'=>db_result($result,0,'subject'),'pagename'=>'forum_message','forum_id'=>$forum_id));
+	forum_header(array('title'=>db_result($result,0,'subject'),'forum_id'=>$forum_id));
 
 	$title_arr=array();
 	$title_arr[]=$Language->getText('forum_message','message').': '.$msg_id;
@@ -183,7 +183,7 @@ if ($msg_id) {
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 
 } else {
-	forum_header(array('title'=>$Language->getText('forum_message','must_choose_message_title'),'pagename'=>'forum_message'));
+	forum_header(array('title'=>$Language->getText('forum_message','must_choose_message_title')));
 	echo '<h1>'.$Language->getText('forum_message','must_choose_message_body').'</h1>';
 
 }

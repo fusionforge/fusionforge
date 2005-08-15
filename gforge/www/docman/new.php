@@ -87,7 +87,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 } else {
-	docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'),'docman','',$g->getPublicName());
+	docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'));
 	?>
 	<p>
 	<?php echo $Language->getText('docman_new','intro') ?>

@@ -10,7 +10,7 @@
  */
 
 
-$ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'pagename'=>'tracker','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName()) ));
+$ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 
 ?>
 	<h2>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h2>
@@ -44,6 +44,7 @@ if (session_loggedin()) {
 		</tr>
 <?php } ?>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="func" value="postmod">
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 

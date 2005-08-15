@@ -147,7 +147,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>$Language->getText('people_editjob','title'),'pagename'=>'people_editjob'));
+	people_header(array('title'=>$Language->getText('people_editjob','title')));
 
 	//for security, include group_id
 	$sql="SELECT * FROM people_job WHERE job_id='$job_id' AND group_id='$group_id'";

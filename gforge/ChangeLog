@@ -1,3 +1,8 @@
+2005-08-12	Marcelo Mottalli	<marcelo@gforgegroup.com>
+
+	* Applied patch [#1391] by Sebastian Ubalde (double form submission checks), 
+	fixed conflicts with register_globals patch.
+
 2005-08-10  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* [#1022] register_globals=off patch is applied.

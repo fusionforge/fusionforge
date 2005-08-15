@@ -177,7 +177,7 @@ if ($add_cat && $group_project_id) {
 	if (!$pg->userIsAdmin()) {
 		exit_permission_denied();
 	}
-	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories_title'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories_title')));
 	echo "<h2>".$Language->getText('pm_admin_projects','add_categories_to').": ". $pg->getName() ."</h2>";
 
 	/*
@@ -241,7 +241,7 @@ if ($add_cat && $group_project_id) {
 	if (!$pg->userIsAdmin()) {
 		exit_permission_denied();
 	}
-	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories')));
 
 	echo '<h2>'.$Language->getText('pm_admin_projects','modify_category').': '. $pg->getName() .'</h2>';
 
@@ -278,7 +278,7 @@ if ($add_cat && $group_project_id) {
 		exit_permission_denied();
 	}
 
-	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_subprojects_title'),'pagename'=>'pm_admin_projects','sectionvals'=>group_getname($group_id)));
+	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_subprojects_title')));
 
 	?>
 	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?></p>
@@ -319,7 +319,7 @@ if ($add_cat && $group_project_id) {
 		exit_permission_denied();
 	}
 
-	pm_header(array('title'=>$Language->getText('pm_admin_projects','change_project_title'),'pagename'=>'pm_admin_update_pg','sectionvals'=>$g->getPublicName()));
+	pm_header(array('title'=>$Language->getText('pm_admin_projects','change_project_title')));
 
 	?>
 	<p><?php echo $Language->getText('pm_admin_projects','change_project_intro') ?></p>
@@ -407,7 +407,7 @@ if ($add_cat && $group_project_id) {
 	/*
 		Show main page
 	*/
-	pm_header(array('title'=>$Language->getText('pm_admin_projects','admin_title'),'pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
+	pm_header(array('title'=>$Language->getText('pm_admin_projects','admin_title')));
 
 	//
 	//	Show link to create new subproject

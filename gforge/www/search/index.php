@@ -66,7 +66,7 @@ $renderer = $searchManager->getSearchRenderer($type_of_search, $words, $offset, 
 if ($renderer) {
 	$renderer->flush();
 } else {
-	$HTML->header(array('title'=>$Language->getText('search', 'title'), 'pagename'=>'search'));
+	$HTML->header(array('title'=>$Language->getText('search', 'title')));
 	
 	echo '<h1>'.$Language->getText('search', 'error_invalid_search').'</h1>';
 	

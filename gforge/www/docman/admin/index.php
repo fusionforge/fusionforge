@@ -158,7 +158,7 @@ if ($editdoc && $docid) {
 	}
 
 	
-	docman_header($Language->getText('docman_admin_editdocs','section'),$Language->getText('docman_admin_editdocs','title'),'docman_admin_docedit','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_editdocs','section'),$Language->getText('docman_admin_editdocs','title'),'');
 
 	?>
 		<br />
@@ -277,7 +277,7 @@ if ($editdoc && $docid) {
 //
 } elseif ($addgroup) {
 
-	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'docman_admin_addgroups','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'');
 
 	echo "<h1>".$Language->getText('docman_admin_addgroups','title')."</h1>";
 	
@@ -357,7 +357,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$dgh->getErrorMessage());
 	}
 
-	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'');
 	?>
 	<p><strong><?php echo $Language->getText('docman_admin_editgroups','edit_group') ?></strong></p>
 	<form name="editgroup" action="index.php?editgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
@@ -391,7 +391,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 	
-	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'');
 ?>
 		<p>
 		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
@@ -428,9 +428,9 @@ if ($editdoc && $docid) {
 //	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
 
-	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'docman_admin','admin',$g->getPublicName(),'admin');
+	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'admin');
 
-	?>
+	?> 
 	<h3><?php echo $Language->getText('docman_admin','title') ?></h3>
 	<p>
 	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;addgroup=1"><?php echo $Language->getText('docman_admin','add_edit_docgroups') ?></a>

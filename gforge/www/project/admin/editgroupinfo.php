@@ -95,7 +95,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID()));
 
 if (getStringFromRequest('submit')) {
 	$hookParams['group']=$group_id;

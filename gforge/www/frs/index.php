@@ -64,7 +64,7 @@ if ( $num_packages < 1) {
 	exit_error($Language->getText('project_showfiles','error_no_packages_defined_title'),$Language->getText('project_showfiles','error_no_packages_defined_text'));
 }
 
-frs_header(array('title'=>$Language->getText('project_showfiles','title'),'group'=>$group_id,'pagename'=>'project_showfiles','sectionvals'=>group_getname($group_id)));
+frs_header(array('title'=>$Language->getText('project_showfiles','title'),'group'=>$group_id));
 
 echo '<p>'.$Language->getText('project_showfiles','intro').' ';
 if ($release_id) {

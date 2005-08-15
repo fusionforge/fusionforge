@@ -56,7 +56,7 @@ $_order=$ptf->order;
 $_category_id=$ptf->category;
 $_view=$ptf->view_type;
 
-pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
+pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'group_project_id'=>$group_project_id));
 
 /*
 		creating a custom technician box which includes "any" and "unassigned"

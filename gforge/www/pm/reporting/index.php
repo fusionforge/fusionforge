@@ -61,7 +61,7 @@ function pm_reporting_header($group_id) {
 function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$comment="") {
 		global $bar_colors;
 
-	   	pm_header(array ("title"=>$title,'pagename'=>'pm_reporting'));
+	   	pm_header(array ("title"=>$title));
 	   	pm_reporting_header($group_id);
 	   	echo "\n<h1>$title</h1>";
 
@@ -90,7 +90,7 @@ if ($what) {
 		$start = getStringFromRequest('start');
 		$end = getStringFromRequest('end');
 
-		pm_header(array ("title"=>$Language->getText('pm_reporting','aging_report'),'pagename'=>'pm_reporting'));
+		pm_header(array ("title"=>$Language->getText('pm_reporting','aging_report')));
 		pm_reporting_header($group_id);
 		echo "\n<h1>".$Language->getText('pm_reporting','aging_report')."</h1>";
 
@@ -235,7 +235,7 @@ if ($what) {
 	/*
 		Show main page
 	*/
-	pm_header(array ("title"=>$page_title,'pagename'=>'pm_reporting'));
+	pm_header(array ("title"=>$page_title));
 
 	pm_reporting_header($group_id);
 

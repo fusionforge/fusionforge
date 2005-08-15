@@ -128,7 +128,7 @@ if (getStringFromRequest('submit')) {
 
 $group->clearError();
 
-project_admin_header(array('title'=>$Language->getText('project_admin','title', array($group->getPublicName())),'group'=>$group->getID(),'pagename'=>'project_admin','sectionvals'=>array($group->getPublicName())));
+project_admin_header(array('title'=>$Language->getText('project_admin','title', array($group->getPublicName())),'group'=>$group->getID()));
 
 /*
 	Show top box listing trove and other info

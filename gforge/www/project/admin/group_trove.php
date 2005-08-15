@@ -52,7 +52,8 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 		for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
 			$varname = 'root'.$i;
 			// check to see if exists first, then insert into DB
-			$category = getStringFromRequest($varname) [$rootnode];
+			//@TODO change this to use the escaping utils
+			$category = $_REQUEST[$varname][$rootnode];
 			if ($category) {
 				trove_setnode($group_id,$category,$rootnode);
 			}

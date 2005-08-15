@@ -51,7 +51,7 @@ if (!session_loggedin()) {
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>$Language->getText('survey','title'),'pagename'=>'survey_survey'));
+$sh->header(array('title'=>$Language->getText('survey','title')));
 
 if (!$survey_id) {
     echo "<h1>".$Language->getText('survey','for_some_reason')."</h1>";

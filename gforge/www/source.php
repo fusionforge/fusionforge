@@ -41,7 +41,7 @@ if (!file_exists($fname) || @is_dir($fname)) {
 	exit_error($Language->getText('source','file_not_found'), $Language->getText('source','file_not_found_text'));
 }
 
-$HTML->header(array('title'=>$Language->getText('source','source_of',$file),'pagename'=>'viewsource'));
+$HTML->header(array('title'=>$Language->getText('source','source_of',$file)));
 
 show_source($fname);
 

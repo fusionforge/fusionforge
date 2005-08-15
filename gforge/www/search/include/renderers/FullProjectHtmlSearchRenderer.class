@@ -71,7 +71,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
-		site_project_header(array('title' => $this->Language->getText('advanced_search', 'project_search'), 'group' => $this->groupId, 'pagename' => 'advanced search', ));
+		site_project_header(array('title' => $this->Language->getText('advanced_search', 'project_search'), 'group' => $this->groupId, ));
 		echo $this->getResult();
 	}
 	
