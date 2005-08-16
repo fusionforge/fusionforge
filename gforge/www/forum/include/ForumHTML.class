@@ -314,6 +314,7 @@ class ForumHTML extends Error {
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 			<table>
 			<tr>
 			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />

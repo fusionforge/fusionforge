@@ -47,6 +47,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		<p>
 		<form action="/people/editjob.php" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<input type="hidden" name="form_key" value="' . form_generate_key() . '">
 		<strong>'.$Language->getText('people','category').':</strong>'.utils_requiredField().'<br /></p>
 		'. people_job_category_box('category_id') .'
 		<p>

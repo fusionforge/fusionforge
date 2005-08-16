@@ -40,9 +40,14 @@ if ($group_id) {
 		if (getStringFromRequest('add_list') == 'y') {
 			$mailingList = new MailingList($Group);
 			
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+				exit_form_double_submit();
+			}
 			if(!$mailingList || !is_object($mailingList)) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general', 'error'), $Language->getText('mail_admin', 'error_getting_list'));
 			} elseif($mailingList->isError()) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general', 'error'), $mailingList->getErrorMessage());
 			}
 			
@@ -51,6 +56,7 @@ if ($group_id) {
 				getStringFromPost('description'),
 				getIntFromPost('is_public', 1)
 			)) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general', 'error'), $mailingList->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('mail_admin_addlist', 'list_added');
@@ -129,6 +135,7 @@ if ($group_id) {
 		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id ?>">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 			<p><strong><?php echo $Language->getText('mail_admin_addlist', 'form_name'); ?></strong><br />
 			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo $GLOBALS['sys_lists_host']; ?></strong><br /></p>
 			<p>

@@ -26,7 +26,7 @@ function displayUserSkills($user_id, $allowEdit) {
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();
-		$feedback .= 'No skills listed ';
+		$feedback = 'No skills listed ';
 		echo '<tr><td>This user has not entered any skills.</td></tr>';
 	} else {
 		

@@ -51,12 +51,16 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		if (!$title || !$description || $category_id==100) {
 			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
 		$sql="INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) ".
 			"VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$feedback .= $Language->getText('people_editjob','job_insert_failed');
 			echo db_error();
+			form_release_key($_POST['form_key']);
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
 			$feedback .= $Language->getText('people_editjob','job_insert_ok');
@@ -75,10 +79,10 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			"WHERE job_id='$job_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$feedback .= $Language->getText('people_editjob','job_update_no');
+			$feedback = $Language->getText('people_editjob','job_update_no');
 			echo db_error();
 		} else {
-			$feedback .= $Language->getText('people_editjob','job_update_ok');
+			$feedback = $Language->getText('people_editjob','job_update_ok');
 		}
 
 } else if (getStringFromRequest('add_to_job_inventory')) {

@@ -26,6 +26,8 @@ require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
 $msg_id = getIntFromRequest('msg_id');
+$total_rows = getIntFromRequest('total_rows');
+$ret_val = getIntFromRequest('ret_val');
 if ($msg_id) {
 
 	/*
@@ -122,7 +124,7 @@ if ($msg_id) {
 	$title_arr[]=$Language->getText('forum_forum','author');
 	$title_arr[]=$Language->getText('forum_forum','date');
 
-	$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
+	$ret_val = $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=count($msg_arr[0]);
 
@@ -171,7 +173,7 @@ if ($msg_id) {
 
 	$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
-	echo $ret_val;
+		echo $ret_val;
 
 	/*
 		Show post followup form

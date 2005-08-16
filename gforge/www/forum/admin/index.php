@@ -30,6 +30,7 @@ require_once('common/forum/ForumMessage.class');
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
 $deleteforum = getStringFromRequest('deleteforum');
+$feedback = getStringFromRequest('feedback');
 
 if ($group_id) {
 	//
@@ -99,6 +100,9 @@ if ($group_id) {
 			}
 
 		} else if (getStringFromRequest('add_forum')) {
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+				exit_form_double_submit();
+			}
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
 			$is_public = getStringFromRequest('is_public');
@@ -108,15 +112,19 @@ if ($group_id) {
 				Adding forums to this group
 			*/
 			if (!$p->isForumAdmin()) {
+				form_release_key($_POST['form_key']);
 				exit_permission_denied();
 			}
 			$f=new Forum($g);
 			if (!$f || !is_object($f)) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
 			} elseif ($f->isError()) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			}
 			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous)) {
+				form_release_key($_POST['form_key']);
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('forum_admin_addforum','forum_created');
@@ -159,6 +167,7 @@ if ($group_id) {
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
+			<input type="hidden" name="form_key" value="' . form_generate_key() . '">
 			<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
 			<input type="text" name="forum_name" value="" size="20" maxlength="30" /><br />
 			<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />

@@ -29,14 +29,14 @@
 	Written by dtype Oct 1999
 */
 
+require_once('pre.php');
+
 $user_id = getStringFromRequest('user_id');
 $form_dev = getStringFromRequest('form_dev');
 
 if (!$user_id) {
 	$user_id=$form_dev;
 }
-
-require_once('pre.php');
 
 header("Location: /users/". user_getname($user_id) ."/");
 

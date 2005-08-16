@@ -44,11 +44,14 @@ if (user_ismember(1,'A')) {
 
 		if (getStringFromRequest('people_cat')) {
 			$cat_name = getStringFromRequest('cat_name');
-
+			if (!form_key_is_valid($_POST['form_key'])) {
+				exit_form_double_submit();
+			}
 			$sql="INSERT INTO people_job_category (name) VALUES ('$cat_name')";
 			$result=db_query($sql);
 			if (!$result) {
 				echo db_error();
+				form_release_key($_POST['form_key']);
 				$feedback .= ' Error inserting value ';
 			}
 
@@ -56,11 +59,14 @@ if (user_ismember(1,'A')) {
 
 		} else if (getStringFromRequest('people_skills')) {
 			$skill_name = getStringFromRequest('skill_name');
-
+			if (!form_key_is_valid($_POST['form_key'])) {
+				exit_form_double_submit();
+			}
 			$sql="INSERT INTO people_skill (name) VALUES ('$skill_name')";
 			$result=db_query($sql);
 			if (!$result) {
 				echo db_error();
+				form_release_key($_POST['form_key']);
 				$feedback .= ' Error inserting value ';
 			}
 
@@ -124,6 +130,7 @@ if (user_ismember(1,'A')) {
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
+		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 		<h4>New Category Name:</h4>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" /><br />
 		<p>
@@ -158,6 +165,7 @@ if (user_ismember(1,'A')) {
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
+		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 		<h4>New Skill Name:</h4>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" /><br />
 		<p>

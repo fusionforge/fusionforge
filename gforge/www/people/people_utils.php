@@ -368,7 +368,7 @@ function people_show_category_table() {
 	$title_arr=array();
 	$title_arr[]=$Language->getText('people','category');;
 
-	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
+	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 
 /*
 	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". 
@@ -438,7 +438,7 @@ function people_show_job_list($result) {
 	$title_arr[]=$Language->getText('people','date_opened');
 	$title_arr[]= $Language->getText('people','project',$GLOBALS['sys_name']);
 
-	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
+	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {

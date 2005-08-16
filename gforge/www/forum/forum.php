@@ -28,6 +28,9 @@ require_once('common/forum/ForumMessage.class');
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');
 $thread_id = getIntFromRequest('thread_id');
+$offset = getIntFromRequest('offset');
+$max_rows = getIntFromRequest('max_rows');
+$set = getIntFromRequest('set');
 
 if ($forum_id) {
 
@@ -61,18 +64,24 @@ if ($forum_id) {
 		if necessary, insert a new message into the forum
 	*/
 	if (getStringFromRequest('post_message')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
 		$subject = getStringFromRequest('subject');
 		$body = getStringFromRequest('body');
 		$is_followup_to = getStringFromRequest('is_followup_to');
 
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
+			form_release_key($_POST['form_key']);
 			exit_error($Language->getText('general','error'), "Error getting new ForumMessage");
 		} elseif ($fm->isError()) {
+			form_release_key($_POST['form_key']);
 			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to) || $fm->isError()) {
+			form_release_key($_POST['form_key']);
 			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('forum_forum','postsuccess');
@@ -87,8 +96,10 @@ if ($forum_id) {
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
+		form_release_key($_POST['form_key']);
 		exit_error($Language->getText('general','error'), "Error getting new ForumMessageFactory");
 	} elseif ($fmf->isError()) {
+		form_release_key($_POST['form_key']);
 		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
 	}
 
