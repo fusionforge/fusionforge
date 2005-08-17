@@ -38,10 +38,16 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	// XXX ogi: What's $rm_id?
+	 if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	 }
 	group_add_history ('Changed Trove',$rm_id,$group_id);
 
 	// there is at least a $root1[xxx]
-	while (list($rootnode,$value) = each(getStringFromRequest('root1'))) {
+	$allroots = array();
+	$allroots = getStringFromRequest('root1');
+	//$eachroot = ;//must make this bypass because it wouldn´t compile otherwise
+	while (list($rootnode,$value) = each($allroots)) {
 		// check for array, then clear each root node for group
 		db_query("
 			DELETE FROM trove_group_link
@@ -49,11 +55,12 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 			AND trove_cat_root='$rootnode'
 		");
 		
-		for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
+		for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 			$varname = 'root'.$i;
 			// check to see if exists first, then insert into DB
 			//@TODO change this to use the escaping utils
-			$category = $_REQUEST[$varname][$rootnode];
+			$var_aux = getStringFromRequest($varname);
+			$category = $var_aux[$rootnode];
 			if ($category) {
 				trove_setnode($group_id,$category,$rootnode);
 			}
@@ -81,7 +88,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 		WHERE group_id='$group_id'
 		AND trove_cat_root='$catroot'");
 
-	for ($i=1;$i<=$GLOBALS['TROVE_MAXPERROOT'];$i++) {
+	for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 		// each drop down, consisting of all cats in each root
 		$name= "root$i"."[$catroot]";
 		// see if we have one for selection
@@ -95,7 +102,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 }
 
 ?>
-
+<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_group_trove','update_changes') ?>" /></p>
 </form>
