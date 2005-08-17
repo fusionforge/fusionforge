@@ -30,6 +30,7 @@ if (session_loggedin()) {
 		$type = getStringFromRequest('type');
 		$version = getStringFromRequest('version');
 		$code = getStringFromRequest('code');
+		$changes = getStringFromRequest('changes');
 
 		/*
 			Create a new snippet entry, then create a new snippet version entry
