@@ -51,7 +51,7 @@ if (user_ismember(1,'A')) {
 			$result=db_query($sql);
 			if (!$result) {
 				echo db_error();
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				$feedback .= ' Error inserting value ';
 			}
 
@@ -66,7 +66,7 @@ if (user_ismember(1,'A')) {
 			$result=db_query($sql);
 			if (!$result) {
 				echo db_error();
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				$feedback .= ' Error inserting value ';
 			}
 

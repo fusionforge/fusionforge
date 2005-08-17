@@ -40,7 +40,7 @@ if (session_loggedin()) {
 			$result=db_query($sql);
 			if (!$result) {
 				//error in database
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_insert');
 				snippet_header(array('title'=>$Language->getText('snippet_package','title')));
 				echo db_error();
@@ -108,7 +108,7 @@ function show_add_snippet_box() {
 				}
 			}
 		} else {
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 			exit_error($Language->getText('general','error'),$Language->getText('snippet_package','error_go_back_and_fill'));
 		}
 

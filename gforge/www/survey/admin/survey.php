@@ -71,7 +71,7 @@ if (getStringFromRequest('updown')=="Y") {
 /* Error on previous transactions? */
 if ($s->isError()) {
     $feedback = $s->getErrorMessage();
-    form_release_key($_POST['form_key']);
+    form_release_key(getStringFromRequest("form_key"));
 } 
 
 echo ($sh->ShowAddSurveyForm($s));

@@ -112,19 +112,19 @@ if ($group_id) {
 				Adding forums to this group
 			*/
 			if (!$p->isForumAdmin()) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_permission_denied();
 			}
 			$f=new Forum($g);
 			if (!$f || !is_object($f)) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
 			} elseif ($f->isError()) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			}
 			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous)) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('forum_admin_addforum','forum_created');

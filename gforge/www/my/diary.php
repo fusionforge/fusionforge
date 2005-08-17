@@ -57,7 +57,7 @@ if (!session_loggedin()) {
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= $Language->getText('my_diary','diary_updated');
 			} else {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				echo db_error();
 				$feedback .= $Language->getText('my_diary','nothing_updated');
 			}
@@ -105,7 +105,7 @@ if (!session_loggedin()) {
 					//since this is a private note
 				}
 			} else {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				$feedback .= $Language->getText('my_diary','error_adding_item');
 				echo db_error();
 			}

@@ -65,7 +65,7 @@ if (getStringFromRequest('submit')) {
 	$feedback = "";
 
 	if ($sys_use_scm && !$scm) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest("form_key"));
 		$feedback .= $Language->getText('register','scm_not_selected');
 	} else {
 		$scm_host = $sys_cvs_host;
@@ -90,7 +90,7 @@ if (getStringFromRequest('submit')) {
 			$res = $group->setPluginUse($scm,true);
 		}
 		if (!$res) {
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$HTML->header(array('title'=>$Language->getText('register','registration_complete')));

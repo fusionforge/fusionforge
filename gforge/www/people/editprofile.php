@@ -37,7 +37,7 @@ if (session_loggedin()) {
 			"WHERE user_id='".user_getid()."'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 			$feedback .= $Language->getText('people_editprofile','update_failed');
 			echo db_error();
 		} else {
@@ -84,7 +84,7 @@ if (session_loggedin()) {
 			   
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
-					form_release_key($_POST['form_key']);
+					form_release_key(getStringFromRequest("form_key"));
 					echo db_error();
 					$feedback .= $Language->getText('people_editprofile','failed_to_add_skill');
 					echo '<h2>'.$Language->getText('people_editprofile','failed_to_add_skill').'<h2>';
@@ -93,7 +93,7 @@ if (session_loggedin()) {
 				}
 			}
 		} else {
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 			exit_error($Language->getText('people_editprofile','error'),$Language->getText('people_editprofile','fill_all_required_fields'));
 		}
 	}

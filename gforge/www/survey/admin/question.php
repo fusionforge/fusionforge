@@ -75,7 +75,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     /* Error */
     if ( $sq->isError()) {
 	$msg = $sq->getErrorMessage();
-	form_release_key($_POST['form_key']);
+	form_release_key(getStringFromRequest("form_key"));
     }
     
     echo "<H3>".$msg ."</H3>";

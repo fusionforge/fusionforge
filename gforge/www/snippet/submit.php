@@ -63,7 +63,7 @@ if (session_loggedin()) {
 				}
 			}
 		} else {
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 			exit_error('Error','Error - Go back and fill in all the information');
 		}
 

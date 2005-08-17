@@ -58,7 +58,7 @@ if (session_loggedin()) {
 					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_version_insert');
 					echo db_error();
 				} else {
-					form_release_key($_POST['form_key']);
+					form_release_key(getStringFromRequest("form_key"));
 					$feedback .= $Language->getText('snippet_addversion','snippet_version_added_successfully');
 				}
 			} else {
@@ -183,7 +183,7 @@ function show_add_snippet_box() {
 				}
 
 			} else {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error( $Language->getText('snippet_addversion','error_go_back_and_fill_in_all'));
 			}
 

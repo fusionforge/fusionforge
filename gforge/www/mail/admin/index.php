@@ -44,10 +44,10 @@ if ($group_id) {
 				exit_form_double_submit();
 			}
 			if(!$mailingList || !is_object($mailingList)) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general', 'error'), $Language->getText('mail_admin', 'error_getting_list'));
 			} elseif($mailingList->isError()) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general', 'error'), $mailingList->getErrorMessage());
 			}
 			
@@ -56,7 +56,7 @@ if ($group_id) {
 				getStringFromPost('description'),
 				getIntFromPost('is_public', 1)
 			)) {
-				form_release_key($_POST['form_key']);
+				form_release_key(getStringFromRequest("form_key"));
 				exit_error($Language->getText('general', 'error'), $mailingList->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('mail_admin_addlist', 'list_added');

@@ -60,7 +60,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		if (!$result || db_affected_rows($result) < 1) {
 			$feedback .= $Language->getText('people_editjob','job_insert_failed');
 			echo db_error();
-			form_release_key($_POST['form_key']);
+			form_release_key(getStringFromRequest("form_key"));
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
 			$feedback .= $Language->getText('people_editjob','job_insert_ok');
