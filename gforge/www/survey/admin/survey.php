@@ -42,7 +42,10 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 }
 
 if (getStringFromRequest('post')=="Y") {
-    $survey_title = getStringFromRequest('survey_title');
+    if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+	$survey_title = getStringFromRequest('survey_title');
     $to_add = getStringFromRequest('to_add');
     $to_del = getStringFromRequest('to_del');
     $is_active = getStringFromRequest('is_active');
@@ -68,6 +71,7 @@ if (getStringFromRequest('updown')=="Y") {
 /* Error on previous transactions? */
 if ($s->isError()) {
     $feedback = $s->getErrorMessage();
+    form_release_key($_POST['form_key']);
 } 
 
 echo ($sh->ShowAddSurveyForm($s));

@@ -120,7 +120,7 @@ class Survey extends Error {
 		/* Make old style survey string from array: 1, 2, 3, ..., n */
 		$survey_questions = $this->_makeQuestionString($add_questions);
 
-		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
+		$sql="insert into surveys (survey_title,group_id,survey_questions,is_active) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions','$is_active')";
 
 		$result=db_query($sql);
 		if (!$result) {

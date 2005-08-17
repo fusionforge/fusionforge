@@ -37,6 +37,8 @@ require_once('www/survey/include/SurveyHTML.class');
 
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
+$graph = getStringFromRequest('graph');
+$show_comment = getStringFromRequest('show_comment');
 
 /* We need a group_id */ 
 if (!$group_id) {

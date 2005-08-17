@@ -16,6 +16,7 @@ require_once('www/survey/include/SurveyHTML.class');
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $question_id = getIntFromRequest('question_id');
+$question = getStringFromRequest('question');
 $question_type = getStringFromRequest('question_type');
 
 /* We need a group_id */ 
@@ -63,13 +64,18 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 	$sq->update($question, $question_type);
 	$msg = $Language->getText('survey_edit_question','update_successful');
     } else { /* adding new question */
-	$sq->create($question, $question_type);
+	$question = getStringFromRequest('question');
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+    $sq->create($question, $question_type);
 	$msg = $Language->getText('survey_add_question', 'question_added'); 
     }
     
     /* Error */
     if ( $sq->isError()) {
 	$msg = $sq->getErrorMessage();
+	form_release_key($_POST['form_key']);
     }
     
     echo "<H3>".$msg ."</H3>";
