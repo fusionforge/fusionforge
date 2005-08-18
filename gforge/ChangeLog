@@ -1,3 +1,9 @@
+2005-08-18	Francisco Gimeno <francisco@gforgegroup.com>
+
+	* cronjobs/cron-cvs/cvs.php: added support for plugins
+	* gforge-plugin-cvstracker/include/cvstrackerPlugin.class: add cvs.php
+	support
+	
 2005-08-16	Leonel Corso <leonel@gforgegroup.com>, Marcelo Mottalli <marcelo@gforgegroup.com>,
 Daniel Perez <daniel@gforgegroup.com>
 	
