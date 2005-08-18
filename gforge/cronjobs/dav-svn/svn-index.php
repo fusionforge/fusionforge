@@ -1,6 +1,6 @@
 <?php
  
-require_once('/usr/share/gforge/www/include/squal_pre.php');    // Initial db and session library, opens session
+require_once('squal_pre.php');    // Initial db and session library, opens session
 ?>
 <html> 
  <head> 
