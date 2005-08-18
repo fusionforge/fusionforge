@@ -28,6 +28,10 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+require_once('common/include/SCM.class') ;
+
+setup_plugin_manager () ;
+
 $use_cvs_acl = false;
 $maincvsroot = "/cvsroot";
 
@@ -69,8 +73,8 @@ function getCvsFile($repos,$file) {
 function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
 	$actual_dir = getcwd();
 	chdir(dirname($file));	
-        system("cvs -d ".$repos." ci -m \"".$message."\" ".basename($file));
-        // unlink (basename($file));
+	system("cvs -d ".$repos." ci -m \"".$message."\" ".basename($file));
+	// unlink (basename($file));
 	chdir($actual_dir);
 }
 
@@ -153,7 +157,7 @@ function addProjectRepositories() {
 		/*
 			Simply call cvscreate.sh
 		*/
-		$repositoryPath = $maincvsroot.db_result($res,$i,'unix_group_name');
+		$repositoryPath = $maincvsroot."/".db_result($res,$i,'unix_group_name');
 		if (is_dir($repositoryPath)) {
 			$writersContent = '';
 			$readersContent = '';
@@ -172,7 +176,6 @@ function addProjectRepositories() {
 			writeFile($repositoryPath.'/CVSROOT/readers', $readersContent);
 			writeFile($repositoryPath.'/CVSROOT/passwd', $passwdContent);
 			addsyncmail(db_result($res,$i,'unix_group_name'));
-
 			$hookParams['group_id']=db_result($res,$i,'group_id');
 			$hookParams['file_name']=$repositoryPath;
 			plugin_hook("update_cvs_repository",$hookParams);
