@@ -48,6 +48,16 @@ function getStringFromRequest($key, $defaultValue = '') {
 }
 
 /**
+ * getArrayFromRequest - get an array from REQUEST
+ * @param	string $key	Key of the wanted value
+ * @param	string $defaultValue	if we can't find the wanted value, it returns the default value
+ * @return	array	The value
+ */
+function getArrayFromRequest($key, $defaultValue = array()) {
+	return _getArrayFromArray(_getRequestArray(), $key, $defaultValue);
+}
+
+/**
  * getIntFromPost - get an int from POST
  *
  * @param string $key key of the wanted value
@@ -180,14 +190,31 @@ function _getIntFromArray(& $array, $key, $defaultValue = 0) {
 }
 
 /**
- * _getIntFromArray - get an int from an array
+ * _getStringFromArray - get a string from an array
  *
  * @param array $array the array
  * @param string $key the key of the wanted value
  * @param int $defaultValue an int which is returned if we can't find the key in the array
- * @return int the wanted value
+ * @return string the wanted value
  */
 function _getStringFromArray(& $array, $key, $defaultValue = '') {
+	if(isset($array[$key])) {
+		return $array[$key];
+	}
+	else {
+		return $defaultValue;
+	}
+}
+
+/**
+ * _getArrayFromArray - get an array from another array
+ *
+ * @param array $array the array
+ * @param string $key the key of the wanted value
+ * @param int $defaultValue an array which is returned if we can't find the key in the array
+ * @return string the wanted value
+ */
+function _getArrayFromArray(& $array, $key, $defaultValue = array()) {
 	if(isset($array[$key])) {
 		return $array[$key];
 	}
