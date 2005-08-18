@@ -66,6 +66,7 @@ if (!$frsp || !is_object($frsp)) {
 //
 //
 $release_id = getIntFromRequest('release_id');
+$func = getStringFromRequest('func');
 if ($func=='delete_release' && $release_id) {
 	$sure = getStringFromRequest('sure');
 	$really_sure = getStringFromRequest('really_sure');

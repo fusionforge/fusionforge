@@ -82,13 +82,16 @@ if (getStringFromRequest('submit')) {
 
 	} elseif ($func=='delete_package' && $package_id) {
 
-		//create a new package
+		//delete a package
 		$frsp = new FRSPackage($project,$package_id);
 		if (!$frsp || !is_object($frsp)) {
 			exit_error('Error','Could Not Get FRS Package');
 		} elseif ($frsp->isError()) {
 			exit_error('Error',$frsp->getErrorMessage());
 		}
+		
+		$sure = getIntFromRequest("sure");
+		$really_sure = getIntFromRequest("really_sure");
 		if (!$frsp->delete($sure,$really_sure)) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {

@@ -33,23 +33,29 @@ require_once('www/admin/admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
 	$mail_type = getStringFromRequest('mail_type');
 	$mail_message = getStringFromRequest('mail_message');
 	$mail_subject = getStringFromRequest('mail_subject');
 
 	if (!$mail_type) {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('admin_massmail','missing_parameter_select_target')
 		);
 	}
 
 	if (!trim($mail_message)) {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('admin_massmail','missing_parameter_empty_message')
 		);
 	}
 
 	if (trim($mail_subject) == '['.$GLOBALS['sys_name'].']') {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('admin_massmail','missing_parameter_proper_subject')
 		);
@@ -61,6 +67,7 @@ if (getStringFromRequest('submit')) {
 	");
 
 	if (!$res || db_affected_rows($res)<1) {
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('admin_massmail','error_scheduling_mailing') .db_error()
 		);
@@ -91,6 +98,7 @@ print '
 
 print '
 <form action="'.getStringFromServer('PHP_SELF').'" method="post">'
+.'<input type="hidden" name="form_key" value="'.form_generate_key().'">'
 .'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(

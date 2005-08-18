@@ -28,6 +28,7 @@
 require_once('pre.php');    
 require_once('www/scm/include/scm_utils.php');    
 
+$group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$group_id));
 
 $hook_params = array () ;

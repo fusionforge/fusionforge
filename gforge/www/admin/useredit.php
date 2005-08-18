@@ -61,7 +61,7 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 
     //XXX use_shell
 	if (!$u->setEmail($email)
-		|| !$u->setShell($shell)
+		|| ($sys_use_shell && !$u->setShell($shell))
 		|| !$u->setStatus($status)) {
 		exit_error(
 			$Language->getText('admin_useredit','could_not_complete_operation'),

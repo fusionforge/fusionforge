@@ -1,3 +1,8 @@
+2005-08-16	Leonel Corso <leonel@gforgegroup.com>, Marcelo Mottalli <marcelo@gforgegroup.com>,
+Daniel Perez <daniel@gforgegroup.com>
+	
+	* Major bug fixes in register_globals patch [#1022] and forms patch [#1391]
+
 2005-08-12	Marcelo Mottalli	<marcelo@gforgegroup.com>
 
 	* Applied patch [#1391] by Sebastian Ubalde (double form submission checks), 

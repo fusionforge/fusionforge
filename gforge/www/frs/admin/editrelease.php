@@ -73,7 +73,7 @@ if (!$frsr || !is_object($frsr)) {
 }
 
 //we make sure we are not receiving $sys_ftp_upload_dir by POST or GET, to prevent security problems
-$sys_ftp_upload_dir = getStringFromRequest("sys_ftp_upload_dir");
+global $sys_ftp_upload_dir;
 if (!$sys_ftp_upload_dir) {
 	exit_error('Error','External sys_ftp_upload_dir detected');
 }
@@ -97,7 +97,7 @@ if (getStringFromRequest('step1')) {
 	$exec_changes = true;
 
 	// Check for uploaded release notes
-	if ($uploaded_notes != "" && $uploaded_notes != "none") {
+	if ($uploaded_notes["tmp_name"]) {
 		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
@@ -177,6 +177,7 @@ if (getStringFromRequest('step2')) {
 
 // Edit/Delete files in a release
 if (getStringFromRequest('step3')) {
+	$step3 = getStringFromRequest('step3');
 	$file_id = getIntFromRequest('file_id');
 	$processor_id = getIntFromRequest('processor_id');
 	$type_id = getIntFromRequest('type_id');

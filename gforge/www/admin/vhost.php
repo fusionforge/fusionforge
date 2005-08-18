@@ -39,13 +39,12 @@ if (!$sys_use_project_vhost) {
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-$group_id = getIntFromRequest('group_id');
-
 if (getStringFromRequest('add')) {
 	$groupname = getStringFromRequest('groupname');
 	$vhost_name = getStringFromRequest('vhost_name');
+	//$group_id = getIntFromRequest('group_id');
 
-	if ($group_id) {
+	if ($groupname) {
 
 		$group = &group_get_object_by_name($groupname);
 		if (!$group || !is_object($group)) {
@@ -53,6 +52,8 @@ if (getStringFromRequest('add')) {
 		} elseif ($group->isError()) {
 			exit_error('Error',$group->getErrorMessage());
 		}
+		
+		$group_id = $group->getID();
 
 		if (valid_hostname($vhost_name)) {
 

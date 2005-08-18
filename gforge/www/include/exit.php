@@ -15,7 +15,7 @@
  * @param		string	Error title
  * @param		string	Error text
  */
-function exit_error($title,$text) {
+function exit_error($title,$text="") {
 	global $HTML,$group_id, $Language;
 	$HTML->header(array('title'=>$Language->getText('exit','exiting_with_error'),'group'=>$group_id));
 	print '<h2><span style="color:#FF3333">'.$title.'</span></h2><p>'.htmlspecialchars($text) .'</p>';

@@ -88,7 +88,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 			</tr>
 
 		<?php
-		
+		$i=0;
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 			print	'<tr ' . $HTML->boxGetAltRowStyle($i) . '>'

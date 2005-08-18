@@ -28,6 +28,9 @@
 
 require_once('pre.php');
 
+$group_id = getIntFromGet("group_id");
+$form_grp = getIntFromGet("form_grp");
+
 if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }

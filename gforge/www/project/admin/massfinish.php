@@ -32,6 +32,8 @@ require_once('www/include/role_utils.php');
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
+$accumulated_ids = getStringFromRequest("accumulated_ids");
+
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error('Error','Could Not Get Group');

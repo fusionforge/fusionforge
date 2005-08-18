@@ -54,14 +54,16 @@ if (!$accumulated_ids) {
 	$accumulated_ids =& explode(',',$accumulated_ids);
 }
 
-$newids = getStringFromRequest('newids');
+$newids = getArrayFromRequest('newids');
 if (count($newids) > 0) {
 	if (count($accumulated_ids) > 0) {
-		$accumulated_ids =& array_merge($accumulated_ids,$newids);
+		$accumulated_ids = array_merge($accumulated_ids,$newids);
 	} else {
 		$accumulated_ids=$newids;
 	}
 }
+$accumulated_ids = array_unique($accumulated_ids);
+
 if (getStringFromRequest('finished')) {
 	header("Location: massfinish.php?group_id=$group_id&accumulated_ids=".implode(',',$accumulated_ids));
 }
@@ -101,11 +103,15 @@ if (!$res || db_numrows($res) < 1) {
 	//	Everything is built on the multi-dimensial arrays in the Role object
 	//
 	for ($i=0; $i<db_numrows($res); $i++) {
-
+		$uid = db_result($res,$i,'user_id');
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>
 			<td>'.db_result($res,$i,'lastname').', '.db_result($res,$i,'firstname').'</td>
 			<td>'.db_result($res,$i,'user_name').'</td>
-			<td><input type="checkbox" name="newids[]" value="'. db_result($res,$i,'user_id') .'"></td></tr>';
+			<td><input type="checkbox" name="newids[]" value="'. $uid .'"';
+		if (in_array($uid, $accumulated_ids)) {
+			echo ' checked="checked"';
+		}
+		echo '></td></tr>';
 
 	}
 

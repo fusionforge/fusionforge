@@ -32,6 +32,10 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 // ########################################################
 
 if (getStringFromRequest('submit')) {
+	if (!form_key_is_valid(getStringFromRequest("form_key"))) {
+		exit_form_double_submit();
+	}
+	
 	$form_parent = getStringFromRequest('form_parent');
 	$form_shortname = getStringFromRequest('form_shortname');
 	$form_fullname = getStringFromRequest('form_fullname');
@@ -54,6 +58,7 @@ if (getStringFromRequest('submit')) {
 		");
 
 		if (!$res || db_affected_rows($res)<1) {
+			form_release_key(getStringFromRequest("form_key"));
 			exit_error(
 				$Language->getText('admin_trove_cat_add','error_in_trove_openration'),
 				db_error()
@@ -62,7 +67,7 @@ if (getStringFromRequest('submit')) {
 	} 
 
 	// update full paths now
-        trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
+	trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 
@@ -73,6 +78,7 @@ site_admin_header(array('title'=>$Language->getText('admin_trove_cat_add','title
 <h3><?php echo $Language->getText('admin_trove_cat_add','add_new_trove_category'); ?></h3>
 
 <form action="trove_cat_add.php" method="post">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <p><?php echo $Language->getText('admin_trove_cat_add','parent_category'); ?>:<?php echo utils_requiredField(); ?>
 <br /><select name="form_parent">
 
@@ -81,7 +87,8 @@ site_admin_header(array('title'=>$Language->getText('admin_trove_cat_add','title
 // generate list of possible parents
 // <paul@zootweb.com> 4/2/2003 - If we were given a parent trove use it
 // in the "Parent Category" box otherwise give them the complete list.
-if (isset($parent_trove_cat_id)) {
+$parent_trove_cat_id = getIntFromRequest("parent_trove_cat_id", -1);
+if ($parent_trove_cat_id != -1) {
 	if ($parent_trove_cat_id == 0) {
 		print ('<option value="0">root</option>\n');
 	} else {

@@ -144,7 +144,7 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $Language->getText('project_admin_editimages','file_deleted');
 		}
 
-	} else if ($edit) {
+	} else if (getStringFromRequest("edit")) {
 		if ($description == "") {
 			$feedback .= $Language->getText('project_admin_editimages','file_description_required').'<b />';
 		} else {
@@ -199,6 +199,7 @@ echo '
 	<p>
 ';
 
+$mode = getStringFromGet("mode");
 if ($mode == "edit") {
 	$result=db_query("	SELECT *
 				FROM db_images

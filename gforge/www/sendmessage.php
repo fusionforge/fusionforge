@@ -64,6 +64,7 @@ if (getStringFromRequest('send_mail')) {
 		/*
 			force them to enter all vars
 		*/
+		form_release_key(getStringFromRequest('form_key'));
 		exit_missing_param();
 	}
 	

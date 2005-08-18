@@ -52,7 +52,7 @@ $rows=db_numrows($result);
 $more=0;
 if ($rows>$limit) {
 	$rows=$limit;
-        $more=1;
+	$more=1;
 }
 
 if ($rows < 1) {
@@ -62,7 +62,7 @@ if ($rows < 1) {
 		echo '<h2>'.$Language->getText('news', 'nonews').'</h2>';
 	}
 	echo '
-		<p>' . $Language->getText('news', 'noitems') . '</p>';;
+		<p>' . $Language->getText('news', 'noitems') . '</p>';
 	echo db_error();
 } else {
 	echo '<table width="100%" border="0">

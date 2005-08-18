@@ -38,9 +38,9 @@ $approve = getStringFromRequest('approve');
 $status = getIntFromRequest('status');
 $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
+$id = getIntFromRequest('id');
 
 if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
-	$id = getIntFromRequest('id');
 	$status = getIntFromRequest('status');
 	$summary = getStringFromRequest('summary');
 	$details = getStringFromRequest('details');
@@ -267,7 +267,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			Show list of waiting news items
 		*/
 
-	        $old_date = time()-60*60*24*30;
+		$old_date = time()-60*60*24*30;
 		$sql_pending= "
 			SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name

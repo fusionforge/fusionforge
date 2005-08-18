@@ -84,7 +84,8 @@ if (getStringFromRequest('submit')) {
 	session_redirect("/admin/trove/trove_cat_list.php");
 }
 
-if ($GLOBALS["delete"]) {
+if (getStringFromRequest("delete")) {
+	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
 	if ($form_trove_cat_id==$default_trove_cat){
 		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete'));
 	}
@@ -115,6 +116,8 @@ if ($GLOBALS["delete"]) {
 	Main Code
 */
 
+$trove_cat_id = getIntFromRequest("trove_cat_id");
+
 $res_cat = db_query("SELECT * FROM trove_cat WHERE trove_cat_id=$trove_cat_id");
 if (db_numrows($res_cat)<1) {
 	exit_error( $Language->getText('admin_trove_cat_edit','no_such_category'));
@@ -132,8 +135,8 @@ site_admin_header(array('title'=>$Language->getText('admin_trove_cat_edit','titl
 <br /><select name="form_parent">
 
 <?php
-// generate list of possible parents
-$res_parent = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
+// generate list of possible parents (a category can't be a parent of itself)
+$res_parent = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id <> ".$trove_cat_id);
 
 // Place the root node at the start of the list
 print('<option value="0"');

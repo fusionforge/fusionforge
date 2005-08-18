@@ -36,21 +36,26 @@ function admin_table_add($table, $unit, $primary_key) {
 
 	// This query may return no rows, but the field names are needed.
 	$result = db_query('SELECT * FROM '.$table.' WHERE '.$primary_key.'=0');
+	$fields = array();
 
 	if ($result) {
 		$cols = db_numfields($result);
 
 		echo $Language->getText('admin_admin_table', 'create_new_below', array(getUnitLabel($unit))).'
 			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
+			<input type="hidden" name="form_key" value="'.form_generate_key().'">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
 			$fieldname = db_fieldname($result, $i);
+			$fields[] = $fieldname;
 
 			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
 			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
 		}
-		echo '</table><input type="submit" value="'.$Language->getText('general', 'add').'" /></form>
+		echo '</table><input type="submit" value="'.$Language->getText('general', 'add').'" />
+			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'">
+			</form>
 			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
 			</form>';
@@ -67,17 +72,25 @@ function admin_table_add($table, $unit, $primary_key) {
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_postadd($table, $unit, $primary_key) {
-	global $HTTP_POST_VARS, $Language;
+	global $Language;
+	
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+		exit_form_double_submit();
+	}
+	
+	$field_list = getStringFromRequest('__fields__');
+	$fields = split(",", $field_list);
+	$values = array();
+	foreach ($fields as $field) {
+		$values[] = "'".getStringFromPost($field)."'";
+	}
 
-	$sql = "INSERT INTO $table ("
-		. join(',', array_keys($HTTP_POST_VARS))
-		. ") VALUES ('"
-		. htmlspecialchars(join("','", array_values($HTTP_POST_VARS)))
-		. "')";
+	$sql = "INSERT INTO $table (".$field_list.") VALUES (".implode(",", $values).")";
 
 	if (db_query($sql)) {
 		echo $Language->getText('admin_admin_table', 'successfully_added', array(ucfirst(getUnitLabel($unit))));
 	} else {
+		form_release_key(getStringFromRequest('form_key'));
 		echo db_error();
 	}
 }
@@ -292,9 +305,7 @@ echo '<h3>'.$Language->getText('admin_admin_table', 'title', array(ucwords(getUn
 <p><a href="/admin/">'.$Language->getText('admin_admin_table', 'site_admin_home').'</a></p>
 <p>&nbsp;</p>';
 
-$table = getStringFromRequest('table');
-$unit = getStringFromRequest('unit');
-$primary_key = getStringFromRequest('primary_key');
+// $table, $unit and $primary_key are variables passed from the parent scripts
 $id = getStringFromRequest('id');
 
 switch (getStringFromRequest('function')) {

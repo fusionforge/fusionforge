@@ -93,14 +93,13 @@ if (getStringFromRequest('submit')) {
 	} else {
 		$feedback .= $Language->getText('project_admin_editgroupinfo','group_updated');
 	}
-}
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID()));
-
-if (getStringFromRequest('submit')) {
+	// This is done so plugins can enable/disable themselves from the project
 	$hookParams['group']=$group_id;
 	plugin_hook("groupisactivecheckboxpost",$hookParams);
 }
+
+project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID()));
 
 /* NOT ACTIVE YET
 

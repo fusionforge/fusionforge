@@ -45,7 +45,7 @@ if (getStringFromRequest('submit')) {
 	$groupname = getStringFromRequest('groupname');
 	$dbname = getStringFromRequest('dbname');
 
-	if ($group_id) {
+	if ($groupname) {
 
 		$group =& group_get_object_by_name($groupname);
 		if (!$group || !is_object($group)) {
@@ -53,12 +53,13 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			exit_error('Error',$group->getErrorMessage());
 		}
-
+		
+		$group_id = $group->getID();
 
 		$user =& session_get_user();
-		if (!$u || !is_object($u)) {
+		if (!$user || !is_object($user)) {
 			exit_error('Error','Could Not Get User');
-		} elseif ($u->isError()) {
+		} elseif ($user->isError()) {
 			exit_error('Error',$u->getErrorMessage());
 		}
 
@@ -71,7 +72,7 @@ if (getStringFromRequest('submit')) {
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= $Language->getText('admin_database','error_adding_database') .db_error();
 		} else {
-			$feedback .= $Language->getText('admin_database','group'). "<em>".$group->getUnixName()."</em>" .$Language->getText('admin_database','added_already_active_database');
+			$feedback .= $Language->getText('admin_database','group'). " <em>".$group->getUnixName()."</em>" .$Language->getText('admin_database','added_already_active_database');
 		}
 
 	} else {

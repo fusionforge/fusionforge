@@ -30,6 +30,12 @@ require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once('common/reporting/ReportProjectAct.class');
 
+$SPAN = getStringFromRequest("SPAN");
+$area = getStringFromRequest("area");
+$g_id = getStringFromRequest("g_id");
+$start = getStringFromRequest("start");
+$end = getStringFromRequest("end");
+
 if (!$SPAN) {
 	$SPAN=1;
 }

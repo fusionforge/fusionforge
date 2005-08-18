@@ -38,7 +38,6 @@ if (!$a || !is_object($a)) {
 //	Add a relationship from this artifact to an existing task
 //
 if (getStringFromRequest('add_to_task')) {
-	$group = getStringFromRequest('group');
 	$offset = getStringFromRequest('offset');
 	$_order = getStringFromRequest('_order');
 	$max_rows = getStringFromRequest('max_rows');
@@ -46,6 +45,8 @@ if (getStringFromRequest('add_to_task')) {
 	$_assigned_to = getStringFromRequest('_assigned_to');
 	$_status = getStringFromRequest('_status');
 	$_category_id = getStringFromRequest('_category_id');
+	
+	// $group object is created in tracker.php
 
 	$pg=new ProjectGroup($group,$group_project_id);
 	if (!$pg || !is_object($pg)) {

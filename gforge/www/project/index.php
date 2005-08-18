@@ -18,6 +18,7 @@ require_once('pre.php');
 	Project Summary Page
 	Written by dtype Oct. 1999
 */
+$group_id = getIntFromRequest("group_id");
 
 if ((!$group_id) && $form_grp) {
 	$group_id=$form_grp;

@@ -31,7 +31,7 @@ function site_admin_header($params) {
 }
 
 function site_admin_footer($vals=0) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $feedback;
 	echo html_feedback_bottom($feedback);
 	$HTML->footer(array());
 }
