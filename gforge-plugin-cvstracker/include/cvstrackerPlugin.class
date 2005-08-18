@@ -38,6 +38,7 @@ class cvstrackerPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
 		$this->hooks[] = "task_extra_detail";
+		$this->hooks[] = "update_cvs_repository";
 	}
 
 	/**
@@ -153,6 +154,75 @@ class cvstrackerPlugin extends Plugin {
 			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
 	}
 
+
+	/**
+	* Function to add cvstracker lines to a loginfo file
+	*
+	* @param   string  $path The filename of loginfo
+	*
+	*/
+	function addCvsTrackerToFile($path) {
+		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
+		
+		$FOut = fopen($path, "a");
+		if($FOut) {
+			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
+			if ( $cvs_binary_version == "1.12" ) {
+				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
+					" ".$sys_plugins_path."/cvstracker/bin/post.php".
+					" %r %p %{sVv} )\n";
+			}
+			if ( $cvs_binary_version == "1.11") {
+				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
+					" ".$sys_plugins_path."/cvstracker/bin/post.php".
+					" %r %{sVv} )\n";
+			}
+			fwrite($FOut,$Line);
+			fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
+			fclose($FOut);
+		}
+	}
+
+	/**
+	* Retrieve a file into a temporary directory from a CVS server
+	*
+	* @param String $repos Repository Name
+	* @param String $file File Name
+	*
+	* return String the FileName in the working repository
+	*/
+	function getCvsFile($repos,$file) {
+		$actual_dir = getcwd();
+		$tempdirname = tempnam("/tmp","cvstracker");
+		if (!$tempdirname) 
+			return false;
+		if (!unlink($tempdirname))
+			return false;
+
+		// Create the temporary directory and returns its name.
+		if (!mkdir($tempdirname))
+			return false;
+
+		if (!chdir($tempdirname))
+			return false;
+		system("cvs -d ".$repos." co ".$file);
+		
+		chdir($actual_dir);
+		return $tempdirname.$file;
+	}
+
+	/**
+	* putCvsFile commit a file to the repository
+	*
+	* @param String $repos Repository
+	* @param String $file to commit
+	* @param String $message to commit
+	*/
+	function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
+		system("cvs -d ".$repos." ci -m \"".$message."\" ".$file);
+		unlink ($file);
+	}
+
 	/**
 	* The function to be called for a Hook
 	*
@@ -200,6 +270,30 @@ class cvstrackerPlugin extends Plugin {
 				" AND plugin_cvstracker_data_master.holder_id=".
 				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
 			$this->getCommitEntries($Query, $group_id);
+		} elseif ($hookname == "update_cvs_repository") {
+			$Group = group_get_object($params["group_id"]);
+			if ($Group->usesPlugin("cvstracker")) {
+				$LineFound=FALSE;
+				$FIn = fopen(getCvsFile( $params["file_name"],
+					"CVSROOT/loginfo"),"r");
+				if ($FIn) {
+					while (!feof($FIn))  {
+						$Line = fgets ($FIn);
+						if(!preg_match("/^#/", $Line) &&
+							preg_match("/cvstracker/",$Line)) {
+								$LineFound = TRUE;
+							}
+				 	}
+				}
+				fclose($FIn);
+				if($LineFound==FALSE) {
+					$newfile=getCvsFile($params["file_name"],
+						 "CVSROOT/loginfo");
+					$this->addCvsTrackerToFile($newfile);
+					$this->putCvsFile($params["file_name"],
+						$newfile);
+				}
+			}
 		}
 	}
 }
