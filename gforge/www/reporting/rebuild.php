@@ -34,22 +34,27 @@ session_require( array('group'=>$sys_stats_group,'A') );
 
 global $Language;
 
-echo report_header($Language->getText('reporting_rebuild','title'));
-
+	echo report_header($Language->getText('reporting_rebuild','title'));
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
+		
+
 
 	$r = new ReportSetup();
 
 	if (!$r->initialSetup()) {
 		echo $r->getErrorMessage();
+		form_release_key(getStringFromRequest("form_key"));
 	} else {
 		Header("Location: index.php?feedback=Successfully+Rebuilt");
 	}
 
 }
+	
 	echo $Language->getText('reporting_rebuild','message');
 ?>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+
 <input type="checkbox" name="im_sure" value="1"><?php echo $Language->getText('reporting_rebuild','imsure'); ?><p>
 <p>
 <input type="submit" name="submit" value="<?php echo $Language->getText('reporting_rebuild','pressonlyonce'); ?>">

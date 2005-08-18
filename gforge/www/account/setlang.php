@@ -25,6 +25,7 @@
 
 require_once('pre.php');
 
+$language_id=getStringFromRequest('language_id');
 setcookie('cookie_language_id',$language_id,(time()+2592000),'/','',0);
 $cookie_language_id = $language_id;
 

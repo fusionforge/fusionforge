@@ -100,9 +100,43 @@ class DocumentGroupFactory extends Error {
 		$count = count($this->flat_groups);
 		for ($i=0; $i < $count; $i++) {
 			$this->nested_groups["".$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
+			
 		}
+
 		
 		return $this->nested_groups;
+
+	}
+		/**
+	 *	getDocumentGroups - Return an array of DocumentGroup objects.
+	 *
+	 *	@return	array	The array of DocumentGroup.
+	 */
+	function &getDocumentGroups() {
+		if ($this->flat_groups) {
+			return $this->flat_groups;
+		}
+		
+		$sql="SELECT * FROM doc_groups
+		WHERE group_id='".$this->Group->getID()."' 
+		ORDER BY groupname ASC";
+
+		$result=db_query($sql);
+		$rows = db_numrows($result);
+		
+		if (!$result || $rows < 1) {
+			$this->setError('No Groups Found '.db_error());
+			return false;
+		} else {
+			while ($arr = db_fetch_array($result)) {
+				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);
+			}
+		}
+		
+
+		
+		return $this->flat_groups;
+
 	}
 }
 

@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+
 require_once('pre.php');    // Initial db and session library, opens session
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');

@@ -16,6 +16,11 @@
 require_once('pre.php');
 require_once('site_stats_utils.php');
 
+$report=getStringFromRequest('report');
+$orderby=getStringFromRequest('orderby'); 
+$projects=getIntFromRequest('projects'); 
+$trovecatid=getIntFromRequest('trovecatid');
+
 // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 

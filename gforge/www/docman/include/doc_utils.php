@@ -153,6 +153,11 @@ function docman_footer($params) {
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
 	global $selected_doc_group_id,$Language;
 
+	$selected_doc_group_id=getIntFromRequest('selected_doc_group_id');
+	
+	
+
+	
 	if (!is_array($nested_groups["$parent_group"])) {
 		return;
 	}
@@ -160,12 +165,12 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo "<ul style='list-style-type: none'>";
 	$child_count = count($nested_groups["$parent_group"]);
 	
-	for ($i=0; $i < $child_count; $i++) {
+	for ($i=0; $i < $child_count; $i++) {		
 		$doc_group =& $nested_groups["$parent_group"][$i];
 		
 		// Display group and subgroups only if it has associated documents
 		if ($doc_group->hasDocuments($nested_groups, $document_factory, $stateid)) {
-			// Recursive call
+			// Recursive call			
 			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
 				$icon = 'ofolder15.png';
 			} else {
@@ -190,7 +195,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		
 		// Display this group's documents
 		if (($doc_group->hasSubgroup($nested_groups, $selected_doc_group_id) || $selected_doc_group_id == $doc_group->getID()) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
-			// Retrieve all the docs from this category
+			// Retrieve all the docs from this category			
 			if ($stateid) {
 				$document_factory->setStateID($stateid);
 			}

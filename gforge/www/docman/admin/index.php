@@ -92,14 +92,14 @@ if (getStringFromRequest('submit')) {
 
 	} elseif (getStringFromRequest('editgroup')) {
 		$doc_group = getStringFromRequest('doc_group');
-		$groupname = $groupname;
+		$groupname = getIntFromRequest('groupname');
 		$parent_doc_group = getIntFromRequest('parent_doc_group');
-
+		
 		$dg = new DocumentGroup($g,$doc_group);
 		if ($dg->isError()) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
-		if (!$dg->update($groupname,$parent_doc_group)) {
+		if (!$dg->update($groupname,$parent_doc_group)) {			
 			exit_error('Error',$dg->getErrorMessage());
 		}
 		$feedback = $Language->getText('general','update_successful');
@@ -275,7 +275,7 @@ if ($editdoc && $docid) {
 //	Add a document group / view existing groups list
 //
 //
-} elseif ($addgroup) {
+} elseif (getStringFromRequest('addgroup')) {
 
 	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'');
 
@@ -341,7 +341,7 @@ if ($editdoc && $docid) {
 //
 } elseif (getStringFromRequest('editgroup') && getStringFromRequest('doc_group')) {
 	$doc_group = getStringFromRequest('doc_group');
-
+	
 	$dg = new DocumentGroup($g,$doc_group);
 	if ($dg->isError()) {
 		exit_error('Error',$dg->getErrorMessage());
@@ -427,7 +427,7 @@ if ($editdoc && $docid) {
 	$df->setStateID('ALL');
 //	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
-
+	
 	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'admin');
 
 	?> 
@@ -440,13 +440,13 @@ if ($editdoc && $docid) {
 	if (!$d_arr || count($d_arr) < 1) {
 		print "<p><strong>".$Language->getText('docman','error_no_docs').".</strong></p>";
 	} else {
-		// get a list of used document states
+		// get a list of used document states		
 		$states = $df->getUsedStates();
 		$nested_groups =& $dgf->getNested();
 		echo "<ul>";
 		foreach ($states as $state) {
 			echo "<li><strong>".$state["name"]."</strong>";
-			docman_display_documents($nested_groups, $df, true, $state["stateid"], true);
+			docman_display_documents($nested_groups, $df, true, $state[$stateid], true);
 			echo "</li>";
 		}
 		echo "</ul>";

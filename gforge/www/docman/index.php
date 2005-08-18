@@ -85,7 +85,7 @@ if (!$d_arr || count($d_arr) < 1) {
 	doc_droplist_count($group_id, $language_id, $g);
 
 	// Get the document groups info
-	$nested_groups =& $dgf->getNested();
+	$nested_groups =& $dgf->getNested();	
 	docman_display_documents($nested_groups,$df,$is_editor);
 }
 

@@ -60,7 +60,7 @@ if ($result) {
 <p><?php echo $Language->getText('my_bookmark_add','bookmark_title') ?>:<br />
 <input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
 </p>
-<p><input type="submit" value=" <?php echo $Language->getText('general','submit') ?> " /></p>
+<p><input type="submit" name="submit" value=" <?php echo $Language->getText('general','submit') ?> " /></p>
 </form>
 <?php
 

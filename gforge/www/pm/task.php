@@ -49,6 +49,8 @@ $dependent_on = getStringFromRequest('dependent_on');
 $duration = getStringFromRequest('duration');
 $parent_id = getIntFromRequest('parent_id');
 
+
+
 if (!$group_id || !$group_project_id) {
 	exit_missing_param();
 }
@@ -95,8 +97,9 @@ switch (getStringFromRequest('func')) {
 	//
 	case 'postaddtask' : {
 		if ($pg->userIsAdmin()) {
+			
 			$add_artifact_id = getStringFromRequest('add_artifact_id');
-
+						
 			$pt = new ProjectTask($pg);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get Empty ProjectTask');
@@ -104,9 +107,14 @@ switch (getStringFromRequest('func')) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
 
+			if (!$dependent_on)
+			{
+				$dependent_on=array();
+			}
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
-
+			
+			
 			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
 				exit_error('ERROR',$pt->getErrorMessage());
 			} else {
@@ -130,7 +138,11 @@ switch (getStringFromRequest('func')) {
 	case 'postmodtask' : {
 		if ($pg->userIsAdmin()) {
 			$rem_artifact_id = getStringFromRequest('rem_artifact_id');
-
+		
+			if(!$rem_artifact_id){
+				$rem_artifact_id=array();
+			}
+		
 			$pt = new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
@@ -138,6 +150,9 @@ switch (getStringFromRequest('func')) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
 
+			if (!$dependent_on)	{
+				$dependent_on=array();
+			}
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
@@ -182,7 +197,7 @@ switch (getStringFromRequest('func')) {
 
 	case 'postuploadcsv': {
 
-		if ($pg->userIsAdmin()) {
+		if ($pg->userIsAdmin()) {			
 			include 'postuploadcsv.php';
 		} else {
 			exit_permission_denied();
@@ -193,7 +208,7 @@ switch (getStringFromRequest('func')) {
 	case 'massupdate' : {
 		$project_task_id_list = getStringFromRequest('project_task_id_list');
 		$count=count($project_task_id_list);
-
+	
 		if ($pg->userIsAdmin()) {
 
 			for ($i=0; $i < $count; $i++) {

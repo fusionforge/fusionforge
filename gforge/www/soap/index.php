@@ -90,6 +90,11 @@ require_once('www/soap/common/user.php');
 require_once('www/soap/tracker/tracker.php');
 
 //
+//	Include Docman Functions
+//
+require_once('www/soap/docman/docman.php');
+
+//
 //	Include task manager Functions
 //
 require_once('www/soap/pm/pm.php');

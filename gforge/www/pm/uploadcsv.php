@@ -11,7 +11,7 @@ pm_header(array('title'=>$Language->getText('pm_uploadcsv','title'),'group_proje
 ?>
 <?php echo $Language->getText('pm_uploadcsv','explain'); ?>
 <p>
-<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=$group_project_id&amp;group_id=$group_id&amp;func=postuploadcsv">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<? echo $group_project_id ?>&amp;group_id=<? echo $group_id ?>&amp;func=postuploadcsv">
 <?php echo $Language->getText('pm_uploadcsv','choose_file'); ?><br />
 <input type="file" name="userfile"  size="30" />
 <input type="submit" name="submit" value="submit">

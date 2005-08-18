@@ -18,6 +18,7 @@
 */
 
 
+
 require_once('pre.php');
 require_once('common/docman/Document.class');
 require_once('common/docman/DocumentGroupFactory.class');
@@ -26,13 +27,13 @@ require_once('include/DocumentGroupHTML.class');
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
-	exit_no_group();
+	exit_no_group();	
 }
 $g =& group_get_object($group_id);
 if (!$g || !is_object($g)) {
-	exit_error('Error','Could Not Get Group');
+	exit_error('Error','Could Not Get Group');	
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error('Error',$g->getErrorMessage());	
 }
 
 $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
@@ -45,43 +46,45 @@ if (getStringFromRequest('submit')) {
 	$ftp_filename = getStringFromRequest('ftp_filename');
 	$uploaded_data = getUploadedFile('uploaded_data');
 	$language_id = getIntFromRequest('language_id');
+	
 
 	if (!$doc_group || $doc_group == 100) {
-		//cannot add a doc unless an appropriate group is provided
+		//cannot add a doc unless an appropriate group is provided		
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
-
-	if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename )) {
+	
+	if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename )) {		
 		exit_missing_param();
 	}
 
 	$d = new Document($g);
-	if (!$d || !is_object($d)) {
+	if (!$d || !is_object($d)) {		
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
-	} elseif ($d->isError()) {
+	} elseif ($d->isError()) {	
 		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	}
-
-	if ($uploaded_data) {
-		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+	
+	if ($file_url) {
+		$data = '';
+		$uploaded_data_name=$file_url;
+		$uploaded_data_type='URL';		
+	} elseif ($ftp_filename!=100) { //100 == None
+		$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
+		$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
+	} elseif ($uploaded_data) {
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
 			exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
 		}
 		$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 		$file_url='';
 		$uploaded_data_name=$uploaded_data['name'];
 		$uploaded_data_type=$uploaded_data['type'];
-	} elseif ($file_url) {
-		$data = '';
-		$uploaded_data_name=$file_url;
-		$uploaded_data_type='URL';
-	} elseif ($ftp_filename) {
-		$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
-		$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
 	}
 	
+	
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
-		exit_error($Language->getText('general','error'),$d->getErrorMessage());
-	} else {
+			exit_error($Language->getText('general','error'),$d->getErrorMessage());
+	} else {		
 		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('docman_new','submitted_successfully'));
 		exit;
 	}
@@ -155,6 +158,7 @@ if (getStringFromRequest('submit')) {
 			}
 
 			//display_groups_option($group_id);
+			$selected_doc_group=getIntFromRequest('selected_doc_group');
 			$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $selected_doc_group);
 		?>
 		</td>

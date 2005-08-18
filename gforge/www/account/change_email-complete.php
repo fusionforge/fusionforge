@@ -32,7 +32,8 @@ $confirm_hash = getStringFromRequest('confirm_hash');
 
 if (!$confirm_hash) {
 	// XXX ogi: What's $ch?
-	$confirm_hash = $ch;
+	//$confirm_hash = $ch;
+	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {
 	exit_missing_param();

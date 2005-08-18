@@ -20,6 +20,7 @@ session_require( array('group'=>$sys_stats_group) );
 
 $group_id = getIntFromRequest('group_id');
 $year = getIntFromRequest('year');
+$monthly = getIntFromRequest('monthly');
 
 if ( ! $group_id ) {
 	$group_id = 0;
