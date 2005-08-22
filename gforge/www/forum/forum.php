@@ -24,6 +24,8 @@ require_once('common/forum/Forum.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
+require_once('www/forum/include/AttachManager.class'); //attachent manager
+require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');
@@ -70,6 +72,12 @@ if ($forum_id) {
 		$subject = getStringFromRequest('subject');
 		$body = getStringFromRequest('body');
 		$is_followup_to = getStringFromRequest('is_followup_to');
+		$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
+		$smilie_on=$sys_bbcode_smilie_on; 
+		$bbcode_on=$sys_bbcode_bbcode_on; 
+		$strip_html=$sys_bbcode_strip_html;
+		$text_support = new TextSupport();
+		$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
 
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
@@ -80,11 +88,19 @@ if ($forum_id) {
 			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 
-		if (!$fm->create($subject, $body, $thread_id, $is_followup_to) || $fm->isError()) {
+		
+		if (!$fm->create($subject, $body,$bbcode_uid, $thread_id, $is_followup_to) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
 			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('forum_forum','postsuccess');
+			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
+			$am->Setmsgid($f->getNextThreadID());
+			$attach = getUploadedFile("attachment1");
+			$am->attach($attach);
+			foreach ($am->Getmessages() as $item) {
+				$feedback .= "<br>" . $item;
+			}
 			$style='';
 			$thread_id='';
 			if (getStringFromRequest('monitor')) {
@@ -166,7 +182,8 @@ if ($forum_id) {
 		</span></td></tr>
 	</table></form>
 	<p>&nbsp;</p>';
-
+	$am = new AttachManager();
+	$ret_val .= $am->PrintHelperFunctions();
 	if ($style=='nested') {
 
 		$msg_arr =& $fmf->nestArray($fmf->getNested());

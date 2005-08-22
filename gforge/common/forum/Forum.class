@@ -508,12 +508,12 @@ class Forum extends Error {
 	 *
 	 *	@param	string	The name of the forum.
 	 *	@param	string	The description of the forum.
-	 *	@param	int	Pass (1) if it should be public (0) for private.
+	 *	@param	int		if it should be public (0) for private.
+	 *	@param	int	 	if we should allow non-logged-in users to post (0) for mandatory login.
 	 *	@param	string	The email address to send all new posts to.
-	 *	@param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
 	 *	@return	boolean	success.
 	 */
-	function update($forum_name,$description,$send_all_posts_to='') {
+	function update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to='') {
 		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError($Language->getText('forum_common','error_min_name_length'));
@@ -543,7 +543,9 @@ class Forum extends Error {
 		$res=db_query("UPDATE forum_group_list SET
 			forum_name='". strtolower($forum_name) ."',
 			description='". htmlspecialchars($description) ."',
-			send_all_posts_to='$send_all_posts_to'
+			send_all_posts_to='".$send_all_posts_to ."',
+			allow_anonymous='" .$allow_anonymous . "',
+			is_public='" .$is_public . "'
 			WHERE group_id='".$this->Group->getID()."'
 			AND group_forum_id='".$this->getID()."'");
 

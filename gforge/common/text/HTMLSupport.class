@@ -1,0 +1,40 @@
+<?php 
+require_once('common/include/Error.class');
+
+
+class HTMLSupport extends Error {
+ 
+	var $allowed_html_tags = array(); 
+	
+	// must be called after HTML was initialized
+	function HTMLSupport(){
+		$this->Error();
+	}
+	
+		
+	function prepareText($text, $strip_html) {
+		if ($strip_html){
+			$trans_tbl = get_html_translation_table (HTML_ENTITIES);
+		}else{
+			$trans_tbl = array();
+		}	
+		
+		// MS Word strangeness..
+		// smart single/ double quotes:
+		$trans_tbl[chr(145)] = '\'';
+		$trans_tbl[chr(146)] = '\'';
+		$trans_tbl[chr(147)] = '&';
+		$trans_tbl[chr(148)] = '&';
+		// è :
+		$trans_tbl[chr(142)] = 'è';
+
+		$text = strtr ($text, $trans_tbl);		
+				
+		return $text;
+	}
+	
+	
+
+
+}
+?>

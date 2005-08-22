@@ -27,6 +27,12 @@ gforge-plugin-scmsvn/www/viewcvs/images/down.png -text
 gforge-plugin-scmsvn/www/viewcvs/images/logo.png -text
 gforge-plugin-scmsvn/www/viewcvs/images/up.png -text
 gforge/backend/shell/apache.sh svneol=native#unset
+gforge/common/text/BBCodeSupport.class -text svneol=unset#application/octet-stream
+gforge/common/text/BBCodeSupportHtml.class -text svneol=unset#application/octet-stream
+gforge/common/text/HTMLSupport.class -text svneol=unset#application/octet-stream
+gforge/common/text/SmilieSupport.class -text svneol=unset#application/octet-stream
+gforge/common/text/SmilieSupportHtml.class -text svneol=unset#application/octet-stream
+gforge/common/text/TextSupport.class -text svneol=unset#application/octet-stream
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
@@ -42,6 +48,7 @@ gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
 gforge/www/favicon.ico svneol=native#unset
+gforge/www/forum/include/AttachManager.class -text svneol=unset#application/octet-stream
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
@@ -52,6 +59,7 @@ gforge/www/images/ic/caret.png -text
 gforge/www/images/ic/cfolder15.png -text
 gforge/www/images/ic/check.png -text
 gforge/www/images/ic/cvs16b.png -text
+gforge/www/images/ic/del.png -text
 gforge/www/images/ic/docman16b.png -text
 gforge/www/images/ic/forum20g.png -text
 gforge/www/images/ic/forum20w.png -text
@@ -83,6 +91,29 @@ gforge/www/images/icon.png -text
 gforge/www/images/msg.png -text
 gforge/www/images/pow-gforge.png -text
 gforge/www/images/sf-for-debian.png -text
+gforge/www/images/smiles/icon_arrow.gif -text
+gforge/www/images/smiles/icon_biggrin.gif -text
+gforge/www/images/smiles/icon_confused.gif -text
+gforge/www/images/smiles/icon_cool.gif -text
+gforge/www/images/smiles/icon_cry.gif -text
+gforge/www/images/smiles/icon_eek.gif -text
+gforge/www/images/smiles/icon_evil.gif -text
+gforge/www/images/smiles/icon_exclaim.gif -text
+gforge/www/images/smiles/icon_frown.gif -text
+gforge/www/images/smiles/icon_idea.gif -text
+gforge/www/images/smiles/icon_lol.gif -text
+gforge/www/images/smiles/icon_mad.gif -text
+gforge/www/images/smiles/icon_mrgreen.gif -text
+gforge/www/images/smiles/icon_neutral.gif -text
+gforge/www/images/smiles/icon_question.gif -text
+gforge/www/images/smiles/icon_razz.gif -text
+gforge/www/images/smiles/icon_redface.gif -text
+gforge/www/images/smiles/icon_rolleyes.gif -text
+gforge/www/images/smiles/icon_sad.gif -text
+gforge/www/images/smiles/icon_smile.gif -text
+gforge/www/images/smiles/icon_surprised.gif -text
+gforge/www/images/smiles/icon_twisted.gif -text
+gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
 gforge/www/search/include/engines/DocsGroupSearchEngine.class -text svneol=unset#application/octet-stream

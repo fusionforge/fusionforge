@@ -21,6 +21,8 @@
 require_once('pre.php');
 require_once('note.php');
 require_once('www/news/news_utils.php');
+require_once('www/forum/include/AttachManager.class');
+require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
@@ -153,6 +155,7 @@ class ForumHTML extends Error {
 		return true;
 	}
 
+	
 	function showNestedMessage ( &$msg ) {
 		/*
 
@@ -161,6 +164,7 @@ class ForumHTML extends Error {
 
 		*/
 		global $sys_datefmt,$Language,$HTML;
+		global $sys_bbcode_make_clickable,$sys_bbcode_smilie_on,$sys_bbcode_bbcode_on,$sys_bbcode_strip_html;//bbcode variables
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -169,13 +173,22 @@ class ForumHTML extends Error {
 			$bold_begin='<strong>';
 			$bold_end='</strong>';
 		}
+		$am = new AttachManager();
+		$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
+		$smilie_on=$sys_bbcode_smilie_on; 
+		$bbcode_on=$sys_bbcode_bbcode_on; 
+		$strip_html=$sys_bbcode_strip_html;
+		$text_support = new TextSupport();
 		$ret_val = '
 		<table border="0">
 			<tr>
 				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
-					'<br /><a href="/forum/message.php?msg_id='.
+					'<br />
+					' . $am->PrintAttachLink($msg->getID()) . '
+					<br />
+					<a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.
 					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</a> &nbsp; '.
@@ -184,13 +197,36 @@ class ForumHTML extends Error {
 			</tr>
 			<tr>
 				<td>
-					'. util_make_links( nl2br( $msg->getBody() ) ) .'
+					'.  $text_support->displayText($msg->getBody(), $make_clickable, $smilie_on, $bbcode_on, $msg->getBBCode_uid()) .'
 				</td>
 			</tr>
 		</table>';
 		return $ret_val;
 	}
+	
+	
+// echoes the link to the attach form
+function LinkAttachForm() {
+	global $Language;
+	
+	$poststarttime = time();
+	$posthash = md5($poststarttime . user_getid() );
+	echo "
+	<fieldset class=\"fieldset\">
+	<table>
+			<tr>
+				<td>" . $Language->getText('forum_forum','browseattach') . "</td>
+			</tr>
+			<tr>
+				<td>" . $Language->getText('forum_forum','filetoupload') . ":   <input type=\"file\" name=\"attachment1\"/></td>
+			</tr>
+	</table>
+	
+	</fieldset>";	
 
+}	
+	
+	
 	function showNestedMessages ( &$msg_arr, $msg_id ) {
 		global $total_rows,$sys_datefmt;
 
@@ -208,6 +244,7 @@ class ForumHTML extends Error {
 			for each message, recurse to show any submessages
 
 			*/
+			$am = new AttachManager();
 			for ($i=($rows-1); $i >= 0; $i--) {
 				//	  increment the global total count
 				$total_rows++;
@@ -307,25 +344,32 @@ class ForumHTML extends Error {
 				}
 			}
 			echo notepad_func();
+			$text_support = new TextSupport(); //for BBCODE
 			?>
 			<div align="center">
-			<form action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" method="post">
+			<?php $objid = $this->Forum->getID(); $text_support->displayForm('form', 'body',"/forum/forum.php?forum_id=$objid","enctype=\"multipart/form-data\""); ?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-			<table>
-			<tr>
-			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
+			<fieldset class="fieldset"><table><tr><td valign="top">
+			<?php $text_support->displaySmiliesList(); ?>
+			</td><td valign="top">
+			<?php echo $text_support->displayBBCodeHelpTools(); ?>
+			<br>
+			<strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
-			</td></tr>
-			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
-				<textarea name="body" rows="10" cols="50" wrap="soft"></textarea>
-			</td></tr>
-			<tr><td align="center">
-				<strong><font color="red"><?php echo $Language->getText('forum_utils','htmltag'); ?></font></strong>
+			<br><br>
+			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
+				<?php $text_support->displayTextField('body'); ?>
+			<br><br>		
+<!--		<strong><font color="red"><?php echo $Language->getText('forum_utils','htmltag'); ?></font></strong> -->
 				<p>
+				<?php $this->LinkAttachForm();?>
+				<p>
+			
+
 			<?php
 			if (!session_loggedin()) {
 				echo '<strong><font color="red">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['.$Language->getText('forum_utils','loggedin').']</a></font></strong>';
@@ -335,7 +379,7 @@ class ForumHTML extends Error {
 			<input type="submit" name="submit" value="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>" /><?php
 				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'.$Language->getText('forum_message','receive_followups').'.' : ''); ?>
 				</p>
-			</td></tr></table>
+			</td></tr></table></fieldset>
 			</form>
 			</div>
 			<?php

@@ -536,6 +536,47 @@ artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 artifact_query	exist_query	Query already exists
 artifact_query	not_exist_query	Query does not exist
+bbcode	quote	Quote
+bbcode	code	Code
+bbcode	wrote	Wrote
+bbcode	bbcode_b_help	Bold text: [b]text[/b]  (alt+b)
+bbcode	bbcode_i_help	Italic text: [i]text[/i]  (alt+i)
+bbcode	bbcode_u_help	Underline text: [u]text[/u]  (alt+u)
+bbcode	bbcode_q_help	Quote text : [quote]text[/quote]  (alt+q)
+bbcode	bbcode_c_help	Code display: [code]code[/code]  (alt+c)
+bbcode	bbcode_l_help	List: [list]text[/list] (alt+l)
+bbcode	bbcode_o_help	Ordered list: [list=]text[/list]  (alt+o)
+bbcode	bbcode_p_help	Insert image: [img]http://image_url[/img]  (alt+p)
+bbcode	bbcode_w_help	Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)
+bbcode	bbcode_a_help	Close all open bbCode tags
+bbcode	bbcode_s_help	Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000
+bbcode	bbcode_f_help	Font size: [size=x-small]small text[/size]
+bbcode	emoticons	Emoticons
+bbcode	more_emoticons	View more Emoticons
+bbcode	font_color	Font colour
+bbcode	color_default	Default
+bbcode	color_dark_red	Dark Red
+bbcode	color_red	Red
+bbcode	color_orange	Orange
+bbcode	color_brown	Brown
+bbcode	color_yellow	Yellow
+bbcode	color_green	Green
+bbcode	color_olive	Olive
+bbcode	color_cyan	Cyan
+bbcode	color_blue	Blue
+bbcode	color_dark_blue	Dark Blue
+bbcode	color_indigo	Indigo
+bbcode	color_violet	Violet
+bbcode	color_white	White
+bbcode	color_black	Black
+bbcode	font_size	Font size
+bbcode	font_tiny	Tiny
+bbcode	font_small	Small
+bbcode	font_normal	Normal
+bbcode	font_large	Large
+bbcode	font_huge	Huge
+bbcode	close_tags	Close Tags
+bbcode	styles_tip	Tip: Styles can be applied quickly to selected text
 calendar	april	April
 calendar	august	August
 calendar	comingyear	Coming Year
@@ -807,8 +848,17 @@ forum_forum	topic	Topic
 forum_forum	topicstarter	Topic Starter
 forum_forum	views	Views
 forum_forum	ultimate	Ultimate
+forum_forum	browseattach	Use the "Browse" button to find the file you want to attach
+forum_forum	filetoupload	File to upload
 forum_forum_thread	section	Forums
 forum_forum_thread	title	View Thread
+forum_attachmngr	errnofile	No file was provided
+forum_attachmngr	err_inv_ext	Invalid Extension
+forum_attachmngr	err_toobig	File too big for that file type
+forum_attachmngr	err_upload	Error, problem with the attachment file uploaded into the server
+forum_attachmngr	uploadok	File uploaded
+forum_attachmngr	upload_notok	File not uploaded
+forum_attachmngr	err_msgid	Couldn´t get message id
 forum_message	by	BY
 forum_message	date	DATE
 forum_message	message	Message
@@ -2265,6 +2315,7 @@ session	missingpasswd	Missing Password Or Users Name
 session	notactive	Account Not Active
 session	pending	Account Pending
 session	suspended	Account Suspended
+smilies	smilies_list	Smilies's list	
 snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
 snippet_addversion	changes	Changes:
 snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!

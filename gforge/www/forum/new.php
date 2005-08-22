@@ -22,6 +22,7 @@
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
+require_once('www/forum/include/AttachManager.class');
 
 /*
 	User obviously has to be logged in to save place

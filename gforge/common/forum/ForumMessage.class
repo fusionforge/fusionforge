@@ -98,11 +98,12 @@ class ForumMessage extends Error {
 	 *
 	 *	@param	string	The subject of the message.
 	 *	@param	string	The body of the message.
+	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@return	boolean success.
 	 */
-	function create($subject, $body, $thread_id='', $is_followup_to='') {
+	function create($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='') {
 		global $Language;
 		if (!$body || !$subject) {
 			$this->setError($Language->getText('forum_common_forummessage','error_required_fields'));
@@ -182,9 +183,9 @@ class ForumMessage extends Error {
 		}
 
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-			body,post_date,is_followup_to,thread_id,most_recent_date) 
+			body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
 			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
+			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -234,6 +235,15 @@ class ForumMessage extends Error {
 		return true;
 	}
 
+	/**
+	 *	getBBCode_uid - get the BBCODE UID this ForumMessage is associated with.
+	 *
+	 *	@return	object	The bbcode uid.
+	 */
+	function &getBBCode_uid() {
+		return $this->data_array['bbcode_uid'];
+	}
+	
 	/**
 	 *	getForum - get the Forum object this ForumMessage is associated with.
 	 *

@@ -134,6 +134,8 @@ if ($group_id) {
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
 			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
+			$allow_anonymous = getIntFromRequest('allow_anonymous');
+			$is_public = getIntFromRequest('is_public');
 			/*
 				Change a forum
 			*/
@@ -146,7 +148,7 @@ if ($group_id) {
 			if (!$f->userIsAdmin()) {
 				exit_permission_denied();
 			}
-			if (!$f->update($forum_name,$description,$send_all_posts_to)) {
+			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to)) {
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('forum_admin_changestatus','update_successful');
@@ -212,7 +214,7 @@ if ($group_id) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-<!--				<span style="font-size:-1">
+				<span style="font-size:-1">
 				<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
 				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
 				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '.$Language->getText('general','no').'<br />
@@ -222,9 +224,9 @@ if ($group_id) {
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '.$Language->getText('general','no').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'.$Language->getText('general','deleted').'<br />
-				</span></td><td>
+				</span>
 				<span style="font-size:-1">
--->
+
 				<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
 				<p>

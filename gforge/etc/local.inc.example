@@ -290,5 +290,10 @@ $sys_localization_enable_timestamp_checking = true;
 // Path to plugins directory
 $sys_plugins_path='/usr/lib/gforge/plugins/';
 
+$sys_bbcode_make_clickable=1; //bbcode customizations
+$sys_bbcode_smilie_on=1; 
+$sys_bbcode_bbcode_on=1; 
+$sys_bbcode_strip_html=0;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

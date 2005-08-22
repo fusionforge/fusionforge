@@ -20,6 +20,7 @@
 
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
+require_once('www/forum/include/AttachManager.class');
 require_once('common/forum/Forum.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
@@ -100,8 +101,17 @@ if ($msg_id) {
 	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
 	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (<a href=\"/users/".$fm->getPosterName()."/\">". $fm->getPosterName() ."</a>)<br />";
 	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
+	$am = new AttachManager();
+	echo $am->PrintHelperFunctions();
+	echo $am->PrintAttachLink($msg_id) . "<br/>";
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
-	echo nl2br( util_make_links($fm->getBody() ));
+	
+	$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
+	$smilie_on=$sys_bbcode_smilie_on; 
+	$bbcode_on=$sys_bbcode_bbcode_on; 
+	$strip_html=$sys_bbcode_strip_html;
+	$text_support = new TextSupport();
+	echo $text_support->displayText($fm->getBody(), $make_clickable, $smilie_on, $bbcode_on, $fm->getBBCode_uid());
 	echo "</td></tr>";
 
 	echo $GLOBALS['HTML']->listTableBottom();
