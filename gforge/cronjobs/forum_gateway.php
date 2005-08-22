@@ -31,6 +31,7 @@ require_once ('common/include/Group.class');
 require_once ('common/include/MailParser.class');
 require_once ('common/forum/Forum.class');
 require_once ('common/forum/ForumMessage.class');
+require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
 class ForumGateway extends Error {
 	/*
@@ -209,7 +210,7 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
-		if (!$ForumMessage->create($this->Subject,$this->Body,$this->ThreadId,$this->Parent)) {
+		if (!$ForumMessage->create($this->Subject,$this->Body,-1,$this->ThreadId,$this->Parent)) {
 			$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		} else {
