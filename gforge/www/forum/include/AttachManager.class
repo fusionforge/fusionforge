@@ -1,5 +1,34 @@
 <?php
 
+/**
+ * GForge Attachment manager class
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002-2005 (c) GForge Team
+ * http://gforge.org/
+ *
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/* 
+	by Daniel Perez - 2005
+*/
+
 require_once('pre.php');
 
 class AttachManager extends Error {
@@ -60,10 +89,11 @@ class AttachManager extends Error {
 	 * Function PrintAttachLink
 	 *
 	 * @param 	int		The message id.
+	 * @param 	int		The group.
 	 *
 	 * @return 	returns link to attachment /delete if corresponding; else returns a message about no attachment found
 	 */
-	function PrintAttachLink($msg_id) {
+	function PrintAttachLink($msg_id,$group_id) {
 		
 		//ask if the message has an attachment
 
@@ -74,7 +104,7 @@ class AttachManager extends Error {
 		}
 		if ($attachid) {
 			$attach = "
-			<a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>";
+			<a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>";
 			$attach_userid = db_result($res,0,'userid');
 			if (user_getid() == $attach_userid) { //only permit the user who created the attach to delete it
 				$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&attach_userid=$attach_userid&delete=yes','yes');\">" .  "<font size=\"-3\">delete</font></a>";
@@ -86,13 +116,19 @@ class AttachManager extends Error {
 		return $attach;
 	}
 	
-	function attach($attach) {
+	function attach($attach,$group_id) {
 		global $Language;
 		global $_FILES;
 		
-		$sql = "SELECT * FROM forum_attachmenttype";
+		$sql = "SELECT * FROM forum_attachmenttype where group_id=$group_id"; //we get the attach types for this group. if there´s none, then use the default ones
 		$res = db_query($sql);
 		$attachtypes = array();
+		if (db_numrows($res)<1) {
+			//use defaults
+			$sql = "SELECT * FROM forum_attachmenttype where group_id = -1";
+			$res = db_query($sql);
+		}
+		
 		
 		//fill the datastore array with the supported filetypes
 		global $sys_db_row_pointer;
@@ -100,7 +136,7 @@ class AttachManager extends Error {
 			$aux = db_fetch_array($res);
 			$attachtypes[$aux[0]] = $aux;
 		}
-		
+				
 		
 	
 		$attachment = trim($attach['tmp_name']);
@@ -123,6 +159,8 @@ class AttachManager extends Error {
 		{
 			// invalid extension
 			$this->messages[] = $Language->getText('forum_attachmngr','err_inv_ext');
+			@unlink($attachment);
+			return;
 		}
 		
 		$maxattachsize = $attachtypes["$extension"]['size'];
@@ -133,11 +171,13 @@ class AttachManager extends Error {
 			// too big
 			@unlink($attachment);
 			$this->messages[] = $Language->getText('forum_attachmngr','err_toobig');
+			return;
 		}
 		
 		if (!is_uploaded_file($attachment) || !($filestuff = @file_get_contents($attachment)) )
 		{
 			$this->messages[] = $Language->getText('forum_attachmngr','err_upload');
+			return;
 		}
 		
 		if (!session_loggedin()) {

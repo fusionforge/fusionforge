@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge User's Personal Page
+ * GForge New attachment page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2005 (c) GForge Team
@@ -23,6 +23,10 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+/* 
+	by Daniel Perez - 2005
+*/
 
 require_once('pre.php');
 require_once('www/forum/include/AttachManager.class');
@@ -90,18 +94,11 @@ function printmain() {
 	echo $msg;
 }
 
-// ######################### REQUIRE BACK-END ############################
-
 require_once('pre.php');
 
-// #######################################################################
-// ######################## START MAIN SCRIPT ############################
-// #######################################################################
 
-/*TODO if (!$bbuserinfo['userid']) // Guests can not post attachments
-{
-	print_no_permission();
-}*/
+//TODO // Guests can not post attachments
+
 
 $sql = "SELECT * FROM forum_attachmenttype";
 $res = db_query($sql);
@@ -164,32 +161,8 @@ if (getStringFromRequest("do")=="manageattach") {
 	}
 	
 	
-	/*$extensions = array(
-		'gif' => '1',
-		'jpg' => '2',
-		'jpe' => '2',
-		'jpeg'=> '2',
-		'png' => '3',
-		'swf' => '4',
-		'psd' => '5',
-		'bmp' => '6',
-	);*/
-	
 	$am = &getStringFromServer("currentam");
 	$am->fillvalues(getStringFromRequest("user_id"),time(),addslashes($attachment_name),pg_escape_string($filestuff),$filesize,1,addslashes(md5($filestuff)),addslashes(getStringFromRequest("posthash")));
-	
-	//$posterid = iif($postinfo['postid'], $postinfo['userid'], $bbuserinfo['userid']);
-	//faltan posterid, visible y posthash
-	// add to db
-	/*$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, filehash, posthash)
-			VALUES 
-			(" . getStringFromRequest("user_id") . ", " . time() . ", '" . addslashes($attachment_name) . "',
-			'" . pg_escape_string($filestuff) . "', $filesize, 1, '" . addslashes(md5($filestuff)) . "', '" . addslashes(getStringFromRequest("posthash")) . "')";
-	if (db_query($sql)) {
-		echo "File uploaded OK.";
-	}	else {
-		echo "Error with DB Insert";
-	}*/
 	
 	@unlink($attachment);
 	

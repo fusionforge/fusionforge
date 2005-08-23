@@ -23,6 +23,7 @@
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
+require_once('www/forum/admin/ForumAdmin.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
@@ -301,9 +302,8 @@ if ($group_id) {
 		//	Add new forum
 		//
 		if ($p->isForumAdmin()) {
-			echo '
-			<p>
-			<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a><br /></p>';
+			$fa = new ForumAdmin();
+			$fa->PrintAdminOptions();
 		}
 		//
 		//	Get existing forums

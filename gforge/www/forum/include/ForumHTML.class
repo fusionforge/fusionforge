@@ -163,7 +163,7 @@ class ForumHTML extends Error {
 		in the format appropriate for the nested messages
 
 		*/
-		global $sys_datefmt,$Language,$HTML;
+		global $sys_datefmt,$Language,$HTML,$group_id;
 		global $sys_bbcode_make_clickable,$sys_bbcode_smilie_on,$sys_bbcode_bbcode_on,$sys_bbcode_strip_html;//bbcode variables
 		/*
 			See if this message is new or not
@@ -186,7 +186,7 @@ class ForumHTML extends Error {
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br />
-					' . $am->PrintAttachLink($msg->getID()) . '
+					' . $am->PrintAttachLink($msg->getID(),$group_id) . '
 					<br />
 					<a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.

@@ -1,0 +1,318 @@
+<?php
+
+/**
+ * GForge Forum Admin Class
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002-2004 (c) GForge Team
+ * http://gforge.org/
+ *
+ * @version   
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/* forum admin class
+	by Daniel Perez - 2005
+*/
+
+require_once('pre.php');
+
+class ForumAdmin extends Error {
+	var $group_id;
+	var $p,$g;
+	
+	/**
+	 *  PrintAdminOptions - prints the different administrator option for the forums.
+	 *
+	 */
+	
+	function PrintAdminOptions() {
+		global $Language,$group_id;
+		
+		echo '
+			<p>
+			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a>';
+		echo '
+			| <a href="attachments.php?action=attach_extensions&group_id=' . $group_id . '">' . $Language->getText('forum_admin','manage_attachs').'</a><br /></p>';
+		
+	}
+	
+	
+	/**
+	 *  Authorized - returns true if the user is authorized as a forum admin for the group, or false.
+	 *
+	 *  @param  string	 The group id.
+	 */
+	
+	function Authorized($group_id) {
+		if (!$group_id) {
+			/*
+			Not logged in or insufficient privileges
+			*/
+			$this->setGroupIdError();
+			return false;
+		}
+		$this->group_id = $group_id;
+		$this->g =& group_get_object($group_id);
+		if (!$this->g || !is_object($this->g) || $this->g->isError()) {
+			$this->setGroupIdError();
+			return false;
+		}
+		
+		$this->p =& $this->g->getPermission( session_get_user() );
+		if (!$this->p || !is_object($this->p) || $this->p->isError()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		return true;
+	}
+	
+	function ForumAdmin() {
+		global $group_id;
+		$this->group_id = $group_id; 
+	}
+	
+	/**
+	 *  ExecuteAction - Executes the action passed as parameter
+	 *
+	 *  @param  string	 action to execute.
+	 */
+	function ExecuteAction ($action) {
+		global $Language;
+		if ($action=="attach_extensions") {
+			//view the attachment extensions
+			$gid = $this->group_id;
+			$types = db_query("SELECT * FROM forum_attachmenttype where group_id=$gid ORDER BY extension");
+			$this->PrintAdminOptions();
+			
+			echo '
+			<form action="attachments.php" method="post">
+			<input type="hidden" name="action" value="addnewtype" />
+			<table border="1">
+				<tr>
+					<td>' . $Language->getText('forum_admin_attachs','extension') . '</td>
+					<td>' . $Language->getText('forum_admin_attachs','maxfilesize') . '</td>
+					<td>' . $Language->getText('forum_admin_attachs','maxwidth') . '</td>
+					<td>' . $Language->getText('forum_admin_attachs','maxheight') . '</td>
+					<td>' . $Language->getText('forum_admin_attachs','enabled') . '</td>
+					<td>' . $Language->getText('forum_admin_attachs','actions') . '</td>
+				</tr>
+			';
+			
+			while ($onetype = db_fetch_array($types)) {
+				$onetype['size'] = $onetype['size'] ? $onetype['size']: $Language->getText('include_html','none');
+				switch($onetype['extension']) {
+					case 'gif':
+					case 'bmp':
+					case 'jpg':
+					case 'jpeg':
+					case 'jpe':
+					case 'png':
+					case 'psd':
+					case 'swf':
+					case 'tiff':
+					case 'tif':
+						$onetype['width'] = $onetype['width'] ? $onetype['width'] : $Language->getText('include_html','none');
+						$onetype['height'] = $onetype['height'] ? $onetype['height'] : $Language->getText('include_html','none');
+						break;
+					default:
+						$onetype['width'] = '&nbsp;';
+						$onetype['height'] = '&nbsp;';
+				}
+				$onetype['enabled'] = $onetype['enabled'] ? $Language->getText('survey_edit','yes'): $Language->getText('survey_edit','no');
+				echo "
+				<tr>
+					<td><b>$onetype[extension]</b></td>
+					<td>$onetype[size]</td>
+					<td>$onetype[width]</td>
+					<td>$onetype[height]</td>
+					<td>$onetype[enabled]</td>
+					<td><a href=\"attachments.php?action=update_attach_type&group_id=$gid&extension=$onetype[extension]\"> Edit </a> | 
+						<a href=\"attachments.php?action=remove_attach_type&group_id=$gid&extension=$onetype[extension]\"> Delete</a></td>
+				</tr>";
+			}
+			echo "
+			</table>
+			<p>
+				<center><input type=\"submit\" value=\"Add new\"></center></td>
+			</form>
+			";
+
+		}
+		if ($action == "update_attach_type") {
+			$group_id = getIntFromRequest("group_id");
+			$extension = getStringFromRequest("extension");
+			
+			$this->PrintAdminOptions();
+			if ($extension) {
+				//output modify form
+				$type = db_query("SELECT * FROM forum_attachmenttype where group_id=$group_id and extension='$extension'");
+				$type = db_fetch_array($type);
+				if ($type['mimetype']) {
+					$type['mimetype'] = implode("\n", unserialize($type['mimetype']));
+				}
+				
+			}
+			echo '
+				<form action="attachments.php" method="post">
+				<input type="hidden" name="action" value="make_update_attach_type" />
+				<input type="hidden" name="group_id" value="'. $group_id .'" />
+				<input type="hidden" name="extension" value="'. $extension .'" />
+				';
+			
+			$output = '
+				<table cellpadding="4" cellspacing="0" align="center" border="0" width="90%">
+				<tr>
+					<td align="center" colspan="2">
+							<b>' . $Language->getText('forum_admin_attachs','attachtype') .'  : '  . $type['extension'] . '</b>
+					</td></tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','extension') . '</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td>
+									<input type="text" name="type[extension]" value="' . $type['extension'] . '" size="35" tabindex="1" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','maxfilesize') . ' (bytes)</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td>
+									<input type="text" name="type[size]" value="' . $type['size'] . '" size="35" tabindex="1" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','maxwidth') . ' (pixels)
+					</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td>
+									<input type="text" name="type[width]" value="' . $type['width'] . '" size="35" tabindex="1" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','maxheight') . ' (pixels)
+					</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td>
+									<input type="text" name="type[height]" value="' . $type['height'] . '" size="35" tabindex="1" />
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','mimetype_advice') . '</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td>
+									<textarea name="type[mimetype]" rows="4" cols="40" wrap="virtual" tabindex="1">' . $type['mimetype'] . '</textarea>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td>' . $Language->getText('forum_admin_attachs','enabled') . '</td>
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr valign="top">
+								<td><span style="white-space:nowrap">
+									<input type="radio" name="type[enabled]" value="1" tabindex="1" '; if ($type['enabled']) $output.= 'checked="checked"'; $output.= ' />Yes
+									<input type="radio" name="type[enabled]" value="0" tabindex="1" '; if (!$type['enabled']) $output.= 'checked="checked"'; $output.= ' />No
+									</span>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" tabindex="1" value=" Update " />
+						<input type="reset" tabindex="1" value=" Reset  " />
+					</td>
+				</tr>
+				</table>';
+				echo $output;		
+			
+		}
+		if ($action == "make_update_attach_type") {
+			global $Language;
+			$group_id = getIntFromRequest("group_id");
+			$extension = getStringFromRequest("extension");
+			$type = getArrayFromRequest('type');
+			
+			$type['extension'] = strtolower($type['extension']);
+
+			if (empty($type['extension'])) {
+				exit_error($Language->getText('people_editprofile','all_fields_required'));
+			}
+
+			if ($extension != $type['extension'] AND $test = db_query("SELECT extension FROM forum_attachmenttype WHERE extension = '" . addslashes($type['extension']) . "' and group_id=$group_id")) {
+				exit_error($Language->getText('forum_admin_attachs','extension_exists'));
+			}
+			if ($type['mimetype']) {
+				$mimetype = explode("\n", $type['mimetype']);
+				foreach($mimetype AS $index => $value) {
+					$mimetype["$index"] = trim($value);
+				}
+			}	else {
+				$mimetype = array('Content-type: unknown/unknown');
+			}
+			
+			$type['mimetype'] = serialize($mimetype);
+
+			if ($extension) {
+				//update
+				$sql = "UPDATE forum_attachmenttype SET extension='" . $type['extension'] . "' , size='" . $type['size'] . "' , height='" . $type['height'] . "' , width='" . $type['width'] . "' , mimetype='" . addslashes($type['mimetype']) . "' , enabled='" . $type['enabled'] . "' where group_id=$group_id and extension='$extension'";
+				$res = db_query($sql);
+				if (!$res) {
+					echo db_error();
+				}
+			}	else {
+				//add new one
+				$res = db_query("
+					INSERT INTO forum_attachmenttype (extension, size, height, width, mimetype, enabled,group_id)
+					VALUES
+						('" . addslashes($type['extension']) . "', " . intval($type['size']) . ", " . intval($type['height']) . ", " . intval($type['width']) . ", '" . addslashes($type['mimetype']) . "', " . intval($type['enabled']) . " , $group_id )");
+				$res = db_query($sql);
+				if (!$res) {
+					echo db_error();
+				}
+			}
+		}
+	}
+	
+}
+
+?>

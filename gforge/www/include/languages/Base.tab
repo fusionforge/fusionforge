@@ -775,6 +775,16 @@ forum_admin	really_sure	I'm Really Sure
 forum_admin	delete	Delete
 forum_admin	deleted	Successfully Deleted
 forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
+forum_admin	manage_attachs	Manage Attachments
+forum_admin_attachs	extension	Extension
+forum_admin_attachs	maxfilesize	Max Filesize
+forum_admin_attachs	maxwidth	Max Width
+forum_admin_attachs	maxheight	Max Height
+forum_admin_attachs	enabled	Enabled
+forum_admin_attachs	actions	Actions
+forum_admin_attachs	attachtype	Attachment Type
+forum_admin_attachs	mimetype	Mime Type
+forum_admin_attachs	mimetype_advice	If you don´t know what to put here, leave blank and the file will download as a binary attachment
 forum_admin_addforum	add_forum	Add This Forum
 forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
 forum_admin_addforum	allow_attach	Allow File Attachment?

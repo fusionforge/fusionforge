@@ -1,3 +1,13 @@
+23-08-2005
+	attachments :
+		* changed DB to accept attach types per project
+		* added functionality to check for enabled/disabled attach types
+		* admin -> added class ForumAdmin which will gradually incorporate all functions related to forum administration
+		* admin -> added first version of attachment type manager (still needs development)
+
+update to be made : 
+1) run 20050823.sql
+
 22-08-2005
 	initial attachment version. upload, delete, view attachments
 	admin -> option to modify allow anonymous / public forum status

@@ -103,7 +103,7 @@ if ($msg_id) {
 	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
-	echo $am->PrintAttachLink($msg_id) . "<br/>";
+	echo $am->PrintAttachLink($msg_id,$group_id) . "<br/>";
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
 	
 	$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
