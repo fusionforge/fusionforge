@@ -44,44 +44,52 @@ function goodbye($msg) {
 }
 
 
-//TODO check user perms
 
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
 $attach_userid = getIntFromRequest("attach_userid");
 $group_id = getIntFromRequest("group_id");
+$forum_id = getIntFromRequest("forum_id");
+global $Language;
+
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+	exit_no_group();
+}
+
+$f=new Forum($g,$forum_id);
+if (!$f || !is_object($f)) {
+	exit_error($Language->getText('general','error'),"Error getting Forum");
+}	elseif ($f->isError()) {
+	exit_error($Language->getText('general','error'),$f->getErrorMessage());
+}
 
 if ($delete == "yes") {
 	//only the user that created the attach can delete it (safecheck)
 	if ($attach_userid != user_getid()) {
-		goodbye("You cannot delete this attachment");
+		goodbye($Language->getText('forum_attach_download','cannot_delete'));
 	}	else {
 		db_query ("DELETE FROM forum_attachment where attachmentid=$attachid");
-		goodbye("Attachment deleted");
+		goodbye($Language->getText('forum_attach_download','deleted'));
 	}
 }
 
 $sql = "SELECT  * FROM forum_attachment as attachment where attachment.attachmentid=$attachid";
 $res = db_query($sql);
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
-$sql = "SELECT * FROM forum_attachmenttype where extension = '$extension' and group_id = '$group_id'";
+$sql = "SELECT * FROM forum_attachment_type where extension = '$extension'";
 $res2 = db_query($sql);
-if (db_numrows($res2)<1) {
-	//use the default one
-	$sql = "SELECT * FROM forum_attachmenttype where extension = '$extension' and group_id = -1";
-	$res2 = db_query($sql);
-}
 
 if ( (!$res) || (!$res2) ) {
 	exit_error("Attachment Download error","DB Error");
 }
 
 if ( db_numrows($res2)<1) {
-	goodbye("The attachment type has been removed by the administrator.");
+	goodbye($Language->getText('forum_attach_download','type_removed'));
 }
 
 if ( (db_result($res2,0,'enabled') == 0 )) {
-	goodbye("Attachment Type has been disabled by the administrator.");
+	goodbye($Language->getText('forum_attach_download','type_disabled'));
 }
 
 
@@ -112,7 +120,6 @@ if (is_array($mimetype))
 	header('Content-type: unknown/unknown');
 }
 
-$count = 1;
 $filedata = base64_decode(db_result($res,0,'filedata'));
 echo $filedata;
 flush();

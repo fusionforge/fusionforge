@@ -1,3 +1,13 @@
+24-08-2005
+	DB : after discussing some issues, fixed the variable names, and changed the schema of forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes attachs that belong to deleted messages and/or forums
+	attachments : 
+		* admin -> add new attach type
+		* admin -> delete attach type
+		* admin -> modify attach type
+		* admin -> added double submit check to the attachment type forms
+		* uploading of attach now checks for image sizes restrictions
+		* download of attach checks user perms
+
 23-08-2005
 	attachments :
 		* changed DB to accept attach types per project

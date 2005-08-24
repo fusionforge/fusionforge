@@ -186,7 +186,9 @@ class ForumHTML extends Error {
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br />
-					' . $am->PrintAttachLink($msg->getID(),$group_id) . '
+					';
+					$msgforum = $msg->getForum();
+					$ret_val .= $am->PrintAttachLink($msg->getID(),$group_id,$msgforum->getID()) . '
 					<br />
 					<a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.

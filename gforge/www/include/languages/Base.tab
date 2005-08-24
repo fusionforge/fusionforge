@@ -775,7 +775,7 @@ forum_admin	really_sure	I'm Really Sure
 forum_admin	delete	Delete
 forum_admin	deleted	Successfully Deleted
 forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
-forum_admin	manage_attachs	Manage Attachments
+forum_admin	manage_attach_types	Manage Attachment Types
 forum_admin_attachs	extension	Extension
 forum_admin_attachs	maxfilesize	Max Filesize
 forum_admin_attachs	maxwidth	Max Width
@@ -784,7 +784,12 @@ forum_admin_attachs	enabled	Enabled
 forum_admin_attachs	actions	Actions
 forum_admin_attachs	attachtype	Attachment Type
 forum_admin_attachs	mimetype	Mime Type
+forum_admin_attachs	extension_exists	Name already exists, please choose a different one or edit the corresponding one
 forum_admin_attachs	mimetype_advice	If you don´t know what to put here, leave blank and the file will download as a binary attachment
+forum_admin_attachs	updateok	Attachment Type Updated Successfully
+forum_admin_attachs	updatenot_ok	Problem Updating Attachment Type
+forum_admin_attachs	deleteok	Attachment Type Deleted
+forum_admin_attachs	deletenot_ok	Couldn´t delete Attachment Type
 forum_admin_addforum	add_forum	Add This Forum
 forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
 forum_admin_addforum	allow_attach	Allow File Attachment?
@@ -869,6 +874,12 @@ forum_attachmngr	err_upload	Error, problem with the attachment file uploaded int
 forum_attachmngr	uploadok	File uploaded
 forum_attachmngr	upload_notok	File not uploaded
 forum_attachmngr	err_msgid	Couldn´t get message id
+forum_attachmngr	bad_dimension	File not uploaded, dimensions too large
+forum_attachmngr	not_image	The file provided has the extension but isn´t an image type
+forum_attach_download	cannot_delete	You cannot delete this attachment
+forum_attach_download	deleted	Attachment deleted
+forum_attach_download	type_removed	The attachment type has been removed by the administrator
+forum_attach_download	type_disabled	The Attachment Type has been disabled by the administrator
 forum_message	by	BY
 forum_message	date	DATE
 forum_message	message	Message
