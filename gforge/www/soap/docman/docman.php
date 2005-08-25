@@ -156,14 +156,14 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','addDocument','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','addDocument','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','addDocument',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
 	$d = new Document($g);
 	if (!$d || !is_object($d)) {
 		return new soap_fault ('','addDocument','Could Not create Document','Could Not create Document');
 	} elseif ($d->isError()) {
-		return new soap_fault ('','addDocument','$d->getErrorMessage()',$d->getErrorMessage());
+		return new soap_fault ('','addDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 
 	if ($base64_contents) {		
@@ -210,14 +210,14 @@ function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) 
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','addDocumentGroup','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','addDocumentGroup','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','addDocumentGroup',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
 	$dg = new DocumentGroup($g);
 	if (!$dg || !is_object($dg)) {
 		return new soap_fault ('','addDocumentGroup','Could Not get Document Group','Could Not Get Document Group');
 	}elseif ($dg->isError()) {
-		return new soap_fault ('','addDocumentGroup','$dg->getErrorMessage()',$dg->getErrorMessage());
+		return new soap_fault ('','addDocumentGroup',$dg->getErrorMessage(),$dg->getErrorMessage());
 	}
 	if (!$dg->create($groupname, $parent_doc_group)) {
 		return new soap_fault ('','addDocumentGroup','Could Not Create Document Group','Could Not Create Document Group');
@@ -252,7 +252,7 @@ function &getDocuments($session_ser,$group_id,$doc_group_id) {
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','getDocuments','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','getDocuments','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','getDocuments',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
 
@@ -260,7 +260,7 @@ function &getDocuments($session_ser,$group_id,$doc_group_id) {
 	if (!$df || !is_object($df)) {
 		return new soap_fault ('','getDocuments','Could Not Get Document Factory','Could Not Get Document Factory');
 	} elseif ($df->isError()) {
-		return new soap_fault ('','getDocuments',$df->getErrorMessage(),df>getErrorMessage());
+		return new soap_fault ('','getDocuments',$df->getErrorMessage(),$df->getErrorMessage());
 	}
 	
 	$df->setDocGroupID($doc_group_id);
@@ -317,7 +317,7 @@ function &getDocumentGroups($session_ser,$group_id) {
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','getDocumentGroups','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','getDocumentGroups','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','getDocumentGroups',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
 
@@ -325,7 +325,7 @@ function &getDocumentGroups($session_ser,$group_id) {
 	if (!$dgf || !is_object($dgf)) {
 		return new soap_fault ('','getDocumentGroups','Could Not Get Document Group Factory','Could Not Get Document Group Factory');
 	} elseif ($dgf->isError()) {
-		return new soap_fault ('','getDocumentGroups',$dgf->getErrorMessage(),dgf>getErrorMessage());
+		return new soap_fault ('','getDocumentGroups',$dgf->getErrorMessage(),$dgf->getErrorMessage());
 	}
 	
 	return documentsGroup_to_soap($dgf->getDocumentGroups());
@@ -337,13 +337,7 @@ function &getDocumentGroups($session_ser,$group_id) {
 //
 function documentsGroup_to_soap($dg_arr) {
 	$return = array();
-	
-	/*if (!is_object($dg_arr[0])) {
-	$return[]=array(
-				'doc_group_id'=>count($dg_arr),
-				'parent_doc_group'=>$dg_arr[0],
-				'groupnamename'=>'There is no object in the array.');
-	}*/
+		
 	for ($i=0; $i<count($dg_arr); $i++) {
 		if ($dg_arr[$i]->isError()) {
 				$return[]=array(
@@ -391,14 +385,14 @@ function &getDocumentFiles($session_ser,$group_id,$doc_group_id,$doc_id) {
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','GetDocumentFiles','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','GetDocumentFiles','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','GetDocumentFiles',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 	
 	$d=new Document($g,$doc_id);
 	if (!$d || !is_object($d)) {
 		return new soap_fault ('','GetDocumentFiles','Could Not Get Document','Could Not Get Document');
 	} elseif ($d->isError()) {
-		return new soap_fault ('','GetDocumentFiles','$d->getErrorMessage()',$d->getErrorMessage());
+		return new soap_fault ('','GetDocumentFiles',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 	
 	$return = (documentfiles_to_soap($d));
@@ -439,18 +433,18 @@ function documentDelete($session_ser,$group_id,$doc_id) {
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','documentDelete','Could Not Get Group','Could Not Get Group');
 	} elseif ($g->isError()) {
-		return new soap_fault ('','documentDelete','$g->getErrorMessage()',$g->getErrorMessage());
+		return new soap_fault ('','documentDelete',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 	
 	$d= new Document($g,$doc_id);
 	if (!$d || !is_object($d)) {
 		return new soap_fault ('','documentDelete','Could Not Get Document','Could Not Get Document');
 	} elseif ($d->isError()) {
-		return new soap_fault ('','documentDelete','$d->getErrorMessage()',$d->getErrorMessage());
+		return new soap_fault ('','documentDelete',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 		
 	if (!$d->delete()) {
-		return new soap_fault ('','documentDelete','$d->getErrorMessage()',$d->getErrorMessage());
+		return new soap_fault ('','documentDelete',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
 		return true;
 	}
