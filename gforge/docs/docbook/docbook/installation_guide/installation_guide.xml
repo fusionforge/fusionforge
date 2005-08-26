@@ -55,6 +55,9 @@
 		</para>
 		<itemizedlist>
 			<listitem>
+				<para>Debian GNU/Linux 3.1 (Sarge)</para>
+			</listitem>
+			<listitem>
 				<para>RedHat Enterprise Linux 3 with bundled packages except for a compiled GNU Mailman</para>
 			</listitem>
 			<listitem>
@@ -76,7 +79,7 @@
 				You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://roland.mas.free.fr/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
 			</para>
 			<para>
-				Note that GForge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scratch install snapshot are also available for a guided installation.
+				Note that GForge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. Package versions of GForge may lag behind upstream versions. From scratch install snapshot are also available for a guided installation.
 			</para>
 		</section>
 		<section>
@@ -89,44 +92,35 @@
 				<title>Directory Layout</title>
 				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/var/www/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
 				<note>
-					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/lib/gforge</filename>.</para>
+					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/gforge</filename>. You may use symbolic links to physically place files in FHS-compliant places and still use directory paths that are presented in this manual.</para>
 				</note>
 			</section>
 			<section>
 				<title>Unpacking</title>
 				<para>To install GForge, follow these steps (as root):</para>
 <screen>
-# <userinput>bzip2 -dc gforge-4.1.tar.bz2 | tar xvf -</userinput>
-# <userinput>mv gforge-4.1 <replaceable>/var/www/gforge</replaceable></userinput>
+# <userinput>bzip2 -dc gforge-4.5.tar.bz2 | tar xvf -</userinput>
+# <userinput>mv gforge-4.5 <replaceable>/var/www/gforge</replaceable></userinput>
 </screen>
 			</section>
 			<section>
 				<title>GForge Config File</title>
-				<para>In the GForge distribution, you will find <filename>etc/local.inc</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable>):</para>
+				<para>In the GForge distribution, you will find <filename>etc/local.inc.example</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable> and <replaceable>apache-group</replaceable>):</para>
 <programlisting>
 # <userinput>mkdir /etc/gforge</userinput>
-# <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc /etc/gforge</userinput>
 # <userinput>chown -R root: /etc/gforge</userinput>
+# <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc.example /etc/gforge/local.inc</userinput>
 # <userinput>chmod -R 644 /etc/gforge</userinput>
-# <userinput>chown <replaceable>apache-user</replaceable> /etc/gforge/local.inc</userinput>
+# <userinput>chown <replaceable>apache-user</replaceable>:<replaceable>apache-group</replaceable> /etc/gforge/local.inc</userinput>
 # <userinput>chmod 600 /etc/gforge/local.inc</userinput>
 </programlisting>
 			</section>
 			<section>
 				<title>Configuring GForge</title>
+				<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
 				<orderedlist>
-					<listitem><para>Login as <literal>root</literal> user</para></listitem>
 					<listitem>
-						<para>Create a directory <filename class="directory">/etc/gforge</filename></para>
-					</listitem>
-					<listitem>
-						<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory"><replaceable>/var/www/gforge</replaceable>/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
-					</listitem>
-					<listitem>
-						<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
-						<orderedlist>
-							<listitem>
-								<para>Database configuration:</para>
+						<para>Database configuration:</para>
 <programlisting>
 $sys_dbhost="localhost"
 $sys_dbname="gforge"
@@ -134,17 +128,17 @@ $sys_dbuser="gforge"
 $sys_dbpasswd="gforge"
 $sys_server="postgres"
 </programlisting>
-							</listitem>
-							<listitem>
-								<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
+					</listitem>
+					<listitem>
+						<para>Change the following basic variables::</para>
 <programlisting>
 $sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";
+$sys_themeroot="<replaceable>/var/www/gforge</replaceable>/www/themes/";
+$sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
 </programlisting>
-							</listitem>
-							<listitem>
-								<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
-							</listitem>
-						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
 					</listitem>
 				</orderedlist>
 			</section>
@@ -211,18 +205,27 @@ $ <userinput>createlang plpgsql gforge</userinput>
 $ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
 $ <userinput>psql -a -U gforge -W -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
 </screen>
+				<note>
+					<para>You may experience the following errors.  They are harmless and you can safely ignore them:</para>
+<screen>
+ERROR:  permission denied for language c
+ERROR:  must be superuser to create procedural language
+ERROR:  permission denied for schema public
+</screen>
+				</note>
 			</section>
 		</section>
 		<section>
 			<title>Configuring DNS Server (BIND)</title>
-			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums &ndash; consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
-			<para>New subdomain in <replaceable>company.com</replaceable> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
+			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example GForge configuration file and replace it with your domain name.</para>
+			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums &ndash; consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
+			<para>New subdomain in <literal>gforge.<replaceable>company.com</replaceable></literal> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
 <screen>
 gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
 ns.gforge       IN      A       <replaceable>1.2.3.4</replaceable>
 </screen>
 			<note>
-				<para>Do not add the latter resource record (<literal>ns.gforge</literal>) if this DNS server serves both <literal><replaceable>company.com</replaceable></literal> and <literal>gforge.<replaceable>company.com</replaceable></literal>.</para>
+				<para>Do not add the latter resource record (<literal>ns.gforge</literal>) if this DNS server serves both <literal><replaceable>company.com</replaceable></literal> and <literal>gforge.<replaceable>company.com</replaceable></literal> zones.</para>
 			</note>
 			<para>New zone file for <literal>gforge.<replaceable>company.com</replaceable></literal> may look like this:</para>
 <screen>
@@ -287,7 +290,8 @@ $ <userinput>php4 -i | fgrep php.ini</userinput>
 		</section>
 		<section id="web-server">
 			<title>Configuring the Web Server (Apache)</title>
-			<para>First, you should decide where to put GForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.  Use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to GForge virtual host configuration for Apache.  All is inside the following template:</para>
+			<para>First, you should decide where to put GForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.</para>
+			<para>You may use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to making GForge virtual host configuration for Apache from scratch.  All is inside the following template:</para>
 <programlisting>
 NameVirtualHost <replaceable>1.2.3.4</replaceable>
 &lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
@@ -296,6 +300,9 @@ NameVirtualHost <replaceable>1.2.3.4</replaceable>
 
 &lt;/VirtualHost&gt;
 </programlisting>
+			<note>
+				<para>Configuring for SSL is not discussed in this guide.</para>
+			</note>
 			<orderedlist>
 				<listitem>
 					<para>Set basic virtual host settings:</para>
@@ -307,16 +314,16 @@ ServerAdmin webmaster@gforge.<replaceable>company.com</replaceable>
 				<listitem>
 					<para>Define log files:</para>
 <programlisting>
-CustomLog "<replaceable>/var/log/gforge</replaceable>/access.log" combined
-ErrorLog  "<replaceable>/var/log/gforge</replaceable>/error.log"
+CustomLog "<replaceable>/var/log/gforge</replaceable>/gforge/access.log" combined
+ErrorLog  "<replaceable>/var/log/gforge</replaceable>/gforge/error.log"
 </programlisting>
 					<para>Usual practice is to use <command>logrotate</command> on these files.  Alternative is to pipe logs to <command>cronolog</command> which will automatically make directory with <filename>access.log</filename> and <filename>error.log</filename> for each day:</para>
 <programlisting>
-CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
-ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
+CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/gforge/%Y/%m/%d/access.log" combined
+ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/gforge/%Y/%m/%d/error.log"
 </programlisting>
 					<note>
-						<para>In FHS-compliant install, you may want to use <filename class="directory">/var/local/log/gforge</filename> instead of <filename class="directory">/var/log/gforge</filename>.</para>
+						<para>In FHS-compliant install, you may want to use <filename class="directory">/var/local/gforge/log</filename> instead of <filename class="directory">/var/log/gforge</filename>. In any cases, the relevant directories should be created with appropriate permissions.</para>
 					</note>
 				</listitem>
 				<listitem>
@@ -334,11 +341,14 @@ DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
 				</listitem>
 				<listitem>
 					<para>Configuring PHP for Apache</para>
-					<para>The configuration for the PHP module for Apache is different for Apache versions 1.3 and 2.0. Follow the instructions for the version installed on your system.</para>
-					<itemizedlist>
-						<listitem>
-							<para>Configuring PHP for Apache 1.3</para>
-							<para>Insert the following instructions after the <literal>DocumentRoot</literal> directive:</para>
+					<para>Ensure that PHP module is loaded.  You may need to consult your distribution manual. Typical lines that load and configure PHP module are like this:</para>
+<programlisting>
+LoadModule php_module	modules/libphp.so
+AddModule mod_php.c
+
+AddType application/x-httpd-php .php
+</programlisting>
+					<para>Insert the following instructions after the <literal>DocumentRoot</literal> directive:</para>
 <programlisting>
 &lt;Location /projects&gt;
   ForceType application/x-httpd-php
@@ -347,16 +357,9 @@ DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
   ForceType application/x-httpd-php
 &lt;/Location&gt;
 </programlisting>
-							<para>Ensure the following lines are present and not commented out in Apache configuration:</para>
-<programlisting>
-LoadModule php_module	modules/libphp.so
-AddModule mod_php.c
-</programlisting>
-						</listitem>
-						<listitem>
-							<para>Configuring PHP for Apache 2.0</para>
-							<para>For newer versions of Apache 2.0 (RedHat 9 or above), please follow Apache 1.3 instructions above.</para>
-							<para>Change the existing <literal>Files</literal> directive to:</para>
+					<note>
+						<para>If you use Apache 2, you may need to use a different configuration. Usually, this is not neede.</para>
+						<para>Change the existing <literal>Files</literal> directive to:</para>
 <programlisting>
 &lt;Files *.php&gt;
     SetOutputFilter PHP
@@ -365,8 +368,8 @@ AddModule mod_php.c
     LimitRequestBody 2097152
 &lt;/Files&gt;
 </programlisting>
-							<para>The <literal>LimitRequestBody</literal> directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size greater than 512Kb. With this directive, we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the <literal>upload_max_filesize</literal> directive in PHP configuration file.</para>
-							<para>Add the following lines:</para>
+						<para>The <literal>LimitRequestBody</literal> directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size greater than 512Kb. With this directive, we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the <literal>upload_max_filesize</literal> directive in PHP configuration file.</para>
+						<para>Add the following lines:</para>
 <programlisting>
 &lt;Files projects&gt;
 SetOutputFilter PHP
@@ -380,8 +383,7 @@ SetInputFilter PHP
 AcceptPathInfo on
 &lt;/Files&gt;
 </programlisting>
-						</listitem>
-					</itemizedlist>
+					</note>
 				</listitem>
 				<listitem>
 					<para>Set up PHP module:</para>
@@ -391,7 +393,6 @@ php_flag   gpc_magic_quotes On
 php_flag   files_uploads    On
 php_value  include_path     ".:/etc/gforge:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include"
 php_value  default_charset  "UTF-8"
-
 </programlisting>
 				</listitem>
 				<listitem>
@@ -412,7 +413,7 @@ DirectoryIndex index.php
 						<listitem>
 							<para>Declare new zone in <literal>gforge.<replaceable>company.com</replaceable></literal> zone:</para>
 <programlisting>
-projects        IN      NS      ns.projects.gforge<replaceable>company.com</replaceable>
+projects        IN      NS      ns.projects.gforge.<replaceable>company.com</replaceable>
 </programlisting>
 							<para>If DNS server <emphasis>doesn't</emphasis> serve the new <literal>projects.gforge.<replaceable>company.com</replaceable></literal> zone, add the following line too:</para>
 <programlisting>
@@ -458,18 +459,26 @@ $ <userinput>host test.projects.gforge.<replaceable>company.com</replaceable></u
 				<section>
 					<title>Web Server Configuration (Apache)</title>
 					<para>Module <literal>vhost_alias</literal> should be enabled and the following directives should be added to <filename>httpd.conf</filename> (<filename class="directory"><replaceable>/var/www/homedirs</replaceable>/groups</filename> is what you have chosen in <varname>$groupdir_prefix</varname>):</para>
+					<note>
+						<para>If you want to be FHS-compliant, you may use <filename>/var/local/gforge/log</filename> and <filename>/var/local/gforge/homedirs</filename>. </para>
+					</note>
 <programlisting>
 #
 #	WARNING - security is degraded by having this
 #	on the same machine as the primary GForge
 #
-&lt;VirtualHost 192.168.1.1&gt;
+NameVirtualHost <replaceable>1.2.3.4</replaceable>
+&lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
   ServerName        projects.gforge.<replaceable>company.com</replaceable>
   ServerAlias       *.gforge.<replaceable>company.com</replaceable>
   UseCanonicalName  Off
 
-  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
-  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
+# You may want to add these files to logrotate, or just use cronolog as shown below
+  CustomLog "<replaceable>/var/log/gforge</replaceable>/projects/access.log" combined
+  ErrorLog  "<replaceable>/var/log/gforge</replaceable>/projects/error.log"
+
+#  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/projects/%Y/%m/%d/access.log" combined
+#  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/projects/%Y/%m/%d/error.log"
 
   DocumentRoot        <replaceable>/var/www/homedirs</replaceable>/groups
   VirtualDocumentRoot <replaceable>/var/www/homedirs</replaceable>/groups/%1/htdocs
@@ -516,7 +525,7 @@ noreply: /dev/null
 			<para>You may want to consider adding <literal>MX</literal> (mail exchanger) resource records for the above domain names.  This is meaningful only if you want fallback mail routes or if firewall doesn't allow incoming port 25 for the server.</para>
 			<section>
 				<title>Mail gateways to forum and tracker</title>
-				<para>When forum or tracker is monitored, replying to monitor mails are processed by gateways.  These gateways use GForge configuration file <filename>/etc/gforge/local.inc</filename> so that they can access database but the problem is that they run with different user than that of Apache.  So if you want to use these gateways, you'll have to change access mode of <filename>local.inc</filename>.</para>
+				<para>When forum or tracker is monitored, replying to monitor mails are processed by mail gateways.  These gateways use GForge configuration file <filename>/etc/gforge/local.inc</filename> so that they can access database but the problem is that they run with different user than that of Apache.  So if you want to use these gateways, you'll have to change access mode of <filename>local.inc</filename>.</para>
 			</section>
 		</section>
 		<section>
@@ -527,12 +536,12 @@ noreply: /dev/null
 # <userinput>chown -R <replaceable>apache-user</replaceable> <replaceable>/var/lib/gforge</replaceable>/download</userinput>
 </screen>
 			<note>
-				<para>For FHS-compliance, use <filename class="directory"><replaceable>/var/local/lib/gforge</replaceable>/download</filename>.</para>
+				<para>For FHS-compliance, use <filename class="directory">/var/local/gforge/download</filename>.</para>
 			</note>
 		</section>
 		<section>
 			<title>Configuring GNU Mailman</title>
-			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/usr/lib/mailman</filename> but sometimes it can be found in <filename class="directory">/var/mailman</filename>.  You must adjust <varname>MAILMAN_DIR</varname> in <filename>cronjobs/mail/mailing_lists_create.php</filename>.  The directory name must end in slash.</para>
+			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/usr/lib/mailman</filename> but sometimes it can be found in <filename class="directory">/var/mailman</filename>.  You should change GForge configuration variable <varname>$sys_path_to_mailman</varname> to that Mailman directory.</para>
 			<para>Cronjobs for Mailman are located in <filename>cronjobs/mail/*</filename>.  <filename>cronjobs/mail/mailing_lists_create.php</filename> is used obviously to create new mailing lists.</para>
 			<para>For all problems with Mailman installation and use, contact the Mailman mailing lists for help.</para>
 			<para>To install it:</para>
@@ -541,10 +550,27 @@ noreply: /dev/null
 					<para>Install a GNU Mailman package or compile it</para>
 				</listitem>
 				<listitem>
+					<para>Don't integrate Mailman with Postfix (or other MTA) by delegating it generation of alias-style file.  GForge generates such file.  But you'll need to put mail aliases in <filename>/etc/aliases</filename> for the required standard <literal>mailman</literal> mailing list.  Create it with:</para>
+<screen>
+# <replaceable>/usr/lib/mailman/bin</replaceable>/newlist mailman
+</screen>
+				</listitem>
+				<listitem>
+					<para>Configure <filename>mm_cfg.py</filename>:</para>
+					<itemizedlist>
+						<listitem>
+							<para><varname>DEFAULT_HOST_NAME</varname> and <varname>DEFAULT_URL</varname> should point to <literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
+						</listitem>
+						<listitem>
+							<para>Don't use ugly <literal>cgi-bin</literal> as part of URLs.</para>
+						</listitem>
+					</itemizedlist>
+				</listitem>
+				<listitem>
 					<para><command>su</command> to <literal>root</literal> and set the Mailman password by using the <command>mmsitepass</command> command</para>
 				</listitem>
 				<listitem>
-					<para>Create directory <filename class="directory"><replaceable>/var/www</replaceable>/mailman/</filename>.  It will be document root for <literal>lists.gforge.<replaceable>company.com</replaceable>.</literal></para>
+					<para>Create directory <filename class="directory"><replaceable>/var/www/mailman</replaceable>/</filename>.  It will be document root for <literal>lists.gforge.<replaceable>company.com</replaceable>.</literal></para>
 				</listitem>
 				<listitem>
 					<para>In Web server configuraton, create virtual host for Mailman, adjusting <literal>ScriptAlias</literal> and <literal>Alias</literal> directives:</para>
@@ -552,23 +578,26 @@ noreply: /dev/null
 &lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
   ServerName    lists.gforge.<replaceable>company.com</replaceable>
   ServerAdmin   mailman@lists.gforge.<replaceable>company.com</replaceable>
-  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/access.log" combined
-  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/%Y/%m/%d/error.log"
 
-  DocumentRoot  /var/www/mailman
+# You may want to add these files to logrotate, or just use cronolog as shown below
+  CustomLog "<replaceable>/var/log/gforge</replaceable>/lists/access.log" combined
+  ErrorLog  "<replaceable>/var/log/gforge</replaceable>/lists/error.log"
+
+#  CustomLog "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/lists/%Y/%m/%d/access.log" combined
+#  ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/lists/%Y/%m/%d/error.log"
+
+  DocumentRoot  <replaceable>/var/www/mailman</replaceable>
   DirectoryIndex index.html
   ScriptAlias   /mailman/ <replaceable>/usr/lib/mailman/cgi-bin/</replaceable>
   Alias         /pipermail/ <replaceable>/var/lib</replaceable>/mailman/archives/public/
+  Alias         /doc/ <replaceable>usr/share/images/mailman/</replaceable>
 &lt;/VirtualHost&gt;
 </programlisting>
-				</listitem>
-				<listitem>
-					<para>Run the script <filename>gforge/cronjobs/mail/mailing_lists_create.php</filename> (with <command>php -f</command>). This creates any lists that are already in the database.</para>
 				</listitem>
 			</orderedlist>
 			<section>
 				<title>Mailing list for commits</title>
-				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal>. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>server.gforge.<replaceable>company.com</replaceable></literal>.</para>
+				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal> is created too. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>[^@]+@<replaceable>servername\.company\.com</replaceable></literal> where <replaceable>servername.company.com</replaceable> is name of the host where Mailman is installed (<literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
 			</section>
 		</section>
 		<section>
@@ -578,11 +607,12 @@ noreply: /dev/null
 # <userinput>mkdir <replaceable>/var/www</replaceable>/scmtarballs</userinput>
 # <userinput>mkdir <replaceable>/var/www</replaceable>/scmsnapshots</userinput>
 </screen>
+			<para>These directories correspond to GForge configuration variables <varname>$sys_scm_tarballs_path</varname> and <varname>$sys_scm_snapshots_path</varname>.</para>
 		</section>
 		<section>
 			<title>Cron Jobs</title>
 			<para>
-				Cron jobs are in the <filename class="directory">cronjobs/</filename> directory and the <filename>README</filename> file contains a sample crontab. This gives you the basic cronjobs for updating certain statistics and data on the site.
+				Cron jobs are in the <filename class="directory">cronjobs/</filename> directory and the <filename>crontab.in</filename> file contains a sample crontab. This gives you the basic cronjobs for updating certain statistics and data on the site.
 			</para>
 			<para>
 				<filename class="directory">cronjobs/cvs-cron/</filename> contains scripts useful for creating blank cvs trees and managing the <filename>/etc/groups</filename>, <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename> files. See <filename>cronjobs/README.root</filename> for more info.
@@ -590,6 +620,7 @@ noreply: /dev/null
 			<para>
 				<filename class="directory">cronjobs/mail/</filename> contains files useful for the creation of new mailing lists in mailman and creating the <filename>/etc/aliases</filename> file.
 			</para>
+			<para>Prepare for <filename>cronjobs/cvs-cron/usergroup.php</filename> and <filename>cronjobs/mail/mailaliases.php</filename>.</para>
 			<screen>
 # adduser anonymous
 # cp /etc/aliases /etc/aliases.org
@@ -597,25 +628,29 @@ noreply: /dev/null
 # cp /etc/passwd /etc/passwd.org
 # cp /etc/group /etc/group.org
 </screen>
+			<note>
+				<para>There are two other ways to authenticate GForge users: LDAP and NSS with PostgreSQL backend.  They are not discussed in this guide.</para>
+			</note>
+			<caution>
+				<para>The <filename>cronjobs/cvs-cron/usergroup.php</filename> cron script will meddle with your <filename>/etc/passwd</filename>, <filename>/etc/group</filename>, and <filename>/etc/shadow</filename> files. By default, this cron will save these files with a <literal>.new</literal> extension. You will have to edit the cron script to remove the <literal>.new</literal> extension, but you must make sure that it is properly generating your files or your server could be unusable.</para>
+			</caution>
 			<warning>
 				<para>
 					The following command will blow away any existing root crontab:
 				</para>
 			</warning>
-			<screen>
+<screen>
 # crontab cronjobs/crontab.in
 </screen>
 			<para>Now edit the paths to the cron scripts by setting the value of <varname>GFORGE</varname> and <varname>PHP</varname> variables:</para>
 			<screen>
 # crontab -e
 </screen>
-			<caution>
-				<para>The <filename>cronjobs/cvs-cron/usergroup.php</filename> cron script will meddle with your <filename>/etc/passwd</filename>, <filename>/etc/group</filename>, and <filename>/etc/shadow</filename> files. By default, this cron will save these files with a <literal>.new</literal> extension. You will have to edit the cron script to remove the <literal>.new</literal> extension, but you must make sure that it is properly generating your files or your server could be unusable.</para>
-			</caution>
+			<para>Uncomment entries for <filename>cronjobs/cvs-cron/usergroup.php</filename>, <filename>cronjobs/mail/mailing_lists_create.php</filename>, and <filename>cronjobs/mail/mailaliases.php</filename> but not before understanding the consequences.</para>
 		</section>
 		<section>
 			<title>Verifying the Installation</title>
-			<para>To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.</para>
+			<para>To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage. You will need to either disable CVS and SVN plugins in some way, or configure them before making the first test.</para>
 			<note>
 				<para>If you get an <computeroutput>Error: Could Not Connect to Database</computeroutput>, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in <filename>pg_hba.conf</filename> a bit more trusting - for example, change the last work of the second line from <literal>md5</literal> to <literal>trust</literal>.</para>
 			</note>
@@ -654,16 +689,19 @@ gforge-> <userinput>VALUES (<replaceable>102</replaceable>,1,'A');</userinput>
 				<para>PHP must be compiled with <literal>--with-gd</literal>, or appropriate package must be installed.  Extra fonts for JPGraph are not necessary.  Be sure your <filename>/etc/gforge/local.inc</filename> file contains the proper path to the <filename class="directory">jpgraph/src/</filename> directory.</para>
 				<para>Manual installation can be done like this:</para>
 <screen>
-# tar -xzf jpgraph-1.17.tar.gz
-# mkdir /var/www/jpgraph
-# mv jpgraph-1.17/src/* /var/www/jpgraph
+# tar -xzf jpgraph-1.19.tar.gz
+# mkdir <replaceable>/var/www</replaceable>/jpgraph
+# cp -R jpgraph-1.19/src/* <replaceable>/var/www</replaceable>/jpgraph
 </screen>
-				<para>When you get your preferred version of JPGraph installed, you will have to edit one setting in <filename>jpgraph.php</filename>:</para>
+				<note>
+					<para>If you want FHS-compliance, <filename class="directory">/usr/local/share/jpgraph</filename></para>
+				</note>
+				<para>When you get your preferred version of JPGraph installed, you will have to edit one setting in <filename>jpgraph.php</filename> (or <filename>jpg-config.php</filename>, depending on JPGraph version):</para>
 <programlisting>
 DEFINE("USE_CACHE", false);
 </programlisting>
 				<warning>
-					<para>Be careful with JPGraph license: versions > 1.5.2 are not free (as in free speech).</para>
+					<para>Be careful with JPGraph license: versions &gt; 1.5.2 are not free (as in free speech).  You must check license before use.</para>
 				</warning>
 			</section>
 			<section>
