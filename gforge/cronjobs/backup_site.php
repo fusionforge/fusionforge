@@ -23,16 +23,20 @@
  */
 
 require_once('local.inc');
+require ('common/include/utils.php');
 require ('common/include/cron_utils.php');
 
 $database=$sys_dbname; //Database name from local.inc
-$time=time();
-$year=date('Y',$time); //obtain current year
-$month=date('m',$time); //obtain current month
-$day=date('d',$time); //obtain current day
-$datetime=$year.'-'.$month.'-'.$day; //we will use this to concatenate it with the tar filename
+$datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
+if(!(isset($sys_path_to_backup)) ||  (strcmp($sys_path_to_backup,"/") == 0)){
+	die("eror");
+	//TODO LOG THE ERROR
+}
 
+if(!util_is_root_dir($sys_path_to_backup){
+	$sys_path_to_backup=$sys_path_to_backup.'/';
+}
 
 system('pg_dump -Ft -b '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar', $retval);   //proceed with db dump
 system('tar -cvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar '.$sys_upload_dir , $retval);   //proceed upload dir tar file creation
@@ -41,7 +45,7 @@ system('tar -cvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar '.$sys_pat
 system('tar -cvf '.$sys_path_to_backup.'svnroot-tmp-'.$datetime.'.tar '.$sys_path_svnroot , $retval);   //proceed svnroot dir tar file creation
 
 //Now we store all the tar files we've just created in one tar called backup(date).tar 
-system('tar -cvf '.$sys_path_to_backup.'backup'.$datetime.'.tar '.$sys_path_to_backup.'*'.$datetime.'*',$retval);
+system('tar -cvf '.$sys_path_to_backup.'backup'.$datetime.'.tar '.$sys_path_to_backup.'*-tmp-'.$datetime.'*',$retval);
 
 //If execution of tar command was successfull ($retval equals zero) remove individual files
 if($retval==0){	

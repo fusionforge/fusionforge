@@ -24,7 +24,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require('local.inc');
 require_once('common/include/Error.class');
+require_once('common/include/database.php');
 require_once('common/docman/Document.class');
 require_once('common/docman/DocumentFactory.class');
 require_once('common/docman/DocumentGroup.class');
@@ -127,7 +129,80 @@ $server->wsdl->addComplexType(
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentFile[]')),
 	'tns:DocumentFile');
+	
 
+
+//
+// DocumentLanguage
+//
+$server->wsdl->addComplexType(
+	'DocumentLanguage',
+	'complexType',
+	'struct',
+	'sequence', 
+	'',
+	array(
+	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int'),
+	'description' => array('name'=>'description', 'type' => 'xsd:string')
+	
+	)		
+);
+	
+//
+// DocumentLanguage Array
+//
+
+$server->wsdl->addComplexType(
+	'ArrayOfDocumentLanguage',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentLanguage[]')),
+	'tns:DocumentLanguage');
+
+
+//
+//getDocumentLanguages
+//
+$server->register(
+	'getDocumentLanguages',
+	array(
+		'session_ser'=>'xsd:string'		
+		),
+	array('getDocumentLanguagesResponse'=>'tns:ArrayOfDocumentLanguage'),
+	$uri,$uri.'#getDocumentLanguages','rpc','encoded');
+
+//
+//getDocumentLanguages
+//
+function &getDocumentLanguages($session_ser) {
+	continue_session($session_ser);
+	$return = array();
+		
+	$languages = db_query('select language_id, classname from supported_languages');	
+	for ($row=0; $row<db_numrows($languages); $row++) {
+			$return[]=array(
+				'language_id'=>db_result($languages,$row,'language_id'),
+				'description'=>db_result($languages,$row,'classname')				
+			);
+		}
+	return $return;
+}
+
+//
+// validateLanguage is used to validate that the language_id that is provided is valid.
+//
+
+function validateLanguage($language_id){
+	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$languageId.'\'');	
+	if(db_numrows($res)==1){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 //
 //addDocument
@@ -143,7 +218,7 @@ $server->register(
 		'language_id'=>'xsd:int',
 		'base64_contents'=>'xsd:string',
 		'filename'=>'xsd:string',		
-		'filetype'=>'xsd:string'		
+		'file_url'=>'xsd:string'		
 	),
 	array('addDocumentResponse'=>'xsd:int'),
 	$uri,$uri.'#addDocument','rpc','encoded'
@@ -165,6 +240,10 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 	} elseif ($d->isError()) {
 		return new soap_fault ('','addDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	}
+	
+	if(!validateLanguage($language_id)){
+		return new soap_fault ('','addDocument','Invalid Language ID','Invalid Language ID');		
+	}	
 
 	if ($base64_contents) {		
 		$bin_data = base64_decode($base64_contents);
@@ -340,10 +419,7 @@ function documentsGroup_to_soap($dg_arr) {
 		
 	for ($i=0; $i<count($dg_arr); $i++) {
 		if ($dg_arr[$i]->isError()) {
-				$return[]=array(
-				'doc_group_id'=>2,
-				'parent_doc_group'=>2,
-				'groupnamename'=>'FOO');
+				//skip if error
 		} else {	
 			$return[]=array(
 				'doc_group_id'=>$dg_arr[$i]->getID(),
