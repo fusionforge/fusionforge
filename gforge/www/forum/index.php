@@ -50,6 +50,7 @@ if ($group_id) {
 
 //	echo $Language->getText('forum', 'choose');
 
+	echo $HTML->subMenu(array("My Monitored Forums"),array("myforums.php?group_id=$group_id"));
 	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'));
 	echo $HTML->listTableTop($tablearr);
 

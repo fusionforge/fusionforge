@@ -47,10 +47,14 @@ function goodbye($msg) {
 
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
-$attach_userid = getIntFromRequest("attach_userid");
+//$attach_userid = getIntFromRequest("attach_userid");
 $group_id = getIntFromRequest("group_id");
 $forum_id = getIntFromRequest("forum_id");
 global $Language;
+
+if ( !($forum_id) || !($group_id) || !($attachid) ) {
+	exit_missing_param();
+}
 
 $g =& group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
@@ -65,8 +69,16 @@ if (!$f || !is_object($f)) {
 }
 
 if ($delete == "yes") {
+	if ( ! session_loggedin() ) {
+		exit_not_logged_in();//only logged users can delete attachments
+	}
 	//only the user that created the attach can delete it (safecheck)
-	if ($attach_userid != user_getid()) {
+	$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
+	$res = db_query($sql);
+	if ( (!$res) ) {
+		exit_error("Attachment Download error","DB Error");
+	}
+	if (db_result($res,0,'userid') != user_getid()) {
 		goodbye($Language->getText('forum_attach_download','cannot_delete'));
 	}	else {
 		db_query ("DELETE FROM forum_attachment where attachmentid=$attachid");
@@ -74,7 +86,12 @@ if ($delete == "yes") {
 	}
 }
 
-$sql = "SELECT  * FROM forum_attachment as attachment where attachment.attachmentid=$attachid";
+//only if the forum is public, or else the user is admin or has view privileges can download the attachment
+if ( ! ( ($f->userCanView()) || ($f->userIsAdmin()) || ($f->isPublic()) ) ) {
+	exit_permission_denied();
+}
+
+$sql = "SELECT  * FROM forum_attachment where attachmentid=$attachid";
 $res = db_query($sql);
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 $sql = "SELECT * FROM forum_attachment_type where extension = '$extension'";
@@ -91,8 +108,6 @@ if ( db_numrows($res2)<1) {
 if ( (db_result($res2,0,'enabled') == 0 )) {
 	goodbye($Language->getText('forum_attach_download','type_disabled'));
 }
-
-
 
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
 header('X-Powered-By:');
@@ -120,7 +135,11 @@ if (is_array($mimetype))
 	header('Content-type: unknown/unknown');
 }
 
+
 $filedata = base64_decode(db_result($res,0,'filedata'));
 echo $filedata;
 flush();
+//increase the attach count
+db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
+
 ?>

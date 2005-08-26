@@ -1,3 +1,51 @@
+2005-08-26
+	* when attachments are downloaded, its download count is incremented
+	* forum/attachment.php secured
+2005-08-25
+	myforums page : added the myforums page to the "my page" and when you visit any list of forums 
+	for any group. it shows a description of all the forums you are monitoring, the project they belong to, a 
+	link to them and an indicator that tells you if there´s new content for that forum.
+
+2005-08-24
+	DB : after discussing some issues, fixed the variable names, and changed the schema of 
+
+forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes 
+attachs that belong to deleted messages and/or forums
+	attachments : 
+		* admin -> add new attach type
+		* admin -> delete attach type
+		* admin -> modify attach type
+		* admin -> added double submit check to the attachment type forms
+		* uploading of attach now checks for image sizes restrictions
+		* download of attach checks user perms
+
+2005-08-23 Daniel Perez <daniel@gforgegroup.com>
+	attachments :
+		* changed DB to accept attach types per project
+		* added functionality to check for enabled/disabled attach types
+		* admin -> added class ForumAdmin which will gradually incorporate all functions related 
+		to forum administration
+		* admin -> added first version of attachment type manager (still needs development)
+
+update to be made : 
+1) run 20050823.sql
+
+2005-08-22 Daniel Perez <daniel@gforgegroup.com>
+	initial attachment version. upload, delete, view attachments
+	admin -> option to modify allow anonymous / public forum status
+	bbcode -> added support for bbcode
+	
+updates to be made : 
+1) run 20050822.sql
+2) add to local.inc the following variables for configuration
+
+$sys_bbcode_make_clickable
+$sys_bbcode_smilie_on
+$sys_bbcode_bbcode_on
+$sys_bbcode_strip_html
+
+3) update the files through CVS, of course ;)
+
 2005-08-18	Francisco Gimeno <francisco@gforgegroup.com>
 
 	* cronjobs/cron-cvs/cvs.php: added support for plugins

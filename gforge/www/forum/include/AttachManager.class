@@ -98,17 +98,17 @@ class AttachManager extends Error {
 		
 		//ask if the message has an attachment
 
-		$sql = "SELECT attachmentid,filename,userid FROM forum_attachment where msg_id=$msg_id";
+		$sql = "SELECT attachmentid,filename,userid,counter FROM forum_attachment where msg_id=$msg_id";
 		$res = db_query($sql);
 		if ($res) {
 			$attachid = db_result($res,0,'attachmentid');
 		}
 		if ($attachid) {
 			$attach = "
-			<a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>";
+			<a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
 			if (user_getid() == $attach_userid) { //only permit the user who created the attach to delete it
-				$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&attach_userid=$attach_userid&delete=yes','yes');\">" .  "<font size=\"-3\">delete</font></a>";
+				$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&delete=yes','yes');\">" .  "<font size=\"-3\">delete</font></a>";
 			}
 		}	else {
 			$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . "No attachment found";
@@ -117,6 +117,13 @@ class AttachManager extends Error {
 		return $attach;
 	}
 	
+	/**
+	 * Function attach : saves the file in the DB
+	 *
+	 * @param 	int		The file to attach
+	 * @param 	int		The group.
+	 *
+	 */
 	function attach($attach,$group_id) {
 		global $Language;
 		global $_FILES;
@@ -132,8 +139,6 @@ class AttachManager extends Error {
 			$attachtypes[$aux[0]] = $aux;
 		}
 				
-		
-	
 		$attachment = trim($attach['tmp_name']);
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);

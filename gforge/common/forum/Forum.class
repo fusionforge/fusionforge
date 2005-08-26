@@ -582,6 +582,16 @@ class Forum extends Error {
 		db_query("DELETE FROM forum_saved_place
 			WHERE forum_id='".$this->getID()."'");
 //echo '3'.db_error();
+		$res = db_query("SELECT msg_id from forum where group_forum_id='".$this->getID()."'");//get the messages for this forum, to delete its attachments
+		$delete_ids = array();
+		for ($i=0;$i<db_numrows($res);$i++) {
+			$aux = db_fetch_array($res);
+			$delete_ids[] = $aux[0];
+		}
+		foreach ($delete_ids as $id) {
+			db_query("DELETE FROM forum_attachment where msg_id='$id'");
+		}
+		
 		db_query("DELETE FROM forum
 			WHERE group_forum_id='".$this->getID()."'");
 //echo '4'.db_error();

@@ -381,6 +381,8 @@ class ForumMessage extends Error {
 			WHERE msg_id='$msg_id' 
 			AND group_forum_id='".$this->Forum->getID()."'";
 		$toss=db_query($sql);
+		$sql = "DELETE FROM forum_attachment where msg_id='$msg_id'";
+		$res = db_query($res);
 
 		return $count;
 

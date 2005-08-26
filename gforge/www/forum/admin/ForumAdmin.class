@@ -193,7 +193,7 @@ class ForumAdmin extends Error {
 	 *  @param  string	 action to execute.
 	 */
 	function ExecuteAction ($action) {
-		global $Language;
+		global $Language,$HTML;
 		if ($action=="attach_extensions") {
 			//view the attachment type extensions
 			$gid = $this->group_id;
@@ -217,17 +217,17 @@ class ForumAdmin extends Error {
 				}
 			}
 			</script>
-			<table border="1">
-				<tr>
-					<td>' . $Language->getText('forum_admin_attachs','extension') . '</td>
-					<td>' . $Language->getText('forum_admin_attachs','maxfilesize') . '</td>
-					<td>' . $Language->getText('forum_admin_attachs','maxwidth') . '</td>
-					<td>' . $Language->getText('forum_admin_attachs','maxheight') . '</td>
-					<td>' . $Language->getText('forum_admin_attachs','enabled') . '</td>
-					<td>' . $Language->getText('forum_admin_attachs','actions') . '</td>
-				</tr>
-			';
 			
+			';
+			$title = array();
+			$title[] = $Language->getText('forum_admin_attachs','extension');
+			$title[] = $Language->getText('forum_admin_attachs','maxfilesize');
+			$title[] = $Language->getText('forum_admin_attachs','maxwidth');
+			$title[] = $Language->getText('forum_admin_attachs','maxheight');
+			$title[] = $Language->getText('forum_admin_attachs','enabled');
+			$title[] = $Language->getText('forum_admin_attachs','actions');
+			echo $HTML->listTableTop($title);
+			$i = 2;
 			while ($onetype = db_fetch_array($types)) {
 				$onetype['size'] = $onetype['size'] ? $onetype['size']: $Language->getText('include_html','none');
 				switch($onetype['extension']) {
@@ -250,18 +250,18 @@ class ForumAdmin extends Error {
 				}
 				$onetype['enabled'] = $onetype['enabled'] ? $Language->getText('survey_edit','yes'): $Language->getText('survey_edit','no');
 				echo "
-				<tr>
+				<tr" . $HTML->boxGetAltRowStyle($i++). ">
 					<td><b>$onetype[extension]</b></td>
-					<td>$onetype[size]</td>
-					<td>$onetype[width]</td>
-					<td>$onetype[height]</td>
-					<td>$onetype[enabled]</td>
-					<td><a href=\"attachments.php?action=update_attach_type&group_id=$gid&extension=$onetype[extension]\"> Edit </a> | 
-						<a href=\"javascript:confirmDel('attachments.php?action=remove_attach_type&group_id=$gid&extension=$onetype[extension]'); \"> Delete</a></td>
+					<td><center>$onetype[size]</center></td>
+					<td><center>$onetype[width]</center></td>
+					<td><center>$onetype[height]</center></td>
+					<td><center>$onetype[enabled]</center></td>
+					<td><div align=\"right\"><a href=\"attachments.php?action=update_attach_type&group_id=$gid&extension=$onetype[extension]\"> Edit </a> | 
+						<a href=\"javascript:confirmDel('attachments.php?action=remove_attach_type&group_id=$gid&extension=$onetype[extension]'); \"> Delete</a></div></td>
 				</tr>";
 			}
+			echo $HTML->listTableBottom();
 			echo "
-			</table>
 			<p>
 				<center><input type=\"submit\" value=\"Add new\"></center></td>
 			</form>

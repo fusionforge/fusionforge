@@ -897,6 +897,10 @@ forum_message	thread_view	Thread View
 forum_message	title	View Message
 forum_monitor	activated	Forum monitoring started
 forum_monitor	deactivated	Forum monitoring deactivated
+forum_myforums	no_monitored	You have no monitored forums
+forum_myforums	myforums	My Monitored Forums
+forum_myforums	project	Project
+forum_myforums	newcontent	New Content?
 forum_save	saved	Forum Position Saved. New messages will be highlighted when you return
 forum_utils	added	Forum Added
 forum_utils	admin	Admin

@@ -31,7 +31,7 @@ require_once ('common/include/Group.class');
 require_once ('common/include/MailParser.class');
 require_once ('common/forum/Forum.class');
 require_once ('common/forum/ForumMessage.class');
-require_once('common/text/TextSupport.class'); // bbcode, smilies support
+//require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
 class ForumGateway extends Error {
 	/*
@@ -210,6 +210,10 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
+		
+		//$text_support = new TextSupport();
+		//$bbcode_uid = $text_support->prepareText($this->Body,0,0,0,0);//we get the text UNFORMATTED, as is
+
 		if (!$ForumMessage->create($this->Subject,$this->Body,-1,$this->ThreadId,$this->Parent)) {
 			$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
 			return false;
