@@ -140,6 +140,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	if (count($forums) < 1) {
 		echo '<strong>'.$Language->getText('my', 'no_monitored_forums').'</strong>'.$Language->getText('my', 'no_monitored_forums_details');
 	} else {
+		echo '<tr><td colspan="2"><center><strong><a href="/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
 		foreach ($forums as $f) {
 			echo '</td></tr>';
 			$group = $f->getGroup();
