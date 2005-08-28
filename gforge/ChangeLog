@@ -1,3 +1,8 @@
+2005-08-28  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml:
+	Plugins section is reviewed.
+
 2005-08-26
 	* when attachments are downloaded, its download count is incremented
 	* forum/attachment.php secured

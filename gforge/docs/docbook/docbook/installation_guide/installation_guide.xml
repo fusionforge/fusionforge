@@ -69,6 +69,9 @@
 		<title>Installation</title>
 		<section>
 			<title>Overview</title>
+			<note>
+				<para>This installation guide is for GForge 4.5.0.1.</para>
+			</note>
 			<para>GForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
 			<para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
 			<para>The manual installation of GForge is documented below. Be sure to follow each step carefully, check the forums for frequently asked questions, and ask your Apache, Mailman, and PostgreSQL installation questions in the corresponding mailing lists rather than on the GForge forums where little help is available.</para>
@@ -588,16 +591,19 @@ noreply: /dev/null
 
   DocumentRoot  <replaceable>/var/www/mailman</replaceable>
   DirectoryIndex index.html
-  ScriptAlias   /mailman/ <replaceable>/usr/lib/mailman/cgi-bin/</replaceable>
+  ScriptAlias   /mailman/ <replaceable>/usr/lib/cgi-bin/mailman/</replaceable>
   Alias         /pipermail/ <replaceable>/var/lib</replaceable>/mailman/archives/public/
   Alias         /doc/ <replaceable>usr/share/images/mailman/</replaceable>
 &lt;/VirtualHost&gt;
 </programlisting>
+					<note>
+						<para>Check that <literal>ScriptAlias</literal> and <literal>Alias</literal> directories are correct.  The example values are for Debian 3.1 (Sarge).</para>
+					</note>
 				</listitem>
 			</orderedlist>
 			<section>
 				<title>Mailing list for commits</title>
-				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal> is created too. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>[^@]+@<replaceable>servername\.company\.com</replaceable></literal> where <replaceable>servername.company.com</replaceable> is name of the host where Mailman is installed (<literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
+				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal> is created too. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>^.*@<replaceable>servername\.company\.com</replaceable></literal> where <replaceable>servername.company.com</replaceable> is name of the host where Mailman is installed (<literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
 			</section>
 		</section>
 		<section>
@@ -615,7 +621,7 @@ noreply: /dev/null
 				Cron jobs are in the <filename class="directory">cronjobs/</filename> directory and the <filename>crontab.in</filename> file contains a sample crontab. This gives you the basic cronjobs for updating certain statistics and data on the site.
 			</para>
 			<para>
-				<filename class="directory">cronjobs/cvs-cron/</filename> contains scripts useful for creating blank cvs trees and managing the <filename>/etc/groups</filename>, <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename> files. See <filename>cronjobs/README.root</filename> for more info.
+				<filename class="directory">cronjobs/cvs-cron/</filename> contains scripts useful for creating blank cvs trees and managing the <filename>/etc/groups</filename>, <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename> files. See <filename>cronjobs/README.root</filename> and CVS plugins section for more info.
 			</para>
 			<para>
 				<filename class="directory">cronjobs/mail/</filename> contains files useful for the creation of new mailing lists in mailman and creating the <filename>/etc/aliases</filename> file.
@@ -731,30 +737,71 @@ $sys_dbpasswd = 'p455w0rd' ;
 	<section>
 		<title>Plugins</title>
 		<note>
-			<para>From GForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
+			<para>Since GForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
 		</note>
-		<para>For each plugin you can find an <filename>INSTALL</filename> file in the plugin tarball.</para>
+		<para>For each plugin, you can find an <filename>INSTALL</filename> file in the plugin tarball.</para>
 		<section>
 			<title>CVS</title>
 			<section>
 				<title>Overview</title>
-				<para>CVS is now managed via the scmcvs plugin which is included in the <filename class="directory">plugins/</filename> directory in the tarball downloaded from gforge.org. Most of the files in scmcvs are intended for auto-installation on Debian systems and <emphasis role="strong">do not apply</emphasis> to the majority of users. The scmcvs plugin is activated by default in the <filename>gforge.sql</filename> database and all that you have to do is copy the <filename>plugins/scmcvs/etc/*</filename> directories to <filename class="directory">/etc/gforge</filename> directory and possibly modify the files slightly. In addition, the <filename>plugins/scmcvs/www/*</filename> files should be placed in <filename class="directory">www/plugins/scmcvs</filename> directory.</para>
-				<para>Cronjobs for CVS are included in <filename>cronjobs/crontab.in</filename>, but are commented out by default for your security. <filename>cronjobs/cvs-cron/*</filename> contains the files that are executed hourly to build permissions and create blank cvs trees. Make sure these files are executed as root, and have proper execution bits set.  Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
+				<para>CVS is now managed via the scmcvs plugin which is included in the <filename class="directory">plugins/</filename> directory in the tarball downloaded from gforge.org. Most of the files in scmcvs are intended for auto-installation on Debian systems and <emphasis role="strong">do not apply</emphasis> to the majority of users. The scmcvs plugin is activated by default in the <filename>gforge.sql</filename> database and all that you have to do is copy the <filename>plugins/scmcvs/etc/*</filename> directories to <filename class="directory">/etc/gforge</filename> directory and possibly modify the files slightly.</para>
+			</section>
+			<section>
+				<title>Cronjobs</title>
+				<para>Cronjobs for CVS are included in <filename>cronjobs/crontab.in</filename>, but are commented out by default for your security. The CVS cronjobs are in <filename><replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron</filename> and consist of:</para>
+				<itemizedlist>
+					<listitem>
+						<para><filename>usergroup.php</filename> creates user and groups in <filename>/etc/passwd</filename>, <filename>/etc/shadow</filename>, and <filename>/etc/group</filename>.</para>
+					</listitem>
+					<listitem>
+						<para><filename>cvs.php</filename> creates repositories.</para>
+					</listitem>
+					<listitem>
+						<para><filename>ssh_create.php</filename> copies SSH keys to user directories.</para>
+					</listitem>
+					<listitem>
+						<para><filename>history_parse.php</filename> collects statistics.</para>
+					</listitem>
+				</itemizedlist>
+				<para>Make sure these files are executed as root, and have proper execution bits set.  Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system. Here is a list of CVS cronjobs:</para>
+				<para>If you are using CVS 1.11, replace <literal>%1{sVv}</literal> in <filename><replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/cvs.php</filename> with <literal>%{sVv}</literal>, and replace <filename>syncmail</filename> with updated version:</para>
+<screen>
+# <userinput>cd <replaceable>/var/www/gforge</replaceable></userinput>
+# <userinput>cp cp plugins/scmcvs/bin/syncmail-cvs-1.11 cronjobs/cvs-cron/syncmail</userinput>
+</screen>
+				<para>If you are using CVS 1.12, replace <literal>%1{sVv}</literal> in <filename><replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/cvs.php</filename> with <literal>%s</literal>, and replace <filename>syncmail</filename> with updated version:</para>
+<screen>
+# <userinput>cd <replaceable>/var/www/gforge</replaceable></userinput>
+# <userinput>cp cp plugins/scmcvs/bin/syncmail-cvs-1.12 cronjobs/cvs-cron/syncmail</userinput>
+</screen>
 			</section>
 			<section>
 				<title>Installation</title>
+				<warning>
+					<para>This guide doesn't cover chrooted CVS repositories which are always recommended.</para>
+				</warning>
 				<orderedlist>
 					<listitem>
-						<para>Create default location for CVS repositories:</para>
+						<para>Create default location for CVS repositories (<varname>$cvsdir_prefix</varname> in GForge configuration file):</para>
 <screen>
 # <userinput>mkdir <replaceable>/cvsroot</replaceable></userinput>
 </screen>
 					</listitem>
 					<listitem>
-						<para><emphasis>Optional:</emphasis> Set up basic index.php file for CVS virtual host if desired:</para>
+						<para><emphasis>Optional:</emphasis> Set up basic index.php file for CVS virtual host if desired.  This guide has not further instructions on enabling CVS virtual host.</para>
 <screen>
 # <userinput>mkdir <replaceable>/var/www/cvs</replaceable></userinput>
 # <userinput>cp <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/www/* <replaceable>/var/www/cvs</replaceable></userinput>
+</screen>
+					</listitem>
+					<listitem>
+						<para>If you want to use checkout of svmcvs plugin, copy it:</para>
+<screen>
+# <userinput>mkdir <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs</userinput>
+# <userinput>cp -R <replaceable>gforge-plugin-scmcvs</replaceable>/* <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs</userinput>
+
+# <userinput>mkdir <replaceable>/var/www/gforge</replaceable>/www/plugins/scmcvs</userinput>
+# <userinput>cp -R <replaceable>gforge-plugin-scmcvs</replaceable>/www/* <replaceable>/var/www/gforge</replaceable>/www/plugins/scmcvs</userinput>
 </screen>
 					</listitem>
 					<listitem>
@@ -771,13 +818,30 @@ $sys_dbpasswd = 'p455w0rd' ;
 </screen>
 					</listitem>
 					<listitem>
-						<para>Edit GForge Config File <filename>/etc/gforge/local.inc</filename> and change <varname>$sys_path_to_scmweb</varname> to be <filename class="directory">/var/www/gforge/plugins/scmcvs/cgi-bin</filename>.</para>
+						<para>Copy CVS restricted shell:</para>
+<screen>
+# <userinput>cp <replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/cvssh.pl /bin</userinput>
+</screen>
+					</listitem>
+					<listitem>
+						<para>Edit GForge Config File <filename>/etc/gforge/local.inc</filename> and change <varname>$sys_path_to_scmweb</varname> to be <filename class="directory"><replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/cgi-bin</filename>.</para>
 					</listitem>
 					<listitem>
 						<para>You may have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
 <screen>
 'gforge'  => ['GForge-CVS', '<replaceable>/home/chroot/cvsroot/</replaceable>'],
 </screen>
+					</listitem>
+					<listitem>
+						<para>Install the following non-core Perl modules:</para>
+						<itemizedlist>
+							<listitem>
+								<para>IPC::Run</para>
+							</listitem>
+							<listitem>
+								<para>URI::Escape</para>
+							</listitem>
+						</itemizedlist>
 					</listitem>
 					<listitem>
 						<para>You may want to user CVS pserver.  First, assure that cvspserver service is defined in <filename>/etc/services</filename>.  It will look like this:</para>
@@ -802,6 +866,33 @@ cvspserver stream tcp nowait root <replaceable>/var/www/gforge</replaceable>/plu
 			</section>
 		</section>
 		<section>
+			<title>CVSTracker</title>
+			<section>
+				<title>Overview</title>
+				<para>The cvstracker plugin allows for some integration between CVS commits and the bug tracker and task manager. So, for example, when you commit, you can reference bug and task IDs in your commit message and have the commit linked to the corresponding bug and task.</para>
+				<para>See the <filename>plugins/cvstracker/README</filename> file for details. This plugin is enabled by default in the <filename>gforge.sql</filename> database file. As with the other plugins, you may manually place the config files in <filename class="directory">/etc/gforge/plugins/cvstracker/</filename> and uncomment the cronjob in <filename>crontab.in</filename>.</para>
+				<para>You will also have to copy the <filename>newcommit.php</filename> file to your gforge <filename class="directory">www/plugins/cvstracker/</filename> dir</para>
+			</section>
+			<section>
+				<title>Installation</title>
+				<programlisting>
+#copy the cvstracker config files to /etc/gforge/
+cd <replaceable>/var/www/gforge</replaceable>/plugins/cvstracker/
+cp -R etc/plugins/cvstracker/ /etc/gforge/plugins/
+mkdir <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
+cp -R www/* <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
+</programlisting>
+				<para><filename>plugins/cvstracker/bin/post.php</filename> is called on each commit and it needs the GForge configuration file <filename>local.inc</filename> so the latter should have relaxed permissions.</para>
+				<para>Uncomment <filename>update_loginfo.php</filename> in crontab.</para>
+				<para>Fix CVSTracker table:</para>
+<screen>
+ALTER TABLE public.plugin_cvstracker_data_master DROP cvs_date;
+ALTER TABLE public.plugin_cvstracker_data_master ADD cvs_date INT;
+ALTER TABLE public.plugin_cvstracker_data_master ALTER cvs_date SET NOT NULL;
+</screen>
+			</section>
+		</section>
+		<section>
 			<title>SVN</title>
 			<section>
 				<title>Overview</title>
@@ -823,6 +914,9 @@ cvspserver stream tcp nowait root <replaceable>/var/www/gforge</replaceable>/plu
 			</section>
 			<section>
 				<title>Installation</title>
+				<note>
+					<para><emphasis>Instructions here are far from complete.</emphasis></para>
+				</note>
 <programlisting>
 #Create default location for SVN repositories
 mkdir /var/svn
@@ -835,22 +929,6 @@ cp <replaceable>/var/www/gforge</replaceable>/cronjobs/dav-svn/www/* /var/www/sv
 cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
 </programlisting>
 			</section>
-		</section>
-		<section>
-			<title>CVSTracker Overview</title>
-			<para>The cvstracker plugin allows for some integration between CVS commits and the bug tracker and task manager. So, for example, when you commit, you can reference bug and task IDs in your commit message and have the commit linked to the corresponding bug and task.</para>
-			<para>See the <filename>plugins/cvstracker/README</filename> file for details. This plugin is enabled by default in the <filename>gforge.sql</filename> database file. As with the other plugins, you may manually place the config files in <filename class="directory">/etc/gforge/plugins/cvstracker/</filename> and uncomment the cronjob in <filename>crontab.in</filename>.</para>
-			<para>You will also have to copy the <filename>newcommit.php</filename> file to your gforge <filename class="directory">www/plugins/cvstracker/</filename> dir</para>
-		</section>
-		<section>
-			<title>Installation</title>
-<programlisting>
-#copy the cvstracker config files to /etc/gforge/
-cd <replaceable>/var/www/gforge</replaceable>/plugins/cvstracker/
-cp -R etc/plugins/cvstracker/ /etc/gforge/plugins/
-cp -R www/ <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
-</programlisting>
-			<para><filename>plugins/cvstracker/bin/post.php</filename> is called on each commit and it needs the GForge configuration file <filename>local.inc</filename> so the latter should have relaxed permissions.</para>
 		</section>
 	</section>
 	<section>
