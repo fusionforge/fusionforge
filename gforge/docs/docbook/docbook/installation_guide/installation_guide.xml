@@ -767,12 +767,12 @@ $sys_dbpasswd = 'p455w0rd' ;
 				<para>If you are using CVS 1.11, replace <literal>%1{sVv}</literal> in <filename><replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/cvs.php</filename> with <literal>%{sVv}</literal>, and replace <filename>syncmail</filename> with updated version:</para>
 <screen>
 # <userinput>cd <replaceable>/var/www/gforge</replaceable></userinput>
-# <userinput>cp cp plugins/scmcvs/bin/syncmail-cvs-1.11 cronjobs/cvs-cron/syncmail</userinput>
+# <userinput>cp plugins/scmcvs/bin/syncmail-cvs-1.11 cronjobs/cvs-cron/syncmail</userinput>
 </screen>
 				<para>If you are using CVS 1.12, replace <literal>%1{sVv}</literal> in <filename><replaceable>/var/www/gforge</replaceable>/cronjobs/cvs-cron/cvs.php</filename> with <literal>%s</literal>, and replace <filename>syncmail</filename> with updated version:</para>
 <screen>
 # <userinput>cd <replaceable>/var/www/gforge</replaceable></userinput>
-# <userinput>cp cp plugins/scmcvs/bin/syncmail-cvs-1.12 cronjobs/cvs-cron/syncmail</userinput>
+# <userinput>cp plugins/scmcvs/bin/syncmail-cvs-1.12 cronjobs/cvs-cron/syncmail</userinput>
 </screen>
 			</section>
 			<section>
@@ -850,9 +850,8 @@ cvspserver      2401/tcp
 cvspserver      2401/udp
 </programlisting>
 						<para>Add entry for pserver in <filename>/etc/inetd.conf</filename>:</para>
-<programlisting>
-cvspserver stream tcp nowait root <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver cvs-pserver
-</programlisting>
+<para><literal>cvspserver stream tcp nowait root <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver cvs-pserver</literal></para>
+
 						<para>Make sure that the wrapper script is executable:</para>
 <screen>
 # <userinput>chmod +x <replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/bin/cvs-pserver</userinput>
