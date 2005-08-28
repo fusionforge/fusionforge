@@ -1,8 +1,0 @@
-gforge-plugin-scmsvn for Debian
--------------------------------
-
-This plugin holds the Subversion stuff.  It is the second step towards
-choice of SCM systems, the first being that CVS has already been
-pluginified.
-
- -- Roland Mas <lolando@debian.org>, Sun Mar 14 15:56:15 2004

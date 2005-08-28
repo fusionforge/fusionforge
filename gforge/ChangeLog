@@ -1,3 +1,9 @@
+2005-07-27  Francisco Gimeno <francisco@gforgegroup.com>
+
+	* Fixed XSS vulnerabilities by adding htmlspecialchars for direct used
+	variables: files search/index.php, snippet/detail.php,
+	include/exit.php, include/logger.php, account/login.php
+
 2005-07-18  Francisco Gimeno <francisco@gforgegroup.com>
 
 	* Fixed [#1412] $this in non-class file (migraterbac.php). Added exit

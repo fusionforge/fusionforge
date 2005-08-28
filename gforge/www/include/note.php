@@ -40,8 +40,8 @@ require_once('html.php');
  * @param               int     cols
  */
 function notepad_button_raw($str, $form, $wrap, $rows, $cols) {
-       $anchor = '<a href="javascript:notepad_window_param(\''.$form.'\',\''.
-		 $wrap.'\',' . $rows . ',' . $cols . ')">'. $str . '</a>';
+       $anchor = '<a href="javascript:notepad_window_param(\''.htmlspecialchars($form).'\',\''.
+		 $wrap.'\',' . intval($rows) . ',' . intval($cols) . ')">'. $str . '</a>';
        return $anchor;
 }
 
