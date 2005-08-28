@@ -24,7 +24,7 @@ require_once ('plugins/scmsvn/config.php');
 
 $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php
-$svnroot = "/var/svn/";
+$svnroot = "/var/lib/gforge/chroot/svnroot/";
 $ARGV = $GLOBALS['argv'];
 $err = '';
 $debug = 0;
@@ -55,6 +55,7 @@ $user_list = array();
 // We are only actually interested in LOGENTRY type things, as this is 
 // where we update our commit total
 function endElement($parser, $name) {
+  debug ("endelement $name") ;
 	global $time_ok, $last_tag, $commits, $date_key;
 	if ($name == "LOGENTRY" && $time_ok) {
 		$commits[$date_key]++;
@@ -67,6 +68,7 @@ function endElement($parser, $name) {
 // is doing things and when. We use last_tag to keep track of the
 // last element we were in.
 function charData($parser, $chars) {
+  debug ("chardata $chars") ;
 	global $last_tag, $last_user, $last_time, $start_time,
 			$end_time, $time_ok, $date_key, $user_list;
 	switch ($last_tag) {
@@ -94,6 +96,7 @@ function charData($parser, $chars) {
 			// that the time is OK.
 			// If we do have the start and end time, make sure this event
 			// is within those times.
+			debug ("start $start_time, end $end_time, last $last_time");
 			if (!$start_time && !$end_time) {
 				$time_ok = true;
 			} elseif ($start_time <= $last_time && $last_time <= $end_time) {
@@ -116,6 +119,7 @@ function charData($parser, $chars) {
 }
 
 function startElement($parser, $name, $attrs) {
+  debug ("startelement $name");
     global $last_user, $last_time, $last_tag, $time_ok,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates;
