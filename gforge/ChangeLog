@@ -1,17 +1,20 @@
+2005-08-30 Daniel Perez <daniel@gforgegroup.com>
+	* fixed minor bug : common/tracker/Artifact.class -> now only sends mailFollowup(s) to ACTIVE users
+2005-08-29 Daniel Perez <daniel@gforgegroup.com>
+	* admin -> update forum moderation level status, create forum with moderation status
+	* changed DB, the ability to moderate posts by the forum admins is going to be incorporated
+	* insert moderated message with or without attach
 2005-08-28  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
-
-	* docs/docbook/docbook/installation_guide/installation_guide.xml:
-	Plugins section is reviewed.
-
+	* docs/docbook/docbook/installation_guide/installation_guide.xml: Plugins section is reviewed.
 2005-08-26
 	* when attachments are downloaded, its download count is incremented
 	* forum/attachment.php secured
-2005-08-25
+2005-08-25 Daniel Perez <daniel@gforgegroup.com>
 	myforums page : added the myforums page to the "my page" and when you visit any list of forums 
 	for any group. it shows a description of all the forums you are monitoring, the project they belong to, a 
 	link to them and an indicator that tells you if there´s new content for that forum.
 
-2005-08-24
+2005-08-24 Daniel Perez <daniel@gforgegroup.com>
 	DB : after discussing some issues, fixed the variable names, and changed the schema of 
 
 forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes 

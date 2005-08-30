@@ -1325,7 +1325,9 @@ class Artifact extends Error {
 		$users =& user_get_objects($monitor_ids);
 		if (count($users) > 0) {
 			foreach ($users as $user) {
-				$emails[] = $user->getEmail();
+				if ($user->getStatus() == "A") { //we are only sending emails to active users
+					$emails[] = $user->getEmail();
+				}
 			}
 		}
 		
