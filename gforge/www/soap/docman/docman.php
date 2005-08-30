@@ -196,7 +196,7 @@ function &getDocumentLanguages($session_ser) {
 //
 
 function validateLanguage($language_id){
-	$res = db_query('SELECT classname FROM supported_languages WHERE language_id='.$language_id);	
+	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$language_id.'\'');	
 	if(db_numrows($res)==1){
 		return true;
 	}else{
