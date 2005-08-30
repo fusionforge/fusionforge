@@ -196,7 +196,7 @@ function &getDocumentLanguages($session_ser) {
 //
 
 function validateLanguage($language_id){
-	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$languageId.'\'');	
+	$res = db_query('SELECT classname FROM supported_languages WHERE language_id='.$language_id);	
 	if(db_numrows($res)==1){
 		return true;
 	}else{
@@ -275,7 +275,7 @@ $server->register(
 		'groupname'=>'xsd:string',
 		'parent_doc_group'=>'xsd:int'			
 	),
-	array('addDocumentGroupResponse'=>'xsd:boolean'),
+	array('addDocumentGroupResponse'=>'xsd:int'),
 	$uri,$uri.'#addDocumentGroup','rpc','encoded'
 );
 
@@ -301,7 +301,7 @@ function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) 
 	if (!$dg->create($groupname, $parent_doc_group)) {
 		return new soap_fault ('','addDocumentGroup','Could Not Create Document Group','Could Not Create Document Group');
 		}else {
-		return true;
+		return $dg->getID();
 	}
 }
 
