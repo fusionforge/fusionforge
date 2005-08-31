@@ -51,7 +51,7 @@ if ($group_id) {
 //	echo $Language->getText('forum', 'choose');
 
 	echo $HTML->subMenu(array("My Monitored Forums"),array("myforums.php?group_id=$group_id"));
-	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'));
+	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'),$Language->getText('forum_forum','moderationlvl'));
 	echo $HTML->listTableTop($tablearr);
 
 	/*
@@ -62,8 +62,13 @@ if ($group_id) {
 		if (!is_object($farr[$j])) {
 			//just skip it - this object should never have been placed here
 		} elseif ($farr[$j]->isError()) {
-			echo $farr->getErrorMessage();
+			echo $farr[$j]->getErrorMessage();
 		} else {
+			switch ($farr[$j]->getModerationLevel()) {
+				case 0 : $modlvl = $Language->getText('forum_forum','mod0');break;
+				case 1 : $modlvl = $Language->getText('forum_forum','mod1');break;
+				case 2 : $modlvl = $Language->getText('forum_forum','mod2');break;
+			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
 				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 				'&nbsp;' .
@@ -71,7 +76,8 @@ if ($group_id) {
 				<td>'.$farr[$j]->getDescription().'</td>
 				<td align="center">'.$farr[$j]->getThreadCount().'</td>
 				<td align="center">'. $farr[$j]->getMessageCount() .'</td>
-				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td></tr>';
+				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td>
+				<td align="center">'. $modlvl  .'</td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();

@@ -1,3 +1,5 @@
+2005-08-31 Daniel Perez <daniel@gforgegroup.com>
+	* admin -> forum moderation finished (release / delete messages)
 2005-08-30 Daniel Perez <daniel@gforgegroup.com>
 	* fixed minor bug : common/tracker/Artifact.class -> now only sends mailFollowup(s) to ACTIVE users
 2005-08-29 Daniel Perez <daniel@gforgegroup.com>

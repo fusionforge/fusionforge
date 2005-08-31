@@ -93,9 +93,13 @@ if ($forum_id) {
 			form_release_key(getStringFromRequest("form_key"));
 			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
-			$feedback=$Language->getText('forum_forum','postsuccess');
+			if ($fm->isPending() ) {
+				$feedback=$Language->getText('forum_forum','pendingpostsuccess');
+			} else {
+				$feedback=$Language->getText('forum_forum','postsuccess');
+			}
 			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
-			$am->Setmsgid($f->getNextThreadID());
+			$am->SetForumMsg($fm);
 			$attach = getUploadedFile("attachment1");
 			$am->attach($attach,$group_id);
 			foreach ($am->Getmessages() as $item) {

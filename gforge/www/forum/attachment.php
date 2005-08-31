@@ -47,7 +47,7 @@ function goodbye($msg) {
 
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
-//$attach_userid = getIntFromRequest("attach_userid");
+$pending = getStringFromRequest("pending");
 $group_id = getIntFromRequest("group_id");
 $forum_id = getIntFromRequest("forum_id");
 global $Language;
@@ -73,7 +73,9 @@ if ($delete == "yes") {
 		exit_not_logged_in();//only logged users can delete attachments
 	}
 	//only the user that created the attach can delete it (safecheck)
-	$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
+	if (!$pending){ //pending messages aren´t deleted from this page
+		$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
+	}
 	$res = db_query($sql);
 	if ( (!$res) ) {
 		exit_error("Attachment Download error","DB Error");
@@ -81,7 +83,9 @@ if ($delete == "yes") {
 	if (db_result($res,0,'userid') != user_getid()) {
 		goodbye($Language->getText('forum_attach_download','cannot_delete'));
 	}	else {
-		db_query ("DELETE FROM forum_attachment where attachmentid=$attachid");
+		if (!$pending) {
+			db_query ("DELETE FROM forum_attachment where attachmentid=$attachid");
+		}
 		goodbye($Language->getText('forum_attach_download','deleted'));
 	}
 }
@@ -91,7 +95,11 @@ if ( ! ( ($f->userCanView()) || ($f->userIsAdmin()) || ($f->isPublic()) ) ) {
 	exit_permission_denied();
 }
 
-$sql = "SELECT  * FROM forum_attachment where attachmentid=$attachid";
+if ($pending=="yes") {
+	$sql = "SELECT  * FROM forum_pending_attachment where attachmentid='$attachid'";
+} else {
+	$sql = "SELECT  * FROM forum_attachment where attachmentid='$attachid'";
+}
 $res = db_query($sql);
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 $sql = "SELECT * FROM forum_attachment_type where extension = '$extension'";
@@ -140,6 +148,9 @@ $filedata = base64_decode(db_result($res,0,'filedata'));
 echo $filedata;
 flush();
 //increase the attach count
-db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
+if (!$pending) { //we don´t care for the pending attach counter, it´s just for administrative purposes
+	db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
+}
+echo site_footer();
 
 ?>

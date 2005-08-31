@@ -776,6 +776,12 @@ forum_admin	delete	Delete
 forum_admin	deleted	Successfully Deleted
 forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
 forum_admin	manage_attach_types	Manage Attachment Types
+forum_admin	manage_pending_messages	Manage Pending Messages
+forum_admin	moderate0	No Moderation
+forum_admin	moderate1	Moderated Level 1
+forum_admin	moderate2	Moderated Level 2
+forum_admin	explain_moderate1	To moderate anonymous posts (if allowed in public forum) and posts from non-member users.
+forum_admin	explain_moderate2	To moderate ALL posts.
 forum_admin_attachs	extension	Extension
 forum_admin_attachs	maxfilesize	Max Filesize
 forum_admin_attachs	maxwidth	Max Width
@@ -790,6 +796,15 @@ forum_admin_attachs	updateok	Attachment Type Updated Successfully
 forum_admin_attachs	updatenot_ok	Problem Updating Attachment Type
 forum_admin_attachs	deleteok	Attachment Type Deleted
 forum_admin_attachs	deletenot_ok	Couldn´t delete Attachment Type
+forum_admin_pending	forum_name	Forum Name
+forum_admin_pending	subject	Message
+forum_admin_pending	release	Release Submitted
+forum_admin_pending	delete	Delete Submitted
+forum_admin_pending	update	Update
+forum_admin_pending	view_pending_notice	This is the content of the pending message
+forum_admin_pending	deleted_ok	Message Deleted Successfully
+forum_admin_pending	released_ok	Message Released Successfully
+forum_admin_pending	thread_deleted	The thread which the message was posted to doesn´t exist anymore, please delete the message.
 forum_admin_addforum	add_forum	Add This Forum
 forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
 forum_admin_addforum	allow_attach	Allow File Attachment?
@@ -846,11 +861,16 @@ forum_forum	flat	Flat
 forum_forum	forum	Forum
 forum_forum	description	Description
 forum_forum	lastpost	Last Post
+forum_forum	moderationlvl	Moderation Level
+forum_forum	mod0	No Moderation
+forum_forum	mod1	Anonymous & Non Group Users
+forum_forum	mod2	All Except Admins
 forum_forum	nested	Nested	
 forum_forum	next_messages	Next Messages
 forum_forum	no_forum_chosen	No Forum Chosen
 forum_forum	posts	Posts
 forum_forum	postsuccess	Message Posted Successfully
+forum_forum	pendingpostsuccess	Message Queued for moderation -> Please wait until the admin approves/rejects it
 forum_forum	previous_messages	Previous Messages
 forum_forum	replies	Replies
 forum_forum	section	Project: $1 

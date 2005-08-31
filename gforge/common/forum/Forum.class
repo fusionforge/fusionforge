@@ -121,9 +121,10 @@ class Forum extends Error {
 	 *	@param	string	The email address to send all new posts to.
 	 *	@param	int	Pass (1) if a welcome message should be created (0) for no welcome message.
 	 *	@param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
+	 *	@param	int Pass (0) if the messages that are posted in the forum should go to moderation before available. 0-> no moderation 1-> moderation for anonymous and non-project members 2-> moderation for everyone
 	 *	@return	boolean	success.
 	 */
-	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1) {
+	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1,$moderation_level=0) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError($Language->getText('forum_common','error_min_name_length'));
@@ -164,13 +165,13 @@ class Forum extends Error {
 			}
 		}
 
-		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous)
+		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level)
 			VALUES ('".$this->Group->getId()."',
 			'". strtolower($forum_name) ."',
 			'$is_public',
 			'". htmlspecialchars($description) ."',
 			'$send_all_posts_to',
-			'$allow_anonymous')";
+			'$allow_anonymous','$moderation_level')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -332,6 +333,15 @@ class Forum extends Error {
 	function getDescription() {
 		return $this->data_array['description'];
 	}
+	
+	/**
+	 *	getModerationLevel - the moderation level of the forum
+	 *
+	 *	@return int	The moderation level.
+	 */
+	function getModerationLevel() {
+		return $this->data_array['moderation_level'];
+	}
 
 	/**
 	 *	getMessageCount - the total number of messages in this forum.
@@ -368,6 +378,17 @@ class Forum extends Error {
 	function getMonitoringIDs() {
 		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
 		$result=db_query($sql);
+		return util_result_column_to_array($result);
+	}
+	
+	/**
+	 *	getForumAdminIDs - return an array of user_id's for those users which are forum admins.
+	 *
+	 *	@return	array 	The array of user_id's.
+	 */
+	function getForumAdminIDs() {
+		$sql = "SELECT user_id FROM forum_perm WHERE group_forum_id='".$this->getID()."' and perm_level > 1";
+		$result = db_query($sql);
 		return util_result_column_to_array($result);
 	}
 	
@@ -511,9 +532,10 @@ class Forum extends Error {
 	 *	@param	int		if it should be public (0) for private.
 	 *	@param	int	 	if we should allow non-logged-in users to post (0) for mandatory login.
 	 *	@param	string	The email address to send all new posts to.
+	 *	@param	int		if the messages that are posted in the forum should go to moderation before available. 0-> no moderation 1-> moderation for anonymous and non-project members 2-> moderation for everyone
 	 *	@return	boolean	success.
 	 */
-	function update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to='') {
+	function update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to='',$moderation_level=0) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError($Language->getText('forum_common','error_min_name_length'));
@@ -545,6 +567,7 @@ class Forum extends Error {
 			description='". htmlspecialchars($description) ."',
 			send_all_posts_to='".$send_all_posts_to ."',
 			allow_anonymous='" .$allow_anonymous . "',
+			moderation_level='" .$moderation_level . "',
 			is_public='" .$is_public . "'
 			WHERE group_id='".$this->Group->getID()."'
 			AND group_forum_id='".$this->getID()."'");
@@ -764,6 +787,39 @@ class Forum extends Error {
 		}
 	}
 
+	/**
+	 *  userIsModLvl1 - see if the user goes into the moderated level 1 category
+	 *
+	 *  @return boolean user_is_mod_lvl1
+	 */
+	function userIsModLvl1() {
+		if (!session_loggedin()) {
+			if ( ($this->isPublic() && $this->allowAnonymous()) ) {
+				return true;//public forum, anonymous allowed, user not logged in
+			}
+		} else {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if (  (!$perm->isMember() )) {
+				//the user isn´t a member of the project
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 *  userIsModLvl2 - see if the user goes into the moderated level 2 category
+	 *
+	 *  @return boolean user_is_mod_lvl1
+	 */
+	function userIsModLvl2() {
+		if ( $this->userIsAdmin() ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	/**
 	 *  userCanPost - see if the logged-in user's perms are >= 1 or Group ForumAdmin.
 	 *

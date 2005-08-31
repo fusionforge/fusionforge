@@ -21,6 +21,7 @@
 require_once('pre.php');
 require_once('note.php');
 require_once('www/news/news_utils.php');
+require_once('www/forum/admin/ForumAdmin.class');
 require_once('www/forum/include/AttachManager.class');
 require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
@@ -156,6 +157,51 @@ class ForumHTML extends Error {
 	}
 
 	
+	/**
+	 * Function showPendingMessage
+	 *
+	 * @param 	object	The message.
+	 *
+	 * @return 	returns the html output
+	 */
+	function showPendingMessage ( &$msg) {
+		global $sys_datefmt,$Language,$HTML,$group_id;
+		global $sys_bbcode_make_clickable,$sys_bbcode_smilie_on,$sys_bbcode_bbcode_on,$sys_bbcode_strip_html;//bbcode variables
+		
+		$am = new AttachManager();
+		$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
+		$smilie_on=$sys_bbcode_smilie_on; 
+		$bbcode_on=$sys_bbcode_bbcode_on; 
+		$strip_html=$sys_bbcode_strip_html;
+		$text_support = new TextSupport();
+		$ret_val = $am->PrintHelperFunctions();
+		html_feedback_top($Language->getText('forum_admin_pending','view_pending_notice'));
+		$ret_val .= '
+		<table border="0">
+			<tr>
+				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'.$Language->getText('forum_utils','by').
+					$msg->getPosterRealName().
+					'<br />
+					';
+					$msgforum =& $msg->getForum();
+					$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
+					<br />
+					'.
+					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
+					$bold_begin. $msg->getSubject() . $bold_end .'&nbsp; '.
+					'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
+				</td>
+			</tr>
+			<tr>
+				<td>
+					'.  $text_support->displayText($msg->getBody(), $make_clickable, $smilie_on, $bbcode_on, $msg->getBBCode_uid()) .'
+				</td>
+			</tr>
+		</table>';
+		return $ret_val;
+		
+	}
+	
 	function showNestedMessage ( &$msg ) {
 		/*
 
@@ -179,7 +225,10 @@ class ForumHTML extends Error {
 		$bbcode_on=$sys_bbcode_bbcode_on; 
 		$strip_html=$sys_bbcode_strip_html;
 		$text_support = new TextSupport();
-		$ret_val = '
+		$fa = new ForumAdmin();
+		$ret_val = /*$fa->PrintAdminMessageOptions() .*/
+		
+		'
 		<table border="0">
 			<tr>
 				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
@@ -188,7 +237,7 @@ class ForumHTML extends Error {
 					'<br />
 					';
 					$msgforum = $msg->getForum();
-					$ret_val .= $am->PrintAttachLink($msg->getID(),$group_id,$msgforum->getID()) . '
+					$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					<a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.

@@ -46,7 +46,7 @@ if (!session_loggedin()) {
 $user_id = user_getid();
 $group_id = getIntFromRequest("group_id");
 //get the user monitored forums
-$sql = "SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$user_id and fg.group_forum_id=mon.forum_id";
+$sql = "SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id='$user_id' and fg.group_forum_id=mon.forum_id";
 $result = db_query($sql);
 if (!$result || db_numrows($result) < 1) {
 	exit_error($Language->getText('forum_myforums','no_monitored'),$Language->getText('forum_monitored','no_monitored').' '.db_error());

@@ -38,6 +38,7 @@ require_once('common/include/Error.class');
 
 class ForumMessage extends Error {
 
+	var $awaits_moderation;//boolean -> true if the message was inserted for approval (pending), false if not
 	/**
 	 * Associative array of data from db.
 	 *
@@ -58,9 +59,10 @@ class ForumMessage extends Error {
 	 *	@param	object	The Forum object to which this ForumMessage is associated.
 	 *  @param  int	 The message_id.
 	 *  @param  array   The associative array of data.
+	 *	@param 	boolean	Whether the message is a pending one.
 	 *	@return	boolean	success.
 	 */
-	function ForumMessage(&$Forum, $msg_id=false, $arr=false) {
+	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
 		global $Language;
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
@@ -74,25 +76,253 @@ class ForumMessage extends Error {
 		$this->Forum =& $Forum;
 
 		if ($msg_id) {
-			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($msg_id)) {
+			if ($pending) {
+				//we are going to create the pending message to show it to the admin for moderation
+				if (!$this->fetchModeratedData($msg_id)) {
 					return false;
 				}
+				$this->awaits_moderation = true;
 			} else {
-				$this->data_array =& $arr;
-				//
-				//	Verify this message truly belongs to this Forum
-				//
-				if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
-					$this->setError($Language->getText('forum_common_forummessage','error_group_forum_id'));
-					$this->data_array=null;
-					return false;
+				if (!$arr || !is_array($arr)) {
+					if (!$this->fetchData($msg_id)) {
+						return false;
+					}
+				} else {
+					$this->data_array =& $arr;
+					//
+					//	Verify this message truly belongs to this Forum
+					//
+					if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
+						$this->setError($Language->getText('forum_common_forummessage','error_group_forum_id'));
+						$this->data_array=null;
+						return false;
+					}
 				}
 			}
 		}
 		return true;
 	}
 
+/**
+	*	insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
+	 *	@param	string	The subject of the message.
+	 *	@param	string	The body of the message.
+	 *	@param 	string	BBCODE ID.
+	 *	@param	int	The thread_id of the message, if known.
+	 *	@param	int	The message_id of the parent message, if any.
+	 *	@param 	int	The id of the user that is posting the message
+	 *	@return	boolean success.
+	*/
+	
+	function insertmoderated($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id) {
+		if (!$thread_id) {
+			$thread_id=$this->Forum->getNextThreadID();
+			$is_followup_to=0;
+			if (!$thread_id) {
+				$this->setError('ForumMessage::create() '.$Language->getText('forum_common_forummessage','error_getting_next_thread'));
+				db_rollback();
+				return false;
+			}
+		}
+		
+		$sql="INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
+		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+		VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
+		'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+
+		$result=db_query($sql);
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			db_rollback();
+			return false;
+		} else {
+			$msg_id=db_insertid($result,'forum_pending_messages','msg_id');
+			if (!$this->fetchModeratedData($msg_id)) {
+				db_rollback();
+				return false;
+			}
+			if (!$msg_id) {
+				db_rollback();
+				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+				return false;
+			} else {
+				if (!$this->sendNewModeratedMsgNotice()) {
+					db_rollback();
+					return false;
+				}
+				db_commit();
+				$this->awaits_moderation = true;
+				return true;
+			}
+		}
+	}
+	
+
+	/**
+	*	insertreleasedmsg - inserts the released message into the main table (forum)
+	 *	@param 	string	The Forum id
+	 *	@param	string	The subject of the message.
+	 *	@param	string	The body of the message.
+	 *	@param	string	The post date
+	 *	@param 	string	BBCODE ID.
+	 *	@param	int	The thread_id of the message
+	 *	@param	int	The message_id of the parent message, if any.
+	 *	@param 	int	The id of the user that is posting the message
+	 *	@param 	int	has followups?
+	 *	@param 	int	most recent date
+	 *	@return	boolean success.
+	*/
+	
+	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date,$bbcode_uid, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
+		global $Language;
+		
+		if ($is_followup_to != 0) {
+			
+			//was posted in reply to another thread
+			//we must check whether that thread still exists. if it does, post the message. else, set the error
+				//
+			//  increment the parent's followup count if necessary
+			//
+			db_begin();
+			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
+				WHERE thread_id='$thread_id' AND is_followup_to='0'");
+			if (!$res4 || db_affected_rows($res4) < 1) {
+				$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_master_thread'));
+				db_rollback();
+				return false;
+			} else {
+				//
+				//  mark the parent with followups as an optimization later
+				//
+				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
+					WHERE msg_id='$is_followup_to'");
+				if (!$res3) {
+					$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_parent'));
+					db_rollback();
+					return false;
+				}
+			}
+			db_commit();
+		}
+			
+			
+		db_begin();
+		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
+		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+		VALUES ('". $group_forum_id ."', '$posted_by', '". htmlspecialchars($subject) ."', 
+		'". htmlspecialchars($body) ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."','" . $bbcode_uid . "')";
+
+		$result=db_query($sql);
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			db_rollback();
+			return false;
+		} else {
+			$msg_id=db_insertid($result,'forum','msg_id');
+			if (!$this->fetchData($msg_id)) {
+				db_rollback();
+				$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+				return false;
+			}
+			if (!$msg_id) {
+				db_rollback();
+				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+				return false;
+			} else {
+				if (!$this->sendNotice()) {
+					db_rollback();
+					return false;
+				}
+				db_commit();
+				$this->awaits_moderation = false;
+				return true;
+			}
+		}
+	}
+	
+	
+	
+	/**
+	*	insertmsg - inserts the message into the main table (forum)
+	 *	@param	string	The subject of the message.
+	 *	@param	string	The body of the message.
+	 *	@param 	string	BBCODE ID.
+	 *	@param	int	The thread_id of the message, if known.
+	 *	@param	int	The message_id of the parent message, if any.
+	 *	@param 	int	The id of the user that is posting the message
+	 *	@return	boolean success.
+	*/
+	
+	function insertmsg($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id) {
+		global $Language;
+		
+		if (!$thread_id) {
+			$thread_id=$this->Forum->getNextThreadID();
+			$is_followup_to=0;
+			if (!$thread_id) {
+				$this->setError('ForumMessage::create() '.$Language->getText('forum_common_forummessage','error_getting_next_thread'));
+				db_rollback();
+				return false;
+			}
+		} else {
+			//
+			//  increment the parent's followup count if necessary
+			//
+			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
+				WHERE thread_id='$thread_id' AND is_followup_to='0'");
+			if (!$res4 || db_affected_rows($res4) < 1) {
+				$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_master_thread'));
+				db_rollback();
+				return false;
+			} else {
+				//
+				//  mark the parent with followups as an optimization later
+				//
+				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
+					WHERE msg_id='$is_followup_to'");
+				if (!$res3) {
+					$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_parent'));
+					db_rollback();
+					return false;
+				}
+			}
+		}
+		
+		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
+			body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
+			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+
+		$result=db_query($sql);
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			db_rollback();
+			return false;
+		} else {
+			$msg_id=db_insertid($result,'forum','msg_id');
+			if (!$this->fetchData($msg_id)) {
+				db_rollback();
+				return false;
+			}
+			if (!$msg_id) {
+				db_rollback();
+				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+				return false;
+			} else {
+				if (!$this->sendNotice()) {
+					db_rollback();
+					return false;
+				}
+//echo "Committing";
+				db_commit();
+//echo "db_error()".db_error();
+				$this->awaits_moderation = false;
+				return true;
+			}
+		}
+	}
+	
+	
 	/**
 	 *	create - use this function to create a new message in the database.
 	 *
@@ -135,7 +365,8 @@ class ForumMessage extends Error {
 		}
 
 		//see if that message has been posted already for all the idiots that double-post
-		$res3=db_query("SELECT * FROM forum 
+		//we shouldn´t need this, the double post checker functions solve this issue now
+		/*$res3=db_query("SELECT * FROM forum 
 			WHERE is_followup_to='$is_followup_to' 
 			AND body='".  htmlspecialchars($body) ."'
 			AND subject='".  htmlspecialchars($subject) ."' 
@@ -148,69 +379,31 @@ class ForumMessage extends Error {
 			return false;
 		} else {
 			echo db_error();
-		}
+		}*/
 		db_begin();
-		if (!$thread_id) {
-			$thread_id=$this->Forum->getNextThreadID();
-			$is_followup_to=0;
-			if (!$thread_id) {
-				$this->setError('ForumMessage::create() '.$Language->getText('forum_common_forummessage','error_getting_next_thread'));
-				db_rollback();
-				return false;
+		
+		//now we check the moderation status of the forum and act accordingly
+		$mod_level = $this->Forum->GetModerationLevel();
+		switch ($mod_level) {
+			case 0: {
+				//no moderation
+				return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
 			}
-		} else {
-			//
-			//  increment the parent's followup count if necessary
-			//
-			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
-				WHERE thread_id='$thread_id' AND is_followup_to='0'");
-			if (!$res4 || db_affected_rows($res4) < 1) {
-				$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_master_thread'));
-				db_rollback();
-				return false;
-			} else {
-				//
-				//  mark the parent with followups as an optimization later
-				//
-				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
-					WHERE msg_id='$is_followup_to'");
-				if (!$res3) {
-					$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_parent'));
-					db_rollback();
-					return false;
+			case 1: {
+				//moderation for anonymous & non project users
+				if ($this->Forum->userIsModLvl1()) {
+					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+				} else {
+					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
 				}
 			}
-		}
-
-		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-			body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
-			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
-
-		$result=db_query($sql);
-		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
-			db_rollback();
-			return false;
-		} else {
-			$msg_id=db_insertid($result,'forum','msg_id');
-			if (!$this->fetchData($msg_id)) {
-				db_rollback();
-				return false;
-			}
-			if (!$msg_id) {
-				db_rollback();
-				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
-				return false;
-			} else {
-				if (!$this->sendNotice()) {
-					db_rollback();
-					return false;
+			case 2: {
+				//moderation for anyone who can post (even project members). admins can always post...
+				if ($this->Forum->userIsModLvl2()) {
+					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+				} else {
+					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
 				}
-//echo "Committing";
-				db_commit();
-//echo "db_error()".db_error();
-				return true;
 			}
 		}
 	}
@@ -224,6 +417,26 @@ class ForumMessage extends Error {
 	function fetchData($msg_id) {
 		global $Language;
 		$res=db_query("SELECT * FROM forum_user_vw
+			WHERE msg_id='$msg_id'
+			AND group_forum_id='". $this->Forum->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError($Language->getText('forum_common_forummessage','error_invalid_message_id').db_error());
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+	
+	/**
+	 *  fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
+	 *
+	 *  @param  int	 The message ID.
+	 *  @return boolean	success.
+	 */
+	function fetchModeratedData($msg_id) {
+		global $Language;
+		$res=db_query("SELECT * FROM forum_pending_user_vw
 			WHERE msg_id='$msg_id'
 			AND group_forum_id='". $this->Forum->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
@@ -323,6 +536,15 @@ class ForumMessage extends Error {
 	 */
 	function getParentID() {
 		return $this->data_array['is_followup_to'];
+	}
+	
+	/**
+	 *	isPending - is the message pending, awaiting moderation?
+	 *
+	 *	@return	int	awaits_moderation
+	 */
+	function isPending() {
+		return $this->awaits_moderation;
 	}
 
 	/**
@@ -431,6 +653,54 @@ class ForumMessage extends Error {
 		$bccres = db_query($sql);
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
+		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
+//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
+		return true;
+	}
+	
+	/**
+	 *	sendNewModeratedMsgNotice - contains the logic to send out email notifications to the forum admins when a new moderated message is posted
+	 *
+	 *	@return boolean success.
+	 */
+	function sendNewModeratedMsgNotice() {
+		global $Language;
+
+		$ids =& $this->Forum->getForumAdminIDs();
+		
+		//
+		//	See if there is anyone to send messages to
+		//
+		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
+			return true;
+		}
+		
+		$f =& $this->getForum();
+		$g =& $f->getGroup();
+
+		$body = "\nRead and respond to this message at: ".
+		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
+		"\nBy: " . $this->getPosterRealName() . "\n\n";
+
+		$body .= util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		"\n\n______________________________________________________________________".
+		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
+
+		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
+		$extra_headers = "Precedence: Bulk\n"
+			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
+			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+		$parentid = $this->getParentId();
+		if (!empty($parentid)) {
+			$extra_headers .= "\nIn-Reply-To: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">\n"
+				."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+		}
+
+		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
+		$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+		$bccres = db_query($sql);
+		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;

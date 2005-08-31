@@ -33,6 +33,8 @@ $group_forum_id = getIntFromRequest('group_forum_id');
 $deleteforum = getStringFromRequest('deleteforum');
 $feedback = getStringFromRequest('feedback');
 
+global $HTML;
+
 if ($group_id) {
 	//
 	//  Set up local objects
@@ -56,106 +58,27 @@ if ($group_id) {
 			/*
 				Deleting entire forum
 			*/
-			$f=new Forum($g,$group_forum_id);
-			if (!$f || !is_object($f)) {
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
-			} elseif ($f->isError()) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
-			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			} else {
-				$feedback .= $Language->getText('forum_admin','deleted');
-				$group_forum_id=0;
-				$deleteforum=0;
-			}
+			$fa = new ForumAdmin($group_id);
+			$feedback .= $fa->ExecuteAction("delete_forum");
+			$group_forum_id=0;
+			$deleteforum=0;
 		} elseif (getStringFromRequest('delete')) {
-			$msg_id = getStringFromRequest('msg_id');
+			
 			/*
 				Deleting messages or threads
 			*/
-			$f=new Forum($g,$group_forum_id);
-			if (!$f || !is_object($f)) {
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
-			} elseif ($f->isError()) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
-
-			$fm=new ForumMessage($f,$msg_id);
-			if (!$fm || !is_object($fm)) {
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
-			} elseif ($fm->isError()) {
-				exit_error($Language->getText('general','error'),$fm->getErrorMessage());
-			}
-			$count=$fm->delete();
-			if (!$count || $fm->isError()) {
-				exit_error($Language->getText('general','error'),$fm->getErrorMessage());
-			} else {
-				$feedback .= $Language->getText('forum_admin_delete_messages','messages_deleted',$count);
-			}
-
+			$fa = new ForumAdmin($group_id);
+			$feedback .= $fa->ExecuteAction("delete");
 		} else if (getStringFromRequest('add_forum')) {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
-			$forum_name = getStringFromRequest('forum_name');
-			$description = getStringFromRequest('description');
-			$is_public = getStringFromRequest('is_public');
-			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-			$allow_anonymous = getStringFromRequest('allow_anonymous');
-			/*
-				Adding forums to this group
-			*/
-			if (!$p->isForumAdmin()) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_permission_denied();
-			}
-			$f=new Forum($g);
-			if (!$f || !is_object($f)) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
-			} elseif ($f->isError()) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			}
-			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous)) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			} else {
-				$feedback .= $Language->getText('forum_admin_addforum','forum_created');
-			}
-
+			$fa = new ForumAdmin($group_id);
+			$feedback .= $fa->ExecuteAction("add_forum");
 		} else if (getStringFromRequest('change_status')) {
-			$forum_name = getStringFromRequest('forum_name');
-			$description = getStringFromRequest('description');
-			$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-			$allow_anonymous = getIntFromRequest('allow_anonymous');
-			$is_public = getIntFromRequest('is_public');
-			/*
-				Change a forum
-			*/
-			$f=new Forum($g,$group_forum_id);
-			if (!$f || !is_object($f)) {
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
-			} elseif ($f->isError()) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
-			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to)) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
-			} else {
-				$feedback .= $Language->getText('forum_admin_changestatus','update_successful');
-			}
+			$fa = new ForumAdmin($group_id);
+			$feedback .= $fa->ExecuteAction("change_status");
 		}
-
 	}
 
 	if (getStringFromRequest('add_forum')) {
@@ -183,6 +106,10 @@ if ($group_id) {
 			<input type="radio" name="allow_anonymous" value="1" />'.$Language->getText('general','yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'.$Language->getText('general','no').'
 			<br /><br />
+			<span style="font-size:-1">' .
+					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",0) . '
+				</span><br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
+				<span style="font-size:-1">
 			<strong>'.$Language->getText('forum_admin_addforum','email_posts').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
 			<p>
@@ -208,7 +135,13 @@ if ($group_id) {
 
 		forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status')));
 		echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'</p>';
-
+		$fa = new ForumAdmin();
+		if ($fa->Authorized($group_id)) {
+			if ($fa->isForumAdmin($group_forum_id)) {
+				$fa->PrintAdminPendingOption($group_forum_id);
+			}
+		}
+		
 		echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 				<input type="hidden" name="post_changes" value="y" />
@@ -225,7 +158,10 @@ if ($group_id) {
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '.$Language->getText('general','no').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'.$Language->getText('general','deleted').'<br />
-				</span>
+				</span><p>
+				<span style="font-size:-1">' .
+					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",$f->getModerationLevel()) . '
+				</span><br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
 				<span style="font-size:-1">
 
 				<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
@@ -291,6 +227,19 @@ if ($group_id) {
 			</form>';
 		forum_footer(array());
 
+	} elseif ( getStringFromRequest("deletemsg") ) {
+		// confirm delete message
+		$fa = new ForumAdmin();
+		if ($fa->Authorized($group_id)) {
+			
+		} else {
+			//manage auth errors
+			if ($fa->isGroupIdError()) {
+				exit_no_group();
+			}	elseif ($fa->isPermissionDeniedError()) {
+				exit_permission_denied();
+			}
+		}
 	} else {
 		/*
 			Show main page for choosing
