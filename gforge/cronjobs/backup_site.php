@@ -23,40 +23,70 @@
  */
 
 require_once('local.inc');
-require ('common/include/utils.php');
+require ('squal_pre.php');
 require ('common/include/cron_utils.php');
+
 
 $database=$sys_dbname; //Database name from local.inc
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
 if(!(isset($sys_path_to_backup)) ||  (strcmp($sys_path_to_backup,"/") == 0)){
-	die("eror");
-	//TODO LOG THE ERROR
+	cron_entry(23,'Variable $sys_path_to_backup was not set or it was equal to /.');	
+	exit;
 }
 
-if(!util_is_root_dir($sys_path_to_backup){
+if(util_is_root_dir($sys_path_to_backup)){
 	$sys_path_to_backup=$sys_path_to_backup.'/';
 }
 
-system('pg_dump -Ft -b '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar', $retval);   //proceed with db dump
-system('tar -cvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar '.$sys_upload_dir , $retval);   //proceed upload dir tar file creation
-system('tar -cvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar '.$sys_path_mailing, $retval);   //proceed mailman dir tar file creation
-system('tar -cvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar '.$sys_path_cvsroot , $retval);   //proceed cvsroot dir tar file creation
-system('tar -cvf '.$sys_path_to_backup.'svnroot-tmp-'.$datetime.'.tar '.$sys_path_svnroot , $retval);   //proceed svnroot dir tar file creation
+
+$output = "";
+@exec('pg_dump -Ft -b 2>&1 '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+if($retval!=0){
+	$err.= implode("\n", $output);
+}
+
+$output="";
+@exec('tar -cvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar '.$sys_upload_dir.' 2>&1' ,$output,$retval);   //proceed upload dir tar file creation
+if($retval!=0){
+	$err.= implode("\n", $output);
+}
+
+$output="";
+@exec('tar -cvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar '.$sys_path_mailing.' 2>&1', $output,$retval);   //proceed mailman dir tar file creation
+if($retval!=0){
+	$err.= implode("\n", $output);	
+}
+
+$output="";
+@exec('tar -cvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar '.$sys_path_cvsroot.' 2>&1' ,$output,$retval);   //proceed cvsroot dir tar file creation
+if($retval!=0){
+	$err.= implode("\n", $output);
+}
+
+$output="";
+@exec('tar -cvf '.$sys_path_to_backup.'svnroot-tmp-'.$datetime.'.tar '.$sys_path_svnroot.' 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
+if($retval!=0){
+	$err.= implode("\n", $output);
+}
 
 //Now we store all the tar files we've just created in one tar called backup(date).tar 
-system('tar -cvf '.$sys_path_to_backup.'backup'.$datetime.'.tar '.$sys_path_to_backup.'*-tmp-'.$datetime.'*',$retval);
+$output="";
+@exec('tar -cvf '.$sys_path_to_backup.'backup'.$datetime.'.tar '.$sys_path_to_backup.'*-tmp-'.$datetime.'*  2>&1',$output,$retval);
+if($retval!=0){
+	$err.= implode("\n", $output);
+}
 
 //If execution of tar command was successfull ($retval equals zero) remove individual files
 if($retval==0){	
-	system('rm '.$sys_path_to_backup.'*tmp-'.$datetime.'*',$retval);
+	$output="";
+	@exec('rm '.$sys_path_to_backup.'*tmp-'.$datetime.'*  2>&1',$output,$retval);
+	if($retval!=0){
+		$err.= implode("\n", $output);
+	}
 }
 
 
-/*
+cron_entry(23,addslashes($err));
 
-./home/tperdue/share/gforge-gfg/cvsroot
-./home/tperdue/share/gforge-4.5.0.1-gfg/cvsroot
-
-*/
 ?>
