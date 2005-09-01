@@ -1027,7 +1027,7 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 
 //*****************************
 //By Remo on 24-03-2005
-//for getProjectData() function
+//for getProjectTrackers() function
 
 $server->wsdl->addComplexType(
 	'ArtifactTypeData',
@@ -1054,7 +1054,7 @@ $server->wsdl->addComplexType(
 );
 
 $server->wsdl->addComplexType(
-	'GroupData',
+	'ProjectTrackers',
 	'complexType',
 	'struct',
 	'sequence',
@@ -1065,8 +1065,9 @@ $server->wsdl->addComplexType(
 	)
 );
 
+/*
 $server->wsdl->addComplexType(
-	'ProjectData',
+	'ProjectTrackers',
 	'complexType',
 	'array',
 	'',
@@ -1075,163 +1076,113 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupData[]')),
 	'tns:GroupData'
 );
+*/
 
 $server->register(
-	'getProjectData',
-	array('session_ser'=>'xsd:string'),
-	array('getProjectDataResponse'=>'tns:ProjectData'),
-	$uri,$uri.'#getProjectData','rpc','encoded');
+	'getProjectTrackers',
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int'),
+	//array('getProjectTrackersResponse'=>'tns:ProjectTrackers'),
+	array('getProjectTrackersResponse'=>'tns:ArrayOfArtifactTypeData'),
+	$uri,$uri.'#getProjectTrackers','rpc','encoded');
 
 
 //********************************************************************
 //
-// getProjectData function is used to retrieve the information like
+// getProjectTrackers function is used to retrieve the information like
 // Group details and their related Artifact details, and extra field
 // data and element details which is related to the artifact
 //
 //*******************************************************************
 
-function getProjectData($session_ser) {
+function getProjectTrackers($session_ser,$group_id) {
 	continue_session($session_ser); 
-	$uid =& user_getid(); // Get the user id
-	if (!$uid) {
-		return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
-	}
-	if($uid) {
-		$usrobj=& session_get_user(); // Get the user object for the current session
-		if (!$usrobj || !is_object($usrobj)) {
-			return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
-		} elseif ($usrobj->isError()) {
-			return new soap_fault ('','getProjectData',$usrobj->getErrorMessage(),$usrobj->getErrorMessage());
-		}
+	$grpobj =& group_get_object($group_id);
+	if (!$grpobj || !is_object($grpobj)) {
+		return new soap_fault ('','getProjectTrackers','Could Not Get Group','Could Not Get Group');
+	} elseif ($grpobj->isError()) {
+		return new soap_fault ('','getProjectTrackers',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
-//NEEDS LOTS OF COMMENTS THROUHOUT
-	//*********
-	//** Retrieve the group objects from the user object for the current session using $usrobj->getGroups() function
+	$returnGroup=array();
+	$atobjs=array();
+	$atfobj = new ArtifactTypeFactory($grpobj); //Initialize the ArtifactTypeFactory object from group object
+	if (!$atfobj || !is_object($atfobj)) {
+		return new soap_fault ('','getProjectTrackers','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
+	} elseif ($atfobj->isError()) {
+		return new soap_fault ('','getProjectTrackers',$atfobj->getErrorMessage(),$atf->getErrorMessage());
+	}
+	//********
+	// Retreive the ArtifactType object from the ArtifactTypeFactory object
+	$atobjs=$atfobj->getArtifactTypes();
 
-	$grpsobj=$usrobj->getGroups(); 
-	reset($grpsobj);
-	$return=array(); //initialize the return array
-
-	//*******
-	// Loop through the group array object
-	// and retrive the ArtifactTypeFactory object from the group object
-	while(list($gky,) = each($grpsobj)) {
-		if (!is_object($grpsobj[$gky])) { 
-			continue; 
-		}
-		if ($grpsobj[$gky]->isError()) {
-		   return new soap_fault('','getProjectData',$grpsobj[$gky]->getErrorMessage(),$grpsobj[$gky]->getErrorMessage());
-			//skip it if it had an error
-		} else {						
-			$grpobj=$grpsobj[$gky];
-			$returnGroup=array();
-			$atobjs=array();
-			$atfobj = new ArtifactTypeFactory($grpobj); //Initialize the ArtifactTypeFactory object from group object
-			if (!$atfobj || !is_object($atfobj)) {
-				return new soap_fault ('','getProjectData','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
-			} elseif ($atfobj->isError()) {
-				return new soap_fault ('','getProjectData',$atfobj->getErrorMessage(),$atf->getErrorMessage());
-			}
-			//********
-			// Retreive the ArtifactType object from the ArtifactTypeFactory object
-			$atobjs=$atfobj->getArtifactTypes();
-			if(!$atobjs) { continue; }
-			$j=0;
-			reset($atobjs);
-			$returnATdata=array();
-			while(list($atky1, )=each($atobjs)) {
-				$returnTechnicians=array();
-				$tmpartifactlist=array();
-				$i=$atky1;
-				if ($atobjs[$i]->isError()) {	
-				   	return new soap_fault('','getProjectData',$atobjs[$i]->getErrorMessage(),$atobjs[$i]->getErrorMessage());
-				} else {
-	/*				$afobj = new ArtifactFactory($atobjs[$i]);
-					if (!$afobj || !is_object($afobj)) {
-						return new soap_fault ('','getProjectData','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
-					} elseif ($afobj->isError()) {
-						return new soap_fault ('','getProjectData',$afobj->getErrorMessage(),$afobj->getErrorMessage());
-					}		
-					$afobj->setup(0,'','',0,'custom',false,false);
-					$tmpartifactlist=$afobj->getArtifacts();
-					//$returnArtifacts=array();
-	*/
-					$returnTechnicians=users_to_soap($atobjs[$i]->getTechnicianObjects());
+	$j=0;
+	reset($atobjs);
+	$returnATdata=array();
+	while(list($atky1, )=each($atobjs)) {
+		$returnTechnicians=array();
+		$tmpartifactlist=array();
+		$i=$atky1;
+		if ($atobjs[$i]->isError()) {	
+		   	return new soap_fault('','getProjectTrackers',$atobjs[$i]->getErrorMessage(),$atobjs[$i]->getErrorMessage());
+		} else {
+/*				$afobj = new ArtifactFactory($atobjs[$i]);
+				if (!$afobj || !is_object($afobj)) {
+					return new soap_fault ('','getProjectTrackers','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
+				} elseif ($afobj->isError()) {
+					return new soap_fault ('','getProjectTrackers',$afobj->getErrorMessage(),$afobj->getErrorMessage());
+				}		
+				$afobj->setup(0,'','',0,'custom',false,false);
+				$tmpartifactlist=$afobj->getArtifacts();
+				//$returnArtifacts=array();
+*/
+			$returnTechnicians=users_to_soap($atobjs[$i]->getTechnicianObjects());
 //					$returnArtifacts=artifacts_to_soap($tmpartifactlist);
-					
-					// Get list of extra fields for this artifact
-					$extrafields = array();
-					$tmpextrafields = $atobjs[$i]->getExtraFields();
-					foreach ($tmpextrafields as $extrafield) {
-						$aefobj = new ArtifactExtraField($atobjs[$i], $extrafield["extra_field_id"]);
-						
-						// array of available values
-						$avtmp = $aefobj->getAvailableValues();
-						$avs = array();
-						for ($j=0; $j < count($avtmp); $j++) {
-							$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
-							$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
-							$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
-						}
-						
-						$extrafields[] = array(
-							"extra_field_id"=> $aefobj->getID(),
-							"field_name"	=> $aefobj->getName(),
-							"field_type"	=> $aefobj->getType(),
-							"is_required"	=> $aefobj->isRequired(),
-							"alias"			=> $aefobj->getAlias(),
-							"available_values"	=> $avs
-						);
-					}
-
-					$returnArtifactType=array(
-						'group_artifact_id'=>$atobjs[$i]->data_array['group_artifact_id'],
-						'group_id'=>$atobjs[$i]->data_array['group_id'],
-						'name'=>$atobjs[$i]->data_array['name'],
-						'description'=>$atobjs[$i]->data_array['description'],
-						'is_public'=>$atobjs[$i]->data_array['is_public'],
-						'allow_anon'=>$atobjs[$i]->data_array['allow_anon'],
-						'due_period'=>$atobjs[$i]->data_array['due_period'],
-						'datatype'=>$atobjs[$i]->data_array['datatype'],
-			       		'status_timeout'=>$atobjs[$i]->data_array['status_timeout'],
-			       		'extra_fields' => $extrafields
-			       	);
-					$returnATdata[] = array(
-						'ArtifactType' => $returnArtifactType,
-						'technicians' => $returnTechnicians);
-	//					'artifacts' => $returnArtifacts);
-					$returnTechnicians=array();
-	//				$returnArtifacts=array();
-					$returnArtifactType=array();
-				}
-			}
-		
-			//mail("remo@wcogs.com","getProjectData-ArtifactType",count($artifact_list1));
-			//$artifact_list1=$tmpartifactlist;
-			//$returnArtifacts=artifacts_to_soap($artifact_list1);
 			
-			$returnGroup = array('group_id'=>$grpobj->data_array['group_id'],
-				'group_name'=>$grpobj->data_array['group_name'],
-				'homepage'=>$grpobj->data_array['homepage'],
-				'is_public'=>$grpobj->data_array['is_public'],
-				'status'=>$grpobj->data_array['status'],
-				'unix_group_name'=>$grpobj->data_array['unix_group_name'],
-				'short_description'=>$grpobj->data_array['short_description'],
-				'scm_box'=>$grpobj->data_array['scm_box'],
-				'register_time'=>$grpobj->data_array['register_time']);
+			// Get list of extra fields for this artifact
+			$extrafields = array();
+			$tmpextrafields = $atobjs[$i]->getExtraFields();
+			foreach ($tmpextrafields as $extrafield) {
+				$aefobj = new ArtifactExtraField($atobjs[$i], $extrafield["extra_field_id"]);
+				
+				// array of available values
+				$avtmp = $aefobj->getAvailableValues();
+				$avs = array();
+				for ($j=0; $j < count($avtmp); $j++) {
+					$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
+					$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
+					$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+				}
+				
+				$extrafields[] = array(
+					"extra_field_id"=> $aefobj->getID(),
+					"field_name"	=> $aefobj->getName(),
+					"field_type"	=> $aefobj->getType(),
+					"is_required"	=> $aefobj->isRequired(),
+					"alias"			=> $aefobj->getAlias(),
+					"available_values"	=> $avs
+				);
+			}
 
-			$return[] = array(
-				'group' => $returnGroup,
-				'artifacttypes' => $returnATdata
+			$returnArtifactType=array(
+				'group_artifact_id'=>$atobjs[$i]->data_array['group_artifact_id'],
+				'group_id'=>$atobjs[$i]->data_array['group_id'],
+				'name'=>$atobjs[$i]->data_array['name'],
+				'description'=>$atobjs[$i]->data_array['description'],
+				'is_public'=>$atobjs[$i]->data_array['is_public'],
+				'allow_anon'=>$atobjs[$i]->data_array['allow_anon'],
+				'due_period'=>$atobjs[$i]->data_array['due_period'],
+				'datatype'=>$atobjs[$i]->data_array['datatype'],
+	       		'status_timeout'=>$atobjs[$i]->data_array['status_timeout'],
+	       		'extra_fields' => $extrafields
+	       	);
+			$returnATdata[] = array(
+				'ArtifactType' => $returnArtifactType,
+				'technicians' => $returnTechnicians
 			);
-			$returnATdata=array();
 		}
 	}
-	//$ar = array(array("group"=>array(),"artifacttypes"=>array(array("ArtifactType"=>array(),"artifacts"=>array()))));
-	//return $ar;
-	return $return;
+
+	return $returnATdata;
 }
 
 ?>
