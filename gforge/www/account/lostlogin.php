@@ -62,7 +62,7 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($submit) {
+if (getStringFromRequest("submit")) {
 
 	if (strlen($passwd)<6) {
 		exit_error(

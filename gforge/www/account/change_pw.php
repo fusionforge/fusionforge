@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if (strlen($passwd)<6) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('general','error'),
 			$Language->getText('account_change_pw','not_valid_password')
@@ -61,7 +61,7 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if ($passwd != $passwd2) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('general','error'),
 			$Language->getText('account_change_pw','passwords_dont_match')
@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if (!$u->setPasswd($passwd)) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			$Language->getText('general','error'),
 			'Could not change password: '.$u->getErrorMessage()

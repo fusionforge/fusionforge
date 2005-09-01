@@ -44,7 +44,7 @@ if (user_ismember(1,'A')) {
 
 		if (getStringFromRequest('people_cat')) {
 			$cat_name = getStringFromRequest('cat_name');
-			if (!form_key_is_valid($_POST['form_key'])) {
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
 			$sql="INSERT INTO people_job_category (name) VALUES ('$cat_name')";
@@ -59,7 +59,7 @@ if (user_ismember(1,'A')) {
 
 		} else if (getStringFromRequest('people_skills')) {
 			$skill_name = getStringFromRequest('skill_name');
-			if (!form_key_is_valid($_POST['form_key'])) {
+			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
 			$sql="INSERT INTO people_skill (name) VALUES ('$skill_name')";

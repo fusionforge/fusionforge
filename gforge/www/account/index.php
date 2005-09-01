@@ -77,7 +77,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= $Language->getText('account','updated').'<br />';

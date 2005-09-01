@@ -44,15 +44,15 @@ if (getStringFromRequest('submit')) {
 
 	$u =& user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
-   		form_release_key($_POST['form_key']);
+   		form_release_key(getStringFromRequest('form_key'));
    		exit_error('Error','Could Not Get User');
 	} elseif ($u->isError()) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error('Error',$u->getErrorMessage());
 	}
 
 	if (!$u->setNewEmailAndHash($newemail, $confirm_hash)) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			'Could Not Complete Operation',
 			$u->getErrorMessage()

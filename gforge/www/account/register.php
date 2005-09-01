@@ -56,14 +56,11 @@ if (!$theme_id) {
 }
 
 if (getStringFromRequest('submit')) {
-
 	/*
-
 		Adding call to library rather than
 		logic that used to be coded in this page
-
 	*/
-	if (!form_key_is_valid($_POST['form_key'])) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}	
 	$new_user = new User();

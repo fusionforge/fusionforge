@@ -51,7 +51,7 @@ if (getStringFromRequest('submit')) {
 
 	$u->setNewEmailAndHash($u->getEmail(), $confirm_hash);
 	if ($u->isError()) {
-		form_release_key($_POST['form_key']);
+		form_release_key(getStringFromRequest('form_key'));
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 

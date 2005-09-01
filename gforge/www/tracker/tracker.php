@@ -211,7 +211,7 @@ switch (getStringFromRequest('func')) {
 			no one is hacking around, we override any fields they don't have
 			permission to change.
 		*/
-		if (!form_key_is_valid($_POST['form_key'])) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
 		}	
 
@@ -382,7 +382,7 @@ switch (getStringFromRequest('func')) {
 	//
 
 	case 'postdeleteartifact' : {
-		if (!form_key_is_valid($_POST['form_key'])) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
 		}
 		if ($ath->userIsAdmin()) {

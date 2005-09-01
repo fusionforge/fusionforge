@@ -29,7 +29,7 @@ if (session_loggedin()) {
 		/*
 			update the job's description, status, etc
 		*/
-		if (!form_key_is_valid($_POST['form_key'])) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
 		}
 		

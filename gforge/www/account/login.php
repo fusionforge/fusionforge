@@ -63,7 +63,7 @@ if (session_issecure()) {
 // ###### first check for valid login, if so, redirect
 
 if ($login) {
-	if (!form_key_is_valid($_POST['form_key'])) {
+	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
 	$success=session_login_valid(strtolower($form_loginname),$form_pw);
@@ -92,7 +92,7 @@ if ($session_hash) {
 $HTML->header(array('title'=>'Login'));
 
 if ($login && !$success) {
-	form_release_key($_POST['form_key']);	
+	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if ($userstatus == "P") {
 		$feedback = $Language->getText('account_login', 'pending_account', array(htmlspecialchars($form_loginname)));
