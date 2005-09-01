@@ -801,6 +801,7 @@ forum_admin_pending	subject	Message
 forum_admin_pending	release	Release Submitted
 forum_admin_pending	delete	Delete Submitted
 forum_admin_pending	update	Update
+forum_admin_pending	nomoderated	No forums are moderated for this group
 forum_admin_pending	view_pending_notice	This is the content of the pending message
 forum_admin_pending	deleted_ok	Message Deleted Successfully
 forum_admin_pending	released_ok	Message Released Successfully

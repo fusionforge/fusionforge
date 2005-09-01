@@ -597,6 +597,11 @@ class ForumAdmin extends Error {
 				$moderated_forums[$aux[1]] = $aux[0];
 			}
 			
+			if (count($moderated_forums)==0) {
+				echo $HTML->feedback($Language->getText('forum_admin_pending','nomoderated'));
+				forum_footer(array());
+				exit();
+			}
 			if (!$forum_id) {
 				//get the first one
 				$keys = array_keys($moderated_forums);
