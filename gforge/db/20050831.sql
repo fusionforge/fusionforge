@@ -1,6 +1,8 @@
 ALTER TABLE forum ALTER bbcode_uid SET DEFAULT -1;
 
-ALTER TABLE forum_group_list ADD COLUMN moderation_level integer DEFAULT 0;
+ALTER TABLE forum_group_list ADD COLUMN moderation_level integer;
+
+ALTER TABLE forum_group_list ALTER moderation_level SET DEFAULT 0;
 
 DROP VIEW forum_group_list_vw;
 
