@@ -28,6 +28,9 @@ require ('common/include/cron_utils.php');
 
 
 $database=$sys_dbname; //Database name from local.inc
+$username=$sys_dbuser; //Username used to log on to data base
+$password=$sys_dbpasswd; //Db Password 
+
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
 if(!(isset($sys_path_to_backup)) ||  (strcmp($sys_path_to_backup,"/") == 0)){
@@ -41,7 +44,7 @@ if(util_is_root_dir($sys_path_to_backup)){
 
 
 $output = "";
-@exec('pg_dump -Ft -b 2>&1 '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+@exec('echo -n -e "'.$password.'\n" | pg_dump -U '.$username.' -v -Ft -b 2>&1 '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
 if($retval!=0){
 	$err.= implode("\n", $output);
 }

@@ -54,9 +54,14 @@ MAILTO=""
 57 1 * * * $PHP $GFORGE/cronjobs/check_stale_tracker_items.php
 
 #
+#      Daily site backup
+#
+0 2 * * *  $PHP $GFORGE/cronjobs/backup_site.php
+
+#
 #       VACUUM should be done after ALL OTHER JOBS
 #
-0 2 * * *  $PHP $GFORGE/cronjobs/vacuum.php
+40 2 * * *  $PHP $GFORGE/cronjobs/vacuum.php
 
 #
 #       Stats aggregation work
