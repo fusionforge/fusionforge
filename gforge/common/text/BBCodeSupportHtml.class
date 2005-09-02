@@ -291,7 +291,7 @@ class BBCodeSupportHtml extends BBCodeSupport {
 	
 	function displayTextField($text_field_name, $default_value=''){
 		?>
-		<textarea name="<?php echo $text_field_name; ?>" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="6" class="post" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);"><?php $default_value; ?></textarea>
+		<textarea name="<?php echo $text_field_name; ?>" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="6" class="post" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);"><?php echo $default_value; ?></textarea>
 		<?php
 	}
 

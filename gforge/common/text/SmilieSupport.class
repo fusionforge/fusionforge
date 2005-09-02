@@ -86,7 +86,7 @@ class SmilieSupport extends Error {
 			$code = preg_quote($smilie_code);
 			$code = str_replace('/', '\\/', $code);
 			$this->smilies_orig[] = "/(?<=.\W|\W.|^\W)" . $code . "(?=.\W|\W.|\W$)/"; 
-			$this->smilies_repl[] = '<img src="http://'. $sys_default_domain . '/images/smiles/' . $smilie_info['image'] . '" alt="' . $smilie_info['emoticon'] . '" border="0" />';			
+			$this->smilies_repl[] = '<img src="' . $sys_images_url . '/images/smiles/' . $smilie_info['image'] . '" alt="' . $smilie_info['emoticon'] . '" border="0" />';			
 		}
 	   return true;	
 	}

@@ -67,7 +67,7 @@ class SmilieSupportHtml extends SmilieSupport {
 					$return .= '</tr><tr align="center" valign="middle">'. "\n";
 				}
 				
-				$return .= '<td><a href="javascript:emoticon(\''.$smilie_code.'\')"><img src="http://'. $sys_default_domain . '/images/smiles/' . $smilie_info['image'] . '" border="0" alt="'.$smilie_info['emoticon'].'" title="'.$smilie_info['emoticon'].'" /></a></td>'. "\n";
+				$return .= '<td><a href="javascript:emoticon(\''.$smilie_code.'\')"><img src="' . $sys_images_url . '/images/smiles/' . $smilie_info['image'] . '" border="0" alt="'.$smilie_info['emoticon'].'" title="'.$smilie_info['emoticon'].'" /></a></td>'. "\n";
 				
 				$s_colspan = max($s_colspan, $col + 1);
 				
