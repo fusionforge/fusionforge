@@ -1,13 +1,27 @@
+2005-09-1 Leonel Corso <leonel@gforgegroup.com>
+	* cronjobs/backup_site.php: has support now for password protected databases
+
+2005-08-31 Daniel Perez <daniel@gforgegroup.com>
+	* admin -> forum moderation finished (release / delete messages)
 2005-08-31 Daniel Perez <daniel@gforgegroup.com>
 	* admin -> forum moderation finished (release / delete messages)
 2005-08-30 Daniel Perez <daniel@gforgegroup.com>
 	* fixed minor bug : common/tracker/Artifact.class -> now only sends mailFollowup(s) to ACTIVE users
+	
+2005-08-29 Leonel Corso <leonel@gforgegroup.com>
+	* Docman Soap API added to CLI	
+	
 2005-08-29 Daniel Perez <daniel@gforgegroup.com>
 	* admin -> update forum moderation level status, create forum with moderation status
 	* changed DB, the ability to moderate posts by the forum admins is going to be incorporated
 	* insert moderated message with or without attach
 2005-08-28  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 	* docs/docbook/docbook/installation_guide/installation_guide.xml: Plugins section is reviewed.
+
+2005-08-27 Leonel Corso <leonel@gforgegroup.com>
+	* cronjobs/backup_site.php written. This cronjob dumps the db, 
+	* mailing lists, cvsroot, svnroot, and uploads dir into a tarball. 
+	
 2005-08-26
 	* when attachments are downloaded, its download count is incremented
 	* forum/attachment.php secured
@@ -56,6 +70,9 @@ $sys_bbcode_strip_html
 
 3) update the files through CVS, of course ;)
 
+2005-08-20 Leonel Corso <leonel@gforgegroup.com>
+	* SOAP support for docman has been added 
+
 2005-08-18	Francisco Gimeno <francisco@gforgegroup.com>
 
 	* cronjobs/cron-cvs/cvs.php: added support for plugins
@@ -82,6 +99,7 @@ Daniel Perez <daniel@gforgegroup.com>
 	* Fixed XSS vulnerabilities by adding htmlspecialchars for direct used
 	variables: files search/index.php, snippet/detail.php,
 	include/exit.php, include/logger.php, account/login.php
+
 
 2005-07-18  Francisco Gimeno <francisco@gforgegroup.com>
 
