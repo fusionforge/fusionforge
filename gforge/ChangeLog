@@ -61,7 +61,8 @@ $sys_bbcode_strip_html
 	* cronjobs/cron-cvs/cvs.php: added support for plugins
 	* gforge-plugin-cvstracker/include/cvstrackerPlugin.class: add cvs.php
 	support
-	
+2005-08-17	Daniel Perez <daniel@gforgegroup.com>
+	* Wiki Plugin v 0.91 released
 2005-08-16	Leonel Corso <leonel@gforgegroup.com>, Marcelo Mottalli <marcelo@gforgegroup.com>,
 Daniel Perez <daniel@gforgegroup.com>
 	
