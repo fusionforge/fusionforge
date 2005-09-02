@@ -1,3 +1,7 @@
+2005-09-02 Daniel Perez <daniel@gforgegroup.com>
+	* forum : (new feature) edit messages for admins and message creators
+	* forum : (new feature) edit attachment / add attachment for admins and message creators
+
 2005-09-1 Leonel Corso <leonel@gforgegroup.com>
 	* cronjobs/backup_site.php: has support now for password protected databases
 

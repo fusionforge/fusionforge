@@ -1,8 +1,8 @@
 <?php
 require_once('common/include/Error.class');
-require_once('common/text/SmilieSupportHtml.class');
-require_once('common/text/BBCodeSupportHtml.class');
-require_once('common/text/HTMLSupport.class');
+require_once('www/include/SmilieSupportHtml.class');
+require_once('www/include/BBCodeSupportHtml.class');
+require_once('www/include/HTMLSupport.class');
 
 
 class TextSupport extends Error {

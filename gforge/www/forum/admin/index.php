@@ -62,13 +62,6 @@ if ($group_id) {
 			$feedback .= $fa->ExecuteAction("delete_forum");
 			$group_forum_id=0;
 			$deleteforum=0;
-		} elseif (getStringFromRequest('delete')) {
-			
-			/*
-				Deleting messages or threads
-			*/
-			$fa = new ForumAdmin($group_id);
-			$feedback .= $fa->ExecuteAction("delete");
 		} else if (getStringFromRequest('add_forum')) {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
@@ -175,7 +168,7 @@ if ($group_id) {
 				<p>
 				<input type="submit" name="submit" value="'.$Language->getText('general','update').'" /></span>
 			</form><p>';
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
+			//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'.$Language->getText('forum_admin','delete_forum').'</a><br />';
 		forum_footer(array());
 
@@ -203,35 +196,139 @@ if ($group_id) {
 			</form>';
 		forum_footer(array());
 
-	} elseif (getStringFromRequest('delete') && $group_forum_id) {
-
-		$f = new Forum ($g,$group_forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error('Error','Could Not Get Forum Object');
-		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
-		} elseif (!$f->userIsAdmin()) {
-			exit_permission_denied();
-		}
-		forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status')));
-		echo '<p>
-			<strong>'.$Language->getText('general','delete').'</strong><br />
-			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
-			<input type="hidden" name="post_changes" value="y" />
-			<input type="hidden" name="delete" value="y" />
-			<input type="hidden" name="group_id" value="'.$group_id.'" />
-			<input type="hidden" name="group_forum_id" value="'.$group_forum_id.'" />
-			<strong>'.$Language->getText('forum_admin_delete_message','enter_message_id').'</strong><br />
-			<input type="text" name="msg_id" value="" />
-			<input type="submit" name="submit" value="'.$Language->getText('general','delete').'" />
-			</form>';
-		forum_footer(array());
-
 	} elseif ( getStringFromRequest("deletemsg") ) {
-		// confirm delete message
+		// delete message handling
+		
 		$fa = new ForumAdmin();
 		if ($fa->Authorized($group_id)) {
-			
+			$forum_id = getStringFromRequest("forum_id");
+			$thread_id = getStringFromRequest("thread_id");
+			$msg_id = getStringFromRequest("deletemsg");
+			if ($fa->isForumAdmin($forum_id)) {
+				if (getStringFromRequest("ok")) {
+					//actually delete the message
+					$feedback .= $fa->ExecuteAction("delete");
+					forum_header(array('title'=>$Language->getText('forum_admin_delete_message','title')));
+					echo '<p><a href="/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					forum_footer(array());
+				} elseif (getStringFromRequest("cancel")) {
+					// the user cancelled the request, go back to forum
+					echo "<script>";
+					//if thread_id is 0, then we came from message.php. else, we came from forum.php
+					if (!$thread_id) {
+						echo "window.location='/forum/message.php?msg_id=$msg_id';";
+					} else {
+						echo "window.location='/forum/forum.php?thread_id=$thread_id&forum_id=$forum_id';";
+					}
+					echo "</script>";
+				} else {
+					//print the delete message confirmation
+					forum_header(array('title'=>$Language->getText('forum_admin_delete_message','title')));
+					echo '<p><center>
+							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+							<h3>' . $Language->getText('forum_admin_delete_message','warning') . '</h3><p>
+							<input type="submit" name="ok" value="' . $Language->getText('general','yes') . '">    
+							<input type="submit" name="cancel" value="' . $Language->getText('general','no') . '">    
+							<input type="hidden" name="deletemsg" value="'.$msg_id.'">
+							<input type="hidden" name="group_id" value="'.$group_id.'">
+							<input type="hidden" name="forum_id" value="'.$forum_id.'">
+							<input type="hidden" name="thread_id" value="'.$thread_id.'">
+							</center>
+							</form>';
+					forum_footer(array());
+				}
+			} else {
+				exit_permission_denied();
+			}
+		} else {
+			//manage auth errors
+			if ($fa->isGroupIdError()) {
+				exit_no_group();
+			}	elseif ($fa->isPermissionDeniedError()) {
+				exit_permission_denied();
+			}
+		}
+	} elseif (getStringFromRequest("editmsg")) {
+		// edit message handling
+		$forum_id = getStringFromRequest("forum_id");
+		$thread_id = getStringFromRequest("thread_id");
+		$msg_id = getStringFromRequest("editmsg");
+		$fa = new ForumAdmin();
+		if ($fa->Authorized($group_id)) {
+			if ($fa->isForumAdmin($forum_id)) {
+				if (getStringFromRequest("ok")) {
+					//actually finish editing the message and save the contents
+					$f = new Forum ($fa->GetGroupObject(),$forum_id);
+					if (!$f || !is_object($f)) {
+						exit_error('Error','Could Not Get Forum Object');
+					} elseif ($f->isError()) {
+						exit_error('Error',$f->getErrorMessage());
+					}
+					$fm=new ForumMessage($f,$msg_id,false,false);
+					if (!$fm || !is_object($fm)) {
+						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+					} elseif ($fm->isError()) {
+						exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+					}
+					$subject = getStringFromRequest('subject');
+					$body = getStringFromRequest('body');
+					$is_followup_to = getStringFromRequest('is_followup_to');
+					$form_key = getStringFromRequest('form_key');
+					$posted_by = getStringFromRequest('posted_by');
+					$post_date = getStringFromRequest('post_date');
+					$is_followup_to = getStringFromRequest('is_followup_to');
+					$has_followups = getStringFromRequest('has_followups');
+					$most_recent_date = getStringFromRequest('most_recent_date');
+					$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
+					$smilie_on=$sys_bbcode_smilie_on; 
+					$bbcode_on=$sys_bbcode_bbcode_on; 
+					$strip_html=$sys_bbcode_strip_html;
+					$text_support = new TextSupport();
+					$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
+					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid)) {
+						$feedback .= $Language->getText('forum_admin_edit_message','message_edited');
+					} else {
+						$feedback .= $fm->getErrorMessage();
+					}
+					forum_header(array('title'=>$Language->getText('forum_admin_edit_message','title')));
+					echo '<p><a href="/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					forum_footer(array());
+				} elseif (getStringFromRequest("cancel")) {
+					// the user cancelled the request, go back to forum
+					echo "<script>";
+					echo "window.location='/forum/message.php?msg_id=$msg_id';";
+					echo "</script>";
+				} else { 
+					//print the edit message confirmation
+					
+					$f = new Forum ($fa->GetGroupObject(),$forum_id);
+					if (!$f || !is_object($f)) {
+						exit_error('Error','Could Not Get Forum Object');
+					} elseif ($f->isError()) {
+						exit_error('Error',$f->getErrorMessage());
+					}
+					
+					$fm=new ForumMessage($f,$msg_id,false,false);
+					if (!$fm || !is_object($fm)) {
+						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+					} elseif ($fm->isError()) {
+						exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+					}
+					
+					$fh = new ForumHTML($f);
+					if (!$fh || !is_object($fh)) {
+						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+					} elseif ($fh->isError()) {
+						exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+					}
+					
+					forum_header(array('title'=>$Language->getText('forum_admin_edit_message','title')));
+					$fh->showEditForm($fm);
+					forum_footer(array());
+				}
+			} else {
+				exit_permission_denied();
+			}
 		} else {
 			//manage auth errors
 			if ($fa->isGroupIdError()) {

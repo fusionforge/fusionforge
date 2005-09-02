@@ -83,6 +83,7 @@ class ForumMessage extends Error {
 				}
 				$this->awaits_moderation = true;
 			} else {
+				$this->awaits_moderation = false;
 				if (!$arr || !is_array($arr)) {
 					if (!$this->fetchData($msg_id)) {
 						return false;
@@ -573,6 +574,24 @@ class ForumMessage extends Error {
 	function hasFollowups() {
 		return $this->data_array['has_followups'];
 	}
+	
+	/**
+	 *	hasAttach - whether this message has an attachment.
+	 *
+	 *	@return boolean has_attach.
+	 */
+	
+	function hasAttach() {
+		if ($this->isPending()) {
+			$sql = "SELECT attachmentid FROM forum_pending_attachment WHERE msg_id='$this->getID()'";
+		} else {
+			$sql = "SELECT attachmentid FROM forum_attachment WHERE msg_id='$this->getID()'";
+		}
+		if ((db_numrows(db_query($sql)) > 0 )) {
+			return true;
+		}
+		return false;		
+	}
 
 	/**
 	 *	delete - Delete this message and its followups.
@@ -580,13 +599,24 @@ class ForumMessage extends Error {
 	 *	@return	int	The count of deleted messages.
 	 */
 	function delete() {
+		global $Language;
 		$msg_id=$this->getID();
-		$perm =& $this->Forum->Group->getPermission( session_get_user() );
+		if (!$msg_id) {
+			$this->setError($Language->getText('forum_admin_delete_message','invalid_id'));
+			return 0;
+		}
+		
+		if (!$this->Forum->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		
+		/*$perm =& $this->Forum->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
-		}
+		}*/
 
 		$sql="SELECT msg_id FROM forum 
 			WHERE is_followup_to='$msg_id' 
@@ -594,6 +624,7 @@ class ForumMessage extends Error {
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		$count=1;
+		
 
 		for ($i=0;$i<$rows;$i++) {
 			$msg = new ForumMessage($this->Forum,db_result($result,$i,'msg_id'));
@@ -706,6 +737,45 @@ class ForumMessage extends Error {
 		return true;
 	}
 
+	/**
+	 *	updatemsg - impacts in the DB the new content of the message
+	 *	
+	 *	@param	string	The forum ID
+	 *	@param 	int		The id of the user that is posting the message
+	 *	@param	string	The subject of the message.
+	 *	@param	string	The body of the message.
+	 *	@param	string	The post date
+	 *	@param	int		The message_id of the parent message, if any.
+	 *	@param	int		The thread_id of the message, if known.
+	 *	@param	int		has followups?
+	 *	@param	string	The most recent date.
+	 *	@param 	string	BBCODE ID. 
+	 *
+	 *	@return boolean success.
+	 */
+	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid) {
+		$subject = htmlspecialchars($subject);
+		$body = htmlspecialchars($body);
+		$msg_id = $this->getID();
+		$sql="UPDATE forum 
+			SET group_forum_id='$group_forum_id' , posted_by='$posted_by' , subject='$subject',
+			body='$body', post_date='$post_date' , is_followup_to='$is_followup_to' ,
+			thread_id='$thread_id',most_recent_date='$most_recent_date' , bbcode_uid='$bbcode_uid'
+			WHERE msg_id='$msg_id'";
+		$res = db_query($sql);
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		} else {
+			if (db_affected_rows($res)<1) {
+				$this->setError("Message not found");
+				return false;
+			}
+			return true;
+		}
+	}
+	
+	
 }
 
 ?>

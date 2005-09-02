@@ -27,12 +27,6 @@ gforge-plugin-scmsvn/www/viewcvs/images/down.png -text
 gforge-plugin-scmsvn/www/viewcvs/images/logo.png -text
 gforge-plugin-scmsvn/www/viewcvs/images/up.png -text
 gforge/backend/shell/apache.sh svneol=native#unset
-gforge/common/text/BBCodeSupport.class -text svneol=unset#application/octet-stream
-gforge/common/text/BBCodeSupportHtml.class -text svneol=unset#application/octet-stream
-gforge/common/text/HTMLSupport.class -text svneol=unset#application/octet-stream
-gforge/common/text/SmilieSupport.class -text svneol=unset#application/octet-stream
-gforge/common/text/SmilieSupportHtml.class -text svneol=unset#application/octet-stream
-gforge/common/text/TextSupport.class -text svneol=unset#application/octet-stream
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
@@ -117,6 +111,12 @@ gforge/www/images/smiles/icon_twisted.gif -text
 gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
+gforge/www/include/BBCodeSupport.class -text svneol=unset#application/octet-stream
+gforge/www/include/BBCodeSupportHtml.class -text svneol=unset#application/octet-stream
+gforge/www/include/HTMLSupport.class -text svneol=unset#application/octet-stream
+gforge/www/include/SmilieSupport.class -text svneol=unset#application/octet-stream
+gforge/www/include/SmilieSupportHtml.class -text svneol=unset#application/octet-stream
+gforge/www/include/TextSupport.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/DocsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/ForumsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/FrsGroupSearchEngine.class -text svneol=unset#application/octet-stream
@@ -135,6 +135,7 @@ gforge/www/themes/gforge/images/ic/cvs16b.png -text
 gforge/www/themes/gforge/images/ic/docman16b.png -text
 gforge/www/themes/gforge/images/ic/forum20g.png -text
 gforge/www/themes/gforge/images/ic/forum20w.png -text
+gforge/www/themes/gforge/images/ic/forum_add.gif -text
 gforge/www/themes/gforge/images/ic/forum_delete.gif -text
 gforge/www/themes/gforge/images/ic/forum_edit.gif -text
 gforge/www/themes/gforge/images/ic/ftp16b.png -text
@@ -204,6 +205,7 @@ gforge/www/themes/osx/images/ic/cvs16b.png -text
 gforge/www/themes/osx/images/ic/docman16b.png -text
 gforge/www/themes/osx/images/ic/forum20g.png -text
 gforge/www/themes/osx/images/ic/forum20w.png -text
+gforge/www/themes/osx/images/ic/forum_add.gif -text
 gforge/www/themes/osx/images/ic/forum_delete.gif -text
 gforge/www/themes/osx/images/ic/forum_edit.gif -text
 gforge/www/themes/osx/images/ic/ftp16b.png -text
@@ -254,6 +256,7 @@ gforge/www/themes/osx/images/tabs/rightselect.png -text
 gforge/www/themes/osx/images/tabs/ruledeselect.png -text
 gforge/www/themes/osx/images/tabs/ruleselect.png -text
 gforge/www/themes/osx/images/tabs/select.png -text
+gforge/www/themes/ultralite/images/forum_add.gif -text
 gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text

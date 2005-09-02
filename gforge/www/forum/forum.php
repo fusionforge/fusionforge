@@ -25,7 +25,7 @@ require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 require_once('www/forum/include/AttachManager.class'); //attachent manager
-require_once('common/text/TextSupport.class'); // bbcode, smilies support
+require_once('www/include/TextSupport.class'); // bbcode, smilies support
 
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');

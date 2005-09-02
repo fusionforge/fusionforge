@@ -1,5 +1,5 @@
 <?php
-require_once('common/text/SmilieSupport.class');
+require_once('www/include/SmilieSupport.class');
 
 
 

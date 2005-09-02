@@ -49,16 +49,19 @@ class ForumAdmin extends Error {
 	/**
 	 *  PrintAdminMessageOptions - prints the different administrator options for a message
 	 *
+	 *	@param   integer	The Message ID
+	 *	@param   integer	The Group ID
+	 *	@param   integer	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 *	@param   integer	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 *	@return  The HTML output
 	 */
 	
-	function PrintAdminMessageOptions() {
+	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0) {
 		global $HTML;
 		
-		$return = 
-		'<table>
-			<tr><td bgcolor="#FF7D7D" nowrap="nowrap">Delete Message</td></tr>
-			<tr><td bgcolor="#FF7D7D" nowrap="nowrap">Edit Message</td></tr>
-		</table>';
+		$return = '<a href="admin/index.php?editmsg=' . $msg_id  . '&group_id=' . $group_id .  '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array()) . "</a>";
+		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&group_id=' . $group_id . '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array());
+		$return .= "<br>";
 		return $return;
 	}
 	
@@ -122,7 +125,7 @@ class ForumAdmin extends Error {
 		} elseif ($f->isError()) {
 			exit_error('Error',$f->getErrorMessage());
 		} elseif (!$f->userIsAdmin()) {
-			exit_permission_denied();
+			return false;
 		}
 		return true;
 	}
@@ -527,9 +530,9 @@ class ForumAdmin extends Error {
 			return $feedback;
 		}
 		if ($action == "delete") { //Deleting messages or threads
-			$msg_id = getStringFromRequest('msg_id');
-			$group_forum_id = getIntFromRequest('group_forum_id');
-			$f=new Forum($this->g,$group_forum_id);
+			$msg_id = getStringFromRequest('deletemsg');
+			$forum_id = getIntFromRequest('forum_id');
+			$f=new Forum($this->g,$forum_id);
 			if (!$f || !is_object($f)) {
 				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
 			} elseif ($f->isError()) {

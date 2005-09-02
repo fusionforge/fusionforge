@@ -827,10 +827,13 @@ forum_admin_changestatus	title	Change Forum Status
 forum_admin_changestatus	update_successful	Forum Info Updated Successfully
 forum_admin_delete	section	Forum Administration
 forum_admin_delete	title	Delete Forum
+forum_admin_edit_message	title	Edit a Message
+forum_admin_edit_message	message_edited	Message Edited Successfully
 forum_admin_delete_message	section	Forum Administration
 forum_admin_delete_message	title	Delete a Message
 forum_admin_delete_message	enter_message_id	Enter message identifier
 forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
+forum_admin_delete_message	invalid_id	Invalid Message ID
 forum_admin_delete_messages	messages_deleted	$1 messages deleted
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_illegal_characters	Illegal Characters in Forum Name
@@ -886,6 +889,7 @@ forum_forum	views	Views
 forum_forum	ultimate	Ultimate
 forum_forum	browseattach	Use the "Browse" button to find the file you want to attach
 forum_forum	filetoupload	File to upload
+forum_forum	currentfile	Current File
 forum_forum_thread	section	Forums
 forum_forum_thread	title	View Thread
 forum_attachmngr	errnofile	No file was provided
@@ -893,14 +897,19 @@ forum_attachmngr	err_inv_ext	Invalid Extension
 forum_attachmngr	err_toobig	File too big for that file type
 forum_attachmngr	err_upload	Error, problem with the attachment file uploaded into the server
 forum_attachmngr	uploadok	File uploaded
+forum_attachmngr	updateok	File Updated Successfully
 forum_attachmngr	upload_notok	File not uploaded
 forum_attachmngr	err_msgid	Couldn´t get message id
 forum_attachmngr	bad_dimension	File not uploaded, dimensions too large
 forum_attachmngr	not_image	The file provided has the extension but isn´t an image type
 forum_attach_download	cannot_delete	You cannot delete this attachment
+forum_attach_download	cannot_edit	You cannot edit this attachment
 forum_attach_download	deleted	Attachment deleted
 forum_attach_download	type_removed	The attachment type has been removed by the administrator
 forum_attach_download	type_disabled	The Attachment Type has been disabled by the administrator
+forum_attach_download	not_exists	The Attachment does not exist
+forum_attach_download	title	Attachments
+forum_attach_download	warning	Warning : Current file will be deleted permanently
 forum_message	by	BY
 forum_message	date	DATE
 forum_message	message	Message

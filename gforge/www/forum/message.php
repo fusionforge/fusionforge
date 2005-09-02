@@ -99,11 +99,16 @@ if ($msg_id) {
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
+	$fa = new ForumAdmin();
+	if ($f->userIsAdmin()) {
+		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
+	}
 	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (<a href=\"/users/".$fm->getPosterName()."/\">". $fm->getPosterName() ."</a>)<br />";
 	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . "<br/>";
+	
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
 	
 	$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
@@ -141,13 +146,14 @@ if ($msg_id) {
 	if ($rows > $max_rows) {
 		$rows=$max_rows;
 	}
-
+	
 	$current_message=$msg_id;
 	$i=0;
 	while (($i < $rows) && ($total_rows < $max_rows)) {
 		$msg =& $msg_arr["0"][$i];
 		$total_rows++;
-
+		
+		
 		if ($fm->getID() != $msg->getID()) {
 			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().'">';
 			$ah_end='</a>';

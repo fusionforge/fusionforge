@@ -123,11 +123,27 @@ class AttachManager extends Error {
 			$attach = "
 			<a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id$pend','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
-			if (user_getid() == $attach_userid) { //only permit the user who created the attach to delete it
-				$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&delete=yes','yes');\">" .  "<font size=\"-3\">delete</font></a>";
+			
+			$f = $msg->getForum();
+			if (!$f || !is_object($f)) {
+			exit_error('Error','Could Not Get Forum Object');
+			} else {
+				if ( ((user_getid() == $attach_userid) || ($f->userIsAdmin())) && (!$msg->isPending()) ) { //only permit the user who created the attach to delete it, or an admin
+					$attach .= "   <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&msg_id=$msg_id&edit=yes','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_edit.gif','37','15',array()) . "</font></a>";
+					$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&delete=yes','yes');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_delete.gif','16','18',array()) . "</font></a>";
+				}
 			}
 		}	else {
-			$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . "No attachment found";
+			//add attach for existing message
+			$f = $msg->getForum();
+			if (!$f || !is_object($f)) {
+			exit_error('Error','Could Not Get Forum Object');
+			} else {
+				$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . "No attachment found";
+				if ( ((user_getid() == $msg->getPosterID()) || ($f->userIsAdmin())) && (!$msg->isPending()) ) { //only permit an admin or the user who created the message to insert an attach
+					$attach .= "   <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=0&group_id=$group_id&forum_id=$forum_id&msg_id=$msg_id&edit=yes','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_add.gif','37','15',array()) . "</font></a>";
+				}
+			}
 		}
 		
 		return $attach;
@@ -166,9 +182,11 @@ class AttachManager extends Error {
 	 *
 	 * @param 	int		The file to attach
 	 * @param 	int		The group.
+	 * @param 	int		Whether we are updating an existing attach (attachid to update or cero for new message (inserts using the hights msg id from forum table)
+	 * @param 	int		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
 	 *
 	 */
-	function attach($attach,$group_id) {
+	function attach($attach,$group_id,$update=0,$msg_id=0) {
 		global $Language;
 		global $_FILES;
 		
@@ -261,13 +279,29 @@ class AttachManager extends Error {
 		
 			
 		if ($this->ForumMsg->isPending()) {
-			// add to db
-			$result=db_query("SELECT max(msg_id) AS id FROM forum_pending_messages");
-			if (!$result || db_numrows($result) < 1) {
-				$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
-				@unlink($attachment);
+			if ($update) {
+				//update the fileinfo
+				/*$sql = "UPDATE forum_pending_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' , filename = '" . addslashes($attachment_name) . "' , filehash = '" . addslashes(md5($filestuff)) . "' where attachmentid=$update";
+				if (db_query($sql)) {
+					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
+				}	else {
+					$this->messages[] = $Language->getText('forum_attachmngr','upload_notok');
+				}*/
+				// not implemented
 			} else {
-				$this->msg_id = db_result($result,0,0);
+				// add to db
+				if ($msg_id!=0) {
+					$this->msg_id = $msg_id;
+				} else {
+					$result=db_query("SELECT max(msg_id) AS id FROM forum_pending_messages");
+					if (!$result || db_numrows($result) < 1) {
+						$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
+						@unlink($attachment);
+						return -1;
+					} else {
+						$this->msg_id = db_result($result,0,0);
+					}
+				}
 				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
@@ -279,17 +313,37 @@ class AttachManager extends Error {
 				}
 			}
 		} else {
-			// add to db
-			$result=db_query("SELECT max(msg_id) AS id FROM forum");
-			if (!$result || db_numrows($result) < 1) {
-				$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
-				@unlink($attachment);
+			if ($update) {
+				//update the fileinfo
+				$sql = "UPDATE forum_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' ,
+				 filename = '" . addslashes($attachment_name) . "' , 
+				 filehash = '" . addslashes(md5($filestuff)) . "' , 
+				 counter = '0' ,
+				 filesize = '" . $filesize . "' where attachmentid=$update";
+				if (db_query($sql)) {
+					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
+					$this->messages[] = $Language->getText('forum_attachmngr','updateok');
+				}	else {
+					$this->messages[] = $Language->getText('forum_attachmngr','upload_notok');
+				}
 			} else {
-				$this->msg_id = db_result($result,0,0);
+				// add to db
+				if ($msg_id!=0) {
+					$this->msg_id = $msg_id;
+				} else {
+					$result=db_query("SELECT max(msg_id) AS id FROM forum_pending_messages");
+					if (!$result || db_numrows($result) < 1) {
+						$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
+						@unlink($attachment);
+						return -1;
+					} else {
+						$this->msg_id = db_result($result,0,0);
+					}
+				}
 				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
-						VALUES 
-						( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-						'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
+					VALUES 
+					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
+					'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
 				if (db_query($sql)) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
 				}	else {

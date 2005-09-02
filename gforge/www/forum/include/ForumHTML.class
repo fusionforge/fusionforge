@@ -23,7 +23,7 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 require_once('www/forum/admin/ForumAdmin.class');
 require_once('www/forum/include/AttachManager.class');
-require_once('common/text/TextSupport.class'); // bbcode, smilies support
+require_once('www/include/TextSupport.class'); // bbcode, smilies support
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
@@ -155,7 +155,7 @@ class ForumHTML extends Error {
 		$this->Forum =& $Forum;
 		return true;
 	}
-
+	
 	
 	/**
 	 * Function showPendingMessage
@@ -226,17 +226,16 @@ class ForumHTML extends Error {
 		$strip_html=$sys_bbcode_strip_html;
 		$text_support = new TextSupport();
 		$fa = new ForumAdmin();
-		$ret_val = /*$fa->PrintAdminMessageOptions() .*/
-		
+		$msgforum =& $msg->getForum(); 
+		$ret_val = 		
 		'
 		<table border="0">
 			<tr>
-				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
+				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= $Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br />
 					';
-					$msgforum = $msg->getForum();
 					$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					<a href="/forum/message.php?msg_id='.
@@ -255,27 +254,79 @@ class ForumHTML extends Error {
 		return $ret_val;
 	}
 	
+	/**
+	*  LinkAttachEditForm - Returns the link to the attach form for editing
+	*
+	*	@param 		string	Filename
+	*	@param 		int		group id
+	*	@param 		int		forum id
+	*	@param 		int		attach id
+	*	@param 		int		msg id
+	*
+	*	@return		The HTML output
+	*/
 	
-// echoes the link to the attach form
-function LinkAttachForm() {
-	global $Language;
-	
-	$poststarttime = time();
-	$posthash = md5($poststarttime . user_getid() );
-	echo "
-	<fieldset class=\"fieldset\">
-	<table>
+	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
+		global $Language;
+		$return_val = '
+			
+			<p>
+			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
+			<table>
 			<tr>
-				<td>" . $Language->getText('forum_forum','browseattach') . "</td>
+				<td>' . $Language->getText('forum_forum','currentfile') . ": <font color=\"blue\">" . $filename . '</font></td>
 			</tr>
-			<tr>
-				<td>" . $Language->getText('forum_forum','filetoupload') . ":   <input type=\"file\" name=\"attachment1\"/></td>
-			</tr>
-	</table>
+			</table>
+			
+			<fieldset class=\"fieldset\">
+			<table>
+					
+					<tr>
+						<td>' . $Language->getText('forum_forum','browseattach') . '</td>
+					</tr>
+					<tr>
+						<td>' . $Language->getText('forum_forum','filetoupload') . ':   <input type="file" name="attachment1"/></td>
+					</tr>
+					<tr>
+						<td><font color="red">' . $Language->getText('forum_attach_download','warning') . '</font></td>
+					</tr>
+			</table>
+			<input type="submit" name="go" value="'.$Language->getText('forum_admin_pending','update').'">
+			<input type="hidden" name="doedit" value="1"/>
+			<input type="hidden" name="edit" value="yes"/>
+			<input type="hidden" name="forum_id" value="'.$forum_id.'"/>
+			<input type="hidden" name="group_id" value="'.$group_id.'"/>
+			<input type="hidden" name="attachid" value="'.$attachid.'"/>
+			<input type="hidden" name="msg_id" value="'.$msg_id.'"/>
+			</fieldset></form><p>';
+		return $return_val;
+	}
 	
-	</fieldset>";	
+	/**
+	*  LinkAttachForm - echoes the link to the attach form
+	*
+	*	@return		The HTML output echoed
+	*/
 
-}	
+	function LinkAttachForm() {
+		global $Language;
+		
+		$poststarttime = time();
+		$posthash = md5($poststarttime . user_getid() );
+		echo "
+		<fieldset class=\"fieldset\">
+		<table>
+				<tr>
+					<td>" . $Language->getText('forum_forum','browseattach') . "</td>
+				</tr>
+				<tr>
+					<td>" . $Language->getText('forum_forum','filetoupload') . ":   <input type=\"file\" name=\"attachment1\"/></td>
+				</tr>
+		</table>
+		
+		</fieldset>";	
+	
+	}	
 	
 	
 	function showNestedMessages ( &$msg_arr, $msg_id ) {
@@ -384,6 +435,75 @@ function LinkAttachForm() {
 		return $ret_val;
 	}
 
+	/**
+	*  showEditForm - Prints the form to edit a message
+	*
+	*	@param 		int		The Message
+	*	@return		The HTML output echoed
+	*/
+	
+	function showEditForm(&$msg) {
+		global $Language;
+		
+		$thread_id = $msg->getThreadID();
+		$msg_id = $msg->getID();
+		$posted_by = $msg->getPosterID();
+		$subject = $msg->getSubject();
+		$body = $msg->getBody();
+		$post_date = $msg->getPostDate();
+		$is_followup_to = $msg->getParentID();
+		$has_followups = $msg->hasFollowups();
+		$most_recent_date = $msg->getMostRecentDate();
+		$g =& $this->Forum->getGroup();
+		$group_id = $g->getID();
+		
+		if ($this->Forum->userCanPost()) { // minor control, but anyways it should be an admin at this point
+			echo notepad_func();
+			$text_support = new TextSupport(); //for BBCODE
+			?>
+			<div align="center">
+			<?php $objid = $this->Forum->getID(); $text_support->displayForm('form', 'body',"/forum/admin/index.php","enctype=\"multipart/form-data\""); ?>
+			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
+			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
+			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
+			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
+			<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
+			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
+			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
+			<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+			<fieldset class="fieldset"><table><tr><td valign="top">
+			<?php $text_support->displaySmiliesList(); ?>
+			</td><td valign="top">
+			<?php echo $text_support->displayBBCodeHelpTools(); ?>
+			<br>
+			<strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
+				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
+			<br><br>
+			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
+				<?php $text_support->displayTextField('body',$body); ?>
+			<br><br>		
+			
+				<p>
+				<?php //$this->LinkAttachForm();?>
+				<p>
+			
+
+			<?php
+			?>
+			<br />
+			<center><input type="submit" name="ok" value="<?php echo $Language->getText('forum_admin_pending','update'); ?>" />
+			   <input type="submit" name="cancel" value="<?php echo $Language->getText('general','cancel'); ?>" />
+			</center>
+				</p>
+			</td></tr></table></fieldset>
+			</form>
+			</div>
+			<?php
+		}
+	}
+	
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		global $Language;
 
