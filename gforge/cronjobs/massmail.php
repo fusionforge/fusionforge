@@ -33,6 +33,12 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+if (!cron_create_lock('gforge-massmail')) {
+	$err = "Massmail already running...exiting";
+	cron_entry(6,$err);
+	exit();
+}
+
 //bad hack to get around Roland's misuse of Language in utils.php
 $Language = new BaseLanguage();
 $Language->loadLanguage($sys_lang);
@@ -89,14 +95,14 @@ if (!$mail_res) {
 
 if (db_numrows($mail_res)<1) {
 	// Nothing to send
-	exit();
+	m_exit();
 }
 
 $type = db_result($mail_res, 0, 'type');
 if (!$table_mapping[$type]) {
 	$err .= "Unknown mailing type\n";
 	cron_entry(6,$err);
-	exit();
+	m_exit();
 }
 
 $subj = db_result($mail_res, 0, 'subject');
@@ -123,7 +129,7 @@ if ($users_res && db_numrows($users_res)==0) {
 	db_query("UPDATE massmail_queue
 		SET failed_date=0,finished_date='".time()."'
 		WHERE id='$mail_id'");
-	exit();
+	m_exit();
 }
 
 // These mailing types should include unsubscription info
@@ -144,7 +150,7 @@ while ($row =& db_fetch_array($users_res)) {
 	util_send_message($row['email'],$subj,$body."\r\n".sprintf( $tail,$row['confirm_hash'] ),'noreply@'.$sys_default_domain );
 //echo "$row[email],$subj,$body.\r\n".sprintf( $tail,$row['confirm_hash'] ).",'noreply@'.$sys_default_domain";
 
-echo "\n".$row['email'].$row['user_id'];
+//echo "\n".$row['email'].$row['user_id'];
 
 	$last_userid = $row['user_id'];
 
@@ -162,6 +168,14 @@ if (db_error()) {
 	$err .= $sql.db_error();
 }
 
-cron_entry(6,$err);
+m_exit();
+
+function m_exit() {
+	if (!cron_remove_lock('gforge-massmail')) {
+		$err .= "Could not remove lock file\n";
+	}
+	cron_entry(6,$err);
+	exit;
+}
 
 ?>
