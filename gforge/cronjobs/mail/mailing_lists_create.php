@@ -129,9 +129,22 @@ $rows	 = db_numrows($res);
 for($k = 0; $k < $rows; $k++) {
 	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
 	
-	passthru($sys_path_to_mailman."/bin/rmlist -a $deleted_mail_list", $failed);
-	if(!$failed){
-		$res1 = db_query("UPDATE mailing_list_name SET isdeleted = 1 WHERE mailing_list_name = '$deleted_group_name';" );
+	exec($sys_path_to_mailman."/bin/rmlist -a $deleted_mail_list", $output);
+	$success = false;
+	foreach ($output as $line) {
+		// Mailman 2.1.x
+		if (preg_match("/to finish removing/i", $line)) {
+			$success = true;
+			break;
+		}
+		// Mailman 2.1.0
+		if (preg_match("/removing list info/i", $line)) {
+			$success = true;
+			break;
+		}
+	}
+	if($success){
+		$res1 = db_query("UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = '$deleted_mail_list'");
 		$err .= db_error();
 	}else{
 		$err .= "Colud not remove the list $deleted_mail_list \n";
