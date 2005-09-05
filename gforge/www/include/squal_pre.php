@@ -44,6 +44,15 @@ require_once('squal_exit.php');
 //needed for logging / logo
 //require_once('browser.php');
 
+//system library
+require_once('common/include/System.class');
+if (!$sys_account_manager_type) {
+        $sys_account_manager_type='UNIX';
+}
+require_once('common/include/system/'.$sys_account_manager_type.'.class');
+$SYS=new $sys_account_manager_type();
+
+
 $sys_datefmt = "m/d/y H:i";
 
 // #### Connect to db
