@@ -145,8 +145,6 @@ if ($group_id) {
 			<strong><?php echo $Language->getText('mail_admin_addlist', 'form_description'); ?></strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /><br /></p>
 			<p>
-			<strong><span style="color:red"><?php echo $Language->getText('mail_admin_addlist', 'warning'); ?></span></strong></p>
-			<p>
 			<input type="submit" name="submit" value="<?php echo $Language->getText('mail_admin_addlist', 'form_addlist'); ?>" /></p>
 		</form>
 		<?php
