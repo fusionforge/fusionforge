@@ -162,14 +162,14 @@
 						} elseif ($aefe->isError()) {
 							$feedback .= $aefe->getErrorMessage();			
 						} else {
-							$name=$ath->getElementName($copyid[$k]);
+							$name=addslashes($ath->getElementName($copyid[$k]));
 							$status=$ath->getElementStatusID($copyid[$k]);
 							if (!$aefe->create($name,$status)) {
 								$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
 								$feedback .= '- Copied choice:';
-								$feedback .= $name;
+								$feedback .= stripslashes($name);
 							}
 						}
 					} 
