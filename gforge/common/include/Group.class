@@ -1282,6 +1282,7 @@ class Group extends Error {
 	}
 
 	function delete($sure,$really_sure,$really_really_sure) {
+		global $Language;
 
 		if (!$sure || !$really_sure || !$really_really_sure) {
 			$this->setMissingParamsError();
@@ -1440,7 +1441,9 @@ class Group extends Error {
 				echo "Not Object: MailingList: ".$i;
 				continue;
 			}
-			$ml_arr[$i]->delete();
+			if (!$ml_arr[$i]->delete()) {
+				$this->setError($Language->getText('mail','error_delete'));
+			}
 //echo 'MailingListFactory'.db_error();
 		}
 		//
