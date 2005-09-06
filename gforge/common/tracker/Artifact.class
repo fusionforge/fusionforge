@@ -232,7 +232,7 @@ class Artifact extends Error {
 		//	Check to see if this user is trying to double-submit
 		//
 		$res=db_query("SELECT * FROM artifact 
-			WHERE summary='$summary' 
+			WHERE summary='".htmlspecialchars($summary)."' 
 			AND submitted_by='$user'
 			AND group_artifact_id='".$this->ArtifactType->getID()."'
 			AND open_date > '". (time() - 86400) ."'");
