@@ -1146,6 +1146,7 @@ include_toolreport	open	Open
 include_toolreport	project_lifespan	Project lifespan
 include_toolreport	show	Show
 index	welcome	Welcome
+mail	error_delete	Could not delete properly the mailing list
 mail	archives	$1 Archives
 mail	choose_a_list	<p>Choose a list to browse, search, and post messages.</p>
 mail	external_administration	Subscribe/Unsubscribe/Preferences
