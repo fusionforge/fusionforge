@@ -47,7 +47,7 @@ $server->wsdl->addComplexType(
 	array(
 	'doc_group_id' => array('name'=>'doc_group_id', 'type' => 'xsd:int'),
 	'parent_doc_group' => array('name'=>'parent_doc_group', 'type' => 'xsd:int'),
-	'groupnamename' => array('name'=>'groupnamename', 'type' => 'xsd:string')
+	'groupname' => array('name'=>'groupname', 'type' => 'xsd:string')
 	)
 );
 
@@ -133,6 +133,79 @@ $server->wsdl->addComplexType(
 
 
 //
+// DocumentState
+//
+$server->wsdl->addComplexType(
+	'DocumentState',
+	'complexType',
+	'struct',
+	'sequence', 
+	'',
+	array(
+	'state_id' => array('name'=>'state_id', 'type' => 'xsd:int'),
+	'description' => array('name'=>'description', 'type' => 'xsd:string')	
+	)		
+);
+	
+//
+// DocumentState Array
+//
+
+$server->wsdl->addComplexType(
+	'ArrayOfDocumentState',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentState[]')),
+	'tns:DocumentState');
+
+
+
+//
+//getDocumentStates
+//
+$server->register(
+	'getDocumentStates',
+	array(
+		'session_ser'=>'xsd:string'		
+		),
+	array('getDocumentStatesResponse'=>'tns:ArrayOfDocumentState'),
+	$uri,$uri.'#getDocumentStates','rpc','encoded');
+//
+//getDocumentStates
+//	
+function &getDocumentStates($session_ser) {
+	continue_session($session_ser);
+	$return = array();
+		
+	$states = db_query('select * from doc_states');	
+	for ($row=0; $row<db_numrows($states); $row++) {
+			$return[]=array(
+				'state_id'=>db_result($states,$row,'stateid'),
+				'description'=>db_result($states,$row,'name')				
+			);
+		}
+	return $return;
+}
+
+//
+// validateState is used to validate that the state_id that is provided is valid.
+//
+
+function validateState($state_id){
+	$res = db_query('SELECT name FROM doc_states WHERE stateid=\''.$state_id.'\'');	
+	if(db_numrows($res)==1){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+
+//
 // DocumentLanguage
 //
 $server->wsdl->addComplexType(
@@ -162,7 +235,6 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentLanguage[]')),
 	'tns:DocumentLanguage');
 
-
 //
 //getDocumentLanguages
 //
@@ -173,6 +245,7 @@ $server->register(
 		),
 	array('getDocumentLanguagesResponse'=>'tns:ArrayOfDocumentLanguage'),
 	$uri,$uri.'#getDocumentLanguages','rpc','encoded');
+
 
 //
 //getDocumentLanguages
@@ -265,6 +338,111 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 }
 
 //
+//updateDocument
+//
+$server->register(
+	'updateDocument',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'doc_group'=>'xsd:int',
+		'doc_id'=>'xsd:int',
+		'title'=>'xsd:string',
+		'description'=>'xsd:string',
+		'language_id'=>'xsd:int',		
+		'base64_contents'=>'xsd:string',
+		'filename'=>'xsd:string',		
+		'file_url'=>'xsd:string',
+		'state_id'=>'xsd:int'
+	),
+	array('updateDocumentResponse'=>'xsd:boolean'),
+	$uri,$uri.'#updateDocument','rpc','encoded'
+);
+
+//
+//updateDocument
+//
+function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description,$language_id, $base64_contents,$filename,$file_url,$state_id) {
+	continue_session($session_ser);
+			
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g)) {
+		return new soap_fault ('','updateDocument','Could Not Get Group','Could Not Get Group');
+	} elseif ($g->isError()) {
+		return new soap_fault ('','updateDocument',$g->getErrorMessage(),$g->getErrorMessage());
+	}
+
+	$d = new Document($g,$doc_id);
+	if (!$d || !is_object($d)) {
+		return new soap_fault ('','updateDocument','Could Not create Document','Could Not create Document');
+	} elseif ($d->isError()) {
+		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
+	}
+	
+	
+	if(($language_id)){
+		if(!validateLanguage($language_id)){
+			return new soap_fault ('','updateDocument','Invalid Language ID','Invalid Language ID');		
+		}	
+	}else{
+		$language_id=$d->getLanguageID();
+	}
+	
+	if($state_id){
+		if(!validateState($state_id)){
+			return new soap_fault ('','updateDocument','Invalid State ID','Invalid State ID');		
+		}	
+	}else{
+		$state_id=$d->getStateID();
+	}
+	
+	if(!$title){
+		$title=$d->getName();
+	}
+	
+	if(!$description){
+		$description=$d->getDescription();
+	}
+
+
+	if((!$base64_contents) && (!$file_url)){	
+		if((!$base64_contents) && (!$d->isURL())){
+			$bin_data=$d->getFileData();
+			$data = addslashes($bin_data);
+			$uploaded_data_name=$d->getFileName();
+			$file_url='';
+		}else{
+			if((!$file_url) && ($d->isURL())){
+				
+				$data='';
+				$uploaded_data_name=$d->getFileName();
+				$uploaded_data_type='URL';			
+			}	
+		}
+	}elseif($file_url){
+		$data='';
+		$uploaded_data_name=$file_url;
+		$uploaded_data_type='URL';		
+	}elseif($base64_contents){
+		$bin_data = base64_decode($base64_contents);
+		$data = addslashes($bin_data);
+		$file_url='';
+		$uploaded_data_name=$filename;	
+	}		
+	
+	
+	if (!$d->update($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description,$state_id)) {
+		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
+	} else {
+		return true;	
+	}
+
+}
+
+
+
+
+//
 //addDocumentGroup
 //
 $server->register(
@@ -302,6 +480,50 @@ function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) 
 		return new soap_fault ('','addDocumentGroup','Could Not Create Document Group','Could Not Create Document Group');
 		}else {
 		return $dg->getID();
+	}
+}
+
+
+//
+//updateDocumentGroup
+//
+$server->register(
+	'updateDocumentGroup',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'doc_group'=>'xsd:int',
+		'new_groupname'=>'xsd:string',
+		'new_parent_doc_group'=>'xsd:int'			
+	),
+	array('updateDocumentGroupResponse'=>'xsd:boolean'),
+	$uri,$uri.'#updateDocumentGroup','rpc','encoded'
+);
+
+//
+// updateDocumentGroup
+//
+function &updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupname, $new_parent_doc_group) {
+	continue_session($session_ser);
+
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g)) {
+		return new soap_fault ('','updateDocumentGroup','Could Not Get Group','Could Not Get Group');
+	} elseif ($g->isError()) {
+		return new soap_fault ('','updateDocumentGroup',$g->getErrorMessage(),$g->getErrorMessage());
+	}
+
+	$dg = new DocumentGroup($g,$doc_group);
+	if (!$dg || !is_object($dg)) {
+		return new soap_fault ('','updateDocumentGroup','Could Not get Document Group','Could Not Get Document Group');
+	}elseif ($dg->isError()) {
+		return new soap_fault ('','updateDocumentGroup',$dg->getErrorMessage(),$dg->getErrorMessage());
+	}
+		
+	if (!$dg->update($new_groupname, $new_parent_doc_group)) {
+		return new soap_fault ('','updateDocumentGroup',$dg->getErrorMessage(),$dg->getErrorMessage());
+		}else {
+		return true;
 	}
 }
 
@@ -389,7 +611,10 @@ $server->register(
 		),
 	array('getDocumentGroupsResponse'=>'tns:ArrayOfDocumentGroup'),
 	$uri,$uri.'#getDocumentGroups','rpc','encoded');
-
+	
+//
+//getDocumentGroups
+//
 function &getDocumentGroups($session_ser,$group_id) {
 	continue_session($session_ser);
 	$g =& group_get_object($group_id);
@@ -424,7 +649,7 @@ function documentsGroup_to_soap($dg_arr) {
 			$return[]=array(
 				'doc_group_id'=>$dg_arr[$i]->getID(),
 				'parent_doc_group'=>$dg_arr[$i]->getParentID(),
-				'groupnamename'=>$dg_arr[$i]->getName()
+				'groupname'=>$dg_arr[$i]->getName()
 			);
 		}
 	}
@@ -433,6 +658,50 @@ function documentsGroup_to_soap($dg_arr) {
 
 
 
+
+
+
+//
+//getDocumentGroup
+//
+$server->register(
+	'getDocumentGroup',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'doc_group'=>'xsd:int'
+		),
+	array('getDocumentGroupResponse'=>'tns:DocumentGroup'),
+	$uri,$uri.'#getDocumentGroup','rpc','encoded');
+	
+//
+//getDocumentGroup
+//
+function &getDocumentGroup($session_ser,$group_id,$doc_group) {
+	continue_session($session_ser);
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g)) {
+		return new soap_fault ('','getDocumentGroup','Could Not Get Group','Could Not Get Group');
+	} elseif ($g->isError()) {
+		return new soap_fault ('','getDocumentGroup',$g->getErrorMessage(),$g->getErrorMessage());
+	}
+
+
+	$dg = new DocumentGroup($g,$doc_group);
+	if (!$dg || !is_object($dg)) {
+		return new soap_fault ('','getDocumentGroup','Could Not Get Document Group Factory','Could Not Get Document Group Factory');
+	} elseif ($dg->isError()) {
+		return new soap_fault ('','getDocumentGroup',$dg->getErrorMessage(),$dg->getErrorMessage());
+	}
+	
+	
+	$documentGroup=array('doc_group_id'=>$dg->getID(),
+									'parent_doc_group'=>$dg->getParentID(),
+									'groupname'=>$dg->getName());
+	
+	
+	return $documentGroup;
+}
 
 
 
@@ -445,8 +714,7 @@ $server->register(
 	'getDocumentFiles',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'doc_group'=>'xsd:int',
+		'group_id'=>'xsd:int',		
 		'doc_id'=>'xsd:int'
 		),
 	array('getDocumentFilesResponse'=>'tns:ArrayOfDocumentFile'),
@@ -455,7 +723,7 @@ $server->register(
 ///
 /// getDocumentFiles
 ///
-function &getDocumentFiles($session_ser,$group_id,$doc_group_id,$doc_id) {
+function &getDocumentFiles($session_ser,$group_id,$doc_id) {
 	continue_session($session_ser);
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {
