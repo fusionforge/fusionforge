@@ -85,9 +85,10 @@ require_once('www/soap/common/group.php');
 require_once('www/soap/common/user.php');
 
 //
-//	Include tracker Functions
+//	Include tracker & tracker query Functions
 //
 require_once('www/soap/tracker/tracker.php');
+require_once('www/soap/tracker/query.php');
 
 //
 //	Include Docman Functions

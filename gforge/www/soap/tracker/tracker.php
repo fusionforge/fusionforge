@@ -292,8 +292,6 @@ $server->register(
 	$uri,$uri.'#getArtifactFileData','rpc','encoded'
 );
 
-
-//TODO - FINISH ADD FILE
 $server->register(
 	'addArtifactFile',
 	array(	'session_ser'=>'xsd:string',
@@ -1023,5 +1021,90 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 	} else {
 		return $am->getID();
 	}
+}
+
+/**
+ * artifactGetChangeLog
+ */
+$server->wsdl->addComplexType(
+	'ArtifactChangeLog',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
+		'old_value' => array('name' => 'old_value', 'type' => 'xsd:string'),
+		'date' => array('name' => 'date', 'type' => 'xsd:int'),
+		'user_name' => array('name' => 'user_name', 'type' => 'xsd:string')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfArtifactChangeLog',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(
+		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactChangeLog[]')
+	),
+	'tns:ArtifactChangeLog'
+);
+
+$server->register(
+	'artifactGetChangeLog',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'artifact_id' => 'xsd:int'
+	),
+	array('artifactGetChangeLogResponse'=>'tns:ArrayOfArtifactChangeLog'),
+	$uri,
+	$uri.'#artifactSetView','rpc','encoded'
+);
+
+function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $artifact_id) {
+	continue_session($session_ser);
+	$grp =& group_get_object($group_id);
+	if (!$grp || !is_object($grp)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get Group','Could Not Get Group');
+	} elseif ($grp->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$grp->getErrorMessage(),$grp->getErrorMessage());
+	}
+	
+	$at = new ArtifactType($grp,$group_artifact_id);
+	if (!$at || !is_object($at)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get ArtifactType','Could Not Get ArtifactType');
+	} elseif ($at->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$at->getErrorMessage(),$at->getErrorMessage());
+	}
+
+	$artifact = new Artifact($at,$artifact_id);
+	if (!$artifact || !is_object($artifact)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get Artifact','Could Not Get Artifact');
+	} elseif ($artifact->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$artifact->getErrorMessage(),$artifact->getErrorMessage());
+	}
+	
+	// note that Artifact::getHistory returns a DB result handler
+	$result = $artifact->getHistory();
+	return artifact_history_to_soap($result);
+}
+
+function artifact_history_to_soap($db_result) {
+	$result = array();
+	while ($entry = db_fetch_array($db_result)) {
+		$result[] = array(
+					"field_name"	=> $entry["field_name"],
+					"old_value"		=> $entry["old_value"],
+					"date"			=> $entry["entrydate"],
+					"user_name"		=> $entry["user_name"]
+					);
+	}
+	
+	return $result;
 }
 ?>
