@@ -332,7 +332,6 @@ switch (getStringFromRequest('func')) {
 					echo $deletion;
 					$feedback .= $Language->getText('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
 				} else {
-					echo $deletion;
 					$feedback .= $Language->getText('pm_deletetask','task_deleted_successfully');
 				}
 			}
