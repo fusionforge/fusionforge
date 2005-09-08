@@ -66,7 +66,7 @@ if (getStringFromRequest('submit')) {
 		if ($d->isError()) {
 			exit_error($Language->getText('general','error'),$d->getErrorMessage());
 		}
-		if ($uploaded_data) {
+		if ($uploaded_data['name']) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['tmp_name']));
 			}
@@ -77,7 +77,7 @@ if (getStringFromRequest('submit')) {
 			$data = '';
 			$filename=$file_url;
 			$filetype='URL';
-		} elseif ($ftp_filename) {
+		} elseif ($ftp_filename!=100) { //100==None
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
 			$filetype=$uploaded_data_type;
