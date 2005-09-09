@@ -1,3 +1,6 @@
+2005-09-07	Marcelo Mottalli <marcelo@gforgegroup.com>
+	* Added artifact query functions to SOAP interface
+
 2005-09-02 Daniel Perez <daniel@gforgegroup.com>
 	* forum : (new feature) edit messages for admins and message creators
 	* forum : (new feature) edit attachment / add attachment for admins and message creators
@@ -7,8 +10,10 @@
 
 2005-08-31 Daniel Perez <daniel@gforgegroup.com>
 	* admin -> forum moderation finished (release / delete messages)
+
 2005-08-31 Daniel Perez <daniel@gforgegroup.com>
 	* admin -> forum moderation finished (release / delete messages)
+
 2005-08-30 Daniel Perez <daniel@gforgegroup.com>
 	* fixed minor bug : common/tracker/Artifact.class -> now only sends mailFollowup(s) to ACTIVE users
 	
@@ -29,6 +34,7 @@
 2005-08-26
 	* when attachments are downloaded, its download count is incremented
 	* forum/attachment.php secured
+
 2005-08-25 Daniel Perez <daniel@gforgegroup.com>
 	myforums page : added the myforums page to the "my page" and when you visit any list of forums 
 	for any group. it shows a description of all the forums you are monitoring, the project they belong to, a 
@@ -36,10 +42,8 @@
 
 2005-08-24 Daniel Perez <daniel@gforgegroup.com>
 	DB : after discussing some issues, fixed the variable names, and changed the schema of 
-
-forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes 
-attachs that belong to deleted messages and/or forums
-	attachments : 
+	forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes 
+	attachs that belong to deleted messages and/or forums attachments : 
 		* admin -> add new attach type
 		* admin -> delete attach type
 		* admin -> modify attach type
