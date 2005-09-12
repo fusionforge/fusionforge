@@ -184,7 +184,7 @@ $server->register(
 		'group_artifact_id'=>'xsd:int',
 		'artifact_query_id' => 'xsd:int'
 	),
-	array('artifactDeleteViewResponse'=>'xsd:bool'),
+	array('artifactDeleteViewResponse'=>'xsd:boolean'),
 	$uri,
 	$uri.'#artifactDeleteView','rpc','encoded'
 );
@@ -227,7 +227,7 @@ $server->register(
 		'group_artifact_id'=>'xsd:int',
 		'artifact_query_id' => 'xsd:int'
 	),
-	array('artifactSetView'=>'xsd:bool'),
+	array('artifactSetView'=>'xsd:boolean'),
 	$uri,
 	$uri.'#artifactSetView','rpc','encoded'
 );
@@ -255,7 +255,8 @@ function artifactSetView($session_ser, $group_id, $group_artifact_id, $artifact_
 		return new soap_fault ('','artifactDeleteView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 	
-	return $query->makeDefault();
+	$query->makeDefault();
+	return true;
 }
 
 /**
