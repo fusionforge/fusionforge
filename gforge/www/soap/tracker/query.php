@@ -42,7 +42,7 @@ $server->wsdl->addComplexType(
 	'',
 	array(
 		'extra_field_id' => array('name' => 'extra_field_id', 'type' => 'xsd:int'),
-		'values' => array('name' => 'values', 'type' => 'xsd:int[]')
+		'values' => array('name' => 'values', 'type' => 'tns:ArrayOfint')
 	)
 );
 
@@ -269,7 +269,7 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(
-		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:int[]')
+		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArrayOfint')
 	),
 	'xsd:int'
 ); 
