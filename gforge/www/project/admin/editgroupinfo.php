@@ -61,7 +61,6 @@ if (getStringFromRequest('submit')) {
 	$use_stats = getStringFromRequest('use_stats');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
-	$use_wikiplugin = getStringFromRequest('use_wikiplugin');
   
 	$res = $group->update(
 		session_get_user(),
