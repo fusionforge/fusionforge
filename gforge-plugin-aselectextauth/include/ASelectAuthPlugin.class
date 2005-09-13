@@ -53,7 +53,7 @@ class ASelectextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			if () {				
+			if (1) {	 //Aselect validate method here			
 				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
 					// Also according to DB
 					$GLOBALS['aselect_auth_failed']=false;
@@ -71,7 +71,7 @@ class ASelectextauthPlugin extends Plugin {
 			}
 		} else {
 			// User doesn't exist in DB yet
-			if () {
+			if (1) { //Aselect validate method here
 				// User authenticated
 				// Now get her info
 								
