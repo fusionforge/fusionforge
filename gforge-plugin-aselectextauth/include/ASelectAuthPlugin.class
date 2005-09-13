@@ -19,6 +19,7 @@
  */
 
 require_once('common/include/User.class');
+require_once('Aselect.class');
 
 
 class ASelectextauthPlugin extends Plugin {
@@ -31,8 +32,10 @@ class ASelectextauthPlugin extends Plugin {
 	function CallHook ($hookname, $params) {
 		global $Language, $HTML ;
 		
-		$loginname = $params['loginname'] ;
-		$passwd = $params['passwd'] ;
+		$Aselect = new Aselect();
+		
+		$loginname = $Aselect->getUserID();
+		$passwd = '' ;
 		
 		switch ($hookname) {
 		case "session_before_login":
@@ -47,14 +50,15 @@ class ASelectextauthPlugin extends Plugin {
 	function AuthUser ($loginname, $passwd) {
 		global $feedback,$Language;
 	
-		$GLOBALS['aselect_auth_failed']=true;
-		return false;
+		if(!$loginname){
+			return false;
+		}
 
+		
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			if (1) {	 //Aselect validate method here			
-				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
+			if (session_login_valid_dbonly ($loginname,$passwd, false)) {
 					// Also according to DB
 					$GLOBALS['aselect_auth_failed']=false;
 					return true ;
@@ -63,18 +67,8 @@ class ASelectextauthPlugin extends Plugin {
 					$u->setPasswd ($passwd) ;
 					$GLOBALS['aselect_auth_failed']=false;
 					return true ;
-				}
-			} else {				
-				$feedback=$Language->getText('session','invalidpasswd');
-				$GLOBALS['aselect_auth_failed']=true;
-				return false ;
-			}
+				}			
 		} else {
-			// User doesn't exist in DB yet
-			if (1) { //Aselect validate method here
-				// User authenticated
-				// Now get her info
-								
 				// Insert into DB
 				$u = new User () ;
 
@@ -156,10 +150,7 @@ class ASelectextauthPlugin extends Plugin {
 				$GLOBALS['aselect_auth_failed']=false;
 				$GLOBALS['aselect_first_login']=true;
 				return true ;
-			} else {
-				$GLOBALS['aselect_auth_failed']=true;
-				$feedback=$Language->getText('session','invalidpasswd');
-				return false ; // Probably ignored, but just in case
+			
 			}
 		}
 	}

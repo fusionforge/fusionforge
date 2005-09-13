@@ -1,0 +1,88 @@
+<?php
+/** A-Select class for Gforge
+ *
+ * This file is part of Gforge
+ *
+ * This class, like Gforge, is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
+
+
+class ASelect {
+	var $userid;
+	var $organization;
+	var $attributes=array();
+	var $ticket;
+	function ASelect () {
+		setcookie("aselectuid", "lcorso"); //The A-Select username of the authenticated user.
+		setcookie("aselectorganization", "Gforge"); //The organization ID of the A-Select Server that 
+																								//was responsible for authenticating the user.
+		setcookie("aselectattributes", "attribute1=value1&attribute2=value2"); //Contains all user attributes 
+																																					 //that the A-Select Server provided
+		setcookie("aselectticket","1234567890"); //The ticket identifier provided by the A-Select Agent.
+		
+		if(!isset($_COOKIE['aselectuid'])){
+		   $userid = $_COOKIE['aselectuid'];
+		} else {
+   		 $userid = '';
+		}
+		
+		if(!isset($_COOKIE['aselectorganization'])){
+			$organization = $_COOKIE['aselectorganization'];
+		} else {
+   		$organization = '';
+		}
+		
+		if(!isset($_COOKIE['aselectattributes'])){			
+			$a = explode('&', $_COOKIE['aselectattributes']);
+			$i = 0;
+			while ($i < count($a)) {
+   			$b = split('=', $a[$i]);
+   			$attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
+   			$i++;
+			}		
+			} else {
+   		//nothing to be done here yet.
+			}
+		
+		if(!isset($_COOKIE['aselectticket'])){
+			$ticket = $_COOKIE['aselectticket'];
+		} else {
+   		$ticket = '';
+		}
+	}
+	
+	function getUserID () {
+		return $this->userid;
+	}
+	
+	function getOrganization () {
+		return $this->organization;
+	}
+	
+	function getAttributes () {
+		return $this->attributes;
+	}
+	
+	function getAttribute ($attribute) {
+		return $this->attributes[$attribute];
+	}
+	
+	function getTicket () {
+		return $this->ticket;
+	}
+	
+	
+}
+?>
