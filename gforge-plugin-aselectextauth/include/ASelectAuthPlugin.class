@@ -19,6 +19,7 @@
  */
 
 require_once('common/include/User.class');
+require_once('common/include/session.php');
 require_once('Aselect.class');
 
 
@@ -26,20 +27,21 @@ class ASelectextauthPlugin extends Plugin {
 	function ASelectextauthPlugin () {
 		$this->Plugin() ;
 		$this->name = "aselectextauth";
-		$this->hooks[] = "session_before_login";	
+		$this->hooks[] = "before_session_set";	
 	}
 	
 	function CallHook ($hookname, $params) {
 		global $Language, $HTML ;
 		
-		$Aselect = new Aselect();
 		
-		$loginname = $Aselect->getUserID();
-		$passwd = '' ;
 		
 		switch ($hookname) {
-		case "session_before_login":
-			// Authenticate against A-Select
+		case "before_session_set":
+		
+			$Aselect = new Aselect();			
+			$loginname = strtolower($Aselect->getUserID()); //Since A-Select UserID is 
+																											//not case sensitive we pass it to lower case
+			$passwd = '' ;
 			$this->AuthUser ($loginname, $passwd) ;
 			break;		
 		default:
@@ -58,16 +60,9 @@ class ASelectextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			if (session_login_valid_dbonly ($loginname,$passwd, false)) {
-					// Also according to DB
-					$GLOBALS['aselect_auth_failed']=false;
-					return true ;
-				} else {
-					// Passwords mismatch, update DB's
-					$u->setPasswd ($passwd) ;
-					$GLOBALS['aselect_auth_failed']=false;
-					return true ;
-				}			
+			session_set_new($loginname); //create session cookie		
+			$GLOBALS['aselect_auth_failed']=false;
+			return true ;
 		} else {
 				// Insert into DB
 				$u = new User () ;
@@ -147,12 +142,14 @@ class ASelectextauthPlugin extends Plugin {
 					$feedback = "<br>Error Activating User: ".$u->getErrorMessage();
 					return false;
 				}
+				
 				$GLOBALS['aselect_auth_failed']=false;
 				$GLOBALS['aselect_first_login']=true;
+				session_set_new($loginname);		//create session cookie		
 				return true ;
 			
 			}
-		}
+		
 	}
 }
 
