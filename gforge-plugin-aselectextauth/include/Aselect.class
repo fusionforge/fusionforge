@@ -26,16 +26,6 @@ class ASelect {
 	var $ticket;
 	function ASelect () {
 		
-		/*THIS SECTION IS TO SIMULATE A-SELECT COOKIE -- MUST BE REMOVED WHEN A-SELECT MIDDLEWARE IS PRESENT */
-		setcookie("aselectuid", "admin"); //The A-Select username of the authenticated user.
-		setcookie("aselectorganization", "Gforge"); //The organization ID of the A-Select Server that 
-																								//was responsible for authenticating the user.
-		setcookie("aselectattributes", "attribute1=value1&attribute2=value2"); //Contains all user attributes 
-																																					 //that the A-Select Server provided
-		setcookie("aselectticket","1234567890"); //The ticket identifier provided by the A-Select Agent.
-		
-		/*END OF SIMULATION SECTION */
-		
 		if(isset($_COOKIE['aselectuid'])){
 		   $this->username = $_COOKIE['aselectuid'];		   		    
 		} else {

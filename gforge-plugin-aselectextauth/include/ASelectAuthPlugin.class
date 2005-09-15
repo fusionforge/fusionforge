@@ -59,10 +59,15 @@ class ASelectextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			$user_id = $u->getID();  
-			session_set_new($user_id); //create session cookie		
-			$GLOBALS['aselect_auth_failed']=false;
-			return true ;
+			if($u->getStatus()=='A'){ //we check if it's active				
+				$user_id = $u->getID();  
+				session_set_new($user_id); //create session cookie		
+				$GLOBALS['aselect_auth_failed']=false;
+				return true ;
+			} else {
+				$GLOBALS['aselect_auth_failed']=true;
+				return false ;
+			}
 		} else {				
 					$GLOBALS['aselect_auth_failed']=true;					
 					return false;

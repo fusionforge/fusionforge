@@ -1,0 +1,34 @@
+0. INSTALLATION of ASelect Plugin
+
+
+Untar/gzip this file into the directory where GForge plugins reside
+
+e.g. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
+	with /srv/www/gforge/plugins/aselectextauth and all the files in it
+
+bash$ gzip -d aselectextauth.tar.gz
+bash$ tar -xvf aselectextauth.tar
+
+1. CONFIGURATION
+
+A) Go to GForge installation dir and enter the plugins folder
+
+e.g. : /srv/www/gforge/gforge/plugins
+
+Run the command ln -s <path-to-aselectextauth-plugin> ./aselectextauth 
+
+e.g. : If you have, as we said earlier, extracted the plugin in /srv/www/gforge/plugins/aselectextauth/
+we should run "ln -s /srv/www/gforge/plugins/aselectextauth/ ./aselectextauth"
+
+You can skip this step if you are putting the plugin in the GForge plugin folder 
+(/srv/www/gforge/gforge/plugins in the example)
+
+B) Run install_aselectauth.psql to insert the tables into the GForge DB
+
+psql gforge -f db/install_aselectauth.psql
+
+C) Apply the register.diff to /register.php
+e.g. : If the GForge is installed on /srv/www/gforge, register.php would be found in
+		/srv/www/gforge/www/account/register.php
+			
+END
