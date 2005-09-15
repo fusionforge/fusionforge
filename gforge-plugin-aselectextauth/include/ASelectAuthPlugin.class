@@ -33,16 +33,15 @@ class ASelectextauthPlugin extends Plugin {
 	function CallHook ($hookname, $params) {
 		global $Language, $HTML ;
 		
-		
-		
 		switch ($hookname) {
 		case "before_session_set":
 		
 			$Aselect = new Aselect();			
-			$loginname = strtolower($Aselect->getUserID()); //Since A-Select UserID is 
+			$loginname = strtolower($Aselect->getUserName());//Since A-Select UserID is 
 																											//not case sensitive we pass it to lower case
-			$passwd = '' ;
-			$this->AuthUser ($loginname, $passwd) ;
+			$passwd = '' ;		
+	
+			$this->AuthUser($loginname, $passwd) ;
 			break;		
 		default:
 			// Forgot something
@@ -52,7 +51,7 @@ class ASelectextauthPlugin extends Plugin {
 	function AuthUser ($loginname, $passwd) {
 		global $feedback,$Language;
 	
-		if(!$loginname){
+		if(!$loginname) {						
 			return false;
 		}
 
@@ -60,95 +59,16 @@ class ASelectextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			session_set_new($loginname); //create session cookie		
+			$user_id = $u->getID();  
+			session_set_new($user_id); //create session cookie		
 			$GLOBALS['aselect_auth_failed']=false;
 			return true ;
-		} else {
-				// Insert into DB
-				$u = new User () ;
-
-				$unix_name = $loginname ;
-				$firstname = '' ;
-				$lastname = '' ;
-				$password1 = $passwd ;
-				$password2 = $passwd ;
-				$email = '' ;
-				$mail_site = 1 ;
-				$mail_va = 0 ;
-				$language_id = 1 ;
-				$timezone = 'GMT' ;
-				$jabber_address = '' ;
-				$jabber_only = 0 ;
-				$theme_id = 1 ;
-				$unix_box = '' ;
-				$address = '' ;
-				$address2 = '' ;
-				$phone = '' ;
-				$fax = '' ;
-				$title = '' ;
-				$ccode = 'US' ;
-				$send_mail = false ;
-
-				if ($mappedinfo['firstname']) {
-					$firstname = $mappedinfo['firstname'] ;
-				}
-				if ($mappedinfo['lastname']) {
-					$lastname = $mappedinfo['lastname'] ;
-				}
-				if ($mappedinfo['email']) {
-					$email = $mappedinfo['email'] ;
-				}
-				if ($mappedinfo['language_id']) {
-					$language_id = $mappedinfo['language_id'] ;
-				}
-				if ($mappedinfo['timezone']) {
-					$timezone = $mappedinfo['timezone'] ;
-				}
-				if ($mappedinfo['jabber_address']) {
-					$jabber_address = $mappedinfo['jabber_address'] ;
-				}
-				if ($mappedinfo['address']) {
-					$address = $mappedinfo['address'] ;
-				}
-				if ($mappedinfo['address2']) {
-					$address2 = $mappedinfo['address2'] ;
-				}
-				if ($mappedinfo['phone']) {
-					$phone = $mappedinfo['phone'] ;
-				}
-				if ($mappedinfo['fax']) {
-					$fax = $mappedinfo['fax'] ;
-				}
-				if ($mappedinfo['title']) {
-					$title = $mappedinfo['title'] ;
-				}
-				if ($mappedinfo['ccode']) {
-					$ccode = $mappedinfo['ccode'] ;
-				}
-				if ($mappedinfo['themeid']) {
-					$theme_id = $mappedinfo['themeid'] ;
-				}
-
-				if (!$u->create ($unix_name,$firstname,$lastname,$password1,$password2,$email,
-					    $mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
-					    $unix_box, $address, $address2, $phone, $fax, $title, $ccode, $send_mail)) {
-					$GLOBALS['aselect_auth_failed']=true;
-					$feedback = "<br>Error Creating User: ".$u->getErrorMessage();
+		} else {				
+					$GLOBALS['aselect_auth_failed']=true;					
 					return false;
-				}
-
-				if (!$u->setStatus ('A')) {
-					$GLOBALS['aselect_auth_failed']=true;
-					$feedback = "<br>Error Activating User: ".$u->getErrorMessage();
-					return false;
-				}
-				
-				$GLOBALS['aselect_auth_failed']=false;
-				$GLOBALS['aselect_first_login']=true;
-				session_set_new($loginname);		//create session cookie		
-				return true ;
+		}						
 			
-			}
+			
 		
 	}
 }

@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once ($GLOBALS['sys_plugins_path'].'/aselectextauth/include/ASelectExtAuthPlugin.class') ;
+require_once ($GLOBALS['sys_plugins_path'].'aselectextauth/include/ASelectAuthPlugin.class') ;
 
 $ASelectExtAuthPluginObject = new ASelectextauthPlugin ;
 
