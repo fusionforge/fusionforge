@@ -112,6 +112,7 @@ require_once('common/include/PluginManager.class') ;
 require_once('common/include/SCM.class') ;
 
 setup_plugin_manager () ;
+plugin_hook('before_session_set');
 
 //determine if they're logged in
 session_set();
