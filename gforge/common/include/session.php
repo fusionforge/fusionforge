@@ -425,6 +425,7 @@ function session_getdata($user_id) {
  *	@return none
  */
 function session_set() {
+	plugin_hook('session_set_entry');
 	global $G_SESSION;
 	global $session_ser, $session_key;
 
@@ -461,6 +462,7 @@ function session_set() {
 			session_logout();
 		}
 	}
+	plugin_hook('session_set_return');
 }
 
 //TODO - this should be generalized and used for pre.php, squal_pre.php, 

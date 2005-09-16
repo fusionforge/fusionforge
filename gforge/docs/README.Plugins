@@ -216,9 +216,17 @@ hook is called, and parameters that are passed into the hook and a brief
 description. There may be other hooks available, added after this section
 had been written.
 
-  Hook Name  : after_session_set
-  Locations  : www/include/pre.php
-  Description: Called once the GForge session has been initialised.
+  Hook Name  : session_set_entry
+  Locations  : common/include/session.php
+  Description: Called before checking if the user is logged in by
+  						 reading session cookie.
+               You can use this hook to handle session setup specific
+               to your plugin. 
+  
+  Hook Name  : session_set_return
+  Locations  : common/include/session.php
+  Description: Called after checking if the user is logged in by reading
+  						 session cookie.
                You can use this hook to handle session setup specific
                to your plugin.
 

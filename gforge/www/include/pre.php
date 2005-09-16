@@ -112,12 +112,12 @@ require_once('common/include/PluginManager.class') ;
 require_once('common/include/SCM.class') ;
 
 setup_plugin_manager () ;
-plugin_hook('before_session_set');
+
 
 //determine if they're logged in
 session_set();
 
-plugin_hook('after_session_set');
+
 
 //mandatory login
 if (!session_loggedin() && $sys_force_login == 1 ) {
