@@ -95,8 +95,10 @@ function project_admin_header($params) {
 		$links[] = '/project/admin/database.php?group_id='.$group_id;
 	}
 	$links[] = '/project/stats/?group_id='.$group_id;
-	
-	echo $HTML->subMenu($labels, $links);
+	echo ($HTML->beginSubMenu());	
+	echo $HTML->printSubMenu($labels, $links);
+	plugin_hook ("groupadminmenu", $params) ;
+	echo ($HTML->endSubMenu());
 }
 
 /*
