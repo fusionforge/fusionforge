@@ -918,6 +918,7 @@ class ProjectTask extends Error {
 
 
 		if ($details) {
+			$has_changes = true;
 			if (!$this->addMessage($details)) {
 				db_rollback();
 				return false;
