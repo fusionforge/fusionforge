@@ -20,10 +20,6 @@ require_once('note.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
-$report=new Report();
-if ($report->isError()) {
-	exit_error('Error',$report->getErrorMessage());
-}
 echo notepad_func();
 
 pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
@@ -215,6 +211,11 @@ $title_arr[]=$Language->getText('pm', 'category');
 $title_arr[]=$Language->getText('pm', 'user');
 $title_arr[]=' ';
 
+$report=new Report();
+if ($report->isError()) {
+	exit_error('Error',$report->getErrorMessage());
+}
+
 echo $HTML->listTableTop ($title_arr);
 	echo '<form action="/reporting/timeadd.php" method="post" />
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
@@ -227,7 +228,9 @@ echo $HTML->listTableTop ($title_arr);
 		<td>&nbsp;</td>
 		<td align="middle"><input type="submit" name="add" value="'.$Language->getText('general','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('general','cancel').'" /></td>
 	</tr></form>';
-
+	
+//setenv("TZ=" . $user_timezone); //restore the user´s timezone
+	
 //
 //	Display Time Recorded for this task
 //
