@@ -1,3 +1,7 @@
+2005-09-49 Daniel Perez <daniel@gforgegroup.com>
+	common/pm : changed ProjectTask.class to send email only when something is really changed
+	www/pm : changed mod_task.php -> Report.class instantiation was changing timezone and displaying incorrect date. changed location of class instantiation
+
 2005-09-07	Marcelo Mottalli <marcelo@gforgegroup.com>
 	* Added artifact query functions to SOAP interface
 
