@@ -1,6 +1,13 @@
-2005-09-49 Daniel Perez <daniel@gforgegroup.com>
+2005-09-16	Leonel Corso <leonel@gforgegroup.com>
+	* www/include/pre.php -> Changed plugin hooks to meet new coding standard.
+	* docs/README.Plugins -> Changed information explaining plugin hooks.
+
+2005-09-16 Daniel Perez <daniel@gforgegroup.com>
 	common/pm : changed ProjectTask.class to send email only when something is really changed
 	www/pm : changed mod_task.php -> Report.class instantiation was changing timezone and displaying incorrect date. changed location of class instantiation
+
+2005-09-07 Leonel Corso <leonel@gforgegroup.com>
+	* Added document update functions to SOAP Interface
 
 2005-09-07	Marcelo Mottalli <marcelo@gforgegroup.com>
 	* Added artifact query functions to SOAP interface
@@ -35,7 +42,7 @@
 	* cronjobs/backup_site.php written. This cronjob dumps the db, 
 	* mailing lists, cvsroot, svnroot, and uploads dir into a tarball. 
 	
-2005-08-26
+2005-08-26 Daniel Perez <daniel@gforgegroup.com>
 	* when attachments are downloaded, its download count is incremented
 	* forum/attachment.php secured
 
