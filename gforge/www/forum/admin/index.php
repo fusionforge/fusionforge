@@ -373,8 +373,10 @@ if ($group_id) {
 		*/
 
 		for ($j = 0; $j < count($farr); $j++) {
-			if ($farr[$j]->isError()) {
-				echo $farr->getErrorMessage();
+			if (!is_object($farr[$j])) {
+				//just skip it - this object should never have been placed here
+			} elseif ($farr[$j]->isError()) {
+				echo $farr[$j]->getErrorMessage();
 			} else {
 				echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
 					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<p>';
