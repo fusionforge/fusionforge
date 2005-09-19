@@ -101,7 +101,7 @@ class ProjectGroupFactory extends Error {
 				if ($perm->isPMAdmin()) {
 					$exists='';
 				} else {
-					$exists=" AND EXISTS (SELECT group_project_ID 
+					$exists=" AND group_project_id IN (SELECT group_project_ID
 					FROM project_perm 
 					WHERE perm_level >= 0 AND group_project_id=project_group_list.group_project_id
 					AND user_id='".user_getid()."') ";
