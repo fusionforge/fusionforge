@@ -1,3 +1,9 @@
+gforge-plugin-scmsvn (4.5-3) unstable; urgency=low
+
+  * [Christian] New version in the branch
+
+ -- Christian Bayle <bayle@debian.org>  Tue,  6 Sep 2005 00:57:06 +0200
+
 gforge-plugin-scmsvn (4.5-1) unstable; urgency=low
 
   * [Roland] Ported to Gforge 4.5.
