@@ -33,7 +33,6 @@ require_once('common/reporting/Report.class');
 require_once('common/reporting/report_utils.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
-session_require( array('group'=>$sys_stats_group) );
 
 $group_id = getIntFromRequest('group_id');
 $atid = getStringFromRequest('atid');
