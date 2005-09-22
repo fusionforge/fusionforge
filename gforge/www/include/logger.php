@@ -75,7 +75,7 @@ $sys_db_is_dirty=false;
 
 if (!$res_logger) {
 	echo "An error occured in the logger.\n";
-	echo db_error();
+	echo htmlspecialchars(db_error());
 	exit;
 }
 

@@ -282,7 +282,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
 				<input type="radio" name="'.$select_name.'" value="'.$vals[$i].'"';
-			if ($vals[$i] == $checked_val) {
+			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found=true;
 				$return .= ' checked';
 			}
