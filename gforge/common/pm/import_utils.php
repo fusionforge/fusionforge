@@ -2,6 +2,7 @@
 require_once('common/pm/ProjectTaskFactory.class');
 
 function printr($var, $name='$var', $echo=true) {
+/*
 //	return;
 	//$str = highlight_string("<?php\n$name = ".var_export($var, 1).";\n? >\n", 1);
 //	$str=var_export($var, 1);
@@ -15,11 +16,12 @@ function printr($var, $name='$var', $echo=true) {
 		fwrite($fp,"\n-------".date('Y-m-d H:i:s')."-----".$name."-----\n".$var);
 		fclose($fp);
 	}
+*/
 }
 
 function printrcomplete() {
-	exec("/bin/cat /tmp/msp.log | mail -s\"printr\" tim@perdue.net");
-	exec("/bin/rm -f /tmp/msp.log");
+//	exec("/bin/cat /tmp/msp.log | mail -s\"printr\" tim@perdue.net");
+//	exec("/bin/rm -f /tmp/msp.log");
 }
 
 function &pm_import_tasks($group_project_id,&$tasks) {
