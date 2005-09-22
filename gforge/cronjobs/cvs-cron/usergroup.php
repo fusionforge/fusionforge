@@ -228,10 +228,10 @@ for($k = 0; $k < count($grouplines); $k++) {
 //
 //	Add the groups from the gforge database
 //
-$res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
-for($i = 0; $i < db_numrows($res); $i++) {
-    $groups[] = db_result($res,$i,'unix_group_name');
-    $gids[db_result($res,$i,'unix_group_name')]=db_result($res,$i,'group_id')+GROUP_ID_ADD;
+$group_res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
+for($i = 0; $i < db_numrows($group_res); $i++) {
+    $groups[] = db_result($group_res,$i,'unix_group_name');
+    $gids[db_result($group_res,$i,'unix_group_name')]=db_result($group_res,$i,'group_id')+GROUP_ID_ADD;
 }
 
 for($i = 0; $i < count($groups); $i++) {
@@ -244,6 +244,15 @@ for($i = 0; $i < count($groups); $i++) {
 
 		$line = $groups[$i] . ":x:" . ($gids[$groups[$i]]) . ":";
 
+
+		/* we need to get the project object to check if a project
+		 * has a private CVS repository - in which case we need to add
+		 * the apache user to the group so that ViewCVS can be used
+		 */
+		 
+		$gid = db_result($group_res, $i, 'group_id');
+		$project = &group_get_object($gid);
+		
 		$resusers=db_query("SELECT user_name 
 			FROM users,user_group,groups 
 			WHERE groups.group_id=user_group.group_id 
@@ -251,9 +260,36 @@ for($i = 0; $i < count($groups); $i++) {
 			AND user_group.cvs_flags='1'
 			AND users.status='A'
 			AND groups.unix_group_name='$groups[$i]'");
+			
 		$gmembers =& util_result_column_to_array($resusers,'user_name');
-		$line .= implode(',',$gmembers).$pserver_anon[$groups[$i]]."\n";
-
+		
+		$group_name = $groups[$i];
+		if (!($project->enableAnonSCM())) {
+			if (!$gmembers) {
+				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
+				if ($pserver_anon[$groups[$i]]) {
+					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
+					$line .= $this_anon . "," . $sys_apache_user . "\n";
+				} else {
+					$line .= $sys_apache_user . "\n"; // only the apache user then?
+				}
+			} else {
+				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "," . $sys_apache_user . "\n";
+			}
+		} else {
+			if (!$gmembers) {
+				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
+				if ($pserver_anon[$groups[$i]]) {
+					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
+					$line .= $this_anon . "\n";
+				} else {
+					$line .= "\n"; //no users
+				}
+			} else {
+				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "\n";
+			}
+		}
+		
 		fwrite($h6, $line);
 
 	}
