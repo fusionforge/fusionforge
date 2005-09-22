@@ -157,14 +157,22 @@ function addProjectRepositories() {
 		/*
 			Simply call cvscreate.sh
 		*/
-		$repositoryPath = $maincvsroot."/".db_result($res,$i,'unix_group_name');
+		
+		$project = &group_get_object(db_result($res,$i,'group_id')); // get the group object for the current group
+		
+		if ( (!$project) || (!is_object($project))  )  {
+			echo "Error Getting Group." . " Id : " . db_result($res,$i,'group_id') . " , Name : " . db_result($res,$i,'unix_group_name');
+			break; // continue to the next project
+		}
+		
+		$repositoryPath = $maincvsroot."/".$project->getUnixName();
 		if (is_dir($repositoryPath)) {
 			$writersContent = '';
 			$readersContent = '';
 			$passwdContent = '';
-			if(db_result($res,$i,'enable_anonscm')) {
+			if($project->enableAnonSCM()) {
 				$repositoryMode = 02775;
-				if (db_result($res,$i,'enable_pserver')) {
+				if ($project->enablePserver()) {
 					$readersContent = 'anonymous';
 					$passwdContent = 'anonymous:8Z8wlZezt48mY';
 				}
@@ -175,20 +183,20 @@ function addProjectRepositories() {
 			writeFile($repositoryPath.'/CVSROOT/writers', $writersContent);
 			writeFile($repositoryPath.'/CVSROOT/readers', $readersContent);
 			writeFile($repositoryPath.'/CVSROOT/passwd', $passwdContent);
-			addsyncmail(db_result($res,$i,'unix_group_name'));
-			$hookParams['group_id']=db_result($res,$i,'group_id');
+			addsyncmail($project->getUnixName());
+			$hookParams['group_id']=$project->getID();
 			$hookParams['file_name']=$repositoryPath;
 			plugin_hook("update_cvs_repository",$hookParams);
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
 			system('./cvscreate.sh '.
-				db_result($res,$i,'unix_group_name').
-				' '.(db_result($res,$i,'group_id')+50000).
-				' '.db_result($res,$i,'enable_anonscm').
-				' '.db_result($res,$i,'enable_pserver'));
-			addsyncmail(db_result($res,$i,'unix_group_name'));
-			$hookParams['group_id']=db_result($res,$i,'group_id');
+				$project->getUnixName().
+				' '.($project->getID()+50000).
+				' '.$project->enableAnonSCM().
+				' '.$project->enablePserver());
+			addsyncmail($project->getUnixName());
+			$hookParams['group_id']=$project->getID();
 			$hookParams['file_name']=$repositoryPath;
 			plugin_hook("update_cvs_repository",$hookParams);
 			if ($use_cvs_acl == true) {
@@ -196,7 +204,7 @@ function addProjectRepositories() {
 					"/aclconfig.default ".$repositoryPath.'/CVSROOT/aclconfig');
 				$res_admins = db_query("SELECT users.user_name FROM users,user_group ".
 					"WHERE users.user_id=user_group.user_id AND ".
-					"user_group.group_id='".db_result($res,$i,'group_id')."'");
+					"user_group.group_id='".$project->getID()."'");
 				$useradmin_group = db_result($res_admins,0,'user_name');
 				system("cvs -d ".$repositoryPath." racl ".$useradmin_group.":p -r ALL -d ALL");
 			}
