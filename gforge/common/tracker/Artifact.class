@@ -1145,7 +1145,7 @@ class Artifact extends Error {
 	 *
 	 *	@return	array	array of data
 	 */
-	function getExtraFieldData() {
+	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
