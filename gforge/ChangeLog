@@ -1,3 +1,12 @@
+2005-09-29 Daniel Perez <daniel@gforgegroup.com>
+Bug Fixing : 
+
+http://gforge.org/tracker/index.php?func=detail&aid=1545&group_id=6&atid=111
+http://gforge.org/tracker/index.php?func=detail&aid=1542&group_id=6&atid=111
+
+Warning message was issued due to missing getArrayFromRequest function call
+Unneeded addslashes removed, it was messing up the name when mass updating
+
 2005-09-16	Leonel Corso <leonel@gforgegroup.com>
 	* www/include/pre.php -> Changed plugin hooks to meet new coding standard.
 	* docs/README.Plugins -> Changed information explaining plugin hooks.
