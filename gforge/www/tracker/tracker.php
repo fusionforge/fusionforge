@@ -117,6 +117,7 @@ switch (getStringFromRequest('func')) {
 		$resolution_id = getStringFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$canned_response = getIntFromRequest("canned_response");
+		$extra_fields = getArrayFromRequest('extra_fields');
 		
 		$count=count($artifact_id_list);
 
@@ -138,7 +139,6 @@ switch (getStringFromRequest('func')) {
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
-				$_summary=addslashes($ah->getSummary());
 
 				//
 				//	get existing extra field data
