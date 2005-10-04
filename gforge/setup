@@ -339,6 +339,171 @@ doapache() {
 }
 
 
+cleanplugindirs() {
+	for dir in www/plugins cronjobs/plugins db/plugins plugins/bin plugins/cgi-bin plugins etc/plugins 
+	do 
+		[ -d $dir ] && rmdir $dir && echo "# $dir removed" 
+	done
+}
+
+setupplugindirs() {
+	for dir in www/plugins cronjobs/plugins db/plugins plugins plugins/bin plugins/cgi-bin etc/plugins 
+	do 
+		[ ! -d $dir ] && mkdir $dir && echo "# Creating $dir" || echo "# $dir already exists" 
+	done
+}
+
+setupplugin() {
+	if [ -d "$1" ]
+	then
+		PLUGINDIR=$1
+		CURDIR=`pwd`
+		cd $PLUGINDIR
+		PLUGINDIR=`pwd`
+		cd $CURDIR
+
+		PLUGINNAME=`basename $1 | sed 's/gforge-plugin-//' `
+		echo "# Setting symlinks for $PLUGINNAME plugin"
+		# www stuffs
+		echo "# www stuffs"
+		if [ -d "$PLUGINDIR/www" -a -d "www/plugins" ] 
+		then 
+			echo "ln -s $PLUGINDIR/www www/plugins/$PLUGINNAME" 
+			ln -s $PLUGINDIR/www www/plugins/$PLUGINNAME 
+		fi 
+		# cronjobs stuffs
+		echo "# cronjobs stuffs"
+		if [ -d "$PLUGINDIR/cronjobs" -a -d "cronjobs/plugins" ] 
+		then 
+			echo "ln -s $PLUGINDIR/cronjobs cronjobs/plugins/$PLUGINNAME" 
+			ln -s $PLUGINDIR/cronjobs cronjobs/plugins/$PLUGINNAME
+		fi 
+		# lib stuffs
+		echo "# lib stuffs"
+		if [ -d "$PLUGINDIR/lib" -a -d "db/plugins" ] 
+		then 
+			echo "ln -s $PLUGINDIR/lib db/plugins/$PLUGINNAME" 
+			ln -s $PLUGINDIR/lib db/plugins/$PLUGINNAME
+		fi 
+		# include stuffs
+		echo "# include stuffs"
+		if [ -d "$PLUGINDIR/include" -a -d "plugins" ] 
+		then 
+			echo "ln -s $PLUGINDIR/include plugins/$PLUGINNAME" 
+			ln -s $PLUGINDIR/include plugins/$PLUGINNAME 
+		fi 
+		# cgi-bin stuffs
+		echo "# cgi-bin stuffs"
+		if [ -d "$PLUGINDIR/cgi-bin" -a -d "cgi-bin" ] 
+		then 
+			echo "ln -s $PLUGINDIR/cgi-bin cgi-bin/$PLUGINNAME" 
+			ln -s $PLUGINDIR/cgi-bin cgi-bin/$PLUGINNAME
+		fi 
+		# bin stuffs
+		echo "# bin stuffs"
+		if [ -d "$PLUGINDIR/bin" -a -d "plugins/bin" ] 
+		then 
+			echo "ln -s $PLUGINDIR/bin plugins/bin/$PLUGINNAME" 
+			ln -s $PLUGINDIR/bin plugins/bin/$PLUGINNAME
+		fi 
+		# etc/plugins stuffs
+		echo "# etc/plugins stuffs"
+		if [ -d "$PLUGINDIR/etc/plugins/$PLUGINNAME" -a -d "etc/plugins" ] 
+		then 
+			echo "ln -s $PLUGINDIR/etc/plugins/$PLUGINNAME etc/plugins/$PLUGINNAME" 
+			ln -s $PLUGINDIR/etc/plugins/$PLUGINNAME etc/plugins/$PLUGINNAME
+		fi 
+		# etc/httpd.d stuffs
+		echo "# etc/httpd.d stuffs"
+		if [ -d "$PLUGINDIR/etc/httpd.d" -a -d "etc/httpd.d" ] 
+		then 
+			for file in $PLUGINDIR/etc/httpd.d/[0-9][0-9]*
+			do
+				BASEN=`basename $file`
+				echo "ln -s $file etc/httpd.d/$BASEN" 
+				ln -s $file etc/httpd.d/$BASEN 
+			done
+		fi 
+		exit 0
+	else
+		echo "Couldn't find $1 directory"
+		exit 1
+	fi
+}
+
+delplugin() {
+	if [ -d "$1" ]
+	then
+		PLUGINDIR=$1
+		PLUGINNAME=`basename $1 | sed 's/gforge-plugin-//' `
+		echo "# Setting symlinks for $PLUGINNAME plugin"
+		# www stuffs
+		echo "# www stuffs"
+		if [ -d "$PLUGINDIR/www" -a -d "www/plugins" ] 
+		then 
+			echo "rm www/plugins/$PLUGINNAME" 
+			rm www/plugins/$PLUGINNAME 
+		fi 
+		# cronjobs stuffs
+		echo "# cronjobs stuffs"
+		if [ -d "$PLUGINDIR/cronjobs" -a -d "cronjobs/plugins" ] 
+		then 
+			echo "rm cronjobs/plugins/$PLUGINNAME" 
+			rm cronjobs/plugins/$PLUGINNAME
+		fi 
+		# lib stuffs
+		echo "# lib stuffs"
+		if [ -d "$PLUGINDIR/lib" -a -d "db/plugins" ] 
+		then 
+			echo "rm db/plugins/$PLUGINNAME" 
+			rm db/plugins/$PLUGINNAME
+		fi 
+		# include stuffs
+		echo "# include stuffs"
+		if [ -d "$PLUGINDIR/include" -a -d "plugins" ] 
+		then 
+			echo "rm plugins/$PLUGINNAME" 
+			rm plugins/$PLUGINNAME 
+		fi 
+		# cgi-bin stuffs
+		echo "# cgi-bin stuffs"
+		if [ -d "$PLUGINDIR/cgi-bin" -a -d "cgi-bin" ] 
+		then 
+			echo "rm cgi-bin/$PLUGINNAME" 
+			rm cgi-bin/$PLUGINNAME
+		fi 
+		# bin stuffs
+		echo "# bin stuffs"
+		if [ -d "$PLUGINDIR/bin" -a -d "plugins/bin" ] 
+		then 
+			echo "rm plugins/bin/$PLUGINNAME" 
+			rm plugins/bin/$PLUGINNAME
+		fi 
+		# etc/plugins stuffs
+		echo "# etc/plugins stuffs"
+		if [ -d "$PLUGINDIR/etc/plugins/$PLUGINNAME" -a -d "etc/plugins" ] 
+		then 
+			echo "rm etc/plugins/$PLUGINNAME" 
+			rm etc/plugins/$PLUGINNAME
+		fi 
+		# etc/httpd.d stuffs
+		echo "# etc/httpd.d stuffs"
+		if [ -d "$PLUGINDIR/etc/httpd.d" -a -d "etc/httpd.d" ] 
+		then 
+			for file in $PLUGINDIR/etc/httpd.d/[0-9][0-9]*
+			do
+				BASEN=`basename $file`
+				echo "rm etc/httpd.d/$BASEN" 
+				rm etc/httpd.d/$BASEN 
+			done
+		fi 
+		exit 0
+	else
+		echo "Couldn't find $1 directory"
+		exit 1
+	fi
+}
+
 ETCDIR=`pwd`/etc
 BINDIR=`pwd`/utils
 CGIDIR=`pwd`/cgi-bin
@@ -469,6 +634,24 @@ do
 			;;
 		-debug )
 			set -x
+			;;
+		-cleanplugindir)
+			cleanplugindirs
+			exit 0
+			;;
+		-plugindir)
+			setupplugindirs
+			exit 0
+			;;
+		-plugin)
+			shift
+			PLUGINPATH=$1
+			setupplugin $PLUGINPATH
+			;;
+		-delplugin)
+			shift
+			PLUGINPATH=$1
+			delplugin $PLUGINPATH
 			;;
 		*)
 			echo "Bad Parameter"

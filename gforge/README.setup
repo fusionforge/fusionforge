@@ -31,6 +31,29 @@ rm etc/httpd.vhosts
 # Let me know if this was usefull and the change you had to do to make it run
 # on your system
 # 
+# PLUGIN SETUP
+#
+# Now you can also use setup to set up plugins
+# This is very preliminary implementation 
+# just run
+#
+# ./setup -plugindir 
+# To install plugin directories
+#
+# ./setup -cleanplugindir 
+# will remove the created dir only if they are empty
+#
+# To setup a plugin just run
+# 
+# ./setup -plugin <plugin_dir>
+# plugin_dir can be related path like ../gforge-plugin-scmcvs or absolute path
+#
+# To remove a plugin just run
+#
+# ./setup -delplugin <plugin_dir> 
+#
+#
 # Christian
 # 
 # <bayle@debian.org>
+
