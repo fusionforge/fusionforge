@@ -1437,11 +1437,11 @@ class Group extends Error {
 		$mlf = new MailingListFactory($this);
 		$ml_arr =& $mlf->getMailingLists();
 		for ($i=0; $i<count($ml_arr); $i++) {
-			if (!is_object($ms_arr[$i])) {
+			if (!is_object($ml_arr[$i])) {
 				echo "Not Object: MailingList: ".$i;
 				continue;
 			}
-			if (!$ml_arr[$i]->delete()) {
+			if (!$ml_arr[$i]->delete(1,1)) {
 				$this->setError($Language->getText('mail','error_delete'));
 			}
 //echo 'MailingListFactory'.db_error();
