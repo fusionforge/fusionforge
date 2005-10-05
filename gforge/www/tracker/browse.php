@@ -262,14 +262,14 @@ if ($art_arr && count($art_arr) > 0) {
 			<tr><td colspan="2">';
 		if ($offset > 0) {
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
+			$set.'&offset='.($offset-50).'&query_id=' . getIntFromRequest('query_id').'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
 		} else {
 			echo '&nbsp;';
 		}
 		echo '</td><td>&nbsp;</td><td colspan="2">';
 		if ($rows >= 50) {
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
+			$set.'&offset='.($offset+50).'&query_id=' . getIntFromRequest('query_id'). '"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
 		} else {
 			echo '&nbsp;';
 		}
