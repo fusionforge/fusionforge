@@ -1,3 +1,9 @@
+2005-10-05 Daniel Perez <daniel@gforgegroup.com>
+https://gforge.org/tracker/?func=detail&aid=1558&group_id=6&atid=111
+	* now when clicking on "Browse", the selected query is mantained
+	* now when clicking "Next 50" or "Previous 50" the query item in select box is mantained too
+https://gforge.org/tracker/?func=detail&aid=1551&group_id=1&atid=106
+	* Changed description to return description instead of id
 2005-09-29 Daniel Perez <daniel@gforgegroup.com>
 Bug Fixing : 
 
