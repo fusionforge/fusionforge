@@ -828,7 +828,7 @@ function artifactfiles_to_soap($files_arr) {
 			'id' => $files_arr[$i]->getID(),
 			'artifact_id' => $files_arr[$i]->Artifact->getID(),
 			'name' => $files_arr[$i]->getName(),
-			'description' => $files_arr[$i]->getID(),
+			'description' => $files_arr[$i]->getDescription(),
 			'filesize' => $files_arr[$i]->getSize(),
 			'filetype' => $files_arr[$i]->getType(),
 			'adddate' => $files_arr[$i]->getDate(),
