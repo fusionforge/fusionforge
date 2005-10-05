@@ -1,0 +1,20 @@
+#
+#       *.company.com creation of group home dirs
+#
+12 * * * * /var/www/gforge3/cronjobs/dav-svn/create_group_home.php /var/www/homedirs/
+
+#
+#       users.company.com creation of user dirs
+#
+15 * * * * /var/www/gforge3/cronjobs/dav-svn/create_users.php /var/www/homedirs/
+
+#
+#       structure for versioned docman
+#
+18 * * * * /var/www/gforge3/cronjobs/dav-svn/create_docman.php
+
+#
+#       structure for subversion repos
+#
+20 * * * * /var/www/gforge3/cronjobs/dav-svn/create_svn.php
+
