@@ -125,7 +125,7 @@ if (getStringFromRequest('submit')) {
 			echo '<br /><br />';
 			echo '<strong>'.$Language->getText('docman_new','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
 			echo $Language->getText('docman_new','ftpupload_choosefile').'</strong>'. utils_requiredField() .'<br />';
-			$arr[]='';
+			//$arr[]='';
 			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
 			echo '<br /><br />';			
