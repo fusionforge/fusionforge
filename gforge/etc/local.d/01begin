@@ -47,3 +47,7 @@ $sys_users_host = '{users_host}';
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = '{lists_host}';
 
+$sys_bbcode_make_clickable=1; //bbcode customizations
+$sys_bbcode_smilie_on=1; 
+$sys_bbcode_bbcode_on=1; 
+$sys_bbcode_strip_html=1;
