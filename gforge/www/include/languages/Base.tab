@@ -551,6 +551,8 @@ bbcode	bbcode_w_help	Insert URL: [url]http://url[/url] or [url=http://url]URL te
 bbcode	bbcode_a_help	Close all open bbCode tags
 bbcode	bbcode_s_help	Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000
 bbcode	bbcode_f_help	Font size: [size=x-small]small text[/size]
+bbcode	bbcode_k_help	Link to Task: [task]Forumid:Subproject:Taskid:TaskName[/task]   (alt+k)
+bbcode	bbcode_h_help	Link to Artifact: [artifact]ArtifactID[/artifact]   (alt+h)
 bbcode	emoticons	Emoticons
 bbcode	more_emoticons	View more Emoticons
 bbcode	font_color	Font colour
@@ -1728,6 +1730,7 @@ project_admin	userrealname	Real Name
 project_admin	user_added	User Added Successfully
 project_admin	user_removed	User Removed Successfully
 project_admin	www_directory	Project WWW directory on shell server:&nbsp;
+project_admin	wiki	Wiki Administration
 project_admin_database	add_new_database	Add New Database
 project_admin_database	add_new_database_info	Clicking on "create" will schedule the creation of the database, and email the	details to the project administrators
 project_admin_database	cannot_add	Cannot add database entry

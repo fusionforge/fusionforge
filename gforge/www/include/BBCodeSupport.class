@@ -93,8 +93,10 @@ class BBCodeSupport extends Error {
 								'url1' 					=> '<a href="\\1\\2" target="_blank">\\1\\2</a>',
 								'url2' 					=> '<a href="http://\\1" target="_blank">\\1</a>',
 								'url3' 					=> '<a href="\\1\\2" target="_blank">\\3</a>',
-								'url4' 					=> '<a href="http://\\1" target="_blank">\\2</a>'
-										);	
+								'url4' 					=> '<a href="http://\\1" target="_blank">\\2</a>',
+								'urltask'				=> '<a href="/pm/task.php?func=detailtask&project_task_id=\\3&group_id=\\1&group_project_id=\\2">\\4</a>',
+								'urlartifact'			=> '<a href="/tracker/index.php?func=detail&aid=\\1">Artifact\\1</a>'
+										);
 	 
 	 } 
 	
@@ -199,7 +201,16 @@ class BBCodeSupport extends Error {
 		// [email]user@domain.tld[/email] code..
 		$patterns[5] = "#\[email\]([a-z0-9\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)\[/email\]#si";
 		$replacements[5] = $this->bbcode_tpl['email'];
-	
+		
+		// [task]Forumid:Subproject:Taskid:TaskName[/task] code..
+		$patterns[6] = "#\[task\]([0-9]+?):([0-9]+?):([0-9]+?):([a-z0-9\-_.]+?)\[/task\]#si";
+		$replacements[6] = $this->bbcode_tpl['urltask'];
+		
+		// [artifact]artifactID[/artifact] code..
+		$patterns[7] = "#\[artifact\]([0-9]+?)\[/artifact\]#si";
+		$replacements[7] = $this->bbcode_tpl['urlartifact'];
+		
+		
 		$text = preg_replace($patterns, $replacements, $text);
 		
 				

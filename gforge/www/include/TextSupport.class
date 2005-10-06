@@ -76,9 +76,7 @@ class TextSupport extends Error {
 	// make_clickable will parse the text and transform www.aa.aa into a <a... tag
 	// returns bbcode_uid, it's the code that was used to code the text with bbcode support, we will need that when we want to display the text with bbcode on	
 	function prepareText(&$text, $make_clickable=1, $strip_html=1, $smilie_on=1, $bbcode_on=1){
-		if ($strip_html){
 			$text = $this->HTMLSupport->prepareText($text, $strip_html);
-		}
 		if ($smilie_on){
 			$text = $this->SmilieSupportHtml->prepareText($text);
 		}

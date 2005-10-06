@@ -1,3 +1,12 @@
+2005-10-06 Daniel Perez <daniel@gforgegroup.com>
+(**FORUMS**)
+http://gforge.org/tracker/?func=detail&aid=1559&group_id=1&atid=105
+	* Added security. Now the behaviour is
+		always) htmlspecialchars to the body except the following tags :  <b>, <i>, <ul>, <ol>, <u> and <img>
+		sys_bbcode_strip_html -> 0 ) htmlspecialchars
+		sys_bbcode_strip_html -> 1 ) htmlentities
+Added bbcode tags for :
+	* task, artifact
 2005-10-05 Daniel Perez <daniel@gforgegroup.com>
 https://gforge.org/tracker/?func=detail&aid=1558&group_id=6&atid=111
 	* now when clicking on "Browse", the selected query is mantained

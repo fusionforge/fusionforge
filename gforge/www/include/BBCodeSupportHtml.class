@@ -54,10 +54,12 @@ class BBCodeSupportHtml extends BBCodeSupport {
 		a_help = "<?php echo $Language->getText('bbcode','bbcode_a_help'); ?>";
 		s_help = "<?php echo $Language->getText('bbcode','bbcode_s_help'); ?>";
 		f_help = "<?php echo $Language->getText('bbcode','bbcode_f_help'); ?>";
+		k_help = "<?php echo $Language->getText('bbcode','bbcode_k_help'); ?>";
+		h_help = "<?php echo $Language->getText('bbcode','bbcode_h_help'); ?>";
 		
 		// Define the bbCode tags
 		bbcode = new Array();
-		bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]');
+		bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','dummy','dummy','dummy','dummy','[task]','[/task]','[artifact]','[/artifact]');
 		imageTag = false;
 		
 		// Shows the help messages in the helpline window
@@ -243,6 +245,13 @@ class BBCodeSupportHtml extends BBCodeSupport {
 			<td>
 			  <input type="button" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onClick="bbstyle(16)" onMouseOver="helpline('w')" />
 			  </span></td>
+			 <td>
+			  <input type="button" accesskey="k" name="addbbcode22" value="Task" style="width: 40px"  onClick="bbstyle(22)" onMouseOver="helpline('k')" />
+			  </span></td>
+			  <td>
+			  <input type="button" accesskey="h" name="addbbcode24" value="Artifact" style="width: 60px"  onClick="bbstyle(24)" onMouseOver="helpline('h')" />
+			  </span></td>
+			<td>
 		  </tr>
 		  <tr> 
 			<td colspan="9"> 
