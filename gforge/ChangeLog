@@ -1,4 +1,8 @@
 2005-10-06 Daniel Perez <daniel@gforgegroup.com>
+	[#1561] Uploading doc in HEAD (gforge.org) doesn't work
+	http://gforge.org/tracker/?func=detail&aid=1561&group_id=1&atid=105
+	Extra blank field was being added to the ftp select box, now fixed
+2005-10-06 Daniel Perez <daniel@gforgegroup.com>
 (**FORUMS**)
 http://gforge.org/tracker/?func=detail&aid=1559&group_id=1&atid=105
 	* Added security. Now the behaviour is
