@@ -61,33 +61,33 @@ class SVNPlugin extends SCM {
 		switch ($hookname) {
 		case 'scm_page':
 			$group_id = $params['group_id'] ;
-			$this->display_scm_page ($group_id) ;
+			$this->getPage ($group_id) ;
 			break ;
 		case 'scm_admin_update':
-			$this->scm_admin_update ($params) ;
+			$this->AdminUpdate ($params) ;
 			break ;
 		case 'scm_admin_page':
-			$this->display_scm_admin_page ($params) ;
+			$this->getAdminPage ($params) ;
 			break ;
 		case 'scm_stats':
-			$this->display_stats ($params) ;
+			$this->getStats ($params) ;
 			break;
 // 		case 'group_approved':
-// 			$this->group_approved ($params) ;
+// 			$this->groupApproved ($params) ;
 // 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
 			break;
 		case 'cssfile':
-			$this->cssfile_scm ($params) ;
+			$this->getCSSfile ($params) ;
 			break;
 		default:
 			// Forgot something
 		}
 	}
 
-	function display_scm_page ($group_id) {
+	function getPage ($group_id) {
 		global $Language, $HTML ;
 
 		$project =& group_get_object($group_id);
@@ -155,10 +155,10 @@ class SVNPlugin extends SCM {
 				<?php
 				// ######################## SVN Browsing
 				echo $HTML->boxTop($Language->getText('plugin_scmsvn', 'history'));
-				echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
+				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displaySvnBrowser) {
 					echo $Language->getText('plugin_scmsvn', 'browsetree');
-					echo '<p>[<a href="'.$this->account_group_viewcvs_url($group_id).'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
+					echo '<p>[<a href="'.$this->getAccountGroupViewcvsUrl($group_id).'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
 				}
 
 				echo $HTML->boxBottom();
@@ -170,7 +170,7 @@ class SVNPlugin extends SCM {
 		}
 	}
 
-	function scm_admin_update ($params) {
+	function AdminUpdate ($params) {
 		$group =& group_get_object($params['group_id']);
 		if (!$group || !is_object($group)) {
 			return false;
@@ -195,7 +195,7 @@ class SVNPlugin extends SCM {
 		}
 	}
 
-	function display_scm_admin_page ($params) {
+	function getAdminPage ($params) {
 		global $Language ;
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) ) {
@@ -205,7 +205,7 @@ class SVNPlugin extends SCM {
 		}
 	}
 
-	function display_stats ($params) {
+	function getStats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
@@ -216,13 +216,13 @@ class SVNPlugin extends SCM {
 		}
 
 		if ($project->usesPlugin ($this->name)) {
-			list($commit_num, $add_num) = $this->get_total_stats($group_id);
+			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			echo ' (SVN: '.$Language->getText('plugin_scmsvn','svn_updates',array(number_format($commit_num,0),number_format($add_num,0))).')';
 		}
 	}
 
 	// Get the total stats for a group
-	function get_total_stats($group_id) {
+	function getTotalStats($group_id) {
 		$result = db_query("
 			SELECT SUM(commits) AS commits, SUM(adds) AS adds
 			FROM stats_cvs_group
@@ -239,7 +239,7 @@ class SVNPlugin extends SCM {
 	}
 
 	// Not used at the moment and probably useless
-	function group_approved ($params) {
+	function groupApproved ($params) {
 		$group_id = $params['group_id'] ;
 		
 		$project =& group_get_object($group_id);
@@ -257,17 +257,17 @@ class SVNPlugin extends SCM {
 	}
 
 	/**
-	 *	account_group_viewcvs_url() - Returns URL for group's SVN interface WWW.
+	 *	getAccountGroupViewcvsUrl() - Returns URL for group's SVN interface WWW.
 	 *
 	 *	@param  int  The group id
 	 *	@return URL to access CVS over HTTP
 	 */
-	function account_group_viewcvs_url($group_id) {
+	function getAccountGroupViewcvsUrl($group_id) {
 		$project =& group_get_object($group_id);
 		return 'http'.(($this->use_ssl) ? 's' : '').'://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
 	}
 
-	function cssfile_scm ($layout) {
+	function getCSSfile ($layout) {
 		// Only show the stylesheet if we're actually in the SVN pages.
 		// This stops styles inadvertently clashing with the main site.
 		if (strncmp($_SERVER['REQUEST_URI'], '/plugins/scmsvn/', 16) == 0) {
@@ -275,7 +275,7 @@ class SVNPlugin extends SCM {
 		}
 	}
 
-	function display_detailed_stats ($params) {
+	function getDetailedStats ($params) {
 		global $Language, $HTML;
 		$group_id = $params['group_id'] ;
 
@@ -308,7 +308,7 @@ class SVNPlugin extends SCM {
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
-			list($commit_num, $add_num) = $this->get_total_stats($group_id);
+			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			if ($commit_num > $total['commits'] ||
 				$add_num > $total['adds']) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
