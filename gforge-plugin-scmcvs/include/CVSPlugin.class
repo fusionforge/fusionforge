@@ -41,22 +41,22 @@ class CVSPlugin extends SCM {
 		switch ($hookname) {
 		case 'scm_page':
 			$group_id = $params['group_id'] ;
-			$this->display_scm_page ($group_id) ;
+			$this->getPage ($group_id) ;
 			break ;
 		case 'scm_admin_update':
-			$this->scm_admin_update ($params) ;
+			$this->adminUpdate ($params) ;
 			break ;
 		case 'scm_admin_page':
-			$this->display_scm_admin_page ($params) ;
+			$this->getAdminPage ($params) ;
 			break ;
 		case 'scm_stats':
-			$this->display_stats ($params) ;
+			$this->getStats ($params) ;
 			break;
 // 		case "group_approved":
-// 			$this->group_approved ($params) ;
+// 			$this->groupApproved ($params) ;
 // 			break;
 		case 'cssfile':
-			$this->cssfile_scm ($params) ;
+			$this->getCSSfile ($params) ;
 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
@@ -67,11 +67,11 @@ class CVSPlugin extends SCM {
 		}
 	}
 
-	function cssfile_scm ($layout) {
+	function getCSSfile ($layout) {
 		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmcvs/cvsweb/css/cvsweb.css" />';
 	}
 
-	function display_scm_page ($group_id) {
+	function getPage ($group_id) {
 		global $Language, $HTML ;
 
 		$project =& group_get_object($group_id);
@@ -137,10 +137,10 @@ class CVSPlugin extends SCM {
 				<?php
 				// ######################## CVS Browsing 
 				echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
-				echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
+				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displayCvsBrowser){
 					echo $Language->getText('plugin_scmcvs', 'browsetree');
-					echo '<p>[<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
+					echo '<p>[<a href="'.$this->getAccountGroupCVSwebUrl($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
 				}
 				echo $HTML->boxBottom();
 				?>
@@ -151,7 +151,7 @@ class CVSPlugin extends SCM {
 		}	
 	}
 
-	function scm_admin_update ($params) {
+	function adminUpdate ($params) {
 		$group =& group_get_object($params['group_id']);
 		if (!$group || !is_object($group)) {
 			return false;
@@ -181,7 +181,7 @@ class CVSPlugin extends SCM {
 		}
 	}
 
-	function display_scm_admin_page ($params) {
+	function getAdminPage ($params) {
 		global $Language;
 		$group =& group_get_object($params['group_id']);
 
@@ -196,7 +196,7 @@ class CVSPlugin extends SCM {
 		}
 	}
 
-	function display_stats ($params) {
+	function getStats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
@@ -223,7 +223,7 @@ class CVSPlugin extends SCM {
 		}
 	}
 	
-	function display_detailed_stats ($params) {
+	function getDetailedStats ($params) {
 		global $Language, $HTML;
 		$group_id = $params['group_id'] ;
 		
@@ -266,12 +266,12 @@ class CVSPlugin extends SCM {
 	}
 
 	/**
-	 *      account_group_cvsweb_url() - Returns URL for group's CVS interface WWW
+	 *      getAccountGroupCvswebUrl() - Returns URL for group's CVS interface WWW
 	 *
 	 *	@param  string  The group name
 	 *      @return URL to access CVS over HTTP
 	 */
-	function account_group_cvsweb_url($group_id) {
+	function getAccountGroupCVSwebUrl($group_id) {
 		$project =& group_get_object($group_id);
 		//return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot='.$project->getUnixName();
 		// external SCM box is now handled inside cvsweb.php
@@ -279,7 +279,7 @@ class CVSPlugin extends SCM {
 	}
 
 /*
-	function group_approved ($params) {
+	function groupApproved ($params) {
 		$group_id = $params['group_id'] ;
 	
 		$project =& group_get_object($group_id);
