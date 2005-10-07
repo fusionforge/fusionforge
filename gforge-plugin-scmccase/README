@@ -12,8 +12,8 @@ Installation:
 
 - files from etc/ go to /etc/gforge/plugins/scmsvn
 - files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
-- files from include/ go to /usr/lib/gforge/plugins/scmsvn/include
-- files from lib/ go to  /usr/lib/gforge/plugins/scmsvn/lib
+- files from common/ go to /usr/lib/gforge/plugins/scmsvn/common
+- files from db/ go to  /usr/lib/gforge/plugins/scmsvn/db
 
 Setup:
 
