@@ -25,8 +25,8 @@ Installation:
 - files from etc/ go to /etc/gforge/plugins/scmsvn, apart from
 etc/httpd.conf that you should install as /etc/gforge/httpd.d/10scmsvn
 - files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
-- files from include/ go to /usr/lib/gforge/plugins/scmsvn/include
-- files from lib/ go to  /usr/lib/gforge/plugins/scmsvn/lib
+- files from common/ go to /usr/lib/gforge/plugins/scmsvn/common
+- files from db/ go to  /usr/lib/gforge/plugins/scmsvn/db
 - files from cronjobs/ go to  /usr/lib/gforge/plugins/scmsvn/cronjobs
 
 Setup:

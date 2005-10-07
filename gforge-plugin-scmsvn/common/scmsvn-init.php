@@ -23,7 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once ($GLOBALS['sys_plugins_path'].'/scmsvn/include/SVNPlugin.class') ;
+require_once ($GLOBALS['sys_plugins_path'].'/scmsvn/common/SVNPlugin.class') ;
 
 $SVNPluginObject = new SVNPlugin ;
 
