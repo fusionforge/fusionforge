@@ -94,12 +94,17 @@ class PluginManager extends Error {
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
 		foreach ($plugins_data as $p_id => $p_name) {
-			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
-			} else {
+			} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
+					$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+					if (file_exists ($filename)) {
+						require_once ($filename) ;
+					} else {
 				// we can't find the plugin so we remove it from the array
-				unset($this->plugins_data[$p_id]);
+					unset($this->plugins_data[$p_id]);
+					}
 			}
 		}
 		return true ;

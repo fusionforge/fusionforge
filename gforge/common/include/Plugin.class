@@ -64,7 +64,7 @@ class Plugin extends Error {
 	 * @param params - array of parameters to pass the hook
 	 */
 	function CallHook ($hookname, $params) {
-		return true ;
+		return true ; 
 	}
 
 	/**
@@ -73,6 +73,9 @@ class Plugin extends Error {
 	 * @return string path
 	 */
 	function GetLanguagePath() {
+		if (file_exists ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/')) {
+				return ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/') ;
+		} else {
 		return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/include/languages/';
 	}
 
