@@ -1,3 +1,7 @@
+2005-10-10 Daniel Perez <daniel@gforgegroup.com>
+	(**FORUMS**)
+	The email message is now sent with tags, quotes and bbcode is removed
+	Also a fix was made because some messages were being double htmlspecialchared
 2005-10-06 Daniel Perez <daniel@gforgegroup.com>
 	[#1561] Uploading doc in HEAD (gforge.org) doesn't work
 	http://gforge.org/tracker/?func=detail&aid=1561&group_id=1&atid=105
