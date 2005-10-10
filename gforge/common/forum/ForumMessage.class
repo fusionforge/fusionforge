@@ -129,7 +129,7 @@ class ForumMessage extends Error {
 		$sql="INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
 		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
 		VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-		'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+		'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -211,7 +211,7 @@ class ForumMessage extends Error {
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
 		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
 		VALUES ('". $group_forum_id ."', '$posted_by', '". htmlspecialchars($subject) ."', 
-		'". htmlspecialchars($body) ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."','" . $bbcode_uid . "')";
+		'". $body ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."','" . $bbcode_uid . "')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -292,7 +292,7 @@ class ForumMessage extends Error {
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
 			body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
 			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+			'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -642,6 +642,17 @@ class ForumMessage extends Error {
 	}
 
 	/**
+	 *	removebbcode - workaround to remove bbcode tags.
+	 *
+	 *	@return string	converted text
+	 */
+	function removebbcode($text) {
+		//$replaced =  preg_replace("/\[[_a-zA-Z]:.+\](.+)\[\/[_a-zA-Z]:.*\]/","$1",$text);
+		$replaced =  preg_replace("/\[.+\](.+)\[\/.+\]/","$1",$text);
+		return $replaced;
+	}
+	
+	/**
 	 *	sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
 	 *	@return boolean success.
@@ -661,7 +672,7 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$body .= util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		$body .= $this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody()))).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
@@ -713,7 +724,7 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$body .= util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		$body .= $this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody()))).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
@@ -755,7 +766,7 @@ class ForumMessage extends Error {
 	 */
 	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid) {
 		$subject = htmlspecialchars($subject);
-		$body = htmlspecialchars($body);
+		$body = $body;
 		$msg_id = $this->getID();
 		$sql="UPDATE forum 
 			SET group_forum_id='$group_forum_id' , posted_by='$posted_by' , subject='$subject',

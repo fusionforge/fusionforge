@@ -94,7 +94,8 @@ class TextSupport extends Error {
 	
 	// strip_html is also defined here so that we could for exemple store the raw data in the db and then displaying the text
 	// with a strip html function on it. 
-	function displayText($text, $make_clickable=1, $smilie_on=1, $bbcode_on=1, $bbcode_uid=0){
+	function displayText($text, $make_clickable=1, $smilie_on=1, $bbcode_on=1, $bbcode_uid=0,$strip_html=1){
+		$text = $this->HTMLSupport->prepareText($text, $strip_html);
 		if ($smilie_on){
 			// parse the text var and convert all the smilies into nice images links
 			$text = $this->SmilieSupportHtml->displayText($text);
