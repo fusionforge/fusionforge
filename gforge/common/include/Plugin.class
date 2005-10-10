@@ -77,6 +77,7 @@ class Plugin extends Error {
 				return ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/') ;
 		} else {
 		return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/include/languages/';
+		}
 	}
 
 	/**
