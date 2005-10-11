@@ -74,11 +74,11 @@ class Plugin extends Error {
 	 */
 	function GetLanguagePath() {
 		if (file_exists ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/')) {
-				return ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/') ;
-		} else {
+			return ($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/') ;
+	} else {
 		return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/include/languages/';
-		}
 	}
+}
 
 	/**
 	 * GetSpecificLanguagePath() - get the path where we can find installation specific language files
