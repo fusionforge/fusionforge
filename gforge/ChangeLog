@@ -1,3 +1,8 @@
+2005-10-11 Daniel Perez <daniel@gforgegroup.com>
+http://gforge.org/tracker/?func=detail&aid=1571&group_id=1&atid=105
+	(**Survey**)
+	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
+
 2005-10-05 Daniel Perez <daniel@gforgegroup.com>
 
 https://gforge.org/tracker/?func=detail&aid=1551&group_id=1&atid=106
