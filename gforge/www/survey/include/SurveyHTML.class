@@ -647,7 +647,31 @@ class SurveyHTML extends Error {
 				for($j=0; $j<$totalCount; $j++) {
 					$ret.='<hr.><strong>'.$Language->getText('survey_show_results_aggregate','comments').
 						' # '.($j+1).'/'.$totalCount. '</strong><p/>';
-					$ret.='<pre>'.$results[$j].'</pre>';
+					$ret.='<pre>';
+					$words = explode(" ",$results[$j]);
+					$i = 0;
+					$linelength = 0;
+					//print 100 chars in words per line
+					foreach ($words as $word) {
+						// if we have a stupidly strange word with lots of letters, we´ll make a new line for it and split it
+						if ( (strlen($word)>100) && ((strlen($word)+$linelength)>100)) {	
+							$chunks = $this->split_str($word,50);
+							foreach ($chunks as $chunk) {
+								$ret .= $chunk;
+								$ret .= "<br>";
+							}
+							$linelength = 0;
+						} else {
+							$linelength += strlen($word);
+							if ($linelength>100) {
+								$ret .= "<br>";
+								$linelength = 0;
+							} else {
+								$ret .= $word . " ";
+							}
+						}
+					}
+					$ret.='</pre>';
 				}
 			} else {
 				$ret.='<ul><li><a href="show_results.php?survey_id='.$Survey->getID().
@@ -665,6 +689,22 @@ class SurveyHTML extends Error {
 		return $ret;
 	} 
 
+	/**
+         * split_str - works as str_split of PHP5 -  Converts a string to an array.
+	 *
+	 * @param String str
+         * @param int length of chunk
+	 * @return array array of chunks of the string
+	 */
+		function split_str($str,$split_lengt=1) {
+			$cnt = strlen($str);
+			for ($i=0;$i<$cnt;$i+=$split_lengt) {
+				$rslt[]= substr($str,$i,$split_lengt);
+			}
+	 		return $rslt;
+		}
+
+	
 	/**
          * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
