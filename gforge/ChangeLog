@@ -1,3 +1,6 @@
+2005-10-11 Daniel Perez <daniel@gforgegroup.com>
+	(**Survey**)
+	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
 2005-10-10 Daniel Perez <daniel@gforgegroup.com>
 	(**FORUMS**)
 	The email message is now sent with tags, quotes and bbcode is removed
