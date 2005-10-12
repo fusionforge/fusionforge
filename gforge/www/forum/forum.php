@@ -32,7 +32,7 @@ $style = getStringFromRequest('style');
 $thread_id = getIntFromRequest('thread_id');
 $offset = getIntFromRequest('offset');
 $max_rows = getIntFromRequest('max_rows');
-$set = getIntFromRequest('set');
+$set = getStringFromRequest('set');
 
 if ($forum_id) {
 

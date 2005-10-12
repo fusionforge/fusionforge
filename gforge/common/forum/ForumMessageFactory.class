@@ -106,7 +106,7 @@ class ForumMessageFactory extends Error {
 			if ($set=='custom') {
 				if ($u->getPreference('forum_style')) {
 					if ($_pref == $u->getPreference('forum_style')) {
-						//do nothing - pref already stored
+						//pref already stored
 					} else {
 						//set the pref
 						$u->setPreference ('forum_style',$_pref);
