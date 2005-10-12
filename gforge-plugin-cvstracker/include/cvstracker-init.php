@@ -23,6 +23,10 @@
  * along with GForge-plugin-cvstracker; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
+
+global $sys_cvsroot_path, $cvs_binary_version, $cvs_tracker_debug;
+require_once ('plugins/cvstracker/config.php');
+
 require_once ('cvstrackerPlugin.class') ;
 
 $cvstrackerPluginObject = new cvstrackerPlugin ;
