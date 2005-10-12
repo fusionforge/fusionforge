@@ -1,3 +1,10 @@
+2005-10-12  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
+	Added section for enabling Full Text Indexing.
+	[#1568] Fix creating /etc/gforge and /etc/gforge/local.inc.
+	Various small improvements.
+
 2005-10-12 Daniel Perez <daniel@gforgegroup.com>
 	(**Tracker**)
 	Fixed bug -> https://gforge.org/tracker/?func=detail&aid=1558&group_id=6&atid=111
