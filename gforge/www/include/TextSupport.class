@@ -85,7 +85,7 @@ class TextSupport extends Error {
 			$text = $this->BBCodeSupportHtml->prepareText($text, $bbcode_uid);
 		}
 		if ($make_clickable){
-			$text = $this->makeClickable($text);
+			//$text = $this->makeClickable($text);
 		}
 		
 		return $bbcode_uid;
