@@ -190,7 +190,7 @@ function addProjectRepositories() {
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
-			system('./cvscreate.sh '.
+			system(dirname(__FILE__).'/cvscreate.sh '.
 				$project->getUnixName().
 				' '.($project->getID()+50000).
 				' '.$project->enableAnonSCM().
