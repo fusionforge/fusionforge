@@ -111,9 +111,9 @@
 				<para>In the GForge distribution, you will find <filename>etc/local.inc.example</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable> and <replaceable>apache-group</replaceable>):</para>
 <programlisting>
 # <userinput>mkdir /etc/gforge</userinput>
-# <userinput>chown -R root: /etc/gforge</userinput>
+# <userinput>chown root: /etc/gforge</userinput>
+# <userinput>chmod 755 /etc/gforge</userinput>
 # <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc.example /etc/gforge/local.inc</userinput>
-# <userinput>chmod -R 644 /etc/gforge</userinput>
 # <userinput>chown <replaceable>apache-user</replaceable>:<replaceable>apache-group</replaceable> /etc/gforge/local.inc</userinput>
 # <userinput>chmod 600 /etc/gforge/local.inc</userinput>
 </programlisting>
@@ -206,7 +206,7 @@ $ <userinput>createlang plpgsql gforge</userinput>
 				<para>Finally, install the database:</para>
 <screen>
 $ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
-$ <userinput>psql -a -U gforge -W -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
+$ <userinput>psql -a -U gforge -W -h localhost -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
 </screen>
 				<note>
 					<para>You may experience the following errors.  They are harmless and you can safely ignore them:</para>
@@ -216,6 +216,41 @@ ERROR:  must be superuser to create procedural language
 ERROR:  permission denied for schema public
 </screen>
 				</note>
+				<section>
+					<title>Full Text Indexing</title>
+					<para>If you want to enable full text indexing, follow these steps:</para>
+					<itemizedlist>
+						<listitem>
+							<para>Find <filename>tsearch2.sql</filename> in your distribution of PostgreSQL and run it:</para>
+<screen>
+# <userinput>su - postgres</userinput>
+$ <userinput>psql -f <replaceable>/path/to/</replaceable>tsearch2.sql gforge</userinput>
+</screen>
+							<para>Since <literal>gforge</literal> PostgreSQL user is not superuser, access to some Tsearch2 tables should be additionally granted:</para>
+<screen>
+# <userinput>su - postgres</userinput>
+$ <userinput>psql gforge</userinput>
+gforge=# <userinput>GRANT SELECT ON pg_ts_dict TO gforge;</userinput>
+gforge=# <userinput>GRANT SELECT ON pg_ts_parser TO gforge;</userinput>
+gforge=# <userinput>GRANT SELECT ON pg_ts_cfg TO gforge;</userinput>
+gforge=# <userinput>GRANT SELECT ON pg_ts_cfgmap TO gforge;</userinput>
+</screen>
+						</listitem>
+						<listitem>
+							<para>Import data definitions:</para>
+<screen>
+$ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
+$ <userinput>psql -U gforge -W -h localhost -f FTI.sql gforge</userinput>
+$ <userinput>psql -U gforge -W -h localhost -f FTI-20050315.sql gforge</userinput>
+$ <userinput>psql -U gforge -W -h localhost -f FTI-20050401.sql gforge</userinput>
+$ <userinput>psql -U gforge -W -h localhost -f FTI-20050530.sql gforge</userinput>
+</screen>
+						</listitem>
+						<listitem>
+							<para>Enable Full Text Indexing by setting <varname>$sys_use_fti</varname> in GForge Configuration File <filename>local.inc</filename>.</para>
+						</listitem>
+					</itemizedlist>
+				</section>
 			</section>
 		</section>
 		<section>
@@ -562,7 +597,7 @@ noreply: /dev/null
 					<para>Configure <filename>mm_cfg.py</filename>:</para>
 					<itemizedlist>
 						<listitem>
-							<para><varname>DEFAULT_HOST_NAME</varname> and <varname>DEFAULT_URL</varname> should point to <literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
+							<para><varname>DEFAULT_HOST_NAME</varname> and <varname>DEFAULT_URL</varname> should point to <literal>lists.gforge.<replaceable>company.com</replaceable></literal>. These variable names may vary depending on Mailman distribution.</para>
 						</listitem>
 						<listitem>
 							<para>Don't use ugly <literal>cgi-bin</literal> as part of URLs.</para>
@@ -603,7 +638,7 @@ noreply: /dev/null
 			</orderedlist>
 			<section>
 				<title>Mailing list for commits</title>
-				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal> is created too. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>^.*@<replaceable>servername\.company\.com</replaceable></literal> where <replaceable>servername.company.com</replaceable> is name of the host where Mailman is installed (<literal>lists.gforge.<replaceable>company.com</replaceable></literal>.</para>
+				<para>When repositories are created, mailing list <literal><replaceable>project</replaceable>-commits@lists.gforge.<replaceable>company.com</replaceable></literal> is created too. Note that project administrators should manually set Privacy Options... / Sender filters / accept_these_nonmembers to something like <literal>^.*@<replaceable>servername\.company\.com</replaceable></literal> where <replaceable>servername.company.com</replaceable> is name of the host where Mailman is installed (<literal>lists.gforge.<replaceable>company.com</replaceable></literal>).</para>
 			</section>
 		</section>
 		<section>
@@ -614,6 +649,9 @@ noreply: /dev/null
 # <userinput>mkdir <replaceable>/var/www</replaceable>/scmsnapshots</userinput>
 </screen>
 			<para>These directories correspond to GForge configuration variables <varname>$sys_scm_tarballs_path</varname> and <varname>$sys_scm_snapshots_path</varname>.</para>
+			<note>
+				<para>For FHS-compliance, use <filename class="directory">/var/local/gforge/scmtarballs</filename> and <filename class="directory">/var/local/gforge/scmsnapshots</filename>.</para>
+			</note>
 		</section>
 		<section>
 			<title>Cron Jobs</title>
@@ -628,11 +666,11 @@ noreply: /dev/null
 			</para>
 			<para>Prepare for <filename>cronjobs/cvs-cron/usergroup.php</filename> and <filename>cronjobs/mail/mailaliases.php</filename>.</para>
 			<screen>
-# adduser anonymous
-# cp /etc/aliases /etc/aliases.org
-# cp /etc/shadow /etc/shadow.org
-# cp /etc/passwd /etc/passwd.org
-# cp /etc/group /etc/group.org
+# <userinput>adduser anonymous</userinput>
+# <userinput>cp /etc/aliases /etc/aliases.org</userinput>
+# <userinput>cp /etc/shadow /etc/shadow.org</userinput>
+# <userinput>cp /etc/passwd /etc/passwd.org</userinput>
+# <userinput>cp /etc/group /etc/group.org</userinput>
 </screen>
 			<note>
 				<para>There are two other ways to authenticate GForge users: LDAP and NSS with PostgreSQL backend.  They are not discussed in this guide.</para>
@@ -672,8 +710,8 @@ noreply: /dev/null
 					<para>Verify in Account Maintenance the user id of the user registered.</para>
 					<para>Usually this is 102, but you can verify this by running the following SQL query via the PostgreSQL <command>psql</command> utility:</para>
 <screen>
-$ psql -U gforge gforge
-gforge=> SELECT user_id FROM users WHERE user_name='<replaceable>YOUR USER NAME</replaceable>';
+$ <userinput>psql -U gforge -W -h localhost gforge</userinput>
+gforge=> <userinput>SELECT user_id FROM users WHERE user_name='<replaceable>YOUR USER NAME</replaceable>'</userinput>;
 </screen>
 				</listitem>
 				<listitem>
@@ -885,10 +923,14 @@ cp -R www/* <replaceable>/var/www/gforge</replaceable>/www/plugins/cvstracker/
 				<para>Uncomment <filename>update_loginfo.php</filename> in crontab.</para>
 				<para>Fix CVSTracker table:</para>
 <screen>
-ALTER TABLE public.plugin_cvstracker_data_master DROP cvs_date;
-ALTER TABLE public.plugin_cvstracker_data_master ADD cvs_date INT;
-ALTER TABLE public.plugin_cvstracker_data_master ALTER cvs_date SET NOT NULL;
+$ <userinput>psql -U gforge -W -h localhost gforge</userinput>
+template1=# <userinput>ALTER TABLE public.plugin_cvstracker_data_master DROP cvs_date;</userinput>
+template1=# <userinput>ALTER TABLE public.plugin_cvstracker_data_master ADD cvs_date INT;</userinput>
+template1=# <userinput>ALTER TABLE public.plugin_cvstracker_data_master ALTER cvs_date SET NOT NULL;</userinput>
 </screen>
+				<note>
+					<para>CVS Tracker is not enabled by default for project.  You'll have to manually enable it.</para>
+				</note>
 			</section>
 		</section>
 		<section>
