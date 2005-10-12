@@ -105,6 +105,11 @@ require_once('www/soap/pm/pm.php');
 //
 require_once('www/soap/frs/frs.php');
 
+//
+//	Include SCM Functions
+//
+require_once('www/soap/scm/scm.php');
+
 
 $wsdl_data = $server->wsdl->serialize();
 

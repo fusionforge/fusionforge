@@ -1,3 +1,6 @@
+2005-10-12  Marcelo Mottalli   <marcelo@gforgegroup.com>
+	* Added SCM support to SOAP interface
+
 2005-10-12  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
