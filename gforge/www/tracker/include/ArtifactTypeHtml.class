@@ -46,7 +46,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links  = array();
 
 		$labels[] = $this->getName().': '.$Language->getText('tracker_artifacttype','browse');
-		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() . '&query_id=' . getIntFromRequest('query_id');
+		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID();
 		$labels[] = $Language->getText('tracker_artifacttype','csv');
 		$links[]  = '/tracker/?func=downloadcsv&group_id='.$group_id.'&atid='. $this->getID();
 		if ($this->allowsAnon() || session_loggedin()) {

@@ -18,6 +18,17 @@ if (!$ath->userCanView()) {
 }
 $run = getStringFromRequest('run');
 $query_id = getIntFromRequest('query_id');
+/*if (!$query_id) {
+	//if there´s no query_id then we´ll fetch the user data to see if he has some saved preference
+	if (!session_loggedin()) {
+			$query_id = ""; // the user isn´t logged in, no preference set for him
+	} else {
+		$usr =& session_get_user();
+		$query_id = $usr->getPreference("art_query".$ath->getID());
+	}
+}*/
+
+
 if($run && $query_id) {
 	$aq = new ArtifactQuery($ath,$query_id);
 	if (!$aq || !is_object($aq)) {
@@ -166,7 +177,7 @@ echo '
 	<tr>';
 	if (db_numrows($res)>0) {
 	echo '
-		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$query_id,false).'</span></td>'.
+		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$af->getdefaultquery(),false).'</span></td>'.
 		'<td align="left"><span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input></span></td>';
 	} else {
 		echo '<td colspan="2">&nbsp;</td>';
@@ -262,14 +273,14 @@ if ($art_arr && count($art_arr) > 0) {
 			<tr><td colspan="2">';
 		if ($offset > 0) {
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset-50).'&query_id=' . getIntFromRequest('query_id').'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
+			$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
 		} else {
 			echo '&nbsp;';
 		}
 		echo '</td><td>&nbsp;</td><td colspan="2">';
 		if ($rows >= 50) {
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset+50).'&query_id=' . getIntFromRequest('query_id'). '"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
+			$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
 		} else {
 			echo '&nbsp;';
 		}

@@ -54,6 +54,7 @@ class ArtifactFactory extends Error {
 	var $max_rows;
 	var $fetched_rows;
 	var $extra_fields;
+	var $defaultquery;
 
 	/**
 	 *  Constructor.
@@ -109,6 +110,7 @@ class ArtifactFactory extends Error {
 			*/
 			if (session_loggedin()) {
 				$default_query=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				$this->defaultquery = $default_query;
 				if ($default_query) {
 					$aq = new ArtifactQuery($this->ArtifactType,$default_query);
 					$_extra_fields=$aq->getExtraFields();
@@ -197,7 +199,15 @@ class ArtifactFactory extends Error {
 		$this->last_changed = time() - $this->changed_from;
 	}
 
-
+	/**
+	 *	getdefaultquery - get the default query
+	 *
+	 *	@return	int	
+	 */
+	function getdefaultquery() {
+		return $this->defaultquery;
+	}
+	
 	/**
 	 *	getArtifacts - get an array of Artifact objects.
 	 *
