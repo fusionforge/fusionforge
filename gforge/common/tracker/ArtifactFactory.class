@@ -200,11 +200,11 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	getdefaultquery - get the default query
+	 *	getDefaultQuery - get the default query
 	 *
 	 *	@return	int	
 	 */
-	function getdefaultquery() {
+	function getDefaultQuery() {
 		return $this->defaultquery;
 	}
 	

@@ -177,7 +177,7 @@ echo '
 	<tr>';
 	if (db_numrows($res)>0) {
 	echo '
-		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$af->getdefaultquery(),false).'</span></td>'.
+		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'</span></td>'.
 		'<td align="left"><span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input></span></td>';
 	} else {
 		echo '<td colspan="2">&nbsp;</td>';
