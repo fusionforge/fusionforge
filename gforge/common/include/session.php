@@ -469,14 +469,21 @@ function session_set() {
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to 
 //setup languages
 function session_continue($sessionKey) {
-    global $session_ser, $Language, $sys_strftimefmt, $sys_datefmt;
-    $session_ser = $sessionKey;
-    session_set();
-    $Language=new BaseLanguage();
-    $Language->loadLanguage("English"); // TODO use the user's default language
-    setlocale (LC_TIME, $Language->getText('system','locale'));
-    $sys_strftimefmt = $Language->getText('system','strftimefmt');
-    $sys_datefmt = $Language->getText('system','datefmt');
+	global $session_ser, $Language, $sys_strftimefmt, $sys_datefmt;
+	$session_ser = $sessionKey;
+	session_set();
+ 	$Language=new BaseLanguage();
+	$Language->loadLanguage("English"); // TODO use the user's default language
+	setlocale (LC_TIME, $Language->getText('system','locale'));
+	$sys_strftimefmt = $Language->getText('system','strftimefmt');
+	$sys_datefmt = $Language->getText('system','datefmt');
+	$LUSER =& session_get_user();
+	if (!is_object($LUSER) || $LUSER->isError()) {
+		return false;
+	} else {
+		putenv('TZ='. $LUSER->getTimeZone());
+		return true;
+	}
 }
 
 /**
