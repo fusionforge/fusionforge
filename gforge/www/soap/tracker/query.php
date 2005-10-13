@@ -70,7 +70,7 @@ $server->wsdl->addComplexType(
 		'sortcol' => array('name' => 'sortcol', 'type' => 'xsd:string'),
 		'sortord' => array('name' => 'sortord', 'type' => 'xsd:string'),
 		'changed' => array('name' => 'changed', 'type' => 'xsd:int'),
-		'assignee' => array('name' => 'assignee', 'type' => 'xsd:string'),
+		'assignee' => array('name' => 'assignee', 'type' => 'tns:ArrayOfInteger'),
 		'status' => array('name' => 'status', 'type' => 'xsd:int'),
 		'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactQueryExtraField')
 	)
@@ -154,6 +154,17 @@ function queries_to_soap($queries) {
 								"values"			=> $values
 								);
 		}
+		
+		$assignee = $artifactQuery->getAssignee();
+		// this is a hack, ArtifactQuery::getAssignee sometimes returns an int and
+		// sometimes it returns an array
+		if (!is_array($assignee)) {
+			if (is_numeric($assignee)) {	// a single ID
+				$assignee = array($assignee);	// wrap in an array
+			} else {
+				$assignee = array();
+			}
+		}
 	
 		$result[] = array(
 					"artifact_query_id"	=> $artifactQuery->getID(),
@@ -162,7 +173,7 @@ function queries_to_soap($queries) {
 									"sortcol"	=> $artifactQuery->getSortCol(),
 									"sortord"	=> $artifactQuery->getSortOrd(),
 									"changed"	=> $artifactQuery->getChanged(),
-									"assignee"	=> $artifactQuery->getAssignee(),
+									"assignee"	=> $assignee,
 									"status"	=> $artifactQuery->getStatus(),
 									"extra_fields"	=> $extra_fields
 									),
