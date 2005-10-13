@@ -78,6 +78,28 @@ function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
 	chdir($actual_dir);
 }
 
+/**
+ * releaseCVSFile - Remove the file that was checked out from cvs
+ * @see getCvsFile
+ */
+function releaseCVSFile($file) {
+	// $file is something like /tmp/(tmp_dir)/path/to/file
+	// we must delete /tmp/tmp_dir
+	if (!preg_match("/^(\\/tmp\\/[^\\/]*)\\/.*/", $file, $result)) {		// Make sure the dir is under /tmp
+		echo "Trying to release a directory not in /tmp. Skipping...";
+		return;
+	}
+	$dir = $result[1];
+	
+	// this shouldn't happen... but add it as a security checke
+	if (util_is_root_dir($dir)) {
+		echo "Trying to delete root dir. Skipping...";
+		return;
+	}
+	$dir = escapeshellarg($dir);
+	system("rm -rf ".$dir);
+}
+
 //the directory exists
 if(is_dir($maincvsroot)) {
 	addProjectRepositories();
@@ -123,6 +145,11 @@ function addsyncmail($unix_group_name) {
 	global $sys_lists_host;
 	global $maincvsroot;
 	$loginfo_file=getCvsFile($maincvsroot."/".$unix_group_name,'CVSROOT/loginfo');
+	if (!$loginfo_file) {
+		echo "Couldn't get loginfo";
+		return;
+	}
+
 	$pathsyncmail = "ALL ".
 		dirname(__FILE__)."/syncmail -u %p %{sVv} ".
 		$unix_group_name."-commits@".$sys_lists_host."\n";
@@ -139,7 +166,7 @@ function addsyncmail($unix_group_name) {
 	} else {
 		echo "Syncmail Found!\n";
 	}
-
+	releaseCvsFile($loginfo_file);
 }
 
 function addProjectRepositories() {
@@ -190,11 +217,13 @@ function addProjectRepositories() {
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
+			$enableAnonSCM = ($project->enableAnonSCM()) ? 1 : 0;
+			$enablePserver = ($project->enablePserver()) ? 1 : 0;
 			system(dirname(__FILE__).'/cvscreate.sh '.
 				$project->getUnixName().
 				' '.($project->getID()+50000).
-				' '.$project->enableAnonSCM().
-				' '.$project->enablePserver());
+				' '.$enableAnonSCM.
+				' '.$enablePserver);
 			addsyncmail($project->getUnixName());
 			$hookParams['group_id']=$project->getID();
 			$hookParams['file_name']=$repositoryPath;
