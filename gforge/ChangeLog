@@ -1,3 +1,8 @@
+2005-10-13  Marcelo Mottalli   <marcelo@gforgegroup.com>
+	* Added extra fields' attribute1 and attribute2 to SOAP	interface
+	* Added "default_selected_id" to SOAP interface (not implemented yet,
+	it currently returns 0)
+
 2005-10-12  Marcelo Mottalli   <marcelo@gforgegroup.com>
 	* Added SCM support to SOAP interface
 

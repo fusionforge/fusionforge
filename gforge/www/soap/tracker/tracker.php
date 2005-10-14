@@ -71,9 +71,12 @@ $server->wsdl->addComplexType(
 		'extra_field_id' => array('name' => 'extra_field_id', 'type' => 'xsd:int'),
 		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
 		'field_type' => array('name' => 'field_type', 'type' => 'xsd:int'),
+		'attribute1' => array('name' => 'attribute1', 'type' => 'xsd:int'),
+		'attribute2' => array('name' => 'attribute2', 'type' => 'xsd:int'),
 		'is_required' => array('name' => 'is_required', 'type' => 'xsd:int'),
 		'alias' => array('name' => 'alias', 'type' => 'xsd:string'),
-		'available_values' => array('name' => 'available_values', 'type' => 'tns:ArrayOfArtifactExtraFieldAvailableValues')
+		'available_values' => array('name' => 'available_values', 'type' => 'tns:ArrayOfArtifactExtraFieldAvailableValues'),
+		'default_selected_id' => array('name' => 'default_selected', 'type' => 'xsd:int')
 	)
 );
 
@@ -538,9 +541,12 @@ function artifacttype_to_soap($at_arr) {
 					"extra_field_id"=> $aefobj->getID(),
 					"field_name"	=> $aefobj->getName(),
 					"field_type"	=> $aefobj->getType(),
+					"attribute1"	=> $aefobj->getAttribute1(),
+					"attribute2"	=> $aefobj->getAttribute2(),
 					"is_required"	=> $aefobj->isRequired(),
 					"alias"			=> $aefobj->getAlias(),
-					"available_values"	=> $avs
+					"available_values"	=> $avs,
+					"default_selected_id" => 0		//TODO (not implemented yet)
 				);
 			}
 
