@@ -461,6 +461,12 @@ class ForumHTML extends Error {
 		$g =& $this->Forum->getGroup();
 		$group_id = $g->getID();
 		
+		if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
+			$http = "https://";
+		} else {
+			$http = "http://";
+		}
+		
 		if ($this->Forum->userCanPost()) { // minor control, but anyways it should be an admin at this point
 			echo notepad_func();
 			$text_support = new TextSupport(); //for BBCODE
@@ -491,7 +497,7 @@ class ForumHTML extends Error {
 				<?php
 				//plugin_hook("text_editor");
 				$oFCKeditor = new FCKeditor('body') ;
-				$oFCKeditor->BasePath = 'http://' . $sys_default_domain  . '/include/fckeditor/';
+				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/include/fckeditor/';
 				$oFCKeditor->Value = $body;
 				$oFCKeditor->Width = "800";
 				$oFCKeditor->Height = "500";
@@ -522,6 +528,12 @@ class ForumHTML extends Error {
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		global $Language,$sys_default_domain;
 
+			if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
+				$http = "https://";
+			} else {
+				$http = "http://";
+			}
+		
 		if ($this->Forum->userCanPost()) {
 			if ($subject) {
 				//if this is a followup, put a RE: before it if needed
@@ -553,7 +565,7 @@ class ForumHTML extends Error {
 			<?php 
 				//plugin_hook("text_editor");
 				$oFCKeditor = new FCKeditor('body') ;
-				$oFCKeditor->BasePath = 'http://' . $sys_default_domain  . '/include/fckeditor/';
+				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/include/fckeditor/';
 				$oFCKeditor->Value = '';
 				$oFCKeditor->Width = "800";
 				$oFCKeditor->Height = "500";
