@@ -113,6 +113,16 @@ function cron_remove_lock($name) {
 	return false;
 }
 
-
+//
+//  Set up this script to run as the site admin
+//
+function runCronAsSiteAdmin() {
+	$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+	if (!$res || db_numrows($res) == 0) {
+		return false;
+	}
+	$id=db_result($res,0,0);
+	session_set_new($id);
+}
 
 ?>
