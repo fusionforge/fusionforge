@@ -433,7 +433,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$val.'-'. substr(db_result($result,$i,1),0,35). '</option>';
+			$return .= '>'. substr(db_result($result,$i,1),0,35). '</option>';
 		}
 	}
 	$return .= '
@@ -487,7 +487,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$ids[$i].'-'.$texts[$i].' </option>';
+			$return .= '>'.$texts[$i].' </option>';
 		}
 	}
 	$return .= '
