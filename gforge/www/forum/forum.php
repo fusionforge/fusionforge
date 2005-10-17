@@ -26,6 +26,7 @@ require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 require_once('www/forum/include/AttachManager.class'); //attachent manager
 require_once('www/include/TextSupport.class'); // bbcode, smilies support
+require_once('common/forum/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');
@@ -77,7 +78,7 @@ if ($forum_id) {
 		$bbcode_on=$sys_bbcode_bbcode_on; 
 		$strip_html=$sys_bbcode_strip_html;
 		$text_support = new TextSupport();
-		$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
+		//$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
 
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
@@ -88,6 +89,8 @@ if ($forum_id) {
 			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 
+		$sanitizer = new TextSanitizer();
+		$body = $sanitizer->SanitizeHtml($body);
 		
 		if (!$fm->create($subject, $body,$bbcode_uid, $thread_id, $is_followup_to) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));

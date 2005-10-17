@@ -27,6 +27,7 @@ require_once('www/forum/admin/ForumAdmin.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
+require_once('common/forum/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
@@ -272,6 +273,8 @@ if ($group_id) {
 					}
 					$subject = getStringFromRequest('subject');
 					$body = getStringFromRequest('body');
+					$sanitizer = new TextSanitizer();
+					$body = $sanitizer->SanitizeHtml($body);
 					$is_followup_to = getStringFromRequest('is_followup_to');
 					$form_key = getStringFromRequest('form_key');
 					$posted_by = getStringFromRequest('posted_by');
@@ -284,7 +287,7 @@ if ($group_id) {
 					$bbcode_on=$sys_bbcode_bbcode_on; 
 					$strip_html=$sys_bbcode_strip_html;
 					$text_support = new TextSupport();
-					$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
+					//$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
 					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid)) {
 						$feedback .= $Language->getText('forum_admin_edit_message','message_edited');
 					} else {
