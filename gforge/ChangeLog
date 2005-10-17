@@ -4,6 +4,9 @@
 		http://gforge.org/tracker/?func=detail&aid=1575&group_id=6&atid=222
 	* Fixed bug -> www/tracker/mod.php
 		http://gforge.org/tracker/?func=detail&aid=1549&group_id=6&atid=222
+	* Fixed bug -> html_build_select_box_from_arrays
+		http://gforge.org/tracker/?func=detail&aid=1548&group_id=6&atid=222
+		htmlspecialchars() call removed
 2005-10-11 Daniel Perez <daniel@gforgegroup.com>
 http://gforge.org/tracker/?func=detail&aid=1571&group_id=1&atid=105
 	(**Survey**)
