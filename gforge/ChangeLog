@@ -7,6 +7,10 @@
 	* Fixed bug -> html_build_select_box_from_arrays
 		http://gforge.org/tracker/?func=detail&aid=1548&group_id=6&atid=222
 		htmlspecialchars() call removed
+	* Fixed bug -> cronjobs/
+		cronjobs/daily_task_email.php
+		http://gforge.org/tracker/?func=detail&aid=1553&group_id=6&atid=222
+		Applied reverse function to htmlentities() so that in the email the chars aren´t displayed as html
 2005-10-13  Marcelo Mottalli   <marcelo@gforgegroup.com>
 	* Added extra fields' attribute1 and attribute2 to SOAP	interface
 	* Added "default_selected_id" to SOAP interface (not implemented yet,
