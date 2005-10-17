@@ -356,7 +356,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 				$checked_found=true;
 				$return .= ' selected="selected"';
 			}
-			$return .= '>'.htmlspecialchars($texts[$i]).'</option>';
+			$return .= '>'./*htmlspecialchars(*/$texts[$i]/*)*/.'</option>';
 		}
 	}
 	//
