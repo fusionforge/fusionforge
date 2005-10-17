@@ -70,6 +70,55 @@ $server->register(
 
 );
 
+$server->wsdl->addComplexType(
+	'TaskDependency',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'task_id' => array('name'=>'task_id', 'type' => 'xsd:int'),
+	'link_type' => array('name'=>'link_type', 'type' => 'xsd:string')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfTaskDependency',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:TaskDependency[]')),
+	'tns:TaskDependency'
+);
+
+
+$server->wsdl->addComplexType(
+	'TaskAssignee',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'user_id' => array('name'=>'user_id', 'type' => 'xsd:int'),
+	'percent_effort' => array('name'=>'link_type', 'type' => 'xsd:int')
+	)
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfTaskAssignee',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:TaskAssignee[]')),
+	'tns:TaskAssignee'
+);
+
+
+
 //
 //	ProjectTasks
 //
@@ -91,8 +140,11 @@ $server->wsdl->addComplexType(
 	'end_date' => array('name'=>'end_date', 'type' => 'xsd:int'),
 	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
 	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
-	'dependent_on' => array('name'=>'dependent_on', 'type' => 'tns:ArrayOfint'),
-	'assigned_to' => array('name'=>'assigned_to', 'type' => 'tns:ArrayOfint')
+	'dependent_on' => array('name'=>'dependent_on', 'type' => 'tns:ArrayOfTaskDependency'),
+	'assigned_to' => array('name'=>'assigned_to', 'type' => 'tns:ArrayOfTaskAssignee'),
+	'duration' => array('name'=>'duration', 'type' => 'xsd:int'),
+	'parent_id' => array('name'=>'parent_id', 'type' => 'xsd:int'),
+	'sort_id' => array('name'=>'sort_id', 'type' => 'xsd:int'),
 	)
 );
 
@@ -138,7 +190,10 @@ $server->register(
 		'category_id'=>'xsd:int',
 		'percent_complete'=>'xsd:int',
 		'assigned_to'=>'tns:ArrayOfint',
-		'dependent_on'=>'tns:ArrayOfint'),
+		'dependent_on'=>'tns:ArrayOfint',
+		'duration'=>'xsd:int',
+		'parent_id'=>'xsd:int'
+		),
 		array('addProjectTaskResponse'=>'xsd:int'),
 		$uri,$uri.'#addProjectTask','rpc','encoded'
 );
@@ -162,8 +217,11 @@ $server->register(
 		'percent_complete'=>'xsd:int',
 		'assigned_to'=>'tns:ArrayOfint',
 		'dependent_on'=>'tns:ArrayOfint',
-		'new_group_project_id'=>'int'),
-		array('addProjectTaskResponse'=>'xsd:int'),
+		'new_group_project_id'=>'int',
+		'duration'=>'xsd:int',
+		'parent_id'=>'xsd:int'
+		),
+		array('updateProjectTaskResponse'=>'xsd:int'),
 		$uri,$uri.'#updateProjectTask','rpc','encoded'
 );
 
@@ -320,7 +378,7 @@ function projectgroups_to_soap($pg_arr) {
 //	addProjectTask
 //
 function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$details,$priority,
-	$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_arr,$depend_arr) {
+	$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_arr,$depend_arr,$duration,$parent_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -350,7 +408,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 	}
 	
 	if (!$a->create($summary,$details,$priority,$hours,$start_date,$end_date,
-            $category_id,$percent_complete,$assigned_arr,$depend_map)) {
+            $category_id,$percent_complete,$assigned_arr,$depend_map,$duration,$parent_id)) {
 		return new soap_fault ('','addProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
@@ -362,7 +420,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 //
 function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_task_id,
 	$summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
-    $percent_complete,$assigned_arr,$depend_arr,$new_group_project_id) {
+    $percent_complete,$assigned_arr,$depend_arr,$new_group_project_id,$duration,$parent_id) {
     continue_session($session_ser);
     $grp =& group_get_object($group_id);
     if (!$grp || !is_object($grp)) {
@@ -392,7 +450,7 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
 	}
 	
     if (!$a->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
-		$percent_complete,$assigned_arr,$depend_map,$new_group_project_id)) {
+		$percent_complete,$assigned_arr,$depend_map,$new_group_project_id,$duration,$parent_id)) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
     } else {
         return $a->getID();
@@ -505,9 +563,22 @@ function projecttasks_to_soap($pt_arr) {
 			$dependent_on = array();
 			$dependent_on_tmp = $pt_arr[$i]->getDependentOn();
 			foreach ($dependent_on_tmp as $dependent_on_id => $link_type) {
-				$dependent_on[] = $dependent_on_id;
+				$dependent_on[] = array("task_id" => $dependent_on_id,
+										"link_type" => $link_type);
 			}
-
+			
+			//build the assigned_to array
+			$assigned_to = array();
+			$assigned_ids = $pt_arr[$i]->getAssignedTo();
+			foreach ($assigned_ids as $assigned_id) {
+				$assigned_to[] = array("user_id" => $assigned_id, 
+										"percent_effort" => 0		// TODO: This should be implemented
+									);
+			}
+			
+			$sort_id = $pt_arr[$i]->getExternalID();
+			if (!$sort_id) $sort_id=0;
+			
 			$return[]=array(
 				'project_task_id'=>$pt_arr[$i]->data_array['project_task_id'],
 				'group_project_id'=>$pt_arr[$i]->data_array['group_project_id'],
@@ -521,7 +592,10 @@ function projecttasks_to_soap($pt_arr) {
 				'status_id'=>$pt_arr[$i]->data_array['status_id'],
 				'category_id'=>$pt_arr[$i]->data_array['category_id'],
 				'dependent_on'=>$dependent_on,
-				'assigned_to'=>$pt_arr[$i]->getAssignedTo()
+				'assigned_to'=>$assigned_to,
+				'duration'=>$pt_arr[$i]->getDuration(),
+				'parent_id'=>$pt_arr[$i]->getParentID(),
+				'sort_id'=>$sort_id
 			);
 		}
 	}
