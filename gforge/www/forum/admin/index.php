@@ -27,7 +27,7 @@ require_once('www/forum/admin/ForumAdmin.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
-require_once('common/forum/TextSanitizer.class'); // to make the HTML input by the user safe to store
+require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
