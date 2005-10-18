@@ -359,7 +359,7 @@ foreach($groups as $group) {
 		fclose($fw);
 		
 	}
-	$resgroupadmin=db_query("SELECT u.user_name FROM users u,user_group ug,groups g
+	/*$resgroupadmin=db_query("SELECT u.user_name FROM users u,user_group ug,groups g
 		WHERE u.user_id=ug.user_id 
 		AND ug.group_id=g.group_id 
 		AND g.unix_group_name='$group'
@@ -370,7 +370,8 @@ foreach($groups as $group) {
 	} else {
 		$user=db_result($resgroupadmin,0,'user_name');
 		system("chown -R $user:$group $groupdir_prefix/$group");
-	}
+	}*/
+	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
 }
 
 //
