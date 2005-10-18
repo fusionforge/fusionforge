@@ -1,3 +1,9 @@
+2005-10-18 Daniel Perez <daniel@gforgegroup.com>
+	* TextSanitizer : added new function to make HTML output more readable and tidy (avoid empty attributes)
+					added textarea,radio,checkbox,text support (form input types)
+					added headings for text formatting (h1->h6)
+					added <address> tag
+	* www/include/html.php : added html_build_rich_textarea function
 2005-10-17	Marcelo Mottalli	<marcelo@gforgegroup.com>
 	* Added the following to WSDL interface:
 		* task dependency type
@@ -17,7 +23,9 @@
 		cronjobs/daily_task_email.php
 		http://gforge.org/tracker/?func=detail&aid=1553&group_id=6&atid=222
 		Applied reverse function to htmlentities() so that in the email the chars aren´t displayed as html
-
+	* FCKEDITOR added
+	* TextSanitizer : first revision
+	* Fckeditor merged into the forums : first revision
 2005-10-13  Marcelo Mottalli   <marcelo@gforgegroup.com>
 	* Added extra fields' attribute1 and attribute2 to SOAP	interface
 	* Added "default_selected_id" to SOAP interface (not implemented yet,
