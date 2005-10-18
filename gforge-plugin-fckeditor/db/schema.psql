@@ -1,0 +1,2 @@
+
+INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('fckeditor','Fckeditor Plugin');
