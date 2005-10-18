@@ -3,7 +3,11 @@
 					added textarea,radio,checkbox,text support (form input types)
 					added headings for text formatting (h1->h6)
 					added <address> tag
+					double quotes replaced (now allowed)
 	* www/include/html.php : added html_build_rich_textarea function
+	* Fckeditor made plugin. Merged plugin into forums. Defaults to old <textarea> (but anyway it´s sanitized for html tags)
+	* Fixed bug -> scmcvs/cronjobs/usergroup.php
+		http://gforge.org/tracker/?func=detail&aid=1429&group_id=6&atid=222
 2005-10-17	Marcelo Mottalli	<marcelo@gforgegroup.com>
 	* Added the following to WSDL interface:
 		* task dependency type
