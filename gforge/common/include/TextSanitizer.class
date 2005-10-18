@@ -32,6 +32,21 @@ require_once('pre.php');
 Class TextSanitizer extends Error {
 	
 		/**
+	 *  ProcessAttributeForTag - Helper function. Gets the attribute and if it isn´t " " it does attname=\"attvalue\"
+	 *
+	 *	@param   string		The attribute name
+	 *	@param   string		The attribute value
+	 *	@return  string		The attribute to be input in the tag, or blank
+	 */	
+	function ProcessAttributeForTag($name,$value) {
+		if ($value==" ") {
+			return " ";
+		} else {
+			return $name . '=\"' . $value . '\"';
+		}
+	}
+	
+		/**
 	 *  FindAttribute - Helper function. Finds the attribute in the string and returns it if it doesn´t have any of the notallowed array
 	 *
 	 *	@param   string		The attribute to find
@@ -40,7 +55,7 @@ Class TextSanitizer extends Error {
 	 *	@return  string		The attribute or "" if it wasn´t found or wasn´t allowed
 	 */
 	function FindAttribute($name,$string,$notallowed) {
-		$attr = "";
+		$attr = " ";
 		preg_match('/' . $name . '=\\\\&quot;([^;]*)\\\\&quot;/',$string,$found);
 		if ($found[1]) {
 			if (!in_array($found[1],$notallowed)) {
@@ -60,7 +75,7 @@ Class TextSanitizer extends Error {
 	 *	@return  string		The attribute or "" if it wasn´t found or wasn´t allowed
 	 */
 	function FindExactAttribute($name,$string,$notallowed,$allowedonly) {
-		$attr = "";
+		$attr = " ";
 		preg_match('/' . $name . '=\\\\&quot;([^;]*)\\\\&quot;/',$string,$found);
 		if ($found[1]) {
 			if ( (!in_array($found[1],$notallowed)) && (in_array($found[1],$allowedonly)) ) {
@@ -108,6 +123,34 @@ Class TextSanitizer extends Error {
 	//search for <sup>something</sup> . 
 		$sup = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)/';
 		$input = preg_replace($sup,"$1<sup>$3</sup>$5",$input);
+		
+	//search for <h1>something</h1> . 
+		$h1 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]1[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]1[^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h1,"$1<h1>$3</h1>$5",$input);
+		
+	//search for <h2>something</h2> . 
+		$h2 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H][1][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H][1][^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h2,"$1<h2>$3</h2>$5",$input);
+
+	//search for <h3>something</h3> . 
+		$h3 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]3[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]3[^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h3,"$1<h3>$3</h3>$5",$input);
+
+	//search for <h4>something</h4> . 
+		$h4 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]4[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]4[^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h4,"$1<h4>$3</h4>$5",$input);
+
+	//search for <h5>something</h5> . 
+		$h5 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]5[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]5[^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h5,"$1<h5>$3</h5>$5",$input);
+
+	//search for <h6>something</h6> . 
+		$h6 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]6[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]6[^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($h6,"$1<h6>$3</h6>$5",$input);
+		
+	//search for <address>something</address> . 
+		$address = '/(.*)(&lt;[^&lt;|^&gt;]*[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)/';
+		$input = preg_replace($address,"$1<address>$3</address>$5",$input);
 		
 	//search for <td>something</td> . 
 		$td = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)/';
@@ -239,9 +282,23 @@ Class TextSanitizer extends Error {
 			
 			//finally, replace
 			//we have some trouble with images in IE if we pass null to width and height params
-			$img_with?$width="width=\"$img_width\"":$width=" ";
-			$img_height?$height="height=\"$img_height\"":$height=" ";
-			$input = str_replace($match[2] . $match[3] . $match[4],"<img $width vspace=\"$img_vspace\" lang=\"$img_lang\" hspace=\"$img_hspace\" $height border=\"$img_border\" align=\"$img_align\" src=\"$img_src\" alt=\"$img_alt\" id=\"$img_id\" title=\"$img_title\" class=\"$img_class\" longdesc=\"$img_longdesc\" style=\"$img_style\" />",$input);
+			$img_width = $this->ProcessAttributeForTag("width",$img_width);
+			$img_height = $this->ProcessAttributeForTag("height",$img_height);
+			// the rest. to avoid empty attributes
+			$img_vspace = $this->ProcessAttributeForTag("vspace",$img_vspace);
+			$img_hspace = $this->ProcessAttributeForTag("hspace",$img_hspace);
+			$img_lang = $this->ProcessAttributeForTag("lang",$img_lang);
+			$img_border = $this->ProcessAttributeForTag("border",$img_border);
+			$img_align = $this->ProcessAttributeForTag("align",$img_align);
+			$img_src = $this->ProcessAttributeForTag("src",$img_src);
+			$img_id = $this->ProcessAttributeForTag("id",$img_id);
+			$img_title = $this->ProcessAttributeForTag("title",$img_title);
+			$img_class = $this->ProcessAttributeForTag("class",$img_class);
+			$img_longdesc = $this->ProcessAttributeForTag("longdesc",$img_longdesc);
+			$img_style = $this->ProcessAttributeForTag("style",$img_style);
+			$img_alt = $this->ProcessAttributeForTag("alt",$img_alt);
+			
+			$input = str_replace($match[2] . $match[3] . $match[4],"<img $img_width $img_vspace $img_lang $img_hspace $img_height $img_border $img_align $img_src $img_alt $img_id $img_title $img_class $img_longdesc $img_style />",$input);
 		}
 		
 		
@@ -294,16 +351,28 @@ Class TextSanitizer extends Error {
 				//search for style attribute
 				$a_style = $this->FindAttribute("style",$thisone,$notallowed);
 				
+				// to avoid empty attributes
+				$a_language = $this->ProcessAttributeForTag("language",$a_language);
+				$a_href = $this->ProcessAttributeForTag("href",$a_href);
+				$a_target = $this->ProcessAttributeForTag("target",$a_target);
+				$a_id = $this->ProcessAttributeForTag("id",$a_id);
+				$a_name = $this->ProcessAttributeForTag("name",$a_name);
+				$a_accesskey = $this->ProcessAttributeForTag("accesskey",$a_accesskey);
+				$a_title = $this->ProcessAttributeForTag("title",$a_title);
+				$a_class = $this->ProcessAttributeForTag("class",$a_class);
+				$a_type = $this->ProcessAttributeForTag("type",$a_type);
+				$a_charset = $this->ProcessAttributeForTag("charset",$a_charset);
+				$a_style = $this->ProcessAttributeForTag("style",$a_style);
+				
 				//finally, replace
-				$input = str_replace($match[2] . $match[4] . $match[5],"<a lang=\"$a_language\" href=\"$a_href\" target=\"$a_target\" id=\"$a_id\" name=\"$a_name\" accesskey=\"$a_accesskey\" title=\"$a_title\" class=\"$a_class\" type=\"$a_type\" charset=\"$a_charset\" style=\"$a_style\">" .$match[4] . "</a>",$input);
+				$input = str_replace($match[2] . $match[4] . $match[5],"<a $a_language $a_href $a_target $a_id $a_name $a_accesskey $a_title $a_class $a_type $a_charset $a_style>" .$match[4] . "</a>",$input);
 				
 			}
 			unset($matchs);
 			preg_match_all($a,$input,$matchs,PREG_SET_ORDER);
 		}
 		
-		//search for <font PERMITTED>something</font>
-		
+	//search for <font PERMITTED>something</font>
 		$font = '/(.*)(&lt;[^&lt;|^&gt;]*[f|F][o|O][n|N][t|T]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[f|F][o|O][n|N][t|T][^&lt;|^&gt;]*&gt;)(.*)/';
 		preg_match_all($font,$input,$matchs,PREG_SET_ORDER);
 		foreach ($matchs as $match) {
@@ -323,12 +392,16 @@ Class TextSanitizer extends Error {
 			//search for color attribute
 			$font_color = $this->FindAttribute("color",$thisone,$notallowed);
 			
+			// to avoid empty attributes
+			$font_size = $this->ProcessAttributeForTag("size",$font_size);
+			$font_face = $this->ProcessAttributeForTag("face",$font_face);
+			$font_color = $this->ProcessAttributeForTag("color",$font_color);
+			
 			//finally, replace
-			$input = str_replace($match[2] . $match[4] . $match[5],"<font size=\"$font_size\" face=\"$font_face\" color=\"$font_color\">" .$match[4] . "</font>",$input);
+			$input = str_replace($match[2] . $match[4] . $match[5],"<font $font_size $font_face $font_color>" .$match[4] . "</font>",$input);
 		}
 
-		//search for <table PERMITTED>something</table>
-		
+	//search for <table PERMITTED>something</table>	
 		$table = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][a|A][b|B][l|L][e|E]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][a|A][b|B][l|L][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms';
 		preg_match_all($table,$input,$matchs,PREG_SET_ORDER);
 		while ($matchs) {
@@ -355,8 +428,15 @@ Class TextSanitizer extends Error {
 				//search for align attribute
 				$table_align = $this->FindAttribute("align",$thisone,$notallowed);
 				
+				// to avoid empty attributes
+				$table_width = $this->ProcessAttributeForTag("width",$table_width);
+				$table_cellspacing = $this->ProcessAttributeForTag("cellspacing",$table_cellspacing);
+				$table_cellpadding = $this->ProcessAttributeForTag("cellpadding",$table_cellpadding);
+				$table_border = $this->ProcessAttributeForTag("border",$table_border);
+				$table_align = $this->ProcessAttributeForTag("align",$table_align);
+				
 				//finally, replace
-				$input = str_replace($match[2] . $match[4] . $match[5],"<table width=\"$table_width\" cellspacing=\"$table_cellspacing\" cellpadding=\"$table_cellpadding\" border=\"$table_border\" align=\"$table_align\">" .$match[4] . "</table>",$input);
+				$input = str_replace($match[2] . $match[4] . $match[5],"<table $table_width $table_cellspacing $table_cellpadding $table_border $table_align>" .$match[4] . "</table>",$input);
 			}
 			unset($matchs);
 			preg_match_all($table,$input,$matchs,PREG_SET_ORDER);
@@ -378,10 +458,82 @@ Class TextSanitizer extends Error {
 			//search for src attribute
 			$hr_size = $this->FindAttribute("size",$thisone,$notallowed);
 			
+			// to avoid empty attributes
+			$hr_width = $this->ProcessAttributeForTag("width",$hr_width);
+			$hr_size = $this->ProcessAttributeForTag("size",$hr_size);
+			
 			//finally, replace
-			$input = str_replace($match[2] . $match[3] . $match[4],"<hr width=\"$hr_width\" size=\"$hr_size\" />",$input);
+			$input = str_replace($match[2] . $match[3] . $match[4],"<hr $hr_width $hr_size />",$input);
 		}
-		
+
+	//search for <textarea PERMITTED>something</textarea>
+		$textarea = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][e|E][x|X][t|T][a|A][r|R][e|E][a|A]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][e|E][x|X][t|T][a|A][r|R][e|E][a|A][^&lt;|^&gt;]*&gt;)(.*)/';
+		preg_match_all($textarea,$input,$matchs,PREG_SET_ORDER);
+		foreach ($matchs as $match) {
+			//search for every match to see if the attributes of the tag is NOT what we expect
+			$thisone = $match[3]; //we store the attributes of the tag
+			
+			//don´t allow "<", ">" or "();"  inside attributes
+			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
+ 			
+			//search for rows attribute
+			$textarea_rows = $this->FindAttribute("rows",$thisone,$notallowed);
+			
+			//search for cols attribute
+			$textarea_cols = $this->FindAttribute("cols",$thisone,$notallowed);
+			
+			//search for name attribute
+			$textarea_name = $this->FindAttribute("name",$thisone,$notallowed);
+			
+			// to avoid empty attributes
+			$textarea_rows = $this->ProcessAttributeForTag("rows",$textarea_rows);
+			$textarea_cols = $this->ProcessAttributeForTag("cols",$textarea_cols);
+			$textarea_name = $this->ProcessAttributeForTag("name",$textarea_name);
+			
+			//finally, replace
+			$input = str_replace($match[2] . $match[4] . $match[5],"<textarea $textarea_rows $textarea_cols $textarea_name >" .$match[4] . "</textarea>",$input);
+		}
+	
+	//search for <input PERMITTED/> 
+		$input_form = '/(.*)(&lt;[^&lt;|^&gt;]*[i|I][n|N][p|P][u|U][t|T]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
+		preg_match_all($input_form,$input,$matchs,PREG_SET_ORDER);
+		foreach ($matchs as $match) {
+			//search for every match to see if the attributes of the tag is NOT what we expect
+			$thisone = $match[3]; //we store the attributes of the tag
+			
+			//don´t allow "<", ">" or "();"  inside attributes
+			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
+ 			
+			//search for type attribute
+			$allowedonly = array("input_form","radio","text");
+			$input_form_type = $this->FindExactAttribute("type",$thisone,$notallowed,$allowedonly) ;
+			
+			//search for name attribute
+			$input_form_name = $this->FindAttribute("name",$thisone,$notallowed);
+
+			//search for value attribute
+			$input_form_value = $this->FindAttribute("value",$thisone,$notallowed);
+			
+			//search for checked attribute
+			$input_form_checked = $this->FindAttribute("checked",$thisone,$notallowed);
+			
+			//search for size attribute
+			$input_form_size = $this->FindAttribute("size",$thisone,$notallowed);
+			
+			//search for maxlength attribute
+			$input_form_maxlength = $this->FindAttribute("maxlength",$thisone,$notallowed);
+			
+			// to avoid empty attributes
+			$input_form_type = $this->ProcessAttributeForTag("type",$input_form_type);
+			$input_form_name = $this->ProcessAttributeForTag("name",$input_form_name);
+			$input_form_value = $this->ProcessAttributeForTag("value",$input_form_value);
+			$input_form_checked = $this->ProcessAttributeForTag("checked",$input_form_checked);
+			$input_form_size = $this->ProcessAttributeForTag("size",$input_form_size);
+			$input_form_maxlength = $this->ProcessAttributeForTag("maxlength",$input_form_maxlength);
+			
+			//finally, replace
+			$input = str_replace($match[2] . $match[3] . $match[4],"<input $input_form_type $input_form_name $input_form_value $input_form_checked $input_form_maxlength $input_form_size />",$input);
+		}
 		
 	//search for &nbsp; and let them be
 		$nonbreakingspace = '/&amp;nbsp;/';
