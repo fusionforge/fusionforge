@@ -495,15 +495,17 @@ class ForumHTML extends Error {
 			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 				<?php //$text_support->displayTextField('body',$body); ?>
 				<?php
-				//plugin_hook("text_editor");
-				$oFCKeditor = new FCKeditor('body') ;
-				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/include/fckeditor/';
-				$oFCKeditor->Value = $body;
-				$oFCKeditor->Width = "800";
-				$oFCKeditor->Height = "500";
-				$oFCKeditor->Create() ;
+				$params['body'] = $body;
+				$params['width'] = "800";
+				$params['height'] = "500";
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+				}
+				unset($GLOBALS['editor_was_set_up']);
 				?>
-<!--		<textarea name="body"  rows="10" cols="50" wrap="soft"><?php //echo $body; ?></textarea> -->
 			<br><br>		
 			
 				<p>
@@ -526,7 +528,7 @@ class ForumHTML extends Error {
 	}
 	
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-		global $Language,$sys_default_domain;
+		global $Language,$sys_default_domain,$group_id;
 
 			if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
 				$http = "https://";
@@ -563,15 +565,16 @@ class ForumHTML extends Error {
 			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 
 			<?php 
-				//plugin_hook("text_editor");
-				$oFCKeditor = new FCKeditor('body') ;
-				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/include/fckeditor/';
-				$oFCKeditor->Value = '';
-				$oFCKeditor->Width = "800";
-				$oFCKeditor->Height = "500";
-				$oFCKeditor->Create() ;
-				
-				//echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+				$params['body'] = $body;
+				$params['width'] = "800";
+				$params['height'] = "500";
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+				}
+				unset($GLOBALS['editor_was_set_up']);
 			?>
 				 <?php //$text_support->displayTextField('body'); ?>
 			<br><br>		

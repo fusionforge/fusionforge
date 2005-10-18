@@ -273,8 +273,10 @@ if ($group_id) {
 					}
 					$subject = getStringFromRequest('subject');
 					$body = getStringFromRequest('body');
+					
 					$sanitizer = new TextSanitizer();
 					$body = $sanitizer->SanitizeHtml($body);
+					
 					$is_followup_to = getStringFromRequest('is_followup_to');
 					$form_key = getStringFromRequest('form_key');
 					$posted_by = getStringFromRequest('posted_by');
