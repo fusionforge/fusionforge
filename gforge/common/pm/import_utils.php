@@ -20,12 +20,13 @@ function printr($var, $name='$var', $echo=true) {
 }
 
 function printrcomplete() {
-//	exec("/bin/cat /tmp/msp.log | mail -s\"printr\" tim@perdue.net");
+//	exec("/bin/cat /tmp/msp.log | mail -s\"printr\" tim@gforgegroup.com");
 //	exec("/bin/rm -f /tmp/msp.log");
 }
 
 function &pm_import_tasks($group_project_id,&$tasks) {
 	printr($tasks,'MSPCheckin::in-array');
+	printr(getenv('TZ'),'MSPCheckin::entry TZ');
 
 	$pg =& projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
@@ -283,6 +284,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {
 						if (!$completed[$pt_arr[$i]->getID()]) {
+							printr($pt_arr[$i]->getID(),'Deleting task');
 							if (!$pt_arr[$i]->delete(true)) {
 								echo $pt_arr[$i]->getErrorMessage();
 							} else {
@@ -300,6 +302,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 	}
 
 //	printr($array,'MSPCheckin::return-array');
+	printr(getenv('TZ'),'MSPCheckin::exit TZ');
 	return $array;
 }
 
