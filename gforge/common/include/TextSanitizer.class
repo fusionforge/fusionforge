@@ -183,8 +183,10 @@ Class TextSanitizer extends Error {
 		$input = preg_replace($li,"$1<li>$3</li>$5",$input);				
 		
 	//search for <blockquote>something</blockquote> . 
-		$blockquote = '/(.*)(&lt;[^&lt;|^&gt;]*[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($blockquote,"$1<blockquote>$3</blockquote>$5",$input);				
+		$blockquote = '/(.*)(&lt;[^&lt;|^&gt;]*[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($blockquote,$input)) {
+			$input = preg_replace($blockquote,"$1<blockquote>$3</blockquote>$5",$input);				
+		}
 		
 	//search for <pre>something</pre> . 
 		$pre1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)/';
@@ -542,6 +544,10 @@ Class TextSanitizer extends Error {
 	//search for &amp; and let them be
 		$nonbreakingspace = '/&amp;amp;/';
 		$input = preg_replace($nonbreakingspace,"&amp;",$input);
+		
+	//search for &quot; and let them be
+		$nonbreakingspace = '/&amp;quot;/';
+		$input = preg_replace($nonbreakingspace,"&quot;",$input);		
 
 	//search for <br /> and let them be
 		$br = '/&lt;br\s{0,3}\/&gt;/';
