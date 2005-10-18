@@ -743,4 +743,22 @@ function html_clean_hash_string($hashstr) {
 	return $hashstr;
 }
 
+/**
+ *	html_build_rich_textarea() - Renders textarea control
+ *	
+ *	@param name (string) - the name for the control
+ *	@param rows (int) - the rows for the control (number of visible text lines)
+ *	@param cols (int)  - the cols for the control (visible width in average character widths)
+ *	@param text (string) - initial text to be displayed
+ *	@param readonly (boolean) - if the text cannot be modified
+ *	@return html code for control
+ */
+function html_build_rich_textarea($name,$rows,$cols,$text,$readonly) {
+	return '<textarea name="'.$name.'"'
+		.' rows="'.$rows.'"'
+		.' cols="'.$cols.'"'
+		.($readonly ? ' readonly' : ' ').'>'
+		. $text . '</textarea>';
+}
+
 ?>
