@@ -216,3 +216,9 @@ adduser --system --group --home /var/lib/gforge/chroot/cvsroot anonscm-gforge
 make history files owned by anonscm-gforge
 chown anonscm-gforge /cvsroot/*/CVSROOT/history
 
+---------------------------------------------
+Currently implementation replaced views with tables
+see db/20050225-nsssetup.sql and changes 
+between tables are triggered by 
+common/include/system/pgsql.class
+I hope soon to get some help to have this as db triggers
