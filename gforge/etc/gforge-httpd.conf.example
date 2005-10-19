@@ -89,35 +89,6 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #</VirtualHost>
 
 #
-#	*.gforge.company.com vhosts
-#	Each project can have its own vhost
-#
-#	WARNING - security is degraded by having this
-#	on the same machine as the primary GForge
-#
-#<VirtualHost *:80>
-#  ServerName projects.gforge.company.com
-#  ServerAlias *.gforge.company.com
-#  DocumentRoot /home/groups
-#  VirtualDocumentRoot /home/groups/%1/htdocs
-#  VirtualScriptAlias /home/groups/%1/cgi-bin
-#  <Directory /var/www/homedirs/groups>
-#    Options Indexes
-#
-#	WARNING - turning on php will allow any user
-#	to upload a php file to your server, and include 
-#	the gforge local.inc file and get your password to 
-#	connect to the database and have total control.
-#
-#    php_flag engine off
-#    AllowOverride None
-#    order allow,deny
-#    allow from all
-#  </Directory>
-#  DirectoryIndex index.html index.htm
-#</VirtualHost>
-
-#
 #	Subversion vhost using mod_auth_gforge
 #
 <VirtualHost *:80>
@@ -196,6 +167,7 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #  SSLCertificateFile /etc/httpd/ssl/star.gforge.company.com.crt
 #  SSLCertificateKeyFile /etc/httpd/ssl/star.gforge.company.com.pem
 #  <Location />
+#    Options FollowSymlinks Indexes
 #    GforgeSysPath	/var/www/homedirs
 #    GforgeGroupsRoot	/groups
 #    GforgeUsersRoot	/users
@@ -225,5 +197,34 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #    Require valid-user
 #  </Location>
 #DirectoryIndex index.htm
+#</VirtualHost>
+
+#
+#	*.gforge.company.com vhosts
+#	Each project can have its own vhost
+#
+#	WARNING - security is degraded by having this
+#	on the same machine as the primary GForge
+#
+#<VirtualHost *:80>
+#  ServerName projects.gforge.company.com
+#  ServerAlias *.gforge.company.com
+#  DocumentRoot /home/groups
+#  VirtualDocumentRoot /home/groups/%1/htdocs
+#  VirtualScriptAlias /home/groups/%1/cgi-bin
+#  <Directory /var/www/homedirs/groups>
+#    Options Indexes
+#
+#	WARNING - turning on php will allow any user
+#	to upload a php file to your server, and include 
+#	the gforge local.inc file and get your password to 
+#	connect to the database and have total control.
+#
+#    php_flag engine off
+#    AllowOverride None
+#    order allow,deny
+#    allow from all
+#  </Directory>
+#  DirectoryIndex index.html index.htm
 #</VirtualHost>
 
