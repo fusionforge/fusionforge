@@ -29,13 +29,13 @@ require_once('pre.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 
-news_header(array('title'=>$Language->getText('news', 'title')));
-
-echo $Language->getText('news', 'choose');
-
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');
 $offset = getIntFromRequest('offset');
+
+news_header(array('title'=>$Language->getText('news', 'title')));
+
+echo $Language->getText('news', 'choose');
 
 /*
 	Put the result set (list of forums for this group) into a column with folders
