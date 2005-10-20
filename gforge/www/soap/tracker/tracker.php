@@ -112,7 +112,8 @@ $server->wsdl->addComplexType(
 	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
 	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
 	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int'),
-	'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField')
+	'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField'),
+	'custom_status_field' => array('name' => 'custom_status_field', 'type' => 'xsd:int'),
 	)
 );
 
@@ -560,7 +561,8 @@ function artifacttype_to_soap($at_arr) {
 				'due_period'=>$at_arr[$i]->data_array['due_period'],
 				'datatype'=>$at_arr[$i]->data_array['datatype'],
 				'status_timeout'=>$at_arr[$i]->data_array['status_timeout'],
-				'extra_fields' => $extrafields
+				'extra_fields' => $extrafields,
+				'custom_status_field' => $at_arr[$i]->data_array['custom_status_field']
 			);
 		}
 	}
