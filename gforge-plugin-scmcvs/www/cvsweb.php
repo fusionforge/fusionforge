@@ -62,7 +62,6 @@ if ($projectName) {
 	
 	// check if the scm_box is located in another server
 	$scm_box = $Group->getSCMBox();
-	//$external_scm = (strtolower($sys_default_domain) != strtolower($scm_box)); 
 	$external_scm = (gethostbyname($sys_default_domain) != gethostbyname($scm_box)); 
 
 	if (session_loggedin()) {
@@ -93,7 +92,7 @@ if ($projectName) {
 	// If we are accessing an external SCM box, execute the cvsweb script remotely and
 	// pipe the results
 	if ($external_scm) {
-		$server_script = $GLOBALS["sys_path_to_scmweb"];
+		$server_script = "/cgi-bin/cvsweb";
 		// remove leading / (if any)
 		$server_script = preg_replace("/^\\//", "", $server_script); 
 		
