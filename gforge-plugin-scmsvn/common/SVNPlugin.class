@@ -264,7 +264,8 @@ class SVNPlugin extends SCM {
 	 */
 	function getAccountGroupViewcvsUrl($group_id) {
 		$project =& group_get_object($group_id);
-		return 'http'.(($this->use_ssl) ? 's' : '').'://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
+		//return 'http'.(($this->use_ssl) ? 's' : '').'://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
+		return '/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
 	}
 
 	function getCSSfile ($layout) {
