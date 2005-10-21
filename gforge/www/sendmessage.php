@@ -118,15 +118,15 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
 <strong><?php echo $Language->getText('sendmessage','email') ?>:</strong><br />
-<input type="text" name="email" size="30" maxlength="40" value="" />
+<input type="text" name="email" size="30" maxlength="255" value="" />
 <p />
-<strong>Your Name:</strong><br />
+<strong><?php echo $Language->getText('sendmessage', 'name') ?>:</strong><br />
 <input type="text" name="name" size="30" maxlength="40" value="" />
 <p />
-<strong>Subject:</strong><br />
-<input type="text" name="subject" size="30" maxlength="40" value="<?php echo $subject; ?>" />
+<strong><?php echo $Language->getText('sendmessage', 'subject') ?>:</strong><br />
+<input type="text" name="subject" size="30" maxlength="255" value="<?php echo $subject; ?>" />
 <p />
-<strong>Message:</strong><br />
+<strong><?php echo $Language->getText('sendmessage', 'message') ?>:</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>
 <p />
 <div align="center">

@@ -92,7 +92,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 		echo '
 		<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span></h3><br />
 		'.$Language->getText('tracker','insert_email').':<p>
-		<input type="text" name="user_email" size="30" maxlength="35" /></p>
+		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		';
 
 	} 

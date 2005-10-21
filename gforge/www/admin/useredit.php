@@ -178,7 +178,7 @@ if ($u->getStatus() == 'D') {
 <?php echo $Language->getText('admin_useredit','email'); ?>
 </td>
 <td>
-<input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="55" />
+<input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="255" />
 </td>
 </tr>
 
