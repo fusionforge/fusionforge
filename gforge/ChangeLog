@@ -2,6 +2,7 @@
 	* forum/ForumMessage.class : strip_tags to emails. This is for when fckeditor edited messages have permitted html
 	* TextSanitizer : Fixed various bugs. <input> tag not allowed
 	* utils.php : added param to send_mail function, just to have it if it´s needed sometime
+	* Applied patch -> http://gforge.org/tracker/index.php?func=detail&aid=1590&group_id=1&atid=106
 2005-10-18 Daniel Perez <daniel@gforgegroup.com>
 	* TextSanitizer : added new function to make HTML output more readable and tidy (avoid empty attributes)
 					added textarea,radio,checkbox,text support (form input types)
