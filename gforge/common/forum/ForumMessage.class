@@ -667,12 +667,14 @@ class ForumMessage extends Error {
 		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
 			return true;
 		}
-
+		
+		//TODO hacer el coso para que busque los tags y haga la variable para poner <br> y llamar a la funcion con send_html en 1
+		
 		$body = "\nRead and respond to this message at: ".
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$body .= $this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody()))).
+		$body .= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
@@ -724,7 +726,7 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$body .= $this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody()))).
+		$body .= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
