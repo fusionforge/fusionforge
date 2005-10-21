@@ -178,9 +178,17 @@ Class TextSanitizer extends Error {
 			$input = preg_replace($ol,"$1<ol>$3</ol>$5",$input);
 		}
 		
+	//search for <ul>something</ul> . 
+		$ul = '/(.*)(&lt;[^&lt;|^&gt;]*[u|U][l|L][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[u|U][l|L][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($ul,$input)) {
+			$input = preg_replace($ul,"$1<ul>$3</ul>$5",$input);
+		}
+		
 	//search for <li>something</li> . 
-		$li = '/(.*)(&lt;[^&lt;|^&gt;]*[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($li,"$1<li>$3</li>$5",$input);				
+		$li = '/(.*)(&lt;[^&lt;|^&gt;]*[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($li,$input)) {
+			$input = preg_replace($li,"$1<li>$3</li>$5",$input);
+		}	
 		
 	//search for <blockquote>something</blockquote> . 
 		$blockquote = '/(.*)(&lt;[^&lt;|^&gt;]*[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
@@ -199,34 +207,30 @@ Class TextSanitizer extends Error {
 		$input = preg_replace($p,"$1<p>$3</p>$5",$input);
 		
 	//search for <p align="something">something</p> 
-		$align1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/';
-		preg_match_all($align1,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match if the attributes of the tag is what we expect
-			$aligns = array("center","right","left");
-			if (in_array($match[3],$aligns)) {
-				//ok, replace
-				$alignthis = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(' . $match[3] . ')\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/'; // we are searching for the first un-replaced occurrence of this particular align
-				$input = preg_replace($alignthis,"$1<p align=\"$3\">$4</p>$6",$input,1);
-			} else {
-				//didn´t have what we expected
-			}
+		$align1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while(preg_match_all($align1,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
+				//search for every match if the attributes of the tag is what we expect
+				$aligns = array("center","right","left","justify");
+				if (in_array($match[0][3],$aligns)) {
+					//ok, replace
+					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<p align=\"" . $match[0][3] . "\">" . $match[0][4] . "</p>",$input);
+				} else {
+					//didn´t have what we expected
+				}
 		}
 		unset($matchs);
 		
 	//search for <div align="something">something</div> 
-		$align2 = '/(.*)(&lt;[^&lt;|^&gt;]*[d|D][i|I][v|V]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[d|D][i|I][v|V][^&lt;|^&gt;]*&gt;)(.*)/';
-		preg_match_all($align2,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match if the attributes of the tag is what we expect
-			$aligns = array("center","right","left");
-			if (in_array($match[3],$aligns)) {
-				//ok, replace
-				$alignthis = '/(.*)(&lt;[^&lt;|^&gt;]*[d|D][i|I][v|V]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(' . $match[3] . ')\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[d|D][i|I][v|V][^&lt;|^&gt;]*&gt;)(.*)/'; // we are searching for the first un-replaced occurrence of this particular align
-				$input = preg_replace($alignthis,"$1<div align=\"$3\">$4</div>$6",$input,1);
-			} else {
-				//didn´t have what we expected
-			}
+		$align2 = '/(.*)(&lt;[^&lt;|^&gt;]*[d|D][i|I][v|V]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[d|D][i|I][v|V][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while(preg_match_all($align2,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
+				//search for every match if the attributes of the tag is what we expect
+				$aligns = array("center","right","left","justify");
+				if (in_array($match[0][3],$aligns)) {
+					//ok, replace
+					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<div align=\"" . $match[0][3] . "\">" . $match[0][4] . "</div>",$input);
+				} else {
+					//didn´t have what we expected
+				}
 		}
 		unset($matchs);
 
@@ -497,7 +501,7 @@ Class TextSanitizer extends Error {
 		}
 	
 	//search for <input PERMITTED/> 
-		$input_form = '/(.*)(&lt;[^&lt;|^&gt;]*[i|I][n|N][p|P][u|U][t|T]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
+/*		$input_form = '/(.*)(&lt;[^&lt;|^&gt;]*[i|I][n|N][p|P][u|U][t|T]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
 		preg_match_all($input_form,$input,$matchs,PREG_SET_ORDER);
 		foreach ($matchs as $match) {
 			//search for every match to see if the attributes of the tag is NOT what we expect
@@ -536,6 +540,7 @@ Class TextSanitizer extends Error {
 			//finally, replace
 			$input = str_replace($match[2] . $match[3] . $match[4],"<input $input_form_type $input_form_name $input_form_value $input_form_checked $input_form_maxlength $input_form_size />",$input);
 		}
+*/
 		
 	//search for &nbsp; and let them be
 		$nonbreakingspace = '/&amp;nbsp;/';
