@@ -86,9 +86,10 @@ function util_check_fileupload($file) {
  * @param		string	The optional email sender address.  Defaults to 'noreply@'
  * @param		string	The addresses to blind-carbon-copy this message
  * @param		string	The optional email sender name. Defaults to ''
+ * @param 		boolean	Whether to send plain text or html email
  *
  */
-function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='') {
+function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='',$send_html_email=false) {
 	global $Language,$sys_bcc_all_email_address,$sys_sendmail_path;
 
 	if (!$to) {
@@ -115,8 +116,9 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if(!empty($BCC)) {
 		$body2 .= "\nBCC: $BCC";
 	}
+	$send_html_email?$type="html":$type="plain";
 	$body2 .= "\nSubject: ".util_encode_mimeheader($subject, $charset).
-		"\nContent-type: text/plain; charset=$charset".
+		"\nContent-type: text/$type; charset=$charset".
 		"\n\n".
 		util_convert_body($body, $charset);
 	
