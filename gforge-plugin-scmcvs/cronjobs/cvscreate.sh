@@ -5,6 +5,7 @@ echo "Portions (c)1999 SourceForge Development Team"
 echo "The rest (c)2004 Guillaume Smet"
 echo "Released under the GPL, 1999"
 echo ""
+echo ""
 
 # if no arguments, print out help screen
 if test $# -lt 4; then 
