@@ -13,8 +13,8 @@ Installation:
 - files from etc/ go to /etc/gforge/ 
 - files from bin/ go to /usr/lib/gforge/plugins/scmcvs/bin
 - files from cgi-bin/ (cvsweb) goes to $sys_path_to_scmweb defined in local.inc
-- files from include/ go to /usr/lib/gforge/plugins/scmcvs/include
-- files from lib/ go to  /usr/lib/gforge/plugins/scmcvs/lib
+- files from common/ go to /usr/lib/gforge/plugins/scmcvs/common
+- files from db/ go to  /usr/lib/gforge/plugins/scmcvs/db
 - files from cronjobs/ go to  /usr/share/gforge/www/plugins/scmcvs/cronjobs
 - files from www/ go to  /usr/share/gforge/www/plugins/scmcvs/
 
