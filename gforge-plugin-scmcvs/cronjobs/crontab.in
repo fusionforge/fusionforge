@@ -1,29 +1,29 @@
 #
 #       Create the /etc/* files
 #
-#10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
+10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
 #
 #       Upload the SSH key files
 #
-#15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
+15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
 #
 #       Create the blank cvs trees
 #
-#20 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs.php
+20 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs.php
 #
 #				Create CVS tarballs
 #
 #
-#5 2 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
+5 2 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
 #
 #	Create CVS snapshots
 #
 # CVSROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
 # you'll have to edit the script if necessary.
 #
-#35 2 * * * /bin/sh $GFORGE/plugins/scmcvs/bin/snapshots.sh generate
+35 2 * * * /bin/sh $GFORGE/plugins/scmcvs/bin/snapshots.sh generate
 #
 #       Daily CVS stats collection
 #
-#20 1 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/history_parse.php
+20 1 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/history_parse.php
 
