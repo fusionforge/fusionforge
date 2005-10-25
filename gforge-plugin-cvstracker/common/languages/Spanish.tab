@@ -1,0 +1,20 @@
+#/**
+#  *
+#  * cvstracker message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  *
+#  */
+plugin_cvstracker	title	Enlaces a los commits de CVS relacionados
+plugin_cvstracker	file	Nombre del Fichero
+plugin_cvstracker	prevVersion	Versión Anterior
+plugin_cvstracker	actualVersion	Versión Actual
+plugin_cvstracker	log	Mensaje
+plugin_cvstracker	date	Fecha
+plugin_cvstracker	diffto	Diferencia a
+plugin_cvstracker	author	Autor

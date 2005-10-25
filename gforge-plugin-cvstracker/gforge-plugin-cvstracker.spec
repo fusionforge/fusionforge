@@ -109,8 +109,8 @@ fi
 %doc AUTHORS COPYING README
 %attr(0664, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF_DIR}/config.php
 %{PLUGIN_LIB_DIR}/bin
-%{PLUGIN_LIB_DIR}/include
-%{PLUGIN_LIB_DIR}/lib
+%{PLUGIN_LIB_DIR}/common
+%{PLUGIN_LIB_DIR}/db
 %{PLUGIN_LIB_DIR}/rpm-specific
 %{PLUGIN_LIB_DIR}/www
 %{CROND_DIR}/%{name}

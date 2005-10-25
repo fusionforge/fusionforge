@@ -9,22 +9,22 @@ clean:
 
 import:
 	cp -rf /usr/lib/gforge/plugins/cvstracker/bin/* bin/ 
-	cp -rf /usr/lib/gforge/plugins/cvstracker/include/* include/
-	cp -rf /usr/lib/gforge/plugins/cvstracker/lib/* lib/
+	cp -rf /usr/lib/gforge/plugins/cvstracker/common/* common/
+	cp -rf /usr/lib/gforge/plugins/cvstracker/db/* db/
 	cp -rf /usr/share/gforge/www/plugins/cvstracker/* www/
 
 install:
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
-	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+	cp -r common/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/
+	cp -r db/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/db/
 	cp -r etc/* $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
 	cp -r debian/cron.d /etc/cron.d/gforge-plugin-$(PLUGIN)
 	install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.d/50$(PLUGIN)
 	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/db/ -type f | xargs chmod 0644
 	find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	/usr/lib/gforge/bin/fill-in-the-blanks.pl \

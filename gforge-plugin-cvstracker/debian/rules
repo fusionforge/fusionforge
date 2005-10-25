@@ -37,8 +37,8 @@ install: build
 	dh_installdirs
 
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
-	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+	cp -r common/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/
+	cp -r db/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/db/
 	# cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
 	cp -r etc/* $(DESTDIR)/etc/gforge/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
@@ -46,8 +46,8 @@ install: build
 	# install -m 0600 httpd.secrets $(DESTDIR)/etc/gforge/httpd.secrets.d/50$(PLUGIN)
 	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/db/ -type f | xargs chmod 0644
 	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644

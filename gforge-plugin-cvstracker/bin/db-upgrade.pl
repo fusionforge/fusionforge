@@ -51,7 +51,7 @@ eval {
     $version = &get_db_version ;
     $target = "0.1" ;
     if (is_lesser $version, $target) {
-		my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
+		my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/db/$pluginname-init.sql" ) ;
 		
 		foreach my $file (@filelist) {
 		    debug "Processing $file" ;
@@ -77,7 +77,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050305.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/plugins/$pluginname/lib/20050305.sql") } ;
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/plugins/$pluginname/db/20050305.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
