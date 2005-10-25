@@ -167,7 +167,13 @@ if ( $cvs_binary_version == "1.12" ) {
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-$SubmitUrl='http://'.$sys_default_domain.'/plugins/cvstracker/newcommit.php';
+if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
+	$http = "https://";
+} else {
+	$http = "http://";
+}
+
+$SubmitUrl = $http . $sys_default_domain . '/plugins/cvstracker/newcommit.php';
 
 $UserArray=posix_getpwuid ( posix_geteuid ( ) );
 $UserName= $UserArray['name'];
