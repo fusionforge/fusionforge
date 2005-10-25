@@ -31,7 +31,7 @@
  *
  */
  
-require ('local.inc');
+//require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
 require ('plugins/cvstracker/config.php');
 require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
