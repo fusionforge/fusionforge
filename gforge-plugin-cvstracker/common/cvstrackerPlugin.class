@@ -115,7 +115,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getFileLink($GroupName, $FileName) {
 		global $sys_default_domain;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'">'.$FileName.'</a>';
 	}
 
@@ -131,7 +131,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
 		global $sys_default_domain;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'&rev='.$Version.'&contenttype=text/x-cvsweb-markup">'.
 			$Version.'</a>';
 	}
@@ -149,7 +149,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
 		global $sys_default_domain,$Language;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'&contenttype=text/x-cvsweb-markup">'.
 			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
