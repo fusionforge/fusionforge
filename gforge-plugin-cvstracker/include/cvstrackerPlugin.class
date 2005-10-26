@@ -38,7 +38,7 @@ class cvstrackerPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
 		$this->hooks[] = "task_extra_detail";
-		$this->hooks[] = "update_cvs_repository";
+		//$this->hooks[] = "update_cvs_repository";
 	}
 
 	/**
@@ -161,7 +161,7 @@ class cvstrackerPlugin extends Plugin {
 	* @param   string  $path The filename of loginfo
 	*
 	*/
-	function addCvsTrackerToFile($path) {
+/*	function addCvsTrackerToFile($path) {
 		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
@@ -182,7 +182,7 @@ class cvstrackerPlugin extends Plugin {
 			fclose($FOut);
 		}
 	}
-
+*/
 	/**
 	* Retrieve a file into a temporary directory from a CVS server
 	*
@@ -191,7 +191,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	* return String the FileName in the working repository
 	*/
-	function getCvsFile($repos,$file) {
+/*	function getCvsFile($repos,$file) {
 		$actual_dir = getcwd();
 		$tempdirname = tempnam("/tmp","cvstracker");
 		if (!$tempdirname) 
@@ -210,7 +210,7 @@ class cvstrackerPlugin extends Plugin {
 		chdir($actual_dir);
 		return $tempdirname.$file;
 	}
-
+*/
 	/**
 	* putCvsFile commit a file to the repository
 	*
@@ -218,11 +218,11 @@ class cvstrackerPlugin extends Plugin {
 	* @param String $file to commit
 	* @param String $message to commit
 	*/
-	function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
+/*	function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
 		system("cvs -d ".$repos." ci -m \"".$message."\" ".$file);
 		unlink ($file);
 	}
-
+*/
 	/**
 	* The function to be called for a Hook
 	*
@@ -270,7 +270,7 @@ class cvstrackerPlugin extends Plugin {
 				" AND plugin_cvstracker_data_master.holder_id=".
 				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
 			$this->getCommitEntries($Query, $group_id);
-		} elseif ($hookname == "update_cvs_repository") {
+		}/* elseif ($hookname == "update_cvs_repository") {
 			$Group = group_get_object($params["group_id"]);
 			if ($Group->usesPlugin("cvstracker")) {
 				$LineFound=FALSE;
@@ -293,7 +293,7 @@ class cvstrackerPlugin extends Plugin {
 					$this->putCvsFile($params["file_name"],
 						$newfile);
 				}
-			}
+			}*/
 		}
 	}
 }
