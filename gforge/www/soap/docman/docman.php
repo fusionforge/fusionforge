@@ -82,7 +82,8 @@ $server->wsdl->addComplexType(
 	'title' => array('name'=>'title', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
 	'stateid' => array('name'=>'stateid', 'type' => 'xsd:int'),	
-	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int')
+	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int'),
+	'filesize' => array('name'=>'filesize', 'type' => 'xsd:int')
 	)
 );
 
@@ -593,7 +594,8 @@ function documents_to_soap($d_arr) {
 				'title'=>$d_arr[$i]->data_array['title'],
 				'description'=>$d_arr[$i]->data_array['description'],
 				'stateid'=>$d_arr[$i]->data_array['stateid'],				
-				'language_id'=>$d_arr[$i]->data_array['language_id']
+				'language_id'=>$d_arr[$i]->data_array['language_id'],
+				'filesize'=>$d_arr[$i]->data_array['filesize']
 			);
 		}
 	}
