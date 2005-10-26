@@ -65,4 +65,64 @@ function chrootCommand($command) {
 	return $command;
 }
 
+//
+//  Create lock file so long running jobs don't overlap
+//
+//  Parameters
+//  $name - Name of cron job to use in the lock file name
+//
+//	Return code
+//  true - lock file create successfully
+//  false - file already exists
+//	IMPORTANT - There tmp dir should have write access to create the lock
+function cron_create_lock($name) {
+	if (!preg_match('/^[[:alnum:]\.\-_]+$/', $name)) {
+		return false;
+	}
+	$lockf = '/tmp/blahlock'.$name;
+
+	if (file_exists($lockf)) {
+		return false;
+	} else {
+	    $fp = fopen($lockf,'w');
+		if ($fp) {
+			fclose($fp);
+			return true;
+		}
+	}
+	return false;
+}
+
+//
+//  Delete lock file created by cron_create_lock
+//
+//  Parameters
+//  $name - Name of cron job to use in the lock file name
+//
+//	Return code
+//  true - lock file deleted successfully
+//  false - error deleting file
+function cron_remove_lock($name) {
+	$lockf = '/tmp/blahlock'.$name;
+
+	if (file_exists($lockf) && is_writeable($lockf)) {
+		if (unlink($lockf)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+//
+//  Set up this script to run as the site admin
+//
+function runCronAsSiteAdmin() {
+	$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+	if (!$res || db_numrows($res) == 0) {
+		return false;
+	}
+	$id=db_result($res,0,0);
+	session_set_new($id);
+}
+
 ?>

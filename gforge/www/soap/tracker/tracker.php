@@ -318,7 +318,7 @@ $server->register(
 $server->register(
 	'artifactFileDelete',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int','file_id'=>'xsd:int'),
-	array('artifactFileDeleteResponse'=>'tns:boolean'),
+	array('artifactFileDeleteResponse'=>'xsd:boolean'),
 	$uri,$uri.'#artifactFileDeleteResponse','rpc','encoded'
 );
 
@@ -400,14 +400,14 @@ $server->register(
 $server->register(
 	'artifactSetMonitor',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
-	array('artifactSetMonitorResponse'=>'tns:boolean'),
+	array('artifactSetMonitorResponse'=>'xsd:boolean'),
 	$uri,$uri.'#artifactSetMonitorResponse','rpc','encoded'
 );
 
 $server->register(
 	'artifactIsMonitoring',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
-	array('artifactIsMonitoringResponse'=>'tns:boolean'),
+	array('artifactIsMonitoringResponse'=>'xsd:boolean'),
 	$uri,$uri.'#artifactIsMonitoringResponse','rpc','encoded'
 );
 
@@ -440,7 +440,7 @@ function artifactIsMonitoring($session_ser,$group_id,$group_artifact_id,$artifac
 $server->register(
 	'artifactDelete',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
-	array('artifactDeleteResponse'=>'tns:boolean'),
+	array('artifactDeleteResponse'=>'xsd:boolean'),
 	$uri,$uri.'#artifactDeleteResponse','rpc','encoded'
 );
 
@@ -462,7 +462,7 @@ function artifactDelete($session_ser,$group_id,$group_artifact_id,$artifact_id) 
 $server->register(
 	'artifactTypeIsMonitoring',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
-	array('artifactTypeIsMonitoringResponse'=>'tns:boolean'),
+	array('artifactTypeIsMonitoringResponse'=>'xsd:boolean'),
 	$uri,$uri.'#artifactTypeIsMonitoringResponse','rpc','encoded'
 );
 
@@ -830,7 +830,7 @@ function artifactfiles_to_soap($files_arr) {
 			'id' => $files_arr[$i]->getID(),
 			'artifact_id' => $files_arr[$i]->Artifact->getID(),
 			'name' => $files_arr[$i]->getName(),
-			'description' => $files_arr[$i]->getID(),
+			'description' => $files_arr[$i]->getDescription(),
 			'filesize' => $files_arr[$i]->getSize(),
 			'filetype' => $files_arr[$i]->getType(),
 			'adddate' => $files_arr[$i]->getDate(),

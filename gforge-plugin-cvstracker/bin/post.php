@@ -31,7 +31,7 @@
  *
  */
  
-require ('local.inc');
+//require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
 require ('plugins/cvstracker/config.php');
 require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
@@ -129,12 +129,13 @@ if( $cvs_binary_version == "1.11" ) {
 	
 	$repository      = $argv[1];
 	$parameters = explode(' ', $argv[2]);
+	$path = $parameters[0];
 	
 	for($i = 1; $i < count($parameters); $i++) {
 		$filesInformation = explode(',', trim($parameters[$i], ','));
 
 		$files[] = array(
-			'name' => $filesInformation[0],
+			'name' => $path."/".$filesInformation[0],
 			'previous' => $filesInformation[1],
 			'actual' => $filesInformation[2]
 		);
@@ -166,7 +167,13 @@ if ( $cvs_binary_version == "1.12" ) {
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-$SubmitUrl='http://'.$sys_default_domain.'/plugins/cvstracker/newcommit.php';
+if ($use_ssl) {
+	$http = "https://";
+} else {
+	$http = "http://";
+}
+
+$SubmitUrl = $http . $sys_default_domain . '/plugins/cvstracker/newcommit.php';
 
 $UserArray=posix_getpwuid ( posix_geteuid ( ) );
 $UserName= $UserArray['name'];
