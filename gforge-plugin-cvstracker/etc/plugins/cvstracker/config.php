@@ -1,6 +1,6 @@
 <?php
 
-$use_ssl = "true"; //whether to use SSL or standard HTTP
+$use_ssl = true; //whether to use SSL or standard HTTP
 $sys_default_domain = "trialgforge.org";
 $sys_plugins_path = "/opt/gforge/gforge/plugins/";
 $sys_cvsroot_path = $cvsdir_prefix;
