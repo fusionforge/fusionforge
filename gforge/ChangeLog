@@ -1,3 +1,7 @@
+2005-10-26 Tim Perdue <tim@gforgegroup.com>
+
+	* moddaterange, opendaterange, closedaterange added to artifact query
+
 2005-10-21 Daniel Perez <daniel@gforgegroup.com>
 	* forum/ForumMessage.class : strip_tags to emails. This is for when fckeditor edited messages have permitted html
 	* TextSanitizer : Fixed various bugs. <input> tag not allowed

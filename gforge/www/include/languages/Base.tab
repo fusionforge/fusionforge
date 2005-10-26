@@ -3096,6 +3096,9 @@ tracker_artifacttype	reporting	Reporting
 tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
 tracker_artifacttype	submit_new	Submit New
 tracker_artifacttype	invalid_emails	E-mail address(es) appeared invalid
+tracker_query	moddaterange	Last Modified Date range
+tracker_query	opendaterange	Open Date range
+tracker_query	closedaterange	Close Date range
 tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
 tracker_browse	ascending	Ascending
 tracker_browse	canned_response	Canned Response

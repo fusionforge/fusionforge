@@ -55,6 +55,9 @@ class ArtifactFactory extends Error {
 	var $fetched_rows;
 	var $extra_fields;
 	var $defaultquery;
+	var $moddaterange;
+	var $opendaterange;
+	var $closedaterange;
 
 	/**
 	 *  Constructor.
@@ -118,6 +121,9 @@ class ArtifactFactory extends Error {
 					$sort=$aq->getSortOrd();
 					$_assigned_to=$aq->getAssignee();
 					$_status=$aq->getStatus();
+					$this->moddaterange = $aq->getModDateRange();
+					$this->opendaterange = $aq->getOpenDateRange();
+					$this->closedaterange = $aq->getCloseDateRange();
 				} else {
 					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
 					if ($custom_pref) {
@@ -185,7 +191,11 @@ class ArtifactFactory extends Error {
 		if (!$max_rows || $max_rows < 5) {
 			$max_rows=50;
 		}
-		$this->max_rows=$max_rows;
+		if ($default_query) {
+			$this->max_rows=0;
+		} else {
+			$this->max_rows=$max_rows;
+		}
 	}
 
 	
@@ -260,12 +270,40 @@ class ArtifactFactory extends Error {
 			$last_changed_str='';
 		}
 
+		//add constraint of range of modified dates
+		if ($this->moddaterange) {
+			$range_arr=explode(' ',$this->moddaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$moddatesql= " AND last_modified_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$moddatesql= '';
+		}
+		//add constraint of range of open dates
+		if ($this->opendaterange) {
+			$range_arr=explode(' ',$this->opendaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$opendatesql= " AND open_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$opendatesql= '';
+		}
+		//add constraint of range of close dates
+		if ($this->closedaterange) {
+			$range_arr=explode(' ',$this->closedaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$closedatesql= " AND close_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$closedatesql= '';
+		}
 		//
 		//  now run the query using the criteria chosen above
 		//
 		$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
+			$opendatesql $moddatesql $closedatesql 
 			 $status_str $assigned_str $last_changed_str $ef_where_str ) AS Artifacts
 			ORDER BY Artifacts.group_artifact_id ".$this->sort.", Artifacts.". $this->order_col ." ".$this->sort;
 //echo "$sql";

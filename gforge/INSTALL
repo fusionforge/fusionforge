@@ -230,7 +230,7 @@ mkdir /home/groups
 ln -s /home/groups homedirs/groups
 
 #Create default location for SVN repositories
-mkdir /var/svn
+mkdir /svnroot
 
 #Create default location for CVS repositories
 mkdir /cvsroot

@@ -48,9 +48,11 @@ if (getStringFromRequest('submit')) {
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
-		$_changed_from = getStringFromRequest('_changed_from');
 		$extra_fields = getStringFromRequest('extra_fields');
-		if (!$aq->create($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
+		$_moddaterange = getStringFromRequest('_moddaterange');
+		$_opendaterange = getStringFromRequest('_opendaterange');
+		$_closedaterange = getStringFromRequest('_closedaterange');
+		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
@@ -87,9 +89,11 @@ if (getStringFromRequest('submit')) {
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
-		$_changed_from = getStringFromRequest('_changed_from');
+		$_moddaterange = getStringFromRequest('_moddaterange');
+		$_opendaterange = getStringFromRequest('_opendaterange');
+		$_closedaterange = getStringFromRequest('_closedaterange');
 		$extra_fields = getStringFromRequest('extra_fields');
-		if (!$aq->update($query_name,$_status,$_assigned_to,$_changed_from,$_sort_col,$_sort_ord,$extra_fields)) {
+		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
@@ -138,10 +142,12 @@ if (getStringFromRequest('submit')) {
 //
 $_assigned_to=$aq->getAssignee();
 $_status=$aq->getStatus();
-$_changed_from=$aq->getChanged();
 $extra_fields =& $aq->getExtraFields();
 $_sort_col=$aq->getSortCol();
 $_sort_ord=$aq->getSortOrd();
+$_moddaterange=$aq->getModDateRange();
+$_opendaterange=$aq->getOpenDateRange();
+$_closedaterange=$aq->getCloseDateRange();
 //
 //	creating a custom technician box which includes "any" and "unassigned"
 $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
@@ -212,7 +218,7 @@ echo '<html>
 <title>Query</title><body>
 <h1>'. $feedback .'</h1>
 
-<table border="3" cellpadding="4" rules="groups" frame="box">
+<table border="3" cellpadding="4" rules="groups" frame="box" width="100%">
 	<form action="'.getStringFromServer('PHP_SELF').'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<tr>
@@ -246,7 +252,7 @@ echo '<html>
 </table>';
 
 echo'
-<table>
+<table width="100%">
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':</a><br />'. $tech_box .'</span></td>
 		<td>';
@@ -258,6 +264,16 @@ echo'
 	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',ARTIFACT_EXTRAFIELD_FILTER_INT,false,'QUERY');
 	
 echo '
+	<tr>
+		<td colspan="2">
+		<span style="font-size:smaller">'.$Language->getText('tracker_query','moddaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'"><p>
+		<span style="font-size:smaller">'.$Language->getText('tracker_query','opendaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'"><p>
+		<span style="font-size:smaller">'.$Language->getText('tracker_query','closedaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'">
+		</td>
+	</tr>
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':</span><br />
 		<span style="font-size:smaller">'. 

@@ -69,10 +69,12 @@ $server->wsdl->addComplexType(
 	array(
 		'sortcol' => array('name' => 'sortcol', 'type' => 'xsd:string'),
 		'sortord' => array('name' => 'sortord', 'type' => 'xsd:string'),
-		'changed' => array('name' => 'changed', 'type' => 'xsd:int'),
+		'moddaterange' => array('name' => 'changed', 'type' => 'xsd:string'),
 		'assignee' => array('name' => 'assignee', 'type' => 'tns:ArrayOfInteger'),
 		'status' => array('name' => 'status', 'type' => 'xsd:int'),
-		'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactQueryExtraField')
+		'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactQueryExtraField'),
+		'opendaterange' => array('name' => 'changed', 'type' => 'xsd:string'),
+		'closedaterange' => array('name' => 'changed', 'type' => 'xsd:string')
 	)
 );
 
@@ -172,10 +174,12 @@ function queries_to_soap($queries) {
 					"fields"	=> array(
 									"sortcol"	=> $artifactQuery->getSortCol(),
 									"sortord"	=> $artifactQuery->getSortOrd(),
-									"changed"	=> $artifactQuery->getChanged(),
+									"moddaterange"	=> $artifactQuery->getModDateRange(),
 									"assignee"	=> $assignee,
 									"status"	=> $artifactQuery->getStatus(),
-									"extra_fields"	=> $extra_fields
+									"extra_fields"	=> $extra_fields,
+									"opendaterange"	=> $artifactQuery->getOpenDateRange(),
+									"closedaterange"	=> $artifactQuery->getCloseDateRange()
 									),
 					);
 	}
@@ -295,17 +299,19 @@ $server->register(
 		'name'=>'xsd:string',
 		'status'=>'xsd:int',
 		'assignee'=>'tns:ArrayOfUserID',
-		'changed_since'=>'xsd:int',
+		'moddaterange'=>'xsd:string',
 		'sort_col'=>'xsd:string',
 		'sort_ord'=>'xsd:string',
-		'extra_fields'=>'tns:ArrayOfArtifactExtraFieldsData'
+		'extra_fields'=>'tns:ArrayOfArtifactExtraFieldsData',
+		'opendaterange'=>'xsd:string',
+		'closedaterange'=>'xsd:string'
 	),
 	array('artifactCreateViewResponse'=>'xsd:int'),
 	$uri,
 	$uri.'#artifactCreateView','rpc','encoded'
 );
-function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, $status, $assignee, $changed_since,
-	$sort_col, $sort_ord, $extra_fields) {
+function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, $status, $assignee, $moddaterange,
+	$sort_col, $sort_ord, $extra_fields, $opendaterange, $closedaterange) {
 		
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
@@ -327,7 +333,8 @@ function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, 
 	$extra_fields = arrangeExtraFields($extra_fields, $aef);
 	
 	$query = new ArtifactQuery($at);
-	if (!$query->create($name, $status, $assignee, $changed_since, $sort_col, $sort_ord, $extra_fields)) {
+	if (!$query->create($name, $status, $assignee, $moddaterange, $sort_col, 
+		$sort_ord, $extra_fields, $opendaterange, $closedaterange)) {
 		return new soap_fault ('','artifactCreateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 	
@@ -348,18 +355,20 @@ $server->register(
 		'name'=>'xsd:string',
 		'status'=>'xsd:int',
 		'assignee'=>'tns:ArrayOfUserID',
-		'changed_since'=>'xsd:int',
+		'moddaterange'=>'xsd:string',
 		'sort_col'=>'xsd:string',
 		'sort_ord'=>'xsd:string',
-		'extra_fields'=>'tns:ArrayOfArtifactExtraFieldsData'
+		'extra_fields'=>'tns:ArrayOfArtifactExtraFieldsData',
+		'opendaterange'=>'xsd:string',
+		'closedaterange'=>'xsd:string'
 	),
 	array('artifactUpdateViewResponse'=>'xsd:int'),
 	$uri,
 	$uri.'#artifactUpdateView','rpc','encoded'
 );
 
-function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_id, $name, $status, $assignee, $changed_since,
-	$sort_col, $sort_ord, $extra_fields) {
+function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_id, $name, $status, $assignee, $moddaterange,
+	$sort_col, $sort_ord, $extra_fields, $opendaterange, $closedaterange) {
 		
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
@@ -388,7 +397,8 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 		return new soap_fault ('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 	
-	if (!$query->update($name, $status, $assignee, $changed_since, $sort_col, $sort_ord, $extra_fields)) {
+	if (!$query->update($name, $status, $assignee, $moddaterange, $sort_col, $sort_ord, 
+		$extra_fields, $opendaterange, $closedaterange)) {
 		return new soap_fault ('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 	
