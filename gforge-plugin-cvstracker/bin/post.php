@@ -167,7 +167,7 @@ if ( $cvs_binary_version == "1.12" ) {
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
+if (strtoupper($use_ssl) == 'YES') {
 	$http = "https://";
 } else {
 	$http = "http://";
