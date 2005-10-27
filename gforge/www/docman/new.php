@@ -68,7 +68,7 @@ if (getStringFromRequest('submit')) {
 		$data = '';
 		$uploaded_data_name=$file_url;
 		$uploaded_data_type='URL';		
-	} elseif ($ftp_filename!=100) { //100 == None
+	} elseif ($sys_use_ftpuploads && $ftp_filename!=100) { //100 == None
 		$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
 		$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
 	} elseif ($uploaded_data) {

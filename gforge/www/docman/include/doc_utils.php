@@ -217,7 +217,8 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							" ".
 							"<a href=\"".$link."\">".
 							$docs[$j]->getName().
-							"</a>";
+							"</a> ".
+							"(".$docs[$j]->getFileSize()." ".$Language->getText("docman", "bytes").")";
 				}
 				echo "</ul>";
 			}

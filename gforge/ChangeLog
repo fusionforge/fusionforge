@@ -1,13 +1,24 @@
+2005-10-27 Marcelo Mottalli <marcelo@gforgegroup.com>
+	
+	* Fixed a bug in docman which prevented uploading files when $sys_use_ftpuploads was set to false
+	* Added filesize attribute to documents
+FOLLOWING SCRIPTS MUST BE RUN:
+	- db/20051027-1.sql
+	- db/20051027-2.php
+
 2005-10-26 Tim Perdue <tim@gforgegroup.com>
 
 	* moddaterange, opendaterange, closedaterange added to artifact query
 
 2005-10-21 Daniel Perez <daniel@gforgegroup.com>
+
 	* forum/ForumMessage.class : strip_tags to emails. This is for when fckeditor edited messages have permitted html
 	* TextSanitizer : Fixed various bugs. <input> tag not allowed
 	* utils.php : added param to send_mail function, just to have it if it´s needed sometime
 	* Applied patch -> http://gforge.org/tracker/index.php?func=detail&aid=1590&group_id=1&atid=106
+
 2005-10-18 Daniel Perez <daniel@gforgegroup.com>
+
 	* TextSanitizer : added new function to make HTML output more readable and tidy (avoid empty attributes)
 					added textarea,radio,checkbox,text support (form input types)
 					added headings for text formatting (h1->h6)
@@ -17,13 +28,16 @@
 	* Fckeditor made plugin. Merged plugin into forums. Defaults to old <textarea> (but anyway it´s sanitized for html tags)
 	* Fixed bug -> scmcvs/cronjobs/usergroup.php
 		http://gforge.org/tracker/?func=detail&aid=1429&group_id=6&atid=222
+
 2005-10-17	Marcelo Mottalli	<marcelo@gforgegroup.com>
+
 	* Added the following to WSDL interface:
 		* task dependency type
 		* assignee resource % (currently set to 0) to tasks
 		* task sort_id
 
 2005-10-17 Daniel Perez <daniel@gforgegroup.com>
+
 	* Fixed bug -> html_build_multiple_select_box_from_arrays and
 				html_build_multiple_select_box now doesn´t display DB ids
 		http://gforge.org/tracker/?func=detail&aid=1575&group_id=6&atid=222
@@ -39,13 +53,17 @@
 	* FCKEDITOR added
 	* TextSanitizer : first revision
 	* Fckeditor merged into the forums : first revision
+
 2005-10-13  Marcelo Mottalli   <marcelo@gforgegroup.com>
+
 	* Added extra fields' attribute1 and attribute2 to SOAP	interface
 	* Added "default_selected_id" to SOAP interface (not implemented yet,
 	it currently returns 0)
 
 2005-10-12  Marcelo Mottalli   <marcelo@gforgegroup.com>
+
 	* Added SCM support to SOAP interface
+
 
 2005-10-12  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
@@ -55,22 +73,31 @@
 	Various small improvements.
 
 2005-10-12 Daniel Perez <daniel@gforgegroup.com>
+
 	(**Tracker**)
 	Fixed bug -> https://gforge.org/tracker/?func=detail&aid=1558&group_id=6&atid=111
 	(**Forums**)
 	Fixed bug -> https://gforge.org/tracker/?func=detail&aid=1572&group_id=1&atid=105
+
 2005-10-11 Daniel Perez <daniel@gforgegroup.com>
+
 	(**Survey**)
 	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
+
 2005-10-10 Daniel Perez <daniel@gforgegroup.com>
+
 	(**FORUMS**)
 	The email message is now sent with tags, quotes and bbcode is removed
 	Also a fix was made because some messages were being double htmlspecialchared
+
 2005-10-06 Daniel Perez <daniel@gforgegroup.com>
+
 	[#1561] Uploading doc in HEAD (gforge.org) doesn't work
 	http://gforge.org/tracker/?func=detail&aid=1561&group_id=1&atid=105
 	Extra blank field was being added to the ftp select box, now fixed
+
 2005-10-06 Daniel Perez <daniel@gforgegroup.com>
+
 (**FORUMS**)
 http://gforge.org/tracker/?func=detail&aid=1559&group_id=1&atid=105
 	* Added security. Now the behaviour is
@@ -79,12 +106,15 @@ http://gforge.org/tracker/?func=detail&aid=1559&group_id=1&atid=105
 		sys_bbcode_strip_html -> 1 ) htmlentities
 Added bbcode tags for :
 	* task, artifact
+
 2005-10-05 Daniel Perez <daniel@gforgegroup.com>
+
 https://gforge.org/tracker/?func=detail&aid=1558&group_id=6&atid=111
 	* now when clicking on "Browse", the selected query is mantained
 	* now when clicking "Next 50" or "Previous 50" the query item in select box is mantained too
 https://gforge.org/tracker/?func=detail&aid=1551&group_id=1&atid=106
 	* Changed description to return description instead of id
+
 2005-09-29 Daniel Perez <daniel@gforgegroup.com>
 Bug Fixing : 
 
@@ -95,43 +125,56 @@ Warning message was issued due to missing getArrayFromRequest function call
 Unneeded addslashes removed, it was messing up the name when mass updating
 
 2005-09-16	Leonel Corso <leonel@gforgegroup.com>
+
 	* www/include/pre.php -> Changed plugin hooks to meet new coding standard.
 	* docs/README.Plugins -> Changed information explaining plugin hooks.
 
 2005-09-16 Daniel Perez <daniel@gforgegroup.com>
-	common/pm : changed ProjectTask.class to send email only when something is really changed
+
+	* common/pm : changed ProjectTask.class to send email only when something is really changed
 	www/pm : changed mod_task.php -> Report.class instantiation was changing timezone and displaying incorrect date. changed location of class instantiation
 
 2005-09-07 Leonel Corso <leonel@gforgegroup.com>
+
 	* Added document update functions to SOAP Interface
 
 2005-09-07	Marcelo Mottalli <marcelo@gforgegroup.com>
+
 	* Added artifact query functions to SOAP interface
 
 2005-09-02 Daniel Perez <daniel@gforgegroup.com>
+
 	* forum : (new feature) edit messages for admins and message creators
 	* forum : (new feature) edit attachment / add attachment for admins and message creators
 
 2005-09-1 Leonel Corso <leonel@gforgegroup.com>
+
 	* cronjobs/backup_site.php: has support now for password protected databases
 
 2005-08-31 Daniel Perez <daniel@gforgegroup.com>
+
 	* admin -> forum moderation finished (release / delete messages)
 
 2005-08-31 Daniel Perez <daniel@gforgegroup.com>
+
 	* admin -> forum moderation finished (release / delete messages)
 
 2005-08-30 Daniel Perez <daniel@gforgegroup.com>
+
 	* fixed minor bug : common/tracker/Artifact.class -> now only sends mailFollowup(s) to ACTIVE users
 	
 2005-08-29 Leonel Corso <leonel@gforgegroup.com>
+
 	* Docman Soap API added to CLI	
 	
 2005-08-29 Daniel Perez <daniel@gforgegroup.com>
+
 	* admin -> update forum moderation level status, create forum with moderation status
 	* changed DB, the ability to moderate posts by the forum admins is going to be incorporated
 	* insert moderated message with or without attach
+
 2005-08-28  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
 	* docs/docbook/docbook/installation_guide/installation_guide.xml: Plugins section is reviewed.
 
 2005-08-27 Leonel Corso <leonel@gforgegroup.com>
@@ -143,12 +186,14 @@ Unneeded addslashes removed, it was messing up the name when mass updating
 	* forum/attachment.php secured
 
 2005-08-25 Daniel Perez <daniel@gforgegroup.com>
-	myforums page : added the myforums page to the "my page" and when you visit any list of forums 
+
+	* myforums page : added the myforums page to the "my page" and when you visit any list of forums 
 	for any group. it shows a description of all the forums you are monitoring, the project they belong to, a 
 	link to them and an indicator that tells you if there´s new content for that forum.
 
 2005-08-24 Daniel Perez <daniel@gforgegroup.com>
-	DB : after discussing some issues, fixed the variable names, and changed the schema of 
+
+	* DB : after discussing some issues, fixed the variable names, and changed the schema of 
 	forum_attachemnt_type. still works will old version anyway. referencial integrity automatically deletes 
 	attachs that belong to deleted messages and/or forums attachments : 
 		* admin -> add new attach type
@@ -159,7 +204,8 @@ Unneeded addslashes removed, it was messing up the name when mass updating
 		* download of attach checks user perms
 
 2005-08-23 Daniel Perez <daniel@gforgegroup.com>
-	attachments :
+	
+	* attachments :
 		* changed DB to accept attach types per project
 		* added functionality to check for enabled/disabled attach types
 		* admin -> added class ForumAdmin which will gradually incorporate all functions related 
@@ -170,6 +216,7 @@ update to be made :
 1) run 20050823.sql
 
 2005-08-22 Daniel Perez <daniel@gforgegroup.com>
+
 	initial attachment version. upload, delete, view attachments
 	admin -> option to modify allow anonymous / public forum status
 	bbcode -> added support for bbcode
@@ -186,6 +233,7 @@ $sys_bbcode_strip_html
 3) update the files through CVS, of course ;)
 
 2005-08-20 Leonel Corso <leonel@gforgegroup.com>
+
 	* SOAP support for docman has been added 
 
 2005-08-18	Francisco Gimeno <francisco@gforgegroup.com>

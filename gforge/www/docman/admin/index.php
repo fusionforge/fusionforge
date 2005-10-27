@@ -77,7 +77,7 @@ if (getStringFromRequest('submit')) {
 			$data = '';
 			$filename=$file_url;
 			$filetype='URL';
-		} elseif ($ftp_filename!=100) { //100==None
+		} elseif ($sys_use_ftpuploads && $ftp_filename!=100) { //100==None
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
 			$filetype=$uploaded_data_type;

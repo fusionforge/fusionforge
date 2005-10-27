@@ -679,6 +679,7 @@ docman	error_no_groups_defined	No Document Groups defined
 docman	submit_new	Submit new documentation
 docman	turned_off	This project has turned off the Doc Manager
 docman	view_doc	View Documentation
+docman	bytes		bytes
 docman_admin	add_edit_docgroups	Add/Edit Document Groups
 docman_admin	section	Project: $1
 docman_admin	title	Document Manager: Administration
