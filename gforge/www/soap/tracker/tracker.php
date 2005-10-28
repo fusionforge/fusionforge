@@ -1071,7 +1071,7 @@ $server->register(
 	),
 	array('artifactGetChangeLogResponse'=>'tns:ArrayOfArtifactChangeLog'),
 	$uri,
-	$uri.'#artifactSetView','rpc','encoded'
+	$uri.'#artifactGetChangeLog','rpc','encoded'
 );
 
 function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $artifact_id) {
