@@ -879,11 +879,22 @@ class ProjectTask extends Error {
 		if ( ($this->getDuration()) != $duration ) {
 			$has_changes = true;
 		}
+
 		if (!$this->ProjectGroup->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
+		/*if ( ($this->getSummary() != $summary) || ($this->getDetails() != $details) ||
+			 ($this->getPriority() != $priority) || ($this->getHours() != $hours) ||
+			 ($this->getStartDate() != $start_date) || ($this->getEndDate() != $end_date) ||
+			 ($this->getStatusID() != $status_id) || ($this->getCategoryID() != $category_id) ||
+			 ($this->getPercentComplete() != $percent_complete) ) {
+			 
+			 $has_changes = true;
+		}*/
+		
+		
 		db_begin();
 
 		//
@@ -924,12 +935,12 @@ class ProjectTask extends Error {
 				return false;
 			}
 		}
-		if ($this->getStatusID() != $status_id)	{ 
-			$this->addHistory ('status_id',$this->getStatusID());  
+		if ($this->getStatusID() != $status_id) { 
+			$this->addHistory ('status_id',$this->getStatusID());
 			$has_changes = true;
 		}
 
-		if ($this->getCategoryID() != $category_id) { 
+		if ($this->getCategoryID() != $category_id)	{
 			$this->addHistory ('category_id',$this->getCategoryID());
 			$has_changes = true;
 		}
@@ -939,28 +950,28 @@ class ProjectTask extends Error {
 			$has_changes = true;
 		}
 
-		if ($this->getSummary() != htmlspecialchars(stripslashes($summary))) { 
-			$this->addHistory ('summary',addslashes($this->getSummary()));  
+		if ($this->getSummary() != htmlspecialchars(stripslashes($summary))) {
+			$this->addHistory ('summary',addslashes($this->getSummary()));
 			$has_changes = true;
 		}
 
-		if ($this->getPercentComplete() != $percent_complete) { 
-			$this->addHistory ('percent_complete',$this->getPercentComplete()); 
+		if ($this->getPercentComplete() != $percent_complete) {
+			$this->addHistory ('percent_complete',$this->getPercentComplete());
 			$has_changes = true;
 		}
 
-		if ($this->getHours() != $hours) { 
-			$this->addHistory ('hours',$this->getHours());  
+		if ($this->getHours() != $hours) {
+			$this->addHistory ('hours',$this->getHours());
 			$has_changes = true;
 		}
 
-		if ($this->getStartDate() != $start_date) { 
-			$this->addHistory ('start_date',$this->getStartDate());  
+		if ($this->getStartDate() != $start_date) {
+			$this->addHistory ('start_date',$this->getStartDate());
 			$has_changes = true;
 		}
 
-		if ($this->getEndDate() != $end_date) { 
-			$this->addHistory ('end_date',$this->getEndDate()); 
+		if ($this->getEndDate() != $end_date) {
+			$this->addHistory ('end_date',$this->getEndDate());
 			$has_changes = true;
 		}
 
@@ -1014,7 +1025,7 @@ class ProjectTask extends Error {
 					db_rollback();
 					return false;
 				} else {
-					if ($has_changes) {
+					if ($has_changes) { //only send email if there was any change
 						$this->sendNotice();
 					}
 					db_commit();
