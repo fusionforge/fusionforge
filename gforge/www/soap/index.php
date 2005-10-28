@@ -99,6 +99,12 @@ require_once('www/soap/pm/pm.php');
 //
 require_once('www/soap/frs/frs.php');
 
+//
+//      Include Docman Functions
+//
+require_once('www/soap/docman/docman.php');
+
+
 
 $wsdl_data = $server->wsdl->serialize();
 
