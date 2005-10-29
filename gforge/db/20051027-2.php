@@ -39,8 +39,8 @@ for ($i=0; $i < db_numrows($res); $i++) {
 	$data = base64_decode($base64_data);
 	$size = strlen($data);
 	
-	$res = db_query("UPDATE doc_data SET filesize=".$size." WHERE docid=".$docid);
-	if (!$res) {
+	$res2 = db_query("UPDATE doc_data SET filesize='".$size."' WHERE docid='".$docid."'");
+	if (!$res2) {
 		echo "Couldn't update document #".$docid.":".db_error()."\n";
 		db_rollback();
 		exit(1);
