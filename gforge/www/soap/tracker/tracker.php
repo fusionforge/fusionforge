@@ -71,9 +71,12 @@ $server->wsdl->addComplexType(
 		'extra_field_id' => array('name' => 'extra_field_id', 'type' => 'xsd:int'),
 		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
 		'field_type' => array('name' => 'field_type', 'type' => 'xsd:int'),
+		'attribute1' => array('name' => 'attribute1', 'type' => 'xsd:int'),
+		'attribute2' => array('name' => 'attribute2', 'type' => 'xsd:int'),
 		'is_required' => array('name' => 'is_required', 'type' => 'xsd:int'),
 		'alias' => array('name' => 'alias', 'type' => 'xsd:string'),
-		'available_values' => array('name' => 'available_values', 'type' => 'tns:ArrayOfArtifactExtraFieldAvailableValues')
+		'available_values' => array('name' => 'available_values', 'type' => 'tns:ArrayOfArtifactExtraFieldAvailableValues'),
+		'default_selected_id' => array('name' => 'default_selected', 'type' => 'xsd:int')
 	)
 );
 
@@ -109,7 +112,8 @@ $server->wsdl->addComplexType(
 	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
 	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
 	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int'),
-	'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField')
+	'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField'),
+	'custom_status_field' => array('name' => 'custom_status_field', 'type' => 'xsd:int'),
 	)
 );
 
@@ -292,8 +296,6 @@ $server->register(
 	$uri,$uri.'#getArtifactFileData','rpc','encoded'
 );
 
-
-//TODO - FINISH ADD FILE
 $server->register(
 	'addArtifactFile',
 	array(	'session_ser'=>'xsd:string',
@@ -540,9 +542,12 @@ function artifacttype_to_soap($at_arr) {
 					"extra_field_id"=> $aefobj->getID(),
 					"field_name"	=> $aefobj->getName(),
 					"field_type"	=> $aefobj->getType(),
+					"attribute1"	=> $aefobj->getAttribute1(),
+					"attribute2"	=> $aefobj->getAttribute2(),
 					"is_required"	=> $aefobj->isRequired(),
 					"alias"			=> $aefobj->getAlias(),
-					"available_values"	=> $avs
+					"available_values"	=> $avs,
+					"default_selected_id" => 0		//TODO (not implemented yet)
 				);
 			}
 
@@ -556,7 +561,8 @@ function artifacttype_to_soap($at_arr) {
 				'due_period'=>$at_arr[$i]->data_array['due_period'],
 				'datatype'=>$at_arr[$i]->data_array['datatype'],
 				'status_timeout'=>$at_arr[$i]->data_array['status_timeout'],
-				'extra_fields' => $extrafields
+				'extra_fields' => $extrafields,
+				'custom_status_field' => $at_arr[$i]->data_array['custom_status_field']
 			);
 		}
 	}
@@ -1025,213 +1031,88 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 	}
 }
 
-//*****************************
-//By Remo on 24-03-2005
-//for getProjectData() function
-
+/**
+ * artifactGetChangeLog
+ */
 $server->wsdl->addComplexType(
-	'ArtifactTypeData',
+	'ArtifactChangeLog',
 	'complexType',
 	'struct',
 	'sequence',
 	'',
 	array(
-	'ArtifactType' => array('name'=>'ArtifactType', 'type' => 'tns:ArtifactType'),
-	'technicians' => array('name'=>'technicians', 'type' => 'tns:ArrayOfUser')
-//	'artifacts' => array('name'=>'artifacts', 'type' => 'tns:ArrayOfArtifact')
+		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
+		'old_value' => array('name' => 'old_value', 'type' => 'xsd:string'),
+		'date' => array('name' => 'date', 'type' => 'xsd:int'),
+		'user_name' => array('name' => 'user_name', 'type' => 'xsd:string')
 	)
 );
 
 $server->wsdl->addComplexType(
-	'ArrayOfArtifactTypeData',
+	'ArrayOfArtifactChangeLog',
 	'complexType',
 	'array',
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactTypeData[]')),
-	'tns:ArtifactTypeData'
-);
-
-$server->wsdl->addComplexType(
-	'GroupData',
-	'complexType',
-	'struct',
-	'sequence',
-	'',
 	array(
-	'group' => array('name'=>'groups', 'type' => 'tns:Group'),
-	'artifacttypes' => array('name'=>'artifacttypes', 'type' => 'tns:ArrayOfArtifactTypeData')
-	)
-);
-
-$server->wsdl->addComplexType(
-	'ProjectData',
-	'complexType',
-	'array',
-	'',
-	'SOAP-ENC:Array',
-	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupData[]')),
-	'tns:GroupData'
+		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactChangeLog[]')
+	),
+	'tns:ArtifactChangeLog'
 );
 
 $server->register(
-	'getProjectData',
-	array('session_ser'=>'xsd:string'),
-	array('getProjectDataResponse'=>'tns:ProjectData'),
-	$uri,$uri.'#getProjectData','rpc','encoded');
+	'artifactGetChangeLog',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'artifact_id' => 'xsd:int'
+	),
+	array('artifactGetChangeLogResponse'=>'tns:ArrayOfArtifactChangeLog'),
+	$uri,
+	$uri.'#artifactGetChangeLog','rpc','encoded'
+);
 
-
-//********************************************************************
-//
-// getProjectData function is used to retrieve the information like
-// Group details and their related Artifact details, and extra field
-// data and element details which is related to the artifact
-//
-//*******************************************************************
-
-function getProjectData($session_ser) {
-	continue_session($session_ser); 
-	$uid =& user_getid(); // Get the user id
-	if (!$uid) {
-		return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
+function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $artifact_id) {
+	continue_session($session_ser);
+	$grp =& group_get_object($group_id);
+	if (!$grp || !is_object($grp)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get Group','Could Not Get Group');
+	} elseif ($grp->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
-	if($uid) {
-		$usrobj=& session_get_user(); // Get the user object for the current session
-		if (!$usrobj || !is_object($usrobj)) {
-			return new soap_fault ('','getProjectData','Could Not Get User','Could Not Get User');
-		} elseif ($usrobj->isError()) {
-			return new soap_fault ('','getProjectData',$usrobj->getErrorMessage(),$usrobj->getErrorMessage());
-		}
+	
+	$at = new ArtifactType($grp,$group_artifact_id);
+	if (!$at || !is_object($at)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get ArtifactType','Could Not Get ArtifactType');
+	} elseif ($at->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
-//NEEDS LOTS OF COMMENTS THROUHOUT
-	//*********
-	//** Retrieve the group objects from the user object for the current session using $usrobj->getGroups() function
-
-	$grpsobj=$usrobj->getGroups(); 
-	reset($grpsobj);
-	$return=array(); //initialize the return array
-
-	//*******
-	// Loop through the group array object
-	// and retrive the ArtifactTypeFactory object from the group object
-	while(list($gky,) = each($grpsobj)) {
-		if (!is_object($grpsobj[$gky])) { 
-			continue; 
-		}
-		if ($grpsobj[$gky]->isError()) {
-		   return new soap_fault('','getProjectData',$grpsobj[$gky]->getErrorMessage(),$grpsobj[$gky]->getErrorMessage());
-			//skip it if it had an error
-		} else {						
-			$grpobj=$grpsobj[$gky];
-			$returnGroup=array();
-			$atobjs=array();
-			$atfobj = new ArtifactTypeFactory($grpobj); //Initialize the ArtifactTypeFactory object from group object
-			if (!$atfobj || !is_object($atfobj)) {
-				return new soap_fault ('','getProjectData','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
-			} elseif ($atfobj->isError()) {
-				return new soap_fault ('','getProjectData',$atfobj->getErrorMessage(),$atf->getErrorMessage());
-			}
-			//********
-			// Retreive the ArtifactType object from the ArtifactTypeFactory object
-			$atobjs=$atfobj->getArtifactTypes();
-			if(!$atobjs) { continue; }
-			$j=0;
-			reset($atobjs);
-			$returnATdata=array();
-			while(list($atky1, )=each($atobjs)) {
-				$returnTechnicians=array();
-				$tmpartifactlist=array();
-				$i=$atky1;
-				if ($atobjs[$i]->isError()) {	
-				   	return new soap_fault('','getProjectData',$atobjs[$i]->getErrorMessage(),$atobjs[$i]->getErrorMessage());
-				} else {
-	/*				$afobj = new ArtifactFactory($atobjs[$i]);
-					if (!$afobj || !is_object($afobj)) {
-						return new soap_fault ('','getProjectData','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
-					} elseif ($afobj->isError()) {
-						return new soap_fault ('','getProjectData',$afobj->getErrorMessage(),$afobj->getErrorMessage());
-					}		
-					$afobj->setup(0,'','',0,'custom',false,false);
-					$tmpartifactlist=$afobj->getArtifacts();
-					//$returnArtifacts=array();
-	*/
-					$returnTechnicians=users_to_soap($atobjs[$i]->getTechnicianObjects());
-//					$returnArtifacts=artifacts_to_soap($tmpartifactlist);
-					
-					// Get list of extra fields for this artifact
-					$extrafields = array();
-					$tmpextrafields = $atobjs[$i]->getExtraFields();
-					foreach ($tmpextrafields as $extrafield) {
-						$aefobj = new ArtifactExtraField($atobjs[$i], $extrafield["extra_field_id"]);
-						
-						// array of available values
-						$avtmp = $aefobj->getAvailableValues();
-						$avs = array();
-						for ($j=0; $j < count($avtmp); $j++) {
-							$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
-							$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
-							$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
-						}
-						
-						$extrafields[] = array(
-							"extra_field_id"=> $aefobj->getID(),
-							"field_name"	=> $aefobj->getName(),
-							"field_type"	=> $aefobj->getType(),
-							"is_required"	=> $aefobj->isRequired(),
-							"alias"			=> $aefobj->getAlias(),
-							"available_values"	=> $avs
-						);
-					}
-
-					$returnArtifactType=array(
-						'group_artifact_id'=>$atobjs[$i]->data_array['group_artifact_id'],
-						'group_id'=>$atobjs[$i]->data_array['group_id'],
-						'name'=>$atobjs[$i]->data_array['name'],
-						'description'=>$atobjs[$i]->data_array['description'],
-						'is_public'=>$atobjs[$i]->data_array['is_public'],
-						'allow_anon'=>$atobjs[$i]->data_array['allow_anon'],
-						'due_period'=>$atobjs[$i]->data_array['due_period'],
-						'datatype'=>$atobjs[$i]->data_array['datatype'],
-			       		'status_timeout'=>$atobjs[$i]->data_array['status_timeout'],
-			       		'extra_fields' => $extrafields
-			       	);
-					$returnATdata[] = array(
-						'ArtifactType' => $returnArtifactType,
-						'technicians' => $returnTechnicians);
-	//					'artifacts' => $returnArtifacts);
-					$returnTechnicians=array();
-	//				$returnArtifacts=array();
-					$returnArtifactType=array();
-				}
-			}
-		
-			//mail("remo@wcogs.com","getProjectData-ArtifactType",count($artifact_list1));
-			//$artifact_list1=$tmpartifactlist;
-			//$returnArtifacts=artifacts_to_soap($artifact_list1);
-			
-			$returnGroup = array('group_id'=>$grpobj->data_array['group_id'],
-				'group_name'=>$grpobj->data_array['group_name'],
-				'homepage'=>$grpobj->data_array['homepage'],
-				'is_public'=>$grpobj->data_array['is_public'],
-				'status'=>$grpobj->data_array['status'],
-				'unix_group_name'=>$grpobj->data_array['unix_group_name'],
-				'short_description'=>$grpobj->data_array['short_description'],
-				'scm_box'=>$grpobj->data_array['scm_box'],
-				'register_time'=>$grpobj->data_array['register_time']);
-
-			$return[] = array(
-				'group' => $returnGroup,
-				'artifacttypes' => $returnATdata
-			);
-			$returnATdata=array();
-		}
+	$artifact = new Artifact($at,$artifact_id);
+	if (!$artifact || !is_object($artifact)) {
+		return new soap_fault ('','artifactGetChangeLog','Could Not Get Artifact','Could Not Get Artifact');
+	} elseif ($artifact->isError()) {
+		return new soap_fault ('','artifactGetChangeLog',$artifact->getErrorMessage(),$artifact->getErrorMessage());
 	}
-	//$ar = array(array("group"=>array(),"artifacttypes"=>array(array("ArtifactType"=>array(),"artifacts"=>array()))));
-	//return $ar;
-	return $return;
+	
+	// note that Artifact::getHistory returns a DB result handler
+	$result = $artifact->getHistory();
+	return artifact_history_to_soap($result);
 }
 
+function artifact_history_to_soap($db_result) {
+	$result = array();
+	while ($entry = db_fetch_array($db_result)) {
+		$result[] = array(
+					"field_name"	=> $entry["field_name"],
+					"old_value"		=> $entry["old_value"],
+					"date"			=> $entry["entrydate"],
+					"user_name"		=> $entry["user_name"]
+					);
+	}
+	
+	return $result;
+}
 ?>
