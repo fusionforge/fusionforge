@@ -1,3 +1,12 @@
+2005-10-37 Daniel Perez <daniel@gforgegroup.com>
+	svntracker : 
+		head -> * fixed links (now working)
+				* fixed bugs
+				* added debug functions to write to file
+
+2005-10-27 Daniel Perez <daniel@gforgegroup.com>
+	Created branch_4_5 for svntracker
+
 2005-10-27 Marcelo Mottalli <marcelo@gforgegroup.com>
 	
 	* Fixed a bug in docman which prevented uploading files when $sys_use_ftpuploads was set to false
