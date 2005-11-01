@@ -1,5 +1,6 @@
 2005-11-01 Daniel Perez <daniel@gforgegroup.com>
 	www/tracker/downloadcv.php : applied patch from ibm tracker to HEAD and Branch_4_5
+	forums : forum.php and message.php -> added fix to support old messages
 
 2005-10-31 Daniel Perez <daniel@gforgegroup.com>
 	svntracker : 
