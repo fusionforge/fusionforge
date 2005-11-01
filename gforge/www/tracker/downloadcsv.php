@@ -22,6 +22,10 @@
  */
 require_once('common/tracker/ArtifactFactory.class');
 
+header('Content-type: text/comma-separated-values');
+list($year, $month) = explode('-', date('Y-m'));
+header('Content-disposition: filename="tracker_report-'.$year.'-'.$month.'.csv"');
+
 if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
