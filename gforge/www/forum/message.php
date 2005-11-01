@@ -116,7 +116,12 @@ if ($msg_id) {
 	$bbcode_on=$sys_bbcode_bbcode_on; 
 	$strip_html=$sys_bbcode_strip_html;
 	$text_support = new TextSupport();
-	echo $fm->getBody();//$text_support->displayText($fm->getBody(), $make_clickable, $smilie_on, $bbcode_on, $fm->getBBCode_uid());
+	if (!strstr('<',$fm->getBody())) { 
+		echo nl2br($fm->getBody()); //backwards compatibility for non html messages
+	} else {
+		echo $fm->getBody();
+	}
+	//echo $fm->getBody();//$text_support->displayText($fm->getBody(), $make_clickable, $smilie_on, $bbcode_on, $fm->getBBCode_uid());
 	echo "</td></tr>";
 
 	echo $GLOBALS['HTML']->listTableBottom();

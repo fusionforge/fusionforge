@@ -251,7 +251,7 @@ class ForumHTML extends Error {
 					'//.  $text_support->displayText($msg->getBody(), $make_clickable, $smilie_on, $bbcode_on, $msg->getBBCode_uid()) .'
 					; 
 					if (!strstr('<',$msg->getBody())) {
-						$ret_val .= nl2br($msg->getBody());
+						$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
 					} else {
 						$ret_val .= $msg->getBody();
 					}
