@@ -59,8 +59,8 @@ class ForumAdmin extends Error {
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0) {
 		global $HTML;
 		
-		$return = '<a href="admin/index.php?editmsg=' . $msg_id  . '&group_id=' . $group_id .  '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array()) . "</a>";
-		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&group_id=' . $group_id . '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array());
+		$return = '<a href="admin/index.php?editmsg=' . $msg_id  . '&group_id=' . $group_id .  '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array(alt=>"Edit")) . "</a>";
+		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&group_id=' . $group_id . '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array(alt=>"Delete"));
 		$return .= "<br>";
 		return $return;
 	}
