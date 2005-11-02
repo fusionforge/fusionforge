@@ -513,7 +513,7 @@ class ForumHTML extends Error {
 			<br><br>		
 			
 				<p>
-				<?php $this->LinkAttachForm();?>
+				<?php //$this->LinkAttachForm();?>
 				<p>
 			
 
