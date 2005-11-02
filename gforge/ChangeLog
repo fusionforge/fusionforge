@@ -1,3 +1,7 @@
+2005-11-02 Daniel Perez <daniel@gforgegroup.com>
+	forums : fixed attachment issue when generating new message
+	common/include/textsanitizer.class : fixed regexp to only look for "script" tag, not the word itself
+
 2005-11-01 Daniel Perez <daniel@gforgegroup.com>
 	www/tracker/downloadcv.php : applied patch from ibm tracker to HEAD and Branch_4_5
 	forums : forum.php and message.php -> added fix to support old messages
