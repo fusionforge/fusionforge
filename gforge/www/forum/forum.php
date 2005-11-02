@@ -104,7 +104,7 @@ if ($forum_id) {
 			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
 			$am->SetForumMsg($fm);
 			$attach = getUploadedFile("attachment1");
-			$am->attach($attach,$group_id);
+			$am->attach($attach,$group_id,0,$fm->getID());
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br>" . $item;
 			}
