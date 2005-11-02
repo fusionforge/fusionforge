@@ -97,7 +97,7 @@ Class TextSanitizer extends Error {
 	$input = htmlspecialchars($input); // first strip all chars
 		
 	//to hell with <script> </script> tags
-	$script_open = '/(&lt;.*[s|S][c|C][r|R][i|I][p|P][t|T].*&gt;)/';
+	$script_open = '/(&lt;\s*[s|S][c|C][r|R][i|I][p|P][t|T]\s*&gt;)/';
 	$input = preg_replace($script_open,"<b>No script tags of any kind allowed</b>",$input);
 		
 	//search for <strong>something</strong> . 
