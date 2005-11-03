@@ -4,6 +4,9 @@
 		[#1396] -> http://gforge.org/tracker/?func=detail&aid=1396&group_id=1&atid=106
 		[#1419] -> http://gforge.org/tracker/?func=detail&aid=1419&group_id=1&atid=106
 		[#1430] -> http://gforge.org/tracker/?func=detail&aid=1430&group_id=1&atid=106
+		[#1437] -> http://gforge.org/tracker/?func=detail&aid=1437&group_id=1&atid=106
+		[#1450] -> http://gforge.org/tracker/?func=detail&aid=1450&group_id=1&atid=106
+		[#1458] -> http://gforge.org/tracker/?func=detail&aid=1458&group_id=1&atid=106
 
 2005-11-02 Daniel Perez <daniel@gforgegroup.com>
 	forums : fixed attachment issue when generating new message

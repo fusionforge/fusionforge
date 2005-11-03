@@ -992,7 +992,7 @@ frs_file	error_already_exists	That filename already exists in this project space
 frs_file	error_cannot_move	File cannot be moved to the permanent location
 frs_file	error_invalid_file	FRSFile Appears to be invalid
 frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
-frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
+frs_file	error_name_format	Filename can only be alphanumeric and "-" "_" "." characters.
 frs_package	error_already_exists	That filename already exists in this project space 
 frs_package	error_cannot_move	File cannot be moved to the permanent location
 frs_package	error_invalid_file	FRSFile Appears to be invalid
