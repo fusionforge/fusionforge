@@ -137,14 +137,20 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 			$package_release = db_fetch_array( $res_release );
 
 		   	// Highlight the release if one was chosen
-			if ( $release_id && $release_id == $package_release['release_id'] ) {
-				$bgstyle = 'BGCOLOR="pink"';
+			if ( $release_id ) {
+				if ( $release_id == $package_release['release_id'] ) {
+					$bgstyle = 'BGCOLOR="pink"';
+					$cell_data[] = array('&nbsp;<strong>
+						<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
+						'colspan="3"');
+				} else {
+					$bgstyle = $cur_style;
+					$cell_data[] = array('&nbsp;<strong><a href="?group_id='.$group_id.'&release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>','colspan="3"');
+				}
 			} else {
 				$bgstyle = $cur_style;
+				$cell_data[] = array('&nbsp;<strong><a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>','colspan="3"');
 			}
-			$cell_data[] = array('&nbsp;<strong>
-				<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
-				'colspan="3"');
 
 			$cell_data[] = array('&nbsp;<strong>
 				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
@@ -189,8 +195,13 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 					$cell_data[] = array($file_release['processor']);
 					$cell_data[] = array($file_release['type']);
 
-					print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
-
+					if ( $release_id  ) {
+						if ( $release_id == $package_release['release_id'] ) {
+							print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data,FALSE);
+						}
+					} else {
+						print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
+					}
 					$proj_stats['size'] += $file_release['file_size'];
 					$proj_stats['downloads'] += $file_release['downloads'];
 				}	
