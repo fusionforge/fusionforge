@@ -1056,7 +1056,8 @@ general	update_successful	Updated successfully
 general	yes	Yes
 global	error	ERROR
 group	activity	Activity Percentile:&nbsp;
-group	activitystat	View project activity <a href="/project/stats/?group_id=$1">statistics</a>.
+group	activitystat	View project <a href="/project/stats/?group_id=$1">Statistics</a> or <a href="/project/report/?group_id=$1">Activity</a>.
+group_activity	lastmod	Last Modified
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
