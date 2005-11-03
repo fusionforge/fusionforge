@@ -89,6 +89,7 @@ $order_title_arr[]=$Language->getText('pm','summary');
 $order_title_arr[]=$Language->getText('pm','start_date');
 $order_title_arr[]=$Language->getText('pm','end_date');
 $order_title_arr[]=$Language->getText('pm','percent_complete');
+$order_title_arr[]=$Language->getText('pm','priority');
 
 $order_col_arr=array();
 $order_col_arr[]='project_task_id';
@@ -96,6 +97,7 @@ $order_col_arr[]='summary';
 $order_col_arr[]='start_date';
 $order_col_arr[]='end_date';
 $order_col_arr[]='percent_complete';
+$order_col_arr[]='priority';
 $order_box=html_build_select_box_from_arrays ($order_col_arr,$order_title_arr,'_order',$_order,false);
 
 /*
