@@ -96,4 +96,17 @@ $trackers[]=array('Patches','Patch Tracking System',1,0,'','',30,0,'','',3, arra
 
 $trackers[]=array('Feature Requests','Feature Request Tracking System',1,0,'','',30,0,'','',4, array($product, $os, $component));
 
+//This allows you to specify a custom status with given status_id.
+//e.g. The following allows for open and closed custom states to be defined for new trackers.
+
+/*$custom_statuses=array(
+array('Duplicate',2),
+array('Unreproducable',1),
+array('Verified',1),
+array('Needs Test',1),
+array('Needs Fix',1));
+
+$custom_status=array('Status',ARTIFACT_EXTRAFIELDTYPE_STATUS,0,0,1,$custom_statuses);*/
+
+
 ?>

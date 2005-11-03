@@ -113,7 +113,19 @@ class ArtifactTypes extends Error {
 //print($el)."**";
 
 							$aefe = new ArtifactExtraFieldElement($aef);
-							if (!$aefe->create(addslashes($el))) {
+						/*	 Allow us to provide a list as an element
+							 value - in doing so, we can provide a
+							 status field value for people wanting to
+							 set up custom statuses. The first element
+							 of any given array is the name, the second
+							 is the status_id (0, 1 or 2)*/
+							$el_name = $el;
+							$el_status = 0;
+							if (is_array($el) && $fld[1] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+								$el_name = $el[0];
+								$el_status = $el[1];
+							}
+							if (!$aefe->create(addslashes($el_name),$el_status)) {
 								db_rollback();
 								$this->setError('Error Creating Extra Field Element: '.$aefe->getErrorMessage());
 								return false;
