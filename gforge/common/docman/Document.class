@@ -383,6 +383,23 @@ class Document extends Error {
 	function getFileSize() {
 		return $this->data_array['filesize'];
 	}
+	/**
+	 *	getUpdated - get the time this document was updated.
+	 *
+	 *	@return int	The epoch date this document was updated.
+	 */
+	function getUpdated() {
+		return $this->data_array['updatedate'];
+	}
+
+	/**
+	 *	getCreated - get the time this document was created.
+	 *
+	 *	@return int	The epoch date this document was created.
+	 */
+	function getCreated() {
+		return $this->data_array['createdate'];
+	}
 
 	/**
 	 *	update - use this function to update an existing entry in the database.

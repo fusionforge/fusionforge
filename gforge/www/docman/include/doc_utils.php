@@ -151,7 +151,7 @@ function docman_footer($params) {
  * docman_display_documents - Recursive function to show the documents inside the groups tree
  */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
-	global $selected_doc_group_id,$Language;
+	global $selected_doc_group_id,$Language,$sys_datefmt;
 
 	$selected_doc_group_id=getIntFromRequest('selected_doc_group_id');
 	
@@ -211,13 +211,23 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					} else {
 						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".$docs[$j]->getFileName() );
 					}
-				
+					$tooltip = $docs[$j]->getFileName() . " (" .
+								($docs[$j]->getUpdated() ?
+								date($sys_datefmt, $docs[$j]->getUpdated()) :
+								date($sys_datefmt,$docs[$j]->getCreated()))  .
+								") ";
+					if ($docs[$j]->getFilesize() > 1024) {
+						$tooltip .= floor($docs[$j]->getFilesize()/1024) . "KiB";
+					} else {
+						$tooltip .= $docs[$j]->getFilesize() . "B";
+					}
+					$tooltip = htmlspecialchars($tooltip);					
 					echo "<li>".
 							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
 							" ".
-							"<a href=\"".$link."\">".
+							"<a href=\"".$link."\" title=\"$tooltip\">".
 							$docs[$j]->getName().
-							"</a> ".
+							"</a> - " . $tooltip . "</li>".
 							"(".$docs[$j]->getFileSize()." ".$Language->getText("docman", "bytes").")";
 				}
 				echo "</ul>";
