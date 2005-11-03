@@ -130,15 +130,32 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		if (!is_dir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName())) {
-			mkdir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName());
+
+		$path_name=$GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
+		if (!is_dir($path_name)) {
+			mkdir($path_name,0755);
+		} else {
+			if ( fileperms($path_name) != 0x4755 ) {
+				chmod($path_name,0755);
+			}
 		}
-		if (!is_dir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName())) {
-			mkdir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName());
+		$path_name=$path_name.'/'.$this->FRSRelease->FRSPackage->getFileName();
+		if (!is_dir($path_name)) {
+			mkdir($path_name,0755);
+		} else {
+			if ( fileperms($path_name) != 0x4755 ) {
+				chmod($path_name,0755);
+			}
 		}
-		if (!is_dir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName().'/'.$this->FRSRelease->getFileName())) {
-			mkdir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName().'/'.$this->FRSRelease->getFileName());		
+		$path_name=$path_name.'/'.$this->FRSRelease->getFileName();
+		if (!is_dir($path_name)) {
+			mkdir($path_name,0755);
+		} else {
+			if ( fileperms($path_name) != 0x4755 ) {
+				chmod($path_name,0755);
+			}
 		}
+
 		$file_location=escapeshellcmd($file_location);
 		$newfilelocation = $GLOBALS['sys_upload_dir'].'/'.
 			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
