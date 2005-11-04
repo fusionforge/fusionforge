@@ -20,7 +20,6 @@ if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
 	exit;
 }
 
-$no_gz_buffer = getStringFromRequest('no_gz_buffer');
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
