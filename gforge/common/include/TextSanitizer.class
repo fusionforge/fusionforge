@@ -86,6 +86,21 @@ Class TextSanitizer extends Error {
 	}
 		
 	
+			/**
+	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character. 
+	 *
+	 *	@param   string		The input string
+	 *	@return  string		The output string
+	 */
+	function convertExtendedCharsForEmail($text) {
+		$text = str_replace("&acute;","'",$text); //it´s better to see that char in the email than the html entity
+		$text = str_replace("&amp;","&",$text);
+		$text = str_replace("&quot;",'"',$text);
+		$text = str_replace("&nbsp;",' ',$text);
+		$text = str_replace("&nbsp;",' ',$text);
+		return $text;
+	}
+	
 		/**
 	 *  SanitizeHtml - Grabs some text with all kinds of html code and parses it to make it safe
 	 *
@@ -547,13 +562,18 @@ Class TextSanitizer extends Error {
 		$input = preg_replace($nonbreakingspace,"&nbsp;",$input);
 		
 	//search for &amp; and let them be
-		$nonbreakingspace = '/&amp;amp;/';
-		$input = preg_replace($nonbreakingspace,"&amp;",$input);
+		$ampersand = '/&amp;amp;/';
+		$input = preg_replace($ampersand,"&amp;",$input);
 		
 	//search for &quot; and let them be
-		$nonbreakingspace = '/&amp;quot;/';
-		$input = preg_replace($nonbreakingspace,"&quot;",$input);		
-
+		$quote = '/&amp;quot;/';
+		$input = preg_replace($quote,"&quot;",$input);
+		
+	//search for &acute; and let them be
+		
+		$cute = '/&amp;acute;/';
+		$input = preg_replace($cute,"&acute;",$input);
+		
 	//search for <br /> and let them be
 		$br = '/&lt;br\s{0,3}\/&gt;/';
 		$input = preg_replace($br,"<br/>",$input);

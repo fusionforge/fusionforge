@@ -67,6 +67,21 @@ class AttachManager extends Error {
 	}
 	
 	/**
+	* Function GetAttachId
+	*
+	* Returns the attach id for the message id passed as a parameter or false if error
+	*/
+	function GetAttachId($msg_id) {
+		$sql = "SELECT attachmentid FROM forum_attachment WHERE msg_id='$msg_id'";
+		$res = db_query($sql);
+		if ($res) {
+			return db_result($res,0,0);
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	* Function PrintHelperFunctions
 	*
 	*
@@ -185,6 +200,8 @@ class AttachManager extends Error {
 	 * @param 	int		Whether we are updating an existing attach (attachid to update or cero for new message (inserts using the hights msg id from forum table)
 	 * @param 	int		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
 	 *
+	 * @return	int	    Attach id on success, false otherwise
+	 *
 	 */
 	function attach($attach,$group_id,$update=0,$msg_id=0) {
 		global $Language;
@@ -208,7 +225,7 @@ class AttachManager extends Error {
 		if ($attachment == 'none' OR empty($attachment) OR empty($attachment_name))
 		{
 			$this->messages[] = $Language->getText('forum_attachmngr','errnofile');
-			return; //no point in continuing if there´s no file
+			return false; //no point in continuing if there´s no file
 		}
 		
 		$attachment_name2 = strtolower($attachment_name);
@@ -219,7 +236,7 @@ class AttachManager extends Error {
 			// invalid extension
 			$this->messages[] = $Language->getText('forum_attachmngr','err_inv_ext');
 			@unlink($attachment);
-			return;
+			return false;
 		}
 		
 		$maxattachsize = $attachtypes["$extension"]['size'];
@@ -230,13 +247,13 @@ class AttachManager extends Error {
 			// too big
 			@unlink($attachment);
 			$this->messages[] = $Language->getText('forum_attachmngr','err_toobig');
-			return;
+			return false;
 		}
 		
 		if (!is_uploaded_file($attachment) || !($filestuff = @file_get_contents($attachment)) )
 		{
 			$this->messages[] = $Language->getText('forum_attachmngr','err_upload');
-			return;
+			return false;
 		}
 		
 		//i´ll check now that if the atatch is an image, it complies with the width+height restrictions
@@ -260,12 +277,12 @@ class AttachManager extends Error {
 				if (($max_attachwidth > 0 AND $imageinfo[0] > $max_attachwidth) OR ($max_attachheight > 0 AND $imageinfo[1] > $max_attachheight)) {
 					@unlink($attachment);
 					 $this->messages[] = $Language->getText('forum_attachmngr','bad_dimension');
-					 return;
+					 return false;
 				}
 				if (!$imageinfo[2]) {
 					@unlink($attachment);
 					$this->messages[] = $Language->getText('forum_attachmngr','not_image');
-					return;
+					return false;
 				}
 			}
 		}
@@ -297,7 +314,7 @@ class AttachManager extends Error {
 					if (!$result || db_numrows($result) < 1) {
 						$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
 						@unlink($attachment);
-						return -1;
+						return false;
 					} else {
 						$this->msg_id = db_result($result,0,0);
 					}
@@ -306,8 +323,10 @@ class AttachManager extends Error {
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
 					'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
-				if (db_query($sql)) {
+				$res = db_query($sql);
+				if ($res) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
+					$id = db_insertid($res,'forum_pending_attachment','attachmentid');
 				}	else {
 					$this->messages[] = $Language->getText('forum_attachmngr','upload_notok');
 				}
@@ -323,6 +342,7 @@ class AttachManager extends Error {
 				if (db_query($sql)) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
 					$this->messages[] = $Language->getText('forum_attachmngr','updateok');
+					$id = $update;
 				}	else {
 					$this->messages[] = $Language->getText('forum_attachmngr','upload_notok');
 				}
@@ -335,7 +355,7 @@ class AttachManager extends Error {
 					if (!$result || db_numrows($result) < 1) {
 						$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
 						@unlink($attachment);
-						return -1;
+						return false;
 					} else {
 						$this->msg_id = db_result($result,0,0);
 					}
@@ -344,14 +364,17 @@ class AttachManager extends Error {
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
 					'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
-				if (db_query($sql)) {
+				$res = db_query($sql);
+				if ($res) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
+					$id = db_insertid($res,'forum_attachment','attachmentid');
 				}	else {
 					$this->messages[] = $Language->getText('forum_attachmngr','upload_notok');
 				}
 			}
 		}
 		@unlink($attachment);
+		return $id;
 	}
 }
 

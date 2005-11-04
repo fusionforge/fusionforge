@@ -35,6 +35,7 @@
 */
 
 require_once('common/include/Error.class');
+include_once('common/include/TextSanitizer.class'); // for parsing the mail body
 
 class ForumMessage extends Error {
 
@@ -251,10 +252,11 @@ class ForumMessage extends Error {
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
+	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
 	 *	@return	boolean success.
 	*/
 	
-	function insertmsg($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id) {
+	function insertmsg($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
 		global $Language;
 		
 		if (!$thread_id) {
@@ -310,7 +312,7 @@ class ForumMessage extends Error {
 				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
 				return false;
 			} else {
-				if (!$this->sendNotice()) {
+				if (!$this->sendNotice($has_attach)) {
 					db_rollback();
 					return false;
 				}
@@ -332,9 +334,10 @@ class ForumMessage extends Error {
 	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
+	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
 	 *	@return	boolean success.
 	 */
-	function create($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='') {
+	function create($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$has_attach=false) {
 		global $Language;
 		if (!$body || !$subject) {
 			$this->setError($Language->getText('forum_common_forummessage','error_required_fields'));
@@ -388,14 +391,14 @@ class ForumMessage extends Error {
 		switch ($mod_level) {
 			case 0: {
 				//no moderation
-				return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+				return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
 			}
 			case 1: {
 				//moderation for anonymous & non project users
 				if ($this->Forum->userIsModLvl1()) {
 					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
 				} else {
-					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
 				}
 			}
 			case 2: {
@@ -403,7 +406,7 @@ class ForumMessage extends Error {
 				if ($this->Forum->userIsModLvl2()) {
 					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
 				} else {
-					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
 				}
 			}
 		}
@@ -655,9 +658,11 @@ class ForumMessage extends Error {
 	/**
 	 *	sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
+	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
+	 *
 	 *	@return boolean success.
 	 */
-	function sendNotice() {
+	function sendNotice($has_attach=false) {
 		global $Language;
 		$ids =& $this->Forum->getMonitoringIDs();
 
@@ -668,13 +673,23 @@ class ForumMessage extends Error {
 			return true;
 		}
 		
-		//TODO hacer el coso para que busque los tags y haga la variable para poner <br> y llamar a la funcion con send_html en 1
-		
 		$body = "\nRead and respond to this message at: ".
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
-		"\nBy: " . $this->getPosterRealName() . "\n\n";
-
-		$body .= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))).
+		"\nBy: " . $this->getPosterRealName() . "\n";
+		
+		if ($has_attach) {
+			//if there´s an attachment for the message, make it note.
+			//Note: We can´t give a link for the attachment here because it hasn´t been created yet (first the message needs to be created
+			$body .= "A file has been uploaded with this message\n\n";
+		} else {
+			$body .= "\n";
+		}
+		
+		$sanitizer = new TextSanitizer();
+		//$text= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))); #NOTE: UTF-8 does not work!
+		$text= strip_tags($this->removebbcode(util_line_wrap($this->getBody())));
+		$text = $sanitizer->convertExtendedCharsForEmail($text);
+		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
@@ -726,7 +741,10 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$body .= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))).
+		$sanitizer = new TextSanitizer();
+		$text= strip_tags($this->removebbcode(util_line_wrap($this->getBody())));
+		$text = $sanitizer->convertExtendedCharsForEmail($text);
+		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
@@ -788,7 +806,59 @@ class ForumMessage extends Error {
 		}
 	}
 	
+		/**
+	 *	sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
+	 *
+	 *	@param int	attach_id	- The id of the file that has been attached
+	 *
+	 *	@return boolean success.
+	 */
+	function sendAttachNotice($attach_id) {
+		global $Language;
+		
+		if ($attach_id) {
+			$ids =& $this->Forum->getMonitoringIDs();
+
+			//
+			//	See if there is anyone to send messages to
+			//
+			if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
+				return true;
+			}
+			
+			$body = "\nRead and respond to this message at: ".
+			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+			"\nBy: " . $this->getPosterRealName() . "\n\n";
+			
+			$body .= "A file has been uploaded to this message, you can download it at: ".
+			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/attachment.php?attachid=". $attach_id . "&group_id=" . $this->Forum->Group->getID() . "&forum_id=" . $this->Forum->getID() . "\n\n";
+
+			$body .=
+			"\n\n______________________________________________________________________".
+			"\nYou are receiving this email because you elected to monitor this forum.".
+			"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
+			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 	
+			$extra_headers = "Precedence: Bulk\n"
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+				."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
+				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+			$parentid = $this->getParentId();
+			if (!empty($parentid)) {
+				$extra_headers .= "\nIn-Reply-To: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">\n"
+					."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+			}
+	
+			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
+			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+			$bccres = db_query($sql);
+			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+			util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
+			return true;
+		}
+		
+		return false;
+	}
 }
 
 ?>

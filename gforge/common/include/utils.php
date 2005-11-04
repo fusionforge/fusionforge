@@ -104,6 +104,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$charset) {
 		$charset = 'UTF-8';
 	}
+
 	$body2 = '';
 	if ($extra_headers) {
 		$body2 .= $extra_headers."\n";

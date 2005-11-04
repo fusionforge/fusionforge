@@ -125,15 +125,23 @@ if ($edit=="yes") {
 			//actually edit the attach and save the info
 			forum_header(array('title'=>$Language->getText('forum_attach_download','title')));
 			$am = new AttachManager();
-			$fm = new ForumMessage($f,false,false,false);
+			$fm = new ForumMessage($f,$msg_id,false,false);
 			$am->SetForumMsg($fm);
 			$attach = getUploadedFile("attachment1");
 			if ($attachid==0) {
 				//update existing one
-				$am->attach($attach,$group_id,$attachid,$msg_id);
+				$attachok = $am->attach($attach,$group_id,$attachid,$msg_id);
+				if ($attachok!=false) {
+					$fm->fetchData($msg_id);
+					$fm->sendAttachNotice($attachok);
+				}
 			} else {
 				//add new one
-				$am->attach($attach,$group_id,$attachid);
+				$attachok = $am->attach($attach,$group_id,$attachid);
+				if ($attachok!=false) {
+					$fm->fetchData($msg_id);
+					$fm->sendAttachNotice($attachok);
+				}
 			}
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br>" . $item;

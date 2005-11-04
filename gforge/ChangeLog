@@ -1,3 +1,11 @@
+2005-11-04 Daniel Perez <daniel@gforgegroup.com>
+	Patchs applied
+		[#1546] -> http://gforge.org/tracker/?func=detail&aid=1546&group_id=1&atid=106
+		[#1567] -> http://gforge.org/tracker/?func=detail&aid=1567&group_id=1&atid=106
+		[#1609] -> http://gforge.org/tracker/?func=detail&aid=1609&group_id=1&atid=106
+	Forums : added mail support when attachment is added
+			changed some special html chars to show up when sending notice via email
+
 2005-11-03 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied
 		[#1322] -> http://gforge.org/tracker/?func=detail&aid=1322&group_id=1&atid=106

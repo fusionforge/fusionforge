@@ -92,7 +92,14 @@ if ($forum_id) {
 		$sanitizer = new TextSanitizer();
 		$body = $sanitizer->SanitizeHtml($body);
 		
-		if (!$fm->create($subject, $body,$bbcode_uid, $thread_id, $is_followup_to) || $fm->isError()) {
+		$attach = getUploadedFile("attachment1");
+		if ($attach['size']) {
+			$has_attach = true;
+		} else {
+			$has_attach = false;
+		}
+		
+		if (!$fm->create($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
 			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
@@ -103,7 +110,6 @@ if ($forum_id) {
 			}
 			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
 			$am->SetForumMsg($fm);
-			$attach = getUploadedFile("attachment1");
 			$am->attach($attach,$group_id,0,$fm->getID());
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br>" . $item;
