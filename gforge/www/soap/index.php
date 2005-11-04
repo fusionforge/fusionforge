@@ -1,5 +1,6 @@
 <?php
 
+$no_gz_buffer=true;
 // 0. Include GForge files for access to GForge system
 require_once('www/include/squal_pre.php');
 require_once('www/include/BaseLanguage.class');
