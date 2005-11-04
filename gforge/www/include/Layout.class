@@ -486,6 +486,14 @@ if (isset($params['group']) && $params['group']) {
 		if ($sys_use_people) {
 			$TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
 		}
+
+		// outermenu hook
+		$PLUGIN_TABS_DIRS = Array();
+		$hookParams['DIRS'] = &$PLUGIN_TABS_DIRS;
+		$hookParams['TITLES'] = &$TABS_TITLES;
+		plugin_hook ("outermenu", $hookParams) ;
+		$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
+
 		if (user_ismember(1,'A')) {
 			$TABS_DIRS[]='/admin/';
 			$TABS_TITLES[]=$Language->getText('menu','admin');
@@ -520,7 +528,14 @@ if (isset($params['group']) && $params['group']) {
 		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/reporting/')) {
 			$selected=array_search('/reporting/',$TABS_DIRS);
 		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && user_ismember(1,'A')) {
-			$selected=array_search('/admin/',$TABS_DIRS);;
+			$selected=array_search('/admin/',$TABS_DIRS);
+		} elseif (count($PLUGIN_TABS_DIRS)>0) {
+			foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
+				if (strstr($GLOBALS['REQUEST_URI'],$PLUGIN_TABS_DIRS_VALUE)) {
+					$selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
+					break;
+				}
+			}
 		} else {
 			$selected=0;
 		}
