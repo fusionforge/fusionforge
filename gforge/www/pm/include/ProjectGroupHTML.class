@@ -40,31 +40,6 @@ function pm_header($params) {
 		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
 	}
 
-
-/*	if ($group_project_id) {
-		$gantt_width=820;
-		$gantt_height=680;
-		$gantt_url="/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
-		// The following make an error in IE
-		//$gantt_title=$Language->getText('pm_include_grouphtml','gantt_chart');
-		// Quite dirty replacement
-		$gantt_title='GanttChart';
-		$gantt_winopt='scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
-
-		echo '<script language="JavaScript" type="text/javascript">' 
-			.'<!-- ' . "\n"
-			.'function gantt_window() {'
-			.'GanttWin = window.open(\''
-			. $gantt_url
-			. '\', \''
-			. $gantt_title
-			. '\', \''
-			. $gantt_winopt . '\');'
-			. '}' . "\n"
-			. ' -->'
-			. '</script>';
-	}*/
-
 	site_project_header($params);
 
 	$labels = array();
@@ -77,8 +52,6 @@ function pm_header($params) {
 			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
-//		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
-//		$links[]  = 'javascript:gantt_window()';
 		if ($group_project_id) {
 			$gantt_width = 820;
 			$gantt_height = 680;
