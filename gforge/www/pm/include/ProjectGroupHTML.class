@@ -41,7 +41,7 @@ function pm_header($params) {
 	}
 
 
-	if ($group_project_id) {
+/*	if ($group_project_id) {
 		$gantt_width=820;
 		$gantt_height=680;
 		$gantt_url="/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
@@ -63,7 +63,8 @@ function pm_header($params) {
 			. '}' . "\n"
 			. ' -->'
 			. '</script>';
-	}
+	}*/
+
 	site_project_header($params);
 
 	$labels = array();
@@ -76,8 +77,18 @@ function pm_header($params) {
 			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
-		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
-		$links[]  = 'javascript:gantt_window()';
+//		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
+//		$links[]  = 'javascript:gantt_window()';
+		if ($group_project_id) {
+			$gantt_width = 820;
+			$gantt_height = 680;
+			$gantt_url = "/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
+			$gantt_title = $Language->getText('pm_include_grouphtml','gantt_chart');
+			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
+			$labels[] = $gantt_title;
+			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace("/\s/e" , "_" , $gantt_title)
+			. '\', \'' . $gantt_winopt . '\'); return false;';
+		}
 		//upload/download as CSV files
 		$labels[] = $Language->getText('pm_include_grouphtml','downloadcsv');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
