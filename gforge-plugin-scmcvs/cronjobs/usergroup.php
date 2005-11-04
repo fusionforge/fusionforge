@@ -338,10 +338,14 @@ foreach($groups as $group) {
 		//
 		$fo=fopen('default_page.php','r');
 		$contents = '';
-		while (!feof($fo)) {
-    		$contents .= fread($fo, 8192);
+		if (!$fo) {
+			$err .= 'Default Page Not Found';
+		} else {
+			while (!feof($fo)) {
+    			$contents .= fread($fo, 8192);
+			}
+			fclose($fo);
 		}
-		fclose($fo);
 		//
 		//	Change some defaults in the template file
 		//
