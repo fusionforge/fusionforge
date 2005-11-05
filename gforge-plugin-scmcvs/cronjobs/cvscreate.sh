@@ -46,9 +46,15 @@ function setRepositoryAccess() {
 
 function createRepository() {
 	mkdir $repositorypath
+	mkdir -p /cvsroot/cvs-locks/$repositoryname
+	chmod 755 /cvsroot/cvs-locks
+	chmod 2777 /cvsroot/cvs-locks/$repositoryname
 	setRepositoryAccess
 	cvs -d$repositorypath init
 	setPserverAccess
+	echo "SystemAuth=yes" > $repositorypath/CVSROOT/config
+	echo "LockDir=/cvsroot/cvs-locks/$repositoryname" >> $repositorypath/CVSROOT/config
+	chmod 444 $repositorypath/CVSROOT/config
 	echo "" > $repositorypath/CVSROOT/val-tags
 	chmod 664 $repositorypath/CVSROOT/val-tags
 	chown -R nobody:$groupid $repositorypath
