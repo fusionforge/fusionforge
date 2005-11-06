@@ -20,10 +20,6 @@ require_once('note.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
 
-$report=new Report();
-if ($report->isError()) {
-	exit_error('Error',$report->getErrorMessage());
-}
 echo notepad_func();
 
 pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project_id'=>$group_project_id));
@@ -214,6 +210,11 @@ $title_arr[]=$Language->getText('pm', 'hours');
 $title_arr[]=$Language->getText('pm', 'category');
 $title_arr[]=$Language->getText('pm', 'user');
 $title_arr[]=' ';
+
+$report=new Report();
+if ($report->isError()) {
+	exit_error('Error',$report->getErrorMessage());
+}
 
 echo $HTML->listTableTop ($title_arr);
 	echo '<form action="/reporting/timeadd.php" method="post" />

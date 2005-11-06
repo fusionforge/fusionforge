@@ -75,7 +75,10 @@ return data:
 
 */
 function &MSPDownload($session_hash,$group_project_id) {
-	session_continue($session_hash);
+	if (!session_continue($session_hash)) {
+		$array['success']=false;
+		$array['errormessage']='Could Not Continue Session';
+	}
 	$pg =& projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
 		$array['success']=false;
@@ -169,7 +172,10 @@ Return:
 function &MSPCheckin($session_hash,$group_project_id,$tasks) {
 	global $primap;
 	printr($tasks,'MSPCheckin::in-tasks');
-	session_continue($session_hash);
+	if (!session_continue($session_hash)) {
+		$array['success']=false;
+		$array['errormessage']='Could Not Continue Session';
+	}
 	return pm_import_tasks($group_project_id,$tasks);
 }
 
@@ -184,7 +190,10 @@ function &MSPCheckin($session_hash,$group_project_id,$tasks) {
 *
 */
 function &MSPGetProjects($session_hash) {
-	session_continue($session_hash);
+	if (!session_continue($session_hash)) {
+		$array['success']=false;
+		$array['errormessage']='Could Not Continue Session';
+	}
 	$group_res = db_query("SELECT groups.group_id FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' AND project_flags='2'");
 	$group_ids=&util_result_column_to_array($group_res,'group_id');
 	$groups=&group_get_objects($group_ids);
@@ -206,7 +215,10 @@ function &MSPGetProjects($session_hash) {
 *
 */
 function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) {
-	session_continue($session_hash);
+	if (!session_continue($session_hash)) {
+		$array['success']=false;
+		$array['errormessage']='Could Not Continue Session';
+	}
 	$group = group_get_object($groupid);
 	if (!$group || !is_object($group)) {
 		$res['code']="error";

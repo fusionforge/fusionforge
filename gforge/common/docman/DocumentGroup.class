@@ -124,28 +124,34 @@ class DocumentGroup extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO doc_groups (group_id,groupname,parent_doc_group)
-			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
+		
+		$res=db_query("SELECT nextval('doc_groups_pk_seq') AS id");
+		if (!$doc_group=db_result($res,0,'id')) {
+			$this->setError('Could Not Get Next ID');
+			db_rollback();
+			return false;
+		}
+		
+		$sql="INSERT INTO doc_groups (doc_group,group_id,groupname,parent_doc_group)
+			VALUES ('".$doc_group."','".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
 
 		$result=db_query($sql);
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-			return true;
 		} else {
 			$this->setError(db_error());
 			return false;
 		}
 
-/*
-			//
-			//	Now set up our internal data structures
-			//
-			if (!$this->fetchData($id)) {
-				return false;
-			}
-*/
+		//	Now set up our internal data structures
+		if (!$this->fetchData($doc_group)) {
+			return false;
+		}
+
+		return true;
 	}
+
 
 	/**
 	 *	fetchData - re-fetch the data for this DocumentGroup from the database.

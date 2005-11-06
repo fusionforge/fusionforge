@@ -78,7 +78,7 @@ for ($i=0; $i<db_numrows($res);$i++) {
 						if ($projectGroup->getID() != $last_projectgroup) {
 							echo $projectGroup->getName().":\n";
 						}
-						echo $task->getSummary().":\n";
+						echo html_entity_decode($task->getSummary()).":\n";
 						echo '***'.
 						(($now>$task->getEndDate())? 'overdue' : "due $end_date").
 						"***\n";

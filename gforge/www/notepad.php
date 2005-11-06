@@ -38,12 +38,12 @@ require_once('pre.php');
  */
 
 if ($wrap == '') {
-        $wrap = htmlspecialchars("SOFT");
+        $wrap = "SOFT";
 }
-if (!is_int($rows)) {
+if ($rows == '') {
         $rows = 30;
 }
-if (!is_int($cols)) {
+if ($cols == '') {
         $cols = 75;
 }
 $pform = '';

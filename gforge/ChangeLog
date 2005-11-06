@@ -1,3 +1,37 @@
+2005-10-17 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug -> html_build_multiple_select_box_from_arrays and
+				html_build_multiple_select_box now doesn´t display DB ids
+		http://gforge.org/tracker/?func=detail&aid=1575&group_id=6&atid=222
+	* Fixed bug -> www/tracker/mod.php
+		http://gforge.org/tracker/?func=detail&aid=1549&group_id=6&atid=222
+	* Fixed bug -> html_build_select_box_from_arrays
+		http://gforge.org/tracker/?func=detail&aid=1548&group_id=6&atid=222
+		htmlspecialchars() call removed
+	* Fixed bug -> cronjobs/
+		cronjobs/daily_task_email.php
+		http://gforge.org/tracker/?func=detail&aid=1553&group_id=6&atid=222
+		Applied reverse function to htmlentities() so that in the email the chars aren´t displayed as html
+2005-10-11 Daniel Perez <daniel@gforgegroup.com>
+http://gforge.org/tracker/?func=detail&aid=1571&group_id=1&atid=105
+	(**Survey**)
+	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
+
+2005-10-05 Daniel Perez <daniel@gforgegroup.com>
+
+https://gforge.org/tracker/?func=detail&aid=1551&group_id=1&atid=106
+	* Changed description to return description instead of id
+
+2005-07-29 Daniel Perez <daniel@gforgegroup.com>
+Bug : 
+
+http://gforge.org/tracker/index.php?func=detail&aid=1542&group_id=6&atid=111
+
+Unneeded addslashes removed, it was messing up the name when mass updating
+
+2005-09-19 Daniel Perez <daniel@gforgegroup.com>
+	common/pm : changed ProjectTask.class to send email only when something is really changed
+	www/pm : changed mod_task.php -> Report.class instantiation was changing timezone and displaying incorrect date. changed location of class instantiation
+
 2005-07-27  Francisco Gimeno <francisco@gforgegroup.com>
 
 	* Fixed XSS vulnerabilities by adding htmlspecialchars for direct used
