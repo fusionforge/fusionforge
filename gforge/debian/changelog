@@ -1,3 +1,9 @@
+gforge (4.5-5f) stable; urgency=low
+
+  * [Christian] Compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Sun,  6 Nov 2005 23:31:43 +0100
+
 gforge (4.5-2) unstable; urgency=low
 
   * [Christian] Added 20050605.sql, 20050617.php, 20050628.sql in db-upgrade

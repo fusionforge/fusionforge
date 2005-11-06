@@ -2,6 +2,13 @@
 # postinst script for gforge
 #
 # see: dh_installdeb(1)
+# Support for new place for pg_hba.conf
+if [ -d /etc/postgresql/7.4/main/ ] 
+then 
+	export pg_hba_dir=/etc/postgresql/7.4/main/
+else
+    	export pg_hba_dir=/etc/postgresql
+fi
 
 set -e
 #set -x				# Be verbose, be very verbose.
@@ -35,7 +42,7 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files
-	replace_file /etc/postgresql/pg_hba.conf
+	replace_file ${pg_hba_dir}/pg_hba.conf
 
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure
