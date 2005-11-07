@@ -1,3 +1,8 @@
+2005-11-07 Daniel Perez <daniel@gforgegroup.com>
+	Forums : 
+		Attachmanager : Added more descriptive error messages
+		Display : Fixed extra line break always displaying
+
 2005-11-04 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied
 		[#1546] -> http://gforge.org/tracker/?func=detail&aid=1546&group_id=1&atid=106

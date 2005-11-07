@@ -235,6 +235,12 @@ class AttachManager extends Error {
 		{
 			// invalid extension
 			$this->messages[] = $Language->getText('forum_attachmngr','err_inv_ext');
+			foreach ($attachtypes as $attachtype) {
+				if ($attachtype['enabled']) {
+					$validexts .= $attachtype[0] . " ";
+				}
+			}
+			$this->messages[] = $Language->getText('forum_attachmngr','valid_ext_are',$validexts);
 			@unlink($attachment);
 			return false;
 		}
@@ -247,6 +253,7 @@ class AttachManager extends Error {
 			// too big
 			@unlink($attachment);
 			$this->messages[] = $Language->getText('forum_attachmngr','err_toobig');
+			$this->messages[] = $Language->getText('forum_attachmngr','maximum_size',$maxattachsize);
 			return false;
 		}
 		
@@ -277,6 +284,7 @@ class AttachManager extends Error {
 				if (($max_attachwidth > 0 AND $imageinfo[0] > $max_attachwidth) OR ($max_attachheight > 0 AND $imageinfo[1] > $max_attachheight)) {
 					@unlink($attachment);
 					 $this->messages[] = $Language->getText('forum_attachmngr','bad_dimension');
+					 $this->messages[] = $Language->getText('forum_attachmngr','maximum_dimension',array($max_attachwidth,$max_attachheight));
 					 return false;
 				}
 				if (!$imageinfo[2]) {

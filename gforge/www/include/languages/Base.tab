@@ -897,13 +897,16 @@ forum_forum_thread	section	Forums
 forum_forum_thread	title	View Thread
 forum_attachmngr	errnofile	No file was provided
 forum_attachmngr	err_inv_ext	Invalid Extension
+forum_attachmngr	valid_ext_are	Valid extensions are : $1
 forum_attachmngr	err_toobig	File too big for that file type
+forum_attachmngr	maximum_size	Maximum size for this file type is $1 bytes
 forum_attachmngr	err_upload	Error, problem with the attachment file uploaded into the server
 forum_attachmngr	uploadok	File uploaded
 forum_attachmngr	updateok	File Updated Successfully
 forum_attachmngr	upload_notok	File not uploaded
 forum_attachmngr	err_msgid	Couldn´t get message id
 forum_attachmngr	bad_dimension	File not uploaded, dimensions too large
+forum_attachmngr	maximum_dimension	Maximum dimension for this file type is width $1 and height $2
 forum_attachmngr	not_image	The file provided has the extension but isn´t an image type
 forum_attach_download	cannot_delete	You cannot delete this attachment
 forum_attach_download	cannot_edit	You cannot edit this attachment
