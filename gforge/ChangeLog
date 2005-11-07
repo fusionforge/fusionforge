@@ -1,3 +1,7 @@
+2005-11-07 Daniel Perez <daniel@gforgegroup.com>
+	Forums : 
+		Fixed bug when creating forum with default email address
+
 2005-10-17 Daniel Perez <daniel@gforgegroup.com>
 	* Fixed bug -> html_build_multiple_select_box_from_arrays and
 				html_build_multiple_select_box now doesn´t display DB ids
