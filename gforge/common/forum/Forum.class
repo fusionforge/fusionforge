@@ -181,6 +181,7 @@ class Forum extends Error {
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 		$this->fetchData($this->group_forum_id);
+		db_commit();
 
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
@@ -189,6 +190,7 @@ class Forum extends Error {
 				return false;
 			}
 		}
+		db_begin();
 		if (!$this->addAllUsers()) {
 			db_rollback();
 			return false;
