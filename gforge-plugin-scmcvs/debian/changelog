@@ -1,3 +1,9 @@
+gforge-plugin-scmcvs (4.5-5) stable; urgency=low
+
+  * [Christian] compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Sun,  6 Nov 2005 21:02:37 +0100
+
 gforge-plugin-scmcvs (4.5-3) unstable; urgency=low
 
   * [Christian] New version in the branch 
