@@ -26,8 +26,6 @@
 	by Daniel Perez (danielperez.arg@gmail.com) - 2005
 */
 
-require_once('pre.php');
-
 
 Class TextSanitizer extends Error {
 	
