@@ -1,7 +1,12 @@
+2005-11-08 Daniel Perez <daniel@gforgegroup.com>
+	Forums : 
+		Added more common htmlentities to convertExtendedCharsForEmail method
+
 2005-11-07 Daniel Perez <daniel@gforgegroup.com>
 	Forums : 
 		Attachmanager : Added more descriptive error messages
 		Display : Fixed extra line break always displaying
+		Fixed bug when creating forum with default email address
 
 2005-11-04 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied

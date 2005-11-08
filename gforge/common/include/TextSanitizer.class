@@ -95,7 +95,9 @@ Class TextSanitizer extends Error {
 		$text = str_replace("&amp;","&",$text);
 		$text = str_replace("&quot;",'"',$text);
 		$text = str_replace("&nbsp;",' ',$text);
-		$text = str_replace("&nbsp;",' ',$text);
+		$text = str_replace("&lt;",'<',$text);
+		$text = str_replace("&gt;",'>',$text);
+		$text = str_replace("&deg;",'°',$text);
 		return $text;
 	}
 	
@@ -243,6 +245,22 @@ Class TextSanitizer extends Error {
 					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<div align=\"" . $match[0][3] . "\">" . $match[0][4] . "</div>",$input);
 				} else {
 					//didn´t have what we expected
+					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5], $match[0][3] . $match[0][4] ,$input);
+				}
+		}
+		unset($matchs);
+		
+	//search for <span class="something">something</span> 
+		$span = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][p|P][a|A][n|N]\s+[c|C][l|L][a|A][s|S][s|S]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][p|P][a|A][n|N][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while(preg_match_all($span,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
+				//search for every match if the attributes of the tag is what we expect
+				$classes = array("Title","titlebar");
+				if (in_array($match[0][3],$classes)) {
+					//ok, replace
+					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<span class=\"" . $match[0][3] . "\">" . $match[0][4] . "</span>",$input);
+				} else {
+					//didn´t have what we expected
+					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5], $match[0][4] ,$input);
 				}
 		}
 		unset($matchs);
