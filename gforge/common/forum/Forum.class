@@ -180,20 +180,18 @@ class Forum extends Error {
 			$this->setError($Language->getText('forum_common','error_adding_forum').db_error());
 			return false;
 		}
-		db_commit();
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 		$this->fetchData($this->group_forum_id);
+		if (!$this->addAllUsers()) {
+			db_rollback();
+			return false;
+		}
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
 			if (!$fm->create("Welcome to ".$forum_name,"Welcome to ".$forum_name)) {
 				$this->setError($fm->getErrorMessage());
 				return false;
 			}
-		}
-		db_begin();
-		if (!$this->addAllUsers()) {
-			db_rollback();
-			return false;
 		}
 		db_commit();
 		return true;

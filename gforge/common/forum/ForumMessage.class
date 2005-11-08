@@ -384,6 +384,7 @@ class ForumMessage extends Error {
 		} else {
 			echo db_error();
 		}*/
+
 		db_begin();
 		
 		//now we check the moderation status of the forum and act accordingly
@@ -672,7 +673,7 @@ class ForumMessage extends Error {
 		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
 			return true;
 		}
-		
+			
 		$body = "\nRead and respond to this message at: ".
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
 		"\nBy: " . $this->getPosterRealName() . "\n";
@@ -684,7 +685,6 @@ class ForumMessage extends Error {
 		} else {
 			$body .= "\n";
 		}
-		
 		$sanitizer = new TextSanitizer();
 		//$text= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))); #NOTE: UTF-8 does not work!
 		$text= strip_tags($this->removebbcode(util_line_wrap($this->getBody())));
@@ -707,9 +707,11 @@ class ForumMessage extends Error {
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-//echo $sql;
-		$bccres = db_query($sql);
+		if (count($ids) != 0) {
+			// maybe we have no monitoring ids. this was causing a transaction to be aborted because of being called everytime
+			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+			$bccres = db_query($sql);
+		}
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
 		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
@@ -760,8 +762,10 @@ class ForumMessage extends Error {
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-		$bccres = db_query($sql);
+		if (count($ids) != 0) {
+			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+			$bccres = db_query($sql);
+		}
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
@@ -850,8 +854,10 @@ class ForumMessage extends Error {
 			}
 	
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-			$bccres = db_query($sql);
+			if (count($ids) != 0) {
+				$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+				$bccres = db_query($sql);
+			}
 			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 			util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
 			return true;
