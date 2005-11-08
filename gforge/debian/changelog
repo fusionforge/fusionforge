@@ -1,8 +1,8 @@
-gforge (4.5-5g) stable; urgency=low
+gforge (4.5-5j) stable; urgency=low
 
   * [Christian] Compile for sarge
 
- -- Christian Bayle <bayle@debian.org>  Sun,  6 Nov 2005 23:31:43 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue,  8 Nov 2005 00:57:51 +0100
 
 gforge (4.5-2) unstable; urgency=low
 
