@@ -328,7 +328,7 @@ setupinout(){
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
-	find $ETCTEMPLATEDIR/templates -type f -regex "$ETCTEMPLATEDIR/templates/[a-z]*"  | while read i 
+	find $ETCTEMPLATEDIR/templates -type f -regex "$ETCTEMPLATEDIR/templates/[a-z].*"  | while read i 
 	do
 		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/templates/`basename $i` ]
 		then
