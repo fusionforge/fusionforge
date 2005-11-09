@@ -251,8 +251,15 @@ switch (getStringFromRequest('func')) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=$Language->getText('tracker','comment_added');
 					} else {
-						//some kind of error in creation
-						exit_error('ERROR',$feedback);
+						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
+							//some kind of error in creation
+							exit_error($ah->getErrorMessage(),$feedback);
+						} else {
+							// we have to unset the error if the user added a file ( add a file and no comment)
+							if ( (getStringFromRequest('add_file')) ) {
+								$ah->clearError();
+							}
+						}
 					}
 
 				} else {
