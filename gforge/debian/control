@@ -109,6 +109,21 @@ Description: collaborative development tool - mail tools (using Postfix)
  This package configures the Postfix mail transfer agent to run
  GForge.
 
+Package: gforge-mta-courier
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32), postfix, postfix-pgsql
+Provides: gforge-mta
+Conflicts: gforge-mta
+Description: collaborative development tool - mail tools (using Courier)
+ GForge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures the Postfix mail transfer agent to run
+ GForge.
+
 Package: gforge-shell-ldap
 Architecture: all
 Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, libnss-ldap (>=184-1), libpam-ldap
