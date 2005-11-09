@@ -6,6 +6,10 @@
 #
 use DBI;
 
+# Run as gforge
+my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
+$> = $uid;
+
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose=0;
@@ -23,6 +27,9 @@ while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {
 	$new_list = "$username:$unix_uid:$ssh_key\n";
 	push @ssh_array, $new_list;
 }
+
+# Run as root
+$> = 0; 
 
 my ($username, $ssh_keys, $ssh_dir);
 
