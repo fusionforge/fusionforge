@@ -12,6 +12,8 @@ switch:
 
 all:
 	@make -f Makefile.$(DIST) all
+clean:
+	@make -f Makefile.$(DIST) clean
 chris:
 	@make -f Makefile.$(DIST) chris
 chriss:
