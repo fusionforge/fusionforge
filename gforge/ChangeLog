@@ -1,3 +1,6 @@
+2005-11-10 Daniel Perez <daniel@gforgegroup.com>
+	Fckeditor : changed configuration
+	
 2005-11-10  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
@@ -9,6 +12,10 @@
 	Added recommendation that reporting tables are initialized early.
 	Instructions for patching when CVS version is 1.12.
 
+2005-11-09 Daniel Perez <daniel@gforgegroup.com>
+	Tracker (fixed bug)
+		[#1630] -> http://gforge.org/tracker/?func=detail&atid=222&aid=1630&group_id=6	
+		
 2005-11-08 Daniel Perez <daniel@gforgegroup.com>
 	Forums : 
 		Added more common htmlentities to convertExtendedCharsForEmail method
