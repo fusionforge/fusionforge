@@ -257,6 +257,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function CallHook ($hookname, $params) {
 		global $group_id,$Language, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
+		$use_cvstrackerplugin = getIntFromRequest('use_cvstrackerplugin');
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			$group = &group_get_object($group_id);
