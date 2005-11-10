@@ -1,3 +1,9 @@
+gforge (4.5.3-2) stable; urgency=low
+
+  * New Upstream version, compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Wed,  9 Nov 2005 01:57:19 +0100
+
 gforge (4.5.3-1) stable; urgency=low
 
   * New Upstream version, compile for sarge
