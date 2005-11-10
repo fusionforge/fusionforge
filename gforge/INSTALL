@@ -279,7 +279,7 @@ cp -R gforge/plugins/cvstracker/www/ gforge/www/plugins/cvstracker/
 chown -R root:apache /var/www
 chmod -R 644 gforge/
 cd gforge
-find -type d | xargs chmod -R 755
+find -type d | xargs chmod 755
 chmod -R 755 cronjobs/
 
 
