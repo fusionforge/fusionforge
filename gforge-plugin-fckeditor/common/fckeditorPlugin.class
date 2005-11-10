@@ -89,6 +89,7 @@ class fckeditorPlugin extends Plugin {
 				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
 				$oFCKeditor->Width = $params['width'];
 				$oFCKeditor->Height = $params['height'];
+				$oFCKeditor->ToolbarSet = "GForge";
 				$oFCKeditor->Create() ;
 				$GLOBALS['editor_was_set_up'] = true;
 			} else {
