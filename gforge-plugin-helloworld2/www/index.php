@@ -40,10 +40,6 @@ function helloworld_User_Header($params) {
 		exit_error("Invalid User", "Cannot Process your request for this user.");
 	}
 
-	$type = getStringFromRequest('type');
-	$id = getStringFromRequest('id');
-	$pluginname = getStringFromRequest('pluginname');
-	
 	if (!$type) {
 		exit_error("Cannot Process your request","No TYPE specified"); // you can create items in Base.tab and customize this messages
 	} elseif (!$id) {
