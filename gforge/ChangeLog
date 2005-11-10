@@ -1,3 +1,14 @@
+2005-11-10  Ognyan Kulev  <ogi@felix.openfmi.net>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
+	Checking out and updating from Branch_4_5.
+	Customizing front page.
+	FTI and project webs moved to optional features.
+	Removed the fix for CVSTracker schema.
+	Q&A about <Files> and <Location>, by David Morsberger.
+	Added recommendation that reporting tables are initialized early.
+	Instructions for patching when CVS version is 1.12.
+
 2005-11-08 Daniel Perez <daniel@gforgegroup.com>
 	Forums : 
 		Added more common htmlentities to convertExtendedCharsForEmail method
