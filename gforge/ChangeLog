@@ -1,5 +1,10 @@
 2005-11-10 Daniel Perez <daniel@gforgegroup.com>
+	Forum : Fixing bugs in display / emails
+	Admin : added plugin manager -> to enable/disable in a site wide fashion the plugins
+
+2005-11-10 Daniel Perez <daniel@gforgegroup.com>
 	Fckeditor : changed configuration
+				upgraded to 2.1.1 version to fix "spaces error" in Firefox
 	
 2005-11-10  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 

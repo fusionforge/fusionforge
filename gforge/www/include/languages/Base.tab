@@ -291,6 +291,19 @@ cronman	job	Job
 cronman	message	Message
 cronman	next	Next
 cronman	previous	Previous
+pluginman	status	Status
+pluginman	action	Action
+pluginman	name	Plugin Name
+pluginman	users	Users Using it
+pluginman	groups	Groups Using it
+pluginman	notice	Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><font color="#ff0000">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups</font><br><br>
+pluginman	active	<font color="#00ff00">Active</font>
+pluginman	inactive	<font color="#800000">Inactive</font>
+pluginman	activate	Activate
+pluginman	deactivate	Deactivate
+pluginman	success	Plugin $1 updated Successfully
+pluginman	userdeleted	$1 Users detached from plugin..<br>
+pluginman	groupdeleted	$1 Groups detached from plugin..<br>
 admin_index	active_projects_count	Active projects: <strong>$1</strong>
 admin_index	active_users_count	Active site users: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
@@ -301,6 +314,7 @@ admin_index	add_edit_delete_licenses	Add, Delete, or Edit Licenses
 admin_index	add_to_trove_map	Add to the Trove Map
 admin_index	approve_reject	Approve/Reject
 admin_index	cronman	Cron Manager
+admin_index	pluginman	Plugin Manager
 admin_index	deleted_status	(deleted) Status
 admin_index	display_full_group	Display Full Group List/Edit Groups
 admin_index	display_full_user_list	Display Full User List/Edit Users
