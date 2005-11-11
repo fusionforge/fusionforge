@@ -360,11 +360,7 @@ if ($project->usesSCM()) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
-	$hook_params['project_name'] = $project->getUnixName();
-	if ($project->usesPlugin("scmcvs"))
-	{
-		plugin_hook ("statcvs_stats_link", $hook_params) ;
-	}
+	
 }
 
 // ######################## AnonFTP
