@@ -217,7 +217,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 								date($sys_datefmt,$docs[$j]->getCreated()))  .
 								") ";
 					if ($docs[$j]->getFilesize() > 1024) {
-						$tooltip .= floor($docs[$j]->getFilesize()/1024) . "KiB";
+						$tooltip .= floor($docs[$j]->getFilesize()/1024) . "Kb";
 					} else {
 						$tooltip .= $docs[$j]->getFilesize() . "B";
 					}
