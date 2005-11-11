@@ -687,8 +687,14 @@ class ForumMessage extends Error {
 		}
 		$sanitizer = new TextSanitizer();
 		//$text= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))); #NOTE: UTF-8 does not work!
-		$text= strip_tags($this->removebbcode(util_line_wrap($this->getBody())));
+		$text = $this->getBody();
+		//echo "texto 1 : " . $text . "<br>";
+		$text = $sanitizer->convertNeededTagsForEmail($text);
+		//echo "texto 2 : " . $text . "<br>";
+		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+		//echo "texto 3 : " . $text . "<br>";
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
+		//echo "texto 4 : " . $text . "<br>";
 		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
@@ -743,9 +749,14 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
-		$sanitizer = new TextSanitizer();
-		$text= strip_tags($this->removebbcode(util_line_wrap($this->getBody())));
+		$text = $this->getBody();
+		//echo "texto 1 : " . $text . "<br>";
+		$text = $sanitizer->convertNeededTagsForEmail($text);
+		//echo "texto 2 : " . $text . "<br>";
+		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+		//echo "texto 3 : " . $text . "<br>";
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
+		//echo "texto 4 : " . $text . "<br>";
 		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";

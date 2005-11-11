@@ -98,9 +98,23 @@ Class TextSanitizer extends Error {
 		$text = str_replace("&lt;",'<',$text);
 		$text = str_replace("&gt;",'>',$text);
 		$text = str_replace("&deg;",'°',$text);
+		$text = str_replace("&lt;br&gt;","\n",$text);
+		$text = str_replace("&lt;br /&gt;","\n",$text);
 		return $text;
 	}
 	
+			/**
+	 *  convertNeededTagsForEmail - Grabs some text with html tags and those which are important for display (<br>, <p>) convert accordingly
+	 *
+	 *	@param   string		The input string
+	 *	@return  string		The output string
+	 */	
+	function convertNeededTagsForEmail($text) {
+		$text = str_replace("<br>","\n",$text);
+		$text = str_replace("<br />","\n",$text);
+		$text = str_replace("<br/>","\n",$text);
+		return $text;
+	}
 		/**
 	 *  SanitizeHtml - Grabs some text with all kinds of html code and parses it to make it safe
 	 *
@@ -116,64 +130,94 @@ Class TextSanitizer extends Error {
 	$input = preg_replace($script_open,"<b>No script tags of any kind allowed</b>",$input);
 		
 	//search for <strong>something</strong> . 
-		$strong_notok = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($strong_notok,"$1<strong>$3</strong>$5",$input);
+		$strong = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($strong,$input)) {
+			$input = preg_replace($strong,"$1<strong>$3</strong>$5",$input);
+		}		
 		
 	//search for <em>something</em> . 
-		$em_notok = '/(.*)(&lt;[^&lt;|^&gt;]*[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($em_notok,"$1<em>$3</em>$5",$input);
+		$em = '/(.*)(&lt;[^&lt;|^&gt;]*[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($em,$input)) {
+			$input = preg_replace($em,"$1<em>$3</em>$5",$input);
+		}
 		
 	//search for <u>something</u> . 
-		$u = '/(.*)(&lt;[^&lt;|^&gt;]*[u|U][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[u|U][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($u,"$1<u>$3</u>$5",$input);
+		$u = '/(.*)(&lt;[^&lt;|^&gt;]*[u|U][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[u|U][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($u,$input)) {
+			$input = preg_replace($u,"$1<u>$3</u>$5",$input);
+		}
 		
 	//search for <strike>something</strike> . 
-		$strike = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($strike,"$1<strike>$3</strike>$5",$input);			
+		$strike = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($strike,$input)) {
+			$input = preg_replace($strike,"$1<strike>$3</strike>$5",$input);			
+		}
 		
 	//search for <sub>something</sub> . 
-		$sub = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($sub,"$1<sub>$3</sub>$5",$input);					
+		$sub = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sub,$input)) {
+			$input = preg_replace($sub,"$1<sub>$3</sub>$5",$input);					
+		}
 
 	//search for <sup>something</sup> . 
-		$sup = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($sup,"$1<sup>$3</sup>$5",$input);
+		$sup = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sup,$input)) {
+			$input = preg_replace($sup,"$1<sup>$3</sup>$5",$input);
+		}
 		
 	//search for <h1>something</h1> . 
-		$h1 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]1[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]1[^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h1,"$1<h1>$3</h1>$5",$input);
+		$h1 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]1[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]1[^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h1,$input)) {
+			$input = preg_replace($h1,"$1<h1>$3</h1>$5",$input);
+		}
 		
 	//search for <h2>something</h2> . 
-		$h2 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H][1][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H][1][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h2,"$1<h2>$3</h2>$5",$input);
+		$h2 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H][1][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H][1][^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($h2,$input)) {
+			$input = preg_replace($h2,"$1<h2>$3</h2>$5",$input);
+		}
 
 	//search for <h3>something</h3> . 
-		$h3 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]3[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]3[^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h3,"$1<h3>$3</h3>$5",$input);
+		$h3 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]3[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]3[^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($h3,$input)) {
+			$input = preg_replace($h3,"$1<h3>$3</h3>$5",$input);
+		}
 
 	//search for <h4>something</h4> . 
-		$h4 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]4[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]4[^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h4,"$1<h4>$3</h4>$5",$input);
+		$h4 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]4[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]4[^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($h4,$input)) {
+			$input = preg_replace($h4,"$1<h4>$3</h4>$5",$input);
+		}
 
 	//search for <h5>something</h5> . 
-		$h5 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]5[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]5[^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h5,"$1<h5>$3</h5>$5",$input);
+		$h5 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]5[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]5[^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($h5,$input)) {
+			$input = preg_replace($h5,"$1<h5>$3</h5>$5",$input);
+		}
 
 	//search for <h6>something</h6> . 
-		$h6 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]6[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]6[^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($h6,"$1<h6>$3</h6>$5",$input);
+		$h6 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]6[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]6[^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($h6,$input)) {
+			$input = preg_replace($h6,"$1<h6>$3</h6>$5",$input);
+		}
 		
 	//search for <address>something</address> . 
-		$address = '/(.*)(&lt;[^&lt;|^&gt;]*[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($address,"$1<address>$3</address>$5",$input);
+		$address = '/(.*)(&lt;[^&lt;|^&gt;]*[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($address,$input)) {
+			$input = preg_replace($address,"$1<address>$3</address>$5",$input);
+		}
 		
 	//search for <td>something</td> . 
-		$td = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($td,"$1<td>$3</td>$5",$input);
+		$td = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($td,$input)) {
+			$input = preg_replace($td,"$1<td>$3</td>$5",$input);
+		}
 		
 	//search for <caption>something</caption> . 
-		$caption = '/(.*)(&lt;[^&lt;|^&gt;]*[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($caption,"$1<caption>$3</caption>$5",$input);
+		$caption = '/(.*)(&lt;[^&lt;|^&gt;]*[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($caption,$input)) {
+			$input = preg_replace($caption,"$1<caption>$3</caption>$5",$input);
+		}
 	
 	//search for <tr>something</tr> . 
 		$tr = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][r|R][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][r|R][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
@@ -218,8 +262,10 @@ Class TextSanitizer extends Error {
 		$input = preg_replace($pre2,"$1<pre>$3</pre>$5",$input);
 		
 	//search for <p>something</p> . 
-		$p = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/';
-		$input = preg_replace($p,"$1<p>$3</p>$5",$input);
+		$p = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/ms';
+		while (preg_match($p,$input)) {
+			$input = preg_replace($p,"$1<p>$3</p>$5",$input);
+		}
 		
 	//search for <p align="something">something</p> 
 		$align1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
