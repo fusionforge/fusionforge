@@ -141,6 +141,8 @@ class CVSPlugin extends SCM {
 				if ($displayCvsBrowser){
 					echo $Language->getText('plugin_scmcvs', 'browsetree');
 					echo '<p>[<a href="'.$this->getAccountGroupCVSwebUrl($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
+					$hook_params['project_name'] = $project->getUnixName();
+					plugin_hook ("cvs_stats", $hook_params) ;
 				}
 				echo $HTML->boxBottom();
 				?>
