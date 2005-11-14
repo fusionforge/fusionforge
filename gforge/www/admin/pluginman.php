@@ -2,7 +2,7 @@
 /**
  * GForge Plugin Activate / Deactivate Page
  *
- * Copyright 2002 GForge, LLC
+ * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
  *
@@ -85,7 +85,7 @@ echo $HTML->listTableTop($title_arr);
 
 //get the directories from the plugins dir
 
-$handle = opendir('../../../plugins');
+$handle = opendir($sys_plugins_path);
 $j = 0;
 while ($filename = readdir($handle)) {
 	//Don't add special directories '..' or '.' to the list
