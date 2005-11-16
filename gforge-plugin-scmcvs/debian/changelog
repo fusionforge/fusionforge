@@ -1,6 +1,7 @@
-gforge-plugin-scmcvs (4.5.3-3) stable; urgency=low
+gforge-plugin-scmcvs (4.5.3-4) stable; urgency=low
 
-  * New Upstream version, compile for sarge
+  * [olivier] Add hooks for dpatch
+  * [olivier] Corrected problem with cvsroot in cvs_update.pl
 
  -- Christian Bayle <bayle@debian.org>  Sun, 13 Nov 2005 18:26:26 +0100
 

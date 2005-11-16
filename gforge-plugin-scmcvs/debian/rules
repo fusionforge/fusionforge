@@ -9,6 +9,7 @@
 export DH_COMPAT=4
 
 export PLUGIN=scmcvs
+include /usr/share/dpatch/dpatch.make
 
 configure: configure-stamp
 configure-stamp:
@@ -16,13 +17,12 @@ configure-stamp:
 	# Add here commands to configure the package.
 	touch configure-stamp
 
-build: build-stamp
-
-build-stamp: configure-stamp
+build: configure-stamp build-stamp
+build-stamp: patch-stamp
 	dh_testdir
 	touch build-stamp
 
-clean:
+clean: unpatch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp

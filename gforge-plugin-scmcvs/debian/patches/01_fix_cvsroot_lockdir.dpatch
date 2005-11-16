@@ -1,0 +1,38 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_fix_cvsroot_lockdir.dpatch by  <ofourdan@gforge.aec>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Transiciel patches for Topcased/GForge
+
+@DPATCH@
+
+diff -Naur gforge-plugin-scmcvs-4.5.3/bin/cvs_update.pl gforge-plugin-scmcvs-4.5.3-3-fix/bin/cvs_update.pl
+--- gforge-plugin-scmcvs-4.5.3/bin/cvs_update.pl	2005-11-16 11:52:32.200846424 +0100
++++ gforge-plugin-scmcvs-4.5.3-3-fix/bin/cvs_update.pl	2005-11-16 11:54:05.135718176 +0100
+@@ -37,7 +37,7 @@
+ 	# This 50000 is really dirty until I change this file completly
+ 	$cvs_gid = $group_id + $anoncvs_uid_add;
+ 	$cvs_dir = "$cvs_root/$group_name";
+-
++print "cvs_root=$cvs_root, cvs_dir=$cvs_dir\n";
+ 	$userlist =~ tr/A-Z/a-z/;
+ 
+ 	#$group_exists = (-d $grpdir_prefix/$group_name);
+@@ -121,7 +121,7 @@
+ 			if($verbose) { print("Enable pserver for $group_name:\t$userlist in $cvs_dir/CVSROOT/writers \n"); }
+ 			open (CONFIG,">$cvs_dir/CVSROOT/config");
+ 			print CONFIG "SystemAuth=yes\n";
+-			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
++			print CONFIG "LockDir=$cvs_root/cvs-locks/$group_name\n";
+ 			close CONFIG;
+ 		} else {
+ 			# turn off pserver writers
+@@ -132,7 +132,7 @@
+ 			if($verbose) { print("Disable pserver for $group_name\n"); }
+ 			open (CONFIG,">$cvs_dir/CVSROOT/config");
+ 			print CONFIG "SystemAuth=no\n";
+-			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
++			print CONFIG "LockDir=$cvs_root/cvs-locks/$group_name\n";
+ 			close CONFIG;
+ 		}
+ 
