@@ -37,7 +37,7 @@ while ($ln = pop(@group_array)) {
 	# This 50000 is really dirty until I change this file completly
 	$cvs_gid = $group_id + $anoncvs_uid_add;
 	$cvs_dir = "$cvs_root/$group_name";
-	if($verbose) print "cvs_root=$cvs_root, cvs_dir=$cvs_dir\n";
+	if($verbose) {print "cvs_root=$cvs_root, cvs_dir=$cvs_dir\n";}
 	$userlist =~ tr/A-Z/a-z/;
 
 	#$group_exists = (-d $grpdir_prefix/$group_name);

@@ -42,8 +42,8 @@ case "$1" in
 	  [ -d $CHROOTDIR/$dir ] || mkdir $CHROOTDIR/$dir
 	done
 	install -d -m 1777 $CHROOTDIR/tmp
-	[ -d $CHROOTDIR/var/lib/gforge/chroot ] && rmdir $CHROOTDIR/var/lib/gforge/chroot
 	[ -L $CHROOTDIR/var/lib/gforge/chroot ] && rm $CHROOTDIR/var/lib/gforge/chroot
+	[ -d $CHROOTDIR/var/lib/gforge/chroot ] && rmdir $CHROOTDIR/var/lib/gforge/chroot
 	ln -s ../../../ $CHROOTDIR/var/lib/gforge/chroot
 	
 	# Copy needed binaries
