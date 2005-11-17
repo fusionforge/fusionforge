@@ -1,3 +1,9 @@
+2005-11-17  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml:
+	/etc/gforge/custom/index_std.php instead of www/index_std.php.
+	Branch_4_5 instead of HEAD for checking out plugins.
+
 2005-11-10 Daniel Perez <daniel@gforgegroup.com>
 	Forum : Fixing bugs in display / emails
 	Admin : added plugin manager -> to enable/disable in a site wide fashion the plugins

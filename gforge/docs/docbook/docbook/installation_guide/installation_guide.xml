@@ -118,18 +118,14 @@ $ <userinput>cvs checkout -P -rBranch_4_5 gforge</userinput>
 $ <userinput>mkdir gforge/plugins</userinput>
 $ <userinput>cd gforge/plugins</userinput>
 
-$ <userinput>cvs checkout -P gforge-plugin-scmcvs</userinput>
+$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-scmcvs</userinput>
 $ <userinput>ln -s gforge-plugin-scmcvs scmcvs</userinput>
 
-$ <userinput>cvs checkout -P gforge-plugin-scmsvn</userinput>
+$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-scmsvn</userinput>
 $ <userinput>ln -s gforge-plugin-scmsvn scmsvn</userinput>
 
-$ <userinput>cvs checkout -P gforge-plugin-cvstracker</userinput>
+$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-cvstracker</userinput>
 $ <userinput>ln -s gforge-plugin-cvstracker cvstracker</userinput>
-
-$ <userinput>ln -s common scmcvs/include</userinput>
-$ <userinput>ln -s common scmsvn/include</userinput>
-$ <userinput>ln -s common cvstracker/include</userinput>
 
 $ <userinput>cd ../www</userinput>
 $ <userinput>mkdir plugins</userinput>
@@ -138,7 +134,6 @@ $ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
 $ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
 $ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
 				</screen>
-				<para>As you may notice, <literal>Branch_4_5</literal> is not used for plugins although there are such branches.</para>
 				<section>
 					<title>Updating checked out Branch_4_5</title>
 					<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
@@ -655,7 +650,18 @@ gforge-> <userinput>VALUES (<replaceable>102</replaceable>,1,'A');</userinput>
 		</section>
 		<section>
 			<title>Customizing Front Page</title>
-			<para>If you want to customize front page, edit <filename>index_std.php</filename>.</para>
+			<para>If you want to customize front page, you'll have to provide new <filename>index_std.php</filename>:</para>
+			<orderedlist>
+				<listitem>
+					<para>Create <filename class="directory">/etc/gforge/custom</filename> directory.</para>
+				</listitem>
+				<listitem>
+					<para>Set <varname>$sys_custom_path</varname> configuration variable to <filename class="directory">/etc/gforge/custom</filename>.</para>
+				</listitem>
+				<listitem>
+					<para>Copy <filename><replaceable>/var/www/gforge</replaceable>/www/index_std.php</filename> to <filename>/etc/gforge/custom/index_std.php</filename> and edit it as you like.</para>
+				</listitem>
+			</orderedlist>
 		</section>
 		<section>
 			<title>Optional Features</title>
