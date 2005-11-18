@@ -16,7 +16,7 @@ require_once('common/include/escapingUtils.php');
 // http://www.google.com/webmasters/faq.html#prefetchblock
 if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
 	header(getStringFromServer('SERVER_PROTOCOL') . ' 404 Prefetch Forbidden');
-	exit_error('Prefetch request forbidden.');
+	trigger_error('Prefetch request forbidden.');
 	exit;
 }
 
