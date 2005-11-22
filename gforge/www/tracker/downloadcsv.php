@@ -50,7 +50,7 @@ $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$
 
 $at_arr =& $af->getArtifacts();
 
-echo 'artifact_id,status_id,status_name,priority,submitter_id,submitter_name,assigned_to_id,assigned_to_name,open_date,close_date,last_modified_date,summary,details';
+echo 'artifact_id,status_id,status_name,priority,submitter_id,submitter_name,assigned_to_id,assigned_to_name,open_date,close_date,last_modified_date,summary';
 
 //
 //	Show the extra fields
@@ -76,8 +76,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 		date($sys_datefmt,$at_arr[$i]->getOpenDate()).'","'.
 		date($sys_datefmt,$at_arr[$i]->getCloseDate()).'","'.
 		date($sys_datefmt,$at_arr[$i]->getLastModifiedDate()).'","'.
-		$at_arr[$i]->getSummary().'","'.
-		str_replace($arrRemove, ' ',$at_arr[$i]->getDetails()).'"';
+		$at_arr[$i]->getSummary().'"';
 
 	//
 	//	Show the extra fields
