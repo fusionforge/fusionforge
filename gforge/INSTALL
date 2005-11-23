@@ -44,6 +44,9 @@ You will need:
 	Optional mod_auth_gforge (required for SVN over DAV):
 	http://gforge.org/frs/?group_id=128
 
+	IPC Run for Perl may be required on some platforms and is hard to find:
+	https://gforge.org/frs/download.php/143/IPC-Run-0.78.tar.gz
+
 
 OVERVIEW
 --------
@@ -80,6 +83,10 @@ that are executed hourly to build permissions and create blank cvs trees.
 Make sure these files are executed as root, and have proper execution bits
 set.  Each of these cronjobs has configuration parameters which you may 
 have to edit manually the paths in those files for your specific system.
+
+  CVSWeb works easily on most platforms, if you follow the instructions 
+below, but the IPCRUN lib may be missing and hard to find. Download it 
+here: https://gforge.org/frs/download.php/143/IPC-Run-0.78.tar.gz
 
 
   SVN Overview
