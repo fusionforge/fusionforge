@@ -1,7 +1,11 @@
-Installation of GForge has been made much easier than the old SF2.x
-codebase.  A great deal of unnecessary code and scalability hacks have
-been removed to make the installation and use of GForge practical for
-just about any Linux admin.
+Installation of GForge is a non-trivial undertaking, since it integrates
+with so many different components across your system. A skilled sysadmin 
+is required to pull it off, or at the least a great deal of patience.
+
+The result of a complete installation means automatic creation of CVS 
+and Subversion repositories, and having access to them controlled by 
+GForge and stats gathered from them. CVSWEB and ViewCVS (used for 
+Subversion browsing) are two additional integration points.
 
 *
 *  PROFESSIONAL SUPPORT
@@ -29,22 +33,17 @@ You will need:
 	Optional Gantt Charting and Graphing Support:
 	JPGraph: ( http://www.aditus.nu/jpgraph/ )
 
+		(NOTE: An older version of JPGraph may be 
+		required - it can be downloaded here: 
+		http://gforge.org/frs/download.php/142/jpgraph-1.9.1.tar.gz)
+
         Optional (required for some plugins):
         Perl ( http://www.perl.org/ )
         the DBI module ( http://dbi.perl.org/ ) and associated DBD::Pg
 
-Compile and install PostgreSQL, then PHP/Apache as per the
-instructions. PHP should be compiled into Apache, as well as compiled
-as a separate CGI. When compiling PHP, don't forget the --with-pgsql
-option for PostgreSQL support.
+	Optional mod_auth_gforge (required for SVN over DAV):
+	http://gforge.org/frs/?group_id=128
 
-If you are going to use Gantt charting and other graphing features,
-your PHP must be compiled --with-gd. Follow the JPGraph installation
-instructions (extra fonts for JPGraph are not necessary). Be sure your
-/etc/gforge/local.inc file contains the proper path to the jpgraph/src/
-directory.
-
-Install Python and MailMan as per the instructions.
 
 OVERVIEW
 --------
@@ -63,6 +62,7 @@ and ask your Apache, mailman, and postgresql installation questions in the
 corresponding mailing lists rather than on the gforge forums where little
 help is available.
 
+
   CVS Overview
   ------------
   CVS is now managed via the scmcvs plugin which is included in the 
@@ -79,29 +79,54 @@ out by default for your security. cronjobs/cvs-cron/* contains the files
 that are executed hourly to build permissions and create blank cvs trees.
 Make sure these files are executed as root, and have proper execution bits
 set.  Each of these cronjobs has configuration parameters which you may 
-have to edit manually for your specific system.
+have to edit manually the paths in those files for your specific system.
+
 
   SVN Overview
   ------------
+
+  If you want to use GForge's svn-over-DAV support, apache2 and 
+mod_auth_gforge are required.
+
   SVN is also managed via plugin - the scmsvn plugin is included and 
 activated by default in gforge. As with scmcvs/ you have to move the 
 scmcvs/etc/plugins/* files to /etc/gforge/plugins/* and may have to
-make minor modifications for your specific setup.
+make minor modifications to those files for your specific setup.
 
-  There are two ways to manage SVN - one is to have SVN over DAV and the 
-other is to have SVN over SSH just as you do with CVS. If you choose 
-to use DAV, you will need the mod_auth_gforge library compiled and installed 
-in your apache and the appropriate VHOST settings in your httpd.conf. 
-mod_auth_gforge is available from gforge.org. The cronjobs to manage
-SVN are in cronjobs/dav-svn/ and so are sample httpd.conf VHOST settings.
-Each of these cronjobs has configuration parameters which you may have to 
-edit manually for your specific system.
+  To install mod_auth_gforge, download it from 
+http://gforge.org/frs/?group_id=128
 
-  Configuring svnserv for svn-over-ssh:
-  http://svnbook.red-bean.com/en/1.0/ch06s03.html
-  http://www.logemann.org/day/archives/000099.html
-  http://bitworking.org/news/Getting_subversion_svn_ssh____to_work_with_PuTTY
+  The sample etc/gforge-httpd.conf.example file in this tarball contains 
+a COMPLETE AND WORKING vhost for subversion-over-dav. You may have to 
+alter the passwords and any other config options, but the sample config 
+shown has been used in dozens or even hundreds of installs and DOES WORK.
 
+  As shown in the directions below, the sample config will be placed into 
+/etc/gforge/ and then included in apache's httpd.conf. The scmsvn plugin 
+will also need its etc files moved into /etc/gforge/plugins/scmsvn/ and
+the files may need to be edited to set paths for your setup.
+
+  Cronjobs - the /cronjobs/dav-svn/create_svn.php creates blank repositories
+for subversion. You will likely have to edit this file to get the proper
+SVN binary path.
+
+  Apache Modules
+  --------------
+
+#
+# mod_vhost_alias is used by the <projectname>.company.com vhosts
+# which are commented out by default in the sample apache conf
+# 
+LoadModule vhost_alias_module modules/mod_vhost_alias.so
+
+#
+# these modules are all needed for mod_auth_gforge
+#
+LoadModule dav_module modules/mod_dav.so
+LoadModule dav_fs_module modules/mod_dav_fs.so
+LoadModule dav_svn_module modules/mod_dav_svn.so
+LoadModule authz_svn_module modules/mod_authz_svn.so
+LoadModule auth_gforge_module modules/mod_auth_gforge.so
 
   CVSTracker Overview
   -------------------
@@ -110,6 +135,9 @@ commits and the bug tracker and task manager. So, for example,
 when you commit, you can reference bug and task IDs in your 
 commit message and have the commit linked to the corresponding
 bug and task.
+
+  This works by having a script in the cvs server issue a POST 
+to the main website ( /plugins/cvstracker/newcommit.php )
 
   See the plugins/cvstracker/README file for details. This 
 plugin is enabled by default in the gforge.sql database file. 
@@ -120,6 +148,7 @@ cronjob in crontab.in.
   You will also have to copy the newcommit.php file to your 
 gforge www/plugins/cvstracker/ dir
 
+
   PHP
   ---
   The cronjobs require the PHP CGI to be installed and the php.ini 
@@ -128,6 +157,7 @@ crontab.in file to set your include path.
 
   In addition, you may have to symlink /usr/bin/php to /usr/bin/php4, 
 which is where the cronjobs expect your PHP CGI to be located.
+
 
   Mailman
   -------
@@ -139,8 +169,8 @@ vhost shown below will work with this setup without any changes.
   Cronjobs for mailman are located in cronjobs/mail/*
 
   cronjobs/mail/mailing_lists_create.php is used obviously to 
-create new mailing lists. You may have to edit the file to change 
-the location of the mailman bin/ directory.
+create new mailing lists. You may have to edit /etc/gforge/local.inc 
+to change the location of the mailman bin/ directory.
 
   For all problems with mailman installation and use, contact 
 the mailman mailing lists for help.
@@ -205,7 +235,8 @@ This process will apply your upgrades. BE SURE TO WATCH FOR ERRORS!
 [gforge]# psql gforge < db/XXXXXXXXXX.sql >> import.log
 
 There may also be migration scripts that have to be run. In the 
-db/ folder, look for migrate-*.php scripts and run them.
+db/ folder, look for XXXXXXXXXXX.php scripts and run them AFTER
+YOU HAVE SET THE php.ini for your include_path.
 
 
 WEB SETUP - MANUAL INSTALLATION
