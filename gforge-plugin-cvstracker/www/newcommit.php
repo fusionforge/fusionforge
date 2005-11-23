@@ -72,8 +72,11 @@ function parseConfig($Config)
 		echo "CVSRootPath = ".$sys_cvsroot_path."\n";
 	}
 
-	$Result['group']    = group_get_object_by_name($GroupName);
+	
 	$Result['user']     = user_get_object_by_name($UserName);
+	session_set_new($Result['user']->getID());
+
+	$Result['group']    = group_get_object_by_name($GroupName);
 	if (!$Result['group'] || !is_object($Result['group']) ||
 		$Result['group']->isError() || !$Result['group']->isActive()) {
 		$Result['check'] = false;
