@@ -134,10 +134,12 @@ class SearchManager {
 			SEARCH__TYPE_IS_PEOPLE,
 			new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', $Language->getText('searchbox','people'))
 		);
-		$this->addSearchEngine(
-			SEARCH__TYPE_IS_SKILL,
-			new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', $Language->getText('searchbox','skill'))
-		);
+		if ($GLOBALS['sys_use_people']) {
+			$this->addSearchEngine(
+				SEARCH__TYPE_IS_SKILL,
+				new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', $Language->getText('searchbox','skill'))
+			);
+		}
 		
 		// Rss search engines
 		$this->addSearchEngine(
