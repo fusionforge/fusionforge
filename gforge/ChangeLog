@@ -1,3 +1,9 @@
+
+2005-11-25 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug -> Hide skills search if sys_use_people is false
+		https://gforge.org/tracker/?func=detail&aid=1586&group_id=6&atid=222
+
+
 2005-11-17  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* docs/docbook/docbook/installation_guide/installation_guide.xml:
@@ -18,6 +24,7 @@
 2005-11-07 Daniel Perez <daniel@gforgegroup.com>
 	Forums : 
 		Fixed bug when creating forum with default email address
+
 
 2005-10-17 Daniel Perez <daniel@gforgegroup.com>
 	* Fixed bug -> html_build_multiple_select_box_from_arrays and
