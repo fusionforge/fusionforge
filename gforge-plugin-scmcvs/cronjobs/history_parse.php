@@ -16,8 +16,9 @@ require ('common/include/cron_utils.php');
 $ARGV = $GLOBALS['argv'];
 $err = '';
 $verbose = 1;
-$debug = 1;
+$debug = 0;
 $cvsroot = "/cvsroot";
+$groups = array();
 
 function debug($message) {
 	global $debug, $err;
@@ -53,12 +54,10 @@ function get_all_days(){
 			debug('Cannot open history file');
 			continue;
 		}
-		$hist_cont = fread( $hist_file, filesize( $hist_file_path ) );
-		fclose( $hist_file );
-		$hist_lines = explode( "\n", $hist_cont );
 
 		// analyzing history file
-		foreach ( $hist_lines as $hist_line ) {
+		while (!feof($hist_file)) {
+			$hist_line = fgets($hist_file, 1024);
 			if ( preg_match( '/^\s*$/', $hist_line ) ) {
 				continue;
 			}
@@ -72,7 +71,7 @@ function get_all_days(){
 				array_push($all_days, $day);
 			
 		}
-			
+		fclose( $hist_file );
 	}
 
 	return $all_days;
@@ -84,6 +83,7 @@ function process_day($day_begin, $day_end){
 	global $err;
 	global $verbose;
 	global $debug;
+	global $groups;
 	
 	
  	$year	= gmstrftime("%Y", $day_begin );
@@ -108,19 +108,11 @@ function process_day($day_begin, $day_end){
 	
 		debug('Working on group '.$group);
 	
-		// trying to find the id of the group matching current repository name
-		$group_res = db_query( "SELECT group_id FROM groups WHERE
-			unix_group_name='$group' AND
-			status='A'" );
-		$group_id_row_count = db_numrows($group_res);
-		if ( $group_id_row = db_fetch_array($group_res) ) {
-			$group_id = $group_id_row[0];
+		if (array_key_exists($group, $groups)) {
+			$group_id = $groups[$group];
 		} else {
 			$err .= "Group $group does not appear to be active...	skipping.\n";
 			continue;
-		}
-		if ( $group_id_row_count > 1 ) {
-			$err .= "Group results are ambiguous... using group_id $group_id.\n";
 		}
 	
 		$cvs_co		= 0;
@@ -140,9 +132,7 @@ function process_day($day_begin, $day_end){
 			debug('Cannot open history file');
 			continue;
 		}
-		$hist_cont = fread( $hist_file, filesize( $hist_file_path ) );
-		fclose( $hist_file );
-		$hist_lines = explode( "\n", $hist_cont );
+
 	
 		// cleaning stats_cvs_* table for the current day to avoid conflicting index problem
 		$sql = "DELETE FROM stats_cvs_group
@@ -164,7 +154,8 @@ function process_day($day_begin, $day_end){
 		}
 	
 		// analyzing history file
-		foreach ( $hist_lines as $hist_line ) {
+		while (!feof($hist_file)) {
+			$hist_line = fgets($hist_file, 1024);
 			if ( preg_match( '/^\s*$/', $hist_line ) ) {
 				continue;
 			}
@@ -192,10 +183,10 @@ function process_day($day_begin, $day_end){
 				break;
 			}
 		}
-	
+		fclose( $hist_file );
 		// if we don't have any stats, skipping to next project
 		if($cvs_co == 0 && $cvs_add == 0 && $cvs_commit == 0) {
-			$err .= "No CVS stats for group ".$group.", skipping to next project";
+			$err .= "No CVS stats for group ".$group.", skipping to next project\n";
 			continue;
 		}
 	
@@ -252,7 +243,15 @@ function process_day($day_begin, $day_end){
 	return $rollback;
 }
 
-db_begin();
+$res = db_query( "SELECT unix_group_name, group_id FROM groups WHERE status='A'" );
+while ($row = db_fetch_array($res) ) {
+	$groups[$row['unix_group_name']] = $row['group_id'];
+}
+if (count($groups) < 1) {
+	$err = "Could not fetch list of group IDs";
+	cron_entry(14,$err);
+	exit;
+}
 
 if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	
@@ -260,18 +259,24 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
 	$day_end = $day_begin + 86400;
  
-  $rollback = process_day($day_begin, $day_end);
+	db_begin();
+	$rollback = process_day($day_begin, $day_end);
 } else if($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
   
-  $all_days = &get_all_days();
-  foreach ( $all_days as $day ) {
-			echo $day;  	
-  	$rollback = process_day($day, $day + 86400);
-  	
-  	if($rollback)
-  		break;
-  	
-  }
+	// Heavy (rarely used) operation, allow for 8hrs
+	ini_set('max_execution_time', '30000');
+	$all_days = &get_all_days();
+	foreach ( $all_days as $day ) {
+		echo date('Y-m-d', $day)."\n";  	
+		db_begin();
+		$rollback = process_day($day, $day + 86400);
+		
+		if($rollback) {
+			break;
+		} else {
+			db_commit();
+		}
+	}
    
 } else {
 
@@ -283,7 +288,7 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 					 ## go until midnight yesterday.
 	$day_begin = $day_end - 86400;
 	//	$day_begin = timegm( 0, 0, 0, (gmtime( time() - 86400 ))[3,4,5] );
-
+	db_begin();
 	$rollback = process_day($day_begin, $day_end);
 
 }
