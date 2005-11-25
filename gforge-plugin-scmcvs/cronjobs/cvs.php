@@ -27,6 +27,8 @@
 
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
+require_once('common/mail/MailingList.class');
+require_once('common/mail/MailingListFactory.class');
 
 require_once('common/include/SCM.class') ;
 
@@ -213,6 +215,65 @@ function add_sync_mail($unix_group_name) {
 	release_CVS_File($loginfo_file);
 }
 
+function addAclCheck($unix_group_name) {
+
+	global $maincvsroot;
+	$commitinfo = $maincvsroot."/".$unix_group_name.'/CVSROOT/commitinfo';
+
+	$Group =& group_get_object_by_name($unix_group_name);
+	if (!$Group || !is_object($Group)) {
+		return false;
+	}
+
+	if (isAclCheckSet($commitinfo) === false) {
+		$aclcheck = "ALL php -q -d include_path=".ini_get('include_path').
+			" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php\n";
+		if(!file_exists($commitinfo) || (file_exists($commitinfo) && is_file($commitinfo))){
+			writeFile($commitinfo, $aclcheck, 1);
+		}
+	}
+}
+
+function writeFile($filePath, $content, $append=0) {
+	if ($append == 1) {
+		$file = fopen($filePath, 'a');
+	} else {
+		$file = fopen($filePath, 'w');
+	}
+	flock($file, LOCK_EX);
+	if(!empty($content)) {
+		fwrite($file, $content);
+	}
+	flock($file, LOCK_UN);
+	fclose($file);
+}
+
+// return's true if it's ok to write the file
+function isAclCheckSet($file_name) {
+	if (!file_exists($file_name)) {
+		// files does't exist, it's ok to write it
+		echo "no existe\n";
+		return false;
+	} else { // check if file is empty or commented out
+		$file = @fopen($file_name, 'r');
+		if (!$file) { // couldn't open file
+			return 1;
+		}
+		while (!feof($file)) {
+			$content = trim(fgets($file, 4096));
+			if (strlen($content) > 1) {
+				if(!preg_match("/^#/", $content) &&
+					preg_match("/aclcheck\.php/",$content)) {
+					fclose($file);
+					return true;
+				}
+			}
+		}
+		fclose($file);
+		return false;
+	}
+}
+
 function add_Project_Repositories() {
 	global $maincvsroot;
 	global $use_cvs_acl;
@@ -255,6 +316,7 @@ function add_Project_Repositories() {
 			write_File($repositoryPath.'/CVSROOT/readers', $readersContent);
 			write_File($repositoryPath.'/CVSROOT/passwd', $passwdContent);
 			add_sync_mail($project->getUnixName());
+			addAclCheck($project->getUnixName());
 			if ($project->usesPlugin("cvstracker")){
 				$newfile="";
 				if(!is_logininfo_line_found($repositoryPath,$newfile)){					
@@ -275,6 +337,7 @@ function add_Project_Repositories() {
 				' '.$enableAnonSCM.
 				' '.$enablePserver);
 			add_sync_mail($project->getUnixName());
+			addAclCheck($project->getUnixName());
 			if ($project->usesPlugin("cvstracker")){
 				$newfile="";
 				if(!is_logininfo_line_found($repositoryPath,$newfile)){

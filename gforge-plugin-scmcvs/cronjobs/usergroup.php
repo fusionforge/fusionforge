@@ -104,14 +104,14 @@ if (util_is_root_dir($groupdir_prefix)) {
 
 //
 //	Get the users' unix_name and password out of the database
-//	ONLY USERS WITH CVS COMMIT PRIVS ARE ADDED
+//   ONLY USERS WITH CVS READ AND COMMIT PRIVS ARE ADDED
 //
 $res = db_query("SELECT distinct users.user_name,users.unix_pw,users.user_id 
 	FROM users,user_group,groups
 	WHERE users.user_id=user_group.user_id 
 	AND user_group.group_id=groups.group_id
 	AND groups.status='A'
-	AND user_group.cvs_flags='1'
+	AND user_group.cvs_flags IN ('0','1')
 	AND users.status='A'
 	ORDER BY user_id ASC");
 
@@ -257,7 +257,7 @@ for($i = 0; $i < count($groups); $i++) {
 			FROM users,user_group,groups 
 			WHERE groups.group_id=user_group.group_id 
 			AND users.user_id=user_group.user_id
-			AND user_group.cvs_flags='1'
+			AND user_group.cvs_flags IN ('0','1')
 			AND users.status='A'
 			AND groups.unix_group_name='$groups[$i]'");
 			
