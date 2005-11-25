@@ -1,3 +1,8 @@
+2005-11-25 Daniel Perez <daniel@gforgegroup.com>
+	Patchs applied : 
+		http://gforge.org/tracker/?func=detail&aid=1585&group_id=6&atid=222 (history parse runs out of memory)
+		
+
 2005-11-17  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* docs/docbook/docbook/installation_guide/installation_guide.xml:
