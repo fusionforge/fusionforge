@@ -320,6 +320,15 @@ class Permission extends Error {
 	function isCVSReader() {
 		return $this->isMember('cvs_flags',0);
 	}
+	
+	/**
+	 *      isCVSWriter - checks if the user has CVS write access.
+	 *
+	 *      @return boolean cvs_flags
+	 */
+	function isCVSWriter() {
+		return $this->isMember('cvs_flags',1);
+	}
 }
 
 ?>
