@@ -1,3 +1,8 @@
+2005-11-25 Tim Perdue <tim@gforgegroup.com>
+
+        * added quick-jump navigation system
+        * added back in the quick-browse for tracker, which was removed for power query
+
 2005-11-25 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied : 
 	* Fixed bug -> history parse runs out of memory

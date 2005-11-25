@@ -2870,7 +2870,8 @@ tracker	query_load	Load Query
 tracker	query_delete	Delete Query
 tracker	query_default	Last Query
 tracker	build_query	Build Query
-tracker	run_query	Run
+tracker	run_query	Power Query
+tracker	quickbrowse	Quick Browse
 tracker_artifacttype	query	Query
 tracker_artifacttype	csv	Download .csv
 tracker	comments	comments
