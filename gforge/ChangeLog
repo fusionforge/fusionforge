@@ -1,7 +1,9 @@
 2005-11-25 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied : 
-		http://gforge.org/tracker/?func=detail&aid=1585&group_id=6&atid=222 (history parse runs out of memory)
-		
+	* Fixed bug -> history parse runs out of memory
+		http://gforge.org/tracker/?func=detail&aid=1585&group_id=6&atid=222
+	* Fixed bug -> Hide skills search if sys_use_people is false
+          https://gforge.org/tracker/?func=detail&aid=1586&group_id=6&atid=222	
 
 2005-11-17  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
