@@ -1132,7 +1132,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!session_loggedin()) {
 			return '';
 		} else {
-			$res=db_query("SELECT * FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' ORDER BY group_id");
+			$res=db_query("SELECT * FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' ORDER BY group_name");
 echo db_error();
 			if (!$res || db_numrows($res) < 1) {
 				return '';
@@ -1145,7 +1145,7 @@ echo db_error();
 				for ($i=0; $i<db_numrows($res); $i++) {
 					$ret .= '
 				<option value="/projects/'.db_result($res,$i,'unix_group_name').'/">'.db_result($res,$i,'group_name').'</option>';
-					if (db_result($res,$i,'admin_flags')) {
+					if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
 				<option value="/project/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 					}
@@ -1162,7 +1162,7 @@ echo db_error();
 					if (db_result($res,$i,'use_pm')) {
 					$ret .= '
 				<option value="/pm/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'project_flags')) {
+						if (trim(db_result($res,$i,'admin_flags')) =='A' || db_result($res,$i,'project_flags')) {
 					$ret .= '
 				<option value="/pm/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1171,7 +1171,7 @@ echo db_error();
 					if (db_result($res,$i,'use_frs')) {
 					$ret .= '
 				<option value="/frs/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'release_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'release_flags')) {
 					$ret .= '
 				<option value="/frs/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1189,7 +1189,7 @@ echo db_error();
 					if (db_result($res,$i,'use_forum')) {
 					$ret .= '
 				<option value="/forum/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'forum_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'forum_flags')) {
 					$ret .= '
 				<option value="/forum/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1198,7 +1198,7 @@ echo db_error();
 					if (db_result($res,$i,'use_mail')) {
 					$ret .= '
 				<option value="/mail/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>';
-						if (db_result($res,$i,'admin_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
 				<option value="/mail/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1207,7 +1207,7 @@ echo db_error();
 					if (db_result($res,$i,'use_docman')) {
 					$ret .= '
 				<option value="/docman/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'doc_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'doc_flags')) {
 					$ret .= '
 				<option value="/docman/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1216,7 +1216,7 @@ echo db_error();
 					if (db_result($res,$i,'use_news')) {
 					$ret .= '
 				<option value="/news/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>';
-						if (db_result($res,$i,'admin_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
 				<option value="/news/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
@@ -1225,7 +1225,7 @@ echo db_error();
 					if (db_result($res,$i,'use_survey')) {
 					$ret .= '
 				<option value="/survey/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>';
-						if (db_result($res,$i,'admin_flags')) {
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
 				<option value="/survey/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
