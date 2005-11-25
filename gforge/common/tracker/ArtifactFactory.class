@@ -90,9 +90,10 @@ class ArtifactFactory extends Error {
 	 *	@param	int	The max number of rows to return.
 	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
 	 *	@param	int	Include this param if you want to limit to a certain assignee.
+	 *	@param	int	Include this param if you want to limit to a particular status.
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status) {
+	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
 //echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
@@ -104,7 +105,9 @@ class ArtifactFactory extends Error {
 		if (session_loggedin()) {
 			$u =& session_get_user();
 		}
-		$_extra_fields=array();
+		if (!is_array($_extra_fields)) {
+			$_extra_fields=array();
+		}
 
 		if (!$set) {
 			/*
@@ -253,7 +256,10 @@ class ArtifactFactory extends Error {
 			$keys=array_keys($this->extra_fields);
 			$vals=array_values($this->extra_fields);
 			for ($i=0; $i<count($keys); $i++) {
-				if (is_array($vals[$i])) {
+				if (empty($vals[$i])) {
+					continue;
+				}
+				if (is_array($vals[$i]) && !empty($vals[$i])) {
 					$vals[$i]=implode(',',$vals[$i]);
 				}
 				$ef_table_str.=", artifact_extra_field_data aefd$i ";
