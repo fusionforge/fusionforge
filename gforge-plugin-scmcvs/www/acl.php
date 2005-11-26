@@ -45,16 +45,17 @@ if (count($matches) == 0) {
 		exit_error('','Invalid username');
 	}
 
-	$projectName = $matches[count($matches)-1];
-	$Group =& group_get_object_by_name($projectName);
-	if (!$Group || !is_object($Group) || $Group->isError()) {
-		exit_no_group();
-	}
-
 	$userName = $matches2[count($matches2)-1];
 	$User =& user_get_object_by_name($userName);
 	if (!$User || !is_object($User)) {
 		exit_error('','User not found');
+	}
+	session_set_new($User->getID());
+
+	$projectName = $matches[count($matches)-1];
+	$Group =& group_get_object_by_name($projectName);
+	if (!$Group || !is_object($Group) || $Group->isError()) {
+		exit_no_group();
 	}
 
 	$perm =& permission_get_object($Group, $User);
