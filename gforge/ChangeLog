@@ -2,6 +2,9 @@
 
 	* added quick-jump navigation system
 	* added back in the quick-browse for tracker, which was removed for power query
+	* made cvssyncmail plugin so it can be unchecked
+	* completely cleaned up cvs.php cronjob
+	* added plugin management page from HEAD to 4.5
 
 
 2005-11-25 Daniel Perez <daniel@gforgegroup.com>
