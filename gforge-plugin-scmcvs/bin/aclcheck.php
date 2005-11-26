@@ -29,11 +29,12 @@ if (((int) $_SERVER['argc']) < 1) {
 	exit(1);
 }
 
-require_once('local.inc');
+require_once('plugins/scmcvs/config.php');
 require ($sys_plugins_path.'/scmcvs/common/Snoopy.class');
 
 // Input cleansing
 $env_cvsroot = (string) $_ENV['CVSROOT'];
+
 # Rules
 # 1. Must begin with /cvs/ or /cvsroot/
 # 2. Then must contain 3 - 15 alphanumeric chars or -
@@ -56,10 +57,16 @@ $SubmitUrl='https://'.$sys_default_domain.'/plugins/scmcvs/acl.php';
 $SubmitVars['group'] = $projectName;
 $SubmitVars['user'] = $userName;
 
-$snoopy->submit($SubmitUrl,$SubmitVars);
-if (!empty($snoopy->results)) {
-	print $snoopy->results."\n";
-	exit(1);
+if ($userName == 'root') {
+	exit(0);
+} else {
+
+	$snoopy->submit($SubmitUrl,$SubmitVars);
+	if (!empty($snoopy->results)) {
+		print $snoopy->results."\n";
+		exit(1);
+	}
+
 }
 
 ?>
