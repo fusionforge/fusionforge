@@ -104,7 +104,7 @@ function docman_recursive_display($docgroup) {
 		echo ",";
 		docman_recursive_display($dg->getID());
 		foreach ($nested_docs[$dg->getID()] as $d) {
-			echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".$d->getName()." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".$d->getDescription()."']";
+			echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".addslashes($d->getName())." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".addslashes($d->getDescription())."']";
 		}
 		echo ",\n],";
 
@@ -129,7 +129,7 @@ docman_recursive_display(0);
 <div id="myMenuID"></div>
 
 <script language="JavaScript"><!--
-        ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 2);
+        ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
 --></script>
 <?php
 
