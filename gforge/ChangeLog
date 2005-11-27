@@ -1,7 +1,15 @@
 2005-11-25 Tim Perdue <tim@gforgegroup.com>
 
-        * added quick-jump navigation system
-        * added back in the quick-browse for tracker, which was removed for power query
+	* added some javascript libraries
+	* modified docman index to use javascript tree - you can expand
+	folders now without a round-trip back to the server
+
+2005-11-25 Tim Perdue <tim@gforgegroup.com>
+
+	* added quick-jump navigation system
+	* added back in the quick-browse for tracker, which was removed for power query
+	* made cvssyncmail plugin so it can be unchecked
+	* completely cleaned up cvs.php cronjob
 
 2005-11-25 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied : 

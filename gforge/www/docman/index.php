@@ -86,44 +86,58 @@ if (!$d_arr || count($d_arr) < 1) {
 
 	// Get the document groups info
 	$nested_groups =& $dgf->getNested();	
-	docman_display_documents($nested_groups,$df,$is_editor);
-}
 
-docman_footer(array());
+	$nested_docs=array();
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_arr as $doc) {
+		$nested_docs[$doc->getDocGroupID()][] = $doc;
+	}
 
 /*
-$d_arr =& $df->getDocuments();
-if (!$d_arr || count($d_arr) <1){
-	$df->setLanguageId(0);
-	$d_arr = &$df->getDocuments();
+	EXPERIMENTAL CODE TO USE JAVASCRIPT TREE
+*/
+function docman_recursive_display($docgroup) {
+	global $nested_groups,$nested_docs,$group_id;
+	foreach ($nested_groups[$docgroup] as $dg) {
+		$folder = '<span class="JSCookTreeFolderClosed"><i><img src=\"/jscook/ThemeXP/folder1.gif\"></i></span><span class="JSCookTreeFolderOpen"><i><img src=\"/jscook/ThemeXP/folderopen1.gif\"></i></span>';
+		echo "\n['$folder', '".$dg->getName()."', '', '', ''";
+		echo ",";
+		docman_recursive_display($dg->getID());
+		foreach ($nested_docs[$dg->getID()] as $d) {
+			echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".$d->getName()." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".$d->getDescription()."']";
+		}
+		echo ",\n],";
+
+	}
 }
 
-docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'),'docman','',$g->getPublicName());
+?>
+<script language="JavaScript" src="/jscook/JSCookTree.js"></script>
+<link rel="stylesheet" href="/jscook/ThemeXP/theme.css" type="text/css" />
+<script src="/jscook/ThemeXP/theme.js" type="text/javascript"></script>
 
-if (!$d_arr || count($d_arr) < 1) {
-	print "<strong>".$Language->getText('docman','error_no_docs')."</strong>";
-} else {
-	doc_droplist_count($group_id, $language_id, $g);
+<script language="JavaScript"><!--
+var myMenu =
+[
+['<span class="JSCookTreeFolderClosed"><i><img src="/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '', '', '',
+<?php
+docman_recursive_display(0);
+?>
+]
+]
+--></script>
+<div id="myMenuID"></div>
 
-	print "\n<ul>";
-	$last_group = "";
-	for ($i=0; $i<count($d_arr); $i++) {
-		//
-		//	If we're starting a new "group" of docs, put in the
-		//	docGroupName and start a new <ul>
-		//
-		if ($d_arr[$i]->getDocGroupID() != $last_group) {
-			print (($i==0) ? '' : '</ul></li><br />');
-			print "\n\n<li><strong>". $d_arr[$i]->getDocGroupName() ."</strong></li><li style=\"list-style: none\"><ul>";
-			$last_group=$d_arr[$i]->getDocGroupID();
-		}
-		print "\n<li><a href=\"".(( $d_arr[$i]->isURL() ) ? $d_arr[$i]->getFileName() : "view.php/$group_id/".$d_arr[$i]->getID()."/".$d_arr[$i]->getFileName() )."\">".
-			$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
-			"\n<br /><em>".$Language->getText('docman','description').":</em> ".$d_arr[$i]->getDescription()."</li>\n";
-	}
-	print "\n</ul></li></ul>\n";
+<script language="JavaScript"><!--
+        ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 2);
+--></script>
+<?php
+
+	echo '<noscript>';
+	docman_display_documents($nested_groups,$df,$is_editor);
+	echo '</noscript>';
 }
 
 docman_footer(array());
-*/
+
 ?>
