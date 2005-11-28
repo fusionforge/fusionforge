@@ -36,6 +36,9 @@
 
 require_once('common/include/Error.class');
 require_once('common/forum/ForumMessage.class');
+// This string is used when sending the notification mail for identifying the
+// user response
+define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');	
 
 class Forum extends Error {
 

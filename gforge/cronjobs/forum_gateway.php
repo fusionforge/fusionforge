@@ -51,6 +51,7 @@ class ForumGateway extends Error {
 	var $Forum=-1;
 	var $Parent=0;
 	var $ForumId=-1;
+	var $Message="";
 
 	function ForumGateway() {
 		$this->Error();
@@ -133,7 +134,7 @@ class ForumGateway extends Error {
 		//where 123456 is the msg_id of the forum message.
 		//we parse that ID to get the forum and thread that this should post to
 		//
-		$subj = $mp->getSubject();
+		$subj = $mp->getSubject();		
 /*
 DBG("mp headers: ".implode("**\n",$mp->headers));
 DBG("mp body: ".$mp->body);
@@ -162,12 +163,28 @@ DBG("BODY: ".$mp->getBody());
 			$this->Subject = addslashes($subj);
 			$this->Parent=0;
 		}
-
+		
 		$this->Body =& addslashes($mp->getBody());
-//DBG('FPARENT: '.$this->Parent);
-//DBG('FSUBJ: '.$this->Subject);
-//DBG('FBODY: '.$this->Body);
-//exit;
+		
+		
+		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($begin === false) { //do nothing
+				return true; 
+		}		
+		// get the part of the message located after the marker
+		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
+		// now look for the ending marker
+		$end = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($end === false) {
+			return true;
+		}
+		$message = substr($this->Body, 0, $end);
+		$message = trim($message);
+		
+		// maybe the last line was "> (FORUM_MAIL_MARKER)". In that case, delete the last ">"
+		$message = preg_replace('/>$/', '', $message);
+		$this->Message = $message;
+		
 		return true;
 	}
 	
@@ -196,6 +213,7 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("Forum Error: ".$Forum->getErrorMessage());
 			return false;
 		}
+		
 		if (!$user_id && !$Forum->AllowAnonymous()) {
 			$this->setError("Could Not Match Sender Email Address to User and Forum Does Not Allow Anonymous Posts");
 			return false;
@@ -212,13 +230,15 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
-		
 		//$text_support = new TextSupport();
 		//$bbcode_uid = $text_support->prepareText($this->Body,0,0,0,0);//we get the text UNFORMATTED, as is
-
-		if (!$ForumMessage->create($this->Subject,$this->Body,-1,$this->ThreadId,$this->Parent)) {
-			$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
-			return false;
+		if ($this->Message!=""){			
+			if (!$ForumMessage->create($this->Subject,$this->Message,-1,$this->ThreadId,$this->Parent)) {
+				$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
+				return false;
+			} else {
+				return true;
+			}
 		} else {
 			return true;
 		}
@@ -247,17 +267,18 @@ DBG("BODY: ".$mp->getBody());
 	}
 
 	function &getForum() {
-		global $argv;
-
+		global $argv;		
+		
+		
 		if ($this->Forum==-1) {
-			$Group =& group_get_object_by_name($argv[1]);
+			$Group =& group_get_object_by_name($argv[1]);			
 			if (!$Group || !is_object($Group)) {
 				$this->setError('Could Not Get Group Object');
 				return false;
 			} elseif ($Group->isError()) {
 				$this->setError('Getting Group Object: '.$Group->getErrorMessage());
 				return false;
-			}
+			}			
 			if ($this->Parent) {
 				//
 				// Find Forum id by parent
