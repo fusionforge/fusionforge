@@ -2,6 +2,9 @@
 /**
  * GForge Plugin Activate / Deactivate Page
  *
+ * @version 
+ * @author 
+ * @copyright 
  * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
@@ -61,7 +64,26 @@ if (getStringFromRequest('update')) {
 		if (!res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
-			$feedback .= $Language->getText('pluginman','success',$pluginname);
+			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
+				chdir('../plugins');
+				if (file_exists($pluginname)) {
+					system('rm ' . $pluginname,$result);
+				} 
+				if (file_exists('/etc/gforge/plugins/'.$pluginname)) {
+					if (!chdir('/etc/gforge/plugins')) {
+						$result2 = 1;
+					} else {
+						system('rm ' . $pluginname,$result2); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+					}					
+				}
+				$feedback = $Language->getText('pluginman','success',$pluginname);
+				if ($result!=0) {
+					$feedback .= $Language->getText('pluginman','successnodeletelink');
+				}
+				if ($result2!=0) {
+					$feedback .= $Language->getText('pluginman','successnodeleteconfig');
+				}
+			}			
 		}
 	} else {
 		$sql = "INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('$pluginname','This is the $pluginname plugin')";
@@ -69,7 +91,22 @@ if (getStringFromRequest('update')) {
 		if (!res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
-			$feedback = $Language->getText('pluginman','success',$pluginname);
+			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
+				chdir('../plugins');
+				$return_value = symlink($sys_plugins_path . $pluginname . '/www',$pluginname); // the apache group or user should have write perms the plugins folder...
+				if (!chdir('/etc/gforge/plugins')) {
+					$return_value2 = false;
+				} else {
+					$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+				}
+				$feedback = $Language->getText('pluginman','success',$pluginname);
+				if (!$return_value) {
+					$feedback .= $Language->getText('pluginman','successnolink');
+				}
+				if (!$return_value2) {
+					$feedback .= $Language->getText('pluginman','successnoconfig',$pluginname);
+				}
+			}
 		}
 	}
 
