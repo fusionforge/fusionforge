@@ -50,6 +50,7 @@ class ForumGateway extends Error {
 	var $Forum=-1;
 	var $Parent=0;
 	var $ForumId=-1;
+	var $Message="";
 
 	function ForumGateway() {
 		$this->Error();
@@ -160,11 +161,24 @@ DBG("BODY: ".$mp->getBody());
 			$this->Parent=0;
 		}
 
-		$this->Body =& addslashes($mp->getBody());
-//DBG('FPARENT: '.$this->Parent);
-//DBG('FSUBJ: '.$this->Subject);
-//DBG('FBODY: '.$this->Body);
-//exit;
+		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($begin === false) { //do nothing
+				return true; 
+		}		
+		// get the part of the message located after the marker
+		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
+		// now look for the ending marker
+		$end = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($end === false) {
+			return true;
+		}
+		$message = substr($this->Body, 0, $end);
+		$message = trim($message);
+		
+		// maybe the last line was "> (FORUM_MAIL_MARKER)". In that case, delete the last ">"
+		$message = preg_replace('/>$/', '', $message);
+		$this->Message = $message;
+		
 		return true;
 	}
 	
@@ -209,9 +223,13 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
-		if (!$ForumMessage->create($this->Subject,$this->Body,$this->ThreadId,$this->Parent)) {
-			$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
-			return false;
+		if ($this->Message!=""){	
+			if (!$ForumMessage->create($this->Subject,$this->Message,$this->ThreadId,$this->Parent)) {
+				$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
+				return false;
+			} else {
+				return true;
+			}
 		} else {
 			return true;
 		}
