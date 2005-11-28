@@ -24,7 +24,7 @@ require_once('www/news/news_utils.php');
 require_once('www/forum/admin/ForumAdmin.class');
 require_once('www/forum/include/AttachManager.class');
 require_once('www/include/TextSupport.class'); // bbcode, smilies support
-require_once('www/include/fckeditor/fckeditor.php');
+//require_once('www/include/fckeditor/fckeditor.php');
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
