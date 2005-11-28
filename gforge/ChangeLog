@@ -1,3 +1,9 @@
+2005-11-25 Daniel Perez <daniel@gforgegroup.com>
+	www/admin/pluginman.php : added create/remove symlink to www and config dirs
+	Fckeditor plugin : changed core files to www/ dir in fckeditor plugin instead of gforge include dir
+	News : added fckeditor plugin integration
+	Doc Manager : added fckeditor plugin integration. organized the logic (was too entangled)
+
 2005-11-25 Tim Perdue <tim@gforgegroup.com>
 
 	* added some javascript libraries
