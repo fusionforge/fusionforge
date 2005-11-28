@@ -64,6 +64,7 @@ if (getStringFromRequest('update')) {
 		if (!res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
+			$feedback = $Language->getText('pluginman','success',$pluginname);
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
 				chdir('../plugins');
 				if (file_exists($pluginname)) {
@@ -76,7 +77,6 @@ if (getStringFromRequest('update')) {
 						system('rm ' . $pluginname,$result2); // the apache group or user should have write perms in /etc/gforge/plugins folder...
 					}					
 				}
-				$feedback = $Language->getText('pluginman','success',$pluginname);
 				if ($result!=0) {
 					$feedback .= $Language->getText('pluginman','successnodeletelink');
 				}
@@ -91,6 +91,7 @@ if (getStringFromRequest('update')) {
 		if (!res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
+			$feedback = $Language->getText('pluginman','success',$pluginname);
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
 				chdir('../plugins');
 				$return_value = symlink($sys_plugins_path . $pluginname . '/www',$pluginname); // the apache group or user should have write perms the plugins folder...
@@ -99,7 +100,6 @@ if (getStringFromRequest('update')) {
 				} else {
 					$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
 				}
-				$feedback = $Language->getText('pluginman','success',$pluginname);
 				if (!$return_value) {
 					$feedback .= $Language->getText('pluginman','successnolink');
 				}
