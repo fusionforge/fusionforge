@@ -31,6 +31,7 @@ require_once('news_admin_utils.php');
 require_once('www/news/news_utils.php');
 //common forum tools which are used during the creation/editing of news items
 require_once('common/forum/Forum.class');
+require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 $post_changes = getStringFromRequest('post_changes');
@@ -75,8 +76,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				$details='(none)';
 			}
 
+			$sanitizer = new TextSanitizer();
+			$details = $sanitizer->SanitizeHtml($details);
 			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', ".
-				"details='".htmlspecialchars($details)."' WHERE id='$id' AND group_id='$group_id'";
+				"details='".$details."' WHERE id='$id' AND group_id='$group_id'";
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
@@ -128,8 +131,21 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		<strong>'.$Language->getText('news_admin', 'subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
-		<strong>'.$Language->getText('news_admin', 'details').':</strong>'.notepad_button('document.forms[1].details').'<br />
-		<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><p>
+		<strong>'.$Language->getText('news_admin', 'details').':</strong>'.notepad_button('document.forms[1].details').'<br />';
+			
+		$params['name'] = 'details';
+		$params['width'] = "600";
+		$params['height'] = "300";
+		$params['group'] = $group_id;
+		$params['body'] = db_result($result,0,'details');
+		plugin_hook("text_editor",$params);
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
+		}
+		unset($GLOBALS['editor_was_set_up']);		
+		
+		echo '<p>
 		<strong>'.$Language->getText('news_admin', 'removal_when_edit', array($GLOBALS['sys_name'])).'</strong><br /></p>
 		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
 		</form>';
@@ -179,8 +195,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				/*
 					Update the db so the item shows on the home page
 				*/
+				$sanitizer = new TextSanitizer();
+				$details = $sanitizer->SanitizeHtml($details);
 				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', ".
-					"summary='".htmlspecialchars($summary)."', details='".htmlspecialchars($details)."' WHERE id='$id'";
+					"summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= $Language->getText('general', 'error_on_update');
@@ -256,8 +274,22 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="radio" name="status" value="2" checked="checked" /> '.$Language->getText('news_admin', 'reject').'<br />
 		<strong>'.$Language->getText('news_admin', 'subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
-		<strong>'.$Language->getText('news_admin', 'details').':</strong><br />
-		<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />
+		<strong>'.$Language->getText('news_admin', 'details').':</strong><br />';
+		
+		$params['name'] = 'details';
+		$params['width'] = "600";
+		$params['height'] = "300";
+		$params['group'] = $group_id;
+		$params['body'] = db_result($result,0,'details');
+		plugin_hook("text_editor",$params);
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
+		}
+		unset($GLOBALS['editor_was_set_up']);		
+		
+		
+		echo '<br />
 		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
 		</form>';
 

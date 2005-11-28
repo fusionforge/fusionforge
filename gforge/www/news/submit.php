@@ -29,6 +29,7 @@ require_once('pre.php');
 require_once('note.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
+require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 
@@ -67,8 +68,10 @@ if (session_loggedin()) {
 					exit_error('Error',$f->getErrorMessage());
 				}
 	   			$new_id=$f->getID();
+				$sanitizer = new TextSanitizer();
+				$details = $sanitizer->SanitizeHtml($details);
 	   			$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) ".
-	   				" VALUES ('$group_id','".user_getid()."','0','".time()."','$new_id','".htmlspecialchars($summary)."','".htmlspecialchars($details)."')";
+	   				" VALUES ('$group_id','".user_getid()."','0','".time()."','$new_id','".htmlspecialchars($summary)."','".$details."')";
 	   			$result=db_query($sql);
 	   			if (!$result) {
 					db_rollback();
@@ -106,9 +109,19 @@ if (session_loggedin()) {
 		<strong>'.$Language->getText('news_submit', 'subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />
-		<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />
-		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
+		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
+		
+		$params['name'] = 'details';
+		$params['width'] = "600";
+		$params['height'] = "300";
+		$params['group'] = $group_id;
+		plugin_hook("text_editor",$params);
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
+		}
+		unset($GLOBALS['editor_was_set_up']);
+	echo '<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
 		</form></p>';
 
 	news_footer(array());
