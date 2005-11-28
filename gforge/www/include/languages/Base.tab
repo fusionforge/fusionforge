@@ -698,6 +698,11 @@ docman	submit_new	Submit new documentation
 docman	turned_off	This project has turned off the Doc Manager
 docman	view_doc	View Documentation
 docman	bytes		bytes
+docman	select	First select the upload type you wish to use
+docman	httpupload	Http Upload
+docman	ftpupload	Ftp Upload
+docman	pasteurl	Url Paste
+docman	editor	Create and edit the file manually
 docman_admin	add_edit_docgroups	Add/Edit Document Groups
 docman_admin	section	Project: $1
 docman_admin	title	Document Manager: Administration
@@ -743,7 +748,7 @@ docman_display_doc	no_document_data_text	No document to display - invalid or ina
 docman_display_doc	no_document_data_title	No document data
 docman_display_doc	section	Project: $1 
 docman_display_doc	title	Document Manager: Display Document
-docman_new	upload_url	OR specify an outside URL where the file will be referenced
+docman_new	upload_url	Specify an outside URL where the file will be referenced
 docman_new	description	Description
 docman_new	doc_title	Document Title
 docman_new	error_blank_document	Error getting blank document
@@ -758,8 +763,11 @@ docman_new	submit	Submit Information
 docman_new	submitted_successfully	Document submitted sucessfully
 docman_new	title	Document Manager: Submit New Documentation
 docman_new	upload_file	Upload File	
-docman_new	ftpupload_new_file	Alternatively, you can use FTP to upload a new file at $1
+docman_new	ftpupload_new_file	You can use FTP to upload a new file at $1
 docman_new	ftpupload_choosefile	Choose an FTP file instead of uploading:
+docman_new	selectsubmit	Select Option
+docman_new	enableftpfirst	You must enable ftp uploads first
+docman_new	name	Name your file :
 error	error_creating	Error creating
 error	not_found	PAGE NOT FOUND
 error	title	Requested Page not Found (Error 404)
