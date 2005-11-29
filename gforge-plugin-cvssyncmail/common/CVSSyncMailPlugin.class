@@ -54,7 +54,7 @@ class CVSSyncMailPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group = &group_get_object($group_id);
-			$use_hellowordplugin = getStringFromRequest('use_cvssyncmailplugin');
+			$use_cvssyncmailplugin = getStringFromRequest('use_cvssyncmailplugin');
 			if ( $use_cvssyncmailplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
