@@ -1,3 +1,8 @@
+2005-11-30 Daniel Perez <daniel@gforgegroup.com>
+        svntracker plugin : changed the handle of the vars, to send only one
+        post to newcommit.php (previously there were multiple HTTP POSTS)
+
+
 2005-11-25 Tim Perdue <tim@gforgegroup.com>
 
 	* added quick-jump navigation system
