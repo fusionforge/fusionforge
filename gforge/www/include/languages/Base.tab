@@ -719,6 +719,7 @@ docman_admin_editdocs	title	Edit Docs
 docman_admin_editdocs	upload	OPTIONAL: Upload new file
 docman_admin_editdocs	upload_ftp	OR choose one form FTP $1
 docman_admin_editdocs	delete_doc	Permanently delete this document
+docman_admin_editdocs	edit	Edit the contents to your desire or leave them as they are to remain unmodified.
 docman_admin_editgroups	add_group	Add a group
 docman_admin_editgroups	description	Group name will be used as a title, so it should be formatted correspondingly.
 docman_admin_editgroups	edit_group	Edit a group

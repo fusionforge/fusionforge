@@ -23,6 +23,7 @@ require_once('www/docman/include/DocumentGroupHTML.class');
 require_once('common/docman/DocumentFactory.class');
 require_once('common/docman/DocumentGroup.class');
 require_once('common/docman/DocumentGroupFactory.class');
+require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {
@@ -61,12 +62,22 @@ if (getStringFromRequest('submit')) {
 		$ftp_filename = getStringFromRequest('ftp_filename');
 		$uploaded_data = getUploadedFile('uploaded_data');
 		$stateid = getIntFromRequest('stateid');
+		$filetype = getStringFromRequest('filetype');
+		$editor = getStringFromRequest('editor');
 
 		$d= new Document($g,$docid);
 		if ($d->isError()) {
 			exit_error($Language->getText('general','error'),$d->getErrorMessage());
 		}
-		if ($uploaded_data['name']) {
+		
+		$sanitizer = new TextSanitizer();
+		$data = $sanitizer->SanitizeHtml($data);
+		if (($editor) && ($d->getFileData()!=$data)) {
+			$filename = $d->getFileName();
+			if (!$filetype) {
+				$filetype = $d->getFileType();
+			}
+		} elseif ($uploaded_data['name']) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['tmp_name']));
 			}
@@ -192,6 +203,33 @@ if ($editdoc && $docid) {
 		</td>
 	</tr>
 
+	<?
+
+	if (!$d->isURL()) {
+		echo '<tr>
+				<td>
+				';
+		echo '<input type="hidden" name="editor" value="editor">';
+		echo $Language->getText('docman_admin_editdocs','edit');
+		$params['name'] = 'data';
+		$params['width'] = "800";
+		$params['height'] = "500";
+		$params['group'] = $group_id;
+		$params['body'] = $d->getFileData();
+		plugin_hook("text_editor",$params);
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $d->getFileData()  .'</textarea><br />';
+		} else {
+			echo '<input type="hidden" name="filetype" value="text/html">'; // the fckeditor creates html docs. this is for filetype
+		}
+		unset($GLOBALS['editor_was_set_up']);
+		echo '</td>
+			</tr>';
+	}
+	
+	?>
+
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('docman_new','language') ?></strong><br />
@@ -250,7 +288,6 @@ if ($editdoc && $docid) {
 			<?php if ($sys_use_ftpuploads) { ?>
 			<strong><?php echo $Language->getText('docman_admin_editdocs','upload_ftp',array($sys_ftp_upload_host)) ?></strong><br />
 			<?php
-			$arr[]='';
 			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
 			echo '<br /><br />';			
