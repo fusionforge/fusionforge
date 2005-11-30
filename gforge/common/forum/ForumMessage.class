@@ -676,6 +676,11 @@ class ForumMessage extends Error {
 			
 		$body = "\nRead and respond to this message at: ".
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+		"\nOr by replying to this e-mail entering your response between the following markers: ".
+			"\n".FORUM_MAIL_MARKER.
+			"\n(enter your response here)".
+			"\n".FORUM_MAIL_MARKER.
+			"\n\n".
 		"\nBy: " . $this->getPosterRealName() . "\n";
 		
 		if ($has_attach) {
