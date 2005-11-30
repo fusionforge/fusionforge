@@ -1,4 +1,8 @@
-2005-11-25 Daniel Perez <daniel@gforgegroup.com>
+2005-11-30 Daniel Perez <daniel@gforgegroup.com>
+	svntracker plugin : changed the handle of the vars, to send only one
+	post to newcommit.php (previously there were multiple HTTP POSTS)
+
+2005-11-28 Daniel Perez <daniel@gforgegroup.com>
 	www/admin/pluginman.php : added create/remove symlink to www and config dirs
 	Fckeditor plugin : changed core files to www/ dir in fckeditor plugin instead of gforge include dir
 	News : added fckeditor plugin integration
