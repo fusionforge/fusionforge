@@ -74,6 +74,12 @@ function parseConfig($Config)
 
 	
 	$Result['user']     = user_get_object_by_name($UserName);
+	if (!$Result['user'] || !is_object($Result['user']) ||
+		$Result['user']->isError() || !$Result['user']->isActive()) {
+		$Result['check'] = false;
+		$Result['error'] = 'Invalid User';
+		return $Result;
+	}
 	session_set_new($Result['user']->getID());
 
 	$Result['group']    = group_get_object_by_name($GroupName);
@@ -89,11 +95,6 @@ function parseConfig($Config)
 		}
 	}
 
-	if (!$Result['user'] || !is_object($Result['user']) ||
-		$Result['user']->isError() || !$Result['user']->isActive()) {
-		$Result['check'] = false;
-		$Result['error'] = 'Invalid User';
-	}
 	return $Result;
 }
 
