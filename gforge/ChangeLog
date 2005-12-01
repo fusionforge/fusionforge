@@ -1,3 +1,6 @@
+2005-12-01 Daniel Perez <daniel@gforgegroup.com>
+	rss 2.0 feed patch added
+
 2005-11-30 Daniel Perez <daniel@gforgegroup.com>
 	svntracker plugin : changed the handle of the vars, to send only one
 	post to newcommit.php (previously there were multiple HTTP POSTS)
