@@ -98,7 +98,12 @@ if (getStringFromRequest('update')) {
 				if (!chdir('/etc/gforge/plugins')) {
 					$return_value2 = false;
 				} else {
-					$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+					if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {
+						$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+					} else {
+						//doesn´t have a config file, but that´s ok
+						$return_value2 = true;
+					}
 				}
 				if (!$return_value) {
 					$feedback .= $Language->getText('pluginman','successnolink');
