@@ -64,6 +64,7 @@ if ($project->usesStats()) {
 	}
 	print '<br />'.$Language->getText('group', 'activity'). substr($actv_res, 0, 5). '%';
 	print '<br />'.$Language->getText('group', 'activitystat', $group_id);
+	print '<br />'.$Language->getText('group', 'rssfeeds', $group_id);
 }
 
 if($GLOBALS['sys_use_people']) {

@@ -1126,6 +1126,7 @@ group	short_summary	Summary
 group	short_support	Support
 group	short_survey	Surveys
 group	short_tracker	Tracker
+group	rssfeeds	View list of <a href="/export/rss_project.php?group_id=$1">RSS feeds</a> available for this project
 help	page_information	Page Information
 help	title	Welcome to $1
 help_forum	close_window	Close Window
