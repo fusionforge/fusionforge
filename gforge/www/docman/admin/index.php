@@ -474,6 +474,7 @@ if ($editdoc && $docid) {
 	</p>
 	<?php
 	
+	$selected_stateid = getIntFromRequest('selected_stateid');
 	if (!$d_arr || count($d_arr) < 1) {
 		print "<p><strong>".$Language->getText('docman','error_no_docs').".</strong></p>";
 	} else {
@@ -483,7 +484,7 @@ if ($editdoc && $docid) {
 		echo "<ul>";
 		foreach ($states as $state) {
 			echo "<li><strong>".$state["name"]."</strong>";
-			docman_display_documents($nested_groups, $df, true, $state[$stateid], true);
+			docman_display_documents($nested_groups, $df, true, $state['stateid'], true);
 			echo "</li>";
 		}
 		echo "</ul>";

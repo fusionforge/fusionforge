@@ -171,7 +171,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		// Display group and subgroups only if it has associated documents
 		if ($doc_group->hasDocuments($nested_groups, $document_factory, $stateid)) {
 			// Recursive call			
-			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
 				$icon = 'ofolder15.png';
 			} else {
 				$icon = 'cfolder15.png';
@@ -188,7 +188,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			echo $Language->getText('docman_admin', 'add_docs');
 			echo "</a>";
 			
-			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
 				docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
 			}
 		}
