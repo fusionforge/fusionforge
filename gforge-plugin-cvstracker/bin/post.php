@@ -193,7 +193,8 @@ foreach ( $files as $file )
 	$SubmitVars[$i]["TaskNumbers"]     = getInvolvedTasks($Log);
 	$SubmitVars[$i]["ArtifactNumbers"] = getInvolvedArtifacts($Log);
 	$SubmitVars[$i]["CvsDate"]         = time();
-	
+	$i++;
+}
 	if($cvs_tracker_debug) {
 		echo "Variables submitted to newcommit.php:\n";
 		print_r($SubmitVars);
@@ -205,5 +206,5 @@ foreach ( $files as $file )
 	$vars['data'] = serialize($SubmitVars);
 	$snoopy->submit($SubmitUrl,$vars);
 	print $snoopy->results;
-}
+
 ?>
