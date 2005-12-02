@@ -25,20 +25,27 @@ require_once('plugins/cvstracker/config.php');
  * ArtifactNumbers and TaskNumbers
  */
 $Config = array();
-$Config['UserName']        = $_POST['UserName'];
-$Config['Repository']      = $_POST['Repository'];
-$Config['FileName']        = $_POST['FileName'];
-$Config['PrevVersion']     = $_POST['PrevVersion'];
-$Config['ActualVersion']   = $_POST['ActualVersion'];
-$Config['ArtifactNumbers'] = $_POST['ArtifactNumbers'];
-$Config['TaskNumbers']     = $_POST['TaskNumbers'];
-$Config['Log']             = $_POST['Log'];
-$Config['CvsDate']         = $_POST['CvsDate'];
+$SubmittedVars = array();
+$SubmittedVars = unserialize(str_replace('\"','"',$_POST['data']));
 
-if($cvs_tracker_debug) {
-	echo "Variables received by newcommit.php:\n";
-	print_r($Config);
+$i = 0;
+foreach ($SubmittedVars as $SubmittedVar) {
+	$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
+	$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
+	$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
+	$Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
+	$Configs[$i]['ActualVersion']   = $SubmittedVar['ActualVersion'];
+	$Configs[$i]['ArtifactNumbers'] = $SubmittedVar['ArtifactNumbers'];
+	$Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
+	$Configs[$i]['Log']             = $SubmittedVar['Log'];
+	$Configs[$i]['CvsDate']         = $SubmittedVar['CvsDate'];
+	$i++;
+	if($cvs_tracker_debug) {
+		echo "Variables received by newcommit.php:\n";
+		print_r($Configs[$i]);
+	}
 }
+
 
 /**
  * Checks if the commit it's possible and parse arguments
@@ -208,31 +215,32 @@ function addTaskLog($Config, $GroupId, $Num)
 	return $return;
 }
 
-$Result = parseConfig($Config);
-if ($Result['check'] == false) {
-	exit_error('Check_error', $Result['error']);
-}
+foreach ($Configs as $Config) {
+	$Result = parseConfig($Config);
+	if ($Result['check'] == false) {
+		exit_error('Check_error', $Result['error']);
+	}
 
-if (!is_null($Config['ArtifactNumbers'])) {
-	foreach ($Config['ArtifactNumbers'] as $Num)
-	{
-		$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
-		if (isset($AddResult['Error'])) {
-			exit_error('Adding ArtifactNumber',$AddResult['Error']);
+	if (!is_null($Config['ArtifactNumbers'])) {
+		foreach ($Config['ArtifactNumbers'] as $Num)
+		{
+			$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
+			if (isset($AddResult['Error'])) {
+				exit_error('Adding ArtifactNumber',$AddResult['Error']);
+			}
+		}
+	}
+
+	if (!is_null($Config['TaskNumbers'])) {
+		foreach ($Config['TaskNumbers'] as $Num)
+		{
+			$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
+			if (isset($AddResult['Error'])) {
+				exit_error('Adding TaskNumber',$AddResult['Error']);
+			}
 		}
 	}
 }
-
-if (!is_null($Config['TaskNumbers'])) {
-	foreach ($Config['TaskNumbers'] as $Num)
-	{
-		$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
-		if (isset($AddResult['Error'])) {
-			exit_error('Adding TaskNumber',$AddResult['Error']);
-		}
-	}
-}
-
 
 exit (0);
 
