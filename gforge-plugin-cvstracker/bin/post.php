@@ -181,27 +181,31 @@ $UserName= $UserArray['name'];
 $Input = file_get_contents ("/dev/stdin" );
 $Log   = getLog($Input);
 
+$i = 0;
 foreach ( $files as $file )
 {
-	$SubmitVars["UserName"]        = $UserName;
-	$SubmitVars["Repository"]      = $repository;
-	$SubmitVars["FileName"]        = $file['name'];
-	$SubmitVars["PrevVersion"]     = $file['previous'];
-	$SubmitVars["ActualVersion"]   = $file['actual'];
-	$SubmitVars["Log"]             = $Log;
-	$SubmitVars["TaskNumbers"]     = getInvolvedTasks($Log);
-	$SubmitVars["ArtifactNumbers"] = getInvolvedArtifacts($Log);
-	$SubmitVars["CvsDate"]         = time();
-	
+	$SubmitVars[$i]["UserName"]        = $UserName;
+	$SubmitVars[$i]["Repository"]      = $repository;
+	$SubmitVars[$i]["FileName"]        = $file['name'];
+	$SubmitVars[$i]["PrevVersion"]     = $file['previous'];
+	$SubmitVars[$i]["ActualVersion"]   = $file['actual'];
+	$SubmitVars[$i]["Log"]             = $Log;
+	$SubmitVars[$i]["TaskNumbers"]     = getInvolvedTasks($Log);
+	$SubmitVars[$i]["ArtifactNumbers"] = getInvolvedArtifacts($Log);
+	$SubmitVars[$i]["CvsDate"]         = time();
+	$i++;
+}
 	if($cvs_tracker_debug) {
 		echo "Variables submitted to newcommit.php:\n";
-		print_r($SubmitVars);
+		print_r($SubmitVars[$i]);
 	}
+	
 /*	if (isset($SubmitVars['TaskNumbers']) &&
 		isset($SubmitVars['ArtifactNumbers'])) {
 		exit(0);
 	}*/
-	$snoopy->submit($SubmitUrl,$SubmitVars);
+	$vars['data'] = serialize($SubmitVars);
+	$snoopy->submit($SubmitUrl,$vars);
 	print $snoopy->results;
-}
+
 ?>
