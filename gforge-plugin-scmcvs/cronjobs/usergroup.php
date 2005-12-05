@@ -387,13 +387,12 @@ $rows	 = db_numrows($res8);
 for($k = 0; $k < $rows; $k++) {
 	$deleted_group_name = db_result($res8,$k,'unix_group_name');
 
-	if(!is_dir($sys_cvsroot."/deleted"))
-		system("mkdir ".$sys_cvsroot."/deleted");
+	if(!is_dir($cvsdir_prefix."/.deleted"))
+		system("mkdir ".$cvsdir_prefix."/.deleted");
 		
-	if(!is_dir($sys_cvsroot."/deleted/".$deleted_group_name))
-		system("mkdir ".$sys_cvsroot."/deleted/".$deleted_group_name);
-
-	system("mv -f $sys_cvsroot/$deleted_group_name/*.* $sys_cvsroot/.deleted/$deleted_group_name");
+	system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
+	system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
+	system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
 	
 	
 	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
