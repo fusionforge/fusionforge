@@ -168,6 +168,7 @@ echo '
 if (session_loggedin()) {
 	echo '<td rowspan="2">';
 	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
+	echo '<input type="hidden" name="power_query" value="1">';
 	$res=db_query("SELECT artifact_query_id,query_name 
 	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
 
@@ -289,23 +290,26 @@ if ($art_arr && count($art_arr) > 0) {
 	/*
 		Show extra rows for <-- Prev / Next -->
 	*/
-	if (($offset > 0) || ($rows >= 50)) {
-		echo '
-			<tr><td colspan="2">';
-		if ($offset > 0) {
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
-		} else {
-			echo '&nbsp;';
+	//only show this if we´re not using a power query
+	if (!getStringFromRequest('power_query')) {
+		if (($offset > 0) || ($rows >= 50)) {
+			echo '
+				<tr><td colspan="2">';
+			if ($offset > 0) {
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+				$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</td><td>&nbsp;</td><td colspan="2">';
+			if ($rows >= 50) {
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+				$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
+			} else {
+				echo '&nbsp;';
+			}
+			echo '</td></tr>';
 		}
-		echo '</td><td>&nbsp;</td><td colspan="2">';
-		if ($rows >= 50) {
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
-		} else {
-			echo '&nbsp;';
-		}
-		echo '</td></tr>';
 	}
 	echo $GLOBALS['HTML']->listTableBottom();
 	/*

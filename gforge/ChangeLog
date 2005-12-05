@@ -2,6 +2,8 @@
 	Patchs applied :
 	* Fixed bug -> usergroup.php has multiple problems 'deleting' CVS repositories
 		http://gforge.org/tracker/?func=detail&aid=1681&group_id=6&atid=222
+	* Fixed bug -> query builder doesn't respect limit of 50 artifacts
+		http://gforge.org/tracker/?func=detail&aid=1682&group_id=6&atid=222
 
 2005-12-02 Daniel Perez <daniel@gforgegroup.com>
 	cvstracker plugin : changed the handle of the vars, to send only one
