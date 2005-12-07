@@ -100,11 +100,13 @@ function release_cvs_file($file) {
 	system("rm -rf ".$dir);
 }
 
-function write_File($filePath, $content) {
+function write_File($filePath, $content, $append=1) {
 	$file = fopen($filePath, 'a');
 	flock($file, LOCK_EX);
-	ftruncate($file, 0);
-	rewind($file);
+	if (!$append) {
+		ftruncate($file, 0);
+		rewind($file);
+	}
 	if(!empty($content)) {
 		fwrite($file, $content);
 	}
@@ -121,8 +123,7 @@ function write_File($filePath, $content) {
  */
 function add_sync_mail($unix_group_name) {
 
-	global $sys_lists_host;
-	global $cvsdir_prefix;
+	global $sys_lists_host, $cvsdir_prefix, $cvs_binary_version;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -133,9 +134,15 @@ function add_sync_mail($unix_group_name) {
 	$content = file_get_contents ($loginfo_file);
 	if ( strstr($content, "syncmail") == FALSE) {
 //		echo $unix_group_name.":Syncmail not found in loginfo.Adding\n";
-		$pathsyncmail = "ALL ".
-			dirname(__FILE__)."/syncmail -u %p %{sVv} ".
-			$unix_group_name."-commits@".$sys_lists_host."\n";
+        if ( $cvs_binary_version == "1.11" ) {
+			$pathsyncmail = "ALL ".
+				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
+				$unix_group_name."-commits@".$sys_lists_host;
+		} else { //it's 1.12
+			$pathsyncmail = "ALL ".
+				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
+				$unix_group_name."-commits@".$sys_lists_host;
+		}
 		$content .= "\n#BEGIN Added by cvs.php script\n".
 			$pathsyncmail. "\n#END Added by cvs.php script\n";
 		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
@@ -170,7 +177,7 @@ function add_cvstracker($unix_group_name) {
         if ( $cvs_binary_version == "1.11" ) {
                 $content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
                     " ".$sys_plugins_path."/cvstracker/bin/post.php".
-                    " %r %{sVv} )\n";
+                    " %r %{sVv} )";
         }else { //it's version 1.12
             $content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
             " ".$sys_plugins_path."/cvstracker/bin/post.php".
