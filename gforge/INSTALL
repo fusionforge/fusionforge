@@ -47,6 +47,9 @@ You will need:
 	IPC Run for Perl may be required on some platforms and is hard to find:
 	https://gforge.org/frs/download.php/143/IPC-Run-0.78.tar.gz
 
+	ViewCVS (now called ViewVC)
+	http://gforge.org/frs/download.php/152/viewvc-1.0-dev-gforge.tar.bz2
+
 
 OVERVIEW
 --------
@@ -116,6 +119,24 @@ the files may need to be edited to set paths for your setup.
   Cronjobs - the /cronjobs/dav-svn/create_svn.php creates blank repositories
 for subversion. You will likely have to edit this file to get the proper
 SVN binary path.
+
+  ViewCVS (ViewVC now) - this is used to browse the SVN repository. 
+A modified version of ViewVC can be downloaded from GForge.org here: 
+http://gforge.org/frs/download.php/152/viewvc-1.0-dev-gforge.tar.bz2
+This should be built using the instructions ( ./viewcvs-install ) 
+then the viewcvs.conf should be modified to recognize the svnroots
+
+	root_parents = /svnroot : svn
+
+  The viewcvs.cgi should then be placed in the same location as your 
+cvsweb cgi (usually placed into /etc/gforge/). The /etc/gforge/local.inc 
+has a path to this cgi, set in the sys_path_to_scmweb='' variable. This 
+variable is shared with the cvs plugin as well, so that's why both cvsweb 
+and viewcvs.cgi must be in the same location.
+
+  Finally, the /var/www/gforge/plugins/scmsvn/viewcvs/ directory should 
+be symlinked to the same location that you installed your viewvc/templates/docroot
+
 
   Apache Modules
   --------------
