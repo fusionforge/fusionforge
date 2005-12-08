@@ -30,7 +30,7 @@ if (((int) $_SERVER['argc']) < 1) {
 }
 
 require_once('plugins/scmcvs/config.php');
-require ($sys_plugins_path.'/scmcvs/common/Snoopy.class');
+require ($sys_plugins_path.'/scmcvs/include/Snoopy.class');
 
 // Input cleansing
 $env_cvsroot = (string) $_ENV['CVSROOT'];
@@ -53,7 +53,7 @@ $userName= $userArray['name'];
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-$SubmitUrl='https://'.$sys_default_domain.'/plugins/scmcvs/acl.php';
+$SubmitUrl='http'.(($use_ssl): 's' ? '' ).'://'.$sys_default_domain.'/plugins/scmcvs/acl.php';
 $SubmitVars['group'] = $projectName;
 $SubmitVars['user'] = $userName;
 
