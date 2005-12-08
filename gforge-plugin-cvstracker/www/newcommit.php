@@ -31,6 +31,7 @@ $SubmittedVars = unserialize(str_replace('\"','"',$_POST['data']));
 $i = 0;
 foreach ($SubmittedVars as $SubmittedVar) {
 	$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
+	//$Configs[$i]['UserName']        = "def_admin";   USE THIS FOR TESTING PURPOSES
 	$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
 	$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
 	$Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
@@ -177,7 +178,6 @@ function addTaskLog($Config, $GroupId, $Num)
 		"project_group_list.group_project_id ".
 		"AND project_task.project_task_id='".$Num."' AND ".
 		" project_group_list.group_id='".$GroupId."'";
-	var_dump($Query);
 	$Result = db_query($Query);
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
