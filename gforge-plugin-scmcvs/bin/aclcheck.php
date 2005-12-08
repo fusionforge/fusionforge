@@ -30,7 +30,7 @@ if (((int) $_SERVER['argc']) < 1) {
 }
 
 require_once('plugins/scmcvs/config.php');
-require ($sys_plugins_path.'/scmcvs/include/Snoopy.class');
+require ($sys_plugins_path.'/scmcvs/common/Snoopy.class');
 
 // Input cleansing
 $env_cvsroot = (string) $_ENV['CVSROOT'];
