@@ -34,7 +34,21 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="GET">
+<script type="text/javascript">
+
+	function change(url,plugin)
+	{
+		field = document.theform.elements[plugin];
+		if (field.checked) {
+			window.location=(url + "&init=yes");
+		} else {
+			window.location=(url);
+		}
+	}
+
+</script>
+
+<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="GET">
 <?php
 
 if (getStringFromRequest('update')) {
@@ -112,6 +126,19 @@ if (getStringFromRequest('update')) {
 					$feedback .= $Language->getText('pluginman','successnoconfig',$pluginname);
 				}
 			}
+			if (getStringFromRequest('init')) {
+				// now we´re going to check if there´s a XX-init.sql file and run it
+				if (is_file($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql')) {
+					$arch = file_get_contents($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql');
+					$arch = preg_replace('/(INSERT INTO plugins.*$)/','',$arch); // remove the line that inserts into plugins table, we are already doing that (and this would return error otherwise)
+					$res = db_query($arch);
+					if (!$res) {
+						$feedback .= $Language->getText('pluginman','successiniterror');
+					}
+				} else {
+					$feedback .= $Language->getText('pluginman','successnoinit');
+				}
+			}
 		}
 	}
 
@@ -121,6 +148,7 @@ echo $Language->getText('pluginman','notice');
 $title_arr = array( $Language->getText('pluginman','name'),
 				$Language->getText('pluginman','status'),
 				$Language->getText('pluginman','action'),
+				$Language->getText('pluginman','init'),
 				$Language->getText('pluginman','users'),
 				$Language->getText('pluginman','groups'),);
 echo $HTML->listTableTop($title_arr);
@@ -140,7 +168,7 @@ while ($filename = readdir($handle)) {
 		}
 		if (db_numrows($res)!=0) {
 			$msg = $Language->getText('pluginman','active');
-			$link = "<a href=\"" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
+			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
 			$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
 			$res = db_query($sql);
 			if (db_numrows($res)>0) {
@@ -167,10 +195,12 @@ while ($filename = readdir($handle)) {
 			} else {
 				$groups = "none";
 			}
-			$link .= '"\">' . $Language->getText('pluginman','deactivate') . "</a>";
+			$link .= "','$j');" . '">' . $Language->getText('pluginman','deactivate') . "</a>";
+			$init = '<input id="'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'">';
 		} else {
 			$msg = $Language->getText('pluginman','inactive');
-			$link = "<a href=\"" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate" . '"\">' . $Language->getText('pluginman','activate') . "</a>";
+			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate','$j');" . '">' . $Language->getText('pluginman','activate') . "</a>";
+			$init = '<input id="'.$j.'" type="checkbox" name="script[]" value="'.$filename.'">';
 			$users = "none";
 			$groups = "none";
 		}
@@ -179,6 +209,7 @@ while ($filename = readdir($handle)) {
 		 	'<td>'. $filename.'</td>'.
 		 	'<td><div align="center">'. $msg .'</div></td>'.
 		 	'<td><div align="center">'. $link .'</div></td>'.
+		 	'<td><div align="center">'. $init .'</div></td>'.
 		 	'<td><div align="left">'. $users .'</div></td>'.
 		 	'<td><div align="left">'. $groups .'</div></td></tr>';
 
