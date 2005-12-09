@@ -1,4 +1,4 @@
-#! /usr/bin/php -f
+#! /usr/bin/php4 -f
 <?php
 /**
  * This script will get mails and store it into forum DB
@@ -31,7 +31,6 @@ require_once ('common/include/Group.class');
 require_once ('common/include/MailParser.class');
 require_once ('common/forum/Forum.class');
 require_once ('common/forum/ForumMessage.class');
-//require_once('common/text/TextSupport.class'); // bbcode, smilies support
 
 class ForumGateway extends Error {
 	/*
@@ -120,9 +119,7 @@ class ForumGateway extends Error {
 			return false;
 		} elseif ($mp->isError()) {
 			$this->setError('Error In MailParser '.$mp->getErrorMessage());
-			// even if it is an error, try to get the address of the sender so we
-			// can send him back the error
-			$this->FromEmail = $mp->getFromEmail();
+//DBG("parseMail error2: ".$mp->getErrorMessage());
 			return false;
 		}
 
@@ -134,12 +131,13 @@ class ForumGateway extends Error {
 		//where 123456 is the msg_id of the forum message.
 		//we parse that ID to get the forum and thread that this should post to
 		//
-		$subj = $mp->getSubject();		
+		$subj = $mp->getSubject();
+
+//DBG("mp headers: ".implode("**\n",$mp->headers));
+//DBG("mp body: ".$mp->body);
+//DBG("SUBJ: ".$subj);
+//DBG("BODY: ".$mp->getBody());
 /*
-DBG("mp headers: ".implode("**\n",$mp->headers));
-DBG("mp body: ".$mp->body);
-DBG("SUBJ: ".$subj);
-DBG("BODY: ".$mp->getBody());
 		$parent_start = (strpos($subj,'[',(strpos($subj,'[')+1))+1);
 		$parent_end = (strpos($subj,']',$parent_start)-1);
 		$this->Parent = substr($subj,$parent_start,($parent_end-$parent_start+1));
@@ -156,23 +154,23 @@ DBG("BODY: ".$mp->getBody());
 		}
 */
 		if (ereg('(\[)([0-9]*)(\])',$subj,$arr)) {
-		        $this->Parent=$arr[2];
+			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
 			$this->Subject = addslashes(substr($subj,$parent_end));
 		} else {
 			$this->Subject = addslashes($subj);
 			$this->Parent=0;
 		}
-		
 		$this->Body =& addslashes($mp->getBody());
-		
-		
+//DBG( "body1:". $this->Body);
+
 		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
 		if ($begin === false) { //do nothing
 				return true; 
 		}		
 		// get the part of the message located after the marker
 		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
+//DBG( "body2:". $this->Body);
 		// now look for the ending marker
 		$end = strpos($this->Body, FORUM_MAIL_MARKER);
 		if ($end === false) {
@@ -205,6 +203,7 @@ DBG("BODY: ".$mp->getBody());
 			session_set_new($user_id);
 		}
 
+//DBG( "AddMessage 1\n");
 		$Forum =& $this->getForum();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError("Could Not Get Forum");
@@ -213,12 +212,12 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("Forum Error: ".$Forum->getErrorMessage());
 			return false;
 		}
-		
 		if (!$user_id && !$Forum->AllowAnonymous()) {
 			$this->setError("Could Not Match Sender Email Address to User and Forum Does Not Allow Anonymous Posts");
 			return false;
 		}
 
+//DBG( "AddMessage 2\n");
 		//
 		//	Create a blank forum message
 		//
@@ -230,13 +229,14 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
-		//$text_support = new TextSupport();
-		//$bbcode_uid = $text_support->prepareText($this->Body,0,0,0,0);//we get the text UNFORMATTED, as is
-		if ($this->Message!=""){			
-			if (!$ForumMessage->create($this->Subject,$this->Message,-1,$this->ThreadId,$this->Parent)) {
+//DBG( "AddMessage 3\n");
+		if ($this->Message!=""){	
+			if (!$ForumMessage->create($this->Subject,$this->Message,$this->ThreadId,$this->Parent)) {
+//DBG( "AddMessage 4.".$ForumMessage->getErrorMessage()."\n");
 				$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
 				return false;
 			} else {
+//DBG( "AddMessage 5.".$ForumMessage->getErrorMessage()."\n");
 				return true;
 			}
 		} else {
@@ -267,18 +267,17 @@ DBG("BODY: ".$mp->getBody());
 	}
 
 	function &getForum() {
-		global $argv;		
-		
-		
+		global $argv;
+
 		if ($this->Forum==-1) {
-			$Group =& group_get_object_by_name($argv[1]);			
+			$Group =& group_get_object_by_name($argv[1]);
 			if (!$Group || !is_object($Group)) {
 				$this->setError('Could Not Get Group Object');
 				return false;
 			} elseif ($Group->isError()) {
 				$this->setError('Getting Group Object: '.$Group->getErrorMessage());
 				return false;
-			}			
+			}
 			if ($this->Parent) {
 				//
 				// Find Forum id by parent
