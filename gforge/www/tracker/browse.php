@@ -60,7 +60,9 @@ $max_rows = getStringFromRequest('max_rows',$max_rows);
 $set = getStringFromRequest('set',$set);
 $_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
 $_status = getStringFromRequest('_status',$_status);
-$_extra_fields = getArrayFromRequest('extra_fields');
+if ($func != 'postadd' && $func != 'postmod' && $func != 'postmassupdate') {
+	$_extra_fields = getArrayFromRequest('extra_fields');
+}
 
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_extra_fields);
 $_sort_col=$af->order_col;
