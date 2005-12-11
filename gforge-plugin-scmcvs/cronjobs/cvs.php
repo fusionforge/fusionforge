@@ -34,6 +34,12 @@ require_once('common/include/SCM.class') ;
 
 setup_plugin_manager () ;
 
+//
+//	Some OSs do not allow root to do a commit
+//	so having this script do a proper checkout/commit is not possible
+//
+$scmcvs_proper_commit_loginfo=false;
+
 /**
  * Retrieve a file into a temporary directory from a CVS server
  *
@@ -44,23 +50,27 @@ setup_plugin_manager () ;
  */
 function checkout_cvs_file($repos,$file) {
 //echo "$repos,$file\n";
-        $actual_dir = getcwd();
-        $tempdirname = tempnam("/tmp","cvstracker");
-        if (!$tempdirname) 
-                return false;
-        if (!unlink($tempdirname))
-                return false;
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return $repos.'/'.$file;
+	}
+	$actual_dir = getcwd();
+	$tempdirname = tempnam("/tmp","cvstracker");
+	if (!$tempdirname) 
+		return false;
+	if (!unlink($tempdirname))
+		return false;
 
-        // Create the temporary directory and returns its name.
-        if (!mkdir($tempdirname))
-                return false;
+	// Create the temporary directory and returns its name.
+	if (!mkdir($tempdirname))
+		return false;
 
-        if (!chdir($tempdirname))
-                return false;
-        system("cvs -d ".$repos." co ".$file);
+	if (!chdir($tempdirname))
+		return false;
+	system("cvs -d ".$repos." co ".$file);
 
-        chdir($actual_dir);
-        return $tempdirname."/".$file;
+	chdir($actual_dir);
+	return $tempdirname."/".$file;
 }
 
 /**
@@ -71,6 +81,10 @@ function checkout_cvs_file($repos,$file) {
  * @param String $message to commit
  */
 function commit_cvs_file($repos,$file,$message="Automatic updated by cvstracker") {
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return true;
+	}
 	$actual_dir = getcwd();
 	chdir(dirname($file));	
 	system("cvs -d ".$repos." ci -m \"".$message."\" ".basename($file));
@@ -83,6 +97,10 @@ function commit_cvs_file($repos,$file,$message="Automatic updated by cvstracker"
  * @see checkout_cvs_file
  */
 function release_cvs_file($file) {
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return true;
+	}
 	// $file is something like /tmp/(tmp_dir)/path/to/file
 	// we must delete /tmp/tmp_dir
 	if (!preg_match("/^(\\/tmp\\/[^\\/]*)\\/.* /", $file, $result)) {		// Make sure the dir is under /tmp
@@ -134,7 +152,7 @@ function add_sync_mail($unix_group_name) {
 	$content = file_get_contents ($loginfo_file);
 	if ( strstr($content, "syncmail") == FALSE) {
 //		echo $unix_group_name.":Syncmail not found in loginfo.Adding\n";
-        if ( $cvs_binary_version == "1.11" ) {
+		if ( $cvs_binary_version == "1.11" ) {
 			$pathsyncmail = "ALL ".
 				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
 				$unix_group_name."-commits@".$sys_lists_host;
@@ -143,7 +161,7 @@ function add_sync_mail($unix_group_name) {
 				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
 				$unix_group_name."-commits@".$sys_lists_host;
 		}
-		$content .= "\n#BEGIN Added by cvs.php script\n".
+		$content = "\n#BEGIN Added by cvs.php script\n".
 			$pathsyncmail. "\n#END Added by cvs.php script\n";
 		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
 		if(is_file($loginfo_file)){
@@ -173,17 +191,17 @@ function add_cvstracker($unix_group_name) {
 
 	$content = file_get_contents ($loginfo_file);
 	if ( strstr($content, "cvstracker") == FALSE) {
-        $content = "\n# BEGIN added by gforge-plugin-cvstracker";
-        if ( $cvs_binary_version == "1.11" ) {
-                $content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-                    " ".$sys_plugins_path."/cvstracker/bin/post.php".
-                    " %r %{sVv} )";
-        }else { //it's version 1.12
-            $content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-            " ".$sys_plugins_path."/cvstracker/bin/post.php".
-            " %r %p %{sVv} )";
-        }
-        $content .= "\n# END added by gforge-plugin-cvstracker";
+		$content = "\n# BEGIN added by gforge-plugin-cvstracker";
+		if ( $cvs_binary_version == "1.11" ) {
+			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" %r %{sVv} )";
+		} else { //it's version 1.12
+			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" %r %p %{sVv} )";
+		}
+		$content .= "\n# END added by gforge-plugin-cvstracker";
 
 		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
 		if(is_file($loginfo_file)){
