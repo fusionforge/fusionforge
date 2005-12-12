@@ -153,11 +153,11 @@ function add_sync_mail($unix_group_name) {
 	if ( strstr($content, "syncmail") == FALSE) {
 //		echo $unix_group_name.":Syncmail not found in loginfo.Adding\n";
 		if ( $cvs_binary_version == "1.11" ) {
-			$pathsyncmail = "ALL ".
+			$pathsyncmail = "DEFAULT ".
 				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
 				$unix_group_name."-commits@".$sys_lists_host;
 		} else { //it's 1.12
-			$pathsyncmail = "ALL ".
+			$pathsyncmail = "DEFAULT ".
 				dirname(__FILE__)."/syncmail -u %p %{sVv} ".
 				$unix_group_name."-commits@".$sys_lists_host;
 		}
