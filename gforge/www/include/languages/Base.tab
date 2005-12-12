@@ -292,11 +292,12 @@ cronman	message	Message
 cronman	next	Next
 cronman	previous	Previous
 pluginman	status	Status
+pluginman	init	Run Init Script?
 pluginman	action	Action
 pluginman	name	Plugin Name
 pluginman	users	Users Using it
 pluginman	groups	Groups Using it
-pluginman	notice	Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><font color="#ff0000">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups</font><br><br>
+pluginman	notice	Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><font color="#ff0000">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</font><br><br>
 pluginman	active	<font color="#00ff00">Active</font>
 pluginman	inactive	<font color="#800000">Inactive</font>
 pluginman	activate	Activate
@@ -306,6 +307,8 @@ pluginman	successnolink	<br>Soft link to www couldn't be created. Check the writ
 pluginman	successnoconfig	<br>Config file could not be linked to etc/gforge/plugins/$1. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.
 pluginman	successnodeletelink	<br>Soft link wasn't removed in www/plugins folder, please do so manually.
 pluginman	successnodeleteconfig <br>Soft link to config files wasn't removed in /etc/gforge/plugins folder, please do so manually.
+pluginman	successnoinit	<br>Couldn't find the SQL init script.
+pluginman	successiniterror <br>Couldn't run SQL init script. Perhaps malformed SQL file? please correct and run manually.
 pluginman	userdeleted	$1 Users detached from plugin..<br>
 pluginman	groupdeleted	$1 Groups detached from plugin..<br>
 admin_index	active_projects_count	Active projects: <strong>$1</strong>
