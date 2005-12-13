@@ -108,18 +108,17 @@ while ( $row =& db_fetch_array($res) ) {
 			//	Create the repository
 			//
 			passthru ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 			svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
+ 			//svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			if ($project->usesPlugin('svncommitemail')) {
- 				addsvnmail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"],$row["unix_group_name"]);
+ 				addSvnMail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/hooks/post-commit");
  			}
  			if ($project->usesPlugin('svntracker')) {
  				addSvnTracker();
  			}
 		} else {
 			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
-			svn_hooks("$svn/".$row["unix_group_name"]);
 			if ($project->usesPlugin('svncommitemail')) {
-				addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
+				addSvnMail("$svn/".$row["unix_group_name"]."/hooks/post-commit");
 			}
 			if ($project->usesPlugin('svntracker')) {
 				addSvnTracker();
@@ -134,7 +133,7 @@ function addSvnTracker() {
 	global $svn,$row;
 	
 	$LineFound = FALSE;
-	$FIn  = fopen($svn."/".$row["unix_group_name"]."/hooks/post-commit","r");	
+	$FIn  = @fopen($svn."/".$row["unix_group_name"]."/hooks/post-commit","r");	
 	if ($FIn) {
 		while (!feof($FIn))  {
 			$Line = fgets ($FIn);
@@ -152,7 +151,7 @@ function addSvnTracker() {
 		//create the file
 		echo $row["unix_group_name"].": post-commit modified and created\n";
 		addSvnTrackerToFile($svn."/".$row["unix_group_name"]."/hooks/post-commit");
-	}	
+	}
 }
 
 function addSvnTrackerToFile($path) {
@@ -160,8 +159,6 @@ function addSvnTrackerToFile($path) {
 	
 	$FOut = fopen($path, "a+");
 	if($FOut) {
-		$Line = '#!/bin/sh' . "\n";
-		fwrite($FOut,$Line);
 		$Line = 'REPOS="$1"'  . "\n";
 		fwrite($FOut,$Line);
 		$Line = 'REV="$2"' . "\n";
@@ -174,19 +171,47 @@ function addSvnTrackerToFile($path) {
 	}
 }
 
-/**
-* addsvnmail($filePath,$unix_group_name)
-* This function add the commit-email.pl into post-commit
-* The commit-email.pl must be in same directory of this script
-* Copyright 2004 (c) GForge
-* @autor Luis Alberto Hurtado Alvarado <luis@gforgegroup.com>
-* @param $filePath The path to svn repository
-* @param $unix_group_name The project name.
-*/
-function addsvnmail($filePath,$unix_group_name) {
+function addSvnMail($filepath) {
+	global $svn,$row,$sys_lists_host;
+
+	$LineFound = FALSE;
+	$FIn  = fopen($filepath,"r");	
+	if ($FIn) {
+		while (!feof($FIn))  {
+			$Line = fgets ($FIn);
+			
+			if((!preg_match("/^#/", $Line)) &&
+				(preg_match("/commit-email.pl/",$Line)) && (preg_match("/".$sys_lists_host."/",$Line))) {
+				$LineFound = TRUE;
+			}
+		}
+		fclose($FIn);
+		if($LineFound==FALSE) {
+			echo $row["unix_group_name"].": post-commit modified\n";
+			addSvnMailToFile($filepath,$row["unix_group_name"]);
+		}
+	} else {
+		//create the file
+		echo $row["unix_group_name"].": post-commit modified and created\n";
+		addSvnMailToFile($filepath,$row["unix_group_name"]);
+	}
+	
+}
+
+function addSvnMailToFile($filePath,$unix_group_name) {
 	global $sys_lists_host;
-	$pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host . "\n";
-	writeFile($filePath.'/hooks/post-commit',$pathsvnmail);
+	
+	$FOut = fopen($filePath, "a+");
+	if($FOut) {
+		$pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host . "\n";
+		$Line = 'REPOS="$1"'  . "\n";
+		fwrite($FOut,$Line);
+		$Line = 'REV="$2"' . "\n";
+		fwrite($FOut,$Line);
+		fwrite($FOut, $pathsvnmail);
+		`chmod +x $filePath `;
+		fclose($FOut);
+	}
 }
 
 /**
@@ -199,29 +224,6 @@ function addsvnmail($filePath,$unix_group_name) {
 function svn_hooks($filePath) {
 	system ("cp $filePath/hooks/post-commit.tmpl $filePath/hooks/post-commit");
 	system("chmod +x ".$filePath."/hooks/post-commit");
-}
-
-/**
-* writeFile($filePath, $content)
-* This function add the mail
-* Copyright 2004 (c) GForge
-* @autor Luis Alberto Hurtado Alvarado <luis@gforgegroup.com>
-* @param $filePath The path to svn repository
-* @param $content The mail
-*/
-function writeFile($filePath, $content) {
-	$file = fopen($filePath, 'a');
-	flock($file, LOCK_EX);
-	ftruncate($file, 0);
-	rewind($file);
-	if(!empty($content)) {
-		fwrite($file, '#!/bin/sh'."\n");
-		fwrite($file, 'REPOS="$1"'."\n");
-		fwrite($file, 'REV="$2"'."\n");
-		fwrite($file, $content);
-	}
-	flock($file, LOCK_UN);
-	fclose($file);
 }
 
 if ($one_repository) {
