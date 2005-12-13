@@ -118,13 +118,13 @@ function release_cvs_file($file) {
 	system("rm -rf ".$dir);
 }
 
-function write_File($filePath, $content, $append=1) {
-	$file = fopen($filePath, 'a');
-	flock($file, LOCK_EX);
-	if (!$append) {
-		ftruncate($file, 0);
-		rewind($file);
+function cvs_write_file($filePath, $content, $append=1) {
+	if ($append) {
+		$file = fopen($filePath, 'a');
+	} else {
+		$file = fopen($filePath, 'w');
 	}
+	flock($file, LOCK_EX);
 	if(!empty($content)) {
 		fwrite($file, $content);
 	}
@@ -165,8 +165,8 @@ function add_sync_mail($unix_group_name) {
 			$pathsyncmail. "\n#END Added by cvs.php script\n";
 		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
 		if(is_file($loginfo_file)){
-			echo $unix_group_name.":About to write the lines\n";
-			write_File($loginfo_file, $content, 1);
+			//echo $unix_group_name.":About to write the lines\n";
+			cvs_write_file($loginfo_file, $content, 1);
 		}
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
 		release_cvs_file($loginfo_file);
@@ -205,8 +205,8 @@ function add_cvstracker($unix_group_name) {
 
 		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
 		if(is_file($loginfo_file)){
-			echo $unix_group_name.":About to write the lines\n";
-			write_File($loginfo_file, $content, 1);
+			//echo $unix_group_name.":About to write the lines\n";
+			cvs_write_file($loginfo_file, $content, 1);
 		}
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
 		release_cvs_file($loginfo_file);
@@ -228,26 +228,12 @@ function add_acl_check($unix_group_name) {
 			"\nALL php -q -d include_path=".ini_get('include_path').
 				" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php %r %p ".
 			"\n#END adding cvs acl check\n";
-		writeFile($commitinfofile, $aclcheck, 1);
+		cvs_write_file($commitinfofile, $aclcheck, 1);
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$commitinfofile);
 		release_cvs_file($loginfo_file);
 	} else {
 //		echo "cvstracker Found!\n";
 	}
-}
-
-function writeFile($filePath, $content, $append=0) {
-	if ($append == 1) {
-		$file = fopen($filePath, 'a');
-	} else {
-		$file = fopen($filePath, 'w');
-	}
-	flock($file, LOCK_EX);
-	if(!empty($content)) {
-		fwrite($file, $content);
-	}
-	flock($file, LOCK_UN);
-	fclose($file);
 }
 
 function update_cvs_repositories() {
@@ -287,9 +273,9 @@ function update_cvs_repositories() {
 				$repositoryMode = 02770;
 			}
 			chmod($repositoryPath, $repositoryMode);
-			write_File($repositoryPath.'/CVSROOT/writers', $writersContent);
-			write_File($repositoryPath.'/CVSROOT/readers', $readersContent);
-			write_File($repositoryPath.'/CVSROOT/passwd', $passwdContent);
+			cvs_write_file($repositoryPath.'/CVSROOT/writers', $writersContent, 0);
+			cvs_write_file($repositoryPath.'/CVSROOT/readers', $readersContent, 0);
+			cvs_write_file($repositoryPath.'/CVSROOT/passwd', $passwdContent, 0);
 			if ($project->usesPlugin('cvssyncmail')) {
 				add_sync_mail($project->getUnixName());
 			}
