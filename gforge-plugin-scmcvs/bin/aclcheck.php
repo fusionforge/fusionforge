@@ -53,7 +53,7 @@ $userName= $userArray['name'];
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-$SubmitUrl='http'.(($use_ssl): 's' ? '' ).'://'.$sys_default_domain.'/plugins/scmcvs/acl.php';
+$SubmitUrl='http'.(($use_ssl) ? 's' : '' ).'://'.$sys_default_domain.'/plugins/scmcvs/acl.php';
 $SubmitVars['group'] = $projectName;
 $SubmitVars['user'] = $userName;
 
