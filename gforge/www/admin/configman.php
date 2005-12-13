@@ -33,11 +33,15 @@ require_once('www/admin/admin_utils.php');
 
 site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
-function printSelection($checked) {
+function printSelection($checked,$pluginpath) {
 	global $Language,$feedback;
 	
 	$config_files = array(); // array that´ll have the config files
 	$i = 0;
+	
+	if ($pluginpath[strlen($pluginpath)-1]!='/') {
+		$pluginpath .= '/';
+	}
 					
 	// check if we can get local.inc
 	$handle = fopen('/etc/gforge/local.inc','r+');
@@ -51,7 +55,7 @@ function printSelection($checked) {
 	}
 
 	//get the directories from the plugins dir
-	if (chdir('/etc/gforge/plugins/')) {
+	if (chdir($pluginpath)) {
 		$handle = opendir('.');
 		$j = 0;
 		while ($filename = readdir($handle)) {
@@ -61,7 +65,7 @@ function printSelection($checked) {
 				if ($handle2){
 					while ($filename2 = readdir($handle2)) {
 						if (strstr($filename2,'.conf') || strstr($filename2,'.inc') || ($filename2=='config.php')) {
-							$config_files['(' . $filename . ') - ' . $filename2] = '/etc/gforge/plugins/' . $filename . '/' . $filename2;
+							$config_files['(' . $filename . ') - ' . $filename2] = $pluginpath . $filename . '/' . $filename2;
 							$i++;						
 						}
 					}
@@ -86,40 +90,48 @@ function printSelection($checked) {
 
 
 <form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="POST">
+
+<?php echo $Language->getText('configman','enterpath'); ?>&nbsp;&nbsp;
+<input type="text" size="55" width="55" name="pluginpath" value="<?php echo getStringFromRequest('pluginpath')?>"/>
+<input type="submit" name="changepath" value="<?php echo $Language->getText('configman','change'); ?>"/>
+<br>
 <?php
 
-printSelection(getStringFromRequest('files'));
+if (getStringFromRequest('pluginpath')) {
 
-if (getStringFromRequest('choose')) {
+	printSelection(getStringFromRequest('files'),getStringFromRequest('pluginpath'));
 	
-	$filepath = getStringFromRequest('files');
-	$handle = fopen($filepath,'r+');
-	if ($handle){
-		fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
-		$filedata = file_get_contents($filepath);
-		echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
-		echo '<input type="hidden" name="filepath" value="' . $filepath . '">';
-		echo '<div align="center"><input type="submit" name="doedit" value="' . $Language->getText('configman','doedit') .'"/></div>';
-	} else {
-		// say we couldn't open the file
-		$feedback .= $Language->getText('configman','notopenfile');
-	}
-} elseif (getStringFromRequest('doedit')) {
-	$filedata = getStringFromRequest('filedata');
-	$filedata = str_replace('\"','"',$filedata);
-	$filedata = str_replace("\'","'",$filedata);
-	$filepath = getStringFromRequest('filepath');
-	if ($handle = fopen($filepath,'w')) {
-		if (fwrite($handle,$filedata)) {
-			// say wrote ok
-			$feedback .= $Language->getText('configman','updateok');
+	if (getStringFromRequest('choose')) {
+		
+		$filepath = getStringFromRequest('files');
+		$handle = fopen($filepath,'r+');
+		if ($handle){
+			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
+			$filedata = file_get_contents($filepath);
+			echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
+			echo '<input type="hidden" name="filepath" value="' . $filepath . '">';
+			echo '<div align="center"><input type="submit" name="doedit" value="' . $Language->getText('configman','doedit') .'"/></div>';
 		} else {
-			// say some problem
-			$feedback .= $Language->getText('configman','nowrite');
+			// say we couldn't open the file
+			$feedback .= $Language->getText('configman','notopenfile');
 		}
-	} else {
-		// say couldn´t open
-		$feedback .= $Language->getText('configman','notopenfile');
+	} elseif (getStringFromRequest('doedit')) {
+		$filedata = getStringFromRequest('filedata');
+		$filedata = str_replace('\"','"',$filedata);
+		$filedata = str_replace("\'","'",$filedata);
+		$filepath = getStringFromRequest('filepath');
+		if ($handle = fopen($filepath,'w')) {
+			if (fwrite($handle,$filedata)) {
+				// say wrote ok
+				$feedback .= $Language->getText('configman','updateok');
+			} else {
+				// say some problem
+				$feedback .= $Language->getText('configman','nowrite');
+			}
+		} else {
+			// say couldn´t open
+			$feedback .= $Language->getText('configman','notopenfile');
+		}
 	}
 }
 

@@ -313,6 +313,8 @@ pluginman	userdeleted	$1 Users detached from plugin..<br>
 pluginman	groupdeleted	$1 Groups detached from plugin..<br>
 configman	choose	Choose
 configman	doedit	Save
+configman	change	Change
+configman	enterpath	Path were you store the plugin configuration folders. E.g. : /etc/gforge/plugins/
 configman	notopenlocalinc	Could not open local.inc file for read/write. Check the permissions for apache<br>
 configman	notopenplugindir	Could not open plugins etc dir for reading. Check the permissions for apache<br>
 configman	notopenfile	Could not open the file for read/write. Check the permissions for apache<br>
