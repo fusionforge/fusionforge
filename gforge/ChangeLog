@@ -1,3 +1,6 @@
+2005-12-13 Daniel Perez <daniel@gforgegroup.com>
+	Added configman.php, configuration files manager for admin interface
+
 2005-12-05 Daniel Perez <daniel@gforgegroup.com>
 	Patchs applied :
 	* Fixed bug -> usergroup.php has multiple problems 'deleting' CVS repositories

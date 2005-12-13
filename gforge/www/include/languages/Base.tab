@@ -311,6 +311,13 @@ pluginman	successnoinit	<br>Couldn't find the SQL init script.
 pluginman	successiniterror <br>Couldn't run SQL init script. Perhaps malformed SQL file? please correct and run manually.
 pluginman	userdeleted	$1 Users detached from plugin..<br>
 pluginman	groupdeleted	$1 Groups detached from plugin..<br>
+configman	choose	Choose
+configman	doedit	Save
+configman	notopenlocalinc	Could not open local.inc file for read/write. Check the permissions for apache<br>
+configman	notopenplugindir	Could not open plugins etc dir for reading. Check the permissions for apache<br>
+configman	notopenfile	Could not open the file for read/write. Check the permissions for apache<br>
+configman	updateok	File wrote successfully.<br>
+configman	nowrite	File wasn't written or is empty.<br>
 admin_index	active_projects_count	Active projects: <strong>$1</strong>
 admin_index	active_users_count	Active site users: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
@@ -321,6 +328,7 @@ admin_index	add_edit_delete_licenses	Add, Delete, or Edit Licenses
 admin_index	add_to_trove_map	Add to the Trove Map
 admin_index	approve_reject	Approve/Reject
 admin_index	cronman	Cron Manager
+admin_index	configman	Config Manager
 admin_index	pluginman	Plugin Manager
 admin_index	deleted_status	(deleted) Status
 admin_index	display_full_group	Display Full Group List/Edit Groups
