@@ -60,7 +60,7 @@ $max_rows = getStringFromRequest('max_rows',$max_rows);
 $set = getStringFromRequest('set',$set);
 $_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
 $_status = getStringFromRequest('_status',$_status);
-if ($func != 'postadd' && $func != 'postmod' && $func != 'postmassupdate') {
+if ($func != 'postadd' && $func != 'postmod' && $func != 'massupdate') {
 	$_extra_fields = getArrayFromRequest('extra_fields');
 }
 
@@ -310,9 +310,8 @@ if ($art_arr && count($art_arr) > 0) {
 					echo '&nbsp;';
 				}
 				echo '</td></tr>';
-			 }
+			}
 		}
-	}
 	echo $GLOBALS['HTML']->listTableBottom();
 	/*
 		Mass Update Code
