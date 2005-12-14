@@ -1,3 +1,8 @@
+2005-12-14 Daniel Perez <daniel@gforgegroup.com>
+	create_svn : post-commit was being overwritten every time on several repositories, now there´s a check to see
+			if the lines are already there for svncommitemail and svntracker and appended if they´re not there,
+			else the file is created (never overwritten)
+
 2005-12-13 Daniel Perez <daniel@gforgegroup.com>
 	Added configman.php, configuration files manager for admin interface
 
