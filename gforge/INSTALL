@@ -10,25 +10,21 @@ Subversion browsing) are two additional integration points.
 *
 *  PROFESSIONAL SUPPORT
 *
-*  If you need professional support, customization,  
-*  or advanced reporting tools for GForge, visit 
+*  If you need professional installation, support, etc:
 *  http://gforgegroup.com/
 *
 
 BASICS OF INSTALLATION
 ----------------------
 
-You will need: 
-	PostgreSQL 7.3 or higher ( http://postgresql.org/ )
-	PHP 4.x or higher ( http://www.php.net/ )
-	Apache 1.2x or higher ( http://www.apache.org/ )
+
+SEE THE NEW FILE:
+
+
+INSTALL.dependencies
 
 	Optional (but highly recommended)
 	PHP Accelerator ( http://www.php-accelerator.co.uk/ )
-
-	Optional Mailing list support:
-	GNU MailMan ( http://www.gnu.org/software/mailman/ )
-	Python ( http://www.python.org/ )
 
 	Optional Gantt Charting and Graphing Support:
 	JPGraph: ( http://www.aditus.nu/jpgraph/ )
@@ -36,13 +32,6 @@ You will need:
 		(NOTE: An older version of JPGraph may be 
 		required - it can be downloaded here: 
 		http://gforge.org/frs/download.php/142/jpgraph-1.9.1.tar.gz)
-
-        Optional (required for some plugins):
-        Perl ( http://www.perl.org/ )
-        the DBI module ( http://dbi.perl.org/ ) and associated DBD::Pg
-
-	Optional mod_auth_gforge (required for SVN over DAV):
-	http://gforge.org/frs/?group_id=128
 
 	IPC Run for Perl may be required on some platforms and is hard to find:
 	https://gforge.org/frs/download.php/143/IPC-Run-0.78.tar.gz
