@@ -33,6 +33,12 @@ require_once('www/admin/admin_utils.php');
 
 site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
+/**
+ * printSelection - prints the select box for the user to get the files to edit
+ *
+ * @param string the checked item (if any)
+ * @param string	the path to the plugins conf dir
+ */
 function printSelection($checked,$pluginpath) {
 	global $Language,$feedback;
 	
@@ -55,7 +61,7 @@ function printSelection($checked,$pluginpath) {
 	}
 
 	//get the directories from the plugins dir
-	if (chdir($pluginpath)) {
+	/*if (chdir($pluginpath)) {
 		$handle = opendir('.');
 		$j = 0;
 		while ($filename = readdir($handle)) {
@@ -77,27 +83,83 @@ function printSelection($checked,$pluginpath) {
 	} else {
 		// say we couldn't get into etc plugins dir
 		$feedback .= $Language->getText('configman','notopenplugindir');
-	}
+	}*/
 	
 	echo '<br><div align="center">';
 	echo html_build_select_box_from_assoc($config_files,'files',$checked,true);
-	echo '<input type="submit" name="choose" value="' . $Language->getText('configman','choose') .'"/>';
-	echo '</div>';	
+	echo '&nbsp;<input type="submit" name="choose" value="' . $Language->getText('configman','choose') .'"/>';
+	echo '</div><br>';	
 }
 
+/**
+ * getVars - gets the contents of the file and returns an associative array of field names / values
+ *
+ * @param string	the contents of the file
+ * @return array	the results
+ */
+function getVars($filedata) {
+	
+	$lines = explode("\n",$filedata);
+	$results = array();
+	foreach ($lines as $line) {
+		if ( (strstr($line,"true") || strstr($line,"false")) && (!strstr($line,"//"))) { // get the true / false vars
+			$sep_var = explode("=",$line);
+			$sep_var[0] = trim($sep_var[0]);
+			$sep_var[1] = substr(trim($sep_var[1]),0,strlen(trim($sep_var[1]))-1);
+			$results[$sep_var[0]] = $sep_var[1];
+		}
+	}
+	return $results;
+}
+
+/**
+ * updateVars - updates the values of the vars of the file passed as an argument with the values of the array passed
+ *
+ * @param unknown_type $vars
+ * @param unknown_type $filepath
+ */
+function updateVars($vars,$filepath) {
+	global $Language,$feedback;
+	
+	$filedata = file_get_contents($filepath);
+	$lines = explode("\n",$filedata);
+	$keys = array_keys($vars);
+	for($i=0;$i<(count($vars));$i++) {
+		$currline = $keys[$i] . "=" . $vars[$keys[$i]] . ";";
+		//$filedata = preg_replace('/(.*)(' . $keys[$i] . ')([^;]*);(.*)/','/\1\2='.$vars[$keys[$i]].';\n\4/',$filedata);	
+		for ($j=0;$j<count($lines);$j++) {
+			if (strstr($lines[$j],$keys[$i])) {
+				$lines[$j] = $currline;
+			}
+		}
+	}
+	$filedata = implode("\n",$lines);
+	if ($handle = fopen($filepath,'w')) {
+		if (fwrite($handle,$filedata)) {
+			// say wrote ok
+			$feedback .= $Language->getText('configman','updateok');
+		} else {
+			// say some problem
+			$feedback .= $Language->getText('configman','nowrite');
+		}
+	} else {
+		// say couldn´t open
+		$feedback .= $Language->getText('configman','notopenfile');
+	}
+}
 
 ?>
 
 
 <form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="POST">
 
-<?php echo $Language->getText('configman','enterpath'); ?>&nbsp;&nbsp;
-<input type="text" size="55" width="55" name="pluginpath" value="<?php echo getStringFromRequest('pluginpath')?>"/>
-<input type="submit" name="changepath" value="<?php echo $Language->getText('configman','change'); ?>"/>
-<br>
+<!--<?php //echo $Language->getText('configman','enterpath'); ?>&nbsp;&nbsp;
+<input type="text" size="55" width="55" name="pluginpath" value="<?php //echo getStringFromRequest('pluginpath')?>"/>
+<input type="submit" name="changepath" value="<?php //echo $Language->getText('configman','change'); ?>"/>
+<br>'-->
 <?php
 
-if (getStringFromRequest('pluginpath')) {
+//if (getStringFromRequest('pluginpath')) {
 
 	printSelection(getStringFromRequest('files'),getStringFromRequest('pluginpath'));
 	
@@ -108,15 +170,32 @@ if (getStringFromRequest('pluginpath')) {
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
 			$filedata = file_get_contents($filepath);
-			echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
-			echo '<input type="hidden" name="filepath" value="' . $filepath . '">';
-			echo '<div align="center"><input type="submit" name="doedit" value="' . $Language->getText('configman','doedit') .'"/></div>';
+			$vars = getVars($filedata); // get the vars from local.inc
+			$keys = array_keys($vars);
+			$title_arr = array($Language->getText('configman','name'),$Language->getText('configman','on'),$Language->getText('configman','off'));
+			echo $HTML->listTableTop($title_arr);
+			$j = 0;
+			for($i=0;$i<(count($keys));$i++) {
+				$checkedtrue = "";
+				$checkedfalse = "";
+				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
+				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+			 	'<td>'. $keys[$i] .'</td>'.
+			 	'<td>'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
+			 	'<td><div align="center">'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '>' .'</div></td></tr>';
+			 	$j++;
+			}
+			echo $HTML->listTableBottom();
+			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
+			echo '<input type="hidden" name="filepath" value="' . $filepath . '">';*/
+			echo '<br><div align="center"><input type="submit" name="doedit" value="' . $Language->getText('configman','doedit') .'"/></div>';
 		} else {
 			// say we couldn't open the file
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		$filedata = getStringFromRequest('filedata');
+		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we´ll update something else, for now it´s local.inc
+		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
 		$filepath = getStringFromRequest('filepath');
@@ -131,9 +210,9 @@ if (getStringFromRequest('pluginpath')) {
 		} else {
 			// say couldn´t open
 			$feedback .= $Language->getText('configman','notopenfile');
-		}
+		}*/
 	}
-}
+//}
 
 
 ?>
