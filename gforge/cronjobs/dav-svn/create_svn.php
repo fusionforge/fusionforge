@@ -154,7 +154,7 @@ function addSvnTracker() {
 }
 
 function addSvnTrackerToFile($path) {
-        global $sys_plugins_path;
+        global $sys_plugins_path,$file_owner;
         
         $FOut = fopen($path, "a+");
         if($FOut) {
@@ -166,6 +166,7 @@ function addSvnTrackerToFile($path) {
                                 " ".$sys_plugins_path. "/svntracker/bin/post.php".  ' "$REPOS" "$REV"' . "\n";
                 fwrite($FOut,$Line);
                 `chmod +x $path `;
+                `chown $file_owner $path`;
                 fclose($FOut);
         }
 }
@@ -198,7 +199,7 @@ function addSvnMail($filepath) {
 }
 
 function addSvnMailToFile($filePath,$unix_group_name) {
-	global $sys_lists_host;
+	global $sys_lists_host,$file_owner;
 	
         $FOut = fopen($filePath, "a+");
         if($FOut) {
@@ -209,6 +210,7 @@ function addSvnMailToFile($filePath,$unix_group_name) {
                 fwrite($FOut,$Line);
                 fwrite($FOut, $pathsvnmail);
                 `chmod +x $filePath `;
+                `chown $file_owner $path`;
                 fclose($FOut);
         }	
 }
