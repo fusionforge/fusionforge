@@ -186,7 +186,7 @@ $artifacts_involved= getInvolvedArtifacts($Log);
 if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
 	//nothing to post
-	exit;
+	die("No artifacts nor tasks in the commit log\n");
 }
 
 $i = 0;
@@ -203,6 +203,7 @@ foreach ( $files as $file )
 	$SubmitVars[$i]["CvsDate"]         = time();
 	$i++;
 }
+	
 	if($cvs_tracker_debug) {
 		echo "Variables submitted to newcommit.php:\n";
 		print_r($SubmitVars);
