@@ -1051,7 +1051,7 @@ $server->wsdl->addComplexType(
 	array(
 		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
 		'old_value' => array('name' => 'old_value', 'type' => 'xsd:string'),
-		'date' => array('name' => 'date', 'type' => 'xsd:string'),
+		'date' => array('name' => 'date', 'type' => 'xsd:int'),
 		'user_name' => array('name' => 'user_name', 'type' => 'xsd:string')
 	)
 );
@@ -1126,7 +1126,7 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 			$old_value =  date($GLOBALS['sys_datefmt'], $old_value);
 		}
 		
-		$date = date($GLOBALS['sys_datefmt'], $date);
+		//$date = date($GLOBALS['sys_datefmt'], $date);
 		
 		$result[] = array(
 					"field_name"	=> $field_name,
