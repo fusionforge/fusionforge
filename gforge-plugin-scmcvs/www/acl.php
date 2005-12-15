@@ -37,7 +37,7 @@ preg_match("/^([[:alnum:]-]{3,15})$/", $env_group, $matches);
 # User rules
 # 1. Must only contain alphanumeric chars
 # 2. Must be 3 - 15 chars
-preg_match("/[[:alnum:]]{3,15}/", $env_user, $matches2);
+preg_match("/[[:alnum:]_]{3,15}/", $env_user, $matches2);
 
 if (count($matches) == 0) {
 	exit_error('','Invalid CVS repository');
