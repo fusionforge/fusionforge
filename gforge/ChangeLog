@@ -1,3 +1,6 @@
+2005-12-15 Marcelo Mottalli <marcelo@gforgegroup.com>
+	* Fixed bug [#1694]: SOAP method getArtifacts returns only 50 artifacts
+
 2005-12-14 Daniel Perez <daniel@gforgegroup.com>
 	create_svn : post-commit was being overwritten every time on several repositories, now there´s a check to see
 			if the lines are already there for svncommitemail and svntracker and appended if they´re not there,

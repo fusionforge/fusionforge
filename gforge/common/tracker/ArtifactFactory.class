@@ -191,7 +191,8 @@ class ArtifactFactory extends Error {
 		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
 
-		if (!$max_rows || $max_rows < 5) {
+		// if $max_rows == 0 it means we want all the rows
+		if (is_null($max_rows) || $max_rows < 0) {
 			$max_rows=50;
 		}
 		if ($default_query) {
