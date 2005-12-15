@@ -1197,24 +1197,3 @@ class Snoopy
 }
 
 ?>
-From root Wed Dec 14 18:24:20 2005
-To: include/Snoopy.class
-Subject: patch may be needed for svntracker
-
-Index: include/Snoopy.class
-===================================================================
-RCS file: /cvsroot/gforge/gforge-plugin-scmcvs/include/Attic/Snoopy.class,v
-retrieving revision 1.1.2.1
-diff -u -r1.1.2.1 Snoopy.class
---- include/Snoopy.class	25 Nov 2005 21:01:43 -0000	1.1.2.1
-+++ include/Snoopy.class	15 Dec 2005 00:14:36 -0000
-@@ -957,7 +957,7 @@
- 		
- 		$headerfile = uniqid(time());
- 
--		exec($this->curl_path." -D \"/tmp/$headerfile\"".$cmdline_params." ".$URI,$results,$return);
-+		@exec($this->curl_path." --insecure -s -D \"/tmp/$headerfile\"".$cmdline_params." ".$URI,$results,$return);
- 		
- 		if($return)
- 		{
-
