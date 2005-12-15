@@ -195,7 +195,7 @@ function add_cvstracker($unix_group_name) {
 		if ( $cvs_binary_version == "1.11" ) {
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
 				" ".$sys_plugins_path."/cvstracker/bin/post.php".
-				" %r %{sVv} )";
+				" ".$unix_group_name." %{sVv} )";
 		} else { //it's version 1.12
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
 				" ".$sys_plugins_path."/cvstracker/bin/post.php".
