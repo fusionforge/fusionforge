@@ -181,6 +181,14 @@ $UserName= $UserArray['name'];
 $Input = file_get_contents ("/dev/stdin" );
 $Log   = getLog($Input);
 
+$tasks_involved= getInvolvedTasks($Log);
+$artifacts_involved= getInvolvedArtifacts($Log);
+if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
+	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
+	//nothing to post
+	exit;
+}
+
 $i = 0;
 foreach ( $files as $file )
 {
@@ -199,10 +207,6 @@ foreach ( $files as $file )
 		echo "Variables submitted to newcommit.php:\n";
 		print_r($SubmitVars);
 	}
-/*	if (isset($SubmitVars['TaskNumbers']) &&
-		isset($SubmitVars['ArtifactNumbers'])) {
-		exit(0);
-	}*/
 	$vars['data'] = serialize($SubmitVars);
 	$snoopy->submit($SubmitUrl,$vars);
 	print $snoopy->results;
