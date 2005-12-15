@@ -261,19 +261,21 @@ class cvstrackerPlugin extends Plugin {
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
-			// Checked or Unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+			if ($group->usesPlugin('scmcvs')) {
+				echo "<tr>";
+				echo "<td>";
+				echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
+				// Checked or Unchecked?
+				if ( $group->usesPlugin ( $this->name ) ) {
+					echo "CHECKED";
+				}
+				echo "><br/>";
+				echo "</td>";
+				echo "<td>";
+				echo "<strong>".$this->text." Plugin</strong>";
+				echo "</td>";
+				echo "</tr>";
 			}
-			echo "><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			$group = &group_get_object($group_id);
 			if ( $use_cvstrackerplugin == 1 ) {
