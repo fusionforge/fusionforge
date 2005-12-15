@@ -1051,7 +1051,7 @@ $server->wsdl->addComplexType(
 	array(
 		'field_name' => array('name' => 'field_name', 'type' => 'xsd:string'),
 		'old_value' => array('name' => 'old_value', 'type' => 'xsd:string'),
-		'date' => array('name' => 'date', 'type' => 'xsd:int'),
+		'date' => array('name' => 'date', 'type' => 'xsd:string'),
 		'user_name' => array('name' => 'user_name', 'type' => 'xsd:string')
 	)
 );
@@ -1107,17 +1107,32 @@ function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $arti
 	
 	// note that Artifact::getHistory returns a DB result handler
 	$result = $artifact->getHistory();
-	return artifact_history_to_soap($result);
+	return artifact_history_to_soap($result, $at);
 }
 
-function artifact_history_to_soap($db_result) {
+function artifact_history_to_soap($db_result, &$artifactType) {
 	$result = array();
 	while ($entry = db_fetch_array($db_result)) {
+		$field_name = $entry["field_name"];
+		$old_value = $entry["old_value"];
+		$date = $entry["entrydate"];
+		$user_name = $entry["user_name"];
+		
+		if ($field_name == 'status_id') {
+			$old_value = $artifactType->getStatusName($old_value);
+		} else if ($field_name == 'assigned_to') {
+			$old_value =  user_getname($old_value);
+		} else if ($field == 'close_date') {
+			$old_value =  date($GLOBALS['sys_datefmt'], $old_value);
+		}
+		
+		$date = date($GLOBALS['sys_datefmt'], $date);
+		
 		$result[] = array(
-					"field_name"	=> $entry["field_name"],
-					"old_value"		=> $entry["old_value"],
-					"date"			=> $entry["entrydate"],
-					"user_name"		=> $entry["user_name"]
+					"field_name"	=> $field_name,
+					"old_value"		=> $old_value,
+					"date"			=> $date,
+					"user_name"		=> $user_name
 					);
 	}
 	
