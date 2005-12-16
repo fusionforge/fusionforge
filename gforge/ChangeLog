@@ -1,3 +1,8 @@
+2005-12-16 Daniel Perez <daniel@gforgegroup.com>
+	Patchs applied :
+	* Fixed bug -> bad link to private mailman archives
+		http://gforge.org/tracker/?func=detail&aid=1687&group_id=6&atid=222
+
 2005-12-15 Marcelo Mottalli <marcelo@gforgegroup.com>
 	* Fixed bug [#1694]: SOAP method getArtifacts returns only 50 artifacts
 	* SOAP call artifactGetChangeLog now returns strings instead of IDs
