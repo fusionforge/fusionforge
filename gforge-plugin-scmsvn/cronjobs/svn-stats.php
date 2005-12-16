@@ -214,7 +214,7 @@ if ($rollback) {
 }
 
 // lenp Not sure about this...
-cron_entry(14,$err);
+cron_entry(24,$err);
 
 function process_day($day_begin=0, $day_end=0) {
 	global $err;
