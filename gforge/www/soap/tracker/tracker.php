@@ -454,7 +454,7 @@ function artifactDelete($session_ser,$group_id,$group_artifact_id,$artifact_id) 
 	} elseif ($a->isError()) {
 		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	}
-	if (!$a->delete()) {
+	if (!$a->delete(1)) {
 		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	} else {
 		return true;
