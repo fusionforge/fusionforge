@@ -125,24 +125,17 @@ class DocumentGroup extends Error {
 			return false;
 		}
 		
-		$res=db_query("SELECT nextval('doc_groups_pk_seq') AS id");
-		if (!$doc_group=db_result($res,0,'id')) {
-			$this->setError('Could Not Get Next ID');
-			db_rollback();
-			return false;
-		}
-		
-		$sql="INSERT INTO doc_groups (doc_group,group_id,groupname,parent_doc_group)
-			VALUES ('".$doc_group."','".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
-
+		$sql="INSERT INTO doc_groups (group_id,groupname,parent_doc_group)
+			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
 		$result=db_query($sql);
-
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
-			$this->setError(db_error());
+			$this->setError('DocumentGroup::create() Error Adding Group: '.db_error());
 			return false;
 		}
+
+		$doc_group = db_insertid($result, 'doc_groups', 'doc_group');
 
 		//	Now set up our internal data structures
 		if (!$this->fetchData($doc_group)) {
