@@ -53,7 +53,8 @@ if (!$Group->usesSCM()) {
 
 // check if the scm_box is located in another server
 $scm_box = $Group->getSCMBox();
-$external_scm = (gethostbyname($sys_default_domain) != gethostbyname($scm_box)); 
+//$external_scm = (gethostbyname($sys_default_domain) != gethostbyname($scm_box)); 
+$external_scm = !$sys_scm_single_host;
 
 if (session_loggedin()) {
 	if (user_ismember($Group->getID())) {
