@@ -43,7 +43,7 @@ echo notepad_func();
                 <?php echo $Language->getText('tracker','insert_email') ?>
                 <br />
                 <p>
-                <input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
+                <input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="255">
                 <?php } ?>
 
 				<?php } ?>

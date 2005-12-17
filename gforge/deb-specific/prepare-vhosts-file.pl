@@ -25,7 +25,7 @@ $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
 }
 die "Cannot connect to database: $!" if ( ! $dbh );
 
-$ifile = '/etc/gforge/templates/httpd.vhosts' ;
+$ifile = '/usr/share/gforge/etc/templates/httpd.vhosts' ;
 $ofile = '/var/lib/gforge/etc/templates/httpd.vhosts' ;
 
 open (IFILE, $ifile)

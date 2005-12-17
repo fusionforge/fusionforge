@@ -16,16 +16,34 @@ require_once('common/tracker/ArtifactQuery.class');
 if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
-if($run && $query_id) {
-	$aq = new ArtifactQuery($ath,$query_id);
-	if (!$aq || !is_object($aq)) {
-		exit_error('Error',$aq->getErrorMessage());
+
+//
+//	The browse page can be powered by a pre-saved query
+//	or by select boxes chosen by the user
+//
+//	If there is a $query_id coming from the request OR the pref
+//	was already saved, use the artifact factory that way.
+//
+//	If the query_id = -1, unset the pref and use regular browse boxes
+//
+if (session_loggedin()) {
+	$query_id = getIntFromRequest('query_id');
+
+	if($query_id) {
+		if ($query_id == '-1') {
+			$u =& session_get_user();
+			$u->setPreference('art_query'.$ath->getID(),'');
+		} else {
+			$aq = new ArtifactQuery($ath,$query_id);
+			if (!$aq || !is_object($aq)) {
+				exit_error('Error',$aq->getErrorMessage());
+			}
+			$aq->makeDefault();
+		}
+	} else {
+		$u =& session_get_user();
+		$query_id=$u->getPreference('art_query'.$ath->getID(),'');
 	}
-	$aq->makeDefault();
-	$_sort_col=$aq->getSortCol();
-	$_sort_ord=$aq->getSortOrd();
-	$_status=$aq->getStatus();
-	$_assigned_to=$aq->getAssignee();
 }
 
 $af = new ArtifactFactory($ath);
@@ -35,12 +53,22 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
+$offset = getStringFromRequest('offset',$offset);
+$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
+$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
+$max_rows = getStringFromRequest('max_rows',$max_rows);
+$set = getStringFromRequest('set',$set);
+$_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
+$_status = getStringFromRequest('_status',$_status);
+if ($func != 'postadd' && $func != 'postmod' && $func != 'massupdate') {
+	$_extra_fields = getArrayFromRequest('extra_fields');
+}
+
+$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_extra_fields);
 $_sort_col=$af->order_col;
 $_sort_ord=$af->sort;
 $_status=$af->status;
 $_assigned_to=$af->assigned_to;
-$_changed_from=$af->changed_from;
 
 $art_arr =& $af->getArtifacts();
 
@@ -51,13 +79,8 @@ if (!$art_arr && $af->isError()) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-$ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
+$ath->header(array('atid'=>$ath->getID()));
 
-echo '
-<table width="60%" border="0">
-	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
-
-if (!session_loggedin()) {
 /**
  *
  *	Build the powerful browsing options pop-up boxes
@@ -128,40 +151,66 @@ $changed_arr[]= 3600 * 24 * 7; // 1 week
 $changed_arr[]= 3600 * 24 * 14;// 2 week
 $changed_arr[]= 3600 * 24 * 30;// 1 month
 
+//
+//	statuses can be custom in GForge 4.5+
+//
+if ($ath->usesCustomStatuses()) {
+	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$extra_fields[$ath->getCustomStatusField()],false,'',true,$Language->getText('tracker','status_any'));
+} else {
+	$status_box = $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any'));
+}
 echo '
+<table width="100%" border="0">';
+
+echo '
+	<tr>';
+/*
+	Logged in users get the option of seeing a power-browse box
+*/
+if (session_loggedin()) {
+	echo '<td rowspan="2">';
+	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
+	echo '<input type="hidden" name="power_query" value="1">';
+	$res=db_query("SELECT artifact_query_id,query_name 
+	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
+
+	if (db_numrows($res)>0) {
+	echo '
+		<span style="font-size:smaller">'.html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'</span><br />
+		<span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input>
+		<span style="font-size:smaller"><strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.
+		$Language->getText('tracker','build_query').'</a></strong></span>';
+	} else {
+		echo '<span style="font-size:smaller"><strong>
+		<a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong></span>';
+	}
+	echo '
+		</form>
+		</td>';
+}
+echo '
+	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="set" value="custom" />
-	<tr>
-		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any')) .'</span></td>';
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
-	</tr>';
+	<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<br />'. $tech_box .'</span></td>'.
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<br />'. $status_box .'</span></td>';
+	echo '
+</tr>
+
+<input type="hidden" name="query_id" value="-1">';
 
 	echo '
 	<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
-		'<td colspan="2"><span style="font-size:smaller">'. 
+		'<td><span style="font-size:smaller">'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
-		'<input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></span></td>
+		'<input type="submit" name="submit" value="'.$Language->getText('tracker','quickbrowse').'" /></span></td>
 	</tr>';
-} else {
-	$res=db_query("SELECT artifact_query_id,query_name 
-	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
 
-	echo '
-	<tr>';
-	if (db_numrows($res)>0) {
-	echo '
-		<td align="right"><span style="font-size:smaller">'.html_build_select_box($res,'query_id',$query_id,false).'</span></td>'.
-		'<td align="left"><span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input></span></td>';
-	} else {
-		echo '<td colspan="2">&nbsp;</td>';
-	}
-echo '<td align="left"><span style="font-size:smaller"><strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong></span></td>
-	</tr>';
-}
+
 echo '
-	</form></table>';
+	</form>
+</table>';
 /**
  *
  *	Show the free-form text submitted by the project admin
@@ -179,7 +228,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 	if ($IS_ADMIN) {
 		echo '
-		<form name="artifactList" action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
+		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
 		<input type="hidden" name="func" value="massupdate">';
 	}
 
@@ -219,7 +268,7 @@ if ($art_arr && count($art_arr) > 0) {
 			$art_arr[$i]->getID() .
 			'</td>';
 		if ($display_col['summary'])
-		 echo '<td><a href="'.$PHP_SELF.'?func=detail&aid='.
+		 echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&aid='.
 			$art_arr[$i]->getID() .
 			'&group_id='. $group_id .'&atid='.
 			$ath->getID().'">'.
@@ -242,24 +291,27 @@ if ($art_arr && count($art_arr) > 0) {
 	/*
 		Show extra rows for <-- Prev / Next -->
 	*/
-	if (($offset > 0) || ($rows >= 50)) {
-		echo '
-			<tr><td colspan="2">';
-		if ($offset > 0) {
-			echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
-		} else {
-			echo '&nbsp;';
+		//only show this if we´re not using a power query
+		if (!getStringFromRequest('power_query')) {
+			if (($offset > 0) || ($rows >= 50)) {
+				echo '
+					<tr><td colspan="2">';
+				if ($offset > 0) {
+					echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+					$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
+				} else {
+					echo '&nbsp;';
+				}
+				echo '</td><td>&nbsp;</td><td colspan="2">';
+				if ($rows >= 50) {
+					echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+					$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
+				} else {
+					echo '&nbsp;';
+				}
+				echo '</td></tr>';
+			}
 		}
-		echo '</td><td>&nbsp;</td><td colspan="2">';
-		if ($rows >= 50) {
-			echo '<a href="'.$PHP_SELF.'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
-			$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
-		} else {
-			echo '&nbsp;';
-		}
-		echo '</td></tr>';
-	}
 	echo $GLOBALS['HTML']->listTableBottom();
 	/*
 		Mass Update Code

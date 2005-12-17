@@ -55,7 +55,7 @@ if (empty($svn) || util_is_root_dir($svn)) {
 	exit;
 }
 
-$res = db_query("SELECT is_public,enable_anonscm,unix_group_name 
+$res = db_query("SELECT is_public,enable_anonscm,unix_group_name,groups.group_id 
 	FROM groups, plugins, group_plugin 
 	WHERE groups.status != 'P' 
 	AND groups.group_id=group_plugin.group_id
@@ -97,36 +97,123 @@ while ( $row =& db_fetch_array($res) ) {
 		$cmd = 'chown -R '.$file_owner.' '.$repos_co;
 		passthru ($cmd);
 	} else {
+		$project = &group_get_object($row["group_id"]); // get the group object for the current group
+		if ( (!$project) || (!is_object($project))  )  {
+			echo "Error Getting Group." . " Id : " . $row["group_id"] . " , Name : " . $row["unix_group_name"];
+			break; // continue to the next project
+		}
 		if ($first_letter) {
 			//
 			//	Create the repository
 			//
 			passthru ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 			svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 			addsvnmail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"],$row["unix_group_name"]);
+ 			//svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
+			if ($project->usesPlugin('svncommitemail')) {
+				addSvnMail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/hooks/post-commit");
+			}
+			if ($project->usesPlugin('svntracker')) {
+				addSvnTracker();
+			}
 		} else {
 			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
-			svn_hooks("$svn/".$row["unix_group_name"]);
-			addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
-		}	
+			$cmd = 'chown -R '.$file_owner.' '.$svn.'/'.$row["unix_group_name"];
+			passthru($cmd); // svn dir owned by apache or viewcvs doesn´t work 
+			if ($project->usesPlugin('svncommitemail')) {
+				addSvnMail("$svn/".$row["unix_group_name"]."/hooks/post-commit");
+			}
+			if ($project->usesPlugin('svntracker')) {
+				addSvnTracker();
+			}
+		}
 		$cmd = 'chown -R '.$file_owner.' '.$svn;
 		passthru ($cmd);
 	}
 }
+function addSvnTracker() {
+        global $svn,$row;
+        
+        $LineFound = FALSE;
+        $FIn  = @fopen($svn."/".$row["unix_group_name"]."/hooks/post-commit","r");        
+        if ($FIn) {
+                while (!feof($FIn))  {
+                        $Line = fgets ($FIn);
+                        if(!preg_match("/^#/", $Line) &&
+                                preg_match("/svntracker/",$Line)) {
+                                $LineFound = TRUE;
+                        }
+                }
+                fclose($FIn);
+                if($LineFound==FALSE) {
+                        echo $row["unix_group_name"].": post-commit modified\n";
+                        addSvnTrackerToFile($svn."/".$row["unix_group_name"]."/hooks/post-commit");
+                }
+        } else {
+                //create the file
+                echo $row["unix_group_name"].": post-commit modified and created\n";
+                addSvnTrackerToFile($svn."/".$row["unix_group_name"]."/hooks/post-commit");
+        }        
+}
 
-/**
-* addsvnmail($filePath,$unix_group_name)
-* This function add the commit-email.pl into post-commit
-* The commit-email.pl must be in same directory of this script
-* Copyright 2004 (c) GForge
-* @autor Luis Alberto Hurtado Alvarado <luis@gforgegroup.com>
-* @param $filePath The path to svn repository
-* @param $unix_group_name The project name.
-*/
-function addsvnmail($filePath,$unix_group_name) {
-	global $sys_lists_host;
-	$pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host;
-	writeFile($filePath.'/hooks/post-commit',$pathsvnmail);
+function addSvnTrackerToFile($path) {
+        global $sys_plugins_path,$file_owner;
+        
+        $FOut = fopen($path, "a+");
+        if($FOut) {
+                $Line = 'REPOS="$1"'  . "\n";
+                fwrite($FOut,$Line);
+                $Line = 'REV="$2"' . "\n";
+                fwrite($FOut,$Line);
+                $Line = "/usr/bin/php -d include_path=".ini_get('include_path').
+                                " ".$sys_plugins_path. "/svntracker/bin/post.php".  ' "$REPOS" "$REV"' . "\n";
+                fwrite($FOut,$Line);
+                `chmod +x $path `;
+                `chown $file_owner $path`;
+                fclose($FOut);
+        }
+}
+
+function addSvnMail($filepath) {
+        global $svn,$row,$sys_lists_host;
+
+        $LineFound = FALSE;
+        $FIn  = fopen($filepath,"r");        
+        if ($FIn) {
+                while (!feof($FIn))  {
+                        $Line = fgets ($FIn);
+                        
+                        if((!preg_match("/^#/", $Line)) &&
+                                (preg_match("/commit-email.pl/",$Line)) && (preg_match("/".$sys_lists_host."/",$Line))) {
+                                $LineFound = TRUE;
+                        }
+                }
+                fclose($FIn);
+                if($LineFound==FALSE) {
+                        echo $row["unix_group_name"].": post-commit modified\n";
+                        addSvnMailToFile($filepath,$row["unix_group_name"]);
+                }
+        } else {
+                //create the file
+                echo $row["unix_group_name"].": post-commit modified and created\n";
+                addSvnMailToFile($filepath,$row["unix_group_name"]);
+        }
+        
+}
+
+function addSvnMailToFile($filePath,$unix_group_name) {
+	global $sys_lists_host,$file_owner;
+	
+        $FOut = fopen($filePath, "a+");
+        if($FOut) {
+                $pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host . "\n";
+                $Line = 'REPOS="$1"'  . "\n";
+                fwrite($FOut,$Line);
+                $Line = 'REV="$2"' . "\n";
+                fwrite($FOut,$Line);
+                fwrite($FOut, $pathsvnmail);
+                `chmod +x $filePath `;
+                `chown $file_owner $path`;
+                fclose($FOut);
+        }	
 }
 
 /**
@@ -141,28 +228,6 @@ function svn_hooks($filePath) {
 	system("chmod +x ".$filePath."/hooks/post-commit");
 }
 
-/**
-* writeFile($filePath, $content)
-* This function add the mail
-* Copyright 2004 (c) GForge
-* @autor Luis Alberto Hurtado Alvarado <luis@gforgegroup.com>
-* @param $filePath The path to svn repository
-* @param $content The mail
-*/
-function writeFile($filePath, $content) {
-	$file = fopen($filePath, 'a');
-	flock($file, LOCK_EX);
-	ftruncate($file, 0);
-	rewind($file);
-	if(!empty($content)) {
-		fwrite($file, '#!/bin/sh'."\n");
-		fwrite($file, 'REPOS="$1"'."\n");
-		fwrite($file, 'REV="$2"'."\n");
-		fwrite($file, $content);
-	}
-	flock($file, LOCK_UN);
-	fclose($file);
-}
 
 if ($one_repository) {
 	passthru ("cd $repos_co && $svn_path/svn commit -m\"\"");

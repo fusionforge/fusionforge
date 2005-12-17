@@ -64,6 +64,7 @@ if ($project->usesStats()) {
 	}
 	print '<br />'.$Language->getText('group', 'activity'). substr($actv_res, 0, 5). '%';
 	print '<br />'.$Language->getText('group', 'activitystat', $group_id);
+	print '<br />'.$Language->getText('group', 'rssfeeds', $group_id);
 }
 
 if($GLOBALS['sys_use_people']) {
@@ -360,6 +361,7 @@ if ($project->usesSCM()) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
+	
 }
 
 // ######################## AnonFTP

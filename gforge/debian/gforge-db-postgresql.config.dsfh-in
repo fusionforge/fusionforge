@@ -1,4 +1,11 @@
 #!/bin/sh -e
+# Support for new place for pg_hba.conf
+if [ -d /etc/postgresql/7.4/main/ ] 
+then 
+	export pg_hba_dir=/etc/postgresql/7.4/main/
+else
+    	export pg_hba_dir=/etc/postgresql
+fi
 
 # Source debconf library.
 . /usr/share/debconf/confmodule
@@ -41,5 +48,5 @@ db_go || true
 vars="admin_login admin_password skill_list"
 update_mainconffile $vars
 
-propose_update_install /etc/postgresql/pg_hba.conf
+propose_update_install ${pg_hba_dir}/pg_hba.conf
 db_stop

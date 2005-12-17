@@ -93,12 +93,12 @@ class Artifact extends Error {
 	 */
 	var $files; 
 
-   /**
-    * Database result set of related tasks
-    *
-    * @var     result $relatedtasks
-    */
-   var $relatedtasks;
+	/**
+	 * Database result set of related tasks
+	 *
+	 * @var     result $relatedtasks
+	 */
+	var $relatedtasks;
     
 	/**
 	 *  Artifact - constructor.
@@ -232,7 +232,7 @@ class Artifact extends Error {
 		//	Check to see if this user is trying to double-submit
 		//
 		$res=db_query("SELECT * FROM artifact 
-			WHERE summary='$summary' 
+			WHERE summary='".htmlspecialchars($summary)."' 
 			AND submitted_by='$user'
 			AND group_artifact_id='".$this->ArtifactType->getID()."'
 			AND open_date > '". (time() - 86400) ."'");
@@ -671,23 +671,23 @@ class Artifact extends Error {
 		return $this->files;
 	}
 
-   /**
-    * getRelatedTasks - get array of related tasks
-    *
-    * @return Database result set
-    */
-   function getRelatedTasks() {
-      if (!$this->relatedtasks) {
-         $this->relatedtasks=
-         db_query("SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
-         FROM project_task pt, project_group_list pgl
-         WHERE pt.group_project_id = pgl.group_project_id AND
-            EXISTS (SELECT project_task_id FROM project_task_artifact
-               WHERE project_task_id=pt.project_task_id
-               AND artifact_id = ". $this->getID() . ")");
-      }
-      return $this->relatedtasks;
-   }
+	/**
+	 * getRelatedTasks - get array of related tasks
+	 *
+	 * @return Database result set
+	 */
+	function getRelatedTasks() {
+		if (!$this->relatedtasks) {
+			$this->relatedtasks=
+			db_query("SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
+			FROM project_task pt, project_group_list pgl
+			WHERE pt.group_project_id = pgl.group_project_id AND
+			EXISTS (SELECT project_task_id FROM project_task_artifact
+				WHERE project_task_id=pt.project_task_id
+				AND artifact_id = ". $this->getID() . ")");
+		}
+		return $this->relatedtasks;
+	}
 
 	/**
 	 *  addMessage - attach a text message to this Artifact.
@@ -820,9 +820,7 @@ class Artifact extends Error {
 		//	Get a lock on this row in the database
 		//
 		$lock=db_query("SELECT * FROM artifact WHERE artifact_id='".$this->getID()."' FOR UPDATE");
-
 		$artifact_type_id = $this->ArtifactType->getID();
-
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
 		//	need to instantiate new ArtifactType obj and test perms
@@ -840,6 +838,7 @@ class Artifact extends Error {
 				db_rollback();
 				return false;
 			}
+			
 			//
 			//	Now set Assigned to 100 in the new ArtifactType
 			//
@@ -850,6 +849,8 @@ class Artifact extends Error {
 			$this->ArtifactType =& $newArtifactType;
 			$update = true;
 		}
+		
+		
 
 		$sqlu='';
 
@@ -1144,7 +1145,7 @@ class Artifact extends Error {
 	 *
 	 *	@return	array	array of data
 	 */
-	function getExtraFieldData() {
+	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
@@ -1324,7 +1325,9 @@ class Artifact extends Error {
 		$users =& user_get_objects($monitor_ids);
 		if (count($users) > 0) {
 			foreach ($users as $user) {
-				$emails[] = $user->getEmail();
+				if ($user->getStatus() == "A") { //we are only sending emails to active users
+					$emails[] = $user->getEmail();
+				}
 			}
 		}
 		

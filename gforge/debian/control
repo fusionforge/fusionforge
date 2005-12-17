@@ -9,7 +9,7 @@ Standards-Version: 3.6.1
 Package: gforge
 Architecture: all
 Conflicts: sourceforge, gforge-cvs
-Depends: debconf (>= 1.0.32), gforge-common (= ${Source-Version}), gforge-web-apache (= ${Source-Version}) | gforge-web (= ${Source-Version}), gforge-db-postgresql (= ${Source-Version}) | gforge-db (= ${Source-Version}), gforge-mta-exim4 (= ${Source-Version}) | gforge-mta-postfix (= ${Source-Version}) | gforge-mta-exim (= ${Source-Version}) | gforge-mta (= ${Source-Version}), gforge-shell-postgresql (= ${Source-Version}) | gforge-shell (= ${Source-Version}), gforge-ftp-proftpd (= ${Source-Version}) | gforge-ftp (= ${Source-Version}), gforge-dns-bind9 (= ${Source-Version}) | gforge-dns (= ${Source-Version}), gforge-lists-mailman (= ${Source-Version}) | gforge-lists (= ${Source-Version})
+Depends: debconf (>= 1.0.32), gforge-common (= ${Source-Version}), gforge-web-apache (= ${Source-Version}) | gforge-web (= ${Source-Version}), gforge-db-postgresql (= ${Source-Version}) | gforge-db (= ${Source-Version}), gforge-mta-exim4 (= ${Source-Version}) | gforge-mta-postfix (= ${Source-Version}) | gforge-mta-exim (= ${Source-Version}) | gforge-mta (= ${Source-Version}), gforge-shell-postgresql (= ${Source-Version}) | gforge-shell (= ${Source-Version}), gforge-ftp-proftpd (= ${Source-Version}) | gforge-ftp (= ${Source-Version}), gforge-lists-mailman (= ${Source-Version}) | gforge-lists (= ${Source-Version})
 Description: collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
@@ -51,7 +51,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32), php4-cli, php4-cgi, php4-pgsql
+Depends: gforge-common, postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32), php4-cli, php4-cgi, php4-pgsql
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
@@ -100,6 +100,21 @@ Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 
 Provides: gforge-mta
 Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Postfix)
+ GForge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures the Postfix mail transfer agent to run
+ GForge.
+
+Package: gforge-mta-courier
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32), postfix, postfix-pgsql
+Provides: gforge-mta
+Conflicts: gforge-mta
+Description: collaborative development tool - mail tools (using Courier)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
