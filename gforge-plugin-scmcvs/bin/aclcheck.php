@@ -38,7 +38,7 @@ $env_cvsroot = (string) $_ENV['CVSROOT'];
 # Rules
 # 1. Must begin with /cvs/ or /cvsroot/
 # 2. Then must contain 3 - 15 alphanumeric chars or -
-preg_match("/^\/(cvs)(root)*\/([[:alnum:]-]{3,15})$/", $env_cvsroot, $matches);
+preg_match("/^\/\/?(cvs)(root)*\/\/?([[:alnum:]-]{3,15})$/", $env_cvsroot, $matches);
 
 if (count($matches) == 0) {
 	print "Invalid CVS directory\n";
@@ -62,7 +62,7 @@ if ($userName == 'root') {
 } else {
 
 	$snoopy->submit($SubmitUrl,$SubmitVars);
-	if (!empty($snoopy->results)) {
+	if (!empty($snoopy->error) || !empty($snoopy->results)) {
 		print $snoopy->results."\n";
 		exit(1);
 	}
