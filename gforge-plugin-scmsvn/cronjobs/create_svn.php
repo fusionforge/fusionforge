@@ -12,7 +12,7 @@ require ('squal_pre.php');
 require_once('common/include/cron_utils.php');
 
 //	/path/to/svn/bin/
-$svn_path='/usr/bin/';
+$svn_path='/usr/bin';
 
 //	Owner of files - apache
 $file_owner=$sys_apache_user.':'.$sys_apache_group;
@@ -108,22 +108,21 @@ while ( $row =& db_fetch_array($res) ) {
 			//	Create the repository
 			//
 			passthru ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 			//svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			if ($project->usesPlugin('svncommitemail')) {
- 				addSvnMail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/hooks/post-commit");
+ 				check_svn_mail($row["unix_group_name"], $svn."/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			}
  			if ($project->usesPlugin('svntracker')) {
- 				addSvnTracker();
+ 				check_svn_tracker($row["unix_group_name"], $svn."/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			}
 		} else {
 			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
 			$cmd = 'chown -R '.$file_owner.' '.$svn.'/'.$row["unix_group_name"];
 			passthru($cmd); // svn dir owned by apache or viewcvs doesn´t work 
 			if ($project->usesPlugin('svncommitemail')) {
-				addSvnMail("$svn/".$row["unix_group_name"]."/hooks/post-commit");
+ 				check_svn_mail($row["unix_group_name"], $svn."/".$row["unix_group_name"]);
 			}
 			if ($project->usesPlugin('svntracker')) {
-				addSvnTracker();
+				check_svn_tracker($row["unix_group_name"], $svn."/".$row["unix_group_name"]);
 			}
 		}	
 		$cmd = 'chown -R '.$file_owner.' '.$svn;
@@ -131,111 +130,60 @@ while ( $row =& db_fetch_array($res) ) {
 	}
 }
 
-function addSvnTracker() {
-	global $svn,$row;
+function check_svn_tracker($project, $repos) {
 	
-	$LineFound = FALSE;
-	$FIn  = @fopen($svn."/".$row["unix_group_name"]."/hooks/post-commit","r");	
-	if ($FIn) {
-		while (!feof($FIn))  {
-			$Line = fgets ($FIn);
-			if(!preg_match("/^#/", $Line) &&
-				preg_match("/svntracker/",$Line)) {
-				$LineFound = TRUE;
-			}
-		}
-		fclose($FIn);
-		if($LineFound==FALSE) {
-			echo $row["unix_group_name"].": post-commit modified\n";
-			addSvnTrackerToFile($svn."/".$row["unix_group_name"]."/hooks/post-commit");
-		}
-	} else {
-		//create the file
-		echo $row["unix_group_name"].": post-commit modified and created\n";
-		addSvnTrackerToFile($svn."/".$row["unix_group_name"]."/hooks/post-commit");
+	$contents = file_get_contents($repos."/hooks/post-commit");	
+	if ( strstr($contents, "svntracker") == FALSE ) {
+		add_svn_tracker_to_repository($project,$repos);
 	}
 }
 
-function addSvnTrackerToFile($path) {
+function add_svn_tracker_to_repository($project,$repos) {
 	global $sys_plugins_path,$file_owner;
 	
-	$FOut = fopen($path, "a+");
+	$FOut = fopen($repos.'/hooks/post-commit', "a+");
 	if($FOut) {
-		$Line = 'REPOS="$1"'  . "\n";
+		$Line = '
+#begin added by svntracker'.
+"\n/usr/bin/php -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path. "/svntracker/bin/post.php".  ' "'.$repos.'" "$2"
+#end added by svntracker';
 		fwrite($FOut,$Line);
-		$Line = 'REV="$2"' . "\n";
-		fwrite($FOut,$Line);
-		$Line = "/usr/bin/php -d include_path=".ini_get('include_path').
-				" ".$sys_plugins_path. "/svntracker/bin/post.php".  ' "$REPOS" "$REV"' . "\n";
-		fwrite($FOut,$Line);
-		`chmod +x $path `;
-		`chown $file_owner $path`;
+		`chmod +x $repos'/hooks/post-commit'`;
+		`chown $file_owner $repos'/hooks/post-commit'`;
 		fclose($FOut);
 	}
 }
 
-function addSvnMail($filepath) {
-	global $svn,$row,$sys_lists_host;
-
-	$LineFound = FALSE;
-	$FIn  = fopen($filepath,"r");	
-	if ($FIn) {
-		while (!feof($FIn))  {
-			$Line = fgets ($FIn);
-			
-			if((!preg_match("/^#/", $Line)) &&
-				(preg_match("/commit-email.pl/",$Line)) && (preg_match("/".$sys_lists_host."/",$Line))) {
-				$LineFound = TRUE;
-			}
-		}
-		fclose($FIn);
-		if($LineFound==FALSE) {
-			echo $row["unix_group_name"].": post-commit modified\n";
-			addSvnMailToFile($filepath,$row["unix_group_name"]);
-		}
-	} else {
-		//create the file
-		echo $row["unix_group_name"].": post-commit modified and created\n";
-		addSvnMailToFile($filepath,$row["unix_group_name"]);
+function check_svn_mail($project, $repos) {
+	$contents = file_get_contents($repos."/hooks/post-commit");
+	if ( strstr($contents, "svncommitemail") == FALSE ) {
+		add_svn_mail_to_repository($project,$repos);
 	}
-	
 }
 
-function addSvnMailToFile($filePath,$unix_group_name) {
-	global $sys_lists_host,$file_owner;
+function add_svn_mail_to_repository($unix_group_name,$repos) {
+	global $sys_lists_host,$file_owner,$sys_plugins_path;
 	
-	$FOut = fopen($filePath, "a+");
+	$FOut = fopen($repos.'/hooks/post-commit', "a+");
 	if($FOut) {
-		$pathsvnmail = dirname($_SERVER['_']).'/commit-email.pl '.' "$REPOS" '.' "$REV" '.$unix_group_name.'-commits@'.$sys_lists_host . "\n";
-		$Line = 'REPOS="$1"'  . "\n";
+		$Line = '
+#begin added by svncommitemail
+'.$sys_plugins_path.'/svncommitemail/bin/commit-email.pl '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
+#end added by svncommitemail';
 		fwrite($FOut,$Line);
-		$Line = 'REV="$2"' . "\n";
-		fwrite($FOut,$Line);
-		fwrite($FOut, $pathsvnmail);
-		`chmod +x $filePath `;
-		`chown $file_owner $path`;
+		`chmod +x $repos'/hooks/post-commit'`;
+		`chown $file_owner $repos'/hooks/post-commit'`;
 		fclose($FOut);
 	}
-}
-
-/**
-* svn_hooks($filePath)
-* This function create the post-commit file in svn hooks
-* Copyright 2004 (c) GForge
-* @autor Luis Alberto Hurtado Alvarado <luis@gforgegroup.com>
-* @param $filePath The path to svn repository
-*/
-function svn_hooks($filePath) {
-	system ("cp $filePath/hooks/post-commit.tmpl $filePath/hooks/post-commit");
-	system("chmod +x ".$filePath."/hooks/post-commit");
 }
 
 if ($one_repository) {
 	passthru ("cd $repos_co && $svn_path/svn commit -m\"\"");
 }
 system("chown $file_owner -R $svn");
-system("cd $svn/ && find -type d -exec chmod 700 {} \;");
-system("cd $svn/ && find -type f -exec chmod 600 {} \;");
+#system("cd $svn/ && find -type d -exec chmod 700 {} \;");
+#system("cd $svn/ && find -type f -exec chmod 600 {} \;");
 
 cron_entry(21,$err);
 ?>
