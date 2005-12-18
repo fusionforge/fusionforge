@@ -24,45 +24,29 @@ make this possible.
 Thanks for taking the time to download this code.  If you have any
 questions please feel free to visit http://gforge.org/
 
+
 1. Installation Instructions
 ----------------------------
 
-1.1 Debian Packages
+Decompress the plugin tarball and place it into your plugins directory. 
+Usually, this would be in a location like /opt/gforge/gforge/plugins/cvstracker
+Whereever you place it, be sure your /etc/gforge/local.inc file has 
+$sys_plugins_path pointing to the plugins directory.
 
-Just download the .deb and dpkg -i gforge-plugin-cvstracker-*.deb. If you
-want to compile your own packages, you can do from 
-gforge-plugin-cvstracker-VERSION directory:
-$ dpkg-buildpackage -us -uc -rfakeroot
+The cvstracker/etc/plugins/cvstracker/config.php should be copied and edited 
+to 
 
-1.2 Other Packaging System
+	/etc/gforge/plugins/cvstracker/config.php
 
-At the moment we're working on doing a script to automatically install it.
-General instructions:
-
-1.2.1 Install the database
-	You'll find this file within this package. Just run it without parameters.
-        /usr/lib/gforge/plugins/cvstracker/bin/db-upgrade.pl
-
-1.2.2 Register the plugin
-	You'll find the script register-plugin with your current Gforge installation. 
-Use it in the following way.
-        /usr/lib/gforge/bin/register-plugin cvstracker "cvstracker"
-
-1.2.3 Install the cron file
-   	You should install a cron file in /etc/cron.d/gforge-plugin-cvstracker like this:
-
-   35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include
-
-1.2.4 Configure the plugin
-
-	You should fill in the cvstracker.conf.tmpl template with apropiate values and put the file in:
-	/etc/gforge/plugins/cvstracker/cvstracker.conf
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager' 
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
 
 
 2. Description
 --------------
 
-CVSTracker plugin allowes linking CVS Log messages to Trackers and Tasks.
+CVSTracker plugin allows linking CVS Log messages to Trackers and Tasks.
 It will review all commits in a project and search for a specific string
 to know which task or tracker is related. 
 

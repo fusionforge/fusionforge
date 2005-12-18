@@ -4,58 +4,17 @@ gforge-plugin-scmsvn
 This is the Subversion plugin for GForge. It creates Subversion
 repositories and provides some functionality to manage them.
 
-Prerequisites:
+Decompress the plugin tarball and place it into your plugins directory.
+Usually, this would be in a location like /opt/gforge/gforge/plugins/scmsvn
+Whereever you place it, be sure your /etc/gforge/local.inc file has
+$sys_plugins_path pointing to the plugins directory.
 
-- install Perl, DBI and DBD::Pg as per GForge's INSTALL file
+The scmsvn/etc/plugins/scmsvn/config.php should be copied and edited
+to
 
-- You'll also need to install Subversion, as well as Python and the
-Subversion-Python module (if you want to use ViewSVN). On Red Hat
-systems, Python is available natively, but you may have to fetch
-Subversion-Python packages from
-<http://subversion.tigris.org/project_packages.html>. It seems
-Mandrake provides the module natively. Again, on Debian, apt's
-dependencies system will take care of it all.
+        /etc/gforge/plugins/scmsvn/config.php
 
-- ViewCVS (<http://sourceforge.net/projects/viewcvs>): warning only
-latest CVS version supports SVN but Debian provides for example
-ViewCVS packages that supports SVN.
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager'
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
 
-Installation:
-
-- files from etc/ go to /etc/gforge/plugins/scmsvn, apart from
-etc/httpd.conf that you should install as /etc/gforge/httpd.d/10scmsvn
-- files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
-- files from common/ go to /usr/lib/gforge/plugins/scmsvn/common
-- files from db/ go to  /usr/lib/gforge/plugins/scmsvn/db
-- files from cronjobs/ go to  /usr/lib/gforge/plugins/scmsvn/cronjobs
-
-Setup:
-
-- customise files in /etc/gforge/plugins/scmsvn to match your
-preferences (SVN server, and whether to enable SVN by default for new
-projects)
-- create a gforge_scm user, member of all the projects for which you
-want to use SVN
-- setup the crontab from debian/cron.d
-- gforge-config
-- /usr/lib/gforge/plugins/scmsvn/bin/db-upgrade.pl
-- /usr/lib/gforge/plugins/scmsvn/bin/install-svn.sh configure
-- /usr/lib/gforge/bin/register-plugin scmsvn "Subversion"
-
- -- Roland Mas <lolando@debian.org>, Tue May 18 22:13:57 2004
-
-Note about ViewCVS wrapper:
-
-ViewCVS CSS static files (www/viewcvs/) and templates
-(etc/plugins/scmsvn/viewcvs/templates/) have been extracted from
-ViewCVS Debian package version 0.9.2+cvs.1.0.dev.2004.07.28-1.4.
-
-Modifications in templates:
-- mainly include/header.ezt and footer.ezt
-- TODO: conversion in XHTML
-
- -- Mathieu Peltier <mathieu.peltier@gmail.com>, Sun Apr 10 23:13:38 2005
-
-Local Variables:
-mode: readme-debian
-End:

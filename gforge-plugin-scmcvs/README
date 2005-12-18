@@ -4,33 +4,17 @@ gforge-plugin-scmcvs
 This is the CVS plugin for Gforge.  It creates CVS repositories and
 provides some functionality to manage them.
 
-Prerequisite:
+Decompress the plugin tarball and place it into your plugins directory.
+Usually, this would be in a location like /opt/gforge/gforge/plugins/scmcvs
+Whereever you place it, be sure your /etc/gforge/local.inc file has
+$sys_plugins_path pointing to the plugins directory.
 
-- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+The scmcvs/etc/plugins/scmcvs/config.php should be copied and edited
+to
 
-Installation:
+        /etc/gforge/plugins/scmcvs/config.php
 
-- files from etc/ go to /etc/gforge/ 
-- files from bin/ go to /usr/lib/gforge/plugins/scmcvs/bin
-- files from cgi-bin/ (cvsweb) goes to $sys_path_to_scmweb defined in local.inc
-- files from common/ go to /usr/lib/gforge/plugins/scmcvs/common
-- files from db/ go to  /usr/lib/gforge/plugins/scmcvs/db
-- files from cronjobs/ go to  /usr/share/gforge/www/plugins/scmcvs/cronjobs
-- files from www/ go to  /usr/share/gforge/www/plugins/scmcvs/
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager'
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
 
-Setup:
-
-- customise files in /etc/gforge/plugins/scmcvs to match your
-preferences (CVS server, and whether to enable CVS by default for new
-projects)
-- setup the crontab from debian/cron.d
-- gforge-config
-- /usr/lib/gforge/plugins/scmcvs/bin/db-upgrade.pl
-- /usr/lib/gforge/plugins/scmcvs/bin/install-cvs.sh configure
-- /usr/lib/gforge/bin/register-plugin scmcvs "CVS"
-
- -- Roland Mas <lolando@debian.org>, Tue May 18 22:14:32 2004
-
-Local Variables:
-mode: readme-debian
-End:
