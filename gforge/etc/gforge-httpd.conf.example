@@ -1,18 +1,24 @@
+LoadModule dav_module modules/mod_dav.so
+LoadModule dav_fs_module modules/mod_dav_fs.so
+LoadModule dav_svn_module modules/mod_dav_svn.so
+LoadModule authz_svn_module modules/mod_authz_svn.so
+LoadModule auth_gforge_module modules/mod_auth_gforge.so
+
 #
 # Use name-based virtual hosting.
 #
 NameVirtualHost *:80
-NameVirtualHost *:443
+#NameVirtualHost *:443
 
 #
 #	Primary GForge vhost
 #
 <VirtualHost *:80>
   ServerName gforge.company.com
-  RewriteEngine on
-  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-</VirtualHost>
-<VirtualHost *:443>
+#  RewriteEngine on
+#  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
+#</VirtualHost>
+#<VirtualHost *:443>
 ServerName gforge.company.com
 ServerAlias scm.gforge.company.com
 ServerAdmin webmaster@gforge.company.com
@@ -22,9 +28,9 @@ php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gfo
 php_value register_globals On
 #php_value output_handler ""
 php_value default_charset "UTF-8"
-SSLEngine On
-SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
-SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
+#SSLEngine On
+#SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
+#SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
 #<Files projects>
 #SetOutputFilter PHP
 #SetInputFilter PHP
@@ -60,8 +66,10 @@ DirectoryIndex index.php
 ServerName lists.gforge.company.com
 ServerAdmin mailman@lists.gforge.company.com
 DocumentRoot /var/www/mailman
-ScriptAlias   /mailman/ /var/mailman/cgi-bin/
-Alias /pipermail/ /var/mailman/archives/public/
+ScriptAlias   /mailman/ /usr/lib/mailman/cgi-bin/
+Alias /pipermail/ /var/lib/mailman/archives/public/
+#ScriptAlias   /mailman/ /var/mailman/cgi-bin/
+#Alias /pipermail/ /var/mailman/archives/public/
 DirectoryIndex index.php index.cgi index.html index.htm
 </VirtualHost>
 
@@ -77,15 +85,32 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #</VirtualHost>
 
 #
-#	SVN Vhost WITHOUT mod_auth_gforge 
-#	allows viewing of viewcvs for each project
-#	Only necessary if SVN is on separate machine
+#	*.gforge.company.com vhosts
+#	Each project can have its own vhost
+#
+#	WARNING - security is degraded by having this
+#	on the same machine as the primary GForge
 #
 #<VirtualHost *:80>
-#ServerName cvs.gforge.company.com
-#ServerAdmin webmaster@cvs.gforge.company.com
-#DocumentRoot /var/www/cvs
-#DirectoryIndex index.php index.cgi
+#  ServerName projects.gforge.company.com
+#  ServerAlias *.gforge.company.com
+#  DocumentRoot /home/groups
+#  VirtualDocumentRoot /home/groups/%1/htdocs
+#  VirtualScriptAlias /home/groups/%1/cgi-bin
+#  <Directory /var/www/homedirs/groups>
+#    Options Indexes
+#
+#	WARNING - turning on php will allow any user
+#	to upload a php file to your server, and include 
+#	the gforge local.inc file and get your password to 
+#	connect to the database and have total control.
+#
+#    php_flag engine off
+#    AllowOverride None
+#    order allow,deny
+#    allow from all
+#  </Directory>
+#  DirectoryIndex index.html index.htm
 #</VirtualHost>
 
 #
@@ -93,11 +118,11 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #
 <VirtualHost *:80>
   ServerName svn.gforge.company.com
-  RewriteEngine on
-  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-</VirtualHost>
-<VirtualHost *:443>
-  ServerName svn.gforge.company.com
+#  RewriteEngine on
+#  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
+#</VirtualHost>
+#<VirtualHost *:443>
+#  ServerName svn.gforge.company.com
   ServerAdmin webmaster@svn.gforge.company.com
   DocumentRoot /var/www/svn
   DAVLockDB    /tmp/svn-DAVLockDB
@@ -108,11 +133,11 @@ DirectoryIndex index.php index.cgi index.html index.htm
   RewriteRule ^/svn/index.html$ /index.php [PT]
   RewriteRule ^/index.htm$ /index.php [PT]
   RewriteRule ^/index.html$ /index.php [PT]
-  SSLEngine On 
-  SSLCertificateFile /etc/httpd/ssl/svn.gforge.company.com.crt
-  SSLCertificateKeyFile /etc/httpd/ssl/svn.gforge.company.com.pem
+#  SSLEngine On 
+#  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
+#  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
   <Location /svn>
-  #  GforgeAuthzEnabled on
+#GforgeAuthzEnabled on
     GforgeSysPath       /svnroot
     GforgeGroupsRoot	/svn
     GforgeAnonClause    "groups.enable_anonscm >= '1'"
@@ -131,7 +156,7 @@ DirectoryIndex index.php index.cgi index.html index.htm
     Auth_PG_user        gforge
 
     Auth_PG_pwd         gforge
-   Auth_PG_pwd_table   users
+    Auth_PG_pwd_table   users
     Auth_PG_pwd_field   user_pw
     Auth_PG_uid_field   user_name
 
@@ -164,10 +189,9 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #  # Needed for windows web folders
 #  DavDepthInfinity on
 #  SSLEngine On
-#  SSLCertificateFile /etc/httpd/ssl/star.gforge.company.com.crt
-#  SSLCertificateKeyFile /etc/httpd/ssl/star.gforge.company.com.pem
+#  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
+#  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
 #  <Location />
-#    Options FollowSymlinks Indexes
 #    GforgeSysPath	/var/www/homedirs
 #    GforgeGroupsRoot	/groups
 #    GforgeUsersRoot	/users
@@ -197,34 +221,5 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #    Require valid-user
 #  </Location>
 #DirectoryIndex index.htm
-#</VirtualHost>
-
-#
-#	*.gforge.company.com vhosts
-#	Each project can have its own vhost
-#
-#	WARNING - security is degraded by having this
-#	on the same machine as the primary GForge
-#
-#<VirtualHost *:80>
-#  ServerName projects.gforge.company.com
-#  ServerAlias *.gforge.company.com
-#  DocumentRoot /home/groups
-#  VirtualDocumentRoot /home/groups/%1/htdocs
-#  VirtualScriptAlias /home/groups/%1/cgi-bin
-#  <Directory /var/www/homedirs/groups>
-#    Options Indexes
-#
-#	WARNING - turning on php will allow any user
-#	to upload a php file to your server, and include 
-#	the gforge local.inc file and get your password to 
-#	connect to the database and have total control.
-#
-#    php_flag engine off
-#    AllowOverride None
-#    order allow,deny
-#    allow from all
-#  </Directory>
-#  DirectoryIndex index.html index.htm
 #</VirtualHost>
 
