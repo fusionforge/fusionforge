@@ -7,24 +7,23 @@ LoadModule auth_gforge_module modules/mod_auth_gforge.so
 #
 # Use name-based virtual hosting.
 #
-NameVirtualHost *:80
-#NameVirtualHost *:443
+NameVirtualHost 192.168.100.100:80
+#NameVirtualHost 192.168.100.100:443
 
 #
 #	Primary GForge vhost
 #
-<VirtualHost *:80>
+<VirtualHost 192.168.100.100:80>
   ServerName gforge.company.com
 #  RewriteEngine on
 #  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
 #</VirtualHost>
-#<VirtualHost *:443>
+#<VirtualHost 192.168.100.100:443>
 ServerName gforge.company.com
-ServerAlias scm.gforge.company.com
 ServerAdmin webmaster@gforge.company.com
-DocumentRoot /var/www/gforge/www
+DocumentRoot /opt/gforge/gforge/www
 ErrorDocument 404 /404.php
-php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
+php_value include_path ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
 php_value register_globals On
 #php_value output_handler ""
 php_value default_charset "UTF-8"
@@ -62,10 +61,10 @@ DirectoryIndex index.php
 #
 #	Lists vhosts - where mailman lives
 #
-<VirtualHost *:80>
+<VirtualHost 192.168.100.100:80>
 ServerName lists.gforge.company.com
 ServerAdmin mailman@lists.gforge.company.com
-DocumentRoot /var/www/mailman
+DocumentRoot /opt/gforge/mailman
 ScriptAlias   /mailman/ /usr/lib/mailman/cgi-bin/
 Alias /pipermail/ /var/lib/mailman/archives/public/
 #ScriptAlias   /mailman/ /var/mailman/cgi-bin/
@@ -77,10 +76,10 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #	CVS Vhost - allows viewing of CVSWeb for each project
 #	Only necessary if CVS is on separate machine
 #
-#<VirtualHost *:80>
+#<VirtualHost 192.168.100.100:80>
 #ServerName cvs.gforge.company.com
 #ServerAdmin webmaster@cvs.gforge.company.com
-#DocumentRoot /var/www/cvs
+#DocumentRoot /opt/gforge/cvs
 #DirectoryIndex index.php index.cgi
 #</VirtualHost>
 
@@ -91,13 +90,13 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #	WARNING - security is degraded by having this
 #	on the same machine as the primary GForge
 #
-#<VirtualHost *:80>
+#<VirtualHost 192.168.100.100:80>
 #  ServerName projects.gforge.company.com
 #  ServerAlias *.gforge.company.com
 #  DocumentRoot /home/groups
 #  VirtualDocumentRoot /home/groups/%1/htdocs
 #  VirtualScriptAlias /home/groups/%1/cgi-bin
-#  <Directory /var/www/homedirs/groups>
+#  <Directory /opt/gforge/homedirs/groups>
 #    Options Indexes
 #
 #	WARNING - turning on php will allow any user
@@ -116,15 +115,15 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #
 #	Subversion vhost using mod_auth_gforge
 #
-<VirtualHost *:80>
+<VirtualHost 192.168.100.100:80>
   ServerName svn.gforge.company.com
 #  RewriteEngine on
 #  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
 #</VirtualHost>
-#<VirtualHost *:443>
+#<VirtualHost 192.168.100.100:443>
 #  ServerName svn.gforge.company.com
   ServerAdmin webmaster@svn.gforge.company.com
-  DocumentRoot /var/www/svn
+  DocumentRoot /opt/gforge/svn
   DAVLockDB    /tmp/svn-DAVLockDB
   RewriteEngine on
   #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
@@ -176,15 +175,15 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #
 #	webDAV editing of project vhosts
 #
-#<VirtualHost *:80>
+#<VirtualHost 192.168.100.100:80>
 #  ServerName edit.gforge.company.com
 #  RewriteEngine on
 #  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
 #</VirtualHost>
-#<VirtualHost *:443>
+#<VirtualHost 192.168.100.100:443>
 #  ServerName edit.gforge.company.com
 #  ServerAdmin webmaster@edit.gforge.company.com
-#  DocumentRoot /var/www/homedirs
+#  DocumentRoot /opt/gforge/homedirs
 #  DAVLockDB    /tmp/projvhost-DAVLockDB
 #  # Needed for windows web folders
 #  DavDepthInfinity on
@@ -192,7 +191,7 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
 #  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
 #  <Location />
-#    GforgeSysPath	/var/www/homedirs
+#    GforgeSysPath	/opt/gforge/homedirs
 #    GforgeGroupsRoot	/groups
 #    GforgeUsersRoot	/users
 #    DAV On
