@@ -1,17 +1,13 @@
-0. INSTALLATION of Helloworld Plugin
+INSTALLATION of cvssyncmail Plugin
 
-i.e. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
-	with /srv/www/gforge/plugins/helloworld and all the files in it
+If the directory where the plugins are is /opt/gforge/gforge/plugins you should end up 
+	with /opt/gforge/gforge/plugins/cvssyncmail and all the files in it
 
-1. CONFIGURATION
+Be sure that your /etc/gforge/local.inc has a sys_plugins_path set to that location.
 
-A) Make the symbolic links for each section
+The 'Site Admin' tab now has a 'Plugin Manager' link, which can be used to activate /
+deactivate plugins. Be sure to activate them if you want them to be available to 
+projects.
 
-(this is just an example, you should change the variables for what you have on your installation)
-
-/$GFORGEDIR/www/plugins/helloworld -> /$GFORGEPLUGINSDIR/helloworld/www
-/$ETC/gforge ->  /$GFORGEPLUGINSDIR/helloworld/etc/plugins/helloworld
-
-B) Run the db/helloworld-init.sql file
-
-psql -U gforge gforge < db/helloworld-init.sql
+Each individual project will have to go to the 'Project Admin' -> 'Edit Public Info'
+page and choose to use the plugin.
