@@ -293,7 +293,7 @@ if ($art_arr && count($art_arr) > 0) {
 		Show extra rows for <-- Prev / Next -->
 	*/
 	//only show this if we´re not using a power query
-	if (!getStringFromRequest('power_query')) {
+	if ((!getStringFromRequest('power_query')) && (db_numrows($res)<1)) { //$res comes from the top, it has rows if we have saved queries
 		if (($offset > 0) || ($rows >= 50)) {
 			echo '
 				<tr><td colspan="2">';
