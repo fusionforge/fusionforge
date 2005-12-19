@@ -80,7 +80,8 @@ if (!isset($GLOBALS['sys_path_to_scmweb']) || (!$external_scm && !is_file($GLOBA
 
 
 if ($external_scm) {
-	$server_script = "/cgi-bin/viewcvs.cgi";
+	//$server_script = "/cgi-bin/viewcvs.cgi";
+	$server_script = $GLOBALS["sys_path_to_scmweb"]."/viewcvs.cgi";
 	// remove leading / (if any)
 	$server_script = preg_replace("/^\\//", "", $server_script); 
 	

@@ -93,7 +93,8 @@ if ($projectName) {
 	// If we are accessing an external SCM box, execute the cvsweb script remotely and
 	// pipe the results
 	if ($external_scm) {
-		$server_script = "/cgi-bin/cvsweb";
+		//$server_script = "/cgi-bin/cvsweb";
+		$server_script = $GLOBALS["sys_path_to_scmweb"]."/cvsweb";
 		// remove leading / (if any)
 		$server_script = preg_replace("/^\\//", "", $server_script); 
 		
