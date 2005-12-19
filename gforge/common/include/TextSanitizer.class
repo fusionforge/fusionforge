@@ -29,60 +29,6 @@
 
 Class TextSanitizer extends Error {
 	
-		/**
-	 *  ProcessAttributeForTag - Helper function. Gets the attribute and if it isn´t " " it does attname=\"attvalue\"
-	 *
-	 *	@param   string		The attribute name
-	 *	@param   string		The attribute value
-	 *	@return  string		The attribute to be input in the tag, or blank
-	 */	
-	function ProcessAttributeForTag($name,$value) {
-		if ($value==" ") {
-			return " ";
-		} else {
-			return $name . '=\"' . $value . '\"';
-		}
-	}
-	
-		/**
-	 *  FindAttribute - Helper function. Finds the attribute in the string and returns it if it doesn´t have any of the notallowed array
-	 *
-	 *	@param   string		The attribute to find
-	 *	@param   string		The string to search
-	 *	@param   array		The array containing not allowed substrings
-	 *	@return  string		The attribute or "" if it wasn´t found or wasn´t allowed
-	 */
-	function FindAttribute($name,$string,$notallowed) {
-		$attr = " ";
-		preg_match('/' . $name . '=\\\\&quot;([^;]*)\\\\&quot;/',$string,$found);
-		if ($found[1]) {
-			if (!in_array($found[1],$notallowed)) {
-				$attr = $found[1];
-			}
-		}
-		return $attr;
-	}
-	
-		/**
-	 *  FindExactAttribute - Helper function. Finds the attribute in the string and returns it if it doesn´t have any of the notallowed array and only if it´s in the allowed string
-	 *
-	 *	@param   string		The attribute to find
-	 *	@param   string		The string to search
-	 *	@param   array		The array containing not allowed substrings
-	 *	@param   array		The array containing allowed substrings
-	 *	@return  string		The attribute or "" if it wasn´t found or wasn´t allowed
-	 */
-	function FindExactAttribute($name,$string,$notallowed,$allowedonly) {
-		$attr = " ";
-		preg_match('/' . $name . '=\\\\&quot;([^;]*)\\\\&quot;/',$string,$found);
-		if ($found[1]) {
-			if ( (!in_array($found[1],$notallowed)) && (in_array($found[1],$allowedonly)) ) {
-				$attr = $found[1];
-			}
-		}
-		return $attr;
-	}
-		
 	
 			/**
 	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character. 
@@ -115,6 +61,15 @@ Class TextSanitizer extends Error {
 		$text = str_replace("<br/>","\n",$text);
 		return $text;
 	}
+	
+	function unhtmlentities ($string) {
+		$trans_tbl = get_html_translation_table (HTML_SPECIALCHARS );
+		$trans_tbl = array_flip ($trans_tbl );
+		$res = strtr ($string ,$trans_tbl );
+		$res = str_replace("&amp;quot;",'"',$res);
+		return $res;
+	}
+	
 		/**
 	 *  SanitizeHtml - Grabs some text with all kinds of html code and parses it to make it safe
 	 *
@@ -129,495 +84,315 @@ Class TextSanitizer extends Error {
 	$script_open = '/(&lt;\s*[s|S][c|C][r|R][i|I][p|P][t|T]\s*&gt;)/';
 	$input = preg_replace($script_open,"<b>No script tags of any kind allowed</b>",$input);
 		
-	//search for <strong>something</strong> . 
-		$strong = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][o|O][n|N][g|G][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($strong,$input)) {
-			$input = preg_replace($strong,"$1<strong>$3</strong>$5",$input);
-		}		
-		
-	//search for <em>something</em> . 
-		$em = '/(.*)(&lt;[^&lt;|^&gt;]*[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[e|E][m|M][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($em,$input)) {
-			$input = preg_replace($em,"$1<em>$3</em>$5",$input);
-		}
-		
-	//search for <u>something</u> . 
-		$u = '/(.*)(&lt;[^&lt;|^&gt;]*[u|U][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[u|U][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($u,$input)) {
-			$input = preg_replace($u,"$1<u>$3</u>$5",$input);
-		}
-		
-	//search for <strike>something</strike> . 
-		$strike = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][t|T][r|R][i|I][k|K][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($strike,$input)) {
-			$input = preg_replace($strike,"$1<strike>$3</strike>$5",$input);			
-		}
-		
-	//search for <sub>something</sub> . 
-		$sub = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][b|B][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($sub,$input)) {
-			$input = preg_replace($sub,"$1<sub>$3</sub>$5",$input);					
-		}
-
-	//search for <sup>something</sup> . 
-		$sup = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][u|U][p|P][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($sup,$input)) {
-			$input = preg_replace($sup,"$1<sup>$3</sup>$5",$input);
-		}
-		
-	//search for <h1>something</h1> . 
-		$h1 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]1[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]1[^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($h1,$input)) {
-			$input = preg_replace($h1,"$1<h1>$3</h1>$5",$input);
-		}
-		
-	//search for <h2>something</h2> . 
-		$h2 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H][1][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H][1][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($h2,$input)) {
-			$input = preg_replace($h2,"$1<h2>$3</h2>$5",$input);
-		}
-
-	//search for <h3>something</h3> . 
-		$h3 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]3[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]3[^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($h3,$input)) {
-			$input = preg_replace($h3,"$1<h3>$3</h3>$5",$input);
-		}
-
-	//search for <h4>something</h4> . 
-		$h4 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]4[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]4[^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($h4,$input)) {
-			$input = preg_replace($h4,"$1<h4>$3</h4>$5",$input);
-		}
-
-	//search for <h5>something</h5> . 
-		$h5 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]5[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]5[^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($h5,$input)) {
-			$input = preg_replace($h5,"$1<h5>$3</h5>$5",$input);
-		}
-
-	//search for <h6>something</h6> . 
-		$h6 = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H]6[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[h|H]6[^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($h6,$input)) {
-			$input = preg_replace($h6,"$1<h6>$3</h6>$5",$input);
-		}
-		
-	//search for <address>something</address> . 
-		$address = '/(.*)(&lt;[^&lt;|^&gt;]*[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($address,$input)) {
-			$input = preg_replace($address,"$1<address>$3</address>$5",$input);
-		}
-		
-	//search for <td>something</td> . 
-		$td = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][d|D][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($td,$input)) {
-			$input = preg_replace($td,"$1<td>$3</td>$5",$input);
-		}
-		
-	//search for <caption>something</caption> . 
-		$caption = '/(.*)(&lt;[^&lt;|^&gt;]*[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($caption,$input)) {
-			$input = preg_replace($caption,"$1<caption>$3</caption>$5",$input);
-		}
+	//search for <strong>
+	// for some tags -> ^¬ is used because we don´t want to match the last &gt;, but the most near one.. so to "cheat" on the regexp we use a character we know won´t 
+	// 					appear between the tag and the closing >, but however anything else is permitted. this is used for tags like <img> which have 
+	//					attributes apart from the tag
+	$strong_open = '/(&lt;[^&lt;|^&gt;|^\/]*[s|S][t|T][r|R][o|O][n|N][g|G][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+	while (preg_match($strong_open,$input)) {
+		$input = preg_replace($strong_open,"<strong>",$input);
+	}
+	$strong_close = '/(&lt;[^&lt;|^&gt;]*\/[s|S][t|T][r|R][o|O][n|N][g|G][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+	while (preg_match($strong_close,$input)) {
+		$input = preg_replace($strong_close,"</strong>",$input);
+	}
 	
-	//search for <tr>something</tr> . 
-		$tr = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][r|R][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][r|R][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($tr,$input)) {
-			$input = preg_replace($tr,"$1<tr>$3</tr>$5",$input);
+		
+	//search for <em>
+		$em_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[e|E][m|M][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($em_open,$input)) {
+			$input = preg_replace($em_open,"<em>",$input);
 		}
-
-	//search for <tbody>something</tbody> . 
-		$tbody = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][b|B][o|O][d|D][y|Y][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][b|B][o|O][d|D][y|Y][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($tbody,$input)) {
-			$input = preg_replace($tbody,"$1<tbody>$3</tbody>$5",$input);
+		$em_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[e|E][m|M][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($em_close,$input)) {
+			$input = preg_replace($em_close,"</em>",$input);
 		}
 		
-	//search for <ol>something</ol> . 
-		$ol = '/(.*)(&lt;[^&lt;|^&gt;]*[o|O][l|L][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[o|O][l|L][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($ol,$input)) {
-			$input = preg_replace($ol,"$1<ol>$3</ol>$5",$input);
-		}
 		
-	//search for <ul>something</ul> . 
-		$ul = '/(.*)(&lt;[^&lt;|^&gt;]*[u|U][l|L][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[u|U][l|L][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($ul,$input)) {
-			$input = preg_replace($ul,"$1<ul>$3</ul>$5",$input);
+	//search for <u>
+		$u_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[u|U][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($u_open,$input)) {
+			$input = preg_replace($u_open,"<u>",$input);
 		}
-		
-	//search for <li>something</li> . 
-		$li = '/(.*)(&lt;[^&lt;|^&gt;]*[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[l|L][i|I][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($li,$input)) {
-			$input = preg_replace($li,"$1<li>$3</li>$5",$input);
+		$u_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[u|U][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($u_close,$input)) {
+			$input = preg_replace($u_close,"</u>",$input);
 		}	
 		
-	//search for <blockquote>something</blockquote> . 
-		$blockquote = '/(.*)(&lt;[^&lt;|^&gt;]*[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while (preg_match($blockquote,$input)) {
-			$input = preg_replace($blockquote,"$1<blockquote>$3</blockquote>$5",$input);				
+	//search for <strike>
+		$strike_open = '/(&lt;[^&lt;|^&gt;|^\/]*[s|S][t|T][r|R][i|I][k|K][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($strike_open,$input)) {
+			$input = preg_replace($strike_open,"<strike>",$input);			
 		}
+		$strike_close = '/(&lt;[^&lt;|^&gt;]*\/[s|S][t|T][r|R][i|I][k|K][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($strike_close,$input)) {
+			$input = preg_replace($strike_close,"</strike>",$input);			
+		}		
 		
-	//search for <pre>something</pre> . 
-		$pre1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)/';
-		$pre2 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][r|R][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		$input = preg_replace($pre1,"$1<pre>$3</pre>$5",$input);
-		$input = preg_replace($pre2,"$1<pre>$3</pre>$5",$input);
-		
-	//search for <p>something</p> . 
-		$p = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P][^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		while (preg_match($p,$input)) {
-			$input = preg_replace($p,"$1<p>$3</p>$5",$input);
+	//search for <sub>
+		$sub_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[s|S][u|U][b|B][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sub_open,$input)) {
+			$input = preg_replace($sub_open,"<sub>",$input);					
 		}
-		
-	//search for <p align="something">something</p> 
-		$align1 = '/(.*)(&lt;[^&lt;|^&gt;]*[p|P]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[p|P][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while(preg_match_all($align1,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
-				//search for every match if the attributes of the tag is what we expect
-				$aligns = array("center","right","left","justify");
-				if (in_array($match[0][3],$aligns)) {
-					//ok, replace
-					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<p align=\"" . $match[0][3] . "\">" . $match[0][4] . "</p>",$input);
-				} else {
-					//didn´t have what we expected
-				}
-		}
-		unset($matchs);
-		
-	//search for <div align="something">something</div> 
-		$align2 = '/(.*)(&lt;[^&lt;|^&gt;]*[d|D][i|I][v|V]\s+[a|A][l|L][i|I][g|G][n|N]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[d|D][i|I][v|V][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while(preg_match_all($align2,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
-				//search for every match if the attributes of the tag is what we expect
-				$aligns = array("center","right","left","justify");
-				if (in_array($match[0][3],$aligns)) {
-					//ok, replace
-					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<div align=\"" . $match[0][3] . "\">" . $match[0][4] . "</div>",$input);
-				} else {
-					//didn´t have what we expected
-					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5], $match[0][3] . $match[0][4] ,$input);
-				}
-		}
-		unset($matchs);
-		
-	//search for <span class="something">something</span> 
-		$span = '/(.*)(&lt;[^&lt;|^&gt;]*[s|S][p|P][a|A][n|N]\s+[c|C][l|L][a|A][s|S][s|S]=\\\\&quot;(.+)\\\\&quot;[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[s|S][p|P][a|A][n|N][^&lt;|^&gt;]*&gt;)(.*)/ms'; // the ms modifier at the end needed because of newline.
-		while(preg_match_all($span,$input,$match,PREG_SET_ORDER)) { // don´t know why but preg_math doesn´t return any coincidence :S. just searching for ONE at a time
-				//search for every match if the attributes of the tag is what we expect
-				$classes = array("Title","titlebar");
-				if (in_array($match[0][3],$classes)) {
-					//ok, replace
-					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5],"<span class=\"" . $match[0][3] . "\">" . $match[0][4] . "</span>",$input);
-				} else {
-					//didn´t have what we expected
-					$input = str_replace($match[0][2] . $match[0][4] . $match[0][5], $match[0][4] ,$input);
-				}
-		}
-		unset($matchs);
+		$sub_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[s|S][u|U][b|B][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sub_close,$input)) {
+			$input = preg_replace($sub_close,"</sub>",$input);					
+		}		
 
-	//search for <img PERMITTED/>
-		$img = '/(.*)(&lt;[^&lt;|^&gt;]*[i|I][m|M][g|G]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
-		preg_match_all($img,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match to see if the attributes of the tag is NOT what we expect
-			$thisone = $match[3]; //we store the attributes of the tag
-			
-			//don´t allow "<", ">" or "();"  inside attributes
-			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
- 			
-			//search for width attribute
-			$img_width = $this->FindAttribute("width",$thisone,$notallowed);
-			
-			//search for vspace attribute
-			$img_vspace = $this->FindAttribute("vspace",$thisone,$notallowed);
-			
-			//search for lang attribute
-			$img_lang = $this->FindAttribute("lang",$thisone,$notallowed);
-			
-			//search for hspace attribute
-			$img_hspace = $this->FindAttribute("hspace",$thisone,$notallowed);
-			
-			//search for height attribute
-			$img_height = $this->FindAttribute("height",$thisone,$notallowed);
-			
-			//search for border attribute
-			$img_border = $this->FindAttribute("border",$thisone,$notallowed);
-			
-			//search for align attribute
-			$img_align = $this->FindAttribute("align",$thisone,$notallowed);
-			
-			//search for src attribute
-			$img_src = $this->FindAttribute("src",$thisone,$notallowed);
-			
-			//search for alt attribute
-			$img_alt = $this->FindAttribute("alt",$thisone,$notallowed);
-			
-			//search for id attribute
-			$img_id = $this->FindAttribute("id",$thisone,$notallowed);
-			
-			//search for title attribute
-			$img_title = $this->FindAttribute("title",$thisone,$notallowed);
-			
-			//search for class attribute
-			$img_class = $this->FindAttribute("class",$thisone,$notallowed);
-			
-			//search for longdesc attribute
-			$img_longdesc = $this->FindAttribute("longdesc",$thisone,$notallowed);
-			
-			//search for style attribute
-			$img_style = $this->FindAttribute("style",$thisone,$notallowed);
-			
-			//finally, replace
-			//we have some trouble with images in IE if we pass null to width and height params
-			$img_width = $this->ProcessAttributeForTag("width",$img_width);
-			$img_height = $this->ProcessAttributeForTag("height",$img_height);
-			// the rest. to avoid empty attributes
-			$img_vspace = $this->ProcessAttributeForTag("vspace",$img_vspace);
-			$img_hspace = $this->ProcessAttributeForTag("hspace",$img_hspace);
-			$img_lang = $this->ProcessAttributeForTag("lang",$img_lang);
-			$img_border = $this->ProcessAttributeForTag("border",$img_border);
-			$img_align = $this->ProcessAttributeForTag("align",$img_align);
-			$img_src = $this->ProcessAttributeForTag("src",$img_src);
-			$img_id = $this->ProcessAttributeForTag("id",$img_id);
-			$img_title = $this->ProcessAttributeForTag("title",$img_title);
-			$img_class = $this->ProcessAttributeForTag("class",$img_class);
-			$img_longdesc = $this->ProcessAttributeForTag("longdesc",$img_longdesc);
-			$img_style = $this->ProcessAttributeForTag("style",$img_style);
-			$img_alt = $this->ProcessAttributeForTag("alt",$img_alt);
-			
-			$input = str_replace($match[2] . $match[3] . $match[4],"<img $img_width $img_vspace $img_lang $img_hspace $img_height $img_border $img_align $img_src $img_alt $img_id $img_title $img_class $img_longdesc $img_style />",$input);
+	//search for <sup>
+		$sup_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[s|S][u|U][p|P][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sup_open,$input)) {
+			$input = preg_replace($sup_open,"<sup>",$input);
 		}
+		$sup_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[s|S][u|U][p|P][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($sup_close,$input)) {
+			$input = preg_replace($sup_close,"</sup>",$input);
+		}		
 		
-		
-	//search for <a PERMITTED>something</a>
-		
-		// i must do a preg_match repeadtely instead of preg_match_all because there may be identical links but some with some text or img between the tags and other without and this would lead to some discarted <a> tags
-		$a = '/(.*)(&lt;[^&lt;|^&gt;]*[a|A]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[a|A][^&lt;|^&gt;]*&gt;)(.*)/';
-		preg_match_all($a,$input,$matchs,PREG_SET_ORDER);
-		
-		while ($matchs) {
-		// we re-do the preg_match_all because there can be identical <a> tags but which have different things inside (like one with text, one with an image, etc) and if we don´t do this it makes just one pass and doesn´t work	
-			foreach ($matchs as $match) {
-				//search for every match to see if the attributes of the tag is NOT what we expect
-				$thisone = $match[3]; //we store the attributes of the tag
-				
-				//don´t allow "<", ">" or "();"  inside attributes
-				$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
-				
-				//search for lang attr
-				$a_language = $this->FindAttribute("lang",$thisone,$notallowed);
-							
-				//search for href attribute
-				$a_href = $this->FindAttribute("href",$thisone,$notallowed);
-							
-				//search for target attribute
-				$allowedonly = array("_blank","_top","_self","_parent"); //don´+t let javascript and stuff go
-				$a_target = $this->FindExactAttribute("target",$thisone,$notallowed,$allowedonly);
-							
-				//search for id attribute
-				$a_id = $this->FindAttribute("id",$thisone,$notallowed);
-				
-				//search for name attribute
-				$a_name = $this->FindAttribute("name",$thisone,$notallowed);
-				
-				//search for accesskey attribute
-				$a_accesskey = $this->FindAttribute("accesskey",$thisone,$notallowed);
-				
-				//search for title attribute
-				$a_title = $this->FindAttribute("title",$thisone,$notallowed);
-				
-				//search for class attribute
-				$a_class = $this->FindAttribute("class",$thisone,$notallowed);
-				
-				//search for type attribute
-				$a_type = $this->FindAttribute("type",$thisone,$notallowed);
-				
-				//search for charset attribute
-				$a_charset = $this->FindAttribute("charset",$thisone,$notallowed);
-				
-				//search for style attribute
-				$a_style = $this->FindAttribute("style",$thisone,$notallowed);
-				
-				// to avoid empty attributes
-				$a_language = $this->ProcessAttributeForTag("language",$a_language);
-				$a_href = $this->ProcessAttributeForTag("href",$a_href);
-				$a_target = $this->ProcessAttributeForTag("target",$a_target);
-				$a_id = $this->ProcessAttributeForTag("id",$a_id);
-				$a_name = $this->ProcessAttributeForTag("name",$a_name);
-				$a_accesskey = $this->ProcessAttributeForTag("accesskey",$a_accesskey);
-				$a_title = $this->ProcessAttributeForTag("title",$a_title);
-				$a_class = $this->ProcessAttributeForTag("class",$a_class);
-				$a_type = $this->ProcessAttributeForTag("type",$a_type);
-				$a_charset = $this->ProcessAttributeForTag("charset",$a_charset);
-				$a_style = $this->ProcessAttributeForTag("style",$a_style);
-				
-				//finally, replace
-				$input = str_replace($match[2] . $match[4] . $match[5],"<a $a_language $a_href $a_target $a_id $a_name $a_accesskey $a_title $a_class $a_type $a_charset $a_style>" .$match[4] . "</a>",$input);
-				
-			}
-			unset($matchs);
-			preg_match_all($a,$input,$matchs,PREG_SET_ORDER);
+	//search for <h1>
+		$h1_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]1[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h1_open,$input)) {
+			$input = preg_replace($h1_open,"<h1>",$input);
 		}
-		
-	//search for <font PERMITTED>something</font>
-		$font = '/(.*)(&lt;[^&lt;|^&gt;]*[f|F][o|O][n|N][t|T]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[f|F][o|O][n|N][t|T][^&lt;|^&gt;]*&gt;)(.*)/';
-		preg_match_all($font,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match to see if the attributes of the tag is NOT what we expect
-			$thisone = $match[3]; //we store the attributes of the tag
-			
-			//don´t allow "<", ">" or "();"  inside attributes
-			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
- 			
-			//search for size attribute
-			$font_size = $this->FindAttribute("size",$thisone,$notallowed);
-			
-			//search for face attribute
-			$allowedonly = array("Comic Sans MS","Arial","Courier New","Tahoma","Times New Roman","Verdana"); //don´+t let javascript and stuff go
-			$font_face = $this->FindExactAttribute("face",$thisone,$notallowed,$allowedonly);
-			
-			//search for color attribute
-			$font_color = $this->FindAttribute("color",$thisone,$notallowed);
-			
-			// to avoid empty attributes
-			$font_size = $this->ProcessAttributeForTag("size",$font_size);
-			$font_face = $this->ProcessAttributeForTag("face",$font_face);
-			$font_color = $this->ProcessAttributeForTag("color",$font_color);
-			
-			//finally, replace
-			$input = str_replace($match[2] . $match[4] . $match[5],"<font $font_size $font_face $font_color>" .$match[4] . "</font>",$input);
+		$h1_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]1[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h1_close,$input)) {
+			$input = preg_replace($h1_close,"</h1>",$input);
 		}
 
-	//search for <table PERMITTED>something</table>	
-		$table = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][a|A][b|B][l|L][e|E]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][a|A][b|B][l|L][e|E][^&lt;|^&gt;]*&gt;)(.*)/ms';
-		preg_match_all($table,$input,$matchs,PREG_SET_ORDER);
-		while ($matchs) {
-		// we re-do the preg_match_all because there can be identical <a> tags but which have different things inside (like one with text, one with an image, etc) and if we don´t do this it makes just one pass and doesn´t work	
-			foreach ($matchs as $match) {
-				//search for every match to see if the attributes of the tag is NOT what we expect
-				$thisone = $match[3]; //we store the attributes of the tag
+	//search for <h2>
+		$h2_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]2[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h2_open,$input)) {
+			$input = preg_replace($h2_open,"<h2>",$input);
+		}
+		$h2_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]2[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h2_close,$input)) {
+			$input = preg_replace($h2_close,"</h2>",$input);
+		}
 				
-				//don´t allow "<", ">" or "();"  inside attributes
-				$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
-	 			
-				//search for width attribute
-				$table_width = $this->FindAttribute("width",$thisone,$notallowed);
-					
-				//search for cellspacing attribute
-				$table_cellspacing = $this->FindAttribute("cellspacing",$thisone,$notallowed);
-				
-				//search for cellpadding attribute
-				$table_cellpadding = $this->FindAttribute("cellpadding",$thisone,$notallowed);
-				
-				//search for border attribute
-				$table_border = $this->FindAttribute("border",$thisone,$notallowed);
-				
-				//search for align attribute
-				$table_align = $this->FindAttribute("align",$thisone,$notallowed);
-				
-				// to avoid empty attributes
-				$table_width = $this->ProcessAttributeForTag("width",$table_width);
-				$table_cellspacing = $this->ProcessAttributeForTag("cellspacing",$table_cellspacing);
-				$table_cellpadding = $this->ProcessAttributeForTag("cellpadding",$table_cellpadding);
-				$table_border = $this->ProcessAttributeForTag("border",$table_border);
-				$table_align = $this->ProcessAttributeForTag("align",$table_align);
-				
-				//finally, replace
-				$input = str_replace($match[2] . $match[4] . $match[5],"<table $table_width $table_cellspacing $table_cellpadding $table_border $table_align>" .$match[4] . "</table>",$input);
-			}
-			unset($matchs);
-			preg_match_all($table,$input,$matchs,PREG_SET_ORDER);
+	//search for <h3>
+		$h3_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]3[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h3_open,$input)) {
+			$input = preg_replace($h3_open,"<h3>",$input);
+		}
+		$h3_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]3[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h3_close,$input)) {
+			$input = preg_replace($h3_close,"</h3>",$input);
+		}
+
+	//search for <h4>
+		$h4_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]4[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h4_open,$input)) {
+			$input = preg_replace($h4_open,"<h4>",$input);
+		}
+		$h4_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]4[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h4_close,$input)) {
+			$input = preg_replace($h4_close,"</h4>",$input);
+		}
+
+	//search for <h5>
+		$h5_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]5[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h5_open,$input)) {
+			$input = preg_replace($h5_open,"<h5>",$input);
+		}
+		$h5_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]5[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h5_close,$input)) {
+			$input = preg_replace($h5_close,"</h5>",$input);
+		}
+
+	//search for <h6>
+		$h6_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H]6[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h6_open,$input)) {
+			$input = preg_replace($h6_open,"<h6>",$input);
+		}
+		$h6_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H]6[^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($h6_close,$input)) {
+			$input = preg_replace($h6_close,"</h6>",$input);
+		}			
+		
+	//search for <address>
+		$address_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^\w]*&gt;)/ms';
+		while (preg_match($address_open,$input)) {
+			$input = preg_replace($address_open,"<address>",$input);
+		}
+		$address_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[a|A][d|D][d|D][r|R][e|E][s|S][s|S][^\w]*&gt;)/ms';
+		while (preg_match($address_close,$input)) {
+			$input = preg_replace($address_close,"</address>",$input);
+		}		
+		
+	//search for <td>
+		$td_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[t|T][d|D][^¬]*&gt;)/ms';
+		while (preg_match($td_open,$input,$matches)) {
+			$input = preg_replace($td_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$td_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[t|T][d|D][^\w]*&gt;)/ms';
+		while (preg_match($td_close,$input)) {
+			$input = preg_replace($td_close,"</td>",$input);
 		}
 		
-	//search for <hr PERMITTED/>
-		$hr = '/(.*)(&lt;[^&lt;|^&gt;]*[h|H][r|R]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
-		preg_match_all($hr,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match to see if the attributes of the tag is NOT what we expect
-			$thisone = $match[3]; //we store the attributes of the tag
-			
-			//don´t allow "<", ">" or "();"  inside attributes
-			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
- 			
-			//search for width attribute
-			$hr_width = $this->FindAttribute("width",$thisone,$notallowed);
-			
-			//search for src attribute
-			$hr_size = $this->FindAttribute("size",$thisone,$notallowed);
-			
-			// to avoid empty attributes
-			$hr_width = $this->ProcessAttributeForTag("width",$hr_width);
-			$hr_size = $this->ProcessAttributeForTag("size",$hr_size);
-			
-			//finally, replace
-			$input = str_replace($match[2] . $match[3] . $match[4],"<hr $hr_width $hr_size />",$input);
+	//search for <table>
+		$table_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[t|T][a|A][b|B][l|L][e|E][^¬]*&gt;)/ms';
+		while (preg_match($table_open,$input,$matches)) {
+			$input = preg_replace($table_open,$this->unhtmlentities($matches[1]),$input,1);
+		}		
+		$table_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[t|T][a|A][b|B][l|L][e|E][^\w]*&gt;)/ms';
+		while (preg_match($table_close,$input)) {
+			$input = preg_replace($table_close,"</table>",$input);
+		}
+		
+	//search for <tr>
+		$tr_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[t|T][r|R][^¬]*&gt;)/ms';
+		while (preg_match($tr_open,$input,$matches)) {
+			$input = preg_replace($tr_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$tr_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[t|T][r|R][^\w]*&gt;)/ms';
+		while (preg_match($tr_close,$input)) {
+			$input = preg_replace($tr_close,"</tr>",$input);
+		}
+		
+	//search for <tbody>
+		$tbody_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[t|T][b|B][o|O][d|D][y|Y][^¬]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($tbody_open,$input)) {
+			$input = preg_replace($tbody_open,"<tbody>",$input);
+		}
+		$tbody_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[t|T][b|B][o|O][d|D][y|Y][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($tbody_close,$input)) {
+			$input = preg_replace($tbody_close,"</tbody>",$input);
+		}		
+		
+
+	//search for <caption>
+		$caption_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^\w]*&gt;)/ms';
+		while (preg_match($caption_open,$input)) {
+			$input = preg_replace($caption_open,"<caption>",$input);
+		}
+		$caption_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[c|C][a|A][p|P][t|T][i|I][o|O][n|N][^\w]*&gt;)/ms';
+		while (preg_match($caption_close,$input)) {
+			$input = preg_replace($caption_close,"</caption>",$input);
+		}		
+		
+	//search for <ol>
+		$ol_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[o|O][l|L][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($ol_open,$input)) {
+			$input = preg_replace($ol_open,"<ol>",$input);
+		}
+		$ol_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[o|O][l|L][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($ol_close,$input)) {
+			$input = preg_replace($ol_close,"</ol>",$input);
+		}		
+		
+	//search for <ul>
+		$ul_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[u|U][l|L][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($ul_open,$input)) {
+			$input = preg_replace($ul_open,"<ul>",$input);
+		}
+		$ul_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[u|U][l|L][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($ul_close,$input)) {
+			$input = preg_replace($ul_close,"</ul>",$input);
 		}
 
-	//search for <textarea PERMITTED>something</textarea>
-		$textarea = '/(.*)(&lt;[^&lt;|^&gt;]*[t|T][e|E][x|X][t|T][a|A][r|R][e|E][a|A]\s(.+)[^&lt;|^&gt;]*&gt;)(.*)(&lt;.*\/[t|T][e|E][x|X][t|T][a|A][r|R][e|E][a|A][^&lt;|^&gt;]*&gt;)(.*)/';
-		preg_match_all($textarea,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match to see if the attributes of the tag is NOT what we expect
-			$thisone = $match[3]; //we store the attributes of the tag
-			
-			//don´t allow "<", ">" or "();"  inside attributes
-			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
- 			
-			//search for rows attribute
-			$textarea_rows = $this->FindAttribute("rows",$thisone,$notallowed);
-			
-			//search for cols attribute
-			$textarea_cols = $this->FindAttribute("cols",$thisone,$notallowed);
-			
-			//search for name attribute
-			$textarea_name = $this->FindAttribute("name",$thisone,$notallowed);
-			
-			// to avoid empty attributes
-			$textarea_rows = $this->ProcessAttributeForTag("rows",$textarea_rows);
-			$textarea_cols = $this->ProcessAttributeForTag("cols",$textarea_cols);
-			$textarea_name = $this->ProcessAttributeForTag("name",$textarea_name);
-			
-			//finally, replace
-			$input = str_replace($match[2] . $match[4] . $match[5],"<textarea $textarea_rows $textarea_cols $textarea_name >" .$match[4] . "</textarea>",$input);
+	//search for <li>
+		$li_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[l|L][i|I][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($li_open,$input)) {
+			$input = preg_replace($li_open,"<li>",$input);
 		}
-	
-	//search for <input PERMITTED/> 
-/*		$input_form = '/(.*)(&lt;[^&lt;|^&gt;]*[i|I][n|N][p|P][u|U][t|T]\s)(.+)(\/[^&lt;|^&gt;|^a_z]*&gt;)(.*)/';
-		preg_match_all($input_form,$input,$matchs,PREG_SET_ORDER);
-		foreach ($matchs as $match) {
-			//search for every match to see if the attributes of the tag is NOT what we expect
-			$thisone = $match[3]; //we store the attributes of the tag
-			
-			//don´t allow "<", ">" or "();"  inside attributes
-			$notallowed = array("&lt;","&gt;","();"); // we won´t accept things that have "<" or ">" or "();"
- 			
-			//search for type attribute
-			$allowedonly = array("input_form","radio","text");
-			$input_form_type = $this->FindExactAttribute("type",$thisone,$notallowed,$allowedonly) ;
-			
-			//search for name attribute
-			$input_form_name = $this->FindAttribute("name",$thisone,$notallowed);
+		$li_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[l|L][i|I][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($li_close,$input)) {
+			$input = preg_replace($li_close,"</li>",$input);
+		}
 
-			//search for value attribute
-			$input_form_value = $this->FindAttribute("value",$thisone,$notallowed);
-			
-			//search for checked attribute
-			$input_form_checked = $this->FindAttribute("checked",$thisone,$notallowed);
-			
-			//search for size attribute
-			$input_form_size = $this->FindAttribute("size",$thisone,$notallowed);
-			
-			//search for maxlength attribute
-			$input_form_maxlength = $this->FindAttribute("maxlength",$thisone,$notallowed);
-			
-			// to avoid empty attributes
-			$input_form_type = $this->ProcessAttributeForTag("type",$input_form_type);
-			$input_form_name = $this->ProcessAttributeForTag("name",$input_form_name);
-			$input_form_value = $this->ProcessAttributeForTag("value",$input_form_value);
-			$input_form_checked = $this->ProcessAttributeForTag("checked",$input_form_checked);
-			$input_form_size = $this->ProcessAttributeForTag("size",$input_form_size);
-			$input_form_maxlength = $this->ProcessAttributeForTag("maxlength",$input_form_maxlength);
-			
-			//finally, replace
-			$input = str_replace($match[2] . $match[3] . $match[4],"<input $input_form_type $input_form_name $input_form_value $input_form_checked $input_form_maxlength $input_form_size />",$input);
+	//search for <blockquote>
+		$blockquote_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($blockquote_open,$input)) {
+			$input = preg_replace($blockquote_open,"<blockquote>",$input);				
 		}
-*/
+		$blockquote_close = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*\/[b|B][l|L][o|O][c|C][k|K][q|Q][u|U][o|O][t|T][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($blockquote_close,$input)) {
+			$input = preg_replace($blockquote_close,"</blockquote>",$input);				
+		}
+		
+	//search for <pre>
+		$pre_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[p|P][r|R][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($pre_open,$input)) {
+			$input = preg_replace($pre_open,"<pre>",$input);				
+		}
+		$pre_close = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*\/[p|P][r|R][e|E][^\w]*&gt;)/ms'; // the ms modifier at the end needed because of newline.
+		while (preg_match($pre_close,$input)) {
+			$input = preg_replace($pre_close,"</pre>",$input);				
+		}
+		
+	//search for <p>
+		$p_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[p|P][^¬]*&gt;)/ms';
+		while (preg_match($p_open,$input,$matches)) {
+			$input = preg_replace($p_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$p_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[p|P][^\w]*&gt;)/ms';
+		while (preg_match($p_close,$input)) {
+			$input = preg_replace($p_close,"</p>",$input);
+		}
+	//search for <div>
+		$div_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[d|D][i|I][v|V][^¬]*&gt;)/ms';
+		while (preg_match($div_open,$input,$matches)) {
+			$input = preg_replace($div_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$div_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[d|D][i|I][v|V][^\w]*&gt;)/ms';
+		while (preg_match($div_close,$input)) {
+			$input = preg_replace($div_close,"</div>",$input);
+		}
+	//search for <span>	
+		$span_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[s|S][p|P][a|A][n|N][^¬]*&gt;)/ms';
+		while (preg_match($span_open,$input,$matches)) {
+			$input = preg_replace($span_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$span_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[s|S][p|P][a|A][n|N][^\w]*&gt;)/ms';
+		while (preg_match($span_close,$input)) {
+			$input = preg_replace($span_close,"</span>",$input);
+		}
+	//search for <img>
+		$img_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[i|I][m|M][g|G][^¬]*&gt;)/ms';
+		while (preg_match($img_open,$input,$matches)) {
+			$input = preg_replace($img_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$img_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[i|I][m|M][g|G][^\w]*&gt;)/ms';
+		while (preg_match($img_close,$input)) {
+			$input = preg_replace($img_close,"</span>",$input);
+		}
+	//search for <a>	
+		$a_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[a|A][^¬]*&gt;)/ms';
+		while (preg_match($a_open,$input,$matches)) {
+			$input = preg_replace($a_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$a_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[a|A][^\w]*&gt;)/ms';
+		while (preg_match($a_close,$input)) {
+			$input = preg_replace($a_close,"</a>",$input);
+		}
+	//search for <font>	
+		$font_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[f|F][o|O][n|N][t|T][^¬]*&gt;)/ms';
+		while (preg_match($font_open,$input,$matches)) {
+			$input = preg_replace($font_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$font_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[f|F][o|O][n|N][t|T][^\w]*&gt;)/ms';
+		while (preg_match($font_close,$input)) {
+			$input = preg_replace($font_close,"</font>",$input);
+		}
+	//search for <hr>
+		$hr_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*[h|H][r|R][^¬]*&gt;)/ms';
+		while (preg_match($hr_open,$input,$matches)) {
+			$input = preg_replace($hr_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$hr_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/[h|H][r|R][^\w]*&gt;)/ms';
+		while (preg_match($hr_close,$input)) {
+			$input = preg_replace($hr_close,"</hr>",$input);
+		}
+
+		/* if we leave this people could use css style in the forum... but that would apply to all messages... i´m leaving this commented for the moment
+		$style_open = '/(&lt;[^&lt;|^&gt;|^\/|^\w]*style[^¬]*&gt;)/msi';
+		while (preg_match($style_open,$input,$matches)) {
+			$input = preg_replace($style_open,$this->unhtmlentities($matches[1]),$input,1);
+		}
+		$style_close = '/(&lt;[^&lt;|^&gt;|^\w]*\/style[^\w]*&gt;)/msi';
+		while (preg_match($style_close,$input)) {
+			$input = preg_replace($style_close,"</style>",$input);
+		}	*/		
 		
 	//search for &nbsp; and let them be
 		$nonbreakingspace = '/&amp;nbsp;/';
@@ -639,7 +414,6 @@ Class TextSanitizer extends Error {
 	//search for <br /> and let them be
 		$br = '/&lt;br\s{0,3}\/&gt;/';
 		$input = preg_replace($br,"<br/>",$input);
-	
 	
 		return $input;
 	}
