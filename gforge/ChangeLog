@@ -1,4 +1,7 @@
-
+2005-12-20 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug in docman treeview
+	* Added popup window for editor in docman
+	
 2005-11-25 Tim Perdue <tim@gforgegroup.com>
 
 	* added new /scm/reporting/ page and graphs

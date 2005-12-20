@@ -785,6 +785,7 @@ docman_new	ftpupload_choosefile	Choose an FTP file instead of uploading:
 docman_new	selectsubmit	Select Option
 docman_new	enableftpfirst	You must enable ftp uploads first
 docman_new	name	Name your file :
+docman_new	edit	Edit
 error	error_creating	Error creating
 error	not_found	PAGE NOT FOUND
 error	title	Requested Page not Found (Error 404)

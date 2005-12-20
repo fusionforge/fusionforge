@@ -98,16 +98,20 @@ if (!$d_arr || count($d_arr) < 1) {
 */
 function docman_recursive_display($docgroup) {
 	global $nested_groups,$nested_docs,$group_id;
-	foreach ($nested_groups[$docgroup] as $dg) {
-		$folder = '<span class="JSCookTreeFolderClosed"><i><img src=\"/jscook/ThemeXP/folder1.gif\"></i></span><span class="JSCookTreeFolderOpen"><i><img src=\"/jscook/ThemeXP/folderopen1.gif\"></i></span>';
-		echo "\n['$folder', '".$dg->getName()."', '', '', ''";
-		echo ",";
-		docman_recursive_display($dg->getID());
-		foreach ($nested_docs[$dg->getID()] as $d) {
-			echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".addslashes($d->getName())." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".addslashes($d->getDescription())."']";
+	if (is_array($nested_groups[$docgroup])) {
+		foreach ($nested_groups[$docgroup] as $dg) {
+			$folder = '<span class="JSCookTreeFolderClosed"><i><img src=\"/jscook/ThemeXP/folder1.gif\"></i></span><span class="JSCookTreeFolderOpen"><i><img src=\"/jscook/ThemeXP/folderopen1.gif\"></i></span>';
+			echo "\n['$folder', '".$dg->getName()."', '', '', ''";
+			echo ",";
+			docman_recursive_display($dg->getID());
+			if (is_array($nested_docs[$dg->getID()])) {
+				foreach ($nested_docs[$dg->getID()] as $d) {
+					echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".addslashes($d->getName())." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".addslashes($d->getDescription())."']";
+				}
+				echo ",\n],";
+			}
+	
 		}
-		echo ",\n],";
-
 	}
 }
 

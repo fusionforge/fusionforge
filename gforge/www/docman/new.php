@@ -103,6 +103,10 @@ if (getStringFromRequest('submit')) {
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
 			exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	} else {		
+		if ($type == 'editor') {
+			//release the cookie for the document contents (should expire at the end of the session anyway)
+			setcookie ("gforgecurrentdocdata", "", time() - 3600);
+		}
 		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('docman_new','submitted_successfully'));
 		exit;
 	}
@@ -169,23 +173,19 @@ if (getStringFromRequest('submit')) {
 				break;
 			}
 			case 'editor' : {
+				echo '<SCRIPT LANGUAGE="JavaScript">';
+				echo 'function openEditor(group) {
+				newwin=window.open("doceditor.php?group_id=" + group, "dispwin", "width=850,height=550,scrollbars=yes,menubar=no");
+				}';
+				echo '</SCRIPT>';				
 				echo '
 					<tr>
 						<td>';
 				
 				echo "<strong>" . $Language->getText('docman_new','name') . '</strong>'.utils_requiredField().'<input type="text" name="name" ><br>';
-				$params['name'] = 'data';
-				$params['width'] = "800";
-				$params['height'] = "500";
-				$params['group'] = $group_id;
-				echo utils_requiredField();
-				plugin_hook("text_editor",$params);
+				echo '<a href="javascript:openEditor('.$group_id.');">'.$Language->getText('docman_new','edit').'</a>';
+				echo '<input type="hidden" name="data">';
 				echo '<input type="hidden" name="type" value="editor">';
-				if (!$GLOBALS['editor_was_set_up']) {
-					//if we don´t have any plugin for text editor, display a simple textarea edit box
-					echo '<textarea name="data" rows="15" cols="100" wrap="soft"></textarea><br />';
-				}
-				unset($GLOBALS['editor_was_set_up']);
 				echo '</td>
 						</tr>';
 				break;		
