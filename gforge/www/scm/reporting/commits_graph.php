@@ -46,6 +46,12 @@ if ($report->isError()) {
 }
 
 $group_id = getIntFromRequest('group_id');
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g)) {
+	echo 'Permission Denied';
+	exit;
+}
+
 $days = getIntFromRequest('days');
 if (!$days || $days < 1) {
 	$days=30;
@@ -73,7 +79,7 @@ if (!$end) {
 		WHERE u.user_id=scu.user_id 
 		AND scu.month >= '$formattedmonth'
 		AND group_id='$group_id'
-		GROUP BY realname";
+		GROUP BY realname ORDER BY count DESC";
 
 //echo $sql;
 //exit;

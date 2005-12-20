@@ -50,10 +50,12 @@ if (!$g || !is_object($g)) {
 	exit;
 }
 
-$sql="SELECT g.month,sum(commits) AS count
-	FROM stats_cvs_group scg, groups g
-	GROUP BY month";
+$sql="SELECT month,sum(commits) AS count
+	FROM stats_cvs_group
+	WHERE group_id='$group_id'
+	GROUP BY month ORDER BY month ASC";
 $res=db_query($sql);
+echo db_error();
 
 $report->labels=util_result_column_to_array($res,0);
 $report->setData($res,1);
@@ -68,7 +70,7 @@ $graph->SetMargin(50,10,35,50);
 $graph->SetScale( "textlin");
 
 // Create the linear plot
-$lineplot =new LinePlot($ydata);
+$lineplot =new LinePlot($report->getData());
 $lineplot ->SetColor("black");
 $lineplot->SetFillColor("orange");
 
@@ -84,7 +86,7 @@ $graph->subtitle->Set($sys_name);
 $a=$report->getDates();
 $graph->xaxis->SetTickLabels($a); 
 $graph->xaxis->SetLabelAngle(90);
-$graph->xaxis->SetTextLabelInterval($report->getGraphInterval());
+$graph->xaxis->SetTextLabelInterval(3);
 
 // Display the graph
 $graph->Stroke();

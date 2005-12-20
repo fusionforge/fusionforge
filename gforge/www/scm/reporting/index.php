@@ -35,6 +35,10 @@ scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'grou
 
 <h2>Reporting</h2>
 <p>
+<h3>Commits Over Time</h3><br />
+<img src="commitstime_graph.php?group_id=<?php echo $group_id; ?>" />
+</p>
+<p>
 <h3>Commits Last 30 Days</h3><br />
 <img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=30" />
 </p>

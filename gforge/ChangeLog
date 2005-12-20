@@ -1,3 +1,8 @@
+
+2005-11-25 Tim Perdue <tim@gforgegroup.com>
+
+	* added new /scm/reporting/ page and graphs
+
 2005-12-16 Daniel Perez <daniel@gforgegroup.com>
 	* Fixed bug : svn-stats.php reports itself as history_parse.php
 		http://gforge.org/tracker/?func=detail&aid=1593&group_id=6&atid=222

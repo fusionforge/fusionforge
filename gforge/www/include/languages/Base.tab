@@ -2333,6 +2333,7 @@ reporting_us	task_status	Task Status
 reporting_us	title	User Summary Report
 reporting_ut	description	Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>
 reporting_ut	title	User Time Reporting
+scm_index	reporting	Reporting
 scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	browseit	Browse CVS Repository
