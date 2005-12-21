@@ -749,7 +749,7 @@ class Artifact extends Error {
 			$user=user_getid();
 		}
 		$sql="insert into artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) 
-			VALUES ('". $this->getID() ."','$field_name','$old_value','$user','". time() ."')";
+			VALUES ('". $this->getID() ."','$field_name','".addslashes($old_value)."','$user','". time() ."')";
 		return db_query($sql);
 	}
 
@@ -848,6 +848,15 @@ class Artifact extends Error {
 			$canned_response=100;
 			$this->ArtifactType =& $newArtifactType;
 			$update = true;
+
+			//
+			//	This is a major problem - the extra fields
+			//	are completely different IDs, and may not even
+			//	exist in the new tracker. All extra_fields will be deleted and 
+			//	then set to 100 in the new tracker.
+			//
+			$res=db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+			$extra_fields=array();
 		}
 		
 		
