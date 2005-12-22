@@ -1,8 +1,6 @@
 * text=auto !eol
 gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge-plugin-cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
-gforge-plugin-eirc/EIRC-1.0.2.tar.gz -text
-gforge-plugin-ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
@@ -42,6 +40,7 @@ gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
 gforge/www/favicon.ico svneol=native#unset
+gforge/www/gfginstaller.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text

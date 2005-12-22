@@ -170,7 +170,10 @@ if (session_loggedin()) {
 			echo $ah->showMessages(); 
 		?>
 	</td></tr>
-
+	
+<?php
+	if ($group->usesPM()) {
+?>
    <tr><td colspan="2">
       <h3>
       <?php echo $Language->getText('tracker','related_tasks'); ?>:
@@ -206,6 +209,7 @@ if (session_loggedin()) {
          }
       }
       echo $GLOBALS['HTML']->listTableBottom();
+ } // if usesPM
       ?>
       <p />
    </td></tr>

@@ -2,6 +2,13 @@
 # prerm script for gforge
 #
 # see: dh_installdeb(1)
+# Support for new place for pg_hba.conf
+if [ -d /etc/postgresql/7.4/main/ ] 
+then 
+	export pg_hba_dir=/etc/postgresql/7.4/main/
+else
+    	export pg_hba_dir=/etc/postgresql
+fi
 
 set -e
 
@@ -24,7 +31,7 @@ case "$1" in
 
         # Unpatch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh purge-files
-	propose_update_remove /etc/postgresql/pg_hba.conf
+	propose_update_remove ${pg_hba_dir}/pg_hba.conf
 
         # DB config removal
 	/usr/lib/gforge/bin/install-db.sh purge

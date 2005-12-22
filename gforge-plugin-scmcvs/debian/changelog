@@ -1,3 +1,22 @@
+gforge-plugin-scmcvs (4.5.3-4) stable; urgency=low
+
+  * [olivier] Add hooks for dpatch
+  * [olivier] Corrected problem with cvsroot in cvs_update.pl
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Nov 2005 18:26:26 +0100
+
+gforge-plugin-scmcvs (4.5-3) unstable; urgency=low
+
+  * [Christian] New version in the branch 
+
+ -- Christian Bayle <bayle@debian.org>  Tue,  6 Sep 2005 00:58:53 +0200
+
+gforge-plugin-scmcvs (4.5-1) unstable; urgency=low
+
+  * [Roland] Remove .arch-ids directories at build time, too.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  7 Aug 2005 17:29:30 +0200
+
 gforge-plugin-scmcvs (4.1-9) unstable; urgency=low
 
   * [Christian] Version taking in account nss
