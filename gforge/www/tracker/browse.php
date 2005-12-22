@@ -71,7 +71,7 @@ if ($set == 'custom') {
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_extra_fields);
+$af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -304,7 +304,7 @@ if ($art_arr && count($art_arr) > 0) {
 		Show extra rows for <-- Prev / Next -->
 	*/
 	//only show this if we´re not using a power query
-	if ((!getStringFromRequest('power_query')) && (db_numrows($res)<1)) { //$res comes from the top, it has rows if we have saved queries
+	if ($af->max_rows > 0) {
 		if (($offset > 0) || ($rows >= 50)) {
 			echo '
 				<tr><td colspan="2">';
