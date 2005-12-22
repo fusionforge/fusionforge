@@ -40,35 +40,46 @@ function getEditorValue( instanceName )
   
   // Get the editor contents as XHTML.
   return oEditor.GetXHTML( true ) ;  // "true" means you want it formatted.
-} 
-function setCookie(name, value, expires, path, domain, secure) {
-    document.cookie= name + "=" + escape(value) +
-        ((expires) ? "; expires=" + expires.toGMTString() : "") +
-        ((path) ? "; path=" + path : "") +
-        ((domain) ? "; domain=" + domain : "") +
-        ((secure) ? "; secure" : "");
+}
+function setEditorValue( instanceName, text )
+{  
+  // Get the editor instance that we want to interact with.
+  var oEditor = FCKeditorAPI.GetInstance( instanceName ) ;
+  
+  // Set the editor contents.
+  oEditor.SetHTML( text ) ;
 }
 ';
 echo '</script>';
 echo '<form name="theform">';
 $params['name'] = 'data';
-$params['body'] = getStringFromCookie('gforgecurrentdocdata');
 $params['width'] = "800";
 $params['height'] = "500";
 $params['group'] = $group_id;
 plugin_hook("text_editor",$params);
-$fckeditor = true;
+$editor = true;
 if (!$GLOBALS['editor_was_set_up']) {
 	//if we don´t have any plugin for text editor, display a simple textarea edit box
-	$fckeditor = false;
-	echo '<textarea name="data" rows="15" cols="100" wrap="soft">'.getStringFromCookie('gforgecurrentdocdata').'</textarea><br />';
+	$editor = false;
+	echo '<textarea name="data" rows="15" cols="100" wrap="soft"></textarea><br />';
+	echo '<script>	
+			window.document.theform.data.value = window.opener.document.adddata.data.value;
+		</script>';
+} else {
+	// we must make it wait a bit or else the fckeditor object won´t be set yet
+	echo '<script type="text/javascript">
+		setTimeout("setEditorValue(\'data\',window.opener.document.adddata.data.value)",2250);
+	</script>
+	';
 }
+
+
 unset($GLOBALS['editor_was_set_up']);
 
-if ($fckeditor) {
-	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=getEditorValue(\'data\');setCookie(\'gforgecurrentdocdata\', getEditorValue(\'data\'));window.close();"/></div>';
+if ($editor) {
+	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=getEditorValue(\'data\');window.close();"/></div>';
 } else {
-	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=window.document.theform.data.value;setCookie(\'gforgecurrentdocdata\', window.document.theform.data.value);window.close();"/></div>';
+	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=window.document.theform.data.value;window.close();"/></div>';
 }
 echo '</form>';
 
