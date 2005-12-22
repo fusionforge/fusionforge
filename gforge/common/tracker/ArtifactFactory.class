@@ -130,12 +130,18 @@ class ArtifactFactory extends Error {
 				} else {
 					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
 					if ($custom_pref) {
+//$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
 						$pref_arr=explode('|',$custom_pref);
 						$_assigned_to=$pref_arr[0];
 						$_status=$pref_arr[1];
-						$order_col=$pref_arr[3];
-						$sort=$pref_arr[4];
-						$_changed=$pref_arr[5];
+						$order_col=$pref_arr[2];
+						$sort=$pref_arr[3];
+						$_changed=$pref_arr[4];
+						if ($this->ArtifactType->usesCustomStatuses()) {
+							$_extra_fields=unserialize($pref_arr[5]);
+						} else {
+							$_status=$pref_arr[1];
+						}
 						$set='custom';
 					} else {
 						//default to open
@@ -173,7 +179,7 @@ class ArtifactFactory extends Error {
 				/*
 					if this custom set is different than the stored one, reset preference
 				*/
-				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed;
+				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
 				}

@@ -60,15 +60,26 @@ $max_rows = getStringFromRequest('max_rows',$max_rows);
 $set = getStringFromRequest('set',$set);
 $_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
 $_status = getStringFromRequest('_status',$_status);
-if ($func != 'postadd' && $func != 'postmod' && $func != 'massupdate') {
-	$_extra_fields = getArrayFromRequest('extra_fields');
+if ($set == 'custom') {
+	//
+	//may be past in next/prev url
+	//
+	if ($_GET['extra_fields'][$ath->getCustomStatusField()]) {
+		$_extra_fields[$ath->getCustomStatusField()] = $_GET['extra_fields'][$ath->getCustomStatusField()];
+	} else {
+		$_extra_fields[$ath->getCustomStatusField()] = $_POST['extra_fields'][$ath->getCustomStatusField()];
+	}
 }
 
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_extra_fields);
+//
+//	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
+//
 $_sort_col=$af->order_col;
 $_sort_ord=$af->sort;
 $_status=$af->status;
 $_assigned_to=$af->assigned_to;
+$_extra_fields=$af->extra_fields;
 
 $art_arr =& $af->getArtifacts();
 
@@ -155,7 +166,7 @@ $changed_arr[]= 3600 * 24 * 30;// 1 month
 //	statuses can be custom in GForge 4.5+
 //
 if ($ath->usesCustomStatuses()) {
-	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$extra_fields[$ath->getCustomStatusField()],false,'',true,$Language->getText('tracker','status_any'));
+	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$_extra_fields[$ath->getCustomStatusField()],false,'',true,$Language->getText('tracker','status_any'));
 } else {
 	$status_box = $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any'));
 }
@@ -220,7 +231,7 @@ echo $ath->getBrowseInstructions();
 if ($art_arr && count($art_arr) > 0) {
 
 	if ($set=='custom') {
-		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&extra_fields['.$ath->getCustomStatusField().']='.$extra_fields[$ath->getCustomStatusField()].'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
 
 
