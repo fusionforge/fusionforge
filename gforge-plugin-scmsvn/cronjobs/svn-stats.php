@@ -263,7 +263,7 @@ function process_day($day_begin=0, $day_end=0) {
 		$logfile = tempnam("/tmp", "svnlog");
 		debug('Working on group ' . $groups[1]);
 
-		$svnroot_group = "$svnroot" . $groups[1];	
+		$svnroot_group = "$svnroot" . "/" . $groups[1];	
 		if (!is_dir($svnroot_group)) {
 			debug("Skipping repository $svnroot_group : doesn't exist");
 		}
