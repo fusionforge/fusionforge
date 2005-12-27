@@ -1,3 +1,7 @@
+2005-12-27 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug : svn-stats.php bug
+		http://gforge.org/tracker/?func=detail&aid=1763&group_id=1&atid=105
+
 2005-12-16 Daniel Perez <daniel@gforgegroup.com>
 	* Fixed bug : svn-stats.php reports itself as history_parse.php
 		http://gforge.org/tracker/?func=detail&aid=1593&group_id=6&atid=222
