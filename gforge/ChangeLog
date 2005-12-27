@@ -1,3 +1,7 @@
+2005-12-27 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug : svn-stats.php bug
+		http://gforge.org/tracker/?func=detail&aid=1763&group_id=1&atid=105
+
 2005-12-20 Daniel Perez <daniel@gforgegroup.com>
 	* Fixed bug in docman treeview
 	* Added popup window for editor in docman
