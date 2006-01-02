@@ -69,11 +69,11 @@
 		<title>Installation</title>
 		<section>
 			<title>Overview</title>
+			<important>
+				<para>The <filename>INSTALL</filename> file in GForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
+			</important>
 			<note>
 				<para>This installation guide is for GForge 4.5.3.</para>
-			</note>
-			<note>
-				<para>Parts of this installation guide are based on <filename>INSTALL</filename> file.</para>
 			</note>
 			<para>GForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
 			<para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
