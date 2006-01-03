@@ -46,13 +46,13 @@ if (session_loggedin()) {
 			if (!$f->stopMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_monitor','deactivated')));
+				header ("Location: /forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_monitor','deactivated')));
 			}
 		} elseif(getStringFromRequest('start')) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_monitor','activated')));
+				header ("Location: /forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_monitor','activated')));
 			}
 		}
 	} else {

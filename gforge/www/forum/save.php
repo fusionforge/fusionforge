@@ -49,7 +49,7 @@ if (session_loggedin()) {
 		if (!$f->savePlace()) {
 			exit_error($Language->getText('general','error'),$f->getErrorMessage());
 		} else {
-			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode($Language->getText('forum_save','saved')));
+			header ("Location: /forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_save','saved')));
 		}
 	} else {
 		exit_missing_param();

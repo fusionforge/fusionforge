@@ -69,7 +69,8 @@ if ($group_id) {
 				case 1 : $modlvl = $Language->getText('forum_forum','mod1');break;
 				case 2 : $modlvl = $Language->getText('forum_forum','mod2');break;
 			}
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .
+				'&group_id=' . $group_id . '">'.
 				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>

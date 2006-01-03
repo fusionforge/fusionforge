@@ -160,7 +160,8 @@ if ($msg_id) {
 		
 		
 		if ($fm->getID() != $msg->getID()) {
-			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().'">';
+			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().
+				'&group_id='.$group_id.'">';
 			$ah_end='</a>';
 		} else {
 			$ah_begin='';

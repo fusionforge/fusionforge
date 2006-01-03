@@ -67,7 +67,7 @@ function forum_header($params) {
 				echo '
 				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
 				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
-				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a><br/>
+				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
 				<strong>'.$Language->getText('forum_utils','project').':</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
@@ -90,7 +90,7 @@ function forum_header($params) {
 	$menu_links=array();
 	if ($f && $forum_id) {
 		$menu_text[]=$Language->getText('forum_utils','discussionforum') .' '. $f->getName();
-		$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
+		$menu_links[]='/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id;
 	}
 	if ($f && $f->userIsAdmin()) {
 		$menu_text[]=$Language->getText('forum_utils','admin');
@@ -239,7 +239,7 @@ class ForumHTML extends Error {
 					$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					<a href="/forum/message.php?msg_id='.
-					$msg->getID() .'">'.
+					$msg->getID() .'&group_id='.$group_id.'">'.
 					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</a> &nbsp; '.
 					'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
@@ -382,7 +382,7 @@ class ForumHTML extends Error {
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 		*/
-		global $total_rows,$sys_datefmt,$forum_id,$current_message;
+		global $total_rows,$sys_datefmt,$forum_id,$current_message,$group_id;
 
 		$rows=count($msg_arr["$msg_id"]);
 		$ret_val = "";
@@ -407,7 +407,8 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 				*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<a href="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'">';
+					$ah_begin='<a href="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .
+						'&group_id='.$group_id.'">';
 					$ah_end='</a>';
 				} else {
 					$ah_begin='';
@@ -550,7 +551,7 @@ class ForumHTML extends Error {
 			$text_support = new TextSupport(); //for BBCODE
 			?>
 			<div align="center">
-			<form "enctype="multipart/form-data" action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" method="post">
+			<form "enctype="multipart/form-data" action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>&group_id=<?php echo $group_id; ?>" method="post">
 			<?php $objid = $this->Forum->getID(); //$text_support->displayForm('form', 'body',"/forum/forum.php?forum_id=$objid","enctype=\"multipart/form-data\""); ?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
