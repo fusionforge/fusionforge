@@ -101,7 +101,7 @@ function docman_recursive_display($docgroup) {
 	if (is_array($nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			$folder = '<span class="JSCookTreeFolderClosed"><i><img src=\"/jscook/ThemeXP/folder1.gif\"></i></span><span class="JSCookTreeFolderOpen"><i><img src=\"/jscook/ThemeXP/folderopen1.gif\"></i></span>';
-			echo "\n['$folder', '".$dg->getName()."', '', '', '',";
+			echo "\n['$folder', '".$dg->getName()."', '#', '', '',";
 			docman_recursive_display($dg->getID());
 			if (is_array($nested_docs[$dg->getID()])) {
 				foreach ($nested_docs[$dg->getID()] as $d) {
@@ -122,7 +122,7 @@ function docman_recursive_display($docgroup) {
 <script language="JavaScript"><!--
 var myMenu =
 [
-['<span class="JSCookTreeFolderClosed"><i><img src="/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '', '', '',
+['<span class="JSCookTreeFolderClosed"><i><img src="/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
 <?php
 docman_recursive_display(0);
 ?>
