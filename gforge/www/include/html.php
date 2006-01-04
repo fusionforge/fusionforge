@@ -282,7 +282,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
 				<input type="radio" name="'.$select_name.'" value="'.$vals[$i].'"';
-			if ($vals[$i] == $checked_val) {
+			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found=true;
 				$return .= ' checked';
 			}
@@ -356,7 +356,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 				$checked_found=true;
 				$return .= ' selected="selected"';
 			}
-			$return .= '>'.htmlspecialchars($texts[$i]).'</option>';
+			$return .= '>'./*htmlspecialchars(*/$texts[$i]/*)*/.'</option>';
 		}
 	}
 	//
@@ -433,7 +433,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$val.'-'. substr(db_result($result,$i,1),0,35). '</option>';
+			$return .= '>'. substr(db_result($result,$i,1),0,35). '</option>';
 		}
 	}
 	$return .= '
@@ -487,7 +487,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$ids[$i].'-'.$texts[$i].' </option>';
+			$return .= '>'.$texts[$i].' </option>';
 		}
 	}
 	$return .= '

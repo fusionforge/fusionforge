@@ -31,7 +31,7 @@
  *
  */
  
-require ('local.inc');
+//require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
 require ('plugins/cvstracker/config.php');
 require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
@@ -129,12 +129,13 @@ if( $cvs_binary_version == "1.11" ) {
 	
 	$repository      = $argv[1];
 	$parameters = explode(' ', $argv[2]);
+	$path = $parameters[0];
 	
 	for($i = 1; $i < count($parameters); $i++) {
 		$filesInformation = explode(',', trim($parameters[$i], ','));
 
 		$files[] = array(
-			'name' => $filesInformation[0],
+			'name' => $path."/".$filesInformation[0],
 			'previous' => $filesInformation[1],
 			'actual' => $filesInformation[2]
 		);
@@ -166,7 +167,13 @@ if ( $cvs_binary_version == "1.12" ) {
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-$SubmitUrl='http://'.$sys_default_domain.'/plugins/cvstracker/newcommit.php';
+if ($use_ssl) {
+	$http = "https://";
+} else {
+	$http = "http://";
+}
+
+$SubmitUrl = $http . $sys_default_domain . '/plugins/cvstracker/newcommit.php';
 
 $UserArray=posix_getpwuid ( posix_geteuid ( ) );
 $UserName= $UserArray['name'];
@@ -174,27 +181,34 @@ $UserName= $UserArray['name'];
 $Input = file_get_contents ("/dev/stdin" );
 $Log   = getLog($Input);
 
+$tasks_involved= getInvolvedTasks($Log);
+$artifacts_involved= getInvolvedArtifacts($Log);
+if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
+	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
+	//nothing to post
+	die("No artifacts nor tasks in the commit log\n");
+}
+
+$i = 0;
 foreach ( $files as $file )
 {
-	$SubmitVars["UserName"]        = $UserName;
-	$SubmitVars["Repository"]      = $repository;
-	$SubmitVars["FileName"]        = $file['name'];
-	$SubmitVars["PrevVersion"]     = $file['previous'];
-	$SubmitVars["ActualVersion"]   = $file['actual'];
-	$SubmitVars["Log"]             = $Log;
-	$SubmitVars["TaskNumbers"]     = getInvolvedTasks($Log);
-	$SubmitVars["ArtifactNumbers"] = getInvolvedArtifacts($Log);
-	$SubmitVars["CvsDate"]         = time();
-	
+	$SubmitVars[$i]["UserName"]        = $UserName;
+	$SubmitVars[$i]["Repository"]      = $repository;
+	$SubmitVars[$i]["FileName"]        = $file['name'];
+	$SubmitVars[$i]["PrevVersion"]     = $file['previous'];
+	$SubmitVars[$i]["ActualVersion"]   = $file['actual'];
+	$SubmitVars[$i]["Log"]             = $Log;
+	$SubmitVars[$i]["TaskNumbers"]     = getInvolvedTasks($Log);
+	$SubmitVars[$i]["ArtifactNumbers"] = getInvolvedArtifacts($Log);
+	$SubmitVars[$i]["CvsDate"]         = time();
+	$i++;
+}
 	if($cvs_tracker_debug) {
 		echo "Variables submitted to newcommit.php:\n";
-		print_r($SubmitVars);
+		print_r($SubmitVars[$i]);
 	}
-/*	if (isset($SubmitVars['TaskNumbers']) &&
-		isset($SubmitVars['ArtifactNumbers'])) {
-		exit(0);
-	}*/
-	$snoopy->submit($SubmitUrl,$SubmitVars);
+	$vars['data'] = serialize($SubmitVars);
+	$snoopy->submit($SubmitUrl,$vars);
 	print $snoopy->results;
-}
+
 ?>

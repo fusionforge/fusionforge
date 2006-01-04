@@ -69,10 +69,10 @@ echo $HTML->boxBottom();
 echo $HTML->boxTop('Ad');
 echo '<center><h3>GForge Enterprise CDE 4.5</h3>';
 echo '<p>
-<a href="http://gforgegroup.com/">GForge Enterprise CDE 4.5</a> from the GForge Group includes commercial-grade 
+<a href="http://gforgegroup.com/products/">GForge Enterprise CDE 4.5</a> from the GForge Group includes commercial-grade 
 documentation, online-training, updates, and support.<p>
-<a target="_blank" href="http://gforgegroup.com/training/">
-<img src="http://gforge.org/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
+<a target="_blank" href="http://gforgegroup.com/products/">
+<img src="http://gforge.org/gfginstaller.png" border="0" height="164" width="250" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');
 
 ?>
@@ -97,16 +97,6 @@ echo $HTML->boxMiddle('Getting GForge');
 <a href="http://gforge.org/tracker/?atid=105&amp;group_id=1&amp;func=browse"><strong>Bug Tracker</strong></a><br />
 <a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=106"><strong>Patch Submissions</strong></a><br />
 <a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=119"><strong>Feature Requests</strong></a>
-<p />
-<a href="http://www.debian.org/"><strong>Debian "unstable" Users</strong></a>
-can simply "apt-get install gforge" to get a complete gforge system.
-Other debian users, can add some lines to /etc/apt/sources.list found at
-<a href="http://people.debian.org/~bayle/">"http://people.debian.org/~bayle/"</a>
-or
-<a href="http://people.debian.org/~lolando/">"http://people.debian.org/~lolando/"</a>
-and type "apt-get install gforge" to
-install a working GForge-3.0 system, thanks to Christian Bayle, Roland Mas and
-the Debian-SF project.
 <p />
 <?php
 echo $HTML->boxBottom();

@@ -279,10 +279,8 @@ switch ($func) {
 			} else {
 				$deletion = $pt->delete(true);
 				if (!$deletion) {
-					echo $deletion;
 					$feedback .= $Language->getText('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
 				} else {
-					echo $deletion;
 					$feedback .= $Language->getText('pm_deletetask','task_deleted_successfully');
 				}
 			}

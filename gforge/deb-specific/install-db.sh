@@ -26,6 +26,13 @@ else
 fi
 
 export LC_ALL=C
+# Support for new place for pg_hba.conf
+if [ -d /etc/postgresql/7.4/main/ ] 
+then 
+	export pg_hba_dir=/etc/postgresql/7.4/main/
+else
+    	export pg_hba_dir=/etc/postgresql
+fi
 
 case "$target" in
     default)
@@ -53,16 +60,16 @@ case "$target" in
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
             # PostgreSQL configuration for versions prior to 7.3
 	    echo "Configuring for PostgreSQL 7.2"
-	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    # if previous string, else no previous string
-	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*gforge_passwd$/host $db_name $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
+	    if grep -q "^host.*gforge_passwd$" ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
+		perl -pi -e "s/^host.*gforge_passwd$/host $db_name $ip_address 255.255.255.255 password gforge_passwd/" ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    else
 		cur=$(mktemp /tmp/$pattern)
 		echo "### Next line inserted by GForge install" > $cur
 		echo "host $db_name $ip_address 255.255.255.255 password gforge_passwd" >> $cur
-		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
-		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		cat ${pg_hba_dir}/pg_hba.conf.gforge-new >> $cur
+		cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 		rm -f $cur
 	    fi
 	    su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
@@ -74,30 +81,30 @@ EOF
 	else
             # PostgreSQL configuration for versions from 7.3 on
 	    echo "Configuring for PostgreSQL 7.3"
-	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    cur=$(mktemp /tmp/$pattern)
-	    if ! grep -q 'BEGIN GFORGE BLOCK -- DO NOT EDIT' /etc/postgresql/pg_hba.conf.gforge-new ; then
+	    if ! grep -q 'BEGIN GFORGE BLOCK -- DO NOT EDIT' ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
 		# Make sure our configuration is inside a delimited BLOCK
-		if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		    perl -e "open F, \"/etc/postgresql/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host.*gforge_passwd\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
-		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
-		elif grep -q "^### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### Next line inserted by GForge install\nhost $db_name $db_user $ip_address 255.255.255.255 password/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
-		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		if grep -q "^host.*gforge_passwd$" ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
+		    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host.*gforge_passwd\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
+		elif grep -q "^### Next line inserted by GForge install" ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
+		    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### Next line inserted by GForge install\nhost $db_name $db_user $ip_address 255.255.255.255 password/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 		else
-		    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host $db_name $db_user.*password\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
-		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host $db_name $db_user.*password\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 		fi
 	    fi
 	    echo "### BEGIN GFORGE BLOCK -- DO NOT EDIT" > $cur
 	    echo "### END GFORGE BLOCK -- DO NOT EDIT" >> $cur
-	    cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
-	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+	    cat ${pg_hba_dir}/pg_hba.conf.gforge-new >> $cur
+	    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    rm -f $cur
 	    
 	    cur=$(mktemp /tmp/$pattern)
-	    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
-	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    rm -f $cur
 
 	    # Remove old password file, created by 7.2, not used by 7.3
@@ -212,16 +219,20 @@ EOF
 		fi
 	fi
 
+	# Enable plpgsql language
+	# Old fashion < 7.4
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/enable_lang plpgsql $db_name" 1> $tmp1 2> $tmp2 \
+	if [ -f /usr/lib/postgresql/bin/enable_lang ] 
+	then
+	 if su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/enable_lang plpgsql $db_name" 1> $tmp1 2> $tmp2 \
 	    || grep -q "plpgsql added to $db_name" $tmp1 \
 	    || grep -q "plpgsql is already enabled in $db_name" $tmp1 ; then
 	    # Creation OK or user already existing -- no problem here
 	    echo -n ""
 	    rm -f $tmp1 $tmp2
-	else
+	 else
 	    echo "Cannot enable the PLPGSQL language in the database...  This shouldn't have happened."
 	    echo "Maybe a problem in your PostgreSQL configuration?"
 	    echo "Please report a bug to the Debian bug tracking system"
@@ -232,17 +243,33 @@ EOF
 	    cat $tmp2
 	    rm -f $tmp1 $tmp2
 	    exit 1
+	 fi
 	fi
-	
-	# Install/upgrade the database contents (tables and data)
-        pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
-        if [ "$pid" = "" ] ; then
-	#if ! pidof postmaster > /dev/null 2> /dev/null ; then
-	    invoke-rc.d postgresql start
+	# New fashion
+	if [ -f /usr/bin/createlang ]
+	then 
+		if [ `su -s /bin/sh postgres -c "/usr/bin/createlang -l $db_name | grep plpgsql | wc -l"` != 1 ]
+		then
+	 		su -s /bin/sh postgres -c "/usr/bin/createlang plpgsql $db_name"
+		else
+			echo "Procedural language on $db_name already enabled"
+		fi
 	else
-	    kill -HUP $pid
-	    #invoke-rc.d postgresql restart
+	 	echo "No way found to enable plpgsql on $db_name here" 
 	fi
+
+	# Start the database
+	if [ -f /var/lib/postgres/data/postmaster.pid ]
+	then
+         pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
+         if [ "$pid" = "" ] ; then
+	    invoke-rc.d postgresql start
+	 else
+	    kill -HUP $pid
+	 fi
+	fi
+
+	# Install/upgrade the database contents (tables and data)
 	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
 	if [ $p != 0 ] ; then
@@ -258,14 +285,14 @@ EOF
 	
 	;;
     purge-files)
-	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
-        if grep -q "### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new
+	cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
+        if grep -q "### Next line inserted by GForge install" ${pg_hba_dir}/pg_hba.conf.gforge-new
         then
-	    perl -pi -e "s/### Next line inserted by GForge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -pi -e "s/### Next line inserted by GForge install\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    # same problem below with gforge required to be the first host that
 	    # uses password, required for allowing change of db_name.
-	    perl -pi -e "s/^host.*password\n//" /etc/postgresql/pg_hba.conf.gforge-new
-	    perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -pi -e "s/^host.*password\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
+	    perl -pi -e "s/^host.*gforge_passwd\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
         fi
 	;;
     purge)
@@ -310,9 +337,9 @@ EOF
 	echo "### Next line inserted by GForge restore" > $newpg
 	echo "$localtrust" >> $newpg
 	#echo "host all 127.0.0.1 255.255.255.255 trust" >> $newpg
-	cat /etc/postgresql/pg_hba.conf >> $newpg
-	mv $newpg /etc/postgresql/pg_hba.conf
-	chmod 644 /etc/postgresql/pg_hba.conf
+	cat ${pg_hba_dir}/pg_hba.conf >> $newpg
+	mv $newpg ${pg_hba_dir}/pg_hba.conf
+	chmod 644 ${pg_hba_dir}/pg_hba.conf
 	/etc/init.d/postgresql restart
 	if [ "x$2" != "x" ] ;then
 		RESTFILE=$2
@@ -323,9 +350,8 @@ EOF
 	su -s /bin/sh postgres -c "dropdb $db_name" || true
 	su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name"  || true
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
-        perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
-        perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf
-        #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
+        perl -pi -e "s/### Next line inserted by GForge restore\n//" ${pg_hba_dir}/pg_hba.conf
+        perl -pi -e "s/$localtrust\n//" ${pg_hba_dir}/pg_hba.conf
 	/etc/init.d/postgresql reload
 	;;
 esac

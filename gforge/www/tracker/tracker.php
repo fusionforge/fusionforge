@@ -106,7 +106,6 @@ switch ($func) {
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
-				$_summary=addslashes($ah->getSummary());
 
 				//
 				//	get existing extra field data
@@ -202,8 +201,15 @@ switch ($func) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=$Language->getText('tracker','comment_added');
 					} else {
-						//some kind of error in creation
-						exit_error('ERROR',$feedback);
+						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
+							//some kind of error in creation
+							exit_error($ah->getErrorMessage(),$feedback);
+						} else {
+							// we have to unset the error if the user added a file ( add a file and no comment)
+							if ( $add_file ) {
+								$ah->clearError();
+							}
+						}
 					}
 
 				} else {
