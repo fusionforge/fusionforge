@@ -64,10 +64,7 @@ help is available.
 plugins/ directory in the tarball downloaded from gforge.org. Most 
 of the files in scmcvs are intended for auto-installation on debian 
 systems and DO NOT APPLY to the majority of users. The scmcvs plugin 
-is activated by default in the gforge.sql database and all that you 
-have to do is move the scmcvs/etc/plugins/* files to /etc/gforge/plugins/* 
-and possibly modify the files slightly. In addition, the scmcvs/www/* files
-should be placed in gforge/www/plugins/scmcvs/*
+is activated by default in the gforge.sql database.
 
   Cronjobs for CVS are included in cronjobs/crontab.in, but are commented 
 out by default for your security. cronjobs/cvs-cron/* contains the files 
@@ -88,22 +85,16 @@ here: https://gforge.org/frs/download.php/143/IPC-Run-0.78.tar.gz
 mod_auth_gforge are required.
 
   SVN is also managed via plugin - the scmsvn plugin is included and 
-activated by default in gforge. As with scmcvs/ you have to move the 
-scmcvs/etc/plugins/* files to /etc/gforge/plugins/* and may have to
-make minor modifications to those files for your specific setup.
+activated by default in gforge.
 
   To install mod_auth_gforge, download it from 
 http://gforge.org/frs/?group_id=128
 
   The sample etc/gforge-httpd.conf.example file in this tarball contains 
-a COMPLETE AND WORKING vhost for subversion-over-dav. You may have to 
+a COMPLETE AND WORKING vhost for subversion-over-dav. The gforge-install.sh
+script will copy this to /etc/gforge/httpd.conf You may have to 
 alter the passwords and any other config options, but the sample config 
 shown has been used in dozens or even hundreds of installs and DOES WORK.
-
-  As shown in the directions below, the sample config will be placed into 
-/etc/gforge/ and then included in apache's httpd.conf. The scmsvn plugin 
-will also need its etc files moved into /etc/gforge/plugins/scmsvn/ and
-the files may need to be edited to set paths for your setup.
 
   Cronjobs - the /cronjobs/dav-svn/create_svn.php creates blank repositories
 for subversion. You will likely have to edit this file to get the proper
@@ -117,21 +108,30 @@ then the viewcvs.conf should be modified to recognize the svnroots
 
 	root_parents = /svnroot : svn
 
+  The docroot var in viewcvs.conf should also be set to the location that the 
+files will be accessible from the web:
+
+	docroot = /plugins/scmsvn/viewcvs/
+
   The viewcvs.cgi should then be placed in the same location as your 
 cvsweb cgi (usually placed into /etc/gforge/). The /etc/gforge/local.inc 
 has a path to this cgi, set in the sys_path_to_scmweb='' variable. This 
 variable is shared with the cvs plugin as well, so that's why both cvsweb 
 and viewcvs.cgi must be in the same location.
 
-  Finally, the /var/www/gforge/plugins/scmsvn/viewcvs/ directory should 
+  Finally, the /opt/gforge/gforge/www/plugins/scmsvn/viewcvs/ directory should 
 be symlinked to the same location that you installed your viewvc/templates/docroot
+
+	cd /opt/gforge/gforge/www/plugins/scmsvn/
+	ln -s /opt/viewvc/templates/docroot viewcvs
 
 
   Apache Modules
   --------------
 
 #
-# mod_vhost_alias is used by the <projectname>.company.com vhosts
+# mod_vhost_alias is used by the 
+# <projectname>.projects.gforge.company.com vhosts
 # which are commented out by default in the sample apache conf
 # 
 LoadModule vhost_alias_module modules/mod_vhost_alias.so
@@ -144,6 +144,7 @@ LoadModule dav_fs_module modules/mod_dav_fs.so
 LoadModule dav_svn_module modules/mod_dav_svn.so
 LoadModule authz_svn_module modules/mod_authz_svn.so
 LoadModule auth_gforge_module modules/mod_auth_gforge.so
+
 
   CVSTracker Overview
   -------------------
@@ -261,54 +262,30 @@ WEB SETUP - MANUAL INSTALLATION
 
 The following are sample commands commonly issued for a manual installation:
 
-tar -xjf gforge-4.0.2.tar.bz2
-mv gforge-4.0.2 /var/www/
-cd /var/www/
-ln -s gforge-4.0.2 gforge
-mkdir mailman
-mkdir uploads
-mkdir jpgraph
-mkdir scmtarballs
-mkdir scmsnapshots
-mkdir localizationcache
+tar -xjf gforge-4.5.6.tar.bz2
+cd gforge-4.5.6
 
-#project vhost space
-mkdir homedirs
-mkdir /home/groups
-ln -s /home/groups homedirs/groups
+#
+#	BEFORE RUNNING THIS, determine your apacheuser/group 
+#	and pass it as an argument as shown below.
+#
+#	Argument 1: the main hostname you want to use.
+#	Argument 2: the apache user
+#	Argument 3: the apache group
+#	Argument 3: the IP address that you are listening on
+#
+./gforge-install.sh gforge.company.com apacheuser apachegroup 100.100.100.100
 
-#Create default location for SVN repositories
-mkdir /svnroot
-
-#Create default location for CVS repositories
-mkdir /cvsroot
-
-# Optional - Set up some basic files for SVN-over-DAV only
-mkdir svn
-cp gforge/cronjobs/dav-svn/www/* svn/
-
-# Optional - Set up basic index.php file for CVS vhost if desired
-mkdir cvs
-cp gforge/cronjobs/cvs-cron/www/* cvs/
-
-#restricted shell for cvs accounts
-cp gforge/cronjobs/cvs-cron/cvssh.pl /bin/
-chmod 755 /bin/cvssh.pl
-
+#
+#	jpgraph install - use the 1.9.1 version from gforge.org
+#	as mentioned above
+#
 tar -xzf jpgraph-1.9.1.tar.gz
-mv jpgraph-1.9.1/src/* /var/www/jpgraph/
+mv jpgraph-1.9.1/src/* /opt/gforge/jpgraph/
 
-#Create default location for gforge config files
-mkdir /etc/gforge
-cp gforge/etc/local.inc.example /etc/gforge/local.inc
-chown -R apache:apache /etc/gforge/
-chmod 600 /etc/gforge/local.inc
+#you will have to edit jpgraph.php to set USE_CACHE=false
+vim /opt/gforge/jpgraph/jpgraph.php
 
-#copy cvsweb and make sure it's in the local.inc sys_scmweb path
-cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
-
-#copy the scmcvs plugin config to /etc/gforge/
-cp -R gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
 
 #you will likely have to edit the cvsweb.conf file
 vim /etc/gforge/plugins/scmcvs/cvsweb.conf
@@ -317,26 +294,10 @@ to change the cvsroot location:
 
 'gforge'  => ['GForge-CVS',       '/cvsroot/'],
 
-#copy the scmsvn config files to /etc/gforge/
-cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
+Now edit the gforge httpd.conf file to change the hostnames 
+and IP address to match your setup.
 
-#copy the cvstracker config files to /etc/gforge/
-cp -R gforge/plugins/cvstracker/etc/plugins/cvstracker/ /etc/gforge/plugins/
-cp -R gforge/plugins/cvstracker/www/ gforge/www/plugins/cvstracker/
-
-chown -R root:apache /var/www
-chmod -R 644 gforge/
-cd gforge
-find -type d | xargs chmod 755
-chmod -R 755 cronjobs/
-
-
-The following will provide an example httpd.conf for apache:
-
-cd /var/www
-cp gforge/etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
-
-Now edit that file to change the hostnames to match your setup.
+vim /etc/gforge/httpd.conf
 
 Apache will need to have a line added to its httpd.conf:
 
@@ -356,14 +317,14 @@ file also can be modified to include this path as well.
 register_globals = On
 magic_quotes_gpc = On
 file_uploads = On
-include_path = ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
+include_path = ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
 
 
 FRS - File Release System
 -------------------------
 
 FRS has been radically simplified. Simply create a directory and make
-it owned by the webserver-user. Usually "chown -R nobody:nobody mydir"
+it owned by the webserver-user. Usually "chown -R apache:apache mydir"
 will do the trick.
 
 This directory will be referenced in the GForge Config File as $sys_upload_dir
@@ -372,13 +333,8 @@ This directory will be referenced in the GForge Config File as $sys_upload_dir
 GForge Config File
 --------------
 
-In the GForge distribution, you will find etc/local.inc. Move it to
-/etc/gforge/local.inc and edit all of the settings.
-
-Usually, you will want to make it readable only by apache:
-
-[root]# chown -R apache:apache /etc/gforge/
-[root]# chmod 600 /etc/gforge/local.inc
+Edit the /etc/gforge/local.inc and set any specific variables 
+like sys_default_domain and any paths to files that are not right
 
 
 Site Admin
@@ -402,7 +358,8 @@ psql> insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NE
 Mail Aliases
 ------------
 
-/etc/aliases - add this line and run "newaliases"
+This alias was already added by the gforge-install script:
+
 noreply:        /dev/null
 
 
@@ -433,14 +390,6 @@ See /cronjobs/README.root for more info.
 /cronjobs/mail/ contains files useful for the creation of new mailing 
 lists in mailman and creating the /etc/aliases file.
 
-
-[root]# adduser anonymous
-[root]# cp /etc/aliases /etc/aliases.org
-[root]# cp /etc/shadow /etc/shadow.org
-[root]# cp /etc/passwd /etc/passwd.org
-[root]# cp /etc/group /etc/group.org
-[root]# mkdir /cvsroot
-
 **************************************************************************
 WARNING!!! the following command will blow away any existing root crontab.
 **************************************************************************
@@ -467,29 +416,10 @@ to remove the .new extension and uncomment the cronjobs.
 JPGRAPH
 -------
 
-When you get your preferred version of jpgraph installed, you will 
-have to edit one setting in jpgraph.php: DEFINE("USE_CACHE",false);
+The installation was shown above. Be sure to use the 1.9.1 version
+from gforge.org and set USE_CACHE=false as shown here.
 
-
-PERL
-----
-
-If you want to use some of the Perl scripts that access the database,
-you'll need the DBI and DBD::Pg Perl modules.  On Red Hat systems (and
-variants), you can get them by installing the libdbi and libdbd-pgsql
-packages.  On Debian systems (and variants), the packages are called
-libdbi-perl and libdbd-pg-perl.
-
-  You'll also need to install utils/include.pl to
-/usr/lib/gforge/lib/, and put some configuration variables into
-/etc/gforge/local.pl.  In particular, you'll need something like:
-,----[ local.pl ]
-| $sys_default_domain = 'gforge.example.com' ;
-| $sys_dbhost = '192.168.12.34' ;
-| $sys_dbname = 'gforge' ;
-| $sys_dbuser = 'gforge' ;
-| $sys_dbpasswd = 'p455w0rd' ;
-`----
+DEFINE("USE_CACHE",false);
 
 
 MOST COMMON PROBLEMS
