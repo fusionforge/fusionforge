@@ -92,7 +92,7 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #
 #<VirtualHost 192.168.100.100:80>
 #  ServerName projects.gforge.company.com
-#  ServerAlias *.gforge.company.com
+#  ServerAlias *.projects.gforge.company.com
 #  DocumentRoot /home/groups
 #  VirtualDocumentRoot /home/groups/%1/htdocs
 #  VirtualScriptAlias /home/groups/%1/cgi-bin
@@ -125,13 +125,13 @@ DirectoryIndex index.php index.cgi index.html index.htm
   ServerAdmin webmaster@svn.gforge.company.com
   DocumentRoot /opt/gforge/svn
   DAVLockDB    /tmp/svn-DAVLockDB
-  RewriteEngine on
-  #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-  RewriteRule ^/svn$ /index.php [PT]
-  RewriteRule ^/svn/$ /index.php [PT]
-  RewriteRule ^/svn/index.html$ /index.php [PT]
-  RewriteRule ^/index.htm$ /index.php [PT]
-  RewriteRule ^/index.html$ /index.php [PT]
+#  RewriteEngine on
+#  #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
+#  RewriteRule ^/svn$ /index.php [PT]
+#  RewriteRule ^/svn/$ /index.php [PT]
+#  RewriteRule ^/svn/index.html$ /index.php [PT]
+#  RewriteRule ^/index.htm$ /index.php [PT]
+#  RewriteRule ^/index.html$ /index.php [PT]
 #  SSLEngine On 
 #  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
 #  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
