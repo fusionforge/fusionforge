@@ -177,7 +177,7 @@ if (getStringFromRequest('submit')) {
 				echo 'function openEditor(group) {
 				newwin=window.open("doceditor.php?group_id=" + group, "dispwin", "width=850,height=550,scrollbars=yes,menubar=no");
 				}';
-				echo '</SCRIPT>';				
+				echo '</SCRIPT>';
 				echo '
 					<tr>
 						<td>';

@@ -244,6 +244,32 @@ class Document extends Error {
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
 	}
+	
+	/**
+	 *	isText - whether this document is a text document and not a binary one.
+	 *
+	 *	@return	boolean	is_text.
+	 */
+	function isText() {
+		$doctype = $this->data_array['filetype'];
+		if (preg_match('/text/i',$doctype)) { // text plain, text html, text x-pátch, etc
+			return true;
+		}	
+		return false;
+	}
+	
+	/**
+	 *	isHtml - whether this document is a html document.
+	 *
+	 *	@return	boolean	is_html.
+	 */
+	function isHtml() {
+		$doctype = $this->data_array['filetype'];
+		if (preg_match('/html/i',$doctype)) {
+			return true;
+		}	
+		return false;
+	}	
 
 	/**
 	 *	isPublic - whether this document is available to the general public.

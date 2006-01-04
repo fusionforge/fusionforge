@@ -72,14 +72,14 @@ if (getStringFromRequest('submit')) {
 		
 		$sanitizer = new TextSanitizer();
 		$data = $sanitizer->SanitizeHtml($data);
-		if (($editor) && ($d->getFileData()!=$data)) {
+		if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
 			$filename = $d->getFileName();
 			if (!$filetype) {
 				$filetype = $d->getFileType();
 			}
 		} elseif ($uploaded_data['name']) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['tmp_name']));
+				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['name']));
 			}
 			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 			$filename=$uploaded_data['name'];
@@ -205,7 +205,7 @@ if ($editdoc && $docid) {
 
 	<?
 
-	if (!$d->isURL()) {
+	if ((!$d->isURL()) && ($d->isText())) {
 		echo '<tr>
 				<td>
 				';
@@ -216,10 +216,14 @@ if ($editdoc && $docid) {
 		$params['height'] = "500";
 		$params['group'] = $group_id;
 		$params['body'] = $d->getFileData();
-		plugin_hook("text_editor",$params);
+		if ($d->isHtml()){
+			// we are displaying with textarea if the document is not html (fckeditor pre-parses the files as html and validates it/changes it)
+			plugin_hook("text_editor",$params);
+		}
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don´t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $d->getFileData()  .'</textarea><br />';
+			echo '<input type="hidden" name="filetype" value="text/plain">';
 		} else {
 			echo '<input type="hidden" name="filetype" value="text/html">'; // the fckeditor creates html docs. this is for filetype
 		}

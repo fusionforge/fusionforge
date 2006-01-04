@@ -1,3 +1,8 @@
+2005-12-27 Daniel Perez <daniel@gforgegroup.com>
+	* Docman : when editing files, the editor only shows up for TEXT files
+			For html text files, the plugin editor shows up (fckeditor at this time)
+			For other text files it´s a textarea to preserver the text format
+
 2006-01-03  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* www/docman/index.php: '#' as JSCookTree folder href instead of ''.
