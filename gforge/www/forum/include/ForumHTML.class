@@ -608,6 +608,10 @@ class ForumHTML extends Error {
 			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).' ">','</a>'));
 			echo '</font></h3>';
 			echo "</div>";
+		} elseif (!session_loggedin()) {
+			echo '
+			<div align="center">
+			<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<ahref="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span></h3><br/></p></div>';
 		} else {
 			//do nothing
 		}

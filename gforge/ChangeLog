@@ -1,3 +1,8 @@
+2006-01-06 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : When Anonymous posting is turned off, tell people to log in.
+		http://gforge.org/tracker/?func=detail&aid=1761&group_id=1&atid=106
+
+
 2006-01-04 Daniel Perez <daniel@gforgegroup.com>
 	* Docman : when editing files, the editor only shows up for TEXT files
 			For html text files, the plugin editor shows up (fckeditor at this time)
