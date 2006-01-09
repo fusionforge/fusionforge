@@ -448,7 +448,7 @@ AcceptPathInfo on
 					<para>Set up PHP module:</para>
 <programlisting>
 php_flag   register_globals On
-php_flag   gpc_magic_quotes On
+php_flag   magic_quotes_gpc On
 php_flag   files_uploads    On
 php_value  include_path     ".:/etc/gforge:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include"
 php_value  default_charset  "UTF-8"
