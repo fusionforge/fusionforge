@@ -55,6 +55,15 @@ if [ -d /opt/gforge ]; then
 	echo 1>&2 "/opt/gforge already exists - clean up before starting install"
 	exit 2
 fi
+if [ ! -d /opt/viewvc ]; then
+	echo 1>&2 "/opt/viewvc didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
+	exit 2
+fi
+if [ ! -f /opt/viewvc/bin/cgi/viewcvs.cgi ]; then
+	echo 1>&2 "/opt/viewvc/bin/cgi/viewcvs.cgi didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
+	exit 2
+fi
+
 
 mkdir /opt/gforge/
 if [ ! -d /opt/gforge ]; then
@@ -70,6 +79,7 @@ mkdir jpgraph
 mkdir scmtarballs
 mkdir scmsnapshots
 mkdir localizationcache
+ln -s /usr/bin/php /usr/bin/php4
 
 #project vhost space
 mkdir homedirs
@@ -102,6 +112,9 @@ cp gforge/etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
 #copy cvsweb and make sure it's in the local.inc sys_scmweb path
 cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
 
+#copy viewvc and make sure it's in the local.inc sys_scmweb path
+cp /opt/viewvc/bin/cgi/viewcvs.cgi /etc/gforge/
+
 #copy the scmcvs plugin config to /etc/gforge/
 cp -R gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
 
@@ -119,6 +132,8 @@ cd plugins
 ln -s ../../plugins/cvstracker/www/ cvstracker
 ln -s ../../plugins/scmcvs/www scmcvs
 ln -s ../../plugins/scmsvn/www/ scmsvn
+cd scmsvn
+ln -s /opt/viewvc/templates/docroot/ viewcvs
 
 cd /opt/gforge
 

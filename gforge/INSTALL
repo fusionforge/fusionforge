@@ -117,10 +117,12 @@ files will be accessible from the web:
 cvsweb cgi (usually placed into /etc/gforge/). The /etc/gforge/local.inc 
 has a path to this cgi, set in the sys_path_to_scmweb='' variable. This 
 variable is shared with the cvs plugin as well, so that's why both cvsweb 
-and viewcvs.cgi must be in the same location.
+and viewcvs.cgi must be in the same location. gforge-install.sh takes care 
+of this step if you have viewvc installed in /opt/viewvc
 
   Finally, the /opt/gforge/gforge/www/plugins/scmsvn/viewcvs/ directory should 
 be symlinked to the same location that you installed your viewvc/templates/docroot
+gforge-install.sh takes care of this step if you have viewvc installed in /opt/viewvc
 
 	cd /opt/gforge/gforge/www/plugins/scmsvn/
 	ln -s /opt/viewvc/templates/docroot viewcvs
@@ -174,7 +176,8 @@ file to be properly configured with your include_path OR edit the
 crontab.in file to set your include path.
 
   In addition, you may have to symlink /usr/bin/php to /usr/bin/php4, 
-which is where the cronjobs expect your PHP CGI to be located.
+which is where the cronjobs expect your PHP CGI to be located. 
+install-gforge.sh takes care of this step for you.
 
 
   Mailman
@@ -230,9 +233,13 @@ import.log file. For postgresql 7.3 users, you will have to
 use the db/gforge-pgsql7.3.sql file, since the postgres team 
 has broken compatibility between releases yet again.
 
-Now, find your pg_hba.conf file and edit it to include this line:
+Now, find your pg_hba.conf file and edit it to include these lines:
 
-local    all         all                                             md5
+#local    all         all                                             md5
+local    all         all                                             trust
+
+The "trust" setting is much less secure, but will be easier to 
+set up for a novice.
 
 You will have to restart postgresql after changing this line so it can 
 pick up your configuration change. Usually you can restart by 
