@@ -143,7 +143,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			//if we don´t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
-		unset($GLOBALS['editor_was_set_up']);		
+		unset($GLOBALS['editor_was_set_up']);
 		
 		echo '<p>
 		<strong>'.$Language->getText('news_admin', 'removal_when_edit', array($GLOBALS['sys_name'])).'</strong><br /></p>
@@ -228,9 +228,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			/*
 				Move msg to rejected status
 			*/
+			$news_id = getArrayFromRequest('news_id');
 			$sql="UPDATE news_bytes "
 			     ."SET is_approved='2' "
-			     ."WHERE id IN ('".implode($news_id,"','")."')";
+			     ."WHERE id IN ('".implode("','",$news_id)."')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= $Language->getText('general', 'error_on_update');
