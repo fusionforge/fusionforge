@@ -284,13 +284,7 @@ if ($group_id) {
 					$is_followup_to = getStringFromRequest('is_followup_to');
 					$has_followups = getStringFromRequest('has_followups');
 					$most_recent_date = getStringFromRequest('most_recent_date');
-					$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
-					$smilie_on=$sys_bbcode_smilie_on; 
-					$bbcode_on=$sys_bbcode_bbcode_on; 
-					$strip_html=$sys_bbcode_strip_html;
-					$text_support = new TextSupport();
-					//$bbcode_uid = $text_support->prepareText($body,$make_clickable,$strip_html,$smilie_on,$bbcode_on);
-					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid)) {
+					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
 						$feedback .= $Language->getText('forum_admin_edit_message','message_edited');
 					} else {
 						$feedback .= $fm->getErrorMessage();

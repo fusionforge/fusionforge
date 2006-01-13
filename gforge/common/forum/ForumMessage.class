@@ -109,14 +109,13 @@ class ForumMessage extends Error {
 	*	insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
 	 *	@param	string	The subject of the message.
 	 *	@param	string	The body of the message.
-	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
 	 *	@return	boolean success.
 	*/
 	
-	function insertmoderated($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id) {
+	function insertmoderated($subject, $body, $thread_id='', $is_followup_to='',$user_id) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
@@ -128,9 +127,9 @@ class ForumMessage extends Error {
 		}
 		
 		$sql="INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
-		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+		body,post_date,is_followup_to,thread_id,most_recent_date) 
 		VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-		'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+		'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -166,7 +165,6 @@ class ForumMessage extends Error {
 	 *	@param	string	The subject of the message.
 	 *	@param	string	The body of the message.
 	 *	@param	string	The post date
-	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
@@ -175,7 +173,7 @@ class ForumMessage extends Error {
 	 *	@return	boolean success.
 	*/
 	
-	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date,$bbcode_uid, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
+	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
 		global $Language;
 		
 		if ($is_followup_to != 0) {
@@ -210,9 +208,9 @@ class ForumMessage extends Error {
 			
 		db_begin();
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-		body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+		body,post_date,is_followup_to,thread_id,most_recent_date) 
 		VALUES ('". $group_forum_id ."', '$posted_by', '". htmlspecialchars($subject) ."', 
-		'". $body ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."','" . $bbcode_uid . "')";
+		'". $body ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -248,7 +246,6 @@ class ForumMessage extends Error {
 	*	insertmsg - inserts the message into the main table (forum)
 	 *	@param	string	The subject of the message.
 	 *	@param	string	The body of the message.
-	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
@@ -256,7 +253,7 @@ class ForumMessage extends Error {
 	 *	@return	boolean success.
 	*/
 	
-	function insertmsg($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
+	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
 		global $Language;
 		
 		if (!$thread_id) {
@@ -292,9 +289,9 @@ class ForumMessage extends Error {
 		}
 		
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-			body,post_date,is_followup_to,thread_id,most_recent_date,bbcode_uid) 
+			body,post_date,is_followup_to,thread_id,most_recent_date) 
 			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-			'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."','" . $bbcode_uid . "')";
+			'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
@@ -331,13 +328,12 @@ class ForumMessage extends Error {
 	 *
 	 *	@param	string	The subject of the message.
 	 *	@param	string	The body of the message.
-	 *	@param 	string	BBCODE ID.
 	 *	@param	int	The thread_id of the message, if known.
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
 	 *	@return	boolean success.
 	 */
-	function create($subject, $body, $bbcode_uid=-1, $thread_id='', $is_followup_to='',$has_attach=false) {
+	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false) {
 		global $Language;
 		if (!$body || !$subject) {
 			$this->setError($Language->getText('forum_common_forummessage','error_required_fields'));
@@ -392,22 +388,22 @@ class ForumMessage extends Error {
 		switch ($mod_level) {
 			case 0: {
 				//no moderation
-				return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
+				return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
 			}
 			case 1: {
 				//moderation for anonymous & non project users
 				if ($this->Forum->userIsModLvl1()) {
-					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+					return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
 				} else {
-					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
+					return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
 				}
 			}
 			case 2: {
 				//moderation for anyone who can post (even project members). admins can always post...
 				if ($this->Forum->userIsModLvl2()) {
-					return $this->insertmoderated($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id);
+					return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
 				} else {
-					return $this->insertmsg($subject, $body,$bbcode_uid, $thread_id, $is_followup_to,$user_id,$has_attach);
+					return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
 				}
 			}
 		}
@@ -453,15 +449,6 @@ class ForumMessage extends Error {
 		return true;
 	}
 
-	/**
-	 *	getBBCode_uid - get the BBCODE UID this ForumMessage is associated with.
-	 *
-	 *	@return	object	The bbcode uid.
-	 */
-	function &getBBCode_uid() {
-		return $this->data_array['bbcode_uid'];
-	}
-	
 	/**
 	 *	getForum - get the Forum object this ForumMessage is associated with.
 	 *
@@ -691,15 +678,10 @@ class ForumMessage extends Error {
 			$body .= "\n";
 		}
 		$sanitizer = new TextSanitizer();
-		//$text= strip_tags($this->removebbcode(util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())))); #NOTE: UTF-8 does not work!
 		$text = $this->getBody();
-		//echo "texto 1 : " . $text . "<br>";
 		$text = $sanitizer->convertNeededTagsForEmail($text);
-		//echo "texto 2 : " . $text . "<br>";
 		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
-		//echo "texto 3 : " . $text . "<br>";
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
-		//echo "texto 4 : " . $text . "<br>";
 		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
@@ -755,13 +737,10 @@ class ForumMessage extends Error {
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
 		$text = $this->getBody();
-		//echo "texto 1 : " . $text . "<br>";
+		$sanitizer = new TextSanitizer();	
 		$text = $sanitizer->convertNeededTagsForEmail($text);
-		//echo "texto 2 : " . $text . "<br>";
 		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
-		//echo "texto 3 : " . $text . "<br>";
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
-		//echo "texto 4 : " . $text . "<br>";
 		$body .= $text .
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
@@ -800,18 +779,17 @@ class ForumMessage extends Error {
 	 *	@param	int		The thread_id of the message, if known.
 	 *	@param	int		has followups?
 	 *	@param	string	The most recent date.
-	 *	@param 	string	BBCODE ID. 
 	 *
 	 *	@return boolean success.
 	 */
-	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date,$bbcode_uid) {
+	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date) {
 		$subject = htmlspecialchars($subject);
 		$body = $body;
 		$msg_id = $this->getID();
 		$sql="UPDATE forum 
 			SET group_forum_id='$group_forum_id' , posted_by='$posted_by' , subject='$subject',
 			body='$body', post_date='$post_date' , is_followup_to='$is_followup_to' ,
-			thread_id='$thread_id',most_recent_date='$most_recent_date' , bbcode_uid='$bbcode_uid'
+			thread_id='$thread_id',most_recent_date='$most_recent_date'
 			WHERE msg_id='$msg_id'";
 		$res = db_query($sql);
 		if (!$res) {

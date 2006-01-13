@@ -111,17 +111,11 @@ if ($msg_id) {
 	
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
 	
-	$make_clickable=$sys_bbcode_make_clickable; //bbcode variables
-	$smilie_on=$sys_bbcode_smilie_on; 
-	$bbcode_on=$sys_bbcode_bbcode_on; 
-	$strip_html=$sys_bbcode_strip_html;
-	$text_support = new TextSupport();
 	if (!strstr('<',$fm->getBody())) { 
 		echo nl2br($fm->getBody()); //backwards compatibility for non html messages
 	} else {
 		echo $fm->getBody();
 	}
-	//echo $fm->getBody();//$text_support->displayText($fm->getBody(), $make_clickable, $smilie_on, $bbcode_on, $fm->getBBCode_uid());
 	echo "</td></tr>";
 
 	echo $GLOBALS['HTML']->listTableBottom();
