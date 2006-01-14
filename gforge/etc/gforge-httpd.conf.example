@@ -21,9 +21,9 @@ NameVirtualHost 192.168.100.100:80
 #<VirtualHost 192.168.100.100:443>
 ServerName gforge.company.com
 ServerAdmin webmaster@gforge.company.com
-DocumentRoot /opt/gforge/gforge/www
+DocumentRoot /usr/lib/gforge/www
 ErrorDocument 404 /404.php
-php_value include_path ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
+php_value include_path ".:/usr/lib/gforge/:/usr/lib/gforge/www/include/:/etc/gforge/"
 php_value register_globals On
 php_value magic_quotes_gpc On
 php_value default_charset "UTF-8"
@@ -115,7 +115,7 @@ DirectoryIndex index.php
 #  DocumentRoot /home/groups
 #  VirtualDocumentRoot /home/groups/%1/htdocs
 #  VirtualScriptAlias /home/groups/%1/cgi-bin
-#  <Directory /opt/gforge/homedirs/groups>
+#  <Directory /var/lib/gforge/homedirs/groups>
 #    Options Indexes
 #
 #	WARNING - turning on php will allow any user
@@ -142,7 +142,7 @@ DirectoryIndex index.php
 #<VirtualHost 192.168.100.100:443>
 #  ServerName edit.gforge.company.com
 #  ServerAdmin webmaster@edit.gforge.company.com
-#  DocumentRoot /opt/gforge/homedirs
+#  DocumentRoot /usr/lib/homedirs
 #  DAVLockDB    /tmp/projvhost-DAVLockDB
 #  # Needed for windows web folders
 #  DavDepthInfinity on
@@ -150,7 +150,7 @@ DirectoryIndex index.php
 #  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
 #  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
 #  <Location />
-#    GforgeSysPath	/opt/gforge/homedirs
+#    GforgeSysPath	/var/lib/gforge/homedirs
 #    GforgeGroupsRoot	/groups
 #    GforgeUsersRoot	/users
 #    DAV On

@@ -120,11 +120,11 @@ variable is shared with the cvs plugin as well, so that's why both cvsweb
 and viewcvs.cgi must be in the same location. gforge-install.sh takes care 
 of this step if you have viewvc installed in /opt/viewvc
 
-  Finally, the /opt/gforge/gforge/www/plugins/scmsvn/viewcvs/ directory should 
+  Finally, the /usr/lib/gforge/www/plugins/scmsvn/viewcvs/ directory should 
 be symlinked to the same location that you installed your viewvc/templates/docroot
 gforge-install.sh takes care of this step if you have viewvc installed in /opt/viewvc
 
-	cd /opt/gforge/gforge/www/plugins/scmsvn/
+	cd /usr/lib/gforge/www/plugins/scmsvn/
 	ln -s /opt/viewvc/templates/docroot viewcvs
 
 
@@ -288,10 +288,10 @@ cd gforge-4.5.6
 #	as mentioned above
 #
 tar -xzf jpgraph-1.9.1.tar.gz
-mv jpgraph-1.9.1/src/* /opt/gforge/jpgraph/
+mv jpgraph-1.9.1/src/* /usr/lib/jpgraph/
 
 #you will have to edit jpgraph.php to set USE_CACHE=false
-vim /opt/gforge/jpgraph/jpgraph.php
+vim /usr/lib/jpgraph/jpgraph.php
 
 
 #you will likely have to edit the cvsweb.conf file
@@ -324,7 +324,7 @@ file also can be modified to include this path as well.
 register_globals = On
 magic_quotes_gpc = On
 file_uploads = On
-include_path = ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
+include_path = ".:/usr/lib/gforge/:/usr/lib/gforge/www/include/:/etc/gforge/"
 
 
 FRS - File Release System
