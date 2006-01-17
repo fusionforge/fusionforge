@@ -75,7 +75,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			if (!$details) {
 				$details='(none)';
 			}
-
+			
 			$sanitizer = new TextSanitizer();
 			$details = $sanitizer->SanitizeHtml($details);
 			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', ".
@@ -280,7 +280,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";
-		$params['group'] = $group_id;
+		$params['group'] = db_result($result,0,'group_id');
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
@@ -333,7 +333,6 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			AND post_date > '$old_date'
 			ORDER BY post_date
 		";
-
 		show_news_approve_form(
 			$sql_pending,
 			$sql_rejected,

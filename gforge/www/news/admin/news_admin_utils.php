@@ -45,7 +45,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		echo date($sys_shortdatefmt, db_result($result,$i,'post_date')).'</td>
        		<td width="45%">';
        		echo '
-       		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.db_result($result,$i,'id').'&amp;group_id='.db_result($result,$i,'group_id').'">'.db_result($result,$i,'summary').'</a>
+       		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
        		</td>
 
        		<td width="35%">
