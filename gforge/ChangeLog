@@ -1,3 +1,6 @@
+2006-01-20 Daniel Perez <daniel@gforgegroup.com>
+	* Added fckeditor support (html news documents) to display in front page
+
 2006-01-13 Daniel Perez <daniel@gforgegroup.com>
 	* Forums : removed all references to bbcode (not used anymore, replaced by fckeditor)
 		update to be made : 

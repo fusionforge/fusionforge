@@ -110,7 +110,12 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		for ($i=0; $i<$rows; $i++) {
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
-				$arr=explode("\n",db_result($result,$i,'details'));
+				if (strstr(db_result($result,$i,'details'),'<br/>')) {
+					// the news is html, fckeditor made for example
+					$arr=explode("<br/>",db_result($result,$i,'details'));
+				} else {
+					$arr=explode("\n",db_result($result,$i,'details'));
+				}
 				//if the first paragraph is short, and so are following paragraphs, add the next paragraph on
 				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
 					$summ_txt='<br />'. util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
