@@ -1,9 +1,9 @@
 gforge (4.5.6-1) unstable; urgency=low
 
-  * Add support for most recent database postgresql 8.0 8.1 at the time
-  writing this (not working yet).
+  * [Christian] Add support for most recent database postgresql 8.0 8.1 at the time
+  writing this.
 
- -- Christian Bayle <bayle@debian.org>  Sun, 29 Jan 2006 20:09:13 +0100
+ -- Christian Bayle <bayle@debian.org>  Mon, 30 Jan 2006 00:51:15 +0100
 
 gforge (4.5.3-4) stable; urgency=low
 
