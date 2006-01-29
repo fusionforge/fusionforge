@@ -321,7 +321,7 @@ class ArtifactFactory extends Error {
 			ORDER BY Artifacts.group_artifact_id ".$this->sort.", Artifacts.". $this->order_col ." ".$this->sort;
 //echo "$sql";
 
-		$result=db_query($sql,($this->max_rows),$this->offset);
+		$result=db_query($sql);//,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
