@@ -270,8 +270,15 @@ if ($art_arr && count($art_arr) > 0) {
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$then=(time()-$ath->getDuePeriod());
-	$rows=count($art_arr);
-	for ($i=0; $i < $rows; $i++) {
+
+	if (!isset($_GET['start'])) {
+		$start=0;
+	} else {
+		$start=$_GET['start'];
+	}
+	$max = ((count($art_arr) > ($start + 25)) ? ($start+25) : count($art_arr) );
+//echo "max: $max";
+	for ($i=$start; $i<$max; $i++) {
 		echo '
 		<tr bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'.
 		'<td NOWRAP>'.
@@ -302,7 +309,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 	/*
 		Show extra rows for <-- Prev / Next -->
-	*/
+	* /
 	//only show this if we´re not using a power query
 	if ($af->max_rows > 0) {
 		if (($offset > 0) || ($rows >= 50)) {
@@ -324,7 +331,31 @@ if ($art_arr && count($art_arr) > 0) {
 			echo '</td></tr>';
 		}
 	}
+	*/
 	echo $GLOBALS['HTML']->listTableBottom();
+	$pages = count($art_arr) / 25;
+	$currentpage = intval($start / 25);
+//echo "Item Count: ".count($arr)."Pages: $pages";
+	$skipped_pages=false;
+	for ($j=0; $j<$pages; $j++) {
+		if ($pages > 20) {
+			if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
+				if (!$skipped_pages) {
+					$skipped_pages=true;
+					echo "....&nbsp;";
+				}
+				continue;
+			} else {
+				$skipped_pages=false;
+			}
+		}
+		if ($j == $currentpage) {
+			echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
+		} else {
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+		}
+	}
+
 	/*
 		Mass Update Code
 	*/

@@ -316,12 +316,13 @@ class ArtifactFactory extends Error {
 		$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
-			$opendatesql $moddatesql $closedatesql 
+			$opendatesql $moddatesql $closedatesql $submitted_by_str
 			 $status_str $assigned_str $last_changed_str $ef_where_str ) AS Artifacts
 			ORDER BY Artifacts.group_artifact_id ".$this->sort.", Artifacts.". $this->order_col ." ".$this->sort;
 //echo "$sql";
+//exit;
 
-		$result=db_query($sql,($this->max_rows),$this->offset);
+		$result=db_query($sql);//,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
