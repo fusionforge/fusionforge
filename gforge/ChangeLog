@@ -1,3 +1,8 @@
+2006-01-29 Tim Perdue	<tim@gforgegroup.com>
+	* added google-style page counts at the bottom of the tracker browse page
+	so you can easily jump to specific pages
+	* Added multiple-file upload capability.
+
 2006-01-06 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : When Anonymous posting is turned off, tell people to log in.
 		http://gforge.org/tracker/?func=detail&aid=1761&group_id=1&atid=106
