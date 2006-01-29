@@ -1,3 +1,8 @@
+2006-01-29 Tim Perdue   <tim@gforgegroup.com>
+	* added google-style page counts at the bottom of the tracker browse page
+	so you can easily jump to specific pages
+	* Added multiple-file upload capability.
+
 2006-01-20 Daniel Perez <daniel@gforgegroup.com>
 	* Added fckeditor support (html news documents) to display in front page
 

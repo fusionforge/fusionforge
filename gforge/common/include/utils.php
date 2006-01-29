@@ -41,16 +41,12 @@ function util_remove_CRLF($str) {
  *
  * @param	   array  The uploaded file as returned by getUploadedFile()
  */
-function util_check_fileupload($file) {
+function util_check_fileupload($filename) {
 
 	/* Empty file is a valid file.
 	This is because this function should be called
 	unconditionally at the top of submit action processing
 	and many forms have optional file upload. */
-	if (!$file) {
-		return true;
-	}
-	$filename = $file['tmp_name'];
 	if ($filename == 'none' || $filename == '') {
 		return true;
 	}

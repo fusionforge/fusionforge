@@ -104,13 +104,14 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" />
 		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
 		<p>
-		<input type="file" name="input_file" size="30" /></p>
-		<p>
-		<strong><?php echo $Language->getText('tracker','file_description') ?>:</strong><br />
-		<input type="text" name="file_description" size="40" maxlength="255" /></p>
+		<strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
 		</td>
 	<tr>
 

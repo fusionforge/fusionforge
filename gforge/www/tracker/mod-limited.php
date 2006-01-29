@@ -125,13 +125,13 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" />
-		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
+		<?php echo $Language->getText('tracker','file_upload') ?><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
 		<p>
-		<input type="file" name="input_file" size="30" /></p>
-		<p>
-		<strong><?php echo $Language->getText('tracker','file_description') ?>:</strong><br />
-		<input type="text" name="file_description" size="40" maxlength="255" /></p>
 		<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
 		<?php
 		//

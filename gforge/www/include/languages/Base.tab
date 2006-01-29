@@ -2914,6 +2914,7 @@ tracker	file_delete	File Delete:
 tracker	file_delete_successful	File Delete: Successful
 tracker	file_delete_upload	File Upload
 tracker	file_description	File description
+tracker	file_upload	Attach Files
 tracker	file_upload_successful	File Upload: Successful
 tracker	followups	Followup
 tracker	group	Group

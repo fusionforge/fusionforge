@@ -78,22 +78,31 @@ switch (getStringFromRequest('func')) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				//
-				//	Attach file to this Artifact.
+				//	  Attach files to this Artifact.
 				//
-				if (getStringFromRequest('add_file')) {
-					$input_file = getUploadedFile('input_file');
-					$file_description = getStringFromRequest('file_description');
+				for ($i=0; $i<5; $i++) {
+					$error=$_FILES['input_file']['error'][$i];
+					if (isset($error) && $error > 0) {
+						continue;
+					}
+					$file_name=$_FILES['input_file']['name'][$i];
+					$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+					if (!is_uploaded_file($tmp_name)) {
+						continue;
+					}
+					$size=$_FILES['input_file']['size'][$i];
+					$type=$_FILES['input_file']['type'][$i];
 
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
 						$feedback .= 'Could Not Create File Object';
-//					} elseif ($afh->isError()) {
-//						$feedback .= $afh->getErrorMessage();
+  //				} elseif ($afh->isError()) {
+  //					$feedback .= $afh->getErrorMessage();
 					} else {
-						if (!util_check_fileupload($input_file)) {
+						if (!util_check_fileupload($tmp_name)) {
 							exit_error("Error","Invalid filename");
 						}
-						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
+						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 							$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
 						}
 					}
@@ -278,22 +287,31 @@ switch (getStringFromRequest('func')) {
 			}
 
 			//
-			//  Attach file to this Artifact.
+			//	  Attach files to this Artifact.
 			//
-			if (getStringFromRequest('add_file')) {
-				$input_file = getUploadedFile('input_file');
-				$file_description = getStringFromRequest('file_description');
+			for ($i=0; $i<5; $i++) {
+				$error=$_FILES['input_file']['error'][$i];
+				if (isset($error) && $error > 0) {
+					continue;
+				}
+				$file_name=$_FILES['input_file']['name'][$i];
+				$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+				if (!is_uploaded_file($tmp_name)) {
+					continue;
+				}
+				$size=$_FILES['input_file']['size'][$i];
+				$type=$_FILES['input_file']['type'][$i];
 
 				$afh=new ArtifactFileHtml($ah);
 				if (!$afh || !is_object($afh)) {
 					$feedback .= 'Could Not Create File Object';
-//				} elseif ($afh->isError()) {
-//					$feedback .= $afh->getErrorMessage();
+  //			} elseif ($afh->isError()) {
+  //				$feedback .= $afh->getErrorMessage();
 				} else {
-					if (!util_check_fileupload($input_file)) {
+					if (!util_check_fileupload($tmp_name)) {
 						exit_error("Error","Invalid filename");
 					}
-					if (!$afh->upload($input_file,$file_description)) {
+					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {

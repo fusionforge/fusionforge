@@ -103,11 +103,13 @@ echo notepad_func();
 
 	<tr><td colspan=2>
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
-		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" /><br />
-		<input type="file" name="input_file" size="30" /></p>
+		<?php echo $Language->getText('tracker','file_upload') ?>
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file[]" size="30" /><br />
 		<p>
-		<strong><?php echo $Language->getText('tracker','file_description') ?>:</strong><br />
-		<input type="text" name="file_description" size="40" maxlength="255" /></p>
 	<?php } ?>
 	<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
 	<?php
@@ -120,7 +122,6 @@ echo notepad_func();
 
 	$title_arr=array();
 	$title_arr[]=$Language->getText('tracker_detail','name');
-	$title_arr[]=$Language->getText('tracker_detail','description');
 	$title_arr[]=$Language->getText('tracker_detail','download');
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -129,7 +130,6 @@ echo notepad_func();
 		for ($i=0; $i<$count; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-			<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
 			<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">'.$Language->getText('tracker_detail','download').'</a></td>
 			</tr>';
 		}
