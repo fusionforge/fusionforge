@@ -360,7 +360,7 @@ EOF
     tmpldifadd=$(mktemp $tmpfile_pattern)
     tmpldifmod=$(mktemp $tmpfile_pattern)
     dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-    /usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
+    su -s /bin/sh gforge -c /usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
     # echo "Filling LDAP with database"
     if ! eval "ldapadd -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
         # Some entries could not be added (already there)
