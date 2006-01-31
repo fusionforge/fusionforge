@@ -2883,6 +2883,14 @@ top_topusers	rating	Rating
 top_topusers	real_name	Real Name
 top_topusers	title	Highest Ranked Users
 top_topusers	user_name	User Name
+trackertab	details	Details
+trackertab	followups	Followups
+trackertab	attachments	Attachments
+trackertab	commits	Commits
+trackertab	changes	Changes
+trackertab	relatedtasks	Related Tasks
+tracker	related_tasks	Related Tasks
+tracker	no_related_tasks	No Related Tasks
 tracker	admin	Admin
 tracker	any	Any
 tracker	assigned_to	Assigned To
@@ -3106,7 +3114,8 @@ tracker_artifact	are_you_sure_delete	Are you sure you want to delete this artifa
 tracker_artifact	confirm_delete	Yes, I want to delete this artifact
 tracker_artifact	delete_failed	Artifact Delete Failed
 tracker_artifact	delete_failed_confirm	Confirmation failed. Artifact not deleted
-tracker_artifact	delete_text	Delete this item
+tracker_artifact	delete_text	Delete
+tracker_artifact	save	Save Changes
 tracker_artifact	deleted_successfully	Artifact Deleted Successfully
 tracker_artifact	deleted_title	Delete an Artifact
 tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.

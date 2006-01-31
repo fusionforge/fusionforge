@@ -13,9 +13,9 @@
 $ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 
 ?>
-	<h2>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h2>
+	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<table width="100%">
+	<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
@@ -41,12 +41,26 @@ if (session_loggedin()) {
 				}
 				?>
 			</td>
+			<td>
+				<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
+			</td>
 		</tr>
+	</table>
 <?php } ?>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="func" value="postmod">
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+
+<script type="text/javascript" src="/dojo/dojo.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabPane");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+</script>
+<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="detailstab">
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','details'); ?>" id="detailstab">
+<table border="0" width="80%">
 
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
@@ -113,7 +127,10 @@ if (session_loggedin()) {
 		<br />
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
-
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
+<table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
@@ -123,7 +140,9 @@ if (session_loggedin()) {
 			echo $ah->showMessages(); 
 		?>
 	</td></tr>
-
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','attachments'); ?>" id="taskstab">
 	<tr><td colspan="2">
 		<?php echo $Language->getText('tracker','file_upload') ?><br />
 		<input type="file" name="input_file[]" size="30" /><br />
@@ -132,7 +151,7 @@ if (session_loggedin()) {
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<p>
-		<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
+		<h3><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h3>
 		<?php
 		//
 		//  print a list of files attached to this Artifact
@@ -164,25 +183,29 @@ if (session_loggedin()) {
 		}
 		echo $GLOBALS['HTML']->listTableBottom();
 		?>
-	</td><tr>
+	</td></tr>
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','commits'); ?>" id="commitstab">
+<table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
 		plugin_hook("artifact_extra_detail",$hookParams);
 	?>
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','changes'); ?>" id="changestab">
+<table border="0" width="80%">
 	<tr><td colspan="2">
-		<h4><?php echo $Language->getText('tracker_mod','changelog') ?>:</h4>
+		<h3><?php echo $Language->getText('tracker_mod','changelog') ?>:</h3>
 		<?php 
 			echo $ah->showHistory(); 
 		?>
 	</td></tr>
-
-	<tr><td colspan="2" align="middle">
-		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
+</table>
+</div>
+</div>
 		</form>
-	</td></tr>
-
-	</table>
-
 <?php
 
 $ath->footer(array());

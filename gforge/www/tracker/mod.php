@@ -15,9 +15,14 @@ $ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah-
 echo notepad_func();
 
 ?>
-	<h2>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h2>
+	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<table width="100%">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+	<input type="hidden" name="func" value="postmod">
+	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+
+	<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
@@ -33,7 +38,7 @@ if (session_loggedin()) {
 				echo '
 				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
 					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
-				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
+				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
@@ -43,15 +48,25 @@ if (session_loggedin()) {
 				}
 				?>
 			</td>
+			<td>
+				<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><strong><?php echo html_image('ic/trash.png','16','16',array()) . $Language->getText('tracker_artifact','delete_text'); ?></strong></a>
+			</td>
+			<td>
+				<input type="submit" name="submit" value="<?php echo $Language->getText('tracker_artifact','save') ?>" />
+			</td>
 		</tr>
+</table>
+<br />
 <?php } ?>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
-	<input type="hidden" name="func" value="postmod">
-	<input type="hidden" name="$result[]"> 	
-	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID();
- ?>">
-
+<script type="text/javascript" src="/dojo/dojo.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabPane");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+</script>
+<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="detailstab">
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','details'); ?>" id="detailstab">
+<table border="0" width="80%">
 	<tr>
 		<td>
 			<strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
@@ -102,7 +117,6 @@ if (session_loggedin()) {
 		?>
 		</td>
 		<td>
-			<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
 		</td>
 	</tr>
 
@@ -148,15 +162,15 @@ if (session_loggedin()) {
 			?>" maxlength="255" />
 		</td>
 		<td>
-		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><?php echo $Language->getText('tracker_artifact','delete_text'); ?></a>
 		</td>
 	</tr>
-
 	<tr><td colspan="2">
-		<br />
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
-
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
+<table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
 		<?php
@@ -171,50 +185,51 @@ if (session_loggedin()) {
 			echo $ah->showMessages(); 
 		?>
 	</td></tr>
-	
+</table>
+</div>
 <?php
-	if ($group->usesPM()) {
+if ($group->usesPM()) {
 ?>
-   <tr><td colspan="2">
-      <h3>
-      <?php echo $Language->getText('tracker','related_tasks'); ?>:
-      </h3>
-      <?php
-      $titles[] = $Language->getText('pm','task_id');
-      $titles[] = $Language->getText('pm','summary');
-      $titles[] = $Language->getText('pm','start_date');
-      $titles[] = $Language->getText('pm','end_date');
-      echo $GLOBALS['HTML']->listTableTop($titles);
-      $result = $ah->getRelatedTasks();
-      if($result) {
-         $taskcount = db_numrows($ah->relatedtasks);
-         if ($taskcount > 0) {
-            for ($i = 0; $i < $taskcount; $i++) {
-               $taskinfo  = db_fetch_array($ah->relatedtasks, $i);
-               $taskid    = $taskinfo['project_task_id'];
-               $projectid = $taskinfo['group_project_id'];
-               $groupid   = $taskinfo['group_id'];
-               $summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-               $startdate = date($sys_datefmt, $taskinfo['start_date']);
-               $enddate   = date($sys_datefmt, $taskinfo['end_date']);
-               echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-                        <td>'.$taskid.'</td>
-                        <td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid.'">'.$summary.'</a></td>
-                        <td>'.$startdate.'</td>
-                        <td>'.$enddate.'</td>
-                     </tr>';
-            }
-         }
-         else {
-            echo '<tr><td colspan="3">'.$Language->getText('tracker','no_related_tasks').'</td></tr>';
-         }
-      }
-      echo $GLOBALS['HTML']->listTableBottom();
- } // if usesPM
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','relatedtasks'); ?>" id="taskstab">
+<table border="0" width="80%">
+	<tr><td colspan="2">
+		<h3><?php echo $Language->getText('tracker','related_tasks'); ?>:</h3>
+		<?php
+		$result = $ah->getRelatedTasks();
+		$taskcount = db_numrows($ah->relatedtasks);
+		if ($taskcount > 0) {
+			$titles[] = $Language->getText('pm','task_id');
+			$titles[] = $Language->getText('pm','summary');
+			$titles[] = $Language->getText('pm','start_date');
+			$titles[] = $Language->getText('pm','end_date');
+			echo $GLOBALS['HTML']->listTableTop($titles);
+			for ($i = 0; $i < $taskcount; $i++) {
+				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+				$taskid    = $taskinfo['project_task_id'];
+				$projectid = $taskinfo['group_project_id'];
+				$groupid   = $taskinfo['group_id'];
+				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+				$startdate = date($sys_datefmt, $taskinfo['start_date']);
+				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+					<td>'.$taskid.'</td>
+						<td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.
+						'&group_id='.$groupid.'&group_project_id='.$projectid.'">'.$summary.'</a></td>
+						<td>'.$startdate.'</td>
+						<td>'.$enddate.'</td>
+				</tr>';
+			}
+			echo $GLOBALS['HTML']->listTableBottom();
+		} else {
+			echo '<tr><td colspan="3">'.$Language->getText('tracker','no_related_tasks').'</td></tr>';
+		}
       ?>
-      <p />
-   </td></tr>
-   
+	</td></tr>
+</table>
+</div>
+<?php } ?>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','attachments'); ?>" id="filetab">
+<table border="0" width="80%">
 	<tr><td colspan="2">
         <strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
         <input type="file" name="input_file[]" size="30" /><br />
@@ -223,7 +238,7 @@ if (session_loggedin()) {
         <input type="file" name="input_file[]" size="30" /><br />
         <input type="file" name="input_file[]" size="30" /><br />
 		<p>
-		<h4><?php echo $Language->getText('tracker_mod','existing_files') ?>:</h4>
+		<h3><?php echo $Language->getText('tracker_mod','existing_files') ?>:</h3>
 		<?php
 		//
 		//	print a list of files attached to this Artifact
@@ -255,24 +270,29 @@ if (session_loggedin()) {
 
 		echo $GLOBALS['HTML']->listTableBottom();
 		?>
-	</td><tr>
+	</td></tr>
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','commits'); ?>" id="commitstab">
+<table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
 		plugin_hook("artifact_extra_detail",$hookParams);
 	?>
+</table>
+</div>
+<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','changes'); ?>" id="changestab">
+<table border="0" width="80%">
 	<tr><td colspan="2">
-		<h4><?php echo $Language->getText('tracker_mod','changelog') ?>:</h4>
+		<h3><?php echo $Language->getText('tracker_mod','changelog') ?>:</h3>
 		<?php 
 			echo $ah->showHistory(); 
 		?>
 	</td></tr>
-
-	<tr><td colspan="2" align="middle">
-		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
+</table>
+</div>
+</div>
 		</form>
-	</td></tr>
-
-	</table>
 
 <?php
 
