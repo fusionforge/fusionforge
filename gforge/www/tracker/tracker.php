@@ -100,10 +100,16 @@ switch (getStringFromRequest('func')) {
   //					$feedback .= $afh->getErrorMessage();
 					} else {
 						if (!util_check_fileupload($tmp_name)) {
+							form_release_key(getStringFromRequest('form_key'));
+							//delete the artifact
+							$ah->delete(true);
 							exit_error("Error","Invalid filename");
 						}
 						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-							$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
+							form_release_key(getStringFromRequest('form_key'));
+							//delete the artifact
+							$ah->delete(true);
+							exit_error(' Could Not Attach File to Item: '.$afh->getErrorMessage());
 						}
 					}
 				}
@@ -309,6 +315,7 @@ switch (getStringFromRequest('func')) {
   //				$feedback .= $afh->getErrorMessage();
 				} else {
 					if (!util_check_fileupload($tmp_name)) {
+						form_release_key(getStringFromRequest('form_key'));
 						exit_error("Error","Invalid filename");
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
