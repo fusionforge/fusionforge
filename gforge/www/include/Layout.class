@@ -862,7 +862,7 @@ if (isset($params['group']) && $params['group']) {
 		if (isset($group_id)) {
 			print '
 					<td width="10">&nbsp;</td>
-					<td><b><a style="color: #FFFFFF" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
+					<td><b><a href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
 		}
 		print '</tr></table>';
 		print '</form>';
@@ -930,18 +930,18 @@ if (isset($params['group']) && $params['group']) {
 		$break = $breakLimit;
 		$countLines = 0;
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="2" style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+			<table width="100%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
 				<tr>
 					<td>
-						<table width="100%" cellspacing="0" border="0">
-							<tr style="font-weight: bold; background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+						<table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
+							<tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
 								<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
 								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
 							</tr>
-							<tr height="20" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+							<tr height="20">
 								<td colspan="3">&nbsp;</td>
 							</tr>
-							<tr align="center" valign="top" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+							<tr align="center" valign="top">
 								<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
@@ -960,9 +960,9 @@ if (isset($params['group']) && $params['group']) {
 				}
 			}
 		
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_HTMLBOX_TITLE.'">
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_LTBACK2.'">
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'; font-weight: bold">
+							<tr style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
 								<td cellspacing="0">
 									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
 							.'	</td>
@@ -970,7 +970,7 @@ if (isset($params['group']) && $params['group']) {
 								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
 								</td>
 							</tr>
-							<tr style="background-color:'. $this->COLOR_CONTENT_BACK.'">
+							<tr style="background-color:'. $this->COLOR_LTBACK1.'">
 								<td colspan="2">';
 								
 			if (!is_array($section)) {
