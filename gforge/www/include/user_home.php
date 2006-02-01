@@ -25,7 +25,15 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 <?php echo $HTML->boxTop($Language->getText('user_home','personal_information')); ?>
 <tr>
 	<td><?php echo $Language->getText('user_home','user_id') ?> </td>
-	<td><strong><?php print $user_id; ?></strong> <?php if($GLOBALS['sys_use_people']) { ?>( <a href="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )<?php } ?></td>
+  <td><strong>
+<?php
+	if (session_loggedin() && user_ismember(1)) {
+		echo '<a href="/admin/useredit.php?user_id='.$user_id.'">'.$user_id.'</a>';
+	} else {
+		echo $user_id;
+	}
+?>
+</strong> <?php if($GLOBALS['sys_use_people']) { ?>( <a href="/people/viewprofile.php?user_id=<?php echo $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )<?php } ?></td>
 </tr>
 
 <tr valign="top">
