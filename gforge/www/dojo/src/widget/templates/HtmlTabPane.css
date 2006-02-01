@@ -20,14 +20,14 @@
 	float : left;
 	padding-left : 9px;
 	border-bottom : 1px solid #765;
-	background : url(images/tab_left.gif) no-repeat left top;
+	background : url(images/tab_left.png) no-repeat left top;
 	cursor: pointer;
 }
 
 .tabs li span {
 	display : block;
 	padding : 4px 15px 4px 6px;
-	background : url(images/tab_right.gif) no-repeat right top;
+	background : url(images/tab_right.png) no-repeat right top;
 	color : #333;
 	font-size : 90%;
 	text-decoration : none;
@@ -52,18 +52,18 @@
 
 .tabs.bottom li {
 	border-bottom : 0;
-	background : url(images/tab_left_r.gif) no-repeat left bottom;
+	background : url(images/tab_left_r.png) no-repeat left bottom;
 }
 
 .tabs.bottom li span {
-	background : url(images/tab_right_r.gif) no-repeat right bottom;
+	background : url(images/tab_right_r.png) no-repeat right bottom;
 }
 
 .tabs.bottom li.current {
 	margin-top : -1px;
-	background-image : url(images/tab_left_r_curr.gif);
+	background-image : url(images/tab_left_r_curr.png);
 }
 
 .tabs.bottom li.current span {
-	background-image : url(images/tab_right_r_curr.gif);
+	background-image : url(images/tab_right_r_curr.png);
 }
