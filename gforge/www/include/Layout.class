@@ -418,10 +418,18 @@ if (isset($params['group']) && $params['group']) {
 	 * @param			   int			 Row number
 	 */
 	function boxGetAltRowStyle($i) {
-		if ($i % 2 == 0) {
-			return 'background="'.$this->imgroot.'vert-grad.png"';
+		if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'))) {
+			if ($i % 2 == 0) {
+				return 'bgcolor="#E0E0E0"';
+			} else {
+				return 'bgcolor="#AEAEAE"';
+			}				
 		} else {
-			return 'background="'.$this->imgroot.'box-grad.png"';
+			if ($i % 2 == 0) {
+				return 'background="'.$this->imgroot.'vert-grad.png"';
+			} else {
+				return 'background="'.$this->imgroot.'box-grad.png"';
+			}			
 		}
 	}
 
