@@ -17,6 +17,8 @@
 		http://gforge.org/tracker/index.php?func=detail&aid=1566&group_id=1&atid=106
 	* Applied patch : cvs history parse ignores exports
 		http://gforge.org/tracker/?func=detail&aid=1784&group_id=6&atid=222
+	* Fixed bug : Tracker Bugs: Failed edit should release form key, failed upload on submit should rollback
+		http://gforge.org/tracker/?func=detail&aid=1829&group_id=1&atid=105		
 
 2006-01-29 Tim Perdue   <tim@gforgegroup.com>
 	* added google-style page counts at the bottom of the tracker browse page
