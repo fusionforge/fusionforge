@@ -171,7 +171,7 @@ function process_day($day_begin, $day_end){
 				} elseif ( $type == 'A' ) {
 					$cvs_add++;
 					$usr_add[$user]++;
-				} elseif ( $type == 'O' ) {
+				} elseif ( $type == 'O' || $type == 'E' ) {
 					$cvs_co++;
 					// ignoring checkouts on a per-user
 				}
