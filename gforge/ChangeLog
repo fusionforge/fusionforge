@@ -11,6 +11,8 @@
 		http://gforge.org/tracker/?func=detail&aid=1807&group_id=1&atid=106
 	* Applied patch : Allow /user/ pages to link to /admin/useredit.php?user_id= pages
 		http://gforge.org/tracker/?func=detail&aid=1820&group_id=1&atid=106
+	* placed patch in contrib
+		http://gforge.org/tracker/?func=detail&aid=1787&group_id=1&atid=106
 
 2006-01-29 Tim Perdue   <tim@gforgegroup.com>
 	* added google-style page counts at the bottom of the tracker browse page
