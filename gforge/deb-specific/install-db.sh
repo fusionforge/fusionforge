@@ -28,6 +28,7 @@ fi
 export LC_ALL=C
 # Support for new place for pg_hba.conf
 # I only try to upgrade on the default cluster
+# I no database is found running, we exit with a big message
 if [ -x /usr/bin/pg_lsclusters ]
 then 
 	# We are with new postgresql working with clusters
@@ -50,6 +51,16 @@ then
 	fi
 else
     	export pg_hba_dir=/etc/postgresql
+	if ! pidof postmaster > /dev/null 2> /dev/null ; then
+		echo "No database postmaster found online running"
+		echo "Couldn't initialize or upgrade gforge database."
+		echo "Please see postgresql documentation"
+		echo "and run dpkg-reconfigure -plow gforge-db-postgresql"
+		echo "once the problem is solved"
+		echo "exiting without error, but gforge db will not work"
+		echo "right now"
+		exit 0
+	fi
 fi
 
 case "$target" in
@@ -66,9 +77,7 @@ case "$target" in
 	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
-	if ! pidof postmaster > /dev/null 2> /dev/null ; then
-		invoke-rc.d postgresql start
-	fi
+
 	if [ "$db_host" == "127.0.0.1" -o "$db_host" == "localhost" ]
 	then
 		# Otherwise the line wouldn't be used
@@ -98,7 +107,7 @@ $db_passwd
 EOF
 	else
             # PostgreSQL configuration for versions from 7.3 on
-	    echo "Configuring for PostgreSQL 7.3"
+	    echo "Configuring for PostgreSQL > 7.3"
 	    cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    cur=$(mktemp /tmp/$pattern)
 	    if ! grep -q 'BEGIN GFORGE BLOCK -- DO NOT EDIT' ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
@@ -276,17 +285,6 @@ EOF
 	 	echo "No way found to enable plpgsql on $db_name here" 
 	fi
 
-	# Start the database
-	if [ -f /var/lib/postgres/data/postmaster.pid ]
-	then
-         pid=$(head -1 /var/lib/postgres/data/postmaster.pid 2>/dev/null)
-         if [ "$pid" = "" ] ; then
-	    invoke-rc.d postgresql start
-	 else
-	    kill -HUP $pid
-	 fi
-	fi
-
 	# Install/upgrade the database contents (tables and data)
 	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
@@ -343,6 +341,12 @@ EOF
 	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
 	;;
     restore)
+	if [ "x$pg_version" != "x" ] 
+	then 
+		pg_name=postgresql-$pg_version
+	else
+		pg_name=postgresql
+	fi
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
@@ -358,7 +362,7 @@ EOF
 	cat ${pg_hba_dir}/pg_hba.conf >> $newpg
 	mv $newpg ${pg_hba_dir}/pg_hba.conf
 	chmod 644 ${pg_hba_dir}/pg_hba.conf
-	/etc/init.d/postgresql restart
+	invoke-rc.d ${pg_name} restart
 	if [ "x$2" != "x" ] ;then
 		RESTFILE=$2
 	else
@@ -370,6 +374,6 @@ EOF
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" ${pg_hba_dir}/pg_hba.conf
         perl -pi -e "s/$localtrust\n//" ${pg_hba_dir}/pg_hba.conf
-	/etc/init.d/postgresql reload
+	invoke-rc.d ${pg_name} reload
 	;;
 esac
