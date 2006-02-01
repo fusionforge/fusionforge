@@ -5,30 +5,214 @@
 #  * GForge
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * Copyright 2004 (c) Andrey Molchanov
+#  * Copyright 2005 (c) Andrey P. Paskal
 #  * http://gforge.org
 #  *
 #  * @version   $Id$
 #  * @author Paul Sokolovsky <pfalcon@users.sourceforge.net>
 #  *
 #  */
-about_foundries	about_blurb	О цехах GForge
-about_foundries	about_blurb	О цехах GForge
+account	title	Настройки аккаунта
+account	updated	Изменено
 account_change_email	desc	<p>Изменение вашего e-mail потребует подтверждение с нового адреса, для того чтобы убедиться в его корректности.</p><p>Нам надо проверять аккуратность e-mail для каждого пользователя с учетом уровня доступа для данного аккаунта. Если мы хотим связаться с пользователем по каким вопросам, по поводу shell-a или аккаунта проекта, то очень важно чтобы мы могли это сделать.</p <p>Отсылка нижерасположенной формы приводит к отсылке письма с URL-ом подтверждения по новому адресу. Вы должны посетить присланный линк для завершения смены вашего e-mail адреса.</p>
 account_change_email	invalid_email	Неверный e-mail адресс
 account_change_email	mailsent	<p>E-mail был послан на новый адрес. Следуйте инструкциям в e-mail чтобы завершить смену вашего e-mail адреса. </p><a href="/">[ Домой ]</a>
 account_change_email	message	Вы запросили смену e-mail адреса на $1.\nПожалуйста посетите следующий линк чтобы завершить смену вашего e-mail адреса:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
-account	title	Настройки аккаунта
-account	updated	Изменено
+account_login	cookiewarn	Cookie должны быть включены в вашем браузере.
+account_login	login	Авторизация
+account_login	login_ssl	Авторизация с SSL
+account_login	loginname	Регистрационное имя:
+account_login	lostpw	[Забыли пароль?]
+account_login	newaccount	[Зарегистрироваться]
+account_login	passwd	Пароль:
+account_login	resend_pending	[Отправить письмо ожидающему пользователю снова]
+account_login	resend_pending_directions	Укажите имя пользователя и нажмите 'Отправить' для повторной отправки письма
+account_verify	loginname	Регистрационное имя:
+admin_add_language	submit	Отправить
+admin_approve_pending	add_this_custom_response	Сделать шаблон из этого ответа
+admin_approve_pending	admin_approve_pending	Сделать активным
+admin_approve_pending	approve	Утвердить
+admin_approve_pending	approve_all_on_this_page	Утвердить все на этой странице
+admin_approve_pending	approving_group		Утверждаемая группа:
+admin_approve_pending	approving_pending_projects	Утверждение ожидающих проектов
+admin_approve_pending	canned_responses	Ответ по шаблону
+admin_approve_pending	custom_response_title	Заголовок и текст произвольного ответа
+admin_approve_pending	edit_project_details	[Редактирование деталей проекта]
+admin_approve_pending	error_creating_group	Ошибка создания группы
+admin_approve_pending	error_group_rejection	Ошибка отказа группе
+admin_approve_pending	home_box	Домашняя область:
+admin_approve_pending	manage_responses	(управление шаблонами ответов)
+admin_approve_pending	no_pending_projects_to_approve	Нет проектов для утверждения
+admin_approve_pending	none_found	Ничего не найдено
+admin_approve_pending	other_information	Прочая информация
+admin_approve_pending	pending_projects	Проекты, ожидающие принятия решения:
+admin_approve_pending	pending_reason	Причина ожидания:
+admin_approve_pending	project_admin	Управление проектом
+admin_approve_pending	submitted_description	Присланное описание:
+admin_approve_pending	unix_group_name	Unix имя группы:
+admin_approve_pending	view_edit_project_members	[Просмотр/Редактирование списка участников проекта]
+admin_grouplist	license	Лицензия
+admin_userlist	submit	Отправить
+advanced_search	no_matches_found	Ничего не найдено
+advanced_search	search_button	Поиск
+common	login	Авторизация
+common	logout	Выход
+common	myaccount	Моя учетная запись
+common	newaccount	Регистрация
+common_utils	priority_colors	Цвета приоритета
 conf	content_encoding	UTF-8
 conf	language_code	ru
 conf	language_id	17
 conf	mail_charset	UTF-8
+docman	admin	Управление
+docman	bytes		байт
+docman	description	Описание
+docman	editor	Создание и редактирование файла напрямую
+docman	error_invalid_file_attack	Ошибка загрузки файла. Попытка $1
+docman	error_no_docs	В проекте нет документов для просмотра
+docman	error_no_groups_defined	Не созданы группы документов
+docman	ftpupload	Ftp загрузка
+docman	httpupload	Http загрузка
+docman	pasteurl	Указанием адреса (Url) файла
+docman	select	Выберите способ закрузки (upload) файла на сайт
+docman	submit_new	Разместить новую документацию
+docman	turned_off	Этот проект не использует подсистему управления документами
+docman	view_doc	Просмотр документации
+docman_admin	add_docs	[Добавить документ сюда]
+docman_admin	add_edit_docgroups	Добавить/Править группу документов
+docman_admin	section	Проект: $1
+docman_admin	title	Документы: Управление
+docman_admin_addgroups	section	Управление документами
+docman_admin_addgroups	title	Создать группу документов
+docman_admin_deletedoc	delete	Удалить
+docman_admin_deletedoc	delete_warning	Сейчас вы удалите этот документ безвозвратно.
+docman_admin_deletedoc	really_sure	Я полностью уверен.
+docman_admin_deletedoc	sure	Я уверен.
+docman_admin_docedit	section	Подсистема управления документами
+docman_admin_docedit	title	Редактировать документ
+docman_admin_editdocs	delete_doc	Удалить документ полностью
+docman_admin_editdocs	doc_contents	Содержание документа
+docman_admin_editdocs	edit	Редактирование содержимого файла.
+docman_admin_editdocs	section	Управление подсистемой работы с документами
+docman_admin_editdocs	state	Состояние
+docman_admin_editdocs	title	Редактировать документы
+docman_admin_editdocs	upload	(Необязательно) Закачать новый файл
+docman_admin_editdocs	upload_ftp	или указать его на FTP сервере $1
+docman_admin_editdocs	upload_url	Задайте внешнюю ссылку, указывающую на файл
+docman_admin_editgroups	add_group	Добавить группу
+docman_admin_editgroups	description	Имя группы будет использовано в качестве заголовка, поэтому должно быть задано в соответствующей форме.
+docman_admin_editgroups	edit_group	Редактировать группу
+docman_admin_editgroups	group_id	Идентификатор группы (ID)
+docman_admin_editgroups	group_name	Имя группы
+docman_admin_editgroups	group_parent	Входит в
+docman_admin_editgroups	new_group_name	Новое имя группы
+docman_admin_editgroups	new_group_parent	Входит в
+docman_admin_editgroups	section	Управление подсистемой работы с документами
+docman_admin_editgroups	title	Редактировать группы
+docman_admin_groupedit	section	Управление подсистемой работы с документами
+docman_admin_groupedit	title	Переименовать группу
+docman_common	error_min_desc_length	Описание документа не может содержать менее 10 символов
+docman_common	error_min_title_length	Заголовок не может содержать менее 5 символов
+docman_common	no_docs	Нет документов
+docman_common_doc	invalid_docid	Документ:: неверный идентификатор доку мента
+docman_common_docgroup	invalid_id	Группа:: неверный идентификатор группы
+docman_common_docgroup	invalid_parent_id	Группа:: неверный идентификатор родительской группы
+docman_common_docgroup	name_required	Группа:: необходимо указать Имя
+docman_display_doc	all_languages	Все языки
+docman_display_doc	docmoved	Документ был перенесен на <a href="/docman/view.php/$1/$2">это новое место</a>
+docman_display_doc	no_document_data_text	Нет документов для просмотра - неверный номер документа или документ не помечен как активный/доступный
+docman_display_doc	no_document_data_title	Нет данных документа
+docman_display_doc	section	Проект: $1
+docman_display_doc	title	Document Manager: Показать документ
+docman_new	description	Описание
+docman_new	doc_title	Название документа
+docman_new	edit	Править
+docman_new	enableftpfirst	Сначала откройте ftp доступ
+docman_new	error_blank_document	Ошибка при получении пустого документа
+docman_new	file	Файл
+docman_new	ftpupload_choosefile	Укажите FTP сервер вместо закачки:
+docman_new	ftpupload_new_file	Как вариант, вы можете использовать FTP для закачки нового файла $1
+docman_new	group	Группа документа
+docman_new	intro	<strong>Название документа</strong>:  Короткое имя документа<br /><strong>Описание:</strong> Краткое описание для помещения под названием документа.
+docman_new	language	Язык
+docman_new	name	Задайте имя файла :
+docman_new	no_valid_group	Не указана группа документа
+docman_new	section	Проект: $1
+docman_new	selectsubmit	Выберите вариант
+docman_new	state	Состояние
+docman_new	submit	Отправить
+docman_new	submitted_successfully	Документ успешно загружен в систему
+docman_new	title	Документы: Добавить новую документацию
+docman_new	upload_file	Закачать файл
+docman_new	upload_url	Или задать внешний адрес (URL) файла
+forum	forum	Форум
+forum	forums_for	Форум для $1
+forum	html	HTML тэги будут отображаться как текст
+forum	section	Проект: $1
+forum	title	Форумы
+forum_admin	title	Форумы: Управление
+forum_admin_addforum	forum_description	Описание
+forum_forum	author	Автор
+forum_forum	changeview	Изменить вид
+forum_forum	date	Дата
+forum_forum	description	Описание
+forum_forum	filetoupload	Файл для загрузки
+forum_forum	forum	Форум
+forum_forum	lastpost	Последнее
+forum_forum	mod0	Без модерирования
+forum_forum	posts	Сообщения
+forum_forum	postsuccess	Сообщение успешно добавлено
+forum_forum	previous_messages	Предыдущие сообщения
+forum_forum	replies	Ответы
+forum_forum	section	Проект: $1
+forum_forum	show	Показать
+forum_forum	thread	Дискуссия
+forum_forum	threads	Дискуссии
+forum_forum	topic	Тема
+forum_forum	topicstarter	Инициатор темы
+forum_message	by	Автор
+forum_message	date	Дата
+forum_message	message	Сообщение
+forum_message	message_not_found_title	Сообщение не найдено
+forum_message	post_followup	Ответить на это сообщение
+forum_message	receive_followups	Получать ответы по почте
+forum_message	section	Форумы
+forum_message	subject	Тема
+forum_message	thread	Начать дискуссию
+forum_message	thread_view	Дерево дискуссии
+forum_save	saved	Позиция записана. Новые сообщения при повторном посещении будут подсвечены
+forum_utils	admin	Управление
+forum_utils	date	Дата
+forum_utils	discussionforum	Дискуссионные форумы:
+forum_utils	htmltag	HTML теги будут отображаться как текст
+forum_utils	message	Сообщение:
+forum_utils	monitor	Взять на контроль
+forum_utils	mustinclude	Нет темы и текста сообщения
+forum_utils	news	Новости
+forum_utils	postcomment	Отправить сообщение
+forum_utils	posted	Сообщение отправлено
+forum_utils	postedby	Автор
+forum_utils	project	Проект
+forum_utils	reply	Ответить
+forum_utils	saveplace	Запомнить позицию
+forum_utils	stopmonitor	Снять с контроля
+forum_utils	subject	Тема:
+forum_utils	summary	Резюме
+forum_utils	thread	Дискуссия
 frs	file_download	Скачать
 frs	file_monitor	Следить
 frs	file_notes	Информация
 frs	file_package	Модуль
+frs	file_rel_date	Дата
 frs	file_version	Версия
 frs	latest_file_releases	Последние файл-релизы
+general	language	Язык
+general	min_characters	(минимум символов: $1)
+general	remove	Удалить
+general	submit	Отправить
+general	submit_edit	Сохранить изменения
+group	activity	Процент активности:&nbsp;
+group	activitystat	Просмотр активности <a href="/project/stats/?group_id=$1">статистики</a> активности по проекту.
 group	developer_info	Участники проекта
 group	developers	Разработчики
 group	long_bugs	Менеджер ошибок
@@ -44,9 +228,13 @@ group	long_scm	SCM репозиторий
 group	long_support	Менеджер тех. поддержки
 group	long_survey	Опросы
 group	long_tracker	Унив.Трекер
+group	nodescription	Проект неимеет описания.
+group	norelease	Проект не выпустил ни одного файла
 group	project_admins	Администраторы
+group	project_developers	Разработчики
 group	public_area	Сервисы проекта
-group	short_admin	Админ
+group	registered	Зарегистрирован:&nbsp;
+group	short_admin	Управление
 group	short_bugs	Ошибки
 group	short_docman	Документация
 group	short_files	Файлы
@@ -63,31 +251,324 @@ group	short_summary	Резюме
 group	short_support	Поддержка
 group	short_survey	Опросы
 group	short_tracker	Унив.Трекер
+help	title	Добро пожаловать в $1
+help_trove_cat	description	Описание
 home	about_blurb	<P>$1 - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org/">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.</P><P><B>Использование сервисов и участие в проектах</B></P><P>Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на $1, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям.</P><P><B>Создание собственного проекта</B></P><P><A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>.</P><P>Спасибо за выбор $1... И мы желаем вам приятного и полезного времяпровождения!</P>
 home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
-home	gforge_statistics	Статистика GForge
+home	gforge_statistics	Статистика по проектам
 home	highest_ranked_users	Пользователи с высоким рейтингом
+home	hosted_projects	Зарегистрированные проекты
 home	most_active_this_week	Наиболее активные за эту неделю
+home	no_stats_available	Нет доступной статистики
+home	none_found	Ничего не найдено
+home	recently_registered	Недавно зарегистрированные проекты
+home	registered_users	Зарегистрированные пользователи
 home	top_project_downloads	Наиболее загружаемые проекты
+index	welcome	Добро пожаловать
+mail	archives	$1 Архивы
+mail	choose_a_list	<p>Выберите список для просмотра, поиска и добавления сообщений.</p>
+mail	provided_by	<p>Работу списков рассылки обеспечивает специальная версия <a href="http://www.list.org/">GNU Mailman</a>. Благодарим проект Mailman и команду <a href="http://www.python.org/">Python</a> за замечательную работу.</p>
+mail	section	Проект: $1
+mail	title	Списки рассылки
+mail	unable_to_get_lists	Не удается получить информацию о списках
+mail_admin	add_list	Добавить списки рассылки
+mail_admin	admin_in_mailman	Управление через Mailman
+mail_admin	error_getting_list	Ошибка доступа к списку
+mail_admin	section	Mailing Списки рассылки Lists
+mail_admin	title	Управление списком рассылки
+mail_admin	update_list	Обновить
+mail_admin_addlist	form_description	Описание:
+mail_admin_addlist	form_ispublic	Публичный?
+mail_admin_updatelist	form_description	Описание:
+mail_common	creation_mail_subject	$1. Новый список рассылки
+mail_common	description	Описание
+mail_common	error_invalid_group_list_id	Неверный идентификатор (id) списка
+mail_common	error_invalid_name	Неверное имя списка
+mail_common	error_list_already_exists	Список уже существует
+mail_common	list_not_activated	Еще не активирован
+mail_common	mailing_list	Список рассылки
+mail_common	mailing_lists	Списки рассылки
+mail_common	prefs	Регистрация
+mail_utils	admin	Управление
+mail_utils	turned_off	В проекте списки рассылки не используются.
 menu	about_gforge	О GForge
 menu	account_maintenance	Мои настройки
+menu	admin	Управление
 menu	bookmark_page	Пометить тек. страницу закладкой
 menu	change_my_theme	Изменить web-тему
-menu	code_snippet_library	Бибиотека Code Snippet'ов
+menu	code_snippet	Библиотека
+menu	code_snippet_library	Бибиотека фрагментов кода
 menu	compile_farm	Фабрика компиляции
+menu	diary_notes	Ежедневник
 menu	discussion_forums	Дискуссионные форумы
 menu	documentation	Документация сайта
-menu	login	Логин (ч/з защищенное соединение)
+menu	home	Главная
+menu	login	Авторизация
+menu	login_ssl	Авторизация через SSL
 menu	logout	Выход
+menu	my_account	Моя учетная запись
 menu	my_personal_page	Моя персональная страница
+menu	mypage	Моя страница
 menu	new_project	Зарегистрировать проект
 menu	new_releases	Последние релизы
 menu	new_user	Новый пользователь
 menu	other_site_mirrors	Зеркала других сайтов
-menu	project_admin	Администрирование проекта
-menu	project_help_wanted	Проекты, нуждающиеся в помощи
-menu	project_summary	База проекта
+menu	project_admin	Управление проектом
+menu	project_help_wanted	Вакансии
+menu	project_summary	Резюме проекта
+menu	projectree	Каталог проектов
+menu	register_project	Регистрация проекта
+menu	reporting	Отчеты
 menu	search	Поиск
 menu	site_status	Статус Сайта
 menu	software_map	Карта проектов
+menu	submit	Отправить
 menu	top_projects	Топ-проекты
+my	about_blurb	Ваша персональная страница содержит списки ошибок и задач, за которые вы отвечаете, а также группы, членами которых вы являетесь.
+my	assigneditems	Адресованное мне
+my	bookmarks	Мои закладки
+my	monitoredfile	Файлы на контроле
+my	monitoredforum	Форумы на контроле
+my	no_bookmarks	Нет сохраненных закладок.
+my	no_monitored_filemodules	Нет файлов на контроле.
+my	no_monitored_filemodules_details	<p>Если есть файлы на контроле, то вам будут приходить уведомления о выходе новых версий файлов со ссылками на сервер, с которого их можно загрузить.</p><p>Для постановки файлов на контроль на странице &quot;Резюме&quot; следует отметить чекбокс в разделе с файлами.</p>
+my	no_monitored_forums	Нет форумов на контроле.
+my	no_monitored_forums_details	<p>По контролируемым форумам новые сообщения, оставленные на форуме, будут вам приходить по почте со ссылкой на сообщение в форуме.</p><p>Для постановки форума на контроль необходимо щелкнуть по &quot;Мониторить форум&quot; в требуемом форуме.</p>
+my	no_open_tasks	Для вас нет задач.
+my	no_projects	Вы не являетесь участником ни одного из активных проектов
+my	no_tracker_items_assigned	Для вас ничего нет.
+my	no_tracker_items_submitted	Вы ничего не создавали.
+my	pending_projects	Ожидающие проекты
+my	pending_projects_1	Появился проект, треюующий просмотра.
+my	pending_projects_2	Появилось $1 проектов, требующих просмотра.
+my	pending_projects_3	Перейти
+my	projects	Мои проекты
+my	submitteditems	Созданное мной
+my	survey	Опросы
+my	tasks	Задачи для меня
+news	choose	<p>Выбрав новость, вы сможете просматривать, добавлять, искать коментарии.</p>
+news	noitems	Нет элементов для просмотра
+news	nonews	Новостей нет
+news	nonewsfor	У проекта '$1' нет новостей
+news	olderheadlines	Предшествующие новости
+news	section	Проект: $1
+news	title	Новости
+news_utils	nonews	Новости не найдены
+news_utils	submit	Добавить новость
+pm	any	Любой(ая)
+pm	cat_any	Любая(ой)
+pm	details	Описание задачи
+pm	end_date	Дата завершения
+pm	hours	Затрачено часов
+pm	intro	Выберите подпроект и вы сможете работать с его задачами.
+pm	noprj	<H1>Подпроекты не найдены</H1><P><B>Либо небыло создано ни одного подпроекта, либо у вас недостаточно прав для их просмотра.<P><FONT COLOR=RED>Администратор этого проекта может создать подпроекты через страницу управления</FONT></B>
+pm	status_any	Любой
+pm	tech_any	Любой(ая)
+project_admin	add_user	Добавить пользователя
+project_admin	addfromlist	Добавить пользователя из списка
+project_admin	docmanager_admin	Управление подсистемой работы с документами
+project_admin	download_tarball	Скачать архив ночного среза SCM
+project_admin	group_members	Участники группы
+project_admin	homepage_link	Домашняя страницы:&nbsp;
+project_admin	mail_admin	Управление почтовой подсистемой
+project_admin	news_admin	Управление новостями
+project_admin	project_information	Дополнительная информация по проекту
+project_admin	scm_admin	SCM Управление
+project_admin	section	Проект: $1
+project_admin	shell_server	SSH Сервер группы:&nbsp;
+project_admin	shell_server_group_directory	Каталог группы на сервере:&nbsp;
+project_admin	short_description	Краткое описание:&nbsp;
+project_admin	task_manager_admin	Управление задачами
+project_admin	title	Управление проектом: $1
+project_admin	tool_admin	Управление инструментом
+project_admin	tracker_admin	Управление Трекером
+project_admin	trove_categorization	Указать категории в карте ПО:&nbsp;
+project_admin	unix_name	Unix имя
+project_admin	user_added	Пользователь добавлен успешно
+project_admin	user_removed	Пользователь удален успешно
+project_admin	user_updated	Информация о пользователе обновлена
+project_admin	www_directory	WWW каталог на SSH сервере:&nbsp;
+project_admin_editgroupinfo	homepage_link	Ссылка на домашнюю страницу
+project_admin_editpackages	add_release	Добавить релиз
+project_admin_editpackages	added_package	Добавленный пакет
+project_admin_editpackages	create_package	Создать пакет
+project_admin_editpackages	edit_releases	Править релизы
+project_admin_editpackages	is_public	Публично доступный
+project_admin_editpackages	new_package_name	Имя нового пакета
+project_admin_editpackages	no_packages_defined	Пакетов нет
+project_admin_editpackages	no_packages_status	Статус
+project_admin_editpackages	package_name	Имя пакета
+project_admin_editpackages	packages_info	<h3>Пакеты</h3><p>Вы можете использовать пакеты для группировки выпуска отдельных файлов в одном релизе или для других целей, если хотите. <p><H4>Пример пакетов:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Ваши пакеты:</H4><p><ol><li>Создайте пакет</li><li>Выпустите новые релизы пакета</li></ol><p><h3>Релизы пакетов</h3><p>Релиз пакета может содержать несколько файлов.<p><H4>Примеры нумерования релизов</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Вы можете создать новые релизы пакетов щелчком по <strong>Добавить/Править релизы</strong> на против имени пакета.<p>
+project_admin_editpackages	qrs	Система быстрого выпуска (QRS)
+project_admin_editpackages	qrs_a_file	Щелкните здесь для $1 быстрого выпуска файла $2
+project_admin_editpackages	title	Правка релиза/Релизы файлов
+project_admin_editpackages	updated_package	Обновленный пакет
+project_admin_editrelease	add_file	Добавить файл
+project_admin_editrelease	add_files_note	Примечание: В некоторых браузерах необходимо выбрать файл в диалоге загрузки и щелкнуть "ОК".</strong></span>
+project_admin_editrelease	changelog_too_small	Список изменений слишком мал
+project_admin_editrelease	data_saved	Данные сохранены
+project_admin_editrelease	delete_file	Удалить файл
+project_admin_editrelease	file_deleted	Файл удален
+project_admin_editrelease	file_list_note	Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.
+project_admin_editrelease	file_released	Выпущенные файлы
+project_admin_editrelease	file_type	Тип файла
+project_admin_editrelease	file_type_update	Тип файла<br />Обновить
+project_admin_editrelease	file_updated	Файл обновлен
+project_admin_editrelease	filename_release	Имя файла<br />Выпустить релиз
+project_admin_editrelease	i_am_sure	Я уверен
+project_admin_editrelease	monitor_count	Пользователей, следящих за файлом: $1 .
+project_admin_editrelease	no_files_in_release	Релиз не содержит файлов
+project_admin_editrelease	note	Редактировать Информацию о релизе (Release Notes) или Список изменений релиза этого пакета. Эти изменения отразатся на всех файлах релиза.<br />Вы можете либо закачать Информацию о релизе и Список изменений по отдельности, либо занести их ниже.
+project_admin_editrelease	paste_changelog	Занесите Список изменений
+project_admin_editrelease	paste_release_notes	Занесите Информацию о релизе
+project_admin_editrelease	preserve_preformatted	Сохранить мою разметку текста.
+project_admin_editrelease	processor_type	Тип архитектуры процессора (ЦПУ)
+project_admin_editrelease	processor_update	Процессор<br />Дата релиза
+project_admin_editrelease	release_date	Дата релиза
+project_admin_editrelease	release_name	Имя релиза
+project_admin_editrelease	release_notes_too_small	Слишком мало информации о релизе
+project_admin_editrelease	status	Статус
+project_admin_editrelease	step_1	Шаг 1:&nbsp;&nbsp; Редактировать релиз
+project_admin_editrelease	step_2	Шаг 2: Добавить файлы к релизу</h3><p>Теперь укажите файл для загрузки в систему. Максимальный размер файла задан администратором, но по умолчанию равен 2Мбайт. Если требуется загрузить файл большего размера, обратитесь к администратору сайта.</p>
+project_admin_editrelease	step_3	Шаг 3: Управление файлами релиза
+project_admin_editrelease	submit_refresh	Отправить/Обновить
+project_admin_editrelease	title	Редактирование
+project_admin_editrelease	update_refresh	Изменить/Обновить
+project_admin_editrelease	upload_change_log	Закачать Список изменений
+project_admin_editrelease	upload_new_file	Закачать новый файл
+project_admin_editrelease	upload_release_notes	Закачать Информацию о релизе
+project_admin_qrs	changelog	Список изменений
+project_admin_qrs	create_new_package	или $1 создать новый пакет $2
+project_admin_qrs	exceed_file_size	Размер загружаемого файла превышает максимально допустимый размер. Обратитесь к администратору сайта для загрузки такого большого файла.
+project_admin_qrs	file_name	Имя файла
+project_admin_qrs	file_released	Файл выпущен в свет: Теперь вы можете перейти к редактированию релиза
+project_admin_qrs	file_type	Тип файла
+project_admin_qrs	ftpupload_choosefile	Указать файл на ftp сервере вместо закачки:
+project_admin_qrs	ftpupload_new_file	Есть возможность указать ftp адрес файла вместо его закачки в $1
+project_admin_qrs	maximum_file_size	Максимально допустимый размер закачиваемого файла:
+project_admin_qrs	must_choose_one	Необходимо выбрать вариант
+project_admin_qrs	no_file_types_available	Типы файлов не заданы
+project_admin_qrs	notify_list	Список уведомления
+project_admin_qrs	package_id	Идентификатор пакета
+project_admin_qrs	partial_file	Файл загружен не полностью.
+project_admin_qrs	preserve_text	Сохранить мою разметку текста
+project_admin_qrs	processor_type	Тип архитектуры процессора (ЦПУ)
+project_admin_qrs	qrs_info	Теперь вы можете $1 добавлять файлы в релиз $2 если хотите, или редактировать релиз.</p> <p>Имейте в виду, что файлы сразу могут не появиться на $3 странице загрузки $4. Допускается задержка в несколько часов на доставку.
+project_admin_qrs	release_date	Дата релиза
+project_admin_qrs	release_file	Файл релиза
+project_admin_qrs	release_name	Имя релиза
+project_admin_qrs	release_note	Примечание: В некоторых браузерах необходимо выбрать файл в диалоге загрузки файлов и щелкнуть "ОК"
+project_admin_qrs	release_notes	Информация о релизе (Release Notes)
+project_admin_qrs	required_file	Необходимо выбрать файл.
+project_admin_qrs	required_file_type	Необходимо выбрать тип файла.
+project_admin_qrs	required_package	Необходимо выбрать пакет.
+project_admin_qrs	required_processor_type	Необходимо выбрать тип процессора.
+project_admin_qrs	required_release_name	Необходимо задать имя релиза.
+project_admin_qrs	separate_emails	Перечислите email адреса через запятую (,)
+project_admin_qrs	title	Система быстрого выпуска
+project_admin_qrs	unknown_file_error	Неизвестная ошибка загрузки файла.
+project_admin_qrs	upload_new_file	Загрузить новый файл
+project_admin_rmuser	cancel	Отмена
+project_admin_rmuser	cannot_remove_admin	Невозможно удалить администратора $1
+project_admin_rmuser	remove	Удалить
+project_admin_rmuser	title	Удалить пользователя
+project_admin_userpermedit	remove	Удалить
+project_admin_utils	admin	Управление
+project_admin_utils	edit_jobs	Редактировать вакансии
+project_admin_utils	edit_public_info	Редактировать общедоступное описание
+project_admin_utils	post_jobs	Опубликовать вакансии
+project_admin_utils	project_history	История проекта
+project_admin_utils	stats	Статистика
+project_admin_utils	user_permissions	Права пользователей
+project_admin_vhost	create	Создать
+project_admin_vhost	delete	Удалить
+project_home	view_members	Список участников
+project_home	view_project_files	Список всех файлов проекта
+project_joinrequest	nonepending	Нет ожидающих запросов
+project_joinrequest	pending	Ожидающие запросы
+project_joinrequest	request_link	Заявка на участие
+project_joinrequest	submitted	Ваш запрос отправлен.
+project_joinrequest	title	Заявка на участие в проекте
+project_memberlist	developer	Разработчик
+project_showfiles	architecture	Аппаратная архитектура
+project_showfiles	date	Дата
+project_showfiles	downloads	Загрузить
+project_showfiles	error_no_packages_defined_text	У проекта нет файлов на данный момент.
+project_showfiles	error_no_packages_defined_title	Нет файлов
+project_showfiles	file_type	Тип
+project_showfiles	filename	Имя файла
+project_showfiles	intro	Ниже приведен список всех файлов проекта.
+project_showfiles	intro2	Перед скачиванием возможно вы захотите просмотреть Информацию о релизе (Release Notes) и Cписок изменений (для доступа щелкните по номеру версии).
+project_showfiles	monitor_package	Взять на контроль этот пакет
+project_showfiles	new_release	Для создания нового релиза щелкните здесь.
+project_showfiles	no_releases	Релизов нет
+project_showfiles	package	Пакет
+project_showfiles	project_totals	Итого по проекту
+project_showfiles	release_highlighted	Вами выбранный релиз <span style="background-color:pink">выделен цветом</span>.
+project_showfiles	release_notes	Информация о релизе (Release &amp; Notes)
+project_showfiles	section	Проект: $1
+project_showfiles	size	Размер
+project_showfiles	title	Файлы проекта
+project_shownotes	changes	Изменения:
+project_stats_utils	bugs	Ошибки
+project_stats_utils	date	Дата
+project_stats_utils	days	Дней
+rbac_edit	addrole	Добавить роль
+rbac_edit	editrole	Изменить роль
+rbac_edit	editroles	Изменить роли
+rbac_edit	forum	Форум
+rbac_edit	observer	Внешние пользователи
+rbac_edit	observerusername	Внешний пользователь
+rbac_edit	pgtitle	Edit Изменить роль
+rbac_edit	remove	Удалить
+rbac_edit	role	Роль
+rbac_edit	update	Обновить
+register	apply_for_registration	Для регистрации проекта заполните форму ниже. Внимательно прочитайте описания и укажите требуемую информацию. Необходимо заполнить все поля.
+register	i_agree	Отправить
+register	i_disagree	Отменить
+register	other_license	Если вы указали Другая, пожалуйста кроме текста самой лицензии приведите обоснование ее выбора. Имейте в виду, что другие лицензии могут быть не приняты. Кроме того, для разрешения открытия такого проекта может потребоваться больше времени, так как потребуется проводить анализ лицензии на соответствие требованиям ПО с открытым исходным кодом (FLOSS).
+register	project_description	<h3>4. Публичное описание проекта</h3><p>Это описание проекта будет отображаться на странице с резюме проекта, в результатах поиска, и т.д.. Максимальная длина 255 символов.
+register	project_full_name	<h3>1. Полное название проекта</h3><p>Начинать следует с задания имени проекта. "Полное название" является описательным и не имеет каких либо ограничений, кроме длины в 40 символом.</p>Полное название:<br/>
+register	project_license	<h3>3. Лицензия</h3>
+register	project_submitted	Ваш запрос на регистрацию проекта отправлен администратору $1. В течении 72 часов вы получите уведомление о его решении и дальнейшие инструкции.</p><p>Спасибо за использование $1
+register	project_unix_name	<h3>5. Короткое имя проекта</h3><p>Необходимо также задать короткое имя проекта.</p><p>  "Короткое имя" имеет множество ограничений, так как используется во множестве мест на сайте. Оно:<ul><li>Должно быть уникальным и не должно совпадать с короткими именами других проектов<li>Должно быть от 3 до 15 символов в длину<li>Должно состоять из строчных символов<li>Может состоять только из символов, чисел и подчеркиваний<li>Должно подходить для использования в качестве регистрационного имени в UNIX системе<li>Не должно совпадать с именами зарезервированных доменов<li>Не может быть изменено</ul><p>Короткое имя важно, так как оно будет использовано в таких местах как:<ul><li>в имени сайта at <tt>короткоеимя.$1</tt><li>в CVS репозитарии для <tt>/cvsroot/короткоеимя</tt> at <tt>cvs.короткоеимя.$1</tt><li>для терминального доступа к <tt>короткое имя.$1</tt><li>в поисковом индексировании</ul><p>Короткое имя:<br/>
+register	purpose_and_summarization	<h3>2. Назначение и краткое описание проекта</h3><p><strong></strong><p><strong> Пожалуйста опишите проект. Это описание проекта будет доступно только его участникам.</strong>
+reporting	feature_req	Запросы на доработку
+reporting_us	any	Любой(ая)
+scm_index	admin	Управление
+scm_index	anoncvs	<p><b>Анонимный CVS доступ</b></p><p>Репозиторий этого проекта доступен для скачивания анонимно. Используйте следующие команды. Имя требуемого модуля следует указать вместо имямодуля. В ответ на запрос пороля просто нажмите клавишу Enter.</p>
+scm_index	browseit	Просмотр CVS репозитария
+scm_index	browsetree	<hr /><b>Просмотр CVS дерева</b><p>Просмотр CVS дерева давет вам великолепную возможность оценить текущий статус кода проекта. Также вы можете увидеть историю изменений любого файла в репозитарии.</p>
+scm_index	devcvs	<p><b>CVS доступ для разработчиков через SSH</b></p><p>Только разработчики проекта могут работать с CVS таким образом. У вас должен быть установлен SSH криент. Замените <i>имямодуля</i> и <i>имяразработчика</i> соответствующими значениями. Укажите пароль в ответ на запрос.</p>
+scm_index	reporting	Отчеты
+search	no_matches_found	Ничего не найдено для <em>$1</em>
+search	tasks_summary	Резюме
+searchbox	advanced_search	Комбинированный поиск
+searchbox	docs	В документах проекта
+searchbox	forum	В форуме
+searchbox	forums	В форумах проекта
+searchbox	frs	В релизах проекта
+searchbox	full	Искать во всех разделах
+searchbox	news	В новостях проекта
+searchbox	people	Пользователи
+searchbox	search	Поиск
+searchbox	skill	Навыки
+searchbox	softwaregroup	ПО/Группы
+searchbox	task	Задачи
+searchbox	tasks	В задачах проекта
+searchbox	trackers	В трекерах проекта
+stats_site_utils	bugs	Ошибки
+survey	survey_not_found	Нет опросов.
+survey	title	Опрос
+top_toplist	posts	Сообщения
+tracker	any	Любой(ая)
+tracker	category_any	Любая(ой)
+tracker	group_any	Любая(ой)
+tracker	status_any	Любой(ая)
+tracker_add	submit		Отправить
+tracker_admin_build_boxes	status_any	Любой(ая)
+tracker_browse	change_any	Любое(ой)
+trove	not_categorized	Этот проект еще не зарегистрировался в
+trove	title	Карта категорий ПО
+trove_list	browse_by	Просмотр по
+user_home	login_name	Регистрационное имя
