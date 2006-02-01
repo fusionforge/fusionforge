@@ -2646,6 +2646,7 @@ sub readLog($;$)
 
   my $fh = do { local (*FH); };
   if (!open($fh, "-|")) {    # child
+  open(STDERR, '>', devnull());    # Ignore rlog's complaints.
     if ($revision ne '') {
       openOutputFilter();
       exec($CMD{rlog}, $revision, $fullname) or exit -1;
