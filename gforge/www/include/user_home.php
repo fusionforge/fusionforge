@@ -78,12 +78,13 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 	<td><strong><?php print date($sys_datefmt, $user->getAddDate()); ?></strong>
 	<?php
 
-	echo $HTML->boxMiddle($Language->getText('user_home','peer_rating'),false,false);
-
-	if ($user->usesRatings()) {
-		echo vote_show_user_rating($user_id);
-	} else {
-		echo $Language->getText('user_home','peer_rating_disabled');
+	if ($sys_use_rating) {
+		echo $HTML->boxMiddle($Language->getText('user_home','peer_rating'),false,false);
+		if ($user->usesRatings()) {
+			echo vote_show_user_rating($user_id);
+		} else {
+			echo $Language->getText('user_home','peer_rating_disabled');
+		}
 	}
 
 	echo $HTML->boxMiddle($Language->getText('user_home','diary_notes'));
@@ -142,6 +143,7 @@ echo $HTML->boxBottom(); ?>
 
 <?php 
 $me = session_get_user(); 
+if ($sys_use_rating) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 
 echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
@@ -159,7 +161,8 @@ echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
 <?php echo $Language->getText('users','optout'); ?>
 </em>
 </p>
-<?php } ?>
+<?php }
+      } ?>
 </td>
 
 

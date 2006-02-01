@@ -230,9 +230,12 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 <?php echo $Language->getText('account_register','remember_me','<a href="/my/">');
 */ ?>
 
-<p /><input type="checkbox"  name="use_ratings" value="1"<?php
+<p />
+<?php if ($sys_use_ratings) { ?>
+<input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
+<?php } ?>	
 <?php 
 $hookParams['user']= user_get_object(user_getid());
 if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update

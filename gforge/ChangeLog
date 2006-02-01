@@ -7,6 +7,8 @@
 		http://gforge.org/tracker/?func=detail&aid=1819&group_id=1&atid=106
 	* Applied patch : cvs-2.12's commitid causes cvsweb to corrupt content behind "download" links
 		http://gforge.org/tracker/?func=detail&aid=1814&group_id=1&atid=106
+	* Applied patch : Patch to optionally disable user ratings on site
+		http://gforge.org/tracker/?func=detail&aid=1807&group_id=1&atid=106
 
 2006-01-29 Tim Perdue   <tim@gforgegroup.com>
 	* added google-style page counts at the bottom of the tracker browse page

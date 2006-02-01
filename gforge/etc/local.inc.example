@@ -143,6 +143,8 @@ $sys_use_ssl=false;
 $sys_use_people=true;
 $sys_use_shell=true;
 
+// Enable/Disable user ratings
+$sys_use_ratings=true;
 // Enable/Disable the ability to upload files using FTP in FRS
 $sys_use_ftpuploads=false;
 // Enable/Disable the use of mail gateways for trackers and forums

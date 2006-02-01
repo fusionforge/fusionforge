@@ -18,8 +18,10 @@ function show_features_boxes() {
 	$return .= show_sitestats();
 	$return .= $HTML->boxMiddle($Language->getText('home','top_project_downloads'));
 	$return .= show_top_downloads();
-	$return .= $HTML->boxMiddle($Language->getText('home','highest_ranked_users'));
-	$return .= show_highest_ranked_users();
+	if ($sys_use_ratings) {
+		$return .= $HTML->boxMiddle($Language->getText('home','highest_ranked_users'));
+		$return .= show_highest_ranked_users();
+	}
 	$return .= $HTML->boxMiddle($Language->getText('home','most_active_this_week'));
 	$return .= show_highest_ranked_projects();
 	$return .= $HTML->boxMiddle($Language->getText('home','recently_registered'));
