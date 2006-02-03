@@ -32,8 +32,9 @@ class ExportProjectSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM export_groups_search('".$this->formatWords()."')";
+			$sql = "SELECT * FROM export_groups_search('".$this->getFormattedWords()."')";
 		} else {
 			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
 			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
