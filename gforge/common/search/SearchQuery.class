@@ -129,7 +129,6 @@ class SearchQuery extends Error {
 			$this->offset,
 			SYS_DB_SEARCH
 		);
-echo $query.'   '.db_error();
 
 		$this->rowsTotalCount = db_numrows($this->result);
 		$this->rowsCount = min($this->rowsPerPage, $this->rowsTotalCount);

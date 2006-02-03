@@ -1,7 +1,7 @@
-DROP FUNCTION doc_data_search CASCADE;
-DROP FUNCTION news_bytes_search CASCADE;
-DROP FUNCTION artifact_search CASCADE;
-DROP FUNCTION trackers_search CASCADE;
+DROP FUNCTION doc_data_search(text, int, text, bool) CASCADE;
+DROP FUNCTION news_bytes_search(text, int) CASCADE;
+DROP FUNCTION artifact_search(text, int) CASCADE;
+DROP FUNCTION trackers_search(text, int, text, bool) CASCADE;
 
 CREATE TRIGGER artifactmessage_ts_update AFTER UPDATE OR INSERT OR DELETE ON artifact_message
 FOR EACH ROW EXECUTE PROCEDURE update_vectors('artifact_message');
