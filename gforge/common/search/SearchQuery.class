@@ -248,7 +248,11 @@ class SearchQuery extends Error {
 	 * @return string words we are searching for, separated by a pipe
 	 */	
 	function getFormattedWords() {
-		$words = implode('|', $this->words);
+		if ($this->isExact) {
+			$words = implode('&', $this->words);
+		} else {
+			$words = implode('|', $this->words);
+		}
 		return $words;
 	}
 }
