@@ -1,3 +1,7 @@
+2006-02-03 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch :  magic quotes and search terms
+		http://gforge.org/tracker/?func=detail&aid=1839&group_id=6&atid=222
+
 2006-02-01 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Chinese language updated
 		http://gforge.org/tracker/?func=detail&aid=1755&group_id=1&atid=106

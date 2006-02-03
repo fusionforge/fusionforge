@@ -815,6 +815,12 @@ if (isset($params['group']) && $params['group']) {
 	function searchBox() {
 		global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
+		if(get_magic_quotes_gpc()) {
+			$defaultWords = stripslashes($words);
+		} else {
+			$defaultWords = $words;
+		}
+		
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
 			$exact = 1;
@@ -853,7 +859,7 @@ if (isset($params['group']) && $params['group']) {
 			print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
 		}
 		print '</td><td>';
-		print '<input type="text" size="12" name="words" value="'.$words.'" />';
+		print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
 
 		print '</td><td>&nbsp;</td><td>';
 		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
