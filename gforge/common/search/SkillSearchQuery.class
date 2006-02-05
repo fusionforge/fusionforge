@@ -32,8 +32,9 @@ class SkillSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM skills_data_search('".$this->formatWords()."')";
+			$sql = "SELECT * FROM skills_data_search('".$this->getFormattedWords()."')";
 		} else {
 			$sql = 'SELECT * '
 				. 'FROM skills_data, users, skills_data_types '

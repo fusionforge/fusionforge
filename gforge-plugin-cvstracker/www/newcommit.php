@@ -25,19 +25,24 @@ require_once('plugins/cvstracker/config.php');
  * ArtifactNumbers and TaskNumbers
  */
 $Config = array();
-$Config['UserName']        = $_POST['UserName'];
-$Config['Repository']      = $_POST['Repository'];
-$Config['FileName']        = $_POST['FileName'];
-$Config['PrevVersion']     = $_POST['PrevVersion'];
-$Config['ActualVersion']   = $_POST['ActualVersion'];
-$Config['ArtifactNumbers'] = $_POST['ArtifactNumbers'];
-$Config['TaskNumbers']     = $_POST['TaskNumbers'];
-$Config['Log']             = $_POST['Log'];
-$Config['CvsDate']         = $_POST['CvsDate'];
-
-if($cvs_tracker_debug) {
-	echo "Variables received by newcommit.php:\n";
-	print_r($Config);
+$SubmittedVars = array();
+$SubmittedVars = unserialize(str_replace('\"','"',$_POST['data']));
+$i = 0;
+foreach ($SubmittedVars as $SubmittedVar) {
+        $Configs[$i]['UserName']        = $SubmittedVar['UserName'];
+        $Configs[$i]['Repository']      = $SubmittedVar['Repository'];
+        $Configs[$i]['FileName']        = $SubmittedVar['FileName'];
+        $Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
+        $Configs[$i]['ActualVersion']   = $SubmittedVar['ActualVersion'];
+        $Configs[$i]['ArtifactNumbers'] = $SubmittedVar['ArtifactNumbers'];
+        $Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
+        $Configs[$i]['Log']             = $SubmittedVar['Log'];
+        $Configs[$i]['CvsDate']         = $SubmittedVar['CvsDate'];
+        $i++;
+        if($cvs_tracker_debug) {
+                echo "Variables received by newcommit.php:\n";
+                print_r($Configs[$i]);
+        }
 }
 
 /**
@@ -72,8 +77,17 @@ function parseConfig($Config)
 		echo "CVSRootPath = ".$sys_cvsroot_path."\n";
 	}
 
-	$Result['group']    = group_get_object_by_name($GroupName);
+	
 	$Result['user']     = user_get_object_by_name($UserName);
+	if (!$Result['user'] || !is_object($Result['user']) ||
+		$Result['user']->isError() || !$Result['user']->isActive()) {
+		$Result['check'] = false;
+		$Result['error'] = 'Invalid User';
+		return $Result;
+	}
+	session_set_new($Result['user']->getID());
+
+	$Result['group']    = group_get_object_by_name($GroupName);
 	if (!$Result['group'] || !is_object($Result['group']) ||
 		$Result['group']->isError() || !$Result['group']->isActive()) {
 		$Result['check'] = false;
@@ -86,11 +100,6 @@ function parseConfig($Config)
 		}
 	}
 
-	if (!$Result['user'] || !is_object($Result['user']) ||
-		$Result['user']->isError() || !$Result['user']->isActive()) {
-		$Result['check'] = false;
-		$Result['error'] = 'Invalid User';
-	}
 	return $Result;
 }
 
@@ -204,27 +213,29 @@ function addTaskLog($Config, $GroupId, $Num)
 	return $return;
 }
 
-$Result = parseConfig($Config);
-if ($Result['check'] == false) {
-	exit_error('Check_error', $Result['error']);
-}
+foreach ($Configs as $Config) {
+	$Result = parseConfig($Config);
+	if ($Result['check'] == false) {
+		exit_error('Check_error', $Result['error']);
+	}
 
-if (!is_null($Config['ArtifactNumbers'])) {
-	foreach ($Config['ArtifactNumbers'] as $Num)
-	{
-		$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
-		if (isset($AddResult['Error'])) {
-			exit_error('Adding ArtifactNumber',$AddResult['Error']);
+	if (!is_null($Config['ArtifactNumbers'])) {
+		foreach ($Config['ArtifactNumbers'] as $Num)
+		{
+			$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
+			if (isset($AddResult['Error'])) {
+				exit_error('Adding ArtifactNumber',$AddResult['Error']);
+			}
 		}
 	}
-}
-
-if (!is_null($Config['TaskNumbers'])) {
-	foreach ($Config['TaskNumbers'] as $Num)
-	{
-		$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
-		if (isset($AddResult['Error'])) {
-			exit_error('Adding TaskNumber',$AddResult['Error']);
+	
+	if (!is_null($Config['TaskNumbers'])) {
+		foreach ($Config['TaskNumbers'] as $Num)
+		{
+			$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
+			if (isset($AddResult['Error'])) {
+				exit_error('Adding TaskNumber',$AddResult['Error']);
+			}
 		}
 	}
 }

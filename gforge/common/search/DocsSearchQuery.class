@@ -52,16 +52,9 @@ class DocsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$nonPublic = 'false';
-			$sections = '';
-			if ($this->showNonPublic) {
-				$nonPublic = 'true';
-			}
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sections = $this->sections;
-			}
-			$sql = "SELECT * FROM doc_data_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+			return $this->getFTIQuery();
 		} else {
 			$sql = 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname'
 				.' FROM doc_data, doc_groups'
@@ -82,6 +75,31 @@ class DocsSearchQuery extends SearchQuery {
 		return $sql;
 	}
 	
+	function getFTIQuery() {
+		if ($this->showNonPublic) {
+			$nonPublic = "1, 4, 5";
+		} else {
+			$nonPublic = "1";
+		}
+		if ($this->sections != SEARCH__ALL_SECTIONS) {
+			$sections = "AND doc_groups.doc_group IN ($this->sections)";
+		} else {
+			$sections = '';
+		}
+		$words = $this->getFormattedWords();
+		$group_id=$this->groupId;
+		$sql="SELECT doc_data.docid, headline(doc_data.title, q) AS title,
+				headline(doc_data.description, q) AS description, doc_groups.groupname
+			FROM doc_data, doc_groups, to_tsquery('$words') AS q
+			WHERE doc_data.doc_group = doc_groups.doc_group
+			AND doc_data.group_id = '$group_id'
+			$sections
+			AND doc_data.stateid IN ($nonPublic)
+			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery('$words') AS q
+			WHERE group_id = '$group_id' AND vectors @@ q ORDER BY rank(vectors, q) DESC)";
+		return $sql;
+	}
+
 	/**
 	 * getSections - returns the list of available doc groups
 	 *
