@@ -2295,7 +2295,12 @@ $dbh->rollback ;
 $dbh->disconnect ;
 
 sub get_pg_version () {
-    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    my $command;
+    if (-x '/usr/bin/pg_lsclusters' ) {
+    	$command = q(/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1) ;
+    } else {
+    	$command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    }
     my $version = qx($command) ;
     chomp $version ;
     return $version ;
