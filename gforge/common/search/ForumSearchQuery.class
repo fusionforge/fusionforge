@@ -53,7 +53,12 @@ class ForumSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM forum_search('".$this->getFormattedWords()."', ".$this->forumId.")";
+			$words = $this->getFormattedWords();
+			$sql = "SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname "
+					." FROM forum, users, to_tsquery('$words') AS q, forum_idx as fi "
+					." WHERE fi.msg_id = forum.msg_id AND vectors @@ q "
+					." AND users.user_id=forum.posted_by AND forum.group_forum_id=$this->forumId "
+					." ORDER BY rank(vectors, q) DESC";
 		} else {
 			$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname '
 				. 'FROM forum,users '

@@ -34,7 +34,14 @@ class ExportProjectSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM export_groups_search('".$this->getFormattedWords()."')";
+			$words = $this->getFormattedWords();
+			$sql = "SELECT headline(group_name, q) as group_name,
+					headline(unix_group_name, q) as unix_group_name,
+					type_id,groups.group_id,headline(short_description, q) as short_description,
+					license,register_time FROM groups, to_tsquery('$words') AS q, groups_idx 
+					WHERE groups.group_id = groups_idx.group_id AND vectors @@ q AND 
+					status IN ('A', 'H') AND is_public='1' AND short_description <> '' 
+					ORDER BY rank(vectors, q) DESC";
 		} else {
 			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
 			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
