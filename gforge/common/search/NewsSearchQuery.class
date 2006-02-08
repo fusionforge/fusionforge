@@ -44,15 +44,16 @@ class NewsSearchQuery extends SearchQuery {
 		if ($sys_use_fti) {
 			$words = $this->getFormattedWords();
 			$group_id=$this->groupId;
-		$sql = "SELECT headline(news_bytes.summary, q) as summary,
-			news_bytes.post_date,
-			news_bytes.forum_id,
-			users.realname
-			FROM news_bytes, users, to_tsquery('$words') AS q
-			WHERE (news_bytes.group_id='$group_id' AND news_bytes.is_approved <> '4'
-			AND news_bytes.submitted_by=users.user_id) AND
-			news_bytes.id IN (SELECT id FROM news_bytes_idx,
-			to_tsquery('$words') AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC)";
+			$sql = "SELECT headline(news_bytes.summary, q) as summary,
+				news_bytes.post_date,
+				news_bytes.forum_id,
+				users.realname
+				FROM news_bytes, users, to_tsquery('$words') AS q, news_bytes_idx
+				WHERE (news_bytes.group_id='$group_id' AND news_bytes.is_approved <> '4'
+				AND news_bytes_idx.id = news_bytes.id
+				AND news_bytes.submitted_by=users.user_id) AND
+				(vectors @@ q)
+				ORDER BY rank(vectors, q) DESC";		
 		} else {
 			$sql = 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname'
 				. ' FROM news_bytes, users'

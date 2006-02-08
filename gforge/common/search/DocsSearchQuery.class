@@ -88,15 +88,16 @@ class DocsSearchQuery extends SearchQuery {
 		}
 		$words = $this->getFormattedWords();
 		$group_id=$this->groupId;
+		
 		$sql="SELECT doc_data.docid, headline(doc_data.title, q) AS title,
-				headline(doc_data.description, q) AS description, doc_groups.groupname
-			FROM doc_data, doc_groups, to_tsquery('$words') AS q
-			WHERE doc_data.doc_group = doc_groups.doc_group
-			AND doc_data.group_id = '$group_id'
-			$sections
-			AND doc_data.stateid IN ($nonPublic)
-			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery('$words') AS q
-			WHERE group_id = '$group_id' AND vectors @@ q ORDER BY rank(vectors, q) DESC)";
+		headline(doc_data.description, q) AS description, doc_groups.groupname
+		FROM doc_data, doc_groups, to_tsquery('$words') AS q, doc_data_idx
+		WHERE doc_data.doc_group = doc_groups.doc_group
+		AND  doc_data.docid = doc_data_idx.docid AND vectors @@ q
+		AND doc_data.group_id = '$group_id'
+		$sections
+		AND doc_data.stateid IN ($nonPublic)
+		ORDER BY rank(vectors, q) DESC";		
 		return $sql;
 	}
 

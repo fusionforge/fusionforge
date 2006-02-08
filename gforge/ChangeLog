@@ -1,3 +1,19 @@
+2006-02-08 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : Patched DocsSearchQuery FTI SQL
+		https://gforge.org/tracker/index.php?func=detail&aid=1849&group_id=6&atid=222
+	* Applied patch :  Patched ExportProjectSearch FTI query
+		https://gforge.org/tracker/index.php?func=detail&aid=1851&group_id=6&atid=222
+	* Applied patch :  forums_search function ordering not results
+		https://gforge.org/tracker/index.php?func=detail&aid=1853&group_id=6&atid=222
+	* Applied patch : NewsSearchQuery not ordering results
+		https://gforge.org/tracker/index.php?func=detail&aid=1855&group_id=6&atid=222
+	* Applied patch :  TasksSearchQuery.class and project_task_search() function problems
+		https://gforge.org/tracker/index.php?func=detail&aid=1858&group_id=6&atid=222
+	* Applied patch : skills_data_search(text) postgresql function not returning results ordered by rank value
+		https://gforge.org/tracker/index.php?func=detail&aid=1857&group_id=6&atid=222
+	* Applied patch : forum_search(text, integer) function not ordering results
+		https://gforge.org/tracker/index.php?func=detail&aid=1852&group_id=6&atid=222
+
 2006-02-03 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch :  magic quotes and search terms
 		http://gforge.org/tracker/?func=detail&aid=1839&group_id=6&atid=222

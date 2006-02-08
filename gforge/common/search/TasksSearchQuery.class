@@ -54,22 +54,29 @@ class TasksSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$nonPublic = 'false';
-			$sections = '';
-			if ($this->showNonPublic) {
-				$nonPublic = 'true';
-			}
+			$sql = 'SELECT project_task.project_task_id,headline(project_task.summary, q) AS summary,project_task.percent_complete,'
+				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 
+				. ' FROM project_task, users, project_group_list, project_task_idx, ' 
+				. ' to_tsquery(\''.$this->getFormattedWords().'\') q'
+				. ' WHERE project_task.created_by = users.user_id'
+				. ' AND project_task.project_task_id = project_task_idx.project_task_id'
+				. ' AND project_task.group_project_id = project_group_list.group_project_id '
+				. ' AND project_group_list.group_id  ='.$this->groupId.' ';
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sections = $this->sections;
+				$sql .= 'AND project_group_list.group_project_id in ('.$this->sections.') ';
 			}
-			$sql = "SELECT * FROM project_task_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+			if (!$this->showNonPublic) {
+				$sql .= 'AND project_group_list.is_public = 1 ';
+			}
+			$sql .= 'AND (vectors @@q)' 
+				. ' ORDER BY rank(vectors, q) DESC';
 		} else {
 			$sql = 'SELECT project_task.project_task_id,project_task.summary,project_task.percent_complete,'
 				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 
 				. ' FROM project_task, users, project_group_list' 
 				. ' WHERE project_task.created_by = users.user_id'
 				. ' AND project_task.group_project_id = project_group_list.group_project_id '
-				. ' AND project_group_list.group_id  ='.$this->groupId;
+				. ' AND project_group_list.group_id  ='.$this->groupId.' ';
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$sql .= 'AND project_group_list.group_project_id in ('.$this->sections.') ';
 			}

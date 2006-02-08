@@ -33,8 +33,13 @@ class SkillSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 		global $sys_use_fti;
-		if ($sys_use_fti) {
-			$sql = "SELECT * FROM skills_data_search('".$this->getFormattedWords()."')";
+		$words = $this->getFormattedWords();
+		if ($sys_use_fti) {		
+			$sql = "SELECT skills_data.skills_data_id, skills_data.type, headline(skills_data.title, q) as title,
+					skills_data.start,skills_data.finish,headline(skills_data.keywords, q) as keywords
+					FROM skills_data, to_tsquery('$words') AS q, users, skills_data_types, skills_data_idx 
+					WHERE skills_data.user_id=users.user_id AND skills_data.skills_data_id = skills_data_idx.skills_data_id 
+					AND skills_data.type=skills_data_types.type_id AND (vectors @@ q) ORDER BY rank(vectors, q) DESC";
 		} else {
 			$sql = 'SELECT * '
 				. 'FROM skills_data, users, skills_data_types '

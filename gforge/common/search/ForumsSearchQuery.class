@@ -62,7 +62,21 @@ class ForumsSearchQuery extends SearchQuery {
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$sections = $this->sections;
 			}
-			$sql = "SELECT * FROM forums_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+			$sql = 'SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name '
+				. 'FROM forum, users, forum_group_list, forum_idx, to_tsquery(\''.
+				  $this->getFormattedWords().'\') as q '
+				. 'WHERE users.user_id = forum.posted_by '
+				. 'AND vectors @@ q AND forum.msg_id = forum_idx.msg_id '
+				. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
+				. 'AND forum_group_list.is_public <> 9 '			
+				. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
+			}
+			if (!$this->showNonPublic) {
+				$sql .= 'AND forum_group_list.is_public = 1 ';
+			}
+			$sql .= 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, rank(vectors, q) DESC';
 		} else {
 			$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name '
 				. 'FROM forum, users, forum_group_list '
