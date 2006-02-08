@@ -135,6 +135,7 @@ if (viewcvs_is_html()) {
 	}
 	scm_header(array('title'=>$Language->getText('scm_index','svn_repository'),
 		'group'=>$Group->getID()));
+	?><link href="/plugins/scmsvn/styles.css" rel="stylesheet" TYPE="text/css"><?php
 	echo $content;
 	scm_footer(array());
 } else {
