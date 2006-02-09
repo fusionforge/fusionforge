@@ -380,17 +380,33 @@ class User extends Error {
 				}
 			}
 
+			db_begin();
+			$res = db_query("DELETE FROM artifact_monitor WHERE user_id='".$this->getID()."' ");
+			if (!$res) {
+				$this->setError('ERROR - Could Not Delete From artifact_monitor: '.db_error());
+				db_rollback();
+				return false;
+			}
+			$res = db_query("DELETE FROM artifact_type_monitor WHERE user_id='".$this->getID()."' ");
+			if (!$res) {
+				$this->setError('ERROR - Could Not Delete From artifact_type_monitor: '.db_error());
+				db_rollback();
+				return false;
+			}
 			$res = db_query("DELETE FROM forum_monitored_forums WHERE user_id='".$this->getID()."' ");
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From forum_monitored_forums: '.db_error());
+				db_rollback();
 				return false;
-			}
+			}				
 			$res = db_query("DELETE FROM filemodule_monitor WHERE user_id='".$this->getID()."' ");
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From filemodule_monitor: '.db_error());
+				db_rollback();
 				return false;
 			}
 			$this->setStatus('D');
+			db_commit();
 		}
 		return true;
 	}

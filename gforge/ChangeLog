@@ -1,3 +1,7 @@
+2006-02-09 Daniel Perez <daniel@gforgegroup.com>
+	* User.class now deletes from filemodule_monitor, forum_monitored_forum, artifact_monitor, artifact_type_monitor when
+		deleting user
+
 2006-02-08 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Patched DocsSearchQuery FTI SQL
 		https://gforge.org/tracker/index.php?func=detail&aid=1849&group_id=6&atid=222
