@@ -34,14 +34,35 @@ $password=$sys_dbpasswd; //Db Password
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
 if(!(isset($sys_path_to_backup)) ||  (strcmp($sys_path_to_backup,"/") == 0)){
-	cron_entry(23,'Variable $sys_path_to_backup was not set or it was equal to /.');	
-	exit;
+//	cron_entry(23,'Variable $sys_path_to_backup was not set or it was equal to /.');	
+//	exit;
+	// Default value
+	$sys_path_to_backup = '/gforge-backups/';
 }
 
 if(util_is_root_dir($sys_path_to_backup)){
 	$sys_path_to_backup=$sys_path_to_backup.'/';
 }
 
+if (!is_dir($sys_path_to_backup)) {
+	// try to recursively create it
+	$subdirs = explode('/', $sys_path_to_backup);
+	$path = '';
+	foreach ($subdirs as $subdir) {
+		$subdir = trim($subdir);
+		if (empty($subdir)) continue;
+		$path .= '/'.$subdir;
+		if (!mkdir($path)) {
+			cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
+			exit;
+		}
+	}
+}
+
+// add trailing slash
+if (!preg_match('/\\/$/',$sys_path_to_backup)) {
+	$sys_path_to_backup .= '/';
+}
 
 $output = "";
 $err = "";
@@ -50,9 +71,12 @@ if($retval!=0){
 	$err.= implode("\n", $output);
 }
 
+/**************************************
+ * Backup uploads dir
+ **************************************/ 
 $output="";
 if (file_exists($sys_upload_dir)) {
-	@exec('tar -cvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar '.$sys_upload_dir.' 2>&1' ,$output,$retval);   //proceed upload dir tar file creation
+	@exec('tar -jcvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar.bz2 '.$sys_upload_dir.' 2>&1' ,$output,$retval);   //proceed upload dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
@@ -60,28 +84,40 @@ if (file_exists($sys_upload_dir)) {
 		$err.= 'Unable to find Upload Dir. Value on local.inc is:'.$sys_upload_dir;
 }
 
+/**************************************
+ * Backup mailing lists files
+ **************************************/ 
 $output="";
-if (file_exists($sys_path_to_mailman)) {
-	@exec('tar -cvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar '.$sys_path_to_mailman.'/ 2>&1', $output,$retval);   //proceed mailman dir tar file creation
+// Most probable mailman data dir
+$mailman_data_dir = '/var/lib/mailman';
+if (file_exists($mailman_data_dir)) {
+	@exec('tar -jcvf '.$sys_path_to_backup.'mailinglist-tmp-'.$datetime.'.tar.bz2 '.$mailman_data_dir.'/ 2>&1', $output,$retval);   //proceed mailman dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);	
 	} 
 } else {
-		$err.= 'Unable to find Mailman Dir. Value on local.inc is:'.$sys_path_to_mailman;
+		$err.= 'Unable to find Mailman data dir. Please edit backup_site.php cronjob';
 }
 
+/**************************************
+ * Backup CVS repositories
+ **************************************/ 
 $output="";
 if (file_exists($cvsdir_prefix)) {
-	@exec('tar -cvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar '.$cvsdir_prefix.'/ 2>&1' ,$output,$retval);   //proceed cvsroot dir tar file creation
+	@exec('tar -jcvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar.bz2 '.$cvsdir_prefix.'/ 2>&1' ,$output,$retval);   //proceed cvsroot dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
 } else {
 	$err.= 'Unable to find CVSROOT Dir. Value on local.inc is:'.$cvsdir_prefix;
 }
+
+/**************************************
+ * Backup SVN repositories
+ **************************************/ 
 $output="";
 if (file_exists($svndir_prefix)) {
-	@exec('tar -cvf '.$sys_path_to_backup.'svnroot-tmp-'.$datetime.'.tar '.$svndir_prefix.'/ 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
+	@exec('tar -jcvf '.$sys_path_to_backup.'svnroot-tmp-'.$datetime.'.tar.bz2 '.$svndir_prefix.'/ 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
@@ -89,9 +125,25 @@ if (file_exists($svndir_prefix)) {
 	$err.= 'Unable to find SVNROOT Dir. Value on local.inc is:'.$svndir_prefix;
 }
 
-//Now we store all the tar files we've just created in one tar called backup(date).tar 
+/**************************************
+ * Backup config files
+ **************************************/ 
 $output="";
-@exec('tar -cvf '.$sys_path_to_backup.'backup'.$datetime.'.tar '.$sys_path_to_backup.'*-tmp-'.$datetime.'*  2>&1',$output,$retval);
+if (file_exists('/etc/gforge')) {
+	@exec('tar -jcvf '.$sys_path_to_backup.'etc-tmp-'.$datetime.'.tar.bz2 /etc/gforge 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
+	if($retval!=0){
+		$err.= implode("\n", $output);
+	}
+} else {
+	$err.= 'Unable to find /etc/gforge dir.';
+}
+
+
+/**************************************
+ * Create backup file
+ **************************************/ 
+$output="";
+@exec('tar -jcvf '.$sys_path_to_backup.'backup'.$datetime.'.tar.bz2 '.$sys_path_to_backup.'*-tmp-'.$datetime.'*  2>&1',$output,$retval);
 if($retval!=0){
 	$err.= implode("\n", $output);
 }
