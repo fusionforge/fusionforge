@@ -10,15 +10,20 @@ ALTER TABLE groups ADD COLUMN unix_gid int;
 ALTER TABLE groups SET DEFAULT nextval('group_unix_id_seq');
 UPDATE groups SET unix_gid=nextval('group_unix_id_seq');
 
-CREATE OR REPLACE FUNCTION userunixid_func() RETURNS OPAQUE AS '
+DROP FUNCTION userunixid_func() CASCADE;
+CREATE OR REPLACE FUNCTION userunixid_func() RETURNS TRIGGER AS '
+DECLARE
+	newuser RECORD;
 BEGIN 
 	FOR newuser IN SELECT unix_uid FROM users WHERE user_id=NEW.user_id LOOP
 		IF newuser.unix_uid=0 THEN
 			UPDATE users SET unix_uid=nextval(''user_unix_id_seq''),
 				unix_gid=currval(''user_unix_id_seq'')
-				WHERE user_id=NEW.user_id
+				WHERE user_id=NEW.user_id;
+		END IF;
 	END LOOP;
-end;
+	RETURN NEW;
+END;
 ' LANGUAGE plpgsql;
 
 CREATE TRIGGER usergroup_insert_userunixid AFTER INSERT ON user_group
