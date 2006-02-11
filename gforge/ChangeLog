@@ -1,3 +1,9 @@
+2006-02-11 Tim Perdue   <tim@gforgegroup.com>
+
+	* Added priority column to tracker and made its background the priority color.
+	the rest of the row is now standard alternating color for accessibility reasons.
+
+
 2006-02-09 Daniel Perez <daniel@gforgegroup.com>
 	* User.class now deletes from filemodule_monitor, forum_monitored_forum, artifact_monitor, artifact_type_monitor when
 		deleting user
