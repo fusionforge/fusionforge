@@ -10,6 +10,20 @@ ALTER TABLE groups ADD COLUMN unix_gid int;
 ALTER TABLE groups SET DEFAULT nextval('group_unix_id_seq');
 UPDATE groups SET unix_gid=nextval('group_unix_id_seq');
 
+CREATE OR REPLACE FUNCTION userunixid_func() RETURNS OPAQUE AS '
+BEGIN 
+	FOR newuser IN SELECT unix_uid FROM users WHERE user_id=NEW.user_id LOOP
+		IF newuser.unix_uid=0 THEN
+			UPDATE users SET unix_uid=nextval(''user_unix_id_seq''),
+				unix_gid=currval(''user_unix_id_seq'')
+				WHERE user_id=NEW.user_id
+	END LOOP;
+end;
+' LANGUAGE plpgsql;
+
+CREATE TRIGGER usergroup_insert_userunixid AFTER INSERT ON user_group
+        FOR EACH ROW EXECUTE PROCEDURE userunixid_func();
+
 --
 -- Passwd view
 --
@@ -26,7 +40,7 @@ CREATE VIEW nss_passwd AS
 		status
 	FROM users
 	WHERE STATUS='A' AND EXISTS (SELECT user_id 
-		FROM user_group WHERE user_id=users.user_id);
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
 
 --
 -- Shadow view (for future use)
@@ -40,7 +54,7 @@ CREATE VIEW nss_shadow AS
 		CHAR(1) 'n' AS pwchange
 	FROM users
 	WHERE STATUS='A' AND EXISTS (SELECT user_id 
-		FROM user_group WHERE user_id=users.user_id);
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
 --
 -- Group Table
 -- Extracted from group information
@@ -54,7 +68,7 @@ CREATE VIEW nss_groups AS
 	SELECT user_id,0,user_name, unix_gid
 	FROM users
 	WHERE status = 'A' AND EXISTS (SELECT user_id
-		FROM user_group WHERE user_id=users.user_id);;
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
 --
 -- User_Group Table
 --
@@ -76,7 +90,8 @@ CREATE VIEW nss_usergroups AS
 	AND
 		groups.status = 'A'
 	AND
-		users.status = 'A';
+		users.status = 'A'
+	AND user_group.cvs_flags=1;
 
 --create index nssusergroup_gidusername ON nss_usergroups(gid,user_name);
 --create index nssusergroup_usernamegid ON nss_usergroups(user_name,gid);
