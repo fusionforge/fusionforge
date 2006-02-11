@@ -1,0 +1,85 @@
+--
+--
+--
+CREATE SEQUENCE user_unix_id_seq START 20000;
+CREATE SEQUENCE group_unix_id_seq START 50000;
+UPDATE users SET unix_uid=0,unix_gid=0;
+UPDATE users SET unix_uid=nextval('user_unix_id_seq'),unix_gid=currval('user_unix_id_seq') 
+	WHERE user_id IN (SELECT user_id FROM user_group);
+ALTER TABLE groups ADD COLUMN unix_gid int;
+ALTER TABLE groups SET DEFAULT nextval('group_unix_id_seq');
+UPDATE groups SET unix_gid=nextval('group_unix_id_seq');
+
+--
+-- Passwd view
+--
+DROP VIEW nss_passwd;
+CREATE VIEW nss_passwd AS
+	SELECT
+		unix_uid AS uid,
+		unix_gid AS gid,
+		user_name AS login,
+		unix_pw AS passwd,
+		realname AS gecos,
+		shell,
+		user_name AS homedir,
+		status
+	FROM users
+	WHERE STATUS='A' AND EXISTS (SELECT user_id 
+		FROM user_group WHERE user_id=users.user_id);
+
+--
+-- Shadow view (for future use)
+--
+DROP VIEW nss_shadow;
+CREATE VIEW nss_shadow AS
+	SELECT
+		user_name AS login,
+		unix_pw AS passwd,
+		CHAR(1) 'n' AS expired,
+		CHAR(1) 'n' AS pwchange
+	FROM users
+	WHERE STATUS='A' AND EXISTS (SELECT user_id 
+		FROM user_group WHERE user_id=users.user_id);
+--
+-- Group Table
+-- Extracted from group information
+--
+DROP TABLE nss_groups;
+DROP VIEW nss_groups;
+CREATE VIEW nss_groups AS
+	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
+	FROM groups
+	UNION 
+	SELECT user_id,0,user_name, unix_gid
+	FROM users
+	WHERE status = 'A' AND EXISTS (SELECT user_id
+		FROM user_group WHERE user_id=users.user_id);;
+--
+-- User_Group Table
+--
+DROP TABLE nss_usergroups ;
+DROP VIEW nss_usergroups;
+CREATE VIEW nss_usergroups AS 
+	SELECT
+		users.unix_uid AS uid,
+		groups.unix_gid AS gid,
+		users.user_id AS user_id,
+		groups.group_id AS group_id,
+		users.user_name AS user_name,
+		groups.unix_group_name AS unix_group_name
+	FROM users,groups,user_group
+	WHERE 
+		users.user_id=user_group.user_id
+	AND
+		groups.group_id=user_group.group_id
+	AND
+		groups.status = 'A'
+	AND
+		users.status = 'A';
+
+--create index nssusergroup_gidusername ON nss_usergroups(gid,user_name);
+--create index nssusergroup_usernamegid ON nss_usergroups(user_name,gid);
+create index users_uid on users(unix_uid);
+create index users_gid on users(unix_gid);
+create index groups_gid on groups (unix_gid);
