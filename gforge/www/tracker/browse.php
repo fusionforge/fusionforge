@@ -246,7 +246,7 @@ if ($art_arr && count($art_arr) > 0) {
 	$display_col=array('summary'=>1,
 		'open_date'=>1,
 		'status'=>0,
-		'priority'=>0,
+		'priority'=>1,
 		'assigned_to'=>1,
 		'submitted_by'=>1);
 
@@ -279,8 +279,8 @@ if ($art_arr && count($art_arr) > 0) {
 //echo "max: $max";
 	for ($i=$start; $i<$max; $i++) {
 		echo '
-		<tr bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'.
-		'<td NOWRAP>'.
+		<tr '. $HTML->boxGetAltRowStyle($i) . '>'.
+		'<td>'.
 		($IS_ADMIN?'<input type="CHECKBOX" name="artifact_id_list[]" value="'.
 			$art_arr[$i]->getID() .'"> ':'').
 			$art_arr[$i]->getID() .
@@ -298,7 +298,7 @@ if ($art_arr && count($art_arr) > 0) {
 		if ($display_col['status'])
 			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
 		if ($display_col['priority'])
-			echo '<td>'. $art_arr[$i]->getPriority() .'</td>';
+			echo '<td bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'. $art_arr[$i]->getPriority() .'</td>';
 		if ($display_col['assigned_to'])
 			echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
 		if ($display_col['submitted_by'])
