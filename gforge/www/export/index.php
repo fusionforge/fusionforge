@@ -13,7 +13,7 @@
 
 
 require_once('pre.php');
-
+global $group_id;
 $HTML->header(array(title=>"Exports Available"));
 ?>
 <p><?php echo $GLOBALS['sys_name']; ?> data is exported in a variety of standard formats. Many of
