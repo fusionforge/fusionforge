@@ -419,9 +419,9 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
-			return 'bgcolor="#E0E0E0" background="'.$this->imgroot.'vert-grad.png"';
+			return 'bgcolor="#E0E0E0"';
 		} else {
-			return 'bgcolor="#AEAEAE" background="'.$this->imgroot.'box-grad.png"';
+			return 'bgcolor="#C9C9C9"';
 		}			
 	}
 
