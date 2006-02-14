@@ -67,13 +67,13 @@ CREATE VIEW nss_shadow AS
 DROP TABLE nss_groups;
 DROP VIEW nss_groups;
 CREATE VIEW nss_groups AS
-	SELECT user_id,0,user_name, unix_gid
-	FROM users
-	WHERE status = 'A' AND EXISTS (SELECT user_id
-		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
---	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
---	FROM groups
+--	SELECT user_id,0,user_name AS NAME, unix_gid
+--	FROM users
+--	WHERE status = 'A' AND EXISTS (SELECT user_id
+--		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 --	UNION 
+	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
+	FROM groups
 --
 -- User_Group Table
 --
