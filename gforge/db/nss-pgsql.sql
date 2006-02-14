@@ -45,7 +45,7 @@ CREATE VIEW nss_passwd AS
 		status
 	FROM users
 	WHERE STATUS='A' AND EXISTS (SELECT user_id 
-		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 
 --
 -- Shadow view (for future use)
@@ -59,7 +59,7 @@ CREATE VIEW nss_shadow AS
 		CHAR(1) 'n' AS pwchange
 	FROM users
 	WHERE STATUS='A' AND EXISTS (SELECT user_id 
-		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 --
 -- Group Table
 -- Extracted from group information
@@ -67,13 +67,13 @@ CREATE VIEW nss_shadow AS
 DROP TABLE nss_groups;
 DROP VIEW nss_groups;
 CREATE VIEW nss_groups AS
-	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
-	FROM groups
-	UNION 
 	SELECT user_id,0,user_name, unix_gid
 	FROM users
 	WHERE status = 'A' AND EXISTS (SELECT user_id
-		FROM user_group WHERE user_id=users.user_id AND cvs_flags=1);
+		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
+--	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
+--	FROM groups
+--	UNION 
 --
 -- User_Group Table
 --
@@ -96,10 +96,14 @@ CREATE VIEW nss_usergroups AS
 		groups.status = 'A'
 	AND
 		users.status = 'A'
-	AND user_group.cvs_flags=1;
+	AND user_group.cvs_flags IN (0,1);
 
 --create index nssusergroup_gidusername ON nss_usergroups(gid,user_name);
 --create index nssusergroup_usernamegid ON nss_usergroups(user_name,gid);
 create index users_uid on users(unix_uid);
 create index users_gid on users(unix_gid);
 create index groups_gid on groups (unix_gid);
+grant select on nss_passwd to cvsuser;
+grant select on nss_usergroups to cvsuser;
+grant select on nss_groups to cvsuser;
+grant select on nss_shadow to cvsuser;
