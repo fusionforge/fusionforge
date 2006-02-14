@@ -1,7 +1,7 @@
 #! /usr/bin/php4 -f
 <?php
 /**
- * GForge Group Role Generator
+ * GForge Extra Field Conversion Script
  *
  * Copyright 2004 GForge, LLC
  * http://gforge.org/
@@ -120,14 +120,15 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		}
 		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$catbox_id FROM artifact 
-			WHERE category_id='$cat_id'");
+			WHERE category_id='$cat_id' AND group_artifact_id='$gaid'");
 		if (!$res2) {
 			echo "Could Not Insert AEFD for category " . db_error();
 			db_rollback();
 			exit(6);
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$cat_name',field_name='Category'
-			WHERE old_value='$cat_id' AND field_name='category_id'");
+			WHERE old_value='$cat_id' AND field_name='category_id' AND artifact_id IN
+            (SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
 		if (!$res3) {
 			echo "Could Not update history category " . db_error();
 			db_rollback();
@@ -171,14 +172,15 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		}
 		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact 
-			WHERE artifact_group_id='$artgroup_id'");
+			WHERE artifact_group_id='$artgroup_id' AND group_artifact_id='$gaid'");
 		if (!$res2) {
 			echo "Could Not Insert AEFD for artifactgroup " . db_error();
 			db_rollback();
 			exit(10);
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$group_name',field_name='Group'
-			WHERE old_value='$artgroup_id' AND field_name='artifact_group_id'");
+			WHERE old_value='$artgroup_id' AND field_name='artifact_group_id' AND artifact_id IN
+            (SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
 		if (!$res3) {
 			echo "Could Not update history artifactgroup " . db_error();
 			db_rollback();
@@ -222,14 +224,15 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			}
 			$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact 
-				WHERE resolution_id='$resolution_id'");
+				WHERE resolution_id='$resolution_id' AND group_artifact_id='$gaid'");
 			if (!$res2) {
 				echo "Could Not Insert AEFD for resolution " . db_error();
 				db_rollback();
 				exit(14);
 			}
 			$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
-				WHERE old_value='$resolution_id' AND field_name='resolution_id'");
+				WHERE old_value='$resolution_id' AND field_name='resolution_id' AND artifact_id IN 
+				(SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
 			if (!$res3) {
 				echo "Could Not update history resolution " . db_error();
 				db_rollback();
@@ -237,8 +240,8 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			}
 		}
 	}
-	db_commit();
 }
+db_commit();
 
 
 echo "SUCCESS";
