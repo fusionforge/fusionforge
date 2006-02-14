@@ -73,7 +73,7 @@ CREATE VIEW nss_groups AS
 --		FROM user_group WHERE user_id=users.user_id AND cvs_flags IN (0,1));
 --	UNION 
 	SELECT 0 AS user_id, group_id,unix_group_name AS name, unix_gid AS gid
-	FROM groups
+	FROM groups;
 --
 -- User_Group Table
 --
