@@ -10,14 +10,14 @@ echo ""
 # if no arguments, print out help screen
 if test $# -lt 4; then 
 	echo "usage:"
-	echo "  cvscreate.sh [repositoryname] [groupid] [isanonymousenabled] [ispserverenabled]"
+	echo "  cvscreate.sh [repositoryname] [groupname] [isanonymousenabled] [ispserverenabled]"
 	echo ""
 	exit 1 
 fi
 
 repositoryname=$1
 repositorypath=/cvsroot/$1
-groupid=$2
+groupname=$2
 isanonymousenabled=$3
 ispserverenabled=$4
 
@@ -57,7 +57,7 @@ function createRepository() {
 	chmod 444 $repositorypath/CVSROOT/config
 	echo "" > $repositorypath/CVSROOT/val-tags
 	chmod 664 $repositorypath/CVSROOT/val-tags
-	chown -R nobody:$groupid $repositorypath
+	chown -R nobody:$groupname $repositorypath
 }
 
 if [ -d $repositorypath ] ; then
