@@ -29,6 +29,7 @@ require_once('common/include/User.class');
 require_once('common/include/Permission.class');
 require_once('common/include/utils.php');
 require_once('common/include/Group.class');
+require_once('common/include/escapingUtils.php');
 require_once('www/include/BaseLanguage.class');
 
 $Language=new BaseLanguage();
