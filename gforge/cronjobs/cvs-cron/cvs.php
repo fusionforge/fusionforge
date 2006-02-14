@@ -286,11 +286,21 @@ function update_cvs_repositories() {
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
+			// Creates the repository
+			
+			// first, make sure the UNIX group exists
+			$data = exec('getent group '.$project->getUnixName());
+			if (empty($data)) {
+				// group doesn't exist -- cronjob that creates users and groups hasn't run yet
+				continue;
+			}
+			
 			$enableAnonSCM = ($project->enableAnonSCM()) ? 1 : 0;
 			$enablePserver = ($project->enablePserver()) ? 1 : 0;
 			system(dirname(__FILE__).'/cvscreate.sh '.
 				$project->getUnixName().
-				' '.($project->getID()+50000).
+//				' '.($project->getID()+50000).
+				' '.$project->getUnixName().
 				' '.$enableAnonSCM.
 				' '.$enablePserver);
 			if ($project->usesPlugin('cvssyncmail')) {
