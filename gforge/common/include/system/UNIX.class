@@ -24,6 +24,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+require_once('common/include/System.class');
 
 class UNIX extends System {
 	/**
@@ -49,6 +50,7 @@ class UNIX extends System {
  	*
  	*/
 	function sysCreateUser($user_id) {
+/*
 		$user = &user_get_object($user_id);
 		if (!$user) {
 			return false;
@@ -64,6 +66,8 @@ class UNIX extends System {
 			}
 			return true;
 		}
+*/
+		return true;
 	}
 
 	/**
@@ -74,11 +78,13 @@ class UNIX extends System {
  	*
  	*/
 	function sysRemoveUser($user_id) {
+/*
 		$res=db_query("UPDATE users SET unix_status='N' WHERE user_id=$user_id");
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
 			return false;
 		}
+*/
 		return true;
 	}
 
