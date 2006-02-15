@@ -155,7 +155,7 @@ function login($userid, $passwd) {
 	$res = session_login_valid($userid, $passwd);
 	
 	if (!$res) {
-		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, $feedback);
+		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid, $feedback);
  	}
 	
 	return $session_ser;
