@@ -3,7 +3,8 @@
 --
 CREATE SEQUENCE user_unix_id_seq START 20000;
 CREATE SEQUENCE group_unix_id_seq START 50000;
-UPDATE users SET unix_uid=0,unix_gid=0;
+UPDATE users SET unix_uid=0,unix_gid=0,shell='/bin/cvssh.pl';
+ALTER TABLE users ALTER COLUMN shell SET default '/bin/cvssh.pl';
 UPDATE users SET unix_uid=nextval('user_unix_id_seq'),unix_gid=currval('user_unix_id_seq') 
 	WHERE user_id IN (SELECT user_id FROM user_group);
 ALTER TABLE groups ADD COLUMN unix_gid int;
