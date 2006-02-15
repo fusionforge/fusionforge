@@ -26,7 +26,7 @@
  */
 require_once('common/include/System.class');
 
-class UNIX extends System {
+class NSSPGSQL extends System {
 	/**
         * Value to add to unix_uid to get unix uid
 	*
@@ -35,10 +35,10 @@ class UNIX extends System {
 	var $UID_ADD = 20000;
 
 	/**
-	*	UNIX() - CONSTRUCTOR
+	*	NSSPGSQL() - CONSTRUCTOR
 	*
 	*/
-	function UNIX() {
+	function NSSPGSQL() {
 		$this->System();
 		return true;
 	}
@@ -50,21 +50,7 @@ class UNIX extends System {
  	*
  	*/
 	function sysCreateUser($user_id) {
-		$user = &user_get_object($user_id);
-		if (!$user) {
-			return false;
-		} else {
-			$res=db_query("UPDATE users SET
-			unix_uid=user_id+".$this->UID_ADD.",
-			unix_gid=user_id+".$this->UID_ADD.",
-			unix_status='A'
-			WHERE user_id=$user_id");
-	                if (!$res) {
-	                        $this->setError('ERROR - Could Not Update User UID/GID: '.db_error());
-	                        return false;
-			}
-			return true;
-		}
+		return true;
 	}
 
 	/**
@@ -75,11 +61,6 @@ class UNIX extends System {
  	*
  	*/
 	function sysRemoveUser($user_id) {
-		$res=db_query("UPDATE users SET unix_status='N' WHERE user_id=$user_id");
-		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
-			return false;
-		}
 		return true;
 	}
 
