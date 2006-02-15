@@ -88,7 +88,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysCreateUser($user_id) {
-/*
 		$user = &user_get_object($user_id);
 		if (!$user) {
 			return false;
@@ -178,8 +177,6 @@ class pgsql extends System {
 			}
 			return true;
 		}
-*/
-		return true;
 	}
 
 	/**
@@ -212,7 +209,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysRemoveUser($user_id) {
-/*
 		$res=db_query("UPDATE users SET unix_status='N' WHERE user_id=$user_id");
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
@@ -233,7 +229,6 @@ class pgsql extends System {
 				return false;
 			}
 		}
-*/
 		return true;
 	}
 
@@ -262,7 +257,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysCheckGroup($group_id) {
-/*
 		$group =& group_get_object($group_id);
 		if (!$group){
 			return false;
@@ -275,8 +269,6 @@ class pgsql extends System {
 				return true;
 			}
 		}
-*/
-		return true;
 	}
 
 	/**
@@ -287,7 +279,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysCreateGroup($group_id) {
-/*
 		$group = &group_get_object($group_id);
 		if (!$group) {
 			return false;
@@ -377,7 +368,6 @@ class pgsql extends System {
 	                        	return false;
 				}
 		}
-*/
 		return true;
 	}
 
@@ -389,7 +379,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysRemoveGroup($group_id) {
-/*
 		$query="DELETE FROM nss_usergroups WHERE group_id=$group_id";
 //echo "<h2>SYS::sysRemoveGroup: $query</h2>";
 		$res1=db_query($query);
@@ -404,7 +393,6 @@ class pgsql extends System {
 	                      	$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
 	                      	return false;
 		}
-*/
 		return true;
 	}
 
@@ -418,7 +406,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
-/*
 		if ($cvs_only) {
 			$query="DELETE FROM nss_usergroups WHERE user_id=$user_id AND group_id=$group_id
 			AND unix_group_name LIKE 'scm_%'";
@@ -496,7 +483,7 @@ class pgsql extends System {
 			$this->setError('ERROR - Could Not Add Shell Group Member(s): '.db_error());
 			return false;
 		}
-*/
+
 		return true;
 	}
 
@@ -510,7 +497,6 @@ class pgsql extends System {
  	*
  	*/
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
-/*
 		if ($cvs_only) {
 			$query="DELETE FROM nss_usergroups WHERE group_id=$group_id AND user_id=$user_id
 			AND unix_group_name LIKE 'scm_%'";
@@ -523,7 +509,6 @@ class pgsql extends System {
 			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
 			return false;
 		}
-*/
 		return true;
 	}
 }
