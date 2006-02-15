@@ -1032,7 +1032,7 @@ class Artifact extends Error {
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped
 //
-			if (!$extra_fields[$efid]) {
+			if (!array_key_exists($efid, $extra_fields) || !$extra_fields[$efid]) {
 				if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					$this->setError('Status Custom Field Must Be Set');
 					return false;

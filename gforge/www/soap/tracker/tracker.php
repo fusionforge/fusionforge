@@ -731,7 +731,11 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 	}
 	
 	$af->setup(0,'','',0,$set,$assigned_to,$status);
-	return artifacts_to_soap($af->getArtifacts());
+	$artifacts = $af->getArtifacts();
+	if ($artifacts === false) {
+		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
+	}
+	return artifacts_to_soap($artifacts);
 
 }
 
@@ -748,6 +752,9 @@ function getArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id) {
 function artifacts_to_soap($at_arr) {
 	$return = array();
 	for ($i=0; $i<count($at_arr); $i++) {
+		// return only the first 100
+		if ($i == 100) break;
+		
 		if ($at_arr[$i]->isError()) {
 			//skip if error
 		} else {
