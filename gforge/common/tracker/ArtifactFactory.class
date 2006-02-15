@@ -262,6 +262,8 @@ class ArtifactFactory extends Error {
 		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
 			$keys=array_keys($this->extra_fields);
 			$vals=array_values($this->extra_fields);
+			$ef_where_str='';
+			$ef_table_str='';
 			for ($i=0; $i<count($keys); $i++) {
 				if (empty($vals[$i])) {
 					continue;
@@ -310,6 +312,10 @@ class ArtifactFactory extends Error {
 		} else {
 			$closedatesql= '';
 		}
+		
+		// these are currently not being used
+		$submitted_by_str = '';
+		
 		//
 		//  now run the query using the criteria chosen above
 		//
