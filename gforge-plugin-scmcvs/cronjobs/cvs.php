@@ -213,6 +213,36 @@ function add_cvstracker($unix_group_name) {
 	} else {
 //		echo "cvstracker Found!\n";
 	}
+	
+	// now make sure that if cvs version is 1.12, "UseNewInfoFmtStrings=yes" line
+	// MUST be present in CVSROOT/config, or else cvstracker won't work
+	if ($cvs_binary_version == "1.12") {
+		$config_file = $loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/config';
+		if (!is_file($config_file)) {
+			echo "Couldn't get CVSROOT/config for $unix_group_name";
+			return;
+		}
+		
+		$content = file_get_contents($config_file);
+		if (!preg_match("/UseNewInfoFmtStrings=yes/i", $content)) {
+			// file must be modified
+			$config_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/config');
+			if (is_file($config_file)) {
+				$lines = file($config_file);
+				$newlines = array();
+				foreach ($lines as $line) {
+					if (!preg_match("/UseNewInfoFmtStrings/i", $line)) {		// maybe it was set to "no"?
+						$newlines[] = trim($line);
+					}
+				}
+				$newlines[] = "UseNewInfoFmtStrings=yes";	// add the required line at the end
+			}
+			$content = implode("\n", $newlines);
+			cvs_write_file($config_file, $content, 0);
+			commit_cvs_file($cvsdir_prefix."/".$unix_group_name, $config_file);
+			release_cvs_file($config_file);
+		}
+	}
 }
 
 function add_acl_check($unix_group_name) {
