@@ -19,11 +19,27 @@
  */
 
 global $sys_plugins_path;
-require_once ($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class') ;
 
-$SVNCommitEmailPlugin = new SVNCommitEmailPlugin() ;
+$found = false;
+if (is_dir($sys_plugins_path.'/svncommitemail/common/')) {
+	if (is_file($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class')) {
+		require_once ($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class') ;
+		$found = true;
+	}
+} else {
+	if (is_file($sys_plugins_path.'/svncommitemail/include/SVNCommitEmailPlugin.class')) {
+		require_once ($sys_plugins_path.'/svncommitemail/include/SVNCommitEmailPlugin.class') ;
+		$found = true;
+	}
+}
 
-register_plugin ($SVNCommitEmailPlugin) ;
+if ($found) {
+	$SVNCommitEmailPlugin = new SVNCommitEmailPlugin() ;
+	register_plugin ($SVNCommitEmailPlugin) ;	
+} else {
+	echo 'Plugin svncommitemail not found';
+}
+
 
 // Local Variables:
 // mode: php
