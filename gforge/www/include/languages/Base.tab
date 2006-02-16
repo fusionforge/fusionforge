@@ -2800,6 +2800,8 @@ tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<
 tracker	open_date	Open Date
 tracker	pagetitle	Tracker
 tracker	please_login	Please $1 login $2
+tracker	related_tasks	Related Tasks
+tracker	no_related_tasks	No related tasks
 tracker	priority	Priority
 tracker	reporting	Report
 tracker	resolution	Resolution
