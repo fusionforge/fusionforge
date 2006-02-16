@@ -318,7 +318,11 @@ class MailingList extends Error {
 	 * @return string url of the archives
 	 */
 	function getArchivesUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		if ($this->isPublic()) {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		} else {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+		}
 	}
 	
 	/**

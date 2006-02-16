@@ -27,33 +27,104 @@
 
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
+require_once('common/mail/MailingList.class');
+require_once('common/mail/MailingListFactory.class');
 
-$use_cvs_acl = false;
-$maincvsroot = "/cvsroot/";
+require_once('common/include/SCM.class') ;
 
-//the directory exists
-if(is_dir($maincvsroot)) {
-	addProjectRepositories();
-} else {
-	if(is_file($maincvsroot)) {
-		$err .= "$maincvsroot exists but is a file\n";
-		exit;
-	} else {
-		if (mkdir($maincvsroot)) {
-			//need to update group permissions using chmod
-			addProjectRepositories();
-		} else {
-			$err .= "unable to make $maincvsroot directory\n";
-			exit;
-		}	
+setup_plugin_manager () ;
+
+//
+//	Some OSs do not allow root to do a commit
+//	so having this script do a proper checkout/commit is not possible
+//
+$scmcvs_proper_commit_loginfo=false;
+
+/**
+ * Retrieve a file into a temporary directory from a CVS server
+ *
+ * @param String $repos Repository Name
+ * @param String $file File Name
+ *
+ * return String the FileName in the working repository
+ */
+function checkout_cvs_file($repos,$file) {
+//echo "$repos,$file\n";
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return $repos.'/'.$file;
 	}
+	$actual_dir = getcwd();
+	$tempdirname = tempnam("/tmp","cvstracker");
+	if (!$tempdirname) 
+		return false;
+	if (!unlink($tempdirname))
+		return false;
+
+	// Create the temporary directory and returns its name.
+	if (!mkdir($tempdirname))
+		return false;
+
+	if (!chdir($tempdirname))
+		return false;
+	system("cvs -d ".$repos." co ".$file);
+
+	chdir($actual_dir);
+	return $tempdirname."/".$file;
 }
 
-function writeFile($filePath, $content) {
-	$file = fopen($filePath, 'a');
+/**
+ * commit_cvs_file commit a file to the repository
+ *
+ * @param String $repos Repository
+ * @param String $file to commit
+ * @param String $message to commit
+ */
+function commit_cvs_file($repos,$file,$message="Automatic updated by cvstracker") {
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return true;
+	}
+	$actual_dir = getcwd();
+	chdir(dirname($file));	
+	system("cvs -d ".$repos." ci -m \"".$message."\" ".basename($file));
+	// unlink (basename($file));
+	chdir($actual_dir);
+}
+
+/**
+ * release_cvs_file - Remove the file that was checked out from cvs
+ * @see checkout_cvs_file
+ */
+function release_cvs_file($file) {
+	global $scmcvs_proper_commit_loginfo;
+	if (!$scmcvs_proper_commit_loginfo) {
+		return true;
+	}
+	// $file is something like /tmp/(tmp_dir)/path/to/file
+	// we must delete /tmp/tmp_dir
+	if (!preg_match("/^(\\/tmp\\/[^\\/]*)\\/.* /", $file, $result)) {		// Make sure the dir is under /tmp
+		echo "Trying to release a directory not in /tmp. Skipping...";
+		return;
+	}
+	$dir = $result[1];
+	
+	// this shouldn't happen... but add it as a security checke
+	if (util_is_root_dir($dir)) {
+		echo "Trying to delete root dir. Skipping...";
+		return;
+	}
+	$dir = escapeshellarg($dir);
+	system("rm -rf ".$dir);
+}
+
+function cvs_write_file($filePath, $content, $append=1) {
+	if ($append) {
+		$file = fopen($filePath, 'a');
+	} else {
+		$file = fopen($filePath, 'w');
+	}
 	flock($file, LOCK_EX);
-	ftruncate($file, 0);
-	rewind($file);
 	if(!empty($content)) {
 		fwrite($file, $content);
 	}
@@ -62,82 +133,169 @@ function writeFile($filePath, $content) {
 }
 
 /**
-*addsyncmail
-*Copyright GForge 2004
-*addsyncmail write to /CVSROOT/loginfo unix_name-commits@lists.gforge.company.com
-*
-*@autor Luis A. Hurtado A. luis@gforgegroup.com
-*@param $unix_group_name Name Group
-*@return void
-*@date 2004-10-25
-*/
-function addsyncmail($unix_group_name) {
+ *add_sync_mail write to /CVSROOT/loginfo unix_name-commits@lists.gforge.company.com
+ *
+ *@param $unix_group_name Name Group
+ *@return void
+ *@date 2004-10-25
+ */
+function add_sync_mail($unix_group_name) {
 
-	global $sys_lists_host;
-	global $maincvsroot;
-	$loginfo = $maincvsroot.$unix_group_name.'/CVSROOT/loginfo';
+	global $sys_lists_host, $cvsdir_prefix, $cvs_binary_version,$sys_plugins_path;
+	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
-	if (checkLoginfo($loginfo)) {
-		$pathsyncmail = "ALL ".dirname(__FILE__)."/syncmail -u %1{sVv} ".$unix_group_name."-commits@".$sys_lists_host."\n";
-		if(is_file($loginfo)){
-			writeFile($loginfo, $pathsyncmail);
+	if (!$loginfo_file) {
+		echo "Couldn't get loginfo for $unix_group_name";
+		return;
+	}
+
+	$content = file_get_contents ($loginfo_file);
+	if ( strstr($content, "syncmail") == FALSE) {
+//		echo $unix_group_name.":Syncmail not found in loginfo.Adding\n";
+		if ( $cvs_binary_version == "1.11" ) {
+			$pathsyncmail = "DEFAULT ".
+				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %p %{sVv} ".
+				$unix_group_name."-commits@".$sys_lists_host;
+		} else { //it's 1.12
+			$pathsyncmail = "DEFAULT ".
+				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %p %{sVv} ".
+				$unix_group_name."-commits@".$sys_lists_host;
 		}
+		$content = "\n#BEGIN Added by cvs.php script\n".
+			$pathsyncmail. "\n#END Added by cvs.php script\n";
+		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
+		if(is_file($loginfo_file)){
+			//echo $unix_group_name.":About to write the lines\n";
+			cvs_write_file($loginfo_file, $content, 1);
+		}
+		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
+		release_cvs_file($loginfo_file);
+	} else {
+//		echo "Syncmail Found!\n";
 	}
 }
 
-function addCvsTrackerToFile($path, $unix_group_name) {
-	global $sys_plugins_path, $sys_users_host;
-	
-	$FOut = fopen($path, "a");
-	if($FOut) {
-		fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
-		$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-			" ".$sys_plugins_path."/cvstracker/bin/post.php".
-			" $unix_group_name %{sVv} )\n";
-		fwrite($FOut,$Line);
-		fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
-		fclose($FOut);
+/**
+ * Function to add cvstracker lines to a loginfo file
+ * @param   string  the unix_group_name
+ *
+ */
+function add_cvstracker($unix_group_name) {
+	global $cvsdir_prefix, $sys_plugins_path, $cvs_binary_version;
+	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
+
+	if (!$loginfo_file) {
+		echo "Couldn't get loginfo for $unix_group_name";
+		return;
 	}
-}
-function isCvsTrackerSet($path) {
-	$LineFound=FALSE;
-	$FIn  = fopen($path,"r");
+
+	$content = file_get_contents ($loginfo_file);
+	if ( strstr($content, "cvstracker") == FALSE) {
+		$content = "\n# BEGIN added by gforge-plugin-cvstracker";
+		if ( $cvs_binary_version == "1.11" ) {
+			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" ".$unix_group_name." %{sVv} )";
+		} else { //it's version 1.12
+			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
+				" ".$sys_plugins_path."/cvstracker/bin/post.php".
+				" %r %p %{sVv} )";
+		}
+		$content .= "\n# END added by gforge-plugin-cvstracker";
+
+		$loginfo_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/loginfo');
+		if(is_file($loginfo_file)){
+			//echo $unix_group_name.":About to write the lines\n";
+			cvs_write_file($loginfo_file, $content, 1);
+		}
+		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
+		release_cvs_file($loginfo_file);
+	} else {
+//		echo "cvstracker Found!\n";
+	}
 	
-	if ($FIn) {
-		while (!feof($FIn)) {
-			$Line = fgets ($FIn);
-			if(!preg_match("/^#/", $Line) &&
-				preg_match("/cvstracker/",$Line)) {
-				$LineFound = TRUE;
+	// now make sure that if cvs version is 1.12, "UseNewInfoFmtStrings=yes" line
+	// MUST be present in CVSROOT/config, or else cvstracker won't work
+	if ($cvs_binary_version == "1.12") {
+		$config_file = $loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/config';
+		if (!is_file($config_file)) {
+			echo "Couldn't get CVSROOT/config for $unix_group_name";
+			return;
+		}
+		
+		$content = file_get_contents($config_file);
+		if (!preg_match("/UseNewInfoFmtStrings=yes/i", $content)) {
+			// file must be modified
+			$config_file = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/config');
+			if (is_file($config_file)) {
+				$lines = file($config_file);
+				$newlines = array();
+				foreach ($lines as $line) {
+					if (!preg_match("/UseNewInfoFmtStrings/i", $line)) {		// maybe it was set to "no"?
+						$newlines[] = trim($line);
+					}
+				}
+				$newlines[] = "UseNewInfoFmtStrings=yes";	// add the required line at the end
 			}
+			$content = implode("\n", $newlines);
+			cvs_write_file($config_file, $content, 0);
+			commit_cvs_file($cvsdir_prefix."/".$unix_group_name, $config_file);
+			release_cvs_file($config_file);
 		}
 	}
-	fclose($FIn);
-	return $LineFound;
 }
-function addProjectRepositories() {
-	global $maincvsroot;
-	global $use_cvs_acl;
 
-	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver 
-	FROM groups, plugins, group_plugin
-    WHERE groups.status != 'P'
-    AND groups.group_id=group_plugin.group_id
-    AND group_plugin.plugin_id=plugins.plugin_id
-    AND plugins.plugin_name='scmcvs'");
+function add_acl_check($unix_group_name) {
+	global $cvsdir_prefix;
+
+	$commitinfofile = $cvsdir_prefix."/".$unix_group_name.'/CVSROOT/commitinfo';
+
+	$content = file_get_contents ($commitinfofile);
+	if ( strstr($content, "aclcheck") == FALSE) {
+
+		$commitinfofile = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/commitinfo');
+		$aclcheck = "\n#BEGIN adding cvs acl check".
+			"\nALL php -q -d include_path=".ini_get('include_path').
+				" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php %r %p ".
+			"\n#END adding cvs acl check\n";
+		cvs_write_file($commitinfofile, $aclcheck, 1);
+		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$commitinfofile);
+		release_cvs_file($loginfo_file);
+	} else {
+//		echo "cvstracker Found!\n";
+	}
+}
+
+function update_cvs_repositories() {
+	global $cvsdir_prefix;
+
+	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver".
+		" FROM groups, plugins, group_plugin".
+		" WHERE groups.status != 'P' ".
+		" AND groups.group_id=group_plugin.group_id ".
+		" AND group_plugin.plugin_id=plugins.plugin_id ".
+		" AND plugins.plugin_name='scmcvs'");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
 			Simply call cvscreate.sh
 		*/
-		$repositoryPath = $maincvsroot.db_result($res,$i,'unix_group_name');
+		
+		$project = &group_get_object(db_result($res,$i,'group_id')); // get the group object for the current group
+		
+		if ( (!$project) || (!is_object($project))  )  {
+			echo "Error Getting Group." . " Id : " . db_result($res,$i,'group_id') . " , Name : " . db_result($res,$i,'unix_group_name');
+			break; // continue to the next project
+		}
+		
+		$repositoryPath = $cvsdir_prefix."/".$project->getUnixName();
 		if (is_dir($repositoryPath)) {
 			$writersContent = '';
 			$readersContent = '';
 			$passwdContent = '';
-			if(db_result($res,$i,'enable_anonscm')) {
+			if($project->enableAnonSCM()) {
 				$repositoryMode = 02775;
-				if (db_result($res,$i,'enable_pserver')) {
+				if ($project->enablePserver()) {
 					$readersContent = 'anonymous';
 					$passwdContent = 'anonymous:8Z8wlZezt48mY';
 				}
@@ -145,61 +303,74 @@ function addProjectRepositories() {
 				$repositoryMode = 02770;
 			}
 			chmod($repositoryPath, $repositoryMode);
-			writeFile($repositoryPath.'/CVSROOT/writers', $writersContent);
-			writeFile($repositoryPath.'/CVSROOT/readers', $readersContent);
-			writeFile($repositoryPath.'/CVSROOT/passwd', $passwdContent);
-			addsyncmail(db_result($res,$i,'unix_group_name'));
-			if (!isCvsTrackerSet($repositoryPath.'/CVSROOT/loginfo')) {
-				$Group = group_get_object(db_result($res,$i,'group_id'));
-				if ($Group->usesPlugin("cvstracker")) {
-					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo', $Group->getUnixName());
-				}
+			cvs_write_file($repositoryPath.'/CVSROOT/writers', $writersContent, 0);
+			cvs_write_file($repositoryPath.'/CVSROOT/readers', $readersContent, 0);
+			cvs_write_file($repositoryPath.'/CVSROOT/passwd', $passwdContent, 0);
+			if ($project->usesPlugin('cvssyncmail')) {
+				add_sync_mail($project->getUnixName());
 			}
+			if ($project->usesPlugin('cvstracker')) {
+				add_cvstracker($project->getUnixName());
+			}
+			add_acl_check($project->getUnixName());
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
-			system('./cvscreate.sh '.db_result($res,$i,'unix_group_name').' '.(db_result($res,$i,'group_id')+50000).' '.db_result($res,$i,'enable_anonscm').' '.db_result($res,$i,'enable_pserver'));
-			addsyncmail(db_result($res,$i,'unix_group_name'));
-			if (!isCvsTrackerSet($repositoryPath.'/CVSROOT/loginfo')) {
-				$Group = group_get_object(db_result($res,$i,'group_id'));
-				if ($Group->usesPlugin("cvstracker")) {
-					addCvsTrackerToFile($repositoryPath.'/CVSROOT/loginfo', $Group->getUnixName());
-				}
+			// Creates the repository
+			
+			// first, make sure the UNIX group exists
+			$data = exec('getent group '.$project->getUnixName());
+			if (empty($data)) {
+				// group doesn't exist -- cronjob that creates users and groups hasn't run yet
+				continue;
 			}
- 			if ($use_cvs_acl == true) {
- 				system ("cp ".dirname($_SERVER['_'])."/aclconfig.default ".$repositoryPath.'/CVSROOT/aclconfig');
- 				$res_admins = db_query("SELECT users.user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND user_group.group_id='".db_result($res,$i,'group_id')."'");
- 				$useradmin_group = db_result($res_admins,0,'user_name');
- 				system("cvs -d ".$repositoryPath." racl ".$useradmin_group.":p -r ALL -d ALL");
- 			}
+			
+			$enableAnonSCM = ($project->enableAnonSCM()) ? 1 : 0;
+			$enablePserver = ($project->enablePserver()) ? 1 : 0;
+			system(dirname(__FILE__).'/cvscreate.sh '.
+				$project->getUnixName().
+//				' '.($project->getID()+50000).
+				' '.$project->getUnixName().
+				' '.$enableAnonSCM.
+				' '.$enablePserver);
+			if ($project->usesPlugin('cvssyncmail')) {
+				add_sync_mail($project->getUnixName());
+			}
+			if ($project->usesPlugin('cvstracker')) {
+				add_cvstracker($project->getUnixName());
+			}
+			add_acl_check($project->getUnixName());
 		}
 	}
 }
 
-// return's true if it's ok to write the file
-function checkLoginfo($file_name) {
-	if (!file_exists($file_name)) {
-		// files does't exist, it's ok to write it
-		return true;
-	} else { // check if file is empty or commented out
-		$file = @fopen($file_name, 'r');
-		if (!$file) { // couldn't open file
-			return false;
-		}
 
-		while (!feof($file)) {
-			$content = trim(fgets($file, 4096));
-			if (strlen($content) > 1) {
-				if ($content{0} != '#') { // it's not a comment
-					fclose($file);
-					return false;
-				}
-			}
-		}
-		fclose($file);
-		return true;
+
+/*
+
+
+	Loop through and create/update each repository for every project 
+	that uses SCMCVS plugin
+
+
+*/
+if(is_dir($cvsdir_prefix)) {
+	update_cvs_repositories();
+} else {
+	if(is_file($cvsdir_prefix)) {
+		$err .= "$cvsdir_prefix exists but is a file\n";
+		exit;
+	} else {
+		if (mkdir($cvsdir_prefix)) {
+			//need to update group permissions using chmod
+			update_cvs_repositories();
+		} else {
+			$err .= "unable to make $cvsdir_prefix directory\n";
+			exit;
+		}	
 	}
 }
+
 
 cron_entry(13,$err);
 

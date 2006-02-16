@@ -394,7 +394,13 @@ class ForumMessage extends Error {
 
 		$body = "\nRead and respond to this message at: ".
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+		"\nOr by replying to this e-mail entering your response between the following markers: ".
+			"\n".FORUM_MAIL_MARKER.
+			"\n(enter your response here)".
+			"\n".FORUM_MAIL_MARKER.
+			"\n\n".
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
+		
 
 		$body .= util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
 		"\n\n______________________________________________________________________".
@@ -414,9 +420,10 @@ class ForumMessage extends Error {
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-//echo $sql;
-		$bccres = db_query($sql);
+		if (count($ids) != 0) {
+			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+			$bccres = db_query($sql);
+		}
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
 		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);

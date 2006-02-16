@@ -145,9 +145,11 @@ class Document extends Error {
 			function_exists('mb_detect_encoding')) {
 			$data = mb_convert_encoding($data,'UTF-8',mb_detect_encoding($data));
 		}
+		
+		$filesize = strlen($data);
 
 		$sql="INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
-			stateid,language_id,filename,filetype,data,created_by)
+			stateid,language_id,filename,filetype,filesize,data,created_by)
 			VALUES ('".$this->Group->getId()."',
 			'". htmlspecialchars($title) ."',
 			'". htmlspecialchars($description) ."',
@@ -157,6 +159,7 @@ class Document extends Error {
 			'$language_id',
 			'$filename',
 			'$filetype',
+			'$filesize',
 			'". base64_encode(stripslashes($data)) ."',
 			'$user_id')";
 
@@ -371,6 +374,15 @@ class Document extends Error {
 		$res=db_query("SELECT data FROM doc_data WHERE docid='".$this->getID()."'");
 		return base64_decode(db_result($res,0,'data'));
 	}
+	
+	/**
+	* getFileSize - Return the size of the document
+	*
+	* @return	int	The file size
+	*/
+	function getFileSize() {
+		return $this->data_array['filesize'];
+	}
 
 	/**
 	 *	update - use this function to update an existing entry in the database.
@@ -403,7 +415,8 @@ class Document extends Error {
 			return false;
 		}
 		if ($data) {
-			$datastr="data='". base64_encode(stripslashes($data)) ."',";
+			$filesize = strlen($data);
+			$datastr="data='". base64_encode(stripslashes($data)) ."', filesize='".$filesize."',";
 		}
 
 		$res=db_query("UPDATE doc_data SET

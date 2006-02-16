@@ -337,7 +337,7 @@ admin_index	site_wide_stats	Estadísticas del Sitio
 admin_index	stats	Estadísticas
 admin_index	title	Administración del Sitio
 admin_index	translation_file_tool	Herramienta de traducción de ficheros
-admin_index	trove_project_tree	Árbol del Mapa de Proyectos
+admin_index	trove_project_tree	�?rbol del Mapa de Proyectos
 admin_index	user_maintaince	Mantenimiento de Usuarios
 admin_index	virtual_host_admin_tool	Herramienta de Administración de Virtual Host
 admin_loadtabfile	availaible_tables	Tablas Disponibles:
@@ -570,7 +570,7 @@ calendar	tuesday	martes
 calendar	update	Actualice
 calendar	view	Enseñe:
 calendar	wednesday	miércoles
-classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras espera que funcione su nombre DNS, puede intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabra una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribución de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un título llamado \'Administración de Proyectos\'.\n\nLe recomendamos encarecidamente que visite ahora la página de $3 y cree una descripción\npública de su proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisite su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfrute del sistema, y por favor, dígales a otras personas de $3. Coméntenos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
+classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribución de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un título llamado \'Administración de Proyectos\'.\n\nLe recomendamos encarecidamente que visite ahora la página de $3 y cree una descripción\npública de su proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisite su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfrute del sistema, y por favor, dígales a otras personas de $3. Coméntenos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
 classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
 classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripción registrada: $3\nLicencia: $4\n\nPor favor, visite esta dirección para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
 classgroup	newprojectnotification_submitter	Petición de nuevo proyecto en $1\n\nNombre Completo del Proyecto: $2\nDescripción enviada: $3\nLicencia: $4\n\nEl equipo de administración de $1 examinará ahora su envío. Se le notificará su decisión.
@@ -948,7 +948,7 @@ group	long_tracker	Registro
 group	nodescription	Este proyecto no ha proporcionado todavía una descripción
 group	norelease	Este proyecto no ha publicado ningún fichero
 group	project_admins	Administradores del proyecto
-group	public_area	Área pública
+group	public_area	�?rea pública
 group	registered	Registrado:&nbsp;
 group	short_admin	Admin
 group	short_bugs	Errores
@@ -1097,7 +1097,7 @@ menu	other_site_mirrors	Otros mirrors de este sitio
 menu	project_admin	Administración del proyecto
 menu	project_help_wanted	Peticiones de ayuda
 menu	project_summary	Resumen del proyecto
-menu	projectree	Árbol de proyectos
+menu	projectree	�?rbol de proyectos
 menu	register_project	Registrar un nuevo proyecto
 menu	reporting	Informes
 menu	search	Buscar
@@ -1981,7 +1981,7 @@ register_tos	section	Registro de un Nuevo Proyecto
 register_tos	title	Términos del Contrato de Servicio
 reporting	add	Añadir
 reporting	administrative	Administración
-reporting	area	Áreas
+reporting	area	�?reas
 reporting	cumulative_users	Usuarios Totales por Semanas (gráfica)
 reporting	cumulative_users_title	Usuarios Totales
 reporting	daily	Diario
@@ -2031,7 +2031,7 @@ reporting_pie	start	Comienzo
 reporting_pie	title	Gráfico de Tarta
 reporting_pie	trackers	Registros
 reporting_rebuild	iamsure	Estoy SEGURO
-reporting_rebuild	message	  <h3>Inicialización del Sistema de Informes</h3><p>A veces, si una tarea programada falló o la base de datos está dañada, puede reconstruir las tablas de informe.<p>Si está seguro de que quiere reconstruirlas, haga click en la marca "Estoy SEGURO" y haga click en el botón de abajo.<p>Esta operación puede llevar varios minutos, así que NO HAGA CLICK MÁS DE UNA VEZ.<p>
+reporting_rebuild	message	  <h3>Inicialización del Sistema de Informes</h3><p>A veces, si una tarea programada falló o la base de datos está dañada, puede reconstruir las tablas de informe.<p>Si está seguro de que quiere reconstruirlas, haga click en la marca "Estoy SEGURO" y haga click en el botón de abajo.<p>Esta operación puede llevar varios minutos, así que NO HAGA CLICK M�?S DE UNA VEZ.<p>
 reporting_rebuild	pressonlyonce	Haga Click una ÚNICA VEZ
 reporting_rebuild	title	Página Principal
 reporting_ta	add_entry	Añadir Entrada
@@ -2140,7 +2140,7 @@ send_pending_items_mail	pm_message	Este correo se te ha enviado para recordarte 
 send_pending_items_mail	pm_subject	Notificación de tareas pendientes
 send_pending_items_mail	tracker_message	Este mensaje se te ha enviado para recordarte los registros pendientes. El registro #$1 está pendiente: \nResumen: $3\nEstado: $5\nFecha de comienzo:$6\nAsignado a: $7\nEnviado por: $8\nDetalles: $9\n\n\nHaga click aquí para visitar la tarea: $4
 send_pending_items_mail	tracker_subject	Notificación de registro pendiente
-sendmessage	about_blurb	En un intento de reducir el spam de correo, estamos usando este formulario para enviar correo.<p>Rellénalo completamente con exactitud o el destinatario no tendrá posibilidad de responder.</p><p><font color="red"><b>SI ESTÁ ESCRIBIENDO PARA PEDIR AYUDA:</b> ¿Leíste la documentación del proyecto? ¿Incluiste su nombre de usuario? Si está escribiendo acerca de un proyecto, incluye su <b>identificador de proyecto</b> y el <b>Nombre del proyecto</b>.</font></p>
+sendmessage	about_blurb	En un intento de reducir el spam de correo, estamos usando este formulario para enviar correo.<p>Rellénalo completamente con exactitud o el destinatario no tendrá posibilidad de responder.</p><p><font color="red"><b>SI EST�? ESCRIBIENDO PARA PEDIR AYUDA:</b> ¿Leíste la documentación del proyecto? ¿Incluiste su nombre de usuario? Si está escribiendo acerca de un proyecto, incluye su <b>identificador de proyecto</b> y el <b>Nombre del proyecto</b>.</font></p>
 sendmessage	contact	Contacto
 sendmessage	email	Su Correo Electrónico
 sendmessage	email_only_to	Solo puede enviar a las direcciones
@@ -2312,13 +2312,13 @@ source	missing_file_text	Debe específicar un fichero para esta página.
 source	show_source	Mostrar fuente
 source	source_of	Fuente de $1
 staff	about_blurb	<P><h2>El personal de GForge</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php\?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>\(pat\)</td><td>Patrick McGovern \(pat\) - Pat "Suena bien" McGovern es el nuevo director de <A HREF="http://sourceforge.net/">GForge.net</A>. Estamos contentos de tener a Pat a bordo, como él solía mantener <A HREF="http://www.valinux.com/">valinux.com</A>, sabe alguna que otra cosa sobre mantener sitios webs importantes.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>\(dlb\)</td><td>Dan es el "Encargado de Producto" de GForge. No estamos seguro de lo que eso significa, sólo sabemos que le gustan los diagramas de tiempo y "handles business development issues".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>\(bigdisk\)</td><td>Tim es el lider técnico de  GForge y es de Iowa. Si Iowa. No Idaho ni Ohio. Iowa. Cuando no está trabajando lo puedes encontrar con bastante facilidad, tiene el único BMW Z3 de Iowa.<P>Tim es el fundador de <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> y de <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>\(pfalcon\)</td><td>Paul es un desarrollador, vive en  Ukrania. Si, donde Chernobil. \*Declara\* que no tiene nada que ver con ese suceso. Se describe a sí mismo como un "geek/trabajo-adicto confirmado".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>\(zelphyr\)</td><td>Darrell también es miembro del equipo de desarrollo de  GForge . Trabajaba para otra compañía, pero ellos querían enterrar el Software Libre y cambiar sus aplicaciones web a ASP... Ahora él trabaja para nosotros.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvendo</a></td><td>\(precision\)</td><td>Uriah es un administrador de sistemas/desarrollador de las escarchadas regiones de Minesota . Cuando no está desenterrando la calzada o descongelando su coche lo encontrarás trabado en un cuarto oscuro en algún lugar delante de un ordenador.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>\(moorman\)</td><td>Jacob \(aka roguemtl\) es el encargado de la calidad del servicio de GForge. Actualmente mantiene la mayoría de las peticiones de ayuda de nivel dos, mantiene la página del estado del sitio y ayuda a asegurarse de que todo el que registra una petición de ayuda tenga un correcto y oportuno servicio. Trabaja desde el nor-este de los Estados Unidos.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvenido</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Contribuciones Externas Significantes:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>\(wallace\)</td><td>Wallace ha contribuido con ajustes significantes y mejoras al código base del núcleo de  GForge. Apreciamos sus esfuerzos tanto como los usuarios que se benefician de sus contribuciones.</td></tr></table>
-stats	overview_stats	ESTADÍSTICAS
-stats	project_stats	ESTADÍSTICAS DE PROYECTOS
-stats	site_graphs	GRÁFICOS DEL SITIO
+stats	overview_stats	ESTAD�?STICAS
+stats	project_stats	ESTAD�?STICAS DE PROYECTOS
+stats	site_graphs	GR�?FICOS DEL SITIO
 stats	title	Estadísticas de $1
-stats_graph	joverview_stats	ESTADÍSTICAS
-stats_graph	project_stats	ESTADÍSTICAS DE PROYECTOS
-stats_graph	site_graphs	GRÁFICOS DEL SITIO
+stats_graph	joverview_stats	ESTAD�?STICAS
+stats_graph	project_stats	ESTAD�?STICAS DE PROYECTOS
+stats_graph	site_graphs	GR�?FICOS DEL SITIO
 stats_graph	sitewide_statistics_graphs	Gráficos Estadísticos del Sitio
 stats_i18n	language	Lenguage
 stats_i18n	language_distribution	Distribución por Lenguages
@@ -2327,9 +2327,9 @@ stats_i18n	title	Estadísticas de $1 según I18n
 stats_i18n	total_non_english	Total No-Inglés
 stats_i18n	users	Usuarios
 stats_index	other_statistics	Otras estadísticas:<ul><li><a href="lastlogins.php">Últimos Accesos</a></li><li><a href="i18n.php">Estadísticas de Lenguajes I18n</a></li></ul>
-stats_index	overview_stats	ESTADÍSTICAS
-stats_index	project_stats	ESTADÍSTICAS DE PROYECTOS
-stats_index	site_graphs	GRÁFICOS DEL SITIO
+stats_index	overview_stats	ESTAD�?STICAS
+stats_index	project_stats	ESTAD�?STICAS DE PROYECTOS
+stats_index	site_graphs	GR�?FICOS DEL SITIO
 stats_index	sitewide_aggregate_statistics	Estadísticas Acumuladas del Sitio
 stats_lastlogins	date	Fecha
 stats_lastlogins	last_logins	Últimos Accesos

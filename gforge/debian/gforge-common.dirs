@@ -7,6 +7,10 @@ usr/lib/gforge/bin
 usr/lib/gforge/lib
 usr/share
 usr/share/gforge
+usr/share/gforge/etc
+usr/share/gforge/etc/templates
+usr/share/gforge/etc/httpd.d
+usr/share/gforge/etc/local.d
 usr/share/gforge/common
 usr/share/gforge/www
 usr/share/gforge/www/include
