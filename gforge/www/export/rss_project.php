@@ -21,18 +21,20 @@ To get Project News or New Project Releases of a specific project use the Links 
 <ul>
 <li><a href="rss_sfnews.php?group_id=<?php echo getIntFromRequest(group_id); ?>"><?php print $GLOBALS[sys_name] ?> Developer Project News</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
-<a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
+<a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)&nbsp; <?php echo html_image('ic/rss.png',16,16,array('border'=>'0'));?></li>
 <li><a href="rss_sfnewreleases.php?group_id=<?php echo getIntFromRequest(group_id); ?>"><?php print $GLOBALS[sys_name] ?> Developer New Project Releases</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
-<a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
+<a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)&nbsp; <?php echo html_image('ic/rss.png',16,16,array('border'=>'0'));?></li>
 </ul>
 
 
 <ul>
 <li><a href="rss20_news.php?group_id=<?php echo getIntFromRequest(group_id); ?>"><?php print $GLOBALS[sys_name] ?> Developer Project News</a>
-(<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
+(<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)&nbsp; <?php echo html_image('ic/rss.png',16,16,array('border'=>'0'));?></li>
+<li><a href="rss20_activity.php?group_id=<?php echo getIntFromRequest(group_id); ?>"><?php print $GLOBALS[sys_name] ?> Activity</a>
+(<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)&nbsp; <?php echo html_image('ic/rss.png',16,16,array('border'=>'0'));?></li>
 <li><a href="rss20_newreleases.php?group_id=<?php echo getIntFromRequest(group_id); ?>"><?php print $GLOBALS[sys_name] ?> Developer New Project Releases</a>
-(<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
+(<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)&nbsp; <?php echo html_image('ic/rss.png',16,16,array('border'=>'0'));?></li>
 </ul>
 
 <a HREF="javascript:history.go(-1)">[Go back]</a>
