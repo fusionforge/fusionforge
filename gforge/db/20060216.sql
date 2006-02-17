@@ -35,3 +35,14 @@ as subref_id, forum.subject AS description, forum.post_date AS activity_date, u.
 u.user_name, u.realname FROM forum_group_list fgl JOIN forum USING (group_forum_id), users u WHERE
 u.user_id=forum.posted_by 
 ;
+
+CREATE TABLE group_activity_monitor (
+group_id int not null CONSTRAINT group_id REFERENCES groups(group_id) ON DELETE CASCADE,
+user_id int NOT NULL CONSTRAINT userid_fk REFERENCES users(user_id),
+filter text,
+PRIMARY KEY (group_id,user_id)
+);
+
+CREATE RULE groupactivity_userdelete_rule AS ON UPDATE TO USERS DO
+	DELETE FROM group_activity_monitor WHERE user_id =(CASE WHEN NEW.status='D' 
+	THEN NEW.user_id ELSE 0 END);
