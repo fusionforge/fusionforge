@@ -135,12 +135,12 @@ if ($rows<1) {
 			}
 			case 'frsrelease': {
 				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
-				$url='<a href="/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release [#'.$arr['description'].']</a>';
+				$url='<a href="/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release '.$arr['description'].'</a>';
 				break;
 			}
 			case 'forumpost': {
 				$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","ALT"=>"Forum"));
-				$url='<a href="/forum/?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post [#'.$arr['subref_id'].']'.$arr['description'].'</a>';
+				$url='<a href="/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post '.$arr['description'].'</a>';
 				break;
 			}
 		}
