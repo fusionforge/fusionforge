@@ -53,6 +53,11 @@ class cvstrackerPlugin extends Plugin {
 		global $Language, $sys_shortdatefmt;
 
 		$group = &group_get_object($group_id);
+		
+		if (!$group->usesPlugin($this->name)) {
+			return;
+		}
+		
 		$DBResult = db_query($Query);
 		$Rows= db_numrows($DBResult);
 		
@@ -83,6 +88,8 @@ class cvstrackerPlugin extends Plugin {
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';
+		} else {
+			echo '<h4>'.$Language->getText('plugin_cvstracker','nocommits').'</h4>';
 		}
 	}
 
