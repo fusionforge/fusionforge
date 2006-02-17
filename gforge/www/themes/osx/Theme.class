@@ -123,6 +123,10 @@ class Theme extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
 	<title><?php echo $params['title']; ?></title>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Activity RSS" href="/export/rss20_activity.php" type="application/rss+xml"/>	
 	<script language="JavaScript" type="text/javascript">
 	<!--
 	function admin_window(adminurl) {
