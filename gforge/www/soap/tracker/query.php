@@ -285,7 +285,7 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(
-		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArrayOfint')
+		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:int[]')
 	),
 	'xsd:int'
 ); 
