@@ -1,3 +1,7 @@
+2006-02-17 Daniel Perez <daniel@gforgegroup.com>
+	* Added activity rss feed
+	* Modified gforgegroup and osx theme to support rss feeds in the header
+
 2006-02-13 Daniel Perez <daniel@gforgegroup.com>
 	* Changed boxGetAltRowStyle in Layout.class
 		http://gforge.org/tracker/?func=detail&aid=1830&group_id=1&atid=105
