@@ -67,7 +67,8 @@ function parseConfig($Config)
 	$Repository = $Config['Repository'];
 	$UserName = $Config['UserName'];
 
-	if($sys_cvsroot_path[strlen($sys_cvsroot_path)]!='/') {
+	// add a trailing / if needed
+	if($sys_cvsroot_path[strlen($sys_cvsroot_path)-1]!='/') {
 		$sys_cvsroot_path.='/';
 	}
 	if(strncmp($Repository,$sys_cvsroot_path, strlen($sys_cvsroot_path)) == 0) {
