@@ -18,3 +18,4 @@ plugin_cvstracker	log	Log Message
 plugin_cvstracker	date	Date
 plugin_cvstracker	diffto	Diff To
 plugin_cvstracker	author	Author
+plugin_cvstracker	nocommits	No commits have been made.
