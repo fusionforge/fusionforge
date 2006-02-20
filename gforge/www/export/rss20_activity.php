@@ -27,10 +27,7 @@
 
 include "pre.php";
 include "rss_utils.inc";
-header("Content-Type: text/xml");
-print '<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-';
+
 // ## default limit
 if (!$limit) $limit = 10;
 if ($limit > 100) $limit = 100;
@@ -56,6 +53,10 @@ if ($group_id) {
 	AND activity_vw.group_id = groups.group_id AND groups.is_public=1 AND activity_vw.group_id='$group_id' ORDER BY activity_date DESC";
 	
 	// ## one time output
+	header("Content-Type: text/xml");
+	print '<?xml version="1.0" encoding="UTF-8"?>
+	<rss version="2.0">
+	';	
 	print " <channel>\n";
 	print "  <title>".$GLOBALS[sys_default_name]." $title Activity</title>\n";
 	print "  <link>http://".$GLOBALS[sys_default_domain]."/activity/$link</link>\n";
@@ -122,9 +123,9 @@ if ($group_id) {
 	print " </channel>\n";	
 	
 } else {
-	// don´t display anything
-	/*$sql="SELECT * FROM activity_vw,groups WHERE activity_date BETWEEN '".(time()-(30*86400))."' AND '".time()."'
-	 AND activity_vw.group_id = groups.group_id AND groups.is_public=1 ORDER BY activity_date DESC";*/
+       // Print error showing no group was selected
+
+       echo "<br><h2><font color='red'>    Error: No group selected</font></h2>";
 }
 
 
