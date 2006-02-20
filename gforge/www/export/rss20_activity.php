@@ -120,7 +120,8 @@ if ($group_id) {
 		print "  </item>\n";
 	}
 	// ## end output
-	print " </channel>\n";	
+	print " </channel>\n";
+	print "</rss>\n";
 	
 } else {
        // Print error showing no group was selected
@@ -130,4 +131,3 @@ if ($group_id) {
 
 
 ?>
-</rss>
