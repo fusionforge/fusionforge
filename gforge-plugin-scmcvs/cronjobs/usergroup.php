@@ -26,47 +26,8 @@
  */
 
 /*
-
-NOTE - THIS SQL CAN BE USED ON A SEPARATED CVS SERVER TO GRANT ONLY THE NECESSARY PERMS
-
-
-CREATE USER cvsuser WITH ENCRYPTED PASSWORD 'password';
-
-GRANT SELECT ON groups, plugins, group_plugin, users, user_group, deleted_groups TO cvsuser;
-GRANT INSERT, UPDATE ON deleted_groups TO cvsuser;
-GRANT ALL ON stats_cvs_group, stats_cvs_user TO cvsuser;
-
-*/
-
-/*
-
 This file creates user / group permissions by editing 
 the /etc/passwd /etc/shadow and /etc/group files
-
-It also creates blank user home directories and 
-creates a group home directory with a template in it.
-
-#
-# * hosts
-#
-<VirtualHost 192.168.1.5>
-ServerName gforge.company.com
-ServerAlias *.gforge.company.com
-VirtualDocumentRoot /home/groups/%1/htdocs
-VirtualScriptAlias /home/groups/%1/cgi-bin
-<Directory /home/groups>
-Options Indexes FollowSymlinks
-AllowOverride All
-order allow,deny
-allow from all
-</Directory>
-LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-CustomLog "|/usr/local/sbin/cronolog /home/groups/%1/logs/%Y/%m/%d/gforge.log" gforge
-# Ensure that we don't try to use SSL on SSL Servers
- <IfModule apache_ssl.c>
- SSLDisable
- </IfModule>
-</VirtualHost> 
 */
 require_once('squal_pre.php');
 require ('common/include/cron_utils.php');
@@ -75,25 +36,7 @@ require ('common/include/cron_utils.php');
 //	Default values for the script
 //
 define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
-define('USER_ID_ADD',10000);
-define('GROUP_ID_ADD',50000);
-define('USER_DEFAULT_GROUP','users');
 define('FILE_EXTENSION','.new'); // use .new when testing
-
-if (!file_exists('/etc/passwd.org')) {
-	echo "passwd.org missing";
-	exit;
-}
-
-if (!file_exists('/etc/shadow.org')) {
-	echo "shadow.org missing";
-	exit;
-}
-
-if (!file_exists('/etc/group.org')) {
-	echo "group.org missing";
-	exit;
-}
 
 if (util_is_root_dir($groupdir_prefix)) {
 	$err .=  "Error! groupdir_prefix Points To Root Directory!";
@@ -106,298 +49,230 @@ if (util_is_root_dir($groupdir_prefix)) {
 //	Get the users' unix_name and password out of the database
 //   ONLY USERS WITH CVS READ AND COMMIT PRIVS ARE ADDED
 //
-$res = db_query("SELECT distinct users.user_name,users.unix_pw,users.user_id 
+$res = db_query("SELECT distinct users.user_name,users.unix_pw,users.unix_uid,users.unix_gid,users.user_id
 	FROM users,user_group,groups
 	WHERE users.user_id=user_group.user_id 
 	AND user_group.group_id=groups.group_id
 	AND groups.status='A'
 	AND user_group.cvs_flags IN ('0','1')
 	AND users.status='A'
-	ORDER BY user_id ASC");
+	ORDER BY users.user_id ASC");
+$err .= db_error();
 
-$users    =& util_result_column_to_array($res,'user_name');
-$user_ids =& util_result_column_to_array($res,'user_id');
+$gforge_users    =& util_result_column_to_array($res,'user_name');
+$user_unix_uids =& util_result_column_to_array($res,'unix_uid');
+$user_unix_gids =& util_result_column_to_array($res,'unix_gid');
 $user_pws =& util_result_column_to_array($res,'unix_pw');
 
-//
-//	Get anonymous pserver users
-//
-$res7=db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public='1' AND enable_anonscm='1' AND type_id='1';");
-$err .= db_error();
-$rows = db_numrows($res7);
-for($k = 0; $k < $rows; $k++) {
-	$pserver_anon[db_result($res7,$k,'unix_group_name')]=',anonymous';
+// Create the entries for the GForge users
+$gforge_lines = array();
+
+// user description is something like "MyGForge user"
+$user_description = preg_replace('/[^[:alnum:] -_]/', '', $sys_name);
+$user_description .= " user";
+
+for ($i=0; $i < count($gforge_users); $i++) {
+	$username = $gforge_users[$i];
+	$user_unix_uid = $user_unix_uids[$i];
+	$user_unix_gid = $user_unix_gids[$i];
+	$shell = DEFAULT_SHELL;
+	$unix_passwd = $user_pws[$i];
+	
+	$line_passwd =	$username.":x:".$user_unix_uid.":".$user_unix_gid.":".
+					$user_description.":/home/".$username.":".$shell;
+	$line_shadow = $username.":".$unix_passwd.":12090:0:99999:7:::";
+	
+	$gforge_lines_passwd[] = $line_passwd;
+	$gforge_lines_shadow[] = $line_shadow;
+	
 }
 
-//
-//	Read in the "default" users
-//
-$h = fopen("/etc/passwd.org","r");
-$passwdcontents = fread($h,filesize("/etc/passwd.org"));
-fclose($h);
-$passwdlines = explode("\n",$passwdcontents);
+/*************************************************************************
+ * Step 1: Process /etc/passwd
+ *************************************************************************/
 
-//
-//	Write the "default" users to a temp file
-//
-$h2 = fopen("/etc/passwd".FILE_EXTENSION,"w");
-for($k = 0; $k < count($passwdlines); $k++) {
-	$passwdline = explode(":",$passwdlines[$k]);
-	$def_users[$passwdline[0]]=1;
-	fwrite($h2,$passwdlines[$k]."\n");
-}
+// Read the passwd file line by line
+$passwd_orig = file("/etc/passwd", "r");
 
-//
-//	Now append the users from the gforge database
-//
-for($i = 0; $i < count($users); $i++) {
-
-	if ($def_users[$users[$i]]) {
-
-		//this username was already existing in the "default" file
-
+// Now write the file with the gforge users at the end
+$passwd = fopen("/etc/passwd".FILE_EXTENSION, "w");
+$etc_users = array();
+for ($i=0; $i < count($passwd_orig); $i++) {
+	$line = trim($passwd_orig[$i]);
+	// Skip the GForge users (will be written later)
+	if (preg_match("/^[[:blank:]]*#GFORGEBEGIN/", $line)) {
+		do {
+			$i++;
+			$line = trim($passwd_orig[$i]);
+		} while ($i < count($passwd_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
+		
+		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
+		if ($i >= (count($passwd_orig)-1)) break;
+		
+		// read next line
+		$i++;
+		$line = trim($passwd_orig[$i]);
+	}
+	
+	$entries = explode(":", $line);
+	if (!empty($entries[0])) {
+		$username = $entries[0];
+		$etc_users[] = $username;		// this is currently not used, but it may be used in the future
+		if (!in_array($username, $gforge_users)) {
+			// write the user only if it's not a gforge user
+			fwrite($passwd, $line."\n");
+		}
 	} else {
-
-		$line = $users[$i] . ":x:" . ($user_ids[$i] + USER_ID_ADD) . ":" . 
-			($user_ids[$i] + USER_ID_ADD) . "::/home/$users[$i]:".DEFAULT_SHELL."\n";
-		fwrite($h2,$line);
-
+		// blank line or comment
+		fwrite($passwd, $line."\n");
 	}
-
-}
-fclose($h2);
-
-
-
-//
-//	this is where we add users to /etc/shadow
-//
-$h3 = fopen("/etc/shadow.org","r");
-$shadowcontents = fread($h3,filesize("/etc/shadow.org"));
-fclose($h3);
-$shadowlines = explode("\n",$shadowcontents);
-
-//
-//	Write the "default" shadow to a temp file
-//
-$h4 = fopen("/etc/shadow".FILE_EXTENSION,"w");
-for($k = 0; $k < count($shadowlines); $k++) {
-    $shadowline = explode(":",$shadowlines[$k]);
-    $def_shadow[$shadowline[0]]=1;
-    fwrite($h4,$shadowlines[$k]."\n");
 }
 
-//
-//  Now append the users from the gforge database
-//
-for($i = 0; $i < count($users); $i++) {
+/*************************************************************************
+ * Step 2: Process /etc/shadow
+ *************************************************************************/
 
-    if ($def_shadow[$users[$i]]) {
+// Read the shadow file line by line
+$passwd_orig = file("/etc/shadow", "r");
 
-	//this username was already existing in the "default" file
-
-    } else {
-
-		$line = $users[$i] . ":" . $user_pws[$i] . ":12090:0:99999:7:::\n";
-		fwrite($h4,$line);
-
+// Now write the file with the gforge users at the end
+$shadow = fopen("/etc/shadow".FILE_EXTENSION, "w");
+for ($i=0; $i < count($passwd_orig); $i++) {
+	$line = trim($passwd_orig[$i]);
+	// Skip the GForge users (will be written later)
+	if (preg_match("/^[[:blank:]]*#GFORGEBEGIN/", $line)) {
+		do {
+			$i++;
+			$line = trim($passwd_orig[$i]);
+		} while ($i < count($passwd_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
+		
+		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
+		if ($i >= (count($passwd_orig)-1)) break;
+		
+		// read next line
+		$i++;
+		$line = trim($passwd_orig[$i]);
 	}
-
+	
+	$entries = explode(":", $line);
+	if (!empty($entries[0])) {
+		$username = $entries[0];
+		if (!in_array($username, $gforge_users)) {
+			// write the user only if it's not a gforge user
+			fwrite($shadow, $line."\n");
+		}
+	} else {
+		// blank line or comment
+		fwrite($shadow, $line."\n");
+	}
 }
 
-fclose($h4);
 
-//
-//	Read the groups from the "default" file
-//
-$h5 = fopen("/etc/group.org","r");
-$groupcontents = fread($h5,filesize("/etc/group.org"));
-fclose($h5);
-$grouplines = explode("\n",$groupcontents);
+/*************************************************************************
+ * Step 3: Write the GForge users to /etc/passwd and /etc/shadow
+ *************************************************************************/
 
-//
-//	Write the "default" groups to a temp file
-//
-$h6 = fopen("/etc/group".FILE_EXTENSION,"w");
-for($k = 0; $k < count($grouplines); $k++) {
-    $groupline = explode(":",$grouplines[$k]);
-    $def_group[$groupline[0]]=1;
-    fwrite($h6,$grouplines[$k]."\n");
+// now write the GForge users
+fwrite($passwd, "#GFORGEBEGIN\n");
+fwrite($shadow, "#GFORGEBEGIN\n");
+assert(count($gforge_lines_passwd) == count($gforge_lines_shadow));
+for ($i=0; $i < count($gforge_lines_passwd); $i++) {
+	$line_passwd = $gforge_lines_passwd[$i];
+	$line_shadow = $gforge_lines_shadow[$i];
+	
+	fwrite($passwd, $line_passwd."\n");
+	fwrite($shadow, $line_shadow."\n");
 }
+fwrite($passwd, "#GFORGEEND\n");
+fwrite($shadow, "#GFORGEEND\n");
 
-//
+
+fclose($passwd);
+fclose($shadow);
+
+/*************************************************************************
+ * Step 4: Parse /etc/group
+ *************************************************************************/
+$group_orig = file("/etc/group");
+$group = fopen("/etc/group".FILE_EXTENSION, "w");
+
 //	Add the groups from the gforge database
-//
-$group_res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
-for($i = 0; $i < db_numrows($group_res); $i++) {
-    $groups[] = db_result($group_res,$i,'unix_group_name');
-    $gids[db_result($group_res,$i,'unix_group_name')]=db_result($group_res,$i,'group_id')+GROUP_ID_ADD;
-}
-
-for($i = 0; $i < count($groups); $i++) {
-
-	if ($def_group[$groups[$i]]) {
-
-		//this groupname was already existing in the "default" file
-
-	} else {
-
-		$line = $groups[$i] . ":x:" . ($gids[$groups[$i]]) . ":";
-
-
-		/* we need to get the project object to check if a project
-		 * has a private CVS repository - in which case we need to add
-		 * the apache user to the group so that ViewCVS can be used
-		 */
-		 
-		$gid = db_result($group_res, $i, 'group_id');
-		$project = &group_get_object($gid);
-		
-		$resusers=db_query("SELECT user_name 
-			FROM users,user_group,groups 
-			WHERE groups.group_id=user_group.group_id 
-			AND users.user_id=user_group.user_id
-			AND user_group.cvs_flags IN ('0','1')
-			AND users.status='A'
-			AND groups.unix_group_name='$groups[$i]'");
-			
-		$gmembers =& util_result_column_to_array($resusers,'user_name');
-		
-		$group_name = $groups[$i];
-		if (!($project->enableAnonSCM())) {
-			if (!$gmembers) {
-				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
-				if ($pserver_anon[$groups[$i]]) {
-					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
-					$line .= $this_anon . "," . $sys_apache_user . "\n";
-				} else {
-					$line .= $sys_apache_user . "\n"; // only the apache user then?
-				}
-			} else {
-				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "," . $sys_apache_user . "\n";
-			}
-		} else {
-			if (!$gmembers) {
-				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
-				if ($pserver_anon[$groups[$i]]) {
-					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
-					$line .= $this_anon . "\n";
-				} else {
-					$line .= "\n"; //no users
-				}
-			} else {
-				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "\n";
-			}
-		}
-		
-		fwrite($h6, $line);
-
-	}
-
-}
-
-fclose($h6);
-
-//
-//	this is where we give a user a home
-//
-foreach($users as $user) {
-	if (is_dir("/home/".$user)) {
-		
-	} else {
-		@mkdir("/home/".$user);
-//		system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
-	}
-	system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
-}
-
-
-//
-//	Create home dir for groups
-//
-foreach($groups as $group) {
-
-	//create an FTP upload dir for this project
-	if ($sys_use_ftpuploads) { 
-		if (!is_dir($sys_ftp_upload_dir.'/'.$group)) {
-			@mkdir($sys_ftp_upload_dir.'/'.$group); 
-		}
-	}
-
-	if (is_dir($groupdir_prefix."/".$group)) {
-
-	} else {
-		@mkdir($groupdir_prefix."/".$group);
-		@mkdir($groupdir_prefix."/".$group."/htdocs");
-		@mkdir($groupdir_prefix."/".$group."/cgi-bin");
-		$g =& group_get_object_by_name($group);
-		
-
-		//
-		//	Read in the template file
-		//
-		$fo=fopen('default_page.php','r');
-		$contents = '';
-		if (!$fo) {
-			$err .= 'Default Page Not Found';
-		} else {
-			while (!feof($fo)) {
-    			$contents .= fread($fo, 8192);
-			}
-			fclose($fo);
-		}
-		//
-		//	Change some defaults in the template file
-		//
-		//$contents=str_replace('<domain>',$sys_default_domain,$contents);
-		//$contents=str_replace('<project_description>',$g->getDescription(),$contents);
-		//$contents=str_replace('<project_name>',$g->getPublicName(),$contents);
-		//$contents=str_replace('<group_id>',$g->getID(),$contents);
-		//$contents=str_replace('<group_name>',$g->getUnixName(),$contents);
-
-		//
-		//	Write the file back out to the project home dir
-		//
-		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.php",'w');
-		fwrite($fw,$contents);
-		fclose($fw);
-		
-	}
-	/*$resgroupadmin=db_query("SELECT u.user_name FROM users u,user_group ug,groups g
-		WHERE u.user_id=ug.user_id 
-		AND ug.group_id=g.group_id 
-		AND g.unix_group_name='$group'
-		AND ug.admin_flags='A'
-		AND u.status='A'");
-	if (!$resgroupadmin || db_numrows($resgroupadmin) < 1) {
-		//group has no members, so cannot create dir
-	} else {
-		$user=db_result($resgroupadmin,0,'user_name');
-		system("chown -R $user:$group $groupdir_prefix/$group");
-	}*/
-	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
-}
-
-//
-//	Move CVS trees for deleted groups
-//
-$res8=db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+$group_res = db_query("SELECT group_id, unix_group_name, unix_gid, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
 $err .= db_error();
-$rows	 = db_numrows($res8);
-for($k = 0; $k < $rows; $k++) {
-	$deleted_group_name = db_result($res8,$k,'unix_group_name');
-
-	if(!is_dir($cvsdir_prefix."/.deleted"))
-		system("mkdir ".$cvsdir_prefix."/.deleted");
-		
-	system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
-	system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
-	system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
-	
-	
-	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
-	$err .= db_error();
+for($i = 0; $i < db_numrows($group_res); $i++) {
+    $gforge_groups[] = db_result($group_res,$i,'unix_group_name');
+    $gids[db_result($group_res,$i,'unix_group_name')] = db_result($group_res,$i,'unix_gid');
 }
+
+for ($i=0; $i < count($group_orig); $i++) {
+	$line = trim($group_orig[$i]);
+	// Skip the GForge groups (will be written later)
+	if (preg_match("/^[[:blank:]]*#GFORGEBEGIN/", $line)) {
+		do {
+			$i++;
+			$line = trim($passwd_orig[$i]);
+		} while ($i < count($passwd_orig) && !preg_match("/^[:blank:]*#GFORGEEND/", $line));
+		
+		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
+		if ($i >= (count($passwd_orig)-1)) break;
+		
+		// read next line
+		$i++;
+		$line = trim($passwd_orig[$i]);
+	}
+	
+	$entries = explode(":", $line);
+	if (!empty($entries[0])) {
+		$groupname = $entries[0];
+		if (!in_array($groupname, $gforge_groups)) {
+			// write the user only if it's not a gforge user
+			fwrite($group, $line."\n");
+		}
+	} else {
+		// blank line or comment
+		fwrite($group, $line."\n");
+	}
+}
+
+// Now write the GForge groups
+fwrite($group, "#GFORGEBEGIN\n");
+
+for ($i = 0; $i < count($gforge_groups); $i++) {
+	$group_name = $gforge_groups[$i];
+	$unix_gid = $gids[$group_name];
+	
+	$line = $group_name.":x:".$unix_gid.":";
+	
+	/* we need to get the project object to check if a project
+	 * has a private CVS repository - in which case we need to add
+	 * the apache user to the group so that ViewCVS can be used
+	 */
+	 
+	$group_id = db_result($group_res, $i, 'group_id');
+	$project = &group_get_object($group_id);
+	$enable_pserver = (db_result($group_res, $i, 'enable_pserver') == 't');	
+
+	$resusers = db_query("SELECT user_name 
+		FROM users,user_group,groups 
+		WHERE groups.group_id=user_group.group_id 
+		AND users.user_id=user_group.user_id
+		AND user_group.cvs_flags IN ('0','1')
+		AND users.status='A'
+		AND groups.unix_group_name='".$group_name."'");
+	$gmembers = util_result_column_to_array($resusers,'user_name');
+	if ($enable_pserver) $gmembers[] = 'anonymous';
+	if (!$project->enableAnonSCM()) {
+		$gmembers[] = $sys_apache_user;
+	}
+	
+	$line .= implode(',', $gmembers);
+	
+	fwrite($group, $line."\n");
+		
+}
+
+fwrite($group, "#GFORGEEND\n");
+fclose($group);
 
 cron_entry(16,$err);
 

@@ -3,6 +3,10 @@
 #
 10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
 #
+#       Create the user and group home directories
+#
+25 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/homedirs.php
+#
 #       Upload the SSH key files
 #
 15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
