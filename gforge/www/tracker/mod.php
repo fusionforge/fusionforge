@@ -58,14 +58,6 @@ if (session_loggedin()) {
 </table>
 <br />
 <?php } ?>
-<script type="text/javascript" src="/dojo/dojo.js"></script>
-<script type="text/javascript">
-	dojo.require("dojo.widget.TabPane");
-	dojo.require("dojo.widget.LinkPane");
-	dojo.require("dojo.widget.ContentPane");
-</script>
-<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="detailstab">
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','details'); ?>" id="detailstab">
 <table border="0" width="80%">
 	<tr>
 		<td>
@@ -168,7 +160,15 @@ if (session_loggedin()) {
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 </table>
-</div>
+<br />
+<br />
+<script type="text/javascript" src="/dojo/dojo.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabPane");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+</script>
+<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="messagestab">
 <div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
 <table border="0" width="80%">
 	<tr><td colspan="2">

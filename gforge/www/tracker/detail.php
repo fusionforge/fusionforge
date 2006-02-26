@@ -54,14 +54,6 @@ echo notepad_func();
 		</tr>
 	</table>
 <?php } ?>
-<script type="text/javascript" src="/dojo/dojo.js"></script>
-<script type="text/javascript">
-	dojo.require("dojo.widget.TabPane");
-	dojo.require("dojo.widget.LinkPane");
-	dojo.require("dojo.widget.ContentPane");
-</script>
-<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="detailstab">
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','details'); ?>" id="detailstab">
 	<table border="0" width="80%">
 		<tr>
 			<td><strong><?php echo $Language->getText('tracker','date') ?>:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
@@ -97,7 +89,13 @@ echo notepad_func();
 			<?php echo $ah->showDetails(); ?>
 		</td></tr>
 </table>
-</div>
+<script type="text/javascript" src="/dojo/dojo.js"></script>
+<script type="text/javascript">
+	dojo.require("dojo.widget.TabPane");
+	dojo.require("dojo.widget.LinkPane");
+	dojo.require("dojo.widget.ContentPane");
+</script>
+<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="messagestab">
 <div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
 	<table border="0" width="80%">
 		<tr><td colspan="2">
