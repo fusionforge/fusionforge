@@ -9,6 +9,9 @@
 #  * @version   $Id$
 #  *
 #  */
+my	assignedartifacts	Assigned Artifacts
+my	submittedartifacts	Submitted Artifacts
+my	assignedtasks	Assigned Tasks
 account	title	Account Preferences
 account	updated	Updated
 account_change_email	desc	<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>
@@ -1287,6 +1290,9 @@ menu	site_status	Site Status
 menu	software_map	Software Map
 menu	submit	Submit
 menu	top_projects	Top Projects
+mytab	todo	To-Do
+mytab	monitoring	Monitored Items
+mytab	project	Projects
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	assigneditems	My Assigned Items
 my	bookmarks	My Bookmarks
