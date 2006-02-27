@@ -24,6 +24,8 @@
 
 require_once('msp.php');
 
+$send_task_email=false;
+
 if (getStringFromRequest('showform')) {
 ?>
 	<html>
