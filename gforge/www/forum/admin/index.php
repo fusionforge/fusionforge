@@ -378,7 +378,7 @@ if ($group_id) {
 				echo $farr[$j]->getErrorMessage();
 			} else {
 				echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<p>';
+					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">Monitoring Users</a><p>';
 			}
 		}
 
