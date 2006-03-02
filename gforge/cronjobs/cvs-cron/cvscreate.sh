@@ -47,7 +47,7 @@ function createRepository() {
 	mkdir $repositorypath
 	mkdir -p /cvsroot/cvs-locks/$repositoryname
 	chmod 755 /cvsroot/cvs-locks
-	chmod 2777 /cvsroot/cvs-locks/$repositoryname
+	chmod 3777 /cvsroot/cvs-locks/$repositoryname
 	setRepositoryAccess
 	cvs -d$repositorypath init
 	setPserverAccess
