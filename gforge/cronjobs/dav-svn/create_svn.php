@@ -132,7 +132,7 @@ while ( $row =& db_fetch_array($res) ) {
 
 function check_svn_tracker($project, $repos) {
 	
-	$contents = file_get_contents($repos."/hooks/post-commit");	
+	$contents = @file_get_contents($repos."/hooks/post-commit");	
 	if ( strstr($contents, "svntracker") == FALSE ) {
 		add_svn_tracker_to_repository($project,$repos);
 	}
@@ -141,22 +141,28 @@ function check_svn_tracker($project, $repos) {
 function add_svn_tracker_to_repository($project,$repos) {
 	global $sys_plugins_path,$file_owner;
 	
-	$FOut = fopen($repos.'/hooks/post-commit', "a+");
+	if (file_exists($repos.'/hooks/post-commit')) {
+		$FOut = fopen($repos.'/hooks/post-commit', "a+");
+	} else {
+		$FOut = fopen($repos.'/hooks/post-commit', "w");
+		$Line = '#!/bin/sh'."\n"; // add this line to first line or else the script fails
+	}
 	if($FOut) {
-		$Line = '
+		$Line .= '
 #begin added by svntracker'.
 "\n/usr/bin/php -d include_path=".ini_get('include_path').
 				" ".$sys_plugins_path. "/svntracker/bin/post.php".  ' "'.$repos.'" "$2"
 #end added by svntracker';
 		fwrite($FOut,$Line);
 		`chmod +x $repos'/hooks/post-commit'`;
+		`chmod 700 $repos'/hooks/post-commit'`;
 		`chown $file_owner $repos'/hooks/post-commit'`;
 		fclose($FOut);
 	}
 }
 
 function check_svn_mail($project, $repos) {
-	$contents = file_get_contents($repos."/hooks/post-commit");
+	$contents = @file_get_contents($repos."/hooks/post-commit");
 	if ( strstr($contents, "svncommitemail") == FALSE ) {
 		add_svn_mail_to_repository($project,$repos);
 	}
@@ -165,14 +171,21 @@ function check_svn_mail($project, $repos) {
 function add_svn_mail_to_repository($unix_group_name,$repos) {
 	global $sys_lists_host,$file_owner,$sys_plugins_path;
 	
-	$FOut = fopen($repos.'/hooks/post-commit', "a+");
+	if (file_exists($repos.'/hooks/post-commit')) {
+		$FOut = fopen($repos.'/hooks/post-commit', "a+");
+	} else {
+		$FOut = fopen($repos.'/hooks/post-commit', "w");
+		$Line = '#!/bin/sh'."\n"; // add this line to first line or else the script fails
+	}
+	
 	if($FOut) {
-		$Line = '
+		$Line .= '
 #begin added by svncommitemail
 '.$sys_plugins_path.'/svncommitemail/bin/commit-email.pl '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
 #end added by svncommitemail';
 		fwrite($FOut,$Line);
 		`chmod +x $repos'/hooks/post-commit'`;
+		`chmod 700 $repos'/hooks/post-commit'`;
 		`chown $file_owner $repos'/hooks/post-commit'`;
 		fclose($FOut);
 	}
