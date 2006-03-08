@@ -793,8 +793,8 @@ error	error_creating	Error creating
 error	not_found	PAGE NOT FOUND
 error	title	Requested Page not Found (Error 404)
 exit	choose_a_group	Error - Choose A group
-exit	choose_group_body	No group Id was chosen
-exit	choose_group_title	ERROR - No group_id was chosen
+exit	choose_group_body	No group was chosen or you can't access it
+exit	choose_group_title	ERROR - No group was chosen or you can't access it
 exit	exiting_with_error	Exiting with error
 exit	missing_parameters_body	Error - missing required parameters
 exit	missing_parameters_title	Error - missing parameters
