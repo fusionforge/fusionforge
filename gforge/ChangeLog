@@ -1,3 +1,10 @@
+
+2006-03-08 Tim Perdue   <tim@gforgegroup.com>
+
+	* addslashes() needs to be applied to all incoming SOAP messages
+	* suppressing sending of emails for msproject
+	* document::sendNotice was never implemented
+
 2006-02-22 Marcelo Mottall <marcelo@gforgegroup.com>
 	* Rewrote usergroup cronjob, it adds markers in /etc files now
 	* Split usergroup cronjob in two: usergroup and homedirs.php
