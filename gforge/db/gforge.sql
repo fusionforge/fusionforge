@@ -84,7 +84,8 @@ CREATE TABLE doc_data (
     language_id integer DEFAULT 1 NOT NULL,
     filename text,
     filetype text,
-    group_id integer
+    group_id integer,
+    filesize integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2059,11 +2060,6 @@ CREATE VIEW project_message_user_vw AS
 
 
 
-CREATE VIEW docdata_vw AS
-    SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
-
-
-
 CREATE FUNCTION frs_dlstats_filetotal_insert_ag() RETURNS "trigger"
     AS '
 BEGIN
@@ -2475,12 +2471,12 @@ CREATE SEQUENCE plugin_cvstracker_master_seq
 CREATE TABLE plugin_cvstracker_data_master (
     id integer DEFAULT nextval('plugin_cvstracker_master_seq'::text) NOT NULL,
     holder_id integer NOT NULL,
-    cvs_date date NOT NULL,
     log_text text DEFAULT ''::text,
     file text DEFAULT ''::text NOT NULL,
     prev_version text DEFAULT ''::text,
     actual_version text DEFAULT ''::text,
-    author text DEFAULT ''::text NOT NULL
+    author text DEFAULT ''::text NOT NULL,
+    cvs_date integer NOT NULL
 );
 
 
@@ -2650,6 +2646,11 @@ CREATE SEQUENCE artifact_extra_field_list_extra_field_id_seq
 
 
 
+CREATE VIEW docdata_vw AS
+    SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, d.filesize, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
+
+
+
 COPY canned_responses (response_id, response_title, response_text) FROM stdin;
 \.
 
@@ -2660,7 +2661,7 @@ COPY db_images (id, group_id, description, bin_data, filename, filesize, filetyp
 
 
 
-COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, doc_group, description, language_id, filename, filetype, group_id) FROM stdin;
+COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, doc_group, description, language_id, filename, filetype, group_id, filesize) FROM stdin;
 \.
 
 
@@ -4133,7 +4134,7 @@ COPY plugin_cvstracker_data_artifact (id, kind, group_artifact_id, project_task_
 
 
 
-COPY plugin_cvstracker_data_master (id, holder_id, cvs_date, log_text, file, prev_version, actual_version, author) FROM stdin;
+COPY plugin_cvstracker_data_master (id, holder_id, log_text, file, prev_version, actual_version, author, cvs_date) FROM stdin;
 \.
 
 
@@ -5258,6 +5259,11 @@ ALTER TABLE ONLY artifact_query
 
 ALTER TABLE ONLY artifact_query_fields
     ADD CONSTRAINT artqueryelmnt_artqueryid FOREIGN KEY (artifact_query_id) REFERENCES artifact_query(artifact_query_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY mail_group_list
+    ADD CONSTRAINT mail_group_list_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
 
 
 

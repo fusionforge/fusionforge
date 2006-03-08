@@ -51,8 +51,24 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM artifact_search('".$this->getFormattedWords()."', ".$this->artifactId.")";
+			$words=$this->getFormattedWords();
+			$artifactId = $this->artifactId;
+			$sql = "SELECT DISTINCT ON (artifact.artifact_id) artifact.artifact_id,
+				artifact.group_artifact_id, artifact.summary AS summary,
+				artifact.open_date, users.realname, artifact_group_list.name
+				FROM artifact LEFT JOIN artifact_message USING (artifact_id), users,
+				artifact_group_list
+				WHERE users.user_id = artifact.submitted_by
+				AND artifact_group_list.group_artifact_id = artifact.group_artifact_id
+				AND artifact_group_list.group_artifact_id='$artifactId'
+				AND artifact.artifact_id IN (
+				SELECT artifact_id FROM artifact_idx,
+				to_tsquery('$words') AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC)
+				OR artifact.artifact_id IN (
+				SELECT artifact_id FROM artifact_message_idx,
+				to_tsquery('$words') AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC)";
 		} else {
 			$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname '
 				. 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users ' 

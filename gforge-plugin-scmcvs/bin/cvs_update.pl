@@ -37,7 +37,7 @@ while ($ln = pop(@group_array)) {
 	# This 50000 is really dirty until I change this file completly
 	$cvs_gid = $group_id + $anoncvs_uid_add;
 	$cvs_dir = "$cvs_root/$group_name";
-
+	if($verbose) {print "cvs_root=$cvs_root, cvs_dir=$cvs_dir\n";}
 	$userlist =~ tr/A-Z/a-z/;
 
 	#$group_exists = (-d $grpdir_prefix/$group_name);
@@ -121,7 +121,7 @@ while ($ln = pop(@group_array)) {
 			if($verbose) { print("Enable pserver for $group_name:\t$userlist in $cvs_dir/CVSROOT/writers \n"); }
 			open (CONFIG,">$cvs_dir/CVSROOT/config");
 			print CONFIG "SystemAuth=yes\n";
-			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
+			print CONFIG "LockDir=$cvs_root/cvs-locks/$group_name\n";
 			close CONFIG;
 		} else {
 			# turn off pserver writers
@@ -132,7 +132,7 @@ while ($ln = pop(@group_array)) {
 			if($verbose) { print("Disable pserver for $group_name\n"); }
 			open (CONFIG,">$cvs_dir/CVSROOT/config");
 			print CONFIG "SystemAuth=no\n";
-			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
+			print CONFIG "LockDir=$cvs_root/cvs-locks/$group_name\n";
 			close CONFIG;
 		}
 
