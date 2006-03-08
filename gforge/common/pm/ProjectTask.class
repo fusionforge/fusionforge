@@ -1042,6 +1042,10 @@ class ProjectTask extends Error {
 	 *	@return	boolean	success.
 	 */
 	function sendNotice($first=false) {
+		global $send_task_email;
+		if (!$send_task_email) {
+			return true;
+		}
 		$ids =& $this->getAssignedTo();
 
 		//
