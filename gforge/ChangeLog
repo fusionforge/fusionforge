@@ -3,6 +3,7 @@
 
 	* addslashes() needs to be applied to all incoming SOAP messages
 	* suppressing sending of emails for msproject
+	* document::sendNotice was never implemented
 
 2006-02-13 Daniel Perez <daniel@gforgegroup.com>
 	* Changed boxGetAltRowStyle in Layout.class
