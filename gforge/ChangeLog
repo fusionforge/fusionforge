@@ -1,3 +1,5 @@
+2006-03-09 Daniel Perez <daniel@gforgegroup.com>
+	* fixed bug in ProjectTask -> $send_task_email===false
 
 2006-03-08 Tim Perdue   <tim@gforgegroup.com>
 
