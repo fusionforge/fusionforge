@@ -58,6 +58,7 @@ Alias /pipermail/ /var/lib/mailman/archives/public/
 #
 DAVLockDB    /tmp/svn-DAVLockDB
   <Location /svn>
+    ErrorDocument 404 default
     GforgeSysPath       /svnroot
     GforgeGroupsRoot	/svn
     GforgeAnonClause    "groups.enable_anonscm >= '1'"
