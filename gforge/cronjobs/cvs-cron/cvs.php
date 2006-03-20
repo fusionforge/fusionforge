@@ -260,7 +260,7 @@ function add_acl_check($unix_group_name) {
 			"\n#END adding cvs acl check\n";
 		cvs_write_file($commitinfofile, $aclcheck, 1);
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$commitinfofile);
-		release_cvs_file($loginfo_file);
+		release_cvs_file($commitinfofile);
 	} else {
 //		echo "cvstracker Found!\n";
 	}
