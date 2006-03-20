@@ -3,6 +3,8 @@
 		http://gforge.org/tracker/?func=detail&aid=2000&group_id=1&atid=106
 	* Applied patch : Plugin manager forgets to report problems, and should tell more about db init errors
 		http://gforge.org/tracker/?func=detail&aid=1964&group_id=1&atid=106
+	* Applied patch : updated italian.tab
+		http://gforge.org/tracker/?func=detail&aid=1921&group_id=1&atid=106		
 
 2006-03-09 Daniel Perez <daniel@gforgegroup.com>
 	* fixed bug in ProjectTask -> $send_task_email===false
