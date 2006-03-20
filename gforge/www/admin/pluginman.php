@@ -134,6 +134,7 @@ if (getStringFromRequest('update')) {
 					$res = db_query($arch);
 					if (!$res) {
 						$feedback .= $Language->getText('pluginman','successiniterror');
+						$feedback .= '<br>Database said: '.db_error();
 					}
 				} else {
 					$feedback .= $Language->getText('pluginman','successnoinit');
@@ -144,6 +145,7 @@ if (getStringFromRequest('update')) {
 
 }
 
+echo $feedback.'<br>';
 echo $Language->getText('pluginman','notice');
 $title_arr = array( $Language->getText('pluginman','name'),
 				$Language->getText('pluginman','status'),
