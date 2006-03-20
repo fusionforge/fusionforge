@@ -1,3 +1,199 @@
+2006-03-20 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : Fixes bug in tracker template upload
+		http://gforge.org/tracker/?func=detail&aid=2000&group_id=1&atid=106
+	* Applied patch : Plugin manager forgets to report problems, and should tell more about db init errors
+		http://gforge.org/tracker/?func=detail&aid=1964&group_id=1&atid=106	
+	* Applied patch : updated italian.tab
+		http://gforge.org/tracker/?func=detail&aid=1921&group_id=1&atid=106
+	* Applied patch : updated chinese.tab	
+		http://gforge.org/tracker/?func=detail&aid=1907&group_id=1&atid=106		
+	* Applied patch : Artifact::create() looses sql error on insertion
+		http://gforge.org/tracker/?func=detail&aid=1909&group_id=1&atid=106
+	* Applied patch : Error message when validation of list name fails is not informative enough
+		http://gforge.org/tracker/?func=detail&aid=1863&group_id=1&atid=106
+
+2006-03-09 Daniel Perez <daniel@gforgegroup.com>
+	* fixed bug in ProjectTask -> $send_task_email===false
+
+2006-03-08 Tim Perdue	<tim@gforgegroup.com>
+
+	* addslashes() needs to be applied to all incoming SOAP messages
+	* suppressing sending of emails for msproject
+	* document::sendNotice was never implemented
+
+2006-02-13 Daniel Perez <daniel@gforgegroup.com>
+	* Changed boxGetAltRowStyle in Layout.class
+		http://gforge.org/tracker/?func=detail&aid=1830&group_id=1&atid=105
+
+2006-02-11 Tim Perdue	<tim@gforgegroup.com>
+
+	* Added priority column to tracker and made its background the priority color.
+	the rest of the row is now standard alternating color for accessibility reasons.
+
+2006-02-09 Daniel Perez <daniel@gforgegroup.com>
+	* User.class now deletes from filemodule_monitor, forum_monitored_forum, artifact_monitor, artifact_type_monitor when
+		deleting user
+
+2006-02-08 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : Patched DocsSearchQuery FTI SQL
+		https://gforge.org/tracker/index.php?func=detail&aid=1849&group_id=6&atid=222
+	* Applied patch :  Patched ExportProjectSearch FTI query
+		https://gforge.org/tracker/index.php?func=detail&aid=1851&group_id=6&atid=222
+	* Applied patch :  forums_search function ordering not results
+		https://gforge.org/tracker/index.php?func=detail&aid=1853&group_id=6&atid=222
+	* Applied patch : NewsSearchQuery not ordering results
+		https://gforge.org/tracker/index.php?func=detail&aid=1855&group_id=6&atid=222
+	* Applied patch :  TasksSearchQuery.class and project_task_search() function problems
+		https://gforge.org/tracker/index.php?func=detail&aid=1858&group_id=6&atid=222
+	* Applied patch : skills_data_search(text) postgresql function not returning results ordered by rank value
+		https://gforge.org/tracker/index.php?func=detail&aid=1857&group_id=6&atid=222
+	* Applied patch : forum_search(text, integer) function not ordering results
+		https://gforge.org/tracker/index.php?func=detail&aid=1852&group_id=6&atid=222
+
+
+2006-02-03 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch :  magic quotes and search terms
+		http://gforge.org/tracker/?func=detail&aid=1839&group_id=6&atid=222
+	* Fixed bug : FTI search with exact match doesn't work
+		http://gforge.org/tracker/?func=detail&aid=1844&group_id=6&atid=222		
+
+2006-02-01 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : Chinese language updated
+		http://gforge.org/tracker/?func=detail&aid=1755&group_id=1&atid=106
+	* Applied patch : MailParser.class is too restrictive
+		http://gforge.org/tracker/?func=detail&aid=1819&group_id=1&atid=106
+	* Applied patch : cvs-2.12's commitid causes cvsweb to corrupt content behind "download" links
+		http://gforge.org/tracker/?func=detail&aid=1814&group_id=1&atid=106
+	* Applied patch : Allow /user/ pages to link to /admin/useredit.php?user_id= pages
+		http://gforge.org/tracker/?func=detail&aid=1820&group_id=1&atid=106
+	* Applied patch :  Fix awfull look of advanced search
+		http://gforge.org/tracker/index.php?func=detail&aid=1566&group_id=1&atid=106
+	* Applied patch : cvs history parse ignores exports
+		http://gforge.org/tracker/?func=detail&aid=1784&group_id=6&atid=222
+	* Fixed bug :  alt row color doesn't render right in IE
+		http://gforge.org/tracker/?func=detail&aid=1830&group_id=1&atid=105
+	* Fixed bug in rss, where group_id wasn´t being properly set
+
+2006-01-29 Tim Perdue	<tim@gforgegroup.com>
+	* added google-style page counts at the bottom of the tracker browse page
+	so you can easily jump to specific pages
+	* Added multiple-file upload capability.
+	* Fixed full-text indexing
+
+2006-01-06 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : When Anonymous posting is turned off, tell people to log in.
+		http://gforge.org/tracker/?func=detail&aid=1761&group_id=1&atid=106
+
+2006-01-03 Daniel Perez <daniel@gforgegroup.com>
+	* Applied patch : pm sort order
+		http://gforge.org/tracker/?func=detail&aid=1582&group_id=6&atid=222
+
+2005-12-27 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug : svn-stats.php bug
+		http://gforge.org/tracker/?func=detail&aid=1763&group_id=1&atid=105
+
+2005-12-16 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug : svn-stats.php reports itself as history_parse.php
+		http://gforge.org/tracker/?func=detail&aid=1593&group_id=6&atid=222
+	Patchs applied :
+	* Fixed bug -> bad link to private mailman archives
+		http://gforge.org/tracker/?func=detail&aid=1687&group_id=6&atid=222
+
+2005-12-15 Marcelo Mottalli <marcelo@gforgegroup.com>
+	* Fixed bug [#1694]: SOAP method getArtifacts returns only 50 artifacts
+
+2005-12-14 Daniel Perez <daniel@gforgegroup.com>
+	create_svn : post-commit was being overwritten every time on several repositories, now there´s a check to see
+			if the lines are already there for svncommitemail and svntracker and appended if they´re not there,
+			else the file is created (never overwritten)
+
+2005-12-13 Daniel Perez <daniel@gforgegroup.com>
+        Added configman.php, configuration files manager for admin interface
+
+2005-12-05 Daniel Perez <daniel@gforgegroup.com>
+	Patchs applied :
+	* Fixed bug -> usergroup.php has multiple problems 'deleting' CVS repositories
+		http://gforge.org/tracker/?func=detail&aid=1681&group_id=6&atid=222
+	* Fixed bug -> query builder doesn't respect limit of 50 artifacts
+		http://gforge.org/tracker/?func=detail&aid=1682&group_id=6&atid=222
+
+2005-12-01 Daniel Perez <daniel@gforgegroup.com>
+	rss 2.0 feed patch added
+
+2005-11-30 Daniel Perez <daniel@gforgegroup.com>
+        svntracker plugin : changed the handle of the vars, to send only one
+        post to newcommit.php (previously there were multiple HTTP POSTS)
+
+2005-11-25 Tim Perdue <tim@gforgegroup.com>
+
+	* added quick-jump navigation system
+	* added back in the quick-browse for tracker, which was removed for power query
+	* made cvssyncmail plugin so it can be unchecked
+	* completely cleaned up cvs.php cronjob
+	* added plugin management page from HEAD to 4.5
+
+
+2005-11-25 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug -> Hide skills search if sys_use_people is false
+		https://gforge.org/tracker/?func=detail&aid=1586&group_id=6&atid=222
+
+
+2005-11-17  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml:
+	/etc/gforge/custom/index_std.php instead of www/index_std.php.
+	Branch_4_5 instead of HEAD for checking out plugins.
+
+2005-11-10  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
+	Checking out and updating from Branch_4_5.
+	Customizing front page.
+	FTI and project webs moved to optional features.
+	Removed the fix for CVSTracker schema.
+	Q&A about <Files> and <Location>, by David Morsberger.
+	Added recommendation that reporting tables are initialized early.
+	Instructions for patching when CVS version is 1.12.
+
+2005-11-07 Daniel Perez <daniel@gforgegroup.com>
+	Forums : 
+		Fixed bug when creating forum with default email address
+
+
+2005-10-17 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug -> html_build_multiple_select_box_from_arrays and
+				html_build_multiple_select_box now doesn´t display DB ids
+		http://gforge.org/tracker/?func=detail&aid=1575&group_id=6&atid=222
+	* Fixed bug -> www/tracker/mod.php
+		http://gforge.org/tracker/?func=detail&aid=1549&group_id=6&atid=222
+	* Fixed bug -> html_build_select_box_from_arrays
+		http://gforge.org/tracker/?func=detail&aid=1548&group_id=6&atid=222
+		htmlspecialchars() call removed
+	* Fixed bug -> cronjobs/
+		cronjobs/daily_task_email.php
+		http://gforge.org/tracker/?func=detail&aid=1553&group_id=6&atid=222
+		Applied reverse function to htmlentities() so that in the email the chars aren´t displayed as html
+2005-10-11 Daniel Perez <daniel@gforgegroup.com>
+http://gforge.org/tracker/?func=detail&aid=1571&group_id=1&atid=105
+	(**Survey**)
+	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
+
+2005-10-05 Daniel Perez <daniel@gforgegroup.com>
+
+https://gforge.org/tracker/?func=detail&aid=1551&group_id=1&atid=106
+	* Changed description to return description instead of id
+
+2005-07-29 Daniel Perez <daniel@gforgegroup.com>
+Bug : 
+
+http://gforge.org/tracker/index.php?func=detail&aid=1542&group_id=6&atid=111
+
+Unneeded addslashes removed, it was messing up the name when mass updating
+
+2005-09-19 Daniel Perez <daniel@gforgegroup.com>
+	common/pm : changed ProjectTask.class to send email only when something is really changed
+	www/pm : changed mod_task.php -> Report.class instantiation was changing timezone and displaying incorrect date. changed location of class instantiation
+
 2005-07-27  Francisco Gimeno <francisco@gforgegroup.com>
 
 	* Fixed XSS vulnerabilities by adding htmlspecialchars for direct used

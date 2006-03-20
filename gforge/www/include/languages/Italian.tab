@@ -22,8 +22,11 @@
 #  *            removed double strings, removed not translated strings,
 #  * 2004-03-05 Lele Gaifax <lele@nautilus.homeip.net>
 #  *            revisited and synced with Base.
+#  * 2006-02-22 rspisser <reinhard@spisser.it>
+#  *            synced with Base.tab
 #  **/
 #
+
 account	title	Preferenze account
 account	updated	Aggiornato
 account_change_email	desc	<p>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.</p> <p>Visti i servizi che garantiamo, è necessario assicurarci che l'indirizzo di ciascun utente sia corretto, dal momento che potrebbe essere necessario contattarlo per questioni relative all'accesso alla shell o a qualche progetto.</p><p>Cliccando su Invia nel form invierà un messaggio contenente un URL per confermare il nuovo indirizzo di posta elettronica. Il cambio sarà completato quando il link di conferma sarà visitato.</p>
@@ -50,6 +53,8 @@ account_change_pw	title	Cambia Password
 account_change_pw	update	Aggiorna password
 account_change_pw_changed	return_to	Adesso puoi tornare alle $1 Preferenze utente $2.
 account_change_pw_changed	title	Cambio password effettuato con successo
+account_editsshkeys	authorized_keys	Chiavi autorizzate:<br /><em>Importante: Assicurati che non ci siano linee vuote tra le chiavi. Dopo aver inserito le chiavi, assicurati che il numero di chiavi del file è quello atteso.</em>
+account_editsshkeys	intro	<p>Per evitare di dover digitare la propria passowrd ogni volta che si accede a CVS/SSH, è possibile inserire le chiavi pubbliche, queste verranno memorizzate nel file ~/.ssh/authorized_keys sul server. Questa attività è schedualta ogni ora.</p><p>Per generare una chiave pubblica, esegui 'ssh-keygen' (si può utilizzare sia il protocollo versione 1 che 2). La chiave pubblica verrà scritta nel file '~/.ssh/identity.pub' per il protocollo versione 1 e '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' per il protocollo versione 2. Per maggiori informazioni su come condividere le chiavi pubbliche consultare la documentazione di ssh.
 account_editsshkeys	section	Preferenze Account
 account_editsshkeys	title	Modifica chiavi CVS/SSH
 account_first	about_blurb	<p>Ora sei un utente registrato su $1, l'ambiente di sviluppo online per progetti Open Source.</p><p>Come utente registrato, puoi partecipare pienamente a tutte le attività del sito. Potrai inserire messaggi nei forum dei progetti, segnalare dei bug nel software ospitato da $1, farti registrare come sviluppatore oppure aprire un tuo progetto personale.</p><p>Buon lavoro, e non dimenticare di inviarci le tue impressioni sul come migliorare $1.</p><p>--il team $1.</p>
@@ -57,6 +62,7 @@ account_first	title	Benvenuto su $1
 account_login	cookiewarn	Da questo momento i cookie devono essere abilitati.
 account_login	deleted_account	<p>Il tuo account su $1 è stato rimosso dal team di $1. Questo può accadere per due ragioni: 1) hai richiesto che il tuo account venga rimosso; oppure 2) sono state effettuate delle azioni giudicate non idonee dal tuo account (cioè, non hai rispettato i termini pattuiti per l'utilizzo dei servizi su $1) che è stato quindi disabilitato per ragioni amministrative. Se questo ti lascia perplesso, inoltra una <a href="/support/?group_id=1">richiesta di supporto</a>.</p><p>Grazie, <br><br>il team $1</p>
 account_login	login	Login con SSL
+account_login	login_ssl	Login con SSL
 account_login	loginname	Login:
 account_login	lostpw	[Hai dimenticato la password?]
 account_login	newaccount	[Nuovo account]
@@ -73,7 +79,7 @@ account_lostlogin	newpasswd2	Conferma nuova password
 account_lostlogin	notmatch	Le password non corrispondono.
 account_lostlogin	passwdchanged	<h2>Password cambiata</h2><p>La password è stata re-impostata. Ora puoi <a href="/account/login.php">loggarti</a> al sito.</p>
 account_lostlogin	severalconfirm	Il codice hash di conferma esiste più volte.
-account_lostlogin	sixchars	La password deve essere valida  (minimo 6 caratteri).
+account_lostlogin	sixchars	La password deve essere valida (minimo 6 caratteri).
 account_lostlogin	title	Conferma di password dimenticata
 account_lostlogin	update	Aggiorna
 account_lostlogin	welcome	<h2>Login per password dimenticata</h2><p>Benvenuto, $1. Adesso puoi cambiare la tua password.</p>
@@ -86,16 +92,20 @@ account_lostpw	title	Hai dimenticato la password?
 account_lostpw	user_dont_exist	L'utente specificato non esiste.
 account_lostpw	warn	<P>Attenzione... smarrire la propria password è una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero.</p><p>Cliccando su "Invia Hash di password persa" ti verrà inviato un link all'indirizzo email registrato. Questo link contiene un codice hash di conferma a 128-bit per il tuo account. Visitando il link indicato nella email sarai in grado di cambiare la password online e di effettuare il login.</p>
 account_options	address	Indirizzo completo:
+account_options	ccode	Nazione:
 account_options	change_email_address	Cambia indirizzo e-mail
 account_options	change_password	Cambia password
 account_options	edit_skills_profile	Modifica il mio profilo delle competenze
 account_options	email_address	Indirizzo e-mail:
 account_options	fax	FAX:
+account_options	firstname	Nome:
 account_options	language	Lingua:
+account_options	lastname	Cognome:
 account_options	login_name	Login:
 account_options	member_since	Data registrazione:
 account_options	phone	Telefono:
 account_options	real_name	Nome completo:
+account_options	themeid	Tema:
 account_options	timezone	Fuso orario:
 account_options	title	Manutenzione account
 account_options	title2	Titolo:
@@ -103,23 +113,29 @@ account_options	user_id	Id utente:
 account_options	view_developer_profile	Visualizza il mio profilo
 account_options	welcome	Benvenuto
 account_register	Preferences	Preferenze
+account_register	ccode	Nazione:
 account_register	communitymail	Desidero ricevere email dalla comunità <I>(poco traffico).</I>
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.</p><p> Ti verrà inviata una email di conferma per verificare il tuo indirizzo email. Visita il link indicato nella email per attivare il tuo account.</p>
 account_register	emailaddr	Indirizzo email:<span><font color="red">*</font></span><br /><em>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</em>
 account_register	err_badinsert	Inserimento fallito
 account_register	err_email	Indirizzo email non valido
+account_register	err_firstname	Nome è un parametro obbligatorio
 account_register	err_jabber	Indirizzo Jabber non valido
+account_register	err_lastname	Cognome è un parametro obbligatorio
 account_register	err_mailexist	Sul sistema esiste già un utente con questo indirizzo di posta elettronica - usa la ricerca persone per recuperare il tuo login.
 account_register	err_passwd	Devi inserire una password
 account_register	err_passwd2	Le password non corrispondono
 account_register	err_passwd3	Password non valida:
 account_register	err_realname	Inserire un nome completo
+account_register	err_theme	Tema è un parametro obbligatorio
 account_register	err_unixname	Nome utente unix non valido.
 account_register	err_userexist	Il nome è specificato già usato da un altro utente.
 account_register	err_username	Devi specificare un nome utente
+account_register	firstname	Nome:
 account_register	jabberaddr	Indirizzo Jabber:
 account_register	jabberonly	Invia le notifiche generate automaticamente solo al mio indirizzo Jabber
 account_register	language	Lingua preferita:
+account_register	lastname	Cognome:
 account_register	loginname	Login (non usare maiuscole):
 account_register	mandatory	I campi indicati con $1 sono obbligatori.
 account_register	message_body	Grazie per la tua registrazione sul sito $4.\nE' stato creato un account con nome utente $1.\nPer completare la registrazione, visita l'URL:\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Se non vedi alcuni link qui sopra, probabilmente si tratta di un bug nel tuo sistema di email.\nUsa il seguente, assicurandoti che tutto venga inserito in una riga sola.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\\nGrazie.\n\n-- il team $4\n
@@ -132,7 +148,8 @@ account_register	register	Registra
 account_register	remember_me	"Ricordati di me". <i>(Permette di accedere alla tua $1 pagina personale</a> senza essere loggato. È comunque necessario loggarsi prima di fare qualsiasi modifica.)</i>
 account_register	resend_pending	[Rispedisci l'email di conferma di un nuovo account]
 account_register	reset	Annulla le modifiche
-account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito  <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione)</I>.
+account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione)</I>.
+account_register	theme	Tema
 account_register	timezone	Fuso orario:
 account_register	title	Registrazione nuovo account
 account_register	update	Applica modifiche
@@ -158,7 +175,7 @@ account_verify	nouser	L'utente non esiste.
 account_verify	password	Password:
 account_verify	title	Verifica account $1
 account_verify	usermandatory	Devi inserire un nome utente.
-account_verify	verify_blurb	<p>Per completare la tua registrazione, fare il login adesso.  Il tuo account sarà attivato.</p>
+account_verify	verify_blurb	<p>Per completare la tua registrazione, fare il login adesso. Il tuo account sarà attivato.</p>
 add_snippet	add_this_snippet_version_id	Aggiungi questo frammento di versione ID:
 add_snippet	back_to_add_page	Torna al modulo di inserimento
 add_snippet	error_doing_snippet_version_insert	ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL FRAMMENTO!
@@ -177,21 +194,24 @@ add_snippet	title	Inserisci un nuovo frammento
 add_snippet	you_can_use_this_form	Puoi usare questo modulo ripetutamente per aggiungere frammenti al package.</p><p>Il campo "Id versione frammento" è l'ID univoco del frammento che viene mostrato di fianco alla sua versione specifica, nelle pagine di consultazione.
 admin	add	Aggiungi
 admin	add_new	[aggiungi nuovo]
-admin	are_you_sure_delete	Sei sicuro di volerlo cancellare
+admin	are_you_sure_delete	Sei sicuro di volerlo rimuovere? 
 admin	cancel	Annulla
-admin	delete	Cancella
+admin	delete	Rimuovi
 admin	edit	Modifica
+admin	home_box	Server per le Homepage:
 admin	http_domain	Dominio HTTP:
 admin	license	Licenza:
 admin	license_other	Altra licenza:
 admin	na	Non disp.
 admin	other	Altri
 admin	reject	Rigetta
+admin	scm_box	Server per SCM:
+admin	scm_box_empty	Il parametro Server SCM è obbligatorio
 admin	site_admin_home	Home amministrazione sito
 admin	submit_changes	Invia modifiche
 admin	submit_new	Invia
 admin	successfully_added	Aggiunto con successo
-admin	successfully_deleted	Cancellato con successo
+admin	successfully_deleted	Rimosso con successo
 admin	successfully_modified	modificato con successo
 admin	yes	si
 admin_add_language	add_new_language	Aggiungi nuova lingua
@@ -200,17 +220,35 @@ admin_add_language	classname	Classname:
 admin_add_language	existing_language	Lingua esistente
 admin_add_language	name	Nome:
 admin_add_language	submit	Invia
+admin_admin_table	add_new	aggiungi nuovo
+admin_admin_table	cant_delete_language	Non è possibile rimuovere la lingua $1 poiché è utilizzata da un profilo utente.
+admin_admin_table	cant_delete_license	Non è possibile rimuovere la licenza $1 poiché è utilizzata da un progetto.
+admin_admin_table	cant_delete_processor	Non è possibile rimuovere il processore $1 poiché è utilizzato in un rilascio file.
+admin_admin_table	create_new_below	Crea un nuovo $1:
+admin_admin_table	delete_confirm	Sei sicuro di voler rimuovere il $1?
+admin_admin_table	modify_below	Modifica il $1:
+admin_admin_table	site_admin_home	Homepage amministrazione Sito
+admin_admin_table	successfully_added	$1 aggiunto.
+admin_admin_table	successfully_deleted	$1 rimosso.
+admin_admin_table	successfully_modified	$1 modificato.
+admin_admin_table	title	Modifica la tabella $1s
+admin_admin_table	unit_file_type	Tipo file
+admin_admin_table	unit_license	Licenza
+admin_admin_table	unit_processor	Processore
+admin_admin_table	unit_supported_language	Linguaggio supportato
+admin_admin_table	unit_theme	Tema
 admin_approve_pending	add_this_custom_response	Aggiungi questa risposta alle risposte predefinite
 admin_approve_pending	admin_approve_pending	Attiva
 admin_approve_pending	approve	Approva
 admin_approve_pending	approve_all_on_this_page	Approva tutto
-admin_approve_pending	approving_group	Approvazione Gruppo:
+admin_approve_pending	approving_group	Approvazione Progetto:
 admin_approve_pending	approving_pending_projects	Approvazione nuovi progetti
+admin_approve_pending	canned_responses	Risposte predefinite
 admin_approve_pending	custom_response_title	Risposte: titolo e testo
 admin_approve_pending	edit_project_details	[Modifica dettaglio progetto]
-admin_approve_pending	error_creating_group	Errore nella creazione dell'oggetto gruppo
-admin_approve_pending	error_group_rejection	Errore durante la fase di rigetto del gruppo
-admin_approve_pending	home_box	Home Box:
+admin_approve_pending	error_creating_group	Errore nella creazione  del progetto 
+admin_approve_pending	error_group_rejection	Errore durante la fase di rigetto del progetto
+admin_approve_pending	home_box	Server homepage:
 admin_approve_pending	manage_responses	(gestisci risposte predefinite)
 admin_approve_pending	no_pending_projects_to_approve	Non ci sono progetti in attesa di approvazione
 admin_approve_pending	none_found	Nessun progetto trovato
@@ -226,15 +264,19 @@ admin_database	added_already_active_database	aggiunto database già attivo
 admin_database	count	Numero
 admin_database	display_database_type	Visualizzazione di database del tipo:
 admin_database	error_adding_database	Errore nell'aggiunta del database
-admin_database	group	Gruppo
-admin_database	group_unix_name	Nome unix del gruppo:
+admin_database	group	Progetto
+admin_database	group_unix_name	Nome unix del progetto:
 admin_database	no_databases_defined	Nessun database definito
-admin_database	site_admin_groups_maintance	Amm. sito: Gestione database dei gruppi
+admin_database	site_admin_groups_maintance	Amm. sito: Gestione database dei progetti 
 admin_database	statistics_for_project_database	Statistiche dei database dei progetti
 admin_database	type	Tipo
 admin_database	unable_to_insert	Impossibile inserire un database già attivo
+admin_groupdelete	delete	Conferma rimozione
+admin_groupdelete	permanentlydelete	Rimuovi in modo permanente
+admin_groupdelete	permanentlydeleteproject	Rimuovi il progetto in modo permanente e irrimediabile
+admin_groupdelete	title	Rimuovi il progetto in modo permanente
 admin_groupedit	active	Attivo (A)
-admin_groupedit	deleted	Cancellato (D)
+admin_groupedit	deleted	Rimosso (D)
 admin_groupedit	error	Errore
 admin_groupedit	error_creating_group_object	Errore nella creazione dell'oggetto group
 admin_groupedit	holding	Non attivo (H)
@@ -248,44 +290,58 @@ admin_groupedit	public	Pubblico?
 admin_groupedit	registration_application	Registrazione applicazione:
 admin_groupedit	status	Stato
 admin_groupedit	title	Site Admin: Group Info
-admin_groupedit	unix_group_name	Nome unix del gruppo:
+admin_groupedit	unix_group_name	Nome unix del progetto:
 admin_groupedit	update	Aggiorna
 admin_groupedit	updated	Aggiornato
 admin_groupedit	yes	Si
-admin_grouplist	group_list	Elenco gruppi
-admin_grouplist	group_list_for_category	Elenco gruppi per la categoria:
-admin_grouplist	group_name_click_to_edit	Nome gruppo (selezionare il nome per modificare)
-admin_grouplist	groups_that_begin_with	Gruppi che iniziano per
+admin_grouplist	group_list	Elenco progetti
+admin_grouplist	group_list_for_category	Elenco progetti per la categoria:
+admin_grouplist	group_name_click_to_edit	Nome progetti (selezionare il nome per modificare)
+admin_grouplist	groups_that_begin_with	Progetti che iniziano per
 admin_grouplist	license	Licenza
 admin_grouplist	members	Membri
 admin_grouplist	public	Pubblico?
+admin_grouplist	register_time	Ora di registrazione
 admin_grouplist	status	Stato
 admin_grouplist	unix_name	Nome unix
+admin_index	active_projects_count	Progetti attivi: <strong>$1</strong>
+admin_index	active_users_count	Utenti attivi: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Aggiungi, rimuovi o modifica i tipi di file
 admin_index	add_delete_edit_laguage	Aggiungi, rimuovi o modifica le lingue supportate
+admin_index	add_edit_delete_licenses	Aggiungi, rimuovi o modifica Licenze
 admin_index	add_edit_delete_processors	Aggiungi, rimuovi o modifica i processori
 admin_index	add_edit_delete_themes	Aggiungi, rimuovi o modifica i temi
 admin_index	add_to_trove_map	Aggiungi alla mappa Trove
 admin_index	approve_reject	Approva/rigetta
+admin_index	configman	Gestore delle configurazioni
 admin_index	cronman	Cron Manager
-admin_index	deleted_status	stato (cancellato)
-admin_index	display_full_group	Visualizza elenco completo dei gruppi
+admin_index	deleted_status	stato (rimosso)
+admin_index	display_full_group	Visualizza elenco completo dei progetti
 admin_index	display_full_user_list	Visualizza elenco completo degli utenti
-admin_index	display_groups_beginning_with	Visualizza gruppi che iniziano con:
+admin_index	display_groups_beginning_with	Visualizza progetti che iniziano con:
 admin_index	display_trove_map	Visualizza mappa Trove
 admin_index	display_user_beginning_with	Visualizza utenti che iniziano con:
 admin_index	front_page_news	Notizie in prima pagina
 admin_index	get	visualizza
-admin_index	group_maintaince	Manutenzione gruppi
-admin_index	groups_with_status	Gruppo con stato
+admin_index	group_maintaince	Manutenzione progetti
+admin_index	groups_with_status	Progetti con stato
 admin_index	mail_engine	Engine di mail per utenti sottoscritti a $1
 admin_index	new_project_approval	(Approvazione nuovi progetti)
 admin_index	news	Notizie
-admin_index	pending_status	Stato (pendente)
+admin_index	pending_projects_count	Progetti in attesa di approvazione: <strong>$1</strong>
+admin_index	pluginman	Gestore dei plugin
 admin_index	private_groups	Gruppi privati
+admin_index	project_active	Attivi (A)
 admin_index	project_database_administration	Amministrazione database per i progetti
+admin_index	project_deleted	Rimossi (D)
+admin_index	project_hold	Sospeso(H)
+admin_index	project_pending	In attesa di approvazione (P)
 admin_index	recent_logins	Ultimi login
 admin_index	register_new_project	Registra nuovo progetto
+admin_index	register_new_user	Registra un nuovo utente
+admin_index	registered_projects_count	Progetti registrati: <strong>$1</strong>
+admin_index	search_groups	Ricerca <em>(id progetto, nome gruppo unix, nome completo)</em>
+admin_index	search_users	Ricerca <em>(id utente, nome utente, nome completo, email)</em>
 admin_index	site_mailing_maintaince	Gestione Mailing-list del sito
 admin_index	site_utilities	Utility
 admin_index	site_wide_stats	Statistiche del sito
@@ -334,15 +390,15 @@ admin_massmail_execute	sending_to	invio a
 admin_massmail_execute	unrecognized_post	Richiesta sconosciuta
 admin_massmail_execute	user_id	Id utente
 admin_responses	add_response	Risposta aggiunta
-admin_responses	by_the_way	A proposito, non ho cancellato... nel caso tu avessi cambiato idea.
+admin_responses	by_the_way	A proposito, non ho rimosso... nel caso tu avessi cambiato idea.
 admin_responses	create	Crea
 admin_responses	create_new_response	Crea nuova risposta:
-admin_responses	deleted_resposes	Risposta cancellata
+admin_responses	deleted_resposes	Risposta rimossa 
 admin_responses	edit_response	Risposta modificata
 admin_responses	edit_response_other	Modifica risposta:
 admin_responses	existing_responses	Risposte esistenti:
 admin_responses	go	vai
-admin_responses	not_sure_dont_click	Se non eri sicuro perché hai cliccato su Cancella?
+admin_responses	not_sure_dont_click	Se non eri sicuro perché hai cliccato su Rimuovi?
 admin_responses	response_text	Testo risposta:
 admin_responses	response_title	Titolo risposta:
 admin_responses	title	Amministrazione sito: Modifica risposte per il rigetto
@@ -350,19 +406,19 @@ admin_responses	yes_im_sure	Si, sono sicuro
 admin_responses	you_cant	Non puoi $1 \"Nessuno\"
 admin_search	email	Email
 admin_search	full_name	Nome completo
-admin_search	group_search_criteria	Ricerca gruppo con criterio
+admin_search	group_search_criteria	Ricerca progetto con criterio
 admin_search	id	ID
 admin_search	index	Risultati della ricerca
 admin_search	matches	corrispondenze
 admin_search	member_since	Registrato il
 admin_search	real_name	Nome reale
-admin_search	refusing_to_display_whole_db	Mi rifiuto di visualizzare l'intero database.  Usa una query CLI per farlo.
+admin_search	refusing_to_display_whole_db	Mi rifiuto di visualizzare l'intero database. Usa una query CLI per farlo.
 admin_search	registered	Registrato
 admin_search	status	Stato
 admin_search	unix_name	Nome UNIX
 admin_search	user_search_criteria	Ricerca utente con criterio
 admin_search	username	Nome utente
-admin_tabfiles	delete_lang	[cancella]
+admin_tabfiles	delete_lang	[rimuovi]
 admin_tabfiles	edit_the_langfile	Modifica la traduzione in $1
 admin_tabfiles	edit_the_language	Modifica la lingua
 admin_tabfiles	language	Lingua
@@ -377,11 +433,12 @@ admin_trove_cat_add	new_category_full_name	Nome completo nuova categoria (VARCHA
 admin_trove_cat_add	new_category_short_name	Nome corto nuova categoria (nessuno spazio, simili ai nomi unix)
 admin_trove_cat_add	parent_category	Categoria superiore
 admin_trove_cat_add	title	Amm. sito: Trove - modifica categoria
-admin_trove_cat_edit	cant_delete_has_subcategories	Impossibile cancellare la categoria Trove: ha delle sottocategorie
-admin_trove_cat_edit	delete	Cancella
+admin_trove_cat_edit	cant_delete_has_subcategories	Impossibile rimuovere la categoria Trove: ha delle sottocategorie
+admin_trove_cat_edit	delete	Rimuovi
 admin_trove_cat_edit	edit_trove_category	Modifica categoria Trove
 admin_trove_cat_edit	error_in_trove_operation	Errore in una operazione Trove
-admin_trove_cat_edit	error_in_trove_operation_cant_delete	Errore in una operazione Trove, non posso cancellare una categoria definita come default nel file local.inc
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Errore in una operazione Trove, non posso rimuovere una categoria definita come default nel file local.inc
+admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	Non è possibile rimuovere questa categoria poiché è attualmente utilizzato da un progetto.
 admin_trove_cat_edit	error_trove_equal_parent	Errore: La categoria superiore non può essere uguale a quella corrente
 admin_trove_cat_edit	new_category_description	Descrizione nuova categoria (VARCHAR 255)
 admin_trove_cat_edit	new_category_full_name	Nome completo (VARCHAR 80)
@@ -391,7 +448,7 @@ admin_trove_cat_edit	parent_category	Categoria superiore:
 admin_trove_cat_edit	title	Site Admin: Trove - Modifica categoria
 admin_trove_cat_edit	update	Aggiorna
 admin_trove_cat_list	add	Aggiungi
-admin_trove_cat_list	browse_trove_tree	Visualizza albero Trove
+admin_trove_cat_list	browse_trove_tree	Consulta albero Trove
 admin_trove_cat_list	edit	Modifica
 admin_trove_cat_list	title	Amm. sito: Trove - Lista delle categorie
 admin_unsubscribe	admin_initiaded_mail	Mailing iniziati da amministratori
@@ -417,7 +474,9 @@ admin_useredit	account_info	Informazione account
 admin_useredit	active	Attivo (A)
 admin_useredit	could_not_complete_operation	Impossibile completare l'operazione
 admin_useredit	current_confirm_bash	Codice hash di conferma:
-admin_useredit	deleted	Cancellato (D)
+admin_useredit	delete	Rimuovi
+admin_useredit	delete_user_confirm	Voglio rimuovere questo utente
+admin_useredit	deleted	Rimosso (D)
 admin_useredit	email	Email:
 admin_useredit	group_memerbership	Gruppi di appartenenza
 admin_useredit	membership_permissions	Può aggiungere altri membri
@@ -428,7 +487,7 @@ admin_useredit	pending	In attesa di approvazione (P)
 admin_useredit	project_admin	Amministrazione progetto
 admin_useredit	real_name	Nome reale
 admin_useredit	suspended	Sospeso (S)
-admin_useredit	this_page_allows	Questa pagina permette di cambiare solo attributi diretti di un utente. Per modificare le informazioni dell'utente relative a un particolare progetto, visita la pagina di amministrazione del gruppo in questione (vedi sotto).
+admin_useredit	this_page_allows	Questa pagina permette di cambiare solo attributi diretti di un utente. Per modificare le informazioni dell'utente relative a un particolare progetto, visita la pagina di amministrazione del progetto in questione (vedi sotto).
 admin_useredit	title	Amm. sito: informazione utente
 admin_useredit	unix_account_status	Stato account Unix
 admin_useredit	unix_name	Nome unix
@@ -441,16 +500,18 @@ admin_useredit	user_name	Nome utente:
 admin_useredit	web_account_status	Stato account Web
 admin_userlist	activate	Attiva
 admin_userlist	active	Attivo
-admin_userlist	all_groups	Tutti i gruppi
-admin_userlist	delete	Cancella
-admin_userlist	deleted	Cancellato
+admin_userlist	add_date	Aggiungi data
+admin_userlist	all_groups	Tutti i progetti
+admin_userlist	delete	Rimuovi
+admin_userlist	deleted	Rimosso
 admin_userlist	devprofile	Profilo sviluppatore
 admin_userlist	key	Chiave
+admin_userlist	login	Login
 admin_userlist	pending	(*)In attesa di approvazione
 admin_userlist	submit	Invia
 admin_userlist	suspend	Sospendi
 admin_userlist	suspended	Sospeso
-admin_userlist	user_list_for_group	Elenco utenti del gruppo:
+admin_userlist	user_list_for_group	Elenco utenti del progetto:
 admin_userlist	user_updated	Utente aggiornato allo stato $1
 admin_userlist	userlist	: Elenco utenti
 admin_vhost	add_virtual_host	Aggiungi host virtuale
@@ -459,14 +520,13 @@ admin_vhost	error_adding_vhost	Errore nell'aggiunta del VHOST:
 admin_vhost	error_updating_vhost	Errore nell'aggiornamento del VHOST:
 admin_vhost	get_info	Ricava informazioni
 admin_vhost	group	Gruppo
-admin_vhost	group_unix_name	Nome unix del gruppo
+admin_vhost	group_unix_name	Nome unix del progetto 
 admin_vhost	htdocs_dir	Directory Htdocs
 admin_vhost	no_such_host	Non esiste questo VHOST:
 admin_vhost	operations	Operazioni
-admin_vhost	scheduled_for_creation	schedulate per la creazione sul gruppo
-admin_vhost	the_provided_group	Il nome gruppo inserito non esiste
+admin_vhost	scheduled_for_creation	schedulate per la creazione sul progetto
+admin_vhost	the_provided_group	Il nome progetto inserito non esiste
 admin_vhost	title	Amministrazione sito
-admin_vhost	tweak_directories	Tweak Directories
 admin_vhost	update	Aggiorna
 admin_vhost	update_record	Aggiorna record:
 admin_vhost	vhost_id	ID VHOST
@@ -475,8 +535,21 @@ admin_vhost	virtual_host	Host virtuale:
 admin_vhost	virtual_host_administration	Amministrazione host virtuale
 admin_vhost	virtual_host_entry_updated	Aggiornato host virtuale
 admin_vhost	virtual_host_name	Nome host virtuale
+advanced_search	all	tutto
+advanced_search	and_search	con tutte le parole
+advanced_search	error_search_minlength	La ricerca deve contenere almeno 3 caratteri
+advanced_search	headline	Risultati di ricerca $1
+advanced_search	no_matches_found	Nessuna corrispondenza trovata
+advanced_search	no_matches_found_no_under_section	Nessuna corrispondenza trovata - Non è stata trovata alcuna sezione (controlla i tuoi privilegi)
+advanced_search	none	nessuno
+advanced_search	or_search	una parola
+advanced_search	search_button	Ricerca
+advanced_search	search_in	Cerca in
+advanced_search	select	Seleziona
 artifact_canned	required_fields	ArtifactCanned: nome e assegnatario sono campi obbligatori
 artifact_category	required_fields	ArtifactCategory: nome e assegnatario sono campi obbligatori
+artifact_query	exist_query	La query esiste già
+artifact_query	not_exist_query	La query non esiste
 calendar	april	aprile
 calendar	august	agosto
 calendar	comingyear	L'anno prossimo
@@ -501,6 +574,7 @@ calendar	june	giugno
 calendar	march	marzo
 calendar	may	maggio
 calendar	monday	lunedì
+calendar	monthdatefmt	m-Y
 calendar	november	novembre
 calendar	october	ottobre
 calendar	onemonth	Un mese
@@ -519,12 +593,12 @@ calendar	tuesday	martedì
 calendar	update	Applica Modifiche
 calendar	view	Visualizza:
 calendar	wednesday	mercoledì
-classgroup	acceptedproject	Il tuo progetto su $7 e' stato approvato.\n\nNome progetto:    $1\nNome unix:        $2\nServer CVS:       cvs.$2.$3\nServer Web/Shell: $2.$3\n\nIl DNS sara' attivato fra circa 1 giorno.  Mentre aspetti che il DNS\nper il tuo sito venga risolto, puoi provare a loggarti a\n\n  $4\n  \ne impostare il CVS a $5\n\nSe dopo 6 ore il tuo account shell/CVS non funziona ancora, apri un\nticket di supporto.  Nota che tutti gli account di shell/CVS\nfunzionano solo con SSH1 (e non con telnet).\n\nIl sito sara' accessibile tramite il tuo account. Leggi la\ndocumentazione del sito (vedi link in basso) sull'utilizzo e sui\nservizi disponibili.\n\nQuando visiterai la pagina del tuo progetto, troverai una funzionalita'\naggiuntiva: \'Amministrazione Progetto\'.  Ti suggeriamo di visitarla\ne di creare la descrizione pubblica del progetto (una volta effettuato\nil login puoi accedervi all'URL http://$3/project/admin/?group_id=$6).\n\nIl tuo progetto non sara' visualizzato nella mappa dei progetti\nfintanto che non verra' categorizzato nella amministrazione progetto.\nPer fare in modo che le persone possano trovare il tuo progetto,\ndovresti farlo subito.  Visita il tuo progetto mentre sei loggato e\nseleziona \'Amministrazione Progetto\' dal menu.  Per ogni problema,\ninviaci una mail.\n\n-- il team $7
+classgroup	acceptedproject	Il tuo progetto su $7 e' stato approvato.\n\nNome progetto: $1\nNome unix: $2\nServer CVS: cvs.$2.$3\nServer Web/Shell: $2.$3\n\nIl DNS sara' attivato fra circa 1 giorno. Mentre aspetti che il DNS\nper il tuo sito venga risolto, puoi provare a loggarti a\n\n $4\n \ne impostare il CVS a $5\n\nSe dopo 6 ore il tuo account shell/CVS non funziona ancora, apri un\nticket di supporto. Nota che tutti gli account di shell/CVS\nfunzionano solo con SSH1 (e non con telnet).\n\nIl sito sara' accessibile tramite il tuo account. Leggi la\ndocumentazione del sito (vedi link in basso) sull'utilizzo e sui\nservizi disponibili.\n\nQuando visiterai la pagina del tuo progetto, troverai una funzionalita'\naggiuntiva: \'Amministrazione Progetto\'. Ti suggeriamo di visitarla\ne di creare la descrizione pubblica del progetto (una volta effettuato\nil login puoi accedervi all'URL http://$3/project/admin/?group_id=$6).\n\nIl tuo progetto non sara' visualizzato nella mappa dei progetti\nfintanto che non verra' categorizzato nella amministrazione progetto.\nPer fare in modo che le persone possano trovare il tuo progetto,\ndovresti farlo subito. Visita il tuo progetto mentre sei loggato e\nseleziona \'Amministrazione Progetto\' dal menu. Per ogni problema,\ninviaci una mail.\n\n-- il team $7
 classgroup	acceptedprojecttitle	Progetto $1 approvato
-classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
-classgroup	newprojectnotification_submitter	Inserito nuovo progetto su $1\n\nNome completo del progetto:  $2\nDescrizione inserita: $3\nLicenza: $4\n\nIl team di amministrazione di $1 esaminera' la tua proposta di nuovo\nprogetto; riceverai un messaggio con la decisione presa.
+classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto: $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
+classgroup	newprojectnotification_submitter	Inserito nuovo progetto su $1\n\nNome completo del progetto: $2\nDescrizione inserita: $3\nLicenza: $4\n\nIl team di amministrazione di $1 esaminera' la tua proposta di nuovo\nprogetto; riceverai un messaggio con la decisione presa.
 classgroup	newprojectnotificationtitle	Nuovo progetto $1 inserito
-classgroup	rejectedproject	Il tuo progetto $3 è stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
+classgroup	rejectedproject	Il tuo progetto $3 è stato rifiutato.\n\nNome progetto: $1\nUnix Name del progetto: $2\n\nRagioni per il rifiuto:\n\n
 classgroup	rejectedprojecttitle	Progetto $1 rifiutato
 common	login	Accedi
 common	logout	Scollegati
@@ -532,9 +606,9 @@ common	myaccount	Mio account
 common	newaccount	Nuovo account
 common_include_account	cvsreserved	Il nome è riservato per il CVS.
 common_include_account	dnsreserved	Il nome è riservato per il DNS.
-common_include_account	illegal	Carattere illegale nel nome.
+common_include_account	illegal	Carattere non valido nel nome.
 common_include_account	nospace	Nel nome login non possono esserci spazi
-common_include_account	nounderscore	Il nome del gruppo non può contenere caratteri sottolineato (_)
+common_include_account	nounderscore	Il nome del progetto non può contenere caratteri sottolineato (_)
 common_include_account	sixchar	La lunghezza della password deve essere di almeno 6 caratteri.
 common_include_account	toolong	Nome troppo lungo, la lunghezza massima è di 15 caratteri.
 common_include_account	tooshort	Nome troppo corto, la lunghezza minima è di 3 caratteri.
@@ -543,11 +617,25 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	it
 conf	language_id	8
+conf	mail_charset	UTF-8
+configman	change	Percorso delle cartelle contenente la configurazione dei plugin, ad esempio: /etc/gforge/plugins/
+configman	choose	Seleziona
+configman	doedit	Salva
+configman	name	Attributo
+configman	notopenfile	Impossibile aprire il file per lettura/scrittura. Controlla i permessi per apache.<br>
+configman	notopenlocalinc	Impossibile aprire il file local.inc in lettura/scrittura. Controlla i permessi per apache<br>
+configman	notopenplugindir	Impossibile aprire la cartella dei plugin in lettura. Controlla i permessi per apache.<br>
+configman	nowrite	Il file non è stato scritto oppure è vuoto.<br>
+configman	off	Spento
+configman	on	Acceso
+configman	updateok	File scritto con successo.<br>
 contact	about_blurb	<p>Questa è la pagina di contatti per <b>$1</b> -- se hai un problema con un progetto ospitato su questo sito, apri un ticket di supporto sul progetto collegandoti a : <tt>http://$2/projects/&lt;project name&gt;</tt> e selezionando lo strumento adeguato.</p><p>Se hai una richiesta di supporto, o vuoi segnalare un bug o desideri comunicare direttamente con lo staff di $1, visita il <a href="/projects/siteadmin">Progetto Master di $1</a>.</p>
 contact	title	Contatta $1
 cronman	date	Data
-cronman	job	Job
+cronman	job	Lavoro
 cronman	message	Messaggio
+cronman	next	Avanti
+cronman	previous	Indietro
 developer	body	Contenuto
 developer	date	Data
 developer	diary_and_notes	Diario e note per
@@ -578,24 +666,34 @@ docman	error_no_groups_defined	Nessun gruppo di documenti definito
 docman	submit_new	Inserisci nuova documentazione
 docman	turned_off	Questo progetto ha disabilitato il Document Manager
 docman	view_doc	Visualizza documentazione
+docman_admin	add_docs	[Aggiungi documento qui]
 docman_admin	add_edit_docgroups	Aggiungi/Modifica gruppi di documenti
 docman_admin	section	Progetto: $1
 docman_admin	title	Document Manager: Amministrazione
 docman_admin_addgroups	section	Amministrazione Document Manager
 docman_admin_addgroups	title	Aggiungi gruppi di documenti
+docman_admin_deletedoc	delete	Rimuovi
+docman_admin_deletedoc	delete_warning	Stai per rimuovere questo documento in modo permanente.
+docman_admin_deletedoc	really_sure	Sono veramente sicuro.
+docman_admin_deletedoc	sure	Sono sicuro.
 docman_admin_docedit	section	Document Manager
 docman_admin_docedit	title	Modifica documento
+docman_admin_editdocs	delete_doc	Rimuovi questo documento in modo permanente
 docman_admin_editdocs	doc_contents	Contenuti del documento
 docman_admin_editdocs	section	Amministrazione Document Manager
 docman_admin_editdocs	state	Stato
 docman_admin_editdocs	title	Modifica documenti
 docman_admin_editdocs	upload	OPZIONALE: Invia nuovo file
+docman_admin_editdocs	upload_ftp	OR oppure seleziona un form FTP $1
+docman_admin_editdocs	upload_url	Specifica un URL al quale verrà creata una referenza
 docman_admin_editgroups	add_group	Aggiungi un gruppo
 docman_admin_editgroups	description	Il nome del gruppo sarà utilizzato come titolo, quindi formattalo di conseguenza.
 docman_admin_editgroups	edit_group	Modifica un gruppo
 docman_admin_editgroups	group_id	ID
 docman_admin_editgroups	group_name	Nome gruppo
+docman_admin_editgroups	group_parent	Appartiene a
 docman_admin_editgroups	new_group_name	Nome del nuovo gruppo
+docman_admin_editgroups	new_group_parent	Appartiene a
 docman_admin_editgroups	section	Amministrazione Document Manager
 docman_admin_editgroups	title	Modifica gruppi
 docman_admin_groupedit	section	Amministrazione Document Manager
@@ -605,6 +703,7 @@ docman_common	error_min_title_length	Il titolo del documento deve essere almeno 
 docman_common	no_docs	Nessun documento trovato
 docman_common_doc	invalid_docid	Document: docid non valido
 docman_common_docgroup	invalid_id	DocumentGroup: ID del DocumentGroup non valido
+docman_common_docgroup	invalid_parent_id	DocumentGroup: ID parent DocumentGroup non valido
 docman_common_docgroup	name_required	Il nome è un attributo obbligatorio
 docman_display_doc	all_languages	Tutte le lingue
 docman_display_doc	docmoved	Questo documento è stato spostato in <a href="/docman/view.php/$1/$2">questa nuova posizione</a>
@@ -616,8 +715,10 @@ docman_new	description	Descrizione
 docman_new	doc_title	Titolo del documento
 docman_new	error_blank_document	Errore nell'ottenere un documento vuoto
 docman_new	file	File
+docman_new	ftpupload_choosefile	Seleziona un file FTP:
+docman_new	ftpupload_new_file	In alternativa puoi utilizzare FTP per inserire un file in $1
 docman_new	group	Gruppo al quale appartiene il documento:
-docman_new	intro	<strong>Titolo del documento</strong>:  si riferisce al nome breve del titolo del documento (ad esempio, come usare il server per i file)<br /><strong>Descrizione:</strong> Una descrizione breve da visualizzare sotto il titolo.
+docman_new	intro	<strong>Titolo del documento</strong>: si riferisce al nome breve del titolo del documento (ad esempio, come usare il server per i file)<br /><strong>Descrizione:</strong> Una descrizione breve da visualizzare sotto il titolo.
 docman_new	language	Lingua
 docman_new	no_valid_group	Non è stato selezionato un gruppo di documenti valido
 docman_new	section	Progetto: $1
@@ -626,6 +727,7 @@ docman_new	submit	Invia informazioni
 docman_new	submitted_successfully	Documento inserito
 docman_new	title	Document Manager: Inserisci nuova documentazione
 docman_new	upload_file	Invia file
+docman_new	upload_url	OR specifica un URL al quale verrà creato un link.
 error	error_creating	Errore nella creazione
 error	not_found	Pagina non trovata
 error	title	Pagina richiesta non trovata (Errore 404)
@@ -637,6 +739,7 @@ exit	disabled_title	Errore - funzionalità disabilitata.
 exit	exiting_with_error	Uscita con errore
 exit	missing_parameters_body	Errore - Mancano alcuni parametri obbligatori
 exit	missing_parameters_title	Errore - parametri mancanti
+forum	check_upload	Seleziona per effettuare effettuare l'upload di un file
 forum	choose	<p>Seleziona un forum e potrai scorrere, cercare e inserire messaggi.</p>
 forum	error_forum_not_found	Forum non trovato
 forum	error_invalid_group_forum_id	$1:: group_forum_id non valido
@@ -649,12 +752,19 @@ forum	html	Le tag HTML verranno visualizzate testualmente nei tuoi post
 forum	section	Progetto: $1
 forum	title	Forum
 forum_admin	add_forum	Aggiungi forum
-forum_admin	delete_message	Cancella messaggio
+forum_admin	delete	Rimuovi
+forum_admin	delete_forum	Rimuovi l'intero forum e tutto il contenuto
+forum_admin	delete_message	Rimuovi messaggio
+forum_admin	delete_warning	Stai per rimuovere in modo permanente e irreversibile questo forum e il suo contenuto!
+forum_admin	deleted	Rimosso
+forum_admin	really_sure	Sono veramente sicuro
 forum_admin	section	Progetto: $1
+forum_admin	sure	Sono sicuro
 forum_admin	title	Amministrazione forum
 forum_admin	update_forum	Aggiorna info/stato forum
 forum_admin_addforum	add_forum	Aggiungi questo forum
 forum_admin_addforum	allow_anonymous	Permettere l'inserimento di messaggi da utenti anonimi?
+forum_admin_addforum	allow_attach	Permettere l'attachment di file?
 forum_admin_addforum	email_posts	Invia tutti i messaggi a:
 forum_admin_addforum	existing_forums	Forum esistenti
 forum_admin_addforum	forum_created	Forum creato con successo
@@ -672,13 +782,14 @@ forum_admin_changestatus	status	Stato
 forum_admin_changestatus	title	Cambia stato forum
 forum_admin_changestatus	update_successful	Informazioni forum aggiornate con successo
 forum_admin_delete	section	Amministrazione forum
-forum_admin_delete	title	Cancella forum
-forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
+forum_admin_delete	title	Rimuovi forum
+forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da rimuovere
 forum_admin_delete_message	section	Amministrazione forum
-forum_admin_delete_message	title	Cancella un messaggio
-forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
-forum_admin_delete_messages	messages_deleted	$1 messaggi cancellati
+forum_admin_delete_message	title	Rimuovi un messaggio
+forum_admin_delete_message	warning	ATTENZIONE! Stai per rimuovere in modo permanente il messaggio e tutte le risposte!!
+forum_admin_delete_messages	messages_deleted	$1 messaggi rimossi
 forum_common	error_adding_forum	Errore nella creazione del forum
+forum_common	error_illegal_characters	Il nome del forum contiene caratteri non validi
 forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
 forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
 forum_common	error_save_when_logged_in	Si può salvare la posizione solo quando si è colleggati
@@ -703,6 +814,7 @@ forum_errors	error_getting_forum	Errore nel recupero del forum
 forum_forum	author	Autore
 forum_forum	changeview	Cambia Vista
 forum_forum	date	Data
+forum_forum	description	Descrizione
 forum_forum	flat	Piatto
 forum_forum	forum	Forum
 forum_forum	lastpost	Ultimo messaggio
@@ -722,6 +834,7 @@ forum_forum	title	Forum: Visualizza forum
 forum_forum	topic	Argomento
 forum_forum	topicstarter	Inizio Argomento
 forum_forum	ultimate	Ultimi
+forum_forum	views	Viste
 forum_forum_thread	section	Forum
 forum_forum_thread	title	Vista per argomento
 forum_message	by	DA
@@ -745,6 +858,7 @@ forum_save	saved	Salva la posizione nel forum. Al prossimo collegamento i nuovi 
 forum_utils	added	Forum aggiunto
 forum_utils	admin	Amministra
 forum_utils	anonymously	Anonimamente
+forum_utils	attach	esegui l'attach
 forum_utils	author	Autore
 forum_utils	brokenthread	Argomento interrotto
 forum_utils	by	Da:
@@ -753,7 +867,7 @@ forum_utils	date	Data
 forum_utils	discussionforum	Forum di discussione:
 forum_utils	doublepost	Sembra tu stia inviando per la seconda volta questo messaggio, dal momento che ha lo stesso oggetto e stesse relazioni con i messaggi precedenti di un tuo altro messaggio.
 forum_utils	error	Errore!
-forum_utils	erroradd	Errore aggiungendo il  Forum
+forum_utils	erroradd	Errore aggiungendo il Forum
 forum_utils	errorfollowup	Hai cercato di rispondere a un messaggio che non esiste.
 forum_utils	errorfollowup2	Nessun ID di followup presente quando si sta ripsondendo a un argomento esistente.
 forum_utils	errorinsert	Errore nella chiamata a insertid()
@@ -780,6 +894,7 @@ forum_utils	postanon	Stai inserendo i messaggi in modalità anonima perché non 
 forum_utils	postcomment	Invia messaggio
 forum_utils	posted	Messaggio inviato
 forum_utils	postedby	Inviato da
+forum_utils	project	Progetto
 forum_utils	reply	rispondi
 forum_utils	saveplace	Salva Posizione
 forum_utils	stopmonitor	Termina Notifica
@@ -793,46 +908,55 @@ frs	file_package	Pacchetto
 frs	file_rel_date	Data
 frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
+frs_admin	delete	Rimuovi
+frs_admin	delete_package_warning	Stai per rimuovere in modo permanente e irrimediabile questo package e tutti i rilasci e file!
+frs_admin	delete_release_warning	Stai per rimuovere in modo permanente e irrimediabile questo rilascii e i file!
+frs_admin	deleted	Rimosso
+frs_admin	really_sure	Sono veramente sicuro
+frs_admin	sure	Sono sicuro
 frs_file	error_already_exists	Il nome del file esiste già all'interno di questo progetto
 frs_file	error_cannot_move	Il file non può essere spostato nella directory finale
 frs_file	error_invalid_file	Il file sembra non essere valido
-frs_file	error_min_name_length	La lunghezza minima del nome di un FRSFile  è di 3 caratteri
+frs_file	error_min_name_length	La lunghezza minima del nome di un FRSFile è di 3 caratteri
 frs_file	error_name_format	Il nome del FRSFile dovrebbe seguire un formato simile a: gforge-3.0.tar.bz2
 frs_package	error_already_exists	Quel nome esiste già in questo progetto
 frs_package	error_cannot_move	Il file non può essere spostato nella sua posizione permanente
 frs_package	error_invalid_file	Il FRSFile non sembra essere valido
-frs_package	error_min_name_length	La lunghezza minima del nome di un FRSFile  è di 3 caratteri
+frs_package	error_min_name_length	La lunghezza minima del nome di un FRSFile è di 3 caratteri
 frs_package	error_name_format	Il nome di un pacchetto può contenere solo caratteri alfanumerici
 frs_package	error_set_monitor	Puoi attivare la notifica solo quando sei collegato
-frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link:\n$4\n\nRicevi questa mail\npoichè hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi più essere notificato via email,\ncollegati a $5 e segui il link: \n$6
+frs_release	email_text	\n\nIl progetto "$1" ('$2') ha \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link:\n$4\n\nRicevi questa mail\npoichè hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi più essere notificato via email,\ncollegati a $5 e segui il link: \n$6
 frs_release	email_title	[Rilascio $1]: $2
-frs_release	error_already_exists	Quella release esiste già in questo progetto
+frs_release	error_already_exists	Questa release esiste già in questo progetto
 frs_release	error_cannot_move	La release non può essere spostato nella sua posizione permanente
 frs_release	error_invalid_file	La Release FRS non sembra essere valida
 frs_release	error_min_name_length	La lunghezza minima del nome di un FRSPackage è di 3 caratteri
 frs_release	error_name_format	Il nome di una Release FRS dovrebbe seguire un formato simile a: gforge-3.0.tar.bz2
 frs_release	error_set_monitor	Puoi attivare la notifica solo quando sei collegato
 general	add	Aggiungi
-general	browse	Visualizza
+general	browse	Consulta
 general	cancel	Annulla
-general	confirm	Confirm
+general	confirm	Conferma
 general	create_successful	Creato con successo
-general	delete	Delete
-general	deleted	Cancellato
+general	delete	Cancella
+general	deleted	Rimosso
 general	done	Fatto
 general	edit	Modifica
 general	error	Errore
 general	error_creating	Errore nella creazione di $1
+general	error_creating_group	Errore nella creazione Group Object
+general	error_creating_perm	Errore nella creazione dell'oggetto Permission
 general	error_getting	Errore richiedendo $1
 general	error_getting_new	Errore richiedendo il nuovo $1
 general	error_group_id	Group_id in db result does not match Group Object
 general	error_missing_params	Parametri mancanti
 general	error_no_valid_group_object	$1:: No Valid Group Object
 general	error_on_update	Errore nell'aggiornamento:
-general	footer	Questo è $1.  Per ulteriori informazioni, incluse quelle sul copyright, visita <a href="/about.php">questa pagina</a>.
+general	footer	Questo è $1. Per ulteriori informazioni, incluse quelle sul copyright, visita <a href="/about.php">questa pagina</a>.
 general	go	Vai
 general	invalid_email	Indirizzo email non valido
 general	language	Lingua
+general	min_characters	(minimo $1 caratteri)
 general	more	Altri
 general	no	No
 general	no_valid_filename	Nome file non valido
@@ -850,6 +974,7 @@ general	sitename	$1
 general	submit	Invia
 general	submit_edit	Invia modifiche
 general	submitted_successfully	$1 inserito con successo
+general	to	a
 general	total	totale
 general	turned_off	Questo progetto ha disabilitato il $1
 general	update	Aggiorna
@@ -861,7 +986,6 @@ group	activitystat	Visualizza le <a href="/project/stats/?group_id=$1">statistic
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_bugs	Bug Tracking
-group	long_scm	Repository SCM
 group	long_docman	DocManager: Documentazione progetto
 group	long_forum	Forum Pubblici
 group	long_ftp	Spazio FTP anonimo
@@ -870,17 +994,19 @@ group	long_mail	Mailing List
 group	long_news	Ultime Notizie
 group	long_patch	Patch Manager
 group	long_pm	Manager attività
+group	long_scm	Repository SCM
 group	long_support	Manager supporto tecnico
 group	long_survey	Sondaggi
 group	long_tracker	Tracker
 group	nodescription	Non è stata ancora inserita una descrizione per questo progetto.
 group	norelease	Questo progetto non ha rilasciato alcun file
 group	project_admins	Amministratori progetto
+group	project_developers	Sviluppatori
 group	public_area	Aree pubbliche
 group	registered	Registrato:
+group	rssfeeds	Visualizza una lista di <a href="/export/rss_project.php?group_id=$1">RSS </a> disponibili per questo progetto.
 group	short_admin	Amministrazione
 group	short_bugs	Bugs
-group	short_scm	SCM
 group	short_docman	Documentazione
 group	short_files	File
 group	short_forum	Forum
@@ -891,26 +1017,30 @@ group	short_memberlist	Sviluppatori
 group	short_news	Notizie
 group	short_patch	Patch
 group	short_pm	Attività
+group	short_scm	SCM
 group	short_summary	Sommario
 group	short_support	Supporto
 group	short_survey	Sondaggi
 group	short_tracker	Tracker
 help	page_information	Informazioni
 help	title	Benvenuto su $1
-help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
-help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
-help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
-help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
-help_tracker	close_window	Close Window
-help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
-help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
-help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
-help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
-help_tracker	priority	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
-help_tracker	resolution	The resolution option represents a tracker items resolution if any.
-help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
-help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
-help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
+help_forum	attach_file	Quando vuoi allegare un file ad un tracker devi selezionare questa casella prima di inviare le modifiche.
+help_forum	close_window	Chiudi Finestra
+help_forum	unknown_help_request	RICHIESTA HELP SCONOSCIUTA:
+help_tracker	assignee	Questa casella rappresenta la persona alla quale è assegnato l'elemento.
+help_tracker	attach_file	Quando vuoi allegare un file devi selezionare questa casella.
+help_tracker	canned_response	La casella di selezione delle risposte predefinite presenta un elenco preparato dall'amministratore.<br /><br /> Se sei un amministratore di progetto puoi premere il link 'amministra' per definire le risposte predefinite.
+help_tracker	category	Questa casella rappresenta la categoria. <br /><br />Seleziona 'Tutti' per visualizzare gli elementi di tutte le categorie.
+help_tracker	close_window	Chiudi finestra
+help_tracker	comment	L'area di testo per i commenti ti permette di inserire una nota quando una risposta predefinita non è appropriata.
+help_tracker	data_type	L'opzione Data Type determina il tracker. Un elemento inserito può far parte dei bug, delle patch, delle richieste di supporto, perciò è necessario individuare a quale Data Type un elemento appartiene.<br /><br />
+help_tracker	group	Questa casella di selezione rappresenta il gruppo del elemento. <br /><br />Se sei un amministratore del progetto puoi cliccare su 'amministra' per definire i gruppi.
+help_tracker	monitor	Puoi abilitare o disabilitare la notifica cliccando sul pulsante "Notifica". <br /><br /><strong>Attenzione!</strong> Questa funzionalità ti invierà ulteriore e-mail; ad esempio se vengono aggiunti commenti, se vengono inseriti o assegnati nuovi elementi.
+help_tracker	priority	L'opzione "Priorità" permette all'utente di definire una priorità da 1 (bassa) a 5 (alta).<br /><br />
+help_tracker	resolution	La opzione risoluzione visualizza la risoluzione del problema, se disponibile.
+help_tracker	sort_by	L'opzione "Ordina per" ti permette di scegliere il tipo di ordinamento.<br /><br /> Puoi scegliere di ordinare per ID, Priorità, Sommario, Data di apertura, Data di chiusura, inserito da o assegnato a. Puoi anche scegliere se i risultati devono essere ordinati in ordine crescente o decrescente.
+help_tracker	status	In questa casella di selezione viene visualizzato lo stato attuale dell'elemento.<br /><br />Puoi impostare lo stato a 'Pending' se sei in attesa di una risposta da chi ha inserito l'elemento. Quando l'autore risponde, lo stato viene automaticamente impostato a 'Open'. Se l'autore non risponde entro un tempo determinato (normalmente 14 giorn) viene impostato a 'Deleted'.
+help_tracker	summary	La casella di testo "sommario" rappresenta un sommario breve. 
 help_tracker	unknown_help_request	RICHIESTA DI AIUTO SCONOSCIUTA:
 help_trove_cat	description	Descrizione
 help_trove_cat	full_category_name	Nome completo della categoria
@@ -924,6 +1054,8 @@ home	hosted_projects	Progetti ospitati
 home	most_active_this_week	Più attivi questa settimana
 home	no_stats_available	Statistiche non disponibili
 home	none_found	Non trovato
+home	recently_registered	Progetti registrati recentemente
+home	recently_registered_date_format	d/m
 home	registered_users	Utenti registrati
 home	sfos	$1 OnSite
 home	top_project_downloads	Progetti più scaricati
@@ -933,6 +1065,7 @@ include_html	priority_highest	Più alta
 include_html	priority_lowest	Più bassa
 include_html	priority_medium	Media
 include_toolreport	all	Tutti
+include_toolreport	for	per
 include_toolreport	key	Legenda
 include_toolreport	last_days	Ultimi giorni
 include_toolreport	last_months	Ultimi mesi
@@ -943,11 +1076,61 @@ include_toolreport	open	Aperti
 include_toolreport	project_lifespan	Durata del progetto
 include_toolreport	show	Visualizza
 index	welcome	Benvenuto
-mail	provided_by	<P>Le mailing list sono gestite da una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>.  Grazie ai team di Mailman e <A href="http://www.python.org">Python</A> per il software eccezionale.</p>
+mail	archives	Archivi $1
+mail	choose_a_list	<p>Seleziona una lista per scorrere, cercare e inserire messaggi.</p>
+mail	error_delete	Non è stato possibile rimuovere la mailing list
+mail	external_administration	Iscrizione/Elimina Iscrizione/Preferenze
+mail	help_to_request	Amministratori di progetto utilizzano questo link per richiedere mailing list.
+mail	mailinglists_for	Mailing List per $1
+mail	no_list_found	Nessuna lista trovata per $1
+mail	provided_by	<P>Le mailing list sono gestite da una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>. Grazie ai team di Mailman e <A href="http://www.python.org">Python</A> per il software eccezionale.</p>
 mail	section	Progetto: $1
 mail	title	Mailing List
+mail	unable_to_get_lists	Impossibile ottenere le liste
+mail_admin	add_list	Aggiungi Mailing List
+mail_admin	admin_in_mailman	Amministra
+mail_admin	error_getting_list	Errore nel caricamento della Lista
+mail_admin	pagetitle	Amministrazione di Mailing List
 mail_admin	section	Mailing List
 mail_admin	title	Amministrazione Mailing List
+mail_admin	update_list	Aggiorna
+mail_admin_addlist	existing_mailing_lists	Mailing List esistenti
+mail_admin_addlist	form_addlist	Aggiungi questa lista
+mail_admin_addlist	form_description	Descrizione:
+mail_admin_addlist	form_ispublic	Pubblica?
+mail_admin_addlist	form_name	Nome Mailing List:
+mail_admin_addlist	list_added	Mailing List aggiunta
+mail_admin_addlist	list_information	<p>I nomi delle Mailing List:<br /><strong>projectname-listname@$1</strong></p><p>Saranno necessri <strong><span style="color:red">6-24 ore </span></strong> per creare la Mailing List.</p>
+mail_admin_addlist	pagetitle	Aggiungi una Mailing List
+mail_admin_addlist	section	Amministrazione Mailing List
+mail_admin_addlist	title	Aggiungi Lista
+mail_admin_addlist	warning	Una volta creata, questa Mailing List sarà sempre agganciata al tuo progetto e non può essere rimossa!
+mail_admin_deletelist	confirmdelete	Conferma Rimozione
+mail_admin_deletelist	permanentlydelete	Rimuovi in modo permanente
+mail_admin_deletelist	title	Rimuovi la lista in modo permanente
+mail_admin_updatelist	form_description	Descrizione:
+mail_admin_updatelist	form_ispublic	Pubblica?
+mail_admin_updatelist	form_updatelist	Aggiorna
+mail_admin_updatelist	information	Puoi amministrare Mailing List da qui. Considera che liste private possono essere viste da membri del progetto, non saranno però elencate su $1.
+mail_admin_updatelist	list	Lista
+mail_admin_updatelist	list_updated	Mailing List aggiornata
+mail_admin_updatelist	no_list_found	Nessuna Mailing List trovata per il progetto
+mail_admin_updatelist	section	Amministrazione Mailing List
+mail_admin_updatelist	status	Stato
+mail_admin_updatelist	title	Aggiorna Mailing List
+mail_common	creation_mail_body	Una Mailing List sarà creata entro 6-24 hours sul server $1n e tu sarai l'amministratore della Mailing List.nnNome Mailing List: $3@$2 .nnLe informazioni sulla Mailing List si trovano qui:n$4 .nnAmministrazione Mailing List:n$5 .nnPassword Mailing List: $6 .nTi consigliamo di cambiare questa password appena possibile.nn-- Lo staff di $1n
+mail_common	creation_mail_subject	Nuova Mailing List $1 
+mail_common	description	Descrizione
+mail_common	error_invalid_group_list_id	Id Mailing List non valido
+mail_common	error_invalid_name	Nome Mailing List non valido
+mail_common	error_list_already_exists	La Mailing List esiste già
+mail_common	error_min_name_length	Il nome della Mailing List deve contenere almeno 4 caratteri
+mail_common	list_not_activated	Mailing List non attivata
+mail_common	mailing_list	Mailing list
+mail_common	mailing_lists	Mailing list
+mail_common	prefs	Iscriviti
+mail_utils	admin	Amministra
+mail_utils	turned_off	Questo progetto ha disabilitato le Mailing List
 menu	about_gforge	Informazioni su $1
 menu	account_maintenance	Manutenzione account
 menu	admin	Amministrazione
@@ -975,6 +1158,7 @@ menu	project_help_wanted	Progetti in cerca di aiuto
 menu	project_summary	Sommario del progetto
 menu	projectree	Struttura del progetto
 menu	register_project	Registra progetto
+menu	reporting	Reportistica
 menu	search	Ricerca
 menu	site_status	Stato del Sito
 menu	software_map	Mappa del Software
@@ -1016,9 +1200,9 @@ my_bookmark_add	bookmark_url	URL segnalibro
 my_bookmark_add	section	Pagina Personale
 my_bookmark_add	title	Aggiungi segnalibro
 my_bookmark_add	visit_page	Vai alla pagina segnata
-my_bookmark_delete	bookmark_deleted	Segnalibro cancellato
+my_bookmark_delete	bookmark_deleted	Segnalibro Rimosso
 my_bookmark_delete	section	La mia pagina personale
-my_bookmark_delete	title	Cancella segnalibro
+my_bookmark_delete	title	Rimuovi segnalibro
 my_bookmark_edit	bookmark_updated	Bookmark aggiornato
 my_bookmark_edit	failed_to_update_bookmark	L'aggiornamento del bookmark è fallito.
 my_bookmark_edit	section	La mia pagina personale
@@ -1059,12 +1243,37 @@ news	choose	<P>Seleziona una notizia e puoi visualizzare, ricercare e inviare me
 news	noitems	Non sono state trovate notizie
 news	nonews	Nessuna notizia
 news	nonewsfor	Nessuna notizia per $1
+news	olderheadlines	Notizie meno recenti
 news	section	Progetto: $1
 news	title	Notizie
+news_admin	approve_for_frontpage	Approva per la Homepage
+news_admin	approve_newsbyte	Approva una news per il progetto: $1
+news_admin	approved_newsbytes	Queste news sono state approvate la settimana passata (totale: $1)
+news_admin	date	Data
+news_admin	details	Dettagli
+news_admin	do_nothing	Non eseguire alcuna operazione
+news_admin	newsbyte_deleted	News rimossa.
+news_admin	newsbyte_not_found	News non trovata.
+news_admin	newsbyte_rejected	News rifiutata.
+news_admin	newsbyte_updated	News aggiornata.
+news_admin	newsbytes_to_approve	Queste news sono in attesa di approvazione(totale: $1)
+news_admin	noapproved	Per questa settimana non è disponibile alcuna news 
 news_admin	noqueued	Nessun item in attesa per questo progetto
+news_admin	norejected	Nessuna news rifiutata è stata trovata per questa settimana
 news_admin	permdenied	Devi essere un'amministratore del progetto che stai modificando oppure un membro del team Notizie di $1.
+news_admin	project	Progetto
 news_admin	queued	Le notizie seguenti sono state inserite nel progetto
+news_admin	reject	Rifiuta
+news_admin	reject_selected	Rifiuta le news selezionate
+news_admin	rejected_newsbytes	Queste news sono state rifiutate nella settimana passata (totale: $1)
+news_admin	removal_when_edit	La news sarà eliminata dalla homepage $1 se viene modificata.
 news_admin	section	Notizie
+news_admin	status	Stato
+news_admin	status_delete	Rimuovi
+news_admin	status_displayed	Visualizzato
+news_admin	subject	Soggetto
+news_admin	submitted_by	Inserita da
+news_admin	submitted_for_group	Inserita per il gruppo
 news_admin	title	Amministrazione Notizie
 news_main	title	Notizie
 news_submit	cannot	Non è possibile inserire news per un progetto se non si è un amministratore del progetto
@@ -1077,13 +1286,14 @@ news_submit	newsadded	News aggiunta.
 news_submit	post_blurb	È possibile inserire news sul progetto se si è un amministratore del progetto. È anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<P>Tutti i messaggi <B>per il tuo progetto</B> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunità dovranno essere approvate da un membro del team di news di $1 prima che questi vengano pubblicate sulla homepage di $1.<P>Si possono inserire URL, ma non codice <P>URL che iniziano con http:// saranno resi cliccabili.
 news_submit	section	News
 news_submit	subject	Oggetto
-news_submit	submit	INVIA
 news_submit	title	Invia notizia per $1
 news_utils	archive	Archivio News
+news_utils	comment_1	Commento
+news_utils	comment_2	Commenti
 news_utils	nonews	Nessuna news trovata
 news_utils	readmore	Leggi&nbsp;altro/Replica
 news_utils	submit	Invia per
-people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</P><P>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</P><P>Scorri i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
+people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</P><P>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</P><P>Consulta i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
 people	action	Azione
 people	add_new_skill	Aggiungi nuova competenza
 people	add_skill	Aggiungi competenza
@@ -1129,9 +1339,9 @@ people_editjob	fill_in	Riempire tutti i campi obbligatori
 people_editjob	finished	Finito
 people_editjob	job_insert_failed	Inserimento Posizione fallita
 people_editjob	job_insert_ok	Posizione inserita
-people_editjob	job_skill_delete_no	Cancellazione competenza posizione fallita
-people_editjob	job_skill_delete_no_wrong_id	Cancellazione competenza posizione fallita - project_id errato
-people_editjob	job_skill_delete_ok	Cancellazione competenza posizione effettuata
+people_editjob	job_skill_delete_no	Rimozione competenza posizione fallita
+people_editjob	job_skill_delete_no_wrong_id	Rimozione competenza posizione fallita - project_id errato
+people_editjob	job_skill_delete_ok	Rimozione competenza posizione effettuata
 people_editjob	job_skill_update_no	Aggiornamento competenza posizione fallito
 people_editjob	job_skill_update_no_wrong_id	Aggiornamento competenza posizione fallita - project_id errato
 people_editjob	job_skill_update_ok	Aggiornamento competenza posizione eseguito
@@ -1144,22 +1354,22 @@ people_editjob	section	Progetti in ricerca d'aiuto
 people_editjob	skill_explains	<p>È possibile cambiare l'elenco delle competenze necessarie per questa posizione. Gli sviluppatori potranno confrontare le loro attitudini con i tuoi requisiti.</p><p>Tutte le posizioni verranno chiuse automaticamente dopo due settimane.</p>
 people_editjob	title	Modifica posizione
 people_editjob	update_description	Aggiorna descrizioni
-people_editprofile	about_to_delete	Stai per cancellare le seguenti competenze $1
+people_editprofile	about_to_delete	Stai per rimuovere le seguenti competenze $1
 people_editprofile	add_new_skill	Aggiungi una nuova competenza
 people_editprofile	add_this_skill	Aggiungi questa competenza
 people_editprofile	all_fields_required	Tutti i campi sono richiesti!
 people_editprofile	are_you_sure	Sei <strong>sicuro</strong> di voler continuare?
-people_editprofile	cancel_skills_update	Aggiornamento competenze cancellato
+people_editprofile	cancel_skills_update	Aggiornamento competenze Rimosso
 people_editprofile	change_required_fields	Cambia i campi richiesti e premi "Invia" alla fine della pagina
-people_editprofile	confirm_delete	Conferma cancellazione
-people_editprofile	confirm_skill_delete	Conferma la cancellazione delle competenze
-people_editprofile	edit_delete_your_skills	Modifica/cancella le tue competenze
+people_editprofile	confirm_delete	Conferma Rimozione
+people_editprofile	confirm_skill_delete	Conferma la Rimozione delle competenze
+people_editprofile	edit_delete_your_skills	Modifica/Rimuovi le tue competenze
 people_editprofile	edit_public_permissions	Modifica permessi pubblici
 people_editprofile	edit_skills	Modifica competenze
 people_editprofile	edit_your_profile	Modifica il profilo
 people_editprofile	end_date	Data fine
 people_editprofile	error	errore - informazioni mancanti
-people_editprofile	failed_delete_skills	Cancellazione competenze fallita
+people_editprofile	failed_delete_skills	Rimozione competenze fallita
 people_editprofile	failed_to_add_skill	Aggiunta competenza fallita
 people_editprofile	failed_update_skills	Aggiornamento competenze fallita
 people_editprofile	fill_all_required_fields	Riempire tutti i campi obbligatori
@@ -1170,14 +1380,14 @@ people_editprofile	keywords_max_255_chars	Parole chiave (massimo 255 caratteri)
 people_editprofile	no_skill_types_in_database	Nessun tipo competenze disponibile nel database (tabella skills_data_types)
 people_editprofile	no_skill_types_in_database_inform	Nessun tipo competenze nel database - informare il system administrator
 people_editprofile	no_skills_selected	Nessuna competenza da modificare selezionata
-people_editprofile	no_skills_selected_to_delete	Nessuna competenza da cancellare selezionata
+people_editprofile	no_skills_selected_to_delete	Nessuna competenza da rimuovere selezionata
 people_editprofile	no_such_user	L'utente non esiste
 people_editprofile	profile_title	Titolo
 people_editprofile	publicly_viewable	Visibile da tutti
 people_editprofile	section	Progetti in ricerca d'aiuto
 people_editprofile	skill_added_ok	Competenza aggiunta
-people_editprofile	skill_delete_successfully	Competenze cancellate con successo
-people_editprofile	skill_deletion_cancelled	Cancellazione competenza annullata
+people_editprofile	skill_delete_successfully	Competenze rimosse con successo
+people_editprofile	skill_deletion_cancelled	Rimozione competenza annullata
 people_editprofile	skills_edit	Modifica competenze
 people_editprofile	start_date	Data inizio
 people_editprofile	title	Modifica profilo
@@ -1209,6 +1419,25 @@ people_viewprofile	set_private	L'utente ha impostato il suo profilo a privato
 people_viewprofile	skills_profile_for	Profilo delle competenze
 people_viewprofile	title	Visualizza un profilo utente
 people_viewprofile	user_fetch_failed	User fetch FAILED
+pluginman	action	Azione
+pluginman	activate	Attiva
+pluginman	active	<font color="#00ff00">Attivo</font>
+pluginman	deactivate	Disattiva
+pluginman	groupdeleted	$1 Gruppi rimossi dal plugin.<br>
+pluginman	groups	Gruppi che lo utilizzano
+pluginman	inactive	<font color="#800000">Non attivo</font>
+pluginman	init	Lanciare lo script di inizializzazione?
+pluginman	name	Nome Plugin
+pluginman	notice	Qui puoi attivare/disattivare plugin che si trovano nella cartella plugins/. Poi puoi abilitarli per progetto o anche per utente, se previsto dal plugin.<br><font color="#ff0000">Attenzione: se disattivi un plugin, viene disattivato per l'intero sito..<br>Fai PARTICOLARE attenzione quando lanci lo script di inizializzazione SQL e il plugin è disattivato: alcuni script comprendono istruzioni per cancellare le tabelle.</font><br><br>
+pluginman	status	Stato
+pluginman	success	Plugin $1 aggiornato
+pluginman	successiniterror	<br>Impossibile eseguire lo script di inizializzazione SQL. Controlla che il file non contiene istruzioni SQL non corrette e dopo aver corretto gli errori, riesegui lo script manualmente.
+pluginman	successnoconfig	<br>Non è stato possibile collegare il file di configurazione a etc/gforge/plugins/$1. Controlla i permessi di scrittura per apache in /etc/gforge/plugins oppure crea il link manualmente.
+pluginman	successnodeletelink	<br>Il softlink nella cartella www/plugins non è stato rimosso, cancella il link manualmente.
+pluginman	successnoinit	<br>Impossibile trovare lo script di inizializzazione SQL.
+pluginman	successnolink	<br>Non è stato possibile creare un softlink alla cartella www. Controlla i permessi per apache in gforge/www/plugins oppure creare il link manualmente.
+pluginman	userdeleted	$1 Utente rimosso dal plugin.<br>
+pluginman	users	Utenti che lo utilizzano
 pm	admin	amministra
 pm	any	Tutti
 pm	assigned_to	Assegnato a
@@ -1216,6 +1445,7 @@ pm	cat_any	Tutte
 pm	cat_none	Nessuna
 pm	category	Categoria
 pm	date_note	La data inizio e fine dell'attività devono essere posteriori alle date di inizio delle attività dalle quali dipende <br/>altrimenti il sistema modificherà automaticamente le date.
+pm	day	Giorno
 pm	dependent	Dipende dall'attività
 pm	dependent_note	Scegliere solo le attività che devono essere completate prima che questa attività possa cominciare.
 pm	details	Dettaglio attività
@@ -1230,18 +1460,25 @@ pm	priority	Priorità
 pm	section	Progetto: $1
 pm	start_date	Data inizio
 pm	status	Stato
+pm	status_any	Tutti
 pm	summary	Sommario
 pm	task_id	Id attività
 pm	tech_any	Tutti
 pm	title	Gestore attività Sottoprogetti e Task
+pm	total	Totale
 pm	unassigned	Non assegnato
+pm	user	Utente
 pm	view_calendar	Visualizza calendario
+pm	view_type	Vista dettagliata
+pm	view_type_detail	Dettagliato
+pm	view_type_summary	Sommario
+pm	week	Settimana
 pm_addtask	task_added_relationship	Aggiornata relazione con tracker
 pm_addtask	task_created_successfully	Attività creata con successo
 pm_addtask	task_updated_successfully	Attività aggiornata con successo
 pm_addtask	title	Aggiungi un nuovo task
-pm_admin	title	Task Manager: Amministrazione
-pm_admin_change_status	section	Amministrazione Task Manager
+pm_admin	title	Gestore attività: Amministrazione
+pm_admin_change_status	section	Amministrazione Gestore Attività
 pm_admin_change_status	title	Aggiorna Informazione
 pm_admin_projects	add_categories	Aggiungi categorie
 pm_admin_projects	add_categories_title	Aggiungi categorie
@@ -1253,11 +1490,17 @@ pm_admin_projects	add_subprojects	Aggiungi sottoprogetti
 pm_admin_projects	admin_title	Amministrazione Progetto/Attività
 pm_admin_projects	category_inserted	Categoria inserita
 pm_admin_projects	category_name	Nome categoria
-pm_admin_projects	category_note	Una volta inserita una categoria non può più essere cancellata.
+pm_admin_projects	category_note	Una volta inserita una categoria non può più essere rimossa.
 pm_admin_projects	category_note2	Non è consigliato cambiare la categoria perchè altri elementi dipendono da essa. Quando si cambia una categoria, tutti gli elementi relazionati verranno assegnati automaticamente al nuovo nome della nuova categoria.</font></strong>
 pm_admin_projects	category_updated	Categoria aggiornata
 pm_admin_projects	change_project_intro	Qui puoi cambiare un progetto. Nota che progetti privati possono essere visualizzati dai membri del progetto, ma non dagli altri.
 pm_admin_projects	change_project_title	Cambia stato di gestore attività
+pm_admin_projects	col_project_id	Id progetto
+pm_admin_projects	col_project_name	Nome progetto
+pm_admin_projects	delete	Rimuovi
+pm_admin_projects	delete_info	Rimuovi in modo permanente questo sottoprogetto e tutti i dati.
+pm_admin_projects	delete_warning	Stai per rimuovere in modo permanente e irrimediabile questo sottoprogetto e tutti i dati!
+pm_admin_projects	deleted	Rimosso
 pm_admin_projects	description	Descrizione
 pm_admin_projects	edit_update	Modifica/aggiorna progetto
 pm_admin_projects	existing_subprojects	Sottoprogetti esistenti
@@ -1271,15 +1514,17 @@ pm_admin_projects	project_inserted	Progetto inserito
 pm_admin_projects	project_name	Nome progetto
 pm_admin_projects	project_title	Titolo
 pm_admin_projects	projects_intro	Aggiungi un nuovo progetto. <strong>Questo è diverso che aggiungere una attività a un progetto.</strong>
+pm_admin_projects	really_sure	Sono veramente sicuro
 pm_admin_projects	section	Amministrazione manager attività
 pm_admin_projects	send_updates	Invia tutti gli aggiornamenti a
+pm_admin_projects	sure	Sono sicuro
 pm_admin_projects	title	Aggiungi sottoprogetti
 pm_browse_custom	section	Manager attività
-pm_browse_custom	title	Elenca Attivià Custom
+pm_browse_custom	title	Consulta Attivià Custom
 pm_browse_my	section	Manager attività progetto $1
-pm_browse_my	title	Elenca le mie attività
+pm_browse_my	title	Consulta le mie attività
 pm_browse_open	section	Manager attività
-pm_browse_open	title	Elenca le attività aperte
+pm_browse_open	title	Consulta le attività aperte
 pm_browsetask	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
 pm_browsetask	browse	Consulta
 pm_browsetask	check_all	Seleziona tutti
@@ -1290,6 +1535,13 @@ pm_browsetask	no_change	Nessuna modifica
 pm_browsetask	overdue_tasks	* indica attività scadute
 pm_browsetask	previous	precedenti 50
 pm_browsetask	title	Consulta le attività
+pm_deletetask	are_you_sure	Sei sicuro di voler rimuovere questa attività?
+pm_deletetask	confirm	Si, sono sicuro di voler rimuovere questa attività
+pm_deletetask	delete	Rimuovi questa attività
+pm_deletetask	task_delete_failed	Rimozione fallita
+pm_deletetask	task_delete_failed_confirm	Conferma non eseguita; l'attività non è stata rimossa.
+pm_deletetask	task_deleted_successfully	Attività rimossa
+pm_deletetask	title	Rimuovi una attività
 pm_detailtask	assigned_to	Assegnato a
 pm_detailtask	category	Categoria
 pm_detailtask	dependend_on_task	Dipende da attività
@@ -1298,11 +1550,11 @@ pm_detailtask	hours	Ore
 pm_detailtask	original_comment	Commento originale
 pm_detailtask	pct_complete	Perc. di completamento
 pm_detailtask	priority	Priorità
-pm_detailtask	section	Task Manager
+pm_detailtask	section	Gestore Attività
 pm_detailtask	start_date	Data inizio
 pm_detailtask	status	Stato
 pm_detailtask	submitted_by	Inserito da
-pm_detailtask	subproject	Subproject
+pm_detailtask	subproject	Sottoprogetto
 pm_detailtask	task_summary	Sommario
 pm_detailtask	title	Dettagli dell'attività
 pm_ganttpage	assignee	Assegnatario
@@ -1314,12 +1566,14 @@ pm_ganttpage	sort_on	Ordina per
 pm_ganttpage	weeks	Settimane
 pm_include_grouphtml	add_task	Aggiungi attività
 pm_include_grouphtml	admin	Amministra
-pm_include_grouphtml	browse_task	Elenca attività
+pm_include_grouphtml	browse_task	Consulta attività
+pm_include_grouphtml	downloadcsv	Scarica come CSV
 pm_include_grouphtml	error_disabled	Il progetto ha disabilitato il gestore delle attività
 pm_include_grouphtml	gantt_chart	Diagramma Gantt
 pm_include_grouphtml	not_started	Non iniziato
 pm_include_grouphtml	project	Progetto
 pm_include_grouphtml	reporting	Reportistica
+pm_include_grouphtml	uploadcsv	Upload CSV
 pm_include_taskhtml	by	Da
 pm_include_taskhtml	comment	Commento
 pm_include_taskhtml	date	Data
@@ -1337,11 +1591,16 @@ pm_include_taskhtml	related_items	Elementi del tracker relazionati
 pm_include_taskhtml	remove_relation	Rimuovi relazione
 pm_include_taskhtml	task_history	Storia delle modifiche all'attività
 pm_include_taskhtml	tracker	Tracker
+pm_index	description	Descrizione
+pm_index	open	Aperti
+pm_index	short_name	Nome sottoprogetto
+pm_index	total	Totale
 pm_modtask	add_comment	Aggiungi un commento
 pm_modtask	assignee	Assegnatario
 pm_modtask	original_comment	Commento originale
 pm_modtask	sort_on	Ordina per
 pm_modtask	submitted_by	Inserito da
+pm_modtask	time_tracking	Registro delle consuntivazioni
 pm_modtask	title	Modifica attività
 pm_projectcategory	required_fields	Categorie progetti: nome e assegnatario sono obblitatori
 pm_projectgroup	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
@@ -1353,7 +1612,7 @@ pm_projecttask	mail_followups_footer	Per maggiori informazioni, visita:
 pm_projecttask	mail_followups_subject	Attivita' #
 pm_projecttask	mail_followups_title	\n\\nCommenti
 pm_projecttask	mail_notice	L'attivita' # $1 è stata aggiornata\n\nProgetto: $2\nSottoprogetto: $3\nSommario: $4\nPerc. Completo: $5\nStato: $6\n\nDescrizione: $7
-pm_reporting	aging_report	Aging Report
+pm_reporting	aging_report	Reportistica sulla anzianità
 pm_reporting	all_tasks_by_category	Tutte le attività per categoria
 pm_reporting	all_tasks_by_technician	Tutte le attivià per tecnico
 pm_reporting	average_duration	Durata media per attività chiuse (giorni)
@@ -1368,19 +1627,33 @@ pm_reporting	tasks_by_category	Attività per categoria
 pm_reporting	tasks_by_technician	Attività per tecnico
 pm_reporting	title	Sistemi di reportistica per le attività
 pm_task	create_successfully	Attività creata con successo
+pm_uploadcsv	choose_file	Seleziona un file in formato .csv per l'upload.
+pm_uploadcsv	explain	Questa pagina ti permette di selezionare un file in formato .csv e di effettuare l'upload in modo tale che venga inserito nel sottoprogetto corrente.
+pm_uploadcsv	title	Effettua l'upload dei dati nel Gestore Attività.
+project_admin	acceptpending	Approva
 project_admin	add_user	Aggiungi utente
+project_admin	addfromlist	Aggiungi utenti dall'elenco
+project_admin	addfromlist1	Seleziona la casella di fianco agli utenti che vuoi aggiungere. Le scelte saranno preservate anche quando premi una delle seguenti lettere. Quando hai terminato, premi "Termina" per selezionare i ruoli.
+project_admin	addfromlist2	Seleziona un ruolo per ogni utente e poi premi "Aggiungi tutti".
+project_admin	choose_first_letter	<p>Seleziona la <strong>prima lettera </strong> del nome della persona da aggiungere.</p>
 project_admin	docmanager_admin	Amministrazione DocManager
 project_admin	download_tarball	Scarica l'archivio CVS creato ogni notte
 project_admin	edit_file_releases	Aggiungi/modifica rilasci di file
 project_admin	edit_member_permissions	Modifica permessi utente
 project_admin	file_releases	Amministrazione rilasci di file
+project_admin	finish	Termina
 project_admin	forum_admin	Amministrazione Forum
-project_admin	group_members	Membri del gruppo
+project_admin	frs_admin	Amministra Rilasci di File
+project_admin	group_members	Membri del progetto
 project_admin	homepage_link	Homepage:&nbsp;
 project_admin	mail_admin	Amministrazione Mail
 project_admin	news_admin	Amministrazione News
+project_admin	no_matching_user	<p>Nessun utente trovato</p>
 project_admin	packages	Pacchetti
+project_admin	plugins_admin	Amministra Plugin
 project_admin	project_information	Informazioni varie sul progetto
+project_admin	rejectpending	Rifiuta
+project_admin	scm_admin	Amministra SCM
 project_admin	section	Progetto: $1
 project_admin	shell_server	Server SSH:&nbsp;
 project_admin	shell_server_group_directory	Directory sul server shell:&nbsp;
@@ -1393,12 +1666,14 @@ project_admin	trove_categorization	Categoria Trove:&nbsp;
 project_admin	unix_name	Nome unix
 project_admin	user_added	Utente aggiunto con successo
 project_admin	user_removed	Utente eliminato con successo
+project_admin	user_updated	Utente aggiornato
+project_admin	userrealname	Nome completo
 project_admin	www_directory	Directory WWW sul server shell
 project_admin_database	add_new_database	Aggiungi nuovo database
 project_admin_database	add_new_database_info	Cliccando su "crea" verrà schedulata la creazione del database e l'invio dell'email agli amministratori del progetto.
 project_admin_database	cannot_add	Impossibile aggiungere database
-project_admin_database	confirm_delete	CONFERMA CANCELLAZIONE
-project_admin_database	confirm_deletion	Clicca per confermare la cancellazione
+project_admin_database	confirm_delete	CONFERMA Rimozione
+project_admin_database	confirm_deletion	Clicca per confermare la Rimozione
 project_admin_database	confirm_new	Conferma nuovo
 project_admin_database	create	Crea
 project_admin_database	current_databases	Database esistenti
@@ -1415,7 +1690,7 @@ project_admin_database	update	Aggiorna
 project_admin_editgroupinfo	active_features	Funzionalità attive
 project_admin_editgroupinfo	enable_anonymous_cvs	Abilita CVS anonimo
 project_admin_editgroupinfo	enable_pserver	Abilita pserver
-project_admin_editgroupinfo	group_name	Nome descrittivo del gruppo
+project_admin_editgroupinfo	group_name	Nome descrittivo del progetto
 project_admin_editgroupinfo	group_updated	Informazioni progetto aggiornate
 project_admin_editgroupinfo	homepage_link	Homepage
 project_admin_editgroupinfo	new_doc	Nuovi inserimenti
@@ -1423,7 +1698,6 @@ project_admin_editgroupinfo	new_doc_info	È possibile inserire un indirizzo emai
 project_admin_editgroupinfo	send_on_all_updates	(invia per tutti gli aggiornamenti)
 project_admin_editgroupinfo	short_description	Descrizione breve (al massimo 255 caratteri, verranno eliminate istruzioni HTML presenti).
 project_admin_editgroupinfo	title	Modifica informazioni progetto
-project_admin_editgroupinfo	use_scm	Usa SCM
 project_admin_editgroupinfo	use_docman	Usa Gestore documentazione
 project_admin_editgroupinfo	use_forums	Usa Forum
 project_admin_editgroupinfo	use_frs	Usa il sistema per i rilasci di file
@@ -1431,17 +1705,18 @@ project_admin_editgroupinfo	use_ftp	Usa FTP
 project_admin_editgroupinfo	use_mailing_lists	Usa Mailing Lists
 project_admin_editgroupinfo	use_news	Usa News
 project_admin_editgroupinfo	use_pm	Usa gestore attività
+project_admin_editgroupinfo	use_scm	Usa SCM
 project_admin_editgroupinfo	use_stats	Usa Statistiche
 project_admin_editgroupinfo	use_surveys	Usa sondaggi
 project_admin_editgroupinfo	use_tracker	Usa Tracker
 project_admin_editimages	add_data	Aggiungi dati multimediali
 project_admin_editimages	add_file	Aggiungi file
-project_admin_editimages	del	Cancella
+project_admin_editimages	del	Rimuovi
 project_admin_editimages	description	Descrizione
-project_admin_editimages	dims	Dims
+project_admin_editimages	dims	Dimensioni
 project_admin_editimages	edit	Modifica
 project_admin_editimages	error_length	ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte
-project_admin_editimages	file_deleted	File multimediale cancellato
+project_admin_editimages	file_deleted	File multimediale Rimosso
 project_admin_editimages	file_description_required	La descrizione del file è obbligatoria
 project_admin_editimages	file_uploaded	File multimediale inserito
 project_admin_editimages	id	ID
@@ -1459,11 +1734,14 @@ project_admin_editpackages	add_release	Aggiungi rilascio
 project_admin_editpackages	added_package	Pacchetto aggiunto
 project_admin_editpackages	create_package	Crea questo pacchetto
 project_admin_editpackages	edit_releases	Modifica rilascio
+project_admin_editpackages	is_public	Pubblico?
 project_admin_editpackages	new_package_name	Nome nuovo pacchetto
 project_admin_editpackages	no_packages_defined	Non ci sono pacchetti definiti
 project_admin_editpackages	no_packages_status	Stato
 project_admin_editpackages	package_name	Nome pacchetto
 project_admin_editpackages	packages_info	<h3>Pacchetti</h3><p>Si possono utilizzare i pacchetti per raggruppare insieme i file dei vari rilasci, oppure in qualunque modo ti sia comodo.</p><H4>Esempio di pacchetto:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong></p><h4>I tuoi pacchetti:</H4><p><ol><li>Definisci i tuoi pacchetti</li><li>Crea una nuova release dei pacchetti</li></ol><p><h3>Rilasci dei pacchetti</h3><p>Un rilascio di un pacchetto può contenere diversi file.<p><H4>Esempi di rilasci</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Puoi creare nuovi rilasci dei pacchetti cliccando sul pulsante <strong>Crea/modifica rilasci</strong> vicino al nome del package interessato.<p>
+project_admin_editpackages	private	Privato
+project_admin_editpackages	public	Publico
 project_admin_editpackages	qrs	QRS
 project_admin_editpackages	qrs_a_file	Clicca qui per $1 rilasciare un file $2
 project_admin_editpackages	releases	Rilasci
@@ -1473,8 +1751,8 @@ project_admin_editrelease	add_file	Aggiungi questo file
 project_admin_editrelease	add_files_note	NOTE: In alcuni browser è necessario selezionare il file nella casella di upload e cliccare "OK". Il doppio click non funziona sempre.</strong></span>
 project_admin_editrelease	changelog_too_small	Il changelog è troppo corto
 project_admin_editrelease	data_saved	Dati salvati
-project_admin_editrelease	delete_file	Cancella file
-project_admin_editrelease	file_deleted	File cancellato
+project_admin_editrelease	delete_file	Rimuovi file
+project_admin_editrelease	file_deleted	File Rimosso
 project_admin_editrelease	file_list_note	Una volta aggiunto file a questo rilascio, è <strong>necessario</strong> aggiornare ogni file con le informazioni corrette, altimenti non compariranno sul sommario dei download.
 project_admin_editrelease	file_released	File rilasciato
 project_admin_editrelease	file_type	Tipo file
@@ -1482,6 +1760,7 @@ project_admin_editrelease	file_type_update	Tipo file<br />Aggiornamento
 project_admin_editrelease	file_updated	File aggiornato
 project_admin_editrelease	filename_release	Nome file<br />Rilascio
 project_admin_editrelease	i_am_sure	Sono sicuro
+project_admin_editrelease	monitor_count	Ci sono $1 utenti che stanno monitorando questo package.
 project_admin_editrelease	no_files_in_release	Nessun file in questo rilascio
 project_admin_editrelease	note	Modifica le note di rilascio o il changelog per questo rilascio del pacchetto. Queste modifiche verranno applicate a tutti i file coinvolti da questo rilascio.<br />Puoi sia caricare individualmente le note e il changelog, sia incollarle insieme qui sotto.
 project_admin_editrelease	paste_changelog	Incolla il changelog
@@ -1511,25 +1790,34 @@ project_admin_newrelease	section	Progetto $1 - Amministrazione
 project_admin_newrelease	title	Crea una nuova release
 project_admin_qrs	changelog	Change Log
 project_admin_qrs	create_new_package	Oppure $1 crea un nuovo package $2
+project_admin_qrs	exceed_file_size	Il file supera il limite massimo; contatta l'amministratore del sito per effettuare l'upload di questo file.
 project_admin_qrs	file_name	Nome file
 project_admin_qrs	file_released	File rilasciato: adesso è possibile modificare il file rilasciato
 project_admin_qrs	file_type	Tipo file
+project_admin_qrs	ftpupload_choosefile	Seleziona un file FTP:
+project_admin_qrs	ftpupload_new_file	In alternativa può usare FTP per fare l'upload di un nuovo file su $1
+project_admin_qrs	maximum_file_size	Dimensione massima del file:
+project_admin_qrs	must_choose_one	E' necessaria una selezione
 project_admin_qrs	no_file_types_available	Nessun tipo file disponibile
+project_admin_qrs	notify_list	Lista di notifica
 project_admin_qrs	package_id	ID package
+project_admin_qrs	partial_file	Il file è stato inviato solo parzialmente.
 project_admin_qrs	preserve_text	Preserva il testo pre-formattato
 project_admin_qrs	processor_type	Tipo processore
 project_admin_qrs	qrs_info	Adesso è possibile $1 aggiungere file $2 al rilascio se lo desideri, oppure modificarlo.</p> <p>Nota che i file potrebbero non comparire immediatamente nella $3 pagina di download $4. Potrebbero passare diverse ore prima che sia disponibile.
 project_admin_qrs	release_date	Data rilascio
 project_admin_qrs	release_file	Rilascia file
 project_admin_qrs	release_name	Nome rilascio
-project_admin_qrs	release_note	NOTA: in alcuni browser è necessario selezionare il file nella casella di upload e cliccare "OK".  Cliccare due volte non registra il file.
+project_admin_qrs	release_note	NOTA: in alcuni browser è necessario selezionare il file nella casella di upload e cliccare "OK". Cliccare due volte non registra il file.
 project_admin_qrs	release_notes	Note di rilascio
 project_admin_qrs	required_file	È necessario selezionare un file.
 project_admin_qrs	required_file_type	È necessario selezionare un tipo file.
 project_admin_qrs	required_package	È necessario selezionare un package
 project_admin_qrs	required_processor_type	È necessario selezionare un tipo processore
 project_admin_qrs	required_release_name	È necessario definire un nome di rilascio
+project_admin_qrs	separate_emails	Separa le email con una virgola (,)
 project_admin_qrs	title	Rilascia nuova versione di file
+project_admin_qrs	unknown_file_error	Errore sconosciuto nell'invio del file.
 project_admin_qrs	upload_new_file	Upload di un nuovo file
 project_admin_rmuser	cancel	Annulla
 project_admin_rmuser	cannot_remove_admin	Non puoi rimuovere un amministratore $1
@@ -1587,7 +1875,7 @@ project_admin_userperms	title	Elenco permessi utente
 project_admin_userperms	tracker_manager	Gestore<br />tracker
 project_admin_utils	admin	Amministra
 project_admin_utils	by	Da
-project_admin_utils	change_history	Cronologia modifiche al gruppo
+project_admin_utils	change_history	Cronologia modifiche al progetto
 project_admin_utils	database_admin	Amministrazione database
 project_admin_utils	date	Data
 project_admin_utils	edit_jobs	Modifica posizioni
@@ -1596,22 +1884,22 @@ project_admin_utils	edit_release_files	Modifica/rilascia file
 project_admin_utils	field	Campo
 project_admin_utils	multimedia_data	Modifica dati multimediali
 project_admin_utils	old_value	Valore precedente
-project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa e alle altre pagine di l'amministrazione del progetto</dd><dt><strong>Tecnici dei rilasci</strong></dt><dd>possono rilasciare file (qualsiasi amministratore del progetto è anche tecnico dei rilasci)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attività/patch, ecc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attività, ecc e amministrare gli strimenti con le pagine /nomestrumento/admin/</dd><dt><strong>Nessun permesso sullo strumento (N/A)</strong></dt><dd>Lo sviluppatore non ha alcun permesso specifico (equivalente a '-')</dd><dt><strong>Moderatori</strong> (forum)</dt><dd>possono cancellare i messaggi dai forum</dd><dt><strong>Editori</strong> (Manager documentazione)</dt><dd>possono aggiornare/modificare/eliminare la documentazione del progetto.</dd></dl>
+project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa e alle altre pagine di l'amministrazione del progetto</dd><dt><strong>Tecnici dei rilasci</strong></dt><dd>possono rilasciare file (qualsiasi amministratore del progetto è anche tecnico dei rilasci)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attività/patch, ecc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attività, ecc e amministrare gli strimenti con le pagine /nomestrumento/admin/</dd><dt><strong>Nessun permesso sullo strumento (N/A)</strong></dt><dd>Lo sviluppatore non ha alcun permesso specifico (equivalente a '-')</dd><dt><strong>Moderatori</strong> (forum)</dt><dd>possono rimuovere i messaggi dai forum</dd><dt><strong>Editori</strong> (Manager documentazione)</dt><dd>possono aggiornare/modificare/eliminare la documentazione del progetto.</dd></dl>
 project_admin_utils	post_jobs	Inserisci posizioni
 project_admin_utils	project_history	Cronologia delle modifiche
 project_admin_utils	stats	Statistiche
 project_admin_utils	user_permissions	Permessi utente
 project_admin_utils	vhosts	Host virtuali
 project_admin_vhost	create	Crea
-project_admin_vhost	delete	Cancella
-project_admin_vhost	info	<strong><span style="text-decoration:underline">Aggiungi nuovo virtual host</span></strong><p>Per aggiungere un nuovo virtualhost, inserisci un <strong>CNAME</strong> per <em>tuohost.org</em> a <strong>$1.$2</strong>.  $3 attualmente non ospita mail (non può essere un MX) oppure DNS</strong>.  <p>Cliccando su "crea" la creazione del virtual host verrà schedulata.  Questa operazione sincronizzerà i server web in modo tale che il tuo host virtuale sarè disponibile alle ore <em>$4.$5</em>.
+project_admin_vhost	delete	Rimuovi
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Aggiungi nuovo virtual host</span></strong><p>Per aggiungere un nuovo virtualhost, inserisci un <strong>CNAME</strong> per <em>tuohost.org</em> a <strong>$1.$2</strong>. $3 attualmente non ospita mail (non può essere un MX) oppure DNS</strong>. <p>Cliccando su "crea" la creazione del virtual host verrà schedulata. Questa operazione sincronizzerà i server web in modo tale che il tuo host virtuale sarè disponibile alle ore <em>$4.$5</em>.
 project_admin_vhost	name	Nuovo host virtuale <em>(esempio: vhost.org)</em>
 project_admin_vhost	no_vhosts	Nessun host virtuale definito
 project_admin_vhost	not_valid_hostname	Nome host non valido - $1
 project_admin_vhost	operations	Operazioni
 project_admin_vhost	title	Gestione host virtuali
 project_admin_vhost	vhost	Host virtuale
-project_admin_vhost	vhost_deleted	Host virtuale cancellato
+project_admin_vhost	vhost_deleted	Host virtuale Rimosso
 project_admin_vhost	vhost_scheduled	Host virtuale schedulato per la creazione
 project_filemodule_monitor	start_monitor_body	È stata attivata la notifica del package
 project_filemodule_monitor	start_monitor_title	Notifica attivata
@@ -1619,6 +1907,7 @@ project_filemodule_monitor	stop_monitor_body	È stata disattivata la notifica de
 project_filemodule_monitor	stop_monitor_title	Notifica disattivata
 project_home	cvs_commits	<strong>$1</strong> commit, <strong>$2</strong> aggiunte
 project_home	forum_messages	<strong>$1</strong> messaggi in <strong>$2</strong> forum
+project_home	forum_messages_only_one_forum	<strong>$1</strong> messaggi nel forum <strong>$2</strong>
 project_home	forums	forum
 project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
 project_home	help_wanted_multiple	persone per occupare $1 svariate posizioni differenti </a>
@@ -1634,6 +1923,20 @@ project_home	title	Informazioni progetto
 project_home	tracker_open	$1 aperti / $2 totali
 project_home	view_members	Visualizza i membri
 project_home	view_project_files	Visualizza tutti i file
+project_joinrequest	already_member	Sei già un membro di questo progetto.
+project_joinrequest	already_requested	Hai già mandato una richiesta agli amministratori del progetto.
+project_joinrequest	approved	Sei stato aggiunto al progetto $1.
+project_joinrequest	comments	Puoi inviare un commento agli amministratori:
+project_joinrequest	denied	La tua richiesta di partecipare al progetto $1 è stata rifiutata dall'amministratore.
+project_joinrequest	join_notice_body	$1 ha richiesto di partecipare al progetto.\nPer approvare la richiesta : http://$2/project/admin/?group_id=$3. nnCommenti dell'utente:n$4
+project_joinrequest	join_notice_subject	Richiedi di partecipare al progetto $1
+project_joinrequest	joining	Puoi richiedere di partecipare ad un progetto cliccando sul pulsante Invia. Gli amministratori dovranno approvare o rifiutare la tua richiesta.
+project_joinrequest	nonepending	Nessuna richiesta pendente
+project_joinrequest	pending	Richieste pendenti
+project_joinrequest	pending_requests	Richieste di partecipazione pendenti:
+project_joinrequest	request_link	Richiedi di partecipare al progetto
+project_joinrequest	submitted	La tua richiesta è stata inoltrata.
+project_joinrequest	title	Richiedi di partecipare al progetto
 project_memberlist	developer	Sviluppatore
 project_memberlist	joining	<P>Se vuoi partecipare a questo progetto, contatta uno degli amministratori, contrassegnati dal grassetto qui sotto.</p><br><br>
 project_memberlist	role	Ruolo/Posizione
@@ -1699,7 +2002,87 @@ project_stats_utils	support	Supporto
 project_stats_utils	tasks	Attività
 projects	section	Progetto: $1
 projects	title	Sommario
+rbac_edit	addrole	Aggiungi ruolo
+rbac_edit	docman	Gestore documentazione
+rbac_edit	editrole	Modifica Ruolo
+rbac_edit	editroles	Modifica Ruoli
+rbac_edit	forum	Forum
+rbac_edit	forumadmin	Amministratore Forum
+rbac_edit	forumpublic	Privilegi per il forum
+rbac_edit	frs	Sistema per rilasci file
+rbac_edit	frspackage	Privilegi del pacchetto
+rbac_edit	intro	Usa questa pagina per modificare i ruoli per il tuo progetto. Nota che ogni membro ha come minimo i privilegi del profilo Observer. Ad esempio, se il profilo Observer ha il permesso di lettura su CVS, allora tutti i ruoli del progetto hanno il permesso di lettura su CVS.
+rbac_edit	newrole	Nuovo ruolo
+rbac_edit	observer	Modifica osservatore
+rbac_edit	observerintro	Usa questa pagina per modificare i privilegi per gli utenti che non sono membri del progetto e utenti non collegati.
+rbac_edit	observerusername	Osservatore
+rbac_edit	pgtitle	Modifica Ruolo
+rbac_edit	pm	Gestore attività
+rbac_edit	pmadmin	Amministratore Gestore Attività
+rbac_edit	pmpublic	Privilegi per il Gestore Attività
+rbac_edit	projectadmin	Amministratore progetto
+rbac_edit	projectpublic	Privilegi del progetto
+rbac_edit	projectpublicnote	Nota: se il progetto è privato, gli utenti che non sono membro del progetto non possono vedere nulla anche se qui è selezionata una opzione diversa.
+rbac_edit	remove	Elimina
+rbac_edit	role	Ruolo
+rbac_edit	rolename	Nome ruolo
+rbac_edit	scm	SCM - Repository per le sorgenti
+rbac_edit	scmpublic	Privilegi SCM
+rbac_edit	title1	Sezione
+rbac_edit	title2	Sottosezione
+rbac_edit	title3	Impostazione
+rbac_edit	tracker	Tracker
+rbac_edit	trackeradmin	Amministratore Tracker
+rbac_edit	trackerpublic	Privilegi del Tracker
+rbac_edit	update	Modifica
+rbac_vals	docman0	Leggi/Scrivi
+rbac_vals	docman1	Amministratore
+rbac_vals	forum-1	Nessun accesso
+rbac_vals	forum0	Lettura
+rbac_vals	forum1	Scrivi
+rbac_vals	forum2	Amministra
+rbac_vals	forumadmin0	Nessuno
+rbac_vals	forumadmin2	Amministratore
+rbac_vals	forumanon0	Non permetti messaggi anonimi
+rbac_vals	forumanon1	Permetti messaggi anonimi
+rbac_vals	forumpublic0	Privato
+rbac_vals	forumpublic1	Pubblico
+rbac_vals	frs0	Lettura
+rbac_vals	frs1	Scrittura
+rbac_vals	frspackage	Sistema di rilasci file
+rbac_vals	frspackage0	Privato
+rbac_vals	frspackage1	Pubblico
+rbac_vals	pm-1	Nessun accesso
+rbac_vals	pm0	Lettura
+rbac_vals	pm1	Tecnico
+rbac_vals	pm2	Tecnico & Amministratore
+rbac_vals	pm3	Solo amministratore
+rbac_vals	pmadmin0	Nessuno
+rbac_vals	pmadmin2	Amministratore
+rbac_vals	pmpublic0	Privato
+rbac_vals	pmpublic1	Pubblico
+rbac_vals	projectadmin0	Nessuno
+rbac_vals	projectadminA	Amministratore
+rbac_vals	projectpublic0	Privato
+rbac_vals	projectpublic1	Pubblico
+rbac_vals	scm-1	Nessun accesso
+rbac_vals	scm0	Lettura
+rbac_vals	scm1	Scrittura
+rbac_vals	scmpublic0	Privato
+rbac_vals	scmpublic1	Pubblico (PServer)
+rbac_vals	tracker-1	Nessun accesso
+rbac_vals	tracker0	Lettura
+rbac_vals	tracker1	Tecnico
+rbac_vals	tracker2	Tecnico & Amministratore
+rbac_vals	tracker3	Solo amministratore
+rbac_vals	trackeradmin0	Nessuno
+rbac_vals	trackeradmin2	Amministra
+rbac_vals	trackeranon0	Non permette messaggi anonimi
+rbac_vals	trackeranon1	Permetti messaggi anonimi
+rbac_vals	trackerpublic0	Privato
+rbac_vals	trackerpublic1	Pubblico
 register	apply_for_registration	Per registrare un progetto, devi inserire alcune informazioni di base. Leggi attentamente le descrizioni e fornisci informazioni complete e attendibili. Tutti i campi sono obbligatori.
+register	choose_scm	<h3>6. SCM</h3><p>Puoi selezionare un solo SCM per il tuo progetto. </p> <p><strong>Non sarà possibile cambiare questa impostazione una volta che il progetto è registrato!</strong></p>
 register	comprehensive_description	Descrivi il progetto in modo più dettagliato.
 register	conflicting_licenses_choice	Scelta sulle licenze conflittuale
 register	describe_registration	Descrivi il sommario del progetto in modo più dettagliato.
@@ -1711,6 +2094,7 @@ register	license_type	Pubblico domino</a><li>Solo sito web <li>Altra/Licenza pro
 register	maximum_description	La lunghezza massima della descrizione del progetto è di 255 caratteri.
 register	more_license_description	Descrivere in modo più dettagliato la licenza.
 register	no_license_chosen	Non hai scelto una licenza
+register	one_scm	Dato che esiste solo un SCM, questo verrà selezionato automaticamente. Verrà selezionato <strong>$1</strong>.
 register	other_license	Se hai selezionato "altra", inserisci una spiegazione oltre che alla descrizione della licenza. Considera che altre licenze potrebbero non venir approvate e potrebbe passare più tempo visto che dovremo controllare se la licenza è compatibile con l'ambiente OpenSource.
 register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>Questa è la descrizione del tuo progetto che sarà visualizzata nel sommario, nei risultati della ricerca, ecc. Non dovrebbe essere lunga e formale quanto la descrizione dell'obiettivo del progetto (passo 2), sentiti libero di essere breve e conciso. La lunghezza massima è di 255 caratteri.
 register	project_full_name	<h3>1. Nome completo del progetto</h3><p>Inizia col dare un nome al progetto. Il "Nome completo" è descrittivo e non ha restrizioni, eccetto una lunghezza massima di 40 caratteri.</p>Nome completo:<br/>
@@ -1720,6 +2104,7 @@ register	project_submitted	Il progetto è stato sottoposto agli amministratori d
 register	project_unix_name	<h3>5. Nome unix del progetto</h3><p>In aggiunta al nome del progetto, devi scegliere un nome "Unix" del progetto.</p><p> Il "nome Unix" ha diverse restrizioni perché è usato in molti posti all'interni del sito:<ul><li>non può essere uguale al nome unix di un altro progetto<li>la lunghezza deve essere tra 3 e 15 caratteri<li>deve essere in minuscolo<li>può contenere solo caratteri, numeri e - <li>deve essere un nome di un utente unix valido<li>non può corrispondere a uno dei domini riservati<li>il nome unix non cambierà mai per l'intera durata del progetto</ul><p>Il nome Unix è importante perché sarà utilizzato per:<ul><li>un sito web: <tt>unixname.$1</tt><li>un repository CVS: <tt>/cvsroot/unixname</tt> sul server <tt>cvs.unixname.$1</tt><li>Accessi shell a <tt>unixname.$1</tt><li>Motore di ricerca </ul><p>Nome unix:<br/>
 register	purpose_and_summarization	<h3>2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Inserisci una descrizione dettagliata e accurata del tuo progetto e quali risorse di $1 userai. Questa descrizione sarà la base per la scelta di approvare o rifiutare il tuo progetto su $1 e, in futuro, per garantire l'utilizzo delle risorse nel modo dovuto. La descrizione non sarà utilizzata come descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>
 register	registration_complete	Registrazione completata
+register	scm_not_selected	Il sito ha SCM abilitato, non è stato selezionato alcun SCM.
 register	title	Registrazione nuovo progetto
 register	unix_group_name_already_taken	Nome unix già utilizzato.
 register_complete	section	Registrazione nuovo progetto
@@ -1729,12 +2114,119 @@ register_projectinfo	title	Informazioni progetto
 register_requirements	section	Registrazione nuovo progetto
 register_requirements	title	Servizi e Requisiti
 register_tos	section	Registrazione nuovo progetto
-register_tos	title	Terms Of Service Agreement
+register_tos	title	Termini di Servizio: Accordo
+reporting	add	Aggiungi
+reporting	administrative	Amministrativo
+reporting	area	Aree
+reporting	cumulative_groups	Report settimanale cumulativo sui progetti (grafico)
+reporting	cumulative_groups_title	Progetti cumulativi
+reporting	cumulative_users	Report settimanale cumulativo sugli utenti (grafico)
+reporting	cumulative_users_title	Utenti cumulativi
+reporting	daily	Giornaliero
+reporting	end	Fine
+reporting	feature_req	Richieste di evoluzioni
+reporting	forum_messages	Messaggi nei forum
+reporting	groups_added_title	Progetti aggiunti
+reporting	groups_added_weekly	Progetti aggiunti settimanalmente (grafico)
+reporting	initialize	Inizializza/Ricostruisci tabelle
+reporting	manage	Gestisci categorie Traccia del Tempo
+reporting	monthly	Mensile
+reporting	next	Prossimo
+reporting	other_trackers	Altri tracker
+reporting	project	Progetto
+reporting	project_activity	Attività (grafico)
+reporting	project_activity_title	Attività del progetto
+reporting	project_specific	Report specifici per il progetto: Tracker, Gestore attività, Forum, Gestore documenti, download
+reporting	projects	Progetti
+reporting	refresh	Ricarica
+reporting	report	report
+reporting	site_wide	Per l'intero sito
+reporting	site_wide_activity	Attività per l'intero sito
+reporting	site_wide_line	Linee (grafico)
+reporting	site_wide_pie	Torta (grafico)
+reporting	site_wide_reports	Report per l'intero sito: Tracker, Gestore attività, Forum, Gestore Documentazione, Download
+reporting	site_wide_time_tracking	Registro delle consuntivazioni per l'intero sito
+reporting	start	Inizio
+reporting	subtitle	Reportistica $1
+reporting	time	Tempo
+reporting	time_tracking	Registro delle consuntivazioni
+reporting	time_tracking_projecttime	Report individuali per progetto (grafico)
+reporting	time_tracking_sitetime	Reportistica sulle consuntivazioni per l'intero sito (grafico)
+reporting	time_tracking_sitetimebar	Grafico sulle ore totale per l'intero sito
+reporting	time_tracking_usersummary	Attività e ore per l'intero sito (grafico)
+reporting	time_tracking_usertime	Reportistica individuale per utente (grafico)
+reporting	title	Reportistica
+reporting	tracker_items_closed	Elementi del tracker chiusi
+reporting	tracker_items_opened	Elementi del tracker aperti
+reporting	type	Tipo
+reporting	update	Aggiorna
+reporting	user	Utente
+reporting	user_activity	Attività (grafico)
+reporting	user_activity_title	Attività utente
+reporting	users	Utenti
+reporting	users_added_title	Utenti aggiunti
+reporting	users_added_weekly	Utenti aggiunti per settimana (grafico)
+reporting	week	Settimana
+reporting	weekly	Settimanale
+reporting_pie	end	Fine
+reporting_pie	start	Inizio
+reporting_pie	title	Grafico a torta
+reporting_pie	trackers	Tracker
+reporting_rebuild	iamsure	Sono sicuro
+reporting_rebuild	message	<h3>Inizializzazione sistema di reportistica</h3><p>In alcuni casi, se i lavori schedulati non sono terminati correttamente oppure se il database è stato danneggiato, devono essere ricostruite le tabelle per la reportistica.<p>Se sei sicuro di voler ricostruire le tabelle, seleziona la casella "Sono sicuro" e premi il pulsante sottostante.<p>Questa operazione può durare alcuni minuti, perciò NON PREMERE PIÙ DI UNA VOLTA.<p>
+reporting_rebuild	pressonlyonce	Premi UNA SOLA VOLTA
+reporting_rebuild	title	Pagina principale
+reporting_ta	add_entry	Aggiungi elemento
+reporting_ta	add_entry_description	Seleziona un progetto/sottoprogetto nel Gestore Attività. Devi selezionare una attività e una categoria per consuntivare.
+reporting_ta	cancel	Annulla
+reporting_ta	category	Categoria
+reporting_ta	change_week	Cambia settimana
+reporting_ta	choose_entry	Seleziona una settimana per consuntivare.
+reporting_ta	choose_entry_description	Dopo aver selezionato una settimana, potrai scegliere un progetto/sottoprogetto nel Gestore Attività.
+reporting_ta	date	Data
+reporting_ta	delete	Rimuovi
+reporting_ta	error_field_required	Tutti i campi sono obbligatori
+reporting_ta	hours	Ore
+reporting_ta	project_task	Progetto/Attività
+reporting_ta	successfully_added	Aggiunto.
+reporting_ta	successfully_deleted	Rimosso
+reporting_ta	task_mgr_project	Progetto Gestore Attività
+reporting_ta	time_entries	Registrazioni per la settimana con inizio $1
+reporting_ta	title	Registro delle consuntivazioni
+reporting_ta	total_hours	Ore Totali
+reporting_ta	week_starting	Settimana iniziale
+reporting_tc	category_name	Nome categoria
+reporting_tc	description	Puoi creare nuove categorie per le consuntivazioni utilizzato nella realizzazione di una attività. Esempi sono "Riunioni", "Sviluppo Codice", "Test".
+reporting_tc	successful	Successo
+reporting_tc	time_code	Codice consuntivazione
+reporting_tc	title	Pagina principale
+reporting_tc	title2	Gestisci categorie delle consuntivazioni
+reporting_ttbp	bycategory	Per categoria
+reporting_ttbp	bysubproject	Per sottoprogetto
+reporting_ttbp	bytask	Per attività
+reporting_ttbp	byuser	Per utente
+reporting_ttbp	title	Registro consuntivazioni per progetto
+reporting_ua	description	Seleziona la <strong>Prima lettera</strong> della persona per la quale vuoi creare la reportistica.<p>
+reporting_us	any	Tutti
+reporting_us	closed	chiuso
+reporting_us	cum_hrs	Ore cumulative
+reporting_us	description	Seleziona un intervallo dalla lista. Il report visualizzerà tutte le attività con la data di inizio in questo intervallo.
+reporting_us	end_date	Data fine
+reporting_us	name	Nome
+reporting_us	no_matches	Nessuna occorrenza trovata
+reporting_us	open	Aperti
+reporting_us	rem_hrs	Ore rimanenti
+reporting_us	status	Stato
+reporting_us	task	Attività
+reporting_us	task_status	Stato attività
+reporting_us	title	Sommario utente
+reporting_ut	description	Seleziona la <strong>prima lettera</strong> deel nome della persona per la quale creare la reportistica.<p>
+reporting_ut	title	Reportistica sulle consuntivazioni per utente
+scm_index	admin	Amministra
 scm_index	anoncvs	<P><B>Accesso anonimo a CVS </B> <P>Il repository CVS di questo progetto può essere estratto tramite il metodo pserver seguendo le istruzioni qui sotto. Il modulo che desideri estrarre deve essere inserito al posto di <I>nomemodulo</I>. Quando viene richiesta una password per l'utente <I>anonymous</I>, premere Invio.
 scm_index	anoncvsup	Non è necessario utilizzare il parametro -d quando si fanno gli update da una sottodirectory.
-scm_index	browseit	Visualizza repository CVS
+scm_index	browseit	Consulta repository CVS
 scm_index	browsetree	<HR><B>Visualizza il repository CVS </B> <P>Visualizzare il repository CVS da' la possibilità di vedere lo stato attuale del codice sviluppato. È possibile visualizzare l'intera storia di ogni singolo file.
-scm_index	scm_repository	Repository SCM
 scm_index	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo gli sviluppatori del progetto possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire <I>nomemodulo</I> e <I>sviluppatore</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
 scm_index	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
 scm_index	developername	sviluppatore
@@ -1743,15 +2235,68 @@ scm_index	error_this_project_has_turned_off	Errore, questo progetto ha disabilit
 scm_index	history	Storia del repository CVS
 scm_index	modulename	nomemodulo
 scm_index	nohistory	Questo progetto non dispone dello storico del CVS.
+scm_index	scm_repository	Repository SCM
 scm_index	section	Progetto: $1
 scm_index	title	CVS
+search	artifact_author	Inserito da
+search	artifact_date	Data
+search	artifact_id	#
+search	artifact_summary	Sommario
+search	docs_description	Descrizione
+search	docs_id	#
+search	docs_title	Titolo
+search	error_criteria_not_specified	Inserire i criteri di ricerca
+search	error_invalid_search	Errore - ricerca non valida
+search	error_search_minlength	La lunghezza minima per le ricerche è di 3 caratteri.
+search	forum_author	Autore
+search	forum_date	Data
+search	forum_thread	Argomento
+search	frs_post_date	Data di inserimento
+search	frs_posted_by	Inserito da
+search	frs_release_name	Nome rilascio
+search	group_description	Descrizione
+search	group_name	Nome progetto
+search	news_post_date	Data di inserimento
+search	news_posted_by	Inserito da
+search	news_summary	Sommario
+search	next_results	Prossimi risultati
+search	no_matches_found	Nessuna occorrenza trovata per <em>$1</em>
+search	people_real_name	Nome completo
+search	people_user_name	Nome utente
+search	previous_results	Risultati precedenti
+search	project_search	Ricerca progetto
+search	search_results	Risultati per <em>$1</em>
+search	skill_from	Da
+search	skill_keywords	Parole chiave
+search	skill_name	Nome
+search	skill_title	Titolo
+search	skill_to	A
+search	skill_type	Tipo
+search	tasks_completed	Completato
+search	tasks_created_by	Creato da
+search	tasks_end_date	Data fine
+search	tasks_id	#
+search	tasks_start_date	Data inizio
+search	tasks_summary	Sommario
 search	title	Ricerca
+searchbox	advanced_search	Ricerca avanzata
+searchbox	docs	Documenti di questo progetto
 searchbox	forum	Questo forum
+searchbox	forums	Forum di questo progetto
+searchbox	frs	Rilasci di questo progetto
+searchbox	full	Ricerca all'interno di tutto il progetto
+searchbox	news	News di questo progetto
 searchbox	people	Persone
 searchbox	search	Ricerca
 searchbox	skill	Competenza
 searchbox	softwaregroup	Software/Gruppo
 searchbox	task	Attività
+searchbox	tasks	Attività di questo progetto
+searchbox	trackers	Tracker di questo progetto
+send_pending_items_mail	pm_message	Questa mail viene inviata per ricordare che ci sono attività scadute. \nL'attività #$1 è scaduta: \nSommario: $2\nInserito da: $4\nStato:$5\nPercentuale completamento: $6\n\nClicca qui per andare all'attività $3
+send_pending_items_mail	pm_subject	Notifica di attività scadute
+send_pending_items_mail	tracker_message	Questa mail viene inviata per ricordare che ci sono elementi del tracker scaduti. L'elemento #$1 è scaduto: \nSommario: $3\nStato: $5\nData inserimento:$6\nAssegnato a: $7\nInserito da: $8\nDettagli: $9\n\n\nClicca qui per andare all'elemento: $4
+send_pending_items_mail	tracker_subject	Notifica di elementi del tracker scaduti
 sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p />Compila accuratamente tutti i campi oppure il destinatario potrebbe non essere in grado di rispondere.<p /><font color="red"><B>SE STAI CERCANDO AIUTO:</B> Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</FONT>
 sendmessage	contact	Contatto
 sendmessage	email	Il tuo indirizzo email
@@ -1764,14 +2309,14 @@ sendmessage	name	Il tuo nome
 sendmessage	send	Invia messaggio
 sendmessage	subject	Oggetto
 sendmessage	title	Invia un messaggio a $1
-session	cannotinit	ERROR - Cannot initialize session
-session	deleted	Utente cancellato
+session	cannotinit	ERROR - Impossibile inizializzare la sessione
+session	deleted	Utente Rimosso
 session	invalidpasswd	Password o nome utente non valido
 session	missingpasswd	Password o nome utente mancante
 session	notactive	Utente non attivo
 session	pending	Utente in attesa di attivazione
 session	suspended	Utente sospeso
-snippet_addversion	browse_the_library	<strong>Scorri la libreria</strong> per trovare i frammenti da aggiungere e poi utilizza questi nella nuova finestra.
+snippet_addversion	browse_the_library	<strong>Consulta la libreria</strong> per trovare i frammenti da aggiungere e poi utilizza questi nella nuova finestra.
 snippet_addversion	changes	Cambiamenti
 snippet_addversion	error_doing_snippet_package_version_insert	ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL PACKAGE!
 snippet_addversion	error_doing_snippet_version_insert	ERRORE NELL'INSERMENTO DELLA VERSIONE DEL FRAMMENTO!
@@ -1790,12 +2335,12 @@ snippet_addversion	snippet_package_version_added_successfully	Versione del packa
 snippet_addversion	snippet_version_added_successfully	Versione del frammento aggiunta con successo
 snippet_addversion	submit	Invia
 snippet_addversion	title	Inserisci una nuove versione del frammento
-snippet_addversion	title_add_snippet_to_package	Aggiunti frammenti al package
+snippet_addversion	title_add_snippet_to_package	Aggiungi frammenti al package
 snippet_addversion	title_submit_a_new_snippet_package	Inserisci un nuovo package di frammenti
 snippet_addversion	title_submit_a_new_snippet_version	Inserisci una nuova versione di un frammento
 snippet_addversion	version	Versione
 snippet_browse	creator	Autore
-snippet_browse	error_bad_url	Errore, Errore - URL non valido?
+snippet_browse	error_bad_url	Errore - URL non valido?
 snippet_browse	no_snippets_found	Nessun frammento trovato
 snippet_browse	packages_of_snippets	Package di frammenti
 snippet_browse	snippet_by_category	Frammenti per categoria: $1
@@ -1804,30 +2349,30 @@ snippet_browse	snippet_title	Titolo
 snippet_browse	snippets	Frammenti
 snippet_browse	snippets_by_language	Frammenti per linguaggio: $1
 snippet_browse	title	Libreria dei frammenti di codice
-snippet_caching	browse_by_category	Visualizza per categoria
-snippet_caching	browse_by_language	Visualizza per linguaggio
-snippet_caching	intro	<p>L'obiettivo di questo archivio è quello di poter condividere frammenti di codice, script e funzioni .</p><p>Puoi creare un nuovo frammento e poi aggiungere versioni aggiuntive dello stesso frammento.</p><p>Una volta creati i frammenti, possono essere raggruppati in "package" di frammenti. Il package può contenere più versioni dello stesso frammento.</p><p>&nbsp;</p><h3>Visualizza frammenti</h3>	<p>Puoi visualizzare i frammenti:</p>
+snippet_caching	browse_by_category	Consulta per categoria
+snippet_caching	browse_by_language	Consulta per linguaggio
+snippet_caching	intro	<p>L'obiettivo di questo archivio è quello di poter condividere frammenti di codice, script e funzioni .</p><p>Puoi creare un nuovo frammento e poi aggiungere versioni aggiuntive dello stesso frammento.</p><p>Una volta creati i frammenti, possono essere raggruppati in "package" di frammenti. Il package può contenere più versioni dello stesso frammento.</p><p>&nbsp;</p><h3>Visualizza frammenti</h3><p>Puoi visualizzare i frammenti:</p>
 snippet_delete	error_mangled_url	Errore - URL non valida?
-snippet_delete	error_only_creator_of_package_version_can_delete	Errore - Solo chi crea una versione di un package può cancellarla.
-snippet_delete	error_only_the_creator	Errore - Solo chi crea una versione di un package può cancellare i frammenti che contiene.
+snippet_delete	error_only_creator_of_package_version_can_delete	Errore - Solo chi crea una versione di un package può rimuoverla.
+snippet_delete	error_only_the_creator	Errore - Solo chi crea una versione di un package può rimuovere i frammenti che contiene.
 snippet_delete	item_removed_from	Frammento rimosso dal package
 snippet_delete	package_removed	Package Rimosso
 snippet_delete	snippet_removed	Frammento rimosso
 snippet_delete	that_snippet_doesnt_exist	Errore - questo frammento non esiste in questo package
-snippet_delete	title	Cancella Frammenti
+snippet_delete	title	Rimuovi Frammenti
 snippet_detail	author	Autore
 snippet_detail	changes_since_last_version	Modifiche dall'ultima versione
 snippet_detail	date_posted	Data inserimento
-snippet_detail	delete	Cancella
+snippet_detail	delete	Rimuovi
 snippet_detail	download_a_raw_text	Scarica una versione in formato raw-text cliccando su &quot;<strong>Scarica versione</strong>&quot;
 snippet_detail	download_version	Scarica versione
-snippet_detail	edit_del	Modifica/cancella
+snippet_detail	edit_del	Modifica/Rimuovi
 snippet_detail	error_no_version_found	Errore - nessuna versione trovata
 snippet_detail	error_was_the_url_mangled	Errore, Errore nell'URL?
 snippet_detail	latest_package_version	Ultima versione del package
 snippet_detail	latest_snippet_version	Ultima versione del frammento:
 snippet_detail	package_version	Versione package
-snippet_detail	snippet_id	Snippet ID
+snippet_detail	snippet_id	ID frammento
 snippet_detail	submit_a_new_snippet	Inserisci un nuovo frammento
 snippet_detail	submit_a_new_version	Inserisci una nuova versione
 snippet_detail	title	Raccolta dei frammenti di codice
@@ -1836,11 +2381,11 @@ snippet_detail	version_of_this_snippet	Versioni del frammento
 snippet_detail	you_can_submit_a_new	Puoi inserire una nuova versione del frammento se l'hai modificato e ti sembra appropriato condividerlo con gli altri.
 snippet_detail	you_can_submit_a_new_version_of_package	Puoi inserire una nuova versione del pacchetto se l'hai modificato e ti sembra appropriato condividerlo con gli altri.
 snippet_download	error	Errore
-snippet_download	nothing_in_here	non c'è niente qui
+snippet_download	nothing_in_here	qui dentro non c'è niente
 snippet_index	title	Libreria dei frammenti di codice
 snippet_package	add_snippet_to	Aggiungi frammenti ai package
 snippet_package	add_snippet_to_package	Aggiungi frammenti ai package
-snippet_package	browse_the_libary	<strong>Scorri la libreria</strong> per trovare i frammenti che vuoi aggiungere  e aggiungili utilizzando il modulo nella nuova finestra.
+snippet_package	browse_the_libary	<strong>Consulta la libreria</strong> per trovare i frammenti che vuoi aggiungere e aggiungili utilizzando il modulo nella nuova finestra.
 snippet_package	category	Categoria
 snippet_package	description	Descrizione
 snippet_package	error_doing_snippet_package_insert	ERRORE NELL'INSERIMENTO DEL PACKAGE!
@@ -1881,11 +2426,11 @@ snippet_submit	version	Versione
 snippet_submit	you_can_post	Puoi inserire un nuovo frammento e condividerlo con altre persone. Riempi i campi con le informazioni richieste. <strong>Inserisci una buona descrizione</strong> e <strong>commenta bene il tuo codice</strong> in modo che altri possono leggere e capire il codice.</p><p><span style="color:red"><strong>Nota:</strong></span> Puoi inserire una nuova versione di un frammento esistente. Dovresti usare questa pagina quando inserisci un frammento nuovo.
 snippet_utils	auctions	Aste
 snippet_utils	author	Autore
-snippet_utils	bbs_systems	BBS Systems
-snippet_utils	browse	Visualizza
+snippet_utils	bbs_systems	Sistemi BBS 
+snippet_utils	browse	Consulta
 snippet_utils	calendars	Calendari
 snippet_utils	category	Categoria:
-snippet_utils	choose_one	Selezionane uno
+snippet_utils	choose_one	Seleziona uno
 snippet_utils	class	Classe
 snippet_utils	create_a_package	Crea un pacchetto
 snippet_utils	database_manipulation	Manipolazione database
@@ -1911,7 +2456,7 @@ snippet_utils	snippet_in_this_package	Frammenti in questo package:
 snippet_utils	snippet_title	Titolo
 snippet_utils	submit_a_new_snippet	Inserisci un nuovo frammento
 snippet_utils	type	Tipo:
-snippet_utils	unix_admin	UNIX Admin
+snippet_utils	unix_admin	Amministrazione UNIX
 snippet_utils	voting	Votazione
 snippet_utils	website_only	Solo sito web
 softwaremap	title	Trove
@@ -1923,7 +2468,6 @@ source	missing_file	Argomento di file mancante
 source	missing_file_text	Deve essere specificato un nome file per questa pagina
 source	show_source	Visualizza sorgente
 source	source_of	Sorgente di $1
-staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 stats	overview_stats	Statistiche d'insieme
 stats	project_stats	Statistiche del progetto
 stats	site_graphs	Grafici del sito
@@ -1956,7 +2500,7 @@ stats_site_utils	all_projects	Tutti i progetti
 stats_site_utils	all_trkr	Tutti i tracker
 stats_site_utils	bugs	Bugs
 stats_site_utils	cls	Cls
-stats_site_utils	comma_seperated_group_id	ID dei gruppi <strong>separati da virgole</strong>)
+stats_site_utils	comma_seperated_group_id	ID dei progetti <strong>separati da virgole</strong>)
 stats_site_utils	comms	Comm's
 stats_site_utils	cos	CO's
 stats_site_utils	current_statistic_all_time	Statistiche aggregate da sempre
@@ -1965,7 +2509,7 @@ stats_site_utils	day	Giorno
 stats_site_utils	developers	Sviluppatori
 stats_site_utils	downloads	Download
 stats_site_utils	generate_report	Genera Report
-stats_site_utils	group_name	Nome gruppo
+stats_site_utils	group_name	Nome progetto
 stats_site_utils	in_trove_category	Progetti nelle categorie trove:
 stats_site_utils	last_30	ultimi 30
 stats_site_utils	month	Mese
@@ -1997,13 +2541,14 @@ stats_view_graph	date	Data
 stats_view_graph	page_views	Pagine viste di Gforge
 stats_view_graph	total_views	Numero di pagine totale viste (ROSSO) ($1 giorni)
 stats_view_graph	views	Viste (ROSSO)
-survey	for_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non è arrivato a questa pagina.
+survey	for_some_reason	Per qualche ragione, l'ID del progetto o del sondaggio non è arrivato a questa pagina.
 survey	high	alta
 survey	low	bassa
 survey	permission_denied	Utente non autorizzato
 survey	survey_not_found	Sondaggio non trovato
 survey	survey_privacy	Privacy del sondaggio
 survey	title	Sondaggi
+survey	warning_double_vote	Attenzione - stai votando una seconda volta per questo sondaggio.
 survey_add_question	add_this_question	Aggiungi questa domanda
 survey_add_question	error_insert_question	Errore nell'inserimento di questa domanda
 survey_add_question	question	Domanda
@@ -2015,7 +2560,7 @@ survey_add_survey	add_this_survey	Aggiungi questo sondaggio
 survey_add_survey	error_in_insert	Errore nell'inserimento del sondaggio
 survey_add_survey	existing_surveys	Sondaggi esistenti
 survey_add_survey	is_active	attivo?
-survey_add_survey	list_questions_numbers	Elenca il numero di domande, nell'ordine desiderato, separato da virgole. <strong>Fai riferimento alla lista delle domande</strong>in modo che puoi visualizzare gli ID delle domande.  <strong>Non</strong> includere spazi e non terminare la lista con una virgola. <br />Esempio: 1,2,3,4,5,6,7
+survey_add_survey	list_questions_numbers	Elenca il numero di domande, nell'ordine desiderato, separato da virgole. <strong>Fai riferimento alla lista delle domande</strong>in modo che puoi visualizzare gli ID delle domande. <strong>Non</strong> includere spazi e non terminare la lista con una virgola. <br />Esempio: 1,2,3,4,5,6,7
 survey_add_survey	name_of_survey	Nome del sondaggio
 survey_add_survey	no	No
 survey_add_survey	show_existing_question	Visualizza domande esistenti
@@ -2023,6 +2568,8 @@ survey_add_survey	survey_inserted	Sondaggio inserito
 survey_add_survey	title	Aggiungi sondaggio
 survey_add_survey	title_is_required	Il titolo del sondaggio è un parametro obbligatorio
 survey_add_survey	yes	Si
+survey_admin	delete	Rimuovi
+survey_admin	edit	Modifica
 survey_admin	section	Strumento per i sondaggi
 survey_admin	title	Amministrazione
 survey_admin_add_question	section	Amministrazione strumento per i sondaggi
@@ -2057,7 +2604,11 @@ survey_admin_utils	group_id	ID progetto
 survey_admin_utils	survey_id	ID sondaggio
 survey_admin_utils	survey_questions	Domande
 survey_admin_utils	survey_title	Titolo del sondaggio
+survey_edit	addable_question	Domande che si possono aggiungere
 survey_edit	change_after_already_response	I risultati dei sondaggi potrebbero essere sviati o non corretti se si cambia un sondaggio dopo che sono già state inserite risposte.
+survey_edit	delete_failed	RIMOZIONE FALLITA
+survey_edit	delete_successful	RIMOSSO
+survey_edit	existing_question	Domande in questo sondaggio
 survey_edit	existing_surveys	Sondaggi esistenti
 survey_edit	is_active	Attivo
 survey_edit	list_question_numbers	Elenca il numero delle domande, nell'ordine desiderato, separate da virgole. <strong>Fare riferimento all'elenco delle domande</strong> per vedere i singoli id. <strong>Non</strong> includere spazi o chiudere l'elenco con una virgola.<br /> Ex: 1,2,3,4,5,6,7
@@ -2087,10 +2638,27 @@ survey_edit_question	title	Modifica una domanda
 survey_edit_question	update_failed	AGGIORNAMENTO FALLITO
 survey_edit_question	update_successful	AGGIORNAMENTO EFFETTUATO
 survey_edit_question	warning_change_after_response	ATTENZIONE! Non è una buona idea cambiare una domanda quando sono state inserite risposte a questa domanda.
-survey_index	for_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non è arrivato a questa pagina.
+survey_error	error_no_valid_group_object	Group Object non valido
+survey_error	error_no_valid_question_object	Question Object non valido
+survey_error	error_no_valid_survey_object	Survey Object non valido
+survey_error	min_question_length	Domanda troppo corta
+survey_error	no_question_found	Nessuna domanda trovata
+survey_error	no_survey_data_filled	Nessun dato inserito per il sondaggio 
+survey_error	no_survey_found	Nessun sondaggio trovato
+survey_error	no_survey_response_found	Nessuna risposta ai sondaggi trovata
+survey_error	permission_denied	Non hai i permessi per accedere a questa pagina
+survey_index	for_some_reason	Per qualche ragione, l'ID del progetto o del sondaggio non è arrivato a questa pagina.
+survey_index	survey_edit	Modifica
 survey_index	survey_id	ID del sondaggio
+survey_index	survey_number_questions	Numero di domande
+survey_index	survey_number_votes	Numero di voti
+survey_index	survey_questions	Domande
+survey_index	survey_result	Risultati
+survey_index	survey_result_comments	Risultati con grafico e commenti
+survey_index	survey_result_graph	Risultati con grafico
 survey_index	survey_title	Titolo sondaggio
-survey_index	this_group_has	Questo gruppo non ha sondaggi attivi
+survey_index	survey_vote	Vota
+survey_index	this_group_has	Questo progetto non ha sondaggi attivi
 survey_index	title	Sondaggio
 survey_privacy	survey_privacy	Privacy del sondaggio
 survey_privacy	the_privacy_information	<p>Le informazioni raccolte in questi sondaggi non saranno mai vendute a terze parti oppure utilizzate per sollecitare l'acquisto di prodotti o servizi.</p><p>Questa informazione viene raccolta per costruire un profilo dei progetti e degli sviluppatori. Questo profilo darà la possibilità ai visitatori del sito di percepire la qualità di un determinato progetto.</p><p>Non è possibile per gli amministratori dei progetti vedere quali ripsoste sono state date dei singoli partecipanti.</p><p>Le informazioni raccolte vengono usate solo in modalità aggregata e non per visualizzare dati su singoli utenti o sviluppatori.</p>.<p>Se in futuro questa policy dovesse cambiare, riguarderà comunque solo dati futuri, mai quelli inseriti prima.</p>
@@ -2100,13 +2668,13 @@ survey_rating_resp	click_to_resturn	Clicca qui per tornare alla pagina precedent
 survey_rating_resp	error	ERRORE
 survey_rating_resp	error_in_insert	Errore nell'inserimento
 survey_rating_resp	error_missing	ERRORE!!! PARAMETRI MANCANTI
-survey_rating_resp	if_you_vote_again	Se voti nuovamente, il tuo vecchio voto verrà cancellato.
+survey_rating_resp	if_you_vote_again	Se voti nuovamente, il tuo vecchio voto verrà Rimosso.
 survey_rating_resp	title	Votazione
 survey_rating_resp	vote_reg	Voto registrato
 survey_rating_resp	vote_regsitered	Voto registrato
 survey_rating_resp	you_must_be_logged_in	Devi essere collegato per poter votare
 survey_resp	error	Errore
-survey_resp	error_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non è arrivato a questa pagina.
+survey_resp	error_some_reason	Per qualche ragione, l'ID del progetto o del sondaggio non è arrivato a questa pagina.
 survey_resp	regards	Saluti
 survey_resp	thank_you	Grazie per aver partecipato al sondaggio
 survey_resp	the_crew	Il team $1
@@ -2127,8 +2695,10 @@ survey_show_results	permission_denied	Permesso negato
 survey_show_results	title	Risultati sondaggio
 survey_show_results	view_aggregate_responses	Visualizza risposte aggregate
 survey_show_results_aggregate	average	Media
+survey_show_results_aggregate	comments	Commenti
 survey_show_results_aggregate	error	errore
 survey_show_results_aggregate	no	No
+survey_show_results_aggregate	no_votes	Nessun voto
 survey_show_results_aggregate	permission_denied	Permesso negato
 survey_show_results_aggregate	responses	Risposte
 survey_show_results_aggregate	title	Visualizza risultati aggregati
@@ -2143,6 +2713,8 @@ survey_survey	section	Sondaggi
 survey_survey	title	Visualizza il sondaggio
 survey_survey_resp	section	Strumento per i sondaggi
 survey_survey_resp	title	Elaborazione sondaggio / Risposte
+survey_utils	add_edit_question	Aggiungi/modifica domande
+survey_utils	add_edit_survey	Aggiungi/modifica sondaggio
 survey_utils	add_question	Aggiungi domande
 survey_utils	add_survey	Aggiungi sondaggio
 survey_utils	admin	Amministra
@@ -2152,14 +2724,15 @@ survey_utils	error_this_group_has_turned_off	Errore, questo progetto ha disabili
 survey_utils	show_results	Visualizza risultati
 system	datefmt	d/m/Y H:i
 system	locale	it_IT
-system	strftimefmt	%d %B %Y  %H:%M
+system	shortdatefmt	d-m-Y
+system	strftimefmt	%d %B %Y %H:%M
 themes	section	Preferenze dell'account
 themes	title	Vedi/Cambia il tema
 top	NA	N/A
 top	about_blurb	Vengono mantenute diverse statistiche sull'utilizzo di $1. Qui trovi quelle relative ai progetti più seguiti, nelle varie categorie.
 top	active_all_time	Progetti più attivi
 top	active_weekly	Progetti più attivi nella scorsa settimana
-top	down	Sceso $1
+top	down	Sceso di $1
 top	downloads	Download più frequenti
 top	downloads_7_days	Download più frequenti (ultimi 7 giorni)
 top	forum_posts	Forum più utilizzati
@@ -2168,7 +2741,7 @@ top	pageviews	Pagine più visitate, sul numero di visualizzazione del logo $1
 top	same	Uguale
 top	title	Progetti principali
 top	top_project	Top $1 project
-top	up	salito di $1
+top	up	Salito di $1
 top	updated_daily	Aggiornato giornalmente
 top	view_other_top_category	Visualizza altre statistiche
 top_mostactive	percentile	Percentuale
@@ -2203,6 +2776,7 @@ tracker	admin	Amministra
 tracker	any	Tutti
 tracker	assigned_to	Assegnato a
 tracker	assignee	Assegnatario
+tracker	build_query	Costruisci query
 tracker	category	Categoria
 tracker	category_any	Tutte
 tracker	changed	Modificato
@@ -2214,8 +2788,8 @@ tracker	comment_added	Commento aggiunto
 tracker	comments	commenti
 tracker	date	Data
 tracker	detailed_description	Descrizione dettagliata
-tracker	file_delete	Cancellazione file:
-tracker	file_delete_successful	Cancellazione file eseguita
+tracker	file_delete	Rimozione file:
+tracker	file_delete_successful	Rimozione file eseguita
 tracker	file_delete_upload	Carica un file
 tracker	file_description	Descrizione File
 tracker	file_upload_successful	File caricato con successo
@@ -2229,15 +2803,25 @@ tracker	item_group	Gruppo
 tracker	no_trackers	Nessun tracker trovato
 tracker	no_trackers_text	Non è stato creato nessun tracker oppure non hai le autorizzazioni per visualizzarlo.<p><FONT COLOR=RED>L'amministratore del progetto può creare tracker utilizzando la pagina di $1 amministrazione $2</FONT></strong>
 tracker	open_date	Data inserimento
-tracker	please_login	Fatti $1 riconoscere $2 , per favore
+tracker	pagetitle	Tracker
+tracker	please_login	Fatti $1 riconoscere $2, per favore
 tracker	priority	Priorità
+tracker	query_default	Ultima query
+tracker	query_delete	Rimuovi query
+tracker	query_load	Carica query
+tracker	query_make_default	Query di default
+tracker	query_name	Nome della query
+tracker	query_update	Aggiorna query
+tracker	quickbrowse	Consulta veloce
 tracker	reporting	Reportistica
 tracker	resolution	Risoluzione
+tracker	run_query	Esegui
+tracker	saved_queries	Salva modifiche
 tracker	security_note	NON inserire password o informazioni confidenziali nel tuo messaggio!
 tracker	status	Stato
 tracker	status_any	Tutti
 tracker	submitted_by	Inserito da
-tracker	submitter	Submitter
+tracker	submitter	Inserito da
 tracker	summary	Sommario
 tracker	title	Tracker
 tracker	tracker_item	Elemento tracker
@@ -2246,6 +2830,8 @@ tracker	updated_successful	Aggiornato con successo
 tracker_add	for_project	Per il progetto
 tracker_add	submit	Invia
 tracker_add	title	Aggiungi un nuovo elemento al tracker
+tracker_admin	add_artifact_types	Aggiungi tipi tracker
+tracker_admin	add_canned	Aggiungi risposte predefinite
 tracker_admin	add_canned_responses	Aggiungi/modifica risposte predefinite
 tracker_admin	add_canned_responses_info	Crea/cambia risposte predefinite per il tracker
 tracker_admin	add_categories	Aggiorna/modifica Categoria
@@ -2256,28 +2842,42 @@ tracker_admin	add_permissions	Aggiungi/modifica utenti e permessi
 tracker_admin	add_permissions_info	Aggiungi/rimuovi utenti a/da questo tracker
 tracker_admin	admin	Amministra
 tracker_admin	auto_assign_to	Assegna automaticamente a
+tracker_admin	build_selection_box	Gestisci campi personalizzati
+tracker_admin	build_selection_box_info	Aggiungi nuove combo, esempio: Fasi del progetto, componenti, etc. Una volta aggiunti, queste combo possono essere utilizzate per descrivere o per elencare tipi di elementi.
 tracker_admin	canned_response_inserted	Risposta predefinita inserita
 tracker_admin	canned_response_updated	Risposta predefinita aggiornata
-tracker_admin	category_add_warning	Una volta inserita una categoria, non può essere cancellata.
+tracker_admin	category_add_warning	Una volta inserita una categoria, non può essere rimossa.
 tracker_admin	category_inserted	Categoria inserita
 tracker_admin	category_name	Nome categoria
 tracker_admin	category_updated	Categoria aggiornata
-tracker_admin	choose_datatype	Scegli un tipo dato e imposta preferenze, gruppi, categorie, utenti e permessi
+tracker_admin	choose_datatype	Scegli un tracker e imposta preferenze, gruppi, categorie, utenti e permessi
+tracker_admin	choose_tracker	Seleziona il tracker da copiare. L'amministratore del sito dovrà impostare i tracker con valori di default e impostare i privilegi in modo tale che tu possa accedervi. 
+tracker_admin	clone_tracker	Copia Tracker
+tracker_admin	clone_warning	ATTENZIONE!!! Copiare questo tracker significa copiare tutti i campi e tutti ciò che comprendono. Se lo stesso tracker viene copiato più volte rischi di fare grande confusione!
+tracker_admin	delete	Rimuovi Tracker
+tracker_admin	delete_extrafieldwarning	Stai per rimuovere in modo permanente e irrimediabile questo campo personalizzato e tutto il suo contenuto!
+tracker_admin	delete_warning	Stai per rimuovere in modo permanente e irrimediabile questo tracker e tutto il suo contenuto!
+tracker_admin	deleted	Rimosso
 tracker_admin	error_inserting	Errore nell'inserimento
 tracker_admin	error_updating	Errore nell'aggiornamento
 tracker_admin	group_inserted	Gruppo inserito
 tracker_admin	group_name	Nome gruppo
 tracker_admin	group_updated	Gruppo aggiornato
-tracker_admin	intro	<h3>Crea un nuovo tracker</h3><p>Questo sistema permette di tracciare virtualmente qualsiasi tipo di informazione. Ogni tracker ha differenti gruppi, categorie, utenti e permessi. Si possono anche spostare elementi tra un tracker e l'altro.</p><p>I tracker sono chiamati anche "Artifact Types", e ogni particolare pezzetto di informazione è un "Artifact".  I "Bugs" possono essere un Artifact Type, mentre un singolo bug report Ã¨ un Artifact.  Puoi creare quanti Types desideri, ma ricorda che dovrai impostare le categorie, i gruppi e i permessi di ciascuno, cosa che può richiedere anche molto tempo.
+tracker_admin	intro	<h3>Crea un nuovo tracker</h3><p>Questo sistema permette di tracciare virtualmente qualsiasi tipo di informazione. Ogni tracker ha differenti gruppi, categorie, utenti e permessi. Si possono anche spostare elementi tra un tracker e l'altro.</p><p>Puoi creare quanti Tracker desideri, ma ricorda che dovrai impostare le categorie, i gruppi e i permessi di ciascuno, cosa che può richiedere anche molto tempo.
+tracker_admin	manage_extrafield	Gestisci campi personalizzati
+tracker_admin	permanently_delete_info	Rimuovi in modo permanente questo tracker
+tracker_admin	really_sure	Sono veramente sicuro.
 tracker_admin	section	Tracker
+tracker_admin	sure	Sono sicuro.
 tracker_admin	title	Amministrazione
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	Titolo
 tracker_admin	tracker_updated	Tracker aggiornato
+tracker_admin	update_artifact_types	Aggiorna impostazioni
 tracker_admin	update_preferences	Aggiorna preferenze
 tracker_admin	update_preferences_info	Imposta preferenze come tempi di scadenza, indirizzi email, etc
 tracker_admin	users_added	Utenti aggiunti
-tracker_admin	users_deleted	Utenti cancellati
+tracker_admin	users_deleted	Utenti rimossi
 tracker_admin	users_updated	Utenti aggiornati
 tracker_admin_add_canned	canned_response_body	Contenuto del messaggio
 tracker_admin_add_canned	canned_response_info	Può essere molto utile creare messaggi generici che ti permettono di risparmiare molto tempo quando bisogna trattare molte richieste simili.
@@ -2287,7 +2887,7 @@ tracker_admin_add_canned	no_responses	Nessuna risposta predefinita per questo pr
 tracker_admin_add_canned	title	Aggiungi/modifica risposte predefinite per $1
 tracker_admin_add_cat	no_categories	Nessuna categoria definita
 tracker_admin_add_cat	title	Aggiungi categorie a $1
-tracker_admin_add_group	group_add_warning	Una volta aggiunto un gruppo, non può essere cancellato
+tracker_admin_add_group	group_add_warning	Una volta aggiunto un gruppo, non può essere Rimosso
 tracker_admin_add_group	no_groups_defined	Nessun gruppo definito
 tracker_admin_add_group	title	Aggiungi/modifica gruppi per $1
 tracker_admin_add_users	add_all_users	Aggiungi tutti gli utenti
@@ -2295,7 +2895,7 @@ tracker_admin_add_users	add_user_info	<h3>Aggiungi utenti:</h3><p>Puoi seleziona
 tracker_admin_add_users	add_users	Aggiungi utenti
 tracker_admin_add_users	admin_only	Solo amministratori
 tracker_admin_add_users	category_permission	Permessi
-tracker_admin_add_users	delete	Cancella
+tracker_admin_add_users	delete	Rimuovi
 tracker_admin_add_users	developers_info	<p>Ogni tracker definito ha un proprio elenco di utenti e permessi.</p><p>Aggiungi utenti al tracker, poi aggiorna i loro permessi.</p><p><dl><dt><strong>Tecnici</strong></dt><dd>Ai tecnici può essere assegnato un elemento</dd><dt><strong>Amministratori</strong></dt><dd>Gli amministratori possono modificare gli elementi</dd></dl></p>
 tracker_admin_add_users	no_developers	Nessuno sviluppatore inserito
 tracker_admin_add_users	tech_admin	Tecnico & Amministratore
@@ -2303,7 +2903,68 @@ tracker_admin_add_users	technician	Tecnico
 tracker_admin_add_users	title	Aggiungi/aggiorna permessi utenti per $1
 tracker_admin_add_users	update_permissions	Aggiorna permessi utenti
 tracker_admin_add_users	user_name	Nome utente
+tracker_admin_build_boxes	add_field	Aggiungi nuovo campo personalizzato
+tracker_admin_build_boxes	alias	Alias del campo
+tracker_admin_build_boxes	box_add_choices	aggiungi scelte
+tracker_admin_build_boxes	box_change_warning	Non è consigliabile cambiare il nome del campo personalizzato poiché altri elementi dipendono dal nome.
+tracker_admin_build_boxes	box_name	Nome campo personalizzato
+tracker_admin_build_boxes	box_name_inserted	Campo aggiuntivo inserito
+tracker_admin_build_boxes	box_name_updated	Campo personalizzato aggiornato
+tracker_admin_build_boxes	box_sizeattr1	Dimensione campo testo/righe area testo
+tracker_admin_build_boxes	box_sizeattr2	Lunghezza massima campo testo/colonne area testo
+tracker_admin_build_boxes	box_sizerows	Per i tipi campo testo e area di testo è necessario definire rispettivamente una dimensione/dimensione massima e il numero di righe/colonne.
+tracker_admin_build_boxes	box_status	Stato
+tracker_admin_build_boxes	box_type	Tipo del campo personalizzato
+tracker_admin_build_boxes	box_type_checkbox	Check Box
+tracker_admin_build_boxes	box_type_multiselect	Casella di scelta multipla (multi-select)
+tracker_admin_build_boxes	box_type_radio	Radio buttons
+tracker_admin_build_boxes	box_type_select	Casella di selezione (Select)
+tracker_admin_build_boxes	box_type_status	Stato
+tracker_admin_build_boxes	box_type_text	Campo testo
+tracker_admin_build_boxes	box_type_textarea	Area di testo
+tracker_admin_build_boxes	box_update_title	Modifica un campo personalizzato in: $1
+tracker_admin_build_boxes	choice_change_warning	Non è consigliabile cambiare il nome dell'elemento poiché ci possono essere referenze a questo oggetto; anche queste referenze verranno rinominate.
+tracker_admin_build_boxes	choice_inserted	Elemento inserito
+tracker_admin_build_boxes	choice_updated	Elemento aggiornato
+tracker_admin_build_boxes	choice_warning	Una volta aggiunto un nuovo elemento, non può più essere rimosso.
+tracker_admin_build_boxes	conflicting_alias	'$1' è in conflitto con un altro alias. Scegliere un altro nome.
+tracker_admin_build_boxes	copy	Copia
+tracker_admin_build_boxes	delete	Rimuovi
+tracker_admin_build_boxes	delete_template	Rimuovi template
+tracker_admin_build_boxes	download_template	Scarica template di default
+tracker_admin_build_boxes	edit	Modifica
+tracker_admin_build_boxes	error_inserting_box	Errore durante l'inserimento di un campo personalizzato
+tracker_admin_build_boxes	error_inserting_choice	Errore durante l'inserimento di un elemento
+tracker_admin_build_boxes	error_updating	Errore durante l'aggiornamento di un campo personalizzato
+tracker_admin_build_boxes	extrafield_deleted	Campo personalizzato Rimosso
+tracker_admin_build_boxes	invalid_alias	L'alias contiene caratteri non validi; sono ammessi solo lettere, numeri, - e _.
+tracker_admin_build_boxes	manage_template	Template per la visualizzazione del campo personalizzato
+tracker_admin_build_boxes	no_box	Non sono stati definiti campi personalizzati
+tracker_admin_build_boxes	no_choice	Non è stato definito alcun elemento
+tracker_admin_build_boxes	opt_add_name	Aggiungi nuovo elemento
+tracker_admin_build_boxes	opt_name	Elemento
+tracker_admin_build_boxes	opt_title	Aggiungi/aggiorna campi personalizzati in: $1
+tracker_admin_build_boxes	opt_update_title	Modifica un elemento in: $1
+tracker_admin_build_boxes	required_alias	L'Alias è obbligatorio
+tracker_admin_build_boxes	required_box_name	il nome campo è obbligatorio
+tracker_admin_build_boxes	required_choice_name	nome elemento è obbligatorio
+tracker_admin_build_boxes	reserved_alias	'$1' è un alias riservato. Scegliere un nome diverso.
+tracker_admin_build_boxes	status_any	Tutti
+tracker_admin_build_boxes	title	Gestisci campi personalizzati
+tracker_admin_build_boxes	tracker_box_add_options	Aggiungi opzioni
+tracker_admin_build_boxes	tracker_box_id	ID
+tracker_admin_build_boxes	tracker_box_option_add	Aggiungi/aggiorna
+tracker_admin_build_boxes	tracker_box_option_title	Elementi definiti
+tracker_admin_build_boxes	tracker_box_title	Campi personalizzati definiti
+tracker_admin_build_boxes	tracker_box_type	Tipo
+tracker_admin_build_boxes	tracker_choice_id	ID
+tracker_admin_build_boxes	upload_template	Aggiungi/aggiorna template
 tracker_admin_choose	title	Amministrazione tracker
+tracker_admin_copy	choices_title	Copia scelte dal campo personalizzato $1
+tracker_admin_copy	copy_choices	Clicca qui per copiare questi elementi in altri tracker.
+tracker_admin_copy	from_box	Copia da
+tracker_admin_copy	into_box	nei tracker e campi personalizzati
+tracker_admin_copy_cat	title	Copia categorie da $1
 tracker_admin_update_canned	title	Modifica risposte predefinite per: $1
 tracker_admin_update_cat	auto_assign_to	Assegna automaticamente a
 tracker_admin_update_cat	category_change_warning	Si sconsiglia vivamente di cambiare il nome alla categoria, perché altre informazioni dipendono da questo. Quando cambi il nome di una categoria, verrà cambiato il nome a tutti i dati relativi.
@@ -2324,10 +2985,18 @@ tracker_admin_update_type	send_submissions	Invia email per nuovi inserimenti all
 tracker_admin_update_type	submit_item_form_text	Testo libero per la pagina di inserimento di un nuovo elemento
 tracker_admin_update_type	title	Aggiorna $1
 tracker_admin_update_users	title	Aggiungi/modifica permessi utenti
+tracker_artifact	are_you_sure_delete	Sei sicuro di voler rimuovere questo tracker?
+tracker_artifact	confirm_delete	Sì, voglio rimuovere questo tracker
+tracker_artifact	delete_failed	Rimozione fallita
+tracker_artifact	delete_failed_confirm	Conferma fallita; tracker non rimosso
+tracker_artifact	delete_text	Rimuovi questo tracker
+tracker_artifact	deleted_successfully	Tracker Rimosso
+tracker_artifact	deleted_title	Rimuovi un tracker
 tracker_artifact	double_submit	Hai cercato di inserire due volte lo stesso messaggio. Cerca di evitare il doppio-click.
-tracker_artifact	error_admin_modify	Artifact: Solo amministratori possono modificare ArtifactTypes privati
+tracker_artifact	error_admin_modify	Tracker: Solo amministratori possono modificare Tracker privati
 tracker_artifact	error_body_required	Il contenuto è obbligatorio
-tracker_artifact	error_no_anonymous	Artifact: Questo tipo di artifact non permette inserimenti come anonimo.
+tracker_artifact	error_no_anonymous	Tracker: Questo tracker non permette inserimenti come anonimo.
+tracker_artifact	error_remap_status	Elemento: errore nel cambio stato
 tracker_artifact	error_summary_required	Il sommario è obbligatorio
 tracker_artifact	error_valid_email_required	È richiesto un indirizzo email valido
 tracker_artifact	logged_in_no	Collegato: NO
@@ -2335,7 +3004,7 @@ tracker_artifact	logged_in_yes	Collegato: SI
 tracker_artifact	monitoring_activated	Notifica attivata
 tracker_artifact	monitoring_deactivated	Notifica disattivata
 tracker_artifact	nothing_changed	Nessuna modifica inserita - aggiornamento annullato
-tracker_artifact	private_error	Solo membri del gruppo possono vedere elementi privati
+tracker_artifact	private_error	Solo membri del progetto possono vedere tracker privati
 tracker_artifactfile	required_fields	Nome file, tipo, dimensione e data sono campi obbligatori
 tracker_artifactgroup	required_field	Nome è un campo obbligatorio
 tracker_artifacthtml	by	Da
@@ -2346,19 +3015,25 @@ tracker_artifacthtml	no_changes	Non sono state effettuate modifiche
 tracker_artifacthtml	no_followups	Non sono stati inseriti commenti
 tracker_artifacthtml	old_value	Valore precedente
 tracker_artifacthtml	sender	Mittente
-tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
+tracker_artifacttype	add_artifact_types	Aggiunti/consulta Tracker
 tracker_artifacttype	admin	Amministra
 tracker_artifacttype	admin_functions	Funzioni di amministrazione
 tracker_artifacttype	browse	Consulta
+tracker_artifacttype	csv	Scarica .csv
 tracker_artifacttype	edit_options	Modifica/aggiorna le opzioni in
+tracker_artifacttype	invalid_emails	Indirizzi e-mail non validi
+tracker_artifacttype	monitoring_activated	Notifica attivata
+tracker_artifacttype	monitoring_deactivated	Notifica disattivata
 tracker_artifacttype	nobody	Nessuno
 tracker_artifacttype	none	Nessuno
+tracker_artifacttype	query	Query
 tracker_artifacttype	reporting	Reportistica
-tracker_artifacttype	required_fields	Nome, descrizione, fuori tempo e tempo scaduto sono campi obbligatori
+tracker_artifacttype	required_fields	Nome, descrizione, il numero di giorni dopo il quale l'elemento è da considerarsi fuori tempo e il numero di giorni dopo i quali elementi in attes di conferma scadono sono campi obbligatori
 tracker_artifacttype	submit_new	Inserisci nuovo
 tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
 tracker_browse	ascending	Ascendente
 tracker_browse	canned_response	Risposta predefinita
+tracker_browse	change_any	Tutti
 tracker_browse	check_all	Seleziona&nbsp;tutti
 tracker_browse	clear_all	Deseleziona&nbsp;tutti
 tracker_browse	day7	Ultimi 7 giorni
@@ -2392,19 +3067,26 @@ tracker_mod	changelog	Change Log
 tracker_mod	data_type	Tipo dato
 tracker_mod	date_closed	Data di chiusura
 tracker_mod	date_submitted	Data di inserimento
-tracker_mod	delete	Cancella
+tracker_mod	delete	Rimuovi
 tracker_mod	description	Descrizione
 tracker_mod	download	Download
 tracker_mod	existing_files	File esistenti
 tracker_mod	name	Nome
 tracker_mod	no_files	Nessun file inserito
 tracker_mod	title	Modifica
-tracker_reporting	aging_report	Aging Report
+tracker_monitor	monitor	Notifica
+tracker_monitor	monitoring_activated	Notifica attivata
+tracker_monitor	monitoring_deactivated	Monitoraggio disattivato
+tracker_monitor	monitorstop	Termina notifica
+tracker_query	closedaterange	Intervallo data di chiusura
+tracker_query	moddaterange	Intervallo ultima data di modifica
+tracker_query	opendaterange	Intervallo data di apertura
+tracker_reporting	aging_report	Reportistica sulla anziantità
 tracker_reporting	all_by_group	Tutti gli elementi per gruppo
 tracker_reporting	all_by_resolution	Tutti gli elementi per risoluzione
 tracker_reporting	all_by_technician	Tutti gli elementi per categoria
 tracker_reporting	all_items_by_technician	Tutti gli elementi per tecnico
-tracker_reporting	artifact_type	Tipo dato
+tracker_reporting	artifact_type	Tracker
 tracker_reporting	average_turnaround	Tempo medio di chiusura (giorni)
 tracker_reporting	dist_by_category	Distribuzione per categoria
 tracker_reporting	dist_by_group	Distribuzione per gruppo
@@ -2428,7 +3110,7 @@ tracker_utils	monitor	Notifica
 tracker_utils	stop_monitoring	Fine notifica
 trove	not_categorized	Questo progetto non è ancora stato categorizzato nella
 trove	title	Mappa del software Trove
-trove_list	browse_by	Visualizza per
+trove_list	browse_by	Consulta per
 trove_list	invalid_category_text	La categoria Trove richiesta non è valida
 trove_list	invalid_category_title	Categoria Trove non valida
 trove_list	limiting_view	Filtro impostato sulle seguenti categorie
@@ -2465,11 +3147,7 @@ user_home	user_id	Id utente
 users	no_user_name	Nessun nome utente specificato
 users	optout	Hai selezionato di non partecipare alle valutazioni, altrimenti avresti la possibilità di valutare questo utente. Vai nella <a href="/account/">gestione del tuo account</a> per maggiori informazioni.
 users	peerinfo1	<p>Se conosci questo utente, prenditi un minuto per valutarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.</p><p>Il sistema di valutazioni $1 si basa su concetti presi da <A HREF="http://www.advogato.com/">Advogato</A>. Il sistema è stato re-implementato ed espanso in vari modi.</p>
-users	peerinfo2	<p>La casella delle valutazioni visualizza tutte le valutazioni per ogni criterio. I numeri includono valutazioni sia da utenti verificati che non.</p><ul><li>Il campo "Posizione globale"  mostra la posizione dell'utente rispetto a tutti gli altri utenti valutati di $1.</li><li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted".</li><li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sarà dato alle valutazioni di altri utenti  -- valutazioni di utenti più valutati avranno un peso maggiore.</ul><p><i>Se non vuoi partecipare dal sistema di valutazione (ciò avrà effetto sia sulla possibilità di essere votato che sulla possibilità di votare gli altri utenti), vai alla tua pagina di <a href="/account/">opzioni account</a>. Se scegli di non partecipare, le tue valutazioni degli altri utenti saranno cancellate e la casella delle 'Votazioni' scomparirà dalla tua homepage.</i></p>
+users	peerinfo2	<p>La casella delle valutazioni visualizza tutte le valutazioni per ogni criterio. I numeri includono valutazioni sia da utenti verificati che non.</p><ul><li>Il campo "Posizione globale" mostra la posizione dell'utente rispetto a tutti gli altri utenti valutati di $1.</li><li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted".</li><li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sarà dato alle valutazioni di altri utenti -- valutazioni di utenti più valutati avranno un peso maggiore.</ul><p><i>Se non vuoi partecipare dal sistema di valutazione (ciò avrà effetto sia sulla possibilità di essere votato che sulla possibilità di votare gli altri utenti), vai alla tua pagina di <a href="/account/">opzioni account</a>. Se scegli di non partecipare, le tue valutazioni degli altri utenti saranno rimosse e la casella delle 'Votazioni' scomparirà dalla tua homepage.</i></p>
 users	title	Sommario utente
 users	user_not_exist_text	Utente non valido
 users	user_not_exist_title	L'utente non esiste
-send_pending_items_mail	pm_subject	Notifica di attività scadute
-send_pending_items_mail	pm_message	Questa mail viene inviata per ricordare che ci sono attività scadute. \nL'attività  #$1 è scaduta: \nSommario: $2\nInserito da: $4\nStato:$5\nPercentuale completamento: $6\n\nClicca qui per andare all'attività $3
-send_pending_items_mail	tracker_subject	Notifica di elementi del tracker scaduti
-send_pending_items_mail	tracker_message	Questa mail viene inviata per ricordare che ci sono elementi del tracker scaduti. L'elemento #$1 è scaduto: \nSommario: $3\nStato: $5\nData inserimento:$6\nAssegnato a: $7\nInserito da: $8\nDettagli: $9\n\n\nClicca qui per andare all'elemento: $4

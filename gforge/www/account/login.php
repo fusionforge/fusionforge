@@ -60,8 +60,6 @@ if (session_issecure()) {
 
 // ###### first check for valid login, if so, redirect
 
-$form_loginname=htmlspecialchars($form_loginname);
-
 if ($login) {
 	$success=session_login_valid(strtolower($form_loginname),$form_pw);
 	if ($success) {
@@ -92,7 +90,7 @@ if ($login && !$success) {
 		
 	// Account Pending
 	if ($userstatus == "P") {
-		$feedback = $Language->getText('account_login', 'pending_account', array($form_loginname));
+		$feedback = $Language->getText('account_login', 'pending_account', array(htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {
 			$feedback .= '<br />'.$Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
