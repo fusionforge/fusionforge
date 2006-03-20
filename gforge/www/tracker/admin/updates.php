@@ -292,7 +292,7 @@
 		//
 		//	Upload template
 		//
-		} elseif (getStringFromTemplate('uploadtemplate')) {
+		} elseif (getStringFromRequest('uploadtemplate')) {
 
 			$input_file = getUploadedFile('input_file');
 			if (!util_check_fileupload($input_file)) {
@@ -300,7 +300,7 @@
 				exit;
 			}
 			$size = $input_file['size'];
-			$input_data = addslashes(fread(fopen($input_file['name'], 'r'), $size));
+			$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
 
 			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
 			echo db_error();
