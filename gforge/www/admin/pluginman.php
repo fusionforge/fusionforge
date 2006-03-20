@@ -59,6 +59,7 @@ if (getStringFromRequest('update')) {
 				exit_error("SQL ERROR",db_error());
 			} else {
 				$feedback .= $Language->getText('pluginman','userdeleted',db_affected_rows($res));
+				$feedback .= '<br>Database said: '.db_error();
 			}
 		}
 		if (getStringFromRequest('delgroups')) {
@@ -141,6 +142,7 @@ if (getStringFromRequest('update')) {
 
 }
 
+echo $feedback.'<br>';
 echo $Language->getText('pluginman','notice');
 $title_arr = array( $Language->getText('pluginman','name'),
 				$Language->getText('pluginman','status'),
