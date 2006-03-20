@@ -249,7 +249,12 @@ class Artifact extends Error {
 			('".$this->ArtifactType->getID()."','$status_id','$priority',
 			'$user','$assigned_to','". time() ."','". htmlspecialchars($summary)."','". htmlspecialchars($details)."')";
 		$res=db_query($sql);
-
+		if (!$res) {
+			$this->setError('Artifact: '.db_error());
+			db_rollback();
+			return false;
+		}
+		
 		$artifact_id=db_insertid($res,'artifact','artifact_id');
 
 		if (!$res || !$artifact_id) {
