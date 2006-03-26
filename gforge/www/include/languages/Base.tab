@@ -1130,6 +1130,7 @@ group	project_developers	Developers
 group	public_area	Public Areas
 group	registered	Registered:&nbsp;
 group	short_admin	Admin
+group	short_activity	Activity
 group	short_bugs	Bugs
 group	short_scm	SCM
 group	short_docman	Docs
@@ -1747,6 +1748,12 @@ frs_admin	delete_package_warning	You are about to permanently and irretrievably 
 frs_admin	delete_release_warning	You are about to permanently and irretrievably delete this release and its files!
 frs_admin	sure	I'm Sure
 frs_admin	really_sure	I'm Really Sure
+projectactivity	headertime	Time
+projectactivity	headertype	Activity
+projectactivity	headerperson	By
+projectactivity	headeractivity	Activity
+projectactivity	startdate	Start
+projectactivity	enddate	End
 project_admin	add_user	Add User
 project_admin	acceptpending	Accept
 project_admin	rejectpending	Reject
