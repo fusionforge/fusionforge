@@ -1,3 +1,7 @@
+2006-03-27 Daniel Perez <daniel@gforgegroup.com>
+	* Fixed bug : Capital letters with "stress marks" are wrong in language/Spanish.tab
+		http://gforge.org/tracker/?func=detail&aid=2099&group_id=1&atid=105
+
 2006-03-20 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Fixes bug in tracker template upload
 		http://gforge.org/tracker/?func=detail&aid=2000&group_id=1&atid=106
