@@ -94,7 +94,12 @@ if ($projectName) {
 	// pipe the results
 	if ($external_scm) {
 		//$server_script = "/cgi-bin/cvsweb";
-		$server_script = $GLOBALS["sys_path_to_scmweb"]."/cvsweb";
+		
+		$scmweb = $GLOBALS["sys_path_to_scmweb"];
+		// remove trailing slash
+		$scmweb = preg_replace("/\\/\$/", "", $scmweb);
+		
+		$server_script = $scmweb."/cvsweb";
 		// remove leading / (if any)
 		$server_script = preg_replace("/^\\//", "", $server_script); 
 		
