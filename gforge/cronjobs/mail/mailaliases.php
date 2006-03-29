@@ -28,6 +28,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+define('FILE_EXTENSION','.new'); // use .new when testing
+
 /*
 
 NOTE - THIS SQL CAN BE USED ON A SECOND SERVER TO GRANT ONLY THE NEEDED PERMS
@@ -51,33 +53,38 @@ $path_to_cronjobs = dirname(dirname(__FILE__));
 // You should also modify this to the correct PHP path and extra configuration (if needed)
 $php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
 
-if (!file_exists('/etc/aliases.org')) {
-	$err .= "CANNOT PROCEED - you must first backup your /etc/aliases file";
-	exit;
+
+$aliases_orig = file("/etc/aliases");
+$aliases = array();
+
+for ($i=0; $i < count($aliases_orig); $i++) {
+	$line = trim($aliases_orig[$i]);
+	// Skip the GForge aliases (will be written later)
+	if (preg_match("/^[[:blank:]]*#GFORGEBEGIN/", $line)) {
+		do {
+			$i++;
+			$line = trim($aliases_orig[$i]);
+		} while ($i < count($aliases_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
+		
+		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
+		if ($i >= (count($aliases_orig)-1)) break;
+		
+		// read next line
+		$i++;
+		$line = trim($aliases_orig[$i]);
+	}
+	
+	// empty line or comment
+	if (empty($line) || preg_match('/^#/', $line)) continue;
+	
+	list($alias_name, $alias) = explode(':', $line, 2);
+	$alias_name = trim($alias_name);
+	$alias = trim($alias);
+	$aliases[$alias_name] = $alias;
 }
 
-//
-//	Write out all the aliases
-//
-$fp = fopen("/etc/aliases","w");
-if (!($fp)) {
-	$err .= ("ERROR: unable to open target file\n");
-	exit;
-}
-
-//
-//	Read in the "default" aliases
-//
-$h = fopen("/etc/aliases.org","r");
-$aliascontents = fread($h,filesize("/etc/aliases.org"));
-$aliaslines = explode("\n",$aliascontents);
-for($k = 0; $k < count($aliaslines); $k++) {
-	$aliasline = explode(":",$aliaslines[$k]);
-	$def_aliases[strtolower($aliasline[0])]=1;
-	fwrite($fp,$aliaslines[$k]."\n");
-}
-$err .= "\n$k Alias Lines";
-fclose($h);
+// Now generate the GForge aliases
+$gforge_aliases = array();
 
 //
 //	Set up the forum aliases
@@ -89,12 +96,13 @@ if ($sys_use_forum) {
 		AND groups.status='A'");
 	for ($forres=0; $forres<db_numrows($resforum); $forres++) {
 		$forname=strtolower(db_result($resforum,$forres,'unix_group_name').'-'.strtolower(db_result($resforum,$forres,'forum_name')));
-		if ($def_aliases[$forname]) {
-			//alias is already taken - perhaps by default
-		} else {
-			$def_aliases[$forname]=1;
-			fwrite($fp,"$forname:	\"|".$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name'))."\"\n");
+		
+		if (array_key_exists($forname, $aliases)) {
+			// A GForge alias was found outside the markers
+			unset($aliases[$forname]);
 		}
+		
+		$gforge_aliases[$forname] = '"|'.$php_command." ".$path_to_cronjobs."/forum_gateway.php ".db_result($resforum,$forres,'unix_group_name')." ".strtolower(db_result($resforum,$forres,'forum_name')).'"';
 	}
 }
 
@@ -117,16 +125,17 @@ if ($sys_use_tracker) {
 		if (strpos($trackername, ' ') !== false) {
 			$trackername = '"'.$trackername.'"';
 		}
-		if ($def_aliases[$trackername]) {
-			//alias is already taken - perhaps by default
-		} else {
-			$def_aliases[$trackername]=1;
-			fwrite($fp,"$trackername:	\"|".$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
+		
+		if (array_key_exists($trackername, $aliases)) {
+			// A GForge alias was found outside the markers
+			unset($aliases[$trackername]);
 		}
+		
+		$gforge_aliases[$trackername] = '"|'.$php_command." ".$path_to_cronjobs."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id')).'"';
 	}
 }
 
-if ($sys_use_mail) {
+if ($sys_use_mail && file_exists("/tmp/mailman-aliases")) {
 	//
 	//	Read in the mailman aliases
 	//
@@ -134,13 +143,19 @@ if ($sys_use_mail) {
 	$mailmancontents = fread($h2,filesize("/tmp/mailman-aliases"));
 	$mailmanlines = explode("\n",$mailmancontents);
 	for	($k = 0; $k < count($mailmanlines); $k++) {
-		$mailmanline = explode(":",$mailmanlines[$k]);
-		if ($def_aliases[strtolower($mailmanline[0])]) {
-			//alias is already taken - perhaps by default
-		} else {
-			$def_aliases[strtolower($mailmanline[0])]=1;
-			fwrite($fp,$mailmanlines[$k]."\n");
+		$mailmanline = explode(":",$mailmanlines[$k], 2);
+		
+		$alias = trim($mailmanline[0]);
+		$command = trim($mailmanline[1]);
+		
+		if (empty($alias)) continue;
+		
+		if (array_key_exists($alias, $aliases)) {
+			// A GForge alias was found outside the markers
+			unset($aliases[$alias]);
 		}
+		
+		$gforge_aliases[$alias] = $command;
 	}
 	$err .= "\n$k Mailman Lines";
 	fclose($h2);
@@ -158,14 +173,30 @@ $rows=db_numrows($res);
 for ($i=0; $i<$rows; $i++) {
 	$user = db_result($res,$i,0);
     $email = db_result($res,$i,1);
-	if ($def_aliases[$user]) {
-		//alias is already taken - perhaps by default or by a mailing list
-	} else {
-		fwrite($fp, $user . ": " . $email . "\n");
+    
+	if (array_key_exists($user, $aliases)) {
+		// A GForge alias was found outside the markers
+		unset($aliases[$user]);
 	}
+	
+	$gforge_aliases[$user] = $email;
 }
 
-fclose($fp);
+
+//
+// Now write all the aliases
+//
+$fh = fopen("/etc/aliases".FILE_EXTENSION, "w");
+foreach ($aliases as $aliasname => $alias) {
+	fwrite($fh, "$aliasname: \t\t $alias\n");
+}
+fputs($fh, "#GFORGEBEGIN\n");
+foreach ($gforge_aliases as $aliasname => $alias) {
+	fwrite($fh, "$aliasname: \t\t $alias\n");
+}
+fputs($fh, "#GFORGEEND\n");
+fclose($fh);
+
 
 db_free_result($res);
 $ok = `newaliases`;
