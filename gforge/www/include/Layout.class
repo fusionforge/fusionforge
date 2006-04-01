@@ -27,20 +27,6 @@ class Layout extends Error {
 	 * @var		string	$imgroot
 	 */
 	var $imgroot = '/themes/gforge/images/';
-	var $COLOR_CONTENT_BACK= '#ffffff';
-	var $COLOR_LTBACK1= '#eeeeef';
-	var $COLOR_LTBACK2= '#fafafa';
-	var $COLOR_SELECTED_TAB= '#e0e0e0';
-	var $COLOR_HTMLBOX_TITLE = '#bbbbbb';
-	var $COLOR_HTMLBOX_BACK = '#eaecef';
-	var $FONT_CONTENT = 'helvetica';
-	var $FONT_HTMLBOX_TITLE = 'helvetica';
-	var $FONTCOLOR_HTMLBOX_TITLE = '#333333';
-	var $FONTCOLOR_CONTENT = '#333333';
-	var $FONTSIZE = 'small';
-	var $FONTSIZE_SMALLER='x-small';
-	var $FONTSIZE_SMALLEST='xx-small';
-	var $FONTSIZE_HTMLBOX_TITLE = 'small';
 	var $bgpri = array();
 
 	/**
@@ -62,38 +48,6 @@ class Layout extends Error {
 		$bgpri[4] = '#daaaaa';
 		$bgpri[5] = '#da8a8a';
 
-		//determine font for this platform
-		if (browser_is_windows() && browser_is_ie()) {
-
-			//ie needs smaller fonts
-			$this->FONTSIZE='x-small';
-			$this->FONTSIZE_SMALLER='xx-small';
-			$this->FONTSIZE_SMALLEST='7pt';
-
-		} else if (browser_is_windows()) {
-
-			//netscape on wintel
-			$this->FONTSIZE='small';
-			$this->FONTSIZE_SMALLER='x-small';
-			$this->FONTSIZE_SMALLEST='x-small';
-
-		} else if (browser_is_mac()){
-
-			//mac users need bigger fonts
-			$this->FONTSIZE='medium';
-			$this->FONTSIZE_SMALLER='small';
-			$this->FONTSIZE_SMALLEST='x-small';
-
-		} else {
-
-			//linux and other users
-			$this->FONTSIZE='small';
-			$this->FONTSIZE_SMALLER='x-small';
-			$this->FONTSIZE_SMALLEST='xx-small';
-
-		}
-
-		$this->FONTSIZE_HTMLBOX_TITLE = $this->FONTSIZE;
 	}
 
 	/**
@@ -107,11 +61,11 @@ class Layout extends Error {
 	}
 
 	/**
-	 *	header() - "steel theme" top of page
+	 *	headerStart() - common code for all themes
 	 *
 	 * @param	array	Header parameters array
 	 */
-	function header($params) {
+	function headerStart($params) {
 		global $Language;
 
 		if (!$params['title']) {
@@ -139,8 +93,6 @@ class Layout extends Error {
 			echo $activity;
 		}
 	?>
-}
-
 	<script language="JavaScript" type="text/javascript">
 	<!--
 
@@ -154,62 +106,15 @@ class Layout extends Error {
 	// -->
 	<?php plugin_hook ("javascript",false) ; ?>
 	</script>
-<?php
-/*
-
-
-
-	WARNING - changing this font call can affect
-	INTERNATIONALIZATION
-
-
-*/
-
-
-		//gets font from Language Object
-		$site_fonts=$GLOBALS['Language']->getFont();
-
-	?>
-
-<style type="text/css">
-	<!--
-	BODY {
-		margin-top: 3;
-		margin-left: 3;
-		margin-right: 3;
-		margin-bottom: 3;
-		background-image: url("<?php echo $this->imgroot; ?>theme-top-blue.png");
-	}
-	ol,ul,p,body,td,tr,th,form { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>;
-		color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
-
-	h1 { font-size: x-large; font-family: <?php echo $site_fonts; ?>; }
-	h2 { font-size: large; font-family: <?php echo $site_fonts; ?>; }
-	h3 { font-size: medium; font-family: <?php echo $site_fonts; ?>; }
-	h4 { font-size: small; font-family: <?php echo $site_fonts; ?>; }
-	h5 { font-size: x-small; font-family: <?php echo $site_fonts; ?>; }
-	h6 { font-size: xx-small; font-family: <?php echo $site_fonts; ?>; }
-
-	pre,tt { font-family: courier,sans-serif }
-
-	a:link { text-decoration:none; color: #0000be }
-	a:visited { text-decoration:none; color: #0000be }
-	a:active { text-decoration:none }
-	a:hover { text-decoration:underline; color:red }
-
-	.titlebar { color: black; text-decoration: none; font-weight: bold; }
-	a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink { color: #0000be; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:visited { color: #0000be; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:hover { text-decoration: none; color: #0000be; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	<?php plugin_hook ("cssstyle",$this) ; ?>
-	-->
-</style>
 <?php plugin_hook ('cssfile',$this); ?>
 </head>
+<?php 
 
+	} 
+
+	function header($params) {
+
+		$this->headerStart($params); ?>
 <body>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -331,6 +236,11 @@ if (isset($params['group']) && $params['group']) {
 		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
 	</tr>
 </table>
+<?php
+		$this->footerEnd($params);
+	}
+
+	function footerEnd($params) { ?>
 
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <br />
