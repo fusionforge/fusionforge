@@ -20,20 +20,12 @@
 #
 menu	account_maintenance	Vedlikehold av brukerinformasjon
 menu	bookmark_page	Bokmerke
-home	breaking_down_barriers	Gj&oslash;r det lettere &aring; utvikle Open Source programvare
-menu	change_my_theme	Nytt webtema
-menu	code_snippet_library	Kodebibliotek
-menu	compile_farm	Komplieringsverksted
-group	developers	Utvikler
 group	developer_info	Utviklerinformasjon
-menu	discussion_forums	Diskusjonsfora
-menu	documentation	Dokumentasjon
 frs	file_download	Last ned
 frs	file_monitor	Overv&aring;k
 frs	file_notes	Notater
 frs	file_package	Pakke
 frs	file_version	Versjon
-group	long_bugs	Feilretting
 group	long_scm	SCM-repository
 group	long_docman	Administrere prosjektdokumentsjon
 group	long_forum	&Aring;pne fora
@@ -41,9 +33,7 @@ group	long_ftp	Anonym FTP-tilgang
 group	long_homepage	Prosjektside
 group	long_mail	Epostlister
 group	long_news	Siste nyheter
-group	long_patch	Administrere retting
 group	long_pm	Prosjektstyring
-group	long_support	Administrere brukerst&oslash;tte
 group	long_survey	Sp&oslash;rreunders&oslash;kelser
 group	short_bugs	Feil
 group	short_scm	SCM
@@ -52,7 +42,6 @@ group	short_files	Files
 group	short_forum	Fora
 group	short_homepage	Hjemmeside
 group	short_mail	Epostlister
-group	short_main	Topp
 group	short_news	Nyheter
 group	short_patch	Rettinger
 group	short_pm	Oppgaver
@@ -67,19 +56,11 @@ menu	logout	Logg av
 home	most_active_this_week	Mest aktive denne uken
 menu	my_personal_page	Min side
 menu	new_project	Meld inn et nytt prosjekt
-menu	new_releases	Nye utgaver
 menu	new_user	Ny bruker via SSL
-menu	other_site_mirrors	Speil
-menu	project_admin	Prosjektadministrator
 group	project_admins	Prosjektadministratorer
 menu	project_help_wanted	Prosjekthjelp s&oslash;kes
-menu	project_summary	Prosjektoversikt
 group	public_area	Fellesområde
 menu	search	S&oslash;k
-menu	software_map	Programvareoversikt
 home	gforge_statistics	GForge statistikk
-menu	top_projects	Topp-prosjekter
 home	top_project_downloads	Flest nedlastinger
-conf	content_encoding	UTF-8
-conf	language_id	9
 conf	mail_charset	UTF-8

@@ -31,10 +31,8 @@ account_change_email	invalid_email	유효하지 않은 메일주소입니다.
 account_change_email	mailsent	<P>새로 입력하신 이메일 주소로 메일이 전송되었습니다. 이메일 주소 변경을 완료하시려면 지금 보내드린 이메일 내용을 잘 읽어 보시기 바랍니다. <P><A href="/">[ 홈으로 되돌아가기 ]</A>
 account_change_email	message	$1의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 관리자
 account_change_email	new_address	새로운 이메일 주소:
-account_change_email	section	사용자 등록 정보
 account_change_email	send_confirmation	새 주소로 확인 메일을 보냅니다.
 account_change_email	subject	$1 확인
-account_change_email	title	이메일 주소 변경
 account_change_email-complete	confirm	환영합니다, $1. 이메일 주소 변경이 완료되었습니다. 새로운 메일 주소는 <strong>$2</strong>입니다. $3으로 보내지는 이메일은 모두 이곳으로 재전송됩니다.
 account_change_email-complete	title	이메일 주소 변경 완결
 account_change_email_confirm	title	이메일 주소 변경 확인
@@ -45,13 +43,10 @@ account_change_pw	not_valid_password	유효한 비밀번호를 입력하셔야 �
 account_change_pw	old_password	기존 비밀번호
 account_change_pw	old_password_incorrect	기존 비밀번호가 맞지 않습니다.
 account_change_pw	passwords_dont_match	새 비밀번호가 서로 일치하지 않습니다.
-account_change_pw	section	사용자 등록 정보
 account_change_pw	title	비밀번호 변경
 account_change_pw	update	비밀번호 갱신
 account_change_pw_changed	return_to	사용자 등록 정보 페이지로 되돌아갑니다.
 account_change_pw_changed	title	비밀번호 변경이 완료되었습니다.
-account_editsshkeys	section	사용자 등록 정보
-account_editsshkeys	title	CVS/SSH 키 편집
 account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 $1의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 게시판에 글을 올릴 수도 있고, $1에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>$1(이)가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 $1(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--$1
 account_first	title	$1 : 환영합니다!
 account_login	cookiewarn	여기서부터는 쿠키를 사용합니다.
@@ -64,9 +59,6 @@ account_login	macwarn	<H2><FONT COLOR="RED">현재 매킨토시에서의 인터�
 account_login	newaccount	[새로운 계정 만들기(가입하기)]
 account_login	passwd	비밀번호:
 account_login	pending_account	<P>여러분의 계정은 현재 이메일을 통한 확인 작업을 기다리고 있는 중입니다.		이메일에 포함되어 있는 링크를 방문하시면 계정이 곧바로 활성화됩니다.		<P>만약 이 이메일을 다시 받고 싶으시다면 아래에 있는 링크를 클릭하세요. 여러분이 등록 과정 중에 입력하신 이메일로 확인 메일이 다시한번 발송됩니다.		<P><A href="pending-resend.php?form_user=$1">[확인 메일 다시 보내기]</A>		<br><hr>		<p>
-account_login	sslnotice	<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>
-account_login	title	사이트 로그인
-account_login	usessl	로그인후 SSL 계속 사용
 account_lostlogin	invalidconfirm	확인에 사용된 hash값이 맞지 않습니다.
 account_lostlogin	newpasswd	새로운 비밀번호 (6글자 이상)
 account_lostlogin	newpasswd2	새로운 비밀번호 (한번더)
@@ -74,7 +66,6 @@ account_lostlogin	notmatch	새 비밀번호가 서로 일치하지 않습니다.
 account_lostlogin	passwdchanged	<h2>비밀번호가 변경되었습니다.</h2><p>축하합니다. 비밀번호가 재설정되었으므로 이제 사이트에 <a href="/account/login.php">로그인</a>하실 수 있습니다.</p>
 account_lostlogin	severalconfirm	확인에 사용된 hash값과 동일한 hash값이 하나 이상 존재합니다.
 account_lostlogin	sixchars	유효한 비밀번호를 입력하셔야 합니다. (최소 6글자 이상)
-account_lostlogin	title	비밀번호 분실 확인
 account_lostlogin	update	업데이트
 account_lostlogin	welcome	<h2>비밀번호 분실 로그인</h2><p>환영합니다, $1. 이곳에서 비밀번호를 변경하실 수 있습니다.</p>
 account_lostpw	invalid_user	유효하지 않은 사용자입니다.
@@ -82,7 +73,6 @@ account_lostpw	message	$3 사이트의 누군가가 (아마도 본인?) 이메�
 account_lostpw	notify	<P>입력하신 이메일 주소로 메일을 보냈습니다. 비밀번호를 변경하시려면 지금 보낸 메일의 내용을 참고하시기 바랍니다. <P><A href="/">[ 홈으로 ]</A>
 account_lostpw	sendhash	확인에 사용되는 hash값을 다시 보냅니다.
 account_lostpw	subject	$1 확인
-account_lostpw	title	비밀번호를 잊으셨습니까?
 account_lostpw	user_dont_exist	존재하지 않는 사용자입니다.
 account_lostpw	warn	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. <P>아래 "Send Lost PW Hash" 를 누르시면 여러분에게 할당되어 있는 이메일 주소로 URL을 알려 드리겠습니다. 그 URL은 여러분의 계정에 할당되어 있는 128-bit 해쉬 정보입니다. 그 URL을 방문하시면 비밀번호를 변경하시고 사이트에 다시 로그인하실 수 있습니다.
 account_options	change_email_address	이메일 주소 변경
@@ -92,7 +82,6 @@ account_options	email_address		이메일 주소:
 account_options	language	언어:
 account_options	login_name	사용자 ID:
 account_options	member_since	가입한 날:
-account_options	real_name	이름:
 account_options	timezone	시간대:
 account_options	title		계정 설정
 account_options	user_id	사용자 번호:
@@ -109,7 +98,6 @@ account_register	err_mailexist	누군가 이 이메일 주소를 이미 사용�
 account_register	err_passwd	비밀번호를 입력하셔야 합니다.
 account_register	err_passwd2	비밀번호가 일치하지 않습니다.
 account_register	err_passwd3	잘못된 비밀번호입니다.
-account_register	err_realname	이름을 입력하셔야 합니다.
 account_register	err_unixname	잘못된 Unix Name. 
 account_register	err_userexist	사용자 ID가 이미 존재합니다.
 account_register	err_username	사용자 ID를 입력하셔야 합니다.
@@ -125,13 +113,11 @@ account_register	message_header	$1 사용자 등록
 account_register	partecipate_peer_ratings	사용자간 평가 프로그램에 참여합니다. <i>(여러가지 기준으로 다른 사용자의 활동을 평가하고, 다른 사용자 역시 여러분을 평가합니다. 만약 여러분이 사용자간 평가 프로그램에 참여하기로 하셨다면, 이것에 대한 자세한 내용은 $1 개인 페이지</a>에서 보실 수 있습니다.)</i>
 account_register	password	비밀번호 (최소 6 글자):
 account_register	password2	비밀번호 (다시):
-account_register	realname	이름:
 account_register	register	등록하기
 account_register	remember_me	"기억하기". <i>(로그인하지 않고 $1 개인 페이지</a>를 볼 수 있는 기능입니다. 내용을 변경하고자 한다면 실제로 로그인하셔야 합니다.)</i>
 account_register	reset	변경 취소
 account_register	siteupdate	사이트 업데이트에 관한 소식 메일로 받기 <I>(트래픽이 거의 없으며 보안 관련 공지사항을 포함하므로 메일을 받아 보시기를 권장합니다.)</I>
 account_register	timezone	시간대:
-account_register	title	사용자 등록
 account_register	update	업데이트
 account_shell	autorized_keys	CVS/SSH 인증 키
 account_shell	edit_keys	키 편집하기
@@ -147,13 +133,10 @@ account_verify	erroractivate	계정을 활성화하는 도중 오류가 발생�
 account_verify	invalidcred	제공한 정보와 일치하는 유효한 계정이 없습니다.
 account_verify	invalidop	잘못된 동작입니다.
 account_verify	invalidparam	잘못된 인자입니다.
-account_verify	invaliduser	잘못된 사용자
 account_verify	login		로그인
 account_verify	loginname	사용자 ID:
 account_verify	missingparam	인자가 빠졌습니다.
-account_verify	nouser	사용자가 존재하지 않습니다.
 account_verify	password	비밀번호:
-account_verify	title	$1 사용자 확인
 account_verify	usermandatory	사용자 ID를 입력하셔야 합니다.
 account_verify	verify_blurb	<p>사용자 등록 절차를 완료하시려면 지금 로그인하십시오. 일반 로그인 기능은 곧바로 활성화됩니다.</p>
 add_snippet	add_this_snippet_version_id	이 코드 버전 ID를 추가하기:
@@ -173,32 +156,14 @@ add_snippet	submit	제출
 add_snippet	title	새로운 코드 제출
 add_snippet	you_can_use_this_form	이 form을 이용해서 패키지에 코드를 계속 추가하실 수 있습니다.</p><p>"코드 버전 ID"는 브라우저 상에서 특정 버전의 코드 옆에 보이는 유일한 ID입니다.
 admin	add	추가
-admin	add_new	[새로 추가]
-admin	are_you_sure_delete	정말로 삭제하시겠습니까
-admin	cancel	취소
 admin	delete	지우기
 admin	edit	편집
 admin	http_domain	HTTP 도메인:
 admin	license	저작권:
 admin	license_other	기타 저작권:
-admin	na	N/A
-admin	other	그외
 admin	reject	거부
-admin	site_admin_home	사이트 관리 페이지
-admin	submit_changes	변동사항 제출하기
-admin	submit_new	새로 제출
-admin	successfully_added	성공적으로 추가되었습니다.
-admin	successfully_deleted	성공적으로 삭제되었습니다.
-admin	successfully_modified	성공적으로 수정되었습니다.
 admin	yes	예
-admin_add_language	add_new_language	새로운 언어 추가하기
-admin_add_language	class_filename	언어 클래스 파일명:
-admin_add_language	classname	언어 클래스:
-admin_add_language	existing_language	현재 존재하는 언어들
-admin_add_language	name	이름:
-admin_add_language	submit	제출
 admin_approve_pending	add_this_custom_response	이 응답을 미리 정의된 응답에 추가하기
-admin_approve_pending	admin_approve_pending	활성화
 admin_approve_pending	approve	승인
 admin_approve_pending	approve_all_on_this_page	이 페이지에 있는 것 모두 승인하기
 admin_approve_pending	approving_group		그룹 승인하기:
@@ -231,9 +196,6 @@ admin_database	statistics_for_project_database	Statistics for Project Databases
 admin_database	type	Type
 admin_database	unable_to_insert	Unable to insert already active database.
 admin_groupedit	active	Active (A)
-admin_groupedit	deleted	Deleted (D)
-admin_groupedit	error	Error
-admin_groupedit	error_creating_group_object	Error creating group object
 admin_groupedit	holding	Holding (H)
 admin_groupedit	incomplete	Incomplete (I)
 admin_groupedit	instruction_email_sent	Instruction email sent
@@ -264,7 +226,6 @@ admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
 admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
 admin_index	add_to_trove_map	Add to the Trove Map
 admin_index	approve_reject	Approve/Reject
-admin_index	deleted_status	(deleted) Status
 admin_index	display_full_group	Display Full Group List/Edit Groups
 admin_index	display_full_user_list	Display Full User List/Edit Users
 admin_index	display_groups_beginning_with	Display Groups Beginning with :
@@ -291,14 +252,6 @@ admin_index	translation_file_tool	Translation file tool
 admin_index	trove_project_tree	Trove Project Tree
 admin_index	user_maintaince	User Maintenance
 admin_index	virtual_host_admin_tool	Virtual Host Admin Tool
-admin_loadtabfile	availaible_tables	Available Tables:
-admin_loadtabfile	edit_dont_work	[edit(don t work)]
-admin_loadtabfile	purge_loaded_data	Purge loaded data
-admin_loadtabfile	reload_all_language_files	(Re)Load all language files
-admin_loadtabfile	see_translations	[see translations]
-admin_loadtabfile	see_untranslated	[see untranslated]
-admin_loadtabfile	tables_loaded	Tables loaded
-admin_loadtabfile	title	Site Admin
 admin_massmail	active_deliveries	Active Deliveries
 admin_massmail	all_project_admins	All Project Admins
 admin_massmail	all_project_developers	All Project Developers
@@ -320,15 +273,8 @@ admin_massmail	subject	Subject
 admin_massmail	subscribers_to_additional_community	Subscribers to "Additional Community Mailings"
 admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
 admin_massmail	text_of_message	Text of Message
-admin_massmail	title	Administrative Mass Mail Engine
 admin_massmail	type	Type
 admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
-admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
-admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
-admin_massmail_execute	receive_post	Received Post. Making Query.
-admin_massmail_execute	sending_to	sending to
-admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
-admin_massmail_execute	user_id	User id:
 admin_responses	add_response	Added Response
 admin_responses	by_the_way	By the way, I didn't delete... just in case...
 admin_responses	create	Create
@@ -358,13 +304,6 @@ admin_search	status	Status
 admin_search	unix_name	UNIX Name
 admin_search	user_search_criteria	User search with criteria
 admin_search	username	Username
-admin_tabfiles	delete_lang	[delete]
-admin_tabfiles	edit_the_langfile	Edit The $1 Language
-admin_tabfiles	edit_the_language	Edit The Language
-admin_tabfiles	language	Language
-admin_tabfiles	modify_the	Modify the $1 below:
-admin_table	edit_the	Edit The
-admin_table	table	Table
 admin_trove_cat_add	add	Add
 admin_trove_cat_add	add_new_trove_category	Add New Trove Category
 admin_trove_cat_add	error_in_trove_openration	Error In Trove Operation
@@ -378,7 +317,6 @@ admin_trove_cat_edit	delete	Delete
 admin_trove_cat_edit	edit_trove_category	Edit Trove Category
 admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
-admin_trove_cat_edit	error_trove_equal_parent	Error Parent Category can not be same as current
 admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
 admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
 admin_trove_cat_edit	new_category_short_name	New category short name (no spaces, unix-like)
@@ -416,7 +354,6 @@ admin_useredit	current_confirm_bash	Current confirm hash:
 admin_useredit	deleted	Deleted (D)
 admin_useredit	email	Email:
 admin_useredit	group_memerbership	Groups Membership
-admin_useredit	membership_permissions	Member Permissions
 admin_useredit	name	Name
 admin_useredit	no_unix_account	No Unix account (N)
 admin_useredit	operations	Operations
@@ -475,22 +412,9 @@ artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 calendar	april	4월
 calendar	august	8월
-calendar	comingyear	내년
-calendar	currentyear	금년
 calendar	december	12월
 calendar	february	2월
-calendar	fordate	For date:
 calendar	friday	금요일
-calendar	invaliddate	잘못된 날짜
-calendar	invaliddateexplain	$1 은 잘못된 날짜입니다
-calendar	invalidday	잘못된 요일입니다
-calendar	invaliddayexplain	일은 1 부터 31 사이라야 합니다.
-calendar	invalidmonth	잘못된 달입니다.
-calendar	invalidmonthexplain	월은 1 부터 12 사이라야 합니다.
-calendar	invalidtype	잘못된 형식입니다.
-calendar	invalidtypeexplain	형식이 잘못되었습니다.
-calendar	invalidyear	잘못된 연도입니다.
-calendar	invalidyearexplain	연도는 1990 에서 2020사이라야 합니다.
 calendar	january	1월
 calendar	july	7월
 calendar	june	6월
@@ -499,21 +423,14 @@ calendar	may	5월
 calendar	monday	월요일
 calendar	november	11월
 calendar	october	10월
-calendar	onemonth	한달
 calendar	saturday	토요일
-calendar	selecteddate	선택된 날짜 (만약 오늘이 아닐 경우).
 calendar	september	9월
 calendar	sunday	일요일
 calendar	task_begins	임무 $1 시작
 calendar	task_ends	임무 $1 종료
 calendar	task_link_title	임무 요약: $1
-calendar	threemonth	3개월
 calendar	thursday	목요일
-calendar	title	프로젝트 관리: 달력
-calendar	todaysdate	오늘의 날짜:
 calendar	tuesday	화요일
-calendar	update	갱신
-calendar	view	보기:
 calendar	wednesday	수요일
 classgroup	acceptedproject	$7에 신청하신 프로젝트가 승인되었습니다.\n\n프로젝트 이름:  $1\n프로젝트 Unix Name:  $2\nCVS 서버:         cvs.$2.$3\nShell/Web 서버:   $2.$3\n\nDNS정보 갱신은 최대 하루가 걸립니다.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nIf you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
 classgroup	acceptedprojecttitle	$1 프로젝트가 승인되었습니다.
@@ -535,13 +452,7 @@ common_include_account	sixchar	비밀번호는 적어도 6글자 이상이어야
 common_include_account	toolong	ID가 너무 깁니다. 이름은 15글자 이하이어야 합니다.
 common_include_account	tooshort	ID가 너무 짧습니다. 3글자 이상이어야 합니다.
 common_utils	priority_colors	우선순위
-conf	content_encoding	utf-8
-conf	default_font	굴림체,verdana,arial,helvetica,sans-serif
-conf	language_code	ko
-conf	language_id	22
 conf	mail_charset	UTF-8
-contact	about_blurb	<p>이것은 <b>$1</b>의 연락 페이지입니다. -- 이곳에서 호스팅되고 있는 프로젝트에 대해 문제가 있다면 해당 프로젝트의 버그 트래킹 시스템이나 기술지원 관리자 기능을 활용하십시오. 이러한 기능들은 해당 프로젝트의 홈페이지인 <tt>http://$2/projects/&lt;프로젝트 이름&gt;</tt> 을 방문하시면 이용하실 수 있습니다.</p><p>기술지원 요청이나 버그 리포트 혹은 $1의 <A href="staff.php">운영자</a>와 직접 연락하고 싶으시다면 <a href="/projects/siteadmin">$1</a>을 방문하십시오.</p>
-contact	title	$1와 연락하기
 cvs	anoncvs	<P><B>익명 CVS 사용 방법</B> <P>다음 방법을 사용하시면 익명으로 이 프로젝트의 CVS 저장소로부터 소스코드를 체크아웃하실 수 있습니다. 체크아웃하고자 하는 모듈을 반드시 <I>modulename</I>부분에 써 주셔야 합니다. <I>anonymous</I>에 대한 비밀번호를 물어보면 그냥 Enter를 누르시면 됩니다.
 cvs	anoncvsup	해당 모듈 디렉토리 안에서 업데이트를 할 때는 -d 옵션이 필요 없습니다.
 cvs	browseit	CVS 저장소(Repository)
@@ -566,14 +477,12 @@ developer_monitor	title	사용자 모니터링하기
 developer_monitor_choose_user	body	오류 - 모니터링할 사용자를 먼저 선택하십시오
 developer_monitor_choose_user	title	사용자를 먼저 선택하십시오
 developer_rate	cannot_rate_yourself	자기 자신은 평가할 수 없습니다.
-developer_rate	invalid_rating_value	오류 - 유효하지 않은 점수가 입력되었습니다.
 developer_rate	ratings_recorded	 평가정보가 기록되었습니다.
 developer_rate	ratings_recorded_body	사용자 평가 페이지에서 평가점수를 재입력하는 것만으로 이 사용자를 다시 평가하실 수 있습니다.
 developer_rate	title	사용자 평가 페이지
 developer_rate	turned_off_body	귀하는 사용자간 평가 시스템에 참여하지 않기로 하셨습니다.
 developer_rate	turned_off_title	평가 기능을 사용하지 않습니다.
 docman	admin	관리
-docman	description	설명
 docman	error_invalid_file_attack	잘못된 파일입니다: $1
 docman	error_no_docs	이 프로젝트에 대해 공개되어 있는 문서가 없습니다.
 docman	error_no_groups_defined	문서 그룹이 정의되어 있지 않습니다.
@@ -587,8 +496,6 @@ docman_admin	section	$1
 docman_admin	title	문서 관리자 관리하기
 docman_admin_addgroups	section	문서 관리자 관리하기
 docman_admin_addgroups	title	문서 그룹 추가
-docman_admin_docedit	section	문서 관리자
-docman_admin_docedit	title	문서 편집
 docman_admin_editdocs	doc_contents	문서 내용
 docman_admin_editdocs	section	문서 관리자 관리하기
 docman_admin_editdocs	state	상태
@@ -604,8 +511,6 @@ docman_admin_editgroups	section	문서 관리자 설정하기
 docman_admin_editgroups	title	그룹 편집
 docman_admin_groupdelete	section	문서 관리자 설정하기
 docman_admin_groupdelete	title	문서 그룹 지우기
-docman_admin_groupedit	section	문서 관리자 설정하기
-docman_admin_groupedit	title	문서 그룹 이름 바꾸기
 docman_common	error_min_desc_length	문서에 대한 설명은 최소 10글자 이상이어야 합니다.
 docman_common	error_min_title_length	제목은 최소 5글자 이상이어야 합니다.
 docman_common	no_docs	문서가 없습니다.
@@ -627,15 +532,12 @@ docman_new	intro	<strong>문서 제목</strong>: 이 문서에 대한 간단한 
 docman_new	language	언어
 docman_new	no_valid_group	유효한 문서 그룹이 선택되지 않았습니다.
 docman_new	section	프로젝트: $1 
-docman_new	state	상태
 docman_new	submit	제출 정보
 docman_new	submitted_successfully	문서가 성공적으로 제출되었습니다.
 docman_new	title	문서 관리자: 새로운 문서 제출하기
 docman_new	upload_file	파일 업로드
-error	error_creating	문서 생성 실패:
 error	not_found	페이지를 찾을 수 없습니다.
 error	title	요청하신 페이지를 찾을 수 없습니다.(Error 404)
-exit	choose_a_group	오류 - 그룹을 선택하십시오.
 exit	choose_group_body	그룹 id가 선택되지 않았습니다.
 exit	choose_group_title	오류 - 그룹 id가 선택되지 않았습니다.
 exit	exiting_with_error	오류가 발생하여 종료합니다.
@@ -643,42 +545,23 @@ exit	missing_parameters_body	오류 - 필요한 인자가 빠졌습니다.
 exit	missing_parameters_title	오류 - 필요한 인자가 빠졌습니다.
 forum	choose	<p>원하시는 게시판을 선택하십시오. 글을 읽거나, 새로운 글을 올리거나, 혹은 답글을 올리실 수도 있습니다.<p>
 forum	error_forum_not_found	게시판이 없습니다.
-forum	error_invalid_group_forum_id	$1:: 게시판 id가 유효하지 않습니다.
 forum	error_no_forums_found	$1에 대한 게시판이 없습니다.
-forum	error_no_valid_forum_object	$1:: 유효한 게시판 객체이 없습니다.
 forum	error_no_valid_group_object	Forum:: 유효한 그룹 객체가 없습니다.
 forum	forum	게시판
 forum	forums_for	$1의 게시판
-forum	html	HTML 태그는 사용하실 수 없습니다.
-forum	section	프로젝트: $1
-forum	title	게시판
 forum_admin	add_forum	게시판 추가하기
 forum_admin	delete_message	게시판 글 삭제하기
-forum_admin	section	프로젝트: $1 
 forum_admin	title	게시판: 관리
-forum_admin	update_forum	게시판 정보와 상태를 갱신합니다.
 forum_admin_addforum	add_forum	이 게시판을 추가합니다.
 forum_admin_addforum	allow_anonymous	익명 사용자가 글을 올릴 수 있도록 하시겠습니까?
 forum_admin_addforum	email_posts	모든 글을 다음 이메일로 보냅니다.:
-forum_admin_addforum	existing_forums	게시판을 종료합니다.
 forum_admin_addforum	forum_created	게시판이 성공적으로 생성되었습니다.
 forum_admin_addforum	forum_description	설명
 forum_admin_addforum	forum_name	게시판 이름
 forum_admin_addforum	is_public	공개?
-forum_admin_addforum	section	게시판 관리
-forum_admin_addforum	title	게시판 추가
 forum_admin_changestatus	change_status	게시판 상태 변경하기
-forum_admin_changestatus	forum	게시판
 forum_admin_changestatus	intro	이곳에서 게시판의 특성들을 정의하실 수 있습니다. 비공개 게시판은 프로젝트 멤버들끼리만 볼 수 있고 일반 사용자는 볼 수 없다는 사실을 유념하세요.
-forum_admin_changestatus	no_forums_found	게시판이 없습니다.
-forum_admin_changestatus	section	게시판 관리
-forum_admin_changestatus	status	상태
-forum_admin_changestatus	title	게시판 설정 변경
 forum_admin_changestatus	update_successful	게시판 정보가 성공적으로 갱신되었습니다.
-forum_admin_delete	section	게시판 관리
-forum_admin_delete	title	게시판 지우기
-forum_admin_delete_message	enter_message_id	글 번호를 입력하십시오.
-forum_admin_delete_message	section	게시판 관리
 forum_admin_delete_message	title	글 지우기
 forum_admin_delete_message	warning	경고! 지워진 글은 복구할 수 없으며 답글까지 함께 지워집니다!
 forum_admin_delete_messages	messages_deleted	$1 개의 글이 삭제되었습니다.
@@ -688,7 +571,6 @@ forum_common	error_min_name_length	게시판 이름은 3글자 이상이어야 �
 forum_common	error_save_when_logged_in	로그인하셔야만 현재 위치를 기록할 수 있습니다.
 forum_common	error_set_monitor	모니터링 기능을 사용하시려면 로그인하셔야 합니다.
 forum_common	error_unable_to_add_monitor	모니터링 기능을 사용하실 수 없습니다.
-forum_common	welcome_to	$1: 환영합니다.
 forum_common_forum	error_save_place	게시판::savePlace() 
 forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
@@ -697,12 +579,9 @@ forum_common_forummessage	error_getting_next_thread	Getting next thread_id faile
 forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() No Valid ParentMessage Object
-forum_common_forummessage	error_not_logged	글을 올리시기 위해서는 로그인하셔야 합니다.
 forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed 
 forum_common_forummessage	error_required_fields	Must Include A Message Body And Subject
-forum_common_forummessage	forum_message	Forum Message
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
-forum_errors	error_determining_forum_id	Error Determining forum_id
 forum_errors	error_getting_forum	Error getting Forum
 forum_forum	author	글쓴이
 forum_forum	changeview	보기 방법 변경
@@ -717,79 +596,49 @@ forum_forum	posts	글수
 forum_forum	postsuccess	성공적으로 글이 게시되었습니다.
 forum_forum	previous_messages	이전 글
 forum_forum	replies	답장
-forum_forum	section	프로젝트: $1 
 forum_forum	show	Show
 forum_forum	thread	Thread
 forum_forum	threaded	Threaded
 forum_forum	threads	Threads
-forum_forum	title	게시판: 게시판 보기
 forum_forum	topic	주제
 forum_forum	topicstarter	처음 글올린이
 forum_forum	ultimate	Ultimate
-forum_forum_thread	section	게시판
-forum_forum_thread	title	스레드 보기
 forum_message	by	BY
 forum_message	date	날짜
 forum_message	message	글
 forum_message	message_not_found_body	글이 존재하지 않습니다.
 forum_message	message_not_found_title	글이 없습니다.
-forum_message	msg	이 스레드에 답글 올리기
 forum_message	must_choose_message_body	글을 먼저 선택하셔야 합니다.
 forum_message	must_choose_message_title	글을 먼저 선택하셔야 합니다.
 forum_message	post_followup	이 글에 답글 올리기
 forum_message	receive_followups	이 글에 대한 답글을 이메일로 받아보기
-forum_message	section	게시판
 forum_message	subject	제목
 forum_message	thread	새글 올리기
 forum_message	thread_view	Thread View
-forum_message	title	메시지 보기
 forum_monitor	activated	게시판을 모니터링합니다.
 forum_monitor	deactivated	게시판을 모니터링하지 않습니다.
 forum_save	saved	게시판의 위치가 기록되었습니다. 다음 방문부터는 새로운 메시지가 하이라이트되어 표시될 것입니다.
-forum_utils	added	게시판이 추가되었습니다.
 forum_utils	admin	관리
 forum_utils	anonymously	익명
-forum_utils	author	글쓴이
-forum_utils	brokenthread	깨진 글타래
 forum_utils	by	By:
 forum_utils	couldpostif	$1 로그인 $2 하시면 글을 올릴 수 있습니다.
 forum_utils	date	날짜
 forum_utils	discussionforum	게시판:
 forum_utils	doublepost	아마도 같은 게시물을 두번 올리신 것 같습니다. 제목과 본문이 이전 게시물과 동일합니다.
-forum_utils	error	오류!
-forum_utils	erroradd	게시판 추가시 오류가 발생하였습니다.
-forum_utils	errorfollowup	존재하지 않는 글에 답글을 달 수 없습니다.
-forum_utils	errorfollowup2	이미 존재하고 있는 글타래에 답글을 달 때는 답글 ID가 필요합니다.
-forum_utils	errorinsert	insertid()가 실패하였습니다.
-forum_utils	errormaster	지금은 글타래의 원 글을 갱신할 수 없습니다.
-forum_utils	errorparent	부모 글을 갱신할 수 없습니다.
-forum_utils	errorpost	글 올리기 실패
-forum_utils	feedbacklogin	로그인하시면 글을 올리실 수 있습니다.
 forum_utils	htmltag	HTML 태그는 해석되지 않고 본문에서 문자 그대로 보입니다.
 forum_utils	latest	최근 소식
 forum_utils	loggedin	로그인
 forum_utils	mailmonitor	\n다음 URL에서 이 글을 읽으시고 답글을 올리실 수 있습니다.\n$1\n글쓴이: $2 \n\n $3\n\n______________________________________________________________________\n이 메일은 귀하께서 이 게시판을 모니터링하고 있기 때문에 발송된 것입니다.\n더이상 모니터링하지 않으시려면 $4에 로그인하셔서 \다음 URL을 방문하셔야 합니다.: $5
-forum_utils	mailnotsent	이메일이 발송되지 않았습니다.- 모니터링중
-forum_utils	mailnotsent2	이메일이 발송되지 않았습니다. - 모니터링하는 사람이 없습니다.
-forum_utils	mailsent	이메일 발송 - 모니터링중
 forum_utils	message	글:
 forum_utils	monitor	게시판 모니터링하기
-forum_utils	mustinclude	본문과 제목을 포함하여야 합니다.
-forum_utils	news	뉴스
-forum_utils	nextfailed	다음 thread_id 를 받아오지 못했습니다.
-forum_utils	noid	게시판 ID없이 글을 게시하려고 합니다.
 forum_utils	nonewsitem	오류 - 이 뉴스 게시물은 없습니다.
-forum_utils	notfound	찾을 수 없습니다.
 forum_utils	postanon	익명으로 글을 올립니다.
 forum_utils	postcomment	답글 올리기
-forum_utils	posted	글이 올라갔습니다.
-forum_utils	postedby	글올린이
 forum_utils	reply	답글
 forum_utils	saveplace	위치 기록하기
 forum_utils	stopmonitor	모니터링 중지
 forum_utils	subject	제목:
 forum_utils	summary	요약
-forum_utils	thread	글타래
 frs	file_download	다운로드
 frs	file_monitor	모니터
 frs	file_notes	릴리즈노트
@@ -802,20 +651,12 @@ frs_file	error_cannot_move	파일을 영구 저장 공간으로 옮길 수 없�
 frs_file	error_invalid_file	파일이 유효하지 않습니다.
 frs_file	error_min_name_length	파일명은 3글자 이상이어야 합니다.
 frs_file	error_name_format	파일명은 다음과 같은 형식이어야 합니다.: gforge-3.0.tar.bz2
-frs_package	error_already_exists	동일한 파일명이 프로젝트 공간 안에 이미 존재하고 있습니다.
-frs_package	error_cannot_move	파일을 영구 저장 공간으로 옮길 수 없습니다.
-frs_package	error_invalid_file	파일이 유효하지 않습니다.
 frs_package	error_min_name_length	패키지 이름은 3글자 이상이어야 합니다.
 frs_package	error_name_format	패키지::업데이트: 패키지 이름은 숫자/영문으로만 이루어져야 합니다.
 frs_package	error_set_monitor	로그인하셔야 모니터링하실 수 있습니다.
 frs_release	email_text	\n\n프로젝트 "$1" ('$2') 가 \n'$3'패키지의 새로운 버전을 릴리즈하였습니다.\n아래 링크를 따라가시면 다운로드하실 수 있습니다.:\n $4\n\n이 메일은 귀하께서 선택하신 패키지의 새로운 버전을\n모니터링하고 계시기 때문에 발송된 것입니다.\n만약 이 내용을 메일로 받아보지 않고자 하신다면\n$5에 로그인하신 후 다음 링크를 따라가십시오.: \n $6
 frs_release	email_title	[$1 릴리즈] $2
-frs_release	error_already_exists	동일한 릴리즈가 프로젝트 공간 안에 이미 존재하고 있습니다.
-frs_release	error_cannot_move	릴리즈를 영구 저장 공간으로 옮길 수 없습니다.
-frs_release	error_invalid_file	릴리즈가 유효하지 않습니다.
 frs_release	error_min_name_length	릴리즈 이름은 3글자 이상이어야 합니다.
-frs_release	error_name_format	릴리즈 이름은 다음과 같은 형식이어야 합니다.: gforge-3.0.tar.bz2
-frs_release	error_set_monitor	로그인하셔야 모니터링하실 수 있습니다.
 general	add	추가
 general	browse	둘러보기
 general	cancel	취소
@@ -828,7 +669,6 @@ general	edit	편집
 general	error	오류
 general	error_creating	$1 생성 오류 발생
 general	error_getting	$1 가져오기 오류
-general	error_getting_new	새 $1 가져오기 오류
 general	error_group_id	데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다.
 general	error_missing_params	인자가 없습니다.
 general	error_no_valid_group_object	$1:: 유효한 그룹 객체가 없습니다.
@@ -839,9 +679,6 @@ general	invalid_email	유효하지 않은 이메일 주소
 general	language	언어
 general	more	더 보기
 general	no	No
-general	no_valid_filename	유효한 파일이름이 없습니다.
-general	no_valid_group	유효한 $1그룹이 없습니다.
-general	no_valid_group_object	$1 유효한 그룹 객체가 없습니다.
 general	open	open
 general	permdenied	접근 금지
 general	permexcuse	프로젝트 관리자가 이 페이지를 볼 수 있도록 접근 권한을 허락해 주어야 합니다.
@@ -849,13 +686,9 @@ general	permnotget	권한을 가져올 수 없습니다.
 general	remove	지우기
 general	reset	리셋
 general	return	[되돌아가기]
-general	return_to	[$1로 되돌아가기]
-general	sitename	$1
 general	submit	제출
 general	submit_edit	편집 제출
-general	submitted_successfully	$1: 성공적으로 제출되었습니다.
 general	total	total
-general	turned_off	이 프로젝트는 $1 기능을 사용하지 않습니다.
 general	update	갱신
 general	update_successful	성공적으로 갱신되었습니다.
 general	yes	Yes
@@ -863,8 +696,6 @@ global	error	오류
 group	activity	프로젝트 활동 상황:&nbsp; 
 group	activitystat	활동상황 <a href="/project/stats/?group_id=$1">통계 자료</a> 보기
 group	developer_info	개발자 정보
-group	developers	개발자
-group	long_bugs	버그 트래킹
 group	long_scm	SCM 저장소
 group	long_docman	문서 관리자: 프로젝트 문서화
 group	long_forum	공개 게시판
@@ -872,9 +703,7 @@ group	long_ftp	익명 FTP 공간
 group	long_homepage	프로젝트 홈페이지
 group	long_mail	메일링 리스트
 group	long_news	뉴스
-group	long_patch	패치 관리자
 group	long_pm	임무 관리자
-group	long_support	기술지원 관리자
 group	long_survey	설문조사
 group	nodescription	이 프로젝트는 아직 설명을 제출하지 않았습니다.
 group	norelease	이 프로젝트는 아직 릴리즈한 파일이 없습니다.
@@ -889,7 +718,6 @@ group	short_files	다운로드
 group	short_forum	게시판
 group	short_homepage	홈페이지
 group	short_mail	메일링 리스트
-group	short_main	메인
 group	short_memberlist	개발자
 group	short_news	뉴스
 group	short_patch	패치
@@ -903,14 +731,10 @@ help	title	환영합니다: $1
 help_tracker	assignee	이 펼침 상자는 추적 항목을 담당하고 있는 프로젝트 관리자를 표시합니다.
 help_tracker	attach_file	추적 항목에 파일을 첨부하려면 변경을 제출하기 전에 이 확인상자를 선택해야 합니다.
 help_tracker	canned_response	미리 준비한 의견 펼침 상자는 일반적인 지원이나 버그 제출에 대하여 프로젝트 관리자가 작성한 미리 준비한 의견들의 목록을 표시합니다.<br /><br />프로젝트 관리자는 '(관리)' 링크를 클릭하여 미리 준비한 의견을 작성할 수 있습니다.
-help_tracker	category	이 펼침 상자는 추적 항목이 프로젝트의 어떤 부분에 해당하는지를 나타내는 분류를 표시합니다.<br /><br />전체 결과를 보려면 '전체'를 선택하십시오.
 help_tracker	close_window	창 닫기
-help_tracker	comment	의견 텍스트 상자로 미리 준비한 의견이 적합하지 않을 경우에 의견을 첨부할 수 있습니다.
 help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
-help_tracker	group	이 펼침 상자는 프로젝트 관리자가 정의한 옵션인 추적 항목의 그룹을 표시합니다.<br /><br />프로젝트 관리자는 '(관리)' 링크를 클릭하여 그룹을 정의할 수 있습니다.
 help_tracker	monitor	"모니터링" 버튼을 클릭하여 이 항목을 모니터링하거나 모니터링을 중지할 수 있습니다. <br /><br /><strong>주의!</strong> 이는 추가적인 메일을 전송합니다. 이 항목에 의견을 추가하거나, 제출하거나, 이 항목을 담당하게 되면, 그 이유에 대한 메일을 받게 됩니다!
 help_tracker	priority	중요도 옵션으로 추적 항목의 중요도를 설정할 수 있습니다. (1-가장 낮음에서 9-가장 높음입니다)<br /><br />이는 사용자가 프로젝트에서 중대한 문제를 발견하였을 경우의 지원 요청 및 버그 관리에 특히 유용합니다.
-help_tracker	resolution	해결방안 옵션은 추적 항목에 대한 존재하는 해결방안을 표시합니다.
 help_tracker	sort_by	정렬 옵션으로 탐색 결과를 어떻게 정렬할지 결정할 수 있습니다.<br /><br />ID, 중요도, 요약, 제출한 날, 해결한 날, 제출자, 담당자로 정렬할 수 있습니다. 오름차순과 내림차순으로 정렬할 수 있습니다.
 help_tracker	status	이 펼침 상자는 추적 항목의 현재 상태를 표시합니다.<br /><br />추적 항목 작성자의 응답을 기다릴 경우 상태를 'Pending'으로 설정할 수 있습니다. 이 상태에서 작성자가 응답을 하면 자동적으로 'Open' 상태로 재설정합니다. 이 상태에서 관리자가 지정한 시간(기본값은 14일)동안 작성자가 응답을 하지 않으면 그 항목은 'Deleted' 상태가 됩니다.
 help_tracker	summary	요약 텍스트 상자는 추적 항목의 짧은 요약을 표시합니다. 여러 추적 항목을 탐색할 때 유용합니다.
@@ -920,21 +744,17 @@ help_trove_cat	full_category_name	Full Category Name
 help_trove_cat	no_such_category	No such trove category
 help_trove_cat	short_name	Short Name
 home	about_blurb	<P>$1 는 <B><A href="http://www.opensource.org/">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다.</P><P><B>사이트에 대한 피드백 및 참여 방법</B></P><P>$1 를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.</P><P><B>여러분만의 프로젝트를 구성하십시오.</B></P><P><A href="/account/register.php">사용자 등록</A>을 하시� , <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.</P>
-home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	gforge_statistics	$1 통계
 home	highest_ranked_users	우수 사용자
 home	hosted_projects	운영중인 프로젝트
 home	most_active_this_week	주간 프로젝트 순위
 home	no_stats_available	통계 자료가 없습니다.
-home	none_found	None Found
 home	registered_users	등록 사용자
-home	sfos	$1 OnSite
 home	top_project_downloads	최다 다운로드
 include_html	no_change	변동사항 없음
 include_html	none	None
 include_html	priority_highest	최고
 include_html	priority_lowest	최저
-include_html	priority_medium	중간
 include_toolreport	all	All 
 include_toolreport	key	Key
 include_toolreport	last_days	Last day(s)
@@ -947,73 +767,39 @@ include_toolreport	project_lifespan	Project lifespan
 include_toolreport	show	Show
 index	welcome	환영합니다.
 mail	provided_by	<p>메일링 리스트는 GForge에 알맞게 구현된 <a href="http://www.list.org/">GNU Mailman</a>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <a href="http://www.python.org/">Python</a> 개발자 여러분들께 감사드립니다.</p>
-mail	section	프로젝트: $1
-mail	title	메일링 리스트
-mail_admin	section	메일링 리스트
-mail_admin	title	메일링 리스트 관리
 mail_admin_add_list	section	메일링 리스트 관리
 mail_admin_add_list	title	리스트 추가
 mail_admin_change_status	section	메일링 리스트 관리
 mail_admin_change_status	title	리스트 관리 및 갱신
-menu	about_gforge	$1 소개
 menu	account_maintenance	사용자 등록 정보
 menu	admin	Admin
 menu	bookmark_page	즐겨찾기
-menu	change_my_theme	테마 변경
 menu	code_snippet	코드 라이브러리
-menu	code_snippet_library	코드 라이브러리
-menu	compile_farm	컴파일 Farm
 menu	diary_notes	일기와 메모
-menu	discussion_forums	게시판
-menu	documentation	참고 문서
 menu	home	홈
 menu	login	로그인
-menu	login_ssl	SSL로 로그인하기
 menu	logout	로그아웃
 menu	my_account	사용자 등록 정보
 menu	my_personal_page	개인 페이지
 menu	mypage	개인 페이지
 menu	new_project	새 프로젝트 등록
-menu	new_releases	새로운 릴리즈
 menu	new_user	사용자 등록
-menu	other_site_mirrors	기타 사이트 미러
-menu	project_admin	프로젝트 관리
 menu	project_help_wanted	멤버 구함
-menu	project_summary	프로젝트 요약
 menu	projectree	프로젝트 트리
 menu	register_project	프로젝트 등록하기
 menu	search	찾기
-menu	site_status	사이트 상태
-menu	software_map	소프트웨어 맵
 menu	submit	제출
-menu	top_projects	상위 프로젝트
-my	about_blurb	여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.
-my	assigneditems	나에게 할당된 항목
 my	bookmarks	나의 즐겨찾기
 my	monitoredfile	모니터링중인 파일 릴리즈
 my	monitoredforum	모니터링중인 게시판
 my	no_bookmarks	현재 저장된 즐겨찾기가 없습니다.
 my	no_monitored_filemodules	모니터링하고 있는 파일이 없습니다.
-my	no_monitored_filemodules_details	<P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다. 파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.</p>
 my	no_monitored_forums	모니터하고 있는 게시판이 없습니다.
-my	no_monitored_forums_details	<p>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.</p><p>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.</p>
 my	no_open_tasks	할당된 임무가 없습니다.
 my	no_projects	아직 어떤 프로젝트에도 소속되어 있지 않습니다.
 my	no_tracker_items_assigned	담당중인 문제점 추적 항목이 없습니다.
 my	no_tracker_items_submitted	제출하신 문제점 추적 항목이 없습니다.
-my	pending_news_bytes	승인을 기다리는 뉴스 목록
-my	pending_news_bytes_1	1 개의 뉴스가 승인을 기다리고 있습니다.
-my	pending_news_bytes_2	$1 개의 뉴스가 승인을 기다리고 있습니다.
-my	pending_news_bytes_3	여기를 클릭하십시오.
-my	pending_projects	승인을 기다리는 프로젝트 목록
-my	pending_projects_1	1 개의 프로젝트가 대기중입니다.
-my	pending_projects_2	$1 개의 프로젝트가 대기중입니다.
-my	pending_projects_3	여기를 클릭하십시오.
 my	projects	나의 프로젝트
-my	submitteditems	내가 제출한 항목
-my	survey	설문 조사
-my	survey_taken	설문조사에 이미 응답하셨습니다.
-my	tasks	나의 임무
 my	title	개인 페이지: $1
 my_bookmark	return	되돌아가기
 my_bookmark_add	added_bookmark	<strong>$1</strong>에 대한 즐겨찾기를 <strong>$2</strong>라는 제목으로 추가하였습니다.
@@ -1021,14 +807,9 @@ my_bookmark_add	back	홈페이지로 되돌아가기
 my_bookmark_add	bookmark_title	즐겨찾기 제목
 my_bookmark_add	bookmark_url	즐겨찾기 주소
 my_bookmark_add	section	개인 페이지
-my_bookmark_add	title	즐겨찾기 추가
 my_bookmark_add	visit_page	즐겨찾기 페이지 방문하기
-my_bookmark_delete	bookmark_deleted	즐겨찾기가 삭제되었습니다.
-my_bookmark_delete	section	개인 페이지
-my_bookmark_delete	title	즐겨찾기 지우기
 my_bookmark_edit	bookmark_updated	즐겨찾기가 갱신되었습니다.
 my_bookmark_edit	failed_to_update_bookmark	즐겨찾기를 갱신하지 못했습니다.
-my_bookmark_edit	section	개인 페이지
 my_bookmark_edit	title	즐겨찾기 편집
 my_diary	add_new_entry	새로운 항목 추가
 my_diary	details	자세히
@@ -1041,7 +822,6 @@ my_diary	is_public_expl	공개하시면 추가되는 항목들이 모니터링 �
 my_diary	item_added	항목이 추가되었습니다.
 my_diary	no_entries	일기가 없습니다.
 my_diary	nothing_updated	갱신된 것이 없습니다.
-my_diary	section	개인 페이지
 my_diary	submit_only_once	한번만 클릭하세요.
 my_diary	summary	요약
 my_diary	title	일기쓰기 및 메모
@@ -1066,14 +846,11 @@ news	choose	<p>원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 �
 news	noitems	항목이 없습니다.
 news	nonews	뉴스가 없습니다.
 news	nonewsfor	$1에 대한 뉴스가 없습니다.
-news	section	프로젝트: $1
 news	title	뉴스
 news_admin	noqueued	No Queued Items Found For Project
 news_admin	permdenied	당신이 프로젝트의 관리자이거나 $1 뉴스 팀의 일원이어야 합니다.
 news_admin	queued	다음 프로젝트에 대한 뉴스들입니다
-news_admin	section	뉴스
 news_admin	title	뉴스 관리
-news_main	title	뉴스
 news_submit	cannot	프로젝트의 관리자가 아니라면 뉴스를 올릴 수 없습니다.
 news_submit	cannotadmin	Submitting news from the news group is not allowed.
 news_submit	details	Details
@@ -1082,10 +859,8 @@ news_submit	errorinsert	뉴스를 올리는 과정에서 오류가 발생하였�
 news_submit	forproject	프로젝트
 news_submit	newsadded	뉴스가 추가되었습니다.
 news_submit	post_blurb	여러분이 프로젝트 관리자라면 뉴스를 등록하실 수 있습니다. 만약 다른 사람의 도움이 필요하다면 "도움 요청" 메시지를 올리실 수도 있습니다.<P><B>여러분의 프로젝트</B>에 관한 모든 뉴스는 곧바로 프로젝트 요약 페이지에 올라가게 됩니다. 만약 $1 홈페이지에 뉴스를 올리시려면 관리 팀으로부터 승인을 받아야 합니다.
-news_submit	section	뉴스
 news_submit	subject	제목
 news_submit	submit	제출하기
-news_submit	title	뉴스 올리기: $1
 news_utils	archive	뉴스 아카이브
 news_utils	nonews	뉴스 항목이 없습니다.
 news_utils	readmore	더 읽기/답글 올리기
@@ -1113,25 +888,13 @@ people	no_categories_found	No Categories Found
 people	no_skill_inventory_setup_up	No Skill Inventory Set Up
 people	none_found	None Found
 people	project	$1 project
-people	section	프로젝트 멤버 구함
-people	section	멤버 구함
 people	short_description	Short Description
 people	skill	Skill
 people	status	Status
 people	title	도움이 필요한 프로젝트
 people	title_array	Title
-people_admin	section	멤버 구함
-people_admin	title	멤버 구함 관리
-people_admin_people_cat	section	멤버 구함 관리
-people_admin_people_cat	title	Job 분류 추가하기
-people_admin_people_skills	section	멤버 구함 관리
-people_admin_people_skills	title	Job 스킬 추가하기
-people_cat	section	멤버 구함
-people_cat	title	분류별 Job 나열하기
 people_createjob	continue	계속 >>
 people_createjob	explains	아래의 항목들을 채워주십시오. '계속'을 누르면, 이 Job이 필요로하는 기술과 경력에 관한 목록을 볼 수 있습니다.
-people_createjob	section	멤버 구함
-people_createjob	title	새로운 Job 만들기
 people_editjob	error_missing	error - missing info
 people_editjob	fill_in	Fill in all required fields
 people_editjob	finished	Finished
@@ -1148,7 +911,6 @@ people_editjob	job_update_no_wrong_id	JOB update failed - wrong project_id
 people_editjob	job_update_ok	JOB updated successfully
 people_editjob	no_such	No Such posting For This Project
 people_editjob	posting_fetch_failed	POSTING fetch FAILED
-people_editjob	section	멤버 구함
 people_editjob	skill_explains	<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>
 people_editjob	title	Job 편집
 people_editjob	update_description	Update Descriptions
@@ -1182,14 +944,11 @@ people_editprofile	no_skills_selected_to_delete	삭제할 스킬을 선택하지
 people_editprofile	no_such_user	존재하지 않는 사용자입니다.
 people_editprofile	profile_title	제목
 people_editprofile	publicly_viewable	공개
-people_editprofile	section	멤버 구함
 people_editprofile	skill_added_ok	스킬을 성공적으로 추가하였습니다.
 people_editprofile	skill_delete_successfully	스킬 $1을 성공적으로 삭제하였습니다.
 people_editprofile	skill_deletion_cancelled	스킬 삭제를 취소하였습니다.
 people_editprofile	skills_edit	스킬 편집
 people_editprofile	start_date	시작일
-people_editprofile	title	나의 프로필 편집
-people_editprofile	title_max_100_chars	제목 (최대 100글자)
 people_editprofile	type	종류
 people_editprofile	update_failed	사용자 갱신 실패
 people_editprofile	update_ok	성공적으로 갱신하였습니다.
@@ -1197,10 +956,6 @@ people_editprofile	update_permission	권한 갱신
 people_editprofile	user_fetch_failed	사용자 가져오기 실패
 people_editprofile	you_can_enter_new_skills	여기에 취득한 새로운 스킬을 입력할 수 있습니다. 가능한 정확하게 시작일과 종료일을 입력해 주십시오.
 people_help_wanted_latest	title	Help Wanted Latest Posts
-people_helpwanted_latest	section	멤버 구함
-people_helpwanted_latest	title	마지막 포스팅
-people_proj	section	멤버 구함
-people_proj	title	멤버 구함: $1
 people_viewjob	contact_info	연락 정보
 people_viewjob	fetch_failed	POSTING fetch FAILED
 people_viewjob	for_project	프로젝트 이름
@@ -1208,20 +963,15 @@ people_viewjob	no_such_posting	No Such Posting For This Project
 people_viewjob	open_date	등록 일시
 people_viewjob	posting_id_not_found	Posting ID not found
 people_viewjob	required_skills	필요한 스킬
-people_viewjob	section	멤버 구함
-people_viewjob	title	$1 이(가) $2 에 필요합니다.
 people_viewjob	view_a_job	View a Job
 people_viewprofile	no_such_user	No Such User
-people_viewprofile	section	사용자 정보
 people_viewprofile	set_private	사용자의 프로필이 비공개로 설정되어 있습니다.
 people_viewprofile	skills_profile_for	스킬 프로필:
 people_viewprofile	title	개발자 프로필 보기
 people_viewprofile	user_fetch_failed	User fetch FAILED
 pm	admin	admin
-pm	any	Any
 pm	assigned_to	Assigned To
 pm	cat_any	모두
-pm	cat_none	없음
 pm	category	분류
 pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
 pm	dependent	Dependend on Task
@@ -1235,7 +985,6 @@ pm	no_tasks_found_text	Add tasks using the link above
 pm	noprj	<H1>하위 프로젝트가 없습니다.</H1><P><B>설정되어 있는 하위 프로젝트가 없거나, 열람할 수 있는 권한이 없습니다.<P><FONT COLOR=RED>프로젝트 관리자가 관리 페이지를 통해 하위 프로젝트를 설정해 주어야 사용할 수 있습니다.</FONT></B>
 pm	percent_complete	달성도
 pm	priority	우선 순위
-pm	section	프로젝트: $1 
 pm	start_date	시작일
 pm	status	상태
 pm	summary	임무 요약
@@ -1250,16 +999,12 @@ pm_addtask	task_created_successfully	Task Created Successfully
 pm_addtask	task_updated_successfully	Task Updated Successfully
 pm_addtask	title	임무 추가하기
 pm_admin	section	$1
-pm_admin	title	임무 관리자: 관리
-pm_admin_change_status	section	임무 관리자 관리
-pm_admin_change_status	title	정보 갱신
 pm_admin_projects	add_categories	Add Categories
 pm_admin_projects	add_categories_title	Add Categories
 pm_admin_projects	add_categories_to	분류를 더할 프로젝트
 pm_admin_projects	add_edit_categories	분류 더하기/고치기
 pm_admin_projects	add_project	프로젝트 더하기
 pm_admin_projects	add_project_intro	프로젝트를 더해 여러 임무를 할당할 수 있습니다. 이것은 새로운 임무를 만드는 것과는 다릅니다.
-pm_admin_projects	add_subprojects	Add Projects
 pm_admin_projects	admin_title	Project/Task Manager Administration
 pm_admin_projects	category_inserted	Category Inserted
 pm_admin_projects	category_name	분류 이름
@@ -1270,27 +1015,17 @@ pm_admin_projects	change_project_intro	You can modify an existing Project using 
 pm_admin_projects	change_project_title	Change Project/Task Manager Status
 pm_admin_projects	description	설명
 pm_admin_projects	edit_update	프로젝트 수정/갱신
-pm_admin_projects	existing_subprojects	만들어진 하위 프로젝트
 pm_admin_projects	id	Id
 pm_admin_projects	is_public	공개할까요?
 pm_admin_projects	modify_category	Modify an Category in
 pm_admin_projects	no_categories	분류가 정의되어 있지 않음
 pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.</p>
-pm_admin_projects	no_subprojects	No Subprojects in this group	
 pm_admin_projects	project_inserted	Project Inserted 
 pm_admin_projects	project_name	새 프로젝트 이름
 pm_admin_projects	project_title	Title
 pm_admin_projects	projects_intro	프로젝트/임무 관리자에 새 프로젝트를 더합니다. <strong>이것은 프로젝트에 임무를 더하는 것과는 다른 작업입니다.</strong>
-pm_admin_projects	section	임무 관리자 관리
 pm_admin_projects	send_updates	Send All Updates To
-pm_admin_projects	title	하위 프로젝트 추가
 pm_admin_projects	updated_successfully	Updated Successfully ";
-pm_browse_custom	section	임무 관리자
-pm_browse_custom	title	별도 임무 보기
-pm_browse_my	section	프로젝트 $1 임무 관리자
-pm_browse_my	title	나의 임무 보기
-pm_browse_open	section	임무 관리자
-pm_browse_open	title	할당된 임무 보기
 pm_browsetask	browse	보기
 pm_browsetask	next	next 50
 pm_browsetask	overdue_tasks	* Denotes overdue tasks
@@ -1304,7 +1039,6 @@ pm_detailtask	hours	Hours
 pm_detailtask	original_comment	Original Comment
 pm_detailtask	pct_complete	달성도
 pm_detailtask	priority	우선 순위
-pm_detailtask	section	임무 관리자
 pm_detailtask	start_date	시작일
 pm_detailtask	status	상태
 pm_detailtask	submitted_by	Submitted By
@@ -1323,7 +1057,6 @@ pm_include_grouphtml	browse_task	임무 보기
 pm_include_grouphtml	error_disabled	This Project Has Turned Off The Task Manager
 pm_include_grouphtml	gantt_chart	Gantt Chart
 pm_include_grouphtml	not_started	시작되지 않음
-pm_include_grouphtml	project	Project
 pm_include_grouphtml	reporting	보고하기
 pm_include_taskhtml	by	By
 pm_include_taskhtml	comment	Comment
@@ -1334,7 +1067,6 @@ pm_include_taskhtml	followups	Folloups
 pm_include_taskhtml	no_changes	No Changes Have Been Made
 pm_include_taskhtml	no_comments	No Comments Have Been Added
 pm_include_taskhtml	no_depend_info	No Tasks are Dependent on This Task
-pm_include_taskhtml	no_followups	No Followups
 pm_include_taskhtml	no_tracker_items	No Related Tracker Items Have Been Added
 pm_include_taskhtml	old_value	Old Value
 pm_include_taskhtml	open_date	Open Date
@@ -1354,11 +1086,6 @@ pm_projectgroup	error_min_desc_length	Document Description Must Be At Least 10 C
 pm_projectgroup	error_min_name_length	Title Must Be At Least 5 Characters
 pm_projectgroup	none_found	No ProjectGroups Found
 pm_projecttask	circular_dependency	Circular Dependency Detected'
-pm_projecttask	mail_followups_body	\nDate: $1\nBy: $2\n\nComment:\n$3
-pm_projecttask	mail_followups_footer	For more info, visit:
-pm_projecttask	mail_followups_subject	Task #
-pm_projecttask	mail_followups_title	\n\nFollow-Ups
-pm_projecttask	mail_notice			Task # $1 has been updated\n\nProject: $2\nSubproject: $3\nSummary: $4\nComplete: $5\nStatus: $6\n\nDescription: $7
 pm_reporting	aging_report	Aging Report
 pm_reporting	all_tasks_by_category	All Tasks By Category
 pm_reporting	all_tasks_by_technician	All Tasks By Technician
@@ -1374,21 +1101,15 @@ pm_reporting	started_tasks	Number of started tasks
 pm_reporting	tasks_by_category	Tasks By Category
 pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	title	임무 리포팅 시스템
-pm_task	create_successfully	Task Created Successfully
 project_admin	add_user	사용자 추가
 project_admin	docmanager_admin	문서 관리자 설정
 project_admin	download_tarball	CVS 트리 tarball 내려받기
-project_admin	edit_file_releases	파일 릴리즈 편집/추가하기
-project_admin	edit_member_permissions	프로젝트 멤버 권한 설정하기
-project_admin	file_releases	파일 릴리즈
 project_admin	forum_admin	게시판 설정
 project_admin	group_members	프로젝트 멤버
 project_admin	homepage_link	홈페이지 링크:&nbsp;
 project_admin	mail_admin	메일 설정
 project_admin	news_admin	뉴스 설정
-project_admin	packages	패키지
 project_admin	project_information	그외 프로젝트 정보
-project_admin	section	프로젝트: $1
 project_admin	shell_server	프로젝트 shell (SSH) 서버:&nbsp;
 project_admin	shell_server_group_directory	shell 서버의 프로젝트 디렉토리:&nbsp; 
 project_admin	short_description	짧은 설명:&nbsp;
@@ -1421,8 +1142,6 @@ project_admin_database	state	상태
 project_admin_database	title	데이터베이스 정보
 project_admin_database	update	갱신
 project_admin_editgroupinfo	active_features	사용중인 기능들
-project_admin_editgroupinfo	enable_anonymous_cvs	익명 CVS 접근 허용
-project_admin_editgroupinfo	enable_pserver	pserver 허용
 project_admin_editgroupinfo	group_name	프로젝트 이름
 project_admin_editgroupinfo	group_updated	프로젝트 정보가 갱신되었습니다.
 project_admin_editgroupinfo	homepage_link	홈페이지 링크
@@ -1521,8 +1240,6 @@ project_admin_group_trove	update_changes	분류 정보 변경사항 갱신
 project_admin_history	info	이 로그는 언제 누가 프로젝트를 변경했는지 보여줍니다.
 project_admin_history	section	프로젝트 $1 - 관리
 project_admin_history	title	히스토리
-project_admin_newrelease	section	프로젝트 $1 - 관리
-project_admin_newrelease	title	새 릴리즈 추가
 project_admin_qrs	changelog	변동사항
 project_admin_qrs	create_new_package	또는 $1 새로운 패키지를 생성합니다. $2
 project_admin_qrs	file_name	파일 이름
@@ -1546,62 +1263,13 @@ project_admin_qrs	required_release_name	릴리즈 이름을 정의하셔야 합�
 project_admin_qrs	section	프로젝트 $1 - 관리
 project_admin_qrs	title	QRS: 퀵 릴리즈 시스템
 project_admin_qrs	upload_new_file	새로운 파일 올리기
-project_admin_rmuser	cancel	취소
-project_admin_rmuser	cannot_remove_admin	$1 관리자는 제거할 수 없습니다.
-project_admin_rmuser	info	<h3>$1 에서 개발자 삭제</h3><p>지금 귀하는 $1로부터 개발자를 제거하려고 합니다. 확인하십시오:</p>
-project_admin_rmuser	operation_not_permitted	동작이 허용되지 않습니다.
-project_admin_rmuser	remove	제거
-project_admin_rmuser	title	사용자 제거
 project_admin_showreleases	date	날짜
 project_admin_showreleases	no_release	이 패키지에 릴리즈가 없습니다.
 project_admin_showreleases	package_name	패키지 이름
 project_admin_showreleases	release_name	릴리즈 이름
 project_admin_showreleases	title	새 파일 버전 릴리즈
-project_admin_userpermedit	add_to_all	모두에 추가
-project_admin_userpermedit	add_to_tracker	문제점 추적 기능에 추가
-project_admin_userpermedit	admin	관리
-project_admin_userpermedit	admin_only	관리만
-project_admin_userpermedit	admin_tech	관리자 & 테크니션
-project_admin_userpermedit	developer_not_found	이 프로젝트에는 개발자가 없습니다.
-project_admin_userpermedit	docman	문서 관리자
-project_admin_userpermedit	editing_permissions	사용자 $1 ($2)의 권한을 편집하고 있습니다.
-project_admin_userpermedit	editor	편집자
-project_admin_userpermedit	file_release_role	파일 릴리즈 역할
-project_admin_userpermedit	forums	게시판
-project_admin_userpermedit	invalid_user	유효하지 않은 사용자입니다.
-project_admin_userpermedit	moderator	게시판 관리자
-project_admin_userpermedit	no_permissions	권한이 없습니다.
-project_admin_userpermedit	not_available	사용할 수 없습니다.
-project_admin_userpermedit	permissions_updated	권한이 갱신되었습니다.
-project_admin_userpermedit	pm	프로젝트/임무 관리자
-project_admin_userpermedit	project_admin	프로젝트 관리자
-project_admin_userpermedit	project_role	프로젝트 역할
-project_admin_userpermedit	property	속성
-project_admin_userpermedit	release_technician	릴리즈 테크니션
-project_admin_userpermedit	remove	제거
-project_admin_userpermedit	reset_changes	변동사항 리셋
 project_admin_userpermedit	section	프로젝트 $1 - 관리
-project_admin_userpermedit	technician	테크니션
-project_admin_userpermedit	title	개발자간 권한 편집
-project_admin_userpermedit	tracker_info	<h3>사용자를 다음 문제점 추적 기능에 추가합니다. :</h3>	<p> 이 사용자를 어느 문제점 추적 항목 권한에 추가할지 결정하실 수 있으며 "Add To All"을 선택하시면 모든 문제점 추적 항목에 간단히 추가됩니다.</p>
-project_admin_userpermedit	tracker_manager	임무 관리자
-project_admin_userpermedit	undefined	미정
-project_admin_userpermedit	update_permissions	개발자 권한 갱신
-project_admin_userpermedit	user_added	사용자가 성공적으로 추가되었습니다.
-project_admin_userpermedit	user_does_not_exist	사용자가 존재하지 않습니다.
-project_admin_userpermedit	value	수치
-project_admin_userperms	docman	문서<br />관리자
-project_admin_userperms	editor	편집자
-project_admin_userperms	forums	게시판
-project_admin_userperms	general	일반
-project_admin_userperms	info	권한을 편집하기 위해서는 개발자의 이름을 클릭하십시오.
-project_admin_userperms	moderator	게시판 관리자
-project_admin_userperms	no_developers	개발자가 없습니다.
-project_admin_userperms	rel_tech	릴리즈 테크니션
 project_admin_userperms	section	프로젝트 $1 - 관리
-project_admin_userperms	task_manager	임무<br />관리자
-project_admin_userperms	title	사용자간 권한 보기
-project_admin_userperms	tracker_manager	문제점 추적<br />관리자
 project_admin_utils	admin	관리
 project_admin_utils	by	By
 project_admin_utils	change_history	프로젝트 변경 이력
@@ -1609,7 +1277,6 @@ project_admin_utils	database_admin	database 설정
 project_admin_utils	date	날짜
 project_admin_utils	edit_jobs	멤버 구함
 project_admin_utils	edit_public_info	공개 정보 편집
-project_admin_utils	edit_release_files	파일 릴리즈/편집
 project_admin_utils	field	항목
 project_admin_utils	multimedia_data	멀티미디어 데이터 편집
 project_admin_utils	old_value	기존 수치
@@ -1617,7 +1284,6 @@ project_admin_utils	permission_blurb	<strong>알림:</strong><dl><dt><strong>프
 project_admin_utils	post_jobs	멤버 구함 공지 올리기
 project_admin_utils	project_history	프로젝트 히스토리
 project_admin_utils	stats	상태
-project_admin_utils	user_permissions	사용자 권한
 project_admin_utils	vhosts	VHOSTs
 project_admin_vhost	create	생성
 project_admin_vhost	delete	삭제
@@ -1635,13 +1301,9 @@ project_filemodule_monitor	start_monitor_body	모니터링이 시작되었습니
 project_filemodule_monitor	start_monitor_title	모니터링이 시작되었습니다.
 project_filemodule_monitor	stop_monitor_body	모니터링이 중단되었습니다.
 project_filemodule_monitor	stop_monitor_title	모니터링이 중단되었습니다.
-project_home	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
-project_home	forum_messages	게시판 갯수: <strong>$2</strong> 글 갯수: <strong>$1</strong>
-project_home	forums	게시판
 project_home	help_wanted	멤버 구함: 이 프로젝트는 다음 역할을 맡아줄 멤버를 구하고 있습니다 : 
 project_home	help_wanted_multiple	$1개의 서로 다른 역할을 맡아줄 멤버를 구합니다.</a>
 project_home	holding_note	알림: 이 프로젝트 엔트리는 $1의 관리자에 의해 유지되고 있습니다. 우리는 이 프로젝트의 공식 사이트가 아닙니다. 추가적인 저작권 정보는 프로젝트의 홈페이지에서 찾아보실 수 있습니다.
-project_home	messages_in	메시지 
 project_home	monitor_package	이 패키지를 모니터링하기
 project_home	no_subprojects	공개된 하위 프로젝트가 없습니다.
 project_home	no_trackers	공개된 문제점 추적 항목이 없습니다.
@@ -1675,30 +1337,13 @@ project_showfiles	package	패키지
 project_showfiles	project_totals	전체
 project_showfiles	release_highlighted	선택하신 릴리즈가 <span style="background-color:pink">하이라이트</span>되었습니다.
 project_showfiles	release_notes	릴리즈 &amp; 노트
-project_showfiles	section	프로젝트: $1
 project_showfiles	size	크기
 project_showfiles	title	파일 보기
 project_shownotes	changes	변동사항:
 project_shownotes	error_release_not_found	해당되는 릴리즈가 없습니다.
 project_shownotes	notes	릴리즈 노트:
 project_shownotes	release_name	릴리즈 이름 :
-project_shownotes	section	프로젝트: $1
 project_shownotes	title	릴리즈 노트와 변동사항
-project_stats	change_stats_view	통계 항목 변경
-project_stats	detailed_statistics	Detailed statistics for
-project_stats	last_30_days	최근 30일
-project_stats	last_7_days	최근 7일
-project_stats	monthly	월별
-project_stats	tasks	Tasks
-project_stats	title	프로젝트 통계
-project_stats	tracker	Tracker
-project_stats	usage_statistics	이용 통계
-project_stats	view_reports	보고 방식
-project_stats_graph	date	일자
-project_stats_graph	page_view_days	지난 $1 일 동안의 페이지 뷰(적색)와 다운로드 횟수(청색)
-project_stats_graph	page_view_months	지난 $1 달 동안의 페이지 뷰(적색)와 다운로드 횟수(청색)
-project_stats_graph	statistics	$1의 $2 통계
-project_stats_graph	views	페이지 뷰 (적색) / 다운로드 횟수 (청색)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	문제추적
 project_stats_utils	bugs	버그
@@ -1715,8 +1360,6 @@ project_stats_utils	stats_for_days	지난 $1 일 동안의 통계
 project_stats_utils	stats_for_months	지난 $1 달 동안의 통계
 project_stats_utils	support	지원
 project_stats_utils	tasks	임무
-projects	section	프로젝트: $1
-projects	title	요약
 register	apply_for_registration	프로젝트를 등록하려면, 프로젝트에 대한 기본 정보를 작성하셔야 합니다. 아래의 설명을 주의깊게 읽어보시고, 완전하고 자세한 내용을 제공해 주십시오. 아래의 모든 필드는 필수입니다.
 register	comprehensive_description	프로젝트 설명을 더 자세하게 해주십시오.
 register	conflicting_licenses_choice	라이센스 선택이 충돌합니다.
@@ -1725,8 +1368,6 @@ register	i_agree	동의합니다
 register	i_disagree	동의하지 않습니다
 register	invalid_full_name	유효하지 않은 프로젝트 이름입니다.
 register	invalid_unix_name	유효하지 않은 유닉스 이름입니다.
-register	license_type	Public domain</a><li>Website Only<li>기타/개별 라이센스</ul><p><strong>이 프로젝트의 라이센스</strong><br/ ><strong>라이센스:</strong><br />
-register	maximum_description	프로젝트 설명은 255 글자 이내로 해주십시오.
 register	more_license_description	라이센스 설명을 더 자세하게 해주십시오.
 register	no_license_chosen	라이센스를 선택하지 않았습니다.
 register	other_license	"기타"를 선택하셨다면, 이유와 함께 라이센스를 설명해 주십시오. 기타 라이센스는 표시되지 않는 점에 주의하시고, 라이센스가 오픈소스 정의에 적합한지 확인하기 위해서, 프로젝트가 생성될 때까지 시간이 추가로 소모됩니다.
@@ -1738,31 +1379,9 @@ register	project_submitted	프로젝트를 $1 관리자에게 제출했습니다
 register	project_unix_name	<h3>5. 프로젝트 유닉스 이름</h3><p>프로젝트 이름에 덧붙여서, 짧은 형식의 유닉스 이름을 선택해야 합니다.</p><p>유닉스 이름은 사이트에서 여러가지로 사용하기 때문에 몇가지 제한이 존재합니다:<ul><li>다른 프로젝트의 유닉스 이름과 같을 수 없습니다.<li>3 글자에서 15 글자 사이여야 합니다.<li>소문자만을 사용할 수 있습니다.<li>영문자, 숫자, 대쉬만을 사용할 수 있습니다.<li>유효한 유닉스 사용자명이여야 합니다.<li>예약된 도메인과 일치해서는 안됩니다.<li>유닉스 이름은 변경할 수 없습니다.</ul><p>유닉스 이름은 다음과 같이 여러가지로 사용합니다:<ul><li><tt>unixname.$1</tt> 웹사이트<li><tt>cvs.unixname.$1</tt>에서 CVS 저장소 루트 <tt>/cvsroot/unixname</tt><li><tt>unixname.$1</tt>으로 쉘 접근<li>사이트 전체의 검색 엔진</ul><p>유닉스 이름:<br/>
 register	purpose_and_summarization	<h3>2. 프로젝트 목적과 요약</h3><p><strong></strong><p><strong>프로젝트에 대한 자세하고 정확한 설명과 어떠한 $1 기능을 사용할 예정인지 적어주십시오. 이 설명은 $1에서 프로젝트 공간의 제공 여부를 결정하는 기초 자료이며, 의도한 대로 서비스를 사용하기 위한 보증입니다. 이 설명은 프로젝트의 공개 설명이 아닙니다.</strong></p>
 register	registration_complete	등록 완료
-register	title	새 프로젝트 등록
 register	unix_group_name_already_taken	이미 존재하는 유닉스 이름입니다.
-register_complete	section	새 프로젝트 등록
-register_complete	title	등록 완료
-register_projectinfo	section	새 프로젝트 등록
-register_projectinfo	title	프로젝트 정보
-register_requirements	section	새 프로젝트 등록
-register_requirements	title	제공되는 서비스 및 요구사항
-register_tos	section	새 프로젝트 등록
-register_tos	title	서비스에 관한 약속
-scm_index	anoncvs	<p><b>익명 CVS 권한</b></p><p>이 프로젝트의 CVS 저장소는 다음과 같은 방법을 통해 익명(pserver)으로 체크아웃하실 수 있습니다. <i>modulename</i>에 체크아웃하고자 하는 모듈 이름을 정확히 명시하셔야 합니다. <i>anonymous</i>에 대해서 비밀번호를 입력하는 부분이 나오면 그냥 엔터키를 누르시면 됩니다.
-scm_index	anoncvsup	모듈 디렉토리 안에서 업데이트를 받아보실 경우에는 -d 인자가 필요 없습니다.
-scm_index	browseit	CVS 저장소 둘러보기
-scm_index	browsetree	<hr><b>CVS 저장소 둘러보기</b> <p>CVS 저장소를 둘러보시면 현재 프로젝트가 어떻게 진행되고 있는지 쉽게 살펴보실 수 있습니다. 그리고 저장소 안에서 어떤 특정 파일에 대한 전체 내역도 아울러 보실 수 있습니다.
 scm_index	scm_repository	SCM 저장소
-scm_index	devcvs	<p><b>SSH를 통한 개발자의 CVS 접근</b></p><p>프로젝트에 개발자로 등록되어 있는 사람만이 이 방법을 사용하실 수 있습니다. 클라이언트 측에 SSH1이 설치되어 있어야 합니다. <i>modulename</i>과 <i>developername</i>을 적절히 바꾸어서 넣어 주시면 됩니다. 비밀번호는 자기 자신의 비밀번호를 입력하세요.
-scm_index	developer_commits_adds	개발자 (30 일/Commits) (30 일/Adds)
-scm_index	developername	개발자이름
-scm_index	error_only_projects_can_use_cvs	오류. CVS는 프로젝트에서만 사용할 수 있습니다.
 scm_index	error_this_project_has_turned_off	오류. 이 프로젝트는 CVS기능을 사용하지 않도록 설정되어 있습니다.
-scm_index	history	저장소 히스토리
-scm_index	modulename	모듈명
-scm_index	nohistory	이 프로젝트는 CVS 히스토리가 없습니다.
-scm_index	section	프로젝트: $1
-scm_index	title	CVS
 search	title	찾기
 searchbox	forum	이 게시판
 searchbox	people	사람
@@ -1781,7 +1400,6 @@ sendmessage	message_sent	메일이 발송되었습니다.
 sendmessage	name	보내는 사람 이름
 sendmessage	send	메일 보내기
 sendmessage	subject	제목
-sendmessage	title	메일 보내기: $1
 session	cannotinit	오류 - 세션을 초기화할 수 없습니다
 session	deleted	Account 삭제되었습니다
 session	invalidpasswd	비밀번호나 사용자 이름이 틀렸습니다
@@ -1811,12 +1429,7 @@ snippet_addversion	section	코드 라이브러리
 snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
 snippet_addversion	snippet_version_added_successfully	Snippet Version Added Successfully.
 snippet_addversion	submit	SUBMIT
-snippet_addversion	title	새 버전 올리기
-snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
-snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
-snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
 snippet_addversion	version	Version:
-snippet_browse	creator	Creator
 snippet_browse	error_bad_url	Error, Error - bad url?
 snippet_browse	no_snippets_found	No snippets found
 snippet_browse	packages_of_snippets	Packages Of Snippets
@@ -1830,15 +1443,7 @@ snippet_browse	title	코드 둘러보기
 snippet_caching	browse_by_category	Browse by Category
 snippet_caching	browse_by_language	Browse by Language
 snippet_caching	intro	<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>
-snippet_delete	error_mangled_url	Error, Error - mangled URL?
-snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
-snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
-snippet_delete	item_removed_from	Item Removed From Package
-snippet_delete	package_removed	Package Removed
 snippet_delete	section	코드 라이브러리
-snippet_delete	snippet_removed	Snippet Removed
-snippet_delete	that_snippet_doesnt_exist	Error - That snippet doesn't exist in this package.
-snippet_delete	title	코드 지우기
 snippet_detail	author	Author
 snippet_detail	changes_since_last_version	Changes since last version:
 snippet_detail	date_posted	Date Posted
@@ -1860,8 +1465,6 @@ snippet_detail	version_of_this_package	Versions Of This Package:
 snippet_detail	version_of_this_snippet	Versions Of This Snippet:
 snippet_detail	you_can_submit_a_new	You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.
 snippet_detail	you_can_submit_a_new_version_of_package	You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.
-snippet_download	error	Error
-snippet_download	nothing_in_here	nothing in here
 snippet_index	title	Snippet Library
 snippet_package	add_snippet_to	Add Snippets To Package
 snippet_package	add_snippet_to_package	Add Snippets to Package
@@ -1889,8 +1492,6 @@ snippet_package	you_can_group	<p>You can group together existing snippets into a
 snippet_submit	category	Category
 snippet_submit	description	Description
 snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
-snippet_submit	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
-snippet_submit	error_go_back_and_fill	Error, Error - Go back and fill in all the information
 snippet_submit	language	Language
 snippet_submit	license	License
 snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
@@ -1898,9 +1499,7 @@ snippet_submit	paste_the_code_here	Paste the Code Here
 snippet_submit	section	코드 라이브러리
 snippet_submit	snippet_added_successfull	Snippet Added Successfully.
 snippet_submit	snippet_title	Title
-snippet_submit	snippet_version_added_successfully	Snippet Version Added Successfully
 snippet_submit	submit	SUBMIT
-snippet_submit	submit_a_new_snippet	Submit A New Snippet
 snippet_submit	suggest_a_category	Suggest a Category
 snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	title	코드 제출
@@ -1912,20 +1511,16 @@ snippet_utils	author	Author
 snippet_utils	bbs_systems	BBS Systems
 snippet_utils	browse	Browse
 snippet_utils	calendars	Calendars
-snippet_utils	category	Category:
 snippet_utils	choose_one	Choose One
 snippet_utils	class	Class
 snippet_utils	create_a_package	Create A Package
 snippet_utils	database_manipulation	Database Manipulation
-snippet_utils	description	Description:
 snippet_utils	download_version	Download Version
 snippet_utils	file_management	File Management
 snippet_utils	full_script	Full Script
 snippet_utils	function	Function
 snippet_utils	games	Games
 snippet_utils	html_manipulation	HTML Manipulation
-snippet_utils	language	Language:
-snippet_utils	license	License:
 snippet_utils	math_functions	Math Functions
 snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
 snippet_utils	other	Other
@@ -1938,12 +1533,9 @@ snippet_utils	snippet_id	Snippet ID
 snippet_utils	snippet_in_this_package	Snippets In This Package:
 snippet_utils	snippet_title	Title
 snippet_utils	submit_a_new_snippet	Submit A New Snippet
-snippet_utils	type	Type:
 snippet_utils	unix_admin	UNIX Admin
 snippet_utils	voting	Voting
 snippet_utils	website_only	WebSite Only
-softwaremap	title	Trove
-softwaremap	title	Trove
 source	file_not_found	File Not Found
 source	file_not_found_text	Cannot find specified file to display.
 source	invalid_argument	Invalid File Argument
@@ -1952,12 +1544,7 @@ source	missing_file	Missing File Argument
 source	missing_file_text	A file must be specified for this page.
 source	show_source	Show source
 source	source_of	Source of $1
-staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-stats	overview_stats	OVERVIEW STATS
-stats	project_stats	PROJECT STATS
-stats	site_graphs	SITE GRAPHS
 stats	title	$1 Site Statistics
-stats_graph	joverview_stats	OVERVIEW STATS
 stats_graph	project_stats	PROJECT STATS
 stats_graph	site_graphs	SITE GRAPHS
 stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
@@ -1971,7 +1558,6 @@ stats_index	other_statistics	Other statistics:<ul><li><a href="i18n.php">I18n St
 stats_index	overview_stats	OVERVIEW STATS
 stats_index	project_stats	PROJECT STATS
 stats_index	site_graphs	SITE GRAPHS
-stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
 stats_lastlogins	date	Date
 stats_lastlogins	last_logins	Last Logins
 stats_lastlogins	most_recent_open	Most Recent Opened Sessions
@@ -2009,7 +1595,6 @@ stats_site_utils	report	Report:
 stats_site_utils	returned_no_category	returned no category name
 stats_site_utils	site	Site
 stats_site_utils	site_views	Site Views
-stats_site_utils	special_project_list	Special Project List
 stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
 stats_site_utils	statistics_for_the_past_months	Statistics for the past $1 months.
 stats_site_utils	subdomain	Subdomain
@@ -2029,7 +1614,6 @@ stats_view_graph	views	Views (RED)
 survey	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
 survey	high	High
 survey	low	Low
-survey	permission_denied	Permission Denied
 survey	survey_not_found	설문 조사를 찾을 수 없습니다.
 survey	survey_privacy	Survey Privacy
 survey	title	설문조사
@@ -2041,7 +1625,6 @@ survey_add_question	question_type	Question type
 survey_add_question	show_existing_questions	Show Existing Questions.
 survey_add_question	title	Add A Question
 survey_add_survey	add_this_survey	Add This Survey
-survey_add_survey	error_in_insert	Error in Survey Insert
 survey_add_survey	existing_surveys	Existing Surveys
 survey_add_survey	is_active	Is Active?
 survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
@@ -2050,42 +1633,12 @@ survey_add_survey	no	No
 survey_add_survey	show_existing_question	Show Existing Questions
 survey_add_survey	survey_inserted	Survey Inserted
 survey_add_survey	title	Add A Survey
-survey_add_survey	title_is_required	Survey title is required
 survey_add_survey	yes	Yes
-survey_admin	section	설문조사 도구
-survey_admin	title	관리하기
-survey_admin_add_question	section	설문조사 관리
-survey_admin_add_question	title	설문 추가
-survey_admin_add_survey	section	설문조사 관리
-survey_admin_add_survey	title	설문조사 추가
-survey_admin_edit_question	section	설문조사 관리
-survey_admin_edit_question	title	질문내용 편집
-survey_admin_edit_survey	section	설문조사 관리
-survey_admin_edit_survey	title	설문조사 편집
-survey_admin_index	add_question	Add Questions
-survey_admin_index	add_survey	Add Surveys
-survey_admin_index	edir_existing_survey	Edit Existing Surveys
-survey_admin_index	edit_existing_question	Edit Existing Questions
 survey_admin_index	its_simple_to_create	<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: $1 where XX is the survey number
 survey_admin_index	permission_denied	Permission Denied
-survey_admin_index	show_results	Show Survey Results
 survey_admin_index	title	Survey Administration
 survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
-survey_admin_show_questions	section	설문조사 관리
-survey_admin_show_questions	title	질문내용 보기
-survey_admin_show_results	section	설문조사 관리
-survey_admin_show_results	title	설문조사 결과 보기
-survey_admin_show_results_aggregate	section	설문조사 관리
-survey_admin_show_results_aggregate	title	설문조사 결과 보기
-survey_admin_show_results_comments	section	설문조사 관리
-survey_admin_show_results_comments	title	설문에 대한 답글 보기
-survey_admin_show_results_individual	section	설문조사 도구 관리
-survey_admin_show_results_individual	title	각각의 설문조사 결과 보기
 survey_admin_utils	found	$1 surveys found
-survey_admin_utils	group_id	Group Id
-survey_admin_utils	survey_id	Survey Id
-survey_admin_utils	survey_questions	Survey questions
-survey_admin_utils	survey_title	Title of survey
 survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
 survey_edit	existing_surveys	Existing Surveys
 survey_edit	is_active	Is Active
@@ -2116,10 +1669,8 @@ survey_edit_question	title	Edit A Question
 survey_edit_question	update_failed	UPDATE FAILED
 survey_edit_question	update_successful	UPDATE SUCCESSFUL
 survey_edit_question	warning_change_after_response	WARNING! It is a bad idea to change a question after responses to it have been submitted
-survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
 survey_index	survey_id	Survey ID
 survey_index	survey_title	Survey Title
-survey_index	this_group_has	This Group Has No Active Surveys
 survey_index	title	Survey
 survey_privacy	survey_privacy	Survey Privacy
 survey_privacy	the_privacy_information	<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
@@ -2147,14 +1698,8 @@ survey_show_questions	note_use_these_questions_id	NOTE: use these question_id's 
 survey_show_questions	permission_denied	Permission Denied
 survey_show_questions	title	Survey Questions
 survey_show_questions	you_may_use_any_of_these	You may use any of these questions on your surveys
-survey_show_result_comment	found	Found
-survey_show_result_comment	permission_denied	Permission Denied
-survey_show_result_comment	question	Question:
-survey_show_result_comment	title	Survey Aggregate Results
-survey_show_results	found	Found
 survey_show_results	permission_denied	Permission Denied
 survey_show_results	title	Survey Results
-survey_show_results	view_aggregate_responses	View Aggregate Responses
 survey_show_results_aggregate	average	Average
 survey_show_results_aggregate	error	error
 survey_show_results_aggregate	no	No
@@ -2168,10 +1713,6 @@ survey_show_results_csv	permission_denied	Permission Denied
 survey_show_results_individual	permission_denied	Permission Denied
 survey_show_results_individual	title	Results
 survey_show_results_individual	yes_no	Yes / No
-survey_survey	section	설문조사
-survey_survey	title	설문조사 보기
-survey_survey_resp	section	설문조사 도구
-survey_survey_resp	title	설문조사 처리 및 반응
 survey_utils	add_question	질문 추가하기
 survey_utils	add_survey	설문조사 추가하기
 survey_utils	admin	관리
@@ -2182,8 +1723,6 @@ survey_utils	show_results	결과 보여주기
 system	datefmt	Y-m-d H:i
 system	locale	en_US
 system	strftimefmt	%Y %B %e  %H:%M
-themes	section	사용자 등록 정보
-themes	title	테마 보기/바꾸기
 top	NA	N/A
 top	about_blurb	이곳 $1에서 운영되고 있는 여러 프로젝트들에 대한 사용 기록을 집계하여 여러가지 분류를 통해 보실 수 있도록 하고 있습니다.
 top	active_all_time	현재 가장 활발한 프로젝트
@@ -2203,18 +1742,12 @@ top	view_other_top_category	다른 통계 상황 보기
 top_mostactive	percentile	비율
 top_mostactive	project_name	프로젝트 이름
 top_mostactive	rank	순위
-top_mostactive	section	상위 프로젝트
-top_mostactive	title	가장 활발한 프로젝트: $1
 top_mostactive	updated_daily	매일 갱신됩니다.
-top_toplist	change	변동
 top_toplist	download	다운로드
-top_toplist	last_rank	지난번 순위
 top_toplist	pageviews	페이지뷰
 top_toplist	posts	올린글수
 top_toplist	project_name	프로젝트 이름
 top_toplist	rank	순위
-top_toplist	section	상위 프로젝트
-top_toplist	title	상위 프로젝트 보기
 top_toplist	top_download	최다 다운로드
 top_toplist	top_download_7_days	지난 7일동안의 최다 다운로드 기록
 top_toplist	top_forum_post_count	가장 글이 많은 게시판
@@ -2226,41 +1759,30 @@ top_topusers	last_rank	지난번 순위
 top_topusers	rank	순위
 top_topusers	rating	평가
 top_topusers	real_name	이름
-top_topusers	title	우수 사용자
 top_topusers	user_name	사용자ID
 tracker	admin	관리
 tracker	any	Any
 tracker	assigned_to	담당자
 tracker	assignee	담당자
-tracker	category	분류
-tracker	category_any	전체
 tracker	check_upload	파일을 업로드/첨부하시려면 선택하십시오.
 tracker	choose	추적할 항목을 선택하십시오. 각 항목을 살펴보시거나 편집하실 수 있고 새로운 항목을 추가하실 수도 있습니다.
 tracker	close_date	해결한 날
-tracker	comment	의견
-tracker	comment_added	의견이 추가되었습니다.
-tracker	comments	의견
 tracker	date	날짜
 tracker	detailed_description	자세한 설명
 tracker	file_delete	파일 삭제: 
 tracker	file_delete_successful	파일 삭제: 성공
-tracker	file_delete_upload	파일 업로드
 tracker	file_description	파일 설명
 tracker	file_upload_successful	파일 업로드: 성공
 tracker	followups	Followup
-tracker	group	그룹
-tracker	group_any	전체
 tracker	id	ID
 tracker	insert_email	<strong>로그인하실 수 없다면</strong>, 이메일 주소를 입력하셔야 합니다.
 tracker	item_created	항목을 생성하였습니다.
-tracker	item_group	그룹
 tracker	no_trackers	접근할 수 있는 문제점 추적 항목이 없습니다.
 tracker	no_trackers_text	문제점 추적 기능을 설정하지 않았거나, 볼 수 있는 권한이 없습니다.<p><FONT COLOR=RED>프로젝트 관리자는 $1 관리자 페이지 $2를 사용하여 데이터형을 설정할 수 있습니다.</FONT></strong>
 tracker	open_date	제출한 날
 tracker	please_login	Please $1 login $2
 tracker	priority	중요도
 tracker	reporting	보고서
-tracker	resolution	해결방안
 tracker	section	프로젝트: $1
 tracker	security_note	메시지에 비밀번호나 기밀 정보를 입력하지 마십시오!
 tracker	status	상태
@@ -2268,47 +1790,32 @@ tracker	status_any	전부
 tracker	submitted_by	제출자
 tracker	submitter	제출자
 tracker	summary	요약
-tracker	title	문제점 추적
 tracker	tracker_item	문제점 추적 항목
 tracker	unassigned	없음
 tracker	updated_successful	갱신 성공
 tracker_add	for_project	프로젝트
 tracker_add	section	$1
 tracker_add	submit		제출
-tracker_add	title	문제점 추적 항목 제출
 tracker_admin	add_canned_responses	미리 준비한 의견 추가/갱신
 tracker_admin	add_canned_responses_info	문제점 추적 기능에서 사용하는 일반적인 응답 메시지를 작성/변경합니다.
 tracker_admin	add_categories	분류 추가/갱신
 tracker_admin	add_categories_info	'mail module', 'gant chart module', 'CVS' 등과 같은 분류를 추가합니다.
 tracker_admin	add_group_infos	'v1.2', '지원 안됨', '확인 안됨' 등과 같은 그룹을 추가합니다.
 tracker_admin	add_groups	그룹 추가/갱신
-tracker_admin	add_permissions	사용자 및 권한 추가/갱신
-tracker_admin	add_permissions_info	이 문제점 추적에 사용자를 추가/제거합니다.
-tracker_admin	admin	관리
-tracker_admin	auto_assign_to	자동 할당
 tracker_admin	canned_response_inserted	미리 준비한 의견이 추가되었습니다.
 tracker_admin	canned_response_updated	미리 준비한 의견이 갱신되었습니다.
-tracker_admin	category_add_warning	추가한 분류는 삭제할 수 없습니다.
-tracker_admin	category_inserted	분류가 추가되었습니다.
 tracker_admin	category_name	분류 이름
-tracker_admin	category_updated	분류가 갱신되었습니다.
 tracker_admin	choose_datatype	항목을 선택하면 분류, 그룹, 사용자 권한 등을 설정할 수 있습니다.
 tracker_admin	error_inserting	추가 에러
 tracker_admin	error_updating	갱신 에러
-tracker_admin	group_inserted	그룹이 추가되었습니다.
 tracker_admin	group_name	새 그룹 이름
-tracker_admin	group_updated	그룹이 갱신되었습니다.
 tracker_admin	intro	<h3>새로운 문제점 추적</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
-tracker_admin	section	문제점 추적
 tracker_admin	title	관리
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	제목
 tracker_admin	tracker_updated	문제점 추적이 갱신되었습니다.
 tracker_admin	update_preferences	Update preferences
 tracker_admin	update_preferences_info	파기 날짜, 이메일 주소 등을 설정합니다.
-tracker_admin	users_added	사용자가 추가되었습니다.
-tracker_admin	users_deleted	사용자가 삭제되었습니다.
-tracker_admin	users_updated	사용자가 갱신되었습니다.
 tracker_admin_add_canned	canned_response_body	본문
 tracker_admin_add_canned	canned_response_info	자주 있는 질문에 대해 시간을 절약할 수 있도록 미리 준비된 답변을 만듭니다.
 tracker_admin_add_canned	canned_response_title	제목
@@ -2316,42 +1823,18 @@ tracker_admin_add_canned	existing_responses	존재하는 의견들
 tracker_admin_add_canned	no_responses	이 그룹에는 의견이 존재하지 않습니다
 tracker_admin_add_canned	section	문제점 추적 관리
 tracker_admin_add_canned	title	미리 준비한 의견 추가: $1
-tracker_admin_add_cat	no_categories	분류가 정의되어 있지 않습니다
 tracker_admin_add_cat	section	문제점 추적 관리
-tracker_admin_add_cat	title	Add Categories to $1
-tracker_admin_add_group	group_add_warning	일단 그룹을 추가하고 나면, 지울 수 없습니다
-tracker_admin_add_group	no_groups_defined	그룹이 정의되어 있지 않습니다
 tracker_admin_add_group	section	문제점 추적 관리
-tracker_admin_add_group	title	$1 에 그룹 추가
-tracker_admin_add_users	add_all_users	모든 사용자 추가
-tracker_admin_add_users	add_user_info	<h3>추가할 사용자:</h3><p>사용자를 한명씩 선택하거나, "모든 사용자 추가"를 체크하여 한꺼번에 모두 추가할 수 있습니다.</p>
-tracker_admin_add_users	add_users	사용자 추가
-tracker_admin_add_users	admin_only	관리자
-tracker_admin_add_users	category_permission	권한
-tracker_admin_add_users	delete	삭제
-tracker_admin_add_users	developers_info	<p>각 문제점 추적 게시판마다 별도의 사용자 목록과 권한을 가지고 있습니다.</p><p>개발자들을 이 게시판에 등록하고 권한을 조정하십시오.</p><p><dl><dt><strong>기술자</strong></dt><dd>항목을 담당할 수 있습니다</dd><dt><strong>관리자</strong></dt><dd>항목을 변경할 수 있습니다</dd></dl></p>
-tracker_admin_add_users	no_developers	개발자가 존재하지 않습니다
-tracker_admin_add_users	tech_admin	기술자&관리자
-tracker_admin_add_users	technician	기술자
-tracker_admin_add_users	title	$1 문제점 추적 게시판의 사용자 권한 추가/갱신
-tracker_admin_add_users	update_permissions	개발자의 권한을 갱신합니다
-tracker_admin_add_users	user_name	사용자 이름
-tracker_admin_choose	title	문제점 추적 관리
 tracker_admin_update_canned	section	문제점 추적 관리
 tracker_admin_update_canned	title	미리 준비한 의견 수정: $1
-tracker_admin_update_cat	auto_assign_to	자동 할당
-tracker_admin_update_cat	category_change_warning	다른 항목들이 참조하고 있기 때문에 분류 이름을 변경하는 것을 권장하지 않습니다. 만약에 이름을 변경한다면, 관련된 모든 항목들도 변경될 것입니다.to the new name
-tracker_admin_update_cat	category_name	분류 이름
 tracker_admin_update_cat	section	문제점 추적 관리
 tracker_admin_update_cat	title	분류 수정: $1
 tracker_admin_update_group	section	문제점 추적 관리
 tracker_admin_update_group	title	그룹 수정: $1
-tracker_admin_update_group	warning	다른 항목들이 참조하고 있기 때문에 그룹 이름을 변경하는 것을 권장하지 않습니다. 만약에 이름을 변경한다면, 관련된 모든 항목들도 변경될 것입니다.
 tracker_admin_update_type	allow_anonymous	로그인 없이 작성 허용
 tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
 tracker_admin_update_type	days_overdue	Days till considered overdue
 tracker_admin_update_type	description	설명
-tracker_admin_update_type	display_resolution	"Resolution" 박스 보이기
 tracker_admin_update_type	email_all_changes	Send email on all changes
 tracker_admin_update_type	name	<strong> 이름:</strong> (예: 회의 일정, 실험 결과, RFP 문서)
 tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
@@ -2361,7 +1844,6 @@ tracker_admin_update_type	send_submissions	Send email on new submission to addre
 tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
 tracker_admin_update_type	title	Update $1
 tracker_admin_update_users	section	문제점 추적 관리
-tracker_admin_update_users	title	문제점 추적 사용자 권한 추가/편집
 tracker_artifact	double_submit	항목이 중복 제출되었습니다. 버튼을 두번 누르시면 안됩니다.
 tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
 tracker_artifact	error_body_required	Artifact: 메시지 본문이 필요합니다.
@@ -2375,7 +1857,6 @@ tracker_artifact	monitoring_deactivated	Monitoring Deactivated
 tracker_artifact	nothing_changed	갱신 취소 - 변동사항이 없습니다.
 tracker_artifact	private_error	Artifact: Only Group Members Can View Private ArtifactTypes
 tracker_artifactfile	required_fields	ArtifactFile: 파일 이름, 타입, 크기, 데이터가 필요합니다.
-tracker_artifactgroup	required_field	ArtifactGroup: 이름이 필요합니다.
 tracker_artifacthtml	by	By
 tracker_artifacthtml	date	날짜
 tracker_artifacthtml	field	필드
@@ -2384,11 +1865,8 @@ tracker_artifacthtml	no_changes	변동 사항이 없습니다.
 tracker_artifacthtml	no_followups	뒤따르는 글이 없습니다.
 tracker_artifacthtml	old_value	이전값
 tracker_artifacthtml	sender	전송자
-tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
 tracker_artifacttype	admin	관리
-tracker_artifacttype	admin_functions	관리 기능
 tracker_artifacttype	browse	둘러보기
-tracker_artifacttype	edit_options	Edit/Update Options in
 tracker_artifacttype	nobody	Nobody
 tracker_artifacttype	none	없음
 tracker_artifacttype	reporting	사용현황
@@ -2406,11 +1884,8 @@ tracker_browse	no_change	변경 없음
 tracker_browse	no_items	항목이 없습니다
 tracker_browse	old_requests	* 요청 표시 > $1일 지났습니다.
 tracker_browse	previous	이전 50
-tracker_browse	request_id	요청 ID
-tracker_browse	resolution	해결책
 tracker_browse	section	프로젝트: $1
 tracker_browse	sort_by	정렬
-tracker_browse	title	$1 보기
 tracker_detail	add_comment	의견 추가
 tracker_detail	attached_files	첨부 파일
 tracker_detail	build_task_relation	작업 관계 작성
@@ -2435,25 +1910,7 @@ tracker_mod	existing_files	존재하는 파일
 tracker_mod	name	이름
 tracker_mod	no_files	현재 첨부 파일 없음
 tracker_mod	title	변경
-tracker_reporting	aging_report	Aging Report
-tracker_reporting	all_by_group	All Items By Artifact Group
-tracker_reporting	all_by_resolution	All Items By Resolution
-tracker_reporting	all_by_technician	All Items By Category
-tracker_reporting	all_items_by_technician	All Items By Technician
-tracker_reporting	artifact_type	Artifact Type: 
-tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
-tracker_reporting	dist_by_category	Distribution by Category
-tracker_reporting	dist_by_group	Distribution by Group
-tracker_reporting	dist_by_resolution	Distribution by Resolution
-tracker_reporting	dist_by_technician	Distribution by Technician
-tracker_reporting	items_open	Number of Items Still Open
-tracker_reporting	items_submitted	Number of Items Submitted
-tracker_reporting	open_by_group	Open By Artifact Group
-tracker_reporting	open_items_by_category	Open Items By Category
-tracker_reporting	open_items_by_resolution	Open Items By Resolution
-tracker_reporting	open_items_by_technician	Open Items By Technician
 tracker_reporting	section	$1
-tracker_reporting	title	문제점 추적 리포팅
 tracker_taskmgr	add_relation_to_task	이미 존재하는 작업과 연계하기
 tracker_taskmgr	add_relationship	선택한 작업에 대해 관계 추가
 tracker_taskmgr	build_relationships	문제점 추적과 임무 관리자 연계하기
@@ -2461,8 +1918,6 @@ tracker_taskmgr	create_task	새 작업 생성하기
 tracker_taskmgr	task	작업
 tracker_taskmgr	task_manager_project	작업 관리 프로젝트
 tracker_taskmgr	tracker_item	추적 항목
-tracker_utils	monitor		모니터링하기
-tracker_utils	stop_monitoring		모니터링 중지하기
 trove	not_categorized	이 프로젝트는 아직 분류가 설정되지 않았습니다.
 trove	title	소프트웨어 맵
 trove_list	browse_by	정렬 기준:
@@ -2474,7 +1929,6 @@ trove_list	number_of_projects	<strong>$1</strong>개의 프로젝트가 결과�
 trove_list	projects	$1개의 프로젝트
 trove_list	remove_filter	이 필터를 제거하기
 trove_list	title	소프트웨어 맵
-user_home	contact	연락처
 user_home	diary_notes	일기와 메모
 user_home	diary_notes_entries	일기/메모 항목:
 user_home	diary_notes_monitor	일기/메모 모니터링하기 
@@ -2483,26 +1937,19 @@ user_home	email	이메일 주소
 user_home	jabber_address	Jabber 주소
 user_home	login_name	사용자 ID
 user_home	member_of	본 개발자는 다음 프로젝트의 멤버로 활동중입니다 :
-user_home	message	메시지
-user_home	name	이름
 user_home	no_projects	본 개발자는 아직 프로젝트에 가입하지 않았습니다.
 user_home	peer_rating	사용자간 평가 프로그램
 user_home	peer_rating_disabled	이 사용자는 사용자간 평가 프로그램에 참여하지 않습니다.
 user_home	personal_information	개인 정보 
 user_home	project_info	프로젝트 정보 
 user_home	real_name	이름
-user_home	send	메일 보내기 
-user_home	send_a_message	메일을 다음 사람에게 보냅니다. 
-user_home	send_message_if_logged	로그인하시면 메일을 보내실 수 있습니다.
 user_home	site_member_since	가입한 날짜
 user_home	skills_profile	스킬 프로필
-user_home	subject	제목
 user_home	title	개발자 프로필
 user_home	user_id	사용자 번호
 users	no_user_name	사용자 이름이 없습니다.
 users	optout	여러분은 사용자간 평가 시스템에서 탈퇴하신 상태이기 때문에 다른 사용자를 평가하실 수 없습니다. 자세한 사항은 <a href="/account/">사용자 등록 정보</a>를 참고하세요.
 users	peerinfo1	<P>만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오.</P><P>$1 사용자간 평가 시스템은 <A HREF="http://www.advogato.com/">Advogato</A>에서 힌트를 얻은 것입니다. 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.</P>
 users	peerinfo2	<P>사용자간 평가 정보는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다.</P><UL><LI>"전체 순위" 필드는 $1의 모든 사용자와 비교한 순위를 나타냅니다.</LI><LI>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다.</LI><LI>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다.</LI></UL><P><I>사용자간 평가 시스템에 참여하고 싶지 않으시다면, (이는 다른 사람에게 평가받는 것, 다른 사람을 평가하는 것 양쪽 모두에 영향을 미칩니다.) <a href="/account/">사용자 등록 정보</a> 페이지에서 설정하시면 됩니다. 만약 이 평가 시스템에서 탈퇴하시면 다른 사용자를 평가했던 정보들도 모두 영구적으로 삭제되고 여러분의 개인 페이지에서 '사용자간 평가' 박스도 사라지게 되니다.</I></P>
-users	title	사용자 정보
 users	user_not_exist_text	잘못된 사용자
 users	user_not_exist_title	사용자가 존재하지 않습니다.

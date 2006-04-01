@@ -23,19 +23,12 @@
 #
 menu	account_maintenance	ดูแลบัญชีผู้ใช้
 menu	bookmark_page	ใส่ที่คั่นหน้า
-home	breaking_down_barriers	ทะลายอุปสรรคสู่การพัฒนาแบบโอเพ่นซอร์ส
-menu	change_my_theme	เปลี่ยน Theme
-menu	code_snippet_library	คลังโปรแกรมเล็ก
-group	developers	ผู้พัฒนา
 group	developer_info	ข้อมูลผู้พัฒนา
-menu	discussion_forums	กระดานสนทนา
-menu	documentation	เอกสารคู่มือไซต์
 frs	file_download	ดาวโหลด
 frs	file_monitor	เฝ้าสังเกต
 frs	file_notes	บันทึกข้อความ
 frs	file_package	แพ็กเกจ
 frs	file_version	รุ่น
-group	long_bugs	ติดตามบั๊ก
 group	long_scm	ที่รวม SCM
 group	long_docman	จัดการเอกสาร: คู่มือโปรเจกต์
 group	long_forum	กระดานสาธารณะ
@@ -43,9 +36,7 @@ group	long_ftp	พื้นที่ FTP นิรนาม
 group	long_homepage	โฮมเพจโครงการ
 group	long_mail	จดหมายกลุ่ม
 group	long_news	ข่าวล่าสุด
-group	long_patch	จัดการแพตช์
 group	long_pm	จัดการภารกิจ
-group	long_support	บริการทางเทคนิก
 group	long_survey	แบบสำรวจ
 group	short_bugs	บั๊ก
 group	short_docman	เอกสาร
@@ -67,21 +58,11 @@ menu	logout	ลงบันทึกออก
 home	most_active_this_week	ตื่นตัวสูงสุดในสัปดาห์
 menu	my_personal_page	หน้าส่วนตัว
 menu	new_project	ตั้งโปรเจกต์ใหม่
-menu	new_releases	ชุดออกใหม่
 menu	new_user	สมัครสมาชิกใหม่
-menu	other_site_mirrors	Mirror ที่อื่น ๆ
-menu	project_admin	บริหารโปรเจกต์
 group	project_admins	ผู้ดูแลโปรเจกต์
 menu	project_help_wanted	ต้องการคนช่วย
-menu	project_summary	สรุปโปรเจกต์
 group	public_area	พื้นที่สาธารณะ
 menu	search	ค้นหา
-menu	software_map	แผนที่ซอฟต์แวร์
 home	gforge_statistics	สถิติ GForge
-menu	top_projects	โปรเจกต์สุดยอด
 home	top_project_downloads	โปรเจกต์ดาวโหลดสูงสุด
-conf	content_encoding	UTF-8
-conf	default_font	MS Sans Serif,Thonburi,sans-serif
-conf	language_code	th
-conf	language_id	5
 conf	mail_charset	UTF-8

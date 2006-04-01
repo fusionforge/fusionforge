@@ -21,10 +21,8 @@ account_change_email	invalid_email	无效的 email 信箱
 account_change_email	mailsent	<p>一封email已经提交到新的信箱。 按照那封email上的指示完成email信箱的改变。 </p><a href="/">[ Home ]</a>
 account_change_email	message	您申请在 $1 上更改您的email信箱。 \n 请点击这个网址来完成email信箱的改变：\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 团队
 account_change_email	new_address	新的Email：
-account_change_email	section	帐号设置
 account_change_email	send_confirmation	发送确认信到新的信箱
 account_change_email	subject	$1 确认
-account_change_email	title	更改Email
 account_change_email-complete	confirm	欢迎您, $1. 您的email信箱成功的更改了。 您新的email信箱现在是<strong>$2</strong>。 所有发送到 $3 的 Mail 都会被转发到这个帐号上。
 account_change_email-complete	title	Email更改成功
 account_change_email_confirm	title	确认email信箱更改
@@ -35,15 +33,12 @@ account_change_pw	not_valid_password	您必须提供有效的密码（至少6个
 account_change_pw	old_password	旧密码
 account_change_pw	old_password_incorrect	旧的密码不正确
 account_change_pw	passwords_dont_match	新密码不一致。
-account_change_pw	section	帐号设置
 account_change_pw	title	更改密码
 account_change_pw	update	更改密码
 account_change_pw_changed	return_to	您现在可以 $1 返回到帐号维护页面 $2。
 account_change_pw_changed	title	更改密码成功
 account_editsshkeys	authorized_keys	认证密钥：<br /><strong><span style="color:red">重要：确定除了在密钥之间外没有换行符，在提交之后，检验您文件中密钥的数值是您所期望的。</span></strong>
 account_editsshkeys	intro	<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此文件不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>
-account_editsshkeys	section	帐号设置
-account_editsshkeys	title	编辑CVS/SSH公钥
 account_first	about_blurb	<p>您现在是 $1 的一个注册用户。 $1 是开放源码软件项目的在线开发环境。</p><p>做为一个注册用户，您可以参与整个网站的所有活动。您可以在项目讨论版上贴出新的消息，可以报告在 $1 当中软件的Bug，可以申请成为某个项目的开发者，甚至创建一个您自己的项目。</p><p>享用这个网站，也请给我们一些回馈信息，以便我们能共同使 $1 变得更好。</p><p>--$1 团队。</p>
 account_first	title	欢迎来到$1
 account_login	cookiewarn	为了登录，您必须启用Cookies功能
@@ -57,9 +52,6 @@ account_login	passwd	密码：
 account_login	pending_account	<P>您的帐号正在等待email信箱改变的确认。 点击您的email当中的链接就可以启动您的帐号。<P>如果您需要再次发送确认email，请点击下面，一封确认email将被送到您在注册时提供的email信箱当中。	<P><A href="pending-resend.php?form_user=$1">[再次发送确认Email]</A>		<br><hr>		<p>
 account_login	resend_pending	[重新发送确认邮件给未通过的帐号]
 account_login	resend_pending_directions	填入用户帐号后点击'提交'就可以再次提交确认邮件
-account_login	sslnotice	<p><B><FONT COLOR="RED">在提交这个表单之后，您将链接到一个SSL服务器，这样其他用户就无法看见您的密码。 </FONT></B> <small style="font-size: x-small"> （如果您对于为什么这个页面不是使用SSL传输感到疑惑，请阅读下一段，谢谢） </small> <P> <B>Internet Explorer</B> 用户有时会碰到SSL问题，因而他们应该在登录之后离开SSL模式。Netscape用户可以一直停留在SSL模式当中以获得最大的安全性。想获得关于这个问题更详细的信息，请点击 <A HREF="http://www.microsoft.com/">微软</A> 的网页<P>
-account_login	title	登录网站
-account_login	usessl	登录后仍然使用SSL
 account_lostlogin	invalidconfirm	不正确的确认编码
 account_lostlogin	newpasswd	新密码（至少6个字节）
 account_lostlogin	newpasswd2	新密码（重复）
@@ -67,7 +59,6 @@ account_lostlogin	notmatch	新密码不一致。
 account_lostlogin	passwdchanged	<h2>密码更改成功</h2><p>祝贺您，您成功的重新设置了帐号密码。现在您可以通过<a href="/account/login.php">登录</a> 到网站。</p>
 account_lostlogin	severalconfirm	这个确认编码不只存在了一次
 account_lostlogin	sixchars	您必须提供一个有效的密码（至少6个字节）。
-account_lostlogin	title	遗忘密码确认
 account_lostlogin	update	更新
 account_lostlogin	welcome	<h2>忘记密码，登录</h2><p>欢迎您， $1。 您现在可以更改密码。</p>
 account_lostpw	invalid_user	不正确用户
@@ -75,7 +66,6 @@ account_lostpw	message	有人 （大概就是您本人）在 $3 网站上申请�
 account_lostpw	notify	<p>一封Email已经被发送到您的信箱中。依照Email上的指示来改变您的密码。</p><p><a href="/">[ Home ]</a></p>
 account_lostpw	sendhash	发送遗失密码确认信
 account_lostpw	subject	$1 确认
-account_lostpw	title	忘了密码？
 account_lostpw	user_dont_exist	用户不存在。
 account_lostpw	warn	<p>嗨... 忘了密码是件很严重的事情。它不仅威胁了您的帐号的安全性，还包括项目甚至是这个网站的安全性。</p><p>点击下面的“发送遗失密码确认信” ，我们将发送一个网址到您的Email信箱。在这个网址中，有一个您帐号的128位元的确认编码。点击那个网址，您就可以在线更新密码并且登录。</p><p> 注意：CVS帐号的密码不会即时同步，请等待20分钟后测试。 </p>
 account_options	address		住址：
@@ -91,7 +81,6 @@ account_options	lastname	姓氏：
 account_options	login_name	帐号
 account_options	member_since	帐号创建日期
 account_options	phone		电话：
-account_options	real_name	真实姓名
 account_options	themeid	主题：
 account_options	timezone	时区：
 account_options	title		帐号维护
@@ -113,8 +102,6 @@ account_register	err_mailexist	已存在使用该email信箱的用户 － 使用
 account_register	err_passwd	您必须提供密码
 account_register	err_passwd2	密码不一致
 account_register	err_passwd3	无效的密码：
-account_register	err_realname	您必须提供一个真实姓名
-account_register	err_theme	必需填选主题
 account_register	err_unixname	无效的帐号
 account_register	err_userexist	帐号已存在
 account_register	err_username	您必须提供一个帐号
@@ -130,7 +117,6 @@ account_register	message_header	$1 帐号注册
 account_register	partecipate_peer_ratings	参与对等评价。 <i>（允许您使用若干指标来评价其他用户，同样您也会被其他用户评价。如果您选择参加评价，更多信息，请参看 $1 用户首页 </a>）</i>。
 account_register	password	密码（至少6个字节）：
 account_register	password2	密码（重复）：
-account_register	realname	完整/真实姓名：
 account_register	register	注册
 account_register	remember_me	"记住我"。 <i>（允许点击您的个人首页 $1 personal page</a> 而不需要登录。但是在做任何改动之前，仍然需要显式的登录。）</i>
 account_register	resend_pending	[重新发送确认邮件给未通过的帐号]
@@ -138,7 +124,6 @@ account_register	reset	重设
 account_register	siteupdate	接受关于本网站更新的Email<i>（量非常小，并且包括安全通告，强烈推荐。）</i>
 account_register	theme	主题：
 account_register	timezone	时区选择：
-account_register	title	注册新帐号
 account_register	update	更新
 account_shell	autorized_keys	SSH共用认证密钥
 account_shell	edit_keys	编辑Keys
@@ -154,13 +139,10 @@ account_verify	erroractivate	启用帐号过程中错误
 account_verify	invalidcred	您的认证输入不符合有效的帐号。
 account_verify	invalidop	无效操作
 account_verify	invalidparam	无效参数
-account_verify	invaliduser	无效用户
 account_verify	login	登录
 account_verify	loginname	用户名称：
 account_verify	missingparam	缺少参数
-account_verify	nouser	用户不存在。
 account_verify	password	密码：
-account_verify	title	$1 帐号确认
 account_verify	usermandatory	您必须输入帐号。
 account_verify	verify_blurb	<p>为了完成注册，请现在就登录。然后您的帐号就会启动成正常的登录模式。</p>
 add_snippet	add_this_snippet_version_id	添加这个代码版本编号：
@@ -180,33 +162,16 @@ add_snippet	submit	提交
 add_snippet	title	提交一个新的代码
 add_snippet	you_can_use_this_form	您可以重复使用这个表单来添加代码到您的软件包中</p><p> "代码版本编号" 是一个唯一的编号，它会显示在网页上代表一个特定的版本
 admin	add	添加
-admin	add_new	[添加]
-admin	are_you_sure_delete	您确定要删除
-admin	cancel	取消
 admin	delete	删除
 admin	edit	编辑
 admin	home_box	Home Box:
 admin	http_domain	HTTP域名：
 admin	license	授权方式：
 admin	license_other	其他授权：
-admin	na	N/A
-admin	other	其他
 admin	reject	拒绝
 admin	scm_box	SCM Box:
 admin	scm_box_empty	SCM Box 不能为空
-admin	site_admin_home	网站管理首页
-admin	submit_changes	提交
-admin	submit_new	提交
-admin	successfully_added	添加成功
-admin	successfully_deleted	删除成功
-admin	successfully_modified	更新成功
 admin	yes	是
-admin_add_language	add_new_language	添加新语言
-admin_add_language	class_filename	对象文件名称：
-admin_add_language	classname	对象名称：
-admin_add_language	existing_language	已经存在的语言
-admin_add_language	name	名称：
-admin_add_language	submit	提交
 admin_admin_table	add_new	add new
 admin_admin_table	cant_delete_language	因为它现今在一个用户描述中被列入参考，你不能删除程序语言 $1。
 admin_admin_table	cant_delete_license	因为它现今在一个项目中被列入参考，你不能删除授权方式 $1。
@@ -219,13 +184,7 @@ admin_admin_table	successfully_added	$1 添加成功
 admin_admin_table	successfully_deleted	$1 删除成功
 admin_admin_table	successfully_modified	$1 修改成功
 admin_admin_table	title	编辑 $1 表格
-admin_admin_table	unit_file_type	文件类型
-admin_admin_table	unit_license	授权方式
-admin_admin_table	unit_processor	处理器
-admin_admin_table	unit_supported_language	支持的程序语言
-admin_admin_table	unit_theme	主题
 admin_approve_pending	add_this_custom_response	添加这个定制回应到回应参考
-admin_approve_pending	admin_approve_pending	启用
 admin_approve_pending	approve	批准
 admin_approve_pending	approve_all_on_this_page	审核这个页面的所有项目
 admin_approve_pending	approving_group		审核中群组：
@@ -263,9 +222,6 @@ admin_groupdelete	permanentlydelete	永久的删除
 admin_groupdelete	permanentlydeleteproject	永久且不能挽回的删除项目
 admin_groupdelete	title	永久的删除项目
 admin_groupedit	active	启用 (A)
-admin_groupedit	deleted	删除 (D)
-admin_groupedit	error	错误
-admin_groupedit	error_creating_group_object	创建群组对象时发生错误
 admin_groupedit	holding	等待 (H)
 admin_groupedit	incomplete	未完成 (I)
 admin_groupedit	instruction_email_sent	已提交说明 Email
@@ -302,7 +258,6 @@ admin_index	add_to_trove_map	添加到软件地图
 admin_index	approve_reject	审核/拒绝
 admin_index	configman	配置管理
 admin_index	cronman	Cron管理
-admin_index	deleted_status	(已删除) 状态
 admin_index	display_full_group	显示完整的群组清单/编辑群组
 admin_index	display_full_user_list	显示完整的用户清单/编辑用户
 admin_index	display_groups_beginning_with	显示群组，首字母：
@@ -320,7 +275,6 @@ admin_index	pluginman	插件管理
 admin_index	private_groups	私人群组
 admin_index	project_active	已激活 (A)
 admin_index	project_database_administration	项目数据库管理
-admin_index	project_deleted	删除 (D)
 admin_index	project_hold	等候 (H)
 admin_index	project_pending	未激活 (P)
 admin_index	recent_logins	最近登录
@@ -338,14 +292,6 @@ admin_index	translation_file_tool	翻译工具
 admin_index	trove_project_tree	软件地图
 admin_index	user_maintaince	用户维护
 admin_index	virtual_host_admin_tool	虚拟主机管理工具
-admin_loadtabfile	availaible_tables	可以使用的资料表：
-admin_loadtabfile	edit_dont_work	[编辑(未运作)]
-admin_loadtabfile	purge_loaded_data	整理读取的资料
-admin_loadtabfile	reload_all_language_files	(重新)读取所有语言文件
-admin_loadtabfile	see_translations	[浏览翻译]
-admin_loadtabfile	see_untranslated	[浏览未翻译]
-admin_loadtabfile	tables_loaded	已读取资料表
-admin_loadtabfile	title	网站管理
 admin_massmail	active_deliveries	进行中的发送
 admin_massmail	all_project_admins	所有项目管理员
 admin_massmail	all_project_developers	所有项目开发者
@@ -367,15 +313,8 @@ admin_massmail	subject	标题
 admin_massmail	subscribers_to_additional_community	"其他社群邮件列表"的订阅者
 admin_massmail	subscribers_to_site_updates	"网站更新"的订阅者
 admin_massmail	text_of_message	文字消息
-admin_massmail	title	可管理的群发邮件
 admin_massmail	type	种类
 admin_massmail	will_be_append	(如果启用将会附加取消订阅的信息)
-admin_massmail_execute	completed_successfully	已经完成
-admin_massmail_execute	querry_complete	查询完成，开始寄送邮件给
-admin_massmail_execute	receive_post	收到资料，制作查询中
-admin_massmail_execute	sending_to	送到
-admin_massmail_execute	unrecognized_post	资料不明，无法执行
-admin_massmail_execute	user_id	用户编号：
 admin_responses	add_response	添加回应
 admin_responses	by_the_way	还有，我没有删除，只是假设
 admin_responses	create	创建
@@ -405,13 +344,6 @@ admin_search	status	状态
 admin_search	unix_name	Unix名称
 admin_search	user_search_criteria	依照条件搜索用户
 admin_search	username	Unix帐号
-admin_tabfiles	delete_lang	[删除]
-admin_tabfiles	edit_the_langfile	编辑语言 $1
-admin_tabfiles	edit_the_language	编辑这个语言
-admin_tabfiles	language	语言
-admin_tabfiles	modify_the	修改 $1 为：
-admin_table	edit_the	编辑这个
-admin_table	table	资料表
 admin_trove_cat_add	add	添加
 admin_trove_cat_add	add_new_trove_category	添加软件类别
 admin_trove_cat_add	error_in_trove_openration	软件执行错误
@@ -425,8 +357,6 @@ admin_trove_cat_edit	delete	删除
 admin_trove_cat_edit	edit_trove_category	编辑软件类别
 admin_trove_cat_edit	error_in_trove_operation	在软件执行时发生错误
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	在软件执行时发生错误，无法在local.inc删除预设的软件类别定义
-admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	无法删除那个类别，因为目前有一个项目正在使用它
-admin_trove_cat_edit	error_trove_equal_parent	错误：上层类别不能跟这个一样
 admin_trove_cat_edit	new_category_description	新类别说明 (255字节)
 admin_trove_cat_edit	new_category_full_name	新类别完整名称 (80字节)
 admin_trove_cat_edit	new_category_short_name	新类别缩写 (没有空白，像是Unix)
@@ -466,7 +396,6 @@ admin_useredit	delete_user_confirm	我要删除这个用户
 admin_useredit	deleted	删除 (D)
 admin_useredit	email	Email：
 admin_useredit	group_memerbership	群组用户身分
-admin_useredit	membership_permissions	用户权限
 admin_useredit	name	名称
 admin_useredit	no_unix_account	没有Unix帐号 (N)
 admin_useredit	operations	作业
@@ -525,7 +454,6 @@ admin_vhost	virtual_host_entry_updated	虚拟主机资料已更新
 admin_vhost	virtual_host_name	虚拟主机名称
 advanced_search	all	全部
 advanced_search	and_search	以所有字
-advanced_search	error_search_minlength	搜索条件必须至少三个字节
 advanced_search	headline	$1 搜索结果
 advanced_search	no_matches_found	未发现符合项目
 advanced_search	no_matches_found_no_under_section	未发现符合项目 - 没有部份提供(检查您的权限)
@@ -540,22 +468,9 @@ artifact_query	exist_query	查询已存在
 artifact_query	not_exist_query	查询不存在
 calendar	april	四月
 calendar	august	八月
-calendar	comingyear	明年
-calendar	currentyear	今年
 calendar	december	十二月
 calendar	february	二月
-calendar	fordate	日期：
 calendar	friday	星期五
-calendar	invaliddate	错误的日期
-calendar	invaliddateexplain	$1 是一个错误的日期
-calendar	invalidday	错误的日期
-calendar	invaliddayexplain	日期必须在 1 与 31 之间
-calendar	invalidmonth	错误的月份
-calendar	invalidmonthexplain	月份必须在 1 与 12 之间
-calendar	invalidtype	错误的类型
-calendar	invalidtypeexplain	类型错误
-calendar	invalidyear	错误的年份
-calendar	invalidyearexplain	年份必须在 1990 与 2020 之间
 calendar	january	一月
 calendar	july	七月
 calendar	june	六月
@@ -565,21 +480,14 @@ calendar	monday	星期一
 calendar	monthdatefmt	Y-m
 calendar	november	十一月
 calendar	october	十月
-calendar	onemonth	一个月
 calendar	saturday	星期六
-calendar	selecteddate	选择的日期 (如果不同于今天)
 calendar	september	九月
 calendar	sunday	星期日
 calendar	task_begins	任务 $1 开始
 calendar	task_ends	任务 $1 结束
 calendar	task_link_title	任务摘要：$1
-calendar	threemonth	一季
 calendar	thursday	星期四
-calendar	title	项目管理：行事历
-calendar	todaysdate	今天的日期
 calendar	tuesday	星期二
-calendar	update	更新
-calendar	view	浏览：
 calendar	wednesday	星期三
 classgroup	acceptedproject	您在 $7 注册的项目通过审核了\n\n项目全名：$1\n项目Unix名称：$2\nCVS服务器：cvs.$2.$3\n控制/网页服务器：$2.$3\n\n您在我们网站上的DNS信息可能需要一天的时间才能够使用，在DNS信息可以使用前，您可以试着登录 $4 并且指定 CVS 到 $5\n\n如果在6个小时后您的控制介面/CVS帐号仍然无法运作，请开启一个支持传票，这样子我们就会帮您看看问题出在哪里。请注意所有的控制/CVS帐号无法通过telnet登录而且只能通过SSH1。\n\n您的网站可以通过控制帐号存取，请读取网站文件 (下面的链接) 来了解操作方式、可以使用的服务与帐号的资料夹配置。\n\n登录后参观您自己在 $7 的项目页面，您可以发现左手边有标示为\'项目管理\'的功能选单。\n\n我们非常建议您现在参观 $7 并且为您的项目创建一个公开的说明\n (请在登录后浏览 http://$3/project/admin/?group_id=$6)\n\n您的项目也不会立即出现在软件地图上 (主要的项目列表放在 $7，它在浏览与搜索上具有相当大的弹性)，您必须在管理介面中指定它的分类，这样一来浏览网站的朋友才可以找到您的项目，建议您可以现在进行登录网站后浏览您的项目，接着从左边的标示 \'软件地图分类\' 点击编辑进行分类。\n\n如果有任何问题请联络 $7，让我们知道您需要什么样的协助。\n\n--  $7
 classgroup	acceptedprojecttitle	$1 项目通过审核了
@@ -601,10 +509,6 @@ common_include_account	sixchar	密码至少要6个字节
 common_include_account	toolong	名称太长，最多只能15个字节
 common_include_account	tooshort	名称太短，至少要三个字节
 common_utils	priority_colors	优先权颜色
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	zh-cn
-conf	language_id	23
 conf	mail_charset	UTF-8
 configman	change	存放插件配置的文件夹，例如： /etc/gforge/plugins/
 configman	choose        选择	
@@ -617,8 +521,6 @@ configman	nowrite	文件未写入或为空。<br>
 configman	off 关	
 configman	on	开
 configman	updateok	文件写入成功。<br>
-contact	about_blurb	<p>这是 <b>$1</b>的联系信息 -- 如果您对本网站上的项目有任何的问题，请将您的问题/信息发送到该项目支持/Bug管理员。您可以通过点击这些项目的首页来获取这些信息：<tt>http://$2/projects/&lt;project name&gt;</tt> 点击相应的工具。</p><p>如果您需要支持，报告Bug或者想直接和 $1 团队联系，请拜访<a href="/projects/siteadmin">$1 Master Project</a>.</p>
-contact	title	联系 $1
 cronman	date	日期
 cronman	job	工作
 cronman	message	消息
@@ -640,14 +542,12 @@ developer_monitor	title	监视用户
 developer_monitor_choose_user	body	错误 － 先选择某个用户
 developer_monitor_choose_user	title	请先选择用户
 developer_rate	cannot_rate_yourself	您不能评价自己
-developer_rate	invalid_rating_value	错误 ─ 无效的评价值
 developer_rate	ratings_recorded	评价记录
 developer_rate	ratings_recorded_body	您可以重新评价某个人。只需要回到他们的评价页面，重新提交信息即可。
 developer_rate	title	用户评价页面
 developer_rate	turned_off_body	您选择不参与相互评价系统
 developer_rate	turned_off_title	评价功能被关闭
 docman	admin	管理
-docman	description	说明
 docman	error_invalid_file_attack	尝试链接文件 $1 时发生错误
 docman	error_no_docs	该项目没有文件
 docman	error_no_groups_defined	没有定义文件分组
@@ -664,8 +564,6 @@ docman_admin_deletedoc	delete	删除
 docman_admin_deletedoc	delete_warning	你正要永久地删除这一份文件。
 docman_admin_deletedoc	really_sure	我非常确定
 docman_admin_deletedoc	sure	我确定
-docman_admin_docedit	section	文件管理员
-docman_admin_docedit	title	编辑文件
 docman_admin_editdocs	delete_doc	永久的删除这份文件
 docman_admin_editdocs	doc_contents	文件内容
 docman_admin_editdocs	section	文件管理员管理
@@ -684,8 +582,6 @@ docman_admin_editgroups	new_group_name	新分组名称
 docman_admin_editgroups	new_group_parent	属于
 docman_admin_editgroups	section	文件管理员管理
 docman_admin_editgroups	title	编辑文件分组
-docman_admin_groupedit	section	文件管理员管理
-docman_admin_groupedit	title	重命名文件分组
 docman_common	error_min_desc_length	文件描述必须至少10个字节
 docman_common	error_min_title_length	标题必须至少5个字节
 docman_common	no_docs	没有发现文件
@@ -710,16 +606,13 @@ docman_new	intro	<strong>文件标题</strong>：引用文件中相关的简单�
 docman_new	language	语言
 docman_new	no_valid_group	没有选择有效的文件分组
 docman_new	section	项目：$1
-docman_new	state	状态
 docman_new	submit	提交信息
 docman_new	submitted_successfully	文件已提交成功
 docman_new	title	文件管理：提交新文件
 docman_new	upload_file	上传文件
 docman_new	upload_url	或者指定一个文件能够参考的外部URL
-error	error_creating	创建错误
 error	not_found	页面不存在
 error	title	页面不存在（错误 404）
-exit	choose_a_group	错误 - 请选一个分组
 exit	choose_group_body	没有选择分组编号
 exit	choose_group_title	错误 - 没有选择分组编号
 exit	disabled_body	网站管理员已经停用了这个功能
@@ -727,18 +620,12 @@ exit	disabled_title	错误 - 停用的功能
 exit	exiting_with_error	错误退出
 exit	missing_parameters_body	错误 - 缺少必须的参数
 exit	missing_parameters_title	错误 - 缺少参数
-forum	check_upload	点击这里才能上传、附加文件
 forum	choose	<p>选择一个讨论区进行浏览，查询和发表意见。<p>
 forum	error_forum_not_found	没有找到讨论区
-forum	error_invalid_group_forum_id	$1::无效的group_forum_id
 forum	error_no_forums_found	$1 没有讨论区
-forum	error_no_valid_forum_object	$1::无效的讨论区对象
 forum	error_no_valid_group_object	讨论区::无效的群组对象
 forum	forum	讨论区
 forum	forums_for	$1 的讨论区
-forum	html	HTML标记将当做普通文字在您的文章中显示
-forum	section	项目：$1
-forum	title	讨论区
 forum_admin	add_forum	增加讨论区
 forum_admin	delete	删除
 forum_admin	delete_forum	删除整个的讨论区和所有的内容
@@ -746,33 +633,18 @@ forum_admin	delete_message	删除文章
 forum_admin	delete_warning	你将永久地删除这整个的讨论区和它所有的内容，而且不能挽回！
 forum_admin	deleted	删除成功
 forum_admin	really_sure	我非常确定
-forum_admin	section	项目：$1
 forum_admin	sure	我确定
 forum_admin	title	讨论区：管理
-forum_admin	update_forum	更新讨论区信息/状态
 forum_admin_addforum	add_forum	增加该讨论区
 forum_admin_addforum	allow_anonymous	允许匿名发表文章？
-forum_admin_addforum	allow_attach	允许附加文件？
 forum_admin_addforum	email_posts	用Email将张贴的文章发送到：
-forum_admin_addforum	existing_forums	讨论区已存在
 forum_admin_addforum	forum_created	讨论区创建成功
 forum_admin_addforum	forum_description	说明
 forum_admin_addforum	forum_name	讨论区名称
 forum_admin_addforum	is_public	讨论区是否公开？
-forum_admin_addforum	section	讨论区管理
-forum_admin_addforum	title	增加讨论区
 forum_admin_changestatus	change_status	修改讨论区状态
-forum_admin_changestatus	forum	讨论区
 forum_admin_changestatus	intro	您可以在这儿调整讨论区的特色。请注意私有讨论区仍然能够被该项目的成员查看，但不是完全公开
-forum_admin_changestatus	no_forums_found	没发现讨论区
-forum_admin_changestatus	section	讨论区管理
-forum_admin_changestatus	status	状态
-forum_admin_changestatus	title	改变讨论区状态
 forum_admin_changestatus	update_successful	讨论区信息更新成功
-forum_admin_delete	section	讨论区管理
-forum_admin_delete	title	删除讨论区
-forum_admin_delete_message	enter_message_id	输入文章编号
-forum_admin_delete_message	section	讨论区管理
 forum_admin_delete_message	title	删除文章
 forum_admin_delete_message	warning	警告！您打算永久地删除一个文章以及所有对它的回覆！！
 forum_admin_delete_messages	messages_deleted	$1 文章已删除
@@ -783,7 +655,6 @@ forum_common	error_min_name_length	讨论区名称必须至少3个字节
 forum_common	error_save_when_logged_in	只有登录后才能保存位置
 forum_common	error_set_monitor	只有登录后才能监视
 forum_common	error_unable_to_add_monitor	无法添加监视
-forum_common	welcome_to	欢迎来到 $1
 forum_common_forum	error_save_place	讨论区：savePlace()
 forum_common_forummessage	error_cannot_update_master_thread	目前无法更新 Master Thread parent
 forum_common_forummessage	error_cannot_update_parent	无法更新上层文章
@@ -792,12 +663,9 @@ forum_common_forummessage	error_getting_next_thread	无法获取下一个 thread
 forum_common_forummessage	error_group_forum_id	数据库中的 Group_forum_id 和 Forum 对象不一致
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 无效的文章编号
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() 无效的 ParentMessage 对象
-forum_common_forummessage	error_not_logged	发文章之前必须登录
 forum_common_forummessage	error_posting_failed	ForumMessage::create() 张贴失败
 forum_common_forummessage	error_required_fields	必须包括文章标题和内容
-forum_common_forummessage	forum_message	讨论区信息
 forum_common_forummessage	no_valid_forum_object	讨论区信息：无效的讨论区对象
-forum_errors	error_determining_forum_id	决定讨论区编号时错误
 forum_errors	error_getting_forum	取得讨论区错误
 forum_forum	author	作者
 forum_forum	changeview	改变浏览方式
@@ -813,82 +681,50 @@ forum_forum	posts	文章
 forum_forum	postsuccess	文章发表成功
 forum_forum	previous_messages	前一页
 forum_forum	replies	回覆
-forum_forum	section	项目：$1
 forum_forum	show	显示
 forum_forum	thread	主题
 forum_forum	threaded	主题
 forum_forum	threads	主题
-forum_forum	title	讨论区：查看讨论区
 forum_forum	topic	主题
 forum_forum	topicstarter	主题发起人
 forum_forum	ultimate	基本
-forum_forum	views	浏览数
-forum_forum_thread	section	讨论区
-forum_forum_thread	title	查看主题
 forum_message	by	作者
 forum_message	date	日期
 forum_message	message	文章
 forum_message	message_not_found_body	该文章（不再）存在
 forum_message	message_not_found_title	没发现文章
-forum_message	msg	发表一个文章到这个主题：
 forum_message	must_choose_message_body	您必须先选择一个文章
 forum_message	must_choose_message_title	必须先选择一个文章
 forum_message	post_followup	回覆该文章
 forum_message	receive_followups	通过 Email 接收所有的回覆
-forum_message	section	讨论区
 forum_message	subject	标题
 forum_message	thread	创建新主题
 forum_message	thread_view	依照主题浏览
-forum_message	title	读文章
 forum_monitor	activated	讨论区监视开始
 forum_monitor	deactivated	讨论区监视停用
 forum_save	saved	讨论区位置已保存。当您下次回来时，新的文章将被加亮显示
-forum_utils	added	讨论区添加成功
 forum_utils	admin	管理
 forum_utils	anonymously	匿名
-forum_utils	attach	附带
-forum_utils	author	作者
-forum_utils	brokenthread	中断的主题
 forum_utils	by	作者：
 forum_utils	couldpostif	您只有 $1 登录 $2 之后才能发表
 forum_utils	date	日期
 forum_utils	discussionforum	讨论版：
 forum_utils	doublepost	请不要重复发表同样内容的文章。
-forum_utils	error	错误！
-forum_utils	erroradd	添加讨论区错误
-forum_utils	errorfollowup	试图回覆一个不存在的文章
-forum_utils	errorfollowup2	回覆主题时，没找到回覆的编号
-forum_utils	errorinsert	无法取得insertid()
-forum_utils	errormaster	目前无法更新Master Thread parent
-forum_utils	errorparent	无法更新上层文章
-forum_utils	errorpost	发表文章错误
-forum_utils	feedbacklogin	只有登录之后才能张贴文章
 forum_utils	htmltag	您文章中的 HTML 标记将当做普通文字显示
 forum_utils	latest	最新新闻
 forum_utils	loggedin	登录
 forum_utils	mailmonitor	\n阅读并回覆该文章：\n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\n您收到这封email是因为您选择监视这个讨论区。\n要停止监视讨论区，登录到$4 \n并且点击：$5
-forum_utils	mailnotsent	邮件没有发送 － 有人监视讨论区
-forum_utils	mailnotsent2	邮件没有发送 － 无人监视讨论区
-forum_utils	mailsent	邮件发送 － 有人监视讨论区
 forum_utils	message	消息：
 forum_utils	monitor	监视讨论区
-forum_utils	mustinclude	必须包括文章标题和内容
-forum_utils	news	新闻
-forum_utils	nextfailed	取得下一个 thread_id 失败
-forum_utils	noid	没有指定讨论区
 forum_utils	nonewsitem	错误 - 没发现新闻
-forum_utils	notfound	没发现
 forum_utils	postanon	您不是匿名用户，无法张贴匿名文章
 forum_utils	postcomment	发表评论
-forum_utils	posted	文章发布成功
-forum_utils	postedby	发表人
 forum_utils	project	项目
 forum_utils	reply	回覆
 forum_utils	saveplace	保存位置
 forum_utils	stopmonitor	停止监视
 forum_utils	subject	标题：
 forum_utils	summary	概要
-forum_utils	thread	主题
 frs	file_download	下载
 frs	file_monitor	监视
 frs	file_notes	备注
@@ -907,20 +743,12 @@ frs_file	error_cannot_move	文件无法被移到永久保存位置
 frs_file	error_invalid_file	FRSFile 似乎无效
 frs_file	error_min_name_length	FRSFile 文件名称必须至少3个字节
 frs_file	error_name_format	FRSFile 文件名称应该是这样的格式：gforge-3.0.tar.bz2
-frs_package	error_already_exists	同样文件名称已存在
-frs_package	error_cannot_move	文件无法被移到永久保存位置
-frs_package	error_invalid_file	FRSFile 似乎无效
 frs_package	error_min_name_length	FRSPackage 名称必须至少3个字节
 frs_package	error_name_format	FRSPackage::Update：软件的名称只能是英文字母
 frs_package	error_set_monitor	只有登录后才能监视
 frs_release	email_text	\n\n项目 "$1" ('$2') 已经  \n 发布软件包'$3'的新版本 \n您可以通过下面的信箱去下载：\n $4\n\n您收到这封email是因为您\n要求当这个软件包有新版本发布时通知您。\n 如果您不希望以后再被通知，\n 请登录到 $5 并点击如下链接：\n $6
 frs_release	email_title	[$1 发布] $2
-frs_release	error_already_exists	在这个项目空间中，同样文件名称的发布文件已存在
-frs_release	error_cannot_move	发布文件无法被移到永久保存位置
-frs_release	error_invalid_file	FRS 发布似乎无效
 frs_release	error_min_name_length	FRSPackage 名称必须至少3个字节
-frs_release	error_name_format	FRS 发布 文件名应该是这样的格式：gforge-3.0.tar.bz2
-frs_release	error_set_monitor	只有登录后才能监视
 general	add	增加
 general	browse	浏览
 general	cancel	取消
@@ -932,10 +760,7 @@ general	done	完成
 general	edit	编辑
 general	error	错误
 general	error_creating	创建 $1 时错误
-general	error_creating_group	创建群组对象错误
-general	error_creating_perm	创建权限对象错误
 general	error_getting	取得 $1 时错误
-general	error_getting_new	取得新 $1 时错误
 general	error_group_id	数据库中的群组编号与群组对象不一致
 general	error_missing_params	缺少参数
 general	error_no_valid_group_object	$1：没有有效的群组对象
@@ -947,9 +772,6 @@ general	language	语言
 general	min_characters	(最少 $1 字节)
 general	more	更多
 general	no	否
-general	no_valid_filename	无效的文件名称
-general	no_valid_group	没有选择有效的 $1 群组
-general	no_valid_group_object	$1 无效的群组对象
 general	open	启用
 general	permdenied	许可权不允许
 general	permexcuse	要想查看该页面，必须由这个项目的管理员赋予您许可权。
@@ -957,14 +779,10 @@ general	permnotget	无法获得许可权
 general	remove	删除
 general	reset	重设
 general	return	返回
-general	return_to	[返回到 $1]
-general	sitename	$1
 general	submit	提交
 general	submit_edit	提交编辑
-general	submitted_successfully	$1 提交成功
 general	to	to
 general	total	总共
-general	turned_off	该项目已经将 $1 关闭
 general	update	更新
 general	update_successful	更新成功
 general	yes	是
@@ -972,18 +790,14 @@ global	error	错误
 group	activity	活跃度：
 group	activitystat	查看项目活动<a href="/project/stats/?group_id=$1">统计</a>
 group	developer_info	开发者信息
-group	developers	开发者
-group	long_bugs	Bug跟踪
 group	long_docman	文件管理：项目文件
 group	long_forum	公共讨论区
 group	long_ftp	匿名FTP
 group	long_homepage	项目首页
 group	long_mail	邮件列表
 group	long_news	最新消息
-group	long_patch	修补程序管理
 group	long_pm	任务管理
 group	long_scm	SCM 仓库
-group	long_support	技术支持
 group	long_survey	调查
 group	long_tracker	跟踪
 group	nodescription	该项目还没有提交描述
@@ -1000,7 +814,6 @@ group	short_files	文件
 group	short_forum	讨论区
 group	short_homepage	首页
 group	short_mail	邮件列表
-group	short_main	主要
 group	short_memberlist	开发者
 group	short_news	新闻
 group	short_patch	修补程序
@@ -1012,20 +825,13 @@ group	short_survey	调查
 group	short_tracker	跟踪
 help	page_information	页面信息
 help	title	欢迎来到 $1
-help_forum	attach_file	如果您希望附加文件，您必须勾选这个项目后文件才会顺利上传。
-help_forum	close_window	关闭视窗
-help_forum	unknown_help_request	不明的求助消息：
 help_tracker	assignee	这下拉式选单代表跟踪者项目指派给哪个项目管理员。
 help_tracker	attach_file	如果您希望附加文件，您必须勾选这个选项，文件才会顺利上传。
 help_tracker	canned_response	回应类别会显示项目管理员定义的支持或是问题类型。<br /><br />如果您是项目管理员，您可以点击 '(管理)' 来定义回应类别。
-help_tracker	category	这下拉式选单代表项目的一个特别部分的跟踪者项目的种类。<br /><br />选择 '任何' 作为更大范围结果软件包。
 help_tracker	close_window	关闭视窗
-help_tracker	comment	当一个预设回应不适合时，意见文字输入区允许您把一个注解附在一个跟踪项目。
 help_tracker	data_type	资料类型选项决定跟踪者的类型项目，既然跟踪者包含bug、patch、支持等等...管理者，您需要能够决定一个项目该属于这些之中的哪一种？<br /><br />这有附加利益促成一个管理将一个支持要求变成一个Bug。
-help_tracker	group	这下拉式选单代表跟踪系统项目群组是一连串项目管理定义选项。<br /><br />如果您是一个项目管理员，您可以点击'(管理)'链接定义您自己的群组。
 help_tracker	monitor	藉由点击"监视"按钮，您可以监视或停止监视这个项目。<br /><br /><strong>注意！</strong> 这将寄送给您额外的Email，如果您添加注解到这个项目，或者发表，或者被指定到这个项目，您也将因同样理由收到Email！
 help_tracker	priority	优先权选项允许一个用户定义跟踪者项目优先权(排列从 1-最低 到 5-最高)。<br /><br />这对一个用户可能发现该项目一个重要问题时的Bugs和支持要求是特别有帮助的。
-help_tracker	resolution	这决议选项代表一个跟踪者项目的任何决议
 help_tracker	sort_by	藉由选项排序允许您决定如何浏览被排序后的结果。<br /><br />在选项中您可以选择排序ID、优先权、摘要、启用日期、结束日期、发表人或被指定人，甚至您也可以升序或降序排序结果。
 help_tracker	status	这下拉式选单代表一个跟踪者项目的现在状态。<br /><br />如果你正在等候来自跟踪者项目作者的一个回应，你能将状态设置为'未决定的'。当作者回应时，这状态将自动重新设置为'Open'。否则，如果作者未在管理员定义的时间点内回应(预设是14天)，然后这个项目将被给予'Deleted'的状态。
 help_tracker	summary	摘要文字栏位代表一个简短的跟踪者项目摘要，当浏览数个跟踪者项目的时候是相当有用的。
@@ -1035,23 +841,19 @@ help_trove_cat	full_category_name	完整的分类名称
 help_trove_cat	no_such_category	没有这种分类
 help_trove_cat	short_name	简短名称
 home	about_blurb	<P>$1 为<B><A href="http://www.opensource.org/">开放源代码软件</A>开发者提供全方面的免费服务</B>，包括CVS文件库、邮件列表、BUG跟踪、在线讨论区、任务管理、网站空间、项目存储及完整的备份，并且完全是通过WEB方式来管理的。</P><P><B>请立即加入，并提出您的宝贵意见。</B></P><P>为了充分利用 $1 所提供的服务，<A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户，仍能浏览本站，但无权参与本站的活动。</P><P><B>开始您自己的项目</B></P><P><A href="/account/register.php">先注册成为本站用户</A>，然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A></P><P>谢谢参与，请充分享受本站提供的服务吧！</P>
-home	breaking_down_barriers	为开放源码的发展开闢一条坦途
 home	gforge_statistics	$1 统计资料
 home	highest_ranked_users	用户评价排行榜
 home	hosted_projects	登录项目
 home	most_active_this_week	本周活力最强排行榜
 home	no_stats_available	没有统计信息
-home	none_found	没有发现
 home	recently_registered	最近注册的项目
 home	recently_registered_date_format	m/d
 home	registered_users	注册用户
-home	sfos	$1 OnSite
 home	top_project_downloads	项目下载排行榜
 include_html	no_change	没有变动
 include_html	none	无
 include_html	priority_highest	最高
 include_html	priority_lowest	最低
-include_html	priority_medium	中等
 include_toolreport	all	所有
 include_toolreport	for	给
 include_toolreport	key	键值
@@ -1072,15 +874,11 @@ mail	help_to_request	项目管理员使用管理链接取得邮件列表
 mail	mailinglists_for	 $1 的邮件列表
 mail	no_list_found	 $1 没有任何邮件列表
 mail	provided_by	<p>邮件列表通过一个GForge版本的<a href="http://www.list.org/">GNU Mailman</a>建置，感谢Mailman 和<a href="http://www.python.org/">Python</a> 全体工作人员，感谢他们卓越的软件。</p>
-mail	section	项目：$1
-mail	title	邮件列表
 mail	unable_to_get_lists	无法取得邮件列表
 mail_admin	add_list	添加邮件列表
 mail_admin	admin_in_mailman	管理
 mail_admin	error_getting_list	取得邮件列表时发生错误
 mail_admin	pagetitle	邮件列表管理
-mail_admin	section	邮件列表
-mail_admin	title	邮件列表管理
 mail_admin	update_list	管理/更新邮件列表
 mail_admin_addlist	existing_mailing_lists	已经存在的邮件列表
 mail_admin_addlist	form_addlist	添加这个邮件列表
@@ -1090,9 +888,6 @@ mail_admin_addlist	form_name	邮件列表名称：
 mail_admin_addlist	list_added	已经添加邮件列表
 mail_admin_addlist	list_information	<p>邮件列表被命名为：<br /><strong>projectname-listname@$1</strong></p><p>约需要 <strong><span style="color:red">6-24 小时</span></strong> 来完成创建您的邮件列表</p>
 mail_admin_addlist	pagetitle	添加一个邮件列表
-mail_admin_addlist	section	邮件列表管理
-mail_admin_addlist	title	增加列表
-mail_admin_addlist	warning	一旦创建了，这个邮件列表会一直附加在您的项目中而且无法被删除！
 mail_admin_deletelist	confirmdelete	确认删除
 mail_admin_deletelist	permanentlydelete	永久的删除
 mail_admin_deletelist	title	永久的删除邮件列表
@@ -1100,85 +895,47 @@ mail_admin_updatelist	form_description	说明：
 mail_admin_updatelist	form_ispublic	公开的？
 mail_admin_updatelist	form_updatelist	更新
 mail_admin_updatelist	information	您可以从这里管理邮件列表，请注意，隐藏的邮件列表还是可以从您的项目网页看到，但是不会出现在 $1。
-mail_admin_updatelist	list	邮件列表
-mail_admin_updatelist	list_updated	邮件列表更新成功
-mail_admin_updatelist	no_list_found	这个项目没有邮件列表
-mail_admin_updatelist	section	邮件列表管理
-mail_admin_updatelist	status	状态
-mail_admin_updatelist	title	管理/更新邮件列表
 mail_common	creation_mail_body	邮件列表会在6~24小时内创建于 $1  \n您是邮件列表的管理者\n\n这个邮件列表是：$3@$2 \n\n您的邮件列表信息在：\n$4 \n\n邮件列表管理介面：\n$5 \n\n邮件列表密码：$6 \n建议您尽快修改这个密码\n\n谢谢您将项目创建在 $1\n\n-- $1 工作团队\n
 mail_common	creation_mail_subject	$1 新的邮件列表
 mail_common	description	说明
-mail_common	error_invalid_group_list_id	错误的邮件列表编号
 mail_common	error_invalid_name	错误的邮件列表名称
 mail_common	error_list_already_exists	邮件列表已经存在
 mail_common	error_min_name_length	邮件列表的名称必须大于或等于4个字节
 mail_common	list_not_activated	尚未启动
 mail_common	mailing_list	邮件列表
-mail_common	mailing_lists	邮件列表
 mail_common	prefs	补充说明
 mail_utils	admin	管理
 mail_utils	turned_off	这个项目的邮件列表已经被关闭
-menu	about_gforge	关于 $1
 menu	account_maintenance	帐号维护
 menu	admin	管理
 menu	bookmark_page	书签
-menu	change_my_theme	更换主题
 menu	code_snippet	分享代码
-menu	code_snippet_library	分享代码数据库
-menu	compile_farm	编译区
 menu	diary_notes	日记和笔记
-menu	discussion_forums	讨论区
-menu	documentation	文件
 menu	home	首页
 menu	login	登录
-menu	login_ssl	通过 SSL 登录
 menu	logout	退出登录
 menu	my_account	我的帐号
 menu	my_personal_page	我的首页
 menu	mypage	我的首页
 menu	new_project	注册新项目
-menu	new_releases	新发布软件
 menu	new_user	通过 SSL 创建新用户
-menu	other_site_mirrors	其他同步更新网站
-menu	project_admin	项目维护
 menu	project_help_wanted	寻求协助
-menu	project_summary	项目摘要
 menu	projectree	软件地图
 menu	register_project	注册项目
 menu	reporting	报告
 menu	search	查询
-menu	site_status	网站状态
-menu	software_map	软件分类表
 menu	submit	发布
-menu	top_projects	热门项目
-my	about_blurb	您的个人首页包括分配给您的bug和任务列表，外加您所属的项目列表
-my	assigneditems	分配给我的
 my	bookmarks	我的书签
 my	monitoredfile	监视文件发布
 my	monitoredforum	监视的讨论区
 my	no_bookmarks	您目前没有保存任何的书签
 my	no_monitored_filemodules	您没有监视任何文件发布
-my	no_monitored_filemodules_details	<p>如果您监视了文件发布，新版本的发布将会通过邮件通知给您。邮件中包含从我们的下载服务器上下载该新文件的链结。</p><p>您可以通过点击一个项目的“摘要”页并点击最新发布项目部分来监视发布。</p>
 my	no_monitored_forums	您没有监视任何讨论区
-my	no_monitored_forums_details	<p>如果您监视了讨论区，讨论区中出现新文章时，将会通过email通知您，邮件中还包括点击该文章的链接。</p><p>您可以在某个讨论区中，点击“监视讨论区”来监视该讨论区。</p>
 my	no_open_tasks	目前没有未完成的任务分配给您
 my	no_projects	您目前不属于任何一个活动项目
 my	no_tracker_items_assigned	目前没有开放的跟踪项分配给您
 my	no_tracker_items_submitted	目前没有您发布的开放跟踪项
-my	pending_news_bytes	待审核新闻
-my	pending_news_bytes_1	有个待审核的新闻
-my	pending_news_bytes_2	共有 $1 个新闻待审核
-my	pending_news_bytes_3	点击这里
-my	pending_projects	待审核的项目
-my	pending_projects_1	有个待审核的项目
-my	pending_projects_2	共有 $1 个待审核项目
-my	pending_projects_3	点击这里
 my	projects	我的项目
-my	submitteditems	我发布的
-my	survey	快速查询
-my	survey_taken	您已经参与了开发查询
-my	tasks	我的任务
 my	title	$1 的个人首页
 my_bookmark	return	返回
 my_bookmark_add	added_bookmark	为<strong>$1</strong>增加标题为<strong>$2</strong>的书签
@@ -1186,14 +943,9 @@ my_bookmark_add	back	返回您的首页
 my_bookmark_add	bookmark_title	书签标题
 my_bookmark_add	bookmark_url	书签位址
 my_bookmark_add	section	我的个人首页
-my_bookmark_add	title	增加书签
 my_bookmark_add	visit_page	点击书签页
-my_bookmark_delete	bookmark_deleted	书签已删除
-my_bookmark_delete	section	我的个人首页
-my_bookmark_delete	title	删除书签
 my_bookmark_edit	bookmark_updated	书签已更新
 my_bookmark_edit	failed_to_update_bookmark	更新书签失败
-my_bookmark_edit	section	我的个人首页
 my_bookmark_edit	title	编辑书签
 my_diary	add_new_entry	增加新日记或笔记
 my_diary	details	细节
@@ -1206,7 +958,6 @@ my_diary	is_public_expl	如果标记为<strong>公开</strong>，您的日记或
 my_diary	item_added	已添加日记或笔记
 my_diary	no_entries	您没有日记或笔记
 my_diary	nothing_updated	没有任何东西更新
-my_diary	section	我的首页
 my_diary	submit_only_once	只能提交一次
 my_diary	summary	摘要
 my_diary	title	我的日记和笔记
@@ -1232,7 +983,6 @@ news	noitems	没有发现
 news	nonews	没有新闻
 news	nonewsfor	$1 没有新闻
 news	olderheadlines	旧标题
-news	section	项目：$1
 news	title	新闻
 news_admin	approve_for_frontpage	核准首页发表
 news_admin	approve_newsbyte	核准新闻针对项目：$1
@@ -1241,7 +991,6 @@ news_admin	date	日期
 news_admin	details	细节
 news_admin	do_nothing	不采取动作
 news_admin	newsbyte_deleted	新闻已移除
-news_admin	newsbyte_not_found	新闻未找到
 news_admin	newsbyte_rejected	新闻已拒绝
 news_admin	newsbyte_updated	新闻已更新
 news_admin	newsbytes_to_approve	这些项目需要被核准(总共：$1)
@@ -1255,7 +1004,6 @@ news_admin	reject	拒绝
 news_admin	reject_selected	选择拒绝
 news_admin	rejected_newsbytes	这些项目过去的一个星期被拒绝(总共：$1)
 news_admin	removal_when_edit	如果您编辑在 $1 首页的这个项目，它将从首页被移除。
-news_admin	section	新闻
 news_admin	status	状态
 news_admin	status_delete	移除
 news_admin	status_displayed	显示
@@ -1263,7 +1011,6 @@ news_admin	subject	标题
 news_admin	submitted_by	发表人
 news_admin	submitted_for_group	发表群组
 news_admin	title	新闻管理
-news_main	title	新闻
 news_submit	cannot	除非您是项目管理员，否则不能发布该项目的新闻
 news_submit	cannotadmin	从news项目中发布新闻是不允许的。
 news_submit	details	细节
@@ -1272,9 +1019,7 @@ news_submit	errorinsert	添加操作错误
 news_submit	forproject	为项目
 news_submit	newsadded	新闻已添加
 news_submit	post_blurb	如果您是项目管理员，您可以为项目发布新闻。当项目需要帮助时，您也可以发布“需要帮助”通知。<P>所有 <B>为您的项目</B>发布的消息都将马上在您项目的摘要页面显示。 对整个社群都感兴趣的新闻，将会在 $1 新闻团队的成员审核之后，出现在 $1 的首页上。<P>您可以包括网址，但是不需要使用HTML标记。<P>以 http:// 开头的网址都会自动变成可点击的
-news_submit	section	新闻
 news_submit	subject	标题
-news_submit	title	为项目 $1 发布新闻
 news_utils	archive	新闻存档
 news_utils	comment_1	评论
 news_utils	comment_2	评论
@@ -1304,24 +1049,13 @@ people	no_categories_found	没有发现分类
 people	no_skill_inventory_setup_up	没有设置技能目录
 people	none_found	没有发现
 people	project	$1 项目
-people	section	需要帮助的项目
 people	short_description	简短说明
 people	skill	技能
 people	status	状态
 people	title	需要帮助的系统
 people	title_array	工作标题
-people_admin	section	寻求协助
-people_admin	title	寻求协助管理
-people_admin_people_cat	section	寻求协助管理
-people_admin_people_cat	title	增加工作分类
-people_admin_people_skills	section	寻求协助管理
-people_admin_people_skills	title	增加工作技能
-people_cat	section	需要帮助
-people_cat	title	按分类排序的工作
 people_createjob	continue	继续 >>
 people_createjob	explains	首先填写以下各项。当点击继续时，将会展示给您这个工作所需要的技能和经验登记列表。
-people_createjob	section	寻求协助的项目
-people_createjob	title	创建新工作
 people_editjob	error_missing	错误 － 缺少信息
 people_editjob	fill_in	请填写所有必须的项目
 people_editjob	finished	完成
@@ -1338,7 +1072,6 @@ people_editjob	job_update_no_wrong_id	工作更新失败 － 错误的项目编�
 people_editjob	job_update_ok	工作更新成功
 people_editjob	no_such	该项目没有这样的文章
 people_editjob	posting_fetch_failed	无法取得文章
-people_editjob	section	寻求协助的项目
 people_editjob	skill_explains	<p>现在您可以编辑/改变这个文章的技能列表。开发人员可以根据您的技能要求列表来判断他们是否符合您的要求。 </p><p>您的布告在两星期后自动关闭。</p>
 people_editjob	title	编辑
 people_editjob	update_description	更新说明
@@ -1372,14 +1105,11 @@ people_editprofile	no_skills_selected_to_delete	没有选择技能进行删除
 people_editprofile	no_such_user	没有这个用户
 people_editprofile	profile_title	标题
 people_editprofile	publicly_viewable	是否公开
-people_editprofile	section	需要帮助的项目
 people_editprofile	skill_added_ok	增加技能成功
 people_editprofile	skill_delete_successfully	技能 $1 删除成功
 people_editprofile	skill_deletion_cancelled	取消技能删除
 people_editprofile	skills_edit	编辑技能
 people_editprofile	start_date	开始日期
-people_editprofile	title	编辑您的个人能力
-people_editprofile	title_max_100_chars	标题（不多于100字节）
 people_editprofile	type	类型
 people_editprofile	update_failed	用户更新失败
 people_editprofile	update_ok	用户更新成功
@@ -1387,10 +1117,6 @@ people_editprofile	update_permission	更新许可权
 people_editprofile	user_fetch_failed	取得用户失败
 people_editprofile	you_can_enter_new_skills	您可以输入在这儿学到的新技能。请输入尽量正确的开始和结束时间。
 people_help_wanted_latest	title	寻求协助最新文章
-people_helpwanted_latest	section	寻求协助的项目
-people_helpwanted_latest	title	最新文章
-people_proj	section	寻求协助的项目
-people_proj	title	$1 中寻求协助的项目
 people_viewjob	contact_info	联系信息
 people_viewjob	fetch_failed	文章取得失败
 people_viewjob	for_project	为项目
@@ -1398,11 +1124,8 @@ people_viewjob	no_such_posting	该项目没有这个文章
 people_viewjob	open_date	启用日期
 people_viewjob	posting_id_not_found	没有发现文章编号
 people_viewjob	required_skills	需要技能
-people_viewjob	section	寻求协助的项目
-people_viewjob	title	$1 需要 $2
 people_viewjob	view_a_job	查看工作
 people_viewprofile	no_such_user	没有这个用户
-people_viewprofile	section	用户个人能力
 people_viewprofile	set_private	用户将他/她的个人能力设置为隐藏
 people_viewprofile	skills_profile_for	技能能力
 people_viewprofile	title	查看用户个人能力
@@ -1419,19 +1142,15 @@ pluginman	name	插件名称
 pluginman	notice	这里可以全站性激活或关闭plugins/目录下的插件，同时根据插件功能，可能还需要为每个项目或每个用户单独激活。<br><font color="#ff0000">注意：某些用户或组正在使用某一插件，点击关闭将同时令这些用户或群组不再使用这一插件。<br>注意：关闭再激活某一插件可能存在风险，因为其SQL初始化脚本可能存在DROP TABLE语句</font><br><br>
 pluginman	status	状态
 pluginman	success	Plugin $1 更新成功
-pluginman	successiniterror	<br>无法执行SQL初始化脚本，请检查并手工执行。
 pluginman	successnoconfig	<br>配置文件无法链接到/etc/gforge/plugins/$1。请检查apache在/etc/gforge/plugins 的写权限或手工创建。
-pluginman	successnodeleteconfig <br>/etc/gforge/plugins目录下的符号链接未删除，请手工删除。
 pluginman	successnodeletelink	<br>www/plugins目录下的符号链接未删除，请手工删除。
 pluginman	successnoinit	<br>找不到SQL初始化脚本。
 pluginman	successnolink	<br>无法创建www符号链接。请检查apache在/www/plugins的写权限或手工创建。
 pluginman	userdeleted	$1 个用户不再使用这个插件。<br>
 pluginman	users	正在使用它的用户
 pm	admin	管理
-pm	any	任何
 pm	assigned_to	分配给
 pm	cat_any	任何
-pm	cat_none	无
 pm	category	分类
 pm	date_note		如果您试图创建一个依赖于其他任务的新任务，而这个新任务的开始日期比那些任务的结束日期要早，系统将改变您的开始/结束日期。
 pm	day	日
@@ -1446,7 +1165,6 @@ pm	no_tasks_found_text	使用上面的链接增加任务
 pm	noprj	<H1>没有发现子项目</H1><P><B>没有设置子项目，或者您没有许可权查看<P><FONT COLOR=RED>项目管理员可以通过项目管理页进行设置</FONT></B>
 pm	percent_complete	完成度百分比
 pm	priority	优先顺序
-pm	section	项目：$1
 pm	start_date	开始日期
 pm	status	状态
 pm	status_any	任何
@@ -1466,16 +1184,12 @@ pm_addtask	task_added_relationship	增加跟踪关系成功
 pm_addtask	task_created_successfully	任务创建成功
 pm_addtask	task_updated_successfully	任务更新成功
 pm_addtask	title	增加新任务
-pm_admin	title	任务管理器：管理
-pm_admin_change_status	section	任务管理器管理
-pm_admin_change_status	title	更新信息
 pm_admin_projects	add_categories	增加分类
 pm_admin_projects	add_categories_title	增加分类
 pm_admin_projects	add_categories_to	增加分类到
 pm_admin_projects	add_edit_categories	增加/编辑分类
 pm_admin_projects	add_project	增加新项目
 pm_admin_projects	add_project_intro	增加一个包括一系列任务的项目，这和创建一个新任务是不同的。
-pm_admin_projects	add_subprojects	增加子项目
 pm_admin_projects	admin_title	项目/任务管理器管理
 pm_admin_projects	category_inserted	分类已添加
 pm_admin_projects	category_name	新分类名称
@@ -1484,36 +1198,24 @@ pm_admin_projects	category_note2	不建议您更改分类名称，因为其他�
 pm_admin_projects	category_updated	分类已更新
 pm_admin_projects	change_project_intro	您可以通过这个表单更改一个现有的任务。请注意隐藏项目仍然能够被项目成员查看到，虽然不是被完全公开。<p>
 pm_admin_projects	change_project_title	更改项目/任务管理器状态
-pm_admin_projects	col_project_id	项目编号
-pm_admin_projects	col_project_name	项目名称
 pm_admin_projects	delete	删除
 pm_admin_projects	delete_info	永久地删除子项目与它的全部资料
 pm_admin_projects	delete_warning	你将永久地删除这个子项目和它所有的相关内容，而且不能挽回！
 pm_admin_projects	deleted	成功删除
 pm_admin_projects	description	说明
 pm_admin_projects	edit_update	编辑/更新项目
-pm_admin_projects	existing_subprojects	已存在的子项目
 pm_admin_projects	id	编号
 pm_admin_projects	is_public	是否公开？
 pm_admin_projects	modify_category	更改分类
 pm_admin_projects	no_categories	没有定义分类
 pm_admin_projects	no_projects_found	<h2>没有发现项目</h2><p>该项目没有子项目。您可以通过上面“增加新项目”的链接来增加新的子项目。
-pm_admin_projects	no_subprojects	该项目没有子项目
 pm_admin_projects	project_inserted	项目已添加
 pm_admin_projects	project_name	新项目名称
 pm_admin_projects	project_title	标题
 pm_admin_projects	projects_intro	增加新的项目到项目/任务管理器。<strong>这与增加一个任务到项目不一样。</strong>
 pm_admin_projects	really_sure	我非常确定
-pm_admin_projects	section	任务管理器管理
 pm_admin_projects	send_updates	用Email发送所有的更新到
 pm_admin_projects	sure	我确定
-pm_admin_projects	title	增加子项目
-pm_browse_custom	section	任务管理器
-pm_browse_custom	title	浏览定制的任务
-pm_browse_my	section	项目 $1 的任务管理器
-pm_browse_my	title	浏览我的任务
-pm_browse_open	section	任务管理器
-pm_browse_open	title	浏览启用的任务
 pm_browsetask	admin_mass_update	<strong>管理员：</strong> 如果您希望在上面选取的项目中套用同样的设置，用这些项目来修改他们的属性并且点击 "大量更新".
 pm_browsetask	browse	浏览
 pm_browsetask	check_all	全部勾选
@@ -1539,7 +1241,6 @@ pm_detailtask	hours	小时
 pm_detailtask	original_comment	原始评论
 pm_detailtask	pct_complete	完成度百分比
 pm_detailtask	priority	优先顺序
-pm_detailtask	section	任务管理器
 pm_detailtask	start_date	开始日期
 pm_detailtask	status	状态
 pm_detailtask	submitted_by	发表人
@@ -1560,7 +1261,6 @@ pm_include_grouphtml	downloadcsv	下载作为CSV
 pm_include_grouphtml	error_disabled	项目关闭了任务管理功能
 pm_include_grouphtml	gantt_chart	甘特图
 pm_include_grouphtml	not_started	尚未开始
-pm_include_grouphtml	project	项目
 pm_include_grouphtml	reporting	报表
 pm_include_grouphtml	uploadcsv	上传CSV
 pm_include_taskhtml	by	作者
@@ -1572,7 +1272,6 @@ pm_include_taskhtml	followups	回覆
 pm_include_taskhtml	no_changes	没有被改动
 pm_include_taskhtml	no_comments	没有评论
 pm_include_taskhtml	no_depend_info	没有任务依赖于本任务
-pm_include_taskhtml	no_followups	没有回覆
 pm_include_taskhtml	no_tracker_items	没有相关的跟踪项被添加
 pm_include_taskhtml	old_value	旧值
 pm_include_taskhtml	open_date	启用日期
@@ -1596,11 +1295,6 @@ pm_projectgroup	error_min_desc_length	文件说明必须至少10个字节
 pm_projectgroup	error_min_name_length	标题必须至少5个字节
 pm_projectgroup	none_found	没有发现项目组
 pm_projecttask	circular_dependency	发现回圈依赖'
-pm_projecttask	mail_followups_body	\n日期：$1\n作者：$2\n\n评论：\n$3
-pm_projecttask	mail_followups_footer	取得更多信息，请点击：
-pm_projecttask	mail_followups_subject	任务 #
-pm_projecttask	mail_followups_title	\n\n回覆
-pm_projecttask	mail_notice			任务 # $1 已被更新\n\n项目：$2\n子项目：$3\n摘要：$4\n完成度：$5\n状态：$6\n\n说明：$7
 pm_reporting	aging_report	按时间报表
 pm_reporting	all_tasks_by_category	按分类统计的所有任务
 pm_reporting	all_tasks_by_technician	按技术人员统计的所有任务
@@ -1615,7 +1309,6 @@ pm_reporting	started_tasks	已开始的任务数
 pm_reporting	tasks_by_category	按分类统计的任务
 pm_reporting	tasks_by_technician	按技术人员统计的任务
 pm_reporting	title	任务报表系统
-pm_task	create_successfully	任务创建成功
 pm_uploadcsv	choose_file	在适当的.csv格式中选择一个文件来上传。
 pm_uploadcsv	explain	这页让你选择一个.csv格式文件并上传它，因此它能在现在的子项目中被插入。
 pm_uploadcsv	title	上传资料给任务管理员。
@@ -1627,9 +1320,6 @@ project_admin	addfromlist2	选择每个用户的角色后点击 "Add All"。
 project_admin	choose_first_letter	<p> 选择你想要增加的人拥有Unix帐号的<strong>第一个字节</strong>。</p>
 project_admin	docmanager_admin	文件管理
 project_admin	download_tarball	下载您的每夜CVS Tree Tarball
-project_admin	edit_file_releases	编辑/增加文件发布
-project_admin	edit_member_permissions	编辑成员许可权
-project_admin	file_releases	文件发布
 project_admin	finish	完成
 project_admin	forum_admin	讨论区管理
 project_admin	frs_admin	文件发布管理
@@ -1638,12 +1328,9 @@ project_admin	homepage_link	网页链结：
 project_admin	mail_admin	邮件管理
 project_admin	news_admin	新闻管理
 project_admin	no_matching_user	<p>未发现符合的用户</p>
-project_admin	packages	软件包
-project_admin	plugins_admin	Plugins管理
 project_admin	project_information	项目其他信息
 project_admin	rejectpending	拒绝
 project_admin	scm_admin	SCM管理
-project_admin	section	任务：$1
 project_admin	shell_server	项目shell(SSH)服务器：
 project_admin	shell_server_group_directory	shell服务器上的项目目录：
 project_admin	short_description	简短说明：
@@ -1677,8 +1364,6 @@ project_admin_database	state	状态
 project_admin_database	title	数据库信息
 project_admin_database	update	更新
 project_admin_editgroupinfo	active_features	活动的特性
-project_admin_editgroupinfo	enable_anonymous_cvs	允许匿名点击CVS
-project_admin_editgroupinfo	enable_pserver	允许pserver
 project_admin_editgroupinfo	group_name	说明性的项目名称
 project_admin_editgroupinfo	group_updated	项目信息更新
 project_admin_editgroupinfo	homepage_link	网页链结
@@ -1775,8 +1460,6 @@ project_admin_group_trove	title	项目类别
 project_admin_group_trove	update_changes	更新所有的类别变动
 project_admin_history	info	这个日志显示，谁曾经在何时对您的项目做过大的更改
 project_admin_history	title	历史
-project_admin_newrelease	section	项目 $1 - 管理
-project_admin_newrelease	title	创建新发布
 project_admin_qrs	changelog	更改日志
 project_admin_qrs	create_new_package	或者 $1 创建新的软件包 $2
 project_admin_qrs	exceed_file_size	上传的文件超过系统限制，您可以联络管理员来上传这个文件
@@ -1788,7 +1471,6 @@ project_admin_qrs	ftpupload_new_file	或者，您能使用FTP上传一个新的�
 project_admin_qrs	maximum_file_size	上传文件大小上限：
 project_admin_qrs	must_choose_one	必须选择一个
 project_admin_qrs	no_file_types_available	没有可用的文件类型
-project_admin_qrs	notify_list	通知列表
 project_admin_qrs	package_id	软件包编号
 project_admin_qrs	partial_file	上传的文件并不完整
 project_admin_qrs	preserve_text	保存我的预设格式化文字
@@ -1804,64 +1486,14 @@ project_admin_qrs	required_file_type	必须选择一个文件类型
 project_admin_qrs	required_package	必须选择一个软件包
 project_admin_qrs	required_processor_type	必须选择一个处理器类型
 project_admin_qrs	required_release_name	必须定义一个发布名
-project_admin_qrs	separate_emails	以一个逗号(,)分隔 e-mails
 project_admin_qrs	title	快速发布系统
 project_admin_qrs	unknown_file_error	文件上传错误
 project_admin_qrs	upload_new_file	上传一个新文件
-project_admin_rmuser	cancel	取消
-project_admin_rmuser	cannot_remove_admin	您无法移除 $1 管理员
-project_admin_rmuser	info	<h3>从 $1 移除开发人员</h3><p>您正尝试从 $1 移除开发人员，请确认您的动作：</p>
-project_admin_rmuser	operation_not_permitted	您无法执行这个动作
-project_admin_rmuser	remove	移除
-project_admin_rmuser	title	移除用户
 project_admin_showreleases	date	日期
 project_admin_showreleases	no_release	这个分类目前没有发布任何文件
 project_admin_showreleases	package_name	分类名称
 project_admin_showreleases	release_name	发布名称
 project_admin_showreleases	title	发布新文件版本
-project_admin_userpermedit	add_to_all	添加全部
-project_admin_userpermedit	add_to_tracker	添加到跟踪者
-project_admin_userpermedit	admin	管理
-project_admin_userpermedit	admin_only	只有管理
-project_admin_userpermedit	admin_tech	管理与技术
-project_admin_userpermedit	developer_not_found	这个群组中找不到这个开发人员
-project_admin_userpermedit	docman	文件管理
-project_admin_userpermedit	editing_permissions	您正在编辑用户权限  $1 ($2)
-project_admin_userpermedit	editor	作者
-project_admin_userpermedit	file_release_role	在文件发布的角色
-project_admin_userpermedit	forums	讨论区
-project_admin_userpermedit	invalid_user	错误的用户
-project_admin_userpermedit	moderator	管理者
-project_admin_userpermedit	no_permissions	没有权限
-project_admin_userpermedit	not_available	无法存取
-project_admin_userpermedit	permissions_updated	权限更新
-project_admin_userpermedit	pm	项目/任务管理
-project_admin_userpermedit	project_admin	项目管理
-project_admin_userpermedit	project_role	项目角色
-project_admin_userpermedit	property	属性
-project_admin_userpermedit	release_technician	发布人员
-project_admin_userpermedit	remove	移除
-project_admin_userpermedit	reset_changes	重设变动
-project_admin_userpermedit	technician	技术人员
-project_admin_userpermedit	title	编辑开发人员权限
-project_admin_userpermedit	tracker_info	<h3>添加用户到这些跟踪：</h3>	<p>	您可以挑选这个用户可以操作的跟踪，或是点击 "全部添加" 给这个用户</p>
-project_admin_userpermedit	tracker_manager	跟踪管理
-project_admin_userpermedit	undefined	未定义
-project_admin_userpermedit	update_permissions	更新开发人员权限
-project_admin_userpermedit	user_added	添加用户成功
-project_admin_userpermedit	user_does_not_exist	用户不存在
-project_admin_userpermedit	value	值
-project_admin_userperms	docman	文件<br />管理
-project_admin_userperms	editor	作者
-project_admin_userperms	forums	讨论
-project_admin_userperms	general	一般
-project_admin_userperms	info	点击下面用户的名称来编辑权限
-project_admin_userperms	moderator	管理者
-project_admin_userperms	no_developers	没有任何开发人员
-project_admin_userperms	rel_tech	Rel.Tech.
-project_admin_userperms	task_manager	工作<br />管理
-project_admin_userperms	title	用户权限列表
-project_admin_userperms	tracker_manager	跟踪<br />管理
 project_admin_utils	admin	管理
 project_admin_utils	by	由
 project_admin_utils	change_history	群组变动纪录
@@ -1869,7 +1501,6 @@ project_admin_utils	database_admin	数据库管理
 project_admin_utils	date	日期
 project_admin_utils	edit_jobs	编辑已发布工作
 project_admin_utils	edit_public_info	编辑公开信息
-project_admin_utils	edit_release_files	编辑/发布文件
 project_admin_utils	field	栏位
 project_admin_utils	multimedia_data	编辑多媒体资料
 project_admin_utils	old_value	旧值
@@ -1877,7 +1508,6 @@ project_admin_utils	permission_blurb	<strong>注意：</strong><dl><dt><strong>�
 project_admin_utils	post_jobs	发布寻求协助
 project_admin_utils	project_history	项目历史纪录
 project_admin_utils	stats	统计
-project_admin_utils	user_permissions	用户权限
 project_admin_utils	vhosts	虚拟主机
 project_admin_vhost	create	创建
 project_admin_vhost	delete	删除
@@ -1894,14 +1524,9 @@ project_filemodule_monitor	start_monitor_body	已经订阅
 project_filemodule_monitor	start_monitor_title	订阅已启用
 project_filemodule_monitor	stop_monitor_body	已经停止订阅
 project_filemodule_monitor	stop_monitor_title	订阅已停止
-project_home	cvs_commits	更新 <strong>$1</strong> 次，添加 <strong>$2</strong> 个
-project_home	forum_messages	讨论区 <strong>$2</strong> 有 <strong>$1</strong> 篇消息
-project_home	forum_messages_only_one_forum	<strong>$1</strong> 篇消息在 <strong>$2</strong> 个讨论区
-project_home	forums	讨论区
 project_home	help_wanted	需要协助：这个项目正在找寻
 project_home	help_wanted_multiple	能够胜任 $1 工作的伙伴 </a>
 project_home	holding_note	注意：这个项目资料是由 $1 团队所维护，我们并不是这个产品的官方网站，相关版权声明信息也许能够在这个项目的网页中找到！
-project_home	messages_in	新消息
 project_home	monitor_package	订阅这个软件包
 project_home	no_subprojects	目前没有公开的子项目
 project_home	no_trackers	目前没有公开的跟踪项目
@@ -1914,7 +1539,6 @@ project_home	view_members	浏览成员
 project_home	view_project_files	浏览全部文件
 project_joinrequest	already_member	你已经是项目成员。
 project_joinrequest	already_requested	你已经向项目管理员发送过请求，请等待回复。
-project_joinrequest	approved	您已经被添加至 $1 项目。
 project_joinrequest	comments	需要的话，您可以向管理员发送一条附言：
 project_joinrequest	denied	您请求加入 $1 项目被管理人员否决。
 project_joinrequest	join_notice_body	$1 已经请求参与您的项目。\n你能在这里核准这一个请求：http://$2/project/admin/?group_id=$3
@@ -1922,7 +1546,6 @@ project_joinrequest	join_notice_subject	请求参与项目 $1
 project_joinrequest	joining	藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您的请求。
 project_joinrequest	nonepending	没有未决定的请求
 project_joinrequest	pending	未决定的请求
-project_joinrequest	pending_requests	未决定的参与请求
 project_joinrequest	request_link	请求参与
 project_joinrequest	submitted	您的请求已经被提交。
 project_joinrequest	title	请求参与项目
@@ -1949,30 +1572,13 @@ project_showfiles	package	软件包
 project_showfiles	project_totals	项目文件总数
 project_showfiles	release_highlighted	您所选择的项目会有 <span style="background-color:pink">醒目标示</span>.
 project_showfiles	release_notes	发布记录
-project_showfiles	section	项目：$1
 project_showfiles	size	大小
 project_showfiles	title	项目文件列表
 project_shownotes	changes	变动：
 project_shownotes	error_release_not_found	找不到这个项目
 project_shownotes	notes	记录：
 project_shownotes	release_name	发布名称：
-project_shownotes	section	项目：$1
 project_shownotes	title	File 发布与变动记录
-project_stats	change_stats_view	切换统计浏览方式
-project_stats	detailed_statistics	统计细节
-project_stats	last_30_days	最近30天
-project_stats	last_7_days	最近7天
-project_stats	monthly	每月
-project_stats	tasks	工作
-project_stats	title	项目统计
-project_stats	tracker	跟踪项目
-project_stats	usage_statistics	使用度统计
-project_stats	view_reports	浏览报表
-project_stats_graph	date	Date
-project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the past $1 days
-project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
-project_stats_graph	statistics	$1 Statistics For $2
-project_stats_graph	views	Views (red) / Downloads (blue)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	所有跟踪项目
 project_stats_utils	bugs	Bugs
@@ -1989,40 +1595,21 @@ project_stats_utils	stats_for_days	过去 $1 天的统计
 project_stats_utils	stats_for_months	过去 $1 个月的统计
 project_stats_utils	support	支持
 project_stats_utils	tasks	任务
-projects	section	项目：$1
-projects	title	摘要
 rbac_edit	addrole	添加角色
-rbac_edit	docman	文件管理
 rbac_edit	editrole	编辑角色
 rbac_edit	editroles	编辑角色
-rbac_edit	forum	讨论区
-rbac_edit	forumadmin	项目讨论区管理
-rbac_edit	forumpublic	讨论区权限
-rbac_edit	frs	文件发布系统
-rbac_edit	frspackage	软件包特权
 rbac_edit	intro	通过这一页来编辑您的项目角色，每个用户至少可以像匿名者存取。例如，如果匿名者可以读取 CVS，那么这个项目的其他角色也可以
 rbac_edit	newrole	新角色
 rbac_edit	observer	编辑匿名者
 rbac_edit	observerintro	通过这一页来编辑您的项目非用户的权限与存取等级，非用户包括未登录的用户。
 rbac_edit	observerusername	匿名者
 rbac_edit	pgtitle	编辑角色
-rbac_edit	pm	工作管理
-rbac_edit	pmadmin	项目任务管理
-rbac_edit	pmpublic	工作管理权限
-rbac_edit	projectadmin	项目管理
-rbac_edit	projectpublic	项目权限
-rbac_edit	projectpublicnote	注意：如果整个项目被设置为隐藏，将没有用户能够存取其他功能，即使您有开放其他功能
 rbac_edit	remove	移除
 rbac_edit	role	角色
 rbac_edit	rolename	角色名称
-rbac_edit	scm	SCM - 代码储存库
-rbac_edit	scmpublic	SCM 权限
 rbac_edit	title1	区域
 rbac_edit	title2	子区域
 rbac_edit	title3	设置
-rbac_edit	tracker	跟踪项目
-rbac_edit	trackeradmin	项目跟踪项目管理
-rbac_edit	trackerpublic	跟踪项目权限
 rbac_edit	update	更新
 rbac_vals	docman0	读取/发表
 rbac_vals	docman1	管理
@@ -2079,8 +1666,6 @@ register	i_agree	我同意
 register	i_disagree	我不同意
 register	invalid_full_name	全名错误
 register	invalid_unix_name	Unix名称错误
-register	license_type	Public domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>这个项目的授权方式</strong><br/ ><strong>您的授权方式：</strong><br />
-register	maximum_description	项目说明最多只允许 255 个字节
 register	more_license_description	请详细说明您的授权方式
 register	no_license_chosen	您尚未选择授权方式
 register	one_scm	因为那里只是存在一个SCM，然后这将被自动地选择。<strong>$1</strong>将被选择。
@@ -2094,16 +1679,7 @@ register	project_unix_name	<h3>5. 项目 Unix 名称</h3><p>除了项目完整�
 register	purpose_and_summarization	<h3>2. 项目目的与摘要</h3><p><strong></strong><p><strong> 请提供您所申请项目详细与准确的说明，以及您计划以何种方式利用 $1 的资源。这份说明将是您的项目在 $1 是否能注册的依据，进而确保您能以预期的方式使用敝站提供的服务。同时这份说明将不会作为您项目的公开说明。</strong>
 register	registration_complete	注册完成
 register	scm_not_selected	网站有启动SCM，但是没有SCM被选择。
-register	title	新项目完成注册了
 register	unix_group_name_already_taken	Unix名称重复
-register_complete	section	新项目注册
-register_complete	title	注册完成
-register_projectinfo	section	新项目注册
-register_projectinfo	title	项目信息
-register_requirements	section	新项目注册
-register_requirements	title	服务与需求
-register_tos	section	新项目注册
-register_tos	title	服务使用条款
 reporting	add	添加
 reporting	administrative	管理
 reporting	area	区域
@@ -2161,7 +1737,6 @@ reporting_pie	end	结束
 reporting_pie	start	开始
 reporting_pie	title	扇形图工具
 reporting_pie	trackers	跟踪者
-reporting_rebuild	iamsure	我确定
 reporting_rebuild	message	  <h3>报告系统初始化</h3><p>有时候，如果工作日程安排失败或者数据库毁损，你可能必须重建报告表格。<p>如果您确定要重建全部的报告表格，勾选"我确定"及按下面的按钮。<p>这可能花费数分钟，因此不要按超过一次。<p>
 reporting_rebuild	pressonlyonce	只能按一次
 reporting_rebuild	title	主要页面
@@ -2212,21 +1787,8 @@ reporting_us	title	用户摘要报告
 reporting_ut	description	选择你希望被报告人姓名的<strong>第一个字节</strong>。<p>
 reporting_ut	title	用户时间报告
 scm_index	admin	管理
-scm_index	anoncvs	<p><b>匿名者 CVS 存取</b></p><p>这项目的CVS repository可以利用下列指令集通过<i>anonymous</i>存取 (pserver) CVS。您希望check out的module，您必须指定<i>modulename</i>。当出现密码输入提示时，只需要按Enter键。</p>
-scm_index	anoncvsup	从module的目录update不需要 -d 参数。
-scm_index	browseit	浏览 CVS Repository
-scm_index	browsetree	<b>浏览 CVS Tree</b><p>浏览 CVS tree 给您项目代码目前状态的宏观视野，同时您也可以检视项目中任何代码的完整存取记录。</p>
-scm_index	devcvs	<p><b>开发人员 CVS 存取通过SSH</b></p><p>只有项目开发人员可以经由这个方式存取CVS tree，SSH2必须安装在您的个人电脑，替换<i>modulename</i>与<i>username</i>以适当的值，当出现密码输入提示时输入您的密码。</p>
-scm_index	developer_commits_adds	开发人员 (30 天/上传次数) (30 天/添加项目)
-scm_index	developername	developername
-scm_index	error_only_projects_can_use_cvs	错误，只有项目可以使用CVS
 scm_index	error_this_project_has_turned_off	错误，这个项目已经关闭CVS
-scm_index	history	Repository 存取记录
-scm_index	modulename	modulename
-scm_index	nohistory	这个项目没有 CVS 存取记录。
 scm_index	scm_repository	SCM Repository
-scm_index	section	项目：$1
-scm_index	title	SCM
 search	artifact_author	发布者
 search	artifact_date	日期
 search	artifact_id	#
@@ -2234,9 +1796,7 @@ search	artifact_summary	Bug摘要
 search	docs_description	说明
 search	docs_id	#
 search	docs_title	主题
-search	error_criteria_not_specified	在上面输入您要搜索的关键字
 search	error_invalid_search	错误 - 无法搜索
-search	error_search_minlength	搜索至少要有 3 个关键字
 search	forum_author	作者
 search	forum_date	日期
 search	forum_thread	讨论
@@ -2253,7 +1813,6 @@ search	no_matches_found	找不到关于 <em>$1</em> 的资料
 search	people_real_name	全名
 search	people_user_name	帐号
 search	previous_results	上一个结果
-search	project_search	项目搜索
 search	search_results	 <em>$1</em> 的搜索结果
 search	skill_from	从
 search	skill_keywords	关键字
@@ -2297,7 +1856,6 @@ sendmessage	message_sent	消息已提交
 sendmessage	name	您的姓名
 sendmessage	send	传送 Email
 sendmessage	subject	主题
-sendmessage	title	送给 $1 一个消息
 session	cannotinit	错误 - 无法初始化连线
 session	deleted	帐号删除了
 session	invalidpasswd	错误的帐号或密码
@@ -2323,12 +1881,7 @@ snippet_addversion	paste_the_code_here	在这里贴上代码：
 snippet_addversion	snippet_package_version_added_successfully	代码软件包版本添加成功
 snippet_addversion	snippet_version_added_successfully	代码版本添加成功
 snippet_addversion	submit	提交
-snippet_addversion	title	上传一个新的代码版本
-snippet_addversion	title_add_snippet_to_package	添加代码到这个软件包
-snippet_addversion	title_submit_a_new_snippet_package	上传一个新的代码软件包
-snippet_addversion	title_submit_a_new_snippet_version	上传一个新的代码版本
 snippet_addversion	version	版本：
-snippet_browse	creator	创建者
 snippet_browse	error_bad_url	错误，错误 - 网址有误？
 snippet_browse	no_snippets_found	找不到代码
 snippet_browse	packages_of_snippets	代码软件包
@@ -2341,14 +1894,6 @@ snippet_browse	title	代码函数库
 snippet_caching	browse_by_category	依类别浏览
 snippet_caching	browse_by_language	依程序语言浏览
 snippet_caching	intro	<p>收集归档的目的是让您和开放原始码社群分享您的代码片断、scripts与函数。</p><p>您可以创造一个"new snippet"，然后快速与容易地张贴片断代码的额外版本。</p><p>只要您有已张贴的片断代码，您可以事后创造一个片断代码的"封装"，这个封装可以包含其它片断代码多重、特定的版本。</p><p> </p><h3>浏览分享代码</h3>	<p>您可以快速地浏览分享代码：</p>
-snippet_delete	error_mangled_url	错误，错误 - 不知所云的URL？
-snippet_delete	error_only_creator_of_package_version_can_delete	错误 - 只有封装套件版本的创造者能删除它。
-snippet_delete	error_only_the_creator	错误 - 只有封装套件版本的创造者能删除来自它的片断代码。
-snippet_delete	item_removed_from	项目从软件包中移除了
-snippet_delete	package_removed	软件包移除了
-snippet_delete	snippet_removed	代码移除了
-snippet_delete	that_snippet_doesnt_exist	错误 - 那个代码不在这个软件包中
-snippet_delete	title	删除代码
 snippet_detail	author	作者
 snippet_detail	changes_since_last_version	与上个版本的差异：
 snippet_detail	date_posted	发表日期
@@ -2369,8 +1914,6 @@ snippet_detail	version_of_this_package	这个软件包的版本：
 snippet_detail	version_of_this_snippet	这个代码的版本：
 snippet_detail	you_can_submit_a_new	如果您已经修改它，而且你感觉和其它人分享是适当的，您可以发表一个这片断代码的新版本。
 snippet_detail	you_can_submit_a_new_version_of_package	如果您已经修改它，而且你感觉和其它人分享是适当的，您可以发表一个这软件封装的新版本。
-snippet_download	error	错误
-snippet_download	nothing_in_here	这里没有任何东西
 snippet_index	title	代码函数库
 snippet_package	add_snippet_to	添加代码到这个软件包
 snippet_package	add_snippet_to_package	添加代码到这个软件包
@@ -2397,17 +1940,13 @@ snippet_package	you_can_group	<p>您可以收集存在的片断代码并使用�
 snippet_submit	category	类别
 snippet_submit	description	说明
 snippet_submit	error_doing_snippet_insert	添加代码时发生错误！
-snippet_submit	error_doing_snippet_version_insert	添加代码版本时发生错误！
-snippet_submit	error_go_back_and_fill	错误，错误 - 退回去而且填写所有的资料
 snippet_submit	language	程序语言
 snippet_submit	license	授权方式
 snippet_submit	make_sure_all_info	请确认所有信息是正确且完整的
 snippet_submit	paste_the_code_here	在这里贴上代码
 snippet_submit	snippet_added_successfull	代码添加成功！
 snippet_submit	snippet_title	标题
-snippet_submit	snippet_version_added_successfully	代码版本添加成功！
 snippet_submit	submit	提交
-snippet_submit	submit_a_new_snippet	提交一个新的代码
 snippet_submit	suggest_a_category	建议新类别
 snippet_submit	suggest_a_language	建议新程序语言
 snippet_submit	type	代码类型
@@ -2418,20 +1957,16 @@ snippet_utils	author	作者
 snippet_utils	bbs_systems	BBS系统
 snippet_utils	browse	浏览
 snippet_utils	calendars	行事历
-snippet_utils	category	类别：
 snippet_utils	choose_one	选择一个
 snippet_utils	class	等级
 snippet_utils	create_a_package	创建一个软件包
 snippet_utils	database_manipulation	数据库管理
-snippet_utils	description	说明：
 snippet_utils	download_version	下载版本
 snippet_utils	file_management	文件管理
 snippet_utils	full_script	完整代码
 snippet_utils	function	功能
 snippet_utils	games	遊戏
 snippet_utils	html_manipulation	HTML管理
-snippet_utils	language	程序语言：
-snippet_utils	license	授权方式：
 snippet_utils	math_functions	数学函数
 snippet_utils	no_snippets_are_in_this_package	目前这个软件包还没有代码
 snippet_utils	other	其它
@@ -2444,11 +1979,9 @@ snippet_utils	snippet_id	代码编号
 snippet_utils	snippet_in_this_package	这个软件包的代码：
 snippet_utils	snippet_title	标题
 snippet_utils	submit_a_new_snippet	上传一个新的代码
-snippet_utils	type	类型：
 snippet_utils	unix_admin	Unix管理
 snippet_utils	voting	评分
 snippet_utils	website_only	WebSite Only
-softwaremap	title	软件地图
 source	file_not_found	找不到文件
 source	file_not_found_text	找不到指定的文件来显示
 source	invalid_argument	错误的文件参数
@@ -2457,12 +1990,7 @@ source	missing_file	没有文件参数
 source	missing_file_text	这个页面必须指定一个文件
 source	show_source	显示代码
 source	source_of	 $1 的代码
-staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-stats	overview_stats	整体统计
-stats	project_stats	项目统计
-stats	site_graphs	网站统计图片
 stats	title	$1 网站统计
-stats_graph	joverview_stats	整体统计
 stats_graph	project_stats	项目统计
 stats_graph	site_graphs	网站统计图片
 stats_graph	sitewide_statistics_graphs	网站统计图片
@@ -2476,7 +2004,6 @@ stats_index	other_statistics	其他统计：<ul><li><a href="i18n.php">I18n 统�
 stats_index	overview_stats	整体统计
 stats_index	project_stats	项目统计
 stats_index	site_graphs	网站统计图片
-stats_index	sitewide_aggregate_statistics	站台合计统计
 stats_lastlogins	date	日期
 stats_lastlogins	last_logins	最近登录
 stats_lastlogins	most_recent_open	最新连线
@@ -2514,7 +2041,6 @@ stats_site_utils	report	报告：
 stats_site_utils	returned_no_category	没有类别名称
 stats_site_utils	site	网站
 stats_site_utils	site_views	网站浏览次数
-stats_site_utils	special_project_list	指定项目列表
 stats_site_utils	statistics_for_the_past_days	过去 $1 天的统计
 stats_site_utils	statistics_for_the_past_months	过去 $1 个月的统计
 stats_site_utils	subdomain	子网域
@@ -2534,7 +2060,6 @@ stats_view_graph	views	Views (RED)
 survey	for_some_reason	基于某些理由，群组编号或问卷编号不能出现在这个页面
 survey	high	高
 survey	low	低
-survey	permission_denied	权限不足
 survey	survey_not_found	找不到问卷
 survey	survey_privacy	问卷隐私声明
 survey	title	问卷
@@ -2547,7 +2072,6 @@ survey_add_question	question_type	问题类型
 survey_add_question	show_existing_questions	显示已经存在的问题
 survey_add_question	title	添加一个问题
 survey_add_survey	add_this_survey	添加这个问卷
-survey_add_survey	error_in_insert	插入问卷时发生问题
 survey_add_survey	existing_surveys	已经存在的问卷
 survey_add_survey	is_active	启用？
 survey_add_survey	list_questions_numbers	以希望的次序列出问题编号，并以逗号分格。<strong>提及您的问题列表</strong>，因此您能浏览问题的编号。<strong>不要</strong>包括空白字节或以逗号作为结尾。<br />范例：1,2,3,4,5,6,7
@@ -2556,44 +2080,14 @@ survey_add_survey	no	否
 survey_add_survey	show_existing_question	显示已经存在的问题
 survey_add_survey	survey_inserted	问卷添加了
 survey_add_survey	title	添加一个问卷
-survey_add_survey	title_is_required	必须填入问卷标题
 survey_add_survey	yes	是
 survey_admin	delete	删除
 survey_admin	edit	编辑
-survey_admin	section	问卷工具
-survey_admin	title	管理
-survey_admin_add_question	section	问卷工具管理
-survey_admin_add_question	title	添加问题
-survey_admin_add_survey	section	问卷工具管理
-survey_admin_add_survey	title	添加问卷
-survey_admin_edit_question	section	问卷工具管理
-survey_admin_edit_question	title	编辑问题
-survey_admin_edit_survey	section	问卷工具管理
-survey_admin_edit_survey	title	编辑问卷
-survey_admin_index	add_question	添加问题
-survey_admin_index	add_survey	添加问卷
-survey_admin_index	edir_existing_survey	编辑已经存在的问卷
-survey_admin_index	edit_existing_question	编辑已经存在的问题
 survey_admin_index	its_simple_to_create	<p>创造问卷是轻而易举的。<ol><li>使用上述构成问卷项目创造问题和注释。</li><li>创造问卷，有条理的列出题目(从<strong>您的</strong>问题列表选择)。</li><li>链接问卷时网址使用格式：$1 此处 XX 代表问卷编号。
 survey_admin_index	permission_denied	权限不足
-survey_admin_index	show_results	显示问卷结果
 survey_admin_index	title	问卷管理
 survey_admin_index	you_can_now_activate	您现在可以 $1 决定启用/停止 $2 已经存在的问卷。
-survey_admin_show_questions	section	问卷工具管理
-survey_admin_show_questions	title	显示问卷问题
-survey_admin_show_results	section	问卷工具管理
-survey_admin_show_results	title	显示问卷结果
-survey_admin_show_results_aggregate	section	问卷工具管理
-survey_admin_show_results_aggregate	title	显示问卷结果
-survey_admin_show_results_comments	section	问卷工具管理
-survey_admin_show_results_comments	title	显示问卷评论
-survey_admin_show_results_individual	section	问卷工具管理
-survey_admin_show_results_individual	title	显示个别问卷结果
 survey_admin_utils	found	找到 $1 个问卷
-survey_admin_utils	group_id	群组编号
-survey_admin_utils	survey_id	问卷编号
-survey_admin_utils	survey_questions	问卷问题
-survey_admin_utils	survey_title	问卷标题
 survey_edit	addable_question	可添加问题
 survey_edit	change_after_already_response	如果您在已经有人填写后修改问卷，您的问卷结果可能令人费解或混乱
 survey_edit	delete_failed	删除错误
@@ -2637,7 +2131,6 @@ survey_error	no_survey_data_filled	问卷资料没有填写
 survey_error	no_survey_found		没有发现问卷
 survey_error	no_survey_response_found	没有发现问卷回应
 survey_error	permission_denied	您没有权限存取这个页面
-survey_index	for_some_reason	基于某些理由，群组编号或问卷编号不能出现在这个页面
 survey_index	survey_edit	编辑
 survey_index	survey_id	问卷编号
 survey_index	survey_number_questions	问题数
@@ -2648,7 +2141,6 @@ survey_index	survey_result_comments	图形与评论的结果
 survey_index	survey_result_graph	统计图
 survey_index	survey_title	问卷标题
 survey_index	survey_vote	评分
-survey_index	this_group_has	这个群组没有进行中的问卷
 survey_index	title	问卷
 survey_privacy	survey_privacy	问卷隐私声明
 survey_privacy	the_privacy_information	<p>在这些调查中被收集的资料将不会被卖给第三者或者用来请求你购买任何的产品或服务。</p><p>这被收集的资料是作为创建被审视的项目与开发人员的概述，这概述将协助访客至本站了解该项目的品质。</p><p>回答问卷调查的编号会被隐藏并不会被项目管理员或被公开或被第三者看见。</p><p>被收集的资料只有以整体的形式被使用，不会再选出特定的用户或开发人员。</p><p>如果任何的改变被打造成一个政策，它将只有影响未来资料的收集，而用户当然有权利"选择退出"。
@@ -2676,14 +2168,8 @@ survey_show_questions	note_use_these_questions_id	注意：当您创造新问卷
 survey_show_questions	permission_denied	权限不足
 survey_show_questions	title	问卷问题
 survey_show_questions	you_may_use_any_of_these	您可以挑选这些问题其中之一应用在您的问卷
-survey_show_result_comment	found	找到
-survey_show_result_comment	permission_denied	权限不足
-survey_show_result_comment	question	问题：
-survey_show_result_comment	title	问卷合计结果
-survey_show_results	found	找到
 survey_show_results	permission_denied	权限不足
 survey_show_results	title	问卷结果
-survey_show_results	view_aggregate_responses	浏览合计回应
 survey_show_results_aggregate	average	平均
 survey_show_results_aggregate	comments	评论
 survey_show_results_aggregate	error	错误
@@ -2699,12 +2185,6 @@ survey_show_results_csv	permission_denied	权限不足
 survey_show_results_individual	permission_denied	权限不足
 survey_show_results_individual	title	结果
 survey_show_results_individual	yes_no	是 / 否
-survey_survey	section	调查工具
-survey_survey	title	显示问卷
-survey_survey_resp	section	调查工具
-survey_survey_resp	title	问卷处理 / 回应
-survey_utils	add_edit_question	添加/编辑 问题
-survey_utils	add_edit_survey	添加/编辑 问卷
 survey_utils	add_question	添加问题
 survey_utils	add_survey	添加问卷
 survey_utils	admin	管理
@@ -2716,8 +2196,6 @@ system	datefmt	Y-m-d H:i
 system	locale	zh_CN
 system	shortdatefmt	Y-m-d
 system	strftimefmt	%Y %B %e  %H:%M
-themes	section	帐号偏好
-themes	title	浏览/修改主题
 top	NA	N/A
 top	about_blurb	在 $1 我们跟踪许多项目的使用量统计，并在这里以数种分类显示项目的排行榜。
 top	active_all_time	全部时间最有活力
@@ -2737,18 +2215,12 @@ top	view_other_top_category	浏览其它的排行分类
 top_mostactive	percentile	百分比
 top_mostactive	project_name	项目名称
 top_mostactive	rank	排名
-top_mostactive	section	项目排行榜
-top_mostactive	title	最有活力项目：$1
 top_mostactive	updated_daily	每日更新
-top_toplist	change	更新
 top_toplist	download	下载次数
-top_toplist	last_rank	最新排名
 top_toplist	pageviews	页面浏览数
 top_toplist	posts	文章数
 top_toplist	project_name	项目名称
 top_toplist	rank	排名
-top_toplist	section	项目排行榜
-top_toplist	title	项目列表排行榜
 top_toplist	top_download	下载排行榜
 top_toplist	top_download_7_days	过去7天下载排行榜
 top_toplist	top_forum_post_count	论坛张贴次数排行榜
@@ -2760,51 +2232,36 @@ top_topusers	last_rank	最新排名
 top_topusers	rank	排名
 top_topusers	rating	评价
 top_topusers	real_name	真实姓名
-top_topusers	title	最高排名用户
 top_topusers	user_name	帐号
 tracker	admin	管理
 tracker	any	任何
 tracker	assigned_to	指定给
 tracker	assignee	被指定人
 tracker	build_query	构造查询
-tracker	category	类别
-tracker	category_any	任何
-tracker	changed	已修改
 tracker	check_upload	检查上传&附加文件
 tracker	choose	选择一个跟踪系统，然后您可以浏览/编辑/添加项目给它。
 tracker	close_date	结束日期
-tracker	comment	评论
-tracker	comment_added	已添加评论
-tracker	comments	评论
 tracker	date	日期
 tracker	detailed_description	细节说明
 tracker	file_delete	文件移除：
 tracker	file_delete_successful	文件移除：成功
-tracker	file_delete_upload	文件上传
 tracker	file_description	文件说明
 tracker	file_upload_successful	文件上传：成功
 tracker	followups	回覆
-tracker	group	群组
-tracker	group_any	任何
 tracker	id	编号
 tracker	insert_email	如果您<strong>不能</strong>登录，请在这里输入您的Email
 tracker	item_created	项目成功创造
-tracker	item_group	群组
 tracker	no_trackers	未发现可以存取的跟踪者
 tracker	no_trackers_text	没有跟踪者已经被设置，导致您不能浏览它们。<p><FONT COLOR=RED>这个项目的管理员首先必须使用 $1 管理页面 $2 设置资料类型。</FONT></strong>
 tracker	open_date	启用日期
-tracker	pagetitle	跟踪者
 tracker	please_login	请 $1 登录 $2
 tracker	priority	优先权
-tracker	query_default	最新查询
 tracker	query_delete	删除查询
 tracker	query_load	载入查询
-tracker	query_make_default	使这个查询作为预设值
 tracker	query_name	命名与储存查询
 tracker	query_update	更新查询
 tracker	quickbrowse	快速浏览
 tracker	reporting	报告
-tracker	resolution	决议
 tracker	run_query	超级查询
 tracker	saved_queries	套用&执行
 tracker	security_note	不要输入密码或机密资料在您的消息中！
@@ -2813,13 +2270,11 @@ tracker	status_any	任何
 tracker	submitted_by	发表人
 tracker	submitter	发表人
 tracker	summary	摘要
-tracker	title	跟踪者
 tracker	tracker_item	跟踪项目
 tracker	unassigned	不能指定
 tracker	updated_successful	更新成功
 tracker_add	for_project	关于项目
 tracker_add	submit		提交
-tracker_add	title	送交跟踪项目
 tracker_admin	add_artifact_types	添加定制类型
 tracker_admin	add_canned	添加预设回应
 tracker_admin	add_canned_responses	添加/更新 预设回应
@@ -2828,18 +2283,11 @@ tracker_admin	add_categories	添加/更新 类别
 tracker_admin	add_categories_info	添加类别像 '信箱模块'、'甘特图模块'、'cvs' 等等。
 tracker_admin	add_group_infos	添加群组像 'v1.2'、'未支持'、'未经检验' 等等。
 tracker_admin	add_groups	添加/更新 群组
-tracker_admin	add_permissions	添加/更新 用户 & 权限
-tracker_admin	add_permissions_info	添加/移除用户至/从这个跟踪项目
-tracker_admin	admin	管理
-tracker_admin	auto_assign_to	自动指定给
 tracker_admin	build_selection_box	管理订制栏位
 tracker_admin	build_selection_box_info	添加新选单像阶段(Phases)、品质度量(Quality Metrics)、元件(Components)...等等，只要添加一次，它们可以被使用在其它的选择式选单(譬如类别或群组)来说明与浏览 bugs 或其它的定制类型。
 tracker_admin	canned_response_inserted	预设回应已插入
 tracker_admin	canned_response_updated	预设回应已更新
-tracker_admin	category_add_warning	只要您添加一个类别，它就无法被删除。
-tracker_admin	category_inserted	类别已插入
 tracker_admin	category_name	类别名称
-tracker_admin	category_updated	类别已更新
 tracker_admin	choose_datatype	选择一个跟踪系统让您可以设置偏好、类别、群组、用户与权限。
 tracker_admin	choose_tracker	选择复制模板。站点管理员需要正确配置默认值和权限令你能够访问。
 tracker_admin	clone_tracker	复制追踪
@@ -2850,14 +2298,11 @@ tracker_admin	delete_warning	你将永久地删除这个的跟踪者和它所有
 tracker_admin	deleted	已成功删除
 tracker_admin	error_inserting	插入错误
 tracker_admin	error_updating	更新错误
-tracker_admin	group_inserted	群组已插入
 tracker_admin	group_name	新群组名称
-tracker_admin	group_updated	群组更新
 tracker_admin	intro	<h3>创造一个新跟踪系统</h3><p>您可以使用本系统虚拟地跟踪任何种类的情报，而每个跟踪者有不同的用户、群组、类别与权限列表。当需要时您可以容易的在每个跟踪者之间移动项目。</p><p>跟踪者被解释为"定制类型"，而个别的多笔资料则是"定制"。"Bugs" 就是一个定制类型，当一个 bug 被举报就是一个定制。您可以创造许多您想要的定制类型，但是记得您需要为每个定制类型设置类别、群组与权限，而这是相当耗时的。
 tracker_admin	manage_extrafield	管理定制字段
 tracker_admin	permanently_delete_info	永久地删除这个跟踪系统。
 tracker_admin	really_sure	我非常确定
-tracker_admin	section	Tracker
 tracker_admin	sure	我确定
 tracker_admin	title	管理部门
 tracker_admin	tracker_id	编号
@@ -2866,33 +2311,12 @@ tracker_admin	tracker_updated	跟踪更新
 tracker_admin	update_artifact_types	更新设置
 tracker_admin	update_preferences	更新偏好
 tracker_admin	update_preferences_info	设置偏好，像过期时间、Email
-tracker_admin	users_added	添加用户
-tracker_admin	users_deleted	删除用户
-tracker_admin	users_updated	更新用户
 tracker_admin_add_canned	canned_response_body	预设回应消息主要部份
 tracker_admin_add_canned	canned_response_info	创造有用的一般回应消息可以节省您很多时间，尤其在处理同样的定制要求。
 tracker_admin_add_canned	canned_response_title	标题
 tracker_admin_add_canned	existing_responses	已存在回应
 tracker_admin_add_canned	no_responses	在本群组回应未设置
 tracker_admin_add_canned	title	添加/变更 预设回应至$1
-tracker_admin_add_cat	no_categories	类别未定义
-tracker_admin_add_cat	title	添加类别至$1
-tracker_admin_add_group	group_add_warning	只要您添加一个群组，它就无法被删除。
-tracker_admin_add_group	no_groups_defined	群组未定义
-tracker_admin_add_group	title	添加/变更群组至$1
-tracker_admin_add_users	add_all_users	添加全部用户
-tracker_admin_add_users	add_user_info	<h3>添加这些用户：</h3><p>您可以挑选跟踪系统中的用户，或添加他们藉由勾选"添加全部用户"。</p>
-tracker_admin_add_users	add_users	添加用户
-tracker_admin_add_users	admin_only	管理员权限
-tracker_admin_add_users	category_permission	权限
-tracker_admin_add_users	delete	删除
-tracker_admin_add_users	developers_info	<p>您定义的每个跟踪者有分开的用户列表和用户权限。</p><p>只是把开发人员加入这一个跟踪者，然后更新他(她)们的权限。</p><p><dl><dt><strong>技术人员</strong></dt><dd>能被分配项目</dd><dt><strong>管理员</strong></dt><dd>能作变更至项目</dd></dl></p>
-tracker_admin_add_users	no_developers	未发现开发人员
-tracker_admin_add_users	tech_admin	技术 & 管理
-tracker_admin_add_users	technician	技术人员
-tracker_admin_add_users	title	添加/更新跟踪用户权限至$1
-tracker_admin_add_users	update_permissions	更新开发人员权限
-tracker_admin_add_users	user_name	帐号
 tracker_admin_build_boxes	add_field	添加新订制栏位
 tracker_admin_build_boxes	alias	栏位别名
 tracker_admin_build_boxes	box_add_choices	添加选择
@@ -2913,11 +2337,9 @@ tracker_admin_build_boxes	box_type_status	状态
 tracker_admin_build_boxes	box_type_text	Text Field
 tracker_admin_build_boxes	box_type_textarea	Text Area
 tracker_admin_build_boxes	box_update_title	修改一个订制栏位在：$1
-tracker_admin_build_boxes	choice_change_warning	不建议您改变组成元件名称，因为它与其他部份有关联性。当您改变组成元件名称，全部相关项目将被变更至新的组成元件。
 tracker_admin_build_boxes	choice_inserted	组成元件已插入
 tracker_admin_build_boxes	choice_updated	组成元件已更新
 tracker_admin_build_boxes	choice_warning	只要您添加一个新组成元件，它就无法被删除
-tracker_admin_build_boxes	conflicting_alias	'$1' 与现有别名冲突，请选用其他别名
 tracker_admin_build_boxes	copy	复制
 tracker_admin_build_boxes	delete	删除
 tracker_admin_build_boxes	delete_template	删除样板
@@ -2935,38 +2357,26 @@ tracker_admin_build_boxes	opt_add_name	添加新组成元件
 tracker_admin_build_boxes	opt_name	组成元件
 tracker_admin_build_boxes	opt_title	添加/更新 订制栏位组成元件在：$1
 tracker_admin_build_boxes	opt_update_title	修改一个订制栏位组成元件在：$1
-tracker_admin_build_boxes	required_alias	别名是必须的
 tracker_admin_build_boxes	required_box_name	一个栏位名称是必须的
 tracker_admin_build_boxes	required_choice_name	一个组成元件名称是必须的
 tracker_admin_build_boxes	reserved_alias	'$1' 是保留别名，请选用其他别名
-tracker_admin_build_boxes	status_any	任何
 tracker_admin_build_boxes	title	管理订制栏位
 tracker_admin_build_boxes	tracker_box_add_options	添加选项
-tracker_admin_build_boxes	tracker_box_id	编号
-tracker_admin_build_boxes	tracker_box_option_add	添加/更新
 tracker_admin_build_boxes	tracker_box_option_title	组成元件定义
 tracker_admin_build_boxes	tracker_box_title	订制栏位定义
 tracker_admin_build_boxes	tracker_box_type	类型
-tracker_admin_build_boxes	tracker_choice_id	编号
 tracker_admin_build_boxes	upload_template	添加/更新样板
-tracker_admin_choose	title	跟踪者管理
 tracker_admin_copy	choices_title	复制选项从订制栏位 $1
 tracker_admin_copy	copy_choices	点击这里来复制这些组成元件到其它跟踪者
 tracker_admin_copy	from_box	复制从
 tracker_admin_copy	into_box	到跟踪者与订制栏位
-tracker_admin_copy_cat	title	从$1复制类别
 tracker_admin_update_canned	title	修改预设回应在：$1
-tracker_admin_update_cat	auto_assign_to	自动指定给
-tracker_admin_update_cat	category_change_warning	不建议您改变定制类别名称，因为它与其他部份有关联性。当您改变类别名称，全部相关项目将被变更至新的类别。
-tracker_admin_update_cat	category_name	类别名称
 tracker_admin_update_cat	title	修改类别在：$1
 tracker_admin_update_group	title	修改一个群组在：$1
-tracker_admin_update_group	warning	不建议您改变定制群组名称，因为它与其他部份有关联性。当您改变群组名称，全部相关项目将被变更至新的群组。
 tracker_admin_update_type	allow_anonymous	允许不用登录即可张贴
 tracker_admin_update_type	browse_item_form_text	给 "浏览项目" 页的自由形式说明文稿
 tracker_admin_update_type	days_overdue	讨论逾期的天数
 tracker_admin_update_type	description	说明
-tracker_admin_update_type	display_resolution	显示决议选单
 tracker_admin_update_type	email_all_changes	全部若有任何变动寄送Email
 tracker_admin_update_type	name	<strong> 名称：</strong> (范例：会议纪录、测试结果、参考说明文件)
 tracker_admin_update_type	pending_timeout	未决定跟踪项目的逾期天数
@@ -2974,14 +2384,12 @@ tracker_admin_update_type	publicy_available	对外公开
 tracker_admin_update_type	send_submissions	若有发表寄送Email至下列信箱
 tracker_admin_update_type	submit_item_form_text	 给 "添加新的项目" 页的自由形式说明文稿
 tracker_admin_update_type	title	更新 $1
-tracker_admin_update_users	title	添加/更新跟踪用户权限
 tracker_artifact	are_you_sure_delete	您确定要删除这个定制类型？
 tracker_artifact	confirm_delete	是，我要删除这个定制类型
 tracker_artifact	delete_failed	定制类型删除失败
 tracker_artifact	delete_failed_confirm	确认失败，定制类型不能删除
 tracker_artifact	delete_text	删除这个项目
 tracker_artifact	deleted_successfully	定制类型成功删除
-tracker_artifact	deleted_title	删除一个定制类型
 tracker_artifact	double_submit	您尝试重复发表这个项目，请避免连续点击滑鼠。
 tracker_artifact	error_admin_modify	定制: 只有定制管理员可以修改私人的定制类型
 tracker_artifact	error_body_required	定制: 消息主要部份是必须的
@@ -2996,7 +2404,6 @@ tracker_artifact	monitoring_deactivated	监视已取消
 tracker_artifact	nothing_changed	没有变动 - 取消更新
 tracker_artifact	private_error	定制：只有群组成员可以浏览私人定制类型
 tracker_artifactfile	required_fields	定制文件: 文件名称、类型、容量与资料是必须的
-tracker_artifactgroup	required_field	定制群组: 名称是必须的
 tracker_artifacthtml	by	由
 tracker_artifacthtml	date	日期
 tracker_artifacthtml	field	栏位
@@ -3005,25 +2412,20 @@ tracker_artifacthtml	no_changes	这个项目没有任何变动
 tracker_artifacthtml	no_followups	没有任何回应
 tracker_artifacthtml	old_value	旧值
 tracker_artifacthtml	sender	寄件人
-tracker_artifacttype	add_artifact_types	添加/浏览跟踪定制类型
 tracker_artifacttype	admin	管理
-tracker_artifacttype	admin_functions	管理功能
 tracker_artifacttype	browse	浏览
 tracker_artifacttype	csv	下载 .csv
-tracker_artifacttype	edit_options	编辑/更新选项
 tracker_artifacttype	invalid_emails	E-mail位址明显无效
 tracker_artifacttype	monitoring_activated	正被监视的追踪
 tracker_artifacttype	monitoring_deactivated	关闭监视的追踪
 tracker_artifacttype	nobody	Nobody
 tracker_artifacttype	none	无
-tracker_artifacttype	query	查询
 tracker_artifacttype	reporting	报告
 tracker_artifacttype	required_fields	定制类型: 名称，说明，适当期间与状态暂停是必须的
 tracker_artifacttype	submit_new	添加
 tracker_browse	admin_mass_update	<strong>管理：</strong></FONT> 如果您希望上述圈选的全部项目生效，使用这些控制改变它们的属性然后点击一次"大量更新"生效。
 tracker_browse	ascending	升序
 tracker_browse	canned_response	预设回应
-tracker_browse	change_any	任何
 tracker_browse	check_all	全选
 tracker_browse	clear_all	全部清除
 tracker_browse	day7	前七天
@@ -3036,10 +2438,7 @@ tracker_browse	no_change	没有变动
 tracker_browse	no_items	没有任何项目
 tracker_browse	old_requests	* 指示请求 > $1 天之久
 tracker_browse	previous	前 50
-tracker_browse	request_id	请求编号
-tracker_browse	resolution	决议
 tracker_browse	sort_by	排序
-tracker_browse	title	浏览 $1
 tracker_browse	week2	前两星期
 tracker_detail	add_comment	添加意见
 tracker_detail	attached_files	附加文件
@@ -3065,30 +2464,10 @@ tracker_mod	name	名称
 tracker_mod	no_files	目前没有附加文件
 tracker_mod	title	修改
 tracker_monitor	monitor	监视
-tracker_monitor	monitoring_activated	正在监视
-tracker_monitor	monitoring_deactivated	监视已取消
 tracker_monitor	monitorstop	停止监视
 tracker_query	closedaterange	关闭日期
 tracker_query	moddaterange	最后修改日期
 tracker_query	opendaterange	打开日期
-tracker_reporting	aging_report	时效报告
-tracker_reporting	all_by_group	依照定制群组的所有项目
-tracker_reporting	all_by_resolution	依照决定者的所有项目
-tracker_reporting	all_by_technician	依照类别的所有项目
-tracker_reporting	all_items_by_technician	依照技术人员的所有项目
-tracker_reporting	artifact_type	定制类型
-tracker_reporting	average_turnaround	平均处理时间 (天)
-tracker_reporting	dist_by_category	由类别分配
-tracker_reporting	dist_by_group	由群组分配
-tracker_reporting	dist_by_resolution	由决议分配
-tracker_reporting	dist_by_technician	由技术人员分配
-tracker_reporting	items_open	未解决项目数量
-tracker_reporting	items_submitted	已提交项目数量
-tracker_reporting	open_by_group	从定制群组开启
-tracker_reporting	open_items_by_category	从类别开启项目
-tracker_reporting	open_items_by_resolution	由决议开启项目
-tracker_reporting	open_items_by_technician	由技术人员开启项目
-tracker_reporting	title	定制回报系统
 tracker_taskmgr	add_relation_to_task	添加既有任务的关系
 tracker_taskmgr	add_relationship	添加选取任务的关系
 tracker_taskmgr	build_relationships	创建跟踪项目与任务管理员的关系
@@ -3096,8 +2475,6 @@ tracker_taskmgr	create_task	创建新的任务
 tracker_taskmgr	task	任务
 tracker_taskmgr	task_manager_project	项目任务管理员
 tracker_taskmgr	tracker_item	跟踪项目
-tracker_utils	monitor		监控
-tracker_utils	stop_monitoring		停止监控
 trove	not_categorized	这个项目还没自行归类于
 trove	title	软件地图
 trove_list	browse_by	浏览者：
@@ -3109,7 +2486,6 @@ trove_list	number_of_projects	找到 <strong>$1</strong> 个项目
 trove_list	projects	$1 个项目
 trove_list	remove_filter	移除这个规则
 trove_list	title	软件地图
-user_home	contact	连络
 user_home	diary_notes	日记与笔记
 user_home	diary_notes_entries	日记/笔记资料：
 user_home	diary_notes_monitor	监控这个日记
@@ -3118,26 +2494,19 @@ user_home	email	您的 Email
 user_home	jabber_address	Jabber位址
 user_home	login_name	登录帐号
 user_home	member_of	这个研发人员隶属于下面群组：
-user_home	message	消息
-user_home	name	您的名称
 user_home	no_projects	这个研发人员不属于任何项目
 user_home	peer_rating	对等评分
 user_home	peer_rating_disabled	用户选择不要加入对等评分
 user_home	personal_information	个人信息
 user_home	project_info	项目信息
 user_home	real_name	真实姓名
-user_home	send	发送消息
-user_home	send_a_message	发送消息
-user_home	send_message_if_logged	在登录后您才能够发送消息
 user_home	site_member_since	注册用户自
 user_home	skills_profile	专长资料
-user_home	subject	主题
 user_home	title	开发人员资料
 user_home	user_id	用户编号
 users	no_user_name	没有提供用户名称
 users	optout	您选择退出对等评分系统，否则您会有机会评量这位用户，请参考 <a href="/account/">您的帐号维护网页</a> 获得更多信息。
 users	peerinfo1	<P>如果你熟悉这一位用户，请花一些时间评价他／她在下列的评量项目上。请用心，您的评量对用户和其它人是看得见的。</P><P>$1 对等评量系统来自 <A HREF="http://www.advogato.com/">Advogato</A> 的观念为基础，本系统以一些方式已经再被推行而且扩大。</P>
 users	peerinfo2	<p>对等评分系统表格为每个个别的标准显示全部的评分平均(与回应等级)。由于评分数值运算和处理需求，这些数字混合来自于 "trusted" 与 "non-trusted" 用户的反应。</p><ul><li>"Sitewide Rank" 栏位显示用户的排名相较所有已排名$1个用户。</li><li>"Aggregate Score" 显示着重于整体得分的平均，并基于可信赖的反应。</li><li>"Personal Importance" 栏位显示其他开发人员的用户评分等级将给予的影响力(在 1 与 1.5 之间) -- 用户反应的评分越高越有更多的影响力。</li></ul><p><i>如果您选择退出对等评分系统(这将影响您评分别人或被评分的能力)，请参考 <a href="/account/">您的帐号维护网页</a>。如果你选择不要参加，你的其他用户评分等级将永久地删除和 "对等评分" 表格将从你的用户页消失。</i></p>
-users	title	用户概要
 users	user_not_exist_text	错误的用户
 users	user_not_exist_title	那个用户不存在。

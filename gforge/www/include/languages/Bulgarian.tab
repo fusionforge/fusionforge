@@ -26,10 +26,8 @@ account_change_email	invalid_email	Невалиден email адрес
 account_change_email	mailsent	<p>Беше изпратено съобщение на новия адрес. Следвайте инструкциите в съобщението, за да осъществите смяната на адреса.</p><a href="/">[ Начало ]</a>
 account_change_email	message	Sledvashtoto syobshtenie e na kiriliza (izberete UTF8 encoding na browsera, za da go prochetete). Вие поискахте промяна на email адрес за GForge.\nМоля посетете следния линк, за да осъществите промяната на адреса:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- екипът на $1
 account_change_email	new_address	Нов Email адрес:
-account_change_email	section	Акаунт-предпочитания
 account_change_email	send_confirmation	Изпращане на потвърждение на новия адрес
 account_change_email	subject	$1 Верификация
-account_change_email	title	Смяна на Email адрес
 account_change_email-complete	confirm	Здравейте, $1. Смяната на паролата е изпълнена. Вашият нов email адрес е: <strong>$2</strong>. Писмата изпратени до $3 ще бъдат препращани на този адрес.
 account_change_email-complete	title	Осъществена смяна на email адрес
 account_change_email_confirm	title	Потвърждаване смяната на email адрес
@@ -40,15 +38,12 @@ account_change_pw	not_valid_password	Трябва да въведете вали
 account_change_pw	old_password	Стара парола
 account_change_pw	old_password_incorrect	Грешна стара парола
 account_change_pw	passwords_dont_match	Новите пароли не съвпадат.
-account_change_pw	section	Акаунт-предпочитания
 account_change_pw	title	Смяна на паролата
 account_change_pw	update	Обновяване на парола
 account_change_pw_changed	return_to	Сега трябва да се $1 върнете в личните предпочитания $2.
 account_change_pw_changed	title	Паролата сменена успешно
 #TO_TRANSLATE#account_editsshkeys	authorized_keys	Authorized keys:<br /><em>Important: Make sure there are no line breaks except between keys. After submitting, verify that the number of keys in your file is what you expected.</em>
 #TO_TRANSLATE#account_editsshkeys	intro	<p>To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the CVS server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.</p><p>To generate a public key, run the program 'ssh-keygen' (you can use both protocol 1 or 2). The public key will be placed at '~/.ssh/identity.pub' (protocole 1) and '~/.ssh/id_dsa.pub' or '~/.ssh/id_rsa.pub' (protocole 2). Read the ssh documentation for further information on sharing keys.</p>
-account_editsshkeys	section	Акаунт-предпочитания
-account_editsshkeys	title	Редактиране на SCM/SSH споделени ключове
 account_first	about_blurb	<p>Сега сте регистриран потребител на $1, online средата за разработване на проекти с Отворен Код.</p><p>Като регистриран потребител вие можете да участвате във всички активности на сайта. Можете да изпращате съобщения във форумите на проектите, да изпращате бъгове за софтура в $1, да се записвате като разработчик по проект, и дори да създадете свои собствени проекти.</p><p>Приятна работа със сайта, и ви молим за препоръки по това как можем да подобрим $1.</p><p>--екипът на $1.</p>
 account_first	title	Добре дошли в $1
 account_login	cookiewarn	Трябва да е активирана подръжката на бисквитки (cookies) от Вашия браузър.
@@ -62,9 +57,6 @@ account_login	passwd		Парола:
 account_login	pending_account	<P>Вашият акаунт в момента очаква вашето потвърждение по email.		Посетете изпратения на email адреса ви линк, за да активирате акаунта си.		<P>Ако желаете да съобщението за потвърждаване да бъде изпратено отново на изпратения при регистрацията адрес, кликнете долу.		<P><A href="pending-resend.php?form_user=$1">[Повторно]</A>		<br><hr>		<p>
 account_login	resend_pending	[Повторно изпращане на писмото за потвърждение на регистрация в системата]
 account_login	resend_pending_directions	Въведете потребителско име и натиснете бутона 'Submit', за да Ви бъде изпратено отново писмото за потвърждение
-#TO_TRANSLATE#account_login	sslnotice	<p><B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.</FONT></B> <small style="font-size: x-small"> (If you wonder why very this page is not loaded via SSL, please read next paragraph. Thank you.) </small> <P> <B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL after login. Netscape users should stay in SSL mode permanently for maximum security.  Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.  <P>
-account_login	title	Влизане в сайта
-account_login	usessl	Оставане в SSL режим след влизане
 account_lostlogin	invalidconfirm	Невалиден хеш за потвърждение
 account_lostlogin	newpasswd	Нова парола (поне 6 символа)
 account_lostlogin	newpasswd2	Нова парола (отново)
@@ -72,7 +64,6 @@ account_lostlogin	notmatch	Новите пароли не съвпадат.
 account_lostlogin	passwdchanged	<h2>Паролата е променена</h2><p>Поздравления, вие променихте паролата за своя акаунт. Сега можете да <a href="/account/login.php">влезете</a> в сайта.</p>
 #TO_TRANSLATE#account_lostlogin	severalconfirm	This confirm hash exists more than once.
 account_lostlogin	sixchars	Трябва да въведете валидна парола (поне 6 символа).
-account_lostlogin	title	Потвърждаване за изгубена парола
 account_lostlogin	update	Обновяване
 #TO_TRANSLATE#account_lostlogin	welcome	<h2>Lost Password Login</h2><p>Welcome, $1. You may now change your password.</p>
 #TO_TRANSLATE#account_lostpw	invalid_user	Invalid user
@@ -80,7 +71,6 @@ account_lostlogin	update	Обновяване
 #TO_TRANSLATE#account_lostpw	notify	<p>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.</p><p><a href="/">[ Home ]</a></p>
 #TO_TRANSLATE#account_lostpw	sendhash	Send Lost PW Hash
 #TO_TRANSLATE#account_lostpw	subject	$1 Verification
-#TO_TRANSLATE#account_lostpw	title	Lost Your Password?
 account_lostpw	user_dont_exist	Такъв потребител не съществува.
 account_lostpw	warn	<p>Хей... да си изгубите паролата си е сериозна работа. Това може да наруши сигурността на вашия акаунт, проекти, както и на този сайт.</p><p>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.</p>
 account_options	address		Адрес:
@@ -96,7 +86,6 @@ account_options	lastname	Фамилия:
 account_options	login_name	Потребителско име:
 account_options	member_since	Член от:
 account_options	phone		Телефон:
-account_options	real_name	Истинско име:
 account_options	themeid	Тема:
 account_options	timezone	Времева зона:
 account_options	title		Регистрация
@@ -118,8 +107,6 @@ account_register	err_mailexist	Потребител с такъв електро
 account_register	err_passwd	Не е указана парола
 account_register	err_passwd2	Паролата и потвърждението и не съвпадат
 account_register	err_passwd3	Грешна парола
-account_register	err_realname	Името е задължително поле
-account_register	err_theme	Темата е задължително поле
 account_register	err_unixname	Невалиден UNIX идентификатор.
 account_register	err_userexist	Това потребителско име вече е заето.
 account_register	err_username	Потребителското име е задължително поле
@@ -135,7 +122,6 @@ account_register	message_header	$1 регистрация
 account_register	partecipate_peer_ratings	Желая да участвувам в системата за взаимно оценяване на уменията между потребителите на портала. <i>(Това Ви дава възможност да оценявате уменията на другите потребители, както и те Вашите). Повече информация можете да намерите на Вашата персонална $1 страница </a>, ако сте активирали оценяването</i>.
 account_register	password	Парола (минимум 6 символа):
 account_register	password2	Парола (потвърждение):
-account_register	realname	Пълно име:
 account_register	register	Регистриране
 #TO_TRANSLATE#account_register	remember_me	"Remember me". <i>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>
 account_register	resend_pending	[Повторно изпращане на писмото за активиране на акаунт]
@@ -143,7 +129,6 @@ account_register	resend_pending	[Повторно изпращане на пис
 account_register	siteupdate	Абонамент за новини по електронната поща касаещи нововъведения и промени в сайта<i> (Генерира малко трафик и включва известия имащи отношение към сигурността. Силно препоръчително е да се абонирате.)</i>
 account_register	theme	Тема
 #TO_TRANSLATE#account_register	timezone	Timezone:
-account_register	title	Нова регистрация
 account_register	update	Обновяване
 #TO_TRANSLATE#account_shell	autorized_keys	SSH Shared Authorized Keys
 #TO_TRANSLATE#account_shell	edit_keys	Edit Keys
@@ -159,13 +144,10 @@ account_register	update	Обновяване
 #TO_TRANSLATE#account_verify	invalidcred	Credentials you entered do not correspond to valid account.
 #TO_TRANSLATE#account_verify	invalidop	Invalid operation
 #TO_TRANSLATE#account_verify	invalidparam	Invalid parameter
-#TO_TRANSLATE#account_verify	invaliduser	Invalid user
 #TO_TRANSLATE#account_verify	login	Login
 #TO_TRANSLATE#account_verify	loginname	Login name:
 #TO_TRANSLATE#account_verify	missingparam	Missing paramater
-#TO_TRANSLATE#account_verify	nouser	User does not exist.
 #TO_TRANSLATE#account_verify	password	Password:
-#TO_TRANSLATE#account_verify	title	$1 Account Verification
 #TO_TRANSLATE#account_verify	usermandatory	You must enter a user name.
 #TO_TRANSLATE#account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
 #TO_TRANSLATE#add_snippet	add_this_snippet_version_id	Add This Snippet Version ID:
@@ -185,32 +167,15 @@ add_snippet	submit	Изпращане
 add_snippet	title	Добавяне на фрагмент
 #TO_TRANSLATE#add_snippet	you_can_use_this_form	You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.
 #TO_TRANSLATE#admin	add	Add
-#TO_TRANSLATE#admin	add_new	[add new]
-#TO_TRANSLATE#admin	are_you_sure_delete	Are you sure you want to delete this
-#TO_TRANSLATE#admin	cancel	Cancel
 #TO_TRANSLATE#admin	delete	Delete
 #TO_TRANSLATE#admin	edit	Edit
 #TO_TRANSLATE#admin	home_box	Home Box:
 #TO_TRANSLATE#admin	http_domain	HTTP Domain:
 admin	license	Лизенз:
 admin	license_other	Друг:
-#TO_TRANSLATE#admin	na	N/A
-#TO_TRANSLATE#admin	other	Other
 #TO_TRANSLATE#admin	reject	Reject
 #TO_TRANSLATE#admin	scm_box	SCM Box:
-#TO_TRANSLATE#admin	site_admin_home	Site Admin Home
-#TO_TRANSLATE#admin	submit_changes	Submit Changes
-#TO_TRANSLATE#admin	submit_new	Submit New
-#TO_TRANSLATE#admin	successfully_added	Successfully Added
-#TO_TRANSLATE#admin	successfully_deleted	Successfully Deleted.
-#TO_TRANSLATE#admin	successfully_modified	successfully modified
 #TO_TRANSLATE#admin	yes	yes
-#TO_TRANSLATE#admin_add_language	add_new_language	Add New Language
-#TO_TRANSLATE#admin_add_language	class_filename	Class Filename:
-#TO_TRANSLATE#admin_add_language	classname	Classname:
-#TO_TRANSLATE#admin_add_language	existing_language	Existing Language
-#TO_TRANSLATE#admin_add_language	name	Name:
-#TO_TRANSLATE#admin_add_language	submit	Submit
 #TO_TRANSLATE#admin_admin_table	add_new	add new
 #TO_TRANSLATE#admin_admin_table	cant_delete_language	You can't delete the language $1 since it's currently referenced in a user profile.
 #TO_TRANSLATE#admin_admin_table	cant_delete_license	You can't delete the license $1 since it's currently referenced in a project.
@@ -223,13 +188,7 @@ admin	license_other	Друг:
 #TO_TRANSLATE#admin_admin_table	successfully_deleted	$1 successfully deleted.
 #TO_TRANSLATE#admin_admin_table	successfully_modified	$1 successfully modified.
 #TO_TRANSLATE#admin_admin_table	title	Edit the $1s Table
-#TO_TRANSLATE#admin_admin_table	unit_file_type	File type
-#TO_TRANSLATE#admin_admin_table	unit_license	License
-#TO_TRANSLATE#admin_admin_table	unit_processor	Processor
-#TO_TRANSLATE#admin_admin_table	unit_supported_language	Supported language
-#TO_TRANSLATE#admin_admin_table	unit_theme	Theme
 #TO_TRANSLATE#admin_approve_pending	add_this_custom_response	Add this custom response to canned responses
-#TO_TRANSLATE#admin_approve_pending	admin_approve_pending	Activate
 #TO_TRANSLATE#admin_approve_pending	approve	Approve
 #TO_TRANSLATE#admin_approve_pending	approve_all_on_this_page	Approve All On This Page
 #TO_TRANSLATE#admin_approve_pending	approving_group		Approving Group:
@@ -263,9 +222,6 @@ admin_approve_pending	project_admin	Project Администриране
 #TO_TRANSLATE#admin_database	type	Type
 #TO_TRANSLATE#admin_database	unable_to_insert	Unable to insert already active database.
 #TO_TRANSLATE#admin_groupedit	active	Active (A)
-#TO_TRANSLATE#admin_groupedit	deleted	Deleted (D)
-#TO_TRANSLATE#admin_groupedit	error	Error
-#TO_TRANSLATE#admin_groupedit	error_creating_group_object	Error creating group object
 #TO_TRANSLATE#admin_groupedit	holding	Holding (H)
 #TO_TRANSLATE#admin_groupedit	incomplete	Incomplete (I)
 #TO_TRANSLATE#admin_groupedit	instruction_email_sent	Instruction email sent
@@ -301,7 +257,6 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_index	add_to_trove_map	Add to the Trove Map
 #TO_TRANSLATE#admin_index	approve_reject	Approve/Reject
 #TO_TRANSLATE#admin_index	cronman	Cron Manager
-#TO_TRANSLATE#admin_index	deleted_status	(deleted) Status
 #TO_TRANSLATE#admin_index	display_full_group	Display Full Group List/Edit Groups
 #TO_TRANSLATE#admin_index	display_full_user_list	Display Full User List/Edit Users
 #TO_TRANSLATE#admin_index	display_groups_beginning_with	Display Groups Beginning with :
@@ -318,7 +273,6 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_index	private_groups	Private Groups
 #TO_TRANSLATE#admin_index	project_active	Active (A)
 #TO_TRANSLATE#admin_index	project_database_administration	Project Database Administration
-#TO_TRANSLATE#admin_index	project_deleted	Deleted (D)
 #TO_TRANSLATE#admin_index	project_hold	Hold (H)
 #TO_TRANSLATE#admin_index	project_pending	Pending (P)
 #TO_TRANSLATE#admin_index	recent_logins	Recent logins
@@ -335,14 +289,6 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_index	trove_project_tree	Trove Project Tree
 #TO_TRANSLATE#admin_index	user_maintaince	User Maintenance
 #TO_TRANSLATE#admin_index	virtual_host_admin_tool	Virtual Host Admin Tool
-#TO_TRANSLATE#admin_loadtabfile	availaible_tables	Available Tables:
-#TO_TRANSLATE#admin_loadtabfile	edit_dont_work	[edit(don t work)]
-#TO_TRANSLATE#admin_loadtabfile	purge_loaded_data	Purge loaded data
-#TO_TRANSLATE#admin_loadtabfile	reload_all_language_files	(Re)Load all language files
-#TO_TRANSLATE#admin_loadtabfile	see_translations	[see translations]
-#TO_TRANSLATE#admin_loadtabfile	see_untranslated	[see untranslated]
-#TO_TRANSLATE#admin_loadtabfile	tables_loaded	Tables loaded
-#TO_TRANSLATE#admin_loadtabfile	title	Site Admin
 #TO_TRANSLATE#admin_massmail	active_deliveries	Active Deliveries
 #TO_TRANSLATE#admin_massmail	all_project_admins	All Project Admins
 #TO_TRANSLATE#admin_massmail	all_project_developers	All Project Developers
@@ -364,15 +310,8 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_massmail	subscribers_to_additional_community	Subscribers to "Additional Community Mailings"
 #TO_TRANSLATE#admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
 #TO_TRANSLATE#admin_massmail	text_of_message	Text of Message
-#TO_TRANSLATE#admin_massmail	title	Administrative Mass Mail Engine
 #TO_TRANSLATE#admin_massmail	type	Type
 #TO_TRANSLATE#admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
-#TO_TRANSLATE#admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
-#TO_TRANSLATE#admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to
-#TO_TRANSLATE#admin_massmail_execute	receive_post	Received Post. Making Query.
-#TO_TRANSLATE#admin_massmail_execute	sending_to	sending to
-#TO_TRANSLATE#admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
-#TO_TRANSLATE#admin_massmail_execute	user_id	User id:
 #TO_TRANSLATE#admin_responses	add_response	Added Response
 #TO_TRANSLATE#admin_responses	by_the_way	By the way, I didn't delete... just in case...
 #TO_TRANSLATE#admin_responses	create	Create
@@ -402,13 +341,6 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_search	unix_name	UNIX Name
 #TO_TRANSLATE#admin_search	user_search_criteria	User search with criteria
 #TO_TRANSLATE#admin_search	username	Username
-#TO_TRANSLATE#admin_tabfiles	delete_lang	[delete]
-#TO_TRANSLATE#admin_tabfiles	edit_the_langfile	Edit The $1 Language
-#TO_TRANSLATE#admin_tabfiles	edit_the_language	Edit The Language
-#TO_TRANSLATE#admin_tabfiles	language	Language
-#TO_TRANSLATE#admin_tabfiles	modify_the	Modify the $1 below:
-#TO_TRANSLATE#admin_table	edit_the	Edit The
-#TO_TRANSLATE#admin_table	table	Table
 #TO_TRANSLATE#admin_trove_cat_add	add	Add
 #TO_TRANSLATE#admin_trove_cat_add	add_new_trove_category	Add New Trove Category
 #TO_TRANSLATE#admin_trove_cat_add	error_in_trove_openration	Error In Trove Operation
@@ -422,8 +354,6 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_trove_cat_edit	edit_trove_category	Edit Trove Category
 #TO_TRANSLATE#admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
 #TO_TRANSLATE#admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation, can't delete trove category define as default in local.inc
-#TO_TRANSLATE#admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	Can't delete that category since it's currently referenced by a project.
-#TO_TRANSLATE#admin_trove_cat_edit	error_trove_equal_parent	Error Parent Category can not be same as current
 #TO_TRANSLATE#admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
 #TO_TRANSLATE#admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
 #TO_TRANSLATE#admin_trove_cat_edit	new_category_short_name	New category short name (no spaces, unix-like)
@@ -463,7 +393,6 @@ admin_trove_cat_edit	update	Обновяване
 #TO_TRANSLATE#admin_useredit	deleted	Deleted (D)
 #TO_TRANSLATE#admin_useredit	email	Email:
 #TO_TRANSLATE#admin_useredit	group_memerbership	Groups Membership
-#TO_TRANSLATE#admin_useredit	membership_permissions	Member Permissions
 #TO_TRANSLATE#admin_useredit	name	Name
 #TO_TRANSLATE#admin_useredit	no_unix_account	No Unix account (N)
 #TO_TRANSLATE#admin_useredit	operations	Operations
@@ -534,22 +463,9 @@ admin_vhost	update	Обновяване
 #TO_TRANSLATE#artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 #TO_TRANSLATE#calendar	april	April
 #TO_TRANSLATE#calendar	august	August
-#TO_TRANSLATE#calendar	comingyear	Coming Year
-#TO_TRANSLATE#calendar	currentyear	Current Year
 #TO_TRANSLATE#calendar	december	December
 #TO_TRANSLATE#calendar	february	February
-#TO_TRANSLATE#calendar	fordate	For date:
 #TO_TRANSLATE#calendar	friday	Friday
-#TO_TRANSLATE#calendar	invaliddate	Invalid date
-#TO_TRANSLATE#calendar	invaliddateexplain	$1 is an invalid date.
-#TO_TRANSLATE#calendar	invalidday	Invalid day
-#TO_TRANSLATE#calendar	invaliddayexplain	Day must be between 1 and 31.
-#TO_TRANSLATE#calendar	invalidmonth	Invalid month
-#TO_TRANSLATE#calendar	invalidmonthexplain	Month must be between 1 and 12.
-#TO_TRANSLATE#calendar	invalidtype	Invalid type
-#TO_TRANSLATE#calendar	invalidtypeexplain	Type is invalid.
-#TO_TRANSLATE#calendar	invalidyear	Invalid year
-#TO_TRANSLATE#calendar	invalidyearexplain	Year must be between 1990 and 2020.
 #TO_TRANSLATE#calendar	january	January
 #TO_TRANSLATE#calendar	july	July
 #TO_TRANSLATE#calendar	june	June
@@ -559,21 +475,14 @@ admin_vhost	update	Обновяване
 #TO_TRANSLATE#calendar	monthdatefmt	Y-m
 #TO_TRANSLATE#calendar	november	November
 #TO_TRANSLATE#calendar	october	October
-#TO_TRANSLATE#calendar	onemonth	One Month
 #TO_TRANSLATE#calendar	saturday	Saturday
-#TO_TRANSLATE#calendar	selecteddate	Selected date (if different from today).
 #TO_TRANSLATE#calendar	september	September
 #TO_TRANSLATE#calendar	sunday	Sunday
 #TO_TRANSLATE#calendar	task_begins	Task $1 Begins
 #TO_TRANSLATE#calendar	task_ends	Task $1 Ends
 #TO_TRANSLATE#calendar	task_link_title	Task Summary: $1
-#TO_TRANSLATE#calendar	threemonth	Three Month
 #TO_TRANSLATE#calendar	thursday	Thursday
-#TO_TRANSLATE#calendar	title	Project Management: Calendar
-#TO_TRANSLATE#calendar	todaysdate	Today's date.
 #TO_TRANSLATE#calendar	tuesday	Tuesday
-calendar	update	Обновяване
-#TO_TRANSLATE#calendar	view	View:
 #TO_TRANSLATE#calendar	wednesday	Wednesday
 #TO_TRANSLATE#classgroup	acceptedproject	Your project registration for $7 has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nIf you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
 #TO_TRANSLATE#classgroup	acceptedprojecttitle	$1 Project Approved
@@ -595,13 +504,7 @@ common	newaccount			Регистрация
 #TO_TRANSLATE#common_include_account	toolong	Name is too long. It must be less than 15 characters.
 #TO_TRANSLATE#common_include_account	tooshort	Name is too short. It must be at least 3 characters.
 common_utils	priority_colors		Легенда на цветовете
-#TO_TRANSLATE#conf	content_encoding	UTF-8
-#TO_TRANSLATE#conf	default_font	verdana,arial,helvetica,sans-serif
-#TO_TRANSLATE#conf	language_code	en
-#TO_TRANSLATE#conf	language_id	1
 #TO_TRANSLATE#conf	mail_charset	UTF-8
-#TO_TRANSLATE#contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/siteadmin">$1 Master Project</a>.</p>
-#TO_TRANSLATE#contact	title	Contact $1
 cronman	date	Дата
 #TO_TRANSLATE#cronman	job	Job
 cronman	message	Съобщение
@@ -623,14 +526,12 @@ developer	no_entries	Няма въведени бележки в този пот
 #TO_TRANSLATE#developer_monitor_choose_user	body	Error - Choose a User To Monitor First
 #TO_TRANSLATE#developer_monitor_choose_user	title	Choose a User first
 #TO_TRANSLATE#developer_rate	cannot_rate_yourself	You can't rate yourself
-#TO_TRANSLATE#developer_rate	invalid_rating_value	ERROR - invalid rating value
 #TO_TRANSLATE#developer_rate	ratings_recorded	Ratings Recorded
 #TO_TRANSLATE#developer_rate	ratings_recorded_body	You can re-rate this person by simply returning to their ratings page and re-submitting the info.
 #TO_TRANSLATE#developer_rate	title	User Ratings Page
 #TO_TRANSLATE#developer_rate	turned_off_body	You chose not to participate in the peer rating system
 #TO_TRANSLATE#developer_rate	turned_off_title	Ratings turned off
 docman	admin	Администриране
-docman	description	Описание
 #TO_TRANSLATE#docman	error_invalid_file_attack	Invalid file attack attempt $1
 docman	error_no_docs	Няма публикувани документи
 #TO_TRANSLATE#docman	error_no_groups_defined	No Document Groups defined
@@ -642,8 +543,6 @@ docman_admin	add_edit_docgroups	Добавяне/редактиране на п�
 docman_admin	title	Администриране
 #TO_TRANSLATE#docman_admin_addgroups	section	Document Manager Administration
 docman_admin_addgroups	title	Създаване и редактиране на папки
-#TO_TRANSLATE#docman_admin_docedit	section	Document Manager
-docman_admin_docedit	title	Редактиране на документ
 docman_admin_editdocs	doc_contents	Съдържание на документа
 #TO_TRANSLATE#docman_admin_editdocs	section	Document Manager Administration
 docman_admin_editdocs	state	Състояние
@@ -658,8 +557,6 @@ docman_admin_editgroups	group_name	Име
 docman_admin_editgroups	new_group_name	Име
 #TO_TRANSLATE#docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Редактиране на папки
-#TO_TRANSLATE#docman_admin_groupedit	section	Document Manager Administration
-docman_admin_groupedit	title	Преименуване на папка
 docman_common	error_min_desc_length	Описанието на документ трябва да бъде поне 10 символа
 docman_common	error_min_title_length	Името трябва да бъде поне 5 символа
 docman_common	no_docs	Няма намерени документи
@@ -681,16 +578,13 @@ docman_new	intro	<strong>Публикуване на нов документ</st
 docman_new	language	Език
 docman_new	no_valid_group	Не е избрана валидна папка
 docman_new	section	Проект: $1
-docman_new	state	Състояние
 docman_new	submit	Публикуване
 docman_new	submitted_successfully	Документът е добавен успешно
 docman_new	title	Добавяне на документ
 docman_new	upload_file	Файл със съдържанието на документа
 docman_new	upload_url	ИЛИ външен URL, където се намира документа
-error	error_creating	Грешка при създаването
 error	not_found	Страницата не е намерена
 error	title	Страницата не е намерена
-exit	choose_a_group	Error - Изберете папка
 exit	choose_group_body	Не е избрана папка
 exit	choose_group_title	Не е избрана папка
 #TO_TRANSLATE#exit	disabled_body	The Site Administrator has turned off this feature.
@@ -698,18 +592,12 @@ exit	choose_group_title	Не е избрана папка
 exit	exiting_with_error	Грешка
 #TO_TRANSLATE#exit	missing_parameters_body	Error - missing required parameters
 #TO_TRANSLATE#exit	missing_parameters_title	Error - missing parameters
-#TO_TRANSLATE#forum	check_upload	Check to Upload & Attach File
 #TO_TRANSLATE#forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	error_forum_not_found	Форумът не е намерен
-#TO_TRANSLATE#forum	error_invalid_group_forum_id	$1:: Invalid group_forum_id
 forum	error_no_forums_found	Няма намерени форуми за $1
-#TO_TRANSLATE#forum	error_no_valid_forum_object	$1:: No Valid Forum Object
 #TO_TRANSLATE#forum	error_no_valid_group_object	Forum:: No Valid Group Object
 forum	forum	Форум
 forum	forums_for	Форуми за $1
-forum	html	HTML таговете ще се визуализират във вашето съобщение като текст
-forum	section	Проект: $1
-forum	title	Форуми
 forum_admin	add_forum	Добавяне на форум
 #TO_TRANSLATE#forum_admin	delete	Delete
 #TO_TRANSLATE#forum_admin	delete_forum	Delete entire forum and all content
@@ -717,33 +605,18 @@ forum_admin	delete_message	Изтриване на съобщение
 #TO_TRANSLATE#forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
 #TO_TRANSLATE#forum_admin	deleted	Successfully Deleted
 #TO_TRANSLATE#forum_admin	really_sure	I'm Really Sure
-forum_admin	section	Проект: $1
 #TO_TRANSLATE#forum_admin	sure	I'm Sure
 forum_admin	title	Форуми: Администрация
-forum_admin	update_forum	Обновяване на информацията за форума
 forum_admin_addforum	add_forum	Добавяне на форума
 forum_admin_addforum	allow_anonymous	Допускане на анонимни съобщения
-forum_admin_addforum	allow_attach	Допускане на прикачени файлове
 forum_admin_addforum	email_posts	Изпращане по електронна поща на всички съобщения до:
-forum_admin_addforum	existing_forums	Съществуващи форуми
 forum_admin_addforum	forum_created	Форумът е създаден успешно
 forum_admin_addforum	forum_description	Описание
 forum_admin_addforum	forum_name	Име на форума
 forum_admin_addforum	is_public	Форума е публичен
-forum_admin_addforum	section	Администрация на форума
-forum_admin_addforum	title	Добавяне на форум
 forum_admin_changestatus	change_status	Промяна на статуса на форума
-forum_admin_changestatus	forum	Форум
 forum_admin_changestatus	intro	Оттук можете да настройвате параметрите на форума. Забележете, че частните форуми могат да бъдат разглеждани само от членовете на Вашия проект.
-forum_admin_changestatus	no_forums_found	Няма намерени форуми
-forum_admin_changestatus	section	Администрация на форум
-forum_admin_changestatus	status	Статус
-forum_admin_changestatus	title	Промяна на статуса на форум
 forum_admin_changestatus	update_successful	Информацията за форума е обновена успешно
-forum_admin_delete	section	Администрация на форума
-forum_admin_delete	title	Изтриване на форума
-forum_admin_delete_message	enter_message_id	Въведете идентификатор на съобщението
-forum_admin_delete_message	section	Администрация на форума
 forum_admin_delete_message	title	Изтриване на съобщение
 forum_admin_delete_message	warning	ПРЕДУПРЕЖДЕНИЕ! Вие сте на път да изтриете съобщение и всички свързани с него други съобщения.
 forum_admin_delete_messages	messages_deleted	$1 съобщение(я) са изтрити
@@ -754,7 +627,6 @@ forum_common	error_min_name_length	Името на форума трябва д�
 #TO_TRANSLATE#forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
 #TO_TRANSLATE#forum_common	error_set_monitor	You can Only Monitor If You Are Logged In
 #TO_TRANSLATE#forum_common	error_unable_to_add_monitor	Unable To Add Monitor
-#TO_TRANSLATE#forum_common	welcome_to	Welcome to $1
 #TO_TRANSLATE#forum_common_forum	error_save_place	Forum::savePlace()
 #TO_TRANSLATE#forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 #TO_TRANSLATE#forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
@@ -763,12 +635,9 @@ forum_common	error_min_name_length	Името на форума трябва д�
 #TO_TRANSLATE#forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
 #TO_TRANSLATE#forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
 #TO_TRANSLATE#forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() No Valid ParentMessage Object
-#TO_TRANSLATE#forum_common_forummessage	error_not_logged	Must Be Logged In to Post Messages
 #TO_TRANSLATE#forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed
 #TO_TRANSLATE#forum_common_forummessage	error_required_fields	Must Include A Message Body And Subject
-#TO_TRANSLATE#forum_common_forummessage	forum_message	Forum Message
 #TO_TRANSLATE#forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
-#TO_TRANSLATE#forum_errors	error_determining_forum_id	Error Determining forum_id
 #TO_TRANSLATE#forum_errors	error_getting_forum	Error getting Forum
 forum_forum	author	Автор
 forum_forum	changeview	Промяна на изгледа
@@ -784,82 +653,50 @@ forum_forum	posts	Постове
 #TO_TRANSLATE#forum_forum	postsuccess	Message Posted Successfully
 #TO_TRANSLATE#forum_forum	previous_messages	Previous Messages
 forum_forum	replies	Отговори
-forum_forum	section	Проект: $1
 forum_forum	show	Покажи
 forum_forum	thread	Нишка
 #TO_TRANSLATE#forum_forum	threaded	Threaded
 forum_forum	threads	Нишки
-forum_forum	title	Форуми: Преглед на форум
 forum_forum	topic	Тема
 #TO_TRANSLATE#forum_forum	topicstarter	Topic Starter
 #TO_TRANSLATE#forum_forum	ultimate	Ultimate
-forum_forum	views	Изгледи
-forum_forum_thread	section	Форуми
-#TO_TRANSLATE#forum_forum_thread	title	View Thread
 forum_message	by	ОТ
 forum_message	date	ДАТА
 forum_message	message	Съобщение
 forum_message	message_not_found_body	Това съобщение вече не съществува
 forum_message	message_not_found_title	Съобщението не е намерено
-#TO_TRANSLATE#forum_message	msg	Post A Message To This Thread:
 forum_message	must_choose_message_body	Първо трябва да изберете съобщение
 forum_message	must_choose_message_title	Първо трябва да изберете съобщение
 #TO_TRANSLATE#forum_message	post_followup	Post a followup to this message
 #TO_TRANSLATE#forum_message	receive_followups	Receive followups via email
-forum_message	section	Форуми
 #TO_TRANSLATE#forum_message	subject	SUBJECT
 #TO_TRANSLATE#forum_message	thread	Start New Thread
 #TO_TRANSLATE#forum_message	thread_view	Thread View
-#TO_TRANSLATE#forum_message	title	View Message
 #TO_TRANSLATE#forum_monitor	activated	Forum monitoring started
 #TO_TRANSLATE#forum_monitor	deactivated	Forum monitoring deactivated
 #TO_TRANSLATE#forum_save	saved	Forum Position Saved. New messages will be highlighted when you return
-forum_utils	added		Форумът е добавен
 forum_utils	admin		Администриране
 forum_utils	anonymously	Анонимно
-#TO_TRANSLATE#forum_utils	attach	attach
-forum_utils	author		Автор
-#TO_TRANSLATE#forum_utils	brokenthread	Broken Thread
 forum_utils	by		От:
 #TO_TRANSLATE#forum_utils	couldpostif	You could post if you were $1 logged in $2
 forum_utils	date		Дата
 forum_utils	discussionforum	Дискусионни форуми:
 #TO_TRANSLATE#forum_utils	doublepost	You appear to be double-posting this message, since it has the same subject and followup information as a prior post.
-forum_utils	error		Грешка!
-forum_utils	erroradd	Грешка при добавянето на форум
-forum_utils	errorfollowup	Опитвате се да продължите тема, която не съществува.
-#TO_TRANSLATE#forum_utils	errorfollowup2	No followup ID present when trying to post to an existing thread.
-#TO_TRANSLATE#forum_utils	errorinsert	Failed to get insertid()
-#TO_TRANSLATE#forum_utils	errormaster	Couldn't Update Master Thread parent with current time
-#TO_TRANSLATE#forum_utils	errorparent	Could Not Update Parent
-#TO_TRANSLATE#forum_utils	errorpost	Posting Failed
-#TO_TRANSLATE#forum_utils	feedbacklogin	You could post if you were logged in
 #TO_TRANSLATE#forum_utils	htmltag	HTML tags will display in your post as text
 #TO_TRANSLATE#forum_utils	latest	Latest News
 #TO_TRANSLATE#forum_utils	loggedin	logged in
 #TO_TRANSLATE#forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
-#TO_TRANSLATE#forum_utils	mailnotsent	email not sent - people monitoring
-#TO_TRANSLATE#forum_utils	mailnotsent2	email not sent - no one monitoring
-#TO_TRANSLATE#forum_utils	mailsent	email sent - people monitoring
 forum_utils	message	Съобщения:
 #TO_TRANSLATE#forum_utils	monitor	Monitor Forum
-#TO_TRANSLATE#forum_utils	mustinclude	Must include a message body and subject
-forum_utils	news	Новини
-#TO_TRANSLATE#forum_utils	nextfailed	Getting next thread_id failed
-#TO_TRANSLATE#forum_utils	noid	Trying to post without a forum ID
 forum_utils	nonewsitem	Грешка - тази новина не е намерена
-forum_utils	notfound	Не е намерено
 forum_utils	postanon	Вие публикувате анонимно защото не сте
 forum_utils	postcomment	Изпращане на коментар
-forum_utils	posted	Съобщението е изпратено
-forum_utils	postedby	Изпратена от
 #TO_TRANSLATE#forum_utils	project	Project
 #TO_TRANSLATE#forum_utils	reply	reply
 #TO_TRANSLATE#forum_utils	saveplace	Save Place
 #TO_TRANSLATE#forum_utils	stopmonitor	Stop Monitoring
 forum_utils	subject	Тема:
 forum_utils	summary	Резюме
-forum_utils	thread	Нишка
 frs	file_download		Изтегляне
 frs	file_monitor		Наблюдение
 frs	file_notes		Бележки
@@ -878,20 +715,12 @@ frs	latest_file_releases	Последно издадени пакети
 #TO_TRANSLATE#frs_file	error_invalid_file	FRSFile Appears to be invalid
 #TO_TRANSLATE#frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
 #TO_TRANSLATE#frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
-#TO_TRANSLATE#frs_package	error_already_exists	That filename already exists in this project space
-#TO_TRANSLATE#frs_package	error_cannot_move	File cannot be moved to the permanent location
-#TO_TRANSLATE#frs_package	error_invalid_file	FRSFile Appears to be invalid
 #TO_TRANSLATE#frs_package	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
 #TO_TRANSLATE#frs_package	error_name_format	FRSPackage::Update: Package Name can only be alphanumeric
 #TO_TRANSLATE#frs_package	error_set_monitor	You Can Only Monitor If You Are Logged In
 #TO_TRANSLATE#frs_release	email_text	\n\nProject "$1" ('$2') has  \nreleased the new version of package '$3' \nYou can download it by following this link:\n $4\n\nYou receive this email because you\nrequested to be notified when new versions of this package\nwere released. If you don't wish to be notified in the\nfuture, please login to $5 and click this link: \n $6
 #TO_TRANSLATE#frs_release	email_title	[$1 Release] $2
-#TO_TRANSLATE#frs_release	error_already_exists	That release already exists in this project space
-#TO_TRANSLATE#frs_release	error_cannot_move	Release cannot be moved to the permanent location
-#TO_TRANSLATE#frs_release	error_invalid_file	FRS Release  Appears to be invalid
 #TO_TRANSLATE#frs_release	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
-#TO_TRANSLATE#frs_release	error_name_format	FRS Release Name Should Be in This Example Format: gforge-3.0.tar.bz2
-#TO_TRANSLATE#frs_release	error_set_monitor	You Can Only Monitor If You Are Logged In
 general	add	Добавяне
 general	browse	Преглед
 general	cancel	Отказ
@@ -904,7 +733,6 @@ general	edit	Редактирне
 general	error	Грешка
 general	error_creating	Грешка при създаването на $1
 general	error_getting	Грешка при получаването на $1
-general	error_getting_new	Грешка при получаването на нов(о) $1
 #TO_TRANSLATE#general	error_group_id	Group_id in db result does not match Group Object
 general	error_missing_params	Липсващи Параметри
 #TO_TRANSLATE#general	error_no_valid_group_object	$1:: No Valid Group Object
@@ -916,9 +744,6 @@ general	language	Език
 #TO_TRANSLATE#general	min_characters	(min $1 chars)
 general	more	Още
 general	no	Не
-general	no_valid_filename	Няма валино име на файл (???)
-#TO_TRANSLATE#general	no_valid_group	No Valid $1 Group was selected
-#TO_TRANSLATE#general	no_valid_group_object	$1 No valid group object
 general	open	Отворени
 general	permdenied	Разрешението е отказано.
 general	permexcuse	Администраторът на проекта трябва да ви даде разрешение за да видите тази старница.
@@ -926,14 +751,10 @@ general	permnotget	Разрешение не беше получено
 general	remove	Премахни
 general	reset	Отначало
 general	return	Обратно
-general	return_to	[Обратно към $1]
-#TO_TRANSLATE#general	sitename	$1
 general	submit	Изпрати
 #TO_TRANSLATE#general	submit_edit	Submit Edit
-general	submitted_successfully	$1 Изпратено Успешно
 #TO_TRANSLATE#general	to	to
 general	total	Общо
-general	turned_off	Този Проект е Изключил $1
 general	update	Обновяване
 general	update_successful	Обновено успешно
 general	yes	Да
@@ -941,18 +762,14 @@ global	error	ГРЕШКА
 group	activity	Процент на активност:&nbsp;
 group	activitystat	<a href="/project/stats/?group_id=$1">Статистики</a> за активността на проекта.
 group	developer_info		Участници в проекта
-group	developers		Разработчици
-group	long_bugs		Проследяване на грешки
 group	long_docman		Документация на проекта
 group	long_forum		Публични форуми
 group	long_ftp		Анонимно FTP пространство
 group	long_homepage		Сайт на проекта
 group	long_mail		Пощенски списъци
 group	long_news		Последни новини
-group	long_patch		Управление на поправките
 group	long_pm			Управление на задачи
 #TO_TRANSLATE#group	long_scm	SCM Repository
-group	long_support		Управляване на поддръжката
 group	long_survey		Допитвания
 group	long_tracker	Тракер
 group	nodescription	Този проект все още не е предоставил описание.
@@ -968,7 +785,6 @@ group	short_files		Пакети
 group	short_forum		Форуми
 group	short_homepage		Начало
 group	short_mail		Пощ.списъци
-group	short_main		Основно
 group	short_memberlist	Разработчици
 group	short_news		Новини
 group	short_patch		Поправки
@@ -980,20 +796,13 @@ group	short_survey		Проучвания
 group	short_tracker	Тракер
 #TO_TRANSLATE#help	page_information	Page Information
 #TO_TRANSLATE#help	title	Welcome to $1
-#TO_TRANSLATE#help_forum	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
-#TO_TRANSLATE#help_forum	close_window	Close Window
-#TO_TRANSLATE#help_forum	unknown_help_request	UNKNOWN HELP REQUEST:
 #TO_TRANSLATE#help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
 #TO_TRANSLATE#help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
 #TO_TRANSLATE#help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
-#TO_TRANSLATE#help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
 #TO_TRANSLATE#help_tracker	close_window	Close Window
-#TO_TRANSLATE#help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
 #TO_TRANSLATE#help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
-#TO_TRANSLATE#help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
 #TO_TRANSLATE#help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
 #TO_TRANSLATE#help_tracker	priority	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
-#TO_TRANSLATE#help_tracker	resolution	The resolution option represents a tracker items resolution if any.
 #TO_TRANSLATE#help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
 #TO_TRANSLATE#help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
 #TO_TRANSLATE#help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
@@ -1003,23 +812,19 @@ help_trove_cat	description	Описание
 #TO_TRANSLATE#help_trove_cat	no_such_category	No such trove category
 #TO_TRANSLATE#help_trove_cat	short_name	Short Name
 #TO_TRANSLATE#home	about_blurb	<P>$1 is a <B>free service to <A href="http://www.opensource.org/">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.</P><P><B>Site Feedback and Participation</B></P><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully.</P><P><B>Set Up Your Own Project</B></P><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>
-home	breaking_down_barriers	Да премахнем пречките пред разработването на софтуер с отворен код
 home	gforge_statistics	GForge статистика
 home	highest_ranked_users	Най-популярни потребители
 home	hosted_projects	        Регистрирани проекти
 home	most_active_this_week	Най-активни през тази седмица
 home	no_stats_available	Няма статистика
-#TO_TRANSLATE#home	none_found	None Found
 home	recently_registered	Скоро регистрирани проекти
 #TO_TRANSLATE#home	recently_registered_date_format	m/d
 home	registered_users	Регистрирани потребители
-#TO_TRANSLATE#home	sfos	$1 OnSite
 home	top_project_downloads	Най-популярни пакети
 #TO_TRANSLATE#include_html	no_change	No Change
 #TO_TRANSLATE#include_html	none	None
 #TO_TRANSLATE#include_html	priority_highest	Highest
 #TO_TRANSLATE#include_html	priority_lowest	Lowest
-#TO_TRANSLATE#include_html	priority_medium	Medium
 #TO_TRANSLATE#include_toolreport	all	All
 #TO_TRANSLATE#include_toolreport	for	for
 #TO_TRANSLATE#include_toolreport	key	Key
@@ -1039,15 +844,11 @@ index	welcome			Добре дошли
 #TO_TRANSLATE#mail	mailinglists_for	Mailing Lists for $1
 mail	no_list_found	Няма създадени пощенски списъци за $1
 #TO_TRANSLATE#mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.list.org/">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>
-#TO_TRANSLATE#mail	section	Project: $1
-#TO_TRANSLATE#mail	title	Mailing Lists
 #TO_TRANSLATE#mail	unable_to_get_lists	Unable to get the lists
 #TO_TRANSLATE#mail_admin	add_list	Add Mailing List
 #TO_TRANSLATE#mail_admin	admin_in_mailman	Administrate
 #TO_TRANSLATE#mail_admin	error_getting_list	Error getting the list
 #TO_TRANSLATE#mail_admin	pagetitle	Mailing List Administration
-#TO_TRANSLATE#mail_admin	section	Mailing Lists
-#TO_TRANSLATE#mail_admin	title	Mailing List Admin
 #TO_TRANSLATE#mail_admin	update_list	Update
 #TO_TRANSLATE#mail_admin_addlist	existing_mailing_lists	Existing mailing lists
 mail_admin_addlist	form_addlist	Създаване
@@ -1057,92 +858,51 @@ mail_admin_addlist	form_name	Име на списъка:
 #TO_TRANSLATE#mail_admin_addlist	list_added	List Added
 mail_admin_addlist	list_information	<p>Адреса на пощенския списък ще изглежда така:<br /><strong>projectname-listname@$1</strong></p><p>Създаването се извършва от фонов процес и ще отнеме най-много 10 минути.</p>
 #TO_TRANSLATE#mail_admin_addlist	pagetitle	Add a Mailing List
-#TO_TRANSLATE#mail_admin_addlist	section	Mailing List Admin
-#TO_TRANSLATE#mail_admin_addlist	title	Add List
-mail_admin_addlist	warning	Веднъж създаден, този списък завинаги ще бъде асоцииран с Вашия проект и няма да може да бъде изтрит.
 mail_admin_updatelist	form_description	Описание:
 mail_admin_updatelist	form_ispublic	Флаг за публичност
 mail_admin_updatelist	form_updatelist	Обновяване
 mail_admin_updatelist	information	Оттук можете да настройвате пощенските списъци към Вашия проект. Списъците, които не са публични ще бъдат видими само за участниците в проекта. <br /><br />
-mail_admin_updatelist	list	Списък
-mail_admin_updatelist	list_updated	Списъкът е обновен успешно
-mail_admin_updatelist	no_list_found	За този проект няма създадени пощенски списъци
-mail_admin_updatelist	section	Администриране
-mail_admin_updatelist	status	Статус
-mail_admin_updatelist	title	Администриране
 #TO_TRANSLATE#mail_common	creation_mail_body	A mailing list will be created on $1 in 6-24 hours \nand you are the list administrator.\n\nThis list is: $3@$2 .\n\nYour mailing list info is at:\n$4 .\n\nList administration can be found at:\n$5 .\n\nYour list password is: $6 .\nYou are encouraged to change this password as soon as possible.\n\nThank you for registering your project with $1.\n\n-- the $1 staff\n
 #TO_TRANSLATE#mail_common	creation_mail_subject	$1 New Mailing List
 #TO_TRANSLATE#mail_common	description	Description
-#TO_TRANSLATE#mail_common	error_invalid_group_list_id	Invalid list id
 #TO_TRANSLATE#mail_common	error_invalid_name	Invalid List Name
 #TO_TRANSLATE#mail_common	error_list_already_exists	List Already Exists
 #TO_TRANSLATE#mail_common	error_min_name_length	Must Provide List Name That Is 4 or More Characters Long
 #TO_TRANSLATE#mail_common	list_not_activated	Not activated yet
 #TO_TRANSLATE#mail_common	mailing_list	Mailing list
-#TO_TRANSLATE#mail_common	mailing_lists	Mailing lists
 #TO_TRANSLATE#mail_common	prefs	Subscription
 mail_utils	admin	Администриране
 #TO_TRANSLATE#mail_utils	turned_off	This Project Has Turned Off The Mailing Lists
-menu	about_gforge		За GForge
 menu	account_maintenance	Регистрация
 menu	admin			Администриране
 menu	bookmark_page		Отбележи страницата
-menu	change_my_theme		Външен вид
 menu	code_snippet		Фрагменти
-menu	code_snippet_library	Софтуерна библиотека
-menu	compile_farm		Фабрика за компилиране
 menu	diary_notes		Дневник &amp; Бележки
-menu	discussion_forums	Дискусионни форуми
-menu	documentation		Документи
 menu	home			Начало
 menu	login			Вход
-#TO_TRANSLATE#menu	login_ssl	Login via SSL
 menu	logout			Изход
 menu	my_account		Моят акаунт
 menu	my_personal_page	Моята лична страница
 menu	mypage			Моята&nbsp;страница
 menu	new_project		Регистриране на нов проект
-menu	new_releases		Новоизлезли
 menu	new_user		Нов потребител
-menu	other_site_mirrors	Огледални копия
-menu	project_admin		Администриране на проект
 menu	project_help_wanted	Помощ
-menu	project_summary		Обща информация за проекта
 menu	projectree		Каталог
 menu	register_project	Регистриране на нов проект
 #TO_TRANSLATE#menu	reporting	Reporting
 menu	search			Търсене
-menu	site_status		Статус на сайта
-menu	software_map		Карта на софтуера
 menu	submit			Изпрати
-menu	top_projects		Топ проекти
-my	about_blurb	Вашата лична страница съдържа списък от грешки и задачи, които Вие сте създали, както и проектите в които участвате.
-my	assigneditems	Грешки и заявки, по които трябва да работите
 my	bookmarks	Моите Бележки
 my	monitoredfile	Наблюдавани Файлови Модули
 my	monitoredforum	Наблюдавани Форуми
 my	no_bookmarks	Нямате в момента никакви запазени бележки.
 my	no_monitored_filemodules	Не наблюдавате никакви файлове.
-my	no_monitored_filemodules_details	<p>Ако наблюдавате файлове, ще Ви бъдат изпратени известия за промени по електронната поща, с хипервръзка към новия файл на нашия сървър.</p><p>Можете да наблюдавате файлове като посетите секцията &quot;Резюме&quot; на проект и изберете от check box файловата секция.</p>
 my	no_monitored_forums	Не наблюдавате никакви форуми.
-my	no_monitored_forums_details	<p>Ако наблюдавате форуми, ще Ви бъдат изпратени новите теми по електронната поща, с връзка към новите съобщения.</p><p>Можете да наблюдавате форуми, като изберете &quot;Monitor Forum&quot; във всеки дискусионен форум.</p>
 my	no_open_tasks	Нямате отворени задачи.
 my	no_projects	Вие не сте член на никой активен проект
 my	no_tracker_items_assigned	Няма намерени.
 my	no_tracker_items_submitted	Няма намерени.
-my	pending_news_bytes	Предстоящи Нови Байтове
-my	pending_news_bytes_1	Има един нов байт чакащ преглеждане
-my	pending_news_bytes_2	Има $1 нови байтове чакащи преглеждане
-my	pending_news_bytes_3	Щракни тук
-my	pending_projects	Предстоящи Проекти
-my	pending_projects_1	Има един предстоящ проект чакащ преглеждане
-my	pending_projects_2	Има $1 ппредстоящи проекти чакащи преглеждане
-my	pending_projects_3	Щракни тук
 my	projects	Моите Проекти
-my	submitteditems	Документирани от вас грешки и заявки
-my	survey	Проучвания
-my	survey_taken	Вие сте попълнили анкетата за разработчик
-my	tasks	Задачи, които трябва да свършите
 my	title	Лична Страница За: $1
 #TO_TRANSLATE#my_bookmark	return	Return
 #TO_TRANSLATE#my_bookmark_add	added_bookmark	Added bookmark for <strong>$1</strong> with title <strong>$2</strong>
@@ -1150,14 +910,9 @@ my	title	Лична Страница За: $1
 #TO_TRANSLATE#my_bookmark_add	bookmark_title	Bookmark Title
 #TO_TRANSLATE#my_bookmark_add	bookmark_url	Bookmark URL
 #TO_TRANSLATE#my_bookmark_add	section	My Personal Page
-#TO_TRANSLATE#my_bookmark_add	title	Add Bookmark
 #TO_TRANSLATE#my_bookmark_add	visit_page	Visit the bookmarked page
-#TO_TRANSLATE#my_bookmark_delete	bookmark_deleted	Bookmark deleted
-#TO_TRANSLATE#my_bookmark_delete	section	My Personal Page
-#TO_TRANSLATE#my_bookmark_delete	title	Delete Bookmark
 #TO_TRANSLATE#my_bookmark_edit	bookmark_updated	Bookmark Updated
 #TO_TRANSLATE#my_bookmark_edit	failed_to_update_bookmark	Failed to update bookmark.
-#TO_TRANSLATE#my_bookmark_edit	section	My Personal Page
 #TO_TRANSLATE#my_bookmark_edit	title	Edit Bookmark
 my_diary	add_new_entry	Добавяне на бележка
 my_diary	details	Описание
@@ -1170,7 +925,6 @@ my_diary	is_public_expl	Публично достъпните бележки щ�
 my_diary	item_added	Бележката е добавена
 my_diary	no_entries	Нямате въведени бележки в дневника
 my_diary	nothing_updated	Нищо не е обновено
-my_diary	section	Моята персонална страница
 my_diary	submit_only_once	Записване
 my_diary	summary	Резюме
 my_diary	title	Моят дневник и бележки
@@ -1196,7 +950,6 @@ news	noitems			Няма намерени бележки
 news	nonews			Няма намерени новини
 news	nonewsfor		Няма намерени новини за $1
 #TO_TRANSLATE#news	olderheadlines	Older headlines
-news	section			Проект: $1
 news	title			Новини
 #TO_TRANSLATE#news_admin	approve_for_frontpage	Approve For Front Page
 #TO_TRANSLATE#news_admin	approve_newsbyte	Approve a NewsByte For Project: $1
@@ -1205,7 +958,6 @@ news	title			Новини
 #TO_TRANSLATE#news_admin	details	Details
 #TO_TRANSLATE#news_admin	do_nothing	Do Nothing
 #TO_TRANSLATE#news_admin	newsbyte_deleted	NewsByte Deleted.
-#TO_TRANSLATE#news_admin	newsbyte_not_found	NewsByte Not Found.
 #TO_TRANSLATE#news_admin	newsbyte_rejected	NewsBytes Rejected.
 #TO_TRANSLATE#news_admin	newsbyte_updated	NewsByte Updated.
 #TO_TRANSLATE#news_admin	newsbytes_to_approve	These items need to be approved (total: $1)
@@ -1219,7 +971,6 @@ news	title			Новини
 #TO_TRANSLATE#news_admin	reject_selected	Reject Selected
 #TO_TRANSLATE#news_admin	rejected_newsbytes	These items were rejected this past week (total: $1)
 #TO_TRANSLATE#news_admin	removal_when_edit	If this item is on the $1 home page and you edit it, it will be removed from the home page.
-news_admin	section		Новини
 #TO_TRANSLATE#news_admin	status	Status
 #TO_TRANSLATE#news_admin	status_delete	Delete
 #TO_TRANSLATE#news_admin	status_displayed	Displayed
@@ -1227,7 +978,6 @@ news_admin	section		Новини
 #TO_TRANSLATE#news_admin	submitted_by	Submitted by
 #TO_TRANSLATE#news_admin	submitted_for_group	Submitted for group
 news_admin	title		Администриране на новини
-news_main	title		Новини
 news_submit	cannot		Само администраторите на проект могат да създават новини за него
 #TO_TRANSLATE#news_submit	cannotadmin	Submitting news from the news group is not allowed.
 news_submit	details		Тяло
@@ -1236,9 +986,7 @@ news_submit	errorinsert	Грешка при добавянето
 news_submit	forproject	За проект
 news_submit	newsadded	Новината е добавена.
 news_submit	post_blurb	Оттук можете да публикувате новини и съобщения от какви специалисти се нуждаете за Вашия проект. <P>Всички изпратени съобщения ще се появят веднага на страницата с резюмето за проекта. Съобщения, които представляват интерес за цялата общност have to be approved by a member of the $1 news team before they will appear on the $1 home page.<P>You may include URLs, but not HTML in your submissions.<P>URLs that start with http:// are made clickable.
-news_submit	section	Новини
 news_submit	subject	Тема
-news_submit	title	Изпращане на новина за $1
 news_utils	archive	Архив на новини
 #TO_TRANSLATE#news_utils	comment_1	Comment
 #TO_TRANSLATE#news_utils	comment_2	Comments
@@ -1268,24 +1016,13 @@ people	no_categories_found	Няма намерени категории
 people	no_skill_inventory_setup_up	Няма описани
 people	none_found	Няма намерени обяви
 people	project	Проект $1
-#TO_TRANSLATE#people	section	Project Help Wanted
 people	short_description	Кратко описание
 people	skill	Умение
 people	status	Статус
 #TO_TRANSLATE#people	title	Help Wanted System
 people	title_array	Име
-#TO_TRANSLATE#people_admin	section	Project Help Wanted
-#TO_TRANSLATE#people_admin	title	Help Wanted Administration
-#TO_TRANSLATE#people_admin_people_cat	section	Help Wanted Administration
-#TO_TRANSLATE#people_admin_people_cat	title	Add Job Categories
-#TO_TRANSLATE#people_admin_people_skills	section	Help Wanted Administration
-#TO_TRANSLATE#people_admin_people_skills	title	Add Job Skills
-#TO_TRANSLATE#people_cat	section	Help Wanted
-#TO_TRANSLATE#people_cat	title	List Jobs By Category
 #TO_TRANSLATE#people_createjob	continue	Continue >>
 people_createjob	explains	Оттук можете да публикувате обяви за търсене на хора с определени умения, които да се включат във Вашия проект.
-#TO_TRANSLATE#people_createjob	section	Project Help Wanted
-#TO_TRANSLATE#people_createjob	title	Create A New Job
 #TO_TRANSLATE#people_editjob	error_missing	error - missing info
 #TO_TRANSLATE#people_editjob	fill_in	Fill in all required fields
 #TO_TRANSLATE#people_editjob	finished	Finished
@@ -1302,7 +1039,6 @@ people_createjob	explains	Оттук можете да публикувате о
 #TO_TRANSLATE#people_editjob	job_update_ok	JOB updated successfully
 #TO_TRANSLATE#people_editjob	no_such	No Such posting For This Project
 #TO_TRANSLATE#people_editjob	posting_fetch_failed	POSTING fetch FAILED
-#TO_TRANSLATE#people_editjob	section	Project Help Wanted
 #TO_TRANSLATE#people_editjob	skill_explains	<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>
 people_editjob	title	Редактиране на обява
 people_editjob	update_description	Обновяване на описанието
@@ -1336,14 +1072,11 @@ people_editjob	update_description	Обновяване на описанието
 #TO_TRANSLATE#people_editprofile	no_such_user	No Such User
 #TO_TRANSLATE#people_editprofile	profile_title	Title
 #TO_TRANSLATE#people_editprofile	publicly_viewable	Publicly Viewable
-#TO_TRANSLATE#people_editprofile	section	Project Help Wanted
 #TO_TRANSLATE#people_editprofile	skill_added_ok	Skill added successfully
 #TO_TRANSLATE#people_editprofile	skill_delete_successfully	Skill$1 deleted successfully
 #TO_TRANSLATE#people_editprofile	skill_deletion_cancelled	Skill deletion cancelled
 #TO_TRANSLATE#people_editprofile	skills_edit	Skills edit
 #TO_TRANSLATE#people_editprofile	start_date	Start Date
-#TO_TRANSLATE#people_editprofile	title	Edit Your Profile
-#TO_TRANSLATE#people_editprofile	title_max_100_chars	Title (max 100 characters)
 #TO_TRANSLATE#people_editprofile	type	Type
 #TO_TRANSLATE#people_editprofile	update_failed	User update FAILED
 #TO_TRANSLATE#people_editprofile	update_ok	User updated successfully
@@ -1351,10 +1084,6 @@ people_editjob	update_description	Обновяване на описанието
 #TO_TRANSLATE#people_editprofile	user_fetch_failed	User fetch FAILED
 #TO_TRANSLATE#people_editprofile	you_can_enter_new_skills	You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.
 #TO_TRANSLATE#people_help_wanted_latest	title	Help Wanted Latest Posts
-#TO_TRANSLATE#people_helpwanted_latest	section	Project Help Wanted
-#TO_TRANSLATE#people_helpwanted_latest	title	Last Posts
-#TO_TRANSLATE#people_proj	section	Project Help Wanted
-#TO_TRANSLATE#people_proj	title	Project Help Wanted For $1
 people_viewjob	contact_info	За контакти
 #TO_TRANSLATE#people_viewjob	fetch_failed	POSTING fetch FAILED
 people_viewjob	for_project	Проект
@@ -1362,20 +1091,15 @@ people_viewjob	for_project	Проект
 people_viewjob	open_date	Дата на създаване
 #TO_TRANSLATE#people_viewjob	posting_id_not_found	Posting ID not found
 people_viewjob	required_skills	Списък от необходими умения
-#TO_TRANSLATE#people_viewjob	section	Project Help Wanted
-#TO_TRANSLATE#people_viewjob	title	$1 wanted for $2
 #TO_TRANSLATE#people_viewjob	view_a_job	View a Job
 people_viewprofile	no_such_user	Няма такъв потребител
-people_viewprofile	section	Информация за потребителя
 people_viewprofile	set_private	Профилът на този потребител не е публичен
 people_viewprofile	skills_profile_for	Профил на уменията на
 #TO_TRANSLATE#people_viewprofile	title	View a User Profile
 #TO_TRANSLATE#people_viewprofile	user_fetch_failed	User fetch FAILED
 #TO_TRANSLATE#pm	admin	admin
-#TO_TRANSLATE#pm	any	Any
 #TO_TRANSLATE#pm	assigned_to	Assigned To
 #TO_TRANSLATE#pm	cat_any	Any
-#TO_TRANSLATE#pm	cat_none	None
 #TO_TRANSLATE#pm	category	Category
 #TO_TRANSLATE#pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
 #TO_TRANSLATE#pm	dependent	Dependent on Task
@@ -1389,7 +1113,6 @@ people_viewprofile	skills_profile_for	Профил на уменията на
 #TO_TRANSLATE#pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project will have to set up projects using the admin page</FONT></B>
 #TO_TRANSLATE#pm	percent_complete	Percent Complete
 #TO_TRANSLATE#pm	priority	Priority
-#TO_TRANSLATE#pm	section	Project: $1
 #TO_TRANSLATE#pm	start_date	Start Date
 #TO_TRANSLATE#pm	status	Status
 #TO_TRANSLATE#pm	status_any	Any
@@ -1406,16 +1129,12 @@ people_viewprofile	skills_profile_for	Профил на уменията на
 #TO_TRANSLATE#pm_addtask	task_created_successfully	Task Created Successfully
 #TO_TRANSLATE#pm_addtask	task_updated_successfully	Task Updated Successfully
 #TO_TRANSLATE#pm_addtask	title	Add a new Task
-#TO_TRANSLATE#pm_admin	title	Task Manager: Administration
-#TO_TRANSLATE#pm_admin_change_status	section	Task Manager Administration
-#TO_TRANSLATE#pm_admin_change_status	title	Update Information
 #TO_TRANSLATE#pm_admin_projects	add_categories	Add Categories
 #TO_TRANSLATE#pm_admin_projects	add_categories_title	Add Categories
 #TO_TRANSLATE#pm_admin_projects	add_categories_to	Add Categories To
 #TO_TRANSLATE#pm_admin_projects	add_edit_categories	Add/Edit Categories
 #TO_TRANSLATE#pm_admin_projects	add_project	Add A Project
 #TO_TRANSLATE#pm_admin_projects	add_project_intro	Add a project, which can contain a set of tasks. This is different than creating a new task.
-#TO_TRANSLATE#pm_admin_projects	add_subprojects	Add Projects
 #TO_TRANSLATE#pm_admin_projects	admin_title	Project/Task Manager Administration
 #TO_TRANSLATE#pm_admin_projects	category_inserted	Category Inserted
 #TO_TRANSLATE#pm_admin_projects	category_name	Category Name
@@ -1424,36 +1143,24 @@ people_viewprofile	skills_profile_for	Профил на уменията на
 #TO_TRANSLATE#pm_admin_projects	category_updated	Category Updated
 #TO_TRANSLATE#pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
 #TO_TRANSLATE#pm_admin_projects	change_project_title	Change Project/Task Manager Status
-#TO_TRANSLATE#pm_admin_projects	col_project_id	Project id
-#TO_TRANSLATE#pm_admin_projects	col_project_name	Project name
 #TO_TRANSLATE#pm_admin_projects	delete	Delete
 #TO_TRANSLATE#pm_admin_projects	delete_info	Permanently delete this subproject and all its data.
 #TO_TRANSLATE#pm_admin_projects	delete_warning	You are about to permanently and irretrievably delete this subproject and all its related data!
 #TO_TRANSLATE#pm_admin_projects	deleted	Successfully Deleted
 pm_admin_projects	description	Описание
 #TO_TRANSLATE#pm_admin_projects	edit_update	Edit/Update Project
-#TO_TRANSLATE#pm_admin_projects	existing_subprojects	Existing Subprojects
 #TO_TRANSLATE#pm_admin_projects	id	Id
 pm_admin_projects	is_public	Флаг за публичност
 #TO_TRANSLATE#pm_admin_projects	modify_category	Modify an Category in
 #TO_TRANSLATE#pm_admin_projects	no_categories	No categories defined
 #TO_TRANSLATE#pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.</p>
-#TO_TRANSLATE#pm_admin_projects	no_subprojects	No Subprojects in this group
 #TO_TRANSLATE#pm_admin_projects	project_inserted	Project Inserted
 #TO_TRANSLATE#pm_admin_projects	project_name	New Project Name
 #TO_TRANSLATE#pm_admin_projects	project_title	Title
 #TO_TRANSLATE#pm_admin_projects	projects_intro	Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>
 #TO_TRANSLATE#pm_admin_projects	really_sure	I'm Really Sure
-#TO_TRANSLATE#pm_admin_projects	section	Task Manager Administration
 #TO_TRANSLATE#pm_admin_projects	send_updates	Send All Updates To
 #TO_TRANSLATE#pm_admin_projects	sure	I'm Sure
-#TO_TRANSLATE#pm_admin_projects	title	Add Subprojects
-#TO_TRANSLATE#pm_browse_custom	section	Task Manager
-#TO_TRANSLATE#pm_browse_custom	title	Browse Custom Tasks
-#TO_TRANSLATE#pm_browse_my	section	Project $1 Task Manager
-#TO_TRANSLATE#pm_browse_my	title	Browse My Tasks
-#TO_TRANSLATE#pm_browse_open	section	Task Manager
-#TO_TRANSLATE#pm_browse_open	title	Browse Open Tasks
 #TO_TRANSLATE#pm_browsetask	admin_mass_update	<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
 #TO_TRANSLATE#pm_browsetask	browse	Browse
 #TO_TRANSLATE#pm_browsetask	check_all	Check &nbsp;all
@@ -1479,7 +1186,6 @@ pm_admin_projects	is_public	Флаг за публичност
 #TO_TRANSLATE#pm_detailtask	original_comment	Original Comment
 #TO_TRANSLATE#pm_detailtask	pct_complete	Percent Complete
 #TO_TRANSLATE#pm_detailtask	priority	Priority
-#TO_TRANSLATE#pm_detailtask	section	Task Manager
 #TO_TRANSLATE#pm_detailtask	start_date	Start Date
 #TO_TRANSLATE#pm_detailtask	status	Status
 #TO_TRANSLATE#pm_detailtask	submitted_by	Submitted By
@@ -1500,7 +1206,6 @@ pm_include_grouphtml	admin	Администриране
 #TO_TRANSLATE#pm_include_grouphtml	error_disabled	This Project Has Turned Off The Task Manager
 #TO_TRANSLATE#pm_include_grouphtml	gantt_chart	Gantt Chart
 #TO_TRANSLATE#pm_include_grouphtml	not_started	Not Started
-#TO_TRANSLATE#pm_include_grouphtml	project	Project
 pm_include_grouphtml	reporting	Отчети
 #TO_TRANSLATE#pm_include_grouphtml	uploadcsv	Upload CSV
 #TO_TRANSLATE#pm_include_taskhtml	by	By
@@ -1512,7 +1217,6 @@ pm_include_grouphtml	reporting	Отчети
 #TO_TRANSLATE#pm_include_taskhtml	no_changes	No Changes Have Been Made
 #TO_TRANSLATE#pm_include_taskhtml	no_comments	No Comments Have Been Added
 #TO_TRANSLATE#pm_include_taskhtml	no_depend_info	No Tasks are Dependent on This Task
-#TO_TRANSLATE#pm_include_taskhtml	no_followups	No Followups
 #TO_TRANSLATE#pm_include_taskhtml	no_tracker_items	No Related Tracker Items Have Been Added
 #TO_TRANSLATE#pm_include_taskhtml	old_value	Old Value
 #TO_TRANSLATE#pm_include_taskhtml	open_date	Open Date
@@ -1535,11 +1239,6 @@ pm_include_taskhtml	tracker	Тракер
 #TO_TRANSLATE#pm_projectgroup	error_min_name_length	Title Must Be At Least 5 Characters
 #TO_TRANSLATE#pm_projectgroup	none_found	No ProjectGroups Found
 #TO_TRANSLATE#pm_projecttask	circular_dependency	Circular Dependency Detected'
-#TO_TRANSLATE#pm_projecttask	mail_followups_body	\nDate: $1\nBy: $2\n\nComment:\n$3
-#TO_TRANSLATE#pm_projecttask	mail_followups_footer	For more info, visit:
-#TO_TRANSLATE#pm_projecttask	mail_followups_subject	Task #
-#TO_TRANSLATE#pm_projecttask	mail_followups_title	\n\nFollow-Ups
-#TO_TRANSLATE#pm_projecttask	mail_notice			Task # $1 has been updated\n\nProject: $2\nSubproject: $3\nSummary: $4\nComplete: $5\nStatus: $6\n\nDescription: $7
 #TO_TRANSLATE#pm_reporting	aging_report	Aging Report
 #TO_TRANSLATE#pm_reporting	all_tasks_by_category	All Tasks By Category
 #TO_TRANSLATE#pm_reporting	all_tasks_by_technician	All Tasks By Assignee
@@ -1554,7 +1253,6 @@ pm_include_taskhtml	tracker	Тракер
 #TO_TRANSLATE#pm_reporting	tasks_by_category	Tasks By Category
 #TO_TRANSLATE#pm_reporting	tasks_by_technician	Tasks By Assignee
 #TO_TRANSLATE#pm_reporting	title	Task Reporting System
-#TO_TRANSLATE#pm_task	create_successfully	Task Created Successfully
 #TO_TRANSLATE#pm_uploadcsv	choose_file	Choose a file in the proper .csv format for uploading.
 #TO_TRANSLATE#pm_uploadcsv	explain	This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.
 #TO_TRANSLATE#pm_uploadcsv	title	Upload data into the task manager.
@@ -1566,9 +1264,6 @@ project_admin	addfromlist	Добавяне от пълния списък с п�
 #TO_TRANSLATE#project_admin	choose_first_letter	<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>
 #TO_TRANSLATE#project_admin	docmanager_admin	DocManager Admin
 #TO_TRANSLATE#project_admin	download_tarball	Download Your Nightly SCM Tree Tarball
-#TO_TRANSLATE#project_admin	edit_file_releases	Edit/Add File Releases
-#TO_TRANSLATE#project_admin	edit_member_permissions	Edit Member Permissions
-#TO_TRANSLATE#project_admin	file_releases	File Releases
 #TO_TRANSLATE#project_admin	finish	Finish
 #TO_TRANSLATE#project_admin	forum_admin	Forum Admin
 #TO_TRANSLATE#project_admin	frs_admin	FRS Admin
@@ -1577,12 +1272,9 @@ project_admin	homepage_link	Сайт на проекта:&nbsp;
 #TO_TRANSLATE#project_admin	mail_admin	Mail Admin
 #TO_TRANSLATE#project_admin	news_admin	News Admin
 #TO_TRANSLATE#project_admin	no_matching_user	<p>No Matching Users Found</p>
-project_admin	packages	Пакети
-#TO_TRANSLATE#project_admin	plugins_admin	Plugins Admin
 project_admin	project_information	Информация за проекта
 #TO_TRANSLATE#project_admin	rejectpending	Reject
 #TO_TRANSLATE#project_admin	scm_admin	SCM Admin
-#TO_TRANSLATE#project_admin	section	Project: $1
 project_admin	shell_server	SSH сървър използван от проекта:&nbsp;
 project_admin	shell_server_group_directory	Директория на проекта на SSH сървъра:&nbsp;
 project_admin	short_description	<b>Кратко описание на проекта:</b>&nbsp;
@@ -1616,8 +1308,6 @@ project_admin	www_directory	WWW Директория на проекта на SS
 #TO_TRANSLATE#project_admin_database	title	Database Information
 project_admin_database	update	Обновяване
 project_admin_editgroupinfo	active_features	Активни инструменти
-#TO_TRANSLATE#project_admin_editgroupinfo	enable_anonymous_cvs	Enable anonymous CVS
-#TO_TRANSLATE#project_admin_editgroupinfo	enable_pserver	Enable pserver
 project_admin_editgroupinfo	group_name	Име на проекта
 #TO_TRANSLATE#project_admin_editgroupinfo	group_updated	Group information updated
 project_admin_editgroupinfo	homepage_link	Сайт на проекта
@@ -1714,8 +1404,6 @@ project_admin_editpackages	package_name	Име на пакета
 #TO_TRANSLATE#project_admin_group_trove	update_changes	Update All Category Changes
 #TO_TRANSLATE#project_admin_history	info	This log will show who made significant changes to your project and when
 #TO_TRANSLATE#project_admin_history	title	History
-#TO_TRANSLATE#project_admin_newrelease	section	Project $1 - Administration
-#TO_TRANSLATE#project_admin_newrelease	title	Create New Release
 #TO_TRANSLATE#project_admin_qrs	changelog	Change Log
 #TO_TRANSLATE#project_admin_qrs	create_new_package	Or $1 create a new package $2
 #TO_TRANSLATE#project_admin_qrs	exceed_file_size	The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file.
@@ -1727,7 +1415,6 @@ project_admin_editpackages	package_name	Име на пакета
 #TO_TRANSLATE#project_admin_qrs	maximum_file_size	Maximum upload file size:
 #TO_TRANSLATE#project_admin_qrs	must_choose_one	Must Choose One
 #TO_TRANSLATE#project_admin_qrs	no_file_types_available	No File Types Available
-#TO_TRANSLATE#project_admin_qrs	notify_list	Notify list
 #TO_TRANSLATE#project_admin_qrs	package_id	Package ID
 #TO_TRANSLATE#project_admin_qrs	partial_file	The uploaded file was only partially uploaded.
 #TO_TRANSLATE#project_admin_qrs	preserve_text	Preserve my pre-formatted text
@@ -1743,64 +1430,14 @@ project_admin_editpackages	package_name	Име на пакета
 #TO_TRANSLATE#project_admin_qrs	required_package	Must select a package.
 #TO_TRANSLATE#project_admin_qrs	required_processor_type	Must select a processor type.
 #TO_TRANSLATE#project_admin_qrs	required_release_name	Must define a release name.
-#TO_TRANSLATE#project_admin_qrs	separate_emails	Separate e-mails with a comma (,)
 #TO_TRANSLATE#project_admin_qrs	title	Quick Release System
 #TO_TRANSLATE#project_admin_qrs	unknown_file_error	Unknown file upload error.
 #TO_TRANSLATE#project_admin_qrs	upload_new_file	Upload a new file
-#TO_TRANSLATE#project_admin_rmuser	cancel	Cancel
-#TO_TRANSLATE#project_admin_rmuser	cannot_remove_admin	You cannot remove $1 admin
-#TO_TRANSLATE#project_admin_rmuser	info	<h3>Removing Developer from $1</h3><p>You are about to remove developer from the $1. Please confirm your action:</p>
-#TO_TRANSLATE#project_admin_rmuser	operation_not_permitted	Operation Not Permitted
-project_admin_rmuser	remove	Премахване
-project_admin_rmuser	title	Премахване на потребител
 #TO_TRANSLATE#project_admin_showreleases	date	Date
 #TO_TRANSLATE#project_admin_showreleases	no_release	No Releases Of This Package Are Available
 #TO_TRANSLATE#project_admin_showreleases	package_name	Package Name
 #TO_TRANSLATE#project_admin_showreleases	release_name	Release Name
 #TO_TRANSLATE#project_admin_showreleases	title	Release New File Version
-#TO_TRANSLATE#project_admin_userpermedit	add_to_all	Add To All
-#TO_TRANSLATE#project_admin_userpermedit	add_to_tracker	Add To Tracker
-project_admin_userpermedit	admin	Администриране
-#TO_TRANSLATE#project_admin_userpermedit	admin_only	Admin Only
-#TO_TRANSLATE#project_admin_userpermedit	admin_tech	Admin & Tech
-#TO_TRANSLATE#project_admin_userpermedit	developer_not_found	Developer Not Found In This Group
-#TO_TRANSLATE#project_admin_userpermedit	docman	Documentation Manager
-#TO_TRANSLATE#project_admin_userpermedit	editing_permissions	You are editing permissions for user $1 ($2)
-#TO_TRANSLATE#project_admin_userpermedit	editor	Editor
-#TO_TRANSLATE#project_admin_userpermedit	file_release_role	Role in File releases
-#TO_TRANSLATE#project_admin_userpermedit	forums	Forums
-#TO_TRANSLATE#project_admin_userpermedit	invalid_user	Invalid user
-#TO_TRANSLATE#project_admin_userpermedit	moderator	Moderator
-#TO_TRANSLATE#project_admin_userpermedit	no_permissions	No permissions
-#TO_TRANSLATE#project_admin_userpermedit	not_available	Not available
-#TO_TRANSLATE#project_admin_userpermedit	permissions_updated	Permissions Updated
-#TO_TRANSLATE#project_admin_userpermedit	pm	Project/Task Manager
-#TO_TRANSLATE#project_admin_userpermedit	project_admin	Project Admin
-#TO_TRANSLATE#project_admin_userpermedit	project_role	Project role
-#TO_TRANSLATE#project_admin_userpermedit	property	Property
-#TO_TRANSLATE#project_admin_userpermedit	release_technician	Release Technician
-project_admin_userpermedit	remove	Премахване
-#TO_TRANSLATE#project_admin_userpermedit	reset_changes	Reset Changes
-#TO_TRANSLATE#project_admin_userpermedit	technician	Technician
-#TO_TRANSLATE#project_admin_userpermedit	title	Edit Developer Permissions
-#TO_TRANSLATE#project_admin_userpermedit	tracker_info	<h3>Add User To These Trackers:</h3>	<p>	You can pick and choose which trackers this user has any privileges in, or simply add the user to all trackers by checking "Add To All".</p>
-#TO_TRANSLATE#project_admin_userpermedit	tracker_manager	Tracker Manager
-#TO_TRANSLATE#project_admin_userpermedit	undefined	Undefined
-#TO_TRANSLATE#project_admin_userpermedit	update_permissions	Update Developer Permissions
-#TO_TRANSLATE#project_admin_userpermedit	user_added	User Added Successfully
-#TO_TRANSLATE#project_admin_userpermedit	user_does_not_exist	User does not exist.
-#TO_TRANSLATE#project_admin_userpermedit	value	Value
-#TO_TRANSLATE#project_admin_userperms	docman	Doc.<br />Manager
-#TO_TRANSLATE#project_admin_userperms	editor	Editor
-#TO_TRANSLATE#project_admin_userperms	forums	Forums
-#TO_TRANSLATE#project_admin_userperms	general	General
-#TO_TRANSLATE#project_admin_userperms	info	Click developer's name below to edit permissions
-#TO_TRANSLATE#project_admin_userperms	moderator	Moderator
-#TO_TRANSLATE#project_admin_userperms	no_developers	No Developers Found
-#TO_TRANSLATE#project_admin_userperms	rel_tech	Rel.Tech.
-#TO_TRANSLATE#project_admin_userperms	task_manager	Task<br />Manager
-#TO_TRANSLATE#project_admin_userperms	title	User Permissions List
-#TO_TRANSLATE#project_admin_userperms	tracker_manager	Tracker<br />Manager
 project_admin_utils	admin	Участници
 project_admin_utils	by	Извършено от
 project_admin_utils	change_history	История на промените по проекта
@@ -1808,7 +1445,6 @@ project_admin_utils	change_history	История на промените по �
 project_admin_utils	date	Дата
 project_admin_utils	edit_jobs	Редактиране на обяви
 project_admin_utils	edit_public_info	Описание и инструменти
-#TO_TRANSLATE#project_admin_utils	edit_release_files	Edit/Release Files
 project_admin_utils	field	Променено поле
 #TO_TRANSLATE#project_admin_utils	multimedia_data	Edit Multimedia Data
 project_admin_utils	old_value	Стара стойност
@@ -1816,7 +1452,6 @@ project_admin_utils	old_value	Стара стойност
 project_admin_utils	post_jobs	Публикуване на обяви
 project_admin_utils	project_history	История
 project_admin_utils	stats	Статистики
-#TO_TRANSLATE#project_admin_utils	user_permissions	User Permissions
 #TO_TRANSLATE#project_admin_utils	vhosts	VHOSTs
 #TO_TRANSLATE#project_admin_vhost	create	Create
 #TO_TRANSLATE#project_admin_vhost	delete	Delete
@@ -1833,14 +1468,9 @@ project_admin_utils	stats	Статистики
 #TO_TRANSLATE#project_filemodule_monitor	start_monitor_title	Monitoring started
 #TO_TRANSLATE#project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
 #TO_TRANSLATE#project_filemodule_monitor	stop_monitor_title	Monitoring stopped
-#TO_TRANSLATE#project_home	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
-project_home	forum_messages	<strong>$1</strong> съобщения в <strong>$2</strong> форума
-#TO_TRANSLATE#project_home	forum_messages_only_one_forum	<strong>$1</strong> messages in <strong>$2</strong> forum
-#TO_TRANSLATE#project_home	forums	forums
 #TO_TRANSLATE#project_home	help_wanted	HELP WANTED: This project is looking for
 #TO_TRANSLATE#project_home	help_wanted_multiple	People to fill $1 several different positions </a>
 #TO_TRANSLATE#project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
-#TO_TRANSLATE#project_home	messages_in	messages in
 #TO_TRANSLATE#project_home	monitor_package	Monitor this package
 #TO_TRANSLATE#project_home	no_subprojects	There are no public subprojects available
 #TO_TRANSLATE#project_home	no_trackers	There are no public trackers available
@@ -1851,14 +1481,12 @@ project_home	forum_messages	<strong>$1</strong> съобщения в <strong>$2
 #TO_TRANSLATE#project_home	tracker_open	<strong>$1</strong> open /<strong>$2</strong> total
 #TO_TRANSLATE#project_home	view_members	View Members
 project_home	view_project_files	Преглед на всички издадени пакети
-#TO_TRANSLATE#project_joinrequest	approved	You have been added to the $1 project.
 #TO_TRANSLATE#project_joinrequest	denied	Your request to join the $1 project was denied by the administrator.
 #TO_TRANSLATE#project_joinrequest	join_notice_body	$1 has requested to join your project. \nYou can approve this request here: http://$2/project/admin/?group_id=$3 .
 #TO_TRANSLATE#project_joinrequest	join_notice_subject	Request to Join Project $1
 #TO_TRANSLATE#project_joinrequest	joining	You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.
 #TO_TRANSLATE#project_joinrequest	nonepending	No Pending Requests
 #TO_TRANSLATE#project_joinrequest	pending	Pending Requests
-#TO_TRANSLATE#project_joinrequest	pending_requests	Pending Join Requests
 #TO_TRANSLATE#project_joinrequest	request_link	Request to join
 #TO_TRANSLATE#project_joinrequest	submitted	Your request has been submitted.
 #TO_TRANSLATE#project_joinrequest	title	Request to join project
@@ -1885,30 +1513,13 @@ project_showfiles	package	Пакет
 project_showfiles	project_totals	Общо за целия проект
 #TO_TRANSLATE#project_showfiles	release_highlighted	The release you have chosen is <span style="background-color:pink">highlighted</span>.
 #TO_TRANSLATE#project_showfiles	release_notes	Release &amp; Notes
-#TO_TRANSLATE#project_showfiles	section	Project: $1
 project_showfiles	size	Размер
 #TO_TRANSLATE#project_showfiles	title	Project Filelist
 #TO_TRANSLATE#project_shownotes	changes	Changes:
 #TO_TRANSLATE#project_shownotes	error_release_not_found	That Release Was Not Found
 #TO_TRANSLATE#project_shownotes	notes	Notes:
 #TO_TRANSLATE#project_shownotes	release_name	Release Name:
-#TO_TRANSLATE#project_shownotes	section	Project: $1
 #TO_TRANSLATE#project_shownotes	title	File Release Notes and Changelog
-#TO_TRANSLATE#project_stats	change_stats_view	Change Stats View
-#TO_TRANSLATE#project_stats	detailed_statistics	Detailed statistics for
-#TO_TRANSLATE#project_stats	last_30_days	Last 30 Days
-#TO_TRANSLATE#project_stats	last_7_days	Last 7 Days
-#TO_TRANSLATE#project_stats	monthly	Monthly
-#TO_TRANSLATE#project_stats	tasks	Tasks
-#TO_TRANSLATE#project_stats	title	Project statistics
-project_stats	tracker	Тракер
-#TO_TRANSLATE#project_stats	usage_statistics	Usage Statistics
-#TO_TRANSLATE#project_stats	view_reports	View Reports
-#TO_TRANSLATE#project_stats_graph	date	Date
-#TO_TRANSLATE#project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the past $1 days
-#TO_TRANSLATE#project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
-#TO_TRANSLATE#project_stats_graph	statistics	$1 Statistics For $2
-#TO_TRANSLATE#project_stats_graph	views	Views (red) / Downloads (blue)
 #TO_TRANSLATE#project_stats_utils	CVS	CVS
 #TO_TRANSLATE#project_stats_utils	all_tracker	All Trkr
 #TO_TRANSLATE#project_stats_utils	bugs	Bugs
@@ -1925,39 +1536,21 @@ project_stats	tracker	Тракер
 #TO_TRANSLATE#project_stats_utils	stats_for_months	Statistics for the past $1 months.
 #TO_TRANSLATE#project_stats_utils	support	Support
 #TO_TRANSLATE#project_stats_utils	tasks	Tasks
-#TO_TRANSLATE#projects	section	Project: $1
-#TO_TRANSLATE#projects	title	Summary
 rbac_edit	addrole	Добавяне на роля
-#TO_TRANSLATE#rbac_edit	docman	Document Manager
 rbac_edit	editrole	Редактиране
 rbac_edit	editroles	Редактиране на ролите
-#TO_TRANSLATE#rbac_edit	forum	Forum
-#TO_TRANSLATE#rbac_edit	forumadmin	Project-wide Forum Admin
-#TO_TRANSLATE#rbac_edit	forumpublic	Forum Privileges
-#TO_TRANSLATE#rbac_edit	frs	File Release System
 #TO_TRANSLATE#rbac_edit	intro	Use this page to edit your project's Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.
 #TO_TRANSLATE#rbac_edit	newrole	New Role
 rbac_edit	observer	   Права&nbsp;&nbsp;&nbsp;
 #TO_TRANSLATE#rbac_edit	observerintro	Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.
 rbac_edit	observerusername	Анонимен потребител
 #TO_TRANSLATE#rbac_edit	pgtitle	Edit Role
-#TO_TRANSLATE#rbac_edit	pm	Task Manager
-#TO_TRANSLATE#rbac_edit	pmadmin	Project-wide Task Manager Admin
-#TO_TRANSLATE#rbac_edit	pmpublic	Task Manager Privileges
-#TO_TRANSLATE#rbac_edit	projectadmin	Project-wide Admin
-#TO_TRANSLATE#rbac_edit	projectpublic	Project Privileges
-#TO_TRANSLATE#rbac_edit	projectpublicnote	Notice: if the entire project is set to private, non-members cannot access the rest of the features even if you mark them as available.
 rbac_edit	remove	Премахване
 rbac_edit	role	Роля
 #TO_TRANSLATE#rbac_edit	rolename	Role Name
-#TO_TRANSLATE#rbac_edit	scm	SCM - Source Code Repository
-#TO_TRANSLATE#rbac_edit	scmpublic	SCM Privileges
 #TO_TRANSLATE#rbac_edit	title1	Section
 #TO_TRANSLATE#rbac_edit	title2	Subsection
 #TO_TRANSLATE#rbac_edit	title3	Setting
-rbac_edit	tracker	Тракер
-#TO_TRANSLATE#rbac_edit	trackeradmin	Project-wide Tracker Admin
-#TO_TRANSLATE#rbac_edit	trackerpublic	Tracker Privileges
 rbac_edit	update	Обновяване
 #TO_TRANSLATE#rbac_vals	docman0	Read/Post
 #TO_TRANSLATE#rbac_vals	docman1	Admin
@@ -2014,8 +1607,6 @@ register	i_agree		Съгласен съм
 register	i_disagree	Не съм съгласен
 #TO_TRANSLATE#register	invalid_full_name	Invalid full name
 #TO_TRANSLATE#register	invalid_unix_name	Invalid unix name
-#TO_TRANSLATE#register	license_type	Public domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><br/ ><strong>Your License:</strong><br />
-#TO_TRANSLATE#register	maximum_description	Maximum length for Project Description is 255 chars
 #TO_TRANSLATE#register	more_license_description	Please give more comprehensive licensing description
 #TO_TRANSLATE#register	no_license_chosen	You do not have chosen a license
 #TO_TRANSLATE#register	one_scm	As there exist just one SCM, then this will be selected automatically. <strong>$1</strong> will be selected.
@@ -2029,16 +1620,7 @@ register	project_full_name	<h5>1. Пълно име на проекта</h5><p>�
 register	purpose_and_summarization	<h5>2. Описание на проекта</h5><p>Тук трябва да опишете какво точно представлява Вашият проект (идеи, цели, задачи). Това описание ще бъде предоставено на администраторите на $1 и няма да е достъпно за други потребители.
 #TO_TRANSLATE#register	registration_complete	Registration complete
 #TO_TRANSLATE#register	scm_not_selected	Site has SCM enabled, but no SCM was chosen.
-#TO_TRANSLATE#register	title	New Project Registration
 #TO_TRANSLATE#register	unix_group_name_already_taken	Unix name already taken
-#TO_TRANSLATE#register_complete	section	New Project Registration
-#TO_TRANSLATE#register_complete	title	Registration Complete
-#TO_TRANSLATE#register_projectinfo	section	New Project Registration
-#TO_TRANSLATE#register_projectinfo	title	Project Information
-#TO_TRANSLATE#register_requirements	section	New Project Registration
-#TO_TRANSLATE#register_requirements	title	Services & Requirements
-#TO_TRANSLATE#register_tos	section	New Project Registration
-#TO_TRANSLATE#register_tos	title	Terms Of Service Agreement
 #TO_TRANSLATE#reporting	add	Add
 #TO_TRANSLATE#reporting	administrative	Administrative
 #TO_TRANSLATE#reporting	area	Areas
@@ -2094,7 +1676,6 @@ register	purpose_and_summarization	<h5>2. Описание на проекта</
 #TO_TRANSLATE#reporting_pie	start	Start
 #TO_TRANSLATE#reporting_pie	title	Tool Pie Graphs
 #TO_TRANSLATE#reporting_pie	trackers	Trackers
-#TO_TRANSLATE#reporting_rebuild	iamsure	I'm SURE
 #TO_TRANSLATE#reporting_rebuild	message	  <h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I'm Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>
 #TO_TRANSLATE#reporting_rebuild	pressonlyonce	Press ONLY ONCE
 #TO_TRANSLATE#reporting_rebuild	title	Main Page
@@ -2145,21 +1726,8 @@ register	purpose_and_summarization	<h5>2. Описание на проекта</
 #TO_TRANSLATE#reporting_ut	description	Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>
 #TO_TRANSLATE#reporting_ut	title	User Time Reporting
 #TO_TRANSLATE#scm_index	admin	Administration
-#TO_TRANSLATE#scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
-#TO_TRANSLATE#scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
-scm_index	browseit	Разглеждане на SVN хранилището
-#TO_TRANSLATE#scm_index	browsetree	<hr /><b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>
-#TO_TRANSLATE#scm_index	devcvs	<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>
-#TO_TRANSLATE#scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
-#TO_TRANSLATE#scm_index	developername	developername
-#TO_TRANSLATE#scm_index	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
 #TO_TRANSLATE#scm_index	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
-#TO_TRANSLATE#scm_index	history	Repository History
-#TO_TRANSLATE#scm_index	modulename	modulename
-#TO_TRANSLATE#scm_index	nohistory	This project has no CVS history.
 #TO_TRANSLATE#scm_index	scm_repository	SCM Repository
-#TO_TRANSLATE#scm_index	section	Project: $1
-#TO_TRANSLATE#scm_index	title	SCM
 search	artifact_author	Изпратено от
 search	artifact_date	Дата
 #TO_TRANSLATE#search	artifact_id	#
@@ -2167,9 +1735,7 @@ search	artifact_summary	Резюме на Грешките
 #TO_TRANSLATE#search	docs_description	Description
 #TO_TRANSLATE#search	docs_id	#
 #TO_TRANSLATE#search	docs_title	Title
-search	error_criteria_not_specified	Въведете Горе Думите за Търсене
 search	error_invalid_search	Грешка - Невалидно търсене
-search	error_search_minlength	Търсеното трябва да бъде минимум три символа
 search	forum_author	Автор
 search	forum_date	Дата
 search	forum_thread	Нишка
@@ -2186,7 +1752,6 @@ search	no_matches_found	Няма открити резултати за <em>$1</
 search	people_real_name	Истинско Име
 search	people_user_name	Потребителско Име
 search	previous_results	Предишни Резултати
-search	project_search		Търсене на Проект
 search	search_results		Резултати от търсенето за <em>$1</em>
 search	skill_from		От
 search	skill_keywords		Ключови Думи
@@ -2230,7 +1795,6 @@ sendmessage	message_sent	Съобщението е изпратено
 sendmessage	name	Вашето Име
 sendmessage	send	Изпращане на Съобщение
 sendmessage	subject	Тема
-sendmessage	title	Изпрати Съобщение на $1
 session	cannotinit		Грешка при създаването на сесия
 session	deleted			Регистрацията е изтрита
 session	invalidpasswd		Грешно име или парола
@@ -2256,12 +1820,7 @@ session	suspended		Регистрацията е преустановена
 #TO_TRANSLATE#snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
 #TO_TRANSLATE#snippet_addversion	snippet_version_added_successfully	Snippet Version Added Successfully.
 #TO_TRANSLATE#snippet_addversion	submit	SUBMIT
-#TO_TRANSLATE#snippet_addversion	title	Submit A New Snippet Version
-#TO_TRANSLATE#snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
-#TO_TRANSLATE#snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
-#TO_TRANSLATE#snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
 #TO_TRANSLATE#snippet_addversion	version	Version:
-#TO_TRANSLATE#snippet_browse	creator	Creator
 #TO_TRANSLATE#snippet_browse	error_bad_url	Error, Error - bad url?
 #TO_TRANSLATE#snippet_browse	no_snippets_found	No snippets found
 #TO_TRANSLATE#snippet_browse	packages_of_snippets	Packages Of Snippets
@@ -2274,14 +1833,6 @@ snippet_browse	snippet_title	Име
 snippet_caching	browse_by_category	Преглед по категория
 snippet_caching	browse_by_language	Преглед по език
 snippet_caching	intro	<p>Целта на този архив е да Ви даде възможност да споделяте фрагменти интересен програмен код.</p><p>Публикуваните фрагменти могат да бъдат групирани в пакети, съдържащи различни версии. </p>
-#TO_TRANSLATE#snippet_delete	error_mangled_url	Error, Error - mangled URL?
-#TO_TRANSLATE#snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
-#TO_TRANSLATE#snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
-#TO_TRANSLATE#snippet_delete	item_removed_from	Item Removed From Package
-#TO_TRANSLATE#snippet_delete	package_removed	Package Removed
-#TO_TRANSLATE#snippet_delete	snippet_removed	Snippet Removed
-#TO_TRANSLATE#snippet_delete	that_snippet_doesnt_exist	Error - That snippet doesn't exist in this package.
-#TO_TRANSLATE#snippet_delete	title	Delete Snippets
 #TO_TRANSLATE#snippet_detail	author	Author
 #TO_TRANSLATE#snippet_detail	changes_since_last_version	Changes since last version:
 snippet_detail	date_posted	Дата на изпращане
@@ -2302,8 +1853,6 @@ snippet_detail	submit_a_new_version	Изпращане на нова верси�
 #TO_TRANSLATE#snippet_detail	version_of_this_snippet	Versions Of This Snippet:
 #TO_TRANSLATE#snippet_detail	you_can_submit_a_new	You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.
 #TO_TRANSLATE#snippet_detail	you_can_submit_a_new_version_of_package	You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.
-#TO_TRANSLATE#snippet_download	error	Error
-#TO_TRANSLATE#snippet_download	nothing_in_here	nothing in here
 #TO_TRANSLATE#snippet_index	title	Snippet Library
 #TO_TRANSLATE#snippet_package	add_snippet_to	Add Snippets To Package
 #TO_TRANSLATE#snippet_package	add_snippet_to_package	Add Snippets to Package
@@ -2330,17 +1879,13 @@ snippet_package	version	Версия
 snippet_submit	category	Категория
 snippet_submit	description	Описание
 snippet_submit	error_doing_snippet_insert	Грешка при добавянето на фрагмент
-snippet_submit	error_doing_snippet_version_insert	Грешка при добавянето на нова весия на фрагмента
-snippet_submit	error_go_back_and_fill	Грешка. Има непопълнени полета
 snippet_submit	language	Език
 snippet_submit	license	Лиценз
 #TO_TRANSLATE#snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
 snippet_submit	paste_the_code_here	Програмен код
 snippet_submit	snippet_added_successfull	Фрагмента е добавен успешно.
 snippet_submit	snippet_title	Име
-snippet_submit	snippet_version_added_successfully	Новата версия на фрагмента е добавена успешно
 snippet_submit	submit	Регистриране
-snippet_submit	submit_a_new_snippet	Добавяне на фрагмент
 #TO_TRANSLATE#snippet_submit	suggest_a_category	Suggest a Category
 #TO_TRANSLATE#snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	type	Тип
@@ -2351,20 +1896,16 @@ snippet_utils	author	Автор
 #TO_TRANSLATE#snippet_utils	bbs_systems	BBS Systems
 snippet_utils	browse	Разглеждане на библиотеката
 #TO_TRANSLATE#snippet_utils	calendars	Calendars
-snippet_utils	category	Категория:
 snippet_utils	choose_one	Изберете...
 #TO_TRANSLATE#snippet_utils	class	Class
 snippet_utils	create_a_package	Създаване на пакет
 #TO_TRANSLATE#snippet_utils	database_manipulation	Database Manipulation
-snippet_utils	description	Описание:
 #TO_TRANSLATE#snippet_utils	download_version	Download Version
 #TO_TRANSLATE#snippet_utils	file_management	File Management
 #TO_TRANSLATE#snippet_utils	full_script	Full Script
 #TO_TRANSLATE#snippet_utils	function	Function
 #TO_TRANSLATE#snippet_utils	games	Games
 #TO_TRANSLATE#snippet_utils	html_manipulation	HTML Manipulation
-#TO_TRANSLATE#snippet_utils	language	Language:
-#TO_TRANSLATE#snippet_utils	license	License:
 #TO_TRANSLATE#snippet_utils	math_functions	Math Functions
 #TO_TRANSLATE#snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
 #TO_TRANSLATE#snippet_utils	other	Other
@@ -2377,11 +1918,9 @@ snippet_utils	description	Описание:
 #TO_TRANSLATE#snippet_utils	snippet_in_this_package	Snippets In This Package:
 #TO_TRANSLATE#snippet_utils	snippet_title	Title
 snippet_utils	submit_a_new_snippet	Добавяне на фрагмент
-#TO_TRANSLATE#snippet_utils	type	Type:
 #TO_TRANSLATE#snippet_utils	unix_admin	UNIX Admin
 #TO_TRANSLATE#snippet_utils	voting	Voting
 #TO_TRANSLATE#snippet_utils	website_only	WebSite Only
-#TO_TRANSLATE#softwaremap	title	Trove
 #TO_TRANSLATE#source	file_not_found	File Not Found
 #TO_TRANSLATE#source	file_not_found_text	Cannot find specified file to display.
 #TO_TRANSLATE#source	invalid_argument	Invalid File Argument
@@ -2390,12 +1929,7 @@ snippet_utils	submit_a_new_snippet	Добавяне на фрагмент
 #TO_TRANSLATE#source	missing_file_text	A file must be specified for this page.
 #TO_TRANSLATE#source	show_source	Show source
 #TO_TRANSLATE#source	source_of	Source of $1
-#TO_TRANSLATE#staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-#TO_TRANSLATE#stats	overview_stats	OVERVIEW STATS
-#TO_TRANSLATE#stats	project_stats	PROJECT STATS
-#TO_TRANSLATE#stats	site_graphs	SITE GRAPHS
 #TO_TRANSLATE#stats	title	$1 Site Statistics
-#TO_TRANSLATE#stats_graph	joverview_stats	OVERVIEW STATS
 #TO_TRANSLATE#stats_graph	project_stats	PROJECT STATS
 #TO_TRANSLATE#stats_graph	site_graphs	SITE GRAPHS
 #TO_TRANSLATE#stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
@@ -2409,7 +1943,6 @@ snippet_utils	submit_a_new_snippet	Добавяне на фрагмент
 #TO_TRANSLATE#stats_index	overview_stats	OVERVIEW STATS
 #TO_TRANSLATE#stats_index	project_stats	PROJECT STATS
 #TO_TRANSLATE#stats_index	site_graphs	SITE GRAPHS
-#TO_TRANSLATE#stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
 #TO_TRANSLATE#stats_lastlogins	date	Date
 #TO_TRANSLATE#stats_lastlogins	last_logins	Last Logins
 #TO_TRANSLATE#stats_lastlogins	most_recent_open	Most Recent Opened Sessions
@@ -2447,7 +1980,6 @@ snippet_utils	submit_a_new_snippet	Добавяне на фрагмент
 #TO_TRANSLATE#stats_site_utils	returned_no_category	returned no category name
 #TO_TRANSLATE#stats_site_utils	site	Site
 #TO_TRANSLATE#stats_site_utils	site_views	Site Views
-#TO_TRANSLATE#stats_site_utils	special_project_list	Special Project List
 #TO_TRANSLATE#stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days
 #TO_TRANSLATE#stats_site_utils	statistics_for_the_past_months	Statistics for the past $1 months
 #TO_TRANSLATE#stats_site_utils	subdomain	Subdomain
@@ -2467,7 +1999,6 @@ snippet_utils	submit_a_new_snippet	Добавяне на фрагмент
 survey	for_some_reason	По някаква причина, груповото ID или обзорното ID не отговарят за тази страница
 survey	high	Високо
 survey	low	Ниско
-survey	permission_denied	Достъпът е отказан.
 survey	survey_not_found	Няма намерени.
 #TO_TRANSLATE#survey	survey_privacy	Survey Privacy
 survey	title	Обзор
@@ -2480,7 +2011,6 @@ survey	title	Обзор
 #TO_TRANSLATE#survey_add_question	show_existing_questions	Show Existing Questions.
 #TO_TRANSLATE#survey_add_question	title	Add A Question
 #TO_TRANSLATE#survey_add_survey	add_this_survey	Add This Survey
-#TO_TRANSLATE#survey_add_survey	error_in_insert	Error in Survey Insert
 #TO_TRANSLATE#survey_add_survey	existing_surveys	Existing Surveys
 survey_add_survey	is_active	Флаг за активност
 #TO_TRANSLATE#survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
@@ -2489,44 +2019,14 @@ survey_add_survey	is_active	Флаг за активност
 #TO_TRANSLATE#survey_add_survey	show_existing_question	Show Existing Questions
 #TO_TRANSLATE#survey_add_survey	survey_inserted	Survey Inserted
 #TO_TRANSLATE#survey_add_survey	title	Add A Survey
-#TO_TRANSLATE#survey_add_survey	title_is_required	Survey title is required
 #TO_TRANSLATE#survey_add_survey	yes	Yes
 #TO_TRANSLATE#survey_admin	delete	Delete
 #TO_TRANSLATE#survey_admin	edit	Edit
-#TO_TRANSLATE#survey_admin	section	Survey Tool
-#TO_TRANSLATE#survey_admin	title	Administration
-#TO_TRANSLATE#survey_admin_add_question	section	Survey Tool Administration
-#TO_TRANSLATE#survey_admin_add_question	title	Add Survey Question
-#TO_TRANSLATE#survey_admin_add_survey	section	Survey Tool Administration
-#TO_TRANSLATE#survey_admin_add_survey	title	Add Survey
-#TO_TRANSLATE#survey_admin_edit_question	section	Survey Tool Administration
-#TO_TRANSLATE#survey_admin_edit_question	title	Edit A Survey Question
-#TO_TRANSLATE#survey_admin_edit_survey	section	Survey Tool Administration
-#TO_TRANSLATE#survey_admin_edit_survey	title	Edit Survey
-survey_admin_index	add_question	Добавяне на въпрос
-survey_admin_index	add_survey	Добавяне на проучване
-survey_admin_index	edir_existing_survey	Редактиране на съществуващи проучвания
-survey_admin_index	edit_existing_question	Редактиране на съществуващи въпроси
 survey_admin_index	its_simple_to_create	<p>Създаването на проучване става по следния начин:<ol><li>Създайте въпросите и обясненията кум тях.</li><li>Създайте проучване, като подредите въпросите от вашия списък в желания ред.</li></ol><br /><p>Проучването ще може да се достъпи чрез следния URL: $1, където XX е идентификатора на проучването
 survey_admin_index	permission_denied	Достъпът е отказан
-survey_admin_index	show_results	Резултати от проучването
 survey_admin_index	title	Администриране
 #TO_TRANSLATE#survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
-#TO_TRANSLATE#survey_admin_show_questions	section	Survey Tool Administration
-survey_admin_show_questions	title	Въпроси на проучването
-#TO_TRANSLATE#survey_admin_show_results	section	Survey Tool Administration
-survey_admin_show_results	title	Резултати от проучването
-#TO_TRANSLATE#survey_admin_show_results_aggregate	section	Survey Tool Administration
-survey_admin_show_results_aggregate	title	Резултати от проучването
-#TO_TRANSLATE#survey_admin_show_results_comments	section	Survey Tool Administration
-survey_admin_show_results_comments	title	Коментари към проучването
-#TO_TRANSLATE#survey_admin_show_results_individual	section	Survey Tool Administration
-#TO_TRANSLATE#survey_admin_show_results_individual	title	Show Individual Survey Results
 survey_admin_utils	found	$1 проучвания са намерени
-#TO_TRANSLATE#survey_admin_utils	group_id	Group Id
-#TO_TRANSLATE#survey_admin_utils	survey_id	Survey Id
-#TO_TRANSLATE#survey_admin_utils	survey_questions	Survey questions
-survey_admin_utils	survey_title	Име на проучването
 #TO_TRANSLATE#survey_edit	addable_question	Addable Questions
 #TO_TRANSLATE#survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
 #TO_TRANSLATE#survey_edit	delete_failed	DELETE FAILED
@@ -2570,7 +2070,6 @@ survey_error	no_question_found	Няма въпроси към това проу�
 survey_error	no_survey_found		Няма публикувани проучвания
 #TO_TRANSLATE#survey_error	no_survey_response_found		No Survey Response is found
 survey_error	permission_denied	Нямате право да достъпвате тази страница
-#TO_TRANSLATE#survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
 #TO_TRANSLATE#survey_index	survey_edit	Edit
 #TO_TRANSLATE#survey_index	survey_id	Survey ID
 #TO_TRANSLATE#survey_index	survey_number_questions	Number of Questions
@@ -2581,7 +2080,6 @@ survey_error	permission_denied	Нямате право да достъпвате
 #TO_TRANSLATE#survey_index	survey_result_graph	Result with Graph
 #TO_TRANSLATE#survey_index	survey_title	Survey Title
 #TO_TRANSLATE#survey_index	survey_vote	Vote
-#TO_TRANSLATE#survey_index	this_group_has	This Group Has No Active Surveys
 #TO_TRANSLATE#survey_index	title	Survey
 #TO_TRANSLATE#survey_privacy	survey_privacy	Survey Privacy
 #TO_TRANSLATE#survey_privacy	the_privacy_information	<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
@@ -2609,14 +2107,8 @@ survey_error	permission_denied	Нямате право да достъпвате
 #TO_TRANSLATE#survey_show_questions	permission_denied	Permission Denied
 #TO_TRANSLATE#survey_show_questions	title	Survey Questions
 #TO_TRANSLATE#survey_show_questions	you_may_use_any_of_these	You may use any of these questions on your surveys
-#TO_TRANSLATE#survey_show_result_comment	found	Found
-#TO_TRANSLATE#survey_show_result_comment	permission_denied	Permission Denied
-#TO_TRANSLATE#survey_show_result_comment	question	Question:
-#TO_TRANSLATE#survey_show_result_comment	title	Survey Aggregate Results
-#TO_TRANSLATE#survey_show_results	found	Found
 #TO_TRANSLATE#survey_show_results	permission_denied	Permission Denied
 #TO_TRANSLATE#survey_show_results	title	Survey Results
-#TO_TRANSLATE#survey_show_results	view_aggregate_responses	View Aggregate Responses
 #TO_TRANSLATE#survey_show_results_aggregate	average	Average
 #TO_TRANSLATE#survey_show_results_aggregate	comments	Comments
 #TO_TRANSLATE#survey_show_results_aggregate	error	error
@@ -2632,12 +2124,6 @@ survey_error	permission_denied	Нямате право да достъпвате
 #TO_TRANSLATE#survey_show_results_individual	permission_denied	Permission Denied
 #TO_TRANSLATE#survey_show_results_individual	title	Results
 #TO_TRANSLATE#survey_show_results_individual	yes_no	Yes / No
-#TO_TRANSLATE#survey_survey	section	Survey Tool
-#TO_TRANSLATE#survey_survey	title	Display Survey
-#TO_TRANSLATE#survey_survey_resp	section	Survey Tool
-#TO_TRANSLATE#survey_survey_resp	title	Survey Processing / Response
-survey_utils	add_edit_question	Добавяне/редактиране на въпроси
-survey_utils	add_edit_survey	Добавяне/редактиране на проучване
 survey_utils	add_question	Добавяне на въпроси
 survey_utils	add_survey	Добавяне на проучване
 survey_utils	admin	Администриране
@@ -2649,8 +2135,6 @@ survey_utils	show_results	Резултати
 #TO_TRANSLATE#system	locale	en_US
 #TO_TRANSLATE#system	shortdatefmt	Y-m-d
 #TO_TRANSLATE#system	strftimefmt	%Y %B %e  %H:%M
-#TO_TRANSLATE#themes	section	Account Preferences
-#TO_TRANSLATE#themes	title	View/Change Theme
 #TO_TRANSLATE#top	NA	N/A
 #TO_TRANSLATE#top	about_blurb	We track many project usage statistics on $1, and display here the top ranked projects in several categories.
 #TO_TRANSLATE#top	active_all_time	Most Active All Time
@@ -2670,18 +2154,12 @@ survey_utils	show_results	Резултати
 #TO_TRANSLATE#top_mostactive	percentile	Percentile
 #TO_TRANSLATE#top_mostactive	project_name	Project Name
 #TO_TRANSLATE#top_mostactive	rank	Rank
-#TO_TRANSLATE#top_mostactive	section	Top Projects
-#TO_TRANSLATE#top_mostactive	title	Most Active Projects: $1
 #TO_TRANSLATE#top_mostactive	updated_daily	Updated Daily
-#TO_TRANSLATE#top_toplist	change	Change
 #TO_TRANSLATE#top_toplist	download	Downloads
-#TO_TRANSLATE#top_toplist	last_rank	Last Rank
 #TO_TRANSLATE#top_toplist	pageviews	Pageviews
 #TO_TRANSLATE#top_toplist	posts	Posts
 #TO_TRANSLATE#top_toplist	project_name	Project name
 #TO_TRANSLATE#top_toplist	rank	Rank
-#TO_TRANSLATE#top_toplist	section	Top Projects
-#TO_TRANSLATE#top_toplist	title	Top Project Lists
 #TO_TRANSLATE#top_toplist	top_download	Top Downloads
 #TO_TRANSLATE#top_toplist	top_download_7_days	Top Downloads in the Past 7 Days
 #TO_TRANSLATE#top_toplist	top_forum_post_count	Top Forum Post Counts
@@ -2693,74 +2171,52 @@ survey_utils	show_results	Резултати
 #TO_TRANSLATE#top_topusers	rank	Rank
 #TO_TRANSLATE#top_topusers	rating	Rating
 #TO_TRANSLATE#top_topusers	real_name	Real Name
-#TO_TRANSLATE#top_topusers	title	Highest Ranked Users
 #TO_TRANSLATE#top_topusers	user_name	User Name
 #TO_TRANSLATE#tracker	admin	Admin
 #TO_TRANSLATE#tracker	any	Any
 #TO_TRANSLATE#tracker	assigned_to	Assigned To
 #TO_TRANSLATE#tracker	assignee	Assignee
-#TO_TRANSLATE#tracker	category	Category
-#TO_TRANSLATE#tracker	category_any	Any
-#TO_TRANSLATE#tracker	changed	Changed
 #TO_TRANSLATE#tracker	check_upload	Check to Upload & Attach File
 tracker	choose	Изберете тракер и ще можете да разглеждате, редактирате и добавяте елементи в него.
 #TO_TRANSLATE#tracker	close_date	Close Date
-#TO_TRANSLATE#tracker	comment	comment
-#TO_TRANSLATE#tracker	comment_added	Comment Added
-#TO_TRANSLATE#tracker	comments	comments
 #TO_TRANSLATE#tracker	date	Date
 #TO_TRANSLATE#tracker	detailed_description	Detailed description
 #TO_TRANSLATE#tracker	file_delete	File Delete:
 #TO_TRANSLATE#tracker	file_delete_successful	File Delete: Successful
-#TO_TRANSLATE#tracker	file_delete_upload	File Upload
 #TO_TRANSLATE#tracker	file_description	File description
 #TO_TRANSLATE#tracker	file_upload_successful	File Upload: Successful
 #TO_TRANSLATE#tracker	followups	Followup
-#TO_TRANSLATE#tracker	group	Group
-#TO_TRANSLATE#tracker	group_any	Any
 #TO_TRANSLATE#tracker	id	ID
 #TO_TRANSLATE#tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here
 #TO_TRANSLATE#tracker	item_created	Item Successfully Created
-#TO_TRANSLATE#tracker	item_group	Group
 #TO_TRANSLATE#tracker	no_trackers	No Accessible Trackers Found
 #TO_TRANSLATE#tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project will have to set up data types using the $1 admin page $2</FONT></strong>
 #TO_TRANSLATE#tracker	open_date	Open Date
-tracker	pagetitle	Тракер
 #TO_TRANSLATE#tracker	please_login	Please $1 login $2
 #TO_TRANSLATE#tracker	priority	Priority
 tracker	reporting	Отчет
-#TO_TRANSLATE#tracker	resolution	Resolution
 #TO_TRANSLATE#tracker	security_note	DO NOT enter passwords or confidential information in your message!
 #TO_TRANSLATE#tracker	status	State
 #TO_TRANSLATE#tracker	status_any	Any
 #TO_TRANSLATE#tracker	submitted_by	Submitted By
 #TO_TRANSLATE#tracker	submitter	Submitter
 #TO_TRANSLATE#tracker	summary	Summary
-tracker	title	Тракери
 #TO_TRANSLATE#tracker	tracker_item	Tracker Item
 #TO_TRANSLATE#tracker	unassigned	Unassigned
 #TO_TRANSLATE#tracker	updated_successful	Updated Successfully
 #TO_TRANSLATE#tracker_add	for_project	For project
 #TO_TRANSLATE#tracker_add	submit		Submit
-#TO_TRANSLATE#tracker_add	title	Submit Tracker Item
 #TO_TRANSLATE#tracker_admin	add_canned_responses	Add/Update Canned Responses
 #TO_TRANSLATE#tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
 #TO_TRANSLATE#tracker_admin	add_categories	Add/Update Categories
 #TO_TRANSLATE#tracker_admin	add_categories_info	Add categories like, 'mail module','gant chart module','cvs', etc
 #TO_TRANSLATE#tracker_admin	add_group_infos	Add groups like, 'v1.2','unsupported','unverified', etc
 #TO_TRANSLATE#tracker_admin	add_groups	Add/Update Groups
-#TO_TRANSLATE#tracker_admin	add_permissions	Add/Update Users &amp; Permissions
-#TO_TRANSLATE#tracker_admin	add_permissions_info	Add/remove users to/from this tracker
-#TO_TRANSLATE#tracker_admin	admin	Admin
-#TO_TRANSLATE#tracker_admin	auto_assign_to	Auto-Assign To
 #TO_TRANSLATE#tracker_admin	build_selection_box	Add/Update Pop-Up Boxes
 #TO_TRANSLATE#tracker_admin	build_selection_box_info	Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types
 #TO_TRANSLATE#tracker_admin	canned_response_inserted	Canned Response Inserted
 #TO_TRANSLATE#tracker_admin	canned_response_updated	Canned Response Updated
-#TO_TRANSLATE#tracker_admin	category_add_warning	Once you add a category, it cannot be deleted
-#TO_TRANSLATE#tracker_admin	category_inserted	Category Inserted
 #TO_TRANSLATE#tracker_admin	category_name	Category Name
-#TO_TRANSLATE#tracker_admin	category_updated	Category Updated
 #TO_TRANSLATE#tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
 #TO_TRANSLATE#tracker_admin	delete	Delete.
 #TO_TRANSLATE#tracker_admin	delete_extrafieldwarning	You are about to permanently and irretrievably delete this extra field and all its contents!
@@ -2768,13 +2224,10 @@ tracker	title	Тракери
 #TO_TRANSLATE#tracker_admin	deleted	Successfully Deleted.
 #TO_TRANSLATE#tracker_admin	error_inserting	Error inserting
 #TO_TRANSLATE#tracker_admin	error_updating	Error updating
-#TO_TRANSLATE#tracker_admin	group_inserted	Group Inserted
 #TO_TRANSLATE#tracker_admin	group_name	New group Name
-#TO_TRANSLATE#tracker_admin	group_updated	Group Updated
 #TO_TRANSLATE#tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
 #TO_TRANSLATE#tracker_admin	permanently_delete_info	Permanently delete this tracker.
 #TO_TRANSLATE#tracker_admin	really_sure	I'm Really Sure.
-tracker_admin	section	Тракер
 #TO_TRANSLATE#tracker_admin	sure	I'm Sure.
 #TO_TRANSLATE#tracker_admin	title	Administration
 #TO_TRANSLATE#tracker_admin	tracker_id	ID
@@ -2782,33 +2235,12 @@ tracker_admin	section	Тракер
 #TO_TRANSLATE#tracker_admin	tracker_updated	Tracker Updated
 #TO_TRANSLATE#tracker_admin	update_preferences	Update preferences
 #TO_TRANSLATE#tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
-#TO_TRANSLATE#tracker_admin	users_added	User(s) Added
-#TO_TRANSLATE#tracker_admin	users_deleted	User(s) Deleted
-#TO_TRANSLATE#tracker_admin	users_updated	User(s) Updated
 #TO_TRANSLATE#tracker_admin_add_canned	canned_response_body	Message Body
 #TO_TRANSLATE#tracker_admin_add_canned	canned_response_info	Creating useful generic messages can save you a lot of time when handling common artifact requests.
 #TO_TRANSLATE#tracker_admin_add_canned	canned_response_title	Title
 #TO_TRANSLATE#tracker_admin_add_canned	existing_responses	Existing Responses
 #TO_TRANSLATE#tracker_admin_add_canned	no_responses	No responses set up in this group
 #TO_TRANSLATE#tracker_admin_add_canned	title	Add/Change Canned Responses to $1
-#TO_TRANSLATE#tracker_admin_add_cat	no_categories	No categories defined
-#TO_TRANSLATE#tracker_admin_add_cat	title	Add Categories to $1
-#TO_TRANSLATE#tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
-#TO_TRANSLATE#tracker_admin_add_group	no_groups_defined	No groups defined
-#TO_TRANSLATE#tracker_admin_add_group	title	Add/Change Groups to $1
-#TO_TRANSLATE#tracker_admin_add_users	add_all_users	Add All Users
-#TO_TRANSLATE#tracker_admin_add_users	add_user_info	<h3>Add These Users:</h3><p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
-#TO_TRANSLATE#tracker_admin_add_users	add_users	Add Users
-#TO_TRANSLATE#tracker_admin_add_users	admin_only	Admin Only
-#TO_TRANSLATE#tracker_admin_add_users	category_permission	Permission
-#TO_TRANSLATE#tracker_admin_add_users	delete	Delete
-#TO_TRANSLATE#tracker_admin_add_users	developers_info	<p>Each tracker that you define has separate user lists and user permissions.</p><p>Simply add developers to this tracker, then update their permissions.</p><p><dl><dt><strong>Technicians</strong></dt><dd>can be assigned items</dd><dt><strong>Admins</strong></dt><dd>can make changes to items</dd></dl></p>
-#TO_TRANSLATE#tracker_admin_add_users	no_developers	No Developers Found
-#TO_TRANSLATE#tracker_admin_add_users	tech_admin	Tech & Admin
-#TO_TRANSLATE#tracker_admin_add_users	technician	Technician
-#TO_TRANSLATE#tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
-#TO_TRANSLATE#tracker_admin_add_users	update_permissions	Update Developer Permissions
-#TO_TRANSLATE#tracker_admin_add_users	user_name	User Name
 #TO_TRANSLATE#tracker_admin_build_boxes	box_add_choices	add choices
 #TO_TRANSLATE#tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the extra field name because other things are dependent upon it. When you change the extra field name, all related items will be changed to the new name
 #TO_TRANSLATE#tracker_admin_build_boxes	box_name	Extra Field Name
@@ -2826,7 +2258,6 @@ tracker_admin	section	Тракер
 #TO_TRANSLATE#tracker_admin_build_boxes	box_type_textarea	Text Area
 #TO_TRANSLATE#tracker_admin_build_boxes	box_update_title	Modify an extra field In: $1
 #TO_TRANSLATE#tracker_admin_build_boxes	box_warning	Once you add a new extra field, it cannot be deleted
-#TO_TRANSLATE#tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the element name because other things are dependent upon it. When you change the element name, all related items will be changed to the new name
 #TO_TRANSLATE#tracker_admin_build_boxes	choice_inserted	Element inserted
 #TO_TRANSLATE#tracker_admin_build_boxes	choice_updated		Element updated
 #TO_TRANSLATE#tracker_admin_build_boxes	choice_warning	Once you add a new element, it cannot be deleted
@@ -2845,31 +2276,20 @@ tracker_admin	section	Тракер
 #TO_TRANSLATE#tracker_admin_build_boxes	opt_update_title	Modify an extra field element In: $1
 #TO_TRANSLATE#tracker_admin_build_boxes	required_box_name	a field name is required
 #TO_TRANSLATE#tracker_admin_build_boxes	required_choice_name	an element name is required
-#TO_TRANSLATE#tracker_admin_build_boxes	status_any	Any
 #TO_TRANSLATE#tracker_admin_build_boxes	title	 Add/Update Extra Fields
-#TO_TRANSLATE#tracker_admin_build_boxes	tracker_box_id	ID
-#TO_TRANSLATE#tracker_admin_build_boxes	tracker_box_option_add	Add/Update
 #TO_TRANSLATE#tracker_admin_build_boxes	tracker_box_option_title	Elements Defined
 #TO_TRANSLATE#tracker_admin_build_boxes	tracker_box_title	Extra Fields Defined
-#TO_TRANSLATE#tracker_admin_build_boxes	tracker_choice_id	ID
-#TO_TRANSLATE#tracker_admin_choose	title	Tracker Admin
 #TO_TRANSLATE#tracker_admin_copy	choices_title	Copy Choices from Extra Field $1
 #TO_TRANSLATE#tracker_admin_copy	copy_choices	Click here to copy these elements to other trackers
 #TO_TRANSLATE#tracker_admin_copy	from_box	Copy From
 #TO_TRANSLATE#tracker_admin_copy	into_box	Into Trackers and Extra Fields
-#TO_TRANSLATE#tracker_admin_copy_cat	title	Copy Categories from $1
 #TO_TRANSLATE#tracker_admin_update_canned	title	Modify Canned Responses In: $1
-#TO_TRANSLATE#tracker_admin_update_cat	auto_assign_to	Auto-Assign To
-#TO_TRANSLATE#tracker_admin_update_cat	category_change_warning	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name
-#TO_TRANSLATE#tracker_admin_update_cat	category_name	Category Name
 #TO_TRANSLATE#tracker_admin_update_cat	title	Modify Category In: $1
 #TO_TRANSLATE#tracker_admin_update_group	title	Modify A Group In: $1
-#TO_TRANSLATE#tracker_admin_update_group	warning	It is not recommended that you change the artifact group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.
 #TO_TRANSLATE#tracker_admin_update_type	allow_anonymous	Allow non-logged-in postings
 #TO_TRANSLATE#tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
 #TO_TRANSLATE#tracker_admin_update_type	days_overdue	Days till considered overdue
 tracker_admin_update_type	description	Описание
-#TO_TRANSLATE#tracker_admin_update_type	display_resolution	Display the "Resolution" box
 #TO_TRANSLATE#tracker_admin_update_type	email_all_changes	Send email on all changes
 #TO_TRANSLATE#tracker_admin_update_type	name	<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)
 #TO_TRANSLATE#tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
@@ -2877,14 +2297,12 @@ tracker_admin_update_type	description	Описание
 #TO_TRANSLATE#tracker_admin_update_type	send_submissions	Send email on new submission to address
 #TO_TRANSLATE#tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
 #TO_TRANSLATE#tracker_admin_update_type	title	Update $1
-#TO_TRANSLATE#tracker_admin_update_users	title	Add/Update Tracker User Permissions
 #TO_TRANSLATE#tracker_artifact	are_you_sure_delete	Are you sure you want to delete this artifact?
 #TO_TRANSLATE#tracker_artifact	confirm_delete	Yes, I want to delete this artifact
 #TO_TRANSLATE#tracker_artifact	delete_failed	Artifact Delete Failed
 #TO_TRANSLATE#tracker_artifact	delete_failed_confirm	Confirmation failed. Artifact not deleted
 #TO_TRANSLATE#tracker_artifact	delete_text	Delete this item
 #TO_TRANSLATE#tracker_artifact	deleted_successfully	Artifact Deleted Successfully
-#TO_TRANSLATE#tracker_artifact	deleted_title	Delete an Artifact
 #TO_TRANSLATE#tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
 #TO_TRANSLATE#tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
 #TO_TRANSLATE#tracker_artifact	error_body_required	Artifact: Message Body Is Required
@@ -2898,7 +2316,6 @@ tracker_admin_update_type	description	Описание
 #TO_TRANSLATE#tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
 #TO_TRANSLATE#tracker_artifact	private_error	Artifact: Only group members can view private artifact types
 #TO_TRANSLATE#tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are required
-#TO_TRANSLATE#tracker_artifactgroup	required_field	ArtifactGroup: name is required
 #TO_TRANSLATE#tracker_artifacthtml	by	By
 #TO_TRANSLATE#tracker_artifacthtml	date	Date
 #TO_TRANSLATE#tracker_artifacthtml	field	Field
@@ -2907,11 +2324,8 @@ tracker_admin_update_type	description	Описание
 #TO_TRANSLATE#tracker_artifacthtml	no_followups	No Followups Have Been Posted
 #TO_TRANSLATE#tracker_artifacthtml	old_value	Old Value
 #TO_TRANSLATE#tracker_artifacthtml	sender	Sender
-#TO_TRANSLATE#tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
 tracker_artifacttype	admin	Администриране
-#TO_TRANSLATE#tracker_artifacttype	admin_functions	Admin Functions
 #TO_TRANSLATE#tracker_artifacttype	browse	Browse
-#TO_TRANSLATE#tracker_artifacttype	edit_options	Edit/Update Options in
 #TO_TRANSLATE#tracker_artifacttype	invalid_emails	E-mail address(es) appeared invalid
 #TO_TRANSLATE#tracker_artifacttype	nobody	Nobody
 #TO_TRANSLATE#tracker_artifacttype	none	None
@@ -2921,7 +2335,6 @@ tracker_artifacttype	reporting	Отчитане
 #TO_TRANSLATE#tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
 #TO_TRANSLATE#tracker_browse	ascending	Ascending
 #TO_TRANSLATE#tracker_browse	canned_response	Canned Response
-#TO_TRANSLATE#tracker_browse	change_any	Any
 #TO_TRANSLATE#tracker_browse	check_all	Check &nbsp;all
 #TO_TRANSLATE#tracker_browse	clear_all	Clear &nbsp;all
 #TO_TRANSLATE#tracker_browse	day7	Last 7days
@@ -2934,10 +2347,7 @@ tracker_artifacttype	reporting	Отчитане
 #TO_TRANSLATE#tracker_browse	no_items	No items found
 #TO_TRANSLATE#tracker_browse	old_requests	* Denotes requests > $1 Days Old
 #TO_TRANSLATE#tracker_browse	previous	Previous 50
-#TO_TRANSLATE#tracker_browse	request_id	Request ID
-#TO_TRANSLATE#tracker_browse	resolution	Resolution
 #TO_TRANSLATE#tracker_browse	sort_by	Order by
-#TO_TRANSLATE#tracker_browse	title	Browse $1
 #TO_TRANSLATE#tracker_browse	week2	Last 2weeks
 #TO_TRANSLATE#tracker_detail	add_comment	Add A Comment
 #TO_TRANSLATE#tracker_detail	attached_files	Attached Files
@@ -2963,27 +2373,7 @@ tracker_mod	description	Описание
 #TO_TRANSLATE#tracker_mod	no_files	No Files Currently Attached
 #TO_TRANSLATE#tracker_mod	title	Modify
 #TO_TRANSLATE#tracker_monitor	monitor	Monitor
-#TO_TRANSLATE#tracker_monitor	monitoring_activated	Now Monitoring
-#TO_TRANSLATE#tracker_monitor	monitoring_deactivated	Monitoring Deactivated
 #TO_TRANSLATE#tracker_monitor	monitorstop	Stop Monitor
-#TO_TRANSLATE#tracker_reporting	aging_report	Aging Report
-#TO_TRANSLATE#tracker_reporting	all_by_group	All Items By Artifact Group
-#TO_TRANSLATE#tracker_reporting	all_by_resolution	All Items By Resolution
-#TO_TRANSLATE#tracker_reporting	all_by_technician	All Items By Category
-#TO_TRANSLATE#tracker_reporting	all_items_by_technician	All Items By Assignee
-#TO_TRANSLATE#tracker_reporting	artifact_type	Artifact Type:
-#TO_TRANSLATE#tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
-#TO_TRANSLATE#tracker_reporting	dist_by_category	Distribution by Category
-#TO_TRANSLATE#tracker_reporting	dist_by_group	Distribution by Group
-#TO_TRANSLATE#tracker_reporting	dist_by_resolution	Distribution by Resolution
-#TO_TRANSLATE#tracker_reporting	dist_by_technician	Distribution by Assignee
-#TO_TRANSLATE#tracker_reporting	items_open	Number of Items Still Open
-#TO_TRANSLATE#tracker_reporting	items_submitted	Number of Items Submitted
-#TO_TRANSLATE#tracker_reporting	open_by_group	Open By Artifact Group
-#TO_TRANSLATE#tracker_reporting	open_items_by_category	Open Items By Category
-#TO_TRANSLATE#tracker_reporting	open_items_by_resolution	Open Items By Resolution
-#TO_TRANSLATE#tracker_reporting	open_items_by_technician	Open Items By Assignee
-#TO_TRANSLATE#tracker_reporting	title	Artifact Reporting System
 #TO_TRANSLATE#tracker_taskmgr	add_relation_to_task	Add Relation To Existing Task.
 #TO_TRANSLATE#tracker_taskmgr	add_relationship	Add Relationship To Selected Task
 #TO_TRANSLATE#tracker_taskmgr	build_relationships	Build Relationship Between Tracker Items and Task Manager
@@ -2991,8 +2381,6 @@ tracker_mod	description	Описание
 #TO_TRANSLATE#tracker_taskmgr	task	Task
 #TO_TRANSLATE#tracker_taskmgr	task_manager_project	Task Manager Project
 #TO_TRANSLATE#tracker_taskmgr	tracker_item	Tracker Item
-#TO_TRANSLATE#tracker_utils	monitor		Monitor
-#TO_TRANSLATE#tracker_utils	stop_monitoring		Stop Monitoring
 trove	not_categorized	Този проект още не е категоризиран в
 #TO_TRANSLATE#trove	title	Trove Software Map
 #TO_TRANSLATE#trove_list	browse_by	Browse By
@@ -3004,7 +2392,6 @@ trove	not_categorized	Този проект още не е категоризи�
 #TO_TRANSLATE#trove_list	projects	$1 projects
 #TO_TRANSLATE#trove_list	remove_filter	Remove This Filter
 #TO_TRANSLATE#trove_list	title	Software Map
-user_home	contact	Контакт
 user_home	diary_notes	Дневник и Бележки
 user_home	diary_notes_entries	Брой записи в дневника:
 user_home	diary_notes_monitor	Активиране на следенето на този дневник за промени
@@ -3013,26 +2400,19 @@ user_home	email	Ел. пощенски адрес
 #TO_TRANSLATE#user_home	jabber_address	Jabber Address
 user_home	login_name	Входно Име
 user_home	member_of	Този потребител участвува в следните проекти:
-user_home	message		Съобщение
-user_home	name		Вашето Име
 user_home	no_projects	Този разработчик не е член на никой проект.
 user_home	peer_rating	Оценка на уменията на потребителя
 user_home	peer_rating_disabled	Потребителят избра да не участва в***
 user_home	personal_information	Лична Информация
 user_home	project_info	Проекти на потребителя
 user_home	real_name	Истинско Име
-user_home	send		Изпрати Съобщение
-user_home	send_a_message	Изпращане на съобщение до
-user_home	send_message_if_logged	Можете да изпращате съобщение ако сте влезли
 user_home	site_member_since	Член на сайта от
 user_home	skills_profile	Профил на Уменията
-user_home	subject	Тема
 user_home	title	Профил на Разработчик
 user_home	user_id	Потребителско ID
 #TO_TRANSLATE#users	no_user_name	No User Name Provided
 #TO_TRANSLATE#users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
 users	peerinfo1	<P>Ако познавате този потребител, можете да го оцените съгласно критериите по-долу. Вашата оценка ще бъде видима от всеки.  <P> Системата за оценяване на $1 е базирана на идеите заложени в <A HREF="http://www.advogato.com/">Advogato</A>.</P>
 users	peerinfo2	<P>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</P><UL><LI>The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.</LI><LI>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</LI><LI>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.</UL><P><I>Ако желаете да не участвате в системата за взаимно оценяване на уменията, Вашите оценки за другите потребители ще бъдат необратимо изтрити и панела 'Peer Rating' няма да се визуализира повече на личната Ви страница. Деактивирането можете да извършите от <a href="/account/">страницата за управление на Вашия акаунт</a>.</I></P>
-#TO_TRANSLATE#users	title	User Summary
 #TO_TRANSLATE#users	user_not_exist_text	Invalid User
 #TO_TRANSLATE#users	user_not_exist_title	That user does not exist.

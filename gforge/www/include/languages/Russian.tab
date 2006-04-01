@@ -28,9 +28,7 @@ account_login	passwd	Пароль:
 account_login	resend_pending	[Отправить письмо ожидающему пользователю снова]
 account_login	resend_pending_directions	Укажите имя пользователя и нажмите 'Отправить' для повторной отправки письма
 account_verify	loginname	Регистрационное имя:
-admin_add_language	submit	Отправить
 admin_approve_pending	add_this_custom_response	Сделать шаблон из этого ответа
-admin_approve_pending	admin_approve_pending	Сделать активным
 admin_approve_pending	approve	Утвердить
 admin_approve_pending	approve_all_on_this_page	Утвердить все на этой странице
 admin_approve_pending	approving_group		Утверждаемая группа:
@@ -60,13 +58,8 @@ common	logout	Выход
 common	myaccount	Моя учетная запись
 common	newaccount	Регистрация
 common_utils	priority_colors	Цвета приоритета
-conf	content_encoding	UTF-8
-conf	language_code	ru
-conf	language_id	17
 conf	mail_charset	UTF-8
 docman	admin	Управление
-docman	bytes		байт
-docman	description	Описание
 docman	editor	Создание и редактирование файла напрямую
 docman	error_invalid_file_attack	Ошибка загрузки файла. Попытка $1
 docman	error_no_docs	В проекте нет документов для просмотра
@@ -88,8 +81,6 @@ docman_admin_deletedoc	delete	Удалить
 docman_admin_deletedoc	delete_warning	Сейчас вы удалите этот документ безвозвратно.
 docman_admin_deletedoc	really_sure	Я полностью уверен.
 docman_admin_deletedoc	sure	Я уверен.
-docman_admin_docedit	section	Подсистема управления документами
-docman_admin_docedit	title	Редактировать документ
 docman_admin_editdocs	delete_doc	Удалить документ полностью
 docman_admin_editdocs	doc_contents	Содержание документа
 docman_admin_editdocs	edit	Редактирование содержимого файла.
@@ -109,8 +100,6 @@ docman_admin_editgroups	new_group_name	Новое имя группы
 docman_admin_editgroups	new_group_parent	Входит в
 docman_admin_editgroups	section	Управление подсистемой работы с документами
 docman_admin_editgroups	title	Редактировать группы
-docman_admin_groupedit	section	Управление подсистемой работы с документами
-docman_admin_groupedit	title	Переименовать группу
 docman_common	error_min_desc_length	Описание документа не может содержать менее 10 символов
 docman_common	error_min_title_length	Заголовок не может содержать менее 5 символов
 docman_common	no_docs	Нет документов
@@ -139,7 +128,6 @@ docman_new	name	Задайте имя файла :
 docman_new	no_valid_group	Не указана группа документа
 docman_new	section	Проект: $1
 docman_new	selectsubmit	Выберите вариант
-docman_new	state	Состояние
 docman_new	submit	Отправить
 docman_new	submitted_successfully	Документ успешно загружен в систему
 docman_new	title	Документы: Добавить новую документацию
@@ -147,9 +135,6 @@ docman_new	upload_file	Закачать файл
 docman_new	upload_url	Или задать внешний адрес (URL) файла
 forum	forum	Форум
 forum	forums_for	Форум для $1
-forum	html	HTML тэги будут отображаться как текст
-forum	section	Проект: $1
-forum	title	Форумы
 forum_admin	title	Форумы: Управление
 forum_admin_addforum	forum_description	Описание
 forum_forum	author	Автор
@@ -164,7 +149,6 @@ forum_forum	posts	Сообщения
 forum_forum	postsuccess	Сообщение успешно добавлено
 forum_forum	previous_messages	Предыдущие сообщения
 forum_forum	replies	Ответы
-forum_forum	section	Проект: $1
 forum_forum	show	Показать
 forum_forum	thread	Дискуссия
 forum_forum	threads	Дискуссии
@@ -176,7 +160,6 @@ forum_message	message	Сообщение
 forum_message	message_not_found_title	Сообщение не найдено
 forum_message	post_followup	Ответить на это сообщение
 forum_message	receive_followups	Получать ответы по почте
-forum_message	section	Форумы
 forum_message	subject	Тема
 forum_message	thread	Начать дискуссию
 forum_message	thread_view	Дерево дискуссии
@@ -187,18 +170,13 @@ forum_utils	discussionforum	Дискуссионные форумы:
 forum_utils	htmltag	HTML теги будут отображаться как текст
 forum_utils	message	Сообщение:
 forum_utils	monitor	Взять на контроль
-forum_utils	mustinclude	Нет темы и текста сообщения
-forum_utils	news	Новости
 forum_utils	postcomment	Отправить сообщение
-forum_utils	posted	Сообщение отправлено
-forum_utils	postedby	Автор
 forum_utils	project	Проект
 forum_utils	reply	Ответить
 forum_utils	saveplace	Запомнить позицию
 forum_utils	stopmonitor	Снять с контроля
 forum_utils	subject	Тема:
 forum_utils	summary	Резюме
-forum_utils	thread	Дискуссия
 frs	file_download	Скачать
 frs	file_monitor	Следить
 frs	file_notes	Информация
@@ -214,18 +192,14 @@ general	submit_edit	Сохранить изменения
 group	activity	Процент активности:&nbsp;
 group	activitystat	Просмотр активности <a href="/project/stats/?group_id=$1">статистики</a> активности по проекту.
 group	developer_info	Участники проекта
-group	developers	Разработчики
-group	long_bugs	Менеджер ошибок
 group	long_docman	Менеджер документации
 group	long_forum	Общедоступные форумы
 group	long_ftp	Анонимный FTP проекта
 group	long_homepage	Домашняя страница проекта
 group	long_mail	Списки рассылки
 group	long_news	Новости
-group	long_patch	Менеджер патчей (исправлений)
 group	long_pm	Задачи проекта
 group	long_scm	SCM репозиторий
-group	long_support	Менеджер тех. поддержки
 group	long_survey	Опросы
 group	long_tracker	Унив.Трекер
 group	nodescription	Проект неимеет описания.
@@ -241,7 +215,6 @@ group	short_files	Файлы
 group	short_forum	Форумы
 group	short_homepage	Дом.страница
 group	short_mail	Сп.рассылки
-group	short_main	Main
 group	short_memberlist	Разработчики
 group	short_news	Новости
 group	short_patch	Патчи
@@ -254,13 +227,11 @@ group	short_tracker	Унив.Трекер
 help	title	Добро пожаловать в $1
 help_trove_cat	description	Описание
 home	about_blurb	<P>$1 - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org/">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.</P><P><B>Использование сервисов и участие в проектах</B></P><P>Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на $1, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям.</P><P><B>Создание собственного проекта</B></P><P><A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>.</P><P>Спасибо за выбор $1... И мы желаем вам приятного и полезного времяпровождения!</P>
-home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
 home	gforge_statistics	Статистика по проектам
 home	highest_ranked_users	Пользователи с высоким рейтингом
 home	hosted_projects	Зарегистрированные проекты
 home	most_active_this_week	Наиболее активные за эту неделю
 home	no_stats_available	Нет доступной статистики
-home	none_found	Ничего не найдено
 home	recently_registered	Недавно зарегистрированные проекты
 home	registered_users	Зарегистрированные пользователи
 home	top_project_downloads	Наиболее загружаемые проекты
@@ -268,94 +239,61 @@ index	welcome	Добро пожаловать
 mail	archives	$1 Архивы
 mail	choose_a_list	<p>Выберите список для просмотра, поиска и добавления сообщений.</p>
 mail	provided_by	<p>Работу списков рассылки обеспечивает специальная версия <a href="http://www.list.org/">GNU Mailman</a>. Благодарим проект Mailman и команду <a href="http://www.python.org/">Python</a> за замечательную работу.</p>
-mail	section	Проект: $1
-mail	title	Списки рассылки
 mail	unable_to_get_lists	Не удается получить информацию о списках
 mail_admin	add_list	Добавить списки рассылки
 mail_admin	admin_in_mailman	Управление через Mailman
 mail_admin	error_getting_list	Ошибка доступа к списку
-mail_admin	section	Mailing Списки рассылки Lists
-mail_admin	title	Управление списком рассылки
 mail_admin	update_list	Обновить
 mail_admin_addlist	form_description	Описание:
 mail_admin_addlist	form_ispublic	Публичный?
 mail_admin_updatelist	form_description	Описание:
 mail_common	creation_mail_subject	$1. Новый список рассылки
 mail_common	description	Описание
-mail_common	error_invalid_group_list_id	Неверный идентификатор (id) списка
 mail_common	error_invalid_name	Неверное имя списка
 mail_common	error_list_already_exists	Список уже существует
 mail_common	list_not_activated	Еще не активирован
 mail_common	mailing_list	Список рассылки
-mail_common	mailing_lists	Списки рассылки
 mail_common	prefs	Регистрация
 mail_utils	admin	Управление
 mail_utils	turned_off	В проекте списки рассылки не используются.
-menu	about_gforge	О GForge
 menu	account_maintenance	Мои настройки
 menu	admin	Управление
 menu	bookmark_page	Пометить тек. страницу закладкой
-menu	change_my_theme	Изменить web-тему
 menu	code_snippet	Библиотека
-menu	code_snippet_library	Бибиотека фрагментов кода
-menu	compile_farm	Фабрика компиляции
 menu	diary_notes	Ежедневник
-menu	discussion_forums	Дискуссионные форумы
-menu	documentation	Документация сайта
 menu	home	Главная
 menu	login	Авторизация
-menu	login_ssl	Авторизация через SSL
 menu	logout	Выход
 menu	my_account	Моя учетная запись
 menu	my_personal_page	Моя персональная страница
 menu	mypage	Моя страница
 menu	new_project	Зарегистрировать проект
-menu	new_releases	Последние релизы
 menu	new_user	Новый пользователь
-menu	other_site_mirrors	Зеркала других сайтов
-menu	project_admin	Управление проектом
 menu	project_help_wanted	Вакансии
-menu	project_summary	Резюме проекта
 menu	projectree	Каталог проектов
 menu	register_project	Регистрация проекта
 menu	reporting	Отчеты
 menu	search	Поиск
-menu	site_status	Статус Сайта
-menu	software_map	Карта проектов
 menu	submit	Отправить
-menu	top_projects	Топ-проекты
-my	about_blurb	Ваша персональная страница содержит списки ошибок и задач, за которые вы отвечаете, а также группы, членами которых вы являетесь.
-my	assigneditems	Адресованное мне
 my	bookmarks	Мои закладки
 my	monitoredfile	Файлы на контроле
 my	monitoredforum	Форумы на контроле
 my	no_bookmarks	Нет сохраненных закладок.
 my	no_monitored_filemodules	Нет файлов на контроле.
-my	no_monitored_filemodules_details	<p>Если есть файлы на контроле, то вам будут приходить уведомления о выходе новых версий файлов со ссылками на сервер, с которого их можно загрузить.</p><p>Для постановки файлов на контроль на странице &quot;Резюме&quot; следует отметить чекбокс в разделе с файлами.</p>
 my	no_monitored_forums	Нет форумов на контроле.
-my	no_monitored_forums_details	<p>По контролируемым форумам новые сообщения, оставленные на форуме, будут вам приходить по почте со ссылкой на сообщение в форуме.</p><p>Для постановки форума на контроль необходимо щелкнуть по &quot;Мониторить форум&quot; в требуемом форуме.</p>
 my	no_open_tasks	Для вас нет задач.
 my	no_projects	Вы не являетесь участником ни одного из активных проектов
 my	no_tracker_items_assigned	Для вас ничего нет.
 my	no_tracker_items_submitted	Вы ничего не создавали.
-my	pending_projects	Ожидающие проекты
-my	pending_projects_1	Появился проект, треюующий просмотра.
-my	pending_projects_2	Появилось $1 проектов, требующих просмотра.
-my	pending_projects_3	Перейти
 my	projects	Мои проекты
-my	submitteditems	Созданное мной
-my	survey	Опросы
-my	tasks	Задачи для меня
 news	choose	<p>Выбрав новость, вы сможете просматривать, добавлять, искать коментарии.</p>
 news	noitems	Нет элементов для просмотра
 news	nonews	Новостей нет
 news	nonewsfor	У проекта '$1' нет новостей
 news	olderheadlines	Предшествующие новости
-news	section	Проект: $1
 news	title	Новости
 news_utils	nonews	Новости не найдены
 news_utils	submit	Добавить новость
-pm	any	Любой(ая)
 pm	cat_any	Любая(ой)
 pm	details	Описание задачи
 pm	end_date	Дата завершения
@@ -374,7 +312,6 @@ project_admin	mail_admin	Управление почтовой подсисте�
 project_admin	news_admin	Управление новостями
 project_admin	project_information	Дополнительная информация по проекту
 project_admin	scm_admin	SCM Управление
-project_admin	section	Проект: $1
 project_admin	shell_server	SSH Сервер группы:&nbsp;
 project_admin	shell_server_group_directory	Каталог группы на сервере:&nbsp;
 project_admin	short_description	Краткое описание:&nbsp;
@@ -448,7 +385,6 @@ project_admin_qrs	ftpupload_new_file	Есть возможность указа�
 project_admin_qrs	maximum_file_size	Максимально допустимый размер закачиваемого файла:
 project_admin_qrs	must_choose_one	Необходимо выбрать вариант
 project_admin_qrs	no_file_types_available	Типы файлов не заданы
-project_admin_qrs	notify_list	Список уведомления
 project_admin_qrs	package_id	Идентификатор пакета
 project_admin_qrs	partial_file	Файл загружен не полностью.
 project_admin_qrs	preserve_text	Сохранить мою разметку текста
@@ -464,22 +400,15 @@ project_admin_qrs	required_file_type	Необходимо выбрать тип 
 project_admin_qrs	required_package	Необходимо выбрать пакет.
 project_admin_qrs	required_processor_type	Необходимо выбрать тип процессора.
 project_admin_qrs	required_release_name	Необходимо задать имя релиза.
-project_admin_qrs	separate_emails	Перечислите email адреса через запятую (,)
 project_admin_qrs	title	Система быстрого выпуска
 project_admin_qrs	unknown_file_error	Неизвестная ошибка загрузки файла.
 project_admin_qrs	upload_new_file	Загрузить новый файл
-project_admin_rmuser	cancel	Отмена
-project_admin_rmuser	cannot_remove_admin	Невозможно удалить администратора $1
-project_admin_rmuser	remove	Удалить
-project_admin_rmuser	title	Удалить пользователя
-project_admin_userpermedit	remove	Удалить
 project_admin_utils	admin	Управление
 project_admin_utils	edit_jobs	Редактировать вакансии
 project_admin_utils	edit_public_info	Редактировать общедоступное описание
 project_admin_utils	post_jobs	Опубликовать вакансии
 project_admin_utils	project_history	История проекта
 project_admin_utils	stats	Статистика
-project_admin_utils	user_permissions	Права пользователей
 project_admin_vhost	create	Создать
 project_admin_vhost	delete	Удалить
 project_home	view_members	Список участников
@@ -506,7 +435,6 @@ project_showfiles	package	Пакет
 project_showfiles	project_totals	Итого по проекту
 project_showfiles	release_highlighted	Вами выбранный релиз <span style="background-color:pink">выделен цветом</span>.
 project_showfiles	release_notes	Информация о релизе (Release &amp; Notes)
-project_showfiles	section	Проект: $1
 project_showfiles	size	Размер
 project_showfiles	title	Файлы проекта
 project_shownotes	changes	Изменения:
@@ -516,7 +444,6 @@ project_stats_utils	days	Дней
 rbac_edit	addrole	Добавить роль
 rbac_edit	editrole	Изменить роль
 rbac_edit	editroles	Изменить роли
-rbac_edit	forum	Форум
 rbac_edit	observer	Внешние пользователи
 rbac_edit	observerusername	Внешний пользователь
 rbac_edit	pgtitle	Edit Изменить роль
@@ -536,10 +463,6 @@ register	purpose_and_summarization	<h3>2. Назначение и краткое
 reporting	feature_req	Запросы на доработку
 reporting_us	any	Любой(ая)
 scm_index	admin	Управление
-scm_index	anoncvs	<p><b>Анонимный CVS доступ</b></p><p>Репозиторий этого проекта доступен для скачивания анонимно. Используйте следующие команды. Имя требуемого модуля следует указать вместо имямодуля. В ответ на запрос пороля просто нажмите клавишу Enter.</p>
-scm_index	browseit	Просмотр CVS репозитария
-scm_index	browsetree	<hr /><b>Просмотр CVS дерева</b><p>Просмотр CVS дерева давет вам великолепную возможность оценить текущий статус кода проекта. Также вы можете увидеть историю изменений любого файла в репозитарии.</p>
-scm_index	devcvs	<p><b>CVS доступ для разработчиков через SSH</b></p><p>Только разработчики проекта могут работать с CVS таким образом. У вас должен быть установлен SSH криент. Замените <i>имямодуля</i> и <i>имяразработчика</i> соответствующими значениями. Укажите пароль в ответ на запрос.</p>
 scm_index	reporting	Отчеты
 search	no_matches_found	Ничего не найдено для <em>$1</em>
 search	tasks_summary	Резюме
@@ -562,12 +485,8 @@ survey	survey_not_found	Нет опросов.
 survey	title	Опрос
 top_toplist	posts	Сообщения
 tracker	any	Любой(ая)
-tracker	category_any	Любая(ой)
-tracker	group_any	Любая(ой)
 tracker	status_any	Любой(ая)
 tracker_add	submit		Отправить
-tracker_admin_build_boxes	status_any	Любой(ая)
-tracker_browse	change_any	Любое(ой)
 trove	not_categorized	Этот проект еще не зарегистрировался в
 trove	title	Карта категорий ПО
 trove_list	browse_by	Просмотр по

@@ -44,10 +44,8 @@ account_change_email	invalid_email	Ogiltig e-postadress
 account_change_email	mailsent	<p>Ett e-postbrev har skickats till den nya e-postadressen. Följ instruktionerna i e-postbrevet för att göra klart ändringen av e-postadress. </p><a href="/">[ Hem ]</a>
 account_change_email	message		Du har begärt en ändring av e-postadress för $1.\nVar vänlig följ följande URL för att slutföra ändringen av e-postadress:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 personalen
 account_change_email	new_address	Ny e-postadress:
-account_change_email	section		Kontoinställningar
 account_change_email	send_confirmation	Skicka bekräftelse till ny adress
 account_change_email	subject		$1 verifiering
-account_change_email	title		Ändra e-postadress
 account_change_email-complete	confirm	Välkommen, $1. Din ändring av e-postadress är nu klar. Din nya angivna e-postadress är <strong>$2</strong>. E-post som skickas till $3 kommer nu att vidarebefordras till detta konto.
 account_change_email-complete	title	E-postadress ändring klar
 account_change_email_confirm	title	E-postadress ändring bekräftelse
@@ -58,13 +56,10 @@ account_change_pw	not_valid_password	Du måste ange ett giltigt lösenord (min. 
 account_change_pw	old_password	Gamla lösenordet
 account_change_pw	old_password_incorrect	Gamla lösenordet är ogiltigt
 account_change_pw	passwords_dont_match	Nya lösenord stämmer inte.
-account_change_pw	section	Kontoinställningar
 account_change_pw	title	Ändra lösenord
 account_change_pw	update	Uppdatera lösenord
 account_change_pw_changed	return_to	Du skall nu $1 återgå till användarinställningar $2.
 account_change_pw_changed	title	Lyckad ändring av lösenord
-account_editsshkeys	section	Kontoinställningar
-account_editsshkeys	title	Redigera CVS/SSH delade nycklar
 account_first	about_blurb	<p>Du är nu en registrerad användare av $1, on-lineutvecklingsmiljön för Öppen Källkod.</p><p>Som registrerad användare kan du delta i alla aktiviteter på webbplatsen. Du kan nu posta meddelanden till projektforumen, posta fel av mjukvara i $1, ansluta dig som projektutvecklare eller till och med starta ditt eget projekt.</p><p>Du bör ta lite tid till att läsa igenom <a href="/docs/site/"><b>Webbplatsdokumentationen</b></a> så att du kan utnyttja $1 fullt ut.</p><p>Ha kul på webbplatsen, och snälla, förse oss med dina åsikter så att vi kan förbättra $1.</p><p>-- $1 personalen.</p>
 account_first	title	Välkommen till $1
 account_login	cookiewarn	Kakor måste aktiveras för att du skall kunna fortsätta.
@@ -77,9 +72,6 @@ account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer på Macintosh stö
 account_login	newaccount	[Nytt Konto]
 account_login	passwd	Lösenord:
 account_login	pending_account	<P>Ditt konto väntar på din bekräftelse via e-post.		Besök länken i detta e-postbrev för att aktivera ditt konto.		<P>För att få e-postbrevet skickat på nytt, var vänlig klicka nedan så kommer ett e-postbrev		för bekräftelse att skickas till den e-postadress du angav vid registreringen.		<P><A href="pending-resend.php?form_user=$1">[Skicka Bekräftelse E-post]</A>		<br><hr>		<p>
-account_login	sslnotice	<p><B><FONT COLOR="RED">Du kommer att kopplas till en SSL-server när du skickar in detta fomulär så ditt lösenord kommer inte att synas för andra användare.</FONT></B> <small style="font-size: x-small"> (Om du undrar varför denna sida inte laddas med SSL, var vänlig läs nästa paragraf. Tack så mycket.) </small> <P> <B>Internet Explorer</B> användare kan få oregelbundna SSL-problem, de bör därför lämna SSL efter inloggning. Användare av Netscape bör stanna i SSL-läge permanent för maximal säkerhet.  Besök <A HREF="http://www.microsoft.com/">Microsoft</A> för mer information om detta kända problem.  <P>
-account_login	title	Inloggninng till webbplats
-account_login	usessl	Stanna i SSL-läge efter inlogging
 account_lostlogin	invalidconfirm	Ogiltig bekräftelsenyckel
 account_lostlogin	newpasswd	Nytt lösenord (min. 6 tecken)
 account_lostlogin	newpasswd2	Nytt lösenord (repetera)
@@ -87,7 +79,6 @@ account_lostlogin	notmatch	Nytt lösenord passar inte.
 account_lostlogin	passwdchanged	<h2>Lösenord bytt</h2><p>Gratulerar, du har återställt lösenordet för ditt konto.Du kan <a href="/account/login.php">logga in</a> på webbplatsen nu.</p>
 account_lostlogin	severalconfirm	Denna bekräftelsenyckel finns i mer än en uppsättning.
 account_lostlogin	sixchars	Du måste ange ett giltigt lösenord (min. 6 tecken).
-account_lostlogin	title	Förlorat lösenord bekräftas
 account_lostlogin	update	Uppdatera
 account_lostlogin	welcome	<h2>Förlorat Lösenord Inloggning</h2><p>Välkommen, $1. Du kan nu ändra ditt lösenord.</p>
 account_lostpw	invalid_user	Ogiltig användare
@@ -95,7 +86,6 @@ account_lostpw	message	Någon (förmodligen du) på $3 webbplatsen begärde ett\
 account_lostpw	notify	<p>Ett e-postbrev har skickats till din angivna e-postadress. Följ instruktionerna i e-postbrevet för att ändra lösenordet till ditt konto.</p><p><a href="/">[ Hem ]</a></p>
 account_lostpw	sendhash	Skicka förlorad lösenordsnyckel
 account_lostpw	subject	$1 Bekräftelse
-account_lostpw	title	Förlorat ditt lösenord?
 account_lostpw	user_dont_exist	Den användaren existerar inte.
 account_lostpw	warn	<p>Hallå... att förlora sitt lösenord är allvarligt. Det äventyrar säkerheten för ditt konto, dina projekt, och denna webbplats.</p><p>Genom att Klicka på "Skicka Förlorad Lösenordsnyckel" här nedan så kommer en URL att skickas till din angivna e-postadress. I denna URL finns en 128-bitars bekräftelsenyckel för ditt konto. Genom att besöka denna URL så tillåts du ändra ditt lösenord online och logga in.</p>
 account_options	change_email_address	Byt e-postadress
@@ -105,7 +95,6 @@ account_options	email_address		e-postadress:
 account_options	language	Språk
 account_options	login_name	Inloggningsnamn
 account_options	member_since	Medlem sedan
-account_options	real_name	Verkligt namn
 account_options	timezone	Tidszon
 account_options	title		Kontounderhåll
 account_options	user_id	Användar-ID
@@ -122,7 +111,6 @@ account_register	err_mailexist	Användare med denna e-postadress finns redan - a
 account_register	err_passwd	Du måste ange ett lösenord
 account_register	err_passwd2	Lösenorden stämmer inte
 account_register	err_passwd3	Ogiltigt lösenord:
-account_register	err_realname	Du måste ange ett verkligt namn
 account_register	err_unixname	Ogiltigt unixnamn.
 account_register	err_userexist	Det användarnamnet existerar redan.
 account_register	err_username	Du måste ange ett användarnamn
@@ -138,13 +126,11 @@ account_register	message_header	$1 Kontoregistrering
 account_register	partecipate_peer_ratings	Delta i användarbedömningar. <i>(Låter dig bedöma andra användare med hjälp av flera kriterier samt att också bli bedömd av andra. Mer information hittar du på din $1 användarsida </a> om du har valt att delta i bedömningar)</i>.
 account_register	password	Lösenord (min. 6 tecken):
 account_register	password2	Lösenord (repetera):
-account_register	realname	Fullt/Verkligt namn:
 account_register	register	Registrera
 account_register	remember_me	"Kom ihåg mig". <i>(Tillåter åtkomst till din $1 personliga sida</a> utan att vara inloggad. Du behöver fortfarande logga in innan du kan göra några ändringar.)</i>
 account_register	reset	Återställ ändringar
 account_register	siteupdate	Erhåll e-post om webbplatsuppdateringar <i>(Mycket låg trafik samt inkluderar säkerhetsvarningar. Rekommenderas.)</i>
 account_register	timezone	Tidszon:
-account_register	title	Registrera nytt konto
 account_register	update	Uppdatera
 account_shell	autorized_keys	CVS/SSH utdelade auktoriserade nycklar
 account_shell	edit_keys	Redigera nycklar
@@ -160,13 +146,10 @@ account_verify	erroractivate	Fel under aktiveringen av konto
 account_verify	invalidcred	Dina lämnade uppgifter stämmer inte med något giltigt konto.
 account_verify	invalidop	Ogiltig operation
 account_verify	invalidparam	Ogiltig parameter
-account_verify	invaliduser	Ogiltig användare
 account_verify	login		Inloggning
 account_verify	loginname	Inloggningsnamn:
 account_verify	missingparam	Parameter saknas
-account_verify	nouser	Användare existerar inte.
 account_verify	password	Lösenord:
-account_verify	title	$1 Kontoverifiering
 account_verify	usermandatory	Du måste ange ett användarnamn.
 account_verify	verify_blurb	<p>Logga in nu för att göra klart din registrering. Ditt konto kommer därefter bli aktiverat för normal inloggning.</p>
 add_snippet	add_this_snippet_version_id	Lägg till detta kodstyckes versions-ID:
@@ -186,32 +169,14 @@ add_snippet	submit	Skicka
 add_snippet	title	Skicka ett nytt kodstycke
 add_snippet	you_can_use_this_form	Du kan använda detta formulär flera gånger för att lägga till kodstycken till ditt paket.</p><p>"Kodstyckeversions-ID" är det unika ID-nummer som visas brevid den specifika versionen av kodstycket på bläddringssidan.
 admin	add	Lägg till
-admin	add_new	[Lägg till ny]
-admin	are_you_sure_delete	Är du säker på att du vill radera detta
-admin	cancel	Avbryt
 admin	delete	Ta bort
 admin	edit	Redigera
 admin	http_domain	HTTP Domän:
 admin	license	Licens:
 admin	license_other	Annan licens:
-admin	na	Ej tillämpbar
-admin	other	Annan
 admin	reject	Avslå
-admin	site_admin_home	Webbplats admin hem
-admin	submit_changes	Skicka ändringar
-admin	submit_new	Skicka ny
-admin	successfully_added	Tillägg lyckades
-admin	successfully_deleted	Borttagning lyckades.
-admin	successfully_modified	Ändring lyckades
 admin	yes	Ja
-admin_add_language	add_new_language	Lägg till nytt språk
-admin_add_language	class_filename	Klass filnamn:
-admin_add_language	classname	Klassnamn:
-admin_add_language	existing_language	Existerande språk
-admin_add_language	name	Namn:
-admin_add_language	submit	Skicka
 admin_approve_pending	add_this_custom_response	Lägg till detta egna svar till förinställda svar
-admin_approve_pending	admin_approve_pending	Aktivera
 admin_approve_pending	approve	Godkänn
 admin_approve_pending	approve_all_on_this_page	Godkänn alla på denna sida
 admin_approve_pending	approving_group		Godkänner grupp:
@@ -244,9 +209,6 @@ admin_database	statistics_for_project_database	Statistik för projektdatabaser
 admin_database	type	Typ
 admin_database	unable_to_insert	Kan inte lägga till en redan aktiv databas.
 admin_groupedit	active	Aktiv (A)
-admin_groupedit	deleted	Raderad (D)
-admin_groupedit	error	Fel
-admin_groupedit	error_creating_group_object	Fel vid skapande av gruppobjekt
 admin_groupedit	holding	Väntar (H)
 admin_groupedit	incomplete	Ofullständig (I)
 admin_groupedit	instruction_email_sent	E-postbrev med instruktioner skickat
@@ -277,7 +239,6 @@ admin_index	add_edit_delete_processors	Lägg till, ta bort eller redigera proces
 admin_index	add_edit_delete_themes	Lägg till, ta bort eller redigera teman
 admin_index	add_to_trove_map	Lägg till i resurskartan
 admin_index	approve_reject	Godkänn/Avslå
-admin_index	deleted_status	(borttagen) Status
 admin_index	display_full_group	Visa full grupplista/redigera grupper
 admin_index	display_full_user_list	Visa full användarlista/redigera användare
 admin_index	display_groups_beginning_with	Visa grupper innehållande :
@@ -303,14 +264,6 @@ admin_index	translation_file_tool	Översättningsverktyg
 admin_index	trove_project_tree	Projektträd över resurser
 admin_index	user_maintaince	Användarunderhåll
 admin_index	virtual_host_admin_tool	Adminverktyg för virtuel värd
-admin_loadtabfile	availaible_tables	Tillgängliga tabeller:
-admin_loadtabfile	edit_dont_work	[redigera(ej fungerande)]
-admin_loadtabfile	purge_loaded_data	Rensa ut lagrad data
-admin_loadtabfile	reload_all_language_files	(Åter)Ladda alla språkfiler
-admin_loadtabfile	see_translations	[se översättningar]
-admin_loadtabfile	see_untranslated	[se oöversatt]
-admin_loadtabfile	tables_loaded	Tabeller laddade
-admin_loadtabfile	title	Webbplats admin
 admin_massmail	active_deliveries	Aktiva leveranser
 admin_massmail	all_project_admins	Alla projektadmins
 admin_massmail	all_project_developers	Alla projektutvecklare
@@ -332,15 +285,8 @@ admin_massmail	subject	Rubrik
 admin_massmail	subscribers_to_additional_community	Prenumeranter på "Ytterligare grupp-e-post"
 admin_massmail	subscribers_to_site_updates	Prenumeranter på "Webbplatsuppdateringar"
 admin_massmail	text_of_message	Meddelandetext
-admin_massmail	title	Administrativ e-postmotor för massutskick
 admin_massmail	type	Typ
 admin_massmail	will_be_append	(kommer att bifogas med information om hur du avslutar prenumerationen, om tillämpligt)
-admin_massmail_execute	completed_successfully	UTFÖRDES FRAMGÅNGSRIKT
-admin_massmail_execute	querry_complete		Fråga utfördes. Börjar e-posta till
-admin_massmail_execute	receive_post		Mottog post. Utför fråga
-admin_massmail_execute	sending_to		skickar till
-admin_massmail_execute	unrecognized_post	Okänd post, kan inte exekveras
-admin_massmail_execute	user_id			Användare-ID:
 admin_responses	add_response	Tillagt svar
 admin_responses	by_the_way	Förresten, jag raderade inte... för att vara på den säkra sidan...
 admin_responses	create	Skapa
@@ -370,13 +316,6 @@ admin_search	status	Status
 admin_search	unix_name	UNIX-namn
 admin_search	user_search_criteria	Användarsökning med urval
 admin_search	username	Användarnamn
-admin_tabfiles	delete_lang	[delete]
-admin_tabfiles	edit_the_langfile	Redigera $1 språket
-admin_tabfiles	edit_the_language	Redigera språket
-admin_tabfiles	language	Språk
-admin_tabfiles	modify_the	Modifiera $1 nedan:
-admin_table	edit_the	Redigera
-admin_table	table	Tabell
 admin_trove_cat_add	add	Lägg till
 admin_trove_cat_add	add_new_trove_category	Lägg till ny resurskategori
 admin_trove_cat_add	error_in_trove_openration	Fel i resursoperation
@@ -388,7 +327,6 @@ admin_trove_cat_add	title	Webbplats admin: Resurs - lägg till led
 admin_trove_cat_edit	cant_delete_has_subcategories	Kan inte raderas, resursen har underkategorier
 admin_trove_cat_edit	delete				Ta bort
 admin_trove_cat_edit	edit_trove_category		Redigera resurskategori
-admin_trove_cat_edit	error_trove_equal_parent	Fel förälderkategori kan inte vara samma som gällande
 admin_trove_cat_edit	error_in_trove_operation	Fel i resursoperation
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Fel i resursoperation , kan inte ta bort resurskategori definierad som standard i local.inc
 admin_trove_cat_edit	new_category_description	Ny kategoribeskrivning (VARCHAR 255)
@@ -428,7 +366,6 @@ admin_useredit	current_confirm_bash		Gällande bekräftelsenyckel:
 admin_useredit	deleted				Raderad (D)
 admin_useredit	email				E-post:
 admin_useredit	group_memerbership		Gruppmedlem
-admin_useredit	membership_permissions		Medlemsbehörighet
 admin_useredit	name				Namn
 admin_useredit	no_unix_account	Inget Unixkonto (N)
 admin_useredit	operations	Operationer
@@ -487,22 +424,9 @@ artifact_canned	required_fields	ArtifaktCanned: namn och tilldelad är Obligator
 artifact_category	required_fields	ArtifaktKategori: namn och tilldelad är Obligatorisk
 calendar	april	April
 calendar	august	Augusti
-calendar	comingyear	Kommande år
-calendar	currentyear	Nuvarande år
 calendar	december	December
 calendar	february	Februari
-calendar	fordate	För datum:
 calendar	friday	Fredag
-calendar	invaliddate	Ogiltigt datum
-calendar	invaliddateexplain	$1 är ett ogiltigt datum.
-calendar	invalidday	Ogiltig dag
-calendar	invaliddayexplain	Dag måste vara mellan 1 och 31.
-calendar	invalidmonth	Ogiltig månad
-calendar	invalidmonthexplain	Månad måste vara mellan 1 och 12.
-calendar	invalidtype	Ogiltig typ
-calendar	invalidtypeexplain	Typ är ogiltig
-calendar	invalidyear	Ogiltigt år
-calendar	invalidyearexplain	År måste vara mellan 1990 och 2020.
 calendar	january	Januari
 calendar	july	Juli
 calendar	june	Juni
@@ -511,21 +435,14 @@ calendar	may	Maj
 calendar	monday	Måndag
 calendar	november	November
 calendar	october	Oktober
-calendar	onemonth	En månad
 calendar	saturday	Lördag
-calendar	selecteddate	Välj datum (om annat än dagens).
 calendar	september	September
 calendar	sunday	Söndag
 calendar	task_begins	Uppgift $1 börjar
 calendar	task_ends	Uppgift $1 slutar
 calendar	task_link_title	Sammanfattning av uppgift: $1
-calendar	threemonth	Tre månader
 calendar	thursday	Torsdag
-calendar	title	Projektledning: Kalender
-calendar	todaysdate	Dagens datum.
 calendar	tuesday	Tisdag
-calendar	update	Uppdatera
-calendar	view	Visa:
 calendar	wednesday	Onsdag
 classgroup	acceptedproject	Din projektregistrering hos $7 har blivit godkänd.\n\nProjekt, fulltnamn:  $1\nProjekt, Unixnamn:  $2\nCVSserver:         cvs.$2.$3\nShell/Webbserver:   $2.$3\n\nDin DNS kommera att behöva upp till en dag för att bli aktiv på vår webbplats.\nMedan du väntar på att din DNS skall bli klar, så kan du försöka koppla in till \n$4 och peka CVS till $5\n\nOm ditt skal/CVS konto fortfarande inte fungerar efter sex timmar, var vänlig\nöppna en supportfråga så att vi kan titta på problemet.\nNotera att alla skal/CVS konton är stängda för telnet och endast\nfungerar med SSH1.\n\nDin webbplats är tillgänglig genom ditt skalkonto. Var vänlig läs i\nwebbplatsdokumentationen (se länk nedan) om hur den är tänkt att användas, tillgängliga\ntjänster, och katalogstruktur för kontot.\n\nVar vänlig att ta dig tid att läsa webbplatsdokumentationen om projekt\nadministration (http://$3/docs/site/). Om du besöker din\negen projektsida i $7 medan du är inloggad,så hittar du\nytterligare menyfunktioner till vänster, rubricerade \'Projekt admin\'.\n\nVi rekommenderar varmt att du nu besöker $7 och skapar en offentlig\nbeskrivning på ditt projekt. Detta kan göras genom att besöka din projektsida\n medan du är inloggad, och välja \'Projekt admin\' från menyn\ntill vänster (eller genom att besöka http://$3/project/admin/?group_id=$6\nefter inloggning).\n\nDitt projekt kommer inte heller att synas i resurskartan (huvud\nlistan för projekt på värden $7. Det ger stor flexibilitet vid\nbläddring och sökning) innan du kategoriserat det i projektadministrations\nskärmen. För att folk skall kunna hitta ditt projekt, bör du göra detta nu.\nBesök ditt projekt medan du är inloggad, och välj \'Projekt admin\' från \nmenyn till vänster.\n\nDra nytta av systemet, och snälla berätta för andra om $7. Låt oss få veta\nom det finns något vi kan göra för att hjälpa dig.\n\n-- $7-personalen
 classgroup	acceptedprojecttitle	$1 projekt godkänt
@@ -542,13 +459,7 @@ common_include_account	sixchar	Lösenord måste ha minst 6 tecken.
 common_include_account	toolong	Namnet är för långt. Det måste ha mindre än 15 tecken.
 common_include_account	tooshort	Namnet är för kort. Det måste ha minst 3 tecken.
 common_utils	priority_colors	Prioritetsfärger
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	sv
-conf	language_id	10
 conf	mail_charset	UTF-8
-contact	about_blurb	<p>Detta är kontakt sidan för <b>$1</b> -- Om du har ett problem med ett projekt med oss som värd, var vänlig skicka dina frågor/information till support/fel-ansvarig för det projektet. Du kan komma åt dessa finesser genom att besöka projektets utvecklingshemsida på: <tt>http://$2/projects/&lt;projectnamn&gt;</tt> och klicka på lämpligt verktyg.</p><p>Om du har en supportbegäran, felanmälan eller önskar att kommunicera direkt med $1-personalen, var vänlig och besök då <a href="/projects/siteadmin">$1 Huvudprojekt</a>.</p>
-contact	title	Kontakta $1
 developer	body	Text
 developer	date	Datum
 developer	diary_and_notes	Dagbok och anteckningar för
@@ -565,14 +476,12 @@ developer_monitor	title	Bevaka en användare
 developer_monitor_choose_user	body	Fel - Välj först en användare att bevaka
 developer_monitor_choose_user	title	Välj först en användare
 developer_rate	cannot_rate_yourself	Du kan inte bedöma dig själv
-developer_rate	invalid_rating_value	FEL - ogiltigt bedömningsvärde
 developer_rate	ratings_recorded	Bedömning nedtecknad
 developer_rate	ratings_recorded_body	Du kan enkelt göra om bedömningen genom att återvända till deras bedömningssida och skicka in informationen på nytt.
 developer_rate	title	Användarbedömningssida
 developer_rate	turned_off_body	Du valde att inte delta i användarbedömningssystemet
 developer_rate	turned_off_title	Bedömningar avstängda
 docman	admin	Admin
-docman	description	Beskrivning
 docman	error_invalid_file_attack	Ogiltigt filangrepps försök $1
 docman	error_no_docs	Detta projekt har inga synliga dokument
 docman	error_no_groups_defined	Inga dokumentgrupper definierade
@@ -584,8 +493,6 @@ docman_admin	section	Projekt: $1
 docman_admin	title	Dokumentansvarig: administration
 docman_admin_addgroups	section	Administration av dokumentansvarig
 docman_admin_addgroups	title	Lägg till dokumentgrupper
-docman_admin_docedit	section	Dokumentansvarig
-docman_admin_docedit	title	Redigera dokument
 docman_admin_editdocs	doc_contents	Dokumentinnehåll
 docman_admin_editdocs	section	Administration av dokumentansvarig
 docman_admin_editdocs	state	Status
@@ -599,8 +506,6 @@ docman_admin_editgroups	group_name	Gruppnamn
 docman_admin_editgroups	new_group_name	Nytt gruppnamn
 docman_admin_editgroups	section	Administration av dokumentansvarig
 docman_admin_editgroups	title	Redigera grupper
-docman_admin_groupedit	section	Administration av dokumentansvarig
-docman_admin_groupedit	title	Byt namn på dokumentgrupp
 docman_common	error_min_desc_length	Dokumentbeskrivning måste ha minst 10 tecken
 docman_common	error_min_title_length	Rubriken måste ha minst 5 tecken
 docman_common	no_docs			Hittade inga dokument
@@ -621,15 +526,12 @@ docman_new	intro	<strong>Dokumentrubrik</strong>:  Refererar till den relativt k
 docman_new	language	Språk
 docman_new	no_valid_group	Ingen giltig dokumentgrupp var vald
 docman_new	section	Projekt: $1
-docman_new	state	Status
 docman_new	submit	Lämna information
 docman_new	submitted_successfully	Dokumentinlämning lyckades
 docman_new	title	Dokumentansvarig: Lämna ny dokumentation
 docman_new	upload_file	Överföra fil
-error	error_creating	Fel vid skapande
 error	not_found	SIDAN HITTADES INTE
 error	title	Begärd sida hittades inte (Fel 404)
-exit	choose_a_group	Fel - Välj en grupp
 exit	choose_group_body	Inget grupp-ID var valt
 exit	choose_group_title	FEL - Inget group_id var valt
 exit	exiting_with_error	Avbryter med fel
@@ -637,43 +539,24 @@ exit	missing_parameters_body	Fel - saknar nödvändig parameters
 exit	missing_parameters_title	Fel - saknade parameterar
 forum	choose	<p>Välj ett forum så kan du bläddra, söka, och skicka inlägg.<p>
 forum	error_forum_not_found	Hittade inte forumet
-forum	error_invalid_group_forum_id	$1:: Ogiltigt group_forum_id
 forum	error_no_forums_found	Hittade inga forum för $1
-forum	error_no_valid_forum_object	$1:: Inga giltiga forumobjekt
 forum	error_no_valid_group_object	Forum:: Inga giltiga gruppobject
 forum	forum	Forum
 forum	forums_for	Forum för $1
-forum	html	HTML-kod kommer att visas som text i ditt inlägg
-forum	section	Projekt: $1
-forum	title	Forum
 forum_admin	add_forum	Lägg till forum
 forum_admin	delete_message	Ta bort inlägg
-forum_admin	section	Projekt: $1
 forum_admin	title	Forum: Administration
-forum_admin	update_forum	Uppdatera forums info/status
 forum_admin_addforum	add_forum	Lägg till detta forum
 forum_admin_addforum	allow_anonymous	Tillåt anonyma inlägg?
 forum_admin_addforum	email_posts	E-posta alla inlägg till:
-forum_admin_addforum	existing_forums	Existerande forum
 forum_admin_addforum	forum_created	Skapande av forum lyckades
 forum_admin_addforum	forum_description	Beskrivning
 forum_admin_addforum	forum_name	Forumnamn
 forum_admin_addforum	is_public	Är offentlig?
-forum_admin_addforum	section	Administration av forum
-forum_admin_addforum	title	Lägg till Forum
 forum_admin_changestatus	change_status	Ändra forum status
-forum_admin_changestatus	forum	Forum
 forum_admin_changestatus	intro	Du kan justera forum finesser här. Var vänlig notera att privata forum fortfarande kan ses av projektmedlemmar, men inte den allmäna besökaren.
-forum_admin_changestatus	no_forums_found	Hittade inga forum
-forum_admin_changestatus	section	Administration av forum
-forum_admin_changestatus	status	Status
-forum_admin_changestatus	title	Ändra forumstatus
 forum_admin_changestatus	update_successful	Uppdatering av foruminfo lyckades
-forum_admin_delete	section	Administration av forum
-forum_admin_delete	title	Ta bort forum
-forum_admin_delete_message	section	administration av forum
 forum_admin_delete_message	title	Ta bort ett inlägg
-forum_admin_delete_message	enter_message_id	Skriv meddelande-ID
 forum_admin_delete_message	warning	VARNING! Du är på väg att radera ett meddelande och alla dess uppföljare!!
 forum_admin_delete_messages	messages_deleted	$1 meddelanden raderade
 forum_common	error_adding_forum	Fel vid tillägg i forum
@@ -682,7 +565,6 @@ forum_common	error_min_name_length	Forumnamn måste ha minst 3 tecken
 forum_common	error_save_when_logged_in	Du kan bara spara din position om du är inloggad
 forum_common	error_set_monitor	Du kan bara bevaka om du är inloggad
 forum_common	error_unable_to_add_monitor	Kunde inte lägga till bevakning
-forum_common	welcome_to	Välkommen till $1
 forum_common_forum	error_save_place	Forum::savePlace()
 forum_common_forummessage	error_cannot_update_master_thread	Kunde inte uppdatera huvudtrådens förälder med gällande tid
 forum_common_forummessage	error_cannot_update_parent	Kunde inte uppdatera förälder
@@ -691,12 +573,9 @@ forum_common_forummessage	error_getting_next_thread	Hämtande av nästa thread_i
 forum_common_forummessage	error_group_forum_id	Groupforum-ID i databasresultatet matchar inte forumobjektet
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Ogiltigt meddelande-ID
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() Ogiltigt föräldermeddelandeobjekt
-forum_common_forummessage	error_not_logged	Måste vara inloggad för att göra inlägg
 forum_common_forummessage	error_posting_failed	ForumMessage::create() inlägg misslyckades
 forum_common_forummessage	error_required_fields	Måste innehålla ett meddelande och rubrik
-forum_common_forummessage	forum_message	Forummeddelande
 forum_common_forummessage	no_valid_forum_object	Forummeddelande:: ogiltigt forumobjekt
-forum_errors	error_determining_forum_id	Fel vid fastställande av forum-ID
 forum_errors	error_getting_forum	Fel vid hämtning av forum
 forum_forum	author	Författare
 forum_forum	changeview	Ändra vy
@@ -711,79 +590,49 @@ forum_forum	posts	Poster
 forum_forum	postsuccess	Inlämning av inlägg lyckades
 forum_forum	previous_messages	Föregående inlägg
 forum_forum	replies	Svar
-forum_forum	section	Projekt: $1
 forum_forum	show	Visa
 forum_forum	thread	Tråd
 forum_forum	threaded	Trådad
 forum_forum	threads	Trådar
-forum_forum	title	Forum: Visa forum
 forum_forum	topic	Ämne
 forum_forum	topicstarter	Ämne startat av
 forum_forum	ultimate	Ultimat
-forum_forum_thread	section	Forum
-forum_forum_thread	title	Visa tråd
 forum_message	by	AV
 forum_message	date	DATUM
 forum_message	message	Inlägg
 forum_message	message_not_found_body	Detta inlägg existerar inte längre
 forum_message	message_not_found_title	Hittar inte inlägget
-forum_message	msg	Lämna ett inlägg i denna tråd:
 forum_message	must_choose_message_body	Du måste välja ett inlägg först
 forum_message	must_choose_message_title	Du måste välja ett inlägg först
 forum_message	post_followup	Lämna in ett svarsinlägg på detta inlägg
 forum_message	receive_followups	Ta emot svar på ditt inlägg via e-post
-forum_message	section	Forum
 forum_message	subject	RUBRIK
 forum_message	thread	Starta ny tråd
 forum_message	thread_view	Trådvy
-forum_message	title	Visa inlägg
 forum_monitor	activated	Forumbevakning startad
 forum_monitor	deactivated	Forumbevakning avslutad
 forum_save	saved	Forumposition sparad. Nya inlägg kommer att framhävas när du återkommer
-forum_utils	added	Forum tillagt
 forum_utils	admin	Admin
 forum_utils	anonymously	Anonymt
-forum_utils	author	Författare
-forum_utils	brokenthread	Trasig tråd
 forum_utils	by	Av:
 forum_utils	couldpostif	Du hade kunnat gör ett inlägg om du var $1 inloggad $2
 forum_utils	date	Datum
 forum_utils	discussionforum	Diskussionsforum:
 forum_utils	doublepost	Du verkar ha dubblerat detta inlägg, eftersom det har samma rubrik och innehåll som föregående inlägg.
-forum_utils	error	Fel!
-forum_utils	erroradd	Fel vid tillägg av forum
-forum_utils	errorfollowup	Du försökte göra ett svarsinlägg på ett inlägg som inte existerar.
-forum_utils	errorfollowup2	Inget svarsinlägg-ID fanns vid försök att göra ett inlägg i en existerande tråd.
-forum_utils	errorinsert	Kunde inte hämta infognings-ID
-forum_utils	errormaster	Kunde inte uppdatera huvudtrådens förälder med gällande tid
-forum_utils	errorparent	Kunde inte uppdatera förälder
-forum_utils	errorpost	Inlägg misslyckades
-forum_utils	feedbacklogin	Du hade kunnat gör ett inlägg om du var inloggad
 forum_utils	htmltag	HTML-kod kommer att visas som text i ditt inlägg
 forum_utils	latest	Senaste nyheterna
 forum_utils	loggedin	inloggad
 forum_utils	mailmonitor	\nLäs och besvara detta inlägg på: \n$1\nAv: $2 \n\n $3\n\n______________________________________________________________________\nDu har fått denna e-post eftersom du valde att bevaka detta forum.\nFör att avsluta bevakningen av detta forum, logga in till $4 \noch besök: $5
-forum_utils	mailnotsent	e-post ej skickad - bevakas
-forum_utils	mailnotsent2	e-post ej skickad - ingen bevakar
-forum_utils	mailsent	e-post skickad - bevakas
 forum_utils	message	Inlägg:
 forum_utils	monitor	Bevaka forum
-forum_utils	mustinclude	Måste innehålla en meddelandetext och en rubrik
-forum_utils	news	Nyheter
-forum_utils	nextfailed	Hämtande av nästa tråd-ID misslyckades
-forum_utils	noid	Försöker att skapa inlägg utan ett forum-ID
 forum_utils	nonewsitem	Fel - hittade inte denna nyhetspost
-forum_utils	notfound	Hittades inte
 forum_utils	postanon	Du skapar inlägg anonymnt eftersom du inte är
 forum_utils	postcomment	Skapa inlägg
-forum_utils	posted	Meddelande skapat
-forum_utils	postedby	Skapat av
 forum_utils	reply	svar
 forum_utils	saveplace	Spara Plats
 forum_utils	stopmonitor	Avsluta Bevakning
 forum_utils	subject	Rubrik:
 forum_utils	summary	Summering
-forum_utils	thread	Tråd
 frs	file_download	Hämta
 frs	file_monitor	Bevaka
 frs	file_notes	Anteckningar
@@ -796,20 +645,12 @@ frs_file	error_cannot_move	Filen kan inte flyttas till den permanenta platsen
 frs_file	error_invalid_file	FRS-fil, verkar vara ogiltig
 frs_file	error_min_name_length	FRS-fil, namn måste ha minst 3 tecken
 frs_file	error_name_format	FRS-fil, namn bör följa detta exempelformat: gforge-3.0.tar.bz2
-frs_package	error_already_exists	Detta filnamn existerar redan i projektutrymmet
-frs_package	error_cannot_move	Filen kan inte flyttas till den permanenta platsen
-frs_package	error_invalid_file	FRS-fil, verkar vara ogiltig
 frs_package	error_min_name_length	FRS-paketnamn måste ha minst 3 tecken
 frs_package	error_name_format	FRS-Paket::Update: Paketnamn kan bara skrivas med alfanumeriska tecken
 frs_package	error_set_monitor	Du kan bara bevaka om du är inloggad
 frs_release	email_text	\n\nProjekt "$1" ('$2') har  \nsläppt en ny version av paketet '$3' \nDu kan ladda ner det med följande länk:\n $4\n\nDu får denna e-post eftersom du\nbegärde att bli underrättad när en ny version av detta paket\nsläpps.Om du inte vill bli underrättad i\nframtiden, var vänlig och logga in till $5 och klicka på denna länk: \n $6
 frs_release	email_title	[$1 Utgåva] $2
-frs_release	error_already_exists	Den utgåvan existerar redan i detta projektutrymme
-frs_release	error_cannot_move	Utgåvan kan inte flyttas till den permanenta platsen
-frs_release	error_invalid_file	FRS-utgåvan  verkar vara ogiltig
 frs_release	error_min_name_length	FRS-paketnamn måste ha minst 3 tecken
-frs_release	error_name_format	FRS-utgåvans namn bör följa detta exempelformat: gforge-3.0.tar.bz2
-frs_release	error_set_monitor	Du kan bara bevaka om du är inloggad
 general	add	Lägg till
 general	browse	Visa
 general	cancel	Avbryt
@@ -822,7 +663,6 @@ general	edit	Redigera
 general	error	Fel
 general	error_creating	Fel vid skapande av $1
 general	error_getting	Fel vid hämtande av $1
-general	error_getting_new	Fel vid hämtande av ny $1
 general	error_group_id	Grupp-ID i db-resultatet motsvarar inte gruppobjektet
 general	error_missing_params	Parameterar saknas
 general	error_no_valid_group_object	$1:: Ej giltigt gruppobjekt
@@ -833,9 +673,6 @@ general	invalid_email	Ogiltig e-postadress
 general	language	Språk
 general	more	Mer
 general	no	Nej
-general	no_valid_filename	Ej giltigt filnamn
-general	no_valid_group	Ingen giltig $1 grupp var vald
-general	no_valid_group_object	$1 Ej giltigt gruppobjekt
 general	open	öppna
 general	permdenied	Rättighet saknas.
 general	permexcuse	Detta projekts administratör måste ge dig rättighet att se denna sida.
@@ -843,13 +680,9 @@ general	permnotget	Fick ingen rättighet
 general	remove	Ta bort
 general	reset	Återställ
 general	return	Återgå
-general	return_to	[Återgå till $1]
-general	sitename	$1
 general	submit	Skicka
 general	submit_edit	Skicka redigering
-general	submitted_successfully	$1 Inlämning lyckades
 general	total	total
-general	turned_off	Detta projekt har stängt av $1
 general	update	Uppdatering
 general	update_successful	Uppdatering lyckades
 general	yes	Ja
@@ -857,8 +690,6 @@ global	error	Fel
 group	activity	Aktivitet i procent:
 group	activitystat	Se projektaktivitet <a href="/project/stats/?group_id=$1">statistik</a>
 group	developer_info	Utvecklarinformation
-group	developers	Utvecklare
-group	long_bugs	Felrättning
 group	long_scm	SCM-förvar
 group	long_docman	DocManager: Projektdokumentation
 group	long_forum	Öppna forum
@@ -866,9 +697,7 @@ group	long_ftp	Anonymt FTP-utrymme
 group	long_homepage	Projekthemsida
 group	long_mail	Sändlistor
 group	long_news	Senaste nyheterna
-group	long_patch	Administrera felrättelser
 group	long_pm	Projektstyrning
-group	long_support	Administrera användarsupport
 group	long_survey	Undersökningar
 group	long_tracker	Ordningslistor
 group	nodescription	Detta projekt saknar beskrivning.
@@ -884,7 +713,6 @@ group	short_files	Filer
 group	short_forum	Forum
 group	short_homepage	Hemsida
 group	short_mail	E-postlistor
-group	short_main	Huvudsida
 group	short_memberlist	Utvecklare
 group	short_news	Nyheter
 group	short_patch	Felrättningar
@@ -898,13 +726,9 @@ help	title	Välkommen till $1
 help_tracker	assignee	Denna rullgardinslista representerar den projektadministratör som ordningsposten är tilldelad
 help_tracker	attach_file	När du vill bifoga en fil med en ordningspost måste du markera denna kryssruta innan du lämnar in förändringarna.
 help_tracker	canned_response	Rullgardinslistan innehåller färdiga svar till vanliga supportfrågor och felanmälningar definierade av projektadministratören.<br /><br /> Om du är projektadmin kan du klicka på '(admin)' länken för att definiera dina egna färdiga svar
-help_tracker	category	Denna rullgardinslista representerar kategorin av ordningsposter som är en särskild del av ett projekt.<br /><br />Välj 'Alla' för ett heltäckande resultat.
 help_tracker	close_window	Stäng fönster
-help_tracker	comment	Kommentarens textarea tillåter dig att bifoga kommentarer till en post i ordningslistan när ett förvalt svar inte är lämpligt.
 help_tracker	data_type	Datatyp avgör vilken typ av ordningslista det är.  Eftersom den övergripande ordningslistan innehåller fel, rättningar, support, etc... så behöver du kunna avgöra vilken av dessa en post tillhör.<br /><br />Detta har fördelen att en administratör kan omvandla ett supportärende till ett felärende.
-help_tracker	group	Denna rullgardinslista representerar den grupp av ordningsposter som definierats av projektadministratören.<br /><br />Om du är projektadmin kan du klicka på '(admin)' länken för att definiera dina egna grupper.
 help_tracker	monitor	Du kan bevaka eller avsluta bevakning av denna post genom att klicka på "Bevakning"'sknappen. <br /><br /><strong>Notera!</strong> detta kommer att innebära att ytterligare e-post skickas till dig. Om du gör kommentar på denna post, skickar in eller tilldelas denna post, så kommer du även att få e-post av dessa skäl!
-help_tracker	resolution	Lösning visar hur posten löstes om så är gjort.
 help_tracker	sort_by	Sortera efter valmöjligheten låter dig välja hur lista skall visas.<br /><br />  Du kan sortera efter ID, Prioritet, Sammanfattning, Öppningsdatum, Avslutsdatum, Inlämnare eller Tilldelad.  Du kan också få resultaten sorterade i stigande eller fallande ordning.
 help_tracker	status	Denna rullgardinslista representerar status på en ordningspost.<br /><br />Du kan sätta status till 'Väntande' om du förväntar dig ett svar från den som författade posten.  När författaren svarar sätts statusen automatiskt 'Öppen'. Annars, om författaren inte svarar inom en av administratören angiven tid, (standard är 14 dagar) så får posten statusen 'Raderad'.
 help_tracker	summary	Sammanfattningstextboxen representerar en kort sammanfattning av posten. Användbar när man bläddrar genom flera poster.
@@ -914,15 +738,12 @@ help_trove_cat	full_category_name	Fullständigt kategorinamn
 help_trove_cat	no_such_category	Resurskategori finns inte
 help_trove_cat	short_name	Förkortning
 home	about_blurb	<P>$1 är en <B>fri tjänst för <A href="http://www.opensource.org/">open source</A>-utvecklare </B>som erbjuder enkel tillgång till det bästa i CVS, sändlistor, felhantering, meddelandeforum, uppgiftsansvarig, webbplatsutrymme, permanent filarkivering, fullständiga backuper, och en helt webbaserad administration.</P><P><B>Deltagande och synpunkter på webbplatsen</B></P><P>För att få ut det mesta av $1 måste du <A href="/account/register.php">registrera dig som webbplatsanvändare</A>. Det gör att du kan delta i allt vi har att erbjuda. Du kan naturligtvis surfa på webbplatsen utan att att registrera dig, men du kommer då inte att kunna delta i allt.</P><P><B>Skapa ditt eget projekt</B></P><P><A href="/account/register.php">Registrera dig som webbplatsanvändare</A>, <A HREF="/account/login.php">logga sedan in</A> och till sist <A HREF="/register/">registrerar du ditt projekt</A>.</P><P>Tack... och ha det så trevligt på webbplatsen.</P>
-home	breaking_down_barriers	Bryter ner gränserna för öppen källkods-utveckling
 home	gforge_statistics	$1-statistik
 home	highest_ranked_users	Högst rankade användare
 home	most_active_this_week	Mest aktiva denna vecka
 home	hosted_projects	Värdprojekt
 home	no_stats_available	Ingen statistik tillgänglig
-home	none_found	Hittade inget
 home	registered_users	Registrerade användare
-home	sfos	$1 OnSite
 home	top_project_downloads	Projekt med flest hämtningar
 home	recently_registered	Nyligen registrerade projekt
 home	recently_registered_date_format	m/d
@@ -934,7 +755,6 @@ include_html	no_change	Ingen förändring
 include_html	none	Ingen
 include_html	priority_highest	Högsta
 include_html	priority_lowest	Lägsta
-include_html	priority_medium	Medium
 include_toolreport	all	Alla
 include_toolreport	key	Nyckel
 include_toolreport	last_days	Senaste dag(ar)
@@ -947,73 +767,39 @@ include_toolreport	project_lifespan	Projektets lisvlängd
 include_toolreport	show	Visa
 index	welcome	Välkommen
 mail	provided_by	<p>E-postlistor tillgängliga via en GForge version av <a href="http://www.list.org/">GNU Mailman</a>. Tack till Mailman och <a href="http://www.python.org/">Python</a> gänget för utmärkt mjukvara.</p>
-mail	section	Projekt: $1
-mail	title	E-postlistor
-mail_admin	section	E-postlistor
-mail_admin	title	E-postlista admin
 mail_admin_add_list	section	E-postlista admin
 mail_admin_add_list	title	Lägg till lista
 mail_admin_change_status	section	E-postlista admin
 mail_admin_change_status	title	Admin / Uppdatera lista
-menu	about_gforge	Om $1
 menu	account_maintenance	Kontounderhåll
 menu	admin	Admin
 menu	bookmark_page	Lägg till bokmärke
-menu	change_my_theme	Byt mitt tema
 menu	code_snippet	Kodstycken
-menu	code_snippet_library	Kodbibliotek
-menu	compile_farm	Kompileringsverkstad
 menu	diary_notes	Dagbok &amp; Anteckningar
-menu	discussion_forums	Diskussionsforum
-menu	documentation	Webbplatsdokumentation
 menu	home	Hem
 menu	login	Inloggning
-menu	login_ssl	Logga&nbsp;in&nbsp;via&nbsp;SSL
 menu	logout	Logga ut
 menu	my_account	Mítt&nbsp;konto
 menu	my_personal_page	Min&nbsp;egen&nbsp;sida
 menu	mypage	Min&nbsp;sida
 menu	new_project	Registrera nytt projekt
-menu	new_releases	Nya utgåvor
 menu	new_user	Ny användare via SSL
-menu	other_site_mirrors	Andra webbplatsspeglar
-menu	project_admin	Projektadministratör
 menu	project_help_wanted	Hjälp Önskas
-menu	project_summary	Projektsammanfattning
 menu	projectree	Projektträd
 menu	register_project	Registrera projekt
 menu	search	Sök
-menu	site_status	Webbplatsstatus
-menu	software_map	Programvaruöversikt
 menu	submit	Lämna in
-menu	top_projects	Topprojekt
-my	about_blurb	Din personliga sida innehåller fel och uppgifter som du har tilldelats, plus en lista med grupper som du är medlem i.
-my	assigneditems	Mina tilldelade poster
 my	bookmarks	Mina bokmärken
 my	monitoredfile	Bevakade filmoduler
 my	monitoredforum	Bevakade forum
 my	no_bookmarks	Du har för närvarande inga sparade bokmärken
 my	no_monitored_filemodules	Du bevakar inga filer
-my	no_monitored_filemodules_details	<p>Om du bevakar filer, så får du meddelanden om nya utgåvor via e-post med en länk till den nya filen på vår nerladdningsserver.</p><p>Du kan bevaka filer genom att besöka ett projekts &quot;Sammanfattningssida&quot; och klicka på kryssrutan i filurvalet.</p>
 my	no_monitored_forums	Du bevakar inga forum
-my	no_monitored_forums_details	<p>Om du bevakar forum, får du meddelanden om nya inlägg i forumet via e-post med en länk till det nya inlägget.</p><p>Du kan bevaka forum genom att klicka &quot;Bevaka Forum&quot; i forumet.</p>
 my	no_open_tasks	Du har inga öppna uppgifter tilldelade dig
 my	no_projects	Du är inte medlem i några aktiva projekt
 my	no_tracker_items_assigned	Du har inga öppna ordningsposter tilldelade dig.
 my	no_tracker_items_submitted	Du har inga öppna ordningsposter inlämnade av dig.
-my	pending_news_bytes	Väntande nyhetesnotiser
-my	pending_news_bytes_1	Det finns en nyhetsnotis för genomgång
-my	pending_news_bytes_2	Det finns $1 nyhetsnotiser för genomgång
-my	pending_news_bytes_3	Klicka här.
-my	pending_projects	Väntande projekt
-my	pending_projects_1	Det finns ett väntande projekt för genomgång
-my	pending_projects_2	Det finns $1 väntande projekt för genomgång
-my	pending_projects_3	Klicka här.
 my	projects	Mina projekt
-my	submitteditems	Mina inlämnade poster
-my	survey	Snabbundersökning
-my	survey_taken	Du har genomfört din utvecklarundersökning
-my	tasks	Mina uppgifter
 my	title	Personlig sida för: $1
 my_bookmark	return	Återgå
 my_bookmark_add	added_bookmark	Tillagt bokmärke för <strong>$1</strong> med rubriken <strong>$2</strong>
@@ -1021,14 +807,9 @@ my_bookmark_add	back	Tillbaka till din hemsida
 my_bookmark_add	bookmark_title	Bokmärke, rubrik
 my_bookmark_add	bookmark_url	Bokmärke, URL
 my_bookmark_add	section	Min personliga sida
-my_bookmark_add	title	Lägg till bokmärke
 my_bookmark_add	visit_page	Besök bokmärkessidan
-my_bookmark_delete	bookmark_deleted	Bokmärket raderat
-my_bookmark_delete	section	Min personliga sida
-my_bookmark_delete	title	Radera bokmärket
 my_bookmark_edit	bookmark_updated	Bokmärke uppdaterat
 my_bookmark_edit	failed_to_update_bookmark	Misslyckades att uppdatera bokmärket.
-my_bookmark_edit	section	Min personliga sida
 my_bookmark_edit	title	Redigera bokmärke
 my_diary	add_new_entry	Lägg till en ny notering
 my_diary	details	Detaljer
@@ -1041,7 +822,6 @@ my_diary	is_public_expl	Om markerad som offentlig, kommer din post att skickas t
 my_diary	item_added	Notering tillagd
 my_diary	no_entries	Du har inga dagboksanteckningar
 my_diary	nothing_updated	Inget uppdaterat
-my_diary	section	Min personliga sida
 my_diary	submit_only_once	LÄMNA ENDAST IN EN GÅNG
 my_diary	summary	Sammanfattning
 my_diary	title	Min dagbok och anteckningar
@@ -1066,14 +846,11 @@ news	choose	<P>Välj en nyhetesnotis så kan du bläddra, söka, och posta medde
 news	noitems	Hittade inga notiser
 news	nonews	Hittade inga nyheter
 news	nonewsfor	Hittade inga nyheter för $1
-news	section	Projekt: $1
 news	title	Nyheter
 news_admin	noqueued	Hittade inga köade poster för projektet
 news_admin	permdenied	Du måste vara admin i projektet du redigerar eller medlem i $1 nyhetesteamet.
 news_admin	queued	Dessa nyhetsposter har blivit inlämnade till projektet
-news_admin	section	Nyheter
 news_admin	title	Adminnyheter
-news_main	title	Nyheter
 news_submit	cannot	Du måste vara admin i projektet för att lämna in nyheter
 news_submit	cannotadmin	Inlämning av nyheter från nyhetsgruppen är inte tillåtet
 news_submit	details	Detaljer
@@ -1082,10 +859,8 @@ news_submit	errorinsert	FEL vid infogning
 news_submit	forproject	För projekt
 news_submit	newsadded	Nyheter tillagda
 news_submit	post_blurb	Du kan posta nyheter om ditt projekt om du är administratör. Du kan också posta "Hjälp Önskas" notiser om ditt projekt behöver hjälp.<P>Alla poster <B>för ditt projekt</B> kommer att visas omedelbart på projektets sammanfattningssida. Poster som är av speciellt intresse för gemenskapen behöver godkännas av en medlem i $1 nyhetsteam innan de visas på $1 hemsidan.<P>Du kan inkludera URL-er, men inte HTML i dina notiser.<P>URL-er som startar med http:// görs klickbara.
-news_submit	section	Nyheter
 news_submit	subject	Ämne
 news_submit	submit	Lämna in
-news_submit	title	Lämna in nyheter för $1
 news_utils	archive	Nyhetsarkiv
 news_utils	nonews	Hittade inga nyheter
 news_utils	readmore	Read&nbsp;Mer/Kommentar
@@ -1113,24 +888,13 @@ people	no_categories_found	Hittade inga kategorier
 people	no_skill_inventory_setup_up	Ingen kompetenslista var inställd
 people	none_found	Hittade ingen
 people	project	$1 projekt
-people	section	Hjälp Önskas
 people	short_description	Kort beskrivning
 people	skill	Kompetens
 people	status	Status
 people	title	Hjälp Önskas, system
 people	title_array	Rubrik
-people_admin	section	Hjälp Önskas
-people_admin	title	Administration av Hjälp önskas
-people_admin_people_cat	section	Administration av Hjälp önskas
-people_admin_people_cat	title	Lägg till jobbkategorier
-people_admin_people_skills	section	Administration av Hjälp önskas
-people_admin_people_skills	title	Lägg till jobbkompetenser
-people_cat	section	Hjälp önskas
-people_cat	title	Lista jobb efter kategori
 people_createjob	continue	Fortsätt >>
 people_createjob	explains	Börja genom att fyll i fälten nedan. När du klickar fortsätt, så kommer du att visas en lista över kompetenser och erfarenhetsnivåer som detta jobb kräver.
-people_createjob	section	Hjälp Önskas
-people_createjob	title	Skapa ett nytt jobb
 people_editjob	error_missing	error - info sakns
 people_editjob	fill_in	Fyll i alla tvingande fält
 people_editjob	finished	Klar
@@ -1147,7 +911,6 @@ people_editjob	job_update_no_wrong_id	JOBB uppdatering misslyckades - fel projec
 people_editjob	job_update_ok	JOBB uppdatering lyckades
 people_editjob	no_such	Inga sådana poster i detta projekt
 people_editjob	posting_fetch_failed	POSTING hämtning MISSLYCKADES
-people_editjob	section	Hjälp Önskas
 people_editjob	skill_explains	<p>Du kan nu redigera/ändra listan av kompetenser bifogade med denna post. Utvecklare kommer att kunna matcha sina kompetenser med dina krav.</p><p>Alla poster stängs automatiskt efter två veckor.</p>
 people_editjob	title	Redigera jobb
 people_editjob	update_description	Uppdatera beskrivningar
@@ -1181,14 +944,11 @@ people_editprofile	no_skills_selected_to_delete	Inga kompetenser valda för rade
 people_editprofile	no_such_user	Ingen sådan användare
 people_editprofile	profile_title	Rubrik
 people_editprofile	publicly_viewable	Offentlig
-people_editprofile	section	Hjälp Önskas
 people_editprofile	skill_added_ok	Tillägg av kompetens
 people_editprofile	skill_delete_successfully	borttagning av kompetens $1 lyckades
 people_editprofile	skill_deletion_cancelled	Borttag av kompetens avbruten
 people_editprofile	skills_edit	Redigera kompetens
 people_editprofile	start_date	Startdatum
-people_editprofile	title	Redigera din profil
-people_editprofile	title_max_100_chars	Rubrik (max 100 tecken)
 people_editprofile	type	Typ
 people_editprofile	update_failed	Uppdatering av användare MISSLYCKADES
 people_editprofile	update_ok	Uppdatering av användare lyckades
@@ -1196,10 +956,6 @@ people_editprofile	update_permission	Uppdateringsrättigheter
 people_editprofile	user_fetch_failed	Hämtning av användare MISSLYCKADES
 people_editprofile	you_can_enter_new_skills	Du kan skriva in nya kompetenser du har skaffat dig här. Var vänlig skriv in start- och slut-datum så korrekt som möjligt.
 people_help_wanted_latest	title	Hjälp Önskas, senaste poster
-people_helpwanted_latest	section	Hjälp Önskas
-people_helpwanted_latest	title	Senaste poster
-people_proj	section	Hjälp Önskas
-people_proj	title	Hjälp Önskas för $1
 people_viewjob	contact_info	Kontaktinfo
 people_viewjob	fetch_failed	Hämtning av POSTNINGAR MISSLYCKADES
 people_viewjob	for_project	För projekt
@@ -1207,20 +963,15 @@ people_viewjob	no_such_posting	Inga sådana poster i detta projekt
 people_viewjob	open_date	Öppningsdatum
 people_viewjob	posting_id_not_found	Hittade inte postnings-ID
 people_viewjob	required_skills	Obligatoriska kompetenser
-people_viewjob	section	Hjälp Önskas
-people_viewjob	title	$1 önskas för $2
 people_viewjob	view_a_job	Visa ett jobb
 people_viewprofile	no_such_user	Inga sådana användare
-people_viewprofile	section	Användarinfo
 people_viewprofile	set_private	Denna användare har satt sin profil till privat
 people_viewprofile	skills_profile_for	Kompetensprofil för
 people_viewprofile	title	Visa en användarprofil
 people_viewprofile	user_fetch_failed	Användarhämtning MISSLYCKADES
 pm	admin		admin
-pm	any		Alla
 pm	assigned_to	Tilldelad
 pm	cat_any		Alla
-pm	cat_none	Ingen
 pm	category	Kategori
 pm	date_note	Systemet kommer att modifiera dina start-/slutdatum om du försöker skapa ett startdatum som ligger före slutdatumet på någon av uppgifterna du är beroende av.
 pm	dependent	Beroende av uppgift
@@ -1234,7 +985,6 @@ pm	no_tasks_found_text	Lägg till uppgifter med hjälp av länken ovan
 pm	noprj	<H1>Inga 		Underprojekt hittade</H1><P><B>Inga underprojekt har satts upp eller också kan dom inte visas.<P><FONT COLOR=RED>Administratören för detta projekt måste sätta upp projektet med adminsidan </FONT></B>
 pm	percent_complete	Procent färdig
 pm	priority	Prioritet
-pm	section	Projekt: $1
 pm	start_date	Startdatum
 pm	status	Status
 pm	summary	Uppgiftssammanfatning
@@ -1247,16 +997,12 @@ pm_addtask	task_added_relationship	Lyckades lägga till relation i ordningslista
 pm_addtask	task_created_successfully	Skapande av uppgift lyckades
 pm_addtask	task_updated_successfully	Uppdatering av uppgift lyckades
 pm_addtask	title	Lägg till en ny uppgift
-pm_admin	title	Uppgiftsledare: Administration
-pm_admin_change_status	section	Administration av uppgiftsledare
-pm_admin_change_status	title	Uppdateringsinformation
 pm_admin_projects	add_categories	Lägg till kategorier
 pm_admin_projects	add_categories_title	Lägg till kategorier
 pm_admin_projects	add_categories_to	Lägg till kategorier till
 pm_admin_projects	add_edit_categories	Lägg till/Redigera kategorier
 pm_admin_projects	add_project	Lägg till ett projekt
 pm_admin_projects	add_project_intro	Lägg till ett projekt, som kan innehålla ett set med uppgifter. Detta är inte samma sak som att skapa en ny uppgift.
-pm_admin_projects	add_subprojects	Lägg till projekt
 pm_admin_projects	admin_title	Administration av projekt-/uppgiftsledare
 pm_admin_projects	category_inserted	Kategori infogad
 pm_admin_projects	category_name	Kategorinamn
@@ -1267,27 +1013,17 @@ pm_admin_projects	change_project_intro	Du kan modifiera ett existerande projekt 
 pm_admin_projects	change_project_title	Ändra projekt-/uppgiftledarstatus
 pm_admin_projects	description	Beskrivning
 pm_admin_projects	edit_update	Redigera/Updatera projekt
-pm_admin_projects	existing_subprojects	Existerande underprojekt
 pm_admin_projects	id	ID
 pm_admin_projects	is_public	Är Offentlig?
 pm_admin_projects	modify_category	Modifiera en kategori i
 pm_admin_projects	no_categories	Inga kategorier definierade
 pm_admin_projects	no_projects_found	<h2>Hittade inga projekt</h2><p>Hittade inga för denna grupp. Du kan lägga till nya projekt med hjälp av "Lägg till ett projekt" länken ovan.</p>
-pm_admin_projects	no_subprojects	Inga underprojekt i denna grupp
 pm_admin_projects	project_inserted	Projekt infogat
 pm_admin_projects	project_name	Nytt projektnamn
 pm_admin_projects	project_title	Rubrik
 pm_admin_projects	projects_intro	Lägg till ett nytt projekt till projekt-/uppgiftsledare. <strong>Detta är inte samma sak som att lägga till en uppgift i projektet.</strong>
-pm_admin_projects	section	Administration av uppgiftsledare
 pm_admin_projects	send_updates	Skicka alla uppdateringar till
-pm_admin_projects	title	Lägg till underprojekt
 pm_admin_projects	updated_successfully	Uppdatering lyckades ";
-pm_browse_custom	section	Uppgiftsledare
-pm_browse_custom	title	Bläddra i egna uppgifter
-pm_browse_my	section	Projekt $1 uppgiftsledare
-pm_browse_my	title	Bläddra i mina uppgifter
-pm_browse_open	section	Uppgiftsledare
-pm_browse_open	title	Bläddra i öppna uppgifter
 pm_browsetask	browse	Bläddra
 pm_browsetask	next	nästa 50
 pm_browsetask	overdue_tasks	* Visar försenade uppgifter
@@ -1301,7 +1037,6 @@ pm_detailtask	hours		Timmar
 pm_detailtask	original_comment	Originalkommentar
 pm_detailtask	pct_complete	Procent Färdig
 pm_detailtask	priority	Prioritet
-pm_detailtask	section		Uppgiftsledare
 pm_detailtask	start_date	Startdatum
 pm_detailtask	status		Status
 pm_detailtask	submitted_by	Inlämnat av
@@ -1320,7 +1055,6 @@ pm_include_grouphtml	browse_task	Bläddra i uppgifter
 pm_include_grouphtml	error_disabled	Detta projekt har stängt av uppgiftsledaren
 pm_include_grouphtml	gantt_chart	Gantt karta
 pm_include_grouphtml	not_started	Ej startad
-pm_include_grouphtml	project	Projekt
 pm_include_grouphtml	reporting	Rapportering
 pm_include_taskhtml	by	Av
 pm_include_taskhtml	comment	Kommentar
@@ -1331,7 +1065,6 @@ pm_include_taskhtml	followups	Uppföljningar
 pm_include_taskhtml	no_changes	Inga förrändringar har utförts
 pm_include_taskhtml	no_comments	Inga kommentarer har lagts till
 pm_include_taskhtml	no_depend_info	Inga uppgifter är beroende av denna uppgift
-pm_include_taskhtml	no_followups	Inga uppföljningar
 pm_include_taskhtml	no_tracker_items	Inga relaterade ordningsposter har lagts till
 pm_include_taskhtml	old_value	Gammalt värde
 pm_include_taskhtml	open_date	Öppnat datum
@@ -1350,11 +1083,6 @@ pm_projectgroup	error_min_desc_length	Dokumentbeskrivning måste ha minst 10 tec
 pm_projectgroup	error_min_name_length	Rubriken måste ha minst 5 tecken
 pm_projectgroup	none_found	Hittade inga projektgrupper
 pm_projecttask	circular_dependency	Rundgångsberoende upptäckt'
-pm_projecttask	mail_followups_body	\nDatum: $1\nAv: $2\n\nKommentar:\n$3
-pm_projecttask	mail_followups_footer	För mer info, besök:
-pm_projecttask	mail_followups_subject	Uppgift #
-pm_projecttask	mail_followups_title	\n\nUppföljningar
-pm_projecttask	mail_notice			Uppgift # $1 har blivit uppdaterat\n\nProjekt: $2\nUnderprojekt: $3\nSammanfattning: $4\nFärdig: $5\nStatus: $6\n\nBeskrivning: $7
 pm_reporting	aging_report	Åldersrapport
 pm_reporting	all_tasks_by_category	Alla uppgifter efter kategori
 pm_reporting	all_tasks_by_technician	Alla uppgifter efter tekniker
@@ -1369,21 +1097,15 @@ pm_reporting	started_tasks	Antal startade uppgifter
 pm_reporting	tasks_by_category	Uppgifter efter kategori
 pm_reporting	tasks_by_technician	Uppgifter efter tekniker
 pm_reporting	title	Uppgift, rapportering system
-pm_task	create_successfully	Skapande av uppgift lyckades
 project_admin	add_user	Lägg till användare
 project_admin	docmanager_admin	Dokumentansvarig admin
 project_admin	download_tarball	Hämta ditt nattliga CVS-träds tarboll
-project_admin	edit_file_releases	Redigera/Lägg till filutgåvor
-project_admin	edit_member_permissions	Redigera medlemsrättigheter
-project_admin	file_releases	Filutgåvor
 project_admin	forum_admin	Forum admin
 project_admin	group_members	Gruppmedlemmar
 project_admin	homepage_link	Hemsida Länk
 project_admin	mail_admin	E-post admin
 project_admin	news_admin	Nyheter admin
-project_admin	packages	Paket
 project_admin	project_information	Diverse projektinformation
-project_admin	section	Projekt: $1
 project_admin	shell_server	Grupp skalserver (SSH)
 project_admin	shell_server_group_directory	Gruppkatalog på skalserver:
 project_admin	short_description	Kort beskrivning
@@ -1415,8 +1137,6 @@ project_admin_database	state	Status
 project_admin_database	title	Databasinformation
 project_admin_database	update	Uppdatering
 project_admin_editgroupinfo	active_features	Aktiva finesser
-project_admin_editgroupinfo	enable_anonymous_cvs	Möjliggör anonym CVS
-project_admin_editgroupinfo	enable_pserver	Möjliggör pserver
 project_admin_editgroupinfo	group_name	Beskrivande gruppnamn
 project_admin_editgroupinfo	group_updated	Gruppinformation uppdaterad
 project_admin_editgroupinfo	homepage_link	Hemsida länk:
@@ -1509,8 +1229,6 @@ project_admin_group_trove	title	Resursgrupp information
 project_admin_group_trove	update_changes	Uppdatera Alla kategoriförändringar
 project_admin_history	info	Denna logg kommer att visa vem som har gjort de mest signifikanta förändringarna i ditt projekt och när
 project_admin_history	title	Historik
-project_admin_newrelease	section	Administration av Projekt $1
-project_admin_newrelease	title	Skapa ny utgåva
 project_admin_qrs	changelog	Ändringslogg
 project_admin_qrs	create_new_package	Eller $1 skapa ett nytt paket $2
 project_admin_qrs	file_name	Filnamn
@@ -1533,58 +1251,11 @@ project_admin_qrs	required_processor_type	Måste välja en processortyp.
 project_admin_qrs	required_release_name	Måste definiera ett namn på utgåvan.
 project_admin_qrs	title	SnabbUtgåvoSystem
 project_admin_qrs	upload_new_file	Överför en ny fil
-project_admin_rmuser	cancel	Avbryt
-project_admin_rmuser	cannot_remove_admin	Du kan inte ta bort $1 admin
-project_admin_rmuser	info	<h3>Tar bort utvecklare från $1</h3><p>Du är på väg att ta bort utvecklare från $1. Var vänlige bekräfta din handling:</p>
-project_admin_rmuser	operation_not_permitted	Operation ej tillåten
-project_admin_rmuser	remove	Ta bort
-project_admin_rmuser	title	Ta bort användare
 project_admin_showreleases	date	Datum
 project_admin_showreleases	no_release	Inga utgåvor av detta paket är tillgängliga
 project_admin_showreleases	package_name	Paketnamn
 project_admin_showreleases	release_name	Utgåvonamn
 project_admin_showreleases	title	Utgåva ny filversion
-project_admin_userpermedit	add_to_all	Lägg till i alla
-project_admin_userpermedit	add_to_tracker	Lägg till i ordningslista
-project_admin_userpermedit	admin	Admin
-project_admin_userpermedit	admin_only	Admin endast
-project_admin_userpermedit	admin_tech	Admin & tekniker
-project_admin_userpermedit	no_permissions	Inga rättigheter
-project_admin_userpermedit	developer_not_found	Utvecklare ej funnen i denna grupp
-project_admin_userpermedit	docman	Ansvarig för dokumentation
-project_admin_userpermedit	editing_permissions	Du redigerar rättigheter för användare $1 ($2)
-project_admin_userpermedit	editor	Editor
-project_admin_userpermedit	forums	Forum
-project_admin_userpermedit	invalid_user	Ogiltig användare
-project_admin_userpermedit	moderator	Moderator
-project_admin_userpermedit	permissions_updated	Rättigheter uppdaterade
-project_admin_userpermedit	pm	Projekt-/Uppgiftsansvarig
-project_admin_userpermedit	project_admin	Projektadmin
-project_admin_userpermedit	project_role	Projektroll
-project_admin_userpermedit	property	Egenskap
-project_admin_userpermedit	release_technician	Utgåvotekniker
-project_admin_userpermedit	remove	Ta bort
-project_admin_userpermedit	reset_changes	Återställ förändringar
-project_admin_userpermedit	technician	Tekniker
-project_admin_userpermedit	title	Redigera utvecklarrättigheter
-project_admin_userpermedit	tracker_info	<h3>Lägg till användare till dessa ordningslistor:</h3>	<p>	Du kan välja vilka ordningslistor denna användare har privilegier i eller helt enkelt lägg till användaren i alla ordningslistor genom att kryssa i "Lägg till i alla".</p>
-project_admin_userpermedit	tracker_manager	Ordningslista ansvarig
-project_admin_userpermedit	undefined	Odefinierad
-project_admin_userpermedit	update_permissions	Uppdatera utvecklarrättigheter
-project_admin_userpermedit	user_added	Tillägg av användare lyckades
-project_admin_userpermedit	user_does_not_exist	Användaren finns inte.
-project_admin_userpermedit	value	Värde
-project_admin_userperms	docman	Doc.<br />Ansvarig
-project_admin_userperms	editor	Editor
-project_admin_userperms	forums	Forum
-project_admin_userperms	general	Generellt
-project_admin_userperms	info	Klicka på utvecklarens namn nedan för att redigera rättigheter
-project_admin_userperms	moderator	Moderator
-project_admin_userperms	no_developers	Hittade inga utvecklare
-project_admin_userperms	rel_tech	Utg.Tek.
-project_admin_userperms	task_manager	Uppgifts<br />ansvarig
-project_admin_userperms	title	Användare rättighetslista
-project_admin_userperms	tracker_manager	Ordningslista<br />ansvarig
 project_admin_utils	admin	Admin
 project_admin_utils	by	Av
 project_admin_utils	change_history	Grupp, ändringshistorik
@@ -1592,7 +1263,6 @@ project_admin_utils	database_admin	Databas admin
 project_admin_utils	date	Datum
 project_admin_utils	edit_jobs	Redigera jobb
 project_admin_utils	edit_public_info	Redigera offentlig info
-project_admin_utils	edit_release_files	Redigera/Släpp filer
 project_admin_utils	field	Fält
 project_admin_utils	multimedia_data	Redigera multimedia data
 project_admin_utils	old_value	Äldre värde
@@ -1600,7 +1270,6 @@ project_admin_utils	permission_blurb	<strong>NOTERA:</strong><dl><dt><strong>Pro
 project_admin_utils	post_jobs	Posta jobb
 project_admin_utils	project_history	Projekthistorik
 project_admin_utils	stats	Stats
-project_admin_utils	user_permissions	Användarrättigheter
 project_admin_utils	vhosts	Virtuella värdar
 project_admin_vhost	create	Skapa
 project_admin_vhost	delete	Ta bort
@@ -1617,13 +1286,9 @@ project_filemodule_monitor	start_monitor_body	Bevakning har Startats
 project_filemodule_monitor	start_monitor_title	Bevakning startad
 project_filemodule_monitor	stop_monitor_body	Bevakning har Stoppats
 project_filemodule_monitor	stop_monitor_title	Bevakning stoppad
-project_home	cvs_commits	<strong>$1</strong> inlämningar, <strong>$2</strong> tillägg
-project_home	forum_messages	<strong>$1</strong> meddelanden i <strong>$2</strong> forum
-project_home	forums	forum
 project_home	help_wanted	Hjälp Önskas: Detta projekt söker efter
 project_home	help_wanted_multiple	Folk att fylla $1 flera olika positioner </a>
 project_home	holding_note	NOTERING: Denna post är underhålls av $1 personalen. Vi är inte den officiella webbplatsen för denna produkt. Ytterligare copyrightinformation hittar du på detta projekts hemsida.
-project_home	messages_in	meddelanden i
 project_home	monitor_package	Bevaka detta paket
 project_home	no_subprojects	Det finns inga offentliga underprojekt tillgängliga
 project_home	no_trackers	Det finns inga offentliga ordningslistor tillgängliga
@@ -1657,30 +1322,13 @@ project_showfiles	package	Paket
 project_showfiles	project_totals	Projekttotaler
 project_showfiles	release_highlighted	Utgåvan du har valt är <span style="background-color:pink">markerad</span>.
 project_showfiles	release_notes	Utgåva &amp; noteringar
-project_showfiles	section	Projekt: $1
 project_showfiles	size	Storlek
 project_showfiles	title	Projekt fillista
 project_shownotes	changes	Ändringar:
 project_shownotes	error_release_not_found	Hittade inte utgåvan
 project_shownotes	notes	Noteringar:
 project_shownotes	release_name	Utgåvans namn:
-project_shownotes	section	Projekt: $1
 project_shownotes	title	Filutgåvans noteringar och ändringslogg
-project_stats	change_stats_view	Visa ändringsstatistik
-project_stats	detailed_statistics	Detaljerad statistik för
-project_stats	last_30_days	Senaste 30 Dagar
-project_stats	last_7_days	Senaste 7 Dagar
-project_stats	monthly	Månatlig
-project_stats	tasks	Uppgifter
-project_stats	title	Projektstatistik
-project_stats	tracker	Ordningslista
-project_stats	usage_statistics	Användning statistik
-project_stats	view_reports	Visa rapporter
-project_stats_graph	date	Datum
-project_stats_graph	page_view_days	Sidläsningar (röd) och hämtat (blå) för de senaste $1 dagarna
-project_stats_graph	page_view_months	Sidläsningar (röd) och hämtat (blå) för de senaste $1 månaderna
-project_stats_graph	statistics	$1 Statistik $1
-project_stats_graph	views	Sidläsningar (röd) / Hämtat (blå)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	Alla ordningslistor
 project_stats_utils	bugs	Fel
@@ -1697,8 +1345,6 @@ project_stats_utils	stats_for_days	Statistik för de senaste $1 dagarna
 project_stats_utils	stats_for_months	Statistik för de senaste $1 månaderna.
 project_stats_utils	support	Support
 project_stats_utils	tasks	Uppgifter
-projects	section	Projekt: $1
-projects	title	Sammanfattning
 register	apply_for_registration	För att ansöka om en projektregistrering, så skall du fylla i grundlägande information om det. Var vänlig läs beskrivningen nedan noggrant och delge fullständig och omfattande information. Alla fält nedan är obligatoriska.
 register	comprehensive_description	Beskriv ditt projekt på ett mer omfattande sätt.
 register	conflicting_licenses_choice	Motstridiga licensval
@@ -1707,8 +1353,6 @@ register	i_agree	JAG GODKÄNNER
 register	i_disagree	JAG GODKÄNNER INTE
 register	invalid_full_name	Ogiltigt fullständigt namn
 register	invalid_unix_name	Ogiltigt unixnamn
-register	license_type	Kulturellt Allmängods(Public Domain)</a><li>Webbplats Enbart <li>Annan/Privatägd Licens</ul><p><strong>Licens för detta projekt</strong><br/ ><strong>Din Licens:</strong><br />
-register	maximum_description	Maximal längd för projektbeskrivningen är 255 tecken
 register	more_license_description	Var vänlig och ge en mer omfattande licens beskrivning"
 register	no_license_chosen	Du har inte valt en licens
 register	other_license	Om du valde "annan", var vänlig ge en förklaring tillsammans med en beskrivning av din licens. Tänk på att andra licenser kanske inte blir godkända. Dessutom, det kan ta längre tid att ta beslut om sådana projekt, eftersom vi behöver kontrollera att licensen är kompatibel med Öppen Källkods (OpenSource) definitionen.
@@ -1720,31 +1364,9 @@ register	project_submitted	Ditt projekt har inlämnats till $1 administratörern
 register	project_unix_name	<h3>5. Projektets unixnamn</h3><p>Förutom projektets fulla namn, så behöver du välja ett kort,"Unix" namn för ditt projekt.</p><p> "Unixnamn" har flera begränsningar eftersom det används på så många ställen i webbplatsen. Dessa är:<ul><li>Får inte var samma unixnamn som för ett annat projekt<li>Måste ha mellan 3 och 15 tecken långt<li>Måste var skrivet i gemener<li>Kan endast innehålla tecken, nummer, och streck<li>Måst vara ett gilltigt unixanvändarnamn<li>Får inte vara detsamma som någon av våra reserverade domäner<li>Unixnamn kommer aldrig att ändras för detta projekt</ul><p>Ditt unixnamn är viktigt eftesom det kommer att användas för många saker, bland annat:<ul><li>En webbplats på<tt>unixname.$1</tt><li>Roten för ett CVS lager på <tt>/cvsroot/unixname</tt> på <tt>cvs.unixname.$1</tt><li>Skal åtkomst till <tt>unixname.$1</tt><li>Sökmotorer för hela webbplatsen</ul><p>Unixnamn:<br/>
 register	purpose_and_summarization	2. Projektets Offentliga Beskrivning</h3><p><strong></strong><p><strong> Var vänlig ge en detaljerad, korrekt beskrivning av ditt projekt och vilka $1 resurser du planerar att använda och hur. Denna beskrivning blir grunden för godkännandet eller avslaget för ditt projekts skall få oss som värd, och senare, för att säkerställa att du använder tjänsterna på avsett vis. Denna beskrivning kommer inte att användas som offentlig beskrivning av ditt projekt. Den måste vara skriven på engelska.</strong>
 register	registration_complete	Registrering färdig
-register	title	Ny projektregistrering
 register	unix_group_name_already_taken	Unixnamn redan upptaget
-register_complete	section	Ny projektregistrering
-register_complete	title	Registrering färdig
-register_projectinfo	section	Ny projektregistrering
-register_projectinfo	title	Projektinformation
-register_requirements	section	Ny projektregistrering
-register_requirements	title	Tjänster & minimikrav
-register_tos	section	Ny projektregistrering
-register_tos	title	Avtalsvilkor för tjänsten
-scm_index	anoncvs	<P><B>Anonym CVS åtkomst</B> <P>Detta projekts CVS-lager kan hämtas med anonym (pserver) CVS med följande instruktions set. Modul som du you vill hämta måste specifieras som <I>modulnamn</I>. När du tillfrågas om lösenord för <I>anonym</I>, tryck bara på returtangenten.
-scm_index	anoncvsup	Uppdateringar innifrån modulens katalog behöver inte -d parametern.
-scm_index	browseit	Bläddra i CVS-lagret
-scm_index	browsetree	<HR><B>Bläddra i CVS-trädet</B> <P>Bläddring i CVS-trädet ger dig en bra insyn i statusen för projektets kod. Du kan också se hela historiken för valfri fil lagret.
 scm_index	scm_repository	SCM Lager
-scm_index	devcvs	<P><B>Ge utvecklare CVS åtkomst via SSH</B> <P>Endast projekt utvecklare kan komma åt CVS trädet via denna metod. SSH1 måste vara installerad på din klientmaskin. Ersätt <I>modulnamn</I> och <I>utvecklarnamn</I> med rätt värden. Ange webbplatslösenord vid anmodan.
-scm_index	developer_commits_adds	Utvecklare (30 dagar/Inlämningar) (30 dagar/Tillägg)
-scm_index	developername	utvecklarnamn
-scm_index	error_only_projects_can_use_cvs	Fel, endast projekt kan använda CVS
 scm_index	error_this_project_has_turned_off	Fel, detta projekt har stängt av CVS
-scm_index	history	Lagerhistorik
-scm_index	modulename	modulnamn
-scm_index	nohistory	Detta projekt har ingen CVS-historik.
-scm_index	section	Projekt: $1
-scm_index	title	CVS
 search	title	Sök
 searchbox	forum	Detta forum
 searchbox	people	Personer
@@ -1763,7 +1385,6 @@ sendmessage	message_sent	Meddelandet har skickats
 sendmessage	name	Ditt namn
 sendmessage	send	Skicka meddelande
 sendmessage	subject	Ämne
-sendmessage	title	Skicka $1 ett meddelande
 session	cannotinit	FEL - Kan inte starta session
 session	deleted	Konto borttaget
 session	invalidpasswd	Ogiltigt lösenord eller användarnamn
@@ -1789,12 +1410,7 @@ snippet_addversion	paste_the_code_here	Klistra in koden här:
 snippet_addversion	snippet_package_version_added_successfully	Tillägg av kodstyckepaketversion lyckades.
 snippet_addversion	snippet_version_added_successfully	Tillägg av kodstyckeversion lyckades.
 snippet_addversion	submit	LÄMNA IN
-snippet_addversion	title	Lämna in en ny kodstyckeversion
-snippet_addversion	title_add_snippet_to_package	Lägg till kodstycken till paket
-snippet_addversion	title_submit_a_new_snippet_package	Lämna in ett nytt kodstyckepaket
-snippet_addversion	title_submit_a_new_snippet_version	Lämna in en ny kodstyckeversion
 snippet_addversion	version	Version:
-snippet_browse	creator	Creator
 snippet_browse	error_bad_url	Fel, inkorrekt url?
 snippet_browse	no_snippets_found	Hittade inga kodstycken
 snippet_browse	packages_of_snippets	Paket med kodstycken
@@ -1807,14 +1423,6 @@ snippet_browse	title	Kodstyckebibliotek
 snippet_caching	browse_by_category	Bläddra efter kategori
 snippet_caching	browse_by_language	Bläddra efter språk
 snippet_caching	intro	<p>Avsikten med detta arkiv är att låta dig dela med dig av dina kodstycken, skript,	och funktioner med Öppen Källkods (Open Source) Mjukvarugemenskapen.</p><p>Du kan skapa ett "nytt kodstycke", och därefter lämna in ytterligare versioner av kodstycket snabbt och enkelt.</p><p>När du har lämnat in kodstycken, så kan du skapa ett "Paket" av dem. Det paketet kan innehålla flera olika versioner av andra kodstycken.</p><p>&nbsp;</p><h3>Bläddra bland kodstycken</h3>	<p>Du kan snabbt bläddra i kodstyckebiblioteket:</p>
-snippet_delete	error_mangled_url	Fel, felaktig URL?
-snippet_delete	error_only_creator_of_package_version_can_delete	Fel - Endast skaparen av en paketversion kan ta bort den.
-snippet_delete	error_only_the_creator	Fel - Endast skaparen av en paketversion kan ta bort kodstycken från den.
-snippet_delete	item_removed_from	Del borttaget från paket
-snippet_delete	package_removed	Paket borttaget
-snippet_delete	snippet_removed	Kodstycke borttaget
-snippet_delete	that_snippet_doesnt_exist	Fel - Det kodstycket existerar inte i detta paket.
-snippet_delete	title	Ta bort kodstycken
 snippet_detail	author	Författare
 snippet_detail	changes_since_last_version	Förändringar sedan senaste versionen:
 snippet_detail	date_posted	Inlämningsdatum
@@ -1835,8 +1443,6 @@ snippet_detail	version_of_this_package	Version av detta paket:
 snippet_detail	version_of_this_snippet	Version av detta kodstycke:
 snippet_detail	you_can_submit_a_new	Du kan lämna in en ny version av detta kodstycke om du har modifierat det och anser att det är viktigt nog att dela med andra.
 snippet_detail	you_can_submit_a_new_version_of_package	Du kan lämna in en ny version of detta paket om du har modifierat det och anser att det är viktigt nog att dela med andra.
-snippet_download	error	Fel
-snippet_download	nothing_in_here	fanns inget här
 snippet_index	title	Kodstyckesbibliotek
 snippet_package	add_snippet_to	Lägg till kodstycken till paket
 snippet_package	add_snippet_to_package	Lägg till kodstycken till paket
@@ -1863,17 +1469,13 @@ snippet_package	you_can_group	<p>Du kan gruppera existerande kodstycken tillsamm
 snippet_submit	category	Kategori
 snippet_submit	description	Beskrivning
 snippet_submit	error_doing_snippet_insert	FEL VID INFOGNING AV KODSTYCKEN!
-snippet_submit	error_doing_snippet_version_insert	FEL VID INFOGNING AV KODSTYCKEVERSION!
-snippet_submit	error_go_back_and_fill	Fel, gå tillbaka och fyll i all information
 snippet_submit	language	Språk
 snippet_submit	license	Licens
 snippet_submit	make_sure_all_info	Säkerställ att all inforamtion är komplett och riktig
 snippet_submit	paste_the_code_here	Klistra in koden Här
 snippet_submit	snippet_added_successfull	Tillägg av kodstycke lyckades.
 snippet_submit	snippet_title	Rubrik
-snippet_submit	snippet_version_added_successfully	Tillägg av kodstyckeversion lyckades
 snippet_submit	submit	LÄMNA IN
-snippet_submit	submit_a_new_snippet	Lämna in ett nytt kodstycke
 snippet_submit	suggest_a_category	Föreslå en kategori
 snippet_submit	suggest_a_language	Föreslå ett språk
 snippet_submit	type	Skript Typ
@@ -1884,20 +1486,16 @@ snippet_utils	author	Författare
 snippet_utils	bbs_systems	BBS-system
 snippet_utils	browse	Bläddra
 snippet_utils	calendars	Kalendrar
-snippet_utils	category	Kategori:
 snippet_utils	choose_one	Välj en
 snippet_utils	class	Klass
 snippet_utils	create_a_package	Skapa ett paket
 snippet_utils	database_manipulation	Databasmanipulering
-snippet_utils	description	Beskrivning:
 snippet_utils	download_version	Hämta version
 snippet_utils	file_management	Filhantering
 snippet_utils	full_script	Fullt skript
 snippet_utils	function	Funktion
 snippet_utils	games	Spel
 snippet_utils	html_manipulation	HTML-manipulering
-snippet_utils	language	Språk:
-snippet_utils	license	Licens:
 snippet_utils	math_functions	Matematikfunktioner
 snippet_utils	no_snippets_are_in_this_package	Det finns ännu inga kodstycken i detta paket
 snippet_utils	other	Annan
@@ -1910,11 +1508,9 @@ snippet_utils	snippet_id	Kodstycke-ID
 snippet_utils	snippet_in_this_package	Kodstycken i detta paket:
 snippet_utils	snippet_title	Rubrik
 snippet_utils	submit_a_new_snippet	Lämna in ett nytt kodstycke
-snippet_utils	type	Typ:
 snippet_utils	unix_admin	UNIX admin
 snippet_utils	voting	Röstning
 snippet_utils	website_only	Endast Webbplats
-softwaremap	title	Resurskarta
 source	file_not_found	Hittar inte filen
 source	file_not_found_text	Hittar inte den specifierade filen för visning.
 source	invalid_argument	Ogiltigt filargument
@@ -1923,12 +1519,7 @@ source	missing_file	Filargument saknas
 source	missing_file_text	En fil måste anges för denna sida.
 source	show_source	Visa källkod
 source	source_of	Källkod för $1
-staff	about_blurb	<P><h2>GForge medarbetarna</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern är the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>. We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing eller two about running important webbplatser.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan är the "Product Ansvarig" for GForge. We're not sure what that means, only that he likes timelines och handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim är the technical lead on GForge och är from Iowa. Yes Iowa. Not Idaho och not Ohio. Iowa. When he's not working you kan locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> och <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul är a developer, living in Ukraine. Yep, it's where Chernobyl är located. He *claims* he had nothing to do with what happened. He describes himself as a "confirmed geek/workaholic typ".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell är also on the GForge development team. He worked for another company, but they wanted to ditch Open Source och move to ASP for their webbprogram... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah är a system administrator/developer from the frosty regions of Minnesota. When he's not shoveling his driveway eller defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) är the Quality of Service Ansvarig for GForge. He currently handles the bulk of the level two support requests, maintains the site status sida, och helps to ensure everyone who logs a support request gets timely, correct service. He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks och improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-stats	overview_stats	ÖVERSIKT STATISTIK
-stats	project_stats	PROJEKT STATISTIK
-stats	site_graphs	WEBBPLATSGRAFER
 stats	title	$1 Webbplats Statistik
-stats_graph	joverview_stats	ÖVERSIKT STATISTIK
 stats_graph	project_stats	PROJEKT STATISTIK
 stats_graph	site_graphs	WEBBPLATSGRAFER
 stats_graph	sitewide_statistics_graphs	Statistikgrafer för hela webbplatsen
@@ -1942,7 +1533,6 @@ stats_index	other_statistics	Annan statistik:<ul><li><a href="lastlogins.php">Se
 stats_index	overview_stats	ÖVERSIKT STATISTIK
 stats_index	project_stats	PROJEKTSTATISTIK
 stats_index	site_graphs	WEBBPLATSGRAFER
-stats_index	sitewide_aggregate_statistics	Sammanlagda statistik för hela webbplatsen
 stats_lastlogins	date	Datum
 stats_lastlogins	last_logins	Senaste inloggningar
 stats_lastlogins	most_recent_open	Senast öppnade sessioner
@@ -1980,7 +1570,6 @@ stats_site_utils	report	Rapport:
 stats_site_utils	returned_no_category	inget kategorinamn returnerades
 stats_site_utils	site	Webbplats
 stats_site_utils	site_views	Webbplatsläsningar
-stats_site_utils	special_project_list	Specialprojektlista
 stats_site_utils	statistics_for_the_past_days	Statistik för de senaste $1 dagarna.
 stats_site_utils	statistics_for_the_past_months	Statistik för de senaste $1 månaderna.
 stats_site_utils	subdomain	Underdomän
@@ -2000,7 +1589,6 @@ stats_view_graph	views	Sidläsningar (RÖD)
 survey	for_some_reason	Av någon anledning, så följde inte grupp-ID eller undersöknings-ID med till denna sida
 survey	high	Hög
 survey	low	Låg
-survey	permission_denied	Tillgång nekad
 survey	survey_not_found	Hittade inte undersökning
 survey	survey_privacy	Undersökning privatliv
 survey	title	Undersökning
@@ -2012,7 +1600,6 @@ survey_add_question	question_type	Fråga typ
 survey_add_question	show_existing_questions	Visa existerande frågor.
 survey_add_question	title	Lägg till en fråga
 survey_add_survey	add_this_survey	Lägg till denna undersökning
-survey_add_survey	error_in_insert	Fel vid infogande av undersökning
 survey_add_survey	existing_surveys	Existerande undersökningar
 survey_add_survey	is_active	Är Aktiv?
 survey_add_survey	list_questions_numbers	Lista frågenummer, i önskad ordning, kommaseparerad. <strong>Hänvisa till din lista med frågor</strong> så att du kan se frågornas ID. Ta <strong>inte</strong> med mellanslag eller avsluta din lista med ett komma. <br />Ex: 1,2,3,4,5,6,7
@@ -2021,42 +1608,12 @@ survey_add_survey	no	Nej
 survey_add_survey	show_existing_question	Visa existerande frågor
 survey_add_survey	survey_inserted	Undersökning infogad
 survey_add_survey	title	Lägg till en undersökning
-survey_add_survey	title_is_required	Undersökningsrubrik krävs
 survey_add_survey	yes	Ja
-survey_admin	section	Undersökningssverktyg
-survey_admin	title	Administration
-survey_admin_add_question	section	Undersökning administrationverktyg
-survey_admin_add_question	title	Lägg till undersökningsfråga
-survey_admin_add_survey	section	Undersökning administrationsverktyg
-survey_admin_add_survey	title	Lägg till undersökning
-survey_admin_edit_question	section	Undersökning administrationsverktyg
-survey_admin_edit_question	title	Redigera en undersökningsfråga
-survey_admin_edit_survey	section	Undersökning administrationsverktyg
-survey_admin_edit_survey	title	Redigera undersökning
-survey_admin_index	add_question	Lägg till frågor
-survey_admin_index	add_survey	Lägg till undersökningar
-survey_admin_index	edir_existing_survey	Redigera existerande undersökningar
-survey_admin_index	edit_existing_question	Redigera existerande frågor
 survey_admin_index	its_simple_to_create	<p>Det är enkelt att skapa en undersökning.<ol><li>Skapa frågor och kommentarer med formulären ovan.</li><li>Skapa en undersökning, lista frågorna i ordning (välj från <strong>din</strong> lista med frågor).</li><li>Länka till undersökningen med detta format: $1 där XX är undersökningens number
 survey_admin_index	permission_denied	Tillgång nekad
-survey_admin_index	show_results	Visa undersökningsresultat
 survey_admin_index	title	Administration av undersökning
 survey_admin_index	you_can_now_activate	Du kan nu aktivera/deaktivera undersökningar på $1 redigera existerande undersökningar $2 sida
-survey_admin_show_questions	section	Undersökning, administrationsverktyg
-survey_admin_show_questions	title	Visa undersökningsfrågor
-survey_admin_show_results	section	Undersökning, administrationsverktyg
-survey_admin_show_results	title	Visa undersökningsresultat
-survey_admin_show_results_aggregate	section	Undersökning, administrationsverktyg
-survey_admin_show_results_aggregate	title	Visa undersökningsresultat
-survey_admin_show_results_comments	section	Undersökning, administrationsverktyg
-survey_admin_show_results_comments	title	Visa undersökningskommenter
-survey_admin_show_results_individual	section	Undersökning, administrationsverktyg
-survey_admin_show_results_individual	title	Visa Individuella undersökningsresultat
 survey_admin_utils	found	$1 undersökningar hittade
-survey_admin_utils	group_id	Grupp-ID
-survey_admin_utils	survey_id	Undersöknings-ID
-survey_admin_utils	survey_questions	Frågor för undersökning
-survey_admin_utils	survey_title	Rubrik för undersökning
 survey_edit	change_after_already_response	Om du ändrar en undersökning efter att du redan har fått svar, så kan dina resultatsidor bli missvisande eller stökiga
 survey_edit	existing_surveys	Existerande undersökningar
 survey_edit	is_active	Är aktiv
@@ -2087,10 +1644,8 @@ survey_edit_question	title	Redigera en fråga
 survey_edit_question	update_failed	UPPDATERING MISSLYCKADES
 survey_edit_question	update_successful	UPPDATERING FRAMGÅNGSRIK
 survey_edit_question	warning_change_after_response	VARNING! Det är en dålig idé att ändra en fråga efter att svar på den har lämnats
-survey_index	for_some_reason	Av någon anledning, så följde inte grupp-ID eller undersöknings-ID med till denna sida
 survey_index	survey_id	Undersöknings-ID
 survey_index	survey_title	Undersökningsrubrik
-survey_index	this_group_has	Denna grupp har inga aktiva undersökningar
 survey_index	title	Undersökning
 survey_privacy	survey_privacy	Undersökning privatliv
 survey_privacy	the_privacy_information	<p>Informationen som insamlas i dessa undersökningar kommer aldrig säljas till tredje man eller användas för få dig att köpa några varor eller tjänster.</p><p>Denna information samlas in för att med hjälp av undersökningen bygga en profil om projektet och utvecklarna. Den profilen kommer att hjälpa webbsidans besökare förstå kvaliteten på ett projekt.</p><p>ID på dem som svarar på undersökningar döljs och är inte synliga för projektadministratörer, allmänheten eller tredje man.</p><p>Den insamlade information används bara i sammanslagen form, och inte för att peka ut enskilda användare eller utvecklare.</p><p>Om några förrändringar görs av denna policy, så kommer det bara att påverka framtida insamlad data och användaren har naturligtvis möjlighet att välja att inte vara med.
@@ -2118,14 +1673,8 @@ survey_show_questions	note_use_these_questions_id	NOTERA: använd dessa fråge-I
 survey_show_questions	permission_denied	Tillgång nekad
 survey_show_questions	title	Undersökning frågor
 survey_show_questions	you_may_use_any_of_these	Du kan använda alla dessa frågor i din undersökning
-survey_show_result_comment	found	Hittade
-survey_show_result_comment	permission_denied	Tillgång nekad
-survey_show_result_comment	question	Fråga:
-survey_show_result_comment	title	Sammanlagda resultat för undersökning
-survey_show_results	found	Hittade
 survey_show_results	permission_denied	Tillgång nekad
 survey_show_results	title	Undersökningsresultat
-survey_show_results	view_aggregate_responses	Visa sammanlagda svar
 survey_show_results_aggregate	average	Genomsnitt
 survey_show_results_aggregate	error	fel
 survey_show_results_aggregate	no	Nej
@@ -2139,10 +1688,6 @@ survey_show_results_csv	permission_denied	Tillgång nekad
 survey_show_results_individual	permission_denied	Tillgång nekad
 survey_show_results_individual	title	Resultat
 survey_show_results_individual	yes_no	Ja / Nej
-survey_survey	section	Undersökningsverktyg
-survey_survey	title	Visa undersökning
-survey_survey_resp	section	Undersökningsverktyg
-survey_survey_resp	title	Undersökning, behandling / svar
 survey_utils	add_question	Lägg till frågor
 survey_utils	add_survey	Lägg till undersökning
 survey_utils	admin	Admin
@@ -2153,8 +1698,6 @@ survey_utils	show_results	Visa resultat
 system	datefmt	Y-m-d H:i
 system	locale	Sv_SE
 system	strftimefmt	%Y %B %e  %H:%M
-themes	section	Kontoinställningar
-themes	title	Visa/Ändra tema
 top	NA	N/A
 top	about_blurb	Vi håller ordning på många projekts användningsstatistik på $1, och visar här de högst rankade projekten i flera kategorier.
 top	active_all_time	Mest aktiv genom tiderna
@@ -2174,18 +1717,12 @@ top	view_other_top_category	Se andra topkategorier
 top_mostactive	percentile	Percentil
 top_mostactive	project_name	Projektnamn
 top_mostactive	rank	Ranking
-top_mostactive	section	Främsta projekt
-top_mostactive	title	Mest aktiva projekt: $1
 top_mostactive	updated_daily	Uppdaterad dagligen
-top_toplist	change	Förrändring
 top_toplist	download	Hämtat
-top_toplist	last_rank	Senaste rang
 top_toplist	pageviews	Sidträffar
 top_toplist	posts	Poster
 top_toplist	project_name	Projektnamn
 top_toplist	rank	Rank
-top_toplist	section	Främsta projekt
-top_toplist	title	Främsta projektlistan
 top_toplist	top_download	Mest Hämtat
 top_toplist	top_download_7_days	Mest hämtat de senaste 7 dagarna
 top_toplist	top_forum_post_count	Flest forumposter
@@ -2197,122 +1734,74 @@ top_topusers	last_rank	Senaste Rang
 top_topusers	rank	Ranking
 top_topusers	rating	Bedömning
 top_topusers	real_name	Verkligt namn
-top_topusers	title	Högst rankad användare
 top_topusers	user_name	Användarenamn
 tracker	admin	Admin
 tracker	any	Alla
 tracker	assigned_to	Tilldelad
 tracker	assignee	Tilldelad
-tracker	category	Kategori
-tracker	category_any	Alla
 tracker	check_upload	Markera för att överföra & bifoga fil
 tracker	choose	Välj en ordningslista så kan du bläddra/redigera/lägga till poster i den.
 tracker	close_date	Stängningsdatum
-tracker	comment_added	Kommentar tillagd
 tracker	date	Datum
 tracker	detailed_description	Detaljerad beskrivning
 tracker	file_delete	Fil raderad:
 tracker	file_delete_successful	Filradering: Lyckad
-tracker	file_delete_upload	Filöverföring
 tracker	file_description	Filbeskrivning
 tracker	file_upload_successful	Filöverföring: Lyckad
 tracker	followups	Uppföljning
-tracker	group	Grupp
-tracker	group_any	Alla
 tracker	id	ID
 tracker	insert_email	Om du <strong>inte kan</strong> logga in, så skriver du din e-postadress här:
 tracker	item_created	Lyckades skapa post
-tracker	item_group	Grupp
 tracker	no_trackers	Hittade inga tillgängliga ordningslistor
 tracker	no_trackers_text	Inga ordningslistor har satts upp eller så kan du inte se dom.<p><FONT COLOR=RED>Admionistratören för detta projekt måste ställa in datatyperna med $1 admin sida $2</FONT></strong>
 tracker	open_date	Öppningsdatum
 tracker	please_login	Var vänlig $1 logga in $2
 tracker	priority	Prioritet
 tracker	reporting	Rapport
-tracker	resolution	Lösning
 tracker	security_note	SKRIV INTE lösenord eller hemlig information i ditt meddelande!
 tracker	status	Status
 tracker	status_any	Alla
 tracker	submitted_by	Inlämnad av
 tracker	submitter	Inlämnare
 tracker	summary	Sammanfattning
-tracker	title	Ordningslistor
 tracker	tracker_item	Ordningspost
 tracker	unassigned	Ej tilldelad
 tracker	updated_successful	Uppdatering lyckades
 tracker_add	for_project	För projekt
 tracker_add	submit		Lämna In
-tracker_add	title	Lämna in ordningsposter
 tracker_admin	add_canned_responses	Lägg till/Uppdatera förinställda svar
 tracker_admin	add_canned_responses_info	Skapa/Ändra förinställda svarsmeddelanden för ordningslistan
 tracker_admin	add_categories	Lägg till/Uppdatera kategorier
 tracker_admin	add_categories_info	Lägg till kategorier som, 'e-postmodul','gant kartmodul','cvs', etc
 tracker_admin	add_group_infos	Lägg till grupper som, 'v1.2','stöds ej','ej verifierad', etc
 tracker_admin	add_groups	Lägg till/Uppdatera grupper
-tracker_admin	add_permissions	Lägg till/Uppdatera användare &amp; rättigheter
-tracker_admin	add_permissions_info	Lägg till/ta bort användare till/från denna ordningslista
-tracker_admin	admin	Admin
-tracker_admin	auto_assign_to	Auto-tilldela till
 tracker_admin	canned_response_inserted	Förinställt svar infogat
 tracker_admin	canned_response_updated	Förinställda svar uppdaterade
-tracker_admin	category_add_warning	När du lagt till en kategori, så kan den inte tas bort
-tracker_admin	category_inserted	Kategori infogad
 tracker_admin	category_name	Kategorinamn
-tracker_admin	category_updated	Kategori uppdaterad
 tracker_admin	choose_datatype	Völj en data typ och så kan du ställa in inställningars, kategorier, grupper, användare, och rättigheter
 tracker_admin	error_inserting	Fel vid infogning
 tracker_admin	error_updating	Fel vid uppdatering
-tracker_admin	group_inserted	Grupp infogad
 tracker_admin	group_name	Nytt gruppnamn
-tracker_admin	group_updated	Grupp uppdaterad
 tracker_admin	intro	<h3>Skapa en ny ordningslista</h3><p>Du kan använda dettas system för att hålla ordning på nästa alla typer av data, varje ordningslista har egna användare, grupper, kategorier, och rättighetslistor. Du kan också lätt flytta poster mellan listorna när du behöver.</p><p>Ordningslistor kallas för "Artifakttyper" och individuella databitar för "Artifakter". "Fel" kan vara en Artifakttyp, medan en fel rapport är en Artifakt. Du kan skapa så många Artifakttyper som du önskar, men komm ihåg att du behöver ställa in kategorier, grupper, och rättigheter för varje typ, vilket kan vara tidsödande.
-tracker_admin	section	Ordningslista
 tracker_admin	title	Administration
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	Rubrik
 tracker_admin	tracker_updated	Ordningslista uppdaterad
 tracker_admin	update_preferences	Uppdatera inställningar
 tracker_admin	update_preferences_info	Ställ in inställningar som förfallodatum, e-postadresser
-tracker_admin	users_added	Användare tillagda
-tracker_admin	users_deleted	Användare borttagna
-tracker_admin	users_updated	Användare uppdaterade
 tracker_admin_add_canned	canned_response_body	Meddelandetext
 tracker_admin_add_canned	canned_response_info	Att skapa användbara generiska svar kan spara dig mycket tid när du hanterar vanilga artifaktfrågor.
 tracker_admin_add_canned	canned_response_title	Rubrik
 tracker_admin_add_canned	existing_responses	Existerande svar
 tracker_admin_add_canned	no_responses	Inga svar inställda för denna grupp
 tracker_admin_add_canned	title	Lägg till/Ändra förinställt svar till $1
-tracker_admin_add_cat	no_categories	Inga kategorier definierade
-tracker_admin_add_cat	title	Lägg till kategorier i $1
-tracker_admin_add_group	group_add_warning	När du lägger till en grupp, så kan den inte bli borttagen
-tracker_admin_add_group	no_groups_defined	Inga grupper definierade
-tracker_admin_add_group	title	Lägg till/Ändra grupper i $1
-tracker_admin_add_users	add_all_users	Lägg till alla användare
-tracker_admin_add_users	add_user_info	<h3>Lägg till dessa användare:</h3><p>Du kan välja användare för din ordningslista eller helt enkelt lägga till alla genom att markera "Lägg till alla användare".</p>
-tracker_admin_add_users	add_users	Lägg till användare
-tracker_admin_add_users	admin_only	Admin endast
-tracker_admin_add_users	category_permission	Rättighet
-tracker_admin_add_users	delete	Ta bort
-tracker_admin_add_users	developers_info	<p>Varje ordningslista som du definierar har separata användar- och rättighets-listor.</p><p>Lägg till utvecklare till denna ordningslistanr, och uppdatera sedan deras rättigheter.</p><p><dl><dt><strong>Tekniker</strong></dt><dd>kan tilldelas poster</dd><dt><strong>Administratörer</strong></dt><dd>kan ändra poster</dd></dl></p>
-tracker_admin_add_users	no_developers	Hittade inga utvecklare
-tracker_admin_add_users	tech_admin	Tekniker & admin
-tracker_admin_add_users	technician	Tekniker
-tracker_admin_add_users	title	Lägg till/Uppdatera ansanvändarnas i ordningslistan för $1
-tracker_admin_add_users	update_permissions	Uppdatera utvecklarrättigheter
-tracker_admin_add_users	user_name	Användarnamn
-tracker_admin_choose	title	Ordningslista admin
 tracker_admin_update_canned	title	Ändra förinställt svar i: $1
-tracker_admin_update_cat	auto_assign_to	Auto-tilldela till
-tracker_admin_update_cat	category_change_warning	Det är inte rekommenderat att ändra artifaktkategorins namn eftersom andra saker är beroende på det. När du ändrar kategorinamn, så kommer alla relaterade poster att ändras till det nya namnet.
-tracker_admin_update_cat	category_name	Kategorinamn
 tracker_admin_update_cat	title	Modifiera kategori i: $1
 tracker_admin_update_group	title	Modifiera en grupp i: $1
-tracker_admin_update_group	warning	Det är inte rekommenderat att ändra artifaktkategorins namn eftersom andra saker är beroende på det. När du ändrar kategorinamn, så kommer alla relaterade poster att ändras till det nya namnet.
 tracker_admin_update_type	allow_anonymous	Tillåt ej-inloggade postningar
 tracker_admin_update_type	browse_item_form_text	Fritext för "bläddra poster" sidan
 tracker_admin_update_type	days_overdue	Dagar innan den anses försenad
 tracker_admin_update_type	description	Beskrivning
-tracker_admin_update_type	display_resolution	Visa "Lösningar" lådan
 tracker_admin_update_type	email_all_changes	Skicka e-post vid alla förändringar
 tracker_admin_update_type	name	<strong> Namn:</strong> (exempel: mötesanteckningar, testresultat, RFP Dokument)
 tracker_admin_update_type	pending_timeout	Dagar till väntande ordningspost går ut
@@ -2320,7 +1809,6 @@ tracker_admin_update_type	publicy_available	Offentlig
 tracker_admin_update_type	send_submissions	Skicka e-post vid nya inlägg till adressen
 tracker_admin_update_type	submit_item_form_text	Fritext för "lägg till ny post" sida
 tracker_admin_update_type	title	Uppdatera $1
-tracker_admin_update_users	title	Lägg till/Uppdatera ordningslisterättigheter för användare
 tracker_artifact	double_submit	Du försökte lägga in samma post två gånger. Var vänlig och undvik dubbel-klickningar.
 tracker_artifact	error_admin_modify	Artifakt: Endast artifaktadministratörer kan modifiera privata artifakttyper
 tracker_artifact	error_body_required	Artifakt: Meddelandetext är obligatorisk'
@@ -2334,7 +1822,6 @@ tracker_artifact	monitoring_deactivated	Bevakning Deaktiverad
 tracker_artifact	nothing_changed	Inget Ändrat - uppdatering avbruten
 tracker_artifact	private_error	Artifakt: Endast gruppmedlemmar kan se privata artifakttyper
 tracker_artifactfile	required_fields	ArtifaktFil: Filnamn, typ, storlek, och data är obligatorisk
-tracker_artifactgroup	required_field	ArtifaktGrupp: namn obligatoriskt
 tracker_artifacthtml	by		Av
 tracker_artifacthtml	date		Datum
 tracker_artifacthtml	field		Fält
@@ -2343,11 +1830,8 @@ tracker_artifacthtml	no_changes	Inga Förändringar har gjorts för denna post
 tracker_artifacthtml	no_followups	Inga uppföljningar har postats
 tracker_artifacthtml	old_value	Äldre Värde
 tracker_artifacthtml	sender		Avsändare
-tracker_artifacttype	add_artifact_types	Lägg till/Bläddra artifakttyper
 tracker_artifacttype	admin		Admin
-tracker_artifacttype	admin_functions	Admin funktioner
 tracker_artifacttype	browse		Bläddra
-tracker_artifacttype	edit_options	Redigera/Uppdatera valmöjligheter i
 tracker_artifacttype	nobody		Ingen
 tracker_artifacttype	none		Inget
 tracker_artifacttype	reporting	Rapportering
@@ -2365,10 +1849,7 @@ tracker_browse	no_change	Ingen förändring
 tracker_browse	no_items	Hittade inga poster
 tracker_browse	old_requests	* Avser frågor > $1 dagar gamla
 tracker_browse	previous	Föregående 50
-tracker_browse	request_id	Fråge-ID
-tracker_browse	resolution	Lösning
 tracker_browse	sort_by		Ordna efter
-tracker_browse	title		Bläddra $1
 tracker_detail	add_comment	Lägg till en kommentar
 tracker_detail	attached_files	Bifogade filer
 tracker_detail	build_task_relation	Bygg uppgiftsrelation
@@ -2392,24 +1873,6 @@ tracker_mod	existing_files	Existerande filer
 tracker_mod	name		Namn
 tracker_mod	no_files	Inga filer bifogade förnärvarande
 tracker_mod	title	Modifiera
-tracker_reporting	aging_report	Åldranderapport
-tracker_reporting	all_by_group	Alla poster efter artifaktgrupp
-tracker_reporting	all_by_resolution	Alla poster efter lösning
-tracker_reporting	all_by_technician	Alla poster efter kategori
-tracker_reporting	all_items_by_technician	Alla poster efter tekniker
-tracker_reporting	artifact_type	Artifakttyp:
-tracker_reporting	average_turnaround	Genomsnittlig omsättnings tid för stängda poster (dagar)
-tracker_reporting	dist_by_category	Fördelning efter kategori
-tracker_reporting	dist_by_group	Fördelning efter grupp
-tracker_reporting	dist_by_resolution	Fördelning efter lösning
-tracker_reporting	dist_by_technician	Fördelning efter tekniker
-tracker_reporting	items_open	Antal fortfarande öppna poster
-tracker_reporting	items_submitted	Antal inlämnade poster
-tracker_reporting	open_by_group	Öppna efter artifaktgrupp
-tracker_reporting	open_items_by_category	Öppna poster efter kategori
-tracker_reporting	open_items_by_resolution	Öppna poster efter lösning
-tracker_reporting	open_items_by_technician	Öppna poster efter tekniker
-tracker_reporting	title	Artifaktrapporteringssystem
 tracker_taskmgr	add_relation_to_task	Lägg till relation till existerande uppgift.
 tracker_taskmgr	add_relationship	Lägg till relation till vald uppgift
 tracker_taskmgr	build_relationships	Bygg relation mellan ordningspost och uppgiftansvarig
@@ -2417,8 +1880,6 @@ tracker_taskmgr	create_task		Skapa ny uppgift
 tracker_taskmgr	task			Uppgift
 tracker_taskmgr	task_manager_project	Uppgiftsansvarig projekt
 tracker_taskmgr	tracker_item		Ordningspost
-tracker_utils	monitor			Bevaka
-tracker_utils	stop_monitoring		Sluta Bevaka
 trove	not_categorized	Detta projekt har ännu inte kategoriserat sig självt i
 trove	title	Resurskartan
 trove_list	browse_by	Bläddra efter:
@@ -2430,7 +1891,6 @@ trove_list	number_of_projects	<strong>$1</strong> projekt i resultatmängden.
 trove_list	projects	$1 projekt
 trove_list	remove_filter	Ta bort detta filter
 trove_list	title	Resurskarta
-user_home	contact	Kontakt
 user_home	diary_notes	Dagbok och anteckningar
 user_home	diary_notes_entries	Dagbok/anteckningar poster:
 user_home	diary_notes_monitor	Bevaka denna dagbok
@@ -2439,26 +1899,19 @@ user_home	email	Din e-postadress
 user_home	jabber_address	Jabberadress
 user_home	login_name	Inloggningsnamn
 user_home	member_of	Denna utvecklare är medlem i följande grupper:
-user_home	message	Meddelande
-user_home	name	Ditt namn
 user_home	no_projects	Denna utvecklare är inte medlem i någon grupp.
 user_home	peer_rating	Användarbedömning
 user_home	peer_rating_disabled	Användare valde att inte delta i användarbedömningar
 user_home	personal_information	Personlig information
 user_home	project_info	Projekt info
 user_home	real_name	Verkligt namn
-user_home	send	Skicka meddelande
-user_home	send_a_message	Skicka ett meddelande till
-user_home	send_message_if_logged	Du skulle kunna skicka ett meddelande om du var inloggad
 user_home	site_member_since	Webbplatsmedlem sedan
 user_home	skills_profile	kompetensprofil
-user_home	subject	Ämne
 user_home	title	Utvecklarprofil
 user_home	user_id	Användar-ID
 users	no_user_name	Inget användarnamn angivet
 users	optout	Du valde att inte delta i användarbedömningssystemet, annars hade du haft möjlighet att bedöma andra användare. Se <a href="/account/">din kontounderhållssida</a> för mer information.
 users	peerinfo1	<p>Ta dig gärna tid att betygsätta denna användare på följande kriterier om du är bekant med honom/henne. Tänk på att dina betyg kommer att vara synliga både för användaren och andra.</p><p>Användarbedömningssystemet hos $1 är baserat på ett koncept från <A HREF="http://www.advogato.com/">Advogato</A>. Systemet har blivit omarbetat och utvidgat i några avseenden.</p>
 users	peerinfo2	<p>Användarbedömningsrutan visar alla genomsnittsbetyg (samt responsnivåer) för varje individuellt kriterium. På grund av den matematik och de uträkningar som behövs för att göra på annat sätt så innefattar dessa siffror både svar från "betrodda" och "icke-betrodda" användare.</p><ul><li>"Rang för hela webbplatsen" fältet visar användarens rang jämfört med alla bedömda $1 användare.</li><li>"Sammanlagda poäng" visar en genomsnittlig viktad poäng baserad på svar från enbart "betrodda" användare.</li><li>Fältet "Personlig Viktning" visar den viktning användarens egna bedömningar av andra användare kommer att ges (mellan 1 och 1.5) -- Högre rankade användares svar ges större betydelse.</li></ul><p><i>Om du skulle välja att inte vara med i "användarbedömning" systemet(detta kommer att påverka din möjlighet att både bedöma och bli bedömd), se <a href="/account/">din konto underhåll sida</a>. Om du väljer att inte delta kommer dina bedömningar av andra användare att tas bort och boxen "Användarbedömningar" kommer att försvinna från din egna sida.</i></p>
-users	title	Användarsammanfattning
 users	user_not_exist_text	Ogiltig användare
 users	user_not_exist_title	Den användaren existerar inte.

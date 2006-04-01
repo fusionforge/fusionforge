@@ -19,20 +19,12 @@
 #
 menu	account_maintenance	Ενημέρωση Λογαριασμού
 menu	bookmark_page	Σελίδα Αγαπημένων
-home	breaking_down_barriers	Καταλύωντας τους φραγμούς στην Ανάπτυξη Ελεύθερου Λογισμικού
-menu	change_my_theme	Αλλαγή του Θέματός Μου
-menu	code_snippet_library	Βιβλιοθήκη Ψηγμάτων Κώδικα
-menu	compile_farm	Φάρμα Μεταγλώττισης
-group	developers	Προγραμματιστές
 group	developer_info	Πληροφορίες Προγραμματιστή
-menu	discussion_forums	Βήμα Συζητήσεων
-menu	documentation	Τεκμηρίωση Συστήματος
 frs	file_download	Μεταφόρτωση
 frs	file_monitor	Παρακολούθηση
 frs	file_notes	Σημειώσεις
 frs	file_package	Πακέτο
 frs	file_version	Έκδοση
-group	long_bugs	Παρακολούθηση Σφαλμάτων
 group	long_scm	Αποθήκη SCM
 group	long_docman	DocManager: Project Documentation
 group	long_forum	Δημόσια Βήματα
@@ -40,9 +32,7 @@ group	long_ftp	Χώρος Ανώνυμου FTP
 group	long_homepage	Αρχική Σελίδα Έργου
 group	long_mail	Λίστες Συνδρομητών
 group	long_news	Τελευταία Νέα
-group	long_patch	Διαχειριστής Επιρραμάτων
 group	long_pm	Διαχειριστής Εργασιών
-group	long_support	Διαχειριστής Υποστήριξης Προγράμματος
 group	long_survey	Έρευνες
 group	short_bugs	Σφάλματα
 group	short_scm	SCM
@@ -51,7 +41,6 @@ group	short_files	Files
 group	short_forum	Βήματα
 group	short_homepage	Πρώτη Σελίδα
 group	short_mail	Λίστες
-group	short_main	Κύριο
 group	short_news	Νέα
 group	short_patch	Επιρράματα
 group	short_pm	Εργασίες
@@ -66,21 +55,11 @@ menu	logout	Αποσύνδεση
 home	most_active_this_week	Περισσότερο Ενεργό για Αυτήν την Εβδομάδα
 menu	my_personal_page	Η Προσωπική μου Σελίδα
 menu	new_project	Καταχώριση Νέου Έργου
-menu	new_releases	Νέες Εκδόσεις
 menu	new_user	Νέος Χρήσης μέσω SSL
-menu	other_site_mirrors	Άλλα Συστήματα Καθεπτρισμού
-menu	project_admin	Διαχειριστής Έργου
 group	project_admins	Διαχειριστές Έργου
 menu	project_help_wanted	Ζητείτε Βοήθεια Έργου
-menu	project_summary	Περίληψη Έργου
 group	public_area	Δημόσιες Περιοχές
 menu	search	Αναζήτηση
-menu	software_map	Χάρτης Λογισμικού
 home	gforge_statistics	Στατιστικά GForge
-menu	top_projects	Κορυφαία Έργα
 home	top_project_downloads	Κορυφαίες Μεταφορτώσεις Έργων
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	el
-conf	language_id	19
 conf	mail_charset	UTF-8

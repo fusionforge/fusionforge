@@ -21,23 +21,14 @@
 #   * Fixed files/forum tab
 #
 about_foundries	about_blurb	O działach
-menu	about_gforge	About GForge
 menu	account_maintenance	Zarządzanie kontem
 menu	bookmark_page	Zrób zakładkę
-home	breaking_down_barriers	Przełamujemy bariery w rozwoju oprogramowania Open Source
-menu	change_my_theme	Zmień wygląd
-menu	code_snippet_library	Teczka wycinków kodu
-menu	compile_farm	Kompilatory
-group	developers	Programiści
 group	developer_info	Informacja o programiście
-menu	discussion_forums	Forum dyskusyjne
-menu	documentation	Dokumentacja serwera
 frs	file_download	Download
 frs	file_monitor	Monitor
 frs	file_notes	Notatki
 frs	file_package	Pakiet
 frs	file_version	Wersja
-group	long_bugs	śledzenie pluskiew
 group	long_scm	Repozytorium SCM
 group	long_docman	DocManager: dokumentacja projektu
 group	long_forum	Forum publiczne
@@ -45,9 +36,7 @@ group	long_ftp	Anonimowy FTP
 group	long_homepage	Strona domowa projektu
 group	long_mail	Listy dyskusyjne
 group	long_news	Najświeższe wieści
-group	long_patch	Centrum łat
 group	long_pm	Centrum zadań
-group	long_support	Centrum pomocy technicznej
 group	long_survey	Sondaże
 group	short_bugs	Pluskwy
 group	short_scm	SCM
@@ -56,7 +45,6 @@ group	short_files	Pliki
 group	short_forum	Forum
 group	short_homepage	Strona domowa
 group	short_mail	Listy dyskusyjne
-group	short_main	Główna
 group	short_news	Nowości
 group	short_patch	Łaty
 group	short_pm	Zadania
@@ -71,20 +59,11 @@ menu	logout	Wyloguj
 home	most_active_this_week	Najbardziej aktywny w tym tygodniu
 menu	my_personal_page	Moja strona osobista
 menu	new_project	Zarejestruj nowy projekt
-menu	new_releases	Nowości
 menu	new_user	Nowy użytkownik przez SSL
-menu	other_site_mirrors	Inne mirrory
-menu	project_admin	Admin projektu
 group	project_admins	Admini projektu
 menu	project_help_wanted	Potrzeba pomoc do projektu
-menu	project_summary	Podsumowanie projektu
 group	public_area	Obszar publiczny
 menu	search	Szukaj
-menu	software_map	Mapa projektów
 home	gforge_statistics	Statystyki GForge
-menu	top_projects	Najlepsze projekty
 home	top_project_downloads	Najczęściej pobierane projekty
-conf	content_encoding	UTF-8
-conf	language_code	pl
-conf	language_id	15
 conf	mail_charset	UTF-8

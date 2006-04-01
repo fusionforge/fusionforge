@@ -22,23 +22,14 @@
 #   * fixed files/forum tab
 #
 about_foundries	about_blurb	Pri fandejoj
-menu	about_gforge	Pri GForge
 menu	account_maintenance	Modifu konton
 menu	bookmark_page	Legosignoj
-home	breaking_down_barriers	Forigu obstaklojn por skribi liberajn programojn
-menu	change_my_theme	Ŝanĝu aspekton
-menu	code_snippet_library	Biblioteko de programeroj
-menu	compile_farm	Muntejaj komputiloj
-group	developers	Programantoj
 group	developer_info	Programanta informo
-menu	discussion_forums	Forumoj de diskuto
-menu	documentation	Dokumentado
 frs	file_download	Elŝutu
 frs	file_monitor	Priatenti dosieron
 frs	file_notes	Notoj
 frs	file_package	Pakaĵo
 frs	file_version	Redakto
-group	long_bugs	Cimilo
 group	long_scm	SCMejo
 group	long_docman	Dokumentilo
 group	long_forum	Publikaj Forumoj
@@ -46,9 +37,7 @@ group	long_ftp	Anonima FTPejo
 group	long_homepage	Projekta hejmpaĝo
 group	long_mail	Dissendolistoj
 group	long_news	Lastaj novaĵoj
-group	long_patch	Flikilo
 group	long_pm	Taskilo
-group	long_support	Subtenilo
 group	long_survey	Demandilo
 group	short_bugs	Cimoj
 group	short_scm	SCM
@@ -57,7 +46,6 @@ group	short_files	Dosieraj
 group	short_forum	Forumoj
 group	short_homepage	Hejmpaĝo
 group	short_mail	Listoj
-group	short_main	Ĉefa paĝo
 group	short_news	Novaĵoj
 group	short_patch	Flikoj
 group	short_pm	Taskoj
@@ -72,20 +60,11 @@ menu	logout	Adiaŭu
 home	most_active_this_week	Plej aktiva ĉi tiu semajno
 menu	my_personal_page	Mia propra paĝo
 menu	new_project	Nova projekto
-menu	new_releases	Novaj versioj
 menu	new_user	Nova uzanto per SSL
-menu	other_site_mirrors	Speguloj
-menu	project_admin	Administru projekton
 group	project_admins	Projektaj estraranoj
 menu	project_help_wanted	Projekthelpo dezirata
-menu	project_summary	Projekta resumo
 group	public_area	Publikaj regionoj
 menu	search	Serĉu
-menu	software_map	Mapo de programoj
 home	gforge_statistics	Statistikaĵoj de GForge
-menu	top_projects	Plej aktivaj projektoj
 home	top_project_downloads	Plej aktivaj projektaj elŝutoj
-conf	content_encoding	UTF-8
-conf	language_code	eo
-conf	language_id	13
 conf	mail_charset	UTF-8

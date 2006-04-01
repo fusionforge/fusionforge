@@ -2,45 +2,31 @@
 system	locale	ja
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
-conf	content_encoding	UTF-8
 conf	mail_charset	UTF-8
-conf	default_font	""
-conf	language_code	ja
-conf	language_id	25
 account	title	アカウントオプション
 account_change_email	message	$1にてメールアドレス変更の手続きがありました。\n\n手続きの覚えのある方は以下のURLにて処理を完了してください。\n\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
-account_change_email	section	アカウントオプション
 account_change_email	subject	$1認証
-account_change_email	title	メールアドレス変更
 account_change_email	mailsent	<p>メールを新しいアドレスへ送りました。メールアドレスの変更を完了するために送られたメールの中の指示にしたがって下さい。<p><a href="/">[ Home ] </a>
 account_change_email	desc	<p>メールアドレスを変更するには、使えるアドレスになっているかをチェックするために新しいメールアドレスからの確認が必要になります。\n<p>使えるメールアドレスを必要としている理由はユーザーに与えてある権限の為です。もし、シェルアカウントやプロジェクトアカウントの問題があった場合には、ちゃんと連絡を取れるのが重要です。\n<p>以下のフォームを送信すると、新しいメールアドレスに確認するためのURLを含むメールが送られます。そのURLをクリックすることによってメールアドレスの変更が終了されます。
 account_change_pw	confirmation	<h2>$1 パスワード変更確認</h2><p>パスワード変更に成功しました</p>
-account_change_pw	section	アカウントオプション
 account_change_pw	title	パスワード変更
-account_editsshkeys	section	アカウントオプション
-account_editsshkeys	title	CVS/SSH共有キー編集
 account_first	about_blurb	おめでとうございます。あなたはオープンソース開発の為のオンライン開発環境 $1 の公認ユーザーになりました。あなたは公認ユーザーとしてサイト上の全ての活動に参加することができ、プロジェクトメッセージフォーラムにメッセージの記入、開発者として $1 にあるソフトに関するバグ情報の提出もすることができます。また、あなた個人のプロジェクトを開始するのも良いでしょう。<p>余裕があればこのサイトに載っているドキュメントに目を通すようにしてください。<p>そうすれば、より $1 を使いこなせるようになるでしょう。<p>そして、より良い $1 にするためにフィードバックをいただければ助かると思います。<p>-- $1 スタッフより。
 account_first	title	ようこそ
 account_login	deleted_account	<p>あなたの $1 にあったアカウントは $1 スタッフによって削除されました。これには以下の二つの可能性があると考えられます。 \n\n1) あなたの依頼による削除\n2) いくつかの違法行為(アカウント利用規約の違反)があなたのアカウントで行われていた為、管理運営上の理由で削除\n\n以上の事について、ご不明な点がありましたら、<a href="/support/?group_id=1">サポートページ</a>をご覧下さい。</p><p><br><br>$1 スタッフ</p>
 account_login	iewarn	<H2><FONT COLOR="RED">IEユーザーは、IE5.01以上へのバージョンアップが必要となります。できれば、128ビットSSLに対応したバージョン。あるいはNetscape4.7以上のバージョンを使用してください。</font></h2>
 account_login	macwarn	<H2><FONT COLOR="RED">Mac OSでは現在、IEの使用はまだサポートしていません。Netscape4.7以上のバージョンをご使用下さい。</font></h2>
 account_login	pending_account	<P>あなたのアカウントは確認メールからのログインを待っています。確認メールの中に記述されたリンクをたどり、そこからログインしてみてください。そうすることによってあなたのアカウントがアクティブになります。 <p>もし、確認メールの再送が必要でしたら<A href="pending-resend.php?form_user=$1">ここ</a>をクリックしてください。確認メールが登録したメールアドレスへ送信されます。<br><hr><p>\n
-account_login	title	サイトログイン
 account_login	cookiewarn	ここから先はクッキーを有効にしてください
 account_login	loginname	ログイン名：
 account_login	passwd	パスワード:
-account_login	usessl	ログイン後もSSL接続のままにする
-account_login	sslnotice	 <p><B><FONT COLOR="RED">このフォームを送信するとSSL接続が行われ、送信内容を暗号化します。これによりその他のユーザーにあなたのパスワードや情報を読み取られるのを防ぎます。</font></b> <small style="font-size: x-small"> (もし、なぜ、このページはロードするのにSSLを使わないのかを疑問に思うのであれば、次の文章を読んでみるとよいでしょう。) </small> <P> <B>Internet Explorer</b> ユーザーはIEにSSLでの断続的な問題があります。ログイン後のSSL接続はおすすめできません。 Netscape ユーザーは最大限にセキュリティを保つため、SSLモードのままにすると良いでしょう。この良く知られている問題に関する情報については、<A HREF="http://www.microsoft.com/">マイクロソフト</a> のサイトに載せてあります。<P>
 account_login	login	ログイン(SSL)
 account_login	lostpw	[パスワードを忘れましたか？]
 account_login	newaccount	[新規アカウント]
 account_lostpw	message	誰か(もしくはあなた自身)が $3 サイトでパスワードの変更を要求しました。\n\nもし、あなたが変更の申し込みを出していなかったら、このメッセージを無視してください。もし、このような申し込みをしましたら、以下のサイトへ行き、パスワードの変更をしてください。\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n-- $3 スタッフ
 account_lostpw	subject	$1 認証
-account_lostpw	title	パスワードを忘れましたか？
 account_lostpw	notify	<p>登録されているアドレス宛に１通のメールを送信しました。メール内の文に従い、パスワードの変更をしてください。</p><a href="/">[ Home ]</a>
 account_lostpw	warn	<p>パスワード失うということは大変なことです。それはあなたのアカウント、あなたのプロジェクトおよびこのサイトのセキュリティを危険にさらします。<p>「パスワードハッシュを送る」をクリックすることによってアカウントに登録されたアドレス宛にURLを送信します。このURLにはあなたのアカウントのための128ビットの確認ハッシュがあります。URLを訪れパスワードを変更してください。
 account_lostpw	sendhash	パスワードハッシュを送る
-account_lostlogin	title	ロストパスワード確認
 account_lostlogin	severalconfirm	(未訳：account_lostlogin.severalconfirm)This confirm hash exists more than once. 
 account_lostlogin	invalidconfirm	(未訳：account_lostlogin.invalidconfirm)Invalid confirmation hash 
 account_lostlogin	sixchars	有効なパスワードを入力してください(最低 6 文字以上)
@@ -50,14 +36,12 @@ account_lostlogin	welcome	<h2>ロストパスワードログイン</h2><P>よう
 account_lostlogin	newpasswd	新規パスワード(最低 6 文字以上)
 account_lostlogin	newpasswd2	新規パスワード(確認)
 account_lostlogin	update	更新
-account_register	title	新規アカウント登録
 account_register	congrat	おめでとうございます。$1 上にユーザー情報を登録しました。<p>メールアドレスの有効性をチェックするために確認のメールを送信しました。メールに記述されたリンクをたどり、アカウントをアクティブにしてください。
 account_register	iewarn	<H2><FONT COLOR="RED">IEユーザーはバージョン5.01以上にアップグレードする必要があります。できれば128bitSSL対応のバージョンやNetscape4.7以上のバージョンをご使用ください。</FONT></H2>
 account_register	macwarn	<H2><FONT COLOR="RED">Mac OSでは現在、IEの使用は、まだ、サポートしていません。Netscape4.7以上のバージョンをご使用下さい。</FONT></H2> 
 account_register	loginname	ログイン名(大文字を使用してはいけません)
 account_register	password	パスワード(最低 6 文字以上):
 account_register	password2	パスワード(確認):
-account_register	realname	フルネーム:
 account_register	language	ランゲージ選択:
 account_register	timezone	タイムゾーン:
 account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span><font color="red">*</font></span><br /><em>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</em>
@@ -68,7 +52,6 @@ account_register	communitymail	追加されたコミュニティのメールを�
 account_register	mandatory	$1 がついてるフィールドは必須項目です。
 account_register	register	登録
 account_register	err_username	ユーザー名を入力して下さい。(必須)
-account_register	err_realname	フルネームを入力してください。(必須)
 account_register	err_passwd	パスワードを入力してください。(必須)
 account_register	err_passwd2	パスワードが一致しません
 account_register	err_passwd3	無効なパスワード:
@@ -86,15 +69,12 @@ account_register	update	更新
 account_register	reset	リセット
 account_unsubscribe	all_mailings	(未訳：account_unsubscribe.all_mailings)all $1 mailings and notifications 
 account_unsubscribe	site_mailings	(未訳：account_unsubscribe.site_mailings)$1 site mailings 
-account_verify	title	(未訳：account_verify.title)$1 Account Verification 
 account_verify	verify_blurb	<p>登録を完了するには、今、すぐにログインしてください。そうすることによって、あなたのアカウントは有効になり、普通のログインもできるようになります。</p> 
 account_verify	password	パスワード:
 account_verify	login	ログイン
 account_verify	loginname	ログイン名:
 account_verify	missingparam	見あたらないパラメータ
 account_verify	usermandatory	ユーザー名を入力しなければなりません。
-account_verify	invaliduser	無効なユーザーです。
-account_verify	nouser	ユーザーが存在しません。
 account_verify	invalidop	無効なオペレーション
 account_verify	accountactive	そのアカウントはすでにアクティブです。
 account_verify	invalidparam	無効なパラメータ
@@ -111,13 +91,10 @@ account_options	edit_skills_profile	スキルプロフィール編集
 account_options	user_id	ユーザーID
 account_options	login_name	ログイン名
 account_options	change_password	パスワード変更
-account_options	real_name	フルネーム
 account_options	language	ランゲージ
 account_options	timezone	タイムゾーン
 account_options	email_address	メールアドレス:
 account_options	change_email_address	メールアドレス変更
-contact	about_blurb	(未訳:contact.about_blurb)<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p> 
-contact	title	コンタクト $1
 cvs	section	プロジェクト: $1
 cvs	title	CVS
 cvs	anoncvs	<b>Anonymous CVS アクセス</b><p>このプロジェクトのCVSリポジトリは、次のCVSコマンドでチェックすることができます。あなたがチェックしたいモジュールの名前は<i>modulename</i>の部分に指定してください。<br>anonymousユーザーのパスワードを求められた時は何も入力せずにEnterキーを押してください。
@@ -132,12 +109,9 @@ docman	admin	管理
 docman	error_no_docs	このプロジェクトには読めるドキュメントがありません。
 docman	error_invalid_file_attack	無効なファイルによる攻撃の試みがありました。: $1
 docman	error_no_groups_defined	ドキュメントグループを定義できません
-docman	description	記述
 docman_admin	section	プロジェクト: $1
 docman_admin	title	 ドキュメントマネージャ：管理
 docman_admin	add_edit_docgroups	ドキュメントグループ 追加/編集
-docman_admin_docedit	section	 ドキュメントマネージャ
-docman_admin_docedit	title	ドキュメント編集
 docman_admin_editdocs	section	ドキュメントマネージャ管理
 docman_admin_editdocs	title	ドキュメント編集
 docman_admin_editdocs	state	ステータス
@@ -151,8 +125,6 @@ docman_admin_editgroups	new_group_name	新規グループ名
 docman_admin_editgroups	add_group	グループ追加
 docman_admin_editgroups	edit_group	グループ編集
 docman_admin_editgroups	description	(未訳:docman_admin_editgroups.description)Group name will be used as a title, so if it should be formatted correspondingly. 
-docman_admin_groupedit	section	ドキュメントマネージャ管理
-docman_admin_groupedit	title	ドキュメントグループ名変更
 docman_admin_groupedit	group_name	グループ名
 docman_display_doc	section	プロジェクト: $1
 docman_display_doc	title	ドキュメントマネージャ: ドキュメント表示
@@ -167,24 +139,9 @@ docman_new	language	ランゲージ
 docman_new	group	ドキュメント所属グループ: 
 docman_new	submit	情報送信
 docman_new	file	ファイル
-docman_new	state	ステータス
 docman_new	error_blank_document	エラー: 空のドキュメントを取得しました。
-forum	section	プロジェクト: $1
-forum	title	 フォーラム
 forum	choose	<p>フォーラムではメッセージの閲覧、検索、投稿が行えます。<p>
-forum	html	HTMLタグはテキストとして表示されます。
-forum_admin	section	プロジェクト: $1
 forum_admin	title	フォーラム: 管理
-forum_admin_addforum	section	 フォーラム管理
-forum_admin_addforum	title	フォーラム追加
-forum_admin_changestatus	section	フォーラム管理
-forum_admin_changestatus	title	フォーラムステータス変更
-forum_admin_delete	section	フォーラム管理
-forum_admin_delete	title	フォーラム削除
-forum_forum	section	プロジェクト: $1
-forum_forum	title	フォーラム: フォーラム表示
-forum_forum_thread	section	フォーラム
-forum_forum_thread	title	新規スレッド
 forum_forum	thread	スレッド
 forum_forum	author	作者
 forum_forum	date	日付
@@ -194,11 +151,7 @@ forum_forum	topic	トピック
 forum_forum	topicstarter	トピックの先頭
 forum_forum	replies	返事
 forum_forum	lastpost	最後の投稿
-forum_message	section	フォーラム
-forum_message	title	メッセージ
-forum_message	msg	このスレッドへメッセージを投稿
 forum_message	thread	新規スレッド開始
-forum_utils	news	ニュース
 forum_utils	discussionforum	ディスカッションフォーラム: 
 forum_utils	nonewsitem	エラー - 新規アイテムが見つかりません。
 forum_utils	latest	最新ニュース
@@ -206,29 +159,10 @@ forum_utils	monitor	モニタ フォーラム
 forum_utils	stopmonitor	ストップモニタリング
 forum_utils	admin	管理
 forum_utils	saveplace	フォーラムの場所を記憶
-forum_utils	erroradd	フォーラム追加エラー
-forum_utils	added	フォーラムを追加しました。
-forum_utils	notfound	何も見つかりませんでした。
 forum_utils	by	By:
-forum_utils	brokenthread	破損したスレッド
-forum_utils	thread	スレッド\n
-forum_utils	author	作者\n
-forum_utils	postedby	投稿者 
 forum_utils	date	日付
 forum_utils	summary	サマリー
-forum_utils	error	エラー
-forum_utils	noid	フォーラムIDなしでメッセージを投稿しようとしました。
-forum_utils	mustinclude	メッセージの投稿には本文と件名が必要です。
 forum_utils	doublepost	このメッセージは重複して送られたようです。このメッセージの件名と記事情報が前回送られたものと同じでした。
-forum_utils	nextfailed	次のスレッドIDの取得に失敗しました。
-forum_utils	errormaster	(未訳:forum_utils.errormaster)Couldn't Update Master Thread parent with current time
-forum_utils	errorparent	親スレッドは更新できません。
-forum_utils	errorfollowup	存在しないメッセージに対して投稿しようとしています。
-forum_utils	errorfollowup2	(未訳:forum_utils.errorfollowup2)No followup ID present when trying to post to an existing thread.
-forum_utils	errorpost	投稿に失敗しました。
-forum_utils	errorinsert	挿入IDの取得に失敗しました。
-forum_utils	posted	メッセージを投稿しました。
-forum_utils	feedbacklogin	メッセージを投稿するにはログインする必要があります。
 forum_utils	subject	件名: 
 forum_utils	message	メッセージ: 
 forum_utils	htmltag	HTMLタグはテキストとして表示されます。
@@ -239,9 +173,6 @@ forum_utils	anonymously	[匿名]
 forum_utils	couldpostif	(未訳:forum_utils.couldpostif)You could post if you were
 forum_utils	reply	返信
 forum_utils	mailmonitor	(未訳:forum_utils.mailmonitor)\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5 
-forum_utils	mailsent	メール送信 - 監視されています。
-forum_utils	mailnotsent	メールは送信されません - 監視されています。
-forum_utils	mailnotsent2	メールは送信されません - 監視されていません。
 frs	file_download	ダウンロード
 frs	file_monitor	モニタ
 frs	file_notes	ノート
@@ -251,26 +182,18 @@ frs	file_version	バージョン
 frs	latest_file_releases	最新ファイルリリース
 general	return	[$1 へ戻る]
 general	error	エラー
-general	sitename	$1
 general	footer	このページ「 $1 」のコピーライト情報などを含む詳しい情報を見るには<a href="/about.php">この</a>ページまで。
 general	permdenied	許可がありません
 general	permnotget	パーミッションが取得できません。
 general	permexcuse	このプロジェクトの管理者にこのページを見る権利をもらわなければなりません。
-general	turned_off	このプロジェクトは $1 をOFFにしています。
 general	update_successful	更新に成功しました。
 general	create_successful	作成に成功しました。
-general	no_valid_group	有効な $1 グループが選択されていませんでした
-general	no_valid_filename	有効なファイルネームではありません。
-general	no_valid_group_object	$1 は有効なグループオブジェクトではありません。
-general	submitted_successfully	$1 の送信に成功しました。
 general	language	ランゲージ
 general	submit_edit	編集結果を送信
 general	edit	編集
 general	add	追加
 general	go	Go
 group	developer_info	 デベロッパー情報
-group	developers	デベロッパー
-group	long_bugs	バグトラッキング
 group	long_scm	SCMリポジトリ
 group	long_docman	ドキュメントマネージャ：プロジェクトドキュメント
 group	long_forum	パブリックフォーラム
@@ -278,9 +201,7 @@ group	long_ftp	Anonymous FTP スペース
 group	long_homepage	プロジェクトホームページ
 group	long_mail	メーリングリスト
 group	long_news	最新ニュース
-group	long_patch	パッチマネージャ
 group	long_pm	タスクマネージャ
-group	long_support	テクニカルサポートマネージャ
 group	long_survey	調査
 group	long_tracker	トラッカー
 group	project_admins	プロジェクト管理
@@ -293,7 +214,6 @@ group	short_files	ファイル
 group	short_forum	フォーラム
 group	short_homepage	ホームページ
 group	short_mail	リスト
-group	short_main	メイン
 group	short_memberlist	デベロッパー
 group	short_news	ニュース
 group	short_patch	パッチ
@@ -308,47 +228,27 @@ group	activitystat	プロジェクトの活動 <a href="/project/stats/?group_id
 group	norelease	このプロジェクトはファイルをひとつもリリースしていません。
 group	nodescription	このプロジェクトはまだ記述を提出していません。
 home	about_blurb	<P>(未訳:home.about_blurb)$1 is a <B>free service to <A href="http://www.opensource.org/">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.</P><P><B>Site Feedback and Participation</B></P><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully.</P><P><B>Set Up Your Own Project</B></P><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>
-home	breaking_down_barriers	障害を乗り越え、オープンソース開発の道へ\n
 home	highest_ranked_users	ランキングの最も高いユーザ
 home	most_active_this_week	今週最も活発なプロジェクト
-home	sfos	$1 オンサイト
 home	gforge_statistics	$1 統計
 home	top_project_downloads	トッププロジェクトダウンロード
 mail	provided_by	<p>メーリングリストは<A href="http://www.list.org/">GNU Mailman</a>のGForgeバージョンを利用して提供します。優れたソフトを作成したMailmanおよび<A href="http://www.python.org/">Python</a>の皆さんに感謝します。</p>
-mail	section	プロジェクト: $1
-mail	title	 メーリングリスト
-mail_admin	section	 メーリングリスト
-mail_admin	title	 メーリングリスト管理
 mail_admin_add_list	section	メーリングリスト管理\n
 mail_admin_add_list	title	リスト追加
 mail_admin_change_status	section	メーリングリスト管理
 mail_admin_change_status	title	リスト 管理/更新
-menu	about_gforge	$1 について
 menu	account_maintenance	アカウント メンテナンス
 menu	bookmark_page	ブックマークページ
-menu	change_my_theme	テーマ変更
-menu	code_snippet_library	サンプルコードライブラリ
-menu	compile_farm	コンパイルファーム
 menu	diary_notes	日記 &amp; ノート
-menu	discussion_forums	ディスカッションフォーラム
-menu	documentation	サイトドキュメント
 menu	login	ログイン
-menu	login_ssl	ログイン(SSL)
 menu	logout	ログアウト
 menu	my_personal_page	パーソナルページ
 menu	my_account	マイアカウント
 menu	new_project	新規プロジェクト登録
-menu	new_releases	ニューリリース
 menu	new_user	新規ユーザー(SSL)
-menu	other_site_mirrors	ミラーサイト
-menu	project_admin	プロジェクト管理
 menu	project_help_wanted	プロジェクト協力者募集
-menu	project_summary	プロジェクトサマリー
 menu	register_project	新規プロジェクト登録
 menu	search	検索
-menu	site_status	サイトステータス
-menu	software_map	ソフトマップ
-menu	top_projects	トッププロジェクト
 menu	admin	管理
 menu	submit	送信
 menu	home	ホーム
@@ -356,58 +256,32 @@ menu	projectree	プロジェクト&nbsp;ツリー
 menu	mypage	マイページ
 menu	code_snippet	サンプルコード
 menu	admin	管理
-my	about_blurb	パーソナルページにはメンバーであるグループのリストや割り当てられているバグおよびタスクのリストなどを含んでいます。
 my	no_bookmarks	今のところ、ブックマークされたページはありません。
 my	no_monitored_filemodules	ファイルをモニタリングしていません。
-my	no_monitored_filemodules_details	<p>ファイルのモニタリングをするとメールでのニューリリースのお知らせを受けることができます。そのお知らせの中には新規ファイルへのリンクもふくまれています。<p>ファイルをモニタリングするには、プロジェクトのサマリーページを開いてファイルセクションにあるチェックボックスをチェックしてください。<br>&nbsp;
 my	no_monitored_forums	フォーラムをモニタリングしていません。
-my	no_monitored_forums_details	<p>フォーラムをモニタリングしているとフォーラムに対し新規投稿があった時、メールでお知らせすることができます。このメールの中には投稿されたメッセージへのリンクが含まれています。<p>フォーラムをモニタリングするにはフォーラム中の"モニタフォーラム"をクリックしてください。<br>&nbsp;
 my	no_open_tasks	あなたに割り当てられたタスクはありません。
 my	no_projects	あなたはアクティブプロジェクトのメンバーではありません。
 my	no_tracker_items_assigned	あなたに与えられたトラッカーアイテムはありません。
 my	no_tracker_items_submitted	あなたが提出したトラッカーアイテムはありません。
 my	title	パーソナルページ: $1
-my	assigneditems	割り当てられたアイテム
-my	submitteditems	提出したアイテム
 my	monitoredforum	モニタリングフォーラム
 my	monitoredfile	モニタリングファイルモジュール
-my	tasks	タスク
-my	survey	高速調査
-my	survey_taken	デベロッパー調査を受け取りました。
 my	bookmarks	ブックマーク
 my	projects	私のプロジェクト
-my	pending_projects	ペンディングプロジェクト
-my	pending_projects_1	調査を待っているペンディングプロジェクト: 1
-my	pending_projects_2	調査を待っているペンディングプロジェクト: $1
-my	pending_projects_3	ここをクリックして下さい。
-my	pending_news_bytes	ペンディングニュースバイト
-my	pending_news_bytes_1	 調査を待っているペンディングプロジェクト: 1
-my	pending_news_bytes_2	調査を待っているニュースバイト: $1
-my	pending_news_bytes_3	ここをクリックしてください。
 my_bookmark_add	section	パーソナルページ
-my_bookmark_add	title	ブックマーク追加
-my_bookmark_delete	section	パーソナルページ
-my_bookmark_delete	title	ブックマーク削除
-my_bookmark_edit	section	 私個人のページ
 my_bookmark_edit	title	ブックマーク編集
-my_diary	section	パーソナルページ
 my_diary	title	日記 &amp; ノート
 new	title	ニューリリース
-news	section	プロジェクト: $1
 news	title	ニュース
 news	choose	<p>ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。<p>
 news	nonews	ニュースが見つかりません
 news	nonewsfor	$1 のニュースは見つかりません。
 news	noitems	アイテムは見つかりません
-news_admin	section	ニュース
 news_admin	title	ニュース管理
 news_admin	permdenied	$1 ニュースチームのメンバーや編集しようとするプロジェクトの管理者でなければ編集できません。
 news_admin	noqueued	(未訳:news_admin.noqueued)No Queued Items Found For Project
 news_admin	queued	これらのニュースアイテムはこのプロジェクトのために提出されています。
-news_main	title	 ニュース
 news_submit	post_blurb	プロジェクト管理者は自分のプロジェクトに関するニュースを投稿することができます。プロジェクトになんらかのヘルプが必要であれば "プロジェクト協力者募集" の募集記事を提出することもできます。<p>ここでの提出はプロジェクトサマリーページに表示されます。またこのプロジェクトに関心持っている方からの投稿はホームページに表示されるまでに、$1 ニュースチームからの許可を得なければなりません。提出する場合、URLを含めてもかまいませんがHTMLを含めてはいけません。<p>「http://」で始まるURLはリンクとして出力されます。
-news_submit	section	ニュース
-news_submit	title	$1 へニュースを提出します。
 news_submit	cannot	プロジェクトの管理者でなければニュースの提出はできません。
 news_submit	cannotadmin	ニュースグループからのニュースの提出は認められません。
 news_submit	forproject	プロジェクト
@@ -422,54 +296,19 @@ news_utils	archive	ニュースアーカイブ
 news_utils	submit	ニュース送信
 news_utils	readmore	もっと詳しく読む
 people	about_blurb	$1 プロジェクトの協力者募集掲示板は非広告プロジェクトボランティアを対象に解放しています。広告ユーザーらの利用は禁止です。<p>プロジェクトリスティングが長くて２週間残ります。あるいは新しい投稿により閉じることもあります。(プロジェクトの管理者は期限切れの募集記事を再投稿することができます。)<p>カテゴリメニューから、「プロジェクト協力者募集」を探してください。<p>もし、あなたがプロジェクトの管理者であれば、ログインしてプロジェクト管理ページから「プロジェクト協力者募集」を申し込んで下さい。<p>新規ジョブカテゴリーを提案する場合、サポートマネージャからリクエストを提出してください。<p>
-people	section	プロジェクト協力者募集
 people	title	プロジェクトが協力者を求めています。
-people_admin	section	プロジェクト協力者募集
-people_admin	title	協力者募集管理
-people_admin_people_cat	section	協力者募集管理
-people_admin_people_cat	title	ジョブカテゴリ追加
-people_admin_people_skills	section	協力者募集管理
-people_admin_people_skills	title	ジョブスキル追加
-people_cat	section	協力者募集
-people_cat	title	カテゴリごとのジョブリスト
-people_createjob	section	プロジェクト協力者募集
-people_createjob	title	新規ジョブ作成
-people_editjob	section	プロジェクト協力者募集
 people_editjob	title	ジョブ編集
-people_editprofile	section	プロジェクト協力者募集
-people_editprofile	title	プロファイル編集
-people_helpwanted_latest	section	プロジェクト協力者募集
-people_helpwanted_latest	title	最後の投稿
-people_proj	section	プロジェクト協力者募集
-people_proj	title	$1 プロジェクト協力者募集
-people_viewjob	section	プロジェクト協力者募集
-people_viewjob	title	(未訳:people_viewjob.title)$1 wanted for $2
-people_viewprofile	section	ユーザー情報
 people_viewprofile	title	デベロッパープロフィール
-pm	section	プロジェクト: $1
 pm	title	Task Manager: Subprojects And Tasks
 pm	noprj	<h1>サブプロジェクトが見つかりません</h1><p><b>サブプロジェクトがセットアップされていません。あるいは、みる権限がありません。<p><font color="red">このプロジェクトの権限管理には管理ページを利用してプロジェクトをセットアップしないといけません。</font></b>
 pm_addtask	section	タスクマネージャ
 pm_addtask	title	タスク追加
 pm_admin	section	$1
-pm_admin	title	タスクマネージャ: 管理
-pm_admin_change_status	section	タスクマネージャ管理
-pm_admin_change_status	title	情報更新
-pm_admin_projects	section	タスクマネージャ管理
-pm_admin_projects	title	サブプロジェクト追加
-pm_browse_custom	section	タスクマネージャ
-pm_browse_custom	title	カスタムタスク
-pm_browse_my	section	プロジェクト $1 タスクマネージャ
-pm_browse_my	title	タスク
-pm_browse_open	section	タスクマネージャ
-pm_browse_open	title	オープンタスク
-pm_detailtask	section	タスクマネージャ
 pm_detailtask	title	タスク詳細
 pm_modtask	section	タスクマネージャ
 pm_modtask	title	タスク修正
 pm_reporting	section	タスクマネージャ
 pm_reporting	title	タスクレポーティングシステム
-project_admin	section	プロジェクト: $1
 project_admin	title	管理サマリー
 project_admin_database	section	プロジェクト $1 - 管理
 project_admin_database	title	データベース情報\n
@@ -483,80 +322,32 @@ project_admin_editreleases	section	プロジェクト $1 - 管理
 project_admin_editreleases	title	リリース編集
 project_admin_history	section	プロジェクト $1 - 管理
 project_admin_history	title	ヒストリ
-project_admin_newrelease	section	プロジェクト $1 - 管理
-project_admin_newrelease	title	ニューリリース作成
 project_admin_qrs	section	プロジェクト $1 - 管理
 project_admin_qrs	title	クイックリリースシステム
 project_admin_userpermedit	section	プロジェクト $1 - 管理
-project_admin_userpermedit	title	デベロッパーパーミッション編集
 project_admin_userperms	section	プロジェクト $1 - 管理
-project_admin_userperms	title	ユーザーパーミッションリスト
 project_admin_vhost	section	プロジェクト $1 - 管理
 project_admin_vhost	title	バーチャルホスト マネージメント
 project_memberlist	joining	<p>もし、あなたが一人の開発者として、このプロジェクトの力になってくれるのなら、下のテキストの中に太字で明示しているプロジェクト管理者の誰かと連絡してください。<br><br>
-project_showfiles	section	プロジェクト: $1
 project_showfiles	title	ファイルリスト
-project_shownotes	section	プロジェクト: $1
 project_shownotes	title	リリースノート
-projects	section	プロジェクト: $1
-projects	title	サマリー
-register	title	 新規プロジェクト登録
-register_complete	section	 新規プロジェクト登録
-register_complete	title	登録完了
-register_projectinfo	section	 新規プロジェクト登録
-register_projectinfo	title	プロジェクト情報
-register_requirements	section	 新規プロジェクト登録
-register_requirements	title	サービス &amp; 資格
-register_tos	section	新規プロジェクト登録
-register_tos	title	サービス規約\n
 search	title	検索
 sendmessage	about_blurb	スパムを減少させるため、このフォームを使ってメールを送るようにしています。<p>このフォームは正確に記入してください。そうしないと、受取人は返事ができません。<p><font color="red"><b>解決方法を待っているあなたに: </b> このサイトのドキュメントを読みましたか？<b>ユーザーID</b>と<b>ユーザー名</b>をいれましたか？ もし、あなたがプロジェクトを組んでいるのなら<b>プロジェクトID</b>と<b>プロジェクト名</b>も記入してください。
-sendmessage	title	$1 へメッセージを送信
 snippet	title	サンプルコードライブラリ
 snippet_add_snippet_to_package	section	サンプルコードライブラリ
 snippet_add_snippet_to_package	title	サンプルをパッケージに追加
 snippet_addversion	section	サンプルコードライブラリ
-snippet_addversion	title	ニューバージョン投稿
 snippet_browse	section	サンプルコードライブラリ
 snippet_browse	title	サンプル
 snippet_delete	section	サンプルコードライブラリ
-snippet_delete	title	サンプル削除
 snippet_detail	section	サンプルコードライブラリ
 snippet_detail	title	サンプル詳細
 snippet_package	section	サンプルコードライブラリ
 snippet_package	title	サンプルコードパッケージ作成
 snippet_submit	section	サンプルコードライブラリ
 snippet_submit	title	サンプルコード送信
-softwaremap	title	倉庫
-staff	about_blurb	(未訳:staff.about_blurb) <P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>. We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened. He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota. When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service. He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	$1 の調査
 survey	survey_not_found	調査報告は見つかりません
-survey_admin	section	調査ツール
-survey_admin	title	管理
-survey_admin_add_question	section	 調査ツール管理
-survey_admin_add_question	title	調査に対する質問の追加
-survey_admin_add_survey	section	 調査ツール管理
-survey_admin_add_survey	title	 調査追加
-survey_admin_edit_question	section	 調査ツール管理
-survey_admin_edit_question	title	調査に対する質問の編集
-survey_admin_edit_survey	section	調査ツール管理
-survey_admin_edit_survey	title	調査内容の編集
-survey_admin_show_questions	section	調査ツール管理
-survey_admin_show_questions	title	調査に対する質問を表示
-survey_admin_show_results	section	 調査ツール管理
-survey_admin_show_results	title	調査結果表示
-survey_admin_show_results_aggregate	section	 調査ツール管理
-survey_admin_show_results_aggregate	title	調査結果の全てを表示
-survey_admin_show_results_comments	section	調査ツール管理
-survey_admin_show_results_comments	title	調査コメントを表示
-survey_admin_show_results_individual	section	調査ツール管理
-survey_admin_show_results_individual	title	個人調査結果
-survey_survey	section	調査ツール
-survey_survey	title	調査表示
-survey_survey_resp	section	調査ツール
-survey_survey_resp	title	調査 進行/レスポンス
-themes	section	アカウントオプション
-themes	title	テーマ変更
 top	about_blurb	私たちが $1 内にあるプロジェクトの使用統計をトレースしました。そこでいくつかのカテゴリーの中から人気の高いプロジェクトをご紹介します。
 top	active_all_time	常に活発なプロジェクト
 top	active_weekly	今週、最も活発なプロジェクト
@@ -566,25 +357,15 @@ top	forum_posts	トップフォーラムのポストカウンタ\n
 top	pageviews	(未訳:top.pageviews) Top Project Pageviews - Measured by impressions of the $1 'button' logo
 top	highest_ranked_users	高評価のユーザー
 top	title	 トッププロジェクト
-top_mostactive	section	トッププロジェクト
-top_mostactive	title	最も活発なプロジェクト: $1
-top_toplist	section	トッププロジェクト
-top_toplist	title	トッププロジェクトリスト
 tracker	section	プロジェクト: $1
-tracker	title	トラッカー
 tracker	choose	トラッカーでは、項目の 閲覧/編集/追加 などができます。 
 tracker_add	section	$1
-tracker_add	title	(未訳:tracker_add.title) Submit Tracker Item
-tracker_admin	section	トラッカー
 tracker_admin	title	管理
 tracker_admin_choose	section	プロジェクト: $1
-tracker_admin_choose	title	トラッカー管理
 tracker_admin_add_canned	section	トラッカー管理
 tracker_admin_add_canned	title	レスポンス追加: $1
 tracker_admin_add_cat	section	トラッカー管理
-tracker_admin_add_cat	title	カテゴリ追加: $1
 tracker_admin_add_group	section	トラッカー管理
-tracker_admin_add_group	title	グループ追加: $1
 tracker_admin_update_canned	section	トラッカー管理
 tracker_admin_update_canned	title	登録されたレスポンスの編集: $1
 tracker_admin_update_cat	section	トラッカー管理
@@ -594,9 +375,7 @@ tracker_admin_update_group	title	グループ編集: $1
 tracker_admin_update_type	section	トラッカー管理
 tracker_admin_update_type	title	更新: $1
 tracker_admin_update_users	section	トラッカー管理
-tracker_admin_update_users	title	トラッカーユーザーパーミッション 追加/更新
 tracker_browse	section	プロジェクト: $1
-tracker_browse	title	$1 閲覧
 tracker_browse	hour24	24時間以内
 tracker_browse	day7	1週間
 tracker_browse	week2	2週間
@@ -604,10 +383,6 @@ tracker_browse	month1	1ヶ月
 tracker_detail	section	$1
 tracker_detail	title	トラッカー詳細
 tracker_reporting	section	プロジェクト: $1
-tracker_reporting	title	トラッカーレポーティング
-tracker_utils	monitor	モニタ
-tracker_utils	stop_monitoring	モニタ中止
-users	title	ユーザーサマリー
 users	peerinfo1	もし、このユーザはあなたの知り合いでしたら、お手数ですが、下にあった基準で、このユーザーをランキングしてください。このランキングはランキングされるユーザーにも他のユーザーらにも見られることを忘れないでください。＄1Peer Rating systemはAdvogatoのコンセプトに基づくものです。このシステムは再び利用され、そして、いくつかの方向へ拡大していました。 \n
 users	peerinfo2	Peer rating boxの内では各基準に対し、すべての平均レベル(およびレスポンスレベル)を表示します。\nレスポンスレベルの数字は信頼されたユーザーと信頼されていないユーザーからのものです。\n「Sitewide Rank」フィールドでは、ユーザーのランクとランクされた $1 の利用者との比較を表示します。"Personal Importance"フィールドでは、他の開発者からもらえるユーザーランキングの値を5段階評価で表示します。そこで高く評価されたユーザーからのレスポンスはより高い評価とされます。\nもし、あなたが Peer Rating System から脱退したいのでしたらアカウントメンテナンスページをご覧下さい。\n脱退したときは Peer Rating Box はユーザーページから消え、ランク付けをする権利も失われます。
 users	optout	Peer Rating Sytemから脱退した場合を除き、ユーザーのランク付けをすることができます。詳しくはアカウントメンテナンスページを参照してください。
@@ -646,7 +421,6 @@ searchbox	people	人物
 searchbox	search	検索
 searchbox	forum	フォーラム
 searchbox	task	タスク
-calendar	title	プロジェクト マネージメント：カレンダー
 calendar	january	1月
 calendar	february	2月
 calendar	march	3月
@@ -666,25 +440,6 @@ calendar	wednesday	水曜日
 calendar	thursday	木曜日
 calendar	friday	金曜日
 calendar	saturday	土曜日
-calendar	view	ビュー：
-calendar	onemonth	1ヶ月
-calendar	threemonth	3ヶ月
-calendar	currentyear	今年
-calendar	comingyear	来年
-calendar	fordate	日付：
-calendar	update	更新
-calendar	todaysdate	今日の日付
-calendar	selecteddate	日付の選択（明日以降）
 calendar	task_link_title	タスクサマリー：$1
 calendar	task_begins	タスク $1 開始
 calendar	task_ends	タスク $1 終了
-calendar	invalidyear	無効な年が指定されました。
-calendar	invalidyearexplain	年は1990〜2020までの数字で指定してください。
-calendar	invalidmonth	無効な月が指定されました。
-calendar	invalidmonthexplain	月は1〜12の数字で指定してください。
-calendar	invalidday	無効な日が指定されました。
-calendar	invaliddayexplain	日付は1〜31の数字で指定してください。
-calendar	invaliddate	無効な日付
-calendar	invaliddateexplain	$1 は無効な日付です。
-calendar	invalidtype	無効なタイプ
-calendar	invalidtypeexplain	タイプが無効です。

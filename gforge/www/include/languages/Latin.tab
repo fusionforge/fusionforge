@@ -11,11 +11,7 @@
 #  */
 # 
 # I'm surprised to find Latin has an ISO 639 Language code!
-conf	content_encoding	UTF-8
-conf	language_code	la
-conf	language_id	24
 conf	mail_charset	UTF-8
-forum	title	Fora
 forum_forum	author	Scriptor
 forum_forum	date	Dies
 forum_forum	lastpost	Responsum Ultimum
@@ -23,22 +19,18 @@ forum_forum	thread	Linea Colloquiorum
 forum_forum	topic	Materia
 forum_forum	topicstarter	Scriptor Princeps
 forum_forum	replies	Responsa
-forum_forum_thread	section	Fora
-forum_message	section	Fora
 forum_utils	by	Scriptor:
 forum_utils	latest	Res Novae
 forum_utils	date	Dies
 forum_utils	message	Nuntius:
 forum_utils	subject	Materia:
 forum_utils	monitor	Observa Hic Forum
-forum_utils	postedby	Scriptor
 forum_utils	summary	Summarium
 frs	file_download	Obtinere
 frs	file_monitor	Observa
 frs	file_notes	Notae
 frs	file_package	Sarcina
 frs	file_rel_date	Dies
-group	long_bugs	Errata
 group	long_docman	Litterae
 group	long_homepage	Domus Coronae
 group	long_forum	Fora Publica
@@ -58,7 +50,6 @@ group	short_summary	Summarium
 menu	diary_notes	Diarium &amp; Notae
 menu	home	Pagina Principalis
 menu	login	Recognoscere
-menu	login_ssl	Recognoscere cum SSL
 menu	logout	Linquere
 menu	mypage	Mea&nbsp;Pagina
 menu	my_personal_page	Mea Pagina Privata
@@ -66,7 +57,6 @@ menu	project_help_wanted	Coronae qui vult auxilium
 menu	search	Scrutatio
 my	monitoredforum	Observo hi Foro
 my	projects	Meae Coronae
-my	tasks	Mea Pensa
 search	title	Scrutor
 calendar	january	Ianuarius
 calendar	february	Februarius
@@ -87,5 +77,3 @@ calendar	wednesday	Mercurii dies
 calendar	thursday	Jovis dies
 calendar	friday	Veneris dies
 calendar	saturday	Saturni dies
-calendar	todaysdate	Hodie
-calendar	fordate	Dies:

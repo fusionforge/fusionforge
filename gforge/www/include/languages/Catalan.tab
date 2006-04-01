@@ -16,10 +16,8 @@ account_change_email	invalid_email	Adreça de correu electrònic no vàlida
 account_change_email	mailsent	<p>S'ha enviat un correu a la nova adreça. Seguiu les instruccions del correu per a completar el canvi d'adreça. </p><a href="/">[ Inici ]</a> 
 account_change_email	message	Heu sol·licitat un canvi d'adreça de correu a $1.\nSi us plau, visiteu la següent URL per a completar el canvi d'adreça:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- l'equip de $1
 account_change_email	new_address	Nova adreça de correu electrònic:
-account_change_email	section	Preferències del compte
 account_change_email	send_confirmation	Envieu la confirmació a la nova adreça
 account_change_email	subject	$1 Verificació
-account_change_email	title	Canvi d'adreça de correu electrònic
 account_change_email-complete	confirm	Benvingut/da, $1. El vostre canvi d'adreça s'ha completat. La vostra nova adreça al fitxer és <strong>$2</strong>. El missatge enviat a $3 es reenviarà ara a aquest compte.
 account_change_email-complete	title	Canvi d'adreça de correu completat
 account_change_email_confirm	title	Confirmació del canvi d\'adreça 
@@ -30,13 +28,10 @@ account_change_pw	not_valid_password	Heu d'entrar una contrasenya vàlida (6 car
 account_change_pw	old_password	Contrasenya vella
 account_change_pw	old_password_incorrect	La contrasenya vella és incorrecta
 account_change_pw	passwords_dont_match	Les noves contrasenyes no coincideixen.
-account_change_pw	section	Preferències del compte
 account_change_pw	title	Canvia la contrasenya
 account_change_pw	update	Actualitza la contrasenya
 account_change_pw_changed	return_to	Ara haurieu de $1 tornar a UserPrefs $2.
 account_change_pw_changed	title	La contrasenya s\'ha canviat amb èxit
-account_editsshkeys	section	Preferències del compte
-account_editsshkeys	title	Edita les claus compartides SSH
 account_editsshkeys	intro	<p>Per evitar que hagueu de teclejar cada cop la vostra contrasenya per al vostre compte CVS/SSH de desenvolupador, podeu pujar aquí les vostres claus públiques i es posaran al servidor CVS al vostre fitxer ~/.ssh/authorized_keys. Això es realitza mitjançant una tasca cron, o sigui que pot ser que no succeeixi immediatament.  Permeteu una hora de retard.</p><p>Per a generar una clau pública, executeu el programa \'ssh-keygen' (podeu usar el protocol 1 ó 2). La clau pública es situarà a '~/.ssh/identity.pub' (protocol 1) i '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocol 2). Per a més informació sobre compartir claus, llegiu la documentació ssh.</p>
 account_editsshkeys	authorized_keys	Claus autoritzades:<br /><em>Important: Assegureu-vos que no hi ha salts de línia excepte entre claus. Després de l'enviament, verifiqueu que el nombre de claus al vostre fitxer és el que esperaveu.</em>
 account_first	about_blurb	<p>Ara sou un usuari registrat a $1, l'entorn de desenvolupament en línia per a projectes de Codi Obert.</p><p>Com a usuari registrat,podeu participar plenament en les activitats del lloc. Ara podeu enviar missatges als fòrums de missatges de projectes, comunicar errors de programa (bugs) a $1, signar com a desenvolupador de projectes, o fins i tot iniciar el vostre propi projecte.</p><p>Gaudiu d'aquest lloc i indiqueu-nos de quines formes podem millorar $1.</p><p>--l'equip de $1.</p>
@@ -52,9 +47,6 @@ account_login	passwd	Contrasenya:
 account_login	pending_account	<P>El vostre compte està pendent de la confirmació de la vostra adreça de correu.		Visitant l'adreça que se us envia en aquest correu activareu el vostre compte.		<P>Si necessiteu reenviar aquest correu, feu clic a baix s'enviarà un correu de confirmació a l'adreça de correu que heu proporcionat durant el registre.		<P><A href="pending-resend.php?form_user=$1">[Reenvia un correu de confirmació]</A>		<br><hr>		<p>
 account_login	resend_pending	[Reenvia un correu de confirmació a un compte pendent]
 account_login	resend_pending_directions	Introduïu un nom d'usuari i feu clic a 'Envia' per a reenviar el correu de confirmació
-account_login	sslnotice	<p><B><FONT COLOR="RED">Quan envieu aquest formulari, us connectareu amb un servidor SSL i la vostra contrasenya no serà visible per altres usuaris.</FONT></B> <small style="font-size: x-small"> (Si us pregunteu per què aquesta mateixa pàgina no es carrega vía SSL, llegiu el següent paràgraf. Gràcies.) </small> <P>Els usuaris de l'<B>Internet Explorer</B> poden tenir problemes intermitents amb l'SSL, hauran d'abandonar l'SSL després de l'inici de sessió. Els usuaris de Netscape haurien d'estar permanentment en mode SSL per màxima seguretat.  Visiteu <A HREF="http://www.microsoft.com/">Microsoft</A> per a més informació sobre aquest problema conegut.  <P>
-account_login	title	Inici de sessió del lloc
-account_login	usessl	Continueu en mode SSL després d'iniciar la sessió
 account_lostlogin	invalidconfirm	clau hash de confirmació no vàlida
 account_lostlogin	newpasswd	Nova contrasenya (mín. 6 car.)
 account_lostlogin	newpasswd2	Nova contrasenya (repetició)
@@ -62,7 +54,6 @@ account_lostlogin	notmatch	Les noves contrasenyes no coincideixen.
 account_lostlogin	passwdchanged	<h2>Contrasenya canviada</h2><p>Felicitats, heu reiniciat la contrasenya del vostre compte. Ara podeu <a href="/account/login.php">iniciar la sessió</a> al lloc.</p>
 account_lostlogin	severalconfirm	Aquesta clau hash de confirmació existeix més d'un cop.
 account_lostlogin	sixchars	Heu de proporcionar una contrasenya vàlida (6 car. com a mínim).
-account_lostlogin	title	Confirmació de contrasenya perduda
 account_lostlogin	update	Actualització
 account_lostlogin	welcome	<h2>Inici de sessió de contrasenya perduda</h2><p>Benvingut/da, $1. Ara podeu canviar la vostra contrasenya.</p>
 account_lostpw	invalid_user	Usuari no vàlid
@@ -70,7 +61,6 @@ account_lostpw	message	Algú (segurament vos) al lloc $3 ha solicitat un\ncanvi 
 account_lostpw	notify	<p>S'ha enviat un correu a l'adreça que teniu al fitxer. Seguiu les instruccions que hi ha al correu per a canviar la vostra contrasenya del compte.</p><p><a href="/">[ Inici ]</a></p>
 account_lostpw	sendhash	Envia el hash de CS perduda
 account_lostpw	subject	$1 Verificació
-account_lostpw	title	Heu perdut la vostra contrasenya?
 account_lostpw	user_dont_exist	Aquest usuari no existeix.
 account_lostpw	warn	<p>Ep... la pèrdua de la vostra contrasenya és un afer seriós. Compromet la seguretat del vostre compte, els vostres projectes i aquest lloc.</p><p>Fent clic a sota "Envia el hash de CS perduda" enviarà una URL a la vostra adreça de correu que tenim al fitxer. En aquesta URL hi ha una clau hash de confirmació de 128-bits pel vostre compte. Al visitar la URL se us permetrà canviar la vostra contrasenya en línia i iniciar una sessió.</p>
 account_options	change_email_address	Canvia l'adreça de correu
@@ -84,7 +74,6 @@ account_options	title2		Títol:
 account_options	language	Idioma:
 account_options	login_name	Nom d'inici de sessió:
 account_options	member_since	Membre des de:
-account_options	real_name	Nom real:
 account_options	firstname	Nom:
 account_options	lastname	Cognom:
 account_options	ccode	País:
@@ -100,14 +89,12 @@ account_register	congrat	<p>Felicitats. Us heu registrat a $1.  <p> Ara se us es
 account_register	emailaddr	Adreça de correu:<span><font color="red">*</font></span> <BR><I>Aquesta adreça de correu es verificarà abans d'activar el compte. Rebreu un compte de correu a &lt;loginname@$1&gt; que es reenviarà a aquesta adreça.</I>
 account_register	err_badinsert	Ha fallat la inserció 
 account_register	theme	Tema
-account_register	err_theme	Es necessita un tema
 account_register	err_email	Adreça de correu no vàlida
 account_register	err_jabber	Adreça Jabber no vàlida
 account_register	err_mailexist	Ja hi ha un usuari amb aquesta adreça - useu la cerca de persones per a recuperar el vostre inici de sessió.
 account_register	err_passwd	Heu de facilitar una contrasenya
 account_register	err_passwd2	Les contrasenyes no coincideixen
 account_register	err_passwd3	Contrasenya no vàlida:
-account_register	err_realname	Heu de facilitar un nom real
 account_register	err_firstname	Heu de facilitar un nom
 account_register	err_lastname	Heu de facilitar un cognom
 account_register	err_unixname	Nom Unix no vàlid. 
@@ -123,7 +110,6 @@ account_register	message_header	Registre del compte $1
 account_register	partecipate_peer_ratings	Participeu en valoracions de parells. <i>(Us permet valorar altres usuaris emprant diversos criteris així com ser valorats per altres. Hi ha més informació disponible a la vostra pàgina d'usuari $1 </a> si heu escollit participar en les valoracions)</i>.
 account_register	password	Contrasenya (mín. 6 cars):
 account_register	password2	Contrasenya (repetició):
-account_register	realname	Nom complet/real:
 account_register	firstname	Nom:
 account_register	lastname	Cognom:
 account_register	ccode	País:
@@ -133,7 +119,6 @@ account_register	reset	Reinicialitza els canvis
 account_register	resend_pending	[Reenvia el correu de confirmació a un compte pendent]
 account_register	siteupdate	Rebre correu sobre actualitzacions del lloc <i>(tràfic molt baix i inclou notícies de seguretat. Molt recomanable.)</i>
 account_register	timezone	Zona horària:
-account_register	title	Registre del nou compte
 account_register	update	Actualització
 account_shell	autorized_keys	Claus SSH compartides autoritzades
 account_shell	edit_keys	Edita les claus
@@ -149,13 +134,10 @@ account_verify	erroractivate	Error durant l'activació del compte
 account_verify	invalidcred	Les credencials que heu introduït no corresponen a un compte vàlid.
 account_verify	invalidop	Operació no vàlida
 account_verify	invalidparam	Paràmetre no vàlid
-account_verify	invaliduser	Usuari no vàlid
 account_verify	login	Inici de sessió
 account_verify	loginname	Nom d'inici de sessió:
 account_verify	missingparam	Paràmetre perdut
-account_verify	nouser	L'usuari no existeix.
 account_verify	password	Contrasenya:
-account_verify	title	Verificació del compte $1
 account_verify	usermandatory	Heu d'entrar un nom d'usuari.
 account_verify	verify_blurb	<p>Per a completar el vostre registre, inicieu una sessió ara. Aleshores, el vostre compte s'activarà per a inicis de sessió normals.</p>
 add_snippet	add_this_snippet_version_id	Afegeix aquest ID de versió de fragment de codi:
@@ -175,32 +157,15 @@ add_snippet	submit	TRAMET
 add_snippet	title	Tramet un nou fragment de codi
 add_snippet	you_can_use_this_form	Podeu usar aquest formulari repetidament per a anar afegint fragments de codi al vostre paquet.</p><p>L'"ID de versió de fragment de codi" és l'únic número ID que es mostra al costat d'una versió específica d'un fragment de codi a les pàgines navegades.
 admin	add	Afegeix
-admin	add_new	[afegeix nou]
-admin	are_you_sure_delete	Esteu segur que voleu suprimir això
-admin	cancel	Cancel·la
 admin	delete	Suprimeix
 admin	edit	Edita
 admin	http_domain	Domini HTTP:
 admin	home_box	Caixa d'inici:
 admin	license	Llicència:
 admin	license_other	Altra llicència:
-admin	na	N/D
-admin	other	Altre/a
 admin	reject	Refusa
 admin	scm_box	Caixa SCM:
-admin	site_admin_home	Pàgina inicial d'administració del lloc
-admin	submit_changes	Tramet canvis
-admin	submit_new	Tramet nou
-admin	successfully_added	Afegit(s) amb èxit
-admin	successfully_deleted	Suprimits(s) amb èxit.
-admin	successfully_modified	modificat(s) amb èxit
 admin	yes	sí
-admin_add_language	add_new_language	Afegeix nou idioma
-admin_add_language	class_filename	Classe nom de Fitxer:
-admin_add_language	classname	Nom de classe:
-admin_add_language	existing_language	Idioma existent
-admin_add_language	name	Nom:
-admin_add_language	submit	Tramet
 admin_admin_table	add_new	afegeix nou
 admin_admin_table	cant_delete_language	No podeu suprimir l'idioma $1 ja que actualment està referenciat en un perfil d'usuari.
 admin_admin_table	cant_delete_license	No podeu suprimir la llicència $1 ja que actualment està referenciada en un projecte.
@@ -213,13 +178,7 @@ admin_admin_table	successfully_added	$1 afegit(s) amb èxit.
 admin_admin_table	successfully_deleted	$1 suprimit(s) amb èxit.
 admin_admin_table	successfully_modified	$1 modificat(s) amb èxit.
 admin_admin_table	title	Edita la taula de $1s
-admin_admin_table	unit_file_type	Tipus de fitxer
-admin_admin_table	unit_license	Llicència
-admin_admin_table	unit_processor	Processador
-admin_admin_table	unit_supported_language	Idioma suportat
-admin_admin_table	unit_theme	Tema
 admin_approve_pending	add_this_custom_response	Afegeix aquesta resposta específica a les respostes 'enllaunades'	
-admin_approve_pending	admin_approve_pending	Activa
 admin_approve_pending	approve	Aprova
 admin_approve_pending	approve_all_on_this_page	Aprova-ho tot en aquesta pàgina
 admin_approve_pending	approving_group		S'està aprovant el grup:
@@ -253,9 +212,6 @@ admin_database	statistics_for_project_database	Estadístiques per bases de dades
 admin_database	type	Tipus
 admin_database	unable_to_insert	Incapaç d'inserir una base de dades ja activa.
 admin_groupedit	active	Activa (A)
-admin_groupedit	deleted	Suprimida (S)
-admin_groupedit	error	Error
-admin_groupedit	error_creating_group_object	Error al crear un objecte de grup
 admin_groupedit	holding	Retinguda (R)
 admin_groupedit	incomplete	Incompleta (I)
 admin_groupedit	instruction_email_sent	Enviat correu d'instrucció
@@ -296,7 +252,6 @@ admin_index	add_edit_delete_licenses	Llicències d'afegit, suprimit o edició
 admin_index	add_to_trove_map	Afegeix a l'arbre de projectes
 admin_index	approve_reject	Aprova/Rebutja
 admin_index	cronman	Gestor del Cron
-admin_index	deleted_status	Estat (suprimit)
 admin_index	display_full_group	Mostra llista de grups completa/Edita Grups
 admin_index	display_full_user_list	Mostra llista d'usuaris completa/Edita usuaris
 admin_index	display_groups_beginning_with	Mostra grups que comencen amb :
@@ -312,7 +267,6 @@ admin_index	news	Notícies
 admin_index	pending_projects_count	Projectes pendents: <strong>$1</strong>
 admin_index	private_groups	Grups privats
 admin_index	project_active	Actiu (A)
-admin_index	project_deleted	Suprimit (S)
 admin_index	project_pending	Pendent (P)
 admin_index	project_hold	Retingut (R)
 admin_index	project_database_administration	Administració de la base dedades de projectes
@@ -330,14 +284,6 @@ admin_index	translation_file_tool	Eina del fitxer de traducció
 admin_index	trove_project_tree	Arbre de projectes
 admin_index	user_maintaince	Manteniment dels usuaris
 admin_index	virtual_host_admin_tool	Eina virtual d'administració de l'ordinador central
-admin_loadtabfile	availaible_tables	Taules disponibles:
-admin_loadtabfile	edit_dont_work	[edita(no funciona)]
-admin_loadtabfile	purge_loaded_data	Purga les dades carregades
-admin_loadtabfile	reload_all_language_files	(Re)carrega tots els fitxers d'idioma
-admin_loadtabfile	see_translations	[veieu traduccions]
-admin_loadtabfile	see_untranslated	[veieu sense traduir]
-admin_loadtabfile	tables_loaded	Taules carregades
-admin_loadtabfile	title	Administració del lloc
 admin_massmail	active_deliveries	Enviaments actius
 admin_massmail	all_project_admins	Tots els administradors de projecte
 admin_massmail	all_project_developers	Tots els desenvolupadors de projecte
@@ -359,15 +305,8 @@ admin_massmail	subject	Assumpte
 admin_massmail	subscribers_to_additional_community	Subscriptors als "Enviaments addicionals de la comunitat"
 admin_massmail	subscribers_to_site_updates	Subscriptors a les "Actualitzacions del lloc"
 admin_massmail	text_of_message	Text del missatge
-admin_massmail	title	Motor de correu massiu administratiu
 admin_massmail	type	Tipus
 admin_massmail	will_be_append	(s'annexarà amb informació sobre l'anul·lació de subscripcions, si és aplicable)
-admin_massmail_execute	completed_successfully	COMPLETAT AMB ÈXIT
-admin_massmail_execute	querry_complete	Consulta completa. Començant l'enviament de correus a 
-admin_massmail_execute	receive_post	Correu rebut. Fent una consulta.
-admin_massmail_execute	sending_to	s'està enviant a
-admin_massmail_execute	unrecognized_post	Correu no reconegut, no es pot executar
-admin_massmail_execute	user_id	id usuari:
 admin_responses	add_response	Resposta afegida
 admin_responses	by_the_way	Per cert, no ho he esborrat... per si de cas...
 admin_responses	create	Crea
@@ -397,13 +336,6 @@ admin_search	status	Estat
 admin_search	unix_name	Nom UNIX
 admin_search	user_search_criteria	Cerca d'usuari amb criteris
 admin_search	username	Nom d'usuari
-admin_tabfiles	delete_lang	[suprimeix]
-admin_tabfiles	edit_the_langfile	Edita l'idioma de $1
-admin_tabfiles	edit_the_language	Edita l'idioma
-admin_tabfiles	language	Idioma
-admin_tabfiles	modify_the	Modifica el $1 de sota:
-admin_table	edit_the	Edita el
-admin_table	table	Taula
 admin_trove_cat_add	add	Afegeix
 admin_trove_cat_add	add_new_trove_category	Afegeix una nova categoria a l'arbre de projectes
 admin_trove_cat_add	error_in_trove_openration	Error en una operació a l'arbre de projectes
@@ -415,10 +347,8 @@ admin_trove_cat_add	title	Administració del lloc: Arbre de projectes - Afegeix 
 admin_trove_cat_edit	cant_delete_has_subcategories	No el puc suprimir, aquesta categoria té subcategories
 admin_trove_cat_edit	delete	Suprimeix
 admin_trove_cat_edit	edit_trove_category	Edita categoria
-admin_trove_cat_edit	error_trove_equal_parent	Error el directori pare no pot ser el mateix que l'actual
 admin_trove_cat_edit	error_in_trove_operation	Error en l'operació
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error en l'operació, no es pot suprimir la categoria  defineix-la com a defecte a local.inc
-admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	No es pot suprimir aquesta categoria ja que actualment està referenciada per un projecte.
 admin_trove_cat_edit	new_category_description	Nova descripció de categoria (VARCHAR 255)
 admin_trove_cat_edit	new_category_full_name	Nou nom complet de categoria (VARCHAR 80)
 admin_trove_cat_edit	new_category_short_name	Nou nom abreujat de categoria (sense espais, estil unix)
@@ -456,7 +386,6 @@ admin_useredit	current_confirm_bash	Confirmació actual bash:
 admin_useredit	deleted	Suprimit (S)
 admin_useredit	email	Correu electrònic:
 admin_useredit	group_memerbership	Pertanyença a grups
-admin_useredit	membership_permissions	Permisos membres
 admin_useredit	name	Nom
 admin_useredit	no_unix_account	Sense compte Unix (N)
 admin_useredit	operations	Operacions
@@ -527,22 +456,9 @@ artifact_canned	required_fields	ArtifactCanned: es necessiten nom i cessionari
 artifact_category	required_fields	ArtifactCategory: es necessiten nom i cessionari
 calendar	april	Abril
 calendar	august	Agost
-calendar	comingyear	L'any vinent
-calendar	currentyear	Aquest any
 calendar	december	Desembre
 calendar	february	Febrer
-calendar	fordate	Per data:
 calendar	friday	Divendres
-calendar	invaliddate	Data no vàlida
-calendar	invaliddateexplain	$1 és una data no vàlida.
-calendar	invalidday	Dia no vàlid
-calendar	invaliddayexplain	El dia ha d'estar comprès entre 1 i 31.
-calendar	invalidmonth	Mes no vàlid
-calendar	invalidmonthexplain	El mes ha d'estar comprès entre 1 i 12.
-calendar	invalidtype	Invalid tipus
-calendar	invalidtypeexplain	Tipus no vàlid.
-calendar	invalidyear	Any no vàlid
-calendar	invalidyearexplain	L'any ha d'estar comprès entre 1990 i 2020.
 calendar	january	Gener
 calendar	july	Juliol
 calendar	june	Juny
@@ -552,21 +468,14 @@ calendar	monday	Dilluns
 calendar	monthdatefmt	Y-m
 calendar	november	Novembre
 calendar	october	Octubre
-calendar	onemonth	Un mes
 calendar	saturday	Dissabte
-calendar	selecteddate	Data seleccionada (si és diferent d'avui).
 calendar	september	Setembre
 calendar	sunday	Diumenge
 calendar	task_begins	Comença la tasca $1
 calendar	task_ends	Acaba la tasca $1
 calendar	task_link_title	Resum de la tasca: $1
-calendar	threemonth	Tres mesos
 calendar	thursday	Dijous
-calendar	title	Gestió de projectes: Calendari
-calendar	todaysdate	Data d'avui.
 calendar	tuesday	Dimarts
-calendar	update	Actualitza
-calendar	view	Vista:
 calendar	wednesday	Dimecres
 classgroup	acceptedproject	El vostre registre de projecte per $7 ha estat aprovat.\n\nNom complet del projecte:  $1\nNom Unix del projecte:  $2\nCVS Servidor:         cvs.$2.$3\nServidor Shell/Web:   $2.$3\n\nDurarà un dia fins que el vostre DNS estigui actiu al nostre lloc.\nMentres espereu la resolució del votre DNS, podeu intentar fer un shell a \n$4 i apuntar el CVS a $5\n\nSi després de 6 hores els vostres comptes de shell/CVS encara no funcionen, si us plau\nobriu un ticket de suport, de manera que puguem donar un cop d'ull al problema.\nTingueu en compte que tots els comptes de shell/CVS estàn tancats al telnet i només\nfuncionen amb SSH1.\n\nEl vostre lloc web és accessible a través del vostre compte de shell. Si us plau, llegiu\nla documentació del lloc (veieu enllaç més avall) sobre l'ús que es proposa, els serveis\ndisponibles, i l'estructura de directoris del compte.\n\nSi visiteu la vostra\npròpia pàgina de projecte a $7 mentres esteu dins d'una sessió, trobareu\nfuncions de menú addicionals a la vostra esquerra etiquetades \'Administració del projecte\'.\n\nUs suggerim especialment que visiteu ara $7 i creeu una descripció\npública per al vostre projecte. Això es pot fer visitant la vostra pàgina\nde projecte mentres sou dins de la sessió, i seleccionant \'Administració del projecte\' des dels menús\nal'esquerra (o visitant http://$3/project/admin/?group_id=$6\ndesprés d'iniciar la sessió).\n\nEl vostre projecte no apareixerà a l'arbre de projectes (llista\nprimària de projectes allotjats a $7 que ofereix una gran flexibilitat a l'hora de\nremenar i cercar) fins que no el categoritzeu a les pantalles d'administració\ndel projecte. Perquè la gent pugui trobar el vostre projecte, ara heu de fer el següent.\nVisiteu el vostre projecte mentres sou dins la sessió, i seleccioneu \'Administració del projecte\' des dels\nmenús de l'esquerra.\n\nGaudiu del sistema, i informeu als altres sobre $7. Feu-nos saber\nsi hi ha alguna cosa que puguem fer per ajudar-vos.\n\n-- la tripulació $7
 classgroup	acceptedprojecttitle	Projecte $1 aprovat
@@ -588,13 +497,7 @@ common_include_account	sixchar	La contrasenya ha de tenir com a mínim 6 caràct
 common_include_account	toolong	El nom és massa llarg. Ha de tenir menys de 15 caràcters.
 common_include_account	tooshort	El nom és massa curt. Ha de tenir com a mínim 3 caràcters.
 common_utils	priority_colors	Colors de prioritat
-conf	content_encoding	UTF-8
 conf	mail_charset	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	ca
-conf	language_id	1
-contact	about_blurb	<p>Aquesta és la pàgina de contacte per <b>$1</b> -- si esteu tenint un problema amb un projecte hostatjat per nosaltres, envieu les vostres questions/informació al gestor de suport/errors per aquest projecte. Podeu accedir a aquestes característiques visitant la pàgina inicial de desenvolupament d'aquest projecte a: <tt>http://$2/projects/&lt;project name&gt;</tt> i fent clic a l'eina apropiada.</p><p>Si teniu una petició de suport, un informe d'errors o desitgeu comunicar directament amb l'equip $1, visiteu el <a href="/projects/siteadmin">Projecte mestre $1</a>.</p>
-contact	title	Contacte $1
 developer	body	Cos
 developer	date	Data
 developer	diary_and_notes	Diari i notes per
@@ -611,14 +514,12 @@ developer_monitor	title	Monitoritza un usuari
 developer_monitor_choose_user	body	Error - Primer heu d'escollir un usuari a monitoritzar
 developer_monitor_choose_user	title	Primer escolliu un usuari
 developer_rate	cannot_rate_yourself	No us podeu puntuar vos mateix
-developer_rate	invalid_rating_value	ERROR - valor de puntuació no vàlid	
 developer_rate	ratings_recorded	Les puntuacions han estat desades
 developer_rate	ratings_recorded_body	Podeu tornar a puntuar aquesta persona simplement tornant a la seva pàgina de puntuacions i reenviant la informació.
 developer_rate	title	Pàgina de puntuacions de l'usuari
 developer_rate	turned_off_body	Heu triat no participar en el sistema de puntuació de parells
 developer_rate	turned_off_title	Puntuacions desconnectades
 docman	admin	Administració
-docman	description	Descripció
 docman	error_invalid_file_attack	Intent d'atac de fitxer no vàlid $1
 docman	error_no_docs	Aquest projecte no té documents visibles
 docman	error_no_groups_defined	No hi ha definits grups de documents
@@ -630,8 +531,6 @@ docman_admin	section	Projecte: $1
 docman_admin	title	Gestor de documents: Administració
 docman_admin_addgroups	section	Administració del Gestor de Documents
 docman_admin_addgroups	title	Afegeix grups de documents
-docman_admin_docedit	section	Gestor de Documents
-docman_admin_docedit	title	Edita el document
 docman_admin_editdocs	doc_contents	Contingut del document
 docman_admin_editdocs	upload_url	Especifica una URL externa on es referenciarà el fitxer
 docman_admin_editdocs	section	Administració del Gestor de Documents
@@ -646,8 +545,6 @@ docman_admin_editgroups	group_name	Nom de grup
 docman_admin_editgroups	new_group_name	Nou nom de grup
 docman_admin_editgroups	section	Administració del Gestor de Documents
 docman_admin_editgroups	title	Edita els grups
-docman_admin_groupedit	section	Administració del Gestor de Documents
-docman_admin_groupedit	title	Canvia el nom del grup dedocuments
 docman_common	error_min_desc_length	La descripció del document ha de tenir un mínim de 10 caràcters
 docman_common	error_min_title_length	El títol ha de tenir un mínim de 5 caràcters
 docman_common	no_docs	No s'han trobat documents
@@ -670,15 +567,12 @@ docman_new	intro	<strong>Títol del document</strong>:  Es refereix al títol re
 docman_new	language	Idioma
 docman_new	no_valid_group	No s'ha seleccionat un grup de documents vàlid
 docman_new	section	Projecte: $1 
-docman_new	state	Estat
 docman_new	submit	Tramet informació
 docman_new	submitted_successfully	Document tramès amb èxit
 docman_new	title	Gestor de Documents: Tramet nova documentació
 docman_new	upload_file	Puja un fitxer	
-error	error_creating	Error al crear
 error	not_found	NO S'HA TROBAT LA PÀGINA
 error	title	La pàgina sol·licitada no s'ha trobat (Error 404)
-exit	choose_a_group	Error - Esculliu un grup
 exit	choose_group_body	No s'ha escollit un Id de grup
 exit	choose_group_title	ERROR - No s'ha escollit un group_id
 exit	exiting_with_error	Sortint amb error
@@ -688,21 +582,13 @@ exit	disabled_title	Error - característica deshabilitada.
 exit	disabled_body	L'administrador del lloc ha desconnectat aquesta característica.
 forum	choose	<p>Escolliu un fòrum i podreu remenar, cercar i enviar missatges.<p>
 forum	error_forum_not_found	Fòrum no trobat
-forum	error_invalid_group_forum_id	$1:: group_forum_id no vàlid
 forum	error_no_forums_found	No s'han trobat fòrums per $1
-forum	error_no_valid_forum_object	$1:: Objecte de fòrum no vàlid
 forum	error_no_valid_group_object	Forum:: Objecte de grup no vàid
 forum	forum	Fòrum
 forum	forums_for	Fòrums per $1
-forum	html	Les etiquetes HTML es mostraran com a text al vostre missatge
-forum	section	Projecte: $1
-forum	title	Fòrums
-forum	check_upload	Control per pujar & annexar fitxer
 forum_admin	add_forum	Afegeix fòrum
 forum_admin	delete_message	Suprimeix missatge
-forum_admin	section	Project: $1 
 forum_admin	title	Forums: Administració
-forum_admin	update_forum	Actualitza Info/Estat fòrum
 forum_admin	delete_forum	Suprimeix el fòrum complet i tot el contingut
 forum_admin	sure	N'estic segur
 forum_admin	really_sure	N'estic completament segur
@@ -711,28 +597,15 @@ forum_admin	deleted	Suprimit amb èxit
 forum_admin	delete_warning	Esteu a punt de suprimir de forma permanent, irreversible i completa aquest fòrum i tot el seu contingut!
 forum_admin_addforum	add_forum	Afegeix aquest fòrum
 forum_admin_addforum	allow_anonymous	Voleu permete missatges anònims?
-forum_admin_addforum	allow_attach	Voleu permetre adjunció de fitxers?
 forum_admin_addforum	email_posts	Enviar correus a:
-forum_admin_addforum	existing_forums	Fòrums existents
 forum_admin_addforum	forum_created	Fòrum creat amb èxit
 forum_admin_addforum	forum_description	Descripció
 forum_admin_addforum	forum_name	Nom del fòrum
 forum_admin_addforum	is_public	És públic?
-forum_admin_addforum	section	Administració del fòrum
-forum_admin_addforum	title	Afegeix fòrum
 forum_admin_changestatus	change_status	Canvia l'estat del fòrum
-forum_admin_changestatus	forum	Fòrum
 forum_admin_changestatus	intro	Podeu ajustar les característiques del fòrum des d'aquí. Teniu en compte que els fòrums  privats encara poden ser vistos pels membres del vostre projecte, però no el públic general.
-forum_admin_changestatus	no_forums_found	No s'han trobat fòrums
-forum_admin_changestatus	section	Administració del fòrum
-forum_admin_changestatus	status	Estat
-forum_admin_changestatus	title	Canvia l'estat del fòrum
 forum_admin_changestatus	update_successful	La informació del fòrum s'ha actualitzat amb èxit
-forum_admin_delete	section	Administració del fòrum
-forum_admin_delete	title	Suprimeix fòrum
-forum_admin_delete_message	section	Administració del fòrum
 forum_admin_delete_message	title	Suprimeix un missatge
-forum_admin_delete_message	enter_message_id	Entra un identificador de missatge
 forum_admin_delete_message	warning	ATENCIÓ! Esteu a punt de suprimir permanentment un missatge i tot el seu fil!!
 forum_admin_delete_messages	messages_deleted	Suprimits $1 missatges
 forum_common	error_adding_forum	Error afegint un fòrum
@@ -742,7 +615,6 @@ forum_common	error_min_name_length	El nom del fòrum ha de tenir 3 caràcters co
 forum_common	error_save_when_logged_in	Només podeu desar el vostre espai si sou dins d'una sessió
 forum_common	error_set_monitor	Només podeu monitoritzar si sou dins d'una sessió
 forum_common	error_unable_to_add_monitor	Incapaç d'afegir un monitor
-forum_common	welcome_to	Benvingut/da a $1
 forum_common_forum	error_save_place	Fòrum::savePlace() 
 forum_common_forummessage	error_cannot_update_master_thread	No s'ha pogut actualitzar el pare del fil principal amb l'hora actual
 forum_common_forummessage	error_cannot_update_parent	No s'ha pogut actualitzar elpare
@@ -751,12 +623,9 @@ forum_common_forummessage	error_getting_next_thread	Ha fallat l'obtenció del se
 forum_common_forummessage	error_group_forum_id	Group_forum_id en resultat db no coincideix amb l'objecte del fòrum
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() MessageID no vàlid
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() Objecte ParentMessage no vàlid
-forum_common_forummessage	error_not_logged	Heu d'estar en una sessió per enviar missatges
 forum_common_forummessage	error_posting_failed	ForumMessage::create() L'enviament ha fallat 
 forum_common_forummessage	error_required_fields	Ha d'incloure un cos i un tema del missatge
-forum_common_forummessage	forum_message	Missatge del fòrum
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: No és un objecte vàlid del fòrum
-forum_errors	error_determining_forum_id	Error en determina el forum_id
 forum_errors	error_getting_forum	Error a l'obtenir el fòrum
 forum_forum	author	Autor
 forum_forum	changeview	Canvia vista
@@ -771,82 +640,50 @@ forum_forum	posts	Missatges
 forum_forum	postsuccess	Missatge enviat amb èxit
 forum_forum	previous_messages	Missatges anteriors
 forum_forum	replies	Respostes
-forum_forum	section	Projecte: $1 
 forum_forum	show	Mostra
 forum_forum	thread	Fil
 forum_forum	threaded	Enfilat
 forum_forum	threads	Fils
-forum_forum	title	Fòrums: Visualitza Fòrum
 forum_forum	topic	Tema
 forum_forum	topicstarter	Inici de tema
-forum_forum	views	Vistes
 forum_forum	ultimate	Últim
-forum_forum_thread	section	Fòrums
-forum_forum_thread	title	Visualitza fil
 forum_message	by	PER
 forum_message	date	DATA
 forum_message	message	Missatge
 forum_message	message_not_found_body	Aquest missatge (ja) no existeix
 forum_message	message_not_found_title	Missatge no trobat
-forum_message	msg	Envia un missatge a aquest fil:
 forum_message	must_choose_message_body	Primer heu d'escollir un missatge
 forum_message	must_choose_message_title	Primer heu d'escollir un missatge
 forum_message	post_followup	Envieu una resposta a aquest missatge
 forum_message	receive_followups	Rebeu respostes per correu electrònic
-forum_message	section	Fòrums
 forum_message	subject	TEMA
 forum_message	thread	Inicia un nou fil
 forum_message	thread_view	Vista del fil
-forum_message	title	Visualitza el missatge
 forum_monitor	activated	Iniciada la monitorització del fòrum
 forum_monitor	deactivated	Desactivada la monitorització del fòrum
 forum_save	saved	Desada la posició del fòrum. Els missatges nous estaran destacats quan torneu
-forum_utils	added	Afegit fòrum
 forum_utils	admin	Administració
 forum_utils	anonymously	Anònimament
-forum_utils	author	Autor
-forum_utils	brokenthread	Fil trencat
 forum_utils	by	Per:
 forum_utils	couldpostif	Podrieu enviar missatges si fossiu $1 iniciant sessió a $2
 forum_utils	date	Data
 forum_utils	discussionforum	Fòrum de discussió:
 forum_utils	doublepost	Sembla que heu enviat dues vegades aquest correu, ja que té el mateix tema i la mateixa informació de seguiment que un correu anterior.
-forum_utils	error	Error!
-forum_utils	erroradd	Error a l'afegir un fòrum
-forum_utils	errorfollowup	Intentant seguir un missatge que no existeix.
-forum_utils	errorfollowup2	No hi ha informació de seguiment a l'intentar enviar a un fil existent.
-forum_utils	errorinsert	No s'ha pogut obtenir insertid()
-forum_utils	errormaster	No s'ha pogut actualitzar el fil mestre amb l'hora actual
-forum_utils	errorparent	No s'ha pogut actualitzar el pare
-forum_utils	errorpost	Ha fallat l'enviament del missatge
-forum_utils	feedbacklogin	Podrieu enviar missatges si estessiu dins d'una sessió
 forum_utils	htmltag	Les etiquetes HTML al vostre missatge es mostraran com a text
 forum_utils	latest	Últimes notícies
 forum_utils	loggedin	dins d'una sessió
 forum_utils	mailmonitor	\nLlegiu i responeu a aquest missatge a: \n$1\nPer: $2 \n\n $3\n\n______________________________________________________________________\nEsteu rebent aquest correu perquè heu escollit monitoritzar aquest fòrum.\nPer deixar de monitoritzar aquest fòrum, inicieu una sessió a $4 \ni visiteu: $5
-forum_utils	mailnotsent	correu no enviat - persones monitoritzant
-forum_utils	mailnotsent2	correu no enviat - ningú monitoritzant
-forum_utils	mailsent	correu enviat - persones monitoritzant
 forum_utils	message	Missatge:
 forum_utils	monitor	Monitoritza el fòrum
-forum_utils	mustinclude	Heu d'incloure un cos i un tema del missatge
-forum_utils	news	Notícies
-forum_utils	nextfailed	Ha fallat l'obtenció del següent thread_id
-forum_utils	noid	Intentant enviar un missatge sense un ID de fòrum
 forum_utils	nonewsitem	Error - no s'ha trobat aquest nou element
-forum_utils	notfound	No trobat
 forum_utils	postanon	Esteu enviant missatges anònimament perquè no esteu
 forum_utils	postcomment	Envia un comentari
-forum_utils	posted	Missatge enviat
-forum_utils	postedby	Enviat per
 forum_utils	project	Projecte
 forum_utils	reply	respon
-forum_utils	attach	adjunta
 forum_utils	saveplace	Desa espai
 forum_utils	stopmonitor	Atura de Monitoritzar
 forum_utils	subject	Tema:
 forum_utils	summary	Resum
-forum_utils	thread	Fil
 frs	file_download	Baixa
 frs	file_monitor	Monitoritza
 frs	file_notes	Notes
@@ -859,20 +696,12 @@ frs_file	error_cannot_move	El fitxer no es pot moure a l'ubicació permanent
 frs_file	error_invalid_file	El nom del fitxer sembla no vàlid
 frs_file	error_min_name_length	El nom del fitxer ha de tenir com a mínim 3 caràcters
 frs_file	error_name_format	El nom de del fitxer ha d'estar en el format d'aquest exemple: gforge-3.0.tar.bz2
-frs_package	error_already_exists	Aquest nom de fitxer ja existeix en aquest espai de projecte 
-frs_package	error_cannot_move	El fitxer no es pot moure a l'ubicació permanent
-frs_package	error_invalid_file	L'FRSFile sembla no vàlid
 frs_package	error_min_name_length	L'FRSFile ha de tenir com a mínim 3 caràcters
 frs_package	error_name_format	FRSPackage::Actualització: El nom del paquet només pot ser alfanumèric
 frs_package	error_set_monitor	Només podeu monitoritzar si sou dins d'una sessió
 frs_release	email_text	\n\nEl projecte "$1" ('$2') ha  \nalliberat la nova versió del paquet '$3' \nPodeu baixar-lo seguint aquest enllaç:\n $4\n\nEsteu rebent aquest correu perquè heu\ndemanat que se us notifiqui quan s'alliberin noves versions d'aquest paquet.\nSi no desitgeu que se us notifiqui en el futur,\n inicieu una sessió a $5 i feu clic a  aquest enllaç: \n $6
 frs_release	email_title	[Publicació $1] $2
-frs_release	error_already_exists	Aquesta publicació ja existeix en aquest espai de projecte 
-frs_release	error_cannot_move	La publicació no es pot moure a una ubicació permanent
-frs_release	error_invalid_file	La publicació SPF sembla ser no vàlida
 frs_release	error_min_name_length	El nom de FRSPackage ha de tenir 3 caràcters com a mínim
-frs_release	error_name_format	El nom de la publicació SPF hauria d'estar en el format d'aquest exemple: gforge-3.0.tar.bz2
-frs_release	error_set_monitor	Només podeu monitoritzar si heu iniciat una sessió
 general	add	Afegeix
 general	browse	navega
 general	cancel	Cancel·la
@@ -885,7 +714,6 @@ general	edit	Edita
 general	error	Error
 general	error_creating	Error al crear $1
 general	error_getting	Error a l'obtenir $1
-general	error_getting_new	Error a l'obtenir el nou $1
 general	error_group_id	El Group_id al resultat db no coincideix amb l'objecte del grup
 general	error_missing_params	Paràmetres faltants
 general	error_no_valid_group_object	$1:: Objecte de grup no vàlid
@@ -896,9 +724,6 @@ general	invalid_email	Adreça de correu no vàlida
 general	language	Idioma
 general	more	Més
 general	no	No
-general	no_valid_filename	Nom de fitxer no vàlid
-general	no_valid_group	S'ha escollit un grup $1 no vàlid
-general	no_valid_group_object	Objecte de grup $1 no vàlid
 general	open	obre
 general	permdenied	Permís denegat.
 general	permexcuse	L'administrador d'aquest projecte us ha de donar permís per veure aquesta pàgina.
@@ -906,14 +731,10 @@ general	permnotget	No s'ha pogut obtenir permís
 general	remove	Suprimeix
 general	reset	Reinicia
 general	return	Retorna
-general	return_to	[Retorna a $1]
-general	sitename	$1
 general	submit	Tramet
 general	submit_edit	Tramet edita
-general	submitted_successfully	$1 tramès amb èxit
 general	to	a
 general	total	total
-general	turned_off	Aquest projecte ha tancat el $1
 general	update	Actualitza
 general	update_successful	Actualitzat amb èxit
 general	yes	Sí
@@ -921,8 +742,6 @@ global	error	ERROR
 group	activity	Percentil d'activitat:&nbsp;
 group	activitystat	Visualitza l'activitat de projecte <a href="/project/stats/?group_id=$1">estadístiques</a>.
 group	developer_info	Informació per desenvolupadors
-group	developers	Desenvolupadors
-group	long_bugs	Seguiment d'errors
 group	long_scm	Repositori SCM
 group	long_docman	DocManager: Gestor de documentació
 group	long_forum	Fòrums públics
@@ -930,9 +749,7 @@ group	long_ftp	Espai FTP anònim
 group	long_homepage	Pagina inicial del projecte
 group	long_mail	Llistes d'enviament de correus
 group	long_news	Últimes notícies
-group	long_patch	Gestor de pedaços
 group	long_pm	Gestor de tasques
-group	long_support	Gestor de suport tècnic
 group	long_survey	Enquestes
 group	long_tracker	Rastrejador
 group	nodescription	Aquest projecte encara no ha enviat cap descripció.
@@ -948,7 +765,6 @@ group	short_files	Fitxers
 group	short_forum	Fòrums
 group	short_homepage	Pàgina inicial
 group	short_mail	Llistes
-group	short_main	Principal
 group	short_memberlist	Desenvolupadors
 group	short_news	Notícies
 group	short_patch	Pedaços
@@ -959,20 +775,13 @@ group	short_survey	Enquestes
 group	short_tracker	Rastrejador
 help	page_information	Informació de la pàgina
 help	title	Benvingut a $1
-help_forum	close_window	Tanca la finestra
-help_forum	attach_file	Si desitgeu adjuntar un fitxer a un element de rastreig heu de marcar aquesta casella abans d'enviar els canvis.
-help_forum	unknown_help_request	PETICIÓ D'AJUDA DESCONEGUDA:
 help_tracker	assignee	Aquesta caixa desplegable representa l'administrador de projecte a qui està assignat un element de rastreig.
 help_tracker	attach_file	Si desitgeu adjuntar un fitxer a un element de rastreig heu de marcar aquesta casella abans d'enviar els canvis.
 help_tracker	canned_response	El desplegable de la resposta 'enllaunada' representa una llista de respostes 'enllaunades' definides per l'administrador de projecte per al suport comú o l'enviament d'errors.<br /><br /> Si sou un administrador de projectes,podeu fer clic a l'enllaç '(admin)' per a definir les vostres pròpies respostes 'enllaunades'
-help_tracker	category	Aquesta caixa desplegable representa la categoria dels elements de rastreig que és una secció particular d'un projecte.<br /><br />Seleccioneu 'Qualsevol' per un conjunt de resultats més ampli.
 help_tracker	close_window	Tanca la finestra
-help_tracker	comment	L'àrea de text de comentaris us permet adjuntar un comentari a un element de rastreig quan una resposta 'enllaunada' no és apropiada.
 help_tracker	data_type	L'opció tipus de dades determina el tipus d'element de rastreig que es tracta.  Com que el rastrejador passa a un gestor d'errors, pedaços, suport, etc..., necessiteu ser capaç de determinar a quin d'aquests ha de correspondre un element.<br /><br />Aquest és l'avantatge afegit de permetre a un administrador convertir una petició de suport en un error (bug).
 help_tracker	priority	L'opció de prioritat permet a un usuari definir una prioritat de l'element de rastreig (que va de 1-mínim a 9-màxim).<br /><br />Això és especialment útil per errors i peticions de suport en les quals un usuari pot trobar un problema crític amb un projecte.
-help_tracker	group	Aquesta caixa desplegable representa el grup dels elements de rastreig que és una llista d'opcions definides per l'administrador del projecte.<br /><br />Si sou un administrador de projecte podeu fer clic a l'enllaç '(admin)' per a definir els vostres propis grups.
 help_tracker	monitor	Podeu monitoritzar o no-monitoritzar aquest element fent clic al botó "Monitoritza". <br /><br /><strong>Nota!</strong> això us enviarà correu addicional. Si afegiu comentaris o s'envien o són assignats a aquest element, també rebreu correus per aquests motius!
-help_tracker	resolution	La opció resolució representa una resolució d'elements de rastreig si n'hi ha.
 help_tracker	sort_by	L'opció Ordena per us permet determinar com es classifiquen els resultats de l'navegació.<br /><br />  Podeu classificar per ID, Prioritat, Resum, Data d'obertura, Data de tancament, Remitent, o Assignee.  També podeu tenir els resultats classificats en ordre Ascendent o Descendent.
 help_tracker	status	Aquesta caixa desplegable representa l'estat actual d'un element de rastreig.<br /><br />Podeu posar l'estat com 'Pendent' si esteu esperant una resposta de l'autor del'element de rastreig.  Quan l'autor respon, l'estat es canvia automàticament a 'Obert'. En canvi, si l'autor no respon en un termini definit per l'administrador (per defecte és 14 dies) se li assigna a l'element un estat d''Suprimit'.
 help_tracker	summary	La caixa de text de resum representa un resum breu de l'element de rastreig. Útil quan s'està navegant entre diversos elements de rastreig.
@@ -982,15 +791,12 @@ help_trove_cat	full_category_name	Nom complet de la categoria
 help_trove_cat	no_such_category	No hi ha aquesta categoria
 help_trove_cat	short_name	Nom curt
 home	about_blurb	$1 és un <B>servei gratuït per a desenvolupadors de <A href="http://www.opensource.org">Codi Obert</A> </B> oferint un accés fàcil almillor en CVS, llistes de correu, seguiment d'errors, fòrums/taules de missatges, gestió de tasques, hostatjament de llocs, arxivament permanent de fitxers, còpies de seguretat completes, i administració total basada en la web.  <BR>&nbsp;<P><B>Feedback i participació del lloc</B><P>Per obtenir el màxim de $1, us caldrà <A href="/account/register.php">registrar-vos com a usuari del lloc</A>. Això us permetrà participar plenament en tot allò que tenim per oferir. Naturalment podeu navegar el lloc sense registrar-vos, però no tindreu accés a participar plenament. <P>&nbsp;<BR><B>Establiu el vostre propi projecte</B><P><A href="/account/register.php">Registreu-vos com a usuari del lloc</A>, després <A HREF="/account/login.php">inicieu una sessió</A> i finalment, <A HREF="/register/">Registreu el vostre projecte.</A> Gràcies... i gaudiu del lloc.
-home	breaking_down_barriers	Trencant les barreres al desenvolupament de programari de Codi Obert
 home	gforge_statistics	Estadístiques $1
 home	highest_ranked_users	Usuaris amb major puntuació
 home	hosted_projects	Projectes hostatjats
 home	most_active_this_week	El més actiu aquesta setmana
 home	no_stats_available	No hi ha estadístiques disponibles
-home	none_found	No se n'ha trobat cap
 home	registered_users	Usuaris registrats
-home	sfos	$1 OnSite
 home	top_project_downloads	Els projectes més descarregats
 home	recently_registered	Projectes registrats recentment
 home	recently_registered_date_format	m/d
@@ -998,7 +804,6 @@ include_html	no_change	Sense canvi
 include_html	none	Cap
 include_html	priority_highest	Màxima
 include_html	priority_lowest	Mínima
-include_html	priority_medium	Mitjana
 include_toolreport	all	Tots
 include_toolreport	for	per
 include_toolreport	key	Clau
@@ -1018,15 +823,11 @@ mail	help_to_request	Els administradors del projecte usen l'enllaç d'administra
 mail	mailinglists_for	Llistes de correu per $1
 mail	no_list_found	No s'han trobat llistes per $1
 mail	provided_by	<p>Llistes de correu facilitades mitjançant una versió GForge del <a href="http://www.list.org">GNU Mailman</a>.  Gràcies als equips de Mailman i <a href="http://www.python.org">Python</a> pel seu excel·lent programari.</p>
-mail	section	Projecte: $1
-mail	title	Llistes de correu
 mail	unable_to_get_lists	Incapaç d'obtenir les llistes
 mail_admin	add_list	Afegeix una llista de correu
 mail_admin	admin_in_mailman	Administra
 mail_admin	error_getting_list	Error a l'obtenir la llista
 mail_admin	pagetitle	Administració de la llista de correu
-mail_admin	section	Llistes de correu
-mail_admin	title	Administració de llistes de correus
 mail_admin	update_list	Actualitza
 mail_admin_addlist	form_addlist	Afegeix aquesta llista
 mail_admin_addlist	form_description	Descripció:
@@ -1036,92 +837,51 @@ mail_admin_addlist	form_name	Nom de la llista de correu:
 mail_admin_addlist	list_added	Llista Afegida
 mail_admin_addlist	pagetitle	Afegeix una llista de correu
 mail_admin_addlist	list_information	<p>Les llista s'anomenarà d'aquesta manera:<br /><strong>nomprojecte-nomllista@$1</strong></p><p>Caldran entre <strong><span style="color:red">6-24 hores</span></strong> perquè es crei la vostra llista.</p>
-mail_admin_addlist	section	Administració de llistes de correus
-mail_admin_addlist	title	Afegeix llista
-mail_admin_addlist	warning	Un cop creada, aquesta llista SEMPRE estarà adjuntada al vostre projecte i no es podrà suprimir!
 mail_admin_updatelist	form_description	Descripció:
 mail_admin_updatelist	form_ispublic	És pública?
 mail_admin_updatelist	form_updatelist	Actualitza
 mail_admin_updatelist	information	Podeu administrar llistes des d'aquí. Tingueu en compte que les llistes privades encara poden ser vistes per membres del vostre projecte, però no estan llistades a $1.
-mail_admin_updatelist	list	Llista
-mail_admin_updatelist	list_updated	Llista actualitzada amb èxit
-mail_admin_updatelist	no_list_found	No s'han trobat llistes per aquest projecte
-mail_admin_updatelist	section	Administració de llistes de correus
-mail_admin_updatelist	status	Estat
-mail_admin_updatelist	title	Actualitza les llistes
 mail_common	creation_mail_body	Es pot crear una llista de correu a $1 en 6-24 hores \ni vos sou l'administrador de la llista.\n\nAquesta llista és: $3@$2 .\n\nLa informació de la vostra llista de correu és a:\n$4 .\n\nL'administració de la llista la podeu trobar a:\n$5 .\n\nLa vostra contrasenya de llista és: $6 .\nSe us encoratja a canviar aquesta contrasenya el més aviat possible.\n\nGràcies per registrar el vostre projecte amb $1.\n\n-- l'equip $1\n
 mail_common	creation_mail_subject	Nova llista de correu $1
 mail_common	error_min_name_length	Heu de proporcionar un nom de llista de 4 ó més caràcters de longitud
 mail_common	error_invalid_name	Nom de llista no vàlid
-mail_common	error_invalid_group_list_id	Id de llista no vàlid
 mail_common	error_list_already_exists	La llista ja existeix
 mail_common	list_not_activated	Encara no està activada
 mail_common	mailing_list	Llista de correu
-mail_common	mailing_lists	Llistes de correu
 mail_common	prefs	Subscripció
 mail_common	description	Descripció
 mail_utils	admin	Administració
 mail_utils	turned_off	Aquest projecte ha desconnectat les llistes de correus
-menu	about_gforge	Quant a $1
 menu	reporting	Informes
 menu	account_maintenance	Manteniment de comptes
 menu	admin	Administració
 menu	bookmark_page	Pàgina de enllaços d'interès
-menu	change_my_theme	Canvia el meu tema
 menu	code_snippet	Fragments&nbsp;de&nbsp;Codi
-menu	code_snippet_library	Biblioteca de fragments de codi
-menu	compile_farm	Granja de compilació
 menu	diary_notes	Diari &amp; Notes
-menu	discussion_forums	Fòrums de Discussió
-menu	documentation	Documents del lloc
 menu	home	Inici
 menu	login	Inici de sessió
-menu	login_ssl	Inici de sessió via SSL
 menu	logout	Final de sessió
 menu	my_account	El meu compte
 menu	my_personal_page	La meva pàgina personal
 menu	mypage	La&nbsp;meva&nbsp;pàgina
 menu	new_project	Registra un nou projecte
-menu	new_releases	Noves publicacions
 menu	new_user	Nou usuari via SSL
-menu	other_site_mirrors	Altres rèpliques del lloc
-menu	project_admin	Administració del projecte
 menu	project_help_wanted	Ofertes&nbsp;de&nbsp;feina
-menu	project_summary	Sumari del projecte
 menu	projectree	Arbre&nbsp;de&nbsp;projectes
 menu	register_project	Registra el projecte
 menu	search	Cerca
-menu	site_status	Estat del lloc
-menu	software_map	Mapa del programari
 menu	submit	Tramet
-menu	top_projects	Projectes principals
-my	about_blurb	La vostra pàgina personal conté llistes d'errors i tasques que teniu assignades, i una llista dels grups als que pertanyeu.
-my	assigneditems	Els meus elements assignats
 my	bookmarks	Els meus enllaços d'interès
 my	monitoredfile	Mòduls de fitxers monitoritzats
 my	monitoredforum	Fòrums monitoritzats
 my	no_bookmarks	Ara no teniu cap enllaç d'interès desat.
 my	no_monitored_filemodules	No esteu monitoritzant cap fitxer.
-my	no_monitored_filemodules_details	<p>Si monitoritzeu fitxers, se us enviaran avisos de noves publicacions per correu, amb un enllaç al nou fitxer al nostre servidor de baixades.</p><p>Podeu monitoritzar fitxers visitant una &quot;Pàgina de resum&quot; del projecte i fent clic a la casella de selecció ala secció de fitxers.</p>
 my	no_monitored_forums	No esteu monitoritzant cap fòrum.
-my	no_monitored_forums_details	<p>Si monitoritzeu fòrums, se us enviaran nous missatges en forma de correu, amb un enllaç al nou missatge.</p><p>Podeu monitoritzar fòrums fent clic a &quot;Monitoritza el fòrum&quot; a qualsevol fòrum de discussió.</p>
 my	no_open_tasks	No teniu tasques obertes assignades.
 my	no_projects	No sou membre de cap projecte actiu
 my	no_tracker_items_assigned	No teniu elements de rastreig oberts assignats.
 my	no_tracker_items_submitted	No teniu elements de rastreig oberts tramesos per vos.
-my	pending_news_bytes	Bytes de notícies pendents
-my	pending_news_bytes_1	Hi ha un byte de notícies esperant ser revisat
-my	pending_news_bytes_2	Hi ha $1 bytes de notícies esperant ser revisats
-my	pending_news_bytes_3	Feu clic aquí.
-my	pending_projects	Projectes pendents
-my	pending_projects_1	Hi ha un projecte pendent que espera ser revisat
-my	pending_projects_2	Hi ha un $1 projectes pendents que esperen ser revisats.
-my	pending_projects_3	Feu clic aquí.
 my	projects	Els meus projectes
-my	submitteditems	Els meus elements tramesos
-my	survey	Anàlisi ràpida
-my	survey_taken	Heu agafat la vostra anàlisi de desenvolupador
-my	tasks	Les meves tasques
 my	title	Pàgina personal per: $1
 my_bookmark	return	Retorna
 my_bookmark_add	added_bookmark	Afegit enllaç d'interès per <strong>$1</strong> amb títol <strong>$2</strong>
@@ -1129,14 +889,9 @@ my_bookmark_add	back	Retorn a la vostra pàgina inicial
 my_bookmark_add	bookmark_title	Títol d'enllaç d'interès
 my_bookmark_add	bookmark_url	URL d'enllaç d'interès
 my_bookmark_add	section	La meva pàgina personal
-my_bookmark_add	title	Afegeix enllaç d'interès
 my_bookmark_add	visit_page	Visita la pàgina marcada
-my_bookmark_delete	bookmark_deleted	Enllaç d'interès suprimit
-my_bookmark_delete	section	La meva pàgina personal
-my_bookmark_delete	title	Suprimeix enllaç d'interès
 my_bookmark_edit	bookmark_updated	Enllaç d'interès actualitzat
 my_bookmark_edit	failed_to_update_bookmark	No s'ha pogut actualitzar l'enllaç d'interès.
-my_bookmark_edit	section	La meva pàgina personal
 my_bookmark_edit	title	Edita enllaç d'interès
 my_diary	add_new_entry	Afegeix una nova entrada
 my_diary	details	Detalls
@@ -1149,7 +904,6 @@ my_diary	is_public_expl	Si està marcat com a pública,  un cop enviada la vostr
 my_diary	item_added	Element afegit
 my_diary	no_entries	No teniu entrades de diari
 my_diary	nothing_updated	No s'ha actualitzat res
-my_diary	section	La meva pàgina personal
 my_diary	submit_only_once	TRAMET NOMÉS UN COP
 my_diary	summary	Resum
 my_diary	title	El meu diari i les meves notes
@@ -1175,7 +929,6 @@ news	noitems	No s'han trobat elements
 news	nonews	No s'han trobat notícies
 news	nonewsfor	No s'han trobat notícies per $1
 news	olderheadlines	Titulars anteriors
-news	section	Projecte: $1
 news	title	Notícies
 news_admin	approve_for_frontpage	Aprovació per a la portada
 news_admin	approve_newsbyte	Aprova un NewsByte pel projecte: $1
@@ -1184,7 +937,6 @@ news_admin	date	Data
 news_admin	details	Detalls
 news_admin	do_nothing	No facis res
 news_admin	newsbyte_deleted	NewsByte suprimit.
-news_admin	newsbyte_not_found	NewsByte No trobat.
 news_admin	newsbyte_rejected	NewsBytes rebutjat.
 news_admin	newsbytes_to_approve	Aquests elements necessiten ser aprovats (total: $1)
 news_admin	newsbyte_updated	NewsByte actualitzat.
@@ -1198,7 +950,6 @@ news_admin	reject	Rebutja
 news_admin	reject_selected	Rebutja els seleccionats
 news_admin	rejected_newsbytes	Aquests elements es varen rebutjar la setmana passada (total: $1)
 news_admin	removal_when_edit	Si aquest element és a la pàgina principal de $1 i l'editeu, s'eliminarà de la pàgina principal.
-news_admin	section	Notícies
 news_admin	status	Estat
 news_admin	status_delete	Suprimeix
 news_admin	status_displayed	Mostrat
@@ -1206,7 +957,6 @@ news_admin	subject	Assumpte
 news_admin	submitted_by	Tramès per
 news_admin	submitted_for_group	Tramès pel grup
 news_admin	title	Administració de noticies
-news_main	title	Notícies
 news_submit	cannot	No podeu trametre notícies per un projecte a no ser que sigueu administrador en aquest projecte
 news_submit	cannotadmin	No es permet trametre notícies des d'un grup de notícies.
 news_submit	details	Detalls
@@ -1215,9 +965,7 @@ news_submit	errorinsert	ERROR a l'inserir
 news_submit	forproject	Per projecte
 news_submit	newsadded	Notícies afegides.
 news_submit	post_blurb	Podeu trametre notícies sobre el vostre projecte si sou un administrador al vostre projecte. També podeu enviar notícies "es necessita ajuda" si el vostre projecte necessita ajuda.</p><p>Tots els missatges <b>per al vostre projecte</b> apareixeran al moment a la vostra pàgina de sumari del projecte. Els missatges que són d'especial interès per a la comunitat hauran de ser apovats per un membre de l'equip de notícies $1 abans que apareixin a la pàgina principal de $1.</p><p>Als vostres enviaments hi podeu incloure URLs, però no HTML.</p><p>A les URLs que comencen amb http:// si pot fer clic.
-news_submit	section	Notícies
 news_submit	subject	Asumpte
-news_submit	title	Tramet notícies per $1
 news_utils	archive	Arxiu de notícies
 news_utils	comment_1	Comentari
 news_utils	comment_2	Comentaris
@@ -1247,24 +995,13 @@ people	no_categories_found	No s'han trobat categories
 people	no_skill_inventory_setup_up	No s'ha creat un inventari d'habilitats
 people	none_found	No se n'ha trobat cap
 people	project	Projecte $1 
-people	section	Es busca ajuda de projecte
 people	short_description	Descripció breu
 people	skill	Habilitat
 people	status	Estat
 people	title	Sistema de petició d'ajuda
 people	title_array	Títol
-people_admin	section	Es busca ajuda de projecte
-people_admin	title	Administració de petició d'ajuda
-people_admin_people_cat	section	Es busca ajuda de projecte
-people_admin_people_cat	title	Afegeix categories de feina
-people_admin_people_skills	section	Administració de petició d'ajuda
-people_admin_people_skills	title	Afegeix habilitats de treball
-people_cat	section	Es necessita ajuda
-people_cat	title	Llistat de feines per categoria
 people_createjob	continue	Continua >>
 people_createjob	explains	Comenceu omplint els camps de sota. Quan feu clic a continua, se us mostrarà una llista d'habilitats i els nivells d'experiència que es requereix per aquesta feina.
-people_createjob	section	Es necessita ajuda de projecte
-people_createjob	title	Crea una nova feina
 people_editjob	error_missing	error - falta informació
 people_editjob	fill_in	Ompliu tots els camps requerits
 people_editjob	finished	Acabat
@@ -1281,7 +1018,6 @@ people_editjob	job_update_no_wrong_id	Ha fallat l'actualització d'una FEINA - p
 people_editjob	job_update_ok	FEINA actualitzada amb èxit
 people_editjob	no_such	No hi ha tal missatge per aquest projecte
 people_editjob	posting_fetch_failed	Ha FALLAT la cerca del MISSATGE
-people_editjob	section	Es necessita ajuda de projecte
 people_editjob	skill_explains	<p>Ara podeu editar/canviar la llista d'habilitats adjuntada a aquest missatge. Els desenvolupadors seran capaços de fer coincidir les seves habilitats amb els vostres requeriments.</p><p>Tots els missatges es tanquen automàticament després de dues setmanes.</p>
 people_editjob	title	Edita feina
 people_editjob	update_description	Actualitza les descripcions
@@ -1315,14 +1051,11 @@ people_editprofile	no_skills_selected_to_delete	No hi ha habilitats seleccionade
 people_editprofile	no_such_user	No hi ha aquest usuari
 people_editprofile	profile_title	Títol
 people_editprofile	publicly_viewable	Públicament visible
-people_editprofile	section	Es necessita ajuda de projecte
 people_editprofile	skill_added_ok	Habilitat afegida amb èxit
 people_editprofile	skill_delete_successfully	L'habilitat $1 s'ha suprimit amb èxit 
 people_editprofile	skill_deletion_cancelled	S'ha cancel·lat la supressió de l'habilitat
 people_editprofile	skills_edit	Edita les habilitats
 people_editprofile	start_date	Data d'inici
-people_editprofile	title	Editeu el vostre perfil
-people_editprofile	title_max_100_chars	Títol (100 caràcters com a màxim)
 people_editprofile	type	Tipus
 people_editprofile	update_failed	Ha FALLAT l'actualització de l'usuari
 people_editprofile	update_ok	L'user ha estat actualitzat amb èxit
@@ -1330,10 +1063,6 @@ people_editprofile	update_permission	Permisos d'actualització
 people_editprofile	user_fetch_failed	Ha FALLAT la cerca de l'usuari
 people_editprofile	you_can_enter_new_skills	Podeu entrar les noves habilitats que heu adquirit aquí. Entreu les dates inicial i final el més acuradament que pugueu.
 people_help_wanted_latest	title	Últims missatges de sol·licitud d'ajuda
-people_helpwanted_latest	section	Es necessita ajuda de projecte
-people_helpwanted_latest	title	Últims correus
-people_proj	section	Es necessita ajuda de projecte
-people_proj	title	Es necessita ajuda de projecte per $1
 people_viewjob	contact_info	Contact Info
 people_viewjob	fetch_failed	Ha FALLAT la cerca de MISSATGES
 people_viewjob	for_project	Per projecte
@@ -1341,11 +1070,8 @@ people_viewjob	no_such_posting	No hi ha tal missatge per aquest projecte
 people_viewjob	open_date	Data oberta
 people_viewjob	posting_id_not_found	No s'ha trobat l'ID de missatge
 people_viewjob	required_skills	Habilitats requerides
-people_viewjob	section	Es necessita ajuda de projecte
-people_viewjob	title	Es necessita $1 per $2
 people_viewjob	view_a_job	Visualitza una feina
 people_viewprofile	no_such_user	No hi ha aquest usuari
-people_viewprofile	section	Informació d'usuari
 people_viewprofile	set_private	Aquest usuari ha posat el seu perfil com a privat
 people_viewprofile	skills_profile_for	Perfil d'habilitats per
 people_viewprofile	title	Visualitza un perfil d'usuari
@@ -1358,10 +1084,8 @@ pm_uploadcsv	explain	Aquesta pàgina us permet escollir un fitxer, en format .cs
 pm_uploadcsv	choose_file	Escolliu un fitxer en elformat .csv adequat per pujar.
 pm_uploadcsv	title	Pujar dades al gestor de tasques.
 pm	admin	administració
-pm	any	Qualsevol
 pm	assigned_to	Assignat a
 pm	cat_any	Qualsevol
-pm	cat_none	Cap
 pm	category	Categoria
 pm	date_note		El sistema modificarà les vostres dates d'inici/final si intenteu crear una data d'inici anterior a la data final de qualsevol tasca de la qual depengueu.
 pm	dependent	Dependent de tasca
@@ -1375,7 +1099,6 @@ pm	no_tasks_found_text	Afegiu tasques usant l'enllaç de sobre
 pm	noprj	<H1>No s'han trobat subprojectes</H1><P><B>No s'han definit subprojectes, o bé no els podeu veure.<P><FONT COLOR=RED>L'administrador d'aquest projecte haurà de definir projectes usant la pàgina d'administració</FONT></B>
 pm	percent_complete	Tantpercent complet
 pm	priority	Prioritat
-pm	section	Projecte: $1 
 pm	start_date	Data d'inici
 pm	status	Estat
 pm	status_any	Any
@@ -1389,9 +1112,6 @@ pm_addtask	task_added_relationship	Relació de rastreig afegida amb èxit
 pm_addtask	task_created_successfully	Tasca creada amb èxit
 pm_addtask	task_updated_successfully	Tasca actualitzada amb èxit
 pm_addtask	title	Afegeix una nova tasca
-pm_admin	title	Gestor de tasques: Administració
-pm_admin_change_status	section	Administració del gestor de tasques
-pm_admin_change_status	title	Actualitza informació
 pm_admin_projects	delete_info	Suprimeix permanentment aquest subprojecte i totes les seves dades.
 pm_admin_projects	delete	Suprimeix
 pm_admin_projects	deleted	Suprimit amb èxit
@@ -1404,7 +1124,6 @@ pm_admin_projects	add_categories_to	Afegeix categories a
 pm_admin_projects	add_edit_categories	Afegeix/edita categories
 pm_admin_projects	add_project	Afegeix un projecte
 pm_admin_projects	add_project_intro	Afegiu un projecte, que pot contenir un conjunt de tasques. Això és diferent de crear una nova tasca.
-pm_admin_projects	add_subprojects	Afegeix projectes
 pm_admin_projects	admin_title	Administració del gestor de projectes/Tasques
 pm_admin_projects	category_inserted	Categoria inserida
 pm_admin_projects	category_name	Nom de categoria
@@ -1413,30 +1132,18 @@ pm_admin_projects	category_note2	No és recomanable que canvieu el nom de catego
 pm_admin_projects	category_updated	Categoria actualitzada
 pm_admin_projects	change_project_intro	Podeu modificar un projecte existent usant aquest formulari. Teniu en compte que els projectes privats encara poden ser vistos per membres del vostre projecte, però no pel públic en general.
 pm_admin_projects	change_project_title	Canvia l'estat del gestor de projectes/tasques
-pm_admin_projects	col_project_id	id de projecte
-pm_admin_projects	col_project_name	Nom de projecte
 pm_admin_projects	description	Descripció
 pm_admin_projects	edit_update	Edita/Actualitza el projecte
-pm_admin_projects	existing_subprojects	Subprojectes existents
 pm_admin_projects	id	Id
 pm_admin_projects	is_public	És Públic?	
 pm_admin_projects	modify_category	Modifica una categoria a
 pm_admin_projects	no_categories	No hi ha definides categories
 pm_admin_projects	no_projects_found	<h2>No s'han trobat projectes</h2><p>no se n'ha trobat cap per aquest grup. Podeu afegir nous projectes usant l'enllaç "Afegeix un projecte" de més amunt.</p>
-pm_admin_projects	no_subprojects	No hi ha subprojectes en aquest grup	
 pm_admin_projects	project_inserted	Projecte inserit 
 pm_admin_projects	project_name	Nom del nou projecte
 pm_admin_projects	project_title	Títol
 pm_admin_projects	projects_intro	Afegeiu un nou projecte al gestor de projectes/tasques. <strong>Això és diferent d'afegir una tasca a un projecte.</strong>
-pm_admin_projects	section	Administració del Gestor de tasques
 pm_admin_projects	send_updates	Envia totes les actualitzacions a
-pm_admin_projects	title	Afegeix subprojectes
-pm_browse_custom	section	Gestor de tasques
-pm_browse_custom	title	navega tasques a mida
-pm_browse_my	section	Gestor de tasques del projecte $1
-pm_browse_my	title	navega les meves tasques
-pm_browse_open	section	Gestor de tasques
-pm_browse_open	title	navega les tasques obertes
 pm_browsetask	admin_mass_update	<strong>Administració:</strong> Si desitgeu aplicar canvis a tots els elements seleccionats anteriorment, useu aquests controls per canviar les seves propietats i feu clic un cop a "Actualització en massa".
 pm_browsetask	check_all	Marca-les &nbsp;totes
 pm_browsetask	clear_all	Suprimeix-les &nbsp;totes
@@ -1456,7 +1163,6 @@ pm_detailtask	hours	Hores
 pm_detailtask	original_comment	Comentari original
 pm_detailtask	pct_complete	Tant per cent de compleció
 pm_detailtask	priority	Prioritat
-pm_detailtask	section	Gestor de tasques
 pm_detailtask	start_date	Data d'inici
 pm_detailtask	status	Estat
 pm_detailtask	submitted_by	Tramès per
@@ -1478,7 +1184,6 @@ pm_include_grouphtml	browse_task	navega les tasques
 pm_include_grouphtml	error_disabled	Aquest projecte ha desconnectat el gestor de tasques
 pm_include_grouphtml	gantt_chart	Gràfica de Gantt
 pm_include_grouphtml	not_started	No iniciat
-pm_include_grouphtml	project	Projecte
 pm_include_grouphtml	reporting	Informes
 pm_include_taskhtml	by	Per
 pm_include_taskhtml	comment	Comentari
@@ -1489,7 +1194,6 @@ pm_include_taskhtml	followups	Respostes
 pm_include_taskhtml	no_changes	No s'han afegit canvis
 pm_include_taskhtml	no_comments	No s'han afegit comentaris
 pm_include_taskhtml	no_depend_info	No hi ha tasques que depenguin d'aquesta tasca
-pm_include_taskhtml	no_followups	No hi ha respostes
 pm_include_taskhtml	no_tracker_items	No s'han afegit elements de rastreig relacionats
 pm_include_taskhtml	old_value	Valor antic
 pm_include_taskhtml	open_date	Data oberta
@@ -1508,11 +1212,6 @@ pm_projectgroup	error_min_desc_length	La descripció del document ha de ser de 1
 pm_projectgroup	error_min_name_length	El títol ha de tenir 5 caràcters com a mínim
 pm_projectgroup	none_found	No s'han trobat grups de projecte
 pm_projecttask	circular_dependency	S'ha detectat una dependència circular
-pm_projecttask	mail_followups_body	\nData: $1\nBy: $2\n\nComentari:\n$3
-pm_projecttask	mail_followups_footer	Per més informació, visiteu:
-pm_projecttask	mail_followups_subject	Tasca #
-pm_projecttask	mail_followups_title	\n\nRespostes
-pm_projecttask	mail_notice			La tasca # $1 ha estat actualitzada\n\nProjecte: $2\nSubprojecte: $3\nResum: $4\nComplet: $5\nEstat: $6\n\nDescripció: $7
 pm_reporting	aging_report	Aging informe
 pm_reporting	all_tasks_by_category	Totes les tasques per categoria
 pm_reporting	all_tasks_by_technician	Totes les tasques per tècnic
@@ -1527,7 +1226,6 @@ pm_reporting	started_tasks	Nombre de tasques iniciades
 pm_reporting	tasks_by_category	Tasques per categoria
 pm_reporting	tasks_by_technician	Tasques per tècnic
 pm_reporting	title	Sistema d'informes de tasques
-pm_task	create_successfully	Tasca creada amb èxit
 frs_admin	delete	Suprimeix
 frs_admin	deleted	Suprimit
 frs_admin	delete_package_warning	Esteu a punt de suprimir de forma permanent i irreversible aquest paquet i totes les seves publicacions i fitxers!
@@ -1542,9 +1240,6 @@ project_admin	choose_first_letter	<p>Escolliu la <strong>primera lletra</strong>
 project_admin	user_updated	Usuari actualitzat amb èxit
 project_admin	docmanager_admin	Administració del gestor de documents
 project_admin	download_tarball	Baixeu el vostre tarball de l'arbre SCM de cada nit
-project_admin	edit_file_releases	Edita/Afegeix publicacions de fitxer
-project_admin	edit_member_permissions	Edita els permisos del membre
-project_admin	file_releases	Publicacions de fitxers
 project_admin	finish	Finalitza
 project_admin	forum_admin	Administració del fòrum
 project_admin	frs_admin	Administració SPF
@@ -1553,11 +1248,8 @@ project_admin	homepage_link	Enllaç de la pàgina d'inici:&nbsp;
 project_admin	mail_admin	Administració de les llistes de correu
 project_admin	news_admin	Administració de les notícies
 project_admin	no_matching_user	<p>No s'han trobat usuaris que coincideixin</p>
-project_admin	packages	Paquets
-project_admin	plugins_admin	Administració de connectors
 project_admin	project_information	Diverses informacions del projecte
 project_admin	scm_admin	Administració SCM
-project_admin	section	Projecte: $1
 project_admin	shell_server	Servidor de shell (SSH) del grup:&nbsp;
 project_admin	shell_server_group_directory	Directori de grup al servidor de shell:&nbsp; 
 project_admin	short_description	Descripció breu:&nbsp;
@@ -1590,8 +1282,6 @@ project_admin_database	state	Estat
 project_admin_database	title	Informació de la base de dades
 project_admin_database	update	Actualitza
 project_admin_editgroupinfo	active_features	Característiques actives
-project_admin_editgroupinfo	enable_anonymous_cvs	Habilita CVS anònim
-project_admin_editgroupinfo	enable_pserver	Habilita pserver
 project_admin_editgroupinfo	group_name	Nom de grup descriptiu
 project_admin_editgroupinfo	group_updated	Actualitzada la informació de grup
 project_admin_editgroupinfo	homepage_link	Enllaç de la pàgina d'inici
@@ -1688,8 +1378,6 @@ project_admin_group_trove	title	Agrupa la informació de l'arbre de projectes
 project_admin_group_trove	update_changes	Actualitza tots els noms de categoria
 project_admin_history	info	Aquest registre mostrarà qui ha fet canvis significatius al vostre projecte i quan
 project_admin_history	title	Història
-project_admin_newrelease	section	Projecte $1 - Administració
-project_admin_newrelease	title	Crea nova publicació
 project_admin_qrs	changelog	Registre de canvis
 project_admin_qrs	create_new_package	O $1 crea un nou paquet $2
 project_admin_qrs	file_name	Nom de fitxer
@@ -1717,60 +1405,11 @@ project_admin_qrs	exceed_file_size	El fitxer carregat excedeix la mida màxima d
 project_admin_qrs	partial_file	El fitxer carregat només estava carregat parcialment.
 project_admin_qrs	unknown_file_error	Error de pujada de fitxer desconegut.
 project_admin_qrs	maximum_file_size	Mida màxima de pujada de fitxer:
-project_admin_rmuser	cancel	Cancel·la
-project_admin_rmuser	cannot_remove_admin	No podeu eliminar l'administrador $1
-project_admin_rmuser	info	<h3>Eliminant un desenvolupador de $1</h3><p>Esteu a punt d'eliminar un desenvolupador de $1. Si us plau, confirmeu la vostra acció:</p>
-project_admin_rmuser	operation_not_permitted	Operació no permesa
-project_admin_rmuser	remove	Suprimeix
-project_admin_rmuser	title	Suprimeix l'usuari
 project_admin_showreleases	date	Data
 project_admin_showreleases	no_release	No hi ha disponibles publicacions d'aquest paquet
 project_admin_showreleases	package_name	Nom del paquet
 project_admin_showreleases	release_name	Nom de la publicació
 project_admin_showreleases	title	Release Nova versió de fitxer
-project_admin_userpermedit	add_to_all	Afegeix-ho a tots
-project_admin_userpermedit	add_to_tracker	Afegeix-ho al rastrejador
-project_admin_userpermedit	admin	Administració
-project_admin_userpermedit	admin_only	Només administradors
-project_admin_userpermedit	admin_tech	Adminstradors & Tècnics
-project_admin_userpermedit	developer_not_found	No s'ha trobat cap desenvolupador en aquest grup
-project_admin_userpermedit	docman	Gestor de documentació
-project_admin_userpermedit	editing_permissions	Esteu editant els permisos per l'usuari $1 ($2)
-project_admin_userpermedit	editor	Editor
-project_admin_userpermedit	file_release_role	Rol en les publicacions de fitxers
-project_admin_userpermedit	forums	Fòrums
-project_admin_userpermedit	invalid_user	Usuari no vàlid
-project_admin_userpermedit	moderator	Moderador
-project_admin_userpermedit	no_permissions	No hi ha permisos
-project_admin_userpermedit	not_available	No disponible
-project_admin_userpermedit	permissions_updated	Permisos actualitzats
-project_admin_userpermedit	pm	Gestor de projectes/Tasques
-project_admin_userpermedit	project_admin	Administració de projecte
-project_admin_userpermedit	project_role	Rol de projecte
-project_admin_userpermedit	property	Propietat
-project_admin_userpermedit	release_technician	Tènic de publicacions
-project_admin_userpermedit	remove	Suprimeix
-project_admin_userpermedit	reset_changes	Reinicia canvis
-project_admin_userpermedit	technician	Tècnic
-project_admin_userpermedit	title	Edita els permisos del desenvolupador
-project_admin_userpermedit	tracker_info	<h3>Afegeix un usuari a aquests rastrejadors:</h3>	<p>	Podeu seleccionar en quins rastrejadors té privilegis aquest usuari, o simplement afegir l'usuari a tots els rastrejadors marcant "Afegeix-lo a tots".</p>
-project_admin_userpermedit	tracker_manager	Gestor de rastrejadors
-project_admin_userpermedit	undefined	No definit
-project_admin_userpermedit	update_permissions	Actualitza els permisos del desenvolupador
-project_admin_userpermedit	user_added	Usuari afegit amb èxit
-project_admin_userpermedit	user_does_not_exist	L'usuari no existeix.
-project_admin_userpermedit	value	Valor
-project_admin_userperms	docman	Gestor<br />de documents
-project_admin_userperms	editor	Editor
-project_admin_userperms	forums	Fòrums
-project_admin_userperms	general	General
-project_admin_userperms	info	Feu clic sobre el nom del desenvolupador a sota per a editar els permisos
-project_admin_userperms	moderator	Moderador
-project_admin_userperms	no_developers	No s'han trobat desenvolupadors
-project_admin_userperms	rel_tech	Rel.Tèc.
-project_admin_userperms	task_manager	Gestor<br />de tasques
-project_admin_userperms	title	Llista de permisos d'usuari
-project_admin_userperms	tracker_manager	Gestor de<br />rastrejadors
 project_admin_utils	admin	Administració
 project_admin_utils	by	Per
 project_admin_utils	change_history	Historial de canvis de grup
@@ -1778,7 +1417,6 @@ project_admin_utils	database_admin	Administrador de bases de dades
 project_admin_utils	date	Data
 project_admin_utils	edit_jobs	Edita les feines
 project_admin_utils	edit_public_info	Edita la informació pública
-project_admin_utils	edit_release_files	Edita/Publica Fitxers
 project_admin_utils	field	Camp
 project_admin_utils	multimedia_data	Edita les dades multimèdia
 project_admin_utils	old_value	Valor antic
@@ -1786,7 +1424,6 @@ project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Els a
 project_admin_utils	post_jobs	Tramet feines
 project_admin_utils	project_history	Historial del projecte
 project_admin_utils	stats	Estadístiques
-project_admin_utils	user_permissions	Permisos d'usuari
 project_admin_utils	vhosts	VHOSTs
 project_admin_vhost	create	Crea
 project_admin_vhost	delete	Suprimeix
@@ -1803,14 +1440,9 @@ project_filemodule_monitor	start_monitor_body	S'ha iniciat la monitorització
 project_filemodule_monitor	start_monitor_title	Monitorització iniciada
 project_filemodule_monitor	stop_monitor_body	S'ha aturat la monitorització
 project_filemodule_monitor	stop_monitor_title	Monitorització aturada
-project_home	cvs_commits	<strong>$1</strong> confirmacions, <strong>$2</strong> afegits
-project_home	forum_messages	<strong>$1</strong> missatges en <strong>$2</strong> fòrums
-project_home	forum_messages_only_one_forum	<strong>$1</strong> missatges al fòrum <strong>$2</strong>
-project_home	forums	fòrums
 project_home	help_wanted	ES NECESSITA AJUDA: Aquest projecte cerca
 project_home	help_wanted_multiple	Gent per cobrir $1 vàries posicions </a>
 project_home	holding_note	NOTA: Aquesta entrada de projecte és mantinguda per l'equip $1. No som el lloc oficial per a aquest producte. Podeu trobar informció addicional de copyright a la pagina d'inici d'aquest projecte.
-project_home	messages_in	imsatges en
 project_home	monitor_package	Monitoritzeu aquest paquet
 project_home	no_subprojects	No hi ha subprojectes públics disponibles
 project_home	no_trackers	No hi rastrejadors públics disponibles
@@ -1844,30 +1476,13 @@ project_showfiles	package	Paquet
 project_showfiles	project_totals	Totals de projecte
 project_showfiles	release_highlighted	La publicació que heu escollit està <span style="background-color:pink">ressaltada</span>.
 project_showfiles	release_notes	Publicació &amp; Notes
-project_showfiles	section	Projecte: $1
 project_showfiles	size	Mida
 project_showfiles	title	Llista de fitxers del projecte
 project_shownotes	changes	Canvis:
 project_shownotes	error_release_not_found	No s'ha trobat aquesta publicació
 project_shownotes	notes	Notes:
 project_shownotes	release_name	Nom de publicació:
-project_shownotes	section	Projecte: $1
 project_shownotes	title	Notes de publicació de fitxers i registre de canvis
-project_stats	change_stats_view	Vista de les estadístiques de canvis
-project_stats	detailed_statistics	Estadístiques detallades de
-project_stats	last_30_days	els últims 30 dies
-project_stats	last_7_days	els últim 7 dies
-project_stats	monthly	Mensualment
-project_stats	tasks	Tasques
-project_stats	title	Estadístiques del projecte 
-project_stats	tracker	Rastrejador
-project_stats	usage_statistics	Estadístiques d'ús 
-project_stats	view_reports	Visualitza els informes
-project_stats_graph	date	Data
-project_stats_graph	page_view_days	Pàgina vistes (vermell) i baixades (blau) pels últims $1 dies
-project_stats_graph	page_view_months	Pàgina vistes (vermell) i baixades (blau) pels últims $1 mesos
-project_stats_graph	statistics	Estadístiques $1 per $2
-project_stats_graph	views	Vistes (vermell) / Baixades (blau)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	Tots rastr.
 project_stats_utils	bugs	Errors
@@ -1884,8 +1499,6 @@ project_stats_utils	stats_for_days	Estadístiques dels passats $1 dies
 project_stats_utils	stats_for_months	Estadístiques dels passats $1 mesos.
 project_stats_utils	support	Suport
 project_stats_utils	tasks	Tasques
-projects	section	Projecte: $1
-projects	title	Resum
 register	apply_for_registration	Per sol·licitar un registre de projecte, haurieu de proporcionar-ne informació bàsica. Llegiu amb cura les descripcions més avall i proporcioneu dades completes i comprensibles. Tots els camps de sota són obligatoris.
 register	comprehensive_description	Descriviu el vostre projecte de forma més comprensible.
 register	conflicting_licenses_choice	Tria de llicències conflictiva
@@ -1894,8 +1507,6 @@ register	i_agree	Envia
 register	i_disagree	Cancel·la
 register	invalid_full_name	Nom complet no vàlid
 register	invalid_unix_name	Nom unix no vàlid
-register	license_type	Domini públic</a><li>Només al lloc web <li>Una altra/Llicència propietària</ul><p><strong>Llicència per a aquest projecte</strong><br/ ><strong>La vostra llicència:</strong><br />
-register	maximum_description	La longitud màxima de la descripció del projecte és de 255 caràcters
 register	more_license_description	Si us plau, doneu-nos una descripció més comprensible de la llicència"
 register	no_license_chosen	No heu escollit cap llicència
 register	other_license	Si heu seleccionat "una altra", doneu una explicació amb la descripció de la vostra llicència. Tingueu en compte que altres llicències poden no ser aprovades. A més, pot caldre temps addicional per prendre una decisió per un projecte així, ja que ens caldrà verificar que aquesta llicència es compatible amb la definició de Codi Obert.
@@ -1907,38 +1518,23 @@ register	project_submitted	El vostre projecte ha estat tramès als administrador
 register	project_unix_name	<h3>5. Nom Unix del projecte</h3><p>A més del nom de projecte complet, haureu d'escollir un nom breu, "Unix" pel vostre projecte.</p><p> El "Nom Unix" té vàries restriccions perquè s'utilitza en tants llocs al voltant del lloc. Són les següents:<ul><li>No pot coincidir amb el nom unix de qualsevol altre projecte<li>Ha de tenir una longitud compresa entre 3 i 15 caràcters<li>Ha d'estar en minúscules<li>Només pot contenir caràcters, nombres i guions<li>Ha de ser un nom d'usuari unix vàlid<li>No pot coincidir amb un dels nostres dominis reservats<li>El nom Unix no canviarà mai per aquest projecte</ul><p>Però el vostre nom unix és important, perquè s'usarà per moltes coses,incloent:<ul><li>Un lloc web a <tt>nomunix.$1</tt><li>Una arrel de repositori CVS de <tt>/cvsroot/nomunix</tt> a <tt>cvs.nomunix.$1</tt><li>Accés shell a <tt>nomunix.$1</tt><li>Motors de cerca a través del lloc</ul><p>Nom Unix:<br/>
 register	purpose_and_summarization	<h3>2. Objectiu i resum del projecte</h3><p><strong></strong><p><strong> Proporcioneu una descripció detallada i acurada del vostre projecte i quins recursos $1 us plantegeu usar i de quina manera. Aquesta descripció serà la base per a l'aprovació o el rebuig de l'hostatjament del vostre projecte a $1, i més endavant assegurar-se que esteu usant els serveis de la forma prevista. Aquesta descripció no serà utilitzada com una descripció pública del vostre projecte.</strong>
 register	registration_complete	Registre complet
-register	title	Nou registre de projecte
 register	unix_group_name_already_taken	El nom Unix ja està agafat
 register	choose_scm	<h3>6. SCM</h3><p>Podeu escollir entre diferents SCM per al vostre projecte, però només un. Seleccioneu el sistema SCM que voleu usar.</p> <p><strong>Un cop el projecte està registrat no podreu canviar-lo!</strong></p>
 register	one_scm	Mentres existeixi un únic SCM, es seleccionarà automàticament. Es seleccionarà <strong>$1</strong>.
 register	scm_not_selected	El lloc té l'SCM habilitat, però no s'ha escollit cap SCM.
-register_complete	section	Nou registre de projecte
-register_complete	title	Registre complet
-register_projectinfo	section	Nou registre de projecte
-register_projectinfo	title	Informació del projecte
-register_requirements	section	Nou registre de projecte
-register_requirements	title	Serveis & Requeriments
-register_tos	section	Nou registre de projecte
-register_tos	title	Acord de termes de servei
-rbac_edit	projectpublic	Privilegis de projecte 
-rbac_edit	projectpublicnote	Nota: si tot el projecte es defineix com privat, els no-membres no poden accedir a la resta de característiques encara que les hi marqueu com a disponibles.
 rbac_vals	frspackage0	Privat
 rbac_vals	frspackage1	Públic
 rbac_vals	frspackage	Sistema de publicació de fitxers
 rbac_vals	projectpublic0	Privat
 rbac_vals	projectpublic1	Públic
-rbac_edit	scmpublic	Privilegis SCM
 rbac_vals	scmpublic0	Privat
 rbac_vals	scmpublic1	Públic (PServer)
-rbac_edit	forumpublic	Privilegis de fòrum
 rbac_vals	forumpublic0	Privat
 rbac_vals	forumpublic1	Públic
 rbac_vals	forumanon0	No missatges anònims
 rbac_vals	forumanon1	Permet missatges anònims
-rbac_edit	pmpublic	Privilegis de gestor de tasques
 rbac_vals	pmpublic0	Privat
 rbac_vals	pmpublic1	Públic
-rbac_edit	trackerpublic	Privilegis de rastrejador
 rbac_vals	trackerpublic0	Privat
 rbac_vals	trackerpublic1	Públic
 rbac_vals	trackeranon0	No missatges anònims
@@ -1975,16 +1571,6 @@ rbac_vals	trackeradmin2	Admin
 rbac_edit	títol1	Secció
 rbac_edit	títol2	Subsecció
 rbac_edit	títol3	Opcions
-rbac_edit	docman	Gestor de documents
-rbac_edit	forum	Fòrum
-rbac_edit	frs	Sistema de publicació de fitxers
-rbac_edit	pm	Gestor de tasques
-rbac_edit	scm	SCM - Repositori de codi font
-rbac_edit	tracker	Rastrejador
-rbac_edit	projectadmin	Administració al nivell del projecte
-rbac_edit	forumadmin	Administració del fòrum al nivell del projecte
-rbac_edit	pmadmin	Administració del gestor de tasques al nivell del projecte
-rbac_edit	trackeradmin	Administració de rastrejadors al nivell del projecte
 rbac_edit	intro	Useu aquesta pàgina per editar els vostres rols deprojecte. Noteu que qualsevol membre té com a mínim el mateix access que l'observador. Per exemple, si l'observador pot llegir CVS, també pot qualsevol altre rol en el projecte.
 rbac_edit	observerintro	Useu aquesta pàgina per editar els permisos i accedir anivells de no-membres del vostre projecte. No-membres inclou els usuaris que no han iniciat una sessió.
 rbac_edit	rolename	Nom del rol
@@ -2053,7 +1639,6 @@ reporting_pie	title	Eina de gràfics de pastís
 reporting_pie	trackers	Rastrejadors
 reporting_pie	start	Inici
 reporting_pie	end	Final
-reporting_rebuild	iamsure	N'estic SEGUR
 reporting_rebuild	message	  <h3>Inicialització del sistema d'informes</h3><p>Ocasionalment, si les tasques cron han fallat o la base de dades està danyada, podeu haver de reconstruir les taules d'informes.<p>Si esteu segur de voler reconstruir totes les taules d'informes,marqueu la casella "N'estic segur" i feu clic el botó de baix.<p>Això pot necessitar un parell de minuts, per tant NO FEU CLIC MÉS D'UN COP.<p>
 reporting_rebuild	pressonlyonce	Premeu-lo NOMÉS UN COP
 reporting_rebuild	title	Pàgina principal
@@ -2103,21 +1688,8 @@ reporting_us	task_status	Estat de la tasca
 reporting_us	title	Informe resum de l'usuari
 reporting_ut	description	Escolliu la <strong>Primera lletra</strong> del nom de la persona sobre la qual voleu informar.<p>
 reporting_ut	title	Informe de temps de l'usuari
-scm_index	anoncvs	<p><b>Accés anònim al CVS</b></p><p>El repositori CVS d'aquest projecte es pot consultar a través d'un CVS anònim (pserver) amb el següent conjunt d'instruccions. El mòdul que voleu consultar ha d'estar especificat com el <i>nomdemodul</i>. Si se us demana una contrasenya per <i>anònim</i>, simplement premeu la tecla Intro.</p>
-scm_index	anoncvsup	Les actualitzacions des de dins del directori delmòdul no necessiten el paràmetre -d.
-scm_index	browseit	Navega el repositori CVS
-scm_index	browsetree	<hr /><b>Navga l'arbre CVS</b><p>Navegant per l'arbre del CVS tindreu una bona visió de l'estat actual del codi d'aquest projecte. També podeu les històries completes de cada fitxer al repositori.</p>
 scm_index	scm_repository	Repositori SCM
-scm_index	devcvs	<p><b>Accés CVS del desenvolupador via SSH</b></p><p>Només els desenvolupadors de projecte poden accedir a l'arbre CVS per aquest mètode. L'SSH1 ha d'estar instal·lat a la vostra màquina client. Substituïu <i>nomdemodul</i> i <i>nomdesenvolupador</i> amb els valors adequats. Quan se us demani, entreu la vostra contrasenya del lloc.</p>
-scm_index	developer_commits_adds	Desenvolupador (30 dies/Confirmacions) (30 day/Afegits)
-scm_index	developername	nomdesenvolupador
-scm_index	error_only_projects_can_use_cvs	Error, només els projectes poden usar el CVS
 scm_index	error_this_project_has_turned_off	Error aquest projecte ha desconnectat el CVS
-scm_index	history	Historial del repositori
-scm_index	modulename	nomdemodul
-scm_index	nohistory	Aquest projecte no té historial de CVS.
-scm_index	section	Projecte: $1
-scm_index	title	SCM
 scm_index	admin	Administració
 search	artifact_author	Tramès per
 search	artifact_date	Data
@@ -2126,9 +1698,7 @@ search	artifact_summary	Resum
 search	docs_id	#
 search	docs_title	Títol
 search	docs_description	Descripció
-search	error_criteria_not_specified	Entreu les paraules de cerca a sobre
 search	error_invalid_search	Error - Cerca no vàlida
-search	error_search_minlength	La cerca ha de tenir 3 caràcters com a mínim
 search	forum_author	Autor
 search	forum_date	Data
 search	forum_thread	Fil
@@ -2145,7 +1715,6 @@ search	no_matches_found	No s'han trobat coincidències per <em>$1</em>
 search	people_real_name	Nom real
 search	people_user_name	Nom d'usuari
 search	previous_results	Resultats anteriors
-search	project_search	Cerca de projecte
 search	search_results	Resultats de cerca per <em>$1</em>
 search	skill_from	Des de
 search	skill_keywords	Paraules clau
@@ -2184,7 +1753,6 @@ sendmessage	message_sent	S'ha enviat el missatge
 sendmessage	name	El vostre nom
 sendmessage	send	Envia elmissatge
 sendmessage	subject	Assumpte
-sendmessage	title	Envia un missatge a $1
 session	cannotinit	ERROR - No s'ha pogut inicialitzar sessió
 session	deleted	Compte suprimit
 session	invalidpasswd	Contrasenya o nom d'usuari no vàlids
@@ -2210,12 +1778,7 @@ snippet_addversion	paste_the_code_here	Enganxa el codi aquí:
 snippet_addversion	snippet_package_version_added_successfully	La versió del paquet de fragments de codi s'ha afegit amb èxit.
 snippet_addversion	snippet_version_added_successfully	La versió del fragment de codi s'ha afegit amb èxit.
 snippet_addversion	submit	TRAMET
-snippet_addversion	title	Envia una nova versió de fragment de codi
-snippet_addversion	title_add_snippet_to_package	Afegeix fragments de codi al paquet
-snippet_addversion	title_submit_a_new_snippet_package	Tramet un nou paquet de fragment de codi
-snippet_addversion	title_submit_a_new_snippet_version	Tramet una nova versió de fragment de codi
 snippet_addversion	version	Versió:
-snippet_browse	creator	Creador
 snippet_browse	error_bad_url	Error, Error - URL defectuosa?
 snippet_browse	no_snippets_found	No s'han trobat fragments de codi
 snippet_browse	packages_of_snippets	Paquets de fragment de codi
@@ -2228,14 +1791,6 @@ snippet_browse	title	Biblioteca de fragments de codi
 snippet_caching	browse_by_category	Navega per categories
 snippet_caching	browse_by_language	Navega per idioma
 snippet_caching	intro	<p>L'objectiu d'aquest arxiu és permetre-us compartir els vostres fragments de codi, scripts, i funcions amb la Comunitat de Programari de Codi Obert.</p><p>Podeu crear un "nou fragment de codi", i seguidament enviar versions addicionals d'aquest fragment de codi ràpid i fàcilment.</p><p>Un cop heu enviat els fragments de codi per correu, podeu crear un "paquet" de fragments. Aquest paquet pot contenir múltiples versions d'altres fragments de codi.</p><p>&nbsp;</p><h3>Navegueu pels fragmentsde codi</h3>	<p>Podeu navegar ràpidament per la biblioteca de fragments de codi:</p>
-snippet_delete	error_mangled_url	Error, Error - URL defectuosa?
-snippet_delete	error_only_creator_of_package_version_can_delete	Error - Només el creador d'una versió empaquetada la pot suprimir.
-snippet_delete	error_only_the_creator	Error - Només el creador d'una versió empaquetada pot suprimir-ne fragments de codi.
-snippet_delete	item_removed_from	Element suprimit del paquet
-snippet_delete	package_removed	Paquet suprimit
-snippet_delete	snippet_removed	Fragment de codi suprimit
-snippet_delete	that_snippet_doesnt_exist	Error - Aquest fragment de codi no existeix en aquest paquet.
-snippet_delete	title	Suprimeix els fragments
 snippet_detail	author	Autor
 snippet_detail	changes_since_last_version	Canvi des de l'última versió:
 snippet_detail	date_posted	Data enviada
@@ -2256,8 +1811,6 @@ snippet_detail	version_of_this_package	Versions d'aquest paquet:
 snippet_detail	version_of_this_snippet	Versions d'aquest fragment de codi:
 snippet_detail	you_can_submit_a_new	Podeu trametre una nova versió d'aquest fragment de codi si l'heu modificat i creieu apropiat compartir-lo amb altres persones.
 snippet_detail	you_can_submit_a_new_version_of_package	Podeu trametre una nova versió d'aquest paquet si l'heu modificat i creieu apropiat compartir-lo amb altres persones.
-snippet_download	error	Error
-snippet_download	nothing_in_here	aquí no hi ha res
 snippet_index	title	Biblioteca de fragments de codi
 snippet_package	add_snippet_to	Afegeix fragments al paquet
 snippet_package	add_snippet_to_package	Afegeix fragments al paquet
@@ -2284,17 +1837,13 @@ snippet_package	you_can_group	<p>Podeu ajuntar fragments de codi existents en un
 snippet_submit	category	Categoria
 snippet_submit	description	Descripció
 snippet_submit	error_doing_snippet_insert	ERROR FENT LA INSERCIÓ D'UN FRAGMENT DE CODI!
-snippet_submit	error_doing_snippet_version_insert	ERROR FENT LA INSERCIÓ D'UNA VERSIÓ D'UN FRAGMENT DE CODI!
-snippet_submit	error_go_back_and_fill	Error, Error - Torneu enrere i ompliu tota la informació
 snippet_submit	language	Idioma
 snippet_submit	license	Llicència
 snippet_submit	make_sure_all_info	Assegureu-vos que tota la informació és completa i acurada
 snippet_submit	paste_the_code_here	Enganxeu el codi aquí
 snippet_submit	snippet_added_successfull	Fragment de codi afegit amb èxit.
 snippet_submit	snippet_title	Títol
-snippet_submit	snippet_version_added_successfully	Versió de fragment de codi afegit amb èxit
 snippet_submit	submit	TRAMET
-snippet_submit	submit_a_new_snippet	Tramet un nou fragment de codi
 snippet_submit	suggest_a_category	Suggeriu una categoria
 snippet_submit	suggest_a_language	Suggeriu un idioma
 snippet_submit	type	Tipus d'script
@@ -2305,20 +1854,16 @@ snippet_utils	author	Autor
 snippet_utils	bbs_systems	Sistemes BBS
 snippet_utils	browse	Navega
 snippet_utils	calendars	Calendaris
-snippet_utils	category	Categoria:
 snippet_utils	choose_one	Escolliu-ne una
 snippet_utils	class	Classe
 snippet_utils	create_a_package	Crea un paquet a
 snippet_utils	database_manipulation	Manipulació de la base de dades
-snippet_utils	description	Descripció:
 snippet_utils	download_version	Baixa la versió
 snippet_utils	file_management	Gestió de fitxers
 snippet_utils	full_script	Script complet
 snippet_utils	function	Funció
 snippet_utils	games	Jocs
 snippet_utils	html_manipulation	Manipulació HTML
-snippet_utils	language	Idioma:
-snippet_utils	license	Llicència:
 snippet_utils	math_functions	Funcions matemàtiques
 snippet_utils	no_snippets_are_in_this_package	Ara no hi ha fragments de codi en aquest paquet
 snippet_utils	other	Un altre
@@ -2331,11 +1876,9 @@ snippet_utils	snippet_id	ID fragment de codi
 snippet_utils	snippet_in_this_package	Fragments en aquest paquet:
 snippet_utils	snippet_title	Títol
 snippet_utils	submit_a_new_snippet	Tramet un nou fragment
-snippet_utils	type	Tipus:
 snippet_utils	unix_admin	Administrador UNIX
 snippet_utils	voting	Votant
 snippet_utils	website_only	Només LlocWeb
-softwaremap	title	Arbre de projectes
 source	file_not_found	Fitxer no trobat
 source	file_not_found_text	No s'ha pogut trobar el fitxer especificat per a mostrar-lo.
 source	invalid_argument	Argument de fitxer no vàlid
@@ -2344,12 +1887,7 @@ source	missing_file	No es troba l'argument del fitxer
 source	missing_file_text	S'ha d'especificar un fitxer per a aquesta pàgina.
 source	show_source	Mostra el codi font
 source	source_of	Codi font de $1
-staff	about_blurb	<P><h2>L'Equip GForge</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sona Bé" McGovern és el nou director de <A HREF="http://sourceforge.net/">GForge.net</A>.  Estem contents de tenir en Pat a la junta directiva, ja que administrava <A HREF="http://www.valinux.com/">valinux.com</A>, o sigui que sap quatre coses sobre l'administració de llocs web importants.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan és el "Product Manager" per GForge. No estem gaire segurs sobre què signica això, només sabem que li agraden les planificacions i que remena aspectes del desenvolupament de negoci.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim és el líder tècnic a GForge i és d'Iowa. Sí, d'Iowa. Ni d'Idaho ni d'Ohio. Iowa. Quan no està treballant, el podreu localitzar bastant fàcilment, ja que té l'únic BMW Z3 d'Iowa.<P>Tim va fundar <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> i <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul és un desenvolupador que viu a Ucraïna. Ep, és on està situat Txernòbil. Ell *diu* que no va tenir res a veure amb el que va passar.  Es descriu a si mateix com un "tipus decalarat adicte a la tècnica i al treball".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell també és membre de l'equip de desenvolupament de GForge. Va treballar per una altra companyia, però varen voler desempallegar-se del Codi Obert i canviar a ASP per a les seves aplicacions web... Ara treballa per a nosaltres.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah és un administrador de sistemes/desenvolupador de les gelades regions de Minnesota.  Quan no està treient neu amb la pala del seu camí o rascant el gel del seu cotxe el trobareu tancat en una habitació fosca a algun lloc al davant d'un ordinador.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) és el cap de Qualitat de Servei de GForge. Actualment es fa càrrec de les peticions de suport de nivell dos, manté la pàgina d'estat del lloc, i ajuda a assegurar que tothom que envia peticions de suport rebi un servei correcte i a temps. Treballa des del nordest dels Estats Units.</td></tr><TR><TD COLSPAN="2"><B>Fundadors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace ha fet millores i ajustaments significatius al nucli del codi base de GForge. Apreciem els seus esforços de la mateixa manera que ho fan els usuaris que es beneficien de les seves contribucions.</td></tr></table>
-stats	overview_stats	ESTADÍSTIQUES GENERALS
-stats	project_stats	ESTADÍSTIQUES DE PROJECTES
-stats	site_graphs	GRÀFIQUES DEL LLOC
 stats	title	Estadístiques del lloc $1
-stats_graph	joverview_stats	ESTADÍSTIQUES GENERALS
 stats_graph	project_stats	ESTADÍSTIQUES DE PROJECTES
 stats_graph	site_graphs	GRÀFIQUES DEL LLOC
 stats_graph	sitewide_statistics_graphs	Gràfiques estadístiques de tot el lloc
@@ -2363,7 +1901,6 @@ stats_index	other_statistics	Altres estadístiques:<ul><li><a href="i18n.php">Es
 stats_index	overview_stats	ESTADÍSTIQUES GENERALS
 stats_index	project_stats	ESTADÍSTIQUES DE PROJECTES
 stats_index	site_graphs	GRÀFIQUES DEL LLOC
-stats_index	sitewide_aggregate_statistics	Estadístiques agregades de tot el lloc
 stats_lastlogins	date	Data
 stats_lastlogins	last_logins	Últims inicis de sessió
 stats_lastlogins	most_recent_open	Sessions obertes més recentment
@@ -2401,7 +1938,6 @@ stats_site_utils	report	Informe:
 stats_site_utils	returned_no_category	no s'ha retornat cap nom de categoria
 stats_site_utils	site	Lloc
 stats_site_utils	site_views	Visites del lloc
-stats_site_utils	special_project_list	Llista de projecte especial
 stats_site_utils	statistics_for_the_past_days	Estadístiques dels últims $1 dies
 stats_site_utils	statistics_for_the_past_months	Estadístiques dels últims $1 mesos
 stats_site_utils	subdomain	Subdomini
@@ -2421,7 +1957,6 @@ stats_view_graph	views	Visites (VERMELL)
 survey	for_some_reason	Per alguna raó, l'ID de grup o l'ID d'enquesta no ho han fet a aquesta pàgina
 survey	high	Alt
 survey	low	Baix
-survey	permission_denied	Permís denegat
 survey	survey_not_found	Enquesta no trobada.
 survey	survey_privacy	Privadesa de l'enquesta
 survey	title	Enquesta
@@ -2434,7 +1969,6 @@ survey_add_question	question_type	Tipus de pregunta
 survey_add_question	show_existing_questions	Mostra les preguntes existents.
 survey_add_question	title	Afegeix una pregunta
 survey_add_survey	add_this_survey	Afegeix aquesta enquesta
-survey_add_survey	error_in_insert	Error a l'inserir l'enquesta
 survey_add_survey	existing_surveys	Enquestes existents
 survey_add_survey	is_active	Està actiu?
 survey_add_survey	list_questions_numbers	Llisteu els números de pregunta en l'ordre desitjat i separats per comes. <strong>Referiu-vos a la vostra llista de preguntes</strong> així podreu veure els id's de les preguntes. <strong>No</strong> incloeu espais o acabeu la vostra llista amb una coma. <br />P.e.: 1,2,3,4,5,6,7
@@ -2443,44 +1977,14 @@ survey_add_survey	no	No
 survey_add_survey	show_existing_question	Mostra les preguntes existents
 survey_add_survey	survey_inserted	Enquesta inserida
 survey_add_survey	title	Afegeix una enquesta
-survey_add_survey	title_is_required	Es requereix el títol de l'enquesta
 survey_add_survey	yes	Sí
-survey_admin	section	Eina d'enquestes
-survey_admin	title	Administració
 survey_admin	edit	Edita
 survey_admin	delete	Suprimeix
-survey_admin_add_question	section	Administració de l'eina d'enquestes
-survey_admin_add_question	title	Afegeix una pregunta de l'enquesta
-survey_admin_add_survey	section	Administració de l'eina d'enquestes
-survey_admin_add_survey	title	Afegeix una enquesta
-survey_admin_edit_question	section	Administració de l'eina d'enquestes
-survey_admin_edit_question	title	Edita una pregunta de l'enquesta
-survey_admin_edit_survey	section	Administració de l'eina d'enquestes
-survey_admin_edit_survey	title	Edita enquesta
-survey_admin_index	add_question	Afegeix pregunta
-survey_admin_index	add_survey	Afegeix enquestes
-survey_admin_index	edir_existing_survey	Edita les enquestes existents
-survey_admin_index	edit_existing_question	Edita les preguntes existents
 survey_admin_index	its_simple_to_create	<p>Crear una enquesta és simple.<ol><li>Creeu preguntes i comentaris usant els formularis anteriors.</li><li>Creeu una enquesta, llisteu les preguntes en ordre (escolliu-les de la <strong>vostra</strong> llista de preguntes).</li><li>Enllaceu amb l'enquesta usant aquest format: $1 on XX és el nom de l'enquesta
 survey_admin_index	permission_denied	Permís denegat
-survey_admin_index	show_results	Mostra els resultats de l'enquesta
 survey_admin_index	title	Administració de l'enquesta
 urvey_admin_index	you_can_now_activate	Ara podeu activar/desactivar les enquestes a $1 editeu la pàgina d'enquestes existents $2
-survey_admin_show_questions	section	Administració de l'eina d'enquestes
-survey_admin_show_questions	title	Mostra les preguntes de l'enquesta
-survey_admin_show_results	section	Administració de l'eina d'enquestes
-survey_admin_show_results	title	Mostra els resultats de l'estudi
-survey_admin_show_results_aggregate	section	Administració de l'eina d'enquestes
-survey_admin_show_results_aggregate	title	Mostra els resultats d'una enquesta
-survey_admin_show_results_comments	section	Administració de l'eina d'enquestes
-survey_admin_show_results_comments	title	Mostra els comentaris de l'enquesta
-survey_admin_show_results_individual	section	Administració de l'eina d'enquestes
-survey_admin_show_results_individual	title	Mostra els resultats de l'enquesta individual
 survey_admin_utils	found	S'han trobat $1 enquestes
-survey_admin_utils	group_id	ID grup
-survey_admin_utils	survey_id	Id enquesta
-survey_admin_utils	survey_questions	Preguntes de l'enquesta
-survey_admin_utils	survey_title	Títol de l'enquesta
 survey_edit	change_after_already_response	Si canvieu una enquesta quan ja teniu respostes, les vostres pàgines de resultats podrien ser errònies o desordenades
 survey_edit	existing_surveys	Enquestes existents
 survey_edit	is_active	Està actiu
@@ -2515,7 +2019,6 @@ survey_edit_question	title	Edita una pregunta
 survey_edit_question	update_failed	HA FALLAT L'ACTUALITZACIÓ
 survey_edit_question	update_successful	ACTUALITZACIÓ AMB ÈXIT
 survey_edit_question	warning_change_after_response	AVÍS! És una mala idea canviar una pregunta després que s'hagin enviat les respostes
-survey_index	for_some_reason	Per alguna raó, l'ID de grup o l'ID de l'enquesta no ho han fet en aquesta pàgina
 survey_index	survey_id	ID d'enquesta
 survey_index	survey_title	Títol de l'enquesta
 survey_index	survey_questions	Preguntes
@@ -2526,7 +2029,6 @@ survey_index	survey_edit	Edita
 survey_index	survey_result	Resultat
 survey_index	survey_result_graph	Resultat amb gràfic
 survey_index	survey_result_comments	Resultat amb gràfic i comentaris
-survey_index	this_group_has	Aquest grup no té enquestes actives
 survey_index	title	Enquesta
 survey_privacy	survey_privacy	Privadesa de l'enquesta
 survey_privacy	the_privacy_information	<p>La informació obtinguda en aquestes enquestes no es vendrà mai a terceres parts ni serà utilitzada per demanar-vos que compreu bens o serveis.</p><p>Aquesta informació es recull per construir un perfil dels projectes i desenvolupadors que s'estan desenvolupant. Aquest perfil ajudarà els visitants del lloc a entendre la qualitat d'un determinat projecte.</p><p>Els ID's dels que responen les enquestes són eliminats i no són visibles per administradors de projecte, el públic o terceres parts.</p><p>La informació recollida només s'utilitza en forma agregada, no per singularitzar usuaris específics o desenvolupadors.</p><p>Si hi hagués canvis en aquesta política, afectarien només dades futures recollides i l'usuari naturalment tindria l'opció de no participar.
@@ -2554,14 +2056,8 @@ survey_show_questions	note_use_these_questions_id	NOTA: useu aquests id's_pregun
 survey_show_questions	permission_denied	Permís denegat
 survey_show_questions	title	Preguntes de l'enquesta
 survey_show_questions	you_may_use_any_of_these	Podeu usar qualsevol d'aquestes preguntes a les vostre enquestes
-survey_show_result_comment	found	Trobat
-survey_show_result_comment	permission_denied	Permís denegat
-survey_show_result_comment	question	Pregunta:
-survey_show_result_comment	title	Resultats agregats de l'enquesta
-survey_show_results	found	Trobat
 survey_show_results	permission_denied	Permís denegat
 survey_show_results	title	Resultats de l'enquesta
-survey_show_results	view_aggregate_responses	Visualitza les respostes agregades
 survey_show_results_aggregate	no_votes	No hi ha vots
 survey_show_results_aggregate	average	Mitjana
 survey_show_results_aggregate	error	error
@@ -2577,14 +2073,8 @@ survey_show_results_csv	permission_denied	Permís denegat
 survey_show_results_individual	permission_denied	Permís denegat
 survey_show_results_individual	title	Resultats
 survey_show_results_individual	yes_no	Sí / No
-survey_survey	section	Eina d'enquesta
-survey_survey	title	Mostra enquesta
-survey_survey_resp	section	Eina d'enquesta
-survey_survey_resp	title	Processat/Resposta de l'enquesta
 survey_utils	add_question	Afegeix preguntes
 survey_utils	add_survey	Afegeix enquesta
-survey_utils	add_edit_question	Afegeix/Edita preguntes
-survey_utils	add_edit_survey	Afegeix/Edita enquesta
 survey_utils	admin	Administra
 survey_utils	edit_questions	Edita preguntes
 survey_utils	edit_survey	Edita enquesta
@@ -2603,8 +2093,6 @@ system	datefmt	Y-m-d H:i
 system	locale	en_US
 system	shortdatefmt	Y-m-d
 system	strftimefmt	%Y %B %e  %H:%M
-themes	section	Preferències del compte
-themes	title	Visualitza/Canvia el tema
 top	NA	N/D
 top	about_blurb	Rastrejem moltes estadístiques d'ús de projecte a $1, i mostrem aquí els projectes més ben classificats en diverses categories.
 top	active_all_time	Més actius en tot el temps
@@ -2624,18 +2112,12 @@ top	view_other_top_category	Visualitza altres màximes categories
 top_mostactive	percentile	Percentil
 top_mostactive	project_name	Nom del Projecte
 top_mostactive	rank	Classificació
-top_mostactive	section	Projectes 
-top_mostactive	title	Projectes més actius: $1
 top_mostactive	updated_daily	Actualitzat diàriament
-top_toplist	change	Canvi
 top_toplist	download	Descàrregues
-top_toplist	last_rank	Última classificació
 top_toplist	pageviews	Visites de la pàgina
 top_toplist	posts	Missatges
 top_toplist	project_name	Nom del Projecte
 top_toplist	rank	Classificació
-top_toplist	section	Projectes millor classificats
-top_toplist	title	Llistes de Projectes millor classificats
 top_toplist	top_download	Descàrregues més populars
 top_toplist	top_download_7_days	Descàrregues més populars en els últims 7 dies
 top_toplist	top_forum_post_count	Màxims comptadors de missatges de fòrums
@@ -2647,56 +2129,41 @@ top_topusers	last_rank	Última classificació
 top_topusers	rank	Classificació
 top_topusers	rating	Valoració
 top_topusers	real_name	Nom real
-top_topusers	title	Usuaris millor classificats
 top_topusers	user_name	Nom d'usuari
 tracker	admin	Admin
 tracker	any	Qualsevol
 tracker	assigned_to	Assignat a
 tracker	assignee	Cessionari
-tracker	category	Categoria
-tracker	category_any	Qualsevol
-tracker	changed	Canviat
 tracker	check_upload	Marqueu per a pujar & Adjuntar un fitxer
 tracker	choose	Escolliu un rastrejador i podreu navegar/editar/afegir-li elements.
 tracker	close_date	Data de tancament
-tracker	comment	comentari
-tracker	comments	comentaris
-tracker	comment_added	Comentari afegit
 tracker	date	Data
 tracker	detailed_description	Descripció detallada
 tracker	file_delete	Suprimeix el fitxer: 
 tracker	file_delete_successful	Fitxer suprimit amb èxit
-tracker	file_delete_upload	Puja el fitxer
 tracker	file_description	Descripció del fitxer
 tracker	file_upload_successful	Fitxer pujat: amb èxit
 tracker	followups	Followup
-tracker	group	Grup
-tracker	group_any	Qualsevol
 tracker	id	ID
 tracker	insert_email	Si <strong>no podeu</strong> iniciar una sessió, entreu la vostra adreça de correu aquí:
 tracker	item_created	Element creat amb èxit
-tracker	item_group	Grup
 tracker	no_trackers	No s'han trobat rastrejadors accessibles
 tracker	no_trackers_text	No s'han creat ratrejadors o no els podeu veure.<p><FONT COLOR=RED>L'administrador d'aquest projecte haurà de crear tipus de dades usant la pàgina d'administració $2 de $1</FONT></strong>
 tracker	open_date	Data oberta
-tracker	pagetitle	Rastrejador
 tracker	please_login	$1 inici de sessió $2
 tracker	priority	Prioritat
 tracker	reporting	Informe
-tracker	resolution	Resolució
 tracker	security_note	NO entreu contrasenyes o informació confidencial al vostre missatge!
 tracker	status	Estat
 tracker	status_any	Qualsevol
 tracker	submitted_by	Tramès per
 tracker	submitter	Remitent
 tracker	summary	Resum
-tracker	title	Rastrejadors
 tracker	tracker_item	Element rastrejador
 tracker	unassigned	No assignat
 tracker	updated_successful	Actualitzat amb èxit
 tracker_add	for_project	Per projecte
 tracker_add	submit		Tramet
-tracker_add	title	Envia element rastrejador
 tracker_admin	permanently_delete_info	Suprimeix aquest rastrejador permanentment.
 tracker_admin	deleted	Suprimit amb èxit.
 tracker_admin	delete_warning	Esteu a punt de suprimir de forma permanent i irreversible aquest rastrejador i tot el seu contingut!
@@ -2709,60 +2176,28 @@ tracker_admin	add_categories	Afegeix/actualitza categories
 tracker_admin	add_categories_info	Afegeix categories com, 'mòdul de correu','mòdul de gràfiques gant','cvs', etc
 tracker_admin	add_group_infos	Afegeix grups com, 'v1.2','no suportat','no verificat', etc
 tracker_admin	add_groups	Afegeix/actualitza grups
-tracker_admin	add_permissions	Afegeix/actualitza usuaris &amp; permisos
-tracker_admin	add_permissions_info	Afegeix/suprimeix usuari a/d'aquest rastrejador
-tracker_admin	admin	Administrador
-tracker_admin	auto_assign_to	Auto-assigna a
 tracker_admin	build_selection_box	Afegeix/actualitza caixes desplegables
 tracker_admin	build_selection_box_info	Afegeix noves caixes com Fases, Mètrica de qualitat, Components, etc.  Un cop afegides, poden usar-se amb altres caixes de selecció (per exemple, Categories o Grups) per a descriure i navegar errors o altres tipus d'artefactes
 tracker_admin	canned_response_inserted	S'ha inserit una resposta 'enllaunada'
 tracker_admin	canned_response_updated	Resposta 'enllaunada' actualitzada
-tracker_admin	category_add_warning	Un cop afegiu una categoria, no es pot suprimir
-tracker_admin	category_inserted	S'ha inserit una categoria
 tracker_admin	category_name	Nom de la categoria
-tracker_admin	category_updated	Categoria actualitzada
 tracker_admin	choose_datatype	Escolliu un tipus de dades i podreu establir preferències, categories, grups, usuaris i permisos
 tracker_admin	error_inserting	Error a l'inserir
 tracker_admin	error_updating	Error a l'actualitzar
-tracker_admin	group_inserted	Grup inserit
 tracker_admin	group_name	Nou nom de grup
-tracker_admin	group_updated	Grup actualitzat
 tracker_admin	intro	<h3>Creeu un nou rastrejador</h3><p>Podeu usar aquest sistema per a rastrejar virtualment qualsevol tipus de dades, tenint cada rastreador llistes d'usuari, grup, categoria i permís separades. També podeu moure fàcilment elements entre rastrejadors quan es necessiti.</p><p>Els rastrejadors es refereixen com a "tipus artefacte" i les parts individuals de les dades són "artefactes". Els "Errors" podrien ser un tipus artefacte, mentres que un informe d'error seria un artefacte. Podeu crear tants tipus d'artefactes com vulgueu, però recordeu que heu d'establir categories, grups i permís per a cada tipus, la qual cosa pot requerir força temps
-tracker_admin	section	Rastrejador
 tracker_admin	title	Administració
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	Títol
 tracker_admin	tracker_updated	Rastrejador actualitzat
 tracker_admin	update_preferences	Actualitza les preferències
 tracker_admin	update_preferences_info	Establiu preferències com temps d'expiració,adreces de correu
-tracker_admin	users_added	Usuaris afegits
-tracker_admin	users_deleted	Usuaris suprimits
-tracker_admin	users_updated	Usuaris actualitzats
 tracker_admin_add_canned	canned_response_body	Cos del missatge
 tracker_admin_add_canned	canned_response_info	Crear missatges genèrics útils us pot estalviar molt de temps al gestionar peticions comunes.
 tracker_admin_add_canned	canned_response_title	Títol
 tracker_admin_add_canned	existing_responses	Respostes existents
 tracker_admin_add_canned	no_responses	No hi ha respostes establertes en aquest grup
 tracker_admin_add_canned	title	Afegeix/canvia les respostes enllaunades a $1
-tracker_admin_add_cat	no_categories	No hi ha categories definides
-tracker_admin_add_cat	title	Afegeix categories a $1
-tracker_admin_copy_cat	title	Copia categories de $1
-tracker_admin_add_group	group_add_warning	Un cop hagueu afegit un grup, no es pot suprimir
-tracker_admin_add_group	no_groups_defined	No hi ha grups definits
-tracker_admin_add_group	title	Afegeix/canvia grups a $1
-tracker_admin_add_users	add_all_users	Afegeix tots els usuaris
-tracker_admin_add_users	add_user_info	<h3>Afegeix aquests usuaris:</h3><p>Podeu seleccionar usuaris per al vostre rastrejador, o simplement afegir-los tots marcant "Afegeix tots els usuaris".</p>
-tracker_admin_add_users	add_users	Afegeix usuaris
-tracker_admin_add_users	admin_only	Només admiistradors
-tracker_admin_add_users	category_permission	Permís
-tracker_admin_add_users	delete	Suprimeix
-tracker_admin_add_users	developers_info	<p>Cada rastrejador que definiu té llistes d'usuaris i permisos d'usuaris.</p><p>Simplement afegiu desenvolupadors a aquest rastrejador i seguidament actualitzeu els seus permisos.</p><p><dl><dt>Es poden assignar elements als <strong>tècnics</strong></dt><dd></dd><dt>Els <strong>administradors</strong></dt><dd>poden fer canvis als elements</dd></dl></p>
-tracker_admin_add_users	no_developers	No s'han trobat desenvolupadors
-tracker_admin_add_users	tech_admin	Tècn.& Admin
-tracker_admin_add_users	technician	Tècnic
-tracker_admin_add_users	title	Afegeix/actualitza permisos d'usuari de rastrejador a $1
-tracker_admin_add_users	update_permissions	Actualitza els permisos de desenvolupador
-tracker_admin_add_users	user_name	Nom d'usuari
 tracker_admin_build_boxes	box_type_select	Quadre de selecció
 tracker_admin_build_boxes	box_type_radio	Botons de ràdio
 tracker_admin_build_boxes	box_type_text	Camp de text
@@ -2775,10 +2210,7 @@ tracker_admin_build_boxes	title	 Afegeix/actualitza els camps extra
 tracker_admin_build_boxes	edit	Edita
 tracker_admin_build_boxes	opt_title	Afegeix/actualitza elements de camp extra a: $1
 tracker_admin_build_boxes	box_add_choices	afegeix les seleccions
-tracker_admin_build_boxes	tracker_box_id	ID
-tracker_admin_build_boxes	tracker_choice_id	ID
 tracker_admin_build_boxes	tracker_box_title	Definits els camps extra
-tracker_admin_build_boxes	tracker_box_option_add	Afegeix/actualitza 
 tracker_admin_build_boxes	tracker_box_option_title	Elements definits
 tracker_admin_build_boxes	box_name	Nom del camp extra
 tracker_admin_build_boxes	opt_add_name	Afegeix nou element
@@ -2795,29 +2227,21 @@ tracker_admin_build_boxes	choice_inserted	S'ha inserit un element
 tracker_admin_build_boxes	box_update_title	Modifica un camp extra a: $1
 tracker_admin_build_boxes	opt_update_title	Modifica un element d'un camp extra a: $1
 tracker_admin_build_boxes	opt_name	Element
-tracker_admin_build_boxes	status_any	Qualsevol
 tracker_admin_build_boxes	box_name_updated	S'ha actualitzat un camp extra
 tracker_admin_build_boxes	choice_updated		S'ha actualitzat un element	
 tracker_admin_build_boxes	box_change_warning	No es recomana que canvieu el nom del camp extra, perquè en depenen altres coses. Quan canvieu el nom de camp extra, tots els elements relacionats es canviaran al nou nom
-tracker_admin_build_boxes	choice_change_warning	No es recomana que canvieu el nom de l'element perquè en depenen altres coses. Quan canvieu el nom de l'element, tots els elements relacionats es canviaran al nou nom
 tracker_admin_build_boxes	error_updating	Error a l'actualitzar un nom de camp extra
 tracker_admin_copy	copy_choices	Feu clic aquí per a copiar aquests elements a altres rastrejadors
 tracker_admin_copy	choices_title	Copia les seleccions del camp extra $1
 tracker_admin_copy	from_box	Copia de 
 tracker_admin_copy	into_box	Als rastrejadors i als camps extra
-tracker_admin_choose	title	Administració de rastrejadors
 tracker_admin_update_canned	title	Modifica les respostes 'enllaunades' a: $1
-tracker_admin_update_cat	auto_assign_to	Auto-assigna a
-tracker_admin_update_cat	category_change_warning	No es recomana que canvieu el nom de categoria de l'artefacte perquè en depenen altres coses. Quan canvieu el nom de la categoria, tots els elements relacionats es canviaran al nou nom
-tracker_admin_update_cat	category_name	Nom de categoria
 tracker_admin_update_cat	title	Modifica la categoria a: $1
 tracker_admin_update_group	title	Modifica un grup a: $1
-tracker_admin_update_group	warning	No es recomana que canvieu el nom de grup de l'artefacte perquè en depenen altres coses. Quan canvieu el nom del grup, tots els elements relacionats es canviaran al nou nom.				
 tracker_admin_update_type	allow_anonymous	Permet l'enviament de missatges fora de sessió
 tracker_admin_update_type	browse_item_form_text	Text de forma lliure per a la pàgina dels "elements de navegació"
 tracker_admin_update_type	days_overdue	Dies fins al venciment
 tracker_admin_update_type	description	Descripció
-tracker_admin_update_type	display_resolution	Mostra la caixa de "Resolució"
 tracker_admin_update_type	email_all_changes	Envia un correu sobre tots els canvis
 tracker_admin_update_type	name	<strong> Nom:</strong> (exemples: actes de reunió, resultats del test, documents RFP)
 tracker_admin_update_type	pending_timeout	Dies fins que els elements de rastreig pendents arribin al venciment de la temporització
@@ -2825,7 +2249,6 @@ tracker_admin_update_type	publicy_available	Disponible públicament
 tracker_admin_update_type	send_submissions	Envia un correu sobre el nou lliurament a l'adreça
 tracker_admin_update_type	submit_item_form_text	Text en forma liure per a la pàgina "tramet un nou element"
 tracker_admin_update_type	title	Actualitza $1
-tracker_admin_update_users	title	Afegeix/actualitza els permisos d'usuari
 tracker_artifact	double_submit	Heu intentat trametre aquest element. Si us plau eviteu fer clic dos cops.
 tracker_artifact	error_admin_modify	Artefacte: Només els administradors d'artefactes poden modificar tipus d'artefacte privats
 tracker_artifact	error_body_required	Artefacte: Es requereix el cos del missatge
@@ -2839,7 +2262,6 @@ tracker_artifact	monitoring_deactivated	Monitorització desactivada
 tracker_artifact	nothing_changed	No s'ha canviat res - Actualització cancel·lada
 tracker_artifact	private_error	Artefacte: Només els membres del grup poden veure tipus d'artefacte privats
 tracker_artifactfile	required_fields	ArtifactFile: Es requereixen el nom de fitxer, el tipus, la mida i les dades
-tracker_artifactgroup	required_field	ArtifactGroup: es requereix el nom
 tracker_artifacthtml	by	Per
 tracker_artifacthtml	date	Data
 tracker_artifacthtml	field	Camp
@@ -2848,11 +2270,8 @@ tracker_artifacthtml	no_changes	No s'han fet canvia a aquest element
 tracker_artifacthtml	no_followups	No s'ha tramès cap resposta
 tracker_artifacthtml	old_value	Valor antic
 tracker_artifacthtml	sender	Remitent
-tracker_artifacttype	add_artifact_types	Afegeix/navega els tipus d'artefactes
 tracker_artifacttype	admin	Administració
-tracker_artifacttype	admin_functions	Funcions d'administració
 tracker_artifacttype	browse	Navega
-tracker_artifacttype	edit_options	Edita/actualitza les opcions a
 tracker_artifacttype	nobody	Ningú
 tracker_artifacttype	none	Cap
 tracker_artifacttype	reporting	Informes
@@ -2870,11 +2289,7 @@ tracker_browse	no_change	No hi ha canvis
 tracker_browse	no_items	No s'han trobat elements
 tracker_browse	old_requests	* Denota requeriments de fa > $1 dia
 tracker_browse	previous	Els 50 anteriors
-tracker_browse	request_id	ID requeriment
-tracker_browse	resolution	Resolució
 tracker_browse	sort_by	Ordenats per
-tracker_browse	title	Navega $1
-tracker_browse	change_any	Qualsevol
 tracker_browse	hour24	Les últimes 24H
 tracker_browse	day7	Els últims 7dies
 tracker_browse	week2	Les últimes 2setmanes
@@ -2902,24 +2317,6 @@ tracker_mod	existing_files	Fitxers existents
 tracker_mod	name	Nom
 tracker_mod	no_files	Actualment no hi ha fitxers adjuntats
 tracker_mod	title	Modifica
-tracker_reporting	aging_report	Informe Aging
-tracker_reporting	all_by_group	Tots els elements per grup d'artefactes
-tracker_reporting	all_by_resolution	Tots els elements per resolució
-tracker_reporting	all_by_technician	Tots els elements per categoria
-tracker_reporting	all_items_by_technician	Tots els elements per tècnic
-tracker_reporting	artifact_type	Tipus d'artefate: 
-tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (en dies)
-tracker_reporting	dist_by_category	Distribució per categoria
-tracker_reporting	dist_by_group	Distribució per grup
-tracker_reporting	dist_by_resolution	Distribució per resolució
-tracker_reporting	dist_by_technician	Distribució per tècnic
-tracker_reporting	items_open	Nombre d'elements encara oberts
-tracker_reporting	items_submitted	Nombre d'elements tramesos
-tracker_reporting	open_by_group	Obre per grup d'artefctes
-tracker_reporting	open_items_by_category	Obre els elements per categoria
-tracker_reporting	open_items_by_resolution	Obre els elements per resolució
-tracker_reporting	open_items_by_technician	Obre els elements per tècnic
-tracker_reporting	title	Sistema d'informes d'artefactes
 tracker_taskmgr	add_relation_to_task	Afegex una relació a la tasca existent.
 tracker_taskmgr	add_relationship	Afegeix una relació a la tasca seleccionada
 tracker_taskmgr	build_relationships	Crea una relació entre els elements de rastreig i el gestor de tasques
@@ -2927,8 +2324,6 @@ tracker_taskmgr	create_task	Crea una nova tasca
 tracker_taskmgr	task	Tasca
 tracker_taskmgr	task_manager_project	Projecte de gestor de tasques
 tracker_taskmgr	tracker_item	Element del rastrejador
-tracker_utils	monitor		Monitoritza
-tracker_utils	stop_monitoring		Para la monitorització
 trove	not_categorized	Aquest projecte encara no ha estat categoritzat al
 trove	title	Arbre de projectes
 trove_list	browse_by	Navega per
@@ -2940,7 +2335,6 @@ trove_list	number_of_projects	<strong>$1</strong> projectes al conjunt de result
 trove_list	projects	$1 projectes
 trove_list	remove_filter	Suprimeix aquest filtre
 trove_list	title	Arbre de projectes
-user_home	contact	Contacte
 user_home	diary_notes	Diari i Notes
 user_home	diary_notes_entries	Entrades de Diari/Notes:
 user_home	diary_notes_monitor	Monitoritza aquest diari
@@ -2949,27 +2343,20 @@ user_home	email	La vostra adreça de correu
 user_home	jabber_address	Adreça de Jabber
 user_home	login_name	Nom d'inici de sessió
 user_home	member_of	Aquest desenvolupador és membre dels següents grups:
-user_home	message	Missatge
-user_home	name	El vostre nom
 user_home	no_projects	Aquest desenvolupador no és membre de cap projecte.
 user_home	peer_rating	Valoració de parells
 user_home	peer_rating_disabled	L'usuari va escollir no participar en la valorció entre parells
 user_home	personal_information	Informació personal
 user_home	project_info	Informació de projecte
 user_home	real_name	Nom real
-user_home	send	Envia un missatge
-user_home	send_a_message	Envia un missatge a
-user_home	send_message_if_logged	Podrieu enviar un missatge si fossiu dins d'una sessió
 user_home	site_member_since	Membre del lloc des de
 user_home	skills_profile	Perfil d'habilitats
-user_home	subject	Assumpte
 user_home	title	Perfil de desenvolupador
 user_home	user_id	Id usuari
 users	no_user_name	No s'ha proporcionat el nom d'usuari
 users	optout	Vos heu optat per al sistema de valoració de parells, i d'aquesta manera podeu avaluar un usuari. Referiu-vos a la <a href="/account/">pàgina de manteniment del compte</a> per a més informació.
 users	peerinfo1	Si vos sou familiar amb aquest usuari, si us plau, prengueu un moment per avaluar-lo amb els següents criteris. Tingueu present que la vostra avaluació restarà visible per l'usuari i els altres.  <P> El $1 Sistema de valoració de parells es basa en els conceptes presents a <A HREF="http://www.advogato.com">Advogato.</A> El sistema ha estat reimplementat i expandit en múltiples formes distintes.
 users	peerinfo2	El quadre d'avaluació mostra totes les mitjanes d'avaluació (i nivells de resposta) per a cadascun dels criteris individuals. A causa de la matemàtica i el procés requerit per a fer-ho, aquests números incorporen tant les respostes dels usuaris "confiables" com dels "no-confiables".  <ul> <li> El camp "Puntuació del lloc" mostra la puntuació d'usuari comparat amb totes les altres puntuacions d'altres $1 usuaris .  <li>La "Puntuació agregada" mostra una mitja, una puntuació entre totes del pes, basat solament en respostes confiables.  <li>El camp "Importància personal" mostra el pes que donaran d'altres desenvolupadors a les puntuacions d'usuari (entre 1 i 1.5) -- les respostes dels usuaris més ben valorats tindran més pes.  </ul> <p> <i> Si voleu optar al sistema de valoració de parells (això afectarà la vostra habilitat tant per avaluar com per a ser avaluat, referiu-vos a <a href="/account/">la pàgina de manteniment del vostre compte</a>. Si vos decidiu de no participar, les vostres avaluacions d'altres usuaris es suprimiran de forma permanent i la caixa de sistema d'avaluació de parells desapareixerà de la seva pàgina d'usuari. </i></p>
-users	title	Resum de l'usuari
 users	user_not_exist_text	Usuari no vàlid
 users	user_not_exist_title	Aquest usuari no existeix.
 send_pending_items_mail	pm_subject	Notificació d'elements pendents del gestor de tasques

@@ -20,20 +20,12 @@
 #
 menu	account_maintenance	ןובשח תקוזחת
 menu	bookmark_page	םיפדעומ
-home	breaking_down_barriers	ישפוח דוק חותיפל םוסחמה תא םירבוש
-menu	change_my_theme	רתאה הארמ תא הנש
-menu	code_snippet_library	דוק יעטק תיירפס
-menu	compile_farm	היצילפמוק תווח
-group	developers	םיחתפמ
 group	developer_info	חתפמה יטרפ
-menu	discussion_forums	םימורופ
-menu	documentation	םינוש םיכמסמ
 frs	file_download	הדרוה
 frs	file_monitor	חיגשמ
 frs	file_notes	תורעה
 frs	file_package	תוליבח
 frs	file_version	תואסרג
-group	long_bugs	תולקת רחא בקעמ
 group	long_scm	SCM רגאמ
 group	long_docman	םיכמסמ להנמ
 group	long_forum	םיחותפ םימורופ
@@ -41,9 +33,7 @@ group	long_ftp	ימינונא יפיטפא תורש
 group	long_homepage	טקיורפה רתא
 group	long_mail	רוויד תומישר
 group	long_news	תונורחא תושדח
-group	long_patch	םינוקית להנמ
 group	long_pm	תומישמ להנמ
-group	long_support	תינכט הכימת להנמ
 group	long_survey	תוריקס
 group	short_bugs	תולקת
 group	short_scm	SCM
@@ -66,16 +56,9 @@ menu	logout	האיצי
 home	most_active_this_week	עובשה םיליעפ יכה
 menu	my_personal_page	ישיא דומע
 menu	new_project	שדח טקיורפ םושר
-menu	new_releases	תושדח תואסרג
-menu	project_admin	טקיורפ להנמ
 group	project_admins	םיטקיורפ ילהנמ
 menu	project_help_wanted	םיטקיורפל םישורד
-menu	project_summary	טקיורפ תוצמת
 menu	search	שופיח
-menu	software_map	תונכות תפמ
 home	gforge_statistics	GForge תוקיטסיטס
 home	top_project_downloads	םיליעפ יכה םיטקיורפה
-conf	content_encoding	UTF-8
-conf	default_font	xxzx-random-font\" size=\"1
-conf	language_id	3
 conf	mail_charset	UTF-8

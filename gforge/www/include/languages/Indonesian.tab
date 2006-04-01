@@ -20,20 +20,12 @@
 #
 menu	account_maintenance	Pemeliharaan Account
 menu	bookmark_page	Halaman Bookmark
-home	breaking_down_barriers	Menumpas Halangan Dalam Pengembangan Open Source
-menu	change_my_theme	Rubah Theme
-menu	code_snippet_library	Pustaka Code Snippet
-menu	compile_farm	Peternakan Kompilasi
-group	developers	Developer
 group	developer_info	Info Developer
-menu	discussion_forums	Forum-forum Diskusi
-menu	documentation	Dokumentasi Situs
 frs	file_download	Download
 frs	file_monitor	Monitor
 frs	file_notes	Catatan
 frs	file_package	Paket
 frs	file_version	Versi
-group	long_bugs	Bug Tracking
 group	long_scm	Gudang SCM
 group	long_docman	DocManager: Dokumentasi Proyek
 group	long_forum	Forum Publik
@@ -41,9 +33,7 @@ group	long_ftp	Tempat Anonymous FTP
 group	long_homepage	Home Page Proyek
 group	long_mail	Milis
 group	long_news	Berita Terbaru
-group	long_patch	Manajer Patch
 group	long_pm	Manajer Tugas
-group	long_support	Manajer Tech Support
 group	long_survey	Survey
 group	short_bugs	Bugs
 group	short_scm	SCM
@@ -52,7 +42,6 @@ group	short_files	Files
 group	short_forum	Forum
 group	short_homepage	Home Page
 group	short_mail	Daftar
-group	short_main	Utama
 group	short_news	Berita
 group	short_patch	Patches
 group	short_pm	Tugas
@@ -67,21 +56,11 @@ menu	logout	Logout
 home	most_active_this_week	Paling Aktif Minggu Ini
 menu	my_personal_page	Halaman Pribadi
 menu	new_project	Pendaftaran Proyek Baru
-menu	new_releases	Keluaran Baru
 menu	new_user	Pengguna Baru dengan SSL
-menu	other_site_mirrors	Mirror Situs
-menu	project_admin	Administrasi Proyek
 group	project_admins	Adminstrator Proyek
 menu	project_help_wanted	Proyek-proyek Perlu Bantuan
-menu	project_summary	Ringkasan Proyek
 group	public_area	Area Publik
 menu	search	Cari
-menu	software_map	Peta Software
 home	gforge_statistics	Statistik GForge
-menu	top_projects	Proyek-proyek Top
 home	top_project_downloads	Proyek Top Downloads
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	id
-conf	language_id	21
 conf	mail_charset	UTF-8
