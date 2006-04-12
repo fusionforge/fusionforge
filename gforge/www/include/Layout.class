@@ -113,6 +113,7 @@ class Layout extends Error {
 	} 
 
 	function header($params) {
+		global $Language;
 
 		$this->headerStart($params); ?>
 <body>
