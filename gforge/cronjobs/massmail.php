@@ -35,7 +35,10 @@ require ('common/include/cron_utils.php');
 
 if (!cron_create_lock('gforge-massmail')) {
 	$err = "Massmail already running...exiting";
-	cron_entry(6,$err);
+		if (!cron_entry(6,$err)) {
+			# rely on crond to report the error
+			echo "cron_entry error: ".db_error()."\n";
+		}
 	exit();
 }
 
@@ -74,7 +77,7 @@ $mail_res = db_query("SELECT *
 
 /* If there was error, notify admins, but don't be pesky */
 if (!$mail_res) {
-	$err .= "cannot execute query to select pending mailings\n";
+	$err .= "cannot execute query to select pending mailings: ".db_error()."\n";
 	$hrs = time()/(60*60);
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
@@ -88,7 +91,7 @@ if (!$mail_res) {
 			."database table. Please take appropriate actions.\n"
 		);
 	}
-	cron_entry(6,$err);
+	m_exit();
 }
 
 // $err .= "Got ".db_numrows($mail_res)." rows\n";
@@ -101,7 +104,6 @@ if (db_numrows($mail_res)<1) {
 $type = db_result($mail_res, 0, 'type');
 if (!$table_mapping[$type]) {
 	$err .= "Unknown mailing type\n";
-	cron_entry(6,$err);
 	m_exit();
 }
 
@@ -171,10 +173,15 @@ if (db_error()) {
 m_exit();
 
 function m_exit() {
+	global $err;
+	
 	if (!cron_remove_lock('gforge-massmail')) {
 		$err .= "Could not remove lock file\n";
 	}
-	cron_entry(6,$err);
+	if (!cron_entry(6,$err)) {
+		# rely on crond to report the error
+		echo "cron_entry error: ".db_error()."\n";
+	}
 	exit;
 }
 
