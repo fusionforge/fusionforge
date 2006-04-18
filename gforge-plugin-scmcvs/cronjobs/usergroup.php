@@ -211,7 +211,7 @@ for ($i=0; $i < count($group_orig); $i++) {
 		do {
 			$i++;
 			$line = trim($passwd_orig[$i]);
-		} while ($i < count($passwd_orig) && !preg_match("/^[:blank:]*#GFORGEEND/", $line));
+		} while ($i < count($passwd_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
 		
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
 		if ($i >= (count($passwd_orig)-1)) break;
