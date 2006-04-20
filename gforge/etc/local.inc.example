@@ -258,5 +258,8 @@ $sys_plugins_path='/usr/lib/gforge/plugins/';
 // email address to send admin alerts to
 $sys_admin_email = 'admin@'.$sys_default_domain;
 
+// Path to sendmail program
+//$sys_sendmail_path='/usr/sbin/sendmail';
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
