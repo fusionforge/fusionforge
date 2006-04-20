@@ -300,6 +300,8 @@ $sys_bbcode_strip_html=0;
 // email address to send admin alerts to
 $sys_admin_email = 'gforge@my.domain';
 
+// Path to sendmail program
+//$sys_sendmail_path='/usr/sbin/sendmail';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

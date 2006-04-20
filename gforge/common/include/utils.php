@@ -123,8 +123,14 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
 
-	exec ("/bin/echo \"". util_prep_string_for_sendmail($body2) .
-		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");
+//	exec ("/bin/echo \"". util_prep_string_for_sendmail($body2) .
+//		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");	
+       if (!$handle = popen($sys_sendmail_path." -f'$from' -t -i", "w")) {
+               echo "<p>Error: cannot run '$sys_sendmail_path' - mail not sent</p>\n";
+       } else {
+               fwrite($handle, util_prep_string_for_sendmail($body2));
+               pclose($handle);
+       }
 }
 
 /**

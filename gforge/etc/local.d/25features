@@ -45,3 +45,6 @@ $sys_user_reg_restricted={sys_user_reg_restricted};
 
 // Enable/Disable user ratings
 $sys_use_ratings=true;
+
+// Path to sendmail program
+//$sys_sendmail_path='/usr/sbin/sendmail';
