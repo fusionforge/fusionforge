@@ -457,6 +457,7 @@ switch (getStringFromRequest('func')) {
 	}
 	case 'downloadcsv' : {
 		include ('downloadcsv.php');
+		break;
 	}
 	case 'download' : {
 		$aid = getStringFromRequest('aid');
