@@ -100,6 +100,7 @@ require_once('www/soap/docman/docman.php');
 //	Include task manager Functions
 //
 require_once('www/soap/pm/pm.php');
+require_once('www/soap/reporting/timeentry.php');
 
 //
 //	Include frs Functions
