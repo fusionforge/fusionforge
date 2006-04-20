@@ -73,7 +73,7 @@ account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (au moins 6
 account_lostlogin	update	Mettre à jour
 account_lostlogin	welcome	<h2>Mot de passe perdu</h2><p>Bienvenue, $1. Vous pouvez maintenant changer votre mot de passe.</p>
 account_lostpw	invalid_user	Utilisateur non valide
-account_lostpw	message	Quelqu'un (probablement vous) sur le site $3, a demandé un \nchangement de mot de passe l'intermédiaire d'une vérification e-mail. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérification, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n-- L'équipe de $3\n
+account_lostpw	message	Quelqu'un (probablement vous) sur le site $3, a demandé un \nchangement de mot de passe par l'intermédiaire d'une vérification e-mail. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérification, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n-- L'équipe de $3\n
 account_lostpw	notify	<p>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions de celui-ci pour changer le mot de passe de votre compte.</p><p><a href="/">[ Page d'accueil ]</a></p>
 account_lostpw	sendhash	Envoyer une clé de hachage pour mot de passe perdu
 account_lostpw	subject	$1 - Vérification
