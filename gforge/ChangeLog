@@ -1,7 +1,14 @@
 2006-04-20 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : use a parameter instead of hardcoded admin address
 		https://gforge.org/tracker/?func=detail&aid=2251&group_id=1&atid=106
-
+	* Applied patch : Add Time Entry to SOAP interface
+		https://gforge.org/tracker/?func=detail&aid=2182&group_id=1&atid=106
+	* Applied patch : Correction for French.tab
+		https://gforge.org/tracker/?func=detail&aid=2115&group_id=1&atid=106
+	* Applied patch : tracker.php lacks a "break" in downloadcsv clause
+		https://gforge.org/tracker/?func=detail&aid=1873&group_id=1&atid=106
+	* Applied patch : Mails cannot be sent when using php safe_mode
+		https://gforge.org/tracker/?func=detail&aid=1810&group_id=1&atid=106
 
 2006-04-17 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Many fixes for massmail.php
