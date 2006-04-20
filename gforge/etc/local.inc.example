@@ -297,5 +297,9 @@ $sys_bbcode_smilie_on=1;
 $sys_bbcode_bbcode_on=1; 
 $sys_bbcode_strip_html=0;
 
+// email address to send admin alerts to
+$sys_admin_email = 'gforge@my.domain';
+
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

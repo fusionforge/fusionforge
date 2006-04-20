@@ -26,14 +26,14 @@ if ($group_id) {
 	if ($rowwm = db_fetch_array($reswm)) {
 	  $webmaster = $rowwm[user_name]."@".$GLOBALS[sys_users_host]." (".$rowwm[realname].")";
 	} else {
-	  $webmaster = "admin@".$GLOBALS[sys_default_domain];
+	  $webmaster = $GLOBALS[sys_admin_email];
 	}
 } else {
 	$where = "is_approved=1";
 	$title = "";
 	$link = "";
 	$description = "";
-	$webmaster = "admin@".$GLOBALS[sys_default_domain];
+	$webmaster = $GLOBALS[sys_admin_email];
 }
 
 // ## one time output
