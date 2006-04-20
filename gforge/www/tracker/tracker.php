@@ -394,6 +394,7 @@ switch ($func) {
 	}
 	case 'downloadcsv' : {
 		include ('downloadcsv.php');
+		break;
 	}
 	case 'download' : {
 		Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
