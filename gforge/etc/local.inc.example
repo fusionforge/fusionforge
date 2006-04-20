@@ -255,5 +255,8 @@ $sys_localization_enable_timestamp_checking = true;
 // Path to plugins directory
 $sys_plugins_path='/usr/lib/gforge/plugins/';
 
+// email address to send admin alerts to
+$sys_admin_email = 'admin@'.$sys_default_domain;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
