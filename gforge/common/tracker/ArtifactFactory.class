@@ -196,7 +196,9 @@ class ArtifactFactory extends Error {
 		$this->sort=$_sort_ord;
 		$this->order_col=$_order_col;
 		$this->status=$_status;
-		$this->assigned_to=$_assigned_to;
+		if ($_assigned_to != 'Array') {
+			$this->assigned_to=$_assigned_to;
+		}
 		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
 
