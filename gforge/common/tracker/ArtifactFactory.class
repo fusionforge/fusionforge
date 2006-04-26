@@ -179,6 +179,9 @@ class ArtifactFactory extends Error {
 				/*
 					if this custom set is different than the stored one, reset preference
 				*/
+				if (is_array($_assigned_to)) {
+					$_assigned_to='';
+				}
 				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
