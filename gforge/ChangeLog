@@ -1,6 +1,8 @@
 2006-04-28 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Fixing daily_task_email cronjob
 		http://gforge.org/tracker/?func=detail&aid=2307&group_id=1&atid=106
+	* Applied patch : Missing links back from various admin sub-tabs
+		http://gforge.org/tracker/?func=detail&aid=2266&group_id=1&atid=106
 
 2006-04-26 Tim Perdue <tim@gforgegroup.com>
 
