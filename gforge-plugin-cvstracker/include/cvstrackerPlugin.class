@@ -38,6 +38,7 @@ class cvstrackerPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
 		$this->hooks[] = "task_extra_detail";
+		//$this->hooks[] = "update_cvs_repository";
 	}
 
 	/**
@@ -51,6 +52,11 @@ class cvstrackerPlugin extends Plugin {
 		global $Language, $sys_shortdatefmt;
 
 		$group = &group_get_object($group_id);
+		
+		if (!$group->usesPlugin($this->name)) {
+			return;
+		}
+		
 		$DBResult = db_query($Query);
 		$Rows= db_numrows($DBResult);
 		
@@ -81,6 +87,8 @@ class cvstrackerPlugin extends Plugin {
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';
+		} else {
+			echo '<h4>'.$Language->getText('plugin_cvstracker','nocommits').'</h4>';
 		}
 	}
 
@@ -113,7 +121,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getFileLink($GroupName, $FileName) {
 		global $sys_default_domain;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'">'.$FileName.'</a>';
 	}
 
@@ -129,7 +137,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
 		global $sys_default_domain;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'&rev='.$Version.'&contenttype=text/x-cvsweb-markup">'.
 			$Version.'</a>';
 	}
@@ -147,7 +155,7 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
 		global $sys_default_domain,$Language;
-		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+		return '<a href="/plugins/scmcvs/cvsweb.php/'.
 			$FileName.'?cvsroot='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'&contenttype=text/x-cvsweb-markup">'.
 			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
@@ -165,19 +173,21 @@ class cvstrackerPlugin extends Plugin {
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
-			// Checked or Unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+			if ($group->usesPlugin('scmcvs')) {
+				echo "<tr>";
+				echo "<td>";
+				echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
+				// Checked or Unchecked?
+				if ( $group->usesPlugin ( $this->name ) ) {
+					echo "CHECKED";
+				}
+				echo "><br/>";
+				echo "</td>";
+				echo "<td>";
+				echo "<strong>".$this->text." Plugin</strong>";
+				echo "</td>";
+				echo "</tr>";
 			}
-			echo "><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			$group = &group_get_object($group_id);
 			if ( $use_cvstrackerplugin == 1 ) {

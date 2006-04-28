@@ -45,7 +45,8 @@ $sys_users_host = 'users.gforge.company.com';
 
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
-$sys_lists_host = 'lists.gforge.company.com';
+//$sys_lists_host = 'lists.gforge.company.com';
+$sys_lists_host = 'gforge.company.com';
 
 //
 // SCM configuration
@@ -61,13 +62,13 @@ $sys_cvs_host=$sys_scm_host;
 $sys_scm_single_host = 1;
 
 // Path to tarballs directory
-$sys_scm_tarballs_path='/path/to/var/lib/gforge/scmtarballs';
+$sys_scm_tarballs_path='/var/lib/gforge/scmtarballs';
 
 // Path to snapshots directory
-$sys_scm_snapshots_path='/path/to/var/lib/gforge/scmsnapshots';
+$sys_scm_snapshots_path='/var/lib/gforge/scmsnapshots';
 
 // Path to SCMWEB
-$sys_path_to_scmweb='/usr/lib/gforge/bin/';
+$sys_path_to_scmweb='/etc/gforge/';
 
 
 //Databases, html/php/other paths
@@ -75,8 +76,8 @@ $sys_path_to_scmweb='/usr/lib/gforge/bin/';
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
 //to the database.
 $sys_dbhost='';
-$sys_dbname='alexandria';
-$sys_dbuser='www';
+$sys_dbname='gforge';
+$sys_dbuser='gforge';
 // You can also specify a database port if you're using something other than 5432
 //$sys_dbport='4242';
 $sys_server='pgsql';
@@ -85,8 +86,7 @@ $sys_server='pgsql';
 // Passwords
 //
 $sys_dbpasswd='';
-$sys_ldap_passwd='';
-$sys_jabber_pass='';
+
 //
 // Account Management
 //
@@ -94,33 +94,6 @@ $sys_jabber_pass='';
 // LDAP for managing with ldap
 // NIS not implemented
 $sys_account_manager_type='UNIX';
-
-//
-// LDAP configuration
-//
-// enable(1) or disable(0) ldap use altogether
-$sys_ldap_host='ldap.gforge.company.com';
-$sys_ldap_port=389;
-$sys_ldap_version=3;
-// this is dn under which all information stored
-$sys_ldap_base_dn='dc=gforge,dc=company,dc=com';
-// and this, how we do access it (add permission required)
-$sys_ldap_bind_dn='cn=SF_robot,dc=gforge,dc=company,dc=com';
-// admin dn - login dn which has permissions to delete entries
-// NOT used by web code, only by support utilities
-// note that password NOT stored here
-$sys_ldap_admin_dn='cn=admin,dc=gforge,dc=company,dc=com';
-
-//
-// Jabber Configuration
-//
-$sys_use_jabber=0;
-//messages from the system will be sent to this address
-$sys_jabber_server='jabber.gforge.company.com';
-$sys_jabber_port='5222';
-// messages sent to jabber accounts will come from this user
-// It is similar to the "From: noreply@gforge.org" used in emails
-$sys_jabber_user='noreply';
 
 //
 //	FEATURES
@@ -136,7 +109,7 @@ $sys_use_mail=true;
 $sys_use_survey=true;
 $sys_use_frs=true;
 $sys_use_fti=false;
-$sys_use_ftp=true;
+$sys_use_ftp=false;
 $sys_use_trove=true;
 $sys_use_snippet=true;
 $sys_use_ssl=false;
@@ -149,7 +122,7 @@ $sys_use_ftpuploads=false;
 $sys_use_gateways=true;
 
 // Enable/Disable the ability to add additionnal vhost for a project
-$sys_use_project_vhost=true;
+$sys_use_project_vhost=false;
 // Enable/Disable the ability to have database for a project (backend not implemented)
 $sys_use_project_database=false;
 // Enable/Disable the ability to add images for a project (frontend not implemented)
@@ -159,7 +132,7 @@ $sys_use_project_multimedia=false;
 //	Restricted project registration
 //	If set to true, only a site admin can register projects
 //
-$sys_project_reg_restricted=true;
+$sys_project_reg_restricted=false;
 //
 //	Restricted user registration
 //	If set to true, only a site admin can register users
@@ -172,7 +145,7 @@ $sys_user_reg_restricted=false;
 $homedir_prefix='/home';
 $groupdir_prefix='/home/groups';
 $cvsdir_prefix='/cvsroot';
-$svndir_prefix='/svnroot';
+$svndir_prefix='/var/lib/gforge/svnroot';
 $sys_chroot='';
 
 //
@@ -183,12 +156,12 @@ $sys_chroot='';
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
 //
-$sys_upload_dir='/path/to/uploads/';
+$sys_upload_dir='/var/lib/gforge/uploads/';
 $sys_ftp_upload_dir='/path/to/frs/upload';
 $sys_ftp_upload_host='upload.gforge.company.com';
 //$sys_ftp_upload_chowner='{ftpuploadchowner}';
-$sys_apache_user='www-gforge';
-$sys_apache_group='www-gforge';
+$sys_apache_user='apacheuser';
+$sys_apache_group='apachegroup';
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
@@ -196,7 +169,7 @@ $sys_apache_group='www-gforge';
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot='/path/to/gforge/www/';
+$sys_urlroot='/usr/lib/gforge/www/';
 
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='MyGForge';
@@ -224,7 +197,7 @@ $sys_bcc_all_email_address='';
 
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
-$sys_themeroot='/path/to/gforge/www/themes/';
+$sys_themeroot='/usr/lib/gforge/www/themes/';
 // If you want an other default theme or language
 $sys_theme='gforge';
 $sys_lang='English';
@@ -248,7 +221,7 @@ $sys_template_group=5;
 $default_trove_cat=18;
 
 // JPGRAPH Package
-$sys_path_to_jpgraph='/path/to/jpgraph';
+$sys_path_to_jpgraph='/usr/lib/jpgraph';
 
 // Show Source
 //	Setting this to 1 will add a "Show Source" link to the bottom of each page
@@ -256,14 +229,6 @@ $sys_show_source=0;
 
 // Force Login
 $sys_force_login=0;
-
-// Truetype font settings
-//$gantt_title_font_family='FF_ARIAL';
-//$gantt_title_font_style='FS_NORMAL';
-//$gantt_title_font_size=12;
-//$gantt_task_font_family='FF_ARIAL';
-//$gantt_task_font_style='FS_NORMAL';
-//$gantt_task_font_size=12;
 
 // Place for customized files
 $sys_custom_path='/path/to/gforge/etc/custom';
@@ -280,7 +245,7 @@ $sys_localization_enable_caching = true;
 // within its document root (does not fall under www/ in the tarball)
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
-$sys_localization_cache_path = '/path/to/localization/cache/';
+$sys_localization_cache_path = '/var/lib/gforge/localizationcache/';
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = true;
@@ -289,6 +254,12 @@ $sys_localization_enable_timestamp_checking = true;
 //
 // Path to plugins directory
 $sys_plugins_path='/usr/lib/gforge/plugins/';
+
+// email address to send admin alerts to
+$sys_admin_email = 'admin@'.$sys_default_domain;
+
+// Path to sendmail program
+//$sys_sendmail_path='/usr/sbin/sendmail';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

@@ -48,4 +48,11 @@ function exit_missing_param() {
 	exit_error('','MISSING REQUIRED PARAMETERS');
 }
 
+/**
+ * exit_disabled() - Return a 'Disabled Feature' error
+ */
+function exit_disabled() {
+       exit_error('','DISABLED FEATURE');
+}
+
 ?>

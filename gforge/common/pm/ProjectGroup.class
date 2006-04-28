@@ -331,7 +331,7 @@ class ProjectGroup extends Error {
 				WHERE users.user_id=project_perm.user_id 
 				AND project_perm.group_project_id='". $this->getID() ."' 
 				AND project_perm.perm_level IN (1,2) 
-				ORDER BY users.user_name";
+				ORDER BY users.realname";
 			$this->technicians=db_query($sql);
 		}
 		return $this->technicians;
