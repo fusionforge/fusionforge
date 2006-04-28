@@ -29,7 +29,7 @@ require_once('common/pm/ProjectTasksForUser.class');
 require_once('common/include/cron_utils.php');
 
 // Get user id's from users who have open tasks
-$res = db_query("SELECT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv 
+$res = db_query("SELECT DISTINCT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv 
 		WHERE u.user_id > 100 AND u.user_id=pat.assigned_to_id AND pat.project_task_id=ptv.project_task_id 
 		AND ptv.status_id=1 ORDER BY u.user_id;");
 
@@ -93,8 +93,8 @@ for ($i=0; $i<db_numrows($res);$i++) {
 			}
 			$messagebody = ob_get_contents();
 			ob_end_clean();
-//			util_send_message($email, $subject, $messagebody);
-			echo "\n\n\n***************************************************\n$messagebody";
+			util_send_message($email, $subject, $messagebody);
+//			echo "\n\n\n***************************************************\nTo: $email\nSubject: $subject\n\n$messagebody";
 		}
 	}
 }
