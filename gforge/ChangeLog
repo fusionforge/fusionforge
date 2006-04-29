@@ -9,6 +9,9 @@
 	* fixed a bug in artifactfactory where arrays were being saved and creating
 	an unsolvable problem and broken sql query.
 
+2006-04-25 Reinhard Spisser   <reinhard@spisser.it>
+
+	* scmsvn: Added Italian.tab
 
 2006-04-20 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : use a parameter instead of hardcoded admin address
