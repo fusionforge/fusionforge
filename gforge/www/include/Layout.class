@@ -88,6 +88,7 @@ class Layout extends Error {
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+	<link rel="stylesheet" type="text/css" href="/themes/css/gforge.css" />
 	<?php	if ($GLOBALS['group_id']) { 
 			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
 			echo $activity;
@@ -118,7 +119,7 @@ class Layout extends Error {
 		$this->headerStart($params); ?>
 <body>
 
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" name="headertable">
 
 	<tr>
 		<td><a href="/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
