@@ -1,3 +1,7 @@
+2006-04-30 Reinhard Spisser <reinhard@spisser.it>
+	* added new css/gforge.css and reference this new css in Layout.class
+	* added new osx/css/theme.css and and gforge/css/theme.css and reference this new css in Layout.class
+
 2006-04-28 Daniel Perez <daniel@gforgegroup.com>
 	* Applied patch : Fixing daily_task_email cronjob
 		http://gforge.org/tracker/?func=detail&aid=2307&group_id=1&atid=106
