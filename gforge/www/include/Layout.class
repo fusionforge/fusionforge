@@ -21,11 +21,18 @@ class Layout extends Error {
 	 */
 	var $rootindex = 'index_std.php';
 
+	/*
+     * The root location of the theme
+     * @var      string $themeroot
+	 */
+	 
+	var $themeroot;  	 
 	/**
 	 * The root location for images
 	 *
 	 * @var		string	$imgroot
 	 */
+
 	var $imgroot = '/themes/gforge/images/';
 	var $bgpri = array();
 
@@ -34,6 +41,8 @@ class Layout extends Error {
 	 */
 	function Layout() {
 		GLOBAL $bgpri;
+		$this->themeroot='/themes/'.$GLOBALS['sys_theme'];
+		
 		// Constructor for parent class...
 		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
 			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
@@ -89,6 +98,8 @@ class Layout extends Error {
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
 	<link rel="stylesheet" type="text/css" href="/themes/css/gforge.css" />
+	<link rel="stylesheet" type="text/css" href="/themes/<?echo $GLOBALS['sys_theme'] ?>/css/theme.css" />
+	
 	<?php	if ($GLOBALS['group_id']) { 
 			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
 			echo $activity;
