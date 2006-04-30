@@ -1,0 +1,25 @@
+
+/* Default stylesheet for gforge
+This stylesheet contains all style information
+removed from the code
+*/
+
+OL,UL,P,BODY,TR,TD,TH,FORM {
+		font-family: arialverdana,arial,helvetica,sans-serif;
+		font-size:13px;
+		color: #202020;
+	}
+H1 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H2 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H3 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H4 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H5 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H6 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+
+P { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; COLOR: #535c5f;}
+
+PRE,TT { font-family: courier,sans-serif }
+.titlebar { FONT-SIZE:13px; color: #FFFFFF; text-decoration: none; }
+.develtitle {
+	FONT-SIZE: 13px; COLOR: #535c5f; FONT-FAMILY: arial
+}
