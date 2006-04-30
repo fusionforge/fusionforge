@@ -33,11 +33,17 @@
 
 class Theme extends Layout {
 
+
 	/**
 	 * Theme() - Constructor
 	 */
 	function Theme() {
+		/* use this only if you are providing your own images */
+		
+		$this->imgroot='/themes/'.$GLOBALS['sys_theme'].'/images/';
+	
 		// Parent constructor
+
 		$this->Layout();
 
 	}
