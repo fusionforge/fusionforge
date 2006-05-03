@@ -82,7 +82,7 @@ if ($rows<1) {
 
 	?>
 <br />
-<table border="0" cellspacing="0" cellpadding="3" bgcolor="#E0E0E0">
+<table border="0" cellspacing="0" cellpadding="3" class="activity">
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 <tr>
@@ -113,7 +113,7 @@ if ($rows<1) {
 	while ($arr =& db_fetch_array($res)) {
 		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
-			echo '<tr bgcolor="#FFFFFF"><td colspan="3">'.date('Y-M-d',$arr['activity_date']).'</td>';
+			echo '<tr class="activity"><td colspan="3">'.date('Y-M-d',$arr['activity_date']).'</td>';
 		//	echo $HTML->listTableTop($theader);
 			$last_day=date('Y-M-d',$arr['activity_date']);
 		}

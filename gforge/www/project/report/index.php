@@ -182,8 +182,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
                 $num_artifacts=db_numrows($artifacts);
                 for ($m=0; $m < $num_artifacts; $m++) {
 			echo "\t\t";
-			echo '<tr style="background-color:'.
-				html_get_priority_color( db_result($artifacts, $m, 'priority')).'">';
+			echo '<tr class="priority'.db_result($artifacts, $m, 'priority').'">';
 			echo "\n\t\t";
 			echo '<td><a href="/tracker/?func=detail&amp;aid='.
 				db_result($artifacts, $m, 'artifact_id').
@@ -224,8 +223,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 
 	while ( $task_type = db_fetch_array($task_group) ) {
 		if ( $task_type['percent_complete'] != 100 ) {
-                	echo '<tr style="background-color:'.
-                      		html_get_priority_color( $task_type['priority']).'">';
+                	echo '<tr class="priority'.$task_type['priority'].'">';
 
 			echo '<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
 				$task_type['project_task_id'].

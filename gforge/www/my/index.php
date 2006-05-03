@@ -97,7 +97,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$art->getID().'</td>
-			<td width="10%" style="background-color:'.html_get_priority_color($art->getPriority()).'">'.$art->getPriority().'</td>
+			<td width="10%" class="priority'.$art->getPriority().'">'.$art->getPriority().'</td>
 			<td><a href="/tracker/?func=detail&amp;aid='.
 			$art->getID().
 			'&amp;group_id='.$art->ArtifactType->Group->getID().
@@ -152,7 +152,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$task->getID().'</td>
-			<td width="10%" style="background-color:'.html_get_priority_color($task->getPriority()).'">'.$task->getPriority().'</td>
+			<td width="10%" class="priority'.$task->getPriority().'">'.$task->getPriority().'</td>
 			<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
 			$task->getID().
 			'&amp;group_id='.$group->getID().
@@ -192,7 +192,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$art->getID().'</td>
-			<td width="10%" style="background-color:'.html_get_priority_color($art->getPriority()).'">'.$art->getPriority().'</td>
+			<td width="10%" class="priority'.$art->getPriority().'">'.$art->getPriority().'</td>
 			<td><a href="/tracker/?func=detail&amp;aid='.
       $art->getID().
       '&amp;group_id='.$art->ArtifactType->Group->getID().

@@ -299,7 +299,7 @@ if ($art_arr && count($art_arr) > 0) {
 		if ($display_col['status'])
 			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
 		if ($display_col['priority'])
-			echo '<td bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'. $art_arr[$i]->getPriority() .'</td>';
+			echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
 		if ($display_col['assigned_to'])
 			echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
 		if ($display_col['submitted_by'])
@@ -310,7 +310,7 @@ if ($art_arr && count($art_arr) > 0) {
 	/*
 		Show extra rows for <-- Prev / Next -->
 	* /
-	//only show this if we´re not using a power query
+	//only show this if weï¿½re not using a power query
 	if ($af->max_rows > 0) {
 		if (($offset > 0) || ($rows >= 50)) {
 			echo '

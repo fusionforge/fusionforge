@@ -188,7 +188,7 @@ if ($rows < 1) {
 		$url = getStringFromServer('PHP_SELF')."?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
 		
 		echo '
-			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			<tr class="priority'.$pt_arr[$i]->getPriority().'">'.
 			'<td>'.
 			($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
 			$pt_arr[$i]->getID() .'"> ':'').
@@ -214,7 +214,7 @@ if ($rows < 1) {
 
 		if ($_view=="detail") {
 			echo '
-			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">
+			<tr class="priority'.$pt_arr[$i]->getPriority() .'">
 				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br( $pt_arr[$i]->getDetails() ) .'</td>
 			</tr>';
 
@@ -226,7 +226,7 @@ if ($rows < 1) {
 		//show detail view
 		} else if ($_view == "detail") {
 			echo '
-				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+				<tr class="priority'.$pt_arr[$i]->getPriority() .'">'.
 				'<td>'.
 				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
 				$pt_arr[$i]->getID() .'"> ':'').
