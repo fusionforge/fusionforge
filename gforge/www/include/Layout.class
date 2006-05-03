@@ -34,29 +34,24 @@ class Layout extends Error {
 	 */
 
 	var $imgroot = '/themes/gforge/images/';
-	var $bgpri = array();
+
 
 	/**
 	 * Layout() - Constructor
 	 */
 	function Layout() {
-		GLOBAL $bgpri;
-		$this->themeroot='/themes/'.$GLOBALS['sys_theme'];
 		
+		$this->themeroot=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
+		/* if images directory exists in theme, then use it as imgroot */
+		if (file_exists ($this->themeroot.'/images')){
+			$this->imgroot='/themes/'.$GLOBALS['sys_theme'].'/images/';
+		}
 		// Constructor for parent class...
 		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
 			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
 		$this->Error();
 
-		/*
-		Set up the priority color array one time only
-		*/
-		$bgpri[1] = '#dadada';
-		$bgpri[2] = '#dacaca';
-		$bgpri[3] = '#dababa';
-		$bgpri[4] = '#daaaaa';
-		$bgpri[5] = '#da8a8a';
-
+		
 	}
 
 	/**
@@ -138,13 +133,13 @@ class Layout extends Error {
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><a style="color: #FFFFFF" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
-				<b><a style="color: #FFFFFF" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+				<b><a class="lnkutility" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
+				<b><a class="lnkutility" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
 				<?php
 			} else {
 				?>
-				<b><a style="color: #FFFFFF" href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
-				<b><a style="color: #FFFFFF" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+				<b><a class="lnkutility" href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
+				<b><a class="lnkutility" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 				<?php
 			}
 			echo $this->quickNav();
@@ -168,19 +163,19 @@ class Layout extends Error {
 	</tr>
 
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+		<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td class="toptab" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td class="toptab"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td class="toptab" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
 	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
-		<td valign="top" width="99%" bgcolor="#E0E0E0" colspan="3">
+		<td class="toptab"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
+		<td valign="top" width="99%" class="toptab" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
 
@@ -208,14 +203,14 @@ if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
-				<td align="left" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td class="projecttab" ><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
 			</tr>
 
 			<tr>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
-				<td valign="top" width="99%" bgcolor="white">
+				<td class="projecttab" ><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
+				<td valign="top" width="99%" class="projecttab">
 
 	<?php
 
@@ -229,24 +224,24 @@ if (isset($params['group']) && $params['group']) {
 
 
 				</td>
-				<td width="10" bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
+				<td width="10" class="footer2" ><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td align="left" class="footer1" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td class="footer1"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" class="footer1" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
 			</tr>
 			</table>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width="10" bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
+		<td width="10" class="footer2"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
-		<td bgcolor="#E0E0E0" colspan="3"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
+		<td align="left" class="footer2" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td class="footer2" colspan="3"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td align="right" class="footer2" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
 	</tr>
 </table>
 <?php
@@ -348,9 +343,9 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
-			return 'bgcolor="#EAEAEA"';
+			return 'class="altRowStyleEven"';
 		} else {
-			return 'bgcolor="#E0E0E0"';
+			return 'class="altRowStyleOdd"';
 		}
 	}
 
@@ -373,14 +368,12 @@ if (isset($params['group']) && $params['group']) {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><a class="sortbutton" href="'.$links_arr[$i].'"><span style="color:'.
-				$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
+				<td align="center"><a class="sortbutton" href="'.$links_arr[$i].'"><span class="FONTCOLOR_HTMLBOX_TITLE"><strong>'.$title_arr[$i].'</strong></span></a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><span style="color:'.
-				$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></td>';
+				<td align="center"><span class="FONTCOLOR_HTMLBOX_TITLE""><strong>'.$title_arr[$i].'</strong></span></td>';
 			}
 		}
 		return $return.'</tr>';
@@ -693,47 +686,15 @@ if (isset($params['group']) && $params['group']) {
 		}
 		$return .= '<tr>';
 		if ($beg_cols > 0) {
-			$return .= '<td colspan="'.$beg_cols.'" height="1" bgcolor="#909090"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+			$return .= '<td colspan="'.$beg_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
 		}
-		$return .= '<td colspan="3" height="1" bgcolor="'.$sel_tab_bgcolor.'"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+		$return .= '<td colspan="3" height="1" class="selTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
 		if ($end_cols > 0) {
-			$return .= '<td colspan="'.$end_cols.'" height="1" bgcolor="#909090"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+			$return .= '<td colspan="'.$end_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
 		}
 		$return .= '</tr>';
 
 
-/*
-			$bgcolor=(($selected==$i)?$light:$dark);
-			$imgcolor=(($selected==$i)?'':'-dark');
-			$return .= '
-				<td '.$bgcolor.' width="9" valign="top">'.
-					'<div align="left">'. html_image('tabs/topleft'.$inner.$imgcolor.'.png',9,9,array()).'</div></td>
-				<td '.$bgcolor.' width="'.$width.'%" rowspan="2" align="center">'.
-				'<a class="'. (($selected==$i)?'tabsellink':'tablink') .'" href="'. $TABS_DIRS[$i] .
-					'">'. $TABS_TITLES[$i] .'</a></td>
-				<td '.$bgcolor.' width="9" valign="top">'.
-				'<div align="right">'. html_image('tabs/topright'.$inner.$imgcolor.'.png',9,9,array()).'</div></td>';
-			if ($i < $count-1) {
-				$return .= '<td width="1" rowspan="2"><img src="'.$this->imgroot . 'clear.png" height="2" width="1" alt="" /></td>';
-			}
-		}
-
-		$return .= '
-		</tr>
-		<tr>';
-		for ($i=0; $i<$count; $i++) {
-			$bgcolor=(($selected==$i)?$light:$dark);
-			$return .= '<td '.$bgcolor.'>&nbsp;</td>';
-			$return .= '<td '.$bgcolor.'>&nbsp;</td>';
-		}
-		$return .= '
-		</tr>
-		<tr>';
-		for ($i=0; $i<$count; $i++) {
-			$bgcolor=(($selected==$i)?$light:'style="background-color:#999999"');
-			$return .= '<td '.$bgcolor.' colspan="4"><img src="'.$this->imgroot . 'clear.png" height="2" width="1" alt="" /></td>';
-		}
-*/
 		return $return.'
 		</table> 
 
@@ -759,7 +720,7 @@ if (isset($params['group']) && $params['group']) {
 		<form action="/search/" method="get">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr><td>
-		<div align="center" style="font-size:smaller">';
+		<div align="center" class="searchbox">';
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
@@ -865,11 +826,11 @@ if (isset($params['group']) && $params['group']) {
 		$break = $breakLimit;
 		$countLines = 0;
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
+			<table width="100%" border="0" cellspacing="0" cellpadding="1" class="advancedSearch2">
 				<tr>
 					<td>
-						<table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
-							<tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
+						<table width="100%" cellspacing="0" border="0" class="advancedSearch1">
+							<tr class="advancedSearch">
 								<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
 								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
 							</tr>
@@ -895,9 +856,9 @@ if (isset($params['group']) && $params['group']) {
 				}
 			}
 		
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_LTBACK2.'">
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" class="advancedSearch2">
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
+							<tr class="advancedSearch2">
 								<td cellspacing="0">
 									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
 							.'	</td>
@@ -905,7 +866,7 @@ if (isset($params['group']) && $params['group']) {
 								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
 								</td>
 							</tr>
-							<tr style="background-color:'. $this->COLOR_LTBACK1.'">
+							<tr class="advancedSearch1">
 								<td colspan="2">';
 								
 			if (!is_array($section)) {
@@ -1013,7 +974,7 @@ if (isset($params['group']) && $params['group']) {
 		$return= '
 		<tr '.$row_attr;
 		if ( $istitle ) {
-			$return .=' align="center" bgcolor="'. $this->COLOR_HTMLBOX_TITLE .'"';
+			$return .=' align="center" class="multiTableRowTitle"';
 		}
 		$return .= '>';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
@@ -1023,11 +984,11 @@ if (isset($params['group']) && $params['group']) {
 			}
 			$return .= '>';
 			if ( $istitle ) {
-				$return .='<font color="'.$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>';
+				$return .='<span class="multiTableRowTitle"';
 			}
 			$return .= $cell_data[$c][0];
 			if ( $istitle ) {
-				$return .='</strong></font>';
+				$return .='</span>';
 			}
 			$return .= '</td>';
 
@@ -1049,7 +1010,7 @@ if (isset($params['group']) && $params['group']) {
 			return '';
 		} else {
 			return '
-				<h3 style="color:red">'.strip_tags($feedback, '<br>').'</h3>';
+				<span class="feedback">'.strip_tags($feedback, '<br>').'</span>';
 		}
 	}
 
