@@ -1,4 +1,3 @@
-
 /* Default stylesheet for gforge
 This stylesheet contains all style information
 removed from the code
@@ -9,12 +8,15 @@ OL,UL,P,BODY,TR,TD,TH,FORM {
 		font-size:13px;
 		color: #202020;
 	}
-H1 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
-H2 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
-H3 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
-H4 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
-H5 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
-H6 { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; }
+H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
+H2 { font-size: large; font-family: arialverdana,arial,helvetica,sans-serif; }
+H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
+H4 { font-size: small; font-family: arialverdana,arial,helvetica,sans-serif; }
+H5 { font-size: x-small; font-family: arialverdana,arial,helvetica,sans-serif; }
+H6 { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
+
+
+
 
 P { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; COLOR: #535c5f;}
 
@@ -23,3 +25,76 @@ PRE,TT { font-family: courier,sans-serif }
 .develtitle {
 	FONT-SIZE: 13px; COLOR: #535c5f; FONT-FAMILY: arial
 }
+/* link utilities on header of page */
+A.lnkutility { COLOR: #ffffff }
+A.lnkutility:visited { COLOR: #ffffff }
+A.lnkutility:active { COLOR: #ffffff }
+A.lnkutility:hover { COLOR: #ffffff }
+
+/* tab menu styles */
+td.toptab { background-color: #E0E0E0}
+td.projecttab { background-color: #ffffff}
+
+td.footer1 { background-color: #E0E0E0}
+td.footer2 { background-color: #E0E0E0}
+td.footer3 { background-color: #E0E0E0}
+
+td.selTab { background-color: white}
+td.notSelTab { background-color: #909090}
+
+/* priority styles */
+td.priority1 { background-color: #dadada}
+td.priority2 { background-color: #dacaca}
+td.priority3 { background-color: #dababa}
+td.priority4 { background-color: #daaaaa}
+td.priority5 { background-color: #da8a8a}
+
+table.advancedSearch2 { background-color: #FFF4A8}
+tr.advancedSearch2 {font-weight: bold;background-color: #FFF4A8}
+
+table.advancedSearch1 { background-color: #FFF4A8}
+tr.advancedSearch1 {background-color: #FFF4A8}
+
+tr.multiTableRowTitle {background-color: #DAD5D7 }
+td.multiTableRowTitle {font-weight: bold; color: #333333}
+
+.FONTCOLOR_HTMLBOX_TITLE {background-color: #333333}
+/* definition for content table */
+tr.content {background-color: #EAC164}
+td.content {background-color: #EAC164}
+.prev, .next {font-family: arial,helvetica; font-size: small; text-decoration: none}
+
+/* global styles */
+
+/* style for error messages */
+.error {color: red; font-size: medium; text-align: center}
+/* style for warning messages */
+.warning {color: red}
+/* style for feedback  */
+.feedback {color: green}
+/* style for required fields */
+.requiredfield {color: red}
+
+.searchbox {font-size: smaller }
+.altRowStyleEven { background-color: #EAEAEA}
+.altRowStyleOdd { backgound-color: #E0E0E0}
+
+/* global styles, from .tab files */
+.highlight {color: red; text-decoration: bold}
+.highlight2 {color: red}
+.plugin-active {color: #00ff00}
+.plugin-inactive {color: #800000}
+.release-highlight {background-color: pink}
+
+
+/* style for activity tab */
+
+table.activity {background-color: #E0E0E0}
+tr.activity {background-color: #ffffff}
+
+
+/* styles for forums */
+.currentfile {color: blue}
+.popups {font-size: -1}
+
+
