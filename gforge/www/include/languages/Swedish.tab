@@ -64,11 +64,11 @@ account_first	about_blurb	<p>Du är nu en registrerad användare av $1, on-lineu
 account_first	title	Välkommen till $1
 account_login	cookiewarn	Kakor måste aktiveras för att du skall kunna fortsätta.
 account_login	deleted_account	<p>Ditt $1 konto har tagits bort av $1 personalen. Detta kan ha två anledningar, antingen 1) du begärde att ditt konto skulle tas bort; eller 2) en handling har utförts med ditt konto som har setts som stötande (dvs. du har brutit mot reglerna för ditt konto) och ditt konto har dragits in av administrativa skäl. Om du har frågor gällande denna sak, posta i så fall en fråga till supportavdelningen<a href="/support/?group_id=1"></a>.</p><p>Tack så mycket, <br><br>$1 Personalen</p>
-account_login	iewarn	<H2><FONT COLOR="RED">Användare av Internet Explorer måste uppgradera till IE 5.01 eller högre, helst med 128-bitars SSL eller använda Netscape 4.7 eller högre</FONT></H2>
+account_login	iewarn	<H2><span class="highlight2">Användare av Internet Explorer måste uppgradera till IE 5.01 eller högre, helst med 128-bitars SSL eller använda Netscape 4.7 eller högre</span></H2>
 account_login	login	Inloggning med SSL
 account_login	loginname	Inloggningsnamn:
 account_login	lostpw	[Förlorat ditt lösenord?]
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer på Macintosh stöds för närvarande inte. Använd Netscape 4.7 eller högre</FONT></H2>
+account_login	macwarn	<H2><span class="highlight">Internet Explorer på Macintosh stöds för närvarande inte. Använd Netscape 4.7 eller högre</span></H2>
 account_login	newaccount	[Nytt Konto]
 account_login	passwd	Lösenord:
 account_login	pending_account	<P>Ditt konto väntar på din bekräftelse via e-post.		Besök länken i detta e-postbrev för att aktivera ditt konto.		<P>För att få e-postbrevet skickat på nytt, var vänlig klicka nedan så kommer ett e-postbrev		för bekräftelse att skickas till den e-postadress du angav vid registreringen.		<P><A href="pending-resend.php?form_user=$1">[Skicka Bekräftelse E-post]</A>		<br><hr>		<p>
@@ -103,7 +103,7 @@ account_options	welcome		Välkommen
 account_register	Preferences	Inställningar
 account_register	communitymail	Ta emot ytterligare brev från gruppen. <i>(Låg trafik.)</i>
 account_register	congrat	<p>Gratulerar. Du har registrerat dig på $1.  <p> Du får nu ett bekräftelsebrev för att säkerställa att din e-postadress är riktig. Följ länken i detta e-postbrev för att bekräfta ditt nya konto.
-account_register	emailaddr	E-postadress:<span><font color="red">*</font></span><br /><em>Denna e-postadress skall bekräftas innan kontot aktiveras. Den kommer inte att visas på denna webbplats. Du kommer att få ett e-postkonto på &lt;loginname@$1&gt; som vidarebefordrar e-post till din riktiga e-postadress.</em>
+account_register	emailaddr	E-postadress:<span class="highlight2">*</span><br /><em>Denna e-postadress skall bekräftas innan kontot aktiveras. Den kommer inte att visas på denna webbplats. Du kommer att få ett e-postkonto på &lt;loginname@$1&gt; som vidarebefordrar e-post till din riktiga e-postadress.</em>
 account_register	err_badinsert	Infogandet misslyckades
 account_register	err_email	Ogiltig e-postadress
 account_register	err_jabber	Ogiltig jabberadress
@@ -114,12 +114,12 @@ account_register	err_passwd3	Ogiltigt lösenord:
 account_register	err_unixname	Ogiltigt unixnamn.
 account_register	err_userexist	Det användarnamnet existerar redan.
 account_register	err_username	Du måste ange ett användarnamn
-account_register	iewarn	<H2><FONT COLOR="RED">Användare av Internet Explorer måste uppgradera till IE 5.01 eller högre, helst med 128-bitars SSL eller använda Netscape 4.7 eller högre</FONT></H2>
+account_register	iewarn	<H2><span class="highlight2">Användare av Internet Explorer måste uppgradera till IE 5.01 eller högre, helst med 128-bitars SSL eller använda Netscape 4.7 eller högre</span></H2>
 account_register	jabberaddr	Jabberadress:
 account_register	jabberonly	Skicka automatiskt genererade meddelanden endast till min Jabber adress
 account_register	language	Språk:
 account_register	loginname	Inloggningsnamn (använd endast små bokstäver):
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer på Macintosh stöds för närvarande inte. Använd Netscape 4.7 eller högre</FONT></H2>
+account_register	macwarn	<H2><span class="highlight">Internet Explorer på Macintosh stöds för närvarande inte. Använd Netscape 4.7 eller högre</span></H2>
 account_register	mandatory	Fält markerade med $1 är obligatoriska.
 account_register	message_body	Tack för att du registrerat dig på $4 webbplats. Du har fått \nkonto med användarnamnet $1 skapat för dig. För\natt fullborda din registrering, besök följande URL: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Om du inte ser någon URL ovan, så beror det förmodligen på ett fel i din e-postläsare.\nAnvänd någon av de nedanstående, men försäkra dig om att allt är skrivet på en rad.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nHa trevligt på webbplatsen.\n\n-- $4 personalen\n
 account_register	message_header	$1 Kontoregistrering
@@ -268,7 +268,7 @@ admin_massmail	active_deliveries	Aktiva leveranser
 admin_massmail	all_project_admins	Alla projektadmins
 admin_massmail	all_project_developers	Alla projektutvecklare
 admin_massmail	all_users	Alla användare
-admin_massmail	be_verry_carefull	Var <span style="color:red"><strong>VÄLDIGT</strong></span> försiktig med detta fomulär, att skicka från det KOMMER att innebära att e-post skickas till massor av användare.
+admin_massmail	be_verry_carefull	Var <span class="highlight">VÄLDIGT</strong></span> försiktig med detta fomulär, att skicka från det KOMMER att innebära att e-post skickas till massor av användare.
 admin_massmail	date	Datum
 admin_massmail	developers_test	Utvecklare (test)
 admin_massmail	error_scheduling_mailing	Fel schemalagd e-post, Kunde inte schemalägga e-post, databasfel:
@@ -982,7 +982,7 @@ pm	hours		Beräknade timmar
 pm	intro		Välj ett underprojekt så kan du bläddra/redigera/lägga till uppgifter till det.
 pm	no_tasks_found	Hittade inga matchande uppgifter
 pm	no_tasks_found_text	Lägg till uppgifter med hjälp av länken ovan
-pm	noprj	<H1>Inga 		Underprojekt hittade</H1><P><B>Inga underprojekt har satts upp eller också kan dom inte visas.<P><FONT COLOR=RED>Administratören för detta projekt måste sätta upp projektet med adminsidan </FONT></B>
+pm	noprj	<H1>Inga 		Underprojekt hittade</H1><P><B>Inga underprojekt har satts upp eller också kan dom inte visas.<P><span class="highlight">Administratören för detta projekt måste sätta upp projektet med adminsidan </span></B>
 pm	percent_complete	Procent färdig
 pm	priority	Prioritet
 pm	start_date	Startdatum
@@ -1007,7 +1007,7 @@ pm_admin_projects	admin_title	Administration av projekt-/uppgiftsledare
 pm_admin_projects	category_inserted	Kategori infogad
 pm_admin_projects	category_name	Kategorinamn
 pm_admin_projects	category_note	När du lagt till en kategori, så kan den inte tas bort
-pm_admin_projects	category_note2	Det är inte rekomenderat att ändra artifaktkategorinamn eftersom andra saker är beroende av den. När du ändrar kategorinamn, så ändras alla relaterade poster till det nya namnet.</font></strong>
+pm_admin_projects	category_note2	Det är inte rekomenderat att ändra artifaktkategorinamn eftersom andra saker är beroende av den. När du ändrar kategorinamn, så ändras alla relaterade poster till det nya namnet.
 pm_admin_projects	category_updated	Kategori uppdaterad
 pm_admin_projects	change_project_intro	Du kan modifiera ett existerande projekt genom att använda detta formulär. Var vänlig notera att privata projekt fortfarande kan ses av medlemmar i ditt projekt, men inte av de allmäna besökarna.
 pm_admin_projects	change_project_title	Ändra projekt-/uppgiftledarstatus
@@ -1320,7 +1320,7 @@ project_showfiles	new_release	För att skapa en ny utgåva klicka här.
 project_showfiles	no_releases	Inga utgåvor
 project_showfiles	package	Paket
 project_showfiles	project_totals	Projekttotaler
-project_showfiles	release_highlighted	Utgåvan du har valt är <span style="background-color:pink">markerad</span>.
+project_showfiles	release_highlighted	Utgåvan du har valt är <span class="release-highlight">markerad</span>.
 project_showfiles	release_notes	Utgåva &amp; noteringar
 project_showfiles	size	Storlek
 project_showfiles	title	Projekt fillista
@@ -1374,7 +1374,7 @@ searchbox	search	Sök
 searchbox	skill	Kompetenser
 searchbox	softwaregroup	Mjukvara/Grupp
 searchbox	task	Uppgifter
-sendmessage	about_blurb	För att försöka minska mängden skräppost anväder vi detta formulär för att skicka e-post.<p />Fyll i det korrekt och fullständigt annars kan inte mottagaren skicka svar.<p /><font color="red"><b>OM DU SKRIVER FÖRA ATT BEGÄRA HJÄLP:</b> Läste du webbplatsdokumentationen? Inkluderade du ditt <b>användar-ID</b> och <b>användar_namn?</b> Om du skriver om ett projekt, inkludera ditt <b>projekt-ID</b> (<b>grupp-ID</b>) och <b>Projekt namn</b>.</font>
+sendmessage	about_blurb	För att försöka minska mängden skräppost anväder vi detta formulär för att skicka e-post.<p />Fyll i det korrekt och fullständigt annars kan inte mottagaren skicka svar.<p /><span class="highlight2">OM DU SKRIVER FÖRA ATT BEGÄRA HJÄLP:</b> Läste du webbplatsdokumentationen? Inkluderade du ditt <b>användar-ID</b> och <b>användar_namn?</b> Om du skriver om ett projekt, inkludera ditt <b>projekt-ID</b> (<b>grupp-ID</b>) och <b>Projekt namn</b>.</span>
 sendmessage	contact	Kontakt
 sendmessage	email	Din e-postadress
 sendmessage	email_only_to	Du kan bara skicka till adresser
@@ -1465,7 +1465,7 @@ snippet_package	suggest_a_language	Föreslå ett språk
 snippet_package	title	Lämna in ett nytt kodstyckespaket
 snippet_package	title_new_snippet_package	Lämna in ett nytt kodstyckespaket
 snippet_package	version	Version
-snippet_package	you_can_group	<p>Du kan gruppera existerande kodstycken tillsammans i ett paket med detta gränssnitt. Innan du skapar ditt paket, försäkra dig om att alla dina kodstycken är på plats och att du har noterat kodstyckenas ID.</p><p><ol><li>Skapa paketet med detta formulär.</li><li><strong>Därefter</strong> använd "Lägg till kodstycken till paket" länken för att lägga till filer till ditt paket.</li></ol></p><p><span style="color:red"><strong>Notera:</strong></span> Du kan lämna in en ny version av ett existerande paket genom att bläddra i biblioteket och använda länken på det existerande paketet. Använda denna sida endast om du lämnar in ett helt nytt paket.
+snippet_package	you_can_group	<p>Du kan gruppera existerande kodstycken tillsammans i ett paket med detta gränssnitt. Innan du skapar ditt paket, försäkra dig om att alla dina kodstycken är på plats och att du har noterat kodstyckenas ID.</p><p><ol><li>Skapa paketet med detta formulär.</li><li><strong>Därefter</strong> använd "Lägg till kodstycken till paket" länken för att lägga till filer till ditt paket.</li></ol></p><p><span class="highlight">Notera:</strong></span> Du kan lämna in en ny version av ett existerande paket genom att bläddra i biblioteket och använda länken på det existerande paketet. Använda denna sida endast om du lämnar in ett helt nytt paket.
 snippet_submit	category	Kategori
 snippet_submit	description	Beskrivning
 snippet_submit	error_doing_snippet_insert	FEL VID INFOGNING AV KODSTYCKEN!
@@ -1480,7 +1480,7 @@ snippet_submit	suggest_a_category	Föreslå en kategori
 snippet_submit	suggest_a_language	Föreslå ett språk
 snippet_submit	type	Skript Typ
 snippet_submit	version	Version
-snippet_submit	you_can_post	Du kan lämna in ett nytt kodstycke och dela det med andra mäniskor runt världen. Fyll bara i denna information. <strong>Ge en ordentlig beskrivning</strong> och <strong>kommentera din kod</strong> så att andra kan läsa och förstå den.</p><p><span style="color:red"><strong>Notera:</strong></span> Du kan lämna in en ny version av ett existerande kodstycke genom att bläddra i biblioteket. Använda denna sida endast om du lämnar in ett helt nytt skript eller funktion.
+snippet_submit	you_can_post	Du kan lämna in ett nytt kodstycke och dela det med andra mäniskor runt världen. Fyll bara i denna information. <strong>Ge en ordentlig beskrivning</strong> och <strong>kommentera din kod</strong> så att andra kan läsa och förstå den.</p><p><span class="highlight">Notera:</span> Du kan lämna in en ny version av ett existerande kodstycke genom att bläddra i biblioteket. Använda denna sida endast om du lämnar in ett helt nytt skript eller funktion.
 snippet_utils	auctions	Auktioner
 snippet_utils	author	Författare
 snippet_utils	bbs_systems	BBS-system
@@ -1753,7 +1753,7 @@ tracker	id	ID
 tracker	insert_email	Om du <strong>inte kan</strong> logga in, så skriver du din e-postadress här:
 tracker	item_created	Lyckades skapa post
 tracker	no_trackers	Hittade inga tillgängliga ordningslistor
-tracker	no_trackers_text	Inga ordningslistor har satts upp eller så kan du inte se dom.<p><FONT COLOR=RED>Admionistratören för detta projekt måste ställa in datatyperna med $1 admin sida $2</FONT></strong>
+tracker	no_trackers_text	Inga ordningslistor har satts upp eller så kan du inte se dom.<p><span class="highlight">Admionistratören för detta projekt måste ställa in datatyperna med $1 admin sida $2</span>
 tracker	open_date	Öppningsdatum
 tracker	please_login	Var vänlig $1 logga in $2
 tracker	priority	Prioritet
@@ -1837,7 +1837,7 @@ tracker_artifacttype	none		Inget
 tracker_artifacttype	reporting	Rapportering
 tracker_artifacttype	required_fields	Artifakttyp: namn, beskrivning, Förväntas klar period, och status tidsgräns är obligatoriska
 tracker_artifacttype	submit_new	Lämna in ny
-tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> Om du vill ändra alla ovan valda poster, så använder du dessa kontroller för att ändra deras egenskaper och klickar en gång på "Massuppdatera".
+tracker_browse	admin_mass_update	<strong>Admin:</strong> Om du vill ändra alla ovan valda poster, så använder du dessa kontroller för att ändra deras egenskaper och klickar en gång på "Massuppdatera".
 tracker_browse	ascending	Stigande
 tracker_browse	canned_response	Standardsvar
 tracker_browse	check_all	Markera &nbsp;alla

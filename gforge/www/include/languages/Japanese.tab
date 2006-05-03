@@ -13,8 +13,8 @@ account_change_pw	title	パスワード変更
 account_first	about_blurb	おめでとうございます。あなたはオープンソース開発の為のオンライン開発環境 $1 の公認ユーザーになりました。あなたは公認ユーザーとしてサイト上の全ての活動に参加することができ、プロジェクトメッセージフォーラムにメッセージの記入、開発者として $1 にあるソフトに関するバグ情報の提出もすることができます。また、あなた個人のプロジェクトを開始するのも良いでしょう。<p>余裕があればこのサイトに載っているドキュメントに目を通すようにしてください。<p>そうすれば、より $1 を使いこなせるようになるでしょう。<p>そして、より良い $1 にするためにフィードバックをいただければ助かると思います。<p>-- $1 スタッフより。
 account_first	title	ようこそ
 account_login	deleted_account	<p>あなたの $1 にあったアカウントは $1 スタッフによって削除されました。これには以下の二つの可能性があると考えられます。 \n\n1) あなたの依頼による削除\n2) いくつかの違法行為(アカウント利用規約の違反)があなたのアカウントで行われていた為、管理運営上の理由で削除\n\n以上の事について、ご不明な点がありましたら、<a href="/support/?group_id=1">サポートページ</a>をご覧下さい。</p><p><br><br>$1 スタッフ</p>
-account_login	iewarn	<H2><FONT COLOR="RED">IEユーザーは、IE5.01以上へのバージョンアップが必要となります。できれば、128ビットSSLに対応したバージョン。あるいはNetscape4.7以上のバージョンを使用してください。</font></h2>
-account_login	macwarn	<H2><FONT COLOR="RED">Mac OSでは現在、IEの使用はまだサポートしていません。Netscape4.7以上のバージョンをご使用下さい。</font></h2>
+account_login	iewarn	<H2><span class="highlight">IEユーザーは、IE5.01以上へのバージョンアップが必要となります。できれば、128ビットSSLに対応したバージョン。あるいはNetscape4.7以上のバージョンを使用してください。</span></h2>
+account_login	macwarn	<H2><span class="highlight">Mac OSでは現在、IEの使用はまだサポートしていません。Netscape4.7以上のバージョンをご使用下さい。</span></h2>
 account_login	pending_account	<P>あなたのアカウントは確認メールからのログインを待っています。確認メールの中に記述されたリンクをたどり、そこからログインしてみてください。そうすることによってあなたのアカウントがアクティブになります。 <p>もし、確認メールの再送が必要でしたら<A href="pending-resend.php?form_user=$1">ここ</a>をクリックしてください。確認メールが登録したメールアドレスへ送信されます。<br><hr><p>\n
 account_login	cookiewarn	ここから先はクッキーを有効にしてください
 account_login	loginname	ログイン名：
@@ -37,14 +37,14 @@ account_lostlogin	newpasswd	新規パスワード(最低 6 文字以上)
 account_lostlogin	newpasswd2	新規パスワード(確認)
 account_lostlogin	update	更新
 account_register	congrat	おめでとうございます。$1 上にユーザー情報を登録しました。<p>メールアドレスの有効性をチェックするために確認のメールを送信しました。メールに記述されたリンクをたどり、アカウントをアクティブにしてください。
-account_register	iewarn	<H2><FONT COLOR="RED">IEユーザーはバージョン5.01以上にアップグレードする必要があります。できれば128bitSSL対応のバージョンやNetscape4.7以上のバージョンをご使用ください。</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">Mac OSでは現在、IEの使用は、まだ、サポートしていません。Netscape4.7以上のバージョンをご使用下さい。</FONT></H2> 
+account_register	iewarn	<H2><span class="highlight2">IEユーザーはバージョン5.01以上にアップグレードする必要があります。できれば128bitSSL対応のバージョンやNetscape4.7以上のバージョンをご使用ください。</span></H2>
+account_register	macwarn	<H2><span class="highlight2">Mac OSでは現在、IEの使用は、まだ、サポートしていません。Netscape4.7以上のバージョンをご使用下さい。</span></H2> 
 account_register	loginname	ログイン名(大文字を使用してはいけません)
 account_register	password	パスワード(最低 6 文字以上):
 account_register	password2	パスワード(確認):
 account_register	language	ランゲージ選択:
 account_register	timezone	タイムゾーン:
-account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span><font color="red">*</font></span><br /><em>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</em>
+account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span class="highlight2">*</span><br /><em>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</em>
 account_register	jabberaddr	Jabberアドレス:
 account_register	jabberonly	(未訳：account_register.jabberonly)Send auto-generated notices only to my Jabber address 
 account_register	siteupdate	サイトの最新情報<i>(セキュリティ情報を含む)</i>に関するメールを受け取る
@@ -300,7 +300,7 @@ people	title	プロジェクトが協力者を求めています。
 people_editjob	title	ジョブ編集
 people_viewprofile	title	デベロッパープロフィール
 pm	title	Task Manager: Subprojects And Tasks
-pm	noprj	<h1>サブプロジェクトが見つかりません</h1><p><b>サブプロジェクトがセットアップされていません。あるいは、みる権限がありません。<p><font color="red">このプロジェクトの権限管理には管理ページを利用してプロジェクトをセットアップしないといけません。</font></b>
+pm	noprj	<h1>サブプロジェクトが見つかりません</h1><p><b>サブプロジェクトがセットアップされていません。あるいは、みる権限がありません。<p><span class="highlight">このプロジェクトの権限管理には管理ページを利用してプロジェクトをセットアップしないといけません。</span></b>
 pm_addtask	section	タスクマネージャ
 pm_addtask	title	タスク追加
 pm_admin	section	$1
@@ -332,7 +332,7 @@ project_memberlist	joining	<p>もし、あなたが一人の開発者として�
 project_showfiles	title	ファイルリスト
 project_shownotes	title	リリースノート
 search	title	検索
-sendmessage	about_blurb	スパムを減少させるため、このフォームを使ってメールを送るようにしています。<p>このフォームは正確に記入してください。そうしないと、受取人は返事ができません。<p><font color="red"><b>解決方法を待っているあなたに: </b> このサイトのドキュメントを読みましたか？<b>ユーザーID</b>と<b>ユーザー名</b>をいれましたか？ もし、あなたがプロジェクトを組んでいるのなら<b>プロジェクトID</b>と<b>プロジェクト名</b>も記入してください。
+sendmessage	about_blurb	スパムを減少させるため、このフォームを使ってメールを送るようにしています。<p>このフォームは正確に記入してください。そうしないと、受取人は返事ができません。<p><span class="highlight2"><b>解決方法を待っているあなたに: </b> このサイトのドキュメントを読みましたか？<b>ユーザーID</b>と<b>ユーザー名</b>をいれましたか？ もし、あなたがプロジェクトを組んでいるのなら<b>プロジェクトID</b>と<b>プロジェクト名</b>も記入してください。</span>
 snippet	title	サンプルコードライブラリ
 snippet_add_snippet_to_package	section	サンプルコードライブラリ
 snippet_add_snippet_to_package	title	サンプルをパッケージに追加

@@ -51,11 +51,11 @@ account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환�
 account_first	title	$1 : 환영합니다!
 account_login	cookiewarn	여기서부터는 쿠키를 사용합니다.
 account_login	deleted_account	<p>여러분의 $1 계정이 관리자에 의해 삭제되었습니다. 이는 보통 두가지로 나눌 수 있는데 1) 여러분 스스로 계정을 삭제해 달라고 요청하셨거나 2) 여러분의 계정이 서비스 계약에 위배되는 행위에 이용되어 시스템 관리를 위해 관리자에 의해 계정이 삭제되는 것입니다. 만약 의문 사항이나 의심되는 점이 있다면 <a href="/support/?group_id=1">지원 요청</a>을 하시면 됩니다.</p><p>감사합니다, <br><br>$1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>
+account_login	iewarn	<H2><span class="highlight2">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</span></H2>
 account_login	login	SSL을 통해 로그인하기
 account_login	loginname	사용자 ID:
 account_login	lostpw	[비밀번호를 잊으셨나요?]
-account_login	macwarn	<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>
+account_login	macwarn	<H2><span class="highlight2">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</span>
 account_login	newaccount	[새로운 계정 만들기(가입하기)]
 account_login	passwd	비밀번호:
 account_login	pending_account	<P>여러분의 계정은 현재 이메일을 통한 확인 작업을 기다리고 있는 중입니다.		이메일에 포함되어 있는 링크를 방문하시면 계정이 곧바로 활성화됩니다.		<P>만약 이 이메일을 다시 받고 싶으시다면 아래에 있는 링크를 클릭하세요. 여러분이 등록 과정 중에 입력하신 이메일로 확인 메일이 다시한번 발송됩니다.		<P><A href="pending-resend.php?form_user=$1">[확인 메일 다시 보내기]</A>		<br><hr>		<p>
@@ -90,7 +90,7 @@ account_options	welcome		환영합니다
 account_register	Preferences	설정하기
 account_register	communitymail	커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>
 account_register	congrat	<p>축하합니다. $1에 등록하셨습니다. <p> 귀하는 이제 곧 메일 주소를 확인하기 위한 확인 메일을 받으시게 됩니다. 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다.
-account_register	emailaddr	이메일 주소:<span><font color="red">*</font></span><br /><em>이 이메일 주소는 계정이 활성화되기 전에 확인이 필요합니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname\@$1&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</em>
+account_register	emailaddr	이메일 주소:<span class="highlight2">*</span><br /><em>이 이메일 주소는 계정이 활성화되기 전에 확인이 필요합니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname\@$1&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</em>
 account_register	err_badinsert	입력 실패
 account_register	err_email	유효하지 않은 이메일 주소
 account_register	err_jabber	유효하지 않은  Jabber 주소
@@ -101,12 +101,12 @@ account_register	err_passwd3	잘못된 비밀번호입니다.
 account_register	err_unixname	잘못된 Unix Name. 
 account_register	err_userexist	사용자 ID가 이미 존재합니다.
 account_register	err_username	사용자 ID를 입력하셔야 합니다.
-account_register	iewarn	<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>
+account_register	iewarn	<H2><span class="highlight2">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</span></H2>
 account_register	jabberaddr	Jabber 주소:
 account_register	jabberonly	자동생성되는 메시지는 Jabber 주소로만 보내기
 account_register	language	언어 선택:
 account_register	loginname	사용자 ID(대문자는 쓰지 마십시오.):
-account_register	macwarn	<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>
+account_register	macwarn	<H2><span class="highlight2">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</span></H2>
 account_register	mandatory	$1가 있는 부분은 필수 항목입니다.
 account_register	message_body	$4 사이트에 등록해 주셔서 감사합니다.\n$1이라는 계정이 개설되어 있으며 \n등록을 마치기 위해서는 다음 링크를 따라가셔야 합니다.\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(URL이 보이지 않는다면 사용하고 계신 메일 클라이언트의 문제입니다.\n아래에 보이는 URL을 따라가십시오. 꼭 한줄에 모두 입력하셔야 합니다.\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\n감사합니다.\n\n-- $4 운영자\n
 account_register	message_header	$1 사용자 등록
@@ -256,7 +256,7 @@ admin_massmail	active_deliveries	Active Deliveries
 admin_massmail	all_project_admins	All Project Admins
 admin_massmail	all_project_developers	All Project Developers
 admin_massmail	all_users	All Users
-admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	be_verry_carefull	Be <span class="highlight">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 admin_massmail	date	Date
 admin_massmail	developers_test	Developers (test)
 admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
@@ -743,7 +743,7 @@ help_trove_cat	description	설명
 help_trove_cat	full_category_name	Full Category Name
 help_trove_cat	no_such_category	No such trove category
 help_trove_cat	short_name	Short Name
-home	about_blurb	<P>$1 는 <B><A href="http://www.opensource.org/">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다.</P><P><B>사이트에 대한 피드백 및 참여 방법</B></P><P>$1 를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.</P><P><B>여러분만의 프로젝트를 구성하십시오.</B></P><P><A href="/account/register.php">사용자 등록</A>을 하시� , <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.</P>
+home	about_blurb	<P>$1 는 <B><A href="http://www.opensource.org/">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다.</P><P><B>사이트에 대한 피드백 및 참여 방법</B></P><P>$1 를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.</P><P><B>여러분만의 프로젝트를 구성하십시오.</B></P><P><A href="/account/register.php">사용자 등록</A>을 하시� , <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.</P>
 home	gforge_statistics	$1 통계
 home	highest_ranked_users	우수 사용자
 home	hosted_projects	운영중인 프로젝트
@@ -982,7 +982,7 @@ pm	hours	예상 시간
 pm	intro	하위 프로젝트를 골라 해당하는 임무를 관리할 수 있습니다.
 pm	no_tasks_found	해당하는 임무를 찾을 수 없음
 pm	no_tasks_found_text	Add tasks using the link above
-pm	noprj	<H1>하위 프로젝트가 없습니다.</H1><P><B>설정되어 있는 하위 프로젝트가 없거나, 열람할 수 있는 권한이 없습니다.<P><FONT COLOR=RED>프로젝트 관리자가 관리 페이지를 통해 하위 프로젝트를 설정해 주어야 사용할 수 있습니다.</FONT></B>
+pm	noprj	<H1>하위 프로젝트가 없습니다.</H1><P><B>설정되어 있는 하위 프로젝트가 없거나, 열람할 수 있는 권한이 없습니다.<P><span class="highlight2">프로젝트 관리자가 관리 페이지를 통해 하위 프로젝트를 설정해 주어야 사용할 수 있습니다.</span></B>
 pm	percent_complete	달성도
 pm	priority	우선 순위
 pm	start_date	시작일
@@ -1009,7 +1009,7 @@ pm_admin_projects	admin_title	Project/Task Manager Administration
 pm_admin_projects	category_inserted	Category Inserted
 pm_admin_projects	category_name	분류 이름
 pm_admin_projects	category_note	분류를 한 번 만들면 지울 수 없습니다
-pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
+pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.
 pm_admin_projects	category_updated	Category Updated
 pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
 pm_admin_projects	change_project_title	Change Project/Task Manager Status
@@ -1200,7 +1200,7 @@ project_admin_editpackages	section	프로젝트 $1 - 관리
 project_admin_editpackages	title	패키지 편집
 project_admin_editpackages	updated_package	갱신된 패키지
 project_admin_editrelease	add_file	이 파일을 추가하기
-project_admin_editrelease	add_files_note	알림: 어떤 브라우저에서는 파일을 다이얼로그 창에서 선택한 후 "OK"버튼을 눌러 주어야만 하는 경우가 있습니다. 더블클릭만 해서는 등록이 되지 않을 수도 있습니다.</strong></span>
+project_admin_editrelease	add_files_note	알림: 어떤 브라우저에서는 파일을 다이얼로그 창에서 선택한 후 "OK"버튼을 눌러 주어야만 하는 경우가 있습니다. 더블클릭만 해서는 등록이 되지 않을 수도 있습니다.</span>
 project_admin_editrelease	changelog_too_small	변동사항 정보가 너무 짧습니다.
 project_admin_editrelease	data_saved	저장되었습니다.
 project_admin_editrelease	delete_file	파일 삭제하기
@@ -1335,7 +1335,7 @@ project_showfiles	new_release	새로운 릴리즈를 생성하시려면 이곳�
 project_showfiles	no_releases	릴리즈가 없습니다.
 project_showfiles	package	패키지
 project_showfiles	project_totals	전체
-project_showfiles	release_highlighted	선택하신 릴리즈가 <span style="background-color:pink">하이라이트</span>되었습니다.
+project_showfiles	release_highlighted	선택하신 릴리즈가 <span class="release-highlight">하이라이트</span>되었습니다.
 project_showfiles	release_notes	릴리즈 &amp; 노트
 project_showfiles	size	크기
 project_showfiles	title	파일 보기
@@ -1389,7 +1389,7 @@ searchbox	search	찾기
 searchbox	skill	스킬
 searchbox	softwaregroup	소프트웨어/프로젝트
 searchbox	task	임무
-sendmessage	about_blurb	스팸을 줄이기 위해 아래 양식을 사용합니다.<p>아래 양식을 모두 제대로 채워 주십시오. 만약 그렇지 않다면 수신인이 제대로 응답하지 못하게 될 수도 있습니다.<p><font color="red"><b>만약 어떤 도움을 요청하는 경우라면:</b> 사이트 관련 문서를 읽어 보셨습니까? 여러분의 <b>사용자 ID</b>와 <b>이름</b>을 제대로 명시하셨는지요? 어느 특정 프로젝트에 관한 것이라면 <b>프로젝트 ID</b> (<b>그룹 ID</b>) 및 <b>프로젝트 이름</b>을 명시해 주시기 바랍니다.</font>
+sendmessage	about_blurb	스팸을 줄이기 위해 아래 양식을 사용합니다.<p>아래 양식을 모두 제대로 채워 주십시오. 만약 그렇지 않다면 수신인이 제대로 응답하지 못하게 될 수도 있습니다.<p><span class="highlight">만약 어떤 도움을 요청하는 경우라면:</b> 사이트 관련 문서를 읽어 보셨습니까? 여러분의 <b>사용자 ID</b>와 <b>이름</b>을 제대로 명시하셨는지요? 어느 특정 프로젝트에 관한 것이라면 <b>프로젝트 ID</b> (<b>그룹 ID</b>) 및 <b>프로젝트 이름</b>을 명시해 주시기 바랍니다.</span>
 sendmessage	contact	연락처
 sendmessage	email	보내는 사람 이메일 주소
 sendmessage	email_only_to	You can only send to addresses 
@@ -1488,7 +1488,7 @@ snippet_package	suggest_a_language	Suggest a Language
 snippet_package	title	코드 패키지 만들기
 snippet_package	title_new_snippet_package	Submit A New Snippet Package
 snippet_package	version	Version
-snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="highlight">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
 snippet_submit	category	Category
 snippet_submit	description	Description
 snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
@@ -1505,7 +1505,7 @@ snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	title	코드 제출
 snippet_submit	type	Script Type
 snippet_submit	version	Version
-snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="highlight">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
 snippet_utils	auctions	Auctions
 snippet_utils	author	Author
 snippet_utils	bbs_systems	BBS Systems
@@ -1778,7 +1778,7 @@ tracker	id	ID
 tracker	insert_email	<strong>로그인하실 수 없다면</strong>, 이메일 주소를 입력하셔야 합니다.
 tracker	item_created	항목을 생성하였습니다.
 tracker	no_trackers	접근할 수 있는 문제점 추적 항목이 없습니다.
-tracker	no_trackers_text	문제점 추적 기능을 설정하지 않았거나, 볼 수 있는 권한이 없습니다.<p><FONT COLOR=RED>프로젝트 관리자는 $1 관리자 페이지 $2를 사용하여 데이터형을 설정할 수 있습니다.</FONT></strong>
+tracker	no_trackers_text	문제점 추적 기능을 설정하지 않았거나, 볼 수 있는 권한이 없습니다.<p><span class="highlight">프로젝트 관리자는 $1 관리자 페이지 $2를 사용하여 데이터형을 설정할 수 있습니다.</span>
 tracker	open_date	제출한 날
 tracker	please_login	Please $1 login $2
 tracker	priority	중요도
@@ -1872,7 +1872,7 @@ tracker_artifacttype	none	없음
 tracker_artifacttype	reporting	사용현황
 tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
 tracker_artifacttype	submit_new	새 항목 제출
-tracker_browse	admin_mass_update	<strong>관리:</strong></FONT> 만약 위에서 선택한 모든 항목들을 변경하고 싶다면, 이 콘트롤을 사용하여 값을 바꾼 다음 "대량 갱신"을 누르십시오.
+tracker_browse	admin_mass_update	<strong>관리:</strong> 만약 위에서 선택한 모든 항목들을 변경하고 싶다면, 이 콘트롤을 사용하여 값을 바꾼 다음 "대량 갱신"을 누르십시오.
 tracker_browse	ascending	오름차순
 tracker_browse	canned_response	미리 준비한 의견
 tracker_browse	check_all	전부 &nbsp;선택

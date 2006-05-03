@@ -37,11 +37,11 @@ account_first	about_blurb	<p>Você agora é um usuário registrado no $1, o ambi
 account_first	title	Bem vindo ao $1
 account_login	cookiewarn	Os Cookies precisam estar habilitados apartir desse ponto.
 account_login	deleted_account	<p>Sua conta $1 foi removida pela administração do $1. Isso pode ocorrer por duas razões, sendo 1) você solicitou que a conta fosse removida; ou 2) alguma ação realizada usando sua conta foi vista como questionável (ex.: você infringiu os termos de serviço para uso de sua conta) e sua conta foi revogada por razões administrativas. Você deve ter perguntas ou colocações sobre o ocorrido, por favor register uma <a href="/support/?group_id=1">requisição de suporte</a>.</p><p>Obrigado, <br><br>Administração do $1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">Usuários do Internet Explorer precisam atualizá-lo para o IE 5.01 ou superior, preferívelmente com SSL de 128-bit ou usar o Netscape 4.7 ou superior</FONT></H2>
+account_login	iewarn	<H2><span class="highlight2">Usuários do Internet Explorer precisam atualizá-lo para o IE 5.01 ou superior, preferívelmente com SSL de 128-bit ou usar o Netscape 4.7 ou superior</span></H2>
 account_login	login	Login com SSL
 account_login	loginname	Nome de Login:
 account_login	lostpw	[Perdeu sua senha?]
-account_login	macwarn	<H2><FONT COLOR="RED">O Internet Explorer para o Macintosh não é suportado atualmente. Use o Netscape 4.7 ou superior</FONT></H2>
+account_login	macwarn	<H2><span class="highlight2">O Internet Explorer para o Macintosh não é suportado atualmente. Use o Netscape 4.7 ou superior</span></H2>
 account_login	newaccount	[Nova Conta]
 account_login	passwd	Senha:
 account_login	pending_account	<P>Sua conta está aguardando a confirmação do seu e-mail.		Ao visitar o link enviado para você neste e-mail você irá ativar sua conta.		<P>Se você precisar que o e-mail seja re-enviado, por favor clique abaixo e um e-mail de confirmação será enviado para o endereço que você forneceu no registro.		<P><A href="pending-resend.php?form_user=$1">[Re-enviar E-mail de Confirmação]</A>		<br><hr>		<p>
@@ -76,7 +76,7 @@ account_options	welcome		Bem vindo
 account_register	Preferences	Preferências
 account_register	communitymail	Receber postagens adicionais da comunidade. <i>(Baixo tráfego.)</i>
 account_register	congrat	<p>Congratulações. Você está registrado no $1.  <p> Será enviado a você um e-mail de confirmação para verificar seu endereço de e-mail. Ao visitar o link enviado para você nesse e-mail você irá ativar a sua conta.
-account_register	emailaddr	Endereço de E-mail:<span><font color="red">*</font></span><br /><em>Esse endereço de e-mail será verificado antes da ativação da conta. Ele não será mostrado no site. Você irá receber uma conta de redirecionamento de e-mail em &lt;loginname@$1&gt; que irá redirecionar para esse endereço.</em>
+account_register	emailaddr	Endereço de E-mail:<span class="highlight2">*</span><br /><em>Esse endereço de e-mail será verificado antes da ativação da conta. Ele não será mostrado no site. Você irá receber uma conta de redirecionamento de e-mail em &lt;loginname@$1&gt; que irá redirecionar para esse endereço.</em>
 account_register	err_badinsert	Inserção Falhou 
 account_register	err_email	Endereço de E-mail Inválido
 account_register	err_jabber	Endereço do Jabber Inválido
@@ -87,12 +87,12 @@ account_register	err_passwd3	Senha Inválida:
 account_register	err_unixname	Nome Unix Inválido. 
 account_register	err_userexist	Aquele nome de usuário já existe.
 account_register	err_username	Você precisa fornecer um nome de usuário
-account_register	iewarn	<H2><FONT COLOR="RED">Usuários do Internet Explorer precisam atualizá-lo para o IE 5.01 ou superior, preferívelmente com SSL de 128-bit ou usar Netscape 4.7 ou superior</FONT></H2>
+account_register	iewarn	<H2><span class="highlight2">Usuários do Internet Explorer precisam atualizá-lo para o IE 5.01 ou superior, preferívelmente com SSL de 128-bit ou usar Netscape 4.7 ou superior</span></H2>
 account_register	jabberaddr	Endereço do Jabber:
 account_register	jabberonly	Enviar notícias geradas automáticamente apenas para o meu endereço do Jabber
 account_register	language	Escolha da Língua:
 account_register	loginname	Nome de Login (não use letras maiúsculas):
-account_register	macwarn	<H2><FONT COLOR="RED">O Internet Explorer do Macintosh não é atualmente suportado. Use o Netscape 4.7 ou superior</FONT></H2>
+account_register	macwarn	<H2><span class="highlight2">O Internet Explorer do Macintosh não é atualmente suportado. Use o Netscape 4.7 ou superior</span></H2>
 account_register	mandatory	Campos marcados com $1 são obrigatórios.
 account_register	message_body	Obrigado por registrar-se no website $4. Você terá uma\nconta com o nome de usuário $1 criada para você. De forma\na completar seu registro, visite a seguinte url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Se você não vê nenhuma URL abaixo, é possível que seja um bug do seu cliente de e-mail.\nUse uma abaixo, mas tenha certeza de que ela foi informada em uma única linha.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nAproveite o site.\n\n-- a administração do $4\n
 account_register	message_header	Registro de Conta do $1
@@ -242,7 +242,7 @@ admin_massmail	active_deliveries	Entregas Ativas
 admin_massmail	all_project_admins	Todos os Administradores de Projeto
 admin_massmail	all_project_developers	Todos os Desenvolvedores de Projeto
 admin_massmail	all_users	Todos os Usuários
-admin_massmail	be_verry_carefull	Seja <span style="color:red"><strong>MUITO</strong></span> cuidadoso com esse formulário, porque enviando-o você ESTARÁ enviando e-mail para muitos usuários.
+admin_massmail	be_verry_carefull	Seja <span class="highlight">MUITO</span> cuidadoso com esse formulário, porque enviando-o você ESTARÁ enviando e-mail para muitos usuários.
 admin_massmail	date	Data
 admin_massmail	developers_test	Desenvolvedores (teste)
 admin_massmail	error_scheduling_mailing	Erro Agendando Postagem, Não pude agendar postagens, erro do banco:
@@ -957,7 +957,7 @@ pm	hours	Horas Estimadas
 pm	intro	Escolha um Subprojeto e você poderá navegar/editar/adicionar tarefas a ele.
 pm	no_tasks_found	Nenhuma Tarefa Correspondente encontrada
 pm	no_tasks_found_text	Adicionar tarefas usando o link abaixo
-pm	noprj	<H1>Nenhum Subprojeto Encontrado</H1><P><B>Nenhum subprojeto foi configurado, ou você não pode vê-lo.<P><FONT COLOR=RED>O Administrador desse projeto terá que configurar projetos usando a página do administrador</FONT></B>
+pm	noprj	<H1>Nenhum Subprojeto Encontrado</H1><P><B>Nenhum subprojeto foi configurado, ou você não pode vê-lo.<P><span class="highlight2">O Administrador desse projeto terá que configurar projetos usando a página do administrador</span>
 pm	percent_complete	Percentual Completo
 pm	priority	Prioridade
 pm	start_date	Data Inicial
@@ -982,7 +982,7 @@ pm_admin_projects	admin_title	Administração do Gerenciador de Projeto/Tarefa
 pm_admin_projects	category_inserted	Categoria Inserida
 pm_admin_projects	category_name	Nome da Categoria
 pm_admin_projects	category_note	Uma vez adicionada uma categoria, ela não pode ser apagada
-pm_admin_projects	category_note2	Não é recomendado que você modifique o nome da categoria porque outras coisas são dependentes dele. Quando você alterar o nome da categoria, todos os ítens relacionados serão modificados para o novo nome.</font></strong>
+pm_admin_projects	category_note2	Não é recomendado que você modifique o nome da categoria porque outras coisas são dependentes dele. Quando você alterar o nome da categoria, todos os ítens relacionados serão modificados para o novo nome.
 pm_admin_projects	category_updated	Categoria Atualizada
 pm_admin_projects	change_project_intro	Você pode modificar um Projeto existente usando esse formulário. Por favor note que projetos privados continuam podendo ser visualizados por membros do seu projeto, mas não pelo público em geral.
 pm_admin_projects	change_project_title	Mudar Status do Gerenciador de Projeto/Tarefa
@@ -1167,7 +1167,7 @@ project_admin_editpackages	releases	Liberações
 project_admin_editpackages	title	Release Editar/Arquivar Liberações
 project_admin_editpackages	updated_package	Atualizar Pacote
 project_admin_editrelease	add_file	Adicionar Esse Arquivo
-project_admin_editrelease	add_files_note	NOTA: Em alguns browsers você precisa selecionar o arquivo no diálogo de envio de arquivos e clicar em "OK".  Clique duplo não registrará o arquivo.</strong></span>
+project_admin_editrelease	add_files_note	NOTA: Em alguns browsers você precisa selecionar o arquivo no diálogo de envio de arquivos e clicar em "OK".  Clique duplo não registrará o arquivo.</span>
 project_admin_editrelease	changelog_too_small	O Log de Alteração é Muito Pequeno 
 project_admin_editrelease	data_saved	Dados Salvos 
 project_admin_editrelease	delete_file	Deletar Arquivo
@@ -1295,7 +1295,7 @@ project_showfiles	new_release	Para criar uma nova liberação clique aqui.
 project_showfiles	no_releases	Nenhuma liberação
 project_showfiles	package	Pacote
 project_showfiles	project_totals	Totais do projeto
-project_showfiles	release_highlighted	A liberação que você escolheu está <span style="background-color:pink">destacada</span>.
+project_showfiles	release_highlighted	A liberação que você escolheu está <span class="release-highlight">destacada</span>.
 project_showfiles	release_notes	Notas de &amp; Liberação
 project_showfiles	size	Tamanho
 project_showfiles	title	Lista de Arquivos do Projeto
@@ -1349,7 +1349,7 @@ searchbox	search	Procurar
 searchbox	skill	Habilidade
 searchbox	softwaregroup	Software/Grupo
 searchbox	task	Tarefas
-sendmessage	about_blurb	Na tentativa de reduzir o spam, nós estamos usando esse formulário para enviar e-mail.<p />Preencha-o corretamente e por completo ou o destinatário poderá não ser capaz de responder.<p /><font color="red"><b>SE VOCÊ ESTIVER PROCURANDO POR AJUDA:</b> Você leu a documentação do site? Você inlcuiu seu <b>user_id</b> e <b>user_name?</b> Se você está escrevendo sobre um projeto, inclua seu <b>project id</b> (<b>group_id</b>) e <b>Nome do Projeto</b>.</font>
+sendmessage	about_blurb	Na tentativa de reduzir o spam, nós estamos usando esse formulário para enviar e-mail.<p />Preencha-o corretamente e por completo ou o destinatário poderá não ser capaz de responder.<p /><span class="highlight2"><b>SE VOCÊ ESTIVER PROCURANDO POR AJUDA:</b> Você leu a documentação do site? Você inlcuiu seu <b>user_id</b> e <b>user_name?</b> Se você está escrevendo sobre um projeto, inclua seu <b>project id</b> (<b>group_id</b>) e <b>Nome do Projeto</b>.</span>
 sendmessage	contact	Contato
 sendmessage	email	Seu Endereço de E-mail
 sendmessage	email_only_to	Você só pode enviar para endereços 
@@ -1440,7 +1440,7 @@ snippet_package	suggest_a_language	Sugerir uma Linguagem
 snippet_package	title	Enviar Um Novo Pacote de Trechos
 snippet_package	title_new_snippet_package	Enviar Um Novo Pacote de Trechos
 snippet_package	version	Versão
-snippet_package	you_can_group	<p>Você pode agrupar trechos existentes em um pacote usando essa interface. Antes de criar o seu pacote, certifique-se de que todos os seus trechos estão no lugar e que você tenha anotado as ID's dos trechos.</p><p><ol><li>Crie o pacote usando esse formulário.</li><li><strong>Então</strong> use o link "Adicionar Trechos ao Pacote" para adicionar arquivos ao seu pacote.</li></ol></p><p><span style="color:red"><strong>Nota:</strong></span> Você pode enviar uma nova versão de um pacote existente listando a biblioteca e usando o link do pacote existente. Você deve usar essa página apenas se você estiver enviando um pacote inteiramente novo.
+snippet_package	you_can_group	<p>Você pode agrupar trechos existentes em um pacote usando essa interface. Antes de criar o seu pacote, certifique-se de que todos os seus trechos estão no lugar e que você tenha anotado as ID's dos trechos.</p><p><ol><li>Crie o pacote usando esse formulário.</li><li><strong>Então</strong> use o link "Adicionar Trechos ao Pacote" para adicionar arquivos ao seu pacote.</li></ol></p><p><span class="highlight">Nota:</span> Você pode enviar uma nova versão de um pacote existente listando a biblioteca e usando o link do pacote existente. Você deve usar essa página apenas se você estiver enviando um pacote inteiramente novo.
 snippet_submit	category	Categoria
 snippet_submit	description	Descrição
 snippet_submit	error_doing_snippet_insert	ERRO FAZENDO A INSERÇÃO DE TRECHO!
@@ -1455,7 +1455,7 @@ snippet_submit	suggest_a_category	Sugerir uma Categoria
 snippet_submit	suggest_a_language	Sugerir uma Linguagem
 snippet_submit	type	Tipo de Script
 snippet_submit	version	Versão
-snippet_submit	you_can_post	Você pode postar um novo trecho de código e compartilha-lo com outras pessoas ao redor do mundo. Apenas preencha essas informações. <strong>Dê uma boa descrição</strong> e <strong>comente o seu código</strong> assim os outros poderão lê-lo e entendê-lo.</p><p><span style="color:red"><strong>Nota:</strong></span> Você pode enviar uma nova versão de um código já existente listando a biblioteca. Voce deve usar essa página apenas se você estiver enviando um código, script ou função completamente nova.
+snippet_submit	you_can_post	Você pode postar um novo trecho de código e compartilha-lo com outras pessoas ao redor do mundo. Apenas preencha essas informações. <strong>Dê uma boa descrição</strong> e <strong>comente o seu código</strong> assim os outros poderão lê-lo e entendê-lo.</p><p><span class="highlight">Nota:</span> Você pode enviar uma nova versão de um código já existente listando a biblioteca. Voce deve usar essa página apenas se você estiver enviando um código, script ou função completamente nova.
 snippet_utils	auctions	Leilões
 snippet_utils	author	Autor
 snippet_utils	bbs_systems	Sistemas de BBS
@@ -1728,7 +1728,7 @@ tracker	id		ID
 tracker	insert_email	Se você <strong>não consegue</strong> fazer login, então informe o seu endereço de e-mail aqui:
 tracker	item_created	Ítem Criado com Sucesso
 tracker	no_trackers	Nenhum Rastreador Acessível Encontrado
-tracker	no_trackers_text	Nenhum rastreador for configurado, ou você não pode vê-los.<p><FONT COLOR=RED>O Administrador desse projeto terá que configurar os tipos de dados usando a página de administração $1 do $2</FONT></strong>
+tracker	no_trackers_text	Nenhum rastreador for configurado, ou você não pode vê-los.<p><span class="highlight">O Administrador desse projeto terá que configurar os tipos de dados usando a página de administração $1 do $2</span>
 tracker	open_date	Data de Abertura
 tracker	please_login	Por favor $1 faça login no $2
 tracker	priority	Prioridade
@@ -1812,7 +1812,7 @@ tracker_artifacttype	none	Nenhum
 tracker_artifacttype	reporting	Relacionando
 tracker_artifacttype	required_fields	Tipo de Artefato: Nome, Descrição, Periodo Atribuído, e Tempo limite de Status são obrigatórios
 tracker_artifacttype	submit_new	Enviar Novo
-tracker_browse	admin_mass_update	<strong>Administrador:</strong></FONT> Se você deseja aplicar as alterações à todos os ítens selecionados abaixo, use esses controles para alterar suas propriedades e clique uma vez em "Atualização em Massa".
+tracker_browse	admin_mass_update	<strong>Administrador:</strong> Se você deseja aplicar as alterações à todos os ítens selecionados abaixo, use esses controles para alterar suas propriedades e clique uma vez em "Atualização em Massa".
 tracker_browse	ascending	Crescente
 tracker_browse	canned_response	Resposta Pré-definida
 tracker_browse	check_all	Verificar &nbsp;todos

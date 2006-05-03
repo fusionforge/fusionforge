@@ -103,7 +103,7 @@ account_register	Preferences	Préférences
 account_register	ccode	Pays :
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <i>(Faible trafic)</i>
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.</p><p>Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte.</p>
-account_register	emailaddr	Adresse e-mail : <span><font color="red">*</font></span><br /><em>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</em>
+account_register	emailaddr	Adresse e-mail : <span class="highlight">*</span><br /><em>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</em>
 account_register	err_badinsert	L'insertion a échouée.
 account_register	err_email	Adresse e-mail non valide
 account_register	err_firstname	Vous devez saisir votre prénom
@@ -305,7 +305,7 @@ admin_massmail	active_deliveries	Distributions actives
 admin_massmail	all_project_admins	Tous  les administrateurs de projets
 admin_massmail	all_project_developers	Tous les développeurs
 admin_massmail	all_users	Tous les utilisateurs
-admin_massmail	be_verry_carefull	Faites <span style="color:red"><strong>TRES</strong></span> attention avec ce formulaire car sa validation entraîne l'envoi d'un message à BEAUCOUP d'utilisateurs.
+admin_massmail	be_verry_carefull	Faites <span class="highlight">TRES</span> attention avec ce formulaire car sa validation entraîne l'envoi d'un message à BEAUCOUP d'utilisateurs.
 admin_massmail	date	Date
 admin_massmail	developers_test	Développeurs (Test)
 admin_massmail	error_scheduling_mailing	Erreur de programmation de courrier. Impossible de programmer le courrier, erreur de base de données :
@@ -882,7 +882,7 @@ mail_admin_addlist	form_description	Description :
 mail_admin_addlist	form_ispublic	Publique ?
 mail_admin_addlist	form_name	Nom de la liste de diffusion :
 mail_admin_addlist	list_added	Liste ajoutée
-mail_admin_addlist	list_information	<p>Les listes sont nommées de cette manière :<br /><strong>nomprojet-nomliste@$1</strong></p><p>Il faudra <strong><span style="color:red">6 à 24 heures</span></strong> pour que votre liste soit créée.</p>
+mail_admin_addlist	list_information	<p>Les listes sont nommées de cette manière :<br /><strong>nomprojet-nomliste@$1</strong></p><p>Il faudra <span class="highlight">6 à 24 heures</span> pour que votre liste soit créée.</p>
 mail_admin_addlist	pagetitle	Ajouter une liste de diffusion
 mail_admin_deletelist	confirmdelete	Confirmer la suppression
 mail_admin_deletelist	permanentlydelete	Supprimer définitivement
@@ -1140,7 +1140,7 @@ pm	hours	Durée horaire estimée
 pm	intro	Choisissez un sous projet pour pouvoir naviguer/éditer/modifier les tâches.
 pm	no_tasks_found	Aucune tâche correspondante trouvée
 pm	no_tasks_found_text	Vous pouvez ajouter des tâches en utilisant le lien ci-dessus.
-pm	noprj	<h2>Aucun sous-projet trouvé</h2><p><b>Aucun sous-projet n'a été défini, ou vous ne pouvez les voir.</b></p><p><span style="color:red"><b>L'administrateur de ce projet peut définir les projets en utilisant la page d'administration.</b></span></p>
+pm	noprj	<h2>Aucun sous-projet trouvé</h2><p><b>Aucun sous-projet n'a été défini, ou vous ne pouvez les voir.</b></p><p><span class="highlight">L'administrateur de ce projet peut définir les projets en utilisant la page d'administration.</span></p>
 pm	percent_complete	Taux d'avancement
 pm	priority	Priorité
 pm	start_date	Date de début
@@ -1172,7 +1172,7 @@ pm_admin_projects	admin_title	Administration de Project/Gestionnaire de tâches
 pm_admin_projects	category_inserted	Catégorie ajoutée
 pm_admin_projects	category_name	Nom de catégorie
 pm_admin_projects	category_note	Dès lors que vous aurez ajouté une catégorie, vous ne pourrez la supprimer.
-pm_admin_projects	category_note2	Il n'est pas recommandé que vous changiez le nom de la catégorie parce que d'autres choses en dépendent. Quand vous changez le nom de la catégorie, tous les items prendront le nouveau nom.</font></strong>
+pm_admin_projects	category_note2	Il n'est pas recommandé que vous changiez le nom de la catégorie parce que d'autres choses en dépendent. Quand vous changez le nom de la catégorie, tous les items prendront le nouveau nom.
 pm_admin_projects	category_updated	Catégorie mise à jour
 pm_admin_projects	change_project_intro	Vous pouvez modifier un projet existant en utilisant ce formulaire. Notez que les projets privés ne peuvent être vus que par les membres, et pas par les visiteurs.
 pm_admin_projects	change_project_title	Changer le statut du gestionnaire de projet/tâche
@@ -1194,7 +1194,7 @@ pm_admin_projects	projects_intro	Ajouter un nouveau projet au Projet/gestionnair
 pm_admin_projects	really_sure	Je confirme vraiment
 pm_admin_projects	send_updates	Envoyer toutes les mises à jour à
 pm_admin_projects	sure	Je confirme
-pm_browsetask	admin_mass_update	<strong>Administration&nbsp;:</strong></font> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
+pm_browsetask	admin_mass_update	<strong>Administration&nbsp;:</strong> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
 pm_browsetask	browse	Parcourir
 pm_browsetask	check_all	Cocher tout
 pm_browsetask	clear_all	Décocher tout
@@ -1548,7 +1548,7 @@ project_showfiles	new_release	Pour créer une nouvelle version, cliquez ici.</s>
 project_showfiles	no_releases	Pas de version
 project_showfiles	package	Paquet
 project_showfiles	project_totals	Totaux du projet
-project_showfiles	release_highlighted	La version que vous avez choisie est <span style="background-color:pink">surlignée</span>.
+project_showfiles	release_highlighted	La version que vous avez choisie est <span class="release-highlight">surlignée</span>.
 project_showfiles	release_notes	Version <br />&amp; Commentaires</s>
 project_showfiles	size	Taille
 project_showfiles	title	Liste de fichiers du projet
@@ -1914,7 +1914,7 @@ snippet_package	suggest_a_language	Suggérer un nouveau langage
 snippet_package	title	Création d'un paquet de bouts de code
 snippet_package	title_new_snippet_package	Soumettre un nouveau paquet d'échantillon
 snippet_package	version	Version
-snippet_package	you_can_group	<p>Vous pouvez grouper plusieurs échantillons existants dans un paquet en utilisant cette interface. Avant de créer votre paquet, soyez sûrs que tous vos échantillons sont en place et que vous avez fait une notice sur cette version d'échantillon.</p><p><ol><li>Créer le paquet en utilisant ce formulaire.</li><li><strong>Puis,</strong> utilisez le lien "Ajoutez des échantillons au paquet" pour ajouter les fichiers à votre paquet.</li></ol></p><p><span style="color:red"><strong>Note :</strong></span> Vous pouvez soumettre une nouvelle version d'un paquet existant en parcourant la bibliothèque et en utilisant le lien sur le paquet existant. Vous ne devriez utiliser cette page que si vous soumettez un paquet entièrement original.
+snippet_package	you_can_group	<p>Vous pouvez grouper plusieurs échantillons existants dans un paquet en utilisant cette interface. Avant de créer votre paquet, soyez sûrs que tous vos échantillons sont en place et que vous avez fait une notice sur cette version d'échantillon.</p><p><ol><li>Créer le paquet en utilisant ce formulaire.</li><li><strong>Puis,</strong> utilisez le lien "Ajoutez des échantillons au paquet" pour ajouter les fichiers à votre paquet.</li></ol></p><p><span class="highlight">Note :</span> Vous pouvez soumettre une nouvelle version d'un paquet existant en parcourant la bibliothèque et en utilisant le lien sur le paquet existant. Vous ne devriez utiliser cette page que si vous soumettez un paquet entièrement original.
 snippet_submit	category	Catégorie&nbsp;
 snippet_submit	description	Description&nbsp;
 snippet_submit	error_doing_snippet_insert	ERREUR - en insertion d'échantillon.
@@ -1929,7 +1929,7 @@ snippet_submit	suggest_a_category	Suggérer une nouvelle catégorie
 snippet_submit	suggest_a_language	Suggérer un nouveau langage
 snippet_submit	type	Type de script&nbsp;
 snippet_submit	version	Version&nbsp;
-snippet_submit	you_can_post	Vous pouvez envoyer un nouvel échantillon de code et le partager avec le reste du monde. Renseignez juste ce formulaire. <strong>Donnez une bonne description</strong> et <strong>commentez votre code</strong> ainsi, les autres pourront le lire et le comprendre.</p><p><span style="color:red"><strong>Note :</strong></span> Vous pouvez publier une nouvelle version d'échantillon existant en parcourant la bibliothèque. Vous ne devriez utiliser cette page que si vous soumettez  un script ou une fonction entièrement original.
+snippet_submit	you_can_post	Vous pouvez envoyer un nouvel échantillon de code et le partager avec le reste du monde. Renseignez juste ce formulaire. <strong>Donnez une bonne description</strong> et <strong>commentez votre code</strong> ainsi, les autres pourront le lire et le comprendre.</p><p><span class="highlight">Note :</span> Vous pouvez publier une nouvelle version d'échantillon existant en parcourant la bibliothèque. Vous ne devriez utiliser cette page que si vous soumettez  un script ou une fonction entièrement original.
 snippet_utils	auctions	Enchères
 snippet_utils	author	Auteur
 snippet_utils	bbs_systems	Systèmes BBS
@@ -2230,7 +2230,7 @@ tracker	id	Numéro
 tracker	insert_email	Si vous ne parvenez pas à vous connecter, saisissez votre e-mail&nbsp;
 tracker	item_created	Élément créé avec succès
 tracker	no_trackers	Aucun outil de suivi trouvé
-tracker	no_trackers_text	Aucun outil de suivi n'a été défini ou vous ne pouvez pas y accéder.</strong></p><p style="color:red">L'administrateur de ce projet doit préciser les types de données en utilisant la $1 page d'administration $2 .
+tracker	no_trackers_text	Aucun outil de suivi n'a été défini ou vous ne pouvez pas y accéder.</strong></p><span class="highlight">L'administrateur de ce projet doit préciser les types de données en utilisant la $1 page d'administration $2 .</span>
 tracker	open_date	Date d'ouverture
 tracker	please_login	$1 Identifiez-vous $2
 tracker	priority	Priorité
@@ -2389,7 +2389,7 @@ tracker_artifacttype	none	Aucun(e)
 tracker_artifacttype	reporting	Rapport
 tracker_artifacttype	required_fields	Type de trace : nom, description, délai avant retard, persistance.
 tracker_artifacttype	submit_new	Nouveau
-tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong></font> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
+tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
 tracker_browse	ascending	Croissant
 tracker_browse	canned_response	Réponses types
 tracker_browse	check_all	Cocher tous

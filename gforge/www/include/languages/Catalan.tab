@@ -86,7 +86,7 @@ account_options	welcome		Benvinguts
 account_register	Preferences	Preferències
 account_register	communitymail	Rebre enviaments addicionals de la comunitat. <i>(tràfic baix.)</i>
 account_register	congrat	<p>Felicitats. Us heu registrat a $1.  <p> Ara se us està enviant un correu de confirmació per a verificar la vostra adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà el vostre compte.
-account_register	emailaddr	Adreça de correu:<span><font color="red">*</font></span> <BR><I>Aquesta adreça de correu es verificarà abans d'activar el compte. Rebreu un compte de correu a &lt;loginname@$1&gt; que es reenviarà a aquesta adreça.</I>
+account_register	emailaddr	Adreça de correu:<span class="highlight2">*</span> <BR><I>Aquesta adreça de correu es verificarà abans d'activar el compte. Rebreu un compte de correu a &lt;loginname@$1&gt; que es reenviarà a aquesta adreça.</I>
 account_register	err_badinsert	Ha fallat la inserció 
 account_register	theme	Tema
 account_register	err_email	Adreça de correu no vàlida
@@ -288,7 +288,7 @@ admin_massmail	active_deliveries	Enviaments actius
 admin_massmail	all_project_admins	Tots els administradors de projecte
 admin_massmail	all_project_developers	Tots els desenvolupadors de projecte
 admin_massmail	all_users	Tots els usuaris
-admin_massmail	be_verry_carefull	Tingueu <span style="color:red"><strong>MOLT</strong></span> de compte amb aquest formulari, perquè enviant-lo es PROVOCARÀ un enviament de correu a molts usuaris.
+admin_massmail	be_verry_carefull	Tingueu <span class="highlight">MOLT</span> de compte amb aquest formulari, perquè enviant-lo es PROVOCARÀ un enviament de correu a molts usuaris.
 admin_massmail	date	Data
 admin_massmail	developers_test	Desenvolupadors (prova)
 admin_massmail	error_scheduling_mailing	Error en preparar l'enviament de correu (mailing), error de la base de dades:
@@ -1096,7 +1096,7 @@ pm	hours	Hores estimades
 pm	intro	Escolliu un subprojecte i podreu navegar-hi/editar-hi/afegir-hi tasques.
 pm	no_tasks_found	No s'han trobat tasques coincidents
 pm	no_tasks_found_text	Afegiu tasques usant l'enllaç de sobre
-pm	noprj	<H1>No s'han trobat subprojectes</H1><P><B>No s'han definit subprojectes, o bé no els podeu veure.<P><FONT COLOR=RED>L'administrador d'aquest projecte haurà de definir projectes usant la pàgina d'administració</FONT></B>
+pm	noprj	<H1>No s'han trobat subprojectes</H1><P><B>No s'han definit subprojectes, o bé no els podeu veure.<P><span class="highlight">L'administrador d'aquest projecte haurà de definir projectes usant la pàgina d'administració</span>
 pm	percent_complete	Tantpercent complet
 pm	priority	Prioritat
 pm	start_date	Data d'inici
@@ -1128,7 +1128,7 @@ pm_admin_projects	admin_title	Administració del gestor de projectes/Tasques
 pm_admin_projects	category_inserted	Categoria inserida
 pm_admin_projects	category_name	Nom de categoria
 pm_admin_projects	category_note	Un cop heu afegit una categoria, no es pot suprimir
-pm_admin_projects	category_note2	No és recomanable que canvieu el nom de categoria perquè en depenen altres coses. Quan canvieu el nom de la categoria, tots els elements relacionats es canviaran al nou nom.</font></strong>
+pm_admin_projects	category_note2	No és recomanable que canvieu el nom de categoria perquè en depenen altres coses. Quan canvieu el nom de la categoria, tots els elements relacionats es canviaran al nou nom.
 pm_admin_projects	category_updated	Categoria actualitzada
 pm_admin_projects	change_project_intro	Podeu modificar un projecte existent usant aquest formulari. Teniu en compte que els projectes privats encara poden ser vistos per membres del vostre projecte, però no pel públic en general.
 pm_admin_projects	change_project_title	Canvia l'estat del gestor de projectes/tasques
@@ -1340,7 +1340,7 @@ project_admin_editpackages	releases	Publicacions
 project_admin_editpackages	title	Edita publicacions de fitxers
 project_admin_editpackages	updated_package	Paquet actualitzat
 project_admin_editrelease	add_file	Afegeix aquest fitxer
-project_admin_editrelease	add_files_note	NOTA: En alguns navegadors heu de seleccionar el fitxer al diàleg de pujada de fitxers i fer clic a "D'acord".  Fent el doble clic no es registra el fitxer.</strong></span>
+project_admin_editrelease	add_files_note	NOTA: En alguns navegadors heu de seleccionar el fitxer al diàleg de pujada de fitxers i fer clic a "D'acord".  Fent el doble clic no es registra el fitxer.</span>
 project_admin_editrelease	changelog_too_small	El registre de canvis és massa petit 
 project_admin_editrelease	data_saved	Dades desades 
 project_admin_editrelease	delete_file	Suprimeix el fitxer
@@ -1742,7 +1742,7 @@ searchbox	softwaregroup	Programari/Grup
 searchbox	task	Tasques
 searchbox	tasks	Tasques d'aquest projecte
 searchbox	trackers	Controls d'aquest projecte
-sendmessage	about_blurb	En un intent de reduir el correu brossa, estem usant aquesta forma per enviar correu.<p />Ompliu-lo de forma completa i acurada o el destinatari no podrà respondre.<p /><font color="red"><b>SI ESTEU ESCRIVINT PER DEMANAR AJUDA:</b> Heu llegit la documentació del lloc? Heu inclòs el vostre <b>id_usuari</b> i <b>nom_usuari?</b> Si esteu escrivint sobre un projecte, incloeu el vostre <b>id_projecte</b> (<b>id_grup</b>) i <b>Nom de projecte</b>.</font>
+sendmessage	about_blurb	En un intent de reduir el correu brossa, estem usant aquesta forma per enviar correu.<p />Ompliu-lo de forma completa i acurada o el destinatari no podrà respondre.<p /><span class="highlight2"><b>SI ESTEU ESCRIVINT PER DEMANAR AJUDA:</b> Heu llegit la documentació del lloc? Heu inclòs el vostre <b>id_usuari</b> i <b>nom_usuari?</b> Si esteu escrivint sobre un projecte, incloeu el vostre <b>id_projecte</b> (<b>id_grup</b>) i <b>Nom de projecte</b>.</span>
 sendmessage	contact	Contacte 
 sendmessage	email	La vostra adreça de correu
 sendmessage	email_only_to	Només podeu enviar a adreces 
@@ -1833,7 +1833,7 @@ snippet_package	suggest_a_language	Suggeriu un idioma
 snippet_package	title	Envia un nou paquet de fragments de codi
 snippet_package	title_new_snippet_package	Envia un nou paquet de fragments de codi
 snippet_package	version	Versió
-snippet_package	you_can_group	<p>Podeu ajuntar fragments de codi existents en un paquet usant aquesta interfície. Abans de crear el vostre paquet, assegureu-vos que els vostres fragments de codi són a lloc i que heu fet una nota dels ID's dels fragments.</p><p><ol><li>Creeu el paquet usant aquest formulari.</li><li><strong>Després</strong> useu l'enllaç "Afegeix fragments al paquet" per afegir fitxers al vostre paquet.</li></ol></p><p><span style="color:red"><strong>Nota:</strong></span> Podeu enviar una nova versió d'un paquet existent navegant per la biblioteca i usant l'enllaç al paquet existent. Només haurieu d'usar aquesta pàgina si esteu enviant un paquet completament nou.
+snippet_package	you_can_group	<p>Podeu ajuntar fragments de codi existents en un paquet usant aquesta interfície. Abans de crear el vostre paquet, assegureu-vos que els vostres fragments de codi són a lloc i que heu fet una nota dels ID's dels fragments.</p><p><ol><li>Creeu el paquet usant aquest formulari.</li><li><strong>Després</strong> useu l'enllaç "Afegeix fragments al paquet" per afegir fitxers al vostre paquet.</li></ol></p><p><span class="highlight">Nota:</span> Podeu enviar una nova versió d'un paquet existent navegant per la biblioteca i usant l'enllaç al paquet existent. Només haurieu d'usar aquesta pàgina si esteu enviant un paquet completament nou.
 snippet_submit	category	Categoria
 snippet_submit	description	Descripció
 snippet_submit	error_doing_snippet_insert	ERROR FENT LA INSERCIÓ D'UN FRAGMENT DE CODI!
@@ -1848,7 +1848,7 @@ snippet_submit	suggest_a_category	Suggeriu una categoria
 snippet_submit	suggest_a_language	Suggeriu un idioma
 snippet_submit	type	Tipus d'script
 snippet_submit	version	Versió
-snippet_submit	you_can_post	Podeu enviar un nou fragment de codi i compartir-lo amb altres persones de tot el món. Només ompliu aquesta informació. <strong>Doneu una bona descripció</strong> i <strong>comenteu el vostre codi</strong> així els altres el poden llegir i entendre.</p><p><span style="color:red"><strong>Nota:</strong></span> Podeu enviar una nova versió d'un fragment existent navegant per la biblioteca. Haurieu d'usar aquesta pàgina només si esteu enviant un script o una funció completament nova.
+snippet_submit	you_can_post	Podeu enviar un nou fragment de codi i compartir-lo amb altres persones de tot el món. Només ompliu aquesta informació. <strong>Doneu una bona descripció</strong> i <strong>comenteu el vostre codi</strong> així els altres el poden llegir i entendre.</p><p><span class="highlight">Nota:</span> Podeu enviar una nova versió d'un fragment existent navegant per la biblioteca. Haurieu d'usar aquesta pàgina només si esteu enviant un script o una funció completament nova.
 snippet_utils	auctions	Subhasta
 snippet_utils	author	Autor
 snippet_utils	bbs_systems	Sistemes BBS
@@ -2148,7 +2148,7 @@ tracker	id	ID
 tracker	insert_email	Si <strong>no podeu</strong> iniciar una sessió, entreu la vostra adreça de correu aquí:
 tracker	item_created	Element creat amb èxit
 tracker	no_trackers	No s'han trobat rastrejadors accessibles
-tracker	no_trackers_text	No s'han creat ratrejadors o no els podeu veure.<p><FONT COLOR=RED>L'administrador d'aquest projecte haurà de crear tipus de dades usant la pàgina d'administració $2 de $1</FONT></strong>
+tracker	no_trackers_text	No s'han creat ratrejadors o no els podeu veure.<p><span class="highlight">L'administrador d'aquest projecte haurà de crear tipus de dades usant la pàgina d'administració $2 de $1</span>
 tracker	open_date	Data oberta
 tracker	please_login	$1 inici de sessió $2
 tracker	priority	Prioritat
@@ -2277,7 +2277,7 @@ tracker_artifacttype	none	Cap
 tracker_artifacttype	reporting	Informes
 tracker_artifacttype	required_fields	ArtifactType: Es requereixen nom, descripció, període previst i estat de venciment
 tracker_artifacttype	submit_new	Tramet nou
-tracker_browse	admin_mass_update	<strong>Administrador:</strong></FONT> Si desitgeu aplicar canvia a tots els elements seleccionats a dalt, useu aquests controls per a canviar les seves propietats i feu clic un cop a "Actualització en massa".
+tracker_browse	admin_mass_update	<strong>Administrador:</strong> Si desitgeu aplicar canvia a tots els elements seleccionats a dalt, useu aquests controls per a canviar les seves propietats i feu clic un cop a "Actualització en massa".
 tracker_browse	ascending	Ascendent
 tracker_browse	canned_response	Resposta 'enllaunada'
 tracker_browse	check_all	Marca-ho &nbsp;tot

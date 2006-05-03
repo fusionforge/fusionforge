@@ -44,7 +44,7 @@ account_change_pw	update	更新密碼
 account_change_pw_changed	return_to	您現在可以 $1 返回到帳號維護頁面 $2。
 account_change_pw_changed	title	更改密碼成功
 account_editsshkeys	intro	<p>為了避免必須每次輸入您的 CVS/SSH 開發人員帳號的密碼，您可以在這裏上傳您的 public key(s)，而它們將被放置在 CVS 伺服器中您的 ~/.ssh/authorized_keys 檔案中。這將被安排在工作排程，所以它不會立即發生，請在一個小時後才嘗試登入。</p><p>為了產生這個 public key，執行這個程式 'ssh-keygen' (您可以使用protocol 1 或 2 兩者其中之一)，這個 public key 將被放置在 '~/.ssh/identity.pub' (protocol 1) 與 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。關於共用認證Keys請閱讀SSH說明書來獲取更進一步資訊。</p>
-account_editsshkeys	authorized_keys	認證Keys：<br /><strong><span style="color:red">重要：確定除了在Keys之間外沒有斷行字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span></strong>
+account_editsshkeys	authorized_keys	認證Keys：<br /><span class="highlight2">重要：確定除了在Keys之間外沒有斷行字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span>
 account_first	about_blurb	<p>您現在是 $1 的一個註冊會員。 $1 是開放源碼軟體專案的線上開發環境。</p><p>做為一個註冊會員，您可以參與整個網站的所有活動。您可以在專案討論版上貼出新的消息，可以報告在 $1 當中軟體的Bug，可以申請成為某個專案的開發者，甚至建立一個您自己的專案。</p><p>享用這個網站，也請給我們一些回饋資訊，以便我們能共同使 $1 變得更好。</p><p>--$1 團隊。</p>
 account_first	title	歡迎來到$1
 account_login	cookiewarn	為了登入，您必須啟用Cookies功能
@@ -97,7 +97,7 @@ account_options	welcome		歡迎
 account_register	Preferences	設定
 account_register	communitymail	接收附加的公共通信論壇。 <i>(量很小)</i>
 account_register	congrat	<p>恭喜。您已經在 $1 上成功註冊。 <p> 一封確認email已經發送到您的email信箱，以確保您email信箱的正確性。點擊email中的連結就可以啟動您的帳號。
-account_register	emailaddr	Email 信箱：<span><font color="red">*</font></span><br /><em>在帳號啟動前，這個Email信箱將被用來確認帳號。您將收到一封由 &lt;loginname@$1&gt; 轉寄的信，所有發向該信箱的Email會被轉寄到您真正的email信箱中去。</em>
+account_register	emailaddr	Email 信箱：<span class="highlight2">*</span><br /><em>在帳號啟動前，這個Email信箱將被用來確認帳號。您將收到一封由 &lt;loginname@$1&gt; 轉寄的信，所有發向該信箱的Email會被轉寄到您真正的email信箱中去。</em>
 account_register	err_badinsert	新增失敗
 account_register	theme	佈景：
 account_register	err_email	無效的Email
@@ -305,7 +305,7 @@ admin_massmail	active_deliveries	進行中的遞送
 admin_massmail	all_project_admins	所有專案管理員
 admin_massmail	all_project_developers	所有專案開發員
 admin_massmail	all_users	所有會員
-admin_massmail	be_verry_carefull	請 <span style="color:red"><strong>非常</strong></span> 小心填寫這個表單，送出後訊息將會email給許多會員
+admin_massmail	be_verry_carefull	請 <span class="highlight">非常</span> 小心填寫這個表單，送出後訊息將會email給許多會員
 admin_massmail	date	日期
 admin_massmail	developers_test	開發者 (測試)
 admin_massmail	error_scheduling_mailing	電子報排程錯誤，無法進行電子報排程，資料庫錯誤：
@@ -876,7 +876,7 @@ mail_admin_addlist	form_ispublic	公開的？
 mail_admin_addlist	form_name	通信論壇名稱：
 mail_admin_addlist	list_added	已經新增通信論壇
 mail_admin_addlist	pagetitle	新增一個通信論壇
-mail_admin_addlist	list_information	<p>通信論壇被命名為：<br /><strong>projectname-listname@$1</strong></p><p>約需要 <strong><span style="color:red">6-24 小時</span></strong> 來完成建立您的通信論壇</p>
+mail_admin_addlist	list_information	<p>通信論壇被命名為：<br /><strong>projectname-listname@$1</strong></p><p>約需要 <span class="highlight">6-24 小時</span> 來完成建立您的通信論壇</p>
 mail_admin_updatelist	form_description	說明：
 mail_admin_updatelist	form_ispublic	公開的？
 mail_admin_updatelist	form_updatelist	更新
@@ -1137,7 +1137,7 @@ pm	hours	估計小時數
 pm	intro	選擇某個子專案進行瀏覽/編輯/增加任務。
 pm	no_tasks_found	沒有發現符合的任務
 pm	no_tasks_found_text	使用上面的連結增加任務
-pm	noprj	<H1>沒有發現子專案</H1><P><B>沒有設定子專案，或者您沒有許可權查看<P><FONT COLOR=RED>專案管理員可以透過專案管理頁進行設定</FONT></B>
+pm	noprj	<H1>沒有發現子專案</H1><P><B>沒有設定子專案，或者您沒有許可權查看<P><span class="highlight">專案管理員可以透過專案管理頁進行設定</span>
 pm	percent_complete	完成度百分比
 pm	priority	優先順序
 pm	start_date	開始日期
@@ -1175,7 +1175,7 @@ pm_admin_projects	admin_title	專案/任務管理器管理
 pm_admin_projects	category_inserted	分類已新增
 pm_admin_projects	category_name	新分類名稱
 pm_admin_projects	category_note	只要您新增一個分類，它就無法被刪除
-pm_admin_projects	category_note2	不建議您更改分類名稱，因為其他東西依賴於它。當您修改分類名稱時，所有其他相關的項都會被更改成新的名字。</font></strong>
+pm_admin_projects	category_note2	不建議您更改分類名稱，因為其他東西依賴於它。當您修改分類名稱時，所有其他相關的項都會被更改成新的名字。
 pm_admin_projects	category_updated	分類已更新
 pm_admin_projects	change_project_intro	您可以透過這個表單更改一個現有的任務。請注意隱藏專案仍然能夠被專案成員查看到，雖然不是被完全公開。<p>
 pm_admin_projects	change_project_title	更改專案/任務管理器狀態
@@ -1397,7 +1397,7 @@ project_admin_editpackages	releases	發佈
 project_admin_editpackages	title	編輯發佈/發佈文件
 project_admin_editpackages	updated_package	更新軟體封裝
 project_admin_editrelease	add_file	新增這個文件
-project_admin_editrelease	add_files_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。</strong></span>
+project_admin_editrelease	add_files_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。</span>
 project_admin_editrelease	changelog_too_small	更改日誌太小了
 project_admin_editrelease	data_saved	資料已保存
 project_admin_editrelease	delete_file	刪除文件
@@ -1533,7 +1533,7 @@ project_showfiles	new_release	點擊這裡建立新的釋出
 project_showfiles	no_releases	未釋出任何檔案
 project_showfiles	package	集合
 project_showfiles	project_totals	專案檔案總數
-project_showfiles	release_highlighted	您所選擇的項目會有 <span style="background-color:pink">醒目標示</span>.
+project_showfiles	release_highlighted	您所選擇的項目會有 <span class="release-highlight">醒目標示</span>.
 project_showfiles	release_notes	釋出記錄
 project_showfiles	size	大小
 project_showfiles	title	專案檔案列表
@@ -1585,7 +1585,7 @@ register	project_full_name	<h3>1. 專案全名</h3><p>您應該開始指定您�
 register	project_information	專案資訊
 register	project_license	<h3>3. 授權方式</h3> <p><strong><em>如果你正在申請一個 website-only 專案，請從下面選項中選擇 "website-only" 並著手進行。</em></strong><p>$1 被創造作為開放原始碼軟體發展管理。為了要使事物保持簡單，我們對於我們的授權方式選擇仰賴<a href="http://www.opensource.org">Open Source Initiative</a>的傑出貢獻。 <p>我們了解，然而可能有其他的授權方式可能更符合你的需求。如果您希望使用的授權方式不是 OSI 認可的，請讓我們了解為什麼您希望使用其它的授權方式。<p>選擇一個授權方式是一個嚴謹的決定，在為您的專案下決定之前，請花費一些時間查閱數種授權方式的文字內容。 <p>只要您有合法的權利，在往後的日子您可以改變您專案的授權方式，您發佈釋出的檔案版本會與此改變息息相關，而且您的檔案地圖編目方法也應被適當地更新。<em>請注意改變授權方式不追溯既往(也就是不適用於已經在開放原始碼授權之下被釋出的產品)。</em> <p>$1 不負責關於你的授權方式合法性的差異。<p><strong>授權方式：</strong>
 register	project_submitted	您的專案計劃已經被提交給 $1 的管理員，在72小時之內，您將收到管理員的決定與更進一步指示的通知。</p><p>感謝您選擇 $1
-register	project_unix_name	<h3>5. 專案 Unix 名稱</h3><p>除了專案完整名稱之外，您還需要為您的專案選擇簡短的 "Unix名稱"。</p><p> "Unix名稱"有數種限制，因為它在敝站將被利用在許多地方。限制如下：<ul><li>不能符合任何其他專案的"Unix名稱"。<li>名稱長度必須<strong><span style="color:red">３</span></strong>至<strong><span style="color:red">１５</span></strong>個字元。<li>必須是<strong><span style="color:red">英文小寫字母</span></strong>。<li>只能包含<span style="color:red">英文字母</span>、<span style="color:red">數字</span>和<span style="color:red">破折號"-"</span>。<li>必須是一個有效的"Unix帳號"。<li>不能符合我們保留的網域名稱其中之一。<li>針對這個專案的"Unix名稱"決定後不得變更。</ul><p>您的"Unix名稱"是非常重要的，由於它將被用在許多地方，包括：<ul><li>網站在 <tt>unixname.$1</tt><li>一個 <tt>/cvsroot/unixname</tt> 的CVS Repository根目錄在<tt>cvs.unixname.$1</tt><li>Shell存取針對<tt>unixname.$1</tt><li>透過本站的搜尋引擎</ul><p>您希望的Unix名稱：<br/>
+register	project_unix_name	<h3>5. 專案 Unix 名稱</h3><p>除了專案完整名稱之外，您還需要為您的專案選擇簡短的 "Unix名稱"。</p><p> "Unix名稱"有數種限制，因為它在敝站將被利用在許多地方。限制如下：<ul><li>不能符合任何其他專案的"Unix名稱"。<li>名稱長度必須<span class="highlight">３</span>至<span class="highlight">１５</span>個字元。<li>必須是<span class="highlight">英文小寫字母</span>。<li>只能包含<span class="highlight2">英文字母</span>、<span class="highlight2">數字</span>和<span class="highlight2">破折號"-"</span>。<li>必須是一個有效的"Unix帳號"。<li>不能符合我們保留的網域名稱其中之一。<li>針對這個專案的"Unix名稱"決定後不得變更。</ul><p>您的"Unix名稱"是非常重要的，由於它將被用在許多地方，包括：<ul><li>網站在 <tt>unixname.$1</tt><li>一個 <tt>/cvsroot/unixname</tt> 的CVS Repository根目錄在<tt>cvs.unixname.$1</tt><li>Shell存取針對<tt>unixname.$1</tt><li>透過本站的搜尋引擎</ul><p>您希望的Unix名稱：<br/>
 register	purpose_and_summarization	<h3>2. 專案目的與摘要</h3><p><strong></strong><p><strong> 請提供您所申請專案詳細與準確的說明，以及您計劃以何種方式利用 $1 的資源。這份說明將是您的專案在 $1 是否能註冊的依據，進而確保您能以預期的方式使用敝站提供的服務。同時這份說明將不會作為您專案的公開說明。</strong>
 register	registration_complete	註冊完成
 register	unix_group_name_already_taken	Unix名稱重複
@@ -1815,7 +1815,7 @@ searchbox	softwaregroup	軟體/群組
 searchbox	task	任務
 searchbox	tasks	這個專案的任務
 searchbox	trackers	這個專案的追蹤者
-sendmessage	about_blurb	為了嘗試減少垃圾信，我們使用以下表單來寄送Email。<p />請精確且完整地填寫，否則收信者可能不知道如何回覆。<p /><font color="red"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</font>
+sendmessage	about_blurb	為了嘗試減少垃圾信，我們使用以下表單來寄送Email。<p />請精確且完整地填寫，否則收信者可能不知道如何回覆。<p /><span class="highlight"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>
 sendmessage	contact	聯絡
 sendmessage	email	您的 Email
 sendmessage	email_only_to	您只能夠寄到位址
@@ -1906,7 +1906,7 @@ snippet_package	suggest_a_language	建議新程式語言
 snippet_package	title	送出一個新的程式碼集合
 snippet_package	title_new_snippet_package	送出一個新的程式碼集合
 snippet_package	version	版本
-snippet_package	you_can_group	<p>您可以收集存在的片斷程式碼並使用這個界面來進行軟體封裝。在創造您的軟體封裝之前，確定您全部的片斷程式碼準備就序而且你已經做一個片斷程式碼的說明。</p><p><ol><li>使用這個表單創造軟體封裝。</li><li><strong>然後</strong>使用"Add Snippets to Package"連結新增檔案至您的軟體封裝。</li></ol></p><p><span style="color:red"><strong>注意：</strong></span>藉由瀏覽函式庫及使用已存在軟體封裝的連結，您可以發表一個已存在軟體封裝的新版本。如果您正在發表一個完整的新軟體封裝，您應該只有使用這個頁面。
+snippet_package	you_can_group	<p>您可以收集存在的片斷程式碼並使用這個界面來進行軟體封裝。在創造您的軟體封裝之前，確定您全部的片斷程式碼準備就序而且你已經做一個片斷程式碼的說明。</p><p><ol><li>使用這個表單創造軟體封裝。</li><li><strong>然後</strong>使用"Add Snippets to Package"連結新增檔案至您的軟體封裝。</li></ol></p><p><span class="highlight">注意：</span>藉由瀏覽函式庫及使用已存在軟體封裝的連結，您可以發表一個已存在軟體封裝的新版本。如果您正在發表一個完整的新軟體封裝，您應該只有使用這個頁面。
 snippet_submit	category	類別
 snippet_submit	description	說明
 snippet_submit	error_doing_snippet_insert	新增程式碼時發生錯誤！
@@ -1921,7 +1921,7 @@ snippet_submit	suggest_a_category	建議新類別
 snippet_submit	suggest_a_language	建議新程式語言
 snippet_submit	type	程式碼類型
 snippet_submit	version	版本
-snippet_submit	you_can_post	您可以張貼一個新的程式碼片斷，並與全世界的其他人分享它，只要填寫這些資訊。<strong>請給予一個良好說明</strong> 與 <strong>註釋您的程式碼</strong> 使得其他人可以閱讀與了解它。</p><p><span style="color:red"><strong>注意：</strong></span>您可以藉由瀏覽函式庫發表一個已存在程式碼片斷的新版本，如果您正在發表一個完整的新script或函式，您應該只有使用這個頁面。
+snippet_submit	you_can_post	您可以張貼一個新的程式碼片斷，並與全世界的其他人分享它，只要填寫這些資訊。<strong>請給予一個良好說明</strong> 與 <strong>註釋您的程式碼</strong> 使得其他人可以閱讀與了解它。</p><p><span class="highlight">注意：</span>您可以藉由瀏覽函式庫發表一個已存在程式碼片斷的新版本，如果您正在發表一個完整的新script或函式，您應該只有使用這個頁面。
 snippet_utils	auctions	網路拍賣
 snippet_utils	author	作者
 snippet_utils	bbs_systems	BBS系統
@@ -2229,7 +2229,7 @@ tracker	id	編號
 tracker	insert_email	如果您<strong>不能</strong>登入，請在這裡輸入您的Email
 tracker	item_created	項目成功創造
 tracker	no_trackers	未發現可以存取的追蹤者
-tracker	no_trackers_text	沒有追蹤者已經被設定，導致您不能瀏覽它們。<p><FONT COLOR=RED>這個專案的管理員首先必須使用 $1 管理頁面 $2 設定資料類型。</FONT></strong>
+tracker	no_trackers_text	沒有追蹤者已經被設定，導致您不能瀏覽它們。<p><span class="highlight">這個專案的管理員首先必須使用 $1 管理頁面 $2 設定資料類型。</span>
 tracker	open_date	啟用日期
 tracker	please_login	請 $1 登入 $2
 tracker	priority	優先權
@@ -2394,7 +2394,7 @@ tracker_artifacttype	reporting	報告
 tracker_artifacttype	required_fields	自訂類型: 名稱，說明，適當期間與狀態暫停是必須的
 tracker_artifacttype	submit_new	新增
 tracker_artifacttype	invalid_emails	E-mail位址明顯無效
-tracker_browse	admin_mass_update	<strong>管理：</strong></FONT> 如果您希望上述圈選的全部項目生效，使用這些控制改變它們的屬性然後點擊一次"大量更新"生效。
+tracker_browse	admin_mass_update	<strong>管理：</strong> 如果您希望上述圈選的全部項目生效，使用這些控制改變它們的屬性然後點擊一次"大量更新"生效。
 tracker_browse	ascending	升冪
 tracker_browse	canned_response	預設回應
 tracker_browse	check_all	全選

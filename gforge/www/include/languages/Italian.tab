@@ -24,6 +24,9 @@
 #  *            revisited and synced with Base.
 #  * 2006-02-22 rspisser <reinhard@spisser.it>
 #  *            synced with Base.tab
+#  * 2006-05-02 rspisser <reinhard@spisser.it>
+#  *            moved style information to .css file
+#
 #  **/
 #
 
@@ -105,7 +108,7 @@ account_register	Preferences	Preferenze
 account_register	ccode	Nazione:
 account_register	communitymail	Desidero ricevere email dalla comunità <I>(poco traffico).</I>
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.</p><p> Ti verrà inviata una email di conferma per verificare il tuo indirizzo email. Visita il link indicato nella email per attivare il tuo account.</p>
-account_register	emailaddr	Indirizzo email:<span><font color="red">*</font></span><br /><em>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</em>
+account_register	emailaddr	Indirizzo email:<span class="highlight">*</span><br /><em>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</em>
 account_register	err_badinsert	Inserimento fallito
 account_register	err_email	Indirizzo email non valido
 account_register	err_firstname	Nome è un parametro obbligatorio
@@ -309,7 +312,7 @@ admin_massmail	active_deliveries	Esecuzioni attive
 admin_massmail	all_project_admins	Tutti gli amministratori del progetto
 admin_massmail	all_project_developers	Tutti gli sviluppatori del progetto
 admin_massmail	all_users	Tutti gli utenti
-admin_massmail	be_verry_carefull	Presta <span style="color:red"><strong>estrema</strong></span> attenzione nell'utilizzare questo modulo, perchè confermandolo SPEDIRAI un messaggio a un sacco di utenti.
+admin_massmail	be_verry_carefull	Presta <span class="highlight">estrema</span> attenzione nell'utilizzare questo modulo, perchè confermandolo SPEDIRAI un messaggio a un sacco di utenti.
 admin_massmail	date	Data
 admin_massmail	developers_test	Sviluppatori (test)
 admin_massmail	error_scheduling_mailing	Errore nella schedulazione della posta. Errore nel database.
@@ -898,7 +901,7 @@ mail_admin_addlist	form_description	Descrizione:
 mail_admin_addlist	form_ispublic	Pubblica?
 mail_admin_addlist	form_name	Nome Mailing List:
 mail_admin_addlist	list_added	Mailing List aggiunta
-mail_admin_addlist	list_information	<p>I nomi delle Mailing List:<br /><strong>projectname-listname@$1</strong></p><p>Saranno necessri <strong><span style="color:red">6-24 ore </span></strong> per creare la Mailing List.</p>
+mail_admin_addlist	list_information	<p>I nomi delle Mailing List:<br /><strong>projectname-listname@$1</strong></p><p>Saranno necessari <span class="highlight">6-24 ore </span> per creare la Mailing List.</p>
 mail_admin_addlist	pagetitle	Aggiungi una Mailing List
 mail_admin_deletelist	confirmdelete	Conferma Rimozione
 mail_admin_deletelist	permanentlydelete	Rimuovi in modo permanente
@@ -1144,14 +1147,14 @@ people_viewprofile	title	Visualizza un profilo utente
 people_viewprofile	user_fetch_failed	User fetch FAILED
 pluginman	action	Azione
 pluginman	activate	Attiva
-pluginman	active	<font color="#00ff00">Attivo</font>
+pluginman	active	<span class="plugin-active">Attivo</span>
 pluginman	deactivate	Disattiva
 pluginman	groupdeleted	$1 Gruppi rimossi dal plugin.<br>
 pluginman	groups	Gruppi che lo utilizzano
-pluginman	inactive	<font color="#800000">Non attivo</font>
+pluginman	inactive	<span class="plugin-inactive">Non attivo</span>
 pluginman	init	Lanciare lo script di inizializzazione?
 pluginman	name	Nome Plugin
-pluginman	notice	Qui puoi attivare/disattivare plugin che si trovano nella cartella plugins/. Poi puoi abilitarli per progetto o anche per utente, se previsto dal plugin.<br><font color="#ff0000">Attenzione: se disattivi un plugin, viene disattivato per l'intero sito..<br>Fai PARTICOLARE attenzione quando lanci lo script di inizializzazione SQL e il plugin è disattivato: alcuni script comprendono istruzioni per cancellare le tabelle.</font><br><br>
+pluginman	notice	Qui puoi attivare/disattivare plugin che si trovano nella cartella plugins/. Poi puoi abilitarli per progetto o anche per utente, se previsto dal plugin.<br><span class="highlight2">Attenzione: se disattivi un plugin, viene disattivato per l'intero sito..<br>Fai PARTICOLARE attenzione quando lanci lo script di inizializzazione SQL e il plugin è disattivato: alcuni script comprendono istruzioni per cancellare le tabelle.</span><br><br>
 pluginman	status	Stato
 pluginman	success	Plugin $1 aggiornato
 pluginman	successnoconfig	<br>Non è stato possibile collegare il file di configurazione a etc/gforge/plugins/$1. Controlla i permessi di scrittura per apache in /etc/gforge/plugins oppure crea il link manualmente.
@@ -1174,7 +1177,7 @@ pm	hours	Ore stimate
 pm	intro	Selezionare un sottoprogetto e puoi visualizzare/modificare e aggiungere attività.
 pm	no_tasks_found	Nessuna attività trovata
 pm	no_tasks_found_text	Aggiungi nuove attività utilizzando i link elencati sopra
-pm	noprj	<H1>Nessun sottoprogetto trovato</H1><P><B>Non è stato alcun sottoprogetto oppure non sei autorizzato a vederli.<P><FONT COLOR=RED>L'amministratore del progetto dovrà creare dei sottoprogetti utilizzando la pagina di amministrazione</FONT></B>
+pm	noprj	<H1>Nessun sottoprogetto trovato</H1><P><B>Non è stato alcun sottoprogetto oppure non sei autorizzato a vederli.<P><span class="highlight2">L'amministratore del progetto dovrà creare dei sottoprogetti utilizzando la pagina di amministrazione</span></B>
 pm	percent_complete	Perc. completamento
 pm	priority	Priorità
 pm	start_date	Data inizio
@@ -1206,7 +1209,7 @@ pm_admin_projects	admin_title	Amministrazione Progetto/Attività
 pm_admin_projects	category_inserted	Categoria inserita
 pm_admin_projects	category_name	Nome categoria
 pm_admin_projects	category_note	Una volta inserita una categoria non può più essere rimossa.
-pm_admin_projects	category_note2	Non è consigliato cambiare la categoria perchè altri elementi dipendono da essa. Quando si cambia una categoria, tutti gli elementi relazionati verranno assegnati automaticamente al nuovo nome della nuova categoria.</font></strong>
+pm_admin_projects	category_note2	Non è consigliato cambiare la categoria perchè altri elementi dipendono da essa. Quando si cambia una categoria, tutti gli elementi relazionati verranno assegnati automaticamente al nuovo nome della nuova categoria.
 pm_admin_projects	category_updated	Categoria aggiornata
 pm_admin_projects	change_project_intro	Qui puoi cambiare un progetto. Nota che progetti privati possono essere visualizzati dai membri del progetto, ma non dagli altri.
 pm_admin_projects	change_project_title	Cambia stato di gestore attività
@@ -1228,7 +1231,7 @@ pm_admin_projects	projects_intro	Aggiungi un nuovo progetto. <strong>Questo è d
 pm_admin_projects	really_sure	Sono veramente sicuro
 pm_admin_projects	send_updates	Invia tutti gli aggiornamenti a
 pm_admin_projects	sure	Sono sicuro
-pm_browsetask	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
+pm_browsetask	admin_mass_update	<strong>Amministratore:</strong> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
 pm_browsetask	browse	Consulta
 pm_browsetask	check_all	Seleziona tutti
 pm_browsetask	clear_all	Deseleziona tutti
@@ -1434,7 +1437,7 @@ project_admin_editpackages	releases	Rilasci
 project_admin_editpackages	title	Modifica rilasci file
 project_admin_editpackages	updated_package	Pacchetto aggiornato
 project_admin_editrelease	add_file	Aggiungi questo file
-project_admin_editrelease	add_files_note	NOTE: In alcuni browser è necessario selezionare il file nella casella di upload e cliccare "OK". Il doppio click non funziona sempre.</strong></span>
+project_admin_editrelease	add_files_note	NOTE: In alcuni browser è necessario selezionare il file nella casella di upload e cliccare "OK". Il doppio click non funziona sempre.</span>
 project_admin_editrelease	changelog_too_small	Il changelog è troppo corto
 project_admin_editrelease	data_saved	Dati salvati
 project_admin_editrelease	delete_file	Rimuovi file
@@ -1582,7 +1585,7 @@ project_showfiles	new_release	Clicca qui per creare una nuova release.
 project_showfiles	no_releases	Nessuna release
 project_showfiles	package	Pacchetto
 project_showfiles	project_totals	Totali progetto
-project_showfiles	release_highlighted	La release che hai scelto è <span style="background-color:pink">evidenziata</span>.
+project_showfiles	release_highlighted	La release che hai scelto è <span class="release-hightlight">evidenziata</span>.
 project_showfiles	release_notes	Note al rilascio
 project_showfiles	size	Dimensione
 project_showfiles	title	File rilasciati per il progetto
@@ -1857,7 +1860,7 @@ send_pending_items_mail	pm_message	Questa mail viene inviata per ricordare che c
 send_pending_items_mail	pm_subject	Notifica di attività scadute
 send_pending_items_mail	tracker_message	Questa mail viene inviata per ricordare che ci sono elementi del tracker scaduti. L'elemento #$1 è scaduto: \nSommario: $3\nStato: $5\nData inserimento:$6\nAssegnato a: $7\nInserito da: $8\nDettagli: $9\n\n\nClicca qui per andare all'elemento: $4
 send_pending_items_mail	tracker_subject	Notifica di elementi del tracker scaduti
-sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p />Compila accuratamente tutti i campi oppure il destinatario potrebbe non essere in grado di rispondere.<p /><font color="red"><B>SE STAI CERCANDO AIUTO:</B> Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</FONT>
+sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p />Compila accuratamente tutti i campi oppure il destinatario potrebbe non essere in grado di rispondere.<p /><span class="highlight2"><b>SE STAI CERCANDO AIUTO</b>: Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</span>
 sendmessage	contact	Contatto
 sendmessage	email	Il tuo indirizzo email
 sendmessage	email_only_to	Puoi inviare messaggi solo a indirizzi
@@ -1948,7 +1951,7 @@ snippet_package	suggest_a_language	Suggerisci un nuovo linguaggio
 snippet_package	title	Nuovo package di frammenti
 snippet_package	title_new_snippet_package	Inserisci un nuovo pacchetto di frammenti
 snippet_package	version	Versione
-snippet_package	you_can_group	<p>Qui puoi raggruppare frammenti esistenti in un pacchetto. Prima di creare il pacchetto, assicurati che tutti i frammenti siano stati creati e di essere in possesso di tutti gli ID dei frammenti.</p><p><ol><li>Crea il pacchetto usando questo modulo.</li><li><strong>Dopo</strong> usa il link "Aggiungi frammento al pacchetto" per aggiungere dei file.</li></ol></p><p><span style="color:red"><strong>Nota:</strong></span> Puoi proporre una nuova versione di un pacchetto esistente scorrendo la libreria e usando il link sul pacchetto esistente. Dovresti usare questa pagina solo quando stai creando un pacchetto completamente nuovo.
+snippet_package	you_can_group	<p>Qui puoi raggruppare frammenti esistenti in un pacchetto. Prima di creare il pacchetto, assicurati che tutti i frammenti siano stati creati e di essere in possesso di tutti gli ID dei frammenti.</p><p><ol><li>Crea il pacchetto usando questo modulo.</li><li><strong>Dopo</strong> usa il link "Aggiungi frammento al pacchetto" per aggiungere dei file.</li></ol></p><p><span class="highlight">Nota:</span> Puoi proporre una nuova versione di un pacchetto esistente scorrendo la libreria e usando il link sul pacchetto esistente. Dovresti usare questa pagina solo quando stai creando un pacchetto completamente nuovo.
 snippet_submit	category	Categoria
 snippet_submit	description	Descrizione
 snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
@@ -1963,7 +1966,7 @@ snippet_submit	suggest_a_category	Suggerisci una categoria
 snippet_submit	suggest_a_language	Suggerisci un linguaggio
 snippet_submit	type	Tipo script
 snippet_submit	version	Versione
-snippet_submit	you_can_post	Puoi inserire un nuovo frammento e condividerlo con altre persone. Riempi i campi con le informazioni richieste. <strong>Inserisci una buona descrizione</strong> e <strong>commenta bene il tuo codice</strong> in modo che altri possono leggere e capire il codice.</p><p><span style="color:red"><strong>Nota:</strong></span> Puoi inserire una nuova versione di un frammento esistente. Dovresti usare questa pagina quando inserisci un frammento nuovo.
+snippet_submit	you_can_post	Puoi inserire un nuovo frammento e condividerlo con altre persone. Riempi i campi con le informazioni richieste. <strong>Inserisci una buona descrizione</strong> e <strong>commenta bene il tuo codice</strong> in modo che altri possono leggere e capire il codice.</p><p><span class="highlight">Nota:</span> Puoi inserire una nuova versione di un frammento esistente. Dovresti usare questa pagina quando inserisci un frammento nuovo.
 snippet_utils	auctions	Aste
 snippet_utils	author	Autore
 snippet_utils	bbs_systems	Sistemi BBS 
@@ -2264,7 +2267,7 @@ tracker	id	ID
 tracker	insert_email	Se <strong>non</strong> puoi fare la login, inserisci qui il tuo indirizzo email:
 tracker	item_created	Elemento creato con successo
 tracker	no_trackers	Nessun tracker trovato
-tracker	no_trackers_text	Non è stato creato nessun tracker oppure non hai le autorizzazioni per visualizzarlo.<p><FONT COLOR=RED>L'amministratore del progetto può creare tracker utilizzando la pagina di $1 amministrazione $2</FONT></strong>
+tracker	no_trackers_text	Non è stato creato nessun tracker oppure non hai le autorizzazioni per visualizzarlo.<p><span class="highlight">L'amministratore del progetto può creare tracker utilizzando la pagina di $1 amministrazione $2</span>
 tracker	open_date	Data inserimento
 tracker	please_login	Fatti $1 riconoscere $2, per favore
 tracker	priority	Priorità
@@ -2435,7 +2438,7 @@ tracker_artifacttype	none	Nessuno
 tracker_artifacttype	reporting	Reportistica
 tracker_artifacttype	required_fields	Nome, descrizione, il numero di giorni dopo il quale l'elemento è da considerarsi fuori tempo e il numero di giorni dopo i quali elementi in attes di conferma scadono sono campi obbligatori
 tracker_artifacttype	submit_new	Inserisci nuovo
-tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
+tracker_browse	admin_mass_update	<strong>Amministratore:</strong> Se vuoi apportare delle modifiche a tutti gli elementi elencati, usa i campi sottostanti per cambiare le proprietà e seleziona "Aggiornamento multiplo".
 tracker_browse	ascending	Ascendente
 tracker_browse	canned_response	Risposta predefinita
 tracker_browse	check_all	Seleziona&nbsp;tutti
