@@ -509,25 +509,6 @@ function html_build_checkbox($name, $value, $checked) {
 		.($checked ? 'checked="checked"' : '').'>';
 }
 
-/**
- * html_get_priority_color() - Return the color value for the index that was passed in
- * (defined in $sys_urlroot/themes/<selected theme>/theme.php)
- *
- * @param		int		Index
- */
-function html_get_priority_color ($index) {
-	global $bgpri;
-
-	/* make sure that index is of appropriate type and range */
-	$index = (int)$index;
-	if ($index<1) {
-		$index=1;
-	} else if ($index>5) {
-		$index=5;
-	}
-	//return "prior$index";
-	return $bgpri[$index];
-}
 
 /**
  * build_priority_select_box() - Wrapper for html_build_priority_select_box()
