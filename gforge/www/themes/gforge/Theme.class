@@ -4,8 +4,6 @@ require_once('www/include/Layout.class');
 
 class Theme extends Layout {
 
-    var $themeroot='/themes/gforge';
-
     function Theme() {
         // Parent constructor
         $this->Layout();
