@@ -85,7 +85,7 @@ if ($diary_user) {
 				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
-		<tr><td colspan="2" bgcolor="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</td></tr>';
+		<tr><td colspan="2" class="content">&nbsp;</td></tr>';
 	}
 	echo "</table>\n";
 

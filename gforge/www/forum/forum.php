@@ -181,9 +181,9 @@ if ($forum_id) {
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 	<table border="0" width="33%">
-		<tr><td><span style="font-size:-1">'. $options_popup .
-			'</span></td><td><span style="font-size:-1">'. $max_row_popup .
-			'</span></td><td><span style="font-size:-1"><input type="submit" name="submit" value="'.
+		<tr><td><span class="popups">'. $options_popup .
+			'</span></td><td><span class="popups">'. $max_row_popup .
+			'</span></td><td><span class="popups"><input type="submit" name="submit" value="'.
 			$Language->getText('forum_forum','changeview').'" />
 		</span></td></tr>
 	</table></form>
@@ -352,9 +352,9 @@ if ($forum_id) {
 		This code puts the nice next/prev.
 	*/
 	$ret_val .= '<table width="100%" border="0">
-		<tr bgcolor="'.$HTML->COLOR_LTBACK1.'"><td width="50%">';
+		<tr class="content"><td width="50%">';
 	if ($offset != 0) {
-		$ret_val .= '<span style="font-family:arial,helvetica;font-size:small;text-decoration:none">
+		$ret_val .= '<span class="prev">
 		<a href="javascript:history.back()"><strong>' .
 		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) .$Language->getText('forum_forum','previous_messages').'</a></strong></span>';
 	} else {
@@ -364,7 +364,7 @@ if ($forum_id) {
 	$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
 
 	if ($avail_rows > $max_rows) {
-		$ret_val .= '<span style="font-family:arial,helvetica;font-size:small;text-decoration:none">
+		$ret_val .= '<span class="next">
 		<a href="/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 			'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id.'">
 		<strong> '.$Language->getText('forum_forum','next_messages') .

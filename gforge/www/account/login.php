@@ -107,7 +107,7 @@ if ($login && !$success) {
 ?>
 	
 <p>
-<span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span>
+<span class="error"><?php echo $Language->getText('account_login', 'cookiewarn'); ?></span>
 </p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">

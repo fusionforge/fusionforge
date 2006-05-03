@@ -81,7 +81,7 @@ if (getStringFromRequest('submit')) {
 $HTML->header(array('title'=>'User Account Registration'));
 
 if ($feedback) {
-	print "<p><font color=\"#FF0000\">$feedback $register_error</font>";
+	print "<p><span class=\"error\">$feedback $register_error</span>";
 } 
 if (!isset($timezone) || empty($timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');

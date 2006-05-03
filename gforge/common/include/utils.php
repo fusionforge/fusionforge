@@ -480,7 +480,7 @@ function show_priority_colors_key() {
 
 	for ($i=1; $i<6; $i++) {
 		echo '
-			<td bgcolor="'.html_get_priority_color($i).'">'.$i.'</td>';
+			<td class="priority'.$i.'">'.$i.'</td>';
 	}
 	echo '</tr></table>';
 }
@@ -515,7 +515,7 @@ function utils_buildcheckboxarray($options,$name,$checked_array) {
  * @return	a string holding the HTML to mark a required field
  */
 function utils_requiredField() {
-	return '<span><font color="red">*</font></span>';
+	return '<span class="requiredfield">*</span>';
 }
 
 /**

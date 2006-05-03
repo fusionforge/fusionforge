@@ -63,9 +63,9 @@ if (!session_loggedin()) {
 			$result = db_query($sql);
 
 			if (!$result) {
-				echo "<span style=\"color:red\">".$Language->getText('developer_monitor','error_inserting')."</span>";
+				echo "<span class=\"error\">".$Language->getText('developer_monitor','error_inserting')."</span>";
 			} else {
-				echo "<h3 style=\"color:red\">".$Language->getText('developer_monitor','monitoring_user')."</h3>";
+				echo "<span class=\"feedback\">".$Language->getText('developer_monitor','monitoring_user')."</span>";
 				echo $Language->getText('developer_monitor','monitoring_user_expl');
 			}
 
@@ -73,7 +73,7 @@ if (!session_loggedin()) {
 
 			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 			$result = db_query($sql);
-			echo "<h3 style=\"color:red\">".$Language->getText('developer_monitor','monitoring_user_off')."</h3>";
+			echo "<span class=\"feedback\">".$Language->getText('developer_monitor','monitoring_user_off')."</span>";
 			echo $Language->getText('developer_monitor','monitoring_user_off_expl');
 	
 		}

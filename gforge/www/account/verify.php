@@ -86,7 +86,7 @@ $HTML->header(array('title'=>'Verify'));
 echo $Language->getText('account_verify', 'verify_blurb');
 
 if ($GLOBALS['error_msg']) {
-	print '<p><font color="#FF0000">'.$GLOBALS['error_msg'].'</font>';
+	print '<p><span class="error">'.$GLOBALS['error_msg'].'</span>';
 }
 ?>
 
