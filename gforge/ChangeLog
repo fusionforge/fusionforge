@@ -1,3 +1,7 @@
+2006-05-04 Reinhard Spisser <reinhard@spisser.it>
+	* css-ification of common/, www/account, www/activity, www/developer
+	  www/forum, www/frs, www/my and www/include/languages
+
 2006-04-30 Reinhard Spisser <reinhard@spisser.it>
 	* added new css/gforge.css and reference this new css in Layout.class
 	* added new osx/css/theme.css and and gforge/css/theme.css and reference this new css in Layout.class
