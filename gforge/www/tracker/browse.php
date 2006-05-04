@@ -47,6 +47,7 @@ if (session_loggedin()) {
 }
 
 $af = new ArtifactFactory($ath);
+
 if (!$af || !is_object($af)) {
 	exit_error('Error','Could Not Get Factory');
 } elseif ($af->isError()) {
@@ -71,7 +72,18 @@ if ($set == 'custom') {
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$_extra_fields);
+if (is_array($_extra_fields)){
+	$keys=array_keys($_extra_fields);
+	foreach ($keys as $key) {
+		if ($_extra_fields[$key] != 'Array') {
+			$aux_extra_fields[$key] = $_extra_fields[$key];
+		}
+	}
+} else {
+	$aux_extra_fields = $_extra_fields;
+}
+
+$af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$aux_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //

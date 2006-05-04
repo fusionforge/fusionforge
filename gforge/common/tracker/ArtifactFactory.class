@@ -182,7 +182,24 @@ class ArtifactFactory extends Error {
 				if (is_array($_assigned_to)) {
 					$_assigned_to='';
 				}
-				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
+				$aux_extra_fields = array();
+				if (is_array($_extra_fields)){
+					//print_r($_extra_fields);
+					$keys=array_keys($_extra_fields);
+					
+					foreach ($keys as $key) {
+						if ($_extra_fields[$key] != 'Array') {
+							$aux_extra_fields[$key] = $_extra_fields[$key];
+						}
+					}
+				}
+
+				$extra_pref = '';
+				if (count($aux_extra_fields)>0) {
+					$extra_pref = '|'.serialize($aux_extra_fields);
+				}
+				
+				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.$extra_pref;
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
 				}
