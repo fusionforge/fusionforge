@@ -155,26 +155,23 @@ if (!$res || $rows < 1) {
 		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
 		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td nowrap="nowrap" align="center">
-				<span style="font-size:smaller">
 					<a href="qrs.php?package_id='. 
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','add_release').']</strong>
 					</a>
-				</span>
-				<span style="font-size:smaller">
+				
 					<a href="showreleases.php?package_id='. 
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','edit_releases').']</strong>
 					</a>
-				</span>
 
 			</td>
-			<td><span style="font-size:smaller"><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="30" /></span></td>
-			<td><span style="font-size:smaller">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
+			<td><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="30" /></td>
+			<td>'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
 			<td><input type="submit" name="submit" value="'.$Language->getText('general','update').'" />
-				<span style="font-size:smaller">
+				
 					<a href="deletepackage.php?package_id='. 
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('general','delete').']</strong>
 					</a>
-				</span>
+				
 			</td>
 			</tr></form>';
 	}

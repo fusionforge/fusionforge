@@ -296,9 +296,9 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <p>
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
-<span style="color:red"><strong>
+<span class="important">
 <?php echo $Language->getText('project_admin_editrelease','add_files_note') ?>
-</strong></span><br />
+</span><br />
 <?php echo $Language->getText('project_admin_editrelease','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
 <?php if ($sys_use_ftpuploads) {
 
@@ -339,7 +339,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 	$res=db_query("SELECT * FROM frs_file WHERE release_id='$release_id'");
 	$rows=db_numrows($res);
 	if($rows < 1) {
-		print("<h4>".$Language->getText('project_admin_editrelease','no_files_in_release')."</h4>\n");
+		print("<span class=\"error\">".$Language->getText('project_admin_editrelease','no_files_in_release')."</span>\n");
 	} else {
 		print($Language->getText('project_admin_editrelease','file_list_note')."\n");
 		$title_arr[]=$Language->getText('project_admin_editrelease','filename_release').'<br />';
@@ -354,20 +354,20 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>" />
 				<input type="hidden" name="step3" value="1" />
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-					<td nowrap="nowrap"><span style="font-size:smaller"><?php echo db_result($res,$x,'filename'); ?></span></td>
-					<td><span style="font-size:smaller"><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></span></td>
-					<td><span style="font-size:smaller"><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></span></td>
+					<td nowrap="nowrap"><?php echo db_result($res,$x,'filename'); ?></td>
+					<td><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></td>
+					<td><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></td>
 				</tr>
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-					<td>
-						<span style="font-size:smaller">
+				file:///usr/share/ubuntu-artwork/home/index.html	<td>
+						
 							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
-						</span>
+						
 					</td>
 					<td>
-						<span style="font-size:smaller">
+						
 							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10" />
-						</span>
+						
 					</td>
 					<td><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','update_refresh') ?> " /></td>
 				</tr>
@@ -383,9 +383,9 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>
-						<span style="font-size:smaller">
+						
 							<input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','delete_file') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo $Language->getText('project_admin_editrelease','i_am_sure') ?> 
-						</span>
+						
 					</td>
 				</tr>
 			</form>

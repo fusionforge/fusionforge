@@ -210,8 +210,8 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 			<h4><?php echo $Language->getText('project_admin_qrs','file_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-		<span style="color:red"><strong>
-		<?php echo $Language->getText('project_admin_qrs','release_note').' ('.$Language->getText('project_admin_qrs','maximum_file_size').' '. ini_get('upload_max_filesize')?>)</strong></span><br />
+		<span class="important">
+		<?php echo $Language->getText('project_admin_qrs','release_note').' ('.$Language->getText('project_admin_qrs','maximum_file_size').' '. ini_get('upload_max_filesize')?>)</span><br />
 		<?php echo $Language->getText('project_admin_qrs','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
 		<?php if ($sys_use_ftpuploads) { 
 

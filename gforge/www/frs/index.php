@@ -139,7 +139,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 		   	// Highlight the release if one was chosen
 			if ( $release_id ) {
 				if ( $release_id == $package_release['release_id'] ) {
-					$bgstyle = 'BGCOLOR="pink"';
+					$bgstyle = 'class="release-highlight"';
 					$cell_data[] = array('&nbsp;<strong>
 						<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
 						'colspan="3"');

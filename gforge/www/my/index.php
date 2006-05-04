@@ -87,11 +87,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		foreach($assignedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" bgcolor="#FFFFFF"><strong><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="content""><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
-				$art->ArtifactType->getName().'</a></strong></td></tr>';
+				$art->ArtifactType->getName().'</a><</td></tr>';
 
 			}
 			echo '
@@ -108,7 +108,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		}
 	} else {
 		echo '
-			<tr><td colspan="3" bgcolor="#FFFFFF">'.$Language->getText('my', 'no_tracker_items_assigned').'</td></tr>';
+			<tr><td colspan="3" span="">'.$Language->getText('my', 'no_tracker_items_assigned').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
@@ -142,12 +142,12 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			$group =& $projectGroup->getGroup();
 			if ($projectGroup->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" bgcolor="#FFFFFF"><strong><a href="/pm/task.php?group_id='.
+				<tr><td colspan="3" class="content"><strong><a href="/pm/task.php?group_id='.
 				$group->getID().
 				'&amp;group_project_id='.
 				$projectGroup->getID().'">'.
 				$group->getPublicName().' - '.
-				$projectGroup->getName().'</a></strong></td></tr>';
+				$projectGroup->getName().'</a></td></tr>';
 			}
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
@@ -163,7 +163,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" bgcolor="#FFFFFF">'.$Language->getText('my', 'no_open_tasks').'</td></tr>';
+		<tr><td colspan="3" class="content">'.$Language->getText('my', 'no_open_tasks').'</td></tr>';
 		echo db_error();
 	}
 	echo $HTML->listTableBottom();
@@ -183,11 +183,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		foreach ($submittedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" bgcolor="#FFFFFF"><strong><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="content"><strong><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
-				$art->ArtifactType->getName().'</a></strong></td></tr>';
+				$art->ArtifactType->getName().'</a></td></tr>';
 			}
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
@@ -203,7 +203,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" bgcolor="#FFFFFF">'.$Language->getText('my', 'no_tracker_items_submitted').'</td></tr>';
+		<tr><td colspan="3" class="content">'.$Language->getText('my', 'no_tracker_items_submitted').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
@@ -304,7 +304,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
-			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a></span>';
+			<a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a>';
 		}
 	}
 
