@@ -96,7 +96,7 @@ $passwd_orig = file("/etc/passwd", "r");
 
 // Now write the file with the gforge users at the end
 $passwd = fopen("/etc/passwd".FILE_EXTENSION, "w");
-$etc_users = array();
+$unmanaged_etc = array();
 for ($i=0; $i < count($passwd_orig); $i++) {
 	$line = trim($passwd_orig[$i]);
 	// Skip the GForge users (will be written later)
@@ -117,11 +117,8 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 	$entries = explode(":", $line);
 	if (!empty($entries[0])) {
 		$username = $entries[0];
-		$etc_users[] = $username;		// this is currently not used, but it may be used in the future
-		if (!in_array($username, $gforge_users)) {
-			// write the user only if it's not a gforge user
-			fwrite($passwd, $line."\n");
-		}
+		$unmanaged_etc[] = $username;
+		fwrite($passwd, $line."\n");
 	} else {
 		// blank line or comment
 		fwrite($passwd, $line."\n");
@@ -137,6 +134,7 @@ $passwd_orig = file("/etc/shadow", "r");
 
 // Now write the file with the gforge users at the end
 $shadow = fopen("/etc/shadow".FILE_EXTENSION, "w");
+$unmanaged_shadow = array();
 for ($i=0; $i < count($passwd_orig); $i++) {
 	$line = trim($passwd_orig[$i]);
 	// Skip the GForge users (will be written later)
@@ -157,10 +155,8 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 	$entries = explode(":", $line);
 	if (!empty($entries[0])) {
 		$username = $entries[0];
-		if (!in_array($username, $gforge_users)) {
-			// write the user only if it's not a gforge user
-			fwrite($shadow, $line."\n");
-		}
+		$unmanaged_shadow[] = $username;
+		fwrite($shadow, $line."\n");
 	} else {
 		// blank line or comment
 		fwrite($shadow, $line."\n");
@@ -180,8 +176,20 @@ for ($i=0; $i < count($gforge_lines_passwd); $i++) {
 	$line_passwd = $gforge_lines_passwd[$i];
 	$line_shadow = $gforge_lines_shadow[$i];
 	
-	fwrite($passwd, $line_passwd."\n");
-	fwrite($shadow, $line_shadow."\n");
+	
+	$entries = explode(":", $line_passwd);
+	$username = $entries[0];
+	if (!in_array($username, $unmanaged_etc)) {
+		// Only write the user if it must be managed by gforge (that is, if it's a new
+		// user or it was found inside the #GFORGE markers).
+		fwrite($passwd, $line_passwd."\n");
+	}
+	
+	$entries = explode(":", $line_shadow);
+	$username = $entries[0];
+	if (!in_array($username, $unmanaged_shadow)) {
+		fwrite($shadow, $line_shadow."\n");
+	}
 }
 fwrite($passwd, "#GFORGEEND\n");
 fwrite($shadow, "#GFORGEEND\n");
@@ -235,6 +243,10 @@ for ($i=0; $i < count($group_orig); $i++) {
 }
 
 // Now write the GForge groups
+// Note that we FORCE the GForge groups to be managed by GForge. This is different than the
+// users, where the administrator could move a user outside the #GFORGE markers and manually
+// manage the user. This is done because we must add the users to the group, and for this we
+// must manage them.
 fwrite($group, "#GFORGEBEGIN\n");
 
 for ($i = 0; $i < count($gforge_groups); $i++) {
