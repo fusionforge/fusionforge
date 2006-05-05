@@ -107,8 +107,7 @@ if ($discrim) {
 	}
 
 	// build text for top of page on what viewier is seeing
-	$discrim_desc = '<span style="color:red;font-size:smaller">'.$Language->getText('trove_list','limiting_view').':
-</span>';
+	$discrim_desc = $Language->getText('trove_list','limiting_view').':';
 	
 	for ($i=0;$i<sizeof($expl_discrim);$i++) {
 		$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
@@ -127,7 +126,7 @@ print '<p>'. (isset($discrim_desc) ? $discrim_desc : '') . '</p>';
 // ######## two column table for key on right
 // first print all parent cats and current cat
 print '<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr valign="top"><td><span style="font-family:arial,helvetica">';
+<tr valign="top"><td>';
 $folders = explode(" :: ",$row_trove_cat['fullpath']);
 $folders_ids = explode(" :: ",$row_trove_cat['fullpath_ids']);
 $folders_len = count($folders);
@@ -180,7 +179,7 @@ while ($row_sub = db_fetch_array($res_sub)) {
 		
 }
 // ########### right column: root level
-print '</span></td><td><span style="font-family:arial,helvetica">';
+print '</td><td>';
 // here we print list of root level categories, and use open folder for current
 $res_rootcat = db_query("
 	SELECT trove_cat_id,fullname
@@ -244,7 +243,7 @@ if (!is_numeric($page)) {
 }
 
 // store this as a var so it can be printed later as well
-$html_limit = '<span style="text-align:center;font-size:smaller">';
+$html_limit = '';
 if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 	$html_limit .= 'More than ';
 	$html_limit .= $Language->getText('trove_list','more_than',array($querytotalcount));
@@ -290,7 +289,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	}	
 
 	if ($row_grp && $viewthisrow) {
-		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2"><span style="font-family:arial,helvetica">';
+		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
 		print "$i_proj. <a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
 			.htmlspecialchars($row_grp['group_name'])."</strong></a> ";
 		if ($row_grp['short_description']) {
@@ -299,11 +298,11 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 
 		print '<br />&nbsp;';
 		// extra description
-		print '</span></td></tr><tr valign="top"><td><span style="font-family:arial,helvetica">';
+		print '</span></td></tr><tr valign="top"><td>';
 		// list all trove categories
 		print trove_getcatlisting($row_grp['group_id'],1,0);
 
-		print '</span></td>'."\n".'<td align="right"><span style="font-family:arial,helvetica">'; // now the right side of the display
+		print '</span></td>'."\n".'<td align="right">'; // now the right side of the display
 		print 'Activity Percentile: <strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 		print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 		print '<br />Register Date: <strong>'.date($sys_datefmt,$row_grp['register_time']).'</strong>';

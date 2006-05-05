@@ -185,7 +185,7 @@ if (!session_loggedin()) {
 				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
-		<tr><td colspan="2" class="content">';
+		<tr><td colspan="2" class="tablecontent">';
 	}
 
 	echo $HTML->boxBottom();

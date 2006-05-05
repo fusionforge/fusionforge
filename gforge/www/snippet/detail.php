@@ -100,14 +100,14 @@ if ($type=='snippet') {
 		<hr />
 		<h2>'.$Language->getText('snippet_detail','latest_snippet_version').' :'.db_result($result,0,'version').'</h2>
 		<p>
-		<pre><span style="font-size:smaller">'. db_result($result,0,'code') .'
-		</span></pre>
+		<span class="snippet-detail">'. db_result($result,0,'code') .'
+		</span>
 		</p>';
 	/*
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span style="color:red">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
+	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
 	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new').'.</p>';
 
 	snippet_footer(array());
@@ -196,7 +196,7 @@ if ($type=='snippet') {
 		Show a form so you can add a new version of this package
 	*/
 	echo '
-	<h3><a href="/snippet/addversion.php?type=package&amp;id='.$id.'"><span style="color:red">' .$Language->getText('snippet_detail','submit_a_new_version').'</span></a></h3>
+	<h3><a href="/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' .$Language->getText('snippet_detail','submit_a_new_version').'</span></a></h3>
 	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new_version_of_package').'.</p>';
 
 	snippet_footer(array());

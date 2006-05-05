@@ -43,18 +43,17 @@ print '<h3>'.$Language->getText('stats_lastlogins','most_recent_open').'</h3>';
 
 $alt=true;
 while ($row_logins = db_fetch_array($res_logins)) {
-	$fontcolor="white";
+	$class="alt1";
 	if ($alt == true) {
-		$fontcolor="lightgrey";
+		$class="alt2";
 	}
 	$alt = !$alt;
 
 	print '<tr>';
-	print '<td bgcolor='.$fontcolor.'>'.date($sys_datefmt, $row_logins['time']).'</td>';
-	print '<td bgcolor='.$fontcolor.'>'.$row_logins['user_name'].'</td>';
-	print '<td bgcolor='.$fontcolor.'>'.$row_logins['ip_addr'].'</td>';
+	print '<td class="'.$classr.'">'.date($sys_datefmt, $row_logins['time']).'</td>';
+	print '<td class="'.$class.'">'.$row_logins['user_name'].'</td>';
+	print '<td class="'.$class.'>'.$row_logins['ip_addr'].'</td>';
 	print '</tr>';
-	print '</font>';
 }
 ?>
 

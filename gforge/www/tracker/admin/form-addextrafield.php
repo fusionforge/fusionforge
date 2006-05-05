@@ -107,7 +107,7 @@
 		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr2'); ?>
 			<input type="text" name="attribute2" value="0" size="2" maxlength="2">
 		<p>
-		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></strong></p>
+		<span class="warning"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
 		</form></p>

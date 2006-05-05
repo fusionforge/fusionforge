@@ -37,8 +37,8 @@ echo notepad_func();
 		<?php echo $pg->categoryBox('category_id'); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(<?php echo $Language->getText('pm','admin') ?>)</a>
 		</td>
 
-		<td><font size="-1">
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" /></font>
+		
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
 	</tr>
 

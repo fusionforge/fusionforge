@@ -35,9 +35,7 @@ function create_snippet_hash($sql, $field) {
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
 	global $Language;
-	$return .=
-	'<div style="font-family:arial,helvetica">
-	'.$Language->getText('snippet_caching','intro').'
+	$return .=$Language->getText('snippet_caching','intro').'
 	<br />
 	<p>
 	<table width="100%" border="0">

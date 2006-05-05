@@ -87,7 +87,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		foreach($assignedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="content""><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="tablecontent""><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
@@ -142,7 +142,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			$group =& $projectGroup->getGroup();
 			if ($projectGroup->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="content"><strong><a href="/pm/task.php?group_id='.
+				<tr><td colspan="3" class="tablecontent"><strong><a href="/pm/task.php?group_id='.
 				$group->getID().
 				'&amp;group_project_id='.
 				$projectGroup->getID().'">'.
@@ -163,7 +163,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" class="content">'.$Language->getText('my', 'no_open_tasks').'</td></tr>';
+		<tr><td colspan="3" class="tablecontent">'.$Language->getText('my', 'no_open_tasks').'</td></tr>';
 		echo db_error();
 	}
 	echo $HTML->listTableBottom();
@@ -183,7 +183,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		foreach ($submittedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="content"><strong><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="tablecontent"><strong><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
@@ -203,7 +203,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" class="content">'.$Language->getText('my', 'no_tracker_items_submitted').'</td></tr>';
+		<tr><td colspan="3" class="tablecontent">'.$Language->getText('my', 'no_tracker_items_submitted').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>

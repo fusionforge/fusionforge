@@ -70,7 +70,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	//	List packages if there are any
 	if ($rows2 > 0) {
 		echo '
-			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','packages_of_snippets').'</strong><td';
+			<tr class="tableheading"><td colspan="3">' .$Language->getText('snippet_browse','packages_of_snippets').'<td>';
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
@@ -86,7 +86,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	//	List snippets if there are any
 	if ($rows > 0) {
 		echo '
-			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','snippets').'</strong></td>';
+			<tr class="tableheading"><td colspan="3">' .$Language->getText('snippet_browse','snippets').'</td>';
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '

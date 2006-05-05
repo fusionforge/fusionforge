@@ -35,7 +35,7 @@ if (session_loggedin()) {
 	if ($suppress_nav) {
 		echo '
 		<html>
-		<body style="background-color:white">';
+		<body>';
 	} else {
 		snippet_header(array('title'=>$Language->getText('add_snippet','title')));
 	}

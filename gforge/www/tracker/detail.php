@@ -37,8 +37,8 @@ echo notepad_func();
 
 				<?php /* } else { ?>
 
-				<h3><FONT COLOR="RED">
-				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3>
+				<span class="error">
+				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></span>
 				<?php if ($ath->allowsAnon()) { ?>
 				<?php echo $Language->getText('tracker','insert_email') ?>
 				<br />

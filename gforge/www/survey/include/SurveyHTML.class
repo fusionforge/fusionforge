@@ -106,9 +106,9 @@ class SurveyHTML extends Error {
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
 			$title = $Language->getText('survey_edit_question','title');
-			$warning = '<h3><span style="color:red">'. 
+			$warning = '<span class="warning">'. 
 				$Language->getText('survey_edit_question','warning_change_after_response').
-				'</span></h3>';
+				'</span>';
 			$question_id = $q->getID();
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
@@ -155,8 +155,8 @@ class SurveyHTML extends Error {
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
 			$title = $Language->getText('survey_edit','title');
-			$warning = '<h3><span style="color:red">'. 
-				$Language->getText('survey_edit','warning_survey_after_response').'</span></h3>';
+			$warning = '<span class="warning">'. 
+				$Language->getText('survey_edit','warning_survey_after_response').'</span>';
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
 			$survey_questions = $s->getQuestionString();
@@ -453,14 +453,14 @@ class SurveyHTML extends Error {
 		global $survey_id;
 		
 		if (!$s->isActive()) {
-			return '<h3><span style="color:red">'. $Language->getText('survey_error','no_vote_for_inactive').'</span></h3>';
+			return '<span class="error">'. $Language->getText('survey_error','no_vote_for_inactive').'</span>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
 		
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<h3><span style="color:red">'. $Language->getText('survey','warning_double_vote').'</span></h3>';
+			$ret.= '<span class="error">'. $Language->getText('survey','warning_double_vote').'</span>';
 		} 
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.

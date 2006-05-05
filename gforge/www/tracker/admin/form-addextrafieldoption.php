@@ -49,7 +49,7 @@
 		<?php echo $ath->statusBox('status_id',1,false,false); ?>
 		<?php } ?>
 		<p>
-		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','choice_warning') ?></span></strong></p>
+		<span class="warning"><?php echo $Language->getText('tracker_admin_build_boxes','choice_warning') ?></span></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo$Language->getText('general','submit') ?>" /></p>
 		</form>

@@ -108,7 +108,7 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
 	global $Language;	
 	print '<form action="projects.php" method="get">' . "\n";
-	print '<table width="100%" cellpadding="0" cellspacing="0" style="background-color:"'.$HTML->COLOR_LTBACK1.'">' . "\n";
+	print '<table width="100%" cellpadding="0" cellspacing="0" class="tableheading">' . "\n";
 
 	print '<tr><td><strong>'.$Language->getText('stats_site_utils','in_trove_category').'</strong></td><td>';
 	stats_generate_trove_pulldown( $trovecat );
@@ -258,7 +258,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		?>
 		<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
 
-		<tr valign="top" align="right" style="bgcolor:<?php echo $HTML->COLOR_LTBACK1;?>">
+		<tr valign="top" align="right" class="tableheading">
 			<td><strong><?php echo $Language->getText('stats_site_utils','group_name'); ?></strong></td>
 			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','page_views'); ?></strong></td>
 			<td><strong><?php echo $Language->getText('stats_site_utils','downloads'); ?></strong></td>
@@ -283,7 +283,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		$uri_string .= "&amp;orderby=";
 
 		?>
-		<tr valign="top" align="right" style="bgcolor:<?php echo $HTML->COLOR_LTBACK1; ?>">
+		<tr valign="top" align="right" class="tableheading">
 			<td>&nbsp;</td>
 			<td><a href="<?php echo $uri_string; ?>site_views"><?php echo $Language->getText('stats_site_utils','site'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>subdomain_views"><?php echo $Language->getText('stats_site_utils','subdomain'); ?></a></td>

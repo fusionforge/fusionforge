@@ -44,8 +44,8 @@
 			<input type="text" name="alias" value="<?php echo $ac->getAlias(); ?>" /></p>
 			</p>
 			<p>
-			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
-				</span></strong></p>
+			<span class="warning"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
+				</span></p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
 			</form></p>

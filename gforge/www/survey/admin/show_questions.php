@@ -54,12 +54,13 @@ Function  ShowResultsEditQuestion($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>" .$Language->getText('survey_show_questions','found',array($rows))."</h3>";
 
-	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
+	echo  "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr class=\"tableheading\">\n";
 	for($i=0; $i<$cols; $i++)  {
-		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
+		echo "<th>".db_fieldname($result,$i)."</th>\n";
 	}
+	
 	echo( "</tr>");
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
@@ -68,7 +69,7 @@ Function  ShowResultsEditQuestion($result) {
 		echo "<td><a href=\"edit_question.php?group_id=$group_id&amp;question_id=".db_result($result,$j,"question_id")."\">".db_result($result,$j,"question_id")."</a></td>\n";
 
 		for($i  =  1;  $i  <  $cols;  $i++)  {
-			printf("<td>%s</td>\n",db_result($result,$j,$i));
+			echo "<td>".db_result($result,$j,$i)."</td>\n";
 		}
 
 		echo( "</tr>");

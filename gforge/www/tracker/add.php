@@ -44,7 +44,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 		<td valign="top">';
 	if (!session_loggedin()) {
 		echo '
-		<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span></h3><br />
+		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><<br />
 		'.$Language->getText('tracker','insert_email').':<p>
 		<input type="text" name="user_email" size="30" maxlength="35" /></p>
 		';
@@ -90,7 +90,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 	<?php 
 	if (!session_loggedin()) {
 		echo '
-		<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span></h3><br />
+		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span><br />
 		'.$Language->getText('tracker','insert_email').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		';
@@ -98,7 +98,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 	} 
 	?>
 		<p>&nbsp;</p>
-		<h3><span style="color:red"><?php echo $Language->getText('tracker','security_note') ?></span></h3>
+		<span class="veryimportant"><?php echo $Language->getText('tracker','security_note') ?></span>
 		</td>
 	</tr>
 

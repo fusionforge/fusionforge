@@ -118,12 +118,12 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 	<input type="hidden" name="set" value="custom" />
 	<table width="10%" border="0">
 	<tr>
-		<td><font size="-1">'.$Language->getText('pm_modtask','assignee').'<br />'. $tech_box .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm','category').'<br />'. $cat_box .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm','view_type').'<br />'. $view_box .'</font></td>
-		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></font></td>
+		<td>'.$Language->getText('pm_modtask','assignee').'<br />'. $tech_box .'</td>
+		<td>'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</td>
+		<td>'.$Language->getText('pm','category').'<br />'. $cat_box .'</td>
+		<td>'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</td>
+		<td>'.$Language->getText('pm','view_type').'<br />'. $view_box .'</td>
+		<td><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></td>
 	</tr></table></form><p />';
 
 
@@ -131,9 +131,9 @@ $rows=count($pt_arr);
 if ($rows < 1) {
 
 	echo '
-		<h1>'.$Language->getText('pm','no_tasks_found').'</h1>
+		<span class="feedback">'.$Language->getText('pm','no_tasks_found').'</span>
 		<p />
-		<strong>'.$Language->getText('pm','no_tasks_found_text').'</strong>';
+		<span class="important">'.$Language->getText('pm','no_tasks_found_text').'</span>';
 	echo db_error();
 } else {
 
@@ -338,13 +338,13 @@ if ($rows < 1) {
 
 			<table width="100%" border="0">
 			<tr><td colspan="2">
-<font size=1>
+
 <a href="javascript:checkAll(1)">'.$Language->getText('pm_browsetask','check_all').'</a>
 -
    <a href="javascript:checkAll(0)">'.$Language->getText('pm_browsetask','clear_all').'</a>
-</font>
+
 <p>
-<font color="#FF0000">'.$Language->getText('pm_browsetask','admin_mass_update').'
+<span class="important">'.$Language->getText('pm_browsetask','admin_mass_update').'
 			</td></tr>
 
 			<tr>

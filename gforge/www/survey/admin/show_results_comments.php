@@ -48,26 +48,20 @@ Function  ShowResultComments($result) {
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
+	echo  "<table border=\"0\">\n";
 	/*  Create  the  headers  */
-	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
+	echo "<tr class=\"tableheading\">\n";
 
 	for($i  =  0;  $i  <  $cols;  $i++)  {
-		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
+		echo "<th>".db_fieldname($result,$i)."</th>\n";
 	}
 	echo "</tr>";
 
 	for($j  =  0;  $j  <  $rows;  $j++)  {
-		if ($j%2==0) {
-			$row_bg="white";
-		} else {
-			$row_bg="$GLOBALS[COLOR_LTBACK1]";
-		}
-
-		echo "<tr style=\"background-color:$row_bg\">\n";
+			echo "<tr class=\"".$HTML->boxGetAltRowStyle($j)."\">\n";
 
 		for ($i = 0; $i < $cols; $i++) {
-			printf("<td>%s</td>\n",db_result($result,$j,$i));
+			echo "<td>".db_result($result,$j,$i)."</td>\n";
 		}
 
 		echo "</tr>";

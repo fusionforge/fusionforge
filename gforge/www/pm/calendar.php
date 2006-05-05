@@ -125,15 +125,14 @@ $HTML->header(array('title'=>$Language->getText("calendar", "title"),'group'=>$g
  */
 function make_task_link($task, $type) {
 	global $HTML, $Language, $group_id, $group_project_id;
-	return '<p style="font-size: ' . $HTML->FONTSIZE_SMALLEST
-		. '"><a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
+	return '<span class="calendar-tasklink"><a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
 		. '" href="/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
 		. '&amp;group_id=' . $group_id
 		. '&amp;group_project_id=' .$group_project_id
 		. '">' . ($type == 'begin' ?
 			  $Language->getText('calendar', 'task_begins', $task->getID()) :
 			  $Language->getText('calendar', 'task_ends', $task->getID()))
-		. '</a></p>';
+		. '</a></span>';
 }
 
 
@@ -189,13 +188,13 @@ function display_month($m, $y) {
 				if ($curr_date == $today['mday']
 				    && $y == $today['year']
 				    && $m == $today['mon']) {
-					$colour = " bgcolor=\"red\"";
+					$colour = " today";
 				} elseif ($curr_date == $day
 					  && $y == $year
 					  && $m == $month) {
-					$colour = " bgcolor=\"gray\"";
+					$colour = " day";
 				}
-				print "\t\t\t<td valign=\"top\"" . $colour . ">$curr_date";
+				print "\t\t\t<td valign=\"top\" class=" . $colour . ">$curr_date";
 				$cell_contents = '';
 				$rows = count($pt_arr);
 				for ($i = 0; $i < $rows; $i++) {
@@ -292,11 +291,11 @@ function display_month($m, $y) {
 	</form>
 	<table width="100%">
 		<tr>
-			<td width="20px" bgcolor="red"></td>
+			<td width="20px" class="calendar-today"></td>
 			<td><?php echo $Language->getText("calendar", "todaysdate") ?></td>
 		</tr>
 		<tr>
-			<td width="20px" bgcolor="gray"></td>
+			<td width="20px" class="calendar-day"></td>
 			<td><?php echo $Language->getText("calendar", "selecteddate") ?></td>
 		</tr>
 	</table>

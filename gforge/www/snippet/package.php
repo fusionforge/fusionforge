@@ -91,7 +91,7 @@ function show_add_snippet_box() {
 <body onload="show_add_snippet_box()">
 
 <p>
-<span style="color:red"><strong><?php echo $Language->getText('snippet_package','important'); ?></strong></span>
+<span class="important"><?php echo $Language->getText('snippet_package','important'); ?></span>
 <p>
 <?php echo $Language->getText('snippet_package','if_a_new_window'); ?></p>
 

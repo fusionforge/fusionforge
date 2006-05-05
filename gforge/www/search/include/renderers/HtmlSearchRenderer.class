@@ -128,11 +128,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 		
 		$html = '';
 		$html .= '<br />';
-		$html .= '<table style="background-color:'.$GLOBALS['HTML']->COLOR_LTBACK1.'" width="100%" cellpadding="5" cellspacing="0">';
+		$html .= '<table class="tablecontent" width="100%" cellpadding="5" cellspacing="0">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= '<a href="'.$this->getPreviousResultsUrl().'" style="text-decoration: none; font-weight:bold;">'
+			$html .= '<a href="'.$this->getPreviousResultsUrl().'" class="prev">'
 				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
 				. ' '.$this->Language->getText('search', 'previous_results').'</a>';
 		} else {
@@ -140,7 +140,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		}
 		$html .= '</td><td align="right">';
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
-			$html .= '<a href="'.$this->getNextResultsUrl().'" style="text-decoration: none; font-weight:bold;">'
+			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
 				.$this->Language->getText('search', 'next_results').' '
 				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
 		} else {
@@ -188,7 +188,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 			return '&nbsp;';
 		}
 		$regexp = implode($this->searchQuery->getWords(), '|');
-		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span style="background-color:pink">\1</span>', $text);
+		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="search-highlight">\1</span>', $text);
 	}
 
 	/**

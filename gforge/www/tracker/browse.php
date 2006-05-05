@@ -198,14 +198,14 @@ if (session_loggedin()) {
 	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
 
 	if (db_numrows($res)>0) {
-	echo '
-		<span style="font-size:smaller">'.html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'</span><br />
-		<span style="font-size:smaller"><input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input>
-		<span style="font-size:smaller"><strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.
-		$Language->getText('tracker','build_query').'</a></strong></span>';
+	echo 
+		html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'<br />
+		<input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input>
+		<strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.
+		$Language->getText('tracker','build_query').'</a></strong>';
 	} else {
-		echo '<span style="font-size:smaller"><strong>
-		<a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong></span>';
+		echo '<strong>
+		<a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong>';
 	}
 	echo '
 		</form>
@@ -214,8 +214,8 @@ if (session_loggedin()) {
 echo '
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="set" value="custom" />
-	<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<br />'. $tech_box .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<br />'. $status_box .'</span></td>';
+	<td>'.$Language->getText('tracker','assignee').':&nbsp;<br />'. $tech_box .'</td>'.
+	'<td>'.$Language->getText('tracker','status').':&nbsp;<br />'. $status_box .'</td>';
 	echo '
 </tr>
 
@@ -223,8 +223,8 @@ echo '
 
 	echo '
 	<tr>
-		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
-		'<td><span style="font-size:smaller">'. 
+		<td align="right">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
+		'<td>'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
 		'<input type="submit" name="submit" value="'.$Language->getText('tracker','quickbrowse').'" /></span></td>
@@ -389,13 +389,13 @@ if ($art_arr && count($art_arr) > 0) {
 
 			<table width="100%" border="0">
 			<tr><td colspan="2">
-<font size=1>
+
 <a href="javascript:checkAll(1)">'.$Language->getText('tracker_browse','check_all').'</a>
 -
   <a href="javascript:checkAll(0)">'.$Language->getText('tracker_browse','clear_all').'</a>
-</font>
+
 <p>
-<FONT COLOR="#FF0000">'.$Language->getText('tracker_browse','admin_mass_update').'
+<span class="important">'.$Language->getText('tracker_browse','admin_mass_update').'
 			</td></tr>';
 
 

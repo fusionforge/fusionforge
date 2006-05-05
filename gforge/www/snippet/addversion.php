@@ -167,7 +167,7 @@ function show_add_snippet_box() {
 </script>
 <body onLoad="show_add_snippet_box()">
 
-<p><span style="color:red"><strong><?php echo $Language->getText('snippet_addversion','important'); ?></strong></span></p>
+<p><span class="important"><?php echo $Language->getText('snippet_addversion','important'); ?></span></p>
 <p>
 <?php echo $Language->getText('snippet_addversion','if_new_window_opened'); ?>
 </p>

@@ -216,7 +216,7 @@ if ($add_cat && $group_project_id) {
 	<strong><?php echo $Language->getText('pm_admin_projects','category_name') ?>:</strong><br />
 	<input type="text" name="name" value="" size="15" maxlength="30" /><br />
 	<p />
-	<strong><font color="red"><?php echo $Language->getText('pm_admin_projects','category_note') ?></font></strong>
+	<span class="important"><?php echo $Language->getText('pm_admin_projects','category_note') ?></span>
 	<p />
 	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
 	</form>
@@ -262,7 +262,7 @@ if ($add_cat && $group_project_id) {
 		<strong><?php echo $Language->getText('pm_admin_projects','category_name')?>:</strong><br />
 		<input type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 		<p />
-		<strong><font color="red"><?php echo $Language->getText('pm_admin_projects','category_note2')?></font></strong>
+		<span class="important"><?php echo $Language->getText('pm_admin_projects','category_note2')?></span>
 		<p />
 		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
 		</form>

@@ -87,11 +87,11 @@ function snippet_header($params) {
 	/*
 		Show horizontal links
 	*/
-	echo '<span style="font-family:arial, helvetica">';
+	
 	echo '<p><strong>';
 	echo '<a href="/snippet/">' .$Language->getText('snippet_utils','browse').'</a>
 		 | <a href="/snippet/submit.php">' .$Language->getText('snippet_utils','submit_a_new_snippet').'</a>
-		 | <a href="/snippet/package.php">' .$Language->getText('snippet_utils','create_a_package').'</a></strong></p></span>';
+		 | <a href="/snippet/package.php">' .$Language->getText('snippet_utils','create_a_package').'</a></strong></p>';
 	echo '<p>&nbsp;</p>';
 }
 

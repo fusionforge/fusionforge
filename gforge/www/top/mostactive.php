@@ -45,7 +45,7 @@ if ($type == 'week') {
 
 $HTML->header(array('title'=>$title));
 
-print '<p><strong><FONT size="+1">'.$title.'</FONT></strong>
+print '<p><h3>'.$title.'</h3>
 <br /><em>('.$Language->getText('top_mostactive','updated_daily').')</em>
 
 <p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>';
@@ -67,7 +67,7 @@ while ($row_top = db_fetch_array($res_top)) {
 }
 
 if ($i<$rows) {
-print '<tr bgcolor="'.$HTML->COLOR_LTBACK2.'"><td>'.(($offset>0)?'<a href="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><strong><-- '.$Language->getText('general','more').'</strong></a>':'&nbsp;').'</td>
+print '<tr class="tablegetmore"><td>'.(($offset>0)?'<a href="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><strong><-- '.$Language->getText('general','more').'</a>':'&nbsp;').'</td>
 	<td>&nbsp;</td>
 	<td align="RIGHT"><a href="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><strong>'.$Language->getText('general','more').' --></strong></a></td></tr>';
 }

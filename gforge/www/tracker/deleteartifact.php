@@ -23,7 +23,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').':
 <table border="0" align="center">
 
 	<tr>
-		<td align="center"><h3><font color="#FF0000"><?php echo $Language->getText('tracker_artifact','are_you_sure_delete'); ?></font></h3>
+		<td class="veryimportant"><?php echo $Language->getText('tracker_artifact','are_you_sure_delete'); ?>
 			<h3>&quot;<?php echo $ah->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">

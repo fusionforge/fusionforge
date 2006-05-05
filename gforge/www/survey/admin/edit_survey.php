@@ -99,7 +99,7 @@ function show_questions() {
 // -->
 </script>
 
-<h3><span style="color:red"><?php echo $Language->getText('survey_edit','warning_survey_after_response'); ?></span></h3>
+<span class="warning"><?php echo $Language->getText('survey_edit','warning_survey_after_response'); ?></span>
 
 <p><?php echo $Language->getText('survey_edit','change_after_already_response'); ?>.</p>
 <p>

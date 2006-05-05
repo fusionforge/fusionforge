@@ -27,7 +27,7 @@ pm_header(array('title'=>$Language->getText('pm_deletetask','title'),'group_proj
 <table border="0" align="center">
 
 	<tr>
-		<td align="center"><h3><font color="#FF0000"><?php echo $Language->getText('pm_deletetask','are_you_sure'); ?></font></h3>
+		<td ><span class="veryimportant"><?php echo $Language->getText('pm_deletetask','are_you_sure'); ?></span></h3>
 			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
