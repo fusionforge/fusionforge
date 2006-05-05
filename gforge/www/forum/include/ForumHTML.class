@@ -172,7 +172,7 @@ class ForumHTML extends Error {
 		$ret_val .= '
 		<table border="0">
 			<tr>
-				<td style="content" nowrap="nowrap">'.$Language->getText('forum_utils','by').
+				<td style="tablecontent" nowrap="nowrap">'.$Language->getText('forum_utils','by').
 					$msg->getPosterRealName().
 					'<br />
 					';
@@ -218,7 +218,7 @@ class ForumHTML extends Error {
 		'
 		<table border="0">
 			<tr>
-				<td class="content" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= $Language->getText('forum_utils','by').' <a href="/users/'.
+				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= $Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br />

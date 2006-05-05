@@ -352,7 +352,7 @@ if ($forum_id) {
 		This code puts the nice next/prev.
 	*/
 	$ret_val .= '<table width="100%" border="0">
-		<tr class="content"><td width="50%">';
+		<tr class="tablecontent"><td width="50%">';
 	if ($offset != 0) {
 		$ret_val .= '<span class="prev">
 		<a href="javascript:history.back()"><strong>' .
