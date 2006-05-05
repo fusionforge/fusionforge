@@ -3,11 +3,30 @@ This stylesheet contains all style information
 removed from the code
 */
 
-OL,UL,P,BODY,TR,TD,TH,FORM {
-		font-family: arialverdana,arial,helvetica,sans-serif;
-		font-size:13px;
-		color: #202020;
+OL,UL,P,BODY,TR,TD,FORM {
+	font-family: arialverdana,arial,helvetica,sans-serif;
+	font-size:13px;
+	color: #202020;
+	text-decoration: none
 	}
+
+TH {
+	font-family: arialverdana,arial,helvetica,sans-serif;
+	font-size:13px;
+	color: #202020;
+	font-weight: bold;
+	text-align: left
+	}
+
+STRONG {font-weight: bold}
+
+H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
+H2 { font-size: large; font-family: arialverdana,arial,helvetica,sans-serif; }
+H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
+H4 { font-size: small; font-family: arialverdana,arial,helvetica,sans-serif; }
+H5 { font-size: x-small; font-family: arialverdana,arial,helvetica,sans-serif; }
+H6 { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
+
 H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
 H2 { font-size: large; font-family: arialverdana,arial,helvetica,sans-serif; }
 H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
@@ -25,6 +44,7 @@ PRE,TT { font-family: courier,sans-serif }
 .develtitle {
 	FONT-SIZE: 13px; COLOR: #535c5f; FONT-FAMILY: arial
 }
+
 /* link utilities on header of page */
 A.lnkutility { COLOR: #ffffff }
 A.lnkutility:visited { COLOR: #ffffff }
@@ -43,44 +63,65 @@ td.selTab { background-color: white}
 td.notSelTab { background-color: #909090}
 
 /* priority styles */
-td.priority1 { background-color: #dadada}
-td.priority2 { background-color: #dacaca}
-td.priority3 { background-color: #dababa}
-td.priority4 { background-color: #daaaaa}
-td.priority5 { background-color: #da8a8a}
+.priority1 { background-color: #dadada}
+.priority2 { background-color: #dacaca}
+.priority3 { background-color: #dababa}
+.priority4 { background-color: #daaaaa}
+.priority5 { background-color: #da8a8a}
 
-table.advancedSearch2 { background-color: #FFF4A8}
-tr.advancedSearch2 {font-weight: bold;background-color: #FFF4A8}
 
-table.advancedSearch1 { background-color: #FFF4A8}
-tr.advancedSearch1 {background-color: #FFF4A8}
-
+/* multiTableRow */
 tr.multiTableRowTitle {background-color: #DAD5D7 }
 td.multiTableRowTitle {font-weight: bold; color: #333333}
 
 .FONTCOLOR_HTMLBOX_TITLE {background-color: #333333}
 /* definition for content table */
-tr.content {background-color: #EAC164}
-td.content {background-color: #EAC164}
+.tableheading {background-color:#D0D0D0; text-align=center;font-weight:  bold}
+.tablecontent {background-color: #EAC164}
+.tablegetmore {background-color: #FFF4A8}
 .prev, .next {font-family: arial,helvetica; font-size: small; text-decoration: none}
+
 
 /* global styles */
 
-/* style for error messages */
-.error {color: red; font-size: medium; text-align: center}
-/* style for warning messages */
-.warning {color: red}
-/* style for feedback  */
-.feedback {color: green}
+/* style for error messages 
+   Use this style if you need to display an error, e.g:
+     User does not exist
+*/
+.error {color: red; font-size: medium; text-align: center; font-weight:  bold}
+
+/* style for warning messages 
+   Use this style if you need to display a warning*/
+
+.warning {color: red: text-decoration: none}
+
+/* style for feedback  
+   Use this style to tell the user that the operation he
+   requested was executed successfully, e.g:
+   User was successfully registered
+*/
+.feedback {color: green; font-size: medium; text-align: center; text-decoration: none}
+/* style for attention 
+   Use this if you wish to display important messages
+   within a text.
+   Note that once registered, the project cannot be deleted
+*/
+
+.important {color: red; font-weight: bold}
+
+
+.veryimportant {color: red; font-weight: bold; font-size: large; text-align: center}
+   
+
 /* style for required fields */
-.requiredfield {color: red}
+.requiredfield {color: red; font-weight: bold}
 
 .searchbox {font-size: smaller }
 .altRowStyleEven { background-color: #EAEAEA}
 .altRowStyleOdd { backgound-color: #E0E0E0}
 
 /* global styles, from .tab files */
-.highlight {color: red; text-decoration: bold}
+.highlight {color: red; font-weight: bold}
 .highlight2 {color: red}
 .plugin-active {color: #00ff00}
 .plugin-inactive {color: #800000}
@@ -97,4 +138,27 @@ tr.activity {background-color: #ffffff}
 .currentfile {color: blue}
 .popups {font-size: -1}
 
+/* styles for calendar (task manager) */
+.calendar-tasklink { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
+.calendar-today {background-color: red}
+.calendar-day {background-color: gray} 
 
+
+/* styles for search/advanced search */
+table.advancedSearch2 { background-color: #FFF4A8}
+tr.advancedSearch2 {font-weight: bold;background-color: #FFF4A8}
+
+table.advancedSearch1 { background-color: #FFF4A8}
+tr.advancedSearch1 {background-color: #FFF4A8}
+.search-highlight {background-color: pink}
+
+
+
+/* stats */
+
+.alt1 {background-color: white}
+.alt2 {background-color: gray}
+
+/* top */
+.topusersup {color: #009900}
+.topusersdown {color: #CC0000}
