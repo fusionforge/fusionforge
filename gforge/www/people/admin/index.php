@@ -134,7 +134,7 @@ if (user_ismember(1,'A')) {
 		<h4>New Category Name:</h4>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" /><br />
 		<p>
-		<strong><span style="color:red">Once you add a category, it cannot be deleted</span></strong></p>
+		<span class="imporant">Once you add a category, it cannot be deleted</span></p>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
 		</form></p>
@@ -169,7 +169,7 @@ if (user_ismember(1,'A')) {
 		<h4>New Skill Name:</h4>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" /><br />
 		<p>
-		<strong><span style="color:red">Once you add a skill, it cannot be deleted</span></strong></p>
+		<span class="important">Once you add a skill, it cannot be deleted</span></p>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
 		</form></p>

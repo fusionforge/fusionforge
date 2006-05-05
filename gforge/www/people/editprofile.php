@@ -140,7 +140,7 @@ if (session_loggedin()) {
 
 			} else	/* not confirmed multiedit */ {
 				people_header(array('title'=>$Language->getText('people_editprofile','skills_edit')));
-				echo '<h2><span style="color:red">'.$Language->getText('people_editprofile','edit_skills').'</span><h2>';
+				echo '<span class="important">'.$Language->getText('people_editprofile','edit_skills').'</span>';
 				echo $Language->getText('people_editprofile','change_required_fields');
 				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
@@ -195,7 +195,7 @@ if (session_loggedin()) {
 				} else {		  
 					people_header(array('title'=>$Language->getText('people_editprofile','confirm_skill_delete')));
 
-					echo '<h2><span style="color:red">'.$Language->getText('people_editprofile','confirm_delete').'</span><h2>';
+					echo '<span class="important">'.$Language->getText('people_editprofile','confirm_delete').'</span>';
 					echo $Language->getText('people_editprofile','about_to_delete',($rows > 1?"s":" ")).":<br /><br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
@@ -277,7 +277,7 @@ if (session_loggedin()) {
 		/* add skills. */
 		echo '<h2>'.$Language->getText('people_editprofile','add_new_skill').'</h2>';
 		echo $Language->getText('people_editprofile','you_can_enter_new_skills').'<br />'.
-			 '<FONT COLOR="#ff0000"><em><strong>'.$Language->getText('people_editprofile','all_fields_required').'</em></strong></FONT>';
+			 '<span class="required-field">'.$Language->getText('people_editprofile','all_fields_required').'</span>';
 	   	echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
 	   	echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
 		$cell_data = array();
