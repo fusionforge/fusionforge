@@ -1,3 +1,8 @@
+
+2006-05-05 Reinhard Spisser <reinhard@spisser.it>
+	* css-ification of www/pm, www/search, www/snippet, www/softwaremap
+	  www/stats, www/survey, www/tracker
+
 2006-05-04 Reinhard Spisser <reinhard@spisser.it>
 	* css-ification of common/, www/account, www/activity, www/developer
 	  www/forum, www/frs, www/my and www/include/languages
