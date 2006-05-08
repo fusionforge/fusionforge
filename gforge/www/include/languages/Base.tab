@@ -89,7 +89,7 @@ account_options	welcome		Welcome
 account_register	Preferences	Preferences
 account_register	communitymail	Receive additional community mailings. <i>(Low traffic.)</i>
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
-account_register	emailaddr	Email Address:<span class="highlight2">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</em>
+account_register	emailaddr	Email Address:<span class="important">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</em>
 account_register	err_badinsert	Insert Failed 
 account_register	theme	Theme
 account_register	err_email	Invalid Email Address
@@ -256,9 +256,9 @@ pluginman	action	Action
 pluginman	name	Plugin Name
 pluginman	users	Users Using it
 pluginman	groups	Groups Using it
-pluginman	notice	Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><span class="highlight2">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br><br>
-pluginman	active	<span class="plugin-active">Active</span>
-pluginman	inactive	<span class="plugin-inactive">Inactive</span>
+pluginman	notice	Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br><br>
+pluginman	active	Active
+pluginman	inactive	Inactive
 pluginman	activate	Activate
 pluginman	deactivate	Deactivate
 pluginman	success	Plugin $1 updated Successfully
@@ -329,7 +329,7 @@ admin_massmail	active_deliveries	Active Deliveries
 admin_massmail	all_project_admins	All Project Admins
 admin_massmail	all_project_developers	All Project Developers
 admin_massmail	all_users	All Users
-admin_massmail	be_verry_carefull	Be <span class="highlight">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	be_verry_carefull	Be <span class="important">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 admin_massmail	date	Date
 admin_massmail	developers_test	Developers (test)
 admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
@@ -1017,7 +1017,7 @@ mail_admin_addlist	form_ispublic	Is Public?
 mail_admin_addlist	form_name	Mailing List Name:
 mail_admin_addlist	list_added	List Added
 mail_admin_addlist	pagetitle	Add a Mailing List
-mail_admin_addlist	list_information	<p>Lists are named in this manner:<br /><strong>projectname-listname@$1</strong></p><p>It will take <span class="highlight">6-24 Hours</span> for your list to be created.</p>
+mail_admin_addlist	list_information	<p>Lists are named in this manner:<br /><strong>projectname-listname@$1</strong></p><p>It will take <span class="important">6-24 Hours</span> for your list to be created.</p>
 mail_admin_updatelist	form_description	Description:
 mail_admin_updatelist	form_ispublic	Is Public?
 mail_admin_updatelist	form_updatelist	Update
@@ -1280,7 +1280,7 @@ pm	hours	Estimated Hours
 pm	intro	Choose a Subproject and you can browse/edit/add tasks to it.
 pm	no_tasks_found	No Matching Tasks found
 pm	no_tasks_found_text	Add tasks using the link above
-pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="highlight2">The Admin for this project will have to set up projects using the admin page</span></B>
+pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="important">The Admin for this project will have to set up projects using the admin page</span></B>
 pm	percent_complete	Percent Complete
 pm	priority	Priority
 pm	start_date	Start Date
@@ -1683,7 +1683,7 @@ project_showfiles	new_release	To create a new release click here.
 project_showfiles	no_releases	No releases
 project_showfiles	package	Package
 project_showfiles	project_totals	Project totals
-project_showfiles	release_highlighted	The release you have chosen is <span class="release-highlight">highlighted</span>.
+project_showfiles	release_highlighted	The release you have chosen is <span class="selected">highlighted</span>.
 project_showfiles	release_notes	Release &amp; Notes
 project_showfiles	size	Size
 project_showfiles	title	Project Filelist
@@ -1967,7 +1967,7 @@ searchbox	softwaregroup	Software/Group
 searchbox	task	Tasks
 searchbox	tasks	This project's tasks
 searchbox	trackers	This project's trackers
-sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="highlight2"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>
+sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="important"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>
 sendmessage	contact	Contact
 sendmessage	email	Your Email Address
 sendmessage	email_only_to	You can only send to addresses 
@@ -2059,7 +2059,7 @@ snippet_package	suggest_a_language	Suggest a Language
 snippet_package	title	Submit A New Snippet Package
 snippet_package	title_new_snippet_package	Submit A New Snippet Package
 snippet_package	version	Version
-snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="highlight">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
 snippet_submit	category	Category
 snippet_submit	description	Description
 snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
@@ -2074,7 +2074,7 @@ snippet_submit	suggest_a_category	Suggest a Category
 snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	type	Script Type
 snippet_submit	version	Version
-snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="highlight">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
 snippet_utils	auctions	Auctions
 snippet_utils	author	Author
 snippet_utils	bbs_systems	BBS Systems
@@ -2392,7 +2392,7 @@ tracker	id	ID
 tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here
 tracker	item_created	Item Successfully Created
 tracker	no_trackers	No Accessible Trackers Found
-tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><span class="highlight2">The Admin for this project will have to set up data types using the $1 admin page $2</span>
+tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the $1 admin page $2</span>
 tracker	open_date	Open Date
 tracker	please_login	Please $1 login $2
 tracker	priority	Priority
