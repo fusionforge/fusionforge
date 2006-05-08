@@ -7,7 +7,8 @@ OL,UL,P,BODY,TR,TD,FORM {
 	font-family: arialverdana,arial,helvetica,sans-serif;
 	font-size:13px;
 	color: #202020;
-	text-decoration: none
+	text-decoration: none;
+	font-weight: none
 	}
 
 TH {
@@ -18,6 +19,29 @@ TH {
 	text-align: left
 	}
 
+
+a:link { text-decoration:none; color: #0000be }
+a:visited { text-decoration:none; color: #0000be }
+a:active { text-decoration:none }
+a:hover { text-decoration:underline; color:red }
+
+.titlebar { color: black; text-decoration: none; font-weight: bold; }
+a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
+a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: x-small; }
+a.tabsellink { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
+a.tabsellink:visited { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
+a.tabsellink:hover { text-decoration: none; color: #0000be; font-weight: bold; font-size: x-small; }
+
+/* form elements */
+
+FORM {font-size: x-small}
+
+TEXTAREA, INPUT, SELECT, OPTION {font-size: x-small}
+
+
+/* end form elements */
+
 STRONG {font-weight: bold}
 
 H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
@@ -26,15 +50,6 @@ H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
 H4 { font-size: small; font-family: arialverdana,arial,helvetica,sans-serif; }
 H5 { font-size: x-small; font-family: arialverdana,arial,helvetica,sans-serif; }
 H6 { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-
-H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
-H2 { font-size: large; font-family: arialverdana,arial,helvetica,sans-serif; }
-H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
-H4 { font-size: small; font-family: arialverdana,arial,helvetica,sans-serif; }
-H5 { font-size: x-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-H6 { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-
-
 
 
 P { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; COLOR: #535c5f;}
@@ -71,16 +86,15 @@ td.notSelTab { background-color: #909090}
 
 
 /* multiTableRow */
-tr.multiTableRowTitle {background-color: #DAD5D7 }
-td.multiTableRowTitle {font-weight: bold; color: #333333}
+.multiTableRowTitle {background-color: #DAD5D7 }
 
-.FONTCOLOR_HTMLBOX_TITLE {background-color: #333333}
+
 /* definition for content table */
 .tableheading {background-color:#D0D0D0; text-align=center;font-weight:  bold}
-.tablecontent {background-color: #EAC164}
+.tablecontent {background-color: #eeeeee}
 .tablegetmore {background-color: #FFF4A8}
 .prev, .next {font-family: arial,helvetica; font-size: small; text-decoration: none}
-
+//.tablefooter {background-color: #FFF4A8} not used
 
 /* global styles */
 
@@ -113,14 +127,27 @@ td.multiTableRowTitle {font-weight: bold; color: #333333}
 .veryimportant {color: red; font-weight: bold; font-size: large; text-align: center}
    
 
+/* the following style are for displaying items in different states */
+
+.active {background-color: lime; text-decoration: none; font-weight: normal}
+.inactive {background-color: gray}
+.deleted {background-color: blue}
+.suspended {background-color: yellow}
+.pending {background-color: red}
+
+/* the following style is used when a word or an item should be highlighted; e.g.
+   selected release or words in the advanced search */
+
+.selected {background-color: pink}
+
 /* style for required fields */
 .requiredfield {color: red; font-weight: bold}
 
-.searchbox {font-size: smaller }
-.altRowStyleEven { background-color: #EAEAEA}
-.altRowStyleOdd { backgound-color: #E0E0E0}
 
-/* global styles, from .tab files */
+.altRowStyleEven { background-color: #EAEAEA; font-weight: none}
+.altRowStyleOdd { background-color: #E0E0E0; font-weight: none}
+
+/* global styles, from .tab files, they should be removed in future */
 .highlight {color: red; font-weight: bold}
 .highlight2 {color: red}
 .plugin-active {color: #00ff00}
@@ -150,8 +177,9 @@ tr.advancedSearch2 {font-weight: bold;background-color: #FFF4A8}
 
 table.advancedSearch1 { background-color: #FFF4A8}
 tr.advancedSearch1 {background-color: #FFF4A8}
-.search-highlight {background-color: pink}
+.search-highlight {background-color: purple}
 
+.snippet-detail
 
 
 /* stats */
