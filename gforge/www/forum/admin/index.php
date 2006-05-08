@@ -99,11 +99,10 @@ if ($group_id) {
 			<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
 			<input type="radio" name="allow_anonymous" value="1" />'.$Language->getText('general','yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'.$Language->getText('general','no').'
-			<br /><br />
-			<span style="font-size:-1">' .
+			<br /><br />' .
 					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",0) . '
-				</span><br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
-				<span style="font-size:-1">
+				<br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
+				
 			<strong>'.$Language->getText('forum_admin_addforum','email_posts').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
 			<p>
@@ -142,21 +141,20 @@ if ($group_id) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-				<span style="font-size:-1">
+				
 				<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
 				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
 				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '.$Language->getText('general','no').'<br />
-				</span>
-				<span style="font-size:-1">
+				
+				
 				<strong>'.$Language->getText('forum_admin_addforum','is_public').'</strong><br />
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '.$Language->getText('general','no').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'.$Language->getText('general','deleted').'<br />
-				</span><p>
-				<span style="font-size:-1">' .
+				<p>' .
 					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",$f->getModerationLevel()) . '
-				</span><br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
-				<span style="font-size:-1">
+				<br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
+				
 
 				<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
@@ -167,7 +165,7 @@ if ($group_id) {
 				<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />
 				<input type="text" name="description" value="'. $f->getDescription() .'" size="40" maxlength="80" /><br />
 				<p>
-				<input type="submit" name="submit" value="'.$Language->getText('general','update').'" /></span>
+				<input type="submit" name="submit" value="'.$Language->getText('general','update').'" />
 			</form><p>';
 			//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
 			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'.$Language->getText('forum_admin','delete_forum').'</a><br />';

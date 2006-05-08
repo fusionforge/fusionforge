@@ -290,7 +290,7 @@ class ForumAdmin extends Error {
 			<input type="hidden" name="action" value="add_newattachtype" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '">
 			<input type="hidden" name="group_id" value="' . getIntFromRequest("group_id") . '" />
-			<font size = "-3" color="#FF0000">This applies to every project</font>
+			<span class="important">This applies to every project</span>
 				<p>
 				<p>
 			<script type="text/javascript">
@@ -434,9 +434,9 @@ class ForumAdmin extends Error {
 				$this->PrintAdminOptions();
 				if (!$res) {
 					echo db_error();
-					echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','updatenot_ok') . "</h3>";
+					echo "<p><p><span class=\"error\">" . $Language->getText('forum_admin_attachs','updatenot_ok') . "</span>";
 				}	else {
-					echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','updateok') . "</h3>";
+					echo "<p><p><span class=\"feedback\">" . $Language->getText('forum_admin_attachs','updateok') . "</span>";
 				}
 				
 				
@@ -450,9 +450,9 @@ class ForumAdmin extends Error {
 				$this->PrintAdminOptions();
 				if (!$res) {
 					echo db_error();
-					echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','updatenot_ok') . "</h3>";
+					echo "<p><p><span class=\"error\">" . $Language->getText('forum_admin_attachs','updatenot_ok') . "</span>";
 				}	else {
-					echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','updateok') . "</h3>";
+					echo "<p><p><span class=\"feedback\">" . $Language->getText('forum_admin_attachs','updateok') . "</span>";
 				}
 				
 			}
@@ -466,9 +466,9 @@ class ForumAdmin extends Error {
 			$this->PrintAdminOptions();
 			if (!$res) {
 				echo db_error();
-				echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','deletenot_ok') . "</h3>";
+				echo "<p><p><span class=\"error\">" . $Language->getText('forum_admin_attachs','deletenot_ok') . "</span>";
 			}	else {
-				echo "<p><p><h3 style=\"color:red\">" . $Language->getText('forum_admin_attachs','deleteok') . "</h3>";
+				echo "<p><p><span class=\"feedback\">" . $Language->getText('forum_admin_attachs','deleteok') . "</span>";
 			}
 			
 		}
