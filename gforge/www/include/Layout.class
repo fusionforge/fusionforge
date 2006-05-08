@@ -983,7 +983,7 @@ if (isset($params['group']) && $params['group']) {
 			}
 			$return .= '>';
 			if ( $istitle ) {
-				$return .='<span class="multiTableRowTitle"';
+				$return .='<span class="multiTableRowTitle">';
 			}
 			$return .= $cell_data[$c][0];
 			if ( $istitle ) {
