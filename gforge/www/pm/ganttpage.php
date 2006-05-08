@@ -155,15 +155,15 @@ if (!$_status) {
 		<?php
 
 echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
-	<table width="10%" border="0">
+	<table width="10%" border="0" class="tableheading">
 	<tr>
-		<TH>'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</TH>
-		<TH>'.$Language->getText('pm','status').':<br />'. $pg->statusBox('_status',$_status,'Any') .'</TH>
-		<TH>'.$Language->getText('pm','category').':<br />'. $cat_box .'</TH>
-		<TH>'.$Language->getText('pm_ganttpage','sort_on').':<br />'. $order_box .'</TH>
-		<TH>'.$Language->getText('pm_ganttpage','resolution').':<br />'. $dispres_box .'</TH>
-		<TH>'.$Language->getText('pm_ganttpage','size').':<br />'. $size_box .'</TH>
-		<TH><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></TH>
+		<td>'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</td>
+		<td>'.$Language->getText('pm','status').':<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td>'.$Language->getText('pm','category').':<br />'. $cat_box .'</td>
+		<td>'.$Language->getText('pm_ganttpage','sort_on').':<br />'. $order_box .'</td>
+		<td>'.$Language->getText('pm_ganttpage','resolution').':<br />'. $dispres_box .'</td>
+		<td>'.$Language->getText('pm_ganttpage','size').':<br />'. $size_box .'</td>
+		<td><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></td>
 	</tr></table></form>';
 
 echo '<img src="'. getStringFromServer('PHP_SELF') .

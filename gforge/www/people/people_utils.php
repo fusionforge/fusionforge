@@ -172,7 +172,7 @@ function people_edit_skill_inventory($user_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<TH><td colspan="4">'.$Language->getText('people','no_skill_setupup').'</h2></td></TH>';
+			<tr><td colspan="4">'.$Language->getText('people','no_skill_setupup').'</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {

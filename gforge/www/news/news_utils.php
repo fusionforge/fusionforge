@@ -203,7 +203,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center"><a href="/news/submit.php?group_id='.$group_id.'"><span style="font-size:smaller">[' . $Language->getText('news_utils', 'submit') . ']</span></a></div>';
+		$return .= '<div align="center"><a href="/news/submit.php?group_id='.$group_id.'">[' . $Language->getText('news_utils', 'submit') . ']</a></div>';
 	}
 
 	return $return;
