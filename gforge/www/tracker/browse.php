@@ -121,6 +121,9 @@ $tech_id_arr[]='0';  //this will be the 'any' row
 $tech_name_arr=util_result_column_to_array($res_tech,1);
 $tech_name_arr[]=$Language->getText('tracker','any');
 
+if (is_array($_assigned_to)) {
+	$_assigned_to='';
+}
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,$Language->getText('tracker','unassigned'));
 
 
@@ -178,8 +181,22 @@ $changed_arr[]= 3600 * 24 * 30;// 1 month
 //	statuses can be custom in GForge 4.5+
 //
 if ($ath->usesCustomStatuses()) {
-	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$_extra_fields[$ath->getCustomStatusField()],false,'',true,$Language->getText('tracker','status_any'));
+	$aux_extra_fields = array();
+	if (is_array($_extra_fields)){
+		$keys=array_keys($_extra_fields);
+		foreach ($keys as $key) {
+			if (!is_array($_extra_fields[$key])) {
+				$aux_extra_fields[$key] = $_extra_fields[$key];
+			}
+		}
+	} else {
+		$aux_extra_fields = $_extra_fields;
+	}
+	$status_box=$ath->renderSelect ($ath->getCustomStatusField(),$aux_extra_fields[$ath->getCustomStatusField()],false,'',true,$Language->getText('tracker','status_any'));
 } else {
+	if (is_array($_status)) {
+		$_status='';
+	}
 	$status_box = $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any'));
 }
 echo '
