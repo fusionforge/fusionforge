@@ -201,7 +201,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	}
 
 	if ($row_grp['status_comment']) {
-		print "<p>" .$Language->getText('admin_approve_pending','pending_reason'). "</p><span style=\"color:red\">".$row_grp['status_comment']."</span>";
+		print "<p>" .$Language->getText('admin_approve_pending','pending_reason'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
 	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";

@@ -59,10 +59,10 @@ function performAction($newStatus, $statusString, $user_id) {
 function show_users_list ($result) {
 	global $Language;
 	echo '<p>' .$Language->getText('admin_userlist','key') .':
-		<font color="#00ff00">'.$Language->getText('admin_userlist','active'). '</font>
-		<font color="grey">' .$Language->getText('admin_userlist','deleted') .'</font>
-		<font color="red">' .$Language->getText('admin_userlist','suspended'). '</font> '
-		.$Language->getText('admin_userlist','pending').'</p>';
+		<span class="active">'.$Language->getText('admin_userlist','active'). '</span>
+		<span class="deleted">' .$Language->getText('admin_userlist','deleted') .'</span>
+		<span class="suspended">' .$Language->getText('admin_userlist','suspended'). '</span>
+		<span class="pending">' .$Language->getText('admin_userlist','pending'). '</span>'.'</p>';
 
 	$headers = array(
 		$Language->getText('admin_userlist', 'login'),
@@ -86,10 +86,11 @@ function show_users_list ($result) {
 
 	$count = 0;
 	while ($usr = db_fetch_array($result)) {
-		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td bgcolor="';
-		if ($usr['status'] == 'A') print "#00ff00";
-		if ($usr['status'] == 'D') print "grey";
-		if ($usr['status'] == 'S') print "red";
+		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td class="';
+		if ($usr['status'] == 'A') print "active";
+		if ($usr['status'] == 'D') print "deleted";
+		if ($usr['status'] == 'S') print "suspended";
+		if ($usr['status'] == 'P') print "pending";
 		print "\"><a href=\"useredit.php?user_id=".$usr['user_id']."\">";
 		if ($usr['status'] == 'P') print "*";
 		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';

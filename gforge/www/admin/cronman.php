@@ -79,12 +79,12 @@ echo $HTML->listTableBottom();
 if($totalCount > ADMIN_CRONMAN_ROWS) {
 ?>
 <br />
-<table style="background-color:<?php echo $GLOBALS['HTML']->COLOR_LTBACK1; ?>" width="100%" cellpadding="5" cellspacing="0">
+<table class="tablegetmore" width="100%" cellpadding="5" cellspacing="0">
 	<tr>
 		<td><?php
 		if ($offset != 0) {
 			$previousUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset - ADMIN_CRONMAN_ROWS);
-			echo '<a href="'.$previousUrl.'" style="text-decoration: none; font-weight:bold;">'
+			echo '<a href="'.$previousUrl.'" class="prev">'
 				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
 				. ' '.$Language->getText('cronman', 'previous').'</a>';
 		} else {
@@ -93,7 +93,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 		echo '</td><td align="right">';
 		if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
 			$nextUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset + ADMIN_CRONMAN_ROWS);
-			echo '<a href="'.$nextUrl.'" style="text-decoration: none; font-weight:bold;">'
+			echo '<a href="'.$nextUrl.'" class="next">'
 				.$Language->getText('cronman', 'next').' '
 				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
 		} else {

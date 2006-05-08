@@ -97,19 +97,19 @@ $result1=db_query("select language_id, count(language_id) AS count from tmp_lang
 $result2=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
 if (db_numrows($result1)>0) {
 ?>
-	<h3 style="color:red">Tables loaded:</h3>
+	<span class="important">Tables loaded:</important>
 <?php
 	echo '
-	<table border="0" bgcolor=white width="100%">
-		<tr bgcolor=blue>
-			<td><b><font color="white">Language</b></font></td>
-			<td colspan=2><b><font color="white">Translated</b></font></td>
-			<td colspan=2><b><font color="white">Extra</b></font></td>
-			<td><b><font color="white">Double</b></font></td>
-			<td><b><font color="white">Translation</b></font></td>
-			<td><b><font color="white">To Translate</b></font></td>
-			<td><b><font color="white">Not in Base</b></font></td>
-			<td><b><font color="white">Tab file</b></font></td>
+	<table border="0">
+		<tr class="tableheading">
+			<td>Language</td>
+			<td colspan=2>Translated</td>
+			<td colspan=2>Extra</td>
+			<td>Double</td>
+			<td>Translation</td>
+			<td>To Translate</td>
+			<td>Not in Base</td>
+			<td>Tab file</td>
 		</tr>';
 		
 	$maxtrans=0;
@@ -125,7 +125,7 @@ if (db_numrows($result1)>0) {
 		$rate1=$howmany1 * 100 / $maxtrans;
 		$rate2=$howmany2 * 100 / $maxtrans;
 		$language_id=db_result($result1,$i,'language_id');
-		echo "\n<tr bgcolor=lightblue><td>$language_id</td>";
+		echo "\n<tr ".$HTML->boxGetAltRowStyle($i)."><td>$language_id</td>";
 		printf("<td>%d</td><td>%3.2f",$howmany1,$rate1);
 		echo "%</td>";
 		if ($rate2!=0) {
@@ -163,7 +163,7 @@ if (db_numrows($result1)>0) {
 	echo "\n</table>";
 } else {
 ?>
-	<h3 style="color:red">Available Tables:</h3>
+	<span class="important">Available Tables:</span>
 		<table border="0">
 <?php
 	$rep= $sys_urlroot . 'include/languages/';

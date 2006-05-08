@@ -115,7 +115,7 @@ if (getStringFromRequest('update')) {
 					if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {
 						$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
 					} else {
-						//doesn´t have a config file, but that´s ok
+						//doesnï¿½t have a config file, but thatï¿½s ok
 						$return_value2 = true;
 					}
 				}
@@ -127,7 +127,7 @@ if (getStringFromRequest('update')) {
 				}
 			}
 			if (getStringFromRequest('init')) {
-				// now we´re going to check if there´s a XX-init.sql file and run it
+				// now weï¿½re going to check if thereï¿½s a XX-init.sql file and run it
 				if (is_file($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql')) {
 					$arch = file_get_contents($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql');
 					$arch = preg_replace('/(INSERT INTO plugins.*$)/','',$arch); // remove the line that inserts into plugins table, we are already doing that (and this would return error otherwise)
@@ -159,8 +159,10 @@ echo $HTML->listTableTop($title_arr);
 
 $handle = opendir($sys_plugins_path);
 $j = 0;
+
 while ($filename = readdir($handle)) {
 	//Don't add special directories '..' or '.' to the list
+	$status=0; 
 	if (($filename!='..') && ($filename!='.') && ($filename!="CVS") ) {
 		//check if the plugin is in the plugins table
 		$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
@@ -170,11 +172,13 @@ while ($filename = readdir($handle)) {
 		}
 		if (db_numrows($res)!=0) {
 			$msg = $Language->getText('pluginman','active');
+			$status="active";
+			
 			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
 			$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
 			$res = db_query($sql);
 			if (db_numrows($res)>0) {
-				// tell the form to delete the users, so that we don´t re-do the query
+				// tell the form to delete the users, so that we donï¿½t re-do the query
 				$link .= "&delusers=1";
 				$users = " ";
 				for($i=0;$i<db_numrows($res);$i++) {
@@ -187,7 +191,7 @@ while ($filename = readdir($handle)) {
 			$sql = "SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = '$filename' and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id";
 			$res = db_query($sql);
 			if (db_numrows($res)>0) {
-				// tell the form to delete the groups, so that we don´t re-do the query
+				// tell the form to delete the groups, so that we donï¿½t re-do the query
 				$link .= "&delgroups=1";
 				$groups = " ";
 				for($i=0;$i<db_numrows($res);$i++) {
@@ -201,6 +205,7 @@ while ($filename = readdir($handle)) {
 			$init = '<input id="'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'">';
 		} else {
 			$msg = $Language->getText('pluginman','inactive');
+			$status = "inactive";
 			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate','$j');" . '">' . $Language->getText('pluginman','activate') . "</a>";
 			$init = '<input id="'.$j.'" type="checkbox" name="script[]" value="'.$filename.'">';
 			$users = "none";
@@ -209,7 +214,7 @@ while ($filename = readdir($handle)) {
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		 	'<td>'. $filename.'</td>'.
-		 	'<td><div align="center">'. $msg .'</div></td>'.
+		 	'<td span class="'.$status.'">'. $msg .'</span></td>'.
 		 	'<td><div align="center">'. $link .'</div></td>'.
 		 	'<td><div align="center">'. $init .'</div></td>'.
 		 	'<td><div align="left">'. $users .'</div></td>'.

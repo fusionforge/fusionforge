@@ -229,13 +229,13 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 		if (! $edit) $cols .=-1;
 
                 echo '<table border="0" width="100%">
-		<tr bgcolor="'.$HTML->COLOR_HTMLBOX_TITLE.'">
-		<td colspan="'.($cols+1).'"><strong><span style="color:'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</span></strong>';
+		<tr class="tableheading">
+		<td colspan="'.($cols+1).'">'. ucwords($unit) .'s';
 		if ($edit) echo '<a href="'.getStringFromServer('PHP_SELF').'?function=add&lang='.$lang.'">[add new]</a>';
 		echo "</td></tr>\n";
 
 		if ($edit) echo '
-			<tr><td width="5%"></td>';
+			<tr ><td width="5%"></td>';
 		else echo '
 			<tr>';
 

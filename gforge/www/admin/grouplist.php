@@ -98,6 +98,17 @@ echo $HTML->listTableTop($headers, $headerLinks);
 
 $i = 0;
 while ($grp = db_fetch_array($res)) {
+
+	if ($grp['status']=='A'){
+		$status="active";
+	}
+	if ($grp['status']=='P'){
+		$status="pending";
+	}
+	if ($grp['status']=='D'){
+		$status="deleted";
+	}
+	
 	$time_display = "";
 	if ($grp['register_time'] != 0) {
 		$time_display = date($sys_datefmt,$grp['register_time']);
@@ -106,7 +117,7 @@ while ($grp = db_fetch_array($res)) {
 	echo '<td><a href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';
 	echo '<td>'.$time_display.'</td>';
 	echo '<td>'.$grp['unix_group_name'].'</td>';
-	echo '<td>'.$grp['status'].'</td>';
+	echo '<td class="'.$status.'">'.$grp['status'].'</td>';
 	echo '<td>'.$grp['is_public'].'</td>';
 	echo '<td>'.$grp['license_name'].'</td>';
 	echo '<td>'.$grp['members'].'</td>';

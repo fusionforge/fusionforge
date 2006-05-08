@@ -36,7 +36,7 @@ site_admin_header(array('title'=>$Language->getText('admin_responses','title')))
 function check_select_value($value, $type) {
 	global $Language;
 	if( $value == "100" ) {
-		print("<span style=\"color:red\"><strong>".$Language->getText('admin_responses','you_cant',array($GLOBALS['type']))."</strong></span><br />\n");
+		print("<span class=\"important\">".$Language->getText('admin_responses','you_cant',array($GLOBALS['type']))."</span><br />\n");
 	}
 }
 ?>
