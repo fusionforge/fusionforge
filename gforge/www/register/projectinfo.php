@@ -124,11 +124,9 @@ site_header(array('title'=>$Language->getText('register','project_information'))
 
 <?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
 <p>
-<font size="-1">
 <textarea name="purpose" wrap="virtual" cols="70" rows="10">
 <?php echo htmlspecialchars(stripslashes($purpose)); ?>
 </textarea>
-</font>
 
 <?php echo $Language->getText('register','project_license', array($GLOBALS['sys_name'])) ?>
 
@@ -145,11 +143,9 @@ echo license_selectbox('license',$license);
 
 <?php echo $Language->getText('register','project_description')?>
 </p>
-<font size="-1">
 <textarea name="description" wrap="virtual" cols="70" rows="5">
 <?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
-</font>
 
 <?php echo $Language->getText('register','project_unix_name',array($GLOBALS['sys_default_domain'])) ?>
 
