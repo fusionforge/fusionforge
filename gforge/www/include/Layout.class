@@ -361,19 +361,18 @@ if (isset($params['group']) && $params['group']) {
 		<tr align="center">
 	<!--		<td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
 			<td background="'.$this->imgroot.'box-grad.png">
-		<table width="100%" border="0" cellspacing="1" cellpadding="2">
-			<tr>';
-
+		<table width="100%" border="0" cellspacing="1" cellpadding="2" >
+			<tr class="tableheading">';
 		$count=count($title_arr);
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><a class="sortbutton" href="'.$links_arr[$i].'"><span class="FONTCOLOR_HTMLBOX_TITLE"><strong>'.$title_arr[$i].'</strong></span></a></td>';
+				<td><a class="sortbutton" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><span class="FONTCOLOR_HTMLBOX_TITLE""><strong>'.$title_arr[$i].'</strong></span></td>';
+				<td>'.$title_arr[$i].'</td>';
 			}
 		}
 		return $return.'</tr>';

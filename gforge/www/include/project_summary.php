@@ -112,7 +112,7 @@ function project_summary($group_id,$mode,$no_table) {
 	if (!$no_table) {
 		$return .= '
 
-		<table border=0 width="100%"><tr><td bgcolor="#EAECEF">';
+		<table border=0 width="100%"><tr><td class="tablecontent">';
 	}
 
 	// ################## ArtifactTypes

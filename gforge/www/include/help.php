@@ -33,7 +33,7 @@ function help_header($title) {
 <head>
 <title><?php print $title; ?></title>
 </head>
-<body style="background-color:white">
+<body>
 <h4><?php echo $GLOBALS['sys_name']; ?> Site Help System:</h4>
 <h2><?php print $title; ?></h2>
 <hr />
