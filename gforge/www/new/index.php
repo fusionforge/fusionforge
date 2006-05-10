@@ -106,22 +106,20 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		}
 	}
 
-	echo "<tr style=\"background-color:".$HTML->COLOR_LTBACK1."\"><td>";
+		echo "<tr class=\"content\"><td>";
         if ($offset != 0) {
-		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
         	echo "<a href=\"/new/?offset=".($offset-20)."\">" .
 			html_image("t2.png","15","15",array("border"=>"0","align"=>"middle")) .
-			" <strong>".$Language->getText('new','newer_releases')."</strong></a></span>";
+			" <strong>".$Language->getText('new','newer_releases')."</strong></a>";
         } else {
         	echo "&nbsp;";
         }
 
 	echo "</td><td colspan=\"2\" align=\"right\">";
 	if (db_numrows($res_new)>$rows) {
-		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
 		echo "<a href=\"/new/?offset=".($offset+20)."\"><strong>".$Language->getText('new','older_releases')."</strong> " .
 		html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) .
-		"</a></span>";
+		"</a>";
 	} else {
 		echo "&nbsp;";
 	}

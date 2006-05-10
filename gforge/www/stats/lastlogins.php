@@ -35,24 +35,23 @@ print '<h3>'.$Language->getText('stats_lastlogins','most_recent_open').'</h3>';
 ?>
 
 <table  width="100%" cellspacing="0" cellpadding="0">
+<tr class="tableheading">
 <th><?php echo $Language->getText('stats_lastlogins','date'); ?></th>
 <th><?php echo $Language->getText('stats_lastlogins','username'); ?></th>
 <th><?php echo $Language->getText('stats_lastlogins','source_ip'); ?></th>
+</tr>
 
 <?php
 
 $alt=true;
+$ii=0;
 while ($row_logins = db_fetch_array($res_logins)) {
-	$class="alt1";
-	if ($alt == true) {
-		$class="alt2";
-	}
-	$alt = !$alt;
+	$ii++;
 
-	print '<tr>';
-	print '<td class="'.$classr.'">'.date($sys_datefmt, $row_logins['time']).'</td>';
-	print '<td class="'.$class.'">'.$row_logins['user_name'].'</td>';
-	print '<td class="'.$class.'>'.$row_logins['ip_addr'].'</td>';
+print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
+	print '<td >'.date($sys_datefmt, $row_logins['time']).'</td>';
+	print '<td >'.$row_logins['user_name'].'</td>';
+	print '<td >'.$row_logins['ip_addr'].'</td>';
 	print '</tr>';
 }
 ?>
