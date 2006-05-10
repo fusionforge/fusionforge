@@ -6,6 +6,10 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
+# Run as gforge
+my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
+$> = $uid;
+
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose = 0;
@@ -26,6 +30,9 @@ while(my ($uid, $gid, $status, $username, $shell, $passwd, $realname) = $c->fetc
 
 	push @user_array, $userlist;
 }
+
+# Run as root
+$> =  0;
 
 # Now write out the files
 write_array_file($file_dir."/dumps/user_dump", @user_array);

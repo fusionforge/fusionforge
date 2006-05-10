@@ -50,6 +50,7 @@ class ForumGateway extends Error {
 	var $Forum=-1;
 	var $Parent=0;
 	var $ForumId=-1;
+	var $Message="";
 
 	function ForumGateway() {
 		$this->Error();
@@ -131,11 +132,12 @@ class ForumGateway extends Error {
 		//we parse that ID to get the forum and thread that this should post to
 		//
 		$subj = $mp->getSubject();
+
+//DBG("mp headers: ".implode("**\n",$mp->headers));
+//DBG("mp body: ".$mp->body);
+//DBG("SUBJ: ".$subj);
+//DBG("BODY: ".$mp->getBody());
 /*
-DBG("mp headers: ".implode("**\n",$mp->headers));
-DBG("mp body: ".$mp->body);
-DBG("SUBJ: ".$subj);
-DBG("BODY: ".$mp->getBody());
 		$parent_start = (strpos($subj,'[',(strpos($subj,'[')+1))+1);
 		$parent_end = (strpos($subj,']',$parent_start)-1);
 		$this->Parent = substr($subj,$parent_start,($parent_end-$parent_start+1));
@@ -152,19 +154,35 @@ DBG("BODY: ".$mp->getBody());
 		}
 */
 		if (ereg('(\[)([0-9]*)(\])',$subj,$arr)) {
-		        $this->Parent=$arr[2];
+			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
 			$this->Subject = addslashes(substr($subj,$parent_end));
 		} else {
 			$this->Subject = addslashes($subj);
 			$this->Parent=0;
 		}
-
 		$this->Body =& addslashes($mp->getBody());
-//DBG('FPARENT: '.$this->Parent);
-//DBG('FSUBJ: '.$this->Subject);
-//DBG('FBODY: '.$this->Body);
-//exit;
+//DBG( "body1:". $this->Body);
+
+		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($begin === false) { //do nothing
+				return true; 
+		}		
+		// get the part of the message located after the marker
+		$this->Body = substr($this->Body, $begin+strlen(FORUM_MAIL_MARKER));
+//DBG( "body2:". $this->Body);
+		// now look for the ending marker
+		$end = strpos($this->Body, FORUM_MAIL_MARKER);
+		if ($end === false) {
+			return true;
+		}
+		$message = substr($this->Body, 0, $end);
+		$message = trim($message);
+		
+		// maybe the last line was "> (FORUM_MAIL_MARKER)". In that case, delete the last ">"
+		$message = preg_replace('/>$/', '', $message);
+		$this->Message = $message;
+		
 		return true;
 	}
 	
@@ -185,6 +203,7 @@ DBG("BODY: ".$mp->getBody());
 			session_set_new($user_id);
 		}
 
+//DBG( "AddMessage 1\n");
 		$Forum =& $this->getForum();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError("Could Not Get Forum");
@@ -198,6 +217,7 @@ DBG("BODY: ".$mp->getBody());
 			return false;
 		}
 
+//DBG( "AddMessage 2\n");
 		//
 		//	Create a blank forum message
 		//
@@ -209,9 +229,16 @@ DBG("BODY: ".$mp->getBody());
 			$this->setError("ForumMessage Error: ".$ForumMessage->getErrorMessage());
 			return false;
 		}
-		if (!$ForumMessage->create($this->Subject,$this->Body,$this->ThreadId,$this->Parent)) {
-			$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
-			return false;
+//DBG( "AddMessage 3\n");
+		if ($this->Message!=""){	
+			if (!$ForumMessage->create($this->Subject,$this->Message,$this->ThreadId,$this->Parent)) {
+//DBG( "AddMessage 4.".$ForumMessage->getErrorMessage()."\n");
+				$this->setError("ForumMessage Create Error: ".$ForumMessage->getErrorMessage());
+				return false;
+			} else {
+//DBG( "AddMessage 5.".$ForumMessage->getErrorMessage()."\n");
+				return true;
+			}
 		} else {
 			return true;
 		}

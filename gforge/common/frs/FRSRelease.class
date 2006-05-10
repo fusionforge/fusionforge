@@ -296,9 +296,9 @@ class FRSRelease extends Error {
 		$this->FRSPackage->Group->getPublicName(),
 		$this->FRSPackage->Group->getUnixName(),
 		$this->FRSPackage->getName(),
-		"<${proto}$GLOBALS[HTTP_HOST]/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
+		"<${proto}".getStringFromServer('HTTP_HOST')."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
 		$GLOBALS['sys_name'],
-		"<${proto}$GLOBALS[HTTP_HOST]/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
+		"<${proto}".getStringFromServer('HTTP_HOST')."/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
 			
 
 		$text = util_line_wrap($text);
@@ -424,11 +424,11 @@ class FRSRelease extends Error {
 			$this->setError('FRSRelease::update() Error On Update: '.db_error());
 			return false;
 		}
-		
+
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
 			db_rollback();
-			$this->setError('FRSRelease::update() Error Updating Release: CouldnÂ´t fetch data');
+			$this->setError('FRSRelease::update() Error Updating Release: Couldn´t fetch data');
 			return false;
 		}
 		$newfilename = $this->getFileName();
@@ -443,7 +443,7 @@ class FRSRelease extends Error {
 			} else {
 				if(!rename($olddirlocation,$newdirlocation)) {
 					db_rollback();
-					$this->setError('FRSRelease::update() Error Updating Release: CouldnÂ´t rename dir');
+					$this->setError('FRSRelease::update() Error Updating Release: Couldn´t rename dir');
 					return false;
 				}
 			}

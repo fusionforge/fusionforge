@@ -54,6 +54,10 @@ class ArtifactFactory extends Error {
 	var $max_rows;
 	var $fetched_rows;
 	var $extra_fields;
+	var $defaultquery;
+	var $moddaterange;
+	var $opendaterange;
+	var $closedaterange;
 
 	/**
 	 *  Constructor.
@@ -86,9 +90,10 @@ class ArtifactFactory extends Error {
 	 *	@param	int	The max number of rows to return.
 	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
 	 *	@param	int	Include this param if you want to limit to a certain assignee.
+	 *	@param	int	Include this param if you want to limit to a particular status.
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status) {
+	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
 //echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
@@ -100,7 +105,9 @@ class ArtifactFactory extends Error {
 		if (session_loggedin()) {
 			$u =& session_get_user();
 		}
-		$_extra_fields=array();
+		if (!is_array($_extra_fields)) {
+			$_extra_fields=array();
+		}
 
 		if (!$set) {
 			/*
@@ -109,6 +116,7 @@ class ArtifactFactory extends Error {
 			*/
 			if (session_loggedin()) {
 				$default_query=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				$this->defaultquery = $default_query;
 				if ($default_query) {
 					$aq = new ArtifactQuery($this->ArtifactType,$default_query);
 					$_extra_fields=$aq->getExtraFields();
@@ -116,15 +124,24 @@ class ArtifactFactory extends Error {
 					$sort=$aq->getSortOrd();
 					$_assigned_to=$aq->getAssignee();
 					$_status=$aq->getStatus();
+					$this->moddaterange = $aq->getModDateRange();
+					$this->opendaterange = $aq->getOpenDateRange();
+					$this->closedaterange = $aq->getCloseDateRange();
 				} else {
 					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
 					if ($custom_pref) {
+//$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
 						$pref_arr=explode('|',$custom_pref);
 						$_assigned_to=$pref_arr[0];
 						$_status=$pref_arr[1];
-						$order_col=$pref_arr[3];
-						$sort=$pref_arr[4];
-						$_changed=$pref_arr[5];
+						$order_col=$pref_arr[2];
+						$sort=$pref_arr[3];
+						$_changed=$pref_arr[4];
+						if ($this->ArtifactType->usesCustomStatuses()) {
+							$_extra_fields=unserialize($pref_arr[5]);
+						} else {
+							$_status=$pref_arr[1];
+						}
 						$set='custom';
 					} else {
 						//default to open
@@ -162,7 +179,27 @@ class ArtifactFactory extends Error {
 				/*
 					if this custom set is different than the stored one, reset preference
 				*/
-				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed;
+				if (is_array($_assigned_to)) {
+					$_assigned_to='';
+				}
+				$aux_extra_fields = array();
+				if (is_array($_extra_fields)){
+					//print_r($_extra_fields);
+					$keys=array_keys($_extra_fields);
+					
+					foreach ($keys as $key) {
+						if ($_extra_fields[$key] != 'Array') {
+							$aux_extra_fields[$key] = $_extra_fields[$key];
+						}
+					}
+				}
+
+				$extra_pref = '';
+				if (count($aux_extra_fields)>0) {
+					$extra_pref = '|'.serialize($aux_extra_fields);
+				}
+				
+				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.$extra_pref;
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
 				}
@@ -176,14 +213,21 @@ class ArtifactFactory extends Error {
 		$this->sort=$_sort_ord;
 		$this->order_col=$_order_col;
 		$this->status=$_status;
-		$this->assigned_to=$_assigned_to;
+		if ($_assigned_to != 'Array') {
+			$this->assigned_to=$_assigned_to;
+		}
 		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
 
-		if (!$max_rows || $max_rows < 5) {
+		// if $max_rows == 0 it means we want all the rows
+		if (is_null($max_rows) || $max_rows < 0) {
 			$max_rows=50;
 		}
-		$this->max_rows=$max_rows;
+		if ($default_query) {
+			$this->max_rows=0;
+		} else {
+			$this->max_rows=$max_rows;
+		}
 	}
 
 	
@@ -197,7 +241,15 @@ class ArtifactFactory extends Error {
 		$this->last_changed = time() - $this->changed_from;
 	}
 
-
+	/**
+	 *	getDefaultQuery - get the default query
+	 *
+	 *	@return	int	
+	 */
+	function getDefaultQuery() {
+		return $this->defaultquery;
+	}
+	
 	/**
 	 *	getArtifacts - get an array of Artifact objects.
 	 *
@@ -232,8 +284,13 @@ class ArtifactFactory extends Error {
 		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
 			$keys=array_keys($this->extra_fields);
 			$vals=array_values($this->extra_fields);
+			$ef_where_str='';
+			$ef_table_str='';
 			for ($i=0; $i<count($keys); $i++) {
-				if (is_array($vals[$i])) {
+				if (empty($vals[$i])) {
+					continue;
+				}
+				if (is_array($vals[$i]) && !empty($vals[$i])) {
 					$vals[$i]=implode(',',$vals[$i]);
 				}
 				$ef_table_str.=", artifact_extra_field_data aefd$i ";
@@ -250,17 +307,49 @@ class ArtifactFactory extends Error {
 			$last_changed_str='';
 		}
 
+		//add constraint of range of modified dates
+		if ($this->moddaterange) {
+			$range_arr=explode(' ',$this->moddaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$moddatesql= " AND last_modified_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$moddatesql= '';
+		}
+		//add constraint of range of open dates
+		if ($this->opendaterange) {
+			$range_arr=explode(' ',$this->opendaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$opendatesql= " AND open_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$opendatesql= '';
+		}
+		//add constraint of range of close dates
+		if ($this->closedaterange) {
+			$range_arr=explode(' ',$this->closedaterange);
+			$begin_int = strtotime($range_arr[0]);
+			$end_int=strtotime($range_arr[1])+(24*60*60);
+			$closedatesql= " AND close_date BETWEEN '$begin_int' AND '$end_int' ";
+		} else {
+			$closedatesql= '';
+		}
+		
+		// these are currently not being used
+		$submitted_by_str = '';
+		
 		//
 		//  now run the query using the criteria chosen above
 		//
 		$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
+			$opendatesql $moddatesql $closedatesql 
 			 $status_str $assigned_str $last_changed_str $ef_where_str ) AS Artifacts
 			ORDER BY Artifacts.group_artifact_id ".$this->sort.", Artifacts.". $this->order_col ." ".$this->sort;
 //echo "$sql";
 
-		$result=db_query($sql,($this->max_rows),$this->offset);
+		$result=db_query($sql);//,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
