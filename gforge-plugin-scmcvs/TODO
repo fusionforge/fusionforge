@@ -1,5 +1,0 @@
-- Add functions to retrieve:
-   * cvsroot by project
-   * list of modules by project
-   * list of branches by project
-- Try to implement a common skel for scmsvn too
