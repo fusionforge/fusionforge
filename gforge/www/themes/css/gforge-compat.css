@@ -1,0 +1,227 @@
+/* Default stylesheet for gforge
+This stylesheet contains all style information
+removed from the code
+*/
+
+
+FORM {
+	font-size: x-small
+	}
+
+TEXTAREA, INPUT, SELECT, OPTION {
+	font-size: x-small
+	}
+
+
+/* end form elements */
+
+STRONG {font-weight: bold}
+
+h1, h2, h3, h4, h5, h6 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-weight:none;
+	padding:0;
+}
+
+H1 { 
+	font-size: x-large
+	}
+H2 { 
+	font-size: large
+	}
+H3 { 
+	font-size: medium
+	}
+
+H4 { 
+	font-size: small
+	}
+
+H5 { 
+	font-size: x-small
+	}
+
+H6 { 
+	font-size: xx-small
+	}
+
+p { 
+	font-size: 13px; 
+	font-family: arial, verdana ,helvetica,sans-serif; 
+	COLOR: #535c5f;
+	font-weight: 400;
+	margin:0;
+	padding:0;}
+
+/* tab menu styles */
+td.toptab { background-color: #E0E0E0}
+td.projecttab { background-color: #ffffff}
+
+td.footer1 { background-color: #E0E0E0}
+td.footer2 { background-color: #E0E0E0}
+td.footer3 { background-color: #E0E0E0}
+
+td.selTab { background-color: white}
+td.notSelTab { background-color: #909090}
+
+.titlebar { 
+	FONT-SIZE:13px; 
+	color: #FFFFFF; 
+	text-decoration: none; 
+	}
+
+.develtitle {
+	FONT-SIZE: 13px; 
+	COLOR: #535c5f; 
+	FONT-FAMILY: arial
+	}
+
+/* priority styles */
+.priority1 { background-color: #dadada}
+.priority2 { background-color: #dacaca}
+.priority3 { background-color: #dababa}
+.priority4 { background-color: #daaaaa}
+.priority5 { background-color: #da8a8a}
+
+
+/* multiTableRow */
+.multiTableRowTitle {background-color: #DAD5D7 }
+
+
+/* definition for content table */
+.tableheading {
+	background-color:#D0D0D0; 
+	text-align=center;
+	font-weight:  bold
+	}
+
+.tablecontent {
+	background-color: #eeeeee
+	}
+
+.tablegetmore {
+	background-color: #EAEAEA
+	}
+
+/* styles for prev next up and down*/
+.prev, .next, up, down {
+	font-family: arial,helvetica, sans-serif; 
+	font-size: small; 
+	text-decoration: bold
+	}
+
+/* top */
+.up {
+	color: #009900
+	}
+
+.down {
+	color: #CC0000
+	}
+
+/* global styles */
+
+/* style for error messages 
+   Use this style if you need to display an error, e.g:
+     User does not exist
+*/
+.error {
+	color: red; 
+	font-size: medium; 
+	text-align: center; 
+	font-weight:  bold
+	}
+
+/* style for warning messages 
+   Use this style if you need to display a warning*/
+
+.warning {
+	color: red: 
+	text-decoration: none
+	}
+
+/* style for feedback  
+   Use this style to tell the user that the operation he
+   requested was executed successfully, e.g:
+   User was successfully registered
+*/
+.feedback {
+	color: red; 
+	font-size: medium; 
+	text-align: center; 
+	text-decoration: none
+	}
+
+/* style for attention 
+   Use this if you wish to display important messages
+   within a text.
+   Note that once registered, the project cannot be deleted
+*/
+
+.important {
+	color: red; 
+	font-weight: bold
+	}
+
+
+.veryimportant {
+	color: red; 
+	font-weight: bold; 
+	font-size: large; 
+	text-align: center
+	}
+   
+
+/* the following style are for displaying items in different states */
+
+.active {
+	background-color: #00aa00; 
+	text-decoration: none; 
+	font-weight: normal
+	}
+
+.inactive {
+	background-color: gray
+	}
+
+.deleted {
+	background-color: blue
+	}
+
+.suspended {
+	background-color: #ffaa00
+	}
+
+.pending {
+	background-color: white
+	}
+
+/* the following style is used when a word or an item should be highlighted; e.g.
+   selected release or words in the advanced search */
+
+.selected {
+	background-color: pink
+	}
+
+/* style for required fields */
+.requiredfield {
+	color: red; 
+	font-weight: bold
+	}
+
+
+.altRowStyleEven { 
+	background-color: #EAEAEA; 
+	font-weight: none
+	}
+
+.altRowStyleOdd { 
+	background-color: #E0E0E0; 
+	font-weight: none
+}
+
+
+
+
+
+
