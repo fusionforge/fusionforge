@@ -172,7 +172,7 @@ class ForumHTML extends Error {
 		$ret_val .= '
 		<table border="0">
 			<tr>
-				<td style="tablecontent" nowrap="nowrap">'.$Language->getText('forum_utils','by').
+				<td class="tablecontent" nowrap="nowrap">'.$Language->getText('forum_utils','by').
 					$msg->getPosterRealName().
 					'<br />
 					';
@@ -267,7 +267,7 @@ class ForumHTML extends Error {
 			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
 			<table>
 			<tr>
-				<td>' . $Language->getText('forum_forum','currentfile') . ": <span class=\"currentfile\">" . $filename . '</span></td>
+				<td>' . $Language->getText('forum_forum','currentfile') . ": <span class=\"selected\">" . $filename . '</span></td>
 			</tr>
 			</table>
 			
@@ -561,7 +561,7 @@ class ForumHTML extends Error {
 			?>
 				 <?php //$text_support->displayTextField('body'); ?>
 			<br><br>		
-<!--		<span class="highlight"><?php echo $Language->getText('forum_utils','htmltag'); ?></span> -->
+<!--		<span class="selected"><?php echo $Language->getText('forum_utils','htmltag'); ?></span> -->
 				<p>
 				<?php $this->LinkAttachForm();?>
 				<p>

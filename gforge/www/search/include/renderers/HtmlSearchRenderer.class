@@ -188,7 +188,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 			return '&nbsp;';
 		}
 		$regexp = implode($this->searchQuery->getWords(), '|');
-		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="search-highlight">\1</span>', $text);
+		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="selected">\1</span>', $text);
 	}
 
 	/**

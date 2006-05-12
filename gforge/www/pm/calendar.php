@@ -8,7 +8,6 @@
  *
  * @version   $Id$
  *
- * @todo Remove hardcoded colours etc. and move into style sheet.
  * @todo some locales start the week with "Monday", and not "Sunday".
  * @todo display holidays.
  */
@@ -125,14 +124,14 @@ $HTML->header(array('title'=>$Language->getText("calendar", "title"),'group'=>$g
  */
 function make_task_link($task, $type) {
 	global $HTML, $Language, $group_id, $group_project_id;
-	return '<span class="calendar-tasklink"><a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
+	return '<a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
 		. '" href="/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
 		. '&amp;group_id=' . $group_id
 		. '&amp;group_project_id=' .$group_project_id
 		. '">' . ($type == 'begin' ?
 			  $Language->getText('calendar', 'task_begins', $task->getID()) :
 			  $Language->getText('calendar', 'task_ends', $task->getID()))
-		. '</a></span>';
+		. '</a>';
 }
 
 
@@ -291,11 +290,11 @@ function display_month($m, $y) {
 	</form>
 	<table width="100%">
 		<tr>
-			<td width="20px" class="calendar-today"></td>
+			<td width="20px" class="selected"></td>
 			<td><?php echo $Language->getText("calendar", "todaysdate") ?></td>
 		</tr>
 		<tr>
-			<td width="20px" class="calendar-day"></td>
+			<td width="20px"></td>
 			<td><?php echo $Language->getText("calendar", "selecteddate") ?></td>
 		</tr>
 	</table>

@@ -251,6 +251,9 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 
 function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	global $Language;
+	$i=0;
+	$offset=0;
+	$trove_cat=0;
 	$res=stats_site_project_result( $report, $orderby, $projects, $trove );
 	// if there are any rows, we have valid data (or close enough).
 	if ( db_numrows( $res ) > 1 ) {
@@ -345,6 +348,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 
 function stats_site_projects_daily( $span ) {
 	global $Language;
+	$i=0;
 	//
 	//  We now only have 30 & 7-day views
 	//
@@ -383,9 +387,9 @@ function stats_site_projects_daily( $span ) {
 			<td><strong><?php echo $Language->getText('stats_site_utils','cvs'); ?></strong></td>
 			</tr>
 		<?php
-
+	
 		while ( $row = db_fetch_array($res) ) {
-			$i++;
+			 $i++;
 
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
 				. '<td>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</td>'
@@ -411,6 +415,7 @@ function stats_site_projects_daily( $span ) {
 
 function stats_site_projects_monthly() {
 	global $Language;
+	$i=0;
 	$sql="SELECT * FROM stats_site_months
 		ORDER BY month DESC";
 

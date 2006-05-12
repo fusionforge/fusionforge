@@ -181,11 +181,11 @@ if ($forum_id) {
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 	<table border="0" width="33%">
-		<tr><td><span class="popups">'. $options_popup .
-			'</span></td><td><span class="popups">'. $max_row_popup .
-			'</span></td><td><span class="popups"><input type="submit" name="submit" value="'.
+		<tr><td>'. $options_popup .
+			'</td><td>'. $max_row_popup .
+			'</td><td>><input type="submit" name="submit" value="'.
 			$Language->getText('forum_forum','changeview').'" />
-		</span></td></tr>
+		</td></tr>
 	</table></form>
 	<p>&nbsp;</p>';
 	$am = new AttachManager();
