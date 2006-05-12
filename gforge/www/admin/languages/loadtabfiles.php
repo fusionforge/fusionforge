@@ -97,7 +97,7 @@ $result1=db_query("select language_id, count(language_id) AS count from tmp_lang
 $result2=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
 if (db_numrows($result1)>0) {
 ?>
-	<span class="important">Tables loaded:</important>
+	<span class="important">Tables loaded:</span>
 <?php
 	echo '
 	<table border="0">
