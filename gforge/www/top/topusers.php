@@ -94,10 +94,10 @@ while ($row_top = db_fetch_array($res_top)) {
 		print $Language->getText('top','same');
 	}
 	else if ($diff > 0) {
-		print "<span class=\"topusersup\"".$Language->getText('top','up',$diff)."</span>";
+		print "<span class=\"up\"".$Language->getText('top','up',$diff)."</span>";
 	}
 	else if ($diff < 0) {
-		print "<span class=\"topusersdown\">".$Language->getText('top','down',(0-$diff))."</span>";
+		print "<span class=\"down\">".$Language->getText('top','down',(0-$diff))."</span>";
 	}
 
 	print '&nbsp;&nbsp;&nbsp;</td></tr>
