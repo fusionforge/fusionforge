@@ -12,13 +12,13 @@
  *
  * @version   $Id$
  */
+ 
 require_once ('www/search/include/SearchManager.class');
 
 class Layout extends Error {
 
 	/**
-	 * The default main page content
-	 */
+	 * The default main page content */
 	var $rootindex = 'index_std.php';
 
 	/*
@@ -92,14 +92,21 @@ class Layout extends Error {
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
-	<link rel="stylesheet" type="text/css" href="/themes/css/gforge.css" />
-	<link rel="stylesheet" type="text/css" href="/themes/<?echo $GLOBALS['sys_theme'] ?>/css/theme.css" />
 	
-	<?php	if ($GLOBALS['group_id']) { 
+	<?php	if (isset($GLOBALS['group_id'])) { 
 			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
 			echo $activity;
 		}
 	?>
+<link rel="stylesheet" type="text/css" href="/themes/css/gforge-compat.css" />
+<?
+$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
+if (file_exists($theme_cssfile)){
+echo '
+<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
+';
+}
+?>
 	<script language="JavaScript" type="text/javascript">
 	<!--
 
@@ -133,8 +140,8 @@ class Layout extends Error {
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><a class="lnkutility" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
-				<b><a class="lnkutility" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+				<a class="lnkutility" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br />
+				<a class="lnkutility" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
 				<?php
 			} else {
 				?>
@@ -462,10 +469,7 @@ if (isset($params['group']) && $params['group']) {
 		} else {
 			$selected=0;
 		}
-		if (!$this->COLOR_SELECTED_TAB) {
-			$this->COLOR_SELECTED_TAB= '#e0e0e0';
-		}
-		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,$this->COLOR_SELECTED_TAB,'100%');
+		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,'','100%');
 
 	}
 
@@ -757,7 +761,7 @@ if (isset($params['group']) && $params['group']) {
 		if (isset($group_id)) {
 			print '
 					<td width="10">&nbsp;</td>
-					<td><b><a href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
+					<td><a class="lnkutility" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
 		}
 		print '</tr></table>';
 		print '</form>';
@@ -825,18 +829,18 @@ if (isset($params['group']) && $params['group']) {
 		$break = $breakLimit;
 		$countLines = 0;
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="1" class="advancedSearch2">
-				<tr>
+			<table width="100%" border="0" cellspacing="0" cellpadding="1">
+				<tr class="tableheader">
 					<td>
-						<table width="100%" cellspacing="0" border="0" class="advancedSearch1">
-							<tr class="advancedSearch">
-								<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
+						<table width="100%" cellspacing="0" border="0">
+							<tr class="tablecontent">
+								<!--<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td-->
 								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
 							</tr>
-							<tr height="20">
+							<tr height="20" class="tablecontent">
 								<td colspan="3">&nbsp;</td>
 							</tr>
-							<tr align="center" valign="top">
+							<tr align="center" valign="top" class="tablecontent">
 								<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
@@ -855,9 +859,9 @@ if (isset($params['group']) && $params['group']) {
 				}
 			}
 		
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" class="advancedSearch2">
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0">
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr class="advancedSearch2">
+							<tr>
 								<td cellspacing="0">
 									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
 							.'	</td>
@@ -865,7 +869,7 @@ if (isset($params['group']) && $params['group']) {
 								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
 								</td>
 							</tr>
-							<tr class="advancedSearch1">
+							<tr class="tablecontent">
 								<td colspan="2">';
 								
 			if (!is_array($section)) {
