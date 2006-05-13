@@ -4,6 +4,19 @@ removed from the code
 */
 
 
+body {
+        font-family:arialverdana, arial, helvetica, sans-serif;
+	
+        }
+OL,UL,P,TR,TD,FORM {
+        font-family: arialverdana,arial,helvetica,sans-serif;
+        font-size:13px;
+        color: #202020;
+        text-decoration: none;
+        font-weight: none
+        }
+
+
 FORM {
 	font-size: x-small
 	}
@@ -24,24 +37,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 H1 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-large
 	}
 H2 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: large
 	}
 H3 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: medium
 	}
 
 H4 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: small
 	}
 
 H5 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-small
 	}
 
 H6 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: xx-small
 	}
 
@@ -96,7 +115,9 @@ td.notSelTab { background-color: #909090}
 	}
 
 .tablecontent {
+	font-size: 13px;
 	background-color: #eeeeee
+	
 	}
 
 .tablegetmore {
