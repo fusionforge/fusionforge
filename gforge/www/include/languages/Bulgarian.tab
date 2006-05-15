@@ -97,7 +97,7 @@ account_register	Preferences	Предпочитания
 account_register	ccode	Държава:
 account_register	communitymail	Получаване на допълнителни съобщения от общността.
 account_register	congrat	<p>Поздравления. Вие се регистрирахте на $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
-account_register	emailaddr	Електронен пощенски адрес:<span class="highlight2">*</span><br /><em>Адресът ще бъде проверен за валидност преди активирането на акаунта. Той няма да се визуализира на сайта.</em>
+account_register	emailaddr	Електронен пощенски адрес:<span class="important">*</span><br /><em>Адресът ще бъде проверен за валидност преди активирането на акаунта. Той няма да се визуализира на сайта.</em>
 #TO_TRANSLATE#account_register	err_badinsert	Insert Failed
 account_register	err_email	Невалиден ел. пощенски адрес
 account_register	err_firstname	Името е задължително поле
@@ -293,7 +293,7 @@ admin_grouplist	unix_name	Unix име
 #TO_TRANSLATE#admin_massmail	all_project_admins	All Project Admins
 #TO_TRANSLATE#admin_massmail	all_project_developers	All Project Developers
 #TO_TRANSLATE#admin_massmail	all_users	All Users
-#TO_TRANSLATE#admin_massmail	be_verry_carefull	Be <span class="highlight">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+#TO_TRANSLATE#admin_massmail	be_verry_carefull	Be <span class="important">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 #TO_TRANSLATE#admin_massmail	date	Date
 #TO_TRANSLATE#admin_massmail	developers_test	Developers (test)
 #TO_TRANSLATE#admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
@@ -1110,7 +1110,7 @@ people_viewprofile	skills_profile_for	Профил на уменията на
 #TO_TRANSLATE#pm	intro	Choose a Subproject and you can browse/edit/add tasks to it.
 #TO_TRANSLATE#pm	no_tasks_found	No Matching Tasks found
 #TO_TRANSLATE#pm	no_tasks_found_text	Add tasks using the link above
-#TO_TRANSLATE#pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="highlight">The Admin for this project will have to set up projects using the admin page</span>
+#TO_TRANSLATE#pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="important">The Admin for this project will have to set up projects using the admin page</span>
 #TO_TRANSLATE#pm	percent_complete	Percent Complete
 #TO_TRANSLATE#pm	priority	Priority
 #TO_TRANSLATE#pm	start_date	Start Date
@@ -1511,7 +1511,7 @@ project_showfiles	new_release	Издаване на нов пакет
 project_showfiles	no_releases	Няма издания
 project_showfiles	package	Пакет
 project_showfiles	project_totals	Общо за целия проект
-#TO_TRANSLATE#project_showfiles	release_highlighted	The release you have chosen is <span class="release-highlight">highlighted</span>.
+#TO_TRANSLATE#project_showfiles	release_highlighted	The release you have chosen is <span class="selected">highlighted</span>.
 #TO_TRANSLATE#project_showfiles	release_notes	Release &amp; Notes
 project_showfiles	size	Размер
 #TO_TRANSLATE#project_showfiles	title	Project Filelist
@@ -1784,7 +1784,7 @@ searchbox	task	Задачи
 #TO_TRANSLATE#send_pending_items_mail	pm_subject	Pending task manager items notification
 #TO_TRANSLATE#send_pending_items_mail	tracker_message	This mail is sent to you to remind you of pending/overdue tracker items. The item #$1 is pending: \nSummary: $3\nStatus: $5\nOpen Date:$6\nAssigned To: $7\nSubmitted by: $8\nDetails: $9\n\n\nClick here to visit the item: $4
 #TO_TRANSLATE#send_pending_items_mail	tracker_subject	Pending tracker  items notification
-sendmessage	about_blurb	В опит да намалим спама, използваме тази форма за пращане на поща.<p />Попълнете я правилно и изцяло или получателя няма да може да отговори.<p /><span class="highlight2"><b>АКО ПИШЕТЕ ЗА ПОМОЩ:</b> Прочетохте ли документацията на сайта? Включихте ли вашите <b>user_id</b> и <b>user_name?</b> Ако пишете относно проект, включете вашето <b>project id</b> (<b>group_id</b>) и <b>Име на Проекта</b>.</span>
+sendmessage	about_blurb	В опит да намалим спама, използваме тази форма за пращане на поща.<p />Попълнете я правилно и изцяло или получателя няма да може да отговори.<p /><span class="important"><b>АКО ПИШЕТЕ ЗА ПОМОЩ:</b> Прочетохте ли документацията на сайта? Включихте ли вашите <b>user_id</b> и <b>user_name?</b> Ако пишете относно проект, включете вашето <b>project id</b> (<b>group_id</b>) и <b>Име на Проекта</b>.</span>
 sendmessage	contact		Контакт
 sendmessage	email	Вашият Email Адрес
 sendmessage	email_only_to		Можете да изпращате само на адреси
@@ -1875,7 +1875,7 @@ snippet_package	submit	Изпращане
 #TO_TRANSLATE#snippet_package	title	Submit A New Snippet Package
 #TO_TRANSLATE#snippet_package	title_new_snippet_package	Submit A New Snippet Package
 snippet_package	version	Версия
-#TO_TRANSLATE#snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="highlight">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+#TO_TRANSLATE#snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
 snippet_submit	category	Категория
 snippet_submit	description	Описание
 snippet_submit	error_doing_snippet_insert	Грешка при добавянето на фрагмент
@@ -1890,7 +1890,7 @@ snippet_submit	submit	Регистриране
 #TO_TRANSLATE#snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	type	Тип
 snippet_submit	version	Версия
-#TO_TRANSLATE#snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="highlight">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+#TO_TRANSLATE#snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
 #TO_TRANSLATE#snippet_utils	auctions	Auctions
 snippet_utils	author	Автор
 #TO_TRANSLATE#snippet_utils	bbs_systems	BBS Systems
@@ -2190,7 +2190,7 @@ tracker	choose	Изберете тракер и ще можете да разг�
 #TO_TRANSLATE#tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here
 #TO_TRANSLATE#tracker	item_created	Item Successfully Created
 #TO_TRANSLATE#tracker	no_trackers	No Accessible Trackers Found
-#TO_TRANSLATE#tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><span class="highlight">The Admin for this project will have to set up data types using the $1 admin page $2</span>
+#TO_TRANSLATE#tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the $1 admin page $2</span>
 #TO_TRANSLATE#tracker	open_date	Open Date
 #TO_TRANSLATE#tracker	please_login	Please $1 login $2
 #TO_TRANSLATE#tracker	priority	Priority

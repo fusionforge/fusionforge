@@ -37,7 +37,7 @@ account_change_pw	title	更改密码
 account_change_pw	update	更改密码
 account_change_pw_changed	return_to	您现在可以 $1 返回到帐号维护页面 $2。
 account_change_pw_changed	title	更改密码成功
-account_editsshkeys	authorized_keys	认证密钥：<br /><span class="highlight">重要：确定除了在密钥之间外没有换行符，在提交之后，检验您文件中密钥的数值是您所期望的。</span>
+account_editsshkeys	authorized_keys	认证密钥：<br /><span class="important">重要：确定除了在密钥之间外没有换行符，在提交之后，检验您文件中密钥的数值是您所期望的。</span>
 account_editsshkeys	intro	<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此文件不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>
 account_first	about_blurb	<p>您现在是 $1 的一个注册用户。 $1 是开放源码软件项目的在线开发环境。</p><p>做为一个注册用户，您可以参与整个网站的所有活动。您可以在项目讨论版上贴出新的消息，可以报告在 $1 当中软件的Bug，可以申请成为某个项目的开发者，甚至创建一个您自己的项目。</p><p>享用这个网站，也请给我们一些回馈信息，以便我们能共同使 $1 变得更好。</p><p>--$1 团队。</p>
 account_first	title	欢迎来到$1
@@ -92,7 +92,7 @@ account_register	Preferences	设置
 account_register	ccode	国家：
 account_register	communitymail	接收附加的公共邮件列表。 <i>(量很小)</i>
 account_register	congrat	<p>恭喜。您已经在 $1 上成功注册。 <p> 一封确认email已经发送到您的email信箱，以确保您email信箱的正确性。点击email中的链接就可以启动您的帐号。
-account_register	emailaddr	Email 信箱：<span class="highlight2">*</span><br /><em>在帐号启动前，这个Email信箱将被用来确认帐号。您将收到一封由 &lt;loginname@$1&gt; 转寄的信，所有发向该信箱的Email会被转寄到您真正的email信箱中去。</em>
+account_register	emailaddr	Email 信箱：<span class="important">*</span><br /><em>在帐号启动前，这个Email信箱将被用来确认帐号。您将收到一封由 &lt;loginname@$1&gt; 转寄的信，所有发向该信箱的Email会被转寄到您真正的email信箱中去。</em>
 account_register	err_badinsert	添加失败
 account_register	err_email	无效的Email
 account_register	err_firstname	您必须输入名字
@@ -296,7 +296,7 @@ admin_massmail	active_deliveries	进行中的发送
 admin_massmail	all_project_admins	所有项目管理员
 admin_massmail	all_project_developers	所有项目开发者
 admin_massmail	all_users	所有用户
-admin_massmail	be_verry_carefull	请 <span class="highlight">非常</span> 小心填写这个表单，提交后消息将会email给许多用户
+admin_massmail	be_verry_carefull	请 <span class="important">非常</span> 小心填写这个表单，提交后消息将会email给许多用户
 admin_massmail	date	日期
 admin_massmail	developers_test	开发者 (测试)
 admin_massmail	error_scheduling_mailing	群发邮件安排错误，无法进行群发邮件安排，数据库错误：
@@ -886,7 +886,7 @@ mail_admin_addlist	form_description	说明：
 mail_admin_addlist	form_ispublic	公开的？
 mail_admin_addlist	form_name	邮件列表名称：
 mail_admin_addlist	list_added	已经添加邮件列表
-mail_admin_addlist	list_information	<p>邮件列表被命名为：<br /><strong>projectname-listname@$1</strong></p><p>约需要 <span class="highlight">6-24 小时</span> 来完成创建您的邮件列表</p>
+mail_admin_addlist	list_information	<p>邮件列表被命名为：<br /><strong>projectname-listname@$1</strong></p><p>约需要 <span class="important">6-24 小时</span> 来完成创建您的邮件列表</p>
 mail_admin_addlist	pagetitle	添加一个邮件列表
 mail_admin_deletelist	confirmdelete	确认删除
 mail_admin_deletelist	permanentlydelete	永久的删除
@@ -1132,14 +1132,14 @@ people_viewprofile	title	查看用户个人能力
 people_viewprofile	user_fetch_failed	取得用户失败
 pluginman	action	动作
 pluginman	activate	激活
-pluginman	active	<span class="plugin-active">活跃</span>
+pluginman	active	活跃
 pluginman	deactivate	关闭
 pluginman	groupdeleted	$1 个群组不再使用这个插件。<br>
 pluginman	groups	正在使用它的群组
-pluginman	inactive	<span class="plugin-inactive">不活跃</span>
+pluginman	inactive	不活跃
 pluginman	init	执行初始化脚本?
 pluginman	name	插件名称
-pluginman	notice	这里可以全站性激活或关闭plugins/目录下的插件，同时根据插件功能，可能还需要为每个项目或每个用户单独激活。<br><span class="highlight">注意：某些用户或组正在使用某一插件，点击关闭将同时令这些用户或群组不再使用这一插件。<br>注意：关闭再激活某一插件可能存在风险，因为其SQL初始化脚本可能存在DROP TABLE语句</span><br><br>
+pluginman	notice	这里可以全站性激活或关闭plugins/目录下的插件，同时根据插件功能，可能还需要为每个项目或每个用户单独激活。<br><span class="important">注意：某些用户或组正在使用某一插件，点击关闭将同时令这些用户或群组不再使用这一插件。<br>注意：关闭再激活某一插件可能存在风险，因为其SQL初始化脚本可能存在DROP TABLE语句</span><br><br>
 pluginman	status	状态
 pluginman	success	Plugin $1 更新成功
 pluginman	successnoconfig	<br>配置文件无法链接到/etc/gforge/plugins/$1。请检查apache在/etc/gforge/plugins 的写权限或手工创建。
@@ -1162,7 +1162,7 @@ pm	hours	估计小时数
 pm	intro	选择某个子项目进行浏览/编辑/增加任务。
 pm	no_tasks_found	没有发现符合的任务
 pm	no_tasks_found_text	使用上面的链接增加任务
-pm	noprj	<H1>没有发现子项目</H1><P><B>没有设置子项目，或者您没有许可权查看<P><span class="highlight">项目管理员可以通过项目管理页进行设置</span></B>
+pm	noprj	<H1>没有发现子项目</H1><P><B>没有设置子项目，或者您没有许可权查看<P><span class="important">项目管理员可以通过项目管理页进行设置</span></B>
 pm	percent_complete	完成度百分比
 pm	priority	优先顺序
 pm	start_date	开始日期
@@ -1570,7 +1570,7 @@ project_showfiles	new_release	点击这里创建新的发布
 project_showfiles	no_releases	未发布任何文件
 project_showfiles	package	软件包
 project_showfiles	project_totals	项目文件总数
-project_showfiles	release_highlighted	您所选择的项目会有 <span class="release-highlight">醒目标示</span>.
+project_showfiles	release_highlighted	您所选择的项目会有 <span class="selected">醒目标示</span>.
 project_showfiles	release_notes	发布记录
 project_showfiles	size	大小
 project_showfiles	title	项目文件列表
@@ -1675,7 +1675,7 @@ register	project_full_name	<h3>1. 项目全名</h3><p>您应该开始指定您�
 register	project_information	项目信息
 register	project_license	<h3>3. 授权方式</h3> <p><strong><em>如果你正在申请一个 website-only 项目，请从下面选项中选择 "website-only" 并着手进行。</em></strong><p>$1 被创造作为开放原始码软件发展管理。为了要使事物保持简单，我们对于我们的授权方式选择仰赖<a href="http://www.opensource.org">Open Source Initiative</a>的杰出贡献。 <p>我们了解，然而可能有其他的授权方式可能更符合你的需求。如果您希望使用的授权方式不是 OSI 认可的，请让我们了解为什么您希望使用其它的授权方式。<p>选择一个授权方式是一个严谨的决定，在为您的项目下决定之前，请花费一些时间查阅数种授权方式的文字内容。 <p>只要您有合法的权利，在往后的日子您可以改变您项目的授权方式，您发布的文件版本会与此改变息息相关，而且您的文件地图编目方法也应被适当地更新。<em>请注意改变授权方式不追溯既往(也就是不适用于已经在开放原始码授权之下被发布的产品)。</em> <p>$1 不负责关于你的授权方式合法性的差异。<p><strong>授权方式：</strong>
 register	project_submitted	您的项目计划已经被提交给 $1 的管理员，在72小时之内，您将收到管理员的决定与更进一步指示的通知。</p><p>感谢您选择 $1
-register	project_unix_name	<h3>5. 项目 Unix 名称</h3><p>除了项目完整名称之外，您还需要为您的项目选择简短的 "Unix名称"。</p><p> "Unix名称"有数种限制，因为它在敝站将被利用在许多地方。限制如下：<ul><li>不能符合任何其他项目的"Unix名称"。<li>名称长度必须<span class="highlight">３</span>至<span class="highlight">１５</span>个字节。<li>必须是<strong><span class="highlight">英文小写字母</span>。<li>只能包含<span class="highlight2">英文字母</span>、<span class="highlight2">数字</span>和<span class="highlight">破折号"-"</span>。<li>必须是一个有效的"Unix帐号"。<li>不能符合我们保留的网域名称其中之一。<li>针对这个项目的"Unix名称"决定后不得变更。</ul><p>您的"Unix名称"是非常重要的，由于它将被用在许多地方，包括：<ul><li>网站在 <tt>unixname.$1</tt><li>一个 <tt>/cvsroot/unixname</tt> 的CVS Repository根目录在<tt>cvs.unixname.$1</tt><li>Shell存取针对<tt>unixname.$1</tt><li>通过本站的搜索引擎</ul><p>您希望的Unix名称：<br/>
+register	project_unix_name	<h3>5. 项目 Unix 名称</h3><p>除了项目完整名称之外，您还需要为您的项目选择简短的 "Unix名称"。</p><p> "Unix名称"有数种限制，因为它在敝站将被利用在许多地方。限制如下：<ul><li>不能符合任何其他项目的"Unix名称"。<li>名称长度必须<span class="important">３</span>至<span class="important">１５</span>个字节。<li>必须是<strong><span class="important">英文小写字母</span>。<li>只能包含<span class="important">英文字母</span>、<span class="important">数字</span>和<span class="important">破折号"-"</span>。<li>必须是一个有效的"Unix帐号"。<li>不能符合我们保留的网域名称其中之一。<li>针对这个项目的"Unix名称"决定后不得变更。</ul><p>您的"Unix名称"是非常重要的，由于它将被用在许多地方，包括：<ul><li>网站在 <tt>unixname.$1</tt><li>一个 <tt>/cvsroot/unixname</tt> 的CVS Repository根目录在<tt>cvs.unixname.$1</tt><li>Shell存取针对<tt>unixname.$1</tt><li>通过本站的搜索引擎</ul><p>您希望的Unix名称：<br/>
 register	purpose_and_summarization	<h3>2. 项目目的与摘要</h3><p><strong></strong><p><strong> 请提供您所申请项目详细与准确的说明，以及您计划以何种方式利用 $1 的资源。这份说明将是您的项目在 $1 是否能注册的依据，进而确保您能以预期的方式使用敝站提供的服务。同时这份说明将不会作为您项目的公开说明。</strong>
 register	registration_complete	注册完成
 register	scm_not_selected	网站有启动SCM，但是没有SCM被选择。
@@ -1845,7 +1845,7 @@ send_pending_items_mail	pm_message	这邮件被寄给你使你想起未决定/�
 send_pending_items_mail	pm_subject	未决定的任务管理员项目通知
 send_pending_items_mail	tracker_message	这邮件被寄给你使你想起未决定/过期的跟踪者项目。\n项目 #$1 是未决定: \n摘要: $3\n状态: $5\n启用日期: $6\n指定给: $7\n发表人: $8\n细节: $9\n\n点击这里拜访这个项目: $4
 send_pending_items_mail	tracker_subject	未决定的跟踪者项目通知
-sendmessage	about_blurb	为了尝试减少垃圾信，我们使用以下表单来寄送Email。<p />请精确且完整地填写，否则收信者可能不知道如何回覆。<p /><span class="highlight">IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>
+sendmessage	about_blurb	为了尝试减少垃圾信，我们使用以下表单来寄送Email。<p />请精确且完整地填写，否则收信者可能不知道如何回覆。<p /><span class="important">IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>
 sendmessage	contact	联络
 sendmessage	email	您的 Email
 sendmessage	email_only_to	您只能够寄到位址
@@ -1936,7 +1936,7 @@ snippet_package	suggest_a_language	建议新程序语言
 snippet_package	title	提交一个新的代码软件包
 snippet_package	title_new_snippet_package	提交一个新的代码软件包
 snippet_package	version	版本
-snippet_package	you_can_group	<p>您可以收集存在的片断代码并使用这个界面来进行软件封装。在创造您的软件封装之前，确定您全部的片断代码准备就序而且你已经做一个片断代码的说明。</p><p><ol><li>使用这个表单创造软件封装。</li><li><strong>然后</strong>使用"Add Snippets to Package"链接添加文件至您的软件封装。</li></ol></p><p><span class="highlight">注意：</span>藉由浏览函数库及使用已存在软件封装的链接，您可以发表一个已存在软件封装的新版本。如果您正在发表一个完整的新软件封装，您应该只有使用这个页面。
+snippet_package	you_can_group	<p>您可以收集存在的片断代码并使用这个界面来进行软件封装。在创造您的软件封装之前，确定您全部的片断代码准备就序而且你已经做一个片断代码的说明。</p><p><ol><li>使用这个表单创造软件封装。</li><li><strong>然后</strong>使用"Add Snippets to Package"链接添加文件至您的软件封装。</li></ol></p><p><span class="important">注意：</span>藉由浏览函数库及使用已存在软件封装的链接，您可以发表一个已存在软件封装的新版本。如果您正在发表一个完整的新软件封装，您应该只有使用这个页面。
 snippet_submit	category	类别
 snippet_submit	description	说明
 snippet_submit	error_doing_snippet_insert	添加代码时发生错误！
@@ -1951,7 +1951,7 @@ snippet_submit	suggest_a_category	建议新类别
 snippet_submit	suggest_a_language	建议新程序语言
 snippet_submit	type	代码类型
 snippet_submit	version	版本
-snippet_submit	you_can_post	您可以张贴一个新的代码片断，并与全世界的其他人分享它，只要填写这些信息。<strong>请给予一个良好说明</strong> 与 <strong>注释您的代码</strong> 使得其他人可以阅读与了解它。</p><p><span class="highlight">注意：</span>您可以藉由浏览函数库发表一个已存在代码片断的新版本，如果您正在发表一个完整的新script或函数，您应该只有使用这个页面。
+snippet_submit	you_can_post	您可以张贴一个新的代码片断，并与全世界的其他人分享它，只要填写这些信息。<strong>请给予一个良好说明</strong> 与 <strong>注释您的代码</strong> 使得其他人可以阅读与了解它。</p><p><span class="important">注意：</span>您可以藉由浏览函数库发表一个已存在代码片断的新版本，如果您正在发表一个完整的新script或函数，您应该只有使用这个页面。
 snippet_utils	auctions	网路拍卖
 snippet_utils	author	作者
 snippet_utils	bbs_systems	BBS系统
@@ -2252,7 +2252,7 @@ tracker	id	编号
 tracker	insert_email	如果您<strong>不能</strong>登录，请在这里输入您的Email
 tracker	item_created	项目成功创造
 tracker	no_trackers	未发现可以存取的跟踪者
-tracker	no_trackers_text	没有跟踪者已经被设置，导致您不能浏览它们。<p><span class="highlight">这个项目的管理员首先必须使用 $1 管理页面 $2 设置资料类型。</span>
+tracker	no_trackers_text	没有跟踪者已经被设置，导致您不能浏览它们。<p><span class="important">这个项目的管理员首先必须使用 $1 管理页面 $2 设置资料类型。</span>
 tracker	open_date	启用日期
 tracker	please_login	请 $1 登录 $2
 tracker	priority	优先权

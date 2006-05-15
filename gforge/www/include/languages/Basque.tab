@@ -272,7 +272,7 @@ admin_massmail	active_deliveries	Bidaltze aktiboak
 admin_massmail	all_project_admins	Proiektuen administrari guztiak
 admin_massmail	all_project_developers	Proiektuen kolaboratzaile guztiak
 admin_massmail	all_users	Erabiltzaile guztiak
-admin_massmail	be_verry_carefull	Izan <span class="highlight">OSO</span> arduratsua formulario honekin, erabiltzen baduzu posta ugari bidaliko dituzu aldi berean.
+admin_massmail	be_verry_carefull	Izan <span class="important">OSO</span> arduratsua formulario honekin, erabiltzen baduzu posta ugari bidaliko dituzu aldi berean.
 admin_massmail	date	Eguna
 admin_massmail	developers_test	Kolaboratzaileak (proban dago)
 admin_massmail	error_scheduling_mailing	Posta programatzen akatsa gertatu da, ezin liteke emailen bidaltzea programatu; datu basean akatsa dago.
@@ -798,7 +798,7 @@ mail_admin_addlist	form_description	Deskribapena:
 mail_admin_addlist	form_ispublic	Publikoa da?
 mail_admin_addlist	form_name	Posta Zerrendaren Izena:
 mail_admin_addlist	list_added	Zerrenda Gehitua
-mail_admin_addlist	list_information	<p>Zerrendak era honetan izendatzen dira:<br /><strong>projektuizena-zerrendaizena@$1</strong></p><p><span class="highlight">6-24 Ordu</span> inguru beharko dira zure zerrenda sortzeko.</p>
+mail_admin_addlist	list_information	<p>Zerrendak era honetan izendatzen dira:<br /><strong>projektuizena-zerrendaizena@$1</strong></p><p><span class="important">6-24 Ordu</span> inguru beharko dira zure zerrenda sortzeko.</p>
 mail_admin_addlist	pagetitle	Posta Zerrenda Gehitu
 mail_admin_updatelist	admin_in_mailman	[Zerrenda hau kudeatu GNU Mailman-en]
 mail_admin_updatelist	form_description	Deskribapena:
@@ -1024,7 +1024,7 @@ pm	hours	Aurreikusitako orduak
 pm	intro	Azpiproiektu bat aukeratu eta bertan atazak ikusi/argitaratu/gehitu ahal izango dituzu
 pm	no_tasks_found	Ez daude bat datozen atazik
 pm	no_tasks_found_text	Atazak gehitu beherako lotura erabiltzen
-pm	noprj	<h1>Ez da azpiproieturik aurkitu</h1><b><p>Ez da azpiproiekturik sustatu, edo ezin dugu ikusi.</p><p><span class="highlight2">Proiektu honen administrariak azpiproiektuak sustatu behar ditu administrazio orria erabiliaz</span></p></b>
+pm	noprj	<h1>Ez da azpiproieturik aurkitu</h1><b><p>Ez da azpiproiekturik sustatu, edo ezin dugu ikusi.</p><p><span class="important">Proiektu honen administrariak azpiproiektuak sustatu behar ditu administrazio orria erabiliaz</span></p></b>
 pm	percent_complete	Osatutako ehunekoa
 pm	priority	Lehentasuna
 pm	start_date	Hasiera data
@@ -1379,7 +1379,7 @@ project_showfiles	new_release	Bertsio berri bat sortzeko egin klik hemen.
 project_showfiles	no_releases	Bertsiorik gabe
 project_showfiles	package	Pakete
 project_showfiles	project_totals	Proiektuaren erabatekoak
-project_showfiles	release_highlighted	La versión que debe elegir es la <span class="release-highlight">sombreada</span>.
+project_showfiles	release_highlighted	La versión que debe elegir es la <span class="selected">sombreada</span>.
 project_showfiles	release_notes	Bertsioaren oharrak
 project_showfiles	size	Tamaina
 project_showfiles	title	Fitxero zerrenda
@@ -1514,7 +1514,7 @@ searchbox	search	Bilatu
 searchbox	skill	Trebezia
 searchbox	softwaregroup	Software/Taldeak
 searchbox	task	Ataza
-sendmessage	about_blurb	Posta spam-a murrizteko formulario hau erabiltzen dugu postak bidaltzeko.<p>Erabat bete zehaztasunez edo hartzaileak ez du erantzuteko aukerarik izango.</p><p><span class="highlight2"><b>Laguntza eskatzeko idazten ari bazara:</b> ¿Proiektuaren dokumentazioa irakurri al dezu? ¿Zure erabiltzaile izena idatzi al duzu? Proiektu bati buruz idazten ari bazara, zure <b> proiektu identifikadorea<b> eta <b>proiektuaren izena</b> sartu.</span></p>
+sendmessage	about_blurb	Posta spam-a murrizteko formulario hau erabiltzen dugu postak bidaltzeko.<p>Erabat bete zehaztasunez edo hartzaileak ez du erantzuteko aukerarik izango.</p><p><span class="important"><b>Laguntza eskatzeko idazten ari bazara:</b> ¿Proiektuaren dokumentazioa irakurri al dezu? ¿Zure erabiltzaile izena idatzi al duzu? Proiektu bati buruz idazten ari bazara, zure <b> proiektu identifikadorea<b> eta <b>proiektuaren izena</b> sartu.</span></p>
 sendmessage	contact	Kontaktua
 sendmessage	email	Zure posta elektronikoa
 sendmessage	email_only_to	Bakarrik helbide hauetara bidali dezakezu
@@ -1605,7 +1605,7 @@ snippet_package	suggest_a_language	Hizkuntza bat iradoki
 snippet_package	title	Adabaki pakete bat sortu
 snippet_package	title_new_snippet_package	Adabakien pakete berri bat argitaratu
 snippet_package	version	Bertsioa
-snippet_package	you_can_group	<p>Interfaz hau erabiliaz pakete batetan dauden adabakiak elkartu ditzakezu. Zure paketea sortu baino lehen, ziurtatu adabaki guztiak toki batetan dauzkazula eta adabaki identifikatiboaren zerrenda egina daukazula.</p><p><ol><li>Sortu pakete bat formulario hau erabiltzen.</li><li><strong>Orduan/strong>"Adabakiak gehitu paketeari" botoia erabili zure paketeari fitxeroak gehitzeko.</li></ol></p><p><span class="highlight">Oharra:</span> Paketearen bertsio berri bat bidali dezakezu liburutegitik nabigatzen eta paketearen lotura sakatzen. Orri hau erabili pakete berri bat bidali nahi duzunean bakarrik.
+snippet_package	you_can_group	<p>Interfaz hau erabiliaz pakete batetan dauden adabakiak elkartu ditzakezu. Zure paketea sortu baino lehen, ziurtatu adabaki guztiak toki batetan dauzkazula eta adabaki identifikatiboaren zerrenda egina daukazula.</p><p><ol><li>Sortu pakete bat formulario hau erabiltzen.</li><li><strong>Orduan/strong>"Adabakiak gehitu paketeari" botoia erabili zure paketeari fitxeroak gehitzeko.</li></ol></p><p><span class="important">Oharra:</span> Paketearen bertsio berri bat bidali dezakezu liburutegitik nabigatzen eta paketearen lotura sakatzen. Orri hau erabili pakete berri bat bidali nahi duzunean bakarrik.
 snippet_submit	category	Kategoria
 snippet_submit	description	Deskribapena
 snippet_submit	error_doing_snippet_insert	¡Akatsa adabakiaren sartzean!
@@ -1620,7 +1620,7 @@ snippet_submit	suggest_a_category	Kategoria bat iradoki
 snippet_submit	suggest_a_language	Hizkuntza bat iradoki
 snippet_submit	type	Script mota
 snippet_submit	version	Bertsioa
-snippet_submit	you_can_post	Kode adabaki bat argitaratu eta mundu osoko pertsonekin parteka dezakezu. Egin behar duzun guztia informazio hau gehitzea da. <strong>Deskribapen on bat egin ezazu/strong> eta <strong>zure kodeari buruz azalpenak eman</strong> besteek irakurri eta ulertu dezaten.</p><p><span class="highlight">Oharra:</span> Adabaki baten bertsio berri bat argitaratu dezakezu liburutegitik nabigatzen. Orri hau erabili erabat berria den funtzio edo script bat bidali nahi baduzu bakarrik.
+snippet_submit	you_can_post	Kode adabaki bat argitaratu eta mundu osoko pertsonekin parteka dezakezu. Egin behar duzun guztia informazio hau gehitzea da. <strong>Deskribapen on bat egin ezazu/strong> eta <strong>zure kodeari buruz azalpenak eman</strong> besteek irakurri eta ulertu dezaten.</p><p><span class="important">Oharra:</span> Adabaki baten bertsio berri bat argitaratu dezakezu liburutegitik nabigatzen. Orri hau erabili erabat berria den funtzio edo script bat bidali nahi baduzu bakarrik.
 snippet_utils	auctions	Enkanteak
 snippet_utils	author	Egilea
 snippet_utils	bbs_systems	BBS sistemak
@@ -1917,7 +1917,7 @@ tracker	id	ID-a
 tracker	insert_email	<strong>Ez</strong> bazara sistemara sartu, idatzi zure posta elektronikoa hemen:
 tracker	item_created	Arrakastaz sortutako artikulua
 tracker	no_trackers	Erregistroak ez daude ikusgai
-tracker	no_trackers_text	Ez daude erregistroak edo ez zaude baimendua horiek ikusteko.<p><span class="highlight">Proiektu honen administrariak mota honetako erregistroak sortu ditzake $1 administrazio orria erabiltzen</span>
+tracker	no_trackers_text	Ez daude erregistroak edo ez zaude baimendua horiek ikusteko.<p><span class="important">Proiektu honen administrariak mota honetako erregistroak sortu ditzake $1 administrazio orria erabiltzen</span>
 tracker	open_date	Bidali zen data
 tracker	please_login	Mesedez $1 sartu $2 -ra
 tracker	priority	Lehentasuna

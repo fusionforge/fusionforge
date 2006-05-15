@@ -299,7 +299,7 @@ pm	details	Описание задачи
 pm	end_date	Дата завершения
 pm	hours	Затрачено часов
 pm	intro	Выберите подпроект и вы сможете работать с его задачами.
-pm	noprj	<H1>Подпроекты не найдены</H1><P><B>Либо небыло создано ни одного подпроекта, либо у вас недостаточно прав для их просмотра.<P><span class="highlight">Администратор этого проекта может создать подпроекты через страницу управления</span>
+pm	noprj	<H1>Подпроекты не найдены</H1><P><B>Либо небыло создано ни одного подпроекта, либо у вас недостаточно прав для их просмотра.<P><span class="selected">Администратор этого проекта может создать подпроекты через страницу управления</span>
 pm	status_any	Любой
 pm	tech_any	Любой(ая)
 project_admin	add_user	Добавить пользователя
@@ -433,7 +433,7 @@ project_showfiles	new_release	Для создания нового релиза 
 project_showfiles	no_releases	Релизов нет
 project_showfiles	package	Пакет
 project_showfiles	project_totals	Итого по проекту
-project_showfiles	release_highlighted	Вами выбранный релиз <span class="release-highlight">выделен цветом</span>.
+project_showfiles	release_highlighted	Вами выбранный релиз <span class="selected">выделен цветом</span>.
 project_showfiles	release_notes	Информация о релизе (Release &amp; Notes)
 project_showfiles	size	Размер
 project_showfiles	title	Файлы проекта

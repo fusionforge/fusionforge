@@ -86,7 +86,7 @@ account_options	welcome		Benvinguts
 account_register	Preferences	Preferències
 account_register	communitymail	Rebre enviaments addicionals de la comunitat. <i>(tràfic baix.)</i>
 account_register	congrat	<p>Felicitats. Us heu registrat a $1.  <p> Ara se us està enviant un correu de confirmació per a verificar la vostra adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà el vostre compte.
-account_register	emailaddr	Adreça de correu:<span class="highlight2">*</span> <BR><I>Aquesta adreça de correu es verificarà abans d'activar el compte. Rebreu un compte de correu a &lt;loginname@$1&gt; que es reenviarà a aquesta adreça.</I>
+account_register	emailaddr	Adreça de correu:<span class="important">*</span> <BR><I>Aquesta adreça de correu es verificarà abans d'activar el compte. Rebreu un compte de correu a &lt;loginname@$1&gt; que es reenviarà a aquesta adreça.</I>
 account_register	err_badinsert	Ha fallat la inserció 
 account_register	theme	Tema
 account_register	err_email	Adreça de correu no vàlida
@@ -288,7 +288,7 @@ admin_massmail	active_deliveries	Enviaments actius
 admin_massmail	all_project_admins	Tots els administradors de projecte
 admin_massmail	all_project_developers	Tots els desenvolupadors de projecte
 admin_massmail	all_users	Tots els usuaris
-admin_massmail	be_verry_carefull	Tingueu <span class="highlight">MOLT</span> de compte amb aquest formulari, perquè enviant-lo es PROVOCARÀ un enviament de correu a molts usuaris.
+admin_massmail	be_verry_carefull	Tingueu <span class="important">MOLT</span> de compte amb aquest formulari, perquè enviant-lo es PROVOCARÀ un enviament de correu a molts usuaris.
 admin_massmail	date	Data
 admin_massmail	developers_test	Desenvolupadors (prova)
 admin_massmail	error_scheduling_mailing	Error en preparar l'enviament de correu (mailing), error de la base de dades:
@@ -836,7 +836,7 @@ mail_admin_addlist	form_ispublic	És pública?
 mail_admin_addlist	form_name	Nom de la llista de correu:
 mail_admin_addlist	list_added	Llista Afegida
 mail_admin_addlist	pagetitle	Afegeix una llista de correu
-mail_admin_addlist	list_information	<p>Les llista s'anomenarà d'aquesta manera:<br /><strong>nomprojecte-nomllista@$1</strong></p><p>Caldran entre <strong><span class="highlight">6-24 hores</span></strong> perquè es crei la vostra llista.</p>
+mail_admin_addlist	list_information	<p>Les llista s'anomenarà d'aquesta manera:<br /><strong>nomprojecte-nomllista@$1</strong></p><p>Caldran entre <strong><span class="important">6-24 hores</span></strong> perquè es crei la vostra llista.</p>
 mail_admin_updatelist	form_description	Descripció:
 mail_admin_updatelist	form_ispublic	És pública?
 mail_admin_updatelist	form_updatelist	Actualitza
@@ -1096,7 +1096,7 @@ pm	hours	Hores estimades
 pm	intro	Escolliu un subprojecte i podreu navegar-hi/editar-hi/afegir-hi tasques.
 pm	no_tasks_found	No s'han trobat tasques coincidents
 pm	no_tasks_found_text	Afegiu tasques usant l'enllaç de sobre
-pm	noprj	<H1>No s'han trobat subprojectes</H1><P><B>No s'han definit subprojectes, o bé no els podeu veure.<P><span class="highlight">L'administrador d'aquest projecte haurà de definir projectes usant la pàgina d'administració</span>
+pm	noprj	<H1>No s'han trobat subprojectes</H1><P><B>No s'han definit subprojectes, o bé no els podeu veure.<P><span class="important">L'administrador d'aquest projecte haurà de definir projectes usant la pàgina d'administració</span>
 pm	percent_complete	Tantpercent complet
 pm	priority	Prioritat
 pm	start_date	Data d'inici
@@ -1427,7 +1427,7 @@ project_admin_utils	stats	Estadístiques
 project_admin_utils	vhosts	VHOSTs
 project_admin_vhost	create	Crea
 project_admin_vhost	delete	Suprimeix
-project_admin_vhost	info	<span class="highlight">Afegiu un nou ordinador central virtual</span><p>Per afegir un nou ordinador central virtual - simplement apunteu a <strong>CNAME</strong> per <em>elvostreordinador.org</em> a <strong>$1.$2</strong>. Actualment $3 no hostatja correu (es a dir, no pot ser un MX) o DNS</strong>.  <p>Feu clic a "crea" i s'organitzarà la creació de l'ordinador central virtual.  Això es sincronitzarà als servidors de projecte web - de manera que <em>elvostreordinador.org</em> mostrarà el material a <em>$4.$5</em>.
+project_admin_vhost	info	<span class="important">Afegiu un nou ordinador central virtual</span><p>Per afegir un nou ordinador central virtual - simplement apunteu a <strong>CNAME</strong> per <em>elvostreordinador.org</em> a <strong>$1.$2</strong>. Actualment $3 no hostatja correu (es a dir, no pot ser un MX) o DNS</strong>.  <p>Feu clic a "crea" i s'organitzarà la creació de l'ordinador central virtual.  Això es sincronitzarà als servidors de projecte web - de manera que <em>elvostreordinador.org</em> mostrarà el material a <em>$4.$5</em>.
 project_admin_vhost	name	Nou ordinador central virtual <em>(p.e. vhost.org)</em>
 project_admin_vhost	no_vhosts	No hi ha VHOSTs definits
 project_admin_vhost	not_valid_hostname	Nom d'ordinador central no vàlid - $1
@@ -1474,7 +1474,7 @@ project_showfiles	new_release	Per a crear una nova publicació, feu clic aquí.
 project_showfiles	no_releases	No hi ha publicacions
 project_showfiles	package	Paquet
 project_showfiles	project_totals	Totals de projecte
-project_showfiles	release_highlighted	La publicació que heu escollit està <span class="release-highlight">ressaltada</span>.
+project_showfiles	release_highlighted	La publicació que heu escollit està <span class="selected">ressaltada</span>.
 project_showfiles	release_notes	Publicació &amp; Notes
 project_showfiles	size	Mida
 project_showfiles	title	Llista de fitxers del projecte
@@ -1742,7 +1742,7 @@ searchbox	softwaregroup	Programari/Grup
 searchbox	task	Tasques
 searchbox	tasks	Tasques d'aquest projecte
 searchbox	trackers	Controls d'aquest projecte
-sendmessage	about_blurb	En un intent de reduir el correu brossa, estem usant aquesta forma per enviar correu.<p />Ompliu-lo de forma completa i acurada o el destinatari no podrà respondre.<p /><span class="highlight2"><b>SI ESTEU ESCRIVINT PER DEMANAR AJUDA:</b> Heu llegit la documentació del lloc? Heu inclòs el vostre <b>id_usuari</b> i <b>nom_usuari?</b> Si esteu escrivint sobre un projecte, incloeu el vostre <b>id_projecte</b> (<b>id_grup</b>) i <b>Nom de projecte</b>.</span>
+sendmessage	about_blurb	En un intent de reduir el correu brossa, estem usant aquesta forma per enviar correu.<p />Ompliu-lo de forma completa i acurada o el destinatari no podrà respondre.<p /><span class="important"><b>SI ESTEU ESCRIVINT PER DEMANAR AJUDA:</b> Heu llegit la documentació del lloc? Heu inclòs el vostre <b>id_usuari</b> i <b>nom_usuari?</b> Si esteu escrivint sobre un projecte, incloeu el vostre <b>id_projecte</b> (<b>id_grup</b>) i <b>Nom de projecte</b>.</span>
 sendmessage	contact	Contacte 
 sendmessage	email	La vostra adreça de correu
 sendmessage	email_only_to	Només podeu enviar a adreces 
@@ -1833,7 +1833,7 @@ snippet_package	suggest_a_language	Suggeriu un idioma
 snippet_package	title	Envia un nou paquet de fragments de codi
 snippet_package	title_new_snippet_package	Envia un nou paquet de fragments de codi
 snippet_package	version	Versió
-snippet_package	you_can_group	<p>Podeu ajuntar fragments de codi existents en un paquet usant aquesta interfície. Abans de crear el vostre paquet, assegureu-vos que els vostres fragments de codi són a lloc i que heu fet una nota dels ID's dels fragments.</p><p><ol><li>Creeu el paquet usant aquest formulari.</li><li><strong>Després</strong> useu l'enllaç "Afegeix fragments al paquet" per afegir fitxers al vostre paquet.</li></ol></p><p><span class="highlight">Nota:</span> Podeu enviar una nova versió d'un paquet existent navegant per la biblioteca i usant l'enllaç al paquet existent. Només haurieu d'usar aquesta pàgina si esteu enviant un paquet completament nou.
+snippet_package	you_can_group	<p>Podeu ajuntar fragments de codi existents en un paquet usant aquesta interfície. Abans de crear el vostre paquet, assegureu-vos que els vostres fragments de codi són a lloc i que heu fet una nota dels ID's dels fragments.</p><p><ol><li>Creeu el paquet usant aquest formulari.</li><li><strong>Després</strong> useu l'enllaç "Afegeix fragments al paquet" per afegir fitxers al vostre paquet.</li></ol></p><p><span class="important">Nota:</span> Podeu enviar una nova versió d'un paquet existent navegant per la biblioteca i usant l'enllaç al paquet existent. Només haurieu d'usar aquesta pàgina si esteu enviant un paquet completament nou.
 snippet_submit	category	Categoria
 snippet_submit	description	Descripció
 snippet_submit	error_doing_snippet_insert	ERROR FENT LA INSERCIÓ D'UN FRAGMENT DE CODI!
@@ -1848,7 +1848,7 @@ snippet_submit	suggest_a_category	Suggeriu una categoria
 snippet_submit	suggest_a_language	Suggeriu un idioma
 snippet_submit	type	Tipus d'script
 snippet_submit	version	Versió
-snippet_submit	you_can_post	Podeu enviar un nou fragment de codi i compartir-lo amb altres persones de tot el món. Només ompliu aquesta informació. <strong>Doneu una bona descripció</strong> i <strong>comenteu el vostre codi</strong> així els altres el poden llegir i entendre.</p><p><span class="highlight">Nota:</span> Podeu enviar una nova versió d'un fragment existent navegant per la biblioteca. Haurieu d'usar aquesta pàgina només si esteu enviant un script o una funció completament nova.
+snippet_submit	you_can_post	Podeu enviar un nou fragment de codi i compartir-lo amb altres persones de tot el món. Només ompliu aquesta informació. <strong>Doneu una bona descripció</strong> i <strong>comenteu el vostre codi</strong> així els altres el poden llegir i entendre.</p><p><span class="important">Nota:</span> Podeu enviar una nova versió d'un fragment existent navegant per la biblioteca. Haurieu d'usar aquesta pàgina només si esteu enviant un script o una funció completament nova.
 snippet_utils	auctions	Subhasta
 snippet_utils	author	Autor
 snippet_utils	bbs_systems	Sistemes BBS
@@ -2148,7 +2148,7 @@ tracker	id	ID
 tracker	insert_email	Si <strong>no podeu</strong> iniciar una sessió, entreu la vostra adreça de correu aquí:
 tracker	item_created	Element creat amb èxit
 tracker	no_trackers	No s'han trobat rastrejadors accessibles
-tracker	no_trackers_text	No s'han creat ratrejadors o no els podeu veure.<p><span class="highlight">L'administrador d'aquest projecte haurà de crear tipus de dades usant la pàgina d'administració $2 de $1</span>
+tracker	no_trackers_text	No s'han creat ratrejadors o no els podeu veure.<p><span class="important">L'administrador d'aquest projecte haurà de crear tipus de dades usant la pàgina d'administració $2 de $1</span>
 tracker	open_date	Data oberta
 tracker	please_login	$1 inici de sessió $2
 tracker	priority	Prioritat

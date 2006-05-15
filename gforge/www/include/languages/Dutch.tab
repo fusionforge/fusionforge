@@ -87,7 +87,7 @@ account_register	Preferences	Voorkeursinstellingen
 account_register	ccode	Land:
 account_register	communitymail	Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>
 account_register	congrat	<p>Gefeliciteerd. Je bent met succes geregistreerd op $1.  <p> Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-mail opgestuurd. Klik op de link in de e-mail om je account te activeren.
-account_register	emailaddr	E-mail adres:<span class="highlight2">*</span><br /><em>Dit e-mail adres wordt eerst geverifieerd voordat uw account wordt geactiveerd. Uw e-mail adres verschijnt vooralsnog nog niet op de site. U ontvangt een tijdelijk mail account &lt;loginname@$1&gt; die de e-mails zal forwarden naar uw adres.</em>
+account_register	emailaddr	E-mail adres:<span class="important">*</span><br /><em>Dit e-mail adres wordt eerst geverifieerd voordat uw account wordt geactiveerd. Uw e-mail adres verschijnt vooralsnog nog niet op de site. U ontvangt een tijdelijk mail account &lt;loginname@$1&gt; die de e-mails zal forwarden naar uw adres.</em>
 account_register	err_badinsert	Aanmelden mislukt
 account_register	err_email	Ongeldig E-mail adres
 account_register	err_firstname	Je moet een voornaam invullen
@@ -283,7 +283,7 @@ admin_massmail	active_deliveries	Actieve verzendingen
 admin_massmail	all_project_admins	Alle project beheerders
 admin_massmail	all_project_developers	Alle project ontwikkelaars
 admin_massmail	all_users	Alle gebruikers
-admin_massmail	be_verry_carefull	Wees <span class="highlight">HEEL</span> voorzichtig met dit formulier. Een submit van dit formulier zal leiden tot verzenden van een email naar een groot aantal users.
+admin_massmail	be_verry_carefull	Wees <span class="important">HEEL</span> voorzichtig met dit formulier. Een submit van dit formulier zal leiden tot verzenden van een email naar een groot aantal users.
 admin_massmail	date	Datum
 admin_massmail	developers_test	Ontwikkelaars (test)
 admin_massmail	error_scheduling_mailing	Fout bij scheduling van mailing, mail scheduling niet gelukt, database fout:
@@ -846,7 +846,7 @@ mail_admin_addlist	form_description	Beschrijving:
 mail_admin_addlist	form_ispublic	Openbaar toegankelijk?
 mail_admin_addlist	form_name	Mailinglijst naam:
 mail_admin_addlist	list_added	Lijst toegevoegd
-mail_admin_addlist	list_information	<p>Lijstnamen worden op deze manier opgebouwd:<br /><strong>projectnaam-lijstnaam@$1</strong></p><p>Het duurt ongeveer <span class="highlight">6-24 uur</span> voordat je lijst gecre&euml;erd is.</p>
+mail_admin_addlist	list_information	<p>Lijstnamen worden op deze manier opgebouwd:<br /><strong>projectnaam-lijstnaam@$1</strong></p><p>Het duurt ongeveer <span class="important">6-24 uur</span> voordat je lijst gecre&euml;erd is.</p>
 mail_admin_addlist	pagetitle	Mailinglijst toevoegen
 mail_admin_updatelist	form_description	Beschrijving:
 mail_admin_updatelist	form_ispublic	Openbaar toegankelijk?
@@ -1100,7 +1100,7 @@ pm	hours	Geschatte uren
 pm	intro	Kies een subproject waarin je wilt bladeren/wijzigen/taken toevoegen.
 pm	no_tasks_found	Geen overeenkomende taken gevonden
 pm	no_tasks_found_text	Voeg taken toe met bovenstaande link
-pm	noprj	<H1>Geen subprojecten gevonden</H1><P><B>Er zijn geen subprojecten, of je mag ze niet zien.<P><span class="highlight">De projectbeheerder moet projecten bijhouden op de projectbeheerspagina</span>
+pm	noprj	<H1>Geen subprojecten gevonden</H1><P><B>Er zijn geen subprojecten, of je mag ze niet zien.<P><span class="important">De projectbeheerder moet projecten bijhouden op de projectbeheerspagina</span>
 pm	percent_complete	Percentage gereed
 pm	priority	Prioriteit
 pm	start_date	Startdatum
@@ -1501,7 +1501,7 @@ project_showfiles	new_release	Klik hier om een nieuwe release aan te maken.
 project_showfiles	no_releases	Geen releases
 project_showfiles	package	Bundel
 project_showfiles	project_totals	Project totalen
-project_showfiles	release_highlighted	De oplevering die je hebt gekozen is <span class="release-highlight">gemarkeerd</span>.
+project_showfiles	release_highlighted	De oplevering die je hebt gekozen is <span class="selected">gemarkeerd</span>.
 project_showfiles	release_notes	Release &amp; Aantekeningen
 project_showfiles	size	Grootte
 project_showfiles	title	Project bestandslijst
@@ -1773,7 +1773,7 @@ send_pending_items_mail	pm_message	Je hebt deze email onvangen om je te wijzen o
 send_pending_items_mail	pm_subject	Bericht m.b.t. openstaande taakbeheer items
 send_pending_items_mail	tracker_message	Je hebt deze email onvangen om je te wijzen op openstaande of over tijd zijnde trackers. Item #$1 staat open: \nSamenvatting: $3\nStatus: $5\nOpvoerdatum:$6\nToegewezen aan: $7\nIngediend door: $8\nDetails: $9\n\n\nKlik hier om te springen naar item $4
 send_pending_items_mail	tracker_subject	Bericht m.b.t. openstaande tracker items
-sendmessage	about_blurb	Om spam te minimaliseren gebruiken we dit form om e-mail te verzenden.<p />Vul het nauwkeurig en volledig in, anders kan de ontvanger geen reply doen.<p /><span style="highlight2">><b>ALS JE OM HULP VRAAGT:</b> Heb je <b>echt</b> de documentatie op de site gelezen? Heb je je <b>user_id</b> en <b>gebruikersnaam vermeld?</b> Als je over een bepaald project schrijft, vermeld dan het <b>project ID</b> (<b>group_id</b>) en de <b>Projectnaam</b>.</span>
+sendmessage	about_blurb	Om spam te minimaliseren gebruiken we dit form om e-mail te verzenden.<p />Vul het nauwkeurig en volledig in, anders kan de ontvanger geen reply doen.<p /><span style="important">><b>ALS JE OM HULP VRAAGT:</b> Heb je <b>echt</b> de documentatie op de site gelezen? Heb je je <b>user_id</b> en <b>gebruikersnaam vermeld?</b> Als je over een bepaald project schrijft, vermeld dan het <b>project ID</b> (<b>group_id</b>) en de <b>Projectnaam</b>.</span>
 sendmessage	contact	Contact
 sendmessage	email	Je e-mail adres
 sendmessage	email_only_to	Je kunt alleen naar adressen versturen
@@ -1864,7 +1864,7 @@ snippet_package	suggest_a_language	Doe een voorstel voor een taal
 snippet_package	title	Toevoegen nieuwe codefragment bundel
 snippet_package	title_new_snippet_package	Toevoegen nieuwe codefragment bundel
 snippet_package	version	Versie
-snippet_package	you_can_group	<p>Je kunt bestaande codefragmenten in een bundel groeperen met dit interface. Zorg dat alle codefragmenten aanwezig zijn en de codefragment ID's bekend zijn voor je de bundel cre&euml;ert.</p><p><ol><li>Cre&euml;er de bundel met dit formulier.</li><li><strong>Daarna</strong> met de link "Voeg codefragmenten aan bundel toe" bestanden aan je bundel toevoegen.</li></ol></p><p><span class="highlight">Let op:</span> Je kunt een nieuwe versie van een bestaande bundel indienen door in de bibliotheek te bladeren en de link naar de bestaande bundel aan te klikken. Gebruik deze pagina alleen om een geheel nieuwe bundel aan te maken.
+snippet_package	you_can_group	<p>Je kunt bestaande codefragmenten in een bundel groeperen met dit interface. Zorg dat alle codefragmenten aanwezig zijn en de codefragment ID's bekend zijn voor je de bundel cre&euml;ert.</p><p><ol><li>Cre&euml;er de bundel met dit formulier.</li><li><strong>Daarna</strong> met de link "Voeg codefragmenten aan bundel toe" bestanden aan je bundel toevoegen.</li></ol></p><p><span class="important">Let op:</span> Je kunt een nieuwe versie van een bestaande bundel indienen door in de bibliotheek te bladeren en de link naar de bestaande bundel aan te klikken. Gebruik deze pagina alleen om een geheel nieuwe bundel aan te maken.
 snippet_submit	category	Categorie
 snippet_submit	description	Omschrijving
 snippet_submit	error_doing_snippet_insert	Fout bij toevoegen CODEFRAGMENT!
@@ -1879,7 +1879,7 @@ snippet_submit	suggest_a_category	Doe een voorstel voor een categorie
 snippet_submit	suggest_a_language	Doe een voorstel voor een taal
 snippet_submit	type	Scripttype
 snippet_submit	version	Versie
-snippet_submit	you_can_post	Je kunt een nieuw codefragment toevoegen en delen met andere gebruikers. Vul dan deze informatie in. <strong>Geef een goede omschrijving</strong> en <strong>becommentarieer je code</strong> zo dat anderen het kunnen lezen en begrijpen.</p><p><span class="highlight">Let op:</span> Je kunt een nieuwe versie van een bestaand codefragment indienen door in de bibliotheek te bladeren en de link aan te klikken. Gebruik deze pagina alleen om een geheel nieuw script of functie in te dienen.
+snippet_submit	you_can_post	Je kunt een nieuw codefragment toevoegen en delen met andere gebruikers. Vul dan deze informatie in. <strong>Geef een goede omschrijving</strong> en <strong>becommentarieer je code</strong> zo dat anderen het kunnen lezen en begrijpen.</p><p><span class="important">Let op:</span> Je kunt een nieuwe versie van een bestaand codefragment indienen door in de bibliotheek te bladeren en de link aan te klikken. Gebruik deze pagina alleen om een geheel nieuw script of functie in te dienen.
 snippet_utils	auctions	Veilingen
 snippet_utils	author	Schrijver
 snippet_utils	bbs_systems	Prikborden
@@ -2179,7 +2179,7 @@ tracker	id	ID
 tracker	insert_email	Als je <strong>niet</strong> kunt inloggen, vul dan hier je e-mail adres in:
 tracker	item_created	Item aangemaakt
 tracker	no_trackers	Geen toegankelijke Trackers gevonden
-tracker	no_trackers_text	Er zijn geen Trackers actief, of je mag ze niet zien.<p><span class="highlight">De beheerder van dit project dient datatypes aan te maken m.b.v. de $1 beheer pagina $2</span>
+tracker	no_trackers_text	Er zijn geen Trackers actief, of je mag ze niet zien.<p><span class="important">De beheerder van dit project dient datatypes aan te maken m.b.v. de $1 beheer pagina $2</span>
 tracker	open_date	Datum ingediend
 tracker	please_login	$1 inloggen $2 s.v.p.
 tracker	priority	Prioriteit

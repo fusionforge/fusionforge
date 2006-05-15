@@ -298,7 +298,7 @@ admin_massmail	active_deliveries	Envíos Activos
 admin_massmail	all_project_admins	Todos los Administradores de Proyectos
 admin_massmail	all_project_developers	Todos los colaboradores de Proyectos
 admin_massmail	all_users	Todos los Usuarios
-admin_massmail	be_verry_carefull	Se <span class="highlight">MUY</span> cuidadoso con este formulario, porque usándolo producirá el envío de correos a muchos usuarios.
+admin_massmail	be_verry_carefull	Se <span class="important">MUY</span> cuidadoso con este formulario, porque usándolo producirá el envío de correos a muchos usuarios.
 admin_massmail	date	Día
 admin_massmail	developers_test	Colaboradores (en prueba)
 admin_massmail	error_scheduling_mailing	Error Programando el Correo, no se puede programar el envío del correo, error en la Base de Datos
@@ -845,7 +845,7 @@ mail_admin_addlist	form_description	Descripción:
 mail_admin_addlist	form_ispublic	¿Es Pública?
 mail_admin_addlist	form_name	Nombre de la Lista de Correo:
 mail_admin_addlist	list_added	Lista añadida
-mail_admin_addlist	list_information	<p>Las Listas de Correo se nombran de la siguiente forma:<br /><strong>nombreproyecto-nombrelista@$1</strong></p><p>Se necesitará entre <span class="highlight">6 y 24 Horas</span> para crear la lista.</p>
+mail_admin_addlist	list_information	<p>Las Listas de Correo se nombran de la siguiente forma:<br /><strong>nombreproyecto-nombrelista@$1</strong></p><p>Se necesitará entre <span class="important">6 y 24 Horas</span> para crear la lista.</p>
 mail_admin_addlist	pagetitle	Añadir una Lista de Correo
 mail_admin_updatelist	form_description	Descripción:
 mail_admin_updatelist	form_ispublic	¿Es Pública?
@@ -1076,7 +1076,7 @@ pm	hours	Horas Estimadas
 pm	intro	Elije un Subproyecto y podrás ver/editar/añadir tareas en él.
 pm	no_tasks_found	No hay Tareas coincidentes
 pm	no_tasks_found_text	Añadir tareas empleando el enlace inferior
-pm	noprj	<h1>No se encontraron subproyectos</h1><b><p>Ningún subproyecto se ha configurado, o no podemos verlo.</p><p><span class="highlight2">El administrador de este proyecto deberá configurar subproyectos usando la página de administración</span></p></b>
+pm	noprj	<h1>No se encontraron subproyectos</h1><b><p>Ningún subproyecto se ha configurado, o no podemos verlo.</p><p><span class="important">El administrador de este proyecto deberá configurar subproyectos usando la página de administración</span></p></b>
 pm	percent_complete	Porcentaje Completado
 pm	priority	Prioridad
 pm	start_date	Fecha Inicio
@@ -1456,7 +1456,7 @@ project_showfiles	new_release	Para crear una nueva versión pulse aquí .
 project_showfiles	no_releases	Sin Versiones
 project_showfiles	package	Paquete
 project_showfiles	project_totals	Totales del Proyecto
-project_showfiles	release_highlighted	La versión que debe elegir es la <span class="release-highlight">sombreada</span>.
+project_showfiles	release_highlighted	La versión que debe elegir es la <span class="selected">sombreada</span>.
 project_showfiles	release_notes	Notas de la Versión
 project_showfiles	size	Tamaño
 project_showfiles	title	Lista de ficheros
@@ -1710,7 +1710,7 @@ send_pending_items_mail	pm_message	Este correo se te ha enviado para recordarte 
 send_pending_items_mail	pm_subject	Notificación de tareas pendientes
 send_pending_items_mail	tracker_message	Este mensaje se te ha enviado para recordarte los registros pendientes. El registro #$1 está pendiente: \nResumen: $3\nEstado: $5\nFecha de comienzo:$6\nAsignado a: $7\nEnviado por: $8\nDetalles: $9\n\n\nHaga click aquí para visitar la tarea: $4
 send_pending_items_mail	tracker_subject	Notificación de registro pendiente
-sendmessage	about_blurb	En un intento de reducir el spam de correo, estamos usando este formulario para enviar correo.<p>Rellénalo completamente con exactitud o el destinatario no tendrá posibilidad de responder.</p><p><span class="highlight2"><b>SI ESTÁ ESCRIBIENDO PARA PEDIR AYUDA:</b> ¿Leíste la documentación del proyecto? ¿Incluiste su nombre de usuario? Si está escribiendo acerca de un proyecto, incluye su <b>identificador de proyecto</b> y el <b>Nombre del proyecto</b>.</span></p>
+sendmessage	about_blurb	En un intento de reducir el spam de correo, estamos usando este formulario para enviar correo.<p>Rellénalo completamente con exactitud o el destinatario no tendrá posibilidad de responder.</p><p><span class="important"><b>SI ESTÁ ESCRIBIENDO PARA PEDIR AYUDA:</b> ¿Leíste la documentación del proyecto? ¿Incluiste su nombre de usuario? Si está escribiendo acerca de un proyecto, incluye su <b>identificador de proyecto</b> y el <b>Nombre del proyecto</b>.</span></p>
 sendmessage	contact	Contacto
 sendmessage	email	Su Correo Electrónico
 sendmessage	email_only_to	Solo puede enviar a las direcciones
@@ -1801,7 +1801,7 @@ snippet_package	suggest_a_language	Sugerir un Lenguaje
 snippet_package	title	Crear un Paquete de Recorte
 snippet_package	title_new_snippet_package	Publicar un nuevo paquete de recortes
 snippet_package	version	Versión
-snippet_package	you_can_group	<p>Puede agrupar conjuntamente recortes existentes en un paquete usando este interfaz. Antes de crear su paquete, compruebe que tienes todos los recortes en un lugar y ha hecho una lista de los identificativos de recortes.</p><p><ol><li>Cree el paquete usando este formulario.</li><li><strong>Entonces</strong> use el botón "Añadir Recortes al Paquete" para añadir ficheros a su paquete.</li></ol></p><p><span class="highlight">Nota:</span> Puede enviar una nueva versión de un paquete existente navegando por la librería y pulsando al enlace del paquete existente. Solo debe usar esta página si está enviando un paquete completamente nuevo.
+snippet_package	you_can_group	<p>Puede agrupar conjuntamente recortes existentes en un paquete usando este interfaz. Antes de crear su paquete, compruebe que tienes todos los recortes en un lugar y ha hecho una lista de los identificativos de recortes.</p><p><ol><li>Cree el paquete usando este formulario.</li><li><strong>Entonces</strong> use el botón "Añadir Recortes al Paquete" para añadir ficheros a su paquete.</li></ol></p><p><span class="important">Nota:</span> Puede enviar una nueva versión de un paquete existente navegando por la librería y pulsando al enlace del paquete existente. Solo debe usar esta página si está enviando un paquete completamente nuevo.
 snippet_submit	category	Categoría
 snippet_submit	description	Descripción
 snippet_submit	error_doing_snippet_insert	¡ERROR HACIENDO INSERCIÓN DEL RECORTE!
@@ -1816,7 +1816,7 @@ snippet_submit	suggest_a_category	Sugiere una Categoría
 snippet_submit	suggest_a_language	Sugiere un Lenguaje
 snippet_submit	type	Tipo de Script
 snippet_submit	version	Versión
-snippet_submit	you_can_post	Puede publicar un nuevo recorte de código y compartirlo con otras personas alrededor del mundo. Simplemente rellene esta información. <strong>Proporcione una buena descripción</strong> y <strong>comente su código</strong> de forma que otros puedan leerlo y comprenderlo.</p><p><span class="highlight">Nota:</span> Puede publicar una nueva versión de un recorte existente navegando por la librería. Solo debe usar esta página si está enviando una función o script totalmente nueva.
+snippet_submit	you_can_post	Puede publicar un nuevo recorte de código y compartirlo con otras personas alrededor del mundo. Simplemente rellene esta información. <strong>Proporcione una buena descripción</strong> y <strong>comente su código</strong> de forma que otros puedan leerlo y comprenderlo.</p><p><span class="important">Nota:</span> Puede publicar una nueva versión de un recorte existente navegando por la librería. Solo debe usar esta página si está enviando una función o script totalmente nueva.
 snippet_utils	auctions	Subastas
 snippet_utils	author	Autor
 snippet_utils	bbs_systems	Sistemas BBS
@@ -2115,7 +2115,7 @@ tracker	id	ID
 tracker	insert_email	Si usted <strong>no</strong> ha entrado al sitema, introduzca su correo electrónico aquí:
 tracker	item_created	Artículo creado con éxito
 tracker	no_trackers	No se encuentran Registros Accesibles
-tracker	no_trackers_text	No hay Registros o ustéd no está autorizado a verlos.<p><span class="highlight">El Administrador de este proyecto puede crear este tipo de Registros utilizando la $1 página de administración $2</span>
+tracker	no_trackers_text	No hay Registros o ustéd no está autorizado a verlos.<p><span class="important">El Administrador de este proyecto puede crear este tipo de Registros utilizando la $1 página de administración $2</span>
 tracker	open_date	Fecha que fue enviado
 tracker	please_login	Por favor $1 entre $2
 tracker	priority	Prioridad

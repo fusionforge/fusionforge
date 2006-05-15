@@ -120,7 +120,7 @@ account_options	welcome	Willkommen
 account_register	ccode	Land:
 account_register	communitymail	Erhalte außerplanmäßige Community-Mailings. <i>(Sehr wenige.)</i>
 account_register	congrat	<p>Gratulation. Sie haben sich auf $1 registrieren lassen.</p><p> Ihnen wurde eine Bestätigungs-EMail zugesendet, um Ihre EMail-Adresse zu überprüfen. Das Besuchen des Links, der in dieser Email steht, wird Ihren Account aktivieren.
-account_register	emailaddr	Email-Adresse:<span class="highlight2">*</span> <BR><I>Diese Email-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungs-Account (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
+account_register	emailaddr	Email-Adresse:<span class="important">*</span> <BR><I>Diese Email-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungs-Account (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
 account_register	err_badinsert	Eingabe fehlgeschlagen
 account_register	err_email	Ungültige Email-Adresse
 account_register	err_firstname	Sie müssen einen Vornamen angeben
@@ -317,7 +317,7 @@ admin_massmail	active_deliveries	Aktive Mailjobs
 admin_massmail	all_project_admins	Alle Projekt-Admins
 admin_massmail	all_project_developers	Alle Projekt-Entwickler
 admin_massmail	all_users	Alle Benutzer
-admin_massmail	be_verry_carefull	Seien Sie <span class="highlight">SEHR</span> vorsichtig mit diesem Formular, weil durch das Abschicken vielen Benutzern eine Email gesendet wird.
+admin_massmail	be_verry_carefull	Seien Sie <span class="important">SEHR</span> vorsichtig mit diesem Formular, weil durch das Abschicken vielen Benutzern eine Email gesendet wird.
 admin_massmail	date	Datum
 admin_massmail	developers_test	Entwickler (test)
 admin_massmail	error_scheduling_mailing	Fehler beim Vorbereiten des Mailings. Konnte Mailing nicht vorbereiten, Datenbankfehler:
@@ -876,7 +876,7 @@ mail_admin_addlist	form_description	Beschreibung:
 mail_admin_addlist	form_ispublic	Ist öffentlich?
 mail_admin_addlist	form_name	Name der Mailingliste :
 mail_admin_addlist	list_added	Liste hinzugefügt
-mail_admin_addlist	list_information	<p>Die Listen sind auf dieser Weise aufgeführt:<br /><strong>projectname-listname@$1</strong></p><p>Es wird ca<strong><span class="highlight">6-24 Stunden</span> dauern, bis Ihre Liste angelegt ist.</p>
+mail_admin_addlist	list_information	<p>Die Listen sind auf dieser Weise aufgeführt:<br /><strong>projectname-listname@$1</strong></p><p>Es wird ca<strong><span class="important">6-24 Stunden</span> dauern, bis Ihre Liste angelegt ist.</p>
 mail_admin_addlist	pagetitle	Eine Mailingliste hinzufügen
 mail_admin_updatelist	form_description	Beschreibung:
 mail_admin_updatelist	form_ispublic	Ist öffentlich?
@@ -1124,7 +1124,7 @@ pm	details	Auftragsdetails
 pm	end_date	Enddatum
 pm	hours	Geschätzte Stunden
 pm	intro	Wählen Sie ein Unterprojekt aus und Sie können Aufträge dafür durchsuchen, ändern und hinzufügen.
-pm	noprj	<H1>Keine Unterprojekte gefunden</H1><P><B>Es wurden keine Unterprojekte eingerichtet oder Sie können sie nicht ansehen.<P><span class="highlight">Der Admininistrator dieses Projektes muss die Projekte mithilfe der Adminseite einrichten</span>
+pm	noprj	<H1>Keine Unterprojekte gefunden</H1><P><B>Es wurden keine Unterprojekte eingerichtet oder Sie können sie nicht ansehen.<P><span class="important">Der Admininistrator dieses Projektes muss die Projekte mithilfe der Adminseite einrichten</span>
 pm	no_tasks_found	Keine übereinstimmenden Aufträge gefunden
 pm	no_tasks_found_text	Fügen Sie Aufträge hinzu, indem Sie auf den obigen Link klicken
 pm	percent_complete	Prozent fertiggestellt
@@ -1525,7 +1525,7 @@ project_showfiles	new_release	Um eine neue Version zu erstellen, klicken Sie hie
 project_showfiles	no_releases	Keine Versionen
 project_showfiles	package	Paket
 project_showfiles	project_totals	Projektsumme
-project_showfiles	release_highlighted	Die von Ihnen gewählte Version ist <span class="release-highlight">hervorgehoben</span>.
+project_showfiles	release_highlighted	Die von Ihnen gewählte Version ist <span class="selected">hervorgehoben</span>.
 project_showfiles	release_notes	Release  Notes
 project_showfiles	size	Größe
 project_showfiles	title	Projekt Dateiliste
@@ -1789,7 +1789,7 @@ searchbox	softwaregroup	Software/Gruppe
 searchbox	task	Aufträge
 searchbox	tasks	Die Aufträge dieses Projekts
 searchbox	trackers	Der Tracker dieses Projektes
-sendmessage	about_blurb	Um Spam zu reduzieren benutzen wir diese Form um Emails zu senden.<p />Füllen Sie es sorgfältig und komplett aus oder der Empfänger wird vielleicht nicht antworten können.<p /><span class="highlight2"><b>WENN SIE HILFE BRAUCHEN:</b> Haben Sie die Seitendokumentation gelesen? Haben Sie Ihre <b>user_id</b> und <b>user_name angegeben?</b> Wenn Sie über ein Projekt schreiben, fügen Sie die <b>project id</b> (<b>group_id</b>) und <b>Projekt Name</b> ein.</span>
+sendmessage	about_blurb	Um Spam zu reduzieren benutzen wir diese Form um Emails zu senden.<p />Füllen Sie es sorgfältig und komplett aus oder der Empfänger wird vielleicht nicht antworten können.<p /><span class="important"><b>WENN SIE HILFE BRAUCHEN:</b> Haben Sie die Seitendokumentation gelesen? Haben Sie Ihre <b>user_id</b> und <b>user_name angegeben?</b> Wenn Sie über ein Projekt schreiben, fügen Sie die <b>project id</b> (<b>group_id</b>) und <b>Projekt Name</b> ein.</span>
 sendmessage	contact	Kontakt
 sendmessage	email	Ihre E-Mail-Adresse
 sendmessage	email_only_to	Sie können nur an Adressen schicken
@@ -1884,7 +1884,7 @@ snippet_package	suggest_a_language	Eine Sprache vorschlagen
 snippet_package	title	Ein neues Schnipselpaket freigeben
 snippet_package	title_new_snippet_package	Ein neues Schnipselpaket freigeben
 snippet_package	version	Version
-snippet_package	you_can_group	<p>Sie können vorhandene Codeschnippsel in einem Paket zusammenfassen, indem Sie dieses Interface benutzen. Bevor Sie Ihr Paket erstellen, stellen Sie sicher, dass alle Ihre Codeschnipsel da sind und sie haben eine Aufzeichnung der Schnippsel IDs gemacht.</p><p><ol><li>Nutzen Sie dieses Formular um ein Paket zu erstellen.</li><li><strong>Danach</strong> benutzen Sie die "Add Snippets to Package"/"Codeschnipsel zu Paket hinzufügen" Link, um die Dateien zu einem Paket hinzuzufügen.</li></ol></p><p><span class="highlight">Anmerkung:</span> Sie können eine neue Version eines vorhandenen Paketes einpflegen, indem Sie die "library" durchsuchen und denk Link des vorhandenen Paketes benutzen. Sie sollten diese Seite nur nutzen, wenn Sie ein ganz neues Paket einpflegen wollen.
+snippet_package	you_can_group	<p>Sie können vorhandene Codeschnippsel in einem Paket zusammenfassen, indem Sie dieses Interface benutzen. Bevor Sie Ihr Paket erstellen, stellen Sie sicher, dass alle Ihre Codeschnipsel da sind und sie haben eine Aufzeichnung der Schnippsel IDs gemacht.</p><p><ol><li>Nutzen Sie dieses Formular um ein Paket zu erstellen.</li><li><strong>Danach</strong> benutzen Sie die "Add Snippets to Package"/"Codeschnipsel zu Paket hinzufügen" Link, um die Dateien zu einem Paket hinzuzufügen.</li></ol></p><p><span class="important">Anmerkung:</span> Sie können eine neue Version eines vorhandenen Paketes einpflegen, indem Sie die "library" durchsuchen und denk Link des vorhandenen Paketes benutzen. Sie sollten diese Seite nur nutzen, wenn Sie ein ganz neues Paket einpflegen wollen.
 snippet_submit	category	Kategorie
 snippet_submit	description	Beschreibung
 snippet_submit	error_doing_snippet_insert	FEHLER BEIM EINFÜGEN DES CODESCHNIPPSELS!
@@ -1899,7 +1899,7 @@ snippet_submit	suggest_a_category	Geben Sie eine Kategorie ein
 snippet_submit	suggest_a_language	Geben Sie eine Sprache ein
 snippet_submit	type	Script 	Typ
 snippet_submit	version	Version
-snippet_submit	you_can_post	Sie können einen neuen Codeschnippsel posten und ihn mit anderen Leuten auf der ganzen Welt teilen. Tragen Sie nur diese Informationen ein. <strong> Eine gute Beschreibung eintragen </strong> und <strong> fügen Sie Kommentare ein </strong> damti es andere lesen und verstehen können.</p><p><span class="highlight">Anmerkung:</span> Sie können eine neue Version eines bereits vorhandenen Schnippsels einpflegen, indem Sie die "library" durchsuchen. Sie sollten diese Seite nur benutzen, wenn sie ein vollkommen neues Script oder eine Funktion einpflegen wollen.
+snippet_submit	you_can_post	Sie können einen neuen Codeschnippsel posten und ihn mit anderen Leuten auf der ganzen Welt teilen. Tragen Sie nur diese Informationen ein. <strong> Eine gute Beschreibung eintragen </strong> und <strong> fügen Sie Kommentare ein </strong> damti es andere lesen und verstehen können.</p><p><span class="important">Anmerkung:</span> Sie können eine neue Version eines bereits vorhandenen Schnippsels einpflegen, indem Sie die "library" durchsuchen. Sie sollten diese Seite nur benutzen, wenn sie ein vollkommen neues Script oder eine Funktion einpflegen wollen.
 snippet_utils	auctions	Auktionen
 snippet_utils	author	Autor
 snippet_utils	bbs_systems	BBS Systeme
@@ -2199,7 +2199,7 @@ tracker	id	ID
 tracker	insert_email	Falls Sie sich <strong>nicht</strong> einloggen können, dann tragen Sie Ihre Email-Adresse hier ein:
 tracker	item_created	Element erfolgreich angelegt
 tracker	no_trackers	keine ansprechbaren Tracker gefunden
-tracker	no_trackers_text	Es wurden keine Tracker konfiguriert oder Sie können sie nicht sehen.<p><span class="highlight">Der Admin für dieses Projekt muss Datentypen einrichten, die $1 Adminseite $2 benutzen</span>
+tracker	no_trackers_text	Es wurden keine Tracker konfiguriert oder Sie können sie nicht sehen.<p><span class="important">Der Admin für dieses Projekt muss Datentypen einrichten, die $1 Adminseite $2 benutzen</span>
 tracker	open_date	Eröffnet am
 tracker	please_login	Bitte $1 einloggen $2 
 tracker	priority	Priorität
