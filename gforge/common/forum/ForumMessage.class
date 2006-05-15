@@ -732,8 +732,8 @@ class ForumMessage extends Error {
 		$f =& $this->getForum();
 		$g =& $f->getGroup();
 
-		$body = "\nRead and respond to this message at: ".
-		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/pending.php?action=view_pending&group_id=". $f->getID() . "&forum_id=" . $g->getID() .
+		$body = "\nRead to this message and approve/reject it at: ".
+		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/admin/pending.php?action=view_pending&group_id=". $g->getID() . "&forum_id=" . $f->getID() .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
 		$text = $this->getBody();
@@ -761,6 +761,7 @@ class ForumMessage extends Error {
 			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
 			$bccres = db_query($sql);
 		}
+		
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
