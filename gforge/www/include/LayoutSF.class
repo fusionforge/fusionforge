@@ -331,6 +331,7 @@ class LayoutSF extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
     <TITLE><?php echo $params['title']; ?></TITLE>
+	<link rel="stylesheet" type="text/css" href="/themes/css/gforge.css" />
 	<SCRIPT language="JavaScript">
 	<!--
 	function help_window(helpurl) {
