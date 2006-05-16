@@ -43,7 +43,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 <p><?php echo $Language->getText('survey_show_questions','you_may_use_any_of_these'); ?>.</p>
 
-<p><strong><span style="red"><?php echo $Language->getText('survey_show_questions','note_use_these_questions_id'); ?>.</span></strong></p>
+<p><span class="important"><?php echo $Language->getText('survey_show_questions','note_use_these_questions_id'); ?>.</span></p>
 <p>&nbsp;</p>
 <?php
 
