@@ -19,6 +19,7 @@ h6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
 
 pre,tt { font-family: courier,sans-serif }
 
+
 a:link { text-decoration:none; color: #0000be }
 a:visited { text-decoration:none; color: #0000be }
 a:active { text-decoration:none }
@@ -31,3 +32,15 @@ a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-s
 a.tabsellink { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
 a.tabsellink:visited { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
 a.tabsellink:hover { text-decoration: none; color: #0000be; font-weight: bold; font-size: x-small; }
+
+A.lnkutility {
+        COLOR: #ffffff;
+        font-size: x-small;
+        font-weight:bold;
+        }
+
+A.lnkutility:visited { COLOR: #ffffff }
+A.lnkutility:active { COLOR: #ffffff }
+A.lnkutility:hover { COLOR: #ffffff }
+
+
