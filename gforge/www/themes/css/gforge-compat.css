@@ -18,10 +18,12 @@ OL,UL,P,TR,TD,FORM {
 
 
 FORM {
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-small
 	}
 
 TEXTAREA, INPUT, SELECT, OPTION {
+	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-small
 	}
 
@@ -69,9 +71,13 @@ p {
 	font-family: arial, verdana ,helvetica,sans-serif; 
 	COLOR: #535c5f;
 	font-weight: 400;
-	margin:0;
 	padding:0;}
 
+a {
+	font-size: 13px;
+	font-family: arial, verdana ,helvetica,sans-serif; 
+
+}
 /* tab menu styles */
 td.toptab { background-color: #E0E0E0}
 td.projecttab { background-color: #ffffff}
@@ -240,9 +246,4 @@ td.notSelTab { background-color: #909090}
 	background-color: #E0E0E0; 
 	font-weight: none
 }
-
-
-
-
-
 
