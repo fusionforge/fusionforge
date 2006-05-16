@@ -198,7 +198,7 @@ function menu_loggedin($page_title) {
 function menu_notloggedin() {
 	global $HTML, $Language;
 	$HTML->menuhtml_top('Login Status:');
-	echo "<font class=\"error\">NOT LOGGED IN</font>&nbsp;&nbsp;&nbsp;<br />";
+	echo "<span class=\"error\">NOT LOGGED IN</span>&nbsp;&nbsp;&nbsp;<br />";
 //	$HTML->menu_entry($GLOBALS['sys_home'].'faq/?group='.$GLOBALS['sys_unix_group_name'].'&amp;question=Why_to_log_in.txt','Why Log In?');
 	$HTML->menu_entry('/account/login.php',$Language->getText('menu', 'login'));
 	$HTML->menu_entry('/account/register.php',$Language->getText('menu', 'new_user'));
