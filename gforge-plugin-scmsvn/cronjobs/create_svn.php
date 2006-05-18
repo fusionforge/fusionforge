@@ -33,6 +33,9 @@ $repos_co = '/var/svn-co';
 //$repos_type = ' --fs-type fsfs ';
 $repos_type = '';
 
+//the name of the access_file
+$access_file = "/opt/gforge/svn_access.conf";
+$password_file = "/opt/gforge/svn_password.conf";
 
 /*
 	This script create the gforge dav/svn/docman repositories
@@ -84,6 +87,9 @@ if ($one_repository && !is_dir($repos_co)) {
 	passthru ("mkdir $svn");
 }
 
+// The content of the access file used by svn authz apache2 module
+$access_file_content = "";
+
 while ( $row =& db_fetch_array($res) ) {	
 	if ($one_repository) {
 		if ($first_letter) {
@@ -124,10 +130,59 @@ while ( $row =& db_fetch_array($res) ) {
 			if ($project->usesPlugin('svntracker')) {
 				check_svn_tracker($row["unix_group_name"], $svn."/".$row["unix_group_name"]);
 			}
-		}	
+		}
+		$access_file_content .= add2AccessFile($row["group_id"]);
 		$cmd = 'chown -R '.$file_owner.' '.$svn;
 		passthru ($cmd);
 	}
+}
+
+writeAccessFile($access_file, $access_file_content);
+writePasswordFile($password_file );
+
+function add2AccessFile($group_id)
+{
+	$result = "";
+	$project = &group_get_object($group_id);
+	$result = "[". $project->getUnixName(). ":]\n";
+	$users= &$project->getMembers();
+	foreach($users as $user ) {
+		$perm = &$project->getPermission($user);
+		if ($perm->is_admin || $perm->is_site_admin || $perm->isCVSWriter() ) {
+			$result.= $user->getUnixName() . "= rw\n";
+		} else if ( $perm->isCVSReader() ) {
+			$result.= $user->getUnixName() . "= r\n";
+		}
+	}
+	$result.="\n";
+	return $result;
+}
+
+function writeAccessFile($fileName, $access_file_content)
+{
+	$myFile= fopen( $fileName, "w" );
+	fwrite ( $myFile, $access_file_content );
+	fclose($myFile);
+}
+
+function writePasswordFile($fileName )
+{
+	$res = db_query("SELECT * FROM users");
+	$output = "";
+	if (!$res) {
+		$err .=  "Error! Database Query Failed: ".db_error();
+		echo $err;
+		cron_entry(21,$err);
+		exit;
+	}
+
+	while ( $row =& db_fetch_array($res) ) {
+		if (!empty($row["unix_pw"]))
+			$output .= $row["user_name"].":".$row["unix_pw"]."\n";
+	}
+	$myFile = fopen( $fileName, "w" );
+	fwrite ( $myFile, $output );
+	fclose($myFile);
 }
 
 function check_svn_tracker($project, $repos) {
