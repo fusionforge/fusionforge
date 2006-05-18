@@ -51,25 +51,39 @@ if [ -d /etc/gforge ]; then
 	echo 1>&2 "/etc/gforge already exists - clean up before starting install"
 	exit 2
 fi
-if [ -d /opt/gforge ]; then
-	echo 1>&2 "/opt/gforge already exists - clean up before starting install"
+if [ -d /usr/lib/gforge ]; then
+	echo 1>&2 "/usr/lib/gforge already exists - clean up before starting install"
+	exit 2
+fi
+if [ ! -d /opt/viewvc ]; then
+	echo 1>&2 "/opt/viewvc didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
+	exit 2
+fi
+if [ ! -f /opt/viewvc/bin/cgi/viewcvs.cgi ]; then
+	echo 1>&2 "/opt/viewvc/bin/cgi/viewcvs.cgi didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
 	exit 2
 fi
 
-mkdir /opt/gforge/
-if [ ! -d /opt/gforge ]; then
-	echo 1>&2 "/opt/gforge didn't exist - error - make sure you've got permission"
+
+mkdir /usr/lib/gforge
+if [ ! -d /usr/lib/gforge ]; then
+	echo 1>&2 "/usr/lib/gforge didn't exist - error - make sure you've got permission"
 	exit 2
 fi
-mv ../gforge-4.5.6 /opt/gforge/
-cd /opt/gforge/
-ln -s gforge-4.5.6 gforge
-mkdir mailman
+mkdir /var/lib/gforge
+if [ ! -d /var/lib/gforge ]; then
+	echo 1>&2 "/var/lib/gforge didn't exist - error - make sure you've got permission"
+	exit 2
+fi
+
+mv * /usr/lib/gforge
+cd /var/lib/gforge
 mkdir uploads
-mkdir jpgraph
+mkdir /var/lib/jpgraph
 mkdir scmtarballs
 mkdir scmsnapshots
 mkdir localizationcache
+ln -s /usr/bin/php /usr/bin/php4
 
 #project vhost space
 mkdir homedirs
@@ -77,56 +91,60 @@ mkdir /home/groups
 ln -s /home/groups homedirs/groups
 
 #Create default location for SVN repositories
-mkdir /svnroot
+mkdir svnroot
+ln -s /var/lib/gforge/svnroot /svnroot
 
 #Create default location for CVS repositories
-mkdir /cvsroot
+mkdir cvsroot
+ln -s /var/lib/gforge/cvsroot /cvsroot
 
-#Optional - Set up some basic files for SVN-over-DAV only
-mkdir svn
-cp gforge/cronjobs/dav-svn/www/* svn/
+cd /usr/lib/gforge
 
-# Optional - Set up basic index.php file for CVS vhost if desired
-mkdir cvs
-cp gforge/cronjobs/cvs-cron/www/* cvs/
+#sets up pretty xslt pages for svn when browsing with a web browser
+cp cronjobs/dav-svn/www/svnindex* www/
 
 #restricted shell for cvs accounts
-cp gforge/cronjobs/cvs-cron/cvssh.pl /bin/
+cp cronjobs/cvs-cron/cvssh.pl /bin/
 chmod 755 /bin/cvssh.pl
 
 #Create default location for gforge config files
 mkdir /etc/gforge
-cp gforge/etc/local.inc.example /etc/gforge/local.inc
-cp gforge/etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
+cp etc/local.inc.example /etc/gforge/local.inc
+cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
 
 #copy cvsweb and make sure it's in the local.inc sys_scmweb path
-cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
+cp plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
+
+#copy viewvc and make sure it's in the local.inc sys_scmweb path
+cp /opt/viewvc/bin/cgi/viewcvs.cgi /etc/gforge/
 
 #copy the scmcvs plugin config to /etc/gforge/
-cp -R gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
+cp -R plugins/scmcvs/etc/plugins/ /etc/gforge/
 
 #copy the scmsvn config files to /etc/gforge/
-cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
+cp -R plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
 
 #copy the cvstracker config files to /etc/gforge/
-cp -R gforge/plugins/cvstracker/etc/plugins/cvstracker/ /etc/gforge/plugins/
+cp -R plugins/cvstracker/etc/plugins/cvstracker/ /etc/gforge/plugins/
 
 #symlink plugin www's
-cd /opt/gforge/gforge/www
+cd /usr/lib/gforge/www
 /bin/mkdir plugins
 cd plugins
 
 ln -s ../../plugins/cvstracker/www/ cvstracker
 ln -s ../../plugins/scmcvs/www scmcvs
 ln -s ../../plugins/scmsvn/www/ scmsvn
+cd scmsvn
+ln -s /opt/viewvc/templates/docroot/ viewcvs
 
-cd /opt/gforge
+cd /usr/lib/gforge
 
-chown -R root:$3 /opt/gforge
-chmod -R 644 gforge/
-chown -R $2:$3 /opt/gforge/uploads
-cd gforge && find -type d | xargs chmod 755
-chmod -R 755 cronjobs/
+chown -R root:$3 /usr/lib/gforge
+chmod -R 644 /usr/lib/gforge/
+cd /usr/lib/gforge && find -type d | xargs chmod 755
+chown -R $2:$3 /var/lib/gforge/uploads
+chmod -R 755 /usr/lib/gforge/cronjobs/
 
 if [ ! -d /etc/gforge ]; then
 	echo 1>&2 "/etc/gforge didn't exist - error - make sure you've got permission"
