@@ -211,29 +211,42 @@ $res=db_query("SELECT artifact_query_id,query_name
 	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
 
 
-//
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
-echo '<html>
-<title>Query</title><body>
+?><html>
+<head>
+<title>Query</title>
+<link rel="stylesheet" type="text/css" href="/themes/css/gforge-compat.css" />
+<?php
+
+$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
+if (file_exists($theme_cssfile)){
+echo '
+<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
+';
+}
+echo '
+
+</head>
+<body>
 <h1>'. $feedback .'</h1>
 
-<table border="3" cellpadding="4" rules="groups" frame="box" width="100%">
+<table border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
 	<form action="'.getStringFromServer('PHP_SELF').'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<tr>
-		<td><span style="font-size:smaller">
+		<td>
 			<input type="submit" name="submit" value="'.$Language->getText('tracker','saved_queries').'" />
 		</td>
 		<td>';
 	if(db_numrows($res)>0) {
-		echo html_build_select_box($res,'query_id',$query_id,false).'</span>';
+		echo html_build_select_box($res,'query_id',$query_id,false).'';
 	}
 	echo '
 		</td>
 	</tr>
-	<tr>
-		<td><span style="font-size:">
+	<tr class="tablecontent">
+		<td>
 		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'.$Language->getText('tracker','query_name').'<br />';
 	if(db_numrows($res)>0) {
 		echo '
@@ -242,22 +255,22 @@ echo '<html>
 	if ($query_id) {
 		echo '
 		<input type="radio" name="query_action" value="3" checked>'.$Language->getText('tracker','query_update').'<br />
-		<input type="radio" name="query_action" value="5">'.$Language->getText('tracker','query_delete').'</span>';
+		<input type="radio" name="query_action" value="5">'.$Language->getText('tracker','query_delete').'';
 	}
 	echo '
 		</td>
-		<td valign="top"><span style="font-size:">
-		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></span></td>
+		<td valign="top">
+		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
 	</tr>
 </table>';
 
 echo'
-<table width="100%">
+<table width="100%" class="tablecontent">
 	<tr>
-		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':</a><br />'. $tech_box .'</span></td>
+		<td>'.$Language->getText('tracker','assignee').':</a><br />'. $tech_box .'</td>
 		<td>';
 		if (!$ath->usesCustomStatuses()) {
-			echo '<span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any')) .'</span>';
+			echo $Language->getText('tracker','status').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any'));
 		}
 		echo '</td>
 	</tr>';
@@ -265,21 +278,21 @@ echo'
 	
 echo '
 	<tr>
-		<td colspan="2">
-		<span style="font-size:smaller">'.$Language->getText('tracker_query','moddaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
-		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'"><p>
-		<span style="font-size:smaller">'.$Language->getText('tracker_query','opendaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
-		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'"><p>
-		<span style="font-size:smaller">'.$Language->getText('tracker_query','closedaterange').':</span> <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<td colspan="2">'.
+		$Language->getText('tracker_query','moddaterange').':<strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'"><p/>
+		'.$Language->getText('tracker_query','opendaterange').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'"><p/>
+		'.$Language->getText('tracker_query','closedaterange').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
 		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'">
 		</td>
 	</tr>
 	<tr>
-		<td><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':</span><br />
-		<span style="font-size:smaller">'. 
+		<td>'.$Language->getText('tracker_browse','sort_by').':<br />
+		'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
-		<td><span style="font-size:smaller">&nbsp;</span><br />
-		<span style="font-size:smaller">'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
+		<td>&nbsp;<br />
+		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
 	</tr>
 	</form></table></body></html>';
 
