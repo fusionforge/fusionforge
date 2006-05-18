@@ -1,8 +1,12 @@
+body {
+	margin: 0;
+}
+
 div.header {
         background-color: #fcaf3c;
 	padding-left: 10px;
 	padding-top: 10px;
-	padding-bottom: 5px;
+	padding-bottom: 6px;
 }
 
 div.menu {
@@ -16,9 +20,9 @@ div.union_menu {
 div.toptab {
 	padding-top: 1em;
 	padding-bottom: 0.3em;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	background-color: #F57900;
-	overflow: auto;
+	overflow: none;
 }
 
 div.bottomtab {
