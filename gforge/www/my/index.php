@@ -91,7 +91,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 				$art->ArtifactType->Group->getID().'&atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
-				$art->ArtifactType->getName().'</a><</td></tr>';
+				$art->ArtifactType->getName().'</a></td></tr>';
 
 			}
 			echo '
@@ -214,15 +214,17 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		Forums that are actively monitored
 	*/
 	$last_group=0;
-	echo $HTML->boxTop($Language->getText('my', 'monitoredforum'),false,false);
+	$order_name_arr=array();
+	$order_name_arr[]=$Language->getText('general','remove');
+	$order_name_arr[]=$Language->getText('my','monitoredforum');
+	echo $HTML->listTableTop($order_name_arr);
 	$forumsForUser = new ForumsForUser(session_get_user());
 	$forums =& $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
-		echo '<strong>'.$Language->getText('my', 'no_monitored_forums').'</strong>'.$Language->getText('my', 'no_monitored_forums_details');
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.$Language->getText('my', 'no_monitored_forums').'</strong></center></td></tr>';
 	} else {
-		echo '<tr><td colspan="2"><center><strong><a href="/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong><a href="/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
 		foreach ($forums as $f) {
-			echo '</td></tr>';
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
@@ -236,18 +238,22 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 			'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
 			$f->getID().'">'.
-			$f->getName().'</a>';
+			$f->getName().'</a></td></tr>';
 
 			$last_group= $group->getID();
 		}
 	}
+	echo $HTML->listTableBottom();
 
 	/*
 		Filemodules that are actively monitored
 	*/
 	$last_group=0;
 
-	echo $HTML->boxMiddle($Language->getText('my', 'monitoredfile'),false,false);
+	$order_name_arr=array();
+	$order_name_arr[]=$Language->getText('general','remove');
+	$order_name_arr[]=$Language->getText('my','monitoredfile');
+	echo $HTML->listTableTop($order_name_arr);
 
 	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
 		"FROM groups,filemodule_monitor,frs_package ".
@@ -257,10 +263,9 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<strong>'.$Language->getText('my', 'no_monitored_filemodules').'</strong>'.$Language->getText('my', 'no_monitored_filemodules_details');
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.$Language->getText('my', 'no_monitored_filemodules').'</strong></center></td></tr>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			echo '</td></tr>';
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
 				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/project/?group_id='.
@@ -273,13 +278,12 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 			'BORDER=0"></a></td><td width="99%"><a href="/frs/?group_id='.
 			db_result($result,$i,'group_id').'">'.
-			db_result($result,$i,'name').'</a>';
+			db_result($result,$i,'name').'</a></td></tr>';
 
 			$last_group=db_result($result,$i,'group_id');
 		}
 	}
-
-	echo $HTML->boxBottom();
+	echo $HTML->listTableBottom();
 ?>
 </div>
 <div dojoType="ContentPane" label="<?php echo $Language->getText('mytab','project'); ?>" id="projectstab">
@@ -311,8 +315,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	/*
 		PROJECT LIST
 	*/
+	$order_name_arr=array();
+	$order_name_arr[]=$Language->getText('general','remove');
+	$order_name_arr[]=$Language->getText('my','projects');
+	echo $HTML->listTableTop($order_name_arr);
 
-	echo $HTML->boxTop($Language->getText('my', 'projects'),false,false);
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
 	$result = db_query("SELECT groups.group_name,"
@@ -328,11 +335,10 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		. "ORDER BY group_name");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<strong>'.$Language->getText('my', 'no_projects').'</strong>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><strong>'.$Language->getText('my', 'no_projects').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			echo '</td></tr>';
 			$admin_flags = db_result($result, $i, 'admin_flags');
 			if (stristr($admin_flags, 'A')) {
 				$img="trash-x.png";
@@ -340,20 +346,14 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 				$img="trash.png";
 			}
 
-			if (db_result($result, $i, 'type_id')==2) {
-				$type = 'foundry';
-			} else {
-				$type = 'projects';
-			}
-
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
-			<td><a href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a>';
+			<td><a href="/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
 		}
 	}
-	echo $HTML->boxBottom();
+	echo $HTML->listTableBottom();
 ?>
 </div>
 </div>
