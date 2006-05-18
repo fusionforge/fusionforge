@@ -29,18 +29,6 @@ require('common/include/constants.php');
 
 require('local.inc');
 
-/*
-	redirect to proper hostname to get around certificate problem on IE 5
-*/
-if (getStringFromServer('HTTP_HOST') != $GLOBALS['sys_default_domain'] && getStringFromServer('HTTP_HOST') != $GLOBALS['sys_fallback_domain']) {
-	if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
-		header ("Location: https://".$GLOBALS['sys_default_domain'].getStringFromServer('REQUEST_URI'));
-	} else {
-		header ("Location: http://".$GLOBALS['sys_default_domain'].getStringFromServer('REQUEST_URI'));
-	}
-	exit;
-}
-
 //
 if ($sys_use_jabber) {
 	require_once('common/include/Jabber.class');
