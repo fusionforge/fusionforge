@@ -1,15 +1,20 @@
 body {
 	margin: 0;
+	padding: 0;
+        background-color: #fcaf3c;
 }
 
 div.header {
+
         background-color: #fcaf3c;
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 6px;
+
 }
 
 div.menu {
+	margin-left: 0em;
 }
 
 div.union_menu {
@@ -20,7 +25,8 @@ div.union_menu {
 div.toptab {
 	padding-top: 1em;
 	padding-bottom: 0.3em;
-	font-size: 1.1em;
+	padding-left: 1em;
+	font-size: 1.05em;
 	background-color: #F57900;
 	overflow: none;
 }
@@ -28,14 +34,14 @@ div.toptab {
 div.bottomtab {
 	background-color: #FF910F;
 	background-color: #Fcaf3c;
-		
+	padding-left: 1em;
 	font-size: 1em;
 	margin-bottom: 2em;
 }
 
 .titlebar {
 	color: white;
-	font-size: 1.2em;
+	font-size: 1.05em;
 	font-weight: bold;
 }
 
@@ -122,4 +128,13 @@ tr.tableheading {
 
 td .tableheading {
 	color: white;
+}
+
+div.content {
+	background: white;
+	padding-left: 20px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+	margin-left: 2px;
+	margin-right: 2px;
 }

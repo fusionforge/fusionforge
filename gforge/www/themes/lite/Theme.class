@@ -123,7 +123,7 @@ class Theme extends Layout {
 
 <body>
 <div class="header">
-<table border="0px" width="100%" cellspacing="0px" cellpadding="0px">
+<table border="0px" width="100%" cellspacing="0px" cellpadding="0px" class="content">
 
 	<tr>
 		<td><a href="/"><img src="/themes/lite/images/gforge_logo.png" border="0" alt="Gforge Logo" width="200px" /></a></td>
@@ -151,14 +151,14 @@ class Theme extends Layout {
 
 <?php echo $this->mainMenu($params); ?>
 
-	<!-- Inner Tabs / Shell -->
+		<!-- Inner Tabs / Shell -->
 <?php
 
 
 if ($params['group']) {
 			?>
 				<div class="union_menu" >
-			 	</div>	
+				</div>	
 				<?php
 				echo $this->projectTabs($params['toptab'],$params['group']);
 				?>
@@ -168,6 +168,7 @@ if ($params['group']) {
 
 ?>
 </div>
+<div class="content">
 	<?php
 
 	}
@@ -180,6 +181,13 @@ if ($params['group']) {
 
 
 		<!-- end inner body row -->
+</div> <!-- end of content -->
+<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<br />
+<center>
+<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development En
+vironment" border="0" /></a>
+</center>
 
 </body>
 </html>
