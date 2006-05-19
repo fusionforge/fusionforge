@@ -1,71 +1,85 @@
+/* Default stylesheet for gforge themes
+*/
+
+
 /* Default stylesheet for gforge
 This stylesheet contains all style information
 removed from the code
 */
 
-OL,UL,P,BODY,TR,TD,FORM {
-	font-family: arialverdana,arial,helvetica,sans-serif;
-	font-size:13px;
-	color: #202020;
-	text-decoration: none;
-	font-weight: none
+
+body {
+        font-family:arialverdana, arial, helvetica, sans-serif;
+	
+        }
+OL,UL,P,TR,TD,FORM {
+        font-family: arialverdana,arial,helvetica,sans-serif;
+        font-size:13px;
+        color: #202020;
+        text-decoration: none;
+        font-weight: none
+        }
+
+
+FORM {
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: x-small
 	}
 
-TH {
-	font-family: arialverdana,arial,helvetica,sans-serif;
-	font-size:13px;
-	color: #202020;
-	font-weight: bold;
-	text-align: left
+TEXTAREA, INPUT, SELECT, OPTION {
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: x-small
 	}
 
-
-a:link { text-decoration:none; color: #0000be }
-a:visited { text-decoration:none; color: #0000be }
-a:active { text-decoration:none }
-a:hover { text-decoration:underline; color:red }
-
-.titlebar { color: black; text-decoration: none; font-weight: bold; }
-a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
-a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: x-small; }
-a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: x-small; }
-a.tabsellink { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
-a.tabsellink:visited { color: #0000be; text-decoration: none; font-weight: bold; font-size: x-small; }
-a.tabsellink:hover { text-decoration: none; color: #0000be; font-weight: bold; font-size: x-small; }
-
-/* form elements */
-
-FORM {font-size: x-small}
-
-TEXTAREA, INPUT, SELECT, OPTION {font-size: x-small}
-
-
-/* end form elements */
 
 STRONG {font-weight: bold}
 
-H1 { font-size: x-large; font-family: arialverdana,arial,helvetica,sans-serif; }
-H2 { font-size: large; font-family: arialverdana,arial,helvetica,sans-serif; }
-H3 { font-size: medium; font-family: arialverdana,arial,helvetica,sans-serif; }
-H4 { font-size: small; font-family: arialverdana,arial,helvetica,sans-serif; }
-H5 { font-size: x-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-H6 { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-
-
-P { font-size: 13px; font-family: arialverdana,arial,helvetica,sans-serif; COLOR: #535c5f;}
-
-PRE,TT { font-family: courier,sans-serif }
-.titlebar { FONT-SIZE:13px; color: #FFFFFF; text-decoration: none; }
-.develtitle {
-	FONT-SIZE: 13px; COLOR: #535c5f; FONT-FAMILY: arial
+h1, h2, h3, h4, h5, h6 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-weight:none;
+	padding:0;
 }
 
-/* link utilities on header of page */
-A.lnkutility { COLOR: #ffffff }
-A.lnkutility:visited { COLOR: #ffffff }
-A.lnkutility:active { COLOR: #ffffff }
-A.lnkutility:hover { COLOR: #ffffff }
+H1 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: x-large
+	}
+H2 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: large
+	}
+H3 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: medium
+	}
 
+H4 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: small
+	}
+
+H5 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: x-small
+	}
+
+H6 { 
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: xx-small
+	}
+
+p { 
+	font-size: 13px; 
+	font-family: arial, verdana ,helvetica,sans-serif; 
+	COLOR: #535c5f;
+	font-weight: 400;
+	padding:0;}
+
+a {
+	font-size: 13px;
+	font-family: arial, verdana ,helvetica,sans-serif; 
+
+}
 /* tab menu styles */
 td.toptab { background-color: #E0E0E0}
 td.projecttab { background-color: #ffffff}
@@ -76,6 +90,18 @@ td.footer3 { background-color: #E0E0E0}
 
 td.selTab { background-color: white}
 td.notSelTab { background-color: #909090}
+
+.titlebar { 
+	FONT-SIZE:13px; 
+	color: #FFFFFF; 
+	text-decoration: none; 
+	}
+
+.develtitle {
+	FONT-SIZE: 13px; 
+	COLOR: #535c5f; 
+	FONT-FAMILY: arial
+	}
 
 /* priority styles */
 .priority1 { background-color: #dadada}
@@ -90,11 +116,37 @@ td.notSelTab { background-color: #909090}
 
 
 /* definition for content table */
-.tableheading {background-color:#D0D0D0; text-align=center;font-weight:  bold}
-.tablecontent {background-color: #eeeeee}
-.tablegetmore {background-color: #FFF4A8}
-.prev, .next {font-family: arial,helvetica; font-size: small; text-decoration: none}
-//.tablefooter {background-color: #FFF4A8} not used
+.tableheading {
+	background-color:#D0D0D0; 
+	text-align=center;
+	font-weight:  bold
+	}
+
+.tablecontent {
+	font-size: 13px;
+	background-color: #eeeeee
+	
+	}
+
+.tablegetmore {
+	background-color: #EAEAEA
+	}
+
+/* styles for prev next up and down*/
+.prev, .next, up, down {
+	font-family: arial,helvetica, sans-serif; 
+	font-size: small; 
+	text-decoration: bold
+	}
+
+/* top */
+.up {
+	color: #009900
+	}
+
+.down {
+	color: #CC0000
+	}
 
 /* global styles */
 
@@ -102,91 +154,218 @@ td.notSelTab { background-color: #909090}
    Use this style if you need to display an error, e.g:
      User does not exist
 */
-.error {color: red; font-size: medium; text-align: center; font-weight:  bold}
+.error {
+	color: red; 
+	font-size: medium; 
+	text-align: center; 
+	font-weight:  bold
+	}
 
 /* style for warning messages 
    Use this style if you need to display a warning*/
 
-.warning {color: red: text-decoration: none}
+.warning {
+	color: red: 
+	text-decoration: none
+	}
 
 /* style for feedback  
    Use this style to tell the user that the operation he
    requested was executed successfully, e.g:
    User was successfully registered
 */
-.feedback {color: green; font-size: medium; text-align: center; text-decoration: none}
+.feedback {
+	color: red; 
+	font-size: medium; 
+	text-align: center; 
+	text-decoration: none
+	}
+
 /* style for attention 
    Use this if you wish to display important messages
    within a text.
    Note that once registered, the project cannot be deleted
 */
 
-.important {color: red; font-weight: bold}
+.important {
+	color: red; 
+	font-weight: bold
+	}
 
 
-.veryimportant {color: red; font-weight: bold; font-size: large; text-align: center}
+.veryimportant {
+	color: red; 
+	font-weight: bold; 
+	font-size: large; 
+	text-align: center
+	}
    
 
 /* the following style are for displaying items in different states */
 
-.active {background-color: lime; text-decoration: none; font-weight: normal}
-.inactive {background-color: gray}
-.deleted {background-color: blue}
-.suspended {background-color: yellow}
-.pending {background-color: red}
+.active {
+	background-color: #00aa00; 
+	text-decoration: none; 
+	font-weight: normal
+	}
+
+.inactive {
+	background-color: gray
+	}
+
+.deleted {
+	background-color: blue
+	}
+
+.suspended {
+	background-color: #ffaa00
+	}
+
+.pending {
+	background-color: white
+	}
 
 /* the following style is used when a word or an item should be highlighted; e.g.
    selected release or words in the advanced search */
 
-.selected {background-color: pink}
+.selected {
+	background-color: pink
+	}
 
 /* style for required fields */
-.requiredfield {color: red; font-weight: bold}
+.requiredfield {
+	color: red; 
+	font-weight: bold
+	}
 
 
-.altRowStyleEven { background-color: #EAEAEA; font-weight: none}
-.altRowStyleOdd { background-color: #E0E0E0; font-weight: none}
+.altRowStyleEven { 
+	background-color: #EAEAEA; 
+	font-weight: none
+	}
 
-/* global styles, from .tab files, they should be removed in future */
-.highlight {color: red; font-weight: bold}
-.highlight2 {color: red}
-.plugin-active {color: #00ff00}
-.plugin-inactive {color: #800000}
-.release-highlight {background-color: pink}
-
-
-/* style for activity tab */
-
-table.activity {background-color: #E0E0E0}
-tr.activity {background-color: #ffffff}
+.altRowStyleOdd { 
+	background-color: #E0E0E0; 
+	font-weight: none
+}
 
 
-/* styles for forums */
-.currentfile {color: blue}
-.popups {font-size: -1}
 
-/* styles for calendar (task manager) */
-.calendar-tasklink { font-size: xx-small; font-family: arialverdana,arial,helvetica,sans-serif; }
-.calendar-today {background-color: red}
-.calendar-day {background-color: gray} 
-
-
-/* styles for search/advanced search */
-table.advancedSearch2 { background-color: #FFF4A8}
-tr.advancedSearch2 {font-weight: bold;background-color: #FFF4A8}
-
-table.advancedSearch1 { background-color: #FFF4A8}
-tr.advancedSearch1 {background-color: #FFF4A8}
-.search-highlight {background-color: purple}
-
-.snippet-detail
+TH {
+	font-family: arialverdana,arial,helvetica,sans-serif;
+	font-size:13px;
+	color: #202020;
+	font-weight: bold;
+	text-align: left
+	}
 
 
-/* stats */
 
-.alt1 {background-color: white}
-.alt2 {background-color: gray}
+a:link {
+	text-decoration:none; 
+	color: #0000be 
+	}
 
-/* top */
-.topusersup {color: #009900}
-.topusersdown {color: #CC0000}
+a:visited { 
+	text-decoration:none; 
+	color: #0000be 
+	}
+
+a:active { 
+	text-decoration:none 
+	}
+
+a:hover { 
+	text-decoration:underline; 
+	color:red 
+	}
+
+.titlebar { 
+	color: black; 
+	text-decoration: none; 
+	font-weight: bold; 
+	}
+
+a.tablink { 
+	color: black; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+a.tablink:visited { 
+	color: black; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+a.tablink:hover { 
+	text-decoration: none; 
+	color: black; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+a.tabsellink { 
+	color: #0000be; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+a.tabsellink:visited { 
+	color: #0000be; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+a.tabsellink:hover { 
+	text-decoration: none; 
+	color: #0000be; 
+	font-weight: bold; 
+	font-size: x-small; 
+	}
+
+
+
+
+
+
+
+PRE,TT { 
+	font-family: courier,sans-serif 
+	}
+
+
+ul { 
+	list-style-position:inside;
+	margin:12px;
+	padding:0;
+	}
+
+ol { 
+	list-style-position:outside;
+	list-style-type:upper-roman;
+	margin:0;
+	padding:0;
+	}
+
+
+ul { 
+	padding:0;
+	}
+/* link utilities on header of page */
+A.lnkutility { 
+	COLOR: #ffffff;
+	font-size: x-small;
+	font-weight:bold;
+	}
+
+A.lnkutility:visited { COLOR: #ffffff }
+A.lnkutility:active { COLOR: #ffffff }
+A.lnkutility:hover { COLOR: #ffffff }
+
+
+
