@@ -98,6 +98,25 @@ class Layout extends Error {
 			echo $activity;
 		}
 	?>
+<?
+
+/* check if a personalized css stylesheet exist, if yes include only
+   this stylesheet
+   new stylesheets should use the <themename>.css file
+*/
+$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
+if (file_exists($theme_cssfile)){
+echo '
+<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
+}
+else
+{
+/* if this is not our case, then include the compatibility stylesheet
+   that contains all removed styles from the code and check if a
+   custom stylesheet exists. 
+   Used for compatibility with existing stylesheets
+*/
+?>
 <link rel="stylesheet" type="text/css" href="/themes/css/gforge-compat.css" />
 <?
 $theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
@@ -105,6 +124,7 @@ if (file_exists($theme_cssfile)){
 echo '
 <link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
 ';
+}
 }
 ?>
 	<script language="JavaScript" type="text/javascript">
@@ -911,7 +931,7 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function beginSubMenu () {
 		$return = '
-			<p><strong>';
+			<p/><strong>';
 		return $return;
 	}
 
