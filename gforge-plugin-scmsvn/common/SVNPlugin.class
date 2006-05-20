@@ -143,10 +143,12 @@ class SVNPlugin extends SCM {
 
 				// ######################## SVN Snapshot
 				if ($displaySvnBrowser) {
-					print '
-						<p>
-						[<a href="/snapshots.php?group_id='.$group_id.'">'.$Language->getText('plugin_scmsvn', 'download_snapshot').'</a>]
-						</p>';
+					$filename=$project->getUnixName().'-scm-latest.tar.gz';
+					if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+						print '<p>[<a href="/snapshots.php?group_id='.$group_id.'">'
+							.$Language->getText('plugin_scmsvn', 'download_snapshot').
+							'</a>]</p>';
+					}
 				}
 				?>
 				</td>
