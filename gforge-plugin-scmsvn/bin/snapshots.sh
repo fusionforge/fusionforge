@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Generate SVN repositories snapshots.
+# Generate SVN trunk repositories snapshots.
 
 set -e
 #set -x
@@ -26,7 +26,8 @@ case "$1" in
             # Make tgz archive
 	    mkdir -p $work_dir/$dir-scm-$today
 	    cd $work_dir
-	    svn checkout -q file://$SVNROOT/$dir $dir-scm-$today
+	    svn checkout -q file://$SVNROOT/$dir/trunk $dir-scm-$today 2>/dev/null || 
+	    ( rm -fr $dir-scm-$today; svn checkout -q file://$SVNROOT/$dir $dir-scm-$today)
             tar czf $dir-scm-latest.tar.gz $dir-scm-$today
             mv $dir-scm-latest.tar.gz $SCMSNAPSHOTSDIR
         done
