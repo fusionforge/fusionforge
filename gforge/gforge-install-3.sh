@@ -3,13 +3,6 @@ if [ $# -ne 4  ]; then
 	echo 1>&2 Usage: $0  gforge.company.com  apacheuser  apachegroup  ip.add.re.ss
 	exit 127
 fi
-#validate hostname
-echo "$1" | egrep '^([[:alnum:].\-_])*$' -q
-found_host=$?
-if [ $found_host -ne 0 ]; then
-	echo 1>&2 "invalid hostname"
-	exit 2
-fi
 #validate apache user
 getent passwd $2 > /dev/null
 found_apacheuser=$?
@@ -31,39 +24,6 @@ if [ $found_ip -ne 0 ]; then
 	echo 1>&2 "invalid IP address"
 	exit 2
 fi
-if [ -f /etc/aliases.org ]; then
-	echo 1>&2 "/etc/aliases.org already exists - clean up before starting install"
-	exit 2
-fi
-if [ -f /etc/passwd.org ]; then
-	echo 1>&2 "/etc/passwd.org already exists - clean up before starting install"
-	exit 2
-fi
-if [ -f /etc/shadow.org ]; then
-	echo 1>&2 "/etc/shadow.org already exists - clean up before starting install"
-	exit 2
-fi
-if [ -f /etc/group.org ]; then
-	echo 1>&2 "/etc/group.org already exists - clean up before starting install"
-	exit 2
-fi
-if [ -d /etc/gforge ]; then
-	echo 1>&2 "/etc/gforge already exists - clean up before starting install"
-	exit 2
-fi
-if [ -d /usr/lib/gforge ]; then
-	echo 1>&2 "/usr/lib/gforge already exists - clean up before starting install"
-	exit 2
-fi
-if [ ! -d /opt/viewvc ]; then
-	echo 1>&2 "/opt/viewvc didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
-	exit 2
-fi
-if [ ! -f /opt/viewvc/bin/cgi/viewcvs.cgi ]; then
-	echo 1>&2 "/opt/viewvc/bin/cgi/viewcvs.cgi didn't exist - error - make sure you've installed viewvc in /opt/viewvc. You can download from http://gforge.org/frs/?group_id=143"
-	exit 2
-fi
-
 
 mkdir /usr/lib/gforge
 if [ ! -d /usr/lib/gforge ]; then
@@ -83,20 +43,28 @@ mkdir /var/lib/jpgraph
 mkdir scmtarballs
 mkdir scmsnapshots
 mkdir localizationcache
-ln -s /usr/bin/php /usr/bin/php4
+if [ ! -f /usr/bin/php4 ]; then
+	ln -s /usr/bin/php /usr/bin/php4
+fi
 
 #project vhost space
 mkdir homedirs
 mkdir /home/groups
-ln -s /home/groups homedirs/groups
+if [ ! -d homedirs/groups ]; then
+	ln -s /home/groups homedirs/groups
+fi
 
 #Create default location for SVN repositories
 mkdir svnroot
-ln -s /var/lib/gforge/svnroot /svnroot
+if [ ! -d /svnroot ]; then
+	ln -s /var/lib/gforge/svnroot /svnroot
+fi
 
 #Create default location for CVS repositories
 mkdir cvsroot
-ln -s /var/lib/gforge/cvsroot /cvsroot
+if [ ! -d /cvsroot ]; then
+	ln -s /var/lib/gforge/cvsroot /cvsroot
+fi
 
 cd /usr/lib/gforge
 
@@ -132,11 +100,16 @@ cd /usr/lib/gforge/www
 /bin/mkdir plugins
 cd plugins
 
-ln -s ../../plugins/cvstracker/www/ cvstracker
-ln -s ../../plugins/scmcvs/www scmcvs
-ln -s ../../plugins/scmsvn/www/ scmsvn
+if [ ! -d cvstracker ]; then
+	ln -s ../../plugins/cvstracker/www/ cvstracker
+fi
+if [ ! -d scmcvs ]; then
+	ln -s ../../plugins/scmcvs/www scmcvs
+fi
+if [ ! -d scmsvn ]; then
+	ln -s ../../plugins/scmsvn/www/ scmsvn
+fi
 cd scmsvn
-ln -s /opt/viewvc/templates/docroot/ viewcvs
 
 cd /usr/lib/gforge
 
@@ -160,8 +133,3 @@ cd /etc/gforge && find -type f -exec perl -pi -e "s/192\.168\.100\.100/$4/" {} \
 
 
 echo "noreply:        /dev/null" >> /etc/aliases
-
-cp /etc/aliases /etc/aliases.org
-cp /etc/shadow /etc/shadow.org
-cp /etc/passwd /etc/passwd.org
-cp /etc/group /etc/group.org

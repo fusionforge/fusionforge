@@ -149,15 +149,14 @@ while ( $row =& db_fetch_array($res) ) {
 writeAccessFile($access_file, $access_file_content);
 writePasswordFile($password_file );
 
-function add2AccessFile($group_id)
-{
+function add2AccessFile($group_id) {
 	$result = "";
 	$project = &group_get_object($group_id);
 	$result = "[". $project->getUnixName(). ":]\n";
 	$users= &$project->getMembers();
 	foreach($users as $user ) {
 		$perm = &$project->getPermission($user);
-		if ($perm->is_admin || $perm->is_site_admin || $perm->isCVSWriter() ) {
+		if ( $perm->isCVSWriter() ) {
 			$result.= $user->getUnixName() . "= rw\n";
 		} else if ( $perm->isCVSReader() ) {
 			$result.= $user->getUnixName() . "= r\n";
@@ -167,16 +166,15 @@ function add2AccessFile($group_id)
 	return $result;
 }
 
-function writeAccessFile($fileName, $access_file_content)
-{
+function writeAccessFile($fileName, $access_file_content) {
 	$myFile= fopen( $fileName, "w" );
 	fwrite ( $myFile, $access_file_content );
 	fclose($myFile);
 }
 
-function writePasswordFile($fileName )
-{
-	$res = db_query("SELECT * FROM users");
+function writePasswordFile($fileName ) {
+	$res = db_query("SELECT * FROM users WHERE user_id IN (SELECT DISTINCT user_id FROM user_group ug, group_plugin gp, plugins p
+		WHERE ug.group_id=gp.group_id AND gp.plugin_id=p.plugin_id AND p.plugin_name='scmsvn')");
 	$output = "";
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
