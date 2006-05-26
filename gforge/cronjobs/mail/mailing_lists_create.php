@@ -10,6 +10,13 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+if (is_dir($sys_path_to_mailman)) {
+} elseif (is_dir("/usr/lib/mailman")) {
+	$sys_path_to_mailman="/usr/lib/mailman";
+} else {
+    echo "\nsys_path_to_mailman path is not set right for this script!!";
+}
+
 //
 // Extract the mailing lists that already exist on the system and create
 // a "list" of them for use later so we don't try to create ones that 

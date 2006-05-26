@@ -14,6 +14,15 @@ require_once('common/include/cron_utils.php');
 //	/path/to/svn/bin/
 $svn_path='/usr/bin';
 
+if (is_file($svn_path.'svnadmin')) {
+
+} elseif (is_file('/usr/bin/svnadmin')) {
+	$svn_path='/usr/bin';
+} else {
+	echo "\nsvn path is not set right in this script!!";
+}
+
+
 //	Owner of files - apache
 $file_owner=$sys_apache_user.':'.$sys_apache_group;
 
