@@ -152,7 +152,7 @@ writePasswordFile($password_file );
 function add2AccessFile($group_id) {
 	$result = "";
 	$project = &group_get_object($group_id);
-	$result = "[". $project->getUnixName(). ":]\n";
+	$result = "[". $project->getUnixName(). ":/]\n";
 	$users= &$project->getMembers();
 	foreach($users as $user ) {
 		$perm = &$project->getPermission($user);
@@ -161,6 +161,11 @@ function add2AccessFile($group_id) {
 		} else if ( $perm->isCVSReader() ) {
 			$result.= $user->getUnixName() . "= r\n";
 		}
+	}
+	if ( $project->enableAnonSCM() ) {
+		$result.="anonsvn= r\n";
+		$result.="* = r\n";
+
 	}
 	$result.="\n";
 	return $result;
@@ -189,6 +194,7 @@ function writePasswordFile($fileName ) {
 	}
 	$myFile = fopen( $fileName, "w" );
 	fwrite ( $myFile, $output );
+	fwrite ( $myFile, 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n");
 	fclose($myFile);
 }
 
