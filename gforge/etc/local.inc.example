@@ -303,5 +303,14 @@ $sys_admin_email = 'gforge@my.domain';
 // Path to sendmail program
 //$sys_sendmail_path='/usr/sbin/sendmail';
 
+// Select unix_password cipher
+// Normally there will be no reason to change this for Linux based systems
+// Valid choices are MD5, DES, Blowfish, or Plain
+// DO NOT CHANGE ON EXISTING INSTALL!!!
+
+// If using usergroup_wrapper.php (for non-Linux systems)
+// this value MUST be plain
+unix_cipher = 'MD5';
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

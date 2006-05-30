@@ -152,10 +152,30 @@ function genchr(){
  *
  */
 function account_gensalt(){
-
+	global $unix_cipher;
+	// ncommander: modified for cipher selection
+	// crypt() selects the cipher based on
+	// the salt, so ...
+	
 	$a = genchr(); 
 	$b = genchr();
-	$salt = "$1$" . "$a$b";
+	switch($unix_cipher) {
+		case 'DES':
+			$salt = "$a$b";
+			break;
+		default:
+		case 'MD5':	
+			$salt = "$1$" . "$a$b";
+			break;
+		case 'Blowfish':
+			$i = 0;
+			while (!$i = 16) {
+			 	$salt .= rand(64,126);
+			 	$i++;
+			 }
+			return "$2a$".$salt;
+			break;
+	}
 	return $salt;	
 }
 
@@ -167,7 +187,14 @@ function account_gensalt(){
  *
  */
 function account_genunixpw($plainpw) {
-	return crypt($plainpw,account_gensalt());
+	// ncommander: Support clear password hashing
+	// for usergroup_plain.php
+	global $unix_cipher;
+	if (strcasecmp($unix_cipher, 'Plain') == 0) {
+		return $plainpw;
+	} else {
+		return crypt($plainpw,account_gensalt());
+	}
 }
 
 /**
