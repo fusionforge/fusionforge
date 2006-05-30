@@ -37,7 +37,6 @@ class SVNPlugin extends SCM {
  		$this->hooks[] = 'scm_stats';
 // 		$this->hooks[] = 'group_approved';
 		$this->hooks[] = 'scm_plugin';
-		$this->hooks[] = 'cssfile';
 
 		require_once('plugins/scmsvn/config.php') ;
 		
@@ -78,9 +77,6 @@ class SVNPlugin extends SCM {
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
-			break;
-		case 'cssfile':
-			$this->getCSSfile ($params) ;
 			break;
 		default:
 			// Forgot something
@@ -160,7 +156,7 @@ class SVNPlugin extends SCM {
 				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displaySvnBrowser) {
 					echo $Language->getText('plugin_scmsvn', 'browsetree');
-					echo '<p>[<a href="'.$this->getAccountGroupViewcvsUrl($group_id).'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
+					echo '<p>[<a href="/scm/viewvc.php/?root='.$project->getUnixName().'">'.$Language->getText('plugin_scmsvn', 'browseit').'</a>]</p>' ;
 				}
 
 				echo $HTML->boxBottom();
@@ -256,26 +252,6 @@ class SVNPlugin extends SCM {
 			$project->setPluginUse('scmsvn', 0) ;
 		}
 		return true;
-	}
-
-	/**
-	 *	getAccountGroupViewcvsUrl() - Returns URL for group's SVN interface WWW.
-	 *
-	 *	@param  int  The group id
-	 *	@return URL to access CVS over HTTP
-	 */
-	function getAccountGroupViewcvsUrl($group_id) {
-		$project =& group_get_object($group_id);
-		//return 'http'.(($this->use_ssl) ? 's' : '').'://'.$project->getSCMBox().'/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
-		return '/plugins/scmsvn/viewcvs.php/?root='.$project->getUnixName();
-	}
-
-	function getCSSfile ($layout) {
-		// Only show the stylesheet if we're actually in the SVN pages.
-		// This stops styles inadvertently clashing with the main site.
-		if (strncmp($_SERVER['REQUEST_URI'], '/plugins/scmsvn/', 16) == 0) {
-			echo '<link rel="stylesheet" type="text/css" href="/plugins/scmsvn/viewcvs/styles.css" />';
-		}
 	}
 
 	function getDetailedStats ($params) {

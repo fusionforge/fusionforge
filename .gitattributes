@@ -536,14 +536,6 @@ gforge-plugin-ldapextauth/rpm-specific/.keepme -text svneol=unset#application/oc
 gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
-gforge-plugin-scmcvs/www/cvsweb/icons/back.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/binary.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/dir.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/miniback.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minidir.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minigraph.png -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minitext.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/text.gif -text
 gforge-plugin-scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
 gforge-plugin-scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
 gforge-plugin-scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
@@ -818,6 +810,40 @@ gforge/www/jscook/ThemeXP/page.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plus.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
+gforge/www/scm/viewvc/lib/accept.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/compat.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/config.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/debug.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/ezt.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/idiff.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/popen.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/sapi.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/vclib/__init__.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/vclib/svn/__init__.pyc svneol=native#unset
+gforge/www/scm/viewvc/lib/viewvc.pyc svneol=native#unset
+gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
+gforge/www/scm/viewvc/templates/docroot/images/back.png -text
+gforge/www/scm/viewvc/templates/docroot/images/back_small.png -text
+gforge/www/scm/viewvc/templates/docroot/images/broken.png -text
+gforge/www/scm/viewvc/templates/docroot/images/chalk.jpg svneol=native#unset
+gforge/www/scm/viewvc/templates/docroot/images/cvsgraph_16x16.png -text
+gforge/www/scm/viewvc/templates/docroot/images/cvsgraph_32x32.png -text
+gforge/www/scm/viewvc/templates/docroot/images/diff.png -text
+gforge/www/scm/viewvc/templates/docroot/images/dir.png -text
+gforge/www/scm/viewvc/templates/docroot/images/down.png -text
+gforge/www/scm/viewvc/templates/docroot/images/download.png -text
+gforge/www/scm/viewvc/templates/docroot/images/feed-icon-16x16.jpg svneol=native#unset
+gforge/www/scm/viewvc/templates/docroot/images/forward.png -text
+gforge/www/scm/viewvc/templates/docroot/images/list.png -text
+gforge/www/scm/viewvc/templates/docroot/images/log.png -text
+gforge/www/scm/viewvc/templates/docroot/images/logo.png -text
+gforge/www/scm/viewvc/templates/docroot/images/text.png -text
+gforge/www/scm/viewvc/templates/docroot/images/up.png -text
+gforge/www/scm/viewvc/templates/docroot/images/view.png -text
+gforge/www/scm/viewvc/viewvc.org/images/bg-grad.jpg svneol=native#unset
+gforge/www/scm/viewvc/viewvc.org/images/title.jpg svneol=native#unset
+gforge/www/scm/viewvc/viewvc.org/images/title.xcf svneol=native#unset
+gforge/www/scm/viewvc/windows/aspfool/aspfool.dll svneol=native#unset
 gforge/www/search/include/engines/DocsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/ForumsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/FrsGroupSearchEngine.class -text svneol=unset#application/octet-stream
@@ -897,6 +923,25 @@ gforge/www/themes/gforge/images/theme-toptab-selected-bg.png -text
 gforge/www/themes/gforge/images/theme-toptab-selected-end.png -text
 gforge/www/themes/gforge/images/theme-toptab-selected-notselected.png -text
 gforge/www/themes/gforge/images/vert-grad.png -text
+gforge/www/themes/gforge/viewvc/images/annotate.png -text
+gforge/www/themes/gforge/viewvc/images/back.png -text
+gforge/www/themes/gforge/viewvc/images/back_small.png -text
+gforge/www/themes/gforge/viewvc/images/broken.png -text
+gforge/www/themes/gforge/viewvc/images/chalk.jpg svneol=native#unset
+gforge/www/themes/gforge/viewvc/images/cvsgraph_16x16.png -text
+gforge/www/themes/gforge/viewvc/images/cvsgraph_32x32.png -text
+gforge/www/themes/gforge/viewvc/images/diff.png -text
+gforge/www/themes/gforge/viewvc/images/dir.png -text
+gforge/www/themes/gforge/viewvc/images/down.png -text
+gforge/www/themes/gforge/viewvc/images/download.png -text
+gforge/www/themes/gforge/viewvc/images/feed-icon-16x16.jpg svneol=native#unset
+gforge/www/themes/gforge/viewvc/images/forward.png -text
+gforge/www/themes/gforge/viewvc/images/list.png -text
+gforge/www/themes/gforge/viewvc/images/log.png -text
+gforge/www/themes/gforge/viewvc/images/logo.png -text
+gforge/www/themes/gforge/viewvc/images/text.png -text
+gforge/www/themes/gforge/viewvc/images/up.png -text
+gforge/www/themes/gforge/viewvc/images/view.png -text
 gforge/www/themes/lite/images/gforge_logo.png -text
 gforge/www/themes/osx/images/background.png -text
 gforge/www/themes/osx/images/clear.png -text

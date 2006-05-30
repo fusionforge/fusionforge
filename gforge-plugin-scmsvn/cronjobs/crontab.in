@@ -33,20 +33,20 @@
 #
 #       *.company.com creation of group home dirs
 #
-12 * * * * $GFORGE/plugins/scmsvn/cronjobs/create_group_home.php /var/www/homedirs/
+12 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/create_group_home.php /var/www/homedirs/
 
 #
 #       users.company.com creation of user dirs
 #
-15 * * * * $GFORGE/plugins/scmsvn/cronjobs/create_users.php /var/www/homedirs/
+15 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/create_users.php /var/www/homedirs/
 
 #
 #       structure for versioned docman
 #
-18 * * * * $GFORGE/plugins/scmsvn/cronjobs/create_docman.php
+18 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/create_docman.php
 
 #
 #       structure for subversion repos
 #
-20 * * * * $GFORGE/plugins/scmsvn/cronjobs/create_svn.php
+20 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/create_svn.php
 

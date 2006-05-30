@@ -14,7 +14,6 @@ class CVSPlugin extends SCM {
 
 		$this->hooks[] = 'scm_plugin';
 //		$this->hooks[] = 'group_approved';
-		$this->hooks[] = 'cssfile';
 
 		require_once('plugins/scmcvs/config.php') ;
 
@@ -55,9 +54,6 @@ class CVSPlugin extends SCM {
 // 		case "group_approved":
 // 			$this->groupApproved ($params) ;
 // 			break;
-		case 'cssfile':
-			$this->getCSSfile ($params) ;
-			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -65,10 +61,6 @@ class CVSPlugin extends SCM {
 		default:
 			// Forgot something
 		}
-	}
-
-	function getCSSfile ($layout) {
-		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmcvs/cvsweb/css/cvsweb.css" />';
 	}
 
 	function getPage ($group_id) {
@@ -140,7 +132,7 @@ class CVSPlugin extends SCM {
 				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displayCvsBrowser){
 					echo $Language->getText('plugin_scmcvs', 'browsetree');
-					echo '<p>[<a href="'.$this->getAccountGroupCVSwebUrl($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
+					echo '<p>[<a href="/scm/viewvc.php/?root='.$project->getUnixName().'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
 					$hook_params['project_name'] = $project->getUnixName();
 					plugin_hook ("cvs_stats", $hook_params) ;
 				}
@@ -265,19 +257,6 @@ class CVSPlugin extends SCM {
 			echo $HTML->listTableBottom();
 			echo '<hr size="1" />';
 		}
-	}
-
-	/**
-	 *      getAccountGroupCvswebUrl() - Returns URL for group's CVS interface WWW
-	 *
-	 *	@param  string  The group name
-	 *      @return URL to access CVS over HTTP
-	 */
-	function getAccountGroupCVSwebUrl($group_id) {
-		$project =& group_get_object($group_id);
-		//return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot='.$project->getUnixName();
-		// external SCM box is now handled inside cvsweb.php
-		return '/plugins/scmcvs/cvsweb.php/?cvsroot='.$project->getUnixName();
 	}
 
 /*
