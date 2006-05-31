@@ -24,6 +24,7 @@ function viewcvs_is_html() {
 
 	return (strpos($request_uri,"*checkout*") === false && 
 		strpos($query_string,"view=graphimg") === false &&
+		strpos($query_string,"view=patch") === false &&
 		strpos($query_string,"view=tar") === false &&
 		strpos($request_uri,"*docroot*") === false &&
 		strpos($request_uri,"makepatch=1") === false);
