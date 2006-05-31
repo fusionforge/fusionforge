@@ -72,7 +72,7 @@ class cvstrackerPlugin extends Plugin {
 				$Row = db_fetch_array($DBResult);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
-						$Row['file']). '</td>'.
+						$Row['file'],$Row['actual_version']). '</td>'.
 				'<td>'. date($sys_shortdatefmt, $Row['cvs_date']).'</td>'.
 				'<td>'. $this->getDiffLink($group->getUnixName(),
 						$Row['file'],
@@ -120,10 +120,10 @@ class cvstrackerPlugin extends Plugin {
 	* @return   String  The string containing a link to the File in the cvsweb
 	*
 	*/
-	function getFileLink($GroupName, $FileName) {
+	function getFileLink($GroupName, $FileName, $LatestRevision) {
 		global $sys_default_domain;
-		return '<a href="/plugins/scmcvs/cvsweb.php/'.
-			$FileName.'?cvsroot='.$GroupName.'">'.$FileName.'</a>';
+		return '<a href="/scm/viewvc.php/'.
+			$FileName.'?root='.$GroupName.'&amp;view=log">'.$FileName.'</a>';
 	}
 
 	/**
@@ -138,8 +138,8 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
 		global $sys_default_domain;
-		return '<a href="/plugins/scmcvs/cvsweb.php/'.
-			$FileName.'?cvsroot='.$GroupName.'&rev='.$Version.'&contenttype=text/x-cvsweb-markup">'.
+		return '<a href="/scm/viewvc.php/'.
+			$FileName.'?root='.$GroupName.'&pathrev='.$Version.'&amp;view=markup">'.
 			$Version.'</a>';
 	}
 
@@ -156,9 +156,9 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
 		global $sys_default_domain,$Language;
-		return '<a href="/plugins/scmcvs/cvsweb.php/'.
-			$FileName.'?cvsroot='.$GroupName.'&r1='.$PrevVersion.'&r2='.
-			$ActualVersion.'&contenttype=text/x-cvsweb-markup">'.
+		return '<a href="/scm/viewvc.php/'.
+			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
+			$ActualVersion.'">'.
 			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
 	}
 
