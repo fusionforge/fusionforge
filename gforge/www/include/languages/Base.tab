@@ -1052,6 +1052,7 @@ menu	projectree	Project&nbsp;Tree
 menu	register_project	Register Project
 menu	search	Search
 menu	submit	Submit
+menu	bookmark_add	Add bookmark
 mytab	monitoring	Monitored Items
 mytab	project	Projects
 my	bookmarks	My Bookmarks
@@ -1650,7 +1651,7 @@ project_filemodule_monitor	start_monitor_title	Monitoring started
 project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
 project_filemodule_monitor	stop_monitor_title	Monitoring stopped
 project_home	help_wanted	HELP WANTED: This project is looking for
-project_home	help_wanted_multiple	People to fill $1 several different positions </a>
+project_home	help_wanted_multiple	People to fill $1 several different positions 
 project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
 project_home	monitor_package	Monitor this package
 project_home	no_subprojects	There are no public subprojects available

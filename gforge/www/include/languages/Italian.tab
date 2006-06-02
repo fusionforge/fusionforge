@@ -1540,7 +1540,7 @@ project_filemodule_monitor	start_monitor_title	Notifica attivata
 project_filemodule_monitor	stop_monitor_body	È stata disattivata la notifica del package
 project_filemodule_monitor	stop_monitor_title	Notifica disattivata
 project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
-project_home	help_wanted_multiple	persone per occupare $1 svariate posizioni differenti </a>
+project_home	help_wanted_multiple	persone per occupare $1 svariate posizioni differenti 
 project_home	holding_note	NOTA: Questo progetto è mantenuto dal team di $1, non è però il sito ufficiale di questo progetto. Ulteriori informazioni sul copyright possono essere trovate sulla homepage del progetto.
 project_home	monitor_package	Notifica questo package
 project_home	no_subprojects	Non ci sono sottoprogetti pubblici
