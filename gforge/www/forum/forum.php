@@ -249,7 +249,7 @@ if ($forum_id) {
 
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="/forum/message.php?msg_id='.$msg->getID().
-				'&group_id='.$group_id.'">'.
+				'&ampgroup_id='.$group_id.'">'.
 				html_image('ic/msg.png',"10","12",array("border"=>"0"));
 			/*
 				See if this message is new or not

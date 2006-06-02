@@ -98,7 +98,7 @@ if ($msg_id) {
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	echo "<tr><td>\n";
+	echo "<tr class=\"tablecontent\"><td>\n";
 	$fa = new ForumAdmin();
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
