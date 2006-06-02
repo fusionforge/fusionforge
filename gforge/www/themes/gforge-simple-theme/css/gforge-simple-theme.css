@@ -1,0 +1,620 @@
+/*main styles*/
+html,body{margin: 0;padding:0}
+body{font-family: arial,sans-serif;font-size: 76%}
+
+A {
+	text-decoration: none;
+	color: CornFlowerBlue;
+}
+/* styles for header */
+div#container{	BACKGROUND-color:#204a87}
+
+div#container A{
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+	color: #eeeeec;
+}
+
+div#header{background-color:#36C;color: #ff0}
+
+
+div#logo{float: left;width: 200px;\width:210px;w\idth:210px;padding: 1em 0 0 10px;height: 52px;
+	BACKGROUND: url(/themes/gforge-simple-theme/images/logo.png) no-repeat; }
+
+div#logo H1 {
+	width: 200px;
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
+	MARGIN: 0px; POSITION: top; HEIGHT: 52px;
+}
+
+div#logo H1 A {
+	width: 200px;
+	DISPLAY: block; TEXT-INDENT: -99em; HEIGHT: 52px;
+}
+
+
+div#util{float: right; width: 100px;\width:110px;w\idth:110px;padding: 1em 5px;
+text-transform: lowercase;
+FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+border: 0px;
+top-margin:0px;
+
+}
+
+
+
+div#toolscontent{margin: 0 210px;padding: 1em 10px}
+
+
+div#content{margin: 0 170px;padding: 1em 10px}
+
+
+/* style for footer */
+div#footer{clear:both; text-align:center; padding: 5px 0;
+     color: #000}
+
+
+
+/*
+
+FINE*/
+	
+#contenitore{
+	width: 100%;
+	display: inline;
+	background-color: #204a87;
+
+}
+
+
+#gforge-top {
+	float:left;
+	width: 250px;
+	background-color: #204a87;
+BACKGROUND: url(/themes/gforge-simple-theme/images/logo.png) no-repeat;
+}
+
+/*
+<H1><a href="/">GForge</a></H1>
+*/
+
+
+#menudx{
+	text-transform: lowercase;
+	float:right;
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+	font-size:95%;
+	border: 0px;
+	background-color: #204a87;
+	color:#000;
+	top-margin:0px;
+	height: 52px;
+	float:right;
+	width: 10em;
+}
+
+#toputilities {
+	height: 52px;
+	float: left;
+	width: 60%;
+	background-color: #204a87;
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+
+}
+
+#toputilities FORM SELECT  {
+	FONT: 10px Lucida Grande, Tahoma, sans-serif; 
+
+
+}
+#toputilities TEXTAREA, INPUT, SELECT, OPTION{
+//	background-color: #729fcf;
+//	border: 2px;
+//	border-color: green;
+	FONT: 9px Lucida Grande, Tahoma, sans-serif; 
+
+
+}
+
+#toputilities A{
+	color: white;
+}
+
+
+#topempty {
+	height: 52px;
+	float: right;
+	width: 35em;
+	background-color: #204a87;
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+
+}
+
+
+
+#menudx a{
+	color: #eeeeec;
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+
+	
+}
+
+
+/* TODO:
+
+copy gforge-compat.css styles and personalize them.
+*/
+@import url(/themes/gforge-simple-theme/css/base.css);
+
+#gforge-header {
+	width: 100%;
+	display: inline;
+	height: 52px;
+	background-color: #00004e;
+	width: 85%;
+}
+
+#gforge-top {
+	BACKGROUND-color:#00004e; ; MARGIN-BOTTOM: 0px; OVERFLOW: hidden; HEIGHT: 52px; width: 185px;
+	FLOAT: left;
+}
+
+
+#gforge-top H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
+	BACKGROUND: url(/themes/gforge-simple-theme/images/logo.png) no-repeat; MARGIN: 0px; POSITION: top; HEIGHT: 52px;
+}
+#gforge-top H1 A {
+	DISPLAY: block; BACKGROUND: url(images/logo.png) no-repeat; WIDTH: 498px; TEXT-INDENT: -99em; HEIGHT: 52px;
+}
+
+#gforge-utility {
+
+text-transform: lowercase;
+float:right;
+FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+font-size:95%;
+width:15%;
+border: 1px solid #669;
+background-color: #ededed;
+color:#000;
+top-margin:0px;
+}
+
+
+
+#footer {
+	width: 100%;
+	
+
+}
+
+/** NAVIGATION **/
+
+div#gforge-top-navigation{	
+BACKGROUND-color:#3465a4;}
+
+
+/* OUTER TABS */
+
+/* first level navigation (usually main tabs) */
+
+
+
+
+
+
+#gforge-toptab {
+	margin: 10px auto;
+	background-color: blue;
+	}
+
+
+
+#gforge-toptab-nav {
+	FLOAT: right; BACKGROUND-color:#3465a4; MARGIN: 0px; HEIGHT: 34px; 
+}
+#gforge-toptab-nav A {
+	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none;
+}
+
+#gforge-toptab-nav A:hover {
+	LINE-HEIGHT: 24px
+}
+
+#gforge-toptab-nav A#gforge-home:hover {
+	BORDER-TOP: #8ae234 5px solid
+}
+
+#gforge-toptab-nav A#gforge-my:hover {
+	BORDER-TOP: #fce94f 5px solid
+}
+#gforge-toptab-nav A#gforge-reporting:hover {
+	BORDER-TOP: #fcaf3e 5px solid
+}
+#gforge-toptab-nav A#gforge-admin:hover {
+	BORDER-TOP: #e9b96e 5px solid
+}
+#gforge-toptab-nav A#gforge-people:hover {
+	BORDER-TOP: #8ae234 5px solid
+}
+#gforge-toptab-nav A#gforge-softwaremap:hover {
+	BORDER-TOP: #ad7fa8 5px solid
+}
+#gforge-toptab-nav A#gforge-snippet:hover {
+	BORDER-TOP: #ef2929 5px solid
+}
+
+
+#gforge-toptab-nav #gforge-selected {
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+	color:white;
+	background-color: #c4a000;
+	height: 34px;
+	line-height: 24px;
+	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none
+
+}
+/* does not work*/
+#gforge-toptab-nav SPAN {
+	DISPLAY: block; BACKGROUND-image: url(/themes/gforge-simple-theme/images/top-sep.gif) no-repeat center top; FLOAT: left; MARGIN: 0px 6px; OVERFLOW: hidden; WIDTH: 1px; CURSOR: default; TEXT-INDENT: -5em; HEIGHT: 34px
+}
+
+
+/* END OUTER TABS */
+
+
+/* PROJECT TABS */
+
+#gforge-secondlevel-nav {
+	FLOAT: right; BACKGROUND-color:#729fcf; MARGIN: 0px; HEIGHT: 34px;
+
+}
+
+#gforge-secondlevel-nav A {
+	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none
+}
+
+#gforge-secondlevel-nav A:hover {
+	LINE-HEIGHT: 24px
+}
+
+
+#gforge-secondlevel-nav A#gforge-project-summary:hover {
+	BORDER-TOP: #c4a000 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-admin:hover {
+	BORDER-TOP: #ce5c00 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-forum:hover {
+	BORDER-TOP: #8f5902 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-tracker:hover {
+	BORDER-TOP: #4e9a06 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-mail:hover {
+	BORDER-TOP: #204a87 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-task:hover {
+	BORDER-TOP: #5c3566 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-docman:hover {
+	BORDER-TOP: #a40000 5px solid
+}
+
+#gforge-secondlevel-nav A#gforge-project-survey:hover {
+	BORDER-TOP: #73d216 5px solid
+}
+
+#gforge-secondlevel-nav A#gforge-project-news:hover {
+	BORDER-TOP: #c17d11 5px solid
+}
+
+#gforge-secondlevel-nav A#gforge-project-scm:hover {
+	BORDER-TOP: #fcaf3e 5px solid
+}
+#gforge-secondlevel-nav A#gforge-project-plugin:hover {
+	BORDER-TOP: #edd400 5px solid
+}
+
+#gforge-secondlevel-nav A#gforge-project-frs:hover {
+	BORDER-TOP: #a40000 5px solid
+}
+
+#gforge-secondlevel-nav #gforge-selected {
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+	color:white;
+	background-color: #75507b;
+	height: 34px;
+	line-height: 24px;
+	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none
+
+}
+
+
+
+#gforge-secondlevel-nav SPAN {
+	DISPLAY: block; BACKGROUND: url(images/top-sep.gif) no-repeat center top; FLOAT: left; MARGIN: 0px 6px; OVERFLOW: hidden; WIDTH: 1px; CURSOR: default; TEXT-INDENT: -5em; HEIGHT: 34px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* END PROJECT TABS */
+
+
+
+#gforge-content{
+	width: 100%;
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+	float: right;
+	margin: 0px;
+	padding: 0px;
+
+	}
+
+/* from base.css */
+
+.altRowStyleEven { 
+	background-color: #EAEAEA; 
+	font-weight: none
+	}
+
+.altRowStyleOdd { 
+	background-color: #E0E0E0; 
+	font-weight: none
+}
+
+
+/* definition for content table */
+.tableheading {
+	background-color:#D0D0D0; 
+	text-align: center;
+	font-weight:  bold;
+	}
+
+.tablecontent {
+	font-size: 11px;
+	background-color: #eeeeee
+	
+	}
+
+.tablegetmore {
+	background-color: #EAEAEA
+	}
+
+div#tabletop {
+	width: 950px;
+	background-image: url(/themes/gforge-simple-theme/images/box-grad.png);
+}
+
+div#tabletop TABLE{
+	width: 950px;
+}
+div#tabletop THEAD{
+	text-align: center;
+	font-weight: bold;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+div#tabletop THEAD A{
+	color: black;
+}
+
+div#tabletop THEAD TD{
+	color: #00004a;
+}
+
+div#tabletop TBODY{
+	background-color: #eeeeee;
+}
+
+
+
+div#gforge-content-snippet {
+
+}
+div#gforge-content-softwaremap {
+
+}
+
+
+/* priority styles */
+.priority1 { background-color: #dadada}
+.priority2 { background-color: #dacaca}
+.priority3 { background-color: #dababa}
+.priority4 { background-color: #daaaaa}
+.priority5 { background-color: #da8a8a}
+
+
+/* START */
+
+/* Default stylesheet for gforge
+
+
+/* end form elements */
+
+STRONG {font-weight: bold}
+
+h1, h2, h3, h4, h5, h6 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-weight:none;
+	padding:0;
+}
+
+H1 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: x-large
+	}
+H2 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: large
+	}
+H3 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: medium
+	}
+
+H4 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: small
+	}
+
+H5 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: x-small
+	}
+
+H6 { 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: xx-small
+	}
+
+
+
+.titlebar { 
+	FONT-SIZE:11px; 
+	color: black; 
+	text-decoration: none; 
+	}
+
+.develtitle {
+	FONT-SIZE: 11px; 
+	COLOR: #535c5f; 
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	}
+
+
+/* styles for prev next up and down*/
+.prev, .next, up, down {
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: small; 
+	text-decoration: bold
+	}
+
+/* top */
+.up {
+	color: #009900
+	}
+
+.down {
+	color: #CC0000
+	}
+
+/* global styles */
+
+/* style for error messages 
+   Use this style if you need to display an error, e.g:
+     User does not exist
+*/
+.error {
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	color: red;
+	text-decoration: bold;
+	font-size: 14px;
+}
+
+/* style for warning messages 
+   Use this style if you need to display a warning*/
+
+.warning {
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	color: red: 
+	text-decoration: none
+	}
+
+/* style for feedback  
+   Use this style to tell the user that the operation he
+   requested was executed successfully, e.g:
+   User was successfully registered
+*/
+.feedback {
+	color: red; 
+	font-size: 13px; 
+	text-align: center; 
+	text-decoration: none
+	border: 1px #0ac solid;
+	}
+
+/* style for attention 
+   Use this if you wish to display important messages
+   within a text.
+   Note that once registered, the project cannot be deleted
+*/
+
+.important {
+	color: red; 
+	font-weight: bold
+	}
+
+
+.veryimportant {
+	color: red; 
+	font-weight: bold; 
+	font-size: large; 
+	text-align: center
+	}
+   
+
+/* the following style are for displaying items in different states */
+
+.active {
+	background-color: #73d216; 
+	text-decoration: none; 
+	font-weight: normal
+	}
+
+.inactive {
+	background-color: #c17d11;
+	}
+
+.deleted {
+	background-color: #cc0000; 
+	color: white;
+	}
+
+.suspended {
+
+	background-color: #edd400;
+	}
+
+.pending {
+	background-color: #f57900;
+	}
+
+/* the following style is used when a word or an item should be highlighted; e.g.
+   selected release or words in the advanced search */
+
+.selected {
+	background-color: pink
+	}
+
+/* style for required fields */
+.requiredfield {
+	color: red; 
+	font-weight: bold
+	}
+
+
+.bookmark {
+	font-size: 10px;
+}
+
+/* END*/
+
+fieldset {
+
+}
+legend {
+	font-size: 12px;
+}
+

@@ -850,6 +850,10 @@ gforge/www/search/include/engines/FrsGroupSearchEngine.class -text svneol=unset#
 gforge/www/search/include/engines/NewsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/TasksGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/TrackersGroupSearchEngine.class -text svneol=unset#application/octet-stream
+gforge/www/themes/gforge-simple-theme/images/box-grad.png -text
+gforge/www/themes/gforge-simple-theme/images/box-topleft.png -text
+gforge/www/themes/gforge-simple-theme/images/box-topright.png -text
+gforge/www/themes/gforge-simple-theme/images/logo.png -text
 gforge/www/themes/gforge/images/box-grad.png -text
 gforge/www/themes/gforge/images/box-topleft.png -text
 gforge/www/themes/gforge/images/box-topright.png -text
