@@ -1,3 +1,8 @@
+2006-06-01 Reinhard Spisser <reinhard@spisser.it>
+	* committing first xhtml compliant theme (gforge-simple-theme)
+
+2006-06-01 Reinhard Spisser <reinhard@spisser.it>
+	* fix for bug [#2491] CSS Bug
 
 2006-05-19 Reinhard Spisser <reinhard@spisser.it>
 	* final commits for css-ification task
