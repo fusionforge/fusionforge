@@ -271,10 +271,10 @@ echo '<a href="'.$this->selected_dir.'">'.$this->selected_title.'</a>';
 		<!-- Box Middle Start -->
 					</td>
 				</tr>
-				<tr align="center">
-					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
+				<tr class="tableheading">
+					<td colspan="2">'.$title.'</td>
 				</tr>
-				<tr align="left">
+				<tr align="left" class="tablecontent">
 					<td colspan="2">
 		<!-- Box Middle End -->';
 	}
@@ -447,7 +447,7 @@ function listTableBottom() {
 				$this->selected_dir = $TABS_DIRS[$i];
 				$this->selected_id = $TABS_IDS[$i];
 	
-				$return .= '<div id="gforge-selected" title="'.$TABS_TITLES[$i].'" >'.$TABS_TITLES[$i].'</div> <span>|</span>';
+				$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'" >'.$TABS_TITLES[$i].'</a> <span>|</span>';
 			}
 			else{
 				$return .= '<a id="gforge-'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'"
@@ -484,8 +484,8 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
 			return;
 		}
 
-		$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
-		$TABS_TITLES[]=$project->getPublicName();
+//		$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+//		$TABS_TITLES[]=$project->getPublicName();
 
 		// Summary
 		$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
@@ -603,7 +603,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
 				$this->selected_title = $TABS_TITLES[$i];
 				$this->selected_dir = $TABS_DIRS[$i];
 				$this->selected_ids = $TABS_IDS[$i];
-			       	$return .= '<div id="gforge-selected" >'.$TABS_TITLES[$i].'</div> <span>|</span>';
+			       	$return .= '<a id="gforge-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
 
 			}
 			else{

@@ -481,10 +481,11 @@ H6 {
 
 
 
-.titlebar { 
+.titlebar TD { 
 	FONT-SIZE:11px; 
 	color: black; 
 	text-decoration: none; 
+	background-color:#D0D0D0; 
 	}
 
 .develtitle {
