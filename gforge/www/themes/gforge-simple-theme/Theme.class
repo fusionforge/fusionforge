@@ -176,23 +176,32 @@ echo '
 
 </div>
 
-<div id="gforge-top-navigation">
-<div id="gforge-toptab-nav">
+<div id="outertabscontainer">
+<div id="outertabs-left">
+</div>
+<div id="outertabs-content">
 <?php echo $this->outerTabs($params); 
-
 ?>
 </div>
+<div id="outertabs-right">
 </div>
 
-<?php
+</div>
+
+<?php 
 if (isset($params['group']) && $params['group']) {
-	echo '<div id="gforge-secondlevel-nav">';
-	echo $this->projectTabs($params['toptab'],$params['group']);
-	echo '</div>';
+?>
+<div id="projecttabscontainer">
+<div id="projecttabs-left">
+</div>
+<div id="projecttabs-content">
+<?echo $this->projectTabs($params['toptab'],$params['group']);?>
+</div>
+<div id="projecttabs-right">
+</div>
+</div>
 
-	}
-
-
+<?php }
 ?>
 
 
@@ -446,16 +455,16 @@ function listTableBottom() {
 				$this->selected_title = $TABS_TITLES[$i];
 				$this->selected_dir = $TABS_DIRS[$i];
 				$this->selected_id = $TABS_IDS[$i];
-	
-				$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'" >'.$TABS_TITLES[$i].'</a> <span>|</span>';
+				$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'" >'.$TABS_TITLES[$i].'</a> ';
 			}
 			else{
 				$return .= '<a id="gforge-'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'"
-href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
+href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 			}
 		}
 	if(isset($params['group']) && $params['group']) {
-			$return.= '<div id="gforge-selected"> '.$TABS_TITLES[$i].'</div>';
+				$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'"
+href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 			$this->selected_title = $TABS_TITLES[$i];
 	}
 	return $return;
@@ -602,17 +611,17 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
 			if ($selected==$i){
 				$this->selected_title = $TABS_TITLES[$i];
 				$this->selected_dir = $TABS_DIRS[$i];
-				$this->selected_ids = $TABS_IDS[$i];
-			       	$return .= '<a id="gforge-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
+				$this->selected_id = $TABS_IDS[$i];
+			       	$return .= '<a id="gforge-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 
 			}
 			else{
 				if ($TABS_IDS[$i]==''){
-			        	$return .= '<a id="gforge-project-std" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
+			        	$return .= '<a id="gforge-project-std" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>';
 
 				}
 				else {
-			        	$return .= '<a id="'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> <span>|</span>';
+			        	$return .= '<a id="'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>';
 				}
 			}
                 }
