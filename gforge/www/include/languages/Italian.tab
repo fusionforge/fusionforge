@@ -832,12 +832,13 @@ group	short_mail	Mailing List
 group	short_memberlist	Sviluppatori
 group	short_news	Notizie
 group	short_patch	Patch
-group	short_pm	Attività
+group	short_pm	Attivit&agrave;
 group	short_scm	SCM
 group	short_summary	Sommario
 group	short_support	Supporto
 group	short_survey	Sondaggi
 group	short_tracker	Tracker
+group	short_activity	Attivit&agrave sul progetto
 help	page_information	Informazioni
 help	title	Benvenuto su $1
 help_tracker	assignee	Questa casella rappresenta la persona alla quale è assegnato l'elemento.

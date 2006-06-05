@@ -514,6 +514,11 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		$TABS_TITLES[]=$Language->getText('group','short_homepage');
 */
 
+		$TABS_DIRS[]='/activity/?group_id='. $group;
+		$TABS_IDS[]='gforge-project-activity';
+		$TABS_TITLES[]=$Language->getText('group','short_activity');
+		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
+
 		// Forums
 		if ($project->usesForum()) {
 			$TABS_DIRS[]='/forum/?group_id='.$group;

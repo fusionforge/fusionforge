@@ -457,6 +457,11 @@ margin-right: 200px;
 #projecttabs-content A#gforge-project-admin:hover {
 	BORDER-TOP: #ce5c00 5px solid
 }
+#projecttabs-content A#gforge-project-activity:hover {
+	BORDER-TOP: #73d216 5px solid
+}
+
+
 #projecttabs-content A#gforge-project-forum:hover {
 	BORDER-TOP: #8f5902 5px solid
 }
@@ -491,9 +496,6 @@ margin-right: 200px;
 #projecttabs-content A#gforge-project-frs:hover {
 	BORDER-TOP: #a40000 5px solid
 }
-
-
-
 
 
 #projecttabs-content A#gforge-selected  {
