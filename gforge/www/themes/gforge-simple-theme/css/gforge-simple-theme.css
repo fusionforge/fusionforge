@@ -2,10 +2,8 @@
 html,body{margin: 0;padding:0}
 body{font-family: arial,sans-serif;font-size: 76%}
 
-A {
-	text-decoration: none;
-	color: CornFlowerBlue;
-}
+A {text-decoration: none;color: CornFlowerBlue;}
+
 /* styles for header */
 div#container{	BACKGROUND-color:#204a87}
 
@@ -54,300 +52,11 @@ div#footer{clear:both; text-align:center; padding: 5px 0;
 
 
 
-/*
-
-FINE*/
-	
-#contenitore{
-	width: 100%;
-	display: inline;
-	background-color: #204a87;
-
-}
-
-
-#gforge-top {
-	float:left;
-	width: 250px;
-	background-color: #204a87;
-BACKGROUND: url(/themes/gforge-simple-theme/images/logo.png) no-repeat;
-}
-
-/*
-<H1><a href="/">GForge</a></H1>
-*/
-
-
-#menudx{
-	text-transform: lowercase;
-	float:right;
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-	font-size:95%;
-	border: 0px;
-	background-color: #204a87;
-	color:#000;
-	top-margin:0px;
-	height: 52px;
-	float:right;
-	width: 10em;
-}
-
-#toputilities {
-	height: 52px;
-	float: left;
-	width: 60%;
-	background-color: #204a87;
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-
-}
-
-#toputilities FORM SELECT  {
-	FONT: 10px Lucida Grande, Tahoma, sans-serif; 
-
-
-}
-#toputilities TEXTAREA, INPUT, SELECT, OPTION{
-//	background-color: #729fcf;
-//	border: 2px;
-//	border-color: green;
-	FONT: 9px Lucida Grande, Tahoma, sans-serif; 
-
-
-}
-
-#toputilities A{
-	color: white;
-}
-
-
-#topempty {
-	height: 52px;
-	float: right;
-	width: 35em;
-	background-color: #204a87;
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-
-}
-
-
-
-#menudx a{
-	color: #eeeeec;
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-
-	
-}
-
-
-/* TODO:
-
-copy gforge-compat.css styles and personalize them.
-*/
-@import url(/themes/gforge-simple-theme/css/base.css);
-
-#gforge-header {
-	width: 100%;
-	display: inline;
-	height: 52px;
-	background-color: #00004e;
-	width: 85%;
-}
-
-#gforge-top {
-	BACKGROUND-color:#00004e; ; MARGIN-BOTTOM: 0px; OVERFLOW: hidden; HEIGHT: 52px; width: 185px;
-	FLOAT: left;
-}
-
-
-#gforge-top H1 {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
-	BACKGROUND: url(/themes/gforge-simple-theme/images/logo.png) no-repeat; MARGIN: 0px; POSITION: top; HEIGHT: 52px;
-}
-#gforge-top H1 A {
-	DISPLAY: block; BACKGROUND: url(images/logo.png) no-repeat; WIDTH: 498px; TEXT-INDENT: -99em; HEIGHT: 52px;
-}
-
-#gforge-utility {
-
-text-transform: lowercase;
-float:right;
-FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-font-size:95%;
-width:15%;
-border: 1px solid #669;
-background-color: #ededed;
-color:#000;
-top-margin:0px;
-}
-
-
-
-#footer {
-	width: 100%;
-	
-
-}
-
 /** NAVIGATION **/
 
 div#gforge-top-navigation{	
 BACKGROUND-color:#3465a4;}
 
-
-/* OUTER TABS */
-
-/* first level navigation (usually main tabs) */
-
-
-
-
-
-
-#gforge-toptab {
-	margin: 10px auto;
-	background-color: blue;
-	}
-
-
-
-#gforge-toptab-nav {
-	FLOAT: right; BACKGROUND-color:#3465a4; MARGIN: 0px; HEIGHT: 34px; 
-}
-#gforge-toptab-nav A {
-	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none;
-}
-
-#gforge-toptab-nav A:hover {
-	LINE-HEIGHT: 24px
-}
-
-#gforge-toptab-nav A#gforge-home:hover {
-	BORDER-TOP: #8ae234 5px solid
-}
-
-#gforge-toptab-nav A#gforge-my:hover {
-	BORDER-TOP: #fce94f 5px solid
-}
-#gforge-toptab-nav A#gforge-reporting:hover {
-	BORDER-TOP: #fcaf3e 5px solid
-}
-#gforge-toptab-nav A#gforge-admin:hover {
-	BORDER-TOP: #e9b96e 5px solid
-}
-#gforge-toptab-nav A#gforge-people:hover {
-	BORDER-TOP: #8ae234 5px solid
-}
-#gforge-toptab-nav A#gforge-softwaremap:hover {
-	BORDER-TOP: #ad7fa8 5px solid
-}
-#gforge-toptab-nav A#gforge-snippet:hover {
-	BORDER-TOP: #ef2929 5px solid
-}
-
-
-#gforge-toptab-nav #gforge-selected {
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-	color:white;
-	background-color: #c4a000;
-	height: 34px;
-	line-height: 24px;
-	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none
-
-}
-/* does not work*/
-#gforge-toptab-nav SPAN {
-	DISPLAY: block; BACKGROUND-image: url(/themes/gforge-simple-theme/images/top-sep.gif) no-repeat center top; FLOAT: left; MARGIN: 0px 6px; OVERFLOW: hidden; WIDTH: 1px; CURSOR: default; TEXT-INDENT: -5em; HEIGHT: 34px
-}
-
-
-/* END OUTER TABS */
-
-
-/* PROJECT TABS */
-
-#gforge-secondlevel-nav {
-	FLOAT: right; BACKGROUND-color:#729fcf; MARGIN: 0px; HEIGHT: 34px;
-
-}
-
-#gforge-secondlevel-nav A {
-	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none
-}
-
-#gforge-secondlevel-nav A:hover {
-	LINE-HEIGHT: 24px
-}
-
-
-#gforge-secondlevel-nav A#gforge-project-summary:hover {
-	BORDER-TOP: #c4a000 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-admin:hover {
-	BORDER-TOP: #ce5c00 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-forum:hover {
-	BORDER-TOP: #8f5902 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-tracker:hover {
-	BORDER-TOP: #4e9a06 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-mail:hover {
-	BORDER-TOP: #204a87 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-task:hover {
-	BORDER-TOP: #5c3566 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-docman:hover {
-	BORDER-TOP: #a40000 5px solid
-}
-
-#gforge-secondlevel-nav A#gforge-project-survey:hover {
-	BORDER-TOP: #73d216 5px solid
-}
-
-#gforge-secondlevel-nav A#gforge-project-news:hover {
-	BORDER-TOP: #c17d11 5px solid
-}
-
-#gforge-secondlevel-nav A#gforge-project-scm:hover {
-	BORDER-TOP: #fcaf3e 5px solid
-}
-#gforge-secondlevel-nav A#gforge-project-plugin:hover {
-	BORDER-TOP: #edd400 5px solid
-}
-
-#gforge-secondlevel-nav A#gforge-project-frs:hover {
-	BORDER-TOP: #a40000 5px solid
-}
-
-#gforge-secondlevel-nav #gforge-selected {
-	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
-	color:white;
-	background-color: #75507b;
-	height: 34px;
-	line-height: 24px;
-	FLOAT: left; FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; COLOR: #eee; TEXT-DECORATION: none
-
-}
-
-
-
-#gforge-secondlevel-nav SPAN {
-	DISPLAY: block; BACKGROUND: url(images/top-sep.gif) no-repeat center top; FLOAT: left; MARGIN: 0px 6px; OVERFLOW: hidden; WIDTH: 1px; CURSOR: default; TEXT-INDENT: -5em; HEIGHT: 34px
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* END PROJECT TABS */
 
 
 
@@ -360,7 +69,6 @@ BACKGROUND-color:#3465a4;}
 
 	}
 
-/* from base.css */
 
 .altRowStyleEven { 
 	background-color: #EAEAEA; 
@@ -378,11 +86,13 @@ BACKGROUND-color:#3465a4;}
 	background-color:#D0D0D0; 
 	text-align: center;
 	font-weight:  bold;
+	color: black;
 	}
 
 .tablecontent {
+	text-decoration: none;
 	font-size: 11px;
-	background-color: #eeeeee
+	background-color: #eeeeee;
 	
 	}
 
@@ -392,6 +102,7 @@ BACKGROUND-color:#3465a4;}
 
 div#tabletop {
 	width: 950px;
+	font-size: 11px;
 	background-image: url(/themes/gforge-simple-theme/images/box-grad.png);
 }
 
@@ -404,10 +115,12 @@ div#tabletop THEAD{
 	border: 0px;
 	padding: 0px;
 	margin: 0px;
+	font-size: 11px;
 }
 
 div#tabletop THEAD A{
 	color: black;
+	font-size: 11px;
 }
 
 div#tabletop THEAD TD{
@@ -416,16 +129,11 @@ div#tabletop THEAD TD{
 
 div#tabletop TBODY{
 	background-color: #eeeeee;
+	font-size: 11px;
 }
 
 
 
-div#gforge-content-snippet {
-
-}
-div#gforge-content-softwaremap {
-
-}
 
 
 /* priority styles */
@@ -443,7 +151,10 @@ div#gforge-content-softwaremap {
 
 /* end form elements */
 
-STRONG {font-weight: bold}
+STRONG {
+	font-family: Lucida Grande, Tahoma, sans-serif; 
+	font-size: 11px;
+font-weight: bold}
 
 h1, h2, h3, h4, h5, h6 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
@@ -481,7 +192,7 @@ H6 {
 
 
 
-.titlebar TD { 
+.titlebar  { 
 	FONT-SIZE:11px; 
 	color: black; 
 	text-decoration: none; 
@@ -543,7 +254,6 @@ H6 {
 	font-size: 13px; 
 	text-align: center; 
 	text-decoration: none
-	border: 1px #0ac solid;
 	}
 
 /* style for attention 
@@ -572,6 +282,7 @@ H6 {
 	background-color: #73d216; 
 	text-decoration: none; 
 	font-weight: normal
+	color: white;
 	}
 
 .inactive {
@@ -592,6 +303,10 @@ H6 {
 	background-color: #f57900;
 	}
 
+/* TODO */
+/* admin users: link sono brutti 
+
+*/
 /* the following style is used when a word or an item should be highlighted; e.g.
    selected release or words in the advanced search */
 
@@ -606,16 +321,187 @@ H6 {
 	}
 
 
-.bookmark {
-	font-size: 10px;
-}
-
 /* END*/
 
 fieldset {
+
 
 }
 legend {
 	font-size: 12px;
 }
+
+
+
+
+#outertabscontainer{
+
+width: 95%
+margin: 10px auto;
+background-color: #ffff;
+color: #333;
+BACKGROUND-color:#3465a4;
+}
+
+
+#outertabs-left {
+float: left;
+width: 10px;
+margin: 0;
+padding: 1em;
+}
+#outertabs-right {
+float: right;
+width: 40px;
+margin: 0;
+padding: 1em;
+
+}
+#outertabs-content {
+margin-left: 20px;
+margin-right: 40px;
+border-top: #3465a4 5px solid;
+}
+
+#outertabs-content A {
+	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #eeeeec;
+}
+
+
+#outertabs-content A#gforge-home:hover {
+	BORDER-TOP: #8ae234 5px solid;
+}
+
+#outertabs-content A#gforge-my:hover {
+	BORDER-TOP: #fce94f 5px solid
+}
+#outertabs-content A#gforge-reporting:hover {
+	BORDER-TOP: #fcaf3e 5px solid
+}
+#outertabs-content A#gforge-admin:hover {
+	BORDER-TOP: #e9b96e 5px solid
+}
+#outertabs-content A#gforge-people:hover {
+	BORDER-TOP: #8ae234 5px solid
+}
+#outertabs-content A#gforge-softwaremap:hover {
+	BORDER-TOP: #ad7fa8 5px solid
+}
+#outertabs-content A#gforge-snippet:hover {
+	BORDER-TOP: #ef2929 5px solid
+}
+
+
+
+#outertabs-content A#gforge-selected  {
+	BORDER-TOP: #c4a000 5px solid;
+	background-color: #c4a000 ;
+	color: #2e3436;
+}
+
+
+#projecttabscontainer{
+
+width: 100%;
+margin: 0px auto;
+color: #333;
+border: 0px;
+BACKGROUND-color:#729fcf;
+}
+
+
+#projecttabs-left {
+float: left;
+width: 160px;
+margin: 0;
+padding: 1em;
+BACKGROUND-color:#729fcf;
+}
+#projecttabs-right {
+float: right;
+width: 160px;
+margin: 0;
+padding: 1em;
+
+}
+#projecttabs-content {
+margin-left: 200px;
+margin-right: 200px;
+	border-top: #729fcf 5px solid;
+}
+
+#projecttabs-content A {
+	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	color: #eeeeec;
+
+}
+
+
+#projecttabs-content A#gforge-project-summary:hover {
+	BORDER-TOP: #8ae234 5px solid;
+}
+
+
+
+
+#projecttabs-content A#gforge-project-admin:hover {
+	BORDER-TOP: #ce5c00 5px solid
+}
+#projecttabs-content A#gforge-project-forum:hover {
+	BORDER-TOP: #8f5902 5px solid
+}
+#projecttabs-content A#gforge-project-tracker:hover {
+	BORDER-TOP: #4e9a06 5px solid
+}
+#projecttabs-content A#gforge-project-mail:hover {
+	BORDER-TOP: #204a87 5px solid
+}
+#projecttabs-content A#gforge-project-task:hover {
+	BORDER-TOP: #5c3566 5px solid
+}
+#projecttabs-content A#gforge-project-docman:hover {
+	BORDER-TOP: #a40000 5px solid
+}
+
+#projecttabs-content A#gforge-project-survey:hover {
+	BORDER-TOP: #73d216 5px solid
+}
+
+#projecttabs-content A#gforge-project-news:hover {
+	BORDER-TOP: #c17d11 5px solid
+}
+
+#projecttabs-content A#gforge-project-scm:hover {
+	BORDER-TOP: #fcaf3e 5px solid
+}
+#projecttabs-content A#gforge-project-plugin:hover {
+	BORDER-TOP: #edd400 5px solid
+}
+
+#projecttabs-content A#gforge-project-frs:hover {
+	BORDER-TOP: #a40000 5px solid
+}
+
+
+
+
+
+#projecttabs-content A#gforge-selected  {
+	BORDER-TOP: #204a87 5px solid;
+	background-color: #204a87;
+
+
+}
+
+
 
