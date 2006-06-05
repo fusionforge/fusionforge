@@ -1,3 +1,16 @@
+gforge (4.5.14-0) experimental; urgency=low
+
+  * [Roland] New upstream release (4.5.14), snapshot as of 2006-06-03,
+    (closes: #242186, #281310).
+  * This release includes the fix for a cross-site scripting security
+    vulnerability (closes: #328224).
+  * proftpd's config file is now in /etc/proftpd/proftpd.conf.
+  * Added Debconf translations for Vietnamese and Swedish, updated Dutch
+    (closes: #311791, #339878, #354591).
+  * Allow debconf-2.0 as an alternative for debconf (closes: #331835).
+
+ -- Roland Mas <lolando@debian.org>  Mon,  5 Jun 2006 12:05:21 +0200
+
 gforge (4.5.6-1) unstable; urgency=low
 
   * [Christian] Add support for most recent database postgresql 8.0 8.1 at the time
