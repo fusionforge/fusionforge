@@ -85,4 +85,10 @@ class ArtifactQueryFactory extends Error {
 		return $this->ArtifactQueries;
 	}
 }
- ?>
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>
