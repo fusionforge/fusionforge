@@ -96,4 +96,9 @@ $trackers[]=array('Patches','Patch Tracking System',1,0,'','',30,0,'','',3, arra
 
 $trackers[]=array('Feature Requests','Feature Request Tracking System',1,0,'','',30,0,'','',4, array($product, $os, $component));
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

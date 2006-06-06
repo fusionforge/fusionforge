@@ -136,7 +136,8 @@ class MailingList extends Error {
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
 		if(!validate_email($realListName.'@'.$GLOBALS['sys_lists_host'])) {
-			$this->setError($Language->getText('mail_common', 'error_invalid_name'));
+			$this->setError($Language->getText('mail_common', 'error_invalid_name') . ': ' .
+			$realListName.'@'.$GLOBALS['sys_lists_host']);
 			return false;
 		}
 
@@ -318,7 +319,11 @@ class MailingList extends Error {
 	 * @return string url of the archives
 	 */
 	function getArchivesUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		if ($this->isPublic()) {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		} else {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+		}
 	}
 	
 	/**

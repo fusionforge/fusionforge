@@ -1,6 +1,46 @@
-gforge (4.1-9) unstable; urgency=low
+gforge (4.5.14-1) experimental; urgency=low
+
+  * [Roland] New upstream release (4.5.14), snapshot as of 2006-06-03,
+    (closes: #242186, #281310).
+  * This release includes the fix for a cross-site scripting security
+    vulnerability (closes: #328224).
+  * proftpd's config file is now in /etc/proftpd/proftpd.conf.
+  * Added Debconf translations for Vietnamese and Swedish, updated Dutch
+    (closes: #311791, #339878, #354591).
+  * Allow debconf-2.0 as an alternative for debconf (closes: #331835).
+
+ -- Roland Mas <lolando@debian.org>  Tue,  6 Jun 2006 21:03:26 +0200
+
+gforge (4.5.6-1) unstable; urgency=low
+
+  * [Christian] Add support for most recent database postgresql 8.0 8.1 at the time
+  writing this.
+
+ -- Christian Bayle <bayle@debian.org>  Mon, 30 Jan 2006 00:51:15 +0100
+
+gforge (4.5.3-4) stable; urgency=low
+
+  * New Upstream version, compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 16 Nov 2005 19:08:15 +0100
+
+gforge (4.5.3-3) stable; urgency=low
+
+  * New Upstream version, compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Nov 2005 18:25:52 +0100
+
+gforge (4.5-5k) stable; urgency=low
+
+  * [Christian] Compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Tue,  8 Nov 2005 22:11:58 +0100
+
+gforge (4.5-2) unstable; urgency=low
 
   * [Christian] Added 20050605.sql, 20050617.php, 20050628.sql in db-upgrade
+  * [Christian] Some issues were fixed in migraterbac scripts and in tracker
+  * [Christian] Include last branch corrections
 
  -- Christian Bayle <bayle@debian.org>  Sun,  3 Jul 2005 17:44:38 +0200
 
