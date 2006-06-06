@@ -1,4 +1,4 @@
-gforge (4.5.14-0) experimental; urgency=low
+gforge (4.5.14-1) experimental; urgency=low
 
   * [Roland] New upstream release (4.5.14), snapshot as of 2006-06-03,
     (closes: #242186, #281310).
@@ -9,7 +9,7 @@ gforge (4.5.14-0) experimental; urgency=low
     (closes: #311791, #339878, #354591).
   * Allow debconf-2.0 as an alternative for debconf (closes: #331835).
 
- -- Roland Mas <lolando@debian.org>  Mon,  5 Jun 2006 12:05:21 +0200
+ -- Roland Mas <lolando@debian.org>  Tue,  6 Jun 2006 21:03:26 +0200
 
 gforge (4.5.6-1) unstable; urgency=low
 
