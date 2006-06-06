@@ -48,7 +48,7 @@ install: build
 	# install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.conf.d/50$(PLUGIN)
 	# install -m 0600 httpd.secrets $(DESTDIR)/etc/gforge/httpd.secrets.d/50$(PLUGIN)
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/ -type f | xargs chmod 0644
 	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
 	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	# find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
