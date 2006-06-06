@@ -3,8 +3,9 @@ Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
-Build-Depends-Indep: debhelper (>= 4.1.16), sharutils, docbook-to-man, devscripts, dpatch
-Standards-Version: 3.6.1
+Build-Depends-Indep: sharutils, docbook-to-man, devscripts
+Build-Depends: debhelper (>= 4.1.16), dpatch, perl
+Standards-Version: 3.7.2
 
 Package: gforge
 Architecture: all
@@ -21,7 +22,7 @@ Description: collaborative development tool - meta-package
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, cpio, lockfile-progs
+Depends: debconf (>= 1.0.32) | debconf-2.0, cpio, lockfile-progs, adduser
 Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1),gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmcase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
