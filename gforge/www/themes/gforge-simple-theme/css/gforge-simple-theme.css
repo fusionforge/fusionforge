@@ -1,6 +1,13 @@
 /*main styles*/
 html,body{margin: 0;padding:0}
-body{font-family: arial,sans-serif;font-size: 76%}
+body{
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+}
+
+
+TD{
+	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
+}
 
 A {text-decoration: none;color: CornFlowerBlue;}
 
@@ -42,8 +49,11 @@ top-margin:0px;
 
 div#toolscontent{margin: 0 210px;padding: 1em 10px}
 
+div#content TEXTAREA, INPUT, SELECT, OPTION  {
+	FONT: 9px Lucida Grande, Tahoma, sans-serif;
+}
 
-div#content{margin: 0 170px;padding: 1em 10px}
+div#content{margin: 0 170px;padding: 1em 10px }
 
 
 /* style for footer */
@@ -164,25 +174,25 @@ h1, h2, h3, h4, h5, h6 {
 
 H1 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
-	font-size: x-large
+	font-size: 14px;
 	}
 H2 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
-	font-size: large
+	font-size: 13px;
 	}
 H3 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
-	font-size: medium
+	font-size: 12px;
 	}
 
 H4 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
-	font-size: small
+	font-size: 11px;
 	}
 
 H5 { 
 	font-family: Lucida Grande, Tahoma, sans-serif; 
-	font-size: x-small
+	font-size: 10px;
 	}
 
 H6 { 
@@ -271,7 +281,7 @@ H6 {
 .veryimportant {
 	color: red; 
 	font-weight: bold; 
-	font-size: large; 
+	font-size: 13px; 
 	text-align: center
 	}
    
@@ -285,6 +295,10 @@ H6 {
 	color: white;
 	}
 
+.active A{
+	color: black;
+}
+
 .inactive {
 	background-color: #c17d11;
 	}
@@ -294,17 +308,28 @@ H6 {
 	color: white;
 	}
 
+.deleted A{
+	color: black;
+}
+
 .suspended {
 
 	background-color: #edd400;
+	color: black;
 	}
+.suspended A{
+	color: black;
+}
 
 .pending {
 	background-color: #f57900;
+
 	}
 
-/* TODO */
-/* admin users: link sono brutti 
+.pending A{
+	color: black;
+}
+
 
 */
 /* the following style is used when a word or an item should be highlighted; e.g.
@@ -335,43 +360,43 @@ legend {
 
 
 #outertabscontainer{
-
-width: 95%
-margin: 10px auto;
-background-color: #ffff;
-color: #333;
-BACKGROUND-color:#3465a4;
+	width: 95%
+	margin: 10px auto;
+	background-color: #ffff;
+	color: #333;
+	BACKGROUND-color:#3465a4;
 }
 
 
 #outertabs-left {
-float: left;
-width: 10px;
-margin: 0;
-padding: 1em;
+	float: left;
+	width: 10px;
+	margin: 0;
+	padding: 1em;
 }
 #outertabs-right {
-float: right;
-width: 40px;
-margin: 0;
-padding: 1em;
+	float: right;
+	width: 40px;
+	margin: 0;
+	padding: 1em;
 
 }
+
 #outertabs-content {
-margin-left: 20px;
-margin-right: 40px;
-border-top: #3465a4 5px solid;
+	margin-left: 20px;
+	margin-right: 40px;
+	border-top: #3465a4 5px solid;
 }
 
 #outertabs-content A {
 	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	color: #eeeeec;
+	BORDER-right: #729fcf 1px dotted;
 }
-
 
 #outertabs-content A#gforge-home:hover {
 	BORDER-TOP: #8ae234 5px solid;
@@ -380,23 +405,26 @@ border-top: #3465a4 5px solid;
 #outertabs-content A#gforge-my:hover {
 	BORDER-TOP: #fce94f 5px solid
 }
+
 #outertabs-content A#gforge-reporting:hover {
-	BORDER-TOP: #fcaf3e 5px solid
+	BORDER-TOP: #fcaf3e 5px solid;
 }
+
 #outertabs-content A#gforge-admin:hover {
 	BORDER-TOP: #e9b96e 5px solid
 }
+
 #outertabs-content A#gforge-people:hover {
 	BORDER-TOP: #8ae234 5px solid
 }
+
 #outertabs-content A#gforge-softwaremap:hover {
 	BORDER-TOP: #ad7fa8 5px solid
 }
+
 #outertabs-content A#gforge-snippet:hover {
 	BORDER-TOP: #ef2929 5px solid
 }
-
-
 
 #outertabs-content A#gforge-selected  {
 	BORDER-TOP: #c4a000 5px solid;
@@ -405,54 +433,50 @@ border-top: #3465a4 5px solid;
 }
 
 
+/* PROJECT TABS */
+
 #projecttabscontainer{
-
-width: 100%;
-margin: 0px auto;
-color: #333;
-border: 0px;
-BACKGROUND-color:#729fcf;
+	width: 100%;
+	margin: 0px auto;
+	color: #333;
+	border: 0px;
+	BACKGROUND-color:#729fcf;
 }
-
 
 #projecttabs-left {
-float: left;
-width: 160px;
-margin: 0;
-padding: 1em;
-BACKGROUND-color:#729fcf;
+	float: left;
+	width: 160px;
+	margin: 0;
+	padding: 1em;
+	BACKGROUND-color:#729fcf;
 }
-#projecttabs-right {
-float: right;
-width: 160px;
-margin: 0;
-padding: 1em;
 
+#projecttabs-right {
+	float: right;
+	width: 160px;
+	margin: 0;
+	padding: 1em;
 }
+
 #projecttabs-content {
-margin-left: 200px;
-margin-right: 200px;
+	margin-left: 200px;
+	margin-right: 200px;
 	border-top: #729fcf 5px solid;
 }
 
 #projecttabs-content A {
 	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 7px;
+	padding-left: 7px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-
+	border-right: #eeeeec 1px dotted;
 	color: #eeeeec;
-
 }
-
 
 #projecttabs-content A#gforge-project-summary:hover {
 	BORDER-TOP: #8ae234 5px solid;
 }
-
-
-
 
 #projecttabs-content A#gforge-project-admin:hover {
 	BORDER-TOP: #ce5c00 5px solid
@@ -460,8 +484,6 @@ margin-right: 200px;
 #projecttabs-content A#gforge-project-activity:hover {
 	BORDER-TOP: #73d216 5px solid
 }
-
-
 #projecttabs-content A#gforge-project-forum:hover {
 	BORDER-TOP: #8f5902 5px solid
 }
@@ -477,15 +499,12 @@ margin-right: 200px;
 #projecttabs-content A#gforge-project-docman:hover {
 	BORDER-TOP: #a40000 5px solid
 }
-
 #projecttabs-content A#gforge-project-survey:hover {
 	BORDER-TOP: #73d216 5px solid
 }
-
 #projecttabs-content A#gforge-project-news:hover {
 	BORDER-TOP: #c17d11 5px solid
 }
-
 #projecttabs-content A#gforge-project-scm:hover {
 	BORDER-TOP: #fcaf3e 5px solid
 }
@@ -501,9 +520,31 @@ margin-right: 200px;
 #projecttabs-content A#gforge-selected  {
 	BORDER-TOP: #204a87 5px solid;
 	background-color: #204a87;
+}
 
+div#select-deselect-all{
+	background-color: #dfdfdf;
+	padding-left: 150px;
+	left-margin: 150px;
+	width: 150px;
+	border: #204a87 1px dotted;
+}
+div#advancedsearch ul li{
+	display: inline;
 
 }
 
+div#advancedsearch li{
+	text-decoration: none;
+}
 
+div#advancedsearch fieldset{
+	padding: 10px;
+	display: inline;
+	background-color: #dfdfdf;
+}
 
+div#advancedsearch #list ul li{
+	display: block;
+	
+}

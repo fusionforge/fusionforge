@@ -696,24 +696,15 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		<form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="search" value="1"/>
 		<input type="hidden" name="group_id" value="'.$group_id.'"/>
-		<div align="center"><br />
-			<table border="0">
-				<tr>
-					<td colspan ="2">
+		<div id="advancedsearchtext">
 						<input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
 						<input type="submit" name="submitbutton" value="'.$Language->getText('advanced_search', 'search_button').'" />
-					</td>
-				</tr>
-				<tr>
-					<td valign="top">
 						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'and_search').'
-					</td>
-					<td>
 						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'or_search').'
-					</td>
-				</tr>
-			</table><br /></div>'
-		.$this->createUnderSections($sectionsArray).'
+</div>';
+	print '<br/>	'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\',true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a>';
+
+		print $this->createUnderSections($sectionsArray).'
 		</form>';
 
 
@@ -750,19 +741,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		$break = $breakLimit;
 		$countLines = 0;
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="1">
-				<tr class="tableheader">
-					<td>
-						<table width="100%" cellspacing="0" border="0">
-							<tr class="tablecontent">
-								<!--<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td-->
-								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
-							</tr>
-							<tr height="20" class="tablecontent">
-								<td colspan="3">&nbsp;</td>
-							</tr>
-							<tr align="center" valign="top" class="tablecontent">
-								<td>';
+		<div id="advancedsearch"><ul>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
 			if (is_array($section)) {
@@ -775,54 +754,39 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 				//if the next block is so large that shifting it to the next column hits the breakpoint better
 				//the second part of statement (behind &&) proofs, that no 4th column is added
 				if ((($countLines - $break) >= ($break - $countLines)) && ((($break + $breakLimit)/$breakLimit) <= 3)) {
-					$return .= '</td><td>';
 					$break += $breakLimit;
 				}
 			}
 		
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0">
-							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr>
-								<td cellspacing="0">
-									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
-							.'	</td>
-								<td align="right">'
-								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
-								</td>
-							</tr>
-							<tr class="tablecontent">
-								<td colspan="2">';
+			$return .= '<li><fieldset><legend>'.$Language->getText('group', $key).'</legend>'
+							.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
+			<div id="list"><ul>
+							';
 								
 			if (!is_array($section)) {
-				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
+				$return .= '<li><input type="checkbox" name="'.urlencode($key).'"';
 				if (isset($GLOBALS[urlencode($key)]))
 					$return .= ' checked="checked" ';
-				$return .= ' /></input>'.$Language->getText('group', $key).'<br />';
+				$return .= ' /></input>'.$Language->getText('group', $key).'</li>';
 			}
 			else
 				foreach($section as $underkey => $undersection) {
-					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
+					$return .= '	<li><input type="checkbox" name="'.urlencode($key.$underkey).'"';
 					if (isset($GLOBALS[urlencode($key.$underkey)]))
 						$return .= ' checked ';
-					$return .= '></input>'.$undersection.'<br />';				
+					$return .= '></input>'.$undersection.'</li>';				
 					
 				}
-				
-			$return .=		'	</td>
-							</tr>
-						</table></td></tr></table><br />';
+				$return .= '</ul></div></fieldset></li>';
 						
 			if ($countLines >= $break) {
 				if (($countLines - $break) < ($break - $countLines)) {
-					$return .= '</td><td width="33%">';
 					$break += $breakLimit;
 				}
 			}
 		}
-		
-		return $return.'		</td>
-							</tr>
-						</table></td></tr></table>';
+		$return.='</div></ul>';
+		return $return;
 	}
 
 	/**
