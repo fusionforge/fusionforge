@@ -1,3 +1,9 @@
+gforge-plugin-scmcvs (4.5.14-1) experimental; urgency=low
+
+  * [Roland] Updated for Gforge 4.5.14.
+
+ -- Roland Mas <lolando@debian.org>  Mon,  5 Jun 2006 18:20:32 +0200
+
 gforge-plugin-scmcvs (4.5-1) unstable; urgency=low
 
   * [Roland] Remove .arch-ids directories at build time, too.
