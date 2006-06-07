@@ -1,0 +1,16 @@
+etc
+etc/sourceforge
+etc/sourceforge/httpd.conf.d
+etc/sourceforge/httpd.secrets.d
+etc/sourceforge/plugins
+etc/sourceforge/plugins/helloworld
+usr
+usr/lib
+usr/lib/sourceforge
+usr/lib/sourceforge/plugins/
+usr/lib/sourceforge/plugins/helloworld
+usr/lib/sourceforge/plugins/helloworld/bin
+usr/lib/sourceforge/cgi-bin
+usr/lib/sourceforge/www
+usr/lib/sourceforge/www/plugins
+usr/lib/sourceforge/www/plugins/helloworld

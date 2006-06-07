@@ -1,0 +1,38 @@
+gforge-plugin-scmcvs
+--------------------
+
+This is the CVS plugin for Gforge.  It creates CVS repositories and
+provides some functionality to manage them.
+
+Prerequisites:
+
+You'll need the DBI and DBD::Pg Perl modules.  On Red Hat systems, you
+can get them by installing the libdbi and libdbd-pgsql packages.  On
+Debian systems, the packages are called libdbi-perl and libdbd-pg-perl
+(but you shouldn't have to worry about them, they'll be installed
+automatically).
+
+Installation:
+
+- files from etc/ go to /etc/gforge/plugins/scmcvs, apart from
+etc/httpd.conf that you should install as /etc/gforge/httpd.d/10scmcvs
+- files from bin/ go to /usr/lib/gforge/plugins/scmcvs/bin
+- files from include/ go to /usr/lib/gforge/plugins/scmcvs/include
+- files from lib/ go to  /usr/lib/gforge/plugins/scmcvs/lib
+
+Setup:
+
+- customise files in /etc/gforge/plugins/scmcvs to match your
+preferences (CVS server, and whether to enable CVS by default for new
+projects)
+- setup the crontab from debian/cron.d
+- gforge-config
+- /usr/lib/gforge/plugins/scmcvs/bin/db-upgrade.pl
+- /usr/lib/gforge/plugins/scmcvs/bin/install-cvs.sh configure
+- /usr/lib/gforge/bin/register-plugin scmcvs "CVS"
+
+ -- Roland Mas <lolando@debian.org>, Sun May 16 17:20:32 2004
+
+Local Variables:
+mode: readme-debian
+End:

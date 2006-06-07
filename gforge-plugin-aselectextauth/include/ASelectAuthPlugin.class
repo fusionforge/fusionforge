@@ -1,0 +1,168 @@
+<?php
+/** External authentication via A-Select for Gforge
+ *
+ * This file is part of Gforge
+ *
+ * This plugin, like Gforge, is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
+
+require_once('common/include/User.class');
+
+
+class ASelectextauthPlugin extends Plugin {
+	function ASelectextauthPlugin () {
+		$this->Plugin() ;
+		$this->name = "aselectextauth";
+		$this->hooks[] = "session_before_login";	
+	}
+	
+	function CallHook ($hookname, $params) {
+		global $Language, $HTML ;
+		
+		$loginname = $params['loginname'] ;
+		$passwd = $params['passwd'] ;
+		
+		switch ($hookname) {
+		case "session_before_login":
+			// Authenticate against A-Select
+			$this->AuthUser ($loginname, $passwd) ;
+			break;		
+		default:
+			// Forgot something
+		}
+	}
+
+	function AuthUser ($loginname, $passwd) {
+		global $feedback,$Language;
+	
+		$GLOBALS['aselect_auth_failed']=true;
+		return false;
+
+		$u = user_get_object_by_name ($loginname) ;
+		if ($u) {
+			// User exists in DB
+			if () {				
+				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
+					// Also according to DB
+					$GLOBALS['aselect_auth_failed']=false;
+					return true ;
+				} else {
+					// Passwords mismatch, update DB's
+					$u->setPasswd ($passwd) ;
+					$GLOBALS['aselect_auth_failed']=false;
+					return true ;
+				}
+			} else {				
+				$feedback=$Language->getText('session','invalidpasswd');
+				$GLOBALS['aselect_auth_failed']=true;
+				return false ;
+			}
+		} else {
+			// User doesn't exist in DB yet
+			if () {
+				// User authenticated
+				// Now get her info
+								
+				// Insert into DB
+				$u = new User () ;
+
+				$unix_name = $loginname ;
+				$firstname = '' ;
+				$lastname = '' ;
+				$password1 = $passwd ;
+				$password2 = $passwd ;
+				$email = '' ;
+				$mail_site = 1 ;
+				$mail_va = 0 ;
+				$language_id = 1 ;
+				$timezone = 'GMT' ;
+				$jabber_address = '' ;
+				$jabber_only = 0 ;
+				$theme_id = 1 ;
+				$unix_box = '' ;
+				$address = '' ;
+				$address2 = '' ;
+				$phone = '' ;
+				$fax = '' ;
+				$title = '' ;
+				$ccode = 'US' ;
+				$send_mail = false ;
+
+				if ($mappedinfo['firstname']) {
+					$firstname = $mappedinfo['firstname'] ;
+				}
+				if ($mappedinfo['lastname']) {
+					$lastname = $mappedinfo['lastname'] ;
+				}
+				if ($mappedinfo['email']) {
+					$email = $mappedinfo['email'] ;
+				}
+				if ($mappedinfo['language_id']) {
+					$language_id = $mappedinfo['language_id'] ;
+				}
+				if ($mappedinfo['timezone']) {
+					$timezone = $mappedinfo['timezone'] ;
+				}
+				if ($mappedinfo['jabber_address']) {
+					$jabber_address = $mappedinfo['jabber_address'] ;
+				}
+				if ($mappedinfo['address']) {
+					$address = $mappedinfo['address'] ;
+				}
+				if ($mappedinfo['address2']) {
+					$address2 = $mappedinfo['address2'] ;
+				}
+				if ($mappedinfo['phone']) {
+					$phone = $mappedinfo['phone'] ;
+				}
+				if ($mappedinfo['fax']) {
+					$fax = $mappedinfo['fax'] ;
+				}
+				if ($mappedinfo['title']) {
+					$title = $mappedinfo['title'] ;
+				}
+				if ($mappedinfo['ccode']) {
+					$ccode = $mappedinfo['ccode'] ;
+				}
+				if ($mappedinfo['themeid']) {
+					$theme_id = $mappedinfo['themeid'] ;
+				}
+
+				if (!$u->create ($unix_name,$firstname,$lastname,$password1,$password2,$email,
+					    $mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
+					    $unix_box, $address, $address2, $phone, $fax, $title, $ccode, $send_mail)) {
+					$GLOBALS['aselect_auth_failed']=true;
+					$feedback = "<br>Error Creating User: ".$u->getErrorMessage();
+					return false;
+				}
+
+				if (!$u->setStatus ('A')) {
+					$GLOBALS['aselect_auth_failed']=true;
+					$feedback = "<br>Error Activating User: ".$u->getErrorMessage();
+					return false;
+				}
+				$GLOBALS['aselect_auth_failed']=false;
+				$GLOBALS['aselect_first_login']=true;
+				return true ;
+			} else {
+				$GLOBALS['aselect_auth_failed']=true;
+				$feedback=$Language->getText('session','invalidpasswd');
+				return false ; // Probably ignored, but just in case
+			}
+		}
+	}
+}
+
+?>
