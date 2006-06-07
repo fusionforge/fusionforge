@@ -1,0 +1,36 @@
+gforge-plugin-scmsvn (4.5-1) unstable; urgency=low
+
+  * [Roland] Ported to Gforge 4.5.
+  * [Roland] Fixed location of the svn-stats script in crontab.
+  * [Roland] Remove .arch-ids directories at build time.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  7 Aug 2005 17:32:11 +0200
+
+gforge-plugin-scmsvn (4.1-9) unstable; urgency=low
+
+  * New upstream 
+  * [Christian] Added dependancy to php4-cli
+  * [Christian] Added cronjobs/tarballs.php
+  * [Christian] Splited svn_dump_update in svn_dump and svn_update
+  svn_dump is almost identical to cvs_dump
+  * [Mathieu] Link to snapshots added
+  * [Mathieu] Integrated ViewCVS PHP wrapper inspired from CodeX and
+  CVSweb's ones
+  * [Mathieu] Created repository with fsfs backend because ViewCVS
+  requires write permission with default SVN backend
+  * [Christian] Reviewed update-inetd 
+
+ -- Christian Bayle <bayle@debian.org>  Sat, 26 Feb 2005 09:13:47 +0100
+
+gforge-plugin-scmsvn (4.0.2-1) unstable; urgency=low
+
+  * Align version with gforge
+
+ -- Christian Bayle <bayle@debian.org>  Mon, 24 Jan 2005 23:15:29 +0100
+
+gforge-plugin-scmsvn (1.0-1) unstable; urgency=low
+
+  * Initial packaging.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 26 Apr 2004 16:24:21 +0200
+

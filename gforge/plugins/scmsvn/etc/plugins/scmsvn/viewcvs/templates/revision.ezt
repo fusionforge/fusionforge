@@ -1,0 +1,91 @@
+[# setup page definitions]
+  [define location][rootname][if-any where]: [where][end][end]
+  [define page_title][cfg.general.main_title] - revision - [location][end]
+  [define help_href][docroot]/help_rootview.html[end]
+[# end]
+
+[include "include/header.ezt" "revision"]
+
+<hr noshade>
+
+<table border="0" cellspacing="1" cellpadding="2">
+  <tr align=left>
+    <th>Jump to revision:</td>
+    <td>
+      <form method=get action="[jump_rev_action]">
+      [jump_rev_hidden_values]
+      <input type="text" name="rev" value="[jump_rev]">
+      <input type=submit value="Go">
+      [if-any prev_href]
+        <a href="[prev_href]"><img src="[icons]/back.gif" border="0" alt="Previous"></a>[end]
+      [if-any next_href] <a href="[next_href]"><img src="[icons]/forward.gif" border="0" alt="Next"></a>[end]
+      </form>
+    </td>
+  </tr>
+  <tr align=left>
+    <th>Author:</th>
+    <td>[author]</td>
+  </tr>
+  <tr align=left>
+    <th>Date:</th>
+    <td>[date_str] <i>([ago] ago)</i></td>
+  </tr>
+</table>
+
+<p><b>Log Message:</b><br/>
+   <pre class="vc_log">[log]</pre>
+</p>
+
+<hr noshade>
+
+<p><b>Changed paths:</b></p>
+<table border="0" cellspacing="1" cellpadding="2">
+  <thead>
+  <tr align=left>
+    <th class="vc_header_sort">Path</th>
+    <th class="vc_header">Action</th>
+    <th class="vc_header">Text Changes</th>
+    <th class="vc_header">Prop Changes</th>
+    <th class="vc_header">Diff to Previous</th>
+  </tr>
+  </thead>
+  <tbody>
+  [if-any changes]
+    [for changes]
+      <tr class="vc_row_[if-index changes even]even[else]odd[end]">
+      <td>
+        [is changes.pathtype "dir"]
+          <img src="[icons]/small/dir.gif">
+        [else]
+          <img src="[icons]/small/text.gif">
+        [end]
+        [is changes.action "deleted"]
+          [changes.filename]
+        [else]
+          <a href="[changes.view_href]">[changes.filename]</a>
+        [end]
+      </td>
+      <td align=center>[changes.action]</td>
+      [is changes.action "deleted"]
+        <td align=center>&nbsp;</td>
+        <td align=center>&nbsp;</td>
+      [else]
+        <td align=center>[is changes.text_mods "1"]X[else]&nbsp;[end]</td>
+        <td align=center>[is changes.prop_mods "1"]X[else]&nbsp;[end]</td>
+      [end]
+        [if-any changes.diff_href]
+          <td align=center><a href="[changes.diff_href]&amp;r1=[rev]&amp;r2=[changes.prev_rev]&amp;p1=[changes.filename]&amp;p2=[changes.prev_path]">(diff to previous)</a></td>
+        [else]
+          <td align=center>&nbsp;</td>
+        [end]
+      </tr>
+    [end]
+  [else]
+    <tr>
+    <td colspan="5">No changed paths.</td>
+    </tr>
+  [end]
+  </tbody>
+</table>
+
+[include "include/footer.ezt"]

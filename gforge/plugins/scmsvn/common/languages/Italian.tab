@@ -1,0 +1,24 @@
+plugin_scmsvn	anonsvn	<p><b>Accesso anonimo a Subversion</b></p><p>Il repository di questo progetto pu&ograve; essere estratto tramite accesso anonimo usando il seguente comando:</p>
+plugin_scmsvn	svn_repository	Repository SVN
+plugin_scmsvn	developername	nome sviluppatore
+plugin_scmsvn	error_only_projects_can_use_svn	Errore, solo i progetti possono abilitare SVN
+plugin_scmsvn	error_this_project_has_turned_off	Errore, questo progetto ha disabilitato SVN
+plugin_scmsvn	history	Storia del repository
+plugin_scmsvn	nohistory	Questo progetto non ha storia subversion.
+plugin_scmsvn	section	Progetto: $1
+plugin_scmsvn	title	SCM
+plugin_scmsvn	admin	Amministrazione
+plugin_scmsvn	download_snapshot	Scarica l'immagine notturna del repository SVN
+plugin_scmsvn	documentation	<p>La documentazione per Subversion (spesso anche scritto come "SVN" &egrave; disponibile a < a href="http://svnbook.red-bean.com/">questo</a> indirizzo.</p>
+plugin_scmsvn	devsvnssh	<p><b>Accesso di sviluppoatore a SVN utilizzando SSH</b></p><p>Solo sviluppatori possono accedere a SVN tramite questo metodo. SSH deve essere installato sulla macchina client. Sostituire <i>nomesviluppatore</i> con il nome della propria utenza. Quando viene richiesta la password, inserire la propria password utilizzata sul sito.</p>
+plugin_scmsvn	devsvndav	<p><b>Accesso di sviluppatore a SVN utilizzando DAV</b></p><p>Solo sviluppatori registrati del progetto possono accedere al repository SVN di questo progetto tramite questo metoto. Sostituire <i>nomesviluppatore</i>  con il nome della propria utenza. Quando viene richiesta la password, inserire la propria password utilizzata sul sito.</p>
+plugin_scmsvn	enable_svn	Utilizza Subversion
+plugin_scmsvn	enable_anonymous_svn	Abilita accesso anonimo
+plugin_scmsvn	browseit	Consulta il repository Subversion
+plugin_scmsvn	browsetree	<b>Consulta l'alberatura Subversion</b><p>La consultazione dell'alberatura ti da' una ottima visuale sullo stato attuale del codice del progetto. Puoi anche visualizzare la cronostoria completo di tutti i file nel repository.</p>
+plugin_scmsvn	realname	nomesviluppatore
+plugin_scmsvn	adds	Aggiunti
+plugin_scmsvn	commits	Modificati
+plugin_scmsvn	unknown	Sconosciuti
+plugin_scmsvn	total	Totale
+plugin_scmsvn	svn_updates	<strong>$1</strong> modificati, <strong>$2</strong> aggiunti

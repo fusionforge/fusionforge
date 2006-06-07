@@ -561,6 +561,18 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/plugins/scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/icons/small/debian.jpg svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/icons/small/dir.gif svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/icons/small/text.gif svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/images/chalk.jpg svneol=native#unset
+gforge/plugins/scmsvn/www/viewcvs/images/cvsgraph_16x16.png -text
+gforge/plugins/scmsvn/www/viewcvs/images/cvsgraph_32x32.png -text
+gforge/plugins/scmsvn/www/viewcvs/images/down.png -text
+gforge/plugins/scmsvn/www/viewcvs/images/logo.png -text
+gforge/plugins/scmsvn/www/viewcvs/images/up.png -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
