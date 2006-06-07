@@ -1,0 +1,15 @@
+Source: gforge-plugin-scmcvs
+Section: devel
+Priority: optional
+Maintainer: Roland Mas <lolando@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>
+Build-Depends-Indep: debhelper (>> 4.0.0)
+Standards-Version: 3.6.1
+
+Package: gforge-plugin-scmcvs
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web, libipc-run-perl, rcs, liburi-perl, cvs, php4-cli
+Description: cvs plugin for GForge
+ This plug-in contains the CVS subsystem of Gforge.  It allows each
+ Gforge project to have its own CVS repository, and gives some control
+ over it to the project's administrator.
