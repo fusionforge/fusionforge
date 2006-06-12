@@ -364,6 +364,10 @@ class BaseLanguage {
 			$content['pluginDependencies'] =& $this->pluginDependencies;
 			$content['text'] =& $this->textArray;
 			$fp = fopen($cachePath, 'a');
+		    if ($fp == false) {
+            	echo "fopen(".$cachePath.") failed\n";
+                return;
+            }
 			flock($fp, LOCK_EX);
 			ftruncate($fp, 0);
 			$content = serialize($content);
