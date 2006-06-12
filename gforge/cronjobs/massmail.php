@@ -147,38 +147,36 @@ if ($type=='SITE' || $type=='COMMNTY') {
 $body = db_result($mail_res, 0, 'message');
 
 // Actual mailing loop
+$compt = 0;
 while ($row =& db_fetch_array($users_res)) {
-
+	$compt++;
 	util_send_message($row['email'],$subj,$body."\r\n".sprintf( $tail,$row['confirm_hash'] ),'noreply@'.$sys_default_domain );
-//echo "$row[email],$subj,$body.\r\n".sprintf( $tail,$row['confirm_hash'] ).",'noreply@'.$sys_default_domain";
-
-//echo "\n".$row['email'].$row['user_id'];
-
 	$last_userid = $row['user_id'];
 
 	sleep($SLEEP);
 }
 
 $sql="UPDATE massmail_queue
-	SET failed_date=0,
-	last_userid='999999999'
-	WHERE id='$mail_id'";
+		SET failed_date=0,
+		last_userid='$last_userid',
+		finished_date='".time()."'
+		WHERE id='$mail_id'";
 
 db_query($sql);
 
 if (db_error()) {
 	$err .= $sql.db_error();
 }
+$mess = "massmail $compt mails sent";
+m_exit($mess);
 
-m_exit();
-
-function m_exit() {
+function m_exit($mess = '') {
 	global $err;
 	
 	if (!cron_remove_lock('gforge-massmail')) {
 		$err .= "Could not remove lock file\n";
 	}
-	if (!cron_entry(6,$err)) {
+	if (!cron_entry(6,$mess.$err)) {
 		# rely on crond to report the error
 		echo "cron_entry error: ".db_error()."\n";
 	}

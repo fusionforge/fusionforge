@@ -123,6 +123,8 @@ computedefault(){
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
 	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
+	# added for massmail error 11/2005 fabio bertagnin transiciel
+	DEFAULTsys_sendmail_path=/usr/sbin/sendmail
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
