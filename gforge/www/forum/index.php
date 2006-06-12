@@ -35,9 +35,14 @@ if ($group_id) {
 		exit_error($Language->getText('general','error'),$ff->getErrorMessage());
 	}
 
-	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ));
-
 	$farr =& $ff->getForums();
+
+	if ( count($farr) == 1 ) {
+  		Header("Location:http://".$sys_default_domain."/forum/forum.php?forum_id=".$farr[0]->getID());
+	exit();
+	}
+
+	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ));
 
 	if ($ff->isError() || count($farr) < 1) {
 		echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
@@ -47,6 +52,7 @@ if ($group_id) {
 		forum_footer(array());
 		exit;
 	}
+
 
 //	echo $Language->getText('forum', 'choose');
 
