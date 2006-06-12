@@ -178,11 +178,11 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			if ($limit) {
 				$limit--;
 			}
-			if (!$limit && $i==$rows-1) {
-				$return .= '</ul><hr width="100%" size="1" />'."\n";
-			}
 		}
-		if (!$limit) $return .= '</ul>';
+		if ($tail_headlines){
+		  if (!$limit) $return .= '</ul>';
+			$return .= '<hr width="100%" size="1" />'."\n";
+		}
 		if ($group_id != $sys_news_group) {
 			$archive_url='/news/?group_id='.$group_id;
 		} else {

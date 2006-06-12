@@ -89,7 +89,7 @@ function forum_header($params) {
 	$menu_links=array();
 	if ($f && $forum_id) {
 		$menu_text[]=$Language->getText('forum_utils','discussionforum') .' '. $f->getName();
-		$menu_links[]='/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id;
+		$menu_links[]='"/forum/forum.php?forum_id='.$forum_id.'"';
 	}
 	if ($f && $f->userIsAdmin()) {
 		$menu_text[]=$Language->getText('forum_utils','admin');

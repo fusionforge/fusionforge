@@ -584,6 +584,7 @@ common_include_account	toolong	Name is too long. It must be less than 15 charact
 common_include_account	tooshort	Name is too short. It must be at least 3 characters.
 common_utils	priority_colors	Priority Colors
 conf	mail_charset	UTF-8
+conf	content_encoding	UTF-8
 developer	body	Body
 developer	date	Date
 developer	diary_and_notes	Diary And Notes For

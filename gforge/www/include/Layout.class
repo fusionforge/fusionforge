@@ -312,11 +312,11 @@ if (isset($params['group']) && $params['group']) {
 		return '
 		<!-- Box Top Start -->
 
-		<table cellspacing="0" cellpadding="0" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
+		<table cellspacing="0" cellpadding="0" width="100%" border="0" style="background:url('.$this->imgroot.'vert-grad.png)">
 		<tr align="center">
-			<td valign="top" align="right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
-			<td width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
-			<td valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
+			<td valign="top" align="right" width="10" style="background:url('.$this->imgroot.'box-topleft.png)"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt="" /></td>
+			<td width="100%" style="background:url('.$this->imgroot.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
+			<td valign="top" width="10" style="background:url('.$this->imgroot.'box-topright.png)"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt="" /></td>
 		</tr>
 		<tr>
 			<td colspan="3">
@@ -339,7 +339,7 @@ if (isset($params['group']) && $params['group']) {
 					</td>
 				</tr>
 				<tr align="center">
-					<td colspan="2" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
+					<td colspan="2" style="background:url('.$this->imgroot.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left">
 					<td colspan="2">
@@ -386,8 +386,8 @@ if (isset($params['group']) && $params['group']) {
 		$return = '
 		<table cellspacing="0" cellpadding="0" width="100%" border="0">
 		<tr align="center">
-	<!--		<td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
-			<td background="'.$this->imgroot.'box-grad.png">
+	<!--		<td valign="top" align="right" width="10" style="background:url('.$this->imgroot.'box-grad.png)"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" alt="" /></td> -->
+			<td style="background:url('.$this->imgroot.'box-grad.png)">
 		<table width="100%" border="0" cellspacing="1" cellpadding="2" >
 			<tr class="tableheading">';
 		$count=count($title_arr);
@@ -407,7 +407,7 @@ if (isset($params['group']) && $params['group']) {
 
 	function listTableBottom() {
 		return '</table></td>
-			<!-- <td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
+			<!-- <td valign="top" align="right" width="10" style="background:url('.$this->imgroot.'box-grad.png)"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" alt="" /></td> -->
 			</tr></table>';
 	}
 
@@ -657,9 +657,9 @@ if (isset($params['group']) && $params['group']) {
 		//		$rowspan=(($issel)?'rowspan="2" ' : '');
 
 				$return .= '
-					<td '.$rowspan.'valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="25" width="10" alt="" /></td>'.
-						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -672,14 +672,14 @@ if (isset($params['group']) && $params['group']) {
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td '.$rowspan.'colspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 				//
 				//	Last graphic on right-side
 				//
 				$return .= '
-					<td '.$rowspan.'valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png">'.
+					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="10" alt="" /></td>';
 
 			} else {
@@ -694,9 +694,9 @@ if (isset($params['group']) && $params['group']) {
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td '.$rowspan.'colspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 
 			}
 		}
@@ -717,11 +717,11 @@ if (isset($params['group']) && $params['group']) {
 		}
 		$return .= '<tr>';
 		if ($beg_cols > 0) {
-			$return .= '<td colspan="'.$beg_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+			$return .= '<td colspan="'.$beg_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" alt="" /></td>';
 		}
-		$return .= '<td colspan="3" height="1" class="selTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+		$return .= '<td colspan="3" height="1" class="selTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" alt="" /></td>';
 		if ($end_cols > 0) {
-			$return .= '<td colspan="'.$end_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" /></td>';
+			$return .= '<td colspan="'.$end_cols.'" height="1" class="notSelTab"><img src="'.$this->imgroot.'clear.png" height="1" width="10" alt="" /></td>';
 		}
 		$return .= '</tr>';
 
