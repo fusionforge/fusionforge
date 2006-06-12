@@ -1,3 +1,10 @@
+gforge (4.5.14-1+1) experimental; urgency=low
+
+  * [Roland] Started moving database upgrading code from PHP scripts to
+    db-upgrade.pl: migrateforum.php, 20050617.php.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 15:37:09 +0200
+
 gforge (4.5.14-1) experimental; urgency=low
 
   * [Roland] New upstream release (4.5.14), snapshot as of 2006-06-03,

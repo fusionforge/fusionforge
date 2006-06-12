@@ -1589,9 +1589,27 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-2+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with migrateforum.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migrateforum.php") == 0 
-	or die "system call of 20040826_migrateforum.php failed: $?" ;
+        &debug ("Migrating forum names") ;
+	
+	$query = "SELECT group_forum_id,forum_name FROM forum_group_list" ;
+	&debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $forumid = $array[0] ;
+	    my $oldname = $array[1] ;
+	    
+	    my $newname = lc $oldname ;
+	    $newname =~ s/[^_.0-9a-z-]/-/g ;
+	    
+	    my $query2 = "UPDATE forum_group_list SET forum_name='$newname' WHERE group_forum_id=$forumid" ;
+	    &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2163,9 +2181,68 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-8" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050617.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050617.php") == 0
-	or die "system call of 20050617.php failed: $?" ;
+        &debug ("Creating aliases for the extra fields") ;
+
+	my %reserved_alias = (
+	    "project" => 1,
+	    "type" => 1,
+	    "priority" => 1,
+	    "assigned_to" => 1,
+	    "summary" => 1,
+	    "details" => 1,
+	) ;
+
+	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
+	&debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $name = $array[0] ;
+	    my $alias = $array[1] ;
+	    my $gaid = $array[2] ;
+	    my $efid = $array[3] ;
+
+	    if (! $alias) {
+		my $newalias = lc $name ;
+		$newalias =~ s/\s/_/g ;
+		$newalias =~ s/[^_a-z]//g ;
+		
+		if ($newalias ne "") {
+		    if ($reserved_alias{$newalias}) {
+			$newalias = "extra_" . $newalias ;
+		    }
+		    
+		    my $candidate ;
+		    my $conflict = 0 ;
+		    my $count = 0 ;
+		    do {
+			$candidate = $newalias ;
+			$candidate .= $count if ($count > 0) ;
+			my $query2 = "SELECT count(*) FROM artifact_extra_field_list WHERE group_artifact_id=$gaid AND LOWER(alias)='$candidate' AND extra_field_id <> $efid" ;
+			&debug ($query2) ;
+			my $sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			my @array2 = $sth2->fetchrow_array ;
+			if ($array2[0] == 0) {
+			    $conflict = 0 ;
+			} else {
+			    $conflict = 1 ;
+			    $count++ ;
+			}
+			$sth2->finish () ;
+		    } until ($conflict == 0) ;
+			
+		    my $query2 = "UPDATE artifact_extra_field_list SET alias='$candidate' WHERE extra_field_id=$efid" ;
+		    &debug ($query2) ;
+		    my $sth2 =$dbh->prepare ($query2) ;
+		    $sth2->execute () ;
+		    $sth2->finish () ;
+		}
+	    }
+
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
