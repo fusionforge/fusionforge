@@ -88,7 +88,8 @@ function session_check_session_cookie($session_cookie) {
 	if (trim($user_agent) != getStringFromServer('HTTP_USER_AGENT')) {
 		return false;
 	}
-	if ($time - time() >= $GLOBALS['sys_session_expire']) {
+	if (($GLOBALS['sys_session_expire'] > 0) && 
+	    ($time - time() >= $GLOBALS['sys_session_expire'])) {
 		return false;
 	}
 
@@ -185,7 +186,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 		// If we're here, then the user has typed a password matching the (MD5) user_pw
 		// Let's check whether it also matches the (crypt) unix_pw
 		$usr = db_fetch_array($res);
-
+/*
 		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 			// The (crypt) unix_pw does not match
 			if ($usr['unix_pw'] == '') {
@@ -205,6 +206,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 				return false;
 			}
 		}
+*/
 
 		// Yay.  The provided password matches both fields in the database.
 		// Let's check the status of this user
