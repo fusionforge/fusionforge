@@ -126,7 +126,7 @@ if ($login && !$success) {
 </form>
 <p><a href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></a></p>
 <p><a href="register.php"><?php echo $Language->getText('account_login', 'newaccount'); ?></a></p>
-<p><a href="pending-resend.php"><?php echo $Language->getText('account_login','resend_pending'); ?></a>
+<p><a href="pending-resend.php"><?php echo $Language->getText('account_login','resend_pending'); ?></a></p>
 
 <?php
 
