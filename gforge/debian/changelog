@@ -1,9 +1,12 @@
-gforge (4.5.14-1+1) experimental; urgency=low
+gforge (4.5.14-2) experimental; urgency=low
 
   * [Roland] Started moving database upgrading code from PHP scripts to
     db-upgrade.pl: migrateforum.php, 20050617.php.
+  * [Roland] disable-tracker-reply-by-email.dpatch: Removed the blurb
+    about replying to a bug report by email from the notifications, since
+    the reply by email doesn't work yet.
 
- -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 15:37:09 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 15:53:00 +0200
 
 gforge (4.5.14-1) experimental; urgency=low
 
