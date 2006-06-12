@@ -5,8 +5,10 @@ gforge (4.5.14-2) experimental; urgency=low
   * [Roland] disable-tracker-reply-by-email.dpatch: Removed the blurb
     about replying to a bug report by email from the notifications, since
     the reply by email doesn't work yet.
+  * [Roland] Re-enabled dpatch, which seems to have been left out at some
+    point.
 
- -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 15:53:00 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 16:03:11 +0200
 
 gforge (4.5.14-1) experimental; urgency=low
 

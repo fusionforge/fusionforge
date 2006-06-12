@@ -29,7 +29,7 @@ debian/po/templates.pot: $(wildcard debian/*.templates) $(wildcard debian/*.temp
 	@debconf-updatepo
 
 build: configure-stamp build-stamp
-build-stamp: patch-stamp
+build-stamp: patch
 	dh_testdir
 
 	# Build man pages from Docbook sources
