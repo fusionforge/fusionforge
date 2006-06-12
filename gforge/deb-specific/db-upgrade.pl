@@ -1592,7 +1592,7 @@ END;
         &debug ("Migrating forum names") ;
 	
 	$query = "SELECT group_forum_id,forum_name FROM forum_group_list" ;
-	&debug ($query) ;
+	# &debug ($query) ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	while (@array = $sth->fetchrow_array) {
@@ -1603,7 +1603,7 @@ END;
 	    $newname =~ s/[^_.0-9a-z-]/-/g ;
 	    
 	    my $query2 = "UPDATE forum_group_list SET forum_name='$newname' WHERE group_forum_id=$forumid" ;
-	    &debug ($query2) ;
+	    # &debug ($query2) ;
 	    my $sth2 =$dbh->prepare ($query2) ;
 	    $sth2->execute () ;
 	    $sth2->finish () ;
@@ -2193,7 +2193,7 @@ $dbh->{RaiseError} = 1;
 	) ;
 
 	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
-	&debug ($query) ;
+	# &debug ($query) ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	while (@array = $sth->fetchrow_array) {
@@ -2219,7 +2219,7 @@ $dbh->{RaiseError} = 1;
 			$candidate = $newalias ;
 			$candidate .= $count if ($count > 0) ;
 			my $query2 = "SELECT count(*) FROM artifact_extra_field_list WHERE group_artifact_id=$gaid AND LOWER(alias)='$candidate' AND extra_field_id <> $efid" ;
-			&debug ($query2) ;
+			# &debug ($query2) ;
 			my $sth2 =$dbh->prepare ($query2) ;
 			$sth2->execute () ;
 			my @array2 = $sth2->fetchrow_array ;
@@ -2233,7 +2233,7 @@ $dbh->{RaiseError} = 1;
 		    } until ($conflict == 0) ;
 			
 		    my $query2 = "UPDATE artifact_extra_field_list SET alias='$candidate' WHERE extra_field_id=$efid" ;
-		    &debug ($query2) ;
+		    # &debug ($query2) ;
 		    my $sth2 =$dbh->prepare ($query2) ;
 		    $sth2->execute () ;
 		    $sth2->finish () ;
