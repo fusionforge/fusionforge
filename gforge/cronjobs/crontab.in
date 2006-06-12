@@ -6,14 +6,13 @@
 #
 # @version   $Id$
 #
+#
+# YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
 
 # Change path to the GForge directory.
 GFORGE="/path/to/gforge"
 
-# Change paths to the GForge directory.
-# Don't reference $GFORGE because this won't work!
-# You may need to change the pathname to php CLI (command line interface)
-PHP="/usr/bin/php4 -d include_path=.:/path/to/gforge:/path/to/gforge/www/include:/etc/gforge/"
+PHP="/usr/bin/php4 -f"
 
 # Don't mail command output to anyone.
 MAILTO=""

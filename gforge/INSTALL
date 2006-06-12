@@ -280,13 +280,18 @@ PHP setup
 ---------
 
 You may also add the include_path to the php.ini, as it will be
-necessary for your php cgi to run the cron jobs. The crontab.in 
-file also can be modified to include this path as well.
+necessary for your php cgi to run the cron jobs.
 
 register_globals = Off
 magic_quotes_gpc = On
 file_uploads = On
 include_path = ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
+
+PHP CLI that is used by crontab.in may use different php.ini.  Find
+it by running the following command and add the above include_path
+directive there:
+
+$ /usr/bin/php4 -i | fgrep php.ini
 
 
 FRS - File Release System
