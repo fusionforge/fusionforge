@@ -3,3 +3,4 @@
 #taskdetailview
 #globalsoff
 disable-tracker-reply-by-email
+add-groupadminmenu-hook
