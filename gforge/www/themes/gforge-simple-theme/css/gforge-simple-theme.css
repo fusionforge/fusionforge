@@ -111,13 +111,13 @@ BACKGROUND-color:#3465a4;}
 	}
 
 div#tabletop {
-	width: 950px;
+	width: 95%;
 	font-size: 11px;
 	background-image: url(/themes/gforge-simple-theme/images/box-grad.png);
 }
 
 div#tabletop TABLE{
-	width: 950px;
+	width: 100%;
 }
 div#tabletop THEAD{
 	text-align: center;
@@ -145,6 +145,7 @@ div#tabletop TBODY{
 
 
 
+/* START default stylesheet */
 
 /* priority styles */
 .priority1 { background-color: #dadada}
@@ -153,13 +154,6 @@ div#tabletop TBODY{
 .priority4 { background-color: #daaaaa}
 .priority5 { background-color: #da8a8a}
 
-
-/* START */
-
-/* Default stylesheet for gforge
-
-
-/* end form elements */
 
 STRONG {
 	font-family: Lucida Grande, Tahoma, sans-serif; 
@@ -199,8 +193,6 @@ H6 {
 	font-family: Lucida Grande, Tahoma, sans-serif; 
 	font-size: xx-small
 	}
-
-
 
 .titlebar  { 
 	FONT-SIZE:11px; 
@@ -352,11 +344,10 @@ fieldset {
 
 
 }
+
 legend {
 	font-size: 12px;
 }
-
-
 
 
 #outertabscontainer{
