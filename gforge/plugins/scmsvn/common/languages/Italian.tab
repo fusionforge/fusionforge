@@ -9,7 +9,7 @@ plugin_scmsvn	section	Progetto: $1
 plugin_scmsvn	title	SCM
 plugin_scmsvn	admin	Amministrazione
 plugin_scmsvn	download_snapshot	Scarica l'immagine notturna del repository SVN
-plugin_scmsvn	documentation	<p>La documentazione per Subversion (spesso anche scritto come "SVN" &egrave; disponibile a < a href="http://svnbook.red-bean.com/">questo</a> indirizzo.</p>
+plugin_scmsvn	documentation	<p>La documentazione per Subversion (spesso anche scritto come "SVN" &egrave; disponibile a <a href="http://svnbook.red-bean.com/">questo</a> indirizzo.</p>
 plugin_scmsvn	devsvnssh	<p><b>Accesso di sviluppoatore a SVN utilizzando SSH</b></p><p>Solo sviluppatori possono accedere a SVN tramite questo metodo. SSH deve essere installato sulla macchina client. Sostituire <i>nomesviluppatore</i> con il nome della propria utenza. Quando viene richiesta la password, inserire la propria password utilizzata sul sito.</p>
 plugin_scmsvn	devsvndav	<p><b>Accesso di sviluppatore a SVN utilizzando DAV</b></p><p>Solo sviluppatori registrati del progetto possono accedere al repository SVN di questo progetto tramite questo metoto. Sostituire <i>nomesviluppatore</i>  con il nome della propria utenza. Quando viene richiesta la password, inserire la propria password utilizzata sul sito.</p>
 plugin_scmsvn	enable_svn	Utilizza Subversion
