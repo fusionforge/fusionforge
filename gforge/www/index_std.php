@@ -31,13 +31,13 @@ The GForge project is supported and maintained by the GForgeGroup:
 	<li>Integration into your network, with LDAP authentication</li>
 	<li>See <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a> for more info.</li>
 </ul>
-<p>
 <h3>Major New Features</h3>
 <p>
 <strong>Command Line Interface</strong> The unix-style interface to 
 GForge uses the SOAP API to let you access, add, and update Bugs, 
 Tasks, and File Releases. The <a href="http://gforge.org/projects/cli/">CLI Project</a>
 is always looking for enhancements, fixes, and feedback.
+</p>
 <p>
 <strong>Tinderbox</strong> This widely-known build tool has been 
 integrated with a GForge plugin, allowing project admins to 
@@ -45,17 +45,19 @@ setup and activate tinderbox building for their projects and
 view the results through the tinderbox plugin in GForge. The 
 <a href="http://gforge.org/projects/tinderbox/">Tinderbox Project</a>
 is always looking for volunteers.
+</p>
 <p>
 <strong>More Powerful Tracker</strong> Major enhancements in the 
 tracker include powerful new querying capabilities, new bugzilla-like 
 fields by default, a configurable template project, and tracker cloning.
+</p>
 <p>
 <strong>MS Project Integration</strong> A plugin has been developed 
 for MS Project that allows it to synchronize tasks with GForge 
 task manager subprojects. The 
 <a href="http://gforge.org/projects/msproject/">MS Project Plugin</a> 
 is currently only available under a non-free license.
-<p>
+</p>
 <?php
 echo $HTML->boxTop($Language->getText('group','long_news'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
@@ -68,9 +70,9 @@ echo $HTML->boxBottom();
 <?php
 echo $HTML->boxTop('Ad');
 echo '<center><h3>GForge Enterprise CDE 4.5</h3>';
-echo '<p>
+echo '
 <a href="http://gforgegroup.com/products/">GForge Enterprise CDE 4.5</a> from the GForge Group includes commercial-grade 
-documentation, online-training, updates, and support.<p>
+documentation, online-training, updates, and support.<br/>
 <a target="_blank" href="http://gforgegroup.com/products/">
 <img src="http://gforge.org/gfginstaller.png" border="0" height="164" width="250" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');

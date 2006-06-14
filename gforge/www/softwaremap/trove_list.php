@@ -206,7 +206,7 @@ while ($row_rootcat = db_fetch_array($res_rootcat)) {
 		print ('</a>');
 	}
 }
-print '</span></td></tr></table>';
+print '</td></tr></table>';
 ?>
 <hr />
 <?php
@@ -271,7 +271,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 	}
 }
 
-$html_limit .= '</span>';
+//$html_limit .= '</span>';
 
 print $html_limit."<hr />\n";
 
