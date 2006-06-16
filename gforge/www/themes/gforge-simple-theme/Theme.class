@@ -327,6 +327,8 @@ echo '<a href="'.$this->selected_dir.'">'.$this->selected_title.'</a>';
 	 */
 	function listTableTop ($title_arr,$links_arr=false) {
 
+		$return='';
+
 		$return = '
 	<div id="tabletop">
 	<table>

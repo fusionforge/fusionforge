@@ -1,5 +1,6 @@
 /*main styles*/
 html,body{margin: 0;padding:0}
+
 body{
 	FONT: 11px Lucida Grande, Tahoma, sans-serif; 
 }
@@ -64,10 +65,7 @@ div#footer{clear:both; text-align:center; padding: 5px 0;
 
 /** NAVIGATION **/
 
-div#gforge-top-navigation{	
-BACKGROUND-color:#3465a4;}
-
-
+div#gforge-top-navigation{BACKGROUND-color:#3465a4;}
 
 
 #gforge-content{
@@ -76,14 +74,10 @@ BACKGROUND-color:#3465a4;}
 	float: right;
 	margin: 0px;
 	padding: 0px;
-
 	}
 
 
-.altRowStyleEven { 
-	background-color: #EAEAEA; 
-	font-weight: none
-	}
+.altRowStyleEven {background-color: #EAEAEA; font-weight: none}
 
 .altRowStyleOdd { 
 	background-color: #E0E0E0; 
@@ -141,8 +135,6 @@ div#tabletop TBODY{
 	background-color: #eeeeee;
 	font-size: 11px;
 }
-
-
 
 
 /* START default stylesheet */
@@ -380,11 +372,11 @@ legend {
 }
 
 #outertabs-content A {
-	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
+	FONT: 11px/22px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
 	padding-right: 5px;
 	padding-left: 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 	color: #eeeeec;
 	BORDER-right: #729fcf 1px dotted;
 }
@@ -456,11 +448,11 @@ legend {
 }
 
 #projecttabs-content A {
-	FONT: 11px/34px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
+	FONT: 11px/22px Lucida Grande, Tahoma, sans-serif; TEXT-TRANSFORM: lowercase; TEXT-DECORATION: none;
 	padding-right: 7px;
 	padding-left: 7px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 	border-right: #eeeeec 1px dotted;
 	color: #eeeeec;
 }
