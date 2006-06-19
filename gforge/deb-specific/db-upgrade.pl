@@ -2339,6 +2339,60 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.5.14-3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Setting up time tracking") ;
+
+	if (&table_exists ($dbh, "rep_time_category")) {
+	    &debug ("...already set up.") ;
+	} else {
+	    &drop_table_if_exists ($dbh, "rep_time_category") ;
+	    &drop_sequence_if_exists ($dbh, "rep_time_category_time_code_seq") ;
+	    &drop_table_if_exists ($dbh, "rep_time_tracking") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_monthly") ;
+	    &drop_view_if_exists ($dbh, "rep_group_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_user_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_daily_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_weekly_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_monthly_vw") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_daily") ;
+	    &drop_index_if_exists ($dbh, "repgroupactdaily_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_weekly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactweekly_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_monthly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactmonthly_monthly") ;
+
+	    @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/timetracking-init.sql") } ;
+	    foreach my $s (@reqlist) {
+		$query = $s ;
+		# debug $query ;
+		$sth = $dbh->prepare ($query) ;
+		$sth->execute () ;
+		$sth->finish () ;
+	    }
+	    @reqlist = () ;
+	}
+	
+	&update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;

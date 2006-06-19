@@ -166,6 +166,7 @@ install: build
 	install -m 644 db/2004*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 755 db/2005*php     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/2005*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
