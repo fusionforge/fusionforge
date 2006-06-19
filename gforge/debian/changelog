@@ -1,10 +1,14 @@
-gforge (4.5.14-2+) experimental; urgency=low
+gforge (4.5.14-3) experimental; urgency=low
 
   * [Roland] Removed a bit of verbosity from db-upgrade.pl.
   * [Roland] add-groupadminmenu-hook.dpatch: Backported the insertion of
     the groupadminmenu hook from CVS HEAD.
+  * [Roland] Set up the tables for timetracking at install time, rather
+    than needing the admin to go and click on a button.
+  * [Roland] Removed banner ads.
+  * [Roland] Made create-vhosts.sh cronjob silent (closes: #374384).
 
- -- Roland Mas <lolando@debian.org>  Tue, 13 Jun 2006 22:34:29 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 19 Jun 2006 16:37:24 +0200
 
 gforge (4.5.14-2) experimental; urgency=low
 
