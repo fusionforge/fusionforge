@@ -1,3 +1,9 @@
+gforge-plugin-scmcvs (4.5.14-2) experimental; urgency=low
+
+  * [Roland] Made the cron jobs silent (closes: #374385).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 19 Jun 2006 16:22:09 +0200
+
 gforge-plugin-scmcvs (4.5.14-1) experimental; urgency=low
 
   * [Roland] Updated for Gforge 4.5.14.
