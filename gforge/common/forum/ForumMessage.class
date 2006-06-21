@@ -36,6 +36,7 @@
 
 require_once('common/include/Error.class');
 include_once('common/include/TextSanitizer.class'); // for parsing the mail body
+include_once('common/include/User.class');
 
 class ForumMessage extends Error {
 
@@ -689,13 +690,14 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Precedence: Bulk\n"
+		$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
 			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 		$parentid = $this->getParentId();
 		if (!empty($parentid)) {
-			$extra_headers .= "\nIn-Reply-To: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">\n"
+ 			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
 				."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
 		}
 
@@ -707,7 +709,8 @@ class ForumMessage extends Error {
 		}
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
-		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
+		$User = user_get_object($this->getPosterID());
+		util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
@@ -746,13 +749,14 @@ class ForumMessage extends Error {
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Precedence: Bulk\n"
+		$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
 			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 		$parentid = $this->getParentId();
 		if (!empty($parentid)) {
-			$extra_headers .= "\nIn-Reply-To: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">\n"
+ 			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
 				."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
 		}
 
@@ -763,7 +767,8 @@ class ForumMessage extends Error {
 		}
 		
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-		util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
+		$User = user_get_object($this->getPosterID());
+		util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
@@ -838,13 +843,14 @@ class ForumMessage extends Error {
 			"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 	
-			$extra_headers = "Precedence: Bulk\n"
+			$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+			$extra_headers .= "Precedence: Bulk\n"
 				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 				."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
 				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 			$parentid = $this->getParentId();
 			if (!empty($parentid)) {
-				$extra_headers .= "\nIn-Reply-To: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">\n"
+				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
 					."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
 			}
 	
@@ -854,7 +860,8 @@ class ForumMessage extends Error {
 				$bccres = db_query($sql);
 			}
 			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-			util_send_message('',$subject,$body,$this->Forum->getReturnEmailAddress(),$BCC,$this->getPosterRealName(),$extra_headers);
+			$User = user_get_object($this->getPosterID());
+			util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 			return true;
 		}
 		
