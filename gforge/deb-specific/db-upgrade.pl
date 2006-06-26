@@ -2192,6 +2192,12 @@ $dbh->{RaiseError} = 1;
 	    "details" => 1,
 	) ;
 
+	$query = "ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
 	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
 	# &debug ($query) ;
 	$sth = $dbh->prepare ($query) ;
