@@ -1,3 +1,9 @@
+gforge (4.5.14-4+) experimental; urgency=low
+
+  * [Roland] Converted 20041211-syncmail.php to db-upgrade.pl.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 26 Jun 2006 17:08:13 +0200
+
 gforge (4.5.14-4) experimental; urgency=low
 
   * [Roland] Now recommends at least one of the SCM plugins (Subversion or

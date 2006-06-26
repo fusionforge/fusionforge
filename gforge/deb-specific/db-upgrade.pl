@@ -11,6 +11,7 @@ use diagnostics ;
 use DBI ;
 use MIME::Base64 ;
 use HTML::Entities ;
+use Digest::MD5 ;
 
 use vars qw/$dbh @reqlist $query/ ;
 use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
@@ -1890,9 +1891,52 @@ END;
     $version = &get_db_version ;
     $target = "4.0.2-0+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041211-syncmail.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20041211-syncmail.php") == 0 
-	or die "system call of 20041211-syncmail.php failed: $?" ;
+        &debug ("Creating automatic commit notification mailing-lists") ;
+	
+
+	$query = "SELECT group_id, unix_group_name FROM groups WHERE status='A' ORDER BY group_id" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id   = $array[0] ;
+	    my $group_name = $array[1] ;
+
+	    my $query2 = "SELECT count(*) FROM mail_group_list 
+   			  WHERE group_id = $group_id 
+			  AND list_name = '".$group_name."-commits'" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    my @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    if ($array2[0] == 0) {
+		my $listname = $group_name."-commits" ;
+		my $listpw = substr (Digest::MD5::md5_base64 ($listname . rand(1)), 0, 16) ;
+		
+		
+		$query2 = "SELECT user_id FROM user_group 
+			   WHERE admin_flags = 'A' 
+			   AND group_id = $group_id" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		my $group_admin = -1 ;
+		if (@array2 = $sth2->fetchrow_array) {
+		    $group_admin = $array2[0] ;
+		}
+		$sth2->finish () ;
+
+		$query2 = "INSERT INTO mail_group_list (group_id, list_name, is_public, password, list_admin, status, description)
+                           VALUES ($group_id, '$listname', 1, '$listpw', $group_admin, 1, 'commits')" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		$sth2->finish () ;
+	    }
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
