@@ -2174,9 +2174,194 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-5" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-2.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050325-2.php") == 0
-	or die "system call of 20050325-2.php failed: $?" ;
+        &debug ("Converting trackers to use their extra fields") ;
+	
+	$query = "SELECT group_id,group_artifact_id,use_resolution FROM artifact_group_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id = $array[0] ;
+	    my $gaid 	 = $array[1] ;
+	    my $ur 	 = $array[2] ;
+
+	    # Ajout du champ Category
+	    my $query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+	    # &debug ($query2) ;
+	    my $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    my @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    my $aefid = $array2[0] ;
+	    
+	    $query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Category', 1)" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    $query2 = "SELECT id, category_name FROM artifact_category WHERE group_artifact_id=$gaid" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $cat_id = $array2[0] ;
+		my $catname = $array2[1] ;
+
+		if ($catname eq '') { $catname = '[empty]' ; }
+		
+		my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		# &debug ($query3) ;
+		my $sth3 = $dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		my @array3 = $sth3->fetchrow_array ;
+		$sth3->finish () ;
+		my $efeid = $array3[0] ;
+
+		$query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                              VALUES ($efeid, $aefid, ?, 0)" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($catname) ;
+		$sth3->finish () ;
+
+		$query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                           SELECT artifact_id,$efeid,$aefid FROM artifact 
+                           WHERE category_id=$cat_id" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		$sth3->finish () ;
+
+		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Category'
+			   WHERE old_value=$cat_id AND field_name='category_id'" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($catname) ;
+		$sth3->finish () ;
+	    }
+	    $sth2->finish () ;
+	    
+	    # Ajout du champ Group
+	    $query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    $aefid = $array2[0] ;
+	    
+	    $query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Group', 1)" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    $query2 = "SELECT id, group_name FROM artifact_group WHERE group_artifact_id=$gaid" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $grp_id = $array2[0] ;
+		my $grpname = $array2[1] ;
+
+		if ($grpname eq '') { $grpname = '[empty]' ; }
+		
+		my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		# &debug ($query3) ;
+		my $sth3 = $dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		my @array3 = $sth3->fetchrow_array ;
+		$sth3->finish () ;
+		my $efeid = $array3[0] ;
+
+		$query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                              VALUES ($efeid, $aefid, ?, 0)" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($grpname) ;
+		$sth3->finish () ;
+
+		$query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                           SELECT artifact_id,$efeid,$aefid FROM artifact 
+                           WHERE artifact_group_id=$grp_id" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		$sth3->finish () ;
+
+		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Group'
+			   WHERE old_value=$grp_id AND field_name='artifact_group_id'" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($grpname) ;
+		$sth3->finish () ;
+	    }
+	    $sth2->finish () ;
+
+	    # Ajout du champ Resolution (s'il existe, cf. $ur)
+	    if ($ur) {
+		$query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+		# &debug ($query2) ;
+		$sth2 = $dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		@array2 = $sth2->fetchrow_array ;
+		$sth2->finish () ;
+		$aefid = $array2[0] ;
+		
+		$query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Resolution', 1)" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+
+		$query2 = "SELECT id, resolution_name FROM artifact_resolution WHERE group_artifact_id=$gaid" ;
+		# &debug ($query2) ;
+		$sth2 = $dbh->prepare ($query2) ;
+		$sth2->execute () ;
+
+		while (@array2 = $sth2->fetchrow_array) {
+		    my $res_id = $array2[0] ;
+		    my $resname = $array2[1] ;
+
+		    if ($resname eq '') { $resname = '[empty]' ; }
+		    
+		    my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		    # &debug ($query3) ;
+		    my $sth3 = $dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    my @array3 = $sth3->fetchrow_array ;
+		    $sth3->finish () ;
+		    my $efeid = $array3[0] ;
+
+		    $query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                               VALUES ($efeid, $aefid, ?, 0)" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute ($resname) ;
+		    $sth3->finish () ;
+
+		    $query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                               SELECT artifact_id,$efeid,$aefid FROM artifact 
+                               WHERE resolution_id=$res_id" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    $sth3->finish () ;
+
+		    $query3 = "UPDATE artifact_history SET old_value=?,field_name='Resolution'
+			       WHERE old_value=$res_id AND field_name='resolution_id'" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute ($resname) ;
+		    $sth3->finish () ;
+		}
+		$sth2->finish () ;
+	    }
+	}
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2227,6 +2412,12 @@ $dbh->{RaiseError} = 1;
     if (&is_lesser ($version, $target)) {
         &debug ("Creating aliases for the extra fields") ;
 
+	$query = "ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
 	my %reserved_alias = (
 	    "project" => 1,
 	    "type" => 1,
@@ -2235,12 +2426,6 @@ $dbh->{RaiseError} = 1;
 	    "summary" => 1,
 	    "details" => 1,
 	) ;
-
-	$query = "ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
 
 	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
 	# &debug ($query) ;
