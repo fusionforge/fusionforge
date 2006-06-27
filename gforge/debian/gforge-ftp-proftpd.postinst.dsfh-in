@@ -36,7 +36,7 @@ case "$1" in
 
         # Patch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh configure-files
-	replace_file /etc/proftpd.conf
+	replace_file /etc/proftpd/proftpd.conf
 
         # Setup our FTP
 	/usr/lib/gforge/bin/install-ftp.sh configure 

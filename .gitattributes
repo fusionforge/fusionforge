@@ -1,33 +1,5 @@
 * text=auto !eol
-gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
-gforge-plugin-cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
-gforge-plugin-eirc/EIRC-1.0.2.tar.gz -text
-gforge-plugin-ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
-gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
-gforge-plugin-scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
-gforge-plugin-scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
-gforge-plugin-scmcvs/www/cvsweb/icons/back.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/binary.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/dir.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/miniback.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minidir.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minigraph.png -text
-gforge-plugin-scmcvs/www/cvsweb/icons/minitext.gif -text
-gforge-plugin-scmcvs/www/cvsweb/icons/text.gif -text
-gforge-plugin-scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/icons/small/debian.jpg svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/icons/small/dir.gif svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/icons/small/text.gif svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/images/chalk.jpg svneol=native#unset
-gforge-plugin-scmsvn/www/viewcvs/images/cvsgraph_16x16.png -text
-gforge-plugin-scmsvn/www/viewcvs/images/cvsgraph_32x32.png -text
-gforge-plugin-scmsvn/www/viewcvs/images/down.png -text
-gforge-plugin-scmsvn/www/viewcvs/images/logo.png -text
-gforge-plugin-scmsvn/www/viewcvs/images/up.png -text
 gforge/backend/shell/apache.sh svneol=native#unset
-gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
@@ -42,6 +14,7 @@ gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
 gforge/www/favicon.ico svneol=native#unset
+gforge/www/gfginstaller.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text

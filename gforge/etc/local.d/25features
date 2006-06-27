@@ -42,3 +42,6 @@ $sys_project_reg_restricted={sys_project_reg_restricted};
 //	If set to true, only a site admin can register users
 //
 $sys_user_reg_restricted={sys_user_reg_restricted};
+
+// Path to sendmail program
+//$sys_sendmail_path='/usr/sbin/sendmail';

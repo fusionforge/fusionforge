@@ -5,5 +5,5 @@
 
 #DSFHELPER:replace-files#
 
-propose_update_install /etc/proftpd.conf
+propose_update_install /etc/proftpd/proftpd.conf
 db_stop
