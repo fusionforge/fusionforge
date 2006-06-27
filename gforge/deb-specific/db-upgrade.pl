@@ -1620,8 +1620,157 @@ END;
     $target = "3.3.0-2+2" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with migraterbac.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migraterbac.php") == 0
-	or die "system call of 20040826_migraterbac.php failed: $?" ;
+	
+	my $defaultroles = {
+	    'Admin'	       => { 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' },
+	    'Senior Developer' => { 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' },
+	    'Junior Developer' => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'1', 'pmadmin'=>'0', 'pm'=>'1' },
+	    'Doc Writer'       => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'0', 'pmadmin'=>'0', 'pm'=>'0' },
+	    'Support Tech'     => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' }
+	} ;
+	
+	$query = "SELECT group_id FROM groups where status != 'P'" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id = $array[0] ;
+
+	    my ($query2, $sth2, @array2, $admin_rid, $jd_rid, %roledata) ;
+	    foreach my $rname (keys %$defaultroles) {
+		$query2 = "SELECT nextval('role_role_id_seq'::text)" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		@array2 = $sth2->fetchrow_array ;
+		my $rid = $array2[0] ;
+		$sth2->finish () ;
+		if ($rname eq 'Admin') {
+		    $admin_rid = $rid ;
+		} elsif ($rname eq 'Junior Developer') {
+		    $jd_rid = $rid ;
+		}
+
+		$query2 = "INSERT INTO role (role_id, group_id, role_name)
+                           VALUES ($rid, $group_id, 'rname')" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		$sth2->finish () ;
+
+		foreach my $section (keys %{$defaultroles->{$rname}}) {
+		    if ($section eq 'forum') {
+			$query2 = "SELECT group_forum_id 
+                               FROM forum_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'forum'}{$array2[0]} = $defaultroles->{$rname}{'forum'} ;
+			}
+			$sth2->finish () ;
+		    } elsif ($section eq 'pm') {
+			$query2 = "SELECT group_project_id 
+                               FROM project_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'pm'}{$array2[0]} = $defaultroles->{$rname}{'pm'} ;
+			}
+			$sth2->finish () ;
+		    } elsif ($section eq 'tracker') {
+			$query2 = "SELECT group_artifact_id 
+                               FROM artifact_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'tracker'}{$array2[0]} = $defaultroles->{$rname}{'tracker'} ;
+			}
+			$sth2->finish () ;
+		    } else {
+			$roledata{$section}{0} = $defaultroles->{$rname}{$section} ;
+		    }
+		    
+		    foreach my $rd_it (keys %{$roledata{$section}}) {
+			$query2 = "INSERT INTO role_setting (role_id, section_name, ref_id, value)
+                                   VALUES ($rid, '$section', $rd_it, '$roledata{$section}{$rd_it}')" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			$sth2->finish () ;
+		    }
+		    
+		}
+		
+	    }
+	    
+	    #   affecter le rôle Admin aux admins, JD aux autres
+	    $query2 = "SELECT user_id, admin_flags FROM user_group WHERE group_id = $group_id" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $uid        = $array2[0] ;
+		my $adminflags = $array2[1] ;
+		my ($rid, $rname) ;
+		
+		my $query3 ;
+		if ($adminflags eq 'A') {
+		    $rid = $admin_rid ;
+		    $rname = 'Admin' ;
+		} else {
+		    $rid = $jd_rid ;
+		    $rname = 'Junior Developer' ;
+		}
+		my @reqlist3 = (
+				"UPDATE user_group
+                                 SET role_id = $rid,
+			         admin_flags    = '$defaultroles->{$rname}{'projectadmin'}',
+			         forum_flags    = '$defaultroles->{$rname}{'forumadmin'}',
+			         project_flags  = '$defaultroles->{$rname}{'pmadmin'}',
+			         doc_flags      = '$defaultroles->{$rname}{'docman'}',
+			         cvs_flags      = '$defaultroles->{$rname}{'scm'}',
+			         release_flags  = '$defaultroles->{$rname}{'frs'}',
+			         artifact_flags = '$defaultroles->{$rname}{'trackeradmin'}'
+                                 WHERE user_id = $uid AND group_id = $group_id" ,
+				"UPDATE forum_perm
+				 SET perm_level=$defaultroles->{$rname}{'forum'}
+				 WHERE group_forum_id IN (
+                                    SELECT group_forum_id
+                                    FROM forum_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				"UPDATE project_perm
+				 SET perm_level=$defaultroles->{$rname}{'pm'}
+				 WHERE group_project_id IN (
+                                    SELECT group_project_id
+                                    FROM project_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				"UPDATE artifact_perm
+				 SET perm_level=$defaultroles->{$rname}{'tracker'}
+				 WHERE group_artifact_id IN (
+                                    SELECT group_artifact_id
+                                    FROM artifact_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				) ;
+		foreach my $query3 (@reqlist3) {
+		    # &debug ($query3) ;
+		    my $sth3 = $dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    $sth3->finish () ;
+		}
+	    }
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
