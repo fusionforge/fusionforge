@@ -1,9 +1,9 @@
-gforge (4.5.14-4+1) experimental; urgency=low
+gforge (4.5.14-4+1+) experimental; urgency=low
 
-  * [Roland] Converted 20041211-syncmail.php and 20050325-2.php to
-    db-upgrade.pl.
+  * [Roland] Converted 20041211-syncmail.php, 20051027-2.php and
+    20050325-2.php to db-upgrade.pl.
 
- -- Roland Mas <lolando@debian.org>  Mon, 26 Jun 2006 22:30:13 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Jun 2006 09:13:29 +0200
 
 gforge (4.5.14-4) experimental; urgency=low
 

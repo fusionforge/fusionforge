@@ -2566,9 +2566,26 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.5-4" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20051027-2.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20051027-2.php") == 0
-	or die "system call of 20051027-2.php failed: $?" ;
+        &debug ("Updating document sizes") ;
+
+	$query = "SELECT docid, data FROM doc_data" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $docid = $array[0] ;
+	    my $b64data = $array[1] ;
+	    my $data = decode_base64 ($b64data) ;
+	    my $size = length ($data) ;
+
+	    my $query2 = "UPDATE doc_data SET filesize=$size WHERE docid=$docid" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
