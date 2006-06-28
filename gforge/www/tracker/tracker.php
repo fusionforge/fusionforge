@@ -62,19 +62,31 @@ switch ($func) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				//
-				//	Attach file to this Artifact.
+				//	Attach files to this Artifact.
 				//
-				if ($add_file) {
+				for ($i=0; $i<5; $i++) {
+					$error=$_FILES['input_file']['error'][$i];
+					if (isset($error) && $error > 0) {
+						continue;
+					}
+					$file_name=$_FILES['input_file']['name'][$i];
+					$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+					if (!is_uploaded_file($tmp_name)) {
+						continue;
+					}
+					$size=$_FILES['input_file']['size'][$i];
+					$type=$_FILES['input_file']['type'][$i];
+
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
 						$feedback .= 'Could Not Create File Object';
 //					} elseif ($afh->isError()) {
 //						$feedback .= $afh->getErrorMessage();
 					} else {
-						if (!util_check_fileupload($input_file)) {
+						if (!util_check_fileupload($tmp_name)) {
 							exit_error("Error","Invalid filename");
 						}
-						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
+						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 							$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
 						}
 					}
@@ -106,7 +118,6 @@ switch ($func) {
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
-				$_summary=addslashes($ah->getSummary());
 
 				//
 				//	get existing extra field data
@@ -202,8 +213,15 @@ switch ($func) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=$Language->getText('tracker','comment_added');
 					} else {
-						//some kind of error in creation
-						exit_error('ERROR',$feedback);
+						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
+							//some kind of error in creation
+							exit_error($ah->getErrorMessage(),$feedback);
+						} else {
+							// we have to unset the error if the user added a file ( add a file and no comment)
+							if ( $add_file ) {
+								$ah->clearError();
+							}
+						}
 					}
 
 				} else {
@@ -222,26 +240,36 @@ switch ($func) {
 			}
 
 			//
-			//  Attach file to this Artifact.
+			//  Attach files to this Artifact.
 			//
-			if ($add_file) {
+			for ($i=0; $i<5; $i++) {
+				$error=$_FILES['input_file']['error'][$i];
+				if (isset($error) && $error > 0) {
+					continue;
+				}
+				$file_name=$_FILES['input_file']['name'][$i];
+				$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+				if (!is_uploaded_file($tmp_name)) {
+					continue;
+				}
+				$size=$_FILES['input_file']['size'][$i];
+				$type=$_FILES['input_file']['type'][$i];
+
 				$afh=new ArtifactFileHtml($ah);
 				if (!$afh || !is_object($afh)) {
 					$feedback .= 'Could Not Create File Object';
 //				} elseif ($afh->isError()) {
-//					$feedback .= $afh->getErrorMessage();
+//				  $feedback .= $afh->getErrorMessage();
 				} else {
-					if (!util_check_fileupload($input_file)) {
+					if (!util_check_fileupload($tmp_name)) {
 						exit_error("Error","Invalid filename");
 					}
-					if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
-						$was_error=true;
-					} else {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');
+					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
+						$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
 					}
 				}
 			}
+
 
 			//
 			//	Delete list of files from this artifact
@@ -366,6 +394,7 @@ switch ($func) {
 	}
 	case 'downloadcsv' : {
 		include ('downloadcsv.php');
+		break;
 	}
 	case 'download' : {
 		Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");

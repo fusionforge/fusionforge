@@ -1,0 +1,33 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge~/cronjobs/cvs-cron/default_page.php gforge/cronjobs/cvs-cron/default_page.php
+--- gforge~/cronjobs/cvs-cron/default_page.php	2005-07-18 12:50:45.000000000 +0200
++++ gforge/cronjobs/cvs-cron/default_page.php	2006-06-19 15:07:19.000000000 +0200
+@@ -158,9 +158,6 @@
+ 		</table><p>&nbsp;</p>
+ </td></tr></table>
+ 			&nbsp;<p>
+-			<center>
+-			<a href="http://gforgegroup.com/"><img src="http://gforge.org/pro/gforgebanner.jpg" height="60" width="468" border="0" alt="GForge Group Professional Services" /></a><br /><br />
+-			</center>
+ 			<!-- end main body row -->
+ 
+ 
+diff -urNad gforge~/cronjobs/dav-svn/default_page.php gforge/cronjobs/dav-svn/default_page.php
+--- gforge~/cronjobs/dav-svn/default_page.php	2004-10-29 04:49:05.000000000 +0200
++++ gforge/cronjobs/dav-svn/default_page.php	2006-06-19 15:07:07.000000000 +0200
+@@ -158,9 +158,6 @@
+ 		</table><p>&nbsp;</p>
+ </td></tr></table>
+ 			&nbsp;<p>
+-			<center>
+-			<a href="http://gforgegroup.com/"><img src="http://gforge.org/pro/gforgebanner.jpg" height="60" width="468" border="0" alt="GForge Group Professional Services" /></a><br /><br />
+-			</center>
+ 			<!-- end main body row -->
+ 
+ 

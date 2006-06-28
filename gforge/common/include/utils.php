@@ -121,7 +121,14 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	}
 
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body2) .
-		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");
+		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");	
+// WARNING : popen commented code probably brought some trouble, we will use the pipe method as we were before		  
+/*       if (!$handle = popen($sys_sendmail_path." -f'$from' -t -i", "w")) {
+               echo "<p>Error: cannot run '$sys_sendmail_path' - mail not sent</p>\n";
+       } else {
+               fwrite($handle, util_prep_string_for_sendmail($body2));
+               pclose($handle);
+       }*/
 }
 
 /**

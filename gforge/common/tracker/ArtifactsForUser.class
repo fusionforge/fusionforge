@@ -96,4 +96,10 @@ class ArtifactsForUser extends Error {
 		return $this->getArtifactsFromSQL($sql);
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
