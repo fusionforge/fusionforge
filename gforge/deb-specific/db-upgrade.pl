@@ -1619,7 +1619,7 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-2+2" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with migraterbac.php") ;
+        &debug ("Migrating permissions to RBAC") ;
 	
 	my $defaultroles = {
 	    'Admin'	       => { 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' },
@@ -1718,8 +1718,8 @@ END;
 		my $uid        = $array2[0] ;
 		my $adminflags = $array2[1] ;
 		my ($rid, $rname) ;
-		
-		my $query3 ;
+
+		$adminflags =~ s/\s//g ;
 		if ($adminflags eq 'A') {
 		    $rid = $admin_rid ;
 		    $rname = 'Admin' ;

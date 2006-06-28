@@ -1,3 +1,10 @@
+gforge (4.5.14-6) experimental; urgency=low
+
+  * [Roland] Fixed the RBAC migration (which left the whole site without
+    any project admin, doh!).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 28 Jun 2006 10:41:30 +0200
+
 gforge (4.5.14-5) experimental; urgency=low
 
   * [Roland] Converted the remaining PHP database upgrading scripts
