@@ -956,8 +956,8 @@ class Snoopy
 			$cmdline_params .= " -m ".$this->read_timeout;
 		
 		$headerfile = uniqid(time());
-
-		exec($this->curl_path." -D \"/tmp/$headerfile\"".$cmdline_params." ".$URI,$results,$return);
+// TODO -> WE SHOULD MODIFY THE -K PARAMETER. THIS IS ONLY FOR TEST PURPOSES, AS WE DON´T HAVE A CERTIFICATE
+		exec($this->curl_path." -D \"/tmp/$headerfile\"".$cmdline_params." -k ".$URI,$results,$return);
 		
 		if($return)
 		{

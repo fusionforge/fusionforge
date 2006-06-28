@@ -113,12 +113,16 @@ class SearchQuery extends Error {
 	 * executeQuery - execute the SQL query to get the results
 	 */ 
 	function executeQuery() {
+		global $sys_use_fti;
 		if($this->searchId) {
 			$query = $this->getSearchByIdQuery();
 		} else {
 			$query = $this->getQuery();
 		}
 
+		if ($sys_use_fti) {
+			db_query("select set_curcfg('default')");
+		}
 		$this->result = db_query(
 			$query,
 			$this->rowsPerPage + 1,
@@ -248,7 +252,11 @@ class SearchQuery extends Error {
 	 * @return string words we are searching for, separated by a pipe
 	 */	
 	function getFormattedWords() {
-		$words = implode('|', $this->words);
+		if ($this->isExact) {
+			$words = implode('&', $this->words);
+		} else {
+			$words = implode('|', $this->words);
+		}
 		return $words;
 	}
 }
