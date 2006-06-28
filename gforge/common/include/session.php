@@ -297,8 +297,7 @@ function session_cookie($name ,$value, $domain = '', $expiration = 0) {
  *	@return never returns
  */
 function session_redirect($loc) {
-	global $HTTP_SERVER_VARS;	
-	header('Location: http' . (session_issecure()?'s':'') . '://' . $HTTP_SERVER_VARS['HTTP_HOST'] . $loc);
+	header('Location: http' . (session_issecure()?'s':'') . '://' . getStringFromServer('HTTP_HOST') . $loc);
 	print("\n\n");
 	exit;
 }
