@@ -5407,7 +5407,8 @@ CREATE  INDEX "artifactcountsagg_groupartid" on "artifact_counts_agg" using btre
 -- Name: "statssitepgsbyday_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statssitepgsbyday_oid" on "stats_site_pages_by_day" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statssitepgsbyday_oid" on stats_site_pages_by_day(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 435 (OID 23313)
@@ -5423,7 +5424,8 @@ CREATE  INDEX "statssitepagesbyday_month_day" on "stats_site_pages_by_day" using
 -- Name: "frsdlfileagg_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "frsdlfileagg_oid" on "frs_dlstats_file_agg" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "frsdlfileagg_oid" on frs_dlstats_file_agg(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 437 (OID 23388)
@@ -5439,7 +5441,8 @@ CREATE UNIQUE INDEX "frsdlfileagg_month_day_file" on "frs_dlstats_file_agg" usin
 -- Name: "statsaggsitebygrp_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statsaggsitebygrp_oid" on "stats_agg_site_by_group" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statsaggsitebygrp_oid" on stats_agg_site_by_group(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 439 (OID 23401)
@@ -5455,7 +5458,8 @@ CREATE UNIQUE INDEX "statssitebygroup_month_day_grou" on "stats_agg_site_by_grou
 -- Name: "statsprojectmetric_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statsprojectmetric_oid" on "stats_project_metric" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statsprojectmetric_oid" on stats_project_metric(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 441 (OID 23414)
@@ -5471,7 +5475,8 @@ CREATE UNIQUE INDEX "statsprojectmetric_month_day_gr" on "stats_project_metric" 
 -- Name: "statsagglogobygrp_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statsagglogobygrp_oid" on "stats_agg_logo_by_group" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statsagglogobygrp_oid" on stats_agg_logo_by_group(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 443 (OID 23433)
@@ -5487,7 +5492,8 @@ CREATE UNIQUE INDEX "statslogobygroup_month_day_grou" on "stats_agg_logo_by_grou
 -- Name: "statssubdpages_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statssubdpages_oid" on "stats_subd_pages" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statssubdpages_oid" on stats_subd_pages(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 445 (OID 23446)
@@ -5503,7 +5509,8 @@ CREATE UNIQUE INDEX "statssubdpages_month_day_group" on "stats_subd_pages" using
 -- Name: "statscvsgrp_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statscvsgrp_oid" on "stats_cvs_group" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statscvsgrp_oid" on stats_cvs_group(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 447 (OID 23486)
@@ -5519,7 +5526,8 @@ CREATE UNIQUE INDEX "statscvsgroup_month_day_group" on "stats_cvs_group" using b
 -- Name: "statsprojectdevelop_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statsprojectdevelop_oid" on "stats_project_developers" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statsprojectdevelop_oid" on stats_project_developers(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 449 (OID 23507)
@@ -5535,7 +5543,8 @@ CREATE UNIQUE INDEX "statsprojectdev_month_day_group" on "stats_project_develope
 -- Name: "statsproject_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statsproject_oid" on "stats_project" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statsproject_oid" on stats_project(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 451 (OID 23524)
@@ -5551,7 +5560,8 @@ CREATE UNIQUE INDEX "statsproject_month_day_group" on "stats_project" using btre
 -- Name: "statssite_oid" Type: INDEX Owner: tperdue
 --
 
-CREATE UNIQUE INDEX "statssite_oid" on "stats_site" using btree ( "oid" "oid_ops" );
+CREATE UNIQUE INDEX "statssite_oid" on stats_site(month,day) ;
+-- using btree ( "oid" "oid_ops" );
 
 --
 -- TOC Entry ID 453 (OID 23567)

@@ -51,6 +51,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
 			$nonPublic = 'false';
 			$sections = '';

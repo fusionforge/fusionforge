@@ -31,6 +31,9 @@ case "$1" in
 	    dev \
 	    var \
 	    var/run \
+	    var/run/sshd \
+	    var/lib \
+	    var/lib/gforge \
 	    cvsroot \
 	    home \
 	    home/users \
@@ -39,6 +42,9 @@ case "$1" in
 	  [ -d $CHROOTDIR/$dir ] || mkdir $CHROOTDIR/$dir
 	done
 	install -d -m 1777 $CHROOTDIR/tmp
+	[ -L $CHROOTDIR/var/lib/gforge/chroot ] && rm $CHROOTDIR/var/lib/gforge/chroot
+	[ -d $CHROOTDIR/var/lib/gforge/chroot ] && rmdir $CHROOTDIR/var/lib/gforge/chroot
+	ln -s ../../../ $CHROOTDIR/var/lib/gforge/chroot
 	
 	# Copy needed binaries
 	# For testing /bin/ls /bin/su
@@ -48,6 +54,7 @@ case "$1" in
 	for binary in \
 	    /usr/sbin/sshd \
 	    /usr/bin/cvs \
+	    /usr/bin/svnserve \
 	    /bin/ls \
 	    /bin/sh \
 	    /bin/bash \
@@ -59,6 +66,18 @@ case "$1" in
 	done \
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
+
+	# sshd extras
+	# pthread cancel
+	cp /lib/libgcc_s* $CHROOTDIR/lib
+	
+	# pam extras 
+	# pam_limits.so
+	cp /lib/libcap* $CHROOTDIR/lib
+        
+	# nss extras
+	# /lib/libnss_pgsql ?
+	cp /lib/libcom_err* $CHROOTDIR/lib
 
 	# Create devices files
 	[ -c $CHROOTDIR/dev/null ] || mknod $CHROOTDIR/dev/null c 1 3
@@ -89,6 +108,7 @@ FIN
 	[ -f /etc/pam.d/su ] && cp /etc/pam.d/su $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/cvs ] && cp /etc/pam.d/cvs $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/other ] && cp /etc/pam.d/other $CHROOTDIR/etc/pam.d
+	cp /etc/pam.d/common* $CHROOTDIR/etc/pam.d
 	cp /lib/libpam* $CHROOTDIR/lib
 	
 	cp /lib/libnss_files* $CHROOTDIR/lib
@@ -136,6 +156,7 @@ FIN
 root:x:0:0:Root:/:/bin/bash
 nobody:x:65534:65534:nobody:/:/bin/false
 FIN
+getent passwd | grep sshd >> $CHROOTDIR/etc/passwd
 getent passwd | grep anonscm-gforge >> $CHROOTDIR/etc/passwd
 	cat > $CHROOTDIR/etc/shadow <<-FIN
 root:*:11142:0:99999:7:::

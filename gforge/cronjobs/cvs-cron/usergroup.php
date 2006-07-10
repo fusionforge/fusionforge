@@ -228,10 +228,10 @@ for($k = 0; $k < count($grouplines); $k++) {
 //
 //	Add the groups from the gforge database
 //
-$res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
-for($i = 0; $i < db_numrows($res); $i++) {
-    $groups[] = db_result($res,$i,'unix_group_name');
-    $gids[db_result($res,$i,'unix_group_name')]=db_result($res,$i,'group_id')+GROUP_ID_ADD;
+$group_res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
+for($i = 0; $i < db_numrows($group_res); $i++) {
+    $groups[] = db_result($group_res,$i,'unix_group_name');
+    $gids[db_result($group_res,$i,'unix_group_name')]=db_result($group_res,$i,'group_id')+GROUP_ID_ADD;
 }
 
 for($i = 0; $i < count($groups); $i++) {
@@ -244,6 +244,14 @@ for($i = 0; $i < count($groups); $i++) {
 
 		$line = $groups[$i] . ":x:" . ($gids[$groups[$i]]) . ":";
 
+		/* we need to get the project object to check if a project
+		 * has a private CVS repository - in which case we need to add
+		 * the apache user to the group so that ViewCVS can be used
+		 */
+		 
+		$gid = db_result($group_res, $i, 'group_id');
+		$project = &group_get_object($gid);
+		
 		$resusers=db_query("SELECT user_name 
 			FROM users,user_group,groups 
 			WHERE groups.group_id=user_group.group_id 
@@ -252,7 +260,33 @@ for($i = 0; $i < count($groups); $i++) {
 			AND users.status='A'
 			AND groups.unix_group_name='$groups[$i]'");
 		$gmembers =& util_result_column_to_array($resusers,'user_name');
-		$line .= implode(',',$gmembers).$pserver_anon[$groups[$i]]."\n";
+		
+		$group_name = $groups[$i];
+		if (!($project->enableAnonSCM())) {
+			if (!$gmembers) {
+				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
+				if ($pserver_anon[$groups[$i]]) {
+					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
+					$line .= $this_anon . "," . $sys_apache_user . "\n";
+				} else {
+					$line .= $sys_apache_user . "\n"; // only the apache user then?
+				}
+			} else {
+				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "," . $sys_apache_user . "\n";
+			}
+		} else {
+			if (!$gmembers) {
+				//if there´s not a user in $gmembers, remove the initial "," from pserver_anon
+				if ($pserver_anon[$groups[$i]]) {
+					$this_anon = ltrim($pserver_anon[$groups[$i]],",");
+					$line .= $this_anon . "\n";
+				} else {
+					$line .= "\n"; //no users
+				}
+			} else {
+				$line .= implode(',',$gmembers) . $pserver_anon[$groups[$i]] . "\n";
+			}
+		}
 
 		fwrite($h6, $line);
 
@@ -302,10 +336,14 @@ foreach($groups as $group) {
 		//
 		$fo=fopen('default_page.php','r');
 		$contents = '';
-		while (!feof($fo)) {
-    		$contents .= fread($fo, 8192);
+		if (!$fo) {
+			$err .= 'Default Page Not Found';
+		} else {
+			while (!feof($fo)) {
+    			$contents .= fread($fo, 8192);
+			}
+			fclose($fo);
 		}
-		fclose($fo);
 		//
 		//	Change some defaults in the template file
 		//
@@ -346,13 +384,12 @@ $rows	 = db_numrows($res8);
 for($k = 0; $k < $rows; $k++) {
 	$deleted_group_name = db_result($res8,$k,'unix_group_name');
 
-	if(!is_dir($sys_cvsroot."/deleted"))
-		system("mkdir ".$sys_cvsroot."/deleted");
+	if(!is_dir($cvsdir_prefix."/.deleted"))
+		system("mkdir ".$cvsdir_prefix."/.deleted");
 		
-	if(!is_dir($sys_cvsroot."/deleted/".$deleted_group_name))
-		system("mkdir ".$sys_cvsroot."/deleted/".$deleted_group_name);
-
-	system("mv -f $sys_cvsroot/$deleted_group_name/*.* $sys_cvsroot/.deleted/$deleted_group_name");
+	system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
+	system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
+	system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
 	
 	
 	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );

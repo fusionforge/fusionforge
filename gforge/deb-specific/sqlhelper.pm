@@ -34,6 +34,7 @@ use subs qw/ &get_plugin_id &remove_plugin_from_groups
 sub get_plugin_id ( $$ ) ;
 sub remove_plugin_from_groups ( $$ ) ;
 sub remove_plugin_from_users ( $$ ) ;
+sub table_exists ( $$ ) ;
 sub drop_table_if_exists ( $$ ) ;
 sub drop_index_if_exists ( $$ ) ;
 sub drop_sequence_if_exists ( $$ ) ;
@@ -45,6 +46,22 @@ sub create_plugin_metadata_table ( $$$ ) ;
 sub is_lesser ( $$ ) ;
 sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
+
+sub table_exists ( $$ ) {
+    my $dbh = shift or die "Not enough arguments" ;
+    my $tname = shift or die  "Not enough arguments" ;
+    my $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    my @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+
+    if ($array [0] != 0) {
+	return 1 ;
+    } else {
+	return 0 ;
+    }
+}
 
 sub drop_table_if_exists ( $$ ) {
     my $dbh = shift or die "Not enough arguments" ;
