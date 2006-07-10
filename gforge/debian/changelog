@@ -1,3 +1,13 @@
+gforge (4.5.14-7) experimental; urgency=low
+
+  * [Roland] Add a "project_before_description" hook on project homes.
+  * [Roland] Managed to get apache-related scripts to play nice with
+    debconf (closes: #376155).
+  * [Roland] Also, updated from CVS, to fix the "missing
+    Textsanitizer.class" bug (closes: #375863).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jul 2006 18:15:56 +0200
+
 gforge (4.5.14-6) experimental; urgency=low
 
   * [Roland] Fixed the RBAC migration (which left the whole site without
