@@ -1,3 +1,10 @@
+gforge (4.5.14-8) experimental; urgency=low
+
+  * [Roland] Oops.  Only part of the fix for #376155 had been committed,
+    and the rest wasn't part of 4.5.14-7.  This new upload should have it.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jul 2006 18:56:25 +0200
+
 gforge (4.5.14-7) experimental; urgency=low
 
   * [Roland] Add a "project_before_description" hook on project homes.
