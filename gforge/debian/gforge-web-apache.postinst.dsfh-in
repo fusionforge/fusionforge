@@ -50,7 +50,7 @@ case "$1" in
 	    echo "can't find cronolog in usual places" >&2
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
-	# db_stop
+	db_stop
 	
         /usr/sbin/gforge-config
 
