@@ -9,14 +9,14 @@ echo ""
 # if no arguments, print out help screen
 if test $# -lt 4; then 
 	echo "usage:"
-	echo "  cvscreate.sh [repositoryname] [groupid] [isanonymousenabled] [ispserverenabled]"
+	echo "  cvscreate.sh [repositoryname] [groupname] [isanonymousenabled] [ispserverenabled]"
 	echo ""
 	exit 1 
 fi
 
 repositoryname=$1
 repositorypath=/cvsroot/$1
-groupid=$2
+groupname=$2
 isanonymousenabled=$3
 ispserverenabled=$4
 
@@ -45,12 +45,18 @@ function setRepositoryAccess() {
 
 function createRepository() {
 	mkdir $repositorypath
+	mkdir -p /cvsroot/cvs-locks/$repositoryname
+	chmod 755 /cvsroot/cvs-locks
+	chmod 3777 /cvsroot/cvs-locks/$repositoryname
 	setRepositoryAccess
 	cvs -d$repositorypath init
 	setPserverAccess
+	echo "SystemAuth=yes" > $repositorypath/CVSROOT/config
+	echo "LockDir=/cvsroot/cvs-locks/$repositoryname" >> $repositorypath/CVSROOT/config
+	chmod 444 $repositorypath/CVSROOT/config
 	echo "" > $repositorypath/CVSROOT/val-tags
 	chmod 664 $repositorypath/CVSROOT/val-tags
-	chown -R nobody:$groupid $repositorypath
+	chown -R nobody:$groupname $repositorypath
 }
 
 if [ -d $repositorypath ] ; then

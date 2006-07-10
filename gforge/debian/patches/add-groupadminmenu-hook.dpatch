@@ -1,0 +1,23 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge~/www/project/admin/project_admin_utils.php gforge/www/project/admin/project_admin_utils.php
+--- gforge~/www/project/admin/project_admin_utils.php	2004-10-23 17:19:28.000000000 +0200
++++ gforge/www/project/admin/project_admin_utils.php	2006-06-13 22:32:05.000000000 +0200
+@@ -96,7 +96,11 @@
+ 	}
+ 	$links[] = '/project/stats/?group_id='.$group_id;
+ 	
+-	echo $HTML->subMenu($labels, $links);
++	echo ($HTML->beginSubMenu());
++	echo $HTML->printSubMenu($labels, $links);
++	plugin_hook ("groupadminmenu", $params) ;
++	echo ($HTML->endSubMenu());
++
+ }
+ 
+ /*
