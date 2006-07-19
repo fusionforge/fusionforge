@@ -292,6 +292,8 @@ admin_index	approve_reject	Approve/Reject
 admin_index	cronman	Cron Manager
 admin_index	configman	Config Manager
 admin_index	pluginman	Plugin Manager
+admin_index	admin_site_wide_data	Admin side-wide data
+admin_index	admin_plugin_data	Admin plugin data
 admin_index	display_full_group	Display Full Group List/Edit Groups
 admin_index	display_full_user_list	Display Full User List/Edit Users
 admin_index	display_groups_beginning_with	Display Groups Beginning with :

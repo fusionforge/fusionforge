@@ -265,19 +265,19 @@ admin_grouplist	status	Stato
 admin_grouplist	unix_name	Nome unix
 admin_index	active_projects_count	Progetti attivi: <strong>$1</strong>
 admin_index	active_users_count	Utenti attivi: <strong>$1</strong>
-admin_index	add_delete_edit_file_types	Aggiungi, rimuovi o modifica i tipi di file
-admin_index	add_delete_edit_laguage	Aggiungi, rimuovi o modifica le lingue supportate
-admin_index	add_edit_delete_licenses	Aggiungi, rimuovi o modifica Licenze
-admin_index	add_edit_delete_processors	Aggiungi, rimuovi o modifica i processori
-admin_index	add_edit_delete_themes	Aggiungi, rimuovi o modifica i temi
+admin_index	add_delete_edit_file_types	Gestione tipi file
+admin_index	add_delete_edit_laguage	Gestione lingue supportate
+admin_index	add_edit_delete_licenses	Gestione licenze
+admin_index	add_edit_delete_processors	Gestione processori
+admin_index	add_edit_delete_themes	Gestione temi
 admin_index	add_to_trove_map	Aggiungi alla mappa Trove
 admin_index	approve_reject	Approva/rigetta
-admin_index	configman	Gestore delle configurazioni
+admin_index	configman	Gestione configurazioni
 admin_index	cronman	Cron Manager
 admin_index	display_full_group	Visualizza elenco completo dei progetti
 admin_index	display_full_user_list	Visualizza elenco completo degli utenti
 admin_index	display_groups_beginning_with	Visualizza progetti che iniziano con:
-admin_index	display_trove_map	Visualizza mappa Trove
+admin_index	display_trove_map	Gestione mappa Trove
 admin_index	display_user_beginning_with	Visualizza utenti che iniziano con:
 admin_index	front_page_news	Notizie in prima pagina
 admin_index	get	visualizza
@@ -287,8 +287,8 @@ admin_index	mail_engine	Engine di mail per utenti sottoscritti a $1
 admin_index	new_project_approval	(Approvazione nuovi progetti)
 admin_index	news	Notizie
 admin_index	pending_projects_count	Progetti in attesa di approvazione: <strong>$1</strong>
-admin_index	pluginman	Gestore dei plugin
-admin_index	private_groups	Gruppi privati
+admin_index	pluginman	Gestione plugin
+admin_index	private_groups	Progetti privati
 admin_index	project_active	Attivi (A)
 admin_index	project_database_administration	Amministrazione database per i progetti
 admin_index	project_hold	Sospeso(H)
@@ -307,7 +307,7 @@ admin_index	title	Amministrazione sito
 admin_index	translation_file_tool	Strumento per la traduzione
 admin_index	trove_project_tree	Albero dei progetti Trove
 admin_index	user_maintaince	Manutenzione utenti
-admin_index	virtual_host_admin_tool	Amministrazione dei virtual host
+admin_index	virtual_host_admin_tool	Gestione virtual host
 admin_massmail	active_deliveries	Esecuzioni attive
 admin_massmail	all_project_admins	Tutti gli amministratori del progetto
 admin_massmail	all_project_developers	Tutti gli sviluppatori del progetto
@@ -451,7 +451,7 @@ admin_vhost	cgi_dir	CGI Dir
 admin_vhost	error_adding_vhost	Errore nell'aggiunta del VHOST:
 admin_vhost	error_updating_vhost	Errore nell'aggiornamento del VHOST:
 admin_vhost	get_info	Ricava informazioni
-admin_vhost	group	Gruppo
+admin_vhost	group	Progetto
 admin_vhost	group_unix_name	Nome unix del progetto 
 admin_vhost	htdocs_dir	Directory Htdocs
 admin_vhost	no_such_host	Non esiste questo VHOST:
@@ -938,7 +938,7 @@ group	project_developers	Sviluppatori
 group	public_area	Aree pubbliche
 group	registered	Registrato:
 group	rssfeeds	Visualizza una lista di <a href="/export/rss_project.php?group_id=$1">RSS </a> disponibili per questo progetto.
-group	short_activity	Attivit&agrave sul progetto
+group	short_activity	Attivit&agrave; sul progetto
 group	short_admin	Amministrazione
 group	short_bugs	Bugs
 group	short_docman	Documentazione
