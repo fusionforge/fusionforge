@@ -219,7 +219,6 @@ function admin_table_postedit($table, $unit, $primary_key, $whereclause, $column
  */
 function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang) {
         global $HTML;
-
 	//CB// echo "<h1>SELECT * FROM $table $whereclause</h1>";
         $result = db_query("SELECT $columns FROM $table $whereclause;");
 
@@ -270,16 +269,21 @@ $HTML->header(array('title'=>'Edit the '. $lang .' Language '. ucwords($unit) .'
 
 echo '<h3>Edit the '. $lang .' Language ' . ucwords($unit) .'s</h3>
 <p><a href="/admin/">Site Admin Home</a></p>
+<p><a href="/admin/languages/loadtabfiles.php">Translations Home</a></p>
 <p>&nbsp;</p>';
 
+
+/*
 $table = getStringFromRequest('table');
 $unit = getStringFromRequest('unit');
 $primary_key = getStringFromRequest('primary_key');
 $whereclause = getStringFromRequest('whereclause');
 $columns = getStringFromRequest('columns');
 $edit = getStringFromRequest('edit');
+*/
 $id = getStringFromRequest('id');
 $lang = getStringFromRequest('lang');
+
 
 switch (getStringFromRequest('function')) {
 	case 'add' : {

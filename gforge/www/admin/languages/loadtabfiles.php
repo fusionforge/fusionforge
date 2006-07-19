@@ -24,6 +24,7 @@
 
 require_once('pre.php');
 require_once('common/include/account.php');
+require_once('common/include/escapingUtils.php');
 require_once('www/admin/admin_utils.php');
 require_once('www/include/BaseLanguage.class');
 
