@@ -183,7 +183,7 @@ if ($forum_id) {
 	<table border="0" width="33%">
 		<tr><td>'. $options_popup .
 			'</td><td>'. $max_row_popup .
-			'</td><td>><input type="submit" name="submit" value="'.
+			'</td><td><input type="submit" name="submit" value="'.
 			$Language->getText('forum_forum','changeview').'" />
 		</td></tr>
 	</table></form>
