@@ -53,11 +53,11 @@ $ids[]='frsrelease';
 $ids[]='forumpost';
 
 $texts=array();
-$texts[]='Commits';
-$texts[]='Tracker Opened';
-$texts[]='Tracker Closed';
-$texts[]='FRS Release';
-$texts[]='Forum Post';
+$texts[]=$Language->getText('projectactivity','commits');
+$texts[]=$Language->getText('projectactivity','tracker_opened');
+$texts[]=$Language->getText('projectactivity','tracker_closed');
+$texts[]=$Language->getText('projectactivity','frs_release');
+$texts[]=$Language->getText('projectactivity','forum_post');
 
 if (count($show) < 1) {
 	$show=$ids;
@@ -77,7 +77,7 @@ echo db_error();
 
 $rows=db_numrows($res);
 if ($rows<1) {
-	echo 'No Activity Found';
+	echo $Language->getText('projectactivity','no_activity_found');
 } else {
 
 	?>
@@ -93,8 +93,8 @@ if ($rows<1) {
 </tr>
 <tr>
 	<td><?php echo $multiselect; ?></td>
-	<td valign="top"><input name="start_date" value="<?php echo date('Y-m-d',$begin); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input name="end_date" value="<?php echo date('Y-m-d',$end); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="start_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$begin); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="end_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$end); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input type="submit" name="submit" value="Submit"></td>
 </tr>
 </form>
@@ -113,7 +113,7 @@ if ($rows<1) {
 	while ($arr =& db_fetch_array($res)) {
 		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.date('Y-M-d',$arr['activity_date']).'</td>';
+			echo '<tr class="tableheading"><td colspan="3">'.date($Language->getText('system','shortdatefmt'),$arr['activity_date']).'</td>';
 		//	echo $HTML->listTableTop($theader);
 			$last_day=date('Y-M-d',$arr['activity_date']);
 		}
