@@ -1441,6 +1441,12 @@ projectactivity	headerperson	By
 projectactivity	headeractivity	Activity
 projectactivity	startdate	Start
 projectactivity	enddate	End
+projectactivity	commits	Commits
+projectactivity	tracker_opened	Tracker Opened
+projectactivity	tracker_closed	Tracker Closed
+projectactivity	frs_release	FRS Release
+projectactivity	forum_post	Forum Post
+projectactivity	no_activity_found	No Activity Found
 project_admin	add_user	Add User
 project_admin	acceptpending	Accept
 project_admin	rejectpending	Reject
@@ -2656,3 +2662,4 @@ send_pending_items_mail	pm_subject	Pending task manager items notification
 send_pending_items_mail	pm_message	This mail is sent to you to remind you of pending/overdue tasks. \nThe task manager item  #$1 is pending: \nTask Summary: $2\nSubmitted by: $4\nStatus:$5\nPercent Complete: $6\n\nClick here to visit the item $3
 send_pending_items_mail	tracker_subject	Pending tracker  items notification
 send_pending_items_mail	tracker_message	This mail is sent to you to remind you of pending/overdue tracker items. The item #$1 is pending: \nSummary: $3\nStatus: $5\nOpen Date:$6\nAssigned To: $7\nSubmitted by: $8\nDetails: $9\n\n\nClick here to visit the item: $4
+

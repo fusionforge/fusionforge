@@ -1452,10 +1452,16 @@ pm_uploadcsv	explain	Questa pagina ti permette di selezionare un file in formato
 pm_uploadcsv	title	Effettua l'upload dei dati nel Gestore Attività.
 projectactivity	enddate	Fine
 projectactivity	headeractivity	Attivit&agrave; sul progetto
-projectactivity	headerperson	Da
-projectactivity	headertime	Ora
+projectactivity	headerperson	Inserito da
+projectactivity	headertime	Ora inserimento
 projectactivity	headertype	Attivit&agrave; sul progetto
 projectactivity	startdate	Inizio
+projectactivity	commits	Commit
+projectactivity	tracker_opened	Tracker aperti
+projectactivity	tracker_closed	Tracker chiusi
+projectactivity	frs_release	Rilasci file
+projectactivity	forum_post	Inserimenti in forum
+projectactivity	no_activity_found	Nessuna attivit&agrave; trovata
 project_admin	acceptpending	Approva
 project_admin	addfromlist	Aggiungi utenti dall'elenco
 project_admin	addfromlist1	Seleziona la casella di fianco agli utenti che vuoi aggiungere. Le scelte saranno preservate anche quando premi una delle seguenti lettere. Quando hai terminato, premi "Termina" per selezionare i ruoli.
