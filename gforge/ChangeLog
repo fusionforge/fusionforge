@@ -1,3 +1,7 @@
+2006-07-21 Reinhard Spisser <reinhard@spisser.it>
+	* I18n of activity tab
+	* Fixed translation tool which did not work correctly
+	
 2006-06-01 Reinhard Spisser <reinhard@spisser.it>
 	* committing first xhtml compliant theme (gforge-simple-theme)
 
