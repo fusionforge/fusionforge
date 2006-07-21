@@ -1,3 +1,23 @@
+gforge (4.5.14-8+3) unstable; urgency=low
+
+  * [Roland] Uploading to unstable.  This means the bugs that were fixed
+    during the experimental phase can now be closed (closes: #358241,
+    #328224, #375863, #331835, #339646, #374384, #373554, #242186,
+    #376155, #311791, #339878, #354591).
+  * [Roland] fix-lists-url.dpatch: Fixed URL patterns for Mailman pages
+    (closes: #375529).  By using the appropriate URLs, rather than messing
+    with Mailman's configuration.  Adapted the Apache config accordingly.
+  * [Roland] Fixed Postfix configuration (closes: #376284).
+  * [Roland] Removed versioned dependencies on virtual packages, by
+    keeping only the existing packages (closes: #376163).  If new
+    alternatives appear (for new MTAs or mailing-list managers or anything
+    else), I'll be glad to add them in the control file.
+  * [Roland] Applied patch from Julien Cristau
+    <julien.cristau@ens-lyon.org>, whereby sql2ldif.pl now uses the SQL
+    views rather than duplicating their code.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 21 Jul 2006 17:16:01 +0200
+
 gforge (4.5.14-8) experimental; urgency=low
 
   * [Roland] Oops.  Only part of the fix for #376155 had been committed,
