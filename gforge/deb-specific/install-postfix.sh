@@ -66,7 +66,7 @@ $gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 #You may move this block around to accomodate your local needs as long as you
 # keep it in an appropriate position, where \"appropriate\" is defined by you.
 
-pgsql_gforge_users_host = $sys_dbhost
+pgsql_gforge_users_hosts = $sys_dbhost
 pgsql_gforge_users_user = gforge_mta
 pgsql_gforge_users_password = 
 pgsql_gforge_users_dbname = $sys_dbname
@@ -75,7 +75,7 @@ pgsql_gforge_users_select_field = email
 pgsql_gforge_users_table = mta_users
 pgsql_gforge_users_where_field = login
 
-pgsql_gforge_lists_host = $sys_dbhost
+pgsql_gforge_lists_hosts = $sys_dbhost
 pgsql_gforge_lists_user = gforge_mta
 pgsql_gforge_lists_password = 
 pgsql_gforge_lists_dbname = $sys_dbname
