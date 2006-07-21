@@ -7,3 +7,4 @@ disable-tracker-reply-by-email
 add-groupadminmenu-hook
 add-project-before-description-hook
 missing-images
+fix-lists-url
