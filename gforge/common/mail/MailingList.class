@@ -136,7 +136,8 @@ class MailingList extends Error {
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
 		if(!validate_email($realListName.'@'.$GLOBALS['sys_lists_host'])) {
-			$this->setError($Language->getText('mail_common', 'error_invalid_name'));
+			$this->setError($Language->getText('mail_common', 'error_invalid_name') . ': ' .
+			$realListName.'@'.$GLOBALS['sys_lists_host']);
 			return false;
 		}
 
@@ -318,7 +319,11 @@ class MailingList extends Error {
 	 * @return string url of the archives
 	 */
 	function getArchivesUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		if ($this->isPublic()) {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+		} else {
+			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+		}
 	}
 	
 	/**
@@ -357,7 +362,7 @@ class MailingList extends Error {
 			return false;
 		}
 		$sql="INSERT INTO deleted_mailing_lists (mailing_list_name,
-			delete_date,isdeleted) VALUES ('".$this->getName."','".time()."','0')";
+			delete_date,isdeleted) VALUES ('".$this->getName()."','".time()."','0')";
 		$res=db_query($sql);
 		if (!$res) {
 			$this->setError('Could Not Insert Into Delete Queue: '.db_error());

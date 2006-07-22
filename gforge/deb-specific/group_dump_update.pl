@@ -6,6 +6,10 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
+# Run as gforge
+my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
+$> = $uid;
+
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose = 0;
@@ -37,6 +41,9 @@ while(my ($group_id, $unix_gid, $group_name, $status) = $c->fetchrow()) {
 
 	push @group_array, $grouplist;
 }
+
+# Run as root
+$> = 0;
 
 # Now write out the files
 write_array_file($file_dir."/dumps/group_dump", @group_array);
@@ -100,7 +107,7 @@ sub add_group {
 	system("chmod 2775 $log_dir");
 	system("chmod 2775 $cgi_dir");
 	system("chmod 2775 $ht_dir");
-	system("chmod 660 $ht_dir/index.php");
+	system("chmod 664 $ht_dir/index.php");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	chown $dummy_uid, $gid, ("$ht_dir/index.php");
 }

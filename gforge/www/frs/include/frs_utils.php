@@ -89,9 +89,11 @@ function frs_header($params) {
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isReleaseTechnician()) {
 			echo $HTML->subMenu(
 				array(
+					$Language->getText('group','short_files'),
 					$Language->getText('project_admin_utils','admin')
 				),
 				array(
+					'/frs/?group_id='.$group_id,
 					'/frs/admin/?group_id='.$group_id
 				)
 			);

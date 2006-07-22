@@ -131,7 +131,7 @@ for($k = 0; $k < $rows; $k++) {
 	
 	passthru($sys_path_to_mailman."/bin/rmlist -a $deleted_mail_list", $failed);
 	if(!$failed){
-		$res1 = db_query("UPDATE mailing_list_name SET isdeleted = 1 WHERE mailing_list_name = '$deleted_group_name';" );
+		$res1 = db_query("UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = '$deleted_group_name';" );
 		$err .= db_error();
 	}else{
 		$err .= "Colud not remove the list $deleted_mail_list \n";
