@@ -1,3 +1,9 @@
+gforge-plugin-scmcvs (4.5.14-3) unstable; urgency=low
+
+  * [Roland] Upload to unstable (closes: #374385).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 22 Jul 2006 16:59:07 +0200
+
 gforge-plugin-scmcvs (4.5.14-2) experimental; urgency=low
 
   * [Roland] Made the cron jobs silent (closes: #374385).
