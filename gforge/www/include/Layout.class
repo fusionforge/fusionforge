@@ -132,6 +132,7 @@ class Layout extends Error {
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
 	<title><?php echo $params['title']; ?></title>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss20_news.php" type="application/rss+xml"/>
 	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
 
 	<script language="JavaScript" type="text/javascript">
@@ -222,6 +223,7 @@ class Layout extends Error {
 				<b><a style="color: #FFFFFF" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 				<?php
 			}
+			echo $this->quickNav();
 
 		?></td>
 		<td>&nbsp;&nbsp;</td>
@@ -418,9 +420,9 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
-			return 'background="'.$this->imgroot.'vert-grad.png"';
+			return 'bgcolor="#EAEAEA"';
 		} else {
-			return 'background="'.$this->imgroot.'box-grad.png"';
+			return 'bgcolor="#E0E0E0"';
 		}
 	}
 
@@ -799,6 +801,12 @@ if (isset($params['group']) && $params['group']) {
 	function searchBox() {
 		global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
+		if(get_magic_quotes_gpc()) {
+			$defaultWords = stripslashes($words);
+		} else {
+			$defaultWords = $words;
+		}		
+		
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
 			$exact = 1;
@@ -837,7 +845,7 @@ if (isset($params['group']) && $params['group']) {
 			print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
 		}
 		print '</td><td>';
-		print '<input type="text" size="12" name="words" value="'.$words.'" />';
+		print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
 
 		print '</td><td>&nbsp;</td><td>';
 		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
@@ -846,7 +854,7 @@ if (isset($params['group']) && $params['group']) {
 		if (isset($group_id)) {
 			print '
 					<td width="10">&nbsp;</td>
-					<td><b><a style="color: #FFFFFF" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
+					<td><b><a href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
 		}
 		print '</tr></table>';
 		print '</form>';
@@ -914,18 +922,18 @@ if (isset($params['group']) && $params['group']) {
 		$break = $breakLimit;
 		$countLines = 0;
 		$return = '
-			<table width="100%" border="0" cellspacing="0" cellpadding="2" style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+			<table width="100%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
 				<tr>
 					<td>
-						<table width="100%" cellspacing="0" border="0">
-							<tr style="font-weight: bold; background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+						<table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
+							<tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
 								<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
 								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
 							</tr>
-							<tr height="20" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+							<tr height="20">
 								<td colspan="3">&nbsp;</td>
 							</tr>
-							<tr align="center" valign="top" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+							<tr align="center" valign="top">
 								<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
@@ -944,9 +952,9 @@ if (isset($params['group']) && $params['group']) {
 				}
 			}
 		
-			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_HTMLBOX_TITLE.'">
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_LTBACK2.'">
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-							<tr style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'; font-weight: bold">
+							<tr style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
 								<td cellspacing="0">
 									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
 							.'	</td>
@@ -954,7 +962,7 @@ if (isset($params['group']) && $params['group']) {
 								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
 								</td>
 							</tr>
-							<tr style="background-color:'. $this->COLOR_CONTENT_BACK.'">
+							<tr style="background-color:'. $this->COLOR_LTBACK1.'">
 								<td colspan="2">';
 								
 			if (!is_array($section)) {
@@ -1112,6 +1120,118 @@ if (isset($params['group']) && $params['group']) {
 	 	$res=db_query("SELECT theme_id FROM themes WHERE dirname='$dirname'");
 	        return db_result($res,0,'theme_id');
 	}
+
+	function quickNav() {
+		if (!session_loggedin()) {
+			return '';
+		} else {
+			$res=db_query("SELECT * FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' ORDER BY group_name");
+echo db_error();
+			if (!$res || db_numrows($res) < 1) {
+				return '';
+			} else {
+				$ret = '
+		<form name="quicknavform">
+			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
+				$ret .= '
+				<option value="">Quick Jump To...</option>';
+				for ($i=0; $i<db_numrows($res); $i++) {
+					$ret .= '
+				<option value="/projects/'.db_result($res,$i,'unix_group_name').'/">'.db_result($res,$i,'group_name').'</option>';
+					if (trim(db_result($res,$i,'admin_flags'))=='A') {
+					$ret .= '
+				<option value="/project/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+					}
+		//tracker
+					if (db_result($res,$i,'use_tracker')) {
+					$ret .= '
+				<option value="/tracker/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
+						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'tracker_flags')) {
+					$ret .= '
+				<option value="/tracker/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//task mgr
+					if (db_result($res,$i,'use_pm')) {
+					$ret .= '
+				<option value="/pm/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
+						if (trim(db_result($res,$i,'admin_flags')) =='A' || db_result($res,$i,'project_flags')) {
+					$ret .= '
+				<option value="/pm/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//FRS
+					if (db_result($res,$i,'use_frs')) {
+					$ret .= '
+				<option value="/frs/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'release_flags')) {
+					$ret .= '
+				<option value="/frs/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//SCM
+					if (db_result($res,$i,'use_scm')) {
+					$ret .= '
+				<option value="/scm/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>';
+						/*if (db_result($res,$i,'admin_flags') || db_result($res,$i,'project_flags')) {
+					$ret .= '
+				<option value="/pm/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						} */
+					}
+		//forum
+					if (db_result($res,$i,'use_forum')) {
+					$ret .= '
+				<option value="/forum/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'forum_flags')) {
+					$ret .= '
+				<option value="/forum/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//mail
+					if (db_result($res,$i,'use_mail')) {
+					$ret .= '
+				<option value="/mail/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
+					$ret .= '
+				<option value="/mail/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//doc
+					if (db_result($res,$i,'use_docman')) {
+					$ret .= '
+				<option value="/docman/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'doc_flags')) {
+					$ret .= '
+				<option value="/docman/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//news
+					if (db_result($res,$i,'use_news')) {
+					$ret .= '
+				<option value="/news/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
+					$ret .= '
+				<option value="/news/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+		//survey
+					if (db_result($res,$i,'use_survey')) {
+					$ret .= '
+				<option value="/survey/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>';
+						if (trim(db_result($res,$i,'admin_flags'))=='A') {
+					$ret .= '
+				<option value="/survey/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+						}
+					}
+				}	
+				$ret .= '
+			</select>
+		</form>';
+			}
+		}
+		return $ret;
+	}
+
 }
 
 // Local Variables:

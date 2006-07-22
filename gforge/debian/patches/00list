@@ -2,3 +2,4 @@
 # This one was used for testing and is not included in gforge upstream
 #taskdetailview
 #globalsoff
+disable-tracker-reply-by-email

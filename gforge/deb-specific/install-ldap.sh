@@ -222,22 +222,22 @@ access to attribute=userPassword
 
 	# odd looking regex makes sure it doesnt match the comment 'access to *'
 	perl -pi -e "s/(?<!')access to \*(?!')/# Next lines added by GForge install
-access to dn.children=\"ou=People,$gforge_base_dn\"
+access to dn.subtree=\"ou=People,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn.children=\"ou=Group,$gforge_base_dn\"
+access to dn.subtree=\"ou=Group,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn.children=\"ou=mailingList,$gforge_base_dn\"
+access to dn.subtree=\"ou=mailingList,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn.children=\"ou=cvsGroup,$gforge_base_dn\"
+access to dn.subtree=\"ou=cvsGroup,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
@@ -360,7 +360,7 @@ EOF
     tmpldifadd=$(mktemp $tmpfile_pattern)
     tmpldifmod=$(mktemp $tmpfile_pattern)
     dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-    /usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
+    su -s /bin/sh gforge -c /usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
     # echo "Filling LDAP with database"
     if ! eval "ldapadd -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
         # Some entries could not be added (already there)

@@ -32,8 +32,9 @@ class PeopleSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
+		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM users_search('".$this->formatWords()."')";
+			$sql = "SELECT * FROM users_search('".$this->getFormattedWords()."')";
 		} else {
 			$sql = 'SELECT user_name,user_id,realname ' 
 				. 'FROM users ' 
