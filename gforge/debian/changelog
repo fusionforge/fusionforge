@@ -1,4 +1,4 @@
-gforge (4.5.14-8+3) unstable; urgency=low
+gforge (4.5.14-9) unstable; urgency=low
 
   * [Roland] Uploading to unstable.  This means the bugs that were fixed
     during the experimental phase can now be closed (closes: #358241,
@@ -16,7 +16,7 @@ gforge (4.5.14-8+3) unstable; urgency=low
     <julien.cristau@ens-lyon.org>, whereby sql2ldif.pl now uses the SQL
     views rather than duplicating their code.
 
- -- Roland Mas <lolando@debian.org>  Fri, 21 Jul 2006 17:16:01 +0200
+ -- Roland Mas <lolando@debian.org>  Sat, 22 Jul 2006 16:43:57 +0200
 
 gforge (4.5.14-8) experimental; urgency=low
 
