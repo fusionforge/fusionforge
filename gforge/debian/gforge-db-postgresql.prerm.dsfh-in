@@ -3,6 +3,32 @@
 #
 # see: dh_installdeb(1)
 
+# Support for new place for pg_hba.conf
+# I only try to upgrade on the default cluster
+if [ -x /usr/bin/pg_lsclusters ]
+then 
+	# We are with new postgresql working with clusters
+	# This is probably not te most elegant way to deal with database
+	# I install or upgrade on the default cluster if it is online
+	# or I quit gently with a big message
+	pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
+	if [ "x$pg_version" != "x" ] 
+	then 
+		export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+	else
+		echo "No database found online on port 5432"
+		echo "Couldn't initialize or upgrade gforge database."
+		echo "Please see postgresql documentation"
+		echo "and run dpkg-reconfigure -plow gforge-db-postgresql"
+		echo "once the problem is solved"
+		echo "exiting without error, but gforge db will not work"
+		echo "right now"
+		exit 0
+	fi
+else
+    	export pg_hba_dir=/etc/postgresql
+fi
+
 set -e
 
 # summary of how this script can be called:
@@ -24,7 +50,7 @@ case "$1" in
 
         # Unpatch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh purge-files
-	propose_update_remove /etc/postgresql/pg_hba.conf
+	propose_update_remove ${pg_hba_dir}/pg_hba.conf
 
         # DB config removal
 	/usr/lib/gforge/bin/install-db.sh purge

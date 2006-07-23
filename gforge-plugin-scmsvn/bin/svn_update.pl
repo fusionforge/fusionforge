@@ -74,9 +74,10 @@ while ($ln = pop(@group_array)) {
 
 	# Right management
 	if ($group_exists && $use_scm && $status eq 'A'){
+	    if ($enable_anonscm) {
 		chmod 02775, "$svn_dir";
-		# TODO restrict permission when $enable_anonscm is
-		# true thanks subversion.conf and maybe unix rights
-		# also
+	    } else {
+		chmod 02070, "$svn_dir";
+	    }
 	}
 }

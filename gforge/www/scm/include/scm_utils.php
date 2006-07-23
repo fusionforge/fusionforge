@@ -50,9 +50,11 @@ function scm_header($params) {
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 				echo $HTML->subMenu(
 				array(
+					$Language->getText('scm_index','title'),
 					$Language->getText('scm_index','admin')
 				),
 				array(
+					'/scm/?group_id='.$params['group'],
 					'/scm/admin/?group_id='.$params['group']
 				)
 			);

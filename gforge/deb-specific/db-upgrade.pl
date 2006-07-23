@@ -1589,9 +1589,27 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-2+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with migrateforum.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migrateforum.php") == 0 
-	or die "system call of 20040826_migrateforum.php failed: $?" ;
+        &debug ("Migrating forum names") ;
+	
+	$query = "SELECT group_forum_id,forum_name FROM forum_group_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $forumid = $array[0] ;
+	    my $oldname = $array[1] ;
+	    
+	    my $newname = lc $oldname ;
+	    $newname =~ s/[^_.0-9a-z-]/-/g ;
+	    
+	    my $query2 = "UPDATE forum_group_list SET forum_name='$newname' WHERE group_forum_id=$forumid" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2163,9 +2181,68 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-8" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050617.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050617.php") == 0
-	or die "system call of 20050617.php failed: $?" ;
+        &debug ("Creating aliases for the extra fields") ;
+
+	my %reserved_alias = (
+	    "project" => 1,
+	    "type" => 1,
+	    "priority" => 1,
+	    "assigned_to" => 1,
+	    "summary" => 1,
+	    "details" => 1,
+	) ;
+
+	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $name = $array[0] ;
+	    my $alias = $array[1] ;
+	    my $gaid = $array[2] ;
+	    my $efid = $array[3] ;
+
+	    if (! $alias) {
+		my $newalias = lc $name ;
+		$newalias =~ s/\s/_/g ;
+		$newalias =~ s/[^_a-z]//g ;
+		
+		if ($newalias ne "") {
+		    if ($reserved_alias{$newalias}) {
+			$newalias = "extra_" . $newalias ;
+		    }
+		    
+		    my $candidate ;
+		    my $conflict = 0 ;
+		    my $count = 0 ;
+		    do {
+			$candidate = $newalias ;
+			$candidate .= $count if ($count > 0) ;
+			my $query2 = "SELECT count(*) FROM artifact_extra_field_list WHERE group_artifact_id=$gaid AND LOWER(alias)='$candidate' AND extra_field_id <> $efid" ;
+			# &debug ($query2) ;
+			my $sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			my @array2 = $sth2->fetchrow_array ;
+			if ($array2[0] == 0) {
+			    $conflict = 0 ;
+			} else {
+			    $conflict = 1 ;
+			    $count++ ;
+			}
+			$sth2->finish () ;
+		    } until ($conflict == 0) ;
+			
+		    my $query2 = "UPDATE artifact_extra_field_list SET alias='$candidate' WHERE extra_field_id=$efid" ;
+		    # &debug ($query2) ;
+		    my $sth2 =$dbh->prepare ($query2) ;
+		    $sth2->execute () ;
+		    $sth2->finish () ;
+		}
+	    }
+
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2190,6 +2267,133 @@ $dbh->{RaiseError} = 1;
         &debug ("Committing.") ;
         $dbh->commit () ;
     }
+
+    $version = &get_db_version ;
+    $target = "4.5-1" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050711.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050711.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-2" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050906.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050906.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20051027-1.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20051027-1.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-4" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20051027-2.php") ;
+	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20051027-2.php") == 0
+	or die "system call of 20051027-2.php failed: $?" ;
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5.14-3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Setting up time tracking") ;
+
+	if (&table_exists ($dbh, "rep_time_category")) {
+	    &debug ("...already set up.") ;
+	} else {
+	    &drop_table_if_exists ($dbh, "rep_time_category") ;
+	    &drop_sequence_if_exists ($dbh, "rep_time_category_time_code_seq") ;
+	    &drop_table_if_exists ($dbh, "rep_time_tracking") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_monthly") ;
+	    &drop_view_if_exists ($dbh, "rep_group_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_user_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_daily_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_weekly_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_monthly_vw") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_daily") ;
+	    &drop_index_if_exists ($dbh, "repgroupactdaily_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_weekly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactweekly_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_monthly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactmonthly_monthly") ;
+
+	    @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/timetracking-init.sql") } ;
+	    foreach my $s (@reqlist) {
+		$query = $s ;
+		# debug $query ;
+		$sth = $dbh->prepare ($query) ;
+		$sth->execute () ;
+		$sth->finish () ;
+	    }
+	    @reqlist = () ;
+	}
+	
+	&update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
     &debug ("Please enjoy using GForge.") ;
@@ -2222,7 +2426,12 @@ $dbh->rollback ;
 $dbh->disconnect ;
 
 sub get_pg_version () {
-    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    my $command;
+    if (-x '/usr/bin/pg_lsclusters' ) {
+    	$command = q(/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1) ;
+    } else {
+    	$command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    }
     my $version = qx($command) ;
     chomp $version ;
     return $version ;
