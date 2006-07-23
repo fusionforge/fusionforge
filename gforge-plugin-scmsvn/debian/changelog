@@ -1,11 +1,11 @@
 gforge-plugin-scmsvn (4.5.14-3) unstable; urgency=low
 
   * [Roland] Made repositories actually not-accessible when the anonymous
-    SCM option is disabled.
+    SCM option is disabled (closes: #376513).
   * [Roland] Started using dpatch.  First patch: disable-dav, to switch
     SVN over to SSH (for developers) and svnserve (for anonymous).
 
- -- Roland Mas <lolando@debian.org>  Sun, 23 Jul 2006 15:02:57 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 23 Jul 2006 15:07:33 +0200
 
 gforge-plugin-scmsvn (4.5.14-2) unstable; urgency=low
 
