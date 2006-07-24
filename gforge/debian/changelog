@@ -1,3 +1,10 @@
+gforge (4.5.14-9+1) unstable; urgency=low
+
+  * [Roland] Fixed control file (it referenced a gforge-plugin-scmcase
+    package that never existed, rather than -scmccase).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 24 Jul 2006 12:02:02 +0200
+
 gforge (4.5.14-9) unstable; urgency=low
 
   * [Roland] Uploading to unstable.  This means the bugs that were fixed

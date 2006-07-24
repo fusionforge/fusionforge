@@ -24,7 +24,7 @@ Description: collaborative development tool - meta-package
 Package: gforge-common
 Architecture: all
 Depends: debconf (>= 1.0.32) | debconf-2.0, cpio, lockfile-progs, adduser
-Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1),gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmcase (<< 4.1), gforge-theme-starterpack (<< 4.0)
+Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1), gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmccase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
