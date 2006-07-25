@@ -772,7 +772,7 @@ forum_common	error_adding_forum	Errore nella creazione del forum
 forum_common	error_illegal_characters	Il nome del forum contiene caratteri non validi
 forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
 forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
-forum_common	error_save_when_logged_in	Si può salvare la posizione solo quando si è colleggati
+forum_common	error_save_when_logged_in	Si pu&ograve; salvare la posizione solo quando si è colleggati
 forum_common	error_set_monitor	Puoi richiedere la notifica di un forum solo se sei collegato
 forum_common	error_unable_to_add_monitor	Impossibile aggiungere la notifica
 forum_common_forum	error_save_place	Forum::savePlace()
@@ -793,7 +793,8 @@ forum_forum	changeview	Cambia Vista
 forum_forum	currentfile	File corrente
 forum_forum	date	Data
 forum_forum	description	Descrizione
-forum_forum	filetoupload	File da inserireforum_forum	flat	Piatto
+forum_forum	filetoupload	File da inserire
+forum_forum	flat	Piatto
 forum_forum	forum	Forum
 forum_forum	lastpost	Ultimo messaggio
 forum_forum	mod0	Non moderato
@@ -818,7 +819,7 @@ forum_forum	ultimate	Ultimi
 forum_message	by	DA
 forum_message	date	DATA
 forum_message	message	Messaggio
-forum_message	message_not_found_body	Il messaggio non esiste (più).
+forum_message	message_not_found_body	Il messaggio non esiste pi&ugrave;.
 forum_message	message_not_found_title	Messaggio non trovato
 forum_message	must_choose_message_body	Devi prima scegliere un messaggio a cui rispondere
 forum_message	must_choose_message_title	Devi prima scegliere un messaggio a cui rispondere
