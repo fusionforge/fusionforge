@@ -800,7 +800,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 	 */
 	function beginSubMenu () {
 		$return = '
-			<p/><strong>';
+			<p><strong>';
 		return $return;
 	}
 
