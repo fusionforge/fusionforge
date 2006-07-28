@@ -153,7 +153,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 ?> 
 <p><?php echo $Language->getText('project_admin','shell_server') ?><strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong></p>
 <p><?php echo $Language->getText('project_admin','shell_server_group_directory') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
-<p><?php echo $Language->getText('project_admin','www_directory') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></p>
+<p><?php echo $Language->getText('project_admin','www_directory') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
 	} //end of use_shell condition
 ?> 
@@ -223,7 +223,7 @@ echo $HTML->boxBottom();
 			AND user_group.group_id='$group_id' ORDER BY user_id");
 
 		echo '
-		<table width="100% border="2">
+		<table width="100%" border="2">
 			<tr><td><strong>'.$Language->getText('project_admin','unix_name').'</strong></td>
 			<td><strong>'.$Language->getText('rbac_edit','role').'</strong></td>
 			<td><strong>'.$Language->getText('rbac_edit','update').'</strong></td>

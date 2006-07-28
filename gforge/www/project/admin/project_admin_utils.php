@@ -154,7 +154,7 @@ function show_grouphistory ($group_id) {
 	
 		echo '
 		<h3>'.$Language->getText('project_admin_utils','change_history').'</h3>
-		<p>';
+		<p/>';
 		$title_arr=array();
 		$title_arr[]=$Language->getText('project_admin_utils','field');
 		$title_arr[]=$Language->getText('project_admin_utils','old_value');
