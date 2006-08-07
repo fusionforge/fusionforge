@@ -1591,7 +1591,7 @@ project_admin_editrelease	update_refresh	Update/Refresh
 project_admin_editrelease	upload_change_log	Upload Change Log
 project_admin_editrelease	upload_new_file	Upload a new file
 project_admin_editrelease	upload_release_notes	Upload Release Notes
-project_admin_group_trove	intro	<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.
+project_admin_group_trove	intro	<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted</p>.
 project_admin_group_trove	title	Group Trove Information
 project_admin_group_trove	update_changes	Update All Category Changes
 project_admin_history	info	This log will show who made significant changes to your project and when
@@ -2070,7 +2070,7 @@ snippet_package	suggest_a_language	Suggest a Language
 snippet_package	title	Submit A New Snippet Package
 snippet_package	title_new_snippet_package	Submit A New Snippet Package
 snippet_package	version	Version
-snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
 snippet_submit	category	Category
 snippet_submit	description	Description
 snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!

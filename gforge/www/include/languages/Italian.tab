@@ -83,7 +83,7 @@ account_lostpw	notify	<p>è stata inviata una email all'indirizzo indicato nel d
 account_lostpw	sendhash	Invia codice hash della password smarrita
 account_lostpw	subject	Verifica da $1
 account_lostpw	user_dont_exist	L'utente specificato non esiste.
-account_lostpw	warn	<P>Attenzione... smarrire la propria password è una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero.</p><p>Cliccando su "Invia Hash di password persa" ti verrà inviato un link all'indirizzo email registrato. Questo link contiene un codice hash di conferma a 128-bit per il tuo account. Visitando il link indicato nella email sarai in grado di cambiare la password online e di effettuare il login.</p>
+account_lostpw	warn	<p>Attenzione... smarrire la propria password è una questione seria. Compromette la sicurezza del proprio account, dei progetti e del sito intero.</p><p>Cliccando su "Invia Hash di password persa" ti verrà inviato un link all'indirizzo email registrato. Questo link contiene un codice hash di conferma a 128-bit per il tuo account. Visitando il link indicato nella email sarai in grado di cambiare la password online e di effettuare il login.</p>
 account_options	address	Indirizzo completo:
 account_options	ccode	Nazione:
 account_options	change_email_address	Cambia indirizzo e-mail
@@ -105,7 +105,7 @@ account_options	user_id	Id utente:
 account_options	view_developer_profile	Visualizza il mio profilo
 account_options	welcome	Benvenuto
 account_register	ccode	Nazione:
-account_register	communitymail	Desidero ricevere email dalla comunità <I>(poco traffico).</I>
+account_register	communitymail	Desidero ricevere email dalla comunità <i>(poco traffico).</i>
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.</p><p> Ti verrà inviata una email di conferma per verificare il tuo indirizzo email. Visita il link indicato nella email per attivare il tuo account.</p>
 account_register	emailaddr	Indirizzo email:<span class="important">*</span><br /><em>Questo indirizzo email sarà verificato prima dell'attivazione dell'account e non verrà visualizzato sul sito. Riceverai un account di ridirezione &lt;loginname@$1&gt; che inoltrerà le mail a questo indirizzo.</em>
 account_register	err_badinsert	Inserimento fallito
@@ -129,7 +129,7 @@ account_register	loginname	Login (non usare maiuscole):
 account_register	mandatory	I campi indicati con $1 sono obbligatori.
 account_register	message_body	Grazie per la tua registrazione sul sito $4.\nE' stato creato un account con nome utente $1.\nPer completare la registrazione, visita l'URL:\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Se non vedi alcuni link qui sopra, probabilmente si tratta di un bug nel tuo sistema di email.\nUsa il seguente, assicurandoti che tutto venga inserito in una riga sola.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\\nGrazie.\n\n-- il team $4\n
 account_register	message_header	Registrazione account $1
-account_register	partecipate_peer_ratings	Partecipa alle valutazioni. <I>(Permette di valutare altri utenti utilizzando criteri diversi ed essere valutato da altri. Se avete intenzione di partecipare alle valutazione, potete ottenere maggiori informazioni sulla vostra $1 homepage </a>)</i>.
+account_register	partecipate_peer_ratings	Partecipa alle valutazioni. <i>(Permette di valutare altri utenti utilizzando criteri diversi ed essere valutato da altri. Se avete intenzione di partecipare alle valutazione, potete ottenere maggiori informazioni sulla vostra $1 homepage </a>)</i>.
 account_register	password	Password (minimo 6 caratteri):
 account_register	password2	Conferma password:
 account_register	Preferences	Preferenze
@@ -137,7 +137,7 @@ account_register	register	Registra
 account_register	remember_me	"Ricordati di me". <i>(Permette di accedere alla tua $1 pagina personale</a> senza essere loggato. È comunque necessario loggarsi prima di fare qualsiasi modifica.)</i>
 account_register	resend_pending	[Rispedisci l'email di conferma di un nuovo account]
 account_register	reset	Annulla le modifiche
-account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione)</I>.
+account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito <i>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione)</i>.
 account_register	theme	Tema
 account_register	timezone	Fuso orario:
 account_register	update	Applica modifiche
@@ -974,7 +974,7 @@ help_trove_cat	description	Descrizione
 help_trove_cat	full_category_name	Nome completo della categoria
 help_trove_cat	no_such_category	Categoria Trove inesistente
 help_trove_cat	short_name	Nome breve
-home	about_blurb	<P>$1 è un <B>servizio gratuito agli sviluppatori <A href="http://www.opensource.org/">Open Source</A></B> che offre un accesso facilitato al meglio tra CVS, mailing list, bug tracking, forum di messaggi, gestione attività, site hosting, archivio permanente di file, backup completi, e amministrazione completamente via web.</P><P><B>Site Feedback e Participazione</B></P><P>Per ottenere il massimo da $1, dovrai <A href="/account/register.php">registrarti come utente del sito</A>. Questo ti consentirà di partecipare a pieno titolo in tutto quello che abbiamo da offrire. Puoi ovviamente visitare il sito senza registrarti, ma in quel modo non potrai accedere in modo completo.</P><P><B>Apri un tuo progetto personale</B></P><P><A href="/account/register.php">Registrati come utente del sito</A>, poi <A HREF="/account/login.php">collegati</A> e infine, <A HREF="/register/">Registra il tuo progetto</A>.</P><P>Grazie.... e goditi il sito.</P>
+home	about_blurb	<p>$1 è un <B>servizio gratuito agli sviluppatori <A href="http://www.opensource.org/">Open Source</A></B> che offre un accesso facilitato al meglio tra CVS, mailing list, bug tracking, forum di messaggi, gestione attività, site hosting, archivio permanente di file, backup completi, e amministrazione completamente via web.</p><p><b>Site Feedback e Participazione</B></P><P>Per ottenere il massimo da $1, dovrai <A href="/account/register.php">registrarti come utente del sito</A>. Questo ti consentirà di partecipare a pieno titolo in tutto quello che abbiamo da offrire. Puoi ovviamente visitare il sito senza registrarti, ma in quel modo non potrai accedere in modo completo.</P><P><B>Apri un tuo progetto personale</B></P><P><A href="/account/register.php">Registrati come utente del sito</A>, poi <A HREF="/account/login.php">collegati</A> e infine, <A HREF="/register/">Registra il tuo progetto</A>.</P><P>Grazie.... e goditi il sito.</P>
 home	gforge_statistics	Statistiche $1
 home	highest_ranked_users	Utenti più valutati
 home	hosted_projects	Progetti ospitati
@@ -1007,7 +1007,7 @@ mail	external_administration	Iscrizione/Elimina Iscrizione/Preferenze
 mail	help_to_request	Amministratori di progetto utilizzano questo link per richiedere mailing list.
 mail	mailinglists_for	Mailing List per $1
 mail	no_list_found	Nessuna lista trovata per $1
-mail	provided_by	<P>Le mailing list sono gestite da una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>. Grazie ai team di Mailman e <A href="http://www.python.org">Python</A> per il software eccezionale.</p>
+mail	provided_by	<p>Le mailing list sono gestite da una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>. Grazie ai team di Mailman e <A href="http://www.python.org">Python</A> per il software eccezionale.</p>
 mail	unable_to_get_lists	Impossibile ottenere le liste
 mail_admin	add_list	Aggiungi Mailing List
 mail_admin	admin_in_mailman	Amministra
@@ -1157,7 +1157,7 @@ news_submit	errorboth	ERRORE - oggetto e messaggio sono obbligatori
 news_submit	errorinsert	ERRORE durante l'inserimento
 news_submit	forproject	Per il progetto
 news_submit	newsadded	News aggiunta.
-news_submit	post_blurb	È possibile inserire news sul progetto se si è un amministratore del progetto. È anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<P>Tutti i messaggi <B>per il tuo progetto</B> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunità dovranno essere approvate da un membro del team di news di $1 prima che questi vengano pubblicate sulla homepage di $1.<P>Si possono inserire URL, ma non codice <P>URL che iniziano con http:// saranno resi cliccabili.
+news_submit	post_blurb	È possibile inserire news sul progetto se si è un amministratore del progetto. È anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<p>Tutti i messaggi <B>per il tuo progetto</B> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunità dovranno essere approvate da un membro del team di news di $1 prima che questi vengano pubblicate sulla homepage di $1.<p>Si possono inserire URL, ma non codice </p>URL che iniziano con http:// saranno resi cliccabili.
 news_submit	subject	Oggetto
 news_utils	archive	Archivio News
 news_utils	comment_1	Commento
@@ -1165,7 +1165,7 @@ news_utils	comment_2	Commenti
 news_utils	nonews	Nessuna news trovata
 news_utils	readmore	Leggi&nbsp;altro/Replica
 news_utils	submit	Invia per
-people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</P><P>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</P><P>Consulta i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
+people	about_blurb	<p>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</p><p>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</P><P>Consulta i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
 people	action	Azione
 people	added_skill	Aggiungi a elenco competenze
 people	add_new_skill	Aggiungi nuova competenza
