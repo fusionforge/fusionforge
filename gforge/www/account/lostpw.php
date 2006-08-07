@@ -75,8 +75,7 @@ echo $Language->getText('account_lostpw','warn');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
-<p>
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
 <br />
 <input type="text" name="loginname" />

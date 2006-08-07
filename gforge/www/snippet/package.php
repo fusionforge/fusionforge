@@ -117,9 +117,9 @@ function show_add_snippet_box() {
 
 	?>
 	</p><?php echo $Language->getText('snippet_package','you_can_group'); ?></p>
-	<p>
+	<p/>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />
 
@@ -130,7 +130,7 @@ function show_add_snippet_box() {
 	</td></tr>
 
 	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_package','description'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<textarea name="description" rows="5" cols="45" wrap="soft"></textarea>
+		<textarea name="description" rows="5" cols="45"></textarea>
 	</td></tr>
 
 	<tr>
@@ -157,7 +157,7 @@ function show_add_snippet_box() {
 		<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_package','submit'); ?>" />
 	</td></tr>
 
-	</table></form></p>
+	</table></form>
 	<?php
 	snippet_footer(array());
 

@@ -92,7 +92,7 @@ if (!isset($ccode) || empty($ccode)) {
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
 <?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
 <input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />

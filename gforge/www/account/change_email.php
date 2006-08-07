@@ -78,7 +78,7 @@ echo $Language->getText('account_change_email', 'desc');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <?php echo $Language->getText('account_change_email','new_address') ?>
 <input type="text" name="newemail" maxlength="255" />
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />

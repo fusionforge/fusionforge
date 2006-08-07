@@ -55,7 +55,7 @@ if (getStringFromRequest('submit')) {
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p><?php echo $Language->getText('account_editsshkeys', 'authorized_keys'); ?>
 <br />
-<textarea rows="10" name="authorized_keys" style="width:90%;">
+<textarea rows="10" cols="80" name="authorized_keys" style="width:90%;">
 <?php echo $u->getAuthorizedKeys(); ?>
 </textarea></p>
 <p><input type="submit" name="submit" value="<?php echo $Language->getText('general', 'update'); ?>" /></p>

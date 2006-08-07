@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 	?>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php echo $Language->getText('account_change_pw','old_password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>
 	<p><?php echo $Language->getText('account_change_pw','new_password') ?>:

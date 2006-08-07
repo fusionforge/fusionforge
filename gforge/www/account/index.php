@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 site_user_header(array('title'=>$Language->getText('account_options', 'title')));
 
 echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
+echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
 echo $HTML->boxTop($Language->getText('account_options', 'title'));
 
 ?>
@@ -174,27 +174,27 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'address'); ?></td>
-	<td><input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"></td>
+	<td><input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/></td>
 </tr>
 
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'address'); ?></td>
-	<td><input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"></td>
+	<td><input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/></td>
 </tr>
 
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'phone'); ?></td>
-	<td><input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"></td>
+	<td><input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/></td>
 </tr>
 
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'fax'); ?></td>
-	<td><input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"></td>
+	<td><input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/></td>
 </tr>
 
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'title2'); ?></td>
-	<td><input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"></td>
+	<td><input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/></td>
 </tr>
 
 <?php
@@ -236,6 +236,7 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
 	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
 <?php } ?>	
+</td></tr>
 <?php 
 $hookParams['user']= user_get_object(user_getid());
 if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
@@ -243,8 +244,8 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 } else {
 	plugin_hook("userisactivecheckbox", $hookParams);
 }
-
 ?>
+<tr><td>
 
 <?php echo $HTML->boxBottom();
 
@@ -266,10 +267,9 @@ if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 	echo $HTML->boxBottom();
 }
 ?>
+
 </td>
 </tr>
-
-
 
 </table>
 
