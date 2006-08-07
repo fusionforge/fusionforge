@@ -82,9 +82,9 @@ if ($rows<1) {
 
 	?>
 <br />
-<table border="0" cellspacing="0" cellpadding="3">
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>"/>
+<table border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td><strong><?php echo $Language->getText('projectactivity','headeractivity') ?></strong></td>
 	<td><strong><?php echo $Language->getText('projectactivity','startdate') ?></strong></td>
@@ -95,10 +95,10 @@ if ($rows<1) {
 	<td><?php echo $multiselect; ?></td>
 	<td valign="top"><input name="start_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$begin); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input name="end_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$end); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input type="submit" name="submit" value="Submit"></td>
+	<td valign="top"><input type="submit" name="submit" value="Submit"/></td>
 </tr>
-</form>
 </table>
+</form>
 <br />
 	<?php
 
@@ -113,7 +113,7 @@ if ($rows<1) {
 	while ($arr =& db_fetch_array($res)) {
 		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.date($Language->getText('system','shortdatefmt'),$arr['activity_date']).'</td>';
+			echo '<tr class="tableheading"><td colspan="3">'.date($Language->getText('system','shortdatefmt'),$arr['activity_date']).'</td></tr>';
 		//	echo $HTML->listTableTop($theader);
 			$last_day=date('Y-M-d',$arr['activity_date']);
 		}
