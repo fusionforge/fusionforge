@@ -1,10 +1,12 @@
-gforge (4.5.14-9+2) unstable; urgency=low
+gforge (4.5.14-9+3) unstable; urgency=low
 
   * [Roland] Fixed control file (it referenced a gforge-plugin-scmcase
     package that never existed, rather than -scmccase).
   * [Roland] Updated from CVS.
+  * [Roland] Updated French debconf templates translation, from Christian
+    Perrier and the French l10n team (closes: #382589).
 
- -- Roland Mas <lolando@debian.org>  Mon, 24 Jul 2006 12:03:46 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 16 Aug 2006 20:49:41 +0200
 
 gforge (4.5.14-9) unstable; urgency=low
 
