@@ -690,7 +690,8 @@ class ForumMessage extends Error {
 		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+		$extra_headers = "Return-Path: <noreply@gforge.org>\n";
+		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
@@ -749,7 +750,8 @@ class ForumMessage extends Error {
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+		$extra_headers = "Return-Path: <noreply@gforge.org>\n";
+		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
@@ -843,7 +845,8 @@ class ForumMessage extends Error {
 			"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 	
-			$extra_headers = "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+			$extra_headers = "Return-Path: <noreply@gforge.org>\n";
+			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
 				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
 				."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
