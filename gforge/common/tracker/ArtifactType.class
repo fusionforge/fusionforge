@@ -856,7 +856,7 @@ class ArtifactType extends Error {
 		db_query("DELETE FROM artifact_monitor
 			WHERE EXISTS (SELECT artifact_id FROM artifact 
 			WHERE group_artifact_id='".$this->getID()."'
-			AND artifact.artifact_id=artifact_history.artifact_id)");
+			AND artifact.artifact_id=artifact_monitor.artifact_id)");
 //echo '9'.db_error();
 		db_query("DELETE FROM artifact
 			WHERE group_artifact_id='".$this->getID()."'");
@@ -1228,5 +1228,10 @@ class ArtifactType extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+$no_gz_buffer=true;
 // 0. Include GForge files for access to GForge system
 require_once('www/include/squal_pre.php');
 require_once('www/include/BaseLanguage.class');
@@ -85,9 +86,10 @@ require_once('www/soap/common/group.php');
 require_once('www/soap/common/user.php');
 
 //
-//	Include tracker Functions
+//	Include tracker & Query Functions
 //
 require_once('www/soap/tracker/tracker.php');
+require_once('www/soap/tracker/query.php');
 
 //
 //	Include task manager Functions
@@ -98,6 +100,12 @@ require_once('www/soap/pm/pm.php');
 //	Include frs Functions
 //
 require_once('www/soap/frs/frs.php');
+
+//
+//      Include Docman Functions
+//
+require_once('www/soap/docman/docman.php');
+
 
 
 $wsdl_data = $server->wsdl->serialize();
@@ -143,7 +151,7 @@ function login($userid, $passwd) {
 	$res = session_login_valid($userid, $passwd);
 	
 	if (!$res) {
-		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, $feedback);
+		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid, $feedback);
  	}
 	
 	return $session_ser;
