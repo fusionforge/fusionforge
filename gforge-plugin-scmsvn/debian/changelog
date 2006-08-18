@@ -1,3 +1,10 @@
+gforge-plugin-scmsvn (4.5.14-4) unstable; urgency=low
+
+  * [Roland] Depend on python-subversion rather than python2.3-subversion
+    to follow the new Python policy (closes: #383381).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Aug 2006 19:37:51 +0200
+
 gforge-plugin-scmsvn (4.5.14-3) unstable; urgency=low
 
   * [Roland] Made repositories actually not-accessible when the anonymous
