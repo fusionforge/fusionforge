@@ -1,3 +1,10 @@
+gforge-plugin-scmcvs (4.5.14-4) unstable; urgency=low
+
+  * [Roland] Removed cvs.$hostname virtualhosts from Apache configuration,
+    since they weren't used for anything (closes: #375345).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Aug 2006 13:47:50 +0200
+
 gforge-plugin-scmcvs (4.5.14-3) unstable; urgency=low
 
   * [Roland] Upload to unstable (closes: #374385).

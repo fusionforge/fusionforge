@@ -43,6 +43,8 @@ install: build
 	cp cgi-bin/cvsweb $(DESTDIR)/usr/lib/gforge/bin/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/cvsweb
 	cp -r etc/httpd.d $(DESTDIR)/usr/share/gforge/etc/
+	rm $(DESTDIR)/usr/share/gforge/etc/httpd.d/30virtualcvs
+	rm $(DESTDIR)/usr/share/gforge/etc/httpd.d/31virtualcvs.ssl
 	cp -r etc/plugins $(DESTDIR)/etc/gforge/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
