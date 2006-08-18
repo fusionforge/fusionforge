@@ -112,7 +112,7 @@ _Description: Do you want a simple DNS setup?
  have many servers as project web servers or SCM servers.
  .
  Even though you have a simple DNS setup, you can still have
- seperate boxes for your project servers, it just assumes you
+ separate boxes for your project servers, it just assumes you
  have all the project web dirs on the same server and a single
  server for SCM.
 
