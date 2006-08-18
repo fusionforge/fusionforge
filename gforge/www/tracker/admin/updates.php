@@ -106,6 +106,7 @@
 		//	Copy Categories
 		//
 		} elseif ($copy_opt) {
+
 			$copy_rows=count($copyid);
 			if ($copy_rows > 0) {
 				//
@@ -142,14 +143,14 @@
 						} elseif ($aefe->isError()) {
 							$feedback .= $aefe->getErrorMessage();			
 						} else {
-							$name=$ath->getElementName($copyid[$k]);
+							$name=addslashes($ath->getElementName($copyid[$k]));
 							$status=$ath->getElementStatusID($copyid[$k]);
 							if (!$aefe->create($name,$status)) {
 								$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
 								$feedback .= '- Copied choice:';
-								$feedback .= $name;
+								$feedback .= stripslashes($name);
 							}
 						}
 					} 
@@ -256,7 +257,7 @@
 				exit;
 			}
 			$size = @filesize($input_file);
-			$input_data = addslashes(fread(fopen($input_file, 'r'), $size));
+			$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
 
 			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
 			echo db_error();

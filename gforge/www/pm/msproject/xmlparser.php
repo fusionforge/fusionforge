@@ -24,14 +24,16 @@
 
 require_once('msp.php');
 
-if ($showform) {
+$send_task_email=false;
+
+if (getStringFromRequest('showform')) {
 ?>
 	<html>
 	<title>XML Parser</title>
 	<body>
 	<h2>XML Parser</h2>
 	<p>
-	<form name="xmlparser" method="POST" action="<?php echo $PHP_SELF; ?>">
+	<form name="xmlparser" method="POST" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 	Text: <br>
 	<textarea name="document" cols="50" rows="10"></textarea>
 	<br>
@@ -39,9 +41,9 @@ if ($showform) {
 	<input type="submit" value="Parser">
 	</form>
 	<?php
-} elseif ($_POST["parser"] == "yes") {
+} elseif (getStringFromRequest("parser") == "yes") {
 
-	$data = $_POST["document"];
+	$data = getStringFromRequest("document");
 	//$data = str$data);
 
 } else {
@@ -58,7 +60,7 @@ if (!$data) {
 	exit;
 }
 
-printr($data,'initial-data');
+//printr($data,'initial-data');
 
 // SECTION 1. DEBUG XML
 //$data = stripslashes($data);
@@ -68,6 +70,7 @@ $data = str_replace("</ ","</",$data);
 $data = str_replace("</ ","</",$data);
 $data = str_replace("\r","",$data);
 printr($data,'next-data');
+printr(getenv('TZ'),'xmlparser1:: TZ');
 
 //SECTION 2. 
 //FUNCTIONS AND VARIABLES
@@ -383,6 +386,7 @@ function characterDataHandler ($parser, $data) {
 	}
 }
 printr($foo2,'Starting XMLParse 1');
+printr(getenv('TZ'),'xmlparser2:: TZ');
 //SECTION 3. MAIN
 $xml_parser = xml_parser_create();
 xml_set_element_handler($xml_parser, "startElement", "endElement");
@@ -400,6 +404,7 @@ if (!xml_parse($xml_parser, $data,true)) {
 xml_parser_free($xml_parser);
 
 printr($result["REQUEST"],'request');
+printr(getenv('TZ'),'xmlparser3:: TZ');
 //SECTION 4. CALL GFORGE FUNCTIONS
 switch ($result["REQUEST"]) {
 	//MSPLogin
@@ -589,7 +594,7 @@ case $result["REQUEST"] == "CreateProject": {
 }
 }
 
-//printrcomplete();
+printrcomplete();
 
 
 ?>
