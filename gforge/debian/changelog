@@ -1,3 +1,10 @@
+gforge (4.5.14-10+1) unstable; urgency=low
+
+  * [Roland] Updated Dutch debconf templates translation, from Bart
+    Cornelis <cobaco@skolelinux.no> (closes: #384150).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 22 Aug 2006 23:30:52 +0200
+
 gforge (4.5.14-10) unstable; urgency=low
 
   * [Roland] Fixed control file (it referenced a gforge-plugin-scmcase
