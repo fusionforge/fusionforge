@@ -3,7 +3,7 @@ by Roland Mas <lolando@debian.org>.  Work has been constant since
 then, and the package evolved a great deal.  It began to work, for a
 start.
 
-Copyright info for the Sourceforge software:
+Copyright info for Sourceforge:
 ,----
 | The original sources were downloaded from http://www.sourceforge.net/
 | 
@@ -19,17 +19,45 @@ Copyright info for the Sourceforge software:
 | General Public License.
 `----
 
+Then time passed, and Sourceforge was no longer distributed as Free
+Software, so a fork happened.  The last known Free version of
+Sourceforge was the starting point for Gforge.
+
+Copyright info for Gforge:
+,----
+| The original sources are available on http://gforge.org/
+| 
+| Authors: Lots of contributors.  Here's the core team:
+| 
+| Timothy Perdue   	 <tim@gforgegroup.com>
+| Christian Bayle	 <gforge@free.fr>
+| Guillaume Smet	 <guillaume-gforge@smet.org>
+| Sung Kim	 	 <hunkims@gmail.com>
+| Jaime Díaz	 	 <jaime@gforgegroup.com>
+| Francisco Gimeno 	 <kikov@kikov.org>
+| Roland Mas	 	 <lolando@debian.org>
+| Todd Musgrove	 	 <tmusgrove@aveti.com>
+| Tom Copeland	 	 <tom@infoether.com>
+| Thomas Hargens	 <tom@gforgegroup.com>
+| 
+| GForge is free software; you can redistribute it and/or modify it
+| under the terms of the GNU General Public License as published by the
+| Free Software Foundation; either version 2 of the License, or (at your
+| option) any later version.
+`----
+
 The packaging and installing scripts (in the debian/ and deb-specific/
-directories amongst others) are copyright (c) 2000-2002 by Christian
+directories amongst others) are copyright (c) 2000-2004 by Christian
 Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
 are free to use and redistribute them under the terms of the GNU
 General Public License.
 
-The themes are copyright (c) 1999-2000 by VA Linux.  The Savannah
-themes are modified versions, and are copyright (c) 2000-2001 by the
-Free Software Foundation.  They all are free software, and you can
-redistribute them and/or modify them under the terms of the GNU
-General Public License.
+Some of the themes are copyright (c) 1999-2000 by VA Linux.  The
+Savannah themes are modified versions, and are copyright (c) 2000-2001
+by the Free Software Foundation.  Other themes are copyright (c)
+2000-2004 various people, mostly the Gforge core team.  They all are
+free software, and you can redistribute them and/or modify them under
+the terms of the GNU General Public License.
 
 On Debian systems, the complete text of the GNU General Public License
 can be found in the /usr/share/common-licenses directory.

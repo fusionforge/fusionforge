@@ -89,15 +89,15 @@ sub add_group {
 
 	if ($verbose) {print("Making a Group for : $gname\n")};
 		
-	mkdir $group_dir, 0775;
-	mkdir $log_dir, 0775;
-	mkdir $cgi_dir, 0775;
-	mkdir $ht_dir, 0775;
+	mkdir $group_dir, 2775;
+	mkdir $log_dir, 2775;
+	mkdir $cgi_dir, 2775;
+	mkdir $ht_dir, 2775;
 	# perl is sometime fucked to create with right permission
-	system("chmod 0755 $group_dir");
-	system("chmod 0755 $log_dir");
-	system("chmod 0755 $cgi_dir");
-	system("chmod 0755 $ht_dir");
+	system("chmod 2775 $group_dir");
+	system("chmod 2775 $log_dir");
+	system("chmod 2775 $cgi_dir");
+	system("chmod 2775 $ht_dir");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 }
 
@@ -106,9 +106,21 @@ sub add_group {
 #############################
 sub update_group {
 	my ($gid, $gname, $userlist) = @_;
-	my ($p_gname, $p_junk, $p_gid, $p_userlist, $counter);
+	my ($log_dir, $cgi_dir, $ht_dir);
 	
+	$group_dir = $grpdir_prefix.$gname;
+	$log_dir = $group_dir."/log";
+	$cgi_dir = $group_dir."/cgi-bin";
+	$ht_dir = $group_dir."/htdocs";
+
 	if ($verbose) {print("Updating Group: $gname\n")};
+		
+	system("chmod 2775 $group_dir");
+	system("chmod 2775 $log_dir");
+	system("chmod 2775 $cgi_dir");
+	system("chmod 2775 $ht_dir");
+	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
+	
 }
 
 #############################

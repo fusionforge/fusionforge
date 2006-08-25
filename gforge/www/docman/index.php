@@ -47,6 +47,7 @@ if ($language_id == "*") {
 }
 
 $df->setLanguageID($language_id);
+$df->setSort('doc_group, title');
 $d_arr =& $df->getDocuments();
 if (!$_arr || count($d_arr) <1){
 	$df->setLanguageId(0);
@@ -80,5 +81,10 @@ if (!$d_arr || count($d_arr) < 1) {
 }
 
 docman_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

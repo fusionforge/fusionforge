@@ -175,7 +175,7 @@ eval {
 
 	      $login = $admin_login ;
 	      $pwd = $admin_password ;
-	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
+	      $md5pwd=qx/echo -n '$pwd' | md5sum/ ;
 	      chomp $md5pwd ;
 	      $md5pwd =~ s/(.{32}) .*/$1/ ;
 	      $email = $server_admin ;

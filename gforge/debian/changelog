@@ -1,11 +1,330 @@
-gforge (3.1-2+2) unstable; urgency=low
+gforge (3.1-31sarge1) stable-security; urgency=high
+
+  * Backported XSS vulnerabilities (CAN-2005-2430) fix from the upstream
+    4.5 to 4.5.0.1 diff (closes: #328224).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 30 May 2006 20:50:53 +0200
+
+gforge (3.1-31) unstable; urgency=low
+
+  * Fixed database creation when PostgreSQL doesn't run in the 'C' locale
+    (closes: #306316).  Thanks for the hint!
+
+ -- Roland Mas <lolando@debian.org>  Thu, 28 Apr 2005 20:09:34 +0200
+
+gforge (3.1-30) unstable; urgency=high
+
+  * Fixed LDAP postinst to account for the new slapd.conf syntax for ACLs
+    (closes: #304755).
+  * Start PostgreSQL daemon if needed (closes: #291535).
+  * Updated link to new location of Mailman's CGI scripts.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 15 Apr 2005 21:00:04 +0200
+
+gforge (3.1-29) unstable; urgency=low
+
+  * Fixed discrepancy in pending news items (to be approved on the front
+    page) between /my/ and /news/admin/.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 14 Mar 2005 10:03:06 +0100
+
+gforge (3.1-28) unstable; urgency=low
+
+  * Updated Czech Debconf translations (mostly fuzziness) from Miroslav
+    Kure (closes: #298747).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 13 Mar 2005 23:37:09 +0100
+
+gforge (3.1-27) unstable; urgency=low
+
+  * Fixed a bug in include.pl, where db_drop_table_if_exists would check
+    for the existence of a table then promptly do nothing about it.
+  * Fixed stats_cvs.pl so it actually does something useful, and enabled
+    it in crontab, so it does so every night (closes: #215920).
+  * Enlarged the text input widget for SSH keys (closes: #293566).
+  * Added a DISTINCT clause to massmail.php, so as not to send multiple
+    copies of emails to people even if they're admins for multiple
+    projects.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 23 Feb 2005 20:12:36 +0100
+
+gforge (3.1-26) unstable; urgency=high
+
+  * Disabled controller.php and controlleroo.php because of security
+    risks, hence the high urgency upload (closes: #291718).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 23 Jan 2005 12:59:25 +0100
+
+gforge (3.1-25) unstable; urgency=low
+
+  * Moved db_stop back a bit later in gforge-web-apache.postinst, because
+    it seems modules-config uses Debconf.  Grr.
+  * Updated French and Japanese Debconf translations to fix fuzziness
+    (closes: #286999, #287799).
+  * Converted old setup using php4-cgi to php4-cli.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jan 2005 15:34:56 +0100
+
+gforge (3.1-24) unstable; urgency=low
+
+  * [Roland] Updated French translations for Debconf templates from
+    Christian Perrier and debian-l10n-french (closes: #282676).
+  * [Roland] Apparently LC_ALL is not enough, LANG must be set too for
+    install-db.sh (closes: #283849).
+  * [Roland] Stop debconf system before restarting Apache, as it may lead
+    to problems.
+  * [Roland] Added Japanese debconf translations from Hideki Yamane, and
+    fixed a few typos in the English templates (closes: #286283).
+  * [Roland] Fixed a few Lintian errors.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 19 Dec 2004 14:57:28 +0100
+
+gforge (3.1-23) unstable; urgency=low
+
+  * [Roland] Updated Dutch translations for Debconf templates from
+    debian-l10n-dutch (closes: #279239).
+  * [Roland] Initial Czech Debconf translation from Miroslav Kure
+    <kurem@debian.cz> (closes: #280133).
+  * [Roland] Ensure the various commands run by install-db.sh run in
+    LANG=C.
+  * [Roland] Added libnss_ldap.so* to chroot, so that users can
+    authenticate against LDAP inside it, patch from Clement 'nodens'
+    Hermann <clement.hermann@free.fr> (closes: #280446).
+  * [Roland] Disabled sys_use_ldap in local.inc.template to prevent the
+    web interface from returning errors when adding users to projects
+    (closes: #280496).
+  * [Roland] Updated debian/copyright a bit, including a mention of the
+    http://gforge.org upstream website (closes: #281309).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Nov 2004 20:15:52 +0100
+
+gforge (3.1-22) unstable; urgency=medium
+
+  * [Roland] Fixed quoting in db-upgrade.pl script, to prevent Bad Things
+    from happening when some password contains special characters, thanks
+    to David Margery for noticing (closes: #276465).
+  * [Roland] urgency=medium because this is an RC bug.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Oct 2004 22:30:18 +0200
+
+gforge (3.1-21) unstable; urgency=low
+
+  * [Roland] The "Troll farceur, elfe farci" release.
+  * [Roland] Fallback to doing nothing in case debconf is absent for
+    gforge-sourceforge-transition.preinst (closes: #265616).  Rationale:
+    if it were an upgrade from old Sourceforge, debconf would be present.
+    If it isn't, then there's nothing to do, and we can safely exit.
+  * [Roland] Also removed useless debconf stuff in
+    gforge-sourceforge-transition.postinst.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 14 Aug 2004 20:39:49 +0200
+
+gforge (3.1-20) unstable; urgency=low
+
+  * [Roland] The "I can only assume you're being facetious" release.
+  * [Roland] Fallback to doing debconf-related stuff in
+    sourceforge.postinst instead of sourceforge.preinst if needed.  I
+    refuse to add a Pre-Depends to an empty package (closes: #263784).
+  * [Roland] Fixed a couple of Lintian warnings and errors too.
+
+ -- Roland Mas <lolando@debian.org>  Thu,  5 Aug 2004 22:39:31 +0200
+
+gforge (3.1-19) unstable; urgency=medium
+
+  * [Roland] Evidently *sigh* I now have to protect users against
+    themselves now.  You'd think they'd read package description, and not
+    deliberately install empty packages.  Fixed database dump for
+    transition so it doesn't fail (or do anything) if the database doesn't
+    exist (closes: #263349).
+
+ -- Roland Mas <lolando@debian.org>  Wed,  4 Aug 2004 21:03:09 +0200
+
+gforge (3.1-18) unstable; urgency=low
+
+  * [Roland] Re-added the Debconf note about the need for an SSL
+    certificate, which seems to have been lost in time at some point.
+  * [Roland] Restored proper non-setgid permissions on the debian/ control
+    directory (closes: #262500).
+  * [Roland] Set LC_ALL to C in scripts to fix error message detection
+    (closes: #254695).
+
+ -- Roland Mas <lolando@debian.org>  Tue,  3 Aug 2004 16:06:31 +0200
+
+gforge (3.1-17) unstable; urgency=low
+
+  * [Roland] Fixed docman/view.php to display filenames appropriately in
+    case of files with spaces in their name (patch from Emmanuel Lacour
+    <elacour@home-dn.net>) (closes: #241874).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 May 2004 18:54:09 +0200
+
+gforge (3.1-16) unstable; urgency=low
+
+  * [Roland] Fix for create-mailing-lists.pl and fix-mailing-lists.pl from
+    Matt Hope <dopey@debian.org>: no need to get the previous config
+    before reinjecting it, and it even used to break some versions of
+    Mailman.
+  * [Roland] Force register_globals to On (closes: #2511886).
+  * [Roland] Fix ScriptAlias for Mailman's CGI scripts (closes: #244678).
+  * [Roland] Added Catalan translations for Debconf templates from Debian
+    L10n Catalan Team (closes: #250126).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 27 May 2004 23:29:37 +0200
+
+gforge (3.1-15) unstable; urgency=low
+
+  * [Roland] Fixed override disparity.
+  * [Roland] Fixed redirection of createuser's output (used to be to
+    /dev/null, now it's displayed).
+  * [Roland] Fixed install-db.sh, which would blindly overwrite lines in
+    pg_hba.conf which it wasn't entitled to overwrite.
+
+ -- Roland Mas <lolando@debian.org>  Thu,  1 Apr 2004 23:18:01 +0200
+
+gforge (3.1-14) unstable; urgency=low
+
+  * [Roland] Rewrote the "sourceforge" package description to fix a
+    Lintian error.
+  * [Roland] po-debconf updates for French (Christian Perrier and the
+    debian-l10n-french team) and Dutch (cobaco and the debian-l10n-dutch
+    team) (closes: #232235, #237844, #238566).
+  * [Roland] Disable shell access for suspended and deleted accounts
+    (closes: #239879).
+  * [Roland] Also enable e-mail forwarding for accounts even if they don't
+    belong to any group (closes: #237024).
+  * [Roland] Fixed cvsweb.cgi so it calls cvs with non-absolute filenames,
+    thus allowing the "download" feature to work again.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 31 Mar 2004 22:00:46 +0200
+
+gforge (3.1-13) unstable; urgency=low
+
+  * [Roland] Upgraded the Suggests: libphp-jpgraph to a Depends:, since
+    that package has now been uploaded to Debian unstable.
+  * [Roland] Fixed the versioned depends in gforge-cvs.  On malformed
+    line, dpkg-gencontrol doesn't give you an error message, but just
+    ignores the line instead, which resulted in gforge-cvs depending on
+    nothing at all (closes: #236112).
+
+ -- Roland Mas <lolando@debian.org>  Thu,  4 Mar 2004 22:23:38 +0100
+
+gforge (3.1-12) unstable; urgency=low
+
+  * [Roland] Added an empty sourceforge binary package, with some Debconf
+    magic to help people upgrading from sourceforge to gforge.
+  * [Christian] Also moved the logs in gforge-sourceforge-transition.
+
+ -- Roland Mas <lolando@debian.org>  Tue,  2 Mar 2004 23:06:02 +0100
+
+gforge (3.1-11) unstable; urgency=low
+
+  * [Roland] Added exim4 support, patch from Guillem Jover
+    <guillem@debian.org>.  Thanks! (closes: #234684).  Also made it the
+    default, since exim4 is the new default MTA for Sarge.
+
+ -- Roland Mas <lolando@debian.org>  Mon,  1 Mar 2004 16:46:57 +0100
+
+gforge (3.1-10) unstable; urgency=low
+
+  * [Roland] This is a brown-paper-bag type of release.  I broke
+    install-ldap.sh in 3.1-9.  This should fix it.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 16 Feb 2004 14:20:27 +0100
+
+gforge (3.1-9) unstable; urgency=low
+
+  * [Roland] Added permissions for the robot to edit the
+    ou=mailingList,dc=... entries in LDAP.
+  * [Roland] Better detection of strange conditions in cvs_dump_update.pl.
+  * [Roland] Fixed permissions for groups' "home" directories.
+  * [Roland] Added po/nl.po for the Dutch translation (closes: #232236).
+  * [Roland] Don't comment out LDAP schema inclusions in slapd.conf
+    (closes: #227377).
+  * [Roland] Don't count private projects and the None user when
+    displaying numbers on the front page (closes: #211086).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 15 Feb 2004 17:10:11 +0100
+
+gforge (3.1-8) unstable; urgency=low
+
+  * [Roland] It seems the new organisation of the apache (and related)
+    packages managed to break quite a lot of things.  Still trying to
+    catch up, this time removing a "Listen" directive that would turn out
+    to be a duplicate one, thus preventing Apache from running.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Jan 2004 22:45:03 +0100
+
+gforge (3.1-7) unstable; urgency=low
+
+  * [Roland] Yet another LDAP fix.  This one would completely prevent
+    installation from scratch.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 02:12:51 +0100
+
+gforge (3.1-6) unstable; urgency=low
+
+  * [Roland] Detection of wrong passwords, with a message describing how
+    to fix (closes: #223693, #215577, #224257).
+  * [Roland] Insert data into LDAP using the robot DN, so as to minimise
+    the use of the admin DN.
+  * [Roland] Better detection of errors when creating database and user,
+    too.
+  * [Roland] Added cronjobs/massmail.php and enabled it in
+    gforge-db-postgresql.cron.d (closes: #225686).
+  * [Roland] Cleaned up the Apache installation process so that it works
+    more generically with apache{,-perl,-ssl} flavours.  Also use
+    /etc/$flavour/conf.d/ directory (thus removing the hack that changed
+    the /etc/$flavour/httpd.conf file).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:41:21 +0100
+
+gforge (3.1-5) unstable; urgency=low
+
+  * [Roland] Tightened the versioned dependency on Apache so that we can
+    rely on modules-config (closes: #220872).
+  * [Roland] Escape special characters like @ and $ before passing strings
+    containing them to a Perl script, for instance e-mail addresses.
+    Should help fix the administrator's e-mail.
+  * [Roland] install-db.sh now uses grep and cut (instead of Perl) to
+    extract the configuration variables from the configuration file, which
+    should help gforge-sourceforge-transition work better.
+  * [Roland] Added full path to invoke-rc.d in create-vhosts.sh.  This
+    script may be called from a very sparse environment (cron), in which
+    $PATH does not include /usr/sbin.
+  * [Roland] Remove .ssh/authorized_keys when they are set to empty,
+    instead of just leaving them as they are.
+  * [Roland] Added support for apache-perl too.
+  * [Roland] Fixed the way we use modules-config so that gforge-web-apache
+    does not hang on install (closes: #221172).
+  * [Roland] Added "--encoding=UNICODE" to the restore action of
+    install-db.sh.
+
+ -- Roland Mas <lolando@debian.org>  Fri,  9 Jan 2004 22:35:34 +0100
+
+gforge (3.1-4) unstable; urgency=low
+
+  * [Roland] Fixed multiline inline Perl script for gforge-mta-postfix's
+    configuration process (I know, I know) (closes: #219379).
+  * [Roland] install-apache.sh now uses the new "modules-config" mechanism
+    provided by Apache packages to enable/disable modules, instead of
+    uncommenting LoadModules lines by script (closes: #219745).
+  * [Roland] Fixed update-user-group-cvs.sh's handling of lockfiles
+    (closes: #219957).
+  * [Christian] corrected SYSLOGD warning to 'you must have
+    SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in
+    /etc/init.d/sysklogd', since the old advice might have break
+    your syslogd, sorry for this but this is makejail advice.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:21:26 +0100
+
+gforge (3.1-3) unstable; urgency=low
 
   * [Roland] Added a lock feature to update-user-group-cvs.sh.  That adds
     a dependency on lockfile-progs.
   * [Roland] Fixed install-postfix.sh for gforge-mta-postfix's
     deconfiguration process (closes: #218637).
 
- -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 20:57:10 +0100
+ -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 23:16:44 +0100
 
 gforge (3.1-2) unstable; urgency=low
 

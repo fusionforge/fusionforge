@@ -26,10 +26,11 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 if ($add) {
 
-	if ($group_id) {
+	if ($groupname) {
 
 		$group = &group_get_object_by_name($groupname);
 		exit_assert_object($group, 'Group');
+		$group_id = $group->getID () ;
 
 		if (valid_hostname($vhost_name)) {
 
@@ -38,10 +39,11 @@ if ($add) {
 			$cgidir = $homedir.'/cgi-bin/';
 
 
-			$res = db_query("
+			$sql = "
 				INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id) 
 				VALUES ('$vhost_name','$docdir','$cgidir',$group_id)
-			");
+			";
+			$res = db_query($sql);
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$feedback .= $Language->getText('admin_vhost','error_adding_vhost') .db_error();

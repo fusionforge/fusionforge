@@ -13,7 +13,9 @@ propose_update () {
     file=$1
     mode=$2
     template=gforge/shared/replace_file_$mode
-    if diff -q ${file} ${file}.gforge-new > /dev/null 2>&1 ; then
+    if [ ! -e ${file}.gforge-new ] ; then
+        echo "${file} already configured, not changing."
+    elif diff -q ${file} ${file}.gforge-new > /dev/null 2>&1 ; then
         # Old file and new file are identical
         rm -f ${file}.gforge-new
     else

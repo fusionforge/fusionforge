@@ -11,9 +11,8 @@ else
     fi
     lockfile-touch $LOCK &
     LOCKPID=$!
-    trap "kill $LOCKPID" exit
-    
-    
+    trap "kill $LOCKPID ; lockfile-remove $LOCK" exit
+        
 	# Fill ldap tables
 	# Should be safe to comment this soon
 	/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1

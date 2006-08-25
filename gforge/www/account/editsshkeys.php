@@ -53,7 +53,7 @@ if ($submit) {
 <br /><em>Important: Make sure there are no line breaks except between keys.
 After submitting, verify that the number of keys in your file is what you expected.</em>
 <br />
-<textarea rows="10" cols="60" name="authorized_keys">
+<textarea rows="10" cols="140" name="authorized_keys">
 <?php echo $u->getAuthorizedKeys(); ?>
 </textarea></p>
 <p><input type="submit" name="submit" value="Update" /></p>

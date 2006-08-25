@@ -1,0 +1,840 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gforge 3.1-24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-12-19 14:38+0100\n"
+"PO-Revision-Date: 2004-12-23 02:02+0900\n"
+"Last-Translator: Hideki Yamane <henrich@samba.gr.jp>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=EUC-JP\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#: ../dsf-helper/shellhost-variables.templates:3
+msgid "Your shell server"
+msgstr "shell 用サーバ"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#: ../dsf-helper/shellhost-variables.templates:3
+msgid "The hostname of the server that will host your Gforge shell accounts"
+msgstr "Gforge のシェルアカウントを提供するサーバのホスト名です。"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+#: ../dsf-helper/downloadhost-variables.templates:3
+msgid "Your download server"
+msgstr "ダウンロード用サーバ"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+msgid ""
+"The hostname of the server that will host your Gforge packages.  It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Gforge がパッケージを提供するサーバのホスト名です。メインの Gforge ホストと同"
+"じであってはなりません。"
+
+#. Type: string
+#. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:26
+#: ../gforge-dns-bind9.templates.dsfh-in:23
+msgid "admin"
+msgstr "admin"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid "The Gforge administrator login"
+msgstr "Gforge 管理者のログイン名"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects."
+msgstr ""
+"この Gforge アカウントは Gforge のシステム上の全権限を持ちます。これは、プロ"
+"ジェクトの作成を許可するのに必要となります。"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+#: ../dsf-helper/host-variables.templates:3
+msgid "Your IP address"
+msgstr "IP アドレス"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+#: ../dsf-helper/host-variables.templates:3
+msgid ""
+"The IP address of the server that will host your Gforge installation. This "
+"is needed for the Apache virtualhosting configuration."
+msgstr ""
+"Gforge のインストールが行われるサーバの IP アドレスです。これは Apache のバー"
+"チャルホストの設定に必要です。"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid "The Gforge administrator password"
+msgstr "Gforge 管理者パスワード"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects.  Please type a password here."
+msgstr ""
+"この Gforge アカウントは Gforge システムについての全権限を持っています。これ"
+"は、プロジェクトの作成を許可するのに必要となります。ここでパスワードを入力し"
+"てください。"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:37
+msgid "The Gforge administrator password - again"
+msgstr "Gforge 管理者パスワード - 再入力してください"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+#: ../dsf-helper/dbpasswd-variables.templates:9
+#: ../dsf-helper/ldap-variables.templates:20
+msgid "Please re-type the password for confirmation."
+msgstr "確認のため、再度パスワードを入力してください。"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid "The initial list of skills"
+msgstr "スキルの初期リスト"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid ""
+"Gforge allows users to define a list of their skills, to be chosen amongst "
+"those present in the database.  This list is the initial list of skills that "
+"will enter the database.  Please enter the skill names separated by semi-"
+"colons `;'."
+msgstr ""
+"Gforge では、ユーザに対してデータベースに存在するものの中から自身のスキルを選"
+"び出し、スキルリストを明確にするのを許容しています。このリストがデータベース"
+"に入力されるスキルの初期リストとなります。セミコロン `;' で区切ったスキルの名"
+"前を入力してください。"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+#: ../dsf-helper/dbpasswd-variables.templates:3
+msgid "Password used for the database"
+msgstr "データベース用パスワード"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+msgid ""
+"The connection to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"DB システムへの接続にはパスワードが必要になります。ここでパスワードを選んでく"
+"ださい。"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:18
+#: ../dsf-helper/dbpasswd-variables.templates:9
+msgid "Password used for the database - again"
+msgstr "データベース用パスワード - 再入力してください"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+#: ../dsf-helper/ldap-variables.templates:3
+msgid "The LDAP base DN"
+msgstr "LDAP の base DN"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+#: ../dsf-helper/ldap-variables.templates:3
+msgid ""
+"The DN is used to refer to the LDAP directory unambiguously.  You could use, "
+"for instance, \"dc=gforge,dc=example,dc=com\""
+msgstr ""
+"DN は LDAP ディレクトリを明示的に参照するのに利用されます。例えば "
+"\"dc=gforge,dc=example,dc=com\" というようにして使うことが可能です。"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+#: ../dsf-helper/ldap-variables.templates:9
+msgid "The LDAP host"
+msgstr "LDAP ホスト名"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+#: ../dsf-helper/ldap-variables.templates:9
+msgid "The hostname of the LDAP server."
+msgstr "LDAP サーバのホスト名"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Do you want mail to ${noreply} to be deleted?"
+msgstr "${noreply} へのメールを削除しますか?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
+"even some e-mail to that address too."
+msgstr ""
+"Gforge は \"${noreply}\" アドレスから大量のメールを送り、そのアドレスに対して"
+"のメールについても同様に大量になります。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"It is advised that you let the package direct e-mail to that address to a "
+"black hole (/dev/null), unless you have another use for that address."
+msgstr ""
+"このアドレスを他の用途に使っていない限り、パッケージがこのアドレスに対しての"
+"メールを直接ブラックホール (/dev/null) に放り込むのを許可したほうが良いでしょ"
+"う。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Accepting this option will perform that redirection."
+msgstr "このオプションを許可すると転送を行います。"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+#: ../dsf-helper/ldap-variables.templates:14
+msgid "LDAP password used to add users from the web"
+msgstr "web からユーザを追加する際に使われる LDAP パスワード"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+#: ../dsf-helper/ldap-variables.templates:14
+msgid ""
+"In order to add users into the LDAP directory from the web, you need to "
+"provide a password."
+msgstr ""
+"web から LDAP ディレクトリにユーザを追加するためにはパスワードの入力が必要で"
+"す。"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+#: ../dsf-helper/ldap-variables.templates:20
+msgid "LDAP password - again"
+msgstr "LDAP パスワード - 再入力"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid "Gforge requires appropriate PAM-LDAP configuration"
+msgstr "Gforge には適切な PAM-LDAP の設定が必要です"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Gforge requires the libpam-ldap package to be configured appropriately.  You "
+"might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
+"parameters."
+msgstr ""
+"Gforge は、正しく設定するために libpam-ldap パッケージが必要です。間違ったパ"
+"ラメータを修正するためには \"dpkg-reconfigure libpam-ldap\" を実行する必要が"
+"あるでしょう。"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Known good values are: LDAP protocol version=3, make root database "
+"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
+"for passwords=crypt.  Make sure that you type the same password for the "
+"libpam-ldap root password and the Gforge LDAP password."
+msgstr ""
+"よく知られている適切な値は LDAP protocol version=3, make root database "
+"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
+"for passwords=crypt です。libpam-ldap の root パスワードと Gforge LDAP パス"
+"ワードが同じであるのを確認してください。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid "Do you want a simple DNS setup?"
+msgstr "簡易 DNS 設定を行いますか?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid ""
+"You can have a simple DNS setup which uses wildcards to map all project web-"
+"hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
+"or a complex setup which allows you to have many servers as project web "
+"servers or CVS servers."
+msgstr ""
+"ワイルドカードを使って全てのプロジェクトの web サーバを 1 つの IP へとマッピ"
+"ングし、全ての cvs ホストを 1 台の CVS サーバへ転送する簡易 DNS 設定か、大量"
+"のサーバをプロジェクトの web サーバや CVS サーバとする複雑な設定が可能です。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid ""
+"Even though you have a simple DNS setup, you can still have seperate boxes "
+"for your project servers, it just assumes you have all the project web dirs "
+"on the same server and a single server for CVS."
+msgstr ""
+"簡易 DNS 設定を行っても、単に全てのプロジェクトの web ページのディレクトリを"
+"同じサーバに配置して CVS にサーバを 1 台配置するとすれば、複数のサーバをプロ"
+"ジェクトのサーバとして持つことができます。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid "Do you want ${file} to be updated?"
+msgstr "${file} を更新しますか?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid ""
+"In order for Gforge to be fully deinstalled, some changes must be made to "
+"the ${file} file."
+msgstr ""
+"Gforge を完全に削除するには、${file} ファイルに変更を加える必要があります。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid ""
+"I can either do them for you (and backup the current version in ${file}."
+"gforge-old), or write the changes to another file (${file}.gforge-new) and "
+"let you propagate the changes to ${file} yourself."
+msgstr ""
+"この変更作業を行うこともできますし (現在のバージョンを ${file}.gforge-old に"
+"バックアップします)、あるいは変更を別のファイル (${file}.gforge-new) へ書き出"
+"して ${file} に加わった変更を自身で適用することもできます。"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid "Shall I modify the ${file} automatically?"
+msgstr "$自動的に {file} を修正しますか?"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:125
+#: ../dsf-helper/replace-files.templates:31
+msgid "Please check ${file}"
+msgstr "${file} を確認してください"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:125
+#: ../dsf-helper/replace-files.templates:31
+msgid ""
+"You have chosen not to let the Gforge package update the ${file} file.  Very "
+"well, I have not changed it.  Instead, I have written the suggested changes "
+"into ${file}.gforge-new. Please check this file and apply the appropriate "
+"changes to ${file}."
+msgstr ""
+"あなたは Gforge パッケージが ${file} ファイルを更新しないことを選びました。よ"
+"ろしい、何も変更しません。その代わり、${file}.gforge-new にお勧めの変更を書き"
+"出してあります。このファイルを確認して、適切な変更を ${file} に行ってくださ"
+"い。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3
+msgid "Your Gforge domain or subdomain name"
+msgstr "Gforge のドメイン名かサブドメイン名"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3
+msgid ""
+"The domain that will host your Gforge installation.  Some services will be "
+"given their own subdomain in that domain (cvs, lists, etc.)."
+msgstr ""
+"Gforge の設定に利用されるドメインです。いくつかのサービスには、そのドメインで"
+"の固有のサブドメイン (cvs, lists など) が与えられます。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:9
+msgid "The Gforge admin email address."
+msgstr "Gforge の管理者メールアドレス"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:9
+msgid ""
+"The email address of the Gforge administrator of your site.  Needed in case "
+"a problem occurs."
+msgstr ""
+"あなたのサイトの Gforge 管理者のメールアドレスです。問題が起きた際に必要にな"
+"ります。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:16
+msgid "The Gforge system name"
+msgstr "Gforge のシステム名称"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:16
+msgid "This name is used in various places throughout the system."
+msgstr "システム上で様々な場面を通して利用される名称です。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/cvshost-variables.templates:3
+msgid "Your CVS server"
+msgstr "CVS サーバ"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/cvshost-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge CVS repositories.  It "
+"should not be the same as your main Gforge host."
+msgstr ""
+"Gforge の CVS リポジトリを提供するサーバのホスト名です。メインの Gforge ホス"
+"トと同じ名前であってはなりません。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3
+msgid "Your database server"
+msgstr "データベースサーバ"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3
+msgid ""
+"The IP address (or host name) of the server that will host your GForge "
+"database.  This is needed for virtually all the subpackages."
+msgstr ""
+"GForge データベースを提供するサーバの IP アドレス (またはホスト名) です。全て"
+"のサブパッケージに対して仮想的に必要になります。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:10
+msgid "Your database name"
+msgstr "データベース名"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:10
+msgid ""
+"The name of the database that will host your GForge database.  This is "
+"needed for virtually all the subpackages."
+msgstr ""
+"GForge のデータベースを提供するデータベースの名前です。全てのサブパッケージに"
+"対して仮想的に必要になります。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:17
+msgid "Your database admin username"
+msgstr "データベース管理者のユーザ名"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:17
+msgid ""
+"The admin username of the database that will host your GForge database.  "
+"This is needed for virtually all the subpackages."
+msgstr ""
+"GForge データベースを提供するデータベースの管理者のユーザ名です。全てのサブ"
+"パッケージに対して仮想的に必要になります。"
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:3
+msgid ""
+"The connecton to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"DB システムへの接続にはパスワードが必要になります。ここでパスワードを選んでく"
+"ださい。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/downloadhost-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge packages. It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Gforge のパッケージを提供するサーバのホスト名です。メインの Gforge ホストと同"
+"じであってはなりません。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:4
+msgid "The news admin group id"
+msgstr "ニュース管理者グループの ID"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:4
+msgid ""
+"Members of the news admin group can approve news for the Gforge main page.  "
+"This group id MUST NOT be 1. You only need to touch this group if you "
+"upgrade from a previous version and want to keep your data."
+msgstr ""
+"ニュース管理者グループのメンバーは Gforge のメインページにニュースを掲載可能"
+"になります。このグループ id は 1 で「あってはなりません」。以前のバージョンか"
+"らのアップグレードでデータを保持したい場合はこのグループを追加するだけで構い"
+"ません。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:12
+msgid "The stats admin group id"
+msgstr "stats 管理者グループの ID"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:17
+msgid "The peer rating admin group id"
+msgstr "peer rating 管理者グループの ID"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:3
+msgid "Your mailing-lists server"
+msgstr "メーリングリストサーバ"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge mailing-lists. It "
+"should not be the same as your main Gforge host."
+msgstr ""
+"Gforge のメーリングリストを提供するサーバのホスト名です。メインの Gforge ホス"
+"トと同じであってはなりません。"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid "Migrate to Gforge?"
+msgstr "Gforge へ移行しますか?"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"The free software version of the Sourceforge software has been renamed to "
+"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
+"and \"sourceforge\" is no longer supported or maintained.  The transition to "
+"Gforge should be rather simple, as most of the work is automated: once this "
+"package has been successfully installed, just install the \"gforge\" package "
+"and things should go smoothly."
+msgstr ""
+"フリーソフトウェア版の Sourgeforge ソフトウェアは \"Gforge\" へ名称を変更され"
+"ました。これに従い、Debian パッケージは \"gforge\" に名称を変更され、"
+"\"sourceforge\" はサポート・メンテナンスされなくなりました。Gforge への移行は"
+"シンプルで、殆どの作業が自動化されています: 一旦このパッケージのインストール"
+"が完了すると、単に \"gforge\" パッケージをインストールすれば作業はスムースに"
+"行くはずです。"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"You still have the option not to upgrade to Gforge yet, for instance if you "
+"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"happen."
+msgstr ""
+"例えば、あらかじめバックアップを行いたいような場合、まだ Gforge へアップグ"
+"レードしないという選択もまだ可能です。アップグレードしない場合は、何も起きま"
+"せん。"
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid "Sourceforge is no more"
+msgstr "Sourgeforge パッケージは提供されなくなりました"
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid ""
+"Sourceforge has been renamed Gforge, and the software known as Sourceforge "
+"is no longer maintained as free software.  This \"sourceforge\" package is "
+"only here to help you upgrade to Gforge.  Once you have installed this "
+"package and the one it depends on (gforge-sourceforge-transition), your data "
+"have been saved, and you can safely uninstall the \"sourceforge\" package "
+"and proceed to install Gforge."
+msgstr ""
+"Sourgeforge は Gforge に改名され、Sourceforge として知られていたソフトウェア"
+"はもはやフリーソフトウェアとしてはメンテナンスされていません。この "
+"\"sourceforge\" パッケージは単に Gforge へのアップグレードを手助けするために"
+"あるだけです。一旦このパッケージのインストールとパッケージが依存している作業 "
+"(gforge から sourceforge への移行) を行うと、データは保存され、安全に "
+"\"sourceforge\" パッケージを削除して Gforge のインストールを続けられます。"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:4
+msgid ""
+"In order for Gforge to fully work, some changes must be made to the ${file} "
+"file."
+msgstr ""
+"Gforge を完全に動作させるには、${file} に多少変更を加える必要があります。"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:4
+msgid "Shall I modify ${file} automatically?"
+msgstr "自動的に ${file} を変更しても構わないですか?"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:3
+msgid "Your user mail redirector server"
+msgstr "メール転送サーバ"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge user mail redirector. "
+"It should not be the same as your main Gforge host."
+msgstr ""
+"Gforge ユーザへのメール転送を提供するサーバのホスト名です。メインの Gforge ホ"
+"ストと同じであってはなりません。"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Bulgarian"
+msgstr "ブルガリア語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Catalan"
+msgstr "カタロニア語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Chinese"
+msgstr "中国語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Dutch"
+msgstr "オランダ語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Esperanto"
+msgstr "エスペラント語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "French"
+msgstr "フランス語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "German"
+msgstr "ドイツ語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Greek"
+msgstr "ギリシャ語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Hebrew"
+msgstr "ヘブライ語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Indonesian"
+msgstr "インドネシア語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Italian"
+msgstr "イタリア語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Japanese"
+msgstr "日本語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Korean"
+msgstr "韓国語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Latin"
+msgstr "ラテン語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Norwegian"
+msgstr "ノルウェー語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Polish"
+msgstr "ポーランド語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "PortugueseBrazilian"
+msgstr "ポルトガル語 (ブラジル)"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Portuguese"
+msgstr "ポルトガル語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Russian"
+msgstr "ロシア語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "SimplifiedChinese"
+msgstr "中国語 (簡文)"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Spanish"
+msgstr "スペイン語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Swedish"
+msgstr "スウェーデン語"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Thai"
+msgstr "タイ語"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:4
+msgid "English"
+msgstr "英語"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:5
+msgid "Default language"
+msgstr "標準の言語"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:5
+msgid "Here is the default language for web pages."
+msgstr "ここで web ページでの標準言語を指定します。"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:11
+msgid "Default theme"
+msgstr "標準のテーマ"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:11
+msgid ""
+"Here is the default theme for web pages, be careful to enter a valid name."
+msgstr ""
+"ここでは web ページの標準テーマを入力します。正しい名称を入力するように注意し"
+"てください。"

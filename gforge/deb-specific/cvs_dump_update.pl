@@ -81,7 +81,7 @@ while ($ln = pop(@group_array)) {
 		print ("ERROR: $group_name home dir $grpdir_prefix$group_name doesn't exists\n");
 		print ("	but use_cvs=$use_cvs\tstatus=$status\n");
 	}
-	if ($cvs_exists && !$group_exists) {
+	if ($cvs_exists && !$group_exists && $status eq 'A') {
 		print ("ERROR: CVS $cvs_root$group_name/CVSROOT exists\n");
 		print ("	but no $group_name home dir at $grpdir_prefix$group_name\n");
 		print ("	use_cvs=$use_cvs\tstatus=$status\n");

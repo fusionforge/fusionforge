@@ -43,7 +43,7 @@ if ($docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 
-	Header ("Content-disposition: filename=".$d->getFileName());
+	Header ("Content-disposition: filename=\"".$d->getFileName()."\"");
 
 	if (strstr($d->getFileType(),'app')) {
 		Header ("Content-type: application/binary");

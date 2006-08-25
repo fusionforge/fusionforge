@@ -1,0 +1,10 @@
+Template: gforge/shared/mod_ssl_cert
+Type: note
+_Description: Generate an SSL certificate
+ You need a valid SSL/TLS certificate to run Gforge.
+ If you don't already have one, you'll have to run the
+ "mod-ssl-makecert" command to generate one, and restart Apache
+ afterwards.
+ .
+ Please note you will not be able to start Apache if you have no
+ such certificate.

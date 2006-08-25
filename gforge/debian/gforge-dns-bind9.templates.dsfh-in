@@ -80,17 +80,6 @@ Type: password
 _Description: LDAP password - again
  Please re-type the password for confirmation.
 
-Template: gforge/shared/mod_ssl_cert
-Type: note
-_Description: Generate an SSL certificate
- You need a valid SSL/TLS certificate to run Gforge.
- If you don't already have one, you'll have to run the
- "mod-ssl-makecert" command to generate one, and restart Apache
- afterwards.
- .
- Please note you will not be able to start Apache if you have no
- such certificate.
-
 Template: gforge/shared/pam_ldap_config
 Type: note
 _Description: Gforge requires appropriate PAM-LDAP configuration
@@ -107,9 +96,9 @@ Template: gforge/shared/simple_dns
 Type: boolean
 Default: false
 _Description: Do you want a simple DNS setup?
- You can have a simple DNS setup wich uses wildcards to map all
+ You can have a simple DNS setup which uses wildcards to map all
  project web-hosts to a single IP, and direct all the cvs-hosts
- to a single CVS server, or a complex setup wich allows you to
+ to a single CVS server, or a complex setup which allows you to
  have many servers as project web servers or CVS servers.
  .
  Even though you have a simple DNS setup, you can still have

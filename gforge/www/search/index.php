@@ -31,6 +31,7 @@ if (!$type_of_search) {
 if (!$type_of_search) {
 	$type_of_search='soft';
 }
+$words=htmlspecialchars($words);
 
 require_once('pre.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');

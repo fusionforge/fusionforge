@@ -9,3 +9,4 @@
 #DSFHELPER:groupid-variables#
 #DSFHELPER:dbpasswd-variables#
 #DSFHELPER:ldap-variables#
+#DSFHELPER:ssl-cert#

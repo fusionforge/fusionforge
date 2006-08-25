@@ -23,8 +23,6 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
-. /usr/share/debconf/confmodule
-
 case "$1" in
     configure)
     	[ -f /usr/lib/gforge-sourceforge-transition/bin/install-db.sh ] && /usr/lib/gforge-sourceforge-transition/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge sourceforge
