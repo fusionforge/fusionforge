@@ -41,7 +41,7 @@ require_once('html.php');
  */
 function notepad_button_raw($str, $form, $wrap, $rows, $cols) {
         $notepad_php = '/notepad.php';
-        $notepad_url = $notepad_php . "?form=$form&wrap=$wrap&rows=$rows&cols=$cols";
+        $notepad_url = $notepad_php . "?form=".htmlspecialchars($form)."&wrap=$wrap&rows=$rows&cols=$cols";
         $notepad_title = 'GForgeNotepad';
         $notepad_height = 700;
         $notepad_width = 580;

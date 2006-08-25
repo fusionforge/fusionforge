@@ -81,7 +81,7 @@ if ($login && !$success) {
 <input type="hidden" name="return_to" value="<?php echo $return_to; ?>" />
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
-<br /><input type="text" name="form_loginname" value="<?php echo $form_loginname; ?>" />
+<br /><input type="text" name="form_loginname" value="<?php echo htmlspecialchars($form_loginname); ?>" />
 </p>
 <p>
 <?php echo $Language->getText('account_login', 'passwd'); ?>
