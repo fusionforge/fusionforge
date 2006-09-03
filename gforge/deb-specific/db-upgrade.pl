@@ -2494,7 +2494,7 @@ $dbh->{RaiseError} = 1;
 
 		    $query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
                                SELECT artifact_id,$efeid,$aefid FROM artifact 
-                               WHERE resolution_id=$res_id" ;
+                               WHERE resolution_id=$res_id and group_artifact_id=$gaid" ;
 		    # &debug ($query3) ;
 		    $sth3 =$dbh->prepare ($query3) ;
 		    $sth3->execute () ;
