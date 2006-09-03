@@ -2466,7 +2466,7 @@ $dbh->{RaiseError} = 1;
 		$sth2 =$dbh->prepare ($query2) ;
 		$sth2->execute () ;
 
-		$query2 = "SELECT id, resolution_name FROM artifact_resolution WHERE group_artifact_id=$gaid" ;
+		$query2 = "SELECT id, resolution_name FROM artifact_resolution" ;
 		# &debug ($query2) ;
 		$sth2 = $dbh->prepare ($query2) ;
 		$sth2->execute () ;
