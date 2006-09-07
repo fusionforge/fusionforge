@@ -713,7 +713,8 @@ class ForumMessage extends Error {
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
 		$User = user_get_object($this->getPosterID());
-		util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
+		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
+		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
@@ -774,7 +775,8 @@ class ForumMessage extends Error {
 		
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		$User = user_get_object($this->getPosterID());
-		util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
+		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
+		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
@@ -870,7 +872,7 @@ class ForumMessage extends Error {
 			}
 			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 			$User = user_get_object($this->getPosterID());
-			util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
+			util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
 			return true;
 		}
 		
