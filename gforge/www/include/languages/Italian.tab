@@ -65,7 +65,7 @@ account_login	login_ssl	Login con SSL
 account_login	lostpw	[Hai dimenticato la password?]
 account_login	newaccount	[Nuovo account]
 account_login	passwd	Password:
-account_login	pending_account	<p>Il tuo account è in attesa dell'approvazione di conferma via email. Il tuo account verrà attivato quando visiterai il link indicato in questo messaggio.</p> <p>Dovessi averne bisogno, cliccando qui sotto ti verrà spedito nuovamente il messaggio di conferma.</p><p><A href="pending-resend.php?form_user=$1">[Re-invia email di conferma]</A></p><br><hr>
+account_login	pending_account	<p>Il tuo account è in attesa dell'approvazione di conferma via email. Il tuo account verrà attivato quando visiterai il link indicato in questo messaggio.</p> <p>Dovessi averne bisogno, cliccando qui sotto ti verrà spedito nuovamente il messaggio di conferma.</p><p><a href="pending-resend.php?form_user=$1">[Re-invia email di conferma]</a></p><br><hr>
 account_login	resend_pending	[Rimanda l'email di conferma di un nuovo account]
 account_login	resend_pending_directions	Inserisci il nome dell'utente e clicca su 'Conferma' per rispedire l'email di conferma
 account_lostlogin	invalidconfirm	Il codice hash di conferma non è valido.
@@ -974,7 +974,7 @@ help_trove_cat	description	Descrizione
 help_trove_cat	full_category_name	Nome completo della categoria
 help_trove_cat	no_such_category	Categoria Trove inesistente
 help_trove_cat	short_name	Nome breve
-home	about_blurb	<p>$1 è un <B>servizio gratuito agli sviluppatori <A href="http://www.opensource.org/">Open Source</A></B> che offre un accesso facilitato al meglio tra CVS, mailing list, bug tracking, forum di messaggi, gestione attività, site hosting, archivio permanente di file, backup completi, e amministrazione completamente via web.</p><p><b>Site Feedback e Participazione</B></P><P>Per ottenere il massimo da $1, dovrai <A href="/account/register.php">registrarti come utente del sito</A>. Questo ti consentirà di partecipare a pieno titolo in tutto quello che abbiamo da offrire. Puoi ovviamente visitare il sito senza registrarti, ma in quel modo non potrai accedere in modo completo.</P><P><B>Apri un tuo progetto personale</B></P><P><A href="/account/register.php">Registrati come utente del sito</A>, poi <A HREF="/account/login.php">collegati</A> e infine, <A HREF="/register/">Registra il tuo progetto</A>.</P><P>Grazie.... e goditi il sito.</P>
+home	about_blurb	<p>$1 è un <b>servizio gratuito agli sviluppatori <a href="http://www.opensource.org/">Open Source</a></b> che offre un accesso facilitato al meglio tra CVS, mailing list, bug tracking, forum di messaggi, gestione attività, site hosting, archivio permanente di file, backup completi, e amministrazione completamente via web.</p><p><b>Site Feedback e Participazione</b></p><p>Per ottenere il massimo da $1, dovrai <a href="/account/register.php">registrarti come utente del sito</a>. Questo ti consentirà di partecipare a pieno titolo in tutto quello che abbiamo da offrire. Puoi ovviamente visitare il sito senza registrarti, ma in quel modo non potrai accedere in modo completo.</p><p><b>Apri un tuo progetto personale</b></p><p><a href="/account/register.php">Registrati come utente del sito</a>, poi <a href="/account/login.php">collegati</a> e infine, <a href="/register/">Registra il tuo progetto</a>.</p><p>Grazie.... e goditi il sito.</p>
 home	gforge_statistics	Statistiche $1
 home	highest_ranked_users	Utenti più valutati
 home	hosted_projects	Progetti ospitati
@@ -1007,7 +1007,7 @@ mail	external_administration	Iscrizione/Elimina Iscrizione/Preferenze
 mail	help_to_request	Amministratori di progetto utilizzano questo link per richiedere mailing list.
 mail	mailinglists_for	Mailing List per $1
 mail	no_list_found	Nessuna lista trovata per $1
-mail	provided_by	<p>Le mailing list sono gestite da una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>. Grazie ai team di Mailman e <A href="http://www.python.org">Python</A> per il software eccezionale.</p>
+mail	provided_by	<p>Le mailing list sono gestite da una versione personalizzata di <a href="http://www.list.org">GNU Mailman</a>. Grazie ai team di Mailman e < href="http://www.python.org">Python</a> per il software eccezionale.</p>
 mail	unable_to_get_lists	Impossibile ottenere le liste
 mail_admin	add_list	Aggiungi Mailing List
 mail_admin	admin_in_mailman	Amministra
@@ -1117,7 +1117,7 @@ new	released_by	Rilasciato da:
 new	this_project_has_not	Questo progetto non ha ancora inserito una descrizione
 new	title	Nuovi file rilasciati
 new	version	Versione:
-news	choose	<P>Seleziona una notizia e puoi visualizzare, ricercare e inviare messaggi.</P>
+news	choose	<p>Seleziona una notizia e puoi visualizzare, ricercare e inviare messaggi.</p>
 news	noitems	Non sono state trovate notizie
 news	nonews	Nessuna notizia
 news	nonewsfor	Nessuna notizia per $1
@@ -1157,7 +1157,7 @@ news_submit	errorboth	ERRORE - oggetto e messaggio sono obbligatori
 news_submit	errorinsert	ERRORE durante l'inserimento
 news_submit	forproject	Per il progetto
 news_submit	newsadded	News aggiunta.
-news_submit	post_blurb	È possibile inserire news sul progetto se si è un amministratore del progetto. È anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<p>Tutti i messaggi <B>per il tuo progetto</B> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunità dovranno essere approvate da un membro del team di news di $1 prima che questi vengano pubblicate sulla homepage di $1.<p>Si possono inserire URL, ma non codice </p>URL che iniziano con http:// saranno resi cliccabili.
+news_submit	post_blurb	È possibile inserire news sul progetto se si è un amministratore del progetto. È anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<p>Tutti i messaggi <b>per il tuo progetto</b> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunità dovranno essere approvate da un membro del team di news di $1 prima che questi vengano pubblicate sulla homepage di $1.<p>Si possono inserire URL, ma non codice </p>URL che iniziano con http:// saranno resi cliccabili.
 news_submit	subject	Oggetto
 news_utils	archive	Archivio News
 news_utils	comment_1	Commento
@@ -1165,7 +1165,7 @@ news_utils	comment_2	Commenti
 news_utils	nonews	Nessuna news trovata
 news_utils	readmore	Leggi&nbsp;altro/Replica
 news_utils	submit	Invia per
-people	about_blurb	<p>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</p><p>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</P><P>Consulta i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
+people	about_blurb	<p>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non è consentito un uso commerciale.</p><p>L'elenco dei progetti rimane attivo per due settimane oppure finché ne viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.</p><p>Consulta i menu di categoria per trovare i progetti in cerca di aiuto.</p><p>Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto.</p><p>Per suggerire ulteriori categorie, sottoponi una richiesta tramite il support manager.</p>
 people	action	Azione
 people	added_skill	Aggiungi a elenco competenze
 people	add_new_skill	Aggiungi nuova competenza
@@ -1299,7 +1299,7 @@ pm	details	Dettaglio attività
 pm	end_date	Data fine
 pm	hours	Ore stimate
 pm	intro	Selezionare un sottoprogetto e puoi visualizzare/modificare e aggiungere attività.
-pm	noprj	<H1>Nessun sottoprogetto trovato</H1><P><B>Non è stato alcun sottoprogetto oppure non sei autorizzato a vederli.<P><span class="important">L'amministratore del progetto dovrà creare dei sottoprogetti utilizzando la pagina di amministrazione</span></B>
+pm	noprj	<h1>Nessun sottoprogetto trovato</h1><p/><b>Non è stato alcun sottoprogetto oppure non sei autorizzato a vederli.<p/><span class="important">L'amministratore del progetto dovrà creare dei sottoprogetti utilizzando la pagina di amministrazione</span></b>
 pm	no_tasks_found	Nessuna attività trovata
 pm	no_tasks_found_text	Aggiungi nuove attività utilizzando i link elencati sopra
 pm	percent_complete	Perc. completamento
@@ -1565,7 +1565,7 @@ project_admin_editpackages	new_package_name	Nome nuovo pacchetto
 project_admin_editpackages	no_packages_defined	Non ci sono pacchetti definiti
 project_admin_editpackages	no_packages_status	Stato
 project_admin_editpackages	package_name	Nome pacchetto
-project_admin_editpackages	packages_info	<h3>Pacchetti</h3><p>Si possono utilizzare i pacchetti per raggruppare insieme i file dei vari rilasci, oppure in qualunque modo ti sia comodo.</p><H4>Esempio di pacchetto:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong></p><h4>I tuoi pacchetti:</H4><p><ol><li>Definisci i tuoi pacchetti</li><li>Crea una nuova release dei pacchetti</li></ol><p><h3>Rilasci dei pacchetti</h3><p>Un rilascio di un pacchetto può contenere diversi file.<p><H4>Esempi di rilasci</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Puoi creare nuovi rilasci dei pacchetti cliccando sul pulsante <strong>Crea/modifica rilasci</strong> vicino al nome del package interessato.<p>
+project_admin_editpackages	packages_info	<h3>Pacchetti</h3><p>Si possono utilizzare i pacchetti per raggruppare insieme i file dei vari rilasci, oppure in qualunque modo ti sia comodo.</p><h4>Esempio di pacchetto:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong></p><h4>I tuoi pacchetti:</h4><p><ol><li>Definisci i tuoi pacchetti</li><li>Crea una nuova release dei pacchetti</li></ol><p><h3>Rilasci dei pacchetti</h3><p>Un rilascio di un pacchetto può contenere diversi file.<p><h4>Esempi di rilasci</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Puoi creare nuovi rilasci dei pacchetti cliccando sul pulsante <strong>Crea/modifica rilasci</strong> vicino al nome del package interessato.<p>
 project_admin_editpackages	private	Privato
 project_admin_editpackages	public	Publico
 project_admin_editpackages	qrs	QRS
@@ -1702,7 +1702,7 @@ project_joinrequest	request_link	Richiedi di partecipare al progetto
 project_joinrequest	submitted	La tua richiesta è stata inoltrata.
 project_joinrequest	title	Richiedi di partecipare al progetto
 project_memberlist	developer	Sviluppatore
-project_memberlist	joining	<P>Se vuoi partecipare a questo progetto, contatta uno degli amministratori, contrassegnati dal grassetto qui sotto.</p><br><br>
+project_memberlist	joining	<p>Se vuoi partecipare a questo progetto, contatta uno degli amministratori, contrassegnati dal grassetto qui sotto.</p><br><br>
 project_memberlist	role	Ruolo/Posizione
 project_memberlist	skills	Competenze
 project_memberlist	title	Elenco partecipanti al progetto
@@ -1994,7 +1994,7 @@ searchbox	softwaregroup	Software/Gruppo
 searchbox	task	Attività
 searchbox	tasks	Attività di questo progetto
 searchbox	trackers	Tracker di questo progetto
-sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p />Compila accuratamente tutti i campi oppure il destinatario potrebbe non essere in grado di rispondere.<p /><span class="important"><b>SE STAI CERCANDO AIUTO</b>: Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</span>
+sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p />Compila accuratamente tutti i campi oppure il destinatario potrebbe non essere in grado di rispondere.<p /><span class="important"><b>SE STAI CERCANDO AIUTO</b>: Hai letto la documentazione del sito? Hai incluso il tuo <b>user_id</b> e<b>user_name?</b> Se stai scrivendo per un progetto, hai incluso il tuo <b>project id</b> (<b>group_id</b>) e <b>Nome progetto</b>?</span>
 sendmessage	contact	Contatto
 sendmessage	email	Il tuo indirizzo email
 sendmessage	email_only_to	Puoi inviare messaggi solo a indirizzi
@@ -2673,7 +2673,7 @@ user_home	user_id	Id utente
 user_home	view_wiki	Visualizza Wiki personale
 users	no_user_name	Nessun nome utente specificato
 users	optout	Hai selezionato di non partecipare alle valutazioni, altrimenti avresti la possibilità di valutare questo utente. Vai nella <a href="/account/">gestione del tuo account</a> per maggiori informazioni.
-users	peerinfo1	<p>Se conosci questo utente, prenditi un minuto per valutarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.</p><p>Il sistema di valutazioni $1 si basa su concetti presi da <A HREF="http://www.advogato.com/">Advogato</A>. Il sistema è stato re-implementato ed espanso in vari modi.</p>
+users	peerinfo1	<p>Se conosci questo utente, prenditi un minuto per valutarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.</p><p>Il sistema di valutazioni $1 si basa su concetti presi da <a href="http://www.advogato.com/">Advogato</a>. Il sistema è stato re-implementato ed espanso in vari modi.</p>
 users	peerinfo2	<p>La casella delle valutazioni visualizza tutte le valutazioni per ogni criterio. I numeri includono valutazioni sia da utenti verificati che non.</p><ul><li>Il campo "Posizione globale" mostra la posizione dell'utente rispetto a tutti gli altri utenti valutati di $1.</li><li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted".</li><li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sarà dato alle valutazioni di altri utenti -- valutazioni di utenti più valutati avranno un peso maggiore.</ul><p><i>Se non vuoi partecipare dal sistema di valutazione (ciò avrà effetto sia sulla possibilità di essere votato che sulla possibilità di votare gli altri utenti), vai alla tua pagina di <a href="/account/">opzioni account</a>. Se scegli di non partecipare, le tue valutazioni degli altri utenti saranno rimosse e la casella delle 'Votazioni' scomparirà dalla tua homepage.</i></p>
 users	user_not_exist_text	Utente non valido
 users	user_not_exist_title	L'utente non esiste
