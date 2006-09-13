@@ -117,14 +117,14 @@ site_header(array('title'=>$Language->getText('register','project_information'))
 </p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <?php echo $Language->getText('register','project_full_name') ?>
 
-<input size="40" maxlength="40" type=text name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>">
+<input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>"/>
 
 <?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
-<p>
-<textarea name="purpose" wrap="virtual" cols="70" rows="10">
+<p/>
+<textarea name="purpose" cols="70" rows="10">
 <?php echo htmlspecialchars(stripslashes($purpose)); ?>
 </textarea>
 
@@ -133,23 +133,20 @@ site_header(array('title'=>$Language->getText('register','project_information'))
 <?php
 echo license_selectbox('license',$license);
 ?>
-<p>
 <?php echo $Language->getText('register','other_license') ?>
 <br />
-<textarea name="license_other" wrap=virtual cols=60 rows=5>
+<textarea name="license_other" cols="60" rows="5">
 <?php echo htmlspecialchars(stripslashes($license_other)); ?>
 </textarea>
-<p>
 
 <?php echo $Language->getText('register','project_description')?>
-</p>
-<textarea name="description" wrap="virtual" cols="70" rows="5">
+<textarea name="description" cols="70" rows="5">
 <?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
 
 <?php echo $Language->getText('register','project_unix_name',array($GLOBALS['sys_default_domain'])) ?>
 
-<input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>">
+<input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
 
 <?php
 	$SCMFactory=new SCMFactory();
@@ -166,11 +163,11 @@ echo license_selectbox('license',$license);
 					$myPlugin= plugin_get_object($scm);
 					echo '<p><input type="radio" name="scm" ';
 					if ($checked) {
-						echo 'CHECKED ';
+						echo ' checked="checked" ';
 						$checked=false;
 					}
 					echo 'value="'.$myPlugin->name;
-					echo '">'.$myPlugin->text.'</p>';
+					echo '"/>'.$myPlugin->text.'</p>';
 					$checked=false;
 				}
 			}
@@ -183,7 +180,7 @@ echo license_selectbox('license',$license);
 
 
 <div align="center">
-<input type=submit name="submit" value="<?php echo $Language->getText('register','i_agree') ?>"> <input type=submit name="i_disagree" value="<?php echo $Language->getText('register','i_disagree') ?>">
+<input type="submit" name="submit" value="<?php echo $Language->getText('register','i_agree') ?>"/> <input type="submit" name="i_disagree" value="<?php echo $Language->getText('register','i_disagree') ?>"/>
 </div>
 
 </form>
