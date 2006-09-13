@@ -142,7 +142,7 @@ if (!session_loggedin()) {
 	<h3>'. $info_str .'</h3>
 	<p />
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
-	<input type="hidden" name="form_key" value="'.form_generate_key().'">
+	<input type="hidden" name="form_key" value="'.form_generate_key().'"/>
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table>
