@@ -12,6 +12,10 @@ switch:
 
 all:
 	@make -f Makefile.$(DIST) all
+clean:
+	@make -f Makefile.$(DIST) clean
+cleanor:
+	@make -f Makefile.$(DIST) cleanor
 chris:
 	@make -f Makefile.$(DIST) chris
 chriss:
