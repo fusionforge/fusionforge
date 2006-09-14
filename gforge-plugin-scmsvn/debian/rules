@@ -10,6 +10,9 @@ export DH_COMPAT=4
 
 export PLUGIN=scmsvn
 
+PACKAGE=gforge-plugin-scmsvn
+include /usr/share/dpatch/dpatch.make
+
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
@@ -18,11 +21,11 @@ configure-stamp:
 
 build: build-stamp
 
-build-stamp: configure-stamp
+build-stamp: configure-stamp patch
 	dh_testdir
 	touch build-stamp
 
-clean:
+clean: unpatch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
@@ -37,23 +40,18 @@ install: build
 	dh_installdirs
 
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	#ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/svnsh $(DESTDIR)/bin/
-	# Removed svnsh that should be scmsh in gforge-common package
-	cp -r common/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/
+	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
+	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/*
-	#cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
 	cp cgi-bin/viewcvs.cgi $(DESTDIR)/usr/lib/gforge/bin/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/viewcvs.cgi
-	cp -r etc/* $(DESTDIR)/etc/gforge/
+	cp -r etc/httpd.d $(DESTDIR)/usr/share/gforge/etc/
+	cp -r etc/plugins $(DESTDIR)/etc/gforge/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
-	# install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.conf.d/50$(PLUGIN)
-	# install -m 0600 httpd.secrets $(DESTDIR)/etc/gforge/httpd.secrets.d/50$(PLUGIN)
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/common/ -type f | xargs chmod 0644
-	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
-	# find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
-	# find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	# clean CVS/baz dir
 	find $(DESTDIR)/ -type d -name CVS -or -name .arch-ids | xargs rm -rf
@@ -94,4 +92,4 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+.PHONY: build clean binary-indep binary-arch binary install configure patch unpatch
