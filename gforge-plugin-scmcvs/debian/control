@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
-Build-Depends: debhelper (>> 4.0.0)
+Build-Depends: debhelper (>> 4.0.0), dpatch
 Standards-Version: 3.7.2
 
 Package: gforge-plugin-scmcvs
