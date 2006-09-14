@@ -24,7 +24,7 @@ case "$1" in
 
 	# Unpatch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh purge-files
-	propose_update_remove /etc/proftpd.conf
+	propose_update_remove /etc/proftpd/proftpd.conf
 
 	# Clean debconf after ourselves
 	db_stop

@@ -1,6 +1,159 @@
-gforge (4.1-9) unstable; urgency=low
+gforge (4.5.14-10+3) unstable; urgency=low
+
+  * [Roland] Updated Dutch debconf templates translation, from Bart
+    Cornelis <cobaco@skolelinux.no> (closes: #384150).
+  * [Roland] debian/rules: also remove binary files coming from uu-files
+    coming from patches on clean.
+  * [Roland] db-upgrade.pl: Fixed conversion of the Resolution field to
+    the extra-fields system.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  3 Sep 2006 21:52:54 +0200
+
+gforge (4.5.14-10) unstable; urgency=low
+
+  * [Roland] Fixed control file (it referenced a gforge-plugin-scmcase
+    package that never existed, rather than -scmccase).
+  * [Roland] Updated from CVS.
+  * [Roland] Updated French debconf templates translation, from Christian
+    Perrier <bubulle@debian.org> and the French l10n team (closes:
+    #382589).
+  * [Roland] Updated Swedish debconf templates translation, from Daniel
+    Nylander <po@danielnylander.se>.
+  * [Roland] Updated Vietnamese debconf templates translation, from Clytie
+    Siddall <clytie@riverland.net.au> and the Vietnamese free-software
+    translation team.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Aug 2006 09:12:54 +0200
+
+gforge (4.5.14-9) unstable; urgency=low
+
+  * [Roland] Uploading to unstable.  This means the bugs that were fixed
+    during the experimental phase can now be closed (closes: #358241,
+    #328224, #375863, #331835, #339646, #374384, #373554, #242186,
+    #376155, #311791, #339878, #354591).
+  * [Roland] fix-lists-url.dpatch: Fixed URL patterns for Mailman pages
+    (closes: #375529).  By using the appropriate URLs, rather than messing
+    with Mailman's configuration.  Adapted the Apache config accordingly.
+  * [Roland] Fixed Postfix configuration (closes: #376284).
+  * [Roland] Removed versioned dependencies on virtual packages, by
+    keeping only the existing packages (closes: #376163).  If new
+    alternatives appear (for new MTAs or mailing-list managers or anything
+    else), I'll be glad to add them in the control file.
+  * [Roland] Applied patch from Julien Cristau
+    <julien.cristau@ens-lyon.org>, whereby sql2ldif.pl now uses the SQL
+    views rather than duplicating their code.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 22 Jul 2006 16:43:57 +0200
+
+gforge (4.5.14-8) experimental; urgency=low
+
+  * [Roland] Oops.  Only part of the fix for #376155 had been committed,
+    and the rest wasn't part of 4.5.14-7.  This new upload should have it.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jul 2006 18:56:25 +0200
+
+gforge (4.5.14-7) experimental; urgency=low
+
+  * [Roland] Add a "project_before_description" hook on project homes.
+  * [Roland] Managed to get apache-related scripts to play nice with
+    debconf (closes: #376155).
+  * [Roland] Also, updated from CVS, to fix the "missing
+    Textsanitizer.class" bug (closes: #375863).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jul 2006 18:15:56 +0200
+
+gforge (4.5.14-6) experimental; urgency=low
+
+  * [Roland] Fixed the RBAC migration (which left the whole site without
+    any project admin, doh!).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 28 Jun 2006 10:41:30 +0200
+
+gforge (4.5.14-5) experimental; urgency=low
+
+  * [Roland] Converted the remaining PHP database upgrading scripts
+    (20040826_migraterbac.php and 20041211-syncmail.php, 20051027-2.php
+    and 20050325-2.php) to static Perl code in db-upgrade.pl.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 27 Jun 2006 14:49:03 +0200
+
+gforge (4.5.14-4) experimental; urgency=low
+
+  * [Roland] Now recommends at least one of the SCM plugins (Subversion or
+    CVS).
+  * [Roland] Added missing rss.png icon (closes: #373554).
+  * [Roland] Fixed db-upgrade.pl (trying to access a column not yet
+    created yet for checkpoint 4.1-8).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 26 Jun 2006 16:05:06 +0200
+
+gforge (4.5.14-3) experimental; urgency=low
+
+  * [Roland] Removed a bit of verbosity from db-upgrade.pl.
+  * [Roland] add-groupadminmenu-hook.dpatch: Backported the insertion of
+    the groupadminmenu hook from CVS HEAD.
+  * [Roland] Set up the tables for timetracking at install time, rather
+    than needing the admin to go and click on a button.
+  * [Roland] Removed banner ads.
+  * [Roland] Made create-vhosts.sh cronjob silent (closes: #374384).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 19 Jun 2006 16:37:24 +0200
+
+gforge (4.5.14-2) experimental; urgency=low
+
+  * [Roland] Started moving database upgrading code from PHP scripts to
+    db-upgrade.pl: migrateforum.php, 20050617.php.
+  * [Roland] disable-tracker-reply-by-email.dpatch: Removed the blurb
+    about replying to a bug report by email from the notifications, since
+    the reply by email doesn't work yet.
+  * [Roland] Re-enabled dpatch, which seems to have been left out at some
+    point.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 12 Jun 2006 16:03:11 +0200
+
+gforge (4.5.14-1) experimental; urgency=low
+
+  * [Roland] New upstream release (4.5.14), snapshot as of 2006-06-03,
+    (closes: #242186, #281310).
+  * This release includes the fix for a cross-site scripting security
+    vulnerability (closes: #328224).
+  * proftpd's config file is now in /etc/proftpd/proftpd.conf.
+  * Added Debconf translations for Vietnamese and Swedish, updated Dutch
+    (closes: #311791, #339878, #354591).
+  * Allow debconf-2.0 as an alternative for debconf (closes: #331835).
+
+ -- Roland Mas <lolando@debian.org>  Tue,  6 Jun 2006 21:03:26 +0200
+
+gforge (4.5.6-1) unstable; urgency=low
+
+  * [Christian] Add support for most recent database postgresql 8.0 8.1 at the time
+  writing this.
+
+ -- Christian Bayle <bayle@debian.org>  Mon, 30 Jan 2006 00:51:15 +0100
+
+gforge (4.5.3-4) stable; urgency=low
+
+  * New Upstream version, compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 16 Nov 2005 19:08:15 +0100
+
+gforge (4.5.3-3) stable; urgency=low
+
+  * New Upstream version, compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Nov 2005 18:25:52 +0100
+
+gforge (4.5-5k) stable; urgency=low
+
+  * [Christian] Compile for sarge
+
+ -- Christian Bayle <bayle@debian.org>  Tue,  8 Nov 2005 22:11:58 +0100
+
+gforge (4.5-2) unstable; urgency=low
 
   * [Christian] Added 20050605.sql, 20050617.php, 20050628.sql in db-upgrade
+  * [Christian] Some issues were fixed in migraterbac scripts and in tracker
+  * [Christian] Include last branch corrections
 
  -- Christian Bayle <bayle@debian.org>  Sun,  3 Jul 2005 17:44:38 +0200
 

@@ -11,6 +11,7 @@ use diagnostics ;
 use DBI ;
 use MIME::Base64 ;
 use HTML::Entities ;
+use Digest::MD5 ;
 
 use vars qw/$dbh @reqlist $query/ ;
 use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
@@ -1589,9 +1590,27 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-2+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with migrateforum.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migrateforum.php") == 0 
-	or die "system call of 20040826_migrateforum.php failed: $?" ;
+        &debug ("Migrating forum names") ;
+	
+	$query = "SELECT group_forum_id,forum_name FROM forum_group_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $forumid = $array[0] ;
+	    my $oldname = $array[1] ;
+	    
+	    my $newname = lc $oldname ;
+	    $newname =~ s/[^_.0-9a-z-]/-/g ;
+	    
+	    my $query2 = "UPDATE forum_group_list SET forum_name='$newname' WHERE group_forum_id=$forumid" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -1600,9 +1619,158 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-2+2" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with migraterbac.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migraterbac.php") == 0
-	or die "system call of 20040826_migraterbac.php failed: $?" ;
+        &debug ("Migrating permissions to RBAC") ;
+	
+	my $defaultroles = {
+	    'Admin'	       => { 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' },
+	    'Senior Developer' => { 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' },
+	    'Junior Developer' => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'1', 'pmadmin'=>'0', 'pm'=>'1' },
+	    'Doc Writer'       => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'0', 'pmadmin'=>'0', 'pm'=>'0' },
+	    'Support Tech'     => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' }
+	} ;
+	
+	$query = "SELECT group_id FROM groups where status != 'P'" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id = $array[0] ;
+
+	    my ($query2, $sth2, @array2, $admin_rid, $jd_rid, %roledata) ;
+	    foreach my $rname (keys %$defaultroles) {
+		$query2 = "SELECT nextval('role_role_id_seq'::text)" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		@array2 = $sth2->fetchrow_array ;
+		my $rid = $array2[0] ;
+		$sth2->finish () ;
+		if ($rname eq 'Admin') {
+		    $admin_rid = $rid ;
+		} elsif ($rname eq 'Junior Developer') {
+		    $jd_rid = $rid ;
+		}
+
+		$query2 = "INSERT INTO role (role_id, group_id, role_name)
+                           VALUES ($rid, $group_id, 'rname')" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		$sth2->finish () ;
+
+		foreach my $section (keys %{$defaultroles->{$rname}}) {
+		    if ($section eq 'forum') {
+			$query2 = "SELECT group_forum_id 
+                               FROM forum_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'forum'}{$array2[0]} = $defaultroles->{$rname}{'forum'} ;
+			}
+			$sth2->finish () ;
+		    } elsif ($section eq 'pm') {
+			$query2 = "SELECT group_project_id 
+                               FROM project_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'pm'}{$array2[0]} = $defaultroles->{$rname}{'pm'} ;
+			}
+			$sth2->finish () ;
+		    } elsif ($section eq 'tracker') {
+			$query2 = "SELECT group_artifact_id 
+                               FROM artifact_group_list 
+                               WHERE group_id = $group_id" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			while (@array2 = $sth2->fetchrow_array) {
+			    $roledata{'tracker'}{$array2[0]} = $defaultroles->{$rname}{'tracker'} ;
+			}
+			$sth2->finish () ;
+		    } else {
+			$roledata{$section}{0} = $defaultroles->{$rname}{$section} ;
+		    }
+		    
+		    foreach my $rd_it (keys %{$roledata{$section}}) {
+			$query2 = "INSERT INTO role_setting (role_id, section_name, ref_id, value)
+                                   VALUES ($rid, '$section', $rd_it, '$roledata{$section}{$rd_it}')" ;
+			# &debug ($query2) ;
+			$sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			$sth2->finish () ;
+		    }
+		    
+		}
+		
+	    }
+	    
+	    #   affecter le rôle Admin aux admins, JD aux autres
+	    $query2 = "SELECT user_id, admin_flags FROM user_group WHERE group_id = $group_id" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $uid        = $array2[0] ;
+		my $adminflags = $array2[1] ;
+		my ($rid, $rname) ;
+
+		$adminflags =~ s/\s//g ;
+		if ($adminflags eq 'A') {
+		    $rid = $admin_rid ;
+		    $rname = 'Admin' ;
+		} else {
+		    $rid = $jd_rid ;
+		    $rname = 'Junior Developer' ;
+		}
+		my @reqlist3 = (
+				"UPDATE user_group
+                                 SET role_id = $rid,
+			         admin_flags    = '$defaultroles->{$rname}{'projectadmin'}',
+			         forum_flags    = '$defaultroles->{$rname}{'forumadmin'}',
+			         project_flags  = '$defaultroles->{$rname}{'pmadmin'}',
+			         doc_flags      = '$defaultroles->{$rname}{'docman'}',
+			         cvs_flags      = '$defaultroles->{$rname}{'scm'}',
+			         release_flags  = '$defaultroles->{$rname}{'frs'}',
+			         artifact_flags = '$defaultroles->{$rname}{'trackeradmin'}'
+                                 WHERE user_id = $uid AND group_id = $group_id" ,
+				"UPDATE forum_perm
+				 SET perm_level=$defaultroles->{$rname}{'forum'}
+				 WHERE group_forum_id IN (
+                                    SELECT group_forum_id
+                                    FROM forum_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				"UPDATE project_perm
+				 SET perm_level=$defaultroles->{$rname}{'pm'}
+				 WHERE group_project_id IN (
+                                    SELECT group_project_id
+                                    FROM project_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				"UPDATE artifact_perm
+				 SET perm_level=$defaultroles->{$rname}{'tracker'}
+				 WHERE group_artifact_id IN (
+                                    SELECT group_artifact_id
+                                    FROM artifact_group_list
+                                    WHERE group_id=$group_id)
+                                 AND user_id=$uid" ,
+				) ;
+		foreach my $query3 (@reqlist3) {
+		    # &debug ($query3) ;
+		    my $sth3 = $dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    $sth3->finish () ;
+		}
+	    }
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -1872,9 +2040,52 @@ END;
     $version = &get_db_version ;
     $target = "4.0.2-0+1" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041211-syncmail.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20041211-syncmail.php") == 0 
-	or die "system call of 20041211-syncmail.php failed: $?" ;
+        &debug ("Creating automatic commit notification mailing-lists") ;
+	
+
+	$query = "SELECT group_id, unix_group_name FROM groups WHERE status='A' ORDER BY group_id" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id   = $array[0] ;
+	    my $group_name = $array[1] ;
+
+	    my $query2 = "SELECT count(*) FROM mail_group_list 
+   			  WHERE group_id = $group_id 
+			  AND list_name = '".$group_name."-commits'" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    my @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    if ($array2[0] == 0) {
+		my $listname = $group_name."-commits" ;
+		my $listpw = substr (Digest::MD5::md5_base64 ($listname . rand(1)), 0, 16) ;
+		
+		
+		$query2 = "SELECT user_id FROM user_group 
+			   WHERE admin_flags = 'A' 
+			   AND group_id = $group_id" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		my $group_admin = -1 ;
+		if (@array2 = $sth2->fetchrow_array) {
+		    $group_admin = $array2[0] ;
+		}
+		$sth2->finish () ;
+
+		$query2 = "INSERT INTO mail_group_list (group_id, list_name, is_public, password, list_admin, status, description)
+                           VALUES ($group_id, '$listname', 1, '$listpw', $group_admin, 1, 'commits')" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		$sth2->finish () ;
+	    }
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2112,9 +2323,194 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-5" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-2.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050325-2.php") == 0
-	or die "system call of 20050325-2.php failed: $?" ;
+        &debug ("Converting trackers to use their extra fields") ;
+	
+	$query = "SELECT group_id,group_artifact_id,use_resolution FROM artifact_group_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $group_id = $array[0] ;
+	    my $gaid 	 = $array[1] ;
+	    my $ur 	 = $array[2] ;
+
+	    # Ajout du champ Category
+	    my $query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+	    # &debug ($query2) ;
+	    my $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    my @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    my $aefid = $array2[0] ;
+	    
+	    $query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Category', 1)" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    $query2 = "SELECT id, category_name FROM artifact_category WHERE group_artifact_id=$gaid" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $cat_id = $array2[0] ;
+		my $catname = $array2[1] ;
+
+		if ($catname eq '') { $catname = '[empty]' ; }
+		
+		my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		# &debug ($query3) ;
+		my $sth3 = $dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		my @array3 = $sth3->fetchrow_array ;
+		$sth3->finish () ;
+		my $efeid = $array3[0] ;
+
+		$query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                              VALUES ($efeid, $aefid, ?, 0)" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($catname) ;
+		$sth3->finish () ;
+
+		$query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                           SELECT artifact_id,$efeid,$aefid FROM artifact 
+                           WHERE category_id=$cat_id" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		$sth3->finish () ;
+
+		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Category'
+			   WHERE old_value=$cat_id AND field_name='category_id'" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($catname) ;
+		$sth3->finish () ;
+	    }
+	    $sth2->finish () ;
+	    
+	    # Ajout du champ Group
+	    $query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    @array2 = $sth2->fetchrow_array ;
+	    $sth2->finish () ;
+	    $aefid = $array2[0] ;
+	    
+	    $query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Group', 1)" ;
+	    # &debug ($query2) ;
+	    $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    $query2 = "SELECT id, group_name FROM artifact_group WHERE group_artifact_id=$gaid" ;
+	    # &debug ($query2) ;
+	    $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+
+	    while (@array2 = $sth2->fetchrow_array) {
+		my $grp_id = $array2[0] ;
+		my $grpname = $array2[1] ;
+
+		if ($grpname eq '') { $grpname = '[empty]' ; }
+		
+		my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		# &debug ($query3) ;
+		my $sth3 = $dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		my @array3 = $sth3->fetchrow_array ;
+		$sth3->finish () ;
+		my $efeid = $array3[0] ;
+
+		$query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                              VALUES ($efeid, $aefid, ?, 0)" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($grpname) ;
+		$sth3->finish () ;
+
+		$query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                           SELECT artifact_id,$efeid,$aefid FROM artifact 
+                           WHERE artifact_group_id=$grp_id" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		$sth3->finish () ;
+
+		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Group'
+			   WHERE old_value=$grp_id AND field_name='artifact_group_id'" ;
+		# &debug ($query3) ;
+		$sth3 =$dbh->prepare ($query3) ;
+		$sth3->execute ($grpname) ;
+		$sth3->finish () ;
+	    }
+	    $sth2->finish () ;
+
+	    # Ajout du champ Resolution (s'il existe, cf. $ur)
+	    if ($ur) {
+		$query2 = "SELECT nextval('artifact_extra_field_list_extra_field_id_seq'::text)" ;
+		# &debug ($query2) ;
+		$sth2 = $dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		@array2 = $sth2->fetchrow_array ;
+		$sth2->finish () ;
+		$aefid = $array2[0] ;
+		
+		$query2 = "INSERT INTO artifact_extra_field_list (extra_field_id, group_artifact_id,field_name,field_type) 
+                       VALUES ($aefid, $gaid, 'Resolution', 1)" ;
+		# &debug ($query2) ;
+		$sth2 =$dbh->prepare ($query2) ;
+		$sth2->execute () ;
+
+		$query2 = "SELECT id, resolution_name FROM artifact_resolution" ;
+		# &debug ($query2) ;
+		$sth2 = $dbh->prepare ($query2) ;
+		$sth2->execute () ;
+
+		while (@array2 = $sth2->fetchrow_array) {
+		    my $res_id = $array2[0] ;
+		    my $resname = $array2[1] ;
+
+		    if ($resname eq '') { $resname = '[empty]' ; }
+		    
+		    my $query3 = "SELECT nextval('artifact_extra_field_elements_element_id_seq'::text)" ;
+		    # &debug ($query3) ;
+		    my $sth3 = $dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    my @array3 = $sth3->fetchrow_array ;
+		    $sth3->finish () ;
+		    my $efeid = $array3[0] ;
+
+		    $query3 = "INSERT INTO artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) 
+                               VALUES ($efeid, $aefid, ?, 0)" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute ($resname) ;
+		    $sth3->finish () ;
+
+		    $query3 = "INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+                               SELECT artifact_id,$efeid,$aefid FROM artifact 
+                               WHERE resolution_id=$res_id and group_artifact_id=$gaid" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute () ;
+		    $sth3->finish () ;
+
+		    $query3 = "UPDATE artifact_history SET old_value=?,field_name='Resolution'
+			       WHERE old_value=$res_id AND field_name='resolution_id'" ;
+		    # &debug ($query3) ;
+		    $sth3 =$dbh->prepare ($query3) ;
+		    $sth3->execute ($resname) ;
+		    $sth3->finish () ;
+		}
+		$sth2->finish () ;
+	    }
+	}
+	
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2163,9 +2559,74 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-8" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050617.php") ;
-	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20050617.php") == 0
-	or die "system call of 20050617.php failed: $?" ;
+        &debug ("Creating aliases for the extra fields") ;
+
+	$query = "ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	my %reserved_alias = (
+	    "project" => 1,
+	    "type" => 1,
+	    "priority" => 1,
+	    "assigned_to" => 1,
+	    "summary" => 1,
+	    "details" => 1,
+	) ;
+
+	$query = "SELECT field_name, alias, group_artifact_id, extra_field_id FROM artifact_extra_field_list" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $name = $array[0] ;
+	    my $alias = $array[1] ;
+	    my $gaid = $array[2] ;
+	    my $efid = $array[3] ;
+
+	    if (! $alias) {
+		my $newalias = lc $name ;
+		$newalias =~ s/\s/_/g ;
+		$newalias =~ s/[^_a-z]//g ;
+		
+		if ($newalias ne "") {
+		    if ($reserved_alias{$newalias}) {
+			$newalias = "extra_" . $newalias ;
+		    }
+		    
+		    my $candidate ;
+		    my $conflict = 0 ;
+		    my $count = 0 ;
+		    do {
+			$candidate = $newalias ;
+			$candidate .= $count if ($count > 0) ;
+			my $query2 = "SELECT count(*) FROM artifact_extra_field_list WHERE group_artifact_id=$gaid AND LOWER(alias)='$candidate' AND extra_field_id <> $efid" ;
+			# &debug ($query2) ;
+			my $sth2 =$dbh->prepare ($query2) ;
+			$sth2->execute () ;
+			my @array2 = $sth2->fetchrow_array ;
+			if ($array2[0] == 0) {
+			    $conflict = 0 ;
+			} else {
+			    $conflict = 1 ;
+			    $count++ ;
+			}
+			$sth2->finish () ;
+		    } until ($conflict == 0) ;
+			
+		    my $query2 = "UPDATE artifact_extra_field_list SET alias='$candidate' WHERE extra_field_id=$efid" ;
+		    # &debug ($query2) ;
+		    my $sth2 =$dbh->prepare ($query2) ;
+		    $sth2->execute () ;
+		    $sth2->finish () ;
+		}
+	    }
+
+	}
+	$sth->finish () ;
+
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
@@ -2190,6 +2651,150 @@ $dbh->{RaiseError} = 1;
         &debug ("Committing.") ;
         $dbh->commit () ;
     }
+
+    $version = &get_db_version ;
+    $target = "4.5-1" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050711.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050711.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-2" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050906.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050906.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20051027-1.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20051027-1.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5-4" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Updating document sizes") ;
+
+	$query = "SELECT docid, data FROM doc_data" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $docid = $array[0] ;
+	    my $b64data = $array[1] ;
+	    my $data = decode_base64 ($b64data) ;
+	    my $size = length ($data) ;
+
+	    my $query2 = "UPDATE doc_data SET filesize=$size WHERE docid=$docid" ;
+	    # &debug ($query2) ;
+	    my $sth2 =$dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    $sth2->finish () ;
+	}
+	$sth->finish () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5.14-3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Setting up time tracking") ;
+
+	if (&table_exists ($dbh, "rep_time_category")) {
+	    &debug ("...already set up.") ;
+	} else {
+	    &drop_table_if_exists ($dbh, "rep_time_category") ;
+	    &drop_sequence_if_exists ($dbh, "rep_time_category_time_code_seq") ;
+	    &drop_table_if_exists ($dbh, "rep_time_tracking") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_users_cum_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_added_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_groups_cum_monthly") ;
+	    &drop_view_if_exists ($dbh, "rep_group_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_user_act_oa_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_daily_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_weekly_vw") ;
+	    &drop_view_if_exists ($dbh, "rep_site_act_monthly_vw") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_user_act_monthly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_daily") ;
+	    &drop_index_if_exists ($dbh, "repgroupactdaily_daily") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_weekly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactweekly_weekly") ;
+	    &drop_table_if_exists ($dbh, "rep_group_act_monthly") ;
+	    &drop_index_if_exists ($dbh, "repgroupactmonthly_monthly") ;
+
+	    @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/timetracking-init.sql") } ;
+	    foreach my $s (@reqlist) {
+		$query = $s ;
+		# debug $query ;
+		$sth = $dbh->prepare ($query) ;
+		$sth->execute () ;
+		$sth->finish () ;
+	    }
+	    @reqlist = () ;
+	}
+	
+	&update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
     &debug ("Please enjoy using GForge.") ;
@@ -2222,7 +2827,12 @@ $dbh->rollback ;
 $dbh->disconnect ;
 
 sub get_pg_version () {
-    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    my $command;
+    if (-x '/usr/bin/pg_lsclusters' ) {
+    	$command = q(/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1) ;
+    } else {
+    	$command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    }
     my $version = qx($command) ;
     chomp $version ;
     return $version ;

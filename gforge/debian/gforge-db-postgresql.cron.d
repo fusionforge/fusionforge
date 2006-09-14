@@ -33,7 +33,7 @@
 45 0 * * * gforge [ -x /usr/lib/gforge/bin/db_stats_agg.php ] && /usr/lib/gforge/bin/db_stats_agg.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Hourly sending of mass e-mailings
-48 * * * * root [ -x /usr/lib/gforge/bin/massmail.php ] && /usr/lib/gforge/bin/massmail.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+48 * * * * gforge [ -x /usr/lib/gforge/bin/massmail.php ] && /usr/lib/gforge/bin/massmail.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Weekly db vacuum
 50 2 * * Mon gforge [ -x /usr/lib/gforge/bin/vacuum.php ] && /usr/lib/gforge/bin/vacuum.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1

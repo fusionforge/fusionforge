@@ -18,6 +18,7 @@ remove-binary-files:
 #	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 	# Also a few images
 #	rm -f www/themes/gforge/images/es_*
+	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 configure: configure-stamp debian/po/templates.pot
 configure-stamp: remove-binary-files
@@ -29,7 +30,7 @@ debian/po/templates.pot: $(wildcard debian/*.templates) $(wildcard debian/*.temp
 	@debconf-updatepo
 
 build: configure-stamp build-stamp
-build-stamp: patch-stamp
+build-stamp: patch
 	dh_testdir
 
 	# Build man pages from Docbook sources
@@ -48,7 +49,6 @@ clean: remove-binary-files unpatch
 	rm -f cvssh.1 gforge-config.1
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
-	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 	dh_clean
 
 install: build
@@ -64,23 +64,23 @@ install: build
 	# (gforge is a meta-package and needs no files)
 
 	# gforge-common
-	install -m 644 etc/httpd.d/[0-9][0-9]* $(CURDIR)/debian/gforge-common/etc/gforge/httpd.d/
-	install -m 644 etc/httpd.d/httpd* $(CURDIR)/debian/gforge-common/etc/gforge/httpd.d/
-	install -m 644 etc/local.d/[0-9][0-9]* $(CURDIR)/debian/gforge-common/etc/gforge/local.d/
-	install -m 644 etc/templates/*\.* $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 755 setup $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-common/bin/cvssh
+	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
+	install -m 644 etc/httpd.d/httpd*                 $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
+	install -m 644 etc/local.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/local.d/
+	install -m 644 etc/templates/*\.*                 $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/templates/
+	install -m 755 setup                               $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/cvssh.pl               $(CURDIR)/debian/gforge-common/bin/cvssh
 	#
-	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 utils/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/gforge-config $(CURDIR)/debian/gforge-common/usr/sbin/
-	install -m 644 utils/include.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
+	install -m 755 deb-specific/install-chroot.sh     $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-ssh.sh        $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 utils/fill-in-the-blanks.pl        $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/gforge-config         $(CURDIR)/debian/gforge-common/usr/sbin/
+	install -m 644 utils/include.pl                   $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
 	#
-	install -m 755 deb-specific/user_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/group_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/user_dump_update.pl   $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/group_dump_update.pl  $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 644 cronjobs/cvs-cron/default_page.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
-	install -m 755 deb-specific/ssh_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/ssh_dump_update.pl    $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
@@ -166,6 +166,7 @@ install: build
 	install -m 644 db/2004*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 755 db/2005*php     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/2005*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
@@ -177,7 +178,8 @@ install: build
 	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
 
 	# gforge-shell-ldap
-	cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
+	# not needed chroot is a symlink -> ../../../
+	#cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
 
 	# gforge-shell-postgresql
 	install -m 755 deb-specific/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/

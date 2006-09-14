@@ -1,0 +1,37 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge~/common/mail/MailingList.class gforge/common/mail/MailingList.class
+--- gforge~/common/mail/MailingList.class	2006-05-30 20:10:38.000000000 +0200
++++ gforge/common/mail/MailingList.class	2006-07-21 14:47:17.000000000 +0200
+@@ -322,7 +322,7 @@
+ 		if ($this->isPublic()) {
+ 			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+ 		} else {
+-			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
++			return 'http://'.$GLOBALS['sys_lists_host'].'/cgi-bin/mailman/private/'.$this->getName().'/';
+ 		}
+ 	}
+ 	
+@@ -332,7 +332,7 @@
+ 	 * @return string url of the info page
+ 	 */
+ 	function getExternalInfoUrl() {
+-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
++		return 'http://'.$GLOBALS['sys_lists_host'].'/cgi-bin/mailman/listinfo/'.$this->getName();
+ 	}
+ 	
+ 	/**
+@@ -341,7 +341,7 @@
+ 	 * @return string url of the admin
+ 	 */
+ 	function getExternalAdminUrl() {
+-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
++		return 'http://'.$GLOBALS['sys_lists_host'].'/cgi-bin/mailman/admin/'.$this->getName();
+ 	}
+ 
+ 	/**
