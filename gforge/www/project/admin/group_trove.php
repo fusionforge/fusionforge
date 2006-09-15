@@ -102,7 +102,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 }
 
 ?>
-<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>"/>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_group_trove','update_changes') ?>" /></p>
 </form>

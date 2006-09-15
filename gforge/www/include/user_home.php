@@ -18,11 +18,11 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 
 ?>
 
-<p>
 <table width="100%" cellpadding="2" cellspacing="2" border="0"><tr valign="top">
 <td width="50%">
 
 <?php echo $HTML->boxTop($Language->getText('user_home','personal_information')); ?>
+</td></tr>
 <tr>
 	<td><?php echo $Language->getText('user_home','user_id') ?> </td>
   <td><strong>
@@ -94,6 +94,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 			echo $Language->getText('user_home','peer_rating_disabled');
 		}
 	}
+	echo "</td></tr></table>";
 
 	echo $HTML->boxMiddle($Language->getText('user_home','diary_notes'));
  
@@ -106,9 +107,9 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 	$res=db_query("SELECT count(*) from user_diary ".
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo $Language->getText('user_home','diary_notes_entries').' '.db_result($res,0,0).'
-	<p>
+	<p/>
 	<a href="/developer/diary.php?diary_user='. $user_id .'">'.$Language->getText('user_home','diary_notes_view').'</a><?p>
-	<p>
+	<p/>
 	<a href="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .$Language->getText('user_home','diary_notes_monitor').'</a></p>';
 	$hookparams['user_id'] = $user_id;
 	plugin_hook("user_personal_links",$hookparams);
@@ -118,7 +119,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 
 <tr><td colspan="2">
 	<h4><?php echo $Language->getText('user_home','project_info') ?></h4>
-	<p>
+	<p/>
 <?php
 	// now get listing of groups for that user
 	$res_cat = db_query("SELECT groups.group_name, 
@@ -132,14 +133,14 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {
 	?>
-	<p><?php echo $Language->getText('user_home','no_projects') ?></p>
+	<p/><?php echo $Language->getText('user_home','no_projects') ?><p/>
 	<?php
 } else { // endif no groups
-	print "<p>".$Language->getText('user_home','member_of')."<br />&nbsp;";
+	print "<p/>".$Language->getText('user_home','member_of')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
 		print ("<br />" . "<a href=\"/projects/".$row_cat['unix_group_name']."/\">".$row_cat['group_name']."</a>\n");
 	}
-	print "</ul></p>";
+	print "</ul><p/>";
 } // end if groups
 
 echo $HTML->boxBottom(); ?>
@@ -164,11 +165,11 @@ echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
 <?php echo $Language->getText('users','peerinfo2', $GLOBALS['sys_name']);
 
 } else if ($me && !$me->usesRatings()) { ?>
-<p>
+<p/>
 <em>
 <?php echo $Language->getText('users','optout'); ?>
 </em>
-</p>
+<p/>
 <?php }
       } ?>
 </td>
@@ -176,13 +177,12 @@ echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
 
 </tr>
 </table>
-</p>
-<p>
+<p/>
 <table width="100%" cellpadding="2" cellspacing="2" border="0"><tr valign="top">
 <tr><td colspan="2">
 
 </td></tr>
-</table></p>
+</table><p/>
 
 <?php
 

@@ -52,7 +52,7 @@ print '<br /><br />';
 stats_site_projects_monthly( );
 print '<br /><br />' . "\n";
 print '</div>' . "\n";
-echo '<p>'.$Language->getText('stats_index','other_statistics').'</p>';
+echo '<p/>'.$Language->getText('stats_index','other_statistics');
 
 //
 // END PAGE CONTENT CODE

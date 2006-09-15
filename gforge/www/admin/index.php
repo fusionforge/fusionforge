@@ -118,8 +118,8 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 			<option value="H"><?php echo $Language->getText('admin_index','project_hold'); ?></option>
 			<option value="P"><?php echo $Language->getText('admin_index','project_pending'); ?></option>
 	</select>
-	<input type="hidden" name="groupsearch" value="1">
-	<input type="hidden" name="search" value="%">
+	<input type="hidden" name="groupsearch" value="1"/>
+	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo $Language->getText('general','submit');?> "/>
 	</form></li>
 	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>

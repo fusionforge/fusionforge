@@ -259,7 +259,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>
-		<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 		<tr valign="top" align="right" class="tableheading">
 			<td><strong><?php echo $Language->getText('stats_site_utils','group_name'); ?></strong></td>
@@ -372,8 +372,6 @@ function stats_site_projects_daily( $span ) {
 
 		?>
 		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_days',array($valid_days)); ?></strong></p>
-
-		<p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
 			<td><strong><?php echo $Language->getText('stats_site_utils','day'); ?></strong></td>
@@ -405,7 +403,7 @@ function stats_site_projects_daily( $span ) {
 		}
 
 		?>
-		</table></p>
+		</table>
 		<?php
 
 	} else {
@@ -429,7 +427,6 @@ function stats_site_projects_monthly() {
 		?>
 		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_months',array($valid_months)); ?></strong></p>
 
-		<p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
 			<td><strong><?php echo $Language->getText('stats_site_utils','month'); ?>Month</strong></td>
@@ -463,7 +460,7 @@ function stats_site_projects_monthly() {
 		}
 
 		?>
-		</table></p>
+		</table>
 		<?php
 
 	} else {
@@ -489,7 +486,7 @@ function stats_site_aggregate( ) {
 	?>
 	<p><strong><?php echo $Language->getText('stats_site_utils','current_statistic_all_time'); ?></strong></p>
 
-	<p><table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
 		<td><strong><?php echo $Language->getText('stats_site_utils','site_views'); ?></strong></td>
 		<td><strong><?php echo $Language->getText('stats_site_utils','subdomain_views'); ?></strong></td>
@@ -506,7 +503,7 @@ function stats_site_aggregate( ) {
 		<td><?php echo number_format( $groups["count"],0 ); ?></td>
 		</tr>
 
-	</table></p>
+	</table>
 	<?php
 }
 
