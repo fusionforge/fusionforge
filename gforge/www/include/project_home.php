@@ -128,7 +128,9 @@ echo $HTML->boxBottom();
 		</td>
 	</tr>
 </table>
-<p>&nbsp;</p>
+
+<br />
+
 <?php
 
 // ############################# File Releases
