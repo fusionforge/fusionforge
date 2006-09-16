@@ -1,5 +1,6 @@
 gforge (4.5.14-10+3) unstable; urgency=low
 
+  [ Roland Mas ]
   * [Roland] Updated Dutch debconf templates translation, from Bart
     Cornelis <cobaco@skolelinux.no> (closes: #384150).
   * [Roland] debian/rules: also remove binary files coming from uu-files
@@ -7,7 +8,7 @@ gforge (4.5.14-10+3) unstable; urgency=low
   * [Roland] db-upgrade.pl: Fixed conversion of the Resolution field to
     the extra-fields system.
 
- -- Roland Mas <lolando@debian.org>  Sun,  3 Sep 2006 21:52:54 +0200
+ -- Christian Bayle <chris@athlonfree.grazian.org>  Sat, 16 Sep 2006 00:05:20 +0200
 
 gforge (4.5.14-10) unstable; urgency=low
 
