@@ -37,8 +37,8 @@ install: build
 	dh_installdirs
 
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
-	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+#	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
+#	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
 	cp cgi-bin/cvsweb $(DESTDIR)/usr/lib/gforge/bin/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/cvsweb
@@ -48,8 +48,8 @@ install: build
 	cp -r etc/plugins $(DESTDIR)/etc/gforge/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+#	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
+#	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	# clean CVS/baz dir
 	find $(DESTDIR)/ -type d -name CVS -or -name .arch-ids | xargs rm -rf
