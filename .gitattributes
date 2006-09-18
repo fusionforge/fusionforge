@@ -563,6 +563,7 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/etc/httpd.d/21list.ssl -text
 gforge/plugins/scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
