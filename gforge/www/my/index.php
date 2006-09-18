@@ -51,8 +51,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 		$result=db_query($sql);
 		$rows=db_numrows($result);
-		if (!$result || $rows != 1) {
-			exit_not_logged_in();
+		if (!$result || $rows != 1) { exit_not_logged_in();
 		}
 		$user_id=db_result($result,0,'user_id');
 		session_get_user()=user_get_object($user_id,$result);
@@ -61,14 +60,11 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname())));
 	?>
 
-<script type="text/javascript" src="/dojo/dojo.js"></script>
-<script type="text/javascript">
-    dojo.require("dojo.widget.TabPane");
-    dojo.require("dojo.widget.LinkPane");
-    dojo.require("dojo.widget.ContentPane");
-</script>
-<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="assignedartifactstab">
-<div dojoType="ContentPane" label="<?php echo $Language->getText('my','assignedartifacts'); ?>" id="assignedartifactstab">
+	<link rel="stylesheet" type="text/css" href="/tabber/gforge-tabber.css">
+<script type="text/javascript" src="/tabber/tabber.js"></script>
+<div id="tabber" class="tabber">
+<div class="tabbertab" 
+title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 	<?php
 	/*
 		Artifacts
@@ -113,7 +109,9 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('my','assignedtasks'); ?>" id="assignedtasksstab">
+  
+<div class="tabbertab" 
+title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 <?php
 	/*
 		Tasks assigned to me
@@ -169,7 +167,8 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('my','submittedartifacts'); ?>" id="submittedartifactstab">
+<div class="tabbertab" 
+title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 <?php
 	$last_group="0";
 	$order_name_arr=array();
@@ -208,7 +207,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('mytab','monitoring'); ?>" id="monitortab">
+<div class="tabbertab" title="<?php echo $Language->getText('mytab','monitoring'); ?>" >
 <?php
 	/*
 		Forums that are actively monitored
@@ -286,7 +285,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('mytab','project'); ?>" id="projectstab">
+<div class="tabbertab" title="<?php echo $Language->getText('mytab','project'); ?>" >
 <?php
 	/*
 		   Personal bookmarks

@@ -162,14 +162,10 @@ if (session_loggedin()) {
 </table>
 <br />
 <br />
-<script type="text/javascript" src="/dojo/dojo.js"></script>
-<script type="text/javascript">
-	dojo.require("dojo.widget.TabPane");
-	dojo.require("dojo.widget.LinkPane");
-	dojo.require("dojo.widget.ContentPane");
-</script>
-<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="messagestab">
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
+<link rel="stylesheet" type="text/css" href="/tabber/gforge-tabber.css">
+<script type="text/javascript" src="/tabber/tabber.js"></script>
+<div id="tabber" class="tabber">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
@@ -190,7 +186,7 @@ if (session_loggedin()) {
 <?php
 if ($group->usesPM()) {
 ?>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','relatedtasks'); ?>" id="taskstab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','relatedtasks'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<h3><?php echo $Language->getText('tracker','related_tasks'); ?>:</h3>
@@ -228,7 +224,7 @@ if ($group->usesPM()) {
 </table>
 </div>
 <?php } ?>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','attachments'); ?>" id="filetab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','attachments'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
         <strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
@@ -273,7 +269,7 @@ if ($group->usesPM()) {
 	</td></tr>
 </table>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','commits'); ?>" id="commitstab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','commits'); ?>">
 <table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
@@ -281,7 +277,7 @@ if ($group->usesPM()) {
 	?>
 </table>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','changes'); ?>" id="changestab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','changes'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<h3><?php echo $Language->getText('tracker_mod','changelog') ?>:</h3>
