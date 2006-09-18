@@ -864,6 +864,17 @@ gforge/www/search/include/engines/FrsGroupSearchEngine.class -text svneol=unset#
 gforge/www/search/include/engines/NewsGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/TasksGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/TrackersGroupSearchEngine.class -text svneol=unset#application/octet-stream
+gforge/www/tabber/example-ajax-0.html -text
+gforge/www/tabber/example-ajax-1.html -text
+gforge/www/tabber/example-ajax-2.html -text
+gforge/www/tabber/example-ajax.html -text
+gforge/www/tabber/example-cookies.html -text
+gforge/www/tabber/example.css -text
+gforge/www/tabber/example.html -text
+gforge/www/tabber/example2.html -text
+gforge/www/tabber/gforge-tabber.css -text
+gforge/www/tabber/tabber-minimized.js -text
+gforge/www/tabber/tabber.js -text
 gforge/www/themes/gforge-simple-theme/images/box-grad.png -text
 gforge/www/themes/gforge-simple-theme/images/box-topleft.png -text
 gforge/www/themes/gforge-simple-theme/images/box-topright.png -text
