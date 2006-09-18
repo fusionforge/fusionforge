@@ -1,3 +1,6 @@
+2006-09-19 Reinhard Spisser <reinhard@spisser.it>
+ 	* replacing dojo tabs with tabber
+
 2006-07-21 Reinhard Spisser <reinhard@spisser.it>
 	* I18n of activity tab
 	* Fixed translation tool which did not work correctly
