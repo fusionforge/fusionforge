@@ -1,6 +1,19 @@
+gforge (4.5.14-25+3) unstable; urgency=low
+
+  * Merged Branch_4_5 into trunk after svn conversion
+  essentially debian and deb-specific dir, setup and install-apache.sh too
+  * Separated gforge-web-apache in gforge-web-apache and gforge-web-apache2
+  * Added support for php5
+  * Don't setup ssl if certifcate are not there
+  * Added dsf_helper/patch-apache.* 
+  * Added a update_with_sql function in db-upgrade.pl and get in sync with
+    latest db/*.sql
+  * Fixed many typos in templates so lintian is happy
+
+ -- Christian Bayle <bayle@debian.org>  Tue, 19 Sep 2006 20:13:14 +0200
+
 gforge (4.5.14-10+3) unstable; urgency=low
 
-  [ Roland Mas ]
   * [Roland] Updated Dutch debconf templates translation, from Bart
     Cornelis <cobaco@skolelinux.no> (closes: #384150).
   * [Roland] debian/rules: also remove binary files coming from uu-files
@@ -8,7 +21,7 @@ gforge (4.5.14-10+3) unstable; urgency=low
   * [Roland] db-upgrade.pl: Fixed conversion of the Resolution field to
     the extra-fields system.
 
- -- Christian Bayle <chris@athlonfree.grazian.org>  Sat, 16 Sep 2006 00:05:20 +0200
+ -- Roland Mas <lolando@debian.org>  Sun,  3 Sep 2006 21:52:54 +0200
 
 gforge (4.5.14-10) unstable; urgency=low
 
