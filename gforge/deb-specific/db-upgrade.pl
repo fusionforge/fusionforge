@@ -2672,45 +2672,8 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "4.5-2" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050906.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050906.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.5-3" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20051027-1.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20051027-1.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20050906","4.5-2"); 
+    &update_with_sql("20051027-1","4.5-3"); 
 
     $version = &get_db_version ;
     $target = "4.5-4" ;
@@ -2794,6 +2757,15 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
+    &update_with_sql("20050812","4.5.14-10merge"); 
+    &update_with_sql("20050822","4.5.14-11merge"); 
+    &update_with_sql("20050823","4.5.14-12merge"); 
+    &update_with_sql("20050824","4.5.14-13merge"); 
+    &update_with_sql("20050831","4.5.14-14merge"); 
+
+    &update_with_sql("20060113","4.5.14-15"); 
+    &update_with_sql("20060214","4.5.14-16"); 
+    &update_with_sql("20060216","4.5.14-17"); 
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
@@ -2902,3 +2874,27 @@ sub get_db_version () {
 
     return $version ;
 }
+
+sub update_with_sql ( $ ) {
+    my $sqldate = shift or die "Not enough arguments" ;
+    my $target = shift or die "Not enough arguments" ;
+    my $version = &get_db_version ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with $sqldate.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/$sqldate.sql") } ;
+        foreach my $s (@reqlist) {
+            my $query = $s ;
+            # debug $query ;
+            my $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+}
+
