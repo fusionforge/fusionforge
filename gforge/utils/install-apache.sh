@@ -158,18 +158,18 @@ case "$1" in
 		for flavour in apache apache-perl apache-ssl ; do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
 				if [ "`/usr/sbin/modules-config $flavour query mod_php4`" == "" ] ; then
-	    				/usr/sbin/modules-config $flavour enable mod_php4
+	    				DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_php4
 				fi
 				if [ $flavour != apache-ssl ] ; then
 					if [ "`/usr/sbin/modules-config $flavour query mod_ssl`" == "" ] ; then
-	    					/usr/sbin/modules-config $flavour enable mod_ssl
+	    					DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_ssl
 					fi
 				fi
 				if [ "`/usr/sbin/modules-config $flavour query mod_env`" == "" ] ; then
-	    				/usr/sbin/modules-config $flavour enable mod_env
+	    				DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_env
 				fi
 				if [ "`/usr/sbin/modules-config $flavour query mod_vhost_alias`" == "" ] ; then
-	    				/usr/sbin/modules-config $flavour enable mod_vhost_alias
+	    				DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_vhost_alias
 				fi
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
@@ -188,11 +188,11 @@ case "$1" in
 	if [ -f /usr/sbin/a2enmod ] ; then
 		for flavour in apache2 ;  do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-				/usr/sbin/a2enmod php4
-				/usr/sbin/a2enmod ssl
-				/usr/sbin/a2enmod suexec
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php4 || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod ssl || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod suexec || true
 				#not enabling env module, part of base in apache2
-				/usr/sbin/a2enmod vhost_alias
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
@@ -210,7 +210,7 @@ case "$1" in
 	if [ "$NO_START" != "0" ]; then
 		for flavour in apache apache-perl apache-ssl ; do
 			if [ -x /usr/sbin/$flavour ]; then
-				invoke-rc.d $flavour restart || true
+				invoke-rc.d $flavour restart < /dev/null > /dev/null 2>&1 || true
 			fi
 		done
 	else
@@ -237,7 +237,7 @@ case "$1" in
     	for flavour in apache apache-perl apache-ssl apache2; do
 		[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && rm -f /etc/$flavour/conf.d/gforge.httpd.conf
 		if [ -x /usr/sbin/$flavour ]; then
-			invoke-rc.d $flavour restart || true
+			invoke-rc.d $flavour restart < /dev/null > /dev/null 2>&1 || true
 		fi
 	done
 	;;
