@@ -1,4 +1,3 @@
-DROP VIEW activity_vw;
 
 CREATE VIEW activity_vw AS 
 SELECT 
