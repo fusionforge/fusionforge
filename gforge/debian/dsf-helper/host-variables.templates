@@ -1,5 +1,5 @@
 Template: gforge/shared/ip_address
 Type: string
-_Description: Your IP address
+_Description: Your IP address:
  The IP address of the server that will host your Gforge installation. This
  is needed for the Apache virtualhosting configuration.

@@ -1,19 +1,19 @@
 Template: gforge/shared/db_host
 Type: string
-_Description: Your database server
+_Description: Your database server:
  The IP address (or host name) of the server that will host your GForge
  database.  This is needed for virtually all the subpackages.
 
 Template: gforge/shared/db_name
 Type: string
 Default: gforge
-_Description: Your database name
+_Description: Your database name:
  The name of the database that will host your GForge database.  This is
  needed for virtually all the subpackages.
 
 Template: gforge/shared/db_user
 Type: string
 Default: gforge
-_Description: Your database admin username
+_Description: Your database admin username:
  The admin username of the database that will host your GForge database. 
  This is needed for virtually all the subpackages.

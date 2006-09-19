@@ -1,4 +1,4 @@
 Template: gforge/shared/jabber_host
 Type: string
-_Description: Your jabber server
+_Description: Your jabber server:
  The hostname of the server that will host your Jabber server

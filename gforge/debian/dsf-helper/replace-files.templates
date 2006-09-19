@@ -5,12 +5,10 @@ _Description: Do you want ${file} to be updated?
  In order for Gforge to fully work, some changes must be made to the
  ${file} file.
  .
- I can either do them for you (and backup the current version in
+ Installer can either do them for you (and backup the current version in
  ${file}.gforge-old), or write the changes to another file
  (${file}.gforge-new) and let you propagate the changes to ${file}
  yourself.
- .
- Shall I modify ${file} automatically?
 
 Template: gforge/shared/replace_file_remove
 Type: boolean
@@ -19,17 +17,15 @@ _Description: Do you want ${file} to be updated?
  In order for Gforge to be fully deinstalled, some changes must be made to
  the ${file} file.
  .
- I can either do them for you (and backup the current version in
+ Installer can either do them for you (and backup the current version in
  ${file}.gforge-old), or write the changes to another file
  (${file}.gforge-new) and let you propagate the changes to ${file}
  yourself.
- .
- Shall I modify the ${file} automatically?
 
 Template: gforge/shared/file_changed
 Type: note
 _Description: Please check ${file}
  You have chosen not to let the Gforge package update the ${file} file. 
- Very well, I have not changed it.  Instead, I have written the suggested
+ Very well, Installer has not changed it.  Instead, It has written the suggested
  changes into ${file}.gforge-new. Please check this file and apply the
  appropriate changes to ${file}.

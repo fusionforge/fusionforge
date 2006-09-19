@@ -1,21 +1,21 @@
 Template: gforge/shared/ldap_base_dn
 Type: string
-_Description: The LDAP base DN
+_Description: The LDAP base DN:
  The DN is used to refer to the LDAP directory unambiguously.  You could
  use, for instance, "dc=gforge,dc=example,dc=com"
 
 Template: gforge/shared/ldap_host
 Type: string
-_Description: The LDAP host
+_Description: The LDAP host:
  The hostname of the LDAP server.
 
 Template: gforge/shared/ldap_web_add_password
 Type: password
-_Description: LDAP password used to add users from the web
+_Description: LDAP password used to add users from the web:
  In order to add users into the LDAP directory from the web, you need to
  provide a password.
 
 Template: gforge/shared/ldap_web_add_password_confirm
 Type: password
-_Description: LDAP password - again
+_Description: LDAP password - again:
  Please re-type the password for confirmation.

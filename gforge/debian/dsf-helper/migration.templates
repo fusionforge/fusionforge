@@ -1,7 +1,7 @@
 Template: gforge/migrate_from_sourceforge
 Type: boolean
 Default: false
-_Description: Migrate to Gforge?
+_Description: Migrate to Gforge:
  The free software version of the Sourceforge software has been
  renamed to "Gforge".  Accordingly, the Debian package has been
  renamed to "gforge", and "sourceforge" is no longer supported or
