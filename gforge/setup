@@ -1,7 +1,7 @@
 #! /bin/sh
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath] [-listen80|nolisten80]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
 }
 
 getval(){
@@ -123,8 +123,6 @@ computedefault(){
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
 	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
-	# added for massmail error 11/2005 fabio bertagnin transiciel
-	DEFAULTsys_sendmail_path=/usr/sbin/sendmail
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
@@ -269,6 +267,7 @@ setupinout(){
 	then
 		EXCLUDEVHOST='' 		
 	fi
+	#
 	rm -f $ETCDIR/httpd.d/10cvs
 	rm -f $ETCDIR/httpd.d/10scmcvs
 	rm -f $ETCDIR/httpd.d/10scmcvsauth
@@ -276,15 +275,34 @@ setupinout(){
 	rm -f $ETCDIR/httpd.d/11scmcvshttp
 	rm -f $ETCDIR/httpd.d/11scmsvnhttp
 	rm -f $ETCDIR/httpd.d/12scmcvshttp.ssl
+	rm -f $ETCDIR/httpd.d/20list
+	#
 
-	find $ETCDIR/httpd.d  -type f -regex "$ETCDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
+	find $ETCTEMPLATEDIR/httpd.d  -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
 	do
+		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/httpd.d/`basename $i` ]
+		then
+			if diff -q $i $ETCDIR/httpd.d/`basename $i` 
+			then
+				rm -f $ETCDIR/httpd.d/`basename $i`
+			else
+				i=$ETCDIR/httpd.d/`basename $i`
+			fi
+		fi
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
 	
 	if [ $listen80 == false ]
 	then
 		rm -f $ETCDIR/00listen80.gforge-new
+	fi
+
+	if [ $usessl == false -o -z "$(findkey)" -o -z "$(findcrt)" ]
+	then
+		echo "SSL Disabled"
+		rm -f $ETCDIR/[0-9][0-9]*.ssl.gforge-new
+	else
+		echo "SSL Enabled"
 	fi
 
 	echo "Creating $HTTPDCONF"
@@ -295,8 +313,17 @@ setupinout(){
 	rm $ETCDIR/httpd.secrets.gforge-new
 	
 	echo "Creating $LOCALINC"
-	find $ETCDIR/local.d -type f -regex "$ETCDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i 
+	find $ETCTEMPLATEDIR/local.d -type f -regex "$ETCTEMPLATEDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i 
 	do
+		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/local.d/`basename $i` ]
+		then
+			if diff -q $i $ETCDIR/local.d/`basename $i` 
+			then
+				rm -f $ETCDIR/local.d/`basename $i`
+			else
+				i=$ETCDIR/local.d/`basename $i`
+			fi
+		fi
 		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
 	(find $CONFFILEOUTDIR  -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | xargs cat ) > $LOCALINC
@@ -304,8 +331,17 @@ setupinout(){
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
-	find $ETCDIR/templates -name '[a-z]*' -maxdepth 1 -type f | while read i 
+	find $ETCTEMPLATEDIR/templates -type f -regex "$ETCTEMPLATEDIR/templates/[a-z].*"  | while read i 
 	do
+		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/templates/`basename $i` ]
+		then
+			if diff -q $i $ETCDIR/templates/`basename $i` 
+			then
+				rm -f $ETCDIR/templates/`basename $i`
+			else
+				i=$ETCDIR/templates/`basename $i`
+			fi
+		fi
 		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
 	chmod 600 $HTTPDSECRETS $CONFFILEIN $CONFFILEOUT
@@ -341,172 +377,8 @@ doapache() {
 }
 
 
-cleanplugindirs() {
-	for dir in www/plugins cronjobs/plugins db/plugins plugins/bin plugins/cgi-bin plugins etc/plugins 
-	do 
-		[ -d $dir ] && rmdir $dir && echo "# $dir removed" 
-	done
-}
-
-setupplugindirs() {
-	for dir in www/plugins cronjobs/plugins db/plugins plugins plugins/bin plugins/cgi-bin etc/plugins 
-	do 
-		[ ! -d $dir ] && mkdir $dir && echo "# Creating $dir" || echo "# $dir already exists" 
-	done
-}
-
-setupplugin() {
-	if [ -d "$1" ]
-	then
-		PLUGINDIR=$1
-		CURDIR=`pwd`
-		cd $PLUGINDIR
-		PLUGINDIR=`pwd`
-		cd $CURDIR
-
-		PLUGINNAME=`basename $1 | sed 's/gforge-plugin-//' `
-		echo "# Setting symlinks for $PLUGINNAME plugin"
-		# www stuffs
-		echo "# www stuffs"
-		if [ -d "$PLUGINDIR/www" -a -d "www/plugins" ] 
-		then 
-			echo "ln -s $PLUGINDIR/www www/plugins/$PLUGINNAME" 
-			ln -s $PLUGINDIR/www www/plugins/$PLUGINNAME 
-		fi 
-		# cronjobs stuffs
-		echo "# cronjobs stuffs"
-		if [ -d "$PLUGINDIR/cronjobs" -a -d "cronjobs/plugins" ] 
-		then 
-			echo "ln -s $PLUGINDIR/cronjobs cronjobs/plugins/$PLUGINNAME" 
-			ln -s $PLUGINDIR/cronjobs cronjobs/plugins/$PLUGINNAME
-		fi 
-		# lib stuffs
-		echo "# lib stuffs"
-		if [ -d "$PLUGINDIR/lib" -a -d "db/plugins" ] 
-		then 
-			echo "ln -s $PLUGINDIR/lib db/plugins/$PLUGINNAME" 
-			ln -s $PLUGINDIR/lib db/plugins/$PLUGINNAME
-		fi 
-		# include stuffs
-		echo "# include stuffs"
-		if [ -d "$PLUGINDIR/include" -a -d "plugins" ] 
-		then 
-			echo "ln -s $PLUGINDIR/include plugins/$PLUGINNAME" 
-			ln -s $PLUGINDIR/include plugins/$PLUGINNAME 
-		fi 
-		# cgi-bin stuffs
-		echo "# cgi-bin stuffs"
-		if [ -d "$PLUGINDIR/cgi-bin" -a -d "cgi-bin" ] 
-		then 
-			echo "ln -s $PLUGINDIR/cgi-bin cgi-bin/$PLUGINNAME" 
-			ln -s $PLUGINDIR/cgi-bin cgi-bin/$PLUGINNAME
-		fi 
-		# bin stuffs
-		echo "# bin stuffs"
-		if [ -d "$PLUGINDIR/bin" -a -d "plugins/bin" ] 
-		then 
-			echo "ln -s $PLUGINDIR/bin plugins/bin/$PLUGINNAME" 
-			ln -s $PLUGINDIR/bin plugins/bin/$PLUGINNAME
-		fi 
-		# etc/plugins stuffs
-		echo "# etc/plugins stuffs"
-		if [ -d "$PLUGINDIR/etc/plugins/$PLUGINNAME" -a -d "etc/plugins" ] 
-		then 
-			echo "ln -s $PLUGINDIR/etc/plugins/$PLUGINNAME etc/plugins/$PLUGINNAME" 
-			ln -s $PLUGINDIR/etc/plugins/$PLUGINNAME etc/plugins/$PLUGINNAME
-		fi 
-		# etc/httpd.d stuffs
-		echo "# etc/httpd.d stuffs"
-		if [ -d "$PLUGINDIR/etc/httpd.d" -a -d "etc/httpd.d" ] 
-		then 
-			for file in $PLUGINDIR/etc/httpd.d/[0-9][0-9]*
-			do
-				BASEN=`basename $file`
-				echo "ln -s $file etc/httpd.d/$BASEN" 
-				ln -s $file etc/httpd.d/$BASEN 
-			done
-		fi 
-		exit 0
-	else
-		echo "Couldn't find $1 directory"
-		exit 1
-	fi
-}
-
-delplugin() {
-	if [ -d "$1" ]
-	then
-		PLUGINDIR=$1
-		PLUGINNAME=`basename $1 | sed 's/gforge-plugin-//' `
-		echo "# Setting symlinks for $PLUGINNAME plugin"
-		# www stuffs
-		echo "# www stuffs"
-		if [ -d "$PLUGINDIR/www" -a -d "www/plugins" ] 
-		then 
-			echo "rm www/plugins/$PLUGINNAME" 
-			rm www/plugins/$PLUGINNAME 
-		fi 
-		# cronjobs stuffs
-		echo "# cronjobs stuffs"
-		if [ -d "$PLUGINDIR/cronjobs" -a -d "cronjobs/plugins" ] 
-		then 
-			echo "rm cronjobs/plugins/$PLUGINNAME" 
-			rm cronjobs/plugins/$PLUGINNAME
-		fi 
-		# lib stuffs
-		echo "# lib stuffs"
-		if [ -d "$PLUGINDIR/lib" -a -d "db/plugins" ] 
-		then 
-			echo "rm db/plugins/$PLUGINNAME" 
-			rm db/plugins/$PLUGINNAME
-		fi 
-		# include stuffs
-		echo "# include stuffs"
-		if [ -d "$PLUGINDIR/include" -a -d "plugins" ] 
-		then 
-			echo "rm plugins/$PLUGINNAME" 
-			rm plugins/$PLUGINNAME 
-		fi 
-		# cgi-bin stuffs
-		echo "# cgi-bin stuffs"
-		if [ -d "$PLUGINDIR/cgi-bin" -a -d "cgi-bin" ] 
-		then 
-			echo "rm cgi-bin/$PLUGINNAME" 
-			rm cgi-bin/$PLUGINNAME
-		fi 
-		# bin stuffs
-		echo "# bin stuffs"
-		if [ -d "$PLUGINDIR/bin" -a -d "plugins/bin" ] 
-		then 
-			echo "rm plugins/bin/$PLUGINNAME" 
-			rm plugins/bin/$PLUGINNAME
-		fi 
-		# etc/plugins stuffs
-		echo "# etc/plugins stuffs"
-		if [ -d "$PLUGINDIR/etc/plugins/$PLUGINNAME" -a -d "etc/plugins" ] 
-		then 
-			echo "rm etc/plugins/$PLUGINNAME" 
-			rm etc/plugins/$PLUGINNAME
-		fi 
-		# etc/httpd.d stuffs
-		echo "# etc/httpd.d stuffs"
-		if [ -d "$PLUGINDIR/etc/httpd.d" -a -d "etc/httpd.d" ] 
-		then 
-			for file in $PLUGINDIR/etc/httpd.d/[0-9][0-9]*
-			do
-				BASEN=`basename $file`
-				echo "rm etc/httpd.d/$BASEN" 
-				rm etc/httpd.d/$BASEN 
-			done
-		fi 
-		exit 0
-	else
-		echo "Couldn't find $1 directory"
-		exit 1
-	fi
-}
-
 ETCDIR=`pwd`/etc
+ETCTEMPLATEDIR=`pwd`/etc
 BINDIR=`pwd`/utils
 CGIDIR=`pwd`/cgi-bin
 GFGDIR=`pwd`
@@ -524,12 +396,13 @@ LOCALINC=$ETCDIR/local.inc
 HTTPDCONF=$ETCDIR/httpd.conf
 HTTPDSECRETS=$ETCDIR/httpd.secrets
 SYSTEM=pgsql
-export ETCDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE SYSTEM
+export ETCDIR ETCTEMPLATEDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE SYSTEM
 interact=false
 noapache=false
 database=env
 dovhost=false
 listen80=true
+usessl=true
 
 while [ $# -ne 0 ]
 do
@@ -578,6 +451,7 @@ do
 		-fhs )
 			shift
 			ETCDIR=/etc/gforge
+			ETCTEMPLATEDIR=/usr/share/gforge/etc
 			BINDIR=/usr/lib/gforge/bin
 			CGIDIR=/usr/lib/gforge/cgi-bin
 			GFGDIR=''
@@ -608,6 +482,9 @@ do
 		-nolisten80 )
 			listen80=false
 			;;
+		-nossl )
+			usessl=false
+			;;
 		-example )
 			shift
 			CONFFILEIN=$ETCDIR/gforge.conf.example
@@ -636,24 +513,6 @@ do
 			;;
 		-debug )
 			set -x
-			;;
-		-cleanplugindir)
-			cleanplugindirs
-			exit 0
-			;;
-		-plugindir)
-			setupplugindirs
-			exit 0
-			;;
-		-plugin)
-			shift
-			PLUGINPATH=$1
-			setupplugin $PLUGINPATH
-			;;
-		-delplugin)
-			shift
-			PLUGINPATH=$1
-			delplugin $PLUGINPATH
 			;;
 		*)
 			echo "Bad Parameter"
