@@ -9,9 +9,9 @@ Standards-Version: 3.7.2
 
 Package: gforge
 Architecture: all
-Conflicts: sourceforge, gforge-cvs
-Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (= ${Source-Version}), gforge-web-apache (= ${Source-Version}), gforge-db-postgresql (= ${Source-Version}), gforge-mta-exim4 (= ${Source-Version}) | gforge-mta-postfix (= ${Source-Version}) | gforge-mta-exim (= ${Source-Version}) | gforge-mta-courier (= ${Source-Version}), gforge-shell-postgresql (= ${Source-Version}) | gforge-shell-ldap (= ${Source-Version}), gforge-ftp-proftpd (= ${Source-Version}), gforge-lists-mailman (= ${Source-Version})
-Recommends: gforge-plugin-scmsvn | gforge-plugin-scmcvs
+Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${Source-Version})
+Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (=${Source-Version}), gforge-web, gforge-db, gforge-mta, gforge-shell, gforge-ftp, gforge-lists
+Recommends: gforge-plugin-scm
 Description: collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
@@ -35,9 +35,25 @@ Description: collaborative development tool - shared files
  This package contains files and programs used by several other
  subpackages.
 
+Package: gforge-web-apache2
+Architecture: all
+Depends: gforge-common, gforge-db, libapache2-mod-php5 | libapache2-mod-php4, php5-cgi | php4-cgi, php5-pgsql | php4-pgsql, php5-gd | php4-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, cronolog, python
+Recommends: libphp-jpgraph
+Provides: gforge-web
+Conflicts: gforge-web
+Description: collaborative development tool - web part (using Apache)
+ GForge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package contains the files needed to run the web part of
+ GForge on an Apache webserver.
+
 Package: gforge-web-apache
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php4 | apache (>= 1.3.26) | apache-ssl (>= 1.3.26) | apache-perl (>= 1.3.26), apache2 (>= 2.0.52) | libapache-mod-ssl | apache-ssl, libapache2-mod-php4 | libapache-mod-php4 | php4, php4-cgi, php4-pgsql, php4-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, cronolog
+Depends: gforge-common, gforge-db, libapache-mod-php5 | libapache-mod-php4, php5-cgi | php4-cgi, php5-pgsql | php4-pgsql, php5-gd | php4-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, cronolog, python
 Recommends: libphp-jpgraph
 Provides: gforge-web
 Conflicts: gforge-web
@@ -128,7 +144,7 @@ Description: collaborative development tool - mail tools (using Courier)
 
 Package: gforge-shell-ldap
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-ldap (>=184-1), libpam-ldap
+Depends: gforge-common, gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-ldap (>=184-1), libpam-ldap
 Provides: gforge-shell
 Conflicts: gforge-shell
 Description: collaborative development tool - shell accounts (using LDAP)
@@ -158,7 +174,7 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
 
 Package: gforge-ftp-proftpd
 Architecture: all
-Depends: gforge-common, gforge-shell-postgresql | gforge-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0
+Depends: gforge-common, gforge-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0
 Provides: gforge-ftp
 Conflicts: gforge-ftp
 Description: collaborative development tool - FTP management (using ProFTPd)
@@ -172,7 +188,7 @@ Description: collaborative development tool - FTP management (using ProFTPd)
 
 Package: gforge-ldap-openldap
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, slapd (>= 2.2.23), ldap-utils
+Depends: gforge-common, gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, slapd (>= 2.2.23), ldap-utils
 Provides: gforge-ldap
 Conflicts: gforge-ldap
 Description: collaborative development tool - LDAP directory (using OpenLDAP)
@@ -186,7 +202,7 @@ Description: collaborative development tool - LDAP directory (using OpenLDAP)
 
 Package: gforge-dns-bind9
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, bind9 
+Depends: gforge-common, gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, bind9 
 Provides: gforge-dns
 Conflicts: gforge-dns
 Description: collaborative development tool - DNS management (using Bind9)
@@ -200,7 +216,7 @@ Description: collaborative development tool - DNS management (using Bind9)
 
 Package: gforge-lists-mailman
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52) | apache (>= 1.3.9) | apache-ssl (>= 1.3.9) | apache-perl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, mailman (>= 2.1-3)
+Depends: gforge-common, gforge-db, gforge-mta, apache2 (>= 2.0.52) | apache (>= 1.3.9) | apache-ssl (>= 1.3.9) | apache-perl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, mailman (>= 2.1-3)
 Provides: gforge-lists
 Conflicts: gforge-lists
 Description: collaborative development tool - mailing-lists (using Mailman)
