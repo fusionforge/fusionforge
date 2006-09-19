@@ -27,6 +27,7 @@ set -e
 
 #DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
+#DSFHELPER:patch-apache#
 
 case "$1" in
     configure)
@@ -50,18 +51,13 @@ case "$1" in
 	    echo "can't find cronolog in usual places" >&2
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
-	db_stop
 	
         /usr/sbin/gforge-config
 
         # Patch Apache configuration files
-	/usr/lib/gforge/bin/install-apache.sh configure-files
-	for flavour in apache apache2 apache-perl apache-ssl ; do
-	    [ -e /etc/$flavour/httpd.conf ] && replace_file /etc/$flavour/httpd.conf
-	    [ -e /etc/php4/$flavour/php.ini ] && replace_file /etc/php4/$flavour/php.ini
-	done
+	patch_apache_replace apache apache-perl apache-ssl
 
-	replace_file /etc/php4/cgi/php.ini
+	db_stop
 
         # Setup our Apache
 	touch /var/lib/gforge/etc/httpd.vhosts  && \

@@ -26,10 +26,6 @@ init_debconf_from_mainconffile
 # [Disabled] DSFHELPER:dbpasswd-variables#
 # [Disabled] DSFHELPER:ldap-variables#
 # [Disabled] DSFHELPER:dbhost-variables#
+#DSFHELPER:patch-apache#
 
-for flavour in apache apache2 apache-perl apache-ssl ; do
-	[ -e /etc/$flavour/httpd.conf ] && propose_update_install /etc/$flavour/httpd.conf
-	[ -e /etc/php4/$flavour/php.ini ] && propose_update_install /etc/php4/$flavour/php.ini
-done
-
-propose_update_install /etc/php4/cgi/php.ini
+patch_apache_propose apache apache-perl apache-ssl

@@ -18,13 +18,13 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
+#DSFHELPER:patch-apache#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
         # Unpatch Apache configuration files
-	/usr/lib/gforge/bin/install-apache.sh purge-files
-	propose_update_remove /etc/apache/httpd.conf
+	unpatch_apache
 
 	# Clean debconf after ourselves
 	db_stop
