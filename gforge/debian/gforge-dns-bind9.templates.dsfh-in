@@ -8,38 +8,38 @@
 
 Template: gforge/shared/db_password
 Type: password
-_Description: Password used for the database
+_Description: Password used for the database:
  The connection to the DB system requires a password.  Please choose a
  password here.
 
 Template: gforge/shared/db_password_confirm
 Type: password
-_Description: Password used for the database - again
+_Description: Password used for the database - again:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/admin_login
 Type: string
 _Default: admin
-_Description: The Gforge administrator login
+_Description: The Gforge administrator login:
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.
 
 Template: gforge/shared/admin_password
 Type: password
-_Description: The Gforge administrator password
+_Description: The Gforge administrator password:
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
 
 Template: gforge/shared/admin_password_confirm
 Type: password
-_Description: The Gforge administrator password - again
+_Description: The Gforge administrator password - again:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-_Description: The initial list of skills
+_Description: The initial list of skills:
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
@@ -47,13 +47,13 @@ _Description: The initial list of skills
 
 Template: gforge/shared/ldap_base_dn
 Type: string
-_Description: The LDAP base DN
+_Description: The LDAP base DN:
  The DN is used to refer to the LDAP directory unambiguously.  You could use,
  for instance, "dc=gforge,dc=example,dc=com"
 
 Template: gforge/shared/ldap_host
 Type: string
-_Description: The LDAP host
+_Description: The LDAP host:
  The hostname of the LDAP server.
 
 Template: gforge/shared/noreply_to_bitbucket
@@ -70,13 +70,13 @@ _Description: Do you want mail to ${noreply} to be deleted?
 
 Template: gforge/shared/ldap_web_add_password
 Type: password
-_Description: LDAP password used to add users from the web
+_Description: LDAP password used to add users from the web:
  In order to add users into the LDAP directory from the web, you need to
  provide a password.
 
 Template: gforge/shared/ldap_web_add_password_confirm
 Type: password
-_Description: LDAP password - again
+_Description: LDAP password - again:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/mod_ssl_cert
@@ -123,18 +123,16 @@ _Description: Do you want ${file} to be updated?
  In order for Gforge to be fully deinstalled, some changes must
  be made to the ${file} file.
  .
- I can either do them for you (and backup the current version in
+ Installer can either do them for you (and backup the current version in
  ${file}.gforge-old), or write the changes to another file
  (${file}.gforge-new) and let you propagate the changes to
  ${file} yourself.
- .
- Shall I modify the ${file} automatically?
 
 Template: gforge/shared/file_changed
 Type: note
 _Description: Please check ${file}
  You have chosen not to let the Gforge package update the
- ${file} file.  Very well, I have not changed it.  Instead,
- I have written the suggested changes into ${file}.gforge-new.
+ ${file} file.  Very well, Installer has not changed it.  Instead,
+ It has written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
