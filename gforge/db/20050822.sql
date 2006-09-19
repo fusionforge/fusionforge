@@ -13,7 +13,6 @@ alter table forum add bbcode_uid character varying(15);
 -- Name: forum_attachment; Type: TABLE; Schema: public; Owner: gforge; Tablespace: 
 --
 
-drop table forum_attachment;
 
 CREATE TABLE forum_attachment (
     attachmentid serial NOT NULL,
@@ -66,7 +65,6 @@ ALTER TABLE ONLY forum_attachment
 -- Name: forum_attachmenttype; Type: TABLE; Schema: public; Owner: gforge; Tablespace: 
 --
 
-drop table forum_attachmenttype;
 
 CREATE TABLE forum_attachmenttype (
     extension character varying(20) DEFAULT ''::character varying NOT NULL,
@@ -84,7 +82,9 @@ CREATE TABLE forum_attachmenttype (
 -- Data for Name: forum_attachmenttype; Type: TABLE DATA; Schema: public; Owner: gforge
 --
 
-COPY forum_attachmenttype (extension, mimetype, size, width, height, enabled, display) FROM stdin;
+--COPY forum_attachmenttype (extension, mimetype, size, width, height, enabled, display) FROM stdin;
+--compat for older version
+COPY forum_attachmenttype FROM stdin;
 gif	a:1:{i:0;s:23:"Content-type: image/gif";}	20000	620	280	1	0
 jpeg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	20000	620	280	1	0
 jpg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	100000	0	0	1	0
