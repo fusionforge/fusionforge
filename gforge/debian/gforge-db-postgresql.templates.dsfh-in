@@ -4,7 +4,7 @@
 
 Template: gforge/shared/shell_host
 Type: string
-_Description: Your shell server
+_Description: Your shell server:
  The hostname of the server that will host your Gforge shell accounts
 
 #DSFHELPER:users-variables#
@@ -13,7 +13,7 @@ _Description: Your shell server
 
 Template: gforge/shared/download_host
 Type: string
-_Description: Your download server
+_Description: Your download server:
  The hostname of the server that will host your Gforge packages. 
  It should not be the same as your main Gforge host.
 
@@ -22,32 +22,32 @@ _Description: Your download server
 Template: gforge/shared/admin_login
 Type: string
 _Default: admin
-_Description: The Gforge administrator login
+_Description: The Gforge administrator login:
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.
 
 Template: gforge/shared/ip_address
 Type: string
-_Description: Your IP address
+_Description: Your IP address:
  The IP address of the server that will host your Gforge installation.
  This is needed for the Apache virtualhosting configuration.
 
 Template: gforge/shared/admin_password
 Type: password
-_Description: The Gforge administrator password
+_Description: The Gforge administrator password:
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
 
 Template: gforge/shared/admin_password_confirm
 Type: password
-_Description: The Gforge administrator password - again
+_Description: The Gforge administrator password - again:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-_Description: The initial list of skills
+_Description: The initial list of skills:
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
