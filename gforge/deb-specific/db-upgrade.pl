@@ -2765,7 +2765,7 @@ $dbh->{RaiseError} = 1;
 
     &update_with_sql("20060113","4.5.14-15"); 
     &update_with_sql("20060214","4.5.14-16"); 
-    &update_with_sql("20060216","4.5.14-17"); 
+    &update_with_sql("20060216-nocommit","4.5.14-17"); 
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
