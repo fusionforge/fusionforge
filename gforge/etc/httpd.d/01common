@@ -3,12 +3,7 @@
   deny from all
 </Files>
 
-<IfModule mod_ssl.c>
-  Listen 443
-</IfModule>
-
 NameVirtualHost {ip_address}:80
-NameVirtualHost {ip_address}:443
 # This is magic for virtual hosting!
 UseCanonicalName Off
 
