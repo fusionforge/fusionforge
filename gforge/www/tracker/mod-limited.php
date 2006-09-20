@@ -29,14 +29,14 @@ if (session_loggedin()) {
 					$key="monitor";
 				}
 				echo '
-				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
 				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
 					echo '
-				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
+				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&aid='.$aid.'">'.
 					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
 				}
 				?>
@@ -47,7 +47,7 @@ if (session_loggedin()) {
 		</tr>
 	</table>
 <?php } ?>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 	<input type="hidden" name="func" value="postmod">
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
@@ -120,14 +120,9 @@ if (session_loggedin()) {
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 </table>
-<script type="text/javascript" src="/dojo/dojo.js"></script>
-<script type="text/javascript">
-	dojo.require("dojo.widget.TabPane");
-	dojo.require("dojo.widget.LinkPane");
-	dojo.require("dojo.widget.ContentPane");
-</script>
-<div id="mainTabPane" dojoType="TabPane" style="width: 100%; height: 40em;" selectedTab="messagestab">
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','followups'); ?>" id="messagestab">
+<script type="text/javascript" src="/tabber/tabber.js"></script>
+<div id="tabber" class="tabber">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups');?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
@@ -140,7 +135,7 @@ if (session_loggedin()) {
 	</td></tr>
 </table>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','attachments'); ?>" id="taskstab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','attachments'); ?>">
 	<tr><td colspan="2">
 		<?php echo $Language->getText('tracker','file_upload') ?><br />
 		<input type="file" name="input_file[]" size="30" /><br />
@@ -184,7 +179,7 @@ if (session_loggedin()) {
 	</td></tr>
 </table>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','commits'); ?>" id="commitstab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','commits'); ?>">
 <table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
@@ -192,7 +187,7 @@ if (session_loggedin()) {
 	?>
 </table>
 </div>
-<div dojoType="ContentPane" label="<?php echo $Language->getText('trackertab','changes'); ?>" id="changestab">
+<div class="tabbertab" title="<?php echo $Language->getText('trackertab','changes'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<h3><?php echo $Language->getText('tracker_mod','changelog') ?>:</h3>
