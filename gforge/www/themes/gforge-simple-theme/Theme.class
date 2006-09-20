@@ -325,12 +325,17 @@ echo '<a href="'.$this->selected_dir.'">'.$this->selected_title.'</a>';
 	 * @param	   array   The array of titles
 	 * @param	   array   The array of title links
 	 */
-	function listTableTop ($title_arr,$links_arr=false) {
+	function listTableTop ($title_arr,$links_arr=false,$cnt=0) {
 
 		$return='';
+		if ($cnt==0){
+		 $return='<div id="tabletop">';
+		}
+		else{
+			$return='<div id="tabletop'.$cnt.'">';
+		}
 
-		$return = '
-	<div id="tabletop">
+		$return .= '
 	<table>
 		<thead><tr>';
 	$count=count($title_arr);
@@ -621,7 +626,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 				$this->selected_title = $TABS_TITLES[$i];
 				$this->selected_dir = $TABS_DIRS[$i];
 				$this->selected_id = $TABS_IDS[$i];
-			       	$return .= '<a id="gforge-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
+			       	$return .= '<a id="gforge-project-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 
 			}
 			else{
