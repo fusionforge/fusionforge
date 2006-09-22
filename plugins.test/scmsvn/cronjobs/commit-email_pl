@@ -8,9 +8,9 @@
 # command line arguments.
 #
 # $HeadURL: http://svn.collab.net/repos/svn/branches/1.1.x/tools/hook-scripts/commit-email.pl.in $
-# $LastChangedDate: 2004-06-14 16:29:22 -0400 (Mon, 14 Jun 2004) $
-# $LastChangedBy: breser $
-# $LastChangedRevision: 9986 $
+# $LastChangedDate$
+# $LastChangedBy$
+# $LastChangedRevision$
 #    
 # ====================================================================
 # Copyright (c) 2000-2004 CollabNet.  All rights reserved.
