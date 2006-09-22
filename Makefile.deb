@@ -5,15 +5,13 @@ list:
 	@echo ======================================================================================
 	@cat Makefile.deb | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
-all: allgf allcvs allsvn           # Build gforge and svn and cvs plugins #
-clean: cleangf cleancvs cleansvn   # Clean gforge and svn and cvs plugins #
-allor: orig origcvs origsvn        # Build gforge and svn and cvs orig tarballs #
-cleanor:                           # Clean all gforge orig tarballs #
+all: allgf                         # Build gforge #
+clean: cleangf                     # Clean gforge #
+allor: orig origcvs origsvn        # Build gforge orig tarball #
+cleanor:                           # Clean gforge orig tarball #
 	rm -f gforge*orig.tar.gz
-allgf: orig cleangf build          # Build gforge #
-allcvs: origcvs cleancvs buildcvs  # Build cvs plugins #
-allsvn: origsvn cleansvn buildsvn  # Build svn plugins #
-allup: upload uploadcvs uploadsvn  # Upload all using dput and optional where=<server> #
+allgf: orig cleangf build          # Build gforge and orig tarballs #
+allup: upload                      # Upload all using dput and optional where=<server> #
 
 dchcmd=dch -i
 dchcmd=dch
@@ -23,8 +21,6 @@ debuildopts=-sa
 debuildopts=-sa -us -uc
 debuildopts=-us -uc
 gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
-cvsversion=$(shell head -1 gforge-plugin-scmcvs/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
-svnversion=$(shell head -1 gforge-plugin-scmsvn/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
 where=g-rouille
 where=mercure
 where=local
@@ -50,42 +46,6 @@ gforge_$(gfversion).orig.tar.gz:
 	tar cvzf gforge_$(gfversion).orig.tar.gz gforge-$(gfversion)
 	rm -rf gforge-$(gfversion)
 #
-# CVS PLUGIN
-#
-cleancvs:               # Clean debian files of gforge-plugin-scmcvs build           #
-	@rm -f gforge-plugin-scmcvs*deb gforge-plugin-scmcvs*upload gforge-plugin-scmcvs*build gforge-plugin-scmcvs*dsc gforge-plugin-scmcvs*[^g].tar.gz gforge-plugin-scmcvs*asc gforge-plugin-scmcvs*changes
-	@echo cleancvs Done
-buildcvs:               # Build debian gforge-plugin-scmcvs package                  #
-	cd gforge-plugin-scmcvs ; debclean;$(dchcmd); find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmcvs-$(cvsversion)
-	cd gforge-plugin-scmcvs-$(cvsversion); debuild $(debuildopts); fakeroot debian/rules clean
-	rm -rf gforge-plugin-scmcvs-$(cvsversion)
-uploadcvs:              # Upload gforge-plugin-scmcvs on where=<server> using dput   #
-	dput $(where) gforge-plugin-scmcvs*changes
-origcvs: gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz               # Make gforge-plugin-scmcvs orig file                        #
-gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz:
-	cd gforge-plugin-scmcvs ; debclean; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmcvs-$(cvsversion)
-	tar cvzf gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz gforge-plugin-scmcvs-$(cvsversion)
-	rm -rf gforge-plugin-scmcvs-$(cvsversion)
-
-#
-# SVN PLUGIN
-#
-cleansvn:               # Clean debian files of gforge-plugin-scmcvs build           #
-	@rm -f gforge-plugin-scmsvn*deb gforge-plugin-scmsvn*upload gforge-plugin-scmsvn*build gforge-plugin-scmsvn*dsc gforge-plugin-scmsvn*[^g].tar.gz gforge-plugin-scmsvn*asc gforge-plugin-scmsvn*changes
-	@echo cleansvn Done
-buildsvn:               # Build debian gforge-plugin-scmsvn package                  #
-	cd gforge-plugin-scmsvn ; debclean; $(dchcmd); find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmsvn-$(svnversion)
-	cd gforge-plugin-scmsvn-$(svnversion); debuild $(debuildopts); fakeroot debian/rules clean
-	rm -rf gforge-plugin-scmsvn-$(svnversion)
-uploadsvn:              # Upload gforge-plugin-scmsvn on where=<server> using dput   #
-	dput $(where) gforge-plugin-scmsvn*changes
-origsvn: gforge-plugin-scmsvn_$(svnversion).orig.tar.gz               # Make gforge-plugin-scmsvn orig file                        #
-gforge-plugin-scmsvn_$(svnversion).orig.tar.gz:
-	cd gforge-plugin-scmsvn ; debclean; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmsvn-$(svnversion)
-	tar cvzf gforge-plugin-scmsvn_$(svnversion).orig.tar.gz gforge-plugin-scmsvn-$(svnversion)
-	rm -rf gforge-plugin-scmsvn-$(svnversion)
-
-#
 # PHPDOCUMENTOR
 #
 phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched gforge/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build gforge phpdoc     #
@@ -105,9 +65,3 @@ gforge/docs/phpdoc/docs:
 chris:
 	make -f Makefile.deb allgf dchcmd="dch -i" debuildopts=""
 	make -f Makefile.deb upload where=localgforge
-chrisc:
-	make -f Makefile.deb allcvs dchcmd="dch -i" debuildopts=""
-	make -f Makefile.deb uploadcvs where=localgforge
-chriss:
-	make -f Makefile.deb allsvn dchcmd="dch -i" debuildopts=""
-	make -f Makefile.deb uploadsvn where=localgforge
