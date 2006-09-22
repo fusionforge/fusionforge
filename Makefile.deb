@@ -21,6 +21,7 @@ dchcmd=""
 dchcmd=dch -v 4.5.6-1 -D unstable "New Upstream version"
 debuildopts=-sa
 debuildopts=-sa -us -uc
+debuildopts=-us -uc
 gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
 cvsversion=$(shell head -1 gforge-plugin-scmcvs/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
 svnversion=$(shell head -1 gforge-plugin-scmsvn/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
