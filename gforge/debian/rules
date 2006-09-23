@@ -111,8 +111,9 @@ install: build
 	# viewvc rights
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;
 	grep -ri '^#!' $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/scm/viewvc | grep -v '\.svn' | cut -d: -f1 | xargs chmod 0755
+
 	# dojo toolkit
-	chmod 0755 $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/dojo/src/storage/storage.sh
+	#chmod 0755 $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/dojo/src/storage/storage.sh
 
 	# move some files from gforge-web-apache to gforge-common as there are needed by postgress upgrade
 	# these files should be moved one day in common/
