@@ -69,7 +69,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql | postgresql-7.4 | postgresql-8.0 | postgresql-8.1 , perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, php4-cli, php4-cgi, php4-pgsql
+Depends: postgresql-8.1 | postgresql-8.0 | postgresql-7.4 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
