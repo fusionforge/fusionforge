@@ -22,7 +22,7 @@
 
 Summary: GForge Collaborative Development Environment
 Name: gforge
-Version: 4.1
+Version: 4.5.14
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -312,6 +312,8 @@ fi
 %{SCM_TARBALLS_DIR}
 
 %changelog
+* Mon Sep 25 2006 Open Wide <guillaume.smet@openwide.fr>
+- updated RPM packaging to 4.5.14
 * Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>
 - fixed Xavier's patch
 - added Mandrake support based on patch [#1194] by Kevin R. Bulgrien

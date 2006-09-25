@@ -1,11 +1,16 @@
 diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
---- gforge/deb-specific/db-upgrade.pl	2005-02-13 03:45:59.000000000 +0100
-+++ gforge-rpm/deb-specific/db-upgrade.pl	2005-02-20 16:34:35.001940285 +0100
-@@ -1991,7 +1991,7 @@
+--- gforge/deb-specific/db-upgrade.pl	2006-09-25 14:57:45.000000000 +0200
++++ gforge-rpm/deb-specific/db-upgrade.pl	2006-09-25 15:02:04.000000000 +0200
+@@ -2827,12 +2827,7 @@
  $dbh->disconnect ;
  
  sub get_pg_version () {
--    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+-    my $command;
+-    if (-x '/usr/bin/pg_lsclusters' ) {
+-    	$command = q(/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1) ;
+-    } else {
+-    	$command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+-    }
 +    my $command = q(rpm -q --qf %{VERSION} postgresql) ;
      my $version = qx($command) ;
      chomp $version ;
