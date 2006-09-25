@@ -3,7 +3,7 @@
 
 Summary: CVS Plugin for GForge CDE
 Name: gforge-plugin-%{plugin}
-Version: 4.1
+Version: 4.5.14
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -138,6 +138,8 @@ fi
 %{CROND_DIR}/%{name}
 
 %changelog
+* Mon Sep 25 2006 Open Wide <guillaume.smet@openwide.fr>
+- updated RPM packaging to 4.5.14
 * Fri Apr 29 2005 Xavier Rameau <xrameau@gmail.com>
 - Added support for SuSE
 * Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
