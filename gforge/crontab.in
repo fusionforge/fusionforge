@@ -12,7 +12,7 @@
 # Change path to the GForge directory.
 GFORGE="/path/to/gforge"
 
-PHP="/usr/bin/php4 -f"
+PHP="/usr/bin/php -f"
 
 # Don't mail command output to anyone.
 MAILTO=""
@@ -109,6 +109,53 @@ MAILTO=""
 30 5 * * 1,2,3,4,5 $PHP $GFORGE/cronjobs/daily_task_email.php
 
 #
-#	Enable the cvs<->tracker link
+#       Create the /etc/* files needed for CVS
 #
-#35 1 * * * $PHP $GFORGE/plugins/cvstracker/bin/update_loginfo.php
+10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/usergroup.php
+
+#
+#       Upload the SSH key files needed for CVS
+#
+15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/ssh_create.php
+
+#
+#       Create the blank cvs trees
+#
+20 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/cvs.php
+
+#
+#       Create CVS tarballs
+#
+5 2 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
+
+#
+#       Create CVS snapshots
+#
+# CVSROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
+# you'll have to edit the script if necessary.
+#
+35 2 * * * /bin/sh $GFORGE/plugins/scmcvs/cronjobs/snapshots.sh generate
+
+#
+#       Create the blank svn trees for SVN-over-DAV
+#       (all repositories owned by apache)
+#
+21 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/dav-svn/create_svn.php
+
+#
+#       Create SVN snapshots
+#
+# SVNROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
+# you'll have to edit the script if necessary.
+#
+35 3 * * * /bin/sh $GFORGE/plugins/scmsvn/cronjobs/snapshots.sh generate
+
+#
+#       Daily SVN stats collection
+#
+20 1 * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/svn-stats.php
+
+#
+#       Create SVN tarballs
+#
+5 3 * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
