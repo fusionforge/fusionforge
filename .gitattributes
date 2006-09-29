@@ -1,6 +1,4 @@
 * text=auto !eol
-gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
-gforge-plugin-cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
@@ -36,6 +34,32 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
+gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
+gforge/plugins/svncommitemail/bin/commit-email.pl -text
+gforge/plugins/svncommitemail/include/SVNCommitEmailPlugin.class -text
+gforge/plugins/svncommitemail/include/svncommitemail-init.php -text
+gforge/plugins/svntracker/AUTHORS -text
+gforge/plugins/svntracker/COPYING -text
+gforge/plugins/svntracker/README -text
+gforge/plugins/svntracker/bin/db-delete.pl -text
+gforge/plugins/svntracker/bin/db-upgrade.pl -text
+gforge/plugins/svntracker/bin/post.php -text
+gforge/plugins/svntracker/bin/update_postcommit.php -text
+gforge/plugins/svntracker/etc/plugins/svntracker/config.php -text
+gforge/plugins/svntracker/etc/plugins/svntracker/svntracker.conf -text
+gforge/plugins/svntracker/httpd.conf -text
+gforge/plugins/svntracker/include/Snoopy.class -text
+gforge/plugins/svntracker/include/languages/Base.tab -text
+gforge/plugins/svntracker/include/languages/French.tab -text
+gforge/plugins/svntracker/include/languages/Spanish.tab -text
+gforge/plugins/svntracker/include/svntracker-init.php -text
+gforge/plugins/svntracker/include/svntrackerPlugin.class -text
+gforge/plugins/svntracker/lib/20051011.sql -text
+gforge/plugins/svntracker/lib/svntracker-init.sql -text
+gforge/plugins/svntracker/postcommit.example -text
+gforge/plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker -text
+gforge/plugins/svntracker/www/newcommit.php -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
