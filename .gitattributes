@@ -11,6 +11,12 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/plugins/cvssyncmail/INSTALL -text
+gforge/plugins/cvssyncmail/common/CVSSyncMailPlugin.class -text
+gforge/plugins/cvssyncmail/common/cvssyncmail-init.php -text
+gforge/plugins/cvssyncmail/common/languages/Base.tab -text
+gforge/plugins/cvssyncmail/db/cvssyncmail-init.sql -text
+gforge/plugins/cvssyncmail/include/cvssyncmail-init.php -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
