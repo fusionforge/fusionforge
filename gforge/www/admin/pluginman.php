@@ -58,7 +58,7 @@ if (getStringFromRequest('update')) {
 		if (getStringFromRequest('delusers')) {
 			$sql = "DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = '$pluginname')";
 			$res = db_query($sql);
-			if (!res) {
+			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
 				$feedback .= $Language->getText('pluginman','userdeleted',db_affected_rows($res));
@@ -75,7 +75,7 @@ if (getStringFromRequest('update')) {
 		}
 		$sql = "DELETE FROM plugins WHERE plugin_name = '$pluginname'";
 		$res = db_query($sql);
-		if (!res) {
+		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = $Language->getText('pluginman','success',$pluginname);
@@ -167,7 +167,7 @@ while ($filename = readdir($handle)) {
 		//check if the plugin is in the plugins table
 		$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
 		$res = db_query($sql);
-		if (!res) {
+		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		}
 		if (db_numrows($res)!=0) {
