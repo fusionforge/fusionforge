@@ -19,5 +19,5 @@ $sys_sendmail_path='{sys_sendmail_path}';
 
 // If using usergroup_wrapper.php (for non-Linux systems)
 // this value MUST be plain
-unix_cipher = 'MD5';
+$unix_cipher = 'MD5';
 
