@@ -67,7 +67,7 @@ if (getStringFromRequest('update')) {
 		if (getStringFromRequest('delgroups')) {
 			$sql = "DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = '$pluginname')";
 			$res = db_query($sql);
-			if (!res) {
+			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
 				$feedback .= $Language->getText('pluginman','groupdeleted',db_affected_rows($res));
