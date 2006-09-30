@@ -108,7 +108,7 @@ $sys_sendmail_path='/usr/sbin/sendmail';
 
 // If using usergroup_wrapper.php (for non-Linux systems)
 // this value MUST be plain
-unix_cipher = 'MD5';
+$unix_cipher = 'MD5';
 
 //
 // LDAP configuration
