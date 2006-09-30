@@ -23,7 +23,7 @@ Description: collaborative development tool - meta-package
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, cpio, lockfile-progs, adduser
+Depends: debconf (>= 1.0.32) | debconf-2.0, cpio, lockfile-progs, adduser, php4-cli, python
 Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1), gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmccase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
@@ -69,7 +69,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: postgresql-8.1 | postgresql-8.0 | postgresql-7.4 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0
+Depends: postgresql-8.1 | postgresql-8.0 | postgresql-7.4 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, php4-cli
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)

@@ -62,6 +62,14 @@ install: build
 
 	# gforge
 	# (gforge is a meta-package and needs no files)
+	
+	# gforge-plugins
+	cp -r plugins $(CURDIR)/debian/gforge-common/usr/share/gforge/
+	cp -r $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-common/etc/gforge/
+	rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/etc/*
+	rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/debian
+	mkdir $(CURDIR)/debian/gforge-common/usr/share/gforge/www/plugins
+	chown www-data:www-data $(CURDIR)/debian/gforge-common/usr/share/gforge/www/plugins
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
@@ -86,6 +94,7 @@ install: build
 	#
 	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/ -name CVS -type d | xargs rm -rf
+	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
 
@@ -107,6 +116,8 @@ install: build
 	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
+
+	
 
 	# viewvc rights
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;

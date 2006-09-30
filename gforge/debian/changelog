@@ -1,4 +1,4 @@
-gforge (4.5.14-25+5) unstable; urgency=low
+gforge (4.5.14-25+91) unstable; urgency=low
 
   * Merged Branch_4_5 into trunk after svn conversion
   essentially debian and deb-specific dir, setup and install-apache.sh too
@@ -11,8 +11,9 @@ gforge (4.5.14-25+5) unstable; urgency=low
   * Fixed many typos in templates so lintian is happy
   * Removed php4 dependancies for gforge-db-postgresql and reordered
     postgresql one
+  * Install plugins with gforge-web-apache 
 
- -- Christian Bayle <bayle@debian.org>  Tue, 19 Sep 2006 20:13:14 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 30 Sep 2006 20:48:24 +0200
 
 gforge (4.5.14-10+3) unstable; urgency=low
 
