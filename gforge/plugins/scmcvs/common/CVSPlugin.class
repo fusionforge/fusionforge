@@ -4,6 +4,7 @@ require_once('common/include/User.class');
 
 class CVSPlugin extends SCM {
 	function CVSPlugin () {
+		global $cvs_root;
 		$this->SCM () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
