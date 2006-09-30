@@ -69,7 +69,6 @@ $sys_scm_snapshots_path='/path/to/var/lib/gforge/scmsnapshots';
 // Path to SCMWEB
 $sys_path_to_scmweb='/usr/lib/gforge/bin/';
 
-
 //Databases, html/php/other paths
 //server to use for updates and reads
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
@@ -87,6 +86,7 @@ $sys_server='pgsql';
 $sys_dbpasswd='';
 $sys_ldap_passwd='';
 $sys_jabber_pass='';
+
 //
 // Account Management
 //
@@ -94,6 +94,21 @@ $sys_jabber_pass='';
 // LDAP for managing with ldap
 // NIS not implemented
 $sys_account_manager_type='UNIX';
+
+// email address to send admin alerts to
+$sys_admin_email = 'gforge@gforge.company.com';
+
+// Path to sendmail program
+$sys_sendmail_path='/usr/sbin/sendmail';
+
+// Select unix_password cipher
+// Normally there will be no reason to change this for Linux based systems
+// Valid choices are MD5, DES, Blowfish, or Plain
+// DO NOT CHANGE ON EXISTING INSTALL!!!
+
+// If using usergroup_wrapper.php (for non-Linux systems)
+// this value MUST be plain
+unix_cipher = 'MD5';
 
 //
 // LDAP configuration
@@ -270,7 +285,6 @@ $sys_force_login=0;
 // Place for customized files
 $sys_custom_path='/path/to/gforge/etc/custom';
 
-
 //
 // Localization caching Configuration
 //
@@ -286,31 +300,18 @@ $sys_localization_cache_path = '/path/to/localization/cache/';
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = true;
+
 //
 // Plugins configuration
 //
 // Path to plugins directory
-$sys_plugins_path='/usr/lib/gforge/plugins/';
+$sys_plugins_path='/usr/share/gforge/plugins/';
 
-$sys_bbcode_make_clickable=1; //bbcode customizations
-$sys_bbcode_smilie_on=1; 
-$sys_bbcode_bbcode_on=1; 
-$sys_bbcode_strip_html=0;
-
-// email address to send admin alerts to
-$sys_admin_email = 'gforge@my.domain';
-
-// Path to sendmail program
-//$sys_sendmail_path='/usr/sbin/sendmail';
-
-// Select unix_password cipher
-// Normally there will be no reason to change this for Linux based systems
-// Valid choices are MD5, DES, Blowfish, or Plain
-// DO NOT CHANGE ON EXISTING INSTALL!!!
-
-// If using usergroup_wrapper.php (for non-Linux systems)
-// this value MUST be plain
-unix_cipher = 'MD5';
+//bbcode customizations
+$sys_bbcode_make_clickable=1;
+$sys_bbcode_smilie_on=1;
+$sys_bbcode_bbcode_on=1;
+$sys_bbcode_strip_html=1;
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

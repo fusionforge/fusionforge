@@ -1,4 +1,3 @@
-
 //
 //	FEATURES
 //	You can turn features on/off sitewide
@@ -20,6 +19,8 @@ $sys_use_ssl={sys_use_ssl};
 $sys_use_people={sys_use_people};
 $sys_use_shell={sys_use_shell};
 
+// Enable/Disable user ratings
+$sys_use_ratings={sys_use_ratings};
 // Enable/Disable the ability to upload files using FTP in FRS
 $sys_use_ftpuploads={sys_use_ftpuploads};
 // Enable/Disable the use of mail gateways for trackers and forums
@@ -43,8 +44,3 @@ $sys_project_reg_restricted={sys_project_reg_restricted};
 //
 $sys_user_reg_restricted={sys_user_reg_restricted};
 
-// Enable/Disable user ratings
-$sys_use_ratings=true;
-
-// Path to sendmail program
-//$sys_sendmail_path='/usr/sbin/sendmail';

@@ -1,4 +1,3 @@
-
 //
 // Localization caching Configuration
 //
@@ -14,3 +13,4 @@ $sys_localization_cache_path = '{sys_localization_cache_path}';
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = {sys_localization_enable_timestamp_checking};
+

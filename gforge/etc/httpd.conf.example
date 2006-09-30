@@ -1,15 +1,14 @@
+<IfModule mod_ssl.c>
+  Listen 443
+</IfModule>
+NameVirtualHost 10.GF.OR.GE:443
 Listen 80
 <Files .htaccess>
   order allow,deny
   deny from all
 </Files>
 
-<IfModule mod_ssl.c>
-  Listen 443
-</IfModule>
-
 NameVirtualHost 10.GF.OR.GE:80
-NameVirtualHost 10.GF.OR.GE:443
 # This is magic for virtual hosting!
 UseCanonicalName Off
 
@@ -147,8 +146,8 @@ UseCanonicalName Off
 
 	<IfModule mod_ssl.c>
 		SSLEngine on
-		SSLCertificateFile /etc/apache/ssl.crt/server.crt
-		SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+		SSLCertificateFile /etc/apache2/ssl/apache.pem
+		SSLCertificateKeyFile /etc/apache2/ssl/apache.pem
 		<Files ~ "\.(cgi|shtml)$">
 			SSLOptions +StdEnvVars
 		</Files>
@@ -198,8 +197,8 @@ UseCanonicalName Off
 
   <IfModule mod_ssl.c>
     SSLEngine on
-    SSLCertificateFile /etc/apache/ssl.crt/server.crt
-    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    SSLCertificateFile /etc/apache2/ssl/apache.pem
+    SSLCertificateKeyFile /etc/apache2/ssl/apache.pem
     <Files ~ "\.(cgi|shtml)$">
       SSLOptions +StdEnvVars
     </Files>
@@ -259,7 +258,9 @@ UseCanonicalName Off
     SSLDisable
   </IfModule>
 </VirtualHost>
-
+#
+# List host
+#
 # HTTPS
 <VirtualHost 10.GF.OR.GE:443>
   ServerName lists.gforge.company.com
@@ -267,8 +268,8 @@ UseCanonicalName Off
 
   <IfModule mod_ssl.c>
     SSLEngine on
-    SSLCertificateFile /etc/apache/ssl.crt/server.crt
-    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    SSLCertificateFile /etc/apache2/ssl/apache.pem
+    SSLCertificateKeyFile /etc/apache2/ssl/apache.pem
     <Files ~ "\.(cgi|shtml)$">
       SSLOptions +StdEnvVars
     </Files>

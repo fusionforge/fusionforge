@@ -1,4 +1,3 @@
-
 //
 // Jabber Configuration
 //
@@ -9,3 +8,4 @@ $sys_jabber_port='5222';
 // messages sent to jabber accounts will come from this user
 // It is similar to the "From: noreply@gforge.org" used in emails
 $sys_jabber_user='noreply';
+

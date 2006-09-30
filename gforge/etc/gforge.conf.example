@@ -30,6 +30,7 @@ ldap_web_add_password=
 sys_path_to_mailman=/usr/lib/mailman
 cgidir=/path/to/cgidir
 cronolog_path=/usr/bin/cronolog
+sys_sendmail_path=/usr/sbin/sendmail
 sys_path_to_jpgraph=/path/to/jpgraph
 sys_path_to_scmweb=/usr/lib/gforge/bin/
 gforge_chroot=
