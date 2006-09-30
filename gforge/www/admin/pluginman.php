@@ -102,7 +102,7 @@ if (getStringFromRequest('update')) {
 	} else {
 		$sql = "INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('$pluginname','This is the $pluginname plugin')";
 		$res = db_query($sql);
-		if (!res) {
+		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = $Language->getText('pluginman','success',$pluginname);
