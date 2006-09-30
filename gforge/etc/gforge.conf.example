@@ -78,6 +78,7 @@ sys_use_ftp=true
 sys_use_trove=true
 sys_use_snippet=true
 sys_use_shell=true
+sys_use_ratings=true
 sys_use_ssl=false
 sys_use_people=true
 sys_use_ftpuploads=false
