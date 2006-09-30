@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/usr/lib/gforge/plugins/eirc/include/EIRCPlugin.class') ;
+require_once ('EIRCPlugin.class') ;
 
 $EIRCPluginObject = new EIRCPlugin ;
 
