@@ -14,10 +14,13 @@ usr/share/gforge/etc/local.d
 usr/share/gforge/common
 usr/share/gforge/www
 usr/share/gforge/www/include
+usr/share/gforge/scm
 usr/sbin
 var
 var/lib
 var/lib/gforge
+var/lib/gforge/www
+var/lib/gforge/www/plugins
 var/lib/gforge/etc
 var/lib/gforge/etc/templates
 bin
