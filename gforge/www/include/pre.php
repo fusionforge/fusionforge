@@ -24,10 +24,11 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
 
+require('local.inc');
+
 // get constants used for flags or status
 require('common/include/constants.php');
 
-require('local.inc');
 
 //
 if ($sys_use_jabber) {

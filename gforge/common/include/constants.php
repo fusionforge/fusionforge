@@ -1,5 +1,6 @@
 <?php
 
+require_once('local.inc');
 /* Search */
 
 define('SEARCH__TYPE_IS_ARTIFACT', 'artifact');
@@ -41,11 +42,11 @@ define('MAIL__MAILING_LIST_IS_CREATED', '2');
 define('MAIL__MAILING_LIST_NAME_MIN_LENGTH', 4);
 
 /* Groups */
-
 define('GROUP_IS_MASTER', 1);
-define('GROUP_IS_NEWS', 3);
-define('GROUP_IS_STATS', 2);
-define('GROUP_IS_PEER_RATINGS', 4);
+define('GROUP_IS_STATS', $sys_stats_group);
+define('GROUP_IS_NEWS', $sys_news_group);
+define('GROUP_IS_PEER_RATINGS', $sys_peer_rating_group);
+define('GROUP_IS_TEMPLATE', $sys_template_group);
 
 /* Admin */
 define('ADMIN_CRONMAN_ROWS', 30);
