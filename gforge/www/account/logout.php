@@ -23,12 +23,30 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('pre.php');    
+Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+Header( "Cache-Control: no-cache");
+Header( "Cache-Control: must-revalidate");
+
+require_once('pre.php');
+
+$return_to = getStringFromRequest('return_to');
+
+//
+//      Validate return_to
+//
+if ($return_to) {
+        $tmpreturn=explode('?',$return_to);
+        if (!@is_file($sys_urlroot.$tmpreturn[0]) && !@is_dir($sys_urlroot.$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1) && !(strpos($tmpreturn[0],'mediawiki') == 1)) {
+	$return_to='';
+}				        }
 
 session_logout();
 
 plugin_hook('before_logout_redirect');
 
+if ($return_to) {
+header('Location: '.$return_to);
+}else{
 header('Location: /');
-
+}
 ?>
