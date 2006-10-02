@@ -25,7 +25,7 @@ class HelloWorldPlugin extends Plugin {
 	function HelloWorldPlugin () {
 		$this->Plugin() ;
 		$this->name = "helloworld" ;
-		$this->text = "Hello World!" ; // To show in the tabs, use...
+		$this->text = "HelloWorld!" ; // To show in the tabs, use...
 		$this->hooks[] = "user_personal_links";//to make a link to the user´s personal part of the plugin
 		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
