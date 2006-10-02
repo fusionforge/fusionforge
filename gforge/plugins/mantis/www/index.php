@@ -13,7 +13,7 @@ require_once ('plugins/mantis/config.php');
 // the header that displays for the user portion of the plugin
 function helloworld_Project_Header($params) {                                                                                                                                         
 	global $DOCUMENT_ROOT,$HTML,$id,$Language;                                                                            
-	$params['toptab']='Mantis'; 
+	$params['toptab']='mantis'; 
 	$params['group']=$id;
 	/*                                                                                                                                                              
 		Show horizontal links                                                                                                                                   
@@ -24,7 +24,7 @@ function helloworld_Project_Header($params) {
 // the header that displays for the project portion of the plugin
 function helloworld_User_Header($params) {
 	global $DOCUMENT_ROOT,$HTML,$user_id,$Language;                                                                            
-	$params['toptab']='Mantis'; 
+	$params['toptab']='mantis'; 
 	$params['user']=$user_id;
 	/*                                                                                                                                                              
 	 Show horizontal links                                                                                                                                   
