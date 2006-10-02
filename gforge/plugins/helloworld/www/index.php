@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Hello world plugin 2
+ * HelloWorld plugin
  *
  * Daniel Perez <danielperez.arg@gmail.com>
  *
