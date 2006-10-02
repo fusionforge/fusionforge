@@ -45,12 +45,19 @@ function printSelection($checked,$pluginpath) {
 	$config_files = array(); // array that´ll have the config files
 	$i = 0;
 	
-	if ($pluginpath[strlen($pluginpath)-1]!='/') {
-		$pluginpath .= '/';
+	if (strlen($pluginpath)>=1){
+		if ($pluginpath[strlen($pluginpath)-1]!='/') {
+			$pluginpath .= '/';
+		}
 	}
 					
 	// check if we can get local.inc
-	$handle = fopen('/etc/gforge/local.inc','r+');
+	@$handle = fopen('/etc/gforge/local.inc','r+');
+	if (! $handle) { 
+		// Open readonly but tell you can't write
+		$handle = fopen('/etc/gforge/local.inc','r');
+		$feedback .= $Language->getText('configman','notopenlocalinc');
+	}
 	if ($handle) {
 		$config_files['local.inc'] = '/etc/gforge/local.inc';
 		fclose($handle);
@@ -134,7 +141,7 @@ function updateVars($vars,$filepath) {
 		}
 	}
 	$filedata = implode("\n",$lines);
-	if ($handle = fopen($filepath,'w')) {
+	if (@$handle = fopen($filepath,'w')) {
 		if (fwrite($handle,$filedata)) {
 			// say wrote ok
 			$feedback .= $Language->getText('configman','updateok');
@@ -166,7 +173,12 @@ function updateVars($vars,$filepath) {
 	if (getStringFromRequest('choose')) {
 		
 		$filepath = getStringFromRequest('files');
-		$handle = fopen($filepath,'r+');
+		@$handle = fopen($filepath,'r+');
+		if (! $handle) {
+			// Open readonly but tell you can't write
+			$handle = fopen('/etc/gforge/local.inc','r');
+			$feedback .= $Language->getText('configman','notopenfile');
+		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
 			$filedata = file_get_contents($filepath);
