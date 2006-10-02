@@ -64,7 +64,7 @@ function helloworld_User_Header($params) {
 			// other perms checks here...
 			helloworld_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 			// DO THE STUFF FOR THE PROJECT PART HERE
-			echo "We are in the Project Helloworld plugin <br>";
+			echo "We are in the Project HelloWorld plugin <br>";
 			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 		} elseif ($type == 'user') {
 			$realuser = user_get_object($id);// 
@@ -76,7 +76,7 @@ function helloworld_User_Header($params) {
 			}
 			helloworld_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));    
 			// DO THE STUFF FOR THE USER PART HERE
-			echo "We are in the User Helloworld plugin <br>";
+			echo "We are in the User HelloWorld plugin <br>";
 			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 		} elseif ($type == 'admin') {
 			$group = group_get_object($id);
@@ -94,7 +94,7 @@ function helloworld_User_Header($params) {
 			if ( $userperm->isAdmin() ) {
 				helloworld_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-				echo "We are in the Project Helloworld plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
+				echo "We are in the Project HelloWorld plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
 				echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 			} else {
 				exit_error("Access Denied", "You are not a project Admin");
