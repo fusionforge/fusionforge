@@ -84,7 +84,7 @@ class HelloWorldPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group = &group_get_object($group_id);
-			$use_hellowordplugin = getStringFromRequest('use_helloworldplugin');
+			$use_helloworldplugin = getStringFromRequest('use_helloworldplugin');
 			if ( $use_helloworldplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
