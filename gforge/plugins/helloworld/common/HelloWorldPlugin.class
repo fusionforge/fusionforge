@@ -107,15 +107,15 @@ class HelloWorldPlugin extends Plugin {
 		} elseif ($hookname == "userisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
-			$use_hellowordplugin = getStringFromRequest('use_helloworldplugin');
-			if ( $use_hellowordplugin == 1 ) {
+			$use_helloworldplugin = getStringFromRequest('use_helloworldplugin');
+			if ( $use_helloworldplugin == 1 ) {
 				$user->setPluginUse ( $this->name );
 			} else {
 				$user->setPluginUse ( $this->name, false );
 			}
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_hellowordplugin" value="1" ';
+			echo ' <input type="CHECKBOX" name="use_helloworldplugin" value="1" ';
 			// CHECKED OR UNCHECKED?
 			if ( $user->usesPlugin ( $this->name ) ) {
 				echo "CHECKED";
