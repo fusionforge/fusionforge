@@ -13,7 +13,8 @@
  * @version   $Id$
  */
  
-require_once ('www/search/include/SearchManager.class');
+require_once('common/include/constants.php');
+require_once('www/search/include/SearchManager.class');
 
 class Layout extends Error {
 
@@ -444,13 +445,22 @@ if (isset($params['group']) && $params['group']) {
 		plugin_hook ("outermenu", $hookParams) ;
 		$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
 
-		if (user_ismember(1,'A')) {
-			$TABS_DIRS[]='/admin/';
-			$TABS_TITLES[]=$Language->getText('menu','admin');
-		}
-		if (user_ismember($GLOBALS['sys_stats_group'])) {
-			$TABS_DIRS[]='/reporting/';
-			$TABS_TITLES[]=$Language->getText('menu','reporting');
+		$user_is_super=false;
+		if (session_loggedin()) {
+			$projectmaster =& group_get_object(GROUP_IS_MASTER);
+			$projectstats =& group_get_object(GROUP_IS_STATS);
+			$permmaster =& $projectmaster->getPermission( session_get_user() );
+			$permstats =& $projectstats->getPermission( session_get_user() );
+
+			if ($permmaster->isAdmin()) {
+				$user_is_super=true;
+				$TABS_DIRS[]='/admin/';
+				$TABS_TITLES[]=$Language->getText('menu','admin');
+			}
+			if ($permstats->isMember()) {
+				$TABS_DIRS[]='/reporting/';
+				$TABS_TITLES[]=$Language->getText('menu','reporting');
+			}
 		}
 		if(isset($params['group']) && $params['group']) {
 			// get group info using the common result set
@@ -477,11 +487,11 @@ if (isset($params['group']) && $params['group']) {
 			$selected=array_search("/people/", $TABS_DIRS);
 		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/reporting/')) {
 			$selected=array_search('/reporting/',$TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && user_ismember(1,'A')) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && $user_is_super) {
 			$selected=array_search('/admin/',$TABS_DIRS);
 		} elseif (count($PLUGIN_TABS_DIRS)>0) {
 			foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
-				if (strstr($GLOBALS['REQUEST_URI'],$PLUGIN_TABS_DIRS_VALUE)) {
+				if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
 					$selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
 					break;
 				}
@@ -522,8 +532,9 @@ if (isset($params['group']) && $params['group']) {
 		$TABS_TITLES[]=$Language->getText('group','short_summary');
 		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
-		if (user_ismember($group,'A')) {
-			// Project Admin
+		// Project Admin
+		$perm =& $project->getPermission( session_get_user() );
+		if ($perm->isAdmin()) {
 			$TABS_DIRS[]='/project/admin/?group_id='. $group;
 			$TABS_TITLES[]=$Language->getText('group','short_admin');
 			(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -538,8 +549,6 @@ if (isset($params['group']) && $params['group']) {
 		$TABS_DIRS[]='/activity/?group_id='. $group;
 		$TABS_TITLES[]=$Language->getText('group','short_activity');
 		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
-
-
 
 		// Forums
 		if ($project->usesForum()) {

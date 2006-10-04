@@ -1,7 +1,9 @@
-2006-10-01 Christian Bayle <bayle@debian.org>
+2006-10-04 Christian Bayle <bayle@debian.org>
  	* remove use of deprecated user_ismember function in layout.class
 	* Allow opening of /etc/gforge/local.inc readonly in configman.php,
 	remove some warning
+	* Correct outertab hook and remove deprecated user_ismember function
+	in Layout.class
 
 2006-09-19 Reinhard Spisser <reinhard@spisser.it>
  	* replacing dojo tabs with tabber
