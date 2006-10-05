@@ -6,6 +6,7 @@ usr/bin
 usr/lib/gforge/bin
 usr/lib/gforge/lib
 usr/share
+usr/share/doc/gforge
 usr/share/gforge
 usr/share/gforge/etc
 usr/share/gforge/etc/templates

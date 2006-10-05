@@ -65,11 +65,20 @@ install: build
 	
 	# gforge-plugins
 	cp -r plugins $(CURDIR)/debian/gforge-common/usr/share/gforge/
+	#rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/usr
 	cp -r $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-common/etc/gforge/
 	rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/etc/*
 	rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/*/debian
 	ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-common/usr/share/gforge/www
 	chown www-data:www-data $(CURDIR)/debian/gforge-common/var/lib/gforge/www/plugins
+	# mediawiki plugin
+	cp -r $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-common/
+	rm -rf $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/mediawiki/usr
+	mv $(CURDIR)/debian/gforge-common/usr/share/mediawiki1.7/LocalLdapSettings.php \
+	$(CURDIR)/debian/gforge-common/usr/share/mediawiki1.7/LocalLdapSettings.php.example
+	mv $(CURDIR)/debian/gforge-common/usr/share/mediawiki1.7/LocalSettings.php \
+	$(CURDIR)/debian/gforge-common/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
+	mv $(CURDIR)/debian/gforge-common/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-common/usr/share/doc/gforge/README.mediawiki_plugin
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
