@@ -209,7 +209,7 @@ echo '<h1>XXXXXX'.$username.$G_USERNAME.'</h1>';
 	 * @access public
 	 */
 	function setPassword( $user, &$password ) {
-		$this->printDebug("Entering setPassword",1);
+		//$this->printDebug("Entering setPassword",1);
 		return true;
 	}
 
@@ -222,7 +222,7 @@ echo '<h1>XXXXXX'.$username.$G_USERNAME.'</h1>';
 	 * @access public
 	 */	
         function updateExternalDB( $user ) {
-		$this->printDebug("Entering updateExternalDB",1);
+		//$this->printDebug("Entering updateExternalDB",1);
 		$this->email = $user->getEmail();
 		$this->realname = $user->getRealName();
 		$this->nickname = $user->getOption('nickname');
@@ -244,7 +244,7 @@ echo '<h1>XXXXXX'.$username.$G_USERNAME.'</h1>';
 	 * @access public
 	 */
         function addUser( $user, $password ) {
-		$this->printDebug("Entering addUser",1);
+		//$this->printDebug("Entering addUser",1);
         }
 
 	/**
