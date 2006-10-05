@@ -17,6 +17,7 @@ gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application
 gforge/docs/images/sflogo2-105a.png -text
 gforge/etc/httpd.d/00listen443.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
+gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2.tar.gz -text
