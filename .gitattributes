@@ -551,6 +551,45 @@ gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/universalkey.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unlink.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unorderedlist.gif -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
+gforge/plugins/mediawiki/README -text
+gforge/plugins/mediawiki/common/MediaWikiPlugin.class -text
+gforge/plugins/mediawiki/common/languages/Base.tab -text
+gforge/plugins/mediawiki/common/mediawiki-init.php -text
+gforge/plugins/mediawiki/usr/share/gforge/etc/httpd.d/03mediawiki -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/LocalLdapSettings.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/LocalSettings.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/includes/GFProject.class.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/includes/GFUser.class.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/includes/GForgeAuthentication.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/includes/GForgePre.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/includes/LdapAuthentication.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/GForge.php -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/IE50Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/IE55Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/IE60Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/IE70Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/IEMacFixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/KHTMLFixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/Opera6Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/Opera7Fixes.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/bullet.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/discussionitem_icon.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/external.png -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/file_icon.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/headbg.jpg -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/link_icon.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/lock_icon.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/magnify-clip.png -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/mail_icon.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/main.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/main.css.sos -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/news_icon.png -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/required.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/rtl.css -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
+gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
+gforge/plugins/mediawiki/www/index.php -text
 gforge/plugins/scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
 gforge/plugins/scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream

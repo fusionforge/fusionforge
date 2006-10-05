@@ -1,0 +1,58 @@
+# This plugin was made with the help of these documents
+# http://bugzilla.wikipedia.org/show_bug.cgi?id=814
+# http://meta.wikimedia.org/wiki/User:Otheus/Auto_Login_via_REMOTE_USER
+# Thanks to their authors
+#
+# You will find LDAP authentication plugin 
+# usr/share/mediawiki1.7/LocalLdapSettings.php
+# usr/share/mediawiki1.7/includes/LdapAuthentication.php
+# which were usefull examples but are of no used
+#
+# The plugin is based on the idea to add a Gforge skin to Mediawiki
+# and to use Gforge authentication mecanism to replace mediawiki one
+# That's why it is inspired by LDAP and Autologin examples
+#
+# The skin is in :
+# usr/share/mediawiki1.7/skins/GForge.php file 
+# and 
+# usr/share/mediawiki1.7/skins/gforge/ dir
+# It is based on monobook skin and all css changes are only in main.css
+#
+# usr/share/gforge/etc/httpd.d/03mediawiki contains the apache part you need to add to have this work
+# This is automagically used in debian package or if you use 'setup' script
+#
+# The three following files are partial reproduction of pre.php User.class and Group.class
+# usr/share/mediawiki1.7/includes/GForgePre.php
+# usr/share/mediawiki1.7/includes/GFUser.class.php
+# usr/share/mediawiki1.7/includes/GFProject.class.php
+# These are light version which only use necessary functions
+# It was necessary to do this because of class name collision
+# It should be possible to remove them in future evolution of gforge code
+#
+# In usr/share/mediawiki1.7/includes/GForgeAuthentication.php
+# $wgCacheEpoch = 'date +%Y%m%d%H%M%S';
+# is disabling cache. I didn't find yet a better way to tell mediawiki not to cache files
+# after Connect/Disconnect of a user
+# The mapping of authentication code is in this file which is instanciated in 
+#
+# INSTALL -- INSTALL
+#
+# To install you have to first install mediawiki and modify LocalSettings.php
+# you can choose to use mysql or postgresql database.
+# In case you use postgresql you can either choose the same or a separate db
+# the same or different database users. LocalSettings.php contains an example
+# to reuse the gforge passwd when passed thru apache env 
+#
+# usr/share/mediawiki1.7/LocalSettings.php
+# ---------------------------------------
+#$wgShowIPinHeader=false;
+#require_once( 'includes/GForgeAuthentication.php' );
+#$wgAuth = new GForgeAuthenticationPlugin();
+## 'AutoAuthenticate': called to authenticate users on external/environmental means
+## $user: writes user object to this parameter
+#$wgHooks['AutoAuthenticate'][] = array($wgAuth, 'getGForgeUserSession',array());
+# ---------------------------------------
+# This is mostly the only thing you have to do to activate GForge mediawiki plugin
+# and tell mediawiki you want to use gforge skin
+# disable the other skins is recommended
+#
