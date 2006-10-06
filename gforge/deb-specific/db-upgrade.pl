@@ -2757,15 +2757,34 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
-    &update_with_sql("20050812","4.5.14-10merge"); 
-    &update_with_sql("20050822","4.5.14-11merge"); 
-    &update_with_sql("20050823","4.5.14-12merge"); 
-    &update_with_sql("20050824","4.5.14-13merge"); 
-    &update_with_sql("20050831","4.5.14-14merge"); 
+    # I had to increase versions from 4.5.14 to 4.5.15
+    # The activity view is created by 20060216-nocommit
+    $query = "SELECT count(*) FROM pg_class WHERE relname='activity_vw' AND relkind='v'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    # If the view doesn't exists apply 
+    if ($array [0] == 0) {
+        &update_with_sql("20050812","4.5.15-10merge"); 
+        &update_with_sql("20050822","4.5.15-11merge"); 
+        &update_with_sql("20050823","4.5.15-12merge"); 
+        &update_with_sql("20050824","4.5.15-13merge"); 
+        &update_with_sql("20050831","4.5.15-14merge"); 
 
-    &update_with_sql("20060113","4.5.14-15"); 
-    &update_with_sql("20060214","4.5.14-16"); 
-    &update_with_sql("20060216-nocommit","4.5.14-17"); 
+        &update_with_sql("20060113","4.5.15-15"); 
+        &update_with_sql("20060214","4.5.15-16"); 
+        &update_with_sql("20060216-nocommit","4.5.15-17"); 
+    }
+    $target = "4.5.15-20" ;
+    if (&is_lesser ($version, $target)) {
+    	&update_db_version ($target) ;
+        &debug ("Committing $target") ;
+    	$dbh->commit () ;
+    }
+
+
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
