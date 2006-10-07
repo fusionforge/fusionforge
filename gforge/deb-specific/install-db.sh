@@ -317,7 +317,7 @@ EOF
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
 	rm -f /var/lib/postgres/data/gforge_passwd
-	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
+	[ -f /var/lib/postgres/data/postmaster.pid ] && kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid) || true
 	;;
     dump)
 	if [ -e /etc/sourceforge/local.pl ] ; then
