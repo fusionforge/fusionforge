@@ -3865,7 +3865,7 @@ UNITED KINGDOM	UK
 COPY licenses (license_id, license_name) FROM stdin;
 100	None
 101	GNU General Public License (GPL)
-102	GNU Library Public License (LGPL)
+102	GNU Lesser General Public License (LGPL)
 103	BSD License
 104	MIT License
 105	Artistic License
