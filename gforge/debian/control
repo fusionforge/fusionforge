@@ -10,7 +10,7 @@ Standards-Version: 3.7.2
 Package: gforge
 Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${Source-Version})
-Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (=${Source-Version}), gforge-web, gforge-db, gforge-mta, gforge-shell, gforge-ftp, gforge-lists
+Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (=${Source-Version}), gforge-web-apache2 | gforge-web, gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp, gforge-lists
 Recommends: gforge-plugin-scm
 Description: collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
@@ -34,6 +34,19 @@ Description: collaborative development tool - shared files
  .
  This package contains files and programs used by several other
  subpackages.
+
+Package: gforge-plugins
+Architecture: all
+Depends: gforge-common, php4-cli, python
+Conflicts: sourceforge, gforge-plugin-scmcvs, gforge-plugin-scmsvn, gforge-plugin-scmccase
+Description: collaborative development tool - plugins
+ GForge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package contains a set of various plugins
 
 Package: gforge-web-apache2
 Architecture: all

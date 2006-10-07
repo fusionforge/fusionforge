@@ -13,6 +13,7 @@ gforge (4.5.14-25+952) unstable; urgency=low
     postgresql one
   * Install plugins with gforge-web-apache 
   * Added mediawiki support
+  * Increase version in db-upgrade.pl not to clash with 4.5 branch
 
  -- Christian Bayle <bayle@debian.org>  Sat, 30 Sep 2006 20:48:24 +0200
 
