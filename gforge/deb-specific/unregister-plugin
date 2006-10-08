@@ -43,19 +43,19 @@ eval {
     if ($array[0] == 1) {
     	# Looking if this plugin is already referenced by a group
     	$query2="SELECT group_plugin.plugin_id FROM group_plugin,plugins WHERE group_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
-        $sth = $dbh->prepare ($query) ;
+        $sth = $dbh->prepare ($query2) ;
         $sth->execute () ;
         @array2 = $sth->fetchrow_array () ;
         $sth->finish () ;
-    	if ($array2[0] >= 1) {
+    	if ($array2[0] && $array2[0] >= 1) {
 		print "WARNING: This plugin is already used by one or more groups, can't unregister\n"
 	} else {
     		$query3="SELECT user_plugin.plugin_id FROM user_plugin,plugins WHERE user_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
-        	$sth = $dbh->prepare ($query) ;
+        	$sth = $dbh->prepare ($query3) ;
         	$sth->execute () ;
         	@array3 = $sth->fetchrow_array () ;
         	$sth->finish () ;
-    		if ($array3[0] >= 1) {
+    		if ($array3[0] && $array3[0] >= 1) {
 			print "WARNING: This plugin is already used by one or more users, can't unregister\n"
 		} else {
 			$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
