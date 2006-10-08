@@ -36,7 +36,7 @@ if (session_loggedin()) {
 			<td><?php
 				if ($group->usesPM()) {
 					echo '
-				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&aid='.$aid.'">'.
+				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'">'.
 					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
 				}
 				?>
@@ -126,7 +126,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
-		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
+		<textarea name="details" rows="7" cols="60"></textarea></p>
 		<p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php

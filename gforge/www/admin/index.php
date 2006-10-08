@@ -39,7 +39,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 ?>
 
 <p><strong><?php echo $Language->getText('admin_index','user_maintaince'); ?></strong></p>
-<ul>
+	<ul>
 	<li><?php
 		$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 		$row = db_fetch_array($res);

@@ -41,7 +41,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse">'.
+			<td><a href="/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&func=browse">'.
 				html_image("ic/tracker20w.png","20","20",array("border"=>"0")).' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
 			</td>

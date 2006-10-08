@@ -316,9 +316,9 @@ if ($art_arr && count($art_arr) > 0) {
 			$art_arr[$i]->getID() .
 			'</td>';
 		if ($display_col['summary'])
-		 echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&aid='.
+		 echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
 			$art_arr[$i]->getID() .
-			'&group_id='. $group_id .'&atid='.
+			'&amp;group_id='. $group_id .'&amp;atid='.
 			$ath->getID().'">'.
 			$art_arr[$i]->getSummary().
 			'</a></td>';
@@ -345,14 +345,14 @@ if ($art_arr && count($art_arr) > 0) {
 			echo '
 				<tr><td colspan="2">';
 			if ($offset > 0) {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&set='.
 				$set.'&offset='.($offset-50).'"><strong><-- '.$Language->getText('tracker_browse','previous').'</strong></a>';
 			} else {
 				echo '&nbsp;';
 			}
 			echo '</td><td>&nbsp;</td><td colspan="2">';
 			if ($rows >= 50) {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='.
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;set='.
 				$set.'&offset='.($offset+50).'"><strong>'.$Language->getText('tracker_browse','next').' --></strong></a>';
 			} else {
 				echo '&nbsp;';
@@ -381,7 +381,7 @@ if ($art_arr && count($art_arr) > 0) {
 		if ($j == $currentpage) {
 			echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 		} else {
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&group_id='.$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+			echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
 		}
 	}
 
