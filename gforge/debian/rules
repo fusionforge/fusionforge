@@ -81,6 +81,7 @@ install: build
 	$(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
 	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins/usr/share/doc/gforge-plugins/README.mediawiki
 	# scmcvs plugin
+	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
 	
 
 	# gforge-common

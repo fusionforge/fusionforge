@@ -10,6 +10,7 @@ gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
 gforge/db/20050822-drops.sql -text
 gforge/db/20060216-drops.sql -text
 gforge/db/20060216-nocommit.sql -text
+gforge/deb-specific/install-cvs.sh -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
@@ -591,7 +592,6 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
-gforge/plugins/scmcvs/sbin/install-cvs.debian.sh -text
 gforge/plugins/scmsvn/debian/README.Debian -text
 gforge/plugins/scmsvn/debian/copyright -text
 gforge/plugins/scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
