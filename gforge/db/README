@@ -50,6 +50,10 @@ Old sql and others file for sourceforge 2.6
 drwxrwsr-x    3     4096 2002-12-31 19:21 SQL_migrate-2.5-to-2.6
 Old sql and others file to migrate from sourceforge 2.5 to 2.6
 
+The *-drop.sql are not necessary, they are separated when the tables/views don't exists
+and would make fail debian db-upgrade.pl script
+You can apply them safely, but they should be useless
+
 P.S.:
 In debian upgrade is done with a perl script: deb-specific/db-upgrade.pl.
 This script in debian does smooth upgrade from sourceforge 2.5 to 2.6 and to gforge.
