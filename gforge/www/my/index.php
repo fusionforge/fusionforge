@@ -58,9 +58,8 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	}
 */
 	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname())));
+	$tabcnt=0;	
 	?>
-
-	<link rel="stylesheet" type="text/css" href="/tabber/gforge-tabber.css">
 <script type="text/javascript" src="/tabber/tabber.js"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" 
@@ -74,7 +73,7 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 	$order_name_arr[]=$Language->getText('tracker','id');
 	$order_name_arr[]=$Language->getText('tracker','priority');
 	$order_name_arr[]=$Language->getText('tracker','summary');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	$artifactsForUser = new ArtifactsForUser(session_get_user());
 	$assignedArtifacts =& $artifactsForUser->getAssignedArtifactsByGroup();
@@ -83,8 +82,8 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 		foreach($assignedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent""><a href="/tracker/?group_id='.
-				$art->ArtifactType->Group->getID().'&atid='.
+				<tr><td colspan="3" class="tablecontent"><a href="/tracker/?group_id='.
+				$art->ArtifactType->Group->getID().'&amp;atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
 				$art->ArtifactType->getName().'</a></td></tr>';
@@ -104,7 +103,7 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 		}
 	} else {
 		echo '
-			<tr><td colspan="3" span="">'.$Language->getText('my', 'no_tracker_items_assigned').'</td></tr>';
+			<tr><td colspan="3">'.$Language->getText('my', 'no_tracker_items_assigned').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
@@ -116,12 +115,13 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 	/*
 		Tasks assigned to me
 	*/
+	$tabcnt++;
 	$last_group=0;
 	$order_name_arr=array();
 	$order_name_arr[]=$Language->getText('tracker','id');
 	$order_name_arr[]=$Language->getText('tracker','priority');
 	$order_name_arr[]=$Language->getText('tracker','summary');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$projectTasksForUser = new ProjectTasksForUser(session_get_user());
 	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
 
@@ -140,7 +140,7 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 			$group =& $projectGroup->getGroup();
 			if ($projectGroup->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent"><strong><a href="/pm/task.php?group_id='.
+				<tr><td colspan="3" class="tablecontent"><a href="/pm/task.php?group_id='.
 				$group->getID().
 				'&amp;group_project_id='.
 				$projectGroup->getID().'">'.
@@ -170,20 +170,21 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 <div class="tabbertab" 
 title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 <?php
+	$tabcnt++;
 	$last_group="0";
 	$order_name_arr=array();
 	$order_name_arr[]=$Language->getText('tracker','id');
 	$order_name_arr[]=$Language->getText('tracker','priority');
 	$order_name_arr[]=$Language->getText('tracker','summary');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
 		$i=0;
 		foreach ($submittedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent"><strong><a href="/tracker/?group_id='.
-				$art->ArtifactType->Group->getID().'&atid='.
+				<tr><td colspan="3" class="tablecontent"><a href="/tracker/?group_id='.
+				$art->ArtifactType->Group->getID().'&amp;atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
 				$art->ArtifactType->getName().'</a></td></tr>';
@@ -212,11 +213,12 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	/*
 		Forums that are actively monitored
 	*/
+	$tabcnt++;
 	$last_group=0;
 	$order_name_arr=array();
 	$order_name_arr[]=$Language->getText('general','remove');
 	$order_name_arr[]=$Language->getText('my','monitoredforum');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$forumsForUser = new ForumsForUser(session_get_user());
 	$forums =& $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
@@ -227,9 +229,9 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/forum/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="/forum/?group_id='.
 				$group->getID().'">'.
-				$group->getPublicName().'</a></strong></td></tr';
+				$group->getPublicName().'</a></td></tr>';
 			}
 
 			echo '
@@ -248,11 +250,11 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		Filemodules that are actively monitored
 	*/
 	$last_group=0;
-
+	$tabcnt++;
 	$order_name_arr=array();
 	$order_name_arr[]=$Language->getText('general','remove');
 	$order_name_arr[]=$Language->getText('my','monitoredfile');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
 		"FROM groups,filemodule_monitor,frs_package ".
@@ -267,7 +269,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/project/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="/project/?group_id='.
 				db_result($result,$i,'group_id').'">'.
 				db_result($result,$i,'group_name').'</a></td></tr>';
 			}
@@ -275,7 +277,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/frs/monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
-			'BORDER=0"></a></td><td width="99%"><a href="/frs/?group_id='.
+			'border="0" alt=""/></a></td><td width="99%"><a href="/frs/?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</a></td></tr>';
 
@@ -314,10 +316,11 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	/*
 		PROJECT LIST
 	*/
+	$tabcnt++;
 	$order_name_arr=array();
 	$order_name_arr[]=$Language->getText('general','remove');
 	$order_name_arr[]=$Language->getText('my','projects');
-	echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
