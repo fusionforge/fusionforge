@@ -2035,7 +2035,7 @@ survey_admin_index	its_simple_to_create	<p>Es ist einfach eine Umfrage zu erstel
 survey_admin_index	permission_denied	Zugriff verweigert
 survey_admin_index	title	Survey 	Administration
 survey_admin_index	you_can_now_activate	Sie können nun die Umfragen auf der $1 aktivieren/deaktivieren. Vorhandene Umfragen bearbeiten $2 Seite
-survey_admin_utils	$1 Umfragen gefunden
+survey_admin_utils	found	$1 Umfragen gefunden
 survey_edit	addable_question	Hinzuzufügende Fragen
 survey_edit	change_after_already_response	Wenn Sie die Umfrage ändern, nachdem schon Antworten eingegangen sind, könnten Ihre Ergebnislisten irreführend oder durcheinander gebracht werden.
 survey_edit	delete_failed	Löschen fehlgeschlagen
@@ -2111,7 +2111,7 @@ survey_resp	the_crew	Die $1 Crew
 survey_resp	title	Umfrage vollständig
 survey_resp	unfortunately_you_have_to_be	Um an der Umfrage teilzunehmen, müssen Sie sich leider zuerst einloggen.
 survey_resp	you_nedd_to_be_logged_in	Sie müssen eingeloggt sein
-survey_show_questions	$1 Fragen gefunden
+survey_show_questions	found	$1 Fragen gefunden
 survey_show_questions	title	Umfragefragen
 survey_show_questions	note_use_these_questions_id	Anmerkung: Nutzen Sie diese Fragen_Id's wenn sie eine neue Umfrage erstellen
 survey_show_questions	permission_denied	Zugriff verweigert
@@ -2124,7 +2124,7 @@ survey_show_results_aggregate	error	Fehler
 survey_show_results_aggregate	no	Nein
 survey_show_results_aggregate	permission_denied	Zugriff verweigert
 survey_show_results_aggregate	responses	Antworten
-survey_show_results_aggregate	Überschrift: 	Gesamte Umfrageergebnisse
+survey_show_results_aggregate	title	Überschrift: 	Gesamte Umfrageergebnisse
 survey_show_results_aggregate	view_comments	Zeige alle $1 Kommentare
 survey_show_results_aggregate	yes	Ja
 survey_show_results_aggregate	yes_no	Ja / Nein

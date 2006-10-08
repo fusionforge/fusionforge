@@ -29,8 +29,7 @@
 #
 #  **/
 #
-
-		account	title	Preferenze account
+account	title	Preferenze account
 account	updated	Aggiornato
 account_change_email	desc	<p>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.</p> <p>Visti i servizi che garantiamo, è necessario assicurarci che l'indirizzo di ciascun utente sia corretto, dal momento che potrebbe essere necessario contattarlo per questioni relative all'accesso alla shell o a qualche progetto.</p><p>Cliccando su Invia nel form invierà un messaggio contenente un URL per confermare il nuovo indirizzo di posta elettronica. Il cambio sarà completato quando il link di conferma sarà visitato.</p>
 account_change_email	invalid_email	Indirizzo email non valido

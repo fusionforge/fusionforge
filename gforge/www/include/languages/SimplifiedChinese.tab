@@ -13,7 +13,6 @@
 #
 # ChangeLog:
 #
-
 account	title	帐号设置
 account	updated	更新
 account_change_email	desc	<p>为了保证我们拥有您正确的email信箱，改变您的email信箱，将会要求新email信箱的确认。</p><p>我们需要维护每个用户的正确email信箱，是为了通过这个帐号来对用户进行授权访问。当这个帐号有重要的事件需要通知时，有个确切的email信箱才能使我们做到这一点。</p>  <p>提交这个表单，将会发出一个要求确认的网址到新的email信箱，访问那个链接就可以完成email信箱的改变。</p>
@@ -511,14 +510,14 @@ common_include_account	tooshort	名称太短，至少要三个字节
 common_utils	priority_colors	优先权颜色
 conf	mail_charset	UTF-8
 configman	change	存放插件配置的文件夹，例如： /etc/gforge/plugins/
-configman	choose        选择	
-configman	doedit        保存	
+configman	choose	选择
+configman	doedit	保存
 configman	name	属性
 configman	notopenfile	无法打开文件读写，请检查apache权限设置<br>
 configman	notopenlocalinc	无法打开local.inc文件进行读写，请检查apache权限设置<br>
 configman	notopenplugindir	无法读取 plugins etc 目录，请检查apache权限设置<br>
 configman	nowrite	文件未写入或为空。<br>
-configman	off 关	
+configman	off	关
 configman	on	开
 configman	updateok	文件写入成功。<br>
 cronman	date	日期

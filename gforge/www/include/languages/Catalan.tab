@@ -972,7 +972,7 @@ news_utils	comment_2	Comentaris
 news_utils	nonews	No s'han trobat elements de notícies
 news_utils	readmore	Llegeix-ne&nbsp;més/Comenta
 news_utils	submit	Tramet notícies
-people	about_blurb <p>El tauler destinat a sol·licituds d'ajuda dels projectes de $1 serveix per a col·laboracions voluntàries no comercials. L'ús comercial està prohibit.</p><p>Els llistats de projecte resten oberts durant dues setmanes, o fins que els tanqui el remitent, el que passi abans. (Els administradors dels projectes sempre poden reenviar sol·licituds ja expirades.)</p><p>Exploreu a través del menú de categories per a trobar projectes que cerquin la vostra ajuda.</p><p>Si sou un administrador de projecte, inicieu una sessió i envieu peticions d'ajuda a través de la vostra pàgina d'administració de projecte.</p><p>Per a suggerir noves categories de feina, envieu una petició a través del gestor de suport.</p>
+people	about_blurb	<p>El tauler destinat a sol·licituds d'ajuda dels projectes de $1 serveix per a col·laboracions voluntàries no comercials. L'ús comercial està prohibit.</p><p>Els llistats de projecte resten oberts durant dues setmanes, o fins que els tanqui el remitent, el que passi abans. (Els administradors dels projectes sempre poden reenviar sol·licituds ja expirades.)</p><p>Exploreu a través del menú de categories per a trobar projectes que cerquin la vostra ajuda.</p><p>Si sou un administrador de projecte, inicieu una sessió i envieu peticions d'ajuda a través de la vostra pàgina d'administració de projecte.</p><p>Per a suggerir noves categories de feina, envieu una petició a través del gestor de suport.</p>
 people	action	Acció
 people	add_new_skill	Afegeix una nova habilitat
 people	add_skill	Afegeix habilitat

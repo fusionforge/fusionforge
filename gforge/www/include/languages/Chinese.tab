@@ -19,7 +19,6 @@
 # 2005-04-19  Jimou, Lee
 # 2005-12-19  Finjon Kiang http://twpug.net
 #
-
 account	title	帳號設定
 account	updated	更新
 account_change_email	desc	<p>為了保證我們擁有您正確的email信箱，改變您的email信箱，將會要求新email信箱的確認。</p><p>我們需要維護每個會員的正確email信箱，是為了通過這個帳號來對會員進行授權訪問。當這個帳號有重要的事件需要通知時，有個確切的email信箱才能使我們做到這一點。</p>  <p>送出這個表單，將會發出一個要求確認的網址到新的email信箱，訪問那個連結就可以完成email信箱的改變。</p>

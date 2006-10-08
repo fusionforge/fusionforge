@@ -2427,8 +2427,6 @@ tracker_admin	manage_extrafield	Manage Custom Fields
 tracker_admin	clone_tracker	Clone Tracker
 tracker_admin	add_canned	Add Canned Responses
 tracker_admin	delete	Delete Tracker
-tracker_admin	add_artifact_types
-tracker_admin	add_artifact_types
 tracker_admin	permanently_delete_info	Permanently delete this tracker.
 tracker_admin	deleted	Successfully Deleted.
 tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
@@ -2662,4 +2660,3 @@ send_pending_items_mail	pm_subject	Pending task manager items notification
 send_pending_items_mail	pm_message	This mail is sent to you to remind you of pending/overdue tasks. \nThe task manager item  #$1 is pending: \nTask Summary: $2\nSubmitted by: $4\nStatus:$5\nPercent Complete: $6\n\nClick here to visit the item $3
 send_pending_items_mail	tracker_subject	Pending tracker  items notification
 send_pending_items_mail	tracker_message	This mail is sent to you to remind you of pending/overdue tracker items. The item #$1 is pending: \nSummary: $3\nStatus: $5\nOpen Date:$6\nAssigned To: $7\nSubmitted by: $8\nDetails: $9\n\n\nClick here to visit the item: $4
-
