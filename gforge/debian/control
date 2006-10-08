@@ -37,7 +37,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-plugins
 Architecture: all
-Depends: gforge-common, php4-cli, python
+Depends: gforge-common, php4-cli, python, python-subversion
 Conflicts: sourceforge, gforge-plugin-scmcvs, gforge-plugin-scmsvn, gforge-plugin-scmccase
 Description: collaborative development tool - plugins
  GForge provides many tools to help collaboration in a

@@ -65,11 +65,13 @@ install: build
 	
 	# gforge-plugins
 	cp -r plugins $(CURDIR)/debian/gforge-plugins/usr/share/gforge/
-	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins/etc/gforge/
+	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/etc/
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/*
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/debian
 	ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins/usr/share/gforge/www
 	chown www-data:www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins
+	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/sbin/*
+	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/bin/*
 	# mediawiki plugin
 	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-plugins/
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr
@@ -78,6 +80,8 @@ install: build
 	mv $(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalSettings.php \
 	$(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
 	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins/usr/share/doc/gforge-plugins/README.mediawiki
+	# scmcvs plugin
+	
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
