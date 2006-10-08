@@ -1,13 +1,8 @@
-gforge-plugin-scmcvs
---------------------
+scmcvs plugin
+-------------
 
 This is the CVS plugin for Gforge.  It creates CVS repositories and
 provides some functionality to manage them.
-
-Decompress the plugin tarball and place it into your plugins directory.
-Usually, this would be in a location like /opt/gforge/gforge/plugins/scmcvs
-Whereever you place it, be sure your /etc/gforge/local.inc file has
-$sys_plugins_path pointing to the plugins directory.
 
 The scmcvs/etc/plugins/scmcvs/config.php should be copied and edited
 to
