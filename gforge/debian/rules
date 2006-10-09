@@ -82,7 +82,10 @@ install: build
 	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins/usr/share/doc/gforge-plugins/README.mediawiki
 	# scmcvs plugin
 	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
-	
+	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/scmcvs/cronjobs
+	# scmsvn plugin
+	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
+	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/scmsvn/cronjobs
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/

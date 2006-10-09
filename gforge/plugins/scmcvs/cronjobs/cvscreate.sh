@@ -21,7 +21,7 @@ groupname=$2
 isanonymousenabled=$3
 ispserverenabled=$4
 
-function setPserverAccess() {
+function setAnonymousPserverAccess() {
 	writers=""
 	readers=""
 	passwd=""
@@ -51,7 +51,7 @@ function createRepository() {
 	chmod 3777 /cvsroot/cvs-locks/$repositoryname
 	setRepositoryAccess
 	cvs -d$repositorypath init
-	setPserverAccess
+	setAnonymousPserverAccess
 	echo "SystemAuth=yes" > $repositorypath/CVSROOT/config
 	echo "LockDir=/cvsroot/cvs-locks/$repositoryname" >> $repositorypath/CVSROOT/config
 	chmod 444 $repositorypath/CVSROOT/config
@@ -63,7 +63,7 @@ function createRepository() {
 if [ -d $repositorypath ] ; then
 	echo "$repositoryname already exists."
 	setRepositoryAccess
-	setPserverAccess
+	setAnonymousPserverAccess
 	echo ""
 else
 	createRepository

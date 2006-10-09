@@ -24,7 +24,7 @@ require_once ('plugins/scmsvn/config.php');
 
 $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php
-$svnroot = $svndir_prefix;
+$svnroot = $sys_chroot$svndir_prefix;
 $ARGV = $GLOBALS['argv'];
 $err = '';
 $debug = 0;
