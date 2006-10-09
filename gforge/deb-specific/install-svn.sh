@@ -23,7 +23,6 @@ case "$1" in
         update-inetd --remove  "svnserve stream tcp nowait.400 gforge_scm /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
         update-inetd --remove  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot" || true
         update-inetd --add  "svn stream tcp nowait.400 scm-gforge /usr/bin/svnserve svnserve -i -r $gforge_chroot"
-	/usr/lib/gforge/plugins/scmsvn/bin/install-viewcvs.sh
 	;;
 
     purge)
