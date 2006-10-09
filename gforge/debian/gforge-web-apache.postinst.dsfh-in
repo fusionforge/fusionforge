@@ -66,8 +66,10 @@ case "$1" in
 	/usr/lib/gforge/bin/install-apache.sh configure
 
 	# If you want to work with sourceforge-web-apache at the same time
+	if [ -f /etc/apache/httpd.conf ] ; then
 	if grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
 		echo "" >/etc/gforge/httpd.common
+	fi
 	fi
 
 	# Set up upload directory
