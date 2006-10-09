@@ -16,7 +16,7 @@ echo notepad_func();
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 <?php if (session_loggedin()) { ?>
 	<table cellpadding="0" width="100%">
@@ -31,7 +31,7 @@ echo notepad_func();
 						$key="monitor";
 					}
 					echo '
-					<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+					<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 						html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
 					?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 
@@ -89,7 +89,6 @@ echo notepad_func();
 			<?php echo $ah->showDetails(); ?>
 		</td></tr>
 </table>
-<link rel="stylesheet" type="text/css" href="/tabber/gforge-tabber.css">
 <script type="text/javascript" src="/tabber/tabber.js"></script>
 
 <div id="tabber" class="tabber">
@@ -142,7 +141,7 @@ if ($group->usesPM()) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
 						<td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.
-						'&group_id='.$groupid.'&group_project_id='.$projectid.'">'.$summary.'</a></td>
+						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
 				</tr>';

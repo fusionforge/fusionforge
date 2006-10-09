@@ -17,10 +17,10 @@ echo notepad_func();
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
-	<input type="hidden" name="func" value="postmod">
-	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
+	<input type="hidden" name="func" value="postmod"/>
+	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>"/>
 
 	<table width="80%">
 <?php
@@ -36,14 +36,14 @@ if (session_loggedin()) {
 					$key="monitor";
 				}
 				echo '
-				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
 				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
 					echo '
-				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'">'.
+				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'">'.
 					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
 				}
 				?>
@@ -162,7 +162,6 @@ if (session_loggedin()) {
 </table>
 <br />
 <br />
-<link rel="stylesheet" type="text/css" href="/tabber/gforge-tabber.css">
 <script type="text/javascript" src="/tabber/tabber.js"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups'); ?>">
@@ -175,7 +174,7 @@ if (session_loggedin()) {
 		?>
 		<p>
 		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
-		<textarea name="details" rows="7" cols="60" wrap="soft"></textarea></p>
+		<textarea name="details" rows="7" cols="60"></textarea></p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php
 			echo $ah->showMessages(); 
@@ -184,21 +183,23 @@ if (session_loggedin()) {
 </table>
 </div>
 <?php
+$tabcnt=0;
 if ($group->usesPM()) {
 ?>
 <div class="tabbertab" title="<?php echo $Language->getText('trackertab','relatedtasks'); ?>">
-<table border="0" width="80%">
-	<tr><td colspan="2">
 		<h3><?php echo $Language->getText('tracker','related_tasks'); ?>:</h3>
+<table border="0" width="80%">
 		<?php
+		$tabcnt++;
 		$result = $ah->getRelatedTasks();
 		$taskcount = db_numrows($ah->relatedtasks);
 		if ($taskcount > 0) {
+			echo '<tr><td colspan="2">';
 			$titles[] = $Language->getText('pm','task_id');
 			$titles[] = $Language->getText('pm','summary');
 			$titles[] = $Language->getText('pm','start_date');
 			$titles[] = $Language->getText('pm','end_date');
-			echo $GLOBALS['HTML']->listTableTop($titles);
+			echo $GLOBALS['HTML']->listTableTop($titles,'',$tabcnt);
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
 				$taskid    = $taskinfo['project_task_id'];
@@ -209,8 +210,8 @@ if ($group->usesPM()) {
 				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
-						<td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.
-						'&group_id='.$groupid.'&group_project_id='.$projectid.'">'.$summary.'</a></td>
+						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
+						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
 				</tr>';
@@ -220,11 +221,11 @@ if ($group->usesPM()) {
 			echo '<tr><td colspan="3">'.$Language->getText('tracker','no_related_tasks').'</td></tr>';
 		}
       ?>
-	</td></tr>
 </table>
 </div>
 <?php } ?>
 <div class="tabbertab" title="<?php echo $Language->getText('trackertab','attachments'); ?>">
+		<h3><?php echo $Language->getText('tracker_mod','existing_files') ?>:</h3>
 <table border="0" width="80%">
 	<tr><td colspan="2">
         <strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
@@ -233,8 +234,6 @@ if ($group->usesPM()) {
         <input type="file" name="input_file[]" size="30" /><br />
         <input type="file" name="input_file[]" size="30" /><br />
         <input type="file" name="input_file[]" size="30" /><br />
-		<p>
-		<h3><?php echo $Language->getText('tracker_mod','existing_files') ?>:</h3>
 		<?php
 		//
 		//	print a list of files attached to this Artifact
@@ -242,12 +241,12 @@ if ($group->usesPM()) {
 		$file_list =& $ah->getFiles();
 		
 		$count=count($file_list);
-
+		$tabcnt++;
 		$title_arr=array();
 		$title_arr[]=$Language->getText('tracker_mod','delete');
 		$title_arr[]=$Language->getText('tracker_mod','name');
 		$title_arr[]=$Language->getText('tracker_mod','download');
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr,'',$tabcnt);
 
 		if ($count > 0) {
 
@@ -261,7 +260,7 @@ if ($group->usesPM()) {
 			}
 
 		} else {
-			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan=4>'.$Language->getText('tracker_mod','no_files').'</td></tr>';
+			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="4">'.$Language->getText('tracker_mod','no_files').'</td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();

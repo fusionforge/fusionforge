@@ -46,27 +46,27 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links  = array();
 
 		$labels[] = $this->getName().': '.$Language->getText('tracker_artifacttype','browse');
-		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID();
+		$links[]  = '/tracker/?func=browse&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		$labels[] = $Language->getText('tracker_artifacttype','csv');
-		$links[]  = '/tracker/?func=downloadcsv&group_id='.$group_id.'&atid='. $this->getID();
+		$links[]  = '/tracker/?func=downloadcsv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		if ($this->allowsAnon() || session_loggedin()) {
 			$labels[] = $Language->getText('tracker_artifacttype','submit_new');
-			$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
+			$links[]  = '/tracker/?func=add&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		}
 
 		if (session_loggedin()) {
 			$labels[] = $Language->getText('tracker_artifacttype','reporting');
-			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
+			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&amp;atid='. $this->getID();
 			if ($this->isMonitoring()) {
 				$labels[] = $Language->getText('tracker_monitor','monitorstop');
 			} else {
 				$labels[] = $Language->getText('tracker_monitor','monitor');
 			}
-			$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor';
+			$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor';
 
 			if ($this->userIsAdmin()) {
 				$labels[] = $Language->getText('tracker_artifacttype','admin');
-				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
+				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
 			}
 		}
 
@@ -85,19 +85,19 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links_arr[]='/tracker/admin/?group_id='.$group_id;
 		$title_arr[]=$Language->getText('tracker_admin','add_artifact_types');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&update_type=1';
 		$title_arr[]=$Language->getText('tracker_admin','update_artifact_types');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_extrafield=1';
 		$title_arr[]=$Language->getText('tracker_admin','manage_extrafield');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;clone_tracker=1';
 		$title_arr[]=$Language->getText('tracker_admin','clone_tracker');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_canned=1';
 		$title_arr[]=$Language->getText('tracker_admin','add_canned');
 
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1';
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;delete=1';
 		$title_arr[]=$Language->getText('tracker_admin','delete');
 
 		echo $HTML->printSubMenu($title_arr,$links_arr);
@@ -323,12 +323,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($show_100) {
 			$return .= '
 				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="100" '.
-			((in_array(100,$checked)) ? 'CHECKED' : '').'>'.$text_100.'<br />';
+			((in_array(100,$checked)) ? 'CHECKED' : '').'/>'.$text_100.'<br />';
 		}
 		for ($i=0; $i<count($arr); $i++) {
 			$return .= '
 				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="'.$arr[$i]['element_id'].'" '.
-			((in_array($arr[$i]['element_id'],$checked)) ? 'CHECKED' : '').'>&nbsp;'.$arr[$i]['element_name'].'<br />';
+			((in_array($arr[$i]['element_id'],$checked)) ? 'CHECKED' : '').'/>&nbsp;'.$arr[$i]['element_name'].'<br />';
 		}
 		return $return;
 	}
@@ -370,7 +370,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 */	
 	function renderTextField ($extra_field_id,$contents,$size,$maxlength) {
 		return '
-			<input type="text" name="extra_fields['.$extra_field_id.']" value="'.$contents.'" size="'.$size.'" maxlength="'.$maxlength.'">';
+			<input type="text" name="extra_fields['.$extra_field_id.']" value="'.$contents.'" size="'.$size.'" maxlength="'.$maxlength.'"/>';
 	}
 
 	/**
