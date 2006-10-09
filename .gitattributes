@@ -598,8 +598,6 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
-gforge/plugins/scmsvn/debian/README.Debian -text
-gforge/plugins/scmsvn/debian/copyright -text
 gforge/plugins/scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
