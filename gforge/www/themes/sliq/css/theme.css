@@ -1,0 +1,174 @@
+/* 
+ * Stylesheet for SAP Forge theme.
+ */
+BODY {
+  margin-top: 0em;
+  margin-left: 0em;
+  margin-right: 0em;
+  margin-bottom: 0em;
+  color: rgb(68, 68, 68);
+  background-color: rgb(247, 247, 247);
+  font-family: arial, helvetica, sans-serif;
+  font-size: small;
+}
+
+form { margin: 0; }
+
+img { border: 0; }
+
+a {
+  text-decoration: none;
+  color: rgb(1, 73, 144);
+}
+
+/*
+a:link {
+  color: #0000be
+}
+
+a:visited {
+  color: #0000be
+}
+
+a:active {
+}
+*/
+
+a:hover {
+  text-decoration: underline;
+  color: rgb(247, 0, 0);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: verdana, arial, helvetica, sans-serif;
+}
+
+h1 {
+  font-size: x-large;
+}
+
+h2 {
+  font-size: large;
+}
+
+h3 {
+  font-size: medium;
+}
+
+h4 {
+  font-size: small;
+}
+
+h5 {
+  font-size: x-small;
+}
+
+h6 {
+  font-size: xx-small;
+}
+
+pre,tt {
+  font-family: courier, sans-serif
+}
+
+/* the style of the label on a box title  */
+.titlebar {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.topTab, a.topTab, a.topTab:visited, a.topTab:hover,
+.topTabSelected, a.topTabSelected, a.topTabSelected:visited, 
+a.topTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTab, a.bottomTab, a.bottomTab:visited, a.bottomTab:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+.bottomTabSelected, a.bottomTabSelected, a.bottomTabSelected:visited, 
+a.bottomTabSelected:hover {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+  font-family: arial, helvetica, sans-serif;
+  font-size: 0.9em;
+}
+
+/* header style */
+.header {
+  background: rgb(66, 69, 82) url("../images/header/top-middle.gif") top left
+    repeat-x;
+  /* padding-right: 1em; */
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  margin: 0 0 0 0;
+  vertical-align: top;
+}
+
+.topLeft {
+  vertical-align: top;
+  text-align: left;
+}
+
+.middleRight {
+  vertical-align: middle;
+  text-align: right;
+}
+
+.header form {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  border-width: 0;
+}
+
+/*
+.header h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  font-size: 2px;
+  height: 8px;
+  z-index: 100;
+}
+
+.header h1 a {
+  display: block;
+  width: 205px;
+  height: 55px;
+  background: transparent url("../images/header/top-logo.gif") no-repeat;
+  text-indent: -700em;
+  text-decoration: none;
+}
+*/
+
+.header p,.header a {
+  color: white;
+  font-family: arial, helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.mainCanvas {
+  width: 100%;
+  padding: 0.6em 0.6em 0.6em 0.6em ;
+  border: 0;
+}
+
+.pane {
+  color: rgb(112, 112, 112);
+  background-color: white;
+}
+
+
