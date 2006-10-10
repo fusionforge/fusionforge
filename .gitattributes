@@ -610,8 +610,6 @@ gforge/plugins/svntracker/common/svntracker-init.php -text
 gforge/plugins/svntracker/common/svntrackerPlugin.class -text
 gforge/plugins/svntracker/db/20051011.sql -text
 gforge/plugins/svntracker/db/svntracker-init.sql -text
-gforge/plugins/svntracker/debian/db-delete.pl -text
-gforge/plugins/svntracker/debian/db-upgrade.pl -text
 gforge/plugins/svntracker/etc/plugins/svntracker/config.php -text
 gforge/plugins/svntracker/httpd.conf -text
 gforge/plugins/svntracker/postcommit.example -text
