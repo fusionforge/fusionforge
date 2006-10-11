@@ -149,3 +149,6 @@ cd /etc/gforge && find -type f -exec perl -pi -e "s/192\.168\.100\.100/$4/" {} \
 
 
 echo "noreply:        /dev/null" >> /etc/aliases
+
+# create symlink for fckeditor
+cd /opt/gforge/www && ln -s ../utils/fckeditor/www/ fckeditor
