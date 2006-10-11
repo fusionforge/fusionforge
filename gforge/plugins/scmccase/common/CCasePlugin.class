@@ -27,6 +27,7 @@ class CCasePlugin extends SCM {
 	function CCasePlugin () {
 		$this->SCM () ;
 		$this->name = "scmccase";
+		$this->text = 'CCASE';
 		$this->hooks[] = "scm_page";
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
