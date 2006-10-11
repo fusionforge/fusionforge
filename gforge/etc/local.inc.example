@@ -45,7 +45,7 @@ $sys_users_host = 'users.gforge.company.com';
 
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
-$sys_lists_host = 'lists.gforge.company.com';
+$sys_lists_host = 'gforge.company.com';
 
 //
 // SCM configuration
@@ -61,10 +61,10 @@ $sys_cvs_host=$sys_scm_host;
 $sys_scm_single_host = 1;
 
 // Path to tarballs directory
-$sys_scm_tarballs_path='/path/to/var/lib/gforge/scmtarballs';
+$sys_scm_tarballs_path='/opt/gforge/scmtarballs';
 
 // Path to snapshots directory
-$sys_scm_snapshots_path='/path/to/var/lib/gforge/scmsnapshots';
+$sys_scm_snapshots_path='/opt/gforge/scmsnapshots';
 
 // Path to SCMWEB
 $sys_path_to_scmweb='/usr/lib/gforge/bin/';
@@ -200,12 +200,11 @@ $sys_chroot='';
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
 //
-$sys_upload_dir='/path/to/uploads/';
-$sys_ftp_upload_dir='/path/to/frs/upload';
+$sys_upload_dir='/opt/gforge/uploads/';
+$sys_ftp_upload_dir='/opt/gforge/ftpupload';
 $sys_ftp_upload_host='upload.gforge.company.com';
-//$sys_ftp_upload_chowner='{ftpuploadchowner}';
-$sys_apache_user='www-gforge';
-$sys_apache_group='www-gforge';
+$sys_apache_user='apacheuser';
+$sys_apache_group='apachegroup';
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
@@ -213,7 +212,7 @@ $sys_apache_group='www-gforge';
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot='/path/to/gforge/www/';
+$sys_urlroot='/opt/gforge/www/';
 
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='MyGForge';
@@ -241,7 +240,7 @@ $sys_bcc_all_email_address='';
 
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
-$sys_themeroot='/path/to/gforge/www/themes/';
+$sys_themeroot='/opt/gforge/www/themes/';
 // If you want an other default theme or language
 $sys_theme='gforge';
 $sys_lang='English';
@@ -265,7 +264,7 @@ $sys_template_group=5;
 $default_trove_cat=18;
 
 // JPGRAPH Package
-$sys_path_to_jpgraph='/path/to/jpgraph';
+$sys_path_to_jpgraph='/opt/jpgraph';
 
 // Show Source
 //	Setting this to 1 will add a "Show Source" link to the bottom of each page
@@ -283,7 +282,7 @@ $sys_force_login=0;
 //$gantt_task_font_size=12;
 
 // Place for customized files
-$sys_custom_path='/path/to/gforge/etc/custom';
+$sys_custom_path='/opt/gforge/etc/custom';
 
 //
 // Localization caching Configuration
@@ -296,7 +295,7 @@ $sys_localization_enable_caching = true;
 // within its document root (does not fall under www/ in the tarball)
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
-$sys_localization_cache_path = '/path/to/localization/cache/';
+$sys_localization_cache_path = '/opt/gforge/localizationcache/';
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = true;
@@ -305,13 +304,7 @@ $sys_localization_enable_timestamp_checking = true;
 // Plugins configuration
 //
 // Path to plugins directory
-$sys_plugins_path='/usr/share/gforge/plugins/';
-
-//bbcode customizations
-$sys_bbcode_make_clickable=1;
-$sys_bbcode_smilie_on=1;
-$sys_bbcode_bbcode_on=1;
-$sys_bbcode_strip_html=1;
+$sys_plugins_path='/opt/gforge/plugins/';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
