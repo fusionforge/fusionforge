@@ -163,7 +163,7 @@ $j = 0;
 while ($filename = readdir($handle)) {
 	//Don't add special directories '..' or '.' to the list
 	$status=0; 
-	if (($filename!='..') && ($filename!='.') && ($filename!="CVS") ) {
+	if (($filename!='..') && ($filename!='.') && ($filename!="CVS") && is_dir($sys_plugins_path.'/'.$filename)) {
 		//check if the plugin is in the plugins table
 		$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
 		$res = db_query($sql);
