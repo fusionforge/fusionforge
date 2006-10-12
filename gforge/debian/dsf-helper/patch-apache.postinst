@@ -1,0 +1,8 @@
+patch_apache_replace () {
+	for flavour in $* ; do
+		[ -e /etc/php4/$flavour/php.ini ] && replace_file /etc/php4/$flavour/php.ini || true
+		[ -e /etc/php5/$flavour/php.ini ] && replace_file /etc/php5/$flavour/php.ini || true
+	done
+	[ -e /etc/php4/cgi/php.ini ] && replace_file /etc/php4/cgi/php.ini || true
+	[ -e /etc/php5/cgi/php.ini ] && replace_file /etc/php5/cgi/php.ini || true
+}

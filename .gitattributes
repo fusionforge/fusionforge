@@ -16,7 +16,19 @@ gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text
 gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
+gforge/debian/dsf-helper/patch-apache.config -text
+gforge/debian/dsf-helper/patch-apache.postinst -text
+gforge/debian/dsf-helper/patch-apache.prerm -text
 gforge/debian/gforge-plugins.cron.d -text
+gforge/debian/gforge-plugins.dirs -text
+gforge/debian/gforge-web-apache2.config.dsfh-in -text
+gforge/debian/gforge-web-apache2.cron.d -text
+gforge/debian/gforge-web-apache2.dirs -text
+gforge/debian/gforge-web-apache2.docs -text
+gforge/debian/gforge-web-apache2.overrides -text
+gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
+gforge/debian/gforge-web-apache2.prerm.dsfh-in -text
+gforge/debian/gforge-web-apache2.templates.dsfh-in -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
@@ -24,6 +36,7 @@ gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application
 gforge/docs/images/sflogo2-105a.png -text
 gforge/etc/httpd.d/00listen443.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
+gforge/etc/local.d/60bbcode -text
 gforge/gforge-install.sh -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
