@@ -316,9 +316,9 @@ if ($sys_show_source) {
      */
     function boxGetAltRowStyle($i) {
         if ($i % 2 == 0) {
-            return 'bgcolor="#EAEAEA"';
+            return ' bgcolor="#EAEAEA"';
         } else {
-            return 'bgcolor="#E0E0E0"';
+            return ' bgcolor="#E0E0E0"';
         }
     }
 

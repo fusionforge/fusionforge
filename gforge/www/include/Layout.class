@@ -371,9 +371,9 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
-			return 'class="altRowStyleEven"';
+			return ' class="altRowStyleEven"';
 		} else {
-			return 'class="altRowStyleOdd"';
+			return ' class="altRowStyleOdd"';
 		}
 	}
 

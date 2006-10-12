@@ -218,11 +218,11 @@ class Theme extends Layout {
 	function boxGetAltRowStyle($i) {
 		switch ($i % 3 ) {
 			case 0:
-				return 'bgcolor="#FFFFFF"';
+				return ' bgcolor="#FFFFFF"';
 			case 1:
-				return 'bgcolor="' . $this->COLOR_LTBACK1 . '"';
+				return ' bgcolor="' . $this->COLOR_LTBACK1 . '"';
 			case 2:
-				return 'bgcolor="' . $this->COLOR_LTBACK2 . '"';
+				return ' bgcolor="' . $this->COLOR_LTBACK2 . '"';
 		}
 	}
 

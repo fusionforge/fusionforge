@@ -240,9 +240,9 @@ vironment" border="0" /></a>
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
-			return 'BGCOLOR="#FFFFFF"';
+			return ' BGCOLOR="#FFFFFF"';
 		} else {
-			return 'BGCOLOR="' . $this->COLOR_LTBACK1 . '"';
+			return ' BGCOLOR="' . $this->COLOR_LTBACK1 . '"';
 		}
 	}
 
