@@ -581,8 +581,6 @@ class ForumAdmin extends Error {
 			//show the pending messages, awaiting moderation
 			$group_id = $this->group_id;
 			$forum_id = getStringFromRequest("forum_id");
-			$page = getIntFromRequest("page"); //the results are paginated
-			$limit = 5; //how many msgs per page to display
 			if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}
@@ -640,42 +638,13 @@ class ForumAdmin extends Error {
 			$title[] = $Language->getText('forum_admin_pending','subject');
 			$title[] = "Action";
 			
-			
-			//we´ll see how much pages to present
-			//if ($forum_id == "A") {
-				// all
-			//	$sql = "SELECT distinct count(*) FROM forum_pending_messages pm, forum_group_list gl WHERE gl.group_id = $group_id AND pm.group_forum_id=gl.group_forum_id";
-			//} else {
-				// only for the forum
-				$sql = "SELECT count(*) FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id='$forum_id' AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id='$forum_id'";
-			//}
+			$sql = "SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id='$forum_id' AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id='$forum_id'";
 			$res = db_query($sql);
 			if (!$res) {
 				echo db_error();
 				return;			
 			}
-			$totalmsgs = db_result($res,0,0);
-			$totalpages = ceil($totalmsgs / $limit);
-			
-			
-			//if ($forum_id == "A") {
-			//	$sql = "SELECT distinct msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE gl.group_id=$group_id OFFSET $page LIMIT $limit"; //20 per page max
-			//} else {
-				$sql = "SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id='$forum_id' AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id='$forum_id' OFFSET $page LIMIT $limit"; //20 per page max
-			//}
-			$res = db_query($sql);
-			if (!$res) {
-				echo db_error();
-				return;			
-			}
-			
-			//list pages
-			echo "<center>";
-			for ($i=0;$i<$totalpages;$i++) {
-				echo '<a href="pending.php?action=view_pending&group_id=' . $group_id . '&page=' . $i . '&forum_id=' . $forum_id . '">' . ($i + 1) . '      </a>';
-			}
-			echo "</center><p>";
-			
+
 			$options = array("1" => "No action","2" => "Delete","3" => "Release"); //array with the supported actions
 			//i´ll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
 			for($i=0;$i<db_numrows($res);$i++) {
