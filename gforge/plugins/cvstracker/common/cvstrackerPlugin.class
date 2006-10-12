@@ -33,7 +33,7 @@ class cvstrackerPlugin extends Plugin {
 	function cvstrackerPlugin () {
 		$this->Plugin() ;
 		$this->name = "cvstracker" ;
-		$this->text = "Cvs 2 Tracker";
+		$this->text = "CVS<->Tracker";
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
@@ -279,7 +279,7 @@ class cvstrackerPlugin extends Plugin {
 				echo "><br/>";
 				echo "</td>";
 				echo "<td>";
-				echo "<strong>".$this->text." Plugin</strong>";
+				echo "<strong>Use ".$this->text." Plugin</strong>";
 				echo "</td>";
 				echo "</tr>";
 			}

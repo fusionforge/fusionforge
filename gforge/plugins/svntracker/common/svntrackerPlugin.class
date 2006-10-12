@@ -33,7 +33,7 @@ class svntrackerPlugin extends Plugin {
 	function svntrackerPlugin () {
 		$this->Plugin() ;
 		$this->name = "svntracker" ;
-		$this->text = "svn 2 Tracker";
+		$this->text = "svn<->Tracker";
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
@@ -247,7 +247,7 @@ class svntrackerPlugin extends Plugin {
 				echo "><br/>";
 				echo "</td>";
 				echo "<td>";
-				echo "<strong>".$this->text." Plugin</strong>";
+				echo "<strong>Use ".$this->text." Plugin</strong>";
 				echo "</td>";
 				echo "</tr>";
 			}
