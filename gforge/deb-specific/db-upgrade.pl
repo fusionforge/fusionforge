@@ -2673,7 +2673,9 @@ $dbh->{RaiseError} = 1;
     }
 
     &update_with_sql("20050906","4.5-2"); 
-    &update_with_sql("20051027-1","4.5-3"); 
+    # 20051027-1 was renamed 20050804-1
+    #&update_with_sql("20051027-1","4.5-3"); 
+    &update_with_sql("20050804-1","4.5-3"); 
 
     $version = &get_db_version ;
     $target = "4.5-4" ;
