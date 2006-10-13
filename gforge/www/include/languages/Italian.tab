@@ -704,7 +704,6 @@ forum_admin	delete_message	Rimuovi messaggio
 forum_admin	delete_warning	Stai per rimuovere in modo permanente e irreversibile questo forum e il suo contenuto!
 forum_admin	explain_moderate1	Per moderare inserimenti anonimi (se permessi in forum pubblici) e inserimenti da utenti che non sono membri del progetto.
 forum_admin	explain_moderate2	Per moderare tutti gli inserimenti.
-forum_admin	manage_attach_types	Gestisci tipi di allegati
 forum_admin	manage_pending_messages	Gestisci messaggi in attesa di approvazione
 forum_admin	moderate0	Non moderato
 forum_admin	moderate1	Moderato al livello 1

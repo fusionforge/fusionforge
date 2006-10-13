@@ -634,7 +634,7 @@ gforge/utils/fckeditor/www/editor/skins/silver/toolbar/unlink.gif -text
 gforge/utils/fckeditor/www/editor/skins/silver/toolbar/unorderedlist.gif -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class -text
-gforge/www/forum/include/AttachManager.class -text svneol=unset#application/octet-stream
+gforge/www/forum/include/AttachManager.class -text
 gforge/www/gfginstaller.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text

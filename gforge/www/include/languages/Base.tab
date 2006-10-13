@@ -708,7 +708,6 @@ forum_admin	really_sure	I'm Really Sure
 forum_admin	delete	Delete
 forum_admin	deleted	Successfully Deleted
 forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
-forum_admin	manage_attach_types	Manage Attachment Types
 forum_admin	manage_pending_messages	Manage Pending Messages
 forum_admin	moderate0	No Moderation
 forum_admin	moderate1	Moderated Level 1

@@ -169,7 +169,7 @@ class AttachManager extends Error {
 	 *
 	 *
 	 */
-	function AddToDBOnly($userid, $dateline, $filename, $filedata, $filesize, $visible, $filehash) {
+	function AddToDBOnly($userid, $dateline, $filename, $filedata, $filesize, $visible, $filehash, $mimetype) {
 		global $Language;
 		
 		$result=db_query("SELECT max(msg_id) AS id FROM forum");
@@ -177,10 +177,10 @@ class AttachManager extends Error {
 			$this->messages[] = $Language->getText('forum_attachmngr','err_msgid');
 		} else {
 			$this->msg_id = db_result($result,0,0);
-			$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
+			$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
 					( $userid , " . $dateline . ", '" . $filename . "',
-					'" .  $filedata . "', $filesize, $visible, $this->msg_id,  '" . $filehash . "')";
+					'" .  $filedata . "', $filesize, $visible, $this->msg_id,  '" . $filehash . "', '" . $mimetype  . "')";
 			if (db_query($sql)) {
 				$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
 			}	else {
@@ -206,21 +206,11 @@ class AttachManager extends Error {
 	function attach($attach,$group_id,$update=0,$msg_id=0) {
 		global $Language;
 		global $_FILES;
-		
-		$sql = "SELECT * FROM forum_attachment_type"; //we get the attach types 
-		$res = db_query($sql);
-		$attachtypes = array();
-		
-		//fill the datastore array with the supported filetypes
-		global $sys_db_row_pointer;
-		for ($i=0;$i<db_numrows($res);$i++) {
-			$aux = db_fetch_array($res);
-			$attachtypes[$aux[0]] = $aux;
-		}
-				
+
 		$attachment = trim($attach['tmp_name']);
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);
+		$attachment_type = trim($attach['type']);
 			
 		if ($attachment == 'none' OR empty($attachment) OR empty($attachment_name))
 		{
@@ -231,29 +221,12 @@ class AttachManager extends Error {
 		$attachment_name2 = strtolower($attachment_name);
 		$extension = substr(strrchr($attachment_name2, '.'), 1);
 		
-		if (!$attachtypes["$extension"] OR !$attachtypes["$extension"]['enabled'])
+		if ($extension == 'exe')
 		{
 			// invalid extension
 			$this->messages[] = $Language->getText('forum_attachmngr','err_inv_ext');
-			foreach ($attachtypes as $attachtype) {
-				if ($attachtype['enabled']) {
-					$validexts .= $attachtype[0] . " ";
-				}
-			}
-			$this->messages[] = $Language->getText('forum_attachmngr','valid_ext_are',$validexts);
+
 			@unlink($attachment);
-			return false;
-		}
-		
-		$maxattachsize = $attachtypes["$extension"]['size'];
-		$filesize = filesize($attachment);
-		
-		if ($maxattachsize != 0 AND $filesize > $maxattachsize)
-		{
-			// too big
-			@unlink($attachment);
-			$this->messages[] = $Language->getText('forum_attachmngr','err_toobig');
-			$this->messages[] = $Language->getText('forum_attachmngr','maximum_size',$maxattachsize);
 			return false;
 		}
 		
@@ -261,38 +234,6 @@ class AttachManager extends Error {
 		{
 			$this->messages[] = $Language->getText('forum_attachmngr','err_upload');
 			return false;
-		}
-		
-		//i´ll check now that if the atatch is an image, it complies with the width+height restrictions
-		$extensions = array(
-			'gif' => '1',
-			'jpg' => '2',
-			'jpe' => '2',
-			'jpeg'=> '2',
-			'png' => '3',
-			'swf' => '4',
-			'psd' => '5',
-			'bmp' => '6',
-			'tiff' => '7',
-			'tif' => '7',
-		);
-		
-		if (!empty($extensions["$extension"])) { //if it´s an image, we have to check it´s attributes
-			if ($imageinfo = @getimagesize($attachment)) {
-				$max_attachwidth = $attachtypes["$extension"]['width'];
-				$max_attachheight = $attachtypes["$extension"]['height'];
-				if (($max_attachwidth > 0 AND $imageinfo[0] > $max_attachwidth) OR ($max_attachheight > 0 AND $imageinfo[1] > $max_attachheight)) {
-					@unlink($attachment);
-					 $this->messages[] = $Language->getText('forum_attachmngr','bad_dimension');
-					 $this->messages[] = $Language->getText('forum_attachmngr','maximum_dimension',array($max_attachwidth,$max_attachheight));
-					 return false;
-				}
-				if (!$imageinfo[2]) {
-					@unlink($attachment);
-					$this->messages[] = $Language->getText('forum_attachmngr','not_image');
-					return false;
-				}
-			}
 		}
 		
 		if (!session_loggedin()) {
@@ -327,10 +268,10 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
+				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
+					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '". addslashes($attachment_type) ."')";
 				$res = db_query($sql);
 				if ($res) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
@@ -345,8 +286,9 @@ class AttachManager extends Error {
 				$sql = "UPDATE forum_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' ,
 				 filename = '" . addslashes($attachment_name) . "' , 
 				 filehash = '" . addslashes(md5($filestuff)) . "' , 
+				 mimetype = '" . addslashes($attachment_type) . "' ,
 				 counter = '0' ,
-				 filesize = '" . $filesize . "' where attachmentid=$update";
+				 filesize = '" . $attachment_size . "' where attachmentid=$update";
 				if (db_query($sql)) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');
 					$this->messages[] = $Language->getText('forum_attachmngr','updateok');
@@ -368,10 +310,10 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
+				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $filesize, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
+					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '" . addslashes($attachment_type) . "')";
 				$res = db_query($sql);
 				if ($res) {
 					$this->messages[] = $Language->getText('forum_attachmngr','uploadok');

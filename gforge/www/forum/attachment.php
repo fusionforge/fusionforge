@@ -186,24 +186,13 @@ if ($pending=="yes") {
 	$sql = "SELECT  * FROM forum_attachment where attachmentid='$attachid'";
 }
 $res = db_query($sql);
-$extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
-$sql = "SELECT * FROM forum_attachment_type where extension = '$extension'";
-$res2 = db_query($sql);
-
-if ( (!$res) || (!$res2) ) {
+if ( (!$res) ) {
 	exit_error("Attachment Download error","DB Error");
 }
+$extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 
 if (!$extension) {
 	goodbye($Language->getText('forum_attach_download','not_exists'));
-}
-
-if ( db_numrows($res2)<1) {
-	goodbye($Language->getText('forum_attach_download','type_removed'));
-}
-
-if ( (db_result($res2,0,'enabled') == 0 )) {
-	goodbye($Language->getText('forum_attach_download','type_disabled'));
 }
 
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
@@ -222,7 +211,8 @@ if ($extension != 'txt') {
 
 header('Content-Length: ' . db_result($res,0,'filesize') );
 
-$mimetype = unserialize(db_result($res2,0,'mimetype'));
+
+$mimetype = db_result($res,0,'mimetype');
 if (is_array($mimetype))
 {
 	foreach ($mimetype AS $index => $header) {
