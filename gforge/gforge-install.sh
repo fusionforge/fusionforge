@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ $# -ne 4  ]; then
-	echo 1>&2 Usage: $0  gforge.company.com  apacheuser  apachegroup  ip.add.re.ss
+if [ $# -ne 3  ]; then
+	echo 1>&2 Usage: $0  gforge.company.com  apacheuser  apachegroup
 	exit 127
 fi
 #validate hostname
@@ -25,12 +25,12 @@ if [ $found_apachegroup -ne 0 ]; then
 	exit 2
 fi
 #validate IP Address
-echo "$4" | egrep '^([0-9]){1,3}\.([0-9]){1,3}\.([0-9]){1,3}\.([0-9]){1,3}$' -q
-found_ip=$?
-if [ $found_ip -ne 0 ]; then
-	echo 1>&2 "invalid IP address"
-	exit 2
-fi
+#echo "$4" | egrep '^([0-9]){1,3}\.([0-9]){1,3}\.([0-9]){1,3}\.([0-9]){1,3}$' -q
+#found_ip=$?
+#if [ $found_ip -ne 0 ]; then
+#	echo 1>&2 "invalid IP address"
+#	exit 2
+#fi
 
 mkdir /opt/gforge
 if [ ! -d /opt/gforge ]; then
@@ -145,7 +145,6 @@ cd /etc/gforge && find -type d | xargs chmod 755
 cd /etc/gforge && find -type f -exec perl -pi -e "s/apacheuser/$2/" {} \;
 cd /etc/gforge && find -type f -exec perl -pi -e "s/apachegroup/$3/" {} \;
 cd /etc/gforge && find -type f -exec perl -pi -e "s/gforge\.company\.com/$1/" {} \;
-cd /etc/gforge && find -type f -exec perl -pi -e "s/192\.168\.100\.100/$4/" {} \;
 
 
 echo "noreply:        /dev/null" >> /etc/aliases

@@ -83,50 +83,6 @@ script will copy this to /etc/gforge/httpd.conf You may have to
 alter the passwords and any other config options, but the sample config 
 shown has been used in dozens or even hundreds of installs and DOES WORK.
 
-  Cronjobs - the /cronjobs/dav-svn/create_svn.php creates blank repositories
-for subversion. You will likely have to edit this file to get the proper
-SVN binary path.
-
-  ViewCVS (ViewVC now) - this is used to browse the SVN repository. 
-
-	root_parents = /svnroot : svn
-
-  The docroot var in viewcvs.conf should also be set to the location that the 
-files will be accessible from the web:
-
-	docroot = /plugins/scmsvn/viewcvs/
-
-  The viewcvs.cgi should then be placed in the same location as your 
-cvsweb cgi (usually placed into /etc/gforge/). The /etc/gforge/local.inc 
-has a path to this cgi, set in the sys_path_to_scmweb='' variable. This 
-variable is shared with the cvs plugin as well, so that's why both cvsweb 
-and viewcvs.cgi must be in the same location.
-
-  Finally, the /opt/gforge/gforge/www/plugins/scmsvn/viewcvs/ directory should 
-be symlinked to the same location that you installed your viewvc/templates/docroot
-
-	cd /opt/gforge/gforge/www/plugins/scmsvn/
-	ln -s /opt/viewvc/templates/docroot viewcvs
-
-
-  Apache Modules
-  --------------
-
-#
-# mod_vhost_alias is used by the 
-# <projectname>.projects.gforge.company.com vhosts
-# which are commented out by default in the sample apache conf
-# 
-LoadModule vhost_alias_module modules/mod_vhost_alias.so
-
-#
-# these modules are all needed for mod_auth_gforge
-#
-LoadModule dav_module modules/mod_dav.so
-LoadModule dav_fs_module modules/mod_dav_fs.so
-LoadModule dav_svn_module modules/mod_dav_svn.so
-LoadModule authz_svn_module modules/mod_authz_svn.so
-
 
   CVSTracker Overview
   -------------------
@@ -144,9 +100,6 @@ plugin is enabled by default in the gforge.sql database file.
 As with the other plugins, you may manually place the config 
 files in /etc/gforge/plugins/cvstracker/ and uncomment the 
 cronjob in crontab.in.
-
-  You will also have to copy the newcommit.php file to your 
-gforge www/plugins/cvstracker/ dir
 
 
   PHP
@@ -256,17 +209,17 @@ cd gforge-4.5.6
 #	Argument 3: the apache group
 #	Argument 3: the IP address that you are listening on
 #
-./gforge-install.sh gforge.company.com apacheuser apachegroup 100.100.100.100
+./gforge-install.sh gforge.company.com apacheuser apachegroup
 
 #
 #	jpgraph install - use the 1.9.1 version from gforge.org
 #	as mentioned above
 #
 tar -xzf jpgraph-1.9.1.tar.gz
-mv jpgraph-1.9.1/src/* /opt/gforge/jpgraph/
+mv jpgraph-1.9.1/src/* /opt/jpgraph/
 
 #you will have to edit jpgraph.php to set USE_CACHE=false
-vim /opt/gforge/jpgraph/jpgraph.php
+vim /opt/jpgraph/jpgraph.php
 
 Apache will need to have a line added to its httpd.conf:
 

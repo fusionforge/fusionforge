@@ -1,261 +1,58 @@
-LoadModule dav_module modules/mod_dav.so
-LoadModule dav_fs_module modules/mod_dav_fs.so
-LoadModule dav_svn_module modules/mod_dav_svn.so
-LoadModule authz_svn_module modules/mod_authz_svn.so
-LoadModule auth_gforge_module modules/mod_auth_gforge.so
+LoadModule dav_module         modules/mod_dav.so
+LoadModule dav_svn_module     modules/mod_dav_svn.so
+LoadModule authz_svn_module   modules/mod_authz_svn.so
 
-#
-# Use name-based virtual hosting.
-#
-NameVirtualHost 192.168.100.100:80
-#NameVirtualHost 192.168.100.100:443
+<VirtualHost _default_:80>
+	ServerName	gforge.company.com
+	DocumentRoot	/opt/gforge/www
+	ErrorDocument 404 /404.php
+	
+	<Directory "/opt/gforge/www">
+		Options	Indexes FollowSymLinks Multiviews
+		Order	allow,deny
+		allow from all
+	</Directory>
 
-#
-#	Primary GForge vhost
-#
-<VirtualHost 192.168.100.100:80>
-  ServerName gforge.company.com
-#  RewriteEngine on
-#  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-#</VirtualHost>
-#<VirtualHost 192.168.100.100:443>
-ServerName gforge.company.com
-ServerAdmin webmaster@gforge.company.com
-DocumentRoot /opt/gforge/gforge/www
-ErrorDocument 404 /404.php
-php_value include_path ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
-php_value register_globals On
-#php_value output_handler ""
-php_value default_charset "UTF-8"
-#SSLEngine On
-#SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
-#SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
-#<Files projects>
-#SetOutputFilter PHP
-#SetInputFilter PHP
-#AcceptPathInfo on
-#</Files>
-#<Files users>
-#SetOutputFilter PHP
-#SetInputFilter PHP
-#AcceptPathInfo on
-#</Files>
-#<Files *.php>
-#    SetOutputFilter PHP
-#    SetInputFilter PHP
-#    AcceptPathInfo On
-#    LimitRequestBody 2097152
-#</Files>
-#
-#	LOCATION may have to be used instead of FILES for some installs
-#
-<Location /projects>
-  ForceType application/x-httpd-php
-</Location>
-<Location /users>
-  ForceType application/x-httpd-php
-</Location>
-DirectoryIndex index.php
-</VirtualHost>
+	<Location "/gf">
+		ForceType application/x-httpd-php
+	</Location>
 
-#
-#	Lists vhosts - where mailman lives
-#
-<VirtualHost 192.168.100.100:80>
-ServerName lists.gforge.company.com
-ServerAdmin mailman@lists.gforge.company.com
-DocumentRoot /opt/gforge/mailman
-ScriptAlias   /mailman/ /usr/lib/mailman/cgi-bin/
-Alias /pipermail/ /var/lib/mailman/archives/public/
-#ScriptAlias   /mailman/ /var/mailman/cgi-bin/
-#Alias /pipermail/ /var/mailman/archives/public/
-DirectoryIndex index.php index.cgi index.html index.htm
-</VirtualHost>
+	#
+	#       mailman settings - may have to adjust
+	#
+	ScriptAlias	/mailman	/usr/lib/mailman/cgi-bin
+	Alias	/pipermail	/var/lib/mailman/archives/public
 
-#
-#	CVS Vhost - allows viewing of CVSWeb for each project
-#	Only necessary if CVS is on separate machine
-#
-#<VirtualHost 192.168.100.100:80>
-#ServerName cvs.gforge.company.com
-#ServerAdmin webmaster@cvs.gforge.company.com
-#DocumentRoot /opt/gforge/cvs
-#DirectoryIndex index.php index.cgi
-#</VirtualHost>
+	<Directory "/usr/lib/mailman/cgi-bin">
+		Options	Indexes FollowSymLinks Multiviews
+		Order	allow,deny
+		allow from all
+	</Directory>
 
-#
-#	*.gforge.company.com vhosts
-#	Each project can have its own vhost
-#
-#	WARNING - security is degraded by having this
-#	on the same machine as the primary GForge
-#
-#<VirtualHost 192.168.100.100:80>
-#  ServerName projects.gforge.company.com
-#  ServerAlias *.projects.gforge.company.com
-#  DocumentRoot /home/groups
-#  VirtualDocumentRoot /home/groups/%1/htdocs
-#  VirtualScriptAlias /home/groups/%1/cgi-bin
-#  <Directory /opt/gforge/homedirs/groups>
-#    Options Indexes
-#
-#	WARNING - turning on php will allow any user
-#	to upload a php file to your server, and include 
-#	the gforge local.inc file and get your password to 
-#	connect to the database and have total control.
-#
-#    php_flag engine off
-#    AllowOverride None
-#    order allow,deny
-#    allow from all
-#  </Directory>
-#  DirectoryIndex index.html index.htm
-#</VirtualHost>
+	<Directory "/var/lib/mailman/archives/public">
+		Options	Indexes FollowSymLinks Multiviews
+		Order	allow,deny
+		allow from all
+	</Directory>
 
-##
-##	Subversion vhost using mod_auth_gforge
-##
-#<VirtualHost 192.168.100.100:80>
-#  ServerName svn.gforge.company.com
-##  RewriteEngine on
-##  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-##</VirtualHost>
-##<VirtualHost 192.168.100.100:443>
-##  ServerName svn.gforge.company.com
-#  ServerAdmin webmaster@svn.gforge.company.com
-#  DocumentRoot /opt/gforge/svn
-#  DAVLockDB    /tmp/svn-DAVLockDB
-##  RewriteEngine on
-##  #RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-##  RewriteRule ^/svn$ /index.php [PT]
-##  RewriteRule ^/svn/$ /index.php [PT]
-##  RewriteRule ^/svn/index.html$ /index.php [PT]
-##  RewriteRule ^/index.htm$ /index.php [PT]
-##  RewriteRule ^/index.html$ /index.php [PT]
-##  SSLEngine On 
-##  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
-##  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
-#  <Location /svn>
-##GforgeAuthzEnabled on
-#    GforgeSysPath       /svnroot
-#    GforgeGroupsRoot	/svn
-#    GforgeAnonClause    "groups.enable_anonscm >= '1'"
-#    GforgeReadClause	"cvs_flags >= '0'"
-#    GforgeWriteClause	"cvs_flags >= '1'"
-#    DAV svn
-#    SVNParentPath	/svnroot
-#    SVNAutoversioning	on
-#    SVNIndexXSLT        /svnindex.xsl
-#    AuthType            basic
-#    AuthName            "Subversion User Authentication"
-#
-#    #Auth_PG_host        localhost
-#    Auth_PG_database    gforge
-#    Auth_PG_port        5432
-#    Auth_PG_user        gforge
-#
-#    Auth_PG_pwd         gforge
-#    Auth_PG_pwd_table   users
-#    Auth_PG_pwd_field   user_pw
-#    Auth_PG_uid_field   user_name
-#
-#    Auth_PG_grp_table   groups
-#    Auth_PG_gid_field   unix_group_name
-#
-#    Auth_PG_encrypted   on
-#    Auth_PG_hash_type   MD5
-#    Auth_PG_authoritative on
-#
-#    Require valid-user
-#    php_flag    engine off
-#  </Location>
-#  DirectoryIndex index.php
-#</VirtualHost>
+	#
+	#	SVN Repository
+	#
+	<Location /svn>
+		DAV svn
+		SVNParentPath /var/lib/gforge/svnroot
 
-#
-#       Subversion vhost using create_svn.php script and svn_authz_module
-#
-<VirtualHost 192.168.100.100:80>
-  ServerName svn.gforge.company.com
-  DocumentRoot /path/to/svn
-  # Example: /opt/gforge/svn
-  DAVLockDB    /tmp/svn-DAVLockDB
-  RewriteEngine on
-  RewriteRule ^/svn$ /index.php [PT]
-  RewriteRule ^/svn/$ /index.php [PT]
-  RewriteRule ^/svn/index.html$ /index.php [PT]
-  RewriteRule ^/index.htm$ /index.php [PT]
-  RewriteRule ^/index.html$ /index.php [PT]
+		# how to authenticate a user
+		AuthzSVNAccessFile /var/lib/gforge/svnroot-access
+		AuthType Basic
+		AuthName "Document repository"
+		AuthUserFile /var/lib/gforge/svnroot-authfile
+		SVNIndexXSLT "/svnindex.xsl"
+	
+		# only authenticated users may access the repository
+		Require valid-user
+	</Location>
 
-  <Location /svn>
-     DAV svn
-     SVNParentPath       /path/to/svnroot
-     # Example:  /opt/gforge/chroot/svnroot
-     SVNAutoversioning   on
-     SVNIndexXSLT        /svnindex.xsl
-     AuthType            basic
-     AuthName            "Subversion User Authentication"
-     AuthUserFile       /path/to/svn_password.conf
-     # Example: /opt/gforge/svn_password.conf
-     AuthzSVNAccessFile /path/to/svn_access.conf
-     # Example: /opt/gforge/svn_access.conf
-     # These files are being generated by create_svn.php cron script.
-
-     Satisfy Any
-     Require valid-user
-     php_flag    engine off
-   </Location>
-  DirectoryIndex index.php
+	php_value	include_path ".:/opt/gforge/www/include/:/opt/gforge:/etc/gforge/"
 
 </VirtualHost>
-
-#
-#	webDAV editing of project vhosts
-#
-#<VirtualHost 192.168.100.100:80>
-#  ServerName edit.gforge.company.com
-#  RewriteEngine on
-#  RewriteRule ^/(.*)$ https://%{SERVER_NAME}/$1 [R=permanent]
-#</VirtualHost>
-#<VirtualHost 192.168.100.100:443>
-#  ServerName edit.gforge.company.com
-#  ServerAdmin webmaster@edit.gforge.company.com
-#  DocumentRoot /opt/gforge/homedirs
-#  DAVLockDB    /tmp/projvhost-DAVLockDB
-#  # Needed for windows web folders
-#  DavDepthInfinity on
-#  SSLEngine On
-#  SSLCertificateFile /etc/httpd/ssl/gforge.company.com.crt
-#  SSLCertificateKeyFile /etc/httpd/ssl/gforge.company.com.pem
-#  <Location />
-#    GforgeSysPath	/opt/gforge/homedirs
-#    GforgeGroupsRoot	/groups
-#    GforgeUsersRoot	/users
-#    DAV On
-#    AuthType		basic
-#    AuthName		"Gforge User Authentication"
-#    Auth_default_access_type DECLINE
-#
-#    Auth_PG_host	localhost
-#    Auth_PG_database    gforge
-#    Auth_PG_port	5432
-#    Auth_PG_user	gforge
-#
-#    Auth_PG_pwd		XXXXXXX
-#    Auth_PG_pwd_table	users
-#    Auth_PG_pwd_field	user_pw
-#    Auth_PG_uid_field	user_name
-#
-#    Auth_PG_grp_table	groups
-#    Auth_PG_gid_field	unix_group_name
-#
-#    Auth_PG_encrypted	on
-#    Auth_PG_hash_type	MD5
-#    Auth_PG_authoritative on
-#    Auth_PG_cache_passwords on
-#
-#    Require valid-user
-#  </Location>
-#DirectoryIndex index.htm
-#</VirtualHost>
-
