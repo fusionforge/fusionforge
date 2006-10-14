@@ -23,7 +23,6 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 require_once('www/forum/admin/ForumAdmin.class');
 require_once('www/forum/include/AttachManager.class');
-require_once('utils/fckeditor/www/fckeditor.php');
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
@@ -451,14 +450,6 @@ class ForumHTML extends Error {
 		$most_recent_date = $msg->getMostRecentDate();
 		$g =& $this->Forum->getGroup();
 		$group_id = $g->getID();
-
-		// Fckeditor
-		$oFCKeditor = new FCKeditor('body') ;
-		$oFCKeditor->BasePath = '/fckeditor/';
-		$oFCKeditor->Value = $body;
-		$oFCKeditor->Width = "800";
-		$oFCKeditor->Height = "500";
-		$oFCKeditor->ToolbarSet = "GForge";
 		
 		if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
 			$http = "https://";
@@ -467,6 +458,7 @@ class ForumHTML extends Error {
 		}
 		
 		if ($this->Forum->userCanPost()) { // minor control, but anyways it should be an admin at this point
+			echo notepad_func();
 			?>
 			<div align="center">
 			<form "enctype="multipart/form-data" action="/forum/admin/index.php" method="post">
@@ -487,9 +479,18 @@ class ForumHTML extends Error {
 			<strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
 			<br><br>
-			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo utils_requiredField(); ?><br />
+			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 				<?php
-						echo $oFCKeditor->CreateHtml();
+				$params['body'] = $body;
+				$params['width'] = "800";
+				$params['height'] = "500";
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+				}
+				unset($GLOBALS['editor_was_set_up']);
 				?>
 			<br><br>		
 			
@@ -515,14 +516,6 @@ class ForumHTML extends Error {
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		global $Language,$sys_default_domain,$group_id;
 
-		// Fckeditor
-		$oFCKeditor = new FCKeditor('body') ;
-		$oFCKeditor->BasePath = '/fckeditor/';
-		$oFCKeditor->Value = $body;
-		$oFCKeditor->Width = "800";
-		$oFCKeditor->Height = "500";
-		$oFCKeditor->ToolbarSet = "GForge";
-
 			if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
 				$http = "https://";
 			} else {
@@ -536,6 +529,7 @@ class ForumHTML extends Error {
 					$subject ='RE: '.$subject;
 				}
 			}
+			echo notepad_func();
 			?>
 			<div align="center">
 			<form "enctype="multipart/form-data" action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>&group_id=<?php echo $group_id; ?>" method="post">
@@ -551,10 +545,19 @@ class ForumHTML extends Error {
 			<strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
 			<br><br>
-			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo utils_requiredField(); ?><br />
+			<strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 
 			<?php 
-				echo $oFCKeditor->CreateHtml();
+				$params['body'] = $body;
+				$params['width'] = "800";
+				$params['height'] = "500";
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+				}
+				unset($GLOBALS['editor_was_set_up']);
 			?>
 				 <?php //$text_support->displayTextField('body'); ?>
 			<br><br>		
