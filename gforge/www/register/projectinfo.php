@@ -159,16 +159,18 @@ echo license_selectbox('license',$license);
 			} else {
 				echo $Language->getText('register','choose_scm')."\n";
 				$checked=true;
-				foreach($scm_plugins as $scm) {
-					$myPlugin= plugin_get_object($scm);
+				foreach($scm_plugins as $plugin) {
+					$myPlugin= plugin_get_object($plugin);
 					echo '<p><input type="radio" name="scm" ';
-					if ($checked) {
-						echo ' checked="checked" ';
-						$checked=false;
+					echo 'value="'.$myPlugin->name.'"';
+					if (isset($scm) && strcmp($scm, $myPlugin->name) == 0) {
+						echo ' checked';
+					} elseif (!isset($scm) && $checked) {
+						echo ' checked';
+						$checked = false;
+					
 					}
-					echo 'value="'.$myPlugin->name;
-					echo '"/>'.$myPlugin->text.'</p>';
-					$checked=false;
+					echo '>'.$myPlugin->text.'</p>';
 				}
 			}
 		} else {
