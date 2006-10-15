@@ -9,6 +9,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');    
 
 /*
@@ -120,34 +121,34 @@ if ($rows<1) {
 		switch ($arr['section']) {
 			case 'commit': {
 				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
-				$url='<a href="/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'].' </a>';
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'].' </a>';
 				break;
 			}
 			case 'trackeropen': {
 				$icon=html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url='<a href="/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Opened</a>';
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Opened</a>';
 				break;
 			}
 			case 'trackerclose': {
 				$icon=html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url='<a href="/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Closed</a>';
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Closed</a>';
 				break;
 			}
 			case 'frsrelease': {
 				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
-				$url='<a href="/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release '.$arr['description'].'</a>';
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release '.$arr['description'].'</a>';
 				break;
 			}
 			case 'forumpost': {
 				$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","ALT"=>"Forum"));
-				$url='<a href="/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post '.$arr['description'].'</a>';
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post '.$arr['description'].'</a>';
 				break;
 			}
 		}
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;'.date('H:i:s',$arr['activity_date']).'</td>
 			<td>'.$icon .' '.$url.'</td>
-			<td><a href="/users/'.$arr['user_name'].'/">'.$arr['realname'].'</a></td>
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$arr['user_name'].'/">'.$arr['realname'].'</a></td>
 			</tr>';
 	}
 

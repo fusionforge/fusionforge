@@ -37,7 +37,7 @@ function people_header($params) {
 	}
 
 	if ($group_id && $job_id) {
-		echo ' | <a href="/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id .'">Edit Job</a>';
+		echo ' | <a href="'.$GLOBALS['sys_urlprefix'].'/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id .'">Edit Job</a>';
 	}
 }
 
@@ -391,7 +391,7 @@ function people_show_category_table() {
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo db_error();
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/people/?category_id='.
+			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.$GLOBALS['sys_urlprefix'].'/people/?category_id='.
 				db_result($result,$i,'category_id') .'">'.
 				db_result($result,$i,'name') .'</a> ('. db_result($result,$i,'total') .')</td></tr>';
 		}
@@ -448,13 +448,13 @@ function people_show_job_list($result) {
 		for ($i=0; $i < $rows; $i++) {
 			$return .= '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
-					'><td><a href="/people/viewjob.php?group_id='.
+					'><td><a href="'.$GLOBALS['sys_urlprefix'].'/people/viewjob.php?group_id='.
 					db_result($result,$i,'group_id') .'&amp;job_id='.
 					db_result($result,$i,'job_id') .'">'.
 					db_result($result,$i,'title') .'</a></td><td>'.
 					db_result($result,$i,'category_name') .'</td><td>'.
 					date($sys_datefmt,db_result($result,$i,'post_date')) .
-					'</td><td><a href="/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
+					'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
 					db_result($result,$i,'group_name') .'</a></td></tr>';
 		}
 	}

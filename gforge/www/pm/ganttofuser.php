@@ -1,5 +1,6 @@
 <?php
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');

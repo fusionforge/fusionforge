@@ -3,6 +3,7 @@
 // Author: Scott Grayban <sgrayban@borgnet.us>
 //
 
+include "../env.inc.php";
 include "pre.php";
 include "rss_utils.inc";
 header("Content-Type: text/xml");

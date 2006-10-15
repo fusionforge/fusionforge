@@ -29,6 +29,7 @@
 // Quota in bytes
 $QUOTA = 1048576;
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 
@@ -295,7 +296,7 @@ for ($i=0; $i<$rows; $i++) {
 
 	.'<td>'.date('Y-m-d', db_result($result, $i, 'upload_date')).'</td>'
 
-	.'<td><a href="/dbimage.php?id='.db_result($result,$i,'id').'">'
+	.'<td><a href="'.$GLOBALS['sys_urlprefix'].'/dbimage.php?id='.db_result($result,$i,'id').'">'
 	     .stripslashes(db_result($result,$i,'filename')).'</a></td>'
 	.'<td>'.db_result($result,$i,'filetype').'</td>'
 	.'<td align="right">'.db_result($result,$i,'filesize').'</td>'

@@ -44,7 +44,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 		<td valign="top">';
 	if (!session_loggedin()) {
 		echo '
-		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><<br />
+		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><<br />
 		'.$Language->getText('tracker','insert_email').':<p>
 		<input type="text" name="user_email" size="30" maxlength="35" /></p>
 		';
@@ -61,18 +61,18 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
-		<td><strong>'.$Language->getText('tracker','assigned_to').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
+		<td><strong>'.$Language->getText('tracker','assigned_to').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
 		echo $ath->technicianBox ('assigned_to');
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
+		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
 
-		echo '</td><td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
+		echo '</td><td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
 		echo build_priority_select_box('priority');
 		echo '</td></tr>';
 	}
 	
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
+		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
 		<input type="text" name="summary" size="80" maxlength="255" />
 		</td>
 	</tr>
@@ -90,7 +90,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 	<?php 
 	if (!session_loggedin()) {
 		echo '
-		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span><br />
+		<span class="error">'.$Language->getText('tracker','please_login',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span><br />
 		'.$Language->getText('tracker','insert_email').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		';
@@ -104,7 +104,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 
 	<tr>
 		<td colspan="2">
-		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
+		<a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
 		<p>
 		<strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
 		<input type="file" name="input_file[]" size="30" /><br />

@@ -41,7 +41,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 	<tr>
 		<td>
 			<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
-			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
+			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
 		<td>

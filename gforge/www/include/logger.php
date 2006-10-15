@@ -27,7 +27,13 @@ if (isset($group_id) && $group_id) {
 	//	for foundry and project summary pages
 	//
 	//
-	$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
+	if ( $GLOBALS['sys_urlprefix'] != '' ) {
+		$pathwithoutprefix=ereg_replace($GLOBALS['sys_urlprefix'],'',getStringFromServer('REQUEST_URI'));
+	} else {
+		$pathwithoutprefix=getStringFromServer('REQUEST_URI');
+	}
+	//$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
+	$expl_pathinfo = explode('/',$pathwithoutprefix);
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
 		$res_grp=db_query("
 			SELECT *

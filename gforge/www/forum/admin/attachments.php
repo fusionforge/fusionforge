@@ -30,6 +30,7 @@
 	by Daniel Perez - 2005
 */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('www/forum/admin/ForumAdmin.class');

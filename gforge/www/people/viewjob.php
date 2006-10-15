@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/people/people_utils.php');
 
@@ -71,7 +72,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'.$Language->getText('people_viewjob','contact_info').':<br />
-			<a href="/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
+			<a href="'.$GLOBALS['sys_urlprefix'].'/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
 		</td><td>
 			<strong>'.$Language->getText('people','status').':</strong><br />
 			'. db_result($result,0,'status_name') .'
@@ -82,7 +83,7 @@ if ($group_id && $job_id) {
 			'. date($sys_datefmt,db_result($result,0,'post_date')) .'
 		</td><td>
 			<strong>'.$Language->getText('people_viewjob','for_project').':<br />
-			<a href="/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
+			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
 		</td></tr>
 
 		<tr><td colspan="2">

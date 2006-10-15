@@ -24,6 +24,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA  */
 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 #require_once('common/tracker/ArtifactGroup.class');
 
@@ -154,13 +155,13 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	} else {
 		echo "\n\t\t<td>".$row_memb['realname']."</td>\n";
 	}
-	echo "\t\t<td><a href=\"/sendmessage.php?touser=".$row_memb['user_id']."\">" . $Language->getText('sendmessage','contact') . "
+	echo "\t\t<td><a href=\"".$GLOBALS['sys_urlprefix']."/sendmessage.php?touser=".$row_memb['user_id']."\">" . $Language->getText('sendmessage','contact') . "
 </a>".
-		"<a href=\"/users/".
+		"<a href=\"".$GLOBALS['sys_urlprefix']."/users/".
 		$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
 		<td align=\"center\">".$row_memb['role']."</td>\n";
 	if($GLOBALS['sys_use_people']) {
-		echo "\t\t<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=".
+		echo "\t\t<td align=\"center\"><a href=\"".$GLOBALS['sys_urlprefix']."/people/viewprofile.php?user_id=".
 			$row_memb['user_id']."\">".$Language->getText('project_memberlist','view').
 			"</a></td>";
 	}
@@ -184,7 +185,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 			echo "\t\t";
 			echo '<tr class="priority'.db_result($artifacts, $m, 'priority').'">';
 			echo "\n\t\t";
-			echo '<td><a href="/tracker/?func=detail&amp;aid='.
+			echo '<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;aid='.
 				db_result($artifacts, $m, 'artifact_id').
 				'&amp;group_id='.$group_id.
 				'&atid='.$artifact_type['group_artifact_id'].
@@ -225,7 +226,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		if ( $task_type['percent_complete'] != 100 ) {
                 	echo '<tr class="priority'.$task_type['priority'].'">';
 
-			echo '<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
+			echo '<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.
 				$task_type['project_task_id'].
 				'&amp;group_id='.$group_id.
 				'&amp;group_project_id='.$task_type['group_project_id'].

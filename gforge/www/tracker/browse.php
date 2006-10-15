@@ -218,11 +218,11 @@ if (session_loggedin()) {
 	echo 
 		html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'<br />
 		<input type="submit" name="run" value="'.$Language->getText('tracker','run_query').'"></input>
-		<strong><a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.
+		<strong><a href="javascript:admin_window('.$GLOBALS['sys_urlprefix'].'\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.
 		$Language->getText('tracker','build_query').'</a></strong>';
 	} else {
 		echo '<strong>
-		<a href="javascript:admin_window(\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong>';
+		<a href="javascript:admin_window('.$GLOBALS['sys_urlprefix'].'\'/tracker/?func=query&group_id='.$group_id.'&atid='. $ath->getID().'\')">'.$Language->getText('tracker','build_query').'</a></strong>';
 	}
 	echo '
 		</form>
@@ -240,7 +240,7 @@ echo '
 
 	echo '
 	<tr>
-		<td align="right">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
+		<td align="right">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window('.$GLOBALS['sys_urlprefix'].'\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td>'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .

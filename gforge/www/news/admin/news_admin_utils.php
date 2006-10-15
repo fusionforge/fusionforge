@@ -49,7 +49,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		</td>
 
        		<td width="35%">
-       		<a href="/projects/'
+       		<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'
        		.db_result($result,$i,'unix_group_name').'/">'
        		.db_result($result,$i,'group_name')
        		.' ('.db_result($result,$i,'unix_group_name').')'

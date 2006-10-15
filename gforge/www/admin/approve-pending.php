@@ -27,6 +27,7 @@
 // Show no more pending projects per page than specified here
 $LIMIT = 50;
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 require_once('common/include/license.php');
@@ -139,10 +140,10 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<h2><?php echo $row_grp['group_name']; ?></h2>
 
 	<p />
-	<h3><a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','edit_project_details'); ?></a></h3>
+	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','edit_project_details'); ?></a></h3>
 
 	<p />
-	<h3><a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','project_admin'); ?></a></h3>
+	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','project_admin'); ?></a></h3>
 
 	<p />
 	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','view_edit_project_members'); ?></a></h3>

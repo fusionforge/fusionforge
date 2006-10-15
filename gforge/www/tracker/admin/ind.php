@@ -93,7 +93,7 @@
 		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($j) . '>
-				<td><a href="/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id.'">' .
+				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id.'">' .
 					html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 					$at_arr[$j]->getName() .'</a>
 				</td>

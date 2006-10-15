@@ -16,6 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/pm/include/ProjectGroupHTML.class');
 require_once('common/pm/ProjectGroupFactory.class');

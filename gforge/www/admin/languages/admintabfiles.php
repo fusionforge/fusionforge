@@ -262,6 +262,7 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 }
 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 

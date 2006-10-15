@@ -29,6 +29,7 @@ $sys_apache_group='{sys_apache_group}';
 //             you will break the html_image function in include/html.php
 //
 $sys_urlroot='{sys_urlroot}';
+$sys_urlprefix='';
 
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='{system_name}';

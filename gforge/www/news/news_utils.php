@@ -122,7 +122,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
 				}
-				$proj_name=' &nbsp; - &nbsp; <a href="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
+				$proj_name=' &nbsp; - &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
@@ -130,7 +130,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 			if (!$limit) {
 				if ($show_forum) {
-					$return .= '<li><a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
+					$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
 				} else {
 					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong>';
 				}
@@ -138,7 +138,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			} else {
 				if ($show_forum) {
 					$return .= '
-					<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
+					<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
 				} else {
 					$return .= '
 					<strong>'. db_result($result,$i,'summary') . '</strong>';
@@ -166,7 +166,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				}
 
 				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
+					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
 				} else {
 					$return .= '<hr width="100%" size="1" />';
 				}
@@ -203,7 +203,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center"><a href="/news/submit.php?group_id='.$group_id.'">[' . $Language->getText('news_utils', 'submit') . ']</a></div>';
+		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/news/submit.php?group_id='.$group_id.'">[' . $Language->getText('news_utils', 'submit') . ']</a></div>';
 	}
 
 	return $return;
@@ -244,13 +244,13 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 				}
 
 				//show the project name
-				$proj_name=' &nbsp; - &nbsp; <a href="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
+				$proj_name=' &nbsp; - &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
 			}
 			$return .= '
-				<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
+				<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
 				<br /><em>'. db_result($result,$i,'realname') .' - '.
 					date($sys_datefmt,db_result($result,$i,'post_date')) . $proj_name . '</em>
 				'. $summ_txt .'<hr width="100%" size="1" />';

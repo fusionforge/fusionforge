@@ -2,7 +2,7 @@
 
 require_once('www/include/Layout.class');
 
-define(THEME_DIR, '/themes/sliq');
+define(THEME_DIR, $GLOBALS['sys_urlprefix'].'/themes/sliq');
 
 define(TOP_TAB_HEIGHT, 30);
 define(BOTTOM_TAB_HEIGHT, 22);
@@ -91,7 +91,7 @@ class Theme extends Layout {
      *    @param    string    The user's realname
      */
     function createLinkToUserHome($user_name, $realname) {
-        return '<a href="/users/'.$user_name.'/">'.$realname.'</a>';
+        return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
     }
 
     /**
@@ -121,9 +121,9 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>/icon.png"/>
     <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>/icon.png"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss20_news.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php" type="application/rss+xml"/>
 
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -161,20 +161,20 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td class="topLeft"><a href="/"><?php echo html_image('/header/top-logo.gif',205,54,array('border'=>'0')); ?></a></td>
+        <td class="topLeft"><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo html_image('/header/top-logo.gif',205,54,array('border'=>'0')); ?></a></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
           if (session_loggedin()) {
             ?>
-            <a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a> 
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a> 
             |
-            <a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
             <?php
           } else {
             ?>
-            <a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a>
             |
-            <a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
             <?php
           }
           echo $this->quickNav();
@@ -224,7 +224,7 @@ class Theme extends Layout {
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <br />
 <center>
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+<a href="http://gforge.org/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
 </center>
 
 <?php
@@ -232,7 +232,7 @@ global $sys_show_source;
 global $Language;
 if ($sys_show_source) {
     global $SCRIPT_NAME;
-    print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
+    print '<a class="showsource" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
 }
 ?>
 
@@ -728,7 +728,7 @@ if ($sys_show_source) {
         if (isset($group_id)) {
             print '
                     <td width="10">&nbsp;</td>
-                    <td><a href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
+                    <td><a href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
         }
         print '</tr></table>';
         print '</form>';

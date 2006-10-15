@@ -55,13 +55,13 @@ class Theme extends Layout {
 
 		$this->headerStart($params); ?>
 
-<link rel="stylesheet" type="text/css" href="/themes/osx/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/osx/css/theme.css" />
 <body>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
-		<td><a href="/"
+		<td><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"
 			onmouseover="imgOver('logo')"
 			onmouseout="imgOff('logo')"><img name="logo" border="0" height="60" width="180"
 				src="<?php echo $this->imgroot.'logo.png'; ?>" alt="GForge Logo" /></a></td>
@@ -69,13 +69,13 @@ class Theme extends Layout {
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
-				<b><a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
 				<?php
 			} else {
 				?>
-				<b><a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
-				<b><a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 				<?php
 			}
 

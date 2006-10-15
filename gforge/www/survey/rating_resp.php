@@ -26,6 +26,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $HTML->header(array('title'=>$Language->getText('survey_rating_resp','title')));

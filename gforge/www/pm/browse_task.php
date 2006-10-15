@@ -286,7 +286,7 @@ if ($rows < 1) {
 	*/
 	echo '<tr><td colspan="2">';
 	if ($offset > 0) {
-		echo '<a href="/pm/task.php?func=browse&amp;group_project_id='.
+		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
 			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50).'">
 			<strong>'.$Language->getText('pm_browsetask','previous').'<--</strong></a>';
 	} else {
@@ -295,7 +295,7 @@ if ($rows < 1) {
 	echo '</td><td>&nbsp;</td><td colspan="2">';
 
 	if ($rows==50) {
-		echo '<a href="/pm/task.php?func=browse&amp;group_project_id='.
+		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
 			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50).
 			'"><strong>'.$Language->getText('pm_browsetask','next').' --></strong></a>';
 	} else {

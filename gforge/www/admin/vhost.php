@@ -29,6 +29,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 require_once('www/admin/admin_utils.php');
@@ -176,7 +177,7 @@ if (getStringFromRequest('tweak')) {
 			'.$GLOBALS['HTML']->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
-			<td><a href="/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
 			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'.$Language->getText('admin_vhost','update').'" /></tr>
 			'.$GLOBALS['HTML']->listTableBottom().'

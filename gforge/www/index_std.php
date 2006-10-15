@@ -10,7 +10,7 @@ creates a repository and controls access to it depending on the role
 settings of the project.
 </p>
 <p>
-Additional Tools:
+Additional Tools:show_features_boshow_features_boxesshow_features_boxesxes
 </p>
 <ul>
 	<li>Manage File Releases</li>

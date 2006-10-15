@@ -310,7 +310,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		$i = $offset;	
 		while ( $row = db_fetch_array($res) ) {
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
-				. '<td>' . ($i + 1) . '. <a href="/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</a></td>'
+				. '<td>' . ($i + 1) . '. <a href="'.$GLOBALS['sys_urlprefix'].'/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</a></td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</td>'

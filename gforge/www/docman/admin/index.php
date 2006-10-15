@@ -17,6 +17,7 @@
 	Complete OO rewrite by Tim Perdue 1/2003
 */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/docman/include/doc_utils.php');
 require_once('www/docman/include/DocumentGroupHTML.class');

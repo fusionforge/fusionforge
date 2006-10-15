@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 
@@ -76,7 +77,7 @@ and visit your Account Maintenance page.
 </p>
 
 <p>
-<a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a>
 </p>
 
 <?php

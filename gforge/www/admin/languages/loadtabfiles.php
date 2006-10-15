@@ -22,6 +22,7 @@
  */
 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 require_once('common/include/escapingUtils.php');

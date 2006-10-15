@@ -26,6 +26,7 @@
  */
 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 

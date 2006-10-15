@@ -331,7 +331,7 @@ class LayoutSF extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
     <TITLE><?php echo $params['title']; ?></TITLE>
-	<link rel="stylesheet" type="text/css" href="/themes/css/gforge.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/css/gforge.css" />
 	<SCRIPT language="JavaScript">
 	<!--
 	function help_window(helpurl) {
@@ -361,7 +361,7 @@ class LayoutSF extends Layout {
 	 */
 	function generic_footer($params) {
 		global $Language, $sys_name;
-		echo '<P><A HREF="/source.php?page_url='.getStringFromServer('PHP_SELF').'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
+		echo '<P><A HREF="'.$GLOBALS['sys_urlprefix'].'/source.php?page_url='.getStringFromServer('PHP_SELF').'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
 
 		global $IS_DEBUG,$QUERY_COUNT;
 		if ($IS_DEBUG && user_isloggedin() && user_ismember(1,'A')) {
@@ -422,7 +422,7 @@ class LayoutSF extends Layout {
 
 	?>
 
-		<link rel="icon" type="image/png" href="/images/debian-sf-icon.png">
+		<link rel="icon" type="image/png" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/debian-sf-icon.png">
 		<style type="text/css">
 			<!--
 	OL,UL,P,BODY,TD,TR,TH,FORM { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>; color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
@@ -519,7 +519,7 @@ $s = ((session_issecure()) ? 's' : '' );
 	?>
 
 	<CENTER>
-	<a href="/"><?php echo html_image($this->imgroot . "sflogo.png","150","150",array()); ?></A>
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo html_image($this->imgroot . "sflogo.png","150","150",array()); ?></A>
 	</CENTER>
 	<P>
 	<!-- menus -->

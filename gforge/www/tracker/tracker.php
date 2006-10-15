@@ -461,7 +461,7 @@ switch (getStringFromRequest('func')) {
 	}
 	case 'download' : {
 		$aid = getStringFromRequest('aid');
-		Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
+		Header("Redirect: ".$GLOBALS['sys_urlprefix']."/tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
 		break;
 	}
 	case 'detail' : {

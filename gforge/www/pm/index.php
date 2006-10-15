@@ -16,6 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/pm/include/ProjectGroupHTML.class');
 require_once('common/pm/ProjectGroupFactory.class');
@@ -69,7 +70,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse">' .
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse">' .
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a></td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>

@@ -246,7 +246,7 @@ class SurveyHTML extends Error {
 			$ret.= '<td><center>[<a href="survey.php?group_id='.$group_id.'&amp;survey_id='.
 				$survey_id.'&amp;is_up=1&amp;updown=Y'.
 				'&amp;question_id='.$arr_to_del[$i]->getID().'">Up</a>]';
-			$ret.= '[<a href="/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='.
+			$ret.= '[<a href="'.$GLOBALS['sys_urlprefix'].'/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='.
 				$survey_id.'&amp;is_up=0&amp;updown=Y'.
 				'&amp;question_id='.$arr_to_del[$i]->getID().'">Down</a>]</center></td>';
 			
@@ -387,7 +387,7 @@ class SurveyHTML extends Error {
 				$ret.= '<td>'.$surveys[$i]->getID().'</td>';
 			}
 			
-			$ret.= '<td>'.$strike_open.'<a href="/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.
+			$ret.= '<td>'.$strike_open.'<a href="'.$GLOBALS['sys_urlprefix'].'/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.
 				$surveys[$i]->getID().'">'.$surveys[$i]->getTitle().'</A>'.$strike_close.'</td>';
 
 			if ($show_questions) {
@@ -408,13 +408,13 @@ class SurveyHTML extends Error {
 			}
 			if ($show_edit) {
 				/* Edit/Delete Link */
-				$ret.= "<td>[<a href=\"/survey/admin/survey.php?group_id=$group_id&amp;survey_id=".
+				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/survey.php?group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
 				$ret.= $Language->getText('survey_admin', 'edit').'</a>] ';
 
 				/* We don;t support delete yet. Need to delete all results as well */
 				/*
-				$ret.= "[<a href=\"/survey/admin/survey.php?delete=Y&amp;group_id=$group_id&amp;survey_id=".
+				$ret.= "[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/survey.php?delete=Y&amp;group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
 				$ret.= $Language->getText('survey_admin', 'delete').'</a>]
                                 */
@@ -422,19 +422,19 @@ class SurveyHTML extends Error {
 			}
 			if ($show_result) {
 				/* Edit/Delete Link */
-				$ret.= "<td>[<a href=\"/survey/admin/show_results.php?group_id=$group_id&amp;survey_id=".
+				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
 				$ret.= $Language->getText('survey_index', 'survey_result').'</a>]</td>';
 			}
 			if ($show_result_graph) {
 				/* Edit/Delete Link */
-				$ret.= "<td>[<a href=\"/survey/admin/show_results.php?graph=yes&amp;group_id=$group_id&amp;survey_id=".
+				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?graph=yes&amp;group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
 				$ret.= $Language->getText('survey_index', 'survey_result_graph').'</a>]</td>';
 			}
 			if ($show_result_comment) {
 				/* Edit/Delete Link */
-				$ret.= "<td>[<a href=\"/survey/admin/show_results.php?graph=yes&amp;show_comment=yes&amp;group_id=$group_id&amp;survey_id=".$surveys[$i]->getID().'">';
+				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?graph=yes&amp;show_comment=yes&amp;group_id=$group_id&amp;survey_id=".$surveys[$i]->getID().'">';
 				$ret.= $Language->getText('survey_index', 'survey_result_comments').'</a>]</td>';
 			}
 			$ret.= "</tr>\n";
@@ -544,7 +544,7 @@ class SurveyHTML extends Error {
 		
 		$ret.='<tr><td align="center" colspan="2">'.
 			'<input type="submit" name="submit" value="'.$Language->getText('general','submit').'" />'.
-			'<br /><a href="/survey/privacy.php">'.$Language->getText('survey','survey_privacy').'</a>'.
+			'<br /><a href="'.$GLOBALS['sys_urlprefix'].'/survey/privacy.php">'.$Language->getText('survey','survey_privacy').'</a>'.
 			'</td></tr></form></table>';
 		
 		return $ret;

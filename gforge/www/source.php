@@ -11,6 +11,7 @@
  *
  */
 
+require_once('env.inc.php');
 require_once('pre.php');
 
 global $sys_show_source;

@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class');
@@ -116,7 +117,7 @@ if (!$res || db_numrows($res) < 1) {
 			$last_name = $name;
 		}
 		echo '<tr '.$HTML->boxGetAltRowStyle(1).'><td>&nbsp;</td>
-				<td><a href="/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id')
+				<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id')
 					.'&project_task_id='.db_result($res,$i,'project_task_id')
 					.'&group_project_id='.db_result($res,$i,'group_project_id')
 					.'" target="_blank">'.db_result($res,$i,'summary').'</a></td>
@@ -149,7 +150,7 @@ if (!$res || db_numrows($res) < 1) {
 					echo '&nbsp;';
 				}
 				echo '</td>
-						<td colspan="2"><a href="/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id').
+						<td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id').
 						'&group_id='.db_result($res2,$j,'group_id').
 						'&aid='.db_result($res2,$j,'artifact_id').'" target="_blank">'.db_result($res2,$j,'summary').'</a></td></tr>';
 			}

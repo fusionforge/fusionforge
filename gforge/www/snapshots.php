@@ -11,6 +11,7 @@
 
 $no_gz_buffer=true;
 
+require_once('env.inc.php');
 require_once('pre.php');
 
 // Get current information

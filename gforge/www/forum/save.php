@@ -19,6 +19,7 @@
 */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
@@ -49,7 +50,7 @@ if (session_loggedin()) {
 		if (!$f->savePlace()) {
 			exit_error($Language->getText('general','error'),$f->getErrorMessage());
 		} else {
-			header ("Location: /forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_save','saved')));
+			header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_save','saved')));
 		}
 	} else {
 		exit_missing_param();

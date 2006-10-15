@@ -66,8 +66,8 @@ function forum_header($params) {
 				echo '
 				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
 				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
-				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
-				<strong>'.$Language->getText('forum_utils','project').':</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
+				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
+				<strong>'.$Language->getText('forum_utils','project').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
@@ -105,19 +105,19 @@ function forum_header($params) {
 	if (session_loggedin() ) {
 		if ($f) {
 			if ($f->isMonitoring()) {
-				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1">' .
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1">' .
 				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</a> | ';
 			} else {
-				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
 				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</a> | ';
 			}
-			echo '<a href="/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
+			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
 			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</a> | ';
 		}
 	}
 
 	if ($f && $forum_id) {
-		echo '<a href="/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
+		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
 			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
 			$Language->getText('forum_message','thread').'</a>';
 	}
@@ -218,14 +218,14 @@ class ForumHTML extends Error {
 		'
 		<table border="0">
 			<tr>
-				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= $Language->getText('forum_utils','by').' <a href="/users/'.
+				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= $Language->getText('forum_utils','by').' <a href="'.$GLOBALS['sys_urlprefix'].'/users/'.
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br />
 					';
 					$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
-					<a href="/forum/message.php?msg_id='.
+					<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.
 					$msg->getID() .'&group_id='.$group_id.'">'.
 					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</a> &nbsp; '.
@@ -393,7 +393,7 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 				*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<a href="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .
+					$ah_begin='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .
 						'&group_id='.$group_id.'">';
 					$ah_end='</a>';
 				} else {
@@ -415,7 +415,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
-					'<td><a href="/users/'.$msg_arr["$msg_id"][$i]->getPosterName().'/">'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</a></td>'.
+					'<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$msg_arr["$msg_id"][$i]->getPosterName().'/">'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</a></td>'.
 					'<td>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
@@ -569,7 +569,7 @@ class ForumHTML extends Error {
 
 			<?php
 			if (!session_loggedin()) {
-				echo '<span class="highlight">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['.$Language->getText('forum_utils','loggedin').']</a></span>';
+				echo '<span class="highlight">'.$Language->getText('forum_utils','postanon').' <a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['.$Language->getText('forum_utils','loggedin').']</a></span>';
 			}
 			?>
 			<br />
@@ -583,11 +583,11 @@ class ForumHTML extends Error {
 
 		} elseif ($this->Forum->allowAnonymous()) {
 			echo '<span class="error">';
-			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).' ">','</a>'));
+			echo $Language->getText('forum_utils','couldpostif',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).' ">','</a>'));
 			echo '<>';
 		} elseif (!session_loggedin()) {
 			echo '
-			<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><br/></p>';
+			<span class="error">'.$Language->getText('tracker','please_login',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><br/></p>';
 		} else {
 			//do nothing
 		}

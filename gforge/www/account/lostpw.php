@@ -29,6 +29,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 if (getStringFromRequest('submit')) {
@@ -85,7 +86,7 @@ echo $Language->getText('account_lostpw','warn');
 </p>
 </form>
 
-<p><a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a></p>
 
 <?php
 

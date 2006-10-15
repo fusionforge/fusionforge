@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');    
 require_once('www/include/trove.php');
 
@@ -112,7 +113,7 @@ if ($discrim) {
 	for ($i=0;$i<sizeof($expl_discrim);$i++) {
 		$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
 			.trove_getfullpath($expl_discrim[$i])
-			.' <a href="/softwaremap/trove_list.php?form_cat='.$form_cat
+			.' <a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='.$form_cat
 			.$discrim_url_b[$i].'">['.$Language->getText('trove_list','remove_filter').']'
 			.'</a>';
 	}
@@ -138,7 +139,7 @@ for ($i=0;$i<$folders_len;$i++) {
 	print "&nbsp; ";
 	// no anchor for current cat
 	if ($folders_ids[$i] != $form_cat) {
-		print '<a href="/softwaremap/trove_list.php?form_cat='
+		print '<a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='
 			.$folders_ids[$i].$discrim_url.'">';
 	} else {
 		print '<strong>';
@@ -199,7 +200,7 @@ while ($row_rootcat = db_fetch_array($res_rootcat)) {
 		echo html_image('ic/ofolder15.png','15','13',array());
 		print ('&nbsp; <strong>'.$row_rootcat['fullname']."</strong>\n");
 	} else {
-		print ('<a href="/softwaremap/trove_list.php?form_cat='
+		print ('<a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='
 			.$row_rootcat['trove_cat_id'].$discrim_url.'">');
 		echo html_image('ic/cfolder15.png','15','13',array());
 		print ('&nbsp; '.$row_rootcat['fullname']."\n");
@@ -259,7 +260,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 	for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
 		$html_limit .= ' ';
 		if ($page != $i) {
-			$html_limit .= '<a href="/softwaremap/trove_list.php?form_cat='.$form_cat;
+			$html_limit .= '<a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='.$form_cat;
 			$html_limit .= $discrim_url.'&page='.$i;
 			$html_limit .= '">';
 		} else $html_limit .= '<strong>';
@@ -290,7 +291,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 
 	if ($row_grp && $viewthisrow) {
 		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
-		print "$i_proj. <a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
+		print "$i_proj. <a href=\"".$GLOBALS['sys_urlprefix']."/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
 			.htmlspecialchars($row_grp['group_name'])."</strong></a> ";
 		if ($row_grp['short_description']) {
 			print "- " . htmlspecialchars($row_grp['short_description']);
@@ -310,7 +311,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 /*
                 if ($row_grp['jobs_count']) {
                 	print '<tr><td colspan="2" align="center">'
-                              .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
+                              .'<a href="'.$GLOBALS['sys_urlprefix'].'/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
                 }
 */
                 print '</table>';

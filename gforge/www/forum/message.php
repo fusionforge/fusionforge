@@ -18,6 +18,7 @@
 	Complete OO rewrite by Tim Perdue 12/2002
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('www/forum/include/AttachManager.class');
@@ -103,13 +104,13 @@ if ($msg_id) {
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
-	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (<a href=\"/users/".$fm->getPosterName()."/\">". $fm->getPosterName() ."</a>)<br />";
-	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
+	echo $Language->getText('forum_message','by').': '. $fm->getPosterRealName() .' (<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$fm->getPosterName().'/">'. $fm->getPosterName() .'</a>)<br />';
+	echo $Language->getText('forum_message','date').': '. date($sys_datefmt, $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
-	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . "<br/>";
+	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '<br/>';
 	
-	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
+	echo $Language->getText('forum_message','subject').': '. $fm->getSubject() .'<p>&nbsp;</p>';
 	
 	if (!strstr('<',$fm->getBody())) { 
 		echo nl2br($fm->getBody()); //backwards compatibility for non html messages
@@ -154,7 +155,7 @@ if ($msg_id) {
 		
 		
 		if ($fm->getID() != $msg->getID()) {
-			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().
+			$ah_begin='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$msg->getID().
 				'&group_id='.$group_id.'">';
 			$ah_end='</a>';
 		} else {

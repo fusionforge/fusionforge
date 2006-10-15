@@ -268,7 +268,7 @@ class Forum extends Error {
 	 *	@return	int	The unix time.
 	 */
 	function getSavedDate() {
-		if ($this->save_date) {
+		if (@$this->save_date) {
 			return $this->save_date;
 		} else {
 			if (session_loggedin()) {

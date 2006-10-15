@@ -29,6 +29,7 @@
 	Written by dtype Oct 1999
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $user_id = getStringFromRequest('user_id');
@@ -38,6 +39,6 @@ if (!$user_id) {
 	$user_id=$form_dev;
 }
 
-header("Location: /users/". user_getname($user_id) ."/");
+header("Location: ".$GLOBALS['sys_urlprefix']."/users/". user_getname($user_id) ."/");
 
 ?>

@@ -28,12 +28,12 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
   <td><strong>
 <?php
 	if (session_loggedin() && user_ismember(1)) {
-		echo '<a href="/admin/useredit.php?user_id='.$user_id.'">'.$user_id.'</a>';
+		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/admin/useredit.php?user_id='.$user_id.'">'.$user_id.'</a>';
 	} else {
 		echo $user_id;
 	}
 ?>
-</strong> <?php if($GLOBALS['sys_use_people']) { ?>( <a href="/people/viewprofile.php?user_id=<?php echo $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )<?php } ?></td>
+</strong> <?php if($GLOBALS['sys_use_people']) { ?>( <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/people/viewprofile.php?user_id=<?php echo $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )<?php } ?></td>
 </tr>
 
 <tr valign="top">
@@ -50,7 +50,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 <tr valign="top">
 	<td><?php echo $Language->getText('user_home','email') ?>: </td>
 	<td>
-	<strong><a href="/sendmessage.php?touser=<?php print $user_id; 
+	<strong><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/sendmessage.php?touser=<?php print $user_id; 
 		?>"><?php print str_replace('@',' @nospam@ ',$user->getEmail()); ?></a></strong>
 	</td>
 </tr>
@@ -108,9 +108,9 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo $Language->getText('user_home','diary_notes_entries').' '.db_result($res,0,0).'
 	<p/>
-	<a href="/developer/diary.php?diary_user='. $user_id .'">'.$Language->getText('user_home','diary_notes_view').'</a><?p>
+	<a href="'.$GLOBALS['sys_urlprefix'].'/developer/diary.php?diary_user='. $user_id .'">'.$Language->getText('user_home','diary_notes_view').'</a><?p>
 	<p/>
-	<a href="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .$Language->getText('user_home','diary_notes_monitor').'</a></p>';
+	<a href="'.$GLOBALS['sys_urlprefix'].'/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .$Language->getText('user_home','diary_notes_monitor').'</a></p>';
 	$hookparams['user_id'] = $user_id;
 	plugin_hook("user_personal_links",$hookparams);
 	
@@ -138,9 +138,9 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p/>".$Language->getText('user_home','member_of')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ("<br />" . "<a href=\"/projects/".$row_cat['unix_group_name']."/\">".$row_cat['group_name']."</a>\n");
+		print ('<br />' . '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_cat['unix_group_name'].'/">'.$row_cat['group_name'].'</a>\n');
 	}
-	print "</ul><p/>";
+	print '</ul><p/>';
 } // end if groups
 
 echo $HTML->boxBottom(); ?>

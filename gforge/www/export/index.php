@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 global $group_id;
 $HTML->header(array(title=>"Exports Available"));

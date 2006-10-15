@@ -26,6 +26,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/survey/Survey.class');
 require_once('www/survey/include/SurveyHTML.class');

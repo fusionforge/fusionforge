@@ -5,6 +5,7 @@
 // http://sourceforge.net
 //
 
+require "../env.inc.php";
 require "pre.php";
 
 $HTML->header(array(title=>"Project Exports"));

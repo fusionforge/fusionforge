@@ -13,6 +13,7 @@
 
 $no_gz_buffer=true;
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/tracker/Artifact.class');
 require_once('common/tracker/ArtifactFile.class');

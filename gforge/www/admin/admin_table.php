@@ -296,13 +296,14 @@ function getUnitLabel($unit) {
 }
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $HTML->header(array('title'=>$Language->getText('admin_admin_table', 'title', array(ucwords(getUnitLabel($unit))))));
 
 echo '<h3>'.$Language->getText('admin_admin_table', 'title', array(ucwords(getUnitLabel($unit)))).'</h3>
-<p><a href="/admin/">'.$Language->getText('admin_admin_table', 'site_admin_home').'</a></p>
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/admin/">'.$Language->getText('admin_admin_table', 'site_admin_home').'</a></p>
 <p>&nbsp;</p>';
 
 // $table, $unit and $primary_key are variables passed from the parent scripts

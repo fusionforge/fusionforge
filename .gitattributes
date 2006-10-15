@@ -632,6 +632,7 @@ gforge/plugins/svntracker/www/newcommit.php -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
+gforge/www/env.inc.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class -text
 gforge/www/forum/include/AttachManager.class -text

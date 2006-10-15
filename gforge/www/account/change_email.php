@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 session_require(array('isloggedin'=>1));
@@ -84,7 +85,7 @@ echo $Language->getText('account_change_email', 'desc');
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />
 </form>
 
-<p><a href="/"><?php echo $Language->getText('general', 'return', $sys_name); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $sys_name); ?></a></p>
 
 <?php
 site_user_footer(array());

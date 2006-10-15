@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('note.php');
 require_once('news_admin_utils.php');
@@ -169,7 +170,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				<ul>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-				<li><a href="/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.
+				<li><a href="'.$GLOBALS['sys_urlprefix'].'/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.
 					db_result($result,$i,'group_id').'">'.
 					db_result($result,$i,'summary').'</a></li>';
 			}
@@ -266,7 +267,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
-		<strong>'.$Language->getText('news_admin', 'submitted_for_group').':</strong> <a href="/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />
+		<strong>'.$Language->getText('news_admin', 'submitted_for_group').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />
 		<strong>'.$Language->getText('news_admin', 'submitted_by').':</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
