@@ -30,14 +30,14 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$key="stop_monitoring";
+					$key="monitorstop";
 				} else {
 					$img="mail16w.png";
 					$key="monitor";
 				}
 				echo '
 				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
-					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
+					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_monitor',$key).'</strong></a>';
 				?>
 			</td>
 			<td><?php
