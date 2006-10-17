@@ -1,4 +1,5 @@
 * text=auto !eol
+gforge/SYNCREV -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/include/TextSanitizer.class -text
 gforge/contrib/cmd-line-prototype.tar.gz -text

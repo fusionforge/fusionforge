@@ -17,7 +17,7 @@ echo notepad_func();
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="func" value="postmod"/>
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>"/>
