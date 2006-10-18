@@ -84,7 +84,8 @@ CREATE TABLE doc_data (
     language_id integer DEFAULT 1 NOT NULL,
     filename text,
     filetype text,
-    group_id integer
+    group_id integer,
+    filesize integer DEFAULT 0 NOT NULL
 );
 
 
@@ -187,7 +188,8 @@ CREATE TABLE forum_group_list (
     is_public integer DEFAULT 0 NOT NULL,
     description text,
     allow_anonymous integer DEFAULT 0 NOT NULL,
-    send_all_posts_to text
+    send_all_posts_to text,
+    moderation_level integer DEFAULT 0
 );
 
 
@@ -2059,11 +2061,6 @@ CREATE VIEW project_message_user_vw AS
 
 
 
-CREATE VIEW docdata_vw AS
-    SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
-
-
-
 CREATE FUNCTION frs_dlstats_filetotal_insert_ag() RETURNS "trigger"
     AS '
 BEGIN
@@ -2164,16 +2161,6 @@ CREATE TABLE cron_history (
     job text,
     output text
 );
-
-
-
-CREATE VIEW forum_group_list_vw AS
-    SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
-
-
-
-CREATE VIEW forum_user_vw AS
-    SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
 
 
 
@@ -2475,12 +2462,12 @@ CREATE SEQUENCE plugin_cvstracker_master_seq
 CREATE TABLE plugin_cvstracker_data_master (
     id integer DEFAULT nextval('plugin_cvstracker_master_seq'::text) NOT NULL,
     holder_id integer NOT NULL,
-    cvs_date date NOT NULL,
     log_text text DEFAULT ''::text,
     file text DEFAULT ''::text NOT NULL,
     prev_version text DEFAULT ''::text,
     actual_version text DEFAULT ''::text,
-    author text DEFAULT ''::text NOT NULL
+    author text DEFAULT ''::text NOT NULL,
+    cvs_date integer NOT NULL
 );
 
 
@@ -2650,6 +2637,104 @@ CREATE SEQUENCE artifact_extra_field_list_extra_field_id_seq
 
 
 
+CREATE VIEW docdata_vw AS
+    SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, d.filesize, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
+
+
+
+CREATE TABLE form_keys (
+    key_id serial NOT NULL,
+    "key" text NOT NULL,
+    creation_date integer NOT NULL,
+    is_used integer DEFAULT 0 NOT NULL
+);
+
+
+
+CREATE TABLE forum_attachment (
+    attachmentid serial NOT NULL,
+    userid integer DEFAULT 100 NOT NULL,
+    dateline integer DEFAULT 0 NOT NULL,
+    filename character varying(100) DEFAULT ''::character varying NOT NULL,
+    filedata text NOT NULL,
+    visible smallint DEFAULT (0)::smallint NOT NULL,
+    counter smallint DEFAULT (0)::smallint NOT NULL,
+    filesize integer DEFAULT 0 NOT NULL,
+    msg_id integer DEFAULT 0 NOT NULL,
+    filehash character varying(32) DEFAULT ''::character varying NOT NULL
+);
+
+
+
+CREATE TABLE forum_attachment_type (
+    extension character varying(20) DEFAULT ''::character varying NOT NULL,
+    mimetype character varying(255) DEFAULT ''::character varying NOT NULL,
+    size integer DEFAULT 0 NOT NULL,
+    width smallint DEFAULT (0)::smallint NOT NULL,
+    height smallint DEFAULT (0)::smallint NOT NULL,
+    enabled smallint DEFAULT (1)::smallint NOT NULL
+);
+
+
+
+CREATE VIEW forum_group_list_vw AS
+    SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_group_list.moderation_level, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
+
+
+
+CREATE TABLE forum_pending_messages (
+    msg_id serial NOT NULL,
+    group_forum_id integer DEFAULT 0 NOT NULL,
+    posted_by integer DEFAULT 0 NOT NULL,
+    subject text DEFAULT ''::text NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL,
+    is_followup_to integer DEFAULT 0 NOT NULL,
+    thread_id integer DEFAULT 0 NOT NULL,
+    has_followups integer DEFAULT 0,
+    most_recent_date integer DEFAULT 0 NOT NULL
+);
+
+
+
+CREATE TABLE forum_pending_attachment (
+    attachmentid serial NOT NULL,
+    userid integer DEFAULT 100 NOT NULL,
+    dateline integer DEFAULT 0 NOT NULL,
+    filename character varying(100) DEFAULT ''::character varying NOT NULL,
+    filedata text NOT NULL,
+    visible smallint DEFAULT (0)::smallint NOT NULL,
+    counter smallint DEFAULT (0)::smallint NOT NULL,
+    filesize integer DEFAULT 0 NOT NULL,
+    msg_id integer DEFAULT 0 NOT NULL,
+    filehash character varying(32) DEFAULT ''::character varying NOT NULL
+);
+
+
+
+CREATE VIEW forum_user_vw AS
+    SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
+
+
+
+CREATE VIEW forum_pending_user_vw AS
+    SELECT forum_pending_messages.msg_id, forum_pending_messages.group_forum_id, forum_pending_messages.posted_by, forum_pending_messages.subject, forum_pending_messages.body, forum_pending_messages.post_date, forum_pending_messages.is_followup_to, forum_pending_messages.thread_id, forum_pending_messages.has_followups, forum_pending_messages.most_recent_date, users.user_name, users.realname FROM forum_pending_messages, users WHERE (forum_pending_messages.posted_by = users.user_id);
+
+
+
+CREATE TABLE group_activity_monitor (
+    group_id integer NOT NULL,
+    user_id integer NOT NULL,
+    filter text
+);
+
+
+
+CREATE VIEW activity_vw AS
+    (((SELECT agl.group_id, 'trackeropen'::text AS section, agl.group_artifact_id AS ref_id, a.artifact_id AS subref_id, a.summary AS description, a.open_date AS activity_date, u.user_id, u.user_name, u.realname FROM (artifact_group_list agl JOIN artifact a USING (group_artifact_id)), users u WHERE (u.user_id = a.submitted_by) UNION SELECT agl.group_id, 'trackerclose'::text AS section, agl.group_artifact_id AS ref_id, a.artifact_id AS subref_id, a.summary AS description, a.close_date AS activity_date, u.user_id, u.user_name, u.realname FROM (artifact_group_list agl JOIN artifact a USING (group_artifact_id)), users u WHERE ((u.user_id = a.assigned_to) AND (a.close_date > 0))) UNION SELECT agl.group_id, 'commit'::text AS section, agl.group_artifact_id AS ref_id, a.artifact_id AS subref_id, pcdm.log_text AS description, pcdm.cvs_date AS activity_date, u.user_id, u.user_name, u.realname FROM (artifact_group_list agl JOIN artifact a USING (group_artifact_id)), plugin_cvstracker_data_master pcdm, plugin_cvstracker_data_artifact pcda, users u WHERE (((pcdm.holder_id = pcda.id) AND (pcda.group_artifact_id = a.artifact_id)) AND (u.user_name = pcdm.author))) UNION SELECT frsp.group_id, 'frsrelease'::text AS section, frsp.package_id AS ref_id, frsr.release_id AS subref_id, frsr.name AS description, frsr.release_date AS activity_date, u.user_id, u.user_name, u.realname FROM (frs_package frsp JOIN frs_release frsr USING (package_id)), users u WHERE (u.user_id = frsr.released_by)) UNION SELECT fgl.group_id, 'forumpost'::text AS section, fgl.group_forum_id AS ref_id, forum.msg_id AS subref_id, forum.subject AS description, forum.post_date AS activity_date, u.user_id, u.user_name, u.realname FROM (forum_group_list fgl JOIN forum USING (group_forum_id)), users u WHERE (u.user_id = forum.posted_by);
+
+
+
 COPY canned_responses (response_id, response_title, response_text) FROM stdin;
 \.
 
@@ -2660,7 +2745,7 @@ COPY db_images (id, group_id, description, bin_data, filename, filesize, filetyp
 
 
 
-COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, doc_group, description, language_id, filename, filetype, group_id) FROM stdin;
+COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, doc_group, description, language_id, filename, filetype, group_id, filesize) FROM stdin;
 \.
 
 
@@ -2695,7 +2780,7 @@ COPY forum_agg_msg_count (group_forum_id, count) FROM stdin;
 
 
 
-COPY forum_group_list (group_forum_id, group_id, forum_name, is_public, description, allow_anonymous, send_all_posts_to) FROM stdin;
+COPY forum_group_list (group_forum_id, group_id, forum_name, is_public, description, allow_anonymous, send_all_posts_to, moderation_level) FROM stdin;
 \.
 
 
@@ -3534,25 +3619,17 @@ COPY themes (theme_id, dirname, fullname, enabled) FROM stdin;
 COPY supported_languages (language_id, name, filename, classname, language_code) FROM stdin;
 1	English	English.class	English	en   
 2	Japanese	Japanese.class	Japanese	ja   
-3	Hebrew	Hebrew.class	Hebrew	iw   
 4	Spanish	Spanish.class	Spanish	es   
 5	Thai	Thai.class	Thai	th   
 6	German	German.class	German	de   
 8	Italian	Italian.class	Italian	it   
-9	Norwegian	Norwegian.class	Norwegian	no   
 10	Swedish	Swedish.class	Swedish	sv   
 12	Dutch	Dutch.class	Dutch	nl   
-13	Esperanto	Esperanto.class	Esperanto	eo   
 14	Catalan	Catalan.class	Catalan	ca   
 22	Korean	Korean.class	Korean	ko   
 20	Bulgarian	Bulgarian.class	Bulgarian	bg   
-19	Greek	Greek.class	Greek	el   
-21	Indonesian	Indonesian.class	Indonesian	id   
-15	Polish	Polish.class	Polish	pl   
-18	Portuguese	Portuguese.class	Portuguese	pt   
 17	Russian	Russian.class	Russian	ru   
 7	French	French.class	French	fr   
-24	Latin	Latin.class	Latin	la   
 23	Smpl.Chinese	SimplifiedChinese.class	SimplifiedChinese	zh-cn
 11	Trad.Chinese	Chinese.class	Chinese	zh-tw
 16	Pt. Brazilian	PortugueseBrazilian.class	PortugueseBrazilian	pt-br
@@ -4133,7 +4210,7 @@ COPY plugin_cvstracker_data_artifact (id, kind, group_artifact_id, project_task_
 
 
 
-COPY plugin_cvstracker_data_master (id, holder_id, cvs_date, log_text, file, prev_version, actual_version, author) FROM stdin;
+COPY plugin_cvstracker_data_master (id, holder_id, log_text, file, prev_version, actual_version, author, cvs_date) FROM stdin;
 \.
 
 
@@ -4172,6 +4249,47 @@ COPY artifact_query (artifact_query_id, group_artifact_id, user_id, query_name) 
 
 
 COPY artifact_query_fields (artifact_query_id, query_field_type, query_field_id, query_field_values) FROM stdin;
+\.
+
+
+
+COPY form_keys (key_id, "key", creation_date, is_used) FROM stdin;
+\.
+
+
+
+COPY forum_attachment (attachmentid, userid, dateline, filename, filedata, visible, counter, filesize, msg_id, filehash) FROM stdin;
+\.
+
+
+
+COPY forum_attachment_type (extension, mimetype, size, width, height, enabled) FROM stdin;
+gif	a:1:{i:0;s:23:"Content-type: image/gif";}	20000	620	280	1
+jpeg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	20000	620	280	1
+jpg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	100000	0	0	1
+jpe	a:1:{i:0;s:24:"Content-type: image/jpeg";}	20000	620	280	1
+png	a:1:{i:0;s:23:"Content-type: image/png";}	20000	620	280	1
+doc	a:2:{i:0;s:20:"Accept-ranges: bytes";i:1;s:32:"Content-type: application/msword";}	20000	0	0	1
+pdf	a:1:{i:0;s:29:"Content-type: application/pdf";}	20000	0	0	1
+bmp	a:1:{i:0;s:26:"Content-type: image/bitmap";}	20000	620	280	1
+psd	a:1:{i:0;s:29:"Content-type: unknown/unknown";}	20000	0	0	1
+zip	a:1:{i:0;s:29:"Content-type: application/zip";}	100000	0	0	1
+txt	a:1:{i:0;s:24:"Content-type: plain/text";}	20000	0	0	1
+\.
+
+
+
+COPY forum_pending_messages (msg_id, group_forum_id, posted_by, subject, body, post_date, is_followup_to, thread_id, has_followups, most_recent_date) FROM stdin;
+\.
+
+
+
+COPY forum_pending_attachment (attachmentid, userid, dateline, filename, filedata, visible, counter, filesize, msg_id, filehash) FROM stdin;
+\.
+
+
+
+COPY group_activity_monitor (group_id, user_id, filter) FROM stdin;
 \.
 
 
@@ -5176,6 +5294,41 @@ ALTER TABLE ONLY artifact_query_fields
 
 
 
+ALTER TABLE ONLY form_keys
+    ADD CONSTRAINT form_keys_pkey PRIMARY KEY (key_id);
+
+
+
+ALTER TABLE ONLY form_keys
+    ADD CONSTRAINT "key" UNIQUE ("key");
+
+
+
+ALTER TABLE ONLY forum_attachment
+    ADD CONSTRAINT forum_attachment_pkey PRIMARY KEY (attachmentid);
+
+
+
+ALTER TABLE ONLY forum_attachment_type
+    ADD CONSTRAINT forum_attachment_type_pkey PRIMARY KEY (extension);
+
+
+
+ALTER TABLE ONLY forum_pending_messages
+    ADD CONSTRAINT forum_pending_messages_pkey PRIMARY KEY (msg_id);
+
+
+
+ALTER TABLE ONLY forum_pending_attachment
+    ADD CONSTRAINT forum_pending_attachment_pkey PRIMARY KEY (attachmentid);
+
+
+
+ALTER TABLE ONLY group_activity_monitor
+    ADD CONSTRAINT group_activity_monitor_pkey PRIMARY KEY (group_id, user_id);
+
+
+
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_typeid FOREIGN KEY (type_id) REFERENCES user_type(type_id) MATCH FULL;
 
@@ -5258,6 +5411,46 @@ ALTER TABLE ONLY artifact_query
 
 ALTER TABLE ONLY artifact_query_fields
     ADD CONSTRAINT artqueryelmnt_artqueryid FOREIGN KEY (artifact_query_id) REFERENCES artifact_query(artifact_query_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY mail_group_list
+    ADD CONSTRAINT mail_group_list_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY forum_attachment
+    ADD CONSTRAINT "$1" FOREIGN KEY (msg_id) REFERENCES forum(msg_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY forum_attachment
+    ADD CONSTRAINT "$2" FOREIGN KEY (userid) REFERENCES users(user_id) ON DELETE SET DEFAULT;
+
+
+
+ALTER TABLE ONLY forum_pending_messages
+    ADD CONSTRAINT forum_pending_messages_group_forum_id_fkey FOREIGN KEY (group_forum_id) REFERENCES forum_group_list(group_forum_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY forum_pending_attachment
+    ADD CONSTRAINT forum_pending_attachment_msg_id_fkey FOREIGN KEY (msg_id) REFERENCES forum_pending_messages(msg_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY forum_pending_attachment
+    ADD CONSTRAINT forum_pending_attachment_userid_fkey FOREIGN KEY (userid) REFERENCES users(user_id) ON DELETE SET DEFAULT;
+
+
+
+ALTER TABLE ONLY group_activity_monitor
+    ADD CONSTRAINT group_id FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY group_activity_monitor
+    ADD CONSTRAINT userid_fk FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 
@@ -7056,6 +7249,10 @@ CREATE RULE projecttask_delete_agg AS ON DELETE TO project_task DO UPDATE projec
 
 
 
+CREATE RULE groupactivity_userdelete_rule AS ON UPDATE TO users DO DELETE FROM group_activity_monitor WHERE (group_activity_monitor.user_id = CASE WHEN (new.status = 'D'::bpchar) THEN new.user_id ELSE 0 END);
+
+
+
 SELECT pg_catalog.setval('canned_responses_pk_seq', 1, false);
 
 
@@ -7429,6 +7626,22 @@ SELECT pg_catalog.setval('artifact_query_artifact_query_id_seq', 1, false);
 
 
 SELECT pg_catalog.setval('artifact_extra_field_list_extra_field_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('form_keys_key_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('forum_attachment_attachmentid_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('forum_pending_messages_msg_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('forum_pending_attachment_attachmentid_seq', 1, false);
 
 
 
