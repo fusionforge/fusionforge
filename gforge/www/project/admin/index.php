@@ -63,11 +63,20 @@ if (getStringFromRequest('submit')) {
 			add user to this project
 		*/
 		$form_unix_name = getStringFromRequest('form_unix_name');
+		$user_object = &user_get_object_by_name($form_unix_name);
+		$user_id = $user_object->getID();
 		$role_id = getIntFromRequest('role_id');
 		if (!$group->addUser($form_unix_name,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_added');
+			//if the user have requested to join this group
+			//we should remove him from the request list
+			//since it has already been added
+			$gjr=new GroupJoinRequest($group,$user_id);
+			if ($gjr || is_object($gjr) || !$gjr->isError()) {
+				$gjr->delete(true);
+			}
 		}
 	} else if (getStringFromRequest('rmuser')) {
 		/*
