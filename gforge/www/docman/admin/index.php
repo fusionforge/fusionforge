@@ -16,6 +16,11 @@
 
 	Complete OO rewrite by Tim Perdue 1/2003
 */
+/*
+
+   Ftp upload option is commented-out
+
+*/
 
 require_once('pre.php');
 require_once('www/docman/include/doc_utils.php');
@@ -59,7 +64,7 @@ if (getStringFromRequest('submit')) {
 		$language_id = getIntFromRequest('language_id');
 		$data = getStringFromRequest('data');
 		$file_url = getStringFromRequest('file_url');
-		$ftp_filename = getStringFromRequest('ftp_filename');
+		//$ftp_filename = getStringFromRequest('ftp_filename');
 		$uploaded_data = getUploadedFile('uploaded_data');
 		$stateid = getIntFromRequest('stateid');
 		$filetype = getStringFromRequest('filetype');
@@ -88,10 +93,12 @@ if (getStringFromRequest('submit')) {
 			$data = '';
 			$filename=$file_url;
 			$filetype='URL';
+		/*
 		} elseif ($sys_use_ftpuploads && $ftp_filename!=100) { //100==None
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
 			$filetype=$uploaded_data_type;
+		*/
 		} else {
 			$filename=addslashes($d->getFileName());
 			$filetype=addslashes($d->getFileType());
@@ -209,8 +216,9 @@ if ($editdoc && $docid) {
 		echo '<tr>
 				<td>
 				';
-		echo '<input type="hidden" name="editor" value="editor">';
+		//echo '<input type="hidden" name="editor" value="editor">';
 		echo $Language->getText('docman_admin_editdocs','edit');
+		/*
 		$params['name'] = 'data';
 		$params['width'] = "800";
 		$params['height'] = "500";
@@ -221,13 +229,16 @@ if ($editdoc && $docid) {
 			plugin_hook("text_editor",$params);
 		}
 		if (!$GLOBALS['editor_was_set_up']) {
+		*/
 			//if we don´t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $d->getFileData()  .'</textarea><br />';
 			echo '<input type="hidden" name="filetype" value="text/plain">';
+		/*
 		} else {
 			echo '<input type="hidden" name="filetype" value="text/html">'; // the fckeditor creates html docs. this is for filetype
 		}
 		unset($GLOBALS['editor_was_set_up']);
+		*/
 		echo '</td>
 			</tr>';
 	}
@@ -289,13 +300,13 @@ if ($editdoc && $docid) {
 		<?php } else { ?>
 		<strong><?php echo $Language->getText('docman_admin_editdocs','upload') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" /><br/><br />
-			<?php if ($sys_use_ftpuploads) { ?>
-			<strong><?php echo $Language->getText('docman_admin_editdocs','upload_ftp',array($sys_ftp_upload_host)) ?></strong><br />
+			<?php //if ($sys_use_ftpuploads) { ?>
+			<!--<strong><?php //echo $Language->getText('docman_admin_editdocs','upload_ftp',array($sys_ftp_upload_host)) ?></strong>--><br />
 			<?php
-			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
-			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-			echo '<br /><br />';			
-			}
+			//$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
+			//echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
+			//echo '<br /><br />';			
+			//}
 		}
 		?>
 		</td>

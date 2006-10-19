@@ -44,7 +44,7 @@ if (getStringFromRequest('submit')) {
 	$title = getStringFromRequest('title');
 	$description = getStringFromRequest('description');
 	$file_url = getStringFromRequest('file_url');
-	$ftp_filename = getStringFromRequest('ftp_filename');
+	//$ftp_filename = getStringFromRequest('ftp_filename');
 	$uploaded_data = getUploadedFile('uploaded_data');
 	$language_id = getIntFromRequest('language_id');
 	$type = getStringFromRequest('type');
@@ -55,7 +55,8 @@ if (getStringFromRequest('submit')) {
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
 	
-	if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename && (!$editor && !$name ) )) {		
+	//if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename && (!$editor && !$name ) )) {		
+	if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {		
 		exit_missing_param();
 	}
 
@@ -94,10 +95,12 @@ if (getStringFromRequest('submit')) {
 			$uploaded_data_type=$uploaded_data['type'];
 			break;
 		}
+		/*
 		case 'ftpupload' : {	
 			$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
 			$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
 		}
+		*/
 	}
 	
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
@@ -113,7 +116,7 @@ if (getStringFromRequest('submit')) {
 
 } else {
 	
-	if (getStringFromRequest('Option')) {
+	//if (getStringFromRequest('Option')) {
 		//option was selected, proceed to show each one
 		$option_selected = getStringFromRequest('option_selected');
 		docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'));
@@ -133,6 +136,15 @@ if (getStringFromRequest('submit')) {
 			<input type="text" name="description" size="50" maxlength="255" />
 			</td>
 		</tr>';		
+		echo '
+			<tr>
+				<td>
+				<strong>'. $Language->getText('docman_new','upload_file') .' :</strong>'. utils_requiredField() .'<br />
+				<input type="file" name="uploaded_data" size="30" /><br /><br />
+				<input type="hidden" name="type" value="httpupload">
+				</td>
+			</tr>';
+		/*
 		switch ($option_selected) {
 			case 'httpupload' : {
 				echo '
@@ -191,6 +203,8 @@ if (getStringFromRequest('submit')) {
 				break;		
 			}
 		}
+		*/
+		
 		echo '
 			<tr>
 				<td>
@@ -219,6 +233,7 @@ if (getStringFromRequest('submit')) {
 		<input type="submit" name="submit" value="'. $Language->getText('docman_new','submit').' " />
 			</form>';
 		docman_footer(array());
+	/*
 	} else {
 		docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'));
 		?>
@@ -226,7 +241,7 @@ if (getStringFromRequest('submit')) {
 		<?php
 		echo '<form name="select_opt" action="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
 		$vals['httpupload'] = $Language->getText('docman','httpupload');
-		$vals['ftpupload'] = $Language->getText('docman','ftpupload');
+		//$vals['ftpupload'] = $Language->getText('docman','ftpupload');
 		$vals['pasteurl'] = $Language->getText('docman','pasteurl');
 		$vals['editor'] = $Language->getText('docman','editor');
 		echo $Language->getText('docman','select');
@@ -234,7 +249,8 @@ if (getStringFromRequest('submit')) {
 		echo '   <input type="submit" value="'. $Language->getText('docman_new','selectsubmit') .'" name="Option">';
 		echo '</form>';
 		docman_footer(array());
-	}		
+	}
+	*/		
 }
 
 ?>
