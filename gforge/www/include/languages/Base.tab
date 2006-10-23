@@ -1925,6 +1925,7 @@ scm_index	reporting	Reporting
 scm_index	scm_repository	SCM Repository
 scm_index	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
 scm_index	admin	Admin
+scm_index	not_created	The repository for this project wasn't created yet. It will be created in the next minutes.
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#
