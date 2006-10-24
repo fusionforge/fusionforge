@@ -111,17 +111,17 @@ MAILTO=""
 #
 #       Create the /etc/* files needed for CVS
 #
-10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/usergroup.php
+10 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
 
 #
 #       Upload the SSH key files needed for CVS
 #
-15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/ssh_create.php
+15 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
 
 #
 #       Create the blank cvs trees
 #
-20 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs-cron/cvs.php
+20 * * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs.php
 
 #
 #       Create CVS tarballs
@@ -140,7 +140,7 @@ MAILTO=""
 #       Create the blank svn trees for SVN-over-DAV
 #       (all repositories owned by apache)
 #
-21 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/dav-svn/create_svn.php
+21 * * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/create_svn.php
 
 #
 #       Create SVN snapshots

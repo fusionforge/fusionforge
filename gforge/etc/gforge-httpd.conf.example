@@ -13,7 +13,11 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 		allow from all
 	</Directory>
 
-	<Location "/gf">
+	<Location "/projects">
+		ForceType application/x-httpd-php
+	</Location>
+
+	<Location "/users">
 		ForceType application/x-httpd-php
 	</Location>
 
