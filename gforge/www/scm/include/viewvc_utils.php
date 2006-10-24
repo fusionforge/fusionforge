@@ -49,6 +49,7 @@ function make_arg_cmd_safe($arg) {
  *      @return String the output of the ViewCVS command.
  */
 function viewcvs_execute($repos_name, $repos_type) {
+	global $Language;
 
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
@@ -72,6 +73,11 @@ function viewcvs_execute($repos_name, $repos_type) {
 		$repos_root = $GLOBALS['svndir_prefix'].'/'.$repos_name;
 	} else {
 		die("Invalid repository type");
+	}
+	
+	if (!is_dir($repos_root)) {
+		$content = $Language->getText('scm_index', 'not_created');
+		return $content;
 	}
 	
 	$query_string = str_replace('\\&', '&', make_arg_cmd_safe($query_string));
