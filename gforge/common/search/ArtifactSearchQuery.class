@@ -39,6 +39,7 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @param int $artifactId artifact id
 	 */
 	function ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId) {
+		//TODO: Why is groupId an arg and var since it isn't used anywhere?
 		$this->groupId = $groupId;
 		$this->artifactId = $artifactId;
 		
@@ -55,20 +56,46 @@ class ArtifactSearchQuery extends SearchQuery {
 		if ($sys_use_fti) {
 			$words=$this->getFormattedWords();
 			$artifactId = $this->artifactId;
-			$sql = "SELECT DISTINCT ON (artifact.artifact_id) artifact.artifact_id,
-				artifact.group_artifact_id, artifact.summary AS summary,
-				artifact.open_date, users.realname, artifact_group_list.name
-				FROM artifact LEFT JOIN artifact_message USING (artifact_id), users,
-				artifact_group_list
-				WHERE users.user_id = artifact.submitted_by
-				AND artifact_group_list.group_artifact_id = artifact.group_artifact_id
-				AND artifact_group_list.group_artifact_id='$artifactId'
-				AND artifact.artifact_id IN (
-				SELECT artifact_id FROM artifact_idx,
-				to_tsquery('$words') AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC)
-				OR artifact.artifact_id IN (
-				SELECT artifact_id FROM artifact_message_idx,
-				to_tsquery('$words') AS q WHERE vectors @@ q ORDER BY rank(vectors, q) DESC)";
+		    if(count($words)) {
+				$tsquery0 = "headline(summary, '".$this->getFormattedWords()."') as summary";
+				$tsquery = ", artifact_idx ai, artifact_message_idx ami, to_tsquery('".$words."') q";
+				$tsmatch = "(ai.vectors @@ q OR ami.vectors @@ q)"; 
+				$rankCol = "sum((rank(ai.vectors, q)+rank(ami.vectors, q))) as rank";
+				$tsjoin = 'AND ai.artifact_id = a.artifact_id '
+						. 'AND ami.id = am.id ';
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = "summary";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "0 as rank";
+				$phraseOp = "";
+			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$detailsCond = $this->getMatchCond('a.details', $this->phrases);
+				$summaryCond = $this->getMatchCond('a.summary', $this->phrases);
+				$msgCond = $this->getMatchCond('am.body', $this->phrases);
+				$phraseCond = "$phraseOp (($detailsCond) OR ($summaryCond))";
+			}
+			$sql = "
+				select a.group_artifact_id,a.artifact_id, $tsquery0,
+				a.open_date,users.realname, rank
+				FROM (SELECT a.artifact_id,
+				$rankCol
+				FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)
+				$tsquery
+				WHERE 
+				a.group_artifact_id='$artifactId'
+				$tsjoin
+				AND ($tsmatch $phraseCond)
+				GROUP BY a.artifact_id) x,
+				artifact a, users
+				WHERE
+				a.artifact_id = x.artifact_id
+				AND users.user_id=a.submitted_by
+				ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC";
 		} else {
 			$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname '
 				. 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users ' 

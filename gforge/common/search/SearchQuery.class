@@ -67,6 +67,10 @@ class SearchQuery extends Error {
 	 */	
 	var $sections = SEARCH__ALL_SECTIONS;
 
+	var $words;
+
+	var $phrases;
+
 	/**
 	 * Constructor
 	 *
@@ -105,7 +109,38 @@ class SearchQuery extends Error {
 				$this->setError('error_search_minlength');
 				return;
 			}
-			$this->words = explode(' ', quotemeta($words));
+			$this->words = array();
+			$this->phrases = array();
+			$phrase = '';
+			$inQuote = false;
+			foreach(explode(' ', quotemeta($words)) as $word) {
+				if($inQuote) {
+					if(substr($word, -3) == "\\\\'") {
+						$word = substr($word, 0, -3);
+						$inQuote = false;
+						$phrase .= ' '.$word;
+						$this->phrases[] = $phrase;
+					} else {
+						$phrase .= ' '.$word;
+					}
+				} else {
+					if(substr($word, 0, 3) == "\\\\'") {
+						$word = substr($word, 3);
+						$inQuote = true;
+						if(substr($word, -3) == "\\\\'") {
+							// This is a special case where the phrase is just one word
+							$word = substr($word, 0, -3);
+							$inQuote = false;
+							$this->phrases[] = $word;
+						} else {
+							$phrase = $word;
+						}
+					} else {
+						$this->words[] = $word;
+					}
+				}
+
+			}
 		}
 	}
 	
@@ -151,7 +186,18 @@ class SearchQuery extends Error {
 	 * @return string the condition
 	 */
 	function getIlikeCondition($fieldName) {
-		return $fieldName." ILIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $this->words) ."%'";
+		$wordArgs = array_merge($this->words, str_replace(' ', "\\\s+",$this->phrases));
+		return $fieldName." ILIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $wordArgs) ."%'";
+	}
+
+	function getMatchCond($fieldName, $arr) {
+		if(!count($arr)) {
+			$result = 'TRUE';
+		} else {
+			$regexs = str_replace(' ', "\\\s+",$arr);
+			$result = $fieldName." ~* '" . implode("' ".$this->operator." ".$fieldName." ~* '", $regexs) ."'";
+		}
+		return $result;
 	}
 	
 	/**
@@ -257,7 +303,6 @@ class SearchQuery extends Error {
 		} else {
 			$words = implode('|', $this->words);
 		}
-		return $words;
 	}
 }
 

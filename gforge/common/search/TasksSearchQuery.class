@@ -54,12 +54,37 @@ class TasksSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = 'SELECT project_task.project_task_id,headline(project_task.summary, q) AS summary,project_task.percent_complete,'
+			if(count($this->words)) {
+				$tsquery0 = "headline(project_task.summary, q) AS summary,";
+				$words = $this->getFormattedWords();
+				$tsquery = ", to_tsquery('$words') AS q, project_task_idx";
+				$tsmatch = "vectors @@ q";
+				$rankCol = "";
+				$tsjoin = ' AND project_task.project_task_id = project_task_idx.project_task_id';
+				$orderBy = "ORDER BY project_group_list.project_name, rank(vectors, q) DESC, project_task.project_task_id";
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = "summary, ";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "";
+				$orderBy = "ORDER BY project_group_list.project_name, project_task.project_task_id";
+				$phraseOp = "";
+			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$phraseCond .= $phraseOp.'('
+					. ' ('.$this->getMatchCond('summary', $this->phrases).')'
+					. ' OR ('.$this->getMatchCond('details', $this->phrases).'))';
+			}
+			$sql = 'SELECT project_task.project_task_id,project_task.percent_complete,'
+			    .  $tsquery0
 				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 
-				. ' FROM project_task, users, project_group_list, project_task_idx, ' 
-				. ' to_tsquery(\''.$this->getFormattedWords().'\') q'
+				. ' FROM project_task, users, project_group_list '
+				. $tsquery
 				. ' WHERE project_task.created_by = users.user_id'
-				. ' AND project_task.project_task_id = project_task_idx.project_task_id'
+				. $tsjoin
 				. ' AND project_task.group_project_id = project_group_list.group_project_id '
 				. ' AND project_group_list.group_id  ='.$this->groupId.' ';
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
@@ -68,8 +93,7 @@ class TasksSearchQuery extends SearchQuery {
 			if (!$this->showNonPublic) {
 				$sql .= 'AND project_group_list.is_public = 1 ';
 			}
-			$sql .= 'AND (vectors @@q)' 
-				. ' ORDER BY rank(vectors, q) DESC';
+			$sql .= "AND ($tsmatch $phraseCond) $orderBy";
 		} else {
 			$sql = 'SELECT project_task.project_task_id,project_task.summary,project_task.percent_complete,'
 				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 

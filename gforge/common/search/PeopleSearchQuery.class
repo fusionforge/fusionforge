@@ -34,7 +34,36 @@ class PeopleSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM users_search('".$this->getFormattedWords()."')";
+			if(count($this->words)) {
+				$tsquery0 = ", user_name, headline(realname, q) as realname ";
+				$words = $this->getFormattedWords();
+				$tsquery = ", to_tsquery('$words') AS q, users_idx ";
+				$tsmatch = "vectors @@ q";
+				$rankCol = "";
+				$tsjoin = 'AND users_idx.user_id = users.user_id';
+				$orderBy = "ORDER BY rank(vectors, q) DESC, user_name";
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = ", user_name, realname ";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "";
+				$orderBy = "ORDER BY user_name";
+				$phraseOp = "";
+			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$phraseCond .= $phraseOp.'('
+					. ' ('.$this->getMatchCond('user_name', $this->phrases).')'
+					. ' OR ('.$this->getMatchCond('realname', $this->phrases).'))';
+			}
+			$sql = 'SELECT users.user_id '.$tsquery0
+				. 'FROM users '.$tsquery
+				. 'WHERE (status=\'A\') '
+				. $tsjoin
+				. " AND ($tsmatch $phraseCond) "
+				. $orderBy;
 		} else {
 			$sql = 'SELECT user_name,user_id,realname ' 
 				. 'FROM users ' 
