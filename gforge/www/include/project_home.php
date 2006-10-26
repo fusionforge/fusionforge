@@ -398,6 +398,12 @@ if ($project->usesNews()) {
 	echo $HTML->boxBottom();
 }
 
+//
+//	Linked projects (hierarchy)
+//
+
+plugin_hook('project_home_link',$group_id);
+
 ?>
 		</td>
 	</tr>

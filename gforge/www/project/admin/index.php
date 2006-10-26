@@ -307,6 +307,12 @@ echo '<input type="submit" name="edit" value="'.$Language->getText('rbac_edit','
 
 echo '<p><a href="roleedit.php?group_id='.$group_id.'">'.$Language->getText('rbac_edit','addrole').'</a>';
 
+//
+//	Project hierarchy functions
+
+plugin_hook('admin_project_link',$group_id) ;
+
+
 echo $HTML->boxBottom();?>
 
 		</td>
