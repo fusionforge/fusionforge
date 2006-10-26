@@ -2,7 +2,7 @@
 
 require_once('www/include/Layout.class');
 
-define(THEME_DIR, '/themes/sliq');
+define(THEME_DIR, '/themes/gforge');
 
 define(TOP_TAB_HEIGHT, 30);
 define(BOTTOM_TAB_HEIGHT, 22);
@@ -119,8 +119,8 @@ class Theme extends Layout {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
     <title><?php echo $params['title']; ?></title>
-    <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>/icon.png"/>
-    <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>/icon.png"/>
+    <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
+    <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss20_news.php" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
@@ -161,7 +161,7 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td class="topLeft"><a href="/"><?php echo html_image('/header/top-logo.gif',205,54,array('border'=>'0')); ?></a></td>
+        <td class="topLeft"><a href="/"><?php echo html_image('header/top-logo.gif',205,54,array('border'=>'0')); ?></a></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
           if (session_loggedin()) {
