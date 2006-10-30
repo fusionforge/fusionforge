@@ -167,6 +167,35 @@ while ( $row =& db_fetch_array($res) ) {
 writeAccessFile($access_file, $access_file_content);
 writePasswordFile($password_file, $password_file_contents);
 
+//
+// Move SVN repositories for deleted groups
+//
+
+// First make sure that the .deleted dir exists
+if (!is_dir($svndir_prefix."/.deleted")) {
+	system("mkdir ".$svndir_prefix."/.deleted");
+}
+
+$res = db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+$err .= db_error();
+$rows = db_numrows($res);
+for($k = 0; $k < $rows; $k++) {
+	$deleted_group_name = db_result($res,$k,'unix_group_name');
+	
+	$repos_dir = $svndir_prefix.'/'.$deleted_group_name;
+	if (is_dir($repos_dir)) {
+		// repository exists
+		system("mv -f $repos_dir $svndir_prefix/.deleted/");
+		system("chown -R root:root $svndir_prefix/.deleted/$deleted_group_name");
+		system("chmod -R o-rwx $svndir_prefix/.deleted/$deleted_group_name");
+	}
+
+	$res2 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
+	$err .= db_error();
+}
+
+
+
 function add2AccessFile($group_id) {
 	$result = "";
 	$project = &group_get_object($group_id);
