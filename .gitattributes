@@ -30,6 +30,7 @@ gforge/plugins/scmcvs/www/cvsweb/icons/minidir.gif -text
 gforge/plugins/scmcvs/www/cvsweb/icons/minigraph.png -text
 gforge/plugins/scmcvs/www/cvsweb/icons/minitext.gif -text
 gforge/plugins/scmcvs/www/cvsweb/icons/text.gif -text
+gforge/plugins/scmsvn/gforge-plugin-scmsvn.spec -text
 gforge/plugins/scmsvn/www/viewcvs/icons/back.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/forward.gif svneol=native#unset
 gforge/plugins/scmsvn/www/viewcvs/icons/small/back.gif svneol=native#unset
