@@ -9,6 +9,7 @@ BuildArch: noarch
 License: GPL
 Group: Development/Tools
 Source: %{name}-%{version}.tar.bz2
+Patch0: gforge-plugin-scmcvs-4.5.14-cvsweb.css.patch
 AutoReqProv: off
 Requires: gforge >= 4.0
 Requires: perl perl-URI
@@ -37,11 +38,13 @@ Requires: perl-IPC-Run
 %define GFORGE_LIB_DIR		%{_libdir}/gforge/lib
 %define GFORGE_DB_DIR		%{_libdir}/gforge/db
 %define GFORGE_BIN_DIR		%{_libdir}/gforge/bin
+%define PLUGINS_WWW_DIR		%{GFORGE_DIR}/www/plugins
 %define PLUGINS_LIB_DIR		%{_libdir}/gforge/plugins
 %define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
 %define CROND_DIR		%{_sysconfdir}/cron.d
 
 #specific define for plugins
+%define PLUGIN_WWW		%{PLUGINS_WWW_DIR}/%{plugin}
 %define PLUGIN_LIB		%{PLUGINS_LIB_DIR}/%{plugin}
 %define PLUGIN_CONF		%{PLUGINS_CONF_DIR}/%{plugin}
 
@@ -58,7 +61,8 @@ with GForge CDE and provides CVS support to GForge CDE.
 It also provides a specific version of CVSWeb wrapped in GForge CDE.
 
 %prep
-%setup
+%setup -q
+#%patch0 -p0
 
 %build
 
@@ -72,10 +76,14 @@ install -m 644 rpm-specific/cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 # copying all needed stuff to %{PLUGIN_LIB}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
-for dir in bin include lib rpm-specific www; do
+for dir in bin include lib rpm-specific; do
 	cp -rp $dir $RPM_BUILD_ROOT/%{PLUGIN_LIB}/
 done;
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
+
+# copying all needed stuff to %{PLUGIN_WWW}
+install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_WWW}/
+cp -rp www/* $RPM_BUILD_ROOT/%{PLUGIN_WWW}/
 
 # installing CVSWeb cgi
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
@@ -127,6 +135,7 @@ fi
 %attr(0660, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF}/cvsweb.conf
 %attr(0755,-,-) %{GFORGE_BIN_DIR}/cvsweb
 %{GFORGE_CONF_DIR}/httpd.d
+%{PLUGIN_WWW}
 %{PLUGIN_CONF}/languages
 %{PLUGIN_CONF}/config.pl
 %{PLUGIN_LIB}/bin
@@ -134,10 +143,11 @@ fi
 %{PLUGIN_LIB}/include
 %{PLUGIN_LIB}/lib
 %{PLUGIN_LIB}/rpm-specific
-%{PLUGIN_LIB}/www
 %{CROND_DIR}/%{name}
 
 %changelog
+* Fri Oct 13 2006 Open Wide <guillaume.smet@openwide.fr>
+- moved www dir to GFORGE_DIR/www/plugins
 * Mon Sep 25 2006 Open Wide <guillaume.smet@openwide.fr>
 - updated RPM packaging to 4.5.14
 * Fri Apr 29 2005 Xavier Rameau <xrameau@gmail.com>
