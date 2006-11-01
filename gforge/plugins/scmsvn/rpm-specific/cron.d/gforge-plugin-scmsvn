@@ -1,0 +1,35 @@
+#
+# GForge
+# Copyright 2005 (c) Guillaume Smet
+# http://gforge.org/
+#
+# @version   $Id: gforge,v 1.2 2004/12/07 16:12:24 gsmet Exp $
+#
+
+# Change path to the GForge directory.
+GFORGE="/usr/share/gforge"
+GFORGE_PLUGINS="/usr/lib/gforge/plugins"
+
+# Change paths to the GForge directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+# Tarballs
+50 2 * * * root $PHP $GFORGE_PLUGINS/scmsvn/cronjobs/tarballs.php
+
+# Snapshots
+35 3 * * * root $GFORGE_PLUGINS/scmsvn/bin/snapshots.sh generate
+
+# Repositories update
+45 * * * * root su -s /bin/sh gforge -c $GFORGE_PLUGINS/scmsvn/bin/svn_dump.pl && $GFORGE_PLUGINS/scmsvn/bin/svn_update.pl
+
+# mod_authz_svn
+55 * * * * root $PHP $GFORGE_PLUGINS/scmsvn/cronjobs/create_authz_svn.php
+
+# Statistics
+55 4 * * * root $PHP $GFORGE_PLUGINS/scmsvn/cronjobs/svn-stats.php
+

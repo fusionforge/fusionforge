@@ -1,0 +1,94 @@
+--- www/viewcvs/styles.css.orig	2006-10-02 10:15:21.000000000 +0200
++++ www/viewcvs/styles.css	2006-10-31 16:02:19.000000000 +0100
+@@ -2,40 +2,31 @@
+ /***  ViewCVS CSS Stylesheet ***/
+ /*******************************/
+ 
+-/*** Standard Tags ***/
+-html, body {
+-  color: #000000;
+-  background-color: #ffffff;
+-}
+-
+-a:link    { color: #0000ff; }
+-a:visited { color: #880088; }
+-a:active  { color: #0000ff; }
+-
+-
+ /** Navigation Headers ***/
+ .vc_navheader {
+-  background-color: #8888ff;
++  background-color: #98CBCB;
++  border: 2px solid #cccc00;
++  padding: 5px;
+ }
+ 
+ 
+ /*** Table Headers ***/
+ .vc_header {
+   text-align: left;
+-  background-color: #cccccc;
++  background-color: #cccc00;
+ }
+ .vc_header_sort {
+   text-align: left;
+-  background-color: #88ff88;
++  background-color: #cccc00;
+ }
+ 
+ 
+ /*** Table Rows ***/
+ .vc_row_even {
+-  background-color: #ffffff;
++  background-color: #98CBCB;
+ }
+ .vc_row_odd {
+-  background-color: #ccccee;
++  background-color: white;
+ }
+ 
+ 
+@@ -52,7 +43,7 @@
+ 
+ /*** Markup Summary Header ***/
+ .vc_summary {
+-  background-color: #eeeeee;
++  background-color: #ffffff;
+ }
+ 
+ 
+@@ -61,7 +52,13 @@
+   background-color: #ffffff;
+ }
+ .vc_diff_chunk_header {
+-  background-color: #99cccc;
++  background-color: #98CBCB;
++}
++.vc_diff_chunk_header table {
++  border: 2px solid #cccc00;
++}
++.vc_diff_chunk_header td {
++  border: none;
+ }
+ .vc_diff_chunk_extra {
+   font-size: smaller;
+@@ -95,6 +92,19 @@
+   font-family: sans-serif;
+   font-size: smaller;
+ }
++.vc_diff_form {
++  width: 100%;
++}
++.vc_diff_makepatch {
++}
++.vc_diff_help {
++  text-align: right;
++  border: 1px outset;
++}
++.vc_diff_help td {
++  border: none;
++  padding: 0px;
++}
+ .vc_raw_diff {
+   background-color: #cccccc;
+   font-size: smaller;
