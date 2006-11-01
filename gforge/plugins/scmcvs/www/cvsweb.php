@@ -132,7 +132,11 @@ if ($projectName) {
 		$content = ob_get_contents();
 		ob_end_clean();
 	}
-	
+
+	if(preg_match("/^Status: 30[12] [^\n]*\nLocation: ([^\n]*)\n/", $content, $matches)) {
+		header('Location: '.$matches[1]);
+		exit();
+	}
 
 	if ($isHtml) {
 		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
