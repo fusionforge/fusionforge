@@ -1,8 +1,9 @@
 plugin_scmsvn	anonsvn	<p><b>Anonymous Subversion Access</b></p><p>This project's SVN repository can be checked out through anonymous access with the following command(s).</p>
 plugin_scmsvn	svn_repository	SVN Repository
 plugin_scmsvn	developername	developername
-plugin_scmsvn	error_only_projects_can_use_svn	Error, Only Projects Can Use SVN
-plugin_scmsvn	error_this_project_has_turned_off	Error This Project Has Turned Off SVN
+plugin_scmsvn	error_only_projects_can_use_svn	Error: Only projects can use SVN
+plugin_scmsvn	error_this_project_has_turned_off	Error: This project has turned off SVN
+plugin_scmsvn	error_repository_not_created_yet	This repository has not been created yet.
 plugin_scmsvn	history	Repository History
 plugin_scmsvn	nohistory	This project has no SVN history.
 plugin_scmsvn	section	Project: $1

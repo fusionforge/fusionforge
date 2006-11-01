@@ -107,6 +107,9 @@ if ($external_scm) {
 	}
 } else {
 	// Call to ViewCVS CGI locally (see viewcvs_utils.php)
+	if(!is_dir($sys_chroot.$svndir_prefix.'/'.$projectName)) {
+		exit_error($Language->getText('general','error'), $Language->getText('plugin_scmsvn','error_repository_not_created_yet'));
+	}
 	$content = viewcvs_execute();
 }
 

@@ -11,6 +11,7 @@ plugin_scmsvn	enable_svn	Utiliser Subversion
 plugin_scmsvn	enable_anonymous_svn	Activer l'accès anonyme
 plugin_scmsvn	error_only_projects_can_use_svn	Erreur : seuls les projets peuvent utiliser Subversion
 plugin_scmsvn	error_this_project_has_turned_off	Erreur : ce projet a désactivé Subversion.
+plugin_scmsvn	error_repository_not_created_yet	Le référentiel de sources de ce projet n'a pas encore été créé.
 plugin_scmsvn	history	Historique du dépôt
 plugin_scmsvn	nohistory	Ce projet n'a pas de dépôt Subversion.
 plugin_scmsvn	section	Projet : $1
