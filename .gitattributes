@@ -22,6 +22,7 @@ gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svn
 gforge/plugins/scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
 gforge/plugins/scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
+gforge/plugins/scmcvs/rpm-specific/patches/gforge-plugin-scmcvs-4.5.14-cvsweb.css.patch -text
 gforge/plugins/scmcvs/www/cvsweb/icons/back.gif -text
 gforge/plugins/scmcvs/www/cvsweb/icons/binary.gif -text
 gforge/plugins/scmcvs/www/cvsweb/icons/dir.gif -text

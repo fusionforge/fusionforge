@@ -1,0 +1,80 @@
+--- www/cvsweb/css/cvsweb.css.orig	2006-10-31 15:27:46.000000000 +0100
++++ www/cvsweb/css/cvsweb.css	2006-10-31 15:27:54.000000000 +0100
+@@ -34,19 +34,19 @@
+ 
+ /* Navigation header for source views, diffs and annotations */
+ div#cvsweb .navigate-header {
+-  background-color: #a1cef7;
++  background-color: #98CBCB;
+   padding: 2px;
+-  border: 2px outset;
++  border: 2px solid #cccc00;
+ }
+ 
+ /* Directory table */
+ div#cvsweb table.dir {
+-  border-right: 1px solid #ccc;
++  border-right: 1px solid #cccc00;
+ }
+ /* Cells */
+ div#cvsweb table.dir * td {
+-  border-left: 1px solid #ccc;
+-  border-bottom: 1px solid #ccc;
++  border-left: 1px solid #cccc00;
++  border-bottom: 1px solid #cccc00;
+   padding-left: 5px;
+   padding-right: 5px;
+ }
+@@ -55,13 +55,12 @@
+   /*
+   background-color:#ffc ;
+   */
+-  background-color:#3c7ebb;
+-  border: thin outset;
++  background-color:#cccc00;
+   padding-left: 5px;
+   padding-right: 5px;
+ }
+ div#cvsweb table.dir * th a {
+-   color:#FFFFFF;
++   color:#003399;
+ }
+ 
+ /* Sorted column header */
+@@ -69,16 +68,15 @@
+   /*
+   background-color: #fc6;
+   */
+-  background-color:#a1cef7;
+-  border: thin inset;
++  background-color:#cccc00;
+ }
+ /* Even rows */
+ div#cvsweb table.dir * tr.even {
+-  background-color: #fff;
++  background-color: #98CBCB;
+ }
+ /* Odd rows */
+ div#cvsweb table.dir * tr.odd {
+-  background-color: #eeeeef;
++  background-color: #ffffff;
+ }
+ /* File and dir name columns */
+ div#cvsweb table.dir * td.file, table.dir * td.dir {
+@@ -126,13 +124,13 @@
+ /* Diff-selected revision in log */
+ div#cvsweb .diff-selected {
+   padding-right: 0.5em;
+-  border-right: 10px solid #fc6;
++  border-right: 10px solid #cccc00;
+ }
+ 
+ /* Line-header of each diffed file */
+ div#cvsweb .diff-heading {
+-  background-color: #9cc;
+-  border: 2px outset;
++  background-color: #98CBCB;
++  border: 2px solid #cccc00;
+   padding: 5px;
+ }
+ /* Lines that are the same */
