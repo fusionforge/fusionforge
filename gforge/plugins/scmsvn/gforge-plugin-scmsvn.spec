@@ -121,7 +121,7 @@ fi
 %post
 if [ "$1" = "1" ] ; then
 	# register plugin in database
-	%{GFORGE_BIN_DIR}/register-plugin %{plugin} CVS &> /dev/null
+	%{GFORGE_BIN_DIR}/register-plugin %{plugin} Subversion &> /dev/null
 else
 	# upgrade
 	:
