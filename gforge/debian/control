@@ -143,7 +143,7 @@ Description: collaborative development tool - shell accounts (using LDAP)
 
 Package: gforge-shell-postgresql
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-pgsql1
+Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-pgsql1, libpam-pgsql, nscd
 Provides: gforge-shell
 Conflicts: gforge-shell
 Description: collaborative development tool - shell accounts (using PostgreSQL)

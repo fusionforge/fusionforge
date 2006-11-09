@@ -123,6 +123,8 @@ computedefault(){
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
 	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
+	DEFAULTpam_db_user=gforge_pam
+	DEFAULTpam_db_pw=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR

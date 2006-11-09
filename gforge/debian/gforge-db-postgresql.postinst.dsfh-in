@@ -53,10 +53,21 @@ set -e
 
 #DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
+#DSFHELPER:create-random-pw#
 case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
 
+	if ! grep -q '^pam_db_user=' /etc/gforge/gforge.conf ; then
+	    echo "pam_db_user=gforge_pam" >> /etc/gforge/gforge.conf
+	fi
+	if ! grep -q '^pam_db_pw=' /etc/gforge/gforge.conf ; then
+	    pam_db_pw=$(gen_random_pw)
+	    cat >> /etc/gforge/gforge.conf <<-EOF
+pam_db_pw=$pam_db_pw
+EOF
+	fi
+	
 	/usr/sbin/gforge-config
 
         # Patch DB configuration files

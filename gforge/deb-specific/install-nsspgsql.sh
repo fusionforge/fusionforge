@@ -28,6 +28,8 @@ setup_vars() {
     db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
     db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
     db_password=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
+    pam_db_user=$(grep ^pam_db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+    pam_db_pw=$(grep ^pam_db_pw= /etc/gforge/gforge.conf | cut -d= -f2-)
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
@@ -42,12 +44,51 @@ show_vars() {
 }
 
 # Should I do something for /etc/pam_pgsql.conf ?
-modify_pam_pgsql(){
-    echo -n
-    # echo "Nothing to do"
+configure_pam_pgsql(){
+    if [ ! -e /etc/pam_pgsql.conf ] ; then
+	touch /etc/pam_pgsql.conf
+    fi
+    echo -n > /etc/pam_pgsql.conf.gforge-new
+    chmod 600 /etc/pam_pgsql.conf.gforge-new
+    cat > /etc/pam_pgsql.conf.gforge-new <<EOF
+host            = $db_host
+database        = $db_name
+user            = $pam_db_user
+password        = $pam_db_pw
+table           = nss_shadow
+user_column     = login
+pwd_column      = passwd
+pw_type         = crypt
+expired_column  = expired
+newtok_column   = pwchange
+EOF
+
+
+    if ! grep -q auth[[:space:]]\\+sufficient[[:space:]]\\+pam_pgsql.so /etc/pam.d/common-auth ; then
+	cp -a /etc/pam.d/common-auth /etc/pam.d/common-auth.gforge-new
+	perl -pi -e 's/(auth\s+required\s+pam_unix.so.*)/auth  sufficient  pam_pgsql.so #Added by GForge install\n$1 use_first_pass #Added by GForge install\n#Comment by GForge install#$1/g' /etc/pam.d/common-auth.gforge-new
+    fi
+    if ! grep -q account[[:space:]]\\+sufficient[[:space:]]\\+pam_pgsql.so /etc/pam.d/common-account ; then
+	cp -a /etc/pam.d/common-account /etc/pam.d/common-account.gforge-new
+	perl -pi -e 's/(account\s+required\s+pam_unix.so.*)/account  sufficient  pam_pgsql.so #Added by GForge install\n$1 try_first_pass #Added by GForge install\n#Comment by GForge install#$1/g' /etc/pam.d/common-account.gforge-new
+    fi
 }
 
-# Check/Modify /etc/libnss-ldap.conf
+purge_pam_pgsql(){
+    if grep -q '#Added by GForge install' /etc/pam.d/common-auth ; then
+	cp -a /etc/pam.d/common-auth /etc/pam.d/common-auth.gforge-new
+	perl -pi -e "s/^[^\n]*#Added by GForge install\n//" /etc/pam.d/common-auth.gforge-new
+	perl -pi -e "s/#Comment by GForge install#//" /etc/pam.d/common-auth.gforge-new
+    fi
+    
+    if grep -q '#Added by GForge install' /etc/pam.d/common-account ; then
+	cp -a /etc/pam.d/common-account /etc/pam.d/common-account.gforge-new
+	perl -pi -e "s/^[^\n]*#Added by GForge install\n//" /etc/pam.d/common-account.gforge-new
+	perl -pi -e "s/#Comment by GForge install#//" /etc/pam.d/common-account.gforge-new
+    fi
+}
+
+# Check/Modify /etc/libnss-pgsql.conf
 configure_libnss_pgsql(){
     # All users can see ldap stored gid/uid
 #    cat > /etc/nss-pgsql.conf.gforge-new <<EOF
@@ -170,6 +211,8 @@ case "$1" in
 	setup_vars
 	# echo "Modifying /etc/nss-pgsql.conf"
 	configure_libnss_pgsql
+	# echo "Modifying /etc/pam_pgsql.conf"
+	configure_pam_pgsql
 	# echo "Modifying /etc/nsswitch.conf"
 	configure_nsswitch
 	;;
@@ -179,6 +222,8 @@ case "$1" in
 	setup_vars
 	# echo "Purging /etc/nsswitch.conf"
 	purge_nsswitch
+	# echo "Modifying /etc/pam_pgsql.conf"
+	purge_pam_pgsql
 	# echo "Purging /etc/nss-pgsql.conf"
 	purge_libnss_pgsql
 	;;

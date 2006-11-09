@@ -6,8 +6,6 @@
 #  ./sql2ldif.pl	: Dump only top-level ou map
 #  ./sql2ldif.pl --full : Dump full database (ouch!)
 #
-#  $Id$
-# 
 
 use DBI;
 
@@ -32,10 +30,10 @@ die "Cannot connect to database: $!" if ( ! $dbh );
 
 # We give user maximum of privileges assigned to one by groups ;-(
 my $query = "
-SELECT nss_passwd.login,gecos,shell,passwd,uid,gid,email
-FROM nss_passwd,mta_users
-WHERE nss_passwd.login=mta_users.login
-GROUP BY nss_passwd.login,gecos,shell,passwd,uid,gid,email
+SELECT nss_passwd.login,gecos,shell,nss_shadow.passwd,uid,gid,email
+FROM nss_passwd,nss_shadow,mta_users
+WHERE nss_passwd.login=mta_users.login AND nss_passwd.login=nss_shadow.login
+GROUP BY nss_passwd.login,gecos,shell,nss_shadow.passwd,uid,gid,email
 ";
 my $rel = $dbh->prepare($query);
 $rel->execute();

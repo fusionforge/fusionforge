@@ -28,6 +28,7 @@ case "$1" in
 	propose_update_remove /etc/exim4/exim4.conf
 	propose_update_remove /etc/exim4/exim4.conf.template
 	propose_update_remove /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+	update-exim4.conf
 
 	# Clean debconf after ourselves
 	db_stop

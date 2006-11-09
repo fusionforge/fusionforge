@@ -4,13 +4,17 @@
 </Files>
 
 <IfModule mod_ssl.c>
-  Listen 443
+  # You may need to uncomment this, depending on your setup
+  # Listen {ip_address}:443
 </IfModule>
+
+# You may need to uncomment this, depending on your setup
+# Listen {ip_address}:80
 
 NameVirtualHost {ip_address}:80
 NameVirtualHost {ip_address}:443
 # This is magic for virtual hosting!
-UseCanonicalName Off
+# UseCanonicalName Off
 
 <Directory ~ "/CVS/">
   ## block web access to CVS directories.

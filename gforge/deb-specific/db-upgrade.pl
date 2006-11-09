@@ -1652,7 +1652,7 @@ END;
 		}
 
 		$query2 = "INSERT INTO role (role_id, group_id, role_name)
-                           VALUES ($rid, $group_id, 'rname')" ;
+                           VALUES ($rid, $group_id, '$rname')" ;
 		# &debug ($query2) ;
 		$sth2 =$dbh->prepare ($query2) ;
 		$sth2->execute () ;
@@ -2790,6 +2790,97 @@ $dbh->{RaiseError} = 1;
 	}
 	
 	&update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5.14-12" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Fixing NSS-related views") ;
+
+	&drop_view_if_exists ($dbh, "nss_passwd") ;
+	&drop_view_if_exists ($dbh, "nss_shadow") ;
+
+	@reqlist = (
+		    "CREATE VIEW nss_passwd AS
+                     SELECT 
+                            unix_uid AS uid,
+                            unix_gid AS gid,
+                            user_name AS login,
+                            'x'::bpchar AS passwd,
+                            realname AS gecos,
+                            shell,
+                            user_name AS homedir
+                     FROM users
+                     WHERE status = 'A'
+                       AND unix_status = 'A'
+                       AND users.user_name <> 'None'",
+		    "CREATE VIEW nss_shadow AS
+                     SELECT
+                            user_name AS login,
+                            unix_pw AS passwd,
+                            CHAR(1) 'n' AS expired,
+                            CHAR(1) 'n' AS pwchange
+                     FROM users
+                     WHERE status = 'A'
+                       AND unix_status = 'A'
+                       AND user_name <> 'None'",
+		    "GRANT SELECT ON nss_passwd TO gforge_nss",
+		    "GRANT SELECT ON nss_shadow TO gforge_pam",
+		    );
+
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.5.14-14" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Fixing past mistakes in role naming") ;
+
+	my $defaultroles_restricted = {
+	    'Admin'	       => { 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'trackeradmin'=>'2', 'pmadmin'=>'2' },
+	    'Senior Developer' => { 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'trackeradmin'=>'2', 'pmadmin'=>'2' },
+	    'Junior Developer' => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'trackeradmin'=>'0', 'pmadmin'=>'0' },
+	    'Doc Writer'       => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'trackeradmin'=>'0', 'pmadmin'=>'0' },
+	    'Support Tech'     => { 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'trackeradmin'=>'0', 'pmadmin'=>'0' }
+	} ;
+
+	foreach my $drname (sort keys %{$defaultroles_restricted}) {
+	    $query = "UPDATE role SET role_name='$drname' WHERE role_id IN (SELECT min(role.role_id)" ;
+	    my $from = "" ;
+	    my $where = "" ;
+	    foreach my $setting (keys %{$defaultroles_restricted->{$drname}}) {
+		$from .= ", role_setting rs_$setting" ;
+		$where .= "role.role_id = rs_$setting.role_id AND rs_$setting.section_name='$setting' AND " ;
+		$where .= "rs_$setting.value = '$defaultroles_restricted->{$drname}->{$setting}' \nAND " ;
+	    }
+	    $query .= "\nFROM role$from" ;
+	    $query .= "\nWHERE $where role.role_name='rname' GROUP BY role.group_id)";
+	    push @reqlist, $query;
+	}
+	
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+
+        &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
     }

@@ -6,11 +6,14 @@ gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
 gforge/db/20040326-gforge-3.3 -text svneol=unset#application/octet-stream
 gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
+gforge/deb-specific/fix-frs.pl -text
+gforge/debian/dsf-helper/create-random-pw.postinst -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/etc/httpd.d/20list -text
 gforge/plugins/cvssyncmail/INSTALL -text
 gforge/plugins/cvssyncmail/common/CVSSyncMailPlugin.class -text
 gforge/plugins/cvssyncmail/common/cvssyncmail-init.php -text

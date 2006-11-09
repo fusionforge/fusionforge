@@ -75,6 +75,7 @@ case "$target" in
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
+	pam_db_user=$(grep ^pam_db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
 
@@ -130,7 +131,7 @@ EOF
 	    rm -f $cur
 	    
 	    cur=$(mktemp /tmp/$pattern)
-	    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	    perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name $pam_db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	    cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    rm -f $cur
 
@@ -147,6 +148,8 @@ EOF
 	db_passwd=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+	pam_db_user=$(grep ^pam_db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+	pam_db_pw=$(grep ^pam_db_pw= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
@@ -205,6 +208,23 @@ EOF
 	    fi
 	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
 CREATE USER gforge_mta WITH PASSWORD '' ;
+EOF
+		then
+		rm -f $tmp1 $tmp2
+	    else
+		echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+		echo "Maybe a problem in your PostgreSQL configuration?"
+		echo "Please report a bug to the Debian bug tracking system"
+		echo "Please include the following output:"
+		echo "CREATE USER's STDOUT:"
+		cat $tmp1
+		echo "CREATE USER's STDERR:"
+		cat $tmp2
+		rm -f $tmp1 $tmp2
+		exit 1
+	    fi
+	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
+CREATE USER gforge_pam WITH PASSWORD '$pam_db_pw' ;
 EOF
 		then
 		rm -f $tmp1 $tmp2
@@ -312,12 +332,21 @@ EOF
         fi
 	;;
     purge)
-	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
-	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
-	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
-	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
+	if [ -e /etc/gforge/gforge.conf ] ; then
+	    db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
+	    db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+	    su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
+	    su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
+	fi
 	rm -f /var/lib/postgres/data/gforge_passwd
-	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
+	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if [ "x$pg_version" != "x" ] 
+	then 
+		pg_name=postgresql-$pg_version
+	else
+		pg_name=postgresql
+	fi
+	invoke-rc.d ${pg_name} reload || true
 	;;
     dump)
 	if [ -e /etc/sourceforge/local.pl ] ; then

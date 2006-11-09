@@ -36,6 +36,7 @@ case "$1" in
 	replace_file /etc/exim4/exim4.conf
 	replace_file /etc/exim4/exim4.conf.template
 	replace_file /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+	update-exim4.conf
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -105,6 +105,7 @@ install: build
 	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
+	install -m 755 deb-specific/fix-frs.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 
 	# move some files from gforge-web-apache to gforge-common as there are needed by postgress upgrade
 	# these files should be moved one day in common/
@@ -203,6 +204,10 @@ install: build
 	# gforge-lists-mailman
 	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fix-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
+
+	# cleaning up Arch/TLA/Baz control files if needed
+	for i in $(shell dh_listpackages) ; do find $(CURDIR)/debian/$$i -name .arch-ids -type d | xargs rm -rf ; done
+
 
 binary-indep: build install
 	dh_testdir

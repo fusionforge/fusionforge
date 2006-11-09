@@ -1,7 +1,5 @@
 #! /bin/bash
 #
-# $Id$
-#
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)
@@ -146,11 +144,14 @@ modify_pam_ldap(){
 
 # Check/Modify /etc/libnss-ldap.conf
 configure_libnss_ldap(){
+    if [ ! -e /etc/libnss-ldap.conf ] ; then
+	touch /etc/libnss-ldap.conf
+    fi
     cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.gforge-new
     # Check if DN is correct
     if ! grep -q "^base[ 	]*$sf_ldap_dn" /etc/libnss-ldap.conf.gforge-new ; then
 	echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
-	grep "^base" /etc/libnss-ldap.conf
+	grep "^base" /etc/libnss-ldap.conf || true
 	echo "Should be: base $gforge_base_dn"
     fi
     # Check bindpw

@@ -18,3 +18,44 @@ replace_file () {
 	fi
     fi
 }
+
+propose_update () {
+    file=$1
+    mode=$2
+    template=gforge/shared/replace_file_$mode
+    if [ -e ${file}.gforge-old ] ; then
+        echo "${file} replacement already wanted, not changing."
+    else
+    	if [ -e ${file} ] ; then
+        	db_fset $template seen false
+        	db_subst $template file $file
+        	db_input high $template || true
+        	db_go || true
+        	db_get $template || true
+        	case "$RET" in
+            	"true")
+                	echo >&2 "Will be replacing file $file with changed version, saving original"
+			cp $file ${file}.gforge-old
+                	;;
+            	"false")
+                	db_fset gforge/shared/file_changed seen false
+                	db_subst gforge/shared/file_changed file $file
+                	db_input high gforge/shared/file_changed || true
+                	db_go || true
+                	;;
+        	esac
+	else
+		echo "WARNING: No $file to modify"
+	fi
+    fi
+}
+
+# Same, but for installation
+propose_update_install () {
+    propose_update $1 install
+}
+
+# Same, but for de-installation
+propose_update_remove () {
+    propose_update $1 remove
+}

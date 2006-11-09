@@ -58,14 +58,17 @@ case "$1" in
 	    /bin/ls \
 	    /bin/sh \
 	    /bin/bash \
-	    /bin/chgrp ; do
-	  if [ -x "$binary" ] ; then
+	    /bin/chgrp \
+	    /lib/security/pam_pgsql.so ; do
+	  if [ -f "$binary" ] ; then
 	      echo "$binary"
 	      ldd $binary | cut -d" " -f3
 	  fi
 	done \
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
+
+	cp -d /lib/ld-* $CHROOTDIR/lib
 
 	# sshd extras
 	# pthread cancel
@@ -137,6 +140,7 @@ FIN
 
 	# Libnss-pgsql related stuffs
 	[ -e /etc/nss-pgsql.conf ] && cp /etc/nss-pgsql.conf $CHROOTDIR/etc
+	[ -e /etc/pam_pgsql.conf ] && cp /etc/pam_pgsql.conf $CHROOTDIR/etc
 	[ "$(echo /lib/libnss_pgsql*)" != "/lib/libnss_pgsql*" ] && cp /lib/libnss_pgsql* $CHROOTDIR/lib
 	[ "$(echo /usr/lib/libnss_pgsql*)" != "/usr/lib/libnss_pgsql*" ] && cp /usr/lib/libnss_pgsql* $CHROOTDIR/usr/lib
 	[ "$(echo /usr/lib/libdb*)" != "/usr/lib/libdb*" ] && cp /usr/lib/libdb* $CHROOTDIR/usr/lib
@@ -156,8 +160,8 @@ FIN
 root:x:0:0:Root:/:/bin/bash
 nobody:x:65534:65534:nobody:/:/bin/false
 FIN
-getent passwd | grep sshd >> $CHROOTDIR/etc/passwd
-getent passwd | grep anonscm-gforge >> $CHROOTDIR/etc/passwd
+	getent passwd | grep sshd >> $CHROOTDIR/etc/passwd
+	getent passwd | grep anonscm-gforge >> $CHROOTDIR/etc/passwd
 	cat > $CHROOTDIR/etc/shadow <<-FIN
 root:*:11142:0:99999:7:::
 nobody:*:11142:0:99999:7:::
@@ -166,7 +170,17 @@ FIN
 root:x:0
 nogroup:x:65534:
 FIN
-getent group | grep anonscm-gforge >> $CHROOTDIR/etc/group
+	getent group | grep anonscm-gforge >> $CHROOTDIR/etc/group
+	cat > $CHROOTDIR/etc/hosts <<-FIN
+127.0.0.1       localhost
+
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+FIN
 
 	;;
 
