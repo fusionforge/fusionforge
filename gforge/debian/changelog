@@ -1,3 +1,11 @@
+gforge (4.5.14-19+2) unstable; urgency=low
+
+  * [Roland] Packages now come from the upstream SVN repository (CVS
+    repository has been abandoned).  No differences in the binary
+    packages, although the source packages grows a bit.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 10 Nov 2006 11:22:08 +0100
+
 gforge (4.5.14-19) unstable; urgency=low
 
   * [Roland] Made the chroot environment a bit more complete, by adding
