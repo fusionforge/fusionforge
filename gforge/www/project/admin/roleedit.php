@@ -82,6 +82,10 @@ if ($role_id=='observer') {
 				$feedback .= ' Successfully Updated Role ';
 			}
 		}
+		//plugin webcal
+			//change assistant for webcal
+			$params = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission_auto',$params);	
 	}
 }
 

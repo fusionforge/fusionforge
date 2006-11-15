@@ -62,7 +62,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$tabcnt=0;	
 	?>
 <script type="text/javascript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/tabber/tabber.js"></script>
-<div id="tabber" class="tabber">
+<div id="tabber" class="tabber" <? plugin_hook('call_user_js');?>>
 <div class="tabbertab" 
 title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 	<?php
@@ -288,6 +288,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
+
 <div class="tabbertab" title="<?php echo $Language->getText('mytab','project'); ?>" >
 <?php
 	/*
@@ -359,6 +360,10 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
+<?php
+//link to webcal
+plugin_hook('call_user_cal') ;
+?>
 </div>
 <?php
 	echo site_user_footer(array());

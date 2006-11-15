@@ -69,6 +69,12 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_added');
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
 		}
 	} else if (getStringFromRequest('rmuser')) {
 		/*
@@ -79,6 +85,12 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_removed');
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
 		}
 	} else if (getStringFromRequest('updateuser')) {
 		/*
@@ -90,6 +102,13 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_updated');
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
+			
 		}
 	} elseif (getStringFromRequest('acceptpending')) {
 		/*
@@ -124,7 +143,7 @@ if (getStringFromRequest('submit')) {
 				$feedback .= 'Rejected';
 			}
 		}
-	}
+	} 
 }
 
 $group->clearError();

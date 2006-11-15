@@ -63,6 +63,10 @@ function activate_group($group_id) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("group_approved", $hook_params) ;
+	
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('add_cal_group',$group_id);
 
 	return true;
 }
@@ -73,6 +77,9 @@ if ($action=='activate') {
 
 	$groups=explode(',', $list_of_groups);
 	array_walk($groups, 'activate_group');
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('add_cal_group',$group_id);
 
 } else if ($action=='delete') {
 	$group_id = getIntFromRequest('group_id');
@@ -80,7 +87,10 @@ if ($action=='activate') {
 	$add_to_can = getStringFromRequest('add_to_can');
 	$response_text = getStringFromRequest('response_text');
 	$response_title = getStringFromRequest('response_title');
-
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('del_cal_group',$group_id);
+	
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_error('Error','Could Not Get Group');

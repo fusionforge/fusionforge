@@ -119,8 +119,14 @@ $user_id = getStringFromRequest('user_id');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
+	//plugin webcal
+	//del webcal user
+	plugin_hook('del_cal_user',$user_id);
 } else if ($action=='activate') {
 	performAction('A', "ACTIVE", $user_id);
+	//plugin webcal
+	//create webcal user
+	plugin_hook('add_cal_user',$user_id);
 } else if ($action=='suspend') {
 	performAction('S', "SUSPENDED", $user_id);
 }

@@ -61,6 +61,10 @@ if (!$u->setEmail($u->getNewEmail())) {
 		$u->getErrorMessage()
 	);
 }
+//plugin webcal change user mail
+	else {
+		plugin_hook('change_cal_mail',user_getid());
+	}
 
 site_user_header(array('title'=>$Language->getText('account_change_email-complete','title')));
 ?>

@@ -47,7 +47,13 @@ if (getStringFromRequest('finished')) {
 	$keys=array_keys($addrole);
 	for ($i=0; $i<count($keys); $i++) {
 		$group->addUser($keys[$i],$addrole[$keys[$i]]);
+		//plugin webcal
+			//change assistant for webcal
+			$params[0] = $keys[$i];
+			$params[1] = $group_id;
+			plugin_hook('change_cal_permission',$params);
 	}
+	$group_id = getIntFromRequest('group_id');
 	Header("Location: index.php?group_id=$group_id&feedback=Successful");
 }
 
