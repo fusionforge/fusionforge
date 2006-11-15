@@ -613,6 +613,9 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
+gforge/plugins/projects_hierarchy/AUTHORS -text
+gforge/plugins/projects_hierarchy/COPYING -text
+gforge/plugins/projects_hierarchy/ChangeLog -text
 gforge/plugins/projects_hierarchy/common/languages/Base.tab -text
 gforge/plugins/projects_hierarchy/common/languages/French.tab -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
