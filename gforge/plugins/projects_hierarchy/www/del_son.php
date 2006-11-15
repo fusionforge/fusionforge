@@ -27,12 +27,17 @@
 
 require_once('pre.php');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+//plugin webcal
+$params[0] =  $_GET['sub_group_id'] ;
+$params[1] =  $_GET['group_id'] ;
+plugin_hook('del_cal_link_father',$params);
 //del link between two projects
 $sql = "DELETE FROM plugin_projects_hierarchy WHERE project_id  = '".$_GET['group_id']."' AND sub_project_id = '".$_GET['sub_group_id']."'";
 //print "<br>".$sql;
 db_begin();
 $test = db_query($sql) or die(db_error());
 db_commit();
+
 ?>
 <script>
 //back to the administration (father)

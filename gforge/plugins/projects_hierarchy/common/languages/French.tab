@@ -25,6 +25,10 @@ project_admin	alert_del	Etes vous sûr de vouloir supprimer le lien?
 project_admin	father	Parent du projet
 project_admin	alert_allow	Etes vous sûr de vouloir autoriser ce projet?
 project_admin	display_link	Liste des liens
+project_admin	share_link	Partage de ressources
+project_admin	navi_link	Lien de navigation
+project_admin	com_father	Commentaire du père :
+project_admin	com	Commentaire :
 project_tree	cat	Par catégorie
 project_tree	tree	Par hiérarchie
 project_tree	tree_project	Arbre des projets

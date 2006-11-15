@@ -28,7 +28,7 @@
 require_once('pre.php');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 //add link between two projects
-$sql = "INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type) VALUES ('".$_GET['group_id']."' , '".$_POST['sub_project_id']."', 'shar')";
+$sql = "INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ('".$_GET['group_id']."' , '".$_POST['sub_project_id']."', 'shar','".$_POST['com']."')";
 //print "<br>".$sql;
 db_begin();
 $test = db_query($sql) or die(db_error());

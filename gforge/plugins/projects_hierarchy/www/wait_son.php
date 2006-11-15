@@ -33,6 +33,11 @@ $sql = "UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  
 db_begin();
 $test = db_query($sql) or die(db_error());
 db_commit();
+//plugin webcal
+$params[0] =  $_GET['sub_group_id'] ;
+$params[1] =  $_GET['group_id'] ;
+plugin_hook('add_cal_link_father',$params);
+
 ?>
 <script>
 //back to the administration (son) 
