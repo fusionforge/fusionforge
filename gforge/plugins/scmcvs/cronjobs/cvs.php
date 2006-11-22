@@ -246,7 +246,7 @@ function add_cvstracker($unix_group_name) {
 }
 
 function add_acl_check($unix_group_name) {
-	global $cvsdir_prefix;
+	global $cvsdir_prefix, $cvs_binary_version;
 
 	$commitinfofile = $cvsdir_prefix."/".$unix_group_name.'/CVSROOT/commitinfo';
 
@@ -254,10 +254,20 @@ function add_acl_check($unix_group_name) {
 	if ( strstr($content, "aclcheck") == FALSE) {
 
 		$commitinfofile = checkout_cvs_file($cvsdir_prefix.'/'.$unix_group_name,'CVSROOT/commitinfo');
-		$aclcheck = "\n#BEGIN adding cvs acl check".
-			"\nALL php -q -d include_path=".ini_get('include_path').
-				" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php %r %p ".
-			"\n#END adding cvs acl check\n";
+		if ( $cvs_binary_version == "1.11" ) {
+			$aclcheck = "\n#BEGIN adding cvs acl check".
+				"\nALL php -q -d include_path=".ini_get('include_path').
+					" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php ".$cvsdir_prefix."/".$unix_group_name.
+				"\n#END adding cvs acl check\n";
+		} else { //it's version 1.12
+			$aclcheck = "\n#BEGIN adding cvs acl check".
+				"\nALL php -q -d include_path=".ini_get('include_path').
+					" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php %r %p ".
+				"\n#END adding cvs acl check\n";
+		}
+
+
+
 		cvs_write_file($commitinfofile, $aclcheck, 1);
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$commitinfofile);
 		release_cvs_file($commitinfofile);

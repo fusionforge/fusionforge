@@ -43,8 +43,8 @@ $repos_co = '/var/svn-co';
 $repos_type = '';
 
 //the name of the access_file
-$access_file = "/opt/gforge/svn_access.conf";
-$password_file = "/opt/gforge/svn_password.conf";
+$access_file = "/var/lib/gforge/svnroot-access";
+$password_file = "/var/lib/gforge/svnroot-authfile";
 
 /*
 	This script create the gforge dav/svn/docman repositories
@@ -146,8 +146,55 @@ while ( $row =& db_fetch_array($res) ) {
 	}
 }
 
+// Now generate the contents for the password file
+$password_file_contents = '';
+$res = db_query("SELECT * FROM users WHERE user_id IN (SELECT DISTINCT user_id FROM user_group ug, group_plugin gp, plugins p
+	WHERE ug.group_id=gp.group_id AND gp.plugin_id=p.plugin_id AND p.plugin_name='scmsvn')");
+$output = "";
+if (!$res) {
+	$err .=  "Error! Database Query Failed: ".db_error();
+	echo $err;
+	cron_entry(21,$err);
+	exit;
+}
+
+while ( $row =& db_fetch_array($res) ) {
+	if (!empty($row["unix_pw"]))
+		$password_file_contents .= $row["user_name"].":".$row["unix_pw"]."\n";
+}
+
+
 writeAccessFile($access_file, $access_file_content);
-writePasswordFile($password_file );
+writePasswordFile($password_file, $password_file_contents);
+
+//
+// Move SVN repositories for deleted groups
+//
+
+// First make sure that the .deleted dir exists
+if (!is_dir($svndir_prefix."/.deleted")) {
+	system("mkdir ".$svndir_prefix."/.deleted");
+}
+
+$res = db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+$err .= db_error();
+$rows = db_numrows($res);
+for($k = 0; $k < $rows; $k++) {
+	$deleted_group_name = db_result($res,$k,'unix_group_name');
+	
+	$repos_dir = $svndir_prefix.'/'.$deleted_group_name;
+	if (is_dir($repos_dir)) {
+		// repository exists
+		system("mv -f $repos_dir $svndir_prefix/.deleted/");
+		system("chown -R root:root $svndir_prefix/.deleted/$deleted_group_name");
+		system("chmod -R o-rwx $svndir_prefix/.deleted/$deleted_group_name");
+	}
+
+	$res2 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
+	$err .= db_error();
+}
+
+
 
 function add2AccessFile($group_id) {
 	$result = "";
@@ -177,23 +224,9 @@ function writeAccessFile($fileName, $access_file_content) {
 	fclose($myFile);
 }
 
-function writePasswordFile($fileName ) {
-	$res = db_query("SELECT * FROM users WHERE user_id IN (SELECT DISTINCT user_id FROM user_group ug, group_plugin gp, plugins p
-		WHERE ug.group_id=gp.group_id AND gp.plugin_id=p.plugin_id AND p.plugin_name='scmsvn')");
-	$output = "";
-	if (!$res) {
-		$err .=  "Error! Database Query Failed: ".db_error();
-		echo $err;
-		cron_entry(21,$err);
-		exit;
-	}
-
-	while ( $row =& db_fetch_array($res) ) {
-		if (!empty($row["unix_pw"]))
-			$output .= $row["user_name"].":".$row["unix_pw"]."\n";
-	}
+function writePasswordFile($fileName, $password_file_contents) {
 	$myFile = fopen( $fileName, "w" );
-	fwrite ( $myFile, $output );
+	fwrite ( $myFile, $password_file_contents );
 	fwrite ( $myFile, 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n");
 	fclose($myFile);
 }

@@ -35,13 +35,39 @@ class ExportProjectSearchQuery extends SearchQuery {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
 			$words = $this->getFormattedWords();
-			$sql = "SELECT headline(group_name, q) as group_name,
-					headline(unix_group_name, q) as unix_group_name,
-					type_id,groups.group_id,headline(short_description, q) as short_description,
-					license,register_time FROM groups, to_tsquery('$words') AS q, groups_idx 
-					WHERE groups.group_id = groups_idx.group_id AND vectors @@ q AND 
-					status IN ('A', 'H') AND is_public='1' AND short_description <> '' 
-					ORDER BY rank(vectors, q) DESC";
+			if(count($this->words)) {
+				$tsquery0 = "headline(unix_group_name, q) as unix_group_name, headline(short_description, q) as short_description";
+				$tsquery = ", groups_idx, to_tsquery('".$words."') q";
+				$tsmatch = "vectors @@ q";
+				$rankCol = "";
+				$tsjoin = 'AND groups.group_id = groups_idx.group_id ';
+				$orderBy = "ORDER BY rank(vectors, q) DESC, group_name ASC";
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = "unix_group_name, short_description";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "";
+				$orderBy = "ORDER BY group_name";
+				$phraseOp = "";
+			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$groupNameCond = $this->getMatchCond('group_name', $this->phrases);
+				$groupDescriptionCond = $this->getMatchCond('short_description', $this->phrases);
+				$groupUnixNameCond = $this->getMatchCond('unix_group_name', $this->phrases);
+				$phraseCond = $phraseOp.' (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			}
+			$sql = "SELECT $tsquery0,
+				type_id,
+				groups.group_id,
+				license,
+				register_time
+				FROM groups $tsquery
+				WHERE status IN ('A', 'H') AND is_public='1' AND short_description <> ''
+				$tsjoin AND ($tsmatch $phraseCond)
+				$orderBy";
 		} else {
 			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
 			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);

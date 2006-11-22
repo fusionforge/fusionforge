@@ -2,6 +2,16 @@
 /***  ViewVC CSS Stylesheet ***/
 /*******************************/
 
+/*** Standard Tags ***/
+html, body {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+a:link    { color: #0000ff; }
+a:visited { color: #880088; }
+a:active  { color: #0000ff; }
+
 img { border: none; }
 table {
   width: 100%;
@@ -11,9 +21,28 @@ table {
 table.auto {
   width: auto;
 }
+table.fixed {
+  width: 100%;
+  table-layout: fixed;
+}
+table.fixed td {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+tr, td, th { vertical-align: top; }
 form { margin: 0; }
 
-/** Navigation Headers ***/
+/*** Icons ***/
+.vc_icon {
+  width: 16px;
+  height: 16px;
+  border: none;
+  padding: 0 1px;
+}
+
+
+/*** Navigation Headers ***/
 .vc_navheader {
   background-color: #cccccc;
 }

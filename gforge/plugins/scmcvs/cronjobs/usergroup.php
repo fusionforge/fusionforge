@@ -205,11 +205,13 @@ $group_orig = file("/etc/group");
 $group = fopen("/etc/group".FILE_EXTENSION, "w");
 
 //	Add the groups from the gforge database
-$group_res = db_query("SELECT group_id, unix_group_name, unix_gid, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
+$group_res = db_query("SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
 $err .= db_error();
+
+$gforge_groups = array();
 for($i = 0; $i < db_numrows($group_res); $i++) {
     $gforge_groups[] = db_result($group_res,$i,'unix_group_name');
-    $gids[db_result($group_res,$i,'unix_group_name')] = db_result($group_res,$i,'unix_gid');
+    $gids[db_result($group_res,$i,'unix_group_name')] = db_result($group_res,$i,'group_id') + 50000;	// 50000: hardcoded value (for now).
 }
 
 for ($i=0; $i < count($group_orig); $i++) {

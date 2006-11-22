@@ -88,16 +88,40 @@ class DocsSearchQuery extends SearchQuery {
 		}
 		$words = $this->getFormattedWords();
 		$group_id=$this->groupId;
+
+		if(count($this->words)) {
+			$tsquery0 = "headline(doc_data.title, q) AS title, headline(doc_data.description, q) AS description";
+			$tsquery = ", doc_data_idx, to_tsquery('".$words()."') q";
+			$tsmatch = "vectors @@ q";
+			$rankCol = "";
+			$tsjoin = 'AND doc_data.docid = doc_data_idx.docid  ';
+			$orderBy = "ORDER BY rank(vectors, q) DESC, groupname ASC";
+			$phraseOp = $this->getOperator();
+		} else {
+			$tsquery0 = "title, description";
+			$tsquery = "";
+			$tsmatch = "";
+			$tsjoin = "";
+			$rankCol = "";
+			$orderBy = "ORDER BY groupname";
+			$phraseOp = "";
+		}
+
+		$phraseCond = '';
+		if(count($this->phrases)) {
+			$titleCond = $this->getMatchCond('title', $this->phrases);
+			$descCond = $this->getMatchCond('description', $this->phrases);
+			$phraseCond = $phraseOp.' (('.$titleCond.') OR ('.$descCond.'))';
+		}
 		
-		$sql="SELECT doc_data.docid, headline(doc_data.title, q) AS title,
-		headline(doc_data.description, q) AS description, doc_groups.groupname
-		FROM doc_data, doc_groups, to_tsquery('$words') AS q, doc_data_idx
-		WHERE doc_data.doc_group = doc_groups.doc_group
-		AND  doc_data.docid = doc_data_idx.docid AND vectors @@ q
-		AND doc_data.group_id = '$group_id'
-		$sections
-		AND doc_data.stateid IN ($nonPublic)
-		ORDER BY rank(vectors, q) DESC";		
+		$sql="SELECT doc_data.docid, $tsquery0, doc_groups.groupname
+			FROM doc_data, doc_groups $tsquery
+			WHERE doc_data.doc_group = doc_groups.doc_group
+			$tsjoin AND ($tsmatch $phraseCond )
+			AND doc_data.group_id = '$group_id'
+			$sections
+			AND doc_data.stateid IN ($nonPublic)
+			$orderBy";
 		return $sql;
 	}
 

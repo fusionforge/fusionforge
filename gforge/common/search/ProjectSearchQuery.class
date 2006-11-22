@@ -34,7 +34,38 @@ class ProjectSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$sql = "SELECT * FROM groups_search('".$this->getFormattedWords()."')";
+			if(count($this->words)) {
+				$tsquery0 = "headline(group_name, q) as group_name, " .
+						"unix_group_name, " .
+						"headline(short_description, q) as short_description";
+				$words = $this->getFormattedWords();
+				$tsquery = ", to_tsquery('$words') AS q, groups_idx as i ";
+				$tsmatch = "vectors @@ q";
+				$rankCol = "";
+				$tsjoin = 'AND g.group_id = i.group_id';
+				$distinctOn = "rank(vectors, q), group_name";
+				$orderBy = "ORDER BY rank(vectors, q) DESC, group_name";
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = "group_name, unix_group_name, short_description";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "";
+				$distinctOn = "group_name";
+				$orderBy = "ORDER BY group_name";
+				$phraseOp = "";
+			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$groupNameCond = $this->getMatchCond('group_name', $this->phrases);
+				$groupDescriptionCond = $this->getMatchCond('short_description', $this->phrases);
+				$groupUnixNameCond = $this->getMatchCond('unix_group_name', $this->phrases);
+				$phraseCond = $phraseOp.' (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			}
+			$sql = "SELECT DISTINCT ON ($distinctOn) type_id, g.group_id, " .$tsquery0.
+					" FROM groups AS g ".$tsquery.
+					" WHERE g.status in ('A', 'H') AND ($tsmatch $phraseCond) $tsjoin $orderBy";
 		} else {
 			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
 			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);

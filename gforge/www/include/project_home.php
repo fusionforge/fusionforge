@@ -42,7 +42,7 @@ if ($project->getStatus() == 'H') {
 }
 
 if ($project->getDescription()) {
-	print "<p>" . $project->getDescription() . '</p>';
+	print "<p>" . nl2br($project->getDescription()) . '</p>';
 } else {
 	print "<p>" . $Language->getText('group', 'nodescription') . '</p>';
 }

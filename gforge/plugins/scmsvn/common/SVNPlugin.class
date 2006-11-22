@@ -120,7 +120,8 @@ class SVNPlugin extends SCM {
 						print '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
 					}
 					if ($this->use_dav) {
-						print '<tt>svn checkout http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/>';
+						print '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
+						print $Language->getText('plugin_scmsvn', 'anonpasswd').'<br/>';
 					}
 					print '</p>';
 				}

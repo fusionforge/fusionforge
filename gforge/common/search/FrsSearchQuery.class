@@ -53,15 +53,46 @@ class FrsSearchQuery extends SearchQuery {
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
-			$nonPublic = 'false';
-			$sections = '';
-			if ($this->showNonPublic) {
-				$nonPublic = 'true';
+			if(count($this->words)) {
+				$tsquery0 = "headline(frs_package.name, q) AS package_name, headline(frs_release.name, q) as release_name";
+				$tsquery = ", to_tsquery('".$this->getFormattedWords()."') AS q, frs_release_idx r, frs_file_idx f";
+				$tsmatch = "(f.vectors @@ q OR r.vectors @@ q)";
+				$rankCol = "";
+				$tsjoin = 'AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id';
+				$orderBy = "ORDER BY frs_package.name, frs_release.name";
+				$phraseOp = $this->getOperator();
+			} else {
+				$tsquery0 = "frs_package.name as package_name, frs_release.name as release_name";
+				$tsquery = "";
+				$tsmatch = "";
+				$tsjoin = "";
+				$rankCol = "";
+				$orderBy = "ORDER BY frs_package.name, frs_release.name";
+				$phraseOp = "";
 			}
+			$phraseCond = '';
+			if(count($this->phrases)) {
+				$phraseCond .= $phraseOp.'(('.$this->getMatchCond('frs_release.changes', $this->phrases).')'
+					. ' OR ('.$this->getMatchCond('frs_release.notes', $this->phrases).')'
+					. ' OR ('.$this->getMatchCond('frs_release.name', $this->phrases).')'
+					. ' OR ('.$this->getMatchCond('frs_file.filename', $this->phrases).'))';
+			}
+			$sql = 'SELECT '.$tsquery0.', frs_release.release_date, frs_release.release_id, users.realname'
+				. ' FROM frs_file, frs_release, users, frs_package'.$tsquery
+				. ' WHERE frs_release.released_by = users.user_id'
+				. $tsjoin
+				. ' AND frs_package.package_id = frs_release.package_id'
+				. ' AND frs_file.release_id=frs_release.release_id'
+				. ' AND frs_package.group_id='.$this->groupId;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$sections = $this->sections;
+				$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
 			}
-			$sql = "SELECT * FROM frs_search('".$this->getFormattedWords()."', ".$this->groupId.", '$sections', $nonPublic)";
+			if(!$this->showNonPublic) {
+				$sql .= ' AND is_public=1';
+			}
+
+			$sql .= ' AND (  '.$tsmatch.' '.$phraseCond.') '.$orderBy;
 		} else {
 			$sql = 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname'
 				. ' FROM frs_file, frs_release, users, frs_package'

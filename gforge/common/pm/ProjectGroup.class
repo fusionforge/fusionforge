@@ -413,52 +413,131 @@ class ProjectGroup extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
+
 		db_begin();
-		db_query("DELETE FROM project_category
-			WHERE group_project_id='".$this->getID()."'");
-//echo '1'.db_error();
-		db_query("DELETE FROM project_perm
-			WHERE group_project_id='".$this->getID()."'");
-//echo '2'.db_error();
-		db_query("DELETE FROM project_assigned_to
+
+                $sql = "DELETE FROM project_perm WHERE group_project_id='".$this->getID()."'";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+
+                $sql = "DELETE FROM project_assigned_to
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_assigned_to.project_task_id)");
-//echo '4'.db_error();
-		db_query("DELETE FROM project_dependencies
+			AND project_task.project_task_id=project_assigned_to.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_dependencies
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_dependencies.project_task_id)");
-//echo '5'.db_error();
-		db_query("DELETE FROM project_history
+			AND project_task.project_task_id=project_dependencies.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_history
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_history.project_task_id)");
-//echo '6'.db_error();
-		db_query("DELETE FROM project_messages
+			AND project_task.project_task_id=project_history.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_messages
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_messages.project_task_id)");
-//echo '7'.db_error();
-		db_query("DELETE FROM project_task_artifact
+			AND project_task.project_task_id=project_messages.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_task_artifact
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_task_artifact.project_task_id)");
-//echo '8'.db_error();
-		db_query("DELETE FROM rep_time_tracking
+			AND project_task.project_task_id=project_task_artifact.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM rep_time_tracking
 			WHERE EXISTS (SELECT project_task_id FROM project_task
 			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=rep_time_tracking.project_task_id)");
-//echo '9'.db_error();
-		db_query("DELETE FROM project_task
-			WHERE group_project_id='".$this->getID()."'");
-//echo '10'.db_error();
-		db_query("DELETE FROM project_group_list
-			WHERE group_project_id='".$this->getID()."'");
-//echo '11'.db_error();
-		db_query("DELETE FROM project_counts_agg
-			WHERE group_project_id='".$this->getID()."'");
-//echo '12'.db_error();
+			AND project_task.project_task_id=rep_time_tracking.project_task_id)";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_task
+			WHERE group_project_id='".$this->getID()."'";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+		$sql = "DELETE FROM project_category WHERE group_project_id='".$this->getID()."'";
+		$res = db_query($sql);
+
+		if (!$res)
+		{
+			$this->setError('DATABASE '.db_error().' QUERY='.$sql);
+			return false;
+		}
+
+                $sql = "DELETE FROM project_group_list
+			WHERE group_project_id='".$this->getID()."'";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+                $sql = "DELETE FROM project_counts_agg
+			WHERE group_project_id='".$this->getID()."'";
+                $res = db_query($sql);
+
+                if (!$res)
+                {
+                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        return false;
+                }
+
+
 		db_commit();
 		return true;
 	}

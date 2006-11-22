@@ -21,4 +21,5 @@ plugin_scmsvn	adds	Adds
 plugin_scmsvn	commits	Updates
 plugin_scmsvn	unknown	Unknown
 plugin_scmsvn	total	Total
+plugin_scmsvn	anonpasswd	The password is 'anonsvn'
 plugin_scmsvn	svn_updates	<strong>$1</strong> updates, <strong>$2</strong> adds

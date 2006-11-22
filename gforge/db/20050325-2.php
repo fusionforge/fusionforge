@@ -244,6 +244,6 @@ for ($i=0; $i<db_numrows($res); $i++) {
 db_commit();
 
 
-echo "SUCCESS";
+echo "\nSUCCESS";
 
 ?>

@@ -91,8 +91,17 @@ function installSUSE() {
 	passthru("/etc/init.d/apache2 start");
 }
 
+function installArk() {
+	INFO("Installing packages: Executing apt-get. Please wait...\n\n\n");
+	passthru("apt-get update");
+	passthru("apt-get -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion subversion-server-httpd postfix rcs mod_ssl wget ssh xinetd");
+
+	INFO("Restarting PostgreSQL\n");
+	passthru("/sbin/service postgresql restart");
+}
+
 if (count($argv) < 2) {
-    echo "Usage: pre-install.php [RHEL4|DEBIANSARGE|FC3|FC4]\n";
+	echo "Usage: pre-install.php [RHEL4|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
     check_version();
 } else {
     $platform = $argv[1];
@@ -107,6 +116,8 @@ if (count($argv) < 2) {
 		installDebian(); /* Debian and friends */
 	} elseif ($platform == 'SUSE') {
 		installSUSE();
+	} elseif ($platform == 'ARK') {
+		installArk();
 	} else {
 		echo 'UNSUPPORTED PLATFORM';
 	}
