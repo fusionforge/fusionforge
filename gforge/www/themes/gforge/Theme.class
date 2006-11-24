@@ -459,6 +459,12 @@ if ($sys_show_source) {
         $TABS_TITLES[]=$Language->getText('group','short_summary');
         (($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
+		// Project Activity tab
+
+		$TABS_DIRS[]='/activity/?group_id='. $group;
+		$TABS_TITLES[]=$Language->getText('group','short_activity');
+		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
+
         if (user_ismember($group,'A')) {
             // Project Admin
             $TABS_DIRS[]='/project/admin/?group_id='. $group;
