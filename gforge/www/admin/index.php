@@ -162,7 +162,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="cronman.php"><?php echo $Language->getText('admin_index','cronman'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo $Language->getText('admin_index','pluginman'); ?></a></li>
 	<li><a href="configman.php"><?php echo $Language->getText('admin_index','configman'); ?></a></li>
-	<?php plugin_hook("site_admin_option_hook", false); ?>
+	
+	<?php 
+	plugin_hook("quota_admin_tab");
+	plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
 <?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>

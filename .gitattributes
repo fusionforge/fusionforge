@@ -661,6 +661,16 @@ gforge/plugins/projects_hierarchy/www/img/trash.gif -text
 gforge/plugins/projects_hierarchy/www/index.php -text
 gforge/plugins/projects_hierarchy/www/softwaremap.php -text
 gforge/plugins/projects_hierarchy/www/wait_son.php -text
+gforge/plugins/quota_management/INSTALL -text
+gforge/plugins/quota_management/common/languages/Base.tab -text
+gforge/plugins/quota_management/common/quota_management-init.php -text
+gforge/plugins/quota_management/common/quota_managementPlugin.class -text
+gforge/plugins/quota_management/cronjobs/quota_update.pl -text
+gforge/plugins/quota_management/db/quota_management-init.sql -text
+gforge/plugins/quota_management/www/index.php -text
+gforge/plugins/quota_management/www/quota.php -text
+gforge/plugins/quota_management/www/quota_admin.php -text
+gforge/plugins/quota_management/www/quota_project.php -text
 gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text
 gforge/plugins/svntracker/README -text
