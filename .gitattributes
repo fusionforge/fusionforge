@@ -968,6 +968,7 @@ gforge/www/include/HTMLSupport.class -text svneol=unset#application/octet-stream
 gforge/www/include/SmilieSupport.class -text svneol=unset#application/octet-stream
 gforge/www/include/SmilieSupportHtml.class -text svneol=unset#application/octet-stream
 gforge/www/include/TextSupport.class -text svneol=unset#application/octet-stream
+gforge/www/include/unicode.php -text
 gforge/www/jscook/ThemePanel/arrow.gif svneol=native#unset
 gforge/www/jscook/ThemePanel/arrowdown.gif svneol=native#unset
 gforge/www/jscook/ThemePanel/blank.gif svneol=native#unset

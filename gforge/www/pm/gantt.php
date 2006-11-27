@@ -7,6 +7,7 @@ if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');
 require_once('common/pm/ProjectTaskFactory.class');
+require_once('www/include/unicode.php');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
@@ -77,13 +78,14 @@ $rows=count($pt_arr);
 for ($i=0; $i<$rows; $i++) {
 	// Format the bar for the first activity
 	// ($row,$title,$startdate,$enddate)
-	$activity[$i] = new GanttBar ($i, $pt_arr[$i]->getSummary(), date('Y-m-d',$pt_arr[$i]->getStartDate()), date('Y-m-d',$pt_arr[$i]->getEndDate()-86400));
-
+	$activity[$i] = new GanttBar ($i, convert_unicode($pt_arr[$i]->getSummary()), date('Y-m-d',$pt_arr[$i]->getStartDate()), date('Y-m-d',$pt_arr[$i]->getEndDate()-86400));
+	
 	// Yellow diagonal line pattern on a red background
 	$activity[$i]->SetPattern(BAND_RDIAG, "yellow");
 	$activity[$i]->SetFillColor ("red");
 	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? ($pt_arr[$i]->getPercentComplete()/100) : 0));
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
+	$activity[$i]->title->SetFont( FF_ARIAL, FS_NORMAL,9);
 
 //	global $sys_gantt_task_font_family,$sys_gantt_task_font_style,$sys_gantt_task_font_size;
 //	settitlefont($activity[$i],$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
