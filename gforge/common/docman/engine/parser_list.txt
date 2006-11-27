@@ -1,0 +1,8 @@
+# parser_list.txt
+# Liste des documents connus avec le parseur associé
+# Cette liste est utilisée pour fabriquer les mots clé pour la recherche dans le contenu des documents
+# Le format texte est traité directement par un parseur approprié (engine/parser_text.py).
+# Les autres formats doivent être convertis au format texte avant d'être envoyées au parseur de base.
+text/plain	parser_text.php
+application/pdf	parser_pdf.php
+application/vnd.sun.xml.writer	parser_oo.php

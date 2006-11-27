@@ -75,6 +75,9 @@ function docman_header($title,$pagehead,$style='xyz') {
 	$menu_links[]='/docman/new.php?group_id='.$group_id;
 	$menu_text[]=$Language->getText('docman','view_doc');
 	$menu_links[]='/docman/index.php?group_id='.$group_id;
+	$menu_text[]=$Language->getText('docman_search','search_title');
+	$menu_links[]='/docman/search.php?group_id='.$group_id;
+	
 
 	if (session_loggedin()) {
 		$perm =& $project->getPermission(session_get_user());
@@ -187,7 +190,6 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0"))." ";
 			echo $Language->getText('docman_admin', 'add_docs');
 			echo "</a>";
-			
 			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
 				docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
 			}
@@ -229,6 +231,9 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							$docs[$j]->getName().
 							"</a> - " . $tooltip . "</li>".
 							"(".$docs[$j]->getFileSize()." ".$Language->getText("docman", "bytes").")";
+							//add description
+							echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+							echo "<i>".$docs[$j]->getDescription()."</i>";
 				}
 				echo "</ul>";
 			}

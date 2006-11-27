@@ -61,7 +61,7 @@ if (getStringFromRequest('submit')) {
 		exit_missing_param();
 	}
 
-	$d = new Document($g);
+	$d = new Document($g, false, false,$sys_engine_path);
 	if (!$d || !is_object($d)) {		
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
 	} elseif ($d->isError()) {	

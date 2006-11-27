@@ -1,6 +1,14 @@
 * text=auto !eol
 gforge/SYNCREV -text
 gforge/backend/shell/apache.sh svneol=native#unset
+gforge/common/docman/Parsedata.class -text
+gforge/common/docman/engine/majwords.php -text
+gforge/common/docman/engine/majwords.sh -text
+gforge/common/docman/engine/parser_list.txt -text
+gforge/common/docman/engine/parser_oo.php -text
+gforge/common/docman/engine/parser_pdf.php.php -text
+gforge/common/docman/engine/parser_text.inc.php -text
+gforge/common/docman/engine/parser_text.php -text
 gforge/common/include/TextSanitizer.class -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
@@ -878,6 +886,9 @@ gforge/plugins/webcalendar/www/year.php -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
+gforge/www/docman/include/vtemplate.class.php -text
+gforge/www/docman/search.php -text
+gforge/www/docman/search.tpl.html -text
 gforge/www/env.inc.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class -text

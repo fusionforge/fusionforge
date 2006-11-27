@@ -1830,6 +1830,7 @@ rbac_edit	addrole	Add Role
 rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
+rbac_edit	webcal	Webcalendar
 reporting	add	Add
 reporting	administrative	Administrative
 reporting	area	Areas
