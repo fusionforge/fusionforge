@@ -11,6 +11,7 @@ gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
 gforge/common/include/TextSanitizer.class -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
+gforge/cronjobs/ftp_create_group_access.php -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
