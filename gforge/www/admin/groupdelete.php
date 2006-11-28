@@ -46,6 +46,7 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error('Error',$group->getErrorMessage());
 	} else {
+		plugin_hook('delete_link',$_GET['group_id']) ;
 		header("Location: /admin/?feedback=DELETED");
 	}
 }
