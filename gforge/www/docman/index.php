@@ -44,6 +44,17 @@ if ($dgf->isError()) {
 	exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
 }
 
+
+// Save chosen language in docman and print document details in documents list
+if ($language_id)
+{
+       setcookie("my_language_id", "$language_id", time()+3600*24*999);
+}
+if (!$language_id && isset($_COOKIE["my_language_id"]))
+{
+       $language_id = $_COOKIE["my_language_id"];
+}
+
 // the "selected language" variable will be used in the links to navigate the
 // document groups tree
 
