@@ -1,4 +1,4 @@
-#!/usr/local/bin/php -q
+#!/usr/bin/php -q
 <?php
 /* $Id: send_reminders.php,v 1.21.2.3 2006/06/07 15:10:46 cknudsen Exp $
  *
