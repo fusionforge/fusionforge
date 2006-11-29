@@ -14,7 +14,7 @@ fi
 BDIR="/var/lib/gforge/chroot /var/lib/mailman /etc"
 PATTERNS="mailman postgresql exim4 gforge"
 
-DEST="/backup"
+DEST="/var/lib/gforge/backup"
 
 # BACKUPDIR=`date --date yesterday +%A`
 BACKUPDIR=`date +%A`
