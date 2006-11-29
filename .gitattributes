@@ -791,7 +791,6 @@ gforge/plugins/webcalendar/www/includes/php-dbi.php -text
 gforge/plugins/webcalendar/www/includes/print_styles.css -text
 gforge/plugins/webcalendar/www/includes/settings.php -text
 gforge/plugins/webcalendar/www/includes/settings.php.orig -text
-gforge/plugins/webcalendar/www/includes/settings_old.php -text
 gforge/plugins/webcalendar/www/includes/site_extras.php -text
 gforge/plugins/webcalendar/www/includes/styles.php -text
 gforge/plugins/webcalendar/www/includes/trailer.php -text
