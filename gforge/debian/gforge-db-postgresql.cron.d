@@ -48,4 +48,5 @@
 30 17 * * * root [ -x /usr/lib/gforge/bin/get_news_notapproved.pl ] && /usr/lib/gforge/bin/get_news_notapproved.pl -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Daily incremental backup to /backup
-15 23 * * * root [ -x /usr/lib/gforge/bin/gforge-db-backup.sh ] && /usr/lib/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1
+# we have to discuss this 
+#15 23 * * * root [ -x /usr/lib/gforge/bin/gforge-db-backup.sh ] && /usr/lib/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1
