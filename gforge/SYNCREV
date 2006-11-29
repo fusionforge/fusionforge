@@ -2,3 +2,6 @@
 ----------- 19/Nov/2006
 svn merge --ignore-ancestry https://svn.gforge.org/svn/gforge/trunk/gforge@5824 https://svn.gforge.org/svn/gforge/trunk/gforge@5865 Branch_4_6dev/gforge
 new sync rev with trunk is 5865
+----------- 29/Nov/2006
+svn merge https://svn.gforge.org/svn/gforge/trunk/gforge@5866 https://svn.gforge.org/svn/gforge/trunk/gforge@5879 Branch_4_6dev/gforge
+new sync rev with trunk is 5879
