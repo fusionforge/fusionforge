@@ -632,7 +632,7 @@ gforge/plugins/projects_hierarchy/common/languages/Base.tab -text
 gforge/plugins/projects_hierarchy/common/languages/French.tab -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class -text
-gforge/plugins/projects_hierarchy/db/project_hierarchy-init.sql -text
+gforge/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
 gforge/plugins/projects_hierarchy/www/add_link.php -text
 gforge/plugins/projects_hierarchy/www/add_son.php -text
 gforge/plugins/projects_hierarchy/www/del_father.php -text
