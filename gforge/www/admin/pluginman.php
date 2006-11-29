@@ -142,7 +142,7 @@ if (getStringFromRequest('update')) {
 				if (is_file($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php')) {
 				include($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php');		
 				} else {
-					$feedback .= $Language->getText('pluginman','successnoinit');
+					
 				}
 			}
 		}
