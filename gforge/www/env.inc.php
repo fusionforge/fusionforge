@@ -18,8 +18,8 @@ $gfRequestTime = microtime( true );
 $IP = dirname(dirname( __FILE__ )) ;
 //define( 'GF_INSTALL_PATH', $IP );
 $sep = PATH_SEPARATOR;
-if( !ini_set( "include_path", "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep:" ) ) {
-        set_include_path( "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep:" );
+if( !ini_set( "include_path", "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins" ) ) {
+        set_include_path( "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins" );
 }
 ini_set( 'memory_limit', '20M' );
 #echo '['.$IP.']';
