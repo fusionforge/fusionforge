@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 #
 # This script will update a pre-0.9.7 WebCalendar database to have the
 # correct tables for 0.9.7.
