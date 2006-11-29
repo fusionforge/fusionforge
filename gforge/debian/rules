@@ -96,6 +96,7 @@ install: build
 	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php \
 		$(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes
 	chown www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	chmod 600 $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
 	ln -s /var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php \
 		$(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php
 	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/tools/*.pl
