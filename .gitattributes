@@ -693,6 +693,7 @@ gforge/plugins/svntracker/www/newcommit.php -text
 gforge/plugins/webcalendar/AUTHORS -text
 gforge/plugins/webcalendar/COPYING -text
 gforge/plugins/webcalendar/ChangeLog -text
+gforge/plugins/webcalendar/README -text
 gforge/plugins/webcalendar/common/languages/Base.tab -text
 gforge/plugins/webcalendar/common/languages/French.tab -text
 gforge/plugins/webcalendar/common/webcalendar-init.php -text
