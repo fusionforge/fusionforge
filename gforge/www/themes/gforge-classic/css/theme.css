@@ -5,7 +5,7 @@ BODY {
 		margin-left: 3;
 		margin-right: 3;
 		margin-bottom: 3;
-		background-image: url("/themes/gforge/images/theme-top-blue.png");
+		background-image: url("../images/theme-top-blue.png");
 	}
 ol,ul,p,body,td,tr,th,form { font-family: verdana,arial,helvetica,sans-serif; font-size:small;
 		color: #333333; }
@@ -45,6 +45,19 @@ A.lnkutility:hover { COLOR: #ffffff }
 
 
 /* $Id$ */
+/* header style */
+.header {
+//background: rgb(66, 69, 82) url("../images/theme-top-blue.png") top left
+background: url("../images/theme-top-blue.png") top left
+repeat-x;
+/* padding-right: 1em; */
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 0;
+margin: 0 0 0 0;
+vertical-align: top;
+}
+
 
 /*--------------------------------------------------
   REQUIRED to hide the non-active tab content.

@@ -90,33 +90,7 @@ class GForgeTemplate extends QuickTemplate {
 		<?php $this->html('headscripts') ?>
 
 	<!-- GFORGE Stylesheet BEGIN -->
-	<?php
-		/* check if a personalized css stylesheet exist, if yes include only
-   		this stylesheet
-   		new stylesheets should use the <themename>.css file
-		*/
-		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
-		if (file_exists($theme_cssfile)){
-			echo '
-	<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>
-			';
-		} else {
-		/* if this is not our case, then include the compatibility stylesheet
-   		that contains all removed styles from the code and check if a
-   		custom stylesheet exists. 
-   		Used for compatibility with existing stylesheets
-		*/
-		?>
-	<link rel="stylesheet" type="text/css" href="/themes/css/gforge-compat.css" />
-		<?php
-		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
-		if (file_exists($theme_cssfile)){
-			echo '
-	<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
-			';
-		}
-	}
-?>
+	<?php $GLOBALS['HTML']->headerCSS(); ?>
 	<!-- GFORGE Stylesheet END -->
 </head>
 
@@ -125,69 +99,7 @@ class GForgeTemplate extends QuickTemplate {
  class="<?php $this->text('nsclass') ?> <?php $this->text('dir') ?>">
 
 	<!-- GFORGE BodyHeader BEGIN -->
-<table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable" >
-	<tr>
-		<td><a href="/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
-		<td><?php echo $GLOBALS['HTML']->searchBox(); ?></td>
-		<td align="right"><?php
-			global $Language;
-			if (session_loggedin()) {
-				?>
-				<a class="lnkutility" href="/account/logout.php?return_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo $Language->getText('common','logout'); ?></a><br />
-				<a class="lnkutility" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
-				<?php
-			} else {
-				?>
-				<b><a class="lnkutility" href="/account/login.php?return_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo $Language->getText('common','login'); ?></a></b><br />
-				<b><a class="lnkutility" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
-				<?php
-			}
-			echo $GLOBALS['HTML']->quickNav();
-
-		?></td>
-		<td>&nbsp;&nbsp;</td>
-	</tr>
-
-</table>
-<table border="0" width="100%" cellspacing="0" cellpadding="0" >
-	<tr>
-		<td>&nbsp;</td>
-		<td colspan="3">
-		<?php echo $GLOBALS['HTML']->outerTabs($params); ?>
-		</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td align="left" class="toptab" width="9"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
-		<td class="toptab" width="30"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td class="toptab"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="toptab" width="30"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td align="right" class="toptab" width="9"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
-	</tr>
-	<tr>
-		<!-- Outer body row -->
-		<td class="toptab"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
-		<td valign="top" width="99%" class="toptab" colspan="3">
-			<!-- Inner Tabs / Shell -->
-			<table border="0" width="100%" cellspacing="0" cellpadding="0">
-			<?php if (isset($params['group']) && $params['group']) { ?>
-			<tr>
-				<td>&nbsp;</td>
-				<td>
-				<?php echo $GLOBALS['HTML']->projectTabs($params['toptab'],$params['group']); ?>
-				</td>
-				<td>&nbsp;</td>
-			</tr>
-			<?php } ?>
-			<tr>
-				<td align="left" class="projecttab" width="9"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-				<td class="projecttab" ><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" class="projecttab"  width="9"><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
-			</tr>
-
-			<tr>
-				<td class="projecttab" ><img src="<?php echo $GLOBALS['HTML']->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
-				<td valign="top" width="99%" class="projecttab" >
+	<?php $GLOBALS['HTML']->bodyHeader($params); ?>
 	<!-- GFORGE BodyHeader END -->
 
 	<div id="globalWrapper">

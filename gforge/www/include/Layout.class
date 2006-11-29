@@ -97,34 +97,8 @@ class Layout extends Error {
 			echo $activity;
 		}
 	?>
-<?
+	<?php $this->headerCSS(); ?>
 
-/* check if a personalized css stylesheet exist, if yes include only
-   this stylesheet
-   new stylesheets should use the <themename>.css file
-*/
-$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
-if (file_exists($theme_cssfile)){
-echo '
-<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
-}
-else
-{
-/* if this is not our case, then include the compatibility stylesheet
-   that contains all removed styles from the code and check if a
-   custom stylesheet exists. 
-   Used for compatibility with existing stylesheets
-*/
-echo '
-<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/css/gforge-compat.css" />';
-$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
-if (file_exists($theme_cssfile)){
-echo '
-<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
-';
-}
-}
-?>
 	<script language="JavaScript" type="text/javascript">
 	<!--
 
@@ -138,18 +112,49 @@ echo '
 	// -->
 	<?php plugin_hook ("javascript",false) ; ?>
 	</script>
-<?php plugin_hook ('cssfile',$this); ?>
 </head>
 <?php 
-
 	} 
+	
+	function headerCSS() {
+		/* check if a personalized css stylesheet exist, if yes include only
+   		this stylesheet
+   		new stylesheets should use the <themename>.css file
+		*/
+		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
+		if (file_exists($theme_cssfile)){
+			echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
+		} else {
+		/* if this is not our case, then include the compatibility stylesheet
+   		that contains all removed styles from the code and check if a
+   		custom stylesheet exists. 
+   		Used for compatibility with existing stylesheets
+		*/
+			echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/css/gforge-compat.css" />';
+			$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
+			if (file_exists($theme_cssfile)){
+				echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />';
+			}
+		}
+		plugin_hook ('cssfile',$this);
+	}
 
 	function header($params) {
 		global $Language;
 
 		$this->headerStart($params); ?>
-<body style="background-image: url(<?php echo $this->imgroot.'theme-top-blue.png'; ?>)" >
+<body>
+		<?php
+		$this->bodyHeader($params);
+	}
 
+	function bodyHeader($params){
+		global $Language;
+		?>
+<div class="header">
 <table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
 
 	<tr>
@@ -290,6 +295,7 @@ if (isset($params['group']) && $params['group']) {
 ?>
 
 </body>
+</div>
 </html>
 <?php
 
