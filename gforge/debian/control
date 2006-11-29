@@ -187,7 +187,7 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
 
 Package: gforge-ftp-proftpd
 Architecture: all
-Depends: gforge-common, gforge-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0
+Depends: gforge-common, gforge-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, php4-cli
 Provides: gforge-ftp
 Conflicts: gforge-ftp
 Description: collaborative development tool - FTP management (using ProFTPd)
