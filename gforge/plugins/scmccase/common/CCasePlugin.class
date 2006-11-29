@@ -35,7 +35,7 @@ class CCasePlugin extends SCM {
 		$this->hooks[] = "group_approved";
 		$this->hooks[] = "scm_plugin";
 
-                require_once('/etc/gforge/plugins/scmccase/config.php') ;
+                require_once('plugins/scmccase/config.php') ;
 		
 		$this->default_ccase_server = $default_ccase_server ;
 		$this->this_server = $this_server ;
