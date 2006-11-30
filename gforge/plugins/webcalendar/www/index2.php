@@ -150,7 +150,7 @@ if($row[0] < 1 ){
 	$row_admin = db_fetch_array($res_admin);
 	$row[0] = $row_admin[0];
 } 
-elseif( $row[0] < 1) {
+if( $row[0] < 1) {
 	//verif si admin 
 	$sql_admin = "SELECT COUNT(*) FROM  webcal_user,users WHERE users.user_name = webcal_user.cal_login AND users.user_id = '".$user_id."' AND  cal_is_admin = 'Y'" ;	
 	$res_admin = db_query($sql_admin);

@@ -22,7 +22,7 @@ fwrite($handle,$fichier_conf);
 fclose($handle);
 
 //user
-$query = "SELECT user_name,user_pw,email,user_id FROM users WHERE NOT user_name='None' AND user_id > 99";
+$query = "SELECT user_name,user_pw,email,user_id FROM users WHERE NOT user_name='None' ";
 $res = db_query($query);
 echo db_error();
 while ($row = db_fetch_array($res)) {
