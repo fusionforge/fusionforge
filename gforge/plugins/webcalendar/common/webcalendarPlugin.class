@@ -50,6 +50,7 @@ class webcalendarPlugin extends Plugin {
 		$this->hooks[] = "add_cal_link_father_event"; // add a link between son and father
 		$this->hooks[] = "change_cal_password"; //change the password a webcal user
 		$this->hooks[] = "change_cal_mail"; //change the mail a webcal user
+	        $this->hooks[] = "cal_link_group"; //a link to group calendar
 	}
 
 	function CallHook ($hookname, $params) {
@@ -94,17 +95,6 @@ class webcalendarPlugin extends Plugin {
 		} elseif ($hookname == "userisactivecheckbox") {
 			//check if user is active
 			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_webcalendarplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
- 			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "userisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
@@ -524,6 +514,12 @@ class webcalendarPlugin extends Plugin {
 				}
 								
 						
+		}
+		elseif ($hookname == "cal_link_group" ){
+		// www/include/project_home.php line 418
+		//params = group_id
+		print '<hr size="1" />';
+		print '<a href="/plugins/webcalendar/index2.php?type=group&group_id='.$params.'">Webcalendar</a> ';
 		}
 		 
 	}
