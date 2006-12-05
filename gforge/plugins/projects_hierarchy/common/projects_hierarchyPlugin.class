@@ -82,17 +82,6 @@ class projects_hierarchyPlugin extends Plugin {
 		} elseif ($hookname == "userisactivecheckbox") {
 			//check if user is active
 			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_projects_hierarchyplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
- 			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "userisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
@@ -211,18 +200,21 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<form action="../../plugins/projects_hierarchy/add_son.php?group_id='.$group_id.'" method="POST" name="formson">';
 			//include('hierarchy_utils.php');
 			//select box of sons
-			echo son_box($group_id,'sub_project_id','0');
-			echo '&nbsp;&nbsp;&nbsp;<input type="text" size="80" value="" name="com">&nbsp;' ;
+			echo '<table><tr>';
+			echo '<td>'.$Language->getText('project_admin','choice_project').'</td><td>'.son_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>' ;
+			echo '</tr><tr>' ;
+			echo '<td>'.$Language->getText('project_admin','com').'</td><td> <input type="text" size="50" value="" name="com"></td>' ;
 			//echo type_son_box();
-			echo '<input type="submit"  name="son" value="'.$Language->getText('project_admin','save_son').'"></form>';
+			echo '<td><input type="submit"  name="son" value="'.$Language->getText('project_admin','save_son').'"></td></tr></table></form>';
 			echo '<br/>';
 			echo '<form action="../../plugins/projects_hierarchy/add_link.php?group_id='.$group_id.'" method="POST" name="formlink">';
 			//include('hierarchy_utils.php');
 			//select box of sons
-			echo link_box($group_id,'sub_project_id','0');
-			echo '&nbsp;<input type="text" size="80" value="" name="com">&nbsp;' ;
-			//echo type_son_box();
-			echo '<input type="submit"  name="son" value="Ajouter un lien"></form>';
+			echo '<table><tr>';
+			echo '<td>'.$Language->getText('project_admin','choice_project').'</td><td>'.link_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>';
+			echo '</tr><tr>' ;
+			echo '<td>'.$Language->getText('project_admin','com').'</td><td><input type="text" size="50" value="" name="com"></td>' ;
+			echo '<td><input type="submit"  name="son" value="'.$Language->getText('project_admin','add_link').'"></td></tr></table></form>';
 			echo '<br/>';
 			//select all the sons of the current project
 			$sql_son = "SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE " .

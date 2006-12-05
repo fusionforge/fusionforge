@@ -18,6 +18,7 @@ project_admin	allow	Authorize
 project_admin	wait	Waiting
 project_admin	share	Share
 project_admin	navi	Navigation
+project_admin	add_link	Add a link
 project_admin	validation_wait	Father waiting for validation
 project_admin	hierarchy	Modify the hierarchy
 project_admin	save_son	Add son project
@@ -25,10 +26,11 @@ project_admin	alert_del	Do you really want to delete this link ?
 project_admin	father	Project's parent
 project_admin	alert_allow	Do you really want to authorize this project ?
 project_admin	display_link	Link list
-project_admin	share_link	Partage de ressources
-project_admin	navi_link	Liens de navigation
-project_admin	com_father	Commentaire du père :
-project_admin	com	Commentaire :
+project_admin	share_link	Share link
+project_admin	navi_link	Navigation link
+project_admin	com_father	Commentary of father :
+project_admin	com	Commentary :
+project_admin	choice_project	Select a project : 
 project_tree	cat	By Category
 project_tree	tree	By hierarchy
 project_tree	tree_project	Project Tree

@@ -378,6 +378,8 @@ if ($project->usesFTP()) {
 	}
 }
 
+//webcalendar
+plugin_hook("cal_link_group",$group_id);
 echo $HTML->boxBottom();
 
 if ($project->usesNews()) {

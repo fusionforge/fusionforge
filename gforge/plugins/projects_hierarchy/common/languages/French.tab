@@ -18,6 +18,7 @@ project_admin	allow	Autoriser
 project_admin	wait	En attente
 project_admin	share	Partagé
 project_admin	navi	Navigation
+project_admin	add_link	Ajouter un lien
 project_admin	validation_wait	Père en attente de validation
 project_admin	hierarchy	Modifier la Hiérarchie
 project_admin	save_son	Ajouter un fils
@@ -29,6 +30,7 @@ project_admin	share_link	Partage de ressources
 project_admin	navi_link	Lien de navigation
 project_admin	com_father	Commentaire du père :
 project_admin	com	Commentaire :
+project_admin	choice_project	Choix du projet :
 project_tree	cat	Par catégorie
 project_tree	tree	Par hiérarchie
 project_tree	tree_project	Arbre des projets
