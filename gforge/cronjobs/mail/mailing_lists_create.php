@@ -64,9 +64,12 @@ for ($i=0; $i<$rows; $i++) {
 	$grouplistid = db_result($res,$i,'group_list_id');
 	$public = db_result($res,$i,'is_public');
 	
+	$is_commits_list = preg_match('/-commits$/', $listname);
+	
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
 	$privatize_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
+	$publicize_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
 	
 	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
@@ -79,14 +82,23 @@ for ($i=0; $i<$rows; $i++) {
 echo $err;
 			continue;
 		} else {
-			// Privatize the new list
-			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$privatizeFailed);
+			if ($is_commits_list) {
+				// Make the *-commits list public
+				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
+				passthru($publicize_cmd,$publicizeFailed);
+			} else {
+				// Privatize the new list
+				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+				passthru($privatize_cmd,$privatizeFailed);
+			}
 		}
 		$mailingListIds[] = $grouplistid;
 	} else {	// Old list
-		// Privatize only if it is marked as private
-		if (!$public) {
+		if ($is_commits_list) {
+			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
+			passthru($publicize_cmd,$publicizeFailed);
+		} elseif (!$public) {
+			// Privatize only if it is marked as private
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
 			passthru($privatize_cmd,$privatizeFailed);
 		}
