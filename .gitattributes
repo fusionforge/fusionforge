@@ -26,6 +26,7 @@ gforge-plugin-scmsvn/www/viewcvs/images/logo.png -text
 gforge-plugin-scmsvn/www/viewcvs/images/up.png -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/contrib/cmd-line-prototype.tar.gz -text
+gforge/cronjobs/mail/publicize_list.py -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
