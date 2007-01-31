@@ -476,7 +476,9 @@ if (isset($params['group']) && $params['group']) {
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/my/') || strstr(getStringFromServer('REQUEST_URI'),'/account/') || 
+		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || 
+				strstr($GLOBALS['REQUEST_URI'],'/account/') || 
+				strstr($GLOBALS['REQUEST_URI'],'/register/') ||  
 				strstr(getStringFromServer('REQUEST_URI'),'/themes/') ) {
 			$selected=array_search("/my/", $TABS_DIRS);
 		} elseif (strstr(getStringFromServer('REQUEST_URI'),'softwaremap')) {
