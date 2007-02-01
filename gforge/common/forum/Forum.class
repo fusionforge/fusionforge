@@ -879,6 +879,10 @@ class Forum extends Error {
 				WHERE group_forum_id='". $this->getID() ."'
 				AND user_id='".user_getid()."'";
 				$this->current_user_perm=db_result(db_query($sql),0,0);
+
+				// Return no access if no access rights defined.
+				if (!$this->current_user_perm)
+					$this->current_user_perm=-1;
 			}
 			return $this->current_user_perm;
 		}
