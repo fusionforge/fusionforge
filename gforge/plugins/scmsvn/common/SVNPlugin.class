@@ -195,7 +195,7 @@ class SVNPlugin extends SCM {
 	function getAdminPage ($params) {
 		global $Language ;
 		$group =& group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) ) {
+		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
 			?>
 			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo $Language->getText('plugin_scmsvn', 'enable_anonymous_svn') ?></strong></p>
 			<?php
