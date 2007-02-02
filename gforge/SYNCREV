@@ -8,3 +8,6 @@ new sync rev with trunk is 5879
 ----------- 31/Jan/2007
 svn merge https://svn.gforge.org/svn/gforge/trunk/gforge@5880 https://svn.gforge.org/svn/gforge/trunk/gforge@5907 Branch_4_6dev/gforge
 new sync rev with trunk is 5907
+----------- 02/02/2007
+svn merge https://svn.gforge.org/svn/gforge/trunk/gforge@5908 https://svn.gforge.org/svn/gforge/trunk/gforge@5912 Branch_4_6dev/gforge
+new sync rev with trunk is 5912

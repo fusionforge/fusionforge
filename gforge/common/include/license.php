@@ -79,7 +79,7 @@ function license_delete($id) {
 }
 
 function license_selectbox($title='license_id',$selected='xzxz') {
-    $res=db_query("SELECT license_id, license_name FROM licenses");
+    $res=db_query("SELECT license_id, license_name FROM licenses ORDER BY license_name");
     return html_build_select_box($res,$title,$selected,false);
 }
 
