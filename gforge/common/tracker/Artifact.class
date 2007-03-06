@@ -595,7 +595,7 @@ class Artifact extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
+		$sql="SELECT count(*) AS count FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;

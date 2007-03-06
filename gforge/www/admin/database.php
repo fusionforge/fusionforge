@@ -86,7 +86,7 @@ if (getStringFromRequest('submit')) {
 site_admin_header(array('title'=>$Language->getText('admin_database','site_admin_groups_maintance')));
 
 $res_db = db_query("
-	SELECT stateid,statename,COUNT(*)
+	SELECT stateid,statename,COUNT(*) AS count
 	FROM prdb_dbs,prdb_states
 	WHERE stateid=state
 	GROUP BY statename,stateid

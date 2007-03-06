@@ -475,7 +475,7 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
+		$sql="SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
@@ -802,7 +802,7 @@ class Forum extends Error {
 		} else {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (  (!$perm->isMember() )) {
-				//the user isn´t a member of the project
+				//the user isn't a member of the project
 				return true;
 			}
 		}
