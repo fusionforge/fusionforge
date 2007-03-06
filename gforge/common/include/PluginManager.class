@@ -67,11 +67,7 @@ class PluginManager extends Error {
 	 * @return a plugin object
 	 */
 	function GetPluginObject ($pluginname) {
-		if (array_key_exists($pluginname, $this->plugins_objects)) {
-			return $this->plugins_objects[$pluginname];
-		} else {
-			return NULL;
-		}
+		return $this->plugins_objects [$pluginname] ;
 	}
 
 	/**
