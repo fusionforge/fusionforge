@@ -65,6 +65,7 @@ ON user_metric_history(month,day,user_id);
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
 $threshhold='1.6';
 
 db_begin();

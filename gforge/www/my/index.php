@@ -229,13 +229,13 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="/forum/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2"><a href="/forum/?group_id='.
 				$group->getID().'">'.
 				$group->getPublicName().'</a></td></tr>';
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.$f->getID().
+			<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="/forum/monitor.php?forum_id='.$f->getID().
 			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 			'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
 			$f->getID().'">'.
