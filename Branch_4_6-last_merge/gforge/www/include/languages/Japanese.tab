@@ -1,0 +1,445 @@
+# Japanese localisation by Robert B. Hawkins
+system	locale	ja
+system	strftimefmt	%Y %B %e  %H:%M
+system	datefmt	Y-m-d H:i
+conf	mail_charset	UTF-8
+account	title	アカウントオプション
+account_change_email	message	$1にてメールアドレス変更の手続きがありました。\n\n手続きの覚えのある方は以下のURLにて処理を完了してください。\n\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
+account_change_email	subject	$1認証
+account_change_email	mailsent	<p>メールを新しいアドレスへ送りました。メールアドレスの変更を完了するために送られたメールの中の指示にしたがって下さい。<p><a href="/">[ Home ] </a>
+account_change_email	desc	<p>メールアドレスを変更するには、使えるアドレスになっているかをチェックするために新しいメールアドレスからの確認が必要になります。\n<p>使えるメールアドレスを必要としている理由はユーザーに与えてある権限の為です。もし、シェルアカウントやプロジェクトアカウントの問題があった場合には、ちゃんと連絡を取れるのが重要です。\n<p>以下のフォームを送信すると、新しいメールアドレスに確認するためのURLを含むメールが送られます。そのURLをクリックすることによってメールアドレスの変更が終了されます。
+account_change_pw	confirmation	<h2>$1 パスワード変更確認</h2><p>パスワード変更に成功しました</p>
+account_change_pw	title	パスワード変更
+account_first	about_blurb	おめでとうございます。あなたはオープンソース開発の為のオンライン開発環境 $1 の公認ユーザーになりました。あなたは公認ユーザーとしてサイト上の全ての活動に参加することができ、プロジェクトメッセージフォーラムにメッセージの記入、開発者として $1 にあるソフトに関するバグ情報の提出もすることができます。また、あなた個人のプロジェクトを開始するのも良いでしょう。<p>余裕があればこのサイトに載っているドキュメントに目を通すようにしてください。<p>そうすれば、より $1 を使いこなせるようになるでしょう。<p>そして、より良い $1 にするためにフィードバックをいただければ助かると思います。<p>-- $1 スタッフより。
+account_first	title	ようこそ
+account_login	deleted_account	<p>あなたの $1 にあったアカウントは $1 スタッフによって削除されました。これには以下の二つの可能性があると考えられます。 \n\n1) あなたの依頼による削除\n2) いくつかの違法行為(アカウント利用規約の違反)があなたのアカウントで行われていた為、管理運営上の理由で削除\n\n以上の事について、ご不明な点がありましたら、<a href="/support/?group_id=1">サポートページ</a>をご覧下さい。</p><p><br><br>$1 スタッフ</p>
+account_login	iewarn	<H2><span class="important">IEユーザーは、IE5.01以上へのバージョンアップが必要となります。できれば、128ビットSSLに対応したバージョン。あるいはNetscape4.7以上のバージョンを使用してください。</span></h2>
+account_login	macwarn	<H2><span class="important">Mac OSでは現在、IEの使用はまだサポートしていません。Netscape4.7以上のバージョンをご使用下さい。</span></h2>
+account_login	pending_account	<P>あなたのアカウントは確認メールからのログインを待っています。確認メールの中に記述されたリンクをたどり、そこからログインしてみてください。そうすることによってあなたのアカウントがアクティブになります。 <p>もし、確認メールの再送が必要でしたら<A href="pending-resend.php?form_user=$1">ここ</a>をクリックしてください。確認メールが登録したメールアドレスへ送信されます。<br><hr><p>\n
+account_login	cookiewarn	ここから先はクッキーを有効にしてください
+account_login	loginname	ログイン名：
+account_login	passwd	パスワード:
+account_login	login	ログイン(SSL)
+account_login	lostpw	[パスワードを忘れましたか？]
+account_login	newaccount	[新規アカウント]
+account_lostpw	message	誰か(もしくはあなた自身)が $3 サイトでパスワードの変更を要求しました。\n\nもし、あなたが変更の申し込みを出していなかったら、このメッセージを無視してください。もし、このような申し込みをしましたら、以下のサイトへ行き、パスワードの変更をしてください。\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n-- $3 スタッフ
+account_lostpw	subject	$1 認証
+account_lostpw	notify	<p>登録されているアドレス宛に１通のメールを送信しました。メール内の文に従い、パスワードの変更をしてください。</p><a href="/">[ Home ]</a>
+account_lostpw	warn	<p>パスワード失うということは大変なことです。それはあなたのアカウント、あなたのプロジェクトおよびこのサイトのセキュリティを危険にさらします。<p>「パスワードハッシュを送る」をクリックすることによってアカウントに登録されたアドレス宛にURLを送信します。このURLにはあなたのアカウントのための128ビットの確認ハッシュがあります。URLを訪れパスワードを変更してください。
+account_lostpw	sendhash	パスワードハッシュを送る
+account_lostlogin	severalconfirm	(未訳：account_lostlogin.severalconfirm)This confirm hash exists more than once. 
+account_lostlogin	invalidconfirm	(未訳：account_lostlogin.invalidconfirm)Invalid confirmation hash 
+account_lostlogin	sixchars	有効なパスワードを入力してください(最低 6 文字以上)
+account_lostlogin	notmatch	新規パスワードが確認とマッチしませんでした。
+account_lostlogin	passwdchanged	<h2>パスワード変更</h2><p>パスワードの変更を完了しました。 <a href="/account/login.php">ここ</a>からサイトにログインできます。</p>
+account_lostlogin	welcome	<h2>ロストパスワードログイン</h2><P>ようこそ、 $1. どうぞパスワードを変更してください。
+account_lostlogin	newpasswd	新規パスワード(最低 6 文字以上)
+account_lostlogin	newpasswd2	新規パスワード(確認)
+account_lostlogin	update	更新
+account_register	congrat	おめでとうございます。$1 上にユーザー情報を登録しました。<p>メールアドレスの有効性をチェックするために確認のメールを送信しました。メールに記述されたリンクをたどり、アカウントをアクティブにしてください。
+account_register	iewarn	<H2><span class="important">IEユーザーはバージョン5.01以上にアップグレードする必要があります。できれば128bitSSL対応のバージョンやNetscape4.7以上のバージョンをご使用ください。</span></H2>
+account_register	macwarn	<H2><span class="important">Mac OSでは現在、IEの使用は、まだ、サポートしていません。Netscape4.7以上のバージョンをご使用下さい。</span></H2> 
+account_register	loginname	ログイン名(大文字を使用してはいけません)
+account_register	password	パスワード(最低 6 文字以上):
+account_register	password2	パスワード(確認):
+account_register	language	ランゲージ選択:
+account_register	timezone	タイムゾーン:
+account_register	emailaddr	(未訳：account_register.emailaddr)Email Address:<span class="important">*</span><br /><em>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at <loginname@$1> that will forward to this address.</em>
+account_register	jabberaddr	Jabberアドレス:
+account_register	jabberonly	(未訳：account_register.jabberonly)Send auto-generated notices only to my Jabber address 
+account_register	siteupdate	サイトの最新情報<i>(セキュリティ情報を含む)</i>に関するメールを受け取る
+account_register	communitymail	追加されたコミュニティのメールを受け取ります。
+account_register	mandatory	$1 がついてるフィールドは必須項目です。
+account_register	register	登録
+account_register	err_username	ユーザー名を入力して下さい。(必須)
+account_register	err_passwd	パスワードを入力してください。(必須)
+account_register	err_passwd2	パスワードが一致しません
+account_register	err_passwd3	無効なパスワード:
+account_register	err_unixname	無効なUnixネーム
+account_register	err_email	無効なメールアドレス
+account_register	err_jabber	無効なJabberアドレス
+account_register	err_userexist	そのユーザー名はすでに存在します。
+account_register	err_mailexist	(未訳：account_register.err_mailexist)User with this email already exists - use people search to recover your login. 
+account_register	err_badinsert	インサート失敗
+account_register	message_header	$1 アカウント登録
+account_register	partecipate_peer_ratings	ランキングに参加(いくつかの基準で、他のユーザーをランク付けすることができます。同じく他のユーザーらもあなたをランク付けすることができます。もし、あなたがランキングに参加するのであれば、これらの詳しい情報について、あなたの $1 ユーザーページから入手することができます。)
+account_register	remember_me	ユーザーを記憶します。<i>（ログインしなくでも $1 パーソナルページ</a>へのアクセスを可能にしてくれる機能です。ただし、設定の変更をする時には、ログインが必要です。)</i>
+account_register	message_body	$4 ウェブサイトに登録していただき、ありがとうございます。\nユーザー 「$1」 を登録しました。登録を終えるために次のURLを訪れてください:\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(このメッセージの上にURLが表示されますが、そこに表示されていなければ、\nそれは恐らくあなたのメールクライアントのバグによるものだと思われます。\n表示されなかったときのためにもう一つのURLを下に用意して置きました。\nこのURLを入力するときは改行を含めないようにお願いします。)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nどうぞ $4 サイトを楽しんで下さい $4 スタッフより。
+account_register	update	更新
+account_register	reset	リセット
+account_unsubscribe	all_mailings	(未訳：account_unsubscribe.all_mailings)all $1 mailings and notifications 
+account_unsubscribe	site_mailings	(未訳：account_unsubscribe.site_mailings)$1 site mailings 
+account_verify	verify_blurb	<p>登録を完了するには、今、すぐにログインしてください。そうすることによって、あなたのアカウントは有効になり、普通のログインもできるようになります。</p> 
+account_verify	password	パスワード:
+account_verify	login	ログイン
+account_verify	loginname	ログイン名:
+account_verify	missingparam	見あたらないパラメータ
+account_verify	usermandatory	ユーザー名を入力しなければなりません。
+account_verify	invalidop	無効なオペレーション
+account_verify	accountactive	そのアカウントはすでにアクティブです。
+account_verify	invalidparam	無効なパラメータ
+account_verify	cannotconfirm	アカウント同一性チェック - 無効の確認ハッシュ(あるいはログイン名)
+account_verify	accessdenied	アクセス拒否
+account_verify	invalidcred	(未訳：account_verify.invalidcred)Credentials you entered do not correspond to valid account. 
+account_verify	cannotactivate	そのアカウントをアクティブにできません
+account_verify	erroractivate	アカウントをアクティブにするときにエラーが発生しました
+account_options	title	アカウントメンテナンス
+account_options	welcome	ようこそ
+account_options	member_since	メンバー登録日
+account_options	view_developer_profile	デベロッパープロフィール
+account_options	edit_skills_profile	スキルプロフィール編集
+account_options	user_id	ユーザーID
+account_options	login_name	ログイン名
+account_options	change_password	パスワード変更
+account_options	language	ランゲージ
+account_options	timezone	タイムゾーン
+account_options	email_address	メールアドレス:
+account_options	change_email_address	メールアドレス変更
+cvs	section	プロジェクト: $1
+cvs	title	CVS
+cvs	anoncvs	<b>Anonymous CVS アクセス</b><p>このプロジェクトのCVSリポジトリは、次のCVSコマンドでチェックすることができます。あなたがチェックしたいモジュールの名前は<i>modulename</i>の部分に指定してください。<br>anonymousユーザーのパスワードを求められた時は何も入力せずにEnterキーを押してください。
+cvs	anoncvsup	取得したモジュールのディレクトリ内から更新を行う場合は -d パラメータを指定する必要はありません。
+cvs	devcvs	<p><b>開発者向けのSSHによるCVSアクアセス</b><p>プロジェクト開発者のみこのメソッドを利用する事ができます。ただし、SSH1をクライアントマシーンにインストールしなければなりません。 <i>developername</i>と<i>modulename</i>を適切な値と置き換えて下さい。パスワードを要求してきた場合はパスワードも入力してください。
+cvs	history	リポジトリ履歴
+cvs	browsetree	<hr><b>CVSツリー</b><p>CVSツリーを見ることによってこのプロジェクトの現在のコードを把握できます。CVSリポジトリの全てのファイルヒストリを見ることもできます。
+cvs	browseit	CVSリポジトリ閲覧
+docman	submit_new	新規ドキュメントの送信
+docman	view_doc	ドキュメント閲覧
+docman	admin	管理
+docman	error_no_docs	このプロジェクトには読めるドキュメントがありません。
+docman	error_invalid_file_attack	無効なファイルによる攻撃の試みがありました。: $1
+docman	error_no_groups_defined	ドキュメントグループを定義できません
+docman_admin	section	プロジェクト: $1
+docman_admin	title	 ドキュメントマネージャ：管理
+docman_admin	add_edit_docgroups	ドキュメントグループ 追加/編集
+docman_admin_editdocs	section	ドキュメントマネージャ管理
+docman_admin_editdocs	title	ドキュメント編集
+docman_admin_editdocs	state	ステータス
+docman_admin_editdocs	upload	オプション:新規ファイルのアップロード
+docman_admin_editdocs	doc_contents	ドキュメントコンテンツ
+docman_admin_addgroups	section	ドキュメントマネージャ管理
+docman_admin_addgroups	title	ドキュメントグループ追加
+docman_admin_editgroups	section	 ドキュメントマネージャ管理
+docman_admin_editgroups	title	グループ編集
+docman_admin_editgroups	new_group_name	新規グループ名
+docman_admin_editgroups	add_group	グループ追加
+docman_admin_editgroups	edit_group	グループ編集
+docman_admin_editgroups	description	(未訳:docman_admin_editgroups.description)Group name will be used as a title, so if it should be formatted correspondingly. 
+docman_admin_groupedit	group_name	グループ名
+docman_display_doc	section	プロジェクト: $1
+docman_display_doc	title	ドキュメントマネージャ: ドキュメント表示
+docman_display_doc	all_languages	オールランゲージ
+docman_new	section	プロジェクト: $1
+docman_new	title	ドキュメントマネージャ: 新規ドキュメント送信
+docman_new	intro	<strong>ドキュメントタイトル</strong>: 簡潔なドキュメントタイトルにしてください。(例: ダウンロードサーバーの使い方。)<br/><strong>記述: </strong>簡単な記述はタイトルのすぐ下に置いてください。
+docman_new	doc_title	ドキュメントタイトル
+docman_new	description	記述
+docman_new	upload_file	ファイルアップロード
+docman_new	language	ランゲージ
+docman_new	group	ドキュメント所属グループ: 
+docman_new	submit	情報送信
+docman_new	file	ファイル
+docman_new	error_blank_document	エラー: 空のドキュメントを取得しました。
+forum	choose	<p>フォーラムではメッセージの閲覧、検索、投稿が行えます。<p>
+forum_admin	title	フォーラム: 管理
+forum_forum	thread	スレッド
+forum_forum	author	作者
+forum_forum	date	日付
+forum_forum	changeview	チェンジビュー
+forum_forum	postsuccess	メッセージを投稿しました。
+forum_forum	topic	トピック
+forum_forum	topicstarter	トピックの先頭
+forum_forum	replies	返事
+forum_forum	lastpost	最後の投稿
+forum_message	thread	新規スレッド開始
+forum_utils	discussionforum	ディスカッションフォーラム: 
+forum_utils	nonewsitem	エラー - 新規アイテムが見つかりません。
+forum_utils	latest	最新ニュース
+forum_utils	monitor	モニタ フォーラム
+forum_utils	stopmonitor	ストップモニタリング
+forum_utils	admin	管理
+forum_utils	saveplace	フォーラムの場所を記憶
+forum_utils	by	By:
+forum_utils	date	日付
+forum_utils	summary	サマリー
+forum_utils	doublepost	このメッセージは重複して送られたようです。このメッセージの件名と記事情報が前回送られたものと同じでした。
+forum_utils	subject	件名: 
+forum_utils	message	メッセージ: 
+forum_utils	htmltag	HTMLタグはテキストとして表示されます。
+forum_utils	postanon	ログインしていないので匿名で投稿します。
+forum_utils	loggedin	ログイン
+forum_utils	postcomment	コメント投稿
+forum_utils	anonymously	[匿名]
+forum_utils	couldpostif	(未訳:forum_utils.couldpostif)You could post if you were
+forum_utils	reply	返信
+forum_utils	mailmonitor	(未訳:forum_utils.mailmonitor)\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5 
+frs	file_download	ダウンロード
+frs	file_monitor	モニタ
+frs	file_notes	ノート
+frs	file_package	パッケージ
+frs	file_rel_date	日付
+frs	file_version	バージョン
+frs	latest_file_releases	最新ファイルリリース
+general	return	[$1 へ戻る]
+general	error	エラー
+general	footer	このページ「 $1 」のコピーライト情報などを含む詳しい情報を見るには<a href="/about.php">この</a>ページまで。
+general	permdenied	許可がありません
+general	permnotget	パーミッションが取得できません。
+general	permexcuse	このプロジェクトの管理者にこのページを見る権利をもらわなければなりません。
+general	update_successful	更新に成功しました。
+general	create_successful	作成に成功しました。
+general	language	ランゲージ
+general	submit_edit	編集結果を送信
+general	edit	編集
+general	add	追加
+general	go	Go
+group	developer_info	 デベロッパー情報
+group	long_scm	SCMリポジトリ
+group	long_docman	ドキュメントマネージャ：プロジェクトドキュメント
+group	long_forum	パブリックフォーラム
+group	long_ftp	Anonymous FTP スペース
+group	long_homepage	プロジェクトホームページ
+group	long_mail	メーリングリスト
+group	long_news	最新ニュース
+group	long_pm	タスクマネージャ
+group	long_survey	調査
+group	long_tracker	トラッカー
+group	project_admins	プロジェクト管理
+group	public_area	パブリックエリア
+group	short_admin	管理
+group	short_bugs	バグ
+group	short_scm	SCM
+group	short_docman	ドキュメント
+group	short_files	ファイル
+group	short_forum	フォーラム
+group	short_homepage	ホームページ
+group	short_mail	リスト
+group	short_memberlist	デベロッパー
+group	short_news	ニュース
+group	short_patch	パッチ
+group	short_pm	タスク
+group	short_summary	サマリー
+group	short_support	サポート
+group	short_survey	調査
+group	short_tracker	トラッカー
+group	registered	登録: 
+group	activity	活動率: 
+group	activitystat	プロジェクトの活動 <a href="/project/stats/?group_id=$1">統計</a>
+group	norelease	このプロジェクトはファイルをひとつもリリースしていません。
+group	nodescription	このプロジェクトはまだ記述を提出していません。
+home	about_blurb	<P>(未訳:home.about_blurb)$1 is a <B>free service to <A href="http://www.opensource.org/">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.</P><P><B>Site Feedback and Participation</B></P><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully.</P><P><B>Set Up Your Own Project</B></P><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>
+home	highest_ranked_users	ランキングの最も高いユーザ
+home	most_active_this_week	今週最も活発なプロジェクト
+home	gforge_statistics	$1 統計
+home	top_project_downloads	トッププロジェクトダウンロード
+mail	provided_by	<p>メーリングリストは<A href="http://www.list.org/">GNU Mailman</a>のGForgeバージョンを利用して提供します。優れたソフトを作成したMailmanおよび<A href="http://www.python.org/">Python</a>の皆さんに感謝します。</p>
+mail_admin_add_list	section	メーリングリスト管理\n
+mail_admin_add_list	title	リスト追加
+mail_admin_change_status	section	メーリングリスト管理
+mail_admin_change_status	title	リスト 管理/更新
+menu	account_maintenance	アカウント メンテナンス
+menu	bookmark_page	ブックマークページ
+menu	diary_notes	日記 &amp; ノート
+menu	login	ログイン
+menu	logout	ログアウト
+menu	my_personal_page	パーソナルページ
+menu	my_account	マイアカウント
+menu	new_project	新規プロジェクト登録
+menu	new_user	新規ユーザー(SSL)
+menu	project_help_wanted	プロジェクト協力者募集
+menu	register_project	新規プロジェクト登録
+menu	search	検索
+menu	admin	管理
+menu	submit	送信
+menu	home	ホーム
+menu	projectree	プロジェクト&nbsp;ツリー
+menu	mypage	マイページ
+menu	code_snippet	サンプルコード
+menu	admin	管理
+my	no_bookmarks	今のところ、ブックマークされたページはありません。
+my	no_monitored_filemodules	ファイルをモニタリングしていません。
+my	no_monitored_forums	フォーラムをモニタリングしていません。
+my	no_open_tasks	あなたに割り当てられたタスクはありません。
+my	no_projects	あなたはアクティブプロジェクトのメンバーではありません。
+my	no_tracker_items_assigned	あなたに与えられたトラッカーアイテムはありません。
+my	no_tracker_items_submitted	あなたが提出したトラッカーアイテムはありません。
+my	title	パーソナルページ: $1
+my	monitoredforum	モニタリングフォーラム
+my	monitoredfile	モニタリングファイルモジュール
+my	bookmarks	ブックマーク
+my	projects	私のプロジェクト
+my_bookmark_add	section	パーソナルページ
+my_bookmark_edit	title	ブックマーク編集
+my_diary	title	日記 &amp; ノート
+new	title	ニューリリース
+news	title	ニュース
+news	choose	<p>ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。<p>
+news	nonews	ニュースが見つかりません
+news	nonewsfor	$1 のニュースは見つかりません。
+news	noitems	アイテムは見つかりません
+news_admin	title	ニュース管理
+news_admin	permdenied	$1 ニュースチームのメンバーや編集しようとするプロジェクトの管理者でなければ編集できません。
+news_admin	noqueued	(未訳:news_admin.noqueued)No Queued Items Found For Project
+news_admin	queued	これらのニュースアイテムはこのプロジェクトのために提出されています。
+news_submit	post_blurb	プロジェクト管理者は自分のプロジェクトに関するニュースを投稿することができます。プロジェクトになんらかのヘルプが必要であれば "プロジェクト協力者募集" の募集記事を提出することもできます。<p>ここでの提出はプロジェクトサマリーページに表示されます。またこのプロジェクトに関心持っている方からの投稿はホームページに表示されるまでに、$1 ニュースチームからの許可を得なければなりません。提出する場合、URLを含めてもかまいませんがHTMLを含めてはいけません。<p>「http://」で始まるURLはリンクとして出力されます。
+news_submit	cannot	プロジェクトの管理者でなければニュースの提出はできません。
+news_submit	cannotadmin	ニュースグループからのニュースの提出は認められません。
+news_submit	forproject	プロジェクト
+news_submit	subject	件名
+news_submit	details	詳細
+news_submit	errorinsert	インサート中にエラーがありました。
+news_submit	errorboth	エラー - 件名と本文は必須項目です。
+news_submit	newsadded	ニュースを追加しました。
+news_submit	submit	送信
+news_utils	nonews	ニュースアイテムは見つかりません
+news_utils	archive	ニュースアーカイブ
+news_utils	submit	ニュース送信
+news_utils	readmore	もっと詳しく読む
+people	about_blurb	$1 プロジェクトの協力者募集掲示板は非広告プロジェクトボランティアを対象に解放しています。広告ユーザーらの利用は禁止です。<p>プロジェクトリスティングが長くて２週間残ります。あるいは新しい投稿により閉じることもあります。(プロジェクトの管理者は期限切れの募集記事を再投稿することができます。)<p>カテゴリメニューから、「プロジェクト協力者募集」を探してください。<p>もし、あなたがプロジェクトの管理者であれば、ログインしてプロジェクト管理ページから「プロジェクト協力者募集」を申し込んで下さい。<p>新規ジョブカテゴリーを提案する場合、サポートマネージャからリクエストを提出してください。<p>
+people	title	プロジェクトが協力者を求めています。
+people_editjob	title	ジョブ編集
+people_viewprofile	title	デベロッパープロフィール
+pm	title	Task Manager: Subprojects And Tasks
+pm	noprj	<h1>サブプロジェクトが見つかりません</h1><p><b>サブプロジェクトがセットアップされていません。あるいは、みる権限がありません。<p><span class="important">このプロジェクトの権限管理には管理ページを利用してプロジェクトをセットアップしないといけません。</span></b>
+pm_addtask	section	タスクマネージャ
+pm_addtask	title	タスク追加
+pm_admin	section	$1
+pm_detailtask	title	タスク詳細
+pm_modtask	section	タスクマネージャ
+pm_modtask	title	タスク修正
+pm_reporting	section	タスクマネージャ
+pm_reporting	title	タスクレポーティングシステム
+project_admin	title	管理サマリー
+project_admin_database	section	プロジェクト $1 - 管理
+project_admin_database	title	データベース情報\n
+project_admin_editgroupinfo	section	プロジェクト $1 - 管理
+project_admin_editgroupinfo	title	公開情報編集
+project_admin_editimages	section	プロジェクト $1 - 管理
+project_admin_editimages	title	マルチメディアデータ編集
+project_admin_editpackages	section	プロジェクト $1 - 管理
+project_admin_editpackages	title	パッケージ編集
+project_admin_editreleases	section	プロジェクト $1 - 管理
+project_admin_editreleases	title	リリース編集
+project_admin_history	section	プロジェクト $1 - 管理
+project_admin_history	title	ヒストリ
+project_admin_qrs	section	プロジェクト $1 - 管理
+project_admin_qrs	title	クイックリリースシステム
+project_admin_userpermedit	section	プロジェクト $1 - 管理
+project_admin_userperms	section	プロジェクト $1 - 管理
+project_admin_vhost	section	プロジェクト $1 - 管理
+project_admin_vhost	title	バーチャルホスト マネージメント
+project_memberlist	joining	<p>もし、あなたが一人の開発者として、このプロジェクトの力になってくれるのなら、下のテキストの中に太字で明示しているプロジェクト管理者の誰かと連絡してください。<br><br>
+project_showfiles	title	ファイルリスト
+project_shownotes	title	リリースノート
+search	title	検索
+sendmessage	about_blurb	スパムを減少させるため、このフォームを使ってメールを送るようにしています。<p>このフォームは正確に記入してください。そうしないと、受取人は返事ができません。<p><span class="important"><b>解決方法を待っているあなたに: </b> このサイトのドキュメントを読みましたか？<b>ユーザーID</b>と<b>ユーザー名</b>をいれましたか？ もし、あなたがプロジェクトを組んでいるのなら<b>プロジェクトID</b>と<b>プロジェクト名</b>も記入してください。</span>
+snippet	title	サンプルコードライブラリ
+snippet_add_snippet_to_package	section	サンプルコードライブラリ
+snippet_add_snippet_to_package	title	サンプルをパッケージに追加
+snippet_addversion	section	サンプルコードライブラリ
+snippet_browse	section	サンプルコードライブラリ
+snippet_browse	title	サンプル
+snippet_delete	section	サンプルコードライブラリ
+snippet_detail	section	サンプルコードライブラリ
+snippet_detail	title	サンプル詳細
+snippet_package	section	サンプルコードライブラリ
+snippet_package	title	サンプルコードパッケージ作成
+snippet_submit	section	サンプルコードライブラリ
+snippet_submit	title	サンプルコード送信
+survey	title	$1 の調査
+survey	survey_not_found	調査報告は見つかりません
+top	about_blurb	私たちが $1 内にあるプロジェクトの使用統計をトレースしました。そこでいくつかのカテゴリーの中から人気の高いプロジェクトをご紹介します。
+top	active_all_time	常に活発なプロジェクト
+top	active_weekly	今週、最も活発なプロジェクト
+top	downloads	トップダウンロード
+top	downloads_7_days	トップダウンロード（過去7日間）\n
+top	forum_posts	トップフォーラムのポストカウンタ\n
+top	pageviews	(未訳:top.pageviews) Top Project Pageviews - Measured by impressions of the $1 'button' logo
+top	highest_ranked_users	高評価のユーザー
+top	title	 トッププロジェクト
+tracker	section	プロジェクト: $1
+tracker	choose	トラッカーでは、項目の 閲覧/編集/追加 などができます。 
+tracker_add	section	$1
+tracker_admin	title	管理
+tracker_admin_choose	section	プロジェクト: $1
+tracker_admin_add_canned	section	トラッカー管理
+tracker_admin_add_canned	title	レスポンス追加: $1
+tracker_admin_add_cat	section	トラッカー管理
+tracker_admin_add_group	section	トラッカー管理
+tracker_admin_update_canned	section	トラッカー管理
+tracker_admin_update_canned	title	登録されたレスポンスの編集: $1
+tracker_admin_update_cat	section	トラッカー管理
+tracker_admin_update_cat	title	カテゴリ編集: $1
+tracker_admin_update_group	section	トラッカー管理
+tracker_admin_update_group	title	グループ編集: $1
+tracker_admin_update_type	section	トラッカー管理
+tracker_admin_update_type	title	更新: $1
+tracker_admin_update_users	section	トラッカー管理
+tracker_browse	section	プロジェクト: $1
+tracker_browse	hour24	24時間以内
+tracker_browse	day7	1週間
+tracker_browse	week2	2週間
+tracker_browse	month1	1ヶ月
+tracker_detail	section	$1
+tracker_detail	title	トラッカー詳細
+tracker_reporting	section	プロジェクト: $1
+users	peerinfo1	もし、このユーザはあなたの知り合いでしたら、お手数ですが、下にあった基準で、このユーザーをランキングしてください。このランキングはランキングされるユーザーにも他のユーザーらにも見られることを忘れないでください。＄1Peer Rating systemはAdvogatoのコンセプトに基づくものです。このシステムは再び利用され、そして、いくつかの方向へ拡大していました。 \n
+users	peerinfo2	Peer rating boxの内では各基準に対し、すべての平均レベル(およびレスポンスレベル)を表示します。\nレスポンスレベルの数字は信頼されたユーザーと信頼されていないユーザーからのものです。\n「Sitewide Rank」フィールドでは、ユーザーのランクとランクされた $1 の利用者との比較を表示します。"Personal Importance"フィールドでは、他の開発者からもらえるユーザーランキングの値を5段階評価で表示します。そこで高く評価されたユーザーからのレスポンスはより高い評価とされます。\nもし、あなたが Peer Rating System から脱退したいのでしたらアカウントメンテナンスページをご覧下さい。\n脱退したときは Peer Rating Box はユーザーページから消え、ランク付けをする権利も失われます。
+users	optout	Peer Rating Sytemから脱退した場合を除き、ユーザーのランク付けをすることができます。詳しくはアカウントメンテナンスページを参照してください。
+trove	not_categorized	このプロジェクトはまだ分類されていません。
+trove	title	ソフトマップ
+classgroup	acceptedproject	$7 へのプロジェクト登録が承認されました。\n\nプロジェクト名:$1\nCVSサーバー:cvs.$2.$3 (サービスを提供できません)\nシェル/ウェブサーバー:$2.$3 (サービスを提供できません)\n\nこのサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりません\nシェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてください。
+classgroup	rejectedproject	$3 へのプロジェクトの登録が拒否されました。\n\nプロジェクト名:$1\nプロジェクトUNIX名:$2\n\n拒否の理由:\n\n
+classgroup	newprojectnotification	新しいプロジェクト $1 が提出されました\n\nプロジェクト名: $2\n提出された記述: $3\nライセンス: $4\n\n以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \nhttp://$5/admin/approve-pending.php
+classgroup	acceptedprojecttitle	$1 プロジェクト 承認
+classgroup	rejectedprojecttitle	$1 プロジェクトの拒否
+classgroup	newprojectnotificationtitle	新しいプロジェクト $1 が提出されました
+session	missingpasswd	そのようなユーザー名、あるいは、パスワードは存在しません。
+session	invalidpasswd	無効なパスワード、あるいは、ユーザー名
+session	suspended	アカウント一時停止\n
+session	pending	ペンディングアカウント
+session	deleted	アカウント削除
+session	notactive	アカウントがアクティブではありません。
+session	cannotinit	エラー - セッションを初期化できませんでした。
+global	error	エラー
+common_include_account	sixchar	パスワードは最低 6 文字以上でなければいけません。
+common_include_account	nospace	ログイン名にスペースを含めてはいけません。
+common_include_account	tooshort	名前が短すぎます。最低 3 文字以上でなければなりません。
+common_include_account	toolong	名前が長すぎます。最大 15 文字までです。
+common_include_account	illegal	規則違反な名前です。
+common_include_account	cvsreserved	名前はCSVの為に予約されています。
+common_include_account	dnsreserved	名前はDNSの為に予約されています。
+common_include_account	nounderscore	DNSのため、グループ名にはアンダースコアが使えません。\n
+survey	title	デベロッパー調査
+image	logout	logout.png
+image	login	login.png
+image	myaccount	myaccount.png
+image	newaccount	newaccount.png
+searchbox	softwaregroup	ソフト/グループ
+searchbox	skill	スキル
+searchbox	people	人物
+searchbox	search	検索
+searchbox	forum	フォーラム
+searchbox	task	タスク
+calendar	january	1月
+calendar	february	2月
+calendar	march	3月
+calendar	april	4月
+calendar	may	5月
+calendar	june	6月
+calendar	july	7月
+calendar	august	8月
+calendar	september	9月
+calendar	october	10月
+calendar	november	11月
+calendar	december	12月
+calendar	sunday	日曜
+calendar	monday	月曜
+calendar	tuesday	火曜日
+calendar	wednesday	水曜日
+calendar	thursday	木曜日
+calendar	friday	金曜日
+calendar	saturday	土曜日
+calendar	task_link_title	タスクサマリー：$1
+calendar	task_begins	タスク $1 開始
+calendar	task_ends	タスク $1 終了

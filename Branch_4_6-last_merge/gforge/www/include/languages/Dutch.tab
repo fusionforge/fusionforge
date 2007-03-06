@@ -1,0 +1,2398 @@
+#/**
+#  *
+#  * GForge Dutch Message catalog
+#  *
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * Copyright 2004-2005 (c) Ramon van Alteren, Wim van der Hamsvoord, Rene van Leeuwen, Monique Dewanchand, Urso Wieske
+#  * http://gforge.org
+#  *
+#  * @version   $Id$
+#  *
+#  */
+account	title	Account voorkeursinstellingen
+account	updated	Gewijzigd                                   
+account_change_email	desc	<p>Om je e-mailadres te wijzigen hebben we bevestiging nodig van dit nieuwe emailadres, zodat we er zeker van zijn dat we een correct emailadres geregistreerd hebben.</p><p>We hebben een correct emailadres nodig voor iedere gebruiker vanwege het type toegang dat we beschikbaar stellen d.m.v. dit account. Als we een gebruiker moeten kunnen bereiken vanwege problemen die te maken hebben met een shell of project account, dan is het belangrijk dat we daar ook toe in staat zijn.</p>  <p>Door op de submit button te drukken wordt er een mail met een bevestigings URL verstuurd naar het nieuwe emailadres. Door het aanklikken van dit bevestigings URL wordt de wijziging van je emailadres voltooid.</p>
+account_change_email	invalid_email	Ongeldig e-mail adres
+account_change_email	mailsent	<p>Een e-mail is verzonden naar het nieuwe adres. Volg de instructies in de e-mail om de wijziging te voltooien. </p><a href="/">[ Home ]</a>
+account_change_email	message	Je hebt om een wijziging van je e-mail adres verzocht op $1.\nKies het volgende URL om de wijzging van je e-mail adres te voltooien:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- de $1 beheerder\n
+account_change_email	new_address	Nieuw e-mail adres:
+account_change_email	send_confirmation	Stuur een bevestiging naar het nieuwe email adres
+account_change_email	subject	$1 verificatie
+account_change_email-complete	confirm	Welkom, $1. De wijziging van je e-mailadres is nu voltooid. Je nieuwe geregistreerde emailadres is  <strong>$2</strong>. Mail verzonden naar $3 wordt geforward naar dit adres.
+account_change_email-complete	title	E-mail adreswijziging voltooid
+account_change_email_confirm	title	Bevestiging e-mail adreswijziging
+account_change_pw	confirmation	<h2>$1 Bevestiging van de wachtwoordwijziging</h2><p>De wachtwoordwijziging is doorgevoerd.</p>
+account_change_pw	new_password	Nieuw wachtwoord (minimaal 6 karakters)
+account_change_pw	new_password_repeat	Nieuw wachtwoord (opnieuw)
+account_change_pw	not_valid_password	Je moet een geldig wachtwoord ingeven (minimaal 6 karakters)
+account_change_pw	old_password	Oude wachtwoord
+account_change_pw	old_password_incorrect	Het oude wachtwoord is niet juist
+account_change_pw	passwords_dont_match	De nieuwe wachtwoorden komen niet overeen.
+account_change_pw	title	Wijzig wachtwoord
+account_change_pw	update	Wachtwoord aanpassen
+account_change_pw_changed	return_to	Je dient nu $1 terug te gaan naar "Account voorkeursinstellingen" $2.
+account_change_pw_changed	title	Wachtwoord gewijzigd
+account_editsshkeys	authorized_keys	Geauthorizeerde sleutels:<br /><em>Belangrijk: let op dat er alleen regeleinden tussen sleutels staan. Controleer na submitten of het aantal sleutels in je bestand correct is.</em>
+account_editsshkeys	intro	<p>Om te voorkomen dat je iedere keer je wachtwoord moet intypen voor je CVS/SSH ontwikkelaars account, kun je hier je public key(s) uploaden zodat ze  op de CVS server in je ~/.ssh/authorized_keys file geplaatst worden. Dit wordt gedaan door een cron job, dus het gebeurt waarschijnlijk niet meteen.  Wacht in ieder geval een uur.</p><p>Om een public key te genereren kun je het programma 'ssh-keygen' gebruiken (je kunt zowel protocol 1 als 2 gebruiken). De public key zal worden geplaatst in '~/.ssh/identity.pub' (protocol 1) en '~/.ssh/id_dsa.pub' of '~/.ssh/id_rsa.pub' (protocol 2). Lees de ssh documentatie voor verdere informatie over key sharing.</p>
+account_first	about_blurb	<p>Je bent nu een geregistreerde gebruiker van $1, de online ontwikkel omgeving voor Open Source projecten.</p><p>Als een geregistreerde gebruiker kan je volledig deelnemen aan de activiteiten op de site. Je kan nu boodschappen posten in de project forums, bugs melden voor software in $1, je aanmelden als project ontwikkelaar, of je eigen project starten.</p><p>We adviseren dat je in iedere geval de <a href="/docs/site/"><b>Site Documentatie</b></a> doorleest zodat je voldoende informatie hebt om volledig gebruik te maken van $1.</p><p>Veel plezier, en aarzel niet om commentaar te geven zodat we $1 kunnen blijven verbeteren.</p><p>--De $1 beheerders.</p>
+account_first	title	Welkom bij $1
+account_login	cookiewarn	Om in te loggen moeten cookies zijn toegestaan door je browser.
+account_login	deleted_account	<p>Je $1 account is verwijderd door de  $1 beheerders. Dit kan gedaan zijn vanwege twee redenen 1) Je hebt zelf verzocht om je account te laten verwijderen; of 2) Er is een activiteit uitgevoerd vanaf jouw account die als onbehoorlijk wordt beschouwd (m.a.w. je hebt de gebruiksvoorwaarden voor je account overtreden) en je account is verwijderd om administratieve redenen. Mocht je vragen of opmerkingen hebben hierover dan kun een <a href="/support/?group_id=1">hulp verzoek</a> sturen.</p><p>Bedankt, <br><br>de $1 beheerders</p>
+account_login	login	Login
+account_login	login_ssl	Login via SSL
+account_login	loginname	Loginnaam:
+account_login	lostpw	[Wachtwoord kwijt?]
+account_login	newaccount	[Nieuw account]
+account_login	passwd	Wachtwoord:
+account_login	pending_account	<P>Je account is op dit moment nog niet actief in afwachting van de bevestiging per email.	Het bezoeken van de link uit de bevestigings e-mail zorgt ervoor dat je account geactiveerd wordt.	<P>Als je deze e-mail opnieuw naar je verzonden wilt hebben, click dan a.u.b hieronder en een nieuwe bevestigings e-mail zal verzonden worden naar het e-mail adres dat je opgegeven hebt bij in de registratie procedure.	<P><A href="pending-resend.php?form_user=$1">[Opnieuw verzenden Bevestigings E-mail]</A>	<br><hr>	<p>
+account_login	resend_pending	[verstuur bevestigings email voor een nog niet geactiveerd account]
+account_login	resend_pending_directions	Vul een gebruikersnaam in en klik op 'Versturen' om de bevestigingsemail te versturen
+account_lostlogin	invalidconfirm	Ongeldige bevestigings hash
+account_lostlogin	newpasswd	Nieuw wachtwoord (minimum 6 karakters)
+account_lostlogin	newpasswd2	Nieuw wachtwoord (opnieuw)
+account_lostlogin	notmatch	De nieuwe wachtwoorden zijn niet gelijk.
+account_lostlogin	passwdchanged	<h2>Je wachtwoord is gewijzigd</h2><p>Het wijzigen van je wachtwoord is voltooid. Je mag <a href="/account/login.php">inloggen</a> op de site.</p>
+account_lostlogin	severalconfirm	Deze bevestigingshash bestaat meer dan &eacute;&eacute;n keer.
+account_lostlogin	sixchars	Je kunt alleen inloggen met een geldig wachtwoord (minimaal 6 karakters).
+account_lostlogin	update	Aanpassen
+account_lostlogin	welcome	<h2>Login wachtwoord is kwijt.</h2><p>Welkom, $1. Je kunt nu je wachtwoord veranderen.</p>
+account_lostpw	invalid_user	Ongeldige gebruiker
+account_lostpw	message	Iemand (waarschijnlijk jijzelf) op de $3 site heeft een \nwachtwoord wijziging via e-mail bevestiging aangevraagd. Als dit niet zo is,\nnegeer dan deze melding zodat het wijzigingsverzoek vervalt.\n\nAls je deze bevestiging wel hebt aangevraagd, volg dan het volgende URL\nom je wachtwoord te wijzigen:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- de $3 beheerder\n
+account_lostpw	notify	<p>Een e-mail is verstuurd naar je geregistreerde adres. Volg de instructies in deze mail om het wachtwoord te wijzigen.</p><p><a href="/">[ Home ]</a></p>
+account_lostpw	sendhash	Stuur verloren wachtwoord hash
+account_lostpw	subject	$1 verificatie
+account_lostpw	user_dont_exist	De opgegeven gebruiker bestaat niet.
+account_lostpw	warn	<p>Een wachtwoord verliezen is een serieuze zaak.... Het verzwakt de beveiliging van je account, je projecten, en deze site.</p><p>Kies "Stuur verloren Wachtwoord Hash" en we sturen een e-mail met een URL naar het je adres. In deze URL is een 128-bit bevestigingshash voor je account opgenomen. Het volgen van de URL maakt het mogelijk je wachtwoord online te veranderen.</p>
+account_options	address	Adres:
+account_options	ccode	Land:
+account_options	change_email_address	Wijzig e-mail adres
+account_options	change_password	Wijzig wachtwoord
+account_options	edit_skills_profile	Pas mijn vaardigheden profiel aan
+account_options	email_address	E-mail adres:
+account_options	fax	FAX:
+account_options	firstname	Voornaam:
+account_options	language	Taal
+account_options	lastname	Achternaam:
+account_options	login_name	Loginnaam
+account_options	member_since	Lid sinds
+account_options	phone	Telefoon:
+account_options	themeid	Thema:
+account_options	timezone	Tijdzone
+account_options	title	Accountbeheer
+account_options	title2	Titel:
+account_options	user_id	Gebruikers ID
+account_options	view_developer_profile	Toon mijn ontwikkelaars profiel
+account_options	welcome	Welkom
+account_register	Preferences	Voorkeursinstellingen
+account_register	ccode	Land:
+account_register	communitymail	Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>
+account_register	congrat	<p>Gefeliciteerd. Je bent met succes geregistreerd op $1.  <p> Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-mail opgestuurd. Klik op de link in de e-mail om je account te activeren.
+account_register	emailaddr	E-mail adres:<span class="important">*</span><br /><em>Dit e-mail adres wordt eerst geverifieerd voordat uw account wordt geactiveerd. Uw e-mail adres verschijnt vooralsnog nog niet op de site. U ontvangt een tijdelijk mail account &lt;loginname@$1&gt; die de e-mails zal forwarden naar uw adres.</em>
+account_register	err_badinsert	Aanmelden mislukt
+account_register	err_email	Ongeldig E-mail adres
+account_register	err_firstname	Je moet een voornaam invullen
+account_register	err_jabber	Ongeldig Jabber adres
+account_register	err_lastname	Je moet een achternaam invullen
+account_register	err_mailexist	Dit e-mail adres is al in gebruik - gebruik de Mensen-zoekoptie om je login te herstellen.
+account_register	err_passwd	Je moet een wachtwoord opgeven
+account_register	err_passwd2	Wachtwoorden komen niet overeen.
+account_register	err_passwd3	Ongeldig wachtwoord:
+account_register	err_unixname	Ongeldige Unix naam.
+account_register	err_userexist	De opgegeven gebruikersnaam bestaat al.
+account_register	err_username	Je moet een gebruikersnaam opgeven
+account_register	firstname	Voornaam:
+account_register	jabberaddr	Jabber adres:
+account_register	jabberonly	Stuur automatisch gegenereerde mededelingen alleen naar mijn Jabber adres
+account_register	language	Taal keuze:
+account_register	lastname	Achternaam:
+account_register	loginname	Loginnaam (gebruik geen hoofdletters):
+account_register	mandatory	Velden met een $1 zijn verplicht.
+account_register	message_body	Bedankt voor je registratie op de $4 website. Er wordt een \naccount met gebruikersnaam $1 voor je aangemaakt. Om de registratie \ncompleet te maken, bezoek de volgende url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Indien er geen URL hierboven staat, dan is het mogelijk dat er een bug in uw mailclient zit.\nGebruik een van de onderstaande url's. Zorg er voor dat de url wordt ingevoerd als een enkele regel.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nVeel plezier.\n\n-- de $4 beheerders\n
+account_register	message_header	$1 Account registratie
+account_register	partecipate_peer_ratings	Deelnemen aan Collega Beoordelingssysteem. <i>(Stelt je in staat medegebruikers volgens diverse criteria te beoordelen, en om ook zelf beoordeeld te worden. Meer informatie is beschikbaar op je $1 gebruikerspagina </a> als je kiest om deel te nemen aan het beoordelingssysteem)</i>.
+account_register	password	Wachtwoord (min. 6 tekens):
+account_register	password2	Wachtwoord (herhaal):
+account_register	register	Registreer
+account_register	remember_me	"Bewaar login gegevens". <i>(Geeft toegang tot je $1 persoonlijke pagina</a> zonder ingelogged te zijn. Je moet nog steeds echt inloggen voordat je wijzigingen kunt aanbrengen.)</i>
+account_register	resend_pending	[Bevestigings e-mail opnieuw toesturen]
+account_register	reset	Wijzigingen ongedaan maken
+account_register	siteupdate	E-mail over site updates ontvangen <i>(Weinig mail, en inclusief beveiligings aankondigingen. Sterk aanbevolen.)</i>
+account_register	theme	Thema
+account_register	timezone	Tijdzone:
+account_register	update	Wijzigingen verzenden
+account_shell	autorized_keys	CVS/SSH gedeelde autorisatie sleutels
+account_shell	edit_keys	Bewerk sleutels
+account_shell	shell_box	Shell Box
+account_shell	title	Shell account informatie
+account_unsubscribe	all_mailings	alle $1 mailings en aankondigingen
+account_unsubscribe	site_mailings	$1 site mailings
+account_verify	accessdenied	Toegang geweigerd
+account_verify	accountactive	Account is reeds actief.
+account_verify	cannotactivate	Kan account niet activeren.
+account_verify	cannotconfirm	Kan account-identiteit niet bevestigen - ongeldige bevestigings hash of loginnaam
+account_verify	erroractivate	Fout tijdens activeren account
+account_verify	invalidcred	Ingevoerde gegevens komen niet overeen met een geldig account.
+account_verify	invalidop	Ongeldige operatie
+account_verify	invalidparam	Ongeldige parameter
+account_verify	login	Login
+account_verify	loginname	Loginnaam:
+account_verify	missingparam	Ontbrekende parameter
+account_verify	password	Wachtwoord:
+account_verify	usermandatory	Je moet een gebruikersnaam opgeven.
+account_verify	verify_blurb	<p>Om je registratie af te ronden dien je nu in te loggen. Je account wordt dan geactiveerd voor normaal gebruik.</p>
+add_snippet	add_this_snippet_version_id	Voeg dit codefragment versie ID toe:
+add_snippet	back_to_add_page	Terug naar Pagina toevoegen
+add_snippet	error_doing_snippet_version_insert	Fout bij toevoegen codefragment versie!
+add_snippet	error_go_back_and_fill_all	Fout - Ga terug en vul alle informatie in
+add_snippet	error_only_creator_can_add	Fout - Alleen de maker van deze package versie kan er codefragmenten aan toevoegen.
+add_snippet	error_snippet_already_added	Fout - Dat codefragment was reeds toegevoegd.
+add_snippet	error_snippet_doesnt_exist	Fout - Dat codefragment bestaat niet.
+add_snippet	error_snippet_id_missing	Fout - Bundel versie ID van codefragment ontbreekt
+add_snippet	make_sure_all_info	Zorg dat alle informatie compleet en juist is
+add_snippet	no_snippets_in_this_package	Er zijn nog geen codefragmenten aan deze bundel toegevoegd
+add_snippet	package	Bundel:
+add_snippet	snippet_version_added_successfully	Codefragment versie toegevoegd.
+add_snippet	snippets_in_this_package	Codefragmenten in deze bundel
+add_snippet	submit	Submit
+add_snippet	title	Toevoegen nieuw codefragment
+add_snippet	you_can_use_this_form	Je kunt dit formulier opnieuw gebruiken om nieuwe codefragmenten aan je bundel toe te voegen.</p><p>Het "Codefragment versie ID" is het unieke ID nummer dat naast een bepaald codefragment getoond wordt op de "bladeren" pagina's.
+admin	add	Voeg toe
+admin	delete	Verwijderen
+admin	edit	Bewerken
+admin	home_box	Home box:
+admin	http_domain	HTTP Domein:
+admin	license	Licentie:
+admin	license_other	Licentie anders:
+admin	reject	Geweigerd
+admin	scm_box	SCM box:
+admin	yes	ja
+admin_admin_table	add_new	nieuwe toevoegen
+admin_admin_table	cant_delete_language	Je kunt de taal $1 niet verwijderen omdat er nog een verwijzing aanhangt in een gebruikersprofiel.
+admin_admin_table	cant_delete_license	Je kunt de $1 licentie niet verwijderen omdat er nog een verwijzing aanhangt in een project.
+admin_admin_table	cant_delete_processor	Je kunt de $1 processor niet verwijderen omdat er nog een verwijzing aanhangt in een bestands release.
+admin_admin_table	create_new_below	Maak een nieuwe $1 hieronder:
+admin_admin_table	delete_confirm	Weet je zeker dat je $1 wilt verwijderen?
+admin_admin_table	modify_below	Wijzig de $1 hieronder:
+admin_admin_table	site_admin_home	Site Beheer home
+admin_admin_table	successfully_added	$1 toegevoegen gelukt.
+admin_admin_table	successfully_deleted	$1 verwijderen gelukt.
+admin_admin_table	successfully_modified	$1 wijzigen gelukt.
+admin_admin_table	title	Wijzig de $1s tabel
+admin_approve_pending	add_this_custom_response	Voeg dit antwoord toe aan de standaard antwoorden
+admin_approve_pending	approve	Goedgekeurd
+admin_approve_pending	approve_all_on_this_page	Keur alles op deze pagina goed
+admin_approve_pending	approving_group	Groep goedgekeurd:
+admin_approve_pending	approving_pending_projects	Goedkeuren projecten
+admin_approve_pending	canned_responses	Standaard antwoorden
+admin_approve_pending	custom_response_title	Antwoord titel en tekst
+admin_approve_pending	edit_project_details	[Wijzig project details]
+admin_approve_pending	error_creating_group	Fout bij aanmaken groep object
+admin_approve_pending	error_group_rejection	Fout bij groep weigering
+admin_approve_pending	home_box	Home box:
+admin_approve_pending	manage_responses	(reacties beheren)
+admin_approve_pending	no_pending_projects_to_approve	Geen goed te keuren projecten in de pijpleiding
+admin_approve_pending	none_found	Niets gevonden
+admin_approve_pending	other_information	Overige informatie
+admin_approve_pending	pending_projects	Projecten in behandeling:
+admin_approve_pending	pending_reason	Reden in behandeling:
+admin_approve_pending	project_admin	Project beheer
+admin_approve_pending	submitted_description	Ingediende beschrijving:
+admin_approve_pending	unix_group_name	Unix 	Unix groepsnaam:
+admin_approve_pending	view_edit_project_members	[Bekijk/wijzig projectleden]
+admin_database	add_an_already_active_database	Voeg een reeds actieve database toe
+admin_database	added_already_active_database	Reeds actieve database toegevoegd
+admin_database	count	Aantal
+admin_database	display_database_type	Toon databases van type:
+admin_database	error_adding_database	Fout bij toevoegen database
+admin_database	group	Groep
+admin_database	group_unix_name	Unix groepsnaam:
+admin_database	no_databases_defined	Geen database gedefinieerd
+admin_database	site_admin_groups_maintance	Site beheer: groepsdatabase beheer
+admin_database	statistics_for_project_database	Statistieken voor project databases
+admin_database	type	Type
+admin_database	unable_to_insert	Niet mogelijk om reeds actieve database toe te voegen.
+admin_groupedit	active	Actief (A)
+admin_groupedit	holding	Aangehouden (W)
+admin_groupedit	incomplete	Onvolledig (I)
+admin_groupedit	instruction_email_sent	E-mail met uitleg verstuurd
+admin_groupedit	new_project_instruction_email	Opnieuw verzenden instructie e-mail voor nieuw project
+admin_groupedit	no	Nee
+admin_groupedit	pending	In behandeling (P)
+admin_groupedit	project_admin	[Projectbeheer]
+admin_groupedit	public	Publiek toegankelijk
+admin_groupedit	registration_application	Registratie applicatie:
+admin_groupedit	status	Status
+admin_groupedit	title	Site beheer: groepsinfo
+admin_groupedit	unix_group_name	Unix groepsnaam:
+admin_groupedit	update	Bijwerken
+admin_groupedit	updated	Bijgewerkt
+admin_groupedit	yes	Ja
+admin_grouplist	group_list	Groepslijst
+admin_grouplist	group_list_for_category	Groepslijst voor categorie:
+admin_grouplist	group_name_click_to_edit	Groepsnaam (klik om te wijzigen)
+admin_grouplist	groups_that_begin_with	Groepen die beginnen met
+admin_grouplist	license	Licentie
+admin_grouplist	members	Teamleden
+admin_grouplist	public	Publiek toegankelijk
+admin_grouplist	register_time	Tijdregistratie
+admin_grouplist	status	Status
+admin_grouplist	unix_name	Unix naam
+admin_index	active_projects_count	Actieve projecten: <strong>$1</strong>
+admin_index	active_users_count	Actieve site deelnemers: <strong>$1</strong>
+admin_index	add_delete_edit_file_types	Toevoegen, Verwijderen, of Bewerken van file types
+admin_index	add_delete_edit_laguage	Toevoegen, Verwijderen, of Wijzigen van ondersteunde talen
+admin_index	add_edit_delete_licenses	Toevoegen, Verwijderen, of Wijzigen van licenties
+admin_index	add_edit_delete_processors	Toevoegen, Verwijderen, of Wijzigen van processoren
+admin_index	add_edit_delete_themes	Toevoegen, Verwijderen, of Wijzigen van thema's
+admin_index	add_to_trove_map	Toevoegen aan het Trove overzicht
+admin_index	approve_reject	Goedkeuren/verwerpen
+admin_index	cronman	Cronbeheer
+admin_index	display_full_group	Toon volledige groepslijst/bewerk groepen
+admin_index	display_full_user_list	Toon volledige gebruikerslijst/bewerk gebruikers
+admin_index	display_groups_beginning_with	Toon groepen die beginnen met :
+admin_index	display_trove_map	Toon Trove overzicht
+admin_index	display_user_beginning_with	Toon gebruikernamen die beginnen met:
+admin_index	front_page_news	Voorpaginanieuws
+admin_index	get	Ophalen
+admin_index	group_maintaince	Groepsonderhoud
+admin_index	groups_with_status	Groepen met status
+admin_index	mail_engine	Mail engine voor $1 geregistreerde gebruikers
+admin_index	new_project_approval	(Nieuw project goedkeuren)
+admin_index	news	Nieuws
+admin_index	pending_projects_count	Aangehouden projecten: <strong>$1</strong>
+admin_index	private_groups	Besloten groepen
+admin_index	project_active	Actief (A)
+admin_index	project_database_administration	Project database beheer
+admin_index	project_hold	Aangehouden (H)
+admin_index	project_pending	In behandeling (P)
+admin_index	recent_logins	Recente logins
+admin_index	register_new_project	Nieuw project registreren
+admin_index	registered_projects_count	Geregistreerde projecten: <strong>$1</strong>
+admin_index	search_groups	Zoeken <em>(groepsID, unix naam groep, volledige naam)</em>
+admin_index	search_users	Zoeken <em>(userID, gebruikersnaam, echte naam, email)</em>
+admin_index	site_mailing_maintaince	Site mailings onderhoud
+admin_index	site_utilities	Site hulpmiddelen
+admin_index	site_wide_stats	Site-brede statistieken
+admin_index	stats	Statistieken
+admin_index	title	Site beheer
+admin_index	translation_file_tool	Vertalingsbestanden beheer
+admin_index	trove_project_tree	Trove project overzicht
+admin_index	user_maintaince	Onderhouden gebruikers
+admin_index	virtual_host_admin_tool	Virtuele Host beheer
+admin_massmail	active_deliveries	Actieve verzendingen
+admin_massmail	all_project_admins	Alle project beheerders
+admin_massmail	all_project_developers	Alle project ontwikkelaars
+admin_massmail	all_users	Alle gebruikers
+admin_massmail	be_verry_carefull	Wees <span class="important">HEEL</span> voorzichtig met dit formulier. Een submit van dit formulier zal leiden tot verzenden van een email naar een groot aantal users.
+admin_massmail	date	Datum
+admin_massmail	developers_test	Ontwikkelaars (test)
+admin_massmail	error_scheduling_mailing	Fout bij scheduling van mailing, mail scheduling niet gelukt, database fout:
+admin_massmail	id	ID
+admin_massmail	last_user_id_mailed	Laatst gemailde gebruikers id
+admin_massmail	mail_engine_for	Mail 	Mail engine voor $1 geregistreerde gebruikers
+admin_massmail	mailing_successfully_scheduled	Mailing succesvol gescheduled voor aflevering
+admin_massmail	missing_parameter_empty_message	Ontbrekende parameter, je probeert een lege boodschap te verzenden
+admin_massmail	missing_parameter_proper_subject	Ontbrekende parameter, je dient een geschikt onderwerp voor de mailing op te geven
+admin_massmail	missing_parameter_select_target	Ontbrekende parameter, je dient een doelgroep voor de mailing te kiezen
+admin_massmail	schedule_for_mailing	Schedule voor mailing
+admin_massmail	select	(kies)
+admin_massmail	subject	Onderwerp
+admin_massmail	subscribers_to_additional_community	Geregistreerden voor "Aanvullende community mailings"
+admin_massmail	subscribers_to_site_updates	Geregistreerden voor "Site wijzigingen"
+admin_massmail	text_of_message	Berichttekst
+admin_massmail	type	Type
+admin_massmail	will_be_append	(zal worden toegevoegd met uitschrijvingsinformatie, indien van toepassing)
+admin_responses	add_response	Toegevoegd antwoord
+admin_responses	by_the_way	Tussen haakjes, ik heb niets verwijderd... voor het geval dat...
+admin_responses	create	Cre&euml;er
+admin_responses	create_new_response	Cre&euml;er nieuw antwoord:
+admin_responses	deleted_resposes	Gewist antwoord
+admin_responses	edit_response	Bewerkte antwoorden
+admin_responses	edit_response_other	Bewerk antwoord:
+admin_responses	existing_responses	Bestaande antwoorden:
+admin_responses	go	OK
+admin_responses	not_sure_dont_click	Waarom druk je op 'Wissen' als je er niet zeker van bent?
+admin_responses	response_text	Antwoord tekst:
+admin_responses	response_title	Antwoord titel:
+admin_responses	title	Site beheer: wijzig afwijzingsantwoorden
+admin_responses	yes_im_sure	Ja, ik weet het zeker
+admin_responses	you_cant	Je kunt &#039;Geen&#039; niet $1 !
+admin_search	email	E-mail
+admin_search	full_name	Volledige naam
+admin_search	group_search_criteria	Groep zoeken met zoekcriteria
+admin_search	id	ID
+admin_search	index	Beheer zoekresultaten
+admin_search	matches	gevonden
+admin_search	member_since	Lid sinds
+admin_search	real_name	Echte naam
+admin_search	refusing_to_display_whole_db	Het tonen van de complete(!) database is geweigerd. Gebruik een CLI query als je dit toch wilt.
+admin_search	registered	Geregistreerd
+admin_search	status	Status
+admin_search	unix_name	Unix naam
+admin_search	user_search_criteria	Gebruiker zoeken met criteria
+admin_search	username	Gebruikersnaam
+admin_trove_cat_add	add	Voeg toe
+admin_trove_cat_add	add_new_trove_category	Voeg nieuwe Trove categorie toe
+admin_trove_cat_add	error_in_trove_openration	Fout in Trove bewerking
+admin_trove_cat_add	new_category_description	Nieuwe categorie - beschrijving (VARCHAR 255)
+admin_trove_cat_add	new_category_full_name	Nieuwe categorie - volledige naam (VARCHAR 80)
+admin_trove_cat_add	new_category_short_name	Nieuwe categorie - verkorte naam (geen spaties, unix stijl)
+admin_trove_cat_add	parent_category	Voeg nieuwe parent categorie in
+admin_trove_cat_add	title	Site beheer: Trove - voeg Node toe
+admin_trove_cat_edit	cant_delete_has_subcategories	Verwijderen niet mogelijk, deze Trove categorie heeft subcategorie&euml;n
+admin_trove_cat_edit	delete	Wissen
+admin_trove_cat_edit	edit_trove_category	Wijzig Trove categorie
+admin_trove_cat_edit	error_in_trove_operation	Fout in Trove bewerking
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Fout in Trove bewerking - kan Trove categorie niet verwijderen die als default in local.inc is opgenomen
+admin_trove_cat_edit	new_category_description	Nieuwe categorie - beschrijving (VARCHAR 255)
+admin_trove_cat_edit	new_category_full_name	Nieuwe categorie - volledige naam (VARCHAR 80)
+admin_trove_cat_edit	new_category_short_name	Nieuwe categorie - verkorte naam (geen spaties, unix stijl)
+admin_trove_cat_edit	no_such_category	Gevraagde Trove categorie bestaat niet
+admin_trove_cat_edit	parent_category	Parent categorie:
+admin_trove_cat_edit	title	Site beheer: Trove - wijzig categorie
+admin_trove_cat_edit	update	Aanpassen
+admin_trove_cat_list	add	Voeg toe
+admin_trove_cat_list	browse_trove_tree	Bekijk Trove overzicht
+admin_trove_cat_list	edit	Bewerken
+admin_trove_cat_list	title	Site beheer: Trove - categorie lijst
+admin_unsubscribe	admin_initiaded_mail	Mailings verzonden door de beheerder zelf
+admin_unsubscribe	all	ALLE
+admin_unsubscribe	all_site_mailing	Alle site mailings
+admin_unsubscribe	comm_mail	Community mail
+admin_unsubscribe	email	E-mail
+admin_unsubscribe	error_unsubscribe_user	Fout, uitschrijven was niet mogelijk voor de gebruiker:
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	real_name	Echte naam
+admin_unsubscribe	show_user_matching	Toon het matching patroon van de gebruiker
+admin_unsubscribe	site_mail	Site mail.
+admin_unsubscribe	subscription_maintance	Site mailings inschrijvingen onderhoud
+admin_unsubscribe	title	Site mailings inschrijvingen onderhoud
+admin_unsubscribe	unsubscribe	Uitschrijven
+admin_unsubscribe	unsubscribe_user	Uitschrijven gebruiker:
+admin_unsubscribe	use_fields_bellow	Gebruik het veld hieronder om gebruikers te vinden die overeenkomen met het matching patroon $1 gebruikersnaam, echte naam, of e-mail adres (doet automatisch substring match, gebruik '%' ergens in het patroon om 0 of meer willekeurige tekens aan te duiden). Klik op de gebruikersnaam om hem uit te schrijven voor site mailings (er zal een nieuw formulier getoond worden).
+admin_unsubscribe	user_id	gebruikers ID
+admin_unsubscribe	user_unsubscribed	Gebruiker uitgeschreven
+admin_unsubscribe	username	Gebruikersnaam
+admin_unsubscribe	you_can_unsubscribe	Je kunt een gebruiker ofwel uit door de beheerder zelf verzonden site-brede mailings uitschrijven, ofwel uit alle site mailings zoals forum and release aankondigingen.
+admin_useredit	account_info	Account informatie
+admin_useredit	active	Actief (A)
+admin_useredit	could_not_complete_operation	Kon de gevraagde bewerking niet uitvoeren
+admin_useredit	current_confirm_bash	Huidige bevestigings hash:
+admin_useredit	delete	Verwijderen
+admin_useredit	delete_user_confirm	Ik wil deze gebruiker verwijderen
+admin_useredit	deleted	Gewist (D)
+admin_useredit	email	E-mail:
+admin_useredit	group_memerbership	Groepen lidmaatschap
+admin_useredit	name	Naam
+admin_useredit	no_unix_account	Geen Unix account (N)
+admin_useredit	operations	Bewerkingen
+admin_useredit	pending	In behandeling (P)
+admin_useredit	project_admin	Project beheer
+admin_useredit	real_name	Echte naam
+admin_useredit	suspended	Opgeschort (S)
+admin_useredit	this_page_allows	Via deze pagina kun je alleen de directe eigenschappen van de het gebruikerobject wijzigen. Om eigenschappen van een gebruiker in een specifieke groep te wijzigen moet je naar de beheerpagina van die bewuste groep gaan (hieronder).
+admin_useredit	title	Site beheer: Gebruikersinfo
+admin_useredit	unix_account_status	Unix account status
+admin_useredit	unix_name	Unix naam
+admin_useredit	unix_shell	Unix shell:
+admin_useredit	unix_status_updated_mirroring	Unix status aangepast conform web status, tenzij de status was 'Geen unix account (N)'
+admin_useredit	update	Aanpassen
+admin_useredit	updated	Aangepast
+admin_useredit	user_id	Gebruikers ID:
+admin_useredit	user_name	gebruikersnaam:
+admin_useredit	web_account_status	Web account status
+admin_userlist	activate	Activeer
+admin_userlist	active	Actief
+admin_userlist	add_date	Datum toevoegen
+admin_userlist	all_groups	Alle groepen
+admin_userlist	delete	Verwijder
+admin_userlist	deleted	Verwijderd
+admin_userlist	devprofile	Ontwikkelaarsprofiel
+admin_userlist	key	Sleutel
+admin_userlist	login	Login
+admin_userlist	pending	In behandeling
+admin_userlist	submit	Toevoegen
+admin_userlist	suspend	Opschorten
+admin_userlist	suspended	Opgeschort
+admin_userlist	user_list_for_group	Gebruikerslijst voor groep:
+admin_userlist	user_updated	Gebruiker gewijzigd naar $1 status
+admin_userlist	userlist	: Gebruikerslijst
+admin_vhost	add_virtual_host	Voeg Virtuele Host toe
+admin_vhost	cgi_dir	CGI directory
+admin_vhost	error_adding_vhost	Fout bij toevoegen Virtuele Host:
+admin_vhost	error_updating_vhost	Fout bij aanpassen Virtuele Host:
+admin_vhost	get_info	Haal info op
+admin_vhost	group	Groep
+admin_vhost	group_unix_name	Unix naam van groep
+admin_vhost	htdocs_dir	HTDOCS directory
+admin_vhost	no_such_host	Deze Virtuele Host bestaat niet:
+admin_vhost	operations	Bewerkingen
+admin_vhost	scheduled_for_creation	gescheduled om voor de groep aangemaakt te worden
+admin_vhost	the_provided_group	De opgegeven groepsnaam bestaat niet
+admin_vhost	title	Site beheer
+admin_vhost	tweak_directories	Directories aanpassen
+admin_vhost	update	Aanpassen
+admin_vhost	update_record	Record aanpassen:
+admin_vhost	vhost_id	Virtuele Host - ID
+admin_vhost	vhost_name	Virtuele Host -  Naam
+admin_vhost	virtual_host	Virtuele Host:
+admin_vhost	virtual_host_administration	Virtuele Host - beheer
+admin_vhost	virtual_host_entry_updated	Virtuele Host - eigenschappen aangepast.
+admin_vhost	virtual_host_name	Virtuele Host - naam
+advanced_search	all	alles
+advanced_search	and_search	met alle woorden
+advanced_search	headline	$1 zoekresultaat
+advanced_search	no_matches_found	Niets gevonden
+advanced_search	no_matches_found_no_under_section	Niets gevonden - geen secties beschikbaar (controleer je rechten)
+advanced_search	none	geen
+advanced_search	or_search	met &eacute;&eacute;n woord
+advanced_search	search_button	Zoeken
+advanced_search	search_in	Zoeken in
+advanced_search	select	Selecteren
+artifact_canned	required_fields	Artefact aangehouden: naam en verantwoordelijke verplicht
+artifact_category	required_fields	Artefact categorie: naam en verantwoordelijke verplicht
+calendar	april	April
+calendar	august	Augustus
+calendar	december	December
+calendar	february	Februari
+calendar	friday	Vrijdag
+calendar	january	Januari
+calendar	july	Juli
+calendar	june	Juni
+calendar	march	Maart
+calendar	may	Mei
+calendar	monday	Maandag
+calendar	monthdatefmt	Y-m
+calendar	november	November
+calendar	october	Oktober
+calendar	saturday	Zaterdag
+calendar	september	September
+calendar	sunday	Zondag
+calendar	task_begins	Taak $1 begint
+calendar	task_ends	Taak $1 eindigt
+calendar	task_link_title	Taaksamenvatting: $1
+calendar	thursday	Donderdag
+calendar	tuesday	Dinsdag
+calendar	wednesday	Woensdag
+classgroup	acceptedproject	Je project aanvraag voor $7 is goedgekeurd.\n\nVolledige projectnaam:  $1\nUnix project naam:  $2\nCVS server:         cvs.$2.$3\nShell/Web server:   $2.$3\n\nHet duurt ongeveer een dag tot het DNS deze wijzigingen heeft doorgevoerd.\nTerwijl je wacht op de DNS toevoeging, kun je een shell login proberen op \n$4 en met CVS naar $5 gaan.\n\nNeem contact op met de beheerders als je shell/CVS accounts na een uur of 6 nog niet werken.\nAlle shell/CVS accounts zijn dichtgezet voor telnet en werken alleen met SSH2.\n\nJe web site is toegankelijk via je shell account. Lees de site documentatie (link hieronder) m.b.t. beoogd gebruik, beschikbare diensten, en directory structuur van het account.\n\nNeem ook wat tijd om de site documentatie m.b.t. project beheer te lezen (http://$3/docs/site/). Als je je eigen project pagina bezoekt in $7 terwijl je ingelogd bent, vind je links aanvullende menu functies onder &#039;Project beheer&#039;.\n\nWe adviseren dringend om $7 te bezoeken en een algemene projectbeschrijving te geven. Dit kan ofwel door je project pagina te bezoeken terwijl je ingelogd bent, en &#039;Project beheer&#039; te keizen in het menu aan de linkerkant, ofwel door naar http://$3/project/admin/?group_id=$6 , na login.\n\nJe project zal niet in het Trove overzicht verschijnen (een lijst van projecten op $7 om makkelijk rond te kijken en te zoeken) zolang je het niet categorizeert in de project beheer schermen. Doe het meteen zodat de mensen je project ook kunnen vinden.\n\nVeel plezier met dit systeem en vertel ook anderen over $7. Laat het ons weten als we ergens mee kunnen helpen.\n\n-- het $7 team
+classgroup	acceptedprojecttitle	$1 project goedgekeurd
+classgroup	newprojectnotification	Nieuw $1 project ingediend\n\nVolledige project naam:  $2\nIngediende omschrijving: $3\nLicentie: $4\n\nVolg deze URL om de aanvraag goed of af te keuren:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	Nieuw $1 project ingediend\n\nVolledige project naam:  $2\nIngediende omschrijving: $3\nLicentie: $4\n\nDe $1 beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht krijgen over de beslissing.
+classgroup	newprojectnotificationtitle	Nieuw $1 project ingediend
+classgroup	rejectedproject	Je project aanvraag voor $3 is afgewezen.\n\nVolledige project naam:  $1\nUnix project naam:  $2\n\nReden van afwijzing:\n\n
+classgroup	rejectedprojecttitle	$1 Project afgewezen
+common	login	Inloggen
+common	logout	Uitloggen
+common	myaccount	Mijn account
+common	newaccount	Nieuw account
+common_include_account	cvsreserved	Naam is gereserveerd voor CVS.
+common_include_account	dnsreserved	Naam is gereserveerd voor DNS.
+common_include_account	illegal	Niet toegestaan teken in de login naam.
+common_include_account	nospace	Er mogen geen spaties in de login naam voorkomen.
+common_include_account	nounderscore	Groep naam mag om DNS redenen geen underscore bevatten.
+common_include_account	sixchar	Het wachtwoord moet minstens uit 6 karakters bestaan.
+common_include_account	toolong	Naam is te lang: moet minder dan 15 karakters zijn.
+common_include_account	tooshort	Naam is te kort: moet langer dan 3 karakters zijn.
+common_utils	priority_colors	Prioriteit kleurcodes
+conf	mail_charset	UTF-8
+cronman	date	Datum
+cronman	job	Job
+cronman	message	Bericht
+cronman	next	Volgende
+cronman	previous	Vorige
+developer	body	Berichttekst
+developer	date	Datum
+developer	diary_and_notes	Logboek en aantekeningen voor
+developer	entry_not_found	Gebruiker niet gevonden
+developer	no_entries	Deze gebruiker heeft geen logboek
+developer	no_user_selected	Geen gebruiker geselecteerd
+developer	subject	Onderwerp
+developer_monitor	error_inserting	Fout bij het toevoegen aan gebruikersmonitor
+developer_monitor	monitoring_user	Gebruiker wordt nu gemonitord
+developer_monitor	monitoring_user_expl	<p>De aantekeningen van deze gebruiker worden vanaf nu per e-mail toegestuurd.</p><p>Klik nogmaals op <strong>Monitor gebruiker</strong> om monitoring weer uit te schakelen.</p>
+developer_monitor	monitoring_user_off	Gebruikersmonitor is uitgeschakeld
+developer_monitor	monitoring_user_off_expl	Je zult geen monitor e-mails van deze gebruiker meer ontvangen
+developer_monitor	title	Monitor een gebruiker
+developer_monitor_choose_user	body	Fout - kies eerst een gebruiker om te monitoren
+developer_monitor_choose_user	title	Kies eerst een gebruiker
+developer_rate	cannot_rate_yourself	Je kunt jezelf niet beoordelen
+developer_rate	ratings_recorded	Beoordeling geregistreerd
+developer_rate	ratings_recorded_body	Je kunt deze persoon opnieuw beoordelen door naar zijn beoordelingspagina terug te gaan en de info nogmaals in te voeren.
+developer_rate	title	Gebruiker beoordelingspagina
+developer_rate	turned_off_body	Je hebt ervoor gekozen om niet aan het Collega Beoordelingssysteem mee te doen
+developer_rate	turned_off_title	Beoordelingen uitgeschakeld
+docman	admin	Beheer
+docman	error_invalid_file_attack	Aanvalspoging met ongeldig bestand $1
+docman	error_no_docs	Dit project heeft geen openbare documenten
+docman	error_no_groups_defined	Geen documentgroepen gedefinieerd
+docman	submit_new	Toevoegen nieuwe documentatie
+docman	turned_off	Dit project heeft de documentmanager uitgezet
+docman	view_doc	Bekijk documentatie
+docman_admin	add_edit_docgroups	Documentgroepen toevoegen/bewerken
+docman_admin	section	Project: $1
+docman_admin	title	Documentmanager - beheer
+docman_admin_addgroups	section	Documentmanager beheer
+docman_admin_addgroups	title	Documentmanager toevoegen
+docman_admin_editdocs	doc_contents	Documentinhoud
+docman_admin_editdocs	section	Documentmanager beheer
+docman_admin_editdocs	state	Status
+docman_admin_editdocs	title	Documenten bewerken
+docman_admin_editdocs	upload	OPTIONEEL: Nieuw bestand uploaden
+docman_admin_editdocs	upload_url	Specificeer een extern URL waar het bestand kan worden gevonden
+docman_admin_editgroups	add_group	Voeg groep toe
+docman_admin_editgroups	description	Groepsnaam zal als titel gebruikt worden - denk daaraan bij naamgeving en formattering.
+docman_admin_editgroups	edit_group	Groep aanpassen
+docman_admin_editgroups	group_id	ID
+docman_admin_editgroups	group_name	Groepsnaam
+docman_admin_editgroups	new_group_name	Nieuwe groepsnaam
+docman_admin_editgroups	section	Documentmanager beheer
+docman_admin_editgroups	title	Groepen bewerken
+docman_common	error_min_desc_length	Documentomschrijving moet uit minstens 10 tekens bestaan
+docman_common	error_min_title_length	Titel moet uit minstens 5 tekens bestaan
+docman_common	no_docs	Geen documenten gevonden
+docman_common_doc	invalid_docid	Document: Ongeldig document ID
+docman_common_docgroup	invalid_id	Documentgroep: Ongeldig documentgroep ID
+docman_common_docgroup	name_required	Documentgroep: Naam is verplicht
+docman_display_doc	all_languages	Alle talen
+docman_display_doc	docmoved	Dit document is verplaatst naar <a href="/docman/view.php/$1/$2"> deze nieuwe locatie</a>
+docman_display_doc	no_document_data_text	Geen document om te tonen - ongeldig of niet-geactiveerd documentnummer
+docman_display_doc	no_document_data_title	Geen documentgegevens
+docman_display_doc	section	Project: $1
+docman_display_doc	title	Documentbeheer: Document tonen
+docman_new	description	Omschrijving
+docman_new	doc_title	Documenttitel
+docman_new	error_blank_document	Fout bij ophalen leeg document
+docman_new	file	Bestand
+docman_new	group	Groep waar document in thuis hoort
+docman_new	intro	<strong>Document Titel</strong>:  verwijst naar de verkorte titel van het document (b.v. Het gebruik van de download server)<br /><strong>Omschrijving:</strong> Een korte omschrijving die vlak onder de titel komt.
+docman_new	language	Taal
+docman_new	no_valid_group	Geen geldige documentgroep geselecteerd
+docman_new	section	Project: $1
+docman_new	submit	Document submitten
+docman_new	submitted_successfully	Document gesubmit
+docman_new	title	Documentbeheerder: Toevoegen nieuwe documentatie
+docman_new	upload_file	Document uploaden
+docman_new	upload_url	OF specificeer een extern URL waar het bestand kan worden gevonden
+error	not_found	PAGINA NIET GEVONDEN
+error	title	Pagina niet gevonden (Fout 404)
+exit	choose_group_body	Geen groepsID gekozen
+exit	choose_group_title	Fout - geen groepsID gekozen
+exit	disabled_body	De site beheerder heeft deze optie uitgezet
+exit	disabled_title	Fout - optie uitgezet.
+exit	exiting_with_error	Afgebroken i.v.m. fout
+exit	missing_parameters_body	Fout - verplichte parameters niet ingevuld
+exit	missing_parameters_title	Fout - ontbrekende parameters
+forum	choose	<p>Kies een forum om te kunnen browsen, zoeken en berichten te kunnen schrijven.<p>
+forum	error_forum_not_found	Forum niet gevonden
+forum	error_no_forums_found	Geen forums gevonden voor $1
+forum	error_no_valid_group_object	Forum:: Geen geldig groep object
+forum	forum	Forum
+forum	forums_for	Forums voor $1
+forum_admin	add_forum	Voeg forum toe
+forum_admin	delete	Verwijder
+forum_admin	delete_forum	Verwijder het hele forum en alle inhoud
+forum_admin	delete_message	Verwijder bericht
+forum_admin	delete_warning	Je staat op het punt om dit hele forum en de gehele inhoud ervan volledig en onherroepelijk te verwijderen!
+forum_admin	deleted	Succesvol verwijderd
+forum_admin	really_sure	Ik weet het helemaal zeker
+forum_admin	sure	Ik weet het zeker
+forum_admin	title	Forums: beheer
+forum_admin_addforum	add_forum	Voeg dit forum toe
+forum_admin_addforum	allow_anonymous	Anonieme berichten toestaan?
+forum_admin_addforum	email_posts	Alle berichten e-mailen aan:
+forum_admin_addforum	forum_created	Forum met succes aangemaakt
+forum_admin_addforum	forum_description	Omschrijving
+forum_admin_addforum	forum_name	Forumnaam
+forum_admin_addforum	is_public	Publiek toegankelijk
+forum_admin_changestatus	change_status	Forum status wijzigen
+forum_admin_changestatus	intro	Je kunt hier forum eigenschappen aanpassen. Let op: besloten forums kunnen wel door leden van je eigen project bekeken worden, maar niet door overige gebruikers.
+forum_admin_changestatus	update_successful	Forum info gewijzigd
+forum_admin_delete_message	title	Verwijder een bericht
+forum_admin_delete_message	warning	LET OP! Je gaat nu een bericht met alle followups permanent verwijderen!!
+forum_admin_delete_messages	messages_deleted	$1 berichten verwijderd
+forum_common	error_adding_forum	Fout bij het toevoegen van een forum
+forum_common	error_illegal_characters	Niet-toegestane tekens in de forum naam
+forum_common	error_min_desc_length	Forum omschrijving moet minstens 10 tekens lang zijn
+forum_common	error_min_name_length	Forum naam moet minstens 3 tekens lang zijn
+forum_common	error_save_when_logged_in	Je kunt je positie alleen opslaan als je bent ingelogd
+forum_common	error_set_monitor	Je kunt alleen monitoren als je bent ingelogd
+forum_common	error_unable_to_add_monitor	Kan geen monitor toevoegen
+forum_common_forum	error_save_place	Forum::savePlace()
+forum_common_forummessage	error_cannot_update_master_thread	Kan master thread parent niet aanpassen met huidige tijd
+forum_common_forummessage	error_cannot_update_parent	Kan parent niet aanpassen
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Kan geen nieuw bericht ID krijgen
+forum_common_forummessage	error_getting_next_thread	Ophalen van volgend thread ID niet gelukt
+forum_common_forummessage	error_group_forum_id	Groep forum ID in database resultaat komt niet overeen met forum object
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Ongeldig bericht ID
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() Geen geldig ParentMessage object
+forum_common_forummessage	error_posting_failed	ForumMessage::create() Plaatsen van bericht niet gelukt
+forum_common_forummessage	error_required_fields	Berichttekst en -onderwerp verplicht
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: geen geldig forum object
+forum_errors	error_getting_forum	Fout bij het ophalen van het forum
+forum_forum	author	Auteur
+forum_forum	changeview	Wijzig weergave
+forum_forum	date	Datum
+forum_forum	description	Beschrijving
+forum_forum	flat	Plat
+forum_forum	forum	Forum
+forum_forum	lastpost	Laatste bericht
+forum_forum	nested	Genest
+forum_forum	next_messages	Volgende berichten
+forum_forum	no_forum_chosen	Geen forum gekozen
+forum_forum	posts	Berichten
+forum_forum	postsuccess	Bericht geplaatst
+forum_forum	previous_messages	Vorige berichten
+forum_forum	replies	Antwoorden
+forum_forum	show	Toon
+forum_forum	thread	Thread
+forum_forum	threaded	Forum weergeven als threads
+forum_forum	threads	Threads
+forum_forum	topic	Onderwerp
+forum_forum	topicstarter	Onderwerp starter
+forum_forum	ultimate	Laatste
+forum_message	by	DOOR
+forum_message	date	DATUM
+forum_message	message	Bericht
+forum_message	message_not_found_body	Dit bericht bestaat niet (meer)
+forum_message	message_not_found_title	Bericht niet gevonden
+forum_message	must_choose_message_body	Je moet eerst een bericht kiezen
+forum_message	must_choose_message_title	Eerst een bericht kiezen
+forum_message	post_followup	Plaats een reactie op dit bericht
+forum_message	receive_followups	Ontvang reacties via e-mail
+forum_message	subject	ONDERWERP
+forum_message	thread	Start nieuwe thread
+forum_message	thread_view	Weergave als threads
+forum_monitor	activated	Forum monitoring geactiveerd
+forum_monitor	deactivated	Forum monitoring gedeactiveerd
+forum_save	saved	Forum positie opgeslagen. Nieuwe berichten worden gemarkeerd als je terugkeert
+forum_utils	admin	Beheer
+forum_utils	anonymously	Anoniem
+forum_utils	by	Door:
+forum_utils	couldpostif	Je zou een bericht kunnen plaatsen $1 als je was ingelogd $2
+forum_utils	date	Datum
+forum_utils	discussionforum	Discussie forums:
+forum_utils	doublepost	Het lijkt erop dat je dit bericht dubbel plaatst, aangezien het hetzelfde onderwerp en followup informatie heeft als een eerder bericht.
+forum_utils	htmltag	HTML tags in je bericht zullen als tekst zichtbaar zijn
+forum_utils	latest	Laatste Nieuws
+forum_utils	loggedin	ingelogd
+forum_utils	mailmonitor	\nLees en reageer op dit bericht: \n$1\nDoor: $2 \n\n $3\n\n______________________________________________________________________\nJe ontvangt deze e-mail omdat je dit forum monitort.\nAls je wilt stoppen met het monitoren van dit forum, log dan in op $4 \nen ga naar: $5
+forum_utils	message	Bericht:
+forum_utils	monitor	Monitor forum
+forum_utils	nonewsitem	Fout - nieuws onderwerp niet gevonden
+forum_utils	postanon	Je bent anoniem berichten aan het plaatsen omdat je niet bent
+forum_utils	postcomment	Commentaar plaatsen
+forum_utils	project	Project
+forum_utils	reply	antwoord
+forum_utils	saveplace	Sla positie op
+forum_utils	stopmonitor	Stop met monitoren
+forum_utils	subject	Onderwerp:
+forum_utils	summary	Samenvatting
+frs	file_download	Downloaden
+frs	file_monitor	Monitor
+frs	file_notes	Aantekeningen
+frs	file_package	Bundel
+frs	file_rel_date	Datum
+frs	file_version	Versie
+frs	latest_file_releases	Meest recente release-versies
+frs_admin	delete	Verwijderen
+frs_admin	delete_package_warning	Je staat op het punt om dit hele package met alle bijbehorende releases en bestanden volledig en onherroepelijk te verwijderen!
+frs_admin	delete_release_warning	Je staat op het punt om deze hele release en de gehele inhoud ervan volledig en onherroepelijk te verwijderen!
+frs_admin	deleted	Verwijderd
+frs_admin	really_sure	Ik weet het helemaal zeker
+frs_admin	sure	Ik weet het zeker
+frs_file	error_already_exists	Deze bestandsnaam komt al in deze projectomgeving voor
+frs_file	error_cannot_move	Bestand kan niet verplaatst worden naar de permanente locatie
+frs_file	error_invalid_file	FRS bestand is kennelijk niet geldig
+frs_file	error_min_name_length	FRS bestandsnaam moet tenminste 3 tekens lang zijn
+frs_file	error_name_format	FRS bestandsnaam moet het volgende format volgen: gforge-3.0.tar.bz2
+frs_package	error_min_name_length	FRS bestandsnaam moet tenminste 3 tekens lang zijn
+frs_package	error_name_format	FRSPackage::Update: Bundel naam moet volledig alfanumeriek zijn
+frs_package	error_set_monitor	Je kunt alleen monitoren als je ingelogd bent
+frs_release	email_text	\n\nProject "$1" ('$2') heeft  \neen nieuwe versie van package '$3' opgeleverd.\nHet kan worden gedownload via de link:\n $4\n\nJe ontvangt deze e-mail omdat je gevraagd hebt\nbericht te krijgen wanneer er een nieuwe versie van dit package\nopgeleverd wordt. Als je in de toekomst geen bericht meer wilt \nontvangen, log dan in op $5 en klik op deze link: \n $6
+frs_release	email_title	[$1 Publicatie] $2
+frs_release	error_min_name_length	FRS packagenaam moet tenminste 3 tekens lang zijn
+general	add	Toevoegen
+general	browse	Bladeren
+general	cancel	Afbreken
+general	confirm	Bevestigen
+general	create_successful	Aangemaakt
+general	delete	Wissen
+general	deleted	Gewist
+general	done	Klaar
+general	edit	Bewerken
+general	error	Fout
+general	error_creating	Fout bij aanmaken $1
+general	error_getting	Fout bij ophalen $1
+general	error_group_id	Groep ID in database resultaat komt niet overeen met groep object
+general	error_missing_params	Ontbrekende parameters
+general	error_no_valid_group_object	$1:: Geen geldig Group object
+general	error_on_update	Fout bij bewerken:
+general	footer	Dit is $1.  Voor meer informatie, waaronder copyright info, zie <a href="/about.php">deze pagina</a>.
+general	go	OK
+general	invalid_email	Ongeldig e-mail adres
+general	language	Taal
+general	more	Meer
+general	no	Nee
+general	open	open
+general	permdenied	Toegang geweigerd.
+general	permexcuse	De beheerder van dit project moet je toestemming geven om deze pagina te bekijken.
+general	permnotget	Geen toestemming gekregen.
+general	remove	Verwijderen
+general	reset	Ongedaan maken
+general	return	Terug
+general	submit	Submit
+general	submit_edit	Submit wijzigingen
+general	to	tot
+general	total	totaal
+general	update	Wijzigen
+general	update_successful	Wijziging doorgevoerd
+general	yes	Ja
+global	error	Fout
+group	activity	Activiteit percentiel:
+group	activitystat	Bekijk project activiteit <a href="/project/stats/?group_id=$1">statistieken</a>
+group	developer_info	Ontwikkelaars info
+group	long_cvs	CVS repository
+group	long_docman	Documentmanager: documentatie van project
+group	long_forum	Openbare forums
+group	long_ftp	Anonieme FTP-ruimte
+group	long_homepage	Project startpagina
+group	long_mail	Mailing lijsten
+group	long_news	Laatste Nieuws
+group	long_pm	Taakmanager
+group	long_scm	SCM repository
+group	long_survey	Enqu&ecirc;tes
+group	long_tracker	Tracker
+group	nodescription	Dit project heeft nog geen beschrijving ingediend.
+group	norelease	Dit project heeft nog geen bestanden gepubliceerd.
+group	project_admins	Project beheerders
+group	public_area	Publiek domein
+group	registered	Geregistreerd:
+group	short_admin	Beheer
+group	short_bugs	Bugs
+group	short_cvs	CVS
+group	short_docman	Documentatie
+group	short_files	Bestanden
+group	short_forum	Forums
+group	short_homepage	Startpagina
+group	short_mail	Lijsten
+group	short_memberlist	Ontwikkelaars
+group	short_news	Nieuws
+group	short_patch	Patches
+group	short_pm	Taken
+group	short_scm	SCM
+group	short_summary	Samenvatting
+group	short_support	Ondersteuning
+group	short_survey	Enqu&ecirc;tes
+group	short_tracker	Tracker
+help	page_information	Pagina informatie
+help	title	Welkom bij $1
+help_tracker	assignee	Deze drop-down lijst toont de project beheerder aan wie een tracker item is toegewezen.
+help_tracker	attach_file	Als je een bestand aan een tracker item wilt koppelen moet je deze checkbox activeren voordat je je wijzigingen verstuurt.
+help_tracker	canned_response	De standaard antwoorden drop-down lijst geeft een lijst van door de project beheerder gedefinieerde standaard antwoorden op hulp verzoeken of bug meldingen.<br /><br /> Als je project beheerder bent kun je op de '(beheer)' link klikken om je eigen standaard antwoorden aan te maken.
+help_tracker	close_window	Venster sluiten
+help_tracker	data_type	De gegevenstype optie geeft aan wat voor type tracker item dit is.  Omdat de tracker de bug, patch, hulp, etc. opties in zich verenigt moeten beheerders de gelegenheid hebben aan te geven wat voor type een item is.<br /><br />Dit heeft bovendien het voordeel dat een beheerder een verzoek om hulp als bug kan opvoeren.
+help_tracker	monitor	Je kunt voor dit item monitoring aan of uit zetten door de "Monitor" link te klikken. <br /><br /><strong>Let op!</strong> - dit zorgt voor extra email. Als je commentaar op dit item levert, of een item indient, of als dit item aan jou is toegewezen, zul je op grond daarvan ook emails hierover ontvangen!
+help_tracker	priority	De prioriteit keuze geeft een gebruiker de mogelijkheid een tracker item op prioriteit te filteren (van 1-Laagste tot 5-Hoogste).<br /><br />Dit is extra handig bij bugs en hulpverzoeken als er een kritisch probleem in een project opduikt.
+help_tracker	sort_by	De sorteer-op optie geeft aan hoe de resultaten gesorteerd worden.<br /><br />  Er kan gesorteerd worden op ID, Prioriteit, Samenvatting, Openingsdatum, Sluitdatum, Opvoerder, or Toegewezen-aan.  Er kan ook aangegeven worden of oplopend of aflopend gesorteerd moet worden.
+help_tracker	status	Deze drop-down lijst geeft de huidige status van een tracker item aan.<br /><br />Je kunt de status op 'In Behandeling' zetten als je op antwoord wacht van de opsteller van het tracker item.  Als de opsteller antwoord geeft wordt de status automatisch op 'Open' gezet. Als de opsteller daarentegen geen antwoord geeft binnen een door de beheerder gespecificeerde tijd (standaard 14 dagen) krijgt het item de status  'Verwijderd'.
+help_tracker	summary	Het samenvattingsveld geeft een korte beschrijving van het tracker item. Handig wanneer er door meerdere tracker items gebladerd wordt.
+help_tracker	unknown_help_request	ONBEKEND HULP VERZOEK:
+help_trove_cat	description	Omschrijving
+help_trove_cat	full_category_name	Volledige categorienaam
+help_trove_cat	no_such_category	Deze Trove categorie bestaat niet
+help_trove_cat	short_name	Verkorte naam
+home	about_blurb	<P>$1 is een <B>gratis service voor <A href="http://www.opensource.org/">Open Source</A> ontwikkelaars</B> die gemakkelijke toegang tot het beste in CVS, mailing lijsten, bug tracking, berichtborden/forums, taakbeheer, site hosting, permanente bestandsarchivering, volledige backups, en volledig web-gebaseerd beheer geeft.</P><P><B>Site feedback en hoe mee te doen</B></P><P>Om het meeste uit $1 te halen, moet u naar	<A href="/account/register.php">registreren als een site gebruiker</A> gaan. Dit stelt u in staat om volledig mee te doen met alles wat we te bieden hebben. U kunt natuurlijk de site doorkijken zonder te registreren, maar u kunt niet volledig meedoen.</P><P><B>Uw eigen project opzetten</B></P><P><A href="/account/register.php">Registreren als een site gebruiker</A>, dan <A HREF="/account/login.php">Inloggen</A> en uiteindelijk, <A HREF="/register/">Nieuw project registreren</A>.</P><P>Bedankt... en veel succes met de site.</P>
+home	gforge_statistics	$1 Statistieken
+home	highest_ranked_users	Gebruikers met de hoogste score
+home	hosted_projects	Gehoste projecten
+home	most_active_this_week	Meest actief deze week
+home	no_stats_available	Geen statistieken beschikbaar
+home	recently_registered	Onlangs geregistreerde projecten
+home	recently_registered_date_format	m/d
+home	registered_users	Geregistreerde gebruikers
+home	top_project_downloads	Hoogst scorende project downloads
+include_html	no_change	Geen verandering
+include_html	none	Geen
+include_html	priority_highest	Hoogste
+include_html	priority_lowest	Laagste
+include_toolreport	all	Alles
+include_toolreport	for	voor
+include_toolreport	key	Sleutel
+include_toolreport	last_days	Laatste dag(en)
+include_toolreport	last_months	Laatste maand(en)
+include_toolreport	last_weeks	Laatste week(en)
+include_toolreport	last_years	Laatste jaar(en)
+include_toolreport	no_data	Geen rapportagedata gevonden
+include_toolreport	open	Open
+include_toolreport	project_lifespan	Project levensduur
+include_toolreport	show	Toon
+index	welcome	Welkom
+mail	archives	$1 archieven
+mail	choose_a_list	<p>Kies een lijst als je berichten wilt zoeken, lezen of plaatsen.</p>
+mail	external_administration	Aanmelden/Afmelden/Voorkeuren
+mail	help_to_request	Projectbeheerders kunnen de beheerslink gebruiken om mail lijsten aan te vragen.
+mail	mailinglists_for	Mailinglijsten voor $1
+mail	no_list_found	Geen lijsten gevonden voor $1
+mail	provided_by	<p>Mailing lijst aangeboden via een GForge versie van <a href="http://www.list.org/">GNU Mailman</a>.  Dank aan de Mailman en <a href="http://www.python.org/">Python</a> teams voor deze uitstekende software.</p>
+mail	unable_to_get_lists	Kan de lijsten niet ophalen
+mail_admin	add_list	Mailinglijst toevoegen
+mail_admin	admin_in_mailman	Beheren
+mail_admin	error_getting_list	Fout bij het ophalen van de lijst
+mail_admin	pagetitle	Mailinglijst beheer
+mail_admin	update_list	Lijsten beheren/aanpassen
+mail_admin_addlist	existing_mailing_lists	Bestaande mailinglijsten
+mail_admin_addlist	form_addlist	Deze lijst toevoegen
+mail_admin_addlist	form_description	Beschrijving:
+mail_admin_addlist	form_ispublic	Openbaar toegankelijk?
+mail_admin_addlist	form_name	Mailinglijst naam:
+mail_admin_addlist	list_added	Lijst toegevoegd
+mail_admin_addlist	list_information	<p>Lijstnamen worden op deze manier opgebouwd:<br /><strong>projectnaam-lijstnaam@$1</strong></p><p>Het duurt ongeveer <span class="important">6-24 uur</span> voordat je lijst gecre&euml;erd is.</p>
+mail_admin_addlist	pagetitle	Mailinglijst toevoegen
+mail_admin_updatelist	form_description	Beschrijving:
+mail_admin_updatelist	form_ispublic	Openbaar toegankelijk?
+mail_admin_updatelist	form_updatelist	Aanpassen
+mail_admin_updatelist	information	Je kunt lijsten hiervandaan beheren. Denk eraan dat priv&eacute; denk eraan dat lijsten nog steeds door leden van jouw project zichtbaar zijn, maar niet zichtbaar zijn in $1.
+mail_common	creation_mail_body	In 6-24 uur zal er een mailinglijst gecre&euml;erd worden op $1 \n en jij bent de lijstbeheerder.\n\nDeze lijst is: $3@$2 .\n\nJe mailing lijst info staat op:\n$4 .\n\nLijstbeheer staat op:\n$5 .\n\nHet wachtwoord voor je lijst is: $6 .\nVerander dit wachtwoord zo snel mogelijk.\n\nBedankt voor het aanmelden van je project bij $1.\n\n-- de $1 beheerders\n
+mail_common	creation_mail_subject	$1 Nieuwe Mailinglijst
+mail_common	description	Beschrijving
+mail_common	error_invalid_name	Ongeldige lijstnaam
+mail_common	error_list_already_exists	Lijst bestaat al
+mail_common	error_min_name_length	Je moet een lijstnaam opgeven die minimaal 4 tekens lang is
+mail_common	list_not_activated	Nog niet geactiveerd
+mail_common	mailing_list	Mailinglijst
+mail_common	prefs	Aanmelding
+mail_utils	admin	Beheer
+mail_utils	turned_off	Dit project heeft de mailinglijsten uitgezet
+menu	account_maintenance	Account onderhouden
+menu	admin	Beheer
+menu	bookmark_page	Deze pagina toevoegen aan favorieten
+menu	code_snippet	Codefragmenten
+menu	diary_notes	Logboek notities
+menu	home	Startpagina
+menu	login	Inloggen
+menu	logout	Uitloggen
+menu	my_account	Mijn account
+menu	my_personal_page	Mijn persoonlijke pagina
+menu	mypage	Mijn pagina
+menu	new_project	Nieuw project registreren
+menu	new_user	Nieuwe gebruiker via SSL
+menu	project_help_wanted	Project&nbsp;vacatures
+menu	projectree	Project&nbsp;overzicht
+menu	register_project	Registreer project
+menu	reporting	Overzichten
+menu	search	Zoeken
+menu	submit	Toevoegen
+my	bookmarks	Mijn favorieten
+my	monitoredfile	Mijn bestandsmodules
+my	monitoredforum	Mijn forums
+my	no_bookmarks	Momenteel zijn er geen bookmarks opgeslagen.
+my	no_monitored_filemodules	Je monitort nu geen bestanden.
+my	no_monitored_forums	Je monitort nu geen forums.
+my	no_open_tasks	Geen.
+my	no_projects	Geen.
+my	no_tracker_items_assigned	Geen.
+my	no_tracker_items_submitted	Geen.
+my	projects	Mijn projecten
+my	title	Persoonlijke pagina voor: $1
+my_bookmark	return	Terug
+my_bookmark_add	added_bookmark	Bookmark toegevoegd voor <strong>$1</strong> met titel <strong>$2</strong>
+my_bookmark_add	back	Terug naar de startpagina
+my_bookmark_add	bookmark_title	Bookmark titel
+my_bookmark_add	bookmark_url	URL bookmarken
+my_bookmark_add	section	Mijn persoonlijke pagina
+my_bookmark_add	visit_page	Ga naar gebookmarkte pagina
+my_bookmark_edit	bookmark_updated	Bookmark gewijzigd
+my_bookmark_edit	failed_to_update_bookmark	Kan bookmark niet wijzigen.
+my_bookmark_edit	title	Bewerk bookmark
+my_diary	add_new_entry	Voeg een nieuw item toe
+my_diary	details	Details
+my_diary	diary_updated	Logboek bijgewerkt
+my_diary	entry_not_found	Item niet gevonden of niet jouw eigendom
+my_diary	error_adding_item	Fout bij toevoegen item
+my_diary	existing_entries	Bestaand logboek en aantekeningen
+my_diary	is_public	Openbaar
+my_diary	is_public_expl	Als je "Openbaar" aanvinkt zullen nieuw toegevoegde items aan alle monitoring gebruikers worden gemaild.
+my_diary	item_added	Item toegevoegd
+my_diary	no_entries	Je hebt geen logboek of aantekeningen
+my_diary	nothing_updated	Niets bijgewerkt
+my_diary	submit_only_once	SLECHTS EENMAAL TOEVOEGEN
+my_diary	summary	Samenvatting
+my_diary	title	Mijn logboek en aantekeningen
+my_diary	update_entry	Item bewerken
+my_rmproject	operation_not_permitted_text	Je kunt jezelf niet uit dit project verwijderen omdat je er de beheerder van bent. Je dient eerst aan een medebeheerder te vragen om jouw beheerdersrechten in te trekken. Als je de enige beheerder bent van dit project, plaats dan eerst een oproep op het <a href="/people/">Hulp gevraagd mededelingenbord</a> en draag de beheerdersrechten over aan een ge&iuml;nteresseerde persoon.
+my_rmproject	operation_not_permitted_title	Bewerking niet toegestaan
+my_rmproject	quitting_project	Uit het project stappen
+my_rmproject	quitting_project_text	Je staat op het punt jezelf te verwijderen uit het project - bevestig dit verzoek:
+my_rmproject	title	Uit het project stappen
+new	download	Download
+new	module	Module:
+new	newer_releases	Nieuwere versies
+new	no_new_release_found	Geen nieuwe versies gevonden.
+new	notes_changes	Notities &amp; Wijzigingen
+new	older_releases	Oudere versies
+new	projects_total	Project totaal:
+new	released_by	Opgeleverd door:
+new	this_project_has_not	Dit project heeft geen beschrijving aangemaakt
+new	title	Nieuwe bestand versies
+new	version	Versie:
+news	choose	<P>Kies een nieuws item om te kunnen bladeren/zoeken/posten.<P>
+news	noitems	Geen items gevonden
+news	nonews	Geen nieuws gevonden
+news	nonewsfor	Geen nieuws gevonden voor $1
+news	olderheadlines	Oudere nieuwskoppen
+news	title	Nieuws
+news_admin	approve_for_frontpage	Goedkeuren voor voorpagina
+news_admin	approve_newsbyte	Nieuwsitem goedkeuren voor project: $1
+news_admin	approved_newsbytes	Deze items werden vorige week goedgekeurd (totaal: $1)
+news_admin	date	Datum
+news_admin	details	Details
+news_admin	do_nothing	Niet doen
+news_admin	newsbyte_deleted	Nieuwsitem verwijderd.
+news_admin	newsbyte_rejected	Nieuwsitems afgewezen.
+news_admin	newsbyte_updated	Nieuwsitem gewijzigd.
+news_admin	newsbytes_to_approve	Deze items moeten nog goedgekeurd worden (totaal: $1)
+news_admin	noapproved	Geen goedgekeurde items gevonden voor deze week
+news_admin	noqueued	Geen klaarstaande items gevonden voor project
+news_admin	norejected	Geen afgewezen items gevonden voor deze week
+news_admin	permdenied	Je dient beheerder te zijn van het project dat je wilt wijzigen, of lid van het $1 nieuws team.
+news_admin	project	Project
+news_admin	queued	Deze nieuws items staan klaar voor project
+news_admin	reject	Afwijzen
+news_admin	reject_selected	Selectie afwijzen
+news_admin	rejected_newsbytes	Deze items werden vorige week afgewezen (totaal: $1)
+news_admin	removal_when_edit	Als dit item op de $1 home pagina staat en je wijzigt het zal het van de home pagina verwijderd worden.
+news_admin	status	Status
+news_admin	status_delete	Verwijderen
+news_admin	status_displayed	Zichtbaar
+news_admin	subject	Onderwerp
+news_admin	submitted_by	Ingediend door
+news_admin	submitted_for_group	Ingediend voor groep
+news_admin	title	Nieuws beheer
+news_submit	cannot	Je kunt alleen nieuws aan een project toevoegen als je beheerder van dat project bent
+news_submit	cannotadmin	Nieuws toevoegen vanuit de nieuws groep is niet toegestaan.
+news_submit	details	Details
+news_submit	errorboth	Fout - zowel titel als berichttekst zijn verplicht
+news_submit	errorinsert	Fout bij invoegen
+news_submit	forproject	Voor project
+news_submit	newsadded	Nieuws toegevoegd.
+news_submit	post_blurb	Je kunt nieuws over je project plaatsen als je beheerder bent voor dat project. Je kunt ook "Hulp gevraagd" berichten plaatsen als je project nog handjes nodig heeft.<P>Alle berichten <B>voor je project</B> zullen meteen op de Project Samenvatting pagina zichtbaar zijn. Berichten voor de gehele community moeten eerst goedgekeurd worden dooor een lid van het $1 nieuwsteam voor ze op de $1 home page verschijnen.<P>Je mag URLs invoegen, maar geen HTML tags.<P>URLs die met http:// beginnen zullen aanklikbaar zijn.
+news_submit	subject	Onderwerp
+news_utils	archive	Nieuws archief
+news_utils	comment_1	Commentaar
+news_utils	comment_2	Commentaren
+news_utils	nonews	Geen nieuws items gevonden
+news_utils	readmore	Lees&nbsp;verder/Commentaar
+news_utils	submit	Toevoegen nieuws
+people	about_blurb	<p>De $1 &#039;Projecthulp Gevraagd&#039; pagina is voor niet-commerci&euml;le, vrijwillige project vacatures. Commercieel gebruik is niet toegestaan.</p><p>Project vacatures zullen 2 weken blijven staan, tenzij ze eerder worden gesloten door de indiener. (Project beheerders kunnen vervallen vacatures altijd opnieuw indienen.)</p><p>Blader door het categorie menu om naar projecten te zoeken die je hulp kunnen gebruiken.</p><p>Als je een project beheerder bent, log dan in, en dien &#039;Hulp Gevraagd&#039; verzoeken via de project beheer pagina in.</p><p>Om nieuwe vacature categorie&euml;n in te dienen moet je een verzoek aan de vacature beheerder doen.</p>
+people	action	Actie
+people	add_new_skill	Voeg een nieuwe vaardigheid toe
+people	add_skill	Voeg vaardigheid toe
+people	added_skill	Toegevoegd aan vaardigheden overzicht
+people	category	Categorie
+people	click_job_titles	Klik op vacaturebeschrijving voor meer gedetailleerde beschrijvingen.
+people	date_opened	Aanmelddatum
+people	error_inserting	Fout bij toevoegen aan vaardigheden overzicht
+people	error_skill_already	Fout - reeds toegevoegd aan vaardigheden overzicht
+people	experience	Ervaring
+people	here_is_list_position	Hier is een lijst met openstaande functies voor dit project.
+people	invalid_id	Ongeldig ID
+people	last_posts	Meest recente berichten
+people	level	Niveau
+people	long_description	Uitgebreide omschrijving
+people	more_latest_posts	nog meer recente berichten
+people	must_be_loggin	Je moet eerst ingelogd zijn
+people	must_select_a_skill	Selecteer een vaardigheden ID
+people	no_categories_found	Geen categorie&euml;n gevonden
+people	no_skill_inventory_setup_up	Geen vaardigheden overzicht aangemaakt
+people	none_found	Niets gevonden
+people	project	$1 project
+people	short_description	Korte beschrijving
+people	skill	Vaardigheden
+people	status	Status
+people	title	Systeemhulp gevraagd
+people	title_array	Titel
+people_createjob	continue	Ga door >>
+people_createjob	explains	Begin met invullen van de onderstaande velden. Wanneer je op &#039;Ga door&#039; klikt wordt er een lijst getoond van vaardigheden en ervaringniveaus die vereist zijn voor deze vacature.
+people_editjob	error_missing	fout -  er ontbreekt nog informatie
+people_editjob	fill_in	Vul alle verplichte velden in
+people_editjob	finished	Klaar
+people_editjob	job_insert_failed	Invoegen vacature niet gelukt
+people_editjob	job_insert_ok	Vacature toegevoegd
+people_editjob	job_skill_delete_no	Verwijderen vacature-vaardigheid niet gelukt
+people_editjob	job_skill_delete_no_wrong_id	Verwijderen vacature-vaardigheid niet gelukt - verkeerd project ID
+people_editjob	job_skill_delete_ok	JOB skill Vacature-vaardigheid verwijderd
+people_editjob	job_skill_update_no	JOB skill Aanpassen vacature-vaardigheid niet gelukt
+people_editjob	job_skill_update_no_wrong_id	Aanpassen vacature-vaardigheid niet gelukt - verkeerd project ID
+people_editjob	job_skill_update_ok	Vacature-vaardigheden aangepasd
+people_editjob	job_update_no	Aanpassen vacature niet gelukt
+people_editjob	job_update_no_wrong_id	Aanpassen vacature niet gelukt - verkeerd project ID
+people_editjob	job_update_ok	Vacature aangepast
+people_editjob	no_such	Een dergelijke vacature komt in dit project niet voor
+people_editjob	posting_fetch_failed	Vacature ophalen niet gelukt
+people_editjob	skill_explains	<p>Nu kun je de lijst met vaardigheden wijzigen die gekoppeld zijn aan deze vacature. Ontwikkelaars kunnen dan hun vaardigheden met jouw vacature-eisen vergelijken.</p><p>Alle oproepen worden na twee weken automatisch afgesloten.</p>
+people_editjob	title	Wijzig vacature
+people_editjob	update_description	Beschrijving aanpassen
+people_editprofile	about_to_delete	Je gaat nu deze vaardigheid verwijderen $1
+people_editprofile	add_new_skill	Voeg een nieuwe vaardigheid toe
+people_editprofile	add_this_skill	Voeg deze vaardigheid toe
+people_editprofile	all_fields_required	Alle velden zijn verplicht!
+people_editprofile	are_you_sure	Weet je <strong>zeker</strong> dat je door wilt gaan?
+people_editprofile	cancel_skills_update	Vaardigheden bewerken afgebroken
+people_editprofile	change_required_fields	Pas de verplichte velden aan, en klik op &#039;Ga door&#039; onderaan de pagina
+people_editprofile	confirm_delete	Bevestig verwijderen
+people_editprofile	confirm_skill_delete	Bevestig vaardigheid verwijderen
+people_editprofile	edit_delete_your_skills	Bewerk/Verwijder je vaardigheden
+people_editprofile	edit_public_permissions	Bewerk Publieke Permissies
+people_editprofile	edit_skills	Bewerk vaardigheden
+people_editprofile	edit_your_profile	Bewerk je profile
+people_editprofile	end_date	Einddatum
+people_editprofile	error	Fout - Ontbrekende info
+people_editprofile	failed_delete_skills	Verwijderen van vaardigheden niet gelukt.
+people_editprofile	failed_to_add_skill	Toevoegen van vaardigheden niet gelukt.
+people_editprofile	failed_update_skills	Aanpassen van vaardigheden niet gelukt
+people_editprofile	fill_all_required_fields	Vul alle verplichte velden in
+people_editprofile	following_options	Onderstaande optie bepaalt of anderen je vaardigheden kunnen zien. Ook als deze optie is uitgeschakeld kan je hieronder vaardigheden toevoegen.
+people_editprofile	from_skills_database	uit de vaardigheden database. Deze actie kan niet ongedaan worden gemaakt.
+people_editprofile	keywords	Sleutelwoorden
+people_editprofile	keywords_max_255_chars	Sleutelwoorden (max 255 karakters)
+people_editprofile	no_skill_types_in_database	Geen vaardigheid types in de database
+people_editprofile	no_skill_types_in_database_inform	Geen vaardigheid types in de database - meld dit aan de systeembeheerder
+people_editprofile	no_skills_selected	Geen vaardigheden geselecteerd om te bewerken.
+people_editprofile	no_skills_selected_to_delete	Geen vaardigheden geselecteerd om te verwijderen.
+people_editprofile	no_such_user	Die gebruiker bestaat niet
+people_editprofile	profile_title	Titel
+people_editprofile	publicly_viewable	Voor iedereen zichtbaar
+people_editprofile	skill_added_ok	Vaardigheid succesvol toegevoegd
+people_editprofile	skill_delete_successfully	Vaardigheid $1 succesvol verwijderd
+people_editprofile	skill_deletion_cancelled	Vaardigheid verwijderen afgebroken
+people_editprofile	skills_edit	Vaardigheid bewerken
+people_editprofile	start_date	Startdatum
+people_editprofile	type	Type
+people_editprofile	update_failed	Gebruiker aanpassen niet gelukt
+people_editprofile	update_ok	Gebruiker aangepast
+people_editprofile	update_permission	Rechten wijzigen
+people_editprofile	user_fetch_failed	Gebruiker ophalen niet gelukt
+people_editprofile	you_can_enter_new_skills	Je kunt hier nieuwe vaardigheden toevoegen. Vul de start- en einddatum zo nauwkeurig mogelijk in.
+people_help_wanted_latest	title	Hulp gevraagd - meest recente oproepen
+people_viewjob	contact_info	Contactinformatie
+people_viewjob	fetch_failed	Vacature ophalen niet gelukt
+people_viewjob	for_project	Voor project
+people_viewjob	no_such_posting	Deze vacature is niet aanwezig bij dit project
+people_viewjob	open_date	Aanmeldingsdatum
+people_viewjob	posting_id_not_found	Oproep ID niet gevonden
+people_viewjob	required_skills	Vereiste vaardigheden
+people_viewjob	view_a_job	Bekijk een vacature
+people_viewprofile	no_such_user	Die gebruiker bestaat niet
+people_viewprofile	set_private	Deze gebruiker heeft zijn/haar profiel op priv&eacute; staan
+people_viewprofile	skills_profile_for	Vaardighedenprofiel voor
+people_viewprofile	title	Bekijk een gebruikersprofiel
+people_viewprofile	user_fetch_failed	Gebruiker ophalen niet gelukt
+pm	admin	beheer
+pm	assigned_to	Toegewezen aan
+pm	cat_any	Alle
+pm	category	Categorie
+pm	date_note	Het systeem zal je start- en einddatums aanpassen als je een startdatum aangeeft die eerder is dan de eind datum van afhankelijke taken.
+pm	dependent	Afhankelijk van taak
+pm	dependent_note	Je moet alleen taken kiezen die klaar moeten zijn voordat deze taak kan beginnen.
+pm	details	Taak 	Details
+pm	end_date	Einddatum
+pm	hours	Geschatte uren
+pm	intro	Kies een subproject waarin je wilt bladeren/wijzigen/taken toevoegen.
+pm	no_tasks_found	Geen overeenkomende taken gevonden
+pm	no_tasks_found_text	Voeg taken toe met bovenstaande link
+pm	noprj	<H1>Geen subprojecten gevonden</H1><P><B>Er zijn geen subprojecten, of je mag ze niet zien.<P><span class="important">De projectbeheerder moet projecten bijhouden op de projectbeheerspagina</span>
+pm	percent_complete	Percentage gereed
+pm	priority	Prioriteit
+pm	start_date	Startdatum
+pm	status	Status
+pm	status_any	Alle
+pm	summary	Taak samenvatting
+pm	task_id	Taak ID
+pm	tech_any	Alle
+pm	title	Project/Taak beheer: subprojecten en taken
+pm	unassigned	Niet toegewezen
+pm	view_calendar	Toon kalender
+pm	view_type	Detailweergave
+pm	view_type_detail	Gedetailleerd
+pm	view_type_summary	Samenvatting
+pm_addtask	task_added_relationship	Relatie met Tracker toegevoegd
+pm_addtask	task_created_successfully	Taak aangemaakt
+pm_addtask	task_updated_successfully	Taak aangepast
+pm_addtask	title	Voeg een nieuwe taak toe
+pm_admin_projects	add_categories	Voeg categorie&euml;n toe
+pm_admin_projects	add_categories_title	Voeg categorie&euml;n toe
+pm_admin_projects	add_categories_to	Categori&euml;n toevoegen
+pm_admin_projects	add_edit_categories	Categori&euml;n toevoegen/aanpassen
+pm_admin_projects	add_project	Voeg een project toe
+pm_admin_projects	add_project_intro	Voeg een project toe, deze kan een set taken bevatten. Dit is dus anders dan een nieuwe taak toevoegen.
+pm_admin_projects	admin_title	Project- en taakmanager beheer
+pm_admin_projects	category_inserted	Categorie toegevoegd
+pm_admin_projects	category_name	Categorienaam
+pm_admin_projects	category_note	Een eenmaal toegevoegde categorie kan niet meer worden verwijderd
+pm_admin_projects	category_note2	Het wordt niet aangeraden om een categorienaam te wijzigen, omdat andere zaken hiervan afhankelijk zijn. Als je een categorienaam wijzigt worden alle gerelateerde items gewijzigd naar die nieuwe naam.
+pm_admin_projects	category_updated	Categorie gewijzigd
+pm_admin_projects	change_project_intro	Je kunt een bestaand project wijzigen met dit form. Let op: priv&eacute; projecten kunnen door alle leden van een team worden ingezien, maar niet door het algemene publiek.
+pm_admin_projects	change_project_title	Wijzig project- en taakmanager status
+pm_admin_projects	delete	Verwijderen
+pm_admin_projects	delete_info	Dit subproject and alle bijbehorende data definitief verwijderen.
+pm_admin_projects	delete_warning	Je staat op het punt om dit subproject and alle bijbehorende data volledig en onherroepelijk te verwijderen!
+pm_admin_projects	deleted	Succesvol verwijderd
+pm_admin_projects	description	Omschrijving
+pm_admin_projects	edit_update	Project aanpassen
+pm_admin_projects	id	ID
+pm_admin_projects	is_public	Openbaar?
+pm_admin_projects	modify_category	Een categorie aanpassen in
+pm_admin_projects	no_categories	Geen categorie&euml;n bekend
+pm_admin_projects	no_projects_found	<h2>Geen projecten gevonden</h2><p>Niets gevonden voor deze groep. Je kunt nieuwe projecten toevoegen via bovenstaande "Voeg een project toe" link.</p>
+pm_admin_projects	project_inserted	Project ingevoegd
+pm_admin_projects	project_name	Nieuwe projectnaam
+pm_admin_projects	project_title	Titel
+pm_admin_projects	projects_intro	Voeg een nieuw project toe met de project- en taakmanager. <strong>Dit is iets anders dan een taak aan een project toevoegen.</strong>
+pm_admin_projects	really_sure	Ik weet het helemaal zeker
+pm_admin_projects	send_updates	Stuur alle wijzigingen naar
+pm_admin_projects	sure	Ik weet het zeker
+pm_browsetask	admin_mass_update	<strong>Beheer:</strong> Als je wijzigingen op alle geselecteerde hierboven wilt doorvoeren kun je hier de eigenschappen veranderen en eenmaal op "Alles aanpassen" klikken.
+pm_browsetask	browse	Bladeren
+pm_browsetask	check_all	Alles controleren
+pm_browsetask	clear_all	Alles wissen
+pm_browsetask	mass_update	Alles aanpassen
+pm_browsetask	next	volgende 50
+pm_browsetask	no_change	Geen wijzigingen
+pm_browsetask	overdue_tasks	* Geeft taken die over tijd zijn aan
+pm_browsetask	previous	vorige 50
+pm_browsetask	title	Bladeren taken
+pm_deletetask	are_you_sure	Weet je zeker dat je deze taak wilt verwijderen?
+pm_deletetask	confirm	Ja, ik wil deze taak verwijderen
+pm_deletetask	delete	Verwijder deze taak
+pm_deletetask	task_delete_failed	Verwijderen mislukt
+pm_deletetask	task_delete_failed_confirm	Bevestiging niet gelukt. Taak niet verwijderen
+pm_deletetask	task_deleted_successfully	Taak succesvol verwijderd
+pm_deletetask	title	Verwijder een taak
+pm_detailtask	assigned_to	Toegewezen aan
+pm_detailtask	category	Categorie
+pm_detailtask	dependend_on_task	Hangt af van taak
+pm_detailtask	end_date	Einddatum
+pm_detailtask	hours	Uren
+pm_detailtask	original_comment	Oorspronkelijk commentaar
+pm_detailtask	pct_complete	Percentage compleet
+pm_detailtask	priority	Prioriteit
+pm_detailtask	start_date	Startdatum
+pm_detailtask	status	Status
+pm_detailtask	submitted_by	Ingediend door
+pm_detailtask	subproject	Subproject
+pm_detailtask	task_summary	Taaksamenvatting
+pm_detailtask	title	Taakdetail
+pm_ganttpage	assignee	Toegewezen aan
+pm_ganttpage	days	Dagen
+pm_ganttpage	months	Maanden
+pm_ganttpage	resolution	Resolutie
+pm_ganttpage	size	Grootte
+pm_ganttpage	sort_on	Sorteer op
+pm_ganttpage	weeks	Weken
+pm_include_grouphtml	add_task	Voeg taak toe
+pm_include_grouphtml	admin	Beheer
+pm_include_grouphtml	browse_task	Bladeren door taken
+pm_include_grouphtml	downloadcsv	Downloaden als CSV
+pm_include_grouphtml	error_disabled	Dit project heeft de taakmanager uitgeschakeld
+pm_include_grouphtml	gantt_chart	Gantt schema
+pm_include_grouphtml	not_started	Niet gestart
+pm_include_grouphtml	reporting	Overzichten
+pm_include_grouphtml	uploadcsv	Uploaden CSV
+pm_include_taskhtml	by	Door
+pm_include_taskhtml	comment	Commentaar
+pm_include_taskhtml	date	Datum
+pm_include_taskhtml	depend_info	Taken die afhankelijk zijn van deze taak
+pm_include_taskhtml	field	Veld
+pm_include_taskhtml	followups	Reacties
+pm_include_taskhtml	no_changes	Geen wijzigingen doorgevoerd
+pm_include_taskhtml	no_comments	Geen commentaar toegevoegd
+pm_include_taskhtml	no_depend_info	Geen taken afhankelijk van deze taak
+pm_include_taskhtml	no_tracker_items	Geen aan de tracker gerelateerde items toegevoegd
+pm_include_taskhtml	old_value	Oude waarde
+pm_include_taskhtml	open_date	Aanmeldingsatum
+pm_include_taskhtml	related_items	Aan de tracker gerelateerde items
+pm_include_taskhtml	remove_relation	Verwijder relatie
+pm_include_taskhtml	task_history	Taakwijzigingen geschiedenis
+pm_include_taskhtml	tracker	Tracker
+pm_index	description	Beschrijving
+pm_index	open	Open
+pm_index	short_name	Subproject Naam
+pm_index	total	Totaal
+pm_modtask	add_comment	Voeg Commentaar toe
+pm_modtask	assignee	Toegewezen aan
+pm_modtask	original_comment	Oorspronkelijk commentaar
+pm_modtask	sort_on	Sorteren op
+pm_modtask	submitted_by	Ingediend door
+pm_modtask	title	Taak wijzigen
+pm_projectcategory	required_fields	Projectcategorie: naam en toegewezen-aan zijn verplicht
+pm_projectgroup	error_min_desc_length	Documentomschrijving moet minstens 10 tekens lang zijn
+pm_projectgroup	error_min_name_length	Titel moet minstens 5 tekens lang zijn
+pm_projectgroup	none_found	Geen projectgroepen gevonden
+pm_projecttask	circular_dependency	Circulaire verwijzing gevonden
+pm_reporting	aging_report	Doorlooptijden rapport
+pm_reporting	all_tasks_by_category	Alle taken per categorie
+pm_reporting	all_tasks_by_technician	Alle taken per technicus
+pm_reporting	average_duration	Gemiddelde duur voor afgesloten taken (dagen)
+pm_reporting	by_subproject	Overzicht per subproject
+pm_reporting	by_tech	Overzicht per technicus
+pm_reporting	not_completed	Aantal nog niet voltooide taken
+pm_reporting	open_tasks_by_category	Open taken per categorie
+pm_reporting	open_tasks_by_technician	Open taken per technicus
+pm_reporting	report_note	<p>Let op dat sommige taken aan meer technici kunnen worden toegewezen. Dergelijke taken zullen voor ieder van hen geteld worden.</p>
+pm_reporting	started_tasks	Aantal gestarte taken
+pm_reporting	tasks_by_category	Taken per categorie
+pm_reporting	tasks_by_technician	Taken per technicus
+pm_reporting	title	Taakrapportage systeem
+pm_uploadcsv	choose_file	Kies een bestand in het juiste .csv format om te uploaden.
+pm_uploadcsv	explain	Op deze pagina kun je een bestand in .csv format selecteren en uploaden zodat het in het huidige subproject wordt opgenomen.
+pm_uploadcsv	title	Data uploaden in de taak manager.
+project_admin	acceptpending	Accept
+project_admin	add_user	Gebruiker toevoegen
+project_admin	addfromlist	Gebruikers toevoegen uit lijst
+project_admin	addfromlist1	Vink de naam van de gebruiker(s) aan die je wilt totvoegen. Je keuze zal worden opgeslagen als je op een van de letters beneden klikt. Klik "Voltooien" als je klaar bent om de rollen voor de gebruikers, die je aan het toevoegen bent, te selecteren.
+project_admin	addfromlist2	Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle toevoegen&quot;.
+project_admin	choose_first_letter	<p>Kies de <strong>eerste letter</strong> van de naam van de persoon die je wilt toevoegen.</p>
+project_admin	docmanager_admin	Documentmanager beheer
+project_admin	download_tarball	Nachtelijke CVS tarball downloaden
+project_admin	finish	Eindigen
+project_admin	forum_admin	Forumbeheer
+project_admin	frs_admin	Release beheer
+project_admin	group_members	Groepsleden
+project_admin	homepage_link	Link naar startpagina
+project_admin	mail_admin	Mailbeheer
+project_admin	news_admin	Nieuwsbeheer
+project_admin	no_matching_user	<p>Geen matchende gebruikers gevonden</p>
+project_admin	project_information	Overige projectinformatie
+project_admin	rejectpending	Afwijzen
+project_admin	scm_admin	SCM beheer
+project_admin	shell_server	Shell (SSH) server van Groep
+project_admin	shell_server_group_directory	Groepsdirectory op shell server:
+project_admin	short_description	Korte omschrijving
+project_admin	task_manager_admin	Taakmanager beheer
+project_admin	title	Projectbeheer: $1
+project_admin	tool_admin	Hulpmiddelenbeheer
+project_admin	tracker_admin	Tracker beheer
+project_admin	trove_categorization	Trove classificatie:
+project_admin	unix_name	Unixnaam
+project_admin	user_added	Gebruiker toegevoegd
+project_admin	user_removed	Gebruiker verwijderd
+project_admin	user_updated	Gebruiker aangepast
+project_admin	userrealname	Werkelijke naam
+project_admin	www_directory	WWW directory van project op shell server:
+project_admin_database	add_new_database	Voeg nieuwe database toe
+project_admin_database	add_new_database_info	Klik op &#039;Aanmaken&#039; om het cre&euml;ren van de database te schedulen, en de details naar de projectbeheerders te emailen
+project_admin_database	cannot_add	Kan geen database element toevoegen
+project_admin_database	confirm_delete	BEVESTIG VERWIJDEREN
+project_admin_database	confirm_deletion	Klik om verwijderen te bevestigen
+project_admin_database	confirm_new	Bevestig toevoegen
+project_admin_database	create	Aanmaken
+project_admin_database	current_databases	Huidige databases
+project_admin_database	database_created	Database creatie gescheduled
+project_admin_database	database_type	Database type
+project_admin_database	db_type	DB type
+project_admin_database	maximum_databases_allocated	Het maximum aantal databases van welk type dan ook is al toegewezen
+project_admin_database	new_password	Nieuw wachtwoord
+project_admin_database	no_databases	Er zijn momenteel geen databases aan deze groep toegewezen
+project_admin_database	operations	Bewerkingen
+project_admin_database	state	Status
+project_admin_database	title	Database informatie
+project_admin_database	update	Wijzigingen versturen
+project_admin_editgroupinfo	active_features	Geactiveerde eigenschappen
+project_admin_editgroupinfo	group_name	Beschrijvende groepsnaam
+project_admin_editgroupinfo	group_updated	Groep informatie gewijzigd
+project_admin_editgroupinfo	homepage_link	Link naar startpagina:
+project_admin_editgroupinfo	new_doc	Nieuwe documenten
+project_admin_editgroupinfo	new_doc_info	Als je wilt kun je standaard e-mail adressen opgeven om nieuwe documenten naar toe te sturen
+project_admin_editgroupinfo	send_on_all_updates	(stuur voor alle wijzigingen)
+project_admin_editgroupinfo	short_description	Korte omschrijving (Max 255 tekens, HTML wordt gestript uit de omschrijving)
+project_admin_editgroupinfo	title	Groep info bewerken
+project_admin_editgroupinfo	use_docman	Gebruik documentmanager
+project_admin_editgroupinfo	use_forums	Gebruik forums
+project_admin_editgroupinfo	use_frs	Gebruik bestandopleveringssysteem
+project_admin_editgroupinfo	use_ftp	Gebruik FTP
+project_admin_editgroupinfo	use_mailing_lists	Gebruik mailinglijsten
+project_admin_editgroupinfo	use_news	Gebruik nieuws
+project_admin_editgroupinfo	use_pm	Gebruik project- of taakmanager
+project_admin_editgroupinfo	use_scm	Gebruik SCM
+project_admin_editgroupinfo	use_stats	Gebruik statistieken
+project_admin_editgroupinfo	use_surveys	Gebruik enqu&ecirc;te
+project_admin_editgroupinfo	use_tracker	Gebruik Tracker
+project_admin_editimages	add_data	Voeg multimedia gegevens toe
+project_admin_editimages	add_file	Voeg bestand toe
+project_admin_editimages	del	Wis
+project_admin_editimages	description	Omschrijving
+project_admin_editimages	dims	Afmeting
+project_admin_editimages	edit	Bewerk
+project_admin_editimages	error_length	Fout - bestand moet > 20 bytes en < 256000 bytes in lengte zijn
+project_admin_editimages	file_deleted	Multimedia bestand gewist
+project_admin_editimages	file_description_required	Bestandsbeschrijving is verplicht
+project_admin_editimages	file_uploaded	Multimedia bestand geupload
+project_admin_editimages	id	ID
+project_admin_editimages	intro	Je kunt tot $1 MB aan multimedia bestanden (bitmap en vector graphics, geluidsclips, 3D modellen) in de database opslaan. Gebruik deze pagina om multimedia data aan je project toe tevoegen of te wissen.
+project_admin_editimages	local_filename	Locale bestandsnaam
+project_admin_editimages	mime_type	MIME Type
+project_admin_editimages	name	Naam
+project_admin_editimages	properties_updated	Multimedia bestand eigenschappen aangepast
+project_admin_editimages	replace	Vervang door ander bestand (optioneel)
+project_admin_editimages	required_fields	Zowel bestandsnaam als omschrijving zijn verplicht
+project_admin_editimages	size	Afmetingen
+project_admin_editimages	title	Multimedia gegevens bewerken
+project_admin_editimages	uploaded	Toegevoegd
+project_admin_editpackages	add_release	Release toevoegen
+project_admin_editpackages	added_package	Bundel toegevoegd
+project_admin_editpackages	create_package	Deze bundel aanmaken
+project_admin_editpackages	edit_releases	Oplevering bewerken
+project_admin_editpackages	is_public	Voor iedereen zichtbaar
+project_admin_editpackages	new_package_name	Naam nieuwe bundel
+project_admin_editpackages	no_packages_defined	Je hebt geen bundel aangegeven
+project_admin_editpackages	no_packages_status	Status
+project_admin_editpackages	package_name	Naam bundel
+project_admin_editpackages	packages_info	<h3>Bundels</h3><p>Je kunt bundels gebruiken om verschillende bestanden te groeperen en gezamelijk uit te leveren. <p><H4>Een voorbeeld van bundels:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Uw bundels:</H4><p><ol><li>Definieer uw bundels</li><li>Cre&euml;er een nieuwe versie van een Bundel</li></ol><p><h3>Versies van Bundels</h3><p>Een versie van een bundel kan meerdere bestanden bevatten.<p><H4>Voorbeelden van versies</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Je kunt een nieuwe versie van een bundel aanmaken door te klikken op <strong>Add Publicatie/Edit Publicaties</strong> naast de naam van de bundel.<p>
+project_admin_editpackages	private	Besloten
+project_admin_editpackages	public	Openbaar
+project_admin_editpackages	qrs	QuickRelease
+project_admin_editpackages	qrs_a_file	Klik hier om een bestand te $1 quick-releasen $2
+project_admin_editpackages	releases	Release
+project_admin_editpackages	title	Bewerk release/Bestandsreleases
+project_admin_editpackages	updated_package	Bundel aangepast
+project_admin_editrelease	add_file	Dit bestand toevoegen
+project_admin_editrelease	add_files_note	LET OP: In sommige browsers moet je een bestand in het bestand-verzenden scherm kiezen en op "OK" klikken  Dubbelklikken is niet genoeg om het bestand vast te leggen.</span>
+project_admin_editrelease	changelog_too_small	Change Log is te klein
+project_admin_editrelease	data_saved	Gegevens opgeslagen
+project_admin_editrelease	delete_file	Bestand wissen
+project_admin_editrelease	file_deleted	Bestand gewist
+project_admin_editrelease	file_list_note	Nadat je bestanden aan deze release hebt toegevoegd <strong>moet</strong> je elk van deze bestanden voorzien van de juiste aangepaste informatie - anders komen ze niet op je download samenvattingspagina.
+project_admin_editrelease	file_released	Bestand gereleased
+project_admin_editrelease	file_type	Bestandstype
+project_admin_editrelease	file_type_update	Bestandstype<br />aanpassen
+project_admin_editrelease	file_updated	Bestand aangepast
+project_admin_editrelease	filename_release	Bestandsnaam<br />release
+project_admin_editrelease	i_am_sure	Ja, zeker weten!
+project_admin_editrelease	monitor_count	Er zijn $1 gebruikers, die dit package monitoren.
+project_admin_editrelease	no_files_in_release	Geen bestanden in deze release
+project_admin_editrelease	note	Pas de Release Notes of het Change Log aan voor deze oplevering of deze bundel. Deze wijzigingen zullen gelden voor alle bestanden in deze oplevering.<br />Je kunt ofwel de Release Notes of het Change Log ieder afzonderlijk uploaden, of ze samen hieronder inplakken.
+project_admin_editrelease	paste_changelog	Plak het Change Log in
+project_admin_editrelease	paste_release_notes	Plak de Release Notes in
+project_admin_editrelease	preserve_preformatted	Laat de voorgeformatteerde tekst intact.
+project_admin_editrelease	processor_type	Processortype
+project_admin_editrelease	processor_update	Processor<br />release datum
+project_admin_editrelease	release_date	release datum
+project_admin_editrelease	release_name	release naam
+project_admin_editrelease	release_notes_too_small	Release Notes zijn te klein
+project_admin_editrelease	status	Status
+project_admin_editrelease	step_1	Stap 1:&nbsp;&nbsp; Release bewerken
+project_admin_editrelease	step_2	Stap 2: Voeg bestanden toe aan deze release</h3><p>Kies nu een bestand om te uploaden naar het systeem. De maximum bestandsgrootte, bepaald door de beheerder, is normaliter 2MB. Als je grotere bestanden moet uploaden, neem dan contact op met de systeem beheerder.</p>
+project_admin_editrelease	step_3	Step 3: Bestanden aanpassen in deze release
+project_admin_editrelease	submit_refresh	Toevoegen/vernieuwen
+project_admin_editrelease	title	Release bewerken
+project_admin_editrelease	update_refresh	Bewerken/vernieuwen
+project_admin_editrelease	upload_change_log	Change Log uploaden
+project_admin_editrelease	upload_new_file	Nieuw bestand uploaden
+project_admin_editrelease	upload_release_notes	Release Notes uploaden
+project_admin_group_trove	intro	<h3>Wijzig Trove categorizatie</h3><p>Kies maximaal 3 locaties voor dit project in elk van Trove hoofdcategorie&euml;n. Als het bij project geen enkele - of alle - van deze locaties thuis hoort hoef je alleen "Niets geselecteerd" te kiezen.</p><p> BELANGRIJK: Projecten horen alleen gecategorizeerd te worden bij de meest specifieke locaties die in het overzicht beschikbaar zijn. Gelijktijdige categorizatie in een specifieke categorie EN in een hogere categorie resulteren alleen in toewijzing aan de meer specifieke categorie.
+project_admin_group_trove	title	Groep Index informatie
+project_admin_group_trove	update_changes	Alle categoriewijzigingen aanpassen
+project_admin_history	info	Deze geschiedenis laat zien wie significante wijzigingen aan je project heeft aangebracht en wanneer
+project_admin_history	title	Geschiedenis
+project_admin_qrs	changelog	Change Log
+project_admin_qrs	create_new_package	Of $1 maak een nieuwe bundel $2
+project_admin_qrs	exceed_file_size	Het geuploade bestand is groter dan de maximum bestandsgrootte. Neem contact op met de site beheerder om dit grote bestand te uploaden.
+project_admin_qrs	file_name	Bestandsnaam
+project_admin_qrs	file_released	Bestand opgeleverd: je kunt de release nu aanpassen
+project_admin_qrs	file_type	Bestandstype
+project_admin_qrs	ftpupload_choosefile	Kies een FTP bestand in plaats van uploaden:
+project_admin_qrs	ftpupload_new_file	Als alternatief kun je FTP gebruiken voor het uploaden van een nieuw bestand naar $1
+project_admin_qrs	maximum_file_size	Maximum grootte upload bestand:
+project_admin_qrs	must_choose_one	Je moet er &eacute;&eacute;n kiezen
+project_admin_qrs	no_file_types_available	Geen bestandstypes beschikbaar
+project_admin_qrs	package_id	Bundel ID
+project_admin_qrs	partial_file	Het geuploade bestand is slechts gedeeltelijk geupload.
+project_admin_qrs	preserve_text	Laat de voorgeformatteerde tekst intact
+project_admin_qrs	processor_type	Processortype
+project_admin_qrs	qrs_info	Je kunt nu $1 bestanden toevoegen aan deze Release $2 , of de oplevering bewerken.</p> <p>Denk eraan dat de bestanden niet meteen op de $3 download pagina $4 zullen verschijnen. Het doorzetten kan enkele uren duren.
+project_admin_qrs	release_date	Release datum
+project_admin_qrs	release_file	Release bestand
+project_admin_qrs	release_name	Release naam
+project_admin_qrs	release_note	LET OP: In sommige browsers moet je een bestand in het bestand-verzenden scherm kiezen en op "OK" klikken  Dubbelklikken is niet genoeg om het bestand vast te leggen.
+project_admin_qrs	release_notes	Release Notes
+project_admin_qrs	required_file	Selecteer een bestand.
+project_admin_qrs	required_file_type	Selecteer een bestandstype.
+project_admin_qrs	required_package	Selecteer een bundel.
+project_admin_qrs	required_processor_type	Selecteer een processortype.
+project_admin_qrs	required_release_name	Release naam is verplicht.
+project_admin_qrs	title	Quick Release System
+project_admin_qrs	unknown_file_error	Onbekende fout bij het uploaden van het bestand.
+project_admin_qrs	upload_new_file	Nieuw bestand uploaden
+project_admin_showreleases	date	Datum
+project_admin_showreleases	no_release	Van deze bundel zijn geen opleveringen beschikbaar
+project_admin_showreleases	package_name	Bundelnaam
+project_admin_showreleases	release_name	Publicatienaam
+project_admin_showreleases	title	Opleveren nieuwe bestandsversie
+project_admin_utils	admin	Beheer
+project_admin_utils	by	Door
+project_admin_utils	change_history	Groepswijzigingen geschiedenis
+project_admin_utils	database_admin	Databasebeheer
+project_admin_utils	date	Datum
+project_admin_utils	edit_jobs	Vacatures wijzigen
+project_admin_utils	edit_public_info	Openbare informatie aanpassen
+project_admin_utils	field	Veld
+project_admin_utils	multimedia_data	Aanpassen multimedia gegevens
+project_admin_utils	old_value	Oude waarde
+project_admin_utils	permission_blurb	<strong>UITLEG:</strong><dl><dt><strong>Projectbeheerders</strong></dt><dd>kunnen deze pagina en andere projectbeheerspagina's bewerken</dd><dt><strong>Opleveringstechnici</strong></dt><dd>kunnen bestandsopleveringen maken(iedere projectbeheerder is ook opleveringstechnicus)</dd><dt><strong>Hulpmiddelen technici (T)</strong></dt><dd>kunnen Bugs/Taken/Patches toegewezen krijgen</dd><dt><strong>Hulpmiddelen beheerders (A)</strong></dt><dd>kunnen Bugs/Taken/Patches wijzigen en kunnen de /hulpmiddel/admin/ pagina's gebruiken</dd><dt><strong>Geen rechten (N/A)</strong></dt><dd>De ontwikkelaar heeft geen specifieke rechten (gelijk aan '-')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>kunnen mededelingen van de project forums verwijderen</dd><dt><strong>Redacteurs</strong> (documentmanager)</dt><dd>kunnen documentatie van het project wijzigen/verwijderen.</dd></dl>
+project_admin_utils	post_jobs	Vacatures plaatsen
+project_admin_utils	project_history	Project geschiedenis
+project_admin_utils	stats	Statistieken
+project_admin_utils	vhosts	Virtuele Hosts
+project_admin_vhost	create	Aanmaken
+project_admin_vhost	delete	Wissen
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Voeg nieuwe Virtuele Host toe</span></strong><p>Om een nieuwe Virtuele Host toe te voegen moet je een <strong>CNAME</strong> voor <em>jouwhost.org</em> op <strong>$1.$2</strong> aanwijzen.  $3 kan geen mail hosten(dwz. kan geen MX zijn) of DNS</strong>.  <p>Klikken op "aanmaken" zet een Virtuele Host klaar om aan te maken. Deze wordt gesynchroniseerd met de webservers van het project zodat <em>jouwhost.org</em> het materiaal zal presenteren op <em>$4.$5</em>.
+project_admin_vhost	name	Nieuwe Virtuele Host <em>(b.v. vhost.org)</em>
+project_admin_vhost	no_vhosts	Geen Virtuele Hosts gedefinieerd
+project_admin_vhost	not_valid_hostname	Geen geldige hostnaam - $1
+project_admin_vhost	operations	Bewerkingen
+project_admin_vhost	title	Virtuele Host beheer
+project_admin_vhost	vhost	Virtuele Host
+project_admin_vhost	vhost_deleted	Virtuele Host gewist
+project_admin_vhost	vhost_scheduled	Virtuele Host wordt aangemaakt.
+project_filemodule_monitor	start_monitor_body	Monitoring gestart
+project_filemodule_monitor	start_monitor_title	Monitoring gestart
+project_filemodule_monitor	stop_monitor_body	Monitoring gestopt
+project_filemodule_monitor	stop_monitor_title	Monitoring gestopt
+project_home	help_wanted	HULP GEVRAAGD: Dit project zoekt nog
+project_home	help_wanted_multiple	Mensen om $1 verschillende taken te vullen </a>
+project_home	holding_note	LET OP: Dit project wordt geheel door de $1 staf onderhouden. Wij zijn niet de offici&euml;le site voor dit product. Op de homepage van het project kan anvullende copyright informatie aanwezig zijn.
+project_home	monitor_package	Monitor deze bundel
+project_home	no_subprojects	Er zijn geen openbare subprojecten beschikbaar
+project_home	no_trackers	Er zijn geen openbare trackers beschikbaar
+project_home	public_mailing_lists	openbare mailinglijsten
+project_home	release_notes	Release Notes
+project_home	surveys	Enqu&ecirc;tes
+project_home	title	Project info
+project_home	tracker_open	$1 open /$2 totaal
+project_home	view_members	Bekijk leden
+project_home	view_project_files	Bekijk alle project bestanden
+project_joinrequest	denied	Je verzoek om aan het $1 project te worden toegevoegd is door de beheerder afgewezen.
+project_joinrequest	join_notice_body	$1 heeft een verzoek ingediend om aan je project deel te nemen. Je kunt dit verzoek afhandelen op de <a href="http://$2/project/admin/?group_id=$3">project beheer pagina</a>.
+project_joinrequest	join_notice_subject	Verzoek om deel te mogen nemen aan project $1
+project_joinrequest	joining	Je kunt een verzoek indienen om aan een project deel te nemen door op de submit knop te klikken. Er wordt dan een email gestuurd naar een beheerder om je verzoek te behandelen.
+project_joinrequest	nonepending	Geen openstaande verzoeken
+project_joinrequest	pending	Openstaande verzoeken
+project_joinrequest	request_link	Aanmeldingsverzoek
+project_joinrequest	submitted	Je verzoek is verstuurd.
+project_joinrequest	title	Verzoek om aan project deel te nemen
+project_memberlist	developer	Ontwikkelaar
+project_memberlist	joining	<P>Als je aan dit project wilt bijdragen als ontwikkelaar, neem dan contact op met de projectbeheerder hieronder (vetgedrukt).<br><br>
+project_memberlist	role	Rol/Positie
+project_memberlist	skills	Vaardigheden
+project_memberlist	title	Projectledenlijst
+project_memberlist	username	Gebruikersnaam
+project_memberlist	view	View
+project_showfiles	architecture	Architectuur
+project_showfiles	date	Datum
+project_showfiles	downloads	D/L
+project_showfiles	error_no_packages_defined_text	Er zijn geen bestandsbundels aangemaakt voor dit project.
+project_showfiles	error_no_packages_defined_title	Geen bestandsbundels
+project_showfiles	file_type	Type
+project_showfiles	filename	Bestandsnaam
+project_showfiles	intro	Hieronder staat een lijst met alle bestanden van het project.
+project_showfiles	intro2	Kijk voor het downloaden de Release Notes en Change Log even door (toegankelijk door op de release versie te klikken).
+project_showfiles	monitor_package	Monitor deze bundel
+project_showfiles	new_release	Klik hier om een nieuwe release aan te maken.
+project_showfiles	no_releases	Geen releases
+project_showfiles	package	Bundel
+project_showfiles	project_totals	Project totalen
+project_showfiles	release_highlighted	De oplevering die je hebt gekozen is <span class="selected">gemarkeerd</span>.
+project_showfiles	release_notes	Release &amp; Aantekeningen
+project_showfiles	size	Grootte
+project_showfiles	title	Project bestandslijst
+project_shownotes	changes	Wijzigingen:
+project_shownotes	error_release_not_found	Die release is niet te vinden
+project_shownotes	notes	Notitie:
+project_shownotes	release_name	Opleveringsnaam:
+project_shownotes	title	Release Notes en Change Log voor bestand
+project_stats_utils	CVS	CVS
+project_stats_utils	all_tracker	Alle Trackers
+project_stats_utils	bugs	Bugs
+project_stats_utils	date	Datum
+project_stats_utils	days	Dagen
+project_stats_utils	dl	D/L
+project_stats_utils	month	Levensduur
+project_stats_utils	page_views	Paginabezoeken
+project_stats_utils	patches	Patches
+project_stats_utils	project_did_not_exits	Het project bestond niet op deze datum.
+project_stats_utils	rank	Rang
+project_stats_utils	stats_all_time	Statistieken voor de hele levensduur
+project_stats_utils	stats_for_days	Statistieken voor de laatste $1 dag(en)
+project_stats_utils	stats_for_months	Statistieken voor de laatste $1 maand(en).
+project_stats_utils	support	Ondersteuning
+project_stats_utils	tasks	Taken
+rbac_edit	addrole	Rol toevoegen
+rbac_edit	editrole	Rol wijzigen
+rbac_edit	editroles	Rollen wijzigen
+rbac_edit	intro	Deze pagina is bedoeld om de rollen in je project vast te leggen. Let erop dat ieder lid ten minste evenveel toegangsrechten heeft als een Waarnemer. Als een Waarnemer bijvoorbeeld leesrechten op CVS heeft, dan heeft iedere andere rol in het project die ook.
+rbac_edit	newrole	Nieuwe rol
+rbac_edit	observer	Waarnemer wijzigen
+rbac_edit	observerintro	Deze pagina is bedoeld om de rechten en toegangsbeperkingen vast te leggen voor mensen die geen lid zijn van je project. Mensen die niet ingelogd zijn vallen ook onder de niet-leden.
+rbac_edit	observerusername	Waarnemer
+rbac_edit	pgtitle	Rol wijzigen
+rbac_edit	remove	verwijderen
+rbac_edit	role	Rol
+rbac_edit	rolename	Rolnaam
+rbac_edit	title1	Sectie
+rbac_edit	title2	Subsectie
+rbac_edit	title3	Instelling
+rbac_edit	update	Aanpassen
+rbac_vals	docman0	Read/Post
+rbac_vals	docman1	Beheer
+rbac_vals	forum-1	Geen toegang
+rbac_vals	forum0	Lezen
+rbac_vals	forum1	Posten
+rbac_vals	forum2	Beheer
+rbac_vals	forumadmin0	Geen
+rbac_vals	forumadmin2	Beheer
+rbac_vals	forumanon0	Geen anonieme posts
+rbac_vals	forumanon1	Anonieme posts toegestaan
+rbac_vals	forumpublic0	Besloten
+rbac_vals	forumpublic1	Openbaar
+rbac_vals	frs0	Lezen
+rbac_vals	frs1	Schrijven
+rbac_vals	frspackage	File Release Systeem
+rbac_vals	frspackage0	Besloten
+rbac_vals	frspackage1	Openbaar
+rbac_vals	pm-1	Geen toegang
+rbac_vals	pm0	Lezen
+rbac_vals	pm1	Techniek
+rbac_vals	pm2	Techniek &amp; beheer
+rbac_vals	pm3	Alleen beheerders
+rbac_vals	pmadmin0	Geen
+rbac_vals	pmadmin2	Beheer
+rbac_vals	pmpublic0	Besloten
+rbac_vals	pmpublic1	Openbaar
+rbac_vals	projectadmin0	Geen
+rbac_vals	projectadminA	Beheer
+rbac_vals	projectpublic0	Besloten
+rbac_vals	projectpublic1	Openbaar
+rbac_vals	scm-1	Geen toegang
+rbac_vals	scm0	Lezen
+rbac_vals	scm1	Schrijven
+rbac_vals	scmpublic0	Besloten
+rbac_vals	scmpublic1	Openbaar (pserver)
+rbac_vals	tracker-1	Geen toegang
+rbac_vals	tracker0	Lezen
+rbac_vals	tracker1	Techniek
+rbac_vals	tracker2	Techniek &amp; beheer
+rbac_vals	tracker3	Alleen beheerders
+rbac_vals	trackeradmin0	Geen
+rbac_vals	trackeradmin2	Beheer
+rbac_vals	trackeranon0	Geen anonieme posts
+rbac_vals	trackeranon1	Anonieme posts toegestaan
+rbac_vals	trackerpublic0	Besloten
+rbac_vals	trackerpublic1	Openbaar
+register	apply_for_registration	Om een project te laten registreren, moet er wat informatie over ingevuld worden. Lees onderstaande omschrijvingen goed, en vul volledige en begrijpelijke gegevens in. Alle velden hieronder zijn verplicht.
+register	choose_scm	<h3>6. SCM</h3><p>Je kunt uit verschillende SCM vormen voor je project kiezen, maar je mag er niet meer dan &eacute;&eacute;n selecteren. Kies dus zorgvuldig het SCM systeem dat je wilt gebruiken.</p> <p><strong>Je kunt je keuze niet meer wijzigen nadat je project is aangemeld!</strong></p>
+register	comprehensive_description	Omschrijf het project op meer compacte wijze.
+register	conflicting_licenses_choice	Conflicterende licentie keuze
+register	describe_registration	Omschrijf het doel op meer compacte wijze.
+register	i_agree	AKKOORD
+register	i_disagree	NIET AKKOORD
+register	invalid_full_name	Ongeldige volledige naam
+register	invalid_unix_name	Ongeldige unix naam
+register	more_license_description	Geef een compactere licentie omschrijving"
+register	no_license_chosen	Je hebt geen licentievorm gekozen
+register	one_scm	Als er maar &eacute;&eacute;n SCM beschikbaar is wordt deze automatisch gekozen. De keuze is <strong>$1</strong>.
+register	other_license	Als je "Andere" hebt gekozen, geef dan naast een omschrijving van deze licentie ook de reden waarom je deze kiest. Houd er rekening mee dat andere licentievormen mogelijk niet goedgekeurd kunnen worden. Ook kan dit invloed hebben op de doorlooptijd om het project goed te keuren, omdat we moeten controleren of deze licentievorm compatibel is met de OpenSource definitie.
+register	project_description	<h3>4. Openbare projectomschrijving </h3><p>Dit is de omschrijving van het project die op de projectsamenvatting pagina zal verschijnen, in zoekresultaten, etc. Ze moet niet zo formeel zijn als de projectdoel en samenvatting (stap 2), gebruik een compacte. maar pakkende omschrijving. Maximum lengte is 255 tekens.
+register	project_full_name	<h3>1. Volledige projectnaam</h3><p>Begin met de volledige naam van je project. De "Volledige naam" is beschrijvend, en heeft geen beperkingen (behalve een limiet van 40 tekens).</p>Volledige naam:<br/>
+register	project_information	Project informatie
+register	project_license	<h3>3. Licentie</h3> <p><strong><em>Als je een website-only project aanvraagt, kies dan "Alleen website" hieronder, en ga verder.</em></strong><p>$1 is gecre&euml;erd om Open Source software development mogelijk te maken. Om zaken simpel te houden gebruiken we het uitstekende <a href="http://www.opensource.org">Open Source Initiative</a> voor onze licentiekeuzes. <p>We zijn ons ervan bewust dat er andere licentievormen zijn die je behoeften misschien beter dekken. Als je een licentievorm wilt gebruiken die niet OSI gecertificeerd is, laat ons dan s.v.p. weten waarom je aan een andere licentievorm de voorkeur geeft.<p>Keuze van de licentievorm is een serieuze zaak. Neem de tijd om de omschrijvingen van de diverse licenties te lezen alvorens een keuze te maken. <p>Je kunt de licentie voor je project eventueel op een later tijdstijp nog wijzigen indien: -je de wettelijke mogelijkheid hebt dat te doen, -de project documentatie deze wijziging duidelijk aangeeft, -de filemap categorizatie op de juiste manier wordt bijgewerkt. <em>Denk eraan dat licentiewijzigingen geen terugwerkende kracht hebben (ze zijn niet van toepassing op producten die reeds onder OpenSource licentie zijn vrijgegeven).</em> <p>$1 is niet verantwoordelijk voor juridische discrepanties aangaande je licentie.<p><strong>Licenties</strong>
+register	project_submitted	Je projectaanvraag is ingediend bij de  $1 beheerder. Binnen 72 uur ontvang je een beslissing over de aanvraag, en verdere instructies.</p>
+register	project_unix_name	<h3>5. Unixnaam van het project </h3><p>Behalve een volledige projectnaam moet je een korte unixnaam kiezen voor je project.</p><p> De "Unixnaam" wordt op diverse plaatsen op de site gebruikt, en heeft enkele beperkingen. Deze zijn:<ul><li>Mag niet overeenkomen met een reeds bestaande unixnaam van een project<li>Moet tussen 3 en 15 tekens lang zijn<li>Moet in kleine letters zijn<li>Mag alleen (kleine)letters, cijfers en koppeltekens bevatten<li>Moet een geldige unix gebruikersnaam zijn<li>Mag geen gereserveerd woord zijn<li>De unixnaam mag nooit veranderen voor een project</ul><p>De unixnaam is zo belangrijk omdat ze wordt gebruikt voor diversie funkties, zoals:<ul><li>Een website als <tt>unixnaam.$1</tt><li>Als CVS Repository root <tt>/cvsroot/unixnaam</tt> op <tt>cvs.unixnaam.$1</tt><li>Shell toegang tot <tt>unixnaam.$1</tt><li>Zoekmachines op de gehele site</ul><p>Unixnaam:<br/>
+register	purpose_and_summarization	<h3>2. Projectdoel en samenvatting</h3><p><strong></strong><p><strong> Geef een uitgebreide en nauwkeurige omschrijving van je project en welke $1 resources en op welke wijze je deze gaat gebruiken. Deze omschrijving vormt de basis waarop de beslissing over acceptatie of afwijzing van de project hosting op $1 wordt genomen, en later om te beoordelen of de aangevraagde resources op de bedoelde wijze worden aangewend. Deze omschrijving is niet bedoeld als een openbare project samenvatting.</strong>
+register	registration_complete	Registratie compleet
+register	scm_not_selected	Deze site heeft SCM geactiveerd, maar g&eacute;&eacute;n SCM geselecteerd.
+register	unix_group_name_already_taken	Unixnaam is al in gebruik
+reporting	add	Toevoegen
+reporting	administrative	Beheer
+reporting	area	Gebieden
+reporting	cumulative_groups	Cumulatief weekoverzicht projecten (grafiek)
+reporting	cumulative_groups_title	Cumulatief projectoverzicht
+reporting	cumulative_users	Cumulatief weekoverzicht gebruikers (grafiek)
+reporting	cumulative_users_title	Cumulatief gebruikersoverzicht
+reporting	daily	Per dag
+reporting	end	Eind
+reporting	feature_req	Feature verzoeken
+reporting	forum_messages	Forum berichten
+reporting	groups_added_title	Projecten toegevoegd
+reporting	groups_added_weekly	Projecten toegevoegd per week (grafiek)
+reporting	initialize	Initializeer / herbouw overzicht tabellen
+reporting	manage	Tijdregistratie categorie&euml;n beheer
+reporting	monthly	Per maand
+reporting	next	Volgende
+reporting	other_trackers	Andere Trackers
+reporting	project	Project
+reporting	project_activity	Activiteit (grafiek)
+reporting	project_activity_title	Project activiteit
+reporting	project_specific	Project-specifieke overzichten: Tracker, Taakbeheer, Forums, Documentbeheer, Downloads
+reporting	projects	Projecten
+reporting	refresh	Verversen
+reporting	report	overzicht
+reporting	site_wide	Hele site
+reporting	site_wide_activity	Sitebrede activiteit
+reporting	site_wide_line	Lijngrafiek
+reporting	site_wide_pie	Taartgrafiek
+reporting	site_wide_reports	Sitebrede overzichten: Tracker, Taakbeheer, Forums, Documentbeheer, Downloads
+reporting	site_wide_time_tracking	Sitebrede tijdregistratie
+reporting	start	Start
+reporting	subtitle	$1 overzicht
+reporting	time	Tijd
+reporting	time_tracking	Tijdregistratie
+reporting	time_tracking_projecttime	Individuele project tijdoverzichten (grafiek)
+reporting	time_tracking_sitetime	Sitebrede tijdoverzichten (grafiek)
+reporting	time_tracking_sitetimebar	Sitebrede urentotalen (grafiek)
+reporting	time_tracking_usersummary	Sitebrede taken &amp; uren (overzicht)
+reporting	time_tracking_usertime	Individuele gebruikers tijdoverzichten (grafiek)
+reporting	title	Overzichten
+reporting	type	Type
+reporting	update	Aanpassen
+reporting	user	Gebruiker
+reporting	user_activity	Activiteit (grafiek)
+reporting	user_activity_title	Gebruikers activiteit
+reporting	users	Gebruikers
+reporting	users_added_title	Gebruikers toegevoegd
+reporting	users_added_weekly	Gebruikers toegevoegd per week (grafiek)
+reporting	week	Week
+reporting	weekly	Per week
+reporting_pie	end	Eind
+reporting_pie	start	Start
+reporting_pie	title	Tool taartgrafiek
+reporting_pie	trackers	Trackers
+reporting_rebuild	message	  <h3>Initializatie van het rapportage systeem</h3><p>Een enkele keer, als er cronjobs mislukt zijn of de database beschadigd is, zul je de overzichtstabellen moeten herbouwen.<p>Als je zeker weet dat je alle overzichtstabellen wilt herbouwen, klik dan op de  "Ik weet het zeker" knop hieronder.<p>Dit kan een paar minuten duren, maar klik SLECHTS EEN KEER.<p>
+reporting_rebuild	pressonlyonce	SLECHTS EEN KEER klikken
+reporting_rebuild	title	Hoofdpagina
+reporting_ta	add_entry	Item toevoegen
+reporting_ta	add_entry_description	Kies een Project/Subproject in de taakbeheerder. Daarna moet je een taak en een categorie kiezen waarop je je tijd wilt boeken.
+reporting_ta	cancel	Cancel
+reporting_ta	category	Categorie
+reporting_ta	change_week	Andere week
+reporting_ta	choose_entry	Kies een week om tijd te boeken of te wijzigen.
+reporting_ta	choose_entry_description	Nadat je een week hebt gekozen, zal er gevraagd worden om een Project/Subproject in de taakbeheerder te kiezen.
+reporting_ta	date	Datum
+reporting_ta	delete	Vewijderen
+reporting_ta	error_field_required	Alle velden zijn verplicht.
+reporting_ta	hours	Uren
+reporting_ta	project_task	Project/Taak
+reporting_ta	successfully_added	Toegevoegd
+reporting_ta	successfully_deleted	Verwijderd
+reporting_ta	task_mgr_project	Project taakbeheerder
+reporting_ta	time_entries	Tijdregistratie voor de week beginnend op $1
+reporting_ta	title	Tijdregistratie
+reporting_ta	total_hours	Totaal aantal uren
+reporting_ta	week_starting	Week beginnend op
+reporting_tc	category_name	Categorienaam
+reporting_tc	description	Je kunt categorie&euml;n aanmaken hoe tijd besteed mag worden om een bepaalde taak uit te voeren. Voorbeelden van categorie&euml;n zijn "vergaderen", "code schrijven", "testen".
+reporting_tc	successful	Geslaagd
+reporting_tc	time_code	Tijdcode
+reporting_tc	title	Hoofdpagina
+reporting_tc	title2	Tijdregistratie beheer categorie&euml;n
+reporting_ttbp	bycategory	Per categorie
+reporting_ttbp	bysubproject	Per subproject
+reporting_ttbp	bytask	Per taak
+reporting_ttbp	byuser	Per gebruiker
+reporting_ttbp	title	Tijdregistratie per project
+reporting_ua	description	Kies de <strong>eerste letter</strong> van de naam van de persoon waarover je gegevens wilt vastleggen.<p>
+reporting_us	any	Iedere
+reporting_us	closed	Gesloten
+reporting_us	cum_hrs	Cum. uren
+reporting_us	description	Kies een range uit dhe pop-up boxen hieronder. Het overzicht bevat een lijst van alle taken met status Open in die range.
+reporting_us	end_date	Einddatum
+reporting_us	name	Naam
+reporting_us	no_matches	Niets gevonden
+reporting_us	open	Open
+reporting_us	rem_hrs	Besch. uren
+reporting_us	status	Status
+reporting_us	task	Taak
+reporting_us	task_status	Taakstatus
+reporting_us	title	Samenvatting gebruiker
+reporting_ut	description	Kies de <strong>eerste letter</strong> van de naam van de persoon waarover je gegevens wilt vastleggen.<p>
+reporting_ut	title	Overzicht uren gebruiker
+scm_index	admin	Beheer
+scm_index	error_this_project_has_turned_off	Fout: dit project heeft CVS uitgeschakeld
+scm_index	scm_repository	SCM repository
+search	artifact_author	Ingediend door
+search	artifact_date	Datum
+search	artifact_id	#
+search	artifact_summary	Korte bug omschrijving
+search	docs_description	Beschrijving
+search	docs_id	#
+search	docs_title	Titel
+search	error_invalid_search	Fout - ongeldige zoekterm
+search	forum_author	Auteur
+search	forum_date	Datum
+search	forum_thread	Thread
+search	frs_post_date	Post datum
+search	frs_posted_by	Gepost door
+search	frs_release_name	Releasenaam
+search	group_description	Beschrijving
+search	group_name	Groepsnaam
+search	news_post_date	Post datum
+search	news_posted_by	Gepost door
+search	news_summary	Samenvatting
+search	next_results	Volgende resulten
+search	no_matches_found	Niets passends gevonden voor <em>$1</em>
+search	people_real_name	Werkelijke naam
+search	people_user_name	Gebruikersnaam
+search	previous_results	Vorige resulten
+search	search_results	Zoekresulten voor <em>$1</em>
+search	skill_from	Van
+search	skill_keywords	Sleutelwoorden
+search	skill_name	Naam
+search	skill_title	Titel
+search	skill_to	Aan
+search	skill_type	Type
+search	tasks_completed	Voltooid
+search	tasks_created_by	Aangemaakt door
+search	tasks_end_date	Einddatum
+search	tasks_id	#
+search	tasks_start_date	Startdatum
+search	tasks_summary	Samenvatting
+search	title	Zoeken
+searchbox	advanced_search	Uitgebreid zoeken
+searchbox	docs	Documenten bij dit project
+searchbox	forum	Dit forum
+searchbox	forums	Forums bij dit project
+searchbox	frs	Releases van dit project
+searchbox	news	Nieuws over dit project
+searchbox	people	Mensen
+searchbox	search	Zoeken
+searchbox	skill	Vaardigheid
+searchbox	softwaregroup	Software/Groep
+searchbox	task	Taken
+searchbox	tasks	Taken bij dit project
+searchbox	trackers	Trackers bij dit project
+send_pending_items_mail	pm_message	Je hebt deze email onvangen om je te wijzen op openstaande of over tijd zijnde taken. \nTaakbeheerder item  #$1 staat open: \nTaaksamenvatting: $2\nIngediend door: $4\nStatus:$5\nPercentage voltooid: $6\n\nKlik hier om te springen naar item $3
+send_pending_items_mail	pm_subject	Bericht m.b.t. openstaande taakbeheer items
+send_pending_items_mail	tracker_message	Je hebt deze email onvangen om je te wijzen op openstaande of over tijd zijnde trackers. Item #$1 staat open: \nSamenvatting: $3\nStatus: $5\nOpvoerdatum:$6\nToegewezen aan: $7\nIngediend door: $8\nDetails: $9\n\n\nKlik hier om te springen naar item $4
+send_pending_items_mail	tracker_subject	Bericht m.b.t. openstaande tracker items
+sendmessage	about_blurb	Om spam te minimaliseren gebruiken we dit form om e-mail te verzenden.<p />Vul het nauwkeurig en volledig in, anders kan de ontvanger geen reply doen.<p /><span style="important">><b>ALS JE OM HULP VRAAGT:</b> Heb je <b>echt</b> de documentatie op de site gelezen? Heb je je <b>user_id</b> en <b>gebruikersnaam vermeld?</b> Als je over een bepaald project schrijft, vermeld dan het <b>project ID</b> (<b>group_id</b>) en de <b>Projectnaam</b>.</span>
+sendmessage	contact	Contact
+sendmessage	email	Je e-mail adres
+sendmessage	email_only_to	Je kunt alleen naar adressen versturen
+sendmessage	error_user_not_exist	Fout - die gebruiker bestaat niet
+sendmessage	error_variables	Fout - niet alle variabelen zijn ingevuld
+sendmessage	message	Bericht
+sendmessage	message_sent	Bericht is verzonden
+sendmessage	name	Je naam
+sendmessage	send	Stuur bericht
+sendmessage	subject	Onderwerp
+session	cannotinit	Fout - kan geen sessie beginnen
+session	deleted	Account verwijderd
+session	invalidpasswd	Ongeldig wachtwoord of gebruikersnaam
+session	missingpasswd	Ontbrekend wachtwoord of gebruikersnaam
+session	notactive	Account niet actief
+session	pending	Account In behandeling
+session	suspended	Account opgeschort
+snippet_addversion	browse_the_library	<strong>Blader door de library</strong> om codefragmenten te vinden die je wilt toevoegen, voeg ze toe met de 'Nieuw venster' link zoals hierboven aangegeven.
+snippet_addversion	changes	Wijzigingen:
+snippet_addversion	error_doing_snippet_package_version_insert	Fout bij invoegen CODEFRAGMENT BUNDEL VERSIE!
+snippet_addversion	error_doing_snippet_version_insert	Fout bij invoegen CODEFRAGMENT VERSIE!
+snippet_addversion	error_go_back_and_fill_in_all	Fout - ga terug en vul alle informatie in
+snippet_addversion	error_snippet_doesnt_exist	Fout: codefragment bestaat niet
+snippet_addversion	error_snippet_package_doesnt_exist	Fout: codefragment bundel bestaat niet
+snippet_addversion	error_url_or_form	Fout: was de URL of form ongeldig??
+snippet_addversion	if_new_window_opened	Als er een nieuw venster geopend was kun je dit gebruiken om codefragmenten aan je bundel toe te voegen. Als er geen nieuw venster geopend werd dien je de volgende link te gebruiken om een toevoeging aan je bundel te doen voordat je deze pagina verlaat.
+snippet_addversion	if_you_have_modified	Als je een bundel hebt gewijzigd, en de wijzigingen zijn van belang voor anderen, maak deze wijzigingen dan s.v.p. bekend voor anderen.
+snippet_addversion	if_you_have_modified_a_version	Als je een codefragment hebt gewijzigd, en de wijzigingen zijn van belang voor anderen, maak deze wijzigingen dan s.v.p. bekend voor anderen.
+snippet_addversion	important	BELANGRIJK!
+snippet_addversion	link_add_snippets_to_package	Voeg codefragmenten aan bundel toe
+snippet_addversion	make_sure_all_info_is_complete	Zorg dat alle info juist en compleet is
+snippet_addversion	paste_the_code_here	Plak de code hier:
+snippet_addversion	snippet_package_version_added_successfully	Codefragment bundel versie toegevoegd.
+snippet_addversion	snippet_version_added_successfully	Codefragment versie toegevoegd.
+snippet_addversion	submit	VERZENDEN
+snippet_addversion	version	Versie:
+snippet_browse	error_bad_url	Fout - verkeerde URL?
+snippet_browse	no_snippets_found	Geen codefragmenten gevonden
+snippet_browse	packages_of_snippets	Bundels van codefragmenten
+snippet_browse	snippet_by_category	Codefragmenten per categorie: $1
+snippet_browse	snippet_id	Codefragment ID
+snippet_browse	snippet_title	Titel
+snippet_browse	snippets	Codefragmenten
+snippet_browse	snippets_by_language	Codefragmenten per taal: $1
+snippet_browse	title	Codefragment bibliotheek
+snippet_caching	browse_by_category	Bladeren per categorie
+snippet_caching	browse_by_language	Bladeren per taal
+snippet_caching	intro	<p>Het doel van dit archief is om jouw codefragmenten, scripts,	en functies met de Open Source Software Gemeenschap te delen.</p><p>Je kunt een "nieuw codefragment" cre&euml;ren, en daarna ook nieuwe versies van dat codefragment snel en gemakkelijk toevoegen.</p><p>Zodra je codefragmenten geplaatst hebt kun je een "bundel" van codefragmenten aanmaken. Die bundel kan meerdere versies van andere codefragmenten bevatten.</p><p>&nbsp;</p><h3>Bladeren codefragmenten</h3>	<p>Je kunt eenvoudig door de codefragment bibliotheek bladeren:</p>
+snippet_detail	author	Schrijver
+snippet_detail	changes_since_last_version	Wijzigingen sinds de laatste versie:
+snippet_detail	date_posted	Datum ingestuurd
+snippet_detail	delete	Wissen
+snippet_detail	download_a_raw_text	Download een platte tekst versie van deze code door te klikken op &quot;<strong>Download versie</strong>&quot;
+snippet_detail	download_version	Download versie
+snippet_detail	edit_del	Bewerken/verwijderen
+snippet_detail	error_no_version_found	Fout - geen versies gevonden
+snippet_detail	error_was_the_url_mangled	Fout - verkeerde URL?
+snippet_detail	latest_package_version	Laatste bundel versie:
+snippet_detail	latest_snippet_version	Laatste codefragment versie:
+snippet_detail	package_version	Bundel versie
+snippet_detail	snippet_id	Codefragment ID
+snippet_detail	submit_a_new_snippet	Submit nieuw codefragment
+snippet_detail	submit_a_new_version	Submit nieuwe versie
+snippet_detail	title	Codefragment bibliotheek
+snippet_detail	version_of_this_package	Versies van deze bundel:
+snippet_detail	version_of_this_snippet	Versies van dit codefragment:
+snippet_detail	you_can_submit_a_new	Je kunt een nieuwe versie van dit codefragment submitten als je het gewijzigd hebt en de wijzigingen ook voor anderen van belang zijn.
+snippet_detail	you_can_submit_a_new_version_of_package	Je kunt een nieuwe versie van deze bundel submitten als je deze gewijzigd hebt en de wijzigingen ook voor anderen van belang zijn.
+snippet_index	title	Codefragment bibliotheek
+snippet_package	add_snippet_to	Voeg codefragmenten toe
+snippet_package	add_snippet_to_package	Voeg codefragmenten aan bundel toe
+snippet_package	browse_the_libary	<strong>Blader door de bibliotheek</strong> om de codefragmenten te vinden die je wilt toevoegen. Voeg ze toe met de 'Nieuw venster' link zoals hierboven aangegeven.
+snippet_package	category	Categorie
+snippet_package	description	Omschrijving:
+snippet_package	error_doing_snippet_package_insert	Fout bij toevoegen CODEFRAGMENT BUNDEL!
+snippet_package	error_doing_snippet_package_version	Fout bij toevoegen CODEFRAGMENT BUNDEL VERSIE!
+snippet_package	error_go_back_and_fill	Fout - ga terug en vul alle gevraagde gegevens in
+snippet_package	if_a_new_window	Als er een nieuw venster geopend was kun je dit gebruiken om codefragmenten aan je bundel toe te voegen. Als er geen nieuw venster geopend werd dien je de volgende link te gebruiken om een toevoeging aan je bundel te doen voordat je deze pagina verlaat.
+snippet_package	important	BELANGRIJK!
+snippet_package	language	Taal
+snippet_package	make_sure_all_info	Zorg dat alle gegevens juist en volledig zijn
+snippet_package	snippet_package_added_successfull	Codefragment bundel toegevoegd.
+snippet_package	snippet_title	Titel:
+snippet_package	snippet_version_added_successfull	Codefragment bundel versie toegevoegd.
+snippet_package	submit	VERZENDEN
+snippet_package	suggest_a_category	Doe een voorstel voor een categorie
+snippet_package	suggest_a_language	Doe een voorstel voor een taal
+snippet_package	title	Toevoegen nieuwe codefragment bundel
+snippet_package	title_new_snippet_package	Toevoegen nieuwe codefragment bundel
+snippet_package	version	Versie
+snippet_package	you_can_group	<p>Je kunt bestaande codefragmenten in een bundel groeperen met dit interface. Zorg dat alle codefragmenten aanwezig zijn en de codefragment ID's bekend zijn voor je de bundel cre&euml;ert.</p><p><ol><li>Cre&euml;er de bundel met dit formulier.</li><li><strong>Daarna</strong> met de link "Voeg codefragmenten aan bundel toe" bestanden aan je bundel toevoegen.</li></ol></p><p><span class="important">Let op:</span> Je kunt een nieuwe versie van een bestaande bundel indienen door in de bibliotheek te bladeren en de link naar de bestaande bundel aan te klikken. Gebruik deze pagina alleen om een geheel nieuwe bundel aan te maken.
+snippet_submit	category	Categorie
+snippet_submit	description	Omschrijving
+snippet_submit	error_doing_snippet_insert	Fout bij toevoegen CODEFRAGMENT!
+snippet_submit	language	Taal
+snippet_submit	license	Licentie
+snippet_submit	make_sure_all_info	Zorg dat alle info juist en volledig is
+snippet_submit	paste_the_code_here	Plak de code hier
+snippet_submit	snippet_added_successfull	Codefragment toegevoegd.
+snippet_submit	snippet_title	Titel
+snippet_submit	submit	SUBMIT
+snippet_submit	suggest_a_category	Doe een voorstel voor een categorie
+snippet_submit	suggest_a_language	Doe een voorstel voor een taal
+snippet_submit	type	Scripttype
+snippet_submit	version	Versie
+snippet_submit	you_can_post	Je kunt een nieuw codefragment toevoegen en delen met andere gebruikers. Vul dan deze informatie in. <strong>Geef een goede omschrijving</strong> en <strong>becommentarieer je code</strong> zo dat anderen het kunnen lezen en begrijpen.</p><p><span class="important">Let op:</span> Je kunt een nieuwe versie van een bestaand codefragment indienen door in de bibliotheek te bladeren en de link aan te klikken. Gebruik deze pagina alleen om een geheel nieuw script of functie in te dienen.
+snippet_utils	auctions	Veilingen
+snippet_utils	author	Schrijver
+snippet_utils	bbs_systems	Prikborden
+snippet_utils	browse	Bladeren
+snippet_utils	calendars	Kalenders
+snippet_utils	choose_one	Kies er &eacute;&eacute;n
+snippet_utils	class	Klasse
+snippet_utils	create_a_package	Cre&euml;er een bundel
+snippet_utils	database_manipulation	Databasebewerking
+snippet_utils	download_version	Download versie
+snippet_utils	file_management	Bestandsbeheer
+snippet_utils	full_script	Volledig script
+snippet_utils	function	Functie
+snippet_utils	games	Games
+snippet_utils	html_manipulation	HTML bewerking
+snippet_utils	math_functions	Wiskundige functies
+snippet_utils	no_snippets_are_in_this_package	Er zitten nog geen codefragmenten in deze bundel
+snippet_utils	other	Overige
+snippet_utils	other_language	Andere taal
+snippet_utils	readme	LEESMIJ
+snippet_utils	sample_code	Voorbeeld code (HOWTO)
+snippet_utils	searching	Zoeken
+snippet_utils	shopping_carts	Winkelwagentjes
+snippet_utils	snippet_id	Codefragment ID
+snippet_utils	snippet_in_this_package	Codefragmenten in deze bundel:
+snippet_utils	snippet_title	Titel
+snippet_utils	submit_a_new_snippet	Toevoegen nieuw codefragment
+snippet_utils	unix_admin	UNIX beheer
+snippet_utils	voting	Stemmen
+snippet_utils	website_only	Alleen Website
+source	file_not_found	Bestand niet gevonden
+source	file_not_found_text	Kan aangeduide bestand niet vinden.
+source	invalid_argument	Ongeldig bestand argument
+source	invalid_argument_text	Het bestand argument is ongeldig.
+source	missing_file	Ontbrekend bestand argument
+source	missing_file_text	Je moet een bestand specificeren voor deze pagina.
+source	show_source	Toon broncode
+source	source_of	Broncode van $1
+stats	title	$1 site statistieken
+stats_graph	project_stats	PROJECT STATISTIEKEN
+stats_graph	site_graphs	SITE GRAFIEKEN
+stats_graph	sitewide_statistics_graphs	Sitebrede grafieken
+stats_i18n	language	Taal
+stats_i18n	language_distribution	Talen distributies
+stats_i18n	language_text	Dit is een lijst van door de gebruikers gekozen voorkeursinstellingen; niet inbegrepen zijn talen die via cookies of browserinstellingen geselecteerd zijn
+stats_i18n	title	$1 I18n statistieken
+stats_i18n	total_non_english	Totaal niet-engels
+stats_i18n	users	Gebruikers
+stats_index	other_statistics	Andere statistieken:<ul><li><a href="lastlogins.php">Meest recente logins</a></li><li><a href="i18n.php">I18n statistieken</a></li></ul>
+stats_index	overview_stats	OVERZICHT STATISTIEKEN
+stats_index	project_stats	PROJECT STATISTIEKEN
+stats_index	site_graphs	SITE GRAFIEKEN
+stats_lastlogins	date	Datum
+stats_lastlogins	last_logins	Laatste logins
+stats_lastlogins	most_recent_open	Meest recent geopende sessies
+stats_lastlogins	no_records	Geen records gevonden","Database fout: "
+stats_lastlogins	source_ip	Source IP
+stats_lastlogins	username	Gebruikersnaam
+stats_projects	project_comparision	Statistische vergelijking van projecten
+stats_site_utils	adds	Toevoegingen
+stats_site_utils	all	alle
+stats_site_utils	all_projects	Alle projecten
+stats_site_utils	all_trkr	Alle Trackers
+stats_site_utils	bugs	Bugs
+stats_site_utils	cls	Cls
+stats_site_utils	comma_seperated_group_id	<strong>komma gescheiden</strong> groep ID&#039;s)
+stats_site_utils	comms	Commits
+stats_site_utils	cos	CO&#039;s
+stats_site_utils	current_statistic_all_time	Huidige geaggregeerde statistieken vanaf het begin
+stats_site_utils	cvs	CVS
+stats_site_utils	day	Dag
+stats_site_utils	developers	Ontwikkelaars
+stats_site_utils	downloads	Downloads
+stats_site_utils	generate_report	Genereer een rapport
+stats_site_utils	group_name	Groepsnaam
+stats_site_utils	in_trove_category	Projecten in Trove categorie:
+stats_site_utils	last_30	laatste_30
+stats_site_utils	month	Maand
+stats_site_utils	no_data	Geen gegevens
+stats_site_utils	no_valid_data	Geen geldige gegevens gevonden.
+stats_site_utils	opn	Open
+stats_site_utils	or_special_project_list	OF geef een speciale projectlijst op:
+stats_site_utils	page_views	Pagina bezoeken
+stats_site_utils	patches	Patches
+stats_site_utils	projects	Projecten
+stats_site_utils	report	Overzicht:
+stats_site_utils	returned_no_category	geen categorienaam teruggekregen
+stats_site_utils	site	Site
+stats_site_utils	site_views	Site Views
+stats_site_utils	statistics_for_the_past_days	Statistieken voor de afgelopen $1 dagen.
+stats_site_utils	statistics_for_the_past_months	Statistieken voor de afgelopen $1 maanden.
+stats_site_utils	subdomain	Subdomein
+stats_site_utils	subdomain_views	Subdomein bezoeken
+stats_site_utils	support	Ondersteuning
+stats_site_utils	tasks	Taken
+stats_site_utils	total	Totaal
+stats_site_utils	view_by	Bekijken per:
+stats_user_graph	date	Datum
+stats_user_graph	new_additions_by_day	Nieuwe toevoegingem, per dag
+stats_user_graph	new_user_projects	Nieuwe gebruikers (ROOD), nieuwe projecten (BLAUW
+stats_user_graph	user_projects	gebruikers (ROOD) / projecten (BLAUW)
+stats_view_graph	date	Datum
+stats_view_graph	page_views	Gforge pagina bezoeken
+stats_view_graph	total_views	Totaal pagina bezoeken (ROOD) ($1 dagen)
+stats_view_graph	views	Bezoeken (ROOD)
+survey	for_some_reason	Om een of andere reden is het Groeps ID of Enqu&ecirc;te ID niet aan deze pagina doorgegeven
+survey	high	Hoog
+survey	low	Laag
+survey	survey_not_found	Geen.
+survey	survey_privacy	Enqu&ecirc;te privacy
+survey	title	Enqu&ecirc;te
+survey	warning_double_vote	Pas op - je staat op het punt om voor de tweede keer in deze enqu&ecirc;te te te stemmen.
+survey_add_question	add_this_question	Voeg deze vraag toe.
+survey_add_question	error_insert_question	Fout bij toevoegen vraag
+survey_add_question	question	Vraag
+survey_add_question	question_added	Vraag toegevoegd
+survey_add_question	question_type	Type vraag
+survey_add_question	show_existing_questions	Toon bestaande vragen.
+survey_add_question	title	Voeg een vraag toe
+survey_add_survey	add_this_survey	Voeg deze enqu&ecirc;te toe
+survey_add_survey	existing_surveys	Bestaande Enqu&ecirc;tes
+survey_add_survey	is_active	Actief?
+survey_add_survey	list_questions_numbers	Geef de vraagnummers, in de gewenste volgorde, gescheiden door komma's. <strong>Raadpleeg Uw lijst van vragen</strong> zodat U de juiste vraagnummers kunt zien. Gebruik <strong>geen</strong> spaties, en eindig <strong>niet</strong> met een komma.<br /> Bijvoorbeeld: 1,2,3,4,5,6,7
+survey_add_survey	name_of_survey	Naam van de enqu&ecirc;te:
+survey_add_survey	no	Nee
+survey_add_survey	show_existing_question	Toon bestaande vragen
+survey_add_survey	survey_inserted	Enqu&ecirc;te	toegevoegd
+survey_add_survey	title	Voeg een enqu&ecirc;te toe
+survey_add_survey	yes	Ja
+survey_admin	delete	Wissen
+survey_admin	edit	Wijzigen
+survey_admin_index	its_simple_to_create	<p>het is heel gemakkelijk om een enqu&ecirc;te aan te maken.<ol><li>Cre&euml;er vragen en commentaren m.b.v. de formulieren hierboven.</li><li>Maak een enqu&ecirc;te aan door de vragen in de gewenste volgorde in te voeren (kies uit <strong>je eigen</strong> vragenlijst).</li><li>Link de enqu&ecirc;te volgens dit format: $1 waarbij XX het enqu&ecirc;tenummer is
+survey_admin_index	permission_denied	Toegang geweigerd
+survey_admin_index	title	Enqu&ecirc;te beheer
+survey_admin_index	you_can_now_activate	Je kunt nu enqu&ecirc;tes activeren/deactiveren op de $1 &#039;Bestaande enqu&ecirc;tes aanpassen&#039; $2 pagina
+survey_admin_utils	found	$1 Enqu&ecirc;tes gevonden
+survey_edit	addable_question	Toe te voegen vragen
+survey_edit	change_after_already_response	Als je een enqu&ecirc;te wijzigt nadat er al antwoorden zijn teruggestuurd, kunnen de resultaten misleidend of onjuist zijn
+survey_edit	delete_failed	WISSEN MISLUKT
+survey_edit	delete_successful	GEWISD
+survey_edit	existing_question	Vragen in deze enqu&ecirc;te
+survey_edit	existing_surveys	Bestaande enqu&ecirc;tes
+survey_edit	is_active	actief
+survey_edit	list_question_numbers	Geef de vraagnummers, in de gewenste volgorde, gescheiden door komma's. <strong>Raadpleeg Uw lijst van vragen</strong> zodat U de juiste vraagnummers kunt zien. Gebruik <strong>geen</strong> spaties, en eindig <strong>niet</strong> met een komma.<br /> Bijvoorbeeld: 1,2,3,4,5,6,7
+survey_edit	missing_date	WIJZIGEN MISLUKT: ontbrekende gegevens
+survey_edit	name_off_survey	Enqu&ecirc;te naam
+survey_edit	no	Nee
+survey_edit	permission_denied	Toegang geweigerd
+survey_edit	question	Vragen
+survey_edit	show_existing_questions	Toon bestaande vragen
+survey_edit	submit_changes	Submit wijzigingen
+survey_edit	survey_question_required	WIJZIGEN MISLUKT: Enqu&ecirc;te vragen ontbreken
+survey_edit	survey_title_required	WIJZIGEN MISLUKT: Enqu&ecirc;te titel ontbreekt
+survey_edit	title	Bewerk een enqu&ecirc;te
+survey_edit	update_failed	WIJZIGEN MISLUKT
+survey_edit	update_successful	GEWIJZIGD
+survey_edit	warning_survey_after_response	WAARSCHUWING! Het is geen goed idee een enqu&ecirc;te te veranderen nadat al antwoorden zijn ingediend
+survey_edit	yes	Ja
+survey_edit_question	editing_question	Bewerken vraag
+survey_edit_question	error_finding_question	Fout bij het vinden van de vraag
+survey_edit_question	if_you_change_after	Als je een vraag wijzigt nadat er al antwoorden zijn teruggestuurd, kunnen de resultaten misleidend of onjuist zijn
+survey_edit_question	permission_denied	Toegang geweigerd
+survey_edit_question	question	Vraag
+survey_edit_question	question_type	Vraag Type
+survey_edit_question	show_existing_question	Vertoon bestaande vragen
+survey_edit_question	submit_changes	Submit wijzigingen
+survey_edit_question	title	Bewerk een vraag
+survey_edit_question	update_failed	WIJZIGEN MISLUKT
+survey_edit_question	update_successful	GEWIJZIGD
+survey_edit_question	warning_change_after_response	WAARSCHUWING! Het is geen goed idee vragen te veranderen nadat al antwoorden zijn ingediend
+survey_error	error_no_valid_group_object	Geen geldig Groep Object
+survey_error	error_no_valid_question_object	Geen geldig Vraag Object
+survey_error	error_no_valid_survey_object	Geen geldig Enqu&ecirc;te Object
+survey_error	min_question_length	Vraag is te kort
+survey_error	no_question_found	Geen enqu&ecirc;tevraag gevonden
+survey_error	no_survey_data_filled	De enqu&ecirc;tegegevens zijn niet ingevuld
+survey_error	no_survey_found	Geen enqu&ecirc;te gevonden
+survey_error	no_survey_response_found	Geen enqu&ecirc;teantwoorden gevonden
+survey_error	permission_denied	Je hebt geen toestemming om deze pagina op te vragen
+survey_index	survey_edit	Wijzigen
+survey_index	survey_id	Enqu&ecirc;te ID
+survey_index	survey_number_questions	Aantal vragen
+survey_index	survey_number_votes	Aantal vragen
+survey_index	survey_questions	Vragen
+survey_index	survey_result	Resultaat
+survey_index	survey_result_comments	Resultaten met grafieken en toelichting
+survey_index	survey_result_graph	Resultaat met grafiek
+survey_index	survey_title	Enqu&ecirc;te titel
+survey_index	survey_vote	Vote
+survey_index	title	Enqu&ecirc;te
+survey_privacy	survey_privacy	Enqu&ecirc;te privacy
+survey_privacy	the_privacy_information	<p>De informatie die met deze enqu&ecirc;te verzameld wordt zal nooit verkocht worden aan derde partijen, noch gebruikt om je aan te sporen goederen of diensten aan te schaffen.</p><p>Deze informatie zal uitsluitend gebruikt worden om een profiel op te bouwen van de projecten en ontwikkelaars die ondervraagd worden. Dit profiel zal andere bezoekers helpen om een beeld te vormen van de kwaliteit van een bepaald project.</p><p>De ID's van degenen die een enqu&ecirc;te beantwoorden zullen niet worden doorgegeven aan het publiek, derde partijen, noch aan de projectbeheerders.</p><p>De verzamelde informatie zal alleen in een geaggregeerde vorm beschikbaar zijn en kan niet gebruikt worden om individuele gegevens van ontwikkelaars af te leiden.</p><p>Indien er enige veranderingen in deze regels zullen komen, zullen deze nimmer met terugwerkende kracht zijn, en de gebruikers zal de gelegenheid tot 'opt-out' worden geboden.
+survey_privacy	the_team	Het $1 team
+survey_privacy	title	Enqu&ecirc;te
+survey_rating_resp	click_to_resturn	Klik om terug te keren naar de vorige pagina
+survey_rating_resp	error	Fout
+survey_rating_resp	error_in_insert	Fout bij toevoegen
+survey_rating_resp	error_missing	Fout!!! ONTBREKENDE PARAMETERS
+survey_rating_resp	if_you_vote_again	Als je nog een keer stemt, wordt de vorige stem uitgewist.
+survey_rating_resp	title	Stemmen
+survey_rating_resp	vote_reg	Stem geregistreerd
+survey_rating_resp	vote_regsitered	Stem geregistreerd
+survey_rating_resp	you_must_be_logged_in	Je moet ingelogd zijn om te stemmen
+survey_resp	error	Fout
+survey_resp	error_some_reason	Om een of andere reden is het Groeps ID of Enqu&ecirc;te ID niet aan deze pagina doorgegeven
+survey_resp	regards	Betreft
+survey_resp	thank_you	Bedankt voor voor het nemen van de tijd om deze enqu&ecirc;te in te vullen.
+survey_resp	the_crew	Het $1 team
+survey_resp	title	Enqu&ecirc;te voltooid
+survey_resp	unfortunately_you_have_to_be	Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enqu&ecirc;tes.
+survey_resp	you_nedd_to_be_logged_in	Je moet hiervoor ingelogd zijn
+survey_show_questions	found	$1 vragen gevonden
+survey_show_questions	note_use_these_questions_id	LET OP: gebruik deze vraag ID&#039;s als U een nieuwe enqu&ecirc;te samenstelt
+survey_show_questions	permission_denied	Toegang geweigerd
+survey_show_questions	title	Enqu&ecirc;te vragen
+survey_show_questions	you_may_use_any_of_these	Je mag elke van deze vragen gebruiken in je enqu&ecirc;tes
+survey_show_results	permission_denied	Toegang geweigerd
+survey_show_results	title	Enqu&ecirc;te resultaten
+survey_show_results_aggregate	average	Gemiddeld
+survey_show_results_aggregate	comments	Commentaar
+survey_show_results_aggregate	error	Fout
+survey_show_results_aggregate	no	Nee
+survey_show_results_aggregate	no_votes	Geen stemmen
+survey_show_results_aggregate	permission_denied	Toegang geweigerd
+survey_show_results_aggregate	responses	Antwoorden
+survey_show_results_aggregate	title	Geaggregeerde enqu&ecirc;te resultaten
+survey_show_results_aggregate	view_comments	Laat commentaar zien
+survey_show_results_aggregate	yes	Ja
+survey_show_results_aggregate	yes_no	Ja / Nee
+survey_show_results_csv	permission_denied	Toegang geweigerd
+survey_show_results_individual	permission_denied	Toegang geweigerd
+survey_show_results_individual	title	Resultaten
+survey_show_results_individual	yes_no	Ja / Nee
+survey_utils	add_question	Voeg vragen toe
+survey_utils	add_survey	Voeg enqu&ecirc;te toe
+survey_utils	admin	Beheer
+survey_utils	edit_questions	Bewerk vragen
+survey_utils	edit_survey	Bewerk enqu&ecirc;te
+survey_utils	error_this_group_has_turned_off	Fout, deze groep heeft enqu&ecirc;tes uitgeschakeld
+survey_utils	show_results	Toon resultaten
+system	datefmt	Y-m-d H:i
+system	locale	en_US
+system	shortdatefmt	Y-m-d
+system	strftimefmt	%Y %B %e  %H:%M
+top	NA	n.v.t.
+top	about_blurb	Wij houden project gebruikstatistieken bij op $1 en laten hier de hoogst scorende projecten in verschillende categorie&euml;n zien.
+top	active_all_time	Meest actief
+top	active_weekly	Meest actief deze week
+top	down	Naar beneden $1
+top	downloads	Meest gevraagde downloads
+top	downloads_7_days	Meest gevraagde downloads (laatste 7 dagen)
+top	forum_posts	Meeste forum berichten
+top	highest_ranked_users	Gebruikers met de hoogste score
+top	pageviews	Hoogste aantal paginabezoeken per project (gemeten als klikken op het  $1 'button' logo)
+top	same	Zelfde
+top	title	Meest actieve projecten
+top	top_project	Meest actieve $1 project
+top	up	Naar boven $1
+top	updated_daily	Dagelijks bijgewerkt
+top	view_other_top_category	Bekijk andere hoogste categorie&euml;n
+top_mostactive	percentile	Percentiel
+top_mostactive	project_name	Projectnaam
+top_mostactive	rank	Score
+top_mostactive	updated_daily	Dagelijks bijgewerkt
+top_toplist	download	Downloads
+top_toplist	pageviews	Paginabezoeken
+top_toplist	posts	Geplaatste berichten
+top_toplist	project_name	Projectnaam
+top_toplist	rank	Score
+top_toplist	top_download	Meest gevraagde downloads
+top_toplist	top_download_7_days	Meest gevraagde downloads in de laatste 7 dagen
+top_toplist	top_forum_post_count	Hoogste aantal forum berichten
+top_toplist	top_weekly_pagesviews	Hoogste aantal paginabezoeken per week op *.$1 (klikken op het $2 logo)
+top_topusers	change	Wijzig
+top_topusers	info_not_available	Informatie niet beschikbaar
+top_topusers	info_not_available_more	Informatie over hoogst beoordeelde gebruikers is niet beschikbaar.
+top_topusers	last_rank	Vorige score
+top_topusers	rank	Score
+top_topusers	rating	Beoordeling
+top_topusers	real_name	Werkelijke naam
+top_topusers	user_name	Gebruikersnaam
+tracker	admin	Beheer
+tracker	any	Allen
+tracker	assigned_to	Toegewezen aan
+tracker	assignee	Toegewezen aan
+tracker	check_upload	Aanvinken om bestand te uploaden en te attachen
+tracker	choose	Kies een tracker - je kunt dan bladeren/wijzigen/items toevoegen.
+tracker	close_date	Sluitingsdatum
+tracker	date	Datum
+tracker	detailed_description	Gedetailleerde beschrijving
+tracker	file_delete	Bestand wissen:
+tracker	file_delete_successful	Bestand gewist
+tracker	file_description	Bestandsbeschrijving
+tracker	file_upload_successful	Bestand geupload
+tracker	followups	Reacties
+tracker	id	ID
+tracker	insert_email	Als je <strong>niet</strong> kunt inloggen, vul dan hier je e-mail adres in:
+tracker	item_created	Item aangemaakt
+tracker	no_trackers	Geen toegankelijke Trackers gevonden
+tracker	no_trackers_text	Er zijn geen Trackers actief, of je mag ze niet zien.<p><span class="important">De beheerder van dit project dient datatypes aan te maken m.b.v. de $1 beheer pagina $2</span>
+tracker	open_date	Datum ingediend
+tracker	please_login	$1 inloggen $2 s.v.p.
+tracker	priority	Prioriteit
+tracker	reporting	Overzichten
+tracker	security_note	Vermeld GEEN wachtwoorden of vertrouwelijke informatie in je boodschap!
+tracker	status	Status
+tracker	status_any	Alle
+tracker	submitted_by	Ingediend door
+tracker	submitter	Indiener
+tracker	summary	Samenvatting
+tracker	tracker_item	Tracker item
+tracker	unassigned	Niet toegewezen
+tracker	updated_successful	Gewijzigd
+tracker_add	for_project	Voor project
+tracker_add	submit	Submit
+tracker_admin	add_canned_responses	Standaard antwoorden toevoegen / wijzigen
+tracker_admin	add_canned_responses_info	Cre&euml;er / wijzig generieke antwoordboodschappen voor de Tracker
+tracker_admin	add_categories	Categorie&euml;n toevoegen / wijzigen
+tracker_admin	add_categories_info	Voeg categorie&euml;n zoals, 'mail module','plannings module','cvs', etc. toe
+tracker_admin	add_group_infos	Voeg groepen zoals, 'v1.2','niet ondersteund','ongeverifieerd', etc. toe
+tracker_admin	add_groups	Groepen toevoegen / wijzigen
+tracker_admin	build_selection_box	Pop-Up boxes toevoegen / aanpassen
+tracker_admin	build_selection_box_info	Voeg nieuwe boxes toe zoals fases, kwaliteitsmetrieken, componenten, etc.  Wanneer ze eenmaal zijn toegevoegd kunnen ze gebruikt worden samen met andere keuze boxes (bijvooorbeeld, categorie&euml;n of groepen) om bugs of andere items te beschrijven of te doorzoeken
+tracker_admin	canned_response_inserted	Standaard antwoord invoegen
+tracker_admin	canned_response_updated	Standaard antwoord aangepast
+tracker_admin	category_name	Categorienaam
+tracker_admin	choose_datatype	Als je een datatype kiest kun je voorkeuren, categorie&euml;n, groepen, gebruikers en rechten toekennen
+tracker_admin	delete	Verwijderen.
+tracker_admin	delete_warning	Je staat op het punt om deze tracker and alle bijbehorende onderdelen onherroepelijk te verwijderen!
+tracker_admin	deleted	Verwijderd.
+tracker_admin	error_inserting	Fout bij het invoegen
+tracker_admin	error_updating	Fout bij het wijzigen
+tracker_admin	group_name	Nieuwe groepsnaam
+tracker_admin	intro	<h3>Cre&euml;er een nieuwe Tracker</h3><p>Je kunt dit systeem gebruiken om alle mogelijke soorten gegevens te blijven volgen, waarbij iedere Tracker aparte gebruikers-, groeps-, categorie-, en rechtenlijsten heeft. Je kunt items ook gemakkelijk tussen Trackers kopi&euml;ren, als dat nuttig is.</p><p>Trackers worden ook wel "Artefacttypes" genoemd en afzonderlijke data elementen zijn dan  "Artefacten". "Bugs" kunnen een Artefacttype zijn, waarbij een bug melding dan een Artefact is. Je kunt zoveel Artefacttypes maken als je wilt, maar denk er wel aan dat je categorie&euml;en, groepen, en rechten aan elk type moet toekennen, wat een boel tijd kan kosten.
+tracker_admin	permanently_delete_info	Deze tracker onherroepelijk verwijderen.
+tracker_admin	really_sure	Ik weet het helemaal zeker.
+tracker_admin	sure	Ik weet het zeker.
+tracker_admin	title	Beheer
+tracker_admin	tracker_id	ID
+tracker_admin	tracker_title	Titel
+tracker_admin	tracker_updated	Tracker aangepast
+tracker_admin	update_preferences	Voorkeuren aanpassen
+tracker_admin	update_preferences_info	Wijzig voorkeursinstellingen zoals expiration times, e-mail adres
+tracker_admin_add_canned	canned_response_body	Berichttekst
+tracker_admin_add_canned	canned_response_info	Door een aantal generieke antwoorden te formuleren kun je jezelf een boel tijd besparen bij het afhandelen van vragen of verzoeken m.b.t. artefacten.
+tracker_admin_add_canned	canned_response_title	Titel
+tracker_admin_add_canned	existing_responses	Bestaande antwoorden
+tracker_admin_add_canned	no_responses	Voor deze groep zijn geen standaard antwoorden beschikbaar
+tracker_admin_add_canned	title	Standaard antwoorden toevoegen / wijzigen voor $1
+tracker_admin_build_boxes	box_add_choices	keuze toevoegen
+tracker_admin_build_boxes	box_change_warning	Het is niet aanbevolen om de extra veldnaam te veranderen omdat er andere dingen aan gekoppeld zijn. Als je de extra veldnaam wijzigt zullen ook alle gerelateerde items naar de nieuwe naam worden omgezet
+tracker_admin_build_boxes	box_name	Extra veldnaam
+tracker_admin_build_boxes	box_name_inserted	Extra veld ingevoegd
+tracker_admin_build_boxes	box_name_updated	Extra veld aangepast
+tracker_admin_build_boxes	box_sizeattr1	Tekstveldgrootte/Tekstgebied rijen
+tracker_admin_build_boxes	box_sizeattr2	Maximum tekstveldlengte/Tekstgebied kolommen
+tracker_admin_build_boxes	box_sizerows	Tekstvelden en tekstgebieden dienen gespecificeerde grootte/maximumlengte resp. rijen/kolommen te hebben.
+tracker_admin_build_boxes	box_type	Type extra veld
+tracker_admin_build_boxes	box_type_radio	Radiobuttons
+tracker_admin_build_boxes	box_type_select	Selectbox
+tracker_admin_build_boxes	box_type_text	Tekstveld
+tracker_admin_build_boxes	box_type_textarea	Tekstgebied
+tracker_admin_build_boxes	box_update_title	Wijzig een extra veld in $1
+tracker_admin_build_boxes	box_warning	Nadat je een nieuw extra veld hebt aangemaakt kan het niet meer verwijderd worden
+tracker_admin_build_boxes	choice_inserted	Element ingevoegd
+tracker_admin_build_boxes	choice_updated		Element aangepast
+tracker_admin_build_boxes	choice_warning	Nadat je een nieuw extra element hebt aangemaakt kan het niet meer verwijderd worden
+tracker_admin_build_boxes	edit	Wijzigen
+tracker_admin_build_boxes	error_inserting_box	Fout bij het invoegen van een extra veld
+tracker_admin_build_boxes	error_inserting_choice	Fout bij het invoegen van een element
+tracker_admin_build_boxes	error_updating	Fout bij het invoegen van een extra veld naam
+tracker_admin_build_boxes	no_box	Je hebt geen enkel extra veld gedefinieerd
+tracker_admin_build_boxes	no_choice	Je hebt geen enkel element gedefinieerd
+tracker_admin_build_boxes	opt_add_name	Nieuw element toevoegen
+tracker_admin_build_boxes	opt_name	Element
+tracker_admin_build_boxes	opt_title	Extra veldelementen toevoegen/aanpassen in: $1
+tracker_admin_build_boxes	opt_update_title	Wijzig een extra veldelement In: $1
+tracker_admin_build_boxes	required_box_name	veldnaam is verplicht
+tracker_admin_build_boxes	required_choice_name	elementnaam is verplicht
+tracker_admin_build_boxes	title	 Extra velden toevoegen/aanpassen
+tracker_admin_build_boxes	tracker_box_option_title	Gedefinieerde elementen
+tracker_admin_build_boxes	tracker_box_title	Gedefinieerde extra velden
+tracker_admin_copy	choices_title	Kopieer keuzes uit extra veld $1
+tracker_admin_copy	copy_choices	Klik hier om deze elementen naar andere trackers te kopieren
+tracker_admin_copy	from_box	Kopieer uit
+tracker_admin_copy	into_box	Naar trackers en extra velden
+tracker_admin_update_canned	title	Standaard antwoorden aanpassen in: $1
+tracker_admin_update_cat	title	Categorie aanpassen in: $1
+tracker_admin_update_group	title	Groep aanpassen in: $1
+tracker_admin_update_type	allow_anonymous	Berichten toestaan zonder ingelogd te zijn
+tracker_admin_update_type	browse_item_form_text	Vrije tekst voor de "blader door items" pagina
+tracker_admin_update_type	days_overdue	Aantal dagen voordat het als telaat afgehandeld beschouwd wordt
+tracker_admin_update_type	description	Omschrijving
+tracker_admin_update_type	email_all_changes	Stuur e-mail voor iedere wijziging
+tracker_admin_update_type	name	<strong> Naam:</strong> (bijvoorbeeld: notulen, test resultaten, documentatie)
+tracker_admin_update_type	pending_timeout	Aantal dagen totdat de in behandeling zijnde tracker items vervallen
+tracker_admin_update_type	publicy_available	Publiek beschikbaar
+tracker_admin_update_type	send_submissions	Stuur e-mail over nieuwe item aanmelding naar adres
+tracker_admin_update_type	submit_item_form_text	Vrije tekst voor de "nieuw item plaatsen" pagina
+tracker_admin_update_type	title	$1 aanpassen
+tracker_artifact	are_you_sure_delete	Weet je zeker dat je dit item wilt verwijderen?
+tracker_artifact	confirm_delete	Ja, ik wil dit item verwijderen
+tracker_artifact	delete_failed	Verwijderen van item niet gelukt
+tracker_artifact	delete_failed_confirm	Confirmation failed. Item niet verwijderd
+tracker_artifact	delete_text	Verwijder dit item
+tracker_artifact	deleted_successfully	Item verwijderd
+tracker_artifact	double_submit	Je hebt geprobeerd om dit item twee keer aan te melden. Alsjeblief niet dubbel-klikken.
+tracker_artifact	error_admin_modify	Artefact: allen artefact beheerders kunnen private artefacttypes aanpassen
+tracker_artifact	error_body_required	Artefact: berichttekst is verplicht'
+tracker_artifact	error_no_anonymous	Artefact: dit artefacttype staat geen anonymous aanmeldingen toe. Login alsjeblief.
+tracker_artifact	error_summary_required	Artefact: samenvatting van bericht is verplicht
+tracker_artifact	error_valid_email_required	SetMonitor::Geldig e-mail adres is verplicht
+tracker_artifact	logged_in_no	Ingelogd: NEE
+tracker_artifact	logged_in_yes	Ingelogd: JA
+tracker_artifact	monitoring_activated	Monitoring geactiveerd
+tracker_artifact	monitoring_deactivated	Monitoring gedeactiveerd
+tracker_artifact	nothing_changed	Niets Gewijzigd - Actie Afgebroken
+tracker_artifact	private_error	Artefact: alleen groepsleden kunnen private artefacttypes zien
+tracker_artifactfile	required_fields	Artefactbestand: bestandsnaam, type, grootte, en datum zijn verplicht
+tracker_artifacthtml	by	Door
+tracker_artifacthtml	date	Datum
+tracker_artifacthtml	field	Veld
+tracker_artifacthtml	message	Bericht
+tracker_artifacthtml	no_changes	Geen wijzigingen uitgevoerd
+tracker_artifacthtml	no_followups	ER zijn geen reacties geplaatst
+tracker_artifacthtml	old_value	Oude waarde
+tracker_artifacthtml	sender	Afzender
+tracker_artifacttype	admin	Beheer
+tracker_artifacttype	browse	Bladeren
+tracker_artifacttype	nobody	Niemand
+tracker_artifacttype	none	Geen
+tracker_artifacttype	reporting	Overzichten
+tracker_artifacttype	required_fields	Artefacttype: naam, omschrijving, opleverdatum en status timeout zijn verplicht
+tracker_artifacttype	submit_new	Nieuw toevoegen
+tracker_browse	admin_mass_update	<strong>Beheer:</strong> Als je alle hierboven geselecteerde items wilt wijzigen, verander dan hier hun eigenschappen en voer eenmalig "Alles bijwerken" uit.
+tracker_browse	ascending	Oplopend
+tracker_browse	canned_response	Standaard antwoord
+tracker_browse	check_all	Alles &nbsp;controleren
+tracker_browse	clear_all	Alles &nbsp;verwijderen
+tracker_browse	day7	Laatste 7 dagen
+tracker_browse	descending	Aflopend
+tracker_browse	hour24	Laatste 24 uur
+tracker_browse	mass_update	Alles bijwerken
+tracker_browse	month1	Laatste maand
+tracker_browse	next	Volgende 50
+tracker_browse	no_change	Geen wijzigingen
+tracker_browse	no_items	Geen items gevonden
+tracker_browse	old_requests	* Geeft aan: verzoeken > $1 dagen oud
+tracker_browse	previous	Vorige 50
+tracker_browse	sort_by	Sorteren per
+tracker_browse	week2	Laatste 2 weken
+tracker_detail	add_comment	Voeg een commentaar toe
+tracker_detail	attached_files	Bijgevoegde bestanden
+tracker_detail	build_task_relation	Cre&euml;er taakrelatie
+tracker_detail	changes	Wijzingen
+tracker_detail	description	Omschrijving
+tracker_detail	download	Download
+tracker_detail	name	Naam
+tracker_detail	no_files_attached	Momenteel geen bestanden bijgevoegd
+tracker_detail	title	Detail
+tracker_mod	attach_comment	OF voeg commentaar toe
+tracker_mod	build_task_relation	Cre&euml;er taakrelatie
+tracker_mod	canned_response	Gebruik standaard antwoord
+tracker_mod	changelog	Change Log
+tracker_mod	data_type	Datatype
+tracker_mod	date_closed	Datum afgesloten
+tracker_mod	date_submitted	Datum ingediend
+tracker_mod	delete	Wissen
+tracker_mod	description	Omschrijving
+tracker_mod	download	Download
+tracker_mod	existing_files	Bestaande bestanden
+tracker_mod	name	Naam
+tracker_mod	no_files	Momenteel geen bestanden bijgevoegd
+tracker_mod	title	Aanpassen
+tracker_taskmgr	add_relation_to_task	Voeg relatie met bestaande taak toe.
+tracker_taskmgr	add_relationship	Voeg relatie met geselecteerde taak toe
+tracker_taskmgr	build_relationships	Leg relaties tussen Tracker items en Taakmanager vast
+tracker_taskmgr	create_task	Cre&euml;er nieuwe taak
+tracker_taskmgr	task	Taak
+tracker_taskmgr	task_manager_project	Taakmanager project
+tracker_taskmgr	tracker_item	Tracker item
+trove	not_categorized	Dit project is nog niet geclassificeerd in het
+trove	title	Trove software overzicht
+trove_list	browse_by	Bladeren op basis van:
+trove_list	invalid_category_text	Die Trove categorie bestaat niet
+trove_list	invalid_category_title	Ongeldige Trove Categorie
+trove_list	limiting_view	De weergave van projecten wordt nu ingeperkt op de volgende categorie&euml;n:
+trove_list	more_than	Meer dan <strong>$1</strong> projecten in resultaatset.
+trove_list	number_of_projects	<strong>$1</strong> projecten in resultaatset.
+trove_list	projects	$1 projecten
+trove_list	remove_filter	Verwijder dit filter
+trove_list	title	Software overzicht
+user_home	diary_notes	Logboek en aantekeningen
+user_home	diary_notes_entries	Logboek en aantekeningen items:
+user_home	diary_notes_monitor	Dit logboek monitoren
+user_home	diary_notes_view	Bekijk logboek en aantekeningen
+user_home	email	Je E-mail adres
+user_home	jabber_address	Je Jabber adres
+user_home	login_name	Loginnaam
+user_home	member_of	Deze ontwikkelaar is lid van de volgende groepen:
+user_home	no_projects	Deze ontwikkelaar is geen lid van enig project.
+user_home	peer_rating	Beoordeling door collega&#039;s
+user_home	peer_rating_disabled	De gebruiker heeft beoordeling door collega&#039;s uitgeschakeld
+user_home	personal_information	Persoonlijke informatie
+user_home	project_info	Project info
+user_home	real_name	Echte naam
+user_home	site_member_since	Site lid sinds
+user_home	skills_profile	Vaardigheden profiel
+user_home	title	Ontwikkelaars profiel
+user_home	user_id	Gebruikers ID
+users	no_user_name	Geen gebruikersnaam ingevoerd
+users	optout	Je hebt gekozen om niet deel te nemen aan het Collega Beoordelingssysteem (peer rating), anders zou je een beoordeling voor de gebruiker kunnen hebben gegeven. Raadpleeg <a href="/account/">je account beheerpagina</a> voor nadere informatie.
+users	peerinfo1	<P>Als je bekend bent met deze gebruiker, geef een beoordeling over hem op basis van de volgende criteria. Houd rekening met het feit dat je beoordeling door andere gebruikers wordt bekeken.</P><P>Het $1 Collega Beoordelingssysteem (peer rating) is gebaseerd op concepten uit <A HREF="http://www.advogato.com/">Advogato</A>. Het systeem is opnieuw ge&iuml;mplementeerd en is in sommige opzichten uitgebreid.</P>
+users	peerinfo2	<P>De beoordeling door collega's (peer rating) box laat alle gemiddelde beoordelingen (en response niveau&#039;s) zien voor ieder individueel criterium. Vanwege het vereiste rekenkundig- en verwerkingsvermogen bevatten deze getallen in het ander geval reacties van zowel &#039;trusted&#039; als &#039;non-trusted&#039; gebruikers.</P><UL><LI>Het &#039;$1 brede score&#039; veld toont de score van de gebruiker vergeleken met alle $1 gebruikers uit de ranglijst.</LI><LI>De &#039;Geaggregeerde score&#039; toont een gemiddelde waarde, gewogen over alle scores, uitsluitend gebaseerd op trusted-responses.</LI><LI>Het &#039;Personal Importance&#039; veld laat het gewicht zien dat aan de beoordelingen van andere ontwikkelaars gegeven zal worden (tussen 1 en 1.5) -- reacties van hoger beoordeelde gebruikers krijgen meer gewicht.</LI></UL><P><I>Als je niet deel wilt nemen aan het collega beoordelingssysteem (dit heeft effect op je mogelijkheid om beoordeeld te worden en anderen te beoordelen), ga dan naar <a href="/account/">je account onderhoudspagina</a>. Als je kiest om niet deel te nemen, worden jouw beoordelingen van andere gebruikers permanent gewist, en de &#039;Peer Rating&#039; box zal van je pagina verdwijnen.</I></P>
+users	user_not_exist_text	Ongeldige gebruiker
+users	user_not_exist_title	Die gebruiker bestaat niet.

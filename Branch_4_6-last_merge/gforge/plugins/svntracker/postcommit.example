@@ -1,0 +1,4 @@
+#!/bin/sh
+REPOS="$1"
+REV="$2"
+/usr/bin/php -d include_path=.:/opt/gforge/gforge:/opt/gforge/gforge/www/include:/etc/gforge/ /opt/gforge/gforge/plugins/svntracker/bin/post.php  "$REPOS" "$REV"

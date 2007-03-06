@@ -1,0 +1,16 @@
+0. UNINSTALLATION of ASelect Plugin
+
+
+A) Run uninstall_aselectauth.psql to delete all information regarding Aselect from the GForge DB
+
+psql gforge -f db/uninstall_aselectauth.psql
+
+B) Go to GForge installation dir and enter the plugins folder
+
+e.g. : /srv/www/gforge/gforge/plugins
+	
+C) Delete the aselectextauth folder
+	
+bash$ rm -R aselectextauth
+			
+END

@@ -1,0 +1,15 @@
+usr/share/doc/gforge-plugins
+usr/share/gforge/etc
+usr/share/gforge/etc/templates
+usr/share/gforge/etc/httpd.d
+usr/share/gforge/etc/local.d
+usr/share/gforge/plugins
+usr/share/gforge/www
+usr/share/gforge/www/include
+usr/sbin
+var/lib/gforge/www/plugins
+var/lib/gforge/etc
+var/lib/gforge/etc/templates
+bin
+etc/gforge
+usr/lib/gforge/bin

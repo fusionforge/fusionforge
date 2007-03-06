@@ -1,0 +1,133 @@
+list:
+	@echo ======================================================================================
+	@echo '=                    Available target are listed below                               ='
+	@echo '=                    Today only to build rpm packages and tarballs                   ='
+	@echo ======================================================================================
+	@cat Makefile.rpm | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
+
+#Do it all
+all: gforge allplugins dist          # Build gforge and plugins #
+clean: cleangf cleanplugins   # Clean gforge and plugins #
+
+#GForge
+gforge: cleangf build          # Build gforge #
+
+#Plugins 
+allplugins: cvsplugin cvstrackerplugin ldapextauthplugin
+cleanplugins: cleancvs cleansvn cleancvstracker cleanldapextauth cleanexternalsearch
+
+cvsplugin: cleancvs buildcvs  # package cvs plugin #
+svnplugin: cleansvn buildsvn  # package svn plugin #
+cvstrackerplugin: cleancvstracker buildcvstracker  # package cvstracker plugin #
+ldapextauthplugin: cleanldapextauth buildldapextauth  # package ldapextauth plugin #
+externalsearchplugin: cleanexternalsearch buildexternalsearch  # package externalsearch plugin #
+
+RPM_TMP=/tmp/gforge-build
+
+# build a custom rpmmacro file and rpmrc to point to it for rpmbuild
+rpmrc:
+	echo 'include: /usr/lib/rpm/rpmrc' > ./rpmrc
+
+rpmmacro:
+	echo '$(shell rpmbuild --showrc | grep '^macrofiles'):./rpmmacros' >> ./rpmrc
+	echo '%_topdir $(RPM_TMP)' >> ./rpmmacros
+	echo '%_rpmtopdir %{_topdir}' >> ./rpmmacros
+	echo '%_builddir %{_rpmtopdir}/BUILD' >> ./rpmmacros
+	echo '%_rpmdir %{_rpmtopdir}/RPMS' >> ./rpmmacros
+	echo '%_sourcedir %{_rpmtopdir}/SOURCE' >> ./rpmmacros
+	echo '%_specdir %{_rpmtopdir}/SPEC' >> ./rpmmacros
+	echo '%_srcrpmdir %{_rpmtopdir}/SRPMS' >> ./rpmmacros
+	echo '%_tmppath %{_rpmtopdir}/TMP' >> ./rpmmacros
+	echo '%_buildroot %{_tmppath}/%{name}-root' >> ./rpmmacros
+
+rpmprep: rpmrc rpmmacro
+	-mkdir -p $(RPM_TMP)/BUILD $(RPM_TMP)/RPMS $(RPM_TMP)/SOURCE $(RPM_TMP)/SPEC $(RPM_TMP)/SRPMS $(RPM_TMP)/TMP 2> /dev/null
+
+dist: rpmprep
+	-mkdir ./dist 2> /dev/null
+	mv ./*.bz2 $(RPM_TMP)/RPMS/noarch/*.rpm ./dist
+#
+# GFORGE
+#
+versiongf:
+override version=$(shell grep '^Version:' gforge/gforge.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleangf: versiongf		# Clean files of gforge build                         #
+	@rm -rf gforge-$(version).tar.bz2 gforge-$(version)
+	@echo cleangf Done
+build: rpmprep versiongf		# Build rpm gforge packages                               #
+	cd gforge ;find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(version)
+	cp gforge/rpm-specific/patches/gforge-4.0-deb_rpm.patch .
+	tar cvjf gforge-$(version).tar.bz2 gforge-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-$(version).tar.bz2
+
+#
+# CVS PLUGIN
+#
+versioncvs:
+override version=$(shell grep '^Version:' gforge-plugin-scmcvs/gforge-plugin-scmcvs.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleancvs: versioncvs               # Clean files of gforge-plugin-scmcvs build           #
+	@rm -rf gforge-plugin-scmcvs-$(version).tar.bz2 gforge-plugin-scmcvs-$(version)
+	@echo cleancvs Done
+buildcvs: rpmprep versioncvs               # Build rpm gforge-plugin-scmcvs package                  #
+	cd gforge-plugin-scmcvs ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-scmcvs-$(version)
+	tar cvjf gforge-plugin-scmcvs-$(version).tar.bz2 gforge-plugin-scmcvs-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-plugin-scmcvs-$(version).tar.bz2 
+
+#
+# SVN PLUGIN
+#
+versionsvn:
+override version=$(shell grep '^Version:' gforge-plugin-scmsvn/gforge-plugin-scmsvn.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleansvn: versionsvn               # Clean files of gforge-plugin-scmcvs build           #
+	@rm -rf gforge-plugin-scmsvn-$(version).tar.bz2 gforge-plugin-scmsvn-$(version)
+	@echo cleansvn Done
+buildsvn: rpmprep versionsvn               # Build rpm gforge-plugin-scmsvn package                  #
+	cd gforge-plugin-scmsvn ; find . -type f | grep -v '/CVS/' | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmsvn-$(version)
+	tar cvzf gforge-plugin-scmsvn-$(version).tar.bz2 gforge-plugin-scmsvn-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-plugin-scmsvn-$(version).tar.bz2
+
+#
+# CVSTRACKER PLUGIN
+#
+versioncvstracker:
+override version=$(shell grep '^Version:' gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleancvstracker: versioncvstracker               # Clean files of gforge-plugin-cvstracker build           #
+	@rm -rf gforge-plugin-cvstracker-$(version).tar.bz2 gforge-plugin-cvstracker-$(version)
+	@echo cleantracker Done
+buildcvstracker: rpmprep versioncvstracker               # Build rpm gforge-plugin-cvstracker package                  #
+	cd gforge-plugin-cvstracker ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-cvstracker-$(version)
+	tar cvzf gforge-plugin-cvstracker-$(version).tar.bz2 gforge-plugin-cvstracker-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-plugin-cvstracker-$(version).tar.bz2
+
+#
+# LDAPAUTH PLUGIN
+#
+versionldapextauth:
+override version=$(shell grep '^Version:' gforge-plugin-ldapextauth/gforge-plugin-ldapextauth.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleanldapextauth: versionldapextauth               # Clean files of gforge-plugin-ldapextauth build           #
+	@rm -rf gforge-plugin-ldapextauth-$(version).tar.bz2 gforge-plugin-ldapextauth-$(version)
+	@echo cleanldapextauth Done
+buildldapextauth: rpmprep versionldapextauth               # Build rpm gforge-plugin-ldapextauth package                  #
+	cd gforge-plugin-ldapextauth ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-ldapextauth-$(version)
+	tar cvzf gforge-plugin-ldapextauth-$(version).tar.bz2 gforge-plugin-ldapextauth-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-plugin-ldapextauth-$(version).tar.bz2
+
+#
+# EXTERNALSEARCH PLUGIN
+#
+versionexternalsearch:
+override version=$(shell grep '^Version:' gforge-plugin-externalsearch/gforge-plugin-externalsearch.spec | sed 's/.*:\s*\(.*\)/\1/')
+
+cleanexternalsearch: versionexternalsearch               # Clean files of gforge-plugin-externalsearch build           #
+	@rm -rf gforge-plugin-externalsearch-$(version).tar.bz2 gforge-plugin-externalsearch-$(version)
+	@echo cleanexternalsearch Done
+buildexternalsearch: rpmprep versionexternalsearch               # Build rpm gforge-plugin-externalsearch package                  #
+	cd gforge-plugin-externalsearch ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-externalsearch-$(version)
+	tar cvzf gforge-plugin-externalsearch-$(version).tar.bz2 gforge-plugin-externalsearch-$(version)
+	rpmbuild -ta --rcfile rpmrc gforge-plugin-externalsearch-$(version).tar.bz2
+

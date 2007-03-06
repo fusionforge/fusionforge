@@ -1,0 +1,32 @@
+gforge-plugin-ldapextauth
+-------------------------
+
+This is the external LDAP authentication plugin for Gforge.
+
+Prerequisite:
+
+- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+
+Installation:
+
+- files from etc/ go to /etc/gforge/plugins/ldapextauth
+- files from bin/ go to /usr/lib/gforge/plugins/ldapextauth/bin
+- files from include/ go to /usr/lib/gforge/plugins/ldapextauth/include
+
+Setup:
+
+- customise files in /etc/gforge/plugins/ldapextauth to match your
+LDAP installation (server, base DN, and mapping)
+- /usr/lib/gforge/plugins/ldapextauth/bin/db-upgrade.pl
+- /usr/lib/gforge/bin/register-plugin ldapextauth "LDAP external authentication"
+
+Voilà, you can now log into Gforge with your existing loginname and
+password.  Your account will be created the first time you log in
+(which means you can't add someone to a group before his/her first
+login).
+
+ -- Roland Mas <lolando@debian.org>, Tue May 18 22:14:54 2004
+
+Local Variables:
+mode: readme-debian
+End:

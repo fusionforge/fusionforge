@@ -1,0 +1,12 @@
+#/**
+#  *
+#  * English message catalog (empty)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  *
+#  */
+conf	mail_charset	UTF-8

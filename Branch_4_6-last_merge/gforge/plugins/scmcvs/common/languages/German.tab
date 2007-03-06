@@ -1,0 +1,4 @@
+plugin_scmcvs	browseit	Durchsuche CVS Repository
+plugin_scmcvs	developername	Entwicklername
+plugin_scmcvs	modulename	Modulname
+plugin_scmcvs	nohistory	Für dieses Projekt existiert keine CVS Geschichte.
