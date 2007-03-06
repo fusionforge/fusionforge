@@ -86,7 +86,9 @@ class Plugin extends Error {
 	 * @return string path
 	 */
 	function GetSpecificLanguagePath() {
-		return '/etc/gforge/plugins/'.$this->name.'/languages/';
+		global $sys_etc_path;
+
+		return $sys_etc_path.'/plugins/'.$this->name.'/languages/';
 	}
 }
 

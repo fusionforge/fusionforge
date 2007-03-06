@@ -83,19 +83,20 @@ if (getStringFromRequest('update')) {
 				chdir('../plugins');
 				if (file_exists($pluginname)) {
 					system('rm ' . $pluginname,$result);
-				} 
-				if (file_exists('/etc/gforge/plugins/'.$pluginname)) {
-					if (!chdir('/etc/gforge/plugins')) {
-						$result2 = 1;
-					} else {
-						system('rm ' . $pluginname,$result2); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+					if ($result != 0) {
+						$feedback .= $Language->getText('pluginman','successnodeletelink');
+					}
+				} else {
+					$result = 0;
+				}
+				if (file_exists("$sys_etc_path/plugins/$pluginname")) {
+					if (chdir("$sys_etc_path/plugins")) {
+						system('rm ' . $pluginname, $result2); // the apache group or user should have write perms in $sys_etc_path/plugins folder...
+
+						if ($result2 != 0) {
+							$feedback .= $Language->getText('pluginman','successnodeleteconfig');
+						}
 					}					
-				}
-				if ($result!=0) {
-					$feedback .= $Language->getText('pluginman','successnodeletelink');
-				}
-				if ($result2!=0) {
-					$feedback .= $Language->getText('pluginman','successnodeleteconfig');
 				}
 			}			
 		}
@@ -109,7 +110,7 @@ if (getStringFromRequest('update')) {
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
 				chdir('../plugins');
 				$return_value = symlink($sys_plugins_path . $pluginname . '/www',$pluginname); // the apache group or user should have write perms the plugins folder...
-				if (!chdir('/etc/gforge/plugins')) {
+				if (!chdir($sys_etc_path . '/plugins')) {
 					$return_value2 = false;
 				} else {
 					if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {

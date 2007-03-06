@@ -186,7 +186,7 @@ class BaseLanguage {
 	 * @param string $lang language name
 	 */
 	function loadGlobalLanguage($lang) {
-		global $sys_theme, $sys_urlroot;
+		global $sys_theme, $sys_urlroot, $sys_etc_path;
 
 		// Customization by language in $sys_urlroot/include/languages/<Language>.tab
 		$fname = $sys_urlroot.'/include/languages/'.$lang.'.tab';
@@ -196,13 +196,13 @@ class BaseLanguage {
 		if (file_exists ($ftname)) {
 			$this->loadLanguageFile($ftname) ;
 		}
-		// Site-local customizations in /etc/gforge/languages-local/<Language>.tab
-		$fname = '/etc/gforge/languages-local/'.$lang.'.tab' ;
+		// Site-local customizations in $sys_etc_path/languages-local/<Language>.tab
+		$fname = "$sys_etc_path/languages-local/$lang.tab" ;
 		if (file_exists ($fname)) {
 			$this->loadLanguageFile($fname) ;
 		}
-		// Site-local Customization by theme in /etc/gforge/languages-local/<theme_name>/<Language>.tab
-		$fltname = '/etc/gforge/languages-local/'.$sys_theme.'/'.$lang.'.tab' ;
+		// Site-local Customization by theme in $sys_etc_path/languages-local/<theme_name>/<Language>.tab
+		$fltname = "$sys_etc_path/languages-local/$sys_theme/$lang.tab";
 		if (file_exists ($fltname)) {
 			$this->loadLanguageFile($fltname) ;
 		}

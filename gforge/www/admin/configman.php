@@ -40,9 +40,9 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
  * @param string	the path to the plugins conf dir
  */
 function printSelection($checked,$pluginpath) {
-	global $Language,$feedback;
+	global $Language,$feedback,$sys_etc_path;
 	
-	$config_files = array(); // array that´ll have the config files
+	$config_files = array(); // array that'll have the config files
 	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
@@ -52,14 +52,14 @@ function printSelection($checked,$pluginpath) {
 	}
 					
 	// check if we can get local.inc
-	@$handle = fopen('/etc/gforge/local.inc','r+');
+	@$handle = fopen($sys_etc_path . '/local.inc','r+');
 	if (! $handle) { 
 		// Open readonly but tell you can't write
-		$handle = fopen('/etc/gforge/local.inc','r');
+		$handle = fopen($sys_etc_path . '/local.inc','r');
 		$feedback .= $Language->getText('configman','notopenlocalinc');
 	}
 	if ($handle) {
-		$config_files['local.inc'] = '/etc/gforge/local.inc';
+		$config_files['local.inc'] = $sys_etc_path . '/local.inc';
 		fclose($handle);
 		$i++;
 	} else {
@@ -150,7 +150,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','nowrite');
 		}
 	} else {
-		// say couldn´t open
+		// say couldn't open
 		$feedback .= $Language->getText('configman','notopenfile');
 	}
 }
@@ -176,7 +176,7 @@ function updateVars($vars,$filepath) {
 		@$handle = fopen($filepath,'r+');
 		if (! $handle) {
 			// Open readonly but tell you can't write
-			$handle = fopen('/etc/gforge/local.inc','r');
+			$handle = fopen($sys_etc_path.'/local.inc','r');
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 		if ($handle){
@@ -206,7 +206,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we´ll update something else, for now it´s local.inc
+		updateVars(getArrayFromRequest('attributes'),$sys_etc_path . '/local.inc'); // perhaps later we'll update something else, for now it's local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
@@ -220,7 +220,7 @@ function updateVars($vars,$filepath) {
 				$feedback .= $Language->getText('configman','nowrite');
 			}
 		} else {
-			// say couldn´t open
+			// say couldn't open
 			$feedback .= $Language->getText('configman','notopenfile');
 		}*/
 	}
