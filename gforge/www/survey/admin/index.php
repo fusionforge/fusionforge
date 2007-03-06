@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/survey/include/SurveyHTML.class');
 
@@ -42,9 +43,9 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 ?>
 
-<?php echo $Language->getText('survey_admin_index','its_simple_to_create', array('<p><strong>/survey/survey.php?group_id='.$group_id.'&survey_id=XX</strong>')); ?>
+<?php echo $Language->getText('survey_admin_index','its_simple_to_create', array('<p><strong>'.$GLOBALS['sys_urlprefix'].'/survey/survey.php?group_id='.$group_id.'&survey_id=XX</strong>')); ?>
 
-<p><?php echo $Language->getText('survey_admin_index','you_can_now_activate',array('<a href="/survey/admin/survey.php?group_id='.$group_id.'">','</a>')); ?>
+<p><?php echo $Language->getText('survey_admin_index','you_can_now_activate',array('<a href="'.$GLOBALS['sys_urlprefix'].'/survey/admin/survey.php?group_id='.$group_id.'">','</a>')); ?>
 
 </p>
 <p>

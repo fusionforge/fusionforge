@@ -72,6 +72,7 @@ install: build
 	chown www-data:www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins
 	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/sbin/*
 	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/bin/*
+	rm -f $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/COPYING
 	# mediawiki plugin
 	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-plugins/
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr
@@ -86,6 +87,19 @@ install: build
 	# scmsvn plugin
 	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
 	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/scmsvn/cronjobs
+	# cvstracker plugin
+	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/svntracker/postcommit.example
+	# fckeditor plugin
+	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/fckeditor/www/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.pl
+	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/connectors/php/Commands/helpers/*.cgi
+	# webcalendar plugin
+	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php \
+		$(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes
+	chown www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	chmod 600 $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	ln -s /var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php \
+		$(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php
+	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/tools/*.pl
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
@@ -122,6 +136,7 @@ install: build
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name .cvsignore | xargs rm -f
 	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm -f
+	rm -f $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/themes/gforge/COPYING
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -name '*.py' -exec chmod 0755 {} \;
@@ -180,9 +195,15 @@ install: build
 	install -m 644 cronjobs/stats_site.inc        $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
 	install -m 644 cronjobs/stats_projects.inc    $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
 	#
+	install -m 755 cronjobs/reporting_cron.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	# 
 	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/gforge-db-backup.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	#
+	install -m 755 cronjobs/ftp_create_group_access.php $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
+	#
 	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/

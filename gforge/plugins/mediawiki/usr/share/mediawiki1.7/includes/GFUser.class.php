@@ -356,6 +356,24 @@ class GFUser extends Error {
 	function isLoggedIn() {
 		return $this->is_logged_in;
 	}
+
+	function setUpTheme() {
+//
+//	An optimization in session_getdata lets us pre-fetch this in most cases.....
+//
+		if (!$this->data_array['dirname']) {
+			$res=db_query("SELECT dirname FROM themes WHERE theme_id='".$this->getThemeID()."'");
+			$this->theme=db_result($res,0,'dirname');
+		} else {
+			$this->theme=$this->data_array['dirname'];
+		}
+		if (is_file($GLOBALS['sys_themeroot'].$this->theme.'/Theme.class')) {
+			$GLOBALS['sys_theme']=$this->theme;
+		} else {
+			$this->theme=$GLOBALS['sys_theme'];
+		}
+		return $this->theme;
+	}
 }
 
 // Local Variables:

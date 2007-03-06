@@ -2,7 +2,7 @@
 
 require_once('www/include/Layout.class');
 
-define(THEME_DIR, '/themes/gforge');
+define(THEME_DIR, $GLOBALS['sys_urlprefix'].'/themes/gforge');
 
 define(TOP_TAB_HEIGHT, 30);
 define(BOTTOM_TAB_HEIGHT, 22);
@@ -91,7 +91,7 @@ class Theme extends Layout {
      *    @param    string    The user's realname
      */
     function createLinkToUserHome($user_name, $realname) {
-        return '<a href="/users/'.$user_name.'/">'.$realname.'</a>';
+        return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
     }
 
     /**
@@ -121,9 +121,9 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
     <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss20_news.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php" type="application/rss+xml"/>
 
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -149,15 +149,20 @@ class Theme extends Layout {
     //gets font from Language Object
     $site_fonts=$GLOBALS['Language']->getFont();
 
+    $this->headerCSS();
     ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
-
-    <?php plugin_hook ('cssfile',$this); ?>
 </head>
 
 <body>
 
+  <?php
+  $this->bodyHeader($params);
+  }
+
+  function bodyHeader($params){
+        global $Language;
+  ?>
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
@@ -166,15 +171,15 @@ class Theme extends Layout {
         <td class="middleRight"><?php
           if (session_loggedin()) {
             ?>
-            <a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a> 
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a> 
             |
-            <a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
             <?php
           } else {
             ?>
-            <a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a>
             |
-            <a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
             <?php
           }
           echo $this->quickNav();
@@ -232,7 +237,7 @@ global $sys_show_source;
 global $Language;
 if ($sys_show_source) {
     global $SCRIPT_NAME;
-    print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
+    print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
 }
 ?>
 
@@ -241,6 +246,13 @@ if ($sys_show_source) {
 
 <?php
 
+    }
+
+    function headerCSS(){
+       ?>
+       <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
+       <?php
+       plugin_hook ('cssfile',$this);
     }
 
     function getRootIndex() {
@@ -341,7 +353,7 @@ if ($sys_show_source) {
         if ($links_arr) {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td align="center"><a class="sortbutton" href="'.$links_arr[$i].'"><span style="color:'.
+                <td align="center"><a class="sortbutton" href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
             }
         } else {
@@ -385,14 +397,30 @@ if ($sys_show_source) {
         if ($sys_use_people) {
             $TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
         }
-        if (user_ismember(1,'A')) {
-            $TABS_DIRS[]='/admin/';
-            $TABS_TITLES[]=$Language->getText('menu','admin');
-        }
-        if (user_ismember($GLOBALS['sys_stats_group'])) {
-            $TABS_DIRS[]='/reporting/';
-            $TABS_TITLES[]=$Language->getText('menu','reporting');
-        }
+	// outermenu hook
+	$PLUGIN_TABS_DIRS = Array();
+	$hookParams['DIRS'] = &$PLUGIN_TABS_DIRS;
+	$hookParams['TITLES'] = &$TABS_TITLES;
+	plugin_hook ("outermenu", $hookParams) ;
+	$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
+
+	$user_is_super=false;
+	if (session_loggedin()) {
+		$projectmaster =& group_get_object(GROUP_IS_MASTER);
+		$projectstats =& group_get_object(GROUP_IS_STATS);
+		$permmaster =& $projectmaster->getPermission( session_get_user() );
+		$permstats =& $projectstats->getPermission( session_get_user() );
+
+		if ($permmaster->isAdmin()) {
+			$user_is_super=true;
+			$TABS_DIRS[]='/admin/';
+			$TABS_TITLES[]=$Language->getText('menu','admin');
+		}
+		if ($permstats->isMember()) {
+			$TABS_DIRS[]='/reporting/';
+			$TABS_TITLES[]=$Language->getText('menu','reporting');
+		}
+	}
         if(isset($params['group']) && $params['group']) {
             // get group info using the common result set
             $project =& group_get_object($params['group']);
@@ -418,7 +446,7 @@ if ($sys_show_source) {
             $selected=array_search("/people/", $TABS_DIRS);
         } elseif (strstr(getStringFromServer('REQUEST_URI'),'/reporting/')) {
             $selected=array_search('/reporting/',$TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && user_ismember(1,'A')) {
+        } elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && $user_is_super) {
             $selected=array_search('/admin/',$TABS_DIRS);
         } else {
             $selected=0;
@@ -459,14 +487,14 @@ if ($sys_show_source) {
         $TABS_TITLES[]=$Language->getText('group','short_summary');
         (($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
-		// Project Activity tab
+	// Project Activity tab
+	$TABS_DIRS[]='/activity/?group_id='. $group;
+	$TABS_TITLES[]=$Language->getText('group','short_activity');
+	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
-		$TABS_DIRS[]='/activity/?group_id='. $group;
-		$TABS_TITLES[]=$Language->getText('group','short_activity');
-		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
-
-        if (user_ismember($group,'A')) {
-            // Project Admin
+        // Project Admin
+        $perm =& $project->getPermission( session_get_user() );
+        if ($perm->isAdmin()) {
             $TABS_DIRS[]='/project/admin/?group_id='. $group;
             $TABS_TITLES[]=$Language->getText('group','short_admin');
             (($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -601,7 +629,7 @@ if ($sys_show_source) {
                 $return .= sprintf(
                     '<td background="%s" width="'.$width.'%%" align="center">
             		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
+    		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
     
                 // if the next tab is not last, insert a separator
                 if ($i < $count-1) {
@@ -622,7 +650,7 @@ if ($sys_show_source) {
                 $return .= sprintf(
                     '<td background="%s" width="'.$width.'%%" align="center">
             		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
+    		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
     
                 // if the next tab is not selected, close this tab
                 if ($selected != $i+1) {

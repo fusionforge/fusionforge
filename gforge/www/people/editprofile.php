@@ -10,6 +10,7 @@
  *
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('people_utils.php');
 require_once('skills_utils.php');

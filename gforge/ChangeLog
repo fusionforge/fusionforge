@@ -1,4 +1,3 @@
-
 2006-10-04 Christian Bayle <bayle@debian.org>
  	* remove use of deprecated user_ismember function in layout.class
 	* Allow opening of /etc/gforge/local.inc readonly in configman.php,

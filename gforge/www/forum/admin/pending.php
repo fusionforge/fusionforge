@@ -30,6 +30,7 @@
 	by Daniel Perez - 2005
 */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('www/forum/admin/ForumAdmin.class');
@@ -46,7 +47,7 @@ $fa = new ForumAdmin();
 if ($fa->Authorized($group_id)) {
 	//user authorized, continue check
 	
-	//if there´s no forum_id input, then the user must have access to all forums, thus he´s a group admin for the forums
+	//if thereï¿½s no forum_id input, then the user must have access to all forums, thus heï¿½s a group admin for the forums
 	if (!$forum_id) {
 		if ($fa->isGroupAdmin()) {
 			forum_header(array('title'=>$Language->getText('forum_admin','title')));

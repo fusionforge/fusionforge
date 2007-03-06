@@ -66,7 +66,7 @@ if (session_loggedin()) {
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				?>
-				(<tt><a href="/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
+				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo $Language->getText('tracker_mod','date_submitted') ?>:</strong><br />
@@ -83,7 +83,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker_mod','data_type') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo $Language->getText('tracker_mod','data_type') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 //
@@ -117,13 +117,13 @@ if (session_loggedin()) {
 	?>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
+		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
 		?>
 		</td><td>
-		<strong><?php echo $Language->getText('tracker','priority') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo $Language->getText('tracker','priority') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
 		<?php
 		/*
 			Priority of this request
@@ -136,7 +136,7 @@ if (session_loggedin()) {
 	<tr>
 		<td>
 		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<strong><?php echo $Language->getText('tracker','status') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo $Language->getText('tracker','status') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->statusBox ('status_id', $ah->getStatusID() );
@@ -148,7 +148,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
@@ -167,13 +167,13 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('.$Language->getText('tracker','admin').')</a>';
+		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('.$Language->getText('tracker','admin').')</a>';
 		?>
 		<p>
-		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea></p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php
@@ -210,7 +210,7 @@ if ($group->usesPM()) {
 				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
-						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
+						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
 						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
@@ -255,7 +255,7 @@ if ($group->usesPM()) {
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'.$Language->getText('tracker_mod','delete').' </td>'.
 				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
+				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
 				</tr>';
 			}
 

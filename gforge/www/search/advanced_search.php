@@ -10,6 +10,7 @@
  * @version $Id$
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/escapingUtils.php');
 require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class');

@@ -17,6 +17,7 @@
 	Complete OO rewrite by Tim Perdue 1/2003
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('include/doc_utils.php');
 require_once('common/docman/DocumentFactory.class');
@@ -41,6 +42,17 @@ if ($df->isError()) {
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError()) {
 	exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
+}
+
+
+// Save chosen language in docman and print document details in documents list
+if ($language_id)
+{
+       setcookie("my_language_id", "$language_id", time()+3600*24*999);
+}
+if (!$language_id && isset($_COOKIE["my_language_id"]))
+{
+       $language_id = $_COOKIE["my_language_id"];
 }
 
 // the "selected language" variable will be used in the links to navigate the
@@ -115,14 +127,14 @@ function docman_recursive_display($docgroup) {
 }
 
 ?>
-<script language="JavaScript" src="/jscook/JSCookTree.js"></script>
-<link rel="stylesheet" href="/jscook/ThemeXP/theme.css" type="text/css" />
+<script language="JavaScript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/JSCookTree.js"></script>
+<link rel="stylesheet" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/ThemeXP/theme.css" type="text/css" />
 <script src="/jscook/ThemeXP/theme.js" type="text/javascript"></script>
 
 <script language="JavaScript"><!--
 var myMenu =
 [
-['<span class="JSCookTreeFolderClosed"><i><img src="/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
+['<span class="JSCookTreeFolderClosed"><i><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
 <?php
 docman_recursive_display(0);
 ?>

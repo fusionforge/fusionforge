@@ -8,7 +8,7 @@
  * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
- * Daniel A. Pérez danielperez.arg@gmail.com
+ * Daniel A. Pï¿½rez danielperez.arg@gmail.com
  *
  * This file is part of GForge.
  *
@@ -28,6 +28,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
@@ -42,7 +43,7 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 function printSelection($checked,$pluginpath) {
 	global $Language,$feedback;
 	
-	$config_files = array(); // array that´ll have the config files
+	$config_files = array(); // array thatï¿½ll have the config files
 	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
@@ -150,7 +151,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','nowrite');
 		}
 	} else {
-		// say couldn´t open
+		// say couldnï¿½t open
 		$feedback .= $Language->getText('configman','notopenfile');
 	}
 }
@@ -206,7 +207,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we´ll update something else, for now it´s local.inc
+		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later weï¿½ll update something else, for now itï¿½s local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
@@ -220,7 +221,7 @@ function updateVars($vars,$filepath) {
 				$feedback .= $Language->getText('configman','nowrite');
 			}
 		} else {
-			// say couldn´t open
+			// say couldnï¿½t open
 			$feedback .= $Language->getText('configman','notopenfile');
 		}*/
 	}

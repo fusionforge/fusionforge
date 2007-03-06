@@ -48,7 +48,7 @@ $HTML->header(array('title'=>$title));
 print '<p><h3>'.$title.'</h3>
 <br /><em>('.$Language->getText('top_mostactive','updated_daily').')</em>
 
-<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>';
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a>';
 
 $arr=array($Language->getText('top_mostactive','rank'),$Language->getText('top_mostactive','project_name'),$Language->getText('top_mostactive','percentile'));
 
@@ -61,7 +61,7 @@ $rows=db_numrows($res_top);
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$i
-		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
+		.'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.$row_top['group_name']."</a>"
 		.'</td><td align="right">'.substr($row_top['percentile'],0,5).'%</td></tr>';
 }

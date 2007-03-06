@@ -31,6 +31,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
@@ -135,7 +136,7 @@ if ($displaydb) {
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<li><a href="/project/admin/database.php?group_id='.$row_db['group_id'].'">'.$row_db['dbname']."</a></li>";
+		print '<li><a href="'.$GLOBALS['sys_urlprefix'].'/project/admin/database.php?group_id='.$row_db['group_id'].'">'.$row_db['dbname']."</a></li>";
 
 	}
 	print "</ul>";

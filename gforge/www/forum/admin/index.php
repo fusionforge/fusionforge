@@ -20,6 +20,7 @@
 	Heavy RBAC changes 3/17/2004
 */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
@@ -208,7 +209,7 @@ if ($group_id) {
 					//actually delete the message
 					$feedback .= $fa->ExecuteAction("delete");
 					forum_header(array('title'=>$Language->getText('forum_admin_delete_message','title')));
-					echo '<p><a href="/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
@@ -288,7 +289,7 @@ if ($group_id) {
 						$feedback .= $fm->getErrorMessage();
 					}
 					forum_header(array('title'=>$Language->getText('forum_admin_edit_message','title')));
-					echo '<p><a href="/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum

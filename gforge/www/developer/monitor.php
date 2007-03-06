@@ -24,6 +24,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 if (!session_loggedin()) {

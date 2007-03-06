@@ -28,6 +28,7 @@
 // Results per page
 $LIMIT = 50; 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $offset = getStringFromRequest('offset');
@@ -61,7 +62,7 @@ $HTML->header(array('title'=>$Language->getText('top_topusers','title')));
 print '<h1>'.$Language->getText('top_topusers','title').'</h1>
 <br /><em>('.$Language->getText('top','updated_daily').')</em>
 
-<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a></p>';
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a></p>';
 
 $tableHeaders = array(
 	$Language->getText('top_topusers','rank'),
@@ -77,7 +78,7 @@ echo $HTML->listTableTop($tableHeaders);
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</td><td><a href="/users/'. $row_top['user_name'] .'/">'
+		.'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'. $row_top['user_name'] .'/">'
 		.$row_top['user_name'].'</a></td>'
 		.'<td>'.$row_top['realname'].'</td>'
 		.'</td><td align="right">'.sprintf('%.2f', $row_top['metric'])

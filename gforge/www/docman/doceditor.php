@@ -26,8 +26,9 @@
  */
 
 // This file is a popup window to edit docman
-//	By Daniel A. Pérez 2005
+//	By Daniel A. Pï¿½rez 2005
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $group_id = getIntFromRequest('group_id'); //get the group id
@@ -59,14 +60,14 @@ $params['group'] = $group_id;
 plugin_hook("text_editor",$params);
 $editor = true;
 if (!$GLOBALS['editor_was_set_up']) {
-	//if we don´t have any plugin for text editor, display a simple textarea edit box
+	//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 	$editor = false;
 	echo '<textarea name="data" rows="15" cols="100" wrap="soft"></textarea><br />';
 	echo '<script>	
 			window.document.theform.data.value = window.opener.document.adddata.data.value;
 		</script>';
 } else {
-	// we must make it wait a bit or else the fckeditor object won´t be set yet
+	// we must make it wait a bit or else the fckeditor object wonï¿½t be set yet
 	echo '<script type="text/javascript">
 		setTimeout("setEditorValue(\'data\',window.opener.document.adddata.data.value)",2250);
 	</script>

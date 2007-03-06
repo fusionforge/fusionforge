@@ -2829,7 +2829,10 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
-
+	
+	&update_with_sql("20051103_transiciel_motscle_document","4.6-1");
+	
+	
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;

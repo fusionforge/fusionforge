@@ -170,7 +170,9 @@ if (session_loggedin()) {
 	//and see if we support that language
 	//if we don't support it, just use default language
 	if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
-		$classname = getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
+		$classname=getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
+	} else {
+		$classname='';
 	}
 	if (!$classname) {
 		$classname=$sys_lang;

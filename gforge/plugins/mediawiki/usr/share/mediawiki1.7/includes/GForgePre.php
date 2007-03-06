@@ -41,7 +41,7 @@ if ($sys_use_jabber) {
 */
 
 //library to determine browser settings
-//require_once('www/include/browser.php');
+require_once('www/include/browser.php');
 
 //base error library for new objects
 require_once('common/include/Error.class');
@@ -151,7 +151,7 @@ if (!session_loggedin() && $sys_force_login == 1 ) {
 if (session_loggedin()) {
 	//set up the user's timezone if they are logged in
 	$LUSER =& session_get_user();
-	//$LUSER->setUpTheme();
+	$LUSER->setUpTheme();
 	//header('Cache-Control: private');
 	$GLOBALS['G_USERNAME']=$GLOBALS['G_SESSION']->getUnixName();
 }

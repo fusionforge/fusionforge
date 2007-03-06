@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -102,13 +103,13 @@ if (session_loggedin()) {
 	<td><strong><?php echo $Language->getText('snippet_submit','language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!-- FIXME: Where should this link go to? <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a> -->
+		<!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a> -->
 	</td>
 
 	<td><strong><?php echo $Language->getText('snippet_submit','category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
-                <!-- FIXME: Where should this link go to? <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a> -->
+                <!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a> -->
 	</td>
 	</tr>
 

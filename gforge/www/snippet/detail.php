@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -68,12 +69,12 @@ if ($type=='snippet') {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
-				'</td><td><a href="/snippet/download.php?type=snippet&amp;id='.
+				'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/download.php?type=snippet&amp;id='.
 				db_result($result,$i,'snippet_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td align="center"><a href="/snippet/delete.php?type=snippet&amp;snippet_version_id='.
+				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
@@ -107,7 +108,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
+	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
 	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new').'.</p>';
 
 	snippet_footer(array());
@@ -159,15 +160,15 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/snippet/detail.php?type=packagever&amp;id='.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=packagever&amp;id='.
 				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'.
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td align="center"><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
+				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
-				'</a> &nbsp; &nbsp; &nbsp; <a href="/snippet/delete.php?type=package&snippet_package_version_id='.
+				'</a> &nbsp; &nbsp; &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=package&snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 		}
@@ -196,7 +197,7 @@ if ($type=='snippet') {
 		Show a form so you can add a new version of this package
 	*/
 	echo '
-	<h3><a href="/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' .$Language->getText('snippet_detail','submit_a_new_version').'</span></a></h3>
+	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' .$Language->getText('snippet_detail','submit_a_new_version').'</span></a></h3>
 	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new_version_of_package').'.</p>';
 
 	snippet_footer(array());

@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 $is_admin_page='y';

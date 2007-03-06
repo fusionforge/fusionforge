@@ -30,8 +30,9 @@
 	by Daniel Perez - 2005
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
+require_once('include/ForumHTML.class');
 
 /**
 	 *  goodbye - Just prints a message and a close button.
@@ -83,7 +84,7 @@ if ($delete == "yes") {
 		exit_not_logged_in();//only logged users can delete attachments
 	}
 	//only the user that created the attach  or forum admin can delete it (safecheck)
-	if (!$pending){ //pending messages aren´t deleted from this page
+	if (!$pending){ //pending messages arenï¿½t deleted from this page
 		$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
 	}
 	$res = db_query($sql);
@@ -109,7 +110,7 @@ if ($edit=="yes") {
 		exit_not_logged_in();//only logged users can edit attachments
 	}
 	//only the user that created the attach  or forum admin can edit it (safecheck)
-	if (!$pending){ //pending messages aren´t deleted from this page
+	if (!$pending){ //pending messages arenï¿½t deleted from this page
 		$sql1 = "SELECT filename FROM forum_attachment WHERE attachmentid='$attachid'";
 		$sql2 = "SELECT posted_by FROM forum WHERE msg_id='$msg_id'";
 	}
@@ -231,7 +232,7 @@ for ($i = 0; $i < strlen($filedata); $i = $i+100) {
 
 flush();
 //increase the attach count
-if (!$pending) { //we don´t care for the pending attach counter, it´s just for administrative purposes
+if (!$pending) { //we donï¿½t care for the pending attach counter, itï¿½s just for administrative purposes
 	db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
 }
 

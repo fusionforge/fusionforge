@@ -22,7 +22,7 @@ echo site_project_header($params);
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo "<h1>".$Language->getText('tracker','no_trackers')."</h1>";
-	echo "<p><strong>".$Language->getText('tracker','no_trackers_text',array('<a href="/tracker/admin/?group_id='.$group_id.'">','</a>'))."</strong>";
+	echo "<p><strong>".$Language->getText('tracker','no_trackers_text',array('<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'">','</a>'))."</strong>";
 	} else {
 
 	echo '<p>'.$Language->getText('tracker', 'choose').'<p>';
@@ -41,7 +41,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&func=browse">'.
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&func=browse">'.
 				html_image("ic/tracker20w.png","20","20",array("border"=>"0")).' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
 			</td>

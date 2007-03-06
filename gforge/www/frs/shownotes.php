@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/frs/include/frs_utils.php');
 
@@ -56,7 +57,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	echo $HTML->boxTop($Language->getText('project_shownotes','notes'));
 
-	echo '<h3>'.$Language->getText('project_shownotes','release_name').' <a href="/frs/?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
+	echo '<h3>'.$Language->getText('project_shownotes','release_name').' <a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
 		<p>';
 
 /*

@@ -54,7 +54,7 @@ else {
 	$column1 = $Language->getText('top_toplist','download');
 }
 $HTML->header(array('title'=>$title));
-print '<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>';
+print '<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a>';
 $arr=array($Language->getText('top_toplist','rank'),$Language->getText('top_toplist','project_name'),"$column1");
 echo $HTML->listTableTop($arr);
 
@@ -68,7 +68,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	}
 	$display_rank++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
-		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
+		.'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.stripslashes($row_top['group_name'])."</a>"
 		.'</td><td align="right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'

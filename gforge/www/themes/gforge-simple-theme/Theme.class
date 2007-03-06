@@ -65,7 +65,7 @@ class Theme extends Error {
 	 *	@param	string	The user's realname
 	 */
 	function createLinkToUserHome($user_name, $realname) {
-		return '<a href="/users/'.$user_name.'/">'.$realname.'</a>';
+		return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
 	}
 
 	/**
@@ -93,12 +93,12 @@ class Theme extends Error {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
 	<title><?php echo $params['title']; ?></title>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php" type="application/rss+xml"/>
 	
 	<?php	if (isset($GLOBALS['group_id'])) { 
-			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
+			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
 			echo $activity;
 		}
 	?>
@@ -111,7 +111,7 @@ class Theme extends Error {
 $theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
 if (file_exists($theme_cssfile)){
 echo '
-<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
+<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
 }
 ?>
 
@@ -145,22 +145,22 @@ echo '
 
 <div id="container">
 <div id="logo">
-<h1><a href="/">Goto GForge</a></h1>
-<!--<a href="/"><img src="/themes/gforge-simple-theme/images/logo.png" border="0" margin="0" padding="0" valign="top"/></a>-->
+<h1><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/">Goto GForge</a></h1>
+<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/gforge-simple-theme/images/logo.png" border="0" margin="0" padding="0" valign="top"/></a>-->
 </div>
     <div id="util">
 
 <?php	if (session_loggedin()) {
 				?>
 
-<a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br/>
-<a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a><br/>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br/>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a><br/>
 			
 				<?php
 			} else {
 				?>
-				<a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a><br/>
-				<a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a><br/>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
 				<?php
 			}
 ?>
@@ -224,13 +224,13 @@ echo '<a href="'.$this->selected_dir.'">'.$this->selected_title.'</a>';
 
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <div id="footer">
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+<a href="http://gforge.org/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
 </div>
 <?php
 	global $sys_show_source;
 	global $Language;
 	if ($sys_show_source) {
-		print '<a class="showsource" href="/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
+		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
 	}
 ?>
 
@@ -692,7 +692,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if (isset($group_id)) {
 			print '
 					
-					<a class="lnkutility" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a>';
+					<a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a>';
 		}
 		print '</form>';
 

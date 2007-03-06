@@ -33,12 +33,12 @@ echo notepad_func();
 					echo '
 					<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 						html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
-					?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
+					?>&nbsp;<a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 
 				<?php /* } else { ?>
 
 				<span class="error">
-				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></span>
+				<?php echo $Language->getText('tracker','please_login',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></span>
 				<?php if ($ath->allowsAnon()) { ?>
 				<?php echo $Language->getText('tracker','insert_email') ?>
 				<br />
@@ -71,7 +71,7 @@ echo notepad_func();
 			/*if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				?>
-				(<tt><a href="/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
+				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php }*/ ?>
 			</td>
 			<td><strong><?php echo $Language->getText('tracker','assigned_to') ?>:</strong><br />
@@ -140,7 +140,7 @@ if ($group->usesPM()) {
 				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
-						<td><a href="/pm/task.php?func=detailtask&project_task_id='.$taskid.
+						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&project_task_id='.$taskid.
 						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
@@ -185,7 +185,7 @@ if ($group->usesPM()) {
 		for ($i=0; $i<$count; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-			<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
 				$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">'.$Language->getText('tracker_detail','download').'</a></td>
 			</tr>';
 		}

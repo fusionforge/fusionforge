@@ -22,6 +22,7 @@ http://dev.gforge.org/pm/task.php?func=addartifact
 //$related_artifact_id
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/pm/ProjectGroupFactory.class');
 require_once('common/pm/ProjectTaskFactory.class');

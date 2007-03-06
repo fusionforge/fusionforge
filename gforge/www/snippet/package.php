@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -95,7 +96,7 @@ function show_add_snippet_box() {
 <p>
 <?php echo $Language->getText('snippet_package','if_a_new_window'); ?></p>
 
-<p><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_package','add_snippet_to'); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_package','add_snippet_to'); ?></a></p>
 
 <p>
 <?php echo $Language->getText('snippet_package','browse_the_libary'); ?>
@@ -137,13 +138,13 @@ function show_add_snippet_box() {
 	<td><strong><?php echo $Language->getText('snippet_package','language') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!--<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_language'); ?></a>-->
+		<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_language'); ?></a>-->
 	</td>
 
 	<td><strong><?php echo $Language->getText('snippet_package','category') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
-		<!-- <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_category'); ?></a>-->
+		<!-- <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_category'); ?></a>-->
 	</td>
 	</tr>
  

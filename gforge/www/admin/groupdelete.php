@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/license.php');
 require_once('www/admin/admin_utils.php');
@@ -45,6 +46,7 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error('Error',$group->getErrorMessage());
 	} else {
+		plugin_hook('delete_link',$_GET['group_id']) ;
 		header("Location: /admin/?feedback=DELETED");
 	}
 }

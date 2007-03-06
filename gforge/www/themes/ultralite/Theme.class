@@ -35,19 +35,19 @@ class Theme extends Layout {
 		
 		<body>
 		<p align=left>
-		<a href="/"><h2>GForge</h2></a>
+		<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><h2>GForge</h2></a>
 		</p>
 		<p align=right>
 		<?
 		if (session_loggedin()) {
 		?>
-		<b><a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b>
-		<b><a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
 		<?php
 		} else {
 		?>
-		<b><a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b>
-		<b><a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 		<?php
 		}
 		?>
@@ -144,7 +144,7 @@ class Theme extends Layout {
 		<?php
 		global $sys_show_source;
 		if ($sys_show_source) {
-		print '<a class="showsource" href="/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '">Show Source</a>';
+		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '">Show Source</a>';
 		}
 		?>
 		</body>

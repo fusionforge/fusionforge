@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 
@@ -75,6 +76,10 @@ if (getStringFromRequest('submit')) {
 			'Could not change password: '.$u->getErrorMessage()
 		);
 	}
+	//plugin webcal change user password
+	else {
+		plugin_hook('change_cal_password',user_getid());
+	}
 
 	site_user_header(array('title'=>$Language->getText('account_change_pw_changed','title')));
 	?>
@@ -82,7 +87,7 @@ if (getStringFromRequest('submit')) {
 	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS['sys_name']); ?>
 
 	<p>
-	<?php echo $Language->getText('account_change_pw_changed','return_to',array('<a href="/account/">','</a>')) ?>
+	<?php echo $Language->getText('account_change_pw_changed','return_to',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/">','</a>')) ?>
 	</p>
 	
 	<?php

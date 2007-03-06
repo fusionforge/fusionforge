@@ -19,6 +19,7 @@
 
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/docman/Document.class');
 require_once('common/docman/DocumentGroupFactory.class');
@@ -60,7 +61,7 @@ if (getStringFromRequest('submit')) {
 		exit_missing_param();
 	}
 
-	$d = new Document($g);
+	$d = new Document($g, false, false,$sys_engine_path);
 	if (!$d || !is_object($d)) {		
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
 	} elseif ($d->isError()) {	

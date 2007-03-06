@@ -27,6 +27,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));

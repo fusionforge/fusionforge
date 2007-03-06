@@ -31,6 +31,7 @@ Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
 Header( "Cache-Control: no-cache"); 
 Header( "Cache-Control: must-revalidate"); 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $return_to = getStringFromRequest('return_to');
@@ -75,7 +76,7 @@ if ($login) {
 			header ("Location: " . $return_to);
 			exit;
 		} else {
-			header ("Location: /my/");
+			header ("Location: ".$GLOBALS['sys_urlprefix']."/my/");
 			exit;
 		}
 	}

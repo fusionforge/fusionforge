@@ -28,7 +28,7 @@ function make_user_link($username) {
 	if (!strcasecmp($username,'Nobody') || !strcasecmp($username,'None')) {
 		return $username;
 	} else {
-		return '<a href="/users/'.$username.'">'.$username.'</a>' ;
+		return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$username.'">'.$username.'</a>' ;
 	}
 }
 

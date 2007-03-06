@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');    
 
 /*
@@ -28,6 +29,6 @@ if (!$group_id) {
 	exit_error("Missing Group Argument","A group must be specified for this page.");
 }
 
-header ("Location: /projects/". group_getunixname($group_id) ."/");
+header ("Location: ".$GLOBALS['sys_urlprefix']."/projects/". group_getunixname($group_id) ."/");
 
 ?>

@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
@@ -91,14 +92,14 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'D') print "deleted";
 		if ($usr['status'] == 'S') print "suspended";
 		if ($usr['status'] == 'P') print "pending";
-		print "\"><a href=\"useredit.php?user_id=".$usr['user_id']."\">";
+		print '"><a href="useredit.php?user_id='.$usr['user_id'].'">';
 		if ($usr['status'] == 'P') print "*";
 		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
 		echo '</td>';
 		echo '<td width="15%" align="center">';
 		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
 		echo '</td>';
-		echo '<td width="15%" align="center"><a href="/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
 		echo '<td width="15%" align="center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
 		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
 		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
@@ -118,8 +119,14 @@ $user_id = getStringFromRequest('user_id');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
+	//plugin webcal
+	//del webcal user
+	plugin_hook('del_cal_user',$user_id);
 } else if ($action=='activate') {
 	performAction('A', "ACTIVE", $user_id);
+	//plugin webcal
+	//create webcal user
+	plugin_hook('add_cal_user',$user_id);
 } else if ($action=='suspend') {
 	performAction('S', "SUSPENDED", $user_id);
 }

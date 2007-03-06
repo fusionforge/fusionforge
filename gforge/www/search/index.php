@@ -12,6 +12,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once ('www/search/include/SearchManager.class');

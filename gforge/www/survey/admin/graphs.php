@@ -17,6 +17,7 @@
  *  @ hight 
  */ 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 
 // Check if we have jpgraph

@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 require_once('www/admin/admin_utils.php');
@@ -248,7 +249,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
-		<td width="40%"><a href="/project/admin/?group_id='.$row_cat['group_id'].'">['.$Language->getText('admin_useredit','project_admin').']</a></td>
+		<td width="40%"><a href="'.$GLOBALS['sys_urlprefix'].'/project/admin/?group_id='.$row_cat['group_id'].'">['.$Language->getText('admin_useredit','project_admin').']</a></td>
 		</tr>
 	';
 

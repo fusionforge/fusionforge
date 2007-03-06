@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('vote_function.php');
 require_once('common/tracker/ArtifactsForUser.class');
@@ -60,8 +61,8 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname())));
 	$tabcnt=0;	
 	?>
-<script type="text/javascript" src="/tabber/tabber.js"></script>
-<div id="tabber" class="tabber">
+<script type="text/javascript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/tabber/tabber.js"></script>
+<div id="tabber" class="tabber" <? plugin_hook('call_user_js');?>>
 <div class="tabbertab" 
 title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 	<?php
@@ -82,7 +83,7 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 		foreach($assignedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent"><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="tablecontent"><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&amp;atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
@@ -93,7 +94,7 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$art->getID().'</td>
 			<td width="10%" class="priority'.$art->getPriority().'">'.$art->getPriority().'</td>
-			<td><a href="/tracker/?func=detail&amp;aid='.
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;aid='.
 			$art->getID().
 			'&amp;group_id='.$art->ArtifactType->Group->getID().
 			'&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() . '</a>';
@@ -140,7 +141,7 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 			$group =& $projectGroup->getGroup();
 			if ($projectGroup->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent"><a href="/pm/task.php?group_id='.
+				<tr><td colspan="3" class="tablecontent"><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?group_id='.
 				$group->getID().
 				'&amp;group_project_id='.
 				$projectGroup->getID().'">'.
@@ -151,7 +152,7 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$task->getID().'</td>
 			<td width="10%" class="priority'.$task->getPriority().'">'.$task->getPriority().'</td>
-			<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.
 			$task->getID().
 			'&amp;group_id='.$group->getID().
 			'&amp;group_project_id='.$projectGroup->getID().'">'.$style_begin.$task->getSummary().$style_end.'</a>';
@@ -183,7 +184,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		foreach ($submittedArtifacts as $art) {
 			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
-				<tr><td colspan="3" class="tablecontent"><a href="/tracker/?group_id='.
+				<tr><td colspan="3" class="tablecontent"><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&amp;atid='.
 				$art->ArtifactType->getID().'">'.
 				$art->ArtifactType->Group->getPublicName().' - '.
@@ -193,7 +194,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i++) .'>
 			<td width="10%">'.$art->getID().'</td>
 			<td width="10%" class="priority'.$art->getPriority().'">'.$art->getPriority().'</td>
-			<td><a href="/tracker/?func=detail&amp;aid='.
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;aid='.
       $art->getID().
       '&amp;group_id='.$art->ArtifactType->Group->getID().
       '&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() .'</a>';
@@ -224,20 +225,20 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	if (count($forums) < 1) {
 		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.$Language->getText('my', 'no_monitored_forums').'</strong></center></td></tr>';
 	} else {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong><a href="/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong><a href="'.$GLOBALS['sys_urlprefix'].'/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
 		foreach ($forums as $f) {
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="/forum/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.
 				$group->getID().'">'.
 				$group->getPublicName().'</a></td></tr>';
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.$f->getID().
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$f->getID().
 			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
-			'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
+			'border="0" alt="" /></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.
 			$f->getID().'">'.
 			$f->getName().'</a></td></tr>';
 
@@ -269,15 +270,15 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="/project/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='.
 				db_result($result,$i,'group_id').'">'.
 				db_result($result,$i,'group_name').'</a></td></tr>';
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/frs/monitor.php?filemodule_id='.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
-			'border="0" alt=""/></a></td><td width="99%"><a href="/frs/?group_id='.
+			'border="0" alt=""/></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</a></td></tr>';
 
@@ -287,6 +288,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
+
 <div class="tabbertab" title="<?php echo $Language->getText('mytab','project'); ?>" >
 <?php
 	/*
@@ -305,11 +307,11 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		for ($i=0; $i<$rows; $i++) {
 			echo '</td></tr>
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
-			<a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
+			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
-			<a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a>';
+			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a>';
 		}
 	}
 
@@ -352,12 +354,16 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
-			<td><a href="/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();
 ?>
 </div>
+<?php
+//link to webcal
+plugin_hook('call_user_cal') ;
+?>
 </div>
 <?php
 	echo site_user_footer(array());

@@ -34,7 +34,7 @@ class Layout extends Error {
 	 * @var		string	$imgroot
 	 */
 
-	var $imgroot = '/themes/gforge/images/';
+	var $imgroot;
 
 
 	/**
@@ -45,14 +45,12 @@ class Layout extends Error {
 		$this->themeroot=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
 		/* if images directory exists in theme, then use it as imgroot */
 		if (file_exists ($this->themeroot.'/images')){
-			$this->imgroot='/themes/'.$GLOBALS['sys_theme'].'/images/';
+			$this->imgroot=$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/images/';
 		}
 		// Constructor for parent class...
 		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
 			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
 		$this->Error();
-
-		
 	}
 
 	/**
@@ -62,7 +60,7 @@ class Layout extends Error {
 	 *	@param	string	The user's realname
 	 */
 	function createLinkToUserHome($user_name, $realname) {
-		return '<a href="/users/'.$user_name.'/">'.$realname.'</a>';
+		return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
 	}
 
 	/**
@@ -90,44 +88,17 @@ class Layout extends Error {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
 	<title><?php echo $params['title']; ?></title>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="/export/rss_sfnews.php" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="/export/rss20_news.php" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="/export/rss_sfprojects.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php" type="application/rss+xml"/>
+	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php" type="application/rss+xml"/>
 	
 	<?php	if (isset($GLOBALS['group_id'])) { 
-			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
+			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="'.$GLOBALS['sys_urlprefix'].'/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
 			echo $activity;
 		}
 	?>
-<?
+	<?php $this->headerCSS(); ?>
 
-/* check if a personalized css stylesheet exist, if yes include only
-   this stylesheet
-   new stylesheets should use the <themename>.css file
-*/
-$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
-if (file_exists($theme_cssfile)){
-echo '
-<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
-}
-else
-{
-/* if this is not our case, then include the compatibility stylesheet
-   that contains all removed styles from the code and check if a
-   custom stylesheet exists. 
-   Used for compatibility with existing stylesheets
-*/
-?>
-<link rel="stylesheet" type="text/css" href="/themes/css/gforge-compat.css" />
-<?
-$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
-if (file_exists($theme_cssfile)){
-echo '
-<link rel="stylesheet" type="text/css" href="/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
-';
-}
-}
-?>
 	<script language="JavaScript" type="text/javascript">
 	<!--
 
@@ -141,33 +112,64 @@ echo '
 	// -->
 	<?php plugin_hook ("javascript",false) ; ?>
 	</script>
-<?php plugin_hook ('cssfile',$this); ?>
 </head>
 <?php 
-
 	} 
+	
+	function headerCSS() {
+		/* check if a personalized css stylesheet exist, if yes include only
+   		this stylesheet
+   		new stylesheets should use the <themename>.css file
+		*/
+		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
+		if (file_exists($theme_cssfile)){
+			echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
+		} else {
+		/* if this is not our case, then include the compatibility stylesheet
+   		that contains all removed styles from the code and check if a
+   		custom stylesheet exists. 
+   		Used for compatibility with existing stylesheets
+		*/
+			echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/css/gforge-compat.css" />';
+			$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
+			if (file_exists($theme_cssfile)){
+				echo '
+	<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />';
+			}
+		}
+		plugin_hook ('cssfile',$this);
+	}
 
 	function header($params) {
 		global $Language;
 
 		$this->headerStart($params); ?>
 <body>
+		<?php
+		$this->bodyHeader($params);
+	}
 
+	function bodyHeader($params){
+		global $Language;
+		?>
+<div class="header">
 <table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
 
 	<tr>
-		<td><a href="/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
+		<td><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<a class="lnkutility" href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br />
-				<a class="lnkutility" href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
+				<a class="lnkutility" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br />
+				<a class="lnkutility" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
 				<?php
 			} else {
 				?>
-				<b><a class="lnkutility" href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
-				<b><a class="lnkutility" href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+				<b><a class="lnkutility" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
+				<b><a class="lnkutility" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
 				<?php
 			}
 			echo $this->quickNav();
@@ -288,11 +290,12 @@ if (isset($params['group']) && $params['group']) {
 	global $sys_show_source;
 	global $Language;
 	if ($sys_show_source) {
-		print '<a class="showsource" href="/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
+		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
 	}
 ?>
 
 </body>
+</div>
 </html>
 <?php
 
@@ -395,7 +398,7 @@ if (isset($params['group']) && $params['group']) {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td><a class="sortbutton" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
+				<td><a class="sortbutton" href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
@@ -670,7 +673,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="25" width="10" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$GLOBALS['sys_urlprefix'].$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -685,7 +688,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$GLOBALS['sys_urlprefix'].$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 				//
 				//	Last graphic on right-side
 				//
@@ -707,7 +710,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$GLOBALS['sys_urlprefix'].$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 
 			}
 		}
@@ -800,7 +803,7 @@ if (isset($params['group']) && $params['group']) {
 		if (isset($group_id)) {
 			print '
 					<td width="10">&nbsp;</td>
-					<td><a class="lnkutility" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
+					<td><a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
 		}
 		print '</tr></table>';
 		print '</form>';
@@ -979,10 +982,10 @@ if (isset($params['group']) && $params['group']) {
 		
 		for ($i=0; $i<$count; $i++) {
 			$return .= '
-				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a> | ';
+				<a href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'">'.$title_arr[$i].'</a> | ';
 		}
 		$return .= '
-				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a>';
+				<a href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'">'.$title_arr[$i].'</a>';
 		return $return;
 	}
 

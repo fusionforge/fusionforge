@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('common/include/Role.class');
@@ -81,6 +82,10 @@ if ($role_id=='observer') {
 				$feedback .= ' Successfully Updated Role ';
 			}
 		}
+		//plugin webcal
+			//change assistant for webcal
+			$params = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission_auto',$params);	
 	}
 }
 

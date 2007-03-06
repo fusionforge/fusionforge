@@ -8,6 +8,7 @@
   *
   *
   */
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('common/survey/SurveyQuestion.class');
 require_once('common/survey/SurveyQuestionFactory.class');

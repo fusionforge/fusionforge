@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/timezones.php');
 
@@ -104,9 +105,9 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <?php echo $Language->getText('account_options', 'intro'); ?>
 </p>
 <ul>
-<li><a href="/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></strong></a></li>
+<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></strong></a></li>
 <?php if($GLOBALS['sys_use_people']) { ?>
-	<li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
 <?php } ?>
 </ul>
 <?php echo $HTML->boxBottom(); ?>
@@ -227,14 +228,14 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 <?php /*
 <p /><input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
-<?php echo $Language->getText('account_register','remember_me','<a href="/my/">');
+<?php echo $Language->getText('account_register','remember_me','<a href="'.$GLOBALS['sys_urlprefix'].'/my/">');
 */ ?>
 
 <p />
 <?php if ($sys_use_ratings) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
-	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="/users/'.$u->getUnixName().'">'); ?>
+	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$u->getUnixName().'">'); ?>
 <?php } ?>	
 </td></tr>
 <?php 

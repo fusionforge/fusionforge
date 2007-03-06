@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -172,7 +173,7 @@ function show_add_snippet_box() {
 <?php echo $Language->getText('snippet_addversion','if_new_window_opened'); ?>
 </p>
 <p>
-<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_addversion','link_add_snippets_to_package'); ?></a></p>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_addversion','link_add_snippets_to_package'); ?></a></p>
 <p><?php echo $Language->getText('snippet_addversion','browse_the_library'); ?></p>
 <p>
 

@@ -26,6 +26,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');	
 require_once('www/frs/include/frs_utils.php');
 
@@ -80,7 +81,7 @@ echo $Language->getText('project_showfiles','intro2').'
 $perm =& $cur_group->getPermission(session_get_user());
 
 if ($perm->isReleaseTechnician()) {
-	echo "<p><a href=\"admin/qrs.php?package=&group_id=$group_id\">";
+	echo '<p><a href="admin/qrs.php?package=&group_id='.$group_id.'">';
 	echo $Language->getText('project_showfiles','new_release');
 	echo "</a></p>";
 }
@@ -113,7 +114,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 	
 	print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
-	<a href="/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
+	<a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
 	html_image('ic/mail16w.png','20','20',array('alt'=>$Language->getText('project_showfiles','monitor_package'))) .
 	'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
@@ -186,7 +187,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 					$cell_data=array();
 					
 					$cell_data[] = array('<dd>
-						<a href="/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
+						<a href="'.$GLOBALS['sys_urlprefix'].'/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
 						. $file_release['filename'] .'</a>',
 						'colspan=3');
 						

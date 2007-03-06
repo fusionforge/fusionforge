@@ -18,8 +18,9 @@
     Complete OO rewrite by Tim Perdue 12/2002
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
+require_once('../forum/include/ForumHTML.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/Forum.class');
 
@@ -56,7 +57,7 @@ if ($group_id) {
 
 //	echo $Language->getText('forum', 'choose');
 
-	echo $HTML->subMenu(array("My Monitored Forums"),array("myforums.php?group_id=$group_id"));
+	echo $HTML->subMenu(array("My Monitored Forums"),array("/forum/myforums.php?group_id=$group_id"));
 	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'),$Language->getText('forum_forum','moderationlvl'));
 	echo $HTML->listTableTop($tablearr);
 

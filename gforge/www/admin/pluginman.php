@@ -27,6 +27,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
@@ -136,8 +137,12 @@ if (getStringFromRequest('update')) {
 						$feedback .= $Language->getText('pluginman','successiniterror');
 						$feedback .= '<br>Database said: '.db_error();
 					}
+				}	
+				//we check for a php script	
+				if (is_file($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php')) {
+				include($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php');		
 				} else {
-					$feedback .= $Language->getText('pluginman','successnoinit');
+					
 				}
 			}
 		}

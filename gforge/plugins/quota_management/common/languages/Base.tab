@@ -1,0 +1,65 @@
+#/**
+#  *
+#  * quota_management message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  *                2005 (c) Daniel Pérez <danielperez.arg@gmail.com>
+#  * http://sourceforge.net
+#  * Here you can add your own language customizations
+#  *
+#  *
+#  */
+user_home	view_quota_management	View Personal quota_management
+project_admin	quota_management	View the quota_management Administration
+admin_quotas	quotas_title	Ressources usage and quota
+admin_quotas	quotas_admin_title	Quota Manager Admin
+admin_quotas	projects_space_label	Projects ressources use
+admin_quotas	projects_space_modif	Projects disk quota
+admin_quotas	users_space_label	Users disk use
+admin_quotas	id	id
+admin_quotas	mbytes	Mb
+admin_quotas	name	name
+admin_quotas	database	database
+admin_quotas	disk	disk
+admin_quotas	project	project
+admin_quotas	project_expl	Ftp, Home
+admin_quotas	disk_scm	scm
+admin_quotas	disk_scm_expl	Cvs, Svn
+admin_quotas	disk_other	others
+admin_quotas	disk_other_expl	Download - without quota control
+admin_quotas	total	total
+admin_quotas	quota_hard_name	disk quota hard
+admin_quotas	quota_soft_name	disk quota soft
+admin_quotas	modify_button	Modify
+admin_quotas	quota_val_invalid	Input error : Hard quota must be greater than soft quota
+admin_quotas	quota_val_update_success	Successfully updated quota
+project_admin_utils	quotas	Quota
+project_admin_quotas	title	Project quota manager
+project_admin_quotas	documents_title	Documents
+project_admin_quotas	search_engine_title	Documents search engine
+project_admin_quotas	news_title	News
+project_admin_quotas	forums_title	Forums
+project_admin_quotas	table_head_name	quota type
+project_admin_quotas	table_head_nb	quantity
+project_admin_quotas	table_head_size	size
+project_admin_quotas	table_quota_size	quota
+project_admin_quotas	size_metric	Mb
+project_admin_quotas	total_label	Total
+project_admin_quotas	upload_title	Download project directory
+project_admin_quotas	home_title	Home project directory
+project_admin_quotas	ftp_title	Ftp project directory
+project_admin_quotas	cvs_title	CVS project directory
+project_admin_quotas	svn_title	Subversion project directory
+project_admin_quotas	database_space_label	Database
+project_admin_quotas	disk_space_label	Disk space
+project_admin_quotas	quota_space_label	Quota disk management
+project_admin_quotas	quota_settings_label	Quota settings
+project_admin_quotas	quota_soft_label	Quota soft
+project_admin_quotas	quota_hard_label	Quota hard
+project_admin_quotas	quota_group1_label	Home, Ftp
+project_admin_quotas	quota_groupscm_label	Cvs, Svn
+project_admin_quotas	quota_exceed	Quota exceeded
+project_admin_quotas	with_ftp_home	With ftp and home quota control
+project_admin_quotas	with_scm	With cvs and svn quota control
+project_admin_quotas	without	Without quota control

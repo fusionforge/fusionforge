@@ -61,7 +61,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				$what = 'projects';
 			}		
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				.'<td width="30%"><a href="/'.$what.'/'
+				.'<td width="30%"><a href="'.$GLOBALS['sys_urlprefix'].'/'.$what.'/'
 				.db_result($result, $i, 'unix_group_name').'/">'
 				.html_image('ic/msg.png', '10', '12', array('border'=>'0'))
 				.' '.$this->highlightTargetWords(db_result($result, $i, 'group_name')).'</a></td>'

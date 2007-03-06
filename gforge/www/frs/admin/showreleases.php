@@ -29,6 +29,7 @@
  * a little and incorporate FRS.class.		-Darrell
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');	
 require_once('www/frs/include/frs_utils.php');
 require_once('common/frs/FRSPackage.class');

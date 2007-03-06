@@ -1,0 +1,40 @@
+<!--VTP_MAIN-->
+<!--VTP_FORMSEARCH-->
+<form action="search.php?group_id={#GROUP_ID}" method="POST">
+<input type="hidden" name="cmd" value="search" />
+<table width="98%" cellpadding="2" cellspacing="0" border="0">
+<tr>
+	<td>
+		<b>{#TITLE}</b>
+		<input type="text" name="textsearch" id="textsearch" size="48" value='{#TEXTSEARCH}' />
+		<input type="submit" value="{#SUBMIT_PROMPT}" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<input type="radio" name="search_type" value="all" {#ALLCHECKED} /> {#SEARCH_ALL_WORDS}
+		<input type="radio" name="search_type" value="one" {#ONECHECKED} /> {#SEARCH_ONE_WORD}
+	</td>
+</tr>
+</table>
+</form>
+<!--/VTP_FORMSEARCH-->
+<!--VTP_RESULTSEARCH-->
+<table width="98%" cellpadding="0" cellspacing="0" border="0">
+<!--VTP_RESULT-->
+<tr><td width="20px" align="right"><b>{#N}.</b></td><td><a href="/docman/view.php/{#GROUP_ID}/{#DOC_ID}/{#FILE_NAME}"><b>{#SEARCHTITLE}</b></a></td></tr>
+<tr><td colspan="2">{#SEARCHCOMMENT}</td></tr>
+<tr><td colspan="2"><b>{#STATE}</b>&nbsp;&nbsp;<i>{#SEARCHPATH}</i></td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<!--/VTP_RESULT-->
+</table>
+<!--/VTP_RESULTSEARCH-->
+
+
+<!--VTP_MESSAGE-->
+<table width="98%" cellpadding="2" cellspacing="0" border="0">
+<tr><td><b>{#TITLE}</b></td></tr>
+<tr><td style="color:#9A0202">{#TEXT}</td></tr>
+</table>
+<!--/VTP_MESSAGE-->
+<!--/VTP_MAIN-->

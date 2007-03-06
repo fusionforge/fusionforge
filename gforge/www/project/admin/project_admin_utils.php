@@ -77,6 +77,7 @@ function project_admin_header($params) {
 		$labels[] = $Language->getText('project_admin_utils','database_admin');
 	}
 	$labels[] = $Language->getText('project_admin_utils','stats');
+	plugin_hook("quota_label_project_admin");
 	
 	$links[] = '/project/admin/?group_id='.$group_id;
 	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
@@ -95,6 +96,8 @@ function project_admin_header($params) {
 		$links[] = '/project/admin/database.php?group_id='.$group_id;
 	}
 	$links[] = '/project/stats/?group_id='.$group_id;
+	plugin_hook("quota_link_project_admin");
+	
 	echo ($HTML->beginSubMenu());	
 	echo $HTML->printSubMenu($labels, $links);
 	plugin_hook ("groupadminmenu", $params) ;

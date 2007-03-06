@@ -682,6 +682,13 @@ docman_new	selectsubmit	Select Option
 docman_new	enableftpfirst	You must enable ftp uploads first
 docman_new	name	Name your file :
 docman_new	edit	Edit
+docman_search	search_title	Search in documents
+docman_search	search_submit_prompt	Search
+docman_search	search_all_words	With all the words
+docman_search	search_exact	With exact phrase
+docman_search	search_one_word	With at least one of words
+docman_search	error_query	Database query error
+docman_search	no_search_result	Your search did not match any documents
 error	not_found	PAGE NOT FOUND
 error	title	Requested Page not Found (Error 404)
 exit	choose_group_body	No group was chosen or you can't access it
@@ -1131,8 +1138,9 @@ news_admin	noapproved	No approved items found for this week
 news_admin	noqueued	No Queued Items Found
 news_admin	norejected	No rejected items found for this week
 news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
+news_admin	private_project	Private project
 news_admin	project	Project
-news_admin	queued	These News Items Were Submitted For Project
+news_admin	queued	List of News Submitted for Project
 news_admin	reject	Reject
 news_admin	reject_selected	Reject Selected
 news_admin	rejected_newsbytes	These items were rejected this past week (total: $1)
@@ -1140,6 +1148,10 @@ news_admin	removal_when_edit	If this item is on the $1 home page and you edit it
 news_admin	status	Status
 news_admin	status_delete	Delete
 news_admin	status_displayed	Displayed
+news_admin	status_pending	Pending
+news_admin	status_deleted	Deleted
+news_admin	status_rejected	Rejected
+news_admin	status_unknow	Unknow
 news_admin	subject	Subject
 news_admin	submitted_by	Submitted by
 news_admin	submitted_for_group	Submitted for group
@@ -1799,6 +1811,9 @@ rbac_vals	forumadmin0	None
 rbac_vals	forumadmin2	Admin
 rbac_vals	trackeradmin0	None
 rbac_vals	trackeradmin2	Admin
+rbac_vals	webcal2	See
+rbac_vals	webcal1	Modify
+rbac_vals	webcal0	No access
 rbac_edit	title1	Section
 rbac_edit	title2	Subsection
 rbac_edit	title3	Setting
@@ -1815,6 +1830,7 @@ rbac_edit	addrole	Add Role
 rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
+rbac_edit	webcal	Webcalendar
 reporting	add	Add
 reporting	administrative	Administrative
 reporting	area	Areas

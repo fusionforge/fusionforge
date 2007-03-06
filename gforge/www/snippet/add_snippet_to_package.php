@@ -12,6 +12,7 @@
   */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -68,7 +69,7 @@ if (session_loggedin()) {
 			$result=db_query("SELECT * FROM snippet_version WHERE snippet_version_id='$snippet_version_id'");
 			if (!$result || db_numrows($result) < 1) {
 				echo '<h1>' .$Language->getText('add_snippet','error_snippet_doesnt_exist').'</h1>';
-				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' .$Language->getText('add_snippet','back_to_add_page').'</a>';
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' .$Language->getText('add_snippet','back_to_add_page').'</a>';
 				handle_add_exit();
 			}
 
@@ -80,7 +81,7 @@ if (session_loggedin()) {
 				"AND snippet_version_id='$snippet_version_id'");
 			if ($result && db_numrows($result) > 0) {
 				echo '<h1>'.$Language->getText('add_snippet','error_snippet_already_added').'</h1>';
-				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
 				handle_add_exit();
 			}
 
@@ -99,7 +100,7 @@ if (session_loggedin()) {
 			}
 		} else {
 			echo '<h1>' .$Language->getText('add_snippet','error_go_back_and_fill_all').'</h1>';
-			echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
+			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
 			handle_add_exit();
 		}
 
@@ -173,7 +174,7 @@ for ($i=0; $i<$combolistrows; $i++)
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td align="center">
-				<a href="/snippet/delete.php?type=frompackage&snippet_version_id='.
+				<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td><td width="99%">'.

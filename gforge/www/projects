@@ -26,6 +26,7 @@
  */
 
 
+require_once('env.inc.php');
 require_once('pre.php');    
 
 //
@@ -44,14 +45,13 @@ if (!$group_id || !$project) {
 	$subpage = getStringFromRequest('subpage');
 
 	if ($subpage == "admin") {
-//		include('www/project/admin/index.php');
-		session_redirect("/project/admin/?group_id=$group_id");
+		session_redirect($GLOBAL['sys_urlprefix']."/project/admin/?group_id=$group_id");
 		exit();
 	} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
 		if (getStringFromRequest('subpage2') == "release") {
-			session_redirect("/frs/admin/qrs.php?group_id=$group_id");
+			session_redirect($GLOBAL['sys_urlprefix']."/frs/admin/qrs.php?group_id=$group_id");
 		} else {
-			session_redirect("/frs/?group_id=$group_id");
+			session_redirect($GLOBAL['sys_urlprefix']."/frs/?group_id=$group_id");
 		}
 		exit();
 	} else if ($subpage == "cvs") {

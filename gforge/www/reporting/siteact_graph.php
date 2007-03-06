@@ -25,10 +25,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once('common/reporting/ReportSiteAct.class');
+require_once('www/include/unicode.php');
 
 session_require( array('group'=>$sys_stats_group) );
 
@@ -72,8 +74,8 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot2 );
 
 	//	Legends
-	$lineplot->SetLegend ($Language->getText('reporting','tracker_items_opened'));
-	$lineplot2 ->SetLegend($Language->getText('reporting','tracker_items_closed'));
+	 $lineplot->SetLegend (convert_unicode($Language->getText('reporting','tracker_items_opened')));
+	 $lineplot2 ->SetLegend(convert_unicode($Language->getText('reporting','tracker_items_closed')));
 
 } elseif ($area=='forum') {
 

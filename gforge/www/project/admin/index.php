@@ -29,6 +29,7 @@
  */
 
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
@@ -70,6 +71,14 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_added');
+
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
+
 			//if the user have requested to join this group
 			//we should remove him from the request list
 			//since it has already been added
@@ -77,6 +86,7 @@ if (getStringFromRequest('submit')) {
 			if ($gjr || is_object($gjr) || !$gjr->isError()) {
 				$gjr->delete(true);
 			}
+
 		}
 	} else if (getStringFromRequest('rmuser')) {
 		/*
@@ -87,6 +97,12 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_removed');
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
 		}
 	} else if (getStringFromRequest('updateuser')) {
 		/*
@@ -98,6 +114,13 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_updated');
+			//plugin webcal
+			//change assistant for webcal
+			$params[0] = getIntFromRequest('user_id');
+			$params[1] = getIntFromRequest('group_id');
+			plugin_hook('change_cal_permission',$params);
+			$group_id = getIntFromRequest('group_id');
+			
 		}
 	} elseif (getStringFromRequest('acceptpending')) {
 		/*
@@ -132,7 +155,7 @@ if (getStringFromRequest('submit')) {
 				$feedback .= 'Rejected';
 			}
 		}
-	}
+	} 
 }
 
 $group->clearError();
@@ -168,39 +191,39 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 ?> 
 
 <?php	if($sys_use_scm) { ?>
-	<p>[ <a href="/tarballs.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText('project_admin', 'download_tarball') ?></a> ]</p>
+	<p>[ <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tarballs.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText('project_admin', 'download_tarball') ?></a> ]</p>
 <?php	} ?>
 
 <hr />
 <p>
-<h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>
+<h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>
 </p>
 <?php
 echo $HTML->boxMiddle($Language->getText('project_admin','tool_admin').'');
 
 if($sys_use_tracker) { ?>
-	<a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','tracker_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','tracker_admin') ?></a><br />
 <?php }
 if($sys_use_docman) { ?>
-	<a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','docmanager_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','docmanager_admin') ?></a><br />
 <?php }
 if($sys_use_mail) { ?>
-	<a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','mail_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','mail_admin') ?></a><br />
 <?php }
 if($sys_use_news) { ?>
-	<a href="/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','news_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','news_admin') ?></a><br />
 <?php }
 if($sys_use_pm) { ?>
-	<a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
 <?php }
 if($sys_use_forum) { ?>
-	<a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
 <?php }
 if($sys_use_frs) { ?>
-	<a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
 <?php }
 if($sys_use_scm) { ?>
-	<a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
 <?php }
 
 $hook_params = array () ;
@@ -294,7 +317,7 @@ if (count($reqs) < 1) {
 		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>
 		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
 			<input type="submit" name="acceptpending" value="<?php echo $Language->getText('project_admin','acceptpending') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo $Language->getText('project_admin','rejectpending') ?>" /></td>
@@ -314,6 +337,12 @@ echo role_box($group_id,'role_id','');
 echo '<input type="submit" name="edit" value="'.$Language->getText('rbac_edit','editrole').'"></form>';
 
 echo '<p><a href="roleedit.php?group_id='.$group_id.'">'.$Language->getText('rbac_edit','addrole').'</a>';
+
+//
+//	Project hierarchy functions
+
+plugin_hook('admin_project_link',$group_id) ;
+
 
 echo $HTML->boxBottom();?>
 

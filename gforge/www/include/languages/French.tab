@@ -989,13 +989,14 @@ news_admin	do_nothing	Ne rien faire
 news_admin	newsbyte_deleted	Annonce supprimée.
 news_admin	newsbyte_rejected	Annonce rejetée.
 news_admin	newsbyte_updated	Annonce mise à jour.
-news_admin	newsbytes_to_approve	Ces annonces ont besoin d'être approuvées (total : $1)
+news_admin	newsbytes_to_approve	Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : $1)
 news_admin	noapproved	Aucune annonce approuvée cette semaine
 news_admin	noqueued	Pas d'annonce en attente
 news_admin	norejected	Aucune annonce rejetée cette semaine
 news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe des annonces de $1.
+news_admin	private_project	Projet privé
 news_admin	project	Projet
-news_admin	queued	Annonces en attente de validation pour le projet
+news_admin	queued	Annonces postées pour le projet
 news_admin	reject	Rejeter
 news_admin	reject_selected	Rejeter les annonces sélectionnées
 news_admin	rejected_newsbytes	Ces annonces ont été rejetées la semaine passée (total : $1)
@@ -1003,6 +1004,10 @@ news_admin	removal_when_edit	Si cette annonce se trouve sur la page d'accueil de
 news_admin	status	Etat
 news_admin	status_delete	Supprimée
 news_admin	status_displayed	Affichée
+news_admin	status_pending	En attente
+news_admin	status_deleted	Effacée
+news_admin	status_rejected	Rejetée
+news_admin	status_unknow	Etat inconnu
 news_admin	subject	Sujet
 news_admin	submitted_by	Proposée par
 news_admin	submitted_for_group	Proposée pour le projet
@@ -1635,6 +1640,9 @@ rbac_vals	trackeranon0	Pas de message anonyme
 rbac_vals	trackeranon1	Autoriser les messages anonymes
 rbac_vals	trackerpublic0	Privé
 rbac_vals	trackerpublic1	Public
+rbac_vals	webcal2	Voir
+rbac_vals	webcal1	Modifier
+rbac_vals	webcal0	Aucun accès
 register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous devez remplir un certain nombre d'information de base à son propos. Veuillez lire attentivement les descriptions ci-dessous et fournir des données précises et complètes. Tous les champs sont obligatoires.
 register	choose_scm	<h3>6. Gestion de sources</h3><p>Vous pouvez choisir parmi différents gestionnaires de sources pour votre projet mais seulement un seul. Merci de choisir avec soin le gestionnaire de sources que vous souhaitez utiliser.</p> <p><strong>Vous ne pourrez plus le changer une fois le projet enregistré !</strong></p>
 register	comprehensive_description	Décrivez de manière plus complète votre projet

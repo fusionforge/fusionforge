@@ -268,7 +268,7 @@ if (db_numrows($result) > 0) {
 
 	<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
 	<br />
-	<a href="/survey/privacy.php"><?php echo $Language->getText('survey','survey_privacy') ?></a>
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/survey/privacy.php"><?php echo $Language->getText('survey','survey_privacy') ?></a>
 	</td></tr>
 	</form>
 	</table>

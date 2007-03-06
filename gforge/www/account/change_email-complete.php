@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');    
 require_once('common/include/account.php');
 
@@ -60,6 +61,10 @@ if (!$u->setEmail($u->getNewEmail())) {
 		$u->getErrorMessage()
 	);
 }
+//plugin webcal change user mail
+	else {
+		plugin_hook('change_cal_mail',user_getid());
+	}
 
 site_user_header(array('title'=>$Language->getText('account_change_email-complete','title')));
 ?>
@@ -68,7 +73,7 @@ site_user_header(array('title'=>$Language->getText('account_change_email-complet
 <?php echo $Language->getText('account_change_email-complete','confirm', array($u->getUnixName(),$u->getEmail(),'&lt;'.$u->getUnixName().'@'.$GLOBALS['sys_users_host'].'&gt')) ?>
 </p>
 
-<p><a href="/"><?php echo $Language->getText('account_change_email', 'return'); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('account_change_email', 'return'); ?></a></p>
 
 <?php
 

@@ -28,7 +28,7 @@
  *
  */
 
-require_once("www/plugins/fckeditor/fckeditor.php");
+require_once($GLOBALS['sys_plugins_path']."fckeditor/www/fckeditor.php");
 
 class fckeditorPlugin extends Plugin {
 	function fckeditorPlugin () {

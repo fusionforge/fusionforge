@@ -79,7 +79,7 @@ class Theme extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>"/>
 	<title><?php echo $params['title']; ?></title>
-	<link rel="stylesheet" type="text/css" href="/themes/lite/css/theme.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/lite/css/theme.css" />
 	<script type="text/javascript">
 	<!--
 	function help_window(helpurl) {
@@ -126,18 +126,18 @@ class Theme extends Layout {
 <table border="0px" width="100%" cellspacing="0px" cellpadding="0px" class="content">
 
 	<tr>
-		<td><a href="/"><img src="/themes/lite/images/gforge_logo.png" border="0" alt="Gforge Logo" width="200px" /></a></td>
+		<td><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><img src="/themes/lite/images/gforge_logo.png" border="0" alt="Gforge Logo" width="200px" /></a></td>
 		<td align="right"><?php echo $this->searchBox(); ?></td>
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<a href="/account/logout.php">Logout</a><br />
-				<a href="/account/">My Account</a>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php">Logout</a><br />
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/">My Account</a>
 				<?php
 			} else {
 				?>
-				<a href="/account/login.php">Login</a><br />
-				<a href="/account/register.php">New Account</a>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php">Login</a><br />
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php">New Account</a>
 				<?php
 			}
 
@@ -185,7 +185,7 @@ if ($params['group']) {
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <br />
 <center>
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development En
+<a href="http://gforge.org/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/pow-gforge.png" alt="Powered By GForge Collaborative Development En
 vironment" border="0" /></a>
 </center>
 

@@ -8,6 +8,7 @@ usr/share/gforge/www
 usr/share/gforge/www/include
 usr/sbin
 var/lib/gforge/www/plugins
+var/lib/gforge/www/plugins/webcalendar/www/includes
 var/lib/gforge/etc
 var/lib/gforge/etc/templates
 bin

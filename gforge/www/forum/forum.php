@@ -18,6 +18,7 @@
 	Complete OO rewrite by Tim Perdue 12/2002
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
@@ -248,7 +249,7 @@ if ($forum_id) {
 			$total_rows++;
 
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
-				<td><a href="/forum/message.php?msg_id='.$msg->getID().
+				<td><a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$msg->getID().
 				'&ampgroup_id='.$group_id.'">'.
 				html_image('ic/msg.png',"10","12",array("border"=>"0"));
 			/*
@@ -320,7 +321,7 @@ if ($forum_id) {
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/forum/forum.php?thread_id='.
+				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?thread_id='.
 				$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id.'">'.
 				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*
@@ -365,7 +366,7 @@ if ($forum_id) {
 
 	if ($avail_rows > $max_rows) {
 		$ret_val .= '<span class="next">
-		<a href="/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
+		<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 			'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id.'">
 		<strong> '.$Language->getText('forum_forum','next_messages') .
 		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';

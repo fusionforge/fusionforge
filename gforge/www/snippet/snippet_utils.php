@@ -89,9 +89,9 @@ function snippet_header($params) {
 	*/
 	
 	echo '<p><strong>';
-	echo '<a href="/snippet/">' .$Language->getText('snippet_utils','browse').'</a>
-		 | <a href="/snippet/submit.php">' .$Language->getText('snippet_utils','submit_a_new_snippet').'</a>
-		 | <a href="/snippet/package.php">' .$Language->getText('snippet_utils','create_a_package').'</a></strong>';
+	echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/">' .$Language->getText('snippet_utils','browse').'</a>
+		 | <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/submit.php">' .$Language->getText('snippet_utils','submit_a_new_snippet').'</a>
+		 | <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/package.php">' .$Language->getText('snippet_utils','create_a_package').'</a></strong>';
 	echo '&nbsp;';
 }
 
@@ -140,7 +140,7 @@ function snippet_show_package_snippets($version) {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
-				'</td><td><a href="/snippet/download.php?type=snippet&amp;id='.
+				'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/download.php?type=snippet&amp;id='.
 				db_result($result,$i,'snippet_version_id').'">'.
 				db_result($result,$i,'version').'</a></td><td>'.
 				db_result($result,$i,'name').'</td><td>'.

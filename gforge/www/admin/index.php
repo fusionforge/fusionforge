@@ -29,6 +29,7 @@
  */
 
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
@@ -109,7 +110,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	</li>
 </ul>
 <ul>
-	<li><a href="/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
 	<li><?php echo $Language->getText('admin_index','groups_with_status'); ?> <a href="approve-pending.php"><?php echo $Language->getText('admin_index','project_pending'); ?> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></a></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo $Language->getText('admin_index','groups_with_status'); ?>
@@ -129,14 +130,14 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <strong><?php echo $Language->getText('admin_index','news'); ?></strong>
 </p>
 <ul>
-	<li><a href="/news/admin/"><?php echo $Language->getText('admin_index','approve_reject'); ?></a> <?php echo $Language->getText('admin_index','front_page_news'); ?></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/"><?php echo $Language->getText('admin_index','approve_reject'); ?></a> <?php echo $Language->getText('admin_index','front_page_news'); ?></li>
 </ul>
 
 <p>
 <strong><?php echo $Language->getText('admin_index','stats'); ?></strong>
 </p>
 <ul>
-	<li><a href="/stats/"><?php echo $Language->getText('admin_index','site_wide_stats'); ?></a></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/stats/"><?php echo $Language->getText('admin_index','site_wide_stats'); ?></a></li>
 </ul>
 
 <p>
@@ -156,12 +157,15 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_frs_processor.php"><?php echo $Language->getText('admin_index','add_edit_delete_processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo $Language->getText('admin_index','add_edit_delete_themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo $Language->getText('admin_index','add_edit_delete_licenses'); ?></a></li>
-	<li><a href="/admin/languages/loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
-	<li><a href="/stats/lastlogins.php"><?php echo $Language->getText('admin_index','recent_logins'); ?></a></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/admin/languages/loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/stats/lastlogins.php"><?php echo $Language->getText('admin_index','recent_logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo $Language->getText('admin_index','cronman'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo $Language->getText('admin_index','pluginman'); ?></a></li>
 	<li><a href="configman.php"><?php echo $Language->getText('admin_index','configman'); ?></a></li>
-	<?php plugin_hook("site_admin_option_hook", false); ?>
+	
+	<?php 
+	plugin_hook("quota_admin_tab");
+	plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
 <?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>

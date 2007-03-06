@@ -2,6 +2,9 @@
 # Regular cron jobs for the gforge-db-postgresql package
 #
 
+# Daily reporting process
+25 7 * * * gforge [ -x /usr/lib/gforge/bin/reporting_cron.php ] && /usr/lib/gforge/bin/reporting_cron.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+
 # Recalculate user popularity metric
 25 1 * * * gforge [ -x /usr/lib/gforge/bin/calculate_user_metric.php ] && /usr/lib/gforge/bin/calculate_user_metric.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
@@ -33,7 +36,7 @@
 45 0 * * * gforge [ -x /usr/lib/gforge/bin/db_stats_agg.php ] && /usr/lib/gforge/bin/db_stats_agg.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Hourly sending of mass e-mailings
-48 * * * * gforge [ -x /usr/lib/gforge/bin/massmail.php ] && /usr/lib/gforge/bin/massmail.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+48 * * * * root [ -x /usr/lib/gforge/bin/massmail.php ] && /usr/lib/gforge/bin/massmail.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Weekly db vacuum
 50 2 * * Mon gforge [ -x /usr/lib/gforge/bin/vacuum.php ] && /usr/lib/gforge/bin/vacuum.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
@@ -43,3 +46,7 @@
 
 # Daily mail for not approved news
 30 17 * * * root [ -x /usr/lib/gforge/bin/get_news_notapproved.pl ] && /usr/lib/gforge/bin/get_news_notapproved.pl -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+
+# Daily incremental backup to /backup
+# we have to discuss this 
+#15 23 * * * root [ -x /usr/lib/gforge/bin/gforge-db-backup.sh ] && /usr/lib/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1

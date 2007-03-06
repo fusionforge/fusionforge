@@ -12,6 +12,7 @@
  * @todo display holidays.
  */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 
 $group_id = getIntFromRequest('group_id');
@@ -125,7 +126,7 @@ $HTML->header(array('title'=>$Language->getText("calendar", "title"),'group'=>$g
 function make_task_link($task, $type) {
 	global $HTML, $Language, $group_id, $group_project_id;
 	return '<a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
-		. '" href="/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
+		. '" href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
 		. '&amp;group_id=' . $group_id
 		. '&amp;group_project_id=' .$group_project_id
 		. '">' . ($type == 'begin' ?

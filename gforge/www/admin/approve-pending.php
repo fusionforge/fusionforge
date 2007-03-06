@@ -27,6 +27,7 @@
 // Show no more pending projects per page than specified here
 $LIMIT = 50;
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/account.php');
 require_once('common/include/license.php');
@@ -62,6 +63,10 @@ function activate_group($group_id) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("group_approved", $hook_params) ;
+	
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('add_cal_group',$group_id);
 
 	return true;
 }
@@ -72,6 +77,9 @@ if ($action=='activate') {
 
 	$groups=explode(',', $list_of_groups);
 	array_walk($groups, 'activate_group');
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('add_cal_group',$group_id);
 
 } else if ($action=='delete') {
 	$group_id = getIntFromRequest('group_id');
@@ -79,7 +87,10 @@ if ($action=='activate') {
 	$add_to_can = getStringFromRequest('add_to_can');
 	$response_text = getStringFromRequest('response_text');
 	$response_title = getStringFromRequest('response_title');
-
+	//plugin webcalendar
+	//create webcal group
+	plugin_hook('del_cal_group',$group_id);
+	
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_error('Error','Could Not Get Group');
@@ -139,10 +150,10 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<h2><?php echo $row_grp['group_name']; ?></h2>
 
 	<p />
-	<h3><a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','edit_project_details'); ?></a></h3>
+	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','edit_project_details'); ?></a></h3>
 
 	<p />
-	<h3><a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','project_admin'); ?></a></h3>
+	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','project_admin'); ?></a></h3>
 
 	<p />
 	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','view_edit_project_members'); ?></a></h3>

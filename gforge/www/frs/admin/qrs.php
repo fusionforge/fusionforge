@@ -8,6 +8,7 @@
  * @version   $Id$
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');	
 require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
@@ -134,9 +135,9 @@ if (getStringFromRequest('submit')) {
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
-							array('<a href="/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
+							array('<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
 							'</strong></a>',
-							'<a href="/frs/?group_id='.$group_id.'">','</a>')) ?>
+							'<a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.$group_id.'">','</a>')) ?>
 						<?php
 						db_commit();
 						frs_admin_footer(array());
@@ -186,7 +187,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 ?>
 			&nbsp;&nbsp;
 			
-			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="/frs/admin/?group_id='.$group_id.'">','</a>')) ?>
+			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/?group_id='.$group_id.'">','</a>')) ?>
 		</td>
 	</tr>
 	<tr>
