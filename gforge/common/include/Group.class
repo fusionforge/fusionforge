@@ -304,7 +304,7 @@ class Group extends Error {
 			$this->setError($Language->getText('register','describe_registration'));
 			return false;
 		} else if (strlen($purpose)>1500) {
-			$this->setError($Language->getText('register','describe_registration'));
+			$this->setError($Language->getText('register','description_too_long'));
 			return false;
 		} else if (strlen($description)<10) {
 			$this->setError($Language->getText('register','comprehensive_description'));

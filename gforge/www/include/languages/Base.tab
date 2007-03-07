@@ -1746,6 +1746,7 @@ register	apply_for_registration	To apply for project registration, you should fi
 register	comprehensive_description	Describe in a more comprehensive manner your project.
 register	conflicting_licenses_choice	Conflicting licenses choice
 register	describe_registration	Please describe your Registration Purpose in a more comprehensive manner
+register	description_too_long	The Registration Purpose text is too long. Please make it smaller than 1500 bytes.
 register	i_agree	Submit
 register	i_disagree	Cancel
 register	invalid_full_name	Invalid full name
