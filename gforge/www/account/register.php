@@ -52,7 +52,12 @@ $fax = getStringFromRequest('fax');
 $title = getStringFromRequest('title');
 $ccode = getStringFromRequest('ccode');
 
-if (!$theme_id) {
+if ($sys_use_ssl && !session_issecure()) {
+	//force use of SSL for login
+	header('Location: https://'.$HTTP_HOST.$REQUEST_URI);
+}
+
+if (!$theme_id || !is_numeric($theme_id)) {
 	$theme_id=$HTML->getThemeIdFromName($sys_theme);
 }
 
@@ -84,10 +89,10 @@ $HTML->header(array('title'=>'User Account Registration'));
 if ($feedback) {
 	print "<p><span class=\"error\">$feedback $register_error</span>";
 } 
-if (!isset($timezone) || empty($timezone)) {
+if (!isset($timezone) || empty($timezone) || !eregi('^[-a-z0-9_/]*?$', $timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
 }
-if (!isset($ccode) || empty($ccode)) {
+if (!isset($ccode) || empty($ccode) || !eregi('^[a-z][a-z]$', $ccode)) {
 	$ccode = $sys_default_country_code;
 }
 ?>

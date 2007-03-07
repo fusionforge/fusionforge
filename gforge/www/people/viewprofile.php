@@ -23,7 +23,7 @@ $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
 
 $user_id = getStringFromRequest('user_id');
-if ($user_id) {
+if ($user_id && is_numeric($user_id)) {
 
 	/*
 		Fill in the info to create a job
