@@ -43,7 +43,7 @@ if ($group_id) {
 
 	echo people_show_project_jobs($group_id) . '</p>';
 
-} else if ($category_id) {
+ } else if ($category_id && is_numeric($category_id)) {
 
 	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people_cat','titlevals'=>array(people_get_category_name($category_id))));
 

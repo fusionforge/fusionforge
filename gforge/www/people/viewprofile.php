@@ -18,7 +18,7 @@ if (!$sys_use_people) {
 	exit_disabled();
 }
 
-if ($user_id) {
+if ($user_id && is_numeric($user_id)) {
 
 	/*
 		Fill in the info to create a job
