@@ -256,6 +256,8 @@ class ArtifactFactory extends Error {
 	 *	@return	array	The array of Artifact objects.
 	 */
 	function &getArtifacts() {
+		global $sys_database_type;
+
 		if (!empty($this->artifacts)) {
 			return $this->artifacts;
 		}
@@ -341,7 +343,12 @@ class ArtifactFactory extends Error {
 		//
 		//  now run the query using the criteria chosen above
 		//
-		$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str
+		if ($sys_database_type == "mysql") {
+			$sql="SELECT * FROM (SELECT DISTINCT artifact_vw.* FROM artifact_vw $ef_table_str ";
+		} else {
+			$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str ";
+		}
+		$sql.="
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
 			$opendatesql $moddatesql $closedatesql $submitted_by_str

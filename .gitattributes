@@ -1,6 +1,7 @@
 * text=auto !eol
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/include/TextSanitizer.class -text
+gforge/common/include/database-mysql.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
@@ -11,6 +12,8 @@ gforge/db/20050822-drops.sql -text
 gforge/db/20060216-drops.sql -text
 gforge/db/20060216-nocommit.sql -text
 gforge/db/FTI-20061025.sql -text
+gforge/db/gforge-data-mysql.sql -text
+gforge/db/gforge-struct-mysql.sql -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
 gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text
@@ -40,6 +43,7 @@ gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
 gforge/gforge-install.sh -text
 gforge/plugins/createplugin.sh -text
+gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2.tar.gz -text
@@ -613,6 +617,7 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
+gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text
 gforge/plugins/svntracker/README -text
@@ -624,6 +629,7 @@ gforge/plugins/svntracker/common/languages/Spanish.tab -text
 gforge/plugins/svntracker/common/svntracker-init.php -text
 gforge/plugins/svntracker/common/svntrackerPlugin.class -text
 gforge/plugins/svntracker/db/20051011.sql -text
+gforge/plugins/svntracker/db/svntracker-init-mysql.sql -text
 gforge/plugins/svntracker/db/svntracker-init.sql -text
 gforge/plugins/svntracker/etc/plugins/svntracker/config.php -text
 gforge/plugins/svntracker/httpd.conf -text
@@ -982,6 +988,7 @@ gforge/www/themes/osx/images/ic/msg.png -text
 gforge/www/themes/osx/images/ic/new.png -text
 gforge/www/themes/osx/images/ic/ofolder15.png -text
 gforge/www/themes/osx/images/ic/pencil.png -text
+gforge/www/themes/osx/images/ic/rss.png -text svneol=unset#image/png
 gforge/www/themes/osx/images/ic/save.png -text
 gforge/www/themes/osx/images/ic/survey16b.png -text
 gforge/www/themes/osx/images/ic/taskman20g.png -text

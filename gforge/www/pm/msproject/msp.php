@@ -32,18 +32,24 @@ return data:
 	$array[errormessage]='Bad Password';
  */
 function &MSPLogin($username,$password) {
-	global $feedback,$session_ser;
+	global $feedback,$session_ser,$sys_database_type;
 
 	$success=session_login_valid(strtolower($username),$password);
 	if ($success) {
 		$array['success']=true;
 		$array['session_hash']=$session_ser;
-		$res=db_query("SELECT pgl.group_project_id, g.group_name || ': ' || pgl.project_name AS name
+	    if ( $sys_database_type == "mysql" ) {
+			$sql="SELECT pgl.group_project_id, CONCAT(g.group_name, ': ', pgl.project_name) AS name";
+	    } else {
+			$sql="SELECT pgl.group_project_id, g.group_name || ': ' || pgl.project_name AS name";
+		}
+		$sql.="
 			FROM groups g, project_group_list pgl 
 			NATURAL JOIN project_perm pp
 			WHERE pp.user_id='".user_getid()."' 
 			AND g.group_id=pgl.group_id
-			AND pp.perm_level > 0");
+			AND pp.perm_level > 0";
+		$res=db_query($sql);
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
 			$array['success']=false;

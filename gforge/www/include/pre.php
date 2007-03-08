@@ -49,7 +49,7 @@ require_once('www/include/Layout.class');
 require_once('common/include/utils.php');
 
 //database abstraction
-require_once('common/include/database.php');
+require_once('common/include/database-'.$sys_database_type.'.php');
 
 //security library
 require_once('common/include/session.php');

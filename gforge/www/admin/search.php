@@ -62,7 +62,6 @@ function format_name($name, $status) {
 /*
 	Main code
 */
-
 if ($substr) {
 	$search = "%$search%";
 }
@@ -70,14 +69,23 @@ if ($substr) {
 
 if ($usersearch) {
 
-	$result = db_query("
-	    SELECT DISTINCT * 
-	    FROM users
-	    WHERE user_id ILIKE '$search'
-	    OR user_name ILIKE '%$search%'
-	    OR email ILIKE '%$search%'
-	    OR realname ILIKE '%$search%'
-	"); 
+	$sql = "
+		SELECT DISTINCT * 
+		FROM users";
+	if ( $sys_database_type == "mysql" ) {
+		$sql .= "
+		WHERE user_id LIKE '$search'
+		OR user_name LIKE '%$search%'
+		OR email LIKE '%$search%'
+		OR realname LIKE '%$search%'"; 
+	} else {
+		$sql .= "
+		WHERE user_id ILIKE '$search'
+		OR user_name ILIKE '%$search%'
+		OR email ILIKE '%$search%'
+		OR realname ILIKE '%$search%'"; 
+	}
+	$result = db_query($sql);
 
 	print '<p><strong>' .$Language->getText('admin_search','user_search_criteria').' "<em>'.$search.'</em>": '
 	      .db_numrows($result) .' '. $Language->getText('admin_search','matches').'</strong></p>';
@@ -131,14 +139,23 @@ if (getStringFromRequest('groupsearch')) {
 		$crit_desc .= " is_public=$is_public";
 	}
 
-	$result = db_query("
+	$sql = "
 		SELECT DISTINCT *
-		FROM groups
+		FROM groups";
+	if ( $sys_database_type == "mysql" ) {
+		$sql .= "
+		WHERE (group_id LIKE '%$search%'
+		OR unix_group_name LIKE '%$search%'
+		OR group_name LIKE '%$search%')
+		$crit_sql"; 
+	} else {
+		$sql .= "
 		WHERE (group_id ILIKE '%$search%'
 		OR unix_group_name ILIKE '%$search%'
 		OR group_name ILIKE '%$search%')
-		$crit_sql
-	"); 
+		$crit_sql"; 
+	}
+	$result = db_query($sql);
 
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";

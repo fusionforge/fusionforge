@@ -62,8 +62,13 @@ $err .= "\n\nBeginning stats_agg_logo_by_group ".date('Ymd H:i:s',time());
 $sql = "DELETE FROM stats_agg_logo_by_group WHERE month='$year$month' AND day='$day'";
 $rel = db_query($sql);
 $err .= db_error();
-$sql = "INSERT INTO stats_agg_logo_by_group 
-	SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) 
+$sql = "INSERT INTO stats_agg_logo_by_group ";
+if ($ys_database_type == "mysql") {
+	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,count(*) AS count";
+} else {
+	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) AS count";
+}
+$sql.="
 	FROM activity_log WHERE type=1 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);
 $err .= db_error();
@@ -77,8 +82,12 @@ $err .= "\n\nBeginning stats_agg_site_by_group ".date('Ymd H:i:s',time());
 $sql = "DELETE FROM stats_agg_site_by_group WHERE month='$year$month' AND day='$day'";
 $rel = db_query($sql);
 $err .= db_error();
-$sql = "INSERT INTO stats_agg_site_by_group 
-	SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,COUNT(*) 
+$sql = "INSERT INTO stats_agg_site_by_group ";
+if ($sys_database_type == "mysql") {
+	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,COUNT(*) AS count";
+} else {
+	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,COUNT(*) AS count";
+$sql .= "
 	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);
 $err .= db_error();
@@ -91,9 +100,14 @@ $err .= "\n\nBeginning stats_site_pages_by_day ".date('Ymd H:i:s',time());
 $sql = "DELETE FROM stats_site_pages_by_day WHERE month='$year$month' AND day='$day'";
 $rel = db_query($sql);
 $err .= db_error();
-$sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views)
-	SELECT '$year$month'::int AS month, '$day'::int AS newday, count(*) 
-	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday";
+$sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views) ";
+if ($sys_database_type == "mysql") {
+	$sql .= "SELECT '$year$month' AS month, '$day' AS newday, count(*) AS count";
+} else {
+	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday, count(*) AS count";
+}
+$sql .= "
+		FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday";
 $rel = db_query($sql);
 $err .= db_error();
 
@@ -104,10 +118,16 @@ $err .= db_error();
 $err .= "\n\nBeginning stats_project_developers ".date('Ymd H:i:s',time());
 $rel=db_query("DELETE FROM stats_project_developers WHERE month='$year$month' AND day='$day'");
 $err .= db_error();
-$res=db_query("INSERT INTO stats_project_developers (month,day,group_id,developers) 
-	SELECT '$year$month'::int AS month,'$day'::int AS day,group_id,count(*) 
-	FROM user_group 
-	GROUP BY month,day,group_id");
+$sql = "INSERT INTO stats_project_developers (month,day,group_id,developers) ";
+if ($sys_database_type == "mysql") {
+	$sql .= "SELECT '$year$month' AS month,'$day' AS day,group_id,count(*) AS count";
+} else {
+	$sql .= "SELECT '$year$month'::int AS month,'$day'::int AS day,group_id,count(*) AS count";
+}
+$sql .= "
+		FROM user_group 
+		GROUP BY month,day,group_id";
+$rel = db_query($sql);
 $err .= db_error();
 
 db_commit();

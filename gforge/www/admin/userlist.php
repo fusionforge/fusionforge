@@ -138,7 +138,12 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname");
+	    if ( $sys_database_type == "mysql" ) {
+			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name LIKE '".$user_name_search."%' OR lastname LIKE '".$user_name_search."%' ORDER BY lastname";
+		} else {
+			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname";
+		}
+		$result = db_query($sql);
 	} else {
 		$sortorder = $_GET['sortorder'];
 		if (!isset($sortorder) || empty($sortorder)) {

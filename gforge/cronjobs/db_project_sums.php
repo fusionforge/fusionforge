@@ -107,8 +107,13 @@ $res=db_query("DELETE FROM project_sums_agg;");
 /*
 	Get counts of mailing lists
 */
-$sql="INSERT INTO project_sums_agg 
-	SELECT group_id,'mail'::text AS type,count(*) AS count 
+$sql="INSERT INTO project_sums_agg ";
+if ( $sys_database_type == "mysql" ) {
+	$sql.="SELECT group_id,'mail' AS type,count(*) AS count ";
+} else {
+	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
+}
+$sql.="
 	FROM mail_group_list WHERE is_public != 9
 	GROUP BY group_id,type;";
 
@@ -119,8 +124,13 @@ $err .= db_error();
 /*
 	Get counts of surveys
 */
-$sql="INSERT INTO project_sums_agg 
-	SELECT group_id,'surv'::text AS type,count(*) AS count 
+$sql="INSERT INTO project_sums_agg ";
+if ( $sys_database_type == "mysql" ) {
+	$sql.="SELECT group_id,'surv' AS type,count(*) AS count ";
+} else {
+	$sql="SELECT group_id,'surv'::text AS type,count(*) AS count ";
+}
+$sql.="
 	FROM surveys
 	WHERE is_active='1'
 	GROUP BY group_id,type;";
@@ -132,8 +142,13 @@ $err .= db_error();
 /*
 	Forum message count
 */
-$sql="INSERT INTO project_sums_agg
-	SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count 
+$sql="INSERT INTO project_sums_agg ";
+if ( $sys_database_type == "mysql" ) {
+	$sql="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
+} else {
+	$sql="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
+}
+$sql.="
 	FROM forum,forum_group_list 
 	WHERE forum.group_forum_id=forum_group_list.group_forum_id 
 	AND forum_group_list.is_public=1
@@ -146,8 +161,14 @@ $err .= db_error();
 /*
 	Forum count
 */
-$sql="INSERT INTO project_sums_agg
-	SELECT group_id,'fora'::text AS type, count(*) AS count 
+	$sql="INSERT INTO project_sums_agg ";
+if ( $sys_database_type == "mysql" ) {
+$sql.="
+	SELECT group_id,'fora' AS type, count(*) AS count ";
+} else {
+	$sql.="SELECT group_id,'fora'::text AS type, count(*) AS count ";
+}
+$sql.="
 	FROM forum_group_list 
 	WHERE is_public=1
 	GROUP BY group_id,type;";

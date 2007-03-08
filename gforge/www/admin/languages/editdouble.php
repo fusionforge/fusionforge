@@ -32,7 +32,11 @@ $lang = getStringFromRequest('lang');
 $unit        = 'item';
 $table       = 'tmp_lang';
 $primary_key = 'seq';
-$whereclause = " WHERE language_id||pagename||category IN (SELECT language_id||pagename||category FROM (SELECT count(*) AS cnt,language_id,pagename,category  FROM tmp_lang WHERE pagename!='#' GROUP BY language_id,pagename,category) AS cntdouble where cnt>1 AND language_id='".$lang."') AND pagename!='' ORDER BY language_id,pagename,category,seq ";
+if ( $sys_database_type == "mysql" ) {
+	$whereclause = " WHERE concat(language_id,pagename,category) IN (SELECT concat(language_id,pagename,category) FROM (SELECT count(*) AS cnt,language_id,pagename,category  FROM tmp_lang WHERE pagename!='#' GROUP BY language_id,pagename,category) AS cntdouble where cnt>1 AND language_id='".$lang."') AND pagename!='' ORDER BY language_id,pagename,category,seq ";
+} else {
+	$whereclause = " WHERE language_id||pagename||category IN (SELECT language_id||pagename||category FROM (SELECT count(*) AS cnt,language_id,pagename,category  FROM tmp_lang WHERE pagename!='#' GROUP BY language_id,pagename,category) AS cntdouble where cnt>1 AND language_id='".$lang."') AND pagename!='' ORDER BY language_id,pagename,category,seq ";
+}
 $columns     = "seq, tmpid, pagename, category, tstring";
 $edit        = 'yes';
 

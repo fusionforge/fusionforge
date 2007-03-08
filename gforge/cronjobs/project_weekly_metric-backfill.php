@@ -53,8 +53,12 @@ if (!$rel) {
 }
 
 #forum messages
-$sql="INSERT INTO project_counts_weekly_tmp 
-SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count 
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)) AS count ";
+} else {
+	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count ";
+$sql.="
 FROM forum,forum_group_list 
 WHERE forum.group_forum_id=forum_group_list.group_forum_id 
 AND post_date > '$last_week' 
@@ -68,8 +72,13 @@ if (!$rel) {
 
 
 #project manager tasks
-$sql="INSERT INTO project_counts_weekly_tmp 
-SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)::float) AS count 
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)) AS count ";
+} else {
+	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)::float) AS count ";
+}
+$sql.="
 FROM project_task,project_group_list 
 WHERE project_task.group_project_id=project_group_list.group_project_id 
 AND end_date > '$last_week'
@@ -85,8 +94,13 @@ if (!$rel) {
 }
 
 #bugs
-$sql="INSERT INTO project_counts_weekly_tmp 
-SELECT agl.group_id,'bugs',log(3 * count(*)::float) AS count 
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)) AS count ";
+} else {
+	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)::float) AS count ";
+}
+$sql.="
 FROM artifact_group_list agl,artifact a
 WHERE a.open_date > '$last_week'
 AND a.open_date < '$this_week'
@@ -104,8 +118,13 @@ if (!$rel) {
 
 
 #patches
-$sql="INSERT INTO project_counts_weekly_tmp 
-SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count 
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)) AS count ";
+} else {
+	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
+}
+$sql.="
 FROM artifact_group_list agl,artifact a
 WHERE a.open_date > '$last_week'
 AND a.open_date < '$this_week'
@@ -123,8 +142,13 @@ if (!$rel) {
 
 
 #support
-$sql="INSERT INTO project_counts_weekly_tmp 
-SELECT agl.group_id,'support',log(5 * count(*)::float) AS count 
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT agl.group_id,'support',log(5 * count(*)) AS count ";
+} else {
+	$sql.="SELECT agl.group_id,'support',log(5 * count(*)::float) AS count ";
+}
+$sql.="
 FROM artifact_group_list agl,artifact a
 WHERE a.open_date > '$last_week'
 AND a.open_date < '$this_week'
@@ -142,8 +166,13 @@ if (!$rel) {
 
 
 #file releases
-$sql="INSERT INTO project_counts_weekly_tmp 
-select frs_package.group_id,'filereleases',log(5 * count(*)::float)
+$sql="INSERT INTO project_counts_weekly_tmp ";
+if ($sys_database_type == "mysql") {
+	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)) ";
+} else {
+	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)::float) ";
+}
+$sql.="
 FROM frs_release,frs_package
 WHERE 
 	frs_package.package_id = frs_release.package_id 
@@ -204,8 +233,13 @@ if (!$rel) {
 }
 
 
-$sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id)
-SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id
+$sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id) ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT ranking,100-(100*((ranking-1)/$counts)),group_id ";
+} else {
+	$sql.="SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id ";
+}
+$sql.="
 FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
 $rel = db_query($sql);
@@ -219,8 +253,12 @@ if (!$rel) {
 //
 db_query("DELETE FROM stats_project_metric WHERE month='$this_year$this_month' AND day='$this_day'");
 
-$sql="INSERT INTO stats_project_metric (month,day,group_id,ranking,percentile) 
-SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentile
+$sql="INSERT INTO stats_project_metric (month,day,group_id,ranking,percentile) ";
+if ($sys_database_type == "mysql") {
+	$sql.="SELECT '$this_year$this_month', '$this_day',group_id,ranking,percentile ";
+} else {
+	$sql.="SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentile ";
+}
 FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {

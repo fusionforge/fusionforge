@@ -299,28 +299,29 @@ class ForumMessage extends Error {
 			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
 			db_rollback();
 			return false;
-		} else {
-			$msg_id=db_insertid($result,'forum','msg_id');
-			if (!$this->fetchData($msg_id)) {
-				db_rollback();
-				return false;
-			}
-			if (!$msg_id) {
-				db_rollback();
-				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
-				return false;
-			} else {
-				if (!$this->sendNotice($has_attach)) {
-					db_rollback();
-					return false;
-				}
-//echo "Committing";
-				db_commit();
-//echo "db_error()".db_error();
-				$this->awaits_moderation = false;
-				return true;
-			}
 		}
+
+		$msg_id=db_insertid($result,'forum','msg_id');
+		if (!$this->fetchData($msg_id)) {
+			db_rollback();
+			return false;
+		}
+
+		if (!$msg_id) {
+			db_rollback();
+			$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+			return false;
+		}
+
+		if (!$this->sendNotice($has_attach)) {
+			db_rollback();
+			return false;
+		}
+//echo "Committing";
+		db_commit();
+//echo "db_error()".db_error();
+		$this->awaits_moderation = false;
+		return true;
 	}
 	
 	
