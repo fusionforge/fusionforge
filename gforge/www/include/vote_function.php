@@ -264,7 +264,7 @@ if (db_numrows($result) > 0) {
 	}
 
 	?>
-	<tr><td align="center" colspan="2">
+	<tr><td style="text-align:center" colspan="2">
 
 	<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
 	<br />

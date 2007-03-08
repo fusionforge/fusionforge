@@ -31,10 +31,10 @@ pm_header(array('title'=>$Language->getText('pm_deletetask','title'),'group_proj
 			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td align="center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('pm_deletetask','confirm'); ?></td>
+		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('pm_deletetask','confirm'); ?></td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
+		<td style="text-align:center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
 	</tr>
 
 </table>

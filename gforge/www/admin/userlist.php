@@ -93,15 +93,15 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'P') print "pending";
 		print "\"><a href=\"useredit.php?user_id=".$usr['user_id']."\">";
 		if ($usr['status'] == 'P') print "*";
-		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
+		echo $usr['firstname'].' '.$usr['lastname'].' ('.$usr['user_name'].')</a>';
 		echo '</td>';
-		echo '<td width="15%" align="center">';
+		echo '<td width="15%" style="text-align:center">';
 		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
 		echo '</td>';
-		echo '<td width="15%" align="center"><a href="/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
 		echo '</tr>';
 		$count ++;
 	}

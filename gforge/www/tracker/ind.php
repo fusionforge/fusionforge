@@ -47,9 +47,9 @@ if (!$at_arr || count($at_arr) < 1) {
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'
 			</td>
-			<td align="center">'. (int) $at_arr[$j]->getOpenCount() . '
+			<td style="text-align:center">'. (int) $at_arr[$j]->getOpenCount() . '
 			</td>
-			<td align="center">'. (int) $at_arr[$j]->getTotalCount() .'
+			<td style="text-align:center">'. (int) $at_arr[$j]->getTotalCount() .'
 			</td>
 		</tr>';
 		}

@@ -1669,7 +1669,7 @@ project_home	public_mailing_lists	public mailing lists
 project_home	release_notes	Release Notes
 project_home	surveys	surveys
 project_home	title	Project Info
-project_home	tracker_open	<strong>$1</strong> open /<strong>$2</strong> total
+project_home	tracker_open	<strong>$1</strong> open / <strong>$2</strong> total
 project_home	view_members	View Members
 project_home	view_project_files	View All Project Files
 project_memberlist	developer	Developer
@@ -1876,6 +1876,7 @@ reporting_pie	end	End
 reporting_rebuild	message	  <h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I'm Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>
 reporting_rebuild	pressonlyonce	Press ONLY ONCE
 reporting_rebuild	title	Main Page
+reporting_rebuild	imsure	I am sure
 reporting_ta	add_entry	Add Entry
 reporting_ta	add_entry_description	Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in.
 reporting_ta	cancel	Cancel

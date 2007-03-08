@@ -106,7 +106,7 @@ if ($usersearch) {
 				<td>'.$row['realname'].'</td>
 				<td>'.$row['email'].'</td>
 				<td>'.date($sys_datefmt, $row['add_date']).'</td>
-				<td align="center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
+				<td style="text-align:center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
 				</tr>
 			'; 
 		}
@@ -172,7 +172,7 @@ if (getStringFromRequest('groupsearch')) {
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>
 				<td>'.date($sys_datefmt, $row['register_time']).'</td>
-				<td align="center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
+				<td style="text-align:center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
 				</tr>
 			';
 					
