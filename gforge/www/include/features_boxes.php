@@ -11,7 +11,7 @@
 require_once('common/include/GForge.class');
 
 function show_features_boxes() {
-	GLOBAL $HTML,$Language;
+	GLOBAL $HTML,$Language,$sys_use_ratings;
 	
 	$return = '';
 	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS['sys_name']),0);

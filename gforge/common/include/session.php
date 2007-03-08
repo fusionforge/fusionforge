@@ -337,7 +337,7 @@ function session_require($req) {
 			exit_permission_denied();
 		}
 
-		if ($req['admin_flags']) {
+		if (@$req['admin_flags']) {
 			if (!$perm->isAdmin()) {
 				exit_permission_denied();
 			}

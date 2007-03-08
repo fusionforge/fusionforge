@@ -2,7 +2,7 @@
 /**
  * GForge Plugin FCKeditor Plugin Class
  *
- * Copyright 2005 (c) Daniel A. Pérez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
+ * Copyright 2005 (c) Daniel A. Pï¿½rez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
  *
  * This file is part of GForge-plugin-fckeditor
  *
@@ -67,7 +67,7 @@ class fckeditorPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			$group = &group_get_object($group_id);
-			if ( getStringFromRequest(use_fckeditorplugin) == 1 ) {
+			if ( getStringFromRequest('use_fckeditorplugin') == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
 				$group->setPluginUse ( $this->name, false );

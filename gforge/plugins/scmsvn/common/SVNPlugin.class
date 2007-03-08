@@ -78,7 +78,7 @@ class SVNPlugin extends SCM {
 	}
 
 	function getPage ($group_id) {
-		global $Language, $HTML ;
+		global $Language, $HTML, $sys_scm_snapshots_path;
 
 		$project =& group_get_object($group_id);
 		if (!$project || !is_object($project)) {

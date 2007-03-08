@@ -8,7 +8,7 @@
  * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
- * Daniel A. Pérez danielperez.arg@gmail.com
+ * Daniel A. Pï¿½rez danielperez.arg@gmail.com
  *
  * This file is part of GForge.
  *
@@ -184,6 +184,7 @@ function updateVars($vars,$filepath) {
 			$filedata = file_get_contents($filepath);
 			$vars = getVars($filedata); // get the vars from local.inc
 			$keys = array_keys($vars);
+			sort($keys);
 			$title_arr = array($Language->getText('configman','name'),$Language->getText('configman','on'),$Language->getText('configman','off'));
 			echo $HTML->listTableTop($title_arr);
 			$j = 0;
