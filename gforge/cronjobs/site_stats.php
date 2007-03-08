@@ -63,7 +63,7 @@ $sql = "DELETE FROM stats_agg_logo_by_group WHERE month='$year$month' AND day='$
 $rel = db_query($sql);
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_logo_by_group ";
-if ($ys_database_type == "mysql") {
+if ($sys_database_type == "mysql") {
 	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,count(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) AS count";
@@ -87,6 +87,7 @@ if ($sys_database_type == "mysql") {
 	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,COUNT(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,COUNT(*) AS count";
+}
 $sql .= "
 	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);

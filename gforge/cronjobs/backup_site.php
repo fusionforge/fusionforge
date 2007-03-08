@@ -51,9 +51,11 @@ if (!is_dir($sys_path_to_backup)) {
 		$subdir = trim($subdir);
 		if (empty($subdir)) continue;
 		$path .= '/'.$subdir;
-		if (!mkdir($path)) {
-			cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
-			exit;
+		if (!file_exists($path)) {
+			if (!mkdir($path)) {
+				cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
+				exit;
+			}
 		}
 	}
 }

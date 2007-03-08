@@ -61,7 +61,7 @@ if (!$rel) {
 
 #forum messages
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($ys_database_type == "mysql") {
+if ($sys_database_type == "mysql") {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)) AS count ";
 } else {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count ";
@@ -126,7 +126,7 @@ $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == "mysql") {
 	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)) AS count ";
 } else {
-	SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
+	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
 }
 $sql.="
 FROM artifact_group_list agl,artifact a
@@ -170,9 +170,10 @@ if (!$rel) {
 #cvs commits
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == "mysql") {
-	$sql.=SELECT group_id,'cvs',log(sum(commits)) AS count ";
+	$sql.="SELECT group_id,'cvs',log(sum(commits)) AS count ";
 } else {
-	$sql="SELECT group_id,'cvs',log(sum(commits)::float) AS count ";
+	$sql.="SELECT group_id,'cvs',log(sum(commits)::float) AS count ";
+}
 $sql.="
 FROM stats_cvs_group 
 WHERE ((month = '$last_year$last_month' AND day >= '$last_day') OR (month > '$last_year$last_month'))
@@ -196,6 +197,7 @@ if ($sys_database_type == "mysql") {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)) ";
 } else {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)::float) ";
+}
 $sql.="
 FROM frs_release,frs_package
 WHERE 
@@ -287,6 +289,7 @@ if ($sys_database_type == "mysql") {
 	$sql.="SELECT ranking,100-(100*((ranking-1)/$counts)),group_id ";
 } else {
 	$sql="SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id ";
+}
 $sql.="
 FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
@@ -306,6 +309,7 @@ if ($sys_database_type == "mysql") {
 	$sql.="SELECT '$this_year$this_month', '$this_day',group_id,ranking,percentile ";
 } else {
 	$sql.="SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentile ";
+}
 $sql.="
 	FROM project_weekly_metric";
 $rel = db_query($sql);

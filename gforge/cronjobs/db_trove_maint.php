@@ -147,7 +147,7 @@ function get_trove_sub_projects($cat_id) {
 	if ($count == '') { $count = 0 ; }
  
 	//number of children of this trove_cat
-	$rows=count( $parent_list[$cat_id] );
+	$rows=count( @$parent_list[$cat_id] );
 
 	for ($i=0; $i<$rows; $i++) {
 		$count += get_trove_sub_projects( $parent_list[$cat_id][$i] );
