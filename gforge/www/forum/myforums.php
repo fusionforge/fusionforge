@@ -76,7 +76,7 @@ $i = 0;
 
 
 $f = array();
-//CHECK : if we won´t ever be needing to store each forum/fmf, etc for each pass, don´t use an array and use the same variable like $fmf instead of $fmf[$i], etc
+//CHECK : if we wonï¿½t ever be needing to store each forum/fmf, etc for each pass, donï¿½t use an array and use the same variable like $fmf instead of $fmf[$i], etc
 for($i=0;$i<sizeof($monitored_forums);$i++) {
 	$g =& group_get_object($monitored_forums[$i]["group_id"]);
 	if (!$g || !is_object($g) || $g->isError()) {
@@ -122,12 +122,12 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		$j=0;
 		$newcontent = "<center>---</center>";
 		//this loops through every message AND followup, in search of new messages.
-		//anything that´s new ( new thread or followup) is considered to be a "new thing" and the forum 
+		//anything thatï¿½s new ( new thread or followup) is considered to be a "new thing" and the forum 
 		//is considered to have new contents
 		foreach ($msg_arr as $forum_msg_arr) {
 			foreach ($forum_msg_arr as $forum_msg) {
 				if ($f->getSavedDate() < $forum_msg->getPostDate()) {
-				//we´ve got ourselves a new message or followup for this forum. note that, exit the search
+				//weï¿½ve got ourselves a new message or followup for this forum. note that, exit the search
 				$newcontent = "<center>" . html_image("ic/new.png","25","11",array("border"=>"0")) . "</center>";
 				break;
 				}
@@ -140,7 +140,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			$msg =& $msg_arr["0"][$j];
 			$total_rows++;
 			if ($f->getSavedDate() < $msg->getPostDate()) {
-				//we´ve got ourselves a new message for this forum. note that, exit the search
+				//weï¿½ve got ourselves a new message for this forum. note that, exit the search
 				$newcontent = "<center>" . html_image("ic/new.png","25","11",array("border"=>"0")) . "</center>";
 				break;
 			}
@@ -155,8 +155,8 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			'&nbsp;' .
 			$f->getName() .'</a></td>
 			<td>'.$f->getDescription().'</td>
-			<td align="center">'.$f->getThreadCount().'</td>
-			<td align="center">'. $f->getMessageCount() .'</td>
+			<td style="text-align:center">'.$f->getThreadCount().'</td>
+			<td style="text-align:center">'. $f->getMessageCount() .'</td>
 			<td>'.  date($sys_datefmt,$f->getMostRecentDate()) .'</td>
 			<td>' . $newcontent . '</td></tr>';
 	}

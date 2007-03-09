@@ -46,7 +46,7 @@
 					<table style="FLOAT: right" cellspacing="0" cellpadding="0" width="150" border="1">
 						<tbody>
 							<tr>
-								<td align="center" colspan="3"><strong>Table title</strong></td>
+								<td style="text-align:center" colspan="3"><strong>Table title</strong></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>

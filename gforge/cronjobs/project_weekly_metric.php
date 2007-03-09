@@ -25,6 +25,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 $time = time();
 
 $last_week= ( $time - (86400 * 7) );  

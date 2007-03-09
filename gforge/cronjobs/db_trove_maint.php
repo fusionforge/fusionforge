@@ -25,6 +25,7 @@
 require ('squal_pre.php');	
 require ('common/include/cron_utils.php');
 
+$err='';
 
 /*
 //FIRST TIME THIS SCRIPT IS RUN - YOU MAY NEED TO RUN THIS QUERY FIRST

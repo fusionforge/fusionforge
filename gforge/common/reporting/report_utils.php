@@ -36,7 +36,9 @@ function report_header($title) {
 
 function report_footer() {
 	global $HTML;
-	echo html_feedback_bottom($GLOBALS['feedback']);
+	if (isset($GLOBALS['feedback'])) {
+		echo html_feedback_bottom($GLOBALS['feedback']);
+	}
 	echo $HTML->footer(array());
 }
 

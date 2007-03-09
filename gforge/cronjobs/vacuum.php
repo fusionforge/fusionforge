@@ -27,6 +27,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 //
 //	PG 7.1 and earlier
 //

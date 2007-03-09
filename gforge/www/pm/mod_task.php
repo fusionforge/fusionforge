@@ -192,7 +192,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 	</tr>
 
 	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" style="text-align:center">
 		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
 	</tr>
@@ -221,15 +221,15 @@ echo $HTML->listTableTop ($title_arr);
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
 	<input type="hidden" name="submit" value="1" />
 	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-		<td align="middle">'. report_weeks_box($report, 'week') .'</td>
-		<td align="middle">'. report_day_adjust_box($report, 'days_adjust') .'</td>
-		<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
-		<td align="middle">'.report_time_category_box('time_code',false).'</td>
+		<td style="text-align:middle">'. report_weeks_box($report, 'week') .'</td>
+		<td style="text-align:middle">'. report_day_adjust_box($report, 'days_adjust') .'</td>
+		<td style="text-align:middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
+		<td style="text-align:middle">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
-		<td align="middle"><input type="submit" name="add" value="'.$Language->getText('general','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('general','cancel').'" /></td>
+		<td style="text-align:middle"><input type="submit" name="add" value="'.$Language->getText('general','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('general','cancel').'" /></td>
 	</tr></form>';
 	
-//setenv("TZ=" . $user_timezone); //restore the user´s timezone
+//setenv("TZ=" . $user_timezone); //restore the userï¿½s timezone
 	
 //
 //	Display Time Recorded for this task

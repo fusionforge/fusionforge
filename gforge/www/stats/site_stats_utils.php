@@ -152,7 +152,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print html_build_select_box_from_arrays ( $orderby_vals, $orderby_vals, "orderby", $orderby, false );
 	print '</td></tr>';
 
-	print '<tr><td colspan="2" align="center"> <input type="submit" value="'.$Language->getText('stats_site_utils','generate_report').'" /> </td></tr>';
+	print '<tr><td colspan="2" style="text-align:center"> <input type="submit" value="'.$Language->getText('stats_site_utils','generate_report').'" /> </td></tr>';
 
 	print '</table>' . "\n";
 	print '</form>' . "\n";

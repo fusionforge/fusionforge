@@ -188,7 +188,8 @@ class DocumentFactory extends Error {
 		
 		if (count($return) == 0) {
 			$this->setError($Language->getText('docman_common','no_docs'));
-			return false;
+			$return = NULL;
+			return $return;
 		}
 
 		return $return;

@@ -127,7 +127,7 @@ if (getStringFromRequest('update')) {
 				}
 			}
 			if (getStringFromRequest('init')) {
-				// now we�re going to check if there�s a XX-init.sql file and run it
+				// now we're going to check if there's a XX-init.sql file and run it
 				if (is_file($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql')) {
 					$arch = file_get_contents($sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql');
 					$arch = preg_replace('/(INSERT INTO plugins.*$)/','',$arch); // remove the line that inserts into plugins table, we are already doing that (and this would return error otherwise)
@@ -142,7 +142,6 @@ if (getStringFromRequest('update')) {
 			}
 		}
 	}
-
 }
 
 echo $feedback.'<br>';
@@ -158,70 +157,79 @@ echo $HTML->listTableTop($title_arr);
 //get the directories from the plugins dir
 
 $handle = opendir($sys_plugins_path);
+$filelist = array();
+while (($filename = readdir($handle)) !== false) {
+	if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
+		is_dir($sys_plugins_path.'/'.$filename)) {
+
+		$filelist[] = $filename;
+	}
+}
+closedir($handle);
+
+sort($filelist);
+
 $j = 0;
 
-while ($filename = readdir($handle)) {
+foreach ($filelist as $filename) {
 	//Don't add special directories '..' or '.' to the list
 	$status=0; 
-	if (($filename!='..') && ($filename!='.') && ($filename!="CVS") && is_dir($sys_plugins_path.'/'.$filename)) {
-		//check if the plugin is in the plugins table
-		$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
+	//check if the plugin is in the plugins table
+	$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
+	$res = db_query($sql);
+	if (!$res) {
+		exit_error("SQL ERROR",db_error());
+	}
+	if (db_numrows($res)!=0) {
+		$msg = $Language->getText('pluginman','active');
+		$status="active";
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
+		$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
 		$res = db_query($sql);
-		if (!$res) {
-			exit_error("SQL ERROR",db_error());
-		}
-		if (db_numrows($res)!=0) {
-			$msg = $Language->getText('pluginman','active');
-			$status="active";
-			
-			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
-			$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
-			$res = db_query($sql);
-			if (db_numrows($res)>0) {
-				// tell the form to delete the users, so that we don�t re-do the query
-				$link .= "&delusers=1";
-				$users = " ";
-				for($i=0;$i<db_numrows($res);$i++) {
-					$users .= db_result($res,$i,0) . " | ";
-				}
-				$users = substr($users,0,strlen($users) - 3); //remove the last |
-			} else {
-				$users = "none";
+		if (db_numrows($res)>0) {
+			// tell the form to delete the users, so that we don�t re-do the query
+			$link .= "&delusers=1";
+			$users = " ";
+			for ($i=0;$i<db_numrows($res);$i++) {
+				$users .= db_result($res,$i,0) . " | ";
 			}
-			$sql = "SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = '$filename' and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id";
-			$res = db_query($sql);
-			if (db_numrows($res)>0) {
-				// tell the form to delete the groups, so that we don�t re-do the query
-				$link .= "&delgroups=1";
-				$groups = " ";
-				for($i=0;$i<db_numrows($res);$i++) {
-					$groups .= db_result($res,$i,0) . " | ";
-				}
-				$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
-			} else {
-				$groups = "none";
-			}
-			$link .= "','$j');" . '">' . $Language->getText('pluginman','deactivate') . "</a>";
-			$init = '<input id="'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'">';
+			$users = substr($users,0,strlen($users) - 3); //remove the last |
 		} else {
-			$msg = $Language->getText('pluginman','inactive');
-			$status = "inactive";
-			$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate','$j');" . '">' . $Language->getText('pluginman','activate') . "</a>";
-			$init = '<input id="'.$j.'" type="checkbox" name="script[]" value="'.$filename.'">';
 			$users = "none";
+		}
+		$sql = "SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = '$filename' and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id";
+		$res = db_query($sql);
+		if (db_numrows($res)>0) {
+			// tell the form to delete the groups, so that we don�t re-do the query
+			$link .= "&delgroups=1";
+			$groups = " ";
+			for ($i=0;$i<db_numrows($res);$i++) {
+				$groups .= db_result($res,$i,0) . " | ";
+			}
+			$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
+		} else {
 			$groups = "none";
 		}
-
-		echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
-		 	'<td>'. $filename.'</td>'.
-		 	'<td span class="'.$status.'">'. $msg .'</span></td>'.
-		 	'<td><div align="center">'. $link .'</div></td>'.
-		 	'<td><div align="center">'. $init .'</div></td>'.
-		 	'<td><div align="left">'. $users .'</div></td>'.
-		 	'<td><div align="left">'. $groups .'</div></td></tr>';
-
-		$j++;
+		$link .= "','$j');" . '">' . $Language->getText('pluginman','deactivate') . "</a>";
+		$init = '<input id="'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'">';
+	} else {
+		$msg = $Language->getText('pluginman','inactive');
+		$status = "inactive";
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate','$j');" . '">' . $Language->getText('pluginman','activate') . "</a>";
+		$init = '<input id="'.$j.'" type="checkbox" name="script[]" value="'.$filename.'">';
+		$users = "none";
+		$groups = "none";
 	}
+
+	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+		'<td>'. $filename.'</td>'.
+		'<td span class="'.$status.'" style="text-align:left">'. $msg .'</span></td>'.
+		'<td><div align="center">'. $link .'</div></td>'.
+		'<td><div align="center">'. $init .'</div></td>'.
+		'<td><div align="left">'. $users .'</div></td>'.
+		'<td><div align="left">'. $groups .'</div></td></tr>';
+
+	$j++;
 }
 
 echo $HTML->listTableBottom();
