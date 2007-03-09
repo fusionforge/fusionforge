@@ -152,7 +152,7 @@ function show_add_snippet_box() {
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
 
-	<tr><td colspan="2" align="center">
+	<tr><td colspan="2" style="text-align:center">
 		<strong><?php echo $Language->getText('snippet_package','make_sure_all_info'); ?></strong>
 		<br />
 		<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_package','submit'); ?>" />

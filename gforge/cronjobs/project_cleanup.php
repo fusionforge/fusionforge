@@ -25,6 +25,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 db_begin();
 
 

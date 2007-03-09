@@ -25,6 +25,8 @@
 
 class CCasePlugin extends SCM {
 	function CCasePlugin () {
+		global $sys_etc_path;
+
 		$this->SCM () ;
 		$this->name = "scmccase";
 		$this->text = 'CCASE';
@@ -32,10 +34,9 @@ class CCasePlugin extends SCM {
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
-		$this->hooks[] = "group_approved";
 		$this->hooks[] = "scm_plugin";
 
-                require_once('plugins/scmccase/config.php') ;
+		require_once($sys_etc_path.'/plugins/scmccase/config.php') ;
 		
 		$this->default_ccase_server = $default_ccase_server ;
 		$this->this_server = $this_server ;
@@ -61,9 +62,6 @@ class CCasePlugin extends SCM {
 			break ;
 		case "scm_stats":
 			$this->display_stats ($params) ;
-			break;
-		case "group_approved":
-			$this->group_approved ($params) ;
 			break;
 		case "scm_plugin":
 			$scm_plugins=& $params['scm_plugins'];
@@ -151,18 +149,6 @@ if ($project->enableAnonCVS() || !$anonymous) {
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
 
-		if ($params['scmradio'] == 'scmccase') {
-			$group->setPluginUse("scmccase", 1) ;
-			
-		} else {
-			$group->setPluginUse("scmccase", 0) ;
-		}
-// 		if ($params['scmccase_use_ccase']) {
-// 			$group->setPluginUse("scmccase", 1) ;
-			
-// 		} else {
-// 			$group->setPluginUse("scmccase", 0) ;
-// 		}
 		if ($params['scmccase_ccase_server'] && $params['scmccase_ccase_server'] != "") {
 			$this->SetGroupServer ($params['group_id'], $params['scmccase_ccase_server']) ;
 		} else {
@@ -172,12 +158,13 @@ if ($project->enableAnonCVS() || !$anonymous) {
 
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
+
+		if ( $group->usesPlugin ( $this->name ) ) {
 ?>
-<!-- <input type="checkbox" name="scmccase_use_ccase" value="1" <?php if ($group->usesPlugin("scmccase")) {print '"checked"';} ?>> <strong>Use Clear Case</strong><br> -->
-<input type="radio" name="scmradio" value="scmccase" <?php if ($group->usesPlugin("scmccase")) {print '"checked"';} ?>> <strong>Use Clear Case</strong><br>
-<input type="text" name="scmccase_ccase_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>Clear Case server</strong><br><br>
+			<input type="text" name="scmccase_ccase_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>Clear Case server</strong><br /><br />
 <?php
-														      }
+		}
+	}
 
 	function display_stats ($params) {
 		global $Language ;
@@ -198,17 +185,6 @@ if ($project->enableAnonCVS() || !$anonymous) {
 		
 	}
 	
-        function group_approved ($params) {
-                $group_id = $params['group_id'] ;
-
-                $project =& group_get_object($group_id);
-
-                if ($this->enabled_by_default) {
-                        $group->setPluginUse("scmccase", 1) ;
-                } else {
-                        $group->setPluginUse("scmccase", 0) ;
-                }
-        }
 
 	function GetDefaultServer () {
 		return $this->default_ccase_server ;

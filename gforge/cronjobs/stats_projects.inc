@@ -28,6 +28,7 @@
 //
 
 function project_stats_day($year,$month,$day) {
+	global $sys_database_type;
 
 	db_begin();
 
@@ -38,13 +39,22 @@ function project_stats_day($year,$month,$day) {
 
 	db_query("DELETE FROM stats_project WHERE month='$year$month' AND day='$day'");
 
-$sql="INSERT INTO stats_project
+$sql="INSERT INTO stats_project ";
+	if ($sys_database_type == "mysql") {
 
+		$sql.="
+SELECT 
+'$year$month' AS month,
+'$day' AS day,
+mess.* FROM (";
+	} else {
+		$sql="
 SELECT 
 '$year$month'::int AS month,
 '$day'::int AS day,
-* FROM (
-
+* FROM (";
+	}
+	$sql .= "
 SELECT 
 	groups.group_id,
 	r.count AS release_count,
@@ -69,11 +79,11 @@ FROM groups
 --
 LEFT JOIN (
 	SELECT group_id,COUNT(release_id) AS count
-    FROM frs_release,frs_package
-    WHERE 
+	FROM frs_release,frs_package
+	WHERE 
 		frs_release.release_date > '$day_begin' 
 		AND frs_release.release_date < '$day_end' 
-        AND frs_release.package_id = frs_package.package_id
+		AND frs_release.package_id = frs_package.package_id
 	GROUP BY group_id 
 	) r USING (group_id)
 
@@ -82,10 +92,10 @@ LEFT JOIN (
 --
 LEFT JOIN ( 
 	SELECT forum_group_list.group_id,COUNT(forum.msg_id) AS count
-    FROM forum_group_list, forum
-    WHERE 
+	FROM forum_group_list, forum
+	WHERE 
 		forum_group_list.group_forum_id = forum.group_forum_id 
-        AND forum.post_date > '$day_begin' 
+		AND forum.post_date > '$day_begin' 
 		AND forum.post_date < '$day_end' 
 	GROUP BY forum_group_list.group_id
 	) fmcount USING (group_id)
@@ -95,12 +105,12 @@ LEFT JOIN (
 --
 LEFT JOIN ( 
 	SELECT forum_group_list.group_id,COUNT( DISTINCT(forum.posted_by) ) AS count
-    FROM forum_group_list, forum
-    WHERE 
+	FROM forum_group_list, forum
+	WHERE 
 		forum_group_list.group_forum_id = forum.group_forum_id 
-        AND forum.post_date > '$day_begin' 
+		AND forum.post_date > '$day_begin' 
 		AND forum.post_date < '$day_end'
-    GROUP BY group_id
+	GROUP BY group_id
 	) fucount USING (group_id)
 
 --
@@ -244,11 +254,11 @@ LEFT JOIN (
 --
 LEFT JOIN (
 	SELECT group_id,COUNT(job_id) AS count
-    FROM people_job
-    WHERE 
+	FROM people_job
+	WHERE 
 		post_date > '$day_begin' 
 		AND post_date < '$day_end'
-    GROUP BY group_id
+	GROUP BY group_id
 	) helpr USING (group_id)
 
 ) mess

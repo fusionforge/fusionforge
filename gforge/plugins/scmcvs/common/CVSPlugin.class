@@ -12,7 +12,6 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = 'scm_stats';
 
 		$this->hooks[] = 'scm_plugin';
-//		$this->hooks[] = 'group_approved';
 
 		require_once('plugins/scmcvs/config.php') ;
 
@@ -50,9 +49,6 @@ class CVSPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
-// 		case "group_approved":
-// 			$this->groupApproved ($params) ;
-// 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -257,20 +253,6 @@ class CVSPlugin extends SCM {
 			echo '<hr size="1" />';
 		}
 	}
-
-/*
-	function groupApproved ($params) {
-		$group_id = $params['group_id'] ;
-	
-		$project =& group_get_object($group_id);
-
-		if ($this->enabled_by_default) {
-			$group->setPluginUse("scmcvs", 1) ;
-		} else {
-			$group->setPluginUse("scmcvs", 0) ;
-		}
-	}
-*/
 }
 
 // Local Variables:

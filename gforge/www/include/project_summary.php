@@ -41,7 +41,7 @@ function project_getaggvalue($group_id,$type) {
 	if (!$project_agg_arr_is_set) {
 		project_setup_agg($group_id);
 	}
-	if ($project_agg_arr[$type]) {
+	if (@$project_agg_arr[$type]) {
 		return "$project_agg_arr[$type]";
 	} else {
 		return '0';
@@ -138,13 +138,13 @@ function project_summary($group_id,$mode,$no_table) {
 				$return .= '<p>
 				&nbsp;-&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 				'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-				( <strong>'. db_result($result, $j, 'open_count') .' '.$Language->getText('general','open').'  / '. db_result($result, $j, 'count') . $Language->getText('general','total').' </strong> )<br />'.
+				( <strong>'. db_result($result, $j, 'open_count') .' '.$Language->getText('general','open').' / '. db_result($result, $j, 'count') . $Language->getText('general','total').' </strong> )<br />'.
 				db_result($result, $j, 'description') . '</p>';
 			}   
 		}
 	}
 
-	// ##################### Doc Manager
+	// ##################### Forums
 
 	if ($project->usesForum()) {
 		$return .= '

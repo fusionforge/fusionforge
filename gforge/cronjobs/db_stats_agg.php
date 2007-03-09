@@ -27,6 +27,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 $year=date('Y');
 $day=date('d');
 $month=date('m');
@@ -41,11 +43,14 @@ $err .= "\n\nBeginning stats_project_months: ".date('Y-m-d H:i:s',time());
 $rel = db_query("DELETE FROM stats_project_months;", -1, 0, SYS_DB_STATS);
 $err .= db_error(SYS_DB_STATS);
 
-$rel=db_query("INSERT INTO stats_project_months
-SELECT month,
-	group_id,
-	avg(developers)::int AS developers,
-	avg(group_ranking)::int AS group_ranking,
+$sql="INSERT INTO stats_project_months
+	SELECT month, group_id, ";
+if ( $sys_database_type == "mysql" ) {
+	$sql.="avg(developers) AS developers, avg(group_ranking) AS group_ranking, ";
+} else {
+	$sql.="avg(developers)::int AS developers, avg(group_ranking)::int AS group_ranking, ";
+}
+$sql.="
 	avg(group_metric) AS group_metric,
 	sum(logo_showings) AS logo_showings,
 	sum(downloads) AS downloads,
@@ -71,7 +76,8 @@ SELECT month,
 	sum(cvs_adds) AS cvs_adds
 FROM stats_project_vw
 GROUP BY month,group_id
-", -1, 0, SYS_DB_STATS);
+";
+$rel=db_query($sql, -1, 0, SYS_DB_STATS);
 $err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);

@@ -2,10 +2,10 @@
 
 require_once('www/include/Layout.class');
 
-define(THEME_DIR, $GLOBALS['sys_urlprefix'].'/themes/gforge');
+define('THEME_DIR', $GLOBALS['sys_urlprefix'].'/themes/gforge');
 
-define(TOP_TAB_HEIGHT, 30);
-define(BOTTOM_TAB_HEIGHT, 22);
+define('TOP_TAB_HEIGHT', 30);
+define('BOTTOM_TAB_HEIGHT', 22);
 
 class Theme extends Layout {
 
@@ -272,7 +272,7 @@ if ($sys_show_source) {
 
         <table cellspacing="0" cellpadding="0" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
         <tr align="center">
-            <td valign="top" align="right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
+            <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
             <td width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
             <td valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
         </tr>
@@ -344,7 +344,7 @@ if ($sys_show_source) {
         $return = '
         <table cellspacing="0" cellpadding="0" width="100%" border="0">
         <tr align="center">
-    <!--        <td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
+    <!--        <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
             <td background="'.$this->imgroot.'box-grad.png">
         <table width="100%" border="0" cellspacing="1" cellpadding="2">
             <tr>';
@@ -353,13 +353,13 @@ if ($sys_show_source) {
         if ($links_arr) {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td align="center"><a class="sortbutton" href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'"><span style="color:'.
+                <td style="text-align:center"><a class="sortbutton" href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
             }
         } else {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td align="center"><span style="color:'.
+                <td style="text-align:center"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></td>';
             }
         }
@@ -368,7 +368,7 @@ if ($sys_show_source) {
 
     function listTableBottom() {
         return '</table></td>
-            <!-- <td valign="top" align="right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
+            <!-- <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
             </tr></table>';
     }
 
@@ -504,6 +504,12 @@ if ($sys_show_source) {
         $TABS_TITLES[]=$Language->getText('group','short_homepage');
         */
 
+	// Project Activity tab 
+
+	$TABS_DIRS[]='/activity/?group_id='. $group;
+	$TABS_TITLES[]=$Language->getText('group','short_activity');
+	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
+
         // Forums
         if ($project->usesForum()) {
             $TABS_DIRS[]='/forum/?group_id='.$group;
@@ -627,7 +633,7 @@ if ($sys_show_source) {
       			<img src="%s" height="%d" width="5" alt="" />
                 	</td>', $middle_img, $clear_img, $tab_height );
                 $return .= sprintf(
-                    '<td background="%s" width="'.$width.'%%" align="center">
+                    '<td background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
     		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
     
@@ -648,7 +654,7 @@ if ($sys_show_source) {
                 	</td>', $left_img, $clear_img, $tab_height );
                     
                 $return .= sprintf(
-                    '<td background="%s" width="'.$width.'%%" align="center">
+                    '<td background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
     		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
     
@@ -836,7 +842,7 @@ if ($sys_show_source) {
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
                             <tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
                                 <td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
-                                <td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
+                                <td style="text-align:right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
                             </tr>
                             <tr height="20">
                                 <td colspan="3">&nbsp;</td>
@@ -866,7 +872,7 @@ if ($sys_show_source) {
                                 <td cellspacing="0">
                                     <a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
             .'    </td>
-                                <td align="right">'
+                                <td style="text-align:right">'
             .$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
                                 </td>
                             </tr>

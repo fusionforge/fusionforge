@@ -90,7 +90,8 @@ class ForumFactory extends Error {
 	 *	@return	array	The array of Forum objects.
 	 */
 	function &getForums() {
-		global $Language;
+		global $Language, $sys_database_type;
+
 		if ($this->forums) {
 			return $this->forums;
 		}
@@ -113,8 +114,20 @@ class ForumFactory extends Error {
 			$public_flag='=1';
 		}
 
-		$sql="SELECT *
-			FROM forum_group_list_vw
+		if ($sys_database_type == "mysql") {
+			$sql="SELECT fgl.*,
+					(SELECT count(*) AS `count`
+						FROM (
+							SELECT DISTINCT group_forum_id, thread_id FROM forum
+						) AS tmp
+						WHERE tmp.group_forum_id = fgl.group_forum_id
+					) AS threads 
+				FROM forum_group_list_vw AS fgl";
+		} else {
+			$sql="SELECT *
+				FROM forum_group_list_vw";
+		}
+		$sql .= "
 			WHERE group_id='". $this->Group->getID() ."' 
 			AND is_public $public_flag 
 			$exists

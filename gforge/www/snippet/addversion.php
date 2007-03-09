@@ -92,7 +92,7 @@ if (session_loggedin()) {
 			<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
 		</td></tr>
  
-		<tr><td colspan="2" align="center">
+		<tr><td colspan="2" style="text-align:center">
 			<strong><?php echo $Language->getText('snippet_addversion','make_sure_all_info_is_complete'); ?></strong>
 			<br />
 			<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_addversion','submit'); ?>" />
@@ -212,7 +212,7 @@ function show_add_snippet_box() {
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2" align="center">
+		<tr><td colspan="2" style="text-align:center">
 			<strong><?php echo $Language->getText('snippet_addversion','make_sure_all_info_is_complete'); ?></strong>
 			<br />
 			<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_addversion','submit'); ?>" />

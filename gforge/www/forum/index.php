@@ -82,10 +82,10 @@ if ($group_id) {
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>
 				<td>'.$farr[$j]->getDescription().'</td>
-				<td align="center">'.$farr[$j]->getThreadCount().'</td>
-				<td align="center">'. $farr[$j]->getMessageCount() .'</td>
+				<td style="text-align:center">'.$farr[$j]->getThreadCount().'</td>
+				<td style="text-align:center">'. $farr[$j]->getMessageCount() .'</td>
 				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td>
-				<td align="center">'. $modlvl  .'</td></tr>';
+				<td style="text-align:center">'. $modlvl  .'</td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();

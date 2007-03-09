@@ -228,8 +228,8 @@ if ($group_id) {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="60%">'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td width="20%" align="center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'.$Language->getText('mail_admin', 'update_list').'</a></td>'.
-					'<td width="20%" align="center">';
+					'<td width="20%" style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'.$Language->getText('mail_admin', 'update_list').'</a></td>'.
+					'<td width="20%" style="text-align:center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo $Language->getText('mail_common', 'list_not_activated');
 					} else {

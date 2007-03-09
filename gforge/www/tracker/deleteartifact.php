@@ -27,10 +27,10 @@ $ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').':
 			<h3>&quot;<?php echo $ah->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td align="center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('tracker_artifact','confirm_delete'); ?></td>
+		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('tracker_artifact','confirm_delete'); ?></td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
+		<td style="text-align:center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
 	</tr>
 
 </table>

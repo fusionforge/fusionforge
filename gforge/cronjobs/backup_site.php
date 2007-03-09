@@ -22,7 +22,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('local.inc');
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
@@ -52,9 +51,11 @@ if (!is_dir($sys_path_to_backup)) {
 		$subdir = trim($subdir);
 		if (empty($subdir)) continue;
 		$path .= '/'.$subdir;
-		if (!mkdir($path)) {
-			cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
-			exit;
+		if (!file_exists($path)) {
+			if (!mkdir($path)) {
+				cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
+				exit;
+			}
 		}
 	}
 }
@@ -158,13 +159,13 @@ if (file_exists($svndir_prefix)) {
  * Backup config files
  **************************************/ 
 $output="";
-if (file_exists('/etc/gforge')) {
-	@exec('tar -jcvf '.$sys_path_to_backup.'etc-tmp-'.$datetime.'.tar.bz2 /etc/gforge 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
+if (file_exists($sys_etc_path)) {
+	@exec('tar -jcvf '.$sys_path_to_backup.'etc-tmp-'.$datetime.'.tar.bz2 '.$sys_etc_path.' 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
 } else {
-	$err.= 'Unable to find /etc/gforge dir.';
+	$err.= 'Unable to find '.$sys_etc_path.' dir.';
 }
 
 

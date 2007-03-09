@@ -65,6 +65,7 @@ ON user_metric_history(month,day,user_id);
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
 $threshhold='1.6';
 
 db_begin();
@@ -72,8 +73,10 @@ db_begin();
 db_query("DELETE FROM user_metric0");
 $err .= db_error();
 
-db_query("select setval('user_metric0_pk_seq',1)");
-$err .= db_error();
+if ( $sys_database_type != "mysql" ) {
+	db_query("select setval('user_metric0_pk_seq',1)");
+	$err .= db_error();
+}
 
 db_query("INSERT INTO user_metric0 
 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
@@ -87,13 +90,26 @@ $err .= db_error();
 
 db_query("UPDATE user_metric0 SET ranking=ranking-1");
 
-db_query("UPDATE user_metric0 SET
-metric=(log(times_ranked::float)*avg_rating::float)::float,
-percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;");
+if ( $sys_database_type == "mysql" ) {
+	$sql="UPDATE user_metric0 SET
+	metric=(log(times_ranked)*avg_rating),
+	percentile=(100-(100*((ranking-1.0)/(select count(*) from user_metric0))));";
+} else {
+	$sql="UPDATE user_metric0 SET
+	metric=(log(times_ranked::float)*avg_rating::float)::float,
+	percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;";
+}
+
+db_query($sql);
 $err .= db_error();
 
-db_query("UPDATE user_metric0 SET
-importance_factor=(1+((percentile::float/100)*.5))::float;");
+if ( $sys_database_type == "mysql" ) {
+	$sql="UPDATE user_metric0 SET importance_factor=(1+((percentile/100.0)*.5));";
+} else {
+	$sql="UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float;";
+}
+
+db_query($sql);
 $err .= db_error();
 
 for ($i=1; $i<9; $i++) {
@@ -251,8 +267,13 @@ for ($i=1; $i<9; $i++) {
 	    /*
 	    	Update with final percentile and importance
 	    */
-	    $sql="UPDATE user_metric$i SET
-		percentile=(100-(100*((ranking::float-1)/". db_result($res,0,0) .")))";
+		if ( $sys_database_type == "mysql" ) {
+			$sql="UPDATE user_metric$i SET
+			percentile=(100-(100*((ranking-1.0)/". db_result($res,0,0) .")))";
+		} else {
+			$sql="UPDATE user_metric$i SET
+			percentile=(100-(100*((ranking::float-1)/". db_result($res,0,0) .")))";
+		}
 	    $res=db_query($sql);
 	    if (!$res || db_affected_rows($res) < 1) {
 		$err .= "Error in round $i setting percentile: ";

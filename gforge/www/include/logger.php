@@ -44,7 +44,7 @@ if (isset($group_id) && $group_id) {
 		
 		// store subpage id for analyzing later
 		$subpage = $expl_pathinfo[3];
-		$subpage2 = $expl_pathinfo[4];
+		$subpage2 = @$expl_pathinfo[4];
 
 		//set up the group_id
 	   	$group_id=db_result($res_grp,0,'group_id');

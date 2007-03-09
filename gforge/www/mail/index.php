@@ -73,13 +73,13 @@ if ($group_id) {
 			echo '<td width="33%">'.
 				'<strong>'.$currentList->getName().'</strong></td>'.
 				'<td width="33%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" align="center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
+				'<td width="33%" style="text-align:center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
 		} else {
 			echo '<td width="33%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
 				$Language->getText('mail', 'archives', array($currentList->getName())).'</a></strong></td>'.
 				'<td>'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
+				'<td width="33%" style="text-align:center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
 				'</td>';
 		}
 		echo '</tr>';

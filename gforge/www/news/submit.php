@@ -117,8 +117,8 @@ if (session_loggedin()) {
 		$params['height'] = "300";
 		$params['group'] = $group_id;
 		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+		if (!isset($GLOBALS['editor_was_set_up'])) {
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);

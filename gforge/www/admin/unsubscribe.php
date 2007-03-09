@@ -106,13 +106,23 @@ Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>" />
 
 $pattern = getStringFromRequest('pattern');
 if ($pattern) {
-	$res = db_query("
+	$sql = "
 		SELECT *
-		FROM users
+		FROM users";
+	if ( $sys_database_type == "mysql" ) {
+		$sql .= "
+		WHERE user_name LIKE '%$pattern%'
+		OR realname LIKE '%$pattern%'
+		OR email LIKE '%$pattern%'
+		";
+	} else {
+		$sql .= "
 		WHERE user_name LIKE '%$pattern%'
 		OR realname ILIKE '%$pattern%'
 		OR email ILIKE '%$pattern%'
-	");
+		";
+	}
+	$res = db_query($sql);
 
 	$title=array();
 	$title[]='&nbsp;';

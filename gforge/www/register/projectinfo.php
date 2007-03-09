@@ -134,13 +134,12 @@ site_header(array('title'=>$Language->getText('register','project_information'))
 <?php
 echo license_selectbox('license',$license);
 ?>
-<?php echo $Language->getText('register','other_license') ?>
-<br />
+<?php echo $Language->getText('register','other_license'); ?>
 <textarea name="license_other" cols="60" rows="5">
 <?php echo htmlspecialchars(stripslashes($license_other)); ?>
 </textarea>
 
-<?php echo $Language->getText('register','project_description')?>
+<?php echo $Language->getText('register','project_description'); ?>
 <textarea name="description" cols="70" rows="5">
 <?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
@@ -150,32 +149,33 @@ echo license_selectbox('license',$license);
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
 
 <?php
-	$SCMFactory=new SCMFactory();
 	if ($sys_use_scm) {
+		$SCMFactory=new SCMFactory();
 		$scm_plugins=$SCMFactory->getSCMs();
-		if(count($scm_plugins)!=0) {	
-			if(count($scm_plugins)==1) {
+		if (count($scm_plugins)!=0) {	
+			if (count($scm_plugins)==1) {
 				echo $Language->getText('register','one_scm',$scm_plugins[0]).'<br /><br />';
 				echo '<input type="hidden" name="scm" value="'. $scm_plugins[0].'">';
 			} else {
 				echo $Language->getText('register','choose_scm')."\n";
+				echo '<table><tbody><tr><td><strong>',$Language->getText('register','scm_repository'),':</strong></td>';
 				$checked=true;
 				foreach($scm_plugins as $plugin) {
 					$myPlugin= plugin_get_object($plugin);
-					echo '<p><input type="radio" name="scm" ';
+					echo '<td><input type="radio" name="scm" ';
 					echo 'value="'.$myPlugin->name.'"';
 					if (isset($scm) && strcmp($scm, $myPlugin->name) == 0) {
-						echo ' checked';
+						echo ' checked="checked"';
 					} elseif (!isset($scm) && $checked) {
-						echo ' checked';
+						echo ' checked="checked"';
 						$checked = false;
-					
 					}
-					echo '>'.$myPlugin->text.'</p>';
+					echo '>'.$myPlugin->text.'</td>';
 				}
+				echo '</tr></tbody></table>'."\n";
 			}
 		} else {
-			echo "Error - Site has SCM but no plugins registered";
+			echo 'Error - Site has SCM but no plugins registered';
 		}
 	}
 

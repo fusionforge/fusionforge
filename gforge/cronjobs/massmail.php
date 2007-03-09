@@ -33,6 +33,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 if (!cron_create_lock('gforge-massmail')) {
 	$err = "Massmail already running...exiting";
 		if (!cron_entry(6,$err)) {

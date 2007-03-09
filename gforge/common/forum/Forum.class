@@ -207,10 +207,24 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
-		global $Language;
-		$res=db_query("SELECT * FROM forum_group_list_vw
-			WHERE group_forum_id='$group_forum_id'
-			AND group_id='". $this->Group->getID() ."'");
+		global $Language, $sys_database_type;
+
+		if ($sys_database_type == "mysql") {
+			$sql="
+				SELECT fgl.*,
+					(SELECT count(*) AS `count`
+						FROM (
+							SELECT DISTINCT group_forum_id, thread_id FROM forum
+						) AS tmp
+						WHERE tmp.group_forum_id = fgl.group_forum_id
+					) AS threads 
+				FROM forum_group_list_vw AS fgl
+				WHERE group_forum_id='$group_forum_id'";
+		} else {
+			$sql="SELECT * FROM forum_group_list_vw
+				WHERE group_forum_id='$group_forum_id'";
+		}
+		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError($Language->getText('forum_common','error_invalid_group_forum_id'));
 			return false;
@@ -244,13 +258,25 @@ class Forum extends Error {
 	 *	@return	int	The next thread_id #.
 	 */
 	function getNextThreadID() {
-		$result=db_query("SELECT nextval('forum_thread_seq')");
+		global $sys_database_type;
+
+		if ($sys_database_type == "mysql") {
+			$sql="call newval('forum_thread_seq', @res)";
+			$result=db_mquery($sql);
+			if (!$result) {
+				echo db_error();
+				return false;
+			}
+			$sql="select @res";
+		} else {
+			$sql="SELECT nextval('forum_thread_seq')";
+		}
+		$result=db_query($sql);
 		if (!$result || db_numrows($result) < 1) {
 			echo db_error();
 			return false;
-		} else {
-			return db_result($result,0,0);
 		}
+		return db_result($result,0,0);
 	}
 
 	/**
@@ -475,7 +501,7 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
+		$sql="SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
@@ -802,7 +828,7 @@ class Forum extends Error {
 		} else {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (  (!$perm->isMember() )) {
-				//the user isn´t a member of the project
+				//the user isn't a member of the project
 				return true;
 			}
 		}

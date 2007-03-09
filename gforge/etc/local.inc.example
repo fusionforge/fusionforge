@@ -14,6 +14,18 @@
 // emitted as part of the HTML stream and processed by the browser,
 // so white space is meaningful!
 //
+// GForge global paths
+//
+$sys_etc_path='/etc/gforge';
+$sys_opt_path='/opt/gforge';
+$sys_var_path='/var/lib/gforge';
+
+//
+// Gforge database type
+//
+//$sys_database_type=mysql;
+$sys_database_type=pgsql;
+
 //
 // GForge hostnames
 //
@@ -61,13 +73,13 @@ $sys_cvs_host=$sys_scm_host;
 $sys_scm_single_host = 1;
 
 // Path to tarballs directory
-$sys_scm_tarballs_path='/opt/gforge/scmtarballs';
+$sys_scm_tarballs_path="$sys_var_path/scmtarballs";
 
 // Path to snapshots directory
-$sys_scm_snapshots_path='/opt/gforge/scmsnapshots';
+$sys_scm_snapshots_path="$sys_var_path/scmsnapshots";
 
 // Path to SCMWEB
-$sys_path_to_scmweb='/usr/lib/gforge/bin/';
+$sys_path_to_scmweb="$sys_opt_path/bin/";
 
 //Databases, html/php/other paths
 //server to use for updates and reads
@@ -188,8 +200,15 @@ $sys_user_reg_restricted=false;
 //
 $homedir_prefix='/home';
 $groupdir_prefix='/home/groups';
+
+//
+// SCM directory prefixes
+//
+//$cvsdir_prefix='$sys_var_path/cvsroot';
+//$svndir_prefix="$sys_var_path/svnroot";
 $cvsdir_prefix='/cvsroot';
 $svndir_prefix='/svnroot';
+
 $sys_chroot='';
 
 //
@@ -200,8 +219,8 @@ $sys_chroot='';
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
 //
-$sys_upload_dir='/opt/gforge/uploads/';
-$sys_ftp_upload_dir='/opt/gforge/ftpupload';
+$sys_upload_dir="$sys_var_path/uploads/";
+$sys_ftp_upload_dir='/path/to/frs/upload';
 $sys_ftp_upload_host='upload.gforge.company.com';
 $sys_apache_user='apacheuser';
 $sys_apache_group='apachegroup';
@@ -212,7 +231,7 @@ $sys_apache_group='apachegroup';
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot='/opt/gforge/www/';
+$sys_urlroot="$sys_opt_path/www/";
 
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='MyGForge';
@@ -240,7 +259,7 @@ $sys_bcc_all_email_address='';
 
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
-$sys_themeroot='/opt/gforge/www/themes/';
+$sys_themeroot="$sys_opt_path/www/themes/";
 // If you want an other default theme or language
 $sys_theme='gforge';
 $sys_lang='English';
@@ -257,14 +276,14 @@ $sys_images_secure_url='';
 //	certain parts of the site, like news, stats, etc
 //	are based on special group_id numbers
 //	group_id #1 is the super-user group of sitewide admins
-$sys_news_group=3;
 $sys_stats_group=2;
+$sys_news_group=3;
 $sys_peer_rating_group=4;
 $sys_template_group=5;
 $default_trove_cat=18;
 
 // JPGRAPH Package
-$sys_path_to_jpgraph='/opt/jpgraph';
+$sys_path_to_jpgraph=$sys_opt_path.'/jpgraph';
 
 // Show Source
 //	Setting this to 1 will add a "Show Source" link to the bottom of each page
@@ -282,7 +301,7 @@ $sys_force_login=0;
 //$gantt_task_font_size=12;
 
 // Place for customized files
-$sys_custom_path='/opt/gforge/etc/custom';
+$sys_custom_path=$sys_etc_path.'/custom';
 
 //
 // Localization caching Configuration
@@ -295,7 +314,7 @@ $sys_localization_enable_caching = true;
 // within its document root (does not fall under www/ in the tarball)
 // Your php.ini file may have to be modified to allow writing outside
 // the webserver's directory
-$sys_localization_cache_path = '/opt/gforge/localizationcache/';
+$sys_localization_cache_path = "$sys_var_path/localizationcache/";
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = true;
@@ -304,7 +323,7 @@ $sys_localization_enable_timestamp_checking = true;
 // Plugins configuration
 //
 // Path to plugins directory
-$sys_plugins_path='/opt/gforge/plugins/';
+$sys_plugins_path="$sys_opt_path/plugins/";
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

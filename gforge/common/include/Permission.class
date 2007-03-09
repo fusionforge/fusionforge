@@ -212,7 +212,7 @@ class Permission extends Error {
 			return $this->is_site_admin;
 		}
 
-		$res = db_query("SELECT count(*) FROM user_group
+		$res = db_query("SELECT count(*) AS count FROM user_group
 			WHERE user_id='". $this->User->getID() ."'
 			AND group_id='1'
 			AND admin_flags='A'");

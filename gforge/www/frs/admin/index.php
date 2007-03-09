@@ -155,7 +155,7 @@ if (!$res || $rows < 1) {
 		<input type="hidden" name="func" value="update_package" />
 		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
 		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<td nowrap="nowrap" align="center">
+			<td nowrap="nowrap" style="text-align:center">
 					<a href="qrs.php?package_id='. 
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','add_release').']</strong>
 					</a>

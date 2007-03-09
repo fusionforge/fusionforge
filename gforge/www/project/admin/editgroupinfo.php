@@ -90,9 +90,9 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$feedback .= $group->getErrorMessage();
+		$feedback = $group->getErrorMessage();
 	} else {
-		$feedback .= $Language->getText('project_admin_editgroupinfo','group_updated');
+		$feedback = $Language->getText('project_admin_editgroupinfo','group_updated');
 	}
 
 	// This is done so plugins can enable/disable themselves from the project

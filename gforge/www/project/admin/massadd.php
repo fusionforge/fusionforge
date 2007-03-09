@@ -45,8 +45,12 @@ if (!$sw) {
 	$sw='A';
 }
 
-$res=db_query("SELECT user_id,user_name,lastname,firstname FROM users 
-	WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ORDER BY lastname,firstname ASC");
+$sql="SELECT user_id,user_name,lastname,firstname FROM users ";
+if ($sys_database_type == "mysql") {
+	$sql.="WHERE status='A' and type_id='1' and lastname LIKE '$sw%' ";
+} else {
+	$sql.="WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ";
+$res=db_query($sql);
 
 $accumulated_ids = getStringFromRequest('accumulated_ids');
 if (!$accumulated_ids) {

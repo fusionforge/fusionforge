@@ -41,9 +41,9 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
  * @param string	the path to the plugins conf dir
  */
 function printSelection($checked,$pluginpath) {
-	global $Language,$feedback;
+	global $Language,$feedback,$sys_etc_path;
 	
-	$config_files = array(); // array that�ll have the config files
+	$config_files = array(); // array that'll have the config files
 	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
@@ -53,14 +53,14 @@ function printSelection($checked,$pluginpath) {
 	}
 					
 	// check if we can get local.inc
-	@$handle = fopen('/etc/gforge/local.inc','r+');
+	@$handle = fopen($sys_etc_path . '/local.inc','r+');
 	if (! $handle) { 
 		// Open readonly but tell you can't write
-		$handle = fopen('/etc/gforge/local.inc','r');
+		$handle = fopen($sys_etc_path . '/local.inc','r');
 		$feedback .= $Language->getText('configman','notopenlocalinc');
 	}
 	if ($handle) {
-		$config_files['local.inc'] = '/etc/gforge/local.inc';
+		$config_files['local.inc'] = $sys_etc_path . '/local.inc';
 		fclose($handle);
 		$i++;
 	} else {
@@ -151,7 +151,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','nowrite');
 		}
 	} else {
-		// say couldn�t open
+		// say couldn't open
 		$feedback .= $Language->getText('configman','notopenfile');
 	}
 }
@@ -177,7 +177,7 @@ function updateVars($vars,$filepath) {
 		@$handle = fopen($filepath,'r+');
 		if (! $handle) {
 			// Open readonly but tell you can't write
-			$handle = fopen('/etc/gforge/local.inc','r');
+			$handle = fopen($sys_etc_path.'/local.inc','r');
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 		if ($handle){
@@ -185,6 +185,7 @@ function updateVars($vars,$filepath) {
 			$filedata = file_get_contents($filepath);
 			$vars = getVars($filedata); // get the vars from local.inc
 			$keys = array_keys($vars);
+			sort($keys);
 			$title_arr = array($Language->getText('configman','name'),$Language->getText('configman','on'),$Language->getText('configman','off'));
 			echo $HTML->listTableTop($title_arr);
 			$j = 0;
@@ -194,8 +195,8 @@ function updateVars($vars,$filepath) {
 				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
 				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td>'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
-			 	'<td><div align="center">'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '>' .'</div></td></tr>';
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '></td></tr>';
 			 	$j++;
 			}
 			echo $HTML->listTableBottom();
@@ -207,7 +208,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we�ll update something else, for now it�s local.inc
+		updateVars(getArrayFromRequest('attributes'),$sys_etc_path . '/local.inc'); // perhaps later we'll update something else, for now it's local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
@@ -221,7 +222,7 @@ function updateVars($vars,$filepath) {
 				$feedback .= $Language->getText('configman','nowrite');
 			}
 		} else {
-			// say couldn�t open
+			// say couldn't open
 			$feedback .= $Language->getText('configman','notopenfile');
 		}*/
 	}

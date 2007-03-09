@@ -29,18 +29,29 @@
  *
  */
 function form_generate_key() {
+	global $sys_database_type;
+
 	$is_new=false;
 	db_begin();
 	// there's about 99.999999999% probability this loop will run only once :) 
 	while(!$is_new) {
 		$key = md5(microtime() + rand() + $_SERVER["REMOTE_ADDR"]);
-		$sql = "SELECT * FROM form_keys WHERE key='".$key."'";
+	    if ( $sys_database_type == "mysql" ) {
+			$sql = "SELECT * FROM form_keys WHERE `key`='".$key."'";
+		} else {
+			$sql = "SELECT * FROM form_keys WHERE key='".$key."'";
+		}
+		$res=db_query($sql);
 		$res=db_query($sql);
 		if (!db_numrows($res)) {
 			$is_new=true;	
 		}
 	}
-	$res = db_query("INSERT INTO form_keys (key,is_used,creation_date) VALUES ('".$key."',0,".time().")");
+	if ( $sys_database_type == "mysql" ) {
+		$res = db_query("INSERT INTO form_keys (`key`,is_used,creation_date) VALUES ('".$key."',0,".time().")");
+	} else {
+		$res = db_query("INSERT INTO form_keys (key,is_used,creation_date) VALUES ('".$key."',0,".time().")");
+	}
 	if (!$res) {
 		db_rollback();
 		return false;
@@ -50,7 +61,7 @@ function form_generate_key() {
 }	
 
 /**
- *  form_key_is_valid() - Checks the db to see if the given key is already used. In case it´s not already used
+ *  form_key_is_valid() - Checks the db to see if the given key is already used. In case itï¿½s not already used
  * 	it updates the db.
  *
  *	@param	int	The key.			
@@ -58,14 +69,24 @@ function form_generate_key() {
  *
  */
 function form_key_is_valid($key) {
+	global $sys_database_type;
+
 	db_begin();
-	$sql = "SELECT * FROM form_keys WHERE key='$key' and is_used=0 FOR UPDATE";
+	if ( $sys_database_type == "mysql" ) {
+		$sql = "SELECT * FROM form_keys WHERE `key`='$key' and is_used=0 FOR UPDATE";
+	} else {
+		$sql = "SELECT * FROM form_keys WHERE key='$key' and is_used=0 FOR UPDATE";
+	}
 	$res=db_query($sql);
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
-	$sql = "UPDATE form_keys SET is_used=1 WHERE key='$key'";
+	if ( $sys_database_type == "mysql" ) {
+		$sql = "UPDATE form_keys SET is_used=1 WHERE `key`='$key'";
+	} else {
+		$sql = "UPDATE form_keys SET is_used=1 WHERE key='$key'";
+	}
 	$res=db_query($sql);
 	if (!$res) {
 		db_rollback();
@@ -76,21 +97,31 @@ function form_key_is_valid($key) {
 }
 
 /**
- *  form_release_key() - Releases the given key if it is already used. If the given key it´s not in the db, it returns false.
+ *  form_release_key() - Releases the given key if it is already used. If the given key itï¿½s not in the db, it returns false.
  *
  *	@param	int	The key.			
  *  @return	boolean	True if the given key is successfully released. False if not. 
  *
  */
 function form_release_key($key) {
+	global $sys_database_type;
+
 	db_begin();
-	$sql = "SELECT * FROM form_keys WHERE key='$key' FOR UPDATE";
+	if ( $sys_database_type == "mysql" ) {
+		$sql = "SELECT * FROM form_keys WHERE `key`='$key' FOR UPDATE";
+	} else {
+		$sql = "SELECT * FROM form_keys WHERE key='$key' FOR UPDATE";
+	}
 	$res=db_query($sql);
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
-	$sql = "UPDATE form_keys SET is_used=0 WHERE key='$key'";
+	if ( $sys_database_type == "mysql" ) {
+		$sql = "UPDATE form_keys SET is_used=0 WHERE `key`='$key'";
+	} else {
+		$sql = "UPDATE form_keys SET is_used=0 WHERE key='$key'";
+	}
 	$res=db_query($sql);
 	if (!$res) {
 		db_rollback();

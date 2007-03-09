@@ -71,6 +71,10 @@ pre,tt {
   font-family: courier, sans-serif
 }
 
+td {
+  text-align: left
+}
+
 /* the style of the label on a box title  */
 .titlebar {
   text-decoration: none;

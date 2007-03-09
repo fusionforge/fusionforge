@@ -32,7 +32,11 @@ $lang = getStringFromRequest('lang');
 $unit        = 'item';
 $table       = 'tmp_lang';
 $primary_key = 'seq';
-$whereclause = " WHERE language_id='".$lang."' AND pagename!='#' AND pagename||category NOT IN (select pagename||category FROM $table WHERE language_id='Base' ) ORDER BY seq";
+if ($sys_database_type == "mysql") {
+	$whereclause = " WHERE language_id='".$lang."' AND pagename!='#' AND concat(pagename,category) NOT IN (select concat(pagename,category) FROM $table WHERE language_id='Base' ) ORDER BY seq";
+} else {
+	$whereclause = " WHERE language_id='".$lang."' AND pagename!='#' AND pagename||category NOT IN (select pagename||category FROM $table WHERE language_id='Base' ) ORDER BY seq";
+}
 $columns     = "seq, pagename, category, tstring";
 include_once('admintabfiles.php');
 

@@ -71,7 +71,11 @@ if (getStringFromRequest('loadall')) {
 	while($file = readdir($dir)) {
 		if(ereg("(.*)\.tab$",$file,$regs)){
 			$language_id=$regs[1];
-			$query="INSERT INTO tmp_lang SELECT -1,'".$language_id."',seq+5,pagename,category,tstring FROM tmp_lang WHERE language_id='Base' AND pagename!='#' AND pagename||category NOT IN (select pagename||category FROM tmp_lang WHERE language_id='" . $language_id . "' ) ORDER BY seq";
+			if ($sys_database_type == "mysql") {
+				$query="INSERT INTO tmp_lang SELECT -1,'".$language_id."',seq+5,pagename,category,tstring FROM tmp_lang WHERE language_id='Base' AND pagename!='#' AND concat(pagename,category) NOT IN (select concat(pagename,category) FROM tmp_lang WHERE language_id='" . $language_id . "' ) ORDER BY seq";
+			} else {
+				$query="INSERT INTO tmp_lang SELECT -1,'".$language_id."',seq+5,pagename,category,tstring FROM tmp_lang WHERE language_id='Base' AND pagename!='#' AND pagename||category NOT IN (select pagename||category FROM tmp_lang WHERE language_id='" . $language_id . "' ) ORDER BY seq";
+			}
 			$res=db_query($query);
 			if (!$res){
 				echo '<br />'.$query.'<br />'. db_error();

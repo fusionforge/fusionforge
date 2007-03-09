@@ -264,7 +264,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" style="text-align:center">
 			<input type="checkbox" name="preformatted" value="1" /> <?php echo $Language->getText('project_admin_qrs','preserve_text') ?>
 			<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_qrs','release_file') ?>" /></p>
 		</td>

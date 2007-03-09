@@ -33,7 +33,6 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_page';
 // to be revised		
  		$this->hooks[] = 'scm_stats';
-// 		$this->hooks[] = 'group_approved';
 		$this->hooks[] = 'scm_plugin';
 
 		require_once('plugins/scmsvn/config.php') ;
@@ -69,9 +68,6 @@ class SVNPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
-// 		case 'group_approved':
-// 			$this->groupApproved ($params) ;
-// 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -82,7 +78,7 @@ class SVNPlugin extends SCM {
 	}
 
 	function getPage ($group_id) {
-		global $Language, $HTML ;
+		global $Language, $HTML, $sys_scm_snapshots_path;
 
 		$project =& group_get_object($group_id);
 		if (!$project || !is_object($project)) {
@@ -174,6 +170,7 @@ class SVNPlugin extends SCM {
 		} elseif ($group->isError()) {
 			return false;
 		}
+
 		if ( $group->usesPlugin ( $this->name ) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
 				$group->SetUsesAnonSCM(true);
@@ -233,24 +230,6 @@ class SVNPlugin extends SCM {
 			$add_num=0;
 		}
 		return array($commit_num, $add_num);
-	}
-
-	// Not used at the moment and probably useless
-	function groupApproved ($params) {
-		$group_id = $params['group_id'] ;
-		
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-		if ($this->enabled_by_default) {
-			$project->setPluginUse('scmsvn', 1) ;
-		} else {
-			$project->setPluginUse('scmsvn', 0) ;
-		}
-		return true;
 	}
 
 	function getDetailedStats ($params) {

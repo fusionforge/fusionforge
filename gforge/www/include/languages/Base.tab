@@ -1681,7 +1681,7 @@ project_home	public_mailing_lists	public mailing lists
 project_home	release_notes	Release Notes
 project_home	surveys	surveys
 project_home	title	Project Info
-project_home	tracker_open	<strong>$1</strong> open /<strong>$2</strong> total
+project_home	tracker_open	<strong>$1</strong> open / <strong>$2</strong> total
 project_home	view_members	View Members
 project_home	view_project_files	View All Project Files
 project_memberlist	developer	Developer
@@ -1753,8 +1753,8 @@ register	invalid_full_name	Invalid full name
 register	invalid_unix_name	Invalid unix name
 register	more_license_description	Please give more comprehensive licensing description
 register	no_license_chosen	You do not have chosen a license
-register	other_license	If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
-register	project_description	<h3>4. Project Public Description</h3>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
+register	other_license	<p>If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.</p>
+register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>
 register	project_full_name	<h3>1. Project full name</h3>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>
 register	project_information	Project Information
 register	project_license	<h3>3. License</h3>
@@ -1763,9 +1763,10 @@ register	project_unix_name	<h3>5. Project Unix Name</h3>In addition to full proj
 register	purpose_and_summarization	<h3>2. Project Purpose And Summarization</h3><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
 register	registration_complete	Registration complete
 register	unix_group_name_already_taken	Unix name already taken
-register	choose_scm	<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p> <p><strong>You will not be able to change it once the project is registered!</strong></p>
+register	choose_scm	<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>
 register	one_scm	As there exist just one SCM, then this will be selected automatically. <strong>$1</strong> will be selected.
 register	scm_not_selected	Site has SCM enabled, but no SCM was chosen.
+register	scm_repository	SCM Repository
 rbac_vals	frspackage0	Private
 rbac_vals	frspackage1	Public
 rbac_vals	frspackage	File Release System
@@ -1892,6 +1893,7 @@ reporting_pie	end	End
 reporting_rebuild	message	  <h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I'm Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>
 reporting_rebuild	pressonlyonce	Press ONLY ONCE
 reporting_rebuild	title	Main Page
+reporting_rebuild	imsure	I am sure
 reporting_ta	add_entry	Add Entry
 reporting_ta	add_entry_description	Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in.
 reporting_ta	cancel	Cancel
@@ -1940,9 +1942,12 @@ reporting_ut	description	Choose the <strong>First Letter</strong> of the name of
 reporting_ut	title	User Time Reporting
 scm_index	reporting	Reporting
 scm_index	scm_repository	SCM Repository
-scm_index	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
+scm_index	error_this_project_has_turned_off	Error - This project has turned off SCM.
 scm_index	admin	Admin
-scm_index	not_created	The repository for this project wasn't created yet. It will be created in the next few minutes.
+scm_index	not_created	The repository for this project isn't created yet. It will be created in the next few minutes.
+scm_index	repos_change_note	Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.
+scm_index	no_plugins_error	Error - Site has SCM but no plugins registered
+
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#

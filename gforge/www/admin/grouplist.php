@@ -46,11 +46,16 @@ if (!isset($sortorder) || empty($sortorder)) {
 if ($form_catroot == 1) {
 	if (isset($group_name_search)) {
 		echo "<p>".$Language->getText('admin_grouplist','groups_that_begin_with'). " <strong>".$group_name_search."</strong></p>\n";
-		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members "
-			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name ILIKE '$group_name_search%' "
-			. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
+		$sql = "SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members ";
+	    if ($sys_database_type == "mysql") {
+			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name LIKE '$group_name_search%' ";
+		} else {
+			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name ILIKE '$group_name_search%' ";
+		}
+		$sql.="GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
 			. ($form_pending?"AND WHERE status='P' ":"")
-			. " ORDER BY $sortorder");
+			. " ORDER BY $sortorder";
+		$res = db_query($sql);
 	} else {
 		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses "

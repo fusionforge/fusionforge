@@ -608,7 +608,7 @@ class Group extends Error {
 		";
 		$res = db_query($sql);
 
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('Error updating project information: '.db_error());
 			db_rollback();
 			return false;

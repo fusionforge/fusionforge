@@ -1,4 +1,5 @@
 * text=auto !eol
+gforge/INSTALL.restricted -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/docman/Parsedata.class -text
 gforge/common/docman/engine/majwords.php -text
@@ -9,6 +10,7 @@ gforge/common/docman/engine/parser_pdf.php.php -text
 gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
 gforge/common/include/TextSanitizer.class -text
+gforge/common/include/database-mysql.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gforge-db-backup.sh -text
@@ -23,6 +25,8 @@ gforge/db/20051103_transiciel_motscle_document.sql -text
 gforge/db/20060216-drops.sql -text
 gforge/db/20060216-nocommit.sql -text
 gforge/db/FTI-20061025.sql -text
+gforge/db/gforge-data-mysql.sql -text
+gforge/db/gforge-struct-mysql.sql -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
 gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text
@@ -52,6 +56,7 @@ gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
 gforge/gforge-install.sh -text
 gforge/plugins/createplugin.sh -text
+gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2.tar.gz -text
@@ -673,6 +678,7 @@ gforge/plugins/quota_management/www/index.php -text
 gforge/plugins/quota_management/www/quota.php -text
 gforge/plugins/quota_management/www/quota_admin.php -text
 gforge/plugins/quota_management/www/quota_project.php -text
+gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text
 gforge/plugins/svntracker/README -text
@@ -684,6 +690,7 @@ gforge/plugins/svntracker/common/languages/Spanish.tab -text
 gforge/plugins/svntracker/common/svntracker-init.php -text
 gforge/plugins/svntracker/common/svntrackerPlugin.class -text
 gforge/plugins/svntracker/db/20051011.sql -text
+gforge/plugins/svntracker/db/svntracker-init-mysql.sql -text
 gforge/plugins/svntracker/db/svntracker-init.sql -text
 gforge/plugins/svntracker/etc/plugins/svntracker/config.php -text
 gforge/plugins/svntracker/httpd.conf -text
@@ -1168,6 +1175,9 @@ gforge/www/themes/gforge/images/ic/cvs16b.png -text
 gforge/www/themes/gforge/images/ic/docman16b.png -text
 gforge/www/themes/gforge/images/ic/forum20g.png -text
 gforge/www/themes/gforge/images/ic/forum20w.png -text
+gforge/www/themes/gforge/images/ic/forum_add.gif -text
+gforge/www/themes/gforge/images/ic/forum_delete.gif -text
+gforge/www/themes/gforge/images/ic/forum_edit.gif -text
 gforge/www/themes/gforge/images/ic/ftp16b.png -text
 gforge/www/themes/gforge/images/ic/halfcheck.png -text
 gforge/www/themes/gforge/images/ic/home16b.png -text
@@ -1250,6 +1260,7 @@ gforge/www/themes/osx/images/ic/msg.png -text
 gforge/www/themes/osx/images/ic/new.png -text
 gforge/www/themes/osx/images/ic/ofolder15.png -text
 gforge/www/themes/osx/images/ic/pencil.png -text
+gforge/www/themes/osx/images/ic/rss.png -text svneol=unset#image/png
 gforge/www/themes/osx/images/ic/save.png -text
 gforge/www/themes/osx/images/ic/survey16b.png -text
 gforge/www/themes/osx/images/ic/taskman20g.png -text

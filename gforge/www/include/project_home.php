@@ -143,19 +143,19 @@ if ($project->usesFRS()) {
 	echo '
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
 		<tr>
-		<td align="left">
+		<td style="text-align:left">
 			'.$Language->getText('frs','file_package').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'.$Language->getText('frs','file_version').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'.$Language->getText('frs','file_rel_date').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'.$Language->getText('frs','file_notes').' / '.$Language->getText('frs','file_monitor').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'.$Language->getText('frs','file_download').'
 		</td>
 		</tr>';
@@ -200,8 +200,8 @@ if ($project->usesFRS()) {
 				} else {
 					$rel_date = getdate(db_result($res_files,$f,'release_date'));
 					echo '
-					<tr align="center">
-					<td align="left">
+					<tr style="text-align:center">
+					<td style="text-align:left">
 					<strong>' . db_result($res_files,$f,'package_name'). '</strong></td>';
 					// Releases to display
 					print '<td>'.db_result($res_files,$f,'release_name') .'
@@ -219,7 +219,7 @@ if ($project->usesFRS()) {
 
 		}
 		?></table>
-	<div align="center">
+	<div style="text-align:center">
 	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_home','view_project_files')?>]</a>
 	</div>
 <?php

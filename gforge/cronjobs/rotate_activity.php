@@ -25,6 +25,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err='';
+
 $today_formatted=date('Ymd',(time()-(30*60*60*24)));
 $sql='';
 

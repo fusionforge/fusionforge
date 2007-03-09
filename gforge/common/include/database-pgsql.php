@@ -126,6 +126,39 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 	return $res;
 }
 
+/**
+ *  db_mquery() - Query the database.
+ *
+ *  @param text SQL statement.
+ *  @param int How many rows do you want returned.
+ *  @param int Of matching rows, return only rows starting here.
+ *	@param int ability to spread load to multiple db servers.
+ *	@return int result set handle.
+ */
+function db_mquery($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	return db_query($qstring, $limit, $offset, $dbserver);
+}
+
+/**
+ *  db_more_results() - Check if there are more unprocessed results.
+ *
+ *	@return bool true if there are more results..
+ */
+function db_more_results() {
+	return false;
+}
+
+/**
+ *  db_next_result() - Get the next result from query with multiple statements.
+ *
+ *  @param		string	SQL statement
+ *  @param		int		How many rows do you want returned
+ *  @param		int		Of matching rows, return only rows starting here
+ */
+function db_next_result() {
+	return NULL;
+}
+
 /* Current transaction level, private variable */
 /* FIXME: Having scalar variable for transaction level is
    no longer correct after multiple database (dbservers) support

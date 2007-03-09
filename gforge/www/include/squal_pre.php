@@ -22,7 +22,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 
 require_once('local.inc');
 require('common/include/constants.php');
-require_once('common/include/database.php');
+require_once('common/include/database-'.$sys_database_type.'.php');
 require_once('common/include/session.php');
 require_once('common/include/Error.class');
 require_once('common/include/User.class');

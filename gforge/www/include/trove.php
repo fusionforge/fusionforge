@@ -238,6 +238,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		ORDER BY trove_cat.fullpath");
 
 	$return = '';
+	$need_close_ul_tag = 0;
 	if (db_numrows($res_trovecat) < 1) {
 		$return .= $Language->getText('trove','not_categorized')
 			.' <a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php">'

@@ -186,8 +186,14 @@ class SearchQuery extends Error {
 	 * @return string the condition
 	 */
 	function getIlikeCondition($fieldName) {
+		global $sys_database_type;
+
 		$wordArgs = array_merge($this->words, str_replace(' ', "\\\s+",$this->phrases));
-		return $fieldName." ILIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $wordArgs) ."%'";
+		if ( $sys_database_type == "mysql" ) {
+			return $fieldName." LIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $wordArgs) ."%'";
+		} else {
+			return $fieldName." ILIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $wordArgs) ."%'";
+		}
 	}
 
 	function getMatchCond($fieldName, $arr) {

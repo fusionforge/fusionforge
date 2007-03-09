@@ -36,7 +36,7 @@ function create_snippet_hash($sql, $field) {
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
 	global $Language;
-	$return .=$Language->getText('snippet_caching','intro').'
+	$return = $Language->getText('snippet_caching','intro').'
 	<br />
 	<p/>
 	<table width="100%" border="0">
@@ -49,7 +49,7 @@ function snippet_mainpage() {
 	$existing_snippets = create_snippet_hash("SELECT language, count(*) as count from snippet group by language", "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
 		$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=lang&amp;lang='.$i.'">'.$SCRIPT_LANGUAGE[$i].'</a> (';
-		if ($existing_snippets[$i]) {
+		if (@$existing_snippets[$i]) {
 			$return .= $existing_snippets[$i].')</li>';
 		} else {
 			$return .= '0)</li>';
@@ -64,7 +64,7 @@ function snippet_mainpage() {
 	$existing_categories = create_snippet_hash("SELECT category, count(*) as count from snippet group by category", "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=cat&amp;cat='.$i.'">'.$SCRIPT_CATEGORY[$i].'</a> (';
-		if ($existing_categories[$i]) {
+		if (@$existing_categories[$i]) {
 			$return .= $existing_categories[$i].')</li>';
 		} else {
 			$return .= '0)</li>';

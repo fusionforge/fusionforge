@@ -94,15 +94,15 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'P') print "pending";
 		print '"><a href="useredit.php?user_id='.$usr['user_id'].'">';
 		if ($usr['status'] == 'P') print "*";
-		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
+		echo $usr['firstname'].' '.$usr['lastname'].' ('.$usr['user_name'].')</a>';
 		echo '</td>';
-		echo '<td width="15%" align="center">';
+		echo '<td width="15%" style="text-align:center">';
 		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
 		echo '</td>';
-		echo '<td width="15%" align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
-		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
+		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
 		echo '</tr>';
 		$count ++;
 	}
@@ -145,7 +145,12 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname");
+	    if ( $sys_database_type == "mysql" ) {
+			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name LIKE '".$user_name_search."%' OR lastname LIKE '".$user_name_search."%' ORDER BY lastname";
+		} else {
+			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname";
+		}
+		$result = db_query($sql);
 	} else {
 		$sortorder = $_GET['sortorder'];
 		if (!isset($sortorder) || empty($sortorder)) {

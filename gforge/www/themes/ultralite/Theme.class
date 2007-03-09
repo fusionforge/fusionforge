@@ -38,7 +38,7 @@ class Theme extends Layout {
 		<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><h2>GForge</h2></a>
 		</p>
 		<p align=right>
-		<?
+		<?php
 		if (session_loggedin()) {
 		?>
 		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b>
