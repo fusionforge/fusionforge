@@ -194,8 +194,8 @@ function updateVars($vars,$filepath) {
 				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
 				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td>'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
-			 	'<td><div align="center">'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '>' .'</div></td></tr>';
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '></td></tr>';
 			 	$j++;
 			}
 			echo $HTML->listTableBottom();
