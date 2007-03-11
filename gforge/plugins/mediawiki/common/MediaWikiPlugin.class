@@ -39,7 +39,6 @@ class MediaWikiPlugin extends Plugin {
 
 	function CallHook ($hookname, $params) {
 		global $use_mediawikiplugin,$G_SESSION,$HTML;
-		$group_id=$params['group'];
 		if ($hookname == "outermenu") {
 			$params['TITLES'][] = 'MediaWiki';
 			$params['DIRS'][] = '/mediawiki';
@@ -50,6 +49,7 @@ class MediaWikiPlugin extends Plugin {
 						  array ('/mediawiki/index.php/User:' . $G_SESSION->getUnixName() ));				
 			}
 		} elseif ($hookname == "groupmenu") {
+			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -70,6 +70,7 @@ class MediaWikiPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
@@ -86,6 +87,7 @@ class MediaWikiPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
 			if ( $use_mediawikiplugin == 1 ) {
