@@ -21,6 +21,10 @@ require_once('common/tracker/ArtifactFile.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('common/tracker/ArtifactType.class');
 
+if (!session_loggedin()) {
+	exit_not_logged_in();	
+}
+
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $atid=$arr[4];
@@ -61,8 +65,8 @@ if (!$ah || !is_object($ah)) {
 	} else if ($afh->isError()) {
 		exit_error('ERROR',$afh->getErrorMessage());
 	} else {
-		Header ('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
-		Header ("Content-type: ".$afh->getType());
+		Header ('Content-disposition: attachment');
+		Header ('Content-type: '.$afh->getType());
 		echo $afh->getData();
 	}
 }
