@@ -25,8 +25,6 @@
 
 class CCasePlugin extends SCM {
 	function CCasePlugin () {
-		global $sys_etc_path;
-
 		$this->SCM () ;
 		$this->name = "scmccase";
 		$this->text = 'CCASE';
@@ -36,7 +34,7 @@ class CCasePlugin extends SCM {
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "scm_plugin";
 
-		require_once($sys_etc_path.'/plugins/scmccase/config.php') ;
+		require_once('plugins/scmccase/config.php') ;
 		
 		$this->default_ccase_server = $default_ccase_server ;
 		$this->this_server = $this_server ;

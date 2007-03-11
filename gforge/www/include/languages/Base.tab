@@ -1002,7 +1002,7 @@ mail	external_administration	Subscribe/Unsubscribe/Preferences
 mail	help_to_request	Project administrators use the admin link to request mailing lists.
 mail	mailinglists_for	Mailing Lists for $1
 mail	no_list_found	No Lists found for $1
-mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.list.org/">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>
+mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.gnu.org/software/mailman">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>
 mail	unable_to_get_lists	Unable to get the lists
 mail_admin_deletelist	title	Permanently Delete List
 mail_admin_deletelist	confirmdelete	Confirm Delete
