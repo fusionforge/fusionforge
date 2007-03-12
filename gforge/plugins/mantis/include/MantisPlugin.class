@@ -38,7 +38,6 @@ class MantisPlugin extends Plugin {
 
 	function CallHook ($hookname, $params) {
 		global $use_mantisplugin,$G_SESSION,$HTML;
-		$group_id=$params['group'];
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mantis")) {
@@ -47,6 +46,7 @@ class MantisPlugin extends Plugin {
 						  array ('/plugins/mantis/index.php' . $param ));				
 			}
 		} elseif ($hookname == "groupmenu") {
+			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -67,6 +67,7 @@ class MantisPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
@@ -83,6 +84,7 @@ class MantisPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			if ( $use_mantisplugin == 1 ) {
 				$group->setPluginUse ( $this->name );

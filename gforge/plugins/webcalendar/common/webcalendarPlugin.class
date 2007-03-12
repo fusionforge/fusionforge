@@ -55,7 +55,6 @@ class webcalendarPlugin extends Plugin {
 
 	function CallHook ($hookname, $params) {
 		global $use_webcalendarplugin,$G_SESSION,$HTML,$Language;
-		$group_id=$params['group'];
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("webcalendar")) {
@@ -64,6 +63,7 @@ class webcalendarPlugin extends Plugin {
 						  array ('/plugins/webcalendar/index.php' . $param ));				
 			}
 		} elseif ($hookname == "groupmenu") {
+			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -85,6 +85,7 @@ class webcalendarPlugin extends Plugin {
 			///Check if the group is active
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_webcalendarplugin = getStringFromRequest('use_webcalendarplugin');
 			if ( $use_webcalendarplugin == 1 ) {

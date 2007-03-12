@@ -42,7 +42,6 @@ class projects_hierarchyPlugin extends Plugin {
 
 	function CallHook ($hookname, $params) {
 		global $use_projects_hierarchyplugin,$G_SESSION,$HTML,$Language;
-		$group_id=$params['group'];
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("projects_hierarchy")) {
@@ -51,6 +50,7 @@ class projects_hierarchyPlugin extends Plugin {
 						  array ('/plugins/projects_hierarchy/index.php' . $param ));				
 			}
 		} elseif ($hookname == "groupmenu") {
+			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -72,6 +72,7 @@ class projects_hierarchyPlugin extends Plugin {
 			//Check if the group is active
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_projects_hierarchyplugin = getStringFromRequest('use_projects_hierarchyplugin');
 			if ( $use_projects_hierarchyplugin == 1 ) {
