@@ -34,7 +34,7 @@ class quota_managementPlugin extends Plugin {
 		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
 		$this->hooks[] = "userisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
-		$this->hooks[] = "quota_admin_tab"; // to show in admin
+		$this->hooks[] = "site_admin_option_hook"; // to show in admin
 		$this->hooks[] = "quota_label_project_admin"; // to show in admin project
 		$this->hooks[] = "quota_link_project_admin"; // to show in admin project
 	}
@@ -135,7 +135,7 @@ class quota_managementPlugin extends Plugin {
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
-		elseif ($hookname == "quota_admin_tab") {
+		elseif ($hookname == "site_admin_option_hook") {
 			// www/admin/index.php line 167
 			// ...
 			?>
