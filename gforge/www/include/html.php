@@ -454,7 +454,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true,$text_100='none') {
 	global $Language;
 	$checked_count=count($checked_array);
-	$return .='
+	$return ='
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		if ($text_100=='none') {
