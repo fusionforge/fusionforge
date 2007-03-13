@@ -147,39 +147,7 @@ class BaseLanguage {
 	 * @param string $lang language name
 	 */	
 	function loadLanguage($lang) {
-		$langmap = array (
-			'Basque'              => 'eu_ES',
-			'Bulgarian'           => 'bg_BG',
-			'Catalan'             => 'ca_ES',
-			'Chinese'             => 'zh_TW',
-			'Dutch'               => 'nl_NL',
-			'English'             => 'en_US',
-			'Esperanto'           => 'eo',
-			'French'              => 'fr_FR',
-			'German'              => 'de_DE',
-			'Greek'               => 'el_GR',
-			'Hebrew'              => 'he_IL',
-			'Indonesian'          => 'id_ID',
-			'Italian'             => 'it_IT',
-			'Japanese'            => 'ja_JP',
-			'Korean'              => 'ko_KR',
-// Even the Unicode consortium doesn't support a Latin locale
-			// 'Latin'            => 'la',
-			'Norwegian'           => 'nb_NO',
-			'Polish'              => 'pl_PL',
-			'PortugueseBrazilian' => 'pt_BR',
-			'Portuguese'          => 'pt_PT',
-			'Russian'             => 'ru_RU',
-			'SimplifiedChinese'   => 'zh_CN',
-			'Spanish'             => 'es_ES',
-			'Swedish'             => 'sv_SE',
-			'Thai'                => 'th_TH',
-			) ;
-		
-                $locale = $langmap[$lang].'.utf8';
-                setlocale(LC_ALL, $locale);
-                bindtextdomain('gforge', '/usr/share/locale/');
-                textdomain('gforge');
+		setupGettext ($lang) ;
 
 		$cachePath = $this->getLocalizationCachePath($lang);
 
@@ -513,6 +481,49 @@ function getLanguageClassName($acceptedLanguages) {
 		}
 		return false; // we will use default language
 	}
+}
+
+
+/**
+ * setupGettext - Set up the gettext infrastructure
+ * 
+ *
+ * @param string $lang language name
+ */	
+function setupGettext ($lang) {
+	$langmap = array (
+		'Basque'              => 'eu_ES',
+		'Bulgarian'           => 'bg_BG',
+		'Catalan'             => 'ca_ES',
+		'Chinese'             => 'zh_TW',
+		'Dutch'               => 'nl_NL',
+		'English'             => 'en_US',
+		'Esperanto'           => 'eo',
+		'French'              => 'fr_FR',
+		'German'              => 'de_DE',
+		'Greek'               => 'el_GR',
+		'Hebrew'              => 'he_IL',
+		'Indonesian'          => 'id_ID',
+		'Italian'             => 'it_IT',
+		'Japanese'            => 'ja_JP',
+		'Korean'              => 'ko_KR',
+// Even the Unicode consortium doesn't support a Latin locale
+		// 'Latin'            => 'la',
+		'Norwegian'           => 'nb_NO',
+		'Polish'              => 'pl_PL',
+		'PortugueseBrazilian' => 'pt_BR',
+		'Portuguese'          => 'pt_PT',
+		'Russian'             => 'ru_RU',
+		'SimplifiedChinese'   => 'zh_CN',
+		'Spanish'             => 'es_ES',
+		'Swedish'             => 'sv_SE',
+		'Thai'                => 'th_TH',
+		) ;
+		
+	$locale = $langmap[$lang].'.utf8';
+	setlocale(LC_ALL, $locale);
+	bindtextdomain('gforge', '/usr/share/locale/');
+	textdomain('gforge');
 }
 
 // Local Variables:
