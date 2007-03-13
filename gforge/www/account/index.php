@@ -27,7 +27,9 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/timezones.php');
 
-session_require(array('isloggedin'=>'1'));
+if (!session_loggedin()) {
+	exit_not_logged_in();
+}
 
 // get global users vars
 $u =& user_get_object(user_getid());
