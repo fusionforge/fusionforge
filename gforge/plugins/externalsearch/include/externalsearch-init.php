@@ -11,7 +11,7 @@
 
 require_once('ExternalSearchPlugin.class') ;
 
-define(SEARCH__TYPE_IS_EXTERNAL, 'external');
+define('SEARCH__TYPE_IS_EXTERNAL', 'external');
 
 $externalSearchPluginObject = new ExternalSearchPlugin();
 
