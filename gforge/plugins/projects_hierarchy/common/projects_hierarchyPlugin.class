@@ -204,7 +204,7 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<table><tr>';
 			echo '<td>'.$Language->getText('project_admin','choice_project').'</td><td>'.son_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>' ;
 			echo '</tr><tr>' ;
-			echo '<td>'.$Language->getText('project_admin','com').'</td><td> <input type="text" size="50" value="" name="com"></td>' ;
+			echo '<td>'.$Language->getText('project_admin','com').'</td><td> <input type="text" size="25" value="" name="com"></td>' ;
 			//echo type_son_box();
 			echo '<td><input type="submit"  name="son" value="'.$Language->getText('project_admin','save_son').'"></td></tr></table></form>';
 			echo '<br/>';
@@ -214,7 +214,7 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<table><tr>';
 			echo '<td>'.$Language->getText('project_admin','choice_project').'</td><td>'.link_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>';
 			echo '</tr><tr>' ;
-			echo '<td>'.$Language->getText('project_admin','com').'</td><td><input type="text" size="50" value="" name="com"></td>' ;
+			echo '<td>'.$Language->getText('project_admin','com').'</td><td><input type="text" size="25" value="" name="com"></td>' ;
 			echo '<td><input type="submit"  name="son" value="'.$Language->getText('project_admin','add_link').'"></td></tr></table></form>';
 			echo '<br/>';
 			//select all the sons of the current project
@@ -242,7 +242,7 @@ class projects_hierarchyPlugin extends Plugin {
 						echo '</td>'; 
 						
 						echo '<td>';
-						if($row_son[link_type] == 'navi'){
+						if($row_son['link_type'] == 'navi'){
 						echo $Language->getText('project_admin','navi_link');	
 						}
 						else {
@@ -251,7 +251,7 @@ class projects_hierarchyPlugin extends Plugin {
 						echo '</td>';
 						
 						echo '<td>';
-						if($row_son[activated] == 'f'){
+						if($row_son['activated'] == 'f'){
 							echo $Language->getText('project_admin','wait');
 						}
 						else {
@@ -259,7 +259,7 @@ class projects_hierarchyPlugin extends Plugin {
 						}
 						echo '</td>';
 						echo "<td><a href='#' onclick='if(confirm(\"".$Language->getText('project_admin','alert_del')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_son.php?group_id=".$group_id."&sub_group_id=".$row_son['sub_project_id']."\"}'}>".$Language->getText('project_admin','del')."</a></td>";
-						echo "<tr><td colspan='4'>".$Language->getText('project_admin','com')." <i>".$row_son[com]."</i>";
+						echo "<tr><td colspan='4'>".$Language->getText('project_admin','com')." <i>".$row_son['com']."</i>";
 						echo '</td></tr>';
 					}
 				
