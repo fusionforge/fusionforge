@@ -487,11 +487,6 @@ if ($sys_show_source) {
         $TABS_TITLES[]=$Language->getText('group','short_summary');
         (($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
-	// Project Activity tab
-	$TABS_DIRS[]='/activity/?group_id='. $group;
-	$TABS_TITLES[]=$Language->getText('group','short_activity');
-	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
-
         // Project Admin
         $perm =& $project->getPermission( session_get_user() );
         if ($perm->isAdmin()) {
@@ -505,7 +500,6 @@ if ($sys_show_source) {
         */
 
 	// Project Activity tab 
-
 	$TABS_DIRS[]='/activity/?group_id='. $group;
 	$TABS_TITLES[]=$Language->getText('group','short_activity');
 	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
