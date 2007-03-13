@@ -79,6 +79,7 @@ class webcalendarPlugin extends Plugin {
 				$params['DIRS'][]='/plugins/webcalendar/index2.php?type=group&group_id='.$group_id;
 				} else {
 				$params['TITLES'][]=$this->text." is [Off]";
+				$params['DIRS'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {

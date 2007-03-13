@@ -60,9 +60,9 @@ class MediaWikiPlugin extends Plugin {
 			if (!$project->isProject()) {
 				return;
 			}
+			$params['DIRS'][]='/mediawiki/index.php/' . $project->getUnixName(); 
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/mediawiki/index.php/' . $project->getUnixName(); 
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 			}	
