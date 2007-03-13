@@ -8,8 +8,9 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
-require_once ('plugins/projects_hierarchy/config.php');
+//require_once ('plugins/projects_hierarchy/config.php');
 
 // the header that displays for the user portion of the plugin
 function projects_hierarchy_Project_Header($params) {                                                                                                                                         

@@ -12,6 +12,7 @@
   */
 
 session_start();
+require_once('../../env.inc.php');    
 require_once('pre.php');    
 require_once('www/include/trove.php');
 require_once('../../../www/docman/include/doc_utils.php');
