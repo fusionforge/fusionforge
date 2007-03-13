@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-13 19:27+0100\n"
+"POT-Creation-Date: 2007-03-13 22:25+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,8 +149,9 @@ msgstr "Previous Version"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:108
 #: plugins/svntracker/common/svntrackerPlugin.class:100
-msgid "Actual Version"
-msgstr "Actual Version"
+#, fuzzy
+msgid "Current Version"
+msgstr "Current File"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:109
 #: plugins/svntracker/common/svntrackerPlugin.class:101
@@ -1771,13 +1772,14 @@ msgstr ""
 "but defaults to 2MB. If you need to upload large files, contact your site "
 "administrator.</p>"
 
-#: www/frs/admin/editrelease.php:301
+#: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:215
+#, fuzzy
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file.</span>"
+"and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file.</span>"
+"and click \"OK\".  Double-clicking doesn't register the file"
 
 #: www/frs/admin/editrelease.php:303 www/frs/admin/qrs.php:216
 msgid "Upload a new file"
@@ -1980,14 +1982,6 @@ msgstr "Or %1$s create a new package %2$s"
 #: www/frs/admin/qrs.php:211
 msgid "File Name"
 msgstr "File Name"
-
-#: www/frs/admin/qrs.php:215
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file"
-msgstr ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file"
 
 #: www/frs/admin/qrs.php:252 www/include/project_home.php:211
 msgid "Release Notes"
@@ -2982,7 +2976,7 @@ msgstr "Low"
 #: www/tracker/admin/form-updateextrafieldelement.php:50
 #: www/tracker/admin/form-extrafieldcopy.php:67 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/register/projectinfo.php:186 www/survey/include/SurveyHTML.class:546
+#: www/register/projectinfo.php:195 www/survey/include/SurveyHTML.class:546
 #: www/project/request.php:66 www/project/admin/editimages.php:235
 #: www/project/admin/roleedit.php:257 www/admin/userlist.php:184
 #: www/admin/index.php:124 www/admin/cronman.php:45
@@ -5938,31 +5932,31 @@ msgstr ""
 "you will receive notification of their decision and further instructions.<p/"
 ">Thank you for choosing %1$s"
 
-#: www/register/projectinfo.php:114
+#: www/register/projectinfo.php:123
 msgid "Project Information"
 msgstr "Project Information"
 
-#: www/register/projectinfo.php:117
-msgid ""
-"To apply for project registration, you should fill in basic information "
-"about it. Please read descriptions below carefully and provide complete and "
-"comprehensive data. All fields below are mandatory."
-msgstr ""
-"To apply for project registration, you should fill in basic information "
-"about it. Please read descriptions below carefully and provide complete and "
-"comprehensive data. All fields below are mandatory."
-
-#: www/register/projectinfo.php:122
-msgid ""
-"<h3>1. Project full name</h3>You should start with specifying the name of "
-"your project. The \"Full Name\" is descriptive, and has no arbitrary "
-"restrictions (except a 40 character limit).<p/>Full Name:<br/>"
-msgstr ""
-"<h3>1. Project full name</h3>You should start with specifying the name of "
-"your project. The \"Full Name\" is descriptive, and has no arbitrary "
-"restrictions (except a 40 character limit).<p/>Full Name:<br/>"
-
 #: www/register/projectinfo.php:126
+msgid ""
+"To apply for project registration, you should fill in basic information "
+"about it. Please read descriptions below carefully and provide complete and "
+"comprehensive data. All fields below are mandatory."
+msgstr ""
+"To apply for project registration, you should fill in basic information "
+"about it. Please read descriptions below carefully and provide complete and "
+"comprehensive data. All fields below are mandatory."
+
+#: www/register/projectinfo.php:131
+msgid ""
+"<h3>1. Project full name</h3>You should start with specifying the name of "
+"your project. The \"Full Name\" is descriptive, and has no arbitrary "
+"restrictions (except a 40 character limit).<p/>Full Name:<br/>"
+msgstr ""
+"<h3>1. Project full name</h3>You should start with specifying the name of "
+"your project. The \"Full Name\" is descriptive, and has no arbitrary "
+"restrictions (except a 40 character limit).<p/>Full Name:<br/>"
+
+#: www/register/projectinfo.php:135
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -5981,12 +5975,12 @@ msgstr ""
 "will not be used as a public description of your project. It must be written "
 "in English.</strong>"
 
-#: www/register/projectinfo.php:132
+#: www/register/projectinfo.php:141
 #, php-format
 msgid "<h3>3. License</h3>"
 msgstr "<h3>3. License</h3>"
 
-#: www/register/projectinfo.php:137
+#: www/register/projectinfo.php:146
 msgid ""
 "<p>If you selected \"other\", please provide an explanation along with a "
 "description of your license. Realize that other licenses may not be "
@@ -6000,7 +5994,7 @@ msgstr ""
 "project, since we will need to check that license is compatible with the "
 "OpenSource definition.</p>"
 
-#: www/register/projectinfo.php:143
+#: www/register/projectinfo.php:152
 msgid ""
 "<h3>4. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -6014,7 +6008,7 @@ msgstr ""
 "description (step 2), so feel free to use concise and catchy wording. "
 "Maximum length is 255 chars.</p>"
 
-#: www/register/projectinfo.php:148
+#: www/register/projectinfo.php:157
 #, php-format
 msgid ""
 "<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
@@ -6045,7 +6039,7 @@ msgstr ""
 "unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 
-#: www/register/projectinfo.php:158
+#: www/register/projectinfo.php:167
 #, php-format
 msgid ""
 "As there exist just one SCM, then this will be selected automatically. "
@@ -6054,7 +6048,7 @@ msgstr ""
 "As there exist just one SCM, then this will be selected automatically. "
 "<strong>%1$s</strong> will be selected."
 
-#: www/register/projectinfo.php:161
+#: www/register/projectinfo.php:170
 msgid ""
 "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
@@ -11022,6 +11016,23 @@ msgstr "ProjectCategory: name and assignee are Required"
 #: common/pm/ProjectGroupFactory.class:125
 msgid "No ProjectGroups Found"
 msgstr "No ProjectGroups Found"
+
+#~ msgid ""
+#~ "NOTE: In some browsers you must select the file in the file-upload dialog "
+#~ "and click \"OK\".  Double-clicking doesn't register the file"
+#~ msgstr ""
+#~ "NOTE: In some browsers you must select the file in the file-upload dialog "
+#~ "and click \"OK\".  Double-clicking doesn't register the file"
+
+#~ msgid ""
+#~ "NOTE: In some browsers you must select the file in the file-upload dialog "
+#~ "and click \"OK\".  Double-clicking doesn't register the file.</span>"
+#~ msgstr ""
+#~ "NOTE: In some browsers you must select the file in the file-upload dialog "
+#~ "and click \"OK\".  Double-clicking doesn't register the file.</span>"
+
+#~ msgid "Actual Version"
+#~ msgstr "Actual Version"
 
 #, fuzzy
 #~ msgid ""

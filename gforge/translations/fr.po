@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-13 19:27+0100\n"
-"PO-Revision-Date: 2007-03-13 19:43+0100\n"
+"POT-Creation-Date: 2007-03-13 22:25+0100\n"
+"PO-Revision-Date: 2007-03-13 22:41+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -135,17 +135,17 @@ msgstr "Date"
 #: plugins/cvstracker/common/cvstrackerPlugin.class:107
 #: plugins/svntracker/common/svntrackerPlugin.class:99
 msgid "Previous Version"
-msgstr ""
+msgstr "Version précédente"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:108
 #: plugins/svntracker/common/svntrackerPlugin.class:100
-msgid "Actual Version"
-msgstr ""
+msgid "Current Version"
+msgstr "Version actuelle"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:109
 #: plugins/svntracker/common/svntrackerPlugin.class:101
 msgid "Log Message"
-msgstr ""
+msgstr "Message de journalisation"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:110
 #: plugins/svntracker/common/svntrackerPlugin.class:102
@@ -169,11 +169,11 @@ msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:59
 msgid "Documents"
-msgstr ""
+msgstr "Documents"
 
 #: plugins/quota_management/www/quota_project.php:62
 msgid "Documents search engine"
-msgstr ""
+msgstr "Moteur de recherche pour les documents"
 
 #: plugins/quota_management/www/quota_project.php:78
 #: www/themes/gforge/Theme.class:553
@@ -270,7 +270,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:385
 #: plugins/quota_management/www/quota.php:401
 msgid "Mb"
-msgstr ""
+msgstr "Mo"
 
 #: plugins/quota_management/www/quota_project.php:206
 #: plugins/quota_management/www/quota_project.php:253
@@ -674,11 +674,11 @@ msgstr "Commencer une nouvelle discussion"
 
 #: plugins/webcalendar/www/index2.php:124
 msgid "You are not allowed to see this calendar."
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à voir ce calendrier."
 
 #: plugins/webcalendar/www/index2.php:132
 msgid "No calendar for this group."
-msgstr ""
+msgstr "Ce groupe n'a pas de calendrier."
 
 #: plugins/webcalendar/common/webcalendarPlugin.class:128
 msgid "View Personal webcalendar"
@@ -693,6 +693,9 @@ msgid ""
 "<p>Documentation for Subversion (sometimes referred to as \"SVN\") is "
 "available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 msgstr ""
+"<p>La documantation de Subversion (que l'on appelle parfois \\\"SVN\\\") est "
+"disponible <a href=\\\"http://svnbook.red-bean.com/\\\">ici</a> (en anglais)."
+"</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class:117
 msgid ""
@@ -869,7 +872,7 @@ msgstr ""
 #: www/soap/index.php:152 www/include/pre.php:184
 #: common/include/session.php:479
 msgid "en_US"
-msgstr "fr"
+msgstr "fr_FR"
 
 #: plugins/mediawiki/usr/share/mediawiki1.7/includes/GForgePre.php:211
 #: www/soap/index.php:153 www/include/pre.php:185
@@ -972,7 +975,7 @@ msgstr ""
 #: common/survey/SurveyResponse.class:99
 #, php-format
 msgid "Error"
-msgstr "ERREUR"
+msgstr "Erreur"
 
 #: www/forum/save.php:53
 msgid "Forum Position Saved. New messages will be highlighted when you return"
@@ -991,22 +994,22 @@ msgstr ""
 #: www/forum/include/AttachManager.class:293
 #: www/forum/include/AttachManager.class:319
 msgid "File uploaded"
-msgstr ""
+msgstr "Fichier publié"
 
 #: www/forum/include/AttachManager.class:187
 #: www/forum/include/AttachManager.class:280
 #: www/forum/include/AttachManager.class:297
 #: www/forum/include/AttachManager.class:322
 msgid "File not uploaded"
-msgstr ""
+msgstr "Fichier non publié"
 
 #: www/forum/include/AttachManager.class:217
 msgid "No file was provided"
-msgstr ""
+msgstr "Aucun fichier n'a été fourni"
 
 #: www/forum/include/AttachManager.class:227
 msgid "Invalid Extension"
-msgstr ""
+msgstr "Extension invalide"
 
 #: www/forum/include/AttachManager.class:235
 msgid "Error, problem with the attachment file uploaded into the server"
@@ -1014,7 +1017,7 @@ msgstr ""
 
 #: www/forum/include/AttachManager.class:294
 msgid "File Updated Successfully"
-msgstr ""
+msgstr "Fichier publié avec succès"
 
 #: www/forum/include/ForumHTML.class:171
 msgid "This is the content of the pending message"
@@ -1030,7 +1033,7 @@ msgstr "répondre"
 
 #: www/forum/include/ForumHTML.class:270
 msgid "Current File"
-msgstr ""
+msgstr "Fichier actuel"
 
 #: www/forum/include/ForumHTML.class:278 www/forum/include/ForumHTML.class:313
 msgid "Use the \"Browse\" button to find the file you want to attach"
@@ -1038,11 +1041,11 @@ msgstr ""
 
 #: www/forum/include/ForumHTML.class:281 www/forum/include/ForumHTML.class:316
 msgid "File to upload"
-msgstr ""
+msgstr "Fichier à publier"
 
 #: www/forum/include/ForumHTML.class:284
 msgid "Warning : Current file will be deleted permanently"
-msgstr ""
+msgstr "Attention : le fichier actuel sera supprimé e manière permanente"
 
 #: www/forum/include/ForumHTML.class:287 www/forum/include/ForumHTML.class:505
 #: www/forum/admin/ForumAdmin.class:378 www/forum/admin/index.php:169
@@ -1103,12 +1106,12 @@ msgstr "%1$s Identifiez-vous %2$s"
 
 #: www/forum/myforums.php:53
 msgid "You have no monitored forums"
-msgstr ""
+msgstr "Vous ne surveillez aucun forum"
 
 #: www/forum/myforums.php:65 www/forum/myforums.php:67
 #: www/forum/myforums.php:70 www/my/index.php:228
 msgid "My Monitored Forums"
-msgstr ""
+msgstr "Mes forums surveillés"
 
 #: www/forum/myforums.php:72 www/forum/admin/index.php:94
 #: www/forum/admin/index.php:166 www/mail/index.php:62
@@ -1133,6 +1136,8 @@ msgid ""
 "Message Queued for moderation -> Please wait until the admin approves/"
 "rejects it"
 msgstr ""
+"Le message est dans la file de modération.  Veuillez attendre que "
+"l'administrateur l'approuve ou le rejette."
 
 #: www/forum/forum.php:103
 msgid "Message Posted Successfully"
@@ -1226,23 +1231,23 @@ msgstr "Vous devez d'abord choisir un message"
 #: www/forum/attachment.php:155 www/tracker/mod.php:227
 #: www/tracker/mod-limited.php:138 www/tracker/detail.php:158
 msgid "Attachments"
-msgstr ""
+msgstr "Pièces jointes"
 
 #: www/forum/attachment.php:95
 msgid "You cannot delete this attachment"
-msgstr ""
+msgstr "Vous ne pouvez pas supprimer cette pièce jointe."
 
 #: www/forum/attachment.php:99
 msgid "Attachment deleted"
-msgstr ""
+msgstr "Pièce jointe supprimée"
 
 #: www/forum/attachment.php:123
 msgid "You cannot edit this attachment"
-msgstr ""
+msgstr "Vous ne pouvez pas modifier cette pièce jointe."
 
 #: www/forum/attachment.php:196
 msgid "The Attachment does not exist"
-msgstr ""
+msgstr "La pièce jointe n'existe pas."
 
 #: www/forum/index.php:46
 #, php-format
@@ -1261,15 +1266,15 @@ msgstr "Forum"
 #: www/forum/index.php:75 www/forum/admin/index.php:104
 #: www/forum/admin/index.php:156
 msgid "No Moderation"
-msgstr ""
+msgstr "Pas de modération"
 
 #: www/forum/index.php:76
 msgid "Anonymous & Non Group Users"
-msgstr ""
+msgstr "Anonymes et utilisateurs extérieurs au groupe"
 
 #: www/forum/index.php:77
 msgid "All Except Admins"
-msgstr ""
+msgstr "Tous les utilisateurs à l'exception des administrateurs"
 
 #: www/forum/admin/ForumAdmin.class:79
 msgid "Add Forum"
@@ -1277,7 +1282,7 @@ msgstr "Ajouter un forum"
 
 #: www/forum/admin/ForumAdmin.class:81 www/forum/admin/ForumAdmin.class:93
 msgid "Manage Pending Messages"
-msgstr ""
+msgstr "Gérer les messages en attente"
 
 #: www/forum/admin/ForumAdmin.class:203
 msgid "Forum Info Updated Successfully"
@@ -1299,7 +1304,7 @@ msgstr "Supprimé avec succès"
 
 #: www/forum/admin/ForumAdmin.class:307
 msgid "No forums are moderated for this group"
-msgstr ""
+msgstr "Ce groupe n'a pas de forums modérés."
 
 #: www/forum/admin/ForumAdmin.class:342 www/forum/admin/index.php:92
 #: www/forum/admin/index.php:160
@@ -1458,11 +1463,11 @@ msgstr ""
 
 #: www/forum/admin/index.php:287
 msgid "Message Edited Successfully"
-msgstr ""
+msgstr "Message modifié avec succès"
 
 #: www/forum/admin/index.php:291 www/forum/admin/index.php:323
 msgid "Edit a Message"
-msgstr ""
+msgstr "Éditer un message"
 
 #: www/forum/monitor.php:50
 msgid "Forum monitoring deactivated"
@@ -1524,6 +1529,8 @@ msgstr "La liste des fichiers du projet est affichée en dessous."
 msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
+"La version que vous avez choisie est <span class=\"selected\">mise en "
+"valeur</span>"
 
 #: www/frs/index.php:74
 msgid ""
@@ -1732,11 +1739,14 @@ msgid ""
 msgstr ""
 "Etape 2&nbsp;:&nbsp;Ajouter des fichiers à cette version</h3><p>Maintenant"
 
-#: www/frs/admin/editrelease.php:301
+#: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:215
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file.</span>"
+"and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
+"Note : dans certains navigateurs, le double-clic ne suffit pas pour "
+"sélectionner un fichier, et il est nécessaire de cliquer sur le bouton \"OK"
+"\"."
 
 #: www/frs/admin/editrelease.php:303 www/frs/admin/qrs.php:216
 msgid "Upload a new file"
@@ -1943,12 +1953,6 @@ msgstr "Ou %1$s créer un nouveau paquet %2$s"
 #: www/frs/admin/qrs.php:211
 msgid "File Name"
 msgstr "Nom du fichier&nbsp;"
-
-#: www/frs/admin/qrs.php:215
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file"
-msgstr ""
 
 #: www/frs/admin/qrs.php:252 www/include/project_home.php:211
 msgid "Release Notes"
@@ -2533,7 +2537,7 @@ msgstr "Rapport"
 #: www/activity/index.php:47 www/activity/index.php:90
 #: www/activity/index.php:108
 msgid "Activity"
-msgstr ""
+msgstr "Activité"
 
 #: www/themes/gforge/Theme.class:517
 #: www/themes/gforge-simple-theme/Theme.class:543
@@ -2784,53 +2788,53 @@ msgstr "Administrer"
 
 #: www/include/BBCodeSupportHtml.class:45
 msgid "Bold text: [b]text[/b]  (alt+b)"
-msgstr ""
+msgstr "Texte en gras : [b]texte[/b] (alt+b)"
 
 #: www/include/BBCodeSupportHtml.class:46
 msgid "Italic text: [i]text[/i]  (alt+i)"
-msgstr ""
+msgstr "Texte en italique : [i]texte[/i] (alt+i)"
 
 #: www/include/BBCodeSupportHtml.class:47
 msgid "Underline text: [u]text[/u]  (alt+u)"
-msgstr ""
+msgstr "Texte souligné : [u]texte[/u] (alt+u)"
 
 #: www/include/BBCodeSupportHtml.class:48
 msgid "Quote text : [quote]text[/quote]  (alt+q)"
-msgstr ""
+msgstr "Citation : [quote]texte[/quote] (alt+q)"
 
 #: www/include/BBCodeSupportHtml.class:49
 msgid "Code display: [code]code[/code]  (alt+c)"
-msgstr ""
+msgstr "Affichage de code : [code]texte[/code] (alt+c)"
 
 #: www/include/BBCodeSupportHtml.class:50
 msgid "List: [list]text[/list] (alt+l)"
-msgstr ""
+msgstr "Liste : [list]texte[/list] (alt+l)"
 
 #: www/include/BBCodeSupportHtml.class:51
 msgid "Ordered list: [list=]text[/list]  (alt+o)"
-msgstr ""
+msgstr "Liste numérotée : [list=]texte[/list] (alt+o)"
 
 #: www/include/BBCodeSupportHtml.class:52
 msgid "Insert image: [img]http://image_url[/img]  (alt+p)"
-msgstr ""
+msgstr "Insertion d'une image : [img]http://url_image[/img] (alt+p)"
 
 #: www/include/BBCodeSupportHtml.class:53
 msgid ""
 "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)"
-msgstr ""
+msgstr "Insertion d'un lien : [url]http://url[/url] ou [url=http://url]texte descriptif[/url] (alt+w)"
 
 #: www/include/BBCodeSupportHtml.class:54
 msgid "Close all open bbCode tags"
-msgstr ""
+msgstr "Fermer tous les éléments BBcode ouverts"
 
 #: www/include/BBCodeSupportHtml.class:55
 msgid ""
 "Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000"
-msgstr ""
+msgstr "Couleur de texte : [color=red]texte[/color] (vous pouvez aussi utiliser des valeurs numériques comme color=#FF0000)"
 
 #: www/include/BBCodeSupportHtml.class:56
 msgid "Font size: [size=x-small]small text[/size]"
-msgstr ""
+msgstr "Taille du texte : [size=x-small]texte[/size]"
 
 #: www/include/BBCodeSupportHtml.class:57
 msgid "Link to Task: [task]Forumid:Subproject:Taskid:TaskName[/task]   (alt+k)"
@@ -2842,99 +2846,99 @@ msgstr ""
 
 #: www/include/BBCodeSupportHtml.class:260
 msgid "Font colour"
-msgstr ""
+msgstr "Couleur de texte"
 
 #: www/include/BBCodeSupportHtml.class:262
 msgid "Default"
-msgstr ""
+msgstr "Par défaut"
 
 #: www/include/BBCodeSupportHtml.class:263
 msgid "Dark Red"
-msgstr ""
+msgstr "Rouge sombre"
 
 #: www/include/BBCodeSupportHtml.class:264
 msgid "Red"
-msgstr ""
+msgstr "Rouge"
 
 #: www/include/BBCodeSupportHtml.class:265
 msgid "Orange"
-msgstr ""
+msgstr "Orange"
 
 #: www/include/BBCodeSupportHtml.class:266
 msgid "Brown"
-msgstr ""
+msgstr "Brun"
 
 #: www/include/BBCodeSupportHtml.class:267
 msgid "Yellow"
-msgstr ""
+msgstr "Jaune"
 
 #: www/include/BBCodeSupportHtml.class:268
 msgid "Green"
-msgstr ""
+msgstr "Vert"
 
 #: www/include/BBCodeSupportHtml.class:269
 msgid "Olive"
-msgstr ""
+msgstr "Vert olive"
 
 #: www/include/BBCodeSupportHtml.class:270
 msgid "Cyan"
-msgstr ""
+msgstr "Bleu cyan"
 
 #: www/include/BBCodeSupportHtml.class:271
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 #: www/include/BBCodeSupportHtml.class:272
 msgid "Dark Blue"
-msgstr ""
+msgstr "Bleu foncé"
 
 #: www/include/BBCodeSupportHtml.class:273
 msgid "Indigo"
-msgstr ""
+msgstr "Indigo"
 
 #: www/include/BBCodeSupportHtml.class:274
 msgid "Violet"
-msgstr ""
+msgstr "Violet"
 
 #: www/include/BBCodeSupportHtml.class:275
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: www/include/BBCodeSupportHtml.class:276
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: www/include/BBCodeSupportHtml.class:277
 msgid "Font size"
-msgstr ""
+msgstr "Taille de police"
 
 #: www/include/BBCodeSupportHtml.class:278
 msgid "Tiny"
-msgstr ""
+msgstr "Minuscule"
 
 #: www/include/BBCodeSupportHtml.class:279
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 #: www/include/BBCodeSupportHtml.class:280
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: www/include/BBCodeSupportHtml.class:281
 msgid "Large"
-msgstr ""
+msgstr "Grand"
 
 #: www/include/BBCodeSupportHtml.class:282
 msgid "Huge"
-msgstr ""
+msgstr "Énorme"
 
 #: www/include/BBCodeSupportHtml.class:285
 msgid "Close Tags"
-msgstr ""
+msgstr "Fermer les élements"
 
 #: www/include/BBCodeSupportHtml.class:292
 msgid "Tip: Styles can be applied quickly to selected text"
-msgstr ""
+msgstr "Astuce : les styles peuvent être appliqués rapidement sur le texte sélectionné."
 
 #: www/include/vote_function.php:198 www/survey/include/SurveyHTML.class:503
 msgid "Low"
@@ -2954,7 +2958,7 @@ msgstr "Bas"
 #: www/tracker/admin/form-updateextrafieldelement.php:50
 #: www/tracker/admin/form-extrafieldcopy.php:67 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/register/projectinfo.php:186 www/survey/include/SurveyHTML.class:546
+#: www/register/projectinfo.php:195 www/survey/include/SurveyHTML.class:546
 #: www/project/request.php:66 www/project/admin/editimages.php:235
 #: www/project/admin/roleedit.php:257 www/admin/userlist.php:184
 #: www/admin/index.php:124 www/admin/cronman.php:45
@@ -3302,7 +3306,7 @@ msgstr "Ajouter aux signets"
 
 #: www/include/menuSF.php:194
 msgid "Logout"
-msgstr "Sortir"
+msgstr "Se déconnecter"
 
 #: www/include/menuSF.php:203 www/account/verify.php:101
 #: www/account/login.php:61 www/admin/userlist.php:69
@@ -3604,7 +3608,7 @@ msgstr "Sujet"
 #: www/news/submit.php:113 www/news/admin/index.php:135
 #: www/news/admin/index.php:279 www/my/diary.php:154
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: www/news/index.php:39
 msgid ""
@@ -3923,7 +3927,7 @@ msgstr "Confirmation de changement d'adresse e-mail"
 msgid ""
 "<p>An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change. </p><a href=\"/\">[ Home ]</a>"
-msgstr ""
+msgstr "<p>Un message a été envoyé à la nouvelle adresse.  Suivez les instructions qu'il contient pour valider le changement d'adresse.</p><a href=\"/\">[ Page d'accueil ]</a>"
 
 #: www/account/change_email.php:81
 msgid "MISSINGTEXT:account_change_email/title:TEXTMISSING"
@@ -4146,7 +4150,7 @@ msgstr "Les nouveaux mots de passe ne concordent pas."
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
 "password.You may <a href=\"/account/login.php\">login</a> to the sitenow.</p>"
-msgstr ""
+msgstr "<h2>Mot de passe changé</h2><p>Bravo, vous venez de changer le mot de passe de votre compte.  Vous pouvez à présent <a href=\"/account/login.php\">vous connecter</a> au site."
 
 #: www/account/lostlogin.php:101
 msgid "New Password (min. 6 chars)"
@@ -4927,7 +4931,7 @@ msgstr "Afficher par"
 
 #: www/tracker/browse.php:247
 msgid "Quick Browse"
-msgstr ""
+msgstr "Navigation rapide"
 
 #: www/tracker/browse.php:294 www/tracker/browse.php:444
 #: www/tracker/mod.php:120 www/tracker/mod-limited.php:85
@@ -4987,7 +4991,7 @@ msgstr "Établir une relation avec des tâches"
 
 #: www/tracker/mod.php:55 www/tracker/query.php:239 www/tracker/detail.php:52
 msgid "Save Changes"
-msgstr ""
+msgstr "Sauver les modifications"
 
 #: www/tracker/mod.php:72 www/tracker/mod-limited.php:67
 msgid "Date Submitted"
@@ -5004,7 +5008,7 @@ msgstr "Type de données"
 #: www/tracker/mod.php:167 www/tracker/mod-limited.php:125
 #: www/tracker/detail.php:95 www/pm/include/ProjectTaskHTML.class:139
 msgid "Followups"
-msgstr ""
+msgstr "Suites"
 
 #: www/tracker/mod.php:170
 msgid "Use Canned Response"
@@ -5022,13 +5026,13 @@ msgstr "Commentaires"
 #: www/tracker/mod.php:189 www/tracker/mod.php:190 www/tracker/detail.php:120
 #: www/tracker/detail.php:123
 msgid "Related Tasks"
-msgstr ""
+msgstr "Tâches liées"
 
 #: www/tracker/mod.php:198 www/tracker/detail.php:128
 #: www/pm/include/ProjectTaskHTML.class:58 www/pm/ganttpage.php:72
 #: www/pm/browse_task.php:87 www/pm/browse_task.php:167
 msgid "Task Id"
-msgstr "Numéro"
+msgstr "Numéro de tâche"
 
 #: www/tracker/mod.php:199 www/tracker/detail.php:129 www/pm/add_task.php:58
 #: www/pm/include/ProjectTaskHTML.class:59
@@ -5036,11 +5040,11 @@ msgstr "Numéro"
 #: www/pm/detail_task.php:61 www/pm/ganttpage.php:73 www/pm/browse_task.php:88
 #: www/pm/browse_task.php:169
 msgid "Task Summary"
-msgstr "Sommaire des tâches"
+msgstr "Résumé des tâches"
 
 #: www/tracker/mod.php:221 www/tracker/detail.php:151
 msgid "No Related Tasks"
-msgstr ""
+msgstr "Pas de tâche liée"
 
 #: www/tracker/mod.php:228
 msgid "Existing Files"
@@ -5049,12 +5053,12 @@ msgstr "Fichiers existants"
 #: www/tracker/mod.php:231 www/tracker/mod-limited.php:140
 #: www/tracker/add.php:109 www/tracker/detail.php:162
 msgid "Attach Files"
-msgstr ""
+msgstr "Joindre des fichiers"
 
 #: www/tracker/mod.php:263 www/tracker/mod-limited.php:175
 #: www/tracker/detail.php:195
 msgid "No Files Currently Attached"
-msgstr "Pas de fichier attaché"
+msgstr "Pas de fichier joint"
 
 #: www/tracker/mod.php:279 www/tracker/mod-limited.php:190
 #: www/tracker/detail.php:210 www/tracker/detail.php:214
@@ -5063,7 +5067,7 @@ msgstr "Changements"
 
 #: www/tracker/mod-limited.php:147 www/tracker/detail.php:170
 msgid "Attached Files"
-msgstr "Fichiers attachés"
+msgstr "Fichiers joints"
 
 #: www/tracker/include/ArtifactHtml.class:40 www/tracker/add.php:82
 msgid "Detailed description"
@@ -5118,11 +5122,11 @@ msgstr "Surveiller"
 
 #: www/tracker/include/ArtifactTypeHtml.class:86
 msgid "New Tracker"
-msgstr ""
+msgstr "Nouvel outil de suivi"
 
 #: www/tracker/include/ArtifactTypeHtml.class:89
 msgid "Update Settings"
-msgstr ""
+msgstr "Mettre à jour les réglages"
 
 #: www/tracker/include/ArtifactTypeHtml.class:92
 #: www/tracker/admin/tracker.php:11
@@ -5134,11 +5138,11 @@ msgstr "Ajouter/Modifier les champs supplémentaires"
 #: www/tracker/admin/form-clonetracker.php:27
 #: www/tracker/admin/form-clonetracker.php:29
 msgid "Clone Tracker"
-msgstr ""
+msgstr "Cloner l'outil de suivi"
 
 #: www/tracker/include/ArtifactTypeHtml.class:98
 msgid "Add Canned Responses"
-msgstr ""
+msgstr "Ajouter des réponses types"
 
 #: www/tracker/tracker.php:37 www/tracker/tracker.php:66
 #: www/tracker/tracker.php:239 common/tracker/Artifact.class:193
@@ -5829,11 +5833,11 @@ msgstr ""
 "vous recevrez la notification de leur décision, et des instructions "
 "supplémentaires.</p><p>Merci d'avoir choisi %1$s."
 
-#: www/register/projectinfo.php:114
+#: www/register/projectinfo.php:123
 msgid "Project Information"
 msgstr "Information du projet"
 
-#: www/register/projectinfo.php:117
+#: www/register/projectinfo.php:126
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -5844,14 +5848,14 @@ msgstr ""
 "descriptions ci-dessous et fournir des données précises et complètes. Tous "
 "les champs sont obligatoires."
 
-#: www/register/projectinfo.php:122
+#: www/register/projectinfo.php:131
 msgid ""
 "<h3>1. Project full name</h3>You should start with specifying the name of "
 "your project. The \"Full Name\" is descriptive, and has no arbitrary "
 "restrictions (except a 40 character limit).<p/>Full Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:126
+#: www/register/projectinfo.php:135
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -5871,12 +5875,12 @@ msgstr ""
 "description publique de votre projet. Elle doit être rédigée en anglais.</"
 "strong></s>"
 
-#: www/register/projectinfo.php:132
+#: www/register/projectinfo.php:141
 #, php-format
 msgid "<h3>3. License</h3>"
 msgstr "<h3>3. Licence</h3>"
 
-#: www/register/projectinfo.php:137
+#: www/register/projectinfo.php:146
 msgid ""
 "<p>If you selected \"other\", please provide an explanation along with a "
 "description of your license. Realize that other licenses may not be "
@@ -5885,7 +5889,7 @@ msgid ""
 "OpenSource definition.</p>"
 msgstr ""
 
-#: www/register/projectinfo.php:143
+#: www/register/projectinfo.php:152
 msgid ""
 "<h3>4. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -5899,7 +5903,7 @@ msgstr ""
 "description du projet (étape 2), donc permettez-vous des formulation "
 "concises et des abréviations. La longueur maximale est de 255 caractères."
 
-#: www/register/projectinfo.php:148
+#: www/register/projectinfo.php:157
 #, php-format
 msgid ""
 "<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
@@ -5917,7 +5921,7 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:158
+#: www/register/projectinfo.php:167
 #, php-format
 msgid ""
 "As there exist just one SCM, then this will be selected automatically. "
@@ -5926,7 +5930,7 @@ msgstr ""
 "Comme il n'existe qu'un seul gestionnaire de sources, il sera sélectionné "
 "automatiquement. <strong>%1$s</strong> sera sélectionné."
 
-#: www/register/projectinfo.php:161
+#: www/register/projectinfo.php:170
 msgid ""
 "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
@@ -6127,9 +6131,9 @@ msgstr "Aucun vote"
 #: www/survey/include/SurveyHTML.class:680
 #: www/survey/admin/show_results_aggregate.php:152
 #: www/survey/admin/show_results_aggregate.php:218
-#, fuzzy, php-format
+#, php-format
 msgid "View All %1$s Comments"
-msgstr "Voir les commentaires"
+msgstr "Voir tous les %s commentaires"
 
 #: www/survey/rating_resp.php:35
 msgid "You must be logged in to vote"
@@ -6367,13 +6371,13 @@ msgstr ""
 "questions).</li><li>L'URL du sondage est %1$s où XX est le numéro du sondage."
 
 #: www/survey/admin/index.php:48
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2"
 "$s page"
 msgstr ""
-"Vous pouvez activer/désactiver les sondages dans %1$sÉditer les sondages "
-"existants"
+"Vous pouvez activer et désactiver les sondages sur la page %1$sÉditer les "
+"sondages existants%2$s"
 
 #: www/survey/admin/survey.php:59
 msgid "Survey Inserted"
@@ -7578,14 +7582,14 @@ msgid "Edit Multimedia Data"
 msgstr "Données multimedia"
 
 #: www/project/admin/editimages.php:199
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can store up to %1$s MB of multimedia data (bitmap and vector graphics, "
 "sound clips, 3D models) in the database. Use this page to add/delete your "
 "project multimedia data."
 msgstr ""
-"Vous pouvez stocker jusqu'à 1Mo de données multimedia (imges vectorisées ou "
-"non, son, modèles 3D) dans la base de données. Utiliser cette page pour "
+"Vous pouvez stocker jusqu'à %1$s Mo de données multimedia (imges vectorisées "
+"ou non, son, modèles 3D) dans la base de données. Utiliser cette page pour "
 "Ajouter/Supprimer les données mutimedia de votre projet."
 
 #: www/project/admin/editimages.php:222
@@ -7856,9 +7860,9 @@ msgid "User Updated Successfully"
 msgstr "Utilisateur mis à jour avec succès"
 
 #: www/project/admin/index.php:163
-#, fuzzy, php-format
+#, php-format
 msgid "Project Admin: %1$s"
-msgstr "Résumé de l'administration"
+msgstr "Administration du projet %1$s"
 
 #: www/project/admin/index.php:175
 msgid "Misc. Project Information"
@@ -10857,30 +10861,3 @@ msgstr "Catégorie de projet : il faut un nom et un responsable."
 #: common/pm/ProjectGroupFactory.class:125
 msgid "No ProjectGroups Found"
 msgstr "Aucun groupe de projet trouvé"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "Ce courrier électronique vous est envoyé pour vous rappeler que des "
-#~ "éléments que vous suivez sont en attente ou en retard. L'élément #%1$s "
-#~ "est en attente : \n"
-#~ "Résumé : %3$s\n"
-#~ "Etat : %5$s\n"
-#~ "Date d'ouverture :%6$s\n"
-#~ "Assigné à : %7$s\n"
-#~ "Soumis par : %8$s\n"
-#~ "Détails: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Cliquez ici pour accéder à cet élément : %4$s"

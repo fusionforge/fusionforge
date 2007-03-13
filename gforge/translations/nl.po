@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-13 19:27+0100\n"
+"POT-Creation-Date: 2007-03-13 22:25+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,8 +138,9 @@ msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:108
 #: plugins/svntracker/common/svntrackerPlugin.class:100
-msgid "Actual Version"
-msgstr ""
+#, fuzzy
+msgid "Current Version"
+msgstr "Versie"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:109
 #: plugins/svntracker/common/svntrackerPlugin.class:101
@@ -1731,10 +1732,10 @@ msgstr ""
 "beheerder, is normaliter 2MB. Als je grotere bestanden moet uploaden, neem "
 "dan contact op met de systeem beheerder.</p>"
 
-#: www/frs/admin/editrelease.php:301
+#: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:215
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file.</span>"
+"and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
 
 #: www/frs/admin/editrelease.php:303 www/frs/admin/qrs.php:216
@@ -1941,12 +1942,6 @@ msgstr "Of %1$s maak een nieuwe bundel %2$s"
 #: www/frs/admin/qrs.php:211
 msgid "File Name"
 msgstr "Bestandsnaam"
-
-#: www/frs/admin/qrs.php:215
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file"
-msgstr ""
 
 #: www/frs/admin/qrs.php:252 www/include/project_home.php:211
 msgid "Release Notes"
@@ -2940,7 +2935,7 @@ msgstr "Laag"
 #: www/tracker/admin/form-updateextrafieldelement.php:50
 #: www/tracker/admin/form-extrafieldcopy.php:67 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/register/projectinfo.php:186 www/survey/include/SurveyHTML.class:546
+#: www/register/projectinfo.php:195 www/survey/include/SurveyHTML.class:546
 #: www/project/request.php:66 www/project/admin/editimages.php:235
 #: www/project/admin/roleedit.php:257 www/admin/userlist.php:184
 #: www/admin/index.php:124 www/admin/cronman.php:45
@@ -5808,11 +5803,11 @@ msgstr ""
 "Je projectaanvraag is ingediend bij de  %1$s beheerder. Binnen 72 uur "
 "ontvang je een beslissing over de aanvraag, en verdere instructies.</p>"
 
-#: www/register/projectinfo.php:114
+#: www/register/projectinfo.php:123
 msgid "Project Information"
 msgstr "Project informatie"
 
-#: www/register/projectinfo.php:117
+#: www/register/projectinfo.php:126
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -5822,14 +5817,14 @@ msgstr ""
 "worden. Lees onderstaande omschrijvingen goed, en vul volledige en "
 "begrijpelijke gegevens in. Alle velden hieronder zijn verplicht."
 
-#: www/register/projectinfo.php:122
+#: www/register/projectinfo.php:131
 msgid ""
 "<h3>1. Project full name</h3>You should start with specifying the name of "
 "your project. The \"Full Name\" is descriptive, and has no arbitrary "
 "restrictions (except a 40 character limit).<p/>Full Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:126
+#: www/register/projectinfo.php:135
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -5848,7 +5843,7 @@ msgstr ""
 "resources op de bedoelde wijze worden aangewend. Deze omschrijving is niet "
 "bedoeld als een openbare project samenvatting.</strong>"
 
-#: www/register/projectinfo.php:132
+#: www/register/projectinfo.php:141
 #, fuzzy, php-format
 msgid "<h3>3. License</h3>"
 msgstr ""
@@ -5872,7 +5867,7 @@ msgstr ""
 "verantwoordelijk voor juridische discrepanties aangaande je licentie."
 "<p><strong>Licenties</strong>"
 
-#: www/register/projectinfo.php:137
+#: www/register/projectinfo.php:146
 msgid ""
 "<p>If you selected \"other\", please provide an explanation along with a "
 "description of your license. Realize that other licenses may not be "
@@ -5881,7 +5876,7 @@ msgid ""
 "OpenSource definition.</p>"
 msgstr ""
 
-#: www/register/projectinfo.php:143
+#: www/register/projectinfo.php:152
 msgid ""
 "<h3>4. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -5895,7 +5890,7 @@ msgstr ""
 "samenvatting (stap 2), gebruik een compacte. maar pakkende omschrijving. "
 "Maximum lengte is 255 tekens."
 
-#: www/register/projectinfo.php:148
+#: www/register/projectinfo.php:157
 #, php-format
 msgid ""
 "<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
@@ -5913,7 +5908,7 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:158
+#: www/register/projectinfo.php:167
 #, php-format
 msgid ""
 "As there exist just one SCM, then this will be selected automatically. "
@@ -5922,7 +5917,7 @@ msgstr ""
 "Als er maar &eacute;&eacute;n SCM beschikbaar is wordt deze automatisch "
 "gekozen. De keuze is <strong>%1$s</strong>."
 
-#: www/register/projectinfo.php:161
+#: www/register/projectinfo.php:170
 msgid ""
 "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"

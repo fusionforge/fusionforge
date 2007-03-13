@@ -105,7 +105,7 @@ class cvstrackerPlugin extends Plugin {
 		$title_arr[]=_('Filename');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
-		$title_arr[]=_('Actual Version');
+		$title_arr[]=_('Current Version');
 		$title_arr[]=_('Log Message');
 		$title_arr[]=_('Author');
 		return $title_arr;

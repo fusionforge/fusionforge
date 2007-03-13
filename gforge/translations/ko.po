@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-13 19:27+0100\n"
+"POT-Creation-Date: 2007-03-13 22:25+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,8 +118,9 @@ msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:108
 #: plugins/svntracker/common/svntrackerPlugin.class:100
-msgid "Actual Version"
-msgstr ""
+#, fuzzy
+msgid "Current Version"
+msgstr "Version"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:109
 #: plugins/svntracker/common/svntrackerPlugin.class:101
@@ -1701,10 +1702,10 @@ msgstr ""
 "는 2MB까지입니다. 만약 큰 파일을 올릴 필요가 있다면 시스템 관리자에게 직접 문"
 "의하세요.</p>"
 
-#: www/frs/admin/editrelease.php:301
+#: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:215
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file.</span>"
+"and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
 
 #: www/frs/admin/editrelease.php:303 www/frs/admin/qrs.php:216
@@ -1905,12 +1906,6 @@ msgstr "또는 %1$s 새로운 패키지를 생성합니다. %2$s"
 #: www/frs/admin/qrs.php:211
 msgid "File Name"
 msgstr "파일 이름"
-
-#: www/frs/admin/qrs.php:215
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file"
-msgstr ""
 
 #: www/frs/admin/qrs.php:252 www/include/project_home.php:211
 msgid "Release Notes"
@@ -2895,7 +2890,7 @@ msgstr "Low"
 #: www/tracker/admin/form-updateextrafieldelement.php:50
 #: www/tracker/admin/form-extrafieldcopy.php:67 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/register/projectinfo.php:186 www/survey/include/SurveyHTML.class:546
+#: www/register/projectinfo.php:195 www/survey/include/SurveyHTML.class:546
 #: www/project/request.php:66 www/project/admin/editimages.php:235
 #: www/project/admin/roleedit.php:257 www/admin/userlist.php:184
 #: www/admin/index.php:124 www/admin/cronman.php:45
@@ -5711,11 +5706,11 @@ msgstr ""
 "프로젝트를 %1$s 관리자에게 제출했습니다. 72 시간 이내에 결정 및 자세한 이용 "
 "절차에 대한 내용을 통보받을 것입니다.</p><p>%1$s을 선택해 주셔서 감사합니다."
 
-#: www/register/projectinfo.php:114
+#: www/register/projectinfo.php:123
 msgid "Project Information"
 msgstr "프로젝트 정보"
 
-#: www/register/projectinfo.php:117
+#: www/register/projectinfo.php:126
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -5725,14 +5720,14 @@ msgstr ""
 "설명을 주의깊게 읽어보시고, 완전하고 자세한 내용을 제공해 주십시오. 아래의 모"
 "든 필드는 필수입니다."
 
-#: www/register/projectinfo.php:122
+#: www/register/projectinfo.php:131
 msgid ""
 "<h3>1. Project full name</h3>You should start with specifying the name of "
 "your project. The \"Full Name\" is descriptive, and has no arbitrary "
 "restrictions (except a 40 character limit).<p/>Full Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:126
+#: www/register/projectinfo.php:135
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -5749,7 +5744,7 @@ msgstr ""
 "한 대로 서비스를 사용하기 위한 보증입니다. 이 설명은 프로젝트의 공개 설명이 "
 "아닙니다.</strong></p>"
 
-#: www/register/projectinfo.php:132
+#: www/register/projectinfo.php:141
 #, fuzzy, php-format
 msgid "<h3>3. License</h3>"
 msgstr ""
@@ -5770,7 +5765,7 @@ msgstr ""
 "적용되지 않습니다.)</em> <p>%1$s 은 라이센스에 관해서 어떠한 법적인 책임도 지"
 "지 않습니다.<p><strong>라이센스</strong>"
 
-#: www/register/projectinfo.php:137
+#: www/register/projectinfo.php:146
 msgid ""
 "<p>If you selected \"other\", please provide an explanation along with a "
 "description of your license. Realize that other licenses may not be "
@@ -5779,7 +5774,7 @@ msgid ""
 "OpenSource definition.</p>"
 msgstr ""
 
-#: www/register/projectinfo.php:143
+#: www/register/projectinfo.php:152
 msgid ""
 "<h3>4. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -5792,7 +5787,7 @@ msgstr ""
 "지 않아도 됩니다. 간결하고 매력적인 단어를 사용하십시오. 최대 길이는 255 문자"
 "입니다."
 
-#: www/register/projectinfo.php:148
+#: www/register/projectinfo.php:157
 #, php-format
 msgid ""
 "<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
@@ -5810,14 +5805,14 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:158
+#: www/register/projectinfo.php:167
 #, php-format
 msgid ""
 "As there exist just one SCM, then this will be selected automatically. "
 "<strong>%1$s</strong> will be selected."
 msgstr ""
 
-#: www/register/projectinfo.php:161
+#: www/register/projectinfo.php:170
 msgid ""
 "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"

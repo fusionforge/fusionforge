@@ -6,6 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-13 22:25+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +20,7 @@ msgid "Pending task manager items notification"
 msgstr "Notificació d'elements pendents del gestor de tasques"
 
 #: cronjobs/send_pending_items_mail.php:78
+#, php-format
 msgid ""
 "This mail is sent to you to remind you of pending/overdue tasks. \n"
 "The task manager item  #%1$s is pending: \n"
@@ -28,7 +31,8 @@ msgid ""
 "\n"
 "Click here to visit the item %3$s"
 msgstr ""
-"Aquest correu se us envia per a recordar-vos que teniu tasques pendents/vençudes. \n"
+"Aquest correu se us envia per a recordar-vos que teniu tasques pendents/"
+"vençudes. \n"
 "L'element #%1$s del gestor de tasques està pendent: \n"
 "Resum de la tasca: %2$s\n"
 "Enviada per: %4$s\n"
@@ -41,8 +45,10 @@ msgid "Pending tracker  items notification"
 msgstr "Notificació d'elements de rastreig pendents"
 
 #: cronjobs/send_pending_items_mail.php:121
+#, fuzzy, php-format
 msgid ""
-"This mail is sent to you to remind you of pending/overdue tracker items. The item #%1$s is pending: \n"
+"This mail is sent to you to remind you of pending/overdue tracker items. The "
+"item #%1$s is pending:\n"
 "Summary: %3$s\n"
 "Status: %5$s\n"
 "Open Date:%6$s\n"
@@ -53,7 +59,8 @@ msgid ""
 "\n"
 "Click here to visit the item: %4$s"
 msgstr ""
-"Aquest correu se us envia per a recordar-vos que teniu elements de rastreig pendents/vençuts. L'element #%1$s està pendent: \n"
+"Aquest correu se us envia per a recordar-vos que teniu elements de rastreig "
+"pendents/vençuts. L'element #%1$s està pendent: \n"
 "Resum: %3$s\n"
 "Estat: %5$s\n"
 "Data oberta:%6$s\n"
@@ -65,7 +72,20 @@ msgstr ""
 "Feu clic aquí per a visitar l'element: %4$s"
 
 #: deb-specific/index_std.php:5
-msgid "<P>%1$s is a <B>free service to <A href=\"http://www.opensource.org/\">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.</P><P><B>Site Feedback and Participation</B></P><P>In order to get the most out of %1$s, you'll need to <A href=\"/account/register.php\">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully.</P><P><B>Set Up Your Own Project</B></P><P><A href=\"/account/register.php\">Register as a site user</A>, then <A HREF=\"/account/login.php\">Login</A> and finally, <A HREF=\"/register/\">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>"
+#, php-format
+msgid ""
+"<P>%1$s is a <B>free service to <A href=\"http://www.opensource.org/\">Open "
+"Source</A> developers</B> offering easy access to the best in CVS, mailing "
+"lists, bug tracking, message boards/forums, task management, site hosting, "
+"permanent file archival, full backups, and total web-based administration.</"
+"P><P><B>Site Feedback and Participation</B></P><P>In order to get the most "
+"out of %1$s, you'll need to <A href=\"/account/register.php\">register as a "
+"site user</A>. This will allow you to participate fully in all we have to "
+"offer. You may of course browse the site without registering, but will not "
+"have access to participate fully.</P><P><B>Set Up Your Own Project</B></"
+"P><P><A href=\"/account/register.php\">Register as a site user</A>, then <A "
+"HREF=\"/account/login.php\">Login</A> and finally, <A HREF=\"/register/"
+"\">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>"
 msgstr ""
 
 #: deb-specific/index_std.php:7 plugins/webcalendar/www/index2.php:56
@@ -117,8 +137,9 @@ msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:108
 #: plugins/svntracker/common/svntrackerPlugin.class:100
-msgid "Actual Version"
-msgstr ""
+#, fuzzy
+msgid "Current Version"
+msgstr "Versió"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class:109
 #: plugins/svntracker/common/svntrackerPlugin.class:101
@@ -439,6 +460,7 @@ msgstr "Suprimeix aquest filtre"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:193
 #: www/softwaremap/trove_list.php:182
+#, php-format
 msgid "%1$s projects"
 msgstr "%1$s projectes"
 
@@ -449,11 +471,13 @@ msgstr "Navega per"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:263
 #: www/softwaremap/trove_list.php:254
+#, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Més de <strong>%1$s</strong> projectes al conjunt de resultats."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:266
 #: www/softwaremap/trove_list.php:257
+#, php-format
 msgid "<strong>%1$s</strong> projects in result set."
 msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
 
@@ -664,11 +688,16 @@ msgid "View the webcalendar Administration"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:113
-msgid "<p>Documentation for Subversion (sometimes referred to as \"SVN\") is available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
+msgid ""
+"<p>Documentation for Subversion (sometimes referred to as \"SVN\") is "
+"available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:117
-msgid "<p><b>Anonymous Subversion Access</b></p><p>This project's SVN repository can be checked out through anonymous access with the following command(s).</p>"
+msgid ""
+"<p><b>Anonymous Subversion Access</b></p><p>This project's SVN repository "
+"can be checked out through anonymous access with the following command(s).</"
+"p>"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:124
@@ -676,7 +705,11 @@ msgid "The password is 'anonsvn'"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:131
-msgid "<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>"
+msgid ""
+"<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers "
+"can access the SVN tree via this method. SSH must be installed on your "
+"client machine. Substitute <i>developername</i> with the proper values. "
+"Enter your site password when prompted.</p>"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:132
@@ -686,7 +719,10 @@ msgid "developername"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:135
-msgid "<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>"
+msgid ""
+"<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers "
+"can access the SVN tree via this method. Substitute <i>developername</i> "
+"with the proper values. Enter your site password when prompted.</p>"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:144
@@ -699,7 +735,10 @@ msgid "Repository History"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:157
-msgid "<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>"
+msgid ""
+"<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great "
+"view into the current status of this project's code. You may also view the "
+"complete histories of any file in the repository.</p>"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:158
@@ -712,6 +751,7 @@ msgid "Enable Anonymous Access"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class:217
+#, php-format
 msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 msgstr ""
 
@@ -743,7 +783,12 @@ msgid "MISSINGTEXT:plugin_scmcvs/documentation:TEXTMISSING"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:101
-msgid "<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>"
+msgid ""
+"<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be "
+"checked out through anonymous (pserver) CVS with the following instruction "
+"set. The module you wish to check out must be specified as the "
+"<i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply "
+"press the Enter key.</p>"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:105
@@ -751,7 +796,11 @@ msgid "modulename"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:110
-msgid "<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>"
+msgid ""
+"<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can "
+"access the CVS tree via this method. SSH must be installed on your client "
+"machine. Substitute <i>modulename</i> and <i>developername</i> with the "
+"proper values. Enter your site password when prompted.</p>"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:121
@@ -759,7 +808,10 @@ msgid "Download The Nightly CVS Tree Snapshot"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:133
-msgid "<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>"
+msgid ""
+"<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view "
+"into the current status of this project's code. You may also view the "
+"complete histories of any file in the repository.</p>"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:134
@@ -771,6 +823,7 @@ msgid "Enable pserver"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class:215
+#, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
 
@@ -799,6 +852,7 @@ msgid "MISSINGTEXT:scm_index/history:TEXTMISSING"
 msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class:197
+#, php-format
 msgid "MISSINGTEXT:project_home/cvs_commits:TEXTMISSING"
 msgstr ""
 
@@ -915,12 +969,14 @@ msgstr ""
 #: www/project/admin/editgroupinfo.php:42 www/admin/search.php:42
 #: www/pm/include/ProjectGroupHTML.class:40 www/my/rmproject.php:50
 #: common/survey/SurveyResponse.class:99
+#, php-format
 msgid "Error"
 msgstr "Error"
 
 #: www/forum/save.php:53
 msgid "Forum Position Saved. New messages will be highlighted when you return"
-msgstr "Desada la posició del fòrum. Els missatges nous estaran destacats quan torneu"
+msgstr ""
+"Desada la posició del fòrum. Els missatges nous estaran destacats quan torneu"
 
 #: www/forum/include/AttachManager.class:177
 #: www/forum/include/AttachManager.class:264
@@ -1033,11 +1089,13 @@ msgid "Receive followups via email"
 msgstr "Rebeu respostes per correu electrònic"
 
 #: www/forum/include/ForumHTML.class:586
+#, php-format
 msgid "You could post if you were %1$s logged in %2$s"
 msgstr "Podrieu enviar missatges si fossiu %1$s iniciant sessió a %2$s"
 
 #: www/forum/include/ForumHTML.class:590 www/tracker/add.php:47
 #: www/tracker/add.php:93
+#, php-format
 msgid "Please %1$s login %2$s"
 msgstr "%1$s inici de sessió %2$s"
 
@@ -1060,6 +1118,7 @@ msgstr ""
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class:34
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class:39
 #: www/pm/index.php:60 www/pm/admin/index.php:301 www/pm/admin/index.php:350
+#, php-format
 msgid "Description"
 msgstr "Descripció"
 
@@ -1068,7 +1127,9 @@ msgid "Posts"
 msgstr "Missatges"
 
 #: www/forum/forum.php:101
-msgid "Message Queued for moderation -> Please wait until the admin approves/rejects it"
+msgid ""
+"Message Queued for moderation -> Please wait until the admin approves/"
+"rejects it"
 msgstr ""
 
 #: www/forum/forum.php:103
@@ -1182,10 +1243,12 @@ msgid "The Attachment does not exist"
 msgstr ""
 
 #: www/forum/index.php:46
+#, php-format
 msgid "Forums for %1$s"
 msgstr "Fòrums per %1$s"
 
 #: www/forum/index.php:49 www/forum/admin/index.php:363
+#, php-format
 msgid "No Forums Found For %1$s"
 msgstr "No s'han trobat fòrums per %1$s"
 
@@ -1223,6 +1286,7 @@ msgid "Forum created successfully"
 msgstr "Fòrum creat amb èxit"
 
 #: www/forum/admin/ForumAdmin.class:260
+#, php-format
 msgid "%1$s messages deleted"
 msgstr "Suprimits %1$s missatges"
 
@@ -1254,7 +1318,9 @@ msgid "Couldn't Update Master Thread parent with current time"
 msgstr "No s'ha pogut actualitzar el pare del fil principal amb l'hora actual"
 
 #: www/forum/admin/ForumAdmin.class:483
-msgid "The thread which the message was posted to doesn't exist anymore, please delete the message."
+msgid ""
+"The thread which the message was posted to doesn't exist anymore, please "
+"delete the message."
 msgstr ""
 
 #: www/forum/admin/attachments.php:50 www/forum/admin/pending.php:53
@@ -1317,8 +1383,13 @@ msgid "Change forum status"
 msgstr "Canvia l'estat del fòrum"
 
 #: www/forum/admin/index.php:131
-msgid "You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public."
-msgstr "Podeu ajustar les característiques del fòrum des d'aquí. Teniu en compte que els fòrums  privats encara poden ser vistos pels membres del vostre projecte, però no el públic general."
+msgid ""
+"You can adjust forum features from here. Please note that private forums can "
+"still be viewed by members of your project, not the general public."
+msgstr ""
+"Podeu ajustar les característiques del fòrum des d'aquí. Teniu en compte que "
+"els fòrums  privats encara poden ser vistos pels membres del vostre "
+"projecte, però no el públic general."
 
 #: www/forum/admin/index.php:154 www/frs/admin/showreleases.php:84
 #: www/frs/admin/index.php:99 www/docman/admin/index.php:150
@@ -1352,8 +1423,12 @@ msgid "Delete"
 msgstr "Suprimeix"
 
 #: www/forum/admin/index.php:187
-msgid "You are about to permanently and irretrievably delete this entire forum and all its contents!"
-msgstr "Esteu a punt de suprimir de forma permanent, irreversible i completa aquest fòrum i tot el seu contingut!"
+msgid ""
+"You are about to permanently and irretrievably delete this entire forum and "
+"all its contents!"
+msgstr ""
+"Esteu a punt de suprimir de forma permanent, irreversible i completa aquest "
+"fòrum i tot el seu contingut!"
 
 #: www/forum/admin/index.php:193 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:81 www/pm/admin/index.php:398
@@ -1370,8 +1445,12 @@ msgid "Delete a Message"
 msgstr "Suprimeix un missatge"
 
 #: www/forum/admin/index.php:229
-msgid "WARNING! You are about to permanently delete a message and all of its followups!!"
-msgstr "ATENCIÓ! Esteu a punt de suprimir permanentment un missatge i tot el seu fil!!"
+msgid ""
+"WARNING! You are about to permanently delete a message and all of its "
+"followups!!"
+msgstr ""
+"ATENCIÓ! Esteu a punt de suprimir permanentment un missatge i tot el seu "
+"fil!!"
 
 #: www/forum/admin/index.php:287
 msgid "Message Edited Successfully"
@@ -1438,12 +1517,17 @@ msgid "Below is a list of all files of the project."
 msgstr "A sota hi ha una llista de tots els fitxers del projecte."
 
 #: www/frs/index.php:72
-msgid "The release you have chosen is <span class=\"selected\">highlighted</span>."
+msgid ""
+"The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 
 #: www/frs/index.php:74
-msgid "Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version)."
-msgstr "Abans de la baixada, podeu voler llegir les notes de publicació i el registre de canvis (accessible fent clic sobre la versió de publicació)."
+msgid ""
+"Before downloading, you may want to read Release Notes and ChangeLog "
+"(accessible by clicking on release version)."
+msgstr ""
+"Abans de la baixada, podeu voler llegir les notes de publicació i el "
+"registre de canvis (accessible fent clic sobre la versió de publicació)."
 
 #: www/frs/index.php:85
 msgid "To create a new release click here."
@@ -1502,8 +1586,12 @@ msgid "Release Edit/File Releases"
 msgstr "Edita publicacions de fitxers"
 
 #: www/frs/admin/deletepackage.php:69
-msgid "You are about to permanently and irretrievably delete this package and all its releases and files!"
-msgstr "Esteu a punt de suprimir de forma permanent i irreversible aquest paquet i totes les seves publicacions i fitxers!"
+msgid ""
+"You are about to permanently and irretrievably delete this package and all "
+"its releases and files!"
+msgstr ""
+"Esteu a punt de suprimir de forma permanent i irreversible aquest paquet i "
+"totes les seves publicacions i fitxers!"
 
 #: www/frs/admin/showreleases.php:99
 msgid "Release New File Version"
@@ -1533,8 +1621,12 @@ msgid "Edit"
 msgstr "Edita"
 
 #: www/frs/admin/deleterelease.php:79
-msgid "You are about to permanently and irretrievably delete this release and its files!"
-msgstr "Esteu a punt de suprimir de forma permanent i irreversible aquesta publicació i els seus fitxers!"
+msgid ""
+"You are about to permanently and irretrievably delete this release and its "
+"files!"
+msgstr ""
+"Esteu a punt de suprimir de forma permanent i irreversible aquesta "
+"publicació i els seus fitxers!"
 
 #: www/frs/admin/editrelease.php:107
 msgid "Release Notes Are Too Small"
@@ -1591,8 +1683,16 @@ msgid "Status"
 msgstr ""
 
 #: www/frs/admin/editrelease.php:261
-msgid "Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br />You can either upload the release notes and change log individually, or paste them in together below."
-msgstr "Edita les notes de publicació o el registre de canvis per aquesta publicació d'aquest paquet. Aquests canvis s'aplicaran a tots els fitxers adjuntats en aquesta publicació.<br />Podeu pujar les notes de publicació i el registre de canvis individualment, o enganxar-les juntes a sota."
+msgid ""
+"Edit the Release Notes or Change Log for this release of this package. These "
+"changes will apply to all files attached to this release.<br />You can "
+"either upload the release notes and change log individually, or paste them "
+"in together below."
+msgstr ""
+"Edita les notes de publicació o el registre de canvis per aquesta publicació "
+"d'aquest paquet. Aquests canvis s'aplicaran a tots els fitxers adjuntats en "
+"aquesta publicació.<br />Podeu pujar les notes de publicació i el registre "
+"de canvis individualment, o enganxar-les juntes a sota."
 
 #: www/frs/admin/editrelease.php:265
 msgid "Upload Release Notes"
@@ -1619,11 +1719,21 @@ msgid "Submit/Refresh"
 msgstr "Tramet/Refresca"
 
 #: www/frs/admin/editrelease.php:296
-msgid "Step 2: Add Files To This Release</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>"
-msgstr "Pas 2: Afegeix fitxers a aquesta publicació</h3><p>Ara, escolliu un fitxer per pujar-lo al sistema. La mida màxima del fitxer és determinada per l'administrador del lloc, però per defecte és de 2MB. Si necessiteu pujar fitxers grans, contacteu el vostre administrador del lloc.</p>"
+msgid ""
+"Step 2: Add Files To This Release</h3><p>Now, choose a file to upload into "
+"the system. The maximum file size is determined by the site administrator, "
+"but defaults to 2MB. If you need to upload large files, contact your site "
+"administrator.</p>"
+msgstr ""
+"Pas 2: Afegeix fitxers a aquesta publicació</h3><p>Ara, escolliu un fitxer "
+"per pujar-lo al sistema. La mida màxima del fitxer és determinada per "
+"l'administrador del lloc, però per defecte és de 2MB. Si necessiteu pujar "
+"fitxers grans, contacteu el vostre administrador del lloc.</p>"
 
-#: www/frs/admin/editrelease.php:301
-msgid "NOTE: In some browsers you must select the file in the file-upload dialog and click \"OK\".  Double-clicking doesn't register the file.</span>"
+#: www/frs/admin/editrelease.php:301 www/frs/admin/qrs.php:215
+msgid ""
+"NOTE: In some browsers you must select the file in the file-upload dialog "
+"and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
 
 #: www/frs/admin/editrelease.php:303 www/frs/admin/qrs.php:216
@@ -1631,6 +1741,7 @@ msgid "Upload a new file"
 msgstr "Puja un nou fitxer"
 
 #: www/frs/admin/editrelease.php:307 www/frs/admin/qrs.php:220
+#, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %1$s"
 msgstr ""
 
@@ -1659,8 +1770,14 @@ msgid "No Files In This Release"
 msgstr "No hi ha fitxers en aquesta publicació"
 
 #: www/frs/admin/editrelease.php:345
-msgid "Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page."
-msgstr "Un cop heu afegit fitxers a aquesta publicació <strong>heu d'</strong> actualitzar cadascun d'aquests fitxers amb la informació correcta o no apareixeran a la vostra pàgina de resum de baixades."
+msgid ""
+"Once you have added files to this release you <strong>must</strong> update "
+"each of these files with the correct information or they will not appear on "
+"your download summary page."
+msgstr ""
+"Un cop heu afegit fitxers a aquesta publicació <strong>heu d'</strong> "
+"actualitzar cadascun d'aquests fitxers amb la informació correcta o no "
+"apareixeran a la vostra pàgina de resum de baixades."
 
 #: www/frs/admin/editrelease.php:346
 msgid "Filename<br />Release"
@@ -1683,6 +1800,7 @@ msgid "Delete File"
 msgstr "Suprimeix el fitxer"
 
 #: www/frs/admin/editrelease.php:398
+#, php-format
 msgid "There are %1$s users monitoring this package."
 msgstr "Hi ha %1$s usuaris monitoritzant aquest paquet."
 
@@ -1699,12 +1817,34 @@ msgid "QRS"
 msgstr "QRS"
 
 #: www/frs/admin/index.php:127
+#, php-format
 msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Feu clic aquí a %1$s per la publicació ràpida d'un fitxer %2$s"
 
 #: www/frs/admin/index.php:130
-msgid "<h3>Packages</h3><p>You can use packages to group different file releases together, or use them however you like. <p><H4>An example of packages:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Your Packages:</H4><p><ol><li>Define your packages</li><li>Create new releases of packages</li></ol><p><h3>Releases of Packages</h3><p>A release of a package can contain multiple files.<p><H4>Examples of Releases</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.<p>"
-msgstr "<h3>Paquets</h3><p>Podeu usar els paquets per agrupar diferents publicacions de fitxers conjuntament, o usar-lo com vulgueu. <p><H4>Un exemple de paquets:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Els vostres paquets:</H4><p><ol><li>Definiu els vostres paquets</li><li>Creeu noves publicacions de paquets</li></ol><p><h3>Publicacions de paquets</h3><p>La publicació d'un paquet pot contenir múltiples fitxers.<p><H4>Exemples depublicacions</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Podeu crear noves publicacions de paquets fent clic a <strong>Afegeix/Edita publicacions</strong> al costat del vostre nom de paquet.<p>"
+msgid ""
+"<h3>Packages</h3><p>You can use packages to group different file releases "
+"together, or use them however you like. <p><H4>An example of packages:</"
+"h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
+"><strong>Mysql-odbc</strong><p><h4>Your Packages:</H4><p><ol><li>Define your "
+"packages</li><li>Create new releases of packages</li></ol><p><h3>Releases of "
+"Packages</h3><p>A release of a package can contain multiple files."
+"<p><H4>Examples of Releases</h4><p><strong>3.22.1</strong><br /"
+"><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>You can create "
+"new releases of packages by clicking on <strong>Add/Edit Releases</strong> "
+"next to your package name.<p>"
+msgstr ""
+"<h3>Paquets</h3><p>Podeu usar els paquets per agrupar diferents publicacions "
+"de fitxers conjuntament, o usar-lo com vulgueu. <p><H4>Un exemple de paquets:"
+"</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
+"><strong>Mysql-odbc</strong><p><h4>Els vostres paquets:</"
+"H4><p><ol><li>Definiu els vostres paquets</li><li>Creeu noves publicacions "
+"de paquets</li></ol><p><h3>Publicacions de paquets</h3><p>La publicació d'un "
+"paquet pot contenir múltiples fitxers.<p><H4>Exemples depublicacions</"
+"h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /"
+"><strong>3.22.3</strong><br /><p>Podeu crear noves publicacions de paquets "
+"fent clic a <strong>Afegeix/Edita publicacions</strong> al costat del vostre "
+"nom de paquet.<p>"
 
 #: www/frs/admin/index.php:142
 msgid "You Have No Packages Defined"
@@ -1747,8 +1887,12 @@ msgid "Must select a package."
 msgstr "Heu de seleccionar un paquet."
 
 #: www/frs/admin/qrs.php:71
-msgid "The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file."
-msgstr "El fitxer carregat excedeix la mida màxima de fitxer. Contacteu amb l'administrador del lloc per carregar aquest fitxer gran."
+msgid ""
+"The uploaded file exceeds the maximum file size. Contact to the site admin "
+"to upload this big file."
+msgstr ""
+"El fitxer carregat excedeix la mida màxima de fitxer. Contacteu amb "
+"l'administrador del lloc per carregar aquest fitxer gran."
 
 #: www/frs/admin/qrs.php:74
 msgid "The uploaded file was only partially uploaded."
@@ -1787,16 +1931,13 @@ msgid "No File Types Available"
 msgstr "No hi ha tipus de fitxers disponibles"
 
 #: www/frs/admin/qrs.php:190
+#, php-format
 msgid "Or %1$s create a new package %2$s"
 msgstr "O %1$s crea un nou paquet %2$s"
 
 #: www/frs/admin/qrs.php:211
 msgid "File Name"
 msgstr "Nom de fitxer"
-
-#: www/frs/admin/qrs.php:215
-msgid "NOTE: In some browsers you must select the file in the file-upload dialog and click \"OK\".  Double-clicking doesn't register the file"
-msgstr ""
 
 #: www/frs/admin/qrs.php:252 www/include/project_home.php:211
 msgid "Release Notes"
@@ -1832,8 +1973,13 @@ msgid "Monitoring Has Been Started"
 msgstr "S'ha iniciat la monitorització"
 
 #: www/people/createjob.php:47
-msgid "Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires."
-msgstr "Comenceu omplint els camps de sota. Quan feu clic a continua, se us mostrarà una llista d'habilitats i els nivells d'experiència que es requereix per aquesta feina."
+msgid ""
+"Start by filling in the fields below. When you click continue, you will be "
+"shown a list of skills and experience levels that this job requires."
+msgstr ""
+"Comenceu omplint els camps de sota. Quan feu clic a continua, se us mostrarà "
+"una llista d'habilitats i els nivells d'experiència que es requereix per "
+"aquesta feina."
 
 #: www/people/createjob.php:52 www/people/editjob.php:171
 #: www/people/people_utils.php:369 www/people/people_utils.php:437
@@ -1949,7 +2095,8 @@ msgstr "Habilitat de FEINA actualitzada amb èxit"
 
 #: www/people/editjob.php:125
 msgid "JOB skill update failed - wrong project_id"
-msgstr "Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
+msgstr ""
+"Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
 
 #: www/people/editjob.php:141
 msgid "JOB skill delete FAILED"
@@ -1961,7 +2108,8 @@ msgstr "Habilitat de FEINA esborrada amb èxit"
 
 #: www/people/editjob.php:147
 msgid "JOB skill delete failed - wrong project_id"
-msgstr "Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
+msgstr ""
+"Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
 
 #: www/people/editjob.php:155
 msgid "Edit Job"
@@ -1976,8 +2124,15 @@ msgid "No Such posting For This Project"
 msgstr "No hi ha tal missatge per aquest projecte"
 
 #: www/people/editjob.php:166
-msgid "<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>"
-msgstr "<p>Ara podeu editar/canviar la llista d'habilitats adjuntada a aquest missatge. Els desenvolupadors seran capaços de fer coincidir les seves habilitats amb els vostres requeriments.</p><p>Tots els missatges es tanquen automàticament després de dues setmanes.</p>"
+msgid ""
+"<p>Now you can edit/change the list of skills attached to this posting. "
+"Developers will be able to match their skills with your requirements.</"
+"p><p>All postings are automatically closed after two weeks.</p>"
+msgstr ""
+"<p>Ara podeu editar/canviar la llista d'habilitats adjuntada a aquest "
+"missatge. Els desenvolupadors seran capaços de fer coincidir les seves "
+"habilitats amb els vostres requeriments.</p><p>Tots els missatges es tanquen "
+"automàticament després de dues setmanes.</p>"
 
 #: www/people/editjob.php:183
 msgid "Update Descriptions"
@@ -2063,6 +2218,7 @@ msgid "Date Opened"
 msgstr "Data d'obertura"
 
 #: www/people/people_utils.php:439
+#, php-format
 msgid "%1$s project"
 msgstr "Projecte %1$s"
 
@@ -2103,7 +2259,8 @@ msgid "Edit Skills"
 msgstr "Edita les habilitats"
 
 #: www/people/editprofile.php:145
-msgid "Change the required fields, and press \"Done\" at the bottom of the page"
+msgid ""
+"Change the required fields, and press \"Done\" at the bottom of the page"
 msgstr ""
 
 #: www/people/editprofile.php:150
@@ -2157,8 +2314,12 @@ msgid "Edit Public Permissions"
 msgstr "Editeu els permisos públics"
 
 #: www/people/editprofile.php:244
-msgid "The following option determines if others can see your skills. If they can't, you can still enter your skills."
-msgstr "La següent opció determina si altres poden veure les vostres habilitats. Encara que no puguin, podeu entrar les vostres habilitats."
+msgid ""
+"The following option determines if others can see your skills. If they "
+"can't, you can still enter your skills."
+msgstr ""
+"La següent opció determina si altres poden veure les vostres habilitats. "
+"Encara que no puguin, podeu entrar les vostres habilitats."
 
 #: www/people/editprofile.php:251
 msgid "Update Permissions"
@@ -2166,19 +2327,26 @@ msgstr "Permisos d'actualització"
 
 #: www/people/editprofile.php:261
 msgid "No skill types in database (skills_data_types table)"
-msgstr "No hi ha tipus d'habilitats a la base de dades (taula skills_data_types)"
+msgstr ""
+"No hi ha tipus d'habilitats a la base de dades (taula skills_data_types)"
 
 #: www/people/editprofile.php:262
 msgid "No skill types in database - inform system administrator"
-msgstr "No hi ha tipus d'habilitats a la base dades - informeu l'administrador del sistema"
+msgstr ""
+"No hi ha tipus d'habilitats a la base dades - informeu l'administrador del "
+"sistema"
 
 #: www/people/editprofile.php:279
 msgid "Add a new skill"
 msgstr "Afegeix una n ova habilitat"
 
 #: www/people/editprofile.php:280
-msgid "You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible."
-msgstr "Podeu entrar les noves habilitats que heu adquirit aquí. Entreu les dates inicial i final el més acuradament que pugueu."
+msgid ""
+"You can enter new skills you have acquired here. Please enter the start and "
+"finish dates as accurately as possible."
+msgstr ""
+"Podeu entrar les noves habilitats que heu adquirit aquí. Entreu les dates "
+"inicial i final el més acuradament que pugueu."
 
 #: www/people/editprofile.php:281
 msgid "All fields are required!"
@@ -2228,11 +2396,31 @@ msgstr "Sistema de petició d'ajuda"
 
 #: www/people/index.php:55
 msgid "Click job titles for more detailed descriptions."
-msgstr "Feu clic els títols dels treballs per unes descripcions més detallades."
+msgstr ""
+"Feu clic els títols dels treballs per unes descripcions més detallades."
 
 #: www/people/index.php:63
-msgid "<p>The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.</p><p>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)</p><p>Browse through the category menu to find projects looking for your help.</p><p>If you're a project admin, log in and submit help wanted requests through your project administration page.</p><p>To suggest new job categories, submit a request via the support manager.</p>"
-msgstr "<p>El tauler destinat a sol·licituds d'ajuda dels projectes de %1$s serveix per a col·laboracions voluntàries no comercials. L'ús comercial està prohibit.</p><p>Els llistats de projecte resten oberts durant dues setmanes, o fins que els tanqui el remitent, el que passi abans. (Els administradors dels projectes sempre poden reenviar sol·licituds ja expirades.)</p><p>Exploreu a través del menú de categories per a trobar projectes que cerquin la vostra ajuda.</p><p>Si sou un administrador de projecte, inicieu una sessió i envieu peticions d'ajuda a través de la vostra pàgina d'administració de projecte.</p><p>Per a suggerir noves categories de feina, envieu una petició a través del gestor de suport.</p>"
+#, php-format
+msgid ""
+"<p>The %1$s Project Help Wanted board is for non-commercial, project "
+"volunteer openings. Commercial use is prohibited.</p><p>Project listings "
+"remain live for two weeks, or until closed by the poster, whichever comes "
+"first. (Project administrators may always re-post expired openings.)</"
+"p><p>Browse through the category menu to find projects looking for your help."
+"</p><p>If you're a project admin, log in and submit help wanted requests "
+"through your project administration page.</p><p>To suggest new job "
+"categories, submit a request via the support manager.</p>"
+msgstr ""
+"<p>El tauler destinat a sol·licituds d'ajuda dels projectes de %1$s serveix "
+"per a col·laboracions voluntàries no comercials. L'ús comercial està "
+"prohibit.</p><p>Els llistats de projecte resten oberts durant dues setmanes, "
+"o fins que els tanqui el remitent, el que passi abans. (Els administradors "
+"dels projectes sempre poden reenviar sol·licituds ja expirades.)</"
+"p><p>Exploreu a través del menú de categories per a trobar projectes que "
+"cerquin la vostra ajuda.</p><p>Si sou un administrador de projecte, inicieu "
+"una sessió i envieu peticions d'ajuda a través de la vostra pàgina "
+"d'administració de projecte.</p><p>Per a suggerir noves categories de feina, "
+"envieu una petició a través del gestor de suport.</p>"
 
 #: www/people/index.php:67
 msgid "Last posts"
@@ -2457,19 +2645,26 @@ msgid "MISSINGTEXT:error/error_creating_perm:TEXTMISSING"
 msgstr ""
 
 #: www/mail/index.php:36
+#, php-format
 msgid "Mailing Lists for %1$s"
 msgstr "Llistes de correu per %1$s"
 
 #: www/mail/index.php:51
+#, php-format
 msgid "No Lists found for %1$s"
 msgstr "No s'han trobat llistes per %1$s"
 
 #: www/mail/index.php:52
 msgid "Project administrators use the admin link to request mailing lists."
-msgstr "Els administradors del projecte usen l'enllaç d'administració per a sol·licitar llistes de correu."
+msgstr ""
+"Els administradors del projecte usen l'enllaç d'administració per a "
+"sol·licitar llistes de correu."
 
 #: www/mail/index.php:57
-msgid "<p>Mailing lists provided via a GForge version of <a href=\"http://www.list.org/\">GNU Mailman</a>. Thanks to the Mailman and <a href=\"http://www.python.org/\">Python</a> crews for excellent software.</p>"
+msgid ""
+"<p>Mailing lists provided via a GForge version of <a href=\"http://www.list."
+"org/\">GNU Mailman</a>. Thanks to the Mailman and <a href=\"http://www."
+"python.org/\">Python</a> crews for excellent software.</p>"
 msgstr ""
 
 #: www/mail/index.php:58
@@ -2489,6 +2684,7 @@ msgid "Not activated yet"
 msgstr "Encara no està activada"
 
 #: www/mail/index.php:80
+#, php-format
 msgid "%1$s Archives"
 msgstr "Arxius %1$s"
 
@@ -2517,7 +2713,11 @@ msgid "Add a Mailing List"
 msgstr "Afegeix una llista de correu"
 
 #: www/mail/admin/index.php:95
-msgid "<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class=\"important\">6-24 Hours</span> for your list to be created.</p>"
+#, php-format
+msgid ""
+"<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
+"strong></p><p>It will take <span class=\"important\">6-24 Hours</span> for "
+"your list to be created.</p>"
 msgstr ""
 
 #: www/mail/admin/index.php:112
@@ -2546,8 +2746,14 @@ msgid "Mailing List Administration"
 msgstr "Administració de la llista de correu"
 
 #: www/mail/admin/index.php:207
-msgid "You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s."
-msgstr "Podeu administrar llistes des d'aquí. Tingueu en compte que les llistes privades encara poden ser vistes per membres del vostre projecte, però no estan llistades a %1$s."
+#, php-format
+msgid ""
+"You can administrate lists from here. Please note that private lists can "
+"still be viewed by members of your project, but are not listed on %1$s."
+msgstr ""
+"Podeu administrar llistes des d'aquí. Tingueu en compte que les llistes "
+"privades encara poden ser vistes per membres del vostre projecte, però no "
+"estan llistades a %1$s."
 
 #: www/mail/admin/index.php:210
 msgid "Add Mailing List"
@@ -2590,7 +2796,8 @@ msgid "Insert image: [img]http://image_url[/img]  (alt+p)"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class:53
-msgid "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)"
+msgid ""
+"Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class:54
@@ -2598,7 +2805,8 @@ msgid "Close all open bbCode tags"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class:55
-msgid "Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000"
+msgid ""
+"Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class:56
@@ -2727,7 +2935,7 @@ msgstr "Baix"
 #: www/tracker/admin/form-updateextrafieldelement.php:50
 #: www/tracker/admin/form-extrafieldcopy.php:67 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/register/projectinfo.php:186 www/survey/include/SurveyHTML.class:546
+#: www/register/projectinfo.php:195 www/survey/include/SurveyHTML.class:546
 #: www/project/request.php:66 www/project/admin/editimages.php:235
 #: www/project/admin/roleedit.php:257 www/admin/userlist.php:184
 #: www/admin/index.php:124 www/admin/cronman.php:45
@@ -2793,6 +3001,7 @@ msgid "Register Project"
 msgstr "Registra el projecte"
 
 #: www/include/features_boxes.php:20
+#, php-format
 msgid "%1$s Statistics"
 msgstr "Estadístiques %1$s"
 
@@ -2837,7 +3046,10 @@ msgid "m/d"
 msgstr "m/d"
 
 #: www/include/LayoutSF.class:375
-msgid "This is %1$s.  For more about it, including copyright info, see <a href=\"/about.php\">this page</a>."
+#, php-format
+msgid ""
+"This is %1$s.  For more about it, including copyright info, see <a href=\"/"
+"about.php\">this page</a>."
 msgstr ""
 
 #: www/include/LayoutSF.class:760 www/include/project_home.php:243
@@ -2963,15 +3175,39 @@ msgid "This developer is a member of the following groups:"
 msgstr "Aquest desenvolupador és membre dels següents grups:"
 
 #: www/include/user_home.php:158
-msgid "<P>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</P><P>The %1$s Peer Rating system is based on concepts from <A HREF=\"http://www.advogato.com/\">Advogato.</A> The system has been re-implemented and expanded in a few ways.</P>"
+#, php-format
+msgid ""
+"<P>If you are familiar with this user, please take a moment to rate him/her "
+"on the following criteria. Keep in mind, that your rating will be visible to "
+"the user and others.</P><P>The %1$s Peer Rating system is based on concepts "
+"from <A HREF=\"http://www.advogato.com/\">Advogato.</A> The system has been "
+"re-implemented and expanded in a few ways.</P>"
 msgstr ""
 
 #: www/include/user_home.php:165
-msgid "<P>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both \"trusted\" and \"non-trusted\" users.</P><UL><LI>The \"Sitewide Rank\" field shows the user's rank compared to all ranked %1$s users.</LI><LI>The \"Aggregate Score\" shows an average, weighted overall score, based on trusted-responses only.</LI><LI>The \"Personal Importance\" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.</LI></UL><P><I>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href=\"/account/\">your account maintenance page</A>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </I></P>"
+#, php-format
+msgid ""
+"<P>The Peer rating box shows all rating averages (and response levels) for "
+"each individual criteria. Due to the math and processing required to do "
+"otherwise, these numbers incoporate responses from both \"trusted\" and "
+"\"non-trusted\" users.</P><UL><LI>The \"Sitewide Rank\" field shows the "
+"user's rank compared to all ranked %1$s users.</LI><LI>The \"Aggregate Score"
+"\" shows an average, weighted overall score, based on trusted-responses only."
+"</LI><LI>The \"Personal Importance\" field shows the weight that users "
+"ratings of other developers will be given (between 1 and 1.5) -- higher "
+"rated user's responses are given more weight.</LI></UL><P><I>If you would "
+"like to opt-out from peer rating system (this will affect your ability to "
+"both rate and be rated), refer to <a href=\"/account/\">your account "
+"maintenance page</A>. If you choose not to participate, your ratings of "
+"other users will be permanently deleted and the 'Peer Rating' box will "
+"disappear from your user page. </I></P>"
 msgstr ""
 
 #: www/include/user_home.php:170
-msgid "You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href=\"/account/\">your account maintenance page</a> for more information."
+msgid ""
+"You opted-out from peer rating system, otherwise you would have a chance to "
+"rate the user. Refer to <a href=\"/account/\">your account maintenance page</"
+"a> for more information."
 msgstr ""
 
 #: www/include/exit.php:20
@@ -2979,12 +3215,17 @@ msgid "Exiting with error"
 msgstr "Sortint amb error"
 
 #: www/include/exit.php:37
-msgid "This project's administrator will have to grant you permission to view this page."
-msgstr "L'administrador d'aquest projecte us ha de donar permís per veure aquesta pàgina."
+msgid ""
+"This project's administrator will have to grant you permission to view this "
+"page."
+msgstr ""
+"L'administrador d'aquest projecte us ha de donar permís per veure aquesta "
+"pàgina."
 
 #: www/include/exit.php:39 www/news/admin/index.php:348
 #: common/include/Error.class:131 common/include/Group.class:426
 #: common/include/Group.class:500
+#, php-format
 msgid "Permission Denied."
 msgstr "Permís denegat."
 
@@ -3054,8 +3295,15 @@ msgid "New User via SSL"
 msgstr "Nou usuari via SSL"
 
 #: www/include/project_home.php:41
-msgid "NOTE: This project entry is maintained by the %1$s staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage."
-msgstr "NOTA: Aquesta entrada de projecte és mantinguda per l'equip %1$s. No som el lloc oficial per a aquest producte. Podeu trobar informció addicional de copyright a la pagina d'inici d'aquest projecte."
+#, php-format
+msgid ""
+"NOTE: This project entry is maintained by the %1$s staff. We are not the "
+"official site for this product. Additional copyright information may be "
+"found on this project's homepage."
+msgstr ""
+"NOTA: Aquesta entrada de projecte és mantinguda per l'equip %1$s. No som el "
+"lloc oficial per a aquest producte. Podeu trobar informció addicional de "
+"copyright a la pagina d'inici d'aquest projecte."
 
 #: www/include/project_home.php:47
 msgid "This project has not yet submitted a description."
@@ -3070,11 +3318,17 @@ msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil d'activitat:&nbsp;"
 
 #: www/include/project_home.php:66
-msgid "View project <a href=\"/project/stats/?group_id=%1$s\">Statistics</a> or <a href=\"/project/report/?group_id=%1$s\">Activity</a>."
+#, php-format
+msgid ""
+"View project <a href=\"/project/stats/?group_id=%1$s\">Statistics</a> or <a "
+"href=\"/project/report/?group_id=%1$s\">Activity</a>."
 msgstr ""
 
 #: www/include/project_home.php:67
-msgid "View list of <a href=\"/export/rss_project.php?group_id=%1$s\">RSS feeds</a> available for this project"
+#, php-format
+msgid ""
+"View list of <a href=\"/export/rss_project.php?group_id=%1$s\">RSS feeds</a> "
+"available for this project"
 msgstr ""
 
 #: www/include/project_home.php:80
@@ -3142,6 +3396,7 @@ msgid "There are no public trackers available"
 msgstr "No hi rastrejadors públics disponibles"
 
 #: www/include/project_home.php:270
+#, php-format
 msgid "<strong>%1$s</strong> open / <strong>%2$s</strong> total"
 msgstr "<strong>%1$s</strong> oberts /<strong>%2$s</strong> total"
 
@@ -3256,6 +3511,7 @@ msgid "File Not Found"
 msgstr "Fitxer no trobat"
 
 #: www/source.php:45
+#, php-format
 msgid "Source of %1$s"
 msgstr "Codi font de %1$s"
 
@@ -3284,8 +3540,11 @@ msgid "Submit News"
 msgstr "Tramet notícies"
 
 #: www/news/submit.php:40
-msgid "You cannot submit news for a project unless you are an admin on that project"
-msgstr "No podeu trametre notícies per un projecte a no ser que sigueu administrador en aquest projecte"
+msgid ""
+"You cannot submit news for a project unless you are an admin on that project"
+msgstr ""
+"No podeu trametre notícies per un projecte a no ser que sigueu administrador "
+"en aquest projecte"
 
 #: www/news/submit.php:46
 msgid "Submitting news from the news group is not allowed."
@@ -3304,7 +3563,15 @@ msgid "ERROR - both subject and body are required"
 msgstr "ERROR - calen l'assumpte i el cos"
 
 #: www/news/submit.php:103
-msgid "You can post news about your project if you are an admin on your project. You may also post \"help wanted\" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable."
+#, php-format
+msgid ""
+"You can post news about your project if you are an admin on your project. "
+"You may also post \"help wanted\" notes if your project needs help.</"
+"p><p>All posts <b>for your project</b> will appear instantly on your project "
+"summary page. Posts that are of special interest to the community will have "
+"to be approved by a member of the %1$s news team before they will appear on "
+"the %1$s home page.</p><p>You may include URLs, but not HTML in your "
+"submissions.</p><p>URLs that start with http:// are made clickable."
 msgstr ""
 
 #: www/news/submit.php:110 www/news/admin/index.php:133
@@ -3321,8 +3588,11 @@ msgid "Details"
 msgstr ""
 
 #: www/news/index.php:39
-msgid "<p>Choose a News item and you can browse, search, and post messages.</p>"
-msgstr "<p>Escolliu un element de les notícies i podreu navegar, cercar, i enviar missatges.</p>"
+msgid ""
+"<p>Choose a News item and you can browse, search, and post messages.</p>"
+msgstr ""
+"<p>Escolliu un element de les notícies i podreu navegar, cercar, i enviar "
+"missatges.</p>"
 
 #: www/news/index.php:63
 msgid "No News Found"
@@ -3340,6 +3610,7 @@ msgstr "Titulars anteriors"
 #: www/news/admin/index.php:216 www/news/admin/index.php:238
 #: common/forum/Forum.class:578 common/mail/MailingList.class:253
 #: common/include/Error.class:170
+#, php-format
 msgid "Error On Update:"
 msgstr "Error a l'actualitzar:"
 
@@ -3353,6 +3624,7 @@ msgid "News Admin"
 msgstr "Administració de les notícies"
 
 #: www/news/admin/index.php:116 www/news/admin/index.php:265
+#, php-format
 msgid "Approve a NewsByte For Project: %1$s"
 msgstr "Aprova un NewsByte pel projecte: %1$s"
 
@@ -3365,8 +3637,13 @@ msgid "Displayed"
 msgstr "Mostrat"
 
 #: www/news/admin/index.php:150
-msgid "If this item is on the %1$s home page and you edit it, it will be removed from the home page."
-msgstr "Si aquest element és a la pàgina principal de %1$s i l'editeu, s'eliminarà de la pàgina principal."
+#, php-format
+msgid ""
+"If this item is on the %1$s home page and you edit it, it will be removed "
+"from the home page."
+msgstr ""
+"Si aquest element és a la pàgina principal de %1$s i l'editeu, s'eliminarà "
+"de la pàgina principal."
 
 #: www/news/admin/index.php:166 www/news/admin/news_admin_utils.php:77
 msgid "No Queued Items Found"
@@ -3402,6 +3679,7 @@ msgid "Reject"
 msgstr ""
 
 #: www/news/admin/news_admin_utils.php:79
+#, php-format
 msgid "These items need to be approved (total: %1$s)"
 msgstr "Aquests elements necessiten ser aprovats (total: %1$s)"
 
@@ -3414,6 +3692,7 @@ msgid "No rejected items found for this week"
 msgstr "No s'han trobat elements rebutjats per aquesta setmana"
 
 #: www/news/admin/news_admin_utils.php:99
+#, php-format
 msgid "These items were rejected this past week (total: %1$s)"
 msgstr "Aquests elements es varen rebutjar la setmana passada (total: %1$s)"
 
@@ -3422,6 +3701,7 @@ msgid "No approved items found for this week"
 msgstr "No hi ha elements aprovats per aquesta setmana"
 
 #: www/news/admin/news_admin_utils.php:117
+#, php-format
 msgid "These items were approved this past week (total: %1$s)"
 msgstr "Aquests elements es varen aprovar la setmana passada (total: %1$s)"
 
@@ -3454,8 +3734,11 @@ msgid "Invalid parameter"
 msgstr "Paràmetre no vàlid"
 
 #: www/account/verify.php:64
-msgid "Cannot confirm account identity - invalid confirmation hash (or login name)"
-msgstr "No s'ha pogut confirmar la identitat del compte - clau hash de confirmació no vàlida (o nom de registre)"
+msgid ""
+"Cannot confirm account identity - invalid confirmation hash (or login name)"
+msgstr ""
+"No s'ha pogut confirmar la identitat del compte - clau hash de confirmació "
+"no vàlida (o nom de registre)"
 
 #: www/account/verify.php:70
 msgid "Access denied"
@@ -3474,8 +3757,12 @@ msgid "Error while activiting account"
 msgstr "Error durant l'activació del compte"
 
 #: www/account/verify.php:87
-msgid "<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>"
-msgstr "<p>Per a completar el vostre registre, inicieu una sessió ara. Aleshores, el vostre compte s'activarà per a inicis de sessió normals.</p>"
+msgid ""
+"<p>In order to complete your registration, login now. Your account will then "
+"be activated for normal logins.</p>"
+msgstr ""
+"<p>Per a completar el vostre registre, inicieu una sessió ara. Aleshores, el "
+"vostre compte s'activarà per a inicis de sessió normals.</p>"
 
 #: www/account/verify.php:96 www/account/pending-resend.php:65
 msgid "Login name:"
@@ -3486,8 +3773,15 @@ msgid "Password:"
 msgstr "Contrasenya:"
 
 #: www/account/register.php:79
-msgid "<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account."
-msgstr "<p>Felicitats. Us heu registrat a %1$s.  <p> Ara se us està enviant un correu de confirmació per a verificar la vostra adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà el vostre compte."
+#, php-format
+msgid ""
+"<p>Congratulations. You have registered on %1$s.  <p> You are now being sent "
+"a confirmation email to verify your email address. Visiting the link sent to "
+"you in this email will activate your account."
+msgstr ""
+"<p>Felicitats. Us heu registrat a %1$s.  <p> Ara se us està enviant un "
+"correu de confirmació per a verificar la vostra adreça de correu. Visiteu "
+"l'enllaç enviat en aquest correu i s'activarà el vostre compte."
 
 #: www/account/register.php:103
 msgid "Login Name (do not use uppercase letters):"
@@ -3531,7 +3825,11 @@ msgid "Country:"
 msgstr "País:"
 
 #: www/account/register.php:143
-msgid "Email Address:<span class=\"important\">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.</em>"
+#, php-format
+msgid ""
+"Email Address:<span class=\"important\">*</span><br /><em>This email address "
+"will be verified before account activation. You will receive a mail forward "
+"account at &lt;loginname@%1$s&gt; that will forward to this address.</em>"
 msgstr ""
 
 #: www/account/register.php:149 www/account/index.php:204
@@ -3543,8 +3841,12 @@ msgid "Send auto-generated notices only to my Jabber address"
 msgstr "Envieu notícies auto-generades només a la meva adreça de Jabber"
 
 #: www/account/register.php:175 www/account/index.php:223
-msgid "Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>"
-msgstr "Rebre correu sobre actualitzacions del lloc <i>(tràfic molt baix i inclou notícies de seguretat. Molt recomanable.)</i>"
+msgid ""
+"Receive Email about Site Updates <i>(Very low traffic and includes security "
+"notices. Highly Recommended.)</i>"
+msgstr ""
+"Rebre correu sobre actualitzacions del lloc <i>(tràfic molt baix i inclou "
+"notícies de seguretat. Molt recomanable.)</i>"
 
 #: www/account/register.php:179 www/account/index.php:227
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
@@ -3560,9 +3862,12 @@ msgstr "[Reenvia el correu de confirmació a un compte pendent]"
 
 #: www/account/pending-resend.php:61
 msgid "Fill in a user name and click 'Submit' to resend the confirmation email"
-msgstr "Introduïu un nom d'usuari i feu clic a 'Envia' per a reenviar el correu de confirmació"
+msgstr ""
+"Introduïu un nom d'usuari i feu clic a 'Envia' per a reenviar el correu de "
+"confirmació"
 
 #: www/account/change_email.php:63
+#, php-format
 msgid ""
 "You have requested a change of email address on %1$s.\n"
 "Please visit the following URL to complete the email change:\n"
@@ -3579,6 +3884,7 @@ msgstr ""
 " -- l'equip de %1$s"
 
 #: www/account/change_email.php:70 www/account/lostpw.php:71
+#, php-format
 msgid "%1$s Verification"
 msgstr "%1$s Verificació"
 
@@ -3587,7 +3893,9 @@ msgid "Email Change Confirmation"
 msgstr "Confirmació del canvi d'adreça"
 
 #: www/account/change_email.php:74
-msgid "<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href=\"/\">[ Home ]</a>"
+msgid ""
+"<p>An email has been sent to the new address. Follow the instructions in the "
+"email to complete the email change. </p><a href=\"/\">[ Home ]</a>"
 msgstr ""
 
 #: www/account/change_email.php:81
@@ -3595,8 +3903,25 @@ msgid "MISSINGTEXT:account_change_email/title:TEXTMISSING"
 msgstr ""
 
 #: www/account/change_email.php:83
-msgid "<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>"
-msgstr "<p>Per a canviar la vostra adreça de correu electrònic cal una confirmació de la nova adreça. Així ens assegurem que tenim una adreça correcta al fitxer.</p><p>Necessitem mantenir una adreça de correu acurada per a cada usuari degut al nivell d'accés que donem a través d'aquest compte. Si ens cal accedir a un usuari per temes provinents d'un compte de shell o de projecte, és important que ho poguem fer així.</p>  <p>A l'enviar el formulari següent, s'enviarà una URL de confirmació a la nova adreça de correu electrònic. En visitar aquest enllaç, es completarà el canvi de correu electrònic.</p>"
+msgid ""
+"<p>Changing your email address will require confirmation from your new email "
+"address, so that we can ensure we have a good email address on file.</"
+"p><p>We need to maintain an accurate email address for each user due to the "
+"level of access we grant via this account. If we need to reach a user for "
+"issues arriving from a shell or project account, it is important that we be "
+"able to do so.</p>  <p>Submitting the form below will mail a confirmation "
+"URL to the new email address. Visiting this link will complete the email "
+"change.</p>"
+msgstr ""
+"<p>Per a canviar la vostra adreça de correu electrònic cal una confirmació "
+"de la nova adreça. Així ens assegurem que tenim una adreça correcta al "
+"fitxer.</p><p>Necessitem mantenir una adreça de correu acurada per a cada "
+"usuari degut al nivell d'accés que donem a través d'aquest compte. Si ens "
+"cal accedir a un usuari per temes provinents d'un compte de shell o de "
+"projecte, és important que ho poguem fer així.</p>  <p>A l'enviar el "
+"formulari següent, s'enviarà una URL de confirmació a la nova adreça de "
+"correu electrònic. En visitar aquest enllaç, es completarà el canvi de "
+"correu electrònic.</p>"
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -3608,6 +3933,7 @@ msgstr "Envieu la confirmació a la nova adreça"
 
 #: www/account/change_email.php:93 www/account/lostpw.php:99
 #: www/account/unsubscribe.php:80 www/my/bookmark_edit.php:68
+#, php-format
 msgid "Return"
 msgstr "Retorna"
 
@@ -3616,11 +3942,27 @@ msgid "Login with SSL"
 msgstr "Inici de sessió amb SSL"
 
 #: www/account/login.php:99
-msgid "<P>Your account is currently pending your email confirmation.\t\tVisiting the link sent to you in this email will activate your account.\t\t<P>If you need this email resent, please click below and a confirmation\t\temail will be sent to the email address you provided in registration.\t\t<P><A href=\"pending-resend.php?form_user=%1$s\">[Resend Confirmation Email]</A>\t\t<br><hr>\t\t<p>"
+#, php-format
+msgid ""
+"<P>Your account is currently pending your email confirmation.\t\tVisiting "
+"the link sent to you in this email will activate your account.\t\t<P>If you "
+"need this email resent, please click below and a confirmation\t\temail will "
+"be sent to the email address you provided in registration.\t\t<P><A href="
+"\"pending-resend.php?form_user=%1$s\">[Resend Confirmation Email]</A>\t"
+"\t<br><hr>\t\t<p>"
 msgstr ""
 
 #: www/account/login.php:102
-msgid "<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href=\"/support/?group_id=1\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+#, php-format
+msgid ""
+"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
+"reasons, either 1) you requested that your account be removed; or 2) some "
+"action has been performed using your account which has been seen as "
+"objectionable (i.e. you have breached the terms of service for use of your "
+"account) and your account has been revoked for administrative reasons. "
+"Should you have questions or concerns regarding this matter, please log a <a "
+"href=\"/support/?group_id=1\">support request</a>.</p><p>Thank you, <br><br>%"
+"1$s Staff</p>"
 msgstr ""
 
 #: www/account/login.php:111
@@ -3645,6 +3987,7 @@ msgid "Invalid user"
 msgstr "Usuari no vàlid"
 
 #: www/account/lostpw.php:59
+#, php-format
 msgid ""
 "Someone (presumably you) on the %3$s site requested a\n"
 "password change through email verification. If this was not you,\n"
@@ -3669,11 +4012,19 @@ msgstr ""
 " -- l'equip %3$s\n"
 
 #: www/account/lostpw.php:75
-msgid "<p>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.</p><p><a href=\"/\">[ Home ]</a></p>"
+msgid ""
+"<p>An email has been sent to the address you have on file. Follow the "
+"instructions in the email to change your account password.</p><p><a href=\"/"
+"\">[ Home ]</a></p>"
 msgstr ""
 
 #: www/account/lostpw.php:85
-msgid "<p>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.</p><p>Clicking \"Send Lost PW Hash\" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.</p>"
+msgid ""
+"<p>Hey... losing your password is serious business. It compromises the "
+"security of your account, your projects, and this site.</p><p>Clicking "
+"\"Send Lost PW Hash\" below will email a URL to the email address we have on "
+"file for you. In this URL is a 128-bit confirmation hash for your account. "
+"Visiting the URL will allow you to change your password online and login.</p>"
 msgstr ""
 
 #: www/account/lostpw.php:95
@@ -3681,20 +4032,60 @@ msgid "Send Lost PW Hash"
 msgstr "Envia el hash de CS perduda"
 
 #: www/account/first.php:31 www/help/index.php:31
+#, php-format
 msgid "Welcome to %1$s"
 msgstr "Benvingut a %1$s"
 
 #: www/account/first.php:33
-msgid "<p>You are now a registered user on %1$s, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in %1$s, sign on as a project developer, or even start your own project.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve %1$s.</p><p>--the %1$s staff.</p>"
-msgstr "<p>Ara sou un usuari registrat a %1$s, l'entorn de desenvolupament en línia per a projectes de Codi Obert.</p><p>Com a usuari registrat,podeu participar plenament en les activitats del lloc. Ara podeu enviar missatges als fòrums de missatges de projectes, comunicar errors de programa (bugs) a %1$s, signar com a desenvolupador de projectes, o fins i tot iniciar el vostre propi projecte.</p><p>Gaudiu d'aquest lloc i indiqueu-nos de quines formes podem millorar %1$s.</p><p>--l'equip de %1$s.</p>"
+#, php-format
+msgid ""
+"<p>You are now a registered user on %1$s, the online development environment "
+"for Open Source projects.</p><p>As a registered user, you can participate "
+"fully in the activities on the site. You may now post messages to the "
+"project message forums, post bugs for software in %1$s, sign on as a project "
+"developer, or even start your own project.</p><p>Enjoy the site, and please "
+"provide us with feedback on ways that we can improve %1$s.</p><p>--the %1$s "
+"staff.</p>"
+msgstr ""
+"<p>Ara sou un usuari registrat a %1$s, l'entorn de desenvolupament en línia "
+"per a projectes de Codi Obert.</p><p>Com a usuari registrat,podeu participar "
+"plenament en les activitats del lloc. Ara podeu enviar missatges als fòrums "
+"de missatges de projectes, comunicar errors de programa (bugs) a %1$s, "
+"signar com a desenvolupador de projectes, o fins i tot iniciar el vostre "
+"propi projecte.</p><p>Gaudiu d'aquest lloc i indiqueu-nos de quines formes "
+"podem millorar %1$s.</p><p>--l'equip de %1$s.</p>"
 
 #: www/account/editsshkeys.php:53
-msgid "<p>To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the CVS server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.</p><p>To generate a public key, run the program 'ssh-keygen' (you can use both protocol 1 or 2). The public key will be placed at '~/.ssh/identity.pub' (protocole 1) and '~/.ssh/id_dsa.pub' or '~/.ssh/id_rsa.pub' (protocole 2). Read the ssh documentation for further information on sharing keys.</p>"
-msgstr "<p>Per evitar que hagueu de teclejar cada cop la vostra contrasenya per al vostre compte CVS/SSH de desenvolupador, podeu pujar aquí les vostres claus públiques i es posaran al servidor CVS al vostre fitxer ~/.ssh/authorized_keys. Això es realitza mitjançant una tasca cron, o sigui que pot ser que no succeeixi immediatament.  Permeteu una hora de retard.</p><p>Per a generar una clau pública, executeu el programa 'ssh-keygen' (podeu usar el protocol 1 ó 2). La clau pública es situarà a '~/.ssh/identity.pub' (protocol 1) i '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocol 2). Per a més informació sobre compartir claus, llegiu la documentació ssh.</p>"
+msgid ""
+"<p>To avoid having to type your password every time for your CVS/SSH "
+"developer account, you may upload your public key(s) here and they will be "
+"placed on the CVS server in your ~/.ssh/authorized_keys file. This is done "
+"by a cron job, so it may not happen immediately.  Please allow for a one "
+"hour delay.</p><p>To generate a public key, run the program 'ssh-"
+"keygen' (you can use both protocol 1 or 2). The public key will be placed at "
+"'~/.ssh/identity.pub' (protocole 1) and '~/.ssh/id_dsa.pub' or '~/.ssh/"
+"id_rsa.pub' (protocole 2). Read the ssh documentation for further "
+"information on sharing keys.</p>"
+msgstr ""
+"<p>Per evitar que hagueu de teclejar cada cop la vostra contrasenya per al "
+"vostre compte CVS/SSH de desenvolupador, podeu pujar aquí les vostres claus "
+"públiques i es posaran al servidor CVS al vostre fitxer ~/.ssh/"
+"authorized_keys. Això es realitza mitjançant una tasca cron, o sigui que pot "
+"ser que no succeeixi immediatament.  Permeteu una hora de retard.</p><p>Per "
+"a generar una clau pública, executeu el programa 'ssh-keygen' (podeu usar el "
+"protocol 1 ó 2). La clau pública es situarà a '~/.ssh/identity."
+"pub' (protocol 1) i '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocol 2). "
+"Per a més informació sobre compartir claus, llegiu la documentació ssh.</p>"
 
 #: www/account/editsshkeys.php:57
-msgid "Authorized keys:<br /><em>Important: Make sure there are no line breaks except between keys. After submitting, verify that the number of keys in your file is what you expected.</em>"
-msgstr "Claus autoritzades:<br /><em>Important: Assegureu-vos que no hi ha salts de línia excepte entre claus. Després de l'enviament, verifiqueu que el nombre de claus al vostre fitxer és el que esperaveu.</em>"
+msgid ""
+"Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+"except between keys. After submitting, verify that the number of keys in "
+"your file is what you expected.</em>"
+msgstr ""
+"Claus autoritzades:<br /><em>Important: Assegureu-vos que no hi ha salts de "
+"línia excepte entre claus. Després de l'enviament, verifiqueu que el nombre "
+"de claus al vostre fitxer és el que esperaveu.</em>"
 
 #: www/account/lostlogin.php:49 www/account/lostlogin.php:55
 #: www/account/lostlogin.php:70 www/account/lostlogin.php:77
@@ -3722,7 +4113,9 @@ msgid "New passwords do not match."
 msgstr "Les noves contrasenyes no coincideixen."
 
 #: www/account/lostlogin.php:88
-msgid "<h2>Password changed</h2><p>Congratulations, you have re-set your account password.You may <a href=\"/account/login.php\">login</a> to the sitenow.</p>"
+msgid ""
+"<h2>Password changed</h2><p>Congratulations, you have re-set your account "
+"password.You may <a href=\"/account/login.php\">login</a> to the sitenow.</p>"
 msgstr ""
 
 #: www/account/lostlogin.php:101
@@ -3734,10 +4127,12 @@ msgid "New Password (repeat)"
 msgstr "Nova contrasenya (repetició)"
 
 #: www/account/unsubscribe.php:66
+#, php-format
 msgid "all %1$s mailings and notifications"
 msgstr "tots els correus i notificacions %1$s"
 
 #: www/account/unsubscribe.php:68
+#, php-format
 msgid "%1$s site mailings"
 msgstr "correus del lloc %1$s"
 
@@ -3827,10 +4222,16 @@ msgid "Successfully Changed Password"
 msgstr "La contrasenya s'ha canviat amb èxit"
 
 #: www/account/change_pw.php:87
-msgid "<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>"
-msgstr "<h2>%1$s Confirmació del canvi de contrasenya</h2><p>Felicitats. Heu canviat la vostra contrasenya.</p>"
+#, php-format
+msgid ""
+"<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have "
+"changed your password.</p>"
+msgstr ""
+"<h2>%1$s Confirmació del canvi de contrasenya</h2><p>Felicitats. Heu canviat "
+"la vostra contrasenya.</p>"
 
 #: www/account/change_pw.php:90
+#, php-format
 msgid "You should now %1$s Return to UserPrefs %2$s."
 msgstr "Ara haurieu de %1$s tornar a UserPrefs %2$s."
 
@@ -3853,10 +4254,12 @@ msgid "Snippet Library"
 msgstr "Biblioteca de fragments de codi"
 
 #: www/snippet/browse.php:44
+#, php-format
 msgid "Snippets by language: %1$s"
 msgstr "Fragments de codi per idioma: %1$s"
 
 #: www/snippet/browse.php:49
+#, php-format
 msgid "Snippets by category: %1$s"
 msgstr "Fragments de codi per categoria: %1$s"
 
@@ -3891,7 +4294,9 @@ msgstr "Error - Falta un ID de versió de fragment de codi vàlid."
 
 #: www/snippet/add_snippet_to_package.php:62
 msgid "Error - Only the creator of a package version can add snippets to it."
-msgstr "Error - Només el creador d'una versió del paquet hi pot afegir fragments de codi."
+msgstr ""
+"Error - Només el creador d'una versió del paquet hi pot afegir fragments de "
+"codi."
 
 #: www/snippet/add_snippet_to_package.php:71
 msgid "Error - That snippet doesn't exist."
@@ -3924,7 +4329,10 @@ msgid "Package:"
 msgstr "Paquet:"
 
 #: www/snippet/add_snippet_to_package.php:118
-msgid "You can use this form repeatedly to keep adding snippets to your package.</p><p>The \"Snippet Version ID\" is the unique ID number that is shown next to a specific version of a snippet on the browse pages."
+msgid ""
+"You can use this form repeatedly to keep adding snippets to your package.</"
+"p><p>The \"Snippet Version ID\" is the unique ID number that is shown next "
+"to a specific version of a snippet on the browse pages."
 msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:127
@@ -3982,19 +4390,38 @@ msgid "IMPORTANT!"
 msgstr "IMPORTANT!"
 
 #: www/snippet/package.php:97 www/snippet/addversion.php:173
-msgid "If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page."
-msgstr "Si s'obria una nova finestra, useu-la per a afegir fragments de codi al vostre paquet. Si no s'obre una nova finestra, useu el següent enllaç per a afegir-los al vostre paquet ABANS que abandoneu aquesta pàgina."
+msgid ""
+"If a new window opened, use it to add snippets to your package. If a new "
+"window did not open, use the following link to add to your package BEFORE "
+"you leave this page."
+msgstr ""
+"Si s'obria una nova finestra, useu-la per a afegir fragments de codi al "
+"vostre paquet. Si no s'obre una nova finestra, useu el següent enllaç per a "
+"afegir-los al vostre paquet ABANS que abandoneu aquesta pàgina."
 
 #: www/snippet/package.php:99 www/snippet/addversion.php:176
 msgid "Add Snippets To Package"
 msgstr "Afegeix fragments al paquet"
 
 #: www/snippet/package.php:102 www/snippet/addversion.php:177
-msgid "<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above."
-msgstr "<strong>Navegueu la biblioteca</strong> per trobar els fragments de codi que voleu afegir, seguidament afegiu-los usant el nou enllaç de finestra que es mostra a dalt."
+msgid ""
+"<strong>Browse the library</strong> to find the snippets you want to add, "
+"then add them using the new window link shown above."
+msgstr ""
+"<strong>Navegueu la biblioteca</strong> per trobar els fragments de codi que "
+"voleu afegir, seguidament afegiu-los usant el nou enllaç de finestra que es "
+"mostra a dalt."
 
 #: www/snippet/package.php:120
-msgid "<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the \"Add Snippets to Package\" link to add files to your package.</li></ol><p><span class=\"important\">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package."
+msgid ""
+"<p>You can group together existing snippets into a package using this "
+"interface. Before creating your package, make sure all your snippets are in "
+"place and you have made a note of the snippet ID's.</p><ol><li>Create the "
+"package using this form.</li><li><strong>Then</strong> use the \"Add "
+"Snippets to Package\" link to add files to your package.</li></ol><p><span "
+"class=\"important\">Note:</span> You can submit a new version of an existing "
+"package by browsing the library and using the link on the existing package. "
+"You should only use this page if you are submitting an entirely new package."
 msgstr ""
 
 #: www/snippet/package.php:138 www/snippet/submit.php:103
@@ -4024,7 +4451,13 @@ msgid "MISSINGTEXT:snippet_submit/title:TEXTMISSING"
 msgstr ""
 
 #: www/snippet/submit.php:75
-msgid "You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class=\"important\">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function."
+msgid ""
+"You can post a new code snippet and share it with other people around the "
+"world. Just fill in this information. <strong>Give a good description</"
+"strong> and <strong>comment your code</strong> so others can read and "
+"understand it.</p><p><span class=\"important\">Note:</span> You can submit a "
+"new version of an existing snippet by browsing the library. You should only "
+"use this page if you are submitting an entirely new script or function."
 msgstr ""
 
 #: www/snippet/submit.php:93
@@ -4143,7 +4576,14 @@ msgid "Download Version"
 msgstr "Baixa la versió"
 
 #: www/snippet/index.php:39
-msgid "<p>The purpose of this archive is to let you share your code snippets, scripts,\tand functions with the Open Source Software Community.</p><p>You can create a \"new snippet\", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a \"Package\" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+msgid ""
+"<p>The purpose of this archive is to let you share your code snippets, "
+"scripts,\tand functions with the Open Source Software Community.</p><p>You "
+"can create a \"new snippet\", then post additional versions of that snippet "
+"quickly and easily.</p><p>Once you have snippets posted, you can then create "
+"a \"Package\" of snippets. That package can contain multiple, specific "
+"versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>\t<p>You "
+"can browse the snippet library quickly:</p>"
 msgstr ""
 
 #: www/snippet/index.php:46
@@ -4163,8 +4603,12 @@ msgid "MISSINGTEXT:snippet_addversion/submit_a_new_snippet_version:TEXTMISSING"
 msgstr ""
 
 #: www/snippet/addversion.php:73
-msgid "If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so."
-msgstr "Si heu modificat una versió d'un fragment de codi i creieu que és prou significant per a compartir-lo amb altres, per favor no dubteu a fer-ho."
+msgid ""
+"If you have modified a version of a snippet and you feel it is significant "
+"enough to share with others, please do so."
+msgstr ""
+"Si heu modificat una versió d'un fragment de codi i creieu que és prou "
+"significant per a compartir-lo amb altres, per favor no dubteu a fer-ho."
 
 #: www/snippet/addversion.php:83 www/snippet/addversion.php:207
 #: www/new/index.php:76
@@ -4180,7 +4624,8 @@ msgid "Error, Error - snippet_package doesn't exist"
 msgstr "Error, Error - paquet_fragment_codi no existeix"
 
 #: www/snippet/addversion.php:142
-msgid "MISSINGTEXT:snippet_addversion/title_submit_a_new_snippet_package:TEXTMISSING"
+msgid ""
+"MISSINGTEXT:snippet_addversion/title_submit_a_new_snippet_package:TEXTMISSING"
 msgstr ""
 
 #: www/snippet/addversion.php:148
@@ -4192,12 +4637,17 @@ msgid "MISSINGTEXT:snippet_addversion/title_add_snippet_to_package:TEXTMISSING"
 msgstr ""
 
 #: www/snippet/addversion.php:192
-msgid "MISSINGTEXT:snippet_addverion/title_submit_a_new_snippet_version:TEXTMISSING"
+msgid ""
+"MISSINGTEXT:snippet_addverion/title_submit_a_new_snippet_version:TEXTMISSING"
 msgstr ""
 
 #: www/snippet/addversion.php:197
-msgid "If you have modified a version of a package and you feel it is significant enough to share with others, please do so."
-msgstr "Si heu modificat una versió d'un paquet i creieu que és prou significant per a compartir-lo amb altres, per favor no dubteu a fer-ho."
+msgid ""
+"If you have modified a version of a package and you feel it is significant "
+"enough to share with others, please do so."
+msgstr ""
+"Si heu modificat una versió d'un paquet i creieu que és prou significant per "
+"a compartir-lo amb altres, per favor no dubteu a fer-ho."
 
 #: www/snippet/addversion.php:227
 msgid "Error, Error - was the URL or form mangled??"
@@ -4220,8 +4670,12 @@ msgid "Changes since last version:"
 msgstr "Canvi des de l'última versió:"
 
 #: www/snippet/detail.php:91 www/snippet/detail.php:179
-msgid "Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;"
-msgstr "Baixeu-vos una versió de text pla d'aquest codi fent clic sobre &quot;<strong>Baixa la versió</strong>&quot;"
+msgid ""
+"Download a raw-text version of this code by clicking on &quot;"
+"<strong>Download Version</strong>&quot;"
+msgstr ""
+"Baixeu-vos una versió de text pla d'aquest codi fent clic sobre &quot;"
+"<strong>Baixa la versió</strong>&quot;"
 
 #: www/snippet/detail.php:102
 msgid "Latest Snippet Version:"
@@ -4232,8 +4686,12 @@ msgid "Submit a new version"
 msgstr "Tramet una nova versió"
 
 #: www/snippet/detail.php:112
-msgid "You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others."
-msgstr "Podeu trametre una nova versió d'aquest fragment de codi si l'heu modificat i creieu apropiat compartir-lo amb altres persones."
+msgid ""
+"You can submit a new version of this snippet if you have modified it and you "
+"feel it is appropriate to share with others."
+msgstr ""
+"Podeu trametre una nova versió d'aquest fragment de codi si l'heu modificat "
+"i creieu apropiat compartir-lo amb altres persones."
 
 #: www/snippet/detail.php:145
 msgid "Versions Of This Package:"
@@ -4252,8 +4710,12 @@ msgid "Latest Package Version:"
 msgstr "Última versió de paquet:"
 
 #: www/snippet/detail.php:201
-msgid "You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others."
-msgstr "Podeu trametre una nova versió d'aquest paquet si l'heu modificat i creieu apropiat compartir-lo amb altres persones."
+msgid ""
+"You can submit a new version of this package if you have modified it and you "
+"feel it is appropriate to share with others."
+msgstr ""
+"Podeu trametre una nova versió d'aquest paquet si l'heu modificat i creieu "
+"apropiat compartir-lo amb altres persones."
 
 #: www/developer/rate.php:39
 msgid "Ratings turned off"
@@ -4276,8 +4738,12 @@ msgid "Ratings Recorded"
 msgstr "Les puntuacions han estat desades"
 
 #: www/developer/rate.php:86
-msgid "You can re-rate this person by simply returning to their ratings page and re-submitting the info."
-msgstr "Podeu tornar a puntuar aquesta persona simplement tornant a la seva pàgina de puntuacions i reenviant la informació."
+msgid ""
+"You can re-rate this person by simply returning to their ratings page and re-"
+"submitting the info."
+msgstr ""
+"Podeu tornar a puntuar aquesta persona simplement tornant a la seva pàgina "
+"de puntuacions i reenviant la informació."
 
 #: www/developer/diary.php:39 www/my/diary.php:139
 msgid "My Diary And Notes"
@@ -4316,8 +4782,13 @@ msgid "User is now being monitored"
 msgstr "Ara l'usuari està essent monitoritzat"
 
 #: www/developer/monitor.php:70
-msgid "<p>You will now be emailed this user's diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>"
-msgstr "<p>Ara se us enviaràn per aquestes entrades de diari de l'usuari.</p><p>Per a desconnectar la monitorització, simplement torneu a fer clic a l'enllaç <strong>Monitoritza l'usuari</strong>.</p>"
+msgid ""
+"<p>You will now be emailed this user's diary entries.</p><p>To turn off "
+"monitoring, simply click the <strong>Monitor user</strong> link again.</p>"
+msgstr ""
+"<p>Ara se us enviaràn per aquestes entrades de diari de l'usuari.</p><p>Per "
+"a desconnectar la monitorització, simplement torneu a fer clic a l'enllaç "
+"<strong>Monitoritza l'usuari</strong>.</p>"
 
 #: www/developer/monitor.php:77
 msgid "Monitoring has been turned off"
@@ -4456,7 +4927,10 @@ msgid "Clear &nbsp;all"
 msgstr "Suprimeix-ho &nbsp;tot"
 
 #: www/tracker/browse.php:415 www/pm/browse_task.php:347
-msgid "<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on \"Mass Update\"."
+msgid ""
+"<strong>Admin:</strong> If you wish to apply changes to all items selected "
+"above, use these controls to change their properties and click once on "
+"\"Mass Update\"."
 msgstr ""
 
 #: www/tracker/browse.php:445 www/tracker/include/ArtifactTypeHtml.class:391
@@ -4472,6 +4946,7 @@ msgid "Mass update"
 msgstr "Actualització en massa"
 
 #: www/tracker/browse.php:464
+#, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* Denota requeriments de fa > %1$s dia"
 
@@ -4641,8 +5116,12 @@ msgstr ""
 #: www/tracker/tracker.php:37 www/tracker/tracker.php:66
 #: www/tracker/tracker.php:239 common/tracker/Artifact.class:193
 #: common/tracker/Artifact.class:723
-msgid "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login."
-msgstr "Artefacte: Aquest tipus d'artefacte no permet enviaments anònims. Si us plau,inicieu una sessió."
+msgid ""
+"Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
+"Login."
+msgstr ""
+"Artefacte: Aquest tipus d'artefacte no permet enviaments anònims. Si us plau,"
+"inicieu una sessió."
 
 #: www/tracker/tracker.php:73 common/include/Error.class:149
 #: common/include/User.class:265
@@ -4741,7 +5220,11 @@ msgid "No Accessible Trackers Found"
 msgstr "No s'han trobat rastrejadors accessibles"
 
 #: www/tracker/ind.php:25
-msgid "No trackers have been set up, or you cannot view them.<p><span class=\"important\">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>"
+#, php-format
+msgid ""
+"No trackers have been set up, or you cannot view them.<p><span class="
+"\"important\">The Admin for this project will have to set up data types "
+"using the %1$s admin page %2$s</span>"
 msgstr ""
 
 #: www/tracker/ind.php:28
@@ -4777,7 +5260,9 @@ msgid "Close Date range"
 msgstr ""
 
 #: www/tracker/admin/form-deleteextrafield.php:12
-msgid "You are about to permanently and irretrievably delete this custom field and all its contents!"
+msgid ""
+"You are about to permanently and irretrievably delete this custom field and "
+"all its contents!"
 msgstr ""
 
 #: www/tracker/admin/form-deleteextrafield.php:14
@@ -4791,8 +5276,11 @@ msgid "I'm Really Sure."
 msgstr "N'estic ben segur."
 
 #: www/tracker/admin/form-updatetracker.php:12 www/tracker/admin/ind.php:120
-msgid "<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
-msgstr "<strong> Nom:</strong> (exemples: actes de reunió, resultats del test, documents RFP)"
+msgid ""
+"<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
+msgstr ""
+"<strong> Nom:</strong> (exemples: actes de reunió, resultats del test, "
+"documents RFP)"
 
 #: www/tracker/admin/form-updatetracker.php:32 www/tracker/admin/ind.php:129
 msgid "Send email on new submission to address"
@@ -4808,7 +5296,9 @@ msgstr "Dies fins al venciment"
 
 #: www/tracker/admin/form-updatetracker.php:40 www/tracker/admin/ind.php:137
 msgid "Days till pending tracker items time out"
-msgstr "Dies fins que els elements de rastreig pendents arribin al venciment de la temporització"
+msgstr ""
+"Dies fins que els elements de rastreig pendents arribin al venciment de la "
+"temporització"
 
 #: www/tracker/admin/form-updatetracker.php:43 www/tracker/admin/ind.php:140
 msgid "Free form text for the \"submit new item\" page"
@@ -4819,8 +5309,12 @@ msgid "Free form text for the \"browse items\" page"
 msgstr ""
 
 #: www/tracker/admin/form-deletetracker.php:9
-msgid "You are about to permanently and irretrievably delete this tracker and all its contents!"
-msgstr "Esteu a punt de suprimir de forma permanent i irreversible aquest rastrejador i tot el seu contingut!"
+msgid ""
+"You are about to permanently and irretrievably delete this tracker and all "
+"its contents!"
+msgstr ""
+"Esteu a punt de suprimir de forma permanent i irreversible aquest "
+"rastrejador i tot el seu contingut!"
 
 #: www/tracker/admin/form-addextrafield.php:20
 msgid "Custom Fields Defined"
@@ -4903,8 +5397,12 @@ msgstr ""
 #: www/tracker/admin/form-addextrafield.php:104
 #: www/tracker/admin/form-updateextrafield.php:34
 #: www/tracker/admin/form-updateextrafield.php:37
-msgid "Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively."
-msgstr "Els camps de text i les àrees de text han de tenir definits mida/longitud màxima i files/columnes, respectivament."
+msgid ""
+"Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols "
+"defined, respectively."
+msgstr ""
+"Els camps de text i les àrees de text han de tenir definits mida/longitud "
+"màxima i files/columnes, respectivament."
 
 #: www/tracker/admin/form-addextrafield.php:105
 #: www/tracker/admin/form-updateextrafield.php:35
@@ -4942,8 +5440,15 @@ msgid "Administration"
 msgstr "Administració"
 
 #: www/tracker/admin/tracker.php:12
-msgid "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types"
-msgstr "Afegeix noves caixes com Fases, Mètrica de qualitat, Components, etc.  Un cop afegides, poden usar-se amb altres caixes de selecció (per exemple, Categories o Grups) per a descriure i navegar errors o altres tipus d'artefactes"
+msgid ""
+"Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
+"they can be used with other selection boxes (for example, Categories or "
+"Groups) to describe and browse bugs or other artifact types"
+msgstr ""
+"Afegeix noves caixes com Fases, Mètrica de qualitat, Components, etc.  Un "
+"cop afegides, poden usar-se amb altres caixes de selecció (per exemple, "
+"Categories o Grups) per a descriure i navegar errors o altres tipus "
+"d'artefactes"
 
 #: www/tracker/admin/tracker.php:14
 msgid "Add/Update Canned Responses"
@@ -4974,11 +5479,23 @@ msgid "MISSINGTEXT:tracker_admin/no_trackers_found:TEXTMISSING"
 msgstr ""
 
 #: www/tracker/admin/ind.php:85
-msgid "Choose a data type and you can set up prefs, categories, groups, users, and permissions"
-msgstr "Escolliu un tipus de dades i podreu establir preferències, categories, grups, usuaris i permisos"
+msgid ""
+"Choose a data type and you can set up prefs, categories, groups, users, and "
+"permissions"
+msgstr ""
+"Escolliu un tipus de dades i podreu establir preferències, categories, "
+"grups, usuaris i permisos"
 
 #: www/tracker/admin/ind.php:115
-msgid "<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as \"Artifact Types\" and individual pieces of data are \"Artifacts\". \"Bugs\" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming"
+msgid ""
+"<h3>Create a new tracker</h3><p>You can use this system to track virtually "
+"any kind of data, with each tracker having separate user, group, category, "
+"and permission lists. You can also easily move items between trackers when "
+"needed.</p><p>Trackers are referred to as \"Artifact Types\" and individual "
+"pieces of data are \"Artifacts\". \"Bugs\" might be an Artifact Type, whiles "
+"a bug report would be an Artifact. You can create as many Artifact Types as "
+"you want, but remember you need to set up categories, groups, and permission "
+"for each type, which can get time-consuming"
 msgstr ""
 
 #: www/tracker/admin/ind.php:126
@@ -5002,17 +5519,29 @@ msgid "Once you add a new element, it cannot be deleted"
 msgstr "Un cop heu afegit un nou element, no es pot suprimir"
 
 #: www/tracker/admin/form-clonetracker.php:32
-msgid "Choose the template tracker to clone. The site administrator will have to set up trackers with default values and set permissions properly so you can access them."
+msgid ""
+"Choose the template tracker to clone. The site administrator will have to "
+"set up trackers with default values and set permissions properly so you can "
+"access them."
 msgstr ""
 
 #: www/tracker/admin/form-clonetracker.php:36
-msgid "WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. You have been warned!"
+msgid ""
+"WARNING!!! Cloning this tracker will duplicate all the fields and all the "
+"elements from those fields into this tracker. There is nothing to prevent "
+"you from cloning multiple times or making a huge mess. You have been warned!"
 msgstr ""
 
 #: www/tracker/admin/form-updateextrafield.php:47
 #: www/tracker/admin/form-updateextrafieldelement.php:47
-msgid "It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name"
-msgstr "No es recomana que canvieu el nom del camp extra, perquè en depenen altres coses. Quan canvieu el nom de camp extra, tots els elements relacionats es canviaran al nou nom"
+msgid ""
+"It is not recommended that you change the custom field name because other "
+"things are dependent upon it. When you change the custom field name, all "
+"related items will be changed to the new name"
+msgstr ""
+"No es recomana que canvieu el nom del camp extra, perquè en depenen altres "
+"coses. Quan canvieu el nom de camp extra, tots els elements relacionats es "
+"canviaran al nou nom"
 
 #: www/tracker/admin/index.php:130
 msgid "Successfully Deleted."
@@ -5020,8 +5549,12 @@ msgstr "Suprimit amb èxit."
 
 #: www/tracker/admin/form-updatecanned.php:17
 #: www/tracker/admin/form-addcanned.php:41
-msgid "Creating useful generic messages can save you a lot of time when handling common artifact requests."
-msgstr "Crear missatges genèrics útils us pot estalviar molt de temps al gestionar peticions comunes."
+msgid ""
+"Creating useful generic messages can save you a lot of time when handling "
+"common artifact requests."
+msgstr ""
+"Crear missatges genèrics útils us pot estalviar molt de temps al gestionar "
+"peticions comunes."
 
 #: www/tracker/admin/form-updatecanned.php:25
 #: www/tracker/admin/form-addcanned.php:48
@@ -5102,8 +5635,11 @@ msgid "Tracker Updated"
 msgstr "Rastrejador actualitzat"
 
 #: www/tracker/add.php:48 www/tracker/add.php:94
-msgid "If you <strong>cannot</strong> login, then enter your email address here"
-msgstr "Si <strong>no podeu</strong> iniciar una sessió, entreu la vostra adreça de correu aquí:"
+msgid ""
+"If you <strong>cannot</strong> login, then enter your email address here"
+msgstr ""
+"Si <strong>no podeu</strong> iniciar una sessió, entreu la vostra adreça de "
+"correu aquí:"
 
 #: www/tracker/add.php:56
 msgid "For project"
@@ -5146,7 +5682,8 @@ msgstr "Informació no disponible"
 
 #: www/top/topusers.php:55
 msgid "Information about highest ranked users is not available."
-msgstr "La informació sobre els usuaris millor classificats no està disponible."
+msgstr ""
+"La informació sobre els usuaris millor classificats no està disponible."
 
 #: www/top/topusers.php:60 www/top/topusers.php:62
 msgid "MISSINGTEXT:top_topusers/title:TEXTMISSING"
@@ -5178,6 +5715,7 @@ msgid "Same"
 msgstr "El mateix"
 
 #: www/top/topusers.php:98
+#, php-format
 msgid "Up %1$s"
 msgstr "Puj. %1$s"
 
@@ -5193,8 +5731,11 @@ msgid "Downloads"
 msgstr "Descàrregues"
 
 #: www/top/toplist.php:42
+#, php-format
 msgid "Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)"
-msgstr "Màxim nombre de visites setmanals de pàgines de projecte a *.%1$s (de impressions del logo %2$s)"
+msgstr ""
+"Màxim nombre de visites setmanals de pàgines de projecte a *.%1$s (de "
+"impressions del logo %2$s)"
 
 #: www/top/toplist.php:43
 msgid "Pageviews"
@@ -5213,12 +5754,18 @@ msgid "Top Projects"
 msgstr "Projectes millor classificats"
 
 #: www/top/index.php:34
+#, php-format
 msgid "Top %1$s project"
 msgstr "Top %1$s project"
 
 #: www/top/index.php:36
-msgid "We track many project usage statistics on %1$s, and display here the top ranked projects in several categories."
-msgstr "Rastrejem moltes estadístiques d'ús de projecte a %1$s, i mostrem aquí els projectes més ben classificats en diverses categories."
+#, php-format
+msgid ""
+"We track many project usage statistics on %1$s, and display here the top "
+"ranked projects in several categories."
+msgstr ""
+"Rastrejem moltes estadístiques d'ús de projecte a %1$s, i mostrem aquí els "
+"projectes més ben classificats en diverses categories."
 
 #: www/top/index.php:43
 msgid "Top Project Pageviews"
@@ -5237,48 +5784,119 @@ msgid "Registration complete"
 msgstr "Registre complet"
 
 #: www/register/projectinfo.php:101
-msgid "Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s"
-msgstr "El vostre projecte ha estat tramès als administradors de %1$s. Dins d'un termini de 72 hores, rebreu una notificació de la seva decisió i més instruccions.</p><p>Gràcies per escollir %1$s"
+#, php-format
+msgid ""
+"Your project has been submitted to the %1$s administrators. Within 72 hours, "
+"you will receive notification of their decision and further instructions.<p/"
+">Thank you for choosing %1$s"
+msgstr ""
+"El vostre projecte ha estat tramès als administradors de %1$s. Dins d'un "
+"termini de 72 hores, rebreu una notificació de la seva decisió i més "
+"instruccions.</p><p>Gràcies per escollir %1$s"
 
-#: www/register/projectinfo.php:114
+#: www/register/projectinfo.php:123
 msgid "Project Information"
 msgstr "Informació del projecte"
 
-#: www/register/projectinfo.php:117
-msgid "To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory."
-msgstr "Per sol·licitar un registre de projecte, haurieu de proporcionar-ne informació bàsica. Llegiu amb cura les descripcions més avall i proporcioneu dades completes i comprensibles. Tots els camps de sota són obligatoris."
+#: www/register/projectinfo.php:126
+msgid ""
+"To apply for project registration, you should fill in basic information "
+"about it. Please read descriptions below carefully and provide complete and "
+"comprehensive data. All fields below are mandatory."
+msgstr ""
+"Per sol·licitar un registre de projecte, haurieu de proporcionar-ne "
+"informació bàsica. Llegiu amb cura les descripcions més avall i proporcioneu "
+"dades completes i comprensibles. Tots els camps de sota són obligatoris."
 
-#: www/register/projectinfo.php:122
-msgid "<h3>1. Project full name</h3>You should start with specifying the name of your project. The \"Full Name\" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>"
+#: www/register/projectinfo.php:131
+msgid ""
+"<h3>1. Project full name</h3>You should start with specifying the name of "
+"your project. The \"Full Name\" is descriptive, and has no arbitrary "
+"restrictions (except a 40 character limit).<p/>Full Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:126
-msgid "<h3>2. Project Purpose And Summarization</h3><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>"
-msgstr "<h3>2. Objectiu i resum del projecte</h3><p><strong></strong><p><strong> Proporcioneu una descripció detallada i acurada del vostre projecte i quins recursos %1$s us plantegeu usar i de quina manera. Aquesta descripció serà la base per a l'aprovació o el rebuig de l'hostatjament del vostre projecte a %1$s, i més endavant assegurar-se que esteu usant els serveis de la forma prevista. Aquesta descripció no serà utilitzada com una descripció pública del vostre projecte.</strong>"
+#: www/register/projectinfo.php:135
+#, php-format
+msgid ""
+"<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
+"detailed, accurate description of your project and what %1$s resources and "
+"in which way you plan to use. This description will be the basis for the "
+"approval or rejection of your project's hosting on %1$s, and later, to "
+"ensure that you are using the services in the intended way. This description "
+"will not be used as a public description of your project. It must be written "
+"in English.</strong>"
+msgstr ""
+"<h3>2. Objectiu i resum del projecte</h3><p><strong></strong><p><strong> "
+"Proporcioneu una descripció detallada i acurada del vostre projecte i quins "
+"recursos %1$s us plantegeu usar i de quina manera. Aquesta descripció serà "
+"la base per a l'aprovació o el rebuig de l'hostatjament del vostre projecte "
+"a %1$s, i més endavant assegurar-se que esteu usant els serveis de la forma "
+"prevista. Aquesta descripció no serà utilitzada com una descripció pública "
+"del vostre projecte.</strong>"
 
-#: www/register/projectinfo.php:132
+#: www/register/projectinfo.php:141
+#, php-format
 msgid "<h3>3. License</h3>"
 msgstr "<h3>3. Llicència</h3>"
 
-#: www/register/projectinfo.php:137
-msgid "<p>If you selected \"other\", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.</p>"
+#: www/register/projectinfo.php:146
+msgid ""
+"<p>If you selected \"other\", please provide an explanation along with a "
+"description of your license. Realize that other licenses may not be "
+"approved. Also, it may take additional time to make a decision for such "
+"project, since we will need to check that license is compatible with the "
+"OpenSource definition.</p>"
 msgstr ""
 
-#: www/register/projectinfo.php:143
-msgid "<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>"
-msgstr "<h3>4. Descripció pública del projecte</h3><p>Aquesta és la descripció del vostre projecte que es mostrarà a la pàgina de sumari del projecte, als resultats de cerques, etc. No hauria de ser tan comprensiu i formal com la descripció d'objectius del projecte (pas 2), sentiu-vos lliures per utilitzar vocabulari concís i enganxós. La longitud màxima és de 255 cars."
+#: www/register/projectinfo.php:152
+msgid ""
+"<h3>4. Project Public Description</h3><p>This is the description of your "
+"project which will be shown on the Project Summary page, in search results, "
+"etc. It should not be as comprehensive and formal as Project Purpose "
+"description (step 2), so feel free to use concise and catchy wording. "
+"Maximum length is 255 chars.</p>"
+msgstr ""
+"<h3>4. Descripció pública del projecte</h3><p>Aquesta és la descripció del "
+"vostre projecte que es mostrarà a la pàgina de sumari del projecte, als "
+"resultats de cerques, etc. No hauria de ser tan comprensiu i formal com la "
+"descripció d'objectius del projecte (pas 2), sentiu-vos lliures per "
+"utilitzar vocabulari concís i enganxós. La longitud màxima és de 255 cars."
 
-#: www/register/projectinfo.php:148
-msgid "<h3>5. Project Unix Name</h3>In addition to full project name, you will need to choose short,\"Unix\" name for your project.<p/> The \"Unix Name\" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
+#: www/register/projectinfo.php:157
+#, php-format
+msgid ""
+"<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
+"to choose short,\"Unix\" name for your project.<p/> The \"Unix Name\" has "
+"several restrictions because it is used in so many places around the site. "
+"They are:<ul><li>Cannot match the unix name of any other project</"
+"li><li>Must be between 3 and 15 characters in length</li><li>Must be in "
+"lower case</li><li>Can only contain characters, numbers, and dashes</"
+"li><li>Must be a valid unix username</li><li>Cannot match one of our "
+"reserved domains</li><li>Unix name will never change for this project</li></"
+"ul><p/>Your unix name is important, however, because it will be used for "
+"many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></"
+"li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs."
+"unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
+"li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:158
-msgid "As there exist just one SCM, then this will be selected automatically. <strong>%1$s</strong> will be selected."
-msgstr "Mentres existeixi un únic SCM, es seleccionarà automàticament. Es seleccionarà <strong>%1$s</strong>."
+#: www/register/projectinfo.php:167
+#, php-format
+msgid ""
+"As there exist just one SCM, then this will be selected automatically. "
+"<strong>%1$s</strong> will be selected."
+msgstr ""
+"Mentres existeixi un únic SCM, es seleccionarà automàticament. Es "
+"seleccionarà <strong>%1$s</strong>."
 
-#: www/register/projectinfo.php:161
-msgid "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>"
-msgstr "<h3>6. SCM</h3><p>Podeu escollir entre diferents SCM per al vostre projecte, però només un. Seleccioneu el sistema SCM que voleu usar.</p> <p><strong>Un cop el projecte està registrat no podreu canviar-lo!</strong></p>"
+#: www/register/projectinfo.php:170
+msgid ""
+"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"just one. Please select the SCM system you want to use.</p>"
+msgstr ""
+"<h3>6. SCM</h3><p>Podeu escollir entre diferents SCM per al vostre projecte, "
+"però només un. Seleccioneu el sistema SCM que voleu usar.</p> <p><strong>Un "
+"cop el projecte està registrat no podreu canviar-lo!</strong></p>"
 
 #: www/survey/survey_resp.php:44
 msgid "Survey Complete"
@@ -5294,7 +5912,9 @@ msgstr "Heu de tenir una sessió iniciada"
 
 #: www/survey/survey_resp.php:60
 msgid "Unfortunately, you have to be logged in to participate in surveys."
-msgstr "Malauradament, heu de tenir una sessió iniciada per participar en les enquestes."
+msgstr ""
+"Malauradament, heu de tenir una sessió iniciada per participar en les "
+"enquestes."
 
 #: www/survey/survey_resp.php:67
 msgid "Thank you for taking time to complete this survey."
@@ -5305,6 +5925,7 @@ msgid "Regards"
 msgstr "Records"
 
 #: www/survey/survey_resp.php:71
+#, php-format
 msgid "The %1$s Crew"
 msgstr "L'equip %1$s"
 
@@ -5337,8 +5958,12 @@ msgstr "Edita una pregunta"
 
 #: www/survey/include/SurveyHTML.class:110
 #: www/survey/admin/edit_question.php:83
-msgid "WARNING! It is a bad idea to change a question after responses to it have been submitted"
-msgstr "AVÍS! És una mala idea canviar una pregunta després que s'hagin enviat les respostes"
+msgid ""
+"WARNING! It is a bad idea to change a question after responses to it have "
+"been submitted"
+msgstr ""
+"AVÍS! És una mala idea canviar una pregunta després que s'hagin enviat les "
+"respostes"
 
 #: www/survey/include/SurveyHTML.class:115
 #: www/survey/include/SurveyHTML.class:163
@@ -5371,8 +5996,11 @@ msgstr "Edita una enquesta"
 
 #: www/survey/include/SurveyHTML.class:159
 #: www/survey/admin/edit_survey.php:103
-msgid "WARNING! It is a bad idea to edit a survey after responses have been posted"
-msgstr "AVÍS! És una mala idea editar una enquesta després que s'hagin enviat les respostes"
+msgid ""
+"WARNING! It is a bad idea to edit a survey after responses have been posted"
+msgstr ""
+"AVÍS! És una mala idea editar una enquesta després que s'hagin enviat les "
+"respostes"
 
 #: www/survey/include/SurveyHTML.class:178 www/survey/admin/add_survey.php:76
 msgid "Name Of Survey:"
@@ -5398,6 +6026,7 @@ msgstr "Preguntes en aquesta enquesta"
 
 #: www/survey/include/SurveyHTML.class:280
 #: www/survey/admin/show_questions.php:56
+#, php-format
 msgid "%1$s questions found"
 msgstr "S'han trobat %1$s preguntes"
 
@@ -5460,6 +6089,7 @@ msgstr "No hi ha vots"
 #: www/survey/include/SurveyHTML.class:680
 #: www/survey/admin/show_results_aggregate.php:152
 #: www/survey/admin/show_results_aggregate.php:218
+#, php-format
 msgid "View All %1$s Comments"
 msgstr "Visualitza tots els comentaris %1$s"
 
@@ -5502,7 +6132,8 @@ msgstr "No s'ha trobat cap enquesta"
 
 #: www/survey/survey.php:58
 msgid "For some reason, the Group ID or Survey ID did not make it to this page"
-msgstr "Per alguna raó, l'ID de grup o l'ID d'enquesta no ho han fet a aquesta pàgina"
+msgstr ""
+"Per alguna raó, l'ID de grup o l'ID d'enquesta no ho han fet a aquesta pàgina"
 
 #: www/survey/admin/show_results_aggregate.php:36
 msgid "Survey Aggregate Results"
@@ -5587,15 +6218,23 @@ msgid "UPDATE FAILED"
 msgstr "HA FALLAT L'ACTUALITZACIÓ"
 
 #: www/survey/admin/edit_survey.php:105
-msgid "If you change a survey after you already have responses, your results pages could be misleading or messed up"
-msgstr "Si canvieu una enquesta quan ja teniu respostes, les vostres pàgines de resultats podrien ser errònies o desordenades"
+msgid ""
+"If you change a survey after you already have responses, your results pages "
+"could be misleading or messed up"
+msgstr ""
+"Si canvieu una enquesta quan ja teniu respostes, les vostres pàgines de "
+"resultats podrien ser errònies o desordenades"
 
 #: www/survey/admin/edit_survey.php:110
 msgid "Name of Survey"
 msgstr "Nom de l'enquesta"
 
 #: www/survey/admin/edit_survey.php:117
-msgid "List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view\tthe question id's. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7"
+msgid ""
+"List question numbers, in desired order, separated by commas. <strong>Refer "
+"to your list of questions</strong> so you can view\tthe question id's. Do "
+"<strong>not</strong> include spaces or end your list with a comma.<br /> Ex: "
+"1,2,3,4,5,6,7"
 msgstr ""
 
 #: www/survey/admin/edit_survey.php:120
@@ -5625,8 +6264,16 @@ msgid "MISSINGTEXT:survey_add_question/error_in_insert:TEXTMISSING"
 msgstr ""
 
 #: www/survey/admin/add_survey.php:81
-msgid "List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7"
-msgstr "Llisteu els números de pregunta en l'ordre desitjat i separats per comes. <strong>Referiu-vos a la vostra llista de preguntes</strong> així podreu veure els id's de les preguntes. <strong>No</strong> incloeu espais o acabeu la vostra llista amb una coma. <br />P.e.: 1,2,3,4,5,6,7"
+msgid ""
+"List question numbers, in desired order, separated by commas. <strong>Refer "
+"to your list of questions</strong> so you can view the question id's. Do "
+"<strong>not</strong> include spaces or end your list with a comma. <br />Ex: "
+"1,2,3,4,5,6,7"
+msgstr ""
+"Llisteu els números de pregunta en l'ordre desitjat i separats per comes. "
+"<strong>Referiu-vos a la vostra llista de preguntes</strong> així podreu "
+"veure els id's de les preguntes. <strong>No</strong> incloeu espais o acabeu "
+"la vostra llista amb una coma. <br />P.e.: 1,2,3,4,5,6,7"
 
 #: www/survey/admin/show_results_individual.php:37
 msgid "Results"
@@ -5670,11 +6317,24 @@ msgid "Survey Administration"
 msgstr "Administració de l'enquesta"
 
 #: www/survey/admin/index.php:46
-msgid "<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: %1$s where XX is the survey number"
-msgstr "<p>Crear una enquesta és simple.<ol><li>Creeu preguntes i comentaris usant els formularis anteriors.</li><li>Creeu una enquesta, llisteu les preguntes en ordre (escolliu-les de la <strong>vostra</strong> llista de preguntes).</li><li>Enllaceu amb l'enquesta usant aquest format: %1$s on XX és el nom de l'enquesta"
+#, php-format
+msgid ""
+"<p>It's simple to create a survey.<ol><li>Create questions and comments "
+"using the forms above.</li><li>Create a survey, listing the questions in "
+"order (choose from <strong>your</strong> list of questions).</li><li>Link to "
+"the survey using this format: %1$s where XX is the survey number"
+msgstr ""
+"<p>Crear una enquesta és simple.<ol><li>Creeu preguntes i comentaris usant "
+"els formularis anteriors.</li><li>Creeu una enquesta, llisteu les preguntes "
+"en ordre (escolliu-les de la <strong>vostra</strong> llista de preguntes).</"
+"li><li>Enllaceu amb l'enquesta usant aquest format: %1$s on XX és el nom de "
+"l'enquesta"
 
 #: www/survey/admin/index.php:48
-msgid "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2$s page"
+#, php-format
+msgid ""
+"You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2"
+"$s page"
 msgstr ""
 
 #: www/survey/admin/survey.php:59
@@ -5691,18 +6351,45 @@ msgid "Editing Question"
 msgstr "Editant la pregunta"
 
 #: www/survey/admin/edit_question.php:85
-msgid "If you change a question after responses have been posted, your results pages may be misleading"
-msgstr "Si canvieu una pregunta després que s'hagin enviat les preguntes, els resultats poden ser erronis"
+msgid ""
+"If you change a question after responses have been posted, your results "
+"pages may be misleading"
+msgstr ""
+"Si canvieu una pregunta després que s'hagin enviat les preguntes, els "
+"resultats poden ser erronis"
 
 #: www/survey/admin/survey_utils.php:33
+#, php-format
 msgid "%1$s surveys found"
 msgstr "S'han trobat %1$s enquestes"
 
 #: www/survey/privacy.php:39
-msgid "<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'."
-msgstr "<p>La informació obtinguda en aquestes enquestes no es vendrà mai a terceres parts ni serà utilitzada per demanar-vos que compreu bens o serveis.</p><p>Aquesta informació es recull per construir un perfil dels projectes i desenvolupadors que s'estan desenvolupant. Aquest perfil ajudarà els visitants del lloc a entendre la qualitat d'un determinat projecte.</p><p>Els ID's dels que responen les enquestes són eliminats i no són visibles per administradors de projecte, el públic o terceres parts.</p><p>La informació recollida només s'utilitza en forma agregada, no per singularitzar usuaris específics o desenvolupadors.</p><p>Si hi hagués canvis en aquesta política, afectarien només dades futures recollides i l'usuari naturalment tindria l'opció de no participar."
+msgid ""
+"<p>The information collected in these surveys will never be sold to third "
+"parties or used to solicit you to purchase any goods or services.</p><p>This "
+"information is being gathered to build a profile of the projects and "
+"developers being surveyed. That profile will help visitors to the site "
+"understand the quality of a given project.</p><p>The ID's of those who "
+"answer surveys are suppressed and not viewable by project administrators or "
+"the public or third parties.</p><p>The information gathered is used only in "
+"aggregate form, not to single out specific users or developers.</p><p>If any "
+"changes are made to this policy, it will affect only future data that is "
+"collected and the user will of course have the ability to 'opt-out'."
+msgstr ""
+"<p>La informació obtinguda en aquestes enquestes no es vendrà mai a terceres "
+"parts ni serà utilitzada per demanar-vos que compreu bens o serveis.</"
+"p><p>Aquesta informació es recull per construir un perfil dels projectes i "
+"desenvolupadors que s'estan desenvolupant. Aquest perfil ajudarà els "
+"visitants del lloc a entendre la qualitat d'un determinat projecte.</"
+"p><p>Els ID's dels que responen les enquestes són eliminats i no són "
+"visibles per administradors de projecte, el públic o terceres parts.</"
+"p><p>La informació recollida només s'utilitza en forma agregada, no per "
+"singularitzar usuaris específics o desenvolupadors.</p><p>Si hi hagués "
+"canvis en aquesta política, afectarien només dades futures recollides i "
+"l'usuari naturalment tindria l'opció de no participar."
 
 #: www/survey/privacy.php:42
+#, php-format
 msgid "The %1$s Team"
 msgstr "L'equip %1$s"
 
@@ -5808,6 +6495,7 @@ msgstr "La consulta no ha retornat dades vàlides."
 
 #: www/stats/site_stats_utils.php:374
 #: www/project/stats/project_stats_utils.php:74
+#, php-format
 msgid "Statistics for the past %1$s days"
 msgstr "Estadístiques dels últims %1$s dies"
 
@@ -5830,6 +6518,7 @@ msgid "No Data"
 msgstr "No hi ha dades"
 
 #: www/stats/site_stats_utils.php:428
+#, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "Estadístiques dels últims %1$s mesos"
 
@@ -5847,10 +6536,12 @@ msgid "Projects"
 msgstr "Projectes"
 
 #: www/stats/i18n.php:20
+#, php-format
 msgid "%1$s I18n Statistics"
 msgstr "%1$s Estadístiques I18n"
 
 #: www/stats/i18n.php:22
+#, php-format
 msgid "Languages Distributions"
 msgstr "Distribucions d'idiomes"
 
@@ -5859,10 +6550,17 @@ msgid "Total Non-English"
 msgstr "Total No-Anglès"
 
 #: www/stats/i18n.php:48
-msgid "This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences"
-msgstr "Aquesta és la llista de les preferències que han escollit els usuaris a les seves preferències; no inclou els idiomes que es seleccionen a través de les galetes o les preferències del navegador"
+msgid ""
+"This is a list of the preferences that users have chosen in their user "
+"preferences; it does not include languages which are selected via cookies or "
+"browser preferences"
+msgstr ""
+"Aquesta és la llista de les preferències que han escollit els usuaris a les "
+"seves preferències; no inclou els idiomes que es seleccionen a través de les "
+"galetes o les preferències del navegador"
 
 #: www/stats/projects.php:28 www/stats/graphs.php:20 www/stats/index.php:22
+#, php-format
 msgid "%1$s Site Statistics"
 msgstr "Estadístiques del lloc %1$s"
 
@@ -5903,6 +6601,7 @@ msgid "Gforge Page Views"
 msgstr "Visites de la pàgina Gforge"
 
 #: www/stats/views_graph.php:86
+#, php-format
 msgid "Total Page Views (RED) (%1$s days)"
 msgstr "Total de visites de la pàgina (VERMELL) (%1$s dies)"
 
@@ -5936,11 +6635,14 @@ msgid "OVERVIEW STATS"
 msgstr "ESTADÍSTIQUES GENERALS"
 
 #: www/stats/index.php:56
-msgid "Other statistics:<ul><li><a href=\"i18n.php\">I18n Statistics</a></li></ul>"
+msgid ""
+"Other statistics:<ul><li><a href=\"i18n.php\">I18n Statistics</a></li></ul>"
 msgstr ""
 
 #: www/scm/include/viewvc_utils.php:79
-msgid "The repository for this project isn't created yet. It will be created in the next few minutes."
+msgid ""
+"The repository for this project isn't created yet. It will be created in the "
+"next few minutes."
 msgstr ""
 
 #: www/scm/include/scm_utils.php:42
@@ -5961,7 +6663,13 @@ msgid "Message has been sent"
 msgstr "S'ha enviat el missatge"
 
 #: www/sendmessage.php:114
-msgid "In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class=\"important\"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>"
+msgid ""
+"In an attempt to reduce spam, we are using this form to send email.<p />Fill "
+"it out accurately and completely or the receiver may not be able to respond."
+"<p /><span class=\"important\"><b>IF YOU ARE WRITING FOR HELP:</b> Did you "
+"read the site documentation? Did you include your <b>user_id</b> and "
+"<b>user_name?</b> If you are writing about a project, include your "
+"<b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>"
 msgstr ""
 
 #: www/sendmessage.php:124
@@ -5985,8 +6693,12 @@ msgid "User Summary Report"
 msgstr "Informe resum de l'usuari"
 
 #: www/reporting/usersummary.php:70
-msgid "Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range."
-msgstr "Escolliu el rang a les caixes desplegables de sota. L'informe llistarà totes les tasques amb una data oberta en aquest rang."
+msgid ""
+"Choose the range from the pop-up boxes below. The report will list all tasks "
+"with an open date in that range."
+msgstr ""
+"Escolliu el rang a les caixes desplegables de sota. L'informe llistarà totes "
+"les tasques amb una data oberta en aquest rang."
 
 #: www/reporting/usersummary.php:74 www/reporting/usercum.php:59
 #: www/reporting/sitetime.php:70 www/reporting/projecttime.php:75
@@ -6095,8 +6807,12 @@ msgid "User Activity"
 msgstr "Activitat de l'usuari"
 
 #: www/reporting/useract.php:57 www/reporting/usertime.php:58
-msgid "Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>"
-msgstr "Escolliu la <strong>Primera lletra</strong> del nom de la persona sobre la qual voleu informar.<p>"
+msgid ""
+"Choose the <strong>First Letter</strong> of the name of the person you wish "
+"to report on.<p>"
+msgstr ""
+"Escolliu la <strong>Primera lletra</strong> del nom de la persona sobre la "
+"qual voleu informar.<p>"
 
 #: www/reporting/useract.php:73 www/reporting/usertime.php:85
 #: www/pm/mod_task.php:211
@@ -6145,8 +6861,12 @@ msgid "Add Entry"
 msgstr "Afegeix una entrada"
 
 #: www/reporting/timeadd.php:191
-msgid "Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in."
-msgstr "Escolliu un projecte/subprojecte al gestor de tasques. Aleshores haureu d'escollir una tasca i una categoria per registrar-hi el vostre temps."
+msgid ""
+"Choose a Project/Subproject in the Task Manager. You will then have to "
+"choose a Task and category to record your time in."
+msgstr ""
+"Escolliu un projecte/subprojecte al gestor de tasques. Aleshores haureu "
+"d'escollir una tasca i una categoria per registrar-hi el vostre temps."
 
 #: www/reporting/timeadd.php:199 www/reporting/timeadd.php:227
 #: www/admin/cronman.php:98
@@ -6162,8 +6882,12 @@ msgid "Choose A Week to Record Or Edit Your Time."
 msgstr "Escolliu una setmana a desar o editeu el vostre temps."
 
 #: www/reporting/timeadd.php:221
-msgid "After you choose a week, you will be prompted to choose a Project/Subproject in the Task Manager."
-msgstr "Després d'escollir una setmana, se us demanarà que escolliu un projecte/subprojecte al gestor de tasques."
+msgid ""
+"After you choose a week, you will be prompted to choose a Project/Subproject "
+"in the Task Manager."
+msgstr ""
+"Després d'escollir una setmana, se us demanarà que escolliu un projecte/"
+"subprojecte al gestor de tasques."
 
 #: www/reporting/timeadd.php:224
 msgid "Week Starting"
@@ -6211,7 +6935,10 @@ msgid "Manage Time Tracker Categories"
 msgstr "Gestiona les categories de control de temps"
 
 #: www/reporting/timecategory.php:88
-msgid "You can create categories for how time might be spent when completing a particular task. Examples of categories include \"Meeting\", \"Coding\", \"Testing\"."
+msgid ""
+"You can create categories for how time might be spent when completing a "
+"particular task. Examples of categories include \"Meeting\", \"Coding\", "
+"\"Testing\"."
 msgstr ""
 
 #: www/reporting/index.php:39
@@ -6240,7 +6967,9 @@ msgstr "Projectes acumulats setmanalment (gràfic)"
 
 #: www/reporting/index.php:49
 msgid "Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
-msgstr "Informes específics de projecte: Rastrejador, Gest tasq, Fòrums, Gest Doc, Baixades"
+msgstr ""
+"Informes específics de projecte: Rastrejador, Gest tasq, Fòrums, Gest Doc, "
+"Baixades"
 
 #: www/reporting/index.php:52
 msgid "Site-Wide"
@@ -6248,7 +6977,8 @@ msgstr "A tot el lloc"
 
 #: www/reporting/index.php:54
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
-msgstr "Informes de tot el lloc: Rastrejador, Gest tasq, Fòrums, Gest Doc, Baixades"
+msgstr ""
+"Informes de tot el lloc: Rastrejador, Gest tasq, Fòrums, Gest Doc, Baixades"
 
 #: www/reporting/index.php:55
 msgid "Pie (graph)"
@@ -6291,7 +7021,12 @@ msgid "Initialize / Rebuild Reporting Tables"
 msgstr "Initialitza / Reelabora taules d'informes"
 
 #: www/reporting/rebuild.php:54
-msgid "<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the \"I'm Sure\" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
+msgid ""
+"<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed "
+"or the database was damaged, you may have to rebuild the reporting tables."
+"<p>If you are sure you want to rebuild all the reporting tables, check the "
+"\"I'm Sure\" box and click the button below.<p>This could take a couple "
+"minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
 msgstr ""
 
 #: www/reporting/rebuild.php:59
@@ -6316,12 +7051,27 @@ msgid "Projects Added"
 msgstr "Projectes afegits"
 
 #: www/help/tracker.php:41
-msgid "This drop-down box represents the person to which a tracker item is assigned."
-msgstr "Aquesta caixa desplegable representa l'administrador de projecte a qui està assignat un element de rastreig."
+msgid ""
+"This drop-down box represents the person to which a tracker item is assigned."
+msgstr ""
+"Aquesta caixa desplegable representa l'administrador de projecte a qui està "
+"assignat un element de rastreig."
 
 #: www/help/tracker.php:44
-msgid "This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'."
-msgstr "Aquesta caixa desplegable representa l'estat actual d'un element de rastreig.<br /><br />Podeu posar l'estat com 'Pendent' si esteu esperant una resposta de l'autor del'element de rastreig.  Quan l'autor respon, l'estat es canvia automàticament a 'Obert'. En canvi, si l'autor no respon en un termini definit per l'administrador (per defecte és 14 dies) se li assigna a l'element un estat d''Suprimit'."
+msgid ""
+"This drop-down box represents the current status of a tracker item.<br /"
+"><br />You can set the status to 'Pending' if you are waiting for a response "
+"from the tracker item author.  When the author responds the status is "
+"automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+"respond with an admin-defined amount of time (default is 14 days) then the "
+"item is given a status of 'Deleted'."
+msgstr ""
+"Aquesta caixa desplegable representa l'estat actual d'un element de rastreig."
+"<br /><br />Podeu posar l'estat com 'Pendent' si esteu esperant una resposta "
+"de l'autor del'element de rastreig.  Quan l'autor respon, l'estat es canvia "
+"automàticament a 'Obert'. En canvi, si l'autor no respon en un termini "
+"definit per l'administrador (per defecte és 14 dies) se li assigna a "
+"l'element un estat d''Suprimit'."
 
 #: www/help/tracker.php:47
 msgid "MISSINGTEXT:help_tracker/category:TEXTMISSING"
@@ -6332,39 +7082,86 @@ msgid "MISSINGTEXT:help_tracker/group:TEXTMISSING"
 msgstr ""
 
 #: www/help/tracker.php:53
-msgid "The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order."
-msgstr "L'opció Ordena per us permet determinar com es classifiquen els resultats de l'navegació.<br /><br />  Podeu classificar per ID, Prioritat, Resum, Data d'obertura, Data de tancament, Remitent, o Assignee.  També podeu tenir els resultats classificats en ordre Ascendent o Descendent."
+msgid ""
+"The Sort By option allows you to determine how the browse results are sorted."
+"<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
+"Submitter, or Assignee.  You can also have the results sorted in Ascending "
+"or Descending order."
+msgstr ""
+"L'opció Ordena per us permet determinar com es classifiquen els resultats de "
+"l'navegació.<br /><br />  Podeu classificar per ID, Prioritat, Resum, Data "
+"d'obertura, Data de tancament, Remitent, o Assignee.  També podeu tenir els "
+"resultats classificats en ordre Ascendent o Descendent."
 
 #: www/help/tracker.php:56
-msgid "The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug."
-msgstr "L'opció tipus de dades determina el tipus d'element de rastreig que es tracta.  Com que el rastrejador passa a un gestor d'errors, pedaços, suport, etc..., necessiteu ser capaç de determinar a quin d'aquests ha de correspondre un element.<br /><br />Aquest és l'avantatge afegit de permetre a un administrador convertir una petició de suport en un error (bug)."
+msgid ""
+"The Data Type option determines the type of tracker item this is.  Since the "
+"tracker rolls into one the bug, patch, support, etc... managers you need to "
+"be able to determine which one of these an item should belong.<br /><br /"
+">This has the added benefit of enabling an admin to turn a support request "
+"into a bug."
+msgstr ""
+"L'opció tipus de dades determina el tipus d'element de rastreig que es "
+"tracta.  Com que el rastrejador passa a un gestor d'errors, pedaços, suport, "
+"etc..., necessiteu ser capaç de determinar a quin d'aquests ha de "
+"correspondre un element.<br /><br />Aquest és l'avantatge afegit de permetre "
+"a un administrador convertir una petició de suport en un error (bug)."
 
 #: www/help/tracker.php:59
-msgid "The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project."
-msgstr "L'opció de prioritat permet a un usuari definir una prioritat de l'element de rastreig (que va de 1-mínim a 9-màxim).<br /><br />Això és especialment útil per errors i peticions de suport en les quals un usuari pot trobar un problema crític amb un projecte."
+msgid ""
+"The priority option allows a user to define a tracker item priority (ranging "
+"from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
+"and support requests where a user might find a critical problem with a "
+"project."
+msgstr ""
+"L'opció de prioritat permet a un usuari definir una prioritat de l'element "
+"de rastreig (que va de 1-mínim a 9-màxim).<br /><br />Això és especialment "
+"útil per errors i peticions de suport en les quals un usuari pot trobar un "
+"problema crític amb un projecte."
 
 #: www/help/tracker.php:62
 msgid "MISSINGTEXT:help_tracker/resolution:TEXTMISSING"
 msgstr ""
 
 #: www/help/tracker.php:65
-msgid "The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items."
-msgstr "La caixa de text de resum representa un resum breu de l'element de rastreig. Útil quan s'està navegant entre diversos elements de rastreig."
+msgid ""
+"The summary text-box represents a short tracker item summary. Useful when "
+"browsing through several tracker items."
+msgstr ""
+"La caixa de text de resum representa un resum breu de l'element de rastreig. "
+"Útil quan s'està navegant entre diversos elements de rastreig."
 
 #: www/help/tracker.php:68
-msgid "The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses"
-msgstr "El desplegable de la resposta 'enllaunada' representa una llista de respostes 'enllaunades' definides per l'administrador de projecte per al suport comú o l'enviament d'errors.<br /><br /> Si sou un administrador de projectes,podeu fer clic a l'enllaç '(admin)' per a definir les vostres pròpies respostes 'enllaunades'"
+msgid ""
+"The canned response drop-down represents a list of project admin-defined "
+"canned responses to common support or bug submission.<br /><br /> If you are "
+"a project admin you can click the '(admin)' link to define your own canned "
+"responses"
+msgstr ""
+"El desplegable de la resposta 'enllaunada' representa una llista de "
+"respostes 'enllaunades' definides per l'administrador de projecte per al "
+"suport comú o l'enviament d'errors.<br /><br /> Si sou un administrador de "
+"projectes,podeu fer clic a l'enllaç '(admin)' per a definir les vostres "
+"pròpies respostes 'enllaunades'"
 
 #: www/help/tracker.php:71
 msgid "MISSINGTEXT:help_tracker/comment:TEXTMISSING"
 msgstr ""
 
 #: www/help/tracker.php:74
-msgid "When you wish to attach a file to a tracker item you must check this checkbox before submitting changes."
-msgstr "Si desitgeu adjuntar un fitxer a un element de rastreig heu de marcar aquesta casella abans d'enviar els canvis."
+msgid ""
+"When you wish to attach a file to a tracker item you must check this "
+"checkbox before submitting changes."
+msgstr ""
+"Si desitgeu adjuntar un fitxer a un element de rastreig heu de marcar "
+"aquesta casella abans d'enviar els canvis."
 
 #: www/help/tracker.php:77
-msgid "You can monitor or un-monitor this item by clicking the \"Monitor\" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!"
+msgid ""
+"You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
+"<br /><br /><strong>Note!</strong> this will send you additional email. If "
+"you add comments to this item, or submitted, or are assigned this item, you "
+"will also get emails for those reasons as well!"
 msgstr ""
 
 #: www/help/tracker.php:80
@@ -6440,7 +7237,10 @@ msgid "MISSINGTEXT:docman/bytes:TEXTMISSING"
 msgstr ""
 
 #: www/docman/display_doc.php:34
-msgid "This document was moved to <a href=\"/docman/view.php/%1$s/%2$s\">this new location</a>"
+#, php-format
+msgid ""
+"This document was moved to <a href=\"/docman/view.php/%1$s/%2$s\">this new "
+"location</a>"
 msgstr ""
 
 #: www/docman/display_doc.php:37 www/docman/view.php:61
@@ -6456,10 +7256,18 @@ msgid "Document Manager: Submit New Documentation"
 msgstr "Gestor de Documents: Tramet nova documentació"
 
 #: www/docman/new.php:124 www/docman/admin/index.php:184
-msgid "<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title."
-msgstr "<strong>Títol del document</strong>:  Es refereix al títol relativament breu del document (ex. Com es fa per usar el servidor de baixades)<br /><strong>Descripció:</strong> Una breu descripció situada justament sota el títol."
+msgid ""
+"<strong>Document Title</strong>:  Refers to the relatively brief title of "
+"the document (e.g. How to use the download server)<br /><strong>Description:"
+"</strong> A brief description to be placed just under the title."
+msgstr ""
+"<strong>Títol del document</strong>:  Es refereix al títol relativament breu "
+"del document (ex. Com es fa per usar el servidor de baixades)<br /"
+"><strong>Descripció:</strong> Una breu descripció situada justament sota el "
+"títol."
 
 #: www/docman/new.php:129 www/docman/admin/index.php:191
+#, php-format
 msgid "Document Title"
 msgstr "Títol del document"
 
@@ -6493,7 +7301,9 @@ msgid "File"
 msgstr "Fitxer"
 
 #: www/docman/admin/index.php:221
-msgid "Edit the contents to your desire or leave them as they are to remain unmodified."
+msgid ""
+"Edit the contents to your desire or leave them as they are to remain "
+"unmodified."
 msgstr ""
 
 #: www/docman/admin/index.php:299
@@ -6533,8 +7343,11 @@ msgid "Belongs to"
 msgstr ""
 
 #: www/docman/admin/index.php:383 www/docman/admin/index.php:435
-msgid "Group name will be used as a title, so it should be formatted correspondingly."
-msgstr "El nom de grup s'usarà com a títol, per tant s'ha de formatar com correspon."
+msgid ""
+"Group name will be used as a title, so it should be formatted "
+"correspondingly."
+msgstr ""
+"El nom de grup s'usarà com a títol, per tant s'ha de formatar com correspon."
 
 #: www/docman/admin/index.php:415
 msgid "Edit a group"
@@ -6557,8 +7370,13 @@ msgid "Project Member List"
 msgstr "Llista de membres del projecte"
 
 #: www/project/report/index.php:130 www/project/memberlist.php:41
-msgid "<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>"
-msgstr "<p>Si us agradaria contribuir a aquest projecte convertint-vos en desenvolupador, contacteu un dels administradors de projecte, designats en negreta més avall.</p>"
+msgid ""
+"<p>If you would like to contribute to this project by becoming a developer, "
+"contact one of the project admins, designated in bold text below.</p>"
+msgstr ""
+"<p>Si us agradaria contribuir a aquest projecte convertint-vos en "
+"desenvolupador, contacteu un dels administradors de projecte, designats en "
+"negreta més avall.</p>"
 
 #: www/project/report/index.php:133 www/project/memberlist.php:54
 msgid "Developer"
@@ -6581,7 +7399,9 @@ msgid "Request to join project"
 msgstr ""
 
 #: www/project/request.php:59
-msgid "You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request."
+msgid ""
+"You can request to join a project by clicking the submit button. An "
+"administrator will be emailed to approve or deny your request."
 msgstr ""
 
 #: www/project/request.php:62
@@ -6600,6 +7420,7 @@ msgid "Project did not exist on this date."
 msgstr "El projecte no existia en aquesta data."
 
 #: www/project/stats/project_stats_utils.php:134
+#, php-format
 msgid "Statistics for the past %1$s months."
 msgstr "Estadístiques dels passats %1$s mesos."
 
@@ -6645,7 +7466,9 @@ msgid "Add New Database"
 msgstr "Afegeix nova base de dades"
 
 #: www/project/admin/database.php:165
-msgid "Clicking on \"create\" will schedule the creation of the database, and email the\tdetails to the project administrators"
+msgid ""
+"Clicking on \"create\" will schedule the creation of the database, and email "
+"the\tdetails to the project administrators"
 msgstr ""
 
 #: www/project/admin/database.php:167
@@ -6712,8 +7535,15 @@ msgid "Edit Multimedia Data"
 msgstr "Edita les dades multimèdia"
 
 #: www/project/admin/editimages.php:199
-msgid "You can store up to %1$s MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data."
-msgstr "Podeu emmagatzemar fin a %1$s MB de dades multimèdia (gràfics vectorials i de mapa de bits, fragments de so, models 3D) a la base de dades. Useu aquesta pàgina per afegir/suprimir les vostres dades multimèdia de projecte."
+#, php-format
+msgid ""
+"You can store up to %1$s MB of multimedia data (bitmap and vector graphics, "
+"sound clips, 3D models) in the database. Use this page to add/delete your "
+"project multimedia data."
+msgstr ""
+"Podeu emmagatzemar fin a %1$s MB de dades multimèdia (gràfics vectorials i "
+"de mapa de bits, fragments de so, models 3D) a la base de dades. Useu "
+"aquesta pàgina per afegir/suprimir les vostres dades multimèdia de projecte."
 
 #: www/project/admin/editimages.php:222
 msgid "Replace with new file (optional)"
@@ -6788,8 +7618,34 @@ msgid "MISSINGTEXT:project_admin_utils/no_changes:TEXTMISSING"
 msgstr ""
 
 #: www/project/admin/project_admin_utils.php:255
-msgid "<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn't have specific permission (currently equivalent to '-')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>"
-msgstr "<strong>NOTA:</strong><dl><dt><strong>Els administradors de projecte  (bold)</strong></dt><dd>poden accedir a aquesta pàgina i altres pàgines d'administració del projecte</dd><dt><strong>Els tècnics de publicació</strong></dt><dd>poden fer les publicacions de fitxers (qualsevol administrador de projecte és també tècnic de publicacions)</dd><dt><strong>Tècnics d'eines (T)</strong></dt><dd>se'ls poden assignar Errors/Tasques/Pedaços</dd><dt><strong>Administradors d'eines (A)</strong></dt><dd>poden fer canvis en errors/tasques/pedaços així com utilitzar les pàgines /toolname/admin/</dd><dt><strong>No permís d'eines (N/A)</strong></dt><dd>El desenvolupador no té permís específic (actualment equivalent a '-')</dd><dt><strong>Moderadors</strong> (fòrums)</dt><dd>poden suprimir missatges dels fòrums del projecte</dd><dt><strong>Editors</strong> (gestor de documents)</dt><dd>poden actualitzar/editar/eliminar documentació del projecte.</dd></dl>"
+msgid ""
+"<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></"
+"dt><dd>can access this page and other project administration pages</"
+"dd><dt><strong>Release Technicians</strong></dt><dd>can make the file "
+"releases (any project admin also a release technician)</dd><dt><strong>Tool "
+"Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</"
+"dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/"
+"Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool "
+"No Permission (N/A)</strong></dt><dd>Developer doesn't have specific "
+"permission (currently equivalent to '-')</dd><dt><strong>Moderators</strong> "
+"(forums)</dt><dd>can delete messages from the project forums</"
+"dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/"
+"remove documentation from the project.</dd></dl>"
+msgstr ""
+"<strong>NOTA:</strong><dl><dt><strong>Els administradors de projecte  (bold)"
+"</strong></dt><dd>poden accedir a aquesta pàgina i altres pàgines "
+"d'administració del projecte</dd><dt><strong>Els tècnics de publicació</"
+"strong></dt><dd>poden fer les publicacions de fitxers (qualsevol "
+"administrador de projecte és també tècnic de publicacions)</"
+"dd><dt><strong>Tècnics d'eines (T)</strong></dt><dd>se'ls poden assignar "
+"Errors/Tasques/Pedaços</dd><dt><strong>Administradors d'eines (A)</strong></"
+"dt><dd>poden fer canvis en errors/tasques/pedaços així com utilitzar les "
+"pàgines /toolname/admin/</dd><dt><strong>No permís d'eines (N/A)</strong></"
+"dt><dd>El desenvolupador no té permís específic (actualment equivalent a '-')"
+"</dd><dt><strong>Moderadors</strong> (fòrums)</dt><dd>poden suprimir "
+"missatges dels fòrums del projecte</dd><dt><strong>Editors</strong> (gestor "
+"de documents)</dt><dd>poden actualitzar/editar/eliminar documentació del "
+"projecte.</dd></dl>"
 
 #: www/project/admin/massfinish.php:69 www/project/admin/index.php:337
 #: www/project/admin/roleedit.php:92 www/project/admin/roleedit.php:104
@@ -6804,7 +7660,9 @@ msgstr "Afegeix usuaris de la llista"
 
 #: www/project/admin/massfinish.php:74
 msgid "Choose the role for each user and then press &quot;Add All&quot;."
-msgstr "Escolliu el rol per a cada usuari i després premeu &quot;Afegeix-los tots&quot;."
+msgstr ""
+"Escolliu el rol per a cada usuari i després premeu &quot;Afegeix-los "
+"tots&quot;."
 
 #: www/project/admin/massfinish.php:83 www/project/admin/index.php:259
 #: www/project/admin/massadd.php:98 www/admin/useredit.php:241
@@ -6821,6 +7679,7 @@ msgid "Virtual Host scheduled for creation."
 msgstr "Ordinador central virtual preparat per a la creació."
 
 #: www/project/admin/vhost.php:71
+#, php-format
 msgid "Not a valid hostname - %1$s"
 msgstr "Nom d'ordinador central no vàlid - %1$s"
 
@@ -6833,7 +7692,15 @@ msgid "Virtual Host Management"
 msgstr "Gestió de l'ordinador central virtual"
 
 #: www/project/admin/vhost.php:112
-msgid "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</span></strong><p>To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.  <p>Clicking on \"create\" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</em>."
+#, php-format
+msgid ""
+"<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
+"span></strong><p>To add a new virtual host - simply point a <strong>CNAME</"
+"strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does "
+"not currently host mail (i.e. cannot be an MX) or DNS</strong>.  <p>Clicking "
+"on \"create\" will schedule the creation of the Virtual Host.  This will be "
+"synced to the project webservers - such that <em>yourhost.org</em> will "
+"display the material at <em>%4$s.%5$s</em>."
 msgstr ""
 
 #: www/project/admin/vhost.php:118
@@ -6861,8 +7728,12 @@ msgid "Descriptive Group Name"
 msgstr "Nom de grup descriptiu"
 
 #: www/project/admin/editgroupinfo.php:129
-msgid "Short Description (255 Character Max, HTML will be stripped from this description)"
-msgstr "Descripció breu (màx. 255 caràcters, en aquesta definició s'hauria de deixar de banda l'HTML)"
+msgid ""
+"Short Description (255 Character Max, HTML will be stripped from this "
+"description)"
+msgstr ""
+"Descripció breu (màx. 255 caràcters, en aquesta definició s'hauria de deixar "
+"de banda l'HTML)"
 
 #: www/project/admin/editgroupinfo.php:136
 msgid "Homepage Link"
@@ -6917,8 +7788,12 @@ msgid "Use Statistics"
 msgstr "Usa les estadístiques"
 
 #: www/project/admin/editgroupinfo.php:319
-msgid "If you wish, you can provide default email addresses to which new submissions will be sent"
-msgstr "Si ho desitgeu, podeu proporcionar adreces de correu per defecte a on dirigir els nous enviaments"
+msgid ""
+"If you wish, you can provide default email addresses to which new "
+"submissions will be sent"
+msgstr ""
+"Si ho desitgeu, podeu proporcionar adreces de correu per defecte a on "
+"dirigir els nous enviaments"
 
 #: www/project/admin/editgroupinfo.php:320
 msgid "New Document Submissions"
@@ -6941,6 +7816,7 @@ msgid "User Updated Successfully"
 msgstr "Usuari actualitzat amb èxit"
 
 #: www/project/admin/index.php:163
+#, php-format
 msgid "Project Admin: %1$s"
 msgstr "Administració del projecte: %1$s"
 
@@ -7051,16 +7927,28 @@ msgid "Add Role"
 msgstr "Afegeix Rol"
 
 #: www/project/admin/roleedit.php:99
-msgid "Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in."
-msgstr "Useu aquesta pàgina per editar els permisos i accedir anivells de no-membres del vostre projecte. No-membres inclou els usuaris que no han iniciat una sessió."
+msgid ""
+"Use this page to edit the permissions and access levels of non-members of "
+"your project. Non-members includes users who are not logged in."
+msgstr ""
+"Useu aquesta pàgina per editar els permisos i accedir anivells de no-membres "
+"del vostre projecte. No-membres inclou els usuaris que no han iniciat una "
+"sessió."
 
 #: www/project/admin/roleedit.php:102
 msgid "New Role"
 msgstr "Nou rol"
 
 #: www/project/admin/roleedit.php:106
-msgid "Use this page to edit your project's Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project."
-msgstr "Useu aquesta pàgina per editar els vostres rols deprojecte. Noteu que qualsevol membre té com a mínim el mateix access que l'observador. Per exemple, si l'observador pot llegir CVS, també pot qualsevol altre rol en el projecte."
+msgid ""
+"Use this page to edit your project's Roles. Note that each member has at "
+"least as much access as the Observer. For example, if the Observer can read "
+"CVS, so can any other role in the project."
+msgstr ""
+"Useu aquesta pàgina per editar els vostres rols deprojecte. Noteu que "
+"qualsevol membre té com a mínim el mateix access que l'observador. Per "
+"exemple, si l'observador pot llegir CVS, també pot qualsevol altre rol en el "
+"projecte."
 
 #: www/project/admin/roleedit.php:115
 msgid "Role Name"
@@ -7083,16 +7971,26 @@ msgid "History"
 msgstr "Història"
 
 #: www/project/admin/history.php:40
-msgid "This log will show who made significant changes to your project and when"
-msgstr "Aquest registre mostrarà qui ha fet canvis significatius al vostre projecte i quan"
+msgid ""
+"This log will show who made significant changes to your project and when"
+msgstr ""
+"Aquest registre mostrarà qui ha fet canvis significatius al vostre projecte "
+"i quan"
 
 #: www/project/admin/massadd.php:78
-msgid "Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click \"Finish\" to choose the roles for the users you are adding."
+msgid ""
+"Check the box next to the name of the user(s) you want to add. Your choices "
+"will be preserved if you click any of the letters below. When done, click "
+"\"Finish\" to choose the roles for the users you are adding."
 msgstr ""
 
 #: www/project/admin/massadd.php:84
-msgid "<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>"
-msgstr "<p>Escolliu la <strong>primera lletra</strong> del nom de la persona que desitgeu afegir.</p>"
+msgid ""
+"<p>Choose the <strong>First Letter</strong> of the name of the person you "
+"wish to add.</p>"
+msgstr ""
+"<p>Escolliu la <strong>primera lletra</strong> del nom de la persona que "
+"desitgeu afegir.</p>"
 
 #: www/project/admin/massadd.php:94
 msgid "<p>No Matching Users Found</p>"
@@ -7107,7 +8005,14 @@ msgid "Group Trove Information"
 msgstr "Agrupa la informació de l'arbre de projectes"
 
 #: www/project/admin/group_trove.php:76
-msgid "<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select \"None Selected\".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted</p>."
+msgid ""
+"<h3>Edit Trove Categorization</h3><p>Select up to three locations for this "
+"project in each of the Trove root categories. If the project does not "
+"require any or all of these locations, simply select \"None Selected\".</"
+"p><p> IMPORTANT: Projects should be categorized in the most specific "
+"locations available in the map. Simultaneous categorization in a specific "
+"category AND a parent category will result in only the more specific "
+"categorization being accepted</p>."
 msgstr ""
 
 #: www/project/admin/group_trove.php:108
@@ -7151,10 +8056,12 @@ msgid "To"
 msgstr "Fins"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class:104
+#, php-format
 msgid "No matches found for <em>%1$s</em>"
 msgstr "No s'han trobat coincidències per <em>%1$s</em>"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class:107
+#, php-format
 msgid "Search results for <em>%1$s</em>"
 msgstr "Resultats de cerca per <em>%1$s</em>"
 
@@ -7202,16 +8109,21 @@ msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class:144
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class:151
+#, php-format
 msgid "%1$s Search Result"
 msgstr "Resultat de la cerca %1$s"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class:151
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class:158
+#, php-format
 msgid "No matches found - No sections available (check your permissions)"
-msgstr "No s'han trobat coincidències - No hi ha seccions disponibles (verifiqueu els vostres permisos)"
+msgstr ""
+"No s'han trobat coincidències - No hi ha seccions disponibles (verifiqueu "
+"els vostres permisos)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class:153
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class:160
+#, php-format
 msgid "No matches found"
 msgstr "No s'han trobat coincidències"
 
@@ -7277,7 +8189,9 @@ msgstr ""
 
 #: www/admin/massmail.php:47
 msgid "Missing parameter, You must select target audience for mailing"
-msgstr "Paràmetre faltant, Heu de seleccionat una audiència objectiu per a l'enviament de correu"
+msgstr ""
+"Paràmetre faltant, Heu de seleccionat una audiència objectiu per a "
+"l'enviament de correu"
 
 #: www/admin/massmail.php:54
 msgid "Missing parameter, You are trying to send empty message"
@@ -7285,11 +8199,14 @@ msgstr "Paràmetre faltant, Esteu intentant enviar un missatge buit"
 
 #: www/admin/massmail.php:61
 msgid "Missing parameter, You must give proper subject to the mailing"
-msgstr "Paràmetre faltant, Heu de posar un assumpte adequat per a l'enviament de correu"
+msgstr ""
+"Paràmetre faltant, Heu de posar un assumpte adequat per a l'enviament de "
+"correu"
 
 #: www/admin/massmail.php:73
 msgid "Error Scheduling Mailing, Could not schedule mailing, database error:"
-msgstr "Error en preparar l'enviament de correu (mailing), error de la base de dades:"
+msgstr ""
+"Error en preparar l'enviament de correu (mailing), error de la base de dades:"
 
 #: www/admin/massmail.php:77 www/admin/massmail.php:83
 msgid "MISSINGTEXT:admin_massmail/title:TEXTMISSING"
@@ -7300,6 +8217,7 @@ msgid "Mailing successfully scheduled for delivery"
 msgstr "Correu preparat amb èxit per a l'enviament"
 
 #: www/admin/massmail.php:87 www/admin/index.php:153
+#, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr "Motor de correu per a subscriptors de %1$s"
 
@@ -7308,7 +8226,9 @@ msgid "Active Deliveries"
 msgstr "Enviaments actius"
 
 #: www/admin/massmail.php:96
-msgid "Be <span class=\"important\">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users."
+msgid ""
+"Be <span class=\"important\">VERY</span> careful with this form, because "
+"submitting it WILL lead to sending email to lots of users."
 msgstr ""
 
 #: www/admin/massmail.php:106
@@ -7502,12 +8422,22 @@ msgid "I want to delete this user"
 msgstr ""
 
 #: www/admin/useredit.php:204
-msgid "This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below)."
-msgstr "Aquestes pàgines permeten enviar només propietats directes de l'objecte usuari. Per editar propietats pertinents a l'usuari dins d'un grup específic, visiteu la pàgina d'administració d'aquest grup (a baix)."
+msgid ""
+"This pages allows to change only direct properties of user object. To edit "
+"properties pertinent to user within specific group, visit admin page of that "
+"group (below)."
+msgstr ""
+"Aquestes pàgines permeten enviar només propietats directes de l'objecte "
+"usuari. Per editar propietats pertinents a l'usuari dins d'un grup "
+"específic, visiteu la pàgina d'administració d'aquest grup (a baix)."
 
 #: www/admin/useredit.php:213
-msgid "Unix status updated mirroring web status, unless it has value 'No unix account (N)'"
-msgstr "Estat Unix actualitzat replicant l'estat de la web, excepte si té el valor 'Sense compte unix (N)'"
+msgid ""
+"Unix status updated mirroring web status, unless it has value 'No unix "
+"account (N)'"
+msgstr ""
+"Estat Unix actualitzat replicant l'estat de la web, excepte si té el valor "
+"'Sense compte unix (N)'"
 
 #: www/admin/useredit.php:224
 msgid "Groups Membership"
@@ -7550,6 +8480,7 @@ msgid ": User List"
 msgstr ": Llista d'usuaris"
 
 #: www/admin/userlist.php:57
+#, php-format
 msgid "User updated to %1$s status"
 msgstr "Usuari actualitzat a l'estat %1$s"
 
@@ -7590,7 +8521,9 @@ msgid "All Groups"
 msgstr "Tots els grups"
 
 #: www/admin/configman.php:60 www/admin/configman.php:68
-msgid "Could not open local.inc file for read/write. Check the permissions for apache<br>"
+msgid ""
+"Could not open local.inc file for read/write. Check the permissions for "
+"apache<br>"
 msgstr ""
 
 #: www/admin/configman.php:98
@@ -7607,7 +8540,8 @@ msgstr ""
 
 #: www/admin/configman.php:155 www/admin/configman.php:181
 #: www/admin/configman.php:207
-msgid "Could not open the file for read/write. Check the permissions for apache<br>"
+msgid ""
+"Could not open the file for read/write. Check the permissions for apache<br>"
 msgstr ""
 
 #: www/admin/configman.php:188
@@ -7623,6 +8557,7 @@ msgid "Site Admin: Edit Rejection Responses"
 msgstr "Administració del lloc: Edita respostes de rebuig"
 
 #: www/admin/responses_admin.php:40
+#, php-format
 msgid "You can't %1$s \\\"None\\\"!"
 msgstr ""
 
@@ -7762,8 +8697,12 @@ msgid "Error In Trove Operation"
 msgstr "Error en l'operació"
 
 #: www/admin/trove/trove_cat_edit.php:91
-msgid "Error In Trove Operation, can't delete trove category define as default in local.inc"
-msgstr "Error en l'operació, no es pot suprimir la categoria  defineix-la com a defecte a local.inc"
+msgid ""
+"Error In Trove Operation, can't delete trove category define as default in "
+"local.inc"
+msgstr ""
+"Error en l'operació, no es pot suprimir la categoria  defineix-la com a "
+"defecte a local.inc"
 
 #: www/admin/trove/trove_cat_edit.php:98
 msgid "Can't delete, That trove cat has sub categories"
@@ -7821,11 +8760,13 @@ msgid "Browse Trove Tree"
 msgstr "navega l'arbre de projectes"
 
 #: www/admin/pluginman.php:82 www/admin/pluginman.php:109
+#, php-format
 msgid "Plugin %1$s updated Successfully"
 msgstr ""
 
 #: www/admin/pluginman.php:96
-msgid "<br>Soft link wasn't removed in www/plugins folder, please do so manually."
+msgid ""
+"<br>Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 
 #: www/admin/pluginman.php:99
@@ -7833,11 +8774,17 @@ msgid "MISSINGTEXT:pluginman/successnodeleteconfig:TEXTMISSING"
 msgstr ""
 
 #: www/admin/pluginman.php:124
-msgid "<br>Soft link to www couldn't be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually."
+msgid ""
+"<br>Soft link to www couldn't be created. Check the write permissions for "
+"apache in gforge www/plugins dir or create the link manually."
 msgstr ""
 
 #: www/admin/pluginman.php:127
-msgid "<br>Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually."
+#, php-format
+msgid ""
+"<br>Config file could not be linked to etc/gforge/plugins/%1$s. Check the "
+"write permissions for apache in /etc/gforge/plugins or create the link "
+"manually."
 msgstr ""
 
 #: www/admin/pluginman.php:137
@@ -7845,7 +8792,15 @@ msgid "MISSINGTEXT:pluginman/successiniterror:TEXTMISSING"
 msgstr ""
 
 #: www/admin/pluginman.php:154
-msgid "Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><span class=\"important\">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br><br>"
+msgid ""
+"Here you can activate / deactivate Site wide plugins which are in the "
+"plugins/ folder. Then, you should activate them also per project, per user "
+"or whatever the plugin specifically applies to.<br><span class=\"important"
+"\">Be careful because some groups/users can be using the plugin. "
+"Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA "
+"careful running the SQL init script when a plugin has been deactivated prior "
+"use (and you want to re-activate) because some scripts have DROP TABLE "
+"statements</span><br><br>"
 msgstr ""
 
 #: www/admin/pluginman.php:155
@@ -7882,8 +8837,15 @@ msgid "Unsubscribe user:"
 msgstr "Dóna de baixa la subscripció de l'usuari:"
 
 #: www/admin/unsubscribe.php:50
-msgid "You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications)."
-msgstr "Podeu donar-vos de baixa o bé dels enviaments de correu del lloc autoiniciats per l'administració o de tots els correus del lloc (iniciats per l'administració i correus automatitzats, com les notificacions de publicacions de fòrums i fitxers)."
+msgid ""
+"You can unsubscribe user either from admin-initiated sitewide mailings or "
+"from all site mailings (admin-initiated and automated mailings, like forum "
+"and file release notifications)."
+msgstr ""
+"Podeu donar-vos de baixa o bé dels enviaments de correu del lloc "
+"autoiniciats per l'administració o de tots els correus del lloc (iniciats "
+"per l'administració i correus automatitzats, com les notificacions de "
+"publicacions de fòrums i fitxers)."
 
 #: www/admin/unsubscribe.php:55
 msgid "MAIL"
@@ -7906,7 +8868,13 @@ msgid "User unsubscribed"
 msgstr "Usuari donat de baixa"
 
 #: www/admin/unsubscribe.php:97
-msgid "Use field below to find users which match given pattern with the %1$s username, real name, or email address (substring match is preformed, use '%%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear)."
+#, php-format
+msgid ""
+"Use field below to find users which match given pattern with the %1$s "
+"username, real name, or email address (substring match is preformed, use '%"
+"%' in the middle of pattern to specify 0 or more arbitrary characters). "
+"Click on the username to unsubscribe user from site mailings (new form will "
+"appear)."
 msgstr ""
 
 #: www/admin/unsubscribe.php:102
@@ -7930,6 +8898,7 @@ msgid "User Maintenance"
 msgstr "Manteniment dels usuaris"
 
 #: www/admin/index.php:47
+#, php-format
 msgid "Active site users: <strong>%1$s</strong>"
 msgstr "Usuaris actius del lloc: <strong>%1$s</strong>"
 
@@ -7958,14 +8927,17 @@ msgid "Group Maintenance"
 msgstr "Manteniment dels grups"
 
 #: www/admin/index.php:79
+#, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
 msgstr "Projectes registrats: <strong>%1$s</strong>"
 
 #: www/admin/index.php:84
+#, php-format
 msgid "Active projects: <strong>%1$s</strong>"
 msgstr "Projectes actius: <strong>%1$s</strong>"
 
 #: www/admin/index.php:89
+#, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
 msgstr "Projectes pendents: <strong>%1$s</strong>"
 
@@ -8078,38 +9050,59 @@ msgid "Previous"
 msgstr "Previ"
 
 #: www/admin/admin_table.php:44
+#, php-format
 msgid "Create a new %1$s below:"
 msgstr "Crea un nou %1$s a sota:"
 
 #: www/admin/admin_table.php:91
+#, php-format
 msgid "%1$s successfully added."
 msgstr "%1$s afegit(s) amb èxit."
 
 #: www/admin/admin_table.php:112
-msgid "You can't delete the processor %1$s since it's currently referenced in a file release."
-msgstr "No podeu suprimir el processador %1$s ja que actualment està referenciat en una publicació de fitxer."
+#, php-format
+msgid ""
+"You can't delete the processor %1$s since it's currently referenced in a "
+"file release."
+msgstr ""
+"No podeu suprimir el processador %1$s ja que actualment està referenciat en "
+"una publicació de fitxer."
 
 #: www/admin/admin_table.php:119
-msgid "You can't delete the license %1$s since it's currently referenced in a project."
-msgstr "No podeu suprimir la llicència %1$s ja que actualment està referenciada en un projecte."
+#, php-format
+msgid ""
+"You can't delete the license %1$s since it's currently referenced in a "
+"project."
+msgstr ""
+"No podeu suprimir la llicència %1$s ja que actualment està referenciada en "
+"un projecte."
 
 #: www/admin/admin_table.php:126
-msgid "You can't delete the language %1$s since it's currently referenced in a user profile."
-msgstr "No podeu suprimir l'idioma %1$s ja que actualment està referenciat en un perfil d'usuari."
+#, php-format
+msgid ""
+"You can't delete the language %1$s since it's currently referenced in a user "
+"profile."
+msgstr ""
+"No podeu suprimir l'idioma %1$s ja que actualment està referenciat en un "
+"perfil d'usuari."
 
 #: www/admin/admin_table.php:136
+#, php-format
 msgid "Are you sure you want to delete this %1$s?"
 msgstr "Esteu segur que voleu suprimir aquest %1$s?"
 
 #: www/admin/admin_table.php:165
+#, php-format
 msgid "%1$s successfully deleted."
 msgstr "%1$s suprimit(s) amb èxit."
 
 #: www/admin/admin_table.php:187
+#, php-format
 msgid "Modify the %1$s below:"
 msgstr "Modifica el %1$s a sota:"
 
 #: www/admin/admin_table.php:233
+#, php-format
 msgid "%1$s successfully modified."
 msgstr "%1$s modificat(s) amb èxit."
 
@@ -8118,6 +9111,7 @@ msgid "add new"
 msgstr "afegeix nou"
 
 #: www/admin/admin_table.php:303 www/admin/admin_table.php:305
+#, php-format
 msgid "Edit the %1$ss Table"
 msgstr "Edita la taula de %1$ss"
 
@@ -8289,8 +9283,13 @@ msgid "Estimated Hours"
 msgstr "Hores estimades"
 
 #: www/pm/add_task.php:85 www/pm/mod_task.php:94
-msgid "The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on."
-msgstr "El sistema modificarà les vostres dates d'inici/final si intenteu crear una data d'inici anterior a la data final de qualsevol tasca de la qual depengueu."
+msgid ""
+"The system will modify your start/end dates if you attempt to create a start "
+"date earlier than the end date of any tasks you depend on."
+msgstr ""
+"El sistema modificarà les vostres dates d'inici/final si intenteu crear una "
+"data d'inici anterior a la data final de qualsevol tasca de la qual "
+"depengueu."
 
 #: www/pm/add_task.php:86 www/pm/mod_task.php:95
 msgid "View Calendar"
@@ -8426,8 +9425,12 @@ msgid "Original Comment"
 msgstr "Comentari original"
 
 #: www/pm/mod_task.php:132
-msgid "You should choose only tasks which must be completed before this task can start."
-msgstr "Haurieu d'escollir només tasques que hagin d'estar completades abans que aquesta tasca es pugui iniciar."
+msgid ""
+"You should choose only tasks which must be completed before this task can "
+"start."
+msgstr ""
+"Haurieu d'escollir només tasques que hagin d'estar completades abans que "
+"aquesta tasca es pugui iniciar."
 
 #: www/pm/mod_task.php:203
 msgid "Time tracking"
@@ -8470,6 +9473,7 @@ msgid "MISSINGTEXT:calendar/invaliddate:TEXTMISSING"
 msgstr ""
 
 #: www/pm/calendar.php:44
+#, php-format
 msgid "MISSINGTEXT:calendar/invaliddateexplain:TEXTMISSING"
 msgstr ""
 
@@ -8526,8 +9530,12 @@ msgid "Upload data into the task manager."
 msgstr "Pujar dades al gestor de tasques."
 
 #: www/pm/uploadcsv.php:12
-msgid "This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject."
-msgstr "Aquesta pàgina us permet escollir un fitxer, en format .csv, i pujar-lo de manera que es pugui inserir al subprojecte actual."
+msgid ""
+"This page lets you choose a file, in .csv format, and upload it so it can be "
+"inserted in the current subproject."
+msgstr ""
+"Aquesta pàgina us permet escollir un fitxer, en format .csv, i pujar-lo de "
+"manera que es pugui inserir al subprojecte actual."
 
 #: www/pm/uploadcsv.php:15
 msgid "Choose a file in the proper .csv format for uploading."
@@ -8607,20 +9615,28 @@ msgid "All Tasks By Assignee"
 msgstr "Totes les tasques per tècnic"
 
 #: www/pm/reporting/index.php:229
-msgid "<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>"
-msgstr "<p>Teniu en compte que una mateixa tasca pot ser assignada a diversos tècnics. Aquesta tasca es comptarà per a cadascun d'ells.</p>"
+msgid ""
+"<p>Note that same task can be assigned to several technicians. Such task "
+"will be counted for each of them.</p>"
+msgstr ""
+"<p>Teniu en compte que una mateixa tasca pot ser assignada a diversos "
+"tècnics. Aquesta tasca es comptarà per a cadascun d'ells.</p>"
 
 #: www/pm/index.php:48
 msgid "Project/Task Manager: Subprojects And Tasks"
 msgstr "Gestor de Projectes/Tasques: Subprojectes i tasques"
 
 #: www/pm/index.php:51
-msgid "<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class=\"important\">The Admin for this project will have to set up projects using the admin page</span></B>"
+msgid ""
+"<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you "
+"cannot view them.<P><span class=\"important\">The Admin for this project "
+"will have to set up projects using the admin page</span></B>"
 msgstr ""
 
 #: www/pm/index.php:54
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
-msgstr "Escolliu un subprojecte i podreu navegar-hi/editar-hi/afegir-hi tasques."
+msgstr ""
+"Escolliu un subprojecte i podreu navegar-hi/editar-hi/afegir-hi tasques."
 
 #: www/pm/index.php:59
 msgid "Subproject Name"
@@ -8707,16 +9723,26 @@ msgid "Modify an Category in"
 msgstr "Modifica una categoria a"
 
 #: www/pm/admin/index.php:266
-msgid "It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name."
-msgstr "No és recomanable que canvieu el nom de categoria perquè en depenen altres coses. Quan canvieu el nom de la categoria, tots els elements relacionats es canviaran al nou nom."
+msgid ""
+"It is not recommended that you change the category name because other things "
+"are dependent upon it. When you change the category name, all related items "
+"will be changed to the new name."
+msgstr ""
+"No és recomanable que canvieu el nom de categoria perquè en depenen altres "
+"coses. Quan canvieu el nom de la categoria, tots els elements relacionats es "
+"canviaran al nou nom."
 
 #: www/pm/admin/index.php:283
 msgid "MISSINGTEXT:pm_admin_projects/add_subprojects_title:TEXTMISSING"
 msgstr ""
 
 #: www/pm/admin/index.php:286
-msgid "Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>"
-msgstr "Afegeiu un nou projecte al gestor de projectes/tasques. <strong>Això és diferent d'afegir una tasca a un projecte.</strong>"
+msgid ""
+"Add a new project to the Project/Task Manager. <strong>This is different "
+"than adding a task to a project.</strong>"
+msgstr ""
+"Afegeiu un nou projecte al gestor de projectes/tasques. <strong>Això és "
+"diferent d'afegir una tasca a un projecte.</strong>"
 
 #: www/pm/admin/index.php:297 www/pm/admin/index.php:344
 msgid "New Project Name"
@@ -8731,8 +9757,14 @@ msgid "Change Project/Task Manager Status"
 msgstr "Canvia l'estat del gestor de projectes/tasques"
 
 #: www/pm/admin/index.php:327
-msgid "You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public."
-msgstr "Podeu modificar un projecte existent usant aquest formulari. Teniu en compte que els projectes privats encara poden ser vistos per membres del vostre projecte, però no pel públic en general."
+msgid ""
+"You can modify an existing Project using this form. Please note that private "
+"projects can still be viewed by members of your project, but not the general "
+"public."
+msgstr ""
+"Podeu modificar un projecte existent usant aquest formulari. Teniu en compte "
+"que els projectes privats encara poden ser vistos per membres del vostre "
+"projecte, però no pel públic en general."
 
 #: www/pm/admin/index.php:362
 msgid "Add/Edit Categories"
@@ -8743,8 +9775,12 @@ msgid "Permanently delete this subproject and all its data."
 msgstr "Suprimeix permanentment aquest subprojecte i totes les seves dades."
 
 #: www/pm/admin/index.php:396
-msgid "You are about to permanently and irretrievably delete this subproject and all its related data!"
-msgstr "Esteu a punt de suprimir permanentment i de forma irreversible aquest subprojecte i totes les seves dades relacionades!"
+msgid ""
+"You are about to permanently and irretrievably delete this subproject and "
+"all its related data!"
+msgstr ""
+"Esteu a punt de suprimir permanentment i de forma irreversible aquest "
+"subprojecte i totes les seves dades relacionades!"
 
 #: www/pm/admin/index.php:412
 msgid "Project/Task Manager Administration"
@@ -8755,11 +9791,17 @@ msgid "Add A Project"
 msgstr "Afegeix un projecte"
 
 #: www/pm/admin/index.php:421
-msgid "Add a project, which can contain a set of tasks. This is different than creating a new task."
-msgstr "Afegiu un projecte, que pot contenir un conjunt de tasques. Això és diferent de crear una nova tasca."
+msgid ""
+"Add a project, which can contain a set of tasks. This is different than "
+"creating a new task."
+msgstr ""
+"Afegiu un projecte, que pot contenir un conjunt de tasques. Això és diferent "
+"de crear una nova tasca."
 
 #: www/pm/admin/index.php:436
-msgid "<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the \"Add A Project\" link above.</p>"
+msgid ""
+"<h2>No Projects Found</h2><p>None found for this group. You may add new "
+"Projects using the \"Add A Project\" link above.</p>"
 msgstr ""
 
 #: www/pm/admin/index.php:440
@@ -8767,8 +9809,12 @@ msgid "Edit/Update Project"
 msgstr "Edita/Actualitza el projecte"
 
 #: www/my/bookmark_add.php:38
-msgid "Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
-msgstr "Afegit enllaç d'interès per <strong>%1$s</strong> amb títol <strong>%2$s</strong>"
+#, php-format
+msgid ""
+"Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
+msgstr ""
+"Afegit enllaç d'interès per <strong>%1$s</strong> amb títol <strong>%2$s</"
+"strong>"
 
 #: www/my/bookmark_add.php:41
 msgid "Visit the bookmarked page"
@@ -8835,8 +9881,12 @@ msgid "Is Public"
 msgstr "És pública"
 
 #: www/my/diary.php:162
-msgid "If marked as public, your entry will be mailed to any monitoring users when it is first submitted."
-msgstr "Si està marcat com a pública,  un cop enviada la vostra entrada s'enviarà per correu a tots els usuaris que monitoritzen."
+msgid ""
+"If marked as public, your entry will be mailed to any monitoring users when "
+"it is first submitted."
+msgstr ""
+"Si està marcat com a pública,  un cop enviada la vostra entrada s'enviarà "
+"per correu a tots els usuaris que monitoritzen."
 
 #: www/my/diary.php:178
 msgid "You Have No Diary Entries"
@@ -8899,7 +9949,12 @@ msgid "Operation Not Permitted"
 msgstr "Operació no permesa"
 
 #: www/my/rmproject.php:66
-msgid "You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href=\"/people/\">Help Wanted Board</a> and be ready to pass admin privilege to interested party."
+msgid ""
+"You cannot remove yourself from this project, because you are admin of it. "
+"You should ask other admin to reset your admin privilege first. If you are "
+"the only admin of the project, please consider posting availability notice "
+"to <a href=\"/people/\">Help Wanted Board</a> and be ready to pass admin "
+"privilege to interested party."
 msgstr ""
 
 #: www/my/rmproject.php:70 www/my/rmproject.php:73
@@ -8907,8 +9962,12 @@ msgid "Quitting Project"
 msgstr "Abandonant el projecte"
 
 #: www/my/rmproject.php:75
-msgid "You are about to remove yourself from the project. Please confirm your action:"
-msgstr "Esteu a punt d'eliminar-vos vos mateix del projecte. Confirmeu la vostra acció:"
+msgid ""
+"You are about to remove yourself from the project. Please confirm your "
+"action:"
+msgstr ""
+"Esteu a punt d'eliminar-vos vos mateix del projecte. Confirmeu la vostra "
+"acció:"
 
 #: common/forum/ForumFactory.class:66
 msgid "Forum:: No Valid Group Object"
@@ -8921,6 +9980,7 @@ msgstr ""
 #: common/forum/Forum.class:80 common/mail/MailingList.class:71
 #: common/mail/MailingListFactory.class:63 common/survey/Survey.class:68
 #: common/survey/SurveyQuestion.class:61 common/survey/SurveyResponse.class:60
+#, php-format
 msgid "%1$s:: No Valid Group Object"
 msgstr "%1$s:: Objecte de grup no vàlid"
 
@@ -9054,10 +10114,12 @@ msgid "List Already Exists"
 msgstr "La llista ja existeix"
 
 #: common/mail/MailingList.class:168
+#, php-format
 msgid "Error Creating %1$s"
 msgstr "Error al crear %1$s"
 
 #: common/mail/MailingList.class:182
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in 6-24 hours \n"
 "and you are the list administrator.\n"
@@ -9096,10 +10158,12 @@ msgstr ""
 "-- l'equip %1$s\n"
 
 #: common/mail/MailingList.class:200
+#, php-format
 msgid "%1$s New Mailing List"
 msgstr "Nova llista de correu %1$s"
 
 #: common/mail/MailingList.class:221 common/mail/MailingListFactory.class:113
+#, php-format
 msgid "Error Getting %1$s"
 msgstr "Error a l'obtenir %1$s"
 
@@ -9116,8 +10180,11 @@ msgid "Unix name already taken"
 msgstr "El nom Unix ja està agafat"
 
 #: common/include/Group.class:304 common/include/Group.class:307
-msgid "Please describe your Registration Purpose in a more comprehensive manner"
-msgstr "Si us plau, descriviu el vostre propòsit de registre d'una manera més comprensible"
+msgid ""
+"Please describe your Registration Purpose in a more comprehensive manner"
+msgstr ""
+"Si us plau, descriviu el vostre propòsit de registre d'una manera més "
+"comprensible"
 
 #: common/include/Group.class:310
 msgid "Describe in a more comprehensive manner your project."
@@ -9133,7 +10200,8 @@ msgstr "Tria de llicències conflictiva"
 
 #: common/include/Group.class:319
 msgid "Please give more comprehensive licensing description"
-msgstr "Si us plau, doneu-nos una descripció més comprensible de la llicència\""
+msgstr ""
+"Si us plau, doneu-nos una descripció més comprensible de la llicència\""
 
 #: common/include/Group.class:421 common/include/Group.class:495
 msgid "Could not get permission"
@@ -9148,6 +10216,7 @@ msgid "Could not delete properly the mailing list"
 msgstr ""
 
 #: common/include/Group.class:2124
+#, fuzzy, php-format
 msgid ""
 "Your project registration for %7$s has been approved.\n"
 "\n"
@@ -9192,30 +10261,41 @@ msgstr ""
 "Mentres espereu la resolució del votre DNS, podeu intentar fer un shell a \n"
 "%4$s i apuntar el CVS a %5$s\n"
 "\n"
-"Si després de 6 hores els vostres comptes de shell/CVS encara no funcionen, si us plau\n"
-"obriu un ticket de suport, de manera que puguem donar un cop d'ull al problema.\n"
-"Tingueu en compte que tots els comptes de shell/CVS estàn tancats al telnet i només\n"
+"Si després de 6 hores els vostres comptes de shell/CVS encara no funcionen, "
+"si us plau\n"
+"obriu un ticket de suport, de manera que puguem donar un cop d'ull al "
+"problema.\n"
+"Tingueu en compte que tots els comptes de shell/CVS estàn tancats al telnet "
+"i només\n"
 "funcionen amb SSH1.\n"
 "\n"
-"El vostre lloc web és accessible a través del vostre compte de shell. Si us plau, llegiu\n"
-"la documentació del lloc (veieu enllaç més avall) sobre l'ús que es proposa, els serveis\n"
+"El vostre lloc web és accessible a través del vostre compte de shell. Si us "
+"plau, llegiu\n"
+"la documentació del lloc (veieu enllaç més avall) sobre l'ús que es proposa, "
+"els serveis\n"
 "disponibles, i l'estructura de directoris del compte.\n"
 "\n"
 "Si visiteu la vostra\n"
 "pròpia pàgina de projecte a %7$s mentres esteu dins d'una sessió, trobareu\n"
-"funcions de menú addicionals a la vostra esquerra etiquetades 'Administració del projecte'.\n"
+"funcions de menú addicionals a la vostra esquerra etiquetades 'Administració "
+"del projecte'.\n"
 "\n"
 "Us suggerim especialment que visiteu ara %7$s i creeu una descripció\n"
 "pública per al vostre projecte. Això es pot fer visitant la vostra pàgina\n"
-"de projecte mentres sou dins de la sessió, i seleccionant 'Administració del projecte' des dels menús\n"
+"de projecte mentres sou dins de la sessió, i seleccionant 'Administració del "
+"projecte' des dels menús\n"
 "al'esquerra (o visitant http://%3$s/project/admin/?group_id=%6$s\n"
 "després d'iniciar la sessió).\n"
 "\n"
 "El vostre projecte no apareixerà a l'arbre de projectes (llista\n"
-"primària de projectes allotjats a %7$s que ofereix una gran flexibilitat a l'hora de\n"
-"remenar i cercar) fins que no el categoritzeu a les pantalles d'administració\n"
-"del projecte. Perquè la gent pugui trobar el vostre projecte, ara heu de fer el següent.\n"
-"Visiteu el vostre projecte mentres sou dins la sessió, i seleccioneu 'Administració del projecte' des dels\n"
+"primària de projectes allotjats a %7$s que ofereix una gran flexibilitat a "
+"l'hora de\n"
+"remenar i cercar) fins que no el categoritzeu a les pantalles "
+"d'administració\n"
+"del projecte. Perquè la gent pugui trobar el vostre projecte, ara heu de fer "
+"el següent.\n"
+"Visiteu el vostre projecte mentres sou dins la sessió, i seleccioneu "
+"'Administració del projecte' des dels\n"
 "menús de l'esquerra.\n"
 "\n"
 "Gaudiu del sistema, i informeu als altres sobre %7$s. Feu-nos saber\n"
@@ -9224,10 +10304,12 @@ msgstr ""
 "-- la tripulació %7$s"
 
 #: common/include/Group.class:2156
+#, php-format
 msgid "%1$s Project Approved"
 msgstr "Projecte %1$s aprovat"
 
 #: common/include/Group.class:2191
+#, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
 "\n"
@@ -9246,10 +10328,12 @@ msgstr ""
 "\n"
 
 #: common/include/Group.class:2211
+#, php-format
 msgid "%1$s Project Denied"
 msgstr "Projecte %1$s denegat"
 
 #: common/include/Group.class:2244
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -9270,10 +10354,12 @@ msgstr ""
 "http://%5$s/admin/approve-pending.php"
 
 #: common/include/Group.class:2252 common/include/Group.class:2278
+#, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Tramès nou projecte %1$s"
 
 #: common/include/Group.class:2270
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -9281,7 +10367,8 @@ msgid ""
 "Submitted Description: %3$s\n"
 "License: %4$s\n"
 "\n"
-"The %1$s admin team will now examine your project submission.  You will be notified of their decision."
+"The %1$s admin team will now examine your project submission.  You will be "
+"notified of their decision."
 msgstr ""
 "Nou projecte %1$s tramès\n"
 "\n"
@@ -9289,7 +10376,8 @@ msgstr ""
 "Descripció enviada: %3$s\n"
 "Llicència: %4$s\n"
 "\n"
-"L'equip d'admistració %1$s examinarà ara el vostre enviament de projecte.  Se us notificarà la seva decisió."
+"L'equip d'admistració %1$s examinarà ara el vostre enviament de projecte.  "
+"Se us notificarà la seva decisió."
 
 #: common/include/User.class:232
 msgid "MISSINGTEXT:account_register/err_themeid:TEXTMISSING"
@@ -9332,14 +10420,19 @@ msgid "That username already exists."
 msgstr "Aquest nom d'usuari ja existeix."
 
 #: common/include/User.class:283
-msgid "User with this email already exists - use people search to recover your login."
-msgstr "Ja hi ha un usuari amb aquesta adreça - useu la cerca de persones per a recuperar el vostre inici de sessió."
+msgid ""
+"User with this email already exists - use people search to recover your "
+"login."
+msgstr ""
+"Ja hi ha un usuari amb aquesta adreça - useu la cerca de persones per a "
+"recuperar el vostre inici de sessió."
 
 #: common/include/User.class:322
 msgid "Insert Failed"
 msgstr "Ha fallat la inserció"
 
 #: common/include/User.class:356
+#, php-format
 msgid ""
 "Thank you for registering on the %4$s web site. You have\n"
 "account with username %1$s created for you. In order\n"
@@ -9347,7 +10440,8 @@ msgid ""
 "\n"
 "<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
 "\n"
-"(If you don't see any URL above, it is likely due to a bug in your mail client.\n"
+"(If you don't see any URL above, it is likely due to a bug in your mail "
+"client.\n"
 "Use one below, but make sure it is entered as the single line.)\n"
 "\n"
 "http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
@@ -9362,7 +10456,8 @@ msgstr ""
 "\n"
 "<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
 "\n"
-"(Si no veieu cap URL a dalt, segurament es deu a un error (bug) al vostre client de correu.\n"
+"(Si no veieu cap URL a dalt, segurament es deu a un error (bug) al vostre "
+"client de correu.\n"
 "Use-ne un a sota, però assegureu-vos que s'introdueix com una sola línia.)\n"
 "\n"
 "http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
@@ -9372,6 +10467,7 @@ msgstr ""
 "-- l'equip %4$s\n"
 
 #: common/include/User.class:373
+#, php-format
 msgid "%1$s Account Registration"
 msgstr "Registre del compte %1$s"
 
@@ -9440,35 +10536,45 @@ msgid "You are already a member of this project."
 msgstr ""
 
 #: common/include/GroupJoinRequest.class:145
-msgid "You have already sent a request to the project administrators. Please wait for their reply."
+msgid ""
+"You have already sent a request to the project administrators. Please wait "
+"for their reply."
 msgstr ""
 
 #: common/include/GroupJoinRequest.class:250
 #: common/include/GroupJoinRequest.class:270
+#, php-format
 msgid "Request to Join Project %1$s"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class:252
+#, php-format
 msgid ""
 "%1$s has requested to join your project. \n"
-"You can approve this request here: http://%2$s/project/admin/?group_id=%3$s. \n"
+"You can approve this request here: http://%2$s/project/admin/?group_id=%3"
+"$s. \n"
 "\n"
 "Comments by the user:\n"
 "%4$s"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class:271
+#, php-format
 msgid "Your request to join the %1$s project was denied by the administrator."
 msgstr ""
 
 #: common/tracker/ArtifactFile.class:130
 msgid "ArtifactFile: File name, type, size, and data are required"
-msgstr "ArtifactFile: Es requereixen el nom de fitxer, el tipus, la mida i les dades"
+msgstr ""
+"ArtifactFile: Es requereixen el nom de fitxer, el tipus, la mida i les dades"
 
 #: common/tracker/ArtifactType.class:213
 #: common/tracker/ArtifactType.class:1192
-msgid "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
-msgstr "ArtifactType: Es requereixen nom, descripció, període previst i estat de venciment"
+msgid ""
+"ArtifactType: Name, Description, Due Period, and Status Timeout are required"
+msgstr ""
+"ArtifactType: Es requereixen nom, descripció, període previst i estat de "
+"venciment"
 
 #: common/tracker/ArtifactType.class:220
 #: common/tracker/ArtifactType.class:1199
@@ -9502,10 +10608,13 @@ msgid "a field name is required"
 msgstr "es requereix un nomde camp"
 
 #: common/tracker/ArtifactExtraField.class:459
-msgid "The alias contains invalid characters. Only letters, numbers, hypens (-) and underscores (_) allowed."
+msgid ""
+"The alias contains invalid characters. Only letters, numbers, hypens (-) and "
+"underscores (_) allowed."
 msgstr ""
 
 #: common/tracker/ArtifactExtraField.class:462
+#, php-format
 msgid "'%1$s' is a reserved alias. Please provide another name."
 msgstr ""
 
@@ -9519,11 +10628,14 @@ msgstr "En sessió: NO"
 
 #: common/tracker/Artifact.class:133
 msgid "Artifact: Only group members can view private artifact types"
-msgstr "Artefacte: Només els membres del grup poden veure tipus d'artefacte privats"
+msgstr ""
+"Artefacte: Només els membres del grup poden veure tipus d'artefacte privats"
 
 #: common/tracker/Artifact.class:179
 msgid "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
-msgstr "Artefacte: Només els administradors d'artefactes poden modificar tipus d'artefacte privats"
+msgstr ""
+"Artefacte: Només els administradors d'artefactes poden modificar tipus "
+"d'artefacte privats"
 
 #: common/tracker/Artifact.class:202
 msgid "Artifact: Message Summary Is Required"
@@ -9539,7 +10651,8 @@ msgstr ""
 
 #: common/tracker/Artifact.class:240
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
-msgstr "Heu intentat trametre aquest element. Si us plau eviteu fer clic dos cops."
+msgstr ""
+"Heu intentat trametre aquest element. Si us plau eviteu fer clic dos cops."
 
 #: common/tracker/Artifact.class:581
 msgid "Now Monitoring Artifact"
@@ -9599,6 +10712,7 @@ msgid "Question is too short"
 msgstr "La pregunta és massa curta"
 
 #: common/reporting/report_utils.php:34
+#, php-format
 msgid "%1$s Reporting"
 msgstr "Informes %1$s"
 
@@ -9703,4 +10817,3 @@ msgstr "Categoria de projecte: es requereixen el nom i el cessionari"
 #: common/pm/ProjectGroupFactory.class:125
 msgid "No ProjectGroups Found"
 msgstr "No s'han trobat grups de projecte"
-
