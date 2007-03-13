@@ -50,6 +50,7 @@ if (!session_loggedin()) {
 		} else {
 			$is_public = '0';
 		}
+
 		//make changes to the database
 		if (getStringFromRequest('update')) {
 			//updating an existing diary entry
@@ -112,9 +113,11 @@ if (!session_loggedin()) {
 			}
 		}
 
-
 	}
 
+	$_summary = '';
+	$_details = '';
+	$_is_public = '';
 
 	if ($diary_id) {
 		$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' AND id='$diary_id'";
@@ -134,6 +137,7 @@ if (!session_loggedin()) {
 	} else {
 		$proc_str='add';
 		$info_str=_('Add A New Entry');
+		$_diary_id = '';
 	}
 
 	echo site_user_header(array('title'=>_('My Diary And Notes')));
