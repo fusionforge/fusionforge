@@ -55,7 +55,7 @@ $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 <?php
 //fin rajout
 
-print "<b><a href=\"./softwaremap.php?cat=c\">"._('By Category')."</a> | <a href=\"./softwaremap.php?cat=t\">"._('By Category')."</a></b>";
+print "<b><a href=\"./softwaremap.php?cat=c\">"._('By Category')."</a> | <a href=\"./softwaremap.php?cat=t\">"._('By Tree')."</a></b>";
 
 echo'
 	<hr />';
