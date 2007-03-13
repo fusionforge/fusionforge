@@ -32,10 +32,10 @@ class LdapextauthPlugin extends Plugin {
 		
 		$this->ldap_conn = false ;
 
-                $this->base_dn = "dc=mirexpress" ;
+		require_once('plugins/ldapextauth/config.php') ;
+                $this->base_dn = "$sys_ldap_dn" ;
 		$this->ldap_server = $sys_ldap_server ;
 		$this->ldap_port = $sys_ldap_port ;
-		require_once('plugins/ldapextauth/config.php') ;
 		if ($base_dn) {
 			$this->base_dn = $base_dn ;
 		}
