@@ -337,7 +337,9 @@ function session_require($req) {
 			exit_permission_denied();
 		}
 
-		if ($req['admin_flags']) {
+		//don't really like this, but as admin_flags is not mandatory
+		//I add @ to remove the warning
+		if (@$req['admin_flags']) {
 			if (!$perm->isAdmin()) {
 				exit_permission_denied();
 			}
