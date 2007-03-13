@@ -31,6 +31,7 @@
 		if($family != NULL){
 		
 		reset($family);
+			$cond = "";
 			while (list($key, $val) = each($family)) {		
 			$cond .= " AND group_id != ".$val." ";
 			}
