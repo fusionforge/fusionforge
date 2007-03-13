@@ -375,8 +375,9 @@ else {
 				//echo $key . "<br/>";
 				//we build a array with id of father and son.
 				//If no father --> 0
-				if(!$arbre[$key] != 0){ 
-				$arbre[$key] = 0 ;
+			// Really don't know why there is a warning there, and added @
+				if(@!$arbre[$key] != 0){ 
+					$arbre[$key] = 0 ;
 				}
 				$cpt_pere = $key;
 				foreach ($sons as $son) {
@@ -421,7 +422,8 @@ else {
 		aff_tree($tree, 0);
 
 }
-docman_display_documents($nested_groups,$df,$is_editor);
+//docman_display_documents($nested_groups,$df,$is_editor);
+docman_display_documents($nested_groups,$df,'');
 
 $HTML->footer(array());
 
