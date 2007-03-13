@@ -1,5 +1,6 @@
 <?php
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 
 function forum_header($params) {

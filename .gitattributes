@@ -60,6 +60,7 @@ gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2.tar.gz -text
+gforge/plugins/env.inc.php -text
 gforge/plugins/fckeditor/common/fckeditorPlugin.class -text svneol=unset#application/octet-stream
 gforge/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
 gforge/plugins/fckeditor/www/editor/css/images/Thumbs.db -text
