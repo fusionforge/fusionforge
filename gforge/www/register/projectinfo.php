@@ -47,9 +47,9 @@ require_once('common/scm/SCMFactory.class');
 //
 if ($sys_project_reg_restricted) {
 	session_require(array('group'=>'1','admin_flags'=>'A'));
+} elseif (!session_loggedin()) {
+	exit_not_logged_in();
 }
-
-session_require(array('isloggedin'=>'1'));
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -109,6 +109,15 @@ if (getStringFromRequest('submit')) {
 	}
 } else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
+} else {
+	$full_name = '';
+	$purpose = '';
+	$license = '';
+	$license_other = '';
+	$description = '';
+	$unix_name = '';
+	$scm = '';
+	$feedback = '';
 }
 
 site_header(array('title'=>$Language->getText('register','project_information')));
