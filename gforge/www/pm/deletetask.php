@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-pm_header(array('title'=>$Language->getText('pm_deletetask','title'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_id));
 
 ?>
 
@@ -27,14 +27,14 @@ pm_header(array('title'=>$Language->getText('pm_deletetask','title'),'group_proj
 <table border="0" align="center">
 
 	<tr>
-		<td ><span class="veryimportant"><?php echo $Language->getText('pm_deletetask','are_you_sure'); ?></span></h3>
+		<td ><span class="veryimportant"><?php echo _('Are you sure you want to delete this task?'); ?></span></h3>
 			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('pm_deletetask','confirm'); ?></td>
+		<td align="center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo _('Yes, I want to delete this task'); ?></td>
 	</tr>
 	<tr>
-		<td style="text-align:center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
+		<td align="center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>
 	</tr>
 
 </table>

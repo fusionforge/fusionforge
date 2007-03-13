@@ -15,7 +15,7 @@ class TasksGroupSearchEngine extends GroupSearchEngine {
 	
 	function TasksGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', $Language->getText('searchbox','tasks'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', _('This project\'s tasks'));
 	}
 	
 	function isAvailable($parameters) {

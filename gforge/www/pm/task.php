@@ -124,7 +124,7 @@ switch (getStringFromRequest('func')) {
 						exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback=$Language->getText('pm_addtask','task_created_successfully');
+				$feedback=_('Task Created Successfully');
 				include 'browse_task.php';
 			}
 		} else {
@@ -165,7 +165,7 @@ switch (getStringFromRequest('func')) {
 						exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback=$Language->getText('pm_addtask','task_updated_successfully');
+				$feedback=_('Task Updated Successfully');
 				include 'browse_task.php';
 			}
 		} else {
@@ -259,7 +259,7 @@ switch (getStringFromRequest('func')) {
 				}
 			}
 			if (!$was_error) {
-				$feedback = $Language->getText('pm_addtask','task_updated_successfully');
+				$feedback = _('Task Updated Successfully');
 			}
 			include 'browse_task.php';
 			break;
@@ -285,7 +285,7 @@ switch (getStringFromRequest('func')) {
 			if (!$pt->addRelatedArtifacts($add_artifact_id)) {
 				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 			} else {
-				$feedback=$Language->getText('pm_addtask','task_added_relationship');
+				$feedback=_('Successfully Added Tracker Relationship');
 				include 'browse_task.php';
 
 			}
@@ -326,13 +326,13 @@ switch (getStringFromRequest('func')) {
 				exit_error('Error', $pt->getErrorMessage());
 			}
 			if (!getStringFromRequest('confirm_delete')) {
-				$feedback .= $Language->getText('pm_deletetask','task_delete_failed_confirm');
+				$feedback .= _('Confirmation failed. Task not deleted');
 			} else {
 				$deletion = $pt->delete(true);
 				if (!$deletion) {
-					$feedback .= $Language->getText('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
+					$feedback .= _('Delete failed') . ': '.$pt->getErrorMessage();
 				} else {
-					$feedback .= $Language->getText('pm_deletetask','task_deleted_successfully');
+					$feedback .= _('Task Successfully Deleted');
 				}
 			}
 			include 'browse_task.php';

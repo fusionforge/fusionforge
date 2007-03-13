@@ -68,7 +68,7 @@ class ForumMessage extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError($Language->getText('forum_common_forummessage','no_valid_forum_object'));
+			$this->setError(_('ForumMessage:: No Valid Forum Object'));
 			return false;
 		}
 		if ($Forum->isError()) {
@@ -96,7 +96,7 @@ class ForumMessage extends Error {
 					//	Verify this message truly belongs to this Forum
 					//
 					if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
-						$this->setError($Language->getText('forum_common_forummessage','error_group_forum_id'));
+						$this->setError(_('Group_forum_id in db result does not match Forum Object'));
 						$this->data_array=null;
 						return false;
 					}
@@ -121,7 +121,7 @@ class ForumMessage extends Error {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
 			if (!$thread_id) {
-				$this->setError('ForumMessage::create() '.$Language->getText('forum_common_forummessage','error_getting_next_thread'));
+				$this->setError('ForumMessage::create() '._('Getting next thread_id failed'));
 				db_rollback();
 				return false;
 			}
@@ -134,7 +134,7 @@ class ForumMessage extends Error {
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -145,7 +145,7 @@ class ForumMessage extends Error {
 			}
 			if (!$msg_id) {
 				db_rollback();
-				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+				$this->setError(_('ForumMessage::create() Unable to get new message id'));
 				return false;
 			} else {
 				if (!$this->sendNewModeratedMsgNotice()) {
@@ -188,7 +188,7 @@ class ForumMessage extends Error {
 			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
 				WHERE thread_id='$thread_id' AND is_followup_to='0'");
 			if (!$res4 || db_affected_rows($res4) < 1) {
-				$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_master_thread'));
+				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
 				db_rollback();
 				return false;
 			} else {
@@ -198,7 +198,7 @@ class ForumMessage extends Error {
 				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
 					WHERE msg_id='$is_followup_to'");
 				if (!$res3) {
-					$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_parent'));
+					$this->setError(_('Could Not Update Parent'));
 					db_rollback();
 					return false;
 				}
@@ -215,19 +215,19 @@ class ForumMessage extends Error {
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
 			$msg_id=db_insertid($result,'forum','msg_id');
 			if (!$this->fetchData($msg_id)) {
 				db_rollback();
-				$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+				$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 				return false;
 			}
 			if (!$msg_id) {
 				db_rollback();
-				$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
+				$this->setError(_('ForumMessage::create() Unable to get new message id'));
 				return false;
 			} else {
 				if (!$this->sendNotice()) {
@@ -261,7 +261,7 @@ class ForumMessage extends Error {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
 			if (!$thread_id) {
-				$this->setError('ForumMessage::create() '.$Language->getText('forum_common_forummessage','error_getting_next_thread'));
+				$this->setError('ForumMessage::create() '._('Getting next thread_id failed'));
 				db_rollback();
 				return false;
 			}
@@ -272,7 +272,7 @@ class ForumMessage extends Error {
 			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
 				WHERE thread_id='$thread_id' AND is_followup_to='0'");
 			if (!$res4 || db_affected_rows($res4) < 1) {
-				$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_master_thread'));
+				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
 				db_rollback();
 				return false;
 			} else {
@@ -282,7 +282,7 @@ class ForumMessage extends Error {
 				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
 					WHERE msg_id='$is_followup_to'");
 				if (!$res3) {
-					$this->setError($Language->getText('forum_common_forummessage','error_cannot_update_parent'));
+					$this->setError(_('Could Not Update Parent'));
 					db_rollback();
 					return false;
 				}
@@ -296,32 +296,31 @@ class ForumMessage extends Error {
 
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_posting_failed').' '.db_error());
+			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
-		}
-
-		$msg_id=db_insertid($result,'forum','msg_id');
-		if (!$this->fetchData($msg_id)) {
-			db_rollback();
-			return false;
-		}
-
-		if (!$msg_id) {
-			db_rollback();
-			$this->setError($Language->getText('forum_common_forummessage','error_get_message_id'));
-			return false;
-		}
-
-		if (!$this->sendNotice($has_attach)) {
-			db_rollback();
-			return false;
-		}
+		} else {
+			$msg_id=db_insertid($result,'forum','msg_id');
+			if (!$this->fetchData($msg_id)) {
+				db_rollback();
+				return false;
+			}
+			if (!$msg_id) {
+				db_rollback();
+				$this->setError(_('ForumMessage::create() Unable to get new message id'));
+				return false;
+			} else {
+				if (!$this->sendNotice($has_attach)) {
+					db_rollback();
+					return false;
+				}
 //echo "Committing";
-		db_commit();
+				db_commit();
 //echo "db_error()".db_error();
-		$this->awaits_moderation = false;
-		return true;
+				$this->awaits_moderation = false;
+				return true;
+			}
+		}
 	}
 	
 	
@@ -338,7 +337,7 @@ class ForumMessage extends Error {
 	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false) {
 		global $Language;
 		if (!$body || !$subject) {
-			$this->setError($Language->getText('forum_common_forummessage','error_required_fields'));
+			$this->setError(_('Must Include A Message Body And Subject'));
 			return false;
 		}
 		if (!$this->Forum->userCanPost()) {
@@ -354,7 +353,7 @@ class ForumMessage extends Error {
 		if ($is_follow_up_to) {
 			$ParentMessage=new ForumMessage($this->Forum,$is_followup_to);
 			if (!$ParentMessage || !is_object($ParentMessage)) {
-				$this->setError("ForumMessage::create()".$Language->getText('forum_common_forummessage','error_no_valid_parent_message'));
+				$this->setError("ForumMessage::create()"._('ForumMessage::create() No Valid ParentMessage Object'));
 				return false;
 			}
 			if ($ParentMessage->isError()) {
@@ -367,7 +366,7 @@ class ForumMessage extends Error {
 		}
 
 		//see if that message has been posted already for all the idiots that double-post
-		//we shouldn't need this, the double post checker functions solve this issue now
+		//we shouldn´t need this, the double post checker functions solve this issue now
 		/*$res3=db_query("SELECT * FROM forum 
 			WHERE is_followup_to='$is_followup_to' 
 			AND body='".  htmlspecialchars($body) ."'
@@ -377,7 +376,7 @@ class ForumMessage extends Error {
 
 		if (db_numrows($res3) > 0) {
 			//already posted this message
-			$this->setError($Language->getText('forum_utils','doublepost'));
+			$this->setError(_('You appear to be double-posting this message, since it has the same subject and followup information as a prior post.'));
 			return false;
 		} else {
 			echo db_error();
@@ -423,7 +422,7 @@ class ForumMessage extends Error {
 			WHERE msg_id='$msg_id'
 			AND group_forum_id='". $this->Forum->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_invalid_message_id').db_error());
+			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -443,7 +442,7 @@ class ForumMessage extends Error {
 			WHERE msg_id='$msg_id'
 			AND group_forum_id='". $this->Forum->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('forum_common_forummessage','error_invalid_message_id').db_error());
+			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -595,7 +594,7 @@ class ForumMessage extends Error {
 		global $Language;
 		$msg_id=$this->getID();
 		if (!$msg_id) {
-			$this->setError($Language->getText('forum_admin_delete_message','invalid_id'));
+			$this->setError(_('Invalid Message ID'));
 			return 0;
 		}
 		
@@ -673,8 +672,8 @@ class ForumMessage extends Error {
 		"\nBy: " . $this->getPosterRealName() . "\n";
 		
 		if ($has_attach) {
-			//if there's an attachment for the message, make it note.
-			//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
+			//if there´s an attachment for the message, make it note.
+			//Note: We can´t give a link for the attachment here because it hasn´t been created yet (first the message needs to be created
 			$body .= "A file has been uploaded with this message\n\n";
 		} else {
 			$body .= "\n";

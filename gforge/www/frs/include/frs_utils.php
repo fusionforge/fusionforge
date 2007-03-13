@@ -89,8 +89,8 @@ function frs_header($params) {
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isReleaseTechnician()) {
 			echo $HTML->subMenu(
 				array(
-					$Language->getText('group','short_files'),
-					$Language->getText('project_admin_utils','admin')
+					_('Files'),
+					_('Admin')
 				),
 				array(
 					'/frs/?group_id='.$group_id,
@@ -146,7 +146,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 	if (!isset($FRS_FILETYPE_RES)) {
 		$FRS_FILETYPE_RES=db_query("SELECT * FROM frs_filetype");
 	}
-	return html_build_select_box ($FRS_FILETYPE_RES,$name,$checked_val,true,$Language->getText('project_admin_qrs', 'must_choose_one'));
+	return html_build_select_box ($FRS_FILETYPE_RES,$name,$checked_val,true,_('Must Choose One'));
 }
 
 /*
@@ -163,7 +163,7 @@ function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
 	if (!isset($FRS_PROCESSOR_RES)) {
 		$FRS_PROCESSOR_RES=db_query("SELECT * FROM frs_processor");
 	}
-	return html_build_select_box ($FRS_PROCESSOR_RES,$name,$checked_val,true,$Language->getText('project_admin_qrs', 'must_choose_one'));
+	return html_build_select_box ($FRS_PROCESSOR_RES,$name,$checked_val,true,_('Must Choose One'));
 }
 
 /*
@@ -177,26 +177,18 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 	/*
 		return a pop-up select box of releases for the project
 	*/
-	global $FRS_RELEASE_RES, $sys_database_type;
-
+	global $FRS_RELEASE_RES;
 	if (!$group_id) {
 		return 'ERROR - GROUP ID REQUIRED';
 	} else {
 		if (!isset($FRS_RELEASE_RES)) {
-			if ($sys_database_type == "mysql") {
-				$sql = "SELECT frs_release.release_id,concat(frs_package.name,' : ',frs_release.name) ";
-			} else {
-				$sql = "SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ";
-			}
-			$sql .=
+			$FRS_RELEASE_RES=db_query("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ".
 				"FROM frs_release,frs_package ".
 				"WHERE frs_package.group_id='$group_id' ".
-				"AND frs_release.package_id=frs_package.package_id";
-
-			$FRS_RELEASE_RES = db_query($sql);
+				"AND frs_release.package_id=frs_package.package_id");
 			echo db_error();
 		}
-		return html_build_select_box($FRS_RELEASE_RES,$name,$checked_val,false);
+		return html_build_select_box ($FRS_RELEASE_RES,$name,$checked_val,false);
 	}
 }
 

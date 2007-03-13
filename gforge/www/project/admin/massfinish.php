@@ -66,12 +66,12 @@ if (!$accumulated_ids) {
 		ORDER BY realname ASC");
 }
 
-project_admin_header(array('title'=>$Language->getText('rbac_edit','pgtitle'),'group'=>$group_id));
+project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
 echo '
-<h2>'.$Language->getText('project_admin','addfromlist').'</h2>
+<h2>'._('Add Users From List').'</h2>
 <p>
-'.$Language->getText('project_admin','addfromlist2').'
+'._('Choose the role for each user and then press &quot;Add All&quot;.').'
 <p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
 
@@ -79,9 +79,9 @@ if (!$res || db_numrows($res) < 1) {
 	echo "No Matching Users Found";
 } else {
 
-	$titles[]=$Language->getText('project_admin','userrealname');
-	$titles[]=$Language->getText('project_admin','unix_name');
-	$titles[]=$Language->getText('rbac_edit','role');
+	$titles[]=_('Real Name');
+	$titles[]=_('Unix Name');
+	$titles[]=_('Role');
 
 	echo $HTML->listTableTop($titles);
 

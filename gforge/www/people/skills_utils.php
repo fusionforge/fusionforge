@@ -32,14 +32,14 @@ function displayUserSkills($user_id, $allowEdit) {
 		
 		echo '<tr class="tableheading">';				 /* headings for the columns */
 		if($allowEdit) {
-			echo '<td>'.$Language->getText('general','edit').'</td>'.
-				 '<td>'.$Language->getText('general','delete').'</td>';
+			echo '<td>'._('Edit').'</td>'.
+				 '<td>'._('Delete').'</td>';
 		}
-		echo '<td>'.$Language->getText('people_editprofile','type').'</td>'.
-			 '<td>'.$Language->getText('people_editprofile','profile_title').'</td>'.
-			 '<td>'.$Language->getText('people_editprofile','start_date').'</td>'.
-			 '<td>'.$Language->getText('people_editprofile','end_date').'</td>'.
-			 '<td>'.$Language->getText('people_editprofile','keywords').'</td>'.
+		echo '<td>'._('Type').'</td>'.
+			 '<td>'._('Title').'</td>'.
+			 '<td>'._('Start Date').'</td>'.
+			 '<td>'._('End Date').'</td>'.
+			 '<td>'._('Keywords').'</td>'.
 			 '</tr>';
 
 		for ($i = 0; $i < $rows; $i++)  /* for each entry in the database */ {
@@ -90,8 +90,8 @@ function displayUserSkills($user_id, $allowEdit) {
 
 		if($allowEdit) {
 			echo '<tr>';
-			echo '<td><input type="submit" name="MultiEdit" value="'.$Language->getText('general','edit').'" /></td>';
-			echo '<td><input type="submit" name="MultiDelete" value="'.$Language->getText('general','delete').'" /></td>';
+			echo '<td><input type="submit" name="MultiEdit" value="'._('Edit').'" /></td>';
+			echo '<td><input type="submit" name="MultiDelete" value="'._('Delete').'" /></td>';
 			echo '</tr>';
 		}
 
@@ -116,8 +116,8 @@ function handle_multi_edit($skill_ids) {
 		$skills=db_query($sql);
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
-			$feedback .= $Language->getText('people_editprofile','user_fetch_failed');
-			echo '<h2>'.$Language->getText('people_editprofile','no_such_user').'<h2>';
+			$feedback .= _('User fetch FAILED');
+			echo '<h2>'._('No Such User').'<h2>';
 		}
 		
 		$yearArray = array();
@@ -150,9 +150,9 @@ function handle_multi_edit($skill_ids) {
 				'<tr><td>'.
 				'<table border="0" >'.
 					'<tr class="tableheading">'.
-						'<td >'.$Language->getText('people_editprofile','type').'</td>'.
-						'<td >'.$Language->getText('people_editprofile','start_date').'</td>'.
-						'<td >'.$Language->getText('people_editprofile','end_date').'</td>'.
+						'<td >'._('Type').'</td>'.
+						'<td >'._('Start Date').'</td>'.
+						'<td >'._('End Date').'</td>'.
 					'</tr>';
 			echo '<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
 						'<td>'.html_build_select_box($skills, 'type[]',db_result($result, $i,'type') , false, '').'</td>'.
@@ -167,14 +167,14 @@ function handle_multi_edit($skill_ids) {
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
 				'<table border="0">'.
 					'<tr class="tableheading">'.
-						'<td>'.$Language->getText('people_editprofile','title_max_100_chars').'</td>'.
+						'<td>'._('MISSINGTEXT:people_editprofile/title_max_100_chars:TEXTMISSING').'</td>'.
 					'</tr>'.
 					'<tr>'.
 						'<td><input type="hidden" name="skill_edit[]" value="'.db_result($result, $i,'skills_data_id').'" />'.
 						'<input type="text" name="title[]" size="100" value="'.db_result($result, $i,'title').'" /></td>'.
 					'</tr>'.
 					'<tr>'.
-						'<td class="tableheading">'.$Language->getText('people_editprofile','keywords_max_255_chars').'</td>'.
+						'<td class="tableheading">'._('Keywords (max 255 characters)').'</td>'.
 					'</tr>'.
 					'<tr>'.
 						'<td><textarea name="keywords[]" rows="3" cols="85" wrap="soft">'.db_result($result, $i,'keywords').'</textarea></td>'.

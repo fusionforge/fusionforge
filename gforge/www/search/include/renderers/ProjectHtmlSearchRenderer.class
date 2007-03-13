@@ -30,8 +30,8 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 		
 		$this->tableHeaders = array(
-			$this->Language->getText('search', 'group_name'),
-			$this->Language->getText('search', 'group_description')
+			_('Group Name'),
+			_('Description')
 		);
 	}
 
@@ -39,7 +39,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		$GLOBALS['HTML']->header(array('title'=>$this->Language->getText('search', 'title'), 'pagename'=>'search'));
+		$GLOBALS['HTML']->header(array('title'=>_('Search'), 'pagename'=>'search'));
 		parent::writeHeader();
 	}
 

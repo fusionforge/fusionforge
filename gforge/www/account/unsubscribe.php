@@ -63,9 +63,9 @@ $user->unsubscribeFromMailings($all);
 site_header(array('title'=>"Unsubscription Complete"));
 
 if ($all) {
-	$what = $Language->getText('account_unsubscribe', 'all_mailings', array($GLOBALS['sys_name']));
+	$what = sprintf(_('all %1$s mailings and notifications'), $GLOBALS['sys_name']);
 } else {
-	$what = $Language->getText('account_unsubscribe', 'site_mailings', array($GLOBALS['sys_name']));
+	$what = sprintf(_('%1$s site mailings'), $GLOBALS['sys_name']);
 }
 ?>
 
@@ -77,7 +77,7 @@ and visit your Account Maintenance page.
 </p>
 
 <p>
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $GLOBALS['sys_name']); ?></a>
 </p>
 
 <?php

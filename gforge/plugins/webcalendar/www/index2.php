@@ -35,7 +35,7 @@ function forum_header($params) {
 
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
+				echo '<h3>'._('Error - this news item was not found').'</h3>';
 			} else {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
 				$group =& group_get_object($params['group']);
@@ -43,17 +43,17 @@ function forum_header($params) {
 					exit_no_group();
 				}
 				echo '
-				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
-				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
-				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
-				<strong>'.$Language->getText('forum_utils','project').':</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
+				<strong>'._('MISSINGTEXT:forum_utils/postedby:TEXTMISSING').':</strong> '.$user->getRealName().'<br />
+				<strong>'._('Date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
+				<strong>'._('Summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
+				<strong>'._('Project').':</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
 				echo '</p>';
 			}
 			echo '</td><td valign="top" width="35%">';
-			echo $HTML->boxTop($Language->getText('forum_utils','latest'));
+			echo $HTML->boxTop(_('Latest News'));
 			echo news_show_latest($params['group'],5,false);
 			echo $HTML->boxBottom();
 			echo '</td></tr></table>';
@@ -67,11 +67,11 @@ function forum_header($params) {
 	$menu_text=array();
 	$menu_links=array();
 	if ($f && $forum_id) {
-		$menu_text[]=$Language->getText('forum_utils','discussionforum') .' '. $f->getName();
+		$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
 		$menu_links[]='"/forum/forum.php?forum_id='.$forum_id.'"';
 	}
 	if ($f && $f->userIsAdmin()) {
-		$menu_text[]=$Language->getText('forum_utils','admin');
+		$menu_text[]=_('Admin');
 		$menu_links[]='/forum/admin/?group_id='.$group_id;
 	}
 	if (count($menu_text) > 0) {
@@ -85,20 +85,20 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1">' .
-				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</a> | ';
+				html_image('ic/xmail16w.png','20','20',array()).' '._('Stop Monitoring').'</a> | ';
 			} else {
 				echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</a> | ';
+				html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum').'</a> | ';
 			}
 			echo '<a href="/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
-			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</a> | ';
+			html_image('ic/save.png','24','24',array()) .' '._('Save Place').'</a> | ';
 		}
 	}
 
 	if ($f && $forum_id) {
 		echo '<a href="/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
-			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
-			$Language->getText('forum_message','thread').'</a>';
+			html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+			_('Start New Thread').'</a>';
 	}
 }
 
@@ -121,7 +121,7 @@ if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
 	<iframe src="/plugins/webcalendar/login.php?type=group&group_id=<?php print $group_id ?>" border=no scrolling="yes" width="100%" height="700"></iframe>	
 	<?}
 	else {
-	print $Language->getText('webcalendar_user','allow');	
+	print _('You are not allowed to see this calendar.');	
 	}	
 
 	}
@@ -129,7 +129,7 @@ if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
 	
 } else {
 
-	print $Language->getText('webcalendar_user','nocalendar');
+	print _('No calendar for this group.');
 	
 	//exit_no_group(); 
 

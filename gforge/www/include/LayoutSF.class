@@ -372,7 +372,7 @@ class LayoutSF extends Layout {
 
 		?>
 <span class="center"><font face="arial, helvetica" size="1" color="#cccccc">
-<? echo $Language->getText('general', 'footer'); ?>
+<? echo _('This is %1$s.  For more about it, including copyright info, see <a href="/about.php">this page</a>.'); ?>
 </font></span>
 </p>&nbsp;
 
@@ -722,19 +722,19 @@ $s = ((session_issecure()) ? 's' : '' );
 /*		print '<H2>'. $project->getPublicName() .' - ';
 		// specific to where we're at
 		switch ($toptab) {
-			case 'home': print $Language->getText('group','short_summary'); break;
-			case 'admin': print $Language->getText('group','short_admin'); break;
-			case 'forums': print $Language->getText('group','short_forum'); break;
-			case 'tracker': print $Language->getText('group','short_tracker'); break;
-			case 'mail': print $Language->getText('group','short_mail'); break;
-			case 'pm': print $Language->getText('group','short_pm'); break;
-			case 'docman': print $Language->getText('group','short_docman'); break;
-			case 'surveys': print $Language->getText('group','short_survey'); break;
-			case 'scm': print $Language->getText('group','short_scm'); break;
-			case 'downloads': print $Language->getText('group','short_files'); break;
-			case 'news': print $Language->getText('group','short_news'); break;
-			case 'memberlist': print $Language->getText('group','short_memberlist'); break;
-			default: print $Language->getText('group','short_summary'); break;
+			case 'home': print _('Summary'); break;
+			case 'admin': print _('Admin'); break;
+			case 'forums': print _('Forums'); break;
+			case 'tracker': print _('Tracker'); break;
+			case 'mail': print _('Lists'); break;
+			case 'pm': print _('Tasks'); break;
+			case 'docman': print _('Docs'); break;
+			case 'surveys': print _('Surveys'); break;
+			case 'scm': print _('SCM'); break;
+			case 'downloads': print _('Files'); break;
+			case 'news': print _('News'); break;
+			case 'memberlist': print _('Developers'); break;
+			default: print _('Summary'); break;
 		}
 
 		if ($extra_text) {
@@ -749,25 +749,25 @@ $s = ((session_issecure()) ? 's' : '' );
 
 		// Summary
 		$this->tab_entry('/projects/'. $project->getUnixName() .'/', $this->icons['Summary'],
-			$Language->getText('group','short_summary'), $toptab == 'home');
+			_('Summary'), $toptab == 'home');
 
 		// Project Admin 
 		$this->tab_entry('/project/admin/?group_id='. $group, $this->icons['Admin'],
-			$Language->getText('group','short_admin'), $toptab == 'admin');
+			_('Admin'), $toptab == 'admin');
 
 		// Homepage
 		$this->tab_entry('http://'. $project->getHomePage(), $this->icons['Homepage'],
-			$Language->getText('group','short_homepage'));
+			_('Home Page'));
 
 		// Forums
 		if ($project->usesForum()) {
 			$this->tab_entry('/forum/?group_id='.$group, $this->icons['Forums'],
-				$Language->getText('group','short_forum'), $toptab == 'forums');
+				_('Forums'), $toptab == 'forums');
 		}
 
 		// Artifact Tracking
 		$this->tab_entry('/tracker/?group_id='.$group, $this->icons['Tracker'],
-			$Language->getText('group','short_tracker'), $toptab == 'tracker');
+			_('Tracker'), $toptab == 'tracker');
 
 /*
 	Messy hack but they insisted on it -
@@ -790,59 +790,59 @@ $s = ((session_issecure()) ? 's' : '' );
 				//bug Tracker
 				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
 				$this->icons['Bugs'],
-				$Language->getText('group','short_bugs'), $toptab == 'bugs');
+				_('Bugs'), $toptab == 'bugs');
 			} elseif (db_result($res,$i,'datatype') == 2) {
 				//support Tracker
 				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
 				$this->icons['Support'],
-				$Language->getText('group','short_support'), $toptab == 'support');
+				_('Support'), $toptab == 'support');
 			} elseif (db_result($res,$i,'datatype') == 3) {
 				//patch Tracker
 				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
 				$this->icons['Patches'],
-				$Language->getText('group','short_patch'), $toptab == 'patch');
+				_('Patches'), $toptab == 'patch');
 			}
 		}
 
 		// Mailing Lists
 		if ($project->usesMail()) {
 			$this->tab_entry('/mail/?group_id='.$group, $this->icons['Lists'], 
-				$Language->getText('group','short_mail'), $toptab == 'mail');
+				_('Lists'), $toptab == 'mail');
 		}
 
 		// Project Manager
 		if ($project->usesPm()) {
 			$this->tab_entry('/pm/?group_id='.$group, $this->icons['Tasks'], 
-				$Language->getText('group','short_pm'), $toptab == 'pm');
+				_('Tasks'), $toptab == 'pm');
 		}
 
 		// Doc Manager
 		if ($project->usesDocman()) {
 			$this->tab_entry('/docman/?group_id='.$group, $this->icons['Docs'], 
-				$Language->getText('group','short_docman'), $toptab == 'docman');
+				_('Docs'), $toptab == 'docman');
 		}
 
 		// Surveys
 		if ($project->usesSurvey()) {
 			$this->tab_entry('/survey/?group_id='.$group, $this->icons['Surveys'], 
-				$Language->getText('group','short_survey'), $toptab == 'surveys');
+				_('Surveys'), $toptab == 'surveys');
 		}
 
 		//newsbytes
 		if ($project->usesNews()) {
 			$this->tab_entry('/news/?group_id='.$group, $this->icons['News'], 
-				$Language->getText('group','short_news'), $toptab == 'news');
+				_('News'), $toptab == 'news');
 		}
 
 		// SCM
 		if ($project->usesSCM()) {
 			$this->tab_entry('/scm/?group_id='.$group, $this->icons['SCM'], 
-				$Language->getText('group','short_scm'), $toptab == 'scm');
+				_('SCM'), $toptab == 'scm');
 		}
 
 		// Downloads
 		$this->tab_entry('/project/showfiles.php?group_id='.$group, $this->icons['Files'], 
-			$Language->getText('group','short_files'), $toptab == 'downloads');
+			_('Files'), $toptab == 'downloads');
 
 		print '<HR SIZE="1" NoShade><BR>';
 	}

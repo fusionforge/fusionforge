@@ -48,7 +48,7 @@ function check_file_size($size) {
 		return true;
 	} else {
 		//too big or small
-		$feedback .= $Language->getText('project_admin_editimages','error_length').' <br />';
+		$feedback .= _('ERROR - file must be > 20 bytes and < 256000 bytes in length').' <br />';
 		return false;
 	}
 }
@@ -106,7 +106,7 @@ function store_file($id, $input_file) {
 			$feedback .= 'ERROR: DB: Cannot store multimedia file<br />';
 			echo db_error();
 		} else {
-			$feedback .= $Language->getText('project_admin_editimages','file_uploaded');
+			$feedback .= _('Multimedia File Uploaded');
 		}
 	}
 }
@@ -123,7 +123,7 @@ if (getStringFromRequest('submit')) {
 
 	if (getStringFromRequest('add')) {
 		if (!$input_file['tmp_name'] || $description == "") {
-			$feedback .= $Language->getText('project_admin_editimages','required_fields');
+			$feedback .= _('Both file name and description are required');
 		} else {
 			//see if they have too many data in the system
 			$res=db_query("SELECT sum(filesize) WHERE group_id='$group_id'");
@@ -142,12 +142,12 @@ if (getStringFromRequest('submit')) {
 			$feedback .= 'ERROR: DB: Cannot delete multimedia file<br />';
 			echo db_error();
 		} else {
-			$feedback .= $Language->getText('project_admin_editimages','file_deleted');
+			$feedback .= _('Multimedia File Deleted');
 		}
 
 	} else if (getStringFromRequest("edit")) {
 		if ($description == "") {
-			$feedback .= $Language->getText('project_admin_editimages','file_description_required').'<b />';
+			$feedback .= _('File description is required').'<b />';
 		} else {
 			if (!$input_file['tmp_name']) {
 
@@ -163,7 +163,7 @@ if (getStringFromRequest('submit')) {
 					$feedback .= 'ERROR: DB: Cannot update multimedia file<br />';
 					echo db_error();
 				} else {
-					$feedback .= $Language->getText('project_admin_editimages','properties_updated').'<br />';
+					$feedback .= _('Multimedia File Properties Updated').'<br />';
 				}
 
 			} else {
@@ -193,10 +193,10 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editimages','title')));
+project_admin_header(array('title'=>_('Edit Multimedia Data')));
 
 echo '
-	<p>'.$Language->getText('project_admin_editimages','intro', array(sprintf("%.2f",$QUOTA/(1024*1024)))).'</p>
+	<p>'.sprintf(_('You can store up to %1$s MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data.'), sprintf("%.2f", $QUOTA/(1024*1024))).'</p>
 	<p>
 ';
 
@@ -213,27 +213,27 @@ if ($mode == "edit") {
 		exit();
 	}
 
-	echo '</p><h4>'.$Language->getText('project_admin_editimages','title').'</h4>
+	echo '</p><h4>'._('Edit Multimedia Data').'</h4>
 	<p>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<input type="hidden" name="id" value="'.$id.'" />
 
-	<strong>'.$Language->getText('project_admin_editimages','replace').':</strong><br />
+	<strong>'._('Replace with new file (optional)').':</strong><br />
 	<input type="file" name="input_file" size="30" />
 	<p>
 
-	<strong>'.$Language->getText('project_admin_editimages','description').':</strong><br />
+	<strong>'._('Description').':</strong><br />
 	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'" />
 	</p>
 	<p>
-	<strong>'.$Language->getText('project_admin_editimages','mime_type').':</strong><br />
+	<strong>'._('MIME Type').':</strong><br />
 	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'" />
 
 	<input type="hidden" name="edit" value="1" />
 
-	<input type="submit" value="'.$Language->getText('general','submit').'" name="submit" />
-	<input type="reset" value="'.$Language->getText('general','reset').'" /><br />
+	<input type="submit" value="'._('Submit').'" name="submit" />
+	<input type="reset" value="'._('Reset').'" /><br />
 	</form></p>
 	';
 } else {
@@ -242,30 +242,30 @@ if ($mode == "edit") {
 				WHERE group_id='$group_id'
 				ORDER BY id");
 
-	echo '<h4>'.$Language->getText('project_admin_editimages','add_data').'</h4>
+	echo '<h4>'._('Add Multimedia Data').'</h4>
 	<p>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<strong>'.$Language->getText('project_admin_editimages','local_filename').':</strong>'.utils_requiredField().'<br />
+	<strong>'._('Local filename').':</strong>'.utils_requiredField().'<br />
 	<input type="file" name="input_file" size="30" />
 	<p>
-	<strong>'.$Language->getText('project_admin_editimages','description').':</strong>'.utils_requiredField().'<br />
+	<strong>'._('Description').':</strong>'.utils_requiredField().'<br />
 	<input type="text" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
-	<input type="submit" value="'.$Language->getText('project_admin_editimages','add_file').'" name="submit" /><br /></p>
+	<input type="submit" value="'._('Add File').'" name="submit" /><br /></p>
 	</form></p>
 	';
 }
 
 $arr=array();
-$arr[]=$Language->getText('project_admin_editimages','edit');
-$arr[]=$Language->getText('project_admin_editimages','id');
-$arr[]=$Language->getText('project_admin_editimages','uploaded');
-$arr[]=$Language->getText('project_admin_editimages','name');
-$arr[]=$Language->getText('project_admin_editimages','mime_type');
-$arr[]=$Language->getText('project_admin_editimages','size');
-$arr[]=$Language->getText('project_admin_editimages','dims');
-$arr[]=$Language->getText('project_admin_editimages','description');
+$arr[]=_('Edit');
+$arr[]=_('ID');
+$arr[]=_('Uploaded');
+$arr[]=_('Name');
+$arr[]=_('MIME Type');
+$arr[]=_('Size');
+$arr[]=_('Dims');
+$arr[]=_('Description');
 
 echo $GLOBALS['HTML']->listTableTop($arr);
 
@@ -283,13 +283,13 @@ for ($i=0; $i<$rows; $i++) {
 
 	echo '
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-	.'<td style="text-align:center">'
+	.'<td align="center">'
 	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
 	 .db_result($result,$i,'id').'">'
-	 .'['.$Language->getText('project_admin_editimages','del').']'.'</a>'
+	 .'['._('Del').']'.'</a>'
 	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;mode=edit&amp;id='
 	 .db_result($result,$i,'id').'"> '
-	 .'['.$Language->getText('project_admin_editimages','edit').']'.'</a>'
+	 .'['._('Edit').']'.'</a>'
 	.'</td>'
 
 	.'<td>'.db_result($result,$i,'id').'</td>'
@@ -299,8 +299,8 @@ for ($i=0; $i<$rows; $i++) {
 	.'<td><a href="'.$GLOBALS['sys_urlprefix'].'/dbimage.php?id='.db_result($result,$i,'id').'">'
 	     .stripslashes(db_result($result,$i,'filename')).'</a></td>'
 	.'<td>'.db_result($result,$i,'filetype').'</td>'
-	.'<td style="text-align:right">'.db_result($result,$i,'filesize').'</td>'
-	.'<td style="text-align:right">'.$dims.'</td>'
+	.'<td align="right">'.db_result($result,$i,'filesize').'</td>'
+	.'<td align="right">'.$dims.'</td>'
 	.'<td>'.stripslashes(db_result($result,$i,'description')).'</td>'
 	.'</tr>';
 }

@@ -79,7 +79,7 @@ if ($limit>20 || $limit < 1) {
 	$limit=20;
 }
 
-echo $HTML->boxTop($Language->getText('group','long_news'));
+echo $HTML->boxTop(_('Latest News'));
 echo news_show_latest($group_id,$limit,$show_summaries,false,$flat);
 echo $HTML->boxBottom();
 

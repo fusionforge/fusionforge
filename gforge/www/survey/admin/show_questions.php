@@ -32,19 +32,19 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_show_questions','title')));
+survey_header(array('title'=>_('Survey Questions')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>".$Language->getText('survey_show_questions','permission_denied')."</h1>";
+	echo "<h1>"._('Permission Denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
 
 ?>
 
-<p><?php echo $Language->getText('survey_show_questions','you_may_use_any_of_these'); ?>.</p>
+<p><?php echo _('You may use any of these questions on your surveys'); ?>.</p>
 
-<p><span class="important"><?php echo $Language->getText('survey_show_questions','note_use_these_questions_id'); ?>.</span></p>
+<p><span class="important"><?php echo _('NOTE: use these question_id\'s when you create a new survey'); ?>.</span></p>
 <p>&nbsp;</p>
 <?php
 
@@ -53,7 +53,7 @@ Function  ShowResultsEditQuestion($result) {
 	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>" .$Language->getText('survey_show_questions','found',array($rows))."</h3>";
+	echo "<h3>" .sprintf(_('%1$s questions found'), $rows)."</h3>";
 
 	echo  "<table border=\"0\">\n";
 	/*  Create  the  headers  */

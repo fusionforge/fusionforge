@@ -15,7 +15,7 @@ class FrsGroupSearchEngine extends GroupSearchEngine {
 	
 	function FrsGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', $Language->getText('searchbox','frs'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', _('This project\'s releases'));
 	}
 	
 	function isAvailable($parameters) {

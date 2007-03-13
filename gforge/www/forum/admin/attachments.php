@@ -47,7 +47,7 @@ $fa = new ForumAdmin();
 if ($fa->Authorized($group_id)) {
 	//user authorized, continue
 	if ($fa->isGroupAdmin()) {
-		forum_header(array('title'=>$Language->getText('forum_admin','title')));
+		forum_header(array('title'=>_('Forums: Administration')));
 		$fa->ExecuteAction($action);
 		forum_footer(array());
 	} else {

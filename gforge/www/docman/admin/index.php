@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 
 		$d= new Document($g,$docid);
 		if ($d->isError()) {
-			exit_error($Language->getText('general','error'),$d->getErrorMessage());
+			exit_error(_('Error'),$d->getErrorMessage());
 		}
 		
 		$sanitizer = new TextSanitizer();
@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 			}
 		} elseif ($uploaded_data['name']) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-				exit_error($Language->getText('general','error'),$Language->getText('docman','error_invalid_file_attack', $uploaded_data['name']));
+				exit_error(_('Error'),sprintf(_('Error'), $uploaded_data['name']));
 			}
 			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 			$filename=$uploaded_data['name'];
@@ -107,7 +107,7 @@ if (getStringFromRequest('submit')) {
 		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid)) {
 			exit_error('Error',$d->getErrorMessage());
 		}
-		$feedback = $Language->getText('general','update_successful');
+		$feedback = _('Updated successfully');
 
 	} elseif (getStringFromRequest('editgroup')) {
 		$doc_group = getStringFromRequest('doc_group');
@@ -121,7 +121,7 @@ if (getStringFromRequest('submit')) {
 		if (!$dg->update($groupname,$parent_doc_group)) {			
 			exit_error('Error',$dg->getErrorMessage());
 		}
-		$feedback = $Language->getText('general','update_successful');
+		$feedback = _('Updated successfully');
 
 
 	} elseif (getStringFromRequest('addgroup')) {
@@ -135,7 +135,7 @@ if (getStringFromRequest('submit')) {
 		if (!$dg->create($groupname, $parent_doc_group)) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
-		$feedback = $Language->getText('general','create_successful');
+		$feedback = _('Created successfully');
 	
 	} elseif (getStringFromRequest('deletedoc') && $docid && getStringFromRequest('sure') && getStringFromRequest('really_sure')) {
 		$d= new Document($g,$docid);
@@ -147,7 +147,7 @@ if (getStringFromRequest('submit')) {
 			exit_error('Error',$d->getErrorMessage());
 		}
 		
-		$feedback = $Language->getText('general','deleted');
+		$feedback = _('Deleted');
 		header('Location: index.php?group_id='.$d->Group->getID().'&feedback='.urlencode($feedback));
 		die();	// End parsing file and redirect
 	}
@@ -177,32 +177,32 @@ if ($editdoc && $docid) {
 	}
 
 	
-	docman_header($Language->getText('docman_admin_editdocs','section'),$Language->getText('docman_admin_editdocs','title'),'');
+	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
 
 	?>
 		<br />
-		<?php echo $Language->getText('docman_new','intro') ?>
+		<?php echo _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.') ?>
 	<form name="editdata" action="index.php?editdoc=1&amp;group_id=<?php echo $group_id; ?>" method="post" enctype="multipart/form-data">
 
 	<table border="0">
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','doc_title') ?>: </strong><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(5)) ?><br />
+		<strong><?php echo _('Document Title') ?>: </strong><?php echo utils_requiredField(); ?> <?php printf(_('Document Title'), 5) ?><br />
 		<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>" />
 		<br /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','description') ?></strong><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general', 'min_characters', array(10)) ?><br />
+		<strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('Description'), 10) ?><br />
 		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
 		<br /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','file')?></strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
 		<?php if ($d->isURL()) {
 			echo '<a href="'.$d->getFileName().'">[View File URL]</a>';
 		} else { ?>
@@ -218,7 +218,7 @@ if ($editdoc && $docid) {
 				<td>
 				';
 		//echo '<input type="hidden" name="editor" value="editor">';
-		echo $Language->getText('docman_admin_editdocs','edit');
+		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
 		/*
 		$params['name'] = 'data';
 		$params['width'] = "800";
@@ -248,7 +248,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','language') ?></strong><br />
+		<strong><?php echo _('Language') ?></strong><br />
 		<?php
 
 			echo html_get_language_popup($Language,'language_id',$d->getLanguageID());
@@ -258,7 +258,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('docman_new','group') ?></strong><br />
+		<strong><?php echo _('Group that document belongs in') ?></strong><br />
 		<?php
 
 			//echo display_groups_option($group_id,$d->getDocGroupID());
@@ -269,7 +269,7 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<br /><strong><?php echo $Language->getText('docman_admin_editdocs','state') ?>:</strong><br />
+		<br /><strong><?php echo _('State') ?>:</strong><br />
 		<?php
 
 			doc_get_state_box($d->getStateID());
@@ -286,7 +286,7 @@ if ($editdoc && $docid) {
 		echo	'
 	<tr>
 		<td>
-		<strong>'.$Language->getText('docman_admin_editdocs','doc_contents').'</strong><br />
+		<strong>'._('Document Contents').'</strong><br />
 		<textarea cols="80" rows="20" name="data">'. htmlspecialchars( $d->getFileData() ).'</textarea>
 		</td>
 	</tr>';
@@ -296,13 +296,13 @@ if ($editdoc && $docid) {
 	<tr>
 		<td>
 		<?php if ($d->isURL()) { ?>
-		<strong><?php echo $Language->getText('docman_admin_editdocs','upload_url') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
         <input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
 		<?php } else { ?>
-		<strong><?php echo $Language->getText('docman_admin_editdocs','upload') ?></strong><br />
+		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" /><br/><br />
 			<?php //if ($sys_use_ftpuploads) { ?>
-			<!--<strong><?php //echo $Language->getText('docman_admin_editdocs','upload_ftp',array($sys_ftp_upload_host)) ?></strong>--><br />
+			<!--<strong><?php //printf(_('OR choose one form FTP %1$s'), $sys_ftp_upload_host) ?></strong>--><br />
 			<?php
 			//$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			//echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
@@ -315,8 +315,8 @@ if ($editdoc && $docid) {
 	</table>
 
 	<input type="hidden" name="docid" value="<?php echo $d->getID(); ?>" />
-	<input type="submit" value="<?php echo $Language->getText('general','submit_edit') ?>" name="submit" /><br /><br />
-	<a href="index.php?deletedoc=1&amp;docid=<?php echo $d->getID() ?>&amp;group_id=<?php echo $d->Group->getID() ?>"><?php echo $Language->getText('docman_admin_editdocs', 'delete_doc') ?></a>
+	<input type="submit" value="<?php echo _('Submit Edit') ?>" name="submit" /><br /><br />
+	<a href="index.php?deletedoc=1&amp;docid=<?php echo $d->getID() ?>&amp;group_id=<?php echo $d->Group->getID() ?>"><?php echo _('Permanently delete this document') ?></a>
 
 	</form>
 	<?php
@@ -330,9 +330,9 @@ if ($editdoc && $docid) {
 //
 } elseif (getStringFromRequest('addgroup')) {
 
-	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'');
+	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
 
-	echo "<h1>".$Language->getText('docman_admin_addgroups','title')."</h1>";
+	echo "<h1>"._('Add Document Groups')."</h1>";
 	
 	$dgf = new DocumentGroupFactory($g);
 	if ($dgf->isError()) {
@@ -348,8 +348,8 @@ if ($editdoc && $docid) {
 	
 	if (count($nested_groups) > 0) {
 		$title_arr=array();
-		$title_arr[]=$Language->getText('docman_admin_editgroups','group_id');
-		$title_arr[]=$Language->getText('docman_admin_editgroups','group_name');
+		$title_arr[]=_('ID');
+		$title_arr[]=_('Group Name');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
@@ -359,28 +359,28 @@ if ($editdoc && $docid) {
 		echo $GLOBALS['HTML']->listTableBottom();
 		
 	} else {
-		echo "\n<h1>".$Language->getText('docman','error_no_groups_defined')."</h1>";
+		echo "\n<h1>"._('No Document Groups defined')."</h1>";
 	}
 	?>
-	<p><strong><?php echo $Language->getText('docman_admin_editgroups','add_group') ?>:</strong></p>
+	<p><strong><?php echo _('Add a group') ?>:</strong></p>
 	<form name="addgroup" action="index.php?addgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
 	<table>
 		<tr>
-			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_name') ?>:</th>
+			<th><?php echo _('New Group Name') ?>:</th>
 			<td><input type="text" name="groupname" /></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_parent') ?>:</th>
+			<th><?php echo _('Belongs to') ?>:</th>
 			<td>
 				<?php echo $dgh->showSelectNestedGroups($nested_groups, 'parent_doc_group') ?>
 			</td>
 
-			<td><input type="submit" value="<?php echo $Language->getText('general','add') ?>" name="submit" /></td>
+			<td><input type="submit" value="<?php echo _('Add') ?>" name="submit" /></td>
 		</tr>
 	</table>
 	<p>
-		 <?php echo $Language->getText('docman_admin_editgroups','description') ?>
+		 <?php echo _('Group name will be used as a title, so it should be formatted correspondingly.') ?>
 	</p>
 	</form>
 	<?php
@@ -410,29 +410,29 @@ if ($editdoc && $docid) {
 		exit_error('Error',$dgh->getErrorMessage());
 	}
 
-	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'');
+	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
 	?>
-	<p><strong><?php echo $Language->getText('docman_admin_editgroups','edit_group') ?></strong></p>
+	<p><strong><?php echo _('Edit a group') ?></strong></p>
 	<form name="editgroup" action="index.php?editgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
 	<input type="hidden" name="doc_group" value="<?php echo $doc_group; ?>" />
 	<table>
 		<tr>
-			<th><?php echo $Language->getText('docman_admin_editgroups','group_name') ?>:</th>
+			<th><?php echo _('Group Name') ?>:</th>
 			<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<th><?php echo $Language->getText('docman_admin_editgroups','group_parent') ?>:</th>
+			<th><?php echo _('Belongs to') ?>:</th>
 			<td>
 			<?php
 				$dgh->showSelectNestedGroups($dgf->getNested(), "parent_doc_group", true, $dg->getParentId(), array($dg->getID()));
 			?>
 			</td>
-			<td><input type="submit" value="<?php echo $Language->getText('general','edit') ?>" name="submit" /></td>
+			<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
 		</tr>
 	</table>
 	<p>
-		 <?php echo $Language->getText('docman_admin_editgroups','description') ?>
+		 <?php echo _('Group name will be used as a title, so it should be formatted correspondingly.') ?>
 
 	</p>
 	</form>
@@ -444,17 +444,17 @@ if ($editdoc && $docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 	
-	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'');
+	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
 ?>
 		<p>
 		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
 		<input type="hidden" name="submit" value="1" /><br />
-		<?php echo $Language->getText('docman_admin_deletedoc','delete_warning'); ?>
+		<?php echo _('You are about to permanently delete this document.'); ?>
 		<p>
-		<input type="checkbox" name="sure" value="1"><?php echo $Language->getText('docman_admin_deletedoc','sure') ?><br />
-		<input type="checkbox" name="really_sure" value="1"><?php echo $Language->getText('docman_admin_deletedoc','really_sure') ?><br />
+		<input type="checkbox" name="sure" value="1"><?php echo _('I\'m Sure.') ?><br />
+		<input type="checkbox" name="really_sure" value="1"><?php echo _('I\'m Really Sure.') ?><br />
 		<p>
-		<input type="submit" name="post_changes" value="<?php echo $Language->getText('docman_admin_deletedoc','delete') ?>" /></p>
+		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 		</form></p>
 <?php
 	docman_footer(array());
@@ -468,12 +468,12 @@ if ($editdoc && $docid) {
 
 	$df = new DocumentFactory($g);
 	if ($df->isError()) {
-		exit_error($Language->getText('general','error'),$df->getErrorMessage());
+		exit_error(_('Error'),$df->getErrorMessage());
 	}
 	
 	$dgf = new DocumentGroupFactory($g);
 	if ($dgf->isError()) {
-		exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
+		exit_error(_('Error'),$dgf->getErrorMessage());
 	}
 	
 
@@ -481,18 +481,18 @@ if ($editdoc && $docid) {
 //	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
 	
-	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'admin');
+	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),_('Document Manager: Administration'),'admin');
 
 	?> 
-	<h3><?php echo $Language->getText('docman_admin','title') ?></h3>
+	<h3><?php echo _('Document Manager: Administration') ?></h3>
 	<p>
-	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;addgroup=1"><?php echo $Language->getText('docman_admin','add_edit_docgroups') ?></a>
+	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;addgroup=1"><?php echo _('Add/Edit Document Groups') ?></a>
 	</p>
 	<?php
 	
 	$selected_stateid = getIntFromRequest('selected_stateid');
 	if (!$d_arr || count($d_arr) < 1) {
-		print "<p><strong>".$Language->getText('docman','error_no_docs').".</strong></p>";
+		print "<p><strong>"._('This project has no visible documents').".</strong></p>";
 	} else {
 		// get a list of used document states		
 		$states = $df->getUsedStates();

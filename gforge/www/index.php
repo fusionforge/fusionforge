@@ -31,7 +31,7 @@ require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 require_once('www/include/features_boxes.php');
 
-$HTML->header(array('title'=>$Language->getText('index','welcome')));
+$HTML->header(array('title'=>_('Welcome')));
 
 // Main page content is now themeable;
 // Default is index_std.php;

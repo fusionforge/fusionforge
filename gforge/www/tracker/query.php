@@ -157,13 +157,13 @@ $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',f
 //	custom order by arrays to build a pop-up box
 //
 $order_name_arr=array();
-$order_name_arr[]=$Language->getText('tracker','id');
-$order_name_arr[]=$Language->getText('tracker','priority');
-$order_name_arr[]=$Language->getText('tracker','summary');
-$order_name_arr[]=$Language->getText('tracker','open_date');
-$order_name_arr[]=$Language->getText('tracker','close_date');
-$order_name_arr[]=$Language->getText('tracker','submitter');
-$order_name_arr[]=$Language->getText('tracker','assignee');
+$order_name_arr[]=_('ID');
+$order_name_arr[]=_('Priority');
+$order_name_arr[]=_('Summary');
+$order_name_arr[]=_('Open Date');
+$order_name_arr[]=_('Close Date');
+$order_name_arr[]=_('Submitter');
+$order_name_arr[]=_('Assignee');
 
 
 $order_arr=array();
@@ -179,8 +179,8 @@ $order_arr[]='assigned_to';
 //	custom sort arrays to build pop-up box
 //
 $sort_name_arr=array();
-$sort_name_arr[]=$Language->getText('tracker_browse','ascending');
-$sort_name_arr[]=$Language->getText('tracker_browse','descending');
+$sort_name_arr[]=_('Ascending');
+$sort_name_arr[]=_('Descending');
 
 
 $sort_arr=array();
@@ -191,11 +191,11 @@ $sort_arr[]='DESC';
 //	custom changed arrays to build pop-up box
 //
 $changed_name_arr=array();
-$changed_name_arr[]=$Language->getText('tracker_browse','changed_any');
-$changed_name_arr[]=$Language->getText('tracker_browse','hour24');
-$changed_name_arr[]=$Language->getText('tracker_browse','day7');
-$changed_name_arr[]=$Language->getText('tracker_browse','week2');
-$changed_name_arr[]=$Language->getText('tracker_browse','month1');
+$changed_name_arr[]=_('MISSINGTEXT:tracker_browse/changed_any:TEXTMISSING');
+$changed_name_arr[]=_('Last 24H');
+$changed_name_arr[]=_('Last 7days');
+$changed_name_arr[]=_('Last 2weeks');
+$changed_name_arr[]=_('Last 1month');
 
 $changed_arr=array();
 $changed_arr[]= 0;
@@ -236,7 +236,7 @@ echo '
 	<input type="hidden" name="form_key" value="'.form_generate_key().'">
 	<tr>
 		<td>
-			<input type="submit" name="submit" value="'.$Language->getText('tracker','saved_queries').'" />
+			<input type="submit" name="submit" value="'._('Save Changes').'" />
 		</td>
 		<td>';
 	if(db_numrows($res)>0) {
@@ -247,15 +247,15 @@ echo '
 	</tr>
 	<tr class="tablecontent">
 		<td>
-		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'.$Language->getText('tracker','query_name').'<br />';
+		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'._('Name and Save Query').'<br />';
 	if(db_numrows($res)>0) {
 		echo '
-		<input type="radio" name="query_action" value="4">'.$Language->getText('tracker','query_load').'<br />';
+		<input type="radio" name="query_action" value="4">'._('Load Query').'<br />';
 	}
 	if ($query_id) {
 		echo '
-		<input type="radio" name="query_action" value="3" checked>'.$Language->getText('tracker','query_update').'<br />
-		<input type="radio" name="query_action" value="5">'.$Language->getText('tracker','query_delete').'';
+		<input type="radio" name="query_action" value="3" checked>'._('Update Query').'<br />
+		<input type="radio" name="query_action" value="5">'._('Delete Query').'';
 	}
 	echo '
 		</td>
@@ -267,10 +267,10 @@ echo '
 echo'
 <table width="100%" class="tablecontent">
 	<tr>
-		<td>'.$Language->getText('tracker','assignee').':</a><br />'. $tech_box .'</td>
+		<td>'._('Assignee').':</a><br />'. $tech_box .'</td>
 		<td>';
 		if (!$ath->usesCustomStatuses()) {
-			echo $Language->getText('tracker','status').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any'));
+			echo _('State').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,_('State'));
 		}
 		echo '</td>
 	</tr>';
@@ -279,16 +279,16 @@ echo'
 echo '
 	<tr>
 		<td colspan="2">'.
-		$Language->getText('tracker_query','moddaterange').':<strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		_('Last Modified Date range').':<strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
 		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'"><p/>
-		'.$Language->getText('tracker_query','opendaterange').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		'._('Open Date range').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
 		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'"><p/>
-		'.$Language->getText('tracker_query','closedaterange').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
+		'._('Close Date range').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
 		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'">
 		</td>
 	</tr>
 	<tr>
-		<td>'.$Language->getText('tracker_browse','sort_by').':<br />
+		<td>'._('Order by').':<br />
 		'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
 		<td>&nbsp;<br />

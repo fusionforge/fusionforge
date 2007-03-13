@@ -33,12 +33,12 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			'&nbsp;',
-			$this->Language->getText('search', 'tasks_id'),
-			$this->Language->getText('search', 'tasks_summary'),
-			$this->Language->getText('search', 'tasks_start_date'),
-			$this->Language->getText('search', 'tasks_end_date'),
-			$this->Language->getText('search', 'tasks_created_by'),
-			$this->Language->getText('search', 'tasks_completed')
+			_('#'),
+			_('Summary'),
+			_('Start Date'),
+			_('End Date'),
+			_('Created By'),
+			_('Completed')
 		);
 	}
 

@@ -47,7 +47,7 @@ if (getStringFromRequest('confirm')) {
 	$user_id = user_getid();
 
 	if (!$group->removeUser($user_id)) {
-		exit_error($Language->getText('general','error'), $group->getErrorMessage());
+		exit_error(_('Error'), $group->getErrorMessage());
 	} else {                    
 		session_redirect("/my/");
 	}
@@ -62,17 +62,17 @@ $perm =& $group->getPermission(session_get_user());
 
 if ( $perm->isAdmin() ) {
 	exit_error(
-		$Language->getText('my_rmproject','operation_not_permitted_title'),
-		$Language->getText('my_rmproject','operation_not_permitted_text')
+		_('Operation Not Permitted'),
+		_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="/people/">Help Wanted Board</a> and be ready to pass admin privilege to interested party.')
 	);
 }
 
-echo site_user_header(array('title'=>$Language->getText('my_rmproject','title')));
+echo site_user_header(array('title'=>_('Quitting Project')));
 
 echo '
-<h3>'.$Language->getText('my_rmproject','quitting_project').' </h3>
+<h3>'._('Quitting Project').' </h3>
 <p>
-'.$Language->getText('my_rmproject','quitting_project_text').'
+'._('You are about to remove yourself from the project. Please confirm your action:').'
 </p>
 
 <table>
@@ -81,13 +81,13 @@ echo '
 <form action="'.getStringFromServer('PHP_SELF').'" method="post">
 <input type="hidden" name="confirm" value="1" />
 <input type="hidden" name="group_id" value="'.$group_id.'" />
-<input type="submit" value="'.$Language->getText('general','remove').'" />
+<input type="submit" value="'._('Remove').'" />
 </form>
 
 </td><td>
 
 <form action="/my/" method="get">
-<input type="submit" value="'.$Language->getText('general','cancel').'" />
+<input type="submit" value="'._('Cancel').'" />
 </form>
 
 </td></tr>

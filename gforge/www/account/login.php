@@ -56,9 +56,9 @@ if ($sys_use_ssl && !session_issecure()) {
 
 // Decide login button based on session.
 if (session_issecure()) {
-    $login_button = $Language->getText('account_login', 'login_ssl');
+    $login_button = _('Login with SSL');
 } else {
-    $login_button = $Language->getText('account_login', 'login'); 
+    $login_button = _('Login'); 
 }
 
 // ###### first check for valid login, if so, redirect
@@ -96,10 +96,10 @@ if ($login && !$success) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if ($userstatus == "P") {
-		$feedback = $Language->getText('account_login', 'pending_account', array(htmlspecialchars($form_loginname)));
+		$feedback = sprintf(_('<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=%1$s">[Resend Confirmation Email]</A>		<br><hr>		<p>'), htmlspecialchars($form_loginname));
 	} else {
 		if ($userstatus == "D") {
-			$feedback .= '<br />'.$Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
+			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), $GLOBALS['sys_name']);
 		}
 	}
 	html_feedback_top($feedback);
@@ -108,26 +108,26 @@ if ($login && !$success) {
 ?>
 	
 <p>
-<span class="error"><?php echo $Language->getText('account_login', 'cookiewarn'); ?></span>
+<span class="error"><?php echo _('Cookies must be enabled past this point.'); ?></span>
 </p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
-<?php echo $Language->getText('account_login', 'loginname'); ?>
+<?php echo _('Login Name:'); ?>
 <br /><input type="text" name="form_loginname" value="<?php echo htmlspecialchars(stripslashes($form_loginname)); ?>" />
 </p>
 <p>
-<?php echo $Language->getText('account_login', 'passwd'); ?>
+<?php echo _('Password:'); ?>
 <br /><input type="password" name="form_pw" />
 </p>
 <p>
 <input type="submit" name="login" value="<?php echo $login_button; ?>" />
 </p>
 </form>
-<p><a href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></a></p>
-<p><a href="register.php"><?php echo $Language->getText('account_login', 'newaccount'); ?></a></p>
-<p><a href="pending-resend.php"><?php echo $Language->getText('account_login','resend_pending'); ?></a></p>
+<p><a href="lostpw.php"><?php echo _('[Lost your password?]'); ?></a></p>
+<p><a href="register.php"><?php echo _('[New Account]'); ?></a></p>
+<p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
 
 <?php
 

@@ -50,7 +50,7 @@ if ($fa->Authorized($group_id)) {
 	//if there�s no forum_id input, then the user must have access to all forums, thus he�s a group admin for the forums
 	if (!$forum_id) {
 		if ($fa->isGroupAdmin()) {
-			forum_header(array('title'=>$Language->getText('forum_admin','title')));
+			forum_header(array('title'=>_('Forums: Administration')));
 			if (getStringFromRequest("Go")) {
 				$fa->ExecuteAction("view_pending");
 			} else {
@@ -71,7 +71,7 @@ if ($fa->Authorized($group_id)) {
 				exit_permission_denied();
 			}
 //		}
-		forum_header(array('title'=>$Language->getText('forum_admin','title')));
+		forum_header(array('title'=>_('Forums: Administration')));
 		if (getStringFromRequest("Go")) {
 			$fa->ExecuteAction("view_pending");
 		} else {

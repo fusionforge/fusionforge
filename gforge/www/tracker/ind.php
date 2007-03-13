@@ -21,16 +21,16 @@ $params['toptab']='tracker';
 echo site_project_header($params);
 
 if (!$at_arr || count($at_arr) < 1) {
-	echo "<h1>".$Language->getText('tracker','no_trackers')."</h1>";
-	echo "<p><strong>".$Language->getText('tracker','no_trackers_text',array('<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'">','</a>'))."</strong>";
+	echo "<h1>"._('No Accessible Trackers Found')."</h1>";
+	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'">', '</a>')."</strong>";
 	} else {
 
-	echo '<p>'.$Language->getText('tracker', 'choose').'<p>';
+	echo '<p>'._('Choose a tracker and you can browse/edit/add items to it.').'<p>';
 
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
-	$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('tracker_admin_update_type','description'),$Language->getText('general','open'),$Language->getText('general','total'));
+	$tablearr=array(_('Tracker'),_('Tracker'),_('Tracker'),_('Tracker'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($at_arr); $j++) {
@@ -47,9 +47,9 @@ if (!$at_arr || count($at_arr) < 1) {
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'
 			</td>
-			<td style="text-align:center">'. (int) $at_arr[$j]->getOpenCount() . '
+			<td align="center">'. (int) $at_arr[$j]->getOpenCount() . '
 			</td>
-			<td style="text-align:center">'. (int) $at_arr[$j]->getTotalCount() .'
+			<td align="center">'. (int) $at_arr[$j]->getTotalCount() .'
 			</td>
 		</tr>';
 		}

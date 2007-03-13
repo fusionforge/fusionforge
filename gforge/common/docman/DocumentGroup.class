@@ -104,7 +104,7 @@ class DocumentGroup extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError($Language->getText('docman_common_docgroup','name_required'));
+			$this->setError(_('DocumentGroup: name is Required'));
 			return false;
 		}
 		
@@ -112,7 +112,7 @@ class DocumentGroup extends Error {
 			// check if parent group exists
 			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError($Language->getText('docman_common_docgroup','invalid_parent_id'));
+				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
 				return false;
 			}
 		} else {
@@ -156,7 +156,7 @@ class DocumentGroup extends Error {
 		global $Language;
 		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('docman_common_docgroup','invalid_id'));
+			$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -223,7 +223,7 @@ class DocumentGroup extends Error {
 			// check if parent group exists
 			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError($Language->getText('docman_common_docgroup','invalid_parent_id'));
+				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
 				return false;
 			}
 		} else {

@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$doc_group || $doc_group == 100) {
 		//cannot add a doc unless an appropriate group is provided		
-		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
+		exit_error(_('Error'),_('Error'));
 	}
 	
 	//if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename && (!$editor && !$name ) )) {		
@@ -63,9 +63,9 @@ if (getStringFromRequest('submit')) {
 
 	$d = new Document($g, false, false,$sys_engine_path);
 	if (!$d || !is_object($d)) {		
-		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
+		exit_error(_('Error'),_('Error'));
 	} elseif ($d->isError()) {	
-		exit_error($Language->getText('general','error'),$d->getErrorMessage());
+		exit_error(_('Error'),$d->getErrorMessage());
 	}
 	
 	switch ($type) {
@@ -75,7 +75,7 @@ if (getStringFromRequest('submit')) {
 			$sanitizer = new TextSanitizer();
 			$data = $sanitizer->SanitizeHtml($data);
 			if (strlen($data)<1) {
-				exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
+				exit_error(_('Error'),_('Error'));
 			}
 			$uploaded_data_type='text/html';
 			break;
@@ -88,7 +88,7 @@ if (getStringFromRequest('submit')) {
 		}
 		case 'httpupload' : {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
-				exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
+				exit_error(_('Error'),_('Error'));
 			}
 			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 			$file_url='';
@@ -105,13 +105,13 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
-			exit_error($Language->getText('general','error'),$d->getErrorMessage());
+			exit_error(_('Error'),$d->getErrorMessage());
 	} else {		
 		if ($type == 'editor') {
 			//release the cookie for the document contents (should expire at the end of the session anyway)
 			setcookie ("gforgecurrentdocdata", "", time() - 3600);
 		}
-		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('docman_new','submitted_successfully'));
+		Header("Location: /docman/?group_id=$group_id&feedback="._('Document submitted sucessfully'));
 		exit;
 	}
 
@@ -120,27 +120,27 @@ if (getStringFromRequest('submit')) {
 	//if (getStringFromRequest('Option')) {
 		//option was selected, proceed to show each one
 		$option_selected = getStringFromRequest('option_selected');
-		docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'));
-		echo'<p>'. $Language->getText('docman_new','intro') .'</p>
+		docman_header(_('Document Manager: Submit New Documentation'),_('Document Manager: Submit New Documentation'));
+		echo'<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.') .'</p>
 		<form name="adddata" action="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post" enctype="multipart/form-data">
 		<table border="0" width="75%">
 		<tr>
 			<td>
-			<strong>'. $Language->getText('docman_new','doc_title').' :</strong>'. utils_requiredField(). $Language->getText('general', 'min_characters', array(5)).'<br />
+			<strong>'. _('Document Title').' :</strong>'. utils_requiredField(). sprintf(_('Document Title'), 5).'<br />
 			<input type="text" name="title" size="40" maxlength="255" />
 			</td>
 		</tr>
 	
 		<tr>
 			<td>
-			<strong>'. $Language->getText('docman_new','description') .' :</strong>'. utils_requiredField() . $Language->getText('general', 'min_characters', array(10)).'<br />
+			<strong>'. _('Description') .' :</strong>'. utils_requiredField() . sprintf(_('Description'), 10).'<br />
 			<input type="text" name="description" size="50" maxlength="255" />
 			</td>
 		</tr>';		
 		echo '
 			<tr>
 				<td>
-				<strong>'. $Language->getText('docman_new','upload_file') .' :</strong>'. utils_requiredField() .'<br />
+				<strong>'. _('Upload File') .' :</strong>'. utils_requiredField() .'<br />
 				<input type="file" name="uploaded_data" size="30" /><br /><br />
 				<input type="hidden" name="type" value="httpupload">
 				</td>
@@ -151,7 +151,7 @@ if (getStringFromRequest('submit')) {
 				echo '
 					<tr>
 						<td>
-						<strong>'. $Language->getText('docman_new','upload_file') .' :</strong>'. utils_requiredField() .'<br />
+						<strong>'. _('Upload File') .' :</strong>'. utils_requiredField() .'<br />
 						<input type="file" name="uploaded_data" size="30" /><br /><br />
 						<input type="hidden" name="type" value="httpupload">
 						</td>
@@ -163,14 +163,14 @@ if (getStringFromRequest('submit')) {
 					echo '
 						<tr>
 							<td>
-							<strong>'.$Language->getText('docman_new','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
-					echo $Language->getText('docman_new','ftpupload_choosefile').'</strong>'. utils_requiredField() .'<br />';
+							<strong>'.sprintf(_('You can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+					echo _('Choose an FTP file instead of uploading:').'</strong>'. utils_requiredField() .'<br />';
 					$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 					echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
 					echo '</td></tr><input type="hidden" name="type" value="ftpupload">';
 					break;
 				} else {
-					exit_error($Language->getText('docman_new','enableftpfirst'));
+					exit_error(_('You must enable ftp uploads first'));
 				}
 				break;
 			}
@@ -178,7 +178,7 @@ if (getStringFromRequest('submit')) {
 				echo '
 					<tr>
 						<td>
-						<strong>'. $Language->getText('docman_new','upload_url').' :</strong>'. utils_requiredField() .'<br />
+						<strong>'. _('Specify an outside URL where the file will be referenced').' :</strong>'. utils_requiredField() .'<br />
 						<input type="text" name="file_url" size="50" />
 						<input type="hidden" name="type" value="pasteurl">
 						</td>
@@ -195,8 +195,8 @@ if (getStringFromRequest('submit')) {
 					<tr>
 						<td>';
 				
-				echo "<strong>" . $Language->getText('docman_new','name') . '</strong>'.utils_requiredField().'<input type="text" name="name" ><br>';
-				echo '<a href="javascript:openEditor('.$group_id.');">'.$Language->getText('docman_new','edit').'</a>';
+				echo "<strong>" . _('Name your file :') . '</strong>'.utils_requiredField().'<input type="text" name="name" ><br>';
+				echo '<a href="javascript:openEditor('.$group_id.');">'._('Edit').'</a>';
 				echo '<input type="hidden" name="data">';
 				echo '<input type="hidden" name="type" value="editor">';
 				echo '</td>
@@ -209,13 +209,13 @@ if (getStringFromRequest('submit')) {
 		echo '
 			<tr>
 				<td>
-				<strong>'. $Language->getText('docman_new','language').' :</strong><br />
+				<strong>'. _('Language').' :</strong><br />
 				'. html_get_language_popup($Language,'language_id',1) .'
 				</td>
 			</tr>
 			<tr>
 				<td>
-				<strong>'. $Language->getText('docman_new','group').' :</strong><br />';
+				<strong>'. _('Group that document belongs in').' :</strong><br />';
 		$dgf = new DocumentGroupFactory($g);
 		if ($dgf->isError()) {
 			exit_error('Error',$dgf->getErrorMessage());
@@ -231,23 +231,23 @@ if (getStringFromRequest('submit')) {
 				</td>
 			</tr>
 		</table>
-		<input type="submit" name="submit" value="'. $Language->getText('docman_new','submit').' " />
+		<input type="submit" name="submit" value="'. _('Submit Information').' " />
 			</form>';
 		docman_footer(array());
 	/*
 	} else {
-		docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'));
+		docman_header(_('Document Manager: Submit New Documentation'),_('Document Manager: Submit New Documentation'));
 		?>
 		
 		<?php
 		echo '<form name="select_opt" action="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
-		$vals['httpupload'] = $Language->getText('docman','httpupload');
-		//$vals['ftpupload'] = $Language->getText('docman','ftpupload');
-		$vals['pasteurl'] = $Language->getText('docman','pasteurl');
-		$vals['editor'] = $Language->getText('docman','editor');
-		echo $Language->getText('docman','select');
+		$vals['httpupload'] = _('Http Upload');
+		//$vals['ftpupload'] = _('Ftp Upload');
+		$vals['pasteurl'] = _('Url Paste');
+		$vals['editor'] = _('Create and edit the file manually');
+		echo _('First select the upload type you wish to use');
 		echo html_build_select_box_from_assoc($vals,'option_selected');
-		echo '   <input type="submit" value="'. $Language->getText('docman_new','selectsubmit') .'" name="Option">';
+		echo '   <input type="submit" value="'. _('Select Option') .'" name="Option">';
 		echo '</form>';
 		docman_footer(array());
 	}

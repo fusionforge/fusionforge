@@ -42,29 +42,29 @@ if ($group_id) {
 	project_admin_header(array());
 
 	echo '
-	<p>'.$Language->getText('people','here_is_list_position').'</p>
+	<p>'._('Here is a list of positions available for this project.').'</p>
 	<p>';
 
 	echo people_show_project_jobs($group_id) . '</p>';
 
  } else if ($category_id && is_numeric($category_id)) {
 
-	people_header(array('title'=>$Language->getText('people','title')));
+	people_header(array('title'=>_('Help Wanted System')));
 
 	echo '
-		<p>'.$Language->getText('people','click_job_titles').'</p>
+		<p>'._('Click job titles for more detailed descriptions.').'</p>
 ';
 	echo people_show_category_jobs($category_id);
 
 } else {
 
-	people_header(array('title'=>$Language->getText('people','title')));
+	people_header(array('title'=>_('Help Wanted System')));
 
-	echo $Language->getText('people','about_blurb', $GLOBALS['sys_name']);
+	printf(_('<p>The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.</p><p>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)</p><p>Browse through the category menu to find projects looking for your help.</p><p>If you\'re a project admin, log in and submit help wanted requests through your project administration page.</p><p>To suggest new job categories, submit a request via the support manager.</p>'), $GLOBALS['sys_name']);
 
 	echo people_show_category_table();
 
-        echo '<h4>'.$Language->getText('people','last_posts').'</h4>';
+        echo '<h4>'._('Last posts').'</h4>';
 
 	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name ".
 		"FROM people_job,people_job_category,groups ".
@@ -74,7 +74,7 @@ if ($group_id) {
                 "ORDER BY post_date DESC";
 	$result=db_query($sql,5);
         echo people_show_job_list($result);
-        echo '<p><a href="helpwanted-latest.php">['.$Language->getText('people','more_latest_posts').']</a></p>';
+        echo '<p><a href="helpwanted-latest.php">['._('more latest posts').']</a></p>';
 
 }
 

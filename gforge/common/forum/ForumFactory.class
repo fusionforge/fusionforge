@@ -63,11 +63,11 @@ class ForumFactory extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('forum','error_no_valid_group_object'));
+			$this->setError(_('Forum:: No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError($Language->getText('forum','forum').':: '.$Group->getErrorMessage());
+			$this->setError(_('Forum').':: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -90,8 +90,7 @@ class ForumFactory extends Error {
 	 *	@return	array	The array of Forum objects.
 	 */
 	function &getForums() {
-		global $Language, $sys_database_type;
-
+		global $Language;
 		if ($this->forums) {
 			return $this->forums;
 		}
@@ -114,20 +113,8 @@ class ForumFactory extends Error {
 			$public_flag='=1';
 		}
 
-		if ($sys_database_type == "mysql") {
-			$sql="SELECT fgl.*,
-					(SELECT count(*) AS `count`
-						FROM (
-							SELECT DISTINCT group_forum_id, thread_id FROM forum
-						) AS tmp
-						WHERE tmp.group_forum_id = fgl.group_forum_id
-					) AS threads 
-				FROM forum_group_list_vw AS fgl";
-		} else {
-			$sql="SELECT *
-				FROM forum_group_list_vw";
-		}
-		$sql .= "
+		$sql="SELECT *
+			FROM forum_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."' 
 			AND is_public $public_flag 
 			$exists
@@ -138,7 +125,7 @@ class ForumFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result) {
-			$this->setError($Language->getText('forum_common_forumfactory','error_no_forums_found').db_error());
+			$this->setError(_('MISSINGTEXT:forum_common_forumfactory/error_no_forums_found:TEXTMISSING').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

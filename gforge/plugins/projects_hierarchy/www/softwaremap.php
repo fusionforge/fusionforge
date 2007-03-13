@@ -40,12 +40,12 @@ $res_trove_cat = db_query("
 
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(
-		$Language->getText('trove_list','invalid_category_title'),
-		$Language->getText('trove_list','invalid_category_text').': '.db_error()
+		_('Invalid Trove Category'),
+		_('That Trove category does not exist').': '.db_error()
 	);
 }
 
-$HTML->header(array('title'=>$Language->getText('trove_list','title'),'pagename'=>'softwaremap'));
+$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 
 //rajout fab a mettre dans head
 ?>
@@ -54,7 +54,7 @@ $HTML->header(array('title'=>$Language->getText('trove_list','title'),'pagename'
 <?php
 //fin rajout
 
-print "<b><a href=\"./softwaremap.php?cat=c\">".$Language->getText('project_tree','cat')."</a> | <a href=\"./softwaremap.php?cat=t\">".$Language->getText('project_tree','tree')."</a></b>";
+print "<b><a href=\"./softwaremap.php?cat=c\">"._('By Category')."</a> | <a href=\"./softwaremap.php?cat=t\">"._('By Category')."</a></b>";
 
 echo'
 	<hr />';
@@ -122,14 +122,14 @@ if($_SESSION['cat'] != 't'){
 			}
 		
 			// build text for top of page on what viewier is seeing
-			$discrim_desc = '<span style="color:red;font-size:smaller">'.$Language->getText('trove_list','limiting_view').':
+			$discrim_desc = '<span style="color:red;font-size:smaller">'._('Now limiting view to projects in the following categories').':
 		</span>';
 			
 			for ($i=0;$i<sizeof($expl_discrim);$i++) {
 				$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
 					.trove_getfullpath($expl_discrim[$i])
 					.' <a href="softwaremap.php?form_cat='.$form_cat
-					.$discrim_url_b[$i].'">['.$Language->getText('trove_list','remove_filter').']'
+					.$discrim_url_b[$i].'">['._('Remove This Filter').']'
 					.'</a>';
 			}
 			$discrim_desc .= "<hr />\n";
@@ -190,7 +190,7 @@ if($_SESSION['cat'] != 't'){
 			print ('<a href="softwaremap.php?form_cat='.$row_sub['trove_cat_id'].$discrim_url.'">');
 			echo html_image("ic/cfolder15.png",'15','13',array());
 			print ('&nbsp; '.$row_sub['fullname'].'</a> <em>('.
-				$Language->getText('trove_list','projects',array($row_sub['subprojects']?$row_sub['subprojects']:'0'))
+				sprintf(_('%1$s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0')
 				.')</em><br />');
 				
 		}
@@ -205,7 +205,7 @@ if($_SESSION['cat'] != 't'){
 			ORDER BY fullname");
 		echo db_error();
 		
-		print $Language->getText('trove_list','browse_by').':';
+		print _('Browse By').':';
 		while ($row_rootcat = db_fetch_array($res_rootcat)) {
 			// print open folder if current, otherwise closed
 			// also make anchor if not current
@@ -260,10 +260,10 @@ if($_SESSION['cat'] != 't'){
 		$html_limit = '<span style="text-align:center;font-size:smaller">';
 		if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 			$html_limit .= 'More than ';
-			$html_limit .= $Language->getText('trove_list','more_than',array($querytotalcount));
+			$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 			
 			}
-		$html_limit .= $Language->getText('trove_list','number_of_projects',array($querytotalcount));
+		$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount);
 		
 		// only display pages stuff if there is more to display
 		if ($querytotalcount > $TROVE_BROWSELIMIT) {
@@ -392,7 +392,7 @@ else {
 				<!--
 			//add files dtress.css, dtree.js et du dossier img
 				d = new dTree('d');	
-				d.add(0,-1,'<?php echo $Language->getText('project_tree','tree_project');?>');
+				d.add(0,-1,'<?php echo _('Project Tree');?>');
 				<?
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)

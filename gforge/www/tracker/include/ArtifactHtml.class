@@ -37,7 +37,7 @@ class ArtifactHtml extends Artifact {
 		$result = $this->getDetails();
 
 		$title_arr = array();
-		$title_arr[] = $Language->getText('tracker','detailed_description');
+		$title_arr[] = _('Detailed description');
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>'. util_line_wrap ( $result, 120,"\n"). '</pre></td></tr>';
@@ -54,14 +54,14 @@ class ArtifactHtml extends Artifact {
 
 		if ($rows > 0) {
 			$title_arr=array();
-			$title_arr[]=$Language->getText('tracker_artifacthtml','message');
+			$title_arr[]=_('Message');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>
-'.$Language->getText('tracker_artifacthtml','date').': '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
-'.$Language->getText('tracker_artifacthtml','sender').': ';
+'._('Date').': '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
+'._('Sender').': ';
 				if(db_result($result,$i,'user_id') == 100) {
 					echo db_result($result,$i,'realname');
 				} else {
@@ -74,7 +74,7 @@ class ArtifactHtml extends Artifact {
 
 		} else {
 			echo '
-				<h3>'.$Language->getText('tracker_artifacthtml','no_followups').'</h3>';
+				<h3>'._('No Followups Have Been Posted').'</h3>';
 		}
 	}
 
@@ -86,10 +86,10 @@ class ArtifactHtml extends Artifact {
 		if ($rows > 0) {
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('tracker_artifacthtml','field');
-			$title_arr[]=$Language->getText('tracker_artifacthtml','old_value');
-			$title_arr[]=$Language->getText('tracker_artifacthtml','date');
-			$title_arr[]=$Language->getText('tracker_artifacthtml','by');
+			$title_arr[]=_('Field');
+			$title_arr[]=_('Old Value');
+			$title_arr[]=_('Date');
+			$title_arr[]=_('By');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -126,7 +126,7 @@ class ArtifactHtml extends Artifact {
 
 		} else {
 			echo '
-			<h3>'.$Language->getText('tracker_artifacthtml','no_changes').'</h3>';
+			<h3>'._('No Changes Have Been Made to This Item').'</h3>';
 		}
 
 	}

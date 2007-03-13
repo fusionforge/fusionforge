@@ -26,7 +26,7 @@ if (session_loggedin()) {
 		*/
 		$result=db_query("SELECT * FROM snippet WHERE snippet_id='$id'");
 		if (!$result || db_numrows($result) < 1) {
-			exit_error($Language->getText('snippet_addversion','error_snippet_doesnt_exist'));
+			exit_error(_('Error, Error - snippet doesn\'t exist'));
 		}
 
 		/*
@@ -56,21 +56,21 @@ if (session_loggedin()) {
 						time()."','".htmlspecialchars($code)."')";
 				$result=db_query($sql);
 				if (!$result) {
-					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_version_insert');
+					$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');
 					echo db_error();
 				} else {
 					form_release_key(getStringFromRequest("form_key"));
-					$feedback .= $Language->getText('snippet_addversion','snippet_version_added_successfully');
+					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error($Language->getText('general','error'),$Language->getText('snippet_addversion','error_go_back_and_fill_in_all'));
+				exit_error(_('Error'),_('Error'));
 			}
 
 		}
-		snippet_header(array('title'=>$Language->getText('snippet_addversion','submit_a_new_snippet_version')));
+		snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/submit_a_new_snippet_version:TEXTMISSING')));
 
 		?>
-		<p><?php echo $Language->getText('snippet_addversion','if_you_have_modified_a_version'); ?></p>
+		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
@@ -80,22 +80,22 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_addversion','version'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Version:'); ?></strong><br />
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_addversion','changes'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Changes:'); ?></strong><br />
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
   
-		<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_addversion','paste_the_code_here'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here:'); ?></strong><br />
 			<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
 		</td></tr>
  
-		<tr><td colspan="2" style="text-align:center">
-			<strong><?php echo $Language->getText('snippet_addversion','make_sure_all_info_is_complete'); ?></strong>
+		<tr><td colspan="2" align="center">
+			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
-			<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_addversion','submit'); ?>" />
+			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
 		</td></tr>
 		</table></form></p>
 		<?php
@@ -112,7 +112,7 @@ if (session_loggedin()) {
 		*/
 		$result=db_query("SELECT * FROM snippet_package WHERE snippet_package_id='$id'");
 		if (!$result || db_numrows($result) < 1) {
-			exit_error($Language->getText('snippet_addversion','error_snippet_package_doesnt_exist'));
+			exit_error(_('Error, Error - snippet_package doesn\'t exist'));
 		}
 
 		if (getStringFromRequest('post_changes')) {
@@ -138,19 +138,19 @@ if (session_loggedin()) {
 				$result=db_query($sql);
 				if (!$result) {
 					//error in database
-					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_package_version_insert');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_submit_a_new_snippet_package')));
+					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');
+					snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/title_submit_a_new_snippet_package:TEXTMISSING')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
 				} else {
 					//so far so good - now add snippets to the package
-					$feedback .= $Language->getText('snippet_addversion','snippet_package_version_added_successfully');
+					$feedback .= _('Snippet Package Version Added Successfully.');
 
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_add_snippet_to_package')));
+					snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/title_add_snippet_to_package:TEXTMISSING')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -168,13 +168,13 @@ function show_add_snippet_box() {
 </script>
 <body onLoad="show_add_snippet_box()">
 
-<p><span class="important"><?php echo $Language->getText('snippet_addversion','important'); ?></span></p>
+<p><span class="important"><?php echo _('IMPORTANT!'); ?></span></p>
 <p>
-<?php echo $Language->getText('snippet_addversion','if_new_window_opened'); ?>
+<?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?>
 </p>
 <p>
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_addversion','link_add_snippets_to_package'); ?></a></p>
-<p><?php echo $Language->getText('snippet_addversion','browse_the_library'); ?></p>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo _('Add Snippets To Package'); ?></a></p>
+<p><?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?></p>
 <p>
 
 					<?php
@@ -185,16 +185,16 @@ function show_add_snippet_box() {
 
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error( $Language->getText('snippet_addversion','error_go_back_and_fill_in_all'));
+				exit_error( _('Error - Go back and fill in all the information'));
 			}
 
 		}
-		snippet_header(array('title'=>$Language->getText('snippet_addverion','title_submit_a_new_snippet_version')));
+		snippet_header(array('title'=>_('MISSINGTEXT:snippet_addverion/title_submit_a_new_snippet_version:TEXTMISSING')));
 
 		?>
 		</p>
 		<p>
-		<?php echo $Language->getText('snippet_addversion','if_you_have_modified'); ?></p>
+		<?php echo _('If you have modified a version of a package and you feel it is significant enough to share with others, please do so.'); ?></p>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
@@ -204,18 +204,18 @@ function show_add_snippet_box() {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_addversion','version'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Version:'); ?></strong><br />
 			<input type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_addversion','changes'); ?></strong><br />
+		<tr><td colspan="2"><strong><?php echo _('Changes:'); ?></strong><br />
 			<textarea name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2" style="text-align:center">
-			<strong><?php echo $Language->getText('snippet_addversion','make_sure_all_info_is_complete'); ?></strong>
+		<tr><td colspan="2" align="center">
+			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
-			<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_addversion','submit'); ?>" />
+			<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
 		</td></tr>
 		</table></form></p>
 		<?php
@@ -224,7 +224,7 @@ function show_add_snippet_box() {
 
 
 	} else {
-		exit_error($Language->getText('snippet_addversion','error_url_or_form'));
+		exit_error(_('Error, Error - was the URL or form mangled??'));
 	}
 
 } else {

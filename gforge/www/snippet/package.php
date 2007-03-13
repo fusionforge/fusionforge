@@ -42,13 +42,13 @@ if (session_loggedin()) {
 			if (!$result) {
 				//error in database
 				form_release_key(getStringFromRequest("form_key"));
-				$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_insert');
-				snippet_header(array('title'=>$Language->getText('snippet_package','title')));
+				$feedback .= _('ERROR DOING SNIPPET PACKAGE INSERT!');
+				snippet_header(array('title'=>_('Submit A New Snippet Package')));
 				echo db_error();
 				snippet_footer(array());
 				exit;
 			} else {
-				$feedback .= $Language->getText('snippet_package','snippet_package_added_successfull');
+				$feedback .= _('Snippet Package Added Successfully.');
 				$snippet_package_id=db_insertid($result,'snippet_package','snippet_package_id');
 				/*
 					create the snippet package version
@@ -60,19 +60,19 @@ if (session_loggedin()) {
 				$result=db_query($sql);
 				if (!$result) {
 					//error in database
-					$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_version');
-					snippet_header(array('title'=>$Language->getText('snippet_package','title_new_snippet_package')));
+					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');
+					snippet_header(array('title'=>_('Submit A New Snippet Package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
 				} else {
 					//so far so good - now add snippets to the package
-					$feedback .= $Language->getText('snippet_package','snippet_version_added_successfull');
+					$feedback .= _('Snippet Pacakge Version Added Successfully.');
 
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>$Language->getText('snippet_package','add_snippet_to_package')));
+					snippet_header(array('title'=>_('Add Snippets to Package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -92,14 +92,14 @@ function show_add_snippet_box() {
 <body onload="show_add_snippet_box()">
 
 <p>
-<span class="important"><?php echo $Language->getText('snippet_package','important'); ?></span>
+<span class="important"><?php echo _('IMPORTANT!'); ?></span>
 <p>
-<?php echo $Language->getText('snippet_package','if_a_new_window'); ?></p>
+<?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?></p>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo $Language->getText('snippet_package','add_snippet_to'); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo _('Add Snippets To Package'); ?></a></p>
 
 <p>
-<?php echo $Language->getText('snippet_package','browse_the_libary'); ?>
+<?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?>
 <p>
 
 					<?php
@@ -110,14 +110,14 @@ function show_add_snippet_box() {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error($Language->getText('general','error'),$Language->getText('snippet_package','error_go_back_and_fill'));
+			exit_error(_('Error'),_('Error'));
 		}
 
 	}
-	snippet_header(array('title'=>$Language->getText('snippet_package','title')));
+	snippet_header(array('title'=>_('Submit A New Snippet Package')));
 
 	?>
-	</p><?php echo $Language->getText('snippet_package','you_can_group'); ?></p>
+	</p><?php echo _('<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.</p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.'); ?></p>
 	<p/>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
@@ -126,36 +126,36 @@ function show_add_snippet_box() {
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_package','snippet_title'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Title:'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="name" size="45" maxlength="60" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_package','description'); ?></strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Description:'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="description" rows="5" cols="45"></textarea>
 	</td></tr>
 
 	<tr>
-	<td><strong><?php echo $Language->getText('snippet_package','language') ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Language') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_language'); ?></a>-->
+		<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a>-->
 	</td>
 
-	<td><strong><?php echo $Language->getText('snippet_package','category') ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Category') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
-		<!-- <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_package','suggest_a_category'); ?></a>-->
+		<!-- <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a>-->
 	</td>
 	</tr>
  
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_package','version') ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Version') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
 
-	<tr><td colspan="2" style="text-align:center">
-		<strong><?php echo $Language->getText('snippet_package','make_sure_all_info'); ?></strong>
+	<tr><td colspan="2" align="center">
+		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_package','submit'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
 	</td></tr>
 
 	</table></form>

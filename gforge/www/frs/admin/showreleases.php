@@ -81,7 +81,7 @@ if ($func=='delete_release' && $release_id) {
 	if (!$frsr->delete($sure,$really_sure)) {
 		exit_error('Error',$frsr->getErrorMessage());
 	} else {
-		$feedback .= $Language->getText('frs_admin','deleted');
+		$feedback .= _('Deleted');
 	}
 }
 
@@ -90,18 +90,18 @@ if ($func=='delete_release' && $release_id) {
 */
 $rs =& $frsp->getReleases();
 if (count($rs) < 1) {
-	exit_error($Language->getText('general','error'),$Language->getText('project_admin_showreleases','no_release'));
+	exit_error(_('Error'),_('Error'));
 }
 
 /*
 	Display a list of releases in this package
 */
-frs_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id));
+frs_admin_header(array('title'=>_('Release New File Version'),'group'=>$group_id));
 
 $title_arr=array();
-$title_arr[]=$Language->getText('project_admin_showreleases','package_name');
-$title_arr[]=$Language->getText('project_admin_showreleases','release_name');
-$title_arr[]=$Language->getText('project_admin_showreleases','date');
+$title_arr[]=_('Package Name');
+$title_arr[]=_('Release Name');
+$title_arr[]=_('Date');
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -111,10 +111,10 @@ for ($i=0; $i<count($rs); $i++) {
 			<td><a href="editrelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
 				.'&amp;release_id='.$rs[$i]->getID().'">'. 
-				$rs[$i]->getName().' ['.$Language->getText('general','edit').']</a>
+				$rs[$i]->getName().' ['._('Edit').']</a>
 				<a href="deleterelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
-				.'&amp;release_id='.$rs[$i]->getID().'">['.$Language->getText('general','delete').']</td><td>'.
+				.'&amp;release_id='.$rs[$i]->getID().'">['._('Delete').']</td><td>'.
 				date('Y-m-d H:i',$rs[$i]->getReleaseDate()).'</td></tr>';
 }
 

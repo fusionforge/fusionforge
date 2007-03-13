@@ -55,6 +55,31 @@ gforge/etc/httpd.d/00listen443.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
 gforge/gforge-install.sh -text
+gforge/locales/bg/LC_MESSAGES/gforge.mo -text
+gforge/locales/ca/LC_MESSAGES/gforge.mo -text
+gforge/locales/de/LC_MESSAGES/gforge.mo -text
+gforge/locales/el/LC_MESSAGES/gforge.mo -text
+gforge/locales/en/LC_MESSAGES/gforge.mo -text
+gforge/locales/eo/LC_MESSAGES/gforge.mo -text
+gforge/locales/es/LC_MESSAGES/gforge.mo -text
+gforge/locales/eu/LC_MESSAGES/gforge.mo -text
+gforge/locales/fr/LC_MESSAGES/gforge.mo -text
+gforge/locales/he/LC_MESSAGES/gforge.mo -text
+gforge/locales/id/LC_MESSAGES/gforge.mo -text
+gforge/locales/it/LC_MESSAGES/gforge.mo -text
+gforge/locales/ja/LC_MESSAGES/gforge.mo -text
+gforge/locales/ko/LC_MESSAGES/gforge.mo -text
+gforge/locales/la/LC_MESSAGES/gforge.mo -text
+gforge/locales/nb/LC_MESSAGES/gforge.mo -text
+gforge/locales/nl/LC_MESSAGES/gforge.mo -text
+gforge/locales/pl/LC_MESSAGES/gforge.mo -text
+gforge/locales/pt/LC_MESSAGES/gforge.mo -text
+gforge/locales/pt_BR/LC_MESSAGES/gforge.mo -text
+gforge/locales/ru/LC_MESSAGES/gforge.mo -text
+gforge/locales/sv/LC_MESSAGES/gforge.mo -text
+gforge/locales/th/LC_MESSAGES/gforge.mo -text
+gforge/locales/zh_CN/LC_MESSAGES/gforge.mo -text
+gforge/locales/zh_TW/LC_MESSAGES/gforge.mo -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
@@ -907,6 +932,32 @@ gforge/plugins/webcalendar/www/year.php -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
+gforge/translations/bg.po -text
+gforge/translations/ca.po -text
+gforge/translations/de.po -text
+gforge/translations/el.po -text
+gforge/translations/en.po -text
+gforge/translations/eo.po -text
+gforge/translations/es.po -text
+gforge/translations/eu.po -text
+gforge/translations/fr.po -text
+gforge/translations/gforge.pot -text
+gforge/translations/he.po -text
+gforge/translations/id.po -text
+gforge/translations/it.po -text
+gforge/translations/ja.po -text
+gforge/translations/ko.po -text
+gforge/translations/la.po -text
+gforge/translations/nb.po -text
+gforge/translations/nl.po -text
+gforge/translations/pl.po -text
+gforge/translations/pt.po -text
+gforge/translations/pt_BR.po -text
+gforge/translations/ru.po -text
+gforge/translations/sv.po -text
+gforge/translations/th.po -text
+gforge/translations/zh_CN.po -text
+gforge/translations/zh_TW.po -text
 gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
@@ -1306,3 +1357,5 @@ gforge/www/themes/ultralite/images/forum_add.gif -text
 gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text
+tools/make-mo.sh -text
+tools/update-gettext-files.sh -text

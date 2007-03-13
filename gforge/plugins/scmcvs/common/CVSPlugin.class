@@ -12,6 +12,7 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = 'scm_stats';
 
 		$this->hooks[] = 'scm_plugin';
+//		$this->hooks[] = 'group_approved';
 
 		require_once('plugins/scmcvs/config.php') ;
 
@@ -49,6 +50,9 @@ class CVSPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
+// 		case "group_approved":
+// 			$this->groupApproved ($params) ;
+// 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -70,7 +74,7 @@ class CVSPlugin extends SCM {
 		
 		if ($project->usesPlugin($this->name)) {
 		
-			print $Language->getText('plugin_scmcvs','documentation');
+			print _('MISSINGTEXT:plugin_scmcvs/documentation:TEXTMISSING');
 
 			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
 			$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
@@ -94,27 +98,27 @@ class CVSPlugin extends SCM {
 			 	<?php
 				// ######################## Anonymous CVS Instructions
 				if ($project->enableAnonSCM()){
-					echo $Language->getText('plugin_scmcvs', 'anoncvs');
+					echo _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
 					print '
 						<p>
 						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
-						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'.$Language->getText('plugin_scmcvs', 'modulename').'</em></tt>
+						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 						</p>';
 				}
 
 				// ######################## Developer Access
-				echo $Language->getText('plugin_scmcvs', 'devcvs');
+				echo _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
 				print '
 					<p>
 					<tt>export CVS_RSH=ssh</tt><br/>
-					<tt>cvs -d :ext:<em>'.$Language->getText('plugin_scmcvs', 'developername').'</em>@'.$cvsrootend.' checkout <em>'.$Language->getText('plugin_scmcvs', 'modulename').'</em></tt>
+					<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('developername').'</em></tt>
 					</p>';
 
 				// ######################## CVS Snapshot
 				if ($displayCvsBrowser) {
 					print '
 						<p>
-						[<a href="/snapshots.php?group_id='.$group_id.'">'.$Language->getText('plugin_scmcvs', 'download_snapshot').'</a>]
+						[<a href="/snapshots.php?group_id='.$group_id.'">'._('Download The Nightly CVS Tree Snapshot').'</a>]
 						</p>';
 	 			}
 				?>
@@ -123,11 +127,11 @@ class CVSPlugin extends SCM {
 				<td width="35%" valign="top">
 				<?php
 				// ######################## CVS Browsing 
-				echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
+				echo $HTML->boxTop(_('Repository History'));
 				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displayCvsBrowser){
-					echo $Language->getText('plugin_scmcvs', 'browsetree');
-					echo '<p>[<a href="/scm/viewvc.php/?root='.$project->getUnixName().'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
+					echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+					echo '<p>[<a href="/scm/viewvc.php/?root='.$project->getUnixName().'">'._('Browse CVS Repository').'</a>]</p>' ;
 					$hook_params['project_name'] = $project->getUnixName();
 					plugin_hook ("cvs_stats", $hook_params) ;
 				}
@@ -177,9 +181,9 @@ class CVSPlugin extends SCM {
 		if ($group->usesPlugin($this->name)) {
 			?>
 			<p>
-			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo $Language->getText('plugin_scmcvs','enable_anonymous_cvs') ?></strong>
+			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong>
 			<br />
-			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> /><strong><?php echo $Language->getText('plugin_scmcvs','enable_pserver') ?></strong>
+			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> /><strong><?php echo _('Enable pserver') ?></strong>
 			</p>
 			<?php
 		}
@@ -208,7 +212,7 @@ class CVSPlugin extends SCM {
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (CVS: '.$Language->getText('plugin_scmcvs','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+			echo ' (CVS: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 	
@@ -226,9 +230,9 @@ class CVSPlugin extends SCM {
 		
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
-				$Language->getText('plugin_scmcvs', 'realname'),
-				$Language->getText('plugin_scmcvs', 'adds'),
-				$Language->getText('plugin_scmcvs', 'commits')
+				_('Name'),
+				_('Adds'),
+				_('Commits')
 			);
 			echo $HTML->listTableTop($tableHeaders);
 
@@ -245,7 +249,7 @@ class CVSPlugin extends SCM {
 				$i++;
 			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			echo '<td width="50%"><strong>'.$Language->getText('plugin_scmcvs', 'total').':</strong></td>'.
+			echo '<td width="50%"><strong>'._('Total').':</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
 			echo '</tr>';
@@ -253,6 +257,20 @@ class CVSPlugin extends SCM {
 			echo '<hr size="1" />';
 		}
 	}
+
+/*
+	function groupApproved ($params) {
+		$group_id = $params['group_id'] ;
+	
+		$project =& group_get_object($group_id);
+
+		if ($this->enabled_by_default) {
+			$group->setPluginUse("scmcvs", 1) ;
+		} else {
+			$group->setPluginUse("scmcvs", 0) ;
+		}
+	}
+*/
 }
 
 // Local Variables:

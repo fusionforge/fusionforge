@@ -48,7 +48,7 @@ if ($group_id && $atid) {
 		exit_error('Error','ArtifactType could not be created');
 	}
 	if ($ath->isError()) {
-		exit_error($Language->getText('general','error').'',$ath->getErrorMessage());
+		exit_error(_('Error').'',$ath->getErrorMessage());
 	}
 	if (!$ath->userIsAdmin()) {
 		exit_permission_denied();
@@ -127,7 +127,7 @@ if ($group_id && $atid) {
 
 } elseif ($group_id) {
 	if (getStringFromRequest('tracker_deleted')) {
-		$feedback .= $Language->getText('tracker_admin','deleted');
+		$feedback .= _('Successfully Deleted.');
 	}
 
 	include ('ind.php');

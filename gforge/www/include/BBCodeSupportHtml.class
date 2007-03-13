@@ -42,20 +42,20 @@ class BBCodeSupportHtml extends BBCodeSupport {
 		
 		
 		// Helpline messages
-		b_help = "<?php echo $Language->getText('bbcode','bbcode_b_help'); ?>";
-		i_help = "<?php echo $Language->getText('bbcode','bbcode_i_help'); ?>";
-		u_help = "<?php echo $Language->getText('bbcode','bbcode_u_help'); ?>";
-		q_help = "<?php echo $Language->getText('bbcode','bbcode_q_help'); ?>";
-		c_help = "<?php echo $Language->getText('bbcode','bbcode_c_help'); ?>";
-		l_help = "<?php echo $Language->getText('bbcode','bbcode_l_help'); ?>";
-		o_help = "<?php echo $Language->getText('bbcode','bbcode_o_help'); ?>";
-		p_help = "<?php echo $Language->getText('bbcode','bbcode_p_help'); ?>";
-		w_help = "<?php echo $Language->getText('bbcode','bbcode_w_help'); ?>";
-		a_help = "<?php echo $Language->getText('bbcode','bbcode_a_help'); ?>";
-		s_help = "<?php echo $Language->getText('bbcode','bbcode_s_help'); ?>";
-		f_help = "<?php echo $Language->getText('bbcode','bbcode_f_help'); ?>";
-		k_help = "<?php echo $Language->getText('bbcode','bbcode_k_help'); ?>";
-		h_help = "<?php echo $Language->getText('bbcode','bbcode_h_help'); ?>";
+		b_help = "<?php echo _('Bold text: [b]text[/b]  (alt+b)'); ?>";
+		i_help = "<?php echo _('Italic text: [i]text[/i]  (alt+i)'); ?>";
+		u_help = "<?php echo _('Underline text: [u]text[/u]  (alt+u)'); ?>";
+		q_help = "<?php echo _('Quote text : [quote]text[/quote]  (alt+q)'); ?>";
+		c_help = "<?php echo _('Code display: [code]code[/code]  (alt+c)'); ?>";
+		l_help = "<?php echo _('List: [list]text[/list] (alt+l)'); ?>";
+		o_help = "<?php echo _('Ordered list: [list=]text[/list]  (alt+o)'); ?>";
+		p_help = "<?php echo _('Insert image: [img]http://image_url[/img]  (alt+p)'); ?>";
+		w_help = "<?php echo _('Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)'); ?>";
+		a_help = "<?php echo _('Close all open bbCode tags'); ?>";
+		s_help = "<?php echo _('Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000'); ?>";
+		f_help = "<?php echo _('Font size: [size=x-small]small text[/size]'); ?>";
+		k_help = "<?php echo _('Link to Task: [task]Forumid:Subproject:Taskid:TaskName[/task]   (alt+k)'); ?>";
+		h_help = "<?php echo _('Link to Artifact: [artifact]ArtifactID[/artifact]   (alt+h)'); ?>";
 		
 		// Define the bbCode tags
 		bbcode = new Array();
@@ -257,39 +257,39 @@ class BBCodeSupportHtml extends BBCodeSupport {
 			<td colspan="9"> 
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr> 
-				  <td>&nbsp;<?php echo $Language->getText('bbcode','font_color'); ?>: 
+				  <td>&nbsp;<?php echo _('Font colour'); ?>: 
 					<select name="addbbcode18" onChange="bbfontstyle('[color=' + this.form.addbbcode18.options[this.form.addbbcode18.selectedIndex].value + ']', '[/color]')" onMouseOver="helpline('s')">
-					  <option style="color:black; background-color: #FFFFFF " value="default" ><?php echo $Language->getText('bbcode','color_default'); ?></option>
-					  <option style="color:darkred; background-color: #DEE3E7" value="darkred" ><?php echo $Language->getText('bbcode','color_dark_red'); ?></option>
-					  <option style="color:red; background-color: #DEE3E7" value="red" ><?php echo $Language->getText('bbcode','color_red'); ?></option>
-					  <option style="color:orange; background-color: #DEE3E7" value="orange" ><?php echo $Language->getText('bbcode','color_orange'); ?></option>
-					  <option style="color:brown; background-color: #DEE3E7" value="brown" ><?php echo $Language->getText('bbcode','color_brown'); ?></option>
-					  <option style="color:yellow; background-color: #DEE3E7" value="yellow" ><?php echo $Language->getText('bbcode','color_yellow'); ?></option>
-					  <option style="color:green; background-color: #DEE3E7" value="green" ><?php echo $Language->getText('bbcode','color_green'); ?></option>
-					  <option style="color:olive; background-color: #DEE3E7" value="olive" ><?php echo $Language->getText('bbcode','color_olive'); ?></option>
-					  <option style="color:cyan; background-color: #DEE3E7" value="cyan" ><?php echo $Language->getText('bbcode','color_cyan'); ?></option>
-					  <option style="color:blue; background-color: #DEE3E7" value="blue" ><?php echo $Language->getText('bbcode','color_blue'); ?></option>
-					  <option style="color:darkblue; background-color: #DEE3E7" value="darkblue" ><?php echo $Language->getText('bbcode','color_dark_blue'); ?></option>
-					  <option style="color:indigo; background-color: #DEE3E7" value="indigo" ><?php echo $Language->getText('bbcode','color_indigo'); ?></option>
-					  <option style="color:violet; background-color: #DEE3E7" value="violet" ><?php echo $Language->getText('bbcode','color_violet'); ?></option>
-					  <option style="color:white; background-color: #DEE3E7" value="white" ><?php echo $Language->getText('bbcode','color_white'); ?></option>
-					  <option style="color:black; background-color: #DEE3E7" value="black" ><?php echo $Language->getText('bbcode','color_black'); ?></option>
-					</select> &nbsp;<?php echo $Language->getText('bbcode','font_size'); ?>:<select name="addbbcode20" onChange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]')" onMouseOver="helpline('f')">
-					  <option value="7" ><?php echo $Language->getText('bbcode','font_tiny'); ?></option>
-					  <option value="9" ><?php echo $Language->getText('bbcode','font_small'); ?></option>
-					  <option value="12" selected ><?php echo $Language->getText('bbcode','font_normal'); ?></option>
-					  <option value="18" ><?php echo $Language->getText('bbcode','font_large'); ?></option>
-					  <option  value="24" ><?php echo $Language->getText('bbcode','font_huge'); ?></option>
+					  <option style="color:black; background-color: #FFFFFF " value="default" ><?php echo _('Default'); ?></option>
+					  <option style="color:darkred; background-color: #DEE3E7" value="darkred" ><?php echo _('Dark Red'); ?></option>
+					  <option style="color:red; background-color: #DEE3E7" value="red" ><?php echo _('Red'); ?></option>
+					  <option style="color:orange; background-color: #DEE3E7" value="orange" ><?php echo _('Orange'); ?></option>
+					  <option style="color:brown; background-color: #DEE3E7" value="brown" ><?php echo _('Brown'); ?></option>
+					  <option style="color:yellow; background-color: #DEE3E7" value="yellow" ><?php echo _('Yellow'); ?></option>
+					  <option style="color:green; background-color: #DEE3E7" value="green" ><?php echo _('Green'); ?></option>
+					  <option style="color:olive; background-color: #DEE3E7" value="olive" ><?php echo _('Olive'); ?></option>
+					  <option style="color:cyan; background-color: #DEE3E7" value="cyan" ><?php echo _('Cyan'); ?></option>
+					  <option style="color:blue; background-color: #DEE3E7" value="blue" ><?php echo _('Blue'); ?></option>
+					  <option style="color:darkblue; background-color: #DEE3E7" value="darkblue" ><?php echo _('Dark Blue'); ?></option>
+					  <option style="color:indigo; background-color: #DEE3E7" value="indigo" ><?php echo _('Indigo'); ?></option>
+					  <option style="color:violet; background-color: #DEE3E7" value="violet" ><?php echo _('Violet'); ?></option>
+					  <option style="color:white; background-color: #DEE3E7" value="white" ><?php echo _('White'); ?></option>
+					  <option style="color:black; background-color: #DEE3E7" value="black" ><?php echo _('Black'); ?></option>
+					</select> &nbsp;<?php echo _('Font size'); ?>:<select name="addbbcode20" onChange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]')" onMouseOver="helpline('f')">
+					  <option value="7" ><?php echo _('Tiny'); ?></option>
+					  <option value="9" ><?php echo _('Small'); ?></option>
+					  <option value="12" selected ><?php echo _('Normal'); ?></option>
+					  <option value="18" ><?php echo _('Large'); ?></option>
+					  <option  value="24" ><?php echo _('Huge'); ?></option>
 					</select>
 					</span></td>
-				  <td nowrap="nowrap" align="right"><span class="gensmall"><a href="javascript:bbstyle(-1)"  onMouseOver="helpline('a')"><?php echo $Language->getText('bbcode','close_tags'); ?></a></span></td>
+				  <td nowrap="nowrap" align="right"><span class="gensmall"><a href="javascript:bbstyle(-1)"  onMouseOver="helpline('a')"><?php echo _('Close Tags'); ?></a></span></td>
 				</tr>
 			  </table>
 			</td>
 		  </tr>
 		  <tr> 
 			<td colspan="9"> 
-			  <input type="text" name="helpbox" size="45" maxlength="100" style="width:450px; font-size:10px" value="<?php echo $Language->getText('bbcode','styles_tip'); ?>" />
+			  <input type="text" name="helpbox" size="45" maxlength="100" style="width:450px; font-size:10px" value="<?php echo _('Tip: Styles can be applied quickly to selected text'); ?>" />
 			  </td>
 		  </tr>
 	  </table>

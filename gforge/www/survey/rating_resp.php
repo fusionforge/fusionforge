@@ -29,10 +29,10 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 
-$HTML->header(array('title'=>$Language->getText('survey_rating_resp','title')));
+$HTML->header(array('title'=>_('Voting')));
 
 if (!session_loggedin()) {
-	echo "<h2>".$Language->getText('survey_rating_resp','you_must_be_logged_in')."</h2>";
+	echo "<h2>"._('You must be logged in to vote')."</h2>";
 } else {
 	$vote_on_id = getIntFromRequest('vote_on_id');
 	$response = getStringFromRequest('response');
@@ -52,17 +52,17 @@ if (!session_loggedin()) {
 			"VALUES ('".user_getid()."','$flag','$vote_on_id','$response','".time()."')";
 		$result=db_query($sql);
 		if (!$result) {
-			$feedback .= $Language->getText('survey_rating_resp','error');
-			echo "<h1>".$Language->getText('survey_rating_resp','error_in_insert')."</h1>";
+			$feedback .= _('ERROR');
+			echo "<h1>"._('Error in insert')."</h1>";
 			echo db_error();
 		} else {
-			$feedback .= $Language->getText('survey_rating_resp','vote_reg');
-			echo "<h2>".$Language->getText('survey_rating_resp','vote_regsitered')."</h2>";
-			echo "<a href=\"javascript:history.back()\"><strong>".$Language->getText('survey_rating_resp','click_to_resturn')."</strong></a>".
-				"<p>".$Language->getText('survey_rating_resp','if_you_vote_again')."</p>";
+			$feedback .= _('Vote registered');
+			echo "<h2>"._('Vote Registered')."</h2>";
+			echo "<a href=\"javascript:history.back()\"><strong>"._('Click to return to previous page')."</strong></a>".
+				"<p>"._('If you vote again, your old vote will be erased.')."</p>";
 		}
 	} else {
-		echo "<h1>".$Language->getText('survey_rating_resp','error_missing')."</h1>";
+		echo "<h1>"._('ERROR!!! MISSING PARAMS')."</h1>";
 	}
 }
 $HTML->footer(array());

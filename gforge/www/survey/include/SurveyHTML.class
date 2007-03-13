@@ -42,7 +42,7 @@ class SurveyHTML extends Error {
 		
 		if ($project =& group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-			exit_error($Language->getText('general','error'), $Language->getText('survey_utils','error_this_group_has_turned_off'));
+			exit_error(_('Error'), _('Error'));
 			}
 			
 			site_project_header($params);
@@ -50,11 +50,11 @@ class SurveyHTML extends Error {
 			if ($is_admin_page && $group_id) {
 				echo ($HTML->subMenu(
 					array(
-						$Language->getText('group','short_survey'),
-						$Language->getText('survey_utils','admin'),
-						$Language->getText('survey_utils','edit_survey'),
-						$Language->getText('survey_utils','edit_questions'),
-						$Language->getText('survey_utils','show_results')
+						_('Surveys'),
+						_('Admin'),
+						_('Edit Survey'),
+						_('Edit Questions'),
+						_('Show Results')
 					),
 					array(
 						'/survey/?group_id='.$group_id,
@@ -71,7 +71,7 @@ class SurveyHTML extends Error {
 
 						echo ($HTML->subMenu(
 							array(
-								$Language->getText('survey_utils','admin')
+								_('Admin')
 							),
 							array(
 								'/survey/admin/?group_id='.$group_id
@@ -100,19 +100,19 @@ class SurveyHTML extends Error {
 		global $group_id;
 
 		/* Default is add */
-		$title = $Language->getText('survey_add_question','title');
-		$question_button = $Language->getText('survey_add_question','add_this_question');
+		$title = _('Add A Question');
+		$question_button = _('Add This Question.');
 		
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
-			$title = $Language->getText('survey_edit_question','title');
+			$title = _('Edit A Question');
 			$warning = '<span class="warning">'. 
-				$Language->getText('survey_edit_question','warning_change_after_response').
+				_('WARNING! It is a bad idea to change a question after responses to it have been submitted').
 				'</span>';
 			$question_id = $q->getID();
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
-			$question_button = $Language->getText('survey_edit', 'submit_changes');
+			$question_button = _('Submit Changes');
 		}
 
 		$ret = '<h2>'. $title. '</h2>';
@@ -122,9 +122,9 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '">';
-		$ret.=$Language->getText('survey_add_question','question').':<br />';
+		$ret.=_('Question').':<br />';
 		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
-		$ret.='<p>'. $Language->getText('survey_edit_question','question_type').':<br />';
+		$ret.='<p>'. _('Question Type').':<br />';
 	
 		$sql="SELECT * from survey_question_types";
 		$result=db_query($sql);
@@ -147,20 +147,20 @@ class SurveyHTML extends Error {
 		global $survey_id;
 
 		/* Default is add */
-		$title = $Language->getText('survey_add_survey','title');
-		$survey_button = $Language->getText('survey_add_survey','add_this_survey');
+		$title = _('Add A Survey');
+		$survey_button = _('Add This Survey');
 		$active = ' checked="checked" ';
 		$inactive = '';
 
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
-			$title = $Language->getText('survey_edit','title');
+			$title = _('Edit A Survey');
 			$warning = '<span class="warning">'. 
-				$Language->getText('survey_edit','warning_survey_after_response').'</span>';
+				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</span>';
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
 			$survey_questions = $s->getQuestionString();
-			$survey_button = $Language->getText('survey_edit', 'submit_changes');
+			$survey_button = _('Submit Changes');
 			if (!$s->isActive()) {
 				$inactive = 'checked ="checked" ';
 				$active ='';
@@ -175,20 +175,20 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '">';
-		$ret.='<strong>'. $Language->getText('survey_add_survey','name_of_survey').'</strong>' .utils_requiredField();
+		$ret.='<strong>'. _('Name Of Survey:').'</strong>' .utils_requiredField();
 		$ret.= '<input type="text" name="survey_title" value="'.$survey_title.'" length="60" maxlength="150" /><p>';
 		
-		$ret.='<p><strong>'. $Language->getText('survey_add_survey','is_active').'</strong>';
-		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'.$Language->getText('survey_add_survey','yes');
-		$ret.='<br /><input type="radio" name="is_active" value="0"' .$inactive. '/>'.$Language->getText('survey_add_survey','no');
+		$ret.='<p><strong>'. _('Is Active?').'</strong>';
+		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'._('Yes');
+		$ret.='<br /><input type="radio" name="is_active" value="0"' .$inactive. '/>'._('No');
 
 		$arr_to_add = & $s->getAddableQuestionInstances();
 		$arr_to_del = & $s->getQuestionInstances();
 		
 		if (count($arr_to_add)>0) {
-			$ret.='<p><strong>'. $Language->getText('survey_edit','addable_question').'</strong>';
+			$ret.='<p><strong>'. _('Addable Questions').'</strong>';
 			$title_arr[] = "&nbsp;";
-			$title_arr[] = $Language->getText('survey_index', 'survey_questions');
+			$title_arr[] = _('Questions');
 			$title_arr[] = "&nbsp;";
 			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 		}
@@ -226,7 +226,7 @@ class SurveyHTML extends Error {
 	
 		/* Deletable questions */
 		if (count($arr_to_del) > 0) {
-			$ret.='<p><strong>'. $Language->getText('survey_edit','existing_question').'</strong>';
+			$ret.='<p><strong>'. _('Questions in this Survey').'</strong>';
 			$title_arr = array('Question ID', 'Question', 'Type', 'Order', 'Delete from this Survey');
 			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 		}
@@ -260,7 +260,7 @@ class SurveyHTML extends Error {
 		}
 	
 		/* Privous style question input text box. deprecated.		
-		$ret.= $Language->getText('survey_add_survey','list_questions_numbers');
+		$ret.= _('List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id\'s. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7');
 		$ret.='<br /><input type="text" name="survey_questions" value="" length="90" maxlength="1500" /></p>';
 		*/
 				
@@ -277,7 +277,7 @@ class SurveyHTML extends Error {
 		global $Language;
 		global $group_id;
 		
-		$ret = "<h3>" . count($questions).' '.$Language->getText('survey_show_questions','found',array($rows))."</h3>";
+		$ret = "<h3>" . count($questions).' '.sprintf(_('%1$s questions found'), $rows)."</h3>";
 				
 		/* Head information */
 		$title_arr = array ('Question ID', 'Question', 'Type', 'Edit/Delete');
@@ -298,9 +298,9 @@ class SurveyHTML extends Error {
 
 			/* Edit/Delete Link */
 			$ret.= "<td>[<a href=\"question.php?group_id=$group_id&amp;question_id=".$questions[$i]->getID().'">';
-			$ret.= $Language->getText('survey_admin', 'edit').'</a>] ';
+			$ret.= _('Edit').'</a>] ';
 			$ret.= "[<a href=\"question.php?delete=Y&amp;group_id=$group_id&amp;question_id=".$questions[$i]->getID().'">';
-			$ret.= $Language->getText('survey_admin', 'delete').'</a>]</td>';
+			$ret.= _('Delete').'</a>]</td>';
 
 			$ret.= "</tr>";
 		}
@@ -325,38 +325,38 @@ class SurveyHTML extends Error {
 		global $user_id;
 		global $group_id;
 
-		$ret = '<h2>'. $Language->getText('survey_edit','existing_surveys'). '</h2>';
+		$ret = '<h2>'. _('Existing Surveys'). '</h2>';
 
 		/* Head information */
 		if ($show_id) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_id');
+			$title_arr[] = _('Survey ID');
 		}
 
-		$title_arr[] = $Language->getText('survey_index', 'survey_title');
+		$title_arr[] = _('Survey Title');
 		
 		if ($show_questions) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_questions');
+			$title_arr[] = _('Questions');
 		}
 		if ($show_number_questions) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_number_questions');
+			$title_arr[] = _('Number of Questions');
 		}
 		if ($show_number_votes) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_number_votes');
+			$title_arr[] = _('Number of Votes');
 		}		
 		if ($show_vote && $user_id) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_vote');
+			$title_arr[] = _('Vote');
 		}
 		if ($show_edit) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_edit');
+			$title_arr[] = _('Edit');
 		}
 		if ($show_result) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_result');
+			$title_arr[] = _('Result');
 		}
 		if ($show_result_graph) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_result_graph');
+			$title_arr[] = _('Result with Graph');
 		}
 		if ($show_result_comment) {
-			$title_arr[] = $Language->getText('survey_index', 'survey_result_comments');
+			$title_arr[] = _('Result with Graph and Comments');
 		}
 
 		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
@@ -410,13 +410,13 @@ class SurveyHTML extends Error {
 				/* Edit/Delete Link */
 				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/survey.php?group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
-				$ret.= $Language->getText('survey_admin', 'edit').'</a>] ';
+				$ret.= _('Edit').'</a>] ';
 
 				/* We don;t support delete yet. Need to delete all results as well */
 				/*
 				$ret.= "[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/survey.php?delete=Y&amp;group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
-				$ret.= $Language->getText('survey_admin', 'delete').'</a>]
+				$ret.= _('Delete').'</a>]
                                 */
                                 $ret.='</td>';
 			}
@@ -424,18 +424,18 @@ class SurveyHTML extends Error {
 				/* Edit/Delete Link */
 				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
-				$ret.= $Language->getText('survey_index', 'survey_result').'</a>]</td>';
+				$ret.= _('Result').'</a>]</td>';
 			}
 			if ($show_result_graph) {
 				/* Edit/Delete Link */
 				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?graph=yes&amp;group_id=$group_id&amp;survey_id=".
 					$surveys[$i]->getID().'">';
-				$ret.= $Language->getText('survey_index', 'survey_result_graph').'</a>]</td>';
+				$ret.= _('Result with Graph').'</a>]</td>';
 			}
 			if ($show_result_comment) {
 				/* Edit/Delete Link */
 				$ret.= "<td>[<a href=\"".$GLOBALS['sys_urlprefix']."/survey/admin/show_results.php?graph=yes&amp;show_comment=yes&amp;group_id=$group_id&amp;survey_id=".$surveys[$i]->getID().'">';
-				$ret.= $Language->getText('survey_index', 'survey_result_comments').'</a>]</td>';
+				$ret.= _('Result with Graph and Comments').'</a>]</td>';
 			}
 			$ret.= "</tr>\n";
 		}
@@ -453,14 +453,14 @@ class SurveyHTML extends Error {
 		global $survey_id;
 		
 		if (!$s->isActive()) {
-			return '<span class="error">'. $Language->getText('survey_error','no_vote_for_inactive').'</span>';
+			return '<span class="error">'. _('MISSINGTEXT:survey_error/no_vote_for_inactive:TEXTMISSING').'</span>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
 		
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<span class="error">'. $Language->getText('survey','warning_double_vote').'</span>';
+			$ret.= '<span class="error">'. _('Warning - you are about to vote a second time on this survey.').'</span>';
 		} 
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
@@ -500,9 +500,9 @@ class SurveyHTML extends Error {
 			case 1: /* This is a radio-button question. Values 1-5.
 			  Show the 1-5 markers only if this is the first in a series */
 				if ($question_type != $last_question_type) {
-					$ret.='	<strong>1</strong>'.$Language->getText('survey','low').
+					$ret.='	<strong>1</strong>'._('Low').
 						'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' .
-						$Language->getText('survey','high').'<br />';
+						_('High').'<br />';
 				}
 				
 				for ($j=1; $j<=5; $j++) {
@@ -542,9 +542,9 @@ class SurveyHTML extends Error {
 			$last_question_type=$question_type;
 		}
 		
-		$ret.='<tr><td style="text-align:center" colspan="2">'.
-			'<input type="submit" name="submit" value="'.$Language->getText('general','submit').'" />'.
-			'<br /><a href="'.$GLOBALS['sys_urlprefix'].'/survey/privacy.php">'.$Language->getText('survey','survey_privacy').'</a>'.
+		$ret.='<tr><td align="center" colspan="2">'.
+			'<input type="submit" name="submit" value="'._('Submit').'" />'.
+			'<br /><a href="'.$GLOBALS['sys_urlprefix'].'/survey/privacy.php">'._('Survey Privacy').'</a>'.
 			'</td></tr></form></table>';
 		
 		return $ret;
@@ -579,7 +579,7 @@ class SurveyHTML extends Error {
 		
 		/* No votes, no result to show */
 		if ($votes==0) {
-			$ret.= '<ul><li/>'.$Language->getText('survey_show_results_aggregate','no_votes').'</ul>';
+			$ret.= '<ul><li/>'._('No Votes').'</ul>';
 			return $ret;
 		}
 
@@ -645,7 +645,7 @@ class SurveyHTML extends Error {
 		case 5:	/* This is a text-field question. */
 			if ($show_comment) {
 				for($j=0; $j<$totalCount; $j++) {
-					$ret.='<hr.><strong>'.$Language->getText('survey_show_results_aggregate','comments').
+					$ret.='<hr.><strong>'._('Comments').
 						' # '.($j+1).'/'.$totalCount. '</strong><p/>';
 					$ret.='<pre>';
 					$words = explode(" ",$results[$j]);
@@ -653,7 +653,7 @@ class SurveyHTML extends Error {
 					$linelength = 0;
 					//print 100 chars in words per line
 					foreach ($words as $word) {
-						// if we have a stupidly strange word with lots of letters, weï¿½ll make a new line for it and split it
+						// if we have a stupidly strange word with lots of letters, we´ll make a new line for it and split it
 						if ( (strlen($word)>100) && ((strlen($word)+$linelength)>100)) {	
 							$chunks = $this->split_str($word,50);
 							foreach ($chunks as $chunk) {
@@ -677,7 +677,7 @@ class SurveyHTML extends Error {
 				$ret.='<ul><li><a href="show_results.php?survey_id='.$Survey->getID().
 					'&amp;question_id='.$Question->getID().
 					'&amp;group_id='.$group_id.'">'.
-					$Language->getText('survey_show_results_aggregate','view_comments', $totalCount).
+					sprintf(_('View All %1$s Comments'), $totalCount).
 					'</a></ul><p/>';
 			}
 		

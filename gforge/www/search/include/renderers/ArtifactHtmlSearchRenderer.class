@@ -41,10 +41,10 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
 		
 		$this->tableHeaders = array(
-			$this->Language->getText('search', 'artifact_id'),
-			$this->Language->getText('search', 'artifact_summary'),
-			$this->Language->getText('search', 'artifact_author'),
-			$this->Language->getText('search', 'artifact_date')
+			_('#'),
+			_('Summary'),
+			_('Submitted By'),
+			_('Date')
 		);
 	}
 	

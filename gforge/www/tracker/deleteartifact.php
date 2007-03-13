@@ -9,7 +9,7 @@
  *
  */
 
-$ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
+$ath->header(array ('title'=>_('MISSINGTEXT:tracker_mod/delete_title:TEXTMISSING').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 
 // $atid, $aid and $group_id are set in tracker.php
 
@@ -23,14 +23,14 @@ $ath->header(array ('title'=>$Language->getText('tracker_mod','delete_title').':
 <table border="0" align="center">
 
 	<tr>
-		<td class="veryimportant"><?php echo $Language->getText('tracker_artifact','are_you_sure_delete'); ?>
+		<td class="veryimportant"><?php echo _('Are you sure you want to delete this artifact?'); ?>
 			<h3>&quot;<?php echo $ah->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo $Language->getText('tracker_artifact','confirm_delete'); ?></td>
+		<td align="center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo _('Yes, I want to delete this artifact'); ?></td>
 	</tr>
 	<tr>
-		<td style="text-align:center"><input type="submit" value="<?php echo $Language->getText('general','submit'); ?>" name="submit" /></td>
+		<td align="center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>
 	</tr>
 
 </table>

@@ -19,7 +19,7 @@ require_once('site_stats_utils.php');
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>$Language->getText('stats','title',array($GLOBALS['sys_name']))));
+$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_name'])));
 
 //
 // BEGIN PAGE CONTENT CODE
@@ -36,9 +36,9 @@ print '<h3>'.$Language->getText('stats_index','sitewide_aggregate_statistics
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><strong><?php echo $Language->getText('stats_index','overview_stats'); ?></strong></td>
-<td><a href="projects.php"><?php echo $Language->getText('stats_index','project_stats'); ?></a></td>
-<td><a href="graphs.php"><?php echo $Language->getText('stats_index','site_graphs'); ?></a></td>
+<td><strong><?php echo _('OVERVIEW STATS'); ?></strong></td>
+<td><a href="projects.php"><?php echo _('PROJECT STATS'); ?></a></td>
+<td><a href="graphs.php"><?php echo _('SITE GRAPHS'); ?></a></td>
 </tr>
 </table>
 
@@ -53,7 +53,7 @@ print '<br /><br />';
 stats_site_projects_monthly( );
 print '<br /><br />' . "\n";
 print '</div>' . "\n";
-echo '<p/>'.$Language->getText('stats_index','other_statistics');
+echo '<p/>'._('Other statistics:<ul><li><a href="i18n.php">I18n Statistics</a></li></ul>');
 
 //
 // END PAGE CONTENT CODE

@@ -17,17 +17,17 @@ function show_features_boxes() {
 	GLOBAL $HTML,$Language,$sys_use_ratings;
 	
 	$return = '';
-	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS['sys_name']),0);
+	$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
 	$return .= show_sitestats();
-	$return .= $HTML->boxMiddle($Language->getText('home','top_project_downloads'));
+	$return .= $HTML->boxMiddle(_('Top Project Downloads'));
 	$return .= show_top_downloads();
 	if ($sys_use_ratings) {
-		$return .= $HTML->boxMiddle($Language->getText('home','highest_ranked_users'));
+		$return .= $HTML->boxMiddle(_('Highest Ranked Users'));
 		$return .= show_highest_ranked_users();
 	}
-	$return .= $HTML->boxMiddle($Language->getText('home','most_active_this_week'));
+	$return .= $HTML->boxMiddle(_('Most Active This Week'));
 	$return .= show_highest_ranked_projects();
-	$return .= $HTML->boxMiddle($Language->getText('home','recently_registered'));
+	$return .= $HTML->boxMiddle(_('Recently Registered Projects'));
 	$return .= show_newest_projects();
 	$return .= $HTML->boxBottom(0);
 	return $return;
@@ -56,7 +56,7 @@ function show_top_downloads() {
 //	echo db_error();
 
 	if (db_numrows($res_topdown) == 0) {
-		return $Language->getText('home','no_stats_available');
+		return _('No Stats Available');
 	}
 	// print each one
 	$return = "";
@@ -65,7 +65,7 @@ function show_top_downloads() {
 			$return .= "(" . number_format($row_topdown['downloads']) . ') <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_topdown['unix_group_name'].'/">'
 			. $row_topdown['group_name']."</a><br />\n";
 	}
-	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/">[ '.$Language->getText('general','more').' ]</a></div>';
+	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/">[ '._('More').' ]</a></div>';
 
 	return $return;
 
@@ -116,8 +116,8 @@ function show_sitestats() {
 	global $Language;
 	$gforge = new GForge();
 	$return = '';
-	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
-	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
+	$return .= '<br />'._('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }
 
@@ -131,16 +131,16 @@ function show_newest_projects() {
 	$return = '';
 
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
-		return $Language->getText('home','no_stats_available')." ".db_error();
+		return _('No Stats Available')." ".db_error();
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
-			$return .= "<strong>(" . date($Language->getText('home','recently_registered_date_format'),$row_newproj['register_time'])  . ")</strong> "
+			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
 				. '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_newproj['unix_group_name'].'/">'
 				. $row_newproj['group_name'].'</a><br />';
 		}
 	}
 	/// TODO: Add more link to show all project
-	//$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/projlist.php">[ '.$Language->getText('general','more').' ]</a></div>';
+	//$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/projlist.php">[ '._('More').' ]</a></div>';
 	return $return;
 }
 
@@ -154,14 +154,14 @@ function show_highest_ranked_users() {
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows<1) {
-		return  $Language->getText('home','no_stats_available').db_error();
+		return  _('No Stats Available').db_error();
 	} else {
 		$return = '';
 		for ($i=0; $i<$rows; $i++) {
 			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="'.$GLOBALS['sys_urlprefix'].'/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />';
 		}
 	}
-	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/topusers.php">[  '.$Language->getText('general','more').' ]</a></div>';
+	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/topusers.php">[  '._('More').' ]</a></div>';
 	return $return;
 }
 
@@ -177,14 +177,14 @@ function show_highest_ranked_projects() {
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {
-		return $Language->getText('home','no_stats_available')." ".db_error();
+		return _('No Stats Available')." ".db_error();
 	} else {
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
 				.' <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].
 			'/">'.$row['group_name'].'</a><br />';
 		}
-		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/mostactive.php?type=week">[ '.$Language->getText('general','more').' ]</a></div>';
+		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/mostactive.php?type=week">[ '._('More').' ]</a></div>';
 	}
 	return $return;
 }

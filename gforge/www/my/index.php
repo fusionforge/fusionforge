@@ -64,16 +64,16 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 <script type="text/javascript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/tabber/tabber.js"></script>
 <div id="tabber" class="tabber" <? plugin_hook('call_user_js');?>>
 <div class="tabbertab" 
-title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
+title="<?php echo _('Assigned Artifacts'); ?>">
 	<?php
 	/*
 		Artifacts
 	*/
 	$last_group=0;
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('tracker','id');
-	$order_name_arr[]=$Language->getText('tracker','priority');
-	$order_name_arr[]=$Language->getText('tracker','summary');
+	$order_name_arr[]=_('ID');
+	$order_name_arr[]=_('Priority');
+	$order_name_arr[]=_('Summary');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	$artifactsForUser = new ArtifactsForUser(session_get_user());
@@ -104,14 +104,14 @@ title="<?php echo $Language->getText('my','assignedartifacts'); ?>">
 		}
 	} else {
 		echo '
-			<tr><td colspan="3">'.$Language->getText('my', 'no_tracker_items_assigned').'</td></tr>';
+			<tr><td colspan="3">'._('You have no open tracker items assigned to you.').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
 </div>
   
 <div class="tabbertab" 
-title="<?php echo $Language->getText('my','assignedtasks'); ?>">
+title="<?php echo _('Assigned Tasks'); ?>">
 <?php
 	/*
 		Tasks assigned to me
@@ -119,9 +119,9 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 	$tabcnt++;
 	$last_group=0;
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('tracker','id');
-	$order_name_arr[]=$Language->getText('tracker','priority');
-	$order_name_arr[]=$Language->getText('tracker','summary');
+	$order_name_arr[]=_('ID');
+	$order_name_arr[]=_('Priority');
+	$order_name_arr[]=_('Summary');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$projectTasksForUser = new ProjectTasksForUser(session_get_user());
 	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
@@ -162,21 +162,21 @@ title="<?php echo $Language->getText('my','assignedtasks'); ?>">
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" class="tablecontent">'.$Language->getText('my', 'no_open_tasks').'</td></tr>';
+		<tr><td colspan="3" class="tablecontent">'._('You have no open tasks assigned to you.').'</td></tr>';
 		echo db_error();
 	}
 	echo $HTML->listTableBottom();
 ?>
 </div>
 <div class="tabbertab" 
-title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
+title="<?php echo _('Submitted Artifacts'); ?>">
 <?php
 	$tabcnt++;
 	$last_group="0";
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('tracker','id');
-	$order_name_arr[]=$Language->getText('tracker','priority');
-	$order_name_arr[]=$Language->getText('tracker','summary');
+	$order_name_arr[]=_('ID');
+	$order_name_arr[]=_('Priority');
+	$order_name_arr[]=_('Summary');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
@@ -204,12 +204,12 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		}
 	} else {
 		echo '
-		<tr><td colspan="3" class="tablecontent">'.$Language->getText('my', 'no_tracker_items_submitted').'</td></tr>';
+		<tr><td colspan="3" class="tablecontent">'._('You have no open tracker items submitted by you.').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<div class="tabbertab" title="<?php echo $Language->getText('mytab','monitoring'); ?>" >
+<div class="tabbertab" title="<?php echo _('Monitored Items'); ?>" >
 <?php
 	/*
 		Forums that are actively monitored
@@ -217,26 +217,26 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	$tabcnt++;
 	$last_group=0;
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('general','remove');
-	$order_name_arr[]=$Language->getText('my','monitoredforum');
+	$order_name_arr[]=_('Remove');
+	$order_name_arr[]=_('Monitored Forums');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$forumsForUser = new ForumsForUser(session_get_user());
 	$forums =& $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.$Language->getText('my', 'no_monitored_forums').'</strong></center></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any forums.').'</strong></center></td></tr>';
 	} else {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong><a href="'.$GLOBALS['sys_urlprefix'].'/forum/myforums.php">' . $Language->getText('forum_myforums','myforums') . '</a></strong></center></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong><a href="'.$GLOBALS['sys_urlprefix'].'/forum/myforums.php">' . _('My Monitored Forums') . '</a></strong></center></td></tr>';
 		foreach ($forums as $f) {
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.
 				$group->getID().'">'.
 				$group->getPublicName().'</a></td></tr>';
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$f->getID().
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$f->getID().
 			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 			'border="0" alt="" /></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.
 			$f->getID().'">'.
@@ -253,8 +253,8 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	$last_group=0;
 	$tabcnt++;
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('general','remove');
-	$order_name_arr[]=$Language->getText('my','monitoredfile');
+	$order_name_arr[]=_('Remove');
+	$order_name_arr[]=_('Monitored FileModules');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
@@ -265,7 +265,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.$Language->getText('my', 'no_monitored_filemodules').'</strong></center></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any files.').'</strong></center></td></tr>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -275,7 +275,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 				db_result($result,$i,'group_name').'</a></td></tr>';
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 			'border="0" alt=""/></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.
@@ -289,29 +289,29 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 ?>
 </div>
 
-<div class="tabbertab" title="<?php echo $Language->getText('mytab','project'); ?>" >
+<div class="tabbertab" title="<?php echo _('Projects'); ?>" >
 <?php
 	/*
 		   Personal bookmarks
 	* /
-	echo $HTML->boxMiddle($Language->getText('my', 'bookmarks'),false,false);
+	echo $HTML->boxMiddle(_('My Bookmarks'),false,false);
 
 	$result = db_query("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
 		"user_id='". user_getid() ."' ORDER BY bookmark_title");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<strong>'.$Language->getText('my', 'no_bookmarks').'</strong>';
+		<strong>'._('You currently do not have any bookmarks saved.').'</strong>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '</td></tr>
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
-			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a>';
+			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._('Edit').']</a>';
 		}
 	}
 
@@ -320,8 +320,8 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 	*/
 	$tabcnt++;
 	$order_name_arr=array();
-	$order_name_arr[]=$Language->getText('general','remove');
-	$order_name_arr[]=$Language->getText('my','projects');
+	$order_name_arr[]=_('Remove');
+	$order_name_arr[]=_('My Projects');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	// Include both groups and foundries; developers should be similarly
@@ -339,7 +339,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 		. "ORDER BY group_name");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><strong>'.$Language->getText('my', 'no_projects').'</strong></td></tr>';
+		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -351,7 +351,7 @@ title="<?php echo $Language->getText('my','submittedartifacts'); ?>">
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
 			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';

@@ -40,9 +40,9 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
 		
 		$this->tableHeaders = array(
-			$this->Language->getText('search', 'forum_thread'),
-			$this->Language->getText('search', 'forum_author'),
-			$this->Language->getText('search', 'forum_date')
+			_('Thread'),
+			_('Author'),
+			_('Date')
 		);
 	}
 	

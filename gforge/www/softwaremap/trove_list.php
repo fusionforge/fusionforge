@@ -39,12 +39,12 @@ $res_trove_cat = db_query("
 
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(
-		$Language->getText('trove_list','invalid_category_title'),
-		$Language->getText('trove_list','invalid_category_text').': '.db_error()
+		_('Invalid Trove Category'),
+		_('That Trove category does not exist').': '.db_error()
 	);
 }
 
-$HTML->header(array('title'=>$Language->getText('trove_list','title')));
+$HTML->header(array('title'=>_('Software Map')));
 
 echo'
 	<hr />';
@@ -112,13 +112,13 @@ if ($discrim) {
 	}
 
 	// build text for top of page on what viewier is seeing
-	$discrim_desc = $Language->getText('trove_list','limiting_view').':';
+	$discrim_desc = _('Now limiting view to projects in the following categories').':';
 	
 	for ($i=0;$i<sizeof($expl_discrim);$i++) {
 		$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
 			.trove_getfullpath($expl_discrim[$i])
 			.' <a href="/softwaremap/trove_list.php?form_cat='.$form_cat
-			.$discrim_url_b[$i].'">['.$Language->getText('trove_list','remove_filter').']'
+			.$discrim_url_b[$i].'">['._('Remove This Filter').']'
 			.'</a>';
 	}
 	$discrim_desc .= "<hr />\n";
@@ -179,7 +179,7 @@ while ($row_sub = db_fetch_array($res_sub)) {
 	print ('<a href="trove_list.php?form_cat='.$row_sub['trove_cat_id'].$discrim_url.'">');
 	echo html_image("ic/cfolder15.png",'15','13',array());
 	print ('&nbsp; '.$row_sub['fullname'].'</a> <em>('.
-		$Language->getText('trove_list','projects',array($row_sub['subprojects']?$row_sub['subprojects']:'0'))
+		sprintf(_('%1$s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0')
 		.')</em><br />');
 		
 }
@@ -194,7 +194,7 @@ $res_rootcat = db_query("
 	ORDER BY fullname");
 echo db_error();
 
-print $Language->getText('trove_list','browse_by').':';
+print _('Browse By').':';
 while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	// print open folder if current, otherwise closed
 	// also make anchor if not current
@@ -251,10 +251,10 @@ if (!is_numeric($page)) {
 $html_limit = '';
 if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 	$html_limit .= 'More than ';
-	$html_limit .= $Language->getText('trove_list','more_than',array($querytotalcount));
+	$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 	
 	}
-$html_limit .= $Language->getText('trove_list','number_of_projects',array($querytotalcount));
+$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount);
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
@@ -307,14 +307,14 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// list all trove categories
 		print trove_getcatlisting($row_grp['group_id'],1,0);
 
-		print '</span></td>'."\n".'<td style="text-align:right">'; // now the right side of the display
+		print '</span></td>'."\n".'<td align="right">'; // now the right side of the display
 		print 'Activity Percentile: <strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 		print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 		print '<br />Register Date: <strong>'.date($sys_datefmt,$row_grp['register_time']).'</strong>';
 		print '</span></td></tr>';
 /*
                 if ($row_grp['jobs_count']) {
-                	print '<tr><td colspan="2" style="text-align:center">'
+                	print '<tr><td colspan="2" align="center">'
                               .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
                 }
 */

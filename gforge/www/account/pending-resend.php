@@ -58,11 +58,11 @@ if (getStringFromRequest('submit')) {
 }
 
 $HTML->header(array('title'=>'Pending-resend'));
-echo $Language->getText('account_login', 'resend_pending_directions');
+echo _('Fill in a user name and click \'Submit\' to resend the confirmation email');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<p><?php echo $Language->getText('account_verify', 'loginname'); ?>
+<p><?php echo _('Login name:'); ?>
 <br /><input type="text" name="loginname" /></p>
 <p><input type="submit" name="submit" value="<?php echo "Submit"; ?>" /></p>
 </form>

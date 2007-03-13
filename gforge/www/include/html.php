@@ -254,7 +254,7 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
 function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
 	global $Language;
 	if ($text_100=='none'){
-		$text_100=$Language->getText('include_html','none');
+		$text_100=_('None');
 	}
 	$return = '';
 
@@ -295,7 +295,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<input type="radio" value="'.$checked_val.'" checked>&nbsp;'.$Language->getText('include_html','no_change').'<br />';
+		<input type="radio" value="'.$checked_val.'" checked>&nbsp;'._('No Change').'<br />';
 	}
 
 	return $return;
@@ -321,7 +321,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
 	global $Language;
 	if ($text_100=='none'){
-		$text_100=$Language->getText('include_html','none');
+		$text_100=_('None');
 	}
 	$return = '';
 
@@ -365,7 +365,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<option value="'.$checked_val.'" selected="selected">'.$Language->getText('include_html','no_change').'</option>';
+		<option value="'.$checked_val.'" selected="selected">'._('No Change').'</option>';
 	}
 
 	$return .= '
@@ -386,7 +386,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
 	global $Language;
 	if ($text_100=='none'){
-		$text_100=$Language->getText('include_html','none');
+		$text_100=_('None');
 	}
 	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100);
 }
@@ -416,7 +416,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 				$return .= ' selected="selected"';
 			}
 		}
-		$return .= '>'.$Language->getText('include_html','none').'</option>';
+		$return .= '>'._('None').'</option>';
 	}
 
 	$rows=db_numrows($result);
@@ -458,7 +458,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		if ($text_100=='none') {
-			$text_100=$Language->getText('include_html','none');
+			$text_100=_('None');
 		}
 		/*
 			Put in the default NONE box
@@ -532,13 +532,13 @@ function html_build_priority_select_box ($name='priority', $checked_val='3', $no
 ?>
 	<select name="<?php echo $name; ?>">
 <?php if($nochange) { ?>
-	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo $Language->getText('include_html','no_change') ?></option>
+	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo _('No Change') ?></option>
 <?php }  ?>
-	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - <?php echo $Language->getText('include_html','priority_lowest') ?></option>
+	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - <?php echo _('Lowest') ?></option>
 	<option value="2"<?php if ($checked_val=="2") {echo " selected=\"selected\"";} ?>>2</option>
 	<option value="3"<?php if ($checked_val=="3") {echo " selected=\"selected\"";} ?>>3</option>
 	<option value="4"<?php if ($checked_val=="4") {echo " selected=\"selected\"";} ?>>4</option>
-	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - <?php echo $Language->getText('include_html','priority_highest') ?></option>
+	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - <?php echo _('Highest') ?></option>
 	</select>
 <?php
 
@@ -674,10 +674,10 @@ function site_user_header($params) {
 	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo ($HTML->beginSubMenu());
 	echo ($HTML->printSubMenu(
-		array($Language->getText('menu','my_personal_page'),
-			$Language->getText('menu','diary_notes'),
-			$Language->getText('menu','account_maintenance'),
-			$Language->getText('menu','register_project')),
+		array(_('My Personal Page'),
+			_('Diary &amp; Notes'),
+			_('Account Maintenance'),
+			_('Register Project')),
 		array('/my/',
 			'/my/diary.php',
 			'/account/',

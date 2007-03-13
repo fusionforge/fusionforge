@@ -18,10 +18,10 @@
 //				$feedback .= $ab->getErrorMessage();			
 			} else {
 				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_box').': '.$ab->getErrorMessage();
+					$feedback .= _('Error inserting a custom field').': '.$ab->getErrorMessage();
 					$ab->clearError();
 				} else {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','box_name_inserted');
+					$feedback .= _('Extra field inserted');
 				}
 			}
 		//
@@ -41,7 +41,7 @@
 				if (!$ab->delete($sure,$really_sure)) {
 					$feedback .= $ab->getErrorMessage();
 				} else {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','extrafield_deleted');
+					$feedback .= _('Custom Field Deleted');
 					$deleteextrafield=false;
 				}
 			}
@@ -66,10 +66,10 @@
 					$name = getStringFromRequest('name');
 					$status_id = getIntFromRequest('status_id');
 					if (!$ao->create($name,$status_id)) {
-						$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
+						$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
-						$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
+						$feedback .= _('Element inserted');
 					}
 				}
 			}
@@ -88,10 +88,10 @@
 //				$feedback .= $acr->getErrorMessage();			
 			} else { 
 				if (!$acr->create($title,$body)) {
-					$feedback .= $Language->getText('tracker_admin','error_inserting').' : '.$acr->getErrorMessage();
+					$feedback .= _('Error inserting').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
-					$feedback .= $Language->getText('tracker_admin','canned_response_inserted');
+					$feedback .= _('Canned Response Inserted');
 				}
 			}
 
@@ -110,10 +110,10 @@
 				$feedback .= $acr->getErrorMessage();
 			} else {
 				if (!$acr->update($title,$body)) {
-					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$acr->getErrorMessage();
+					$feedback .= _('Error updating').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
-					$feedback .= $Language->getText('tracker_admin','canned_response_updated');
+					$feedback .= _('Canned Response Updated');
 					$update_canned=false;
 					$add_canned=true;
 				}
@@ -138,7 +138,7 @@
 				if (!$dest_tracker || !is_object($dest_tracker)) {
 					exit_error('Error','ArtifactType could not be created');
 				} elseif ($dest_tracker->isError()) {
-					exit_error($Language->getText('general','error'),$dest_tracker->getErrorMessage());
+					exit_error(_('Error'),$dest_tracker->getErrorMessage());
 				}
 				//
 				//  Copy elements into a field (box) for each tracker selected 
@@ -165,7 +165,7 @@
 							$name=addslashes($ath->getElementName($copyid[$k]));
 							$status=$ath->getElementStatusID($copyid[$k]);
 							if (!$aefe->create($name,$status)) {
-								$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$aefe->getErrorMessage();
+								$feedback .= _('Error inserting an element').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
 								$feedback .= '- Copied choice:';
@@ -195,10 +195,10 @@
 				$feedback .= $ac->getErrorMessage();
 			} else {
 				if (!$ac->update($name,$attribute1,$attribute2,$is_required,$alias)) {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ac->getErrorMessage();
+					$feedback .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','box_name_updated');
+					$feedback .= _('Custom Field updated');
 					$update_box=false;
 					$add_extrafield=true;
 				}
@@ -227,10 +227,10 @@
 					$name = getStringFromRequest('name');
 					$status_id = getIntFromRequest('status_id');
 					if (!$ao->update($name,$status_id)) {
-						$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
+						$feedback .= _('Error updating a custom field').' : '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
-						$feedback .= $Language->getText('tracker_admin_build_boxes','choice_updated');
+						$feedback .= _('Element updated');
 						$update_opt=false;
 						$add_extrafield=true;
 					}
@@ -269,10 +269,10 @@
 
 			if (!$ath->update($name,$description,$email_all,$email_address,
 				$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
-				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
+				$feedback .= _('Error updating').' : '.$ath->getErrorMessage();
 				$ath->clearError();
 			} else {
-				$feedback .= $Language->getText('tracker_admin','tracker_updated');
+				$feedback .= _('Tracker Updated');
 			}
 
 		//
@@ -283,7 +283,7 @@
 			$really_sure = getStringFromRequest('really_sure');
 
 			if (!$ath->delete($sure,$really_sure)) {
-				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
+				$feedback .= _('Error updating').' : '.$ath->getErrorMessage();
 			} else {
 				header ("Location: /tracker/admin/?group_id=${group_id}&tracker_deleted=1");
 				exit;

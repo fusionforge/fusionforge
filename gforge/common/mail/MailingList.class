@@ -68,7 +68,7 @@ class MailingList extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('general', 'error_no_valid_group_object', array('MailingList')));
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailingList'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -86,7 +86,7 @@ class MailingList extends Error {
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['group_id'] != $this->Group->getID()) {
-					$this->setError($Language->getText('general', 'error_group_id'));
+					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->dataArray = null;
 					return false;
 				}
@@ -129,14 +129,14 @@ class MailingList extends Error {
 		}
 		
 		if(!$listName || strlen($listName) < MAIL__MAILING_LIST_NAME_MIN_LENGTH) {
-			$this->setError($Language->getText('mail_common', 'error_min_name_length'));
+			$this->setError(_('Must Provide List Name That Is 4 or More Characters Long'));
 			return false;
 		}
 		
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
 		if(!validate_email($realListName.'@'.$GLOBALS['sys_lists_host'])) {
-			$this->setError($Language->getText('mail_common', 'error_invalid_name') . ': ' .
+			$this->setError(_('Invalid List Name') . ': ' .
 			$realListName.'@'.$GLOBALS['sys_lists_host']);
 			return false;
 		}
@@ -144,7 +144,7 @@ class MailingList extends Error {
 		$result = db_query('SELECT 1 FROM mail_group_list WHERE lower(list_name)=\''.$realListName.'\'');
 
 		if (db_numrows($result) > 0) {
-			$this->setError($Language->getText('mail_common', 'error_list_already_exists'));
+			$this->setError(_('List Already Exists'));
 			return false;
 		}
 			
@@ -165,7 +165,7 @@ class MailingList extends Error {
 		
 		if (!$result) {
 			db_rollback();
-			$this->setError($Language->getText('general', 'error_creating', array($Language->getText('mail_common', 'mailing_list'))).db_error());
+			$this->setError(sprintf(_('Error Creating %1$s'), _('Error Creating %1$s')).db_error());
 			return false;
 		}
 			
@@ -179,8 +179,25 @@ class MailingList extends Error {
 			$this->setInvalidEmailError();
 			return false;
 		} else {
-			$mailBody = stripcslashes($Language->getText('mail_common', 'creation_mail_body', array($GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword)));
-			$mailSubject = $Language->getText('mail_common', 'creation_mail_subject', array($GLOBALS['sys_name']));
+			$mailBody = stripcslashes(sprintf(_('A mailing list will be created on %1$s in 6-24 hours 
+and you are the list administrator.
+
+This list is: %3$s@%2$s .
+
+Your mailing list info is at:
+%4$s .
+
+List administration can be found at:
+%5$s .
+
+Your list password is: %6$s .
+You are encouraged to change this password as soon as possible.
+
+Thank you for registering your project with %1$s.
+
+-- the %1$s staff
+'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword));
+			$mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
 			
 			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.$GLOBALS['sys_default_domain']);
 		}
@@ -201,7 +218,7 @@ class MailingList extends Error {
 			. "WHERE group_list_id='".$groupListId."' "
 			. "AND group_id='". $this->Group->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('general', 'error_getting', array($Language->getText('mail_common', 'mailing_list'))));
+			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')));
 			return false;
 		}
 		$this->dataArray =& db_fetch_array($res);
@@ -233,7 +250,7 @@ class MailingList extends Error {
 		$res = db_query($sql);
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError($Language->getText('general', 'error_on_update').db_error());
+			$this->setError(_('Error On Update:').db_error());
 			return false;
 		}
 		return true;

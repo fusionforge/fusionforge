@@ -49,7 +49,7 @@ require_once('www/include/Layout.class');
 require_once('common/include/utils.php');
 
 //database abstraction
-require_once('common/include/database-'.$sys_database_type.'.php');
+require_once('common/include/database.php');
 
 //security library
 require_once('common/include/session.php');
@@ -181,10 +181,10 @@ if (session_loggedin()) {
 	$Language->loadLanguage($classname);
 }
 
-setlocale (LC_TIME, $Language->getText('system','locale'));
-$sys_strftimefmt = $Language->getText('system','strftimefmt');
-$sys_datefmt = $Language->getText('system','datefmt');
-$sys_shortdatefmt = $Language->getText('system','shortdatefmt');
+setlocale (LC_TIME, _('en_US'));
+$sys_strftimefmt = _('%Y %B %e  %H:%M');
+$sys_datefmt = _('Y-m-d H:i');
+$sys_shortdatefmt = _('Y-m-d');
 
 
 /*

@@ -292,31 +292,31 @@ class Group extends Error {
 			$this->setError("Group::create: Group object already exists");
 			return false;
 		} else if (strlen($full_name)<3) {
-			$this->setError($Language->getText('register','invalid_full_name'));
+			$this->setError(_('Invalid full name'));
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
-			$this->setError($Language->getText('register','invalid_unix_name'));
+			$this->setError(_('Invalid unix name'));
 			return false;
 		} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
-			$this->setError($Language->getText('register','unix_group_name_already_taken'));
+			$this->setError(_('Unix name already taken'));
 			return false;
 		} else if (strlen($purpose)<10) {
-			$this->setError($Language->getText('register','describe_registration'));
+			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
 			return false;
 		} else if (strlen($purpose)>1500) {
-			$this->setError($Language->getText('register','description_too_long'));
+			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
 			return false;
 		} else if (strlen($description)<10) {
-			$this->setError($Language->getText('register','comprehensive_description'));
+			$this->setError(_('Describe in a more comprehensive manner your project.'));
 			return false;
 		} else if (!$license) {
-			$this->setError($Language->getText('register','no_license_chosen'));
+			$this->setError(_('You do not have chosen a license'));
 			return false;
 		} else if ($license!=GROUP_LICENSE_OTHER && $license_other) {
-			$this->setError($Language->getText('register','conflicting_licenses_choice'));
+			$this->setError(_('Conflicting licenses choice'));
 			return false;
 		} else if ($license==GROUP_LICENSE_OTHER && strlen($license_other)<50) {
-			$this->setError($Language->getText('register','more_license_description'));
+			$this->setError(_('Please give more comprehensive licensing description'));
 			return false;
 		} else {
 
@@ -418,12 +418,12 @@ class Group extends Error {
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError($Language->getText('general','permnotget'));
+			$this->setError(_('Could not get permission'));
 			return false;
 		}
 
 		if (!$perm->isSuperUser()) {
-			$this->setError($Language->getText('general','permdenied'));
+			$this->setError(_('Permission Denied.'));
 			return false;
 		}
 
@@ -492,12 +492,12 @@ class Group extends Error {
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError($Language->getText('general','permnotget'));
+			$this->setError(_('Could not get permission'));
 			return false;
 		}
 
 		if (!$perm->isAdmin()) {
-			$this->setError($Language->getText('general','permdenied'));
+			$this->setError(_('Permission Denied.'));
 			return false;
 		}
 
@@ -608,7 +608,7 @@ class Group extends Error {
 		";
 		$res = db_query($sql);
 
-		if (!$res) {
+		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('Error updating project information: '.db_error());
 			db_rollback();
 			return false;
@@ -868,7 +868,7 @@ class Group extends Error {
 				return false;
 			}
 		} else {
-			$this->setError($Language->getText('admin','scm_box_empty'));
+			$this->setError(_('SCM Box can\'t be empty'));
 			return false;
 		}
 	}
@@ -1442,7 +1442,7 @@ class Group extends Error {
 				continue;
 			}
 			if (!$ml_arr[$i]->delete(1,1)) {
-				$this->setError($Language->getText('mail','error_delete'));
+				$this->setError(_('Could not delete properly the mailing list'));
 			}
 //echo 'MailingListFactory'.db_error();
 		}
@@ -2121,9 +2121,39 @@ class Group extends Error {
 			$l->loadLanguageID($row_admins['language']);
 
 			//																			   $2					  $2					$3							  $4						  $5						$6
-			$message=stripcslashes($l->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name'])));
+			$message=stripcslashes(sprintf(_('Your project registration for %7$s has been approved.
+
+Project Full Name:  %1$s
+Project Unix Name:  %2$s
+
+Your DNS will take up to a day to become active on our site.
+Your web site is accessible through your shell account. Please read
+site documentation (see link below) about intended usage, available
+services, and directory layout of the account.
+
+If you visit your
+own project page in %7$s while logged in, you will find
+additional menu functions to your left labeled \'Project Admin\'.
+
+We highly suggest that you now visit %7$s and create a public
+description for your project. This can be done by visiting your project
+page while logged in, and selecting \'Project Admin\' from the menus
+on the left (or by visiting http://%3$s/project/admin/?group_id=%6$s
+after login).
+
+Your project will also not appear in the Trove Software Map (primary
+list of projects hosted on %7$s which offers great flexibility in
+browsing and search) until you categorize it in the project administration
+screens. So that people can find your project, you should do this now.
+Visit your project while logged in, and select \'Project Admin\' from the
+menus on the left.
+
+Enjoy the system, and please tell others about %7$s. Let us know
+if there is anything we can do to help you.
+
+-- the %7$s crew'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name']));
 	
-			util_send_message($row_admins['email'], $l->getText('classgroup', 'acceptedprojecttitle', array($GLOBALS['sys_name'])), $message);
+			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
 		}
 
 		return true;
@@ -2158,7 +2188,14 @@ class Group extends Error {
 			$l = new BaseLanguage () ;
 			$l->loadLanguageID($row_admins['language']);
 
-			$response=stripcslashes($l->getText('classgroup', 'rejectedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_name'])));
+			$response=stripcslashes(sprintf(_('Your project registration for %3$s has been denied.
+
+Project Full Name:  %1$s
+Project Unix Name:  %2$s
+
+Reasons for negative decision:
+
+'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_name']));
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {
@@ -2171,7 +2208,7 @@ class Group extends Error {
 			"), 0, "response_text");
 			}
 
-			util_send_message($row_admins['email'], $l->getText('classgroup', 'rejectedprojecttitle', array($GLOBALS['sys_name'])), $response);
+			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), $GLOBALS['sys_name']), $response);
 		}
 
 		return true;
@@ -2204,8 +2241,15 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
-				util_send_message($admin_email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
+				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+
+Project Full Name:  %2$s
+Submitted Description: %3$s
+License: %4$s
+
+Please visit the following URL to approve or reject this project:
+http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
+				util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 			}
 		}
 		
@@ -2223,9 +2267,15 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification_submitter', array($GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
+				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+
+Project Full Name:  %2$s
+Submitted Description: %3$s
+License: %4$s
+
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
 				
-				util_send_message($email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
+				util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 			}
 		}
 		

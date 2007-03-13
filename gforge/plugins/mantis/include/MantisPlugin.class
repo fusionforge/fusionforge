@@ -133,7 +133,7 @@ class MantisPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/plugins/mantis/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . $Language->getText('user_home','view_mantis') .'</a></p>';
+					<a href="/plugins/mantis/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('MISSINGTEXT:user_home/view_mantis:TEXTMISSING') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			global $Language;
@@ -141,7 +141,7 @@ class MantisPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/mantis/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . $Language->getText('project_admin','mantis') . '</a><br />';
+				echo '<a href="/plugins/mantis/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('MISSINGTEXT:project_admin/mantis:TEXTMISSING') . '</a><br />';
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {

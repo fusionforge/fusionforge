@@ -30,8 +30,8 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
 		
 		$this->tableHeaders = array(
-			$this->Language->getText('search', 'people_user_name'),
-			$this->Language->getText('search', 'people_real_name')
+			_('User Name'),
+			_('Real Name')
 		);
 	}
 
@@ -39,7 +39,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		$GLOBALS['HTML']->header(array('title'=>$this->Language->getText('search', 'title')));
+		$GLOBALS['HTML']->header(array('title'=>_('Search')));
 		parent::writeHeader();
 	}
 	

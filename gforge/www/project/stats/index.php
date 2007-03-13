@@ -32,7 +32,7 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-site_project_header(array('title'=>$Language->getText('reporting','project_activity_title').' '.$groupname,'group'=>$group_id,'toptab'=>'home'));
+site_project_header(array('title'=>_('Project Activity').' '.$groupname,'group'=>$group_id,'toptab'=>'home'));
 
 if ($area && !is_numeric($area)) { $area = 1; }
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
@@ -43,16 +43,16 @@ if ($end && !is_numeric($end)) { $end = false; }
 // BEGIN PAGE CONTENT CODE
 //
 ?>
-<h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
+<h3><?php echo _('Project Activity'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 <table><tr>
-<td><strong><?php echo $Language->getText('reporting','area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
-<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
+<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

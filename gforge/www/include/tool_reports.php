@@ -51,12 +51,12 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 		);
 		end_graph();
 		print '<p /><br />';
-		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'.$Language->getText('include_toolreport','key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'.$Language->getText('include_toolreport','open').'</td>'.
-		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'.$Language->getText('include_toolreport','all').' </td><td width="5%">)</td></tr></table>';
+		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'._('Key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'._('Key').'</td>'.
+		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'._('All').' </td><td width="5%">)</td></tr></table>';
 		print '<p />';
 //      		GraphResult($result,$title);
 	} else {
-		echo "<h2>".$Language->getText('include_toolreport','no_data')."</h2>";
+		echo "<h2>"._('No data found to report')."</h2>";
 	}
 }
 
@@ -85,15 +85,15 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	$periods=array('day'=>'Last day','week'=>'Last week');
 	$vals=array('day','week','month','year','lifespan');
 	$texts=array(
-		$Language->getText('include_toolreport','last_days'),
-		$Language->getText('include_toolreport','last_weeks'),
-		$Language->getText('include_toolreport','last_months'),
-		$Language->getText('include_toolreport','last_years'),
-		$Language->getText('include_toolreport','project_lifespan'));
+		_('Last day(s)'),
+		_('Last week(s)'),
+		_('Last month(s)'),
+		_('Last year(s)'),
+		_('Project lifespan'));
 
 	if (!$period) $period="lifespan";
 
-	print $Language->getText('include_toolreport','for');
+	print _('for');
 	print html_build_select_box_from_arrays (
 		array('','1','4','7','12','14','30','52'),
 		array('','1','4','7','12','14','30','52'),
@@ -101,7 +101,7 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	print html_build_select_box_from_arrays ($vals,$texts,'period',$period,false);
 
 	print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\" />";
-	print ' <input type="submit" value="'.$Language->getText('include_toolreport','show').'" />';
+	print ' <input type="submit" value="'._('Show').'" />';
 	print "</form>\n";
 }
 

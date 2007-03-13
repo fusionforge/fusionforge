@@ -33,7 +33,7 @@ if ($group_id) {
 
 	$ff=new ForumFactory($g);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
-		exit_error($Language->getText('general','error'),$ff->getErrorMessage());
+		exit_error(_('Error'),$ff->getErrorMessage());
 	}
 
 	$farr =& $ff->getForums();
@@ -43,10 +43,10 @@ if ($group_id) {
 	exit();
 	}
 
-	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ));
+	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
 
 	if ($ff->isError() || count($farr) < 1) {
-		echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
+		echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
 		if($ff->isError()) {
 			echo $ff->getErrorMessage();
 		}
@@ -55,10 +55,10 @@ if ($group_id) {
 	}
 
 
-//	echo $Language->getText('forum', 'choose');
+//	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
 	echo $HTML->subMenu(array("My Monitored Forums"),array("/forum/myforums.php?group_id=$group_id"));
-	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'),$Language->getText('forum_forum','moderationlvl'));
+	$tablearr=array(_('Forum'),_('Forum'),_('Forum'),_('Forum'), _('Forum'),_('Forum'));
 	echo $HTML->listTableTop($tablearr);
 
 	/*
@@ -72,9 +72,9 @@ if ($group_id) {
 			echo $farr[$j]->getErrorMessage();
 		} else {
 			switch ($farr[$j]->getModerationLevel()) {
-				case 0 : $modlvl = $Language->getText('forum_forum','mod0');break;
-				case 1 : $modlvl = $Language->getText('forum_forum','mod1');break;
-				case 2 : $modlvl = $Language->getText('forum_forum','mod2');break;
+				case 0 : $modlvl = _('No Moderation');break;
+				case 1 : $modlvl = _('Anonymous & Non Group Users');break;
+				case 2 : $modlvl = _('All Except Admins');break;
 			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .
 				'&group_id=' . $group_id . '">'.
@@ -82,10 +82,10 @@ if ($group_id) {
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>
 				<td>'.$farr[$j]->getDescription().'</td>
-				<td style="text-align:center">'.$farr[$j]->getThreadCount().'</td>
-				<td style="text-align:center">'. $farr[$j]->getMessageCount() .'</td>
+				<td align="center">'.$farr[$j]->getThreadCount().'</td>
+				<td align="center">'. $farr[$j]->getMessageCount() .'</td>
 				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td>
-				<td style="text-align:center">'. $modlvl  .'</td></tr>';
+				<td align="center">'. $modlvl  .'</td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();

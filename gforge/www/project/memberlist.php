@@ -36,9 +36,9 @@ if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
 
-site_project_header(array('title'=>$Language->getText('project_memberlist','title'),'group'=>$group_id,'toptab'=>'memberlist'));
+site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'=>'memberlist'));
 
-echo $Language->getText('project_memberlist', 'joining');
+echo _('<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>');
 
 // list members
 $query = "SELECT users.*,user_group.admin_flags,role.role_name AS role
@@ -51,11 +51,11 @@ $query = "SELECT users.*,user_group.admin_flags,role.role_name AS role
 
 
 $title_arr=array();
-$title_arr[]=$Language->getText('project_memberlist', 'developer');
-$title_arr[]=$Language->getText('project_memberlist', 'username');
-$title_arr[]=$Language->getText('project_memberlist', 'role');
+$title_arr[]=_('Developer');
+$title_arr[]=_('Username');
+$title_arr[]=_('Role/Position');
 if($GLOBALS['sys_use_people']) {
-	$title_arr[]=$Language->getText('project_memberlist', 'skills');
+	$title_arr[]=_('Skills');
 }
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -72,7 +72,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		<td align=\"center\"><a href=\"/users/".$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
 		<td align=\"center\">".$row_memb['role']."</td>";
 	if($GLOBALS['sys_use_people']) {
-		echo "<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=".$row_memb['user_id']."\">".$Language->getText('project_memberlist','view')."</a></td>";
+		echo "<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=".$row_memb['user_id']."\">"._('View')."</a></td>";
 	}
 	echo "</tr>";
 }

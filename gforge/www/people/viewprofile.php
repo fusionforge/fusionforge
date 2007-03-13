@@ -28,29 +28,29 @@ if ($user_id && is_numeric($user_id)) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>$Language->getText('people_viewprofile','title')));
+	people_header(array('title'=>_('View a User Profile')));
 
 	//for security, include group_id
 	$sql="SELECT * FROM users WHERE user_id='$user_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
-		$feedback .= $Language->getText('people_viewprofile','user_fetch_failed');
-		echo '<h2>'.$Language->getText('people_viewprofile','no_such_user').'</h2>';
+		$feedback .= _('User fetch FAILED');
+		echo '<h2>'._('No Such User').'</h2>';
 	} else {
 
 		/*
 			profile set private
 		*/
 		if (db_result($result,0,'people_view_skills') != 1) {
-			echo '<h2>'.$Language->getText('people_viewprofile','set_private').'</h2>';
+			echo '<h2>'._('This User Has Set His/Her Profile to Private').'</h2>';
 			people_footer(array());
 			exit;
 		}
 
 		echo '
         <p>
-		<strong>'.$Language->getText('people_viewprofile','skills_profile_for').' : </strong>'. db_result($result,0,'realname') .
+		<strong>'._('Skills profile for').' : </strong>'. db_result($result,0,'realname') .
         ' ('.db_result($result, 0, 'user_name') .
         ')<br /><br /></p> <table border="0" width="100%">';
         

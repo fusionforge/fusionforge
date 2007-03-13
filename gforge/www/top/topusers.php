@@ -51,26 +51,26 @@ $res_top = db_query("
 
 if (!$res_top || db_numrows($res_top)<1) {
 	exit_error(
-		$Language->getText('top_topusers','info_not_available'),
-		$Language->getText('top_topusers','info_not_available_more').' '
+		_('Information not available'),
+		_('Information about highest ranked users is not available.').' '
 		.db_error()
 	);
 }
 
-$HTML->header(array('title'=>$Language->getText('top_topusers','title')));
+$HTML->header(array('title'=>_('MISSINGTEXT:top_topusers/title:TEXTMISSING')));
 
-print '<h1>'.$Language->getText('top_topusers','title').'</h1>
-<br /><em>('.$Language->getText('top','updated_daily').')</em>
+print '<h1>'._('MISSINGTEXT:top_topusers/title:TEXTMISSING').'</h1>
+<br /><em>('._('Updated Daily').')</em>
 
-<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a></p>';
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a></p>';
 
 $tableHeaders = array(
-	$Language->getText('top_topusers','rank'),
-	$Language->getText('top_topusers','user_name'),
-	$Language->getText('top_topusers','real_name'),
-	$Language->getText('top_topusers','rating'),
-	$Language->getText('top_topusers','last_rank'),
-	$Language->getText('top_topusers','change')
+	_('Rank'),
+	_('User Name'),
+	_('Real Name'),
+	_('Rating'),
+	_('Last Rank'),
+	_('Change')
 );
 
 echo $HTML->listTableTop($tableHeaders);
@@ -89,13 +89,13 @@ while ($row_top = db_fetch_array($res_top)) {
 	// calculate change
 	$diff = $row_top["old_ranking"] - $row_top["ranking"];
 	if (!$row_top["old_ranking"] || !$row_top["ranking"]) {
-		print $Language->getText('top','NA');
+		print _('N/A');
 	}
 	else if ($diff == 0) {
-		print $Language->getText('top','same');
+		print _('Same');
 	}
 	else if ($diff > 0) {
-		print "<span class=\"up\"".$Language->getText('top','up',$diff)."</span>";
+		print "<span class=\"up\"".sprintf(_('Up %1$s'), $diff)."</span>";
 	}
 	else if ($diff < 0) {
 		print "<span class=\"down\">".$Language->getText('top','down',(0-$diff))."</span>";

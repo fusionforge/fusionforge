@@ -47,16 +47,16 @@ if (!$perm->isPMAdmin()) {
 }
 
 
-$page_title=$Language->getText('pm_reporting','title');
+$page_title=_('Task Reporting System');
 $bar_colors=array("pink","violet");
 
 function pm_reporting_header($group_id) {
 		global $Language;
 		reports_header($group_id,
 			array('aging','tech','subproject'),
-			array($Language->getText('pm_reporting','aging_report'),
-				$Language->getText('pm_reporting','by_tech'),
-				$Language->getText('pm_reporting','by_subproject')));
+			array(_('Aging Report'),
+				_('Report by Assignee'),
+				_('Report by Subproject')));
 }
 
 function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$comment="") {
@@ -91,9 +91,9 @@ if ($what) {
 		$start = getStringFromRequest('start');
 		$end = getStringFromRequest('end');
 
-		pm_header(array ("title"=>$Language->getText('pm_reporting','aging_report')));
+		pm_header(array ("title"=>_('Aging Report')));
 		pm_reporting_header($group_id);
-		echo "\n<h1>".$Language->getText('pm_reporting','aging_report')."</h1>";
+		echo "\n<h1>"._('Aging Report')."</h1>";
 
 		$time_now=time();
 //		echo $time_now."<p>";
@@ -128,7 +128,7 @@ if ($what) {
 			$values[$counter-1]=((int)(db_result($result, 0,0)*1000))/1000;
 		}
 
-		GraphIt($names, $values, $Language->getText('pm_reporting','average_duration'));
+		GraphIt($names, $values, _('Average duration for closed tasks (days)'));
 
 		echo "<p />";
 
@@ -150,7 +150,7 @@ if ($what) {
 			$values[$counter-1]=db_result($result, 0,0);
 		}
 
-		GraphIt($names, $values, $Language->getText('pm_reporting','started_tasks'));
+		GraphIt($names, $values, _('Number of started tasks'));
 
 		echo "<p />";
 
@@ -172,7 +172,7 @@ if ($what) {
 			$values[$counter-1]=db_result($result, 0,0);
 		}
 
-		GraphIt($names, $values, $Language->getText('pm_reporting','not_completed'));
+		GraphIt($names, $values, _('Number of tasks still not completed'));
 
 		echo "<p />";
 
@@ -196,9 +196,9 @@ if ($what) {
 			  "GROUP BY Subproject";
 
 		pm_quick_report($group_id,
-			  $Language->getText('pm_reporting','tasks_by_category'),
-			  $Language->getText('pm_reporting','open_tasks_by_category'),$sql1,
-			  $Language->getText('pm_reporting','all_tasks_by_category'),$sql2);
+			  _('Tasks By Category'),
+			  _('Open Tasks By Category'),$sql1,
+			  _('All Tasks By Category'),$sql2);
 
 	} else if ($what=="tech") {
 
@@ -223,10 +223,10 @@ if ($what) {
 			  "GROUP BY Technician";
 
 		pm_quick_report($group_id,
-		  $Language->getText('pm_reporting','tasks_by_technician'),
-		  $Language->getText('pm_reporting','open_tasks_by_technician'),$sql1,
-		  $Language->getText('pm_reporting','all_tasks_by_technician'),$sql2,
-		  $Language->getText('pm_reporting','report_note'));
+		  _('Tasks By Assignee'),
+		  _('Open Tasks By Assignee'),$sql1,
+		  _('All Tasks By Assignee'),$sql2,
+		  _('<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>'));
 
 	} else {
 		exit_missing_param();

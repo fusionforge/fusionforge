@@ -22,7 +22,7 @@ function mail_header($params) {
 
 		if ($project && is_object($project)) {
 			if (!$project->usesMail()) {
-				exit_error($Language->getText('general', 'error'), $Language->getText('mail_utils', 'turned_off'));
+				exit_error(_('Error'), _('Error'));
 			}
 		}
 
@@ -33,7 +33,7 @@ function mail_header($params) {
 			if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 				echo $HTML->subMenu(
 					array(
-						$Language->getText('mail_utils', 'admin')
+						_('Admin')
 					),
 					array(
 						'/mail/admin/?group_id='.$group_id

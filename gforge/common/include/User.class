@@ -229,44 +229,44 @@ class User extends Error {
 		$unix_box='shell',$address='',$address2='',$phone='',$fax='',$title='',$ccode='US',$send_mail=true) {
 		global $Language;
 		if (!$theme_id) {
-			$this->setError($Language->getText('account_register','err_themeid'));
+			$this->setError(_('MISSINGTEXT:account_register/err_themeid:TEXTMISSING'));
 			return false;
 		}
 		if (!$unix_name) {
-			$this->setError($Language->getText('account_register','err_username'));
+			$this->setError(_('You must supply a username'));
 			return false;
 		}
 		if (!$firstname) {
-			$this->setError($Language->getText('account_register','err_firstname'));
+			$this->setError(_('You must supply a first name'));
 			return false;
 		}
 		if (!$lastname) {
-			$this->setError($Language->getText('account_register','err_lastname'));
+			$this->setError(_('You must supply a last name'));
 			return false;
 		}
 		if (!$password1) {
-			$this->setError($Language->getText('account_register','err_passwd'));
+			$this->setError(_('You must supply a password'));
 			return false;
 		}
 		if ($password1 != $password2) {
-			$this->setError($Language->getText('account_register','err_passwd2'));
+			$this->setError(_('Passwords do not match'));
 			return false;
 		}
 		if (!account_pwvalid($password1)) {
-			$this->setError($Language->getText('account_register','err_passwd3'));
+			$this->setError(_('Invalid Password:'));
 			return false;
 		}
 		$unix_name=strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
-			$this->setError($Language->getText('account_register','err_unixname'));
+			$this->setError(_('Invalid Unix Name.'));
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError($Language->getText('account_register','err_email'));
+			$this->setError(_('Invalid Email Address'));
 			return false;
 		}
 		if ($jabber_address && !validate_email($jabber_address)) {
-			$this->setError($Language->getText('account_register','err_jabber'));
+			$this->setError(_('Invalid Jabber Address'));
 			return false;
 		}
 		if (!$jabber_only) {
@@ -275,12 +275,12 @@ class User extends Error {
 			$jabber_only=1;
 		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
-			$this->setError($Language->getText('account_register','err_userexist'));
+			$this->setError(_('That username already exists.'));
 			return false;
 		}
 		if ($GLOBALS['sys_require_unique_email']) {
 			if (db_numrows(db_query("SELECT user_id FROM users WHERE email='$email'")) > 0) {
-				$this->setError($Language->getText('account_register','err_mailexist'));
+				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
 		}
@@ -319,7 +319,7 @@ class User extends Error {
 		$result=db_query($sql);
 	
 		if (!$result) {
-			$this->setError($Language->getText('account_register','err_badinsert') .db_error().$sql);
+			$this->setError(_('Insert Failed') .db_error().$sql);
 			db_rollback();
 			return false;
 		} else {
@@ -353,10 +353,24 @@ class User extends Error {
 	 */
 	function sendRegistrationEmail() {
 		global $Language;
-		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash(),$GLOBALS['sys_name'])));
+		$message=stripcslashes(sprintf(_('Thank you for registering on the %4$s web site. You have
+account with username %1$s created for you. In order
+to complete your registration, visit the following url: 
+
+<http://%2$s/account/verify.php?confirm_hash=_%3$s>
+
+(If you don\'t see any URL above, it is likely due to a bug in your mail client.
+Use one below, but make sure it is entered as the single line.)
+
+http://%2$s/account/verify.php?confirm_hash=_%3$s
+
+Enjoy the site.
+
+-- the %4$s staff
+'), $this->getUnixName(), $GLOBALS['sys_default_domain'], $this->getConfirmHash(), $GLOBALS['sys_name']));
 		util_send_message(
 			$this->getEmail(),
-			$Language->getText('account_register','message_header',array($GLOBALS['sys_name'])),
+			sprintf(_('%1$s Account Registration'), $GLOBALS['sys_name']),
 			$message
 		);
 	}
@@ -441,7 +455,7 @@ class User extends Error {
 		$block_ratings = $use_ratings ? 0 : 1;
 
 		if ($jabber_address && !validate_email($jabber_address)) {
-			$this->setError($Language->getText('account_register','err_jabber'));
+			$this->setError(_('Invalid Jabber Address'));
 			return false;
 		}
 		if (!$jabber_only) {
@@ -1053,7 +1067,7 @@ class User extends Error {
 		$this->is_logged_in=$val;
 		if ($val) {
 			//if this is the logged in user, see if they are a super user
-			$sql="SELECT count(*) AS count FROM user_group WHERE user_id='". $this->getID() ."' AND group_id='1' AND admin_flags='A'";
+			$sql="SELECT count(*) FROM user_group WHERE user_id='". $this->getID() ."' AND group_id='1' AND admin_flags='A'";
 			$result=db_query($sql);
 			if (!$result) {
 				$this->is_super_user=false;

@@ -37,8 +37,8 @@ if (getStringFromRequest('submit')) {
 
 	if (!$loginname) {
 		exit_error(
-			$Language->getText('account_verify','missingparam'),
-			$Language->getText('account_verify','usermandatory')
+			_('Missing paramater'),
+			_('You must enter a user name.')
 		);
 	}
 
@@ -51,8 +51,8 @@ if (getStringFromRequest('submit')) {
 
 	if ($u->getStatus()=='A'){
 		exit_error(
-			$Language->getText('account_verify','invalidop'),
-			$Language->getText('account_verify','accountactive')
+			_('Invalid operation'),
+			_('Account already active.')
 		);
 	}
 
@@ -60,22 +60,22 @@ if (getStringFromRequest('submit')) {
 
 	if ($confirm_hash != $u->getConfirmHash()) {
 		exit_error(
-			$Language->getText('account_verify','invalidparam'),
-			$Language->getText('account_verify','cannotconfirm')
+			_('Invalid parameter'),
+			_('Cannot confirm account identity - invalid confirmation hash (or login name)')
 		);
 	}
 
 	if (!session_login_valid($loginname, $passwd, 1)) {
 		exit_error(
-			$Language->getText('account_verify','accessdenied'),
-			$Language->getText('account_verify','invalidcred')
+			_('Access denied'),
+			_('Credentials you entered do not correspond to valid account.')
 		);
 	}
 
 	if (!$u->setStatus('A')) {
 		exit_error(
-			$Language->getText('account_verify','cannotactivate'),
-			$Language->getText('account_verify','erroractivate').': '.$u->getErrorMessage()
+			_('Could not activate account'),
+			_('Error while activiting account').': '.$u->getErrorMessage()
 		);
 	}
 
@@ -84,7 +84,7 @@ if (getStringFromRequest('submit')) {
 
 $HTML->header(array('title'=>'Verify'));
 
-echo $Language->getText('account_verify', 'verify_blurb');
+echo _('<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>');
 
 if ($GLOBALS['error_msg']) {
 	print '<p><span class="error">'.$GLOBALS['error_msg'].'</span>';
@@ -93,12 +93,12 @@ if ($GLOBALS['error_msg']) {
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
-<p><?php echo $Language->getText('account_verify', 'loginname'); ?>
+<p><?php echo _('Login name:'); ?>
 <br /><input type="text" name="loginname" /></p>
-<p><?php echo $Language->getText('account_verify', 'password'); ?>
+<p><?php echo _('Password:'); ?>
 <br /><input type="password" name="passwd" /></p>
 <input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" />
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_verify', 'login'); ?>" /></p>
+<p><input type="submit" name="submit" value="<?php echo _('Login'); ?>" /></p>
 </form>
 
 <?php

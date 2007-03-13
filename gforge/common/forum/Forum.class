@@ -77,7 +77,7 @@ class Forum extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('general','error_no_valid_group_object','Forum'));
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Forum"));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -94,7 +94,7 @@ class Forum extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError($Language->getText('general','error_group_id'));
+					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return false;
 				}
@@ -130,15 +130,15 @@ class Forum extends Error {
 	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1,$moderation_level=0) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
-			$this->setError($Language->getText('forum_common','error_min_name_length'));
+			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('forum_common','error_min_desc_length'));
+			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
 		if (eregi('[^_\.0-9a-z-]',$forum_name)) {
-			$this->setError($Language->getText('forum_common','error_illegal_characters'));
+			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
 		if ($send_all_posts_to) {
@@ -180,7 +180,7 @@ class Forum extends Error {
 		$result=db_query($sql);
 		if (!$result) {
 			db_rollback();
-			$this->setError($Language->getText('forum_common','error_adding_forum').db_error());
+			$this->setError(_('Error Adding Forum').db_error());
 			return false;
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
@@ -207,26 +207,12 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
-		global $Language, $sys_database_type;
-
-		if ($sys_database_type == "mysql") {
-			$sql="
-				SELECT fgl.*,
-					(SELECT count(*) AS `count`
-						FROM (
-							SELECT DISTINCT group_forum_id, thread_id FROM forum
-						) AS tmp
-						WHERE tmp.group_forum_id = fgl.group_forum_id
-					) AS threads 
-				FROM forum_group_list_vw AS fgl
-				WHERE group_forum_id='$group_forum_id'";
-		} else {
-			$sql="SELECT * FROM forum_group_list_vw
-				WHERE group_forum_id='$group_forum_id'";
-		}
-		$res=db_query($sql);
+		global $Language;
+		$res=db_query("SELECT * FROM forum_group_list_vw
+			WHERE group_forum_id='$group_forum_id'
+			AND group_id='". $this->Group->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('forum_common','error_invalid_group_forum_id'));
+			$this->setError(_('MISSINGTEXT:forum_common/error_invalid_group_forum_id:TEXTMISSING'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -258,25 +244,13 @@ class Forum extends Error {
 	 *	@return	int	The next thread_id #.
 	 */
 	function getNextThreadID() {
-		global $sys_database_type;
-
-		if ($sys_database_type == "mysql") {
-			$sql="call newval('forum_thread_seq', @res)";
-			$result=db_mquery($sql);
-			if (!$result) {
-				echo db_error();
-				return false;
-			}
-			$sql="select @res";
-		} else {
-			$sql="SELECT nextval('forum_thread_seq')";
-		}
-		$result=db_query($sql);
+		$result=db_query("SELECT nextval('forum_thread_seq')");
 		if (!$result || db_numrows($result) < 1) {
 			echo db_error();
 			return false;
+		} else {
+			return db_result($result,0,0);
 		}
-		return db_result($result,0,0);
 	}
 
 	/**
@@ -450,7 +424,7 @@ class Forum extends Error {
 	function setMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError($Language->getText('forum_common','error_set_monitor'));
+			$this->setError(_('You can Only Monitor If You Are Logged In'));
 			return false;
 		}
 		$sql="SELECT * FROM forum_monitored_forums
@@ -468,7 +442,7 @@ class Forum extends Error {
 			$result = db_query($sql);
 
 			if (!$result) {
-				$this->setError($Language->getText('forum_common','error_unable_to_add_monitor').' : '.db_error());
+				$this->setError(_('Unable To Add Monitor').' : '.db_error());
 				return false;
 			}
 
@@ -484,7 +458,7 @@ class Forum extends Error {
 	function stopMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError($Language->getText('forum_common','error_set_monitor'));
+			$this->setError(_('You can Only Monitor If You Are Logged In'));
 			return false;
 		}
 		$sql="DELETE FROM forum_monitored_forums
@@ -501,7 +475,7 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
+		$sql="SELECT count(*) FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
@@ -515,7 +489,7 @@ class Forum extends Error {
 	function savePlace() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError($Language->getText('forum_common','error_save_when_logged_in'));
+			$this->setError(_('You Can Only Save Your Place If You Are Logged In'));
 			return false;
 		}
 		$sql="SELECT * FROM forum_saved_place
@@ -534,7 +508,7 @@ class Forum extends Error {
 			$result = db_query($sql);
 
 			if (!$result) {
-				$this->setError($Language->getText('forum_common_forum','error_save_place').': '.db_error());
+				$this->setError(_('Forum::savePlace()').': '.db_error());
 				return false;
 			}
 
@@ -566,15 +540,15 @@ class Forum extends Error {
 	function update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to='',$moderation_level=0) {
 		global $Language;
 		if (strlen($forum_name) < 3) {
-			$this->setError($Language->getText('forum_common','error_min_name_length'));
+			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('forum_common','error_min_desc_length'));
+			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
 		if (eregi('[^_\.0-9a-z-]',$forum_name)) {
-			$this->setError($Language->getText('forum_common','error_illegal_characters'));
+			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
 		if ($send_all_posts_to) {
@@ -601,7 +575,7 @@ class Forum extends Error {
 			AND group_forum_id='".$this->getID()."'");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError($Language->getText('general','error_on_update').': '.db_error());
+			$this->setError(_('Error On Update:').': '.db_error());
 			return false;
 		}
 		return true;
@@ -828,7 +802,7 @@ class Forum extends Error {
 		} else {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (  (!$perm->isMember() )) {
-				//the user isn't a member of the project
+				//the user isn´t a member of the project
 				return true;
 			}
 		}

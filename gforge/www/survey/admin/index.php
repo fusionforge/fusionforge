@@ -33,19 +33,19 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_admin_index','title')));
+$sh->header(array('title'=>_('Survey Administration')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo '<h1>'.$Language->getText('survey_admin_index','permission_denied').'</h1>';
+	echo '<h1>'._('Permission Denied').'</h1>';
 	$sh->footer(array());
 	exit;
 }
 
 ?>
 
-<?php echo $Language->getText('survey_admin_index','its_simple_to_create', array('<p><strong>'.$GLOBALS['sys_urlprefix'].'/survey/survey.php?group_id='.$group_id.'&survey_id=XX</strong>')); ?>
+<?php printf(_('<p>It\'s simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: %1$s where XX is the survey number'), '<p><strong>'.$GLOBALS['sys_urlprefix'].'/survey/survey.php?group_id='.$group_id.'&survey_id=XX</strong>'); ?>
 
-<p><?php echo $Language->getText('survey_admin_index','you_can_now_activate',array('<a href="'.$GLOBALS['sys_urlprefix'].'/survey/admin/survey.php?group_id='.$group_id.'">','</a>')); ?>
+<p><?php printf(_('You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2$s page'), '<a href="'.$GLOBALS['sys_urlprefix'].'/survey/admin/survey.php?group_id='.$group_id.'">', '</a>'); ?>
 
 </p>
 <p>

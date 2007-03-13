@@ -41,13 +41,13 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_resp','title')));
+$sh->header(array('title'=>_('Survey Complete')));
 
 if (!$survey_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo "<h1>".$Language->getText('survey_resp','error_some_reason')."</h1>";
+	echo "<h1>"._('Error - For some reason group_id and/or survey_id did not make it he')."</h1>";
 	$sh->footer(array());
 	exit;
 }
@@ -56,19 +56,19 @@ if (!session_loggedin()) {
 	/*
 		Tell them they need to be logged in
 	*/
-	echo "<h1>".$Language->getText('survey_resp','you_nedd_to_be_logged_in')."</h1>";
-	echo "<p>".$Language->getText('survey_resp','unfortunately_you_have_to_be')."</p>";
+	echo "<h1>"._('You need to be logged in')."</h1>";
+	echo "<p>"._('Unfortunately, you have to be logged in to participate in surveys.')."</p>";
 	$sh->footer(array());
 	exit;
 }
 
 ?>
 
-<p><?php echo $Language->getText('survey_resp','thank_you'); ?></p>
+<p><?php echo _('Thank you for taking time to complete this survey.'); ?></p>
 <p>&nbsp;</p>
-<?php echo $Language->getText('survey_resp','regards'); ?>,
+<?php echo _('Regards'); ?>,
 <p>&nbsp;</p>
-<strong><?php echo $Language->getText('survey_resp','the_crew',array($GLOBALS['sys_name'])); ?></strong>
+<strong><?php printf(_('The %1$s Crew'), $GLOBALS['sys_name']); ?></strong>
 <p>&nbsp;</p>
 <?php
 /*

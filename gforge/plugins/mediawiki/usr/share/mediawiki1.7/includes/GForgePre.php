@@ -207,10 +207,10 @@ if (session_loggedin()) {
 	$Language->loadLanguage($classname);
 }
 
-setlocale (LC_TIME, $Language->getText('system','locale'));
-$sys_strftimefmt = $Language->getText('system','strftimefmt');
-$sys_datefmt = $Language->getText('system','datefmt');
-$sys_shortdatefmt = $Language->getText('system','shortdatefmt');
+setlocale (LC_TIME, _('en_US'));
+$sys_strftimefmt = _('%Y %B %e  %H:%M');
+$sys_datefmt = _('Y-m-d H:i');
+$sys_shortdatefmt = _('Y-m-d');
 
 /*
 

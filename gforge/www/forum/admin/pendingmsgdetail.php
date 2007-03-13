@@ -56,21 +56,21 @@ if ($fa->Authorized($group_id)) {
 		$g =& $fa->GetGroupObject();
 		$f=new Forum($g,$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error($Language->getText('general','error'),"Error getting new Forum");
+			exit_error(_('Error'),"Error getting new Forum");
 		} elseif ($f->isError()) {
-			exit_error($Language->getText('general','error'),$f->getErrorMessage());
+			exit_error(_('Error'),$f->getErrorMessage());
 		}
 		$fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
 		if (!$fm || !is_object($fm)) {
-			exit_error($Language->getText('general','error'), "Error getting new ForumMessage");
+			exit_error(_('Error'), "Error getting new ForumMessage");
 		} elseif ($fm->isError()) {
-			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+			exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 		$fhtml = new ForumHTML($f);
 		if (!$fhtml || !is_object($fhtml)) {
-			exit_error($Language->getText('general','error'), "Error getting new ForumHTML");
+			exit_error(_('Error'), "Error getting new ForumHTML");
 		} elseif ($fhtml->isError()) {
-			exit_error($Language->getText('general','error'),$fhtml->getErrorMessage());
+			exit_error(_('Error'),$fhtml->getErrorMessage());
 		}
 		echo $fhtml->showPendingMessage($fm);
 		$HTML->footer(array());

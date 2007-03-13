@@ -57,7 +57,7 @@ class SurveyResponse extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('general','error_no_valid_group_object','Survey Question'));
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -96,7 +96,7 @@ class SurveyResponse extends Error {
 			htmlspecialchars($response) . "','$now')";
 		$res=db_query($sql);
 		if (!$res) {
-			$this->setError($Language->getText('survey_resp','error').db_error());
+			$this->setError(_('Error').db_error());
 			return false;
 		} 
 		return true;

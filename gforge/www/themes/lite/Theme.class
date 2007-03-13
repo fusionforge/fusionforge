@@ -274,16 +274,16 @@ vironment" border="0" /></a>
 		if ($sys_use_people) {
 		        $TABS_DIRS[]='/people/';
 		}
-		$TABS_TITLES[]=$Language->getText('menu','home');
-		$TABS_TITLES[]=$Language->getText('menu','mypage');
+		$TABS_TITLES[]=_('Home');
+		$TABS_TITLES[]=_('My&nbsp;Page');
 		if ($sys_use_trove) {
-		        $TABS_TITLES[]=$Language->getText('menu','projectree');
+		        $TABS_TITLES[]=_('Project&nbsp;Tree');
 		}
 		if ($sys_use_snippet) {
-		        $TABS_TITLES[]=$Language->getText('menu','code_snippet');
+		        $TABS_TITLES[]=_('Code&nbsp;Snippets');
 		}
 		if ($sys_use_people) {
-		        $TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
+		        $TABS_TITLES[]=_('Project&nbsp;Openings');
 		}
 		
 		// outermenu hook
@@ -295,11 +295,11 @@ vironment" border="0" /></a>
 		
 		if (user_ismember(1,'A')) {
 		        $TABS_DIRS[]='/admin/';
-		        $TABS_TITLES[]=$Language->getText('menu','admin');
+		        $TABS_TITLES[]=_('Admin');
 		}
 		if (user_ismember($GLOBALS['sys_stats_group'])) {
 		        $TABS_DIRS[]='/reporting/';
-		        $TABS_TITLES[]=$Language->getText('menu','reporting');
+		        $TABS_TITLES[]=_('Reporting');
 		}
 		if(isset($params['group']) && $params['group']) {
 		        // get group info using the common result set

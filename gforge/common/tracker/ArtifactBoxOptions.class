@@ -91,7 +91,7 @@ class ArtifactBoxOptions extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError($Language->getText('tracker_admin_build_boxes','required_choice_name'));
+			$this->setError(_('an element name is required'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {

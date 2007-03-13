@@ -1027,7 +1027,7 @@ mail_admin_updatelist	form_description	Descrizione:
 mail_admin_updatelist	form_ispublic	Pubblica?
 mail_admin_updatelist	form_updatelist	Aggiorna
 mail_admin_updatelist	information	Puoi amministrare Mailing List da qui. Considera che liste private possono essere viste da membri del progetto, non saranno però elencate su $1.
-mail_common	creation_mail_body	Una Mailing List sarà creata entro 6-24 hours sul server $1n e tu sarai l'amministratore della Mailing List.nnNome Mailing List: $3@$2 .nnLe informazioni sulla Mailing List si trovano qui:n$4 .nnAmministrazione Mailing List:n$5 .nnPassword Mailing List: $6 .nTi consigliamo di cambiare questa password appena possibile.nn-- Lo staff di $1n
+mail_common	creation_mail_body	Una Mailing List sarà creata entro 6-24 hours sul server $1n e tu sarai l'amministratore della Mailing List.nnNome Mailing List: $3@$2 .nnLe informazioni sulla Mailing List si trovano qui:n$4 .nnAmministrazione Mailing List:n$5 .nnPassword Mailing List: $6 .nTi consigliamo di cambiare questa password appena possibile.nn-- Lo staff di $1n\n
 mail_common	creation_mail_subject	Nuova Mailing List $1 
 mail_common	description	Descrizione
 mail_common	error_invalid_name	Nome Mailing List non valido

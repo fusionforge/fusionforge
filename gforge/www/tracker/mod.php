@@ -10,7 +10,7 @@
   */
 
 
-$ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID() ));
+$ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID() ));
 
 echo notepad_func();
 
@@ -44,15 +44,15 @@ if (session_loggedin()) {
 				if ($group->usesPM()) {
 					echo '
 				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'">'.
-					html_image('ic/taskman20w.png','20','20',array()).'<strong>'.$Language->getText('tracker_mod','build_task_relation').'</strong></a>';
+					html_image('ic/taskman20w.png','20','20',array()).'<strong>'._('Build Task Relation').'</strong></a>';
 				}
 				?>
 			</td>
 			<td>
-				<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><strong><?php echo html_image('ic/trash.png','16','16',array()) . $Language->getText('tracker_artifact','delete_text'); ?></strong></a>
+				<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><strong><?php echo html_image('ic/trash.png','16','16',array()) . _('Delete'); ?></strong></a>
 			</td>
 			<td>
-				<input type="submit" name="submit" value="<?php echo $Language->getText('tracker_artifact','save') ?>" />
+				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
 </table>
@@ -61,7 +61,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 	<tr>
 		<td>
-			<strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
+			<strong><?php echo _('Submitted By') ?>:</strong><br />
 			<?php echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
@@ -69,13 +69,13 @@ if (session_loggedin()) {
 				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php } ?>
 		</td>
-		<td><strong><?php echo $Language->getText('tracker_mod','date_submitted') ?>:</strong><br />
+		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
 		<?php
 		echo date($sys_datefmt, $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
-			echo '<br /><strong>'.$Language->getText('tracker_mod','date_closed').':</strong><br />'
+			echo '<br /><strong>'._('Date Closed').':</strong><br />'
 				.date($sys_datefmt, $close_date);
 		}
 		?>
@@ -83,7 +83,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker_mod','data_type') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Data Type') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 //
@@ -117,13 +117,13 @@ if (session_loggedin()) {
 	?>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Assigned To')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
+		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('._('Admin').')</a>';
 		?>
 		</td><td>
-		<strong><?php echo $Language->getText('tracker','priority') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('Priority') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
 		<?php
 		/*
 			Priority of this request
@@ -136,7 +136,7 @@ if (session_loggedin()) {
 	<tr>
 		<td>
 		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<strong><?php echo $Language->getText('tracker','status') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('State') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->statusBox ('status_id', $ah->getStatusID() );
@@ -148,7 +148,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Summary')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
@@ -164,18 +164,18 @@ if (session_loggedin()) {
 <br />
 <script type="text/javascript" src="/tabber/tabber.js"></script>
 <div id="tabber" class="tabber">
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups'); ?>">
+<div class="tabbertab" title="<?php echo _('Followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo _('Use Canned Response') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('.$Language->getText('tracker','admin').')</a>';
+		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('._('Admin').')</a>';
 		?>
 		<p>
-		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea></p>
-		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
+		<h3><?php echo _('Followup') ?>:</h3>
 		<?php
 			echo $ah->showMessages(); 
 		?>
@@ -186,8 +186,8 @@ if (session_loggedin()) {
 $tabcnt=0;
 if ($group->usesPM()) {
 ?>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','relatedtasks'); ?>">
-		<h3><?php echo $Language->getText('tracker','related_tasks'); ?>:</h3>
+<div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
+		<h3><?php echo _('Related Tasks'); ?>:</h3>
 <table border="0" width="80%">
 		<?php
 		$tabcnt++;
@@ -195,10 +195,10 @@ if ($group->usesPM()) {
 		$taskcount = db_numrows($ah->relatedtasks);
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
-			$titles[] = $Language->getText('pm','task_id');
-			$titles[] = $Language->getText('pm','summary');
-			$titles[] = $Language->getText('pm','start_date');
-			$titles[] = $Language->getText('pm','end_date');
+			$titles[] = _('Task Id');
+			$titles[] = _('Task Summary');
+			$titles[] = _('Start Date');
+			$titles[] = _('End Date');
 			echo $GLOBALS['HTML']->listTableTop($titles,'',$tabcnt);
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
@@ -218,17 +218,17 @@ if ($group->usesPM()) {
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 		} else {
-			echo '<tr><td colspan="3">'.$Language->getText('tracker','no_related_tasks').'</td></tr>';
+			echo '<tr><td colspan="3">'._('No Related Tasks').'</td></tr>';
 		}
       ?>
 </table>
 </div>
 <?php } ?>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','attachments'); ?>">
-		<h3><?php echo $Language->getText('tracker_mod','existing_files') ?>:</h3>
+<div class="tabbertab" title="<?php echo _('Attachments'); ?>">
+		<h3><?php echo _('Existing Files') ?>:</h3>
 <table border="0" width="80%">
 	<tr><td colspan="2">
-        <strong><?php echo $Language->getText('tracker','file_upload') ?>:</strong><br />
+        <strong><?php echo _('Attach Files') ?>:</strong><br />
         <input type="file" name="input_file[]" size="30" /><br />
         <input type="file" name="input_file[]" size="30" /><br />
         <input type="file" name="input_file[]" size="30" /><br />
@@ -243,9 +243,9 @@ if ($group->usesPM()) {
 		$count=count($file_list);
 		$tabcnt++;
 		$title_arr=array();
-		$title_arr[]=$Language->getText('tracker_mod','delete');
-		$title_arr[]=$Language->getText('tracker_mod','name');
-		$title_arr[]=$Language->getText('tracker_mod','download');
+		$title_arr[]=_('Delete');
+		$title_arr[]=_('Name');
+		$title_arr[]=_('Download');
 		echo $GLOBALS['HTML']->listTableTop ($title_arr,'',$tabcnt);
 
 		if ($count > 0) {
@@ -253,14 +253,14 @@ if ($group->usesPM()) {
 			for ($i=0; $i<$count; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'.$Language->getText('tracker_mod','delete').' </td>'.
+				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>'.
 				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
+				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'._('Download').'</a></td>
 				</tr>';
 			}
 
 		} else {
-			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="4">'.$Language->getText('tracker_mod','no_files').'</td></tr>';
+			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="4">'._('No Files Currently Attached').'</td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
@@ -268,7 +268,7 @@ if ($group->usesPM()) {
 	</td></tr>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','commits'); ?>">
+<div class="tabbertab" title="<?php echo _('Commits'); ?>">
 <table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
@@ -276,10 +276,10 @@ if ($group->usesPM()) {
 	?>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','changes'); ?>">
+<div class="tabbertab" title="<?php echo _('Changes'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<h3><?php echo $Language->getText('tracker_mod','changelog') ?>:</h3>
+		<h3><?php echo _('Change Log') ?>:</h3>
 		<?php 
 			echo $ah->showHistory(); 
 		?>

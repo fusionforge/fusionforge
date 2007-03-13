@@ -89,21 +89,21 @@ if ($role_id=='observer') {
 	}
 }
 
-project_admin_header(array('title'=>$Language->getText('rbac_edit','pgtitle'),'group'=>$group_id));
+project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
 //
 //	If observer role, show title
 //
 if ($role_id=='observer') {
-	echo '<h2>'.$Language->getText('rbac_edit','observer').'</h2>';
-	echo $Language->getText('rbac_edit','observerintro');
+	echo '<h2>'._('Edit Observer').'</h2>';
+	echo _('Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.');
 } else {
 	if (!$role_id) {
-		echo '<h2>'.$Language->getText('rbac_edit','newrole').'</h2>';
+		echo '<h2>'._('New Role').'</h2>';
 	} else {
-		echo '<h2>'.$Language->getText('rbac_edit','pgtitle').'</h2>';
+		echo '<h2>'._('Edit Role').'</h2>';
 	}
-	echo $Language->getText('rbac_edit','intro');
+	echo _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
 
 }
 
@@ -112,14 +112,14 @@ echo '
 <form action="'.$PHP_SELF.'?group_id='.$group_id.'&role_id='. $role_id .'" method="post">';
 
 if ($role_id != 'observer') {
-	echo '<strong>'.$Language->getText('rbac_edit','rolename').'</strong><br />
+	echo '<strong>'._('Role Name').'</strong><br />
 	<input type="text" name="role_name" value="'.$role->getName().'">
 	<p>';
 }
 
-$titles[]=$Language->getText('rbac_edit','title1');
-$titles[]=$Language->getText('rbac_edit','title2');
-$titles[]=$Language->getText('rbac_edit','title3');
+$titles[]=_('Section');
+$titles[]=_('Subsection');
+$titles[]=_('Setting');
 
 echo $HTML->listTableTop($titles);
 
@@ -254,7 +254,7 @@ for ($i=0; $i<count($keys); $i++) {
 
 echo $HTML->listTableBottom();
 
-echo '<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'">
+echo '<input type="submit" name="submit" value="'._('Submit').'">
 </form>';
 
 project_admin_footer(array());

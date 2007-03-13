@@ -16,12 +16,12 @@
 		echo '<table>';
 		echo '<tr>';
 		echo '<td></td><td><center><strong>';
-		echo $Language->getText('tracker_admin_copy','from_box');
+		echo _('Copy From');
 		echo '<br />';
 		echo $fb->getName();
 		echo '</center></strong></td><td></td><td><strong><center>';
 		
-		echo $Language->getText('tracker_admin_copy','into_box');
+		echo _('Into trackers and custom fields');
 		echo '</center></strong></tr><tr><td><strong><center>';
 		echo '</center></strong></td>';
 		echo '<td valign=top>';
@@ -64,7 +64,7 @@
 		echo '<tr><td>';
 		?>
 		<br />
-	 	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
+	 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</td></tr></table></form>
 		
 		<?php

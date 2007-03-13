@@ -63,7 +63,7 @@ class cvstrackerPlugin extends Plugin {
 		
 		if ($Rows > 0) {
 			echo '<tr><td colspan="2">';
-			echo '<h4>'.$Language->getText('plugin_cvstracker','title').':</h4>';
+			echo '<h4>'._('Links to related CVS commits').':</h4>';
 
 			$title_arr=$this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -89,7 +89,7 @@ class cvstrackerPlugin extends Plugin {
 			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';
 		} else {
-			echo '<h4>'.$Language->getText('plugin_cvstracker','nocommits').'</h4>';
+			echo '<h4>'._('No commits have been made.').'</h4>';
 		}
 	}
 
@@ -102,12 +102,12 @@ class cvstrackerPlugin extends Plugin {
 	function getTitleArr() {
 		global $Language;
 		$title_arr=array();
-		$title_arr[]=$Language->getText('plugin_cvstracker','file');
-		$title_arr[]=$Language->getText('plugin_cvstracker','date');
-		$title_arr[]=$Language->getText('plugin_cvstracker','prevVersion');
-		$title_arr[]=$Language->getText('plugin_cvstracker','actualVersion');
-		$title_arr[]=$Language->getText('plugin_cvstracker','log');
-		$title_arr[]=$Language->getText('plugin_cvstracker','author');
+		$title_arr[]=_('Filename');
+		$title_arr[]=_('Date');
+		$title_arr[]=_('Previous Version');
+		$title_arr[]=_('Actual Version');
+		$title_arr[]=_('Log Message');
+		$title_arr[]=_('Author');
 		return $title_arr;
 	}
 
@@ -159,7 +159,7 @@ class cvstrackerPlugin extends Plugin {
 		return '<a href="/scm/viewvc.php/'.
 			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'">'.
-			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
+			_('Diff To').' '.$PrevVersion.'</a>';
 	}
 
 

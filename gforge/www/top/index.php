@@ -28,24 +28,24 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 
-$HTML->header(array('title'=>$Language->getText('top','title')));
+$HTML->header(array('title'=>_('Top Projects')));
 ?>
 
-<p><strong><?php echo $Language->getText('top','top_project',$GLOBALS['sys_name']); ?></strong></P>
+<p><strong><?php printf(_('Top %1$s project'), $GLOBALS['sys_name']); ?></strong></P>
 
-<p><?php echo $Language->getText('top','about_blurb',$GLOBALS['sys_name']); ?>
+<p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), $GLOBALS['sys_name']); ?>
 <ul>
-<li><a href="mostactive.php?type=week"><?php echo $Language->getText('top','active_weekly'); ?></a>
-<li><a href="mostactive.php"><?php echo $Language->getText('top','active_all_time'); ?></a>
+<li><a href="mostactive.php?type=week"><?php echo _('Most Active This Week'); ?></a>
+<li><a href="mostactive.php"><?php echo _('Most Active All Time'); ?></a>
 <br />&nbsp;
-<li><a href="toplist.php?type=downloads"><?php echo $Language->getText('top','downloads'); ?></a>
+<li><a href="toplist.php?type=downloads"><?php echo _('Top Downloads'); ?></a>
 <br />&nbsp;
-<li><a href="toplist.php?type=pageviews_proj"><?php echo $Language->getText('top','pageviews'); ?></a> 
-<li><a href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></a>
+<li><a href="toplist.php?type=pageviews_proj"><?php echo _('Top Project Pageviews'); ?></a> 
+<li><a href="toplist.php?type=forumposts_week"><?php echo _('Top Forum Post Counts'); ?></a>
 
 <!--
-<li><a href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','downloads_7_days'); ?></a>
-<li><a href="topusers.php"><?php echo $Language->getText('top','highest_ranked_users'); ?></a>
+<li><a href="toplist.php?type=downloads_week"><?php echo _('Top Downloads (Past 7 Days)'); ?></a>
+<li><a href="topusers.php"><?php echo _('Highest Ranked Users'); ?></a>
 -->
 
 </ul>

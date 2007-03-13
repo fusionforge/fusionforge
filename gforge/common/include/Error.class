@@ -128,7 +128,7 @@ class Error {
 	 */
 	function setPermissionDeniedError(){
 		global $Language;
-		$this->setError($Language->getText('general','permdenied'), ERROR__PERMISSION_DENIED_ERROR);
+		$this->setError(_('Permission Denied.'), ERROR__PERMISSION_DENIED_ERROR);
 	}
 	
 	/**
@@ -146,7 +146,7 @@ class Error {
 	 */
 	function setInvalidEmailError(){
 		global $Language;
-		$this->setError($Language->getText('general','invalid_email'), ERROR__INVALID_EMAIL_ERROR);
+		$this->setError(_('Invalid Email Address'), ERROR__INVALID_EMAIL_ERROR);
 	}
 	
 	/**
@@ -167,7 +167,7 @@ class Error {
 	 */
 	function setOnUpdateError($result=""){
 		global $Language;
-		$this->setError($Language->getText('general','error_on_update',$result), ERROR__ON_UPDATE_ERROR);	
+		$this->setError(sprintf(_('Error On Update:'), $result), ERROR__ON_UPDATE_ERROR);	
 	}
 	
 	/**
@@ -185,7 +185,7 @@ class Error {
 	 */
 	function setGroupIdError(){
 		global $Language;
-		$this->setError($Language->getText('general','error_group_id'), ERROR__GROUPID_ERROR);
+		$this->setError(_('Group_id in db result does not match Group Object'), ERROR__GROUPID_ERROR);
 		
 	}
 	
@@ -204,7 +204,7 @@ class Error {
 	 */
 	function setMissingParamsError(){
 		global $Language;
-		$this->setError($Language->getText('general','error_missing_params'), ERROR__MISSING_PARAMS_ERROR);
+		$this->setError(_('Missing Parameters'), ERROR__MISSING_PARAMS_ERROR);
 	}
 	
 	/**

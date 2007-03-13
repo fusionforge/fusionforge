@@ -59,18 +59,18 @@ if (!$frsp || !is_object($frsp)) {
 
 */
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id));
+frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
 
 	echo '<strong>'.$frsp->getName().'</strong><p>';
 	echo '
 	<form action="/frs/admin/?group_id='.$group_id.'" method="post">
 	<input type="hidden" name="func" value="delete_package" />
 	<input type="hidden" name="package_id" value="'. $package_id .'" />
-	'.$Language->getText('frs_admin','delete_package_warning').'
+	'._('You are about to permanently and irretrievably delete this package and all its releases and files!').'
 	<p>
-	<input type="checkbox" name="sure" value="1">'.$Language->getText('frs_admin','sure').'<br />
-	<input type="checkbox" name="really_sure" value="1">'.$Language->getText('frs_admin','really_sure').'<br />
-	<input type="submit" name="submit" value="'.$Language->getText('frs_admin','delete').'" />
+	<input type="checkbox" name="sure" value="1">'._('I\'m Sure').'<br />
+	<input type="checkbox" name="really_sure" value="1">'._('I\'m Really Sure').'<br />
+	<input type="submit" name="submit" value="'._('Delete').'" />
 	</form>';
 
 frs_admin_footer();

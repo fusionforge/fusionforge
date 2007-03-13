@@ -32,10 +32,10 @@ require_once('www/survey/admin/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_add_survey','title')));
+survey_header(array('title'=>_('Add A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>". $Language->getText('survey_add_question','permission_denied')."</h1>";
+	echo "<h1>". _('MISSINGTEXT:survey_add_question/permission_denied:TEXTMISSING')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -45,14 +45,14 @@ if (getStringFromRequest('post_changes')) {
 	$survey_questions = getStringFromRequest('survey_questions');
 
 	if (!$survey_title) {
-		$feedback .= $Language->getText('survey_add_question','title_is_required');
+		$feedback .= _('MISSINGTEXT:survey_add_question/title_is_required:TEXTMISSING');
 	} else {
 		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
 		$result=db_query($sql);
 		if ($result) {
-			$feedback .= $Language->getText('survey_add_question','survey_inserted');
+			$feedback .= _('MISSINGTEXT:survey_add_question/survey_inserted:TEXTMISSING');
 		} else {
-			$feedback .= $Language->getText('survey_add_question','error_in_insert');
+			$feedback .= _('MISSINGTEXT:survey_add_question/error_in_insert:TEXTMISSING');
 		}
 	}
 }
@@ -73,18 +73,18 @@ function show_questions() {
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
-<strong><?php echo $Language->getText('survey_add_survey','name_of_survey') ?></strong><?php echo utils_requiredField(); ?>
+<strong><?php echo _('Name Of Survey:') ?></strong><?php echo utils_requiredField(); ?>
 <br />
 <input type="text" name="survey_title" value="" length="60" maxlength="150" /><p>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="post_changes" value="y" />
-<?php echo $Language->getText('survey_add_survey','list_questions_numbers'); ?>
+<?php echo _('List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id\'s. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7'); ?>
 <br /><input type="text" name="survey_questions" value="" length="90" maxlength="1500" /></p>
-<p><strong><?php echo $Language->getText('survey_add_survey','is_active') ?></strong>
-<br /><input type="radio" name="is_active" value="1" checked="checked" /> <?php echo $Language->getText('survey_add_survey','yes'); ?>
-<br /><input type="radio" name="is_active" value="0" /> <?php echo $Language->getText('survey_add_survey','no'); ?></p>
+<p><strong><?php echo _('Is Active?') ?></strong>
+<br /><input type="radio" name="is_active" value="1" checked="checked" /> <?php echo _('Yes'); ?>
+<br /><input type="radio" name="is_active" value="0" /> <?php echo _('No'); ?></p>
 <p>
-<input type="submit" name="SUBMIT" value="<?php echo $Language->getText('survey_add_survey','add_this_survey'); ?>" /></p>
+<input type="submit" name="SUBMIT" value="<?php echo _('Add This Survey'); ?>" /></p>
 </form></p>
 
 <?php
@@ -98,11 +98,11 @@ $result=db_query($sql);
 
 ?>
 <form>
-<input type="button" name="none" value="<?php echo $Language->getText('survey_add_survey','show_existing_question'); ?>" onclick="show_questions()" />
+<input type="button" name="none" value="<?php echo _('Show Existing Questions'); ?>" onclick="show_questions()" />
 </form>
 
 <p>&nbsp;</p>
-<h2><?php echo $Language->getText('survey_add_survey','existing_surveys') ?></h2>
+<h2><?php echo _('Existing Surveys') ?></h2>
 <p>&nbsp;</p>
 <?php
 ShowResultsEditSurvey($result);

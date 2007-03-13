@@ -80,7 +80,7 @@ if ($group_id) {
 		/*
 			Show the form for adding forums
 		*/
-		forum_header(array('title'=>$Language->getText('forum_admin_addforum','title')));
+		forum_header(array('title'=>_('MISSINGTEXT:forum_admin_addforum/title:TEXTMISSING')));
 
 		echo '
 			<br>
@@ -89,25 +89,25 @@ if ($group_id) {
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '">
-			<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
+			<strong>'._('Forum Name').':</strong><br />
 			<input type="text" name="forum_name" value="" size="20" maxlength="30" /><br />
-			<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />
+			<strong>'._('Description').':</strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /><br />
-			<strong>'.$Language->getText('forum_admin_addforum','is_public').'</strong><br />
-			<input type="radio" name="is_public" value="1" checked="checked" />'.$Language->getText('general','yes').' <br />
-			<input type="radio" name="is_public" value="0" />'.$Language->getText('general','no').'
+			<strong>'._('Is Public?').'</strong><br />
+			<input type="radio" name="is_public" value="1" checked="checked" />'._('Yes').' <br />
+			<input type="radio" name="is_public" value="0" />'._('No').'
 			<br  /><br />
-			<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
-			<input type="radio" name="allow_anonymous" value="1" />'.$Language->getText('general','yes').'<br />
-			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'.$Language->getText('general','no').'
+			<strong>'._('Allow Anonymous Posts?').'</strong><br />
+			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
+			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
 			<br /><br />' .
-					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",0) . '
-				<br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
+					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('No Moderation'),"2" => _('No Moderation') ),"moderation_level",0) . '
+				<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<p>
 				
-			<strong>'.$Language->getText('forum_admin_addforum','email_posts').'</strong><br />
+			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
 			<p>
-			<input type="submit" name="submit" value="'.$Language->getText('forum_admin_addforum','add_forum').'" />
+			<input type="submit" name="submit" value="'._('Add This Forum').'" />
 			</p>
 			</form>';
 
@@ -127,8 +127,8 @@ if ($group_id) {
 			exit_permission_denied();
 		}
 
-		forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status')));
-		echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'</p>';
+		forum_header(array('title'=>_('Change forum status')));
+		echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
 		$fa = new ForumAdmin();
 		if ($fa->Authorized($group_id)) {
 			if ($fa->isForumAdmin($group_forum_id)) {
@@ -143,33 +143,33 @@ if ($group_id) {
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
 				
-				<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
-				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
-				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '.$Language->getText('general','no').'<br />
+				<strong>'._('Allow Anonymous Posts?').'</strong><br />
+				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
+				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'<br />
 				
 				
-				<strong>'.$Language->getText('forum_admin_addforum','is_public').'</strong><br />
-				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
-				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '.$Language->getText('general','no').'<br />
-				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'.$Language->getText('general','deleted').'<br />
+				<strong>'._('Is Public?').'</strong><br />
+				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
+				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
+				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Deleted').'<br />
 				<p>' .
-					html_build_select_box_from_assoc(array("0" => $Language->getText('forum_admin','moderate0') ,"1" => $Language->getText('forum_admin','moderate1'),"2" => $Language->getText('forum_admin','moderate2') ),"moderation_level",$f->getModerationLevel()) . '
-				<br>' . $Language->getText('forum_admin','moderate1') . ': ' . $Language->getText('forum_admin','explain_moderate1') . '<br>' . $Language->getText('forum_admin','moderate2') . ': ' . $Language->getText('forum_admin','explain_moderate2') . '<p>
+					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('No Moderation'),"2" => _('No Moderation') ),"moderation_level",$f->getModerationLevel()) . '
+				<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<p>
 				
 
-				<strong>'.$Language->getText('forum_admin_addforum','forum_name').':</strong><br />
+				<strong>'._('Forum Name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
 				<p>
-				<strong>'.$Language->getText('forum_admin_addforum','email_posts').'</strong><br />
+				<strong>'._('Email All Posts To:').'</strong><br />
 				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="30" maxlength="50" />
 				<p>
-				<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />
+				<strong>'._('Description').':</strong><br />
 				<input type="text" name="description" value="'. $f->getDescription() .'" size="40" maxlength="80" /><br />
 				<p>
-				<input type="submit" name="submit" value="'.$Language->getText('general','update').'" />
+				<input type="submit" name="submit" value="'._('Update').'" />
 			</form><p>';
-			//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />';
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'.$Language->getText('forum_admin','delete_forum').'</a><br />';
+			//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a><br />';
 		forum_footer(array());
 
 	} elseif ($deleteforum && $group_forum_id) {
@@ -182,17 +182,17 @@ if ($group_id) {
 		} elseif (!$f->userIsAdmin()) {
 			exit_permission_denied();
 		}
-		forum_header(array('title'=>$Language->getText('forum_admin','delete')));
+		forum_header(array('title'=>_('Delete')));
 		echo '<p>
-			<strong>'.$Language->getText('forum_admin','delete_warning').'</strong><br />
+			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="deleteforum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="group_forum_id" value="'.$group_forum_id.'" />
-			<input type="checkbox" name="sure" value="1" />'.$Language->getText('forum_admin','sure').'<br />
-			<input type="checkbox" name="really_sure" value="1" />'.$Language->getText('forum_admin','really_sure').'<br />
-			<input type="submit" name="submit" value="'.$Language->getText('forum_admin','delete').'" />
+			<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'<br />
+			<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
+			<input type="submit" name="submit" value="'._('Delete').'" />
 			</form>';
 		forum_footer(array());
 
@@ -208,7 +208,7 @@ if ($group_id) {
 				if (getStringFromRequest("ok")) {
 					//actually delete the message
 					$feedback .= $fa->ExecuteAction("delete");
-					forum_header(array('title'=>$Language->getText('forum_admin_delete_message','title')));
+					forum_header(array('title'=>_('Delete a Message')));
 					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
@@ -223,12 +223,12 @@ if ($group_id) {
 					echo "</script>";
 				} else {
 					//print the delete message confirmation
-					forum_header(array('title'=>$Language->getText('forum_admin_delete_message','title')));
+					forum_header(array('title'=>_('Delete a Message')));
 					echo '<p><center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-							<h3>' . $Language->getText('forum_admin_delete_message','warning') . '</h3><p>
-							<input type="submit" name="ok" value="' . $Language->getText('general','yes') . '">    
-							<input type="submit" name="cancel" value="' . $Language->getText('general','no') . '">    
+							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3><p>
+							<input type="submit" name="ok" value="' . _('Yes') . '">    
+							<input type="submit" name="cancel" value="' . _('No') . '">    
 							<input type="hidden" name="deletemsg" value="'.$msg_id.'">
 							<input type="hidden" name="group_id" value="'.$group_id.'">
 							<input type="hidden" name="forum_id" value="'.$forum_id.'">
@@ -266,9 +266,9 @@ if ($group_id) {
 					}
 					$fm=new ForumMessage($f,$msg_id,false,false);
 					if (!$fm || !is_object($fm)) {
-						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+						exit_error(_('Error'),_('Error'));
 					} elseif ($fm->isError()) {
-						exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+						exit_error(_('Error'),$fm->getErrorMessage());
 					}
 					$subject = getStringFromRequest('subject');
 					$body = getStringFromRequest('body');
@@ -284,11 +284,11 @@ if ($group_id) {
 					$has_followups = getStringFromRequest('has_followups');
 					$most_recent_date = getStringFromRequest('most_recent_date');
 					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
-						$feedback .= $Language->getText('forum_admin_edit_message','message_edited');
+						$feedback .= _('Message Edited Successfully');
 					} else {
 						$feedback .= $fm->getErrorMessage();
 					}
-					forum_header(array('title'=>$Language->getText('forum_admin_edit_message','title')));
+					forum_header(array('title'=>_('Edit a Message')));
 					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
@@ -308,19 +308,19 @@ if ($group_id) {
 					
 					$fm=new ForumMessage($f,$msg_id,false,false);
 					if (!$fm || !is_object($fm)) {
-						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+						exit_error(_('Error'),_('Error'));
 					} elseif ($fm->isError()) {
-						exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+						exit_error(_('Error'),$fm->getErrorMessage());
 					}
 					
 					$fh = new ForumHTML($f);
 					if (!$fh || !is_object($fh)) {
-						exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+						exit_error(_('Error'),_('Error'));
 					} elseif ($fh->isError()) {
-						exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+						exit_error(_('Error'),$fh->getErrorMessage());
 					}
 					
-					forum_header(array('title'=>$Language->getText('forum_admin_edit_message','title')));
+					forum_header(array('title'=>_('Edit a Message')));
 					$fh->showEditForm($fm);
 					forum_footer(array());
 				}
@@ -340,7 +340,7 @@ if ($group_id) {
 			Show main page for choosing
 			either moderator or delete
 		*/
-		forum_header(array('title'=>$Language->getText('forum_admin','title')));
+		forum_header(array('title'=>_('Forums: Administration')));
 
 		//
 		//	Add new forum
@@ -354,13 +354,13 @@ if ($group_id) {
 		//
 		$ff=new ForumFactory($g);
 		if (!$ff || !is_object($ff) || $ff->isError()) {
-			exit_error($Language->getText('general','error'),$ff->getErrorMessage());
+			exit_error(_('Error'),$ff->getErrorMessage());
 		}
 
 		$farr =& $ff->getForums();
 
 		if ($ff->isError()) {
-			echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
+			echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
 			echo $ff->getErrorMessage();
 			forum_footer(array());
 			exit;

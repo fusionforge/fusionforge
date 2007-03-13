@@ -35,14 +35,14 @@ if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
 // session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-site_admin_header(array('title'=>$Language->getText('admin_index','title')));
+site_admin_header(array('title'=>_('Site Admin')));
 
 
 ?>
 <h4>
-	<a href="quota.php"><?php echo $Language->getText('admin_quotas','quotas_title'); ?></a>
+	<a href="quota.php"><?php echo _('Ressources usage and quota'); ?></a>
 	&nbsp;&nbsp;
-	<?php echo $Language->getText('admin_quotas','quotas_admin_title'); ?>
+	<?php echo _('Quota Manager Admin'); ?>
 </h4>
 <?php
 
@@ -55,14 +55,14 @@ if ($_POST["cmd"] == "maj")
 	$qh = $_POST["qh"] * $_quota_block_size;
 	if ($qs > $qh)
 	{
-		$message = utf8_encode($Language->getText('admin_quotas','quota_val_invalid'));
+		$message = utf8_encode(_('Input error : Hard quota must be greater than soft quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
 	}
 	else
 	{
 		$SQL = "UPDATE groups SET quota_soft = $qs, quota_hard = $qh WHERE group_id = $_POST[group_id] ";
 		db_query($SQL);
-		$message = utf8_encode($Language->getText('admin_quotas','quota_val_update_success'));
+		$message = utf8_encode(_('Successfully updated quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
 	}
 }
@@ -95,14 +95,14 @@ if (db_numrows($res_db) > 0)
 ?>
 <table width="700px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080" colspan="6"><?php echo $Language->getText('admin_quotas','projects_space_modif'); ?></td>
+		<td style="border-top:thick solid #808080" colspan="6"><?php echo _('Projects disk quota'); ?></td>
 	</tr>
 	<tr>
-		<td style="border-top:thin solid #808080"><?php echo $Language->getText('admin_quotas','id'); ?></td>
-		<td style="border-top:thin solid #808080"><?php echo $Language->getText('admin_quotas','name'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('id'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('name'); ?></td>
 		<td style="border-top:thin solid #808080"><br /></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo $Language->getText('admin_quotas','quota_soft_name'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo $Language->getText('admin_quotas','quota_hard_name'); ?></td>
+		<td style="border-top:thin solid #808080" align="right"><?php echo _('disk quota soft'); ?></td>
+		<td style="border-top:thin solid #808080" align="right"><?php echo _('disk quota hard'); ?></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 	</tr>
 	<?php
@@ -127,17 +127,17 @@ if (db_numrows($res_db) > 0)
 					size="12" 
 					value="<?php echo $q["quota_soft"]; ?>" 
 					style="background:#ffffd0;text-align:right" /> 
-					<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+					<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
 				<input type="text" name="qh" 
 					size="12" 
 					value="<?php echo $q["quota_hard"]; ?>" 
 					style="background:#ffffd0;text-align:right" /> 
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
-				<input type="submit" value="<?php echo $Language->getText('admin_quotas','modify_button'); ?>" />
+				<input type="submit" value="<?php echo _('Modify'); ?>" />
 			</td>
 		</tr>
 		</form>

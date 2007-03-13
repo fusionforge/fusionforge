@@ -62,13 +62,13 @@ if (getStringFromRequest('createvhost')) {
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= "Cannot insert VHOST entry: ".db_error();
 		} else {
-			$feedback .= $Language->getText('project_admin_vhost','vhost_scheduled');
+			$feedback .= _('Virtual Host scheduled for creation.');
 			$group->addHistory('Added vhost '.$vhost_name.' ','');
 		}
 
 	} else {
 
-		$feedback .= $Language->getText('project_admin_vhost','not_valid_hostname',array($vhost_name));
+		$feedback .= sprintf(_('Not a valid hostname - %1$s'), $vhost_name);
 
 	}
 }
@@ -96,28 +96,28 @@ if (getStringFromRequest('deletevhost')) {
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback .= "Could not delete VHOST entry:".db_error();
 	} else {
-		$feedback .= $Language->getText('project_admin_vhost','vhost_deleted');
+		$feedback .= _('VHOST deleted');
 		$group->addHistory('Virtual Host '.$row_vh['vhost_name'].' Removed','');
 
 	}
 
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_vhost','title'),'group'=>$group->getID()));
+project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group->getID()));
 
 ?>
 
 <p>&nbsp;</p>
 
-<?php echo $Language->getText('project_admin_vhost','info', array($group->getUnixName(),$GLOBALS['sys_default_domain'],$GLOBALS['sys_name'],$group->getUnixName(),$GLOBALS['sys_default_domain']   )) ?>
+<?php printf(_('<strong><span style="text-decoration:underline">Add New Virtual Host</span></strong><p>To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.  <p>Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</em>.'), $group->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_name'], $group->getUnixName(), $GLOBALS['sys_default_domain']) ?>
 <p>
 
 <form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
 <table border="0">
 <tr>
-	<td> <?php echo $Language->getText('project_admin_vhost','name') ?> </td>
+	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
 	<td> <input type="text" size="15" maxlength="255" name="vhost_name" /> </td>
-	<td> <input type="submit" value="<?php echo $Language->getText('project_admin_vhost','create') ?>" /> </td>
+	<td> <input type="submit" value="<?php echo _('Create') ?>" /> </td>
 </tr>
 </table>
 </form>
@@ -133,15 +133,15 @@ $res_db = db_query("
 if (db_numrows($res_db) > 0) {
 
 	$title=array();
-	$title[]=$Language->getText('project_admin_vhost','vhost');
-	$title[]=$Language->getText('project_admin_vhost','operations');
+	$title[]=_('Virtual Host');
+	$title[]=_('Operations');
 	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
 
 		print '	<tr>
 			<td>'.$row_db['vhost_name'].'</td>
-			<td>[ <strong><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'.$Language->getText('project_admin_vhost','delete').'</a></strong>]
+			<td>[ <strong><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;vhostid='.$row_db['vhostid'].'&amp;deletevhost=1">'._('Delete').'</a></strong>]
 			</tr>	
 		';
 
@@ -150,7 +150,7 @@ if (db_numrows($res_db) > 0) {
 	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
-	echo '<p>'.$Language->getText('project_admin_vhost','no_vhosts').'No VHOSTs defined</p>';
+	echo '<p>'._('No VHOSTs defined').'No VHOSTs defined</p>';
 }
 
 project_admin_footer(array());

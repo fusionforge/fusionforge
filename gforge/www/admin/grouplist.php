@@ -27,7 +27,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-site_admin_header(array('title'=>$Language->getText('admin_grouplist','group_list')));
+site_admin_header(array('title'=>_('Group List')));
 
 $form_catroot = getStringFromRequest('form_catroot');
 $form_pending = getStringFromRequest('form_pending');
@@ -45,17 +45,12 @@ if (!isset($sortorder) || empty($sortorder)) {
 }
 if ($form_catroot == 1) {
 	if (isset($group_name_search)) {
-		echo "<p>".$Language->getText('admin_grouplist','groups_that_begin_with'). " <strong>".$group_name_search."</strong></p>\n";
-		$sql = "SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members ";
-	    if ($sys_database_type == "mysql") {
-			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name LIKE '$group_name_search%' ";
-		} else {
-			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name ILIKE '$group_name_search%' ";
-		}
-		$sql.="GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
+		echo "<p>"._('Groups that begin with'). " <strong>".$group_name_search."</strong></p>\n";
+		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members "
+			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name ILIKE '$group_name_search%' "
+			. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
 			. ($form_pending?"AND WHERE status='P' ":"")
-			. " ORDER BY $sortorder";
-		$res = db_query($sql);
+			. " ORDER BY $sortorder");
 	} else {
 		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses "
@@ -65,7 +60,7 @@ if ($form_catroot == 1) {
 			. "ORDER BY $sortorder");
 	}
 } else {
-	echo "<p>".$Language->getText('admin_grouplist','group_list_for_category').' ';
+	echo "<p>"._('Group List for Category:').' ';
 	echo "<strong>" . category_fullname($form_catroot) . "</strong></p>\n";
 	$res = db_query("SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,"
 		. "groups.is_public,"
@@ -81,13 +76,13 @@ if ($form_catroot == 1) {
 }
 
 $headers = array(
-	$Language->getText('admin_grouplist','group_name_click_to_edit'),
-	$Language->getText('admin_grouplist','register_time'),
-	$Language->getText('admin_grouplist','unix_name'),
-	$Language->getText('admin_grouplist','status'),
-	$Language->getText('admin_grouplist','public'),
-	$Language->getText('admin_grouplist','license'),
-	$Language->getText('admin_grouplist','members')
+	_('Group Name (click to edit)'),
+	_('Register Time'),
+	_('Unix Name'),
+	_('Status'),
+	_('Public?'),
+	_('License'),
+	_('Members')
 );
 
 $headerLinks = array(

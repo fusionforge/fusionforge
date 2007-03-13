@@ -66,7 +66,7 @@ if (getStringFromRequest('submit')) {
 
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error(
-				$Language->getText('admin_trove_cat_edit','error_in_trove_operation'),
+				_('Error In Trove Operation'),
 				db_error()
 			);
 		}
@@ -88,26 +88,26 @@ if (getStringFromRequest('submit')) {
 if (getStringFromRequest("delete")) {
 	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
 	if ($form_trove_cat_id==$default_trove_cat){
-		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete'));
+		exit_error( _('Error In Trove Operation, can\'t delete trove category define as default in local.inc'));
 	}
 	$res=db_query("SELECT * FROM trove_cat WHERE parent='$form_trove_cat_id'");
 	if (!$res) {
-		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+		exit_error( _('Error In Trove Operation'), db_error());
 	}
 	if (db_numrows($res)>0) {
-		exit_error( $Language->getText('admin_trove_cat_edit','cant_delete_has_subcategories'), db_error());
+		exit_error( _('Can\'t delete, That trove cat has sub categories'), db_error());
 	} else {
 		$res=db_query("DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
 		if (!$res) {
-			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+			exit_error( _('Error In Trove Operation'), db_error());
 		}
 		$res=db_query("DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
 		if (!$res) {
-			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+			exit_error( _('Error In Trove Operation'), db_error());
 		}
 		$res=db_query("DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
 		if (!$res || db_affected_rows($res)<1) {
-			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+			exit_error( _('Error In Trove Operation'), db_error());
 		}
 	}
 	session_redirect("/admin/trove/trove_cat_list.php");
@@ -121,18 +121,18 @@ $trove_cat_id = getIntFromRequest("trove_cat_id");
 
 $res_cat = db_query("SELECT * FROM trove_cat WHERE trove_cat_id=$trove_cat_id");
 if (db_numrows($res_cat)<1) {
-	exit_error( $Language->getText('admin_trove_cat_edit','no_such_category'));
+	exit_error( _('No Such Category, That trove cat does not exist'));
 }
 $row_cat = db_fetch_array($res_cat);
 
-site_admin_header(array('title'=>$Language->getText('admin_trove_cat_edit','title')));
+site_admin_header(array('title'=>_('Site Admin: Trove - Edit Category')));
 ?>
 
-<h3><?php echo $Language->getText('admin_trove_cat_edit','edit_trove_category'); ?></h3>
+<h3><?php echo _('Edit Trove Category'); ?></h3>
 
 <form action="trove_cat_edit.php" method="post">
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','parent_category'); ?>
+<p><?php echo _('Parent Category:'); ?>
 <br /><select name="form_parent">
 
 <?php
@@ -157,16 +157,16 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <input type="hidden" name="form_trove_cat_id" value="<?php
   print $GLOBALS['trove_cat_id']; ?>" /></p>
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_short_name'); ?>:
+<p><?php echo _('New category short name (no spaces, unix-like)'); ?>:
 <br /><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>" /></p>
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_full_name'); ?>:
+<p><?php echo _('New category full name (VARCHAR 80)'); ?>:
 <br /><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>" /></p>
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_description'); ?>:
+<p><?php echo _('New category description (VARCHAR 255)'); ?>:
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
-<br /><input type="submit" name="submit" value="<?php echo $Language->getText('admin_trove_cat_edit','update'); ?>" /><input type="submit" name="delete" value="<?php echo $Language->getText('admin_trove_cat_edit','delete'); ?>" />
+<br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Update'); ?>" />
 </form>
 
 <?php

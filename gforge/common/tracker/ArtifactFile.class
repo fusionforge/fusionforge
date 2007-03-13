@@ -127,7 +127,7 @@ class ArtifactFile extends Error {
 		//
 		if (!$filename || !$filetype || !$filesize || !$bin_data) {
 			//echo '<P>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
-			$this->setError($Language->getText('tracker_artifactfile','required_fields'));
+			$this->setError(_('ArtifactFile: File name, type, size, and data are required'));
 			return false;
 		}
 

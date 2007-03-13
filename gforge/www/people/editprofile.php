@@ -39,10 +39,10 @@ if (session_loggedin()) {
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
-			$feedback .= $Language->getText('people_editprofile','update_failed');
+			$feedback .= _('User update FAILED');
 			echo db_error();
 		} else {
-			$feedback .= $Language->getText('people_editprofile','update_ok');
+			$feedback .= _('User updated successfully');
 		}
 
 	} else if (getStringFromRequest('AddSkill')) {
@@ -87,15 +87,15 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
 					echo db_error();
-					$feedback .= $Language->getText('people_editprofile','failed_to_add_skill');
-					echo '<h2>'.$Language->getText('people_editprofile','failed_to_add_skill').'<h2>';
+					$feedback .= _('Failed to add the skill');
+					echo '<h2>'._('Failed to add the skill').'<h2>';
 				} else {		  
-					$feedback = $Language->getText('people_editprofile','skill_added_ok');
+					$feedback = _('Skill added successfully');
 				}
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error($Language->getText('people_editprofile','error'),$Language->getText('people_editprofile','fill_all_required_fields'));
+			exit_error(_('error - missing info'),_('error - missing info'));
 		}
 	}
 	if (getStringFromRequest('MultiEdit')) {
@@ -110,7 +110,7 @@ if (session_loggedin()) {
 
 		$numItems = count($skill_edit);
 		if($numItems == 0) {
-			$feedback .= $Language->getText('people_editprofile','no_skills_selected');
+			$feedback .= _('No skills selected to edit.');
 		} else {
 			if (getStringFromRequest('confirmMultiEdit')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -131,7 +131,7 @@ if (session_loggedin()) {
 					$result=db_query($sql);
 					if (!$result || db_affected_rows($result) < 1) {
 						echo db_error();
-						$feedback = $Language->getText('people_editprofile','failed_update_skills');
+						$feedback = _('Failed to update skills');
 						break;
 					} else {
 						$rowsDone++;
@@ -140,29 +140,29 @@ if (session_loggedin()) {
 				}   /* end for */
 
 			} else	/* not confirmed multiedit */ {
-				people_header(array('title'=>$Language->getText('people_editprofile','skills_edit')));
-				echo '<span class="important">'.$Language->getText('people_editprofile','edit_skills').'</span>';
-				echo $Language->getText('people_editprofile','change_required_fields');
+				people_header(array('title'=>_('Skills edit')));
+				echo '<span class="important">'._('Edit Skills').'</span>';
+				echo _('Change the required fields, and press "Done" at the bottom of the page');
 				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 				handle_multi_edit($skill_edit);
 				echo '<input type="hidden" name="confirmMultiEdit" value="1" />';
-				echo '<input type="submit" name="MultiEdit" value="'.$Language->getText('general','done').'" />';
-				echo '<input type="submit" name="cancelMultiEdit" value="'.$Language->getText('general','cancel').'" />';
+				echo '<input type="submit" name="MultiEdit" value="'._('Done').'" />';
+				echo '<input type="submit" name="cancelMultiEdit" value="'._('Cancel').'" />';
 				echo '</form>';
 				people_footer(array());
 				return;
 			}
 		}
 	} else if (getStringFromRequest('cancelMultiEdit')) {
-		$feedback = $Language->getText('people_editprofile','cancel_skills_update');
+		$feedback = _('Cancelled skills update');
 	}
 	
 	if (getStringFromRequest('MultiDelete')) {
 		$skill_delete = getStringFromRequest('skill_delete');
 		$numItems = count($skill_delete);
 		if($numItems == 0) {
-			$feedback .= $Language->getText('people_editprofile','no_skills_selected_to_delete');
+			$feedback .= _('No skills selected to delete.');
 		} else {
 			if(getStringFromRequest('confirmMultiDelete')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -177,8 +177,8 @@ if (session_loggedin()) {
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
 					echo db_error();
-					$feedback .= $Language->getText('people_editprofile','failed_delete_skills');
-					echo '<h2>'.$Language->getText('people_editprofile','failed_delete_skills').'<h2>';
+					$feedback .= _('Failed to delete any skills');
+					echo '<h2>'._('Failed to delete any skills').'<h2>';
 				} else {		  
 					$feedback = $Language->getText('people_editprofile','skill_delete_successfully',(db_affected_rows($result)>1?"s":" "));
 				}
@@ -194,15 +194,15 @@ if (session_loggedin()) {
 				if (!$result || $rows < 1) {
 					echo db_error();
 				} else {		  
-					people_header(array('title'=>$Language->getText('people_editprofile','confirm_skill_delete')));
+					people_header(array('title'=>_('Confirm skill delete')));
 
-					echo '<span class="important">'.$Language->getText('people_editprofile','confirm_delete').'</span>';
+					echo '<span class="important">'._('Confirm Delete').'</span>';
 					echo $Language->getText('people_editprofile','about_to_delete',($rows > 1?"s":" ")).":<br /><br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
 					}
-					echo "<br />".$Language->getText('people_editprofile','from_skills_database')."<br /><br />";
-					echo $Language->getText('people_editprofile','are_you_sure');
+					echo "<br />"._('from the skills database. This action cannot be undone.')."<br /><br />";
+					echo _('Are you <strong>sure</strong> you wish to continue?');
 					
 					echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 					echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
@@ -210,8 +210,8 @@ if (session_loggedin()) {
 						echo '<input type="hidden" name="skill_delete[]" value="'.$skill_delete[$i].'">';
 					}
 					echo '<input type="hidden" name="confirmMultiDelete" value="1" />';
-					echo '<input type="submit" name="MultiDelete" value="'.$Language->getText('general','confirm').'" />';
-					echo '<input type="submit" name="MultiDeleteCancel" value="'.$Language->getText('general','cancel').'" />';
+					echo '<input type="submit" name="MultiDelete" value="'._('Confirm').'" />';
+					echo '<input type="submit" name="MultiDeleteCancel" value="'._('Cancel').'" />';
 					echo '</form>';
 					people_footer(array());
 				}
@@ -220,10 +220,10 @@ if (session_loggedin()) {
 			
 		}
 	} elseif (getStringFromRequest('MultiDeleteCancel')) {
-		$feedback .= $Language->getText('people_editprofile','skill_deletion_cancelled');
+		$feedback .= _('Skill deletion cancelled');
 	}
 
-	people_header(array('title'=>$Language->getText('people_editprofile','edit_your_profile')));
+	people_header(array('title'=>_('Edit Your Profile')));
 
 	html_feedback_top($feedback);
 		
@@ -234,21 +234,21 @@ if (session_loggedin()) {
 
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
-		$feedback .= $Language->getText('people_editprofile','user_fetch_failed');
-		echo '<h2>'.$Language->getText('people_editprofile','no_such_user').'<h2>';
+		$feedback .= _('User fetch FAILED');
+		echo '<h2>'._('No Such User').'<h2>';
 	} else {
 
 		echo '
-		<h2>'.$Language->getText('people_editprofile','edit_public_permissions').'<h2>
+		<h2>'._('Edit Public Permissions').'<h2>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		'.$Language->getText('people_editprofile','following_options').'
+		'._('The following option determines if others can see your skills. If they can\'t, you can still enter your skills.').'
 		<p>
-		<strong>'.$Language->getText('people_editprofile','publicly_viewable').':</strong><br />
+		<strong>'._('Publicly Viewable').':</strong><br />
 		<input type="hidden" name="form_key" value="'.form_generate_key().'"> 
-		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'.$Language->getText('general','no').'</strong><br />
-		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'.$Language->getText('general','yes').'</strong><br /></p>
+		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'._('No').'</strong><br />
+		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'._('Yes').'</strong><br /></p>
 		<p>
-		<input type="submit" name="update_profile" value="'.$Language->getText('people_editprofile','update_permission').'"></p>
+		<input type="submit" name="update_profile" value="'._('Update Permissions').'"></p>
 		</form>';
 
 		//now show the list of desired skills
@@ -258,8 +258,8 @@ if (session_loggedin()) {
 		$skills=db_query($sql);
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
-			$feedback .= $Language->getText('people_editprofile','no_skill_types_in_database');
-			echo '<h2>'.$Language->getText('people_editprofile','no_skill_types_in_database_inform').'<h2>';
+			$feedback .= _('No skill types in database (skills_data_types table)');
+			echo '<h2>'._('No skill types in database - inform system administrator').'<h2>';
 		}
 		
 		$yearArray = array();
@@ -276,15 +276,15 @@ if (session_loggedin()) {
 	   
 		
 		/* add skills. */
-		echo '<h2>'.$Language->getText('people_editprofile','add_new_skill').'</h2>';
-		echo $Language->getText('people_editprofile','you_can_enter_new_skills').'<br />'.
-			 '<span class="required-field">'.$Language->getText('people_editprofile','all_fields_required').'</span>';
+		echo '<h2>'._('Add a new skill').'</h2>';
+		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.
+			 '<span class="required-field">'._('All fields are required!').'</span>';
 	   	echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
 	   	echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
 		$cell_data = array();
-		$cell_data[] = array($Language->getText('people_editprofile','type'));
-		$cell_data[] = array($Language->getText('people_editprofile','start_date'));
-		$cell_data[] = array($Language->getText('people_editprofile','end_date'));
+		$cell_data[] = array(_('Type'));
+		$cell_data[] = array(_('Start Date'));
+		$cell_data[] = array(_('End Date'));
 		echo "<table border=0 >".
 
 				$HTML->multiTableRow('',$cell_data,TRUE);
@@ -301,27 +301,27 @@ if (session_loggedin()) {
 				"<table border=0 >";
 
 				$cell_data = array();
-				$cell_data[] = array($Language->getText('people_editprofile','title_max_100_chars'));
+				$cell_data[] = array(_('MISSINGTEXT:people_editprofile/title_max_100_chars:TEXTMISSING'));
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
 
 				echo "<tr>".
 						"<td><input type=text name=\"title\" size=100></td>".
 					"</tr>";
 				$cell_data = array();
-				$cell_data[] = array($Language->getText('people_editprofile','keywords_max_255_chars'));
+				$cell_data[] = array(_('Keywords (max 255 characters)'));
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
 				echo "<tr>".
 						"<td><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></textarea></td>".
 					"</tr>".
 					"<tr>".
-						"<td><input type=submit name=\"AddSkill\" value=\"".$Language->getText('people_editprofile','add_this_skill')."\"></td>".
+						"<td><input type=submit name=\"AddSkill\" value=\""._('Add This Skill')."\"></td>".
 					"</tr>".
 				 "</table>";
 		
 		echo '</form>';
 		
 		
-		echo '<h2>'.$Language->getText('people_editprofile','edit_delete_your_skills').'</h2>
+		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
 		<table border="0" width="100%">';
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
 		displayUserSkills(user_getid(), 1); 

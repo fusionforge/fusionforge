@@ -15,7 +15,7 @@ class DocsGroupSearchEngine extends GroupSearchEngine {
 	
 	function DocsGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', $Language->getText('searchbox','docs'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', _('This project\'s documents'));
 	}
 	
 	function isAvailable($parameters) {

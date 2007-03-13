@@ -22,19 +22,19 @@ if (!$group_id) {
 session_require(array('group'=>$group_id));
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('error','error_creating_group'));
+	exit_error(_('Error'),
+		_('MISSINGTEXT:error/error_creating_group:TEXTMISSING'));
 } else if ($group->isError()) {
-	exit_error($Language->getText('general','error'),
+	exit_error(_('Error'),
 		$group->getErrorMessage());
 }
 
 $perm =& $group->getPermission( session_get_user() );
 if (!$perm || !is_object($perm)) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('error','error_creating_perm'));
+	exit_error(_('Error'),
+		_('MISSINGTEXT:error/error_creating_perm:TEXTMISSING'));
 } else if ($perm->isError()) {
-	exit_error($Language->getText('general','error'),
+	exit_error(_('Error'),
 		$perm->getErrorMessage());
 }
 

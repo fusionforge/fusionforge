@@ -42,21 +42,21 @@ if (getStringFromRequest('submit') && $user_name) {
 				Show form for unsubscription type selection
 		*/
 
-		site_admin_header(array('title'=>$Language->getText('admin_unsubscribe','title')));
+		site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 		?>
 
-		<h4><?php echo $Language->getText('admin_unsubscribe','unsubscribe_user'); ?> <?php echo $user_name; ?></h4>
+		<h4><?php echo _('Unsubscribe user:'); ?> <?php echo $user_name; ?></h4>
 		<p>
-		<?php echo $Language->getText('admin_unsubscribe','you_can_unsubscribe'); ?>
+		<?php echo _('You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).'); ?>
 		</p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="user_name" value="<?php echo $user_name?>" />
 		Unsubscription type: <?php echo html_build_select_box_from_arrays(
-			array($Language->getText('admin_unsubscribe','mail'),$Language->getText('admin_unsubscribe','all')),
-			array($Language->getText('admin_unsubscribe','admin_initiaded_mail'),$Language->getText('admin_unsubscribe','all_site_mailing')),
+			array(_('MAIL'),_('MAIL')),
+			array(_('Admin-initiated mailings'),_('Admin-initiated mailings')),
 			'type',false,false
 		); ?>
-		<input type="submit" name="submit" value="<?php echo $Language->getText('admin_unsubscribe','unsubscribe'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('Unsubscribe'); ?>" />
 		</form>
 
 		<?php
@@ -77,61 +77,51 @@ if (getStringFromRequest('submit') && $user_name) {
 
 		if (!$u->unsubscribeFromMailings($type=='ALL' ? 1 : 0)) {
 			exit_error(
-				$Language->getText('admin_unsubscribe','error_unsubscribe_user') .$u->getErrorMessage()
+				_('Error, Could not unsubscribe user:') .$u->getErrorMessage()
 			);
 		}
 
-		$feedback .= $Language->getText('admin_unsubscribe','user_unsubscribed').'<br />';
+		$feedback .= _('User unsubscribed').'<br />';
 	}
 }
 
-site_admin_header(array('title'=>$Language->getText('admin_unsubscribe','subscription_maintance')));
+site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 
 ?>
 
 <h4>
-<?php echo $Language->getText('admin_unsubscribe','subscription_maintance'); ?>
+<?php echo _('Site Mailings Subscription Maintenance'); ?>
 </h4>
 
 <p>
-<?php echo $Language->getText('admin_unsubscribe','use_fields_bellow',array($GLOBALS['sys_name'])); ?>
+<?php printf(_('Use field below to find users which match given pattern with the %1$s username, real name, or email address (substring match is preformed, use \'%%\' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).'), $GLOBALS['sys_name']); ?>
 </p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>" />
-<input type="submit" name="submit" value="<?php echo $Language->getText('admin_unsubscribe','show_user_matching'); ?>" />
+<input type="submit" name="submit" value="<?php echo _('Show users matching pattern'); ?>" />
 </form>
 
 <?php
 
 $pattern = getStringFromRequest('pattern');
 if ($pattern) {
-	$sql = "
+	$res = db_query("
 		SELECT *
-		FROM users";
-	if ( $sys_database_type == "mysql" ) {
-		$sql .= "
-		WHERE user_name LIKE '%$pattern%'
-		OR realname LIKE '%$pattern%'
-		OR email LIKE '%$pattern%'
-		";
-	} else {
-		$sql .= "
+		FROM users
 		WHERE user_name LIKE '%$pattern%'
 		OR realname ILIKE '%$pattern%'
 		OR email ILIKE '%$pattern%'
-		";
-	}
-	$res = db_query($sql);
+	");
 
 	$title=array();
 	$title[]='&nbsp;';
-	$title[]=$Language->getText('admin_unsubscribe','user_id');
-	$title[]=$Language->getText('admin_unsubscribe','username');
-	$title[]=$Language->getText('admin_unsubscribe','real_name');
-	$title[]=$Language->getText('admin_unsubscribe','email');
-	$title[]=$Language->getText('admin_unsubscribe','site_mail');
-	$title[]=$Language->getText('admin_unsubscribe','comm_mail');
+	$title[]=_('user_id');
+	$title[]=_('Username');
+	$title[]=_('Real Name');
+	$title[]=_('Email');
+	$title[]=_('Site Mail.');
+	$title[]=_('Comm. Mail.');
 
 	echo $GLOBALS['HTML']->listTableTop($title);
 

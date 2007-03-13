@@ -153,14 +153,14 @@ echo '
 <?php	if (session_loggedin()) {
 				?>
 
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br/>
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a><br/>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a><br/>
+<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a><br/>
 			
 				<?php
 			} else {
 				?>
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a><br/>
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a><br/>
+				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a>
 				<?php
 			}
 ?>
@@ -230,7 +230,7 @@ echo '<a href="'.$this->selected_dir.'">'.$this->selected_title.'</a>';
 	global $sys_show_source;
 	global $Language;
 	if ($sys_show_source) {
-		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '.$Language->getText('source','show_source').' </a>';
+		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '._('Show source').' </a>';
 	}
 ?>
 
@@ -369,11 +369,11 @@ function listTableBottom() {
 		$selected=0;
 		$TABS_DIRS[]='/';
 		$TABS_IDS[]='home';
-		$TABS_TITLES[]=$Language->getText('menu','home');
+		$TABS_TITLES[]=_('Home');
 
 		$TABS_IDS[]='my';
 		$TABS_DIRS[]='/my/';
-		$TABS_TITLES[]=$Language->getText('menu','mypage');
+		$TABS_TITLES[]=_('My&nbsp;Page');
 		if (strstr(getStringFromServer('REQUEST_URI'),'/my/') || strstr(getStringFromServer('REQUEST_URI'),'/account/') ) {
 			$selected=count($TABS_DIRS)-1;
 		} 
@@ -382,7 +382,7 @@ function listTableBottom() {
 			$thistab='softwaremap';
 			$TABS_IDS[]='softwaremap';
 			$TABS_DIRS[]='/'.$thistab.'/';
-			$TABS_TITLES[]=$Language->getText('menu','projectree');
+			$TABS_TITLES[]=_('Project&nbsp;Tree');
 			if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
 				$selected=count($TABS_DIRS)-1;
 			}
@@ -391,7 +391,7 @@ function listTableBottom() {
 			$thistab='snippet';
 			$TABS_IDS[]=$thistab;
 			$TABS_DIRS[]='/'.$thistab.'/';
-			$TABS_TITLES[]=$Language->getText('menu','code_snippet');
+			$TABS_TITLES[]=_('Code&nbsp;Snippets');
 			if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
 				$selected=count($TABS_DIRS)-1;
 			}	
@@ -400,7 +400,7 @@ function listTableBottom() {
 			$thistab='people';
 			$TABS_IDS[]=$thistab;
 			$TABS_DIRS[]='/'.$thistab.'/';
-			$TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
+			$TABS_TITLES[]=_('Project&nbsp;Openings');
 			if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
 				$selected=count($TABS_DIRS)-1;
 			}	
@@ -508,31 +508,31 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		// Summary
 		$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
 		$TABS_IDS[]='gforge-project-summary';
-		$TABS_TITLES[]=$Language->getText('group','short_summary');
+		$TABS_TITLES[]=_('Summary');
 		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
 		if (user_ismember($group,'A')) {
 			// Project Admin
 			$TABS_DIRS[]='/project/admin/?group_id='. $group;
 			$TABS_IDS[]='gforge-project-admin';
-			$TABS_TITLES[]=$Language->getText('group','short_admin');
+			$TABS_TITLES[]=_('Admin');
 			(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 		/* Homepage */
 /*		$TABS_DIRS[]='http://'. $project->getHomePage();
-		$TABS_TITLES[]=$Language->getText('group','short_homepage');
+		$TABS_TITLES[]=_('Home Page');
 */
 
 		$TABS_DIRS[]='/activity/?group_id='. $group;
 		$TABS_IDS[]='gforge-project-activity';
-		$TABS_TITLES[]=$Language->getText('group','short_activity');
+		$TABS_TITLES[]=_('Activity');
 		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
 		// Forums
 		if ($project->usesForum()) {
 			$TABS_DIRS[]='/forum/?group_id='.$group;
 			$TABS_IDS[]='gforge-project-forum';
-			$TABS_TITLES[]=$Language->getText('group','short_forum');
+			$TABS_TITLES[]=_('Forums');
 			(($toptab == 'forums') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -540,7 +540,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesTracker()) {
 			$TABS_DIRS[]='/tracker/?group_id='.$group;
 			$TABS_IDS[]='gforge-project-tracker';
-			$TABS_TITLES[]=$Language->getText('group','short_tracker');
+			$TABS_TITLES[]=_('Tracker');
 			(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
 				? $selected=(count($TABS_TITLES)-1) : '' );
 		}
@@ -549,7 +549,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesMail()) {
 			$TABS_DIRS[]='/mail/?group_id='.$group;
 			$TABS_IDS[]='gforge-project-mail';
-			$TABS_TITLES[]=$Language->getText('group','short_mail');
+			$TABS_TITLES[]=_('Lists');
 			(($toptab == 'mail') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -557,7 +557,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesPm()) {
 			$TABS_IDS[]='gforge-project-task';
 			$TABS_DIRS[]='/pm/?group_id='.$group;
-			$TABS_TITLES[]=$Language->getText('group','short_pm');
+			$TABS_TITLES[]=_('Tasks');
 			(($toptab == 'pm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -565,7 +565,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesDocman()) {
 			$TABS_DIRS[]='/docman/?group_id='.$group;
 			$TABS_IDS[]='gforge-project-docman';
-			$TABS_TITLES[]=$Language->getText('group','short_docman');
+			$TABS_TITLES[]=_('Docs');
 			(($toptab == 'docman') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -573,7 +573,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesSurvey()) {
 			$TABS_DIRS[]='/survey/?group_id='.$group;
 			$TABS_IDS[]='gforge-project-survey';
-			$TABS_TITLES[]=$Language->getText('group','short_survey');
+			$TABS_TITLES[]=_('Surveys');
 			(($toptab == 'surveys') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -581,7 +581,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesNews()) {
 			$TABS_IDS[]='gforge-project-news';
 			$TABS_DIRS[]='/news/?group_id='.$group;
-			$TABS_TITLES[]=$Language->getText('group','short_news');
+			$TABS_TITLES[]=_('News');
 			(($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -589,7 +589,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesSCM()) {
 			$TABS_IDS[]='gforge-project-scm';
 			$TABS_DIRS[]='/scm/?group_id='.$group;
-			$TABS_TITLES[]=$Language->getText('group','short_scm');
+			$TABS_TITLES[]=_('SCM');
 			(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -606,7 +606,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		if ($project->usesFRS()) {
 			$TABS_IDS[]='gforge-project-frs';
 			$TABS_DIRS[]='/frs/?group_id='.$group;
-			$TABS_TITLES[]=$Language->getText('group','short_files');
+			$TABS_TITLES[]=_('Files');
 			(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
@@ -686,13 +686,13 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
 
 
-		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
+		print '<input type="submit" name="Search" value="'._('Search').'" />';
 
 
 		if (isset($group_id)) {
 			print '
 					
-					<a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a>';
+					<a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a>';
 		}
 		print '</form>';
 
@@ -707,11 +707,11 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 		<input type="hidden" name="group_id" value="'.$group_id.'"/>
 		<div id="advancedsearchtext">
 						<input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
-						<input type="submit" name="submitbutton" value="'.$Language->getText('advanced_search', 'search_button').'" />
-						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'and_search').'
-						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'or_search').'
+						<input type="submit" name="submitbutton" value="'._('Search').'" />
+						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
+						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
 </div>';
-	print '<br/>	'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\',true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a>';
+	print '<br/>	'._('Select').' <a href="javascript:setCheckBoxes(\'\',true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('Select').'</a>';
 
 		print $this->createUnderSections($sectionsArray).'
 		</form>';
@@ -768,7 +768,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 			}
 		
 			$return .= '<li><fieldset><legend>'.$Language->getText('group', $key).'</legend>'
-							.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
+							._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('Select').'</a>
 			<div id="list"><ul>
 							';
 								

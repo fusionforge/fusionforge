@@ -43,7 +43,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->addTimeCode($category_name)) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
-			$feedback=$Language->getText('reporting_tc','successful');
+			$feedback=_('Successful');
 		}
 
 	} elseif (getStringFromRequest('update')) {
@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->updateTimeCode($time_code,$category_name)) {
 			exit_error('Error',$r->getErrorMessage());
 		} else {
-			$feedback=$Language->getText('reporting_tc','successful');
+			$feedback=_('Successful');
 		}
 
 		$time_code=false;
@@ -62,7 +62,7 @@ if (getStringFromRequest('submit')) {
 
 }
 
-echo report_header($Language->getText('reporting_tc','title'));
+echo report_header(_('Main Page'));
 
 if ($time_code) {
 	$res1=db_query("SELECT * FROM rep_time_category WHERE time_code='$time_code'");
@@ -70,8 +70,8 @@ if ($time_code) {
 }
 $res=db_query("SELECT * FROM rep_time_category");
 
-$arr[]=$Language->getText('reporting_tc','time_code');
-$arr[]=$Language->getText('reporting_tc','category_name');
+$arr[]=_('Time Code');
+$arr[]=_('Category Name');
 
 echo $HTML->listTableTop($arr);
 
@@ -83,22 +83,22 @@ for ($i=0; $i<db_numrows($res); $i++) {
 echo $HTML->listTableBottom();
 
 ?>
-<h3><?php echo $Language->getText('reporting_tc','title2'); ?></h3>
+<h3><?php echo _('Manage Time Tracker Categories'); ?></h3>
 <p>
-<?php echo $Language->getText('reporting_tc','description'); ?>
+<?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".'); ?>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
-<strong><?php echo $Language->getText('reporting_tc','category_name'); ?>:</strong><br />
+<strong><?php echo _('Category Name'); ?>:</strong><br />
 <input type="text" name="category_name" value="<?php echo $category_name; ?>" >
 <p>
 <?php
 
 if ($time_code) { 
-	echo '<input type="submit" name="update" value="'.$Language->getText('reporting','update').'" />';
+	echo '<input type="submit" name="update" value="'._('Update').'" />';
 } else {
-	echo '<input type="submit" name="add" value="'.$Language->getText('reporting','add').'" />';
+	echo '<input type="submit" name="add" value="'._('Add').'" />';
 }
 
 ?>

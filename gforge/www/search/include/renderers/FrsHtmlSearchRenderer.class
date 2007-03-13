@@ -33,9 +33,9 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			'&nbsp;',
-			$this->Language->getText('search', 'frs_release_name'),
-			$this->Language->getText('search', 'frs_posted_by'),
-			$this->Language->getText('search', 'frs_post_date'),
+			_('Release Name'),
+			_('Posted By'),
+			_('Post Date'),
 		);
 	}
 

@@ -32,10 +32,10 @@ $_quota_block_size = 1024;
 $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
-site_admin_header(array('title'=>$Language->getText('admin_index','title')));
+site_admin_header(array('title'=>_('Site Admin')));
 ?>
 <h4>
-	<?php echo $Language->getText('admin_quotas','quotas_title'); ?>
+	<?php echo _('Ressources usage and quota'); ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="quota_admin.php">Admin</a>
 </h4>
@@ -182,51 +182,51 @@ foreach ($users as $u)
 <table width="800px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="">
 		<td style="border-top:thick solid #808080;font-weight:bold" colspan="3">
-			<?php echo $Language->getText('admin_quotas','projects_space_label'); ?>
+			<?php echo _('Projects ressources use'); ?>
 		</td>
 		<td style="border-top:thick solid #808080" colspan="7">
 			<span style="font-size:10px">
 				(&nbsp;
-				<?php echo $Language->getText('admin_quotas','project'); ?>* : 
-				<?php echo $Language->getText('admin_quotas','project_expl'); ?>
+				<?php echo _('project'); ?>* : 
+				<?php echo _('Ftp, Home'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo $Language->getText('admin_quotas','disk_scm'); ?>* : 
-				<?php echo $Language->getText('admin_quotas','disk_scm_expl'); ?>
+				<?php echo _('scm'); ?>* : 
+				<?php echo _('Cvs, Svn'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo $Language->getText('admin_quotas','disk_other'); ?>* : 
-				<?php echo $Language->getText('admin_quotas','disk_other_expl'); ?>
+				<?php echo _('others'); ?>* : 
+				<?php echo _('Download - without quota control'); ?>
 				&nbsp;)
 			</span>
 		</td>
 	</tr>
 	<tr>
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('admin_quotas','id'); ?>
+			<?php echo _('id'); ?>
 		</td>
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('admin_quotas','name'); ?>
+			<?php echo _('name'); ?>
 		</td>
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo $Language->getText('admin_quotas','database'); ?>
+			<?php echo _('database'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo $Language->getText('admin_quotas','project'); ?>*
+			<?php echo _('project'); ?>*
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo $Language->getText('admin_quotas','disk_scm'); ?>*
+			<?php echo _('scm'); ?>*
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo $Language->getText('admin_quotas','disk_other'); ?>*
+			<?php echo _('others'); ?>*
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo $Language->getText('admin_quotas','total'); ?>
+			<?php echo _('total'); ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('admin_quotas','quota_soft_name'); ?>
+			<?php echo _('disk quota soft'); ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('admin_quotas','quota_hard_name'); ?>
+			<?php echo _('disk quota hard'); ?>
 		</td>
 	</tr>
 	<?php
@@ -270,23 +270,23 @@ foreach ($users as $u)
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
 				<?php echo add_numbers_separator(convert_bytes_to_mega($q["database_size"])); ?>
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
 				<?php echo add_numbers_separator(convert_bytes_to_mega($q["disk_size_1"])); ?>
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
 				<?php echo add_numbers_separator(convert_bytes_to_mega($q["disk_size_scm"])); ?>
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
 				<?php echo add_numbers_separator(convert_bytes_to_mega($q["disk_size_other"])); ?>
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold" align="right">
 				<?php echo add_numbers_separator(convert_bytes_to_mega($local_disk_size)); ?> 
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
 				<?php 
@@ -294,7 +294,7 @@ foreach ($users as $u)
 					{
 						echo add_numbers_separator(convert_bytes_to_mega($q["quota_soft"])); 
 						echo " ";
-						echo $Language->getText('admin_quotas','mbytes'); 
+						echo _('Mb'); 
 					}
 					else
 					{
@@ -308,7 +308,7 @@ foreach ($users as $u)
 					{
 						echo add_numbers_separator(convert_bytes_to_mega($q["quota_hard"])); 
 						echo " ";
-						echo $Language->getText('admin_quotas','mbytes'); 
+						echo _('Mb'); 
 					}
 					else
 					{
@@ -323,28 +323,28 @@ foreach ($users as $u)
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">
-			<?php echo $Language->getText('admin_quotas','total'); ?>
+			<?php echo _('total'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo add_numbers_separator(convert_bytes_to_mega($total_database)); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo add_numbers_separator(convert_bytes_to_mega($total_disk_1)); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo add_numbers_separator(convert_bytes_to_mega($total_disk_scm)); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo add_numbers_separator(convert_bytes_to_mega($total_disk_other)); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo add_numbers_separator(convert_bytes_to_mega($total_database+$total_disk_1+$total_disk_scm+$total_disk_other)); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
@@ -355,17 +355,17 @@ foreach ($users as $u)
 <table width="700px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080" colspan="6">
-			<?php echo $Language->getText('admin_quotas','users_space_label'); ?>
+			<?php echo _('Users disk use'); ?>
 		</td>
 	</tr>
 	<tr>
-		<td style="border-top:thin solid #808080"><?php echo $Language->getText('admin_quotas','id'); ?></td>
-		<td style="border-top:thin solid #808080"><?php echo $Language->getText('admin_quotas','name'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('id'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('name'); ?></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('admin_quotas','disk'); ?>
+			<?php echo _('disk'); ?>
 		</td>
 	</tr>
 	<?php
@@ -382,7 +382,7 @@ foreach ($users as $u)
 			<td style="border-top:thin solid #808080"><br /></td>
 			<td style="border-top:thin solid #808080" align="right">
 				<?php echo add_numbers_separator($u["disk_size"]); ?>
-				<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+				<?php echo _('Mb'); ?>
 			</td>
 		</tr>
 		<?php
@@ -391,14 +391,14 @@ foreach ($users as $u)
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">
-			<?php echo $Language->getText('admin_quotas','total'); ?>
+			<?php echo _('total'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
 			<?php echo add_numbers_separator($total); ?>
-			<?php echo $Language->getText('admin_quotas','mbytes'); ?>
+			<?php echo _('Mb'); ?>
 		</td>
 	</tr>
 </table>

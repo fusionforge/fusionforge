@@ -33,9 +33,9 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_NEWS, $words, $isExact, $searchQuery, $groupId, 'news');
 		
 		$this->tableHeaders = array(
-			$this->Language->getText('search', 'news_summary'),
-			$this->Language->getText('search', 'news_posted_by'),
-			$this->Language->getText('search', 'news_post_date'),
+			_('Summary'),
+			_('Posted By'),
+			_('Post Date'),
 		);
 	}
 	

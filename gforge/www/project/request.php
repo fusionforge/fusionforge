@@ -49,21 +49,21 @@ if ($submit) {
 	if (!$gjr->create($usr->getId(),$comments)) {
 		exit_error('Error',$gjr->getErrorMessage());
 	} else {
-		$feedback .= $Language->getText('project_joinrequest','submitted');
+		$feedback .= _('Your request has been submitted.');
 	}
 }
 
-site_project_header(array('title'=>$Language->getText('project_joinrequest','title'),'group'=>$group_id,'toptab'=>'summary'));
+site_project_header(array('title'=>_('Request to join project'),'group'=>$group_id,'toptab'=>'summary'));
 
 ?>
-<p><?php echo $Language->getText('project_joinrequest', 'joining'); ?></p>
+<p><?php echo _('You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.'); ?></p>
 <form action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post">
 <p>
-<?php echo $Language->getText('project_joinrequest', 'comments'); ?><br>
+<?php echo _('If you want, you can send a comment to the administrator:'); ?><br>
 <textarea name="comments" rows="15" cols="60"></textarea>
 </p>
 <p>
-	<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit'); ?>" />
+	<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 </p>
 </form>
 <?php

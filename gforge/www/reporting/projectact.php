@@ -51,20 +51,20 @@ if (!$start) {
 }
 
 
-echo report_header($Language->getText('reporting','project_activity_title'));
+echo report_header(_('Project Activity'));
 
 ?>
-<h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
+<h3><?php echo _('Project Activity'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>">
 <table><tr>
-<td><strong><?php echo $Language->getText('reporting','project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
-<td><strong><?php echo $Language->getText('reporting','area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
-<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td><strong><?php echo _('Project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
+<td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
+<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

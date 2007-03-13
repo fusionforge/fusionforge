@@ -35,7 +35,7 @@ session_require( array('group'=>$sys_stats_group,'A') );
 
 global $Language;
 
-	echo report_header($Language->getText('reporting_rebuild','title'));
+	echo report_header(_('Main Page'));
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 		
 
@@ -51,14 +51,14 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 }
 	
-	echo $Language->getText('reporting_rebuild','message');
+	echo _('<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I\'m Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
-<input type="checkbox" name="im_sure" value="1"><?php echo $Language->getText('reporting_rebuild','imsure'); ?><p>
+<input type="checkbox" name="im_sure" value="1"><?php echo _('I am sure'); ?><p>
 <p>
-<input type="submit" name="submit" value="<?php echo $Language->getText('reporting_rebuild','pressonlyonce'); ?>">
+<input type="submit" name="submit" value="<?php echo _('Press ONLY ONCE'); ?>">
 </form>
 
 <?php

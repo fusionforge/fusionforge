@@ -46,16 +46,16 @@ if (getStringFromPost('submit')) {
 }
 
 mail_header(array(
-	'title' => $Language->getText('mail_admin_deletelist', 'title')
+	'title' => _('Permanently Delete List')
 ));
 
 ?>
 <h3><?php echo $ml->getName(); ?></h3>
 <p>
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
-<input type="checkbox" name="sure" value="1"><?php echo $Language->getText('mail_admin_deletelist', 'confirmdelete'); ?><br />
-<input type="checkbox" name="really_sure" value="1"><?php echo $Language->getText('mail_admin_deletelist', 'confirmdelete'); ?><br />
-<input type="submit" name="submit" value="<?php echo $Language->getText('mail_admin_deletelist', 'permanentlydelete'); ?>">
+<input type="checkbox" name="sure" value="1"><?php echo _('Confirm Delete'); ?><br />
+<input type="checkbox" name="really_sure" value="1"><?php echo _('Confirm Delete'); ?><br />
+<input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>">
 </form>
 </p>
 <?php

@@ -92,11 +92,11 @@ class FRSFile extends Error {
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_file','error_min_name_length'));
+			$this->setError(_('FRSFile Name Must Be At Least 3 Characters'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError($Language->getText('frs_file','error_name_format'));
+			$this->setError(_('Filename can only be alphanumeric and "-" "_" "." characters.'));
 			return false;
 		}
 //
@@ -106,7 +106,7 @@ class FRSFile extends Error {
 //	before calling this function
 //
 		if (!is_file($file_location) || !file_exists($file_location)) {
-			$this->setError($Language->getText('frs_file','error_invalid_file'));
+			$this->setError(_('FRSFile Appears to be invalid'));
 			return false;
 		}
 
@@ -126,7 +126,7 @@ class FRSFile extends Error {
 			filename='$name'
 			AND release_id='".$this->FRSRelease->getId()."'");
 		if (!$resfile || db_numrows($resfile) > 0) {
-			$this->setError($Language->getText('frs_file','error_already_exists').' '.db_error());
+			$this->setError(_('That filename already exists in this project space').' '.db_error());
 			return false;
 		}
 
@@ -171,7 +171,7 @@ class FRSFile extends Error {
 		//echo $cmd;
 		//print_r($out);
 		if (!file_exists("$newfilelocation$name")) {
-			$this->setError($Language->getText('frs_file','error_cannot_move').': '.$newfilelocation.$name);
+			$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
 			return false;
 		}
 		if (!$release_time) {
@@ -413,14 +413,14 @@ class FRSFile extends Error {
 				$this->data_array['filename'];
 			if (file_exists($new_file_location)) {
 				db_rollback();
-				$this->setError($Language->getText('frs_file','error_already_exists'));
+				$this->setError(_('That filename already exists in this project space'));
 				return false;
 			}
 			$cmd="/bin/mv $old_file_location $new_file_location";
 			exec($cmd,$out);
 			if (!file_exists($new_file_location)) {
 				db_rollback();
-				$this->setError($Language->getText('frs_file','error_cannot_move').': '.$new_file_location);
+				$this->setError(_('File cannot be moved to the permanent location').': '.$new_file_location);
 				return false;
 			}
 		}

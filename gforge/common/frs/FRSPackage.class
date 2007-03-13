@@ -133,11 +133,11 @@ class FRSPackage extends Error {
 	function create($name,$is_public=1) {
 		global $Language,$sys_apache_user,$sys_apache_group;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_package','error_min_name_length'));
+			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError($Language->getText('frs_package','error_name_format'));
+			$this->setError(_('FRSPackage::Update: Package Name can only be alphanumeric'));
 		}
 		$perm =& $this->Group->getPermission( session_get_user() );
 
@@ -266,7 +266,7 @@ class FRSPackage extends Error {
 	function setMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError($Language->getText('frs_package','error_set_monitor'));
+			$this->setError(_('You Can Only Monitor If You Are Logged In'));
 			return false;
 		}
 		$sql="SELECT * FROM filemodule_monitor
@@ -301,7 +301,7 @@ class FRSPackage extends Error {
 	function stopMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError($Language->getText('frs_package','error_set_monitor'));
+			$this->setError(_('You Can Only Monitor If You Are Logged In'));
 			return false;
 		}
 		$sql="DELETE FROM filemodule_monitor
@@ -369,7 +369,7 @@ class FRSPackage extends Error {
 	function update($name,$status) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_package','error_min_name_length'));
+			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 

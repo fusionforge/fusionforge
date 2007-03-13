@@ -34,9 +34,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			'&nbsp;',
-			$this->Language->getText('search', 'docs_id'),
-			$this->Language->getText('search', 'docs_title'),
-			$this->Language->getText('search', 'docs_description'),
+			_('#'),
+			_('Title'),
+			_('Description'),
 		);
 	}
 

@@ -36,12 +36,12 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $df = new DocumentFactory($g);
 if ($df->isError()) {
-	exit_error($Language->getText('general','error'),$df->getErrorMessage());
+	exit_error(_('Error'),$df->getErrorMessage());
 }
 
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError()) {
-	exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
+	exit_error(_('Error'),$dgf->getErrorMessage());
 }
 
 
@@ -83,7 +83,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 
 $df->setLanguageID($language_id);
 
-docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'));
+docman_header(_('Document Manager: Display Document'),_('Document Manager: Display Document'));
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1){
@@ -92,7 +92,7 @@ if (!$d_arr || count($d_arr) <1){
 }
 
 if (!$d_arr || count($d_arr) < 1) {
-	print "<strong>".$Language->getText('docman','error_no_docs')."</strong>";
+	print "<strong>"._('This project has no visible documents')."</strong>";
 } else {
 	doc_droplist_count($group_id, $language_id, $g);
 

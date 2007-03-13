@@ -96,7 +96,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	}
 	
 
-	$charset = $Language->getText('conf','mail_charset');
+	$charset = _('UTF-8');
 	if (!$charset) {
 		$charset = 'UTF-8';
 	}
@@ -475,7 +475,7 @@ function util_make_links ($data='') {
  */
 function show_priority_colors_key() {
 	global $Language;
-	echo '<p /><strong> '.$Language->getText('common_utils','priority_colors').':</strong><br />
+	echo '<p /><strong> '._('Priority Colors').':</strong><br />
 
 		<table border="0"><tr>';
 

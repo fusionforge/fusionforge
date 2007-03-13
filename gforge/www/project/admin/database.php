@@ -44,10 +44,10 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('error','error_creating_group'));
+	exit_error(_('Error'),
+		_('MISSINGTEXT:error/error_creating_group:TEXTMISSING'));
 } else if ($group->isError()) {
-	exit_error($Language->getText('general','error'), $group->getErrorMessage());
+	exit_error(_('Error'), $group->getErrorMessage());
 }
 
 if (getStringFromRequest('createdb')) {
@@ -69,10 +69,10 @@ if (getStringFromRequest('createdb')) {
 	$res = db_query($sql);
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= $Language->getText('project_admin_database','cannot_add').': '.db_error();
+		$feedback .= _('Cannot add database entry').': '.db_error();
 	} else {
 	
-		$feedback .= $Language->getText('project_admin_database','database_created');
+		$feedback .= _('Database scheduled for creation');
 		group_add_history('Created database '.$dbname.' type '.$row_db['dbsoftware'].' ','',$group_id);
 	
 	}
@@ -136,12 +136,12 @@ if (getStringFromRequest('deletedbconfirm')) {
 
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_database','title').'','group'=>$group_id));
+project_admin_header(array('title'=>_('Database Information').'','group'=>$group_id));
 
 // XXX ogi: where's deletedb defined?
 if ($deletedb == 1) {
 
-	print "<hr /><strong><div align=\"center\">".$Language->getText('project_admin_database','confirm_deletion')."[ <a href=\"".getStringFromServer('PHP_SELF')."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'.$Language->getText('project_admin_database','confirm_delete').'</a> ] </div></strong> <hr />";
+	print "<hr /><strong><div align=\"center\">"._('Click to confirm deletion')."[ <a href=\"".getStringFromServer('PHP_SELF')."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'._('Click to confirm deletion').'</a> ] </div></strong> <hr />";
 
 }
 
@@ -161,10 +161,10 @@ if (db_numrows($res_db) > 0) {
 
 	print '
 
-		<p><strong><span style="text-decoration:underline">'.$Language->getText('project_admin_database','add_new_database').'</span></strong></p>
-		<p><em>'.$Language->getText('project_admin_database','add_new_database_info').'</em></p>
+		<p><strong><span style="text-decoration:underline">'._('Add New Database').'</span></strong></p>
+		<p><em>'._('Clicking on "create" will schedule the creation of the database, and email the	details to the project administrators').'</em></p>
 
-		<p><strong>'.$Language->getText('project_admin_database','database_type').':</strong></p>
+		<p><strong>'._('Database Type').':</strong></p>
 		<p><form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="createdb" value="1" />
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -180,13 +180,13 @@ if (db_numrows($res_db) > 0) {
 	print '
 
 		</select>
-		&nbsp; <input type="submit" name="Create" value="'.$Language->getText('project_admin_database','create').'" />
+		&nbsp; <input type="submit" name="Create" value="'._('Create').'" />
 		</form></p>
 	';	
 
 } else {
 ?>
-<?php echo $Language->getText('project_admin_database','maximum_databases_allocated') ?>
+<?php echo _('Maximum number of databases of all types have been allocated') ?>
  <p>
 
 <?php
@@ -204,11 +204,11 @@ $res_db = db_query($sql);
 if (db_numrows($res_db) > 0) {
 
 	$title=array();
-	$title[]=$Language->getText('project_admin_database','db_type');
-	$title[]=$Language->getText('project_admin_database','state');
-	$title[]=$Language->getText('project_admin_database','new_password');
-	$title[]=$Language->getText('project_admin_database','confirm_new');
-	$title[]=$Language->getText('project_admin_database','operations');
+	$title[]=_('DB Type');
+	$title[]=_('State');
+	$title[]=_('New Password');
+	$title[]=_('Confirm New');
+	$title[]=_('Operations');
 
 	echo $GLOBALS['HTML']->listTableTop($title);
 
@@ -231,7 +231,7 @@ if (db_numrows($res_db) > 0) {
 				     <td><input type="text" name="pw" size="8" maxlength="16" /></td>
 				     <td><input type="text" name="pwconfirm" size="8" maxlength="16" /></td>
 				     <td>
-				       <input type="submit" name="submit" value="'.$Language->getText('project_admin_database','update').'" />
+				       <input type="submit" name="submit" value="'._('Update').'" />
 				     </td>
 				  </form> 
 			';
@@ -252,7 +252,7 @@ if (db_numrows($res_db) > 0) {
 
 } else {
 
-	print '<strong><span style="text-decoration:underline">'.$Language->getText('project_admin_database','current_databases').'</span></strong><p>'.$Language->getText('project_admin_database','no_databases').'</p>';
+	print '<strong><span style="text-decoration:underline">'._('Current Databases').'</span></strong><p>'._('Current Databases').'</p>';
 
 }
 

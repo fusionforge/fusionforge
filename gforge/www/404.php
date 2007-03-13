@@ -26,7 +26,7 @@
 require_once('env.inc.php');
 require_once('pre.php');    // Initial db and session library, opens session
 
-$HTML->header(array('title'=>$Language->getText('error','title')));
+$HTML->header(array('title'=>_('Requested Page not Found (Error 404)')));
 
 echo "<div align=\"center\">";
 
@@ -36,7 +36,7 @@ if (session_issecure()) {
 	echo '<h1><a href="http://'.$GLOBALS['sys_default_domain'].'">';
 }
 
-echo $Language->getText('error','not_found')."</a></h1>";
+echo _('PAGE NOT FOUND')."</a></h1>";
 
 echo "<p />";
 

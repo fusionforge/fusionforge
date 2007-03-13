@@ -33,10 +33,10 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_show_results_aggregate','title')));
+survey_header(array('title'=>_('Survey Aggregate Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>".$Language->getText('survey_show_results_aggregate','permission_denied')."</h1>";
+	echo "<h1>"._('Permission Denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -119,33 +119,29 @@ for ($i=0; $i<$count; $i++) {
 		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND response IN ('1','2','3','4','5') AND group_id='$group_id'";
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
-			echo $Language->getText('survey_show_results_aggregate','error');
+			echo _('error');
 			echo db_error();
 		} else {
 			$response_count = db_result($result2, 0, 'count');
-			echo "<strong>" . $response_count . "</strong>" .$Language->getText('survey_show_results_aggregate','responses')."<br />";
+			echo "<strong>" . $response_count . "</strong>" ._('Responses')."<br />";
 		}
 
 		//	average
 		if ($response_count > 0){
-			if ( $sys_database_type == "mysql" ) {
-				$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
-			} else {
-				$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
-			}
+			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
 			$result2=db_query($sql);
 			if (!$result2 || db_numrows($result2) < 1) {
-				echo $Language->getText('survey_show_results_aggregate','error');
+				echo _('error');
 				echo db_error();
 			} else {
-				echo "<strong>". number_format(db_result($result2, 0, 'avg'),2) ."</strong>".$Language->getText('survey_show_results_aggregate','average');
+				echo "<strong>". number_format(db_result($result2, 0, 'avg'),2) ."</strong>"._('Average');
 			}
 			
 			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5') GROUP BY response";
 			
 			$result2=db_query($sql);
 			if (!$result2 || db_numrows($result2) < 1) {
-				echo $Language->getText('survey_show_results_aggregate','error');
+				echo _('error');
 				echo db_error();
 			} else {
 				GraphResult($result2,stripslashes(db_result($result, 0, "question")));
@@ -153,12 +149,12 @@ for ($i=0; $i<$count; $i++) {
 		}// end if (responses to survey question present)
 	} else if ($question_type == "2") { // This is a text-area question.
 		echo db_result($result, 0, "question")."<br />\n";
-		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">".$Language->getText('survey_show_results_aggregate','view_comments')."</a>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All %1$s Comments')."</a>";
 
 	} else if ($question_type == "3") { // 	This is a Yes/No question.
 	  //	Show the Yes/No only if this is the first in a series
 		if ($question_type != $last_question_type) {
-			echo "<strong>".$Language->getText('survey_show_results_aggregate','yes_no')."</strong><br />\n";
+			echo "<strong>"._('Yes / No')."</strong><br />\n";
 		}
 
 		// Select the count and average of responses to this question
@@ -166,25 +162,21 @@ for ($i=0; $i<$count; $i++) {
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
-			echo $Language->getText('survey_show_results_aggregate','error');
+			echo _('error');
 			echo db_error();
 		} else {
-			echo "<strong>".db_result($result2, 0, 0)."</strong> ".$Language->getText('survey_show_results_aggregate','responses')."<br />";
+			echo "<strong>".db_result($result2, 0, 0)."</strong> "._('Responses')."<br />";
 		}
 
 		// average
-	    if ( $sys_database_type == "mysql" ) {
-			$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
-		} else {
-			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
-		}
+		$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
-			echo $Language->getText('survey_show_results_aggregate','error');
+			echo _('error');
 			echo db_error();
 		} else {
-			echo "<strong>".number_format(db_result($result2, 0, 0),2)."</strong>".$Language->getText('survey_show_results_aggregate','average');
+			echo "<strong>".number_format(db_result($result2, 0, 0),2)."</strong>"._('Average');
 		}
 
 		// Get the YES responses
@@ -192,7 +184,7 @@ for ($i=0; $i<$count; $i++) {
 
 		$result2=db_query($sql);
 
-		$name_array[0]=$Language->getText('survey_show_results_aggregate','yes');
+		$name_array[0]=_('Yes');
 
 		if (!$result2 || db_numrows($result2) < 1) {
 			$value_array[0]=0;
@@ -205,7 +197,7 @@ for ($i=0; $i<$count; $i++) {
 
 		$result2=db_query($sql);
 
-		$name_array[1]=$Language->getText('survey_show_results_aggregate','no');
+		$name_array[1]=_('No');
 
 		if (!$result2 || db_numrows($result2) < 1) {
 			$value_array[1]=0;
@@ -223,7 +215,7 @@ for ($i=0; $i<$count; $i++) {
 	} else if ($question_type == "5") { // This is a text-field question.
 		echo db_result($result, 0, "question")."<br />\n";
 
-		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">".$Language->getText('survey_show_results_aggregate','view_comments')."</a>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All %1$s Comments')."</a>";
 
 	}
 

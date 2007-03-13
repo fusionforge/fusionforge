@@ -78,7 +78,7 @@ if (getStringFromRequest('submit')) {
 		if (!$frsp->create($package_name,$is_public)) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			$feedback .=$Language->getText('project_admin_editpackages','added_package');
+			$feedback .=_('Added Package');
 		}
 
 	} elseif ($func=='delete_package' && $package_id) {
@@ -96,7 +96,7 @@ if (getStringFromRequest('submit')) {
 		if (!$frsp->delete($sure,$really_sure)) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			$feedback .=$Language->getText('frs_admin','deleted');
+			$feedback .=_('Deleted');
 		}
 
 	} else if ($func=='update_package' && $package_id && $package_name && $status_id) {
@@ -109,7 +109,7 @@ if (getStringFromRequest('submit')) {
 		if (!$frsp->update($package_name,$status_id)) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			$feedback .= $Language->getText('project_admin_editpackages','updated_package');
+			$feedback .= _('Updated Package');
 		}
 
 	}
@@ -117,17 +117,17 @@ if (getStringFromRequest('submit')) {
 }
 
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id));
+frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
 
 $res=db_query("SELECT status_id,package_id,name AS package_name 
 	FROM frs_package WHERE group_id='$group_id'");
 $rows=db_numrows($res);
 if ($res && $rows > 0) {
-	echo '<h3>'.$Language->getText('project_admin_editpackages','qrs').'</h3>';
-	echo $Language->getText('project_admin_editpackages','qrs_a_file', array('<a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">','</a>') ).'<br />';
+	echo '<h3>'._('QRS').'</h3>';
+	printf(_('Click here to %1$s quick-release a file %2$s'), '<a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">', '</a>').'<br />';
 }
 ?>
-<?php echo  $Language->getText('project_admin_editpackages','packages_info') ?>
+<?php echo  _('<h3>Packages</h3><p>You can use packages to group different file releases together, or use them however you like. <p><H4>An example of packages:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Your Packages:</H4><p><ol><li>Define your packages</li><li>Create new releases of packages</li></ol><p><h3>Releases of Packages</h3><p>A release of a package can contain multiple files.<p><H4>Examples of Releases</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.<p>') ?>
 <p>
 <?php
 /*
@@ -139,12 +139,12 @@ if ($res && $rows > 0) {
 */
 
 if (!$res || $rows < 1) {
-	echo '<h4>'.$Language->getText('project_admin_editpackages','no_packages_defined').'</h4>';
+	echo '<h4>'._('You Have No Packages Defined').'</h4>';
 } else {
 	$title_arr=array();
-	$title_arr[]=$Language->getText('project_admin_editpackages','releases');
-	$title_arr[]=$Language->getText('project_admin_editpackages','package_name');
-	$title_arr[]=$Language->getText('project_admin_editpackages','no_packages_status');
+	$title_arr[]=_('Releases');
+	$title_arr[]=_('Package Name');
+	$title_arr[]=_('Status');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -155,22 +155,22 @@ if (!$res || $rows < 1) {
 		<input type="hidden" name="func" value="update_package" />
 		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
 		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<td nowrap="nowrap" style="text-align:center">
+			<td nowrap="nowrap" align="center">
 					<a href="qrs.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','add_release').']</strong>
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
 					</a>
 				
 					<a href="showreleases.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','edit_releases').']</strong>
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Edit Releases').']</strong>
 					</a>
 
 			</td>
 			<td><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="30" /></td>
 			<td>'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
-			<td><input type="submit" name="submit" value="'.$Language->getText('general','update').'" />
+			<td><input type="submit" name="submit" value="'._('Update').'" />
 				
 					<a href="deletepackage.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('general','delete').']</strong>
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Delete').']</strong>
 					</a>
 				
 			</td>
@@ -189,17 +189,17 @@ if (!$res || $rows < 1) {
 
 ?>
 </p>
-<h3><?php echo $Language->getText('project_admin_editpackages','new_package_name') ?>:</h3>
+<h3><?php echo _('New Package Name') ?>:</h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
 <input type="text" name="package_name" value="" size="20" maxlength="30" />
 <p>
-<strong><?php echo $Language->getText('project_admin_editpackages','is_public'); ?>:</strong><br />
-<input type="radio" name="is_public" value="1" checked> <?php echo $Language->getText('project_admin_editpackages','public'); ?><br />
-<input type="radio" name="is_public" value="0"> <?php echo $Language->getText('project_admin_editpackages','private'); ?><br />
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editpackages','create_package') ?>" /></p>
+<strong><?php echo _('Publicly Viewable'); ?>:</strong><br />
+<input type="radio" name="is_public" value="1" checked> <?php echo _('Public'); ?><br />
+<input type="radio" name="is_public" value="0"> <?php echo _('Private'); ?><br />
+<p><input type="submit" name="submit" value="<?php echo _('Create This Package') ?>" /></p>
 </form></p>
 
 <?php

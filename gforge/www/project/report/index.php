@@ -107,8 +107,6 @@ function GetTime ($timedifference) {
 //
 //      get the Group object
 //
-$group_id = getIntFromRequest('group_id');
-
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
         exit_no_group();
@@ -117,7 +115,7 @@ if ($group->isError()) {
         if($group->isPermissionDeniedError()) {
                 exit_permission_denied($group->getErrorMessage());
         } else {
-                exit_error($Language->getText('general','error'), $group->getErrorMessage());
+                exit_error(_('Error'), $group->getErrorMessage());
         }
 }
 
@@ -126,16 +124,16 @@ if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
 
-site_project_header(array('title'=>$Language->getText('project_memberlist','title'),'group'=>$group_id,'toptab'
+site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'
 =>'memberlist'));
 
-echo $Language->getText('project_memberlist', 'joining');
+echo _('<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>');
 
         $title_arr=array();
-        $title_arr[]=$Language->getText('project_memberlist', 'developer');
-        $title_arr[]=$Language->getText('tracker','summary');
-        $title_arr[]=$Language->getText('tracker','open_date');
-        $title_arr[]=$Language->getText('group_activity','lastmod');
+        $title_arr[]=_('Developer');
+        $title_arr[]=_('Summary');
+        $title_arr[]=_('Open Date');
+        $title_arr[]=_('Last Modified');
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 
@@ -157,14 +155,14 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	} else {
 		echo "\n\t\t<td>".$row_memb['realname']."</td>\n";
 	}
-	echo "\t\t<td><a href=\"".$GLOBALS['sys_urlprefix']."/sendmessage.php?touser=".$row_memb['user_id']."\">" . $Language->getText('sendmessage','contact') . "
+	echo "\t\t<td><a href=\"".$GLOBALS['sys_urlprefix']."/sendmessage.php?touser=".$row_memb['user_id']."\">" . _('Contact') . "
 </a>".
 		"<a href=\"".$GLOBALS['sys_urlprefix']."/users/".
 		$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
 		<td align=\"center\">".$row_memb['role']."</td>\n";
 	if($GLOBALS['sys_use_people']) {
 		echo "\t\t<td align=\"center\"><a href=\"".$GLOBALS['sys_urlprefix']."/people/viewprofile.php?user_id=".
-			$row_memb['user_id']."\">".$Language->getText('project_memberlist','view').
+			$row_memb['user_id']."\">"._('View').
 			"</a></td>";
 	}
 	echo "</tr>\n";

@@ -45,27 +45,27 @@ class ArtifactTypeHtml extends ArtifactType {
 		$labels = array();
 		$links  = array();
 
-		$labels[] = $this->getName().': '.$Language->getText('tracker_artifacttype','browse');
+		$labels[] = $this->getName().': '._('Browse');
 		$links[]  = '/tracker/?func=browse&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
-		$labels[] = $Language->getText('tracker_artifacttype','csv');
+		$labels[] = _('Download .csv');
 		$links[]  = '/tracker/?func=downloadcsv&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		if ($this->allowsAnon() || session_loggedin()) {
-			$labels[] = $Language->getText('tracker_artifacttype','submit_new');
+			$labels[] = _('Submit New');
 			$links[]  = '/tracker/?func=add&amp;group_id='.$group_id.'&amp;atid='. $this->getID();
 		}
 
 		if (session_loggedin()) {
-			$labels[] = $Language->getText('tracker_artifacttype','reporting');
+			$labels[] = _('Reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&amp;atid='. $this->getID();
 			if ($this->isMonitoring()) {
-				$labels[] = $Language->getText('tracker_monitor','monitorstop');
+				$labels[] = _('Stop Monitor');
 			} else {
-				$labels[] = $Language->getText('tracker_monitor','monitor');
+				$labels[] = _('Monitor');
 			}
 			$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor';
 
 			if ($this->userIsAdmin()) {
-				$labels[] = $Language->getText('tracker_artifacttype','admin');
+				$labels[] = _('Admin');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
 			}
 		}
@@ -83,22 +83,22 @@ class ArtifactTypeHtml extends ArtifactType {
 		$group_id= $this->Group->getID();
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id;
-		$title_arr[]=$Language->getText('tracker_admin','add_artifact_types');
+		$title_arr[]=_('New Tracker');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&update_type=1';
-		$title_arr[]=$Language->getText('tracker_admin','update_artifact_types');
+		$title_arr[]=_('Update Settings');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_extrafield=1';
-		$title_arr[]=$Language->getText('tracker_admin','manage_extrafield');
+		$title_arr[]=_('Manage Custom Fields');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;clone_tracker=1';
-		$title_arr[]=$Language->getText('tracker_admin','clone_tracker');
+		$title_arr[]=_('Clone Tracker');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;add_canned=1';
-		$title_arr[]=$Language->getText('tracker_admin','add_canned');
+		$title_arr[]=_('Add Canned Responses');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID().'&amp;delete=1';
-		$title_arr[]=$Language->getText('tracker_admin','delete');
+		$title_arr[]=_('Delete');
 
 		echo $HTML->printSubMenu($title_arr,$links_arr);
 	}
@@ -274,7 +274,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
 		global $Language;
 		if ($text_100 == 'none'){
-			$text_100=$Language->getText('tracker_artifacttype','none');
+			$text_100=_('None');
 		}
 		$arr =& $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
@@ -314,7 +314,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
 		global $Language;
 		if ($text_100 == 'none'){
-			$text_100=$Language->getText('tracker_artifacttype','none');
+			$text_100=_('None');
 		}
 		if (!$checked || !is_array($checked)) {
 			$checked=array();
@@ -388,7 +388,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		global $Language;
 		if ($text_100=='none'){
-			$text_100=$Language->getText('tracker_artifacttype','nobody');
+			$text_100=_('Nobody');
 		}
 		$result = $this->getTechnicians();
 		//	this was a bad hack to allow you to mass-update to unassigned, which is ID=100, which 
@@ -422,7 +422,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='none') {
 		global $Language;
 		if ($text_100=='none'){
-			$text_100=$Language->getText('tracker_artifacttype','none');
+			$text_100=_('None');
 		}
 		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
 	}

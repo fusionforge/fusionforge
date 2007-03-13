@@ -33,7 +33,7 @@
 function account_pwvalid($pw) {
 	global $Language;
 	if (strlen($pw) < 6) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','sixchar');
+		$GLOBALS['register_error'] = _('Password must be at least 6 characters.');
 		return 0;
 	}
 	return 1;
@@ -50,22 +50,22 @@ function account_namevalid($name) {
 	global $Language;
 	// no spaces
 	if (strrpos($name,' ') > 0) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','nospace');
+		$GLOBALS['register_error'] = _('There cannot be any spaces in the login name.');
 		return 0;
 	}
 
 	// min and max length
 	if (strlen($name) < 3) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','tooshort');
+		$GLOBALS['register_error'] = _('Name is too short. It must be at least 3 characters.');
 		return 0;
 	}
 	if (strlen($name) > 15) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','toolong');
+		$GLOBALS['register_error'] = _('Name is too long. It must be less than 15 characters.');
 		return 0;
 	}
 
 	if (!ereg('^[a-z][-a-z0-9_]+$', $name)) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','illegal');
+		$GLOBALS['register_error'] = _('Illegal character in name.');
 		return 0;
 	}
 
@@ -77,11 +77,11 @@ function account_namevalid($name) {
 		return 0;
 	}
 	if ( exec("getent passwd $name") != "" ){
-		$GLOBALS['register_error'] = $Language->getText('account_register','err_userexist');
+		$GLOBALS['register_error'] = _('That username already exists.');
 		return 0;
 	}
 	if (eregi("^(anoncvs_)",$name)) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','cvsreserved');
+		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
 		return 0;
 	}
 		
@@ -103,12 +103,12 @@ function account_groupnamevalid($name) {
 	if (eregi("^((www[0-9]?)|(cvs[0-9]?)|(shell[0-9]?)|(ftp[0-9]?)|(irc[0-9]?)|(news[0-9]?)"
 		. "|(mail[0-9]?)|(ns[0-9]?)|(download[0-9]?)|(pub)|(users)|(compile)|(lists)"
 		. "|(slayer)|(orbital)|(tokyojoe)|(webdev)|(projects)|(cvs)|(slayer)|(monitor)|(mirrors?))$",$name)) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','dnsreserved');
+		$GLOBALS['register_error'] = _('Name is reserved for DNS purposes.');
 		return 0;
 	}
 
 	if (eregi("_",$name)) {
-		$GLOBALS['register_error'] = $Language->getText('common_include_account','nounderscore');
+		$GLOBALS['register_error'] = _('Group name cannot contain underscore for DNS reasons.');
 		return 0;
 	}
 

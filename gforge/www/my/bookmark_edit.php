@@ -38,13 +38,13 @@ if (getStringFromRequest('submit')) {
 	$bookmark_title = getStringFromRequest('bookmark_title');
 
 	if ($bookmark_url && $bookmark_title && bookmark_edit($bookmark_id, $bookmark_url, $bookmark_title)) {
-		$feedback = $Language->getText('my_bookmark_edit', 'bookmark_updated');
+		$feedback = _('Bookmark Updated');
 	} else {
-		$feedback = $Language->getText('my_bookmark_edit', 'failed_to_update_bookmark');
+		$feedback = _('Failed to update bookmark.');
 	}
 }
 
-site_user_header(array('title'=>$Language->getText('my_bookmark_edit','title')));
+site_user_header(array('title'=>_('Edit Bookmark')));
 
 $result = db_query("SELECT * from user_bookmarks where "
 	. "bookmark_id='".$bookmark_id."' and user_id='".user_getid()."'");
@@ -55,17 +55,17 @@ if ($result) {
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
-<p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
+<p><?php echo _('Bookmark URL') ?>:<br />
 <input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
 </p>
-<p><?php echo $Language->getText('my_bookmark_add','bookmark_title') ?>:<br />
+<p><?php echo _('Bookmark Title') ?>:<br />
 <input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
 </p>
-<p><input type="submit" name="submit" value=" <?php echo $Language->getText('general','submit') ?> " /></p>
+<p><input type="submit" name="submit" value=" <?php echo _('Submit') ?> " /></p>
 </form>
 <?php
 
-print "<p><a href=\"/my/\">".$Language->getText('my_bookmark','return')."</a></p>";
+print "<p><a href=\"/my/\">"._('Return')."</a></p>";
 
 site_user_footer(array());
 

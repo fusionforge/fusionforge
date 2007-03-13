@@ -17,7 +17,7 @@
  */
 function exit_error($title,$text="") {
 	global $HTML,$group_id, $Language;
-	$HTML->header(array('title'=>$Language->getText('exit','exiting_with_error'),'group'=>$group_id));
+	$HTML->header(array('title'=>_('Exiting with error'),'group'=>$group_id));
 	print '<span class="error">'.$title.'</span><p>'.htmlspecialchars($text) .'</p>';
 	$HTML->footer(array());
 	exit;
@@ -34,9 +34,9 @@ function exit_permission_denied($reason_descr='') {
 		exit_not_logged_in();
 	} else {
 		if (!$reason_descr) {
-			$reason_descr=$Language->getText('general','permexcuse');
+			$reason_descr=_('This project\'s administrator will have to grant you permission to view this page.');
 		}
-		exit_error($Language->getText('general','permdenied'),$reason_descr);
+		exit_error(_('Permission Denied.'),$reason_descr);
 	}
 }
 
@@ -54,7 +54,7 @@ function exit_not_logged_in() {
  */
 function exit_no_group() {
 	global $Language;
-	exit_error($Language->getText('exit','choose_group_title'),$Language->getText('exit','choose_group_body'));
+	exit_error(_('ERROR - No group was chosen or you can\'t access it'),_('ERROR - No group was chosen or you can\'t access it'));
 }
 
 /**
@@ -62,7 +62,7 @@ function exit_no_group() {
  */
 function exit_missing_param() {
 	global $Language;
-	exit_error($Language->getText('exit','missing_parameters_title'),$Language->getText('exit','missing_parameters_body'));
+	exit_error(_('Error - missing parameters'),_('Error - missing parameters'));
 }
 
 /**
@@ -70,7 +70,7 @@ function exit_missing_param() {
  */
 function exit_disabled() {
 	global $Language;
-	exit_error($Language->getText('exit','disabled_title'),$Language->getText('exit','disabled_body'));
+	exit_error(_('Error - disabled feature.'),_('Error - disabled feature.'));
 }
 
 /**
@@ -78,7 +78,7 @@ function exit_disabled() {
  */
 function exit_form_double_submit() {
 	global $Language;
-	exit_error($Language->getText('exit','double_submit_title'),$Language->getText('exit','double_submit_body'));
+	exit_error(_('Error - double submit'),_('Error - double submit'));
 }
 
 ?>

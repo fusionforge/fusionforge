@@ -32,10 +32,10 @@ class LdapextauthPlugin extends Plugin {
 		
 		$this->ldap_conn = false ;
 
-		require_once('plugins/ldapextauth/config.php') ;
-                $this->base_dn = $sys_ldap_dn ;
+                $this->base_dn = "dc=mirexpress" ;
 		$this->ldap_server = $sys_ldap_server ;
 		$this->ldap_port = $sys_ldap_port ;
+		require_once('plugins/ldapextauth/config.php') ;
 		if ($base_dn) {
 			$this->base_dn = $base_dn ;
 		}
@@ -102,7 +102,7 @@ class LdapextauthPlugin extends Plugin {
 				}
 			} else {
 				// Wrong password according to LDAP
-				$feedback=$Language->getText('session','invalidpasswd');
+				$feedback=_('Invalid Password Or User Name');
 				$GLOBALS['ldap_auth_failed']=true;
 				return false ;
 			}
@@ -204,7 +204,7 @@ class LdapextauthPlugin extends Plugin {
 				return true ;
 			} else {
 				$GLOBALS['ldap_auth_failed']=true;
-				$feedback=$Language->getText('session','invalidpasswd');
+				$feedback=_('Invalid Password Or User Name');
 				return false ; // Probably ignored, but just in case
 			}
 		}

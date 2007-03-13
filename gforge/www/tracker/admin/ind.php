@@ -67,8 +67,8 @@
 	echo site_project_header($params);
 	echo $HTML->subMenu(
 		array(
-			$Language->getText('tracker','reporting'),
-			$Language->getText('tracker','admin')
+			_('Report'),
+			_('Admin')
 		),
 		array(
 			'/tracker/reporting/?group_id='.$group_id,
@@ -77,17 +77,17 @@
 	);
 
 	if (!$at_arr || count($at_arr) < 1) {
-		echo "<h1>".$Language->getText('tracker_admin','no_trackers_found')."</h1>";
+		echo "<h1>"._('MISSINGTEXT:tracker_admin/no_trackers_found:TEXTMISSING')."</h1>";
 		echo "<p>&nbsp;</p>";
 	} else {
 
 		echo '
-		<p>'.$Language->getText('tracker_admin','choose_datatype').'.</p>';
+		<p>'._('Choose a data type and you can set up prefs, categories, groups, users, and permissions').'.</p>';
 
 		/*
 			Put the result set (list of forums for this group) into a column with folders
 		*/
-		$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('tracker_admin_update_type','description'));
+		$tablearr=array(_('Tracker'),_('Tracker'));
 		echo $HTML->listTableTop($tablearr);
 
 		for ($j = 0; $j < count($at_arr); $j++) {
@@ -112,38 +112,38 @@
 		//show nothing
 	} else {
 
-	?><?php echo $Language->getText('tracker_admin','intro') ?>
+	?><?php echo _('<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming') ?>
 	<p>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_at" value="y" />
 	<p>
-	<?php echo $Language->getText('tracker_admin_update_type','name') ?><br />
+	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 	<input type="text" name="name" value=""></p>
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','description') ?>:</strong><br />
+	<strong><?php echo _('Description') ?>:</strong><br />
 	<input type="text" name="description" value="" size="50" /></p>
 	<p>
-	<input type="checkbox" name="is_public" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','publicy_available') ?></strong><br />
-	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','allow_anonymous') ?></strong><br />
+	<input type="checkbox" name="is_public" value="1" /> <strong><?php echo _('Publicly Available') ?></strong><br />
+	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo _('Allow non-logged-in postings') ?></strong><br />
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','send_submissions') ?>:</strong><br />
+	<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 	<input type="text" name="email_address" value="" /></p>
 	<p>
-	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','email_all_changes') ?></strong><br /></p>
+	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo _('Send email on all changes') ?></strong><br /></p>
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','days_overdue') ?>:</strong><br />
+	<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
 	<input type="text" name="due_period" value="30" /></p>
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','pending_timeout') ?>:</strong><br />
+	<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
 	<input type="text" name="status_timeout" value="14" /></p>
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','submit_item_form_text') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
 	<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
 	<p>
-	<strong><?php echo $Language->getText('tracker_admin_update_type','browse_item_form_text') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
 	<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
 	<p>
-	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 	</form></p>
 	<?php
 	}

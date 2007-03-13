@@ -210,14 +210,14 @@ class ArtifactType extends Error {
 		}
 
 		if (!$name || !$description || !$due_period) {
-			$this->setError($Language->getText('tracker_artifacttype','required_fields'));
+			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
 		
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError($Language->getText('tracker_artifacttype','invalid_emails').': '.implode(',',$invalid_emails));
+				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',',$invalid_emails));
 				return false;
 			}
 		}
@@ -556,7 +556,7 @@ class ArtifactType extends Error {
 
 		} else {
 
-			$this->setError($Language->getText('tracker_artifact','error_valid_email_required'));
+			$this->setError(_('SetMonitor::Valid Email Address Required'));
 			return false;
 
 		}
@@ -573,7 +573,7 @@ class ArtifactType extends Error {
 				$this->setError(db_error());
 				return false;
 			} else {
-				$this->setError($Language->getText('tracker_artifacttype','monitoring_activated'));
+				$this->setError(_('Now Monitoring Tracker'));
 				return false;
 			}
 		} else {
@@ -581,7 +581,7 @@ class ArtifactType extends Error {
 			db_query("DELETE FROM artifact_type_monitor
 				WHERE group_artifact_id='". $this->getID() ."'
 				AND user_id='$user_id'");
-			$this->setError($Language->getText('tracker_artifacttype','monitoring_deactivated'));
+			$this->setError(_('Tracker Monitoring Deactivated'));
 			return false;
 		}
 	}
@@ -590,7 +590,7 @@ class ArtifactType extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) AS count FROM artifact_type_monitor 
+		$sql="SELECT count(*) FROM artifact_type_monitor 
 			WHERE user_id='".user_getid()."' AND group_artifact_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
@@ -1189,14 +1189,14 @@ class ArtifactType extends Error {
 		}
 		
 		if (!$name || !$description || !$due_period || !$status_timeout) {
-			$this->setError($Language->getText('tracker_artifacttype','required_fields'));
+			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
 		
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError($Language->getText('tracker_artifacttype','invalid_emails').': '.implode(',',$invalid_emails));
+				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',',$invalid_emails));
 				return false;
 			}
 		}

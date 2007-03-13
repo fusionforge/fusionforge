@@ -27,18 +27,16 @@
 
 function report_header($title) {
 	global $HTML,$sys_name,$Language;
-	echo $HTML->header(array('title'=>" ".$Language->getText('reporting','title').": " . $title));
+	echo $HTML->header(array('title'=>" "._('Reporting').": " . $title));
 	if (isset($GLOBALS['feedback'])) {
 		echo html_feedback_top($GLOBALS['feedback']);
 	}
-	echo "<h2>".$Language->getText('reporting','subtitle',$sys_name)."</h2><p>";
+	echo "<h2>".sprintf(_('%1$s Reporting'), $sys_name)."</h2><p>";
 }
 
 function report_footer() {
 	global $HTML;
-	if (isset($GLOBALS['feedback'])) {
-		echo html_feedback_bottom($GLOBALS['feedback']);
-	}
+	echo html_feedback_bottom($GLOBALS['feedback']);
 	echo $HTML->footer(array());
 }
 
@@ -46,13 +44,13 @@ function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
 	global $Language;
 	if ($suppress_daily) {
 		$vals=array(2,3);
-		$titles=array($Language->getText('reporting','weekly'),
-			$Language->getText('reporting','monthly'));
+		$titles=array(_('Weekly'),
+			_('Monthly'));
 	} else {
 		$vals=array(1,2,3);
-		$titles=array($Language->getText('reporting','daily'),
-			$Language->getText('reporting','weekly'),
-			$Language->getText('reporting','monthly'));
+		$titles=array(_('Daily'),
+			_('Weekly'),
+			_('Monthly'));
 	}
 	return html_build_select_box_from_arrays ($vals,$titles,$name,$selected,false);
 }
@@ -63,7 +61,7 @@ function report_weeks_box($Report, $name='week', $selected=false) {
 
 	$arr2=array();
 	for ($i=0; $i<count($arr); $i++) {
-		$arr2[$i]=date($sys_shortdatefmt, $arr[$i]) .' '.$Language->getText('general', 'to').' '. date($sys_shortdatefmt, ($arr[$i]+6*24*60*60));
+		$arr2[$i]=date($sys_shortdatefmt, $arr[$i]) .' '._('to').' '. date($sys_shortdatefmt, ($arr[$i]+6*24*60*60));
 	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
@@ -78,13 +76,13 @@ function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
 	$days[]='4';
 	$days[]='5';
 	$days[]='6';
-	$names[]=$Language->getText('calendar','sunday');
-	$names[]=$Language->getText('calendar','monday');
-	$names[]=$Language->getText('calendar','tuesday');
-	$names[]=$Language->getText('calendar','wednesday');
-	$names[]=$Language->getText('calendar','thursday');
-	$names[]=$Language->getText('calendar','friday');
-	$names[]=$Language->getText('calendar','saturday');
+	$names[]=_('Sunday');
+	$names[]=_('Monday');
+	$names[]=_('Tuesday');
+	$names[]=_('Wednesday');
+	$names[]=_('Thursday');
+	$names[]=_('Friday');
+	$names[]=_('Saturday');
 	return html_build_select_box_from_arrays ($days,$names,$name,$selected,false);
 
 //	return html_build_select_box_from_arrays (array_reverse(array_values($Report->adjust_days)),array_reverse(array_keys($Report->adjust_days)),$name,$selected,false);
@@ -96,21 +94,16 @@ function report_months_box($Report, $name='month', $selected=false) {
 
 	$arr2=array();
 	for ($i=0; $i<count($arr); $i++) {
-		$arr2[$i]=date($Language->getText('calendar', 'monthdatefmt'),$arr[$i]);
+		$arr2[$i]=date(_('Y-m'),$arr[$i]);
 	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
 
 function report_useract_box($name='dev_id', $selected='1', $start_with='') {
-	global $sys_database_type;
 
 	if ($start_with) {
-		if ( $sys_database_type == "mysql" ) {
-			$sql2=" AND lastname LIKE '$start_with%' ";
-		} else {
-			$sql2=" AND lastname ILIKE '$start_with%' ";
-		}
+		$sql2=" AND lastname ILIKE '$start_with%' ";
 	}
 
 	$res=db_query("SELECT user_id,realname 
@@ -121,14 +114,9 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 }
 
 function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
-	global $sys_database_type;
 
 	if ($start_with) {
-		if ( $sys_database_type == "mysql" ) {
-			$sql2=" AND lastname LIKE '$start_with%' ";
-		} else {
-			$sql2=" AND lastname ILIKE '$start_with%' ";
-		}
+		$sql2=" AND lastname ILIKE '$start_with%' ";
 	}
 
 	$res=db_query("SELECT user_id,realname 
@@ -152,24 +140,24 @@ function report_area_box($name='area', $selected='1') {
 	$arr[]='taskman';
 	$arr[]='downloads';
 
-	$arr2[]=$Language->getText('group','short_tracker');
-	$arr2[]=$Language->getText('group','short_forum');
-	$arr2[]=$Language->getText('group','short_docman');
-	$arr2[]=$Language->getText('group','short_pm');
-	$arr2[]=$Language->getText('stats_site_utils','downloads');
+	$arr2[]=_('Tracker');
+	$arr2[]=_('Forums');
+	$arr2[]=_('Docs');
+	$arr2[]=_('Tasks');
+	$arr2[]=_('Downloads');
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
 	global $Language;
-	$arr[]=$Language->getText('group','short_bugs');
-	$arr[]=$Language->getText('group','short_support');
-	$arr[]=$Language->getText('group','short_patch');
-	$arr[]=$Language->getText('reporting','feature_req');
-	$arr[]=$Language->getText('reporting','other_trackers');
-	$arr[]=$Language->getText('reporting','forum_messages');
-	$arr[]=$Language->getText('group','short_pm');
-	$arr[]=$Language->getText('stats_site_utils','downloads');
+	$arr[]=_('Bugs');
+	$arr[]=_('Support');
+	$arr[]=_('Patches');
+	$arr[]=_('Feature Requests');
+	$arr[]=_('Other Trackers');
+	$arr[]=_('Forum Messages');
+	$arr[]=_('Tasks');
+	$arr[]=_('Downloads');
 
 	$arr2[]='1';
 	$arr2[]='2';

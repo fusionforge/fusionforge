@@ -34,7 +34,7 @@ $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>".$Language->getText('survey_show_results_csv','permission_denied')."</h1>";
+        echo "<h1>"._('Permission Denied')."</h1>";
 	exit;
 }
 

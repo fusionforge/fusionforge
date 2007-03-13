@@ -44,8 +44,8 @@ if ($msg_id) {
 		/*
 			Message not found
 		*/
-		exit_error($Language->getText('forum_message','message_not_found_title'),
-				$Language->getText('forum_message','message_not_found_body'));
+		exit_error(_('Message Not Found'),
+				_('This message does not (any longer) exist'));
 	}
 
 	$group_id=db_result($result,0,'group_id');
@@ -61,23 +61,23 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error($Language->getText('general','error'),$Language->getText('forum_message','error_getting_new_forum'));
+		exit_error(_('Error'),_('Error'));
 	} elseif ($f->isError()) {
-		exit_error($Language->getText('general','error'),$f->getErrorMessage());
+		exit_error(_('Error'),$f->getErrorMessage());
 	}
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+		exit_error(_('Error'),_('Error'));
 	} elseif ($fm->isError()) {
-		exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+		exit_error(_('Error'),$fm->getErrorMessage());
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessagefactory'));
+		exit_error(_('Error'),_('Error'));
 	} elseif ($fmf->isError()) {
-		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
+		exit_error(_('Error'),$fmf->getErrorMessage());
 	}
 
 	$fmf->setUp(0,'threaded',200,'');
@@ -87,15 +87,15 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+		exit_error(_('Error'),_('Error'));
 	} elseif ($fh->isError()) {
-		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
 	forum_header(array('title'=>db_result($result,0,'subject'),'forum_id'=>$forum_id));
 
 	$title_arr=array();
-	$title_arr[]=$Language->getText('forum_message','message').': '.$msg_id;
+	$title_arr[]=_('Message').': '.$msg_id;
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -104,13 +104,13 @@ if ($msg_id) {
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
-	echo $Language->getText('forum_message','by').': '. $fm->getPosterRealName() .' (<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$fm->getPosterName().'/">'. $fm->getPosterName() .'</a>)<br />';
-	echo $Language->getText('forum_message','date').': '. date($sys_datefmt, $fm->getPostDate()) .'<br />';
+	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$fm->getPosterName().'/">'. $fm->getPosterName() .'</a>)<br />';
+	echo _('DATE').': '. date($sys_datefmt, $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '<br/>';
 	
-	echo $Language->getText('forum_message','subject').': '. $fm->getSubject() .'<p>&nbsp;</p>';
+	echo _('SUBJECT').': '. $fm->getSubject() .'<p>&nbsp;</p>';
 	
 	if (!strstr('<',$fm->getBody())) { 
 		echo nl2br($fm->getBody()); //backwards compatibility for non html messages
@@ -127,7 +127,7 @@ if ($msg_id) {
 
 	*/
 	echo '<br /><br />
-		<h3>'.$Language->getText('forum_message','thread_view').'</h3>';
+		<h3>'._('Thread View').'</h3>';
 
 	$msg_arr =& $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
 	if ($fmf->isError()) {
@@ -135,9 +135,9 @@ if ($msg_id) {
 	}
 
 	$title_arr=array();
-	$title_arr[]=$Language->getText('forum_forum','thread');
-	$title_arr[]=$Language->getText('forum_forum','author');
-	$title_arr[]=$Language->getText('forum_forum','date');
+	$title_arr[]=_('Thread');
+	$title_arr[]=_('Author');
+	$title_arr[]=_('Date');
 
 	$ret_val = $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -197,13 +197,13 @@ if ($msg_id) {
 	*/
 
 //	echo '<p>&nbsp;<p>';
-	echo '<div align="center"><h3>'.$Language->getText('forum_message','post_followup').'</h3></div>';
+	echo '<div align="center"><h3>'._('Post a followup to this message').'</h3></div>';
 
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 
 } else {
-	forum_header(array('title'=>$Language->getText('forum_message','must_choose_message_title')));
-	echo '<h1>'.$Language->getText('forum_message','must_choose_message_body').'</h1>';
+	forum_header(array('title'=>_('Must Choose A Message First')));
+	echo '<h1>'._('You Must Choose A Message First').'</h1>';
 
 }
 

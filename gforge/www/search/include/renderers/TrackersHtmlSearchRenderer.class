@@ -33,10 +33,10 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			'&nbsp;',
-			$this->Language->getText('search', 'artifact_id'),
-			$this->Language->getText('search', 'artifact_summary'),
-			$this->Language->getText('search', 'artifact_author'),
-			$this->Language->getText('search', 'artifact_date')
+			_('#'),
+			_('Summary'),
+			_('Submitted By'),
+			_('Date')
 		);
 	}
 

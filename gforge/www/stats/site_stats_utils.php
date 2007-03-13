@@ -110,29 +110,29 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print '<form action="projects.php" method="get">' . "\n";
 	print '<table width="100%" cellpadding="0" cellspacing="0" class="tableheading">' . "\n";
 
-	print '<tr><td><strong>'.$Language->getText('stats_site_utils','in_trove_category').'</strong></td><td>';
+	print '<tr><td><strong>'._('Projects in trove category:').'</strong></td><td>';
 	stats_generate_trove_pulldown( $trovecat );
 	print '</td></tr>';
 
-	print '<tr><td><strong>'.$Language->getText('stats_site_utils','or_special_project_list').'</strong></td>';
+	print '<tr><td><strong>'._('OR enter Special Project List:').'</strong></td>';
 	print '<td> <input type="text" width="100" name="projects" value="'. $projects . '" />';
-	print '  ('.$Language->getText('stats_site_utils','comma_seperated_group_id').'</td></tr>';
+	print '  ('._('<strong>comma separated</strong> group_id\'s)').'</td></tr>';
 
-	print '<tr><td><strong>'.$Language->getText('stats_site_utils','report').'</strong></td><td>';
+	print '<tr><td><strong>'._('Report:').'</strong></td><td>';
 
 	$reports_ids=array();
 	$reports_ids[]='last_30';
 	$reports_ids[]='all';
 
 	$reports_names=array();
-	$reports_names[]=$Language->getText('stats_site_utils','last_30');
-	$reports_names[]=$Language->getText('stats_site_utils','all');
+	$reports_names[]=_('last_30');
+	$reports_names[]=_('all');
 
 	echo html_build_select_box_from_arrays($reports_ids, $reports_names, 'report', $report, false);
 
 	print ' </td></tr>';
 
-	print '<tr><td><strong>'.$Language->getText('stats_site_utils','view_by').'</strong></td><td>';
+	print '<tr><td><strong>'._('View by:').'</strong></td><td>';
 	$orderby_vals = array("downloads",
 				"site_views",
 				"subdomain_views",
@@ -152,7 +152,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print html_build_select_box_from_arrays ( $orderby_vals, $orderby_vals, "orderby", $orderby, false );
 	print '</td></tr>';
 
-	print '<tr><td colspan="2" style="text-align:center"> <input type="submit" value="'.$Language->getText('stats_site_utils','generate_report').'" /> </td></tr>';
+	print '<tr><td colspan="2" align="center"> <input type="submit" value="'._('Generate Report').'" /> </td></tr>';
 
 	print '</table>' . "\n";
 	print '</form>' . "\n";
@@ -262,15 +262,15 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 		<tr valign="top" align="right" class="tableheading">
-			<td><strong><?php echo $Language->getText('stats_site_utils','group_name'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','page_views'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','downloads'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','bugs'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','support'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','patches'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','all_trkr'); ?></strong></td>
-			<td colspan="2"><strong><?php echo $Language->getText('stats_site_utils','tasks'); ?></strong></td>
-			<td colspan="3"><strong><?php echo $Language->getText('stats_site_utils','cvs'); ?></strong></td>
+			<td><strong><?php echo _('Group Name'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('Page Views'); ?></strong></td>
+			<td><strong><?php echo _('Downloads'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('Bugs'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('Support'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('Patches'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('All Trkr'); ?></strong></td>
+			<td colspan="2"><strong><?php echo _('Tasks'); ?></strong></td>
+			<td colspan="3"><strong><?php echo _('CVS'); ?></strong></td>
 		</tr>
 
 		<?php
@@ -288,22 +288,22 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		?>
 		<tr valign="top" align="right" class="tableheading">
 			<td>&nbsp;</td>
-			<td><a href="<?php echo $uri_string; ?>site_views"><?php echo $Language->getText('stats_site_utils','site'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>subdomain_views"><?php echo $Language->getText('stats_site_utils','subdomain'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>downloads"><?php echo $Language->getText('stats_site_utils','total'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>bugs_opened"><?php echo $Language->getText('stats_site_utils','opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>bugs_closed"><?php echo $Language->getText('stats_site_utils','cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>support_opened"><?php echo $Language->getText('stats_site_utils','opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>support_closed"><?php echo $Language->getText('stats_site_utils','cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>patches_opened"><?php echo $Language->getText('stats_site_utils','opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>patches_closed"><?php echo $Language->getText('stats_site_utils','cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>artifacts_opened"><?php echo $Language->getText('stats_site_utils','opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>artifacts_closed"><?php echo $Language->getText('stats_site_utils','cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>tasks_opened"><?php echo $Language->getText('stats_site_utils','opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>tasks_closed"><?php echo $Language->getText('stats_site_utils','cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>cvs_checkouts"><?php echo $Language->getText('stats_site_utils','cos'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo $Language->getText('stats_site_utils','comms'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>cvs_adds"><?php echo $Language->getText('stats_site_utils','adds'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>site_views"><?php echo _('Site'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>subdomain_views"><?php echo _('Subdomain'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>downloads"><?php echo _('Total'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_opened"><?php echo _('Opn'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>support_opened"><?php echo _('Opn'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>support_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_opened"><?php echo _('Opn'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_opened"><?php echo _('Opn'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_opened"><?php echo _('Opn'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_checkouts"><?php echo _('CO\'s'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo _('Comm\'s'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_adds"><?php echo _('Adds'); ?></a></td>
 			</tr>
 		<?php
 	
@@ -337,7 +337,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<?php
 
 	} else {
-		echo $Language->getText('stats_site_utils','no_valid_data')."\n";
+		echo _('Query returned no valid data.')."\n";
 		echo "<br /><hr /><br />\n $sql \n<br /><hr /><br />\n\n";
 		echo db_error();
 	}
@@ -371,18 +371,18 @@ function stats_site_projects_daily( $span ) {
 	if ( ($valid_days = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_days',array($valid_days)); ?></strong></p>
+		<p><strong><?php printf(_('Statistics for the past %1$s days'), $valid_days); ?></strong></p>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
-			<td><strong><?php echo $Language->getText('stats_site_utils','day'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','site_views'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','subdomain_views'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','downloads'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','bugs'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','support'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','patches'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','tasks'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','cvs'); ?></strong></td>
+			<td><strong><?php echo _('Day'); ?></strong></td>
+			<td><strong><?php echo _('Site Views'); ?></strong></td>
+			<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
+			<td><strong><?php echo _('Downloads'); ?></strong></td>
+			<td><strong><?php echo _('Bugs'); ?></strong></td>
+			<td><strong><?php echo _('Support'); ?></strong></td>
+			<td><strong><?php echo _('Patches'); ?></strong></td>
+			<td><strong><?php echo _('Tasks'); ?></strong></td>
+			<td><strong><?php echo _('CVS'); ?></strong></td>
 			</tr>
 		<?php
 	
@@ -407,7 +407,7 @@ function stats_site_projects_daily( $span ) {
 		<?php
 
 	} else {
-		echo $Language->getText('stats_site_utils','no_data');
+		echo _('No Data');
 	}
 }
 
@@ -425,20 +425,20 @@ function stats_site_projects_monthly() {
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php echo $Language->getText('stats_site_utils','statistics_for_the_past_months',array($valid_months)); ?></strong></p>
+		<p><strong><?php printf(_('Statistics for the past %1$s months'), $valid_months); ?></strong></p>
 
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
-			<td><strong><?php echo $Language->getText('stats_site_utils','month'); ?>Month</strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','site_views'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','subdomain_views'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','downloads'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','bugs'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','support'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','patches'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','all_trkr'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','tasks'); ?></strong></td>
-			<td><strong><?php echo $Language->getText('stats_site_utils','cvs'); ?></strong></td>
+			<td><strong><?php echo _('Month'); ?>Month</strong></td>
+			<td><strong><?php echo _('Site Views'); ?></strong></td>
+			<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
+			<td><strong><?php echo _('Downloads'); ?></strong></td>
+			<td><strong><?php echo _('Bugs'); ?></strong></td>
+			<td><strong><?php echo _('Support'); ?></strong></td>
+			<td><strong><?php echo _('Patches'); ?></strong></td>
+			<td><strong><?php echo _('All Trkr'); ?></strong></td>
+			<td><strong><?php echo _('Tasks'); ?></strong></td>
+			<td><strong><?php echo _('CVS'); ?></strong></td>
 			</tr>
 		<?php
 
@@ -464,7 +464,7 @@ function stats_site_projects_monthly() {
 		<?php
 
 	} else {
-		echo $Language->getText('stats_site_utils','no_data');
+		echo _('No Data');
 	}
 }
 
@@ -484,15 +484,15 @@ function stats_site_aggregate( ) {
 	
 
 	?>
-	<p><strong><?php echo $Language->getText('stats_site_utils','current_statistic_all_time'); ?></strong></p>
+	<p><strong><?php echo _('Current Aggregate Statistics for All Time'); ?></strong></p>
 
 	<table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
-		<td><strong><?php echo $Language->getText('stats_site_utils','site_views'); ?></strong></td>
-		<td><strong><?php echo $Language->getText('stats_site_utils','subdomain_views'); ?></strong></td>
-		<td><strong><?php echo $Language->getText('stats_site_utils','downloads'); ?></strong></td>
-		<td><strong><?php echo $Language->getText('stats_site_utils','developers'); ?></strong></td>
-		<td><strong><?php echo $Language->getText('stats_site_utils','projects'); ?></strong></td>
+		<td><strong><?php echo _('Site Views'); ?></strong></td>
+		<td><strong><?php echo _('Subdomain Views'); ?></strong></td>
+		<td><strong><?php echo _('Downloads'); ?></strong></td>
+		<td><strong><?php echo _('Developers'); ?></strong></td>
+		<td><strong><?php echo _('Projects'); ?></strong></td>
 	</tr>
 
 	<tr>

@@ -9,7 +9,7 @@
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="update_type" value="y" />
 		<p>
-		<?php echo $Language->getText('tracker_admin_update_type','name') ?><br />
+		<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getName();
 		} else { 
@@ -19,7 +19,7 @@
 		} 
 		?>
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_update_type','description') ?>:</strong><br />
+		<strong><?php echo _('Description') ?>:</strong><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getDescription();
 		} else {
@@ -29,24 +29,24 @@
 		} 
 		?>
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_update_type','send_submissions') ?>:</strong><br />
+		<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 		<input type="text" name="email_address" value="<?php echo $ath->getEmailAddress(); ?>" /></p>
 		<p>
-		<input type="checkbox" name="email_all" value="1" <?php echo (($ath->emailAll())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','email_all_changes') ?></strong><br /></p>
+		<input type="checkbox" name="email_all" value="1" <?php echo (($ath->emailAll())?'checked="checked"':''); ?> /> <strong><?php echo _('Send email on all changes') ?></strong><br /></p>
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_update_type','days_overdue') ?>:</strong><br />
+		<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
 		<input type="text" name="due_period" value="<?php echo ($ath->getDuePeriod() / 86400); ?>" /></p>
 		<p> 
-		<strong><?php echo $Language->getText('tracker_admin_update_type','pending_timeout') ?>:</strong><br />
+		<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
 		<input type="text" name="status_timeout"  value="<?php echo($ath->getStatusTimeout() / 86400); ?>" /></p>
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_update_type','submit_item_form_text') ?>:</strong><br />
+		<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
 		<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getSubmitInstructions(); ?></textarea></p>
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_update_type','browse_item_form_text') ?>:</strong><br />
+		<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
 		<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getBrowseInstructions(); ?></textarea></p>
 		<p>
-		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form></p>
 		<?php
 

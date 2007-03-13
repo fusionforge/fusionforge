@@ -45,12 +45,8 @@ if (!$sw) {
 	$sw='A';
 }
 
-$sql="SELECT user_id,user_name,lastname,firstname FROM users ";
-if ($sys_database_type == "mysql") {
-	$sql.="WHERE status='A' and type_id='1' and lastname LIKE '$sw%' ";
-} else {
-	$sql.="WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ";
-$res=db_query($sql);
+$res=db_query("SELECT user_id,user_name,lastname,firstname FROM users 
+	WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ORDER BY lastname,firstname ASC");
 
 $accumulated_ids = getStringFromRequest('accumulated_ids');
 if (!$accumulated_ids) {
@@ -73,19 +69,19 @@ if (getStringFromRequest('finished')) {
 	header("Location: massfinish.php?group_id=$group_id&accumulated_ids=".implode(',',$accumulated_ids));
 }
 
-project_admin_header(array('title'=>$Language->getText('rbac_edit','pgtitle'),'group'=>$group_id));
+project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
 
 echo '
-<h2>'.$Language->getText('project_admin','addfromlist').'</h2>
+<h2>'._('Add Users From List').'</h2>
 <p>
-'.$Language->getText('project_admin','addfromlist1').'
+'._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.').'
 <p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'">';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-echo $Language->getText('project_admin', 'choose_first_letter');
+echo _('<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>');
 for ($i=0; $i<count($abc_array); $i++) {
     if ($sw == $abc_array[$i]) {
         echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
@@ -95,12 +91,12 @@ for ($i=0; $i<count($abc_array); $i++) {
 }
 
 if (!$res || db_numrows($res) < 1) {
-	echo $Language->getText('project_admin', 'no_matching_user');
+	echo _('<p>No Matching Users Found</p>');
 } else {
 
-	$titles[]=$Language->getText('project_admin','userrealname');
-	$titles[]=$Language->getText('project_admin','unix_name');
-	$titles[]=$Language->getText('project_admin','add_user');
+	$titles[]=_('Real Name');
+	$titles[]=_('Unix Name');
+	$titles[]=_('Add User');
 
 	echo $HTML->listTableTop($titles);
 
@@ -124,7 +120,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<input type="submit" name="finished" value="'.$Language->getText('project_admin', 'finish').'">
+echo '<input type="submit" name="finished" value="'._('Finish').'">
 </form>';
 
 project_admin_footer(array());

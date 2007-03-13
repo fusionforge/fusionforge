@@ -42,7 +42,7 @@ require_once('include/ForumHTML.class');
 
 function goodbye($msg) {
 	global $Language;
-	site_header(array('title'=>$Language->getText('forum_attach_download','title')));
+	site_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
 	echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
 	site_footer(array());
@@ -74,9 +74,9 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
-	exit_error($Language->getText('general','error'),"Error getting Forum");
+	exit_error(_('Error'),"Error getting Forum");
 }	elseif ($f->isError()) {
-	exit_error($Language->getText('general','error'),$f->getErrorMessage());
+	exit_error(_('Error'),$f->getErrorMessage());
 }
 
 if ($delete == "yes") {
@@ -92,11 +92,11 @@ if ($delete == "yes") {
 		exit_error("Attachment Download error","DB Error");
 	}
 	if (! ((db_result($res,0,'userid') == user_getid()) || ($f->userIsAdmin())) ) {
-		goodbye($Language->getText('forum_attach_download','cannot_delete'));
+		goodbye(_('You cannot delete this attachment'));
 	}	else {
 		if (!$pending) {
 			if (db_query ("DELETE FROM forum_attachment where attachmentid=$attachid")) {
-				goodbye($Language->getText('forum_attach_download','deleted'));
+				goodbye(_('Attachment deleted'));
 			} else {
 				exit_error(db_error());
 			}
@@ -120,11 +120,11 @@ if ($edit=="yes") {
 		exit_error("Attachment error","DB Error");
 	}
 	if (! ((db_result($res2,0,'posted_by') == user_getid()) || ($f->userIsAdmin())) ) {
-		goodbye($Language->getText('forum_attach_download','cannot_edit'));
+		goodbye(_('You cannot edit this attachment'));
 	}	else {
 		if ($doedit=="1") {
 			//actually edit the attach and save the info
-			forum_header(array('title'=>$Language->getText('forum_attach_download','title')));
+			forum_header(array('title'=>_('Attachments')));
 			$am = new AttachManager();
 			$fm = new ForumMessage($f,$msg_id,false,false);
 			$am->SetForumMsg($fm);
@@ -152,12 +152,12 @@ if ($edit=="yes") {
 			exit();
 		} else {
 			//show the form to edit the attach
-			forum_header(array('title'=>$Language->getText('forum_attach_download','title')));
+			forum_header(array('title'=>_('Attachments')));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
-				exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+				exit_error(_('Error'),_('Error'));
 			} elseif ($fh->isError()) {
-				exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+				exit_error(_('Error'),$fh->getErrorMessage());
 			}
 			if (!db_result($res,0,'filename')) {
 				$filename = "No attach found";
@@ -193,7 +193,7 @@ if ( (!$res) ) {
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 
 if (!$extension) {
-	goodbye($Language->getText('forum_attach_download','not_exists'));
+	goodbye(_('The Attachment does not exist'));
 }
 
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));

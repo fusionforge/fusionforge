@@ -17,10 +17,10 @@
 		if ($rows > 0) {
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_title');
-			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_type');	
-			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');	
-			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_add_options');	
+			$title_arr[]=_('Custom Fields Defined');
+			$title_arr[]=_('Type');	
+			$title_arr[]=_('Elements Defined');	
+			$title_arr[]=_('Add Options');	
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($k=0; $k < $rows; $k++) {
@@ -28,13 +28,13 @@
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<td>'.$efarr[$i]['field_name'].'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-						' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a>'.
+						' ['._('Edit').']</a>'.
 					'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
                         $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-                        ' ['.$Language->getText('tracker_admin_build_boxes','delete').']</a>'.
+                        ' ['._('Delete').']</a>'.
 					'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
                         $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-                        ' ['.$Language->getText('tracker_admin_build_boxes','copy').']</a>'.
+                        ' ['._('Copy').']</a>'.
 					'</td>';
 				echo '<td>'.$eftypes[$efarr[$i]['field_type']].'</td>';
 				/*
@@ -51,7 +51,7 @@
 						echo '<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
-						$elearray[$j]['element_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a><br \>';
+						$elearray[$j]['element_name'].' ['._('Edit').']</a><br \>';
 
 					} else {
 						echo '<td>';
@@ -66,7 +66,7 @@
 					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-						$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
+						_('add choices').']</a>';
 				}
 				echo '</td>'; 
 			}
@@ -74,50 +74,50 @@
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else { 
-			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_box')."</h3>";
+			echo "\n<h3>"._('You have not defined any custom fields')."</h3>";
 		}
 
-		echo "<h2>".$Language->getText('tracker_admin_build_boxes','add_field')."</h2>";
+		echo "<h2>"._('Add New Custom Field')."</h2>";
 		?>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_extrafield" value="y" />
-		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
+		<strong><?php echo _('Custom Field Name') ?>:</strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_build_boxes','alias') ?>:</strong><br />
+		<strong><?php echo _('Field alias') ?>:</strong><br />
 		<input type="text" name="alias" value="" size="15" maxlength="30" /><br />
 		<p>
 
-		<strong><?php  echo $Language->getText('tracker_admin_build_boxes','box_type') ?>:</strong><br />
-		<input type="radio" name="field_type" value="1"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_select'); ?><br />
-		<input type="radio" name="field_type" value="2"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_checkbox'); ?><br />
-		<input type="radio" name="field_type" value="3"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_radio'); ?><br />
-		<input type="radio" name="field_type" value="4"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_text'); ?><br />
-		<input type="radio" name="field_type" value="5"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_multiselect'); ?><br />
-		<input type="radio" name="field_type" value="6"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_textarea'); ?><br />
+		<strong><?php  echo _('Type of custom field') ?>:</strong><br />
+		<input type="radio" name="field_type" value="1"> <?php echo _('Select Box'); ?><br />
+		<input type="radio" name="field_type" value="2"> <?php echo _('Check Box'); ?><br />
+		<input type="radio" name="field_type" value="3"> <?php echo _('Radio Buttons'); ?><br />
+		<input type="radio" name="field_type" value="4"> <?php echo _('Text Field'); ?><br />
+		<input type="radio" name="field_type" value="5"> <?php echo _('Multi-Select Box'); ?><br />
+		<input type="radio" name="field_type" value="6"> <?php echo _('Text Area'); ?><br />
 		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<input type="radio" name="field_type" value="7"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_status'); ?><br />
+		<input type="radio" name="field_type" value="7"> <?php echo _('Status'); ?><br />
 		<?php } ?>
-		<!--<input type="radio" name="field_type" value="8"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_technician'); ?><br />-->
+		<!--<input type="radio" name="field_type" value="8"> <?php echo _('MISSINGTEXT:tracker_admin_build_boxes/box_type_technician:TEXTMISSING'); ?><br />-->
 		<p>
-		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizerows'); ?><br />
-		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr1'); ?>
+		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
+		<?php echo _('Text Field Size/Text Area Rows'); ?>
 			<input type="text" name="attribute1" value="0" size="2" maxlength="2"><br />
-		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr2'); ?>
+		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
 			<input type="text" name="attribute2" value="0" size="2" maxlength="2">
 		<p>
-		<span class="warning"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></p>
+		<span class="warning"><?php echo _('MISSINGTEXT:tracker_admin_build_boxes/box_warning:TEXTMISSING') ?></span></p>
 		<p>
-		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form></p>
 		<?php
 
-		echo "<h2>".$Language->getText('tracker_admin_build_boxes','manage_template')."</h2><p>";
+		echo "<h2>"._('Custom Field Rendering Template')."</h2><p>";
 
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?downloadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','download_template').'</a><br />';
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?uploadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','upload_template').'</a><br />';
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.$Language->getText('tracker_admin_build_boxes','delete_template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?downloadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Download default template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?uploadtemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Add/Update template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
 
 		$ath->footer(array());
 

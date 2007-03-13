@@ -56,7 +56,7 @@ $_order=$ptf->order;
 $_category_id=$ptf->category;
 $_view=$ptf->view_type;
 
-pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Browse tasks'),'group_project_id'=>$group_project_id));
 
 /*
 		creating a custom technician box which includes "any" and "unassigned"
@@ -65,9 +65,9 @@ $res_tech=$pg->getTechnicians();
 $tech_id_arr=util_result_column_to_array($res_tech,0);
 $tech_id_arr[]='0';  //this will be the 'any' row
 $tech_name_arr=util_result_column_to_array($res_tech,1);
-$tech_name_arr[]=$Language->getText('pm','tech_any');
+$tech_name_arr[]=_('Any');
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',
-$_assigned_to,true,$Language->getText('pm','unassigned'));
+$_assigned_to,true,_('Unassigned'));
 
 /*
 		creating a custom category box which includes "any" and "none"
@@ -76,7 +76,7 @@ $res_cat=$pg->getCategories();
 $cat_id_arr=util_result_column_to_array($res_cat,0);
 $cat_id_arr[]='0';  //this will be the 'any' row
 $cat_name_arr=util_result_column_to_array($res_cat,1);
-$cat_name_arr[]=$Language->getText('pm','cat_any');
+$cat_name_arr[]=_('Any');
 $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'none');
 
 
@@ -84,12 +84,12 @@ $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category
 	Creating a custom sort box
 */
 $order_title_arr=array();
-$order_title_arr[]=$Language->getText('pm','task_id');
-$order_title_arr[]=$Language->getText('pm','summary');
-$order_title_arr[]=$Language->getText('pm','start_date');
-$order_title_arr[]=$Language->getText('pm','end_date');
-$order_title_arr[]=$Language->getText('pm','percent_complete');
-$order_title_arr[]=$Language->getText('pm','priority');
+$order_title_arr[]=_('Task Id');
+$order_title_arr[]=_('Task Summary');
+$order_title_arr[]=_('Start Date');
+$order_title_arr[]=_('End Date');
+$order_title_arr[]=_('Percent Complete');
+$order_title_arr[]=_('Priority');
 
 $order_col_arr=array();
 $order_col_arr[]='project_task_id';
@@ -104,8 +104,8 @@ $order_box=html_build_select_box_from_arrays ($order_col_arr,$order_title_arr,'_
 	Creating View array
 */
 $view_arr=array();
-$view_arr[]=$Language->getText('pm','view_type_summary');
-$view_arr[]=$Language->getText('pm','view_type_detail');
+$view_arr[]=_('Summary');
+$view_arr[]=_('Detailed');
 $order_col_arr=array();
 $view_col_arr[]='summary';
 $view_col_arr[]='detail';
@@ -118,12 +118,12 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 	<input type="hidden" name="set" value="custom" />
 	<table width="10%" border="0">
 	<tr>
-		<td>'.$Language->getText('pm_modtask','assignee').'<br />'. $tech_box .'</td>
-		<td>'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</td>
-		<td>'.$Language->getText('pm','category').'<br />'. $cat_box .'</td>
-		<td>'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</td>
-		<td>'.$Language->getText('pm','view_type').'<br />'. $view_box .'</td>
-		<td><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></td>
+		<td>'._('Assignee').'<br />'. $tech_box .'</td>
+		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,true, _('Status')) .'</td>
+		<td>'._('Category').'<br />'. $cat_box .'</td>
+		<td>'._('Sort On').'<br />'. $order_box .'</td>
+		<td>'._('Detail View').'<br />'. $view_box .'</td>
+		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form><p />';
 
 
@@ -131,9 +131,9 @@ $rows=count($pt_arr);
 if ($rows < 1) {
 
 	echo '
-		<span class="feedback">'.$Language->getText('pm','no_tasks_found').'</span>
+		<span class="feedback">'._('No Matching Tasks found').'</span>
 		<p />
-		<span class="important">'.$Language->getText('pm','no_tasks_found_text').'</span>';
+		<span class="important">'._('Add tasks using the link above').'</span>';
 	echo db_error();
 } else {
 
@@ -164,21 +164,21 @@ if ($rows < 1) {
 		'priority'=>0);
 
 	$title_arr=array();
-	$title_arr[]=$Language->getText('pm','task_id');
+	$title_arr[]=_('Task Id');
 	if ($display_col['summary'])
-		$title_arr[]=$Language->getText('pm','summary');
+		$title_arr[]=_('Task Summary');
 	if ($display_col['start_date'])
-		$title_arr[]=$Language->getText('pm','start_date');
+		$title_arr[]=_('Start Date');
 	if ($display_col['end_date'])
-		$title_arr[]=$Language->getText('pm','end_date');
+		$title_arr[]=_('End Date');
 	if ($display_col['percent_complete'])
-		$title_arr[]=$Language->getText('pm','percent_complete');
+		$title_arr[]=_('Percent Complete');
 	if ($display_col['category'])
-		$title_arr[]=$Language->getText('pm','category');
+		$title_arr[]=_('Category');
 	if ($display_col['assigned_to'])
-		$title_arr[]=$Language->getText('pm','assigned_to');
+		$title_arr[]=_('Assigned To');
 	if ($display_col['priority'])
-		$title_arr[]=$Language->getText('pm','priority');
+		$title_arr[]=_('Priority');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -249,13 +249,13 @@ if ($rows < 1) {
 		
 				if ($rows > 0) {
 					echo '
-					<h3>'.$Language->getText('pm_include_taskhtml','followups').'</h3>
+					<h3>'._('Followups').'</h3>
 					<p>';
 		
 					$title_arr=array();
-					$title_arr[]=$Language->getText('pm_include_taskhtml','comment');
-					$title_arr[]=$Language->getText('pm_include_taskhtml','date');
-					$title_arr[]=$Language->getText('pm_include_taskhtml','by');
+					$title_arr[]=_('Comment');
+					$title_arr[]=_('Date');
+					$title_arr[]=_('By');
 				
 					echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
@@ -271,7 +271,7 @@ if ($rows < 1) {
 		
 				} else {
 					echo '
-					<h3>'.$Language->getText('pm_include_taskhtml','no_comments').'</h3>';
+					<h3>'._('No Comments Have Been Added').'</h3>';
 				}
 				//
 				// End of show details
@@ -288,7 +288,7 @@ if ($rows < 1) {
 	if ($offset > 0) {
 		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
 			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50).'">
-			<strong>'.$Language->getText('pm_browsetask','previous').'<--</strong></a>';
+			<strong>'._('previous 50').'<--</strong></a>';
 	} else {
 		echo '&nbsp;';
 	}
@@ -297,7 +297,7 @@ if ($rows < 1) {
 	if ($rows==50) {
 		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
 			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50).
-			'"><strong>'.$Language->getText('pm_browsetask','next').' --></strong></a>';
+			'"><strong>'._('next 50').' --></strong></a>';
 	} else {
 		echo '&nbsp;';
 	}
@@ -316,10 +316,10 @@ if ($rows < 1) {
 		$tech_id_arr[]='100.1';  //this will be the 'any' row
 
 		$tech_name_arr=util_result_column_to_array($res_tech,1);
-		$tech_name_arr[]=$Language->getText('pm','unassigned');
+		$tech_name_arr[]=_('Unassigned');
 
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
-		'100',true,$Language->getText('pm_browsetask','no_change'));
+		'100',true,_('No Change'));
 
 		echo '<script language="JavaScript">
 	<!--
@@ -339,41 +339,41 @@ if ($rows < 1) {
 			<table width="100%" border="0">
 			<tr><td colspan="2">
 
-<a href="javascript:checkAll(1)">'.$Language->getText('pm_browsetask','check_all').'</a>
+<a href="javascript:checkAll(1)">'._('Check &nbsp;all').'</a>
 -
-   <a href="javascript:checkAll(0)">'.$Language->getText('pm_browsetask','clear_all').'</a>
+   <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
 <p>
-<span class="important">'.$Language->getText('pm_browsetask','admin_mass_update').'
+<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'
 			</td></tr>
 
 			<tr>
-			<td><strong>'.$Language->getText('pm_detailtask','category').
+			<td><strong>'._('Category').
 				'</strong><br />'. $pg->categoryBox ('category_id','xzxz',true,
-				$Language->getText('pm_browsetask','no_change')) .'</td>
-			<td><strong>'.$Language->getText('pm_detailtask','priority').
+				_('No Change')) .'</td>
+			<td><strong>'._('Priority').
 				'</strong><br />';
 			echo build_priority_select_box ('priority', '100', true);
 			echo '</td>
 			</tr>
 
 			<tr>
-			<td><strong>'.$Language->getText('pm_detailtask','assigned_to').
+			<td><strong>'._('Assigned To').
 				'</strong><br />'. $tech_box .'</td>
-			<td><strong>'.$Language->getText('tracker','status').
-				'</strong><br />'. $pg->statusBox ('status_id','xzxz',true,$Language->getText('pm_browsetask','no_change')) .'</td>
+			<td><strong>'._('State').
+				'</strong><br />'. $pg->statusBox ('status_id','xzxz',true,_('No Change')) .'</td>
 			</tr>
 
-			<tr><td><strong>'.$Language->getText('pm_detailtask','subproject').'</strong><br />
+			<tr><td><strong>'._('Subproject').'</strong><br />
 			'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
 			<td align="middle"><input type="submit" name="submit" value="'.
-			$Language->getText('pm_browsetask','mass_update').'"></td></tr>
+			_('Mass update').'"></td></tr>
 
 			</table>
 		</form>';
 	}
 
-	echo '<p />'.$Language->getText('pm_browsetask','overdue_tasks');
+	echo '<p />'._('* Denotes overdue tasks');
 	show_priority_colors_key();
 
 }

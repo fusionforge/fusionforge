@@ -41,7 +41,7 @@ function admin_table_add($table, $unit, $primary_key) {
 	if ($result) {
 		$cols = db_numfields($result);
 
-		echo $Language->getText('admin_admin_table', 'create_new_below', array(getUnitLabel($unit))).'
+		printf(_('Create a new %1$s below:'), getUnitLabel($unit)).'
 			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
 			<input type="hidden" name="form_key" value="'.form_generate_key().'">
 			<table>';
@@ -53,11 +53,11 @@ function admin_table_add($table, $unit, $primary_key) {
 			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
 			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
 		}
-		echo '</table><input type="submit" value="'.$Language->getText('general', 'add').'" />
+		echo '</table><input type="submit" value="'._('Add').'" />
 			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'">
 			</form>
 			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
+			<input type="submit" value="'._('Cancel').'" />
 			</form>';
 	} else {
 		echo db_error();
@@ -88,7 +88,7 @@ function admin_table_postadd($table, $unit, $primary_key) {
 	$sql = "INSERT INTO $table (".$field_list.") VALUES (".implode(",", $values).")";
 
 	if (db_query($sql)) {
-		echo $Language->getText('admin_admin_table', 'successfully_added', array(ucfirst(getUnitLabel($unit))));
+		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
 	} else {
 		form_release_key(getStringFromRequest('form_key'));
 		echo db_error();
@@ -109,21 +109,21 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "processor") {
 		$result = db_numrows(db_query("SELECT processor_id FROM frs_file WHERE processor_id = $id"));
 		if ($result > 0) {
-			echo '<p>'.$Language->getText('admin_admin_table', 'cant_delete_processor', array(db_result(db_query("select name from frs_processor where processor_id = $id"),0,0))).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query("select name from frs_processor where processor_id = $id"), 0, 0)).'</p>';
 			return;
 		}
 	}
 	if ($unit == "license") {
 		$result = db_numrows(db_query("SELECT license FROM groups WHERE license = $id"));
 		if ($result > 0) {
-			echo '<p>'.$Language->getText('admin_admin_table', 'cant_delete_license', array(db_result(db_query("select license_name from licenses where license_id = $id"),0,0))).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the license %1$s since it\'s currently referenced in a project.'), db_result(db_query("select license_name from licenses where license_id = $id"), 0, 0)).'</p>';
 			return;
 		}
 	}
 	if ($unit == "supported_language") {
 		$result = db_numrows(db_query('SELECT language FROM users WHERE language='.$id));
 		if ($result > 0) {
-			echo '<p>'.$Language->getText('admin_admin_table', 'cant_delete_language', array(db_result(db_query("select license_name from licenses where license_id = $id"),0,0))).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query("select license_name from licenses where license_id = $id"), 0, 0)).'</p>';
 			return;
 		}
 	}
@@ -133,16 +133,16 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($result) {
 		$cols = db_numfields($result);
 
-		echo $Language->getText('admin_admin_table', 'delete_confirm', array(getUnitLabel($unit))).'<ul>';
+		printf(_('Are you sure you want to delete this %1$s?'), getUnitLabel($unit)).'<ul>';
 		for ($i = 0; $i < $cols; $i++) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
 		echo '</ul>
 			<form name="delete" action="'.getStringFromServer('PHP_SELF').'?function=delete&amp;id='.$id.'" method="post">
-			<input type="submit" value="'.$Language->getText('general', 'delete').'" />
+			<input type="submit" value="'._('Delete').'" />
 			</form>
 			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
+			<input type="submit" value="'._('Cancel').'" />
 			</form>';
 	} else {
 		echo db_error();
@@ -162,7 +162,7 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
 
 	$sql = "DELETE FROM $table WHERE $primary_key=$id";
 	if (db_query($sql)) {
-		echo $Language->getText('admin_admin_table', 'successfully_deleted', array(ucfirst(getUnitLabel($unit))));
+		printf(_('%1$s successfully deleted.'), ucfirst(getUnitLabel($unit)));
 	} else {
 		echo db_error();
 	}
@@ -184,7 +184,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 	if ($result) {
 		$cols = db_numfields($result);
 
-		echo $Language->getText('admin_admin_table', 'modify_below', array(getUnitLabel($unit))).'
+		printf(_('Modify the %1$s below:'), getUnitLabel($unit)).'
 			<form name="edit" action="'.getStringFromServer('PHP_SELF').'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
 
@@ -200,9 +200,9 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'" /></td></tr>';
 			}
 		}
-		echo '</table><input type="submit" value="'.$Language->getText('general', 'submit').'" /></form>
+		echo '</table><input type="submit" value="'._('Submit').'" /></form>
 			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="submit" value="'.$Language->getText('general', 'cancel').'" />
+			<input type="submit" value="'._('Cancel').'" />
 			</form>';
 	} else {
 		echo db_error();
@@ -230,7 +230,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	$sql .= "WHERE $primary_key=$id";
 
 	if (db_query($sql)) {
-		echo $Language->getText('admin_admin_table', 'successfully_modified', array(ucfirst(getUnitLabel($unit))));
+		printf(_('%1$s successfully modified.'), ucfirst(getUnitLabel($unit)));
 	} else {
 		echo db_error();
 	}
@@ -253,7 +253,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['.$Language->getText('admin_admin_table', 'add_new').']</a>',
+		$cell_data[]=array(ucwords(getUnitLabel($unit)).' <a href="'.getStringFromServer('PHP_SELF').'?function=add">['._('add new').']</a>',
 			'colspan="'.($cols+1).'"');
 
                 echo '<table border="0" width="100%">';
@@ -270,8 +270,8 @@ function admin_table_show($table, $unit, $primary_key) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
-                        echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['.$Language->getText('general', 'edit').']</a>';
-                        echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['.$Language->getText('general', 'delete').']</a> </td>';
+                        echo '<td><a href="'.getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id.'">['._('Edit').']</a>';
+                        echo '<a href="'.getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id.'">['._('Delete').']</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
 				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}
@@ -300,10 +300,10 @@ require_once('../env.inc.php');
 require_once('pre.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-$HTML->header(array('title'=>$Language->getText('admin_admin_table', 'title', array(ucwords(getUnitLabel($unit))))));
+$HTML->header(array('title'=>sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit)))));
 
-echo '<h3>'.$Language->getText('admin_admin_table', 'title', array(ucwords(getUnitLabel($unit)))).'</h3>
-<p><a href="'.$GLOBALS['sys_urlprefix'].'/admin/">'.$Language->getText('admin_admin_table', 'site_admin_home').'</a></p>
+echo '<h3>'.sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit))).'</h3>
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/admin/">'._('Site Admin Home').'</a></p>
 <p>&nbsp;</p>';
 
 // $table, $unit and $primary_key are variables passed from the parent scripts

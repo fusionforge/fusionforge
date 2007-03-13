@@ -49,18 +49,18 @@ if (!$start) {
 }
 
 
-echo report_header($Language->getText('reporting','site_wide_activity'));
+echo report_header(_('Site-Wide Activity'));
 
 ?>
-<h3><?php echo $Language->getText('reporting','site_wide_activity'); ?></h3>
+<h3><?php echo _('Site-Wide Activity'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
-<td><strong><?php echo $Language->getText('reporting', 'area'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
-<td><strong><?php echo $Language->getText('reporting', 'type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong><?php echo $Language->getText('reporting', 'start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo $Language->getText('reporting', 'end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
+<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

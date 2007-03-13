@@ -38,7 +38,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!validate_email($newemail)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error($Language->getText('general','error'),$Language->getText('account_change_email','invalid_email'));
+		exit_error(_('Error'),_('Error'));
 	}
 
 	$confirm_hash = substr(md5($session_hash . time()),0,16);
@@ -60,32 +60,37 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	$message = stripcslashes($Language->getText('account_change_email', 'message', array(getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name'])));
+	$message = stripcslashes(sprintf(_('You have requested a change of email address on %1$s.
+Please visit the following URL to complete the email change:
 
-	util_send_message($newemail,$Language->getText('account_change_email', 'subject', $GLOBALS['sys_name']),$message);
+<http://%1$s/account/change_email-complete.php?ch=_%2$s>
 
-	site_user_header(array('title'=>$Language->getText('account_change_email_confirm','title')));
+ -- the %1$s staff'), getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name']));
 
-	echo $Language->getText('account_change_email', 'mailsent');
+	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
+
+	site_user_header(array('title'=>_('Email Change Confirmation')));
+
+	echo _('<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href="/">[ Home ]</a>');
 
 	site_user_footer(array());
 	exit();
 }
 
 
-site_user_header(array('title'=>$Language->getText('account_change_email','title')));
+site_user_header(array('title'=>_('MISSINGTEXT:account_change_email/title:TEXTMISSING')));
 
-echo $Language->getText('account_change_email', 'desc');
+echo _('<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<?php echo $Language->getText('account_change_email','new_address') ?>
+<?php echo _('New Email Address:') ?>
 <input type="text" name="newemail" maxlength="255" />
-<input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />
+<input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
 </form>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $sys_name); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $sys_name); ?></a></p>
 
 <?php
 site_user_footer(array());

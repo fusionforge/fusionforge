@@ -106,7 +106,7 @@ class ArtifactExtraField extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError($Language->getText('tracker_admin_build_boxes','required_box_name'));
+			$this->setError(_('a field name is required'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {
@@ -291,13 +291,13 @@ class ArtifactExtraField extends Error {
 	function getAvailableTypes() {
 		global $Language;
 		return array(
-			1=>$Language->getText('tracker_admin_build_boxes','box_type_select'),
-			2=>$Language->getText('tracker_admin_build_boxes','box_type_checkbox'),
-			3=>$Language->getText('tracker_admin_build_boxes','box_type_radio'),
-			4=>$Language->getText('tracker_admin_build_boxes','box_type_text'),
-			5=>$Language->getText('tracker_admin_build_boxes','box_type_multiselect'),
-			6=>$Language->getText('tracker_admin_build_boxes','box_type_textarea'),
-			7=>$Language->getText('tracker_admin_build_boxes','box_type_status')
+			1=>_('Select Box'),
+			2=>_('Check Box'),
+			3=>_('Radio Buttons'),
+			4=>_('Text Field'),
+			5=>_('Multi-Select Box'),
+			6=>_('Text Area'),
+			7=>_('Status')
 		);
 	}
 	
@@ -350,7 +350,7 @@ class ArtifactExtraField extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError($Language->getText('tracker_admin_build_boxes','required_box_name'));
+			$this->setError(_('a field name is required'));
 			return false;
 		}
 		if ($is_required) {
@@ -456,10 +456,10 @@ class ArtifactExtraField extends Error {
 
 		// invalid chars?
 		if (preg_match("/[^[:alnum:]_\\-]/", $alias)) {
-			$this->setError($Language->getText('tracker_admin_build_boxes','invalid_alias'));
+			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hypens (-) and underscores (_) allowed.'));
 			return false;
 		} else if (in_array($alias, $reserved_alias)) {	// alias is reserved?
-			$this->setError($Language->getText('tracker_admin_build_boxes','reserved_alias', array($alias)));
+			$this->setError(sprintf(_('\'%1$s\' is a reserved alias. Please provide another name.'), $alias));
 			return false;
 		}
 		

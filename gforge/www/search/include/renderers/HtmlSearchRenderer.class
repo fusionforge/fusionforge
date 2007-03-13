@@ -40,7 +40,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
 		global $Language;
-		$this->Language =& $GLOBALS['Language'];
+		$Language =& $GLOBALS['Language'];
 		
 		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
 	}
@@ -52,7 +52,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		if($searchQuery->isError()) {
 			$this->writeHeader();
-			echo '<h2>'.$this->Language->getText('search', $searchQuery->getErrorMessage()).'</h2>';
+			echo '<h2>'.$Language->getText('search', $searchQuery->getErrorMessage()).'</h2>';
 			$this->writeFooter();
 		} else {
 			$searchQuery->executeQuery();
@@ -101,10 +101,10 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html = '';
 		
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
-			$html .= '<h2>'.$this->Language->getText('search', 'no_matches_found', array(htmlspecialchars($query['words']))).'</h2>';
+			$html .= '<h2>'.sprintf(_('No matches found for <em>%1$s</em>'), htmlspecialchars($query['words'])).'</h2>';
 			$html .= db_error();
 		} else {
-			$html .= '<h3>'.$this->Language->getText('search', 'search_results', array(htmlspecialchars($query['words']))).'</h3>';
+			$html .= '<h3>'.sprintf(_('Search results for <em>%1$s</em>'), htmlspecialchars($query['words'])).'</h3>';
 		
 			$html .= $GLOBALS['HTML']->listTableTop($this->tableHeaders);
 			$html .= $this->getRows();
@@ -134,14 +134,14 @@ class HtmlSearchRenderer extends SearchRenderer {
 		if ($searchQuery->getOffset() != 0) {
 			$html .= '<a href="'.$this->getPreviousResultsUrl().'" class="prev">'
 				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
-				. ' '.$this->Language->getText('search', 'previous_results').'</a>';
+				. ' '._('Previous Results').'</a>';
 		} else {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td align="right">';
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
 			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
-				.$this->Language->getText('search', 'next_results').' '
+				._('Next Results').' '
 				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
 		} else {
 			$html .= '&nbsp;';

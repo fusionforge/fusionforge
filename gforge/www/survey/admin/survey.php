@@ -34,10 +34,10 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>$Language->getText('survey_add_survey','title')));
+$sh->header(array('title'=>_('Add A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>". $Language->getText('survey_add_question','permission_denied')."</h1>";
+	echo "<h1>". _('MISSINGTEXT:survey_add_question/permission_denied:TEXTMISSING')."</h1>";
 	$sh->footer(array());
 	exit;
 }
@@ -53,10 +53,10 @@ if (getStringFromRequest('post')=="Y") {
   
     if ($survey_id) { /* Modify */
 	$s->update($survey_title, $to_add, $to_del, $is_active);
-	$feedback = $Language->getText('survey_edit','update_successful');
+	$feedback = _('UPDATE SUCCESSFUL');
     }  else {  /* Add */
 	$s->create($survey_title, $to_add, $is_active);
-	$feedback = $Language->getText('survey_add_survey', 'survey_inserted');
+	$feedback = _('Survey Inserted');
     }
 }
 
@@ -66,7 +66,7 @@ if (getStringFromRequest('updown')=="Y") {
     $is_up = getStringFromRequest('is_up');
 
     $s->updateOrder($question_id, $is_up);
-    $feedback = $Language->getText('survey_edit','update_successful');
+    $feedback = _('UPDATE SUCCESSFUL');
 }
 
 /* Error on previous transactions? */
@@ -81,7 +81,7 @@ echo ($sh->ShowAddSurveyForm($s));
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo ($Language->getText('survey_error', 'no_question_found'));
+    echo (_('No Survey Question is found'));
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1));
 }

@@ -76,7 +76,7 @@ if (getStringFromRequest('submit')) {
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation'));
 
-		echo $Language->getText('account_register','congrat', $sys_name);
+		printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), $sys_name);
 		echo $HTML->footer(array());
 		exit;
 	} else {
@@ -100,91 +100,91 @@ if (!isset($ccode) || empty($ccode) || !eregi('^[a-z][a-z]$', $ccode)) {
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
-<?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
+<?php echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField(); ?><br />
 <input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />
 </p>
 <p>
-<?php echo $Language->getText('account_register','password'); echo utils_requiredField(); ?><br />
+<?php echo _('Password (min. 6 chars):'); echo utils_requiredField(); ?><br />
 <input type="password" name="password1" />
 </p>
 <p>
-<?php echo $Language->getText('account_register','password2'); echo utils_requiredField(); ?><br />
+<?php echo _('Password (repeat):'); echo utils_requiredField(); ?><br />
 <input type="password" name="password2" />
 </p
 ><p>
-<?php echo $Language->getText('account_options', 'title2'); ?><br />
+<?php echo _('Title:'); ?><br />
 <input type="text" name="title" value="<?php echo htmlspecialchars(stripslashes($title)); ?>" size="10" />
 </p>
 <p>
-<?php echo $Language->getText('account_register','firstname'); echo utils_requiredField(); ?><br />
+<?php echo _('First Name:'); echo utils_requiredField(); ?><br />
 <input size="30" type="text" name="firstname" value="<?php print(htmlspecialchars(stripslashes($firstname))); ?>" />
 </p>
 <p>
-<?php echo $Language->getText('account_register','lastname'); echo utils_requiredField(); ?><br />
+<?php echo _('Last Name:'); echo utils_requiredField(); ?><br />
 <input size="30" type="text" name="lastname" value="<?php print(htmlspecialchars(stripslashes($lastname))); ?>" />
 </p>
 <p>
-<?php echo $Language->getText('account_register','language'); ?><br />
+<?php echo _('Language Choice:'); ?><br />
 <?php echo html_get_language_popup ($Language,'language_id',$Language->getLanguageId()); ?>
 </p>
 <p>
-<?php echo $Language->getText('account_register','timezone'); ?><br />
+<?php echo _('Timezone:'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
 </p>
 <p>
-<?php echo $Language->getText('account_register','theme'); ?><br />
+<?php echo _('Theme'); ?><br />
 <?php echo html_get_theme_popup('theme_id', $theme_id); ?>
 </p>
 <p>
-<?php echo $Language->getText('account_register','ccode'); ?><br />
+<?php echo _('Country:'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 </p>
 <p>
-@<?php echo $Language->getText('account_register','emailaddr', $GLOBALS['sys_users_host']); ?>
+@<?php printf(_('Email Address:<span class="important">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.</em>'), $GLOBALS['sys_users_host']); ?>
 <br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars(stripslashes($email))); ?>" />
 </p>
 <p>
 <?php
 if ($sys_use_jabber) {
-	echo $Language->getText('account_register','jabberaddr').'<br />
+	echo _('Jabber Address:').'<br />
 	<input size="30" type="text" name="jabber_address" value="'. 
 	htmlspecialchars(stripslashes($jabber_address)) .'" /><br />
 	<input type="checkbox" name="jabber_only" value="1" />
-	'.$Language->getText('account_register','jabberonly').'.';
+	'._('Send auto-generated notices only to my Jabber address').'.';
 }
 ?>
 </p>
 <p>
-<?php echo $Language->getText('account_options', 'address'); ?><br />
+<?php echo _('Address:'); ?><br />
 <input type="text" name="address" value="<?php echo htmlspecialchars(stripslashes($address)); ?>" size="80" />
 </p>
 <p>
-<?php echo $Language->getText('account_options', 'address'); ?><br />
+<?php echo _('Address:'); ?><br />
 <input type="text" name="address2" value="<?php echo htmlspecialchars(stripslashes($address2)); ?>" size="80" />
 </p>
 <p>
-<?php echo $Language->getText('account_options', 'phone'); ?><br />
+<?php echo _('Phone:'); ?><br />
 <input type="text" name="phone" value="<?php echo htmlspecialchars(stripslashes($phone)); ?>" size="20" />
 </p>
 <p>
-<?php echo $Language->getText('account_options', 'fax'); ?><br />
+<?php echo _('FAX:'); ?><br />
 <input type="text" name="fax" value="<?php echo htmlspecialchars(stripslashes($fax)); ?>" size="20" />
 </p>
 <p>
 <input type="checkbox" name="mail_site" value="1" checked="checked" />
-<?php echo $Language->getText('account_register','siteupdate'); ?>
+<?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
 </p>
 <p>
 <input type="checkbox" name="mail_va" value="1" />
-<?php echo $Language->getText('account_register','communitymail'); ?>
+<?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </p>
 <p>
 <?php echo $Language->getText('account_register','mandatory', utils_requiredField()); ?>
 </p>
 <p>
-<input type="submit" name="submit" value="<?php echo $Language->getText('account_register','register'); ?>" />
+<input type="submit" name="submit" value="<?php echo _('Register'); ?>" />
 </p>
 </form>
-<p><a href="pending-resend.php"><?php echo $Language->getText('account_register','resend_pending'); ?></a></p>
+<p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
 
 <?php $HTML->footer(array()); ?>

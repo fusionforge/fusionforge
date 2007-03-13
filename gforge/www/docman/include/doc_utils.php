@@ -63,7 +63,7 @@ function docman_header($title,$pagehead,$style='xyz') {
 	}
 
 	if (!$project->usesDocman()) {
-		exit_error($Language->getText('general','error'),$Language->getText('docman','turned_off'));
+		exit_error(_('Error'),_('Error'));
 	}
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
@@ -71,18 +71,18 @@ function docman_header($title,$pagehead,$style='xyz') {
 	$menu_text=array();
 	$menu_links=array();
 
-	$menu_text[]=$Language->getText('docman','submit_new');
+	$menu_text[]=_('Submit new documentation');
 	$menu_links[]='/docman/new.php?group_id='.$group_id;
-	$menu_text[]=$Language->getText('docman','view_doc');
+	$menu_text[]=_('View Documentation');
 	$menu_links[]='/docman/index.php?group_id='.$group_id;
-	$menu_text[]=$Language->getText('docman_search','search_title');
+	$menu_text[]=_('Search in documents');
 	$menu_links[]='/docman/search.php?group_id='.$group_id;
 	
 
 	if (session_loggedin()) {
 		$perm =& $project->getPermission(session_get_user());
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
-			$menu_text[]=$Language->getText('docman','admin');
+			$menu_text[]=_('Admin');
 			$menu_links[]='/docman/admin/index.php?group_id='.$group_id;
 		}
 	}
@@ -120,9 +120,9 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 	if (db_numrows($gresult) >= 1) {
 
 		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">"
-			." <tr><td valign=\"middle\"><strong>".$Language->getText('general','language')." </strong></td>"
+			." <tr><td valign=\"middle\"><strong>"._('Language')." </strong></td>"
 			." <td valign=\"middle\"><select name=\"language_id\">\n\n";
-		print "<option value=\"*\">".$Language->getText('docman_display_doc','all_languages')." </option>";
+		print "<option value=\"*\">"._('All Languages')." </option>";
 		while($grow = db_fetch_array($gresult)) {
 
 			if ($language_id == $grow['language_id']) {
@@ -132,7 +132,7 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 				print "<option value=\"".$grow['language_id']."\">".$grow['name']." (".$grow['count'].") </option>";
 			}
 		}
-		print "</select></td><td valign=\"middle\"><input type=\"submit\" value=\"".$Language->getText('general','go')."\" /></td></tr></table></form>";
+		print "</select></td><td valign=\"middle\"><input type=\"submit\" value=\""._('Go')."\" /></td></tr></table></form>";
 	} else {
 		echo db_error();
 	}
@@ -188,7 +188,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			// display link to add a document to the current group
 			echo " &nbsp;&nbsp;&nbsp;&nbsp;<a href='".($from_admin ? "../" : "")."new.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group=".$doc_group->getID()."'>";
 			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0"))." ";
-			echo $Language->getText('docman_admin', 'add_docs');
+			echo _('[Add document here]');
 			echo "</a>";
 			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
 				docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
@@ -230,7 +230,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							"<a href=\"".$link."\" title=\"$tooltip\">".
 							$docs[$j]->getName().
 							"</a> - " . $tooltip . "</li>".
-							"(".$docs[$j]->getFileSize()." ".$Language->getText("docman", "bytes").")";
+							"(".$docs[$j]->getFileSize()." "._('MISSINGTEXT:docman/bytes:TEXTMISSING').")";
 							//add description
 							echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							echo "<i>".$docs[$j]->getDescription()."</i>";

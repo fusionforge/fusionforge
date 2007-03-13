@@ -51,14 +51,14 @@ function news_header($params) {
 		$menu_texts=array();
 		$menu_links=array();
 
-		$menu_texts[]=$Language->getText('menu','submit');
+		$menu_texts[]=_('Submit');
 		$menu_links[]='/news/submit.php?group_id='.$group_id;
 		if (session_loggedin()) {
 			$project =& group_get_object($params['group']);
 			if ($project && is_object($project) && !$project->isError()) {
 				$perm =& $project->getPermission(session_get_user());
 				if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
-					$menu_texts[]=$Language->getText('menu','admin');
+					$menu_texts[]=_('Admin');
 					$menu_links[]='/news/admin/?group_id='.$group_id;
 				}
 			}
@@ -103,7 +103,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	$return = '';
 
 	if (!$result || $rows < 1) {
-		$return .= $Language->getText('news_utils', 'nonews');
+		$return .= _('No News Items Found');
 		$return .= db_error();
 	} else {
 		if (!$limit) $return .= '<ul>';
@@ -117,7 +117,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$arr=explode("\n",db_result($result,$i,'details'));
 				}
 				//if the first paragraph is short, and so are following paragraphs, add the next paragraph on
-				if ((count($arr) > 1) && (strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
+				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
 					$summ_txt='<br />'. util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
@@ -160,13 +160,13 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				}
 
 				if ($num_comments <= 1) {
-					$comments_txt = $Language->getText('news_utils', 'comment_1');
+					$comments_txt = _('Comment');
 				} else {
-					$comments_txt = $Language->getText('news_utils', 'comment_2');
+					$comments_txt = _('Comments');
 				}
 
 				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
+					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . _('Read&nbsp;More/Comment') . ']</a></div><hr width="100%" size="1" />';
 				} else {
 					$return .= '<hr width="100%" size="1" />';
 				}
@@ -191,7 +191,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 		if ($show_forum) {
 			$return .= '<div align="center">'
-				.'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
+				.'<a href="'.$archive_url.'">[' . _('News archive') . ']</a></div>';
 		} else {
 			$return .= '<div align="center">...</div>';
 		}
@@ -203,7 +203,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/news/submit.php?group_id='.$group_id.'">[' . $Language->getText('news_utils', 'submit') . ']</a></div>';
+		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/news/submit.php?group_id='.$group_id.'">[' . _('Submit News') . ']</a></div>';
 	}
 
 	return $return;
@@ -230,7 +230,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		$return .= '<h3>' . $Language->getText('news_utils', 'nonews') . '</h3>';
+		$return .= '<h3>' . _('No News Items Found') . '</h3>';
 		$return .= db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {

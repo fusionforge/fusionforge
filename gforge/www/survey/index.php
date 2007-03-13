@@ -46,13 +46,13 @@ $user_id = user_getid();
 
 /* Show header */
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>$Language->getText('survey_index','title')));
+$sh->header(array('title'=>_('Survey')));
 
 /* Show list of Servey */
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<H2>' . ($Language->getText('survey_error', 'no_survey_found')) . '</H2>';
+    echo '<H2>' . (_('No Survey is found')) . '</H2>';
 } else {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }

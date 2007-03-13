@@ -1,3 +1,9 @@
+gforge (4.6.99+svn20070313-0) experimental; urgency=low
+
+  * SVN snapshot.  Don't use for production!
+
+ -- Roland Mas <lolando@debian.org>  Tue, 13 Mar 2007 17:37:44 +0100
+
 gforge (4.5.14-25+963) unstable; urgency=low
 
   * Merged Branch_4_5 into trunk after svn conversion

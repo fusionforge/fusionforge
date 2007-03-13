@@ -120,11 +120,11 @@ class Document extends Error {
 
 		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError($Language->getText('docman_common','error_min_title_length'));
+			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('docman_common','error_min_desc_length'));
+			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
 		}
 
@@ -206,7 +206,7 @@ class Document extends Error {
 			WHERE docid='$docid'
 			AND group_id='". $this->Group->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('docman_common_doc','invalid_docid'));
+			$this->setError(_('Document:: Invalid docid'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -457,11 +457,11 @@ class Document extends Error {
 	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
 		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError($Language->getText('docman_common','error_min_title_length'));
+			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError($Language->getText('docman_common','error_min_desc_length'));
+			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
 		}
 

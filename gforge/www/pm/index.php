@@ -45,21 +45,21 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error('Error',$pgf->getErrorMessage());
 }
 
-pm_header(array('title'=>$Language->getText('pm','title')));
+pm_header(array('title'=>_('Project/Task Manager: Subprojects And Tasks')));
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p>'.$Language->getText('pm','noprj').'</p>';
+	echo '<p>'._('<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="important">The Admin for this project will have to set up projects using the admin page</span></B>').'</p>';
 } else {
 	echo '
-	<p>'.$Language->getText('pm','intro').'</p>';
+	<p>'._('Choose a Subproject and you can browse/edit/add tasks to it.').'</p>';
 
 	/*
 		Put the result set (list of projects for this group) into a column with folders
 	*/
-	$tablearr=array($Language->getText('pm_index','short_name'),
-	$Language->getText('pm_index','description'),
-	$Language->getText('pm_index','open'),
-	$Language->getText('pm_index','total'));
+	$tablearr=array(_('Subproject Name'),
+	_('Description'),
+	_('Open'),
+	_('Total'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
@@ -74,8 +74,8 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a></td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>
-			<td style="text-align:center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
-			<td style="text-align:center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
+			<td align="center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
+			<td align="center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
 		</tr>';
 		}
 	}

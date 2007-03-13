@@ -50,7 +50,7 @@ $group_id = getIntFromRequest("group_id");
 $sql = "SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id='$user_id' and fg.group_forum_id=mon.forum_id";
 $result = db_query($sql);
 if (!$result || db_numrows($result) < 1) {
-	exit_error($Language->getText('forum_myforums','no_monitored'),$Language->getText('forum_monitored','no_monitored').' '.db_error());
+	exit_error(_('You have no monitored forums'),_('You have no monitored forums').' '.db_error());
 }
 
 //now, i need to create a forum object per each forum that the user is monitoring
@@ -62,15 +62,15 @@ for ($i=0;$i<db_numrows($result);$i++) {
 
 //if the link comes from the project, display the project header. If it comes from the user page, display the normal site header
 if ($group_id) {
-	forum_header(array('title'=>$Language->getText('forum_myforums','myforums')));
+	forum_header(array('title'=>_('My Monitored Forums')));
 }	else {
-	site_header(array('title'=>$Language->getText('forum_myforums','myforums'), 'user_id' => $user_id));
+	site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
 }
 
-echo "<h4>" . $Language->getText('forum_myforums','myforums') . "</h4></p>";
-$tablearr=array($Language->getText('forum_myforums','project'),$Language->getText('forum_forum','forum'),
-				$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),
-				$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'), $Language->getText('forum_myforums','newcontent'));
+echo "<h4>" . _('My Monitored Forums') . "</h4></p>";
+$tablearr=array(_('Project'),_('Project'),
+				_('Description'),_('Description'),
+				_('Posts'), _('Posts'), _('Posts'));
 echo $HTML->listTableTop($tablearr);
 
 $i = 0;
@@ -85,7 +85,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 	}
 	$f = new Forum($g,$monitored_forums[$i]["forum_id"]);
 	if (!$f || !is_object($f) || $f->isError()) {
-		exit_error($Language->getText('general','error'));
+		exit_error(_('Error'));
 	}
 	if (!is_object($f)) {
 		//just skip it - this object should never have been placed here
@@ -96,16 +96,16 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
-			exit_error($Language->getText('general','error'), "Error getting new ForumHTML");
+			exit_error(_('Error'), "Error getting new ForumHTML");
 		}	elseif ($fh->isError()) {
-			exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+			exit_error(_('Error'),$fh->getErrorMessage());
 		}
 		
 		$fmf = new ForumMessageFactory($f);
 		if (!$fmf || !is_object($fmf)) {
-			exit_error($Language->getText('general','error'), "Error getting new ForumMessageFactory");
+			exit_error(_('Error'), "Error getting new ForumMessageFactory");
 		}	elseif ($fmf->isError()) {
-			exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
+			exit_error(_('Error'),$fmf->getErrorMessage());
 		}
 		$fmf->setUp($offset,$style,$max_rows,$set);
 		$style=$fmf->getStyle();
@@ -156,8 +156,8 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			'&nbsp;' .
 			$f->getName() .'</a></td>
 			<td>'.$f->getDescription().'</td>
-			<td style="text-align:center">'.$f->getThreadCount().'</td>
-			<td style="text-align:center">'. $f->getMessageCount() .'</td>
+			<td align="center">'.$f->getThreadCount().'</td>
+			<td align="center">'. $f->getMessageCount() .'</td>
 			<td>'.  date($sys_datefmt,$f->getMostRecentDate()) .'</td>
 			<td>' . $newcontent . '</td></tr>';
 	}

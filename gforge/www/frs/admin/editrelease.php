@@ -104,7 +104,7 @@ if (getStringFromRequest('step1')) {
 		}
 		$notes = addslashes(fread(fopen($uploaded_notes['tmp_name'],'r'),$uploaded_notes['size']));
 		if (strlen($notes) < 20) {
-			$feedback .= $Language->getText('project_admin_editrelease','release_notes_too_small');
+			$feedback .= _('Release Notes Are Too Small');
 			$exec_changes = false;
 		}
 	} else {
@@ -118,7 +118,7 @@ if (getStringFromRequest('step1')) {
 		}
 		$changes = addslashes(fread(fopen($uploaded_changes['tmp_name'],'r'), $uploaded_changes['size']));
 		if (strlen($changes) < 20) {
-			$feedback .= $Language->getText('project_admin_editrelease','changelog_too_small');
+			$feedback .= _('Change Log Is Too Small');
 			$exec_changes = false;
 		}
 	} else {
@@ -133,7 +133,7 @@ if (getStringFromRequest('step1')) {
 		if (!$frsr->update($status_id,$release_name,$notes,$changes,$preformatted,$release_date)) {
 			exit_error('Error',$frsr->getErrorMessage());
 		} else {
-			$feedback .= $Language->getText('project_admin_editrelease','data_saved');
+			$feedback .= _('Data Saved');
 		}
 	}
 }
@@ -171,7 +171,7 @@ if (getStringFromRequest('step2')) {
 				db_rollback();
 				exit_error('Error',$frsf->getErrorMessage());
 			}
-			$feedback=$Language->getText('project_admin_editrelease','file_released');
+			$feedback=_('File Released');
 		}
 	}
 }
@@ -202,11 +202,11 @@ if (getStringFromRequest('step3')) {
 				if (!$frsf->delete()) {
 					exit_error('Error',$frsf->getErrorMessage());
 				} else {
-					$feedback .= $Language->getText('project_admin_editrelease','file_deleted');
+					$feedback .= _('File Deleted');
 				}
 			}
 		} else {
-			exit_error('Error',$Language->getText('general','error_missing_params'));
+			exit_error('Error',_('Missing Parameters'));
 		}
 	// Otherwise update the file information
 	} else {
@@ -222,33 +222,33 @@ if (getStringFromRequest('step3')) {
 			if (!$frsf->update($type_id,$processor_id,$release_time,$new_release_id)) {
 				exit_error('Error',$frsf->getErrorMessage());
 			} else {
-				$feedback .= $Language->getText('project_admin_editrelease','file_updated');
+				$feedback .= _('File Updated');
 			}
 		}
 	}
 }
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','title'),'group'=>$group_id));
+frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 /*
  * Show the forms for each step
  */
 ?>
 
-<h3><?php echo $Language->getText('project_admin_editrelease','step_1') ?></h3>
+<h3><?php echo _('Step 1:&nbsp;&nbsp; Edit Release') ?></h3>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><strong><?php echo $Language->getText('project_admin_editrelease','release_date') ?>:<strong></td>
+	<td width="10%"><strong><?php echo _('Release Date') ?>:<strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo $Language->getText('project_admin_editrelease','release_name') ?>:<strong></td>
+	<td><strong><?php echo _('Release Name') ?>:<strong></td>
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo $Language->getText('project_admin_editrelease','status') ?>:</strong></td>
+	<td><strong><?php echo _('Status') ?>:</strong></td>
 	<td>
 		<?php
 			echo frs_show_status_popup('status_id',$frsr->getStatus());
@@ -258,54 +258,54 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <tr>
 	<td colspan="2">
 		<br />
-		<?php echo $Language->getText('project_admin_editrelease','note') ?>
+		<?php echo _('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br />You can either upload the release notes and change log individually, or paste them in together below.') ?>
 	</td>
 </tr>
 <tr>
-	<td><strong><?php echo $Language->getText('project_admin_editrelease','upload_release_notes') ?>:</strong></td>
+	<td><strong><?php echo _('Upload Release Notes') ?>:</strong></td>
 	<td><input type="file" name="uploaded_notes" size="30" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo $Language->getText('project_admin_editrelease','upload_change_log') ?>:</strong></td>
+	<td><strong><?php echo _('Upload Change Log') ?>:</strong></td>
 	<td><input type="file" name="uploaded_changes" size="30" /></td>
 </tr>
 <tr>
 	<td colspan="2">
-		<strong><?php echo $Language->getText('project_admin_editrelease','paste_release_notes') ?>:</strong><br />
+		<strong><?php echo _('Paste The Notes In') ?>:</strong><br />
 		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getNotes(); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-		<strong><?php echo $Language->getText('project_admin_editrelease','paste_changelog') ?>:</strong><br />
+		<strong><?php echo _('Paste The Change Log In') ?>:</strong><br />
 		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getChanges(); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td>
 		<br />
-		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo $Language->getText('project_admin_editrelease','preserve_preformatted') ?>
+		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text.') ?>
 		<p>
-		<input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','submit_refresh') ?>"/></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit/Refresh') ?>"/></p>
 	</td>
 </tr>
 </table>
 </form>
 <p>&nbsp;</p>
 <hr />
-<h3><?php echo $Language->getText('project_admin_editrelease','step_2') ?></h3>
+<h3><?php echo _('Step 2: Add Files To This Release</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>') ?></h3>
 <p>
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
 <span class="important">
-<?php echo $Language->getText('project_admin_editrelease','add_files_note') ?>
+<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.</span>') ?>
 </span><br />
-<?php echo $Language->getText('project_admin_editrelease','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
+<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
 <?php if ($sys_use_ftpuploads) {
 
 	echo '<p>';
-	echo $Language->getText('project_admin_qrs','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
-	echo $Language->getText('project_admin_qrs','ftpupload_choosefile').'<br />';
+	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+	echo _('Choose an FTP file instead of uploading:').'<br />';
 	$arr[]='';
 	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','',false); ?>
@@ -314,13 +314,13 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <table width="60%">
 <tr>
 <td>
-<h4><?php echo $Language->getText('project_admin_editrelease','file_type') ?>:</h4>
+<h4><?php echo _('File Type') ?>:</h4>
 <?php
 	print frs_show_filetype_popup ('type_id');
 ?>
 </td>
 <td>
-<h4><?php echo $Language->getText('project_admin_editrelease','processor_type') ?>:</h4>
+<h4><?php echo _('Processor Type') ?>:</h4>
 <?php
 	print frs_show_processor_popup ('processor_id');
 ?>
@@ -328,24 +328,24 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 </tr>
 </table>
 <p>
-<input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','add_file') ?>" /></p>
+<input type="submit" name="submit" value="<?php echo _('Add This File') ?>" /></p>
 </form></p>
 <p>&nbsp;</p>
 <hr />
 <p>&nbsp;</p>
-<h3><?php echo $Language->getText('project_admin_editrelease','step_3') ?></h3>
+<h3><?php echo _('Step 3: Edit Files In This Release') ?></h3>
 
 <?php
 	// Get a list of files associated with this release
 	$res=db_query("SELECT * FROM frs_file WHERE release_id='$release_id'");
 	$rows=db_numrows($res);
 	if($rows < 1) {
-		print("<span class=\"error\">".$Language->getText('project_admin_editrelease','no_files_in_release')."</span>\n");
+		print("<span class=\"error\">"._('No Files In This Release')."</span>\n");
 	} else {
-		print($Language->getText('project_admin_editrelease','file_list_note')."\n");
-		$title_arr[]=$Language->getText('project_admin_editrelease','filename_release').'<br />';
-		$title_arr[]=$Language->getText('project_admin_editrelease','processor_update').'<br />';
-		$title_arr[]=$Language->getText('project_admin_editrelease','file_type_update').'<br />';
+		print(_('Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.')."\n");
+		$title_arr[]=_('Filename<br />Release').'<br />';
+		$title_arr[]=_('Processor<br />Release Date').'<br />';
+		$title_arr[]=_('File Type<br />Update').'<br />';
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -370,7 +370,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 							<input type="text" name="release_time" value="<?php echo date('Y-m-d',db_result($res,$x,'release_time')); ?>" size="10" maxlength="10" />
 						
 					</td>
-					<td><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','update_refresh') ?> " /></td>
+					<td><input type="submit" name="submit" value="<?php echo _('Update/Refresh') ?> " /></td>
 				</tr>
 				</form>
 
@@ -385,7 +385,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 					<td>&nbsp;</td>
 					<td>
 						
-							<input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','delete_file') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo $Language->getText('project_admin_editrelease','i_am_sure') ?> 
+							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('Delete File') ?> 
 						
 					</td>
 				</tr>
@@ -395,7 +395,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
-echo '<br />'.$Language->getText('project_admin_editrelease', 'monitor_count', array($frsp->getMonitorCount()));
+echo '<br />'.sprintf(_('There are %1$s users monitoring this package.'), $frsp->getMonitorCount());
 echo '<hr />';
 
 frs_admin_footer();

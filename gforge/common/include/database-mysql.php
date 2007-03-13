@@ -15,6 +15,9 @@
  * @var	constant		$sys_database_type
  */
 
+$sys_database_type = 'mysql' ;
+
+
 /**
  *  db_connect() -  Connect to the database
  *

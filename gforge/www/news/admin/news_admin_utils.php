@@ -60,9 +60,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	}
 
        	$title_arr=array(
-       		$Language->getText('news_admin', 'date'),
-       		$Language->getText('news_admin', 'subject'),
-       		$Language->getText('news_admin', 'project')
+       		_('Date'),
+       		_('Subject'),
+       		_('Project')
        	);
 
        	$result=db_query($sql_pending);
@@ -74,15 +74,15 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
 
        	if ($rows < 1) {
        		echo '
-       			<h4>'.$Language->getText('news_admin', 'noqueued').'</h4>';
+       			<h4>'._('No Queued Items Found').'</h4>';
        	} else {
-       		echo '<h4>'.$Language->getText('news_admin', 'newsbytes_to_approve', array($rows)).'</h4>';
+       		echo '<h4>'.sprintf(_('These items need to be approved (total: %1$s)'), $rows).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,true);
        		}
        		echo $GLOBALS['HTML']->listTableBottom();
-       		echo '<br /><input type="submit" name="submit" value="'.$Language->getText('news_admin', 'reject_selected').'" />';
+       		echo '<br /><input type="submit" name="submit" value="'._('Reject Selected').'" />';
        	}
        	echo '</form>';
 
@@ -94,9 +94,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<h4>'.$Language->getText('news_admin', 'norejected').'</h4>';
+       			<h4>'._('No rejected items found for this week').'</h4>';
        	} else {
-       		echo '<h4>'.$Language->getText('news_admin', 'rejected_newsbytes', array($rows)).'</h4>';
+       		echo '<h4>'.sprintf(_('These items were rejected this past week (total: %1$s)'), $rows).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,false);
@@ -112,9 +112,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<h4>'.$Language->getText('news_admin', 'noapproved').'</h4>';
+       			<h4>'._('No approved items found for this week').'</h4>';
        	} else {
-       		echo '<h4>'.$Language->getText('news_admin', 'approved_newsbytes', array($rows)).'</h4>';
+       		echo '<h4>'.sprintf(_('These items were approved this past week (total: %1$s)'), $rows).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,true,false);

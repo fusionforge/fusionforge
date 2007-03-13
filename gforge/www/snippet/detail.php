@@ -30,7 +30,7 @@ if ($type=='snippet') {
 		Expand and show the code for the latest version
 	*/
 
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
+	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_snippet_details($id);
 
@@ -45,17 +45,17 @@ if ($type=='snippet') {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<h3>' .$Language->getText('snippet_detail','error_no_version_found').'</h3>';
+		echo '<h3>' ._('Error - no versions found').'</h3>';
 	} else {
 		echo '
-		<h3>' .$Language->getText('snippet_detail','version_of_this_snippet').':</h3>
+		<h3>' ._('Versions Of This Snippet:').':</h3>
 		<p>';
 		$title_arr=array();
-		$title_arr[]= $Language->getText('snippet_detail','snippet_id');
-		$title_arr[]= $Language->getText('snippet_detail','download_version');
-		$title_arr[]= $Language->getText('snippet_detail','date_posted');
-		$title_arr[]= $Language->getText('snippet_detail','author');
-		$title_arr[]= $Language->getText('snippet_detail','delete');
+		$title_arr[]= _('Snippet ID');
+		$title_arr[]= _('Download Version');
+		$title_arr[]= _('Date Posted');
+		$title_arr[]= _('Author');
+		$title_arr[]= _('Delete');
 		
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -74,13 +74,13 @@ if ($type=='snippet') {
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
+				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
-					<tr'.$row_color.'><td colspan="5">' .$Language->getText('snippet_detail','changes_since_last_version').':<br />'.
+					<tr'.$row_color.'><td colspan="5">' ._('Changes since last version:').':<br />'.
 					nl2br(db_result($result,$i,'changes')).'</td></tr>';
 				}
 		}
@@ -88,7 +88,7 @@ if ($type=='snippet') {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		</p><p>'.$Language->getText('snippet_detail','download_a_raw_text').'
+		</p><p>'._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
 		</p>';
 	}
 	/*
@@ -99,7 +99,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>'.$Language->getText('snippet_detail','latest_snippet_version').' :'.db_result($result,0,'version').'</h2>
+		<h2>'._('Latest Snippet Version:').' :'.db_result($result,0,'version').'</h2>
 		<p>
 		<span class="snippet-detail">'. db_result($result,0,'code') .'
 		</span>
@@ -108,8 +108,8 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'.$Language->getText('snippet_detail','submit_a_new_snippet').'</span></a></h3>
-	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new').'.</p>';
+	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'._('Submit a new version').'</span></a></h3>
+	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	snippet_footer(array());
 
@@ -123,7 +123,7 @@ if ($type=='snippet') {
 
 	*/
 
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
+	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_package_details($id);
 
@@ -139,16 +139,16 @@ if ($type=='snippet') {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<h3>' .$Language->getText('snippet_detail','error_no_version_found').'</h3>';
+		echo '<h3>' ._('Error - no versions found').'</h3>';
 	} else {
 		echo '
-		<h3>' .$Language->getText('snippet_detail','version_of_this_package').':</h3>
+		<h3>' ._('Versions Of This Package:').':</h3>
 		<p>';
 		$title_arr=array();
-		$title_arr[]= $Language->getText('snippet_detail','package_version');
-		$title_arr[]= $Language->getText('snippet_detail','date_posted');
-		$title_arr[]= $Language->getText('snippet_detail','author');
-		$title_arr[]= $Language->getText('snippet_detail','edit_del');
+		$title_arr[]= _('Package Version');
+		$title_arr[]= _('Date Posted');
+		$title_arr[]= _('Author');
+		$title_arr[]= _('Edit/Del');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -165,7 +165,7 @@ if ($type=='snippet') {
 				db_result($result,$i,'version').'</strong></a></td><td>'.
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
+				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
 				'</a> &nbsp; &nbsp; &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=package&snippet_package_version_id='.
@@ -176,7 +176,7 @@ if ($type=='snippet') {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		</p><p>' .$Language->getText('snippet_detail','download_a_raw_text').'
+		</p><p>' ._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
 		</p>';
 	}
 
@@ -188,7 +188,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>' .$Language->getText('snippet_detail','latest_package_version').' : '.db_result($result,0,'version').'</h2>
+		<h2>' ._('Latest Package Version:').' : '.db_result($result,0,'version').'</h2>
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>';
 	snippet_show_package_snippets($newest_version);
@@ -197,8 +197,8 @@ if ($type=='snippet') {
 		Show a form so you can add a new version of this package
 	*/
 	echo '
-	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' .$Language->getText('snippet_detail','submit_a_new_version').'</span></a></h3>
-	<p>' .$Language->getText('snippet_detail','you_can_submit_a_new_version_of_package').'.</p>';
+	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' ._('Submit a new version').'</span></a></h3>
+	<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	snippet_footer(array());
 
@@ -207,7 +207,7 @@ if ($type=='snippet') {
 		Show a specific version of a package and its specific snippet versions
 	*/
 	
-	snippet_header(array('title'=>$Language->getText('snippet_detail','title')));
+	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_package_details($id);
 
@@ -217,7 +217,7 @@ if ($type=='snippet') {
 
 } else {
 
-	exit_error($Language->getText('general','error'),$Language->getText('snippet_detail','error_was_the_url_mangled'));
+	exit_error(_('Error'),_('Error'));
 
 }
 

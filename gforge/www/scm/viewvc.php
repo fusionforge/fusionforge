@@ -49,7 +49,7 @@ if (!$Group || !is_object($Group) || $Group->isError()) {
 	exit_no_group();
 }
 if (!$Group->usesSCM()) {
-	exit_error($Language->getText('general','error'), $Language->getText('scm_index','error_this_project_has_turned_off'));
+	exit_error(_('Error'), _('Error'));
 }
 
 // check if the scm_box is located in another server
@@ -136,7 +136,7 @@ if (viewcvs_is_html()) {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
 		}
 	}
-	scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),
+	scm_header(array('title'=>_('SCM Repository'),
 		'group'=>$Group->getID()));
 
 	echo $content;

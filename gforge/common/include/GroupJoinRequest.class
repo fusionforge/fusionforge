@@ -134,7 +134,7 @@ class GroupJoinRequest extends Error {
 		// Check if user is already a member of the project
 		$perm =& $this->Group->getPermission( user_get_object($user_id) );
 		if ($perm && is_object($perm) && $perm->isMember()) {
-			$this->setError($Language->getText('project_joinrequest','already_member'));
+			$this->setError(_('You are already a member of this project.'));
 			return false;
 		}
 
@@ -142,7 +142,7 @@ class GroupJoinRequest extends Error {
 		$sql = "SELECT * FROM group_join_request WHERE group_id='".$this->Group->getID()."' AND user_id='".$user_id."'";
 		$result = db_query($sql);
 		if (db_numrows($result)) {
-			$this->setError($Language->getText('project_joinrequest','already_requested'));
+			$this->setError(_('You have already sent a request to the project administrators. Please wait for their reply.'));
 			return false;
 		}
 
@@ -247,9 +247,13 @@ class GroupJoinRequest extends Error {
 			$emails[]=$admins[$i]->getEmail();
 		}
 		$email=implode($emails,',');
-		$subject = $Language->getText('project_joinrequest','join_notice_subject',array($this->Group->getPublicName()));
+		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 		$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
-		$body = $Language->getText('project_joinrequest','join_notice_body',array($user->getRealName(),$GLOBALS['sys_default_domain'],$this->Group->getId(),$comments));
+		$body = sprintf(_('%1$s has requested to join your project. 
+You can approve this request here: http://%2$s/project/admin/?group_id=%3$s. 
+
+Comments by the user:
+%4$s'), $user->getRealName(), $GLOBALS['sys_default_domain'], $this->Group->getId(), $comments);
 		$body = str_replace("\\n","\n",$body);
 
 		return util_send_message($email,$subject,$body);
@@ -263,8 +267,8 @@ class GroupJoinRequest extends Error {
 	function reject() {
 		global $Language;
 		$user =& user_get_object($this->getUserId());
-		$subject = $Language->getText('project_joinrequest','join_notice_subject',array($this->Group->getPublicName()));
-		$body = $Language->getText('project_joinrequest','denied',array($this->Group->getPublicName()));
+		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
+		$body = sprintf(_('Your request to join the %1$s project was denied by the administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(),$subject,$body);
 		return $this->delete(1);
 	}

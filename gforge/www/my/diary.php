@@ -56,11 +56,11 @@ if (!session_loggedin()) {
 			$res=db_query("UPDATE user_diary SET summary='". htmlspecialchars($summary) ."',details='". htmlspecialchars($details) ."',is_public='$is_public' ".
 			"WHERE user_id='". user_getid() ."' AND id='$diary_id'");
 			if ($res && db_affected_rows($res) > 0) {
-				$feedback .= $Language->getText('my_diary','diary_updated');
+				$feedback .= _('Diary Updated');
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
 				echo db_error();
-				$feedback .= $Language->getText('my_diary','nothing_updated');
+				$feedback .= _('Nothing Updated');
 			}
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
@@ -69,7 +69,7 @@ if (!session_loggedin()) {
 			"('". user_getid() ."','". time() ."','". htmlspecialchars($summary) ."','". htmlspecialchars($details) ."','$is_public')";
 			$res=db_query($sql);
 			if ($res && db_affected_rows($res) > 0) {
-				$feedback .= $Language->getText('my_diary','item_added');
+				$feedback .= _('Item Added');
 				if ($is_public) {
 
 					//send an email if users are monitoring
@@ -107,7 +107,7 @@ if (!session_loggedin()) {
 				}
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				$feedback .= $Language->getText('my_diary','error_adding_item');
+				$feedback .= _('Error Adding Item');
 				echo db_error();
 			}
 		}
@@ -120,12 +120,12 @@ if (!session_loggedin()) {
 		$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' AND id='$diary_id'";
 		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
-			$feedback .= $Language->getText('my_diary','entry_not_found');
+			$feedback .= _('Entry not found or does not belong to you');
 			$proc_str='add';
-			$info_str=$Language->getText('my_diary','add_new_entry');
+			$info_str=_('Add A New Entry');
 		} else {
 			$proc_str='update';
-			$info_str=$Language->getText('my_diary','update_entry');
+			$info_str=_('Update An Entry');
 			$_summary=db_result($res,0,'summary');
 			$_details=db_result($res,0,'details');
 			$_is_public=db_result($res,0,'is_public');
@@ -133,10 +133,10 @@ if (!session_loggedin()) {
 		}
 	} else {
 		$proc_str='add';
-		$info_str=$Language->getText('my_diary','add_new_entry');
+		$info_str=_('Add A New Entry');
 	}
 
-	echo site_user_header(array('title'=>$Language->getText('my_diary','title')));
+	echo site_user_header(array('title'=>_('My Diary And Notes')));
 
 	echo '
 	<p>&nbsp;</p>
@@ -147,19 +147,19 @@ if (!session_loggedin()) {
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table>
-	<tr><td colspan="2"><strong>'.$Language->getText('my_diary','summary').':</strong><br />
+	<tr><td colspan="2"><strong>'._('Summary').':</strong><br />
 		<input type="text" name="summary" size="45" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong>'.$Language->getText('my_diary','details').':</strong><br />
+	<tr><td colspan="2"><strong>'._('Details').':</strong><br />
 		<textarea name="details" rows="15" cols="60">'. $_details .'</textarea>
 	</td></tr>
 	<tr><td colspan="2">
 		<p>
-		<input type="submit" name="submit" value="'.$Language->getText('my_diary','submit_only_once').'" />
-		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked="checked"':'') .' /> '.$Language->getText('my_diary','is_public').'
+		<input type="submit" name="submit" value="'._('SUBMIT ONLY ONCE').'" />
+		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked="checked"':'') .' /> '._('Is Public').'
 		</p>
-		<p>'.$Language->getText('my_diary','is_public_expl').'
+		<p>'._('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.').'
 		</p>
 	</td></tr>
 
@@ -167,7 +167,7 @@ if (!session_loggedin()) {
 
 	<p />';
 
-	echo $HTML->boxTop($Language->getText('my_diary','existing_entries'));
+	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
 
 	$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' ORDER BY id DESC";
 
@@ -175,7 +175,7 @@ if (!session_loggedin()) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<strong>'.$Language->getText('my_diary','no_entries').'</strong>';
+			<strong>'._('You Have No Diary Entries').'</strong>';
 		echo db_error();
 	} else {
 		echo '&nbsp;</td></tr>';

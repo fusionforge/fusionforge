@@ -37,13 +37,13 @@ $group_id = getIntFromRequest('group_id');
 if (session_loggedin()) {
 
 	if (!user_ismember($group_id,'A')) {
-		exit_permission_denied($Language->getText('news_submit','cannot'));
+		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'));
 	}
 
 	$group_id = getIntFromRequest('group_id');
 
 	if ($group_id == $sys_news_group) {
-		exit_permission_denied($Language->getText('news_submit','cannotadmin'));
+		exit_permission_denied(_('Submitting news from the news group is not allowed.'));
 	}
 
 	if (getStringFromRequest('post_changes')) {
@@ -76,13 +76,13 @@ if (session_loggedin()) {
 	   			$result=db_query($sql);
 	   			if (!$result) {
 					db_rollback();
-	   				$feedback .= ' '.$Language->getText('news_submit', 'errorinsert').' ';
+	   				$feedback .= ' '._('ERROR doing insert').' ';
 	   			} else {
 					db_commit();
-	   				$feedback .= ' '.$Language->getText('news_submit', 'newsadded').' ';
+	   				$feedback .= ' '._('News Added.').' ';
 	   			}
 		} else {
-			$feedback .= ' '.$Language->getText('news_submit', 'errorboth').' ';
+			$feedback .= ' '._('ERROR - both subject and body are required').' ';
 		}
 	}
 
@@ -94,35 +94,35 @@ if (session_loggedin()) {
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>$Language->getText('news', 'title')));
+	news_header(array('title'=>_('News')));
 
 	$jsfunc = notepad_func();
 	$group = group_get_object($group_id);
 	echo '
 		<p>
-		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
+		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
 		'<p>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<strong>'.$Language->getText('news_submit', 'forproject').': '.$group->getPublicName().'</strong>
+		<strong>'._('For Project').': '.$group->getPublicName().'</strong>
 		<input type="hidden" name="post_changes" value="y" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'subject').':</strong>'.utils_requiredField().'<br />
+		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
+		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
 		
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";
 		$params['group'] = $group_id;
 		plugin_hook("text_editor",$params);
-		if (!isset($GLOBALS['editor_was_set_up'])) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don´t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
-	echo '<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
+	echo '<input type="submit" name="submit" value="'._('Submit').'" />
 		</form></p>';
 
 	news_footer(array());

@@ -36,28 +36,28 @@ if ($diary_user) {
 		exit_error('ERROR','User could not be found: '.$user_obj->getErrorMessage());
 	}
 
-	echo $HTML->header(array('title'=>$Language->getText('my_diary','title')));
+	echo $HTML->header(array('title'=>_('My Diary And Notes')));
 
 	echo '
-	<h2>'.$Language->getText('developer','diary_and_notes').': '. $user_obj->getRealName() .'</h2>';
+	<h2>'._('Diary And Notes For').': '. $user_obj->getRealName() .'</h2>';
 
 	if ($diary_id) {
 		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
 		$res=db_query($sql);
 
-		echo $HTML->boxTop($Language->getText('developer','date').": ".date($sys_datefmt, db_result($res,$i,'date_posted')));
+		echo $HTML->boxTop(_('Date').": ".date($sys_datefmt, db_result($res,$i,'date_posted')));
 		if (!$res || db_numrows($res) < 1) {
-			echo $Language->getText('developer','entry_not_found');
+			echo _('Entry Not Found For This User');
 		} else {
-			echo'<strong>'.$Language->getText('developer','subject').':</strong> '. db_result($res,$i,'summary') .'<p>
-			<strong>'.$Language->getText('developer','body').':</strong><br />
+			echo'<strong>'._('Subject').':</strong> '. db_result($res,$i,'summary') .'<p>
+			<strong>'._('Body').':</strong><br />
 			'. nl2br(db_result($res,$i,'details')) .'
 			</p>';
 		}
 		echo $HTML->boxBottom();
 	}
 
-	echo $HTML->boxTop($Language->getText('my_diary','existing_entries'));
+	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
 	echo '<table cellspacing="2" cellpadding="0" width="100%" border="0">
 ';
 	/*
@@ -71,13 +71,13 @@ if ($diary_user) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<tr><td><strong>'.$Language->getText('developer','no_entries').'</strong></td></tr>';
+			<tr><td><strong>'._('This User Has No Diary Entries').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		echo '
 			<tr>
-				<th>'.$Language->getText('developer','subject').'</th>
-				<th>'.$Language->getText('developer','date').'</th>
+				<th>'._('Subject').'</th>
+				<th>'._('Date').'</th>
 			</tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
@@ -96,7 +96,7 @@ if ($diary_user) {
 
 } else {
 
-	exit_error($Language->getText('general','error'),$Language->getText('developer','no_user_selected'));
+	exit_error(_('Error'),_('Error'));
 
 }
 

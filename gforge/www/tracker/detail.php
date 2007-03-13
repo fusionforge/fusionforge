@@ -9,7 +9,7 @@
  * @version   $Id$
  */
 
-echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));
+echo $ath->header(array ('title'=>_('Detail').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -38,9 +38,9 @@ echo notepad_func();
 				<?php /* } else { ?>
 
 				<span class="error">
-				<?php echo $Language->getText('tracker','please_login',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></span>
+				<?php printf(_('Please %1$s login %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">', '</a>') ?></span>
 				<?php if ($ath->allowsAnon()) { ?>
-				<?php echo $Language->getText('tracker','insert_email') ?>
+				<?php echo _('If you <strong>cannot</strong> login, then enter your email address here') ?>
 				<br />
 				<p>
 				<input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="255">
@@ -49,23 +49,23 @@ echo notepad_func();
 				<?php  } */ ?>
 			</td>
 			<td>
-				<input type="submit" name="submit" value="<?php echo $Language->getText('tracker_artifact','save') ?>" />
+				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
 	</table>
 <?php } ?>
 	<table border="0" width="80%">
 		<tr>
-			<td><strong><?php echo $Language->getText('tracker','date') ?>:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
-			<td><strong><?php echo $Language->getText('tracker','priority') ?>:</strong><br /><?php echo $ah->getPriority(); ?></td>
+			<td><strong><?php echo _('Date') ?>:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
+			<td><strong><?php echo _('Priority') ?>:</strong><br /><?php echo $ah->getPriority(); ?></td>
 		</tr>
 
 		<tr>
-			<td><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
+			<td><strong><?php echo _('State') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
+			<td><strong><?php echo _('Submitted By') ?>:</strong><br />
 			<?php
 			echo $ah->getSubmittedRealName();
 			/*if($ah->getSubmittedBy() != 100) {
@@ -74,7 +74,7 @@ echo notepad_func();
 				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php }*/ ?>
 			</td>
-			<td><strong><?php echo $Language->getText('tracker','assigned_to') ?>:</strong><br />
+			<td><strong><?php echo _('Assigned To') ?>:</strong><br />
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 
@@ -82,7 +82,7 @@ echo notepad_func();
 		//$ath->renderExtraFields($ah->getExtraFieldData(),true);
 	?>
 
-		<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
+		<tr><td colspan="2"><strong><?php echo _('Summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
 
 		<tr><td colspan="2">
 			<br />
@@ -92,7 +92,7 @@ echo notepad_func();
 <script type="text/javascript" src="/tabber/tabber.js"></script>
 
 <div id="tabber" class="tabber">
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','followups'); ?>">
+<div class="tabbertab" title="<?php echo _('Followups'); ?>">
 	<table border="0" width="80%">
 		<tr><td colspan="2">
 			<?php if ($ath->allowsAnon() || session_loggedin()) { ?>
@@ -100,13 +100,13 @@ echo notepad_func();
 			<input type="hidden" name="func" value="postmod">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 			<p>
-			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong> 
+			<strong><?php echo _('Add A Comment') ?>:</strong> 
 			<?php echo notepad_button('document.forms[1].details') ?><br />
 			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
-		<h3><?php echo $Language->getText('tracker','followups') ?></h3>
+		<h3><?php echo _('Followup') ?></h3>
 		<p>
 		<?php
 		echo $ah->showMessages();
@@ -117,18 +117,18 @@ echo notepad_func();
 <?php
 if ($group->usesPM()) {
 ?>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','relatedtasks'); ?>">
+<div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<h3><?php echo $Language->getText('tracker','related_tasks'); ?>:</h3>
+		<h3><?php echo _('Related Tasks'); ?>:</h3>
 		<?php
 		$result = $ah->getRelatedTasks();
 		$taskcount = db_numrows($ah->relatedtasks);
 		if ($taskcount > 0) {
-			$titles[] = $Language->getText('pm','task_id');
-			$titles[] = $Language->getText('pm','summary');
-			$titles[] = $Language->getText('pm','start_date');
-			$titles[] = $Language->getText('pm','end_date');
+			$titles[] = _('Task Id');
+			$titles[] = _('Task Summary');
+			$titles[] = _('Start Date');
+			$titles[] = _('End Date');
 			echo $GLOBALS['HTML']->listTableTop($titles);
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
@@ -148,18 +148,18 @@ if ($group->usesPM()) {
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 		} else {
-			echo $Language->getText('tracker','no_related_tasks');
+			echo _('No Related Tasks');
 		}
 	  ?>
 	</td></tr>
 </table>
 </div>
 <?php } ?>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','attachments'); ?>">
+<div class="tabbertab" title="<?php echo _('Attachments'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan=2>
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
-		<strong><?php echo $Language->getText('tracker','file_upload'); ?></strong><br />
+		<strong><?php echo _('Attach Files'); ?></strong><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
@@ -167,7 +167,7 @@ if ($group->usesPM()) {
 		<input type="file" name="input_file[]" size="30" /><br />
 		<p>
 	<?php } ?>
-	<h3><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h3>
+	<h3><?php echo _('Attached Files') ?>:</h3>
 	<?php
 	//
 	//  print a list of files attached to this Artifact
@@ -179,27 +179,27 @@ if ($group->usesPM()) {
 	if ($count > 0) {
 
 		$title_arr=array();
-		$title_arr[]=$Language->getText('tracker_detail','name');
-		$title_arr[]=$Language->getText('tracker_detail','download');
+		$title_arr[]=_('Name');
+		$title_arr[]=_('Download');
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		for ($i=0; $i<$count; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
-				$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">'.$Language->getText('tracker_detail','download').'</a></td>
+				$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">'._('Download').'</a></td>
 			</tr>';
 		}
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo $Language->getText('tracker_detail','no_files_attached');
+		echo _('No Files Currently Attached');
 	}
 	
 
 ?>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','commits'); ?>" >
+<div class="tabbertab" title="<?php echo _('Commits'); ?>" >
 <table border="0" width="80%">
 	<?php
 		$hookParams['artifact_id']=$aid;
@@ -207,11 +207,11 @@ if ($group->usesPM()) {
 	?>
 </table>
 </div>
-<div class="tabbertab" title="<?php echo $Language->getText('trackertab','changes'); ?>">
+<div class="tabbertab" title="<?php echo _('Changes'); ?>">
 <table border="0" width="80%">
 	<tr>
 	<td colspan="2">
-	<h3><?php echo $Language->getText('tracker_detail','changes') ?>:</h3>
+	<h3><?php echo _('Changes') ?>:</h3>
 	<p>
 	<?php
 

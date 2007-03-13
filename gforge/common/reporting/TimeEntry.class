@@ -89,7 +89,7 @@ class TimeEntry extends Error {
         if (!$res) {
             exit_error('Error',db_error());
         } else {
-            $feedback.=$Language->getText('reporting_ta','successfully_added');
+            $feedback.=_('Successfully Added');
         }
 	return db_affected_rows($res);
     }  

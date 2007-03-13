@@ -50,16 +50,16 @@ if (getStringFromRequest('submit')) {
 	// not valid registration, or first time to page
 	site_user_header(array('title'=>'Change Authorized Keys'));
 
-	echo $Language->getText('account_editsshkeys', 'intro');
+	echo _('<p>To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the CVS server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.</p><p>To generate a public key, run the program \'ssh-keygen\' (you can use both protocol 1 or 2). The public key will be placed at \'~/.ssh/identity.pub\' (protocole 1) and \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocole 2). Read the ssh documentation for further information on sharing keys.</p>');
 	?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<p><?php echo $Language->getText('account_editsshkeys', 'authorized_keys'); ?>
+<p><?php echo _('Authorized keys:<br /><em>Important: Make sure there are no line breaks except between keys. After submitting, verify that the number of keys in your file is what you expected.</em>'); ?>
 <br />
 <textarea rows="10" cols="80" name="authorized_keys" style="width:90%;">
 <?php echo $u->getAuthorizedKeys(); ?>
 </textarea></p>
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('general', 'update'); ?>" /></p>
+<p><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
 </form>
 
 	<?php

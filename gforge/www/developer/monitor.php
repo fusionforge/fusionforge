@@ -45,10 +45,10 @@ if (!session_loggedin()) {
 			If they are NOT, then insert a row into the db
 		*/
 
-		$HTML->header (array('title'=>$Language->getText('developer_monitor','title')));
+		$HTML->header (array('title'=>_('Monitor a User')));
 
 		echo '
-			<h2>'.$Language->getText('developer_monitor','title').'</h2>';
+			<h2>'._('Monitor a User').'</h2>';
 
 		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 
@@ -64,25 +64,25 @@ if (!session_loggedin()) {
 			$result = db_query($sql);
 
 			if (!$result) {
-				echo "<span class=\"error\">".$Language->getText('developer_monitor','error_inserting')."</span>";
+				echo "<span class=\"error\">"._('Error inserting into user_diary_monitor')."</span>";
 			} else {
-				echo "<span class=\"feedback\">".$Language->getText('developer_monitor','monitoring_user')."</span>";
-				echo $Language->getText('developer_monitor','monitoring_user_expl');
+				echo "<span class=\"feedback\">"._('User is now being monitored')."</span>";
+				echo _('<p>You will now be emailed this user\'s diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>');
 			}
 
 		} else {
 
 			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 			$result = db_query($sql);
-			echo "<span class=\"feedback\">".$Language->getText('developer_monitor','monitoring_user_off')."</span>";
-			echo $Language->getText('developer_monitor','monitoring_user_off_expl');
+			echo "<span class=\"feedback\">"._('Monitoring has been turned off')."</span>";
+			echo _('You will not receive any more emails from this user');
 	
 		}
 		$HTML->footer (array());
 	} else {
-		$HTML->header (array('title'=>$Language->getText('developer_monitor_choose_user','title')));
+		$HTML->header (array('title'=>_('Choose a User first')));
 		echo '
-			<h1>'.$Language->getText('developer_monitor_choose_user','body').'</h1>';
+			<h1>'._('Error - Choose a User To Monitor First').'</h1>';
 		$HTML->footer (array());
 	} 
 

@@ -84,9 +84,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= $Language->getText('general', 'error_on_update');
+				$feedback .= _('Error On Update:');
 			} else {
-				$feedback .= $Language->getText('news_admin', 'newsbyte_updated');
+				$feedback .= _('NewsByte Updated.');
 			}
 			/*
 				Show the list_queue
@@ -96,7 +96,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>$Language->getText('news_admin', 'title')));
+	news_header(array('title'=>_('News Admin')));
 
 	if ($approve) {
 		/*
@@ -106,14 +106,14 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$sql="SELECT * FROM news_bytes WHERE id='$id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error(_('Error'), _('Error'));
 		}
 		
 		$group =& group_get_object($group_id);
 		
 		echo notepad_func();
 		echo '
-		<h3>'.$Language->getText('news_admin', 'approve_newsbyte', array($group->getPublicName())).'</h3>
+		<h3>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h3>
 		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
@@ -122,17 +122,17 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$user =& user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<strong>'.$Language->getText('news_admin', 'submitted_by').':</strong> '.$user->getRealName().'<br />
+		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 
-		<strong>'.$Language->getText('news_admin', 'status').':</strong><br />
-		<input type="radio" name="status" value="0" checked="checked" /> '.$Language->getText('news_admin', 'status_displayed').'<br />
-		<input type="radio" name="status" value="4" /> '.$Language->getText('news_admin', 'status_delete').'<br />
+		<strong>'._('Status').':</strong><br />
+		<input type="radio" name="status" value="0" checked="checked" /> '._('Displayed').'<br />
+		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
 
-		<strong>'.$Language->getText('news_admin', 'subject').':</strong><br />
+		<strong>'._('Subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
-		<strong>'.$Language->getText('news_admin', 'details').':</strong>'.notepad_button('document.forms[1].details').'<br />';
+		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').'<br />';
 			
 		$params['name'] = 'details';
 		$params['width'] = "600";
@@ -147,8 +147,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		unset($GLOBALS['editor_was_set_up']);
 		
 		echo '<p>
-		<strong>'.$Language->getText('news_admin', 'removal_when_edit', array($GLOBALS['sys_name'])).'</strong><br /></p>
-		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
+		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), $GLOBALS['sys_name']).'</strong><br /></p>
+		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
 
 	} else {
@@ -163,10 +163,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		
 		if ($rows < 1) {
 			echo '
-				<h4>'.$Language->getText('news_admin','noqueued').': '.$group->getPublicName().'</h4>';
+				<h4>'._('No Queued Items Found').': '.$group->getPublicName().'</h4>';
 		} else {
 			echo '
-				<h4>'.$Language->getText('news_admin','queued').': '.$group->getPublicName().'</h4>
+				<h4>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h4>
 				<ul>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
@@ -202,9 +202,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 					"summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
-					$feedback .= $Language->getText('general', 'error_on_update');
+					$feedback .= _('Error On Update:');
 				} else {
-					$feedback .= $Language->getText('news_admin', 'newsbyte_updated');
+					$feedback .= _('NewsByte Updated.');
 				}
 			} else if ($status==2) {
 				/*
@@ -213,10 +213,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				$sql="UPDATE news_bytes SET is_approved='2' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
-					$feedback .= $Language->getText('general', 'error_on_update');
+					$feedback .= _('Error On Update:');
 					$feedback .= db_error();
 				} else {
-					$feedback .= $Language->getText('news_admin', 'newsbyte_deleted');
+					$feedback .= _('NewsByte Deleted.');
 				}
 			}
 
@@ -235,15 +235,15 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			     ."WHERE id IN ('".implode("','",$news_id)."')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= $Language->getText('general', 'error_on_update');
+				$feedback .= _('Error On Update:');
 				$feedback .= db_error();
 			} else {
-				$feedback .= $Language->getText('news_admin', 'newsbyte_rejected');
+				$feedback .= _('NewsBytes Rejected.');
 			}
 		}
 	}
 
-	news_header(array('title'=>$Language->getText('news_admin', 'title')));
+	news_header(array('title'=>_('News Admin')));
 
 	if ($approve) {
 		/*
@@ -255,28 +255,28 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			"AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error(_('Error'), _('Error'));
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
 		$user =& user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<h3>'.$Language->getText('news_admin', 'approve_newsbyte', array($group->getPublicName())).'</h3>
+		<h3>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h3>
 		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
-		<strong>'.$Language->getText('news_admin', 'submitted_for_group').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />
-		<strong>'.$Language->getText('news_admin', 'submitted_by').':</strong> '.$user->getRealName().'<br />
+		<strong>'._('Submitted for group').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />
+		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
-		<input type="radio" name="status" value="1" /> '.$Language->getText('news_admin', 'approve_for_frontpage').'<br />
-		<input type="radio" name="status" value="0" /> '.$Language->getText('news_admin', 'do_nothing').'<br />
-		<input type="radio" name="status" value="2" checked="checked" /> '.$Language->getText('news_admin', 'reject').'<br />
-		<strong>'.$Language->getText('news_admin', 'subject').':</strong><br />
+		<input type="radio" name="status" value="1" /> '._('Approve For Front Page').'<br />
+		<input type="radio" name="status" value="0" /> '._('Do Nothing').'<br />
+		<input type="radio" name="status" value="2" checked="checked" /> '._('Reject').'<br />
+		<strong>'._('Subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
-		<strong>'.$Language->getText('news_admin', 'details').':</strong><br />';
+		<strong>'._('Details').':</strong><br />';
 		
 		$params['name'] = 'details';
 		$params['width'] = "600";
@@ -292,7 +292,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		
 		
 		echo '<br />
-		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
+		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
 
 	} else {
@@ -345,7 +345,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error($Language->getText('general','permdenied'),$Language->getText('news_admin','permdenied',$GLOBALS['sys_name']));
+	exit_error(_('Permission Denied.'),sprintf(_('Permission Denied.'), $GLOBALS['sys_name']));
 
 }
 ?>

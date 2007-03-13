@@ -28,9 +28,9 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 
-site_user_header(array('title'=>$Language->getText('account_first','title',$sys_name)));
+site_user_header(array('title'=>sprintf(_('Welcome to %1$s'), $sys_name)));
 
-echo $Language->getText('account_first','about_blurb', $sys_name);
+printf(_('<p>You are now a registered user on %1$s, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in %1$s, sign on as a project developer, or even start your own project.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve %1$s.</p><p>--the %1$s staff.</p>'), $sys_name);
 
 site_user_footer(array());
 

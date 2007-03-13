@@ -28,7 +28,7 @@ require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
  
-$HTML->header(array('title'=>$Language->getText('admin_userlist','userlist')));
+$HTML->header(array('title'=>_(': User List')));
 
 /**
  * performAction() - Updates the indicated user status
@@ -54,20 +54,20 @@ function performAction($newStatus, $statusString, $user_id) {
 			exit_error('Error',$u->getErrorMessage());
 		}	
 	}
-	echo "<h2>" .$Language->getText('admin_userlist','user_updated',array($GLOBALS['statusString']))."</h2>";
+	echo "<h2>" .sprintf(_('User updated to %1$s status'), $GLOBALS['statusString'])."</h2>";
 }
 
 function show_users_list ($result) {
 	global $Language;
-	echo '<p>' .$Language->getText('admin_userlist','key') .':
-		<span class="active">'.$Language->getText('admin_userlist','active'). '</span>
-		<span class="deleted">' .$Language->getText('admin_userlist','deleted') .'</span>
-		<span class="suspended">' .$Language->getText('admin_userlist','suspended'). '</span>
-		<span class="pending">' .$Language->getText('admin_userlist','pending'). '</span>'.'</p>';
+	echo '<p>' ._('Key') .':
+		<span class="active">'._('Active'). '</span>
+		<span class="deleted">' ._('Deleted') .'</span>
+		<span class="suspended">' ._('Suspended'). '</span>
+		<span class="pending">' ._('(*)Pending'). '</span>'.'</p>';
 
 	$headers = array(
-		$Language->getText('admin_userlist', 'login'),
-		$Language->getText('admin_userlist', 'add_date'),
+		_('Login'),
+		_('Add date'),
 		'&nbsp;',
 		'&nbsp;',
 		'&nbsp;',
@@ -94,15 +94,15 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'P') print "pending";
 		print '"><a href="useredit.php?user_id='.$usr['user_id'].'">';
 		if ($usr['status'] == 'P') print "*";
-		echo $usr['firstname'].' '.$usr['lastname'].' ('.$usr['user_name'].')</a>';
+		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center">';
+		echo '<td width="15%" align="center">';
 		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
-		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
-		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
-		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' ._('DevProfile'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' ._('Activate'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' ._('Delete') .']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' ._('Suspend'). ']</a></td>';
 		echo '</tr>';
 		$count ++;
 	}
@@ -137,20 +137,15 @@ if (getStringFromRequest('action') == 'add_to_group') {
 }
 
 //	Show list of users
-print "<p>" .$Language->getText('admin_userlist','user_list_for_group');
+print "<p>" ._('User list for group:');
 if (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
 
-	print "<strong>" .$Language->getText('admin_userlist','all_groups'). "</strong>";
+	print "<strong>" ._('All Groups'). "</strong>";
 	print "\n</p>";
 
 	if ($user_name_search) {
-	    if ( $sys_database_type == "mysql" ) {
-			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name LIKE '".$user_name_search."%' OR lastname LIKE '".$user_name_search."%' ORDER BY lastname";
-		} else {
-			$sql = "SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname";
-		}
-		$result = db_query($sql);
+		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname");
 	} else {
 		$sortorder = $_GET['sortorder'];
 		if (!isset($sortorder) || empty($sortorder)) {
@@ -186,7 +181,7 @@ if (!$group_id) {
 	<br />
 	<input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
 	<br />
-	<input type="submit" name="Submit" value="<?php echo $Language->getText('admin_userlist','submit'); ?>" />
+	<input type="submit" name="Submit" value="<?php echo _('Submit'); ?>" />
 	</form>
 	</p>
 	<?php

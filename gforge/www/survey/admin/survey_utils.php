@@ -30,7 +30,7 @@ Function  ShowResultsEditSurvey($result) {
 	global $Language;
 	$rows  =  db_NumRows($result);
 	$cols  =  db_NumFields($result);
-	echo "<h3>". $Language->getText('survey_admin_utils','found',array($rows))."</h3>";
+	echo "<h3>". sprintf(_('%1$s surveys found'), $rows)."</h3>";
 
 	if ($rows > 0) {
 		echo "<table border=\"0\">\n";

@@ -39,10 +39,10 @@ $substr = getStringFromRequest('substr');
 $usersearch = getStringFromRequest('usersearch');
 
 if (!$search) {
-	exit_error($Language->getText('general','error'), $Language->getText('admin_search','refusing_to_display_whole_db'));
+	exit_error(_('Error'), _('Error'));
 }
 
-site_admin_header(array('title'=>$Language->getText('admin_search','index')));
+site_admin_header(array('title'=>_('Admin Search Results')));
 
 function format_name($name, $status) {
 	if ($status == 'D') {
@@ -63,6 +63,7 @@ function format_name($name, $status) {
 /*
 	Main code
 */
+
 if ($substr) {
 	$search = "%$search%";
 }
@@ -70,26 +71,17 @@ if ($substr) {
 
 if ($usersearch) {
 
-	$sql = "
-		SELECT DISTINCT * 
-		FROM users";
-	if ( $sys_database_type == "mysql" ) {
-		$sql .= "
-		WHERE user_id LIKE '$search'
-		OR user_name LIKE '%$search%'
-		OR email LIKE '%$search%'
-		OR realname LIKE '%$search%'"; 
-	} else {
-		$sql .= "
-		WHERE user_id ILIKE '$search'
-		OR user_name ILIKE '%$search%'
-		OR email ILIKE '%$search%'
-		OR realname ILIKE '%$search%'"; 
-	}
-	$result = db_query($sql);
+	$result = db_query("
+	    SELECT DISTINCT * 
+	    FROM users
+	    WHERE user_id ILIKE '$search'
+	    OR user_name ILIKE '%$search%'
+	    OR email ILIKE '%$search%'
+	    OR realname ILIKE '%$search%'
+	"); 
 
-	print '<p><strong>' .$Language->getText('admin_search','user_search_criteria').' "<em>'.$search.'</em>": '
-	      .db_numrows($result) .' '. $Language->getText('admin_search','matches').'</strong></p>';
+	print '<p><strong>' ._('User search with criteria').' "<em>'.$search.'</em>": '
+	      .db_numrows($result) .' '. _('matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 
@@ -98,12 +90,12 @@ if ($usersearch) {
 	} else {
 
 		$title=array();
-		$title[]=$Language->getText('admin_search','id');
-		$title[]=$Language->getText('admin_search','username');
-		$title[]=$Language->getText('admin_search','real_name');
-		$title[]=$Language->getText('admin_search','email');
-		$title[]=$Language->getText('admin_search','member_since');
-		$title[]=$Language->getText('admin_search','status');
+		$title[]=_('ID');
+		$title[]=_('Username');
+		$title[]=_('Real Name');
+		$title[]=_('Email');
+		$title[]=_('Member since');
+		$title[]=_('Status');
 					 
 		echo $GLOBALS['HTML']->listTableTop($title);
 
@@ -115,7 +107,7 @@ if ($usersearch) {
 				<td>'.$row['realname'].'</td>
 				<td>'.$row['email'].'</td>
 				<td>'.date($sys_datefmt, $row['add_date']).'</td>
-				<td style="text-align:center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
+				<td align="center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
 				</tr>
 			'; 
 		}
@@ -140,40 +132,31 @@ if (getStringFromRequest('groupsearch')) {
 		$crit_desc .= " is_public=$is_public";
 	}
 
-	$sql = "
+	$result = db_query("
 		SELECT DISTINCT *
-		FROM groups";
-	if ( $sys_database_type == "mysql" ) {
-		$sql .= "
-		WHERE (group_id LIKE '%$search%'
-		OR unix_group_name LIKE '%$search%'
-		OR group_name LIKE '%$search%')
-		$crit_sql"; 
-	} else {
-		$sql .= "
+		FROM groups
 		WHERE (group_id ILIKE '%$search%'
 		OR unix_group_name ILIKE '%$search%'
 		OR group_name ILIKE '%$search%')
-		$crit_sql"; 
-	}
-	$result = db_query($sql);
+		$crit_sql
+	"); 
 
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";
 	}
-	print '<p><strong>' .$Language->getText('admin_search','group_search_criteria').'"<em>'.$search.'</em>" '.$crit_desc.': '
-	      .db_numrows($result).' '.$Language->getText('admin_search','matches').'</strong></p>';
+	print '<p><strong>' ._('Group search with criteria').'"<em>'.$search.'</em>" '.$crit_desc.': '
+	      .db_numrows($result).' '._('matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();
 	} else {
 
 		$title=array();
-		$title[]=$Language->getText('admin_search','id');
-		$title[]=$Language->getText('admin_search','unix_name');
-		$title[]=$Language->getText('admin_search','full_name');
-		$title[]=$Language->getText('admin_search','registered');
-		$title[]=$Language->getText('admin_search','status');
+		$title[]=_('ID');
+		$title[]=_('UNIX Name');
+		$title[]=_('Full Name');
+		$title[]=_('Registered');
+		$title[]=_('Status');
 
 		echo $GLOBALS['HTML']->listTableTop($title);
 
@@ -190,7 +173,7 @@ if (getStringFromRequest('groupsearch')) {
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>
 				<td>'.date($sys_datefmt, $row['register_time']).'</td>
-				<td style="text-align:center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
+				<td align="center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
 				</tr>
 			';
 					

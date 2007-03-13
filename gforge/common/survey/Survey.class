@@ -65,7 +65,7 @@ class Survey extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('general','error_no_valid_group_object','Survey'));
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Survey"));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -82,7 +82,7 @@ class Survey extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError($Language->getText('general','error_group_id'));
+					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return false;
 				}
@@ -107,11 +107,11 @@ class Survey extends Error {
 		global $Language;
 
 		if (!$survey_title) {
-			$this->setError($Language->getText('survey_edit','survey_title_required'));
+			$this->setError(_('UPDATE FAILED: Survey Title Required'));
 			return false;
 			/* We need at least one survey question at this point */	
 		} else if (!$add_questions || !is_array($add_questions) || count($add_questions)<1) {
-			$this->setError($Language->getText('survey_edit','survey_question_required'));
+			$this->setError(_('UPDATE FAILED: Survey Questions Required'));
 			return false;
 		}
 
@@ -124,7 +124,7 @@ class Survey extends Error {
 
 		$result=db_query($sql);
 		if (!$result) {
-			$this->setError($Language->getText('survey_add_question','error_in_insert').db_error());
+			$this->setError(_('MISSINGTEXT:survey_add_question/error_in_insert:TEXTMISSING').db_error());
 			return false;
 		} 
 
@@ -151,7 +151,7 @@ class Survey extends Error {
 		global $Language;
 
 		if (!$survey_title) {
-			$this->setError($Language->getText('survey_edit','survey_title_required'));
+			$this->setError(_('UPDATE FAILED: Survey Title Required'));
 			return false;
 			/* We need at least one survey question at this point */	
 		}
@@ -161,7 +161,7 @@ class Survey extends Error {
 
 		/* Ths Survey is not ready to update */
 		if (!$survey_id) {
-			$this->setError($Language->getText('survey_error','no_survey_data_filled'));
+			$this->setError(_('The Survey data is not filled'));
 			return false;
 		}
 		
@@ -170,7 +170,7 @@ class Survey extends Error {
 			"WHERE survey_id='$survey_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_affected_rows($result) < 1) {
-			 $this->setError($Language->getText('survey_edit','update_failed').db_error());
+			 $this->setError(_('UPDATE FAILED').db_error());
 			 return false;
 		} 
 		/* Update internal data */
@@ -192,7 +192,7 @@ class Survey extends Error {
 
 		/* Ths Survey is not ready to update */
 		if (!$survey_id) {
-			$this->setError($Language->getText('survey_error','no_survey_data_filled'));
+			$this->setError(_('The Survey data is not filled'));
 			return false;
 		}
 
@@ -208,7 +208,7 @@ class Survey extends Error {
 			"WHERE survey_id='$survey_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_affected_rows($result) < 1) {
-			 $this->setError($Language->getText('survey_edit','update_failed').db_error());
+			 $this->setError(_('UPDATE FAILED').db_error());
 			 return false;
 		} 
 		
@@ -232,7 +232,7 @@ class Survey extends Error {
  
 		$res=db_query($sql);
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError($Language->getText('survey_edit_question','delete_failed').db_error());
+			$this->setError(_('MISSINGTEXT:survey_edit_question/delete_failed:TEXTMISSING').db_error());
 			return false;
 		}
 		
@@ -255,7 +255,7 @@ class Survey extends Error {
 		$res=db_query($sql);
 	
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('survey_error','no_survey_found').db_error());
+			$this->setError(_('No Survey is found').db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

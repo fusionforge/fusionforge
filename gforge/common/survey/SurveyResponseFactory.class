@@ -75,19 +75,19 @@ class SurveyResponseFactory extends Error {
 		$this->Error();
 
 		if (!$Survey || !is_object($Survey)) {
-			$this->setError($Language->getText('survey_error','error_no_valid_survey_object'));
+			$this->setError(_('No valid Survey Object'));
 			return false;
 		}
 		if ($Survey->isError()) {
-			$this->setError($Language->getText('survey','survey').':: '.$Survey->getErrorMessage());
+			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Survey->getErrorMessage());
 			return false;
 		}
 		if (!$Question || !is_object($Question)) {
-			$this->setError($Language->getText('survey_error','error_no_valid_question_object'));
+			$this->setError(_('No valid Question Object'));
 			return false;
 		}
 		if ($Question->isError()) {
-			$this->setError($Language->getText('survey','survey').':: '.$Question->getErrorMessage());
+			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Question->getErrorMessage());
 			return false;
 		}
 
@@ -153,7 +153,7 @@ class SurveyResponseFactory extends Error {
 
 		$result = db_query ($sql);
 		if (!$result) {
-			$this->setError($Language->getText('survey_error','no_survey_response_found').db_error());
+			$this->setError(_('No Survey Response is found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

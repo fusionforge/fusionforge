@@ -36,37 +36,37 @@ session_require( array('group'=>$sys_stats_group) );
 echo report_header('Main Page');
 
 ?>
-<h3><?php echo $Language->getText('reporting','users'); ?></h3>
+<h3><?php echo _('Users'); ?></h3>
 <p>
-<a href="useradded.php?SPAN=1"><?php echo $Language->getText('reporting','users_added_weekly'); ?></a><br />
-<a href="usercum.php?SPAN=1"><?php echo $Language->getText('reporting','cumulative_users'); ?></a><br />
-<a href="useract.php"><?php echo $Language->getText('reporting','user_activity'); ?></a><br />
+<a href="useradded.php?SPAN=1"><?php echo _('Users Added Weekly (graph)'); ?></a><br />
+<a href="usercum.php?SPAN=1"><?php echo _('Cumulative Users Weekly (graph)'); ?></a><br />
+<a href="useract.php"><?php echo _('Activity (graph)'); ?></a><br />
 <p>
-<h3><?php echo $Language->getText('reporting','projects'); ?></h3>
+<h3><?php echo _('Projects'); ?></h3>
 <p>
-<a href="groupadded.php?SPAN=1"><?php echo $Language->getText('reporting','groups_added_weekly'); ?></a><br />
-<a href="groupcum.php?SPAN=1"><?php echo $Language->getText('reporting','cumulative_groups'); ?></a><br />
-<?php echo $Language->getText('reporting','project_specific'); ?><br />
-<a href="projectact.php"><?php echo $Language->getText('reporting','project_activity'); ?></a><br />
+<a href="groupadded.php?SPAN=1"><?php echo _('Projects Added Weekly (graph)'); ?></a><br />
+<a href="groupcum.php?SPAN=1"><?php echo _('Cumulative Projects Weekly (graph)'); ?></a><br />
+<?php echo _('Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads'); ?><br />
+<a href="projectact.php"><?php echo _('Activity (graph)'); ?></a><br />
 <p>
-<h3><?php echo $Language->getText('reporting','site_wide'); ?></h3>
+<h3><?php echo _('Site-Wide'); ?></h3>
 <p>
-<?php echo $Language->getText('reporting','site_wide_reports'); ?><br />
-<a href="toolspie.php"><?php echo $Language->getText('reporting','site_wide_pie'); ?></a><br />
-<a href="siteact.php"><?php echo $Language->getText('reporting','site_wide_line'); ?></a><br />
+<?php echo _('Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads'); ?><br />
+<a href="toolspie.php"><?php echo _('Pie (graph)'); ?></a><br />
+<a href="siteact.php"><?php echo _('Line (graph)'); ?></a><br />
 <p>
-<h3><?php echo $Language->getText('reporting','time_tracking'); ?></h3>
+<h3><?php echo _('Time-Tracking'); ?></h3>
 <p>
-<a href="usertime.php"><?php echo $Language->getText('reporting','time_tracking_usertime'); ?></a> <a href="usertime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
-<a href="projecttime.php"><?php echo $Language->getText('reporting','time_tracking_projecttime'); ?></a> <a href="projecttime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
-<a href="sitetime.php"><?php echo $Language->getText('reporting','time_tracking_sitetime'); ?></a> <a href="sitetime.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
-<a href="sitetimebar.php"><?php echo $Language->getText('reporting','time_tracking_sitetimebar'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo $Language->getText('reporting','report'); ?>)</a><br />
-<a href="usersummary.php"><?php echo $Language->getText('reporting','time_tracking_usersummary'); ?></a><br />
+<a href="usertime.php"><?php echo _('Individual User Time Report (graph)'); ?></a> <a href="usertime.php?typ=r">(<?php echo _('Individual User Time Report (graph)'); ?>)</a><br />
+<a href="projecttime.php"><?php echo _('Individual Project Time Report (graph)'); ?></a> <a href="projecttime.php?typ=r">(<?php echo _('Individual Project Time Report (graph)'); ?>)</a><br />
+<a href="sitetime.php"><?php echo _('Site-Wide Time Report (graph)'); ?></a> <a href="sitetime.php?typ=r">(<?php echo _('Site-Wide Time Report (graph)'); ?>)</a><br />
+<a href="sitetimebar.php"><?php echo _('Site-Wide Total Hours Graph (graph)'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo _('Site-Wide Total Hours Graph (graph)'); ?>)</a><br />
+<a href="usersummary.php"><?php echo _('Site-Wide Task &amp; Hours (report)'); ?></a><br />
 <p>
-<h3><?php echo $Language->getText('reporting','administrative'); ?></h3>
+<h3><?php echo _('Administrative'); ?></h3>
 <p>
-<a href="rebuild.php"><?php echo $Language->getText('reporting','initialize'); ?></a><br />
-<a href="timecategory.php"><?php echo $Language->getText('reporting','manage'); ?></a><br />
+<a href="rebuild.php"><?php echo _('Initialize / Rebuild Reporting Tables'); ?></a><br />
+<a href="timecategory.php"><?php echo _('Manage Time Tracker Categories'); ?></a><br />
 
 <p>
 <?php

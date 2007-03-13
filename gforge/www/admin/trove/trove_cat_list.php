@@ -41,10 +41,10 @@ function printnode ($nodeid,$text) {
 	print html_image('ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
 	if ($nodeid == 0) {
-		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','add').']</a> ');
+		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
 	} else {
-		print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','edit').']</a> ');
-		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','add').']</a> ');
+		print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['._('Edit').']</a> ');
+		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
 		print (help_button('trove_cat',$nodeid)."\n");
 	}
 
@@ -62,11 +62,11 @@ function printnode ($nodeid,$text) {
 
 // ########################################################
 
-site_admin_header(array('title'=>$Language->getText('admin_trove_cat_list','title')));
+site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
 
 ?>
 
-<h3><?php echo $Language->getText('admin_trove_cat_list','browse_trove_tree'); ?></h3>
+<h3><?php echo _('Browse Trove Tree'); ?></h3>
 
 <?php
 

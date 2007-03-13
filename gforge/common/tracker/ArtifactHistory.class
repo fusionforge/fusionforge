@@ -90,7 +90,7 @@ class ArtifactHistory extends Error {
 		//	data validation
 		//
 		if (!$name || !$auto_assign_to) {
-			$this->setError($Language->getText('artifact_category','required_fields'));
+			$this->setError(_('ArtifactCategory: name and assignee are Required'));
 			return false;
 		}
 		if (!$this->Artifact->userIsAdmin()) {

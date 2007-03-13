@@ -33,21 +33,21 @@
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
-			<strong><?php echo $Language->getText('tracker_admin_build_boxes','opt_name') ?>:</strong><br />
+			<strong><?php echo _('Element') ?>:</strong><br />
 			<input type="text" name="name" value="<?php echo $ao->getName(); ?>" /></p>
 			<!--
 			Show a pop-up box to choose the possible statuses that this element will map to
 			-->
 			<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) { ?>
-			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_status'); ?>:</strong><br />
+			<strong><?php echo _('Status'); ?>:</strong><br />
 			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
 			<?php } ?>
 
 			<p>
-			<span class="warning"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
+			<span class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
 				</span></p>
 			<p>
-			<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form></p>
 			<?php
 			$ath->footer(array());

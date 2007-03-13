@@ -16,11 +16,11 @@
 		if ($result && $rows > 0) {
 			//code to show existing responses and link to update page
 			echo '
-			<h2>'.$Language->getText('tracker_admin_add_canned','existing_responses').':</h2>
+			<h2>'._('Existing Responses').':</h2>
 			<p>&nbsp;</p>';
 			$title_arr=array();
-			$title_arr[]=$Language->getText('tracker_admin','tracker_id');
-			$title_arr[]=$Language->getText('tracker_admin','tracker_title');
+			$title_arr[]=_('ID');
+			$title_arr[]=_('Title');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -35,20 +35,20 @@
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo "\n<h1>".$Language->getText('tracker_admin_add_canned','no_responses')."</h1>";
+			echo "\n<h1>"._('No responses set up in this group')."</h1>";
 		}
 		?>
-		<p><?php echo $Language->getText('tracker_admin_add_canned','canned_response_info') ?></p>
+		<p><?php echo _('Creating useful generic messages can save you a lot of time when handling common artifact requests.') ?></p>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_canned" value="y" />
-		<strong><?php echo $Language->getText('tracker_admin_add_canned','canned_response_title') ?>:</strong><br />
+		<strong><?php echo _('Title') ?>:</strong><br />
 		<input type="text" name="title" value="" size="50" maxlength="50" />
 		<p>
-		<strong><?php echo $Language->getText('tracker_admin_add_canned','canned_response_body') ?>:</strong><br />
+		<strong><?php echo _('Message Body') ?>:</strong><br />
 		<textarea name="body" rows="30" cols="65" wrap="hard"></textarea></p>
 		<p>
-		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form></p>
 		<?php
 

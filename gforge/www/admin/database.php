@@ -71,47 +71,47 @@ if (getStringFromRequest('submit')) {
 		");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= $Language->getText('admin_database','error_adding_database') .db_error();
+			$feedback .= _('Error Adding Database') .db_error();
 		} else {
-			$feedback .= $Language->getText('admin_database','group'). " <em>".$group->getUnixName()."</em>" .$Language->getText('admin_database','added_already_active_database');
+			$feedback .= _('Group'). " <em>".$group->getUnixName()."</em>" ._('Group');
 		}
 
 	} else {
 
-		$feedback .=	"<strong>" .$Language->getText('admin_database','unable_to_insert'). "</strong>";
+		$feedback .=	"<strong>" ._('Unable to insert already active database.'). "</strong>";
 
 	}
 
 }
 
-site_admin_header(array('title'=>$Language->getText('admin_database','site_admin_groups_maintance')));
+site_admin_header(array('title'=>_('Site Admin: Groups\' DB Maintenance')));
 
 $res_db = db_query("
-	SELECT stateid,statename,COUNT(*) AS count
+	SELECT stateid,statename,COUNT(*)
 	FROM prdb_dbs,prdb_states
 	WHERE stateid=state
 	GROUP BY statename,stateid
 ");
 
-echo '<h3>' .$Language->getText('admin_database','statistics_for_project_database').'</h3>';
+echo '<h3>' ._('Statistics for Project Databases').'</h3>';
 
 if (db_numrows($res_db) > 0) {
 
 	$title=array();
-	$title[]= $Language->getText('admin_database','type');
-	$title[]= $Language->getText('admin_database','count');
+	$title[]= _('Type');
+	$title[]= _('Count');
 	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<tr><td style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td style="text-align:center">'.$row_db['count'].'</td></tr>';
+		print '<tr><td align="center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td align="center">'.$row_db['count'].'</td></tr>';
 
 	}
 
 	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
-	echo '<p>' .$Language->getText('admin_database','no_databases_defined').'</p>';
+	echo '<p>' ._('No databases defined').'</p>';
 }
 
 
@@ -125,7 +125,7 @@ if ($displaydb) {
 
 	$row_db = db_fetch_array($res_db);
 
-	print '<hr /><h3>' .$Language->getText('admin_database','display_database_type') .$row_db['statename'].' </h3><ul>';
+	print '<hr /><h3>' ._('Displaying Databases of Type:') .$row_db['statename'].' </h3><ul>';
 
 	$res_db = db_query("
 		SELECT *
@@ -149,14 +149,14 @@ if ($displaydb) {
 ?>
 <hr />
 
-<h3><?php echo $Language->getText('admin_database','add_an_already_active_database'); ?></h3>
+<h3><?php echo _('Add an already active database'); ?></h3>
 
 <form name="madd" method="post" action="<?php  echo getStringFromServer('PHP_SELF'); ?>">
 
 <table>
 
 <tr>
-<td><?php echo $Language->getText('admin_database','group_unix_name'); ?><?php echo utils_requiredField(); ?></td>
+<td><?php echo _('Group Unix Name:'); ?><?php echo utils_requiredField(); ?></td>
 <td><input type="text" name="groupname" /></td>
 </tr>
 
@@ -166,7 +166,7 @@ if ($displaydb) {
 </tr>
 
 </table>
-<input type="submit" name="submit" value="<?php echo $Language->getText('admin','add'); ?>"/>
+<input type="submit" name="submit" value="<?php echo _('Add'); ?>"/>
 </form>
 
 <?php

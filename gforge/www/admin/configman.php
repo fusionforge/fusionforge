@@ -32,7 +32,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-site_admin_header(array('title'=>$Language->getText('admin_index','title')));
+site_admin_header(array('title'=>_('Site Admin')));
 
 /**
  * printSelection - prints the select box for the user to get the files to edit
@@ -41,9 +41,9 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
  * @param string	the path to the plugins conf dir
  */
 function printSelection($checked,$pluginpath) {
-	global $Language,$feedback,$sys_etc_path;
+	global $Language,$feedback;
 	
-	$config_files = array(); // array that'll have the config files
+	$config_files = array(); // array that�ll have the config files
 	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
@@ -53,19 +53,19 @@ function printSelection($checked,$pluginpath) {
 	}
 					
 	// check if we can get local.inc
-	@$handle = fopen($sys_etc_path . '/local.inc','r+');
+	@$handle = fopen('/etc/gforge/local.inc','r+');
 	if (! $handle) { 
 		// Open readonly but tell you can't write
-		$handle = fopen($sys_etc_path . '/local.inc','r');
-		$feedback .= $Language->getText('configman','notopenlocalinc');
+		$handle = fopen('/etc/gforge/local.inc','r');
+		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache<br>');
 	}
 	if ($handle) {
-		$config_files['local.inc'] = $sys_etc_path . '/local.inc';
+		$config_files['local.inc'] = '/etc/gforge/local.inc';
 		fclose($handle);
 		$i++;
 	} else {
 		// say we couldn't open local.inc
-		$feedback .= $Language->getText('configman','notopenlocalinc');
+		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache<br>');
 	}
 
 	//get the directories from the plugins dir
@@ -90,12 +90,12 @@ function printSelection($checked,$pluginpath) {
 		fclose($handle);
 	} else {
 		// say we couldn't get into etc plugins dir
-		$feedback .= $Language->getText('configman','notopenplugindir');
+		$feedback .= _('Could not open plugins etc dir for reading. Check the permissions for apache<br>');
 	}*/
 	
 	echo '<br><div align="center">';
 	echo html_build_select_box_from_assoc($config_files,'files',$checked,true);
-	echo '&nbsp;<input type="submit" name="choose" value="' . $Language->getText('configman','choose') .'"/>';
+	echo '&nbsp;<input type="submit" name="choose" value="' . _('Choose') .'"/>';
 	echo '</div><br>';	
 }
 
@@ -145,14 +145,14 @@ function updateVars($vars,$filepath) {
 	if (@$handle = fopen($filepath,'w')) {
 		if (fwrite($handle,$filedata)) {
 			// say wrote ok
-			$feedback .= $Language->getText('configman','updateok');
+			$feedback .= _('File wrote successfully.<br>');
 		} else {
 			// say some problem
-			$feedback .= $Language->getText('configman','nowrite');
+			$feedback .= _('File wasn\'t written or is empty.<br>');
 		}
 	} else {
-		// say couldn't open
-		$feedback .= $Language->getText('configman','notopenfile');
+		// say couldn�t open
+		$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
 	}
 }
 
@@ -161,9 +161,9 @@ function updateVars($vars,$filepath) {
 
 <form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="POST">
 
-<!--<?php //echo $Language->getText('configman','enterpath'); ?>&nbsp;&nbsp;
+<!--<?php //echo _('Path were you store the plugin configuration folders. E.g. : /etc/gforge/plugins/'); ?>&nbsp;&nbsp;
 <input type="text" size="55" width="55" name="pluginpath" value="<?php //echo getStringFromRequest('pluginpath')?>"/>
-<input type="submit" name="changepath" value="<?php //echo $Language->getText('configman','change'); ?>"/>
+<input type="submit" name="changepath" value="<?php //echo _('Change'); ?>"/>
 <br>'-->
 <?php
 
@@ -177,16 +177,15 @@ function updateVars($vars,$filepath) {
 		@$handle = fopen($filepath,'r+');
 		if (! $handle) {
 			// Open readonly but tell you can't write
-			$handle = fopen($sys_etc_path.'/local.inc','r');
-			$feedback .= $Language->getText('configman','notopenfile');
+			$handle = fopen('/etc/gforge/local.inc','r');
+			$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
 		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
 			$filedata = file_get_contents($filepath);
 			$vars = getVars($filedata); // get the vars from local.inc
 			$keys = array_keys($vars);
-			sort($keys);
-			$title_arr = array($Language->getText('configman','name'),$Language->getText('configman','on'),$Language->getText('configman','off'));
+			$title_arr = array(_('Attribute'),_('Attribute'),_('Attribute'));
 			echo $HTML->listTableTop($title_arr);
 			$j = 0;
 			for($i=0;$i<(count($keys));$i++) {
@@ -195,20 +194,20 @@ function updateVars($vars,$filepath) {
 				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
 				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '></td></tr>';
+			 	'<td>'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
+			 	'<td><div align="center">'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '>' .'</div></td></tr>';
 			 	$j++;
 			}
 			echo $HTML->listTableBottom();
 			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
 			echo '<input type="hidden" name="filepath" value="' . $filepath . '">';*/
-			echo '<br><div align="center"><input type="submit" name="doedit" value="' . $Language->getText('configman','doedit') .'"/></div>';
+			echo '<br><div align="center"><input type="submit" name="doedit" value="' . _('Save') .'"/></div>';
 		} else {
 			// say we couldn't open the file
-			$feedback .= $Language->getText('configman','notopenfile');
+			$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),$sys_etc_path . '/local.inc'); // perhaps later we'll update something else, for now it's local.inc
+		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we�ll update something else, for now it�s local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
@@ -216,14 +215,14 @@ function updateVars($vars,$filepath) {
 		if ($handle = fopen($filepath,'w')) {
 			if (fwrite($handle,$filedata)) {
 				// say wrote ok
-				$feedback .= $Language->getText('configman','updateok');
+				$feedback .= _('File wrote successfully.<br>');
 			} else {
 				// say some problem
-				$feedback .= $Language->getText('configman','nowrite');
+				$feedback .= _('File wasn\'t written or is empty.<br>');
 			}
 		} else {
-			// say couldn't open
-			$feedback .= $Language->getText('configman','notopenfile');
+			// say couldn�t open
+			$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
 		}*/
 	}
 //}

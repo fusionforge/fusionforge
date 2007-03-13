@@ -66,16 +66,16 @@ class Theme extends Layout {
 			onmouseout="imgOff('logo')"><img name="logo" border="0" height="60" width="180"
 				src="<?php echo $this->imgroot.'logo.png'; ?>" alt="GForge Logo" /></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
-		<td style="text-align:right"><?php
+		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b><br />
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a></b><br />
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a></b>
 				<?php
 			} else {
 				?>
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b><br />
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a></b><br />
+				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a></b>
 				<?php
 			}
 
@@ -188,7 +188,7 @@ class Theme extends Layout {
 					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan="2" height="1"></td></tr><tr style="text-align:left"><td colspan="2">';
+					<td colspan="2" height="1"></td></tr><tr align="left"><td colspan="2">';
 	}
 
 	/**
@@ -259,12 +259,12 @@ class Theme extends Layout {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td style="text-align:left"><a class="titlebar" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
+				<td align="left"><a class="titlebar" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td style="text-align:left">'.$title_arr[$i].'</td>';
+				<td align="left">'.$title_arr[$i].'</td>';
 			}
 		}
 		$return .= '
@@ -304,7 +304,7 @@ class Theme extends Layout {
 			$return .= '
 				<td height="'.$this->TAB_HEIGHT.'" width="5"
 					style="background-image: url('.$this->imgroot.'tabs/left'.$cornerimg.'.png);"></td>
-				<td '.$bgimg.' height="'.$this->TAB_HEIGHT.'" width="'.$width.'%" style="text-align:center">'.
+				<td '.$bgimg.' height="'.$this->TAB_HEIGHT.'" width="'.$width.'%"  align="center">'.
 				'<a class="'. (($selected==$i)?'tabsellink':'tablink') .'" href="'. $TABS_DIRS[$i] .'">'. $TABS_TITLES[$i] .'</a></td>
 				<td height="'.$this->TAB_HEIGHT.'" width="5"
 					style="background-image: url('.$this->imgroot.'tabs/right'.$cornerimg.'.png);"></td>';
@@ -314,7 +314,7 @@ class Theme extends Layout {
 			<td><img src="'.$this->imgroot.'clear.png" height="'.$this->TAB_HEIGHT.'" width="'.$space.'%" alt="" /></td>
 		</tr>
 		<tr>
-		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);" style="text-align:center"><img
+		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);"  align="center"><img
 			src="'.$this->imgroot.'clear.png" height="8" width="'.$space.'%" alt="" /></td>';
 		for ($i=0; $i<$count; $i++) {
 			$bgimg=(($selected==$i)?$select_rule:$deselect_rule);
@@ -322,14 +322,14 @@ class Theme extends Layout {
 			$return .= '
 				<td style="background-image: url('.$this->imgroot.'tabs/leftblend'.$blendimg.'.png);"><img
 					src="'.$this->imgroot . 'clear.png" height="8" width="5" alt="" /></td>
-				<td '.$bgimg.' width="'.$width.'%" style="text-align:center"><img
+				<td '.$bgimg.' width="'.$width.'%"  align="center"><img
 					src="'.$this->imgroot . 'clear.png" height="8" width="1" alt="" /></td>
 				<td style="background-image: url('.$this->imgroot.'tabs/rightblend'.$blendimg.'.png);"><img
 					src="'.$this->imgroot . 'clear.png" height="8" width="5" alt="" /></td>';
 		}
 
 		return $return .= '
-		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);" style="text-align:center"><img
+		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);"  align="center"><img
 			src="'.$this->imgroot.'clear.png" height="8" width="'.$space.'%" alt="" /></td>
 		</tr>
 		<tr><td height="10">&nbsp;</td></tr>

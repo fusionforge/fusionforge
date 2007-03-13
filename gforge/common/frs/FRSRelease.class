@@ -122,7 +122,7 @@ class FRSRelease extends Error {
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_release','error_min_name_length'));
+			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 
@@ -381,7 +381,7 @@ class FRSRelease extends Error {
 
 		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError($Language->getText('frs_release','error_min_name_length'));
+			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 		

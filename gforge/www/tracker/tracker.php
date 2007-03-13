@@ -12,7 +12,7 @@ if ($group->isError()) {
 	if($group->isPermissionDeniedError()) {
 		exit_permission_denied($group->getErrorMessage());
 	} else {
-		exit_error($Language->getText('general','error'), $group->getErrorMessage());
+		exit_error(_('Error'), $group->getErrorMessage());
 	}
 }
 //
@@ -27,14 +27,14 @@ if ($ath->isError()) {
 	if($ath->isPermissionDeniedError()) {
 		exit_permission_denied($group->getErrorMessage());
 	} else {
-		exit_error($Language->getText('general','error'), $ath->getErrorMessage());
+		exit_error(_('Error'), $ath->getErrorMessage());
 	}
 }
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
+			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 		} else {
 			include ('add.php');
 		}
@@ -63,14 +63,14 @@ switch (getStringFromRequest('func')) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error('ERROR','Artifact Could Not Be Created');
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
+			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 		} else {
 			if (empty($user_email)) {
 					$user_email=false;
 			} else {
 				if (!validate_email($user_email)) {
 					form_release_key(getStringFromRequest('form_key'));
-					exit_error('ERROR', $Language->getText('general','invalid_email'));
+					exit_error('ERROR', _('Invalid Email Address'));
 				}
 			}
 			if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
@@ -113,7 +113,7 @@ switch (getStringFromRequest('func')) {
 						}
 					}
 				}
-				$feedback .= $Language->getText('tracker','item_created');
+				$feedback .= _('Item Successfully Created');
 				include 'browse.php';
 			}
 		}
@@ -201,7 +201,7 @@ switch (getStringFromRequest('func')) {
 			unset($ah);
 
 		if (!$was_error) {
-			$feedback = $Language->getText('tracker','updated_successful');			}
+			$feedback = _('Updated Successfully');			}
 		}
 		unset ($extra_fields_choice);
 		include ('browse.php');
@@ -236,7 +236,7 @@ switch (getStringFromRequest('func')) {
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error('ERROR',$Language->getText('tracker_artifact','error_no_anonymous'));
+			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 		} else {
 
 			/*
@@ -251,7 +251,7 @@ switch (getStringFromRequest('func')) {
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields)) {
-					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
+					$feedback =_('Tracker Item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
 				}
@@ -264,7 +264,7 @@ switch (getStringFromRequest('func')) {
 
 					$delete_file=false;
 					if ($ah->addMessage($details,$user_email,true)) {
-						$feedback=$Language->getText('tracker','comment_added');
+						$feedback=_('MISSINGTEXT:tracker/comment_added:TEXTMISSING');
 					} else {
 						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
 							//some kind of error in creation
@@ -283,7 +283,7 @@ switch (getStringFromRequest('func')) {
 					$delete_file=false;
 					$add_file=false;
 					if ($ah->addMessage($details,$user_email,true)) {
-						$feedback=$Language->getText('tracker','comment_added');
+						$feedback=_('MISSINGTEXT:tracker/comment_added:TEXTMISSING');
 					} else {
 						//some kind of error in creation
 						exit_error('ERROR',$ah->getErrorMessage());
@@ -319,10 +319,10 @@ switch (getStringFromRequest('func')) {
 						exit_error("Error","Invalid filename");
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
+						$feedback .= ' <br />'._('MISSINGTEXT:tracker/file_upload_upload:TEXTMISSING').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');
+						$feedback .= ' <br />'._('File Upload: Successful');
 					}
 				}
 			}
@@ -341,10 +341,10 @@ switch (getStringFromRequest('func')) {
 						$feedback .= $afh->getErrorMessage().'::'.$delete_file[$i];
 					} else {
 						if (!$afh->delete()) {
-							$feedback .= ' <br />'.$Language->getText('tracker','file_delete').': '.$afh->getErrorMessage();
+							$feedback .= ' <br />'._('File Delete:').': '.$afh->getErrorMessage();
 							$was_error=true;
 						} else {
-							$feedback .= ' <br />'.$Language->getText('tracker','file_delete_successful');
+							$feedback .= ' <br />'._('File Delete: Successful');
 						}
 					}
 				}
@@ -353,7 +353,7 @@ switch (getStringFromRequest('func')) {
 			//	Show just one feedback entry if no errors
 			//
 			if (!$was_error) {
-				$feedback = $Language->getText('general','update_successful');
+				$feedback = _('Updated successfully');
 			}
 			include ('browse.php');
 		}
@@ -426,13 +426,13 @@ switch (getStringFromRequest('func')) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			}
 			if (!getStringFromRequest('confirm_delete')) {
-				$feedback .= $Language->getText('tracker_artifact','delete_failed_confirm');
+				$feedback .= _('Confirmation failed. Artifact not deleted');
 			}
 			else {
 				if (!$ah->delete(true)) {
-					$feedback .= $Language->getText('tracker_artifact','delete_failed') . ': '.$ah->getErrorMessage();
+					$feedback .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
 				} else {
-					$feedback .= $Language->getText('tracker_artifact','deleted_successfully');
+					$feedback .= _('Artifact Deleted Successfully');
 				}
 			}
 			include 'browse.php';

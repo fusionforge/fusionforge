@@ -32,7 +32,7 @@ $toaddress = getStringFromRequest('toaddress');
 $touser = getStringFromRequest('touser');
 
 if (!$toaddress && !$touser) {
-	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','error_variables'));
+	exit_error(_('Error'),_('Error'));
 }
 
 if ($touser) {
@@ -42,12 +42,12 @@ if ($touser) {
 	*/
 	$result=db_query("SELECT email,user_name FROM users WHERE user_id='$touser'");
 	if (!$result || db_numrows($result) < 1) {
-		exit_error($Language->getText('general','error'),$Language->getText('sendmessage','error_user_not_exist'));
+		exit_error(_('Error'),_('Error'));
 	}
 }
 
 if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
-	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','email_only_to')." @".$GLOBALS['sys_default_domain']);
+	exit_error(_('Error'),_('Error')." @".$GLOBALS['sys_default_domain']);
 }
 
 
@@ -82,8 +82,8 @@ if (getStringFromRequest('send_mail')) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' .$Language->getText('sendmessage','contact')   ));
-		echo '<p>'.$Language->getText('sendmessage','message_sent').'.</p>';
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' ._('Contact')   ));
+		echo '<p>'._('Message has been sent').'.</p>';
 		$HTML->footer(array());
 		exit;
 	} else if ($touser) {
@@ -93,8 +93,8 @@ if (getStringFromRequest('send_mail')) {
 		$to=db_result($result,0,'email');
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '.$Language->getText('sendmessage','contact')));
-		echo '<p>'.$Language->getText('sendmessage','message_sent').'</p>';
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '._('Contact')));
+		echo '<p>'._('Message has been sent').'</p>';
 		$HTML->footer(array());
 		exit;
 	}
@@ -111,27 +111,27 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 ?>
 
 <p />
-<?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
+<?php echo _('In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="important"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>'); ?>
 <p />
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
-<strong><?php echo $Language->getText('sendmessage','email') ?>:</strong><br />
+<strong><?php echo _('Your Email Address') ?>:</strong><br />
 <input type="text" name="email" size="30" maxlength="255" value="" />
 <p />
-<strong><?php echo $Language->getText('sendmessage', 'name') ?>:</strong><br />
+<strong><?php echo _('Your Name') ?>:</strong><br />
 <input type="text" name="name" size="30" maxlength="40" value="" />
 <p />
-<strong><?php echo $Language->getText('sendmessage', 'subject') ?>:</strong><br />
+<strong><?php echo _('Subject') ?>:</strong><br />
 <input type="text" name="subject" size="30" maxlength="255" value="<?php echo $subject; ?>" />
 <p />
-<strong><?php echo $Language->getText('sendmessage', 'message') ?>:</strong><br />
+<strong><?php echo _('Message') ?>:</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>
 <p />
 <div align="center">
-<input type="submit" name="send_mail" value="<?php echo $Language->getText('sendmessage','send') ?>" />
+<input type="submit" name="send_mail" value="<?php echo _('Send Message') ?>" />
 </div>
 </form>
 <?php

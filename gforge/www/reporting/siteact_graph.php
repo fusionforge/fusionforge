@@ -74,8 +74,8 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot2 );
 
 	//	Legends
-	 $lineplot->SetLegend (convert_unicode($Language->getText('reporting','tracker_items_opened')));
-	 $lineplot2 ->SetLegend(convert_unicode($Language->getText('reporting','tracker_items_closed')));
+	 $lineplot->SetLegend (convert_unicode(_('Tracker Items Opened')));
+	 $lineplot2 ->SetLegend(convert_unicode(_('Tracker Items Closed')));
 
 } elseif ($area=='forum') {
 

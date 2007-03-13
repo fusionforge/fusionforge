@@ -69,9 +69,9 @@
 			"else {" .
 			"document.formson.son.disabled=true" .
 			"}\">" .
-			"\n<option value='0' selected=\"selected\" >".$Language->getText('project_admin','link')."</option>\n" .
-			"<option value='shar'>".$Language->getText('project_admin','share')."</option>\n" .
-			"<option value='navi' >".$Language->getText('project_admin','navi')."</option>\n" .
+			"\n<option value='0' selected=\"selected\" >"._('Link Type')."</option>\n" .
+			"<option value='shar'>"._('Share')."</option>\n" .
+			"<option value='navi' >"._('Navigation')."</option>\n" .
 			"</select>";
 	}
 

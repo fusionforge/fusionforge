@@ -69,13 +69,13 @@ if (getStringFromRequest('add')) {
 			");
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$feedback .= $Language->getText('admin_vhost','error_adding_vhost') .db_error();
+				$feedback .= _('Error adding VHOST:') .db_error();
 			} else {
-				$feedback .= $Language->getText('admin_vhost','virtual_host'). "<strong>".$vhost_name."</strong>" .$Language->getText('admin_vhost','scheduled_for_creation'). "<em>".$group->getUnixName()."</em>";
+				$feedback .= _('Virtual Host:'). "<strong>".$vhost_name."</strong>" ._('Virtual Host:'). "<em>".$group->getUnixName()."</em>";
 			}
 		} else {
 
-			$feedback .=	"<strong>" .$Language->getText('admin_vhost','the_provided_group'). "</strong>";
+			$feedback .=	"<strong>" ._('The provided group name does not exist'). "</strong>";
 
 		}
 			
@@ -95,50 +95,50 @@ if (getStringFromRequest('tweakcommit')) {
 	");
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= $Language->getText('admin_vhost','error_updating_vhost') .db_error();
+		$feedback .= _('Error updating VHOST entry:') .db_error();
 	} else {
-		$feedback .= $Language->getText('admin_vhost','virtual_host_entry_updated');
+		$feedback .= _('Virtual Host entry updated.');
 	}		
 
 }
 
 
-site_admin_header(array('title'=>$Language->getText('admin_vhost','title')));
+site_admin_header(array('title'=>_('Site Admin')));
 ?>
 
-<h3><?php echo $Language->getText('admin_vhost','virtual_host_administration'); ?></h3>
+<h3><?php echo _('Virtual Host Administration'); ?></h3>
 
 <form name="madd" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 
-<strong><?php echo $Language->getText('admin_vhost','add_virtual_host'); ?></strong>
+<strong><?php echo _('Add Virtual Host'); ?></strong>
 
 <table border="0">
 
 <tr>
-<td><?php echo $Language->getText('admin_vhost','group_unix_name'); ?></td>
+<td><?php echo _('Group Unix Name'); ?></td>
 <td><input type="text" name="groupname" /></td>
 </tr>
 
 <tr>
-<td><?php echo $Language->getText('admin_vhost','virtual_host_name'); ?></td>
+<td><?php echo _('Virtual Host Name'); ?></td>
 <td><input type="text" name="vhost_name" /></td>
 </tr>
 </table>
 
-<input type="submit" name="add" value="<?php echo $Language->getText('admin_vhost','add_virtual_host'); ?>" />
+<input type="submit" name="add" value="<?php echo _('Add Virtual Host'); ?>" />
 </form>
 
 <p>&nbsp;</p>
 
 <hr />
-<strong><?php echo $Language->getText('admin_vhost','tweak_directories'); ?></strong>
+<strong><?php echo _('Tweak Directories'); ?></strong>
 <br />
 
 <form name="tweak" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <table border="0">
 <tr>
-   <td><?php echo $Language->getText('admin_vhost','virtual_host'); ?></td><td><input type="text" name="vhost_name" /></td>
-   <td><input type="submit" value="<?php echo $Language->getText('admin_vhost','get_info'); ?>" /></td>
+   <td><?php echo _('Virtual Host:'); ?></td><td><input type="text" name="vhost_name" /></td>
+   <td><input type="submit" value="<?php echo _('Get Info'); ?>" /></td>
 </tr>
 </table>
 
@@ -161,15 +161,15 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 	
-		print '<p><strong>'.$Language->getText('admin_vhost','update_record').'</strong></p><hr />';
+		print '<p><strong>'._('Update Record:').'</strong></p><hr />';
 
 		$title=array();
-		$title[]=$Language->getText('admin_vhost','vhost_id');
-		$title[]=$Language->getText('admin_vhost','vhost_name');
-		$title[]=$Language->getText('admin_vhost','group');
-		$title[]=$Language->getText('admin_vhost','htdocs_dir');
-		$title[]=$Language->getText('admin_vhost','cgi_dir');
-		$title[]=$Language->getText('admin_vhost','operations');
+		$title[]=_('VHOST ID');
+		$title[]=_('VHOST Name');
+		$title[]=_('Group');
+		$title[]=_('Htdocs Dir');
+		$title[]=_('CGI Dir');
+		$title[]=_('Operations');
 
 		print '
 			<form name="update" method="post" action="'.getStringFromServer('PHP_SELF').'">
@@ -179,7 +179,7 @@ if (getStringFromRequest('tweak')) {
 			<td>'.$row_vh['vhost_name'].'</td>
 			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
-			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'.$Language->getText('admin_vhost','update').'" /></tr>
+			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'._('Update').'" /></tr>
 			'.$GLOBALS['HTML']->listTableBottom().'
 
 			<input type="hidden" name="tweakcommit" value="1" />
@@ -187,7 +187,7 @@ if (getStringFromRequest('tweak')) {
 			</form>
 		';
 	} else {
-		echo $Language->getText('admin_vhost','no_such_host') . $vhost_name;
+		echo _('No such VHOST:') . $vhost_name;
 	}
 
 }

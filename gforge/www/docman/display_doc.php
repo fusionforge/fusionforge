@@ -31,10 +31,10 @@ if ($docid) {
 	}
 
 	docman_header($d->getName(),$d->getName());
-	echo $Language->getText('docman_display_doc','docmoved',array($group_id,$docid));
+	printf(_('This document was moved to <a href="/docman/view.php/%1$s/%2$s">this new location</a>'), $group_id, $docid);
 	docman_footer(array());
 } else {
-	exit_error($Language->getText('docman_display_doc','no_document_data_title'),$Language->getText('docman_display_doc','no_document_data_text'));
+	exit_error(_('No document data'),_('No document data'));
 }
 
 ?>

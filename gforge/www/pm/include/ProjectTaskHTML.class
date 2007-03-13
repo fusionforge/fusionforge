@@ -51,12 +51,12 @@ class ProjectTaskHTML extends ProjectTask {
 
 		if ($rows > 0) {
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','depend_info').'</h3>
+			<h3>'._('Tasks That Depend on This Task').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('pm','task_id');
-			$title_arr[]=$Language->getText('pm','summary');
+			$title_arr[]=_('Task Id');
+			$title_arr[]=_('Task Summary');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -75,7 +75,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-				<h3>'.$Language->getText('pm_include_taskhtml','no_depend_info').'</h3>';
+				<h3>'._('No Tasks are Dependent on This Task').'</h3>';
 			echo db_error();
 		}
 	}
@@ -96,14 +96,14 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','related_items').'</h3>
+			<h3>'._('Related Tracker Items').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('pm','summary');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','tracker');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','open_date');
-			(($is_admin) ? $title_arr[]=$Language->getText('pm_include_taskhtml','remove_relation') : '');
+			$title_arr[]=_('Task Summary');
+			$title_arr[]=_('Tracker');
+			$title_arr[]=_('Open Date');
+			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 		
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -120,7 +120,7 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableBottom();
 		} else {
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','no_tracker_items').'</h3>';
+			<h3>'._('No Related Tracker Items Have Been Added').'</h3>';
 		}
 	}
 
@@ -136,13 +136,13 @@ class ProjectTaskHTML extends ProjectTask {
 
 		if ($rows > 0) {
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','followups').'</h3>
+			<h3>'._('Followups').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('pm_include_taskhtml','comment');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','date');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','by');
+			$title_arr[]=_('Comment');
+			$title_arr[]=_('Date');
+			$title_arr[]=_('By');
 		
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -158,7 +158,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','no_comments').'</h3>';
+			<h3>'._('No Comments Have Been Added').'</h3>';
 		}
 	
 	}
@@ -177,14 +177,14 @@ class ProjectTaskHTML extends ProjectTask {
 		if ($rows > 0) {
 
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','task_history').'</h3>
+			<h3>'._('Task Change History').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]=$Language->getText('pm_include_taskhtml','field');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','old_value');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','date');
-			$title_arr[]=$Language->getText('pm_include_taskhtml','by');
+			$title_arr[]=_('Field');
+			$title_arr[]=_('Old Value');
+			$title_arr[]=_('Date');
+			$title_arr[]=_('By');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -224,7 +224,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-			<h3>'.$Language->getText('pm_include_taskhtml','no_changes').'</h3>';
+			<h3>'._('No Changes Have Been Made').'</h3>';
 		}
 	}
 

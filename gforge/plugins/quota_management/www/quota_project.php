@@ -44,10 +44,10 @@ if (!$group || !is_object($group)) {
 }
 
 
-project_admin_header(array('title'=>$Language->getText('project_admin_quotas','title'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($group_id))));
 ?>
 
-<h4><?php echo $Language->getText('project_admin_quotas','title'); ?></h4>
+<h4><?php echo _('Project quota manager'); ?></h4>
 
 <?php
 $quotas = array();
@@ -56,10 +56,10 @@ $SQL .= "FROM doc_data ";
 $SQL .= "WHERE group_id = '$group_id' ";
 $res_db = db_query($SQL);
 $q = array();
-$q["name"] = $Language->getText('project_admin_quotas','documents_title');
+$q["name"] = _('Documents');
 $q["nb"] = 0; $q["size"] = 0;
 $q1 = array();
-$q1["name"] = $Language->getText('project_admin_quotas','search_engine_title');
+$q1["name"] = _('Documents search engine');
 $q["size"] = 0;
 if (db_numrows($res_db) > 0) 
 {
@@ -75,7 +75,7 @@ $quotas[1] = $q1;
 $SQL = "SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = '$group_id' ";
 $res_db = db_query($SQL);
 $q = array();
-$q["name"] = $Language->getText('project_admin_quotas','news_title');
+$q["name"] = _('News');
 $q["nb"] = 0; $q["size"] = 0;
 if (db_numrows($res_db) > 0) 
 {
@@ -90,7 +90,7 @@ $SQL = "SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) a
 $SQL .= "ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = '$group_id' ";
 $res_db = db_query($SQL);
 $q = array();
-$q["name"] = $Language->getText('project_admin_quotas','forums_title');
+$q["name"] = _('Forums');
 $q["nb"] = 0; $q["size"] = 0;
 if (db_numrows($res_db) > 0) 
 {
@@ -131,34 +131,34 @@ $group_dir = $chroot_dir.$groupdir_prefix . "/" . $group->getUnixName();
 $cvs_dir = $chroot_dir.$cvsdir_prefix . "/" . $group->getUnixName();
 $svn_dir = $chroot_dir.$svndir_prefix . "/" . $group->getUnixName();
 
-$q["name"] = $Language->getText('project_admin_quotas','upload_title');
+$q["name"] = _('Download project directory');
 $q["path"] = "$upload_dir";
-$q["quota_label"] = $Language->getText('project_admin_quotas','without');
+$q["quota_label"] = _('Without quota control');
 $q["size"] = get_dir_size ("$upload_dir");
 $quota_tot_other += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = $Language->getText('project_admin_quotas','home_title');
+$q["name"] = _('Home project directory');
 $q["path"] = "$group_dir"; $q["size"] = get_dir_size ("$group_dir");
-$q["quota_label"] = $Language->getText('project_admin_quotas','with_ftp_home');
+$q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = $Language->getText('project_admin_quotas','ftp_title');
+$q["name"] = _('Ftp project directory');
 $q["path"] = "$ftp_dir"; $q["size"] = get_dir_size ("$ftp_dir");
-$q["quota_label"] = $Language->getText('project_admin_quotas','with_ftp_home');
+$q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = $Language->getText('project_admin_quotas','cvs_title');
+$q["name"] = _('CVS project directory');
 $q["path"] = "$cvs_dir"; $q["size"] = get_dir_size ("$cvs_dir");
-$q["quota_label"] = $Language->getText('project_admin_quotas','with_scm');
+$q["quota_label"] = _('With cvs and svn quota control');
 $quota_tot_scm += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = $Language->getText('project_admin_quotas','svn_title');
+$q["name"] = _('Subversion project directory');
 $q["path"] = "$svn_dir"; $q["size"] = get_dir_size ("$svn_dir");
-$q["quota_label"] = $Language->getText('project_admin_quotas','with_scm');
+$q["quota_label"] = _('With cvs and svn quota control');
 $quota_tot_scm += $q["size"];
 $quotas_disk[] = $q;
 
@@ -177,12 +177,12 @@ $quotas_disk[] = $q;
 
 <table width="500px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="3" style="border-top:thick solid #808080" align="center"><?php echo $Language->getText('project_admin_quotas','database_space_label'); ?></td>
+		<td colspan="3" style="border-top:thick solid #808080" align="center"><?php echo _('Database'); ?></td>
 	</tr>
 	<tr style="font-weight:bold">
-		<td style="border-top:thin solid #808080"><?php echo $Language->getText('project_admin_quotas','table_head_name'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo $Language->getText('project_admin_quotas','table_head_nb'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo $Language->getText('project_admin_quotas','table_head_size'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('quota type'); ?></td>
+		<td style="border-top:thin solid #808080" align="right"><?php echo _('quantity'); ?></td>
+		<td style="border-top:thin solid #808080" align="right"><?php echo _('size'); ?></td>
 	</tr>
 <?php 
 	$sizetot = 0;
@@ -195,7 +195,7 @@ foreach ($quotas as $q)
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." ".$Language->getText('project_admin_quotas','size_metric'); ?></td>
+				<td style="border-top:thin solid #808080" align="right"><?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?></td>
 			</tr>
 <?php 
 	} 
@@ -203,11 +203,11 @@ foreach ($quotas as $q)
 ?>
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">
-			<?php echo $Language->getText('project_admin_quotas','total_label'); ?>
+			<?php echo _('Total'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." ".$Language->getText('project_admin_quotas','size_metric'); ?>
+			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
 		</td>
 	</tr>
 </table>
@@ -216,16 +216,16 @@ foreach ($quotas as $q)
 <table width="500px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
 		<td colspan="3" style="border-top:thick solid #808080" align="center">
-			<?php echo $Language->getText('project_admin_quotas','disk_space_label'); ?>
+			<?php echo _('Disk space'); ?>
 		</td>
 	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('project_admin_quotas','table_head_name'); ?>
+			<?php echo _('quota type'); ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">&nbsp;</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('project_admin_quotas','table_head_size'); ?>
+			<?php echo _('size'); ?>
 		</td>
 	</tr>
 <?php 
@@ -242,7 +242,7 @@ foreach ($quotas_disk as $q)
 			<?php echo $q["quota_label"]; ?>&nbsp;
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." ".$Language->getText('project_admin_quotas','size_metric'); ?>
+			<?php echo add_numbers_separator(convert_bytes_to_mega($q["size"]))." "._('Mb'); ?>
 		</td>
 	</tr>
 <?php 
@@ -250,10 +250,10 @@ foreach ($quotas_disk as $q)
 }
 ?>
 	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo $Language->getText('project_admin_quotas','total_label'); ?></td>
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." ".$Language->getText('project_admin_quotas','size_metric'); ?>
+			<?php echo add_numbers_separator(convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
 		</td>
 	</tr>
 </table>
@@ -271,36 +271,36 @@ foreach ($quotas_disk as $q)
 	if (($quota_tot_1+0) > ($qs+0) && ($qs+0) > 0)
 	{
 		$color1 = "#FFDCDC";
-		$msg1 = $Language->getText('project_admin_quotas','quota_exceed');
+		$msg1 = _('Quota exceeded');
 	}
 	if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0)
 	{
 		$color2 = "#FFDCDC";
-		$msg2 = $Language->getText('project_admin_quotas','quota_exceed');
+		$msg2 = _('Quota exceeded');
 	}
 ?>
 
 <table width="500px" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="4" style="border-top:thick solid #808080" align="center"><?php echo $Language->getText('project_admin_quotas','quota_space_label'); ?></td>
+		<td colspan="4" style="border-top:thick solid #808080" align="center"><?php echo _('Quota disk management'); ?></td>
 	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('project_admin_quotas','quota_settings_label'); ?>
+			<?php echo _('Quota settings'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold" align="right">
 			&nbsp;
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('project_admin_quotas','quota_soft_label'); ?>
+			<?php echo _('Quota soft'); ?>
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $Language->getText('project_admin_quotas','quota_hard_label'); ?>
+			<?php echo _('Quota hard'); ?>
 		</td>
 	</tr>
 	<tr style="background:<?php echo $color1; ?>">
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('project_admin_quotas','quota_group1_label'); ?>
+			<?php echo _('Home, Ftp'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
 			<?php echo $msg1; ?>
@@ -314,7 +314,7 @@ foreach ($quotas_disk as $q)
 				else
 				{
 					echo "$quota_soft";  
-					echo $Language->getText('admin_quotas','mbytes'); 
+					echo _('Mb'); 
 				}
 			?>
 		</td>
@@ -327,14 +327,14 @@ foreach ($quotas_disk as $q)
 				else
 				{
 					echo "$quota_hard";  
-					echo $Language->getText('admin_quotas','mbytes'); 
+					echo _('Mb'); 
 				}
 			?>
 		</td>
 	</tr>
 	<tr style="background:<?php echo $color2; ?>">
 		<td style="border-top:thin solid #808080">
-			<?php echo $Language->getText('project_admin_quotas','quota_groupscm_label'); ?>
+			<?php echo _('Cvs, Svn'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
 			<?php echo $msg2; ?>
@@ -348,7 +348,7 @@ foreach ($quotas_disk as $q)
 				else
 				{
 					echo "$quota_soft";  
-					echo $Language->getText('admin_quotas','mbytes'); 
+					echo _('Mb'); 
 				}
 			?>
 			</td>
@@ -361,7 +361,7 @@ foreach ($quotas_disk as $q)
 				else
 				{
 					echo "$quota_hard";  
-					echo $Language->getText('admin_quotas','mbytes'); 
+					echo _('Mb'); 
 				}
 			?>
 		</td>

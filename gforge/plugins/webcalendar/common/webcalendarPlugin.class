@@ -125,7 +125,7 @@ class webcalendarPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . $Language->getText('user_home','view_webcalendar') .'</a></p>';
+					<a href="/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal webcalendar') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			global $Language;
@@ -134,7 +134,7 @@ class webcalendarPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . $Language->getText('project_admin','webcalendar') . '</a><br />';
+				echo '<a href="/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('View the webcalendar Administration') . '</a><br />';
 			}
 			
 		}												    

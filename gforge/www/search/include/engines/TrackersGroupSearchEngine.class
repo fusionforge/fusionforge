@@ -15,7 +15,7 @@ class TrackersGroupSearchEngine extends GroupSearchEngine {
 	
 	function TrackersGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', $Language->getText('searchbox','trackers'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', _('This project\'s trackers'));
 	}
 	
 	function isAvailable($parameters) {

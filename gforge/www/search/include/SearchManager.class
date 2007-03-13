@@ -98,7 +98,7 @@ class SearchManager {
 		// Project search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FULL_PROJECT,
-			new GroupSearchEngine(SEARCH__TYPE_IS_FULL_PROJECT, 'FullProjectHtmlSearchRenderer', $Language->getText('searchbox','full'))
+			new GroupSearchEngine(SEARCH__TYPE_IS_FULL_PROJECT, 'FullProjectHtmlSearchRenderer', _('Search the entire project'))
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TRACKERS,
@@ -128,23 +128,23 @@ class SearchManager {
 		// Global search engine
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', $Language->getText('searchbox','softwaregroup'))
+			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Software/Group'))
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
-			new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', $Language->getText('searchbox','people'))
+			new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
 		);
 		if ($GLOBALS['sys_use_people']) {
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
-				new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', $Language->getText('searchbox','skill'))
+				new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))
 			);
 		}
 		
 		// Rss search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', $Language->getText('searchbox','softwaregroup')),
+			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Software/Group')),
 			SEARCH__OUTPUT_RSS
 		);
 		

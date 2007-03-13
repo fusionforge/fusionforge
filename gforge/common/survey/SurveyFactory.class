@@ -57,12 +57,12 @@ class SurveyFactory extends Error {
 
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('survey_error','error_no_valid_group_object'));
+			$this->setError(_('No valid Group Object'));
 			return false;
 		}
 
 		if ($Group->isError()) {
-			$this->setError($Language->getText('survey','survey').':: '.$Group->getErrorMessage());
+			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -99,7 +99,7 @@ class SurveyFactory extends Error {
 		$result = db_query ($sql);
 
 		if (!$result) {
-			$this->setError($Language->getText('survey_error','no_survey_found').db_error());
+			$this->setError(_('No Survey is found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

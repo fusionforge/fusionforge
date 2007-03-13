@@ -34,9 +34,9 @@ $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');
 $offset = getIntFromRequest('offset');
 
-news_header(array('title'=>$Language->getText('news', 'title')));
+news_header(array('title'=>_('News')));
 
-echo $Language->getText('news', 'choose');
+echo _('<p>Choose a News item and you can browse, search, and post messages.</p>');
 
 /*
 	Put the result set (list of forums for this group) into a column with folders
@@ -60,10 +60,10 @@ if ($rows < 1) {
 	if ($group_id) {
 		echo '<h2>'.$Language->getText('news', 'nonewsfor', group_getname($group_id)).'</h2>';
 	} else {
-		echo '<h2>'.$Language->getText('news', 'nonews').'</h2>';
+		echo '<h2>'._('No News Found').'</h2>';
 	}
 	echo '
-		<p>' . $Language->getText('news', 'noitems') . '</p>';
+		<p>' . _('No items were found') . '</p>';
 	echo db_error();
 } else {
 	echo '<table width="100%" border="0">
@@ -81,7 +81,7 @@ if ($rows < 1) {
         if (getStringFromRequest('more')) {
         	echo '<br /><a href="'
                      .'?group_id='.$group_id.'&amp;limit='.$limit
-                     .'&amp;offset='. (string)($offset+$limit) .'">['.$Language->getText('news', 'olderheadlines').']</a>';
+                     .'&amp;offset='. (string)($offset+$limit) .'">['._('Older headlines').']</a>';
         }
 
         echo '

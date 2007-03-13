@@ -64,7 +64,7 @@ account_register	err_badinsert	インサート失敗
 account_register	message_header	$1 アカウント登録
 account_register	partecipate_peer_ratings	ランキングに参加(いくつかの基準で、他のユーザーをランク付けすることができます。同じく他のユーザーらもあなたをランク付けすることができます。もし、あなたがランキングに参加するのであれば、これらの詳しい情報について、あなたの $1 ユーザーページから入手することができます。)
 account_register	remember_me	ユーザーを記憶します。<i>（ログインしなくでも $1 パーソナルページ</a>へのアクセスを可能にしてくれる機能です。ただし、設定の変更をする時には、ログインが必要です。)</i>
-account_register	message_body	$4 ウェブサイトに登録していただき、ありがとうございます。\nユーザー 「$1」 を登録しました。登録を終えるために次のURLを訪れてください:\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(このメッセージの上にURLが表示されますが、そこに表示されていなければ、\nそれは恐らくあなたのメールクライアントのバグによるものだと思われます。\n表示されなかったときのためにもう一つのURLを下に用意して置きました。\nこのURLを入力するときは改行を含めないようにお願いします。)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nどうぞ $4 サイトを楽しんで下さい $4 スタッフより。
+account_register	message_body	$4 ウェブサイトに登録していただき、ありがとうございます。\nユーザー 「$1」 を登録しました。登録を終えるために次のURLを訪れてください:\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(このメッセージの上にURLが表示されますが、そこに表示されていなければ、\nそれは恐らくあなたのメールクライアントのバグによるものだと思われます。\n表示されなかったときのためにもう一つのURLを下に用意して置きました。\nこのURLを入力するときは改行を含めないようにお願いします。)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nどうぞ $4 サイトを楽しんで下さい $4 スタッフより。\n
 account_register	update	更新
 account_register	reset	リセット
 account_unsubscribe	all_mailings	(未訳：account_unsubscribe.all_mailings)all $1 mailings and notifications 

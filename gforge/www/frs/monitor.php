@@ -38,18 +38,18 @@ if (session_loggedin()) {
 
 		if ($stop) {
 			if (!$f->stopMonitor()) {
-				exit_error($Language->getText('general','error'),$f->getErrorMessage());
+				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
-				frs_header(array('title'=>$Language->getText('project_filemodule_monitor','stop_monitor_title'),'group'=>$group_id));
-				echo $Language->getText('project_filemodule_monitor','stop_monitor_body');
+				frs_header(array('title'=>_('Monitoring stopped'),'group'=>$group_id));
+				echo _('Monitoring Has Been Stopped');
 				frs_footer();
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				frs_header(array('title'=>$Language->getText('project_filemodule_monitor','start_monitor_title'),'group'=>$group_id));
-				echo $Language->getText('project_filemodule_monitor','start_monitor_body');
+				frs_header(array('title'=>_('Monitoring started'),'group'=>$group_id));
+				echo _('Monitoring Has Been Started');
 				frs_footer();
 			}
 		}

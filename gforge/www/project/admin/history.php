@@ -33,11 +33,11 @@ require_once('www/project/admin/project_admin_utils.php');
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-project_admin_header(array('title'=>$Language->getText('project_admin_history','title'),'group'=>$group_id));
+project_admin_header(array('title'=>_('History'),'group'=>$group_id));
 
 ?>
 
-<p><?php echo $Language->getText('project_admin_history','info') ?>.</p>
+<p><?php echo _('This log will show who made significant changes to your project and when') ?>.</p>
 <?php
 echo show_grouphistory($group_id);
 

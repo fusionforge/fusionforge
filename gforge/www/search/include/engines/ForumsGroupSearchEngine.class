@@ -15,7 +15,7 @@ class ForumsGroupSearchEngine extends GroupSearchEngine {
 	
 	function ForumsGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', $Language->getText('searchbox','forums'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', _('This project\'s forums'));
 	}
 	
 	function isAvailable($parameters) {

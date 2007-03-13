@@ -22,7 +22,7 @@ require_once('common/reporting/Report.class');
 
 echo notepad_func();
 
-pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 ?>
 
@@ -33,72 +33,72 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 <table border="0" width="100%">
 
 	<tr>
-		<td><strong><?php echo $Language->getText('pm_modtask','submitted_by') ?>:</strong><br />
+		<td><strong><?php echo _('Submitted By') ?>:</strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
-		<td><input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" /></td>
+		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
 	</tr>
 
 	<tr>
 		<td>
-			<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
+			<strong><?php echo _('Category') ?>:</strong><br />
 			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
 		<td>
-			<strong><?php echo $Language->getText('pm_detailtask','subproject'); ?>:</strong><br />
+			<strong><?php echo _('Subproject'); ?>:</strong><br />
 			<?php echo $pg->groupProjectBox('new_group_project_id',$group_project_id,false); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('pm','percent_complete') ?>:</strong><br />
+		<strong><?php echo _('Percent Complete') ?>:</strong><br />
 		<?php echo $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
 		</td>
 
 		<td>
-		<strong><?php echo $Language->getText('pm','priority') ?>:</strong><br />
+		<strong><?php echo _('Priority') ?>:</strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 	</tr>
 
   	<tr>
 		<td>
-		<strong><?php echo $Language->getText('pm','summary') ?>:</strong><br />
+		<strong><?php echo _('Task Summary') ?>:</strong><br />
 		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td>
-		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo $Language->getText('pm_deletetask','delete') ?></a>
+		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo _('Delete this task') ?></a>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo $Language->getText('pm_modtask','original_comment') ?>:</strong><br />
+		<strong><?php echo _('Original Comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
-		<strong><?php echo $Language->getText('pm_modtask','add_comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
+		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
 		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo $Language->getText('pm','start_date') ?>:</strong><br />
+		<strong><?php echo _('Start Date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
 		echo $pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
 		echo $pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
 		echo $pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
 		echo $pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
-		?><br /><?php echo $Language->getText('pm','date_note') ?>
-		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo $Language->getText('pm','view_calendar') ?></a>
+		?><br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
+		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo _('View Calendar') ?></a>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo $Language->getText('pm','end_date') ?>:</strong><br />
+		<strong><?php echo _('End Date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
 		echo $pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
@@ -111,7 +111,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 
 	<tr>
 		<td valign="top">
-		<strong><?php echo $Language->getText('pm','assigned_to') ?>:</strong><br />
+		<strong><?php echo _('Assigned To') ?>:</strong><br />
 		<?php
 		/*
 			List of possible users that this one could be assigned to
@@ -121,7 +121,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		</td>
 
 		<td valign="top">
-		<strong><?php echo $Language->getText('pm','dependent') ?>:</strong><br />
+		<strong><?php echo _('Dependent on Task') ?>:</strong><br />
 		<?php
 		/*
 			List of possible tasks that this one could depend on
@@ -129,18 +129,18 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 
 		echo $pt->multipleDependBox();
 		?><br />
-		<?php echo $Language->getText('pm','dependent_note') ?>
+		<?php echo _('You should choose only tasks which must be completed before this task can start.') ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><br />
+		<strong><?php echo _('Estimated Hours') ?>:</strong><br />
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td>
-		<strong><?php echo $Language->getText('pm','status') ?>:</strong><br />
+		<strong><?php echo _('Status') ?>:</strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
@@ -152,12 +152,12 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 //will add duration and parent selection boxes
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><br />
+		<strong><?php echo _('Estimated Hours') ?>:</strong><br />
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td>
-		<strong><?php echo $Language->getText('pm','status') ?>:</strong><br />
+		<strong><?php echo _('Status') ?>:</strong><br />
 		<?php
 //		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
@@ -192,23 +192,23 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 	</tr>
 
 	<tr>
-		<td colspan="2" style="text-align:center">
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
+		<td colspan="2" align="center">
+		<input type="submit" value="<?php echo _('Submit') ?>" name="submit" />
 		</td>
 	</tr>
 
 </table>
 </form>
 <p>
-<h3><?php echo $Language->getText('pm_modtask', 'time_tracking'); ?></h3>
+<h3><?php echo _('Time tracking'); ?></h3>
 <p>
 <?php
 $title_arr = array();
-$title_arr[]=$Language->getText('pm', 'week');
-$title_arr[]=$Language->getText('pm', 'day');
-$title_arr[]=$Language->getText('pm', 'hours');
-$title_arr[]=$Language->getText('pm', 'category');
-$title_arr[]=$Language->getText('pm', 'user');
+$title_arr[]=_('Week');
+$title_arr[]=_('Day');
+$title_arr[]=_('Estimated Hours');
+$title_arr[]=_('Category');
+$title_arr[]=_('User');
 $title_arr[]=' ';
 
 $report=new Report();
@@ -221,15 +221,15 @@ echo $HTML->listTableTop ($title_arr);
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
 	<input type="hidden" name="submit" value="1" />
 	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-		<td style="text-align:middle">'. report_weeks_box($report, 'week') .'</td>
-		<td style="text-align:middle">'. report_day_adjust_box($report, 'days_adjust') .'</td>
-		<td style="text-align:middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
-		<td style="text-align:middle">'.report_time_category_box('time_code',false).'</td>
+		<td align="middle">'. report_weeks_box($report, 'week') .'</td>
+		<td align="middle">'. report_day_adjust_box($report, 'days_adjust') .'</td>
+		<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
+		<td align="middle">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
-		<td style="text-align:middle"><input type="submit" name="add" value="'.$Language->getText('general','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('general','cancel').'" /></td>
+		<td align="middle"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Add').'" /></td>
 	</tr></form>';
 	
-//setenv("TZ=" . $user_timezone); //restore the userï¿½s timezone
+//setenv("TZ=" . $user_timezone); //restore the user´s timezone
 	
 //
 //	Display Time Recorded for this task
@@ -258,7 +258,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 
 echo '
 <tr '.$HTML->boxGetAltRowStyle($xi++).'>
-<td><strong>'.$Language->getText('pm', 'total').':</strong></td>
+<td><strong>'._('Total').':</strong></td>
 <td>&nbsp;</td>
 <td>'.$total_hours.'</td>
 <td>&nbsp;</td>

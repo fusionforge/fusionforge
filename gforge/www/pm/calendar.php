@@ -24,30 +24,30 @@ $type = getStringFromRequest('type');
 
 // Some sanity checks first.
 if ($year && ($year < 1990 || $year > 2020)) {
-	exit_error($Language->getText("calendar", "invalidyear"),
-		   $Language->getText("calendar", "invalidyearexplain"));
+	exit_error(_('MISSINGTEXT:calendar/invalidyear:TEXTMISSING'),
+		   _('MISSINGTEXT:calendar/invalidyearexplain:TEXTMISSING'));
 }
 
 if ($month && ($month < 1 || $month > 12)) {
-	exit_error($Language->getText("calendar", "invalidmonth"),
-		   $Language->getText("calendar", "invalidmonthexplain"));
+	exit_error(_('MISSINGTEXT:calendar/invalidmonth:TEXTMISSING'),
+		   _('MISSINGTEXT:calendar/invalidmonthexplain:TEXTMISSING'));
 }
 
 if ($day && ($day < 1 || $day > 31)) {
-	exit_error($Language->getText("calendar", "invalidday"),
-		   $Language->getText("calendar", "invaliddayexplain"));
+	exit_error(_('MISSINGTEXT:calendar/invalidday:TEXTMISSING'),
+		   _('MISSINGTEXT:calendar/invaliddayexplain:TEXTMISSING'));
 }
 
 if ($year && isset($month) && isset($day)) {
 	if (!checkdate($month, $day, $year)) {
-		exit_error($Language->getText("calendar", "invaliddate"),
-			   $Language->getText("calendar", "invaliddateexplain", "$year-$month-$day"));
+		exit_error(_('MISSINGTEXT:calendar/invaliddate:TEXTMISSING'),
+			   sprintf(_('MISSINGTEXT:calendar/invaliddateexplain:TEXTMISSING'), "$year-$month-$day"));
 	}
 }
 
 if ($type && $type != 'onemonth' && $type != 'threemonth' && $type != 'currentyear' && $type != 'comingyear') {
-	exit_error($Language->getText("calendar", "invalidtype"),
-		   $Language->getText("calendar", "invalidtypeexplain"));
+	exit_error(_('MISSINGTEXT:calendar/invalidtype:TEXTMISSING'),
+		   _('MISSINGTEXT:calendar/invalidtypeexplain:TEXTMISSING'));
 }
 
 // Fill in defaults
@@ -82,20 +82,20 @@ if ($group_id && $group_project_id) {
 	if (!$g || !is_object($g)) {
 		exit_no_group();
 	} elseif ($g->isError()) {
-		exit_error($Language->getText('global', 'error'), $g->getErrorMessage());
+		exit_error(_('ERROR'), $g->getErrorMessage());
 	}
 	$pg = new ProjectGroup($g, $group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error($Language->getText('global', 'error'), 'BUG: Could Not Get Factory');
+		exit_error(_('ERROR'), 'BUG: Could Not Get Factory');
 	} elseif ($pg->isError()) {
-		exit_error($Language->getText('global', 'error'), $pg->getErrorMessage());
+		exit_error(_('ERROR'), $pg->getErrorMessage());
 	}
 
 	$ptf = new ProjectTaskFactory($pg);
 	if (!$ptf || !is_object($ptf)) {
-		exit_error($Language->getText('global', 'error'), 'BUG: Could Not Get ProjectTaskFactory');
+		exit_error(_('ERROR'), 'BUG: Could Not Get ProjectTaskFactory');
 	} elseif ($ptf->isError()) {
-		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
+		exit_error(_('ERROR'), $ptf->getErrorMessage());
 	}
 	// Violate all known laws about OOP here
 	$ptf->offset=0;
@@ -106,11 +106,11 @@ if ($group_id && $group_project_id) {
 	$ptf->category=0;
 	$pt_arr =& $ptf->getTasks();
 	if ($ptf->isError()) {
-		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
+		exit_error(_('ERROR'), $ptf->getErrorMessage());
 	}
 }
 
-$HTML->header(array('title'=>$Language->getText("calendar", "title"),'group'=>$group_id));
+$HTML->header(array('title'=>_('MISSINGTEXT:calendar/title:TEXTMISSING'),'group'=>$group_id));
 
 /**
  * Create link to a task.
@@ -237,21 +237,21 @@ function display_month($m, $y) {
 	<form action="/pm/calendar.php" method="get">
 	<table width="100%">
 		<tr>
-			<td><?php echo $Language->getText("calendar", "view"); ?><br />
+			<td><?php echo _('MISSINGTEXT:calendar/view:TEXTMISSING'); ?><br />
 				<select name="type">
 <?php
 	print '
-				<option value="onemonth"' . ($type == 'onemonth' ? ' selected="selected"' : '') . '>'. $Language->getText("calendar", "onemonth") . '</option>';
+				<option value="onemonth"' . ($type == 'onemonth' ? ' selected="selected"' : '') . '>'. _('MISSINGTEXT:calendar/onemonth:TEXTMISSING') . '</option>';
 	print '
-				<option value="threemonth"' . ($type == 'threemonth' ? ' selected="selected"' : '') . '>'. $Language->getText("calendar", "threemonth") . '</option>';
+				<option value="threemonth"' . ($type == 'threemonth' ? ' selected="selected"' : '') . '>'. _('MISSINGTEXT:calendar/threemonth:TEXTMISSING') . '</option>';
 	print '
-				<option value="currentyear"' . ($type == 'currentyear' ? ' selected="selected"' : '') . '>' . $Language->getText("calendar", "currentyear") . '</option>';
+				<option value="currentyear"' . ($type == 'currentyear' ? ' selected="selected"' : '') . '>' . _('MISSINGTEXT:calendar/currentyear:TEXTMISSING') . '</option>';
 	print '
-				<option value="comingyear"' . ($type == 'comingyear' ? ' selected="selected"' : '') . '>' . $Language->getText("calendar", "comingyear") . '</option>';
+				<option value="comingyear"' . ($type == 'comingyear' ? ' selected="selected"' : '') . '>' . _('MISSINGTEXT:calendar/comingyear:TEXTMISSING') . '</option>';
 ?>
 				</select>
 			</td>
-			<td><?php echo $Language->getText("calendar", "fordate"); ?><br />
+			<td><?php echo _('MISSINGTEXT:calendar/fordate:TEXTMISSING'); ?><br />
 				<select name="year">
 <?php
 
@@ -276,7 +276,7 @@ function display_month($m, $y) {
 				</select>
 			</td>
 			<td>
-				<input type="submit" value="<?php echo $Language->getText("calendar", "update") ?>" />
+				<input type="submit" value="<?php echo _('MISSINGTEXT:calendar/update:TEXTMISSING') ?>" />
 			</td>
 		</tr>
 	</table>
@@ -292,11 +292,11 @@ function display_month($m, $y) {
 	<table width="100%">
 		<tr>
 			<td width="20px" class="selected"></td>
-			<td><?php echo $Language->getText("calendar", "todaysdate") ?></td>
+			<td><?php echo _('MISSINGTEXT:calendar/todaysdate:TEXTMISSING') ?></td>
 		</tr>
 		<tr>
 			<td width="20px"></td>
-			<td><?php echo $Language->getText("calendar", "selecteddate") ?></td>
+			<td><?php echo _('MISSINGTEXT:calendar/selecteddate:TEXTMISSING') ?></td>
 		</tr>
 	</table>
 <?php

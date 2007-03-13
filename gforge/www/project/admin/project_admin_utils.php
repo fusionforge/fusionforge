@@ -60,23 +60,23 @@ function project_admin_header($params) {
 	$labels = array();
 	$links = array();
 	
-	$labels[] = $Language->getText('project_admin_utils','admin');
-	$labels[] = $Language->getText('project_admin_utils','edit_public_info');
-	$labels[] = $Language->getText('project_admin_utils','project_history');
+	$labels[] = _('Admin');
+	$labels[] = _('Edit Public Info');
+	$labels[] = _('Project History');
 	if($GLOBALS['sys_use_people']) {
-		$labels[] = $Language->getText('project_admin_utils','post_jobs');
-		$labels[] = $Language->getText('project_admin_utils','edit_jobs');
+		$labels[] = _('Post Jobs');
+		$labels[] = _('Edit Jobs');
 	}
 	if($GLOBALS['sys_use_project_multimedia']) {
-		$labels[] = $Language->getText('project_admin_utils','multimedia_data');
+		$labels[] = _('Edit Multimedia Data');
 	}
 	if($GLOBALS['sys_use_project_vhost']) {
-		$labels[] = $Language->getText('project_admin_utils','vhosts');
+		$labels[] = _('VHOSTs');
 	}
 	if($GLOBALS['sys_use_project_database']) {
-		$labels[] = $Language->getText('project_admin_utils','database_admin');
+		$labels[] = _('Database Admin');
 	}
-	$labels[] = $Language->getText('project_admin_utils','stats');
+	$labels[] = _('Stats');
 	plugin_hook("quota_label_project_admin");
 	
 	$links[] = '/project/admin/?group_id='.$group_id;
@@ -156,13 +156,13 @@ function show_grouphistory ($group_id) {
 	if ($rows > 0) {
 	
 		echo '
-		<h3>'.$Language->getText('project_admin_utils','change_history').'</h3>
+		<h3>'._('Group Change History').'</h3>
 		<p/>';
 		$title_arr=array();
-		$title_arr[]=$Language->getText('project_admin_utils','field');
-		$title_arr[]=$Language->getText('project_admin_utils','old_value');
-		$title_arr[]=$Language->getText('project_admin_utils','date');
-		$title_arr[]=$Language->getText('project_admin_utils','by');
+		$title_arr[]=_('Field');
+		$title_arr[]=_('Old Value');
+		$title_arr[]=_('Date');
+		$title_arr[]=_('By');
 		
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
@@ -185,7 +185,7 @@ function show_grouphistory ($group_id) {
 
 	} else {
 		echo '  
-		<h3>'.$Language->getText('project_admin_utils','no_changes').'</h3>';
+		<h3>'._('MISSINGTEXT:project_admin_utils/no_changes:TEXTMISSING').'</h3>';
 	}	   
 }	   
 
@@ -252,7 +252,7 @@ function random_pwgen() {
 function permissions_blurb() {
 	global $Language;
 	
-	return $Language->getText('project_admin_utils','permission_blurb');
+	return _('<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn\'t have specific permission (currently equivalent to \'-\')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>');
 }
 
 ?>

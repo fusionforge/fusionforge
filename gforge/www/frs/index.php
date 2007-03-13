@@ -34,8 +34,8 @@ $group_id = getIntFromRequest('group_id');
 $cur_group =& group_get_object($group_id);
 
 if (!$cur_group) {
-	exit_error($Language->getText('project_showfiles','no_group_title'),
-		$Language->getText('project_showfiles','no_group'));
+	exit_error(_('MISSINGTEXT:project_showfiles/no_group_title:TEXTMISSING'),
+		_('MISSINGTEXT:project_showfiles/no_group:TEXTMISSING'));
 }
 
 //
@@ -62,16 +62,16 @@ $res_package = db_query( $sql );
 $num_packages = db_numrows( $res_package );
 
 if ( $num_packages < 1) {
-	exit_error($Language->getText('project_showfiles','error_no_packages_defined_title'),$Language->getText('project_showfiles','error_no_packages_defined_text'));
+	exit_error(_('No File Packages'),_('No File Packages'));
 }
 
-frs_header(array('title'=>$Language->getText('project_showfiles','title'),'group'=>$group_id));
+frs_header(array('title'=>_('Project Filelist'),'group'=>$group_id));
 
-echo '<p>'.$Language->getText('project_showfiles','intro').' ';
+echo '<p>'._('Below is a list of all files of the project.').' ';
 if ($release_id) {
-	echo $Language->getText('project_showfiles','release_highlighted').' ';
+	echo _('The release you have chosen is <span class="selected">highlighted</span>.').' ';
 }
-echo $Language->getText('project_showfiles','intro2').'
+echo _('Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).').'
 </p>
 ';
 
@@ -82,7 +82,7 @@ $perm =& $cur_group->getPermission(session_get_user());
 
 if ($perm->isReleaseTechnician()) {
 	echo '<p><a href="admin/qrs.php?package=&group_id='.$group_id.'">';
-	echo $Language->getText('project_showfiles','new_release');
+	echo _('To create a new release click here.');
 	echo "</a></p>";
 }
 
@@ -92,20 +92,20 @@ $group_unix_name=group_getunixname($group_id);
 echo '
 <table width="100%" border="0" cellspacing="1" cellpadding="1">';
 $cell_data=array();
-$cell_data[] = array($Language->getText('project_showfiles','package'),'rowspan="2"');
-$cell_data[] = array($Language->getText('project_showfiles','release_notes'),'rowspan="2"');
-$cell_data[] = array($Language->getText('project_showfiles','filename'),'rowspan="2"');
-$cell_data[] = array($Language->getText('project_showfiles','date'),'colspan="4"');
+$cell_data[] = array(_('Package'),'rowspan="2"');
+$cell_data[] = array(_('Release &amp; Notes'),'rowspan="2"');
+$cell_data[] = array(_('Filename'),'rowspan="2"');
+$cell_data[] = array(_('Date'),'colspan="4"');
 
-echo $GLOBALS['HTML']->multiTableRow('', $cell_data, TRUE);
+echo $GLOBALS[HTML]->multiTableRow('', $cell_data, TRUE);
 
 $cell_data=array();
-$cell_data[] = array($Language->getText('project_showfiles','size'));
-$cell_data[] = array($Language->getText('project_showfiles','downloads'));
-$cell_data[] = array($Language->getText('project_showfiles','architecture'));
-$cell_data[] = array($Language->getText('project_showfiles','file_type'));
+$cell_data[] = array(_('Size'));
+$cell_data[] = array(_('D/L'));
+$cell_data[] = array(_('Arch'));
+$cell_data[] = array(_('Type'));
 
-echo $GLOBALS['HTML']->multiTableRow('',$cell_data, TRUE);
+echo $GLOBALS[HTML]->multiTableRow('',$cell_data, TRUE);
 
 $proj_stats['packages'] = $num_packages;
 
@@ -115,7 +115,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	
 	print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
 	<a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
-	html_image('ic/mail16w.png','20','20',array('alt'=>$Language->getText('project_showfiles','monitor_package'))) .
+	html_image('ic/mail16w.png','20','20',array('alt'=>_('Monitor this package'))) .
 	'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 	// get the releases of the package
@@ -128,7 +128,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	$proj_stats['releases'] += $num_releases;
 
 	if ( !$res_release || $num_releases < 1 ) {
-		print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>'.$Language->getText('project_showfiles','no_releases').'</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
+		print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>'._('No releases').'</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
 	} else {
 		// iterate and show the releases of the package
 		for ( $r = 0; $r < $num_releases; $r++ ) {
@@ -157,7 +157,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
 				'colspan="4" align="center"');
 			
-			print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
+			print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
 			// get the files in this release....
 			$sql = "SELECT frs_file.filename AS filename,
 				frs_file.file_size AS file_size,
@@ -198,10 +198,10 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 					if ( $release_id  ) {
 						if ( $release_id == $package_release['release_id'] ) {
-							print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data,FALSE);
+							print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data,FALSE);
 						}
 					} else {
-						print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
+						print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
 					}
 					$proj_stats['size'] += $file_release['file_size'];
 					$proj_stats['downloads'] += $file_release['downloads'];
@@ -213,7 +213,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 if ( $proj_stats['size'] ) {
 	print '<tr><td colspan="8">&nbsp;</tr>'."\n";
-	print '<tr><td><strong>'.$Language->getText('project_showfiles','project_totals').'</strong></td>'
+	print '<tr><td><strong>'._('Project totals').'</strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['releases'] . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['files'] . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . human_readable_bytes($proj_stats['size']) . '</em></strong></td>'

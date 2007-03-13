@@ -38,19 +38,19 @@ if (!$offset || $offset < 0) {
 }
 
 if ($type == 'week') {
-	$title = $Language->getText('top','active_weekly');
+	$title = _('Most Active This Week');
 } else {
-	$title = $Language->getText('top','active_all_time');
+	$title = _('Most Active All Time');
 }
 
 $HTML->header(array('title'=>$title));
 
 print '<p><h3>'.$title.'</h3>
-<br /><em>('.$Language->getText('top_mostactive','updated_daily').')</em>
+<br /><em>('._('Updated Daily').')</em>
 
-<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a>';
+<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a>';
 
-$arr=array($Language->getText('top_mostactive','rank'),$Language->getText('top_mostactive','project_name'),$Language->getText('top_mostactive','percentile'));
+$arr=array(_('Rank'),_('Rank'),_('Rank'));
 
 echo $HTML->listTableTop($arr);
 
@@ -67,9 +67,9 @@ while ($row_top = db_fetch_array($res_top)) {
 }
 
 if ($i<$rows) {
-print '<tr class="tablegetmore"><td>'.(($offset>0)?'<a href="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><strong><-- '.$Language->getText('general','more').'</a>':'&nbsp;').'</td>
+print '<tr class="tablegetmore"><td>'.(($offset>0)?'<a href="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><strong><-- '._('More').'</a>':'&nbsp;').'</td>
 	<td>&nbsp;</td>
-	<td align="RIGHT"><a href="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><strong>'.$Language->getText('general','more').' --></strong></a></td></tr>';
+	<td align="RIGHT"><a href="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><strong>'._('More').' --></strong></a></td></tr>';
 }
 
 echo $HTML->listTableBottom();

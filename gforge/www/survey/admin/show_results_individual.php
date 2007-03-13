@@ -34,10 +34,10 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $customer_id = getIntFromRequest('customer_id');
-survey_header(array('title'=>$Language->getText('survey_show_results_individual','title')));
+survey_header(array('title'=>_('Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>".$Language->getText('survey_show_results_individual','permission_denied')."</h1>";
+        echo "<h1>"._('Permission Denied')."</h1>";
         survey_footer(array());
 	exit;
 }
@@ -204,7 +204,7 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if ($question_type != $last_question_type) {
-	                echo "<strong>".$Language->getText('survey_show_results_individual','yes_no')."</strong><br />\n";
+	                echo "<strong>"._('Yes / No')."</strong><br />\n";
 		}
 
 		echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"1\"";

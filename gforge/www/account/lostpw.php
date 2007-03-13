@@ -43,7 +43,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u || !is_object($u)){
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error($Language->getText('account_lostpw','invalid_user'),$Language->getText('account_lostpw','user_dont_exist'));
+		exit_error(_('Invalid user'),_('Invalid user'));
 	}
 
 	// First, we need to create new confirm hash
@@ -56,13 +56,23 @@ if (getStringFromRequest('submit')) {
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 
-		$message = stripcslashes($Language->getText('account_lostpw', 'message', array(getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name'])));
+		$message = stripcslashes(sprintf(_('Someone (presumably you) on the %3$s site requested a
+password change through email verification. If this was not you,
+ignore this message and nothing will happen.
 
-		util_send_message($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS['sys_name']),$message);
+If you requested this verification, visit the following URL
+to change your password:
+
+<http://%1$s/account/lostlogin.php?ch=_%2$s>
+
+ -- the %3$s staff
+'), getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name']));
+
+		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
 		$HTML->header(array('title'=>"Lost Password Confirmation"));
 
-		echo $Language->getText('account_lostpw','notify');
+		echo _('<p>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.</p><p><a href="/">[ Home ]</a></p>');
 
 		$HTML->footer(array());
 		exit();
@@ -72,21 +82,21 @@ if (getStringFromRequest('submit')) {
 
 $HTML->header(array('title'=>"Lost Account Password"));
 
-echo $Language->getText('account_lostpw','warn');
+echo _('<p>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.</p><p>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.</p>');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
-<?php echo $Language->getText('account_login', 'loginname'); ?>
+<?php echo _('Login Name:'); ?>
 <br />
 <input type="text" name="loginname" />
 <br />
 <br />
-<input type="submit" name="submit" value="<?php echo $Language->getText('account_lostpw','sendhash'); ?>" />
+<input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
 </p>
 </form>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $GLOBALS['sys_name']); ?></a></p>
 
 <?php
 

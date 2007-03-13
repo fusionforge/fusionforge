@@ -66,7 +66,7 @@ function do_update(&$group, $is_public, $status, $license,
 	}
 	db_commit();
 
-	$feedback .= $Language->getText('admin_groupedit','updated').'<br /> ';
+	$feedback .= _('Updated').'<br /> ';
 
 	return true;
 }
@@ -86,17 +86,17 @@ if (getStringFromRequest('submit')) {
 } else if (getStringFromRequest('resend')) {
 
 	$group->sendApprovalEmail();
-	$feedback .= $Language->getText('admin_groupedit','instruction_email_sent').'<br /> ';
+	$feedback .= _('Instruction email sent').'<br /> ';
 
 }
 
-site_admin_header(array('title'=>$Language->getText('admin_groupedit','title')));
+site_admin_header(array('title'=>_('Site Admin: Group Info')));
 
 echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 <p>
-<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>".$Language->getText('admin_groupedit','project_admin'). "</h3></a>"; ?></p>
-<?php print "<a href=\"groupdelete.php?group_id=$group_id\"><h3>".$Language->getText('admin_groupdelete','title'). "</h3></a>"; ?></p>
+<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>"._('[Project Admin]'). "</h3></a>"; ?></p>
+<?php print "<a href=\"groupdelete.php?group_id=$group_id\"><h3>"._('Permanently Delete Project'). "</h3></a>"; ?></p>
 
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -105,7 +105,7 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <table>
 <tr>
 <td>
-<?php echo $Language->getText('admin_groupedit','status') ?>:
+<?php echo _('Status') ?>:
 </td>
 <td>
 <?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
@@ -113,7 +113,7 @@ $status = $group->getStatus();
 if($status == 'P') {
 	// we cannot update the status of a pending project
 	echo '<input type="hidden" name="form_status" value="P" />';
-	echo $Language->getText('admin_groupedit','pending').'&nbsp; &nbsp; ';
+	echo _('Pending (P)').'&nbsp; &nbsp; ';
 } else {
 	echo html_build_select_box_from_arrays(
 		array(
@@ -123,10 +123,10 @@ if($status == 'P') {
 			'H'
 		),
 		array(
-			$Language->getText('admin_groupedit','incomplete'),
-			$Language->getText('admin_groupedit','active'),
-			$Language->getText('admin_groupedit','pending'),
-			$Language->getText('admin_groupedit','holding')
+			_('Incomplete (I)'),
+			_('Active (A)'),
+			_('Pending (P)'),
+			_('Holding (H)')
 		),
 		'form_status', $status, false
 	);
@@ -135,7 +135,7 @@ if($status == 'P') {
 </tr>
 <tr>
 <td>
-<?php echo $Language->getText('admin_groupedit','public') ?>:
+<?php echo _('Public?') ?>:
 </td>
 <td>
 <?php 	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
@@ -145,8 +145,8 @@ if($status == 'P') {
 		'1'
 	),
 	array(
-		$Language->getText('admin_groupedit','no'),
-		$Language->getText('admin_groupedit','yes')
+		_('No'),
+		_('Yes')
 ),
 	'form_public', $group->isPublic(), false
 ); ?>
@@ -156,7 +156,7 @@ if($status == 'P') {
 
 <tr>
 <td>
-<?php echo $Language->getText('admin_groupedit','unix_group_name'); ?>
+<?php echo _('Unix Group Name:'); ?>
 </td>
 <td>
 <?php echo $group->getUnixName(); ?>
@@ -165,7 +165,7 @@ if($status == 'P') {
 
 <tr>
 <td>
-<?php echo $Language->getText('admin','license'); ?>
+<?php echo _('License:'); ?>
 </td>
 <td>
 <?php
@@ -177,7 +177,7 @@ if($status == 'P') {
 if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 ?>
 <tr>
-<td><?php echo $Language->getText('admin','license_other'); ?>
+<td><?php echo _('License Other:'); ?>
 </td>
 <td>
 <?php echo $group->getLicenseOther(); ?>
@@ -190,7 +190,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 ?> 
 <tr>
 <td>
-<?php echo $Language->getText('admin','home_box'); ?>
+<?php echo _('Home Box:'); ?>
 </td>
 <td>
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
@@ -200,7 +200,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 
 <tr>
 <td>
-<?php echo $Language->getText('admin','http_domain') ?>
+<?php echo _('HTTP Domain:') ?>
 </td>
 <td>
 <input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
@@ -209,7 +209,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 
 <tr>
 <td>
-<?php echo $Language->getText('admin_groupedit','registration_application'); ?>
+<?php echo _('Registration Application:'); ?>
 </td>
 <td>
 <?php echo $group->getRegistrationPurpose(); ?>
@@ -219,7 +219,7 @@ if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 if ($group->usesSCM()) {
 ?>
 <tr>
-	<td><?php echo $Language->getText('admin','scm_box'); ?></td>
+	<td><?php echo _('SCM Box:'); ?></td>
 	<td><input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td>
 </tr>
 <?php
@@ -230,8 +230,8 @@ if ($group->usesSCM()) {
 
 <input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
 
-<br /><input type="submit" name="submit" value="<?php echo $Language->getText('admin_groupedit','update'); ?>" />
-&nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="<?php echo $Language->getText('admin_groupedit','new_project_instruction_email'); ?>" />
+<br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
+&nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="<?php echo _('Resend New Project Instruction Email'); ?>" />
 </form></p>
 
 <?php

@@ -44,7 +44,7 @@ if (!$group || !is_object($group)) {
 	exit_permission_denied();
 }
 
-site_project_header(array('title'=>$Language->getText('projectactivity','headertype'),'group'=>$group_id,'toptab'=>'activity'));
+site_project_header(array('title'=>_('Activity'),'group'=>$group_id,'toptab'=>'activity'));
 
 $ids=array();
 $ids[]='commit';
@@ -54,11 +54,11 @@ $ids[]='frsrelease';
 $ids[]='forumpost';
 
 $texts=array();
-$texts[]=$Language->getText('projectactivity','commits');
-$texts[]=$Language->getText('projectactivity','tracker_opened');
-$texts[]=$Language->getText('projectactivity','tracker_closed');
-$texts[]=$Language->getText('projectactivity','frs_release');
-$texts[]=$Language->getText('projectactivity','forum_post');
+$texts[]=_('Commits');
+$texts[]=_('Tracker Opened');
+$texts[]=_('Tracker Closed');
+$texts[]=_('FRS Release');
+$texts[]=_('Forum Post');
 
 if (count($show) < 1) {
 	$show=$ids;
@@ -78,7 +78,7 @@ echo db_error();
 
 $rows=db_numrows($res);
 if ($rows<1) {
-	echo $Language->getText('projectactivity','no_activity_found');
+	echo _('No Activity Found');
 } else {
 
 	?>
@@ -87,15 +87,15 @@ if ($rows<1) {
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>"/>
 <table border="0" cellspacing="0" cellpadding="3">
 <tr>
-	<td><strong><?php echo $Language->getText('projectactivity','headeractivity') ?></strong></td>
-	<td><strong><?php echo $Language->getText('projectactivity','startdate') ?></strong></td>
-	<td><strong><?php echo $Language->getText('projectactivity','enddate') ?></strong></td>
+	<td><strong><?php echo _('Activity') ?></strong></td>
+	<td><strong><?php echo _('Start') ?></strong></td>
+	<td><strong><?php echo _('End') ?></strong></td>
 	<td></td>
 </tr>
 <tr>
 	<td><?php echo $multiselect; ?></td>
-	<td valign="top"><input name="start_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$begin); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input name="end_date" value="<?php echo date($Language->getText('system','shortdatefmt'),$end); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="start_date" value="<?php echo date(_('Y-m-d'),$begin); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="end_date" value="<?php echo date(_('Y-m-d'),$end); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input type="submit" name="submit" value="Submit"/></td>
 </tr>
 </table>
@@ -104,9 +104,9 @@ if ($rows<1) {
 	<?php
 
 	$theader=array();
-	$theader[]=$Language->getText('projectactivity','headertime');
-	$theader[]=$Language->getText('projectactivity','headeractivity');
-	$theader[]=$Language->getText('projectactivity','headerperson');
+	$theader[]=_('Time');
+	$theader[]=_('Activity');
+	$theader[]=_('By');
 
 	echo $HTML->listTableTop($theader);
 
@@ -114,7 +114,7 @@ if ($rows<1) {
 	while ($arr =& db_fetch_array($res)) {
 		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.date($Language->getText('system','shortdatefmt'),$arr['activity_date']).'</td></tr>';
+			echo '<tr class="tableheading"><td colspan="3">'.date(_('Y-m-d'),$arr['activity_date']).'</td></tr>';
 		//	echo $HTML->listTableTop($theader);
 			$last_day=date('Y-M-d',$arr['activity_date']);
 		}

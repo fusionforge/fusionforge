@@ -38,12 +38,12 @@ if (session_loggedin()) {
 		<html>
 		<body>';
 	} else {
-		snippet_header(array('title'=>$Language->getText('add_snippet','title')));
+		snippet_header(array('title'=>_('Submit A New Snippet')));
 	}
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<h1>' .$Language->getText('add_snippet','error_snippet_id_missing') .'</h1>';
+		echo '<h1>' ._('Error - snippet_package_version_id missing') .'</h1>';
 		handle_add_exit();
 	}
 
@@ -59,7 +59,7 @@ if (session_loggedin()) {
 				"WHERE submitted_by='".user_getid()."' AND ".
 				"snippet_package_version_id='$snippet_package_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>' .$Language->getText('add_snippet','error_only_creator_can_add').'</h1>';
+				echo '<h1>' ._('Error - Only the creator of a package version can add snippets to it.').'</h1>';
 				handle_add_exit();
 			}
 
@@ -68,8 +68,8 @@ if (session_loggedin()) {
 			*/
 			$result=db_query("SELECT * FROM snippet_version WHERE snippet_version_id='$snippet_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>' .$Language->getText('add_snippet','error_snippet_doesnt_exist').'</h1>';
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' .$Language->getText('add_snippet','back_to_add_page').'</a>';
+				echo '<h1>' ._('Error - That snippet doesn\'t exist.').'</h1>';
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' ._('Back To Add Page').'</a>';
 				handle_add_exit();
 			}
 
@@ -80,8 +80,8 @@ if (session_loggedin()) {
 				"WHERE snippet_package_version_id='$snippet_package_version_id' ".
 				"AND snippet_version_id='$snippet_version_id'");
 			if ($result && db_numrows($result) > 0) {
-				echo '<h1>'.$Language->getText('add_snippet','error_snippet_already_added').'</h1>';
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
+				echo '<h1>'._('Error - That snippet was already added to this package.').'</h1>';
+				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'._('Back To Add Page').'</a>';
 				handle_add_exit();
 			}
 
@@ -93,14 +93,14 @@ if (session_loggedin()) {
 			$result=db_query($sql);
 
 			if (!$result) {
-				$feedback .= $Language->getText('add_snippet','error_doing_snippet_version_insert');
+				$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');
 				echo db_error();
 			} else {
-				$feedback .= $Language->getText('add_snippet','snippet_version_added_successfully');
+				$feedback .= _('Snippet Version Added Successfully.');
 			}
 		} else {
-			echo '<h1>' .$Language->getText('add_snippet','error_go_back_and_fill_all').'</h1>';
-			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
+			echo '<h1>' ._('Error - Go back and fill in all the information').'</h1>';
+			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'._('Back To Add Page').'</a>';
 			handle_add_exit();
 		}
 
@@ -113,9 +113,9 @@ if (session_loggedin()) {
 
 	?>
 	<p>
-	<strong><?php echo $Language->getText('add_snippet','package'); ?></strong><br />
+	<strong><?php echo _('Package:'); ?></strong><br />
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
-	<p><?php echo $Language->getText('add_snippet','you_can_use_this_form'); ?></p>
+	<p><?php echo _('You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.'); ?></p>
 	<p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
@@ -123,8 +123,8 @@ if (session_loggedin()) {
 	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />
 
 	<table>
-	<tr><td colspan="2" style="text-align:center">
-		<strong><?php echo $Language->getText('add_snippet','add_this_snippet_version_id'); ?></strong><br />
+	<tr><td colspan="2" align="center">
+		<strong><?php echo _('Add This Snippet Version ID:'); ?></strong><br />
  <select name="snippet_version_id">
 <?php
 
@@ -149,10 +149,10 @@ for ($i=0; $i<$combolistrows; $i++)
 </select>
 	</td></tr>
 
-	<tr><td colspan="2" style="text-align:center">
-		<strong><?php echo $Language->getText('add_snippet','make_sure_all_info'); ?></strong>
+	<tr><td colspan="2" align="center">
+		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="<?php echo $Language->getText('add_snippet','submit'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
 	</td></tr>
 	</table></form></p>
 	<?php
@@ -168,12 +168,12 @@ for ($i=0; $i<$combolistrows; $i++)
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-		<p>' .$Language->getText('add_snippet','no_snippets_in_this_package').'</p>';
+		<p>' ._('No Snippets Are In This Package Yet').'</p>';
 	} else {
-		echo $HTML->boxTop($Language->getText('add_snippet','snippets_in_this_package'));
+		echo $HTML->boxTop(_('Snippets In This Package'));
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="text-align:center">
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td align="center">
 				<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.

@@ -48,31 +48,31 @@ if (getStringFromRequest('submit')) {
 	if ($u->getMD5Passwd() != md5($old_passwd)) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
-			$Language->getText('general','error'),
-			$Language->getText('account_change_pw','old_password_incorrect')
+			_('Error'),
+			_('Old password is incorrect')
 		);
 	}
 	
 	if (strlen($passwd)<6) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
-			$Language->getText('general','error'),
-			$Language->getText('account_change_pw','not_valid_password')
+			_('Error'),
+			_('You must supply valid password (at least 6 chars)')
 		);
 	}
 	
 	if ($passwd != $passwd2) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
-			$Language->getText('general','error'),
-			$Language->getText('account_change_pw','passwords_dont_match')
+			_('Error'),
+			_('New passwords do not match.')
 		);
 	}
 
 	if (!$u->setPasswd($passwd)) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
-			$Language->getText('general','error'),
+			_('Error'),
 			'Could not change password: '.$u->getErrorMessage()
 		);
 	}
@@ -81,30 +81,30 @@ if (getStringFromRequest('submit')) {
 		plugin_hook('change_cal_password',user_getid());
 	}
 
-	site_user_header(array('title'=>$Language->getText('account_change_pw_changed','title')));
+	site_user_header(array('title'=>_('Successfully Changed Password')));
 	?>
 
-	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS['sys_name']); ?>
+	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>'), $GLOBALS['sys_name']); ?>
 
 	<p>
-	<?php echo $Language->getText('account_change_pw_changed','return_to',array('<a href="'.$GLOBALS['sys_urlprefix'].'/account/">','</a>')) ?>
+	<?php printf(_('You should now %1$s Return to UserPrefs %2$s.'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/">', '</a>') ?>
 	</p>
 	
 	<?php
 } else { 
 	// Show change form
-	site_user_header(array('title'=>$Language->getText('account_change_pw','title')));
+	site_user_header(array('title'=>_('Change Password')));
 	?>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<p><?php echo $Language->getText('account_change_pw','old_password') ?>:
+	<p><?php echo _('Old Password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>
-	<p><?php echo $Language->getText('account_change_pw','new_password') ?>:
+	<p><?php echo _('New Password (at least 6 chars)') ?>:
 	<br /><input type="password" name="passwd" /></p>
-	<p><?php echo $Language->getText('account_change_pw','new_password_repeat') ?>:
+	<p><?php echo _('New Password (repeat)') ?>:
 	<br /><input type="password" name="passwd2" /></p>
-	<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_change_pw','update') ?>" /></p>
+	<p><input type="submit" name="submit" value="<?php echo _('Update password') ?>" /></p>
 	</form>
 	<?php
 }

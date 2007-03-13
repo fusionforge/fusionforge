@@ -31,10 +31,10 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>$Language->getText('survey_add_question','title')));
+survey_header(array('title'=>_('Add A Question')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>".$Language->getText('survey_add_question','permission_denied')."</h1>";
+	echo "<h1>"._('MISSINGTEXT:survey_add_question/permission_denied:TEXTMISSING')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -46,9 +46,9 @@ if (getStringFromRequest('post_changes')) {
 	$sql="INSERT INTO survey_questions (group_id,question,question_type) VALUES ($group_id,'".htmlspecialchars($question)."',$question_type)";
 	$result=db_query($sql);
 	if ($result) {
-		$feedback .= $Language->getText('survey_add_question','question_added');
+		$feedback .= _('Question Added');
 	} else {
-		$feedback .= $Language->getText('survey_add_question','error_insert_question');
+		$feedback .= _('Error inserting question');
 	}
 }
 
@@ -69,11 +69,11 @@ function show_questions() {
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="post_changes" value="Y" />
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<?php echo $Language->getText('survey_add_question','question') ?>:<br />
+<?php echo _('Question') ?>:<br />
 <input type="text" name="question" value="" size="60" maxlength="150" />
 <p>
 
-<?php echo $Language->getText('survey_add_question','question_type') ?>:<br />
+<?php echo _('Question type') ?>:<br />
 <?php
 
 $sql="SELECT * from survey_question_types";
@@ -83,12 +83,12 @@ echo html_build_select_box($result,'question_type','xzxz',false);
 ?>
 </p>
 
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('survey_add_question','add_this_question'); ?>"></p>
+<p><input type="submit" name="submit" value="<?php echo _('Add This Question.'); ?>"></p>
 </form></p>
 
 <p>
 <form>
-<input type="button" name="none" value="<?php echo $Language->getText('survey_add_question','show_existing_questions'); ?>" onclick="show_questions()" />
+<input type="button" name="none" value="<?php echo _('Show Existing Questions.'); ?>" onclick="show_questions()" />
 </form></p>
 
 <?php

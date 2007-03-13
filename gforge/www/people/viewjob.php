@@ -54,13 +54,13 @@ if ($group_id && $job_id) {
 		"AND people_job.job_id='$job_id' AND people_job.group_id='$group_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
-		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job')));
+		people_header(array('title'=>_('View a Job')));
 		echo db_error();
-		$feedback .= $Language->getText('people_viewjob','fetch_failed');
-		echo '<h2>'.$Language->getText('people_viewjob','no_such_posting').'</h2>';
+		$feedback .= _('POSTING fetch FAILED');
+		echo '<h2>'._('No Such Posting For This Project').'</h2>';
 	} else {
 
-		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job')));
+		people_header(array('title'=>_('View a Job')));
 
 //		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '
@@ -71,27 +71,27 @@ if ($group_id && $job_id) {
 		</td></tr>
 
 		<tr><td>
-			<strong>'.$Language->getText('people_viewjob','contact_info').':<br />
+			<strong>'._('Contact Info').':<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
 		</td><td>
-			<strong>'.$Language->getText('people','status').':</strong><br />
+			<strong>'._('Status').':</strong><br />
 			'. db_result($result,0,'status_name') .'
 		</td></tr>
 
 		<tr><td>
-			<strong>'.$Language->getText('people_viewjob','open_date').':</strong><br />
+			<strong>'._('Open Date').':</strong><br />
 			'. date($sys_datefmt,db_result($result,0,'post_date')) .'
 		</td><td>
-			<strong>'.$Language->getText('people_viewjob','for_project').':<br />
+			<strong>'._('For Project').':<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
 		</td></tr>
 
 		<tr><td colspan="2">
-			<strong>'.$Language->getText('people','long_description').':</strong><p>
+			<strong>'._('Long Description').':</strong><p>
 			'. nl2br(db_result($result,0,'description')) .'</p>
 		</td></tr>
 		<tr><td colspan="2">
-		<h2>'.$Language->getText('people_viewjob','required_skills').':</h2>';
+		<h2>'._('Required Skills').':</h2>';
 
 		//now show the list of desired skills
 		echo people_show_job_inventory($job_id).'</td></tr></table>';
@@ -106,7 +106,7 @@ if ($group_id && $job_id) {
 	if (!$group_id) {
 		exit_no_group();
 	} else {
-		exit_error($Language->getText('general','error'),$Language->getText('people_viewjob','posting_id_not_found'));
+		exit_error(_('Error'),_('Error'));
 	}
 }
 

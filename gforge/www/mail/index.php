@@ -20,27 +20,27 @@ $group_id = getIntFromGet('group_id');
 if ($group_id) {
 	$Group =& group_get_object($group_id);
 	if (!$Group || !is_object($Group)) {
-		exit_error($Language->getText('general', 'error'), 'Could Not Get Group');
+		exit_error(_('Error'), 'Could Not Get Group');
 	} elseif ($Group->isError()) {
 		exit_no_group();
 	}
 	
 	$mlFactory = new MailingListFactory($Group);
 	if (!$mlFactory || !is_object($mlFactory)) {
-		exit_error($Language->getText('general', 'error'), 'Could Not Get MailingListFactory');
+		exit_error(_('Error'), 'Could Not Get MailingListFactory');
 	} elseif ($mlFactory->isError()) {
-		exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
+		exit_error(_('Error'), $mlFactory->getErrorMessage());
 	}
 
 	mail_header(array(
-		'title' => $Language->getText('mail', 'mailinglists_for', array($Group->getPublicName()))
+		'title' => sprintf(_('Mailing Lists for %1$s'), $Group->getPublicName())
 	));
 
 
 	$mlArray =& $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<h1>'.$Language->getText('general', 'error').' '.$Language->getText('mail', 'unable_to_get_lists', array($Group->getPublicName())) .'</h1>';
+		echo '<h1>'._('Error').' '.sprintf(_('Error'), $Group->getPublicName()) .'</h1>';
 		echo $mlFactory->getErrorMessage();
 		mail_footer(array());
 		exit;
@@ -48,19 +48,19 @@ if ($group_id) {
 	
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<p>'.$Language->getText('mail', 'no_list_found', array($Group->getPublicName())) .'</p>';
-		echo '<p>'.$Language->getText('mail', 'help_to_request').'</p>';
+		echo '<p>'.sprintf(_('No Lists found for %1$s'), $Group->getPublicName()) .'</p>';
+		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
 		mail_footer(array());
 		exit;
 	}
 	
-	echo $Language->getText('mail', 'provided_by');
-	echo $Language->getText('mail', 'choose_a_list');
+	echo _('<p>Mailing lists provided via a GForge version of <a href="http://www.list.org/">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>');
+	echo _('<p>Choose a list to browse, search, and post messages.</p>');
 	
 	$tableHeaders = array(
-		$Language->getText('mail_common', 'mailing_list'),
-		$Language->getText('mail_common', 'description'),
-		$Language->getText('mail_common', 'prefs')
+		_('Mailing list'),
+		_('Description'),
+		_('Subscription')
 	);
 	echo $HTML->listTableTop($tableHeaders);
 
@@ -73,13 +73,13 @@ if ($group_id) {
 			echo '<td width="33%">'.
 				'<strong>'.$currentList->getName().'</strong></td>'.
 				'<td width="33%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" style="text-align:center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
+				'<td width="33%" align="center">'._('Not activated yet').'</td></tr>';
 		} else {
 			echo '<td width="33%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
-				$Language->getText('mail', 'archives', array($currentList->getName())).'</a></strong></td>'.
+				sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
 				'<td>'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" style="text-align:center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
+				'<td width="33%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
 				'</td>';
 		}
 		echo '</tr>';

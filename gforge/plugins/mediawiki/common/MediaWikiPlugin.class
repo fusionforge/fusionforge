@@ -137,7 +137,7 @@ class MediaWikiPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/mediawiki/index.php/User:' . $user->getUnixName() . '">' . $Language->getText('user_home','view_mediawiki') .'</a></p>';
+					<a href="/mediawiki/index.php/User:' . $user->getUnixName() . '">' . _('View Personal MediaWiki') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			global $Language;
@@ -145,7 +145,7 @@ class MediaWikiPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/mediawiki/index.php?title=' . $group->getUnixName() . '&action=edit' . '">' . $Language->getText('project_admin','mediawiki') . '</a><br />';
+				echo '<a href="/mediawiki/index.php?title=' . $group->getUnixName() . '&action=edit' . '">' . _('View the MediaWiki Administration') . '</a><br />';
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {

@@ -55,10 +55,10 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 
 $is_admin_page='y';
-$sh->header(array('title'=>$Language->getText('survey_show_results','title')));
+$sh->header(array('title'=>_('Survey Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>".$Language->getText('survey_show_results','permission_denied')."</h1>";
+	echo "<h1>"._('Permission Denied')."</h1>";
 	$sh->footer(array());
 	exit;
 }
@@ -68,11 +68,11 @@ if ($survey_id) {
     $s = new Survey($g, $survey_id);
 		
     if (!$s || !is_object($s)) {
-	echo "<h3>".$Language->getText('general','error'). ' Can not get Survey' ."</H3>";
+	echo "<h3>"._('Error'). ' Can not get Survey' ."</H3>";
 	$sh->footer(array());
 	exit;
     } else if ( $s->isError()) {
-	echo "<h3>".$Language->getText('general','error'). $s->getErrorMessage() ."</H3>";
+	echo "<h3>"._('Error'). $s->getErrorMessage() ."</H3>";
 	$sh->footer(array());
 	exit;
     }
@@ -83,9 +83,9 @@ if ($survey_id) {
 	/* Create a Survey Question for general purpose */
 	$sq = new SurveyQuestion($g, $question_id);
 	if (!$sq || !is_object($sq)) {
-	    echo "<h3>".$Language->getText('general','error'). ' Can not get Survey Question' ."</H3>";
+	    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</H3>";
 	} else if ( $sq->isError()) {
-	    echo "<h3>".$Language->getText('general','error'). $sq->getErrorMessage() ."</H3>";
+	    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</H3>";
 	} else {
 	    showResult($sh, $s, $sq, 1, 0, $graph);
 	}
@@ -114,7 +114,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo ($Language->getText('survey_error', 'no_question_found'));
+    echo (_('No Survey Question is found'));
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
@@ -132,9 +132,9 @@ function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     /* Get results */
     $srf = new SurveyResponseFactory(&$Survey, &$Question);
     if (!$srf || !is_object($srf)) {
-	echo "<h3>".$Language->getText('general','error'). ' Can not get Survey Response Factory' ."</H3>";
+	echo "<h3>"._('Error'). ' Can not get Survey Response Factory' ."</H3>";
     } else if ( $srf->isError()) {
-	echo "<h3>".$Language->getText('general','error'). $srf->getErrorMessage() ."</H3>";
+	echo "<h3>"._('Error'). $srf->getErrorMessage() ."</H3>";
     } else {
         /* Show result in HTML*/ 
 	echo ($SurveyHTML->ShowResult($srf, $show_comment, $q_num, $graph));

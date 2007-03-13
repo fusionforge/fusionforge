@@ -73,7 +73,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */		
 	function writeHeader() {
-		site_project_header(array('title' => $this->Language->getText('advanced_search', 'project_search'), 'group' => $this->groupId, ));
+		site_project_header(array('title' => _('MISSINGTEXT:advanced_search/project_search:TEXTMISSING'), 'group' => $this->groupId, ));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 		
@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<br><h1>'.$this->Language->getText('advanced_search', 'error_search_minlength').'<h1><br>';
+			echo '<br><h1>'._('MISSINGTEXT:advanced_search/error_search_minlength:TEXTMISSING').'<h1><br>';
 		} else {
 			echo $this->getResult();
 		}
@@ -141,16 +141,16 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
 		
-		$result .= '<h3><a name="'.$section.'"></a>'.$this->Language->getText('advanced_search', 'headline', array($this->Language->getText('group', $section))).'</h3>';
+		$result .= '<h3><a name="'.$section.'"></a>'.sprintf(_('%1$s Search Result'), $Language->getText('group', $section)).'</h3>';
 		
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found_no_under_section', array(htmlspecialchars($query['words']))).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found - No sections available (check your permissions)'), htmlspecialchars($query['words'])).'</p>';
 		} else {
-			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found', array(htmlspecialchars($query['words']))).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found'), htmlspecialchars($query['words'])).'</p>';
 		}
 		return $result;
 	}

@@ -57,7 +57,7 @@ class svntrackerPlugin extends Plugin {
 		
 		if ($Rows > 0) {
 			echo '<tr><td colspan="2">';
-			echo '<h4>'.$Language->getText('plugin_svntracker','title').':</h4>';
+			echo '<h4>'._('Links to related SVN commits').':</h4>';
 
 			$title_arr=$this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -94,12 +94,12 @@ class svntrackerPlugin extends Plugin {
 	function getTitleArr() {
 		global $Language;
 		$title_arr=array();
-		$title_arr[]=$Language->getText('plugin_svntracker','file');
-		$title_arr[]=$Language->getText('plugin_svntracker','date');
-		$title_arr[]=$Language->getText('plugin_svntracker','prevVersion');
-		$title_arr[]=$Language->getText('plugin_svntracker','actualVersion');
-		$title_arr[]=$Language->getText('plugin_svntracker','log');
-		$title_arr[]=$Language->getText('plugin_svntracker','author');
+		$title_arr[]=_('Filename');
+		$title_arr[]=_('Date');
+		$title_arr[]=_('Previous Version');
+		$title_arr[]=_('Actual Version');
+		$title_arr[]=_('Log Message');
+		$title_arr[]=_('Author');
 		return $title_arr;
 	}
 
@@ -152,7 +152,7 @@ class svntrackerPlugin extends Plugin {
 		return '<a href="/plugins/scmsvn/viewcvs.php/'.
 			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'">'.
-			$Language->getText('plugin_svntracker','diffto').' '.$PrevVersion.'</a>';
+			_('Diff To').' '.$PrevVersion.'</a>';
 	}
 
 

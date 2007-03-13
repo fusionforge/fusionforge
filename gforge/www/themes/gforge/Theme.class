@@ -171,15 +171,15 @@ class Theme extends Layout {
         <td class="middleRight"><?php
           if (session_loggedin()) {
             ?>
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a> 
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a> 
             |
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a>
             <?php
           } else {
             ?>
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a>
             |
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
+            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a>
             <?php
           }
           echo $this->quickNav();
@@ -237,7 +237,7 @@ global $sys_show_source;
 global $Language;
 if ($sys_show_source) {
     global $SCRIPT_NAME;
-    print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . $SCRIPT_NAME . '"> '.$Language->getText('source','show_source').' </a>';
+    print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . $SCRIPT_NAME . '"> '._('Show source').' </a>';
 }
 ?>
 
@@ -386,16 +386,16 @@ if ($sys_show_source) {
         if ($sys_use_people) {
             $TABS_DIRS[]='/people/';
         }
-        $TABS_TITLES[]=$Language->getText('menu','home');
-        $TABS_TITLES[]=$Language->getText('menu','mypage');
+        $TABS_TITLES[]=_('Home');
+        $TABS_TITLES[]=_('My&nbsp;Page');
         if ($sys_use_trove) {
-            $TABS_TITLES[]=$Language->getText('menu','projectree');
+            $TABS_TITLES[]=_('Project&nbsp;Tree');
         }
         if ($sys_use_snippet) {
-            $TABS_TITLES[]=$Language->getText('menu','code_snippet');
+            $TABS_TITLES[]=_('Code&nbsp;Snippets');
         }
         if ($sys_use_people) {
-            $TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
+            $TABS_TITLES[]=_('Project&nbsp;Openings');
         }
 	// outermenu hook
 	$PLUGIN_TABS_DIRS = Array();
@@ -414,11 +414,11 @@ if ($sys_show_source) {
 		if ($permmaster->isAdmin()) {
 			$user_is_super=true;
 			$TABS_DIRS[]='/admin/';
-			$TABS_TITLES[]=$Language->getText('menu','admin');
+			$TABS_TITLES[]=_('Admin');
 		}
 		if ($permstats->isMember()) {
 			$TABS_DIRS[]='/reporting/';
-			$TABS_TITLES[]=$Language->getText('menu','reporting');
+			$TABS_TITLES[]=_('Reporting');
 		}
 	}
         if(isset($params['group']) && $params['group']) {
@@ -484,37 +484,37 @@ if ($sys_show_source) {
 
         // Summary
         $TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
-        $TABS_TITLES[]=$Language->getText('group','short_summary');
+        $TABS_TITLES[]=_('Summary');
         (($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
         // Project Admin
         $perm =& $project->getPermission( session_get_user() );
         if ($perm->isAdmin()) {
             $TABS_DIRS[]='/project/admin/?group_id='. $group;
-            $TABS_TITLES[]=$Language->getText('group','short_admin');
+            $TABS_TITLES[]=_('Admin');
             (($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
         /* Homepage
         $TABS_DIRS[]='http://'. $project->getHomePage();
-        $TABS_TITLES[]=$Language->getText('group','short_homepage');
+        $TABS_TITLES[]=_('Home Page');
         */
 
 	// Project Activity tab 
 	$TABS_DIRS[]='/activity/?group_id='. $group;
-	$TABS_TITLES[]=$Language->getText('group','short_activity');
+	$TABS_TITLES[]=_('Activity');
 	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
         // Forums
         if ($project->usesForum()) {
             $TABS_DIRS[]='/forum/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_forum');
+            $TABS_TITLES[]=_('Forums');
             (($toptab == 'forums') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         // Artifact Tracking
         if ($project->usesTracker()) {
             $TABS_DIRS[]='/tracker/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_tracker');
+            $TABS_TITLES[]=_('Tracker');
             (($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
             ? $selected=(count($TABS_TITLES)-1) : '' );
         }
@@ -522,42 +522,42 @@ if ($sys_show_source) {
         // Mailing Lists
         if ($project->usesMail()) {
             $TABS_DIRS[]='/mail/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_mail');
+            $TABS_TITLES[]=_('Lists');
             (($toptab == 'mail') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         // Project Manager
         if ($project->usesPm()) {
             $TABS_DIRS[]='/pm/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_pm');
+            $TABS_TITLES[]=_('Tasks');
             (($toptab == 'pm') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         // Doc Manager
         if ($project->usesDocman()) {
             $TABS_DIRS[]='/docman/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_docman');
+            $TABS_TITLES[]=_('Docs');
             (($toptab == 'docman') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         // Surveys
         if ($project->usesSurvey()) {
             $TABS_DIRS[]='/survey/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_survey');
+            $TABS_TITLES[]=_('Surveys');
             (($toptab == 'surveys') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         //newsbytes
         if ($project->usesNews()) {
             $TABS_DIRS[]='/news/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_news');
+            $TABS_TITLES[]=_('News');
             (($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
         // SCM systems
         if ($project->usesSCM()) {
             $TABS_DIRS[]='/scm/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_scm');
+            $TABS_TITLES[]=_('SCM');
             (($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
@@ -573,7 +573,7 @@ if ($sys_show_source) {
         // Downloads
         if ($project->usesFRS()) {
             $TABS_DIRS[]='/frs/?group_id='.$group;
-            $TABS_TITLES[]=$Language->getText('group','short_files');
+            $TABS_TITLES[]=_('Files');
             (($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
         }
 
@@ -756,13 +756,13 @@ if ($sys_show_source) {
         print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
 
         print '</td><td>&nbsp;</td><td>';
-        print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
+        print '<input type="submit" name="Search" value="'._('Search').'" />';
         print '</td>';
 
         if (isset($group_id)) {
             print '
                     <td width="10">&nbsp;</td>
-                    <td><a href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></td>';
+                    <td><a href="/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a></td>';
         }
         print '</tr></table>';
         print '</form>';
@@ -781,15 +781,15 @@ if ($sys_show_source) {
                 <tr>
                     <td colspan ="2">
                         <input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
-                        <input type="submit" name="submitbutton" value="'.$Language->getText('advanced_search', 'search_button').'" />
+                        <input type="submit" name="submitbutton" value="'._('Search').'" />
                     </td>
                 </tr>
                 <tr>
                     <td valign="top">
-                        <input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'and_search').'
+                        <input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
                     </td>
                     <td>
-                        <input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'or_search').'
+                        <input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
                     </td>
                 </tr>
             </table><br /></div>'
@@ -835,8 +835,8 @@ if ($sys_show_source) {
                     <td>
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
                             <tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
-                                <td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
-                                <td style="text-align:right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
+                                <td colspan="2">'._('Search in').':</td>
+                                <td style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('Select').'</a></td>
                             </tr>
                             <tr height="20">
                                 <td colspan="3">&nbsp;</td>
@@ -867,7 +867,7 @@ if ($sys_show_source) {
                                     <a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
             .'    </td>
                                 <td style="text-align:right">'
-            .$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
+            ._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('Select').'</a>
                                 </td>
                             </tr>
                             <tr style="background-color:'. $this->COLOR_LTBACK1.'">

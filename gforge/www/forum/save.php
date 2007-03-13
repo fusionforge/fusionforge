@@ -42,15 +42,15 @@ if (session_loggedin()) {
 
 		$f=new Forum($g,$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error($Language->getText('general','error'),'Error Getting Forum');
+			exit_error(_('Error'),'Error Getting Forum');
 		} elseif ($f->isError()) {
-			exit_error($Language->getText('general','error'),$f->getErrorMessage());
+			exit_error(_('Error'),$f->getErrorMessage());
 		}
 
 		if (!$f->savePlace()) {
-			exit_error($Language->getText('general','error'),$f->getErrorMessage());
+			exit_error(_('Error'),$f->getErrorMessage());
 		} else {
-			header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode($Language->getText('forum_save','saved')));
+			header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
 		}
 	} else {
 		exit_missing_param();

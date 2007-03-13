@@ -39,9 +39,9 @@ function scm_header($params) {
 	}
 
 	if (!$project->usesSCM()) {
-		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
+		exit_error('Error',_('Error - This project has turned off SCM.'));
 	}
-	site_project_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$params['group'],'toptab'=>'scm',));
+	site_project_header(array('title'=>_('SCM Repository'),'group'=>$params['group'],'toptab'=>'scm',));
 	/*
 		Show horizontal links
 	*/
@@ -50,9 +50,9 @@ function scm_header($params) {
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 				echo $HTML->subMenu(
 				array(
-					$Language->getText('scm_index','title'),
-					$Language->getText('scm_index','admin'),
-					$Language->getText('scm_index','reporting')
+					_('MISSINGTEXT:scm_index/title:TEXTMISSING'),
+					_('Admin'),
+					_('Reporting')
 				),
 				array(
 					'/scm/?group_id='.$params['group'],

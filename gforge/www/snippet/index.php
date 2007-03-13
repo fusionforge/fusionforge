@@ -36,20 +36,20 @@ function create_snippet_hash($sql, $field) {
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
 	global $Language;
-	$return = $Language->getText('snippet_caching','intro').'
+	$return .=_('<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>').'
 	<br />
 	<p/>
 	<table width="100%" border="0">
 	<tr><td>
 	</td></tr>
 	<tr><td>
-	<strong>'.$Language->getText('snippet_caching','browse_by_language').':</strong>
+	<strong>'._('Browse by Language').':</strong>
 	<ul>';
 
 	$existing_snippets = create_snippet_hash("SELECT language, count(*) as count from snippet group by language", "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
 		$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=lang&amp;lang='.$i.'">'.$SCRIPT_LANGUAGE[$i].'</a> (';
-		if (@$existing_snippets[$i]) {
+		if ($existing_snippets[$i]) {
 			$return .= $existing_snippets[$i].')</li>';
 		} else {
 			$return .= '0)</li>';
@@ -58,13 +58,13 @@ function snippet_mainpage() {
 
 	$return .= 	
 	'</ul></td><td>
-	<strong>'.$Language->getText('snippet_caching','browse_by_category').':</strong>
+	<strong>'._('Browse by Category').':</strong>
 	<ul>';
 	
 	$existing_categories = create_snippet_hash("SELECT category, count(*) as count from snippet group by category", "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=cat&amp;cat='.$i.'">'.$SCRIPT_CATEGORY[$i].'</a> (';
-		if (@$existing_categories[$i]) {
+		if ($existing_categories[$i]) {
 			$return .= $existing_categories[$i].')</li>';
 		} else {
 			$return .= '0)</li>';
@@ -75,7 +75,7 @@ function snippet_mainpage() {
 	return $return;
 }
 
-snippet_header(array('title'=>$Language->getText('snippet_index','title'), 'header'=>'Snippet Library'));
+snippet_header(array('title'=>_('Snippet Library'), 'header'=>'Snippet Library'));
 echo snippet_mainpage();
 snippet_footer(array());
 

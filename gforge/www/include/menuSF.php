@@ -33,14 +33,14 @@
 // Menu entry for all admin tasks when logged as site administor
 function menu_site_admin() {
 	global $HTML, $Language, $sys_name;
-	$HTML->menuhtml_top($sys_name." ".$Language->getText('menu', 'admin'));
-	$HTML->menu_entry('/admin/',$Language->getText('menu', 'admin_main_page'));
-	$HTML->menu_entry('/admin/grouplist.php',$Language->getText('menu', 'admin_group_list'));
-	$HTML->menu_entry('/admin/userlist.php',$Language->getText('menu', 'admin_user_list'));
-	$HTML->menu_entry('/admin/approve-pending.php',$Language->getText('menu', 'admin_pending_projects'));
-	$HTML->menu_entry('/news/admin/',$Language->getText('menu', 'admin_news_approval'));
-	$HTML->menu_entry('/admin/massmail.php',$Language->getText('menu', 'admin_mass_mail'));
-	$HTML->menu_entry('/people/admin/',$Language->getText('menu', 'admin_people_help_admin'));
+	$HTML->menuhtml_top($sys_name." "._('Admin'));
+	$HTML->menu_entry('/admin/',_('MISSINGTEXT:menu/admin_main_page:TEXTMISSING'));
+	$HTML->menu_entry('/admin/grouplist.php',_('MISSINGTEXT:menu/admin_group_list:TEXTMISSING'));
+	$HTML->menu_entry('/admin/userlist.php',_('MISSINGTEXT:menu/admin_user_list:TEXTMISSING'));
+	$HTML->menu_entry('/admin/approve-pending.php',_('MISSINGTEXT:menu/admin_pending_projects:TEXTMISSING'));
+	$HTML->menu_entry('/news/admin/',_('MISSINGTEXT:menu/admin_news_approval:TEXTMISSING'));
+	$HTML->menu_entry('/admin/massmail.php',_('MISSINGTEXT:menu/admin_mass_mail:TEXTMISSING'));
+	$HTML->menu_entry('/people/admin/',_('MISSINGTEXT:menu/admin_people_help_admin:TEXTMISSING'));
 
 	$HTML->menuhtml_bottom();
 
@@ -96,12 +96,12 @@ function menuhtml_top($title) {
 function menu_site_help() {
 	global $HTML, $Language, $sys_name;
 	$HTML->menuhtml_top($sys_name);
-	$HTML->menu_entry('/', $Language->getText('menu', 'home'));
-	$HTML->menu_entry('/snippet/', $Language->getText('menu', 'code_snippet'));
+	$HTML->menu_entry('/', _('Home'));
+	$HTML->menu_entry('/snippet/', _('Code&nbsp;Snippets'));
 	if (session_loggedin()) {
-		$HTML->menu_entry('/register/',$Language->getText('menu', 'new_project'));
+		$HTML->menu_entry('/register/',_('Register New Project'));
 	}
-	$HTML->menu_entry('/people/',$Language->getText('menu', 'project_help_wanted'));
+	$HTML->menu_entry('/people/',_('Project&nbsp;Openings'));
 	$HTML->menuhtml_bottom();
 }
 
@@ -115,50 +115,50 @@ function menu_project_info($group) {
 
 	} else {
 		$HTML->menuhtml_top($project->getPublicName());
-		$HTML->menu_entry('/projects/'.$project->getUnixName().'/', $Language->getText('group', 'short_summary'));
+		$HTML->menu_entry('/projects/'.$project->getUnixName().'/', _('Summary'));
 		if (user_ismember($group, 'A')) {
 			// Project admin
-			$HTML->menu_entry('/project/admin/?group_id='.$group, $Language->getText('group', 'short_admin'));
+			$HTML->menu_entry('/project/admin/?group_id='.$group, _('Admin'));
 		}
 		// Forums
 		if ($project->usesForum()) {
-			$HTML->menu_entry('/forum/?group_id='.$group, $Language->getText('group', 'short_forum'));
+			$HTML->menu_entry('/forum/?group_id='.$group, _('Forums'));
 		}
 		// Artifact tracking
-		$HTML->menu_entry('/tracker/?group_id='.$group, $Language->getText('group', 'short_tracker'));
+		$HTML->menu_entry('/tracker/?group_id='.$group, _('Tracker'));
 		// Mailing lists
 		if ($project->usesMail()) {
-			$HTML->menu_entry('/mail/?group_id='.$group, $Language->getText('group', 'short_mail'));
+			$HTML->menu_entry('/mail/?group_id='.$group, _('Lists'));
 		}
 		// Project Manager
 		if ($project->usesPm()) {
-			$HTML->menu_entry('/pm/?group_id='.$group, $Language->getText('group', 'short_pm'));
+			$HTML->menu_entry('/pm/?group_id='.$group, _('Tasks'));
 		}
 		// Doc Manager
 		if ($project->usesDocman()) {
-			$HTML->menu_entry('/docman/?group_id='.$group, $Language->getText('group', 'short_docman'));
+			$HTML->menu_entry('/docman/?group_id='.$group, _('Docs'));
 		}
 		// Surveys
 		if ($project->usesSurvey()) {
-			$HTML->menu_entry('/survey/?group_id='.$group, $Language->getText('group', 'short_survey'));
+			$HTML->menu_entry('/survey/?group_id='.$group, _('Surveys'));
 		}
 		//newsbytes
 		if ($project->usesNews()) {
-			$HTML->menu_entry('/news/?group_id='.$group, $Language->getText('group', 'short_news'));
+			$HTML->menu_entry('/news/?group_id='.$group, _('News'));
 		}
 		// SCM
 		if ($project->usesSCM()) {
-			$HTML->menu_entry('/scm/?group_id='.$group, $Language->getText('group', 'short_scm'));
+			$HTML->menu_entry('/scm/?group_id='.$group, _('SCM'));
 		}
 		// Downloads
-		$HTML->menu_entry('/project/showfiles.php?group_id='.$group, $Language->getText('group', 'short_files'));
+		$HTML->menu_entry('/project/showfiles.php?group_id='.$group, _('Files'));
 		$HTML->menuhtml_bottom();
 	}
 }
 
 function menu_search() {
 	global $HTML, $Language;
-	$HTML->menuhtml_top($Language->getText('menu', 'search'));
+	$HTML->menuhtml_top(_('Search'));
 	menu_show_search_box();
 	$HTML->menuhtml_bottom();
 }
@@ -185,13 +185,13 @@ function menu_loggedin($page_title) {
 		Show links appropriate for someone logged in, like account maintenance, etc
 	*/
 	$HTML->menuhtml_top($Language->getText('menu', 'logged_in_as', user_getname()));
-	$HTML->menu_entry('/my/',$Language->getText('menu', 'my_personal_page'));
-	$HTML->menu_entry('/account/',$Language->getText('menu', 'my_account'));
+	$HTML->menu_entry('/my/',_('My Personal Page'));
+	$HTML->menu_entry('/account/',_('My Account'));
 	if (!$GLOBALS['HTTP_POST_VARS']) {
 		$bookmark_title = urlencode( str_replace($sys_name.': ', '', $page_title));
-		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode(getStringFromServer('REQUEST_URI')).'&amp;bookmark_title='.$bookmark_title,$Language->getText('menu', 'bookmark_page'));
+		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode(getStringFromServer('REQUEST_URI')).'&amp;bookmark_title='.$bookmark_title,_('Bookmark Page'));
 	}
-	$HTML->menu_entry('/account/logout.php',$Language->getText('menu', 'logout'));
+	$HTML->menu_entry('/account/logout.php',_('Logout'));
 	$HTML->menuhtml_bottom();
 }
 
@@ -200,8 +200,8 @@ function menu_notloggedin() {
 	$HTML->menuhtml_top('Login Status:');
 	echo "<span class=\"error\">NOT LOGGED IN</span>&nbsp;&nbsp;&nbsp;<br />";
 //	$HTML->menu_entry($GLOBALS['sys_home'].'faq/?group='.$GLOBALS['sys_unix_group_name'].'&amp;question=Why_to_log_in.txt','Why Log In?');
-	$HTML->menu_entry('/account/login.php',$Language->getText('menu', 'login'));
-	$HTML->menu_entry('/account/register.php',$Language->getText('menu', 'new_user'));
+	$HTML->menu_entry('/account/login.php',_('Login'));
+	$HTML->menu_entry('/account/register.php',_('New User via SSL'));
 	$HTML->menuhtml_bottom();
 }
 

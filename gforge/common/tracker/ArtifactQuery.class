@@ -108,7 +108,7 @@ class ArtifactQuery extends Error {
 		}
 
 		if ($this->Exist(htmlspecialchars($name))) {
-			$this->setError($Language->getText('artifact_query','exist_query'));
+			$this->setError(_('Query already exists'));
 			return false;
 		}
 
@@ -449,7 +449,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		if (!$this->Exist(htmlspecialchars($name))) {
-			$this->setError($Language->getText('artifact_query','not_exist_query'));
+			$this->setError(_('Query does not exist'));
 			return false;
 		}
 		$sql="UPDATE artifact_query

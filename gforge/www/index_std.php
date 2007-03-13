@@ -59,7 +59,7 @@ task manager subprojects. The
 is currently only available under a non-free license.
 </p>
 <?php
-echo $HTML->boxTop($Language->getText('group','long_news'));
+echo $HTML->boxTop(_('Latest News'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
 echo $HTML->boxBottom();
 ?>

@@ -28,50 +28,27 @@
 require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/scm/include/scm_utils.php');
-require_once('common/scm/SCMFactory.class');
-
-global $sys_use_scm;
 
 $group_id = getIntFromRequest('group_id');
 
 // Check permissions
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$group_id));
+scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
 if (getStringFromRequest('submit')) {
-	$hook_params = array ();
-	$hook_params['group_id'] = $group_id;
-
-	$scmradio = '';
-	$scmvars = array_keys (_getRequestArray());
+	$hook_params = array () ;
+	$hook_params['group_id'] = $group_id ;
+	$scmvars = array_keys (_getRequestArray()) ;
 	foreach (_getRequestArray() as $key => $value) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
-				$hook_params[$key] = $value;
-			} elseif ($key == 'scmradio') {
-				$scmradio = $value;
+				$hook_params[$key] = $value ;
 			}
 		}
 	}
-
-	$SCMFactory = new SCMFactory();
-	$scm_plugins = $SCMFactory->getSCMs();
-
-	if (in_array($scmradio, $scm_plugins)) {
-		$group =& group_get_object($group_id);
-
-		foreach ($scm_plugins as $plugin) {
-			$myPlugin = plugin_get_object($plugin);
-			if ($scmradio == $myPlugin->name) {
-				$group->setPluginUse($myPlugin->name, 1);
-			} else {
-				$group->setPluginUse($myPlugin->name, 0);
-			}
-		}
-	}
-
-	plugin_hook ("scm_admin_update", $hook_params);
+	$hook_params['scmradio'] = $scmradio ;
+	plugin_hook ("scm_admin_update", $hook_params) ;
 }
 
 ?>
@@ -80,35 +57,10 @@ if (getStringFromRequest('submit')) {
 
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
-	$group =& group_get_object($group_id);
-
-	$SCMFactory = new SCMFactory();
-	$scm_plugins = $SCMFactory->getSCMs();
-	if (count($scm_plugins) != 0) {	
-		if (count($scm_plugins) > 1) {
-			echo '<p>'.$Language->getText('scm_index','repos_change_note').'</p>';
-			echo '<table><tbody><tr><td><strong>',$Language->getText('scm_index','scm_repository'),':</strong></td>';
-			$checked=true;
-			foreach ($scm_plugins as $plugin) {
-				$myPlugin = plugin_get_object($plugin);
-				echo '<td><input type="radio" name="scmradio" ';
-				echo 'value="'.$myPlugin->name.'"';
-				if ($group->usesPlugin($myPlugin->name)) {
-					$scm = $myPlugin->name;
-					echo ' checked="checked"';
-				}
-				echo '>'.$myPlugin->text.'</td>';
-			}
-			echo '</tr></tbody></table>'."\n";
-		}
-	} else {
-		echo '<p>'.$Language->getText('scm_index','no_plugins_error').'</p>';
-	}
-
 	plugin_hook ("scm_admin_page", $hook_params) ;
 ?>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'update'); ?>">
+<input type="submit" name="submit" value="<?php echo _('Update'); ?>">
 </form>
 <?php
 

@@ -74,8 +74,15 @@ function send_pending_pm_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			$Lang = new BaseLanguage() ;
 			$Lang->loadLanguageID($language);
-			$subject=$Lang->getText('send_pending_items_mail','pm_subject');
-			$messagebody=stripcslashes($Lang->getText('send_pending_items_mail','pm_message',array($project_task_id, $summary,$hyperlink, $user_name, $status_name, db_result($res,$i,'percent_complete'))));
+			$subject=_('Pending task manager items notification');
+			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks. 
+The task manager item  #%1$s is pending: 
+Task Summary: %2$s
+Submitted by: %4$s
+Status:%5$s
+Percent Complete: %6$s
+
+Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $user_name, $status_name, db_result($res, $i,'percent_complete')));
 			util_send_message($mailto,$subject,$messagebody);	
 		}
 	}
@@ -110,8 +117,17 @@ function send_pending_tracker_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			$Lang = new BaseLanguage() ;
 			$Lang->loadLanguageID($language);
-			$subject=$Lang->getText('send_pending_items_mail','tracker_subject');
-			$messagebody=stripcslashes($Lang->getText('send_pending_items_mail','tracker_message',array( $artifact,$opendate,$summary,  $hyperlink,$status_name, $realopendate,db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  db_result($res,$tmp,'details') )));
+			$subject=_('Pending tracker  items notification');
+			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tracker items. The item #%1$s is pending:
+Summary: %3$s
+Status: %5$s
+Open Date:%6$s
+Assigned To: %7$s
+Submitted by: %8$s
+Details: %9$s
+
+
+Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlink, $status_name, $realopendate, db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  db_result($res,$tmp,'details')));
 			/* and finally send the email */
 			util_send_message($mailto,$subject,$messagebody);	
 		}

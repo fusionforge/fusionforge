@@ -122,7 +122,7 @@ class ProjectGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError($Language->getText('pm_projectgroup','none_found').db_error());
+			$this->setError(_('No ProjectGroups Found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

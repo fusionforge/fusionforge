@@ -76,7 +76,7 @@ function viewcvs_execute($repos_name, $repos_type) {
 	}
 	
 	if (!is_dir($repos_root)) {
-		$content = $Language->getText('scm_index', 'not_created');
+		$content = _('The repository for this project isn\'t created yet. It will be created in the next few minutes.');
 		return $content;
 	}
 	

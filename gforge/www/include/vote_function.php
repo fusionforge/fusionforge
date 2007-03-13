@@ -195,7 +195,7 @@ if (db_numrows($result) > 0) {
 
 			if ($question_type != $last_question_type) {
 				echo '
-					<strong>1</strong>'.$Language->getText('survey','low').'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' .$Language->getText('survey','high');
+					<strong>1</strong>'._('Low').'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' ._('Low');
 				echo '<br />';
 
 			}
@@ -264,18 +264,18 @@ if (db_numrows($result) > 0) {
 	}
 
 	?>
-	<tr><td style="text-align:center" colspan="2">
+	<tr><td align="center" colspan="2">
 
-	<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
+	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	<br />
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/survey/privacy.php"><?php echo $Language->getText('survey','survey_privacy') ?></a>
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/survey/privacy.php"><?php echo _('Survey Privacy') ?></a>
 	</td></tr>
 	</form>
 	</table>
 	<?php
 
 } else {
-	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong>";
+	echo "<strong>"._('Survey not found.')."</strong>";
 }
 
 }

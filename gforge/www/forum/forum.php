@@ -44,7 +44,7 @@ if ($forum_id) {
 		FROM forum_group_list
 		WHERE group_forum_id='$forum_id'");
 	if (!$result || db_numrows($result) < 1) {
-		exit_error($Language->getText('general','error'),$Language->getText('forum','error_forum_not_found').' '.db_error());
+		exit_error(_('Error'),_('Error').' '.db_error());
 	}
 	$group_id=db_result($result,0,'group_id');
 
@@ -58,9 +58,9 @@ if ($forum_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error($Language->getText('general','error'),"Error getting new Forum");
+		exit_error(_('Error'),"Error getting new Forum");
 	} elseif ($f->isError()) {
-		exit_error($Language->getText('general','error'),$f->getErrorMessage());
+		exit_error(_('Error'),$f->getErrorMessage());
 	}
 
 	/*
@@ -77,10 +77,10 @@ if ($forum_id) {
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error($Language->getText('general','error'), "Error getting new ForumMessage");
+			exit_error(_('Error'), "Error getting new ForumMessage");
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+			exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 
 		$sanitizer = new TextSanitizer();
@@ -95,12 +95,12 @@ if ($forum_id) {
 		
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
+			exit_error(_('Error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
 			if ($fm->isPending() ) {
-				$feedback=$Language->getText('forum_forum','pendingpostsuccess');
+				$feedback=_('Message Queued for moderation -> Please wait until the admin approves/rejects it');
 			} else {
-				$feedback=$Language->getText('forum_forum','postsuccess');
+				$feedback=_('Message Posted Successfully');
 			}
 			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
 			$am->SetForumMsg($fm);
@@ -120,10 +120,10 @@ if ($forum_id) {
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error($Language->getText('general','error'), "Error getting new ForumMessageFactory");
+		exit_error(_('Error'), "Error getting new ForumMessageFactory");
 	} elseif ($fmf->isError()) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
+		exit_error(_('Error'),$fmf->getErrorMessage());
 	}
 
 //echo "<br /> style: $style|max_rows: $max_rows|offset: $offset+";
@@ -137,9 +137,9 @@ if ($forum_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error($Language->getText('general','error'), "Error getting new ForumHTML");
+		exit_error(_('Error'), "Error getting new ForumHTML");
 	} elseif ($fh->isError()) {
-		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
 	forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
@@ -166,13 +166,13 @@ if ($forum_id) {
 	//create a pop-up select box showing options for viewing threads
 
 	$vals=array('nested','flat','threaded','ultimate');
-	$texts=array($Language->getText('forum_forum','nested'), $Language->getText('forum_forum','flat'), $Language->getText('forum_forum','threaded'), $Language->getText('forum_forum','ultimate'));
+	$texts=array(_('Nested'), _('Nested'), _('Nested'), _('Nested'));
 
 	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
 
 	//create a pop-up select box showing options for max_row count
 	$vals=array(25,50,75,100);
-	$texts=array($Language->getText('forum_forum','show').' 25',$Language->getText('forum_forum','show').' 50',$Language->getText('forum_forum','show').' 75',$Language->getText('forum_forum','show').' 100');
+	$texts=array(_('Show').' 25',_('Show').' 50',_('Show').' 75',_('Show').' 100');
 
 	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
@@ -185,7 +185,7 @@ if ($forum_id) {
 		<tr><td>'. $options_popup .
 			'</td><td>'. $max_row_popup .
 			'</td><td><input type="submit" name="submit" value="'.
-			$Language->getText('forum_forum','changeview').'" />
+			_('Change View').'" />
 		</td></tr>
 	</table></form>
 	<p>&nbsp;</p>';
@@ -232,9 +232,9 @@ if ($forum_id) {
 		}
 
 		$title_arr=array();
-		$title_arr[]=$Language->getText('forum_forum','thread');
-		$title_arr[]=$Language->getText('forum_forum','author');
-		$title_arr[]=$Language->getText('forum_forum','date');
+		$title_arr[]=_('Thread');
+		$title_arr[]=_('Author');
+		$title_arr[]=_('Date');
 
 		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -312,10 +312,10 @@ if ($forum_id) {
 		echo db_error();
 
 		$title_arr=array();
-		$title_arr[]=$Language->getText('forum_forum','topic');
-		$title_arr[]=$Language->getText('forum_forum','topicstarter');
-		$title_arr[]=$Language->getText('forum_forum','replies');
-		$title_arr[]=$Language->getText('forum_forum','lastpost');
+		$title_arr[]=_('Topic');
+		$title_arr[]=_('Topic Starter');
+		$title_arr[]=_('Replies');
+		$title_arr[]=_('Last Post');
 
 		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 		$i=0;
@@ -357,7 +357,7 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<span class="prev">
 		<a href="javascript:history.back()"><strong>' .
-		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) .$Language->getText('forum_forum','previous_messages').'</a></strong></span>';
+		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) ._('Previous Messages').'</a></strong></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -368,7 +368,7 @@ if ($forum_id) {
 		$ret_val .= '<span class="next">
 		<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 			'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id.'">
-		<strong> '.$Language->getText('forum_forum','next_messages') .
+		<strong> '._('Next Messages') .
 		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
 	} else {
 		$ret_val .= '&nbsp;';
@@ -384,7 +384,7 @@ if ($forum_id) {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</h3></CENTER>';
+		echo '<CENTER><h3>'._('Start New Thread').'</h3></CENTER>';
 		$fh->showPostForm();
 	}
 */
@@ -392,7 +392,7 @@ if ($forum_id) {
 
 } else {
 
-	exit_error($Language->getText('general','error'),$Language->getText('forum_forum','no_forum_chosen'));
+	exit_error(_('Error'),_('Error'));
 
 }
 

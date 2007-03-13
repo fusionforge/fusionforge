@@ -91,7 +91,7 @@ class ArtifactCanned extends Error {
 		//	data validation
 		//
 		if (!$title || !$body) {
-			$this->setError($Language->getText('artifact_canned','required_fields'));
+			$this->setError(_('ArtifactCanned: name and assignee are Required'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {

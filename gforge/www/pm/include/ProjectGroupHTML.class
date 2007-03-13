@@ -37,7 +37,7 @@ function pm_header($params) {
 	}
 
 	if (!$project->usesPm()) {
-		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
+		exit_error(_('Error'),_('Error'));
 	}
 
 	site_project_header($params);
@@ -46,32 +46,32 @@ function pm_header($params) {
 	$links = array();
 
 	if ($group_project_id) {
-		$labels[] = (($pg) ? $pg->getName() .': ' : '') .$Language->getText('pm_include_grouphtml','browse_task');
+		$labels[] = (($pg) ? $pg->getName() .': ' : '') ._('Browse Tasks');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		if (session_loggedin()) {
-			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
+			$labels[] = _('Add Task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
 		if ($group_project_id) {
 			$gantt_width = 820;
 			$gantt_height = 680;
 			$gantt_url = "/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
-			$gantt_title = $Language->getText('pm_include_grouphtml','gantt_chart');
+			$gantt_title = _('Gantt Chart');
 			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 			$labels[] = $gantt_title;
 			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace("/\s/e" , "_" , $gantt_title)
 			. '\', \'' . $gantt_winopt . '\'); return false;';
 		}
 		//upload/download as CSV files
-		$labels[] = $Language->getText('pm_include_grouphtml','downloadcsv');
+		$labels[] = _('Download as CSV');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
-		$labels[] = $Language->getText('pm_include_grouphtml','uploadcsv');
+		$labels[] = _('Upload CSV');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=uploadcsv';
 	}
 	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
-		$labels[] = $Language->getText('pm_include_grouphtml','reporting');
+		$labels[] = _('Reporting');
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
-		$labels[] = $Language->getText('pm_include_grouphtml','admin');
+		$labels[] = _('Admin');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
 	}
 	if(!empty($labels)) {
@@ -114,7 +114,7 @@ class ProjectGroupHTML extends ProjectGroup {
 		echo '
 		<select name="'.$name.'">';
 		echo '
-		<option value="0">'.$Language->getText('pm_include_grouphtml','not_started'). '</option>';
+		<option value="0">'._('Not Started'). '</option>';
 		for ($i=5; $i<101; $i+=5) {
 			echo '
 			<option value="'.$i.'"';
@@ -132,18 +132,18 @@ class ProjectGroupHTML extends ProjectGroup {
 		echo '
 		<select name="'.$name.'" size="1">';
 		$monthlist = array(
-			'1'=>$Language->getText('calendar','january'),
-			'2'=>$Language->getText('calendar','february'),
-			'3'=>$Language->getText('calendar','march'),
-			'4'=>$Language->getText('calendar','april'),
-			'5'=>$Language->getText('calendar','may'),
-			'6'=>$Language->getText('calendar','june'),
-			'7'=>$Language->getText('calendar','july'),
-			'8'=>$Language->getText('calendar','august'),
-			'9'=>$Language->getText('calendar','september'),
-			'10'=>$Language->getText('calendar','october'),
-			'11'=>$Language->getText('calendar','november'),
-			'12'=>$Language->getText('calendar','december'));
+			'1'=>_('January'),
+			'2'=>_('February'),
+			'3'=>_('March'),
+			'4'=>_('April'),
+			'5'=>_('May'),
+			'6'=>_('June'),
+			'7'=>_('July'),
+			'8'=>_('August'),
+			'9'=>_('September'),
+			'10'=>_('October'),
+			'11'=>_('November'),
+			'12'=>_('December'));
 
 		for ($i=1; $i<=count($monthlist); $i++) {
 			if ($i == $select_month) {

@@ -30,7 +30,7 @@ require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 require_once ('common/include/cron_utils.php');
 
-site_admin_header(array('title'=>$Language->getText('admin_index','title')));
+site_admin_header(array('title'=>_('Site Admin')));
 
 $which = getIntFromRequest('which');
 if (!$which || $which==100) {
@@ -42,14 +42,14 @@ if (!$which || $which==100) {
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php echo html_build_select_box_from_arrays(array_keys($cron_arr), $cron_arr, 'which', $which,true,'Any'); ?>
-<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit');?>">
+<input type="submit" name="submit" value="<?php echo _('Submit');?>">
 </form>
 <?php
 
 $title_arr = array(
-	$Language->getText('cronman','date'),
-	$Language->getText('cronman','job'),
-	$Language->getText('cronman','message')
+	_('Date'),
+	_('Job'),
+	_('Message')
 );
 
 echo $HTML->listTableTop ($title_arr);
@@ -87,7 +87,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 			$previousUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset - ADMIN_CRONMAN_ROWS);
 			echo '<a href="'.$previousUrl.'" class="prev">'
 				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
-				. ' '.$Language->getText('cronman', 'previous').'</a>';
+				. ' '._('Previous').'</a>';
 		} else {
 			echo '&nbsp;';
 		}
@@ -95,7 +95,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 		if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
 			$nextUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset + ADMIN_CRONMAN_ROWS);
 			echo '<a href="'.$nextUrl.'" class="next">'
-				.$Language->getText('cronman', 'next').' '
+				._('Next').' '
 				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
 		} else {
 			echo '&nbsp;';

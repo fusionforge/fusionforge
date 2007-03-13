@@ -130,7 +130,7 @@ class Artifact extends Error {
 		//	make sure this person has permission to view artifacts
 		//
 		if (!$this->ArtifactType->userCanView()) {
-			$this->setError($Language->getText('tracker_artifact','private_error'));
+			$this->setError(_('Artifact: Only group members can view private artifact types'));
 			return false;
 		}
 
@@ -176,7 +176,7 @@ class Artifact extends Error {
 			//	Only admins can post/modify private artifacts
 			//
 			if (!$this->ArtifactType->userIsAdmin()) {
-				$this->setError($Language->getText('tracker_artifact','error_admin_modify'));
+				$this->setError(_('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes'));
 				return false;
 			}
 		}
@@ -190,7 +190,7 @@ class Artifact extends Error {
 			if ($this->ArtifactType->allowsAnon()) {
 				$user=100;
 			} else {
-				$this->setError($Language->getText('tracker_artifact','error_no_anonymous'));
+				$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 				return false;
 			}
 		}
@@ -199,11 +199,11 @@ class Artifact extends Error {
 		//	data validation
 		//
 		if (!$summary) {
-			$this->setError($Language->getText('tracker_artifact','error_summary_required'));
+			$this->setError(_('Artifact: Message Summary Is Required'));
 			return false;
 		}
 		if (!$details) {
-			$this->setError($Language->getText('tracker_artifact','error_body_required'));
+			$this->setError(_('Artifact: Message Body Is Required'));
 			return false;
 		}
 		if (!$assigned_to) {
@@ -222,7 +222,7 @@ class Artifact extends Error {
 		//
 		$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 		if (!$status_id) {
-			$this->setError($Language->getText('tracker_artifact','error_remap_status'));
+			$this->setError(_('Artifact: Error remapping status'));
 			return false;
 		}
 
@@ -237,7 +237,7 @@ class Artifact extends Error {
 			AND group_artifact_id='".$this->ArtifactType->getID()."'
 			AND open_date > '". (time() - 86400) ."'");
 		if ($res && db_numrows($res) > 0) {
-			$this->setError($Language->getText('tracker_artifact','double_submit'));
+			$this->setError(_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
 			db_rollback();
 			return false;
 		}
@@ -561,7 +561,7 @@ class Artifact extends Error {
 
 		} else {
 
-			$this->setError($Language->getText('tracker_artifact','error_valid_email_required'));
+			$this->setError(_('SetMonitor::Valid Email Address Required'));
 			return false;
 
 		}
@@ -578,7 +578,7 @@ class Artifact extends Error {
 				$this->setError(db_error());
 				return false;
 			} else {
-				$this->setError($Language->getText('tracker_artifact','monitoring_activated'));
+				$this->setError(_('Now Monitoring Artifact'));
 				return false;
 			}
 		} else {
@@ -586,7 +586,7 @@ class Artifact extends Error {
 			db_query("DELETE FROM artifact_monitor 
 				WHERE artifact_id='". $this->getID() ."' 
 				AND user_id='$user_id'");
-			$this->setError($Language->getText('tracker_artifact','monitoring_deactivated'));
+			$this->setError(_('Artifact Monitoring Deactivated'));
 			return false;
 		}
 	}
@@ -595,7 +595,7 @@ class Artifact extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) AS count FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
+		$sql="SELECT count(*) FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
@@ -720,7 +720,7 @@ class Artifact extends Error {
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
 		} elseif (!$this->ArtifactType->allowsAnon()) {
-			$this->setError($Language->getText('tracker_artifact','error_no_anonymous'));
+			$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 			return false;
 		} else {
 			$user_id=100;
@@ -990,7 +990,7 @@ class Artifact extends Error {
 			return true;
 		} else {
 			//nothing changed, so cancel the transaction
-			$this->setError($Language->getText('tracker_artifact','nothing_changed'));
+			$this->setError(_('Nothing Changed - Update Cancelled'));
 			db_rollback();
 			return false;
 		}

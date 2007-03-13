@@ -60,30 +60,30 @@ if (getStringFromRequest('submit')) {
 		//echo $cmd.'***'.$output.'***'.$userfile;
 	}
 	if (!$release_name) {
-		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
+		$feedback .= _('Must define a release name.');
 	} else 	if (!$package_id) {
-		$feedback .= $Language->getText('project_admin_qrs','required_package');
+		$feedback .= _('Must select a package.');
 	} else 	if (!$userfile['tmp_name'] && !$ftp_filename) {
 		// Check errors
 		switch($userfile['error']) {
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
-				$feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
+				$feedback .= _('The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file.');
 			break;
 			case UPLOAD_ERR_PARTIAL:
-				$feedback .= $Language->getText('project_admin_qrs','partial_file');
+				$feedback .= _('The uploaded file was only partially uploaded.');
 			break;
 			case UPLOAD_ERR_NO_FILE:
-				$feedback .= $Language->getText('project_admin_qrs','required_file');
+				$feedback .= _('Must select a file.');
 			break;
 			default:
-				$feedback .= $Language->getText('project_admin_qrs','unknown_file_error');
+				$feedback .= _('Unknown file upload error.');
 			break;
 		}
 	} else 	if (!$type_id || $type_id == "100") {
-		$feedback .= $Language->getText('project_admin_qrs','required_file_type');
+		$feedback .= _('Must select a file type.');
 	} else 	if (!$processor_id || $processor_id == "100")  {
-		$feedback .= $Language->getText('project_admin_qrs','required_processor_type');
+		$feedback .= _('Must select a processor type.');
 	} else {
 
 		//
@@ -129,9 +129,9 @@ if (getStringFromRequest('submit')) {
 							exit_error('Error',$frsf->getErrorMessage());
 						}
 						$frsr->sendNotice();
-						$feedback .= $Language->getText('project_admin_qrs','file_released');
+						$feedback .= _('File Released: You May Choose To Edit the Release Now');
 
-						frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id));
+						frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
@@ -157,7 +157,7 @@ if (getStringFromRequest('submit')) {
 
 }
 
-frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id));
+frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 
 ?>
 
@@ -165,7 +165,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	<table border="0" cellpadding="2" cellspacing="2">
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','package_id') ?>:</h4>
+			<h4><?php echo _('Package ID') ?>:</h4>
 		</td>
 		<td>
 <?php
@@ -173,7 +173,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
-		echo '<h4>'.$Language->getText('project_admin_qrs','no_file_types_available').'</h4>';
+		echo '<h4>'._('No File Types Available').'</h4>';
 	} else {
 		
 		echo '<select name="package_id">';
@@ -187,12 +187,12 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 ?>
 			&nbsp;&nbsp;
 			
-			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/?group_id='.$group_id.'">','</a>')) ?>
+			<?php printf(_('Or %1$s create a new package %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/?group_id='.$group_id.'">', '</a>') ?>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','release_name') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('Release Name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 			<input type="text" name="release_name" value="<?php echo htmlspecialchars(stripslashes($release_name)) ?>" />
@@ -200,7 +200,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','release_date') ?>:</h4>
+			<h4><?php echo _('Release Date') ?>:</h4>
 		</td>
 		<td>
 			<input type="text" name="release_date" value="<?php echo date('Y-m-d H:i'); ?>" size="16" maxlength="16" />
@@ -208,17 +208,17 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','file_name') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('File Name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 		<span class="important">
-		<?php echo $Language->getText('project_admin_qrs','release_note').' ('.$Language->getText('project_admin_qrs','maximum_file_size').' '. ini_get('upload_max_filesize')?>)</span><br />
-		<?php echo $Language->getText('project_admin_qrs','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
+		<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file').' ('._('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file').' '. ini_get('upload_max_filesize')?>)</span><br />
+		<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
 		<?php if ($sys_use_ftpuploads) { 
 
 			echo '<p>';
-			echo $Language->getText('project_admin_qrs','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
-			echo $Language->getText('project_admin_qrs','ftpupload_choosefile').'<br />';
+			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$arr[]='';
 			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
@@ -229,7 +229,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','file_type') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('File Type') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php
@@ -239,7 +239,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo $Language->getText('project_admin_qrs','processor_type') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('Processor Type') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php
@@ -249,7 +249,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td valign="top">
-			<h4><?php echo $Language->getText('project_admin_qrs','release_notes') ?>:</h4>
+			<h4><?php echo _('Release Notes') ?>:</h4>
 		</td>
 		<td>
 			<textarea name="release_notes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_notes)); ?></textarea>
@@ -257,16 +257,16 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 	</tr>
 	<tr>
 		<td valign="top">
-			<h4><?php echo $Language->getText('project_admin_qrs','changelog') ?>:</h4>
+			<h4><?php echo _('Change Log') ?>:</h4>
 		</td>
 		<td>
 			<textarea name="release_changes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_changes)); ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" style="text-align:center">
-			<input type="checkbox" name="preformatted" value="1" /> <?php echo $Language->getText('project_admin_qrs','preserve_text') ?>
-			<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_qrs','release_file') ?>" /></p>
+		<td colspan="2" align="center">
+			<input type="checkbox" name="preformatted" value="1" /> <?php echo _('Preserve my pre-formatted text') ?>
+			<p><input type="submit" name="submit" value="<?php echo _('Release File') ?>" /></p>
 		</td>
 	</tr>
 	</table>

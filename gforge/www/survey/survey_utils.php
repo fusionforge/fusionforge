@@ -43,7 +43,7 @@ function survey_header($params) {
 
 	if ($project =& group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
-			exit_error($Language->getText('general','error'), $Language->getText('survey_utils','error_this_group_has_turned_off'));
+			exit_error(_('Error'), _('Error'));
 		}
 		
 		site_project_header($params);
@@ -51,13 +51,13 @@ function survey_header($params) {
 		if ($is_admin_page && $group_id) {
 			echo ($HTML->subMenu(
 				array(
-					$Language->getText('group','short_survey'),
-					$Language->getText('survey_utils','admin'),
-					$Language->getText('survey_utils','add_survey'),
-					$Language->getText('survey_utils','edit_survey'),
-					$Language->getText('survey_utils','add_question'),
-					$Language->getText('survey_utils','edit_questions'),
-					$Language->getText('survey_utils','show_results')
+					_('Surveys'),
+					_('Admin'),
+					_('Add Survey'),
+					_('Edit Survey'),
+					_('Add Questions'),
+					_('Edit Questions'),
+					_('Show Results')
 				),
 				array(
 					'/survey/?group_id='.$group_id,
@@ -76,7 +76,7 @@ function survey_header($params) {
 
 					echo ($HTML->subMenu(
 					array(
-						$Language->getText('survey_utils','admin')
+						_('Admin')
 					),
 					array(
 						'/survey/admin/?group_id='.$group_id

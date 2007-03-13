@@ -38,16 +38,16 @@ class Theme extends Layout {
 		<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><h2>GForge</h2></a>
 		</p>
 		<p align=right>
-		<?php
+		<?
 		if (session_loggedin()) {
 		?>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a></b>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo $Language->getText('common','myaccount'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a></b>
 		<?php
 		} else {
 		?>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo $Language->getText('common','login'); ?></a></b>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a></b>
+		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a></b>
 		<?php
 		}
 		?>
@@ -94,18 +94,18 @@ class Theme extends Layout {
 			}
 		} else if ($group_id && $forum_id) {
 			print '
-			<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
+			<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'._('This forum').'</option>';
 		} else if ($group_id && $group_project_id) {
 			print '
-			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
+			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'._('Tasks').'</option>';
 		}
 
 		print '
-			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
+			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'._('Software/Group').'</option>';
 		print '
-			<option value="'.SEARCH__TYPE_IS_SKILL.'"'.( $type_of_search == SEARCH__TYPE_IS_SKILL ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
+			<option value="'.SEARCH__TYPE_IS_SKILL.'"'.( $type_of_search == SEARCH__TYPE_IS_SKILL ? ' selected="selected"' : '' ).'>'._('Skill').'</option>';
 		print '
-			<option value="'.SEARCH__TYPE_IS_PEOPLE.'"'.( $type_of_search == SEARCH__TYPE_IS_PEOPLE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
+			<option value="'.SEARCH__TYPE_IS_PEOPLE.'"'.( $type_of_search == SEARCH__TYPE_IS_PEOPLE ? ' selected="selected"' : '' ).'>'._('People').'</option>';
 
 		print '</select>';
 		
@@ -127,7 +127,7 @@ class Theme extends Layout {
 		}
 		print '
 		<input type="text" size="12" name="words" value="'.$words.'" />';
-		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
+		print '<input type="submit" name="Search" value="'._('Search').'" />';
 		print '</form>';
 	}
 

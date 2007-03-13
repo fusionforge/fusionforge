@@ -36,10 +36,10 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('error','error_creating_group'));
+	exit_error(_('Error'),
+		_('MISSINGTEXT:error/error_creating_group:TEXTMISSING'));
 } else if ($group->isError()) {
-	exit_error($Language->getText('general','error'),
+	exit_error(_('Error'),
 		$group->getErrorMessage());
 }
 
@@ -90,9 +90,9 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$feedback = $group->getErrorMessage();
+		$feedback .= $group->getErrorMessage();
 	} else {
-		$feedback = $Language->getText('project_admin_editgroupinfo','group_updated');
+		$feedback .= _('Group information updated');
 	}
 
 	// This is done so plugins can enable/disable themselves from the project
@@ -100,7 +100,7 @@ if (getStringFromRequest('submit')) {
 	plugin_hook("groupisactivecheckboxpost",$hookParams);
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID()));
+project_admin_header(array('title'=>_('Edit Group Info').'','group'=>$group->getID()));
 
 /* NOT ACTIVE YET
 
@@ -121,19 +121,19 @@ $images_res = db_query("
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
 <p>
-<?php echo $Language->getText('project_admin_editgroupinfo','group_name') ?>:<br />
+<?php echo _('Descriptive Group Name') ?>:<br />
 <input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" maxlength="40" />
 </p>
 
 <p>
-<?php echo $Language->getText('project_admin_editgroupinfo','short_description') ?>:<br />
+<?php echo _('Short Description (255 Character Max, HTML will be stripped from this description)') ?>:<br />
 <textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
 <?php echo $group->getDescription(); ?>
 </textarea>
 </p>
 
 <p>
-<?php echo $Language->getText('project_admin_editgroupinfo','homepage_link') ?>:<br />
+<?php echo _('Homepage Link') ?>:<br />
 <tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
 </p>
 
@@ -150,7 +150,7 @@ Logo Image:
 
 <hr />
 
-<h3><?php echo $Language->getText('project_admin_editgroupinfo','active_features') ?>:</h3>
+<h3><?php echo _('Active Features') ?>:</h3>
 
 <?php
 
@@ -178,7 +178,7 @@ if($sys_use_mail) {
 <input type="checkbox" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_mailing_lists') ?></strong>
+<strong><?php echo _('Use Mailing Lists') ?></strong>
 </td>
 </tr>
 <?php
@@ -191,7 +191,7 @@ if($sys_use_survey) {
 <input type="checkbox" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_surveys') ?></strong>
+<strong><?php echo _('Use Surveys') ?></strong>
 </td>
 </tr>
 <?php
@@ -204,7 +204,7 @@ if($sys_use_forum) {
 <input type="checkbox" name="use_forum" value="1" <?php echo c($group->usesForum()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_forums') ?></strong>
+<strong><?php echo _('Use Forums') ?></strong>
 </td>
 </tr>
 <?php
@@ -217,7 +217,7 @@ if($sys_use_pm) {
 <input type="checkbox" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
+<strong><?php echo _('Use Project/Task Manager') ?></strong>
 </td>
 </tr>
 <?php
@@ -230,7 +230,7 @@ if($sys_use_scm) {
 <input type="checkbox" name="use_scm" value="1" <?php echo c($group->usesSCM()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_scm') ?></strong>
+<strong><?php echo _('Use SCM') ?></strong>
 </td>
 </tr>
 <?php
@@ -243,7 +243,7 @@ if($sys_use_news) {
 <input type="checkbox" name="use_news" value="1" <?php echo c($group->usesNews()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_news') ?> </strong>
+<strong><?php echo _('Use News') ?> </strong>
 </td>
 </tr>
 <?php
@@ -256,7 +256,7 @@ if($sys_use_docman) {
 <input type="checkbox" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_docman') ?></strong>
+<strong><?php echo _('Use Doc Mgr') ?></strong>
 </td>
 </tr>
 <?php
@@ -269,7 +269,7 @@ if($sys_use_ftp) {
 <input type="checkbox" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_ftp') ?></strong>
+<strong><?php echo _('Use FTP') ?></strong>
 </td>
 </tr>
 <?php
@@ -282,7 +282,7 @@ if($sys_use_tracker) {
 <input type="checkbox" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_tracker') ?></strong>
+<strong><?php echo _('Use Tracker') ?></strong>
 </td>
 </tr>
 <?php
@@ -295,7 +295,7 @@ if($sys_use_frs) {
 <input type="checkbox" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_frs') ?></strong>
+<strong><?php echo _('Use File Release System') ?></strong>
 </td>
 </tr>
 <?php } ?>
@@ -304,7 +304,7 @@ if($sys_use_frs) {
 <input type="checkbox" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> />
 </td>
 <td>
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_stats') ?></strong>
+<strong><?php echo _('Use Statistics') ?></strong>
 </td>
 </tr>
 
@@ -316,17 +316,17 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 </table>
 
 <p>
-<?php echo $Language->getText('project_admin_editgroupinfo','new_doc_info') ?>.<br />
-<strong><?php echo $Language->getText('project_admin_editgroupinfo','new_doc') ?>:</strong><br />
+<?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />
+<strong><?php echo _('New Document Submissions') ?>:</strong><br />
 <input type="text" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" size="25" maxlength="250" />
-<?php echo $Language->getText('project_admin_editgroupinfo','send_on_all_updates') ?>
+<?php echo _('(send on all updates)') ?>
 <input type="checkbox" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
 </p>
 
 <hr />
 
 <p>
-<input type="submit" name="submit" value="<?php echo $Language->getText('general','update') ?>" />
+<input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 </p>
 </form>
 

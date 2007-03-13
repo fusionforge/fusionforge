@@ -16,6 +16,7 @@ usr/share/gforge/common
 usr/share/gforge/www
 usr/share/gforge/www/include
 usr/share/gforge/scm
+usr/share/locale
 usr/sbin
 var
 var/lib

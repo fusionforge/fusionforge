@@ -48,12 +48,12 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-echo report_header($Language->getText('reporting','site_wide_time_tracking'));
+echo report_header(_('Site-Wide Time Tracking'));
 
-$a[]=$Language->getText('reporting_ttbp','bytask');
-$a[]=$Language->getText('reporting_ttbp','bycategory');
-$a[]=$Language->getText('reporting_ttbp','bysubproject');
-$a[]=$Language->getText('reporting_ttbp','byuser');
+$a[]=_('By Task');
+$a[]=_('By Category');
+$a[]=_('By Subproject');
+$a[]=_('By User');
 
 $a2[]='tasks';
 $a2[]='category';
@@ -61,15 +61,15 @@ $a2[]='subproject';
 $a2[]='user';
 
 ?>
-<h3><?php echo $Language->getText('reporting','site_wide_time_tracking'); ?></h3>
+<h3><?php echo _('Site-Wide Time Tracking'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>">
 <table><tr>
-<td><strong><?php echo $Language->getText('reporting', 'type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
-<td><strong><?php echo $Language->getText('reporting', 'start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo $Language->getText('reporting', 'end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
+<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>
@@ -80,8 +80,8 @@ if ($typ =='r') {
 	$labels = $report->labels;
 	$data = $report->getData();
 
-	echo $HTML->listTableTop (array($Language->getText('reporting_pa','type'),
-		$Language->getText('reporting_pa','time')));
+	echo $HTML->listTableTop (array(_('MISSINGTEXT:reporting_pa/type:TEXTMISSING'),
+		_('MISSINGTEXT:reporting_pa/time:TEXTMISSING')));
 
 	for ($i=0; $i<count($labels); $i++) {
 

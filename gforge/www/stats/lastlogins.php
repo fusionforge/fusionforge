@@ -26,20 +26,20 @@ $res_logins = db_query("SELECT us.user_id AS user_id,
 	us.user_id>0 AND us.time>0 ORDER BY us.time DESC",50);
 
 if (!$res_logins || db_numrows($res_logins) < 1) {
-	exit_error('Error',$Language->getText('stats_lastlogins','no_records').db_error());
+	exit_error('Error',_('No records found","Database error: "').db_error());
 }
 
-$HTML->header(array('title'=>$Language->getText('stats_lastlogins','last_logins')));
+$HTML->header(array('title'=>_('Last Logins')));
 
-print '<h3>'.$Language->getText('stats_lastlogins','most_recent_open').'</h3>';
+print '<h3>'._('Most Recent Opened Sessions').'</h3>';
 
 ?>
 
 <table  width="100%" cellspacing="0" cellpadding="0">
 <tr class="tableheading">
-<th><?php echo $Language->getText('stats_lastlogins','date'); ?></th>
-<th><?php echo $Language->getText('stats_lastlogins','username'); ?></th>
-<th><?php echo $Language->getText('stats_lastlogins','source_ip'); ?></th>
+<th><?php echo _('Date'); ?></th>
+<th><?php echo _('Username'); ?></th>
+<th><?php echo _('Source IP'); ?></th>
 </tr>
 
 <?php

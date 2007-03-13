@@ -58,7 +58,7 @@ class SurveyQuestion extends Error {
 		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError($Language->getText('general','error_no_valid_group_object','Survey Question'));
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -75,7 +75,7 @@ class SurveyQuestion extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError($Language->getText('general','error_group_id'));
+					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return false;
 				}
@@ -101,7 +101,7 @@ class SurveyQuestion extends Error {
 		global $Language;
 
 		if (strlen($question) < 3) {
-			$this->setError($Language->getText('survey_error','min_question_length'));
+			$this->setError(_('Question is too short'));
 			return false;
 		} else {
 			// Current permissions check.
@@ -114,7 +114,7 @@ class SurveyQuestion extends Error {
 
 		$res=db_query($sql);
 		if (!$res) {
-			$this->setError($Language->getText('survey_add_question','question_added').db_error());
+			$this->setError(_('Question Added').db_error());
 			return false;
 		} 
 
@@ -142,7 +142,7 @@ class SurveyQuestion extends Error {
 		global $Language;
 
 		if (strlen($question) < 3) {
-			$this->setError($Language->getText('survey_error','min_question_length'));
+			$this->setError(_('Question is too short'));
 			return false;
 		} else {
 			// Current permissions check.
@@ -158,7 +158,7 @@ class SurveyQuestion extends Error {
 	
 		$res=db_query($sql);
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError($Language->getText('survey_edit_question','update_failed').db_error());
+			$this->setError(_('UPDATE FAILED').db_error());
 			return false;
 		}
 		return $this->fetchData($question_id);
@@ -180,7 +180,7 @@ class SurveyQuestion extends Error {
  
 		$res=db_query($sql);
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError($Language->getText('survey_edit_question','delete_failed').db_error());
+			$this->setError(_('MISSINGTEXT:survey_edit_question/delete_failed:TEXTMISSING').db_error());
 			return false;
 		}
 
@@ -206,7 +206,7 @@ class SurveyQuestion extends Error {
 		$res=db_query($sql);
 	
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError($Language->getText('survey_edit_question','error_finding_question').db_error());
+			$this->setError(_('Error finding question').db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

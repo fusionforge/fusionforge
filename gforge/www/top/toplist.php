@@ -34,28 +34,28 @@ $type = getStringFromRequest('type');
 $stats = new Stats();
 
 if ($type == 'downloads_week') {
-	$title = $Language->getText('top_toplist','top_download_7_days');
-	$column1 = $Language->getText('top_toplist','download');
+	$title = _('Top Downloads in the Past 7 Days');
+	$column1 = _('Downloads');
 }
 else if ($type == 'pageviews_proj') {
 	$res_top = $stats->getTopPageViews();
-	$title = $Language->getText('top_toplist','top_weekly_pagesviews',array($GLOBALS['sys_default_domain'],$GLOBALS['sys_name']));
-	$column1 = $Language->getText('top_toplist','pageviews');
+	$title = sprintf(_('Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)'), $GLOBALS['sys_default_domain'], $GLOBALS['sys_name']);
+	$column1 = _('Pageviews');
 }
 else if ($type == 'forumposts_week') {
 	$res_top = $stats->getTopMessagesPosted();
-	$title = $Language->getText('top_toplist','top_forum_post_count');
-	$column1 = $Language->getText('top_toplist','posts');
+	$title = _('Top Forum Post Counts');
+	$column1 = _('Posts');
 }
 // default to downloads
 else {
 	$res_top = $stats->getTopDownloads();
-	$title = $Language->getText('top_toplist','top_download');
-	$column1 = $Language->getText('top_toplist','download');
+	$title = _('Top Downloads');
+	$column1 = _('Downloads');
 }
 $HTML->header(array('title'=>$title));
-print '<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['.$Language->getText('top','view_other_top_category').']</a>';
-$arr=array($Language->getText('top_toplist','rank'),$Language->getText('top_toplist','project_name'),"$column1");
+print '<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a>';
+$arr=array(_('Rank'),_('Rank'),"$column1");
 echo $HTML->listTableTop($arr);
 
 echo db_error();

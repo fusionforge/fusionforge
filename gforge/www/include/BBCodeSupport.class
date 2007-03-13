@@ -122,9 +122,9 @@ class BBCodeSupport extends Error {
 		$text = " " . $text;
 		
 		// we translate the text (for quote and text)
-		$this->bbcode_tpl['quote_open'] = str_replace("{L_QUOTE}", $Language->getText('bbcode','quote'), $this->bbcode_tpl['quote_open']);
-		$this->bbcode_tpl['code_open'] = str_replace("{L_CODE}", $Language->getText('bbcode','code'), $this->bbcode_tpl['code_open']);
-		$this->bbcode_tpl['quote_username_open']  = str_replace("{L_WROTE}", $Language->getText('bbcode','wrote'), $this->bbcode_tpl['quote_username_open']);
+		$this->bbcode_tpl['quote_open'] = str_replace("{L_QUOTE}", _('Quote'), $this->bbcode_tpl['quote_open']);
+		$this->bbcode_tpl['code_open'] = str_replace("{L_CODE}", _('Code'), $this->bbcode_tpl['code_open']);
+		$this->bbcode_tpl['quote_username_open']  = str_replace("{L_WROTE}", _('Wrote'), $this->bbcode_tpl['quote_username_open']);
 		
 	
 		// [CODE] and [/CODE] for posting code (HTML, PHP, C etc etc) in your posts.

@@ -131,7 +131,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	global $feedback,$Language;
 
 	if (!$loginname || !$passwd) {
-		$feedback = $Language->getText('session','missingpasswd');
+		$feedback = _('Missing Password Or Users Name');
 		return false;
 	}
 
@@ -161,7 +161,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 					WHERE user_name='$loginname'");
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
-			$feedback=$Language->getText('session','invalidpasswd');
+			$feedback=_('Invalid Password Or User Name');
 			return false;
 		} else {
 			// There is a user with the provided user_name, but the MD5 passwds do not match
@@ -171,7 +171,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
 				// This one has clearly typed a bad passwd
-				$feedback=$Language->getText('session','invalidpasswd');
+				$feedback=_('Invalid Password Or User Name');
 				return false;
 			}
 			// User exists, (crypt) unix_pw matches
@@ -202,7 +202,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 				$res = db_query ("UPDATE users
 					SET user_pw='OUT OF DATE'
 					WHERE user_id='".$usr['user_id']."'");
-				$feedback=$Language->getText('session','invalidpasswd');
+				$feedback=_('Invalid Password Or User Name');
 				return false;
 			}
 		}
@@ -218,22 +218,22 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 		} else {
 			if ($usr['status'] == 'S') { 
 				//acount suspended
-				$feedback = $Language->getText('session','suspended');
+				$feedback = _('Account Suspended');
 				return false;
 			}
 			if ($usr['status'] == 'P') { 
 				//account pending
-				$feedback = $Language->getText('session','pending');
+				$feedback = _('Account Pending');
 				return false;
 			} 
 			if ($usr['status'] == 'D') { 
 				//account deleted
-				$feedback = $Language->getText('session','deleted');
+				$feedback = _('Account Deleted');
 				return false;
 			}
 			if ($usr['status'] != 'A') {
 				//unacceptable account flag
-				$feedback = $Language->getText('session','notactive');
+				$feedback = _('Account Not Active');
 				return false;
 			}
 		}
@@ -337,7 +337,7 @@ function session_require($req) {
 			exit_permission_denied();
 		}
 
-		if (@$req['admin_flags']) {
+		if ($req['admin_flags']) {
 			if (!$perm->isAdmin()) {
 				exit_permission_denied();
 			}
@@ -386,7 +386,7 @@ function session_set_new($user_id) {
 	$res = session_getdata($user_id);
 
 	if (!$res || db_numrows($res) < 1) {
-		exit_error($Language->getText('global','error'),$Language->getText('session','cannotinit').": ".db_error());
+		exit_error(_('ERROR'),_('ERROR').": ".db_error());
 	} else {
 
 		//set up the new user object
@@ -476,9 +476,9 @@ function session_continue($sessionKey) {
 	session_set();
  	$Language=new BaseLanguage();
 	$Language->loadLanguage("English"); // TODO use the user's default language
-	setlocale (LC_TIME, $Language->getText('system','locale'));
-	$sys_strftimefmt = $Language->getText('system','strftimefmt');
-	$sys_datefmt = $Language->getText('system','datefmt');
+	setlocale (LC_TIME, _('en_US'));
+	$sys_strftimefmt = _('%Y %B %e  %H:%M');
+	$sys_datefmt = _('Y-m-d H:i');
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;

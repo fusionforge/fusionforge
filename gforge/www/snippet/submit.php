@@ -43,7 +43,7 @@ if (session_loggedin()) {
 				htmlspecialchars($description)."','$type','$language','$license')";
 			$result=db_query($sql);
 			if (!$result) {
-				$feedback .= $Language->getText('snippet_submit','error_doing_snippet_insert');
+				$feedback .= _('ERROR DOING SNIPPET INSERT!');
 				echo db_error();
 			} else {
 				$feedback .= ' Snippet Added Successfully. ';
@@ -60,7 +60,7 @@ if (session_loggedin()) {
 					$feedback .= ' ERROR DOING SNIPPET VERSION INSERT! ';
 					echo db_error();
 				} else {
-					$feedback .= $Language->getText('snippet_submit','snippet_added_successfull');
+					$feedback .= _('Snippet Added Successfully.');
 				}
 			}
 		} else {
@@ -69,10 +69,10 @@ if (session_loggedin()) {
 		}
 
 	}
-	snippet_header(array('title'=>$Language->getText('snippet_submit','title')));
+	snippet_header(array('title'=>_('MISSINGTEXT:snippet_submit/title:TEXTMISSING')));
 
 	?>
-	</p><p><?php echo $Language->getText('snippet_submit','you_can_post'); ?>
+	</p><p><?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
@@ -81,50 +81,50 @@ if (session_loggedin()) {
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','snippet_title'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Title'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="name" size="45" maxlength="60" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','description'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Description'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="description" rows="5" cols="45" ></textarea>
 	</td></tr>
 
 	<tr>
-	<td><strong><?php echo $Language->getText('snippet_submit','type'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Script Type'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array($SCRIPT_TYPE,'type'); ?>
 	</td>
 
-	<td><strong><?php echo $Language->getText('snippet_submit','license'); ?>:</strong><br />
+	<td><strong><?php echo _('License'); ?>:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LICENSE,'license'); ?>
 	</td>
 	</tr>
 
 	<tr>
-	<td><strong><?php echo $Language->getText('snippet_submit','language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a> -->
+		<!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a> -->
 	</td>
 
-	<td><strong><?php echo $Language->getText('snippet_submit','category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
-                <!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a> -->
+                <!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a> -->
 	</td>
 	</tr>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','version'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Version'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','paste_the_code_here'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo _('Paste the Code Here'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="code" rows="30" cols="85" ></textarea>
 	</td></tr>
 
-	<tr><td colspan="2" style="text-align:center">
-		<strong><?php echo $Language->getText('snippet_submit','make_sure_all_info'); ?></strong>
+	<tr><td colspan="2" align="center">
+		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_submit','submit'); ?>" />
+		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
 	</td></tr>
 	</table></form>
 

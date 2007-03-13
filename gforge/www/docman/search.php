@@ -32,12 +32,12 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $df = new DocumentFactory($g);
 if ($df->isError()) {
-	exit_error($Language->getText('general','error'),$df->getErrorMessage());
+	exit_error(_('Error'),$df->getErrorMessage());
 }
 
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError()) {
-	exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
+	exit_error(_('Error'),$dgf->getErrorMessage());
 }
 
 // the "selected language" variable will be used in the links to navigate the
@@ -71,7 +71,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor())
 }
 
 
-docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'),'docman','',$g->getPublicName());
+docman_header(_('Document Manager: Display Document'),_('Document Manager: Display Document'),'docman','',$g->getPublicName());
 
 $vtp = new VTemplate;
 $handle = $vtp->Open("search.tpl.html");
@@ -81,14 +81,14 @@ $allchecked = ""; $onechecked = "";
 if ($_POST["search_type"] == "one") {$onechecked = "checked";}
 else {$allchecked = "checked";}
 $vtp->AddSession($handle,"FORMSEARCH");
-$vtp->SetVar($handle,"FORMSEARCH.TITLE",$Language->getText('docman_search', 'search_title'));
+$vtp->SetVar($handle,"FORMSEARCH.TITLE",_('Search in documents'));
 $vtp->SetVar($handle,"FORMSEARCH.GROUP_ID",$_GET["group_id"]);
 $vtp->SetVar($handle,"FORMSEARCH.TEXTSEARCH",$_POST["textsearch"]);
 $vtp->SetVar($handle,"FORMSEARCH.ALLCHECKED",$allchecked);
 $vtp->SetVar($handle,"FORMSEARCH.ONECHECKED",$onechecked);
-$vtp->SetVar($handle,"FORMSEARCH.SUBMIT_PROMPT",$Language->getText('docman_search', 'search_submit_prompt'));
-$vtp->SetVar($handle,"FORMSEARCH.SEARCH_ALL_WORDS",$Language->getText('docman_search', 'search_all_words'));
-$vtp->SetVar($handle,"FORMSEARCH.SEARCH_ONE_WORD",$Language->getText('docman_search', 'search_one_word'));
+$vtp->SetVar($handle,"FORMSEARCH.SUBMIT_PROMPT",_('Search'));
+$vtp->SetVar($handle,"FORMSEARCH.SEARCH_ALL_WORDS",_('With all the words'));
+$vtp->SetVar($handle,"FORMSEARCH.SEARCH_ONE_WORD",_('With at least one of words'));
 $vtp->CloseSession($handle,"FORMSEARCH");
 
 if ($_POST["cmd"] == "search")
@@ -144,13 +144,13 @@ if ($_POST["cmd"] == "search")
 	if (!$result)
 	{
 		$vtp->AddSession($handle,"MESSAGE");
-		$vtp->SetVar($handle,"MESSAGE.TEXT",$Language->getText('docman_search','error_query'));
+		$vtp->SetVar($handle,"MESSAGE.TEXT",_('Database query error'));
 		$vtp->CloseSession($handle,"MESSAGE");
 	}
 	elseif (db_numrows($result) < 1) 
 	{
 		$vtp->AddSession($handle,"MESSAGE");
-		$vtp->SetVar($handle,"MESSAGE.TEXT",$Language->getText('docman_search','no_search_result'));
+		$vtp->SetVar($handle,"MESSAGE.TEXT",_('Your search did not match any documents'));
 		$vtp->CloseSession($handle,"MESSAGE");
 	}
 	else

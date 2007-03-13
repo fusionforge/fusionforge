@@ -52,10 +52,10 @@ if (!session_loggedin()) {
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>$Language->getText('survey','title')));
+$sh->header(array('title'=>_('Survey')));
 
 if (!$survey_id) {
-    echo "<h1>".$Language->getText('survey','for_some_reason')."</h1>";
+    echo "<h1>"._('For some reason, the Group ID or Survey ID did not make it to this page')."</h1>";
 } else {
     echo($sh->ShowSurveyForm($s));
 }

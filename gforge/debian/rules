@@ -65,6 +65,7 @@ install: build
 	
 	# gforge-plugins
 	cp -r plugins $(CURDIR)/debian/gforge-plugins/usr/share/gforge/
+	find $(CURDIR)/debian/gforge-plugins/usr/share/gforge/ -name .svn -type d | xargs rm -rf
 	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/etc/
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/*
 	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/debian
@@ -123,18 +124,18 @@ install: build
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
 	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
-	find $(CURDIR)/debian/gforge-common/usr/share/gforge/ -name CVS -type d | xargs rm -rf
-	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
+	ln -s database-pgsql.php $(CURDIR)/debian/gforge-common/usr/share/gforge/common/include/database.php
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
+	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
+	find $(CURDIR)/debian/gforge-common/ -name .svn -type d | xargs rm -rf
 
 	# gforge-web-apache
 	install -m 644 $(CURDIR)/debian/gforge-web-apache.overrides $(CURDIR)/debian/gforge-web-apache/usr/share/lintian/overrides/gforge-web-apache
 	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/index_std.php
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name .cvsignore | xargs rm -f
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name .svn -type d | xargs rm -rf
 	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm -f
 	rm -f $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/themes/gforge/COPYING
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
