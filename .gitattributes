@@ -1006,6 +1006,10 @@ gforge/www/jscook/ThemeXP/page.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plus.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
+gforge/www/plugins/helloworld -text
+gforge/www/plugins/mediawiki -text
+gforge/www/plugins/projects_hierarchy -text
+gforge/www/plugins/webcalendar -text
 gforge/www/scm/viewvc/lib/accept.pyc svneol=native#unset
 gforge/www/scm/viewvc/lib/compat.pyc svneol=native#unset
 gforge/www/scm/viewvc/lib/config.pyc svneol=native#unset
