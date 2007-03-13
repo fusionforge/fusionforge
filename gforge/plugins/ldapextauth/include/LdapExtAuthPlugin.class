@@ -33,7 +33,7 @@ class LdapextauthPlugin extends Plugin {
 		$this->ldap_conn = false ;
 
 		require_once('plugins/ldapextauth/config.php') ;
-                $this->base_dn = "$sys_ldap_dn" ;
+                $this->base_dn = $sys_ldap_dn ;
 		$this->ldap_server = $sys_ldap_server ;
 		$this->ldap_port = $sys_ldap_port ;
 		if ($base_dn) {
