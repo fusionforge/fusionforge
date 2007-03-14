@@ -160,7 +160,8 @@ if (getStringFromRequest('submit')) {
 
 $group->clearError();
 
-project_admin_header(array('title'=>sprintf(_('Project Admin: %1$s'), $group->getPublicName())), 'group'=>$group->getID());
+$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
+project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
 
 /*
 	Show top box listing trove and other info

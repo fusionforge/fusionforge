@@ -96,8 +96,7 @@ class CCasePlugin extends SCM {
 <?php
 // ############################ developer access
 			
-	 // echo _('MISSINGTEXT:scm_index/devcvs:TEXTMISSING');
-	 echo "<b>Clear Case Access</b>" ;
+	 echo "<b>".print(_('Clear Case Access'))."</b>" ;
 
 	 print "<p>Either mount the VOB with <tt>cleartool mount $vob_tag</tt> or
 	 select the <tt>$vob_tag</tt> VOB in your Clear Case Explorer.
@@ -121,10 +120,9 @@ if (session_loggedin()) {
 }
  
 if ($project->enableAnonCVS() || !$anonymous) {
-	echo $HTML->boxTop(_('MISSINGTEXT:scm_index/history:TEXTMISSING'));
+	echo $HTML->boxTop(_('History'));
 
-	// echo _('MISSINGTEXT:scm_index/browsetree:TEXTMISSING');
-	echo "<b>Browse the Clear Case tree</b><p>Browsing the Clear Case tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>" ;
+	echo "<b>_(Browse the Clear Case tree)</b><p>_(Browsing the Clear Case tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.)</p>" ;
 
 	$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
 	// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
@@ -194,8 +192,13 @@ if ($project->enableAnonCVS() || !$anonymous) {
 		if (!$add_num) {
 			$add_num=0;
 		}
-		echo ' (CCase: '.sprintf(_('MISSINGTEXT:project_home/cvs_commits:TEXTMISSING'), number_format($commit_num, 0), number_format($add_num, 0)).")";
-		
+		$commit_count=number_format($commit_num, 0);
+		$add_count=number_format($add_num, 0);
+		echo ' (CCase: <strong>'.$commit_count.'</strong> ';
+		printf(ngettext("commit","commits",$commit_count),$commit_count);
+		echo ', <strong>'.$add_count.'</strong> '; 
+		printf(ngettext("add","adds",$add_count),$add_count);
+		echo ' )';
 	}
 	
         function group_approved ($params) {

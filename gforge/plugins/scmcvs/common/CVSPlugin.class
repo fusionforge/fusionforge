@@ -74,7 +74,7 @@ class CVSPlugin extends SCM {
 		
 		if ($project->usesPlugin($this->name)) {
 		
-			print _('MISSINGTEXT:plugin_scmcvs/documentation:TEXTMISSING');
+			print _('Some CVS documentation is available <a href="http://www.nongnu.org/cvs/">Here</a>');
 
 			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
 			$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
