@@ -278,13 +278,12 @@ if ($project->usesTracker()) {
 if ($project->usesForum()) {
 	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
-	print '&nbsp;'._('Forums').'</a>';
+	print '&nbsp;'._('Forums').'</a> ( ';
 	$forums_count = project_get_public_forum_count($group_id);
 	$messages_count = project_get_public_forum_message_count($group_id);
-	print ' (<strong> ' . $forums_count .'</strong> ';
-	printf(ngettext("public forum","public forums",$forums_count),$forums_count);
-	print ' / <strong> ' . $messages_count .'</strong> ';
-	printf(ngettext("message","messages",$forums_count),$forums_count);
+	printf(ngettext("<strong>%d</strong> public forum","<strong>%d</strong> public forums",$forums_count),$forums_count);
+	print ' / ';
+	printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$forums_count),$forums_count);
 	print ' )' ;
 }
 
