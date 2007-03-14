@@ -278,15 +278,22 @@ if ($project->usesTracker()) {
 if ($project->usesForum()) {
 	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
-	print '&nbsp;'._('Public Forums').'</a>';
+	print '&nbsp;'._('Forums').'</a>';
 	$forums_count = project_get_public_forum_count($group_id);
+	$messages_count = project_get_public_forum_message_count($group_id);
+	print ' (<strong> ' . $forums_count .'</strong> ';
 	if ($forums_count > 1) {
-		$label = 'forum_messages';
+		printf(_("public forums"));
 	} else {
-		$label = 'forum_messages_only_one_forum';
+		printf(_("public forum"));
 	}
-	print " ( ".$Language->getText('project_home',$label,array(project_get_public_forum_message_count($group_id), $forums_count))." ";
-	print ")\n";
+	print ' / <strong> ' . $messages_count .'</strong> ';
+	if ($messages_count > 1) {
+		printf(_("messages"));
+	} else {
+		printf(_("message"));
+	}
+	print ' )' ;
 }
 
 // ##################### Doc Manager
@@ -305,7 +312,7 @@ if ($project->usesMail()) {
 	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/mail/?group_id='.$group_id.'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Lists')));
 	print '&nbsp;'._('Mailing Lists').'</a>';
-	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> "._('public mailing lists').")";
+	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> "._('public mailing lists')." )";
 }
 
 // ##################### Task Manager

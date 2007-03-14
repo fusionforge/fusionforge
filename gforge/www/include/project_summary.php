@@ -41,7 +41,8 @@ function project_getaggvalue($group_id,$type) {
 	if (!$project_agg_arr_is_set) {
 		project_setup_agg($group_id);
 	}
-	if ($project_agg_arr[$type]) {
+	// Remove warning
+	if (@$project_agg_arr[$type]) {
 		return "$project_agg_arr[$type]";
 	} else {
 		return '0';
