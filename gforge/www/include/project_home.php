@@ -282,17 +282,9 @@ if ($project->usesForum()) {
 	$forums_count = project_get_public_forum_count($group_id);
 	$messages_count = project_get_public_forum_message_count($group_id);
 	print ' (<strong> ' . $forums_count .'</strong> ';
-	if ($forums_count > 1) {
-		printf(_("public forums"));
-	} else {
-		printf(_("public forum"));
-	}
+	printf(ngettext("public forum","public forums",$forums_count),$forums_count);
 	print ' / <strong> ' . $messages_count .'</strong> ';
-	if ($messages_count > 1) {
-		printf(_("messages"));
-	} else {
-		printf(_("message"));
-	}
+	printf(ngettext("message","messages",$forums_count),$forums_count);
 	print ' )' ;
 }
 
