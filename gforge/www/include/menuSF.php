@@ -34,13 +34,13 @@
 function menu_site_admin() {
 	global $HTML, $Language, $sys_name;
 	$HTML->menuhtml_top($sys_name." "._('Admin'));
-	$HTML->menu_entry('/admin/',_('MISSINGTEXT:menu/admin_main_page:TEXTMISSING'));
-	$HTML->menu_entry('/admin/grouplist.php',_('MISSINGTEXT:menu/admin_group_list:TEXTMISSING'));
-	$HTML->menu_entry('/admin/userlist.php',_('MISSINGTEXT:menu/admin_user_list:TEXTMISSING'));
-	$HTML->menu_entry('/admin/approve-pending.php',_('MISSINGTEXT:menu/admin_pending_projects:TEXTMISSING'));
-	$HTML->menu_entry('/news/admin/',_('MISSINGTEXT:menu/admin_news_approval:TEXTMISSING'));
-	$HTML->menu_entry('/admin/massmail.php',_('MISSINGTEXT:menu/admin_mass_mail:TEXTMISSING'));
-	$HTML->menu_entry('/people/admin/',_('MISSINGTEXT:menu/admin_people_help_admin:TEXTMISSING'));
+	$HTML->menu_entry('/admin/',_('Site admin'));
+	$HTML->menu_entry('/admin/grouplist.php',_('Group list admin'));
+	$HTML->menu_entry('/admin/userlist.php',_('User list admin'));
+	$HTML->menu_entry('/admin/approve-pending.php',_('Approve pending projects'));
+	$HTML->menu_entry('/news/admin/',_('News admin approval'));
+	$HTML->menu_entry('/admin/massmail.php',_('Massmail admin'));
+	$HTML->menu_entry('/people/admin/',_('People admin'));
 
 	$HTML->menuhtml_bottom();
 

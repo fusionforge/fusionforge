@@ -36,7 +36,7 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_na
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><a href="index.php"><?php echo _('MISSINGTEXT:stats_graph/overview_stats:TEXTMISSING'); ?></a></td>
+<td><a href="index.php"><?php echo _('OVERVIEW STATS'); ?></a></td>
 <td><strong><?php echo _('PROJECT STATS'); ?></strong></td>
 <td><a href="graphs.php"><?php echo _('SITE GRAPHS'); ?></a></td>
 </tr>

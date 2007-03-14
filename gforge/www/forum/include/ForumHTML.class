@@ -64,7 +64,7 @@ function forum_header($params) {
 					exit_no_group();
 				}
 				echo '
-				<strong>'._('MISSINGTEXT:forum_utils/postedby:TEXTMISSING').':</strong> '.$user->getRealName().'<br />
+				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
 				<strong>'._('Project').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />

@@ -80,7 +80,7 @@ if ($group_id) {
 		/*
 			Show the form for adding forums
 		*/
-		forum_header(array('title'=>_('MISSINGTEXT:forum_admin_addforum/title:TEXTMISSING')));
+		forum_header(array('title'=>_('Add forum')));
 
 		echo '
 			<br>

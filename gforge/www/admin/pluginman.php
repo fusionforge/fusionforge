@@ -96,7 +96,7 @@ if (getStringFromRequest('update')) {
 					$feedback .= _('<br>Soft link wasn\'t removed in www/plugins folder, please do so manually.');
 				}
 				if ($result2!=0) {
-					$feedback .= _('MISSINGTEXT:pluginman/successnodeleteconfig:TEXTMISSING');
+					$feedback .= _('Success, config not deleted');
 				}
 			}			
 		}
@@ -134,8 +134,7 @@ if (getStringFromRequest('update')) {
 					$arch = preg_replace('/(INSERT INTO plugins.*$)/','',$arch); // remove the line that inserts into plugins table, we are already doing that (and this would return error otherwise)
 					$res = db_query($arch);
 					if (!$res) {
-						$feedback .= _('MISSINGTEXT:pluginman/successiniterror:TEXTMISSING');
-						$feedback .= '<br>Database said: '.db_error();
+						$feedback .= _('Initialisation error<br>Database said: ').db_error();
 					}
 				}	
 				//we check for a php script	

@@ -74,13 +74,13 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	site_admin_header(array('title'=>_('MISSINGTEXT:admin_massmail/title:TEXTMISSING')));
+	site_admin_header(array('title'=>_('Massmail admin')));
 	print "<p>" ._('Mailing successfully scheduled for delivery'). "</p>";
 	site_admin_footer(array());
 	exit();
 }
 
-site_admin_header(array('title'=>_('MISSINGTEXT:admin_massmail/title:TEXTMISSING')));
+site_admin_header(array('title'=>_('Massmail Admin')));
 
 print '
 <h4>'

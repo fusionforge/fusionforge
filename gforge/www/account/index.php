@@ -104,7 +104,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <p> <?php echo _('Welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
 <p>
 
-<?php echo _('MISSINGTEXT:account_options/intro:TEXTMISSING'); ?>
+<?php echo _('Account options:'); ?>
 </p>
 <ul>
 <li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo _('View My Developer Profile'); ?></strong></a></li>

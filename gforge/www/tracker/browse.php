@@ -164,7 +164,7 @@ $sort_arr[]='DESC';
 //	custom changed arrays to build pop-up box
 //
 $changed_name_arr=array();
-$changed_name_arr[]=_('MISSINGTEXT:tracker_browse/changed_any:TEXTMISSING');
+$changed_name_arr[]=_('Any changes');
 $changed_name_arr[]=_('Last 24H');
 $changed_name_arr[]=_('Last 7days');
 $changed_name_arr[]=_('Last 2weeks');

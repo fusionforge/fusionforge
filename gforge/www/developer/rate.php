@@ -56,7 +56,7 @@ if (!session_loggedin()) {
 			} else {
 				//ratings can only be between +3 and -3
 				if ($rating > 3 || $rating < -3) {
-					$feedback .= _('MISSINGTEXT:developer_rate/invalid_rate_value:TEXTMISSING');
+					$feedback .= _('Invalid rate value');
 				} else {
 					if ($rating) {
 						// get rid of 0.1 thing

@@ -9,7 +9,7 @@
  *
  */
 
-$ath->header(array ('title'=>_('MISSINGTEXT:tracker_mod/delete_title:TEXTMISSING').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
+$ath->header(array ('title'=>_('Delete artifact').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 
 // $atid, $aid and $group_id are set in tracker.php
 

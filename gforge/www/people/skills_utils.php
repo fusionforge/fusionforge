@@ -167,7 +167,7 @@ function handle_multi_edit($skill_ids) {
 				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
 				'<table border="0">'.
 					'<tr class="tableheading">'.
-						'<td>'._('MISSINGTEXT:people_editprofile/title_max_100_chars:TEXTMISSING').'</td>'.
+						'<td>'._('Title (max 100 characters)').'</td>'.
 					'</tr>'.
 					'<tr>'.
 						'<td><input type="hidden" name="skill_edit[]" value="'.db_result($result, $i,'skills_data_id').'" />'.

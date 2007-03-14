@@ -172,7 +172,7 @@ function people_edit_skill_inventory($user_id) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<tr><td colspan="4">'._('MISSINGTEXT:people/no_skill_setupup:TEXTMISSING').'</h2></td></tr>';
+			<tr><td colspan="4">'._('No skill setup').'</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {

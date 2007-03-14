@@ -73,7 +73,7 @@ site_user_header(array('title'=>_('Email Change Complete')));
 <?php echo $Language->getText('account_change_email-complete','confirm', array($u->getUnixName(),$u->getEmail(),'&lt;'.$u->getUnixName().'@'.$GLOBALS['sys_users_host'].'&gt')) ?>
 </p>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo _('MISSINGTEXT:account_change_email/return:TEXTMISSING'); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo _('Return'); ?></a></p>
 
 <?php
 

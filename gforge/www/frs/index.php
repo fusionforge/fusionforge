@@ -34,8 +34,7 @@ $group_id = getIntFromRequest('group_id');
 $cur_group =& group_get_object($group_id);
 
 if (!$cur_group) {
-	exit_error(_('MISSINGTEXT:project_showfiles/no_group_title:TEXTMISSING'),
-		_('MISSINGTEXT:project_showfiles/no_group:TEXTMISSING'));
+	exit_error(_('No group title'), _('No group'));
 }
 
 //

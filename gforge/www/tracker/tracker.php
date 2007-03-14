@@ -264,7 +264,7 @@ switch (getStringFromRequest('func')) {
 
 					$delete_file=false;
 					if ($ah->addMessage($details,$user_email,true)) {
-						$feedback=_('MISSINGTEXT:tracker/comment_added:TEXTMISSING');
+						$feedback=_('Comment added');
 					} else {
 						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
 							//some kind of error in creation
@@ -283,7 +283,7 @@ switch (getStringFromRequest('func')) {
 					$delete_file=false;
 					$add_file=false;
 					if ($ah->addMessage($details,$user_email,true)) {
-						$feedback=_('MISSINGTEXT:tracker/comment_added:TEXTMISSING');
+						$feedback=_('Comment added');
 					} else {
 						//some kind of error in creation
 						exit_error('ERROR',$ah->getErrorMessage());
@@ -319,7 +319,7 @@ switch (getStringFromRequest('func')) {
 						exit_error("Error","Invalid filename");
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-						$feedback .= ' <br />'._('MISSINGTEXT:tracker/file_upload_upload:TEXTMISSING').':'.$afh->getErrorMessage();
+						$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {
 						$feedback .= ' <br />'._('File Upload: Successful');

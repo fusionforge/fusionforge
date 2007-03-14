@@ -80,8 +80,7 @@ if ($typ =='r') {
 	$labels = $report->labels;
 	$data = $report->getData();
 
-	echo $HTML->listTableTop (array(_('MISSINGTEXT:reporting_pa/type:TEXTMISSING'),
-		_('MISSINGTEXT:reporting_pa/time:TEXTMISSING')));
+	echo $HTML->listTableTop (array(_('Type'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
 

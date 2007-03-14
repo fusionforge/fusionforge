@@ -37,7 +37,7 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error(_('Error'),
-		_('MISSINGTEXT:error/error_creating_group:TEXTMISSING'));
+		_('Error creating group'));
 } else if ($group->isError()) {
 	exit_error(_('Error'),
 		$group->getErrorMessage());

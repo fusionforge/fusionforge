@@ -37,7 +37,7 @@ $s = new Survey($g, $survey_id);
 $sh->header(array('title'=>_('Add A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>". _('MISSINGTEXT:survey_add_question/permission_denied:TEXTMISSING')."</h1>";
+	echo "<h1>". _('Permission denied')."</h1>";
 	$sh->footer(array());
 	exit;
 }

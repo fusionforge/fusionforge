@@ -99,7 +99,7 @@
 		<?php if (!$ath->usesCustomStatuses()) { ?>
 		<input type="radio" name="field_type" value="7"> <?php echo _('Status'); ?><br />
 		<?php } ?>
-		<!--<input type="radio" name="field_type" value="8"> <?php echo _('MISSINGTEXT:tracker_admin_build_boxes/box_type_technician:TEXTMISSING'); ?><br />-->
+		<!--<input type="radio" name="field_type" value="8"> <?php echo _('Box type technician'); ?><br />-->
 		<p>
 		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
 		<?php echo _('Text Field Size/Text Area Rows'); ?>
@@ -107,7 +107,7 @@
 		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
 			<input type="text" name="attribute2" value="0" size="2" maxlength="2">
 		<p>
-		<span class="warning"><?php echo _('MISSINGTEXT:tracker_admin_build_boxes/box_warning:TEXTMISSING') ?></span></p>
+		<span class="warning"><?php echo _('Warning: this add new custom field') ?></span></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form></p>

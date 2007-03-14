@@ -35,7 +35,7 @@ $survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>_('Add A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>". _('MISSINGTEXT:survey_add_question/permission_denied:TEXTMISSING')."</h1>";
+	echo "<h1>". _('Permission denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -45,14 +45,14 @@ if (getStringFromRequest('post_changes')) {
 	$survey_questions = getStringFromRequest('survey_questions');
 
 	if (!$survey_title) {
-		$feedback .= _('MISSINGTEXT:survey_add_question/title_is_required:TEXTMISSING');
+		$feedback .= _('Title required');
 	} else {
 		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
 		$result=db_query($sql);
 		if ($result) {
-			$feedback .= _('MISSINGTEXT:survey_add_question/survey_inserted:TEXTMISSING');
+			$feedback .= _('Question inserted');
 		} else {
-			$feedback .= _('MISSINGTEXT:survey_add_question/error_in_insert:TEXTMISSING');
+			$feedback .= _('Question insert failed');
 		}
 	}
 }

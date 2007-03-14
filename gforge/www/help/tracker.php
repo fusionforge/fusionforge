@@ -44,10 +44,10 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 			print( _('This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to \'Pending\' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of \'Open\'. Otherwise, if the author doesn\'t respond with an admin-defined amount of time (default is 14 days) then the item is given a status of \'Deleted\'.'));
 			break;
 		case 'category':
-			print( _('MISSINGTEXT:help_tracker/category:TEXTMISSING'));
+			print( _('Tracker category'));
 			break;
 		case 'group':
-			print(  _('MISSINGTEXT:help_tracker/group:TEXTMISSING'));
+			print(  _('Tracker group'));
 			break;
 		case 'sort_by':
 			print( _('The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.'));
@@ -59,7 +59,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 			print( _('The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.'));
 			break;
 		case 'resolution':
-			print( _('MISSINGTEXT:help_tracker/resolution:TEXTMISSING'));
+			print( _('Resolution'));
 			break;
 		case 'summary':
 			print( _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.'));
@@ -68,7 +68,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 			print( _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the \'(admin)\' link to define your own canned responses'));
 			break;
 		case 'comment':
-			print( _('MISSINGTEXT:help_tracker/comment:TEXTMISSING'));
+			print( _('Comment'));
 			break;
 		case 'attach_file':
 			print( _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.'));

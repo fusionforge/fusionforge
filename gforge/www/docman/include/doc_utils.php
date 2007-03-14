@@ -230,7 +230,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							"<a href=\"".$link."\" title=\"$tooltip\">".
 							$docs[$j]->getName().
 							"</a> - " . $tooltip . "</li>".
-							"(".$docs[$j]->getFileSize()." "._('MISSINGTEXT:docman/bytes:TEXTMISSING').")";
+							"(".$docs[$j]->getFileSize()." "._('bytes').")";
 							//add description
 							echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							echo "<i>".$docs[$j]->getDescription()."</i>";

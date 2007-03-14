@@ -80,7 +80,7 @@ if ($group_id) {
 			)) {
 				exit_error(_('Error'), $mailingList->getErrorMessage());
 			} else {
-				$feedback .= _('MISSINGTEXT:mail_admin_updatelist/list_updated:TEXTMISSING');
+				$feedback .= _('List updated');
 			}
 		}
 
@@ -164,7 +164,7 @@ if ($group_id) {
 		}
    	
 		mail_header(array(
-			'title' => _('MISSINGTEXT:mail_admin_updatelist/pagetitle:TEXTMISSING')));
+			'title' => _('Mail admin')));
 		?>
 		<h3><?php echo $mailingList->getName(); ?></h3>
 		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">

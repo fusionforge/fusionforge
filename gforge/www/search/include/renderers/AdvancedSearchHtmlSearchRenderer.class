@@ -73,7 +73,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */		
 	function writeHeader() {
-		site_project_header(array('title' => _('MISSINGTEXT:advanced_search/project_search:TEXTMISSING'), 'group' => $this->groupId, ));
+		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, ));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 		
@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<br><h1>'._('MISSINGTEXT:advanced_search/error_search_minlength:TEXTMISSING').'<h1><br>';
+			echo '<br><h1>'._('Error: Under min length search').'<h1><br>';
 		} else {
 			echo $this->getResult();
 		}

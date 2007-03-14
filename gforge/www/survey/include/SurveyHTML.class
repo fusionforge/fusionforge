@@ -453,7 +453,7 @@ class SurveyHTML extends Error {
 		global $survey_id;
 		
 		if (!$s->isActive()) {
-			return '<span class="error">'. _('MISSINGTEXT:survey_error/no_vote_for_inactive:TEXTMISSING').'</span>';
+			return '<span class="error">'. _('Error - you can't vote for inactive survey').'</span>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();

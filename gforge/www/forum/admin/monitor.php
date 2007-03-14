@@ -42,7 +42,7 @@ if (!$f || !is_object($f)) {
 	exit_permission_denied();
 }
 
-forum_header(array('title'=>_('MISSINGTEXT:forum_admin_addforum/title:TEXTMISSING')));
+forum_header(array('title'=>_('Add forum')));
 
 $sql="select users.user_id,users.user_name, users.email, users.realname from
 users,forum_monitored_forums fmf where fmf.user_id=users.user_id and

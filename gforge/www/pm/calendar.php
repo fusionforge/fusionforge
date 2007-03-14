@@ -24,30 +24,30 @@ $type = getStringFromRequest('type');
 
 // Some sanity checks first.
 if ($year && ($year < 1990 || $year > 2020)) {
-	exit_error(_('MISSINGTEXT:calendar/invalidyear:TEXTMISSING'),
-		   _('MISSINGTEXT:calendar/invalidyearexplain:TEXTMISSING'));
+	exit_error(_('Invalid year'),
+		   _('Not between 1990 and 2000'));
 }
 
 if ($month && ($month < 1 || $month > 12)) {
-	exit_error(_('MISSINGTEXT:calendar/invalidmonth:TEXTMISSING'),
-		   _('MISSINGTEXT:calendar/invalidmonthexplain:TEXTMISSING'));
+	exit_error(_('Invalid month'),
+		   _('Not between 1 and 12'));
 }
 
 if ($day && ($day < 1 || $day > 31)) {
-	exit_error(_('MISSINGTEXT:calendar/invalidday:TEXTMISSING'),
-		   _('MISSINGTEXT:calendar/invaliddayexplain:TEXTMISSING'));
+	exit_error(_('Invalid day'),
+		   _('Not between 1 and 31'));
 }
 
 if ($year && isset($month) && isset($day)) {
 	if (!checkdate($month, $day, $year)) {
-		exit_error(_('MISSINGTEXT:calendar/invaliddate:TEXTMISSING'),
-			   sprintf(_('MISSINGTEXT:calendar/invaliddateexplain:TEXTMISSING'), "$year-$month-$day"));
+		exit_error(_('Invalid date'),
+			   sprintf(_('Date not valid'), "$year-$month-$day"));
 	}
 }
 
 if ($type && $type != 'onemonth' && $type != 'threemonth' && $type != 'currentyear' && $type != 'comingyear') {
-	exit_error(_('MISSINGTEXT:calendar/invalidtype:TEXTMISSING'),
-		   _('MISSINGTEXT:calendar/invalidtypeexplain:TEXTMISSING'));
+	exit_error(_('Invalid type'),
+		   _('Type not in onemonth, threemonth, currentyear, comingyear'));
 }
 
 // Fill in defaults
@@ -110,7 +110,7 @@ if ($group_id && $group_project_id) {
 	}
 }
 
-$HTML->header(array('title'=>_('MISSINGTEXT:calendar/title:TEXTMISSING'),'group'=>$group_id));
+$HTML->header(array('title'=>_('Calendar'),'group'=>$group_id));
 
 /**
  * Create link to a task.
@@ -237,21 +237,21 @@ function display_month($m, $y) {
 	<form action="/pm/calendar.php" method="get">
 	<table width="100%">
 		<tr>
-			<td><?php echo _('MISSINGTEXT:calendar/view:TEXTMISSING'); ?><br />
+			<td><?php echo _('Period'); ?><br />
 				<select name="type">
 <?php
 	print '
-				<option value="onemonth"' . ($type == 'onemonth' ? ' selected="selected"' : '') . '>'. _('MISSINGTEXT:calendar/onemonth:TEXTMISSING') . '</option>';
+				<option value="onemonth"' . ($type == 'onemonth' ? ' selected="selected"' : '') . '>'. _('One month') . '</option>';
 	print '
-				<option value="threemonth"' . ($type == 'threemonth' ? ' selected="selected"' : '') . '>'. _('MISSINGTEXT:calendar/threemonth:TEXTMISSING') . '</option>';
+				<option value="threemonth"' . ($type == 'threemonth' ? ' selected="selected"' : '') . '>'. _('Three month') . '</option>';
 	print '
-				<option value="currentyear"' . ($type == 'currentyear' ? ' selected="selected"' : '') . '>' . _('MISSINGTEXT:calendar/currentyear:TEXTMISSING') . '</option>';
+				<option value="currentyear"' . ($type == 'currentyear' ? ' selected="selected"' : '') . '>' . _('Current year') . '</option>';
 	print '
-				<option value="comingyear"' . ($type == 'comingyear' ? ' selected="selected"' : '') . '>' . _('MISSINGTEXT:calendar/comingyear:TEXTMISSING') . '</option>';
+				<option value="comingyear"' . ($type == 'comingyear' ? ' selected="selected"' : '') . '>' . _('Coming year') . '</option>';
 ?>
 				</select>
 			</td>
-			<td><?php echo _('MISSINGTEXT:calendar/fordate:TEXTMISSING'); ?><br />
+			<td><?php echo _('Date'); ?><br />
 				<select name="year">
 <?php
 
@@ -276,7 +276,7 @@ function display_month($m, $y) {
 				</select>
 			</td>
 			<td>
-				<input type="submit" value="<?php echo _('MISSINGTEXT:calendar/update:TEXTMISSING') ?>" />
+				<input type="submit" value="<?php echo _('Update') ?>" />
 			</td>
 		</tr>
 	</table>
@@ -292,11 +292,11 @@ function display_month($m, $y) {
 	<table width="100%">
 		<tr>
 			<td width="20px" class="selected"></td>
-			<td><?php echo _('MISSINGTEXT:calendar/todaysdate:TEXTMISSING') ?></td>
+			<td><?php echo _('today\'s date') ?></td>
 		</tr>
 		<tr>
 			<td width="20px"></td>
-			<td><?php echo _('MISSINGTEXT:calendar/selecteddate:TEXTMISSING') ?></td>
+			<td><?php echo _('selected date') ?></td>
 		</tr>
 	</table>
 <?php

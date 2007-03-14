@@ -417,7 +417,7 @@ class ForumAdmin extends Error {
 							break;
 						}
 						db_commit();
-						$feedback .= _('MISSINGTEXT:forum_admin_pending/deleted_ok:TEXTMISSING');
+						$feedback .= _('Forum deleted');
 						break;
 					}
 					case 3 : { 
@@ -456,7 +456,7 @@ class ForumAdmin extends Error {
 						$has_followups = db_result($res1,0,"has_followups");
 						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
-							$feedback .= "( $subject ) " . _('MISSINGTEXT:forum_admin_pending/released_ok:TEXTMISSING') . "<br>";
+							$feedback .= "( $subject ) " . _('Pending forum released') . "<br>";
 							if (db_numrows($res2)>0) {
 								//if there´s an attachment
 								$am = NEW AttachManager();//object that will handle and insert the attachment into the db

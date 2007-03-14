@@ -77,7 +77,7 @@
 	);
 
 	if (!$at_arr || count($at_arr) < 1) {
-		echo "<h1>"._('MISSINGTEXT:tracker_admin/no_trackers_found:TEXTMISSING')."</h1>";
+		echo "<h1>"._('No trackers found')."</h1>";
 		echo "<p>&nbsp;</p>";
 	} else {
 

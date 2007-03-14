@@ -95,7 +95,7 @@ echo($sh->showAddQuestionForm($sq));
 $sqf = new SurveyQuestionFactory($g);
 $sqs = & $sqf->getSurveyQuestions();
 if (!$sqs) {
-    echo (_('MISSINGTEXT:survey_error/no_questions_found:TEXTMISSING'));
+    echo (_('No questions found'));
 } else {
     echo($sh->showQuestions($sqs));
 }

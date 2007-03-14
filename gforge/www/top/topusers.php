@@ -57,9 +57,9 @@ if (!$res_top || db_numrows($res_top)<1) {
 	);
 }
 
-$HTML->header(array('title'=>_('MISSINGTEXT:top_topusers/title:TEXTMISSING')));
+$HTML->header(array('title'=>_('Top users')));
 
-print '<h1>'._('MISSINGTEXT:top_topusers/title:TEXTMISSING').'</h1>
+print '<h1>'._('Top users').'</h1>
 <br /><em>('._('Updated Daily').')</em>
 
 <p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a></p>';

@@ -185,7 +185,7 @@ function show_grouphistory ($group_id) {
 
 	} else {
 		echo '  
-		<h3>'._('MISSINGTEXT:project_admin_utils/no_changes:TEXTMISSING').'</h3>';
+		<h3>'._('No changes').'</h3>';
 	}	   
 }	   
 

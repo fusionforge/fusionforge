@@ -64,7 +64,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr=array();
 	$title_arr[]= _('Snippet ID');
 	$title_arr[]= _('Title');
-	$title_arr[]= _('MISSINGTEXT:snippet_browse/Creator:TEXTMISSING');
+	$title_arr[]= _('Creator');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 

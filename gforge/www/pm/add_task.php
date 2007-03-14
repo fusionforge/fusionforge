@@ -114,7 +114,7 @@ echo notepad_func();
 		<?php
 		echo $pt->multipleDependBox();
 		?><br />
-		<?php echo _('MISSINGTEXT:pm_addtask/dependent_note:TEXTMISSING') ?>
+		<?php echo _('Dependent note') ?>
 		</td>
 	</tr>
 

@@ -301,7 +301,7 @@ if (session_loggedin()) {
 				"<table border=0 >";
 
 				$cell_data = array();
-				$cell_data[] = array(_('MISSINGTEXT:people_editprofile/title_max_100_chars:TEXTMISSING'));
+				$cell_data[] = array(_('Title (max 100 characters)'));
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
 
 				echo "<tr>".

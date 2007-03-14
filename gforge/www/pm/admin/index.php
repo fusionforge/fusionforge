@@ -280,7 +280,7 @@ if ($add_cat && $group_project_id) {
 		exit_permission_denied();
 	}
 
-	pm_header(array ('title'=>_('MISSINGTEXT:pm_admin_projects/add_subprojects_title:TEXTMISSING')));
+	pm_header(array ('title'=>_('Add a new project')));
 
 	?>
 	<p><?php echo _('Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>') ?></p>

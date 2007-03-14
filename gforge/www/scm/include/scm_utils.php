@@ -50,7 +50,7 @@ function scm_header($params) {
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 				echo $HTML->subMenu(
 				array(
-					_('MISSINGTEXT:scm_index/title:TEXTMISSING'),
+					_('SCM'),
 					_('Admin'),
 					_('Reporting')
 				),

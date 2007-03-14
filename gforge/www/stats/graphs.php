@@ -28,7 +28,7 @@ print '<h3>'._('Sitewide Statistics Graphs').'</h3><br />' . "\n";
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><a href="index.php"><?php echo _('MISSINGTEXT:stats_graph/overview_stats:TEXTMISSING'); ?></a></td>
+<td><a href="index.php"><?php echo _('OVERVIEW STATS'); ?></a></td>
 <td><a href="projects.php"><?php echo _('PROJECT STATS'); ?></a></td>
 <td><strong><?php echo _('SITE GRAPHS'); ?></strong></td>
 </tr>

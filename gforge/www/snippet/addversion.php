@@ -67,7 +67,7 @@ if (session_loggedin()) {
 			}
 
 		}
-		snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/submit_a_new_snippet_version:TEXTMISSING')));
+		snippet_header(array('title'=>_('New snippet version')));
 
 		?>
 		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
@@ -139,7 +139,7 @@ if (session_loggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');
-					snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/title_submit_a_new_snippet_package:TEXTMISSING')));
+					snippet_header(array('title'=>_('New snippet package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -150,7 +150,7 @@ if (session_loggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>_('MISSINGTEXT:snippet_addversion/title_add_snippet_to_package:TEXTMISSING')));
+					snippet_header(array('title'=>_('Add snippet to package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -189,7 +189,7 @@ function show_add_snippet_box() {
 			}
 
 		}
-		snippet_header(array('title'=>_('MISSINGTEXT:snippet_addverion/title_submit_a_new_snippet_version:TEXTMISSING')));
+		snippet_header(array('title'=>_('New snippet version')));
 
 		?>
 		</p>
