@@ -125,7 +125,7 @@ class ForumFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result) {
-			$this->setError(_('MISSINGTEXT:forum_common_forumfactory/error_no_forums_found:TEXTMISSING').db_error());
+			$this->setError(_('Forum not found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

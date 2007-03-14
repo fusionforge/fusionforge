@@ -79,7 +79,7 @@ class SurveyResponseFactory extends Error {
 			return false;
 		}
 		if ($Survey->isError()) {
-			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Survey->getErrorMessage());
+			$this->setError(_('Survey').':: '.$Survey->getErrorMessage());
 			return false;
 		}
 		if (!$Question || !is_object($Question)) {
@@ -87,7 +87,7 @@ class SurveyResponseFactory extends Error {
 			return false;
 		}
 		if ($Question->isError()) {
-			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Question->getErrorMessage());
+			$this->setError(_('Survey').':: '.$Question->getErrorMessage());
 			return false;
 		}
 

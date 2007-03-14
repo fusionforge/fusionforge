@@ -212,7 +212,7 @@ class Forum extends Error {
 			WHERE group_forum_id='$group_forum_id'
 			AND group_id='". $this->Group->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('MISSINGTEXT:forum_common/error_invalid_group_forum_id:TEXTMISSING'));
+			$this->setError(_('Invalid forum group identifier'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

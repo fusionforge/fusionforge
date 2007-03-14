@@ -180,7 +180,7 @@ class SurveyQuestion extends Error {
  
 		$res=db_query($sql);
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('MISSINGTEXT:survey_edit_question/delete_failed:TEXTMISSING').db_error());
+			$this->setError(_('Delete failed').db_error());
 			return false;
 		}
 

@@ -229,7 +229,7 @@ class User extends Error {
 		$unix_box='shell',$address='',$address2='',$phone='',$fax='',$title='',$ccode='US',$send_mail=true) {
 		global $Language;
 		if (!$theme_id) {
-			$this->setError(_('MISSINGTEXT:account_register/err_themeid:TEXTMISSING'));
+			$this->setError(_('You must supply a theme'));
 			return false;
 		}
 		if (!$unix_name) {

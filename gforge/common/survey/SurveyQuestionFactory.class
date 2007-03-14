@@ -63,7 +63,7 @@ class SurveyQuestionFactory extends Error {
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError(_('MISSINGTEXT:survey/survey:TEXTMISSING').':: '.$Group->getErrorMessage());
+			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
