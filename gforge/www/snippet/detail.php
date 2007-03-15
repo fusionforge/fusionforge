@@ -48,7 +48,7 @@ if ($type=='snippet') {
 		echo '<h3>' ._('Error - no versions found').'</h3>';
 	} else {
 		echo '
-		<h3>' ._('Versions Of This Snippet:').':</h3>
+		<h3>' ._('Versions Of This Snippet:').'</h3>
 		<p>';
 		$title_arr=array();
 		$title_arr[]= _('Snippet ID');
@@ -64,8 +64,6 @@ if ($type=='snippet') {
 		*/
 		$newest_version=db_result($result,0,'snippet_version_id');
 	
-		echo $GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname'));
-
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
@@ -80,7 +78,7 @@ if ($type=='snippet') {
 
 				if ($i != ($rows - 1)) {
 					echo '
-					<tr'.$row_color.'><td colspan="5">' ._('Changes since last version:').':<br />'.
+					<tr'.$row_color.'><td colspan="5">' ._('Changes since last version:').'<br />'.
 					nl2br(db_result($result,$i,'changes')).'</td></tr>';
 				}
 		}
@@ -99,7 +97,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>'._('Latest Snippet Version:').' :'.db_result($result,0,'version').'</h2>
+		<h2>'._('Latest Snippet Version: ').db_result($result,0,'version').'</h2>
 		<p>
 		<span class="snippet-detail">'. db_result($result,0,'code') .'
 		</span>
@@ -142,7 +140,7 @@ if ($type=='snippet') {
 		echo '<h3>' ._('Error - no versions found').'</h3>';
 	} else {
 		echo '
-		<h3>' ._('Versions Of This Package:').':</h3>
+		<h3>' ._('Versions Of This Package:').'</h3>
 		<p>';
 		$title_arr=array();
 		$title_arr[]= _('Package Version');
@@ -188,7 +186,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>' ._('Latest Package Version:').' : '.db_result($result,0,'version').'</h2>
+		<h2>' ._('Latest Package Version: ').db_result($result,0,'version').'</h2>
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>';
 	snippet_show_package_snippets($newest_version);

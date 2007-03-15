@@ -32,7 +32,7 @@ $atid = getIntFromRequest('atid');
 
 //if the ATID and GID are not provided, but
 //the artifact_id is, then fetch the other vars
-if ($aid && (!$group_id && !$atid)) {
+if ($aid && (!$group_id || !$atid)) {
 	$a =& artifact_get_object($aid);
 	if (!$a || !is_object($a) || $a->isError()) {
 		exit_error('Error','Could Not Get Artifact Object');

@@ -34,6 +34,10 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('include/ForumHTML.class');
 
+if (!session_loggedin()) {
+	exit_not_logged_in();	
+}
+
 /**
 	 *  goodbye - Just prints a message and a close button.
 	 *
@@ -50,8 +54,6 @@ function goodbye($msg) {
 	/*echo "<center>" . $msg . "</center><p>";
 	die ('<center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>');*/
 }
-
-
 
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
@@ -84,7 +86,7 @@ if ($delete == "yes") {
 		exit_not_logged_in();//only logged users can delete attachments
 	}
 	//only the user that created the attach  or forum admin can delete it (safecheck)
-	if (!$pending){ //pending messages aren�t deleted from this page
+	if (!$pending) { //pending messages aren't deleted from this page
 		$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
 	}
 	$res = db_query($sql);
@@ -110,7 +112,7 @@ if ($edit=="yes") {
 		exit_not_logged_in();//only logged users can edit attachments
 	}
 	//only the user that created the attach  or forum admin can edit it (safecheck)
-	if (!$pending){ //pending messages aren�t deleted from this page
+	if (!$pending) { //pending messages aren't deleted from this page
 		$sql1 = "SELECT filename FROM forum_attachment WHERE attachmentid='$attachid'";
 		$sql2 = "SELECT posted_by FROM forum WHERE msg_id='$msg_id'";
 	}
@@ -182,9 +184,9 @@ if (!$attachid) {
 }
 
 if ($pending=="yes") {
-	$sql = "SELECT  * FROM forum_pending_attachment where attachmentid='$attachid'";
+	$sql = "SELECT * FROM forum_pending_attachment where attachmentid='$attachid'";
 } else {
-	$sql = "SELECT  * FROM forum_attachment where attachmentid='$attachid'";
+	$sql = "SELECT * FROM forum_attachment where attachmentid='$attachid'";
 }
 $res = db_query($sql);
 if ( (!$res) ) {
@@ -203,26 +205,15 @@ header('Expires: ' . gmdate("D, d M Y H:i:s", time() + 31536000) . ' GMT');
 header('Last-Modified: ' . $last . ' GMT');
 header('ETag: "' . db_result($res,0,'attachmentid') . '"');
 
-if ($extension != 'txt') {
-	header("Content-disposition: inline; filename=\"" . db_result($res,0,'filename') . "\"");
-	header('Content-transfer-encoding: binary');
-}	else {
-	header("Content-disposition: attachment; filename=\"" . db_result($res,0,'filename') . "\"");
-}
-
+header('Content-disposition: attachment; filename="' . db_result($res,0,'filename') . '"');
 header('Content-Length: ' . db_result($res,0,'filesize') );
 
-
 $mimetype = db_result($res,0,'mimetype');
-if (is_array($mimetype))
-{
-	foreach ($mimetype AS $index => $header) {
-		header($header);
-	}
-}	else {
-	header('Content-type: unknown/unknown');
+if ($mimetype) {
+	header('Content-type: '.$mimetype);
+} else {
+	header('Content-type: application/octet-stream');
 }
-
 
 $filedata = base64_decode(db_result($res,0,'filedata'));
 for ($i = 0; $i < strlen($filedata); $i = $i+100) {
@@ -232,7 +223,7 @@ for ($i = 0; $i < strlen($filedata); $i = $i+100) {
 
 flush();
 //increase the attach count
-if (!$pending) { //we don�t care for the pending attach counter, it�s just for administrative purposes
+if (!$pending) { //we don't care for the pending attach counter, it's just for administrative purposes
 	db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
 }
 

@@ -86,7 +86,7 @@ if(!$is_public) {
 
 $filepath=$sys_upload_dir.'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$File->getName();
 if (file_exists($filepath)) {
-	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
+	Header('Content-disposition: attachment; filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/binary");
 	$length = filesize($filepath);
 	Header("Content-length: $length");

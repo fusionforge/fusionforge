@@ -211,7 +211,7 @@ if ($editdoc && $docid) {
 		</td>
 	</tr>
 
-	<?
+	<?php
 
 	if ((!$d->isURL()) && ($d->isText())) {
 		echo '<tr>
@@ -231,7 +231,7 @@ if ($editdoc && $docid) {
 		}
 		if (!$GLOBALS['editor_was_set_up']) {
 		*/
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $d->getFileData()  .'</textarea><br />';
 			echo '<input type="hidden" name="filetype" value="text/plain">';
 		/*

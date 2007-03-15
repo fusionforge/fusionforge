@@ -76,6 +76,25 @@ $SCRIPT_LANGUAGE[14] = 'JavaScript';
 $SCRIPT_LANGUAGE[15] = 'SQL';
 $SCRIPT_LANGUAGE[16] = 'C#';
 
+$SCRIPT_EXTENSION = array();
+$SCRIPT_EXTENSION[0] = '.txt';
+$SCRIPT_EXTENSION[1] = '.txt';
+$SCRIPT_EXTENSION[2] = '.c';
+$SCRIPT_EXTENSION[3] = '.cpp';
+$SCRIPT_EXTENSION[4] = '.pl';
+$SCRIPT_EXTENSION[5] = '.php';
+$SCRIPT_EXTENSION[6] = '.py';
+$SCRIPT_EXTENSION[7] = '.sh';
+$SCRIPT_EXTENSION[8] = '.java';
+$SCRIPT_EXTENSION[9] = '.as';
+$SCRIPT_EXTENSION[10] = '.vb';
+$SCRIPT_EXTENSION[11] = '.tcl';
+$SCRIPT_EXTENSION[12] = '.lisp';
+$SCRIPT_EXTENSION[13] = '.txt';
+$SCRIPT_EXTENSION[14] = '.js';
+$SCRIPT_EXTENSION[15] = '.sql';
+$SCRIPT_EXTENSION[16] = '.cs';
+
 function snippet_header($params) {
 	global $HTML, $Language, $sys_use_snippet;
 
