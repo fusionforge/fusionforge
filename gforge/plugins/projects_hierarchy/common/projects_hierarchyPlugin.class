@@ -137,7 +137,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo "<img src=\"themes/gforge/images/ic/forum20g.png\" border=\"0\">&nbsp;"._('Parent project').": <a href=\"/projects/".$row['unix_group_name']."\">" . $row['group_name'] . "</a><br/>";
+				echo '<img src="'.$GLOBALS['sys_urlprefix'].'/themes/gforge/images/ic/forum20g.png" border="0">&nbsp;'._('Parent project').': <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'">' . $row['group_name'] . '</a><br/>';
 				$cpt_project ++;
 			}
 			
@@ -150,7 +150,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo "<img src=\"themes/gforge/images/ic/forum20g.png\" border=\"0\">&nbsp;"._('Child project')." : <a href=\"/projects/".$row['unix_group_name']."\">" . $row['group_name'] . "</a> : ".$row['com']."<br/>";
+				echo '<img src="'.$GLOBALS['sys_urlprefix'].'/themes/gforge/images/ic/forum20g.png" border="0">&nbsp;'._('Child project').' : <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
 				$cpt_project ++;
 			}
 			
