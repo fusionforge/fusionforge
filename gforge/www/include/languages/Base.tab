@@ -869,7 +869,7 @@ frs_file	error_already_exists	That filename already exists in this project space
 frs_file	error_cannot_move	File cannot be moved to the permanent location
 frs_file	error_invalid_file	FRSFile Appears to be invalid
 frs_file	error_min_name_length	FRSFile Name Must Be At Least 3 Characters
-frs_file	error_name_format	Filename can only be alphanumeric and "-" "_" "." characters.
+frs_file	error_name_format	Filename can only be alphanumeric and "-" "+" "_" "." characters.
 frs_package	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
 frs_package	error_name_format	FRSPackage::Update: Package Name can only be alphanumeric
 frs_package	error_set_monitor	You Can Only Monitor If You Are Logged In
@@ -1002,7 +1002,7 @@ mail	external_administration	Subscribe/Unsubscribe/Preferences
 mail	help_to_request	Project administrators use the admin link to request mailing lists.
 mail	mailinglists_for	Mailing Lists for $1
 mail	no_list_found	No Lists found for $1
-mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.list.org/">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>
+mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.gnu.org/software/mailman">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>
 mail	unable_to_get_lists	Unable to get the lists
 mail_admin_deletelist	title	Permanently Delete List
 mail_admin_deletelist	confirmdelete	Confirm Delete

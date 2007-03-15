@@ -42,7 +42,7 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 function printSelection($checked,$pluginpath) {
 	global $Language,$feedback;
 	
-	$config_files = array(); // array that´ll have the config files
+	$config_files = array(); // array that'll have the config files
 	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
@@ -150,7 +150,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','nowrite');
 		}
 	} else {
-		// say couldn´t open
+		// say couldn't open
 		$feedback .= $Language->getText('configman','notopenfile');
 	}
 }
@@ -194,8 +194,8 @@ function updateVars($vars,$filepath) {
 				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
 				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td>'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
-			 	'<td><div align="center">'. '<input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '>' .'</div></td></tr>';
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '></td></tr>';
 			 	$j++;
 			}
 			echo $HTML->listTableBottom();
@@ -207,7 +207,7 @@ function updateVars($vars,$filepath) {
 			$feedback .= $Language->getText('configman','notopenfile');
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later we´ll update something else, for now it´s local.inc
+		updateVars(getArrayFromRequest('attributes'),'/etc/gforge/local.inc'); // perhaps later weï¿½ll update something else, for now itï¿½s local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
@@ -221,7 +221,7 @@ function updateVars($vars,$filepath) {
 				$feedback .= $Language->getText('configman','nowrite');
 			}
 		} else {
-			// say couldn´t open
+			// say couldn't open
 			$feedback .= $Language->getText('configman','notopenfile');
 		}*/
 	}
