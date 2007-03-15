@@ -47,7 +47,7 @@ if ($type=='snippet') {
 		echo '<h3>' .$Language->getText('snippet_detail','error_no_version_found').'</h3>';
 	} else {
 		echo '
-		<h3>' .$Language->getText('snippet_detail','version_of_this_snippet').':</h3>
+		<h3>' .$Language->getText('snippet_detail','version_of_this_snippet').'</h3>
 		<p>';
 		$title_arr=array();
 		$title_arr[]= $Language->getText('snippet_detail','snippet_id');
@@ -63,8 +63,6 @@ if ($type=='snippet') {
 		*/
 		$newest_version=db_result($result,0,'snippet_version_id');
 	
-		echo $GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname'));
-
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
@@ -79,7 +77,7 @@ if ($type=='snippet') {
 
 				if ($i != ($rows - 1)) {
 					echo '
-					<tr'.$row_color.'><td colspan="5">' .$Language->getText('snippet_detail','changes_since_last_version').':<br />'.
+					<tr'.$row_color.'><td colspan="5">' .$Language->getText('snippet_detail','changes_since_last_version').'<br />'.
 					nl2br(db_result($result,$i,'changes')).'</td></tr>';
 				}
 		}
@@ -98,7 +96,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>'.$Language->getText('snippet_detail','latest_snippet_version').' :'.db_result($result,0,'version').'</h2>
+		<h2>'.$Language->getText('snippet_detail','latest_snippet_version').' '.db_result($result,0,'version').'</h2>
 		<p>
 		<span class="snippet-detail">'. db_result($result,0,'code') .'
 		</span>
@@ -141,7 +139,7 @@ if ($type=='snippet') {
 		echo '<h3>' .$Language->getText('snippet_detail','error_no_version_found').'</h3>';
 	} else {
 		echo '
-		<h3>' .$Language->getText('snippet_detail','version_of_this_package').':</h3>
+		<h3>' .$Language->getText('snippet_detail','version_of_this_package').'</h3>
 		<p>';
 		$title_arr=array();
 		$title_arr[]= $Language->getText('snippet_detail','package_version');
@@ -187,7 +185,7 @@ if ($type=='snippet') {
 	echo '
 		<p>&nbsp;</p>
 		<hr />
-		<h2>' .$Language->getText('snippet_detail','latest_package_version').' : '.db_result($result,0,'version').'</h2>
+		<h2>' .$Language->getText('snippet_detail','latest_package_version').' '.db_result($result,0,'version').'</h2>
 		<p>&nbsp;</p>
 		<p>&nbsp;</p>';
 	snippet_show_package_snippets($newest_version);

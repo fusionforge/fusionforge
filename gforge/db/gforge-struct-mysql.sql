@@ -2403,17 +2403,18 @@ CREATE TABLE IF NOT EXISTS `form_keys` (
 
 
 CREATE TABLE IF NOT EXISTS `forum_attachment` (
-    attachmentid int(11) NOT NULL,
-    userid int(11) default 100 NOT NULL,
-    dateline int(11) default 0 NOT NULL,
-    filename character varying(100) DEFAULT '' NOT NULL,
-    filedata text NOT NULL,
-    visible smallint default 0 NOT NULL,
-    counter smallint default 0 NOT NULL,
-    filesize int(11) default 0 NOT NULL,
-    msg_id int(11) default 0 NOT NULL,
-    filehash character varying(32) DEFAULT '' NOT NULL,
-	PRIMARY KEY  (`attachmentid`)
+    attachmentid INT(11) NOT NULL AUTO_INCREMENT,
+    userid INT(11) default 100 NOT NULL,
+    dateline INT(11) default 0 NOT NULL,
+    filename VARCHAR(100) DEFAULT '' NOT NULL,
+    filedata LONGBLOB NOT NULL,
+    visible SMALLINT default 0 NOT NULL,
+    counter SMALLINT default 0 NOT NULL,
+    filesize INT(11) default 0 NOT NULL,
+    msg_id INT(11) default 0 NOT NULL,
+    filehash VARCHAR(32) DEFAULT '' NOT NULL,
+    mimetype VARCHAR(255) DEFAULT '' NOT NULL,
+    PRIMARY KEY  (`attachmentid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 

@@ -242,7 +242,7 @@ class AttachManager extends Error {
 			$user_id = user_getid();
 		}
 		
-		
+		$id = 0;
 			
 		if ($this->ForumMsg->isPending()) {
 			if ($update) {
