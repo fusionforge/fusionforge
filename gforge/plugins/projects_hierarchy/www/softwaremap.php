@@ -15,7 +15,7 @@ session_start();
 require_once('../../env.inc.php');    
 require_once('pre.php');    
 require_once('www/include/trove.php');
-require_once('../../../www/docman/include/doc_utils.php');
+require_once('www/docman/include/doc_utils.php');
 
 if (!$sys_use_trove) {
 	exit_disabled();
@@ -55,7 +55,7 @@ $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 <?php
 //fin rajout
 
-print "<b><a href=\"./softwaremap.php?cat=c\">"._('By Category')."</a> | <a href=\"./softwaremap.php?cat=t\">"._('By Tree')."</a></b>";
+print '<b><a href="./softwaremap.php?cat=c">'._('By Category').'</a> | <a href="./softwaremap.php?cat=t">'._('By Tree').'</a></b>';
 
 echo'
 	<hr />';
@@ -305,8 +305,8 @@ if($_SESSION['cat'] != 't'){
 		
 			if ($row_grp && $viewthisrow) {
 				print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2"><span style="font-family:arial,helvetica">';
-				print "$i_proj. <a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
-					.htmlspecialchars($row_grp['group_name'])."</strong></a> ";
+				print '$i_proj. <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower($row_grp['unix_group_name']) .'/"><strong>'
+					.htmlspecialchars($row_grp['group_name']).'</strong></a> ';
 				if ($row_grp['short_description']) {
 					print "- " . htmlspecialchars($row_grp['short_description']);
 				}
@@ -399,7 +399,7 @@ else {
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 				while (list($key2, $sons2) = each($arbre)) {
-				print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','/projects/".$project_name[$key2][1]."');\n";
+				print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".$GLOBALS['sys_urlprefix']."/projects/".$project_name[$key2][1]."');\n";
 				}
 				?>
 		
