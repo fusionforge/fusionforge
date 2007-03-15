@@ -60,7 +60,7 @@ print '<b><a href="./softwaremap.php?cat=c">'._('By Category').'</a> | <a href="
 echo'
 	<hr />';
 
-if($_SESSION['cat'] != 't'){
+if(@$_SESSION['cat'] != 't'){
 		$row_trove_cat = db_fetch_array($res_trove_cat);
 		
 		// #####################################
