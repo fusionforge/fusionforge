@@ -453,7 +453,7 @@ class SurveyHTML extends Error {
 		global $survey_id;
 		
 		if (!$s->isActive()) {
-			return '<span class="error">'. _('Error - you can't vote for inactive survey').'</span>';
+			return '<span class="error">'. _('Error - you can\'t vote for inactive survey').'</span>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
