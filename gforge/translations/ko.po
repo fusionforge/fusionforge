@@ -894,14 +894,12 @@ msgstr ""
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] "Comment"
-msgstr[1] "Comment"
 
 #: plugins/scmccase/common/CCasePlugin.class:185
 #, php-format
 msgid "add"
 msgid_plural "adds"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/mantis/include/MantisPlugin.class:136
 #, fuzzy
@@ -3628,14 +3626,12 @@ msgstr "공개 게시판"
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
-msgstr[1] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
 #: www/include/project_home.php:286
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
-msgstr[1] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
 #: www/include/project_home.php:297
 msgid "DocManager: Project Documentation"

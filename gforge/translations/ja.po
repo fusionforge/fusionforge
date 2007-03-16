@@ -890,14 +890,12 @@ msgstr ""
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/scmccase/common/CCasePlugin.class:185
 #, php-format
 msgid "add"
 msgid_plural "adds"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/mantis/include/MantisPlugin.class:136
 msgid "View Mantis"
@@ -3552,14 +3550,12 @@ msgstr "パブリックフォーラム"
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/include/project_home.php:286
 #, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/include/project_home.php:297
 msgid "DocManager: Project Documentation"
