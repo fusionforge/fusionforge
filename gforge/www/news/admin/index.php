@@ -96,7 +96,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>_('News Admin')));
+	news_header(array('title'=>_('News admin')));
 
 	if ($approve) {
 		/*
@@ -243,7 +243,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>_('News Admin')));
+	news_header(array('title'=>_('News admin')));
 
 	if ($approve) {
 		/*
@@ -345,7 +345,13 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error(_('Permission Denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), $GLOBALS['sys_name']));
+	exit_error(_('Permission denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), $GLOBALS['sys_name']));
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

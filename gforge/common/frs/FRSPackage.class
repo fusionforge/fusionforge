@@ -266,7 +266,7 @@ class FRSPackage extends Error {
 	function setMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError(_('You Can Only Monitor If You Are Logged In'));
+			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
 		$sql="SELECT * FROM filemodule_monitor
@@ -301,7 +301,7 @@ class FRSPackage extends Error {
 	function stopMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError(_('You Can Only Monitor If You Are Logged In'));
+			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
 		$sql="DELETE FROM filemodule_monitor
@@ -484,5 +484,10 @@ class FRSPackage extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -61,7 +61,7 @@ $ath->header(array ('title'=>_('Submit')));
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
-		<td><strong>'._('Assigned To').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
+		<td><strong>'._('Assigned to').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
 		echo $ath->technicianBox ('assigned_to');
 		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('._('Admin').')</a>';
 

@@ -30,7 +30,7 @@ require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 require_once ('common/include/cron_utils.php');
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 
 $which = getIntFromRequest('which');
 if (!$which || $which==100) {
@@ -107,5 +107,10 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 }
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

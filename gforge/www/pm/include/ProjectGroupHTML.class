@@ -46,10 +46,10 @@ function pm_header($params) {
 	$links = array();
 
 	if ($group_project_id) {
-		$labels[] = (($pg) ? $pg->getName() .': ' : '') ._('Browse Tasks');
+		$labels[] = (($pg) ? $pg->getName() .': ' : '') ._('Browse tasks');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		if (session_loggedin()) {
-			$labels[] = _('Add Task');
+			$labels[] = _('Add task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
 		if ($group_project_id) {

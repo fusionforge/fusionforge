@@ -192,7 +192,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo _('Release Name') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('Release name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 			<input type="text" name="release_name" value="<?php echo htmlspecialchars(stripslashes($release_name)) ?>" />
@@ -200,7 +200,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo _('Release Date') ?>:</h4>
+			<h4><?php echo _('Release date') ?>:</h4>
 		</td>
 		<td>
 			<input type="text" name="release_date" value="<?php echo date('Y-m-d H:i'); ?>" size="16" maxlength="16" />
@@ -275,5 +275,10 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 <?php
 
 frs_admin_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -33,7 +33,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
@@ -180,5 +180,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <?php }
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -72,7 +72,7 @@ if (session_loggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>_('Add Snippets to Package')));
+					snippet_header(array('title'=>_('Add snippets to package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -96,7 +96,7 @@ function show_add_snippet_box() {
 <p>
 <?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?></p>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo _('Add Snippets To Package'); ?></a></p>
+<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo _('Add snippets to package'); ?></a></p>
 
 <p>
 <?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?>
@@ -167,5 +167,10 @@ function show_add_snippet_box() {
 	exit_not_logged_in();
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

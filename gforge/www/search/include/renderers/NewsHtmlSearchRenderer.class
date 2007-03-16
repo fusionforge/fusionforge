@@ -34,8 +34,8 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			_('Summary'),
-			_('Posted By'),
-			_('Post Date'),
+			_('Posted by'),
+			_('Post date'),
 		);
 	}
 	
@@ -61,5 +61,10 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return $return;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

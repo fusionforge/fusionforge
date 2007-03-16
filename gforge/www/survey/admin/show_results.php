@@ -58,7 +58,7 @@ $is_admin_page='y';
 $sh->header(array('title'=>_('Survey Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>"._('Permission Denied')."</h1>";
+	echo "<h1>"._('Permission denied')."</h1>";
 	$sh->footer(array());
 	exit;
 }
@@ -140,4 +140,10 @@ function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
 	echo ($SurveyHTML->ShowResult($srf, $show_comment, $q_num, $graph));
     }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

@@ -124,7 +124,7 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '">';
 		$ret.=_('Question').':<br />';
 		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
-		$ret.='<p>'. _('Question Type').':<br />';
+		$ret.='<p>'. _('Question type').':<br />';
 	
 		$sql="SELECT * from survey_question_types";
 		$result=db_query($sql);

@@ -35,7 +35,7 @@ if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
 // session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 
 
 ?>
@@ -187,8 +187,9 @@ function get_dir_size ($dir)
 	return "$size";
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
-
-
-
-

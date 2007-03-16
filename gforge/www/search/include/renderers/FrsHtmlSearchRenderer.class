@@ -33,9 +33,9 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		$this->tableHeaders = array(
 			'&nbsp;',
-			_('Release Name'),
-			_('Posted By'),
-			_('Post Date'),
+			_('Release name'),
+			_('Posted by'),
+			_('Post date'),
 		);
 	}
 
@@ -83,5 +83,10 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return FrsSearchQuery::getSections($groupId, $userIsGroupMember);	
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

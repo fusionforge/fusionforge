@@ -23,7 +23,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 <table border="0" width="100%">
 
         <tr>
-                <td><strong><?php echo _('Submitted By') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+                <td><strong><?php echo _('Submitted by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
         </tr>
 
 	<tr>
@@ -80,7 +80,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 		$result2=db_query("SELECT users.user_name AS User_Name FROM users,project_assigned_to 
 			WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
-		ShowResultSet($result2,_('Assigned To'), false, false);
+		ShowResultSet($result2,_('Assigned to'), false, false);
 		?>
 		</td>
 		<td valign="top">
@@ -92,7 +92,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 		$result2=db_query("SELECT project_task.summary FROM project_dependencies,project_task 
 			WHERE is_dependent_on_task_id=project_task.project_task_id 
 			AND project_dependencies.project_task_id='$project_task_id'");
-		ShowResultSet($result2,_('Dependent On Task'), false, false);
+		ShowResultSet($result2,_('Dependent on task'), false, false);
 		?>
 		</td>
 	</tr>
@@ -142,5 +142,10 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 <?php
 
 pm_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

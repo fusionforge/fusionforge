@@ -36,7 +36,7 @@ $survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>_('Edit A Question')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>" ._('Permission Denied')."</h1>";
+	echo "<h1>" ._('Permission denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -94,7 +94,7 @@ function show_questions() {
 <br />
 <input type="text" name="question" value="<?php echo $question; ?>" size="60" maxlength="150" />
 
-<p><?php echo _('Question Type'); ?>:
+<p><?php echo _('Question type'); ?>:
 <br />
 <?php
 
@@ -116,5 +116,10 @@ echo html_build_select_box($result,'question_type',$question_type,false);
 <?php
 
 survey_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

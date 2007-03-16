@@ -176,7 +176,7 @@ if ($rows < 1) {
 	if ($display_col['category'])
 		$title_arr[]=_('Category');
 	if ($display_col['assigned_to'])
-		$title_arr[]=_('Assigned To');
+		$title_arr[]=_('Assigned to');
 	if ($display_col['priority'])
 		$title_arr[]=_('Priority');
 
@@ -358,7 +358,7 @@ if ($rows < 1) {
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned To').
+			<td><strong>'._('Assigned to').
 				'</strong><br />'. $tech_box .'</td>
 			<td><strong>'._('State').
 				'</strong><br />'. $pg->statusBox ('status_id','xzxz',true,_('No Change')) .'</td>

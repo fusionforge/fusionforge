@@ -114,7 +114,7 @@ if ($login && !$success) {
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
-<?php echo _('Login Name:'); ?>
+<?php echo _('Login name:'); ?>
 <br /><input type="text" name="form_loginname" value="<?php echo htmlspecialchars(stripslashes($form_loginname)); ?>" />
 </p>
 <p>
@@ -132,5 +132,10 @@ if ($login && !$success) {
 <?php
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

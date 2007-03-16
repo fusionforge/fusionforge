@@ -54,9 +54,9 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 
     /* Error */
     if ( $sq->isError()) {
-	$msg = _('DELETE FAILED').' '.$sq->getErrorMessage();
+	$msg = _('Delete failed').' '.$sq->getErrorMessage();
     } else {
-	$msg = _('DELETE SUCCESSFUL');
+	$msg = _('Delete successful');
     }
     echo "<H3>".$msg ."</H3>";
 } else if (getStringFromRequest('post')=="Y") {
@@ -101,4 +101,10 @@ if (!$sqs) {
 }
 
 $sh->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

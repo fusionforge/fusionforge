@@ -291,9 +291,9 @@ if ($art_arr && count($art_arr) > 0) {
 	if ($display_col['priority'])
 		$title_arr[]=_('Priority');
 	if ($display_col['assigned_to'])
-		$title_arr[]=_('Assigned To');
+		$title_arr[]=_('Assigned to');
 	if ($display_col['submitted_by'])
-		$title_arr[]=_('Submitted By');
+		$title_arr[]=_('Submitted by');
 
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -441,7 +441,7 @@ if ($art_arr && count($art_arr) > 0) {
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned To').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
+			<td><strong>'._('Assigned to').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
 				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {

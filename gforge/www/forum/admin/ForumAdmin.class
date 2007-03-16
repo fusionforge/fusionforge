@@ -76,7 +76,7 @@ class ForumAdmin extends Error {
 		
 		echo '
 			<p>
-			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add Forum').'</a>';
+			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add forum').'</a>';
 		echo '
 			| <a href="pending.php?action=view_pending&group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}

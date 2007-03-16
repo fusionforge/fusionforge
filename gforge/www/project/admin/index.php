@@ -113,7 +113,7 @@ if (getStringFromRequest('submit')) {
 		if (!$group->updateUser($user_id,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
-			$feedback = _('User Updated Successfully');
+			$feedback = _('User updated successfully');
 			//plugin webcal
 			//change assistant for webcal
 			$params[0] = getIntFromRequest('user_id');
@@ -203,28 +203,28 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 echo $HTML->boxMiddle(_('Tool Admin').'');
 
 if($sys_use_tracker) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tracker Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tracker admin') ?></a><br />
 <?php }
 if($sys_use_docman) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('DocManager Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Doc manager admin') ?></a><br />
 <?php }
 if($sys_use_mail) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mail Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mail admin') ?></a><br />
 <?php }
 if($sys_use_news) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('News Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('News admin') ?></a><br />
 <?php }
 if($sys_use_pm) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Task Manager Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Task manager admin') ?></a><br />
 <?php }
 if($sys_use_forum) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forum Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forum admin') ?></a><br />
 <?php }
 if($sys_use_frs) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('FRS Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('FRS admin') ?></a><br />
 <?php }
 if($sys_use_scm) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('SCM Admin') ?></a><br />
+	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('SCM admin') ?></a><br />
 <?php }
 
 $hook_params = array () ;
@@ -257,7 +257,7 @@ echo $HTML->boxBottom();
 
 		echo '
 		<table width="100%" border="2">
-			<tr><td><strong>'._('Unix Name').'</strong></td>
+			<tr><td><strong>'._('Unix name').'</strong></td>
 			<td><strong>'._('Role').'</strong></td>
 			<td><strong>'._('Update').'</strong></td>
 			<td><strong>'._('Remove').'</strong></td></tr>';
@@ -290,7 +290,7 @@ while ($row_memb=db_fetch_array($res_memb)) {
 			<input type="hidden" name="submit" value="y" />
 			<tr><td><input type="text" name="form_unix_name" size="10" value="" /></td>
 			<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?></td>
-			<td colspan="2"><input type="submit" name="adduser" value="<?php echo _('Add User') ?>" /></td>
+			<td colspan="2"><input type="submit" name="adduser" value="<?php echo _('Add user') ?>" /></td>
 			</tr></form>
 
 			<tr><td colspan="4"><a href="massadd.php?group_id=<?php echo $group_id; ?>"><?php echo _('Add Users From List'); ?></a></td></tr>
@@ -355,5 +355,10 @@ echo $HTML->boxBottom();?>
 <?php
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

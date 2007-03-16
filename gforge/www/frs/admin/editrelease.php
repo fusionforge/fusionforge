@@ -240,11 +240,11 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><strong><?php echo _('Release Date') ?>:<strong></td>
+	<td width="10%"><strong><?php echo _('Release date') ?>:<strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Release Name') ?>:<strong></td>
+	<td><strong><?php echo _('Release name') ?>:<strong></td>
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
@@ -385,7 +385,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 					<td>&nbsp;</td>
 					<td>
 						
-							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I'm Sure') ?> 
+							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I\'m Sure') ?> 
 						
 					</td>
 				</tr>
@@ -399,5 +399,10 @@ echo '<br />'.sprintf(_('There are %1$s users monitoring this package.'), $frsp-
 echo '<hr />';
 
 frs_admin_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

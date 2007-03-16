@@ -128,7 +128,7 @@ class Error {
 	 */
 	function setPermissionDeniedError(){
 		global $Language;
-		$this->setError(_('Permission Denied.'), ERROR__PERMISSION_DENIED_ERROR);
+		$this->setError(_('Permission denied.'), ERROR__PERMISSION_DENIED_ERROR);
 	}
 	
 	/**
@@ -217,5 +217,10 @@ class Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -57,7 +57,7 @@ if ($group_id && $job_id) {
 		people_header(array('title'=>_('View a Job')));
 		echo db_error();
 		$feedback .= _('POSTING fetch FAILED');
-		echo '<h2>'._('No Such Posting For This Project').'</h2>';
+		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 
 		people_header(array('title'=>_('View a Job')));
@@ -82,7 +82,7 @@ if ($group_id && $job_id) {
 			<strong>'._('Open Date').':</strong><br />
 			'. date($sys_datefmt,db_result($result,0,'post_date')) .'
 		</td><td>
-			<strong>'._('For Project').':<br />
+			<strong>'._('For project').':<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
 		</td></tr>
 
@@ -109,5 +109,10 @@ if ($group_id && $job_id) {
 		exit_error(_('Error'),_('Posting ID not found'));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

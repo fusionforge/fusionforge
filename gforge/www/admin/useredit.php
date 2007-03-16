@@ -238,7 +238,7 @@ $res_cat = db_query("
 
 $title=array();
 $title[]=_('Name');
-$title[]=_('Unix Name');
+$title[]=_('Unix name');
 $title[]=_('Operations');
 echo $GLOBALS['HTML']->listTableTop($title);
 
@@ -260,5 +260,10 @@ echo $GLOBALS['HTML']->listTableBottom();
 html_feedback_bottom($feedback);
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

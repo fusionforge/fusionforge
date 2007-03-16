@@ -31,7 +31,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 
 ?>
 
@@ -265,5 +265,10 @@ echo $HTML->listTableBottom();
 
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

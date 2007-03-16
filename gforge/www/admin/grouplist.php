@@ -83,7 +83,7 @@ if ($form_catroot == 1) {
 $headers = array(
 	_('Group Name (click to edit)'),
 	_('Register Time'),
-	_('Unix Name'),
+	_('Unix name'),
 	_('Status'),
 	_('Public?'),
 	_('License'),

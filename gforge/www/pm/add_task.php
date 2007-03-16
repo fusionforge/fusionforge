@@ -104,13 +104,13 @@ echo notepad_func();
 
 	<tr>
 		<td valign="top">
-		<strong><?php echo _('Assigned To') ?>:</strong><br />
+		<strong><?php echo _('Assigned to') ?>:</strong><br />
 		<?php
 		echo $pt->multipleAssignedBox();
 		?>
 		</td>
 		<td valign="top">
-		<strong><?php echo _('Dependent on Task') ?>:</strong><br />
+		<strong><?php echo _('Dependent on task') ?>:</strong><br />
 		<?php
 		echo $pt->multipleDependBox();
 		?><br />

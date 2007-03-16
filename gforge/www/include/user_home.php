@@ -37,12 +37,12 @@ $HTML->header(array('title'=>_('Developer Profile')));
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Login Name') ?> </td>
+	<td><?php echo _('Login name') ?> </td>
 	<td><strong><?php print $user->getUnixName(); ?></strong></td>
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Real Name') ?> </td>
+	<td><?php echo _('Real name') ?> </td>
 	<td><strong><?php print $user->getTitle() .' '. $user->getRealName(); ?></strong></td>
 </tr>
 
@@ -187,5 +187,10 @@ printf(_('<P>If you are familiar with this user, please take a moment to rate hi
 <?php
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -36,7 +36,7 @@ function exit_permission_denied($reason_descr='') {
 		if (!$reason_descr) {
 			$reason_descr=_('This project\'s administrator will have to grant you permission to view this page.');
 		}
-		exit_error(_('Permission Denied.'),$reason_descr);
+		exit_error(_('Permission denied.'),$reason_descr);
 	}
 }
 
@@ -80,5 +80,10 @@ function exit_form_double_submit() {
 	global $Language;
 	exit_error(_('Error - double submit'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

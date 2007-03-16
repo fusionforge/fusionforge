@@ -30,8 +30,8 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
 		
 		$this->tableHeaders = array(
-			_('User Name'),
-			_('Real Name')
+			_('User name'),
+			_('Real name')
 		);
 	}
 
@@ -70,5 +70,10 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		exit();
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

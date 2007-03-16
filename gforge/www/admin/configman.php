@@ -32,7 +32,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 
 /**
  * printSelection - prints the select box for the user to get the files to edit
@@ -237,5 +237,10 @@ function updateVars($vars,$filepath) {
 
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

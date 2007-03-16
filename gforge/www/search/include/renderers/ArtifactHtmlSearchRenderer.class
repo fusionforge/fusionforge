@@ -43,7 +43,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->tableHeaders = array(
 			_('#'),
 			_('Summary'),
-			_('Submitted By'),
+			_('Submitted by'),
 			_('Date')
 		);
 	}
@@ -102,5 +102,10 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 	
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

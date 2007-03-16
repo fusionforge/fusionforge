@@ -37,7 +37,7 @@ $customer_id = getIntFromRequest('customer_id');
 survey_header(array('title'=>_('Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>"._('Permission Denied')."</h1>";
+        echo "<h1>"._('Permission denied')."</h1>";
         survey_footer(array());
 	exit;
 }
@@ -268,5 +268,10 @@ echo "\n\n</table>";
 <?php
 
 survey_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

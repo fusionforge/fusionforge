@@ -55,7 +55,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 
 	<tr>
-		<td><strong><?php echo _('Submitted By') ?>:</strong><br />
+		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php
 			echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
@@ -82,7 +82,7 @@ if (session_loggedin()) {
     ?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned To')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
             <?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		<td>
 		<strong><?php echo _('Priority') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
@@ -202,5 +202,10 @@ if (session_loggedin()) {
 <?php
 
 $ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

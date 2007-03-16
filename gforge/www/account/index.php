@@ -122,12 +122,12 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <td><strong><?php print date($sys_datefmt,$u->getAddDate()); ?></strong></td>
 </tr>
 <tr valign="top">
-<td><?php echo _('User Id:'); ?> </td>
+<td><?php echo _('User ID:'); ?> </td>
 <td><strong><?php print $u->getID(); ?></strong></td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Login Name:'); ?> </td>
+<td><?php echo _('Login name:'); ?> </td>
 <td><strong><?php print $u->getUnixName(); ?></strong>
 <br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a></td>
 </tr>
@@ -284,4 +284,10 @@ if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 
 <?php
 site_user_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

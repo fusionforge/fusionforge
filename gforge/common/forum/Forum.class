@@ -450,7 +450,7 @@ class Forum extends Error {
 	function setMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError(_('You can Only Monitor If You Are Logged In'));
+			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
 		$sql="SELECT * FROM forum_monitored_forums
@@ -484,7 +484,7 @@ class Forum extends Error {
 	function stopMonitor() {
 		global $Language;
 		if (!session_loggedin()) {
-			$this->setError(_('You can Only Monitor If You Are Logged In'));
+			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
 		$sql="DELETE FROM forum_monitored_forums
@@ -916,5 +916,10 @@ class Forum extends Error {
 
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

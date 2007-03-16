@@ -57,7 +57,7 @@ if (!session_loggedin()) {
 			echo db_error();
 		} else {
 			$feedback .= _('Vote registered');
-			echo "<h2>"._('Vote Registered')."</h2>";
+			echo "<h2>"._('Vote registered')."</h2>";
 			echo "<a href=\"javascript:history.back()\"><strong>"._('Click to return to previous page')."</strong></a>".
 				"<p>"._('If you vote again, your old vote will be erased.')."</p>";
 		}

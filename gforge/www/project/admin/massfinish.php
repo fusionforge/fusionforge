@@ -79,8 +79,8 @@ if (!$res || db_numrows($res) < 1) {
 	echo "No Matching Users Found";
 } else {
 
-	$titles[]=_('Real Name');
-	$titles[]=_('Unix Name');
+	$titles[]=_('Real name');
+	$titles[]=_('Unix name');
 	$titles[]=_('Role');
 
 	echo $HTML->listTableTop($titles);
@@ -105,5 +105,10 @@ echo '<input type="submit" name="finished" value="Add All">
 </form>';
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

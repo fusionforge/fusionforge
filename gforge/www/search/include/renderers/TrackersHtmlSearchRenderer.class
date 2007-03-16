@@ -35,7 +35,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			'&nbsp;',
 			_('#'),
 			_('Summary'),
-			_('Submitted By'),
+			_('Submitted by'),
 			_('Date')
 		);
 	}
@@ -88,5 +88,10 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return TrackersSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

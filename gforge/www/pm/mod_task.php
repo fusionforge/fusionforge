@@ -33,7 +33,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 <table border="0" width="100%">
 
 	<tr>
-		<td><strong><?php echo _('Submitted By') ?>:</strong><br />
+		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
 	</tr>
@@ -111,7 +111,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 
 	<tr>
 		<td valign="top">
-		<strong><?php echo _('Assigned To') ?>:</strong><br />
+		<strong><?php echo _('Assigned to') ?>:</strong><br />
 		<?php
 		/*
 			List of possible users that this one could be assigned to
@@ -121,7 +121,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 		</td>
 
 		<td valign="top">
-		<strong><?php echo _('Dependent on Task') ?>:</strong><br />
+		<strong><?php echo _('Dependent on task') ?>:</strong><br />
 		<?php
 		/*
 			List of possible tasks that this one could depend on

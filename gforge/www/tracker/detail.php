@@ -65,7 +65,7 @@ echo notepad_func();
 			<td></td>
 		</tr>
 		<tr>
-			<td><strong><?php echo _('Submitted By') ?>:</strong><br />
+			<td><strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php
 			echo $ah->getSubmittedRealName();
 			/*if($ah->getSubmittedBy() != 100) {
@@ -74,7 +74,7 @@ echo notepad_func();
 				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php }*/ ?>
 			</td>
-			<td><strong><?php echo _('Assigned To') ?>:</strong><br />
+			<td><strong><?php echo _('Assigned to') ?>:</strong><br />
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 

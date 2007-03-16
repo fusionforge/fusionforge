@@ -112,7 +112,7 @@ if (getStringFromRequest('submit')) {
 if ($week) {
 	$group_project_id = getStringFromRequest('group_project_id');
 
-	report_header(_('Time Tracking'));
+	report_header(_('Time tracking'));
 
 	if (!$group_project_id) {
 	    if ( $sys_database_type == "mysql" ) {
@@ -226,7 +226,7 @@ if ($week) {
 //
 } else {
 
-	report_header(_('Time Tracking'));
+	report_header(_('Time tracking'));
 
 	?>
 	<h3><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h3>
@@ -244,5 +244,10 @@ if ($week) {
 }
 
 report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

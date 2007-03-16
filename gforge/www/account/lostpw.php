@@ -87,7 +87,7 @@ echo _('<p>Hey... losing your password is serious business. It compromises the s
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
-<?php echo _('Login Name:'); ?>
+<?php echo _('Login name:'); ?>
 <br />
 <input type="text" name="loginname" />
 <br />

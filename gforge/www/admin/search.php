@@ -99,8 +99,8 @@ if ($usersearch) {
 
 		$title=array();
 		$title[]=_('ID');
-		$title[]=_('Username');
-		$title[]=_('Real Name');
+		$title[]=_('User name');
+		$title[]=_('Real name');
 		$title[]=_('Email');
 		$title[]=_('Member since');
 		$title[]=_('Status');
@@ -170,7 +170,7 @@ if (getStringFromRequest('groupsearch')) {
 
 		$title=array();
 		$title[]=_('ID');
-		$title[]=_('UNIX Name');
+		$title[]=_('Unix name');
 		$title[]=_('Full Name');
 		$title[]=_('Registered');
 		$title[]=_('Status');
@@ -204,5 +204,10 @@ if (getStringFromRequest('groupsearch')) {
 } //end if($groupsearch)
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

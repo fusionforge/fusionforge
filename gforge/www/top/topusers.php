@@ -66,8 +66,8 @@ print '<h1>'._('Top users').'</h1>
 
 $tableHeaders = array(
 	_('Rank'),
-	_('User Name'),
-	_('Real Name'),
+	_('User name'),
+	_('Real name'),
 	_('Rating'),
 	_('Last Rank'),
 	_('Change')
@@ -114,4 +114,10 @@ echo $HTML->listTableBottom();
 ';*/
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

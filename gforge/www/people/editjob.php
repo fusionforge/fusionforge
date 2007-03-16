@@ -160,7 +160,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= _('POSTING fetch FAILED');
-		echo '<h2>'._('No Such posting For This Project').'</h2>';
+		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 
 		echo _('<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>').'
@@ -201,5 +201,10 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		exit_permission_denied();
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

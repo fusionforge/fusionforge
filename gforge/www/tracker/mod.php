@@ -61,7 +61,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 	<tr>
 		<td>
-			<strong><?php echo _('Submitted By') ?>:</strong><br />
+			<strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
@@ -117,7 +117,7 @@ if (session_loggedin()) {
 	?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned To')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
 		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('._('Admin').')</a>';

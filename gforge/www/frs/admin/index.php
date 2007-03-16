@@ -143,7 +143,7 @@ if (!$res || $rows < 1) {
 } else {
 	$title_arr=array();
 	$title_arr[]=_('Releases');
-	$title_arr[]=_('Package Name');
+	$title_arr[]=_('Package name');
 	$title_arr[]=_('Status');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -205,5 +205,10 @@ if (!$res || $rows < 1) {
 <?php
 
 frs_admin_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -108,4 +108,10 @@ $result=db_query($sql);
 ShowResultsEditSurvey($result);
 
 survey_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

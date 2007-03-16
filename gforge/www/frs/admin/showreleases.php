@@ -99,8 +99,8 @@ if (count($rs) < 1) {
 frs_admin_header(array('title'=>_('Release New File Version'),'group'=>$group_id));
 
 $title_arr=array();
-$title_arr[]=_('Package Name');
-$title_arr[]=_('Release Name');
+$title_arr[]=_('Package name');
+$title_arr[]=_('Release name');
 $title_arr[]=_('Date');
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -121,5 +121,10 @@ for ($i=0; $i<count($rs); $i++) {
 echo $GLOBALS['HTML']->listTableBottom();
 
 frs_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -36,7 +36,7 @@ $sh = new  SurveyHtml();
 $sh->header(array('title'=>_('Survey Administration')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo '<h1>'._('Permission Denied').'</h1>';
+	echo '<h1>'._('Permission denied').'</h1>';
 	$sh->footer(array());
 	exit;
 }
@@ -55,3 +55,12 @@ $sh->footer(array());
 
 ?>
 </p>
+
+<?
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

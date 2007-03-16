@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 	exit();
 }
 
-site_admin_header(array('title'=>_('Massmail Admin')));
+site_admin_header(array('title'=>_('Massmail admin')));
 
 print '
 <h4>'
@@ -167,5 +167,10 @@ while ($row = db_fetch_array($res)) {
 echo $GLOBALS['HTML']->listTableBottom();
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

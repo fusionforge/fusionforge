@@ -201,7 +201,7 @@ switch (getStringFromRequest('func')) {
 			unset($ah);
 
 		if (!$was_error) {
-			$feedback = _('Updated Successfully');			}
+			$feedback = _('Updated successfully');			}
 		}
 		unset ($extra_fields_choice);
 		include ('browse.php');
@@ -492,5 +492,10 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

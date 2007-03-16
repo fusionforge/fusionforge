@@ -418,12 +418,12 @@ class Group extends Error {
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError(_('Could not get permission'));
+			$this->setError(_('Could not get permission.'));
 			return false;
 		}
 
 		if (!$perm->isSuperUser()) {
-			$this->setError(_('Permission Denied.'));
+			$this->setError(_('Permission denied.'));
 			return false;
 		}
 
@@ -492,12 +492,12 @@ class Group extends Error {
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError(_('Could not get permission'));
+			$this->setError(_('Could not get permission.'));
 			return false;
 		}
 
 		if (!$perm->isAdmin()) {
-			$this->setError(_('Permission Denied.'));
+			$this->setError(_('Permission denied.'));
 			return false;
 		}
 

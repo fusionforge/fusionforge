@@ -193,7 +193,7 @@ function people_edit_skill_inventory($user_id) {
 	$i++; //for row coloring
 
 	echo '
-	<tr class="tableheading"><td colspan="4">'._('Add A New Skill').'/td></tr>
+	<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 		<td>'. people_skill_box('skill_id'). '</td>
@@ -345,7 +345,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$i++; //for row coloring
 
 	echo '
-	<tr><td colspan="4"><h3>'._('Add A New Skill').'</h3></td></tr>
+	<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
 	<tr '. $HTML->boxGetAltRowStyle($i) . '>
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<input type="hidden" name="job_id" value="'. $job_id .'" />
@@ -463,5 +463,10 @@ function people_show_job_list($result) {
 
 	return $return;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

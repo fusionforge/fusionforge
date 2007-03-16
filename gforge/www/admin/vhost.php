@@ -103,7 +103,7 @@ if (getStringFromRequest('tweakcommit')) {
 }
 
 
-site_admin_header(array('title'=>_('Site Admin')));
+site_admin_header(array('title'=>_('Site admin')));
 ?>
 
 <h3><?php echo _('Virtual Host Administration'); ?></h3>
@@ -193,5 +193,10 @@ if (getStringFromRequest('tweak')) {
 }
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

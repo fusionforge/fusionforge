@@ -127,8 +127,8 @@ if ($pattern) {
 	$title=array();
 	$title[]='&nbsp;';
 	$title[]=_('user_id');
-	$title[]=_('Username');
-	$title[]=_('Real Name');
+	$title[]=_('User name');
+	$title[]=_('Real name');
 	$title[]=_('Email');
 	$title[]=_('Site Mail.');
 	$title[]=_('Comm. Mail.');
@@ -154,5 +154,10 @@ if ($pattern) {
 }
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

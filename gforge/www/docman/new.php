@@ -126,14 +126,14 @@ if (getStringFromRequest('submit')) {
 		<table border="0" width="75%">
 		<tr>
 			<td>
-			<strong>'. _('Document Title').' :</strong>'. utils_requiredField(). sprintf(_('(at least %$1s characters)'), 5).'<br />
+			<strong>'. _('Document Title').' :</strong>'. utils_requiredField(). sprintf(_('(at least %1$s characters)'), 5).'<br />
 			<input type="text" name="title" size="40" maxlength="255" />
 			</td>
 		</tr>
 	
 		<tr>
 			<td>
-			<strong>'. _('Description') .' :</strong>'. utils_requiredField() . sprintf(_('(at least %$1s characters)'), 10).'<br />
+			<strong>'. _('Description') .' :</strong>'. utils_requiredField() . sprintf(_('(at least %1$s characters)'), 10).'<br />
 			<input type="text" name="description" size="50" maxlength="255" />
 			</td>
 		</tr>';		

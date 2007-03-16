@@ -98,9 +98,9 @@ if (!$res || db_numrows($res) < 1) {
 	echo _('<p>No Matching Users Found</p>');
 } else {
 
-	$titles[]=_('Real Name');
-	$titles[]=_('Unix Name');
-	$titles[]=_('Add User');
+	$titles[]=_('Real name');
+	$titles[]=_('Unix name');
+	$titles[]=_('Add user');
 
 	echo $HTML->listTableTop($titles);
 
@@ -128,5 +128,10 @@ echo '<input type="submit" name="finished" value="'._('Finish').'">
 </form>';
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

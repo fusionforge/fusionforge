@@ -99,7 +99,7 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 
 $res=db_query($sql);
 if (!$res || db_numrows($res) < 1) {
-	echo _('No matches Found').db_error();
+	echo _('No matches found').db_error();
 } else {
 	$tableHeaders = array(
 		_('Name'),
@@ -163,5 +163,10 @@ if (!$res || db_numrows($res) < 1) {
 }
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
