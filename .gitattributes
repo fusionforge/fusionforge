@@ -46,6 +46,7 @@ gforge/debian/gforge-web-apache2.overrides -text
 gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
 gforge/debian/gforge-web-apache2.prerm.dsfh-in -text
 gforge/debian/gforge-web-apache2.templates.dsfh-in -text
+gforge/docs/README.gettext -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
