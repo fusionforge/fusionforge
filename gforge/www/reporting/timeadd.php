@@ -188,7 +188,7 @@ if ($week) {
 				<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 				<td align="middle">'.report_time_category_box('time_code',false).'</td>
 				<td align="middle"><input type="submit" name="add" value="'.
-				_('Add').'" /><input type="submit" name="cancel" value="'._('Add').'" /></td>
+				_('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 			</tr></form>';
 
 		}

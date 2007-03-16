@@ -877,7 +877,7 @@ if (isset($params['group']) && $params['group']) {
 						<table width="100%" cellspacing="0" border="0">
 							<tr class="tablecontent">
 								<!--<td colspan="2">'._('Search in').':</td-->
-								<td align="right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('Select').'</a></td>
+								<td align="right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
 							</tr>
 							<tr height="20" class="tablecontent">
 								<td colspan="3">&nbsp;</td>
@@ -908,7 +908,7 @@ if (isset($params['group']) && $params['group']) {
 									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
 							.'	</td>
 								<td align="right">'
-								._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('Select').'</a>
+								._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
 								</td>
 							</tr>
 							<tr class="tablecontent">

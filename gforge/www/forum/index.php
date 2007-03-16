@@ -58,7 +58,7 @@ if ($group_id) {
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
 	echo $HTML->subMenu(array("My Monitored Forums"),array("/forum/myforums.php?group_id=$group_id"));
-	$tablearr=array(_('Forum'),_('Forum'),_('Forum'),_('Forum'), _('Forum'),_('Forum'));
+	$tablearr=array(_('Forum'),_('Description'),_('Threads'),_('Posts'), _('Last Post'),_('Moderation Level'));
 	echo $HTML->listTableTop($tablearr);
 
 	/*

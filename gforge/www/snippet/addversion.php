@@ -26,7 +26,7 @@ if (session_loggedin()) {
 		*/
 		$result=db_query("SELECT * FROM snippet WHERE snippet_id='$id'");
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error, Error - snippet doesn\'t exist'));
+			exit_error(_('Error - snippet doesn\'t exist'));
 		}
 
 		/*
@@ -63,7 +63,7 @@ if (session_loggedin()) {
 					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error - Go back and fill in all the information'));
 			}
 
 		}
@@ -112,7 +112,7 @@ if (session_loggedin()) {
 		*/
 		$result=db_query("SELECT * FROM snippet_package WHERE snippet_package_id='$id'");
 		if (!$result || db_numrows($result) < 1) {
-			exit_error(_('Error, Error - snippet_package doesn\'t exist'));
+			exit_error(_('Error - snippet_package doesn\'t exist'));
 		}
 
 		if (getStringFromRequest('post_changes')) {
@@ -224,7 +224,7 @@ function show_add_snippet_box() {
 
 
 	} else {
-		exit_error(_('Error, Error - was the URL or form mangled??'));
+		exit_error(_('Error - was the URL or form mangled??'));
 	}
 
 } else {

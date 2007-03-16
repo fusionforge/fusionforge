@@ -711,7 +711,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
 						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
 </div>';
-	print '<br/>	'._('Select').' <a href="javascript:setCheckBoxes(\'\',true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('Select').'</a>';
+	print '<br/>	'._('Select').' <a href="javascript:setCheckBoxes(\'\',true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a>';
 
 		print $this->createUnderSections($sectionsArray).'
 		</form>';
@@ -768,7 +768,7 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
 			}
 		
 			$return .= '<li><fieldset><legend>'.$Language->getText('group', $key).'</legend>'
-							._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('Select').'</a>
+							._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
 			<div id="list"><ul>
 							';
 								

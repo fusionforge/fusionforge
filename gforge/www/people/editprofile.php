@@ -95,7 +95,7 @@ if (session_loggedin()) {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 	}
 	if (getStringFromRequest('MultiEdit')) {

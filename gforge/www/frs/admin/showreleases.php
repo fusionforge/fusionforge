@@ -90,7 +90,7 @@ if ($func=='delete_release' && $release_id) {
 */
 $rs =& $frsp->getReleases();
 if (count($rs) < 1) {
-	exit_error(_('Error'),_('Error'));
+	exit_error(_('Error'),_('No Releases Of This Package Are Available'));
 }
 
 /*

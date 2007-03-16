@@ -49,7 +49,7 @@ if (!$Group || !is_object($Group) || $Group->isError()) {
 	exit_no_group();
 }
 if (!$Group->usesSCM()) {
-	exit_error(_('Error'), _('Error'));
+	exit_error(_('Error'), _('Error - This project has turned off SCM.'));
 }
 
 // check if the scm_box is located in another server

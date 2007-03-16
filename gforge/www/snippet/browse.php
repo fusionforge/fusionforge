@@ -48,7 +48,7 @@ if ($by=='lang') {
 	$sql2=createPackageQuery("snippet_package.category='$cat'");
 	echo '<h2>' .sprintf(_('Snippets by category: %1$s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
 } else {
-	exit_error(_('Error'),_('Error'));
+	exit_error(_('Error'),_('Error - bad url?'));
 }
 
 $result=db_query($sql);

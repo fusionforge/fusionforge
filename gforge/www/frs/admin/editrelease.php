@@ -385,7 +385,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 					<td>&nbsp;</td>
 					<td>
 						
-							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('Delete File') ?> 
+							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I'm Sure') ?> 
 						
 					</td>
 				</tr>

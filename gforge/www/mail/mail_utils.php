@@ -22,7 +22,7 @@ function mail_header($params) {
 
 		if ($project && is_object($project)) {
 			if (!$project->usesMail()) {
-				exit_error(_('Error'), _('Error'));
+				exit_error(_('Error'), _('This Project Has Turned Off The Mailing Lists'));
 			}
 		}
 

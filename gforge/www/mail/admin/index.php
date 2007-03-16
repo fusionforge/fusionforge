@@ -46,7 +46,7 @@ if ($group_id) {
 			}
 			if(!$mailingList || !is_object($mailingList)) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'), _('Error'));
+				exit_error(_('Error'), _('Error getting the list'));
 			} elseif($mailingList->isError()) {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error(_('Error'), $mailingList->getErrorMessage());
@@ -69,7 +69,7 @@ if ($group_id) {
 			$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
 			if(!$mailingList || !is_object($mailingList)) {
-				exit_error(_('Error'), _('Error'));
+				exit_error(_('Error'), _('Error getting the list'));
 			} elseif($mailingList->isError()) {
 				exit_error(_('Error'), $mailingList->getErrorMessage());
 			}
@@ -102,7 +102,7 @@ if ($group_id) {
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<h1>'._('Error').' '._('Error') .'</h1>';
+			echo '<h1>'._('Error').' '._('Unable to get the lists') .'</h1>';
 			echo $mlFactory->getErrorMessage();
 			mail_footer(array());
 			exit;
@@ -158,7 +158,7 @@ if ($group_id) {
 		$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
 		if(!$mailingList || !is_object($mailingList)) {
-			exit_error(_('Error'), _('Error'));
+			exit_error(_('Error'), _('Error getting the list'));
 		} elseif($mailingList->isError()) {
 			exit_error(_('Error'), $mailingList->getErrorMessage());
 		}
@@ -199,7 +199,7 @@ if ($group_id) {
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<p>'._('Error').' '.sprintf(_('Error'), $Group->getPublicName()) .'</p>';
+			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</p>';
 			echo $mlFactory->getErrorMessage();
 			mail_footer(array());
 			exit;

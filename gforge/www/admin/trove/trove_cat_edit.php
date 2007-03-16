@@ -166,7 +166,7 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <p><?php echo _('New category description (VARCHAR 255)'); ?>:
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
-<br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Update'); ?>" />
+<br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Delete'); ?>" />
 </form>
 
 <?php

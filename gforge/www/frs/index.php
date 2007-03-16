@@ -61,7 +61,7 @@ $res_package = db_query( $sql );
 $num_packages = db_numrows( $res_package );
 
 if ( $num_packages < 1) {
-	exit_error(_('No File Packages'),_('No File Packages'));
+	exit_error(_('No File Packages'),_('There are no file packages defined for this project.'));
 }
 
 frs_header(array('title'=>_('Project Filelist'),'group'=>$group_id));

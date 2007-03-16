@@ -57,10 +57,10 @@ echo report_header('Main Page');
 <p>
 <h3><?php echo _('Time-Tracking'); ?></h3>
 <p>
-<a href="usertime.php"><?php echo _('Individual User Time Report (graph)'); ?></a> <a href="usertime.php?typ=r">(<?php echo _('Individual User Time Report (graph)'); ?>)</a><br />
-<a href="projecttime.php"><?php echo _('Individual Project Time Report (graph)'); ?></a> <a href="projecttime.php?typ=r">(<?php echo _('Individual Project Time Report (graph)'); ?>)</a><br />
-<a href="sitetime.php"><?php echo _('Site-Wide Time Report (graph)'); ?></a> <a href="sitetime.php?typ=r">(<?php echo _('Site-Wide Time Report (graph)'); ?>)</a><br />
-<a href="sitetimebar.php"><?php echo _('Site-Wide Total Hours Graph (graph)'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo _('Site-Wide Total Hours Graph (graph)'); ?>)</a><br />
+<a href="usertime.php"><?php echo _('Individual User Time Report (graph)'); ?></a> <a href="usertime.php?typ=r">(<?php echo _('report'); ?>)</a><br />
+<a href="projecttime.php"><?php echo _('Individual Project Time Report (graph)'); ?></a> <a href="projecttime.php?typ=r">(<?php echo _('report'); ?>)</a><br />
+<a href="sitetime.php"><?php echo _('Site-Wide Time Report (graph)'); ?></a> <a href="sitetime.php?typ=r">(<?php echo _('report'); ?>)</a><br />
+<a href="sitetimebar.php"><?php echo _('Site-Wide Total Hours Graph (graph)'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo _('report'); ?>)</a><br />
 <a href="usersummary.php"><?php echo _('Site-Wide Task &amp; Hours (report)'); ?></a><br />
 <p>
 <h3><?php echo _('Administrative'); ?></h3>

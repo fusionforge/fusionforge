@@ -61,21 +61,21 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error getting new Forum'));
 	} elseif ($f->isError()) {
 		exit_error(_('Error'),$f->getErrorMessage());
 	}
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error getting new ForumMessage'));
 	} elseif ($fm->isError()) {
 		exit_error(_('Error'),$fm->getErrorMessage());
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error getting new ForumMessageFactory'));
 	} elseif ($fmf->isError()) {
 		exit_error(_('Error'),$fmf->getErrorMessage());
 	}
@@ -87,7 +87,7 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error getting new ForumHTML'));
 	} elseif ($fh->isError()) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}

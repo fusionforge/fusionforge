@@ -106,7 +106,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$sql="SELECT * FROM news_bytes WHERE id='$id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error(_('Error'), _('Error'));
+			exit_error(_('Error'), _('NewsByte not found'));
 		}
 		
 		$group =& group_get_object($group_id);
@@ -141,7 +141,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
@@ -255,7 +255,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			"AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error(_('Error'), _('Error'));
+			exit_error(_('Error'), _('NewsByte not found'));
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
@@ -285,7 +285,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);		
@@ -345,7 +345,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error(_('Permission Denied.'),sprintf(_('Permission Denied.'), $GLOBALS['sys_name']));
+	exit_error(_('Permission Denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), $GLOBALS['sys_name']));
 
 }
 ?>

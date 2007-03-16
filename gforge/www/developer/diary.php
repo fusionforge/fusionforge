@@ -96,7 +96,7 @@ if ($diary_user) {
 
 } else {
 
-	exit_error(_('Error'),_('Error'));
+	exit_error(_('Error'),_('No User Selected'));
 
 }
 

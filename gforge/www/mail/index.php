@@ -40,7 +40,7 @@ if ($group_id) {
 	$mlArray =& $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<h1>'._('Error').' '.sprintf(_('Error'), $Group->getPublicName()) .'</h1>';
+		echo '<h1>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</h1>';
 		echo $mlFactory->getErrorMessage();
 		mail_footer(array());
 		exit;

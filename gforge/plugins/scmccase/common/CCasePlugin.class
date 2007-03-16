@@ -118,7 +118,7 @@ if (session_loggedin()) {
 if ($project->enableAnonCVS() || !$anonymous) {
 	echo $HTML->boxTop(_('History'));
 
-	echo "<b>_(Browse the Clear Case tree)</b><p>_(Browsing the Clear Case tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.)</p>" ;
+	echo '<b>'._(Browse the Clear Case tree).'</b><p>'._(Browsing the Clear Case tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.).'</p>' ;
 
 	$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
 	// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;

@@ -107,7 +107,7 @@ class CVSPlugin extends SCM {
 				print '
 					<p>
 					<tt>export CVS_RSH=ssh</tt><br/>
-					<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('developername').'</em></tt>
+					<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 					</p>';
 
 				// ######################## CVS Snapshot

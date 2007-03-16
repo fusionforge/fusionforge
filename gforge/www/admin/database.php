@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= _('Error Adding Database') .db_error();
 		} else {
-			$feedback .= _('Group'). " <em>".$group->getUnixName()."</em>" ._('Group');
+			$feedback .= _('Group'). " <em>".$group->getUnixName()."</em>" ._('added already active database');
 		}
 
 	} else {

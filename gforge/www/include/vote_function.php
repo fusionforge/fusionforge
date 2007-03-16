@@ -195,7 +195,7 @@ if (db_numrows($result) > 0) {
 
 			if ($question_type != $last_question_type) {
 				echo '
-					<strong>1</strong>'._('Low').'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' ._('Low');
+					<strong>1</strong>'._('Low').'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>5</strong>' ._('High');
 				echo '<br />';
 
 			}

@@ -190,7 +190,7 @@ class ForumAdmin extends Error {
 			*/
 			$f=new Forum($this->g,$group_forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting Forum'));
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
@@ -221,7 +221,7 @@ class ForumAdmin extends Error {
 			$f=new Forum($this->g);
 			if (!$f || !is_object($f)) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting Forum'));
 			} elseif ($f->isError()) {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error(_('Error'),$f->getErrorMessage());
@@ -239,7 +239,7 @@ class ForumAdmin extends Error {
 			$forum_id = getIntFromRequest('forum_id');
 			$f=new Forum($this->g,$forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting Forum'));
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
@@ -249,7 +249,7 @@ class ForumAdmin extends Error {
 
 			$fm=new ForumMessage($f,$msg_id);
 			if (!$fm || !is_object($fm)) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting Forum'));
 			} elseif ($fm->isError()) {
 				exit_error(_('Error'),$fm->getErrorMessage());
 			}
@@ -268,7 +268,7 @@ class ForumAdmin extends Error {
 			$group_forum_id = getIntFromRequest('group_forum_id');
 			$f=new Forum($this->g,$group_forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting Forum'));
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
@@ -351,7 +351,7 @@ class ForumAdmin extends Error {
 			}
 
 			$options = array("1" => "No action","2" => "Delete","3" => "Release"); //array with the supported actions
-			//i´ll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
+			//iï¿½ll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
 			for($i=0;$i<db_numrows($res);$i++) {
 				$ids .= db_result($res,$i,'msg_id') . ",";
 			}
@@ -436,7 +436,7 @@ class ForumAdmin extends Error {
 						}
 						$f = new Forum($this->g,$forum_id);
 						if (!$f || !is_object($f)) {
-							exit_error(_('Error'),"Error getting new Forum");
+							exit_error(_('Error'),_('Error getting new Forum'));
 						} elseif ($f->isError()) {
 							exit_error(_('Error'),$f->getErrorMessage());
 						}
@@ -458,7 +458,7 @@ class ForumAdmin extends Error {
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
 							$feedback .= "( $subject ) " . _('Pending forum released') . "<br>";
 							if (db_numrows($res2)>0) {
-								//if there´s an attachment
+								//if thereï¿½s an attachment
 								$am = NEW AttachManager();//object that will handle and insert the attachment into the db
 								$am->SetForumMsg($fm);
 								$userid = db_result($res2,0,"userid");
@@ -479,7 +479,7 @@ class ForumAdmin extends Error {
 						} else {
 							if ($fm->isError()) {
 							    if ( $fm->getErrorMessage() == (_('Couldn\'t Update Master Thread parent with current time')) ) {
-							    	//the thread which the message was replying to doesn´t exist any more
+							    	//the thread which the message was replying to doesnï¿½t exist any more
 							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br>";
 							    } else {
 									$feedback .= "$msg_id - " . $fm->getErrorMessage() . "<br>";

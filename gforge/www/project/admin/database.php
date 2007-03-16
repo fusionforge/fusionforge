@@ -140,7 +140,7 @@ project_admin_header(array('title'=>_('Database Information').'','group'=>$group
 // XXX ogi: where's deletedb defined?
 if ($deletedb == 1) {
 
-	print "<hr /><strong><div align=\"center\">"._('Click to confirm deletion')."[ <a href=\"".getStringFromServer('PHP_SELF')."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'._('Click to confirm deletion').'</a> ] </div></strong> <hr />";
+	print "<hr /><strong><div align=\"center\">"._('Click to confirm deletion')."[ <a href=\"".getStringFromServer('PHP_SELF')."?deletedbconfirm=1&amp;group_id=".$group_id."&amp;dbid=$dbid\">'._('CONFIRM DELETE').'</a> ] </div></strong> <hr />";
 
 }
 
@@ -251,7 +251,7 @@ if (db_numrows($res_db) > 0) {
 
 } else {
 
-	print '<strong><span style="text-decoration:underline">'._('Current Databases').'</span></strong><p>'._('Current Databases').'</p>';
+	print '<strong><span style="text-decoration:underline">'._('Current Databases').'</span></strong><p>'._('There are no databases currently allocated to this group').'</p>';
 
 }
 

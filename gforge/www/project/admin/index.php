@@ -197,7 +197,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 
 <hr />
 <p>
-<h4><?php echo _('Trove Categorization:&nbsp;') ?><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Trove Categorization:&nbsp;') ?>]</a></h4>
+<h4><?php echo _('Trove Categorization:&nbsp;') ?><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit') ?>]</a></h4>
 </p>
 <?php
 echo $HTML->boxMiddle(_('Tool Admin').'');

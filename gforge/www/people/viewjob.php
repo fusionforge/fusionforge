@@ -106,7 +106,7 @@ if ($group_id && $job_id) {
 	if (!$group_id) {
 		exit_no_group();
 	} else {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Posting ID not found'));
 	}
 }
 

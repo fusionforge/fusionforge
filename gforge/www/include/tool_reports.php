@@ -51,7 +51,7 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 		);
 		end_graph();
 		print '<p /><br />';
-		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'._('Key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'._('Key').'</td>'.
+		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'._('Key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'._('Open').'</td>'.
 		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'._('All').' </td><td width="5%">)</td></tr></table>';
 		print '<p />';
 //      		GraphResult($result,$title);

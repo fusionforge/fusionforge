@@ -54,7 +54,7 @@ function exit_not_logged_in() {
  */
 function exit_no_group() {
 	global $Language;
-	exit_error(_('ERROR - No group was chosen or you can\'t access it'),_('ERROR - No group was chosen or you can\'t access it'));
+	exit_error(_('ERROR - No group was chosen or you can\'t access it'),_('No group was chosen or you can\'t access it'));
 }
 
 /**
@@ -62,7 +62,7 @@ function exit_no_group() {
  */
 function exit_missing_param() {
 	global $Language;
-	exit_error(_('Error - missing parameters'),_('Error - missing parameters'));
+	exit_error(_('Error - missing parameters'),_('Error - missing required parameters'));
 }
 
 /**
@@ -70,7 +70,7 @@ function exit_missing_param() {
  */
 function exit_disabled() {
 	global $Language;
-	exit_error(_('Error - disabled feature.'),_('Error - disabled feature.'));
+	exit_error(_('Error - disabled feature.'),_('The Site Administrator has turned off this feature.'));
 }
 
 /**
@@ -78,7 +78,7 @@ function exit_disabled() {
  */
 function exit_form_double_submit() {
 	global $Language;
-	exit_error(_('Error - double submit'),_('Error - double submit'));
+	exit_error(_('Error - double submit'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
 }
 
 ?>

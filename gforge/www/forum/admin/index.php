@@ -101,8 +101,8 @@ if ($group_id) {
 			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
 			<br /><br />' .
-					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('No Moderation'),"2" => _('No Moderation') ),"moderation_level",0) . '
-				<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<p>
+					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
+				<br>' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br>' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
@@ -153,8 +153,8 @@ if ($group_id) {
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Deleted').'<br />
 				<p>' .
-					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('No Moderation'),"2" => _('No Moderation') ),"moderation_level",$f->getModerationLevel()) . '
-				<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<br>' . _('Moderated Level 1') . ': ' . _('Moderated Level 1') . '<p>
+					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
+				<br>' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br>' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 
 				<strong>'._('Forum Name').':</strong><br />
@@ -266,7 +266,7 @@ if ($group_id) {
 					}
 					$fm=new ForumMessage($f,$msg_id,false,false);
 					if (!$fm || !is_object($fm)) {
-						exit_error(_('Error'),_('Error'));
+						exit_error(_('Error'),_('Error getting new forum message'));
 					} elseif ($fm->isError()) {
 						exit_error(_('Error'),$fm->getErrorMessage());
 					}
@@ -308,14 +308,14 @@ if ($group_id) {
 					
 					$fm=new ForumMessage($f,$msg_id,false,false);
 					if (!$fm || !is_object($fm)) {
-						exit_error(_('Error'),_('Error'));
+						exit_error(_('Error'),_('Error getting new forum message'));
 					} elseif ($fm->isError()) {
 						exit_error(_('Error'),$fm->getErrorMessage());
 					}
 					
 					$fh = new ForumHTML($f);
 					if (!$fh || !is_object($fh)) {
-						exit_error(_('Error'),_('Error'));
+						exit_error(_('Error'),_('Error getting new forumhtml'));
 					} elseif ($fh->isError()) {
 						exit_error(_('Error'),$fh->getErrorMessage());
 					}

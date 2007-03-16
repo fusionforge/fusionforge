@@ -176,7 +176,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<?php echo _('Custom response title and text'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
 	<textarea name="response_text" rows="10" cols="50"></textarea>
-	<input type="checkbox" name="add_to_can" value="<?php echo _('yes'); ?>" /><?php echo _('yes') ;?>
+	<input type="checkbox" name="add_to_can" value="<?php echo _('yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
 	<br />
 	<input type="submit" name="submit" value="<?php echo _('Reject'); ?>" />
 	</form>

@@ -122,7 +122,7 @@ print '
 <strong>' ._('Subject').':</strong>'.utils_requiredField().'
 <br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
 
-<p><strong>'._('Text of Message'). ':</strong>'.utils_requiredField(). _('Text of Message').'</p>
+<p><strong>'._('Text of Message'). ':</strong>'.utils_requiredField(). _('(will be appended with unsubscription information, if applicable)').'</p>
 <pre><textarea name="mail_message" cols="70" rows="20">
 </textarea>
 </pre>

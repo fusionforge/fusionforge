@@ -76,7 +76,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
-	exit_error(_('Error'),"Error getting Forum");
+	exit_error(_('Error'),_('Error getting Forum'));
 }	elseif ($f->isError()) {
 	exit_error(_('Error'),$f->getErrorMessage());
 }
@@ -157,7 +157,7 @@ if ($edit=="yes") {
 			forum_header(array('title'=>_('Attachments')));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting new ForumHTML'));
 			} elseif ($fh->isError()) {
 				exit_error(_('Error'),$fh->getErrorMessage());
 			}

@@ -44,7 +44,7 @@ if ($forum_id) {
 		FROM forum_group_list
 		WHERE group_forum_id='$forum_id'");
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('Error'),_('Error').' '.db_error());
+		exit_error(_('Error'),_('Error forum not found ').' '.db_error());
 	}
 	$group_id=db_result($result,0,'group_id');
 
@@ -58,7 +58,7 @@ if ($forum_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error'),"Error getting new Forum");
+		exit_error(_('Error'),_('Error getting new Forum'));
 	} elseif ($f->isError()) {
 		exit_error(_('Error'),$f->getErrorMessage());
 	}
@@ -77,10 +77,10 @@ if ($forum_id) {
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error'), "Error getting new ForumMessage");
+			exit_error(_('Error'), _('Error getting new ForumMessage'));
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+			exit_error(_('Error'),_('Error getting new ForumMessage: '.$fm->getErrorMessage());
 		}
 
 		$sanitizer = new TextSanitizer();
@@ -95,7 +95,7 @@ if ($forum_id) {
 		
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
+			exit_error(_('Error'),_('Error creating ForumMessage: ').$fm->getErrorMessage());
 		} else {
 			if ($fm->isPending() ) {
 				$feedback=_('Message Queued for moderation -> Please wait until the admin approves/rejects it');
@@ -120,7 +120,7 @@ if ($forum_id) {
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error(_('Error'), "Error getting new ForumMessageFactory");
+		exit_error(_('Error'),_('Error getting new ForumMessageFactory'));
 	} elseif ($fmf->isError()) {
 		form_release_key(getStringFromRequest("form_key"));
 		exit_error(_('Error'),$fmf->getErrorMessage());
@@ -137,7 +137,7 @@ if ($forum_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error(_('Error'), "Error getting new ForumHTML");
+		exit_error(_('Error'),_('Error getting new ForumHTML'));
 	} elseif ($fh->isError()) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}
@@ -166,7 +166,7 @@ if ($forum_id) {
 	//create a pop-up select box showing options for viewing threads
 
 	$vals=array('nested','flat','threaded','ultimate');
-	$texts=array(_('Nested'), _('Nested'), _('Nested'), _('Nested'));
+	$texts=array(_('Nested'), _('Flat'), _('Threaded'), _('Ultimate'));
 
 	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
 
@@ -392,7 +392,7 @@ if ($forum_id) {
 
 } else {
 
-	exit_error(_('Error'),_('Error'));
+	exit_error(_('Error'),_('No forum chosen'));
 
 }
 

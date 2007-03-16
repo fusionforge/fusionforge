@@ -50,7 +50,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			create a new job
 		*/
 		if (!$title || !$description || $category_id==100) {
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
@@ -73,7 +73,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if (!$title || !$description || $category_id==100 || $status_id==100 || !$job_id) {
 			//required info
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 
 		$sql="UPDATE people_job SET title='".htmlspecialchars($title)."',description='".htmlspecialchars($description)."',status_id='$status_id',category_id='$category_id' ".
@@ -92,7 +92,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if ($skill_id == "xyxy" || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
 			//required info
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
@@ -108,7 +108,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if ($skill_level_id==100 || $skill_year_id==100  || !$job_id || !$job_inventory_id) {
 			//required info
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
@@ -131,7 +131,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		*/
 		if (!$job_id) {
 			//required info
-			exit_error(_('error - missing info'),_('error - missing info'));
+			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {

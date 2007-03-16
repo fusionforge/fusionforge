@@ -119,7 +119,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 	<table width="10%" border="0">
 	<tr>
 		<td>'._('Assignee').'<br />'. $tech_box .'</td>
-		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,true, _('Status')) .'</td>
+		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,true, _('Any')) .'</td>
 		<td>'._('Category').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Detail View').'<br />'. $view_box .'</td>

@@ -153,7 +153,7 @@ if ($project->usesFRS()) {
 			'._('Date').'
 		</td>
 		<td style="text-align:center">
-			'._('Notes').' / '._('Notes').'
+			'._('Notes').' / '._('Monitor').'
 		</td>
 		<td style="text-align:center">
 			'._('Download').'

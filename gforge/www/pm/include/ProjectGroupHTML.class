@@ -37,7 +37,7 @@ function pm_header($params) {
 	}
 
 	if (!$project->usesPm()) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('This Project Has Turned Off The Task Manager'));
 	}
 
 	site_project_header($params);

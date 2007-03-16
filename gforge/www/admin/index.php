@@ -111,7 +111,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <ul>
 	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/register/"><?php echo _('Register New Project'); ?></a></li>
-	<li><?php echo _('Groups with status'); ?> <a href="approve-pending.php"><?php echo _('Groups with status'); ?> <em><?php echo _('Groups with status'); ?></em></a></li>
+	<li><?php echo _('Groups with status'); ?> <a href="approve-pending.php"><?php echo _('Pending (P)'); ?> <em><?php echo _('(New Project Approval)'); ?></em></a></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo _('Groups with status'); ?>
 	<select name="status">
@@ -130,7 +130,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <strong><?php echo _('News'); ?></strong>
 </p>
 <ul>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/"><?php echo _('Approve/Reject'); ?></a> <?php echo _('Approve/Reject'); ?></li>
+	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/"><?php echo _('Approve/Reject'); ?></a> <?php echo _('Front-page news'); ?></li>
 </ul>
 
 <p>

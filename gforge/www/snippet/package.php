@@ -110,7 +110,7 @@ function show_add_snippet_box() {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error'),_('Error'));
+			exit_error(_('Error'),_('Error - Go back and fill in all the information'));
 		}
 
 	}

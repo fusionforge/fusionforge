@@ -193,7 +193,7 @@ echo license_selectbox('license',$license);
 
 
 <div align="center">
-<input type="submit" name="submit" value="<?php echo _('Submit') ?>"/> <input type="submit" name="i_disagree" value="<?php echo _('Submit') ?>"/>
+<input type="submit" name="submit" value="<?php echo _('Submit') ?>"/> <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
 </div>
 
 </form>

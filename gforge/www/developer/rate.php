@@ -76,7 +76,7 @@ if (!session_loggedin()) {
 			}
 		}
 	} else {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('You can't rate yourself'));
 	}
 
 	echo $HTML->header(array('title'=>_('User Ratings Page')));

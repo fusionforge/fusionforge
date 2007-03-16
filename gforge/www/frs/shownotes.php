@@ -39,7 +39,7 @@ $result=db_query("SELECT frs_release.notes,frs_release.changes,
 		AND frs_release.release_id='$release_id'");
 
 if (!$result || db_numrows($result) < 1) {
-	exit_error(_('Error'), _('Error'));
+	exit_error(_('Error'), _('That Release Was Not Found'));
 } else {
 
 	$group_id=db_result($result,0,'group_id');

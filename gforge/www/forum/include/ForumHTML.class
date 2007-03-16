@@ -487,7 +487,7 @@ class ForumHTML extends Error {
 				$params['group'] = $group_id;
 				plugin_hook("text_editor",$params);
 				if (!$GLOBALS['editor_was_set_up']) {
-					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 				}
 				unset($GLOBALS['editor_was_set_up']);
@@ -554,7 +554,7 @@ class ForumHTML extends Error {
 				$params['group'] = $group_id;
 				plugin_hook("text_editor",$params);
 				if (!$GLOBALS['editor_was_set_up']) {
-					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 				}
 				unset($GLOBALS['editor_was_set_up']);
@@ -569,11 +569,11 @@ class ForumHTML extends Error {
 
 			<?php
 			if (!session_loggedin()) {
-				echo '<span class="highlight">'._('You are posting anonymously because you are not').' <a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['._('You are posting anonymously because you are not').']</a></span>';
+				echo '<span class="highlight">'._('You are posting anonymously because you are not').' <a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['._('logged in').']</a></span>';
 			}
 			?>
 			<br />
-			<input type="submit" name="submit" value="<?php echo _('Post Comment'); echo ((!session_loggedin())?' '._('Post Comment'):''); ?>" /><?php
+			<input type="submit" name="submit" value="<?php echo _('Post Comment'); echo ((!session_loggedin())?' '._('Anonymously'):''); ?>" /><?php
 				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'._('Receive followups via email').'.' : ''); ?>
 				</p>
 			</td></tr></table></fieldset>
