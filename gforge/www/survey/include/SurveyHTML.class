@@ -42,7 +42,7 @@ class SurveyHTML extends Error {
 		
 		if ($project =& group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-			exit_error(_('Error'), _('Error'));
+			exit_error(_('Error'), _('This Group Has Turned Off Surveys.'));
 			}
 			
 			site_project_header($params);
@@ -729,4 +729,5 @@ class SurveyHTML extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
+
 ?>

@@ -22,11 +22,11 @@ if (!$sys_show_source) {
 $file = getStringFromRequest('file');
 
 if (!$file) {
-	exit_error(_('Missing File Argument'), _('Missing File Argument'));
+	exit_error(_('Missing File Argument'), _('A file must be specified for this page.'));
 }
 
 if (strstr($file,'..')) {
-	exit_error(_('Invalid File Argument'), _('Invalid File Argument'));
+	exit_error(_('Invalid File Argument'), _('The file argument is invalid.'));
 }
 
 $dir = dirname($file);
@@ -39,7 +39,7 @@ if ($dir) {
 }
 
 if (!file_exists($fname) || @is_dir($fname)) {
-	exit_error(_('File Not Found'), _('File Not Found'));
+	exit_error(_('File Not Found'), _('Cannot find specified file to display.'));
 }
 
 $HTML->header(array('title'=>sprintf(_('Source of %1$s'), $file)));
@@ -48,4 +48,10 @@ show_source($fname);
 
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

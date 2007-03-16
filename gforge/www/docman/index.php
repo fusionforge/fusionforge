@@ -83,7 +83,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 
 $df->setLanguageID($language_id);
 
-docman_header(_('Document Manager: Display Document'),_('Document Manager: Display Document'));
+docman_header(_('Document Manager: Display Document'),_('Project: %1$s'));
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1){
@@ -154,5 +154,10 @@ docman_recursive_display(0);
 }
 
 docman_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

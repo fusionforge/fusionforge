@@ -58,7 +58,12 @@ if ($docid) {
 	echo $d->getFileData();
 
 } else {
-	exit_error(_('No document data'),_('No document data'));
+	exit_error(_('No document data'),_('No document to display - invalid or inactive document number.'));
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

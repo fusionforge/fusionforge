@@ -50,7 +50,7 @@ print '<p><h3>'.$title.'</h3>
 
 <p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a>';
 
-$arr=array(_('Rank'),_('Rank'),_('Rank'));
+$arr=array(_('Rank'),_('Project name'),_('Percentile'));
 
 echo $HTML->listTableTop($arr);
 
@@ -75,4 +75,10 @@ print '<tr class="tablegetmore"><td>'.(($offset>0)?'<a href="mostactive.php?type
 echo $HTML->listTableBottom();
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

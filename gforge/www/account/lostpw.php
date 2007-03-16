@@ -43,7 +43,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u || !is_object($u)){
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Invalid user'),_('Invalid user'));
+		exit_error(_('Invalid user'),_('That user does not exist.'));
 	}
 
 	// First, we need to create new confirm hash
@@ -101,5 +101,10 @@ echo _('<p>Hey... losing your password is serious business. It compromises the s
 <?php
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

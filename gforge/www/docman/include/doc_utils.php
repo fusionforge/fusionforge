@@ -63,7 +63,7 @@ function docman_header($title,$pagehead,$style='xyz') {
 	}
 
 	if (!$project->usesDocman()) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('This project has turned off the Doc Manager.'));
 	}
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
@@ -242,5 +242,9 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo "</ul>\n";
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

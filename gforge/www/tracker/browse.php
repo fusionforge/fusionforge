@@ -442,7 +442,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 			<tr>
 			<td><strong>'._('Assigned To').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
-				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('Nobody')) .'</td>
+				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {
 		echo '<strong>'._('State').': <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong>
@@ -474,5 +474,10 @@ if ($art_arr && count($art_arr) > 0) {
 }
 
 $ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

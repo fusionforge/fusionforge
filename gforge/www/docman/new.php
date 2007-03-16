@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$doc_group || $doc_group == 100) {
 		//cannot add a doc unless an appropriate group is provided		
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('No valid Document Group was selected.'));
 	}
 	
 	//if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename && (!$editor && !$name ) )) {		
@@ -63,7 +63,7 @@ if (getStringFromRequest('submit')) {
 
 	$d = new Document($g, false, false,$sys_engine_path);
 	if (!$d || !is_object($d)) {		
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error getting blank document.'));
 	} elseif ($d->isError()) {	
 		exit_error(_('Error'),$d->getErrorMessage());
 	}
@@ -75,7 +75,7 @@ if (getStringFromRequest('submit')) {
 			$sanitizer = new TextSanitizer();
 			$data = $sanitizer->SanitizeHtml($data);
 			if (strlen($data)<1) {
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Error getting blank document.'));
 			}
 			$uploaded_data_type='text/html';
 			break;
@@ -88,7 +88,7 @@ if (getStringFromRequest('submit')) {
 		}
 		case 'httpupload' : {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
-				exit_error(_('Error'),_('Error'));
+				exit_error(_('Error'),_('Invalid file name.'));
 			}
 			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 			$file_url='';
@@ -120,20 +120,20 @@ if (getStringFromRequest('submit')) {
 	//if (getStringFromRequest('Option')) {
 		//option was selected, proceed to show each one
 		$option_selected = getStringFromRequest('option_selected');
-		docman_header(_('Document Manager: Submit New Documentation'),_('Document Manager: Submit New Documentation'));
+		docman_header(_('Document Manager: Submit New Documentation'),_('Project: %1$s'));
 		echo'<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.') .'</p>
 		<form name="adddata" action="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post" enctype="multipart/form-data">
 		<table border="0" width="75%">
 		<tr>
 			<td>
-			<strong>'. _('Document Title').' :</strong>'. utils_requiredField(). sprintf(_('Document Title'), 5).'<br />
+			<strong>'. _('Document Title').' :</strong>'. utils_requiredField(). sprintf(_('(at least %$1s characters)'), 5).'<br />
 			<input type="text" name="title" size="40" maxlength="255" />
 			</td>
 		</tr>
 	
 		<tr>
 			<td>
-			<strong>'. _('Description') .' :</strong>'. utils_requiredField() . sprintf(_('Description'), 10).'<br />
+			<strong>'. _('Description') .' :</strong>'. utils_requiredField() . sprintf(_('(at least %$1s characters)'), 10).'<br />
 			<input type="text" name="description" size="50" maxlength="255" />
 			</td>
 		</tr>';		
@@ -236,7 +236,7 @@ if (getStringFromRequest('submit')) {
 		docman_footer(array());
 	/*
 	} else {
-		docman_header(_('Document Manager: Submit New Documentation'),_('Document Manager: Submit New Documentation'));
+		docman_header(_('Document Manager: Submit New Documentation'),_('Project: %1$s'));
 		?>
 		
 		<?php
@@ -253,5 +253,10 @@ if (getStringFromRequest('submit')) {
 	}
 	*/		
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

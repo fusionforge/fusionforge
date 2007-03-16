@@ -249,7 +249,7 @@ class ForumAdmin extends Error {
 
 			$fm=new ForumMessage($f,$msg_id);
 			if (!$fm || !is_object($fm)) {
-				exit_error(_('Error'),_('Error getting Forum'));
+				exit_error(_('Error'),_('Error Getting ForumMessage'));
 			} elseif ($fm->isError()) {
 				exit_error(_('Error'),$fm->getErrorMessage());
 			}

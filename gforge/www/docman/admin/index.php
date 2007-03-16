@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 			}
 		} elseif ($uploaded_data['name']) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-				exit_error(_('Error'),sprintf(_('Error'), $uploaded_data['name']));
+				exit_error(_('Error'),sprintf(_('Invalid file attack attempt %1$s'), $uploaded_data['name']));
 			}
 			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
 			$filename=$uploaded_data['name'];
@@ -177,7 +177,7 @@ if ($editdoc && $docid) {
 	}
 
 	
-	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
+	docman_header(_('Document Manager Administration'),_('Edit Docs'),'');
 
 	?>
 		<br />
@@ -188,14 +188,14 @@ if ($editdoc && $docid) {
 
 	<tr>
 		<td>
-		<strong><?php echo _('Document Title') ?>: </strong><?php echo utils_requiredField(); ?> <?php printf(_('Document Title'), 5) ?><br />
+		<strong><?php echo _('Document Title') ?>: </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
 		<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>" />
 		<br /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('Description'), 10) ?><br />
+		<strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
 		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
 		<br /></td>
 	</tr>
@@ -330,7 +330,7 @@ if ($editdoc && $docid) {
 //
 } elseif (getStringFromRequest('addgroup')) {
 
-	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
+	docman_header(_('Document Manager Administration'),_('Add Document Groups'),'');
 
 	echo "<h1>"._('Add Document Groups')."</h1>";
 	
@@ -410,7 +410,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$dgh->getErrorMessage());
 	}
 
-	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
+	docman_header(_('Document Manager Administration'),_('Edit Groups'),'');
 	?>
 	<p><strong><?php echo _('Edit a group') ?></strong></p>
 	<form name="editgroup" action="index.php?editgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
@@ -444,7 +444,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 	
-	docman_header(_('Document Manager Administration'),_('Document Manager Administration'),'');
+	docman_header(_('Document Manager Administration'),_('Edit Groups'),'');
 ?>
 		<p>
 		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
@@ -509,5 +509,10 @@ if ($editdoc && $docid) {
 	docman_footer(array());
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

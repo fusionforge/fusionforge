@@ -38,7 +38,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!validate_email($newemail)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Invalid email address.'));
 	}
 
 	$confirm_hash = substr(md5($session_hash . time()),0,16);
@@ -94,5 +94,10 @@ echo _('<p>Changing your email address will require confirmation from your new e
 
 <?php
 site_user_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

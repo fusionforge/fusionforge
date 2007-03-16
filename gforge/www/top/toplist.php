@@ -55,7 +55,7 @@ else {
 }
 $HTML->header(array('title'=>$title));
 print '<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a>';
-$arr=array(_('Rank'),_('Rank'),"$column1");
+$arr=array(_('Rank'),_('Project name'),"$column1");
 echo $HTML->listTableTop($arr);
 
 echo db_error();
@@ -80,4 +80,10 @@ while ($row_top = db_fetch_array($res_top)) {
 echo $HTML->listTableBottom();
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

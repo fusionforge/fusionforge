@@ -87,7 +87,7 @@
 		/*
 			Put the result set (list of forums for this group) into a column with folders
 		*/
-		$tablearr=array(_('Tracker'),_('Tracker'));
+		$tablearr=array(_('Tracker'),_('Description'));
 		echo $HTML->listTableTop($tablearr);
 
 		for ($j = 0; $j < count($at_arr); $j++) {
@@ -149,5 +149,10 @@
 	}
 
 	echo site_project_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

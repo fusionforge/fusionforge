@@ -270,7 +270,7 @@ echo'
 		<td>'._('Assignee').':</a><br />'. $tech_box .'</td>
 		<td>';
 		if (!$ath->usesCustomStatuses()) {
-			echo _('State').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,_('State'));
+			echo _('State').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,_('Any'));
 		}
 		echo '</td>
 	</tr>';
@@ -295,5 +295,10 @@ echo '
 		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
 	</tr>
 	</form></table></body></html>';
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

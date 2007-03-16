@@ -43,7 +43,7 @@ function survey_header($params) {
 
 	if ($project =& group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
-			exit_error(_('Error'), _('Error'));
+			exit_error(_('Error'), _('This Group Has Turned Off Surveys.'));
 		}
 		
 		site_project_header($params);
@@ -91,5 +91,10 @@ function survey_header($params) {
 function survey_footer($params) {
 	site_project_footer($params);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

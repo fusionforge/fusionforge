@@ -258,7 +258,7 @@ class projects_hierarchyPlugin extends Plugin {
 							print "<b>"._('Authorize')."</b>";
 						}
 						echo '</td>';
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_son.php?group_id=".$group_id."&sub_group_id=".$row_son['sub_project_id']."\"}'}>"._('Do you really want to delete this link ?')."</a></td>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_son.php?group_id=".$group_id."&sub_group_id=".$row_son['sub_project_id']."\"}'}>"._('Delete')."</a></td>";
 						echo "<tr><td colspan='4'>"._('Commentary :')." <i>".$row_son['com']."</i>";
 						echo '</td></tr>';
 					}
@@ -303,13 +303,13 @@ class projects_hierarchyPlugin extends Plugin {
 						echo '<td>';
 						if($row_son[activated] == 'f'){
 						//echo _('Waiting');
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_son['project_id']."\"}'}>"._('Do you really want to authorize this project ?')."</a></td>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_son['project_id']."\"}'}>"._('Authorize')."</a></td>";
 						}
 						else {
 							print "<b>"._('Authorize')."</b>";
 						}
 						echo '</td>';
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?group_id=".$row_son['project_id']."&sub_group_id=".$group_id."\"}'}>"._('Do you really want to delete this link ?')."</a></td>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?group_id=".$row_son['project_id']."&sub_group_id=".$group_id."\"}'}>"._('Delete')."</a></td>";
 						echo "<tr><td colspan='4'>"._('Commentary of father :')." <i>".$row_son['com']."</i></td>";
 						echo '</tr>';
 					}
@@ -336,7 +336,7 @@ class projects_hierarchyPlugin extends Plugin {
 					echo '<td>';
 					echo "<a href=\"../../projects/".$row_father['unix_group_name']."\">".$row_father['group_name']."</a>";
 					echo '</td><td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_father['group_id']."\"}'}>"._('Do you really want to delete this link ?')."</a></td>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_father['group_id']."\"}'}>"._('Delete')."</a></td>";
 					echo '</td></tr>';
 					}
 					echo '</table>';
@@ -366,7 +366,7 @@ class projects_hierarchyPlugin extends Plugin {
 					echo'<td>';
 					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_wait[group_id]."\"}'}>"._('Do you really want to authorize this project ?')."</a></td>";
 					echo '</td><td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait[group_id]."\"}'}>"._('Do you really want to delete this link ?')."</a></td>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait[group_id]."\"}'}>"._('Delete')."</a></td>";
 					echo "</td><tr><td colspan='3'>"._('Commentary of father :')." <i>".$row_wait[com]."</i>";
 					echo '</td></tr>';
 					}

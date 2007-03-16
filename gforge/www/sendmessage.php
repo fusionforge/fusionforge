@@ -32,7 +32,7 @@ $toaddress = getStringFromRequest('toaddress');
 $touser = getStringFromRequest('touser');
 
 if (!$toaddress && !$touser) {
-	exit_error(_('Error'),_('Error'));
+	exit_error(_('Error'),_('Error - some variables were not provided'));
 }
 
 if ($touser) {
@@ -42,12 +42,12 @@ if ($touser) {
 	*/
 	$result=db_query("SELECT email,user_name FROM users WHERE user_id='$touser'");
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('Error'),_('Error'));
+		exit_error(_('Error'),_('Error - That user does not exist'));
 	}
 }
 
 if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
-	exit_error(_('Error'),_('Error')." @".$GLOBALS['sys_default_domain']);
+	exit_error(_('Error'),_('You can only send to addresses ')." @".$GLOBALS['sys_default_domain']);
 }
 
 
@@ -137,5 +137,9 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 <?php
 $HTML->footer(array());
 
-?>
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
+?>

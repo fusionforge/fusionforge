@@ -427,4 +427,9 @@ docman_display_documents($nested_groups,$df,'');
 
 $HTML->footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

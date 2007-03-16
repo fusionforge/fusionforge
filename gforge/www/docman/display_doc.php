@@ -34,7 +34,12 @@ if ($docid) {
 	printf(_('This document was moved to <a href="/docman/view.php/%1$s/%2$s">this new location</a>'), $group_id, $docid);
 	docman_footer(array());
 } else {
-	exit_error(_('No document data'),_('No document data'));
+	exit_error(_('No document data'),_('No document to display - invalid or inactive document number.'));
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

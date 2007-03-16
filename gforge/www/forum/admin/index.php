@@ -260,7 +260,7 @@ if ($group_id) {
 					//actually finish editing the message and save the contents
 					$f = new Forum ($fa->GetGroupObject(),$forum_id);
 					if (!$f || !is_object($f)) {
-						exit_error('Error','Could Not Get Forum Object');
+						exit_error('Error','Error Getting Forum');
 					} elseif ($f->isError()) {
 						exit_error('Error',$f->getErrorMessage());
 					}
@@ -301,21 +301,21 @@ if ($group_id) {
 					
 					$f = new Forum ($fa->GetGroupObject(),$forum_id);
 					if (!$f || !is_object($f)) {
-						exit_error('Error','Could Not Get Forum Object');
+						exit_error('Error','Error Getting Forum');
 					} elseif ($f->isError()) {
 						exit_error('Error',$f->getErrorMessage());
 					}
 					
 					$fm=new ForumMessage($f,$msg_id,false,false);
 					if (!$fm || !is_object($fm)) {
-						exit_error(_('Error'),_('Error getting new forum message'));
+						exit_error(_('Error'),_('Error Getting ForumMessage'));
 					} elseif ($fm->isError()) {
 						exit_error(_('Error'),$fm->getErrorMessage());
 					}
 					
 					$fh = new ForumHTML($f);
 					if (!$fh || !is_object($fh)) {
-						exit_error(_('Error'),_('Error getting new forumhtml'));
+						exit_error(_('Error'),_('Error Getting ForumHTML'));
 					} elseif ($fh->isError()) {
 						exit_error(_('Error'),$fh->getErrorMessage());
 					}

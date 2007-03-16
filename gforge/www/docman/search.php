@@ -71,7 +71,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor())
 }
 
 
-docman_header(_('Document Manager: Display Document'),_('Document Manager: Display Document'),'docman','',$g->getPublicName());
+docman_header(_('Document Manager: Display Document'),_('Project: %1$s'),'docman','',$g->getPublicName());
 
 $vtp = new VTemplate;
 $handle = $vtp->Open("search.tpl.html");
@@ -247,4 +247,10 @@ function prepare_search_text ($text)
 	$rep = strtolower ($rep);
 	return $rep;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

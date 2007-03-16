@@ -30,7 +30,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
-	$tablearr=array(_('Tracker'),_('Tracker'),_('Tracker'),_('Tracker'));
+	$tablearr=array(_('Tracker'),_('Description'),_('Open'),_('Total'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($at_arr); $j++) {
@@ -58,5 +58,10 @@ if (!$at_arr || count($at_arr) < 1) {
 }
 
 echo site_project_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
