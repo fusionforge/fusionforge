@@ -1067,7 +1067,7 @@ Enjoy the site.
 		$this->is_logged_in=$val;
 		if ($val) {
 			//if this is the logged in user, see if they are a super user
-			$sql="SELECT count(*) FROM user_group WHERE user_id='". $this->getID() ."' AND group_id='1' AND admin_flags='A'";
+			$sql="SELECT count(*) AS count FROM user_group WHERE user_id='". $this->getID() ."' AND group_id='1' AND admin_flags='A'";
 			$result=db_query($sql);
 			if (!$result) {
 				$this->is_super_user=false;

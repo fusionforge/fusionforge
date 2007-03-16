@@ -542,7 +542,7 @@ class SurveyHTML extends Error {
 			$last_question_type=$question_type;
 		}
 		
-		$ret.='<tr><td align="center" colspan="2">'.
+		$ret.='<tr><td style="text-align:center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
 			'<br /><a href="'.$GLOBALS['sys_urlprefix'].'/survey/privacy.php">'._('Survey Privacy').'</a>'.
 			'</td></tr></form></table>';
@@ -653,7 +653,7 @@ class SurveyHTML extends Error {
 					$linelength = 0;
 					//print 100 chars in words per line
 					foreach ($words as $word) {
-						// if we have a stupidly strange word with lots of letters, we´ll make a new line for it and split it
+						// if we have a stupidly strange word with lots of letters, we'll make a new line for it and split it
 						if ( (strlen($word)>100) && ((strlen($word)+$linelength)>100)) {	
 							$chunks = $this->split_str($word,50);
 							foreach ($chunks as $chunk) {

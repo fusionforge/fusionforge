@@ -96,7 +96,7 @@ $cell_data[] = array(_('Release &amp; Notes'),'rowspan="2"');
 $cell_data[] = array(_('Filename'),'rowspan="2"');
 $cell_data[] = array(_('Date'),'colspan="4"');
 
-echo $GLOBALS[HTML]->multiTableRow('', $cell_data, TRUE);
+echo $GLOBALS['HTML']->multiTableRow('', $cell_data, TRUE);
 
 $cell_data=array();
 $cell_data[] = array(_('Size'));
@@ -104,7 +104,7 @@ $cell_data[] = array(_('D/L'));
 $cell_data[] = array(_('Arch'));
 $cell_data[] = array(_('Type'));
 
-echo $GLOBALS[HTML]->multiTableRow('',$cell_data, TRUE);
+echo $GLOBALS['HTML']->multiTableRow('',$cell_data, TRUE);
 
 $proj_stats['packages'] = $num_packages;
 
@@ -156,7 +156,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
 				'colspan="4" align="center"');
 			
-			print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
+			print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
 			// get the files in this release....
 			$sql = "SELECT frs_file.filename AS filename,
 				frs_file.file_size AS file_size,
@@ -197,10 +197,10 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 					if ( $release_id  ) {
 						if ( $release_id == $package_release['release_id'] ) {
-							print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data,FALSE);
+							print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data,FALSE);
 						}
 					} else {
-						print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
+						print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
 					}
 					$proj_stats['size'] += $file_release['file_size'];
 					$proj_stats['downloads'] += $file_release['downloads'];

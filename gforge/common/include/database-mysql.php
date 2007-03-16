@@ -10,15 +10,6 @@
  */
 
 /**
- * System-wide database type
- *
- * @var	constant		$sys_database_type
- */
-
-$sys_database_type = 'mysql' ;
-
-
-/**
  *  db_connect() -  Connect to the database
  *
  *  Notice the global vars that must be set up

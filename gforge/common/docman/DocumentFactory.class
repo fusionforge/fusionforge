@@ -188,7 +188,8 @@ class DocumentFactory extends Error {
 		
 		if (count($return) == 0) {
 			$this->setError(_('No Documents Found'));
-			return false;
+			$return = NULL;
+			return $return;
 		}
 
 		return $return;

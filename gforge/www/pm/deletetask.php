@@ -31,10 +31,10 @@ pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_i
 			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td align="center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo _('Yes, I want to delete this task'); ?></td>
+		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo _('Yes, I want to delete this task'); ?></td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>
+		<td style="text-align:center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>
 	</tr>
 
 </table>

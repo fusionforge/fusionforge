@@ -139,13 +139,13 @@ function project_summary($group_id,$mode,$no_table) {
 				$return .= '<p>
 				&nbsp;-&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 				'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-				( <strong>'. db_result($result, $j, 'open_count') .' '._('open').'  / '. db_result($result, $j, 'count') . _('open').' </strong> )<br />'.
+				( <strong>'. db_result($result, $j, 'open_count') .' '._('open').' / '. db_result($result, $j, 'count') . _('total').' </strong> )<br />'.
 				db_result($result, $j, 'description') . '</p>';
 			}   
 		}
 	}
 
-	// ##################### Doc Manager
+	// ##################### Forums
 
 	if ($project->usesForum()) {
 		$return .= '

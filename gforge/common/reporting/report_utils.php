@@ -36,7 +36,9 @@ function report_header($title) {
 
 function report_footer() {
 	global $HTML;
-	echo html_feedback_bottom($GLOBALS['feedback']);
+	if (isset($GLOBALS['feedback'])) {
+		echo html_feedback_bottom($GLOBALS['feedback']);
+	}
 	echo $HTML->footer(array());
 }
 
@@ -101,9 +103,14 @@ function report_months_box($Report, $name='month', $selected=false) {
 }
 
 function report_useract_box($name='dev_id', $selected='1', $start_with='') {
+	global $sys_database_type;
 
 	if ($start_with) {
-		$sql2=" AND lastname ILIKE '$start_with%' ";
+		if ( $sys_database_type == "mysql" ) {
+			$sql2=" AND lastname LIKE '$start_with%' ";
+		} else {
+			$sql2=" AND lastname ILIKE '$start_with%' ";
+		}
 	}
 
 	$res=db_query("SELECT user_id,realname 
@@ -114,9 +121,14 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 }
 
 function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
+	global $sys_database_type;
 
 	if ($start_with) {
-		$sql2=" AND lastname ILIKE '$start_with%' ";
+		if ( $sys_database_type == "mysql" ) {
+			$sql2=" AND lastname LIKE '$start_with%' ";
+		} else {
+			$sql2=" AND lastname ILIKE '$start_with%' ";
+		}
 	}
 
 	$res=db_query("SELECT user_id,realname 

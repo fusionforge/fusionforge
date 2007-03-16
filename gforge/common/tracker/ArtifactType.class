@@ -590,7 +590,7 @@ class ArtifactType extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) FROM artifact_type_monitor 
+		$sql="SELECT count(*) AS count FROM artifact_type_monitor 
 			WHERE user_id='".user_getid()."' AND group_artifact_id='".$this->getID()."';";
 		$result = db_query($sql);
 		$row_count = db_fetch_array($result);

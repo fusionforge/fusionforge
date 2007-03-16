@@ -499,10 +499,10 @@ if ($sys_show_source) {
         $TABS_TITLES[]=_('Home Page');
         */
 
-	// Project Activity tab 
-	$TABS_DIRS[]='/activity/?group_id='. $group;
-	$TABS_TITLES[]=_('Activity');
-	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
+        // Project Activity tab 
+        $TABS_DIRS[]='/activity/?group_id='. $group;
+        $TABS_TITLES[]=_('Activity');
+        (($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
         // Forums
         if ($project->usesForum()) {
@@ -836,7 +836,7 @@ if ($sys_show_source) {
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
                             <tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
                                 <td colspan="2">'._('Search in').':</td>
-                                <td style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('Select').'</a></td>
+                                <td style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
                             </tr>
                             <tr height="20">
                                 <td colspan="3">&nbsp;</td>
@@ -867,7 +867,7 @@ if ($sys_show_source) {
                                     <a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
             .'    </td>
                                 <td style="text-align:right">'
-            ._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('Select').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('Select').'</a>
+            ._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
                                 </td>
                             </tr>
                             <tr style="background-color:'. $this->COLOR_LTBACK1.'">

@@ -299,28 +299,29 @@ class ForumMessage extends Error {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
-		} else {
-			$msg_id=db_insertid($result,'forum','msg_id');
-			if (!$this->fetchData($msg_id)) {
-				db_rollback();
-				return false;
-			}
-			if (!$msg_id) {
-				db_rollback();
-				$this->setError(_('ForumMessage::create() Unable to get new message id'));
-				return false;
-			} else {
-				if (!$this->sendNotice($has_attach)) {
-					db_rollback();
-					return false;
-				}
-//echo "Committing";
-				db_commit();
-//echo "db_error()".db_error();
-				$this->awaits_moderation = false;
-				return true;
-			}
 		}
+
+		$msg_id=db_insertid($result,'forum','msg_id');
+		if (!$this->fetchData($msg_id)) {
+			db_rollback();
+			return false;
+		}
+
+		if (!$msg_id) {
+			db_rollback();
+			$this->setError(_('ForumMessage::create() Unable to get new message id'));
+			return false;
+		}
+
+		if (!$this->sendNotice($has_attach)) {
+			db_rollback();
+			return false;
+		}
+//echo "Committing";
+		db_commit();
+//echo "db_error()".db_error();
+		$this->awaits_moderation = false;
+		return true;
 	}
 	
 	
@@ -366,7 +367,7 @@ class ForumMessage extends Error {
 		}
 
 		//see if that message has been posted already for all the idiots that double-post
-		//we shouldn´t need this, the double post checker functions solve this issue now
+		//we shouldn't need this, the double post checker functions solve this issue now
 		/*$res3=db_query("SELECT * FROM forum 
 			WHERE is_followup_to='$is_followup_to' 
 			AND body='".  htmlspecialchars($body) ."'
@@ -672,8 +673,8 @@ class ForumMessage extends Error {
 		"\nBy: " . $this->getPosterRealName() . "\n";
 		
 		if ($has_attach) {
-			//if there´s an attachment for the message, make it note.
-			//Note: We can´t give a link for the attachment here because it hasn´t been created yet (first the message needs to be created
+			//if there's an attachment for the message, make it note.
+			//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
 			$body .= "A file has been uploaded with this message\n\n";
 		} else {
 			$body .= "\n";

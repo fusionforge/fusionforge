@@ -115,18 +115,29 @@ if ($week) {
 	report_header(_('Time Tracking'));
 
 	if (!$group_project_id) {
-		$respm=db_query("SELECT pgl.group_project_id,g.group_name || '**' || pgl.project_name
+	    if ( $sys_database_type == "mysql" ) {
+			$sql="SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name)
+		} else {
+			$sql="SELECT pgl.group_project_id,g.group_name || '**' || pgl.project_name ";
+		}
+		$sql.="
 		FROM groups g, project_group_list pgl, user_group ug
 		WHERE ug.user_id='".user_getid()."' 
 		AND ug.group_id=g.group_id
 		AND g.group_id=pgl.group_id
-		ORDER BY group_name,project_name");
+		ORDER BY group_name,project_name";
+		$respm=db_query($sql);
 	}
 	?>
 	<h3><?php echo $Language->getText('reporting_ta','time_entries',date('Y-m-d',$week)); ?></h3>
 	<p>
 	<?php
-	$res=db_query("SELECT pt.project_task_id, pgl.project_name || '**' || pt.summary AS name, 
+	if ( $sys_database_type == "mysql" ) {
+		$sql="SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, 
+	} else {
+		$sql="SELECT pt.project_task_id, pgl.project_name || '**' || pt.summary AS name, ";
+	}
+	$sql .= "
 			rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 			FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
 			rep_time_category rtc
@@ -136,7 +147,9 @@ if ($week) {
 			AND g.group_id=pgl.group_id
 			AND pgl.group_project_id=pt.group_project_id
 			AND pt.project_task_id=rtt.project_task_id 
-			ORDER BY rtt.report_date");
+		ORDER BY rtt.report_date";
+	}
+	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if ($group_project_id || $rows) {
 

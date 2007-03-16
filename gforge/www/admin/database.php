@@ -87,7 +87,7 @@ if (getStringFromRequest('submit')) {
 site_admin_header(array('title'=>_('Site Admin: Groups\' DB Maintenance')));
 
 $res_db = db_query("
-	SELECT stateid,statename,COUNT(*)
+	SELECT stateid,statename,COUNT(*) AS count
 	FROM prdb_dbs,prdb_states
 	WHERE stateid=state
 	GROUP BY statename,stateid
@@ -104,7 +104,7 @@ if (db_numrows($res_db) > 0) {
 
 	while ($row_db = db_fetch_array($res_db)) {
 
-		print '<tr><td align="center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td align="center">'.$row_db['count'].'</td></tr>';
+		print '<tr><td style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?displaydb=1&dbstate='.$row_db['stateid'].'">'.$row_db['statename'].'</a></td><td style="text-align:center">'.$row_db['count'].'</td></tr>';
 
 	}
 

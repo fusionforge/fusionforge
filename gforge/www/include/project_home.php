@@ -143,19 +143,19 @@ if ($project->usesFRS()) {
 	echo '
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
 		<tr>
-		<td align="left">
+		<td style="text-align:left">
 			'._('Package').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'._('Version').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'._('Date').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'._('Notes').' / '._('Notes').'
 		</td>
-		<td align="center">
+		<td style="text-align:center">
 			'._('Download').'
 		</td>
 		</tr>';
@@ -200,8 +200,8 @@ if ($project->usesFRS()) {
 				} else {
 					$rel_date = getdate(db_result($res_files,$f,'release_date'));
 					echo '
-					<tr align="center">
-					<td align="left">
+					<tr style="text-align:center">
+					<td style="text-align:left">
 					<strong>' . db_result($res_files,$f,'package_name'). '</strong></td>';
 					// Releases to display
 					print '<td>'.db_result($res_files,$f,'release_name') .'
@@ -219,7 +219,7 @@ if ($project->usesFRS()) {
 
 		}
 		?></table>
-	<div align="center">
+	<div style="text-align:center">
 	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/?group_id=<?php print $group_id; ?>">[<?php echo _('View All Project Files')?>]</a>
 	</div>
 <?php
@@ -278,12 +278,12 @@ if ($project->usesTracker()) {
 if ($project->usesForum()) {
 	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
-	print '&nbsp;'._('Forums').'</a> ( ';
-	$forums_count = project_get_public_forum_count($group_id);
+	print '&nbsp;'._('Public Forums').'</a> ( ';
 	$messages_count = project_get_public_forum_message_count($group_id);
-	printf(ngettext("<strong>%d</strong> public forum","<strong>%d</strong> public forums",$forums_count),$forums_count);
-	print ' / ';
-	printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$forums_count),$forums_count);
+	$forums_count = project_get_public_forum_count($group_id);
+	printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
+	print ' in ';
+	printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
 	print ' )' ;
 }
 

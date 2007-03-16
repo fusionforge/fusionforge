@@ -74,8 +74,8 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a></td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>
-			<td align="center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
-			<td align="center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
+			<td style="text-align:center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
+			<td style="text-align:center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
 		</tr>';
 		}
 	}

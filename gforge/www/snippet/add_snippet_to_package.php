@@ -123,7 +123,7 @@ if (session_loggedin()) {
 	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />
 
 	<table>
-	<tr><td colspan="2" align="center">
+	<tr><td colspan="2" style="text-align:center">
 		<strong><?php echo _('Add This Snippet Version ID:'); ?></strong><br />
  <select name="snippet_version_id">
 <?php
@@ -149,7 +149,7 @@ for ($i=0; $i<$combolistrows; $i++)
 </select>
 	</td></tr>
 
-	<tr><td colspan="2" align="center">
+	<tr><td colspan="2" style="text-align:center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
 		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
@@ -173,7 +173,7 @@ for ($i=0; $i<$combolistrows; $i++)
 		echo $HTML->boxTop(_('Snippets In This Package'));
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td align="center">
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="text-align:center">
 				<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.

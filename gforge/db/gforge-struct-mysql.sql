@@ -10,7 +10,6 @@
 -- Database: `gforge`
 -- 
 -- CREATE DATABASE `gforge` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
-USE `gforge`;
 
 -- --------------------------------------------------------
 

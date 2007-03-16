@@ -87,7 +87,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			// print "<p>Release rating: ";
 			// print vote_show_thumbs($row_new[filerelease_id],2);
 			print "</td>";
-			print '<td align="center" nowrap="nowrap">';
+			print '<td style="text-align:center" nowrap="nowrap">';
 			// print '&nbsp;<br />Rate this Release!<br />';
 			// print vote_show_release_radios($row_new[filerelease_id],2);
 			print "&nbsp;</td>";
@@ -116,7 +116,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         	echo "&nbsp;";
         }
 
-	echo "</td><td colspan=\"2\" align=\"right\">";
+	echo '</td><td colspan="2" style="text-align:right">';
 	if (db_numrows($res_new)>$rows) {
 		echo "<a href=\"/new/?offset=".($offset+20)."\"><strong>"._('Older Releases')."</strong> " .
 		html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) .

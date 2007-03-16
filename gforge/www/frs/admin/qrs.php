@@ -264,7 +264,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center">
+		<td colspan="2" style="text-align:center">
 			<input type="checkbox" name="preformatted" value="1" /> <?php echo _('Preserve my pre-formatted text') ?>
 			<p><input type="submit" name="submit" value="<?php echo _('Release File') ?>" /></p>
 		</td>

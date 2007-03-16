@@ -73,13 +73,13 @@ if ($group_id) {
 			echo '<td width="33%">'.
 				'<strong>'.$currentList->getName().'</strong></td>'.
 				'<td width="33%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" align="center">'._('Not activated yet').'</td></tr>';
+				'<td width="33%" style="text-align:center">'._('Not activated yet').'</td></tr>';
 		} else {
 			echo '<td width="33%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
 				sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
 				'<td>'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
+				'<td width="33%" style="text-align:center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
 				'</td>';
 		}
 		echo '</tr>';

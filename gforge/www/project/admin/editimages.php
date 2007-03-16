@@ -283,7 +283,7 @@ for ($i=0; $i<$rows; $i++) {
 
 	echo '
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-	.'<td align="center">'
+	.'<td style="text-align:center">'
 	 .'<a href="'. getStringFromServer('PHP_SELF') .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
 	 .db_result($result,$i,'id').'">'
 	 .'['._('Del').']'.'</a>'
@@ -299,8 +299,8 @@ for ($i=0; $i<$rows; $i++) {
 	.'<td><a href="'.$GLOBALS['sys_urlprefix'].'/dbimage.php?id='.db_result($result,$i,'id').'">'
 	     .stripslashes(db_result($result,$i,'filename')).'</a></td>'
 	.'<td>'.db_result($result,$i,'filetype').'</td>'
-	.'<td align="right">'.db_result($result,$i,'filesize').'</td>'
-	.'<td align="right">'.$dims.'</td>'
+	.'<td style="text-align:right">'.db_result($result,$i,'filesize').'</td>'
+	.'<td style="text-align:right">'.$dims.'</td>'
 	.'<td>'.stripslashes(db_result($result,$i,'description')).'</td>'
 	.'</tr>';
 }

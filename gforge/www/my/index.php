@@ -230,13 +230,13 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 			$group = $f->getGroup();
 			if ($group->getID() != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.
+				<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.
 				$group->getID().'">'.
 				$group->getPublicName().'</a></td></tr>';
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$f->getID().
+			<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$f->getID().
 			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 			'border="0" alt="" /></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.
 			$f->getID().'">'.
@@ -275,7 +275,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 				db_result($result,$i,'group_name').'</a></td></tr>';
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 			'border="0" alt=""/></a></td><td width="99%"><a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.
@@ -306,7 +306,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '</td></tr>
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
 			<a href="'.$GLOBALS['sys_urlprefix'].'/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
@@ -351,7 +351,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 			}
 
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
 			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';

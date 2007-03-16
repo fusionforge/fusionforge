@@ -307,14 +307,14 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// list all trove categories
 		print trove_getcatlisting($row_grp['group_id'],1,0);
 
-		print '</span></td>'."\n".'<td align="right">'; // now the right side of the display
+		print '</span></td>'."\n".'<td style="text-align:right">'; // now the right side of the display
 		print 'Activity Percentile: <strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 		print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 		print '<br />Register Date: <strong>'.date($sys_datefmt,$row_grp['register_time']).'</strong>';
 		print '</span></td></tr>';
 /*
                 if ($row_grp['jobs_count']) {
-                	print '<tr><td colspan="2" align="center">'
+                	print '<tr><td colspan="2" style="text-align:center">'
                               .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
                 }
 */

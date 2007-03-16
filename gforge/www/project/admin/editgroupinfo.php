@@ -90,7 +90,7 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$feedback .= $group->getErrorMessage();
+		$feedback = $group->getErrorMessage();
 	} else {
 		$feedback .= _('Group information updated');
 	}

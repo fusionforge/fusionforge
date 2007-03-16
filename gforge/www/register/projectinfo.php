@@ -159,32 +159,33 @@ echo license_selectbox('license',$license);
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
 
 <?php
-	$SCMFactory=new SCMFactory();
 	if ($sys_use_scm) {
+		$SCMFactory=new SCMFactory();
 		$scm_plugins=$SCMFactory->getSCMs();
-		if(count($scm_plugins)!=0) {	
-			if(count($scm_plugins)==1) {
-				printf(_('As there exist just one SCM, then this will be selected automatically. <strong>%1$s</strong> will be selected.'), $scm_plugins[0]).'<br /><br />';
+		if (count($scm_plugins)!=0) {	
+			if (count($scm_plugins)==1) {
+				printf(_('As there is only one SCM system, then this will be selected automatically. <strong>%1$s</strong> will be selected.'), $scm_plugins[0]).'<br /><br />';
 				echo '<input type="hidden" name="scm" value="'. $scm_plugins[0].'">';
 			} else {
 				echo _('<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>')."\n";
+				echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
 				$checked=true;
 				foreach($scm_plugins as $plugin) {
 					$myPlugin= plugin_get_object($plugin);
-					echo '<p><input type="radio" name="scm" ';
+					echo '<td><input type="radio" name="scm" ';
 					echo 'value="'.$myPlugin->name.'"';
 					if (isset($scm) && strcmp($scm, $myPlugin->name) == 0) {
-						echo ' checked';
+						echo ' checked="checked"';
 					} elseif (!isset($scm) && $checked) {
-						echo ' checked';
+						echo ' checked="checked"';
 						$checked = false;
-					
 					}
-					echo '>'.$myPlugin->text.'</p>';
+					echo '>'.$myPlugin->text.'</td>';
 				}
+				echo '</tr></tbody></table>'."\n";
 			}
 		} else {
-			echo "Error - Site has SCM but no plugins registered";
+			echo 'Error - Site has SCM but no plugins registered';
 		}
 	}
 

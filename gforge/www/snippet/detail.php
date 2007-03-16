@@ -72,7 +72,7 @@ if ($type=='snippet') {
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
+				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
@@ -163,7 +163,7 @@ if ($type=='snippet') {
 				db_result($result,$i,'version').'</strong></a></td><td>'.
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
+				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
 				'</a> &nbsp; &nbsp; &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=package&snippet_package_version_id='.

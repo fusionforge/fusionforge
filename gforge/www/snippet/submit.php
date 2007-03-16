@@ -121,7 +121,7 @@ if (session_loggedin()) {
 		<textarea name="code" rows="30" cols="85" ></textarea>
 	</td></tr>
 
-	<tr><td colspan="2" align="center">
+	<tr><td colspan="2" style="text-align:center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 		<br />
 		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
