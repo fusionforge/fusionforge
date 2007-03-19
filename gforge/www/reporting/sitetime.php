@@ -79,8 +79,8 @@ if ($typ =='r') {
 	$labels = $report->labels;
 	$data = $report->getData();
 
-	echo $HTML->listTableTop (array($Language->getText('reporting_pa','type'),
-		$Language->getText('reporting_pa','time')));
+	echo $HTML->listTableTop (array($Language->getText('reporting','type'),
+		$Language->getText('reporting','time')));
 
 	for ($i=0; $i<count($labels); $i++) {
 

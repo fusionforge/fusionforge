@@ -105,7 +105,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$sql="SELECT * FROM news_bytes WHERE id='$id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error($Language->getText('general', 'error'), $Language->getText('news_admin', 'newsbyte_not_found'));
 		}
 		
 		$group =& group_get_object($group_id);
@@ -140,7 +140,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
@@ -254,7 +254,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			"AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error($Language->getText('general', 'error'), $Language->getText('news_admin', 'newsbyte_not_found'));
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
@@ -284,7 +284,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don´t have any plugin for text editor, display a simple textarea edit box
+			//if we donï¿½t have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);		

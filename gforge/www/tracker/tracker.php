@@ -266,7 +266,7 @@ switch (getStringFromRequest('func')) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=$Language->getText('tracker','comment_added');
 					} else {
-						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
+						if ( (strlen($details)>0) ) { //if there was no message, then itï¿½s not an error but addMessage returns false and sets missing params error
 							//some kind of error in creation
 							exit_error($ah->getErrorMessage(),$feedback);
 						} else {
@@ -319,7 +319,7 @@ switch (getStringFromRequest('func')) {
 						exit_error("Error","Invalid filename");
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
+						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_failed').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {
 						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');

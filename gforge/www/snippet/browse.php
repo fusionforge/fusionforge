@@ -63,7 +63,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr=array();
 	$title_arr[]= $Language->getText('snippet_browse','snippet_id');
 	$title_arr[]= $Language->getText('snippet_browse','snippet_title');
-	$title_arr[]= $Language->getText('snippet_browse','Creator');
+	$title_arr[]= $Language->getText('snippet_browse','creator');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 

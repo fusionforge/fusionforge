@@ -138,7 +138,7 @@ if (session_loggedin()) {
 				if (!$result) {
 					//error in database
 					$feedback .= $Language->getText('snippet_addversion','error_doing_snippet_package_version_insert');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_submit_a_new_snippet_package')));
+					snippet_header(array('title'=>$Language->getText('snippet_addversion','submit_a_new_snippet_package')));
 					echo db_error();
 					snippet_footer(array());
 					exit;
@@ -149,7 +149,7 @@ if (session_loggedin()) {
 					//id for this snippet_package_version
 					$snippet_package_version_id=
 						db_insertid($result,'snippet_package_version','snippet_package_version_id');
-					snippet_header(array('title'=>$Language->getText('snippet_addversion','title_add_snippet_to_package')));
+					snippet_header(array('title'=>$Language->getText('snippet_addversion','add_snippet_to_package')));
 
 /*
 	This raw HTML allows the user to add snippets to the package
@@ -188,7 +188,7 @@ function show_add_snippet_box() {
 			}
 
 		}
-		snippet_header(array('title'=>$Language->getText('snippet_addverion','title_submit_a_new_snippet_version')));
+		snippet_header(array('title'=>$Language->getText('snippet_addversion','submit_a_new_snippet_version')));
 
 		?>
 		</p>
