@@ -113,7 +113,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo ($Language->getText('survey_error', 'no_question_found'));
+    echo ($Language->getText('survey_error', 'no_questions_found'));
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }

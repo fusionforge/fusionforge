@@ -60,7 +60,7 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error($Language->getText('general','error'),$Language->getText('forum_message','error_getting_new_forum'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forum'));
 	} elseif ($f->isError()) {
 		exit_error($Language->getText('general','error'),$f->getErrorMessage());
 	}
@@ -86,7 +86,7 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forumhtml'));
 	} elseif ($fh->isError()) {
 		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}

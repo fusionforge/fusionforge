@@ -114,7 +114,7 @@ echo notepad_func();
 		<?php
 		echo $pt->multipleDependBox();
 		?><br />
-		<?php echo $Language->getText('pm_addtask','dependent_note') ?>
+		<?php echo $Language->getText('pm','dependent_note') ?>
 		</td>
 	</tr>
 

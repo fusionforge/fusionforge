@@ -156,7 +156,7 @@ if ($edit=="yes") {
 			forum_header(array('title'=>$Language->getText('forum_attach_download','title')));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
-				exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+				exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forumhtml'));
 			} elseif ($fh->isError()) {
 				exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 			}

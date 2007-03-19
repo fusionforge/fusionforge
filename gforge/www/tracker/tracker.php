@@ -319,7 +319,7 @@ switch (getStringFromRequest('func')) {
 						exit_error("Error","Invalid filename");
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
+						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_failed').':'.$afh->getErrorMessage();
 						$was_error=true;
 					} else {
 						$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');

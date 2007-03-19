@@ -104,7 +104,7 @@ class SurveyQuestionFactory extends Error {
 		$result = db_query ($sql);
 
 		if (!$result) {
-			$this->setError($Language->getText('survey_error','no_question_found').db_error());
+			$this->setError($Language->getText('survey_error','no_questions_found').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

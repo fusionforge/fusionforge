@@ -44,14 +44,14 @@ if (getStringFromRequest('post_changes')) {
 	$survey_questions = getStringFromRequest('survey_questions');
 
 	if (!$survey_title) {
-		$feedback .= $Language->getText('survey_add_question','title_is_required');
+		$feedback .= $Language->getText('survey_add_survey','title_is_required');
 	} else {
 		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
 		$result=db_query($sql);
 		if ($result) {
-			$feedback .= $Language->getText('survey_add_question','survey_inserted');
+			$feedback .= $Language->getText('survey_add_survey','survey_inserted');
 		} else {
-			$feedback .= $Language->getText('survey_add_question','error_in_insert');
+			$feedback .= $Language->getText('survey_add_survey','error_in_insert');
 		}
 	}
 }

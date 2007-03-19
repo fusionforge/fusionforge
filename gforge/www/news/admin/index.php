@@ -105,7 +105,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$sql="SELECT * FROM news_bytes WHERE id='$id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error($Language->getText('general', 'error'), $Language->getText('news_admin', 'newsbyte_not_found'));
 		}
 		
 		$group =& group_get_object($group_id);
@@ -254,7 +254,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			"AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
-			exit_error($Language->getText('general', 'error'), $Language->getText('newsbyte_admin', 'newsbyte_not_found'));
+			exit_error($Language->getText('general', 'error'), $Language->getText('news_admin', 'newsbyte_not_found'));
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
