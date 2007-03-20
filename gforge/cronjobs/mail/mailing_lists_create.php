@@ -10,6 +10,8 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
+$err = '';
+
 if (is_dir($sys_path_to_mailman)) {
 } elseif (is_dir("/usr/lib/mailman")) {
 	$sys_path_to_mailman="/usr/lib/mailman";

@@ -54,7 +54,7 @@ if (!$rel) {
 
 #forum messages
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)) AS count ";
 } else {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count ";
@@ -73,7 +73,7 @@ if (!$rel) {
 
 #project manager tasks
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)) AS count ";
 } else {
 	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)::float) AS count ";
@@ -95,7 +95,7 @@ if (!$rel) {
 
 #bugs
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)::float) AS count ";
@@ -119,7 +119,7 @@ if (!$rel) {
 
 #patches
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
@@ -143,7 +143,7 @@ if (!$rel) {
 
 #support
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'support',log(5 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'support',log(5 * count(*)::float) AS count ";
@@ -167,7 +167,7 @@ if (!$rel) {
 
 #file releases
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)) ";
 } else {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)::float) ";
@@ -234,7 +234,7 @@ if (!$rel) {
 
 
 $sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT ranking,100-(100*((ranking-1)/$counts)),group_id ";
 } else {
 	$sql.="SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id ";
@@ -254,12 +254,12 @@ if (!$rel) {
 db_query("DELETE FROM stats_project_metric WHERE month='$this_year$this_month' AND day='$this_day'");
 
 $sql="INSERT INTO stats_project_metric (month,day,group_id,ranking,percentile) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT '$this_year$this_month', '$this_day',group_id,ranking,percentile ";
 } else {
 	$sql.="SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentile ";
 }
-FROM project_weekly_metric";
+$sql.="FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {
 	echo "<p>$sql<p>".db_error();

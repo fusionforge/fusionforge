@@ -830,7 +830,7 @@ if ($sys_show_source) {
         $break = $breakLimit;
         $countLines = 0;
         $return = '
-            <table width="100%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
+            <table width="99%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
                 <tr>
                     <td>
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">

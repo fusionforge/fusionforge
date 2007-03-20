@@ -32,7 +32,7 @@ $aid = getIntFromRequest('aid');
 
 $a=new Artifact($ath,$aid);
 if (!$a || !is_object($a)) {
-	exit_error('ERROR','Artifact Could Not Be Created');
+	exit_error('ERROR',_('Artifact Could Not Be Created'));
 }
 
 //
@@ -51,7 +51,7 @@ if (getStringFromRequest('add_to_task')) {
 
 	$pg=new ProjectGroup($group,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Could Not Get ProjectGroup');
+		exit_error('Error',_('Could Not Get ProjectGroup'));
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
@@ -59,7 +59,7 @@ if (getStringFromRequest('add_to_task')) {
 
 	$ptf = new ProjectTaskFactory($pg);
 	if (!$ptf || !is_object($ptf)) {
-		exit_error('Error','Could Not Get ProjectTaskFactory');
+		exit_error('Error',_('Could Not Get ProjectTaskFactory'));
 	} elseif ($ptf->isError()) {
 		exit_error('Error',$ptf->getErrorMessage());
 	}
@@ -70,8 +70,12 @@ if (getStringFromRequest('add_to_task')) {
 	}
 
 	$pt_arr =& $ptf->getTasks();
-	if (!$pt_arr || $ptf->isError()) {
-		exit_error('Error',$ptf->getErrorMessage());
+	if (!$pt_arr) {
+		if ($ptf->isError()) {
+			exit_error('Error',$ptf->getErrorMessage());
+		} else {
+			exit_error('Error', _('No Existing Tasks Found'));
+		}
 	}
 
 	$ath->header(array('titlevals'=>array($ath->getName()),
@@ -116,14 +120,18 @@ if (getStringFromRequest('add_to_task')) {
 
 	$pgf=new ProjectGroupFactory($group);
 	if (!$pgf || !is_object($pgf)) {
-		exit_error('Error','Could Not Get Factory');
+		exit_error('Error',_('Could Not Get Factory'));
 	} elseif ($pgf->isError()) {
 		exit_error('Error',$pgf->getErrorMessage());
 	}
 
 	$pg_arr =& $pgf->getProjectGroups();
-	if (!$pg_arr || $pgf->isError()) {
-		exit_error('Error',$pgf->getErrorMessage());
+	if (!$pg_arr) {
+		if ($pgf->isError()) {
+			exit_error('Error',$pgf->getErrorMessage());
+		} else {
+			exit_error('Error',_('No Existing Project Groups Found'));
+		}
 	}
 
 	$ath->header(array('titlevals'=>array($ath->getName()),

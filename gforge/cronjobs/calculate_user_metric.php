@@ -73,7 +73,7 @@ db_begin();
 db_query("DELETE FROM user_metric0");
 $err .= db_error();
 
-if ( $sys_database_type != "mysql" ) {
+if ($sys_database_type != 'mysql') {
 	db_query("select setval('user_metric0_pk_seq',1)");
 	$err .= db_error();
 }
@@ -90,20 +90,27 @@ $err .= db_error();
 
 db_query("UPDATE user_metric0 SET ranking=ranking-1");
 
-if ( $sys_database_type == "mysql" ) {
-	$sql="UPDATE user_metric0 SET
+if ($sys_database_type == 'mysql') {
+	$sql="
+	SELECT count(*) FROM user_metric0 INTO @total;
+	UPDATE user_metric0 SET
 	metric=(log(times_ranked)*avg_rating),
-	percentile=(100-(100*((ranking-1.0)/(select count(*) from user_metric0))));";
+	percentile=(100-(100*(ranking-1.0)/@total));";
+
+	db_mquery($sql);
+	$err .= db_error();
+	db_next_result();
+	$err .= db_error();
 } else {
 	$sql="UPDATE user_metric0 SET
 	metric=(log(times_ranked::float)*avg_rating::float)::float,
 	percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;";
+
+	db_query($sql);
+	$err .= db_error();
 }
 
-db_query($sql);
-$err .= db_error();
-
-if ( $sys_database_type == "mysql" ) {
+if ($sys_database_type == 'mysql') {
 	$sql="UPDATE user_metric0 SET importance_factor=(1+((percentile/100.0)*.5));";
 } else {
 	$sql="UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float;";
@@ -267,7 +274,7 @@ for ($i=1; $i<9; $i++) {
 	    /*
 	    	Update with final percentile and importance
 	    */
-		if ( $sys_database_type == "mysql" ) {
+		if ($sys_database_type == 'mysql') {
 			$sql="UPDATE user_metric$i SET
 			percentile=(100-(100*((ranking-1.0)/". db_result($res,0,0) .")))";
 		} else {

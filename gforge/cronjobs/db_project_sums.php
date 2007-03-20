@@ -65,8 +65,9 @@ if (!$res) {
 
 db_commit();
 
-db_query("VACUUM ANALYZE forum_agg_msg_count;");
-
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE forum_agg_msg_count;");
+}
 
 /*
 	Create an aggregation table that includes counts of artifacts
@@ -91,7 +92,9 @@ $err .= db_error();
 
 db_commit();
 
-db_query("VACUUM ANALYZE artifact_counts_agg;");
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE artifact_counts_agg;");
+}
 
 /*
 
@@ -108,7 +111,7 @@ $res=db_query("DELETE FROM project_sums_agg;");
 	Get counts of mailing lists
 */
 $sql="INSERT INTO project_sums_agg ";
-if ( $sys_database_type == "mysql" ) {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'mail' AS type,count(*) AS count ";
 } else {
 	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
@@ -125,10 +128,10 @@ $err .= db_error();
 	Get counts of surveys
 */
 $sql="INSERT INTO project_sums_agg ";
-if ( $sys_database_type == "mysql" ) {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'surv' AS type,count(*) AS count ";
 } else {
-	$sql="SELECT group_id,'surv'::text AS type,count(*) AS count ";
+	$sql.="SELECT group_id,'surv'::text AS type,count(*) AS count ";
 }
 $sql.="
 	FROM surveys
@@ -143,10 +146,10 @@ $err .= db_error();
 	Forum message count
 */
 $sql="INSERT INTO project_sums_agg ";
-if ( $sys_database_type == "mysql" ) {
-	$sql="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
+if ($sys_database_type == 'mysql') {
+	$sql.="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
 } else {
-	$sql="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
+	$sql.="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
 }
 $sql.="
 	FROM forum,forum_group_list 
@@ -161,10 +164,9 @@ $err .= db_error();
 /*
 	Forum count
 */
-	$sql="INSERT INTO project_sums_agg ";
-if ( $sys_database_type == "mysql" ) {
-$sql.="
-	SELECT group_id,'fora' AS type, count(*) AS count ";
+$sql="INSERT INTO project_sums_agg ";
+if ($sys_database_type == 'mysql') {
+	$sql.="SELECT group_id,'fora' AS type, count(*) AS count ";
 } else {
 	$sql.="SELECT group_id,'fora'::text AS type, count(*) AS count ";
 }
@@ -180,10 +182,12 @@ $err .= db_error();
 db_commit();
 $err .= db_error();
 
-db_query("VACUUM ANALYZE project_sums_agg;");
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE project_sums_agg;");
 
-if (db_error()) {
-	$err .= "Error: ".db_error();
+	if (db_error()) {
+		$err .= "Error: ".db_error();
+	}
 }
 
 cron_entry(3,$err);

@@ -45,7 +45,7 @@ $err .= db_error(SYS_DB_STATS);
 
 $sql="INSERT INTO stats_project_months
 	SELECT month, group_id, ";
-if ( $sys_database_type == "mysql" ) {
+if ($sys_database_type == 'mysql') {
 	$sql.="avg(developers) AS developers, avg(group_ranking) AS group_ranking, ";
 } else {
 	$sql.="avg(developers)::int AS developers, avg(group_ranking)::int AS group_ranking, ";
@@ -82,7 +82,9 @@ $err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
-db_query("VACUUM ANALYZE stats_project_months;", -1, 0, SYS_DB_STATS);
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE stats_project_months;", -1, 0, SYS_DB_STATS);
+}
 
 
 //
@@ -108,7 +110,9 @@ $err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
-db_query("VACUUM ANALYZE stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
+}
 
 
 //
@@ -151,7 +155,9 @@ $err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
-db_query("VACUUM ANALYZE stats_site_months;", -1, 0, SYS_DB_STATS);
+if ($sys_database_type != 'mysql') {
+	db_query("VACUUM ANALYZE stats_site_months;", -1, 0, SYS_DB_STATS);
+}
 
 cron_entry(4,$err);
 
