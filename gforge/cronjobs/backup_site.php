@@ -22,7 +22,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('local.inc');
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
@@ -52,9 +51,11 @@ if (!is_dir($sys_path_to_backup)) {
 		$subdir = trim($subdir);
 		if (empty($subdir)) continue;
 		$path .= '/'.$subdir;
-		if (!mkdir($path)) {
-			cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
-			exit;
+		if (!file_exists($path)) {
+			if (!mkdir($path)) {
+				cron_entry(23,'Couldn\'t create directory '.$path.' for backups');	
+				exit;
+			}
 		}
 	}
 }
@@ -187,6 +188,6 @@ if($retval==0){
 }
 
 
-cron_entry(23,addslashes($err));
+cron_entry(23,$err);
 
 ?>

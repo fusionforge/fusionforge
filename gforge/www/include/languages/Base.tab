@@ -1988,7 +1988,7 @@ scm_index	admin	Admin
 scm_index	not_created	The repository for this project isn't created yet. It will be created in the next few minutes.
 scm_index	repos_change_note	Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.
 scm_index	no_plugins_error	Error - Site has SCM but no plugins registered
-scm_index	title	Title
+scm_index	title	SCM
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#
@@ -2698,6 +2698,8 @@ tracker_taskmgr	add_relation_to_task	Add Relation To Existing Task.
 tracker_taskmgr	add_relationship	Add Relationship To Selected Task
 tracker_taskmgr	build_relationships	Build Relationship Between Tracker Items and Task Manager
 tracker_taskmgr	create_task	Create New Task
+tracker_taskmgr	no_project_groups	No Existing Project Groups Found
+tracker_taskmgr	no_tasks	No Existing Tasks Found
 tracker_taskmgr	task	Task
 tracker_taskmgr	task_manager_project	Task Manager Project
 tracker_taskmgr	tracker_item	Tracker Item

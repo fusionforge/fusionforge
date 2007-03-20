@@ -222,11 +222,11 @@ WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 		if (db_error()) {
 			$this->setError('Database Error: '.db_error().$sql);
 			return false;
-		} else {
-			$this->project_tasks = array();
-			while ($arr =& db_fetch_array($result)) {
-				$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
-			}
+		}
+
+		$this->project_tasks = array();
+		while ($arr =& db_fetch_array($result)) {
+			$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
 		}
 		return $this->project_tasks;
 	}

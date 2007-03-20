@@ -280,7 +280,7 @@ if ($project->usesForum()) {
 	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum')));
 	print '&nbsp;'.$Language->getText('group','long_forum').'</a>';
 	$forums_count = project_get_public_forum_count($group_id);
-	if ($forums_count > 1) {
+	if ($forums_count != 1) {
 		$label = 'forum_messages';
 	} else {
 		$label = 'forum_messages_only_one_forum';

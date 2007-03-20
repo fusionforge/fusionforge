@@ -33,7 +33,7 @@ $cron_arr[25]='homedirs.php';
 
 function cron_entry($job,$output) {
 	$sql="INSERT INTO cron_history (rundate,job,output) 
-		values ('".time()."','$job','$output')";
+		values ('".time()."','$job','".addslashes($output)."')";
 	return db_query($sql);
 }
 
