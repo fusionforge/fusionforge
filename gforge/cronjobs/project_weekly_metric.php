@@ -61,7 +61,7 @@ if (!$rel) {
 
 #forum messages
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)) AS count ";
 } else {
 	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count ";
@@ -80,7 +80,7 @@ if (!$rel) {
 
 #project manager tasks
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)) AS count ";
 } else {
 	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)::float) AS count ";
@@ -100,7 +100,7 @@ if (!$rel) {
 
 #bugs
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)::float) AS count ";
@@ -123,7 +123,7 @@ if (!$rel) {
 
 #patches
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
@@ -146,7 +146,7 @@ if (!$rel) {
 
 #support
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT agl.group_id,'support',log(5 * count(*)) AS count ";
 } else {
 	$sql.="SELECT agl.group_id,'support',log(5 * count(*)::float) AS count ";
@@ -169,7 +169,7 @@ if (!$rel) {
 
 #cvs commits
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'cvs',log(sum(commits)) AS count ";
 } else {
 	$sql.="SELECT group_id,'cvs',log(sum(commits)::float) AS count ";
@@ -193,7 +193,7 @@ if (!$rel) {
 
 #file releases
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)) ";
 } else {
 	$sql.="select frs_package.group_id,'filereleases',log(5 * count(*)::float) ";
@@ -215,7 +215,7 @@ db_begin();
 
 #file downloads
 $sql="INSERT INTO project_counts_weekly_tmp ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'downloads', log(.3 * sum(downloads)) AS downloads ";
 } else {
 	$sql.="SELECT group_id,'downloads', log(.3 * sum(downloads)::float) AS downloads ";
@@ -232,11 +232,13 @@ if (!$rel) {
 
 db_commit();
 
-$sql = "CREATE SEQUENCE project_metric_weekly_seq" ;
-//$err .= "\n\n".$sql;
-$rel = db_query($sql);
-if (!$rel) {
-	$err .= "\n\n***ERROR: $sql\n\n".db_error();
+if ($sys_database_type != 'mysql') {
+	$sql = "CREATE SEQUENCE project_metric_weekly_seq" ;
+	//$err .= "\n\n".$sql;
+	$rel = db_query($sql);
+	if (!$rel) {
+		$err .= "\n\n***ERROR: $sql\n\n".db_error();
+	}
 }
 
 #create a new table to insert the final records into
@@ -285,10 +287,10 @@ if (!$rel) {
 db_commit();
 
 $sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT ranking,100-(100*((ranking-1)/$counts)),group_id ";
 } else {
-	$sql="SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id ";
+	$sql.="SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id ";
 }
 $sql.="
 FROM project_metric_weekly_tmp1
@@ -305,7 +307,7 @@ if (!$rel) {
 db_query("DELETE FROM stats_project_metric WHERE month='$this_year$this_month' AND day='$this_day'");
 
 $sql="INSERT INTO stats_project_metric (month,day,group_id,ranking,percentile) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql.="SELECT '$this_year$this_month', '$this_day',group_id,ranking,percentile ";
 } else {
 	$sql.="SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentile ";

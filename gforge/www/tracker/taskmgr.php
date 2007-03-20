@@ -69,8 +69,12 @@ if (getStringFromRequest('add_to_task')) {
 	}
 
 	$pt_arr =& $ptf->getTasks();
-	if (!$pt_arr || $ptf->isError()) {
-		exit_error('Error',$ptf->getErrorMessage());
+	if (!$pt_arr) {
+		if ($ptf->isError()) {
+			exit_error('Error',$ptf->getErrorMessage());
+		} else {
+			exit_error('Error', $Language->getText('tracker_taskmgr','no_tasks'));
+		}
 	}
 
 	$ath->header(array('titlevals'=>array($ath->getName()),
@@ -121,8 +125,12 @@ if (getStringFromRequest('add_to_task')) {
 	}
 
 	$pg_arr =& $pgf->getProjectGroups();
-	if (!$pg_arr || $pgf->isError()) {
-		exit_error('Error',$pgf->getErrorMessage());
+	if (!$pg_arr) {
+		if ($pgf->isError()) {
+			exit_error('Error',$pgf->getErrorMessage());
+		} else {
+			exit_error('Error',$Language->getText('tracker_taskmgr','no_project_groups'));
+		}
 	}
 
 	$ath->header(array('titlevals'=>array($ath->getName()),

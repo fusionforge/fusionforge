@@ -188,6 +188,6 @@ if($retval==0){
 }
 
 
-cron_entry(23,addslashes($err));
+cron_entry(23,$err);
 
 ?>

@@ -63,7 +63,7 @@ $sql = "DELETE FROM stats_agg_logo_by_group WHERE month='$year$month' AND day='$
 $rel = db_query($sql);
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_logo_by_group ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,count(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) AS count";
@@ -83,7 +83,7 @@ $sql = "DELETE FROM stats_agg_site_by_group WHERE month='$year$month' AND day='$
 $rel = db_query($sql);
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_site_by_group ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,COUNT(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,COUNT(*) AS count";
@@ -102,7 +102,7 @@ $sql = "DELETE FROM stats_site_pages_by_day WHERE month='$year$month' AND day='$
 $rel = db_query($sql);
 $err .= db_error();
 $sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql .= "SELECT '$year$month' AS month, '$day' AS newday, count(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday, count(*) AS count";
@@ -120,7 +120,7 @@ $err .= "\n\nBeginning stats_project_developers ".date('Ymd H:i:s',time());
 $rel=db_query("DELETE FROM stats_project_developers WHERE month='$year$month' AND day='$day'");
 $err .= db_error();
 $sql = "INSERT INTO stats_project_developers (month,day,group_id,developers) ";
-if ($sys_database_type == "mysql") {
+if ($sys_database_type == 'mysql') {
 	$sql .= "SELECT '$year$month' AS month,'$day' AS day,group_id,count(*) AS count";
 } else {
 	$sql .= "SELECT '$year$month'::int AS month,'$day'::int AS day,group_id,count(*) AS count";
