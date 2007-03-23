@@ -618,6 +618,7 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/user.gif -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki-indexed.png -text
 gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
+gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text

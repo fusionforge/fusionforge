@@ -1048,7 +1048,7 @@ class ProjectTask extends Error {
 				AND project_task_id='".$this->getID()."'";
 
 			$res=db_query($sql);
-			if (!$res || db_affected_rows($res) < 1) {
+			if (!$res) {
 				$this->setError('Error On ProjectTask::update-5: '.db_error().$sql);
 				db_rollback();
 				return false;

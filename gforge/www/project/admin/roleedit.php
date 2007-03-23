@@ -104,7 +104,7 @@ if ($role_id=='observer') {
 
 echo '
 <p>
-<form action="'.$PHP_SELF.'?group_id='.$group_id.'&role_id='. $role_id .'" method="post">';
+<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='. $role_id .'" method="post">';
 
 if ($role_id != 'observer') {
 	echo '<strong>'.$Language->getText('rbac_edit','rolename').'</strong><br />
@@ -123,6 +123,7 @@ echo $HTML->listTableTop($titles);
 //
 //	Everything is built on the multi-dimensial arrays in the Role object
 //
+$j = 0;
 $keys = array_keys($role->role_values);
 for ($i=0; $i<count($keys); $i++) {
 

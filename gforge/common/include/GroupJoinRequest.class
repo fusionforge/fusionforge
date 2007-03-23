@@ -95,7 +95,7 @@ class GroupJoinRequest extends Error {
 		$this->Group =& $Group;
 		if ($user_id) {
 			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($group_id,$user_id)) {
+				if (!$this->fetchData($Group->getID(),$user_id)) {
 					return false;
 				}
 			} else {

@@ -291,7 +291,7 @@ if (count($reqs) < 1) {
 			echo "Invalid User";
 		}
 		?>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
 		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>

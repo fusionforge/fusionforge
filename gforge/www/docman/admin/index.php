@@ -446,7 +446,7 @@ if ($editdoc && $docid) {
 	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'');
 ?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
 		<input type="hidden" name="submit" value="1" /><br />
 		<?php echo $Language->getText('docman_admin_deletedoc','delete_warning'); ?>
 		<p>

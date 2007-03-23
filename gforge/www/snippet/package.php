@@ -118,7 +118,7 @@ function show_add_snippet_box() {
 	?>
 	</p><?php echo $Language->getText('snippet_package','you_can_group'); ?></p>
 	<p/>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />

@@ -445,7 +445,7 @@ function backfill_users_added_daily($count=10000) {
 		$this->setError('backfill_users_added_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=($today-($i*REPORT_DAY_SPAN));
 		if (!$this->users_added_daily($day)) {
@@ -489,7 +489,7 @@ function backfill_groups_added_daily($count=10000) {
 		$this->setError('backfill_groups_added_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=($today-($i*REPORT_DAY_SPAN));
 		if (!$this->groups_added_daily($day)) {
@@ -685,7 +685,7 @@ function backfill_users_cum_daily($count=10000) {
 		$this->setError('backfill_users_cum_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=$today-($i*REPORT_DAY_SPAN);
 		if (!$this->users_cum_daily($day)) {
@@ -729,7 +729,7 @@ function backfill_groups_cum_daily($count=10000) {
 		$this->setError('backfill_groups_cum_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=$today-($i*REPORT_DAY_SPAN);
 		if (!$this->groups_cum_daily($day)) {
@@ -1042,7 +1042,7 @@ function backfill_user_act_daily($count=10000) {
 		$this->setError('backfill_user_act_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=$today-($i*REPORT_DAY_SPAN);
 		if (!$this->user_act_daily($day)) {
@@ -1355,7 +1355,7 @@ function backfill_group_act_daily($count=10000) {
 		$this->setError('backfill_group_act_daily:: Could Not Get Start Date');
 		return false;
 	}
-	$i=0;
+	$i = 0;
 	while (true) {
 		$day=$today-($i*REPORT_DAY_SPAN);
 		if (!$this->group_act_daily($day)) {

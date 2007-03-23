@@ -25,7 +25,7 @@ class ExternalSearchPlugin extends Plugin {
 	function CallHook($hookname, & $searchManager) {
 		switch($hookname) {
 			case 'search_engines':
-				require_once('/etc/gforge/plugins/externalsearch/config.php');
+				require_once('plugins/externalsearch/config.php');
 				foreach($externalSearchEngines AS $name => $url) {
 					$type = SEARCH__TYPE_IS_EXTERNAL.'_'.$name;
 					$searchManager->addSearchEngine(

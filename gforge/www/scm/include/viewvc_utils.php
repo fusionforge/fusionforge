@@ -57,14 +57,18 @@ function viewcvs_execute($repos_name, $repos_type) {
 	$viewcvs_path = $GLOBALS['sys_urlroot'].'/scm/viewvc';
 	
 	// this is very important ...
-	if (getStringFromServer('PATH_INFO') == '') {
-		$path = '/';
-	} else {
-		$path = getStringFromServer('PATH_INFO');
+	$path = getStringFromServer('PATH_INFO');
+	if ($path == '') {
+		$path = getStringFromServer('ORIG_PATH_INFO');
+	}
+
+	if ($path != '') {
 		// hack: path must always end with /
-		if (strrpos($path,'/') != (strlen($path)-1)) {
+		if ($path[strlen($path)-1] != '/') {
 			$path .= '/';
 		}
+	} else {
+		$path = '/';
 	}
 	
 	if ($repos_type == "cvs") {

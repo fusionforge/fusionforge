@@ -58,7 +58,7 @@ function endElement($parser, $name) {
   debug ("endelement $name") ;
 	global $time_ok, $last_tag, $commits, $date_key;
 	if ($name == "LOGENTRY" && $time_ok) {
-		$commits[$date_key]++;
+		@$commits[$date_key]++;
 	}
 	$last_tag = "";
 }
@@ -144,19 +144,19 @@ function startElement($parser, $name, $attrs) {
 		case "PATH":
 			if ($time_ok && $date_key) {
 				if ($attrs['ACTION'] == "M") {
-					$updates[$date_key]++;
+					@$updates[$date_key]++;
 					if ($last_user) {
-						$usr_updates[$date_key][$last_user]++;
+						@$usr_updates[$date_key][$last_user]++;
 					}
 				} elseif ($attrs['ACTION'] == "A") {
-					$adds[$date_key]++;
+					@$adds[$date_key]++;
 					if ($last_user) {
-						$usr_adds[$date_key][$last_user]++;
+						@$usr_adds[$date_key][$last_user]++;
 					}
 				} elseif ($attrs['ACTION'] == "D") {
-					$deletes[$date_key]++;
+					@$deletes[$date_key]++;
 					if ($last_user) {
-						$usr_deletes[$date_key][$last_user]++;
+						@$usr_deletes[$date_key][$last_user]++;
 					}
 				}
 			}
@@ -180,7 +180,7 @@ db_begin();
 
 $pluginid = get_plugin_id($pluginname);
 
-if ($ARGV[1] && $ARGV[2] && $ARGV[3]) {
+if (@$ARGV[1] && @$ARGV[2] && @$ARGV[3]) {
 	//$ARGV[1] = Year
 	//$ARGV[2] = Month
 	//$ARGV[3] = Day
@@ -190,7 +190,7 @@ if ($ARGV[1] && $ARGV[2] && $ARGV[3]) {
 	$day_end = $day_begin + 86400;
  
 	$rollback = process_day($day_begin, $day_end);
-} else if ($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
+} else if (@$ARGV[1]=='all' && @!$ARGV[2] && @!$ARGV[3]) { 
 	// Do ALL the days
 	debug('Processing all days');
 	$rollback = process_day();
@@ -360,8 +360,8 @@ function process_day($day_begin=0, $day_end=0) {
 				'$d',
 				'$groups[0]',
 				'0',
-				'" . ($updates[$key] ? $updates[$key] : 0) . "',
-				'" . ($adds[$key] ? $adds[$key] : 0) . "')";
+				'" . (@$updates[$key] ? $updates[$key] : 0) . "',
+				'" . (@$adds[$key] ? $adds[$key] : 0) . "')";
 
 			debug($ins_grp_sql);
 			if (!db_query($ins_grp_sql)) {
@@ -392,8 +392,8 @@ function process_day($day_begin=0, $day_end=0) {
 					'$d',
 					'$groups[0]',
 					'$user_id',
-					'" . ($usr_updates{$key}{$user_name}?$usr_updates{$key}{$user_name}:0)  . "',
-					'" . ($usr_adds{$key}{$user_name}?$usr_adds{$key}{$user_name}:0)  . "')";
+					'" . (@$usr_updates{$key}{$user_name}?$usr_updates{$key}{$user_name}:0)  . "',
+					'" . (@$usr_adds{$key}{$user_name}?$usr_adds{$key}{$user_name}:0)  . "')";
 
 					debug($usr_sql);
 

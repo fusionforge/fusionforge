@@ -1,7 +1,7 @@
 #! /usr/bin/php4 -f
 <?php
 /**
- * create_docman.php 
+ * create_svn.php 
  *
  * Francisco Gimeno <kikov@fco-gimeno.com>
  *
@@ -132,7 +132,7 @@ while ( $row =& db_fetch_array($res) ) {
 		} else {
 			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
 			$cmd = 'chown -R '.$file_owner.' '.$svn.'/'.$row["unix_group_name"];
-			passthru($cmd); // svn dir owned by apache or viewcvs doesn´t work 
+			passthru($cmd); // svn dir owned by apache or viewcvs doesn't work 
 			if ($project->usesPlugin('svncommitemail')) {
  				check_svn_mail($row["unix_group_name"], $svn."/".$row["unix_group_name"]);
 			}
