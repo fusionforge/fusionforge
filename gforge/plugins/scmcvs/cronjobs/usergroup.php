@@ -68,7 +68,7 @@ $user_pws =& util_result_column_to_array($res,'unix_pw');
 $gforge_lines = array();
 
 // user description is something like "MyGForge user"
-$user_description = preg_replace('/[^[:alnum:] -_]/', '', $sys_name);
+$user_description = preg_replace('/[^[:alnum:] _-]/', '', $sys_name);
 $user_description .= " user";
 
 for ($i=0; $i < count($gforge_users); $i++) {

@@ -62,9 +62,11 @@ function scm_header($params) {
 			);
 		}
 	}
+	echo '<div style="width:99%">';
 }
 
 function scm_footer() {
+	echo '</div>';
 	site_project_footer(array());
 }
 
