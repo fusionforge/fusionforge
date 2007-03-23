@@ -102,7 +102,6 @@ function project_summary($group_id,$mode,$no_table) {
 	}
 
 	$project =& group_get_object($group_id);
-	// ################## forums
 
 	if (!$project || !is_object($project)) {
 		return 'Could Not Create Project Object';

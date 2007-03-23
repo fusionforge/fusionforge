@@ -50,6 +50,7 @@ if ($sys_database_type == "mysql") {
 	$sql.="WHERE status='A' and type_id='1' and lastname LIKE '$sw%' ";
 } else {
 	$sql.="WHERE status='A' and type_id='1' and lastname ILIKE '$sw%' ";
+}
 $res=db_query($sql);
 
 $accumulated_ids = getStringFromRequest('accumulated_ids');

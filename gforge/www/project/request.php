@@ -57,7 +57,7 @@ site_project_header(array('title'=>_('Request to join project'),'group'=>$group_
 
 ?>
 <p><?php echo _('You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.'); ?></p>
-<form action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post">
+<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 <p>
 <?php echo _('If you want, you can send a comment to the administrator:'); ?><br>
 <textarea name="comments" rows="15" cols="60"></textarea>

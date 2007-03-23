@@ -67,7 +67,7 @@ class fckeditorPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			$group = &group_get_object($group_id);
-			if ( getStringFromRequest(use_fckeditorplugin) == 1 ) {
+			if ( getStringFromRequest('use_fckeditorplugin') == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
 				$group->setPluginUse ( $this->name, false );

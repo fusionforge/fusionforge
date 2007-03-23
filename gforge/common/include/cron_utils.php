@@ -30,6 +30,7 @@ $cron_arr[22]='daily_task_email.php';
 $cron_arr[23]='backup_site.php';
 $cron_arr[24]='svn-stats.php';
 $cron_arr[25]='homedirs.php';
+$cron_arr[26]='update_users.php';
 
 function cron_entry($job,$output) {
 	$sql="INSERT INTO cron_history (rundate,job,output) 

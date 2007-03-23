@@ -119,7 +119,7 @@ function show_add_snippet_box() {
 	?>
 	</p><?php echo _('<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.</p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol><p><span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.'); ?></p>
 	<p/>
-	<form action="<?php echo $PHP_SELF; ?>" method="post">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="First Posted Version" />

@@ -53,7 +53,7 @@
 	//	Display existing artifact types
 	//
 	$atf = new ArtifactTypeFactory($group);
-	if (!$group || !is_object($group) || $group->isError()) {
+	if (!$atf || !is_object($atf) || $atf->isError()) {
 		exit_error('Error','Could Not Get ArtifactTypeFactory');
 	}
 

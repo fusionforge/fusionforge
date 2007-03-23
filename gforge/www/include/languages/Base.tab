@@ -1833,6 +1833,16 @@ rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
 rbac_edit	webcal	Webcalendar
+rbac_edit	projectadmin	Project Administration
+rbac_edit	frs	File Release System
+rbac_edit	scm	Source Code Management
+rbac_edit	docman	Document Management
+rbac_edit	forumadmin	Forum Administration
+rbac_edit	forum	Forum
+rbac_edit	trackeradmin	Tracker Administration
+rbac_edit	tracker	Tracker
+rbac_edit	pmadmin	Task Administration
+rbac_edit	pm	Task
 reporting	add	Add
 reporting	administrative	Administrative
 reporting	area	Areas

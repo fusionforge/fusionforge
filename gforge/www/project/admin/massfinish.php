@@ -53,7 +53,6 @@ if (getStringFromRequest('finished')) {
 			$params[1] = $group_id;
 			plugin_hook('change_cal_permission',$params);
 	}
-	$group_id = getIntFromRequest('group_id');
 	Header("Location: index.php?group_id=$group_id&feedback=Successful");
 }
 
