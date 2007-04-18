@@ -304,10 +304,13 @@ class Group extends Error {
 			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
 			return false;
 		} else if (strlen($purpose)>1500) {
-			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
+			$this->setError(_('The Registration Purpose text is too long. Please make it smaller than 1500 bytes.'));
 			return false;
 		} else if (strlen($description)<10) {
 			$this->setError(_('Describe in a more comprehensive manner your project.'));
+			return false;
+		} else if (strlen($description)>255) {
+			$this->setError(_('Your project description is too long. Please make it smaller than 256 bytes.'));
 			return false;
 		} else if (!$license) {
 			$this->setError(_('You do not have chosen a license'));
