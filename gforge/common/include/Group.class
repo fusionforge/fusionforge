@@ -309,6 +309,9 @@ class Group extends Error {
 		} else if (strlen($description)<10) {
 			$this->setError($Language->getText('register','comprehensive_description'));
 			return false;
+		} else if (strlen($description)>255) {
+			$this->setError($Language->getText('register','project_description_too_long'));
+			return false;
 		} else if (!$license) {
 			$this->setError($Language->getText('register','no_license_chosen'));
 			return false;
