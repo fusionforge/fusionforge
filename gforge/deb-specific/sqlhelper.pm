@@ -35,6 +35,7 @@ sub get_plugin_id ( $$ ) ;
 sub remove_plugin_from_groups ( $$ ) ;
 sub remove_plugin_from_users ( $$ ) ;
 sub table_exists ( $$ ) ;
+sub view_exists ( $$ ) ;
 sub drop_table_if_exists ( $$ ) ;
 sub drop_index_if_exists ( $$ ) ;
 sub drop_sequence_if_exists ( $$ ) ;
@@ -66,17 +67,12 @@ sub table_exists ( $$ ) {
 sub drop_table_if_exists ( $$ ) {
     my $dbh = shift or die "Not enough arguments" ;
     my $tname = shift or die  "Not enough arguments" ;
-    my $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
 
-    if ($array [0] != 0) {
+    if (&table_exists ($dbh, $tname)) {
 	# debug "Dropping table $tname" ;
-	$query = "DROP TABLE $tname" ;
+	my $query = "DROP TABLE $tname" ;
 	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
+	my $sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
     }
@@ -120,10 +116,9 @@ sub drop_index_if_exists ( $$ ) {
     }
 }
 
-sub drop_view_if_exists ( $$ ) {
+sub view_exists ( $$ ) {
     my $dbh = shift or die "Not enough arguments" ;
     my $vname = shift or die  "Not enough arguments" ;
-
     my $query = "SELECT count(*) FROM pg_class WHERE relname='$vname' AND relkind='v'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -131,10 +126,21 @@ sub drop_view_if_exists ( $$ ) {
     $sth->finish () ;
 
     if ($array [0] != 0) {
+	return 1 ;
+    } else {
+	return 0 ;
+    }
+}
+
+sub drop_view_if_exists ( $$ ) {
+    my $dbh = shift or die "Not enough arguments" ;
+    my $vname = shift or die  "Not enough arguments" ;
+
+    if (&view_exists ($dbh, $vname)) {
 	# debug "Dropping view $vname" ;
-	$query = "DROP VIEW $vname" ;
+	my $query = "DROP VIEW $vname" ;
 	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
+	my $sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
     }

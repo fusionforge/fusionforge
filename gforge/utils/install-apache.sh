@@ -77,7 +77,7 @@ then
 fi
 if [ -z "$PHP_ETC_SEARCH" ] 
 then 
-	PHP_ETC_SEARCH="/etc/php4/apache2/php.ini /etc/php4/apache/php.ini /etc/php4/cgi/php.ini"
+	PHP_ETC_SEARCH="/etc/php5/apache2/php.ini /etc/php4/apache2/php.ini /etc/php4/apache/php.ini /etc/php4/cgi/php.ini"
 fi
 export APACHE_ETC_SEARCH GFORGE_ETC_SEARCH PHP_ETC_SEARCH
 

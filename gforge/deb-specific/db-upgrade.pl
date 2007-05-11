@@ -45,17 +45,8 @@ eval {
     my ($sth, @array, $version, $action, $path, $target) ;
 
     # Do we have at least the basic schema?
-
-    $query = "SELECT count(*) from pg_class where relname = 'groups' and relkind = 'r'";
-    # debug $query ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
     # Create Sourceforge database
-
-    if ($array [0] == 0) {	# No 'groups' table
+    if (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
 	$action = "installation" ;
 	&debug ("Creating initial Sourceforge database from files.") ;
@@ -82,14 +73,7 @@ eval {
     } else {			# A 'groups' table exists
 	$action = "upgrade" ;
 
-	$query = "SELECT count(*) from pg_class where relname = 'debian_meta_data' and relkind = 'r'";
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-
-	if ($array[0] == 0) {	# No 'debian_meta_data' table
+	if (! &table_exists ($dbh, 'debian_meta_data')) {	# No 'debian_meta_data' table
 	    # If we're here, we're upgrading from 2.5-7 or earlier
 	    # We therefore need to create the table
 	    &create_metadata_table ("2.5-7+just+before+8") ;
@@ -401,19 +385,10 @@ eval {
 	  if (&is_lesser ($version, $target)) {
 	      &debug ("Upgrading your database scheme from 2.5") ;
 
-	      my $pg_version = &get_pg_version ;
-
-	      if (&is_lesser ($pg_version, "7.3")) {
-		  @reqlist = (
-			      "DROP INDEX groups_pkey",
-			      "DROP INDEX users_pkey",
-			      ) ;
-	      } else {
-		  @reqlist = (
-			      "ALTER TABLE groups DROP CONSTRAINT groups_pkey",
-			      "ALTER TABLE users DROP CONSTRAINT users_pkey",
-			      ) ;
-	      }
+	      @reqlist = (
+		  "ALTER TABLE groups DROP CONSTRAINT groups_pkey",
+		  "ALTER TABLE users DROP CONSTRAINT users_pkey",
+		  ) ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -775,28 +750,13 @@ eval {
     if (&is_lesser ($version, $target)) {
  	&debug ("Updating supported_languages table.") ;
 	
-	my $pg_version = &get_pg_version ;
-
-	if (&is_lesser ($pg_version, "7.3")) {
-	    @reqlist = (
-			"ALTER TABLE supported_languages RENAME TO supported_languages_old",
-			"CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
-			"INSERT INTO supported_languages SELECT * FROM supported_languages_old",
-			"DROP TABLE supported_languages_old",
-			"ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id)",
-			"ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL",
-			"ALTER TABLE doc_data ADD CONSTRAINT docdata_languageid_fk FOREIGN KEY (language_id) REFERENCES supported_languages(language_id) MATCH FULL",
-			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
-			) ;
-	} else {
-	    @reqlist = (
-			"ALTER TABLE supported_languages RENAME COLUMN language_code TO language_code_old",
-			"ALTER TABLE supported_languages ADD COLUMN language_code character(5)",
-			"UPDATE supported_languages SET language_code = language_code_old",
-			"ALTER TABLE supported_languages DROP COLUMN language_code_old",
-			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
-			) ;
-	}
+	@reqlist = (
+	    "ALTER TABLE supported_languages RENAME COLUMN language_code TO language_code_old",
+	    "ALTER TABLE supported_languages ADD COLUMN language_code character(5)",
+	    "UPDATE supported_languages SET language_code = language_code_old",
+	    "ALTER TABLE supported_languages DROP COLUMN language_code_old",
+	    "UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
+	    ) ;
  	foreach my $s (@reqlist) {
  	    $query = $s ;
  	    # debug $query ;
@@ -1181,38 +1141,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030312.sql") ;
 
-      my $pg_version = &get_pg_version ;
-      
-      if (&is_lesser ($pg_version, "7.3")) {
-	  @reqlist = (
-		      "DROP TRIGGER projtask_insert_depend_trig ON project_task",
-		      "DROP FUNCTION projtask_insert_depend ()",
-		      "CREATE OR REPLACE FUNCTION projtask_insert_depend () RETURNS OPAQUE AS '
-DECLARE
-	dependon RECORD;
-	delta INTEGER;
-BEGIN
-	IF NEW.start_date > NEW.end_date THEN
-		RAISE EXCEPTION ''START DATE CANNOT BE AFTER END DATE'';
-	END IF;
-	FOR dependon IN SELECT * FROM project_dependon_vw
-				WHERE project_task_id=NEW.project_task_id LOOP
-		IF dependon.end_date > NEW.start_date THEN
-			delta := dependon.end_date-NEW.start_date;
-			RAISE NOTICE ''Bumping Back: % Delta: % '',NEW.project_task_id,delta;
-			NEW.start_date := NEW.start_date+delta;
-			NEW.end_date := NEW.end_date+delta;
-		END IF;
-	END LOOP;
-	RETURN NEW;
-END;
-' LANGUAGE 'plpgsql'",
-"CREATE TRIGGER projtask_insert_depend_trig BEFORE INSERT OR UPDATE ON project_task
-	FOR EACH ROW EXECUTE PROCEDURE projtask_insert_depend()",
-		      ) ;
-      } else {
-	  @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030312.sql") } ;
-      }
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030312.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -2761,13 +2690,8 @@ $dbh->{RaiseError} = 1;
 
     # I had to increase versions from 4.5.14 to 4.5.15
     # The activity view is created by 20060216-nocommit
-    $query = "SELECT count(*) FROM pg_class WHERE relname='activity_vw' AND relkind='v'" ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
     # If the view doesn't exists apply 
-    if ($array [0] == 0) {
+    if (! &view_exists ($dbh, 'activity_vw')) {
         &update_with_sql("20050812","4.5.15-10merge"); 
         &update_with_sql("20050822","4.5.15-11merge"); 
         &update_with_sql("20050823","4.5.15-12merge"); 
@@ -2777,12 +2701,6 @@ $dbh->{RaiseError} = 1;
         &update_with_sql("20060113","4.5.15-15"); 
         &update_with_sql("20060214","4.5.15-16"); 
         &update_with_sql("20060216-nocommit","4.5.15-17"); 
-    }
-    $target = "4.5.15-20" ;
-    if (&is_lesser ($version, $target)) {
-    	&update_db_version ($target) ;
-        &debug ("Committing $target") ;
-    	$dbh->commit () ;
     }
 
     $version = &get_db_version ;
@@ -2829,8 +2747,7 @@ $dbh->{RaiseError} = 1;
         $dbh->commit () ;
     }
 
-	
-	&update_with_sql("20051103_transiciel_motscle_document","4.6-1");
+      &update_with_sql("20051103_transiciel_motscle_document","4.6-1");
 	
 	
     ########################### INSERT HERE #################################
@@ -2879,18 +2796,11 @@ sub get_pg_version () {
 
 sub create_metadata_table ( $ ) {
     my $v = shift || "2.5-7+just+before+8" ;
-    # Do we have the metadata table?
 
-    $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data' and relkind = 'r'";
-    # debug $query ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
+    my ($query, $sth, @array) ;
 
     # Let's create this table if we have it not
-
-    if ($array [0] == 0) {
+    if (! &table_exists ($dbh, 'debian_meta_data')) {
 	&debug ("Creating debian_meta_data table.") ;
 	$query = "CREATE TABLE debian_meta_data (key varchar primary key, value text not null)" ;
 	# debug $query ;

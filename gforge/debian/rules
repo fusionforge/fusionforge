@@ -130,53 +130,50 @@ install: build
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
 	find $(CURDIR)/debian/gforge-common/ -name .svn -type d | xargs rm -rf
 
-	# gforge-web-apache
-	install -m 644 $(CURDIR)/debian/gforge-web-apache.overrides $(CURDIR)/debian/gforge-web-apache/usr/share/lintian/overrides/gforge-web-apache
-	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
-	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache/etc/gforge/custom/
-	rm $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/index_std.php
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name .svn -type d | xargs rm -rf
-	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm -f
-	rm -f $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/themes/gforge/COPYING
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -name '*.py' -exec chmod 0755 {} \;
+	# gforge/debian/gforge-web-apache2
+	install -m 644 $(CURDIR)/debian/gforge-web-apache2.overrides $(CURDIR)/debian/gforge-web-apache2/usr/share/lintian/overrides/gforge-web-apache2
+	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
+	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
+	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
+	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/ -name .svn -type d | xargs rm -rf
+	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
+	rm -f $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/gforge/COPYING
+	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -name '*.py' -exec chmod 0755 {} \;
 	# Remove empty theme directories
-	for i in $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/themes/* ; do [ -d $$i ] && [ $$(find $$i -type f | wc -l) = 0 ] && rm -rf $$i || true ; done
+	for i in $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/* ; do [ -d $$i ] && [ $$(find $$i -type f | wc -l) = 0 ] && rm -rf $$i || true ; done
 
-	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache/var/cache/gforge
-	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
-	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
-	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
+	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache2/var/cache/gforge
+	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
+	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
+	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
+	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 
 	
 
 	# viewvc rights
-	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;
-	grep -ri '^#!' $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/scm/viewvc | grep -v '\.svn' | cut -d: -f1 | xargs chmod 0755
+	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;
+	grep -ri '^#!' $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc | grep -v '\.svn' | cut -d: -f1 | xargs chmod 0755
 
 	# dojo toolkit
-	#chmod 0755 $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/dojo/src/storage/storage.sh
+	#chmod 0755 $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/dojo/src/storage/storage.sh
 
-	# move some files from gforge-web-apache to gforge-common as there are needed by postgress upgrade
+	# move some files from gforge/debian/gforge-web-apache2 to gforge-common as there are needed by postgress upgrade
 	# these files should be moved one day in common/
 
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/languages \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/languages \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/squal_pre.php \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_pre.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/squal_exit.php \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_exit.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/pre.php \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/pre.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/BaseLanguage.class \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/BaseLanguage.class \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/include/vote_function.php \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/vote_function.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-
-	# gforge-web-apache2
-	cp -r $(CURDIR)/debian/gforge-web-apache/* $(CURDIR)/debian/gforge-web-apache2
-	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 
 	# gforge-db-postgresql
 	install -m 644 $(CURDIR)/debian/gforge-db-postgresql.overrides $(CURDIR)/debian/gforge-db-postgresql/usr/share/lintian/overrides/gforge-db-postgresql
@@ -229,7 +226,7 @@ install: build
 	install -m 755 db/2005*php     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/2005*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/2006*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-#	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
