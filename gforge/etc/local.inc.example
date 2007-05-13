@@ -23,8 +23,8 @@ $sys_var_path='/var/lib/gforge';
 //
 // Gforge database type
 //
-//$sys_database_type=mysql;
-$sys_database_type=pgsql;
+//$sys_database_type='mysql';
+$sys_database_type='pgsql';
 
 //
 // GForge hostnames
