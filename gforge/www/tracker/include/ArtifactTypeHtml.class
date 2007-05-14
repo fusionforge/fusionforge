@@ -110,10 +110,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false,$mode='') {
 		$efarr = $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
-
 //TODO - add code for "display only" such as mod-limited and detail.php pages
 		$template = $this->getRenderHTML($filter);
-
 		if ($mode=='QUERY') {
 			$keys=array_keys($efarr);
 			for ($k=0; $k<count($keys); $k++) {
@@ -154,7 +152,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 			$template = str_replace('<!--'.$efarr[$i]['field_name'].'-->',$str,$template);
 		}
-		echo $template;
+		if($template != NULL){
+			echo $template;
+		}
 	}
 
 	/**
