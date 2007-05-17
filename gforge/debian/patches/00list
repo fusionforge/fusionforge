@@ -8,3 +8,4 @@
 ##add-project-before-description-hook
 ##missing-images
 ##fix-lists-url
+migrate-shebangs-from-php4-to-php5

@@ -1,11 +1,7 @@
 [type: gettext/rfc822deb] gforge-common.templates.dsfh-in
 [type: gettext/rfc822deb] gforge-db-postgresql.templates.dsfh-in
 [type: gettext/rfc822deb] gforge-dns-bind9.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-ldap-openldap.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-mta-exim.templates.dsfh-in
 [type: gettext/rfc822deb] gforge-mta-postfix.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-shell-ldap.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-web-apache.templates.dsfh-in
 [type: gettext/rfc822deb] dsf-helper/common-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbhost-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbpasswd-variables.templates

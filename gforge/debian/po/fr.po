@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2006-08-18 08:53+0200\n"
+"POT-Creation-Date: 2007-05-17 18:35+0200\n"
 "PO-Revision-Date: 2006-08-11 18:07-0500\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -30,7 +30,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:1001
-msgid "Your shell server"
+#, fuzzy
+msgid "Your shell server:"
 msgstr "Serveur interactif (« shell server ») :"
 
 #. Type: string
@@ -46,7 +47,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:1001
-msgid "Your download server"
+#, fuzzy
+msgid "Your download server:"
 msgstr "Serveur de téléchargement :"
 
 #. Type: string
@@ -70,7 +72,8 @@ msgstr "admin"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:4002
-msgid "The Gforge administrator login"
+#, fuzzy
+msgid "The Gforge administrator login:"
 msgstr "Identifiant de l'administrateur de Gforge :"
 
 #. Type: string
@@ -88,7 +91,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:1001
-msgid "Your IP address"
+#, fuzzy
+msgid "Your IP address:"
 msgstr "Adresse IP :"
 
 #. Type: string
@@ -106,7 +110,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:5001
-msgid "The Gforge administrator password"
+#, fuzzy
+msgid "The Gforge administrator password:"
 msgstr "Mot de passe de l'administrateur de Gforge :"
 
 #. Type: password
@@ -125,7 +130,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
-msgid "The Gforge administrator password - again"
+#, fuzzy
+msgid "The Gforge administrator password - again:"
 msgstr "Confirmation du mot de passe administrateur :"
 
 #. Type: password
@@ -151,7 +157,8 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
-msgid "The initial list of skills"
+#, fuzzy
+msgid "The initial list of skills:"
 msgstr "Liste initiale de domaines de compétences :"
 
 #. Type: string
@@ -173,7 +180,8 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:2001
 #: ../dsf-helper/dbpasswd-variables.templates:1001
-msgid "Password used for the database"
+#, fuzzy
+msgid "Password used for the database:"
 msgstr "Mot de passe de connexion au serveur de bases de données :"
 
 #. Type: password
@@ -190,7 +198,8 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:3001
 #: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database - again"
+#, fuzzy
+msgid "Password used for the database - again:"
 msgstr ""
 "Confirmation du mot de passe de connexion au serveur de bases de données :"
 
@@ -198,7 +207,8 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 #: ../dsf-helper/ldap-variables.templates:1001
-msgid "The LDAP base DN"
+#, fuzzy
+msgid "The LDAP base DN:"
 msgstr "Nom du répertoire LDAP (DN) :"
 
 #. Type: string
@@ -216,7 +226,8 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:9001
 #: ../dsf-helper/ldap-variables.templates:2001
-msgid "The LDAP host"
+#, fuzzy
+msgid "The LDAP host:"
 msgstr "Serveur LDAP :"
 
 #. Type: string
@@ -229,7 +240,6 @@ msgstr "Veuillez indiquer le nom d'hôte du serveur LDAP."
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid "Do you want mail to ${noreply} to be deleted?"
 msgstr "Faut-il supprimer les courriers pour ${noreply} ?"
@@ -237,7 +247,6 @@ msgstr "Faut-il supprimer les courriers pour ${noreply} ?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid ""
 "Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
@@ -248,7 +257,6 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid ""
 "It is advised that you let the package direct e-mail to that address to a "
@@ -260,7 +268,6 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid "Accepting this option will perform that redirection."
 msgstr "Si vous choisissez cette option, la redirection sera mise en place."
@@ -269,7 +276,8 @@ msgstr "Si vous choisissez cette option, la redirection sera mise en place."
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:11001
 #: ../dsf-helper/ldap-variables.templates:3001
-msgid "LDAP password used to add users from the web"
+#, fuzzy
+msgid "LDAP password used to add users from the web:"
 msgstr "Mot de passe LDAP pour l'ajout d'utilisateurs :"
 
 #. Type: password
@@ -287,7 +295,8 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12001
 #: ../dsf-helper/ldap-variables.templates:4001
-msgid "LDAP password - again"
+#, fuzzy
+msgid "LDAP password - again:"
 msgstr "Confirmation du mot de passe LDAP :"
 
 #. Type: note
@@ -321,14 +330,12 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid "Gforge requires appropriate PAM-LDAP configuration"
 msgstr "Configuration PAM-LDAP correcte indispensable pour Gforge"
 
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid ""
 "Gforge requires the libpam-ldap package to be configured appropriately.  You "
 "might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
@@ -341,7 +348,6 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
 "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
@@ -422,21 +428,15 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:16001
 #: ../dsf-helper/replace-files.templates:1001
 #: ../dsf-helper/replace-files.templates:2001
+#, fuzzy
 msgid ""
-"I can either do them for you (and backup the current version in ${file}."
-"gforge-old), or write the changes to another file (${file}.gforge-new) and "
-"let you propagate the changes to ${file} yourself."
+"Installer can either do them for you (and backup the current version in "
+"${file}.gforge-old), or write the changes to another file (${file}.gforge-"
+"new) and let you propagate the changes to ${file} yourself."
 msgstr ""
 "Elles peuvent être faites automatiquement (en sauvegardant la version "
 "actuelle dans ${file}.gforge-old) ou vous pouvez les faire vous-même dans "
 "${file}, les modifications proposées étant indiquées dans ${file}.gforge-new."
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
-#: ../dsf-helper/replace-files.templates:2001
-msgid "Shall I modify the ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
 
 #. Type: note
 #. Description
@@ -449,11 +449,12 @@ msgstr "Vérification de $[file} indispensable"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:3001
+#, fuzzy
 msgid ""
 "You have chosen not to let the Gforge package update the ${file} file.  Very "
-"well, I have not changed it.  Instead, I have written the suggested changes "
-"into ${file}.gforge-new. Please check this file and apply the appropriate "
-"changes to ${file}."
+"well, Installer has not changed it.  Instead, It has written the suggested "
+"changes into ${file}.gforge-new. Please check this file and apply the "
+"appropriate changes to ${file}."
 msgstr ""
 "Vous avez choisi de ne pas laisser le paquet Gforge modifier le fichier "
 "${file}. En conséquence, les modifications ont été sauvegardées dans ${file}."
@@ -463,7 +464,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:1001
-msgid "Your Gforge domain or subdomain name"
+#, fuzzy
+msgid "Your Gforge domain or subdomain name:"
 msgstr "Nom de domaine ou de sous-domaine Gforge :"
 
 #. Type: string
@@ -480,7 +482,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-msgid "The Gforge admin email address."
+#, fuzzy
+msgid "The Gforge admin email address:"
 msgstr "Adresse électronique de l'administrateur Gforge :"
 
 #. Type: string
@@ -496,7 +499,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
-msgid "The Gforge system name"
+#, fuzzy
+msgid "The Gforge system name:"
 msgstr "Nom du système Gforge :"
 
 #. Type: string
@@ -508,7 +512,8 @@ msgstr "Le nom du système est utilisé dans plusieurs parties du serveur."
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:1001
-msgid "Your database server"
+#, fuzzy
+msgid "Your database server:"
 msgstr "Serveur de base de données :"
 
 #. Type: string
@@ -525,7 +530,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Your database name"
+#, fuzzy
+msgid "Your database name:"
 msgstr "Nom de base de données :"
 
 #. Type: string
@@ -542,7 +548,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Your database admin username"
+#, fuzzy
+msgid "Your database admin username:"
 msgstr "Identifiant de l'administrateur de base de données :"
 
 #. Type: string
@@ -579,7 +586,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:1001
-msgid "The news admin group id"
+#, fuzzy
+msgid "The news admin group id:"
 msgstr "Numéro du groupe (GID) d'administration des nouvelles :"
 
 #. Type: string
@@ -599,19 +607,22 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
-msgid "The stats admin group id"
+#, fuzzy
+msgid "The stats admin group id:"
 msgstr "Numéro du groupe d'administration des statistiques :"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:3001
-msgid "The peer rating admin group id"
+#, fuzzy
+msgid "The peer rating admin group id:"
 msgstr "Numéro du groupe d'administration des notations (« rating ») :"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:1001
-msgid "Your mailing-lists server"
+#, fuzzy
+msgid "Your mailing-lists server:"
 msgstr "Serveur de listes de diffusion :"
 
 #. Type: string
@@ -628,7 +639,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../dsf-helper/migration.templates:1001
-msgid "Migrate to Gforge?"
+#, fuzzy
+msgid "Migrate to Gforge:"
 msgstr "Faut-il migrer vers Gforge ?"
 
 #. Type: boolean
@@ -694,16 +706,11 @@ msgstr ""
 "Pour que Gforge fonctionne complètement, des modifications doivent être "
 "apportées au fichier ${file}."
 
-#. Type: boolean
-#. Description
-#: ../dsf-helper/replace-files.templates:1001
-msgid "Shall I modify ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
-
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:1001
-msgid "Your user mail redirector server"
+#, fuzzy
+msgid "Your user mail redirector server:"
 msgstr "Redirecteur de courriers :"
 
 #. Type: string
@@ -719,155 +726,25 @@ msgstr ""
 
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid ""
+"English, Bulgarian, Catalan, Chinese, Dutch, Esperanto, French, German, "
+"Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, "
+"Polish, PortugueseBrazilian, Portuguese, Russian, SimplifiedChinese, "
+"Spanish, Swedish, Thai"
+msgstr ""
+
 #. Type: select
 #. DefaultChoice
-#: ../dsf-helper/web-variables.templates:1001
 #: ../dsf-helper/web-variables.templates:1002
 msgid "English"
 msgstr "French"
 
 #. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Bulgarian"
-msgstr "bulgare"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Catalan"
-msgstr "catalan"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Chinese"
-msgstr "chinois (traditionnel)"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Dutch"
-msgstr "néerlandais"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Esperanto"
-msgstr "espéranto"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "French"
-msgstr "français"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "German"
-msgstr "allemand"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Greek"
-msgstr "grec"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Hebrew"
-msgstr "hébreu"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Indonesian"
-msgstr "indonésien"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Italian"
-msgstr "italien"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Japanese"
-msgstr "japonais"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Korean"
-msgstr "coréen"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Latin"
-msgstr "latin"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Norwegian"
-msgstr "norvégien"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Polish"
-msgstr "polonais"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "PortugueseBrazilian"
-msgstr "portugais du Brésil"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Portuguese"
-msgstr "portugais"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Russian"
-msgstr "russe"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "SimplifiedChinese"
-msgstr "chinois (simplifié)"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Spanish"
-msgstr "espagnol"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Swedish"
-msgstr "suédois"
-
-#. Type: select
-#. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Thai"
-msgstr "thaï"
-
-#. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:1003
-msgid "Default language"
+#, fuzzy
+msgid "Default language:"
 msgstr "Langue par défaut :"
 
 #. Type: select
@@ -879,7 +756,8 @@ msgstr "Veuillez choisir la langue par défaut des pages web."
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:2001
-msgid "Default theme"
+#, fuzzy
+msgid "Default theme:"
 msgstr "Thème par défaut :"
 
 #. Type: string
@@ -890,3 +768,78 @@ msgid ""
 msgstr ""
 "Il s'agit du thème par défaut des pages web. Veillez à indiquer un nom "
 "valide."
+
+#~ msgid "Shall I modify the ${file} automatically?"
+#~ msgstr "Faut-il modifier ${file} automatiquement ?"
+
+#~ msgid "Shall I modify ${file} automatically?"
+#~ msgstr "Faut-il modifier ${file} automatiquement ?"
+
+#~ msgid "Bulgarian"
+#~ msgstr "bulgare"
+
+#~ msgid "Catalan"
+#~ msgstr "catalan"
+
+#~ msgid "Chinese"
+#~ msgstr "chinois (traditionnel)"
+
+#~ msgid "Dutch"
+#~ msgstr "néerlandais"
+
+#~ msgid "Esperanto"
+#~ msgstr "espéranto"
+
+#~ msgid "French"
+#~ msgstr "français"
+
+#~ msgid "German"
+#~ msgstr "allemand"
+
+#~ msgid "Greek"
+#~ msgstr "grec"
+
+#~ msgid "Hebrew"
+#~ msgstr "hébreu"
+
+#~ msgid "Indonesian"
+#~ msgstr "indonésien"
+
+#~ msgid "Italian"
+#~ msgstr "italien"
+
+#~ msgid "Japanese"
+#~ msgstr "japonais"
+
+#~ msgid "Korean"
+#~ msgstr "coréen"
+
+#~ msgid "Latin"
+#~ msgstr "latin"
+
+#~ msgid "Norwegian"
+#~ msgstr "norvégien"
+
+#~ msgid "Polish"
+#~ msgstr "polonais"
+
+#~ msgid "PortugueseBrazilian"
+#~ msgstr "portugais du Brésil"
+
+#~ msgid "Portuguese"
+#~ msgstr "portugais"
+
+#~ msgid "Russian"
+#~ msgstr "russe"
+
+#~ msgid "SimplifiedChinese"
+#~ msgstr "chinois (simplifié)"
+
+#~ msgid "Spanish"
+#~ msgstr "espagnol"
+
+#~ msgid "Swedish"
+#~ msgstr "suédois"
+
+#~ msgid "Thai"
+#~ msgstr "thaï"

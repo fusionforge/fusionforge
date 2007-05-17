@@ -1,0 +1,304 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge~/cronjobs/calculate_user_metric.php gforge/cronjobs/calculate_user_metric.php
+--- gforge~/cronjobs/calculate_user_metric.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/calculate_user_metric.php	2007-05-17 18:16:54.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/check_stale_tracker_items.php gforge/cronjobs/check_stale_tracker_items.php
+--- gforge~/cronjobs/check_stale_tracker_items.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/check_stale_tracker_items.php	2007-05-17 18:15:25.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * check_stale_tracker_items.php - Check for stale tracker items.
+diff -urNad gforge~/cronjobs/db_project_sums.php gforge/cronjobs/db_project_sums.php
+--- gforge~/cronjobs/db_project_sums.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/db_project_sums.php	2007-05-17 18:15:53.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Portions Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/db_stats_agg.php gforge/cronjobs/db_stats_agg.php
+--- gforge~/cronjobs/db_stats_agg.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/db_stats_agg.php	2007-05-17 18:17:21.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge
+diff -urNad gforge~/cronjobs/db_trove_maint.php gforge/cronjobs/db_trove_maint.php
+--- gforge~/cronjobs/db_trove_maint.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/db_trove_maint.php	2007-05-17 18:17:20.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/ftp_create_group_access.php gforge/cronjobs/ftp_create_group_access.php
+--- gforge~/cronjobs/ftp_create_group_access.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/ftp_create_group_access.php	2007-05-17 18:17:37.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * 
+diff -urNad gforge~/cronjobs/massmail.php gforge/cronjobs/massmail.php
+--- gforge~/cronjobs/massmail.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/massmail.php	2007-05-17 18:16:54.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Massmail backend cron script
+diff -urNad gforge~/cronjobs/project_cleanup.php gforge/cronjobs/project_cleanup.php
+--- gforge~/cronjobs/project_cleanup.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/project_cleanup.php	2007-05-17 18:16:05.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/project_weekly_metric.php gforge/cronjobs/project_weekly_metric.php
+--- gforge~/cronjobs/project_weekly_metric.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/project_weekly_metric.php	2007-05-17 18:17:19.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/rating_stats.php gforge/cronjobs/rating_stats.php
+--- gforge~/cronjobs/rating_stats.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/rating_stats.php	2007-05-17 18:15:58.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/reporting_cron.php gforge/cronjobs/reporting_cron.php
+--- gforge~/cronjobs/reporting_cron.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/reporting_cron.php	2007-05-17 18:16:01.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Reporting System
+diff -urNad gforge~/cronjobs/rotate_activity.php gforge/cronjobs/rotate_activity.php
+--- gforge~/cronjobs/rotate_activity.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/rotate_activity.php	2007-05-17 18:17:18.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/site_stats.php gforge/cronjobs/site_stats.php
+--- gforge~/cronjobs/site_stats.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/site_stats.php	2007-05-17 18:17:22.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -urNad gforge~/cronjobs/vacuum.php gforge/cronjobs/vacuum.php
+--- gforge~/cronjobs/vacuum.php	2007-05-11 12:37:23.000000000 +0200
++++ gforge/cronjobs/vacuum.php	2007-05-17 18:17:22.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * nightly VACUUM job
+diff -urNad gforge~/db/20040826_migrateforum.php gforge/db/20040826_migrateforum.php
+--- gforge~/db/20040826_migrateforum.php	2007-05-11 12:37:26.000000000 +0200
++++ gforge/db/20040826_migrateforum.php	2007-05-17 18:17:36.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Forum Renamer - forum names are now unix-format for email gateway
+diff -urNad gforge~/db/20040826_migraterbac.php gforge/db/20040826_migraterbac.php
+--- gforge~/db/20040826_migraterbac.php	2007-05-11 12:37:26.000000000 +0200
++++ gforge/db/20040826_migraterbac.php	2007-05-17 18:17:23.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Group Role Generator
+diff -urNad gforge~/db/20041211-syncmail.php gforge/db/20041211-syncmail.php
+--- gforge~/db/20041211-syncmail.php	2007-05-11 12:37:26.000000000 +0200
++++ gforge/db/20041211-syncmail.php	2007-05-17 18:17:34.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ require_once('www/include/squal_pre.php');
+ require_once('common/mail/MailingList.class');
+diff -urNad gforge~/db/20041222-1-delete-task-artifact.php gforge/db/20041222-1-delete-task-artifact.php
+--- gforge~/db/20041222-1-delete-task-artifact.php	2007-05-11 12:37:26.000000000 +0200
++++ gforge/db/20041222-1-delete-task-artifact.php	2007-05-17 18:17:35.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ require_once('www/include/squal_pre.php');
+ require_once('common/pm/ProjectTask.class');
+diff -urNad gforge~/db/20050325-2.php gforge/db/20050325-2.php
+--- gforge~/db/20050325-2.php	2007-05-11 12:37:26.000000000 +0200
++++ gforge/db/20050325-2.php	2007-05-17 18:17:24.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Extra Field Conversion Script
+diff -urNad gforge~/db/20050617.php gforge/db/20050617.php
+--- gforge~/db/20050617.php	2007-05-11 12:37:27.000000000 +0200
++++ gforge/db/20050617.php	2007-05-17 18:17:33.000000000 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Extra field alias - Create aliases for the extra fields
+diff -urNad gforge~/db/20050804-2.php gforge/db/20050804-2.php
+--- gforge~/db/20050804-2.php	2007-05-11 12:37:27.000000000 +0200
++++ gforge/db/20050804-2.php	2007-05-17 18:17:24.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Group Docman updater
+diff -urNad gforge~/plugins/cvstracker/bin/post.php gforge/plugins/cvstracker/bin/post.php
+--- gforge~/plugins/cvstracker/bin/post.php	2007-05-11 12:37:42.000000000 +0200
++++ gforge/plugins/cvstracker/bin/post.php	2007-05-17 18:17:52.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Plugin CVSTracker HTTPPoster
+diff -urNad gforge~/plugins/scmcvs/bin/aclcheck.php gforge/plugins/scmcvs/bin/aclcheck.php
+--- gforge~/plugins/scmcvs/bin/aclcheck.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/bin/aclcheck.php	2007-05-17 18:17:52.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * Implement CVS ACLs based on GForge roles
+diff -urNad gforge~/plugins/scmcvs/cronjobs/cvs.php gforge/plugins/scmcvs/cronjobs/cvs.php
+--- gforge~/plugins/scmcvs/cronjobs/cvs.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/cvs.php	2007-05-17 18:17:55.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Cron Job
+diff -urNad gforge~/plugins/scmcvs/cronjobs/ftp_create.php gforge/plugins/scmcvs/cronjobs/ftp_create.php
+--- gforge~/plugins/scmcvs/cronjobs/ftp_create.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/ftp_create.php	2007-05-17 18:17:54.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Cron Job
+diff -urNad gforge~/plugins/scmcvs/cronjobs/homedirs.php gforge/plugins/scmcvs/cronjobs/homedirs.php
+--- gforge~/plugins/scmcvs/cronjobs/homedirs.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/homedirs.php	2007-05-17 18:17:54.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Cron Job
+diff -urNad gforge~/plugins/scmcvs/cronjobs/ssh_create.php gforge/plugins/scmcvs/cronjobs/ssh_create.php
+--- gforge~/plugins/scmcvs/cronjobs/ssh_create.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/ssh_create.php	2007-05-17 18:17:56.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Cron Job
+diff -urNad gforge~/plugins/scmcvs/cronjobs/tarballs.php gforge/plugins/scmcvs/cronjobs/tarballs.php
+--- gforge~/plugins/scmcvs/cronjobs/tarballs.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/tarballs.php	2007-05-17 18:17:39.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ 
+ $verbose=0;
+diff -urNad gforge~/plugins/scmcvs/cronjobs/usergroup.php gforge/plugins/scmcvs/cronjobs/usergroup.php
+--- gforge~/plugins/scmcvs/cronjobs/usergroup.php	2007-05-11 12:38:03.000000000 +0200
++++ gforge/plugins/scmcvs/cronjobs/usergroup.php	2007-05-17 18:17:53.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Cron Job
+diff -urNad gforge~/plugins/scmsvn/bin/svn-create.php gforge/plugins/scmsvn/bin/svn-create.php
+--- gforge~/plugins/scmsvn/bin/svn-create.php	2007-05-11 12:38:04.000000000 +0200
++++ gforge/plugins/scmsvn/bin/svn-create.php	2007-05-17 18:17:37.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  *	This file will create blank SVN repositories for the SVN-over-ssh 
+diff -urNad gforge~/plugins/scmsvn/cronjobs/create_svn.php gforge/plugins/scmsvn/cronjobs/create_svn.php
+--- gforge~/plugins/scmsvn/cronjobs/create_svn.php	2007-05-11 12:38:04.000000000 +0200
++++ gforge/plugins/scmsvn/cronjobs/create_svn.php	2007-05-17 18:17:38.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * create_svn.php 
+diff -urNad gforge~/plugins/scmsvn/cronjobs/tarballs.php gforge/plugins/scmsvn/cronjobs/tarballs.php
+--- gforge~/plugins/scmsvn/cronjobs/tarballs.php	2007-05-11 12:38:04.000000000 +0200
++++ gforge/plugins/scmsvn/cronjobs/tarballs.php	2007-05-17 18:17:40.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#! /usr/bin/php5 -f
+ <?php
+ 
+ $verbose=0;
+diff -urNad gforge~/plugins/svntracker/bin/post.php gforge/plugins/svntracker/bin/post.php
+--- gforge~/plugins/svntracker/bin/post.php	2007-05-11 12:38:05.000000000 +0200
++++ gforge/plugins/svntracker/bin/post.php	2007-05-17 18:17:50.000000000 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php -f
++#! /usr/bin/php5 -f
+ <?php
+ /**
+  * GForge Plugin SVNTracker HTTPPoster
