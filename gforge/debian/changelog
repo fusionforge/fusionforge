@@ -1,10 +1,17 @@
-gforge (4.6.99+svn20070511-0) experimental; urgency=low
+gforge (4.6.99+svn20070517-0) experimental; urgency=low
 
   * SVN snapshot.  Don't use for production!
-  * Removing support for Apache 1.3, PHP 4.x and PostgreSQL < 8.2, since
-    these packages will be removed from Debian soon.
+  * Using local database to avoid problems with PostgreSQL not listening
+    to TCP/IP connections by default (closes: #309276, #396127, #415650,
+    #420751).
+  * Removing support for Apache 1.3, PHP 4.x (closes: #424786, #424792),
+    Exim 3 (closes: #420268) and PostgreSQL < 8.2, since these packages
+    will be removed from Debian soon.
+  * Also removing support for LDAP for now, unless someone comes up ready
+    to maintain it in a proper shape (closes: #237229, #241389, #296399,
+    #296507, #372260, #378616).
 
- -- Roland Mas <lolando@debian.org>  Fri, 11 May 2007 18:02:56 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 17 May 2007 15:53:14 +0200
 
 gforge (4.5.14-25+963) unstable; urgency=low
 

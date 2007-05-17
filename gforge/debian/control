@@ -50,7 +50,7 @@ Description: collaborative development tool - plugins
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, cronolog, python
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, cronolog, python
 Recommends: libphp-jpgraph
 Provides: gforge-web
 Conflicts: gforge-web
@@ -66,7 +66,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: postgresql-8.2 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, php5-cli
+Depends: gforge-common, postgresql-8.2 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, php5-cli
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
@@ -92,21 +92,6 @@ Description: collaborative development tool - mail tools (using Exim 4)
  integrated into one web site and managed via a nice web interface.
  .
  This package configures the Exim 4 mail transfer agent to run
- GForge.
-
-Package: gforge-mta-exim
-Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, exim | exim-tls
-Provides: gforge-mta
-Conflicts: gforge-mta
-Description: collaborative development tool - mail tools (using Exim)
- GForge provides many tools to help collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
- .
- This package configures the Exim mail transfer agent to run
  GForge.
 
 Package: gforge-mta-postfix
@@ -139,21 +124,6 @@ Description: collaborative development tool - mail tools (using Courier)
  This package configures the Courier mail transfer agent to run
  GForge.
 
-Package: gforge-shell-ldap
-Architecture: all
-Depends: gforge-common, gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-ldap (>=184-1), libpam-ldap
-Provides: gforge-shell
-Conflicts: gforge-shell
-Description: collaborative development tool - shell accounts (using LDAP)
- GForge provides many tools to help collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
- .
- This package provides shell accounts authenticated via LDAP to
- GForge users.
-
 Package: gforge-shell-postgresql
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-pgsql1
@@ -182,20 +152,6 @@ Description: collaborative development tool - FTP management (using ProFTPd)
  integrated into one web site and managed via a nice web interface.
  .
  This package configures the ProFTPd FTP server for GForge.
-
-Package: gforge-ldap-openldap
-Architecture: all
-Depends: gforge-common, gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, slapd (>= 2.2.23), ldap-utils
-Provides: gforge-ldap
-Conflicts: gforge-ldap
-Description: collaborative development tool - LDAP directory (using OpenLDAP)
- GForge provides many tools to help collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
- .
- This package configures and maintains an LDAP directory for GForge.
 
 Package: gforge-dns-bind9
 Architecture: all

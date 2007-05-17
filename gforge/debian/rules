@@ -228,18 +228,11 @@ install: build
 	install -m 644 db/2006*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
-	# gforge-mta-exim
-	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
-
 	# gforge-mta-exim4
 	install -m 755 deb-specific/install-exim4.sh $(CURDIR)/debian/gforge-mta-exim4/usr/lib/gforge/bin/
 
 	# gforge-mta-postfix
 	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
-
-	# gforge-shell-ldap
-	# not needed chroot is a symlink -> ../../../
-	#cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
 
 	# gforge-shell-postgresql
 	install -m 755 deb-specific/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
@@ -247,11 +240,6 @@ install: build
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
 	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/gforge-ftp-proftpd/etc/gforge/
-
-	# gforge-ldap-openldap
-	install -m 755 utils/ldap/sql2ldif.pl $(CURDIR)/debian/gforge-ldap-openldap/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-ldap.sh $(CURDIR)/debian/gforge-ldap-openldap/usr/lib/gforge/bin/
-	install -m 644 deb-specific/gforge.schema $(CURDIR)/debian/gforge-ldap-openldap/etc/gforge/
 
 	# gforge-dns-bind9
 	install -m 644 $(CURDIR)/debian/gforge-dns-bind9.overrides $(CURDIR)/debian/gforge-dns-bind9/usr/share/lintian/overrides/gforge-dns-bind9
