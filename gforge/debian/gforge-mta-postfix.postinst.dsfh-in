@@ -34,6 +34,7 @@ case "$1" in
 	/usr/lib/gforge/bin/install-postfix.sh configure-files
 	replace_file /etc/aliases
 	replace_file /etc/postfix/main.cf
+	/usr/lib/gforge/bin/install-postfix.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
