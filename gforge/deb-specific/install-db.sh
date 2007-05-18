@@ -89,7 +89,7 @@ case "$target" in
 	rm -f $cur
 	
 	cur=$(mktemp /tmp/$pattern)
-	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 password\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	rm -f $cur
 	
@@ -143,7 +143,7 @@ EOF
 	    exit 1
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
-CREATE USER gforge_mta WITH PASSWORD '' ;
+CREATE USER gforge_mta WITH PASSWORD 'gforge_mta' ;
 EOF
 	then
 	    rm -f $tmp1 $tmp2

@@ -1,4 +1,4 @@
-gforge (4.6.99+svn20070517-0) experimental; urgency=low
+gforge (4.6.99+svn20070518-0) experimental; urgency=low
 
   * SVN snapshot.  Don't use for production!
   * Using local database to avoid problems with PostgreSQL not listening
@@ -10,8 +10,10 @@ gforge (4.6.99+svn20070517-0) experimental; urgency=low
   * Also removing support for LDAP for now, unless someone comes up ready
     to maintain it in a proper shape (closes: #237229, #241389, #296399,
     #296507, #372260, #378616).
+  * Added dummy password for the gforge_mta PostgreSQL user, since it no
+    longer seems possible to use an empty password.
 
- -- Roland Mas <lolando@debian.org>  Thu, 17 May 2007 15:53:14 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 18 May 2007 11:29:59 +0200
 
 gforge (4.5.14-25+963) unstable; urgency=low
 

@@ -68,7 +68,7 @@ $gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 
 pgsql_gforge_users_hosts = $sys_dbhost
 pgsql_gforge_users_user = gforge_mta
-pgsql_gforge_users_password = 
+pgsql_gforge_users_password = gforge_mta
 pgsql_gforge_users_dbname = $sys_dbname
 pgsql_gforge_users_domain = users.$domain_name
 pgsql_gforge_users_select_field = email
@@ -77,7 +77,7 @@ pgsql_gforge_users_where_field = login
 
 pgsql_gforge_lists_hosts = $sys_dbhost
 pgsql_gforge_lists_user = gforge_mta
-pgsql_gforge_lists_password = 
+pgsql_gforge_lists_password = gforge_mta
 pgsql_gforge_lists_dbname = $sys_dbname
 pgsql_gforge_lists_domain = lists.$domain_name
 pgsql_gforge_lists_select_field = post_address
