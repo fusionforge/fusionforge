@@ -86,7 +86,7 @@ pgsql_gforge_lists_result_format = "%s"
 $seen_gf_block = 0;
 $seen_alias_maps = 0;
 while ($l = <>) {
-	if ($l =~ /^\s*alias_maps/) {
+	if ($l =~ /^\s*virtual_alias_maps/) {
 		chomp $l;
 		$l .= ", pgsql:pgsql_gforge_users" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_users/);
 		$l .= ", pgsql:pgsql_gforge_lists" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_lists/);
@@ -118,7 +118,7 @@ if ($seen_gf_block == 0) {
 
 if ($seen_alias_maps == 0) {
 	print "### GFORGE ADDITION - The following line can be moved and this line removed ###\n";
-	print "alias_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists\n";
+	print "virtual_alias_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists\n";
 };
 ' < $tmp1 > $tmp2
 	rm $tmp1
