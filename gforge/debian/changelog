@@ -12,8 +12,9 @@ gforge (4.6.99+svn20070518-0) experimental; urgency=low
     #296507, #372260, #378616).
   * Added dummy password for the gforge_mta PostgreSQL user, since it no
     longer seems possible to use an empty password.
+  * Fixed Postfix alias resolution (closes: #424697).
 
- -- Roland Mas <lolando@debian.org>  Fri, 18 May 2007 11:29:59 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 18 May 2007 12:12:18 +0200
 
 gforge (4.5.14-25+963) unstable; urgency=low
 

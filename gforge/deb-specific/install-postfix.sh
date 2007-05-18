@@ -60,9 +60,9 @@ require ("/etc/gforge/local.pl") ;
 my $gf_block;
 my $l;
 my $seen_gf_block;
-my $seen_virtual_maps;
+my $seen_alias_maps;
 
-$gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
+$gf_block = qq{### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 #You may move this block around to accomodate your local needs as long as you
 # keep it in an appropriate position, where \"appropriate\" is defined by you.
 
@@ -71,36 +71,44 @@ pgsql_gforge_users_user = gforge_mta
 pgsql_gforge_users_password = gforge_mta
 pgsql_gforge_users_dbname = $sys_dbname
 pgsql_gforge_users_domain = users.$domain_name
-pgsql_gforge_users_select_field = email
-pgsql_gforge_users_table = mta_users
-pgsql_gforge_users_where_field = login
+pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '\''%u'\''
 
 pgsql_gforge_lists_hosts = $sys_dbhost
 pgsql_gforge_lists_user = gforge_mta
 pgsql_gforge_lists_password = gforge_mta
 pgsql_gforge_lists_dbname = $sys_dbname
 pgsql_gforge_lists_domain = lists.$domain_name
-pgsql_gforge_lists_select_field = post_address
-pgsql_gforge_lists_table = mta_lists
-pgsql_gforge_lists_where_field = list_name
+pgsql_gforge_lists_query = SELECT post_address FROM mta_lists WHERE list_name = '\''%u'\''
+pgsql_gforge_lists_result_format = "%s"
 
 ### END GFORGE BLOCK ###
-";
+};
 $seen_gf_block = 0;
-$seen_vritual_maps = 0;
+$seen_alias_maps = 0;
 while ($l = <>) {
-	if ($l =~ /^\s*virtual_maps/) {
+	if ($l =~ /^\s*alias_maps/) {
 		chomp $l;
 		$l .= ", pgsql:pgsql_gforge_users" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_users/);
 		$l .= ", pgsql:pgsql_gforge_lists" unless ($l =~ /^[^#]*pgsql:pgsql_gforge_lists/);
 		print "$l\n";
-		$seen_virtual_maps = 1;
+		$seen_alias_maps = 1;
 	} else {
 		if ($l =~ /^\s*\#\#\# BEGIN GFORGE BLOCK \-\- DO NOT EDIT \#\#\#/) {
 			$seen_gf_block = 1;
+		} elsif ($l =~ /^### GFORGE ADDITION - The following line can be moved and this line removed ###/) {
+                        # Ignore that old line
+                } elsif ($l =~ /^\s*virtual_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists$/) {
+                        # Ignore that one too
+		} elsif ($l =~ /^\s*virtual_maps = .*pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists/) {
+                        chomp $l ;
+                        $l =~ s/, pgsql:pgsql_gforge_users// ;
+                        $l =~ s/, pgsql:pgsql_gforge_lists// ;
+                        $l =~ s/pgsql:pgsql_gforge_users, // ;
+                        $l =~ s/pgsql:pgsql_gforge_lists, // ;
+                        print "$l\n" ;
 		} else {
-			print $l;
-		};
+                        print $l;
+                }
 	};
 };
 
@@ -108,9 +116,9 @@ if ($seen_gf_block == 0) {
 	print $gf_block;
 };
 
-if ($seen_virtual_maps == 0) {
+if ($seen_alias_maps == 0) {
 	print "### GFORGE ADDITION - The following line can be moved and this line removed ###\n";
-	print "virtual_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists\n";
+	print "alias_maps = pgsql:pgsql_gforge_users, pgsql:pgsql_gforge_lists\n";
 };
 ' < $tmp1 > $tmp2
 	rm $tmp1
