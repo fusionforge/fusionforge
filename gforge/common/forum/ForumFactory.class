@@ -106,7 +106,7 @@ class ForumFactory extends Error {
 				} else {
 					$exists=" AND group_forum_id IN (SELECT group_forum_ID
 					FROM forum_perm
-					WHERE perm_level >= 0 AND group_forum_id=forum_group_list.group_forum_id
+					WHERE perm_level >= 0 AND group_forum_id=forum_group_list_vw.group_forum_id
 					AND user_id='".user_getid()."') ";
 				}
 			}
