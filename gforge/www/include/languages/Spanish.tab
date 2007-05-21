@@ -622,6 +622,7 @@ forum_common	error_min_name_length	El nombre del foro tiene que tener al menos 3
 forum_common	error_save_when_logged_in	Solo puede guardar su lugar si está autenticado.
 forum_common	error_set_monitor	Solo puede monitorizar si está autenticado.
 forum_common	error_unable_to_add_monitor	Error - no puede monitorizar.
+forum_common	error_list_exists_with_samename	El foro no puede crearse debido a que ya existe una lista de correo con el mismo nombre dentro del mismo proyecto.
 forum_common_forum	error_save_place	Forum::savePlace()
 forum_common_forummessage	error_cannot_update_master_thread	No puedo actualizar el hilo maestro del Mensaje Padre con la hora actual
 forum_common_forummessage	error_cannot_update_parent	No Puedo Actualizar el Mensaje Padre
@@ -859,6 +860,7 @@ mail_common	description	Descripción
 mail_common	error_invalid_name	Nombre inválido de lista de correo
 mail_common	error_list_already_exists	La lista de correo ya EXISTE
 mail_common	error_min_name_length	Debe proporcionar un nombre de lista de 4 o más letras
+mail_common	error_forum_exists_with_samename	La lista de correo no puede crearse debido a que ya existe un foro con el mismo nombre dentro del mismo proyecto.
 mail_common	list_not_activated	No activa todavía
 mail_common	mailing_list	Lista de correo
 mail_common	prefs	Subscripción

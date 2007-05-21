@@ -762,6 +762,7 @@ forum_common	error_min_name_length	Forum Name Must Be At Least 3 Characters
 forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
 forum_common	error_set_monitor	You can Only Monitor If You Are Logged In
 forum_common	error_unable_to_add_monitor	Unable To Add Monitor
+forum_common	error_list_exists_with_samename	The forum cannot be created because a mailing list exists with the same name inside the same project.
 forum_common_forum	error_save_place	Forum::savePlace() 
 forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
@@ -1037,6 +1038,7 @@ mail_common	creation_mail_subject	$1 New Mailing List
 mail_common	error_min_name_length	Must Provide List Name That Is 4 or More Characters Long
 mail_common	error_invalid_name	Invalid List Name
 mail_common	error_list_already_exists	List Already Exists
+mail_common	error_forum_exists_with_samename	The mailing list cannot be created because a forum exists with the same name inside the same project.
 mail_common	list_not_activated	Not activated yet
 mail_common	mailing_list	Mailing list
 mail_common	prefs	Subscription

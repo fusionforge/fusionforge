@@ -147,6 +147,14 @@ class MailingList extends Error {
 			$this->setError(_('List Already Exists'));
 			return false;
 		}
+
+		$result_forum_samename = db_query('SELECT 1 FROM forum_group_list WHERE forum_name=\''.$listName.'\' AND group_id='.$this->Group->getID().'');
+
+		if (db_numrows($result_forum_samename) > 0){
+			$this->setError(_('Forum exists with the same name'));
+			return false;
+		}
+
 			
 		$listPassword = substr(md5($GLOBALS['session_hash'] . time() . rand(0,40000)), 0, 16);
 		

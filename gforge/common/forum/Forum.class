@@ -149,6 +149,14 @@ class Forum extends Error {
 			}
 		}
 
+		$project_name = $this->Group->getUnixName();
+		$result_list_samename = db_query('SELECT 1 FROM mail_group_list WHERE list_name = \''.$project_name.'-'.$forum_name.'\' AND group_id='.$this->Group->getID().''); 
+
+		if (db_numrows($result_list_samename) > 0){
+			$this->setError(_('Mailing List Exists with same name'));	
+			return false;
+		}
+
 
 		// This is a hack to allow non-site-wide-admins to post
 		// news.  The news/submit.php checks for proper permissions.
