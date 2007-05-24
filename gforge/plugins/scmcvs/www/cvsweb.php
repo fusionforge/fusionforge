@@ -127,8 +127,10 @@ if ($projectName) {
 	} else {
 		// SCM Box is the same server as this... execute the cvsweb script locally
 		ob_start();
-		// call to CVSWeb cgi. We use environment variables to pass parameters to the cgi.
-		passthru('PHP_WRAPPER="1" SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" PATH_INFO="'.getStringFromServer('PATH_INFO').'" QUERY_STRING="'.getStringFromServer('QUERY_STRING').'" '.$GLOBALS['sys_path_to_scmweb'].'/cvsweb 2>&1');
+                $path_info = getStringFromServer('PATH_INFO') ;
+                $path_info = preg_replace ('/[][{}()<>\n\r\'\\\$`;"|#&*?^]/', "", $path_info) ;
+                // call to CVSWeb cgi. We use environment variables to pass parameters to the cgi.
+                passthru('PHP_WRAPPER="1" SCRIPT_NAME="'.getStringFromServer('SCRIPT_NAME').'" PATH_INFO="'.$path_info.'" QUERY_STRING="'.getStringFromServer('QUERY_STRING').'" '.$GLOBALS['sys_path_to_scmweb'].'/cvsweb 2>&1');
 		$content = ob_get_contents();
 		ob_end_clean();
 	}
