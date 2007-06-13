@@ -109,6 +109,7 @@ class ProjectGroupFactory extends Error {
 			}
 		} else {
 			$public_flag='=1';
+			$exists='';
 		}
 
 		$sql="SELECT *

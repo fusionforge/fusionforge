@@ -51,7 +51,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><?php
 	echo $Language->getText('admin_index','display_user_beginning_with').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo '<a href="userlist.php?user_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
+		echo '<a href="userlist.php?user_name_search='.urlencode($abc_array[$i]).'">'.$abc_array[$i].'</a>|';
 	}
 ?>
 	<br />
@@ -95,7 +95,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php
 	echo $Language->getText('admin_index','display_groups_beginning_with').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
+		echo '<a href="grouplist.php?group_name_search='.urlencode($abc_array[$i]).'">'.$abc_array[$i].'</a>|';
 	}
 ?>
 	<br />
@@ -122,7 +122,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo $Language->getText('general','submit');?> "/>
 	</form></li>
-	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>
+	<li><a href="search.php?groupsearch=1&amp;search=%25&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>
 </ul>
 
 <p>

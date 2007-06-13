@@ -73,16 +73,18 @@ for ($i=0; $i<$rows; $i++) {
 	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
 		//$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
-		$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname $email $listpassword";
+		$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname $email $listpassword 2>&1";
 		$err .= "Command to be executed is $lcreate_cmd\n";
-		passthru($lcreate_cmd, $failed);
-		if($failed) {
+		$output = '';
+		exec($lcreate_cmd, $output, $failed);
+		if ($failed) {
 			$err .= 'Failed to create '.$listname.", skipping\n";
-echo $err;
+			$err .= implode("\n",$output)."\n";
 			continue;
 		} else {
 			// Privatize the new list
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+			$output = '';
 			passthru($privatize_cmd,$privatizeFailed);
 		}
 		$mailingListIds[] = $grouplistid;

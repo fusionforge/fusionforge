@@ -86,7 +86,7 @@ if ($forum_id) {
 		$body = $sanitizer->SanitizeHtml($body);
 		
 		$attach = getUploadedFile("attachment1");
-		if ($attach['size']) {
+		if (isset($attach['size']) && $attach['size'] > 0) {
 			$has_attach = true;
 		} else {
 			$has_attach = false;

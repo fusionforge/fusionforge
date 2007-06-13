@@ -24,32 +24,32 @@ if ($group_id) {
 	$querywm =  "SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags='A' AND users.user_id=user_group.user_id ORDER BY users.add_date";
 	$reswm = db_query($querywm,1);
 	if ($rowwm = db_fetch_array($reswm)) {
-	  $webmaster = $rowwm[user_name]."@".$GLOBALS[sys_users_host]." (".$rowwm[realname].")";
+	  $webmaster = $rowwm[user_name]."@".$GLOBALS['sys_users_host']." (".$rowwm[realname].")";
 	} else {
-	  $webmaster = $GLOBALS[sys_admin_email];
+	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
 } else {
 	$where = "";
     $title = "";
 	$link = "/new/";
 	$description = "";
-	$webmaster = $GLOBALS[sys_admin_email];
+	$webmaster = $GLOBALS['sys_admin_email'];
 }
 
 // ## one time output
 print " <channel>\n";
-print "  <title>".$GLOBALS[sys_default_name]." Project$title Releases</title>\n";
-print "  <link>http://".$GLOBALS[sys_default_domain]."$link</link>\n";
-print "  <description>".$GLOBALS[sys_name]." Project Releases$description</description>\n";
+print "  <title>".$GLOBALS['sys_default_name']." Project$title Releases</title>\n";
+print "  <link>http://".$GLOBALS['sys_default_domain']."$link</link>\n";
+print "  <description>".$GLOBALS['sys_name']." Project Releases$description</description>\n";
 print "  <language>en-us</language>\n";
-print "  <copyright>Copyright 2000-".date("Y")." ".$GLOBALS[sys_name]." OSI</copyright>\n";
+print "  <copyright>Copyright 2000-".date("Y")." ".$GLOBALS['sys_name']." OSI</copyright>\n";
 print "  <webMaster>$webmaster</webMaster>\n";
 print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 print "  <image>\n";
-print "    <url>http://".$GLOBALS[sys_default_domain]."/images/bflogo-88.png</url>\n";
-print "    <title>".$GLOBALS[sys_name]." Developer</title>\n";
-print "    <link>http://".$GLOBALS[sys_default_domain]."/</link>\n";
+print "    <url>http://".$GLOBALS['sys_default_domain']."/images/bflogo-88.png</url>\n";
+print "    <title>".$GLOBALS['sys_name']." Developer</title>\n";
+print "    <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
 print "    <width>124</width>\n";
 print "    <heigth>32</heigth>\n";
 print "  </image>\n";
@@ -87,12 +87,12 @@ while ($row = db_fetch_array($res)) {
 	if (!$G_RELEASE["$row[filerelease_id]"]) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row[package_name])." ".htmlspecialchars($row[module_name])."</title>\n";
-		print "   <link>http://".$GLOBALS[sys_default_domain]."/project/showfiles.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</link>\n";
+		print "   <link>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</link>\n";
 		print "   <description>".rss_description($row[module_notes])."</description>\n";
-		print "   <author>".$row[user_name]."@".$GLOBALS[sys_users_host]." (".$row[realname].")</author>\n";
-		print "   <comment>http://".$GLOBALS[sys_default_domain]."/project/shownotes.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</comment>\n";
+		print "   <author>".$row[user_name]."@".$GLOBALS['sys_users_host']." (".$row[realname].")</author>\n";
+		print "   <comment>http://".$GLOBALS['sys_default_domain']."/project/shownotes.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</comment>\n";
 		print "   <pubDate>".gmdate('D, d M Y G:i:s',$row[release_date])." GMT</pubDate>\n";
-		print "   <guid>http://".$GLOBALS[sys_default_domain]."/project/showfiles.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</guid>\n";
+		print "   <guid>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row[group_id]."&amp;release_id=".$row[filerelease_id]."</guid>\n";
 		print "  </item>\n";
 		$outputtotal++;
 	}

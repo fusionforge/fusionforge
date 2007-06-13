@@ -49,6 +49,7 @@ if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
 	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','email_only_to')." @".$GLOBALS['sys_default_domain']);
 }
 
+$subject = '';
 
 if (getStringFromRequest('send_mail')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {

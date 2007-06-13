@@ -61,11 +61,13 @@ if (!isset($datatype)) {
 	$datatype=1;
 }
 
+$start = getStringFromRequest('start');
 if (!$start) {
 	$start=time() - ($days * 60 * 60 * 24);
 	$formattedmonth = date('Ym',$start);
 }
 
+$end = getStringFromRequest('end');
 if (!$end) {
 	$end=time();
 } else {

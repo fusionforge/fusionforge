@@ -25,6 +25,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// PHP only adds the SuperGlobals to the GLOBALS array on the first reference.
+// We detect their presence by checking GLOBALS.  The following statements
+// ensure that the SuperGlobals are referenced if they exist.
+isset($_POST['x']);
+isset($_SERVER['x']);
+isset($_GET['x']);
+isset($_FILES['x']);
+isset($_COOKIE['x']);
+
 /**
  * getIntFromRequest - get an int from REQUEST
  *
@@ -154,7 +163,6 @@ function getUploadedFile($key) {
  * getStringFromServer - get a string from Server environment
  *
  * @param string $key key of the wanted value
- * @param string $defaultValue if we can't find the wanted value, it returns the default value
  * @return string the value
  */
 function getStringFromServer($key) {
@@ -231,9 +239,9 @@ function _getArrayFromArray(& $array, $key, $defaultValue = array()) {
  * @return array a predefined array
  */
 function & _getPredefinedArray($superGlobalName, $oldName) {
-	if(isset($GLOBALS[$superGlobalName])) {
+	if (isset($GLOBALS[$superGlobalName])) {
 		$array = & $GLOBALS[$superGlobalName];
-	} elseif(isset($GLOBALS[$oldName])) {
+	} elseif (isset($GLOBALS[$oldName])) {
 		$array = & $GLOBALS[$oldName];
 	} else {
 		$array = array();

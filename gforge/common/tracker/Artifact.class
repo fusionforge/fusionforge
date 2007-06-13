@@ -607,10 +607,9 @@ class Artifact extends Error {
 	 *  @return array of email addresses monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
-		$res=db_query("SELECT user_id
-			FROM artifact_monitor 
-			WHERE artifact_id='". $this->getID() ."'");
-		return array_unique(array_merge($this->ArtifactType->getMonitorIds(),util_result_column_to_array($res)));
+		$res=db_query("SELECT user_id FROM artifact_monitor WHERE artifact_id='". $this->getID() ."'");
+		$return = array_unique(array_merge($this->ArtifactType->getMonitorIds(),util_result_column_to_array($res)));
+		return $return;
 	}
 
 	/**
@@ -1187,9 +1186,8 @@ class Artifact extends Error {
 	 *
 	 */
 	function marker($prop_name,$changes,$extra_field_id=0) {
-		if ($prop_name == 'extra_fields' && $changes[$prop_name][$extra_field_id]) {
-			return '>';
-		} else if ($prop_name != 'extra_fields' && $changes[$prop_name]) {
+		if (($prop_name == 'extra_fields' && array_key_exists($prop_name, $changes) && array_key_exists($extra_field_id, $changes[$prop_name])) ||
+			($prop_name != 'extra_fields' && array_key_exists($prop_name, $changes))) {
 			return '>';
 		} else {
 			return '';
@@ -1212,6 +1210,8 @@ class Artifact extends Error {
 			$changes=array();
 		}
 		
+		$emails = array();
+
 		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
@@ -1384,7 +1384,11 @@ class Artifact extends Error {
 			// for these types, the associated value comes straight
 			case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 			case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
-				$value = $efd[$efid];
+				if (isset($efd[$efid])) {
+					$value = $efd[$efid];
+				} else {
+					$value = null;
+				}
 				break;
 
 			// the other types have and ID or an array of IDs associated to them

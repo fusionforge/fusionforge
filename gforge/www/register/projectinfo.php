@@ -108,6 +108,13 @@ if (getStringFromRequest('submit')) {
 	}
 } else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
+} else {
+	$full_name = '';
+	$purpose = '';
+	$license = '';
+	$license_other = '';
+	$description = '';
+	$unix_name = '';
 }
 
 site_header(array('title'=>$Language->getText('register','project_information')));

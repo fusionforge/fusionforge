@@ -293,7 +293,7 @@ echo '<h1>XXXXXX'.$username.$G_USERNAME.'</h1>';
 		$wgUser = new User();
 		if (session_loggedin()) {
 			//User::SetupSession();
-			$this->initUser(&$wgUser);
+			$this->initUser($wgUser);
 			return true;
 		} else {
 			$wgUser->logout();

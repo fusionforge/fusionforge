@@ -57,7 +57,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->words = $words;
 		$this->isExact = $isExact;
 		
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, null, $groupId);
 	}
 	
 	/**
@@ -100,32 +100,32 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$html = '';
 		
 		if (in_array('short_forum', $this->selectedParentSections)) {
-			$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_forum'));
+			$renderer = new ForumsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_forum'));
 			$html .= $this->getPartResult($renderer, 'short_forum');
 		}
 		
 		if (in_array('short_tracker', $this->selectedParentSections)) {
-			$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId,  $this->getSelectedChildSections('short_tracker'));
+			$renderer = new TrackersHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId,  $this->getSelectedChildSections('short_tracker'));
 			$html .= $this->getPartResult($renderer,  'short_tracker');
 		}
 		
 		if (in_array('short_pm', $this->selectedParentSections)) {
-			$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_pm'));
+			$renderer = new TasksHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_pm'));
 			$html .= $this->getPartResult($renderer, 'short_pm');
 		}
 
 		if (in_array('short_docman', $this->selectedParentSections)) {
-			$renderer = new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_docman'));
+			$renderer = new DocsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_docman'));
 			$html .= $this->getPartResult($renderer, 'short_docman');
 		}
 
 		if (in_array('short_files', $this->selectedParentSections)) {
-			$renderer = new FilesHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
+			$renderer = new FilesHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
 			$html .= $this->getPartResult($renderer, 'short_files');
 		}
 		
 		if (in_array('short_news', $this->selectedParentSections)) {
-			$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+			$renderer = new NewsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
 			$html .= $this->getPartResult($renderer, 'short_news');
 		}
 

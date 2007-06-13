@@ -34,6 +34,8 @@ if(getStringFromGet('root') && strpos(getStringFromGet('root'), ';') === false) 
 			$query[$matches[$i][1]] = urldecode($matches[$i][2]);
 		}
 		$projectName = $query['root'];
+	} else {
+		$projectName = '';
 	}
 }
 // Remove eventual leading /root/ or root/

@@ -9,6 +9,8 @@
  * @version   $Id: database-mysql.php 1423 2003-01-10 14:44:28Z bigdisk $
  */
 
+$db_logging = false;
+
 /**
  *  db_connect() -  Connect to the database
  *
@@ -23,7 +25,7 @@ function db_connect() {
 
 	db_log_dbentry('mysqli_connect',"$sys_dbhost, $sys_dbuser, $sys_dbpasswd");
 	$conn = @mysqli_connect($sys_dbhost, $sys_dbuser, $sys_dbpasswd);
-	db_log_dbexit('mysqli_connect',"$conn");
+	db_log_dbexit('mysqli_connect');
 
 	//
 	//	Now map the physical database connections to the
@@ -61,7 +63,7 @@ function db_query($qstring, $limit = '-1', $offset = 0) {
 //	if ($GLOBALS['IS_DEBUG'])
 //		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<p><br />\n";
 
-	db_log_dbentry('mysqli_select_db',"$conn, $sys_dbname");
+	db_log_dbentry('mysqli_select_db',"$sys_dbname");
 	if (!mysqli_select_db($conn, $sys_dbname)) {
 		db_log_dbexit('mysqli_select_db',false);
 		db_log_exit('db_query');
@@ -69,11 +71,11 @@ function db_query($qstring, $limit = '-1', $offset = 0) {
 	}
 	db_log_dbexit('mysqli_select_db',true);
 
-	db_log_dbentry('mysqli_query',"$conn, $sys_dbname");
+	db_log_dbentry('mysqli_query',"$sys_dbname");
 	$res = mysqli_query($conn, $qstring);
-	db_log_dbexit('mysqli_query',$res);
+	db_log_dbexit('mysqli_query');
 
-	db_log_exit('db_query',"$res");
+	db_log_exit('db_query');
 	return $res;
 }
 
@@ -90,7 +92,7 @@ function db_mquery($qstring) {
 
 	db_log_entry('db_mquery',"$qstring");
 
-	db_log_dbentry('mysqli_select_db',"$conn, $sys_dbname");
+	db_log_dbentry('mysqli_select_db',"$sys_dbname");
 	if (!mysqli_select_db($conn, $sys_dbname)) {
 		db_log_dbexit('mysqli_select_db',false);
 		$err = mysqli_error($conn);
@@ -102,9 +104,9 @@ function db_mquery($qstring) {
 	}
 	db_log_dbexit('mysqli_select_db', true);
 
-	db_log_dbentry('mysqli_multi_query',"$conn, $qstring");
+	db_log_dbentry('mysqli_multi_query',"$qstring");
 	if (!mysqli_multi_query($conn, $qstring)) {
-		db_log_dbexit('mysqli_multi_query','false');
+		db_log_dbexit('mysqli_multi_query',false);
 		$err = mysqli_error($conn);
 		if ($err) {
 			db_log('DB Error = '.$err);
@@ -114,10 +116,10 @@ function db_mquery($qstring) {
 	}
 	db_log_dbexit('mysqli_multi_query',true);
 
-	db_log_dbentry('mysqli_store_result',"$conn");
+	db_log_dbentry('mysqli_store_result');
 	if ($res = mysqli_store_result($conn)) {
-		db_log_dbexit('mysqli_store_result',"$res");
-		db_log_exit('db_mquery',"$res");
+		db_log_dbexit('mysqli_store_result');
+		db_log_exit('db_mquery');
 		return $res;
 	} else {
 		$err = mysqli_error($conn);
@@ -142,18 +144,18 @@ function db_next_result() {
 
 	db_log_entry('db_next_result',NULL);
 
-	db_log_dbentry('mysqli_next_result',"$conn");
+	db_log_dbentry('mysqli_next_result');
 	$ret = mysqli_next_result($conn);
-	db_log_dbexit('mysqli_next_result',"$ret");
+	db_log_dbexit('mysqli_next_result');
 	$err = mysqli_error($conn);
 	if ($err) {
 		db_log('DB Error = '.$err);
 	}
 
 	if ($ret) {
-		db_log_dbentry('mysqli_store_result',"$conn");
+		db_log_dbentry('mysqli_store_result');
 		$res = mysqli_store_result($conn);
-		db_log_dbexit('mysqli_store_result',"$res");
+		db_log_dbexit('mysqli_store_result');
 		if (!$res) {
 			$res = 1;
 		}
@@ -164,7 +166,7 @@ function db_next_result() {
 		}
 		$res = NULL;
 	}
-	db_log_exit('db_next_result',$res);
+	db_log_exit('db_next_result');
 	return $res;
 }
 
@@ -218,14 +220,14 @@ function db_numrows($qhandle) {
  *  @param		string	Query result set handle
  */
 function db_free_result($qhandle) {
-	db_log_entry('db_free_result',"$qhandle");
+	db_log_entry('db_free_result');
 	if (!is_object($qhandle)) {
 		db_log_exit('db_free_result');
 		return;
 	}
-	db_log_dbentry('mysqli_free_result',"$qhandle");
+	db_log_dbentry('mysqli_free_result');
 	$res = mysqli_free_result($qhandle);
-	db_log_dbexit('mysqli_free_result',"$res");
+	db_log_dbexit('mysqli_free_result');
 	db_log_exit('db_free_result');
 }
 
@@ -257,6 +259,10 @@ function db_result($qhandle,$row,$field) {
 	$row_data = mysqli_fetch_array($qhandle, MYSQLI_BOTH);
 	if (!$row_data) {
 		return NULL;
+	}
+	if (!array_key_exists($field, $row_data)) {
+		error_log("Invalid field - $field");
+		log_backtrace(debug_backtrace());
 	}
 	return $row_data[$field];
 }
@@ -306,7 +312,11 @@ function db_affected_rows() {
  *  @param		string	Query result set handle
  */
 function db_fetch_array($qhandle) {
-	return @mysqli_fetch_array($qhandle);
+	if (is_bool($qhandle)) {
+		error_log("Invalid query handle");
+		log_backtrace(debug_backtrace());
+	}
+	return mysqli_fetch_array($qhandle);
 }
 
 /**
@@ -355,19 +365,21 @@ function db_drop_sequence_if_exists ($tn) {
 }
 
 function db_log($message) {
-	global $fhlog;
+	global $fhlog,$db_logging;
 
-	if (!$fhlog) {
-		$fhlog = fopen('/tmp/db.log', 'a');
-	}
+	if ($db_logging) {
+		if (!$fhlog) {
+			$fhlog = fopen('/tmp/db.log', 'a');
+		}
 
-	if ($fhlog) {
-		fwrite($fhlog, $message);
-		fflush($fhlog);
+		if ($fhlog) {
+			fwrite($fhlog, $message);
+			fflush($fhlog);
+		}
 	}
 }
 
-function db_log_entry($func, $args) {
+function db_log_entry($func, $args = NULL) {
 	db_log("\nEntered ".$func.'('.$args.")\n");
 }
 
@@ -375,7 +387,7 @@ function db_log_exit($func, $result = NULL) {
 	db_log('Exited '.$func.' returned '.$result."\n");
 }
 
-function db_log_dbentry($func, $args) {
+function db_log_dbentry($func, $args = NULL) {
 	db_log('Entered '.$func.'('.$args.")\n");
 }
 
@@ -389,4 +401,27 @@ function db_log_dbexit($func, $result = NULL) {
 	}
 }
 
+function log_backtrace($backtrace) {
+	foreach ($backtrace as $entry) {
+		$line = $entry['file'].':'.$entry['line']."\t";
+        if (isset($entry['class'])) {
+            $line .= $entry['class'];
+        }
+        if (isset($entry['type'])) {
+            $line .= $entry['type'];
+        }
+        $line .= $entry['function'].'(';
+//		$first_arg = true;
+//		foreach ($entry['args'] as $arg) {
+//			if (!$first_arg) {
+//				$line .= ', ';
+//			}
+//			$first_arg = false;
+//
+//			$line .= $arg;
+//		}
+		$line .= ")\r\n";
+		error_log($line);
+	}
+}
 ?>

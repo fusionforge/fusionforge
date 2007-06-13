@@ -257,7 +257,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
 		$folders_len = count($folders);
 		// if first in discrim print root category
-		if (!$proj_discrim_used[$folders_ids[0]]) {
+		if (!isset($proj_discrim_used[$folders_ids[0]])) {
 			if (!$isfirstdiscrim) {
 				$return .= "</li>\n";
 			}
@@ -273,7 +273,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 			}
 		}
 		// then print the stuff
-		if ($proj_discrim_used[$folders_ids[0]]) {
+		if (isset($proj_discrim_used[$folders_ids[0]])) {
 			$return .= ', ';
 		}
 

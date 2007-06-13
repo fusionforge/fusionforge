@@ -166,6 +166,7 @@ if (session_loggedin()) {
 	$Language=new BaseLanguage();
 	$Language->loadLanguageID($LUSER->getLanguage());
 } else {
+	$classname = null;
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use default language

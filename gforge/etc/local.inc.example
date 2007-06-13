@@ -58,6 +58,11 @@ $sys_users_host = 'users.gforge.company.com';
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = 'gforge.company.com';
+$sys_lists_domain = 'gforge.company.com';
+$sys_lists_archive_public = "http://$sys_lists_host/pipermail/%s/";
+$sys_lists_archive_private = "http://$sys_lists_host/mailman/private/%s/";
+$sys_lists_external_info = "http://$sys_lists_host/mailman/listinfo/%s";
+$sys_lists_external_admin = "http://$sys_lists_host/mailman/admin/%s";
 
 //
 // SCM configuration

@@ -36,6 +36,7 @@ if (empty($svn) || util_is_root_dir($svn)) {
 $res = db_query("SELECT is_public,enable_anonscm,unix_group_name,groups.group_id 
 	FROM groups, plugins, group_plugin 
 	WHERE groups.status != 'P' 
+	AND groups.use_scm
 	AND groups.group_id=group_plugin.group_id
 	AND group_plugin.plugin_id=plugins.plugin_id
 	AND plugins.plugin_name='scmsvn'");
@@ -50,15 +51,15 @@ if (!$res) {
 // The content of the access file used by svn authz apache2 module
 $access_file_content = '';
 
-while ( $group_row =& db_fetch_array($res) ) {	
+while ( $group_row =& db_fetch_array($res) ) {
 	$access_file_content .= add2AccessFile($group_row['group_id']);
 	if ($per_group_access) {
 		writeAccessFile(sprintf($access_file, $group_row['unix_group_name']), $access_file_content);
 		$access_file_content = '';
 
 		// Now generate the contents for the password file
-		$res = db_query('SELECT user_name,unix_pw FROM users NATURAL JOIN user_group WHERE group_id=\''.$group_row['group_id'].'\'');
-		if (!$res) {
+		$user_res = db_query('SELECT user_name,unix_pw FROM users NATURAL JOIN user_group WHERE group_id=\''.$group_row['group_id'].'\'');
+		if (!$user_res) {
 			$err .=  "Error! Database Query Failed: ".db_error();
 			echo $err;
 			cron_entry(26,$err);
@@ -66,7 +67,7 @@ while ( $group_row =& db_fetch_array($res) ) {
 		}
 
 		$password_file_content = '';
-		while ( $user_row =& db_fetch_array($res) ) {
+		while ( $user_row =& db_fetch_array($user_res) ) {
 			if (!empty($user_row['unix_pw']))
 				$password_file_content .= $user_row['user_name'].':'.$user_row['unix_pw']."\n";
 		}
@@ -100,12 +101,14 @@ function add2AccessFile($group_id) {
 	$project = &group_get_object($group_id);
 	$result = "[". $project->getUnixName(). ":/]\n";
 	$users = &$project->getMembers();
-	foreach($users as $user ) {
-		$perm = &$project->getPermission($user);
-		if ( $perm->isCVSWriter() ) {
-			$result.= $user->getUnixName() . "= rw\n";
-		} else if ( $perm->isCVSReader() ) {
-			$result.= $user->getUnixName() . "= r\n";
+	if ($users) {
+		foreach($users as $user ) {
+			$perm = &$project->getPermission($user);
+			if ( $perm->isCVSWriter() ) {
+				$result.= $user->getUnixName() . "= rw\n";
+			} else if ( $perm->isCVSReader() ) {
+				$result.= $user->getUnixName() . "= r\n";
+			}
 		}
 	}
 	if ( $project->enableAnonSCM() ) {

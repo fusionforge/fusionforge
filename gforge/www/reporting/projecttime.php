@@ -41,7 +41,7 @@ if ($report->isError()) {
 $sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
 $g_id = getStringFromRequest('g_id');
-$typ = getStringFromRequest('typ');
+$type = getStringFromRequest('type');
 $start = getStringFromRequest('start');
 $end = getStringFromRequest('end');
 
@@ -73,7 +73,7 @@ $a2[]='user';
 <td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
 <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td valign="bottom"><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

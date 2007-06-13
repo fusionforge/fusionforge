@@ -54,7 +54,7 @@ $path_to_cronjobs = dirname(dirname(__FILE__));
 $php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
 
 
-$aliases_orig = file("/etc/aliases");
+$aliases_orig = file($sys_etc_path.'/aliases');
 $aliases = array();
 
 for ($i=0; $i < count($aliases_orig); $i++) {
@@ -186,7 +186,7 @@ for ($i=0; $i<$rows; $i++) {
 //
 // Now write all the aliases
 //
-$fh = fopen("/etc/aliases".FILE_EXTENSION, "w");
+$fh = fopen($sys_etc_path.'/aliases'.FILE_EXTENSION, "w");
 foreach ($aliases as $aliasname => $alias) {
 	fwrite($fh, "$aliasname: \t\t $alias\n");
 }

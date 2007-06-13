@@ -529,8 +529,8 @@ class Group extends Error {
 		if (!$use_pm) {
 			$use_pm=0;
 		}
-		if (!$use_pm_depend) {
-			$use_pm_depend=0;
+		if (!$use_pm_depend_box) {
+			$use_pm_depend_box=0;
 		}
 		if (!$use_scm) {
 			$use_scm=0;
@@ -541,8 +541,8 @@ class Group extends Error {
 		if (!$use_docman) {
 			$use_docman=0;
 		}
-		if (!$send_all_tasks) {
-			$send_all_tasks=0;
+		if (!$send_all_docs) {
+			$send_all_docs=0;
 		}
 		if (!$use_ftp) {
 			$use_ftp=0;
@@ -698,7 +698,7 @@ class Group extends Error {
 			SET status='$status'
 			WHERE group_id='". $this->getID()."'");
 
-		if (!$res || db_affected_rows($res) < 1) {
+		if (!$res) {
 			$this->setError('ERROR: DB: Could not change group status: '.db_error());
 			db_rollback();
 			return false;

@@ -64,12 +64,12 @@ class Stats extends Error {
 		    "ORDER BY ranking ASC";
 		} else {
 			$sql="SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile ".
-		  "FROM groups g,stats_project_all_vw s  ".
+			"FROM groups g,stats_project_all_vw s  ".
 			"WHERE g.group_id=s.group_id ".
 			"AND g.is_public=1 and s.group_ranking > 0 ".
 			"ORDER BY ranking ASC";
 		}
-		return db_query($sql, $LIMIT, $offset);
+		return db_query($sql, , $offset);
 	}
 
 	/**

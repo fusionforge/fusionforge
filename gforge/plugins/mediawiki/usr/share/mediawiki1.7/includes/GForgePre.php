@@ -41,7 +41,7 @@ if ($sys_use_jabber) {
 */
 
 //library to determine browser settings
-//require_once('www/include/browser.php');
+require_once('www/include/browser.php');
 
 //base error library for new objects
 require_once('common/include/Error.class');
@@ -53,7 +53,8 @@ require_once('www/include/Layout.class');
 //require_once('common/include/utils.php');
 
 //database abstraction
-require_once('common/include/database.php');
+require_once('common/include/database-'.$sys_database_type.'.php');
+
 /*
 function db_query(){
 }
@@ -200,7 +201,7 @@ if (session_loggedin()) {
 	if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
 		$classname = getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
 	}
-	if (!$classname) {
+	if (!isset($classname)) {
 		$classname=$sys_lang;
 	}
 	$Language=new BaseLanguage();

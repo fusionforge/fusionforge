@@ -73,7 +73,7 @@ echo report_header($Language->getText('reporting_us','title'));
     <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
     <td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
 	<td><strong><?php echo $Language->getText('reporting_us','task_status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
-    <td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+    <td valign="bottom"><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 	</tr></table>
 	</form>
 	<p>
@@ -81,18 +81,18 @@ echo report_header($Language->getText('reporting_us','title'));
 
 $sql="SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, 
 pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
-(select sum(hours) from rep_time_tracking 
-	WHERE user_id=users.user_id 
-	AND project_task_id=pt.project_task_id
-	AND report_date BETWEEN '$start' AND '$end') AS cumulative_hrs
-FROM users, project_assigned_to pat, project_status ps, project_group_list pgl, project_task pt
-LEFT JOIN rep_time_tracking rtt USING (project_task_id)
-WHERE users.user_id=pat.assigned_to_id
-AND pgl.group_project_id=pt.group_project_id
-AND pat.project_task_id=pt.project_task_id
-AND pt.status_id=ps.status_id
-AND pt.status_id IN ($tstat)
-AND pt.start_date BETWEEN '$start' AND '$end'
+(select sum(rtt.hours) from rep_time_tracking rtt
+	WHERE rtt.user_id=users.user_id 
+	AND rtt.project_task_id=pt.project_task_id
+	AND report_date BETWEEN '$start' AND '$end') AS cumulative_hrs 
+FROM users, project_assigned_to pat, project_status ps, project_group_list pgl, project_task pt,
+rep_time_tracking rtt 
+WHERE users.user_id=pat.assigned_to_id 
+AND pgl.group_project_id=pt.group_project_id 
+AND pat.project_task_id=pt.project_task_id 
+AND pt.status_id=ps.status_id 
+AND pt.status_id IN ($tstat) 
+AND pt.start_date BETWEEN '$start' AND '$end' 
 GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group_project_id, 
 	summary, pt.hours, end_date, pt.project_task_id, pt.hours";
 
@@ -108,7 +108,10 @@ if (!$res || db_numrows($res) < 1) {
 		$Language->getText('reporting_us','rem_hrs'),
 		$Language->getText('reporting_us','end_date')
 	);
+
 	echo $HTML->listTableTop($tableHeaders);
+
+    $last_name = '';
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$name=db_result($res,$i,'realname');
 		if ($last_name != $name) {

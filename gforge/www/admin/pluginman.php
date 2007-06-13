@@ -79,7 +79,7 @@ if (getStringFromRequest('update')) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = $Language->getText('pluginman','success',$pluginname);
-			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
+			if (is_dir("$sys_plugins_path/$pluginname/www")) { // if the plugin has a www dir delete the link to it
 				chdir('../plugins');
 				if (file_exists($pluginname)) {
 					system('rm ' . $pluginname,$result);
@@ -107,14 +107,14 @@ if (getStringFromRequest('update')) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = $Language->getText('pluginman','success',$pluginname);
-			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
+			if (is_dir("$sys_plugins_path/$pluginname/www")) { // if the plugin has a www dir make a link to it
 				chdir('../plugins');
-				$return_value = symlink($sys_plugins_path . $pluginname . '/www',$pluginname); // the apache group or user should have write perms the plugins folder...
+				$return_value = symlink("$sys_plugins_path/$pluginname/www",$pluginname); // the apache group or user should have write perms the plugins folder...
 				if (!chdir($sys_etc_path . '/plugins')) {
 					$return_value2 = false;
 				} else {
-					if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {
-						$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
+					if (is_dir("$sys_plugins_path/$pluginname/etc/plugins/$pluginname")) {
+						$return_value2 = symlink("$sys_plugins_path/$pluginname/etc/plugins/$pluginname",$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
 					} else {
 						//doesn�t have a config file, but that�s ok
 						$return_value2 = true;
@@ -129,9 +129,9 @@ if (getStringFromRequest('update')) {
 			}
 			if (getStringFromRequest('init')) {
 				// now we're going to check if there's a XX-init.sql file and run it
-				$db_init = $sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init-'. $sys_database_type .'.sql';
+				$db_init = "$sys_plugins_path/$pluginname/db/$pluginname-init-$sys_database_type.sql";
 				if (!is_file($db_init)) {
-					$db_init = $sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init.sql';
+					$db_init = "$sys_plugins_path/$pluginname/db/$pluginname-init.sql";
 					if (!is_file($db_init)) {
 						$db_init = 0;
 					}
@@ -175,7 +175,7 @@ $handle = opendir($sys_plugins_path);
 $filelist = array();
 while (($filename = readdir($handle)) !== false) {
 	if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
-		is_dir($sys_plugins_path.'/'.$filename)) {
+		is_dir("$sys_plugins_path/$filename")) {
 
 		$filelist[] = $filename;
 	}

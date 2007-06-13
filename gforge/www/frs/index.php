@@ -31,6 +31,7 @@ require_once('www/frs/include/frs_utils.php');
 
 $group_id = getIntFromRequest('group_id');
 $cur_group =& group_get_object($group_id);
+$release_id = getIntFromRequest('release_id');
 
 if (!$cur_group) {
 	exit_error($Language->getText('project_showfiles','no_group_title'),
@@ -107,6 +108,10 @@ $cell_data[] = array($Language->getText('project_showfiles','file_type'));
 echo $GLOBALS['HTML']->multiTableRow('',$cell_data, TRUE);
 
 $proj_stats['packages'] = $num_packages;
+$proj_stats['releases'] = 0;
+$proj_stats['files'] = 0;
+$proj_stats['size'] = 0;
+$proj_stats['downloads'] = 0;
 
 // Iterate and show the packages
 for ( $p = 0; $p < $num_packages; $p++ ) {

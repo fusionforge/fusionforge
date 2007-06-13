@@ -20,6 +20,7 @@ if (!$sys_use_people) {
 
 $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
+$feedback = '';
 
 if (session_loggedin()) {
 
@@ -87,7 +88,7 @@ if (session_loggedin()) {
 					form_release_key(getStringFromRequest("form_key"));
 					echo db_error();
 					$feedback .= $Language->getText('people_editprofile','failed_to_add_skill');
-					echo '<h2>'.$Language->getText('people_editprofile','failed_to_add_skill').'<h2>';
+					echo '<h2>'.$Language->getText('people_editprofile','failed_to_add_skill').'</h2>';
 				} else {		  
 					$feedback = $Language->getText('people_editprofile','skill_added_ok');
 				}
@@ -177,7 +178,7 @@ if (session_loggedin()) {
 				if (!$result || db_affected_rows($result) < 1) {
 					echo db_error();
 					$feedback .= $Language->getText('people_editprofile','failed_delete_skills');
-					echo '<h2>'.$Language->getText('people_editprofile','failed_delete_skills').'<h2>';
+					echo '<h2>'.$Language->getText('people_editprofile','failed_delete_skills').'</h2>';
 				} else {		  
 					$feedback = $Language->getText('people_editprofile','skill_delete_successfully',(db_affected_rows($result)>1?"s":" "));
 				}
@@ -234,11 +235,11 @@ if (session_loggedin()) {
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= $Language->getText('people_editprofile','user_fetch_failed');
-		echo '<h2>'.$Language->getText('people_editprofile','no_such_user').'<h2>';
+		echo '<h2>'.$Language->getText('people_editprofile','no_such_user').'</h2>';
 	} else {
 
 		echo '
-		<h2>'.$Language->getText('people_editprofile','edit_public_permissions').'<h2>
+		<h2>'.$Language->getText('people_editprofile','edit_public_permissions').'</h2>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		'.$Language->getText('people_editprofile','following_options').'
 		<p>
@@ -258,7 +259,7 @@ if (session_loggedin()) {
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= $Language->getText('people_editprofile','no_skill_types_in_database');
-			echo '<h2>'.$Language->getText('people_editprofile','no_skill_types_in_database_inform').'<h2>';
+			echo '<h2>'.$Language->getText('people_editprofile','no_skill_types_in_database_inform').'</h2>';
 		}
 		
 		$yearArray = array();

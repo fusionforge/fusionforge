@@ -49,6 +49,8 @@ class MailParser extends Error {
 		//
 		//	Read the message line-by-line
 		//
+		$got_headers = false;
+		$body = '';
 		for ($i=0; $i<($linecount-1); $i++) {
 //system("echo \"mp: line $i of $linecount length: ".strlen($lines[$i])." ".$lines[$i]."\n\" >> /tmp/forum.log");
 			//

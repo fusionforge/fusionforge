@@ -115,7 +115,7 @@ if ($week) {
 
 	if (!$group_project_id) {
 	    if ( $sys_database_type == "mysql" ) {
-			$sql="SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name)
+			$sql="SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name) ";
 		} else {
 			$sql="SELECT pgl.group_project_id,g.group_name || '**' || pgl.project_name ";
 		}
@@ -132,7 +132,7 @@ if ($week) {
 	<p>
 	<?php
 	if ( $sys_database_type == "mysql" ) {
-		$sql="SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, 
+		$sql="SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, ";
 	} else {
 		$sql="SELECT pt.project_task_id, pgl.project_name || '**' || pt.summary AS name, ";
 	}
@@ -147,7 +147,7 @@ if ($week) {
 			AND pgl.group_project_id=pt.group_project_id
 			AND pt.project_task_id=rtt.project_task_id 
 		ORDER BY rtt.report_date";
-	}
+
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if ($group_project_id || $rows) {

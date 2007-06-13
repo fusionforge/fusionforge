@@ -110,7 +110,7 @@ if (getStringFromRequest('submit')) {
 
 	} elseif (getStringFromRequest('editgroup')) {
 		$doc_group = getStringFromRequest('doc_group');
-		$groupname = getIntFromRequest('groupname');
+		$groupname = getStringFromRequest('groupname');
 		$parent_doc_group = getIntFromRequest('parent_doc_group');
 		
 		$dg = new DocumentGroup($g,$doc_group);

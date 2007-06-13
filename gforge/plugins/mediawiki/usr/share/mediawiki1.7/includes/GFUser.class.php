@@ -358,6 +358,67 @@ class GFUser extends Error {
 	}
 }
 
+/**
+ * user_ismember() - DEPRECATED; DO NOT USE!
+ *
+ * @param		int		The Group ID
+ * @param		int		The Type
+ * @deprecated
+ *
+ */
+function user_ismember($group_id,$type=0) {
+	if (!session_loggedin()) {
+		return false;
+	}
+
+	$project =& group_get_object($group_id);
+
+	if (!$project || !is_object($project)) {
+			return false;
+	}
+
+	$perm =& $project->getPermission( session_get_user() );
+	if (!$perm || !is_object($perm) || !$perm->isMember()) {
+		return false;
+	}
+
+	$type=strtoupper($type);
+	
+	switch ($type) {
+		case 'P2' : {
+			//pm admin
+			return $perm->isPMAdmin();
+			break; 
+		}
+		case 'F2' : {
+			//forum admin
+			return $perm->isForumAdmin();
+			break; 
+		}
+		case '0' : {
+			//just in this group
+			return $perm->isMember();
+			break;
+		}
+		case 'A' : {
+			//admin for this group
+			return $perm->isAdmin();
+			break;
+		}
+		case 'D1' : {
+			//document editor
+			return $perm->isDocEditor();
+			break;
+		}
+		default : {
+			//fubar request
+			return false;
+		}
+	}
+	return false;
+}
+
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

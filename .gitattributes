@@ -735,17 +735,6 @@ gforge/www/jscook/ThemeXP/page.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plus.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
-gforge/www/scm/viewvc/lib/accept.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/compat.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/config.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/debug.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/ezt.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/idiff.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/popen.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/sapi.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/vclib/__init__.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/vclib/svn/__init__.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/viewvc.pyc svneol=native#unset
 gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back_small.png -text
@@ -884,6 +873,7 @@ gforge/www/themes/gforge-simple-theme/images/logo.png -text
 gforge/www/themes/gforge/COPYING -text
 gforge/www/themes/gforge/README.txt -text
 gforge/www/themes/gforge/Theme.class -text
+gforge/www/themes/gforge/css/theme-ie.css -text
 gforge/www/themes/gforge/css/theme.css -text
 gforge/www/themes/gforge/images/bottomtab-new/middle.gif -text
 gforge/www/themes/gforge/images/bottomtab-new/selected-middle.gif -text

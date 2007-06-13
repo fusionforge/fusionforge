@@ -50,7 +50,7 @@ my $svnlook = "/usr/bin/svnlook";
 # prints the entire contents of the file.  If you want to save space
 # in the log and email messages by not printing the file, then set
 # $no_diff_deleted to 1.
-my $no_diff_deleted = 0;
+my $no_diff_deleted = 1;
 
 # Since the path to svnlook depends upon the local installation
 # preferences, check that the required programs exist to insure that

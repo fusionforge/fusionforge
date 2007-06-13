@@ -74,7 +74,7 @@ if ($sw) {
 	<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 	<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 	<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-	<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+	<td valign="bottom"><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 	</tr></table>
 	</form>
 	<p>

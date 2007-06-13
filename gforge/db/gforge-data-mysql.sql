@@ -698,7 +698,7 @@ INSERT INTO `people_skill_year` (`skill_year_id`, `name`) VALUES
 -- 
 
 INSERT INTO `plugins` (`plugin_id`, `plugin_name`, `plugin_desc`) VALUES 
-(1, 'scmsvn', 'SVN Plugin'),
+(1, 'scmsvn', 'SVN Plugin');
 
 -- 
 -- Dumping data for table `prdb_dbs`

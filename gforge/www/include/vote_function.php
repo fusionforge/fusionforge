@@ -398,7 +398,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 		$popup="USER_RATING_POPUP$i";
 		echo '<tr>
 		<td colspan="2"><strong>'. $USER_RATING_QUESTIONS[$i] .':</strong><br /> '
-		.html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</td></tr>';
+		.html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",@$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</td></tr>';
 	}
 
 	echo '

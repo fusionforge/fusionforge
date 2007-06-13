@@ -33,6 +33,10 @@ function printnode ($nodeid,$text) {
 	global $Language;
 	print ('<br />');
 
+	if (!isset($GLOBALS['depth'])) {
+		$GLOBALS['depth'] = 0;
+	}
+
 	for ($i=0;$i<$GLOBALS['depth'];$i++) {
 		print "&nbsp; &nbsp; ";
 	}
@@ -56,7 +60,7 @@ function printnode ($nodeid,$text) {
 	while ($row_child = db_fetch_array($res_child)) {
 		printnode($row_child["trove_cat_id"],$row_child["fullname"]);
 	}
-	$GLOBALS["depth"]--;
+	$GLOBALS['depth']--;
 }
 
 // ########################################################

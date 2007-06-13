@@ -112,7 +112,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				//get the first paragraph of the story
 				if (strstr(db_result($result,$i,'details'),'<br/>')) {
 					// the news is html, fckeditor made for example
-					$arr=explode("<br/>",db_result($result,$i,'details'));
+					$arr=explode("<br />",db_result($result,$i,'details'));
 				} else {
 					$arr=explode("\n",db_result($result,$i,'details'));
 				}

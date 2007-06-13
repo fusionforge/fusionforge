@@ -320,9 +320,9 @@ class MailingList extends Error {
 	 */
 	function getArchivesUrl() {
 		if ($this->isPublic()) {
-			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+			return sprintf($GLOBALS['sys_lists_archive_public'],$this->getName());
 		} else {
-			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+			return sprintf($GLOBALS['sys_lists_archive_private'],$this->getName());
 		}
 	}
 	
@@ -332,7 +332,7 @@ class MailingList extends Error {
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
+		return sprintf($GLOBALS['sys_lists_external_info'],$this->getName());
 	}
 	
 	/**
@@ -341,7 +341,7 @@ class MailingList extends Error {
 	 * @return string url of the admin
 	 */
 	function getExternalAdminUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
+		return sprintf($GLOBALS['sys_lists_external_admin'],$this->getName());
 	}
 
 	/**
