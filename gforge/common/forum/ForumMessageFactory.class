@@ -172,6 +172,8 @@ class ForumMessageFactory extends Error {
 		}
 		if ($thread_id) {
 			$thread_sql=" AND thread_id='$thread_id' ";
+		} else {
+			$thread_sql='';
 		}
 
 		$sql="SELECT * FROM forum_user_vw 

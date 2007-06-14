@@ -197,7 +197,7 @@ class AttachManager extends Error {
 	 *
 	 * @param 	int		The file to attach
 	 * @param 	int		The group.
-	 * @param 	int		Whether we are updating an existing attach (attachid to update or cero for new message (inserts using the hights msg id from forum table)
+	 * @param 	int		Whether we are updating an existing attach (attachid to update or zero for new message (inserts using the hights msg id from forum table)
 	 * @param 	int		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
 	 *
 	 * @return	int	    Attach id on success, false otherwise
@@ -211,7 +211,7 @@ class AttachManager extends Error {
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);
 		$attachment_type = trim($attach['type']);
-			
+
 		if ($attachment == 'none' OR empty($attachment) OR empty($attachment_name))
 		{
 			$this->messages[] = $Language->getText('forum_attachmngr','errnofile');

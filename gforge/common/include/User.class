@@ -77,19 +77,19 @@ function &user_get_object($user_id,$res=false) {
 	//returns appropriate object
 	
 	global $USER_OBJ;
-	if (!isset($USER_OBJ["_".$user_id."_"])) {
+	if (!isset($USER_OBJ["_{$user_id}_"])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
 			$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
 		}
 		if (!$res || db_numrows($res) < 1) {
-			$USER_OBJ["_".$user_id."_"]=false;
+			$USER_OBJ["_{$user_id}_"]=false;
 		} else {
-			$USER_OBJ["_".$user_id."_"]= new User($user_id,$res);
+			$USER_OBJ["_{$user_id}_"]= new User($user_id,$res);
 		}
 	}
-	return $USER_OBJ["_".$user_id."_"];
+	return $USER_OBJ["_{$user_id}_"];
 }
 
 function &user_get_objects($id_arr) {
@@ -104,18 +104,18 @@ function &user_get_objects($id_arr) {
 		if (!$id_arr[$i]) {
 			continue;
 		}
-		if (!isset($USER_OBJ["_".$id_arr[$i]."_"])) {
+		if (!isset($USER_OBJ["_{$id_arr[$i]}_"])) {
 			$fetch[]=$id_arr[$i];
 		} else {
-			$return[] =& $USER_OBJ["_".$id_arr[$i]."_"];
+			$return[] =& $USER_OBJ["_{$id_arr[$i]}_"];
 		}
 	}
 	if (count($fetch) > 0) {
 		$sql="SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')";
 		$res=db_query($sql);
 		while ($arr =& db_fetch_array($res)) {
-			$USER_OBJ["_".$arr['user_id']."_"] = new User($arr['user_id'],$arr);
-			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
+			$USER_OBJ["_{$arr['user_id']}_"] = new User($arr['user_id'],$arr);
+			$return[] =& $USER_OBJ["_{$arr['user_id']}_"];
 		}
 	}
 	return $return;
@@ -1077,7 +1077,7 @@ class User extends Error {
 	 */
 	function deletePreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
-		unset($this->user_pref["$preference_name"]);
+		unset($this->user_pref[$preference_name]);
 		$res= db_query("DELETE FROM user_preferences 
 			WHERE user_id='". $this->getID() ."'
 			AND preference_name='$preference_name'");
@@ -1124,9 +1124,9 @@ class User extends Error {
 		*/
 		if ($this->user_pref) {
 			//echo "\n\nPrefs were fetched already";
-			if ($this->user_pref["$preference_name"]) {
+			if (array_key_exists($preference_name, $this->user_pref)) {
 				//we have fetched prefs - return part of array
-				return $this->user_pref["$preference_name"];
+				return $this->user_pref[$preference_name];
 			} else {
 				//we have fetched prefs, but this pref hasn't been set
 				return false;
@@ -1142,13 +1142,13 @@ class User extends Error {
 				$pref=array();
 				//iterate and put the results into an array
 				for ($i=0; $i<db_numrows($result); $i++) {
-					$pref["".db_result($result,$i,'preference_name').""]=db_result($result,$i,'preference_value');
+					$pref[''.db_result($result,$i,'preference_name')]=db_result($result,$i,'preference_value');
 				}
 				$this->user_pref = $pref;
 
 				if (array_key_exists($preference_name,$this->user_pref)) {
 					//we have fetched prefs - return part of array
-					return $this->user_pref["$preference_name"];
+					return $this->user_pref[$preference_name];
 				} else {
 					//we have fetched prefs, but this pref hasn't been set
 					return false;

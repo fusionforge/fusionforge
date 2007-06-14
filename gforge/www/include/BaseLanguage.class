@@ -240,6 +240,11 @@ class BaseLanguage {
 	 * @param mixed $args array which will replace the $1, $2, etc before it is returned
 	 */
 	function getText($pagename, $category, $args = '') {
+		if (!isset($this->textArray[$pagename]) ||
+			!isset($this->textArray[$pagename][$category])) {
+			error_log('Missing language string: page = '.$pagename.', category = '.$category);
+		}
+
 		if ($args) {
 			for ($i=1, $max = sizeof($args)+1; $i <= $max; $i++) {
 				$patterns[] = '/\$'.$i.'/';

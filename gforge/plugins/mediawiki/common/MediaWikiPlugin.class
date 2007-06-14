@@ -26,7 +26,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "mediawiki" ;
 		$this->text = "MediaWiki!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user큦 personal part of the plugin
+		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "outermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
@@ -39,7 +39,14 @@ class MediaWikiPlugin extends Plugin {
 
 	function CallHook ($hookname, $params) {
 		global $use_mediawikiplugin,$G_SESSION,$HTML;
-		$group_id=$params['group'];
+
+		if (isset($params['group_id'])) {
+			$group_id=$params['group_id'];
+		} elseif (isset($params['group'])) {
+			$group_id=$params['group'];
+		} else {
+			$group_id=null;
+		}
 		if ($hookname == "outermenu") {
 			$params['TITLES'][] = 'MediaWiki';
 			$params['DIRS'][] = '/mediawiki';
@@ -47,7 +54,7 @@ class MediaWikiPlugin extends Plugin {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mediawiki")) {
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/mediawiki/index.php/User:' . $G_SESSION->getUnixName() ));				
+						  array ('/mediawiki/index.php?title=User:' . $G_SESSION->getUnixName() ));				
 			}
 		} elseif ($hookname == "groupmenu") {
 			$project = &group_get_object($group_id);
@@ -62,7 +69,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/mediawiki/index.php/' . $project->getUnixName(); 
+				$params['DIRS'][]='/mediawiki/index.php?title=' . $project->getUnixName(); 
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 			}	
@@ -128,7 +135,7 @@ class MediaWikiPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
 			global $Language;
-			// this displays the link in the user큦 profile page to it큦 personal MediaWiki (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal MediaWiki (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -139,7 +146,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			global $Language;
-			// this displays the link in the project admin options page to it큦  MediaWiki administration
+			// this displays the link in the project admin options page to it's  MediaWiki administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {

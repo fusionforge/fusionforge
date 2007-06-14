@@ -79,7 +79,7 @@ if os.environ["REPOSITORY_TYPE"] == 'cvs':
 elif os.environ["REPOSITORY_TYPE"] == 'svn':
   cfg.general.svn_roots[os.environ["REPOSITORY_NAME"]] = os.environ["REPOSITORY_ROOT"]
 
-cfg.general.address = "<a href='mailto:root@"+os.environ["HTTP_HOST"]+"'>root@" + os.environ["HTTP_HOST"]+ "</a>"
+cfg.general.address = "<a href='mailto:webmaster@"+os.environ["HTTP_HOST"]+"'>webmaster@" + os.environ["HTTP_HOST"]+ "</a>"
 cfg.options.docroot = os.environ["DOCROOT"]
 
 # END OF GForge customization

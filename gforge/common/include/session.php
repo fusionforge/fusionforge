@@ -324,7 +324,7 @@ function session_require($req) {
 		exit_not_logged_in();	
 	}
 
-	if ($req['group']) {
+	if (isset($req['group'])) {
 		$group =& group_get_object($req['group']);
 		if (!$group || !is_object($group)) {
 			exit_error('Error','Could Not Get Group');

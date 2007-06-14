@@ -15,6 +15,9 @@ if ($group->isError()) {
 		exit_error($Language->getText('general','error'), $group->getErrorMessage());
 	}
 }
+
+$feedback = '';
+
 //
 //	Create the ArtifactType object
 //

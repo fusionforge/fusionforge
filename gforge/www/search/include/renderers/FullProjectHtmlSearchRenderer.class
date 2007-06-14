@@ -56,7 +56,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->words = $words;
 		$this->isExact = $isExact;
 		
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, null, $groupId);
 	}
 	
 	/**
@@ -83,12 +83,12 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getResult() {
 		$html = '';
 		
-		$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$trackersRenderer	= new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$tasksRenderer		= new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$docsRenderer		= new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$frsRenderer 		= new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$newsRenderer		= new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
+		$trackersRenderer	= new TrackersHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
+		$tasksRenderer		= new TasksHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
+		$docsRenderer		= new DocsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
+		$frsRenderer 		= new FrsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
+		$newsRenderer		= new NewsHtmlSearchRenderer($this->words, 0, $this->isExact, $this->groupId);
 		
 		$validLength = (strlen($this->words) >= 3);
 
@@ -155,9 +155,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found_no_under_section', array(htmlspecialchars($query['words']))).'</p>';
+			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found_no_under_section', array(htmlspecialchars($renderer->query['words']))).'</p>';
 		} else {
-			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found', array(htmlspecialchars($query['words']))).'</p>';
+			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found', array(htmlspecialchars($renderer->query['words']))).'</p>';
 		}
 		return $result;
 	}

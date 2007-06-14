@@ -36,6 +36,10 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$datatype = getStringFromRequest('datatype');
+$start = getStringFromRequest('start');
+$end = getStringFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -44,10 +48,6 @@ if (!$start) {
 session_require( array('group'=>$sys_stats_group) );
 
 echo report_header($Language->getText('reporting_pie','title'));
-
-$datatype = getStringFromRequest('datatype');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
 
 if (!isset($datatype)) {
 	$datatype=1;
@@ -61,7 +61,7 @@ if (!isset($datatype)) {
 <td><strong><?php echo $Language->getText('reporting_pie','trackers'); ?>:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>
 <td><strong><?php echo $Language->getText('reporting_pie','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo $Language->getText('reporting_pie','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
+<td valign="bottom"><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

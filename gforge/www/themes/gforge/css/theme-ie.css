@@ -1,0 +1,24 @@
+/* 
+ * Stylesheet with Internet Explorer specific overrides.
+ */
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+ padding:0 0 0 0;
+}
+
+.tabberlive .tabbertab {
+  padding:0;
+}
+
+.mainCanvas {
+  padding: 0;
+}
+
+ul.tabbernav {
+  padding: 0;
+}
+

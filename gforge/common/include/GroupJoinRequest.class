@@ -157,7 +157,7 @@ class GroupJoinRequest extends Error {
 			db_rollback();
 			return false;
 		} else {
-			if (!$this->fetchData($group_id,$user_id)) {
+			if (!$this->fetchData($Group->getID(),$user_id)) {
 				db_rollback();
 				return false;
 			} else {

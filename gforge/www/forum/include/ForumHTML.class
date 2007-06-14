@@ -487,7 +487,7 @@ class ForumHTML extends Error {
 				$params['group'] = $group_id;
 				plugin_hook("text_editor",$params);
 				if (!$GLOBALS['editor_was_set_up']) {
-					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					//if we don't have any plugin for text editor, display a simple textarea edit box
 					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 				}
 				unset($GLOBALS['editor_was_set_up']);
@@ -554,7 +554,7 @@ class ForumHTML extends Error {
 				$params['group'] = $group_id;
 				plugin_hook("text_editor",$params);
 				if (!$GLOBALS['editor_was_set_up']) {
-					//if we don´t have any plugin for text editor, display a simple textarea edit box
+					//if we don't have any plugin for text editor, display a simple textarea edit box
 					echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 				}
 				unset($GLOBALS['editor_was_set_up']);
@@ -587,7 +587,7 @@ class ForumHTML extends Error {
 			echo '<>';
 		} elseif (!session_loggedin()) {
 			echo '
-			<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span><br/></p>';
+			<span class="error">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">','</a>')).'</span><br/></p>';
 		} else {
 			//do nothing
 		}
@@ -602,7 +602,7 @@ class ForumHTML extends Error {
 			$messagesys=$GLOBALS['sys_name'];
 			$messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$forum_id;
 			$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
-			/*
+
 			$body = "\nRead and respond to this message at: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$msg_id.
 				"\nBy: " . db_result($result,0, 'user_name') .
@@ -611,7 +611,6 @@ class ForumHTML extends Error {
 				"\nYou are receiving this email because you elected to monitor this forum.".
 				"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
-			* /
 
 			$subject="[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject'));
 			util_handle_message(array_unique($tolist),$subject,$body,$send_all_posts_to);

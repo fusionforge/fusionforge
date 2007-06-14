@@ -46,13 +46,11 @@ print '<h3>'.$Language->getText('stats_lastlogins','most_recent_open').'</h3>';
 $alt=true;
 $ii=0;
 while ($row_logins = db_fetch_array($res_logins)) {
-	$ii++;
-
-print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
-	print '<td >'.date($sys_datefmt, $row_logins['time']).'</td>';
-	print '<td >'.$row_logins['user_name'].'</td>';
-	print '<td >'.$row_logins['ip_addr'].'</td>';
-	print '</tr>';
+	print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($ii++).'>';
+		print '<td >'.date($sys_datefmt, $row_logins['time']).'</td>';
+		print '<td >'.$row_logins['user_name'].'</td>';
+		print '<td >'.$row_logins['ip_addr'].'</td>';
+		print '</tr>';
 }
 ?>
 

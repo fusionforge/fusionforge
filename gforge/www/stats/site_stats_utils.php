@@ -34,7 +34,11 @@ function week_to_dates( $week, $year = 0 ) {
 
 function stats_util_sum_array( $sum, $add ) {
 	while( list( $key, $val ) = each( $add ) ) {
-		$sum[$key] += $val;
+		if (isset($sum[$key])) {
+			$sum[$key] += $val;
+		} else {
+			$sum[$key] = $val;
+		}
 	}
 	return $sum;
 }
@@ -230,6 +234,8 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		s.bugs_closed,
 		s.support_opened,
 		s.support_closed,
+		s.artifacts_opened,
+		s.artifacts_closed,
 		s.patches_opened,
 		s.patches_closed,
 		s.tasks_opened,
@@ -308,6 +314,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<?php
 	
 		$i = $offset;	
+		$sum = array();
 		while ( $row = db_fetch_array($res) ) {
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
 				. '<td>' . ($i + 1) . '. <a href="/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</a></td>'

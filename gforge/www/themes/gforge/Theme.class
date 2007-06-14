@@ -152,8 +152,14 @@ class Theme extends Layout {
     ?>
 
     <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
+    <?php
+		
+		if (browser_is_windows() && browser_is_ie()) {
+			echo '<link rel="stylesheet" type="text/css" href="'.THEME_DIR.'/css/theme-ie.css" />'."\r\n";
+		}
 
-    <?php plugin_hook ('cssfile',$this); ?>
+		plugin_hook ('cssfile',$this);
+	?>
 </head>
 
 <body>
@@ -195,7 +201,10 @@ class Theme extends Layout {
 <!-- inner tabs -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
     <?php
-    if (isset($params['group']) && $params['group']) {
+    if (isset($params['group'])) {
+    	if (!isset($params['toptab'])) {
+			log_backtrace(debug_backtrace());
+		}
     ?>
       <tr>
         <td>
@@ -209,9 +218,12 @@ class Theme extends Layout {
     ?>
 </table>
 
-<table border="0" width="100%" cellspacing="0" cellpadding="0">  
+<table border="0" cellspacing="10" cellpadding="0">
+  <col />
+  <col width="180" />
   <tr>
-    <td class="mainCanvas"> <!-- main body area -->
+    <td class="mainCanvas" style="vertical-align:top">
+	<!-- main body area -->
     <?php
     }
 
@@ -270,7 +282,8 @@ if ($sys_show_source) {
                 <tr align="left">
                     <td colspan="2">
 
-        <!-- Box Top End -->';
+        <!-- Box Top End -->
+';
     }
 
     /**
@@ -289,7 +302,8 @@ if ($sys_show_source) {
                 </tr>
                 <tr align="left">
                     <td colspan="2">
-        <!-- Box Middle End -->';
+        <!-- Box Middle End -->
+';
     }
 
     /**
@@ -299,14 +313,15 @@ if ($sys_show_source) {
      */
     function boxBottom() {
         return '
-            <!-- Box Bottom Start -->
+        <!-- Box Bottom Start -->
                     </td>
                 </tr>
             </table>
             </td>
         </tr>
         </table><br />
-        <!-- Box Bottom End -->';
+        <!-- Box Bottom End -->
+';
     }
 
     /**
@@ -335,7 +350,8 @@ if ($sys_show_source) {
     <!--        <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
             <td background="'.$this->imgroot.'box-grad.png">
         <table width="100%" border="0" cellspacing="1" cellpadding="2">
-            <tr>';
+            <tr>
+';
 
         $count=count($title_arr);
         if ($links_arr) {

@@ -113,7 +113,7 @@ account_register	loginname	Login Name (do not use uppercase letters):
 account_register	mandatory	Fields marked with $1 are mandatory.
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	message_header	$1 Account Registration
-account_register	partecipate_peer_ratings	Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings)</i>.
+account_register	partecipate_peer_ratings	Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to participate in ratings)</i>.
 account_register	password	Password (min. 6 chars):
 account_register	password2	Password (repeat):
 account_register	firstname	First Name:
@@ -283,7 +283,7 @@ configman	enterpath	Path were you store the plugin configuration folders. E.g. :
 configman	notopenlocalinc	Could not open local.inc file for read/write. Check the permissions for apache<br>
 configman	notopenplugindir	Could not open plugins etc dir for reading. Check the permissions for apache<br>
 configman	notopenfile	Could not open the file for read/write. Check the permissions for apache<br>
-configman	updateok	File wrote successfully.<br>
+configman	updateok	File written successfully.<br>
 configman	nowrite	File wasn't written or is empty.<br>
 admin_index	active_projects_count	Active projects: <strong>$1</strong>
 admin_index	active_users_count	Active site users: <strong>$1</strong>
@@ -504,7 +504,8 @@ advanced_search	headline	$1 Search Result
 advanced_search	no_matches_found	No matches found
 advanced_search	no_matches_found_no_under_section	No matches found - No sections available (check your permissions)
 advanced_search	project_search	Project Search
-advanced_search	error_search_minlength	Error minimum search length is 3 characters.
+advanced_search	error_search_minlength	Error: minimum search length is 3 characters.
+advanced_search	error_criteria_not_specified	Error: criteria must be specified.
 artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 artifact_query	exist_query	Query already exists
@@ -756,7 +757,7 @@ forum_admin_attachs	extension_exists	Name already exists, please choose a differ
 forum_admin_attachs	updateok	Attachment Type Updated Successfully
 forum_admin_attachs	updatenot_ok	Problem Updating Attachment Type
 forum_admin_attachs	deleteok	Attachment Type Deleted
-forum_admin_attachs	deletenot_ok	Couldn�t delete Attachment Type
+forum_admin_attachs	deletenot_ok	Couldn't delete Attachment Type
 forum_admin_pending	forum_name	Forum Name
 forum_admin_pending	subject	Message
 forum_admin_pending	update	Update
@@ -842,7 +843,7 @@ forum_attachmngr	err_upload	Error, problem with the attachment file uploaded int
 forum_attachmngr	uploadok	File uploaded
 forum_attachmngr	updateok	File Updated Successfully
 forum_attachmngr	upload_notok	File not uploaded
-forum_attachmngr	err_msgid	Couldn�t get message id
+forum_attachmngr	err_msgid	Couldn't get message id
 forum_attachmngr	bad_dimension	File not uploaded, dimensions too large
 forum_attachmngr	maximum_dimension	Maximum dimension for this file type is width $1 and height $2
 forum_attachmngr	not_image	The file provided has the extension but isn�t an image type
@@ -2220,6 +2221,7 @@ stats_index	other_statistics	Other statistics:<ul><li><a href="i18n.php">I18n St
 stats_index	overview_stats	OVERVIEW STATS
 stats_index	project_stats	PROJECT STATS
 stats_index	site_graphs	SITE GRAPHS
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
 stats_lastlogins	date	Date
 stats_lastlogins	last_logins	Last Logins
 stats_lastlogins	most_recent_open	Most Recent Opened Sessions
@@ -2602,6 +2604,7 @@ tracker_admin_build_boxes	opt_name	Element
 tracker_admin_build_boxes	box_name_updated	Custom Field updated
 tracker_admin_build_boxes	choice_updated		Element updated	
 tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name
+tracker_admin_build_boxes	box_warning	Once you add a new extra field, it cannot be deleted
 tracker_admin_build_boxes	error_updating	Error updating a custom field
 tracker_admin_copy	copy_choices	Click here to copy these elements to other trackers
 tracker_admin_copy	choices_title	Copy choices from custom field $1

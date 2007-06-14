@@ -27,8 +27,7 @@ $HTML->header(array('title'=>$Language->getText('stats','title',array($GLOBALS['
 echo "\n\n";
 
 print '<div align="center">' . "\n";
-print '<h3>'.$Language->getText('stats_index','sitewide_aggregate_statistics
-').'</h3><br />' . "\n";
+print '<h3>'.$Language->getText('stats_index','sitewide_aggregate_statistics').'</h3><br />' . "\n";
 ?>
 
 <hr />

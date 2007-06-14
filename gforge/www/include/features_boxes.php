@@ -56,7 +56,7 @@ function show_top_downloads() {
 		return $Language->getText('home','no_stats_available');
 	}
 	// print each one
-	$return = "";
+	$return = '';
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
 			$return .= "(" . number_format($row_topdown['downloads']) . ') <a href="/projects/'.$row_topdown['unix_group_name'].'/">'
@@ -176,6 +176,7 @@ function show_highest_ranked_projects() {
 	if (!$result || db_numrows($result) < 1) {
 		return $Language->getText('home','no_stats_available')." ".db_error();
 	} else {
+		$return = '';
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
 				.' <a href="/projects/'.$row['unix_group_name'].

@@ -60,6 +60,7 @@ if($GLOBALS['sys_use_people']) {
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 $res_memb = db_query($query);
+$i = 0;
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo "<tr ".$HTML->boxGetAltRowStyle($i++).">";
 	if ( trim($row_memb['admin_flags'])=='A' ) {

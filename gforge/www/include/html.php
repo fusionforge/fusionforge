@@ -403,7 +403,7 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
 function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',$show_100=true) {
 	global $Language;
 	$checked_count=count($checked_array);
-	$return .= '
+	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		/*
@@ -454,7 +454,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true,$text_100='none') {
 	global $Language;
 	$checked_count=count($checked_array);
-	$return .='
+	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		if ($text_100=='none') {
@@ -629,6 +629,10 @@ function site_project_header($params) {
 	if (!$project->isActive()) {
 		//only SF group can view non-active, non-holding groups
 		session_require(array('group'=>'1'));
+	}
+
+	if (!isset($params['title'])) {
+		$params['title'] = '';
 	}
 
 	$params['title']=$project->getPublicName().': '.$params['title'];

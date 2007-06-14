@@ -175,7 +175,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$efarr =& $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
-		$return .= '
+		$return = '
 			<!-- Start Extra Fields Rendering -->
 			<!-- COLUMN NAMES MUST BE PRESERVED EXACTLY, INCLUDING CASE! -->
 			<tr>';

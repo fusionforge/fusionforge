@@ -58,6 +58,7 @@ $stats = new Stats();
 $res_top = $stats->getMostActiveStats($type, $offset);
 $rows=db_numrows($res_top);
 
+$i = 0;
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$i

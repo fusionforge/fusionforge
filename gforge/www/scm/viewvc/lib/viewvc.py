@@ -495,12 +495,14 @@ class Request:
     # add path
     if where:
       url = url + '/' + where
+    else:
+      url = url + '/'
 
     # add suffix for tarball
     if view_func is download_tarball:
       if not where and not cfg.options.root_as_url_component:
         url = url + '/' + rootname + '-root'
-	params['parent'] = '1'
+        params['parent'] = '1'
       url = url + '.tar.gz'
 
     # add trailing slash for a directory

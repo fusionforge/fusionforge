@@ -86,7 +86,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 	<td><strong><?php print date($sys_datefmt, $user->getAddDate()); ?></strong>
 	<?php
 
-	if ($sys_use_rating) {
+	if ($sys_use_ratings) {
 		echo $HTML->boxMiddle($Language->getText('user_home','peer_rating'),false,false);
 		if ($user->usesRatings()) {
 			echo vote_show_user_rating($user_id);
@@ -94,7 +94,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title')));
 			echo $Language->getText('user_home','peer_rating_disabled');
 		}
 	}
-	echo "</td></tr></table>";
+	echo "</td></tr>";
 
 	echo $HTML->boxMiddle($Language->getText('user_home','diary_notes'));
  
@@ -152,7 +152,7 @@ echo $HTML->boxBottom(); ?>
 
 <?php 
 $me = session_get_user(); 
-if ($sys_use_rating) {
+if ($sys_use_ratings) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 
 echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
@@ -183,7 +183,6 @@ echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
 
 </td></tr>
 </table><p/>
-
 <?php
 
 $HTML->footer(array());

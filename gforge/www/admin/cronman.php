@@ -34,6 +34,7 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 $which = getIntFromRequest('which');
 if (!$which || $which==100) {
 	$which=100;
+	$sql_str = '';
 } else {
 	$sql_str = " WHERE job='$which' ";
 }

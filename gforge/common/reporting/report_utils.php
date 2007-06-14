@@ -186,13 +186,15 @@ function report_time_category_box($name='category',$selected=false) {
 function report_pie_arr($labels, $vals) {
 	global $pie_labels,$pie_vals;
 	//first get sum of all values
+	$total = 0;
 	for ($i=0; $i<count($vals); $i++) {
 		$total += $vals[$i];
 	}
 
+	$rem = 0;
 	//now prune out vals where < 2%
 	for ($i=0; $i<count($vals); $i++) {
-		if (($vals[$i]/$total) < .02) {
+		if ($total != 0 && $vals[$i] / $total < .02) {
 			$rem += $vals[$i];
 		} else {
 			$pie_labels[]=util_unconvert_htmlspecialchars($labels[$i])." (". number_format($vals[$i],1) .") ";

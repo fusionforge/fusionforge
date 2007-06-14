@@ -63,6 +63,8 @@ for ($i=0; $i<db_numrows($res);$i++) {
 		$subject = 'Tasks for '.$realname.' for '.$today;
 		if (count($userTasks) > 0) {
 			ob_start();
+			$last_group = '';
+			$last_projectgroup = '';
 			// get the data of every task and compose the email
 			foreach ($userTasks as $task) {
 	

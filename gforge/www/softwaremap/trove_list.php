@@ -125,7 +125,7 @@ print '<p>'. (isset($discrim_desc) ? $discrim_desc : '') . '</p>';
 
 // ######## two column table for key on right
 // first print all parent cats and current cat
-print '<table width="100%" border="0" cellspacing="0" cellpadding="0">
+print '<table width="100%" border="0" cellspacing="10" cellpadding="10">
 <tr valign="top"><td>';
 $folders = explode(" :: ",$row_trove_cat['fullpath']);
 $folders_ids = explode(" :: ",$row_trove_cat['fullpath_ids']);
@@ -289,7 +289,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	}	
 
 	if ($row_grp && $viewthisrow) {
-		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
+		print '<table border="0" cellpadding="10" width="100%"><tr valign="top"><td colspan="2">';
 		print "$i_proj. <a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
 			.htmlspecialchars($row_grp['group_name'])."</strong></a> ";
 		if ($row_grp['short_description']) {

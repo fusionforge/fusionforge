@@ -54,34 +54,39 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$offset = getStringFromRequest('offset',$offset);
-$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
-$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getStringFromRequest('max_rows',$max_rows);
-$set = getStringFromRequest('set',$set);
-$_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
-$_status = getStringFromRequest('_status',$_status);
+$offset = getStringFromRequest('offset');
+$_sort_col = getStringFromRequest('_sort_col');
+$_sort_ord = getStringFromRequest('_sort_ord');
+$max_rows = getStringFromRequest('max_rows');
+$set = getStringFromRequest('set');
+$_assigned_to = getStringFromRequest('_assigned_to');
+$_status = getStringFromRequest('_status');
 if ($set == 'custom') {
 	//
-	//may be past in next/prev url
+	// may be passed in next/prev url
 	//
-	if ($_GET['extra_fields'][$ath->getCustomStatusField()]) {
+	if (isset($_GET['extra_fields'])) {
 		$_extra_fields[$ath->getCustomStatusField()] = $_GET['extra_fields'][$ath->getCustomStatusField()];
-	} else {
+	} elseif (isset($_POST['extra_fields'])) {
 		$_extra_fields[$ath->getCustomStatusField()] = $_POST['extra_fields'][$ath->getCustomStatusField()];
+	} else {
+		$_extra_fields = null;
 	}
-}
 
-if (is_array($_extra_fields)){
-	$keys=array_keys($_extra_fields);
-	foreach ($keys as $key) {
-		if ($_extra_fields[$key] != 'Array') {
-			$aux_extra_fields[$key] = $_extra_fields[$key];
+	if (is_array($_extra_fields)){
+		$keys=array_keys($_extra_fields);
+		foreach ($keys as $key) {
+			if ($_extra_fields[$key] != 'Array') {
+				$aux_extra_fields[$key] = $_extra_fields[$key];
+			}
 		}
+	} else {
+		$aux_extra_fields = $_extra_fields;
 	}
 } else {
-	$aux_extra_fields = $_extra_fields;
+	$aux_extra_fields = null;
 }
+
 
 $af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$aux_extra_fields);
 //

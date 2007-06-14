@@ -64,13 +64,15 @@ function browser_is_netscape() {
 */
 
 
-if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+$user_agent = getStringFromServer('HTTP_USER_AGENT');
+
+if (ereg( 'MSIE ([0-9].[0-9]{1,2})',$user_agent,$log_version)) {
 	$BROWSER_VER=$log_version[1];
 	$BROWSER_AGENT='IE';
-} elseif (ereg( 'Opera ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+} elseif (ereg( 'Opera ([0-9].[0-9]{1,2})',$user_agent,$log_version)) {
 	$BROWSER_VER=$log_version[1];
 	$BROWSER_AGENT='OPERA';
-} elseif (ereg( 'Mozilla/([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+} elseif (ereg( 'Mozilla/([0-9].[0-9]{1,2})',$user_agent,$log_version)) {
 	$BROWSER_VER=$log_version[1];
 	$BROWSER_AGENT='MOZILLA';
 } else {
@@ -82,26 +84,26 @@ if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_
 	Determine platform
 */
 
-if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Win')) {
+if (strstr($user_agent,'Win')) {
 	$BROWSER_PLATFORM='Win';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Mac')) {
+} else if (strstr($user_agent,'Mac')) {
 	$BROWSER_PLATFORM='Mac';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Linux')) {
+} else if (strstr($user_agent,'Linux')) {
 	$BROWSER_PLATFORM='Linux';
-} else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Unix')) {
+} else if (strstr($user_agent,'Unix')) {
 	$BROWSER_PLATFORM='Unix';
 } else {
 	$BROWSER_PLATFORM='Other';
 }
 
 /*
-echo "\n\nAgent: ".getStringFromServer('HTTP_USER_AGENT');
-echo "\nIE: ".browser_is_ie();
-echo "\nMac: ".browser_is_mac();
-echo "\nWindows: ".browser_is_windows();
-echo "\nPlatform: ".browser_get_platform();
-echo "\nVersion: ".browser_get_version();
-echo "\nAgent: ".browser_get_agent();
+echo "<br>Agent: $user_agent";
+echo "<br>\nIE: ".browser_is_ie();
+echo "<br>\nMac: ".browser_is_mac();
+echo "<br>\nWindows: ".browser_is_windows();
+echo "<br>\nPlatform: ".browser_get_platform();
+echo "<br>\nVersion: ".browser_get_version();
+echo "<br>\nAgent: ".browser_get_agent();
 */
 
 ?>

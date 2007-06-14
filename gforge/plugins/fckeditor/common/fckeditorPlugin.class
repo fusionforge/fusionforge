@@ -84,13 +84,15 @@ class fckeditorPlugin extends Plugin {
 				} else {
 					$http = "http://";
 				}
-				if ($params['name']) {
+				if (array_key_exists('name', $params)) {
 					$oFCKeditor = new FCKeditor($params['name']) ;
 				} else {
 					$oFCKeditor = new FCKeditor('body') ;
 				}
 				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/plugins/' . $this->name . '/';
-				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
+				if (array_key_exists('body', $params)) {
+					$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
+				}
 				$oFCKeditor->Width = $params['width'];
 				$oFCKeditor->Height = $params['height'];
 				$oFCKeditor->ToolbarSet = "GForge";
