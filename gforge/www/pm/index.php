@@ -18,8 +18,8 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/pm/include/ProjectGroupHTML.class');
-require_once('common/pm/ProjectGroupFactory.class');
+require_once('www/pm/include/ProjectGroupHTML.class.php');
+require_once('common/pm/ProjectGroupFactory.class.php');
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {

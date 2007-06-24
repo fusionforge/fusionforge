@@ -21,8 +21,8 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
-require_once('common/forum/Forum.class');
+require_once('www/forum/include/ForumHTML.class.php');
+require_once('common/forum/Forum.class.php');
 
 if (session_loggedin()) {
 	/*

@@ -13,7 +13,7 @@ require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('../mail_utils.php');
 
-require_once('common/mail/MailingList.class');
+require_once('common/mail/MailingList.class.php');
 
 $group_id = getIntFromRequest('group_id');
 

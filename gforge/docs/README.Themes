@@ -17,15 +17,15 @@ function (www/include/theme.php):
 
 The theme_sysinit function is called in www/include/pre.php
 The Theme class is included from 
-$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/Theme.class'
+$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/Theme.class.php'
 If sys_theme is not defined it is set to "forged".
 
 So this means that to write a theme you "just" have to create a
-correct www/themes/<your theme>/Theme.class and to add the proper
+correct www/themes/<your theme>/Theme.class.php and to add the proper
 record in the database.  This addition can be done with Roland's
 sf-register-theme tool or in the administrative web interface.
 
-The simplest you can find is at www/themes/forged/Theme.class:
+The simplest you can find is at www/themes/forged/Theme.class.php:
 
 ,----
 | class Theme extends Layout {
@@ -94,8 +94,8 @@ The big work is to make new icons found in www/themes/savannah/images/
 | }
 `----
 
-To do more you can replace all the Layout.class functions by yours.
-This is done a lot in www/themes/classic/Themes.class.  A small
+To do more you can replace all the Layout.class.php functions by yours.
+This is done a lot in www/themes/classic/Themes.class.php.  A small
 example of this is for the tab_entry function in debian theme, that
 allows you to customize the menu in e.g. the page located at
 http://.../projects/siteadmin/
@@ -130,7 +130,7 @@ I WANT TO CUSTOMIZE ICONS
 Icons are not customizable by default.  I started to enable this like
 this in a non regressive way for icons in the project page (code is at
 www/include/project_home.php).  I added the variable $imgproj =
-'images/ic/'; in Layout.class and changed html_image function calls
+'images/ic/'; in Layout.class.php and changed html_image function calls
 like this:
 ,----
 | html_image($imgproj. "manual16c.png", '15','15',array('alt'=>'Release Notes'));

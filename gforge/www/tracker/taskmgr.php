@@ -24,8 +24,8 @@ http://dev.gforge.org/pm/task.php?func=addartifact
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('common/pm/ProjectGroupFactory.class');
-require_once('common/pm/ProjectTaskFactory.class');
+require_once('common/pm/ProjectGroupFactory.class.php');
+require_once('common/pm/ProjectTaskFactory.class.php');
 
 $group_project_id = getIntFromRequest('group_project_id');
 $aid = getIntFromRequest('aid');

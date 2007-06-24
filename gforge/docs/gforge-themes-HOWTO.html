@@ -9,11 +9,11 @@
 
 <p>Let's say you want to create a new theme called "water".  It'll be all blue-ish and clean and such.  
 
-<p>First, create a new directory <code>www/themes/water</code>.  This is where your new theme will live.  Now, write a PHP class called <code>Theme.class </code>that extends <code>www/include/Layout.class</code>.  Like this:
+<p>First, create a new directory <code>www/themes/water</code>.  This is where your new theme will live.  Now, write a PHP class called <code>Theme.class.php </code>that extends <code>www/include/Layout.class.php</code>.  Like this:
 
 <pre>
 class Theme extends Layout {
- require_once('www/include/Layout.class');
+ require_once('www/include/Layout.class.php');
  function Theme() {
   $this->Layout();
   $this->COLOR_HTMLBOX_TITLE = '#BBDDFF';
@@ -48,13 +48,13 @@ bash-2.05a$
 
 <hr>
 
-<p>There's an example of a Layout subclass <a href="http://savannah.nongnu.org/cgi-bin/viewcvs/gforge/gforge/www/themes/debian/Theme.class?rev=1.8&content-type=text/vnd.viewcvs-markup">here</a>.
+<p>There's an example of a Layout subclass <a href="http://savannah.nongnu.org/cgi-bin/viewcvs/gforge/gforge/www/themes/debian/Theme.class.php?rev=1.8&content-type=text/vnd.viewcvs-markup">here</a>.
 
 <hr>
 
 TODO:
 <ul>
-<li>Changing other stuff seems to require copying the gforge/Theme.class file over and customizing it - i.e., editing the CSS stylesheet to do what you want, changing the image root, etc.
+<li>Changing other stuff seems to require copying the gforge/Theme.class.php file over and customizing it - i.e., editing the CSS stylesheet to do what you want, changing the image root, etc.
 <li>Need to include list of images with details from Ryan's post.
 </ul>
  

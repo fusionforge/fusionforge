@@ -32,7 +32,7 @@
 
 
 require ('plugins/svntracker/config.php');
-require ($sys_plugins_path.'/svntracker/common/Snoopy.class');
+require ($sys_plugins_path.'/svntracker/common/Snoopy.class.php');
 
 if ($svn_tracker_debug) {
 	$file = fopen($svn_tracker_debug_file,"a+");	

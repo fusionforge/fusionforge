@@ -24,20 +24,20 @@ require_once('local.inc');
 require('common/include/constants.php');
 require_once('common/include/database-'.$sys_database_type.'.php');
 require_once('common/include/session.php');
-require_once('common/include/Error.class');
-require_once('common/include/User.class');
-require_once('common/include/Permission.class');
+require_once('common/include/Error.class.php');
+require_once('common/include/User.class.php');
+require_once('common/include/Permission.class.php');
 require_once('common/include/utils.php');
-require_once('common/include/Group.class');
+require_once('common/include/Group.class.php');
 require_once('common/include/escapingUtils.php');
-require_once('www/include/BaseLanguage.class');
+require_once('www/include/BaseLanguage.class.php');
 
 $Language=new BaseLanguage();
 $Language->loadLanguage('English');
 
 // Plugins subsystem
-require_once('common/include/Plugin.class') ;
-require_once('common/include/PluginManager.class') ;
+require_once('common/include/Plugin.class.php') ;
+require_once('common/include/PluginManager.class.php') ;
 
 //plain text version of exit_error();
 require_once('squal_exit.php');
@@ -46,11 +46,11 @@ require_once('squal_exit.php');
 //require_once('browser.php');
 
 //system library
-require_once('common/include/System.class');
+require_once('common/include/System.class.php');
 if (!$sys_account_manager_type) {
         $sys_account_manager_type='UNIX';
 }
-require_once('common/include/system/'.$sys_account_manager_type.'.class');
+require_once('common/include/system/'.$sys_account_manager_type.'.class.php');
 $SYS=new $sys_account_manager_type();
 
 

@@ -38,8 +38,8 @@ dependenton5_external_task_id
 dependenton5_linktype
 */
 
-require_once('common/include/User.class');
-require_once('common/pm/ProjectTaskFactory.class');
+require_once('common/include/User.class.php');
+require_once('common/pm/ProjectTaskFactory.class.php');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {

@@ -23,7 +23,7 @@ PRIMARY KEY (user_id)
 CREATE INDEX themeprefs_userid ON theme_prefs(user_id);
 
 --INSERT INTO themes (dirname, fullname) VALUES ('default', 'Default Theme');
---These themes have to be converted to new Layout.class
+--These themes have to be converted to new Layout.class.php
 --INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX');
 --INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest');
 --INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse');

@@ -31,8 +31,8 @@ require_once('note.php');
 require_once('news_admin_utils.php');
 require_once('www/news/news_utils.php');
 //common forum tools which are used during the creation/editing of news items
-require_once('common/forum/Forum.class');
-require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
+require_once('common/forum/Forum.class.php');
+require_once('common/include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 $post_changes = getStringFromRequest('post_changes');

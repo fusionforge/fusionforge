@@ -18,9 +18,9 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-require_once('www/pm/include/ProjectGroupHTML.class');
-require_once('common/pm/ProjectGroupFactory.class');
-require_once('common/pm/ProjectCategory.class');
+require_once('www/pm/include/ProjectGroupHTML.class.php');
+require_once('common/pm/ProjectGroupFactory.class.php');
+require_once('common/pm/ProjectCategory.class.php');
 require_once('www/project/stats/project_stats_utils.php');
 require_once('www/include/tool_reports.php');
 

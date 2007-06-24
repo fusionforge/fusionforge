@@ -1,6 +1,6 @@
 <?php
 
-require_once ('EIRCPlugin.class') ;
+require_once ('EIRCPlugin.class.php') ;
 
 $EIRCPluginObject = new EIRCPlugin ;
 

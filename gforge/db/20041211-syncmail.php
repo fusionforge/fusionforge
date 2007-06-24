@@ -1,8 +1,8 @@
 #! /usr/bin/php4 -f
 <?php
 require_once('www/include/squal_pre.php');
-require_once('common/mail/MailingList.class');
-require_once('common/include/Group.class');
+require_once('common/mail/MailingList.class.php');
+require_once('common/include/Group.class.php');
 
 //
 //	Set up this script to run as the site admin

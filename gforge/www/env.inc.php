@@ -5,10 +5,9 @@
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
-
 error_reporting( E_ALL );
 ////header( "Content-type: text/html; charset=utf-8" );
-//@ini_set( "display_errors", true );
+@ini_set( "display_errors", true );
 //@ini_set( "display_errors", false );
 
 # In case of errors, let output be clean.
@@ -19,8 +18,8 @@ $gfRequestTime = microtime( true );
 $IP = dirname(dirname( __FILE__ )) ;
 //define( 'GF_INSTALL_PATH', $IP );
 $sep = PATH_SEPARATOR;
-if( !ini_set( "include_path", "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" ) ) {
-        set_include_path( "/etc/gforge/custom$sep/etc/gforge$sep$IP$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" );
+if( !ini_set( "include_path", "/etc/gforge/custom$sep$IP$sep/etc/gforge$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" ) ) {
+        set_include_path( "/etc/gforge/custom$sep$IP$sep/etc/gforge$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" );
 }
 ini_set( 'memory_limit', '20M' );
 #echo '['.$IP.']';

@@ -9,11 +9,11 @@
  */
 
 require_once('squal_pre.php');
-require_once('common/pm/ProjectGroup.class');
+require_once('common/pm/ProjectGroup.class.php');
 require_once('common/pm/import_utils.php');
-require_once('common/pm/ProjectTask.class');
-require_once('common/pm/ProjectTaskFactory.class');
-require_once('common/include/User.class');
+require_once('common/pm/ProjectTask.class.php');
+require_once('common/pm/ProjectTaskFactory.class.php');
+require_once('common/include/User.class.php');
 require_once('common/include/session.php');
 
 /**

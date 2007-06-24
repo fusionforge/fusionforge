@@ -157,7 +157,7 @@ diff -urNad gforge~/db/20041211-syncmail.php gforge/db/20041211-syncmail.php
 +#! /usr/bin/php5 -f
  <?php
  require_once('www/include/squal_pre.php');
- require_once('common/mail/MailingList.class');
+ require_once('common/mail/MailingList.class.php');
 diff -urNad gforge~/db/20041222-1-delete-task-artifact.php gforge/db/20041222-1-delete-task-artifact.php
 --- gforge~/db/20041222-1-delete-task-artifact.php	2007-05-11 12:37:26.000000000 +0200
 +++ gforge/db/20041222-1-delete-task-artifact.php	2007-05-17 18:17:35.000000000 +0200
@@ -166,7 +166,7 @@ diff -urNad gforge~/db/20041222-1-delete-task-artifact.php gforge/db/20041222-1-
 +#! /usr/bin/php5 -f
  <?php
  require_once('www/include/squal_pre.php');
- require_once('common/pm/ProjectTask.class');
+ require_once('common/pm/ProjectTask.class.php');
 diff -urNad gforge~/db/20050325-2.php gforge/db/20050325-2.php
 --- gforge~/db/20050325-2.php	2007-05-11 12:37:26.000000000 +0200
 +++ gforge/db/20050325-2.php	2007-05-17 18:17:24.000000000 +0200

@@ -75,8 +75,8 @@ $months = array(1 => 'january', 'february', 'march', 'april', 'may', 'june',
 		'july', 'august', 'september', 'october', 'november', 'december');
 
 if ($group_id && $group_project_id) {
-	require_once('common/pm/ProjectTaskFactory.class');
-	require_once('common/pm/ProjectGroup.class');
+	require_once('common/pm/ProjectTaskFactory.class.php');
+	require_once('common/pm/ProjectGroup.class.php');
 
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {

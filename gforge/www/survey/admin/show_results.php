@@ -28,13 +28,13 @@
 require_once('../../env.inc.php');
 require_once('pre.php');
 
-require_once('common/survey/Survey.class');
-require_once('common/survey/SurveyFactory.class');
-require_once('common/survey/SurveyQuestion.class');
-require_once('common/survey/SurveyQuestionFactory.class');
-require_once('common/survey/SurveyResponse.class');
-require_once('common/survey/SurveyResponseFactory.class');
-require_once('www/survey/include/SurveyHTML.class');
+require_once('common/survey/Survey.class.php');
+require_once('common/survey/SurveyFactory.class.php');
+require_once('common/survey/SurveyQuestion.class.php');
+require_once('common/survey/SurveyQuestionFactory.class.php');
+require_once('common/survey/SurveyResponse.class.php');
+require_once('common/survey/SurveyResponseFactory.class.php');
+require_once('www/survey/include/SurveyHTML.class.php');
 
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');

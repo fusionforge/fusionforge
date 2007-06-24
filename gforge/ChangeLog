@@ -1,3 +1,8 @@
+2007-07-24 Christian Bayle <bayle@debian.org>
+	* Massive renaming of .class in .class.php
+	* This will ease to develop with IDE like eclipse
+	* It may be some side effect of automation I used to do this
+
 2006-10-04 Christian Bayle <bayle@debian.org>
  	* remove use of deprecated user_ismember function in layout.class
 	* Allow opening of /etc/gforge/local.inc readonly in configman.php,

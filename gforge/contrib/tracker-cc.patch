@@ -1,10 +1,10 @@
-Index: common/include/Group.class
+Index: common/include/Group.class.php
 ===================================================================
-RCS file: /cvsroot/gforge/gforge/common/include/Group.class,v
+RCS file: /cvsroot/gforge/gforge/common/include/Group.class.php,v
 retrieving revision 1.22
-diff -u -b -r1.22 Group.class
---- common/include/Group.class	12 Feb 2003 17:23:47 -0000	1.22
-+++ common/include/Group.class	16 Feb 2003 06:35:09 -0000
+diff -u -b -r1.22 Group.class.php
+--- common/include/Group.class.php	12 Feb 2003 17:23:47 -0000	1.22
++++ common/include/Group.class.php	16 Feb 2003 06:35:09 -0000
 @@ -125,6 +125,13 @@
  	var $types_res;
  
@@ -38,13 +38,13 @@ diff -u -b -r1.22 Group.class
  
  
  	/*
-Index: common/tracker/Artifact.class
+Index: common/tracker/Artifact.class.php
 ===================================================================
-RCS file: /cvsroot/gforge/gforge/common/tracker/Artifact.class,v
+RCS file: /cvsroot/gforge/gforge/common/tracker/Artifact.class.php,v
 retrieving revision 1.7
-diff -u -b -r1.7 Artifact.class
---- common/tracker/Artifact.class	12 Feb 2003 17:23:47 -0000	1.7
-+++ common/tracker/Artifact.class	16 Feb 2003 06:35:10 -0000
+diff -u -b -r1.7 Artifact.class.php
+--- common/tracker/Artifact.class.php	12 Feb 2003 17:23:47 -0000	1.7
++++ common/tracker/Artifact.class.php	16 Feb 2003 06:35:10 -0000
 @@ -48,6 +48,13 @@
  	var $data_array;
  
@@ -352,13 +352,13 @@ diff -u -b -r1.10 mod.php
  	</tr>
  
  	<tr>
-Index: www/tracker/include/ArtifactTypeHtml.class
+Index: www/tracker/include/ArtifactTypeHtml.class.php
 ===================================================================
-RCS file: /cvsroot/gforge/gforge/www/tracker/include/ArtifactTypeHtml.class,v
+RCS file: /cvsroot/gforge/gforge/www/tracker/include/ArtifactTypeHtml.class.php,v
 retrieving revision 1.10
-diff -u -b -r1.10 ArtifactTypeHtml.class
---- www/tracker/include/ArtifactTypeHtml.class	3 Feb 2003 04:52:45 -0000	1.10
-+++ www/tracker/include/ArtifactTypeHtml.class	16 Feb 2003 06:35:11 -0000
+diff -u -b -r1.10 ArtifactTypeHtml.class.php
+--- www/tracker/include/ArtifactTypeHtml.class.php	3 Feb 2003 04:52:45 -0000	1.10
++++ www/tracker/include/ArtifactTypeHtml.class.php	16 Feb 2003 06:35:11 -0000
 @@ -98,7 +98,16 @@
  		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
  	}

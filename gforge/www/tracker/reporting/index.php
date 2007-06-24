@@ -27,8 +27,8 @@
 require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('common/reporting/report_utils.php');
-require_once('common/reporting/Report.class');
-require_once('www/tracker/include/ArtifactTypeHtml.class');
+require_once('common/reporting/Report.class.php');
+require_once('www/tracker/include/ArtifactTypeHtml.class.php');
 
 $sw = getStringFromRequest('sw');
 $group_id = getIntFromRequest('group_id');

@@ -103,7 +103,7 @@ find $GFORGE_OPT -type f | xargs chmod 600
 chmod 711 $GFORGE_OPT
 find $GFORGE_OPT/www $GFORGE_OPT/plugins -type d | xargs chmod 711
 find $GFORGE_OPT/www $GFORGE_OPT/plugins/*/www -type f | xargs chmod 744
-find $GFORGE_OPT/www $GFORGE_OPT/plugins/*/www \( -name \*.php -o -name \*.class \) | xargs chmod 700
+find $GFORGE_OPT/www $GFORGE_OPT/plugins/*/www \( -name \*.php -o -name \*.class.php \) | xargs chmod 700
 
 if [ ! -d $GFORGE_CFG ]; then
 	echo 1>&2 "$GFORGE_CFG didn't exist - error - make sure you've got permission"

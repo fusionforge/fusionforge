@@ -20,7 +20,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once('common/tracker/ArtifactFactory.class');
+require_once('common/tracker/ArtifactFactory.class.php');
 
 header('Content-type: text/comma-separated-values');
 list($year, $month) = explode('-', date('Y-m'));

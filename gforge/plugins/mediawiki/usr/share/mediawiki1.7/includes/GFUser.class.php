@@ -17,7 +17,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: User.class 5278 2006-02-09 16:25:13Z danper $
+ * @version   $Id: User.class.php 5278 2006-02-09 16:25:13Z danper $
  * @author Tim Perdue tperdue@valinux.com
  * @date 2000-10-11
  *
@@ -367,7 +367,7 @@ class GFUser extends Error {
 		} else {
 			$this->theme=$this->data_array['dirname'];
 		}
-		if (is_file($GLOBALS['sys_themeroot'].$this->theme.'/Theme.class')) {
+		if (is_file($GLOBALS['sys_themeroot'].$this->theme.'/Theme.class.php')) {
 			$GLOBALS['sys_theme']=$this->theme;
 		} else {
 			$this->theme=$GLOBALS['sys_theme'];

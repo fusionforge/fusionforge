@@ -16,11 +16,11 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('common/tracker/Artifact.class');
-require_once('common/tracker/Artifacts.class');
-require_once('common/tracker/ArtifactFile.class');
-require_once('common/tracker/ArtifactType.class');
-require_once('common/tracker/ArtifactCanned.class');
+require_once('common/tracker/Artifact.class.php');
+require_once('common/tracker/Artifacts.class.php');
+require_once('common/tracker/ArtifactFile.class.php');
+require_once('common/tracker/ArtifactType.class.php');
+require_once('common/tracker/ArtifactCanned.class.php');
 
 function beginDocument() {
 	global $sys_default_domain;

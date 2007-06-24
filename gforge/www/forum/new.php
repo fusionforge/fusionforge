@@ -21,9 +21,9 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
-require_once('common/forum/Forum.class');
-require_once('www/forum/include/AttachManager.class');
+require_once('www/forum/include/ForumHTML.class.php');
+require_once('common/forum/Forum.class.php');
+require_once('www/forum/include/AttachManager.class.php');
 
 /*
 	User obviously has to be logged in to save place

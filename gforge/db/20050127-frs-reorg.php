@@ -26,9 +26,9 @@
  */
 
 require_once('www/include/squal_pre.php');
-require_once('common/frs/FRSFile.class');
-require_once('common/frs/FRSRelease.class');
-require_once('common/frs/FRSPackage.class');
+require_once('common/frs/FRSFile.class.php');
+require_once('common/frs/FRSRelease.class.php');
+require_once('common/frs/FRSPackage.class.php');
 //
 //  Set up this script to run as the site admin
 //

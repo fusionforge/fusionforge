@@ -29,8 +29,8 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('note.php');
 require_once('www/news/news_utils.php');
-require_once('common/forum/Forum.class');
-require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
+require_once('common/forum/Forum.class.php');
+require_once('common/include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 

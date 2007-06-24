@@ -27,7 +27,7 @@
  */
 
 require ('pre.php');    
-require_once ('common/include/Stats.class');    
+require_once ('common/include/Stats.class.php');    
 
 $offset = getIntFromRequest('offset');
 $type = getStringFromRequest('type');

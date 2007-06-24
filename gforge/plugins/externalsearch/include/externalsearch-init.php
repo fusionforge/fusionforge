@@ -9,7 +9,7 @@
  * @version $Id$
  */
 
-require_once('ExternalSearchPlugin.class') ;
+require_once('ExternalSearchPlugin.class.php') ;
 
 define('SEARCH__TYPE_IS_EXTERNAL', 'external');
 

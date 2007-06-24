@@ -3,7 +3,7 @@
 $no_gz_buffer=true;
 // 0. Include GForge files for access to GForge system
 require_once('www/include/squal_pre.php');
-require_once('www/include/BaseLanguage.class');
+require_once('www/include/BaseLanguage.class.php');
 
 $uri = 'http://'.$sys_default_domain;
 // 1. include client and server

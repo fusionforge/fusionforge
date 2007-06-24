@@ -8,16 +8,16 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-require_once('common/tracker/Artifact.class');
-require_once('common/tracker/ArtifactFile.class');
-require_once('www/tracker/include/ArtifactFileHtml.class');
-require_once('common/tracker/ArtifactType.class');
-require_once('common/tracker/ArtifactTypeFactory.class');
-require_once('www/tracker/include/ArtifactTypeHtml.class');
-require_once('www/tracker/include/ArtifactHtml.class');
-require_once('common/tracker/ArtifactCanned.class');
-require_once('common/tracker/ArtifactExtraField.class');
-require_once('common/tracker/ArtifactExtraFieldElement.class');
+require_once('common/tracker/Artifact.class.php');
+require_once('common/tracker/ArtifactFile.class.php');
+require_once('www/tracker/include/ArtifactFileHtml.class.php');
+require_once('common/tracker/ArtifactType.class.php');
+require_once('common/tracker/ArtifactTypeFactory.class.php');
+require_once('www/tracker/include/ArtifactTypeHtml.class.php');
+require_once('www/tracker/include/ArtifactHtml.class.php');
+require_once('common/tracker/ArtifactCanned.class.php');
+require_once('common/tracker/ArtifactExtraField.class.php');
+require_once('common/tracker/ArtifactExtraFieldElement.class.php');
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');

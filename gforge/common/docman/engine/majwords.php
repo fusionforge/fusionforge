@@ -11,10 +11,10 @@
 
 require_once('pre.php');
 require_once('www/docman/include/doc_utils.php');
-require_once('common/docman/Parsedata.class');
-require_once('common/docman/Document.class');
-require_once('common/docman/DocumentFactory.class');
-require_once('common/docman/DocumentGroupFactory.class');
+require_once('common/docman/Parsedata.class.php');
+require_once('common/docman/Document.class.php');
+require_once('common/docman/DocumentFactory.class.php');
+require_once('common/docman/DocumentGroupFactory.class.php');
 
 $p = new Parsedata ("$sys_engine_path");
 // print_debug(print_r($p->get_parser_list (),true));

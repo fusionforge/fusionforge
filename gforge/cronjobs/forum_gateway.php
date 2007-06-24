@@ -27,10 +27,10 @@
  */
 
 require_once ('squal_pre.php');
-require_once ('common/include/Group.class');
-require_once ('common/include/MailParser.class');
-require_once ('common/forum/Forum.class');
-require_once ('common/forum/ForumMessage.class');
+require_once ('common/include/Group.class.php');
+require_once ('common/include/MailParser.class.php');
+require_once ('common/forum/Forum.class.php');
+require_once ('common/forum/ForumMessage.class.php');
 
 class ForumGateway extends Error {
 	/*

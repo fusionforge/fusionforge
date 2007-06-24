@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-require_once ('quota_managementPlugin.class') ;
+require_once ('quota_managementPlugin.class.php') ;
 
 $quota_managementPluginObject = new quota_managementPlugin ;
 

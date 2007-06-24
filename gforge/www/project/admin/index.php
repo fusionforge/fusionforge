@@ -34,7 +34,7 @@ require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
 require_once('common/include/account.php');
-require_once('common/include/GroupJoinRequest.class');
+require_once('common/include/GroupJoinRequest.class.php');
 
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));

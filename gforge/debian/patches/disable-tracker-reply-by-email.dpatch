@@ -5,9 +5,9 @@
 ## DP: at least until this is made to work.
 
 @DPATCH@
-diff -urNad gforge~/common/tracker/Artifact.class gforge/common/tracker/Artifact.class
---- gforge~/common/tracker/Artifact.class	2006-06-12 10:22:31.000000000 +0200
-+++ gforge/common/tracker/Artifact.class	2006-06-12 15:43:49.000000000 +0200
+diff -urNad gforge~/common/tracker/Artifact.class.php gforge/common/tracker/Artifact.class.php
+--- gforge~/common/tracker/Artifact.class.php	2006-06-12 10:22:31.000000000 +0200
++++ gforge/common/tracker/Artifact.class.php	2006-06-12 15:43:49.000000000 +0200
 @@ -1206,16 +1206,16 @@
  			$changes=array();
  		}

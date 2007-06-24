@@ -28,8 +28,8 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/reporting/report_utils.php');
-require_once('common/reporting/Report.class');
-require_once('common/reporting/ReportSetup.class');
+require_once('common/reporting/Report.class.php');
+require_once('common/reporting/ReportSetup.class.php');
 
 session_require( array('group'=>$sys_stats_group,'A') );
 

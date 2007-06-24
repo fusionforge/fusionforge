@@ -34,8 +34,8 @@ require_once('common/include/license.php');
 require_once('www/include/canned_responses.php');
 require_once('www/admin/admin_utils.php');
 require_once('www/project/admin/project_admin_utils.php');
-require_once('common/tracker/ArtifactTypes.class');
-require_once('common/forum/Forum.class');
+require_once('common/tracker/ArtifactTypes.class.php');
+require_once('common/forum/Forum.class.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 

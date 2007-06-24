@@ -4,7 +4,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');
-require_once('common/pm/ProjectTasksForUser.class');
+require_once('common/pm/ProjectTasksForUser.class.php');
 
 
 if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {

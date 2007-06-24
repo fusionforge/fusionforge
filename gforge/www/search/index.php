@@ -14,8 +14,8 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('www/tracker/include/ArtifactTypeHtml.class');
-require_once ('www/search/include/SearchManager.class');
+require_once('www/tracker/include/ArtifactTypeHtml.class.php');
+require_once ('www/search/include/SearchManager.class.php');
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');

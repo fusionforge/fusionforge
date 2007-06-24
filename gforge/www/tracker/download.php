@@ -15,11 +15,11 @@ $no_gz_buffer=true;
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('common/tracker/Artifact.class');
-require_once('common/tracker/ArtifactFile.class');
-//require_once('www/tracker/include/ArtifactFileHtml.class');
-require_once('common/tracker/ArtifactType.class');
-require_once('common/tracker/ArtifactType.class');
+require_once('common/tracker/Artifact.class.php');
+require_once('common/tracker/ArtifactFile.class.php');
+//require_once('www/tracker/include/ArtifactFileHtml.class.php');
+require_once('common/tracker/ArtifactType.class.php');
+require_once('common/tracker/ArtifactType.class.php');
 
 if (!session_loggedin()) {
 	exit_not_logged_in();	

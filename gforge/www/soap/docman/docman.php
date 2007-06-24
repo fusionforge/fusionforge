@@ -25,12 +25,12 @@
  */
 
 require('local.inc');
-require_once('common/include/Error.class');
+require_once('common/include/Error.class.php');
 require_once('common/include/database.php');
-require_once('common/docman/Document.class');
-require_once('common/docman/DocumentFactory.class');
-require_once('common/docman/DocumentGroup.class');
-require_once('common/docman/DocumentGroupFactory.class');
+require_once('common/docman/Document.class.php');
+require_once('common/docman/DocumentFactory.class.php');
+require_once('common/docman/DocumentGroup.class.php');
+require_once('common/docman/DocumentGroupFactory.class.php');
 
 
 

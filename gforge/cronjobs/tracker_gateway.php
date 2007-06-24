@@ -30,10 +30,10 @@
  */
 
 require_once ('squal_pre.php');
-require_once ('common/include/Group.class');
-require_once ('common/include/MailParser.class');
-require_once ('common/tracker/Artifact.class');
-require_once ('common/tracker/ArtifactFactory.class');
+require_once ('common/include/Group.class.php');
+require_once ('common/include/MailParser.class.php');
+require_once ('common/tracker/Artifact.class.php');
+require_once ('common/tracker/ArtifactFactory.class.php');
 
 class TrackerGateway extends Error {
 	/*

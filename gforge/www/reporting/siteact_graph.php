@@ -29,7 +29,7 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
-require_once('common/reporting/ReportSiteAct.class');
+require_once('common/reporting/ReportSiteAct.class.php');
 require_once('www/include/unicode.php');
 
 session_require( array('group'=>$sys_stats_group) );

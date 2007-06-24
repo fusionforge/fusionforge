@@ -21,10 +21,10 @@
 # usr/share/gforge/etc/httpd.d/03mediawiki contains the apache part you need to add to have this work
 # This is automagically used in debian package or if you use 'setup' script
 #
-# The three following files are partial reproduction of pre.php User.class and Group.class
+# The three following files are partial reproduction of pre.php User.class.php and Group.class.php
 # usr/share/mediawiki1.7/includes/GForgePre.php
-# usr/share/mediawiki1.7/includes/GFUser.class.php
-# usr/share/mediawiki1.7/includes/GFProject.class.php
+# usr/share/mediawiki1.7/includes/GFUser.class.php.php
+# usr/share/mediawiki1.7/includes/GFProject.class.php.php
 # These are light version which only use necessary functions
 # It was necessary to do this because of class name collision
 # It should be possible to remove them in future evolution of gforge code

@@ -4,16 +4,16 @@
  *
  *	Sets up database results and preferences for a group and abstracts this info.
  *
- *	Foundry.class and Project.class call this.
+ *	Foundry.class.php and Project.class.php call this.
  *
- *	Project.class contains all the deprecated API from the old group.php file
+ *	Project.class.php contains all the deprecated API from the old group.php file
  *
  *	DEPENDS on user.php being present and setup properly
  *
  *	GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
  *	USE group_get_object() to instantiate properly
  *
- * @version   $Id: Group.class 4707 2005-10-04 11:53:48Z danper $
+ * @version   $Id: Group.class.php 4707 2005-10-04 11:53:48Z danper $
  * @author Tim Perdue <tperdue@valinux.com>
  * @date 2000-08-28
  *
@@ -34,7 +34,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('www/include/BaseLanguage.class');
+require_once('www/include/BaseLanguage.class.php');
 
 $GROUP_OBJ=array();
 

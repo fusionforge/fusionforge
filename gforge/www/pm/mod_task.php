@@ -18,7 +18,7 @@
 
 require_once('note.php');
 require_once('common/reporting/report_utils.php');
-require_once('common/reporting/Report.class');
+require_once('common/reporting/Report.class.php');
 
 echo notepad_func();
 

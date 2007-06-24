@@ -24,9 +24,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class');
-require_once('common/tracker/ArtifactQuery.class');
-require_once('common/tracker/ArtifactQueryFactory.class');
+require_once('common/include/Error.class.php');
+require_once('common/tracker/ArtifactQuery.class.php');
+require_once('common/tracker/ArtifactQueryFactory.class.php');
 // imports ArrayOfArtifactExtraFieldsData type
 require_once('tracker.php');
 

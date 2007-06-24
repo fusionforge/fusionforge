@@ -28,7 +28,7 @@
 
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
-require ('common/reporting/ReportSetup.class');
+require ('common/reporting/ReportSetup.class.php');
 
 $err='';
 

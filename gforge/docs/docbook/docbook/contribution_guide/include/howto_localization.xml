@@ -51,7 +51,7 @@
 INSERT INTO supported_languages
 	(name, filename, classname, language_code)
 	VALUES ('German (Austria)',
-		'Austrian.class',
+		'Austrian.class.php',
 		'Austrian',
 		'at'
 	);

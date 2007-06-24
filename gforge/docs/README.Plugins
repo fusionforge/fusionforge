@@ -107,7 +107,7 @@ there might be cases where it's needed/useful.  Reading those data is
 okay, but it must be careful not to leak any info to places/users
 which normally wouldn't have had access to it.
 
-- Functions in Group.class and User.class: the Group and User classes
+- Functions in Group.class.php and User.class.php: the Group and User classes
 now have a usesPlugin() method.  It takes a single parameter, the
 "acmetimetracker" identifier for the module, and returns a boolean if
 the particular user/group has turned on the use of that module.  Also
@@ -149,7 +149,7 @@ written in PHP) in /plugin/*/cgi-bin/ URL-space (files in
 /usr/lib/sourceforge/cgi-bin/plugins/foo/).
 
   If possible, and as much as possible, a plugin should use the layout
-functions defined by GForge (Layout.class, HTML.class, or
+functions defined by GForge (Layout.class.php, HTML.class.php, or
 whatever they're called), to ensure a consistent look and themability.
 
   Of course, the previous point only applies to plugins written in
@@ -245,12 +245,12 @@ had been written.
                the site.
 
   Hook Name  : cssfile
-  Locations  : www/include/Layout.class
+  Locations  : www/include/Layout.class.php
   Description: Used to include a CSS link element to include in the page
                layout. The hook should return a complete <link> element.
 
   Hook Name  : cssstyle
-  Locations  : www/include/Layout.class
+  Locations  : www/include/Layout.class.php
   Description: Used to include inline CSS into the page layout. The
                hook should return pure CSS, without surrounding
                <style> elements.
@@ -281,7 +281,7 @@ had been written.
                         the GForge tab menu in use (eg. admin, tracker)
                selected - A reference to an array index of the tabs.
                group - The numeric ID of the current group
-  Locations  : www/include/Layout.class
+  Locations  : www/include/Layout.class.php
   Description: Used to provide a plugin specific tab in when viewing
                group pages.
   [TODO: The use of the 'group' name as a parameter is inconsistent
@@ -294,12 +294,12 @@ had been written.
                         the GForge tab menu in use (eg. admin, tracker)
                selected - A reference to an array index of the tabs.
                group_id - The numeric ID of the current group
-  Locations  : www/include/Layout.class
+  Locations  : www/include/Layout.class.php
   Description: Provides a tab for the SCM system in the group pages.
 
   Hook Name  : javascript
-  Locations  : www/include/Layout.class
-               www/include/LayoutSF.class
+  Locations  : www/include/Layout.class.php
+               www/include/LayoutSF.class.php
   Description: Provides a place to add inline Javascript into the page.
                The output of the hook should be pure Javascript, as it will
                be placed within an existing <script> block.
@@ -346,7 +346,7 @@ had been written.
   Hook Name  : scm_plugin
   Parameters : scm_plugins - A reference to an array of plugins providing
                              SCM features. Each element is a plugin string name.
-  Locations  : common/scm/SCMFactory.class
+  Locations  : common/scm/SCMFactory.class.php
   Description: This is used by GForge to identify SCM plugins. Any plugin that
                provides SCM features should add itself to the scm_plugins array
                when this hook is called.
@@ -357,7 +357,7 @@ had been written.
   Description: Shows SCM specific statistics on the group's summary page.
 
   Hook Name  : search_engines
-  Locations  : www/search/include/SearchManager.class
+  Locations  : www/search/include/SearchManager.class.php
 
   Hook Name  : session_before_login
   Parameters : loginname - The login as passed in from the user

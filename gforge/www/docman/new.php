@@ -21,11 +21,11 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('common/docman/Document.class');
-require_once('common/docman/DocumentGroupFactory.class');
+require_once('common/docman/Document.class.php');
+require_once('common/docman/DocumentGroupFactory.class.php');
 require_once('include/doc_utils.php');
-require_once('include/DocumentGroupHTML.class');
-require_once('common/include/TextSanitizer.class'); // to make the HTML input by the user safe to store
+require_once('include/DocumentGroupHTML.class.php');
+require_once('common/include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 if (!$group_id) {

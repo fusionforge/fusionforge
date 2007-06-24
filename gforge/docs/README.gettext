@@ -30,7 +30,7 @@ the PO file, the English string is displayed.
 
         *.php ---\
                   -> gforge.pot -> *.po -> *.mo
-        *.class -/
+        *.class.php -/
 
   Now what happens when the source files are modified, new strings are
 added, and existing ones are modified?  Well, the gforge.pot file
@@ -48,7 +48,7 @@ changes in meaning, and maybe update.
 
         *.php ---\
                   -> new gforge.pot -\
-        *.class -/                    -> new *.po -> new *.mo
+        *.class.php -/                    -> new *.po -> new *.mo
                      old *.po -------/
 
 How to use it when coding -- basic

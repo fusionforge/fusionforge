@@ -32,10 +32,10 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
-require_once('www/forum/admin/ForumAdmin.class');
-require_once('common/forum/Forum.class');
-require_once('common/forum/ForumMessage.class');
+require_once('www/forum/include/ForumHTML.class.php');
+require_once('www/forum/admin/ForumAdmin.class.php');
+require_once('common/forum/Forum.class.php');
+require_once('common/forum/ForumMessage.class.php');
 
 $msg_id = getIntFromRequest("msg_id");
 $group_id = getIntFromRequest('group_id');

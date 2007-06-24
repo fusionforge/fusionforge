@@ -1,0 +1,176 @@
+<?php
+/**
+ * GForge Survey Response Facility
+ *
+ * Copyright 2004 GForge, LLC
+ * http://gforge.org/
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+
+/*
+	Survery Response
+	By Sung Kim 2004/2/13
+*/
+
+require_once('common/include/Error.class.php');
+
+class SurveyResponse extends Error {
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var	 array   $data_array.
+	 */
+	var $data_array;
+
+	/**
+	 * The Group object.
+	 *
+	 * @var	 object  $Group.
+	 */
+	var $Group; //group object
+
+	/**
+	 *  Constructor.
+	 *
+	 *  @param  object	The Group object to which this Survey Response is associated.
+	 *  @param  int	        The questtion_id.
+	 *  @param  array	The associative array of data.
+	 *  @return boolean	success.
+	 */
+	function SurveyResponse(&$Group, $arr=false) {
+		global $Language;
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('Survey:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		if ($arr && is_array($arr)) {
+			$this->data_array =& $arr;
+		}
+		return true;
+	}
+
+	/**
+	 *	create - use this function to create a survey response
+	 *
+	 *	@param	string	The question
+	 *	@param	int     The question type
+         *                      1: Radio Buttons 1-5
+         *                      2: Text Area
+         *                      3: Radio Buttons Yes/No
+         *                      4: Comment Only
+         *                      5: Text Field
+         *                      6: None
+	 *	@return	boolean	success.
+	 */
+	function create($user_id, $survey_id, $question_id, $response) {
+		global $Language;
+		$group_id = $this->Group->GetID();
+		$now = time();
+ 
+		$sql="INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) ".
+			"VALUES ('". $user_id. "','" . addslashes($group_id) . "','" . 
+			addslashes($survey_id) . "','" . addslashes($question_id) . "','". 
+			htmlspecialchars($response) . "','$now')";
+		$res=db_query($sql);
+		if (!$res) {
+			$this->setError(_('Error').db_error());
+			return false;
+		} 
+		return true;
+	}
+
+	/**
+	 *	getGroup - get the Group object this SurveyResponse is associated with.
+	 *
+	 *	@return	object	The Group object.
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	/**
+	 *	getUserID - Get the user id of this Survey response
+	 *
+	 *	@return	int	The user_id
+	 */
+	function getUserID() {
+		return $this->data_array['user_id'];
+	}
+
+	/**
+	 *	getGroup - Get the group id of this Survey response
+	 *
+	 *	@return	int	The group_id
+	 */
+	function getGroupID() {
+		return $this->data_array['group_id'];
+	}
+
+	/**
+	 *	getSurveyID - Get the survey id of this Survey response
+	 *
+	 *	@return	int	The survey_id
+	 */
+	function getSurveyID() {
+		return $this->data_array['survey_id'];
+	}
+
+
+	/**
+	 *	getQuestionID - Get the question id of this Survey response
+	 *
+	 *	@return	int	The question_id
+	 */
+	function getQuestionID() {
+		return $this->data_array['question_id'];
+	}
+
+	/**
+	 *	getUserID - Get the response of this Survey response
+	 *
+	 *	@return	int	The response
+	 */
+	function getResponse() {
+		return $this->data_array['response'];
+	}
+
+
+	/**
+	 *	getPostDate - Get the post date of this Survey response
+	 *
+	 *	@return	int	The post date
+	 */
+	function getPostDate() {
+		return $this->data_array['post_date'];
+	}
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

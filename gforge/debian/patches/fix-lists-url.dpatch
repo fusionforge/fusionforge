@@ -5,9 +5,9 @@
 ## DP: No description.
 
 @DPATCH@
-diff -urNad gforge~/common/mail/MailingList.class gforge/common/mail/MailingList.class
---- gforge~/common/mail/MailingList.class	2006-05-30 20:10:38.000000000 +0200
-+++ gforge/common/mail/MailingList.class	2006-07-21 14:47:17.000000000 +0200
+diff -urNad gforge~/common/mail/MailingList.class.php gforge/common/mail/MailingList.class.php
+--- gforge~/common/mail/MailingList.class.php	2006-05-30 20:10:38.000000000 +0200
++++ gforge/common/mail/MailingList.class.php	2006-07-21 14:47:17.000000000 +0200
 @@ -322,7 +322,7 @@
  		if ($this->isPublic()) {
  			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';

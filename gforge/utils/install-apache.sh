@@ -188,7 +188,7 @@ case "$1" in
 	if [ -f /usr/sbin/a2enmod ] ; then
 		for flavour in apache2 ;  do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php4 || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod ssl || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod suexec || true
 				#not enabling env module, part of base in apache2

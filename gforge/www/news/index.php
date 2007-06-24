@@ -28,7 +28,7 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 require_once('www/news/news_utils.php');
-require_once('common/forum/Forum.class');
+require_once('common/forum/Forum.class.php');
 
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');

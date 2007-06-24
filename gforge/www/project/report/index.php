@@ -26,7 +26,7 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-#require_once('common/tracker/ArtifactGroup.class');
+#require_once('common/tracker/ArtifactGroup.class.php');
 
 function GetTime ($timedifference) {
 

@@ -30,7 +30,7 @@ require_once('pre.php');
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
-require_once('common/reporting/Report.class');
+require_once('common/reporting/Report.class.php');
 require_once('common/reporting/report_utils.php');
 
 session_require( array('group'=>$sys_stats_group) );

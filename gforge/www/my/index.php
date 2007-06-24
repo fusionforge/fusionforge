@@ -28,9 +28,9 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 require_once('vote_function.php');
-require_once('common/tracker/ArtifactsForUser.class');
-require_once('common/forum/ForumsForUser.class');
-require_once('common/pm/ProjectTasksForUser.class');
+require_once('common/tracker/ArtifactsForUser.class.php');
+require_once('common/forum/ForumsForUser.class.php');
+require_once('common/pm/ProjectTasksForUser.class.php');
 
 if (!session_loggedin()) { // || $sf_user_hash) {
 

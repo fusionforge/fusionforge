@@ -20,7 +20,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once('common/tracker/ArtifactQuery.class');
+require_once('common/tracker/ArtifactQuery.class.php');
 
 if (!session_loggedin()) {
 	exit_not_logged_in();

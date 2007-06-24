@@ -27,7 +27,7 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-require_once('www/survey/include/SurveyHTML.class');
+require_once('www/survey/include/SurveyHTML.class.php');
 
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');

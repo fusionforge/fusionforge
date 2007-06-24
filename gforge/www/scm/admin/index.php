@@ -28,7 +28,7 @@
 require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/scm/include/scm_utils.php');
-require_once('common/scm/SCMFactory.class');
+require_once('common/scm/SCMFactory.class.php');
 
 global $sys_use_scm;
 

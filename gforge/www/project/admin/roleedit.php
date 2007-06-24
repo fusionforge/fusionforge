@@ -28,8 +28,8 @@
 require_once('../../env.inc.php');
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
-require_once('common/include/Role.class');
-require_once('common/include/RoleObserver.class');
+require_once('common/include/Role.class.php');
+require_once('common/include/RoleObserver.class.php');
 
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));

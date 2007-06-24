@@ -24,10 +24,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class');
-require_once('common/frs/FRSFile.class');
-require_once('common/frs/FRSPackage.class');
-require_once('common/frs/FRSRelease.class');
+require_once('common/include/Error.class.php');
+require_once('common/frs/FRSFile.class.php');
+require_once('common/frs/FRSPackage.class.php');
+require_once('common/frs/FRSRelease.class.php');
 
 $server->wsdl->addComplexType(
 	'FRSPackage',

@@ -24,13 +24,13 @@ else
 	[ ! -d $plugdir/common/languages ] && mkdir -p $plugdir/common/languages
 	[ ! -d $plugdir/www ] && mkdir $plugdir/www
 
-	if [ ! -f $plugdir/common/${fullname}Plugin.class ]
+	if [ ! -f $plugdir/common/${fullname}Plugin.class.php ]
 	then
-		echo Creating $plugdir/common/${fullname}Plugin.class
-		cat $modelplugdir/common/${modelfullname}Plugin.class | \
+		echo Creating $plugdir/common/${fullname}Plugin.class.php
+		cat $modelplugdir/common/${modelfullname}Plugin.class.php | \
 		sed "s/$modelminus/$minus/g" | \
 		sed "s/$modelfullname/$fullname/g" > \
-		$plugdir/common/${fullname}Plugin.class
+		$plugdir/common/${fullname}Plugin.class.php
 	fi
 	if [ ! -f $plugdir/common/$minus-init.php ]
 	then

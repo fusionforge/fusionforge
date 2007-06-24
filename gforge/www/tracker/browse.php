@@ -8,8 +8,8 @@
  *
  * @version   $Id$
  */
-require_once('common/tracker/ArtifactFactory.class');
-require_once('common/tracker/ArtifactQuery.class');
+require_once('common/tracker/ArtifactFactory.class.php');
+require_once('common/tracker/ArtifactQuery.class.php');
 //
 //  make sure this person has permission to view artifacts
 //

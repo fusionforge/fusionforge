@@ -167,7 +167,7 @@ install: build
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/pre.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/BaseLanguage.class \
+	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/BaseLanguage.class.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/vote_function.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include

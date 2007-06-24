@@ -13,7 +13,7 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/escapingUtils.php');
-require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class');
+require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class.php');
 
 $group_id = getIntFromRequest('group_id');
 $offset = getIntFromRequest('offset');

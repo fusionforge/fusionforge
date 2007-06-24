@@ -27,8 +27,8 @@ unless (-d "/usr/share/gforge/www/themes/$thdir") {
     debug "The directory /usr/share/gforge/www/themes/$thdir does not exist" ;
     exit 1 ;
 }
-unless (-e "/usr/share/gforge/www/themes/$thdir/Theme.class") {
-    debug "The file /usr/share/gforge/www/themes/$thdir/Theme.class does not exist" ;
+unless (-e "/usr/share/gforge/www/themes/$thdir/Theme.class.php") {
+    debug "The file /usr/share/gforge/www/themes/$thdir/Theme.class.php does not exist" ;
     exit 1 ;
 }
 

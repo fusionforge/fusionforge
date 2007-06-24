@@ -36,7 +36,7 @@ require('common/include/constants.php');
 //
 /*
 if ($sys_use_jabber) {
-	require_once('common/include/Jabber.class');
+	require_once('common/include/Jabber.class.php');
 }
 */
 
@@ -44,10 +44,10 @@ if ($sys_use_jabber) {
 require_once('www/include/browser.php');
 
 //base error library for new objects
-require_once('common/include/Error.class');
+require_once('common/include/Error.class.php');
 
 // HTML layout class, may be overriden by the Theme class
-require_once('www/include/Layout.class');
+require_once('www/include/Layout.class.php');
 
 //various html utilities
 //require_once('common/include/utils.php');
@@ -72,24 +72,24 @@ function session_loggedin(){
 
 //system library
 /*
-require_once('common/include/System.class');
+require_once('common/include/System.class.php');
 if (!$sys_account_manager_type) {
 	$sys_account_manager_type='UNIX';
 }
-require_once('common/include/system/'.$sys_account_manager_type.'.class');
+require_once('common/include/system/'.$sys_account_manager_type.'.class.php');
 $SYS=new $sys_account_manager_type();
 */
 
 //user functions like get_name, logged_in, etc
-//require_once('common/include/User.class');
-require_once('includes/GFUser.class.php');
+//require_once('common/include/User.class.php');
+require_once('includes/GFUser.class.php.php');
 
 //group functions like get_name, etc
-//require_once('common/include/Group.class');
-require_once('includes/GFProject.class.php');
+//require_once('common/include/Group.class.php');
+require_once('includes/GFProject.class.php.php');
 
 //permission functions
-require_once('common/include/Permission.class');
+require_once('common/include/Permission.class.php');
 
 //library to set up context help
 //require_once('www/include/help.php');
@@ -112,11 +112,11 @@ if (!$conn) {
 }
 
 // Plugins subsystem
-require_once('common/include/Plugin.class') ;
-require_once('common/include/PluginManager.class') ;
+require_once('common/include/Plugin.class.php') ;
+require_once('common/include/PluginManager.class.php') ;
 
 // SCM-specific plugins subsystem
-require_once('common/include/SCM.class') ;
+require_once('common/include/SCM.class.php') ;
 
 setup_plugin_manager () ;
 /*
@@ -159,7 +159,7 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-require_once($sys_themeroot.$sys_theme.'/Theme.class');
+require_once($sys_themeroot.$sys_theme.'/Theme.class.php');
 
 $HTML=new Theme();
 
@@ -185,7 +185,7 @@ if (session_loggedin()) {
 
 */
 
-require_once('www/include/BaseLanguage.class');
+require_once('www/include/BaseLanguage.class.php');
 
 if (!$sys_lang) {
 	$sys_lang="English";

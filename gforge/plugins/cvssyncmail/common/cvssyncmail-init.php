@@ -19,7 +19,7 @@
  */
 
 global $sys_plugins_path;
-require_once ($sys_plugins_path.'/cvssyncmail/common/CVSSyncMailPlugin.class') ;
+require_once ($sys_plugins_path.'/cvssyncmail/common/CVSSyncMailPlugin.class.php') ;
 
 $CVSSyncMailPlugin = new CVSSyncMailPlugin() ;
 

@@ -20,9 +20,9 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-require_once('../forum/include/ForumHTML.class');
-require_once('common/forum/ForumFactory.class');
-require_once('common/forum/Forum.class');
+require_once('../forum/include/ForumHTML.class.php');
+require_once('common/forum/ForumFactory.class.php');
+require_once('common/forum/Forum.class.php');
 
 $group_id = getIntFromRequest('group_id');
 if ($group_id) {

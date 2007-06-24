@@ -24,9 +24,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class');
-require_once('common/include/Group.class');
-require_once('common/include/GForge.class');
+require_once('common/include/Error.class.php');
+require_once('common/include/Group.class.php');
+require_once('common/include/GForge.class.php');
 
 // Add The definition of a group object
 $server->wsdl->addComplexType(

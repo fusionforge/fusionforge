@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once ($GLOBALS['sys_plugins_path'].'/ldapextauth/include/LdapExtAuthPlugin.class') ;
+require_once ($GLOBALS['sys_plugins_path'].'/ldapextauth/include/LdapExtAuthPlugin.class.php') ;
 
 $LdapExtAuthPluginObject = new LdapExtAuthPlugin ;
 

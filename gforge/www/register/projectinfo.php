@@ -41,7 +41,7 @@
 require_once('../env.inc.php');
 require_once('pre.php');
 require_once('common/include/license.php');
-require_once('common/scm/SCMFactory.class');
+require_once('common/scm/SCMFactory.class.php');
 //
 //	Test if restricted project registration
 //

@@ -25,7 +25,7 @@
  */
 
 require_once('squal_pre.php');
-require_once('common/pm/ProjectTasksForUser.class');
+require_once('common/pm/ProjectTasksForUser.class.php');
 require_once('common/include/cron_utils.php');
 
 $err='';

@@ -1068,7 +1068,7 @@ $conn = pg_connect(
 		<para>Q: How do I upgrade my database?</para>
 		<para>A: As stated above, you must apply the changes that are listed in date order in the <filename class="directory">db/</filename> directory to your database. Only the changes that are not already in your old <filename class="directory">db/</filename> directory should be applied, and they should be applied and checked <emphasis>in order</emphasis>.</para>
 
-		<para>Q: I'm getting an error about BaseLanguage.class not being found.</para>
+		<para>Q: I'm getting an error about BaseLanguage.class.php not being found.</para>
 		<para>A: Make sure your localization path is correctly specified in the local.inc file and that it is readable <emphasis>and</emphasis> writable by the apache user.</para>
 
 		<para>Q: When I click on <quote>/projects/</quote> or <quote>/users/</quote> links, I get the source code instead of the page I expected.</para>

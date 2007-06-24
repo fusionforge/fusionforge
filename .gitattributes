@@ -1,7 +1,7 @@
 * text=auto !eol
 gforge/INSTALL.restricted -text
 gforge/backend/shell/apache.sh svneol=native#unset
-gforge/common/docman/Parsedata.class -text
+gforge/common/docman/Parsedata.class.php -text
 gforge/common/docman/engine/majwords.php -text
 gforge/common/docman/engine/majwords.sh -text
 gforge/common/docman/engine/parser_list.txt -text
@@ -9,7 +9,7 @@ gforge/common/docman/engine/parser_oo.php -text
 gforge/common/docman/engine/parser_pdf.php.php -text
 gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
-gforge/common/include/TextSanitizer.class -text
+gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/database-mysql.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cronjobs/ftp_create_group_access.php -text
@@ -90,7 +90,7 @@ gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#appli
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2.tar.gz -text
 gforge/plugins/env.inc.php -text
-gforge/plugins/fckeditor/common/fckeditorPlugin.class -text
+gforge/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 gforge/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
 gforge/plugins/fckeditor/www/editor/css/images/Thumbs.db -text
 gforge/plugins/fckeditor/www/editor/css/images/fck_anchor.gif -text
@@ -622,7 +622,7 @@ gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unlink.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unorderedlist.gif -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
-gforge/plugins/mediawiki/common/MediaWikiPlugin.class -text
+gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 gforge/plugins/mediawiki/common/languages/Base.tab -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/usr/share/gforge/etc/httpd.d/03mediawiki -text
@@ -666,7 +666,7 @@ gforge/plugins/projects_hierarchy/ChangeLog -text
 gforge/plugins/projects_hierarchy/common/languages/Base.tab -text
 gforge/plugins/projects_hierarchy/common/languages/French.tab -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
-gforge/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class -text
+gforge/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 gforge/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
 gforge/plugins/projects_hierarchy/www/add_link.php -text
 gforge/plugins/projects_hierarchy/www/add_son.php -text
@@ -701,7 +701,7 @@ gforge/plugins/projects_hierarchy/www/wait_son.php -text
 gforge/plugins/quota_management/INSTALL -text
 gforge/plugins/quota_management/common/languages/Base.tab -text
 gforge/plugins/quota_management/common/quota_management-init.php -text
-gforge/plugins/quota_management/common/quota_managementPlugin.class -text
+gforge/plugins/quota_management/common/quota_managementPlugin.class.php -text
 gforge/plugins/quota_management/cronjobs/quota_update.pl -text
 gforge/plugins/quota_management/db/quota_management-init.sql -text
 gforge/plugins/quota_management/www/index.php -text
@@ -714,12 +714,12 @@ gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text
 gforge/plugins/svntracker/README -text
 gforge/plugins/svntracker/bin/post.php -text
-gforge/plugins/svntracker/common/Snoopy.class -text
+gforge/plugins/svntracker/common/Snoopy.class.php -text
 gforge/plugins/svntracker/common/languages/Base.tab -text
 gforge/plugins/svntracker/common/languages/French.tab -text
 gforge/plugins/svntracker/common/languages/Spanish.tab -text
 gforge/plugins/svntracker/common/svntracker-init.php -text
-gforge/plugins/svntracker/common/svntrackerPlugin.class -text
+gforge/plugins/svntracker/common/svntrackerPlugin.class.php -text
 gforge/plugins/svntracker/db/20051011.sql -text
 gforge/plugins/svntracker/db/svntracker-init-mysql.sql -text
 gforge/plugins/svntracker/db/svntracker-init.sql -text
@@ -735,7 +735,7 @@ gforge/plugins/webcalendar/README -text
 gforge/plugins/webcalendar/common/languages/Base.tab -text
 gforge/plugins/webcalendar/common/languages/French.tab -text
 gforge/plugins/webcalendar/common/webcalendar-init.php -text
-gforge/plugins/webcalendar/common/webcalendarPlugin.class -text
+gforge/plugins/webcalendar/common/webcalendarPlugin.class.php -text
 gforge/plugins/webcalendar/db/webcalendar-init.sql -text
 gforge/plugins/webcalendar/script/webcalendar-init.php -text
 gforge/plugins/webcalendar/www/.project -text
@@ -967,8 +967,8 @@ gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
 gforge/www/env.inc.php -text
 gforge/www/favicon.ico svneol=native#unset
-gforge/www/forum/admin/ForumAdmin.class -text
-gforge/www/forum/include/AttachManager.class -text
+gforge/www/forum/admin/ForumAdmin.class.php -text
+gforge/www/forum/include/AttachManager.class.php -text
 gforge/www/gfginstaller.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
@@ -1037,12 +1037,12 @@ gforge/www/images/smiles/icon_twisted.gif -text
 gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
-gforge/www/include/BBCodeSupport.class -text svneol=unset#application/octet-stream
-gforge/www/include/BBCodeSupportHtml.class -text svneol=unset#application/octet-stream
-gforge/www/include/HTMLSupport.class -text svneol=unset#application/octet-stream
-gforge/www/include/SmilieSupport.class -text svneol=unset#application/octet-stream
-gforge/www/include/SmilieSupportHtml.class -text svneol=unset#application/octet-stream
-gforge/www/include/TextSupport.class -text svneol=unset#application/octet-stream
+gforge/www/include/BBCodeSupport.class.php -text svneol=unset#application/octet-stream
+gforge/www/include/BBCodeSupportHtml.class.php -text svneol=unset#application/octet-stream
+gforge/www/include/HTMLSupport.class.php -text svneol=unset#application/octet-stream
+gforge/www/include/SmilieSupport.class.php -text svneol=unset#application/octet-stream
+gforge/www/include/SmilieSupportHtml.class.php -text svneol=unset#application/octet-stream
+gforge/www/include/TextSupport.class.php -text svneol=unset#application/octet-stream
 gforge/www/include/unicode.php -text
 gforge/www/jscook/ThemePanel/arrow.gif svneol=native#unset
 gforge/www/jscook/ThemePanel/arrowdown.gif svneol=native#unset
@@ -1099,12 +1099,12 @@ gforge/www/scm/viewvc/viewvc.org/images/bg-grad.jpg svneol=native#unset
 gforge/www/scm/viewvc/viewvc.org/images/title.jpg svneol=native#unset
 gforge/www/scm/viewvc/viewvc.org/images/title.xcf svneol=native#unset
 gforge/www/scm/viewvc/windows/aspfool/aspfool.dll svneol=native#unset
-gforge/www/search/include/engines/DocsGroupSearchEngine.class -text svneol=unset#application/octet-stream
-gforge/www/search/include/engines/ForumsGroupSearchEngine.class -text svneol=unset#application/octet-stream
-gforge/www/search/include/engines/FrsGroupSearchEngine.class -text svneol=unset#application/octet-stream
-gforge/www/search/include/engines/NewsGroupSearchEngine.class -text svneol=unset#application/octet-stream
-gforge/www/search/include/engines/TasksGroupSearchEngine.class -text svneol=unset#application/octet-stream
-gforge/www/search/include/engines/TrackersGroupSearchEngine.class -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/DocsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/ForumsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/FrsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/NewsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/TasksGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
+gforge/www/search/include/engines/TrackersGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
 gforge/www/tabber/example-ajax-0.html -text
 gforge/www/tabber/example-ajax-1.html -text
 gforge/www/tabber/example-ajax-2.html -text
@@ -1213,7 +1213,7 @@ gforge/www/themes/gforge-simple-theme/images/box-topright.png -text
 gforge/www/themes/gforge-simple-theme/images/logo.png -text
 gforge/www/themes/gforge/COPYING -text
 gforge/www/themes/gforge/README.txt -text
-gforge/www/themes/gforge/Theme.class -text
+gforge/www/themes/gforge/Theme.class.php -text
 gforge/www/themes/gforge/css/theme.css -text
 gforge/www/themes/gforge/images/bottomtab-new/middle.gif -text
 gforge/www/themes/gforge/images/bottomtab-new/selected-middle.gif -text

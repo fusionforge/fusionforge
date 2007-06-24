@@ -32,11 +32,11 @@
 
 require_once('../../env.inc.php');
 require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class');
-require_once('www/forum/admin/ForumAdmin.class');
-require_once('common/forum/Forum.class');
-require_once('common/forum/ForumMessage.class');
-require_once('www/forum/include/AttachManager.class'); //attachent manager
+require_once('www/forum/include/ForumHTML.class.php');
+require_once('www/forum/admin/ForumAdmin.class.php');
+require_once('common/forum/Forum.class.php');
+require_once('common/forum/ForumMessage.class.php');
+require_once('www/forum/include/AttachManager.class.php'); //attachent manager
 
 $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');

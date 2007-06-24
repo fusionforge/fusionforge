@@ -433,7 +433,7 @@ in your old db/ directory should be applied, and they should be applied and
 checked IN ORDER.
 
 
-Q: I'm getting an error about BaseLanguage.class not being found.
+Q: I'm getting an error about BaseLanguage.class.php not being found.
 
 A: Make sure your localization path is correctly specified in the local.inc 
 file and that it is readable AND writable by the apache user.
