@@ -6,13 +6,13 @@ the group element instead, containing multiple forums, in turn containing
 multiple nitf entries.
 -->
 
-<?xml version="1.0" encoding="UTF-8"?>
+
 <!ELEMENT group (forum*)>
 <!ATTLIST group
-  name CDATA>
+  name CDATA ''>
 <!ELEMENT forum (nitf+)>
 <!ATTLIST forum
-  name CDATA>
+  name CDATA '' >
 
 <!--
 ************************************************************************
