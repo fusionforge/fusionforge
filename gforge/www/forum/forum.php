@@ -80,7 +80,7 @@ if ($forum_id) {
 			exit_error(_('Error'), _('Error getting new ForumMessage'));
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error'),_('Error getting new ForumMessage: '.$fm->getErrorMessage());
+			exit_error(_('Error'),_('Error getting new ForumMessage: '.$fm->getErrorMessage()));
 		}
 
 		$sanitizer = new TextSanitizer();
