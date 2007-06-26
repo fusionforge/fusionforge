@@ -84,7 +84,7 @@
 
 	<h3>Structure</h3>
 
-	<p>WebCalendar can be easily customized site-wide, or page-by-page. In other words, you can easily make every page in WebCalendar look similar to one another, or completely different from one another. WebCalendar achieves this effect by uniquely identifying each page.Each page in WebCalendar (obviously) has a filename. WebCalendar automatically takes each filename, removes any underscores (_), as well as the extension (.php), and assigns the resulting value as an ID attribute on that page's body tag. For example, the page "edit_entry.php" would have the following body tag: &lt;body id="editentry">. If you don't want to customize individual pages, you can disregard this information.</p>
+	<p>WebCalendar can be easily customized site-wide, or page-by-page. In other words, you can easily make every page in WebCalendar look similar to one another, or completely different from one another. WebCalendar achieves this effect by uniquely identifying each page.Each page in WebCalendar (obviously) has a filename. WebCalendar automatically takes each filename, removes any underscores (_), as well as the extension (.php), and assigns the resulting value as an ID attribute on that page's body tag. For example, the page "edit_entry.php" would have the following body tag: &lt;body id="editentry"&gt;. If you don't want to customize individual pages, you can disregard this information.</p>
 
 	<p>If you want to customize the look of a single page in WebCalendar, prefix all selectors for that page with its <code>&lt;body&gt;</code>'s <code>id</code>.  For example, to create styles that only apply to <code>month.php</code>, simply prefix all the selectors with <code>#month</code>.  The <code>id</code> for each page is shown below.</p>
 	<a id="bodyids"></a>
@@ -320,25 +320,26 @@
 	</table>
 
 	<p>WebCalendar has two basic types of calendars: full-sized calendars, and mini-calendars. Each of these types use a specific structure. Full-sized calendars are organized using the structure outlined below. The header of the page is a div with the "title" class (i.e. <code>&lt;div class="title"&gt;</code>). Within that div, there are several spans each with its own class. These classes include:
+	</p>
 	<ul><li>
 		weeknumber</li><li>
 		view</li><li>
 		date
 	</li></ul>
-	Also within this div are the left &amp; right navigation arrows. The left arrow link has the "prev" class, and the right arrow link has the "next" class. Pages that have mini-calendars in place of the arrows use "prevmonth" and "nextmonth" with the ID attribute.</p>
+	<p>Also within this div are the left &amp; right navigation arrows. The left arrow link has the "prev" class, and the right arrow link has the "next" class. Pages that have mini-calendars in place of the arrows use "prevmonth" and "nextmonth" with the ID attribute.</p>
 	<p>Structurally, the header of pages with a full-sized calendar will look similar to:</p>
 	<div class="example">
 		<a id="ex1"></a>
-		<pre>&lt;div class="title">
-	&lt;span class="weeknumber">&lt;/span>
-	&lt;span class="view">&lt;/span>
-	&lt;span class="date">&lt;/span>
-&lt;/div>
+		<pre>&lt;div class="title"&gt;
+	&lt;span class="weeknumber"&gt;&lt;/span&gt;
+	&lt;span class="view"&gt;&lt;/span&gt;
+	&lt;span class="date"&gt;&lt;/span&gt;
+&lt;/div&gt;
 </pre>
 		<p>Example 1</p>
 	</div>
 	
-	<p>Below the "title" div is a table with the "main" class. This is the full-size calendar itself. There are a variety of options available in styling the calendar. First, there are two types of cells in a table: tableheaders (<code>&lt;th></code> tags), and tablecells (<code>&lt;td></code> tags). WebCalendar distinguishes between <em>column</em> tableheaders &amp; <em>row</em> tableheaders. Headers containing dates, or days of the week utilize the classes <em>today</em>, and <em>weekend</em>. To style tableheaders for Monday through Friday, while today is eDays of the week that are not Saturday or Sunday, and that are also not today's date, can be styled by simply referring to the "th" tag itself. Alternatively, if you don't want to style tableheaders according to the weekend, or today colors, you can simply omit this style from the stylesheet. Row tableheaders (when they don't contain dates) are always styled using the class, "row".</p>
+	<p>Below the "title" div is a table with the "main" class. This is the full-size calendar itself. There are a variety of options available in styling the calendar. First, there are two types of cells in a table: tableheaders (<code>&lt;th&gt;</code> tags), and tablecells (<code>&lt;td&gt;</code> tags). WebCalendar distinguishes between <em>column</em> tableheaders &amp; <em>row</em> tableheaders. Headers containing dates, or days of the week utilize the classes <em>today</em>, and <em>weekend</em>. To style tableheaders for Monday through Friday, while today is eDays of the week that are not Saturday or Sunday, and that are also not today's date, can be styled by simply referring to the "th" tag itself. Alternatively, if you don't want to style tableheaders according to the weekend, or today colors, you can simply omit this style from the stylesheet. Row tableheaders (when they don't contain dates) are always styled using the class, "row".</p>
 	<p>Tablecells (td tags) within the "main" calendar table follow the same structure as tableheaders with dates, or days. Therefore, tablecells that fall on the weekend, will have the "weekend" class. If the cell is on today's date, but it's not on Saturday or Sunday, the cell will have the "today" class. If the cell is not on the weekend, nor today's date, it doesn't get a class (in this case, style these cells similar to how you styled tableheaders without a class). If the cell is both on the weekend, and on today's date, it has "weekend today" as the value for the class attribute. Below are some examples to help illustrate.</p>
 	<p>If you're customizing month.php &amp; want tablecells (td tags) on today's date to have a red background, you would use:</p>
 	<div class="example">
