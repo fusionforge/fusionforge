@@ -631,8 +631,11 @@ function site_project_header($params) {
 		session_require(array('group'=>'1'));
 	}
 
-	$params['title']=$project->getPublicName().': '.$params['title'];
-
+	if (isset($params['title'])){
+		$params['title']=$project->getPublicName().': '.$params['title'];
+	} else {
+		$params['title']=$project->getPublicName();
+	}
 	echo $HTML->header($params);
 	
 	if(isset($GLOBALS['feedback'])) {

@@ -123,7 +123,7 @@ class ProjectGroupFactory extends Error {
 
 		if (!$result || $rows < 1) {
 			$this->setError(_('No ProjectGroups Found').db_error());
-			return false;
+			$this->projectGroups=NULL;
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->projectGroups[] = new ProjectGroup($this->Group, $arr['group_project_id'], $arr);

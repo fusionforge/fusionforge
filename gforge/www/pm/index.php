@@ -47,6 +47,15 @@ if ($pg_arr && $pgf->isError()) {
 
 pm_header(array('title'=>_('Project/Task Manager: Subprojects And Tasks')));
 
+$perm =& $g->getPermission( session_get_user() );
+if ($perm->isPMAdmin()) {
+	$menu_text=array();
+    $menu_links=array();
+	$menu_text[]=_('Admin');
+	$menu_links[]='/pm/admin/?group_id='.$group_id;
+	echo $HTML->subMenu($menu_text,$menu_links);
+}
+
 if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo '<p>'._('<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="important">The Admin for this project will have to set up projects using the admin page</span></B>').'</p>';
 } else {

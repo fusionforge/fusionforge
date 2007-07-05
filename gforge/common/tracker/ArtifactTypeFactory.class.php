@@ -120,7 +120,7 @@ class ArtifactTypeFactory extends Error {
 
 		if (!$result || $rows < 1) {
 			$this->setError('None Found '.db_error());
-			return false;
+			$this->ArtifactTypes=NULL;
 		} else {
 			while ($arr =& db_fetch_array($result)) {
 				$artifactType = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);

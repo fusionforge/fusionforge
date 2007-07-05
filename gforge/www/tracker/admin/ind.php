@@ -62,7 +62,11 @@
 	//required params for site_project_header();
 	$params['group']=$group_id;
 	$params['toptab']='tracker';
-	$params['title'] = $page_title;
+	if(isset($page_title)){ 
+		$params['title'] = $page_title;
+	} else {
+		$params['title'] = '';
+	}
 
 	echo site_project_header($params);
 	echo $HTML->subMenu(

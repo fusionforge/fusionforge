@@ -60,7 +60,7 @@ function project_admin_header($params) {
 	$labels = array();
 	$links = array();
 	
-	$labels[] = _('Admin');
+	//$labels[] = _('Admin');
 	$labels[] = _('Edit Public Info');
 	$labels[] = _('Project History');
 	if($GLOBALS['sys_use_people']) {
@@ -79,7 +79,7 @@ function project_admin_header($params) {
 	$labels[] = _('Stats');
 	plugin_hook("quota_label_project_admin");
 	
-	$links[] = '/project/admin/?group_id='.$group_id;
+	//$links[] = '/project/admin/?group_id='.$group_id;
 	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
 	if($GLOBALS['sys_use_people']) {

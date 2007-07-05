@@ -82,7 +82,7 @@ if ($login) {
 	}
 }
 
-if ($session_hash) {
+if (isset($session_hash)) {
 	//nuke their old session
 	session_logout();
 }
