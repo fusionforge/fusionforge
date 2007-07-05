@@ -759,10 +759,10 @@ if ($sys_show_source) {
         print '<input type="submit" name="Search" value="'._('Search').'" />';
         print '</td>';
 
-        if (isset($group_id)) {
+        if (isset($group_id) && $group_id) {
             print '
                     <td width="10">&nbsp;</td>
-                    <td><a href="/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a></td>';
+                    <td><a href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a></td>';
         }
         print '</tr></table>';
         print '</form>';

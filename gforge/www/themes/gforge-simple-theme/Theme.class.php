@@ -684,7 +684,7 @@ function searchBox() {
 	print '<input type="submit" name="Search" value="'._('Search').'" />';
 
 
-	if (isset($group_id)) {
+	if (isset($group_id)&& $group_id) {
 		print '
 					
 					<a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a>';
