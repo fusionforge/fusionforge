@@ -800,7 +800,7 @@ if (isset($params['group']) && $params['group']) {
 		print '<input type="submit" name="Search" value="'._('Search').'" />';
 		print '</td>';
 
-		if (isset($group_id)) {
+		if (isset($group_id) && $group_id) {
 			print '
 					<td width="10">&nbsp;</td>
 					<td><a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a></td>';
