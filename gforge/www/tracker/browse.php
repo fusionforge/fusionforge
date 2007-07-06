@@ -54,13 +54,13 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$offset = getStringFromRequest('offset',$offset);
-$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
-$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getStringFromRequest('max_rows',$max_rows);
-$set = getStringFromRequest('set',$set);
-$_assigned_to = getStringFromRequest('_assigned_to',$_assigned_to);
-$_status = getStringFromRequest('_status',$_status);
+$offset = @getStringFromRequest('offset',$offset);
+$_sort_col = @getStringFromRequest('_sort_col',$_sort_col);
+$_sort_ord = @getStringFromRequest('_sort_ord',$_sort_ord);
+$max_rows = @getStringFromRequest('max_rows',$max_rows);
+$set = @getStringFromRequest('set',$set);
+$_assigned_to = @getStringFromRequest('_assigned_to',$_assigned_to);
+$_status = @getStringFromRequest('_status',$_status);
 if ($set == 'custom') {
 	//
 	//may be past in next/prev url
@@ -72,7 +72,7 @@ if ($set == 'custom') {
 	}
 }
 
-if (is_array($_extra_fields)){
+if (@is_array($_extra_fields)){
 	$keys=array_keys($_extra_fields);
 	foreach ($keys as $key) {
 		if ($_extra_fields[$key] != 'Array') {
@@ -80,7 +80,11 @@ if (is_array($_extra_fields)){
 		}
 	}
 } else {
-	$aux_extra_fields = $_extra_fields;
+	if (isset($_extra_fields)){
+		$aux_extra_fields = $_extra_fields;
+	} else {
+		$aux_extra_fields = '';
+	}
 }
 
 $af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$aux_extra_fields);
