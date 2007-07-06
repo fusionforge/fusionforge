@@ -153,7 +153,7 @@ class BaseLanguage {
 
 		if (function_exists('plugin_manager_get_object')) {
 			$pluginManager =& plugin_manager_get_object();
-			$pluginNames =& $pluginManager->getPlugins();
+			$pluginNames = $pluginManager->getPlugins();
 		} else {
 			$pluginNames = array();
 		}

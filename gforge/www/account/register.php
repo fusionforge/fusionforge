@@ -86,7 +86,7 @@ if (getStringFromRequest('submit')) {
 
 $HTML->header(array('title'=>'User Account Registration'));
 
-if ($feedback) {
+if (isset($feedback)) {
 	print "<p><span class=\"error\">$feedback $register_error</span>";
 } 
 if (!isset($timezone) || empty($timezone) || !eregi('^[-a-z0-9_/]*?$', $timezone)) {

@@ -86,7 +86,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 	<td><strong><?php print date($sys_datefmt, $user->getAddDate()); ?></strong>
 	<?php
 
-	if ($sys_use_rating) {
+	if ($sys_use_ratings) {
 		echo $HTML->boxMiddle(_('Peer Rating'),false,false);
 		if ($user->usesRatings()) {
 			echo vote_show_user_rating($user_id);
@@ -138,7 +138,7 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p/>"._('This developer is a member of the following groups:')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ('<br />' . '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_cat['unix_group_name'].'/">'.$row_cat['group_name'].'</a>\n');
+		print ('<br />' . '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_cat['unix_group_name'].'/">'.$row_cat['group_name'].'</a>');
 	}
 	print '</ul><p/>';
 } // end if groups
@@ -152,7 +152,7 @@ echo $HTML->boxBottom(); ?>
 
 <?php 
 $me = session_get_user(); 
-if ($sys_use_rating) {
+if ($sys_use_ratings) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 
 printf(_('<P>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</P><P>The %1$s Peer Rating system is based on concepts from <A HREF="http://www.advogato.com/">Advogato.</A> The system has been re-implemented and expanded in a few ways.</P>'), $GLOBALS['sys_name']);
