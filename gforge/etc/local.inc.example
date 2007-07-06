@@ -232,6 +232,7 @@ $sys_apache_group='apachegroup';
 //             you will break the html_image function in include/html.php
 //
 $sys_urlroot="$sys_opt_path/www/";
+$sys_urlprefix="";
 
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name='MyGForge';
