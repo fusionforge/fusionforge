@@ -42,7 +42,7 @@
 				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 				$feedback .= $res->getErrorMessage();
 			} else {
-				header ("Location: /tracker/admin/?group_id=$group_id&atid=".$res->getID()."&update_users=1");
+				header ("Location: ".$GLOBALS['sys_urlprefix']."/tracker/admin/?group_id=$group_id&atid=".$res->getID()."&update_users=1");
 			}
 
 		}
