@@ -120,6 +120,9 @@ class ForumGateway extends Error {
 		} elseif ($mp->isError()) {
 			$this->setError('Error In MailParser '.$mp->getErrorMessage());
 //DBG("parseMail error2: ".$mp->getErrorMessage());
+ 			// even if it is an error, try to get the address of the sender so we
+ 			// can send him back the error
+ 			$this->FromEmail = $mp->getFromEmail();
 			return false;
 		}
 
