@@ -34,7 +34,7 @@ pre { width: 90%; background: silver; overflow: auto; }
 
 <p>Next, I create a <samp>webalizer.conf</samp> file specifically for this host.  This can usually be done by cranking another site's <samp>webalizer.conf</samp> thru <samp>sed</samp>:
 <pre>
-# sed -e "s/project_one/project_two/g" /etc/webalizer/project_one-webalizer.conf > /etc/webalizer/project_two-webalizer.conf
+# sed -e "s/project_one/project_two/g" /etc/webalizer/project_one-webalizer.conf &gt; /etc/webalizer/project_two-webalizer.conf
 </pre>
 
 <p>I've got a shell script set up that runs every night and runs Webalizer against all those log files, like this:
@@ -45,9 +45,9 @@ pre { width: 90%; background: silver; overflow: auto; }
 /usr/bin/webalizer -c /etc/webalizer/cougaarforge-webalizer.conf
 
 # run webalizer on all the logs after combining and sorting them
-cat /var/log/httpd/*access_log > /var/log/httpd/all_access_log_unsorted
+cat /var/log/httpd/*access_log &gt; /var/log/httpd/all_access_log_unsorted
 sort -t ' ' -k 4.9,4.12n -k 4.5,4.7M -k 4.2,4.3n -k 4.14,4.15n -k 4.17,4.18n -k 4.20,4.21n /var/log/httpd/all_access_log_unsorted
-> /var/log/httpd/all_access_log
+&gt; /var/log/httpd/all_access_log
 /usr/bin/webalizer -c /etc/webalizer/cougaarforge-all-webalizer.conf
 rm /var/log/httpd/all_access_log
 rm /var/log/httpd/all_access_log_unsorted
