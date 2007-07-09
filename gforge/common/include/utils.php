@@ -503,7 +503,7 @@ function utils_buildcheckboxarray($options,$name,$checked_array) {
 			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
 		for ($j=0; $j<$checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
-				echo ' CHECKED';
+				echo ' checked';
 			}
 		}
 		echo '> '.$options[$i];
@@ -855,7 +855,7 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' 
 		if ($log < $pow) {
 			continue;
 		}
-		if ($lab == " MB") {
+		if ($lab == " MB" or $lab == " GB") {
 			$round = 2;
 		}
 		$text = round($bytes/pow($base,$pow),$round).$lab;
