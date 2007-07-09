@@ -187,7 +187,7 @@ class User extends Error {
 			} else {
 				//set up an associative array for use by other functions
 				db_reset_result($res);
-				$this->data_array =& db_fetch_array($res);
+				$this->data_array = db_fetch_array($res);
 			}
 		}
 		$this->is_super_user=false;
