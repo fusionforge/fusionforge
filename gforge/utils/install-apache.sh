@@ -235,7 +235,7 @@ case "$1" in
 
     purge)
     	for flavour in apache apache-perl apache-ssl apache2; do
-		[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && rm -f /etc/$flavour/conf.d/gforge.httpd.conf
+		[ -e /etc/$flavour/conf.d/gforge.httpd.conf ] && rm -f /etc/$flavour/conf.d/gforge.httpd.conf
 		if [ -x /usr/sbin/$flavour ]; then
 			invoke-rc.d $flavour restart < /dev/null > /dev/null 2>&1 || true
 		fi

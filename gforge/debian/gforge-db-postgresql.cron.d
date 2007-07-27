@@ -42,10 +42,10 @@
 50 2 * * Mon gforge [ -x /usr/lib/gforge/bin/vacuum.php ] && /usr/lib/gforge/bin/vacuum.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
 # Daily sweep of the HTTP log files for project activity
-15 0 * * * gforge [ -x /usr/lib/gforge/bin/stats_projects_logparse.pl ] && /usr/lib/gforge/bin/stats_projects_logparse.pl -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+15 0 * * * gforge [ -x /usr/lib/gforge/bin/stats_projects_logparse.pl ] && /usr/lib/gforge/bin/stats_projects_logparse.pl > /dev/null 2>&1
 
 # Daily mail for not approved news
-30 17 * * * root [ -x /usr/lib/gforge/bin/get_news_notapproved.pl ] && /usr/lib/gforge/bin/get_news_notapproved.pl -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+30 17 * * * root [ -x /usr/lib/gforge/bin/get_news_notapproved.pl ] && /usr/lib/gforge/bin/get_news_notapproved.pl > /dev/null 2>&1
 
 # Daily incremental backup to /backup
 # we have to discuss this 

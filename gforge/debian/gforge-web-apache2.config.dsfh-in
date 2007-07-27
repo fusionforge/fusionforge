@@ -28,4 +28,4 @@ init_debconf_from_mainconffile
 # [Disabled] DSFHELPER:dbhost-variables#
 #DSFHELPER:patch-apache#
 
-patch_apache_propose apache2
+# patch_apache_propose apache2

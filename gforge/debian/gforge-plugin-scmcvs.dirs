@@ -1,0 +1,15 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmcvs
+usr/lib/gforge/bin
+usr/lib/gforge/plugins/scmcvs/bin
+usr/lib/gforge/plugins/scmcvs/cgi-bin
+usr/lib/gforge/plugins/scmcvs/lib
+usr/lib/gforge/plugins/scmcvs/cronjobs
+usr/lib/gforge/cgi-bin/plugins/scmcvs
+usr/share/gforge/etc/httpd.d
+usr/share/gforge/www/plugins/scmcvs
+usr/share/gforge/plugins/scmcvs/cronjobs
+usr/share/gforge/plugins/scmcvs/common
+usr/share/gforge/scm
+var/lib/gforge/chroot/cvsroot
+var/log/gforge/cvs

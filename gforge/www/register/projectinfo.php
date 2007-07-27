@@ -67,7 +67,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($sys_use_scm && !$scm) {
 		form_release_key(getStringFromRequest("form_key"));
-		$feedback .= _('Site has SCM enabled, but no SCM was chosen.');
+		// $feedback .= _('Site has SCM enabled, but no SCM was chosen.');
 	} else {
 		$scm_host = $sys_cvs_host;
 		if ($sys_use_scm && $scm) {

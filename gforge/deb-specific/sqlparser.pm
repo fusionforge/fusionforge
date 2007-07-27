@@ -24,11 +24,6 @@
 #
 ### TODO
 # * Make sure the output of pg_dump is interpreted the way it should.
-# * Ditto for he output of mysqldump.  There might be a problem with
-#   the quoting style somewhere: I seem to remember PostgreSQL uses \'
-#   to quote a quote, while MySQL uses ''.  Maybe we should introduce
-#   another parameter to parse_sql_file, indicating what flavour of
-#   SQL to expect.
 
 use strict ;
 use subs qw/ &parse_sql_file &sql_parser_debug / ;
@@ -284,7 +279,7 @@ sub parse_sql_file ( $ ) {
 	    # sql_parser_debug "State = IN_QUOTE" ;
 	  IN_QUOTE_STATE_SWITCH: {
 	      ($rest =~ /^\'/) && do {
-		  $sql .= '\'' ;
+		  $sql .= q/'/ ;
 		  $rest = substr $rest, 1 ;
 		  $l = $rest ;
 		  
@@ -293,7 +288,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ($rest =~ /^\\\'/) && do {
-		  $sql .= '\\\'' ;
+		  $sql .= q/''/ ;
 		  $rest = substr $rest, 2 ;
 		  
 		  last IN_QUOTE_STATE_SWITCH ;
@@ -382,7 +377,7 @@ sub parse_sql_file ( $ ) {
 		      if ($copy_field eq '\N') {
 			  $copy_field = 'NULL' ;
 		      } else {
-			  $copy_field =~ s/\'/\\\'/g ;
+			  $copy_field =~ s/\'/\'\'/g ;
 			  $copy_field = "'" . $copy_field . "'" ;
 		      }
 		      push @copy_data, $copy_field ;

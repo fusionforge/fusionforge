@@ -1,20 +1,28 @@
-gforge (4.6.99+svn20070518-0) experimental; urgency=low
+gforge (4.6.99+svn6070-1) experimental; urgency=low
 
-  * SVN snapshot.  Don't use for production!
+  * SVN snapshot (based on revision 6070, with packaging patches).  Don't
+    use for production!
+  * Generate gforge-plugin-scmcvs and g-p-scmsvn from the gforge source
+    package, since they're maintained in the same upstream repository.
+  * New gforge-plugins-extra package, with other plugins.  Not necessarily
+    well-tested (or even working).
   * Using local database to avoid problems with PostgreSQL not listening
     to TCP/IP connections by default (closes: #309276, #396127, #415650,
     #420751).
-  * Removing support for Apache 1.3, PHP 4.x (closes: #424786, #424792),
-    Exim 3 (closes: #420268) and PostgreSQL < 8.2, since these packages
-    will be removed from Debian soon.
+  * Removing support for Apache 1.3 and PostgreSQL < 8.2, since these
+    packages are no longer in Debian.
   * Also removing support for LDAP for now, unless someone comes up ready
     to maintain it in a proper shape (closes: #237229, #241389, #296399,
     #296507, #372260, #378616).
-  * Added dummy password for the gforge_mta PostgreSQL user, since it no
-    longer seems possible to use an empty password.
+  * Added dummy password for the gforge_mta and gforge_nss PostgreSQL
+    users, since it no longer seems possible to use an empty password.
   * Fixed Postfix alias resolution (closes: #424697).
+  * Actually display the Debconf question asking for an administrative
+    password.  On the other hand, I don't think anybody cares for the
+    database password, so that question can be skipped.
+  * Made cronjobs silent.
 
- -- Roland Mas <lolando@debian.org>  Fri, 18 May 2007 12:12:18 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 27 Jul 2007 21:21:46 +0200
 
 gforge (4.5.14-25+963) unstable; urgency=low
 

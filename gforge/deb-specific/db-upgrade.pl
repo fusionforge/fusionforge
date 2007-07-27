@@ -137,7 +137,7 @@ eval {
 
 		  foreach my $s (@reqlist) {
 		      $query = $s ;
-		      # debug $query ;
+		      # &debug ($query) ;
 		      $sth = $dbh->prepare ($query) ;
 		      $sth->execute () ;
 		      $sth->finish () ;

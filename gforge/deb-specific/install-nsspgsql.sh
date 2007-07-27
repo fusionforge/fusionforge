@@ -81,7 +81,7 @@ host             = $db_host
 port             = 5432
 database         = gforge
 login            = gforge_nss
-passwd           = ''
+passwd           = gforge_nss
 
 #----------------- New possibility including the query directly here ------------------#
 # query

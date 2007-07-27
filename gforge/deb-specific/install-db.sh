@@ -126,7 +126,7 @@ EOF
 	    exit 1
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
-CREATE USER gforge_nss WITH PASSWORD '' ;
+CREATE USER gforge_nss WITH PASSWORD 'gforge_nss' ;
 EOF
 	then
 	    rm -f $tmp1 $tmp2

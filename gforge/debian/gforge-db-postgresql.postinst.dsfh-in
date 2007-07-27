@@ -14,7 +14,7 @@ then
 	pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
 	then 
-		export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+		export pg_hba_dir=/etc/postgresql/${pg_version}/main
 	else
 		echo "No database found online on port 5432"
 		echo "Couldn't initialize or upgrade gforge database."
@@ -61,7 +61,7 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files
-	replace_file ${pg_hba_dir}/pg_hba.conf
+	propose_update_install ${pg_hba_dir}/pg_hba.conf
 
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure

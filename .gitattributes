@@ -1,4 +1,5 @@
 * text=auto !eol
+/.bzrignore -text
 gforge/INSTALL.restricted -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/docman/Parsedata.class.php -text
@@ -38,8 +39,14 @@ gforge/debian/compat -text
 gforge/debian/dsf-helper/patch-apache.config -text
 gforge/debian/dsf-helper/patch-apache.postinst -text
 gforge/debian/dsf-helper/patch-apache.prerm -text
-gforge/debian/gforge-plugins.cron.d -text
-gforge/debian/gforge-plugins.dirs -text
+gforge/debian/gforge-plugin-scmcvs.cron.d -text
+gforge/debian/gforge-plugin-scmcvs.dirs -text
+gforge/debian/gforge-plugin-scmcvs.postinst -text
+gforge/debian/gforge-plugin-scmcvs.prerm -text
+gforge/debian/gforge-plugin-scmsvn.cron.d -text
+gforge/debian/gforge-plugin-scmsvn.dirs -text
+gforge/debian/gforge-plugin-scmsvn.postinst -text
+gforge/debian/gforge-plugins-extra.dirs -text
 gforge/debian/gforge-web-apache2.config.dsfh-in -text
 gforge/debian/gforge-web-apache2.cron.d -text
 gforge/debian/gforge-web-apache2.dirs -text

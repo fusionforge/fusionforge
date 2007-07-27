@@ -1,10 +1,9 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for gforge-plugin-scmsvn
 #
 # see: dh_installdeb(1)
 
 set -e
-# set -x				# Be verbose, be very verbose.
 
 # summary of how this script can be called:
 #        * <postinst> `configure' <most-recently-configured-version>
@@ -14,7 +13,8 @@ set -e
 #        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
 #          <failed-install-package> <version> `removing'
 #          <conflicting-package> <version>
-# for details, see /usr/share/doc/packaging-manual/
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
 #
 # quoting from the policy:
 #     Any necessary prompting should almost always be confined to the
@@ -23,31 +23,32 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
-. /usr/share/debconf/confmodule
-
-#DSFHELPER:replace-files#
 case "$1" in
     configure)
-	# I don't know why I have to do this but somthing locks
-	# If I don't add this db_stop ????
-	# This might be something to do with gforge-config
-	db_stop
 	/usr/sbin/gforge-config
 
-	# Patch Bind configuration files
-	/usr/lib/gforge/bin/install-dns.sh configure-files
-	propose_update_install /etc/bind/named.conf
+	# Prepare database
+	su -s /bin/sh gforge -c '/usr/lib/gforge/bin/register-plugin scmsvn "Subversion"'
+	test -f /etc/default/apache2 && . /etc/default/apache2
+	if [ "$NO_START" != "0" ]; then
+		if [ -x /usr/sbin/apache ]; then
+			/usr/sbin/invoke-rc.d --quiet apache reload
+		fi
+	else
+		if [ -x /usr/sbin/apache2 ]; then
+			/usr/sbin/invoke-rc.d --quiet apache2 reload
+		fi
+	fi
 
-	# Create the DNS zone
-	/usr/lib/gforge/bin/install-dns.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
+
     ;;
 
     *)
         echo "postinst called with unknown argument \`$1'" >&2
-        exit 0
+        exit 1
     ;;
 esac
 
@@ -57,3 +58,5 @@ esac
 #DEBHELPER#
 
 exit 0
+
+

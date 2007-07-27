@@ -59,45 +59,58 @@ install: build
 
 	# gforge
 	# (gforge is a meta-package and needs no files)
-	
-	# gforge-plugins
-	cp -r plugins $(CURDIR)/debian/gforge-plugins/usr/share/gforge/
-	find $(CURDIR)/debian/gforge-plugins/usr/share/gforge/ -name .svn -type d | xargs rm -rf
-	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/etc/
-	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/etc/*
-	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/debian
-	ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins/usr/share/gforge/www
-	chown www-data:www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins
-	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/sbin/*
-	chmod 755 $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/bin/*
-	rm -f $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/*/COPYING
+
+	# gforge-plugins-extra
+	cp -r plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/
+	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/etc/
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/*
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/debian
+	ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www
+	chown www-data:www-data $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins
+	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/sbin/*
+	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/bin/*
+	rm -f $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/COPYING
 	# mediawiki plugin
-	cp -r $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-plugins/
-	rm -rf $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/usr
-	mv $(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalLdapSettings.php \
-	$(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalLdapSettings.php.example
-	mv $(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalSettings.php \
-	$(CURDIR)/debian/gforge-plugins/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
-	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins/usr/share/doc/gforge-plugins/README.mediawiki
-	# scmcvs plugin
-	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
-	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/scmcvs/cronjobs
-	# scmsvn plugin
-	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugins/usr/lib/gforge/bin/
-	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/scmsvn/cronjobs
+	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-plugins-extra/
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/usr
+	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalLdapSettings.php \
+	$(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalLdapSettings.php.example
+	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalSettings.php \
+	$(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
+	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins-extra/usr/share/doc/gforge-plugins-extra/README.mediawiki
 	# cvstracker plugin
-	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/svntracker/postcommit.example
+	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/svntracker/postcommit.example
 	# fckeditor plugin
-	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/fckeditor/www/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.pl
-	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/connectors/php/Commands/helpers/*.cgi
+	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/fckeditor/www/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.pl
+	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/connectors/php/Commands/helpers/*.cgi
 	# webcalendar plugin
-	mv $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php \
-		$(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes
-	chown www-data $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
-	chmod 600 $(CURDIR)/debian/gforge-plugins/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/includes/settings.php \
+		$(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes
+	chown www-data $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	chmod 600 $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
 	ln -s /var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php \
-		$(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/includes/settings.php
-	chmod +x $(CURDIR)/debian/gforge-plugins/usr/share/gforge/plugins/webcalendar/www/tools/*.pl
+		$(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/includes/settings.php
+	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/tools/*.pl
+
+	# Remove files that are in other packages
+	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmcvs/
+	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmsvn/
+
+	# gforge-plugin-scmcvs
+	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/bin/
+	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs
+	cp -r plugins/scmcvs/bin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
+	cp -r plugins/scmcvs/common/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/common/
+	cp -r plugins/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs/
+	cp -r plugins/scmcvs/etc/plugins/scmcvs/* $(CURDIR)/debian/gforge-plugin-scmcvs/etc/gforge/plugins/scmcvs/
+
+	# gforge-plugin-scmsvn
+	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/bin/
+	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs
+	cp -r plugins/scmsvn/bin/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
+	cp -r plugins/scmsvn/common/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/common/
+	cp -r plugins/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/
+	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
@@ -125,14 +138,12 @@ install: build
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
-	find $(CURDIR)/debian/gforge-common/ -name .svn -type d | xargs rm -rf
 
 	# gforge/debian/gforge-web-apache2
 	install -m 644 $(CURDIR)/debian/gforge-web-apache2.overrides $(CURDIR)/debian/gforge-web-apache2/usr/share/lintian/overrides/gforge-web-apache2
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
-	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/ -name .svn -type d | xargs rm -rf
 	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
 	rm -f $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/gforge/COPYING
 	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type d -exec chmod 0755 {} \;
@@ -151,7 +162,7 @@ install: build
 
 	# viewvc rights
 	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;
-	grep -ri '^#!' $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc | grep -v '\.svn' | cut -d: -f1 | xargs chmod 0755
+	grep -ril '^#!' $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc | xargs chmod 0755
 
 	# dojo toolkit
 	#chmod 0755 $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/dojo/src/storage/storage.sh
@@ -248,6 +259,9 @@ install: build
 	# gforge-lists-mailman
 	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fix-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
+
+	# Remove potential SCM artefacts from binary packages
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr | xargs echo rm -rf ; done
 
 binary-indep: build install
 	dh_testdir
