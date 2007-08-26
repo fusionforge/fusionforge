@@ -37,6 +37,9 @@ build-stamp: patch
 	# Uudecode binary files
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
+	# Build gettext *.mo files
+	for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p locales/$$l/LC_MESSAGES && msgfmt -o locales/$$l/LC_MESSAGES/gforge.mo translations/$$l.po ; done
+
 	touch build-stamp
 
 clean: remove-binary-files unpatch
@@ -44,6 +47,8 @@ clean: remove-binary-files unpatch
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	rm -f cvssh.1 gforge-config.1
+
+	rm -rf locales/*
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 	dh_clean

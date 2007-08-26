@@ -1,9 +1,11 @@
+#! /usr/bin/make -f
+
 list:
 	@echo ======================================================================================
 	@echo '=                    Available target are listed below                               ='
 	@echo '=                    Today only to build rpm packages and tarballs                   ='
 	@echo ======================================================================================
-	@cat Makefile.rpm | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
+	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
 #Do it all
 all: gforge allplugins dist          # Build gforge and plugins #

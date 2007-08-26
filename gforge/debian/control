@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts
-Build-Depends: debhelper (>= 4.1.16), dpatch, perl
+Build-Depends: debhelper (>= 4.1.16), dpatch, perl, gettext
 Standards-Version: 3.7.2
 
 Package: gforge
@@ -63,6 +63,15 @@ Description: collaborative development tool - web part (using Apache)
  .
  This package contains the files needed to run the web part of
  Gforge on an Apache webserver.
+
+Package: gforge-web-apache
+Architecture: all
+Depends: gforge-web-apache2
+Provides: gforge-web
+Conflicts: gforge-web
+Description: transition package to gforge-web-apache2
+ This package exists only as a means to make transitions to apache2
+ easier.  You can safely uninstall it.
 
 Package: gforge-db-postgresql
 Architecture: all

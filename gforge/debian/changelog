@@ -1,3 +1,11 @@
+gforge (4.6.99+svn6070-2) experimental; urgency=low
+
+  * Re-add an empty gforge-web-apache package for the transition to
+    apache2.
+  * Generate *.mo at build-time.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 26 Aug 2007 14:35:32 +0200
+
 gforge (4.6.99+svn6070-1) experimental; urgency=low
 
   * SVN snapshot (based on revision 6070, with packaging patches).  Don't
