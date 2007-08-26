@@ -1,3 +1,11 @@
+gforge (4.6.99+svn6078-1) unstable; urgency=low
+
+  * New SVN snapshot (r6078).
+  * Removed unneeded Listen directives.
+  * Fixed a couple of Lintian warnings along the way.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 26 Aug 2007 20:54:10 +0200
+
 gforge (4.6.99+svn6070-2) experimental; urgency=low
 
   * Re-add an empty gforge-web-apache package for the transition to
