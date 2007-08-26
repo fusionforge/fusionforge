@@ -1,4 +1,0 @@
-<IfModule mod_ssl.c>
-  Listen 443
-</IfModule>
-NameVirtualHost {ip_address}:443

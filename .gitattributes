@@ -62,7 +62,6 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
-gforge/etc/httpd.d/00listen443.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
 gforge/gforge-install.sh -text
