@@ -51,16 +51,135 @@ gforge (4.5.14-25+963) unstable; urgency=low
 
  -- Christian Bayle <bayle@debian.org>  Sat, 30 Sep 2006 20:48:24 +0200
 
-gforge (4.5.14-10+3) unstable; urgency=low
+gforge (4.5.14-23) unstable; urgency=low
+
+  * Remove support for php4, since this package will soon no
+    longer be in Debian (closes: #424792, #424786).
+  * Ditto for exim (closes: #420268).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 01 Jul 2007 19:10:40 +0200
+
+gforge (4.5.14-22) unstable; urgency=low
+
+  * Removed Bazaar-internal ,,commit-blahblah directory from the source
+    package.  No other changes.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Mar 2007 20:04:08 +0100
+
+gforge (4.5.14-21) unstable; urgency=high
+
+  * More input sanitisation, fixing more cross-site scripting
+    vulnerabilities.  Again, security implications cause the high urgency.
+  * Also, make sure that the registration procedure happens over SSL.
+  * New debconf templates translations, thanks to Jacobo Tarrio
+    <jtarrio@trasno.net> for Galician (closes: #412917), Miroslav Kure
+    <kurem@upcase.inf.upol.cz> for Czech (closes: #409655), and Ricardo
+    Silva <ardoric@gmail.com> for Portuguese (closes: #413750).
+  * Stopped enabling pgsql.so and gd.so in php.ini, since they're enabled
+    in separate files by the respective packages.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Mar 2007 09:56:47 +0100
+
+gforge (4.5.14-20) unstable; urgency=high
+
+  * Added input sanitisation in the advanced search form to fix a
+    cross-site scripting vulnerability (closes: #406244).  Security
+    implications, hence the urgency.
+  * Updated Dutch debconf templates translation, from Bart
+    Cornelis <cobaco@skolelinux.no> (closes: #408073).
+  * Added German debconf templates translation, from Helge Kreutzmann
+    <debian@helgefjell.de> (closes: #408868).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Jan 2007 13:28:52 +0100
+
+gforge (4.5.14-19) unstable; urgency=low
+
+  * [Roland] Made the chroot environment a bit more complete, by adding
+    missing files: pam_pgsql.conf (closes: #396329), various libraries
+    (closes: #396128), /etc/hosts (closes: #396333).
+
+ -- Roland Mas <lolando@debian.org>  Thu,  9 Nov 2006 21:16:12 +0100
+
+gforge (4.5.14-18) unstable; urgency=low
+
+  * [Roland] Oops.  fix-frs.pl was only added to the source package, not
+    to the binary ones.  Fixed.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 28 Oct 2006 17:30:28 +0200
+
+gforge (4.5.14-17) unstable; urgency=low
+
+  * [Roland] Removed (actually, commented out) Listen directives in the
+    Apache configuration (closes: #394933) (again).  For some reason,
+    Apache doesn't want to start when told to listen on a particular port
+    twice.
+  * [Roland] Added deb-specific/fix-frs.pl, to move released files to the
+    appropriate place according to the new layout mandated by the FRS.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 28 Oct 2006 17:22:39 +0200
+
+gforge (4.5.14-16) unstable; urgency=high
+
+  * [Roland] install-nsspgsql.sh: Create an empty pam_pgsql.conf if it
+    doesn't exist prior to installation.
+  * [Roland] install-ldap.sh: Ditto for libnss-ldap.conf.
+  * [Roland] gforge-mta-exim4: Invoke update-exim4.conf on installation
+    and removal, so Exim is actually configured...
+  * [Roland] fix-mailing-lists.pl needs to be run as root, not gforge,
+    otherwise it has no access to the mailing-lists data.  Fixed
+    gforge-mta-mailman.postinst and fix-mailing-lists.pl accordingly.
+  * [Roland] install-db.sh: Made purge more resistant (closes: #395088).
+  * [Roland] install-ldap.sh: Made installation more resistant.
+  * [Roland] Made Apache setup less invasive (closes: #394933).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 25 Oct 2006 12:12:11 +0200
+
+gforge (4.5.14-15) unstable; urgency=low
+
+  * [Roland] sql2ldif.pl: Get the user password from nss_shadow, since it
+    cannot be found in nss_passwd any longer due to the recent NSS/PAM
+    reorg, patch from Julien Cristau <julien.cristau@ens-lyon.org>
+    (closes: #394022).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 19 Oct 2006 11:09:37 +0200
+
+gforge (4.5.14-14) unstable; urgency=low
+
+  * [Roland] deb-specific/db-upgrade.pl: Last upload only prevented new
+    migrations from using the broken role names, this one tries to restore
+    the names as they should have been.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 12 Oct 2006 13:37:36 +0200
+
+gforge (4.5.14-13) unstable; urgency=high
+
+  * [Roland] deb-specific/db-upgrade.pl: Fixed conversion of old
+    permissions system to RBAC.  All roles were created under the name
+    "rname", which is... let's just say the urgency of this upload is
+    probably not exaggerated.
+
+ -- Roland Mas <lolando@debian.org>  Fri,  6 Oct 2006 21:10:19 +0200
+
+gforge (4.5.14-12) unstable; urgency=low
+
+  * [Roland] Fixed the NSS/PAM mess, hopefully.  We now have NSS views so
+    that the password is hidden from normal users, and a new PAM-specific
+    database user with access to the nss_shadow view.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  4 Oct 2006 15:15:59 +0200
+
+gforge (4.5.14-11) unstable; urgency=low
 
   * [Roland] Updated Dutch debconf templates translation, from Bart
     Cornelis <cobaco@skolelinux.no> (closes: #384150).
-  * [Roland] debian/rules: also remove binary files coming from uu-files
+  * [Roland] debian/rules: Also remove binary files coming from uu-files
     coming from patches on clean.
   * [Roland] db-upgrade.pl: Fixed conversion of the Resolution field to
     the extra-fields system.
+  * [Roland] debian/rules: Remove .arch-ids directories at build time, if
+    present (for packages built from an Arch/Bazaar gateway).
 
- -- Roland Mas <lolando@debian.org>  Sun,  3 Sep 2006 21:52:54 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Sep 2006 20:50:12 +0200
 
 gforge (4.5.14-10) unstable; urgency=low
 
