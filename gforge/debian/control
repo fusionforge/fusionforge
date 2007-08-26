@@ -9,8 +9,8 @@ Standards-Version: 3.7.2
 
 Package: gforge
 Architecture: all
-Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${Source-Version})
-Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (=${Source-Version}), gforge-web-apache2 | gforge-web, gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp, gforge-lists
+Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
+Depends: debconf (>= 1.0.32) | debconf-2.0, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp, gforge-lists
 Recommends: gforge-plugin-scm
 Description: collaborative development tool - meta-package
  Gforge provides many tools to help collaboration in a
@@ -67,8 +67,6 @@ Description: collaborative development tool - web part (using Apache)
 Package: gforge-web-apache
 Architecture: all
 Depends: gforge-web-apache2
-Provides: gforge-web
-Conflicts: gforge-web
 Description: transition package to gforge-web-apache2
  This package exists only as a means to make transitions to apache2
  easier.  You can safely uninstall it.
