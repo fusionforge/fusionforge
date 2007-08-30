@@ -85,9 +85,7 @@ search_conf_file APACHE "$APACHE_ETC_SEARCH"
 APACHE_ETC_LIST="$RESULT"
 search_conf_file GFORGE "$GFORGE_ETC_SEARCH"
 GFORGE_ETC_LIST="$RESULT"
-search_conf_file PHP "$PHP_ETC_SEARCH"
-PHP_ETC_LIST="$RESULT"
-export APACHE_ETC_LIST GFORGE_ETC_LIST PHP_ETC_LIST
+export APACHE_ETC_LIST GFORGE_ETC_LIST
 
 [ -z "$gforgebin" ] && gforgebin="/usr/lib/gforge/bin"
 set $GFORGE_ETC_LIST
@@ -132,22 +130,6 @@ case "$1" in
 					echo "Found Include $gforgeconffile in $apacheconffile"
 	    			fi
 			fi
-		fi
-	done
-	# Make sure pgsql, ldap and gd are enabled in the PHP config files
-	
-	for phpconffile in $PHP_ETC_LIST
-	do
-		cp -a $phpconffile $phpconffile.gforge-new
-		if [ -f $phpconffile.gforge-new ]; then
-	    		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" $phpconffile.gforge-new; then
-				echo "Enabling pgsql in $phpconffile"
-				echo "extension=pgsql.so" >> $phpconffile.gforge-new
-	    		fi
-	    		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*gd.so" $phpconffile.gforge-new; then
-				echo "Enabling gd in $phpconffile"
-				echo "extension=gd.so" >> $phpconffile.gforge-new
-	    		fi
 		fi
 	done
 	;;
@@ -244,7 +226,7 @@ case "$1" in
 
     setup)
     	$0 configure-files
-	for conffile in $APACHE_ETC_LIST $PHP_ETC_LIST
+	for conffile in $APACHE_ETC_LIST
 	do
 		if [ -f $conffile.gforge-new ] 
 		then
@@ -257,7 +239,7 @@ case "$1" in
 
     cleanup)
     	$0 purge-files
-	for conffile in $APACHE_ETC_LIST $PHP_ETC_LIST
+	for conffile in $APACHE_ETC_LIST
 	do
 		if [ -f $conffile.gforge-new ] 
 		then

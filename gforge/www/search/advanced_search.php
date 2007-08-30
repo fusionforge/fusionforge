@@ -15,7 +15,7 @@ require_once('common/include/escapingUtils.php');
 require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class');
 
 $offset = getIntFromRequest('offset');
-$words = getStringFromRequest('words');
+$words = htmlspecialchars(getStringFromRequest('words'));
 $mode = getStringFromRequest('mode', SEARCH__MODE_AND);
 
 if ($mode == SEARCH__MODE_AND) {

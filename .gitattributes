@@ -8,6 +8,10 @@ gforge/db/20040326-gforge-3.3 -text svneol=unset#application/octet-stream
 gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
 gforge/deb-specific/fix-frs.pl -text
 gforge/debian/dsf-helper/create-random-pw.postinst -text
+gforge/debian/po/cs.po -text
+gforge/debian/po/de.po -text
+gforge/debian/po/gl.po -text
+gforge/debian/po/pt.po -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream

@@ -1,10 +1,43 @@
-gforge (4.5.14-19+2) unstable; urgency=low
+gforge (4.5.14-23) unstable; urgency=low
 
-  * [Roland] Packages now come from the upstream SVN repository (CVS
-    repository has been abandoned).  No differences in the binary
-    packages, although the source packages grows a bit.
+  * Remove support for php4, since this package will soon no
+    longer be in Debian (closes: #424792, #424786).
+  * Ditto for exim (closes: #420268).
 
- -- Roland Mas <lolando@debian.org>  Fri, 10 Nov 2006 11:22:08 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 01 Jul 2007 19:10:40 +0200
+
+gforge (4.5.14-22) unstable; urgency=low
+
+  * Removed Bazaar-internal ,,commit-blahblah directory from the source
+    package.  No other changes.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Mar 2007 20:04:08 +0100
+
+gforge (4.5.14-21) unstable; urgency=high
+
+  * More input sanitisation, fixing more cross-site scripting
+    vulnerabilities.  Again, security implications cause the high urgency.
+  * Also, make sure that the registration procedure happens over SSL.
+  * New debconf templates translations, thanks to Jacobo Tarrio
+    <jtarrio@trasno.net> for Galician (closes: #412917), Miroslav Kure
+    <kurem@upcase.inf.upol.cz> for Czech (closes: #409655), and Ricardo
+    Silva <ardoric@gmail.com> for Portuguese (closes: #413750).
+  * Stopped enabling pgsql.so and gd.so in php.ini, since they're enabled
+    in separate files by the respective packages.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Mar 2007 09:56:47 +0100
+
+gforge (4.5.14-20) unstable; urgency=high
+
+  * Added input sanitisation in the advanced search form to fix a
+    cross-site scripting vulnerability (closes: #406244).  Security
+    implications, hence the urgency.
+  * Updated Dutch debconf templates translation, from Bart
+    Cornelis <cobaco@skolelinux.no> (closes: #408073).
+  * Added German debconf templates translation, from Helge Kreutzmann
+    <debian@helgefjell.de> (closes: #408868).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Jan 2007 13:28:52 +0100
 
 gforge (4.5.14-19) unstable; urgency=low
 

@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * Copyright 2004 (c) Francisco Gimeno
