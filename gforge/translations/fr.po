@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-06-24 21:49+0200\n"
-"PO-Revision-Date: 2007-03-16 23:00+0100\n"
+"PO-Revision-Date: 2007-09-03 22:56+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2983,7 +2983,7 @@ msgstr "Logiciel/Groupe"
 #: www/search/include/SearchManager.class.php:135
 #: www/themes/ultralite/Theme.class.php:108
 msgid "People"
-msgstr "Personne"
+msgstr "Personnes"
 
 #: www/search/index.php:72
 msgid "Error - Invalid search"
@@ -3123,7 +3123,7 @@ msgstr ""
 #: www/scm/admin/index.php:40 www/scm/reporting/index.php:33
 #: www/scm/index.php:33
 msgid "SCM Repository"
-msgstr "dépôt de sources"
+msgstr "Dépôt de sources"
 
 #: www/stats/projects.php:28 www/stats/index.php:22 www/stats/graphs.php:20
 #, php-format
@@ -3136,7 +3136,7 @@ msgstr "Comparaison statistiques des projets"
 
 #: www/stats/projects.php:39 www/stats/index.php:39 www/stats/graphs.php:31
 msgid "OVERVIEW STATS"
-msgstr "STATISTIQUES GENERALES"
+msgstr "STATISTIQUES GÉNÉRALES"
 
 #: www/stats/projects.php:40 www/stats/index.php:40 www/stats/graphs.php:32
 msgid "PROJECT STATS"
@@ -3148,15 +3148,15 @@ msgstr "GRAPHIQUES"
 
 #: www/stats/users_graph.php:74
 msgid "New Additions, by Day"
-msgstr "Nouveaux ajouts, par jours"
+msgstr "Nouveaux ajouts, par jour"
 
 #: www/stats/users_graph.php:75
 msgid "New Users (RED), New Projects (BLUE)"
-msgstr "Nouveaux membres (rouge), Nouveaux projets (bleu)"
+msgstr "Nouveaux membres (rouge), nouveaux projets (bleu)"
 
 #: www/stats/users_graph.php:77
 msgid "Users (RED) / Projects (BLUE)"
-msgstr "Membres (rouge) / Projets (bleu)"
+msgstr "Membres (rouge) / projets (bleu)"
 
 #: www/stats/site_stats_utils.php:113
 msgid "Projects in trove category:"
@@ -3168,7 +3168,7 @@ msgstr "OU entrez une liste spéciale&nbsp:"
 
 #: www/stats/site_stats_utils.php:119
 msgid "<strong>comma separated</strong> group_id's)"
-msgstr "numéros de groupes <strong>séparés pas des virgules</strong>"
+msgstr "numéros de groupes <strong>séparés par des virgules</strong>"
 
 #: www/stats/site_stats_utils.php:121
 msgid "Report:"
@@ -3215,7 +3215,7 @@ msgstr "Téléchargement"
 #: www/project/stats/project_stats_utils.php:199
 #: common/reporting/report_utils.php:165
 msgid "Bugs"
-msgstr "Bugs"
+msgstr "Bogues"
 
 #: www/stats/site_stats_utils.php:269 www/stats/site_stats_utils.php:382
 #: www/stats/site_stats_utils.php:437 www/include/LayoutSF.class.php:798
@@ -3233,7 +3233,7 @@ msgstr "Support technique"
 #: www/project/stats/project_stats_utils.php:201
 #: common/reporting/report_utils.php:167
 msgid "Patches"
-msgstr "patches"
+msgstr "Patches"
 
 #: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:439
 #: www/project/stats/project_stats_utils.php:85
@@ -3254,7 +3254,7 @@ msgstr "Tous les suivis"
 #: www/themes/ultralite/Theme.class.php:100
 #: common/reporting/report_utils.php:158 common/reporting/report_utils.php:171
 msgid "Tasks"
-msgstr "tâches"
+msgstr "Tâches"
 
 #: www/stats/site_stats_utils.php:273 www/stats/site_stats_utils.php:385
 #: www/stats/site_stats_utils.php:441
@@ -3342,7 +3342,7 @@ msgstr "Développeurs"
 #: www/stats/site_stats_utils.php:495 www/my/index.php:292
 #: www/reporting/index.php:45
 msgid "Projects"
-msgstr "projets"
+msgstr "Projets"
 
 #: www/stats/index.php:56
 msgid ""
