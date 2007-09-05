@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php4 -f
 <?php
 /**
  * Implement CVS ACLs based on GForge roles

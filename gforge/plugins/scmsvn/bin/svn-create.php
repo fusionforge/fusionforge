@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php4 -f
 <?php
 /**
  *	This file will create blank SVN repositories for the SVN-over-ssh 
