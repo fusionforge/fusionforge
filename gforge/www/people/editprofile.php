@@ -159,7 +159,13 @@ if (session_loggedin()) {
 	}
 	
 	if (getStringFromRequest('MultiDelete')) {
-		$skill_delete = getStringFromRequest('skill_delete');
+		$unfiltered_skill_delete_array = getArrayFromRequest('skill_delete');
+		$skill_delete = array() ;
+		foreach ($unfiltered_skill_delete AS $usd) {
+			if (is_numeric ($usd)) {
+				$skill_delete[] = $usd;
+			}
+		}		
 		$numItems = count($skill_delete);
 		if($numItems == 0) {
 			$feedback .= _('No skills selected to delete.');
