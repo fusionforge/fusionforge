@@ -126,7 +126,9 @@ if (session_loggedin()) {
 			if($confirmMultiDelete) {
 				$sql = "DELETE FROM skills_data where skills_data_id in(".$skill_delete[0];
 				for($i = 1; $i < $numItems; $i++) {
-					$sql .= ",".$skill_delete[$i];
+					if (is_numeric ($skill_delete[$i])) {
+						$sql .= ",".$skill_delete[$i];
+					}
 				}
 				$sql .=")";
 				$result=db_query($sql);
@@ -140,7 +142,9 @@ if (session_loggedin()) {
 			} else {
 				$sql = "SELECT title FROM skills_data where skills_data_id in(".$skill_delete[0];
 				for($i = 1; $i < $numItems; $i++) {
-					$sql .= ",".$skill_delete[$i];
+					if (is_numeric ($skill_delete[$i])) {
+						$sql .= ",".$skill_delete[$i];
+					}
 				}
 				$sql .=")";
 				
