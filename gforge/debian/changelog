@@ -1,3 +1,10 @@
+gforge (4.6.99+svn6078-1+1) UNRELEASED; urgency=low
+
+  * Re-added debian/po/*.po files that hadn't been ported to SVN trunk
+    (closes: #439951).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 31 Aug 2007 16:33:21 +0200
+
 gforge (4.6.99+svn6078-1) unstable; urgency=low
 
   * New SVN snapshot (r6078).
