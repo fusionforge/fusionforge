@@ -103,7 +103,7 @@ class ProjectGroupFactory extends Error {
 				} else {
 					$exists=" AND group_project_id IN (SELECT group_project_ID
 					FROM project_perm 
-					WHERE perm_level >= 0 AND group_project_id=project_group_list.group_project_id
+					WHERE perm_level >= 0 AND group_project_id=project_group_list_vw.group_project_id
 					AND user_id='".user_getid()."') ";
 				}
 			}
