@@ -101,7 +101,7 @@ class ArtifactTypeFactory extends Error {
 				} else {
 					$exists=" AND group_artifact_ID IN (SELECT group_artifact_ID
 					FROM artifact_perm
-					WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list.group_artifact_id
+					WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list_vw.group_artifact_id
 					AND user_id='".user_getid()."') ";
 				}
 			}
