@@ -58,6 +58,18 @@ class Plugin extends Error {
 	}
 
 	/**
+	 * GetInstallDir() - get installation dir for the plugin
+	 *
+	 * @return the directory where the plugin should be linked.
+	 */
+	function GetInstallDir () {
+		if (isset($this->installdir) && $this->installdir)
+			return $this->installdir;
+		else
+			return 'plugins/'.$this->name ;
+	}
+
+	/**
 	 * CallHook() - call a particular hook
 	 *
 	 * @param hookname - the "handle" of the hook

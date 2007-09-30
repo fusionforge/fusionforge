@@ -918,6 +918,7 @@ gforge/plugins/webcalendar/www/ws/get_events.php -text
 gforge/plugins/webcalendar/www/ws/get_reminders.php -text
 gforge/plugins/webcalendar/www/ws/login.php -text
 gforge/plugins/webcalendar/www/year.php -text
+gforge/plugins/wiki/README -text
 gforge/plugins/wiki/common/languages/Base.tab -text
 gforge/plugins/wiki/common/languages/French.tab -text
 gforge/plugins/wiki/db/wiki-init.sql -text

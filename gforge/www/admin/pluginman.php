@@ -80,54 +80,63 @@ if (getStringFromRequest('update')) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
+			
+			// Load the plugin and now get information from it.
+			$pm = plugin_manager_get_object();
+			$plugin = $pm->GetPluginObject($pluginname);
+			$installdir = $plugin->getInstallDir();
+			
+			// Remove the symbolic links made if plugin has a www.
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
-				chdir('../plugins');
-				if (file_exists($pluginname)) {
-					system('rm ' . $pluginname,$result);
-					if ($result != 0) {
+				if (file_exists('../'.$installdir)) {
+					$result = unlink('../'.$installdir);
+					if (!$result) {
 						$feedback .= _('<br>Soft link wasn\'t removed in www/plugins folder, please do so manually.');
 					}
 				} else {
 					$result = 0;
 				}
-				if (file_exists("$sys_etc_path/plugins/$pluginname")) {
-					if (chdir("$sys_etc_path/plugins")) {
-						system('rm ' . $pluginname, $result2); // the apache group or user should have write perms in $sys_etc_path/plugins folder...
-
-						if ($result2 != 0) {
-							$feedback .= _('Success, config not deleted');
-						}
-					}					
+				if (file_exists($sys_etc_path. '/plugins/'.$pluginname)) {
+					$result = unlink($sys_etc_path. '/plugins/'.$pluginname); // the apache group or user should have write perms in $sys_etc_path/plugins folder...
+					if (!$result) {
+						$feedback .= _('Success, config not deleted');
+					}			
 				}
 			}			
 		}
 	} else {
+
 		$sql = "INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('$pluginname','This is the $pluginname plugin')";
 		$res = db_query($sql);
 		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
+
+			// Load the plugin and now get information from it.
+			$pm = plugin_manager_get_object();
+			$pm->LoadPlugin($pluginname);
+			$plugin = $pm->GetPluginObject($pluginname);
+			$installdir = $plugin->getInstallDir();
+
+			// Create a symbolic links to plugins/<plugin>/www (if directory exists).
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
-				chdir('../plugins');
-				$return_value = symlink($sys_plugins_path . $pluginname . '/www',$pluginname); // the apache group or user should have write perms the plugins folder...
-				if (!chdir($sys_etc_path . '/plugins')) {
-					$return_value2 = false;
-				} else {
-					if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {
-						$return_value2 = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname,$pluginname); // the apache group or user should have write perms in /etc/gforge/plugins folder...
-					} else {
-						//doesn�t have a config file, but that�s ok
-						$return_value2 = true;
-					}
-				}
-				if (!$return_value) {
+				// The apache group or user should have write perms the www/plugins folder...
+				$code = symlink($sys_plugins_path . $pluginname . '/www', '../'.$installdir); 
+				if (!$code) {
 					$feedback .= _('<br>Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 				}
-				if (!$return_value2) {
+			}
+				
+			// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
+			if (is_dir($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname)) {
+				// The apache group or user should have write perms in /etc/gforge/plugins folder...
+				$code = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname, $sys_etc_path. '/plugins/'.$pluginname); 
+				if (!$code) {
 					$feedback .= sprintf(_('<br>Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
+
 			if (getStringFromRequest('init')) {
 				// now we're going to check if there's a XX-init.sql file and run it
 				$db_init = $sys_plugins_path . $pluginname . '/db/' . $pluginname . '-init-'. $sys_database_type .'.sql';
@@ -154,7 +163,7 @@ if (getStringFromRequest('update')) {
 				}	
 				//we check for a php script	
 				if (is_file($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php')) {
-				include($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php');		
+					include($sys_plugins_path . $pluginname . '/script/' . $pluginname . '-init.php');		
 				} else {
 					
 				}
@@ -207,7 +216,7 @@ foreach ($filelist as $filename) {
 		$res = db_query($sql);
 		if ($res) {
 			if (db_numrows($res)>0) {
-				// tell the form to delete the users, so that we don�t re-do the query
+				// tell the form to delete the users, so that we don't re-do the query
 				$link .= "&delusers=1";
 				$users = " ";
 				for($i=0;$i<db_numrows($res);$i++) {
@@ -222,7 +231,7 @@ foreach ($filelist as $filename) {
 		$res = db_query($sql);
 		if ($res) {
 			if (db_numrows($res)>0) {
-				// tell the form to delete the groups, so that we don�t re-do the query
+				// tell the form to delete the groups, so that we don't re-do the query
 				$link .= "&delgroups=1";
 				$groups = " ";
 				for($i=0;$i<db_numrows($res);$i++) {

@@ -63,6 +63,46 @@ if (isset($group_id) && $group_id) {
 			$log_group=0;
 		}
 	}
+
+	// Is it a Personal wiki URL (see phpwiki plugin)
+	if (($expl_pathinfo[1]=='wiki') && ($expl_pathinfo[2]=='u')) {
+		// URLs are /wiki/u/<user_name>/<page_name>
+		// Fake group_name which is in fact the user_name.
+		$group_name = $expl_pathinfo[3];
+	}
+
+	// Is it a Project wiki URL (see phpwiki plugin)
+	if (($expl_pathinfo[1]=='wiki') && ($expl_pathinfo[2]=='g')) {
+		// URLs are /wiki/g/<user_name>/<page_name>
+		$group_name = $expl_pathinfo[3];
+		$res_grp=db_query("
+			SELECT *
+			FROM groups
+			WHERE unix_group_name='$group_name'
+			AND status IN ('A','H')
+		");
+		
+		// store subpage id for analyzing later
+		$subpage = @$expl_pathinfo[4];
+		$subpage2 = @$expl_pathinfo[5];
+
+		//set up the group_id
+	   	$group_id=db_result($res_grp,0,'group_id');
+		//set up a foundry object for reference all over the place
+		if ($group_id) {
+			$grp =& group_get_object($group_id,$res_grp);
+			if ($grp) {
+				//this is a project - so set up the project var properly
+				$project =& $grp;
+				//echo "IS PROJECT: ".$group_id;
+				$log_group=$group_id;
+			} else {
+				$log_group=0;
+			}
+		} else {
+			$log_group=0;
+		}
+	}
 	$log_group=0;
 }
 
