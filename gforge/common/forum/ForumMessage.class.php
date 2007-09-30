@@ -351,7 +351,7 @@ class ForumMessage extends Error {
 			$user_id=user_getid();
 		}
 
-		if ($is_follow_up_to) {
+		if ($is_followup_to) {
 			$ParentMessage=new ForumMessage($this->Forum,$is_followup_to);
 			if (!$ParentMessage || !is_object($ParentMessage)) {
 				$this->setError("ForumMessage::create()"._('ForumMessage::create() No Valid ParentMessage Object'));
