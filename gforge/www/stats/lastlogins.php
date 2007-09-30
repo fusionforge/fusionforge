@@ -45,11 +45,9 @@ print '<h3>'._('Most Recent Opened Sessions').'</h3>';
 <?php
 
 $alt=true;
-$ii=0;
+$i=0;
 while ($row_logins = db_fetch_array($res_logins)) {
-	$ii++;
-
-print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
+	print ' <tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>';
 	print '<td >'.date($sys_datefmt, $row_logins['time']).'</td>';
 	print '<td >'.$row_logins['user_name'].'</td>';
 	print '<td >'.$row_logins['ip_addr'].'</td>';

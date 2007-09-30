@@ -111,6 +111,7 @@ if ($rows<1) {
 	echo $HTML->listTableTop($theader);
 
 	$j=0;
+	$last_day = 0;
 	while ($arr =& db_fetch_array($res)) {
 		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
