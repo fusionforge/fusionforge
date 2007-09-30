@@ -52,11 +52,11 @@ if (getStringFromRequest('post')=="Y") {
     $is_active = getStringFromRequest('is_active');
   
     if ($survey_id) { /* Modify */
-	$s->update($survey_title, $to_add, $to_del, $is_active);
-	$feedback = _('UPDATE SUCCESSFUL');
+		$s->update($survey_title, $to_add, $to_del, $is_active);
+		$feedback = _('UPDATE SUCCESSFUL');
     }  else {  /* Add */
-	$s->create($survey_title, $to_add, $is_active);
-	$feedback = _('Survey Inserted');
+		$s->create($survey_title, $to_add, $is_active);
+		$feedback = _('Survey Inserted');
     }
 }
 

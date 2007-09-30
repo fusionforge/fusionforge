@@ -31,7 +31,7 @@ class SurveyHTML extends Error {
 	 * Show survey header 
 	 */
 	function header($params) {
-		global $group_id,$is_admin_page,$HTML,$Language,$sys_use_survey;
+		global $group_id,$is_admin_page,$HTML,$sys_use_survey;
 
 		if (!$sys_use_survey) {
 			exit_disabled();
@@ -96,13 +96,12 @@ class SurveyHTML extends Error {
          * Return string 
          */
 	function showAddQuestionForm( &$q ) {
-		global $Language;
 		global $group_id;
 
 		/* Default is add */
 		$title = _('Add A Question');
 		$question_button = _('Add This Question.');
-		
+
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
 			$title = _('Edit A Question');
@@ -113,6 +112,11 @@ class SurveyHTML extends Error {
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
 			$question_button = _('Submit Changes');
+		} else {
+			$warning = '';
+			$question = '';
+			$question_id = '';
+			$question_type = '';
 		}
 
 		$ret = '<h2>'. $title. '</h2>';
@@ -126,7 +130,7 @@ class SurveyHTML extends Error {
 		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
 		$ret.='<p>'. _('Question type').':<br />';
 	
-		$sql="SELECT * from survey_question_types";
+		$sql="SELECT * FROM survey_question_types";
 		$result=db_query($sql);
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
@@ -142,7 +146,6 @@ class SurveyHTML extends Error {
          * Return string 
          */
 	function showAddSurveyForm( &$s) {
-		global $Language;
 		global $group_id;
 		global $survey_id;
 
@@ -165,6 +168,10 @@ class SurveyHTML extends Error {
 				$inactive = 'checked ="checked" ';
 				$active ='';
 			}
+		} else {
+			$warning = '';
+			$survey_questions = ''; 
+			$survey_title = ''; 
 		}
 
 		$ret = '<h2>'. $title. '</h2>';
@@ -205,7 +212,7 @@ class SurveyHTML extends Error {
 			}
 			
 			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'">'.
-				$arr_to_add[$i]->getQuestion().'('.
+				$arr_to_add[$i]->getQuestion().' ('.
 				$arr_to_add[$i]->getQuestionStringType().')</td>';
 			
 			if ($i%3==2) {
@@ -274,11 +281,11 @@ class SurveyHTML extends Error {
 	 * Show list of questions
 	 */
 	function  ShowQuestions(&$questions) {
-		global $Language;
 		global $group_id;
 		
-		$ret = "<h3>" . count($questions).' '.sprintf(_('%1$s questions found'), $rows)."</h3>";
-				
+		$n = count($questions);
+		$ret = "<h3>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h3>";
+					
 		/* Head information */
 		$title_arr = array ('Question ID', 'Question', 'Type', 'Edit/Delete');
 		$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
@@ -321,7 +328,6 @@ class SurveyHTML extends Error {
 			      $show_vote=0, $show_edit=0, $show_result=0, 
 			      $show_result_graph=0, $show_result_comment=0, 
 			      $show_inactive=0 ) {
-		global $Language;
 		global $user_id;
 		global $group_id;
 
@@ -448,7 +454,6 @@ class SurveyHTML extends Error {
          * Show survey form - Show all forums of Survey
 	 */
 	function ShowSurveyForm( &$s ) {
-		global $Language;
 		global $group_id;
 		global $survey_id;
 		
@@ -557,7 +562,6 @@ class SurveyHTML extends Error {
          *    @param Object a Survey Response Factory
 	 */
 	function ShowResult( &$sr, $show_comment=0, $q_num="", $show_graph=0) {
-		global $Language;
 		global $group_id;
 
 		$Survey = $sr->getSurvey();
