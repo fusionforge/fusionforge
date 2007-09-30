@@ -1,0 +1,12 @@
+<?php // -*-html-*-
+rcs_id('$Id: top.tmpl,v 1.27 2005/02/27 18:19:21 rurban Exp $');
+?>
+<!-- Page title -->
+<?php 
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<!-- The top navigation/search bar -->
+<span class="tooltitle">Navigation</span>
+<div class="toolbar"><?= Template('navbar') ?></div>
+<?php } ?>

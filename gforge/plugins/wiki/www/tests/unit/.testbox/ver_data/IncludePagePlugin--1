@@ -1,0 +1,9 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625912;s:8:"%content";s:379:"This plugin will "include" other pages in this wiki. In the language of hypertext this is called <i>transclusion</i>. The pages will render in distinct tables. You can also load external pages in a more limited fashion with the FrameIncludePlugin. Examples:
+
+<?plugin IncludePage page="HomePage" ?>
+
+<?plugin IncludePage page="WabiSabi" ?>
+
+-----
+
+PhpWikiDocumentation WikiPlugin";}

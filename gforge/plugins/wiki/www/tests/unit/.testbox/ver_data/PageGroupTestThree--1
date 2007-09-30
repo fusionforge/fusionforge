@@ -1,0 +1,13 @@
+a:6:{s:6:"author";s:12:"CarstenKlapp";s:9:"author_id";s:12:"CarstenKlapp";s:6:"markup";s:1:"2";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:352:"You're almost there!
+
+%%% %%% %%% %%% %%% %%% %%%
+
+<?plugin PageGroup
+         label="Go!"
+         parent=PageGroupTest
+         section="Table of Contents"
+?>
+
+Note that the navigation bar can be anywhere, it doesn't have to be at
+the bottom or even consistent from page to page. The label can also
+vary--not sure if this is a good thing. Click Next.";}

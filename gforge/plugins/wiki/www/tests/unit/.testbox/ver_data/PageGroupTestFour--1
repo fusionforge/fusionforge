@@ -1,0 +1,17 @@
+a:6:{s:6:"author";s:12:"CarstenKlapp";s:9:"author_id";s:12:"CarstenKlapp";s:6:"markup";s:1:"2";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:345:"So, this is the last page in this page group.
+
+Note that looping of off on this page, so __Next:__ shouldn't show up
+here but it does because of the bug described in PageGroupTestOne.
+
+%%% %%% %%% %%% %%% %%% %%%
+----
+
+<?plugin PageGroup
+        parent=PageGroupTest
+        section="Table of Contents"
+        loop=false
+?>
+
+----
+
+PageGroupTest";}

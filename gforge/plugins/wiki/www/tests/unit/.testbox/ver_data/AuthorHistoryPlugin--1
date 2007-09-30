@@ -1,0 +1,17 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:442:"This plugin allows you to list the history of edits by a particular
+author; you can specify the page name as well (default is the current
+page).
+
+<verbatim>
+<?plugin AuthorHistory user="test" ?>
+
+<?plugin AuthorHistory page=HomePage ?>
+</verbatim>
+
+The second example will default to the current page. We can't provide
+examples for you since we don't know any potential usernames for your
+wiki.
+
+-------------
+
+PhpWikiDocumentation WikiPlugin";}

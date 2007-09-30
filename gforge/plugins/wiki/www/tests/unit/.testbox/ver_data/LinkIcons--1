@@ -1,0 +1,54 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625917;s:8:"%content";s:1927:"LinkIcons are an optional new feature of PhpWiki. When activated,
+icons will be displayed in front of URLs to indicate the type of link.
+
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/http.png]
+  http link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/url.png]
+  generic internet link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/interwiki.png]
+  InterWiki link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/https.png]
+  https link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/mailto.png]
+  mailto link
+* [http://phpwiki.sourceforge.net/demo/themes/default/images/ftp.png]
+  ftp link
+
+__Note__: Some of the default icons use the alpha channel feature of
+the [PNG | http://www.libpng.org/pub/png/png-sitemap.html] image format
+for smooth rendering on any page color or textured background. Older
+browsers may not display all the images properly.
+
+!!!Examples
+
+The following examples will display with the above link icons only if
+the administrator has enabled this feature.
+
+!! InterWiki links
+
+* InterWiki link PhpWiki:InterWiki
+* A named InterWiki [read WhyWikiWorks at c2|Wiki:WhyWikiWorks].
+
+!!URLs
+
+* Email address [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
+* Normal http link [PhpWiki's Home Page|http://phpwiki.sourceforge.net/phpwiki/]
+* Secure http link [PhpWiki's Home Page|https://phpwiki.sourceforge.net/phpwiki/]
+* File transfer ftp://ftp.sourceforge.net/
+
+''A generic icon is shown for other less common link types.''
+
+* news://nntp.news.com
+* gopher://gopher.caltech.cmu.edu
+
+LinkIcons will only display when the URL protocol is one which PhpWiki
+is allowed to link to. The following examples won't show any icons and
+PhpWiki won't automatically provide double-clickable links either,
+unless the administrator adds them:
+
+* bogus://oedipus.nostradamus.com
+* bolo://lgm.cheshire.org
+
+----
+
+PhpWikiDocumentation";}

@@ -1,0 +1,35 @@
+<?php // -*-html-*-
+rcs_id('$Id: top.tmpl,v 1.2 2005/09/15 05:57:53 rurban Exp $');
+?>
+<!-- The logo -->
+<div id="logo"><a class="wikilink" 
+    href="<?=WikiURL(HOME_PAGE)?>" target="_top"
+    ><img src="<?=$WikiTheme->getImageURL('logo')?>" id="logo-img"
+      border="0" alt="<?=fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
+    align="right" /></a></div>
+<!-- The top navigation/search bar -->
+<div class="wikinavbar">
+<a class="wikilink" href="<?=WikiURL(HOME_PAGE)?>" target="_top">
+<?= WIKI_NAME ?></a> - 
+<!-- Wiki description here -->
+<!-- Page title -->
+<?= $HEADER ?>
+<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+ - <form action="<?= WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?=$charset?>" style="display: inline">
+   <a class="wikilink" href="<?=WikiURL(_("RecentChanges"))?>"><?=_("RecentChanges")?></a>
+   - <a class="wikilink" href="<?=WikiURL(_("FindPage"))?>"><?=_("FindPage")?>:</a>
+   <input type="hidden" name="auto_redirect" value="1" />
+      <input type="text"  name="s" size="12" maxlength="256"
+             title='<?=_("Quick Search")?>'
+             onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
+             onmouseout="window.status=''; return true;" />
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     - <a class="wikilink" href="<?=WikiURL(_("UserPreferences"))?>"><?=_("Preferences")?>:</a>
+    <?php } // isSignedIn ?>
+  </form>
+  <?php if (empty($NOSIGNIN)) { ?>
+  <div class="signin"><?= Template('signin') ?></div>
+  <?php } // $NOSIGNIN?>
+</div>
+<?php } // HIDE_TOOLBARS ?>

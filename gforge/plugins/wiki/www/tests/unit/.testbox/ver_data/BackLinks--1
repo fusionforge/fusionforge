@@ -1,0 +1,7 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:262:"The contents of all pages are searched to find links to the current
+page. The BackLinks function also answers the question: "Which pages
+contain the title of this page?".
+
+----
+
+<?plugin BackLinks exclude||='' include_self||=1 noheader||=0 page||='' info||='' ?>";}

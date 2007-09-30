@@ -1,0 +1,47 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625924;s:8:"%content";s:891:"!! Synopsis
+
+A WikiPlugin to display external RSS feeds.
+
+!!  Usage
+<verbatim>
+  <?plugin RssFeed?>
+  <?plugin RssFeed url=http://somesite.tld/linktofeed.rss ?>
+</verbatim>
+
+!! Plugin Arguments
+Argument|
+  Default Value|
+    Description
+
+url|
+  (empty)|
+    RSS Feed URL
+
+feed|
+  (empty)|
+    RSS Feed Name
+
+description|
+  (empty)|
+    Description of the RSS Feed
+
+maxitem|
+  0|
+    Max. number of entries (0 = unlimited)
+
+!! Sourcecode (since v1.3.8):
+* [PhpWikiCvs:lib/plugin/RssFeed.php]
+* [PhpWikiCvs:lib/RssParser.php] _fixed for allow_url_fopen=Off_
+
+!! Examples
+
+* PhpWikiRss _feed for PhpWiki:RecentChanges_
+<verbatim>
+  <?plugin RssFeed feed=PhpWikiRss description="PhpWiki:RecentChanges"
+	           url=http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss ?>
+</verbatim>
+
+* [PhpWikiDemo:sidebar/]  _Example as sidebar box_
+
+-------------
+PhpWikiDocumentation WikiPlugin";}

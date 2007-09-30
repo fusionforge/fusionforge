@@ -1,0 +1,23 @@
+Date: Mon, 28 Jun 2004 14:28:30 +0200
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.11)
+X-Rcs-Id: $Id: RicercaSuTutto,v 1.1 2004/06/28 18:41:10 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=RicercaSuTutto;
+  flags=PAGE_LOCKED;
+  pgsrc_version="2 $Revision: 1.1 $";
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+<?plugin TitleSearch ?>
+
+----
+
+Additional Searches:
+<?plugin-form TitleSearch?>
+<?plugin-form FullTextSearch?>
+<?plugin-form FuzzyPages?>
+
+----
+
+<?plugin IncludePage page=FindPage quiet=1 section=Tips sectionhead=1 ?>

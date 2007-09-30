@@ -1,0 +1,17 @@
+Date: Sun, 27 Jan 2002 17:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: LikePages,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=LikePages;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+LinkPages 是頁面名稱開頭或結尾為某字的頁面.
+也可以參閱 Wiki:LikePages 和 MeatBall:LikePages.
+
+----
+
+<?plugin LikePages ?>

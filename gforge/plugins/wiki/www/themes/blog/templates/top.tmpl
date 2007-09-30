@@ -1,0 +1,17 @@
+<?php // -*-html-*-
+rcs_id('$Id: top.tmpl,v 1.2 2005/02/02 19:14:14 rurban Exp $');
+?>
+<div id="header">
+<?php if ( $request->getArg('action') == 'browse' ) { ?>
+<div id="yoursiteheader">
+<!-- Insert Flash or Logo here -->
+<a href=""><?= WIKI_NAME ?></a>
+</div>
+<?php } ?>
+</div>
+<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
+<div id="actionbar">
+<?= Template('actionbar') ?>
+</div>
+<?php } ?>
+

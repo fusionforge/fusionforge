@@ -1,0 +1,11 @@
+#/**
+#  *
+#  * wiki message catalog (English)
+#  *
+#  */
+group	wiki	Wiki
+group	short_wiki	Wiki
+plugin_wiki	searchbox	This projects's wiki
+plugin_wiki	pagename	Page
+plugin_wiki	author	Author
+plugin_wiki	date	Date

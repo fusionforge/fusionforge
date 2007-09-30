@@ -1,0 +1,26 @@
+<table width="100%">
+<tr>
+<td valign="top" width="5%" class="toolpalettes">
+<?= Template('top') ?>
+<?php
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<br />
+<span class="tooltitle">Edition</span>
+<div class="toolbar">
+<?= Template('actionbar') ?>
+</div>
+<?php } ?>
+</td>
+<td class="toolpalettes">&nbsp;</td>
+<td valign="top" >
+<div id="content">
+<h1><?= $HEADER ?></h1>
+<br />
+<?= $CONTENT ?>
+</div>
+</td>
+</tr>
+</table>
+<?= Template('bottom') ?>

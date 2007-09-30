@@ -1,0 +1,12 @@
+#!/bin/bash
+#Note: dba requires RPC2.php for RecentChanges
+url="http://reini/phpwiki-dev/RPC2.php"
+#url="http://reini/phpwiki-dev/"
+opt="-0 -v"
+
+curl $opt -H 'Content-Type: text/xml' --data "<methodCall><methodName>wiki.getRPCVersionSupported</methodName><params/></methodCall>" $url
+curl $opt -H 'Content-Type: text/xml' --data "<methodCall><methodName>wiki.getRecentChanges</methodName><params><param><value><string>20050717T21:18:03</string></value></param></params></methodCall>" $url
+curl $opt -H 'Content-Type: text/xml' --data "<methodCall><methodName>wiki.getPage</methodName><params><param><value><string>HomePage</string></value></param></params></methodCall>" $url
+curl $opt -H 'Content-Type: text/xml' --data "<methodCall><methodName>wiki.getPageVersion</methodName><params><param><value><string>HomePage</string></value></param><param><value><int>1</int></value></param></params></methodCall>" $url
+# case-exact + starts_with
+curl $opt -H 'Content-Type: text/xml' --data "<methodCall><methodName>wiki.titleSearch</methodName><params><param><value><string>Hom</string></value></param><param><value><int>5</int></value></param></params></methodCall>" $url

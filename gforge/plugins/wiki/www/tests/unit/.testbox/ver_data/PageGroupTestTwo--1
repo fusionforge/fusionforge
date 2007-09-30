@@ -1,0 +1,16 @@
+a:6:{s:6:"author";s:12:"CarstenKlapp";s:9:"author_id";s:12:"CarstenKlapp";s:6:"markup";s:1:"2";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:368:"<?plugin PageGroup
+         parent=PageGroupTest
+         section="Table of Contents"
+?>
+
+----
+
+%%% %%% %%% %%% %%% %%% %%%
+
+Welcome to page two.
+
+It would be nice if this plugin would work together with BackLinks, so
+that it's presence on a page would be detected by the backlink plugin
+without having to actually add a link to the parent: PageGroupTest.
+
+Click Next.";}

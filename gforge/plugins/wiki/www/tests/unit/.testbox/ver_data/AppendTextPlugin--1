@@ -1,0 +1,34 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:1008:"AppendText is a WikiPlugin to automatically add text to a page. For general
+usage better use the AddCommentPlugin.
+
+<verbatim>
+<?plugin AppendText ?>
+</verbatim>
+
+!! Plugin Arguments
+__page__: |
+  Append to which page. Default: Current page.
+__s__:  |
+  What text to add. Note: A \n is always prepended.
+__before__:  |
+  (Optional) Add before the matching line beginning with before.
+__after__:  |
+  (Optional) Add after the matching line beginning with after.
+
+!! Examples
+
+Add from a list of all available plugins one to the current page.
+<verbatim>
+  <?plugin WikiFormRich action=AppendText buttontext="AddPlugin"
+  	   pulldown[] name=s text="Plugins: " value=<!plugin-list BackLinks page=WikiPlugin !>
+  	   ?>
+</verbatim>
+
+Add from a list of all available Categories to the current page.
+<verbatim>
+  <?plugin WikiFormRich action=AppendText buttontext="AddCategory"
+  	   pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
+  	   ?>
+</verbatim>
+----
+PhpWikiDocumentation";}

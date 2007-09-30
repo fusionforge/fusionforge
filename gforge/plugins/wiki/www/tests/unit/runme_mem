@@ -1,0 +1,42 @@
+#!/bin/sh
+# memory regression suite.
+# runs some tests, with some define combinations and stores it in .result and .data files.
+#
+# TODO: need to check write perms to the .testbox/* (mixed web/cli perms)
+# TODO: need to add the ploticus path
+
+#if [ -d .testbox/page_data -a ! -w .testbox/page_data/AllPages ]; then
+#  rm -rf .testbox/test_*.*db*
+#fi
+db=dba
+level="level=2"
+tests="test=SetupWiki test=AllPagesTest test=DumpHtml"
+prefix=$1
+if [ -z $prefix ]; then prefix="439dba"; fi
+chmod -R a+rw .testbox .dumphtml
+chmod +x prepare_pl combine_define.pl
+
+today=`date`
+for define in USECACHE ENABLE_USER_NEW; do
+  file1="${prefix}_${define}_true"
+  file2="${prefix}_${define}_false"  
+  php -Cq -d register_argc_argv=1 test.php -d${define}=true level=2 debug=9 db=$db $tests | tee ${file1}.result
+  ./prepare_pl ${file1} -nopl
+  #pl -png -o ${file1}.png ${file1}.ploticus
+
+  php -Cq -d register_argc_argv=1 test.php -d${define}=false level=2 debug=9 db=$db $tests | tee ${file2}.result
+  ./prepare_pl ${file2} -nopl
+  #pl -png -o ${file2}.png ${file2}.ploticus
+done
+
+# get the relevant mem numbers (testsetupwiki, test99dumphtml)
+# combine the results and display the graph
+./combine_define.pl $prefix
+
+#pl -png -o all_$db.png -prefab vbars data=$prefix_all_combined.data x=2 y=1 xstep=2 barwidth=line ylbl="memory (kb)" title="$db $title" xlbl="consecutive tests" stubvert=yes ygrid=yes ylbldet="adjust=-0.1,0" xlbldet="adjust=0,-1.2" # vals=yes
+
+# pl -png -o stack.png -prefab stack data=$prefix_combined.data x=1 y=2 y2=3 y3=4 y4=5 barwidth=line ylbl="memory (kb)" title="cli-4.3.9WIN" ygrid=yes ylbldet="adjust=-0.1,0" stubvert=yes stackarea=yes name=file name2=dba name3=SQL name4=ADODB
+
+#pl -png -o compare.png -prefab compare data=$prefix_combined.data catfields=1 y=3 y2=4 y3=5 y4=6 ylbl="memory (kb)" title="$title" ygrid=yes ylbldet="adjust=-0.1,0" barwidth=0.01 stubvert=yes header=yes name=file name2=dba name3=SQL name4=ADODB
+
+#pl -png -o lines.png -prefab lines data=$prefix_combined.data x=2 y=3 y2=4 y3=5 y4=6 ylbl="memory (kb)" title="$title" ygrid=yes ylbldet="adjust=-0.1,0" stubvert=yes header=yes name=file name2=dba name3=SQL name4=ADODB

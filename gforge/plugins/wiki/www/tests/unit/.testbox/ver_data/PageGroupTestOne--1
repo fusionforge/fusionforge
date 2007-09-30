@@ -1,0 +1,21 @@
+a:6:{s:6:"author";s:12:"CarstenKlapp";s:9:"author_id";s:12:"CarstenKlapp";s:6:"markup";s:1:"2";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:600:"Ok, this is page one in this page group.
+
+There is a bug. When looping is true (and it is, but only for this
+first page--another possible flaw) and if the Contents title is not
+the first item on the Table of Contents page, and if there are other
+things on the TOC page after the actual list, then things get screwed
+up. Note that the __Previous:__ link below should point to the last
+page. Click Next.
+
+%%% %%% %%% %%% %%% %%% %%%
+
+<?plugin PageGroup
+         label="Other pages in this group"
+         loop=1
+         parent=PageGroupTest
+         section="Table of Contents"
+?>
+
+----
+
+PageGroupTest";}

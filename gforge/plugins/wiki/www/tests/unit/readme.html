@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>PhpWiki unit tests</title>
+</head>
+<body>
+
+<h1>Introduction</h1>
+
+This directory contains unit tests for PhpWiki.  You must have <a
+href="http://pear.php.net/package/PHPUnit">PEAR's PHPUnit package</a>.
+These tests are unrelated to maketest.pl in the directory above this
+one, which do not use PHPUnit.
+
+<h1>Prerequisites</h1>
+<h2>PHP</h2>
+
+You might want to run these from the php <a
+href="http://www.php.net/features.commandline">command-line
+interface</a>.  It was experimental as of PHP 4.2.0 (php-cli), default as of PHP
+4.3.0.
+
+You also need the 'pear' executable to install or update the required pear libraries.
+
+<h2>PHPUnit</h2>
+
+You can use pear to see if PHPUnit is installed:
+
+<pre>
+/export/scratch/apache/2.0.46/php/bin) % ./pear list
+Installed packages:
+===================
+Package        Version State
+Archive_Tar    0.9     stable
+Console_Getopt 1.0     stable
+DB             1.3     stable
+HTTP           1.2     stable
+HTTP_Upload    0.8.1   stable
+Mail           1.0.1   stable
+Net_SMTP       1.0     stable
+Net_Socket     1.0.1   stable
+PEAR           1.1     stable
+PHPUnit        1.0.0   stable
+XML_Parser     1.0.1   stable
+XML_RPC        1.0.4   stable
+</pre>
+
+If it is not installed, you can use 'pear' to install it:
+
+<pre>
+/export/scratch/apache/2.0.46/php/bin) % ./pear install PHPUnit
+</pre>
+
+<h1>Running these unit tests</h1>
+
+You must be in the phpwiki/tests/unit subdirectory.  Then use the php
+command-line executable to run the tests.
+
+Defaults:
+<pre>
+tests=all
+db=file,dba,SQL,ADODB
+debug=9
+level=1
+</pre>
+
+For example:
+<pre>
+phpwiki/tests/unit % ./test.php
+Run tests ..
+ran 8 tests, 0 failures.
+</pre>
+
+Or for only some tests, give the test names on the commandline:
+
+<pre>
+phpwiki/tests/unit % php -Cq test.php db=dba debug=1 test=SetupWiki test=DumpHtml
+test=SetupWiki,DumpHtml
+db=dba
+debug=1
+level=1
+pid=2544
+
+Testing DB Backend "dba" ...
+Purge the testbox ...
+ran 6 tests, 0 failures.
+</pre>
+
+Or run it from the browser like this:
+
+<pre>
+http://localhost/phpwiki/test/unit/test.php?db=dba&level=10
+http://localhost/phpwiki/test/unit/test.php?test=SetupWiki,DumpHtml&level=1
+  or
+http://localhost/phpwiki/test/unit/test.php?test[]=SetupWiki&test[]=DumpHtml&level=1
+</pre>
+
+<h3>Memory Usage</h3>
+<pre>
+(8MB limit on certain servers)
+
+setupwiki
+cli:  Mem16712 => Mem16928
+web:  Mem21216 => Mem26332 (5MB)
+
+dumphtml
+cli: Mem20696 => Mem31240  (with USECACHE)
+cli: Mem20240 => Mem30212  (without USECACHE) (10MB)
+web: Mem29424 => Mem35400  (without USECACHE) (6MB)
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:1957:"WikiPlugin to easily create new pages, optionally with default content. Since v1.3.8
+
+This allows you to create a page geting the new pagename from a
+forms-based interface, and optionally with the initial content from
+some template.
+
+Put a "<~?plugin-form ~CreatePage ?~>" at some page, browse this page,
+enter the name of the page to create, then click the button.
+
+!! Usage
+<verbatim>
+     <?plugin-form CreatePage ?>
+     <?plugin-form CreatePage template=CategoryHomePage ?>
+     <?plugin-form CreatePage template=SomeTemplatePage vars="year=2004&name=None" ?>
+</verbatim>
+
+!! Plugin Arguments
+*s*: |
+  The pagename, which will passed to the plugin. Default: ""
+*initial_content*:  |
+  The new page will be pre-filled with this content. Default: ""
+*template*:  |
+  The new page will be pre-filled with the content of this page. Default: ""
+*vars*: |
+  variables to be expanded. Default: ""
+*overwrite*: |
+  Whether to overwrite an existing page. Default: ""
+
+!! Known Problems
+
+None
+
+!! Variable Expansion
+
+The content (either initial_content or template) might hold some variables, which will be
+expanded on creation. Unassigned variables will stay as %%<var>%%, assigned variables without
+matching %%<var>%% placeholder will be ignored, without any warning.
+
+A variable in a template is denoted as <tt>%%var%%</tt>, which will be expanded by the
+value of <tt>var</tt> given to the vars argument (in urlencoded php notation).
+
+Some special variables are automatically assigned:
+
+%%ctime%% |
+  $WikiTheme->formatDateTime(time())
+%%author%% |
+  $user->getId()
+
+This forms together with page templates and the PhpWiki:WikiFormRichPlugin and
+optionally the PhpWiki:SqlResultPlugin a framework to create templated pages.
+
+!! Authors
+
+Dan Frankowski, Reini Urban
+
+!! Examples
+
+<?plugin-form CreatePage s=MyHomePage ?>
+
+See also PhpWiki:EasilyCreateNewPages, PhpWiki:WikiFormRichPlugin, PhpWiki:SqlResultPlugin
+
+-------------
+
+PhpWikiDocumentation WikiPlugin";}

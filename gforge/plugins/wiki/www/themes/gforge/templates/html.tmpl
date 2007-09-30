@@ -1,0 +1,18 @@
+<?php  // -*-html-*-
+rcs_id('$Id: html.tmpl,v 1.10 2005/02/04 13:27:29 rurban Exp $');
+/*
+ * No header for Gforge (already provided)
+ *
+ */
+?>
+<?php $WikiTheme->header() ?>
+<?= $WikiTheme->getMoreHeaders() ?>
+<?= Template('body') ?>
+<?php $WikiTheme->footer() ?>
+<?php 
+if (defined('DEBUG') and DEBUG) {
+    echo "<!-- phpwiki source: \n";
+    echo $RCS_IDS;
+    echo "-->\n";
+}
+?>

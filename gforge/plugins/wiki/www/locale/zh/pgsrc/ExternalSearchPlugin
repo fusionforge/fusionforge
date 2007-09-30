@@ -1,0 +1,59 @@
+Date: Fri, 3 Jan 2003 22:00:00 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.4)
+X-Rcs-Id: $Id: ExternalSearchPlugin,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=ExternalSearchPlugin;
+  flags=PAGE_LOCKED;
+  pgsrc_version="2 $Revision: 1.1 $";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+!! Synopsis
+
+ExternalSearchPlugin 建立可以查詢 InterWiki 或其他內部站台的表單.
+
+!! Typical Usage
+<verbatim>
+<?plugin ExternalSearch
+         url="InterWiki or URL"
+         name="button text"
+?>
+</verbatim>
+
+
+!! Arguments
+__url__:
+  指定來自 InterWikiMap 或 url 的 wiki. 任何被使用者輸入的文字將會附加在
+  搜尋 url 後面. 這段替代字串 '__=%s=__' 將會被用來在 url 裡插入搜尋查詢,
+  而不是附加了.
+
+__name__:
+  在送出按鈕上的文字. 對 InterWiki 站台來說,預設為 wiki 名稱,對其他 url 
+  來說,預設為 "External Search".
+
+__formsize__:
+  指定輸入區域大小. (預設: 30 個字元)
+
+__debug__:
+  不要真的重導向到外部站台, 只要印出要被重導向到的 url.
+
+
+!! Examples
+在 MeatBall wiki 上執行全文搜索:
+
+<?plugin ExternalSearch
+         url="http://www.usemod.com/cgi-bin/mb.pl?search="
+         name="MeatBall Search"
+?>
+
+在 PHP 站台上搜索 function 名稱:
+<?plugin ExternalSearch url=php-lookup name="PHP Lookup" ?>
+
+輸入 PHP 函數以查看文件頁:%%%
+<?plugin ExternalSearch url=php-function ?>
+
+輸入PhpWiki上任何已存在的頁面名稱,以直接跳到該頁面.
+<?plugin ExternalSearch url=PhpWiki ?>
+----
+PhpWikiDocumentation WikiPlugin

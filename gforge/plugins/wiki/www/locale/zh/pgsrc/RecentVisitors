@@ -1,0 +1,14 @@
+Date: Sun, 27 Jan 2002 17:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: RecentVisitors,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=RecentVisitors;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+在下面簽上你的大名與參訪日期.
+
+Arno Hollosi, Aredridel Stauck, Jeff Dairiki, Steve Wainstead 是 PhpWiki 的作者群.

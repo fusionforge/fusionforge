@@ -1,0 +1,14 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:343:"View a wiki page in MIME format or download it as backup of a single
+page. _A complete dump of all pages can be produced in
+PhpWikiAdministration._
+
+<?plugin PageDump?>
+----
+Enter exact page name to dump:
+<?plugin-form PageDump?>
+
+TitleSearch:
+<?plugin-form TitleSearch?>
+
+----
+See also: [ViewSource|phpwiki:?action=viewsource], PluginManager.";}

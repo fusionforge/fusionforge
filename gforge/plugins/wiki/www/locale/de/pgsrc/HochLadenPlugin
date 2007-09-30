@@ -1,0 +1,55 @@
+Date: Thu, 10 Jun 2004 04:48:06 -0700
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.11)
+X-Rcs-Id: $Id: HochLadenPlugin,v 1.1 2004/06/17 10:51:22 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=HochLadenPlugin;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags="";
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+Das HochLaden WikiPlugin zeigt eine Eingabebox und zwei Knöpfe. 
+Mit dem ersten Knopf "Durchsuchen..." kann man eine Datei aus dem 
+lokalem Dateisystem auswählen, die man hochladen möchte. 
+Der Textwert dieses Knopfes ("Durchsuchen...") hängt von Ihrem Browser ab. 
+Der zweite "HochLaden" Knopf lädt die Datei dann in das upload Verzeichnis auf dem 
+Server hoch.
+Der Inhalt dieses Verzeichnis ist geheim, jede Datei dort kann mit dem "Upload~:" 
+[InterWikiKarte]n Prefix zum Dateinamen verwendet werden.
+So können Sie z.B. leicht hochgeladene Bilder anzeigen. Siehe PhpWiki:InlineUploadedImages
+
+! Benutzung:
+<verbatim>
+     <?plugin UpLoad ?>
+</verbatim>
+
+!! Argumente:
+__logfile__:
+  Lokaler Pfad. Vorgabe: "phpwiki-upload.log"
+  Das Format ist momentan HTML - eine neue <tr> Zeile per Datei - und nicht die sonst übliche 
+  Log Datei Syntax.
+__autolink__:
+  Füge den hochgeladene Dateinamen zur Liste der hochgeladenen Dateien auf der Seite 'page' dazu.
+  Vorgabe: true
+__page__:
+  Die Seite auf der hochgeladene Dateien aufgelistet werden, wenn 'autolink' 
+  auf true gesetzt ist. 
+  Vorgabe: current page.
+
+! Probleme:
+
+# The user must be authenticated to be able to upload.
+# The filename may not end with certain disallowed extensions, to prevent from abuse.
+# MAX_FILE_SITE is configured by the config.ini option MAX_UPLOAD_SIZE, which defaults to 16MB.
+  Your webserver and php may add another limit.
+# Already existing uploaded files are NOT overwritten.
+# Certain internal php problems for Windows and MacOSX have been fixed with 1.3.9.
+
+----
+
+! Beispiel:
+<?plugin UpLoad ?>
+
+----
+PhpWikiDokumentation

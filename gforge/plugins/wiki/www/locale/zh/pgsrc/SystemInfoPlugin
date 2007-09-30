@@ -1,0 +1,27 @@
+Date: Sat, 15 Nov 2003 16:33:16 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
+Content-Type: application/x-phpwiki;
+  pagename=SystemInfoPlugin;
+  flags="";
+  author=test;
+  version=3;
+  lastmodified=1068931996;
+  author_id=test;
+  markup=2;
+  hits=3;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+SystemInfoPlugin 提供了存取 PhpWiki 所在平台上的低階系統資訊.
+
+<verbatim>
+ Usage:  <?plugin SystemInfo all ?>
+      or <?plugin SystemInfo pagestats cachestats discspace hitstats ?>
+      or <?plugin SystemInfo version ?>
+      or <?plugin SystemInfo current_theme ?>
+      or <?plugin SystemInfo PHPWIKI_DIR ?>
+</verbatim>
+
+範例:
+
+<?plugin SystemInfo all ?>

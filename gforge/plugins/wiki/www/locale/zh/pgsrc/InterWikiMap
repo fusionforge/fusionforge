@@ -1,0 +1,14 @@
+Date: Mon, 18 Feb 2002 22:53:00 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: InterWikiMap,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=InterWikiMap;
+  pagetype=interwikimap;
+  pgsrc_version="3 $Revision: 1.1 $";
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+此 wiki 中,有被使用到的 InterWiki map 列在下面. 這個 map 是來自於下面 verbatim
+區塊裡的文字. (但這只在此頁面被鎖定的情況下才看得到).

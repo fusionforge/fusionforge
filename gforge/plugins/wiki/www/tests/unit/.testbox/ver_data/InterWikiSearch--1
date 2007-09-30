@@ -1,0 +1,9 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625912;s:8:"%content";s:200:"Query any Wiki listed in the InterWikiMap by entering a desired page
+name below.
+
+To add one of these searches to another page use the
+ExternalSearchPlugin.
+
+<?plugin InterWikiSearch?>
+----
+WikiPlugin";}

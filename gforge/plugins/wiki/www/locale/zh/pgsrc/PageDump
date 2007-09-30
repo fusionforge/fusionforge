@@ -1,0 +1,24 @@
+Date: Thu, 11 Dec 2003 19:59:05 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.7pre)
+X-Rcs-Id: $Id: PageDump,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=PageDump;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+以 MIME 格式查看 wiki 頁面或下載為一份單一頁面備份.
+_所有頁面的完整下載可以在 PhpWikiAdministration 中取得._
+
+<?plugin PageDump?>
+----
+輸入完整頁面名稱以進行傾印:
+<?plugin-form PageDump?>
+
+TitleSearch 標題搜尋:
+<?plugin-form TitleSearch?>
+
+----
+參閱: ViewSource, PluginManager.

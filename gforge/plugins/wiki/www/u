@@ -1,0 +1,108 @@
+<?php
+
+ini_set("memory_limit", "64M");
+
+// Disable compression, seems needed to get all the messages.
+$no_gz_buffer=true;
+
+require_once('pre.php');
+
+$user_name = $group_name;
+
+$user =& user_get_object_by_name($user_name);
+if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+
+	exit_error($Language->getText('users','user_not_exist_title'),$Language->getText('users','user_not_exist_text'));
+
+} else {
+
+	$user_id = $user->getID();
+
+	define('VIRTUAL_PATH', '/wiki/u/'.$group_name);
+	define('PATH_INFO_PREFIX', '/'.$group_name . '/');
+	define('USE_PATH_INFO', true);
+	define('PAGE_PREFIX', '_u'.$user_id.'_');
+	
+	define('WIKI_NAME', $group_name);
+
+	// GForge is UTF-8, so use the same.
+	define('CHARSET', 'UTF-8');
+	
+	// Disable access log (already in apache & gforge).
+	define('ACCESS_LOG_SQL', 0);
+	
+//	define('DEBUG', true);
+//	define('_DEBUG_LOGIN', true);
+	
+	// It is not used by it is required by libs.
+	define('ADMIN_USER', 'Project Administrators');
+	define('ADMIN_PASSWD', 'xxx');
+	
+	// Allow template with MediaWiki syntax
+	define("ENABLE_MARKUP_TEMPLATE", true);
+
+	//
+	// Define access rights for the wiki.
+	//
+	
+	// Allow anonymous user to view the pages.
+	define('ALLOW_ANON_USER', true);
+	
+	// Do not allow anon users to edit pages
+	define('ALLOW_ANON_EDIT', false);
+	
+	// Do not allow fake user
+	define('ALLOW_BOGO_LOGIN', false);
+	define('ALLOW_USER_PASSWORDS', true);
+	
+	// Select the plugin_wiki_pref table for getting prefs.
+	define('DBAUTH_PREF_SELECT', "SELECT prefs FROM plugin_wiki_pref WHERE userid='$userid'");
+	define('DBAUTH_PREF_UPDATE', "UPDATE plugin_wiki_pref SET prefs='$pref_blob' WHERE userid='$userid'");
+	define('DBAUTH_PREF_INSERT', "INSERT INTO plugin_wiki_pref (userid,prefs) VALUES ('$userid','$pref_blob')");
+	
+	// A dedicated auth has been created to get auth from GForge
+	$USER_AUTH_ORDER = array("GForge");
+	define('USER_AUTH_ORDER', 'GForge');
+	define('USER_AUTH_POLICY', 'strict');
+
+	define('EXTERNAL_LINK_TARGET', '_top');
+	
+	// Override the default configuration for CONSTANTS before index.php
+	//$LANG='de'; $LC_ALL='de_DE';
+	
+	define('THEME', 'gforge');
+
+	define('ERROR_REPORTING', E_ERROR);
+	
+	// Load the default configuration.
+	include "index.php";
+
+	// Override the default configuration for VARIABLES after index.php:
+	// E.g. Use another DB:
+	$DBParams['dbtype'] = 'SQL';
+	$DBParams['dsn']    = 'pgsql://' . $sys_dbuser . ':' . 
+		$sys_dbpasswd . '@' . $sys_dbhost .'/' . $sys_dbname;
+
+	$DBParams['prefix'] = "plugin_wiki_";
+
+	// If the user is logged in, let the Wiki know
+	if (session_loggedin()){
+        // let php do it's session stuff too!
+        //ini_set('session.save_handler', 'files');
+        // session_start();
+        $user = session_get_user();
+
+        if ($user && is_object($user) && !$user->isError() && $user->isActive()) {
+			$user_name = $user->getRealName();
+        	$_SESSION['user_id'] = $user_name;
+			$_SERVER['PHP_AUTH_USER'] = $user_name;
+			$HTTP_SERVER_VARS['PHP_AUTH_USER'] = $user_name;
+        }
+	} else {
+            // clear out the globals, just in case... 
+	}
+
+	// Start the wiki
+	include "lib/main.php";
+}
+?>

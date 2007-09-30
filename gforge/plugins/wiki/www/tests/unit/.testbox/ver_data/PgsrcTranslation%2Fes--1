@@ -1,0 +1,16 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625921;s:8:"%content";s:506:"__Note:__ This page is much more impressive on the
+[demo server|PhpWikiDemo:en/PgsrcTranslation] where the page names actually
+link.
+
+__What you are looking at:__ This table shows all the default pages
+that ship with PhpWiki translated into this special language.
+If you click on a "T" you can contribute a missing translation.
+
+!! Translated Page Name Matrix (dynamic)
+
+<?plugin _WikiTranslation languages=en,es ?>
+
+----
+
+See also: PhpWiki:MultiLingualWiki, PhpWiki:LanguageSelection,
+PhpWikiDocumentation";}
