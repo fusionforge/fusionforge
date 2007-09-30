@@ -33,8 +33,10 @@ require_once ('common/include/cron_utils.php');
 site_admin_header(array('title'=>_('Site admin')));
 
 $which = getIntFromRequest('which');
+
 if (!$which || $which==100) {
 	$which=100;
+	$sql_str = '';
 } else {
 	$sql_str = " WHERE job='$which' ";
 }

@@ -73,6 +73,7 @@ function activate_group($group_id) {
 
 $action = getStringFromRequest('action');
 if ($action=='activate') {
+	$group_id = getIntFromRequest('group_id');
 	$list_of_groups = getStringFromRequest('list_of_groups');
 
 	$groups=explode(',', $list_of_groups);
@@ -211,7 +212,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		print "<p>" ._('License Other:'). "</p><blockquote>".$row_grp['license_other']."</blockquote>";
 	}
 
-	if ($row_grp['status_comment']) {
+	if (isset($row_grp['status_comment'])) {
 		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
