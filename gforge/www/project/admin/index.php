@@ -256,7 +256,7 @@ echo $HTML->boxBottom();
 			AND user_group.group_id='$group_id' ORDER BY user_id");
 
 		echo '
-		<table width="100%" border="2">
+		<table width="100%" border="0">
 			<tr><td><strong>'._('Unix name').'</strong></td>
 			<td><strong>'._('Role').'</strong></td>
 			<td><strong>'._('Update').'</strong></td>
