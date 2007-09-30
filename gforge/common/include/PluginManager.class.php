@@ -87,24 +87,36 @@ class PluginManager extends Error {
 	}
 
 	/**
+	 * LoadPlugin() - load a specifig plugin
+	 *
+	 */
+	function LoadPlugin ($p_name) {
+		$include_path = $GLOBALS['sys_plugins_path'] ;
+		$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
+		if (file_exists ($filename)) {
+			require_once ($filename) ;
+		} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
+			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			if (file_exists ($filename)) {
+				require_once ($filename) ;
+			} else {
+				// we can't find the plugin so we remove it from the array
+				unset($this->plugins_data[$p_id]);
+			}
+		}
+		return true ;
+	}
+
+	/**
 	 * LoadPlugins() - load available plugins
 	 *
 	 */
 	function LoadPlugins () {
 		$plugins_data = $this->GetPlugins() ;
-		$include_path = $GLOBALS['sys_plugins_path'] ;
 		foreach ($plugins_data as $p_id => $p_name) {
-			$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
-			if (file_exists ($filename)) {
-				require_once ($filename) ;
-			} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
-					$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
-					if (file_exists ($filename)) {
-						require_once ($filename) ;
-					} else {
+			if (!$this->LoadPlugin($p_name)) {
 				// we can't find the plugin so we remove it from the array
-					unset($this->plugins_data[$p_id]);
-					}
+				unset($this->plugins_data[$p_id]);
 			}
 		}
 		return true ;
