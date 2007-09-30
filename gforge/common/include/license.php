@@ -27,7 +27,7 @@
 
 function license_getname($id) {
 	global $license_arr;
-	if (!$license_arr[$id]) {
+	if (!isset($license_arr[$id])) {
 		$res=db_query("SELECT * FROM licenses WHERE license_id='$id'");
 		$license_arr[$id]=db_result($res,0,'license_name');
 	}

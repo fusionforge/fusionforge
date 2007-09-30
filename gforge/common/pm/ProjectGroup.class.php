@@ -747,7 +747,7 @@ class ProjectGroup extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="select perm_level
+				$sql="SELECT perm_level
 				FROM project_perm
 				WHERE group_project_id='". $this->getID() ."'
 				AND user_id='".user_getid()."'";
