@@ -65,7 +65,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 
 <tr valign="top">
 	<td><?php echo _('Address:'); ?></td>
-	<td><?php echo $user->getAddress(); ?></td>
+	<td><?php echo $user->getAddress().'<br/>'.$user->getAddress2(); ?></td>
 </tr>
 
 <tr valign="top">
