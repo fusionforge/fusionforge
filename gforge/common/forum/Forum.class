@@ -154,7 +154,7 @@ class Forum extends Error {
 		if (db_numrows($result_list_samename) > 0) {
 			$this->setError($Languge->getText('forum_common','error_list_exists_with_samename'));
 			return false;
-
+		}
 
 
 		// This is a hack to allow non-site-wide-admins to post
