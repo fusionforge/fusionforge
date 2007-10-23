@@ -133,25 +133,21 @@ computedefault(){
 }
 
 findcrt(){
-	if [ -f /etc/apache2/ssl/apache.pem ]
-	then
-		echo /etc/apache2/ssl/apache.pem
-	else
-		if [ -f /etc/apache/ssl.crt/server.crt ]
-		then 
-		 	echo /etc/apache/ssl.crt/server.crt
-		fi
+	if [ -e /etc/gforge/ssl-cert.pem ] ; then
+	    echo /etc/gforge/ssl-cert.pem
+	elif [ -f /etc/apache2/ssl/apache.pem ] ; then
+	    echo /etc/apache2/ssl/apache.pem
+	elif [ -f /etc/apache/ssl.crt/server.crt ] ; then
+	    echo /etc/apache/ssl.crt/server.crt
 	fi
 }
 findkey(){
-	if [ -f /etc/apache2/ssl/apache.pem ]
-	then
-		echo /etc/apache2/ssl/apache.pem
-	else
-		if [ -f /etc/apache/ssl.key/server.key ]
-		then 
-			echo /etc/apache/ssl.key/server.key
-		fi
+	if [ -e /etc/gforge/ssl-cert.key ] ; then
+	    echo /etc/gforge/ssl-cert.key
+	elif [ -f /etc/apache2/ssl/apache.pem ] ; then
+	    echo /etc/apache2/ssl/apache.pem
+	elif [ -f /etc/apache/ssl.key/server.key ] ; then
+	    echo /etc/apache/ssl.key/server.key
 	fi
 }
 findcronolog(){

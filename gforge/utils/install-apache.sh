@@ -207,19 +207,11 @@ case "$1" in
 	fi
 	# Check apache 2 is running
 	test -f /etc/default/apache2 && . /etc/default/apache2
-	if [ "$NO_START" != "0" ]; then
-		for flavour in apache apache-perl apache-ssl ; do
-			if [ -x /usr/sbin/$flavour ]; then
-				invoke-rc.d $flavour restart < /dev/null > /dev/null 2>&1 || true
-			fi
-		done
-	else
-		for flavour in apache2 ;  do
-			if [ -x /usr/sbin/$flavour ]; then
-				invoke-rc.d $flavour restart || true
-			fi
-		done
-	fi
+	for flavour in apache2 ;  do
+	    if [ -x /usr/sbin/$flavour ]; then
+		invoke-rc.d $flavour restart || true
+	    fi
+	done
 	;;
 
     purge-files)

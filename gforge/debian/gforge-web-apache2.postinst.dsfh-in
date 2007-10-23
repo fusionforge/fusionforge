@@ -51,6 +51,26 @@ case "$1" in
 	    echo "can't find cronolog in usual places" >&2
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
+
+	if [ ! -e /etc/gforge/ssl-cert.pem ] || [ ! -e /etc/gforge/ssl-cert.key ] ; then
+	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
+	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
+		# What, not even the snakeoil cert is there?  Let's generate it
+		make-ssl-cert generate-default-snakeoil
+	    fi
+	    # Right.  At this point, it should be safe to set the symlinks.
+	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/gforge/ssl-cert.pem
+	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/gforge/ssl-cert.key
+	    if grep -q ^sys_use_ssl=false$ /etc/gforge/gforge.conf \
+		&& grep -q ^sys_sslcrt=$ /etc/gforge/gforge.conf \
+		&& grep -q ^sys_sslkey=$ /etc/gforge/gforge.conf ; then
+		# Okay, previous installations failed to locate SSL certs
+		# and disabled SSL altogether.  Let's fix that
+		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/gforge/gforge.conf 
+		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/gforge/ssl-cert.pem,' /etc/gforge/gforge.conf 
+		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/gforge/ssl-cert.key,' /etc/gforge/gforge.conf
+	    fi
+	fi
 	
         /usr/sbin/gforge-config
 
