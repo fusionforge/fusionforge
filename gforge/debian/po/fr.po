@@ -5,23 +5,6 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-
-#~ # Translation of gforge debconf templates to French
-#~ # Copyright (C) 2007 Christian Perrier <bubulle@debian.org>
-#~ # This file is distributed under the same license as the gforge package.
-#~ #
-#~ # Christian Perrier <bubulle@debian.org>, 2006, 2007.
-#~ msgid ""
-#~ msgstr ""
-#~ "Project-Id-Version: \n"
-#~ "Report-Msgid-Bugs-To: lolando@debian.org\n"
 "POT-Creation-Date: 2007-05-17 18:35+0200\n"
 "PO-Revision-Date: 2007-09-04 14:22+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
@@ -441,7 +424,7 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:16001
 #: ../dsf-helper/replace-files.templates:2001
 msgid "Shall I modify the ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
+msgstr "Faut-il modifier ${file} automatiquementÂ ?"
 
 #. Type: note
 #. Description
@@ -703,7 +686,7 @@ msgstr ""
 #. Description
 #: ../dsf-helper/replace-files.templates:1001
 msgid "Shall I modify ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
+msgstr "Faut-il modifier ${file} automatiquementÂ ?"
 
 #. Type: string
 #. Description
@@ -765,19 +748,19 @@ msgstr "chinois (traditionnel)"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Dutch"
-msgstr "néerlandais"
+msgstr "nÃ©erlandais"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Esperanto"
-msgstr "espéranto"
+msgstr "espÃ©ranto"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "French"
-msgstr "français"
+msgstr "franÃ§ais"
 
 #. Type: select
 #. Choices
@@ -795,13 +778,13 @@ msgstr "grec"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Hebrew"
-msgstr "hébreu"
+msgstr "hÃ©breu"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Indonesian"
-msgstr "indonésien"
+msgstr "indonÃ©sien"
 
 #. Type: select
 #. Choices
@@ -819,7 +802,7 @@ msgstr "japonais"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Korean"
-msgstr "coréen"
+msgstr "corÃ©en"
 
 #. Type: select
 #. Choices
@@ -831,7 +814,7 @@ msgstr "latin"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Norwegian"
-msgstr "norvégien"
+msgstr "norvÃ©gien"
 
 #. Type: select
 #. Choices
@@ -843,7 +826,7 @@ msgstr "polonais"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "PortugueseBrazilian"
-msgstr "portugais du Brésil"
+msgstr "portugais du BrÃ©sil"
 
 #. Type: select
 #. Choices
@@ -861,7 +844,7 @@ msgstr "russe"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "SimplifiedChinese"
-msgstr "chinois (simplifié)"
+msgstr "chinois (simplifiÃ©)"
 
 #. Type: select
 #. Choices
@@ -873,13 +856,13 @@ msgstr "espagnol"
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Swedish"
-msgstr "suédois"
+msgstr "suÃ©dois"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:1001
 msgid "Thai"
-msgstr "thaï"
+msgstr "thaÃ¯"
 
 #. Type: select
 #. Description
