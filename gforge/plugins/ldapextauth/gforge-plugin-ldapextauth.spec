@@ -20,7 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 %if "%{_vendor}" == "suse"
 	%define httpduser		wwwrun
 	%define httpdgroup		www
-Requires: php4-ldap
+Requires: php5-ldap
 %else
 	%define httpduser		apache
 	%define httpdgroup		apache

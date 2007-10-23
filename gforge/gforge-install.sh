@@ -50,8 +50,8 @@ mkdir /opt/jpgraph
 mkdir scmtarballs
 mkdir scmsnapshots
 mkdir localizationcache
-if [ ! -f /usr/bin/php4 ]; then
-	ln -s /usr/bin/php /usr/bin/php4
+if [ ! -f /usr/bin/php5 ]; then
+	ln -s /usr/bin/php /usr/bin/php5
 fi
 
 #project vhost space

@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 require_once('www/include/squal_pre.php');
 require_once('common/mail/MailingList.class.php');

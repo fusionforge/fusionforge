@@ -334,14 +334,14 @@ include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www
 				<listitem>
 					<para><emphasis>Cron jobs and some scripts</emphasis> require PHP Command-Line Interface (CLI). Scripts are usually invoked with command like this:</para>
 <screen>
-$ <userinput>php4 -f cronjobs/mail/mailing_lists_create.php</userinput>
+$ <userinput>php5 -f cronjobs/mail/mailing_lists_create.php</userinput>
 </screen>
 					<note>
 						<para>The <literal>-f</literal> is optional when using PHP CLI but it's required when PHP CGI executable is used.</para>
 					</note>
 					<para>You must set <varname>include_path</varname> in PHP CLI <filename>php.ini</filename>, like already shown above. Increase <varname>memory_limit</varname> configuration parameter to at least 32M. To find where <filename>php.ini</filename> is located, use the following command:</para>
 <screen>
-$ <userinput>php4 -i | fgrep php.ini</userinput>
+$ <userinput>php5 -i | fgrep php.ini</userinput>
 </screen>
 				</listitem>
 			</orderedlist>

@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * GForge Extra Field Conversion Script

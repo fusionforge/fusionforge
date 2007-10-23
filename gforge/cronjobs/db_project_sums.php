@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * Portions Copyright 1999-2001 (c) VA Linux Systems

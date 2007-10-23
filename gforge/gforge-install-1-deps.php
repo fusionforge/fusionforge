@@ -67,7 +67,7 @@ function installRHEL() {
 function installDebian() {
 
 	INFO("Installing Packages with apt-get");
-	passthru("apt-get -y install apache2 php4 php4-cli php4-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php4 subversion subversion-tools php4-curl curl ssh lsb-release");
+	passthru("apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release");
 
 	INFO(RED."You Must Install Mailman Manually: apt-get install mailman postfix");
 }
@@ -75,10 +75,10 @@ function installDebian() {
 function installSUSE() {
 
 	INFO("Installing Packages with yast");
-	passthru("yast -i apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server xinetd apache2-mod_php4");
+	passthru("yast -i apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php5-pgsql subversion apache-mod_dav_svn ssh postfix rcs php5-gd mod_ssl perl-IPC-Run php5-curl wget subversion-server xinetd apache2-mod_php5");
 
-	INFO("Fixing php4 installation");
-	passthru("cp /usr/lib/apache2-prefork/libphp4.so /usr/lib/apache2/mod_php.so");
+	INFO("Fixing php5 installation");
+	passthru("cp /usr/lib/apache2-prefork/libphp5.so /usr/lib/apache2/mod_php.so");
 
 	INFO("Restarting APACHE");
 	passthru("/etc/init.d/apache2 start");

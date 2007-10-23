@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /** 
 * Sets up CLI environment based on SAPI and PHP version 

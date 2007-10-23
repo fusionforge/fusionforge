@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * GForge Doc Search Utilities
@@ -25,9 +25,9 @@ $res = shell_exec($cmd);
 
 
 $rep = parser_text($fichout);
-// envoi du résultat sur stdout
+// envoi du rÃ©sultat sur stdout
 echo "$rep";
-// efface les fichiers témporaires
+// efface les fichiers tÃ©mporaires
 unlink ($fichout);
 
 ?>

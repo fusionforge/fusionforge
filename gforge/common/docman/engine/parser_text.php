@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * GForge Doc Search Utilities
@@ -19,7 +19,7 @@ $fichin = $argv[1];
 if (!is_file($fichin)) exit (1);
 
 $rep = parser_text($fichin);
-// envoi du résultat sur stdout
+// envoi du rÃ©sultat sur stdout
 echo "$rep";
 // efface le fichier source
 unlink ($fichin);

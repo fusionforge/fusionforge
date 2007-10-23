@@ -175,7 +175,7 @@ gforge www/plugins/cvstracker/ dir
 file to be properly configured with your include_path OR edit the 
 crontab.in file to set your include path.
 
-  In addition, you may have to symlink /usr/bin/php to /usr/bin/php4, 
+  In addition, you may have to symlink /usr/bin/php to /usr/bin/php5, 
 which is where the cronjobs expect your PHP CGI to be located. 
 install-gforge.sh takes care of this step for you.
 

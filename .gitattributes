@@ -55,7 +55,6 @@ gforge/debian/gforge-web-apache2.overrides -text
 gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
 gforge/debian/gforge-web-apache2.prerm.dsfh-in -text
 gforge/debian/gforge-web-apache2.templates.dsfh-in -text
-gforge/debian/patches/migrate-shebangs-from-php4-to-php5.dpatch -text
 gforge/debian/po/cs.po -text
 gforge/debian/po/de.po -text
 gforge/debian/po/gl.po -text

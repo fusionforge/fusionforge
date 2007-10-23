@@ -75,8 +75,8 @@ Requires: postgresql, postgresql-server
 	
 Requires: postgresql, postgresql-server
 Requires: pgperl, jpeg
-Requires: php4
-Requires: php4-pgsql, php4-mbstring
+Requires: php5
+Requires: php5-pgsql, php5-mbstring
 
 		# Start the postgresql service if needed
 		%define startpostgresql() /etc/init.d/postgresql status | grep 'running' >/dev/null 2>&1 || /etc/init.d/postgresql start

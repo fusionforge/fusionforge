@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php5 -f
 <?php
 $sys_localinc=getenv('sys_localinc');
 if (is_file($sys_localinc)) {

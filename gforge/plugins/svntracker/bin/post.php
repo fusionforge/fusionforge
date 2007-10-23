@@ -1,4 +1,4 @@
-#! /usr/bin/php -f
+#! /usr/bin/php5 -f
 <?php
 /**
  * GForge Plugin SVNTracker HTTPPoster

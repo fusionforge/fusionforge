@@ -77,7 +77,7 @@ then
 fi
 if [ -z "$PHP_ETC_SEARCH" ] 
 then 
-	PHP_ETC_SEARCH="/etc/php5/apache2/php.ini /etc/php4/apache2/php.ini /etc/php4/apache/php.ini /etc/php4/cgi/php.ini"
+	PHP_ETC_SEARCH="/etc/php5/apache2/php.ini /etc/php5/cgi/php.ini"
 fi
 export APACHE_ETC_SEARCH GFORGE_ETC_SEARCH PHP_ETC_SEARCH
 
@@ -118,7 +118,7 @@ case "$1" in
 			# Old fashion Apache
 			if [ -e $apacheconffile ] ; then
 	    			cp -a $apacheconffile $apacheconffile.gforge-new
-	    			perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" $apacheconffile.gforge-new
+	    			perl -pi -e "s/# *LoadModule php5_module/LoadModule php5_module/gi" $apacheconffile.gforge-new
 	    			perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" $apacheconffile.gforge-new
 	    			perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" $apacheconffile.gforge-new
 	    			perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" $apacheconffile.gforge-new
@@ -157,8 +157,8 @@ case "$1" in
 	if [ -f /usr/sbin/modules-config ] ; then
 		for flavour in apache apache-perl apache-ssl ; do
 			if [ -e /etc/$flavour/httpd.conf ] ; then
-				if [ "`/usr/sbin/modules-config $flavour query mod_php4`" == "" ] ; then
-	    				DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_php4
+				if [ "`/usr/sbin/modules-config $flavour query mod_php5`" == "" ] ; then
+	    				DEBIAN_FRONTEND=noninteractive /usr/sbin/modules-config $flavour enable mod_php5
 				fi
 				if [ $flavour != apache-ssl ] ; then
 					if [ "`/usr/sbin/modules-config $flavour query mod_ssl`" == "" ] ; then

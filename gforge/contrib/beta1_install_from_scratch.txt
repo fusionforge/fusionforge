@@ -200,7 +200,7 @@ charts)
 		cp /usr/local/src/php-4.3.1/php.ini-dist /usr/local/lib/php.ini
 		You need to edit /usr/local/apache/conf/httpd.conf so php will work, add these lines
 
-		LoadModule php4_module modules/libphp4.so
+		LoadModule php5_module modules/libphp5.so
 		AddType application/x-httpd-php .php	
 
 		/etc/init.d/httpd restart
