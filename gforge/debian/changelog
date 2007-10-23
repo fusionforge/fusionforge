@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6094-3+4) UNRELEASED; urgency=low
+gforge (4.6.99+svn6094-3+5) UNRELEASED; urgency=low
 
   * Fixed a few script permissions and shebangs.
   * gforge-mta-courier should really depend on courier-mta.
@@ -6,8 +6,9 @@ gforge (4.6.99+svn6094-3+4) UNRELEASED; urgency=low
     (closes: #444615).
   * Updated changelog entry for version 4.6.99+svn6094-1 to include the
     CVE ID.
+  * Collect SVN stats every day, not only on Sundays.
 
- -- Roland Mas <lolando@debian.org>  Wed, 03 Oct 2007 09:12:46 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 16 Oct 2007 18:18:24 +0200
 
 gforge (4.6.99+svn6094-3) unstable; urgency=low
 

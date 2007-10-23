@@ -12,4 +12,4 @@
 45 * * * * root [ -x /usr/share/gforge/plugins/scmsvn/cronjobs/svn_dump.pl ] && su -s /bin/sh gforge -c /usr/share/gforge/plugins/scmsvn/cronjobs/svn_dump.pl > /dev/null 2>&1 && [ -x /usr/share/gforge/plugins/scmsvn/cronjobs/svn_update.pl ] && /usr/share/gforge/plugins/scmsvn/cronjobs/svn_update.pl > /dev/null 2>&1
 
 # Statistics
-55 4 * * Sun root [ -x /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php ] && php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php > /dev/null 2>&1
+55 4 * * * root [ -x /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php ] && php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php > /dev/null 2>&1
