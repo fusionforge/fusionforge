@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6094-1+4) unstable; urgency=low
+gforge (4.6.99+svn6094-2) unstable; urgency=low
 
   * Added Homepage: field to debian/control.
   * debian/patches/use-snoopy-from-distro.dpatch: Use the Snoopy class as
@@ -12,7 +12,7 @@ gforge (4.6.99+svn6094-1+4) unstable; urgency=low
     real cert if possible, but this should ensure the initial SSL setup is
     at least working (closes: #433826).
 
- -- Roland Mas <lolando@debian.org>  Wed, 26 Sep 2007 15:42:43 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 26 Sep 2007 15:44:35 +0200
 
 gforge (4.6.99+svn6094-1) unstable; urgency=high
 
