@@ -1,3 +1,9 @@
+gforge (4.6.99+svn6094-3+1) UNRELEASED; urgency=low
+
+  * Fixed a few script permissions and shebangs.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 26 Sep 2007 18:58:27 +0200
+
 gforge (4.6.99+svn6094-3) unstable; urgency=low
 
   * Merged in a patch from Christian Perrier and the Debian i18n and

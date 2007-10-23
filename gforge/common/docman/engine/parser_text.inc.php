@@ -15,17 +15,17 @@ function parser_text($fichin)
 	$buff = fread ($fp, filesize($fichin));
 	// tout en minuscules
 	$buff = mb_strtolower($buff);
-	// élimination d'éventuels caractères unicode encore présents
+	// Ã©limination d'Ã©ventuels caractÃ¨res unicode encore prÃ©sents
 	$buff = mb_convert_encoding ($buff, "ascii");
-	// élimination caractères avec accents 
-	// et caractères spéciaux
+	// Ã©limination caractÃ¨res avec accents 
+	// et caractÃ¨res spÃ©ciaux
 	$buff = suppression_diacritics($buff);
 	// tous les mots dans un tableau
 	$a = explode(" ", $buff);
 	//sort($a);
-	// élimination des doublons
+	// Ã©limination des doublons
 	$a = array_unique($a);
-	// envoi du résultat sur stdout
+	// envoi du rÃ©sultat sur stdout
 	$rep = print_list($a);
 	return $rep;
 }
@@ -43,7 +43,7 @@ function print_list ($list)
 function suppression_diacritics($text)
 {
 	$b = $text;
-	$b = strtr($b, "éêèëàâäîïùûüôöç", "eeeeaaaiiuuuooc");
+	$b = strtr($b, "Ã©ÃªÃ¨Ã«Ã Ã¢Ã¤Ã®Ã¯Ã¹Ã»Ã¼Ã´Ã¶Ã§", "eeeeaaaiiuuuooc");
 	$b = strtr($b, "\t\r\n?.*'\":;,#![]()", "                 ");
 	return $b;
 }

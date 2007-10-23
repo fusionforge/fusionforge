@@ -93,6 +93,8 @@ install: build
 		$(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes
 	chown www-data $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
 	chmod 600 $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php
+	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/tools/send_reminders.php
+	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/quota_management/cronjobs/quota_update.pl
 	ln -s /var/lib/gforge/www/plugins/webcalendar/www/includes/settings.php \
 		$(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/includes/settings.php
 	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/tools/*.pl
@@ -115,6 +117,8 @@ install: build
 	cp -r plugins/scmsvn/bin/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
 	cp -r plugins/scmsvn/common/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/common/
 	cp -r plugins/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/
+	rm -f $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/README
+	find $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/ -type f | xargs chmod 0755
 	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
 
 	# gforge-common
@@ -142,6 +146,8 @@ install: build
 	ln -s database-pgsql.php $(CURDIR)/debian/gforge-common/usr/share/gforge/common/include/database.php
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
 
 	# gforge/debian/gforge-web-apache2

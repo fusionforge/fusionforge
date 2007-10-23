@@ -1,3 +1,5 @@
+#! /usr/bin/php5 -f
+
 <?php
 /**
 * This file is part of GForge.
