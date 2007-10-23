@@ -5,8 +5,23 @@
 # Christian Perrier <bubulle@debian.org>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#~ # Translation of gforge debconf templates to French
+#~ # Copyright (C) 2007 Christian Perrier <bubulle@debian.org>
+#~ # This file is distributed under the same license as the gforge package.
+#~ #
+#~ # Christian Perrier <bubulle@debian.org>, 2006, 2007.
+#~ msgid ""
+#~ msgstr ""
+#~ "Project-Id-Version: \n"
+#~ "Report-Msgid-Bugs-To: lolando@debian.org\n"
 "POT-Creation-Date: 2007-05-17 18:35+0200\n"
 "PO-Revision-Date: 2007-09-04 14:22+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
@@ -219,6 +234,7 @@ msgstr "Veuillez indiquer le nom d'hÃ´te du serveur LDAP."
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid "Do you want mail to ${noreply} to be deleted?"
 msgstr "Faut-il supprimer les courriers pour ${noreply}Â ?"
@@ -226,6 +242,7 @@ msgstr "Faut-il supprimer les courriers pour ${noreply}Â ?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid ""
 "Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
@@ -236,6 +253,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid ""
 "It is advised that you let the package direct e-mail to that address to a "
@@ -247,6 +265,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim.templates.dsfh-in:2001
 #: ../gforge-mta-postfix.templates.dsfh-in:2001
 msgid "Accepting this option will perform that redirection."
 msgstr "Si vous choisissez cette option, la redirection sera mise en place."
@@ -307,12 +326,14 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid "Gforge requires appropriate PAM-LDAP configuration"
 msgstr "Configuration PAM-LDAP correcte indispensable pour Gforge"
 
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid ""
 "Gforge requires the libpam-ldap package to be configured appropriately.  You "
 "might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
@@ -325,6 +346,7 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
 "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
@@ -406,13 +428,20 @@ msgstr ""
 #: ../dsf-helper/replace-files.templates:1001
 #: ../dsf-helper/replace-files.templates:2001
 msgid ""
-"Installer can either do them for you (and backup the current version in "
-"${file}.gforge-old), or write the changes to another file (${file}.gforge-"
-"new) and let you propagate the changes to ${file} yourself."
+"I can either do them for you (and backup the current version in ${file}."
+"gforge-old), or write the changes to another file (${file}.gforge-new) and "
+"let you propagate the changes to ${file} yourself."
 msgstr ""
 "Elles peuvent Ãªtre faites automatiquement (en sauvegardant la version "
 "actuelle dans ${file}.gforge-old) ou vous pouvez les faire vous-mÃªme dans "
 "${file}, les modifications proposÃ©es Ã©tant indiquÃ©es dans ${file}.gforge-new."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../dsf-helper/replace-files.templates:2001
+msgid "Shall I modify the ${file} automatically?"
+msgstr "Faut-il modifier ${file} automatiquement ?"
 
 #. Type: note
 #. Description
@@ -427,9 +456,9 @@ msgstr "VÃ©rification de ${file} indispensable"
 #: ../dsf-helper/replace-files.templates:3001
 msgid ""
 "You have chosen not to let the Gforge package update the ${file} file.  Very "
-"well, Installer has not changed it.  Instead, It has written the suggested "
-"changes into ${file}.gforge-new. Please check this file and apply the "
-"appropriate changes to ${file}."
+"well, I have not changed it.  Instead, I have written the suggested changes "
+"into ${file}.gforge-new. Please check this file and apply the appropriate "
+"changes to ${file}."
 msgstr ""
 "Vous avez choisi de ne pas laisser le paquet Gforge modifier le fichier "
 "${file}. En consÃ©quence, les modifications ont Ã©tÃ© sauvegardÃ©es dans ${file}."
@@ -670,6 +699,12 @@ msgstr ""
 "Pour que Gforge fonctionne complÃ¨tement, des modifications doivent Ãªtre "
 "apportÃ©es au fichier ${file}."
 
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:1001
+msgid "Shall I modify ${file} automatically?"
+msgstr "Faut-il modifier ${file} automatiquement ?"
+
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:1001
@@ -703,9 +738,148 @@ msgstr ""
 
 #. Type: select
 #. DefaultChoice
+#: ../dsf-helper/web-variables.templates:1001
 #: ../dsf-helper/web-variables.templates:1002
 msgid "English"
 msgstr "French"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Bulgarian"
+msgstr "bulgare"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Catalan"
+msgstr "catalan"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Chinese"
+msgstr "chinois (traditionnel)"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Dutch"
+msgstr "néerlandais"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Esperanto"
+msgstr "espéranto"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "French"
+msgstr "français"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "German"
+msgstr "allemand"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Greek"
+msgstr "grec"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Hebrew"
+msgstr "hébreu"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Indonesian"
+msgstr "indonésien"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Italian"
+msgstr "italien"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Japanese"
+msgstr "japonais"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Korean"
+msgstr "coréen"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Latin"
+msgstr "latin"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Norwegian"
+msgstr "norvégien"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Polish"
+msgstr "polonais"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "PortugueseBrazilian"
+msgstr "portugais du Brésil"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Portuguese"
+msgstr "portugais"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Russian"
+msgstr "russe"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "SimplifiedChinese"
+msgstr "chinois (simplifié)"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Spanish"
+msgstr "espagnol"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Swedish"
+msgstr "suédois"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Thai"
+msgstr "thaï"
 
 #. Type: select
 #. Description
