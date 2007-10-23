@@ -1,11 +1,8 @@
 # List of patches to apply
 # This one was used for testing and is not included in gforge upstream
 #taskdetailview
-#globalsoff
 ##remove-ads
 ##disable-tracker-reply-by-email
-##add-groupadminmenu-hook
 ##add-project-before-description-hook
-##missing-images
 ##fix-lists-url
 use-snoopy-from-distro
