@@ -1,12 +1,23 @@
-gforge (4.6.99+svn6081-0+1) UNRELEASED; urgency=low
+gforge (4.6.99+svn6094-1) unstable; urgency=high
+
+  * New SVN snapshot (r6094).  This includes a fix for an HTML injection
+    vulnerability possibly leading to cross-site scripting (CVE ID
+    pending), hence the high urgency.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Sep 2007 09:44:05 +0200
+
+gforge (4.6.99+svn6086-1) unstable; urgency=high
 
   * Re-added debian/po/*.po files that hadn't been ported to SVN trunk
     (closes: #439951).
   * Updated debian/po/fr.po, thanks to the debian-l10n-french team
     (closes: #440785).
   * Turned register_globals off.
+  * Removed non-free RFCs from source package (closes: #440889).
+  * New SVN snapshot (r6086).  This includes a fix for an SQL injection
+    vulnerability (CVE-2007-3913), hence the high urgency.
 
- -- Roland Mas <lolando@debian.org>  Tue, 04 Sep 2007 16:42:42 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 06 Sep 2007 13:43:45 +0200
 
 gforge (4.6.99+svn6078-1) unstable; urgency=low
 
