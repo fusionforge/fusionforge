@@ -1,8 +1,12 @@
-gforge (4.6.99+svn6094-1+1) UNRELEASED; urgency=low
+gforge (4.6.99+svn6094-1+2) UNRELEASED; urgency=low
 
   * Added Homepage: field to debian/control.
+  * debian/patches/use-snoopy-from-distro.dpatch: Use the Snoopy class as
+    provided by libphp-snoopy rather than shipping our own copy of it
+    (closes: #443951).
+  * Removed local copies from the binary packages, to be extra sure.
 
- -- Roland Mas <lolando@debian.org>  Thu, 20 Sep 2007 10:29:39 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 25 Sep 2007 09:48:54 +0200
 
 gforge (4.6.99+svn6094-1) unstable; urgency=high
 

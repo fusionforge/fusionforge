@@ -265,6 +265,9 @@ install: build
 	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fix-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 
+	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs echo rm -rf ; done
+
 	# Remove potential SCM artefacts from binary packages
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr | xargs echo rm -rf ; done
 
