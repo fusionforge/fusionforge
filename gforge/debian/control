@@ -119,7 +119,7 @@ Description: collaborative development tool - mail tools (using Postfix)
 
 Package: gforge-mta-courier
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, postfix, postfix-pgsql
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, courier-mta
 Provides: gforge-mta
 Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Courier)

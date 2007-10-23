@@ -1,8 +1,9 @@
-gforge (4.6.99+svn6094-3+1) UNRELEASED; urgency=low
+gforge (4.6.99+svn6094-3+2) UNRELEASED; urgency=low
 
   * Fixed a few script permissions and shebangs.
+  * gforge-mta-courier should really depend on courier-mta.
 
- -- Roland Mas <lolando@debian.org>  Wed, 26 Sep 2007 18:58:27 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 30 Sep 2007 15:26:25 +0200
 
 gforge (4.6.99+svn6094-3) unstable; urgency=low
 
