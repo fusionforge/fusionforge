@@ -1,8 +1,8 @@
-# Translation of gforge debconf templates to French
-# Copyright (C) 2007 Christian Perrier <bubulle@debian.org>
-# This file is distributed under the same license as the gforge package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Christian Perrier <bubulle@debian.org>, 2006, 2007.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
