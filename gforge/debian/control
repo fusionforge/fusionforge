@@ -17,7 +17,7 @@ Description: collaborative development tool - meta-package
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
+ page / FTP hosting, release management, etc. All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This meta-package installs a complete Gforge site.
@@ -30,8 +30,8 @@ Description: collaborative development tool - shared files
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package contains files and programs used by several other
  subpackages.
@@ -44,8 +44,8 @@ Description: collaborative development tool - extra plugins
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package contains a set of various plugins.
 
@@ -59,8 +59,8 @@ Description: collaborative development tool - web part (using Apache)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package contains the files needed to run the web part of
  Gforge on an Apache webserver.
@@ -70,7 +70,7 @@ Architecture: all
 Depends: gforge-web-apache2
 Description: transition package to gforge-web-apache2
  This package exists only as a means to make transitions to apache2
- easier.  You can safely uninstall it.
+ easier. You can safely uninstall it.
 
 Package: gforge-db-postgresql
 Architecture: all
@@ -81,8 +81,8 @@ Description: collaborative development tool - database (using PostgreSQL)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package installs, configures and maintains the Gforge
  database.
@@ -96,8 +96,8 @@ Description: collaborative development tool - mail tools (using Exim 4)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package configures the Exim 4 mail transfer agent to run
  Gforge.
@@ -111,8 +111,8 @@ Description: collaborative development tool - mail tools (using Postfix)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package configures the Postfix mail transfer agent to run
  Gforge.
@@ -126,8 +126,8 @@ Description: collaborative development tool - mail tools (using Courier)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package configures the Courier mail transfer agent to run
  Gforge.
@@ -141,8 +141,8 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package provides shell accounts authenticated via the PostgreSQL
  database to Gforge users.
@@ -156,8 +156,8 @@ Description: collaborative development tool - FTP management (using ProFTPd)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package configures the ProFTPd FTP server for Gforge.
 
@@ -170,8 +170,8 @@ Description: collaborative development tool - DNS management (using Bind9)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package configures and maintains the DNS zones for Gforge.
 
@@ -184,8 +184,8 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  Gforge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper, web
- page / FTP hosting, release management, etc.  All these services are
- integrated into one web site and managed via a nice web interface.
+ page / FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This package controls the interaction of Gforge and Mailman.
 
@@ -193,7 +193,7 @@ Package: gforge-plugin-scmcvs
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy
 Description: CVS plugin for Gforge
- This plug-in contains the CVS subsystem of Gforge.  It allows each
+ This plug-in contains the CVS subsystem of Gforge. It allows each
  Gforge project to have its own CVS repository, and gives some control
  over it to the project's administrator.
 Provides: gforge-plugin-scm
@@ -202,7 +202,7 @@ Package: gforge-plugin-scmsvn
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, subversion, subversion-tools, viewcvs, python-subversion, python (>= 2.3), php5-cli
 Description: Subversion plugin for Gforge
- This plug-in contains the Subversion subsystem of Gforge.  It allows
+ This plug-in contains the Subversion subsystem of Gforge. It allows
  each Gforge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
 Provides: gforge-plugin-scm

@@ -1,25 +1,24 @@
 Template: gforge/migrate_from_sourceforge
 Type: boolean
 Default: false
-_Description: Migrate to Gforge:
+_Description: Migrate to Gforge?
  The free software version of the Sourceforge software has been
- renamed to "Gforge".  Accordingly, the Debian package has been
+ renamed to "Gforge". Accordingly, the package has been
  renamed to "gforge", and "sourceforge" is no longer supported or
- maintained.  The transition to Gforge should be rather simple, as
+ maintained. The transition to Gforge should be rather simple, as
  most of the work is automated: once this package has been
- successfully installed, just install the "gforge" package and things
- should go smoothly.
+ successfully installed, just install the "gforge" package.
  .
  You still have the option not to upgrade to Gforge yet, for instance
- if you want to backup things beforehand.  If you refuse the upgrade,
+ if you want to backup things beforehand. If you refuse the upgrade,
  nothing will happen.
 
 Template: gforge/sourceforge_empty_package
 Type: note
-_Description: Sourceforge is no more
+_Description: Sourceforge discontinued
  Sourceforge has been renamed Gforge, and is no longer maintained as
  free software. This "sourceforge" package is only here to help you
- upgrade to Gforge.  Once you have installed this package and the one
- it depends on (gforge-sourceforge-transition), your data have been
- saved, and you can safely uninstall the "sourceforge" package and
+ upgrade to Gforge. Once you have installedit and the one
+ it depends on (gforge-sourceforge-transition), the data are saved
+ and you can safely uninstall the "sourceforge" package and
  proceed to install Gforge.

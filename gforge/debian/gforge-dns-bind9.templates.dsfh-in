@@ -9,52 +9,53 @@
 Template: gforge/shared/db_password
 Type: password
 _Description: Password used for the database:
- The connection to the DB system requires a password.  Please choose a
- password here.
+ The connection to the database system requires a password.
+ .
+ Please choose this connection password.
 
 Template: gforge/shared/db_password_confirm
 Type: password
-_Description: Password used for the database - again:
+_Description: Password confirmation:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/admin_login
 Type: string
 _Default: admin
-_Description: The Gforge administrator login:
- This Gforge account will have all privileges on the Gforge
- system.  It is needed to approve the creation of the projects.
+_Description: Gforge administrator login:
+ Please choose the Gforge administrator account name. It will have all
+ privileges on the system. It will be used to approve new projects'
+ creations.
 
 Template: gforge/shared/admin_password
 Type: password
-_Description: The Gforge administrator password:
- This Gforge account will have all privileges on the Gforge
- system.  It is needed to approve the creation of the projects.  Please
- type a password here.
+_Description: Gforge administrator password:
+ The Gforge administrator account that will have all privileges
+ on the system. It will be used to approve new projects' creations.
 
 Template: gforge/shared/admin_password_confirm
 Type: password
-_Description: The Gforge administrator password - again:
+_Description: Password confirmation:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-_Description: The initial list of skills:
+_Description: Initial list of skills:
  Gforge allows users to define a list of their skills, to be chosen
- amongst those present in the database.  This list is the initial list of
- skills that will enter the database.  Please enter the skill names
- separated by semi-colons `;'.
+ amongst those present in the database. This list is the initial list of
+ skills that will enter the database.
+ .
+ Please enter a semi-colon separated list of skill names.
 
 Template: gforge/shared/ldap_base_dn
 Type: string
-_Description: The LDAP base DN:
- The DN is used to refer to the LDAP directory unambiguously.  You could use,
- for instance, "dc=gforge,dc=example,dc=com"
+_Description: LDAP base DN:
+ The DN is used to refer to the LDAP directory unambiguously. 
+ Example: "dc=gforge,dc=example,dc=com"
 
 Template: gforge/shared/ldap_host
 Type: string
-_Description: The LDAP host:
- The hostname of the LDAP server.
+_Description: LDAP server host name:
 
 Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
@@ -63,26 +64,24 @@ _Description: Do you want mail to ${noreply} to be deleted?
  Gforge sends plenty of e-mail from the "${noreply}" address,
  and maybe even some e-mail to that address too.
  .
- It is advised that you let the package direct e-mail to that address to a
+ It is suggested that e-mail to that address is directed to a
  black hole (/dev/null), unless you have another use for that address.
- .
- Accepting this option will perform that redirection.
 
 Template: gforge/shared/ldap_web_add_password
 Type: password
 _Description: LDAP password used to add users from the web:
- In order to add users into the LDAP directory from the web, you need to
- provide a password.
+ Please provide the password to use when adding users into the LDAP directory
+ from the web.
 
 Template: gforge/shared/ldap_web_add_password_confirm
 Type: password
-_Description: LDAP password - again:
+_Description: Password confirmation:
  Please re-type the password for confirmation.
 
 Template: gforge/shared/mod_ssl_cert
 Type: note
-_Description: Generate an SSL certificate
- You need a valid SSL/TLS certificate to run Gforge.
+_Description: SSL certificate generation
+ A valid SSL/TLS certificate is needed to run Gforge.
  If you don't already have one, you'll have to run the
  "mod-ssl-makecert" command to generate one, and restart Apache
  afterwards.
@@ -92,47 +91,49 @@ _Description: Generate an SSL certificate
 
 Template: gforge/shared/pam_ldap_config
 Type: note
-_Description: Gforge requires appropriate PAM-LDAP configuration
+_Description: Appropriate PAM-LDAP configuration required for Gforge
  Gforge requires the libpam-ldap package to be configured
- appropriately.  You might need to "dpkg-reconfigure libpam-ldap" in
+ appropriately. You might need to "dpkg-reconfigure libpam-ldap" in
  order to fix incorrect parameters.
  .
  Known good values are: LDAP protocol version=3, make root database
  admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
- use for passwords=crypt.  Make sure that you type the same password
- for the libpam-ldap root password and the Gforge LDAP password.
+ use for passwords=crypt.
+ .
+ Make sure that you type the same password for the libpam-ldap root
+ password and the Gforge LDAP password.
 
 Template: gforge/shared/simple_dns
 Type: boolean
 Default: false
-_Description: Do you want a simple DNS setup?
- You can have a simple DNS setup wich uses wildcards to map all
+# Translators: SCM here means "Source Control Management"
+#              (cvs, svn, etc.)
+_Description: Do you want a simple DNS setup for Gforge?
+ You can use a simple DNS setup with wildcards to map all
  project web-hosts to a single IP, and direct all the scm-hosts
  to a single SCM server, or a complex setup wich allows you to
  have many servers as project web servers or SCM servers.
  .
- Even though you have a simple DNS setup, you can still have
- separate boxes for your project servers, it just assumes you
- have all the project web dirs on the same server and a single
- server for SCM.
+ Even though you use a simple DNS setup, you can still use
+ separate boxes for your project servers, it just assumes that
+ all the project web directories are on the same server with a single
+ SCM server.
 
 Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
 _Description: Do you want ${file} to be updated?
- In order for Gforge to be fully deinstalled, some changes must
- be made to the ${file} file.
+ In order for Gforge to be fully uninstalled, some changes must
+ happen in ${file}.
  .
- Installer can either do them for you (and backup the current version in
- ${file}.gforge-old), or write the changes to another file
- (${file}.gforge-new) and let you propagate the changes to
- ${file} yourself.
+ This can be done automatically (the current version will be backed up in
+ ${file}.gforge-old). Alternatively, the needed changes may be written 
+ to another file (${file}.gforge-new) to let you adapt ${file} yourself.
 
 Template: gforge/shared/file_changed
 Type: note
-_Description: Please check ${file}
- You have chosen not to let the Gforge package update the
- ${file} file.  Very well, Installer has not changed it.  Instead,
- It has written the suggested changes into ${file}.gforge-new.
- Please check this file and apply the appropriate changes
- to ${file}.
+_Description: ${file} must be checked
+ You have chosen to not change ${file} automatically.
+ .
+ Instead, the suggested changes have been written into ${file}.gforge-new.
+ Please check this file and apply the appropriate changes to ${file}.

@@ -1,5 +1,6 @@
 Template: gforge/shared/download_host
 Type: string
-_Description: Your download server:
- The hostname of the server that will host your Gforge packages. It should
- not be the same as your main Gforge host.
+_Description: Download server:
+ Please enter the host name of the server that will host the Gforge packages.
+ .
+ It should not be the same as the main Gforge host.

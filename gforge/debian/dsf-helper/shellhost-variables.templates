@@ -1,4 +1,5 @@
 Template: gforge/shared/shell_host
 Type: string
-_Description: Your shell server:
- The hostname of the server that will host your Gforge shell accounts
+_Description: Shell server:
+ Please enter the host name of the server that will host the Gforge
+ shell accounts.

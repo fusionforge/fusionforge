@@ -2,30 +2,28 @@ Template: gforge/shared/replace_file_install
 Type: boolean
 Default: false
 _Description: Do you want ${file} to be updated?
- In order for Gforge to fully work, some changes must be made to the
- ${file} file.
+ In order for Gforge to be operational, some changes must
+ happen in ${file}.
  .
- Installer can either do them for you (and backup the current version in
- ${file}.gforge-old), or write the changes to another file
- (${file}.gforge-new) and let you propagate the changes to ${file}
- yourself.
+ This can be done automatically (the current version will be backed up in
+ ${file}.gforge-old). Alternatively, the needed changes may be written 
+ to another file (${file}.gforge-new) to let you adapt ${file} yourself.
 
 Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
 _Description: Do you want ${file} to be updated?
- In order for Gforge to be fully deinstalled, some changes must be made to
- the ${file} file.
+ In order for Gforge to be fully uninstalled, some changes must
+ happen in ${file}.
  .
- Installer can either do them for you (and backup the current version in
- ${file}.gforge-old), or write the changes to another file
- (${file}.gforge-new) and let you propagate the changes to ${file}
- yourself.
+ This can be done automatically (the current version will be backed up in
+ ${file}.gforge-old). Alternatively, the needed changes may be written 
+ to another file (${file}.gforge-new) to let you adapt ${file} yourself.
 
 Template: gforge/shared/file_changed
 Type: note
-_Description: Please check ${file}
- You have chosen not to let the Gforge package update the ${file} file. 
- Very well, Installer has not changed it.  Instead, It has written the suggested
- changes into ${file}.gforge-new. Please check this file and apply the
- appropriate changes to ${file}.
+_Description: ${file} must be checked
+ You have chosen to not change ${file} automatically.
+ .
+ Instead, the suggested changes have been written into ${file}.gforge-new.
+ Please check this file and apply the appropriate changes to ${file}.
