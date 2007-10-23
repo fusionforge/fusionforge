@@ -1,8 +1,17 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/newsadmin_groupid
 Type: string
 Default: 2
 _Description: News administrative group ID:
- The members of the news admin group can approve news for the Gforge main
+ The members of the news admin group can approve news for the GForge main
  page. This group's ID must not be 1. This should be changed only if
  you upgrade from a previous version and want to keep the data.
 

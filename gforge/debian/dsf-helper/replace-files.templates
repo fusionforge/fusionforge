@@ -1,9 +1,18 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/replace_file_install
 Type: boolean
 Default: false
 _Description: Do you want ${file} to be updated?
- In order for Gforge to be operational, some changes must
- happen in ${file}.
+ In order for GForge to be operational, some changes are needed
+ in ${file}.
  .
  This can be done automatically (the current version will be backed up in
  ${file}.gforge-old). Alternatively, the needed changes may be written 
@@ -13,8 +22,8 @@ Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
 _Description: Do you want ${file} to be updated?
- In order for Gforge to be fully uninstalled, some changes must
- happen in ${file}.
+ In order for GForge to be fully uninstalled, some changes are needed
+ in ${file}.
  .
  This can be done automatically (the current version will be backed up in
  ${file}.gforge-old). Alternatively, the needed changes may be written 

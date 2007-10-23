@@ -1,3 +1,12 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 #DSFHELPER:common-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
@@ -5,9 +14,9 @@
 Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
-_Description: Do you want mail to ${noreply} to be deleted?
- Gforge sends plenty of e-mail from the "${noreply}" address,
- and maybe even some e-mail to that address too.
+_Description: Do you want mail to ${noreply} to be discarded?
+ GForge sends and receives plenty of e-mail to and from the
+ "${noreply}" address.
  .
- It is suggested that e-mail to that address is directed to a
+ E-mail to that address should be directed to a
  black hole (/dev/null), unless you have another use for that address.

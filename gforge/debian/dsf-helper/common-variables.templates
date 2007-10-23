@@ -1,19 +1,28 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/domain_name
 Type: string
-_Description: Gforge domain or subdomain name:
- Please enter the domain that will host the Gforge installation. Some
- services will be given their own subdomain in that domain (scm,
- lists, etc.).
+_Description: GForge domain or subdomain name:
+ Please enter the domain that will host the GForge installation. Some
+ services (scm, lists, etc.) will be given their own subdomain in that
+ domain.
 
 Template: gforge/shared/server_admin
 Type: string
-_Description: Gforge administrator email address:
- Please enter the email address of the Gforge administrator of this site. It
+_Description: GForge administrator e-mail address:
+ Please enter the e-mail address of the GForge administrator of this site. It
  will be used when problems occur.
 
 Template: gforge/shared/system_name
 Type: string
-Default: Gforge
-_Description: Gforge system name:
- Please enter the name of the system. It is used in various places
+Default: GForge
+_Description: GForge system name:
+ Please enter the name of the GForge system. It is used in various places
  throughout the system.

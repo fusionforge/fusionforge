@@ -1,9 +1,18 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/db_password
 Type: password
 _Description: Password used for the database:
- The connection to the database system requires a password.
+ Connections to the database system are authenticated by a password.
  .
- Please choose this connection password.
+ Please choose the connection password.
 
 Template: gforge/shared/db_password_confirm
 Type: password

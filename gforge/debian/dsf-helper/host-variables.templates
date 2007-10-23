@@ -1,7 +1,16 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/ip_address
 Type: string
 _Description: IP address:
- Please enter the IP address of the server that will host the Gforge
+ Please enter the IP address of the server that will host the GForge
  installation.
  .
- This is needed for the Apache virtual hosting configuration.
+ This is needed for the configuration of Apache virtual hosting.

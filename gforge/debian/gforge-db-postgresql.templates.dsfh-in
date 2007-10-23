@@ -1,3 +1,12 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 #DSFHELPER:replace-files#
 
 #DSFHELPER:common-variables#
@@ -5,7 +14,7 @@
 Template: gforge/shared/shell_host
 Type: string
 _Description: Shell server:
- Please enter the host name of the server that will host the Gforge
+ Please enter the hostname of the server that will host the GForge
  shell accounts.
 
 #DSFHELPER:users-variables#
@@ -15,34 +24,37 @@ _Description: Shell server:
 Template: gforge/shared/download_host
 Type: string
 _Description: Download server:
- Please enter the host name of the server that will host the Gforge
+ Please enter the hostname of the server that will host the GForge
  packages. 
  .
- It should not be the same as the main Gforge host.
+ It should not be the same as the main GForge host.
 
 #DSFHELPER:dbpasswd-variables#
 
 Template: gforge/shared/admin_login
 Type: string
 _Default: admin
-_Description: Gforge administrator login:
- Please choose the Gforge administrator account name. It will have all
- privileges on the system. It will be used to approve new projects'
- creations.
+_Description: GForge administrator login:
+ The GForge administrator account will have full privileges on the
+ system. It will be used to approve the creation of new projects.
+ .
+ Please choose the username for this account.
 
 Template: gforge/shared/ip_address
 Type: string
 _Description: IP address:
- Please enter the IP address of the server that will host the Gforge
+ Please enter the IP address of the server that will host the GForge
  installation.
  .
- This is needed for the Apache virtual hosting configuration.
+ This is needed for the configuration of Apache virtual hosting.
 
 Template: gforge/shared/admin_password
 Type: password
-_Description: Gforge administrator password:
- The Gforge administrator account that will have all privileges
- on the system. It will be used to approve new projects' creations.
+_Description: GForge administrator password:
+ The GForge administrator account will have full privileges on the
+ system. It will be used to approve the creation of new projects.
+ .
+ Please choose the password for this account.
 
 Template: gforge/shared/admin_password_confirm
 Type: password
@@ -53,11 +65,11 @@ Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 _Description: Initial list of skills:
- Gforge allows users to define a list of their skills, to be chosen
- amongst those present in the database. This list is the initial list of
+ GForge allows users to define a list of their skills, to be chosen from
+ those present in the database. This list is the initial list of
  skills that will enter the database.
  .
- Please enter a semi-colon separated list of skill names.
+ Please enter a semicolon-separated list of skill names.
 
 #DSFHELPER:dbhost-variables#
 

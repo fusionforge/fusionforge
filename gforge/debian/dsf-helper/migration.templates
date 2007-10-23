@@ -1,24 +1,33 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/migrate_from_sourceforge
 Type: boolean
 Default: false
-_Description: Migrate to Gforge?
- The free software version of the Sourceforge software has been
- renamed to "Gforge". Accordingly, the package has been
- renamed to "gforge", and "sourceforge" is no longer supported or
- maintained. The transition to Gforge should be rather simple, as
+_Description: Migrate to GForge?
+ SourceForge is no longer maintained as free software; the free
+ version is now named GForge. Accordingly, the package has been
+ renamed to 'gforge', and 'sourceforge' is no longer supported or
+ maintained. The transition to GForge should be rather simple, as
  most of the work is automated: once this package has been
- successfully installed, just install the "gforge" package.
+ successfully installed, just install the 'gforge' package.
  .
- You still have the option not to upgrade to Gforge yet, for instance
- if you want to backup things beforehand. If you refuse the upgrade,
+ You still have the option not to upgrade to GForge yet, for instance
+ if you want to back things up beforehand. If you refuse the upgrade,
  nothing will happen.
 
 Template: gforge/sourceforge_empty_package
 Type: note
 _Description: Sourceforge discontinued
- Sourceforge has been renamed Gforge, and is no longer maintained as
- free software. This "sourceforge" package is only here to help you
- upgrade to Gforge. Once you have installedit and the one
- it depends on (gforge-sourceforge-transition), the data are saved
- and you can safely uninstall the "sourceforge" package and
- proceed to install Gforge.
+ SourceForge is no longer maintained as free software; the free
+ version is now named GForge, and the 'sourceforge' package is now
+ a dummy package to help install 'gforge'. Once this dummy package
+ and the 'gforge-sourceforge-transition' are installed, data will be
+ saved so that you can safely uninstall the 'sourceforge' package and
+ proceed to install 'gforge'.

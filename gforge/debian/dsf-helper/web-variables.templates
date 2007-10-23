@@ -1,3 +1,12 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
 Template: gforge/shared/sys_lang
 Type: select
 __Choices: English, Bulgarian, Catalan, Chinese (Traditional), Dutch, Esperanto, French, German, Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, Polish, Portuguese (Brazilian), Portuguese, Russian, Chinese (Simplified), Spanish, Swedish, Thai
@@ -9,5 +18,5 @@ Template: gforge/shared/sys_theme
 Type: string
 Default: gforge
 _Description: Default theme:
- Please choose the default theme for web pages. This has to be a valid
+ Please choose the default theme for web pages. This must be a valid
  name.
