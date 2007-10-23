@@ -1,3 +1,9 @@
+gforge (4.6.99+svn6094-1+1) UNRELEASED; urgency=low
+
+  * Added Homepage: field to debian/control.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 20 Sep 2007 10:29:39 +0200
+
 gforge (4.6.99+svn6094-1) unstable; urgency=high
 
   * New SVN snapshot (r6094).  This includes a fix for an HTML injection
