@@ -8,7 +8,7 @@
   allow from all
   php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www/include:."
   php_admin_value default_charset "UTF-8"
-  php_flag register_globals "On"
+  # php_flag register_globals "On"
   ###
   ### safe PHP settings
   ##

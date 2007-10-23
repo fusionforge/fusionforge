@@ -65,17 +65,17 @@ function browser_is_netscape() {
 
 
 if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
-	$BROWSER_VER=$log_version[1];
-	$BROWSER_AGENT='IE';
+	$GLOBALS['BROWSER_VER']=$log_version[1];
+	$GLOBALS['BROWSER_AGENT']='IE';
 } elseif (ereg( 'Opera ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
-	$BROWSER_VER=$log_version[1];
-	$BROWSER_AGENT='OPERA';
+	$GLOBALS['BROWSER_VER']=$log_version[1];
+	$GLOBALS['BROWSER_AGENT']='OPERA';
 } elseif (ereg( 'Mozilla/([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
-	$BROWSER_VER=$log_version[1];
-	$BROWSER_AGENT='MOZILLA';
+	$GLOBALS['BROWSER_VER']=$log_version[1];
+	$GLOBALS['BROWSER_AGENT']='MOZILLA';
 } else {
-	$BROWSER_VER=0;
-	$BROWSER_AGENT='OTHER';
+	$GLOBALS['BROWSER_VER']=0;
+	$GLOBALS['BROWSER_AGENT']='OTHER';
 }
 
 /*
@@ -83,15 +83,15 @@ if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_
 */
 
 if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Win')) {
-	$BROWSER_PLATFORM='Win';
+	$GLOBALS['BROWSER_PLATFORM']='Win';
 } else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Mac')) {
-	$BROWSER_PLATFORM='Mac';
+	$GLOBALS['BROWSER_PLATFORM']='Mac';
 } else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Linux')) {
-	$BROWSER_PLATFORM='Linux';
+	$GLOBALS['BROWSER_PLATFORM']='Linux';
 } else if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Unix')) {
-	$BROWSER_PLATFORM='Unix';
+	$GLOBALS['BROWSER_PLATFORM']='Unix';
 } else {
-	$BROWSER_PLATFORM='Other';
+	$GLOBALS['BROWSER_PLATFORM']='Other';
 }
 
 /*

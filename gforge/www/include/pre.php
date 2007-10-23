@@ -87,7 +87,7 @@ require_once('common/include/forms.php');
 
 db_connect();
 
-if (!$conn) {
+if (!$GLOBALS['conn']) {
 	print "$sys_name Could Not Connect to Database: ".db_error();
 	exit;
 }
