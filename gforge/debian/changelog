@@ -1,11 +1,13 @@
-gforge (4.6.99+svn6094-4+1) unstable; urgency=low
+gforge (4.6.99+svn6094-4+2) unstable; urgency=low
 
   * Updated package description and Debconf templates after a review by
     the debian-l10n-english team (closes: #446569).
   * Updated debian/po/de.po, from Helge Kreutzmann <debian@helgefjell.de>
     (closes: #447170).
+  * Ditto for debian/po/gl.po, from Jacobo Tarrio <jtarrio@trasno.net>
+    (closes: #447194).
 
- -- Roland Mas <lolando@debian.org>  Thu, 18 Oct 2007 18:20:48 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Oct 2007 22:22:44 +0200
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 
