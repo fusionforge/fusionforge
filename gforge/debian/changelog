@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6078-1+2) unstable; urgency=low
+gforge (4.6.99+svn6081-0+1) UNRELEASED; urgency=low
 
   * Re-added debian/po/*.po files that hadn't been ported to SVN trunk
     (closes: #439951).
@@ -6,7 +6,7 @@ gforge (4.6.99+svn6078-1+2) unstable; urgency=low
     (closes: #440785).
   * Turned register_globals off.
 
- -- Roland Mas <lolando@debian.org>  Tue, 04 Sep 2007 14:58:08 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 04 Sep 2007 16:42:42 +0200
 
 gforge (4.6.99+svn6078-1) unstable; urgency=low
 
