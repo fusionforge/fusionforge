@@ -26,8 +26,8 @@ $Config['Enabled'] = false ;
 // Path to uploaded files relative to the document root.
 $Config['UserFilesPath'] = '/UserFiles/' ;
 
-$Config['AllowedExtensions']['File']	= array() ;
-$Config['DeniedExtensions']['File']		= array('php','php3','php5','phtml','asp','aspx','ascx','jsp','cfm','cfc','pl','bat','exe','dll','reg','cgi') ;
+$Config['AllowedExtensions']['File']	= array('7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'flv', 'gif', 'gz', 'gzip', 'jpeg', 'jpg', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'pdf', 'png', 'ppt', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vsd', 'wav', 'wma', 'wmv', 'xls', 'xml', 'zip') ;
+$Config['DeniedExtensions']['File']		= array() ;
 
 $Config['AllowedExtensions']['Image']	= array('jpg','gif','jpeg','png') ;
 $Config['DeniedExtensions']['Image']	= array() ;
