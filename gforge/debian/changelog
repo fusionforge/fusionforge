@@ -1,11 +1,13 @@
-gforge (4.6.99+svn6094-3+3) UNRELEASED; urgency=low
+gforge (4.6.99+svn6094-3+4) UNRELEASED; urgency=low
 
   * Fixed a few script permissions and shebangs.
   * gforge-mta-courier should really depend on courier-mta.
   * Updated debian/po/de.po, from Helge Kreutzmann <debian@helgefjell.de>
     (closes: #444615).
+  * Updated changelog entry for version 4.6.99+svn6094-1 to include the
+    CVE ID.
 
- -- Roland Mas <lolando@debian.org>  Sun, 30 Sep 2007 15:31:15 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 03 Oct 2007 09:12:46 +0200
 
 gforge (4.6.99+svn6094-3) unstable; urgency=low
 
@@ -34,8 +36,8 @@ gforge (4.6.99+svn6094-2) unstable; urgency=low
 gforge (4.6.99+svn6094-1) unstable; urgency=high
 
   * New SVN snapshot (r6094).  This includes a fix for an HTML injection
-    vulnerability possibly leading to cross-site scripting (CVE ID
-    pending), hence the high urgency.
+    vulnerability possibly leading to cross-site scripting
+    (CVE-2007-3918), hence the high urgency.
 
  -- Roland Mas <lolando@debian.org>  Thu, 13 Sep 2007 09:44:05 +0200
 
