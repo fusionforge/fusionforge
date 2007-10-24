@@ -1,14 +1,8 @@
-gforge (4.6.99+svn6125+removepermtables-0+1) unstable; urgency=low
+gforge (4.6.99+svn6148-0+1) UNRELEASED; urgency=low
 
-  * Started work on the remove-perm-tables branch.  The goal is to get rid
-    of the forum_perm, project_perm and artifact_perm tables, since the
-    information they contain is redundant with RBAC.
-
- -- Roland Mas <lolando@debian.org>  Mon, 24 Sep 2007 09:31:25 +0200
-
-gforge (4.6.99+svn6125-0+1) UNRELEASED; urgency=low
-
-  * New SVN snapshot (r6125).
+  * New SVN snapshot (r6148), including the removal of a few tables
+    (replaced by views where needed, or access to the RBAC tables when
+    possible).
   * Updated package description and Debconf templates after a review by
     the debian-l10n-english team (closes: #446569).
   * Updated debian/po/de.po, from Helge Kreutzmann <debian@helgefjell.de>
@@ -23,7 +17,7 @@ gforge (4.6.99+svn6125-0+1) UNRELEASED; urgency=low
     security vulnerability (CVE-2007-5156) in the copy of FCKeditor
     embedded in gforge-plugins-extra (closes: #447590).
 
- -- Roland Mas <lolando@debian.org>  Tue, 23 Oct 2007 20:55:10 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 24 Oct 2007 16:18:01 +0200
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 
