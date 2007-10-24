@@ -2749,6 +2749,9 @@ $dbh->{RaiseError} = 1;
 
       &update_with_sql("20051103_transiciel_motscle_document","4.6-1");
 	
+      &update_with_sql("20070924-forum-perm","4.6.99-1");
+      &update_with_sql("20070924-project-perm","4.6.99-2");
+      &update_with_sql("20070924-artifact-perm","4.6.99-3");
 	
     ########################### INSERT HERE #################################
 

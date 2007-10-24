@@ -193,10 +193,6 @@ class Forum extends Error {
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 		$this->fetchData($this->group_forum_id);
-		if (!$this->addAllUsers()) {
-			db_rollback();
-			return false;
-		}
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
 			if (!$fm->create("Welcome to ".$forum_name,"Welcome to ".$forum_name)) {
@@ -423,7 +419,12 @@ class Forum extends Error {
 	 *	@return	array 	The array of user_id's.
 	 */
 	function getForumAdminIDs() {
-		$sql = "SELECT user_id FROM forum_perm WHERE group_forum_id='".$this->getID()."' and perm_level > 1";
+		$sql = "SELECT user_group.user_id
+                        FROM user_group, role_setting
+                        WHERE role_setting.section_name='forum'
+                          AND role_setting.ref_id='".$this->getID()."'
+                          AND role_setting.value > 1
+                          AND user_group.role_id = role_setting.role_id";
 		$result = db_query($sql);
 		return util_result_column_to_array($result);
 	}
@@ -661,138 +662,6 @@ class Forum extends Error {
 		return true;
 	}
 
-	/**
-	 *	addAllUsers - add all users to this forum.
-	 *
-	 *	@return boolean success.
-	 */
-	function addAllUsers() {
-		global $sys_news_group;
-		if ($this->Group->getID() == $sys_news_group) {
-			return true;
-		}
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
-			SELECT '".$this->getID()."',user_id,forum_flags
-			FROM user_group
-			WHERE 
-			group_id='".$this->Group->getID()."'
-			AND NOT EXISTS (SELECT user_id FROM forum_perm
-			WHERE group_forum_id='".$this->getID()."'
-			AND user_id=user_group.user_id);";
-		$res= db_query($sql);
-		if (!$res) {
-			$this->setError(db_error());
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *  addUser - add a user to this subproject.
-	 *
-	 *  @param  int  user_id of the new user.
-	 *  @return boolean success.
-	 */
-	function addUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="SELECT * FROM forum_perm
-			WHERE group_forum_id='".$this->getID()."'
-			AND user_id='$id'";
-		$result=db_query($sql);
-		if (db_numrows($result) > 0) {
-			return true;
-		} else {
-			$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
-				VALUES ('".$this->getID()."','$id',0)";
-			$result=db_query($sql);
-			if ($result && db_affected_rows($result) > 0) {
-				return true;
-			} else {
-				$this->setError(db_error());
-				return false;
-			}
-		}
-	}
-
-	/**
-	 *  updateUser - update a user's permissions.
-	 *
-	 *  @param  int  user_id of the user to update.
-	 *  @param  int  (0) read only, (1) tech only, (2) admin & tech (3) admin only.
-	 *  @return boolean success.
-	 */
-	function updateUser($id,$perm_level) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		//
-		//	Update and test if it already exists
-		//
-		$sql="UPDATE forum_perm SET perm_level='$perm_level'
-			WHERE user_id='$id' AND group_forum_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if (db_affected_rows($result) < 1) {
-			//
-			//	If not, insert it.
-			//
-			$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level) VALUES 
-				('".$this->getID()."','$id','$perm_level')";
-			$result=db_query($sql);
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *  deleteUser - delete a user's permissions.
-	 *
-	 *  @param  int  user_id of the user who's permissions to delete.
-	 *  @return boolean success.
-	 */
-	function deleteUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="DELETE FROM forum_perm
-			WHERE user_id='$id' AND group_forum_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if ($result) {
-			return true;
-		} else {
-			$this->setError(db_error());
-			return false;
-		}
-	}
-
-
 	/*
 
 		USER PERMISSION FUNCTIONS
@@ -800,7 +669,7 @@ class Forum extends Error {
 	*/
 
 	/**
-	 *  userCanView - determine if the user can view this subproject.
+	 *  userCanView - determine if the user can view this forum.
 	 *
 	 *  @return boolean   user_can_view.
 	 */
@@ -812,7 +681,7 @@ class Forum extends Error {
 				return false;
 			} else {
 				//
-				//  You must have an entry in project_perm if this subproject is not public
+				//  You must have a role in the project if this forum is not public
 				//
 				if ($this->getCurrentUserPerm() >= 0) {
 					return true;
@@ -899,7 +768,7 @@ class Forum extends Error {
 	}
 
 	/**
-	 *  getCurrentUserPerm - get the logged-in user's perms from forum_perm.
+	 *  getCurrentUserPerm - get the logged-in user's perms from his role.
 	 *
 	 *  @return int perm level for the logged-in user.
 	 */
@@ -908,10 +777,12 @@ class Forum extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="select perm_level
-				FROM forum_perm
-				WHERE group_forum_id='". $this->getID() ."'
-				AND user_id='".user_getid()."'";
+				$sql="SELECT role_setting.value
+				FROM role_setting, user_group
+				WHERE role_setting.ref_id='". $this->getID() ."'
+				AND user_group.role_id = role_setting.role_id
+                                AND user_group.user_id='".user_getid()."'
+                                AND role_setting.section_name='forum'";
 				$this->current_user_perm=db_result(db_query($sql),0,0);
 
 				// Return no access if no access rights defined.

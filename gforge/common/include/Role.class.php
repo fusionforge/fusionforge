@@ -412,72 +412,6 @@ class Role extends Error {
 
 
 						}
-//
-//	If we decide to use a "RBAC Group" to define template roles
-//	The next 3 items will have to be modified to remap IDs for each project
-//
-
-					//
-					//	Forum
-					//
-					} elseif ($usection_name == 'forum') {
-						$sql="UPDATE forum_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_forum_id='$uref_id'
-							AND user_id IN (SELECT ug.user_id FROM
-							user_group ug, forum_group_list fgl, forum_perm fp
-							WHERE ug.role_id='".$this->getID()."'
-							AND ug.group_id=fgl.group_id AND 
-							fgl.group_forum_id='$uref_id'
-							AND ug.user_id=fp.user_id
-							AND fp.group_forum_id=fgl.group_forum_id)";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::forum::'.db_error());
-							db_rollback();
-							return false;
-						}
-					} elseif ($usection_name == 'pm') {
-						$sql="UPDATE project_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_project_id='$uref_id'
-							AND user_id IN (SELECT ug.user_id FROM
-							user_group ug, project_group_list pgl, project_perm pp
-							WHERE ug.role_id='".$this->getID()."'
-							AND ug.group_id=pgl.group_id AND
-                            pgl.group_project_id='$uref_id'
-							AND ug.user_id=pp.user_id
-							AND pp.group_project_id=pgl.group_project_id)";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::pm::'.db_error());
-							db_rollback();
-							return false;
-						}
-					} elseif ($usection_name == 'tracker') {
-						$sql="UPDATE artifact_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_artifact_id='$uref_id'
-							AND user_id IN (SELECT ug.user_id FROM
-							user_group ug, artifact_group_list agl, artifact_perm ap 
-							WHERE ug.role_id='".$this->getID()."'
-							AND ug.group_id=agl.group_id AND
-                            agl.group_artifact_id='$uref_id'
-							AND ug.user_id=ap.user_id
-							AND agl.group_artifact_id=ap.group_artifact_id)";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::tracker::'.db_error());
-							db_rollback();
-							return false;
-						}
-
 					} elseif ($usection_name == 'docman') {
 						$update_usergroup=true;
 					} elseif ($usection_name == 'forumadmin') {
@@ -626,54 +560,6 @@ class Role extends Error {
 								db_rollback();
 								return false;
 							}
-						}
-
-//
-//	If we decide to use a "RBAC Group" to define template roles
-//	The next 3 items will have to be modified to remap IDs for each project
-//
-
-					//
-					//	Forum
-					//
-					} elseif ($usection_name == 'forum') {
-						$sql="UPDATE forum_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_forum_id='$uref_id'
-							AND user_id='$user_id'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::forum::'.db_error());
-							db_rollback();
-							return false;
-						}
-					} elseif ($usection_name == 'pm') {
-						$sql="UPDATE project_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_project_id='$uref_id'
-							AND user_id='$user_id'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::pm::'.db_error());
-							db_rollback();
-							return false;
-						}
-					} elseif ($usection_name == 'tracker') {
-						$sql="UPDATE artifact_perm
-							SET perm_level='$uvalue'
-							WHERE
-							group_artifact_id='$uref_id'
-							AND user_id='$user_id'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
-						if (!$res) {
-							$this->setError('update::tracker::'.db_error());
-							db_rollback();
-							return false;
 						}
 
 					} elseif ($usection_name == 'docman') {

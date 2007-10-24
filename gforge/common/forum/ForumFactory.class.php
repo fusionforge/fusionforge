@@ -104,10 +104,14 @@ class ForumFactory extends Error {
 				if ($perm->isForumAdmin()) {
 					$exists='';
 				} else {
-					$exists=" AND group_forum_id IN (SELECT group_forum_ID
-					FROM forum_perm
-					WHERE perm_level >= 0 AND group_forum_id=forum_group_list_vw.group_forum_id
-					AND user_id='".user_getid()."') ";
+					$exists=" AND group_forum_id IN (SELECT role_setting.ref_id
+					FROM role_setting, user_group
+					WHERE role_setting.value >= 0
+                                          AND role_setting.section_name = 'forum'
+                                          AND role_setting.ref_id=forum_group_list_vw.group_forum_id
+                                          
+   					  AND user_group.role_id = role_setting.role_id
+					  AND user_group.user_id='".user_getid()."') ";
 				}
 			}
 		} else {

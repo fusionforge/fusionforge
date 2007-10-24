@@ -246,6 +246,9 @@ install: build
 	install -m 644 db/2005*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/2006*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20070924-forum-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20070924-project-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20070924-artifact-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim4
 	install -m 755 deb-specific/install-exim4.sh $(CURDIR)/debian/gforge-mta-exim4/usr/lib/gforge/bin/

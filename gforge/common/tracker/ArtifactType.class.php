@@ -271,13 +271,8 @@ class ArtifactType extends Error {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->addAllUsers()) {
-					db_rollback();
-					return false;
-				} else {
-					db_commit();
-					return $id;
-				}
+				db_commit();
+				return $id;
 			}
 		}
 	}
@@ -832,9 +827,6 @@ class ArtifactType extends Error {
 		db_query("DELETE FROM artifact_canned_responses 
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '1'.db_error();
-		db_query("DELETE FROM artifact_perm
-			WHERE group_artifact_id='".$this->getID()."'");
-//echo '3'.db_error();
 		db_query("DELETE FROM artifact_counts_agg
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '5'.db_error();
@@ -947,130 +939,6 @@ class ArtifactType extends Error {
 		}
 	}
 
-	/**
-	 *  addAllUsers - add all users to this artifact.
-	 *
-	 *  @return boolean success.
-	 */
-	function addAllUsers() {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level)
-			SELECT '".$this->getID()."',user_id,artifact_flags
-			FROM user_group
-			WHERE
-			group_id='".$this->Group->getID()."'
-			AND NOT EXISTS (SELECT user_id FROM artifact_perm
-			WHERE group_artifact_id='".$this->getID()."'
-			AND user_id=user_group.user_id);";
-		$res= db_query($sql);
-		if (!$res) {
-			$this->setError(db_error());
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *	addUser - add a user to this ArtifactType.
-	 *
-	 *	@param	int		user_id of the new user.
-	 *	@return boolean	success.
-	 */
-	function addUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="SELECT * FROM artifact_perm 
-			WHERE group_artifact_id='".$this->getID()."' 
-			AND user_id='$id'";
-		$result=db_query($sql);
-		if (db_numrows($result) > 0) {
-			return true;
-		} else {
-			$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
-				VALUES ('".$this->getID()."','$id',0)";
-			$result=db_query($sql);
-			if ($result && db_affected_rows($result) > 0) {
-				return true;
-			} else {
-				$this->setError(db_error());
-				return false;
-			}
-		}
-	}
-
-	/**
-	 *	updateUser - update a user's permissions.
-	 *
-	 *	@param	int		user_id of the user to update.
-	 *	@param	int		(0) read only, (1) tech only, (2) admin & tech (3) admin only.
-	 *	@return boolean	success.
-	 */
-	function updateUser($id,$perm_level) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="UPDATE artifact_perm SET perm_level='$perm_level'
-			WHERE user_id='$id' AND group_artifact_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if (db_affected_rows($result) < 1) {
-			//
-			//  If not, insert it.
-			//
-			$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) VALUES
-				('".$this->getID()."','$id','$perm_level')";
-			$result=db_query($sql);
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *	deleteUser - delete a user's permissions.
-	 *
-	 *	@param	int		user_id of the user who's permissions to delete.
-	 *	@return boolean	success.
-	 */
-	function deleteUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="DELETE FROM artifact_perm
-			WHERE user_id='$id' AND group_artifact_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if ($result) {
-			return true;
-		} else {
-			$this->setError(db_error());
-			return false;
-		}
-	}
-
 	/*
 
 		USER PERMISSION FUNCTIONS
@@ -1090,7 +958,7 @@ class ArtifactType extends Error {
 				return false;
 			} else {
 				//
-				//	You must have an entry in artifact_perm if this tracker is not public
+				//	You must have a role in the project if this tracker is not public
 				//
 				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 0) {
 					return true;
@@ -1140,7 +1008,7 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getCurrentUserPerm - get the logged-in user's perms from artifact_perm.
+	 *	getCurrentUserPerm - get the logged-in user's perms from his role
 	 *
 	 *	@return int perm level for the logged-in user.
 	 */
@@ -1149,10 +1017,12 @@ class ArtifactType extends Error {
 			return 0;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="select perm_level
-				FROM artifact_perm
-				WHERE group_artifact_id='". $this->getID() ."'
-				AND user_id='".user_getid()."'";
+				$sql="SELECT role_setting.value
+				FROM role_setting, user_group
+				WHERE role_setting.ref_id='". $this->getID() ."'
+				AND user_group.role_id = role_setting.role_id
+                                AND user_group.user_id='".user_getid()."'
+                                AND role_setting.section_name='tracker'";
 				$this->current_user_perm=db_result(db_query($sql),0,0);
 			}
 			return $this->current_user_perm;
@@ -1228,5 +1098,10 @@ class ArtifactType extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

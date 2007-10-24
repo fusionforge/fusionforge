@@ -177,11 +177,6 @@ class ProjectGroup extends Error {
 		$this->group_project_id=db_insertid($result,'project_group_list','group_project_id');
 		$this->fetchData($this->group_project_id);
 
-		if (!$this->addAllUsers()) {
-			db_rollback();
-			return false;
-		}
-
 		db_commit();
 		return true;
 	}
@@ -326,11 +321,13 @@ class ProjectGroup extends Error {
 	 */
 	function getTechnicians () {
 		if (!$this->technicians) {
-			$sql="SELECT users.user_id,users.realname 
-				FROM users,project_perm 
-				WHERE users.user_id=project_perm.user_id 
-				AND project_perm.group_project_id='". $this->getID() ."' 
-				AND project_perm.perm_level IN (1,2) 
+			$sql="SELECT users.user_id, users.realname 
+				FROM users, role_setting, user_group
+				WHERE users.user_id=user_group.user_id
+                                AND role_setting.role_id=user_group.role_id
+                                AND role_setting.ref_id='". $this->getID() ."' 
+				AND role_setting.value IN (1,2) 
+                                AND role_setting.section_name='pm'
 				ORDER BY users.realname";
 			$this->technicians=db_query($sql);
 		}
@@ -415,16 +412,6 @@ class ProjectGroup extends Error {
 		}
 
 		db_begin();
-
-                $sql = "DELETE FROM project_perm WHERE group_project_id='".$this->getID()."'";
-                $res = db_query($sql);
-
-                if (!$res)
-                {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
-                        return false;
-                }
-
 
                 $sql = "DELETE FROM project_assigned_to
 			WHERE EXISTS (SELECT project_task_id FROM project_task
@@ -542,133 +529,6 @@ class ProjectGroup extends Error {
 		return true;
 	}
 
-	/**
-	 *  addAllUsers - add all users to this project.
-	 *
-	 *  @return boolean success.
-	 */
-	function addAllUsers() {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		$sql="INSERT INTO project_perm (group_project_id,user_id,perm_level)
-			SELECT '".$this->getID()."',user_id,project_flags
-			FROM user_group
-			WHERE
-			group_id='".$this->Group->getID()."'
-			AND NOT EXISTS (SELECT user_id FROM project_perm
-			WHERE group_project_id='".$this->getID()."'
-			AND user_id=user_group.user_id);";
-		$res= db_query($sql);
-		if (!$res) {
-			$this->setError(db_error());
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *  addUser - add a user to this subproject.
-	 *
-	 *  @param  int	 user_id of the new user.
-	 *  @return boolean success.
-	 */
-	function addUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="SELECT * FROM project_perm
-			WHERE group_project_id='".$this->getID()."'
-			AND user_id='$id'";
-		$result=db_query($sql);
-		if (db_numrows($result) > 0) {
-			return true;
-		} else {
-			$sql="INSERT INTO project_perm (group_project_id,user_id,perm_level)
-				VALUES ('".$this->getID()."','$id',0)";
-			$result=db_query($sql);
-			if ($result && db_affected_rows($result) > 0) {
-				return true;
-			} else {
-				$this->setError(db_error());
-				return false;
-			}
-		}
-	}
-
-	/**
-	 *  updateUser - update a user's permissions.
-	 *
-	 *  @param  int	 user_id of the user to update.
-	 *  @param  int	 (0) read only, (1) tech only, (2) admin & tech (3) admin only.
-	 *  @return boolean success.
-	 */
-	function updateUser($id,$perm_level) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		//
-		//  Update and test if it already exists
-		//
-		$sql="UPDATE project_perm SET perm_level='$perm_level'
-			WHERE user_id='$id' AND group_project_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if (db_affected_rows($result) < 1) {
-			//
-			//  If not, insert it.
-			//
-			$sql="INSERT INTO project_perm (group_project_id,user_id,perm_level) VALUES
-				('".$this->getID()."','$id','$perm_level')";
-			$result=db_query($sql);
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *  deleteUser - delete a user's permissions.
-	 *
-	 *  @param  int	 user_id of the user who's permissions to delete.
-	 *  @return boolean success.
-	 */
-	function deleteUser($id) {
-		if (!$this->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		if (!$id) {
-			$this->setMissingParamsError();
-			return false;
-		}
-		$sql="DELETE FROM project_perm
-			WHERE user_id='$id' AND group_project_id='".$this->getID()."'";
-		$result=db_query($sql);
-		if ($result) {
-			return true;
-		} else {
-			$this->setError(db_error());
-			return false;
-		}
-	}
-
 	/*
 
 		USER PERMISSION FUNCTIONS
@@ -688,7 +548,7 @@ class ProjectGroup extends Error {
 				return false;
 			} else {
 				//
-				//  You must have an entry in project_perm if this subproject is not public
+				//  You must have a role in this project if this subproject is not public
 				//
 				if ($this->getCurrentUserPerm() >= 0) {
 					return true;
@@ -738,7 +598,7 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *  getCurrentUserPerm - get the logged-in user's perms from project_perm.
+	 *  getCurrentUserPerm - get the logged-in user's perms from the role data
 	 *
 	 *  @return int perm level for the logged-in user.
 	 */
@@ -747,10 +607,12 @@ class ProjectGroup extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT perm_level
-				FROM project_perm
-				WHERE group_project_id='". $this->getID() ."'
-				AND user_id='".user_getid()."'";
+				$sql="SELECT role_setting.value
+				FROM role_setting, user_group
+				WHERE role_setting.ref_id='". $this->getID() ."'
+				AND user_group.role_id = role_setting.role_id
+                                AND user_group.user_id='".user_getid()."'
+                                AND role_setting.section_name='pm'";
 				$this->current_user_perm=db_result(db_query($sql),0,0);
 			}
 			return $this->current_user_perm;

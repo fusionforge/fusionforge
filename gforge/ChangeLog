@@ -1,3 +1,30 @@
+2007-09-24  Roland Mas  <lolando@debian.org>
+
+	* common/include/Role.class.php: Removed code that made use of the
+	forum_perm, project_perm and artifact_perm tables.
+	* common/include/Group.class.php: Ditto.
+	* common/include/User.class.php: Ditto.
+
+	* common/forum/Forum.class.php: Use the permissions stored in the
+	role for forums, rather than depending on a redundant table.
+	* common/forum/ForumFactory.class.php: Ditto.
+
+	* common/pm/ProjectGroup.class.php: Use the permissions stored in the
+	role for subprojects, rather than depending on a redundant table.
+	* common/pm/ProjectGroupFactory.class.php: Ditto.
+
+	* common/tracker/ArtifactType.class.php: Use the permissions
+	stored in the role for trackers, rather than depending on a
+	redundant table.
+	* common/tracker/ArtifactTypeFactory.class.php: Ditto.
+
+	* db/20070924-forum-perm.sql: Removed the forum_perm table,
+	replaced it with a view behaving similarly (for backwards
+	compatibility)
+	* db/20070924-project-perm.sql: Likewise, for project_perm.
+	* db/20070924-artifact-perm.sql: Likewise, for artifact_perm.
+	* deb-specific/db-upgrade.pl: Use these new files.
+
 2007-07-06 Christian Bayle <bayle@debian.org>
 	* Made cosmetic changes in sub sub menu to display Admin when possible
 	(still need some work)

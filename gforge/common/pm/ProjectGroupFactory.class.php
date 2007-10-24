@@ -101,10 +101,14 @@ class ProjectGroupFactory extends Error {
 				if ($perm->isPMAdmin()) {
 					$exists='';
 				} else {
-					$exists=" AND group_project_id IN (SELECT group_project_ID
-					FROM project_perm 
-					WHERE perm_level >= 0 AND group_project_id=project_group_list_vw.group_project_id
-					AND user_id='".user_getid()."') ";
+					$exists=" AND group_project_id IN (SELECT role_setting.ref_id
+					FROM role_setting, user_group
+					WHERE role_setting.value >= 0
+                                          AND role_setting.section_name = 'pm'
+                                          AND role_setting.ref_id=project_group_list_vw.group_project_id
+                                          
+   					  AND user_group.role_id = role_setting.role_id
+					  AND user_group.user_id='".user_getid()."') ";
 				}
 			}
 		} else {

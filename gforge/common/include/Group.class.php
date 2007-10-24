@@ -1565,46 +1565,6 @@ class Group extends Error {
 					return false;
 				}
 				//
-				//	Add to all forums
-				//
-				$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level) 
-					SELECT group_forum_id,$user_id,1
-					FROM forum_group_list 
-					WHERE group_id='".$this->getID()."'";
-				$res=db_query($sql);
-				if (!$res) {
-					$this->setError('Adding to forums: '.db_error());
-					db_rollback();
-					return false;
-				}
-				//
-				//	Add to all subprojects
-				//
-				$sql="INSERT INTO project_perm (group_project_id,user_id,perm_level) 
-					SELECT group_project_id,$user_id,2
-					FROM project_group_list 
-					WHERE group_id='".$this->getID()."'";
-				$res=db_query($sql);
-				if (!$res) {
-					$this->setError('Adding to subprojects: '.db_error());
-					db_rollback();
-					return false;
-				}
-				//
-				//	Add to all trackers
-				//
-				$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
-					SELECT group_artifact_id,$user_id,2
-					FROM artifact_group_list 
-					WHERE group_id='".$this->getID()."'";
-				$res=db_query($sql);
-				if (!$res) {
-					$this->setError('Adding to subprojects: '.db_error());
-					db_rollback();
-					return false;
-				}
-
-				//
 				//	check and create if group doesn't exists
 				//
 //echo "<h2>Group::addUser SYS->sysCheckCreateGroup(".$this->getID().")</h2>";
@@ -1724,49 +1684,6 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		} else {
-			//
-			//	remove them from artifact types
-			//
-			$res=db_query("DELETE FROM artifact_perm 
-				WHERE group_artifact_id 
-				IN (SELECT group_artifact_id 
-				FROM artifact_group_list 
-				WHERE group_id='".$this->getID()."') 
-				AND user_id='$user_id'");
-			if (!$res) {
-				$this->setError('ERROR: DB: artifact_perm.'.db_error());
-				db_rollback();
-				return false;
-			}
-			//
-			//	remove them from subprojects
-			//
-			$res=db_query("DELETE FROM project_perm 
-				WHERE group_project_id 
-				IN (SELECT group_project_id 
-				FROM project_group_list 
-				WHERE group_id='".$this->getID()."') 
-				AND user_id='$user_id'");
-			if (!$res) {
-				$this->setError('ERROR: DB: project_perm.'.db_error());
-				db_rollback();
-				return false;
-			}
-			//
-			//	remove them from forums
-			//
-			$res=db_query("DELETE FROM forum_perm 
-				WHERE group_forum_id 
-				IN (SELECT group_forum_id 
-				FROM forum_group_list 
-				WHERE group_id='".$this->getID()."') 
-				AND user_id='$user_id'");
-			if (!$res) {
-				$this->setError('ERROR: DB: forum_perm.'.db_error());
-				db_rollback();
-				return false;
-			}
-
 			//
 			//	reassign open artifacts to id=100
 			//

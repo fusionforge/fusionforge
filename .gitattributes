@@ -25,6 +25,9 @@ gforge/db/20050822-drops.sql -text
 gforge/db/20051103_transiciel_motscle_document.sql -text
 gforge/db/20060216-drops.sql -text
 gforge/db/20060216-nocommit.sql -text
+gforge/db/20070924-artifact-perm.sql -text
+gforge/db/20070924-forum-perm.sql -text
+gforge/db/20070924-project-perm.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text

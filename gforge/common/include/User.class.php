@@ -580,24 +580,6 @@ Enjoy the site.
 					db_rollback();
 					return false;
 				}
-				$res=db_query("DELETE FROM forum_perm WHERE user_id='".$this->getID()."'");
-				if (!$res) {
-					$this->setError('ERROR - Could Not Propogate Deleted Status to forums: '.db_error());
-					db_rollback();
-					return false;
-				}
-				$res=db_query("DELETE FROM artifact_perm WHERE user_id='".$this->getID()."'");
-				if (!$res) {
-					$this->setError('ERROR - Could Not Propogate Deleted Status to tracker: '.db_error());
-					db_rollback();
-					return false;
-				}
-				$res=db_query("DELETE FROM project_perm WHERE user_id='".$this->getID()."'");
-				if (!$res) {
-					$this->setError('ERROR - Could Not Propogate Deleted Status to task manager: '.db_error());
-					db_rollback();
-					return false;
-				}
 			}
 			db_commit();
 			

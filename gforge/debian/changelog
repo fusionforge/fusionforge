@@ -1,3 +1,11 @@
+gforge (4.6.99+svn6125+removepermtables-0+1) unstable; urgency=low
+
+  * Started work on the remove-perm-tables branch.  The goal is to get rid
+    of the forum_perm, project_perm and artifact_perm tables, since the
+    information they contain is redundant with RBAC.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 24 Sep 2007 09:31:25 +0200
+
 gforge (4.6.99+svn6125-0+1) UNRELEASED; urgency=low
 
   * New SVN snapshot (r6125).
