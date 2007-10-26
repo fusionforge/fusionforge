@@ -65,19 +65,17 @@ if (!$perm || !is_object($perm)) {
 //
 //	Get list of trackers this person can see
 //
-if ($perm->isArtifactAdmin()) {
-	$alevel='';
-} else {
-	$alevel=' ap.user_id='. user_getid() ." AND ap.perm_level > 1 AND ";
-}
-
 $sql="SELECT DISTINCT agl.group_artifact_id,agl.name
-	FROM artifact_group_list agl 
-	LEFT JOIN artifact_perm ap
-	ON (ap.group_artifact_id=agl.group_artifact_id)
-	WHERE
-	$alevel
-	agl.group_id='$group_id'";
+	FROM artifact_group_list agl, role_setting rs, user_group ug
+        WHERE agl.group_id='$group_id'
+        AND agl.group_id=ug.group_id
+        AND ug.user_id=". user_getid() ."
+        AND ug.role_id=rs.role_id
+        AND (
+                           (rs.section_name = 'projectadmin' AND rs.value = 'A')
+                           OR (rs.section_name = 'trackeradmin' AND rs.value = 2)
+                           OR (rs.section_name = 'tracker' AND rs.value >= 1 AND rs.ref_id = agl.group_artifact_id)
+        )";
 $restracker=db_query($sql);
 echo db_error();
 
