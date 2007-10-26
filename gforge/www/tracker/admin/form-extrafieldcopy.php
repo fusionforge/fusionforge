@@ -34,19 +34,22 @@
 		echo html_build_multiple_select_box_from_arrays($field_id_arr,$field_arr,'copyid[]',array(),10,false);
 		echo '</td><td><strong><center>';
 		//get a list of all extra fields in trackers and groups that you have perms to admin
-		$sql="SELECT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
+		$sql="SELECT DISTINCT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
 			FROM groups g, 
 			artifact_group_list agl, 
 			artifact_extra_field_list aefl,
 			user_group ug,
-			artifact_perm ap
-			WHERE 
-			(ug.admin_flags='A' OR ug.artifact_flags='2' OR ap.perm_level>='2')
+                        role_setting rs
+			WHERE
+                        (
+                           (rs.section_name = 'projectadmin' AND rs.value = 'A')
+                           OR (rs.section_name = 'trackeradmin' AND rs.value = 2)
+                           OR (rs.section_name = 'tracker' AND rs.value >= 2 AND rs.ref_id = agl.group_artifact_id)
+                        )
 			AND ug.user_id='".user_getid()."'
 			AND ug.group_id=g.group_id
 			AND g.group_id=agl.group_id 
-			AND agl.group_artifact_id=ap.group_artifact_id
-			AND ap.user_id='".user_getid()."'
+			AND rs.role_id=ug.role_id
 			AND aefl.group_artifact_id=agl.group_artifact_id
 			AND aefl.field_type IN (1,2,3,5)";
 		$res=db_query($sql);

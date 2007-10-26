@@ -1,3 +1,8 @@
+2007-10-26  Roland Mas  <lolando@debian.org>
+
+	* www/tracker/admin/form-extrafieldcopy.php: Use the role_settings
+	table instead of the artifact_perm view.
+
 2007-10-25  Roland Mas  <lolando@debian.org>
 
 	* www/pm/msproject/msp.php: Use the role_settings table instead of
