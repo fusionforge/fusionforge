@@ -44,11 +44,13 @@ function &MSPLogin($username,$password) {
 			$sql="SELECT pgl.group_project_id, g.group_name || ': ' || pgl.project_name AS name";
 		}
 		$sql.="
-			FROM groups g, project_group_list pgl 
-			NATURAL JOIN project_perm pp
-			WHERE pp.user_id='".user_getid()."' 
+			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
+			WHERE ug.user_id='".user_getid()."' 
 			AND g.group_id=pgl.group_id
-			AND pp.perm_level > 0";
+			AND rs.value > 0
+			AND rs.group_project_id = pgl.group_project_id
+                        AND ug.role_id = rs.role_id
+                        AND rs.section_name='pm'";
 		$res=db_query($sql);
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
