@@ -3,6 +3,8 @@
 	* www/pm/msproject/msp.php: Use the role_settings table instead of
 	the project_perm view.
 
+	* www/tracker/mod.php: Ditto for artifact_perm.
+
 2007-09-24  Roland Mas  <lolando@debian.org>
 
 	* common/include/Role.class.php: Removed code that made use of the
