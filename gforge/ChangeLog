@@ -1,5 +1,11 @@
 2007-10-31  Roland Mas  <lolando@debian.org>
 
+	* www/include/project_home.php: updated
+	"project_after_description" hook and added
+	"project_before_description" and "project_public_area" hooks.
+	Also, only show trove info if trove is enabled.  Based on patch
+	#1626 by Nicolas Quienot.
+
 	* www/my/index.php: Display the user's role in the projects he
 	belongs to on his personal page.
 	* www/include/user_home.php: Ditto, on his public profile page.

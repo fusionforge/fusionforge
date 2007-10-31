@@ -41,15 +41,20 @@ if ($project->getStatus() == 'H') {
 	print "<p>".sprintf(_('NOTE: This project entry is maintained by the %1$s staff. We are not the official site for this product. Additional copyright information may be found on this project\'s homepage.'), $GLOBALS['sys_name'])."</p>\n";
 }
 
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
+plugin_hook ("project_before_description",$hook_params) ;
+
 if ($project->getDescription()) {
 	print "<p>" . nl2br($project->getDescription()) . '</p>';
 } else {
 	print "<p>" . _('This project has not yet submitted a description.') . '</p>';
 }
 
-// trove info
-print "<br />\n";
-print stripslashes(trove_getcatlisting($group_id,0,1));
+if($GLOBALS['sys_use_trove']) {
+	print "<br />\n";
+	print stripslashes(trove_getcatlisting($group_id,0,1));
+}
 
 // registration date
 print(_('Registered:&nbsp;') . date($sys_datefmt, $project->getStartDate()));
@@ -86,7 +91,9 @@ if($GLOBALS['sys_use_people']) {
 			}
 	}
 }
-plugin_hook ("project_after_description",false) ;
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
+plugin_hook ("project_after_description",$hook_params) ;
 
 ?>
 		</td>
@@ -361,8 +368,13 @@ if ($project->usesSCM()) {
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
-	
 }
+
+// ######################### Plugins
+
+$hook_params = array ();
+$hook_params['group_id'] = $group_id;
+plugin_hook ("project_public_area", $hook_params);
 
 // ######################## AnonFTP
 

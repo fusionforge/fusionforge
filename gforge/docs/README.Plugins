@@ -313,10 +313,16 @@ had been written.
                group summary page to the admin page for a plugin.
 
   Hook Name  : project_after_description
+  Parameters : group_id - The numeric ID of the group
   Locations  : www/include/project_home.php
   Description: Provides some space for plugin specific text on a group's 
                summary page.
-  [TODO: This isn't passed in the group_id... is it of any use??]
+
+  Hook Name  : project_public_area
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Used to provide plugin specific infos on a group's 
+               public area.
 
   Hook Name  : scm_admin_update
   Parameters : group_id - The numeric ID of the group
