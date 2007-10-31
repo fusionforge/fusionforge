@@ -148,7 +148,7 @@ class MailingList extends Error {
 			return false;
 		}
 						
-		$result_forum_samename = dbquery('SELECT 1 FROM forum_group_list WHERE forum_name=\''.$listName.'\' AND group_id='.$this->Group->getID().'');
+		$result_forum_samename = db_query('SELECT 1 FROM forum_group_list WHERE forum_name=\''.$listName.'\' AND group_id='.$this->Group->getID().'');
 
 		if(db_numrows($result_forum_samename) > 0) {
 			$this->setError($Language->getText('mail_common','error_forum_exists_with_samename'));

@@ -18,7 +18,7 @@ $svn_path='/usr/bin';
 $file_owner=$sys_apache_user.':'.$sys_apache_group;
 
 //	Where is the SVN repository?
-$svn=$svndir_prefix;
+$svn=$sys_chroot.$svndir_prefix;
 
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;
