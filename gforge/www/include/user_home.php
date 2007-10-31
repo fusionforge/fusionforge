@@ -125,9 +125,10 @@ $HTML->header(array('title'=>_('Developer Profile')));
 	$res_cat = db_query("SELECT groups.group_name, 
 	 groups.unix_group_name, 
 	 groups.group_id, 
-	 user_group.admin_flags 
+	 user_group.admin_flags,
+         role.role_name
 	 FROM 
-	 groups,user_group WHERE user_group.user_id='$user_id' AND 
+	 groups,user_group,role WHERE user_group.user_id='$user_id' AND  user_group.role_id=role.role_id AND
 	 groups.group_id=user_group.group_id AND groups.is_public='1' AND groups.status='A'");
 
 // see if there were any groups
@@ -138,7 +139,7 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p/>"._('This developer is a member of the following groups:')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ('<br />' . '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_cat['unix_group_name'].'/">'.$row_cat['group_name'].'</a>');
+		print ('<br />' . '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_cat['unix_group_name'].'/">'.htmlentities($row_cat['group_name']).'</a> ('.htmlentities($row_cat['role_name']).')');
 	}
 	print '</ul><p/>';
 } // end if groups

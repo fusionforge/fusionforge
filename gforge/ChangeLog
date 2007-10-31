@@ -1,6 +1,8 @@
 2007-10-31  Roland Mas  <lolando@debian.org>
 
-	* www/my/index.php: Display the user's role in the projects.
+	* www/my/index.php: Display the user's role in the projects he
+	belongs to on his personal page.
+	* www/include/user_home.php: Ditto, on his public profile page.
 
 2007-10-26  Roland Mas  <lolando@debian.org>
 
