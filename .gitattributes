@@ -941,7 +941,6 @@ gforge/plugins/wiki/www/PhpWiki.wsdl -text
 gforge/plugins/wiki/www/README -text
 gforge/plugins/wiki/www/RPC2.php -text
 gforge/plugins/wiki/www/SOAP.php -text
-gforge/plugins/wiki/www/TAGS -text
 gforge/plugins/wiki/www/TODO -text
 gforge/plugins/wiki/www/UPGRADING -text
 gforge/plugins/wiki/www/config/.htaccess -text
