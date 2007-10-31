@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6148-0+2) UNRELEASED; urgency=low
+gforge (4.6.99+svn6148-0+6) UNRELEASED; urgency=low
 
   * New SVN snapshot (r6148), including the removal of a few tables
     (replaced by views where needed, or access to the RBAC tables when
@@ -13,13 +13,18 @@ gforge (4.6.99+svn6148-0+2) UNRELEASED; urgency=low
     <kurem@upcase.inf.upol.cz> (closes: #447477).
   * Ditto for debian/po/vi.po, from Clytie Siddall
     <clytie@riverland.net.au> (closes: #447883).
+  * Ditto for debian/po/nl.po, from Bart Cornelis <cobaco@skolelinux.no>
+    (closes: #448124).
+  * Ditto for debian/po/pt.po, from Ricardo Silva <ardoric@gmail.com>
+    (closes: #448229).
   * Added new Finnish translation, from Esko Arajärvi <edu@iki.fi>
     (closes: #447298).
   * Applied a patch by Steffen Joeris <steffen.joeris@skolelinux.de> for a
     security vulnerability (CVE-2007-5156) in the copy of FCKeditor
     embedded in gforge-plugins-extra (closes: #447590).
+  * Added Vcs-Bzr: field to debian/control.
 
- -- Roland Mas <lolando@debian.org>  Wed, 24 Oct 2007 16:52:15 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Oct 2007 16:58:29 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 

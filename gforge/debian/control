@@ -7,6 +7,7 @@ Build-Depends-Indep: sharutils, docbook-to-man, devscripts
 Build-Depends: debhelper (>= 4.1.16), dpatch, perl, gettext
 Standards-Version: 3.7.2
 Homepage: http://gforge.org/
+Vcs-Bzr: http://bzr.debian.org/~lolando/bzr/gforge/debian/sid/
 
 Package: gforge
 Architecture: all
