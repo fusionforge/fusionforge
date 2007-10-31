@@ -322,6 +322,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	$order_name_arr=array();
 	$order_name_arr[]=_('Remove');
 	$order_name_arr[]=_('My Projects');
+	$order_name_arr[]=_('My Roles');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
 	// Include both groups and foundries; developers should be similarly
@@ -331,15 +332,17 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		. "groups.unix_group_name,"
 		. "groups.status,"
 		. "groups.type_id,"
-		. "user_group.admin_flags "
-		. "FROM groups,user_group "
+		. "user_group.admin_flags,"
+		. "role.role_name "
+		. "FROM groups,user_group,role "
 		. "WHERE groups.group_id=user_group.group_id "
 		. "AND user_group.user_id='". user_getid() ."' "
 		. "AND groups.status='A' "
+		. "AND user_group.role_id=role.role_id "
 		. "ORDER BY group_name");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
+		echo '<tr><td colspan="3" bgcolor="#FFFFFF"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -354,7 +357,8 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
-			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
+			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td>
+			<td>'. htmlspecialchars(db_result($result,$i,'role_name')) .'</td></tr>';
 		}
 	}
 	echo $HTML->listTableBottom();

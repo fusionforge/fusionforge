@@ -1,3 +1,7 @@
+2007-10-31  Roland Mas  <lolando@debian.org>
+
+	* www/my/index.php: Display the user's role in the projects.
+
 2007-10-26  Roland Mas  <lolando@debian.org>
 
 	* www/tracker/admin/form-extrafieldcopy.php: Use the role_setting
