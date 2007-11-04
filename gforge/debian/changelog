@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6162-0+2) UNRELEASED; urgency=low
+gforge (4.6.99+svn6162-0+3) UNRELEASED; urgency=low
 
   * New SVN snapshot (r6162), including the removal of a few tables
     (replaced by views where needed, or access to the RBAC tables when
@@ -17,6 +17,8 @@ gforge (4.6.99+svn6162-0+2) UNRELEASED; urgency=low
     (closes: #448124).
   * Ditto for debian/po/pt.po, from Ricardo Silva <ardoric@gmail.com>
     (closes: #448229).
+  * Ditto for debian/po/fr.po, from Christian Perrier <bubulle@debian.org>
+    (closes: #449014).
   * Added new Finnish translation, from Esko Arajärvi <edu@iki.fi>
     (closes: #447298).
   * Added new Russian translation, from Yuri Kozlov <kozlov.y@gmail.com>
@@ -26,7 +28,7 @@ gforge (4.6.99+svn6162-0+2) UNRELEASED; urgency=low
     embedded in gforge-plugins-extra (closes: #447590).
   * Added Vcs-Bzr: field to debian/control.
 
- -- Roland Mas <lolando@debian.org>  Fri, 02 Nov 2007 09:15:35 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 02 Nov 2007 13:31:26 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 

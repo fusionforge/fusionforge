@@ -1,11 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translation of gforge debconf templates to French
+# Copyright (C) 2002-2007 Christian Perrier <bubulle@debian.org>
+# This file is distributed under the same license as the gforge package.
 #
-#, fuzzy
+# Christian Perrier <bubulle@debian.org>, 2002-2007.
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2007-05-17 18:35+0200\n"
+"Project-Id-Version: gforge\n"
+"Report-Msgid-Bugs-To: lolando@debian.org\n"
+"POT-Creation-Date: 2007-10-18 07:37+0200\n"
 "PO-Revision-Date: 2007-09-04 14:22+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -16,105 +18,120 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:1001
-msgid "Your shell server:"
+#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../dsf-helper/shellhost-variables.templates:2001
+msgid "Shell server:"
 msgstr "Serveur interactif (« shell server ») :"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
-#: ../dsf-helper/shellhost-variables.templates:1001
-msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../gforge-db-postgresql.templates.dsfh-in:4001
+msgid ""
+"Please enter the hostname of the server that will host the GForge shell "
+"accounts."
 msgstr ""
 "Veuillez indiquer le nom du serveur qui hébergera les comptes interactifs "
 "Gforge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
-#: ../dsf-helper/downloadhost-variables.templates:1001
-msgid "Your download server:"
+#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../dsf-helper/downloadhost-variables.templates:2001
+msgid "Download server:"
 msgstr "Serveur de téléchargement :"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../gforge-db-postgresql.templates.dsfh-in:7001
 msgid ""
-"The hostname of the server that will host your Gforge packages.  It should "
-"not be the same as your main Gforge host."
+"Please enter the hostname of the server that will host the GForge packages."
 msgstr ""
-"Veuillez indiquer le serveur qui hébergera les paquets Gforge. Il devrait "
-"être différent du serveur Gforge principal."
+"Veuillez indiquer le nom du serveur qui hébergera les paquets de "
+"Gforge."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-helper/lists-variables.templates:2001
+#: ../dsf-helper/users-variables.templates:2001
+msgid "It should not be the same as the main GForge host."
+msgstr "Ce om devrait être différents du nom d'hôte principal de GForge."
 
 #. Type: string
 #. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-#: ../gforge-dns-bind9.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:4002
-msgid "The Gforge administrator login:"
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
+msgid "GForge administrator login:"
 msgstr "Identifiant de l'administrateur de Gforge :"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:4002
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
-"This Gforge account will have all privileges on the Gforge system.  It is "
-"needed to approve the creation of the projects."
+"The GForge administrator account will have full privileges on the system. It "
+"will be used to approve the creation of new projects."
 msgstr ""
-"Le compte d'administration de Gforge a tous les privilèges sur le système "
-"Gforge. Il sert entre autres à approuver la création de projets."
+"Le compte d'administration de Gforge aura tous les privilèges sur le système "
+"Gforge. Il servira à approuver la création de projets."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/host-variables.templates:1001
-msgid "Your IP address:"
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
+msgid "Please choose the username for this account."
+msgstr "Veuillez choisir l'identifiant à utiliser pour ce compte."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
+msgid "IP address:"
 msgstr "Adresse IP :"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
-#: ../dsf-helper/host-variables.templates:1001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
 msgid ""
-"The IP address of the server that will host your Gforge installation. This "
-"is needed for the Apache virtualhosting configuration."
+"Please enter the IP address of the server that will host the GForge "
+"installation."
 msgstr ""
-"Veuillez indiquer l'adresse IP du serveur qui hébergera Gforge. Cette "
-"information est requise pour la configuration des hôtes virtuels d'Apache."
+"Veuillez indiquer l'adresse IP du serveur qui hébergera Gforge."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
+msgid "This is needed for the configuration of Apache virtual hosting."
+msgstr "Cette information est indispensable à la configuration des hôtes virtuels pour Apache."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:5001
-msgid "The Gforge administrator password:"
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
+msgid "GForge administrator password:"
 msgstr "Mot de passe de l'administrateur de Gforge :"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:5001
-msgid ""
-"This Gforge account will have all privileges on the Gforge system.  It is "
-"needed to approve the creation of the projects.  Please type a password here."
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
+msgid "Please choose the password for this account."
 msgstr ""
-"Le compte de l'administrateur Gforge possèdera tous les privilèges sur le "
-"système Gforge. Ce compte est nécessaire pour la création de projets. "
-"Veuillez indiquer un mot de passe pour ce compte."
-
-#. Type: password
-#. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
-msgid "The Gforge administrator password - again:"
-msgstr "Confirmation du mot de passe administrateur :"
+"Veuillez choisir le mot de passe de ce compte."
 
 #. Type: password
 #. Description
@@ -124,173 +141,167 @@ msgstr "Confirmation du mot de passe administrateur :"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-#: ../dsf-helper/ldap-variables.templates:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-dns-bind9.templates.dsfh-in:4001
+#: ../gforge-dns-bind9.templates.dsfh-in:7001
+#: ../gforge-dns-bind9.templates.dsfh-in:13001
+#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-helper/ldap-variables.templates:5001
+msgid "Password confirmation:"
+msgstr ""
+"Confirmation du mot de passe :"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-dns-bind9.templates.dsfh-in:4001
+#: ../gforge-dns-bind9.templates.dsfh-in:7001
+#: ../gforge-dns-bind9.templates.dsfh-in:13001
+#: ../dsf-helper/dbpasswd-variables.templates:3001
+#: ../dsf-helper/ldap-variables.templates:5001
 msgid "Please re-type the password for confirmation."
 msgstr ""
-"Veuillez entrer à nouveau le mot de passe de l'administrateur, pour "
+"Veuillez entrer à nouveau le mot de passe, pour "
 "confirmation."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
-msgid "The initial list of skills:"
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
+msgid "Initial list of skills:"
 msgstr "Liste initiale de domaines de compétences :"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
-"Gforge allows users to define a list of their skills, to be chosen amongst "
-"those present in the database.  This list is the initial list of skills that "
-"will enter the database.  Please enter the skill names separated by semi-"
-"colons `;'."
+"GForge allows users to define a list of their skills, to be chosen from "
+"those present in the database. This list is the initial list of skills that "
+"will enter the database."
 msgstr ""
 "Les utilisateurs de Gforge peuvent afficher leurs niveaux de compétence dans "
 "différents domaines. Cette liste est la liste initiale de ces domaines. "
-"Veuillez indiquer les noms de ces domaines de compétence séparés par des "
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
+msgid "Please enter a semicolon-separated list of skill names."
+msgstr ""
+"Veuillez indiquer les noms de ces domaines de compétence, séparés par des "
 "points-virgules."
 
 #. Type: password
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:2001
-#: ../dsf-helper/dbpasswd-variables.templates:1001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Password used for the database:"
 msgstr "Mot de passe de connexion au serveur de bases de données :"
 
 #. Type: password
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:2001
-msgid ""
-"The connection to the DB system requires a password.  Please choose a "
-"password here."
-msgstr ""
-"Veuillez indiquer le mot de passe à utiliser pour la connexion au serveur de "
-"bases de données."
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Connections to the database system are authenticated by a password."
+msgstr "Les connexions au serveur de bases de données sont protégées par un mot de passe."
 
 #. Type: password
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:3001
 #: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database - again:"
-msgstr ""
-"Confirmation du mot de passe de connexion au serveur de bases de données :"
+msgid "Please choose the connection password."
+msgstr "Veuillez choisir ce mot de passe de connexion."
 
 #. Type: string
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
-#: ../dsf-helper/ldap-variables.templates:1001
-msgid "The LDAP base DN:"
-msgstr "Nom du répertoire LDAP (DN) :"
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
+msgid "LDAP base DN:"
+msgstr "Nom distinctif du répertoire LDAP (DN) :"
 
 #. Type: string
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
-#: ../dsf-helper/ldap-variables.templates:1001
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
 msgid ""
-"The DN is used to refer to the LDAP directory unambiguously.  You could use, "
-"for instance, \"dc=gforge,dc=example,dc=com\""
+"The DN (Distinguished Name) is used to refer to the LDAP directory "
+"unambiguously. Example: \"dc=gforge,dc=example,dc=com\"."
 msgstr ""
-"Veuillez indiquer le nom utilisé pour identifier l'annuaire LDAP de manière "
-"unique. Par exemple : « dc=gforge,dc=exemple,dc=com »."
+"Le nom distinctif (DN : « (Distinguished Name ») est utilisé pour identifier l'annuaire LDAP de manière "
+"unique. Vous pouvez utiliser, par exemple : « dc=gforge,dc=example,dc=com »."
 
 #. Type: string
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid "The LDAP host:"
-msgstr "Serveur LDAP :"
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid "The hostname of the LDAP server."
-msgstr "Veuillez indiquer le nom d'hôte du serveur LDAP."
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
+msgid "LDAP server hostname:"
+msgstr "Nom d'hôte du serveur LDAP :"
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
-#: ../gforge-mta-postfix.templates.dsfh-in:2001
-msgid "Do you want mail to ${noreply} to be deleted?"
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "Faut-il supprimer les courriers pour ${noreply} ?"
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
-#: ../gforge-mta-postfix.templates.dsfh-in:2001
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
 msgid ""
-"Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
-"even some e-mail to that address too."
+"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
+"address."
 msgstr ""
 "Gforge envoie fréquemment des courriers de et vers l'adresse « ${noreply} »."
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
-#: ../gforge-mta-postfix.templates.dsfh-in:2001
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
 msgid ""
-"It is advised that you let the package direct e-mail to that address to a "
-"black hole (/dev/null), unless you have another use for that address."
+"E-mail to that address should be directed to a black hole (/dev/null), "
+"unless you have another use for that address."
 msgstr ""
 "Il est conseillé de rediriger les courriers adressés à cette adresse vers un "
 "trou noir (/dev/null), sauf si elle est utilisée par ailleurs."
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-#: ../gforge-mta-exim.templates.dsfh-in:2001
-#: ../gforge-mta-postfix.templates.dsfh-in:2001
-msgid "Accepting this option will perform that redirection."
-msgstr "Si vous choisissez cette option, la redirection sera mise en place."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../dsf-helper/ldap-variables.templates:3001
-msgid "LDAP password used to add users from the web:"
-msgstr "Mot de passe LDAP pour l'ajout d'utilisateurs :"
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../dsf-helper/ldap-variables.templates:3001
-msgid ""
-"In order to add users into the LDAP directory from the web, you need to "
-"provide a password."
-msgstr ""
-"Un mot de passe est nécessaire pour l'ajout des utilisateurs à l'annuaire "
-"LDAP depuis le web. Veuillez l'indiquer ici."
 
 #. Type: password
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12001
 #: ../dsf-helper/ldap-variables.templates:4001
-msgid "LDAP password - again:"
-msgstr "Confirmation du mot de passe LDAP :"
+msgid "LDAP password used to add users from the web:"
+msgstr "Mot de passe LDAP pour l'ajout d'utilisateurs :"
 
-#. Type: note
+#. Type: password
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
-msgid "Generate an SSL certificate"
-msgstr "Génération d'un certificat SSL"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:12001
+#: ../dsf-helper/ldap-variables.templates:4001
 msgid ""
-"You need a valid SSL/TLS certificate to run Gforge. If you don't already "
-"have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
-"one, and restart Apache afterwards."
+"Please provide the password to use when adding users into the LDAP directory "
+"from the web."
+msgstr ""
+"Veuillez fournir le mot de passe nécessaire pour l'ajout des utilisateurs à l'annuaire "
+"LDAP depuis le web."
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
+msgid "SSL certificate generation"
+msgstr "Création du certificat SSL"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
+msgid ""
+"A valid SSL/TLS certificate is needed to run GForge. If you don't already "
+"use one, you'll have to run the 'mod-ssl-makecert' command to generate one, "
+"and restart Apache afterwards."
 msgstr ""
 "Gforge a besoin d'un certificat SSL/TLS pour fonctionner. Si vous n'en avez "
 "pas encore, vous devrez en établir un avec la commande « mod-ssl-makecert ». "
@@ -298,7 +309,7 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
 msgid ""
 "Please note you will not be able to start Apache if you have no such "
 "certificate."
@@ -308,73 +319,83 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
-msgid "Gforge requires appropriate PAM-LDAP configuration"
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
+msgid "Appropriate PAM-LDAP configuration required for GForge"
 msgstr "Configuration PAM-LDAP correcte indispensable pour Gforge"
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid ""
-"Gforge requires the libpam-ldap package to be configured appropriately.  You "
-"might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
+"GForge requires the libpam-ldap package to be configured appropriately. You "
+"might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
 "parameters."
 msgstr ""
-"Gforge a besoin que le paquet libpam-ldap soit configurécorrectement. Vous "
-"devrez peut-être utiliser la commande« dpkg-reconfigure libpam-ldap » pour "
-"corriger des paramètresincorrects."
+"Gforge a besoin que le paquet libpam-ldap soit configuré correctement. Vous "
+"aurez peut-être à utiliser la commande « dpkg-reconfigure libpam-ldap » pour "
+"corriger des paramètres incorrects."
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-#: ../gforge-shell-ldap.templates.dsfh-in:2001
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
 "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
-"for passwords=crypt.  Make sure that you type the same password for the "
-"libpam-ldap root password and the Gforge LDAP password."
+"for passwords=crypt."
 msgstr ""
-"Voici un jeu de paramètres réputés corrects :\n"
-" LDAP protocol version=3\n"
-" make root database admin=yes\n"
-" root login account=\"cn=admin,dc=<votre-dc>\"\n"
-" crypt to use for passwords=\"crypt\"\n"
-"En outre, vous devrez utiliser le même mot de passe pour le compte "
+"Les paramètres réputés corrects sont : "
+" LDAP protocol version=3,"
+" make root database admin=yes,"
+" root login account=\"cn=admin,dc=<votre-dc>\","
+" crypt to use for passwords=crypt. "
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
+msgid ""
+"Make sure that you type the same password for the libpam-ldap root password "
+"and the GForge LDAP password."
+msgstr ""
+"Vous devez également veiller à utiliser le même mot de passe pour le compte "
 "superutilisateur de libpam-ldap et pour le compte LDAP de Gforge."
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid "Do you want a simple DNS setup?"
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Souhaitez-vous une configuration DNS simplifiée ?"
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
 msgid ""
-"You can have a simple DNS setup wich uses wildcards to map all project web-"
-"hosts to a single IP, and direct all the scm-hosts to a single SCM server, "
-"or a complex setup wich allows you to have many servers as project web "
-"servers or SCM servers."
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
 msgstr ""
 "Il est possible de mettre en service une gestion DNS simplifiée qui "
 "utilisera des jokers (« wildcards ») pour affecter tous les serveurs web de "
-"vos projets à une seule adresse IP, ainsi que tous les hôtes SCM à un seul "
+"vos projets à une seule adresse IP, ainsi que tous les hôtes SCM (« Source Control Management » : gestionnaire de configuration) à un seul "
 "serveur SCM. Une configuration plus complexe est également possible pour "
 "utiliser plusieurs serveurs comme serveurs web ou SCM."
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
 msgid ""
-"Even though you have a simple DNS setup, you can still have separate boxes "
-"for your project servers, it just assumes you have all the project web dirs "
-"on the same server and a single server for SCM."
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
 msgstr ""
 "Même si vous choisissez la configuration DNS simplifiée, vous pourrez "
-"toujours avoir plusieurs environnements distincts pour les serveurs de vos "
+"toujours utiliser des serveurs différents comme serveurs de "
 "projets. Ce choix n'apporte qu'une restriction : tous les répertoires web "
 "sont sur un seul serveur, ainsi que tous les entrepôts SCM."
 
@@ -384,19 +405,19 @@ msgstr ""
 #. Description
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
-#: ../dsf-helper/replace-files.templates:1001
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:2001
+#: ../dsf-helper/replace-files.templates:3001
 msgid "Do you want ${file} to be updated?"
 msgstr "Souhaitez-vous mettre à jour ${file} ?"
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
-#: ../dsf-helper/replace-files.templates:2001
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
+#: ../dsf-helper/replace-files.templates:3001
 msgid ""
-"In order for Gforge to be fully deinstalled, some changes must be made to "
-"the ${file} file."
+"In order for GForge to be fully uninstalled, some changes are needed in "
+"${file}."
 msgstr ""
 "Pour désinstaller complètement Gforge, des modifications doivent être "
 "apportées au fichier ${file}."
@@ -407,59 +428,56 @@ msgstr ""
 #. Description
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
-#: ../dsf-helper/replace-files.templates:1001
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:2001
+#: ../dsf-helper/replace-files.templates:3001
 msgid ""
-"I can either do them for you (and backup the current version in ${file}."
-"gforge-old), or write the changes to another file (${file}.gforge-new) and "
-"let you propagate the changes to ${file} yourself."
+"This can be done automatically (the current version will be backed up in "
+"${file}.gforge-old). Alternatively, the needed changes may be written  to "
+"another file (${file}.gforge-new) to let you adapt ${file} yourself."
 msgstr ""
 "Elles peuvent être faites automatiquement (en sauvegardant la version "
 "actuelle dans ${file}.gforge-old) ou vous pouvez les faire vous-même dans "
 "${file}, les modifications proposées étant indiquées dans ${file}.gforge-new."
 
-#. Type: boolean
+#. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
-#: ../dsf-helper/replace-files.templates:2001
-msgid "Shall I modify the ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
+msgid "${file} must be checked"
+msgstr "Fichier ${file} à vérifier"
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
-msgid "Please check ${file}"
-msgstr "Vérification de ${file} indispensable"
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
+msgid "You have chosen to not change ${file} automatically."
+msgstr "Vous avez choisi de ne pas modifier ${file} automatiquement."
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
 msgid ""
-"You have chosen not to let the Gforge package update the ${file} file.  Very "
-"well, I have not changed it.  Instead, I have written the suggested changes "
-"into ${file}.gforge-new. Please check this file and apply the appropriate "
-"changes to ${file}."
+"Instead, the suggested changes have been written into ${file}.gforge-new. "
+"Please check this file and apply the appropriate changes to ${file}."
 msgstr ""
-"Vous avez choisi de ne pas laisser le paquet Gforge modifier le fichier "
-"${file}. En conséquence, les modifications ont été sauvegardées dans ${file}."
+"En conséquence, les modifications ont été sauvegardées dans ${file}."
 "gforge-new. Veuillez vérifier ce fichier et appliquer, le cas échéant, les "
 "changements adéquats à ${file}."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:1001
-msgid "Your Gforge domain or subdomain name:"
+#: ../dsf-helper/common-variables.templates:2001
+msgid "GForge domain or subdomain name:"
 msgstr "Nom de domaine ou de sous-domaine Gforge :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:1001
+#: ../dsf-helper/common-variables.templates:2001
 msgid ""
-"The domain that will host your Gforge installation.  Some services will be "
-"given their own subdomain in that domain (scm, lists, etc.)."
+"Please enter the domain that will host the GForge installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
 "Veuillez indiquer le nom de domaine qui hébergera le serveur Gforge. "
 "Certains services auront leur propre sous-domaine à l'intérieur de ce "
@@ -467,182 +485,170 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:2001
-msgid "The Gforge admin email address:"
+#: ../dsf-helper/common-variables.templates:3001
+msgid "GForge administrator e-mail address:"
 msgstr "Adresse électronique de l'administrateur Gforge :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:2001
+#: ../dsf-helper/common-variables.templates:3001
 msgid ""
-"The email address of the Gforge administrator of your site.  Needed in case "
-"a problem occurs."
+"Please enter the e-mail address of the GForge administrator of this site. It "
+"will be used when problems occur."
 msgstr ""
 "Veuillez indiquer l'adresse de l'administrateur de Gforge. Elle est utilisée "
 "quand un problème se produit."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid "The Gforge system name:"
+#: ../dsf-helper/common-variables.templates:4001
+msgid "GForge system name:"
 msgstr "Nom du système Gforge :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/common-variables.templates:3001
-msgid "This name is used in various places throughout the system."
-msgstr "Le nom du système est utilisé dans plusieurs parties du serveur."
+#: ../dsf-helper/common-variables.templates:4001
+msgid ""
+"Please enter the name of the GForge system. It is used in various places "
+"throughout the system."
+msgstr "Veuillez indiquer le nom du système GForge. Il est utilisé dans plusieurs parties du serveur."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/dbhost-variables.templates:1001
-msgid "Your database server:"
+#: ../dsf-helper/dbhost-variables.templates:2001
+msgid "Database server:"
 msgstr "Serveur de base de données :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/dbhost-variables.templates:1001
+#: ../dsf-helper/dbhost-variables.templates:2001
 msgid ""
-"The IP address (or host name) of the server that will host your GForge "
-"database.  This is needed for virtually all the subpackages."
+"Please enter the IP address (or hostname) of the server that will host the "
+"GForge database."
 msgstr ""
 "Veuillez indiquer l'adresse IP ou le nom du serveur qui hébergera la base de "
-"données de Gforge. Cette information est requise pour la configuration de "
-"quasiment tous les sous-paquets."
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid "Your database name:"
-msgstr "Nom de base de données :"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/dbhost-variables.templates:2001
-msgid ""
-"The name of the database that will host your GForge database.  This is "
-"needed for virtually all the subpackages."
-msgstr ""
-"Veuillez indiquer la base qui contiendra les données de Gforge. Cette "
-"information est requise pour la configuration de quasiment tous les sous-"
-"paquets."
+"données de Gforge."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Your database admin username:"
-msgstr "Identifiant de l'administrateur de base de données :"
+msgid "Database name:"
+msgstr "Nom de la base de données :"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
 msgid ""
-"The admin username of the database that will host your GForge database.  "
-"This is needed for virtually all the subpackages."
+"Please enter the name of the database that will host the GForge database."
 msgstr ""
-"Veuillez indiquer l'identifiant de l'administrateur du serveur de bases de "
-"données qui hébergera la base de données de Gforge. Cette information est "
-"requise pour la configuration de quasiment tous les sous-paquets."
-
-#. Type: password
-#. Description
-#: ../dsf-helper/dbpasswd-variables.templates:1001
-msgid ""
-"The connecton to the DB system requires a password.  Please choose a "
-"password here."
-msgstr ""
-"Veuillez indiquer le mot de passe à utiliser pour vous connecter à la base "
-"de données."
+"Veuillez indiquer le nom de la base de données pour "
+"Gforge."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/downloadhost-variables.templates:1001
-msgid ""
-"The hostname of the server that will host your Gforge packages. It should "
-"not be the same as your main Gforge host."
-msgstr ""
-"Veuillez indiquer le nom du serveur qui hébergera les paquets Gforge. Ce nom "
-"ne devrait pas être identique au nom du serveur Gforge principal."
+#: ../dsf-helper/dbhost-variables.templates:4001
+msgid "Database administrator username:"
+msgstr "Identifiant de l'administrateur du serveur de bases de données :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/groupid-variables.templates:1001
-msgid "The news admin group id:"
+#: ../dsf-helper/dbhost-variables.templates:4001
+msgid ""
+"Please enter the username of the database administrator for the server that "
+"will host the GForge database."
+msgstr "Veuillez indiquer l'identifiant de l'administrateur du serveur de bases de données qui hébergera la base de données de GForge."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/downloadhost-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr ""
+"Veuillez indiquer le nom du serveur qui hébergera les paquets de "
+"Gforge."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:2001
+msgid "News administrative group ID:"
 msgstr "Numéro du groupe (GID) d'administration des nouvelles :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/groupid-variables.templates:1001
+#: ../dsf-helper/groupid-variables.templates:2001
 msgid ""
-"Members of the news admin group can approve news for the Gforge main page.  "
-"This group id MUST NOT be 1. You only need to touch this group if you "
-"upgrade from a previous version and want to keep your data."
+"The members of the news admin group can approve news for the GForge main "
+"page. This group's ID must not be 1. This should be changed only if you "
+"upgrade from a previous version and want to keep the data."
 msgstr ""
 "Les membres du groupe d'administration des nouvelles peuvent approuver des "
 "nouvelles pour les publier sur la page d'accueil de Gforge. Le numéro de ce "
-"groupe NE DOIT PAS être 1. Cette information n'est requise que si vous "
+"groupe ne doit pas être 1. Cette information n'est requise que si vous "
 "mettez à jour une installation précédente et que vous voulez garder vos "
 "données."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/groupid-variables.templates:2001
-msgid "The stats admin group id:"
+#: ../dsf-helper/groupid-variables.templates:3001
+msgid "Statistics administrative group ID:"
 msgstr "Numéro du groupe d'administration des statistiques :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/groupid-variables.templates:3001
-msgid "The peer rating admin group id:"
+#: ../dsf-helper/groupid-variables.templates:4001
+msgid "Peer rating administrative group ID:"
 msgstr "Numéro du groupe d'administration des notations (« rating ») :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/lists-variables.templates:1001
-msgid "Your mailing-lists server:"
+#: ../dsf-helper/ldap-variables.templates:3001
+msgid "LDAP server host name:"
+msgstr "Nom d'hôte du serveur LDAP :"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:2001
+msgid "Mailing lists server:"
 msgstr "Serveur de listes de diffusion :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/lists-variables.templates:1001
+#: ../dsf-helper/lists-variables.templates:2001
 msgid ""
-"The hostname of the server that will host your Gforge mailing-lists. It "
-"should not be the same as your main Gforge host."
+"Please enter the host name of the server that will host the GForge mailing "
+"lists."
 msgstr ""
-"Veuillez indiquer le nom du serveur qui hébergera les listes de diffusion de "
-"Gforge. Ce nom ne devrait pas être identique au nom du serveur Gforge "
-"principal."
+"Veuillez indiquer le nom d'hôte du serveur qui hébergera les listes de diffusion de "
+"Gforge."
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/migration.templates:1001
-msgid "Migrate to Gforge:"
+#: ../dsf-helper/migration.templates:2001
+msgid "Migrate to GForge?"
 msgstr "Faut-il migrer vers Gforge ?"
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/migration.templates:1001
+#: ../dsf-helper/migration.templates:2001
 msgid ""
-"The free software version of the Sourceforge software has been renamed to "
-"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
-"and \"sourceforge\" is no longer supported or maintained.  The transition to "
-"Gforge should be rather simple, as most of the work is automated: once this "
-"package has been successfully installed, just install the \"gforge\" package "
-"and things should go smoothly."
+"SourceForge is no longer maintained as free software; the free version is "
+"now named GForge. Accordingly, the package has been renamed to 'gforge', and "
+"'sourceforge' is no longer supported or maintained. The transition to GForge "
+"should be rather simple, as most of the work is automated: once this package "
+"has been successfully installed, just install the 'gforge' package."
 msgstr ""
-"La version libre du logiciel Sourceforge a été rebaptisée « Gforge ».  Les "
-"paquets Debian ont été renommés en conséquence, et le paquet « sourceforge » "
-"n'est plus maintenu.  La transition vers Gforge est normalement simple, car "
-"le plus gros du travail est automatisé.  Une fois que ce paquet a été "
-"installé avec succès, vous pouvez installer le paquet « gforge », et les "
-"choses devraient se dérouler sans problème."
+"Sourceforge n'est plus maintenu en tant que logiciel libre. La version libre a été rebaptisée « Gforge ».  Les "
+"paquets ont été renommés en conséquence, et le paquet « sourceforge » "
+"n'est plus maintenu. La transition vers Gforge est normalement simple, car "
+"le plus gros du travail est automatisé. Une fois que ce paquet a été "
+"installé avec succès, vous pouvez installer le paquet « gforge »."
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/migration.templates:1001
+#: ../dsf-helper/migration.templates:2001
 msgid ""
-"You still have the option not to upgrade to Gforge yet, for instance if you "
-"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"You still have the option not to upgrade to GForge yet, for instance if you "
+"want to back things up beforehand. If you refuse the upgrade, nothing will "
 "happen."
 msgstr ""
 "Vous avez toujours la possibilité de ne pas migrer vers Gforge tout de "
@@ -651,242 +657,360 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../dsf-helper/migration.templates:2001
-msgid "Sourceforge is no more"
+#: ../dsf-helper/migration.templates:3001
+msgid "Sourceforge discontinued"
 msgstr "Sourceforge n'existe plus"
 
 #. Type: note
 #. Description
-#: ../dsf-helper/migration.templates:2001
+#: ../dsf-helper/migration.templates:3001
 msgid ""
-"Sourceforge has been renamed Gforge, and is no longer maintained as free "
-"software. This \"sourceforge\" package is only here to help you upgrade to "
-"Gforge.  Once you have installed this package and the one it depends on "
-"(gforge-sourceforge-transition), your data have been saved, and you can "
-"safely uninstall the \"sourceforge\" package and proceed to install Gforge."
+"SourceForge is no longer maintained as free software; the free version is "
+"now named GForge, and the 'sourceforge' package is now a dummy package to "
+"help install 'gforge'. Once this dummy package and the 'gforge-sourceforge-"
+"transition' are installed, data will be saved so that you can safely "
+"uninstall the 'sourceforge' package and proceed to install 'gforge'."
 msgstr ""
-"La version libre du logiciel Sourceforge a été rebaptisée « Gforge ».  Le "
+"SourceForge n'est plus un logiciel libre. Sa version libre a été rebaptisée « Gforge ».  Le "
 "paquet « sourceforge » n'est présent que pour faciliter la migration vers "
 "Gforge.  Une fois ce paquet, et celui dont il dépend (gforge-sourceforge-"
 "transition), correctement installés, vos données ont été sauvegardées, et "
-"vous pouvez sereinement désinstaller le paquet « sourceforge » et installer "
-"« gforge » à sa place."
+"vous pouvez sans problèmes désinstaller le paquet « sourceforge » et installer "
+"« gforge »."
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/replace-files.templates:1001
+#: ../dsf-helper/replace-files.templates:2001
 msgid ""
-"In order for Gforge to fully work, some changes must be made to the ${file} "
-"file."
+"In order for GForge to be operational, some changes are needed in ${file}."
 msgstr ""
-"Pour que Gforge fonctionne complètement, des modifications doivent être "
+"Pour désinstaller complètement Gforge, des modifications doivent être "
 "apportées au fichier ${file}."
 
-#. Type: boolean
-#. Description
-#: ../dsf-helper/replace-files.templates:1001
-msgid "Shall I modify ${file} automatically?"
-msgstr "Faut-il modifier ${file} automatiquement ?"
-
 #. Type: string
 #. Description
-#: ../dsf-helper/users-variables.templates:1001
-msgid "Your user mail redirector server:"
-msgstr "Redirecteur de courriers :"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/users-variables.templates:1001
+#: ../dsf-helper/shellhost-variables.templates:2001
 msgid ""
-"The hostname of the server that will host your Gforge user mail redirector. "
-"It should not be the same as your main Gforge host."
+"Please enter the host name of the server that will host the GForge shell "
+"accounts."
 msgstr ""
-"Veuillez indiquer le nom du serveur qui hébergera le redirecteur de courrier "
-"des utilisateurs. Ce nom ne devrait pas être identique au nom du serveur "
-"Gforge principal."
+"Veuillez indiquer le nom d'hôte du serveur qui hébergera les comptes interactifs "
+"Gforge."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:2001
+msgid "User mail redirector server:"
+msgstr "Redirecteur des courriers des utilisateurs :"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge user mail "
+"redirector."
+msgstr ""
+"Veuillez indiquer le nom du serveur qui hébergera le redirecteur du courriel utilisateurs de "
+"Gforge."
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid ""
-"English, Bulgarian, Catalan, Chinese, Dutch, Esperanto, French, German, "
-"Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, "
-"Polish, PortugueseBrazilian, Portuguese, Russian, SimplifiedChinese, "
-"Spanish, Swedish, Thai"
-msgstr ""
-"anglais, bulgare, catalan, chinois traditionnel, néerlandais, espéranto, "
-"français, allemand, grec, hébreu, indonésien, italien, japonais, coréen, "
-"latin, norvégien, polonais, portugais du Brésil, portugais, russe, chinois "
-"simplifié, espagnol, suédois, thai"
-
 #. Type: select
 #. DefaultChoice
-#: ../dsf-helper/web-variables.templates:1001
-#: ../dsf-helper/web-variables.templates:1002
+#: ../dsf-helper/web-variables.templates:2001
+#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr "French"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Bulgarian"
 msgstr "bulgare"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Catalan"
 msgstr "catalan"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "Chinese"
-msgstr "chinois (traditionnel)"
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Chinese (Traditional)"
+msgstr "chinois traditionnel"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Dutch"
 msgstr "néerlandais"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Esperanto"
 msgstr "espéranto"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "French"
 msgstr "français"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "German"
 msgstr "allemand"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Greek"
 msgstr "grec"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Hebrew"
 msgstr "hébreu"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Indonesian"
 msgstr "indonésien"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Italian"
 msgstr "italien"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Japanese"
 msgstr "japonais"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Korean"
 msgstr "coréen"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Latin"
 msgstr "latin"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Norwegian"
 msgstr "norvégien"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Polish"
 msgstr "polonais"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "PortugueseBrazilian"
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Portuguese (Brazilian)"
 msgstr "portugais du Brésil"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Portuguese"
 msgstr "portugais"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Russian"
 msgstr "russe"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
-msgid "SimplifiedChinese"
-msgstr "chinois (simplifié)"
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Chinese (Simplified)"
+msgstr "chinois simplifié"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Spanish"
 msgstr "espagnol"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Swedish"
 msgstr "suédois"
 
 #. Type: select
 #. Choices
-#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
 msgstr "thaï"
 
 #. Type: select
 #. Description
-#: ../dsf-helper/web-variables.templates:1003
+#: ../dsf-helper/web-variables.templates:2003
 msgid "Default language:"
 msgstr "Langue par défaut :"
 
 #. Type: select
 #. Description
-#: ../dsf-helper/web-variables.templates:1003
-msgid "Here is the default language for web pages."
+#: ../dsf-helper/web-variables.templates:2003
+msgid "Please choose the default language for web pages."
 msgstr "Veuillez choisir la langue par défaut des pages web."
 
 #. Type: string
 #. Description
-#: ../dsf-helper/web-variables.templates:2001
+#: ../dsf-helper/web-variables.templates:3001
 msgid "Default theme:"
 msgstr "Thème par défaut :"
 
 #. Type: string
 #. Description
-#: ../dsf-helper/web-variables.templates:2001
+#: ../dsf-helper/web-variables.templates:3001
 msgid ""
-"Here is the default theme for web pages, be carreful to enter a valid name."
+"Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
-"Il s'agit du thème par défaut des pages web. Veillez à indiquer un nom "
-"valide."
+"Veuillez choisir le thème par défaut des pages web. Veillez à indiquer un nom "
+"valable."
+
+#~ msgid ""
+#~ "The hostname of the server that will host your Gforge packages.  It "
+#~ "should not be the same as your main Gforge host."
+#~ msgstr ""
+#~ "Veuillez indiquer le serveur qui hébergera les paquets Gforge. Il devrait "
+#~ "être différent du serveur Gforge principal."
+
+#~ msgid ""
+#~ "The IP address of the server that will host your Gforge installation. "
+#~ "This is needed for the Apache virtualhosting configuration."
+#~ msgstr ""
+#~ "Veuillez indiquer l'adresse IP du serveur qui hébergera Gforge. Cette "
+#~ "information est requise pour la configuration des hôtes virtuels d'Apache."
+
+#~ msgid ""
+#~ "This Gforge account will have all privileges on the Gforge system.  It is "
+#~ "needed to approve the creation of the projects.  Please type a password "
+#~ "here."
+#~ msgstr ""
+#~ "Le compte de l'administrateur Gforge possèdera tous les privilèges sur le "
+#~ "système Gforge. Ce compte est nécessaire pour la création de projets. "
+#~ "Veuillez indiquer un mot de passe pour ce compte."
+
+#~ msgid "The Gforge administrator password - again:"
+#~ msgstr "Confirmation du mot de passe administrateur :"
+
+#~ msgid ""
+#~ "The connection to the DB system requires a password.  Please choose a "
+#~ "password here."
+#~ msgstr ""
+#~ "Veuillez indiquer le mot de passe à utiliser pour la connexion au serveur "
+#~ "de bases de données."
+
+#~ msgid "Password used for the database - again:"
+#~ msgstr ""
+#~ "Confirmation du mot de passe de connexion au serveur de bases de données :"
+
+#~ msgid "The LDAP host:"
+#~ msgstr "Serveur LDAP :"
+
+#~ msgid "The hostname of the LDAP server."
+#~ msgstr "Veuillez indiquer le nom d'hôte du serveur LDAP."
+
+#~ msgid "Accepting this option will perform that redirection."
+#~ msgstr "Si vous choisissez cette option, la redirection sera mise en place."
+
+#~ msgid "LDAP password - again:"
+#~ msgstr "Confirmation du mot de passe LDAP :"
+
+#~ msgid "Generate an SSL certificate"
+#~ msgstr "Génération d'un certificat SSL"
+
+#~ msgid "Please check ${file}"
+#~ msgstr "Vérification de ${file} indispensable"
+
+#~ msgid ""
+#~ "The name of the database that will host your GForge database.  This is "
+#~ "needed for virtually all the subpackages."
+#~ msgstr ""
+#~ "Veuillez indiquer la base qui contiendra les données de Gforge. Cette "
+#~ "information est requise pour la configuration de quasiment tous les sous-"
+#~ "paquets."
+
+#~ msgid ""
+#~ "The admin username of the database that will host your GForge database.  "
+#~ "This is needed for virtually all the subpackages."
+#~ msgstr ""
+#~ "Veuillez indiquer l'identifiant de l'administrateur du serveur de bases "
+#~ "de données qui hébergera la base de données de Gforge. Cette information "
+#~ "est requise pour la configuration de quasiment tous les sous-paquets."
+
+#~ msgid ""
+#~ "The connecton to the DB system requires a password.  Please choose a "
+#~ "password here."
+#~ msgstr ""
+#~ "Veuillez indiquer le mot de passe à utiliser pour vous connecter à la "
+#~ "base de données."
+
+#~ msgid ""
+#~ "The hostname of the server that will host your Gforge packages. It should "
+#~ "not be the same as your main Gforge host."
+#~ msgstr ""
+#~ "Veuillez indiquer le nom du serveur qui hébergera les paquets Gforge. Ce "
+#~ "nom ne devrait pas être identique au nom du serveur Gforge principal."
+
+#~ msgid ""
+#~ "The hostname of the server that will host your Gforge mailing-lists. It "
+#~ "should not be the same as your main Gforge host."
+#~ msgstr ""
+#~ "Veuillez indiquer le nom du serveur qui hébergera les listes de diffusion "
+#~ "de Gforge. Ce nom ne devrait pas être identique au nom du serveur Gforge "
+#~ "principal."
+
+#~ msgid ""
+#~ "In order for Gforge to fully work, some changes must be made to the "
+#~ "${file} file."
+#~ msgstr ""
+#~ "Pour que Gforge fonctionne complètement, des modifications doivent être "
+#~ "apportées au fichier ${file}."
+
+#~ msgid "Shall I modify ${file} automatically?"
+#~ msgstr "Faut-il modifier ${file} automatiquement ?"
+
+#~ msgid ""
+#~ "The hostname of the server that will host your Gforge user mail "
+#~ "redirector. It should not be the same as your main Gforge host."
+#~ msgstr ""
+#~ "Veuillez indiquer le nom du serveur qui hébergera le redirecteur de "
+#~ "courrier des utilisateurs. Ce nom ne devrait pas être identique au nom du "
+#~ "serveur Gforge principal."
+
+#~ msgid ""
+#~ "English, Bulgarian, Catalan, Chinese, Dutch, Esperanto, French, German, "
+#~ "Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, "
+#~ "Polish, PortugueseBrazilian, Portuguese, Russian, SimplifiedChinese, "
+#~ "Spanish, Swedish, Thai"
+#~ msgstr ""
+#~ "anglais, bulgare, catalan, chinois traditionnel, néerlandais, espéranto, "
+#~ "français, allemand, grec, hébreu, indonésien, italien, japonais, coréen, "
+#~ "latin, norvégien, polonais, portugais du Brésil, portugais, russe, "
+#~ "chinois simplifié, espagnol, suédois, thai"
+
+#~ msgid "Chinese"
+#~ msgstr "chinois (traditionnel)"
+
+#~ msgid "SimplifiedChinese"
+#~ msgstr "chinois (simplifié)"
