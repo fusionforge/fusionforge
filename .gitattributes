@@ -64,6 +64,7 @@ gforge/debian/po/de.po -text
 gforge/debian/po/fi.po -text
 gforge/debian/po/gl.po -text
 gforge/debian/po/pt.po -text
+gforge/debian/po/ru.po -text
 gforge/docs/README.gettext -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
