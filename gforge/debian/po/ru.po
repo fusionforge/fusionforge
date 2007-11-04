@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Type: string
 #. Description
@@ -30,7 +31,9 @@ msgstr "Сервер оболочек:"
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
-msgstr "Введите имя сервера, на котором будут расположены учётные записи оболочек для GForge."
+msgstr ""
+"Введите имя сервера, на котором будут расположены учётные записи оболочек "
+"для GForge."
 
 #. Type: string
 #. Description
@@ -42,7 +45,8 @@ msgstr "Сервер загрузок:"
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:7001
-msgid "Please enter the hostname of the server that will host the GForge packages."
+msgid ""
+"Please enter the hostname of the server that will host the GForge packages."
 msgstr "Введите имя сервера, на котором будут расположены пакеты GForge."
 
 #. Type: string
@@ -104,7 +108,8 @@ msgstr "IP-адрес:"
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
-msgstr "Введите IP-адрес сервера, на котором будет располагаться установка GForge."
+msgstr ""
+"Введите IP-адрес сервера, на котором будет располагаться установка GForge."
 
 #. Type: string
 #. Description
@@ -177,8 +182,8 @@ msgid ""
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"GForge позволяет пользователям составить список своих навыков из имеющихся "
-"в базе данных. Запрашиваемый сейчас начальный список навыков будет введён в "
+"GForge позволяет пользователям составить список своих навыков из имеющихся в "
+"базе данных. Запрашиваемый сейчас начальный список навыков будет введён в "
 "базу данных."
 
 #. Type: string
@@ -248,8 +253,8 @@ msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"GForge посылает и принимает множество электронных писем на "
-"адрес \"${noreply}\"."
+"GForge посылает и принимает множество электронных писем на адрес \"${noreply}"
+"\"."
 
 #. Type: boolean
 #. Description
@@ -277,8 +282,8 @@ msgid ""
 "Please provide the password to use when adding users into the LDAP directory "
 "from the web."
 msgstr ""
-"Введите пароль, который будет использован при добавлении пользователей "
-"в каталог LDAP через веб."
+"Введите пароль, который будет использован при добавлении пользователей в "
+"каталог LDAP через веб."
 
 #. Type: note
 #. Description
@@ -295,8 +300,8 @@ msgid ""
 "and restart Apache afterwards."
 msgstr ""
 "Для работы GForge требуется действительный сертификат SSL/TLS. Если у вас "
-"такого не имеется, то вам нужно запустить команду для создания "
-"'mod-ssl-makecert' и после этого перезапустить Apache."
+"такого не имеется, то вам нужно запустить команду для создания 'mod-ssl-"
+"makecert' и после этого перезапустить Apache."
 
 #. Type: note
 #. Description
@@ -320,8 +325,8 @@ msgid ""
 "might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
 "parameters."
 msgstr ""
-"Для GForge требуется соответствующая настройка пакета libpam-ldap. Вам "
-"может понадобиться запустить команду 'dpkg-reconfigure libpam-ldap' для "
+"Для GForge требуется соответствующая настройка пакета libpam-ldap. Вам может "
+"понадобиться запустить команду 'dpkg-reconfigure libpam-ldap' для "
 "исправления некорректных параметров."
 
 #. Type: note
@@ -333,8 +338,8 @@ msgid ""
 "for passwords=crypt."
 msgstr ""
 "Работающие значения: версия протокола LDAP =3, использовать корневую "
-"административную базу данных =да, учётная запись "
-"root =\"cn=admin,dc=<your-dc-here>\", алгоритм шифрования паролей =crypt."
+"административную базу данных =да, учётная запись root =\"cn=admin,dc=<your-"
+"dc-here>\", алгоритм шифрования паролей =crypt."
 
 #. Type: note
 #. Description
@@ -343,8 +348,8 @@ msgid ""
 "Make sure that you type the same password for the libpam-ldap root password "
 "and the GForge LDAP password."
 msgstr ""
-"Убедитесь, что вы ввели тот же пароль root в libpam-ldap, что и для "
-"LDAP GForge."
+"Убедитесь, что вы ввели тот же пароль root в libpam-ldap, что и для LDAP "
+"GForge."
 
 #. Type: boolean
 #. Description
@@ -365,10 +370,10 @@ msgid ""
 "or a complex setup which allows many servers as project web servers or SCM "
 "servers."
 msgstr ""
-"Вы можете использовать простую настройку DNS с групповыми символами, "
-"по которым веб-имена всех проектов преобразуются в один IP-адрес, а "
-"все scm-хосты в одно имя сервера SCM, или сложную настройку, которая "
-"позволяет многим серверам выступать в качестве веб или SCM серверов."
+"Вы можете использовать простую настройку DNS с групповыми символами, по "
+"которым веб-имена всех проектов преобразуются в один IP-адрес, а все scm-"
+"хосты в одно имя сервера SCM, или сложную настройку, которая позволяет "
+"многим серверам выступать в качестве веб или SCM серверов."
 
 #. Type: boolean
 #. Description
@@ -382,8 +387,8 @@ msgid ""
 msgstr ""
 "Даже если используется простая настройка DNS, вы всё равно можете "
 "использовать отдельные машины под серверы проектов; здесь просто "
-"предполагается, что все веб-каталоги проектов размещены на том же "
-"сервере с одним сервером SCM."
+"предполагается, что все веб-каталоги проектов размещены на том же сервере с "
+"одним сервером SCM."
 
 #. Type: boolean
 #. Description
@@ -420,10 +425,9 @@ msgid ""
 "${file}.gforge-old). Alternatively, the needed changes may be written  to "
 "another file (${file}.gforge-new) to let you adapt ${file} yourself."
 msgstr ""
-"Это можно сделать автоматически (существующая версия будет сохранена "
-"под именем ${file}.gforge-old). Или же необходимые изменения могут быть "
-"записаны в другой файл (${file}.gforge-new), чтобы вы могли настроить {file} "
-"вручную."
+"Это можно сделать автоматически (существующая версия будет сохранена под "
+"именем ${file}.gforge-old). Или же необходимые изменения могут быть записаны "
+"в другой файл (${file}.gforge-new), чтобы вы могли настроить ${file} вручную."
 
 #. Type: note
 #. Description
@@ -463,9 +467,9 @@ msgid ""
 "Please enter the domain that will host the GForge installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Введите домен, который будет обслуживать установку GForge. В этом "
-"домене некоторым сервисам (scm, lists и т.д.) будут присвоены свои "
-"собственные поддомены."
+"Введите домен, который будет обслуживать установку GForge. В этом домене "
+"некоторым сервисам (scm, lists и т.д.) будут присвоены свои собственные "
+"поддомены."
 
 #. Type: string
 #. Description
@@ -496,8 +500,7 @@ msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
 msgstr ""
-"Введите имя системы GForge. Оно используется в разных местах по "
-"всей системе."
+"Введите имя системы GForge. Оно используется в разных местах по всей системе."
 
 #. Type: string
 #. Description
@@ -512,8 +515,8 @@ msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "GForge database."
 msgstr ""
-"Введите IP-адрес (или имя хоста) сервера, на котором будет расположена "
-"база данных GForge."
+"Введите IP-адрес (или имя хоста) сервера, на котором будет расположена база "
+"данных GForge."
 
 #. Type: string
 #. Description
@@ -524,7 +527,8 @@ msgstr "Имя базы данных:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Please enter the name of the database that will host the GForge database."
+msgid ""
+"Please enter the name of the database that will host the GForge database."
 msgstr "Введите имя базы данных, которая будет содержать базу данных GForge."
 
 #. Type: string
@@ -546,8 +550,10 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Please enter the host name of the server that will host the GForge packages."
-msgstr "Введите имя хоста сервера, на котором будут располагаться пакеты GForge."
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr ""
+"Введите имя хоста сервера, на котором будут располагаться пакеты GForge."
 
 #. Type: string
 #. Description
@@ -563,10 +569,9 @@ msgid ""
 "page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
-"Члены административной группы новостей могут утверждать новости для "
-"главной страницы GForge. Данный ID не должен быть равен 1. Он должен быть "
-"изменён, только если вы обновляетесь с предыдущей версии и хотите "
-"сохранить данные."
+"Члены административной группы новостей могут утверждать новости для главной "
+"страницы GForge. Данный ID не должен быть равен 1. Он должен быть изменён, "
+"только если вы обновляетесь с предыдущей версии и хотите сохранить данные."
 
 #. Type: string
 #. Description
@@ -618,10 +623,10 @@ msgid ""
 "should be rather simple, as most of the work is automated: once this package "
 "has been successfully installed, just install the 'gforge' package."
 msgstr ""
-"SourceForge больше не обслуживается как свободное ПО; свободная "
-"версия теперь называется GForge. Соответственно пакет был переименован "
-"в 'gforge', а 'sourceforge' больше не поддерживается или сопровождается. "
-"Переход на GForge пройдёт довольно просто, так как большая часть работы "
+"SourceForge больше не обслуживается как свободное ПО; свободная версия "
+"теперь называется GForge. Соответственно пакет был переименован в 'gforge', "
+"а 'sourceforge' больше не поддерживается или сопровождается. Переход на "
+"GForge пройдёт довольно просто, так как большая часть работы "
 "автоматизирована: после успешной установки этого пакета, просто установите "
 "пакет 'gforge'."
 
@@ -652,17 +657,17 @@ msgid ""
 "transition' are installed, data will be saved so that you can safely "
 "uninstall the 'sourceforge' package and proceed to install 'gforge'."
 msgstr ""
-"SourceForge больше не обслуживается как свободное ПО; свободная "
-"версия теперь называется GForge, а пакет 'sourceforge' теперь только "
-"помогает в переходе к 'gforge'. После установки этого пакета-пустышки "
-"и 'gforge-sourceforge-transition', данные будут сохранены, для того чтобы "
-"вы смогли безопасно удалить пакет 'sourceforge' и продолжить установку "
-"'gforge'."
+"SourceForge больше не обслуживается как свободное ПО; свободная версия "
+"теперь называется GForge, а пакет 'sourceforge' теперь только помогает в "
+"переходе к 'gforge'. После установки этого пакета-пустышки и 'gforge-"
+"sourceforge-transition', данные будут сохранены, для того чтобы вы смогли "
+"безопасно удалить пакет 'sourceforge' и продолжить установку 'gforge'."
 
 #. Type: boolean
 #. Description
 #: ../dsf-helper/replace-files.templates:2001
-msgid "In order for GForge to be operational, some changes are needed in ${file}."
+msgid ""
+"In order for GForge to be operational, some changes are needed in ${file}."
 msgstr "Для работы GForge требуется изменить ${file}."
 
 #. Type: string
@@ -687,7 +692,8 @@ msgstr "Сервер-перенаправитель пользовательск
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
-msgstr "Введите имя сервера, который будет перенаправлять почту пользователей GForge."
+msgstr ""
+"Введите имя сервера, который будет перенаправлять почту пользователей GForge."
 
 #. Type: select
 #. Choices
@@ -857,8 +863,8 @@ msgstr "Тема по умолчанию:"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-msgid "Please choose the default theme for web pages. This must be a valid name."
+msgid ""
+"Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
-"Выберите тему по умолчанию для веб-страниц. Должно быть указано "
-"допустимое имя."
-
+"Выберите тему по умолчанию для веб-страниц. Должно быть указано допустимое "
+"имя."
