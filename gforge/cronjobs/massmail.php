@@ -35,7 +35,7 @@ require ('common/include/cron_utils.php');
 
 $err='';
 
-if (!cron_create_lock('gforge-massmail')) {
+if (!cron_create_lock(__FILE__)) {
 	$err = "Massmail already running...exiting";
 		if (!cron_entry(6,$err)) {
 			# rely on crond to report the error
@@ -175,8 +175,8 @@ m_exit($mess);
 function m_exit($mess = '') {
 	global $err;
 	
-	if (!cron_remove_lock('gforge-massmail')) {
-		$err .= "Could not remove lock file\n";
+	if (!cron_remove_lock(__FILE__)) {
+		$err .= "Could not remove lock\n";
 	}
 	if (!cron_entry(6,$mess.$err)) {
 		# rely on crond to report the error
