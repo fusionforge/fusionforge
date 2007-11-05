@@ -33,7 +33,7 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-if (!cron_create_lock('gforge-massmail')) {
+if (!cron_create_lock(__FILE__)) {
 	$err = "Massmail already running...exiting";
 	cron_entry(6,$err);
 	m_exit();
@@ -171,7 +171,7 @@ if (db_error()) {
 m_exit();
 
 function m_exit() {
-	if (!cron_remove_lock('gforge-massmail')) {
+	if (!cron_remove_lock(__FILE__)) {
 		$err .= "Could not remove lock file\n";
 	}
 	cron_entry(6,$err);
