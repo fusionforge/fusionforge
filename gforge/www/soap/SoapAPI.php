@@ -223,11 +223,13 @@ $server->register(
 
 $wsdl_data = $server->wsdl->serialize();
 
+/*
 if ($wsdl == "save") {
    $fp = fopen ("/tmp/SoapAPI1.wsdl", 'w');
    fputs ($fp, $wsdl_data);
    fclose ($fp);
 }
+*/
 
 if ($wsdl) {
     echo $wsdl_data;

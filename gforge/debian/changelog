@@ -1,3 +1,10 @@
+gforge (3.1-31sarge4) oldstable-security; urgency=high
+
+  * Fixed file truncation vulnerabilities (CVE-2007-3921) (this version of
+    Gforge isn't vulnerable to the denial of service part of that CVE).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 05 Nov 2007 10:29:43 +0100
+
 gforge (3.1-31sarge3) oldstable-security; urgency=high
 
   * Fixed cross-site scripting vulnerability (CVE-2007-3918).

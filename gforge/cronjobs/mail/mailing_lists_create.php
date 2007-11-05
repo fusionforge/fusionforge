@@ -3,8 +3,8 @@
 
 //
 //	This script will read in a list existing mailing lists, then add the new lists
-//	and, finally, create the lists in a /tmp/mailman-aliases file
-//	The /tmp/mailman-aliases file will then be read by the mailaliases.php file
+//	and, finally, create the lists in a /var/lib/gforge/dumps/mailman-aliases file
+//	The /var/lib/gforge/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
 //
@@ -45,7 +45,7 @@ echo db_error();
 $rows=db_numrows($res);
 echo "$rows rows returned from query\n";
 
-$h1 = fopen("/tmp/mailman-aliases","w");
+$h1 = fopen("/var/lib/gforge/dumps/mailman-aliases","w");
 
 for ($i=0; $i<$rows; $i++) {
 	echo "Processing row $i\n";

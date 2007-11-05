@@ -1,3 +1,13 @@
+2007-11-04  Roland Mas  <lolando@debian.org>
+	
+	* Several fixes to remove vulnerabilities against symlink attacks
+	in /tmp (CVE-2007-3921).
+	* www/soap/SoapAPI.php: Commented out debugging code that could be
+	used to overwrite files.
+	* cronjobs/mail/mailaliases.php and mailing_lists_create.php: Use
+	/var/lib/gforge/dumps/mailman-aliases rather than
+	/tmp/mailman-aliases. 
+	
 2004-03-28  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* utils/ldap/sql2ldif.pl: Disable shell access for suspended and

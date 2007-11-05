@@ -29,8 +29,8 @@ fclose($h);
 //
 //	Read in the mailman aliases
 //
-$h2 = fopen("/tmp/mailman-aliases","r");
-$mailmancontents = fread($h2,filesize("/tmp/mailman-aliases"));
+$h2 = fopen("/var/lib/gforge/dumps/mailman-aliases","r");
+$mailmancontents = fread($h2,filesize("/var/lib/gforge/dumps/mailman-aliases"));
 $mailmanlines = explode("\n",$mailmancontents);
 for($k = 0; $k < count($mailmanlines); $k++) {
 	$mailmanline = explode(":",$mailmanlines[$k]);
