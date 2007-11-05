@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6162-0+4) UNRELEASED; urgency=low
+gforge (4.6.99+svn6169-0+1) UNRELEASED; urgency=high
 
-  * New SVN snapshot (r6162), including the removal of a few tables
+  * New SVN snapshot (r6169), including the removal of a few tables
     (replaced by views where needed, or access to the RBAC tables when
     possible).
   * Updated package description and Debconf templates after a review by
@@ -26,9 +26,11 @@ gforge (4.6.99+svn6162-0+4) UNRELEASED; urgency=low
   * Applied a patch by Steffen Joeris <steffen.joeris@skolelinux.de> for a
     security vulnerability (CVE-2007-5156) in the copy of FCKeditor
     embedded in gforge-plugins-extra (closes: #447590).
+  * SVN r6169 also fixes a few denial of service and file truncation
+    vulnerabilities (CVE-2007-3921).
   * Added Vcs-Bzr: field to debian/control.
 
- -- Roland Mas <lolando@debian.org>  Fri, 02 Nov 2007 14:05:44 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 04 Nov 2007 16:43:55 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 

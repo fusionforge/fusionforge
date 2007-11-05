@@ -80,21 +80,8 @@ function chrootCommand($command) {
 //  false - file already exists
 //	IMPORTANT - There tmp dir should have write access to create the lock
 function cron_create_lock($name) {
-	if (!preg_match('/^[[:alnum:]\.\-_]+$/', $name)) {
-		return false;
-	}
-	$lockf = '/tmp/blahlock'.$name;
-
-	if (file_exists($lockf)) {
-		return false;
-	} else {
-	    $fp = fopen($lockf,'w');
-		if ($fp) {
-			fclose($fp);
-			return true;
-		}
-	}
-	return false;
+	$sem = sem_get (ftok ($name, 'g'), 1, 0600, 1) ;
+	return sem_acquire ($sem);
 }
 
 //
@@ -107,14 +94,8 @@ function cron_create_lock($name) {
 //  true - lock file deleted successfully
 //  false - error deleting file
 function cron_remove_lock($name) {
-	$lockf = '/tmp/blahlock'.$name;
-
-	if (file_exists($lockf) && is_writeable($lockf)) {
-		if (unlink($lockf)) {
-			return true;
-		}
-	}
-	return false;
+	$sem = sem_get (ftok ($name, 'g')) ;
+	return sem_release ($sem);
 }
 
 ?>

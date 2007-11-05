@@ -1,3 +1,16 @@
+2007-11-04  Roland Mas  <lolando@debian.org>
+
+	* Several fixes to remove vulnerabilities against symlink attacks
+	in /tmp (CVE-2007-3921).
+	* common/include/cron_utils.php: Use semaphore rather than
+	insecure lock files.
+	* cronjobs/massmail.php: Adapt to that semaphore change.
+	* www/soap/index.php: Commented out debugging code that could be
+	used to overwrite files.
+	* cronjobs/mail/mailaliases.php and mailing_lists_create.php: Use
+	/var/lib/gforge/dumps/mailman-aliases rather than
+	/tmp/mailman-aliases. 
+
 2007-10-31  Roland Mas  <lolando@debian.org>
 
 	* www/include/project_home.php: updated
