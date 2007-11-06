@@ -93,7 +93,7 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
        print "$srcfile -> $destfile\n" ;
 
        open S, "< $srcfile" ;
-       open D, "> $destfile" ;
+       my $dest = "" ;
        
        while (my $l = <S>) {
 	   chomp $l ;
@@ -102,9 +102,18 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
 	       my $chunk = get_chunk ($chunkname, $ext) ;
 	       $l =~ s!\#DSFHELPER:$chunkname\#!$chunk! ;
 	   }
-	   print D "$l\n" ;
+	   $dest .= "$l\n"
        }
 
+       if ($ext eq "templates") {
+	   # Need to remove a few extra blank lines
+	   $dest =~ s/^#.*\n//gm ;
+	   $dest =~ s/^\n*//g ;
+	   $dest =~ s/\n\n+/\n\n/g ;
+       }
+
+       open D, "> $destfile" ;
+       print D "$dest" ;
        close D ;
        close S ;
    }

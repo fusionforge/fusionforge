@@ -29,8 +29,10 @@ gforge (4.6.99+svn6169-1) unstable; urgency=high
   * SVN r6169 also fixes a few denial of service and file truncation
     vulnerabilities (CVE-2007-3921).
   * Added Vcs-Bzr: field to debian/control.
+  * Patched dsf-helper.pl so it removes a few blank lines in Debconf
+    templates, since they're not allowed.
 
- -- Roland Mas <lolando@debian.org>  Tue, 06 Nov 2007 13:47:21 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Nov 2007 20:10:41 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 
