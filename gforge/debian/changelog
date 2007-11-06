@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6169-0+2) UNRELEASED; urgency=high
+gforge (4.6.99+svn6169-1) unstable; urgency=high
 
   * New SVN snapshot (r6169), including the removal of a few tables
     (replaced by views where needed, or access to the RBAC tables when
@@ -30,7 +30,7 @@ gforge (4.6.99+svn6169-0+2) UNRELEASED; urgency=high
     vulnerabilities (CVE-2007-3921).
   * Added Vcs-Bzr: field to debian/control.
 
- -- Roland Mas <lolando@debian.org>  Tue, 06 Nov 2007 13:44:52 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Nov 2007 13:47:21 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 
