@@ -16,183 +16,163 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: LocFactoryEditor 1.7b1\n"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
-#: ../dsf-helper/shellhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your shell server"
+#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Máy phục vụ trình bao :"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../gforge-db-postgresql.templates.dsfh-in:4001
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
 msgstr ""
 "Hãy gõ tên máy của máy phục vụ sẽ cung cấp các tài khoản trình bao GForge."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
-#: ../dsf-helper/downloadhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your download server"
+#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Máy phục vụ tải xuống:"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../gforge-db-postgresql.templates.dsfh-in:7001
 msgid ""
 "Please enter the hostname of the server that will host the GForge packages."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ cung cấp các gói GForge."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ cung cấp các gói GForge."
 
+#. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
-#. Type: string
-#. Description
 msgid "It should not be the same as the main GForge host."
 msgstr "Không nên trùng với máy chủ GForge chính."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
-#: ../gforge-dns-bind9.templates.dsfh-in:5001
 #. Type: string
 #. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "quản trị"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 #. Type: string
 #. Description
-#| msgid "The Gforge administrator login"
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "GForge administrator login:"
 msgstr "Tên đăng nhập quản trị GForge:"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 #. Type: string
 #. Description
 #. Type: password
 #. Description
-#| msgid ""
-#| "This Gforge account will have all privileges on the Gforge system.  It is "
-#| "needed to approve the creation of the projects."
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
 msgstr ""
-"Tài khoản quản trị GForge này sẽ được mọi quyền truy cập hệ thống. Nó dùng để tán thành việc tạo dự án mới."
+"Tài khoản quản trị GForge này sẽ được mọi quyền truy cập hệ thống. Nó dùng "
+"để tán thành việc tạo dự án mới."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 #. Type: string
 #. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr "Hãy chọn tên người dùng cho tài khoản này."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/host-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your IP address"
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Địa chỉ IP:"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/host-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
-msgstr ""
-"Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt GForge."
+msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt GForge."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../dsf-helper/host-variables.templates:2001
 #. Type: string
 #. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 #. Type: password
 #. Description
-#| msgid "The Gforge administrator password"
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "GForge administrator password:"
 msgstr "Mật khẩu quản trị GForge:"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 #. Type: password
 #. Description
-#| msgid "Please re-type the password for confirmation."
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "Please choose the password for this account."
 msgstr "Hãy chọn mật khẩu cho tài khoản này."
 
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 #: ../dsf-helper/ldap-variables.templates:5001
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#| msgid "Please re-type the password for confirmation."
 msgid "Password confirmation:"
 msgstr "Xác nhận mật khẩu :"
 
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 #: ../dsf-helper/ldap-variables.templates:5001
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
 msgid "Please re-type the password for confirmation."
 msgstr "Hãy gõ lại mật khẩu để xác nhận nó."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 #. Type: string
 #. Description
-#| msgid "The initial list of skills"
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Initial list of skills:"
 msgstr "Danh sách kỹ năng ban đầu :"
 
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 #. Type: string
 #. Description
-#| msgid ""
-#| "Gforge allows users to define a list of their skills, to be chosen "
-#| "amongst those present in the database.  This list is the initial list of "
-#| "skills that will enter the database.  Please enter the skill names "
-#| "separated by semi-colons `;'."
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -202,50 +182,45 @@ msgstr ""
 "của mình, để được chọn trong các điều nằm trong cơ sở dữ liệu. Danh sách này "
 "là danh sách kỹ năng ban đầu sẽ vào cơ sở dữ liệu."
 
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 #. Type: string
 #. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr "Hãy gõ danh sách các tên kỹ năng định giới bằng dấu chấm phẩy « ; »."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
 #. Type: password
 #. Description
-#| msgid "Password used for the database"
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Password used for the database:"
 msgstr "Mật khẩu dùng cho cơ sở dữ liệu :"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
 #. Type: password
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Connections to the database system are authenticated by a password."
 msgstr "Kết nối đến hệ thống cơ sở dữ liệu thì xác thực bằng mật khẩu."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
 #. Type: password
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Please choose the connection password."
 msgstr "Hãy chọn mật khẩu kết nối."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The LDAP base DN"
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
 msgid "LDAP base DN:"
 msgstr "Tên phân biệt cơ bản LDAP:"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid ""
-#| "The DN is used to refer to the LDAP directory unambiguously.  You could "
-#| "use, for instance, \"dc=gforge,dc=example,dc=com\""
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
 msgid ""
 "The DN (Distinguished Name) is used to refer to the LDAP directory "
 "unambiguously. Example: \"dc=gforge,dc=example,dc=com\"."
@@ -253,125 +228,103 @@ msgstr ""
 "Tên phân biệt (DN) này dùng để tham chiếu đến thư mục LDAP một cách rõ ràng. "
 "Thí dụ : « dc=gforge,dc=example,dc=com »."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
 #. Type: string
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
 msgid "LDAP server hostname:"
 msgstr "Tên máy của máy phục vụ LDAP:"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
 #. Type: boolean
 #. Description
-#| msgid "Do you want mail to ${noreply} to be deleted?"
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
 msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
-#| "even some e-mail to that address too."
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
 "GForge gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "It is advised that you let the package direct e-mail to that address to a "
-#| "black hole (/dev/null), unless you have another use for that address."
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
 msgstr ""
-"Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị hủy), trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
+"Các thư gửi đến địa chỉ đó nên bị chuyển hướng tới « /dev/null » (bị hủy), "
+"trừ bạn muốn sử dụng địa chỉ đó bằng cách khác."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
 #. Type: password
 #. Description
-#| msgid "LDAP password used to add users from the web"
+#: ../gforge-dns-bind9.templates.dsfh-in:12001
+#: ../dsf-helper/ldap-variables.templates:4001
 msgid "LDAP password used to add users from the web:"
 msgstr "Mật khẩu LDAP dùng để thêm người dùng từ Web:"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
 #. Type: password
 #. Description
-#| msgid ""
-#| "In order to add users into the LDAP directory from the web, you need to "
-#| "provide a password."
+#: ../gforge-dns-bind9.templates.dsfh-in:12001
+#: ../dsf-helper/ldap-variables.templates:4001
 msgid ""
 "Please provide the password to use when adding users into the LDAP directory "
 "from the web."
 msgstr ""
 "Hãy cung cấp mật khẩu cần dùng khi thêm người dùng vào thư mục LDAP từ Web."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
 #. Type: note
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
 msgid "SSL certificate generation"
 msgstr "Tạo ra chứng nhận SSL"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
 #. Type: note
 #. Description
-#| msgid ""
-#| "You need a valid SSL/TLS certificate to run Gforge. If you don't already "
-#| "have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
-#| "one, and restart Apache afterwards."
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
 msgid ""
 "A valid SSL/TLS certificate is needed to run GForge. If you don't already "
 "use one, you'll have to run the 'mod-ssl-makecert' command to generate one, "
 "and restart Apache afterwards."
 msgstr ""
-"Một chứng nhận SSL/TLS hợp lệ cần thiết để chạy GForge. Không có thì bạn cần phải chạy câu lệnh « mod-ssl-makecert » để tạo nó, rồi khởi chạy lại Apache."
+"Một chứng nhận SSL/TLS hợp lệ cần thiết để chạy GForge. Không có thì bạn cần "
+"phải chạy câu lệnh « mod-ssl-makecert » để tạo nó, rồi khởi chạy lại Apache."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
 #. Type: note
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
 msgid ""
 "Please note you will not be able to start Apache if you have no such "
 "certificate."
-msgstr ""
-"Không có chứng nhận như vậy thì không thể khởi chạy Apache."
+msgstr "Không có chứng nhận như vậy thì không thể khởi chạy Apache."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
 #. Type: note
 #. Description
-#| msgid "Gforge requires appropriate PAM-LDAP configuration"
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid "Appropriate PAM-LDAP configuration required for GForge"
 msgstr "Cấu hình PAM-LDAP thích hợp cần thiết cho GForge"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
 #. Type: note
 #. Description
-#| msgid ""
-#| "Gforge requires the libpam-ldap package to be configured appropriately.  "
-#| "You might need to \"dpkg-reconfigure libpam-ldap\" in order to fix "
-#| "incorrect parameters."
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid ""
 "GForge requires the libpam-ldap package to be configured appropriately. You "
 "might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
 "parameters."
 msgstr ""
-"GForge cần thiết gói « libpam-ldap » có cấu hình thích hợp. Bạn có thể cần phải chạy câu lệnh cấu hình lại gói « dpkg-reconfigure libpam-ldap » để sửa chữa tham số sai."
+"GForge cần thiết gói « libpam-ldap » có cấu hình thích hợp. Bạn có thể cần "
+"phải chạy câu lệnh cấu hình lại gói « dpkg-reconfigure libpam-ldap » để sửa "
+"chữa tham số sai."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
 #. Type: note
 #. Description
-#| msgid ""
-#| "Known good values are: LDAP protocol version=3, make root database "
-#| "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to "
-#| "use for passwords=crypt.  Make sure that you type the same password for "
-#| "the libpam-ldap root password and the Gforge LDAP password."
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
 "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
@@ -387,319 +340,277 @@ msgstr ""
 "• crypt to use for passwords=crypt\n"
 "\t(mật mã cần dùng cho các mật khẩu)"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
 #. Type: note
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
 msgid ""
 "Make sure that you type the same password for the libpam-ldap root password "
 "and the GForge LDAP password."
-msgstr "Hãy kiểm tra xem bạn gõ cùng một mật khẩu cho mật khẩu người chủ « libpam-"
+msgstr ""
+"Hãy kiểm tra xem bạn gõ cùng một mật khẩu cho mật khẩu người chủ « libpam-"
 "ldap » và mật khẩu LDAP GForge."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#| msgid "Do you want a simple DNS setup?"
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
 msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Bạn có muốn thiết lập DNS đơn giản cho GForge không?"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#| msgid ""
-#| "You can have a simple DNS setup wich uses wildcards to map all project "
-#| "web-hosts to a single IP, and direct all the scm-hosts to a single SCM "
-#| "server, or a complex setup wich allows you to have many servers as "
-#| "project web servers or SCM servers."
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
 "or a complex setup which allows many servers as project web servers or SCM "
 "servers."
 msgstr ""
-"Bạn có thể sử dụng một thiết lập DNS đơn giản có ký tự đại diện, để ánh xạ mọi máy chủ Web của dự án tới cùng một địa chỉ IP, và chuyển hướng mọi máy chủ scm-host tới cùng một máy phục vụ SCM, hoặc một thiết lập phức tạp cho phép nhiều máy phục vụ làm máy phục vụ Web của dự án hay máy phục vụ SCM."
+"Bạn có thể sử dụng một thiết lập DNS đơn giản có ký tự đại diện, để ánh xạ "
+"mọi máy chủ Web của dự án tới cùng một địa chỉ IP, và chuyển hướng mọi máy "
+"chủ scm-host tới cùng một máy phục vụ SCM, hoặc một thiết lập phức tạp cho "
+"phép nhiều máy phục vụ làm máy phục vụ Web của dự án hay máy phục vụ SCM."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#| msgid ""
-#| "Even though you have a simple DNS setup, you can still have separate "
-#| "boxes for your project servers, it just assumes you have all the project "
-#| "web dirs on the same server and a single server for SCM."
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
 "the same server with a single SCM server."
 msgstr ""
-"Thậm chí nếu bạn sử dụng một thiết lập DNS đơn giản, bạn vẫn còn có thể sử dụng các máy khác nhau làm máy phục vụ dự án; nó chỉ giả sử tất cả các thư mục Web của dự án nằm trên cùng một máy phục vụ, với một máy phục vụ SCM riêng lẻ."
+"Thậm chí nếu bạn sử dụng một thiết lập DNS đơn giản, bạn vẫn còn có thể sử "
+"dụng các máy khác nhau làm máy phục vụ dự án; nó chỉ giả sử tất cả các thư "
+"mục Web của dự án nằm trên cùng một máy phục vụ, với một máy phục vụ SCM "
+"riêng lẻ."
 
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:2001
 #: ../dsf-helper/replace-files.templates:3001
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
 msgid "Do you want ${file} to be updated?"
 msgstr "Bạn có muốn cập nhật tập tin ${file} không?"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
+#: ../dsf-helper/replace-files.templates:3001
 msgid ""
 "In order for GForge to be fully uninstalled, some changes are needed in "
 "${file}."
 msgstr "Để hủy cài đặt hoàn toàn GForge, tập tin ${file} cần phải thay đổi."
 
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:2001
 #: ../dsf-helper/replace-files.templates:3001
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#| msgid ""
-#| "I can either do them for you (and backup the current version in ${file}."
-#| "gforge-old), or write the changes to another file (${file}.gforge-new) "
-#| "and let you propagate the changes to ${file} yourself."
 msgid ""
 "This can be done automatically (the current version will be backed up in "
 "${file}.gforge-old). Alternatively, the needed changes may be written  to "
 "another file (${file}.gforge-new) to let you adapt ${file} yourself."
 msgstr ""
-"Có thể làm thay đổi một cách tự động (phiên bản hiện thời sẽ được sao lưu vào « ${file}.gforge-old »). Hoặc các thay đổi yêu cầu có thể được ghi vào tập tin khác (${file}.gforge-new) để cho bạn tự sửa đổi ${file}."
+"Có thể làm thay đổi một cách tự động (phiên bản hiện thời sẽ được sao lưu "
+"vào « ${file}.gforge-old »). Hoặc các thay đổi yêu cầu có thể được ghi vào "
+"tập tin khác (${file}.gforge-new) để cho bạn tự sửa đổi ${file}."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
 #. Type: note
 #. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
 msgid "${file} must be checked"
 msgstr "Cần phải kiểm tra ${file}"
 
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
 #. Type: note
 #. Description
-#| msgid "Shall I modify the ${file} automatically?"
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
 msgid "You have chosen to not change ${file} automatically."
 msgstr "Bạn đã chọn không thay đổi tự động ${file}."
 
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
 #. Type: note
 #. Description
-#| msgid ""
-#| "You have chosen not to let the Gforge package update the ${file} file.  "
-#| "Very well, I have not changed it.  Instead, I have written the suggested "
-#| "changes into ${file}.gforge-new. Please check this file and apply the "
-#| "appropriate changes to ${file}."
+#: ../gforge-dns-bind9.templates.dsfh-in:18001
+#: ../dsf-helper/replace-files.templates:4001
 msgid ""
 "Instead, the suggested changes have been written into ${file}.gforge-new. "
 "Please check this file and apply the appropriate changes to ${file}."
 msgstr ""
-"Thay vào đó, các thay đổi đã đề nghị đã được ghi vào « ${file}.gforge-new ». Hãy kiểm tra tập tin này, rồi áp dụng những thay đổi thích hợp vào ${file}."
+"Thay vào đó, các thay đổi đã đề nghị đã được ghi vào « ${file}.gforge-new ». "
+"Hãy kiểm tra tập tin này, rồi áp dụng những thay đổi thích hợp vào ${file}."
 
-#: ../dsf-helper/common-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your Gforge domain or subdomain name"
+#: ../dsf-helper/common-variables.templates:2001
 msgid "GForge domain or subdomain name:"
 msgstr "Tên miền hay miền con GForge:"
 
-#: ../dsf-helper/common-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid ""
-#| "The domain that will host your Gforge installation.  Some services will "
-#| "be given their own subdomain in that domain (scm, lists, etc.)."
+#: ../dsf-helper/common-variables.templates:2001
 msgid ""
 "Please enter the domain that will host the GForge installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Hãy gõ miền sẽ chứa bản cài đặt GForge. Một số dịch vụ (scm, lists v.v.) sẽ nhận miền con riêng ở trong miền đó."
+"Hãy gõ miền sẽ chứa bản cài đặt GForge. Một số dịch vụ (scm, lists v.v.) sẽ "
+"nhận miền con riêng ở trong miền đó."
 
-#: ../dsf-helper/common-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid "The Gforge admin email address."
+#: ../dsf-helper/common-variables.templates:3001
 msgid "GForge administrator e-mail address:"
 msgstr "Địa chỉ thư của quản trị GForge:"
 
-#: ../dsf-helper/common-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid ""
-#| "The email address of the Gforge administrator of your site.  Needed in "
-#| "case a problem occurs."
+#: ../dsf-helper/common-variables.templates:3001
 msgid ""
 "Please enter the e-mail address of the GForge administrator of this site. It "
 "will be used when problems occur."
 msgstr ""
-"Hãy gõ địa chỉ thư điện tử của quản trị GForge của địa chỉ Web này. Nó sẽ dùng khi gặp vấn đề."
+"Hãy gõ địa chỉ thư điện tử của quản trị GForge của địa chỉ Web này. Nó sẽ "
+"dùng khi gặp vấn đề."
 
-#: ../dsf-helper/common-variables.templates:4001
 #. Type: string
 #. Description
-#| msgid "The Gforge system name"
+#: ../dsf-helper/common-variables.templates:4001
 msgid "GForge system name:"
 msgstr "Tên hệ thống GForge:"
 
-#: ../dsf-helper/common-variables.templates:4001
 #. Type: string
 #. Description
-#| msgid "This name is used in various places throughout the system."
+#: ../dsf-helper/common-variables.templates:4001
 msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
-msgstr "Hãy gõ tên của hệ thống GForge. Nó dùng ở các nơi khác nhau trên khắp hệ thống."
+msgstr ""
+"Hãy gõ tên của hệ thống GForge. Nó dùng ở các nơi khác nhau trên khắp hệ "
+"thống."
 
-#: ../dsf-helper/dbhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your database server"
+#: ../dsf-helper/dbhost-variables.templates:2001
 msgid "Database server:"
 msgstr "Máy phục vụ cơ sở dữ liệu :"
 
-#: ../dsf-helper/dbhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid ""
-#| "The IP address (or host name) of the server that will host your GForge "
-#| "database.  This is needed for virtually all the subpackages."
+#: ../dsf-helper/dbhost-variables.templates:2001
 msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "GForge database."
 msgstr ""
 "Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu GForge."
 
-#: ../dsf-helper/dbhost-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid "Your database name"
+#: ../dsf-helper/dbhost-variables.templates:3001
 msgid "Database name:"
 msgstr "Tên cơ sở dữ liệu :"
 
-#: ../dsf-helper/dbhost-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../dsf-helper/dbhost-variables.templates:3001
 msgid ""
 "Please enter the name of the database that will host the GForge database."
-msgstr ""
-"Hãy gõ tên của cơ sở dữ liệu sẽ chứa cơ sở dữ liệu GForge."
+msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ chứa cơ sở dữ liệu GForge."
 
-#: ../dsf-helper/dbhost-variables.templates:4001
 #. Type: string
 #. Description
-#| msgid "Your database admin username"
+#: ../dsf-helper/dbhost-variables.templates:4001
 msgid "Database administrator username:"
 msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
 
-#: ../dsf-helper/dbhost-variables.templates:4001
 #. Type: string
 #. Description
+#: ../dsf-helper/dbhost-variables.templates:4001
 msgid ""
 "Please enter the username of the database administrator for the server that "
 "will host the GForge database."
-msgstr "Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa cơ sở dữ liệu GForge."
+msgstr ""
+"Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa cơ "
+"sở dữ liệu GForge."
 
-#: ../dsf-helper/downloadhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../dsf-helper/downloadhost-variables.templates:2001
 msgid ""
 "Please enter the host name of the server that will host the GForge packages."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa các gói GForge."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói GForge."
 
-#: ../dsf-helper/groupid-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The news admin group id"
+#: ../dsf-helper/groupid-variables.templates:2001
 msgid "News administrative group ID:"
 msgstr "ID nhóm quản trị tin tức:"
 
-#: ../dsf-helper/groupid-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid ""
-#| "Members of the news admin group can approve news for the Gforge main "
-#| "page.  This group id MUST NOT be 1. You only need to touch this group if "
-#| "you upgrade from a previous version and want to keep your data."
+#: ../dsf-helper/groupid-variables.templates:2001
 msgid ""
 "The members of the news admin group can approve news for the GForge main "
 "page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
-"Mọi thành viên của nhóm quản trị tin tức có quyền tán thành tin tức để hiển thị trên trang chính GForge. ID nhóm (GID) này PHẢI khác với số 1. Thay đổi nó chỉ nếu bạn nâng cấp từ phiên bản cũ và muốn giữ lại dữ liệu."
+"Mọi thành viên của nhóm quản trị tin tức có quyền tán thành tin tức để hiển "
+"thị trên trang chính GForge. ID nhóm (GID) này PHẢI khác với số 1. Thay đổi "
+"nó chỉ nếu bạn nâng cấp từ phiên bản cũ và muốn giữ lại dữ liệu."
 
-#: ../dsf-helper/groupid-variables.templates:3001
 #. Type: string
 #. Description
+#: ../dsf-helper/groupid-variables.templates:3001
 msgid "Statistics administrative group ID:"
 msgstr "ID nhóm quản trị thống kê:"
 
-#: ../dsf-helper/groupid-variables.templates:4001
 #. Type: string
 #. Description
-#| msgid "The peer rating admin group id"
+#: ../dsf-helper/groupid-variables.templates:4001
 msgid "Peer rating administrative group ID:"
 msgstr "ID nhóm quản trị đánh giá ngang hàng:"
 
-#: ../dsf-helper/ldap-variables.templates:3001
 #. Type: string
 #. Description
+#: ../dsf-helper/ldap-variables.templates:3001
 msgid "LDAP server host name:"
 msgstr "Tên máy của máy phục vụ LDAP:"
 
-#: ../dsf-helper/lists-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your mailing-lists server"
+#: ../dsf-helper/lists-variables.templates:2001
 msgid "Mailing lists server:"
 msgstr "Máy phục vụ hộp thư chung:"
 
-#: ../dsf-helper/lists-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../dsf-helper/lists-variables.templates:2001
 msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung GForge."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung GForge."
 
-#: ../dsf-helper/migration.templates:2001
 #. Type: boolean
 #. Description
-#| msgid "Migrate to Gforge?"
+#: ../dsf-helper/migration.templates:2001
 msgid "Migrate to GForge?"
 msgstr "Chuyển sang GForge không?"
 
-#: ../dsf-helper/migration.templates:2001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "The free software version of the Sourceforge software has been renamed to "
-#| "\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge"
-#| "\", and \"sourceforge\" is no longer supported or maintained.  The "
-#| "transition to Gforge should be rather simple, as most of the work is "
-#| "automated: once this package has been successfully installed, just "
-#| "install the \"gforge\" package and things should go smoothly."
+#: ../dsf-helper/migration.templates:2001
 msgid ""
 "SourceForge is no longer maintained as free software; the free version is "
 "now named GForge. Accordingly, the package has been renamed to 'gforge', and "
@@ -707,39 +618,32 @@ msgid ""
 "should be rather simple, as most of the work is automated: once this package "
 "has been successfully installed, just install the 'gforge' package."
 msgstr ""
-"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « sourceforge » không còn được hỗ trợ hoặc duy trì lại. Tiến trình chuyển tiếp sang GForge nên là hơi đơn giản, vì phần lớn công việc chạy tự động; một khi gói này đã được cài đặt, chỉ cần cài đặt gói « gforge »."
+"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do "
+"lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « "
+"sourceforge » không còn được hỗ trợ hoặc duy trì lại. Tiến trình chuyển tiếp "
+"sang GForge nên là hơi đơn giản, vì phần lớn công việc chạy tự động; một khi "
+"gói này đã được cài đặt, chỉ cần cài đặt gói « gforge »."
 
-#: ../dsf-helper/migration.templates:2001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "You still have the option not to upgrade to Gforge yet, for instance if "
-#| "you want to backup things beforehand.  If you refuse the upgrade, nothing "
-#| "will happen."
+#: ../dsf-helper/migration.templates:2001
 msgid ""
 "You still have the option not to upgrade to GForge yet, for instance if you "
 "want to back things up beforehand. If you refuse the upgrade, nothing will "
 "happen."
 msgstr ""
-"Bạn vẫn còn có tùy chọn chưa nâng cấp lên GForge, chẳng hạn nếu bạn muốn sao lưu dữ liệu trước đó. Từ chối nâng cấp thì không có gì sẽ xảy ra."
+"Bạn vẫn còn có tùy chọn chưa nâng cấp lên GForge, chẳng hạn nếu bạn muốn sao "
+"lưu dữ liệu trước đó. Từ chối nâng cấp thì không có gì sẽ xảy ra."
 
-#: ../dsf-helper/migration.templates:3001
 #. Type: note
 #. Description
-#| msgid "Sourceforge is no more"
+#: ../dsf-helper/migration.templates:3001
 msgid "Sourceforge discontinued"
 msgstr "Sourceforge không còn tiếp tục lại"
 
-#: ../dsf-helper/migration.templates:3001
 #. Type: note
 #. Description
-#| msgid ""
-#| "Sourceforge has been renamed Gforge, and is no longer maintained as free "
-#| "software. This \"sourceforge\" package is only here to help you upgrade "
-#| "to Gforge.  Once you have installed this package and the one it depends "
-#| "on (gforge-sourceforge-transition), your data have been saved, and you "
-#| "can safely uninstall the \"sourceforge\" package and proceed to install "
-#| "Gforge."
+#: ../dsf-helper/migration.templates:3001
 msgid ""
 "SourceForge is no longer maintained as free software; the free version is "
 "now named GForge, and the 'sourceforge' package is now a dummy package to "
@@ -747,222 +651,212 @@ msgid ""
 "transition' are installed, data will be saved so that you can safely "
 "uninstall the 'sourceforge' package and proceed to install 'gforge'."
 msgstr ""
-"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « sourceforge » lúc bây giờ là gói giả để giúp cài đặt « gforge ». Một khi gói giả này và gói « gforge-sourceforge-"
-"transition » đã được cài đặt, dữ liệu sẽ được lưu để bạn có thể hủy cài đặt an toàn gói « sourceforge » rồi cài đặt « gforge »."
+"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do "
+"lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « "
+"sourceforge » lúc bây giờ là gói giả để giúp cài đặt « gforge ». Một khi gói "
+"giả này và gói « gforge-sourceforge-transition » đã được cài đặt, dữ liệu sẽ "
+"được lưu để bạn có thể hủy cài đặt an toàn gói « sourceforge » rồi cài đặt « "
+"gforge »."
 
-#: ../dsf-helper/replace-files.templates:2001
 #. Type: boolean
 #. Description
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
+#: ../dsf-helper/replace-files.templates:2001
 msgid ""
 "In order for GForge to be operational, some changes are needed in ${file}."
 msgstr "Để GForge hoạt động được, ${file} cần phải thay đổi."
 
-#: ../dsf-helper/shellhost-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../dsf-helper/shellhost-variables.templates:2001
 msgid ""
 "Please enter the host name of the server that will host the GForge shell "
 "accounts."
-msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao GForge."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao GForge."
 
-#: ../dsf-helper/users-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "Your user mail redirector server"
+#: ../dsf-helper/users-variables.templates:2001
 msgid "User mail redirector server:"
 msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
 
-#: ../dsf-helper/users-variables.templates:2001
 #. Type: string
 #. Description
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
+#: ../dsf-helper/users-variables.templates:2001
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
 msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng GForge."
+"Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
+"GForge."
 
-#: ../dsf-helper/web-variables.templates:2001
-#: ../dsf-helper/web-variables.templates:2002
 #. Type: select
 #. Choices
 #. Type: select
 #. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2001
+#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr "tiếng Anh"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Bulgarian"
 msgstr "tiếng Bun-ga-ri"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Catalan"
 msgstr "tiếng Ca-ta-lăng"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Chinese (Traditional)"
 msgstr "tiếng Trung (truyền thống)"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Dutch"
 msgstr "tiếng Hòa"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Esperanto"
 msgstr "tiếng Etpêrantô"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "French"
 msgstr "tiếng Pháp"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "German"
 msgstr "tiếng Đức"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Greek"
 msgstr "tiếng Hy Lạp"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Hebrew"
 msgstr "tiếng Do Thái"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Indonesian"
 msgstr "tiếng Nam Dương"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Italian"
 msgstr "tiếng Ý"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Japanese"
 msgstr "tiếng Nhật"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Korean"
 msgstr "tiếng Hàn"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Latin"
 msgstr "tiếng La-tinh"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Norwegian"
 msgstr "tiếng Na Uy"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Polish"
 msgstr "tiếng Ba Lan"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
-#| msgid "PortugueseBrazilian"
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Portuguese (Brazilian)"
 msgstr "tiếng Bổ Đào Nhà (Bra-xin)"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Portuguese"
 msgstr "tiếng Bổ Đào Nhà"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Russian"
 msgstr "tiếng Nga"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Chinese (Simplified)"
 msgstr "tiếng Trung (phổ thông)"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Spanish"
 msgstr "tiếng Tây Ban Nha"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Swedish"
 msgstr "tiếng Thuỵ Điển"
 
-#: ../dsf-helper/web-variables.templates:2001
 #. Type: select
 #. Choices
+#: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
 msgstr "tiếng Thái"
 
-#: ../dsf-helper/web-variables.templates:2003
 #. Type: select
 #. Description
-#| msgid "Default language"
+#: ../dsf-helper/web-variables.templates:2003
 msgid "Default language:"
 msgstr "Ngôn ngữ mặc định:"
 
-#: ../dsf-helper/web-variables.templates:2003
 #. Type: select
 #. Description
-#| msgid "Here is the default language for web pages."
+#: ../dsf-helper/web-variables.templates:2003
 msgid "Please choose the default language for web pages."
 msgstr "Hãy chọn ngôn ngữ mặc định cho trang Web."
 
-#: ../dsf-helper/web-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid "Default theme"
+#: ../dsf-helper/web-variables.templates:3001
 msgid "Default theme:"
 msgstr "Sắc thái mặc định:"
 
-#: ../dsf-helper/web-variables.templates:3001
 #. Type: string
 #. Description
-#| msgid ""
-#| "Here is the default theme for web pages, be carreful to enter a valid "
-#| "name."
+#: ../dsf-helper/web-variables.templates:3001
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
-msgstr ""
-"Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."

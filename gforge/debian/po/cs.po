@@ -27,14 +27,12 @@ msgstr ""
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:4001
 #: ../dsf-helper/shellhost-variables.templates:2001
-#| msgid "Your shell server"
 msgid "Shell server:"
 msgstr "Server se shellovými účty:"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:4001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
@@ -44,14 +42,12 @@ msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty GFor
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:7001
 #: ../dsf-helper/downloadhost-variables.templates:2001
-#| msgid "Your download server"
 msgid "Download server:"
 msgstr "Server pro stahování:"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:7001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the hostname of the server that will host the GForge packages."
 msgstr "Zadejte prosím jméno serveru, který bude hostit balíky GForge."
@@ -76,7 +72,6 @@ msgstr "admin"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
-#| msgid "The Gforge administrator login"
 msgid "GForge administrator login:"
 msgstr "Přihlašovací jméno správce GForge:"
 
@@ -88,9 +83,6 @@ msgstr "Přihlašovací jméno správce GForge:"
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
-#| msgid ""
-#| "This Gforge account will have all privileges on the Gforge system.  It is "
-#| "needed to approve the creation of the projects."
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
@@ -109,7 +101,6 @@ msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/host-variables.templates:2001
-#| msgid "Your IP address"
 msgid "IP address:"
 msgstr "IP adresa:"
 
@@ -117,7 +108,6 @@ msgstr "IP adresa:"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../dsf-helper/host-variables.templates:2001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
@@ -134,7 +124,6 @@ msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
-#| msgid "The Gforge administrator password"
 msgid "GForge administrator password:"
 msgstr "Heslo správce GForge:"
 
@@ -142,7 +131,6 @@ msgstr "Heslo správce GForge:"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
-#| msgid "Please re-type the password for confirmation."
 msgid "Please choose the password for this account."
 msgstr "Zadejte prosím heslo pro tento účet."
 
@@ -160,7 +148,6 @@ msgstr "Zadejte prosím heslo pro tento účet."
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 #: ../dsf-helper/ldap-variables.templates:5001
-#| msgid "Please re-type the password for confirmation."
 msgid "Password confirmation:"
 msgstr "Potvrzení hesla:"
 
@@ -185,7 +172,6 @@ msgstr "Zadejte heslo ještě jednou pro potvrzení."
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:13001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
-#| msgid "The initial list of skills"
 msgid "Initial list of skills:"
 msgstr "Počáteční seznam schopností:"
 
@@ -193,11 +179,6 @@ msgstr "Počáteční seznam schopností:"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:13001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
-#| msgid ""
-#| "Gforge allows users to define a list of their skills, to be chosen "
-#| "amongst those present in the database.  This list is the initial list of "
-#| "skills that will enter the database.  Please enter the skill names "
-#| "separated by semi-colons `;'."
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -218,7 +199,6 @@ msgstr "Jednotlivé položky seznamu schopností oddělte středníky."
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:3001
 #: ../dsf-helper/dbpasswd-variables.templates:2001
-#| msgid "Password used for the database"
 msgid "Password used for the database:"
 msgstr "Heslo pro připojení do databáze:"
 
@@ -240,7 +220,6 @@ msgstr "Zadejte zde prosím heslo pro připojení."
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:9001
 #: ../dsf-helper/ldap-variables.templates:2001
-#| msgid "The LDAP base DN"
 msgid "LDAP base DN:"
 msgstr "Základní LDAP DN:"
 
@@ -248,9 +227,6 @@ msgstr "Základní LDAP DN:"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:9001
 #: ../dsf-helper/ldap-variables.templates:2001
-#| msgid ""
-#| "The DN is used to refer to the LDAP directory unambiguously.  You could "
-#| "use, for instance, \"dc=gforge,dc=example,dc=com\""
 msgid ""
 "The DN (Distinguished Name) is used to refer to the LDAP directory "
 "unambiguously. Example: \"dc=gforge,dc=example,dc=com\"."
@@ -268,7 +244,6 @@ msgstr "Jméno počítače s LDAP serverem:"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:11001
 #: ../gforge-mta-postfix.templates.dsfh-in:3001
-#| msgid "Do you want mail to ${noreply} to be deleted?"
 msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 
@@ -276,9 +251,6 @@ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:11001
 #: ../gforge-mta-postfix.templates.dsfh-in:3001
-#| msgid ""
-#| "Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
-#| "even some e-mail to that address too."
 msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
@@ -290,9 +262,6 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:11001
 #: ../gforge-mta-postfix.templates.dsfh-in:3001
-#| msgid ""
-#| "It is advised that you let the package direct e-mail to that address to a "
-#| "black hole (/dev/null), unless you have another use for that address."
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
@@ -304,7 +273,6 @@ msgstr ""
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12001
 #: ../dsf-helper/ldap-variables.templates:4001
-#| msgid "LDAP password used to add users from the web"
 msgid "LDAP password used to add users from the web:"
 msgstr "LDAP heslo používané pro přidávání uživatelů z webu:"
 
@@ -312,9 +280,6 @@ msgstr "LDAP heslo používané pro přidávání uživatelů z webu:"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12001
 #: ../dsf-helper/ldap-variables.templates:4001
-#| msgid ""
-#| "In order to add users into the LDAP directory from the web, you need to "
-#| "provide a password."
 msgid ""
 "Please provide the password to use when adding users into the LDAP directory "
 "from the web."
@@ -331,10 +296,6 @@ msgstr "Vytvoření SSL certifikátu"
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:14001
-#| msgid ""
-#| "You need a valid SSL/TLS certificate to run Gforge. If you don't already "
-#| "have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
-#| "one, and restart Apache afterwards."
 msgid ""
 "A valid SSL/TLS certificate is needed to run GForge. If you don't already "
 "use one, you'll have to run the 'mod-ssl-makecert' command to generate one, "
@@ -355,17 +316,12 @@ msgstr "Jestliže certifikát nemáte, nepodaří se vám spustit Apache."
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:15001
-#| msgid "Gforge requires appropriate PAM-LDAP configuration"
 msgid "Appropriate PAM-LDAP configuration required for GForge"
 msgstr "GForge vyžaduje odpovídající nastavení PAM-LDAP"
 
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:15001
-#| msgid ""
-#| "Gforge requires the libpam-ldap package to be configured appropriately.  "
-#| "You might need to \"dpkg-reconfigure libpam-ldap\" in order to fix "
-#| "incorrect parameters."
 msgid ""
 "GForge requires the libpam-ldap package to be configured appropriately. You "
 "might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
@@ -378,11 +334,6 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:15001
-#| msgid ""
-#| "Known good values are: LDAP protocol version=3, make root database "
-#| "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to "
-#| "use for passwords=crypt.  Make sure that you type the same password for "
-#| "the libpam-ldap root password and the Gforge LDAP password."
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
 "admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
@@ -399,15 +350,14 @@ msgid ""
 "Make sure that you type the same password for the libpam-ldap root password "
 "and the GForge LDAP password."
 msgstr ""
-"Ujistěte se, že jako LDAP heslo pro GForge zadáte stejné heslo, jako pro jste "
-"zadali pro roota v libpam-ldap."
+"Ujistěte se, že jako LDAP heslo pro GForge zadáte stejné heslo, jako pro "
+"jste zadali pro roota v libpam-ldap."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
 #: ../gforge-dns-bind9.templates.dsfh-in:16001
-#| msgid "Do you want a simple DNS setup?"
 msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Chcete mít v GForge jednoduchou konfiguraci DNS?"
 
@@ -416,11 +366,6 @@ msgstr "Chcete mít v GForge jednoduchou konfiguraci DNS?"
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
 #: ../gforge-dns-bind9.templates.dsfh-in:16001
-#| msgid ""
-#| "You can have a simple DNS setup wich uses wildcards to map all project "
-#| "web-hosts to a single IP, and direct all the scm-hosts to a single SCM "
-#| "server, or a complex setup wich allows you to have many servers as "
-#| "project web servers or SCM servers."
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -437,10 +382,6 @@ msgstr ""
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
 #: ../gforge-dns-bind9.templates.dsfh-in:16001
-#| msgid ""
-#| "Even though you have a simple DNS setup, you can still have separate "
-#| "boxes for your project servers, it just assumes you have all the project "
-#| "web dirs on the same server and a single server for SCM."
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -466,9 +407,6 @@ msgstr "Chcete aktualizovat ${file}?"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:3001
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
 msgid ""
 "In order for GForge to be fully uninstalled, some changes are needed in "
 "${file}."
@@ -484,18 +422,14 @@ msgstr ""
 #: ../gforge-dns-bind9.templates.dsfh-in:17001
 #: ../dsf-helper/replace-files.templates:2001
 #: ../dsf-helper/replace-files.templates:3001
-#| msgid ""
-#| "I can either do them for you (and backup the current version in ${file}."
-#| "gforge-old), or write the changes to another file (${file}.gforge-new) "
-#| "and let you propagate the changes to ${file} yourself."
 msgid ""
 "This can be done automatically (the current version will be backed up in "
 "${file}.gforge-old). Alternatively, the needed changes may be written  to "
 "another file (${file}.gforge-new) to let you adapt ${file} yourself."
 msgstr ""
-"To je možné provést zcela automaticky (aktuální verze se zazálohuje do ${file}."
-"gforge-old). Alternativně se mohou změny zapsat do jiného souboru (${file}."
-"gforge-new) a nechat přepsání změn do ${file} na vás."
+"To je možné provést zcela automaticky (aktuální verze se zazálohuje do "
+"${file}.gforge-old). Alternativně se mohou změny zapsat do jiného souboru "
+"(${file}.gforge-new) a nechat přepsání změn do ${file} na vás."
 
 #. Type: note
 #. Description
@@ -508,7 +442,6 @@ msgstr "${file} musí být zkontrolován"
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:18001
 #: ../dsf-helper/replace-files.templates:4001
-#| msgid "Shall I modify the ${file} automatically?"
 msgid "You have chosen to not change ${file} automatically."
 msgstr "Zvolili jste, že nechcete ${file} upravit automaticky."
 
@@ -516,11 +449,6 @@ msgstr "Zvolili jste, že nechcete ${file} upravit automaticky."
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:18001
 #: ../dsf-helper/replace-files.templates:4001
-#| msgid ""
-#| "You have chosen not to let the Gforge package update the ${file} file.  "
-#| "Very well, I have not changed it.  Instead, I have written the suggested "
-#| "changes into ${file}.gforge-new. Please check this file and apply the "
-#| "appropriate changes to ${file}."
 msgid ""
 "Instead, the suggested changes have been written into ${file}.gforge-new. "
 "Please check this file and apply the appropriate changes to ${file}."
@@ -531,16 +459,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-#| msgid "Your Gforge domain or subdomain name"
 msgid "GForge domain or subdomain name:"
 msgstr "Název GForge domény nebo subdomény:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-#| msgid ""
-#| "The domain that will host your Gforge installation.  Some services will "
-#| "be given their own subdomain in that domain (scm, lists, etc.)."
 msgid ""
 "Please enter the domain that will host the GForge installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
@@ -551,16 +475,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
-#| msgid "The Gforge admin email address."
 msgid "GForge administrator e-mail address:"
 msgstr "Emailová adresa správce GForge:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
-#| msgid ""
-#| "The email address of the Gforge administrator of your site.  Needed in "
-#| "case a problem occurs."
 msgid ""
 "Please enter the e-mail address of the GForge administrator of this site. It "
 "will be used when problems occur."
@@ -571,14 +491,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
-#| msgid "The Gforge system name"
 msgid "GForge system name:"
 msgstr "Jméno GForge systému:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
-#| msgid "This name is used in various places throughout the system."
 msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
@@ -589,16 +507,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
-#| msgid "Your database server"
 msgid "Database server:"
 msgstr "Databázový server:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
-#| msgid ""
-#| "The IP address (or host name) of the server that will host your GForge "
-#| "database.  This is needed for virtually all the subpackages."
 msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "GForge database."
@@ -609,14 +523,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-#| msgid "Your database name"
 msgid "Database name:"
 msgstr "Jméno databáze:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the name of the database that will host the GForge database."
 msgstr "Zadejte prosím jméno databáze, která bude obsahovat databázi GForge."
@@ -624,7 +536,6 @@ msgstr "Zadejte prosím jméno databáze, která bude obsahovat databázi GForge
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
-#| msgid "Your database admin username"
 msgid "Database administrator username:"
 msgstr "Uživatelské jméno správce databáze:"
 
@@ -641,7 +552,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the host name of the server that will host the GForge packages."
 msgstr "Zadejte prosím jméno serveru, který bude hostit balíky GForge."
@@ -649,25 +559,20 @@ msgstr "Zadejte prosím jméno serveru, který bude hostit balíky GForge."
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
-#| msgid "The news admin group id"
 msgid "News administrative group ID:"
 msgstr "ID skupiny správců novinek:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
-#| msgid ""
-#| "Members of the news admin group can approve news for the Gforge main "
-#| "page.  This group id MUST NOT be 1. You only need to touch this group if "
-#| "you upgrade from a previous version and want to keep your data."
 msgid ""
 "The members of the news admin group can approve news for the GForge main "
 "page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
-"Členové správcovské skupiny pro novinky mohou schvalovat novinky pro "
-"hlavní stránku GForge. Tato skupina nesmí mít ID 1. Toto byste měli měnit "
-"jen v případě, že přecházíte z dřívější verze a chcete zachovat svá data."
+"Členové správcovské skupiny pro novinky mohou schvalovat novinky pro hlavní "
+"stránku GForge. Tato skupina nesmí mít ID 1. Toto byste měli měnit jen v "
+"případě, že přecházíte z dřívější verze a chcete zachovat svá data."
 
 #. Type: string
 #. Description
@@ -678,7 +583,6 @@ msgstr "ID skupiny správců pro statistiky:"
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:4001
-#| msgid "The peer rating admin group id"
 msgid "Peer rating administrative group ID:"
 msgstr "ID skupiny správců pro hodnocení:"
 
@@ -691,14 +595,12 @@ msgstr "Jméno počítače s LDAP serverem:"
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
-#| msgid "Your mailing-lists server"
 msgid "Mailing lists server:"
 msgstr "Server pro poštovní konference:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
@@ -708,20 +610,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../dsf-helper/migration.templates:2001
-#| msgid "Migrate to Gforge?"
 msgid "Migrate to GForge?"
 msgstr "Migrovat na GForge?"
 
 #. Type: boolean
 #. Description
 #: ../dsf-helper/migration.templates:2001
-#| msgid ""
-#| "The free software version of the Sourceforge software has been renamed to "
-#| "\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge"
-#| "\", and \"sourceforge\" is no longer supported or maintained.  The "
-#| "transition to Gforge should be rather simple, as most of the work is "
-#| "automated: once this package has been successfully installed, just "
-#| "install the \"gforge\" package and things should go smoothly."
 msgid ""
 "SourceForge is no longer maintained as free software; the free version is "
 "now named GForge. Accordingly, the package has been renamed to 'gforge', and "
@@ -739,10 +633,6 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../dsf-helper/migration.templates:2001
-#| msgid ""
-#| "You still have the option not to upgrade to Gforge yet, for instance if "
-#| "you want to backup things beforehand.  If you refuse the upgrade, nothing "
-#| "will happen."
 msgid ""
 "You still have the option not to upgrade to GForge yet, for instance if you "
 "want to back things up beforehand. If you refuse the upgrade, nothing will "
@@ -754,20 +644,12 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../dsf-helper/migration.templates:3001
-#| msgid "Sourceforge is no more"
 msgid "Sourceforge discontinued"
 msgstr "Sourceforge se již nevyvíjí"
 
 #. Type: note
 #. Description
 #: ../dsf-helper/migration.templates:3001
-#| msgid ""
-#| "Sourceforge has been renamed Gforge, and is no longer maintained as free "
-#| "software. This \"sourceforge\" package is only here to help you upgrade "
-#| "to Gforge.  Once you have installed this package and the one it depends "
-#| "on (gforge-sourceforge-transition), your data have been saved, and you "
-#| "can safely uninstall the \"sourceforge\" package and proceed to install "
-#| "Gforge."
 msgid ""
 "SourceForge is no longer maintained as free software; the free version is "
 "now named GForge, and the 'sourceforge' package is now a dummy package to "
@@ -777,16 +659,13 @@ msgid ""
 msgstr ""
 "SourceForge již není vyvíjen jako svobodný software; svobodná verze byla "
 "přejmenována na GForge. Balík „sourceforge“ je nyní pouze prázdný balík, "
-"který usnadňuje přechod na GForge. Poté, co tento balík nainstalujete (a s ním "
-"gforge-sourceforge-transition), budou vaše data bezpečně uložena. Pak můžete "
-"balík „sourceforge“ odstranit a nainstalovat „gforge“."
+"který usnadňuje přechod na GForge. Poté, co tento balík nainstalujete (a s "
+"ním gforge-sourceforge-transition), budou vaše data bezpečně uložena. Pak "
+"můžete balík „sourceforge“ odstranit a nainstalovat „gforge“."
 
 #. Type: boolean
 #. Description
 #: ../dsf-helper/replace-files.templates:2001
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
 msgid ""
 "In order for GForge to be operational, some changes are needed in ${file}."
 msgstr ""
@@ -795,7 +674,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/shellhost-variables.templates:2001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the host name of the server that will host the GForge shell "
 "accounts."
@@ -804,14 +682,12 @@ msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty GFor
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
-#| msgid "Your user mail redirector server"
 msgid "User mail redirector server:"
 msgstr "Server pro přesměrování pošty:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
-#| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
@@ -927,7 +803,6 @@ msgstr "polština"
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
-#| msgid "PortugueseBrazilian"
 msgid "Portuguese (Brazilian)"
 msgstr "portugalština (brazilská)"
 
@@ -970,30 +845,24 @@ msgstr "thajština"
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
-#| msgid "Default language"
 msgid "Default language:"
 msgstr "Výchozí jazyk:"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
-#| msgid "Here is the default language for web pages."
 msgid "Please choose the default language for web pages."
 msgstr "Vyberte prosím výchozí jazyk pro webové stránky."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-#| msgid "Default theme"
 msgid "Default theme:"
 msgstr "Výchozí téma:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-#| msgid ""
-#| "Here is the default theme for web pages, be carreful to enter a valid "
-#| "name."
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr ""

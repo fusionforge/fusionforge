@@ -1,28 +1,28 @@
-gforge (4.6.99+svn6169-0+1) UNRELEASED; urgency=high
+gforge (4.6.99+svn6169-0+2) UNRELEASED; urgency=high
 
   * New SVN snapshot (r6169), including the removal of a few tables
     (replaced by views where needed, or access to the RBAC tables when
     possible).
   * Updated package description and Debconf templates after a review by
     the debian-l10n-english team (closes: #446569).
-  * Updated debian/po/de.po, from Helge Kreutzmann <debian@helgefjell.de>
-    (closes: #447170).
-  * Ditto for debian/po/gl.po, from Jacobo Tarrio <jtarrio@trasno.net>
-    (closes: #447194).
-  * Ditto for debian/po/cs.po, from Miroslav Kure
+  * Updated debian/po/de.po (German translation), from Helge Kreutzmann
+    <debian@helgefjell.de> (closes: #447170).
+  * Ditto for debian/po/gl.po (Galician), from Jacobo Tarrio
+    <jtarrio@trasno.net> (closes: #447194).
+  * Ditto for debian/po/cs.po (Czech), from Miroslav Kure
     <kurem@upcase.inf.upol.cz> (closes: #447477).
-  * Ditto for debian/po/vi.po, from Clytie Siddall
+  * Ditto for debian/po/vi.po (Vietnamese), from Clytie Siddall
     <clytie@riverland.net.au> (closes: #447883).
-  * Ditto for debian/po/nl.po, from Bart Cornelis <cobaco@skolelinux.no>
-    (closes: #448124).
-  * Ditto for debian/po/pt.po, from Ricardo Silva <ardoric@gmail.com>
-    (closes: #448229).
-  * Ditto for debian/po/fr.po, from Christian Perrier <bubulle@debian.org>
-    (closes: #449014).
-  * Added new Finnish translation, from Esko Arajärvi <edu@iki.fi>
-    (closes: #447298).
-  * Added new Russian translation, from Yuri Kozlov <kozlov.y@gmail.com>
-    (closes: #448938).
+  * Ditto for debian/po/nl.po (Dutch/Flemish), from Bart Cornelis
+    <cobaco@skolelinux.no> (closes: #448124).
+  * Ditto for debian/po/pt.po (Portuguese), from Ricardo Silva
+    <ardoric@gmail.com> (closes: #448229).
+  * Ditto for debian/po/fr.po (French), from Christian Perrier
+    <bubulle@debian.org> (closes: #449014).
+  * Added new debian/po/fi.po (Finnish) translation, from Esko Arajärvi
+    <edu@iki.fi> (closes: #447298).
+  * Added new debian/po/ru.po (Russian) translation, from Yuri Kozlov
+    <kozlov.y@gmail.com> (closes: #448938).
   * Applied a patch by Steffen Joeris <steffen.joeris@skolelinux.de> for a
     security vulnerability (CVE-2007-5156) in the copy of FCKeditor
     embedded in gforge-plugins-extra (closes: #447590).
@@ -30,7 +30,7 @@ gforge (4.6.99+svn6169-0+1) UNRELEASED; urgency=high
     vulnerabilities (CVE-2007-3921).
   * Added Vcs-Bzr: field to debian/control.
 
- -- Roland Mas <lolando@debian.org>  Sun, 04 Nov 2007 16:43:55 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Nov 2007 13:44:52 +0100
 
 gforge (4.6.99+svn6094-4) unstable; urgency=low
 

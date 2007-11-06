@@ -256,7 +256,8 @@ msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"GForge sendet und empfängt viele E-Mails von und auf der »${noreply}«-Adresse."
+"GForge sendet und empfängt viele E-Mails von und auf der »${noreply}«-"
+"Adresse."
 
 #. Type: boolean
 #. Description
@@ -266,8 +267,9 @@ msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
 msgstr ""
-"E-Mails an diese Adresse sollten an ein schwarzes Loch (/dev/null) umgeleitet "
-"werden, es sei denn, Sie haben für diese Adresse eine andere Verwendung."
+"E-Mails an diese Adresse sollten an ein schwarzes Loch (/dev/null) "
+"umgeleitet werden, es sei denn, Sie haben für diese Adresse eine andere "
+"Verwendung."
 
 #. Type: password
 #. Description
@@ -390,10 +392,10 @@ msgid ""
 "project servers; it just assumes that all the project web directories are on "
 "the same server with a single SCM server."
 msgstr ""
-"Selbst falls Sie eine einfache DNS-Installation verwenden, können Sie dennoch "
-"separate Maschinen für die Projektserver verwenden, es wird nur angenommen, "
-"dass sich alle Webverzeichnisse der Projekte auf dem gleichen Server mit "
-"einem einzelnen Server für SCM befinden."
+"Selbst falls Sie eine einfache DNS-Installation verwenden, können Sie "
+"dennoch separate Maschinen für die Projektserver verwenden, es wird nur "
+"angenommen, dass sich alle Webverzeichnisse der Projekte auf dem gleichen "
+"Server mit einem einzelnen Server für SCM befinden."
 
 #. Type: boolean
 #. Description
@@ -415,8 +417,8 @@ msgid ""
 "In order for GForge to be fully uninstalled, some changes are needed in "
 "${file}."
 msgstr ""
-"Damit GForge komplett deinstalliert wird, werden einige Änderungen in ${file} "
-"benötigt."
+"Damit GForge komplett deinstalliert wird, werden einige Änderungen in "
+"${file} benötigt."
 
 #. Type: boolean
 #. Description
@@ -686,7 +688,8 @@ msgstr ""
 msgid ""
 "In order for GForge to be operational, some changes are needed in ${file}."
 msgstr ""
-"Damit GForge funktionieren kann, werden einige Änderungen an ${file} benötigt."
+"Damit GForge funktionieren kann, werden einige Änderungen an ${file} "
+"benötigt."
 
 #. Type: string
 #. Description
