@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-07 17:18+0100\n"
-"PO-Revision-Date: 2007-11-07 17:22+0100\n"
+"PO-Revision-Date: 2007-11-07 18:19+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3602,7 +3602,7 @@ msgstr "Programmation de l'envoi de messages"
 #: www/tracker/admin/form-addcanned.php:22 www/tracker/browse.php:138
 #: www/tracker/browse.php:288 www/tracker/query.php:160
 msgid "ID"
-msgstr "Identifiant de l'outil de suivi"
+msgstr "Identifiant"
 
 #: www/admin/massmail.php:148
 msgid "Last user_id mailed"
