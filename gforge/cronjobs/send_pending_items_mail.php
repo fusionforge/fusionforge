@@ -76,7 +76,7 @@ function send_pending_pm_items_mail(){
 			$Lang->loadLanguageID($language);
 			$subject=_('Pending task manager items notification');
 			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks. 
-The task manager item  #%1$s is pending: 
+The task manager item #%1$s is pending: 
 Task Summary: %2$s
 Submitted by: %4$s
 Status:%5$s

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 16:01+0100\n"
-"PO-Revision-Date: 2007-09-03 22:56+0200\n"
+"POT-Creation-Date: 2007-11-07 17:18+0100\n"
+"PO-Revision-Date: 2007-11-07 17:22+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: common/docman/Document.class.php:123 common/docman/Document.class.php:460
 #: common/pm/ProjectGroup.class.php:143 common/pm/ProjectGroup.class.php:360
 msgid "Title Must Be At Least 5 Characters"
-msgstr "Le tire doit avoir au moins 5 caratères"
+msgstr "Le tire doit avoir au moins 5 caractères"
 
 #: common/docman/Document.class.php:127 common/docman/Document.class.php:464
 #: common/pm/ProjectGroup.class.php:147 common/pm/ProjectGroup.class.php:364
@@ -28,7 +28,7 @@ msgstr "La description du document doit avoir au moins 10 caractères"
 
 #: common/docman/Document.class.php:209
 msgid "Document:: Invalid docid"
-msgstr "Document : n° de document invalide"
+msgstr "Document : numéro de document invalide"
 
 #: common/docman/DocumentFactory.class.php:190
 msgid "No Documents Found"
@@ -45,7 +45,7 @@ msgstr "DocumentGroup: ID parent invalide"
 
 #: common/docman/DocumentGroup.class.php:159
 msgid "DocumentGroup: Invalid DocumentGroup ID"
-msgstr "Groupe de documents : n° de groupe de documents invalide"
+msgstr "Groupe de documents : numéro de groupe de documents invalide"
 
 #: common/forum/Forum.class.php:80 common/mail/MailingList.class.php:71
 #: common/mail/MailingListFactory.class.php:63
@@ -76,9 +76,8 @@ msgid "Illegal Characters in Forum Name"
 msgstr "Caractères interdits dans le nom du forum"
 
 #: common/forum/Forum.class.php:156
-#, fuzzy
 msgid "Mailing List Exists with same name"
-msgstr "Nom de la liste de diffusion :"
+msgstr "Il existe déjà une liste de diffusion portant ce nom."
 
 #: common/forum/Forum.class.php:191
 msgid "Error Adding Forum"
@@ -86,7 +85,7 @@ msgstr "Erreur lors de l'ajout d'un forum"
 
 #: common/forum/Forum.class.php:233
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "Identifiant invalide pour le groupe de forums"
 
 #: common/forum/Forum.class.php:462 common/forum/Forum.class.php:496
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:304
@@ -183,7 +182,7 @@ msgstr "ForumMessage::fetchData() Identifiant de message invalide"
 
 #: common/forum/ForumMessage.class.php:598
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "Identifiant de message invalide"
 
 #: common/frs/FRSFile.class.php:95
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -192,6 +191,8 @@ msgstr "Le nom du fichier doit compter au moins 3 caractères"
 #: common/frs/FRSFile.class.php:99
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
+"Le nom de fichier ne peut contenir que des caractères alphanumériques ainsi "
+"que « - », « _ » et « . »."
 
 #: common/frs/FRSFile.class.php:109
 msgid "FRSFile Appears to be invalid"
@@ -252,6 +253,8 @@ msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
+"L'objet de votre enregistrement est trop long. Veuillez le raccourcir pour "
+"qu'il ne dépasse pas 1500 octets."
 
 #: common/include/Group.class.php:310
 msgid "Describe in a more comprehensive manner your project."
@@ -261,6 +264,8 @@ msgstr "Décrivez de manière plus complète votre projet"
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
+"La description de votre projet est trop longue. Veuillez la raccourcir pour "
+"qu'elle ne dépasse pas 256 octets."
 
 #: common/include/Group.class.php:316
 msgid "You do not have chosen a license"
@@ -284,7 +289,7 @@ msgstr "Le champ Serveur de sources ne peut pas être vide"
 
 #: common/include/Group.class.php:1448
 msgid "Could not delete properly the mailing list"
-msgstr ""
+msgstr "Erreur lors de la suppression de la liste de diffusion."
 
 #: common/include/Group.class.php:2057
 #, php-format
@@ -484,14 +489,14 @@ msgstr ""
 #, php-format
 msgid "Your request to join the %1$s project was denied by the administrator."
 msgstr ""
-"Votre demande pour rejoindre le projet %1$s a été refusé par le(s) "
+"Votre demande pour rejoindre le projet %1$s a été refusée par le(s) "
 "administrateur(s)."
 
 #: common/include/GroupJoinRequest.class.php:290
-#, fuzzy, php-format
+#, php-format
 msgid "Your request to join the %1$s project was granted by the administrator."
 msgstr ""
-"Votre demande pour rejoindre le projet %1$s a été refusé par le(s) "
+"Votre demande pour rejoindre le projet %1$s a été acceptée par le(s) "
 "administrateur(s)."
 
 #: common/include/User.class.php:232
@@ -699,7 +704,7 @@ msgstr "Une liste portant ce nom existe déjà."
 
 #: common/mail/MailingList.class.php:154
 msgid "Forum exists with the same name"
-msgstr ""
+msgstr "Il existe déjà un forum portant ce nom."
 
 #: common/mail/MailingList.class.php:176
 #, php-format
@@ -931,7 +936,7 @@ msgstr "La mise à jour a échoué : des questions sont requises"
 
 #: common/survey/Survey.class.php:127
 msgid "Insert Error"
-msgstr ""
+msgstr "Erreur lors de l'insertion"
 
 #: common/survey/Survey.class.php:164 common/survey/Survey.class.php:198
 msgid "The Survey data is not filled"
@@ -1195,11 +1200,13 @@ msgid ""
 "The alias contains invalid characters. Only letters, numbers, hypens (-) and "
 "underscores (_) allowed."
 msgstr ""
+"L'alias contient des caractères invalides.  Les seuls caractères autorisés "
+"sont les caractères alphanumériques ainsi que « - » et « _ »."
 
 #: common/tracker/ArtifactExtraField.class.php:462
 #, php-format
 msgid "'%1$s' is a reserved alias. Please provide another name."
-msgstr ""
+msgstr "« %1$s » est un alias réservé. Veuillez choisir un autre nom."
 
 #: common/tracker/ArtifactFile.class.php:130
 msgid "ArtifactFile: File name, type, size, and data are required"
@@ -1250,7 +1257,7 @@ msgstr "Notification de tâches en attente"
 #, php-format
 msgid ""
 "This mail is sent to you to remind you of pending/overdue tasks. \n"
-"The task manager item  #%1$s is pending: \n"
+"The task manager item #%1$s is pending: \n"
 "Task Summary: %2$s\n"
 "Submitted by: %4$s\n"
 "Status:%5$s\n"
@@ -1258,9 +1265,8 @@ msgid ""
 "\n"
 "Click here to visit the item %3$s"
 msgstr ""
-"Ce courrier électronique vous est envoyé pour vous rappeler des tâches en "
-"attente ou en retard. \n"
-"La tâche  #%1$s est en attente : \n"
+"Ce courrier électronique vous est envoyé pour vous rappeler des tâches en attente ou en retard. \n"
+"La tâche #%1$s est en attente : \n"
 "Résumé : %2$s\n"
 "Soumis par : %4$s\n"
 "Etat :%5$s\n"
@@ -1882,7 +1888,7 @@ msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:95
 msgid "Clear Case Access"
-msgstr ""
+msgstr "Accès à Clear Case"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:119
 #: www/project/admin/history.php:36
@@ -1919,6 +1925,8 @@ msgid ""
 "Some CVS documentation is available <a href=\"http://www.nongnu.org/cvs/"
 "\">Here</a>"
 msgstr ""
+"Vous pouvez trouver de la documentation à propos de CVS <a href=\"http://www."
+"nongnu.org/cvs/\">ici</a>."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:97
 msgid ""
@@ -1928,11 +1936,16 @@ msgid ""
 "<i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply "
 "press the Enter key.</p>"
 msgstr ""
+"<p><b>Accès CVS anonyme</b></p><p>Le dépôt CVS de ce projet est accessible "
+"de manière anonyme par le protocole pserver. Le module dont vous souhaitez "
+"obtenir une copie de travail doit être spécifié dans le paramètre <i>nom-du-"
+"module</i>. Si un mot de passe vous est demandé pour l'utilisateur "
+"<i>anonymous</i>, un mot de passe vide conviendra.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:101
 #: plugins/scmcvs/common/CVSPlugin.class.php:110
 msgid "modulename"
-msgstr ""
+msgstr "nom-du-module"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
 msgid ""
@@ -1941,21 +1954,26 @@ msgid ""
 "machine. Substitute <i>modulename</i> and <i>developername</i> with the "
 "proper values. Enter your site password when prompted.</p>"
 msgstr ""
+"<p><b>Accès CVS via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Les valeurs <i>nom-du-module</i> et <i>nom-"
+"du-développeur</i> devront être remplacées par les valeurs appropriées. Vous "
+"pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:110
 #: plugins/scmsvn/common/SVNPlugin.class.php:128
 #: plugins/scmsvn/common/SVNPlugin.class.php:132
 msgid "developername"
-msgstr ""
+msgstr "nom-du-développeur"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:117
 msgid "Download The Nightly CVS Tree Snapshot"
-msgstr ""
+msgstr "Télécharger une l'archive quotidienne du dépôt CVS"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:126
 #: plugins/scmsvn/common/SVNPlugin.class.php:150
 msgid "Repository History"
-msgstr ""
+msgstr "Historique du dépôt"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:129
 msgid ""
@@ -1963,24 +1981,27 @@ msgid ""
 "into the current status of this project's code. You may also view the "
 "complete histories of any file in the repository.</p>"
 msgstr ""
+"<b>Parcourir le dépôt CVS</b><p>Parcourir le dépôt CVS permet de naviguer "
+"dans l'état actuel du code de ce projet, mais également d'avoir accès à "
+"l'historique complet de chaque fichier présent dans le dépôt.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:130
 msgid "Browse CVS Repository"
-msgstr ""
+msgstr "Parcourir le dépôt CVS"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:180
 #: plugins/scmsvn/common/SVNPlugin.class.php:197
 msgid "Enable Anonymous Access"
-msgstr ""
+msgstr "Activer l'accès anonyme"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:182
 msgid "Enable pserver"
-msgstr ""
+msgstr "Activer l'accès par le protole pserver"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:211
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
-msgstr ""
+msgstr "<strong>%1$s</strong> envois, <strong>%2$s</strong> ajouts"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:229
 #: plugins/scmsvn/common/SVNPlugin.class.php:249 www/admin/useredit.php:240
@@ -2001,14 +2022,14 @@ msgstr "Ajouts"
 #: www/tracker/detail.php:202 www/tracker/mod-limited.php:182
 #: www/tracker/mod.php:273
 msgid "Commits"
-msgstr ""
+msgstr "Envois"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:109
 msgid ""
 "<p>Documentation for Subversion (sometimes referred to as \"SVN\") is "
 "available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 msgstr ""
-"<p>La documantation de Subversion (que l'on appelle parfois \\\"SVN\\\") est "
+"<p>La documantation de Subversion (que l'on appelle parfois « SVN ») est "
 "disponible <a href=\\\"http://svnbook.red-bean.com/\\\">ici</a> (en anglais)."
 "</p>"
 
@@ -2018,10 +2039,12 @@ msgid ""
 "can be checked out through anonymous access with the following command(s).</"
 "p>"
 msgstr ""
+"<p><b>Accès anonyme au dépôt Subversion</b></p><p>Le dépôt Subversion de ce "
+"projet est accessible de manière anonyme grâce aux commandes suivantes.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
 msgid "The password is 'anonsvn'"
-msgstr ""
+msgstr "Le mot de passe à fournir est « anonsvn »."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:127
 msgid ""
@@ -2030,6 +2053,11 @@ msgid ""
 "client machine. Substitute <i>developername</i> with the proper values. "
 "Enter your site password when prompted.</p>"
 msgstr ""
+"<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
+"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
+"de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:131
 msgid ""
@@ -2037,10 +2065,14 @@ msgid ""
 "can access the SVN tree via this method. Substitute <i>developername</i> "
 "with the proper values. Enter your site password when prompted.</p>"
 msgstr ""
+"<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. La valeur <i>nom-"
+"du-développeur</i> devra être remplacée par votre identifiant de connexion. "
+"Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:140
 msgid "Download The Nightly SVN Tree Snapshot"
-msgstr ""
+msgstr "Télécharger une l'archive quotidienne du dépôt Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:153
 msgid ""
@@ -2048,23 +2080,26 @@ msgid ""
 "view into the current status of this project's code. You may also view the "
 "complete histories of any file in the repository.</p>"
 msgstr ""
+"<b>Parcourir le dépôt Subversion</b><p>Parcourir le dépôt Subversion permet "
+"de naviguer dans l'état actuel du code de ce projet, mais également d'avoir "
+"accès à l'historique complet de chaque fichier présent dans le dépôt.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:154
 msgid "Browse Subversion Repository"
-msgstr ""
+msgstr "Parcourir le dépôt Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:214
 #, php-format
 msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
-msgstr ""
+msgstr "<strong>%1$s</strong> mises à jour, <strong>%2$s</strong> ajouts"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:251
 msgid "Updates"
-msgstr ""
+msgstr "Mises à jour"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:273
 msgid "Unknown"
-msgstr ""
+msgstr "Autres"
 
 #: plugins/svntracker/common/svntrackerPlugin.class.php:60
 msgid "Links to related SVN commits"
@@ -2502,8 +2537,8 @@ msgstr ""
 #: www/account/index.php:229 www/account/register.php:179
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr ""
-"Recevoir du courrier électronique supplémentaire au sujet de la communauté. "
-"<i>(Faible trafic)</i>"
+"Recevoir des messages additionnels concernant la communauté. <i>(Faible "
+"trafic)</i>"
 
 #: www/account/index.php:258
 msgid "Shell Account Information"
@@ -3018,7 +3053,7 @@ msgstr "oui"
 
 #: www/admin/approve-pending.php:180
 msgid "Add this custom response to canned responses"
-msgstr ""
+msgstr "Ajouter cette réponse personnalisée aux réponses-types"
 
 #: www/admin/approve-pending.php:182 www/news/admin/index.php:276
 #: www/project/admin/index.php:325
@@ -3087,7 +3122,7 @@ msgstr ""
 
 #: www/admin/configman.php:189
 msgid "Attribute"
-msgstr ""
+msgstr "Attribut"
 
 #: www/admin/configman.php:189
 msgid "On"
@@ -3095,11 +3130,11 @@ msgstr "Marche"
 
 #: www/admin/configman.php:189
 msgid "Off"
-msgstr ""
+msgstr "Arrêt"
 
 #: www/admin/configman.php:205
 msgid "Save"
-msgstr "Arrêt"
+msgstr "Enregistrer"
 
 #: www/admin/cronman.php:53
 msgid "Job"
@@ -3122,7 +3157,7 @@ msgstr "Suivant"
 
 #: www/admin/database.php:74
 msgid "Error Adding Database"
-msgstr "Erreur lors de l'ajout d'une base de donnée"
+msgstr "Erreur lors de l'ajout d'une base de données"
 
 #: www/admin/database.php:76 www/admin/vhost.php:169
 msgid "Group"
@@ -3190,7 +3225,7 @@ msgstr "Supprimer le projet définitivement"
 #: www/admin/groupdelete.php:62 www/mail/admin/deletelist.php:56
 #: www/mail/admin/deletelist.php:57 www/people/editprofile.php:205
 msgid "Confirm Delete"
-msgstr "Confirmez L'Effacement"
+msgstr "Confirmez l'effacement"
 
 #: www/admin/groupdelete.php:64 www/mail/admin/deletelist.php:58
 msgid "Permanently Delete"
@@ -3267,8 +3302,7 @@ msgstr "Serveur de sources :"
 #: www/admin/groupedit.php:234
 msgid "Resend New Project Instruction Email"
 msgstr ""
-"Courrier contenant les instructions à propos de nouveaux projets envoyé à "
-"nouveau"
+"Renvoyer le courrier contenant les instructions à propos de nouveaux projets"
 
 #: www/admin/grouplist.php:30
 msgid "Group List"
@@ -3392,7 +3426,7 @@ msgstr "Approuver/Rejeter"
 
 #: www/admin/index.php:133
 msgid "Front-page news"
-msgstr ""
+msgstr "Nouvelles de la page d'accueil"
 
 #: www/admin/index.php:137 www/project/admin/project_admin_utils.php:79
 msgid "Stats"
@@ -3461,11 +3495,11 @@ msgstr "Gestion des tâches répétitives (Cron)"
 
 #: www/admin/index.php:163
 msgid "Plugin Manager"
-msgstr ""
+msgstr "Gestionnaire de greffons"
 
 #: www/admin/index.php:164
 msgid "Config Manager"
-msgstr ""
+msgstr "Gestionnaire de configuration"
 
 #: www/admin/index.php:173
 msgid "Virtual Host Admin Tool"
@@ -3519,11 +3553,11 @@ msgstr "(choisir)"
 
 #: www/admin/massmail.php:107
 msgid "Subscribers to \"Site Updates\""
-msgstr ""
+msgstr "Abonnés aux « mises à jour du site »"
 
 #: www/admin/massmail.php:108
 msgid "Subscribers to \"Additional Community Mailings\""
-msgstr ""
+msgstr "Abonnés aux « messages additionnels concernant la communauté »"
 
 #: www/admin/massmail.php:109
 msgid "All Project Developers"
@@ -3531,7 +3565,7 @@ msgstr "Tous les développeurs"
 
 #: www/admin/massmail.php:110
 msgid "All Project Admins"
-msgstr "Tous  les administrateurs de projets"
+msgstr "Tous les administrateurs de projets"
 
 #: www/admin/massmail.php:111
 msgid "All Users"
@@ -3629,15 +3663,15 @@ msgstr "Action"
 
 #: www/admin/pluginman.php:180
 msgid "Run Init Script?"
-msgstr ""
+msgstr "Lancer le script d'initialisation ?"
 
 #: www/admin/pluginman.php:181
 msgid "Users Using it"
-msgstr ""
+msgstr "Utilisateurs de ce greffon"
 
 #: www/admin/pluginman.php:182
 msgid "Groups Using it"
-msgstr ""
+msgstr "Groupes qui utilisent ce greffon"
 
 #: www/admin/pluginman.php:212 www/admin/userlist.php:63
 msgid "Active"
@@ -3645,11 +3679,11 @@ msgstr "Actif"
 
 #: www/admin/pluginman.php:245
 msgid "Deactivate"
-msgstr ""
+msgstr "Désactiver"
 
 #: www/admin/pluginman.php:248
 msgid "Inactive"
-msgstr ""
+msgstr "Inactif"
 
 #: www/admin/pluginman.php:250 www/admin/userlist.php:103
 msgid "Activate"
@@ -4194,7 +4228,7 @@ msgstr "Évaluation invalide"
 
 #: www/developer/rate.php:79
 msgid "You can't rate yourself"
-msgstr ""
+msgstr "Vous ne pouvez pas vous évaluer vous-même"
 
 #: www/developer/rate.php:82
 msgid "User Ratings Page"
@@ -4209,6 +4243,8 @@ msgid ""
 "You can re-rate this person by simply returning to their ratings page and re-"
 "submitting the info."
 msgstr ""
+"Vous pouvez réévaluer cette personne en retournant sur la page d'évaluation "
+"et en y modifiant les informations."
 
 #: www/docman/admin/index.php:88
 #, php-format
@@ -4397,6 +4433,8 @@ msgstr "Pas de données dans le document"
 #: www/docman/display_doc.php:37 www/docman/view.php:61
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
+"Aucun document à afficher : le numéro de document est invalide, ou "
+"correspond à un document inactif."
 
 #: www/docman/include/doc_utils.php:66
 msgid "This project has turned off the Doc Manager."
@@ -4412,7 +4450,7 @@ msgstr "Voir les documents"
 
 #: www/docman/include/doc_utils.php:78 www/docman/search.php:84
 msgid "Search in documents"
-msgstr ""
+msgstr "Chercher à l'intérieur des documents"
 
 #: www/docman/include/doc_utils.php:125
 msgid "All Languages"
@@ -4494,7 +4532,7 @@ msgstr ""
 
 #: www/docman/search.php:153
 msgid "Your search did not match any documents"
-msgstr ""
+msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: www/forum/admin/ForumAdmin.class.php:79 www/forum/admin/index.php:83
 #: www/forum/admin/monitor.php:45
@@ -4737,7 +4775,7 @@ msgstr "Message envoyé"
 
 #: www/forum/forum.php:123 www/forum/message.php:78
 msgid "Error getting new ForumMessageFactory"
-msgstr ""
+msgstr "Erreur lors de la création de l'objet ForumMessageFactory"
 
 #: www/forum/forum.php:169
 msgid "Nested"
@@ -4795,7 +4833,7 @@ msgstr "Messages suivants"
 
 #: www/forum/forum.php:395
 msgid "No forum chosen"
-msgstr ""
+msgstr "Aucun forum choisi"
 
 #: www/forum/include/AttachManager.class.php:177
 #: www/forum/include/AttachManager.class.php:264
@@ -5185,8 +5223,10 @@ msgstr "Effacer le fichier"
 
 #: www/frs/admin/editrelease.php:398
 #, php-format
-msgid "There are %1$s users monitoring this package."
-msgstr ""
+msgid "There is %1$s user monitoring this package."
+msgid_plural "There are %1$s users monitoring this package."
+msgstr[0] "%1$s utilisateur surveille ce paquet."
+msgstr[1] "%1$s utilisateurs surveillent ce paquet."
 
 #: www/frs/admin/index.php:81
 msgid "Added Package"
@@ -5348,7 +5388,7 @@ msgstr "Publier le paquet"
 
 #: www/frs/admin/showreleases.php:93
 msgid "No Releases Of This Package Are Available"
-msgstr ""
+msgstr "Aucune version n'est disponible pour ce paquet."
 
 #: www/frs/admin/showreleases.php:99
 msgid "Release New File Version"
@@ -5367,7 +5407,7 @@ msgstr "Sélection obligatoire"
 
 #: www/frs/index.php:38
 msgid "No group title"
-msgstr ""
+msgstr "Pas de titre de groupe"
 
 #: www/frs/index.php:38
 msgid "No group"
@@ -5974,7 +6014,7 @@ msgstr "L'administrateur du site a désactivé cette fonctionnalité."
 
 #: www/include/exit.php:81
 msgid "Error - double submit"
-msgstr ""
+msgstr "Erreur - double soumission"
 
 #: www/include/features_boxes.php:20
 #, php-format
@@ -6122,13 +6162,18 @@ msgid ""
 "View project <a href=\"/project/stats/?group_id=%1$s\">Statistics</a> or <a "
 "href=\"/project/report/?group_id=%1$s\">Activity</a>."
 msgstr ""
+"Voir les <a href=\\\"/project/stats/?group_id=%1$s\\\">statistiques</a> ou "
+"le <a href=\\\"/project/report/?group_id=%1$s\\\">rapport d'activité</a> "
+"pour le projet."
 
 #: www/include/project_home.php:72
 #, php-format
 msgid ""
 "View list of <a href=\"/export/rss_project.php?group_id=%1$s\">RSS feeds</a> "
-"available for this project"
+"available for this project."
 msgstr ""
+"Voir la liste des <a href=\"/export/rss_project.php?group_id=%1$s\">flux "
+"RSS</a> disponibles pour ce projet."
 
 #: www/include/project_home.php:85
 msgid "HELP WANTED: This project is looking for"
@@ -6646,7 +6691,7 @@ msgstr "Vous n'avez pas de données"
 
 #: www/my/index.php:67
 msgid "Assigned Artifacts"
-msgstr ""
+msgstr "Éléments affectés"
 
 #: www/my/index.php:75 www/my/index.php:123 www/my/index.php:178
 #: www/pm/add_task.php:51 www/pm/browse_task.php:92 www/pm/browse_task.php:181
@@ -6660,11 +6705,11 @@ msgstr "Priorité"
 
 #: www/my/index.php:107
 msgid "You have no open tracker items assigned to you."
-msgstr "Aucune tâche ne vous est confiée."
+msgstr "Aucun élément de suivi ne vous est confié."
 
 #: www/my/index.php:114
 msgid "Assigned Tasks"
-msgstr ""
+msgstr "Tâches affectées"
 
 #: www/my/index.php:165
 msgid "You have no open tasks assigned to you."
@@ -6672,15 +6717,15 @@ msgstr "Aucune tâche ne vous est confiée."
 
 #: www/my/index.php:172
 msgid "Submitted Artifacts"
-msgstr ""
+msgstr "Éléments soumis"
 
 #: www/my/index.php:207
 msgid "You have no open tracker items submitted by you."
-msgstr "Vous n'avez soumis aucun élément à suivre."
+msgstr "Vous n'avez soumis aucun élément de suivi."
 
 #: www/my/index.php:212
 msgid "Monitored Items"
-msgstr ""
+msgstr "Éléments surveillés"
 
 #: www/my/index.php:220 www/my/index.php:256 www/my/index.php:323
 #: www/my/rmproject.php:84 www/project/admin/index.php:264
@@ -6710,9 +6755,8 @@ msgid "My Projects"
 msgstr "Mes projets"
 
 #: www/my/index.php:325
-#, fuzzy
 msgid "My Roles"
-msgstr "Rôle"
+msgstr "Mes rôles"
 
 #: www/my/index.php:345
 msgid "You're not a member of any active projects"
@@ -6739,7 +6783,9 @@ msgstr "Quitter le projet"
 msgid ""
 "You are about to remove yourself from the project. Please confirm your "
 "action:"
-msgstr "Vous souhaitez vous desister de ce projet ?"
+msgstr ""
+"Vous êtes sur le point de vous desister de ce projet.  Veuillez confirmer "
+"votre décision."
 
 #: www/new/index.php:18
 msgid "New File Releases"
@@ -7006,7 +7052,7 @@ msgstr "Erreur - informations manquantes"
 #: www/people/editjob.php:95 www/people/editjob.php:111
 #: www/people/editjob.php:134 www/people/editprofile.php:98
 msgid "Fill in all required fields"
-msgstr ""
+msgstr "Veuillez remplir tous les champs requis"
 
 #: www/people/editjob.php:62
 msgid "JOB insert FAILED"
@@ -7125,6 +7171,8 @@ msgstr "Édition des compétences"
 msgid ""
 "Change the required fields, and press \"Done\" at the bottom of the page"
 msgstr ""
+"Veuillez modifier les champs requis, puis cliquer sur « Effectué » en bas de "
+"page."
 
 #: www/people/editprofile.php:150
 msgid "Done"
@@ -8658,12 +8706,12 @@ msgstr "Voir"
 
 #: www/project/report/index.php:138
 msgid "Last Modified"
-msgstr ""
+msgstr "Dernière modification"
 
 #: www/project/report/index.php:160 www/sendmessage.php:85
 #: www/sendmessage.php:96
 msgid "Contact"
-msgstr "Conatct"
+msgstr "Contact"
 
 #: www/project/request.php:52
 msgid "Your request has been submitted."
@@ -9029,7 +9077,7 @@ msgstr ""
 
 #: www/reporting/rebuild.php:59
 msgid "I am sure"
-msgstr ""
+msgstr "Je suis sûr"
 
 #: www/reporting/rebuild.php:61
 msgid "Press ONLY ONCE"
@@ -9189,10 +9237,11 @@ msgid ""
 "The repository for this project isn't created yet. It will be created in the "
 "next few minutes."
 msgstr ""
+"Le dépôt de ce projet n'existe pas encore.  Il sera créé prochainement."
 
 #: www/search/include/SearchManager.class.php:101
 msgid "Search the entire project"
-msgstr "Le projet entier"
+msgstr "Chercher dans le projet entier"
 
 #: www/search/include/SearchManager.class.php:131
 #: www/search/include/SearchManager.class.php:147
@@ -9279,7 +9328,7 @@ msgstr "Résultats de la recherche de <em>%1$s</em>"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:137
 msgid "Previous Results"
-msgstr "Résultats précèdents"
+msgstr "Résultats précédents"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:144
 msgid "Next Results"
@@ -9307,15 +9356,17 @@ msgstr "Erreur - Recherche non valide"
 
 #: www/sendmessage.php:35
 msgid "Error - some variables were not provided"
-msgstr ""
+msgstr "Erreur - certaines variables n'ont pas été fournies"
 
 #: www/sendmessage.php:45
 msgid "Error - That user does not exist"
 msgstr "Erreur - cet utilisateur n'existe pas"
 
 #: www/sendmessage.php:50
-msgid "You can only send to addresses "
+#, php-format
+msgid "You can only send to addresses @<em>%1$s</em>."
 msgstr ""
+"Nous ne pouvez envoyer qu'à des adresses dans le domaine <em>%1$s</em>."
 
 #: www/sendmessage.php:86 www/sendmessage.php:97
 msgid "Message has been sent"
@@ -10279,7 +10330,7 @@ msgstr "%1$s sondage(s) trouvé(s)"
 
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 msgid "This Group Has Turned Off Surveys."
-msgstr ""
+msgstr "Ce groupe a désactivé la fonction de sondage."
 
 #: www/survey/include/SurveyHTML.class.php:55 www/survey/survey_utils.php:57
 msgid "Edit Survey"
@@ -10302,11 +10353,11 @@ msgid "Questions in this Survey"
 msgstr "Questions de ce sondage"
 
 #: www/survey/include/SurveyHTML.class.php:287
-#, fuzzy, php-format
+#, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
-msgstr[0] "%1$s question(s) trouvée(s)"
-msgstr[1] "%1$s question(s) trouvée(s)"
+msgstr[0] "%1$s question trouvée"
+msgstr[1] "%1$s questions trouvées"
 
 #: www/survey/include/SurveyHTML.class.php:338
 msgid "Survey ID"
@@ -10345,11 +10396,13 @@ msgstr "Résultats avec graphique et commentaires"
 
 #: www/survey/include/SurveyHTML.class.php:461
 msgid "Error - you can't vote for inactive survey"
-msgstr ""
+msgstr "Erreur - vous ne pouvez pas participer à un sondage inactif."
 
 #: www/survey/include/SurveyHTML.class.php:468
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
+"Attention - vous êtes sur le point de participer à ce sondage pour la "
+"deuxième fois."
 
 #: www/survey/include/SurveyHTML.class.php:586
 msgid "No Votes"
@@ -10642,7 +10695,7 @@ msgstr "Nom du champ"
 #: www/tracker/admin/form-addextrafield.php:88
 #: www/tracker/admin/form-updateextrafield.php:43
 msgid "Field alias"
-msgstr ""
+msgstr "Alias pour le champ"
 
 #: www/tracker/admin/form-addextrafield.php:92
 #: www/tracker/admin/form-updateextrafield.php:23
@@ -11151,34 +11204,31 @@ msgstr "Supprimer la requête"
 
 #: www/tracker/query.php:282
 msgid "Last Modified Date range"
-msgstr ""
+msgstr "Étendue de dates pour la dernière modification"
 
 #: www/tracker/query.php:284
 msgid "Open Date range"
-msgstr ""
+msgstr "Étendue de dates pour l'ouverture"
 
 #: www/tracker/query.php:286
 msgid "Close Date range"
-msgstr ""
+msgstr "Étendue de dates pour la fermeture"
 
 #: www/tracker/taskmgr.php:35
-#, fuzzy
 msgid "Artifact Could Not Be Created"
-msgstr "Erreur lors de la suppression de l'élément"
+msgstr "Erreur lors de la création de l'élément"
 
 #: www/tracker/taskmgr.php:54
-#, fuzzy
 msgid "Could Not Get ProjectGroup"
-msgstr "Échec lors de la mise à jour du parent"
+msgstr "Erreur lors de la création de l'objet ProjectGroup"
 
 #: www/tracker/taskmgr.php:62
 msgid "Could Not Get ProjectTaskFactory"
-msgstr ""
+msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
 
 #: www/tracker/taskmgr.php:77
-#, fuzzy
 msgid "No Existing Tasks Found"
-msgstr "Aucune tâche correspondante trouvée"
+msgstr "Aucune tâche trouvée"
 
 #: www/tracker/taskmgr.php:85 www/tracker/taskmgr.php:140
 msgid "Build Relationship Between Tracker Items and Task Manager"
@@ -11187,19 +11237,17 @@ msgstr "Établir une relation entre le suivi et le gestionnaire de tâches."
 #: www/tracker/taskmgr.php:88 www/tracker/taskmgr.php:142
 #: www/tracker/tracker.php:254
 msgid "Tracker Item"
-msgstr "Trace"
+msgstr "Élément de suivi"
 
 #: www/tracker/taskmgr.php:99
 msgid "Add Relationship To Selected Task"
 msgstr "Ajouter une relation à la tâche sélectionnée"
 
 #: www/tracker/taskmgr.php:123
-#, fuzzy
 msgid "Could Not Get Factory"
-msgstr "Impossible de terminer l'opération"
+msgstr "Erreur lors de la création de l'objet Factory"
 
 #: www/tracker/taskmgr.php:133
-#, fuzzy
 msgid "No Existing Project Groups Found"
 msgstr "Aucun groupe de projet trouvé"
 
@@ -11246,8 +11294,3 @@ msgstr "Erreur lors de la suppression de l'élément"
 #: www/tracker/tracker.php:435
 msgid "Artifact Deleted Successfully"
 msgstr "Element supprimé avec succès"
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr ""
-#~ "Le site a activé la gestion de sources mais aucun gestionnaire de sources "
-#~ "n'a été choisi."

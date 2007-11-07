@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 16:01+0100\n"
+"POT-Creation-Date: 2007-11-07 17:18+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1203,10 +1203,10 @@ msgid "Pending task manager items notification"
 msgstr "未決定的任務管理員項目通知"
 
 #: cronjobs/send_pending_items_mail.php:78
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "This mail is sent to you to remind you of pending/overdue tasks. \n"
-"The task manager item  #%1$s is pending: \n"
+"The task manager item #%1$s is pending: \n"
 "Task Summary: %2$s\n"
 "Submitted by: %4$s\n"
 "Status:%5$s\n"
@@ -5102,9 +5102,11 @@ msgid "Delete File"
 msgstr "刪除文件"
 
 #: www/frs/admin/editrelease.php:398
-#, php-format
-msgid "There are %1$s users monitoring this package."
-msgstr "有 %1$s 個使用者監視這個套裝軟體。"
+#, fuzzy, php-format
+msgid "There is %1$s user monitoring this package."
+msgid_plural "There are %1$s users monitoring this package."
+msgstr[0] "有 %1$s 個使用者監視這個套裝軟體。"
+msgstr[1] "有 %1$s 個使用者監視這個套裝軟體。"
 
 #: www/frs/admin/index.php:81
 msgid "Added Package"
@@ -6026,7 +6028,7 @@ msgstr ""
 #, php-format
 msgid ""
 "View list of <a href=\"/export/rss_project.php?group_id=%1$s\">RSS feeds</a> "
-"available for this project"
+"available for this project."
 msgstr ""
 
 #: www/include/project_home.php:85
@@ -9176,8 +9178,9 @@ msgid "Error - That user does not exist"
 msgstr "錯誤 - 程式碼不存在"
 
 #: www/sendmessage.php:50
-msgid "You can only send to addresses "
-msgstr ""
+#, fuzzy, php-format
+msgid "You can only send to addresses @<em>%1$s</em>."
+msgstr "找不到關於 <em>%1$s</em> 的資料"
 
 #: www/sendmessage.php:86 www/sendmessage.php:97
 msgid "Message has been sent"
