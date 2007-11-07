@@ -1,3 +1,21 @@
+2007-11-07  Roland Mas  <lolando@debian.org>
+
+	* common/include/GroupJoinRequest.class.php: New
+	send_accept_mail() function.
+	* www/project/admin/index.php: Use it.
+
+2007-11-06  Roland Mas  <lolando@debian.org>
+
+	* www/include/BaseLanguage.class.php: Added
+	setup_gettext_from_browser() and setup_gettext_for_user(), to be
+	able to temporarily override a locale.
+	* www/include/pre.php: Adapt accordingly.
+	* common/include/GroupJoinRequest.class.php: Switch to the email
+	recipient's locale before sending email, then switch back to the
+	current user's locale.
+	* common/include/Group.class.php: Ditto for group
+	approval/rejection messages.
+
 2007-11-04  Roland Mas  <lolando@debian.org>
 
 	* Several fixes to remove vulnerabilities against symlink attacks

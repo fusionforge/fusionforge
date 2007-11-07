@@ -159,33 +159,7 @@ if (session_loggedin()) {
 
 require_once('www/include/BaseLanguage.class.php');
 
-if (!$sys_lang) {
-	$sys_lang="English";
-}
-if (session_loggedin()) {
-	$Language=new BaseLanguage();
-	$Language->loadLanguageID($LUSER->getLanguage());
-} else {
-	//if you aren't logged in, check your browser settings 
-	//and see if we support that language
-	//if we don't support it, just use default language
-	if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
-		$classname=getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
-	} else {
-		$classname='';
-	}
-	if (!$classname) {
-		$classname=$sys_lang;
-	}
-	$Language=new BaseLanguage();
-	$Language->loadLanguage($classname);
-}
-
-setlocale (LC_TIME, _('en_US'));
-$sys_strftimefmt = _('%Y %B %e  %H:%M');
-$sys_datefmt = _('Y-m-d H:i');
-$sys_shortdatefmt = _('Y-m-d');
-
+setup_gettext_from_browser() ;
 
 /*
 
@@ -201,5 +175,11 @@ $sys_datefmt
 $sys_shortdatefmt
 
 */
+
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

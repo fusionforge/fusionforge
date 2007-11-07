@@ -526,6 +526,47 @@ function setupGettext ($lang) {
 	textdomain('gforge');
 }
 
+function setup_gettext_from_browser() {
+	global $Language, $sys_lang ;
+	if (!$sys_lang) {
+		$sys_lang="English";
+	}
+	if (session_loggedin()) {
+		$LUSER =& session_get_user();
+		$Language=new BaseLanguage();
+		$Language->loadLanguageID($LUSER->getLanguage());
+	} else {
+		//if you aren't logged in, check your browser settings 
+		//and see if we support that language
+		//if we don't support it, just use default language
+		if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
+			$classname=getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
+		} else {
+			$classname='';
+		}
+		if (!$classname) {
+			$classname=$sys_lang;
+		}
+		$Language=new BaseLanguage();
+		$Language->loadLanguage($classname);
+	}
+
+	setlocale (LC_TIME, _('en_US'));
+	$sys_strftimefmt = _('%Y %B %e  %H:%M');
+	$sys_datefmt = _('Y-m-d H:i');
+	$sys_shortdatefmt = _('Y-m-d');
+}
+
+function setup_gettext_for_user($user) {
+	$Language=new BaseLanguage();
+	$Language->loadLanguageID($user->getLanguage());
+
+	setlocale (LC_TIME, _('en_US'));
+	$sys_strftimefmt = _('%Y %B %e  %H:%M');
+	$sys_datefmt = _('Y-m-d H:i');
+	$sys_shortdatefmt = _('Y-m-d');
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

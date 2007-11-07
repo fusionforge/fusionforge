@@ -2036,7 +2036,7 @@ class Group extends Error {
 	 */
 	function sendApprovalEmail() {
 		$res_admins = db_query("
-			SELECT users.user_name,users.email,users.language
+			SELECT users.user_name,users.email,users.language,users.user_id
 			FROM users,user_group
 			WHERE users.user_id=user_group.user_id
 			AND user_group.group_id='".$this->getID()."'
@@ -2050,8 +2050,8 @@ class Group extends Error {
 
 		// send one email per admin
 		while ($row_admins = db_fetch_array($res_admins)) {
-			$l = new BaseLanguage () ;
-			$l->loadLanguageID($row_admins['language']);
+			$admin =& user_get_object($row_admins['user_id']);
+			setup_gettext_for_user ($admin) ;
 
 			//																			   $2					  $2					$3							  $4						  $5						$6
 			$message=stripcslashes(sprintf(_('Your project registration for %7$s has been approved.
@@ -2087,6 +2087,8 @@ if there is anything we can do to help you.
 -- the %7$s crew'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name']));
 	
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
+
+			setup_gettext_from_browser () ;
 		}
 
 		return true;
@@ -2106,7 +2108,7 @@ if there is anything we can do to help you.
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
 		$res_admins = db_query("
-			SELECT u.email, u.language
+			SELECT u.email, u.language, u.user_id
 			FROM users u, user_group ug
 			WHERE ug.group_id='".$this->getID()."'
 			AND u.user_id=ug.user_id;
@@ -2118,8 +2120,8 @@ if there is anything we can do to help you.
 		}
 		
 		while ($row_admins = db_fetch_array($res_admins)) {
-			$l = new BaseLanguage () ;
-			$l->loadLanguageID($row_admins['language']);
+			$admin =& user_get_object($row_admins['user_id']);
+			setup_gettext_for_user ($admin) ;
 
 			$response=stripcslashes(sprintf(_('Your project registration for %3$s has been denied.
 
@@ -2142,6 +2144,7 @@ Reasons for negative decision:
 			}
 
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), $GLOBALS['sys_name']), $response);
+			setup_gettext_from_browser () ;
 		}
 
 		return true;
@@ -2159,7 +2162,7 @@ Reasons for negative decision:
 	 */
 	function sendNewProjectNotificationEmail() {
 
-		$res = db_query("SELECT users.email, users.language
+		$res = db_query("SELECT users.email, users.language, users.user_id
 	 			FROM users,user_group
 				WHERE group_id=1 
 				AND user_group.admin_flags='A'
@@ -2171,9 +2174,9 @@ Reasons for negative decision:
 		} else {
 			for ($i=0; $i<db_numrows($res) ; $i++) {
 				$admin_email = db_result($res,$i,'email') ;
-				$l = new BaseLanguage () ;
-				$l->loadLanguageID(db_result($res,$i,'language'));
-				
+				$admin =& user_get_object(db_result($res,$i,'user_id'));
+				setup_gettext_for_user ($admin) ;
+
 				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
@@ -2183,11 +2186,12 @@ License: %4$s
 Please visit the following URL to approve or reject this project:
 http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
 				util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
+				setup_gettext_from_browser () ;
 			}
 		}
 		
 		// Get the email of the user who wants to register the project
-		$res = db_query("SELECT u.email, u.language
+		$res = db_query("SELECT u.email, u.language, u.user_id
 				 FROM users u, user_group ug
 				 WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
 
@@ -2197,8 +2201,8 @@ http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicN
 		} else {
 			for ($i=0; $i<db_numrows($res) ; $i++) {
 				$email = db_result($res, $i, 'email');
-				$l = new BaseLanguage () ;
-				$l->loadLanguageID(db_result($res,$i,'language'));
+				$user =& user_get_object(db_result($res,$i,'user_id'));
+				setup_gettext_for_user ($user) ;
 				
 				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
 
@@ -2209,6 +2213,7 @@ License: %4$s
 The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
 				
 				util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
+				setup_gettext_from_browser () ;
 			}
 		}
 		

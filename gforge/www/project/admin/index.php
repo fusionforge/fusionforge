@@ -136,6 +136,7 @@ if (getStringFromRequest('submit')) {
 			if (!$gjr || !is_object($gjr) || $gjr->isError()) {
 				$feedback .= 'Error Getting GroupJoinRequest';
 			} else {
+				$gjr->send_accept_mail();
 				$gjr->delete(true);
 			}
 			$feedback = _('User Added Successfully');
@@ -315,7 +316,7 @@ if (count($reqs) < 1) {
 			echo "Invalid User";
 		}
 		?>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
 		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>

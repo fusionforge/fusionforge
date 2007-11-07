@@ -157,7 +157,7 @@ class GroupJoinRequest extends Error {
 			db_rollback();
 			return false;
 		} else {
-			if (!$this->fetchData($group_id,$user_id)) {
+			if (!$this->fetchData($this->Group->getID(),$user_id)) {
 				db_rollback();
 				return false;
 			} else {
@@ -244,19 +244,24 @@ class GroupJoinRequest extends Error {
 		$user =& session_get_user();
 		$admins =& $this->Group->getAdmins();
 		for ($i=0; $i<count($admins); $i++) {
-			$emails[]=$admins[$i]->getEmail();
-		}
-		$email=implode($emails,',');
-		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
-		$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
-		$body = sprintf(_('%1$s has requested to join your project. 
+			setup_gettext_for_user ($admins[$i]) ;
+		  
+			$email=$admins[$i]->getEmail();
+			$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
+			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
+			$body = sprintf(_('%1$s has requested to join your project. 
 You can approve this request here: http://%2$s/project/admin/?group_id=%3$s. 
 
 Comments by the user:
 %4$s'), $user->getRealName(), $GLOBALS['sys_default_domain'], $this->Group->getId(), $comments);
-		$body = str_replace("\\n","\n",$body);
+			$body = str_replace("\\n","\n",$body);
 
-		return util_send_message($email,$subject,$body);
+			$ret = util_send_message($email,$subject,$body);
+			if (! $ret) { return $ret; }
+
+		}
+		setup_gettext_from_browser () ;
+		return true ;
 	}
 
 	/**
@@ -265,12 +270,26 @@ Comments by the user:
 	 *	@return	boolean	success.
 	 */
 	function reject() {
-		global $Language;
 		$user =& user_get_object($this->getUserId());
+		setup_gettext_for_user ($user) ;
 		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 		$body = sprintf(_('Your request to join the %1$s project was denied by the administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(),$subject,$body);
+		setup_gettext_from_browser () ;
 		return $this->delete(1);
+	}
+
+	/**
+	 *	send_accept_mail()
+	 *
+	 */
+	function send_accept_mail() {
+		$user =& user_get_object($this->getUserId());
+		setup_gettext_for_user ($user) ;
+		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
+		$body = sprintf(_('Your request to join the %1$s project was granted by the administrator.'), $this->Group->getPublicName());
+		util_send_message($user->getEmail(),$subject,$body);
+		setup_gettext_from_browser () ;
 	}
 
 	/**
@@ -306,5 +325,11 @@ Comments by the user:
 		}
 	}
 }
+
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
