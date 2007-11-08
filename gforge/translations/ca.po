@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 17:18+0100\n"
+"POT-Creation-Date: 2007-11-08 10:51+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -478,12 +478,12 @@ msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:276
 #, php-format
-msgid "Your request to join the %1$s project was denied by the administrator."
+msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:290
 #, php-format
-msgid "Your request to join the %1$s project was granted by the administrator."
+msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr ""
 
 #: common/include/User.class.php:232
@@ -852,7 +852,7 @@ msgstr "Documents"
 
 #: common/reporting/report_utils.php:158 common/reporting/report_utils.php:171
 #: www/include/Layout.class.php:583 www/include/LayoutSF.class.php:816
-#: www/include/menuSF.php:135 www/include/project_home.php:320
+#: www/include/menuSF.php:135 www/include/project_home.php:321
 #: www/project/stats/project_stats_utils.php:86
 #: www/project/stats/project_stats_utils.php:146
 #: www/project/stats/project_stats_utils.php:203
@@ -1169,7 +1169,7 @@ msgstr "Àrea de text"
 
 #: common/tracker/ArtifactExtraField.class.php:300 www/admin/groupedit.php:108
 #: www/admin/grouplist.php:87 www/admin/pluginman.php:178
-#: www/admin/search.php:106 www/admin/search.php:176
+#: www/admin/search.php:105 www/admin/search.php:174
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
 #: www/news/admin/index.php:129 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
@@ -1309,7 +1309,7 @@ msgstr ""
 
 #: deb-specific/index_std.php:7 plugins/webcalendar/www/index2.php:56
 #: www/export/projnews.php:82 www/forum/include/ForumHTML.class.php:77
-#: www/include/project_home.php:406 www/index_std.php:62
+#: www/include/project_home.php:407 www/index_std.php:62
 msgid "Latest News"
 msgstr "Últimes notícies"
 
@@ -1608,9 +1608,11 @@ msgstr "Més de <strong>%1$s</strong> projectes al conjunt de resultats."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:267
 #: www/softwaremap/trove_list.php:257
-#, php-format
-msgid "<strong>%1$s</strong> projects in result set."
-msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
+#, fuzzy, php-format
+msgid "<strong>%1$s</strong> project in result set."
+msgid_plural "<strong>%1$s</strong> projects in result set."
+msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:397
 msgid "Project Tree"
@@ -1693,7 +1695,6 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:223
 #: plugins/quota_management/www/quota.php:326
 #: plugins/quota_management/www/quota.php:394
-#: www/include/project_summary.php:141
 msgid "total"
 msgstr "total"
 
@@ -2889,7 +2890,7 @@ msgstr "Modifica el %1$s a sota:"
 #: www/pm/admin/index.php:268 www/pm/admin/index.php:307
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:235 www/project/admin/roleedit.php:258
-#: www/project/request.php:66 www/register/projectinfo.php:196
+#: www/project/request.php:68 www/register/projectinfo.php:196
 #: www/survey/include/SurveyHTML.class.php:551 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:51
@@ -2942,7 +2943,8 @@ msgid "Error creating group object"
 msgstr "Error al crear un objecte de grup"
 
 #: www/admin/approve-pending.php:56
-msgid "Approving Group:"
+#, fuzzy, php-format
+msgid "Approving Group: %1$s"
 msgstr "S'està aprovant el grup:"
 
 #: www/admin/approve-pending.php:104
@@ -3271,7 +3273,7 @@ msgstr "Nom de Grup (feu clic per a editar)"
 msgid "Register Time"
 msgstr "Temps de registre"
 
-#: www/admin/grouplist.php:86 www/admin/search.php:173
+#: www/admin/grouplist.php:86 www/admin/search.php:171
 #: www/admin/useredit.php:241 www/project/admin/index.php:261
 #: www/project/admin/massadd.php:103 www/project/admin/massfinish.php:82
 #, fuzzy
@@ -3545,8 +3547,8 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr "Preparació per a l'enviament de correu"
 
-#: www/admin/massmail.php:144 www/admin/search.php:101
-#: www/admin/search.php:172 www/docman/admin/index.php:351 www/my/index.php:74
+#: www/admin/massmail.php:144 www/admin/search.php:100
+#: www/admin/search.php:170 www/docman/admin/index.php:351 www/my/index.php:74
 #: www/my/index.php:122 www/my/index.php:177
 #: www/project/admin/editimages.php:262
 #: www/tracker/admin/form-addcanned.php:22 www/tracker/browse.php:138
@@ -3713,21 +3715,20 @@ msgid "Admin Search Results"
 msgstr "Resultats de cerca Admin"
 
 #: www/admin/search.php:91
-msgid "User search with criteria"
-msgstr "Cerca d'usuari amb criteris"
+#, fuzzy, php-format
+msgid "User search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "Cerca d'usuari amb criteris"
+msgstr[1] "Cerca d'usuari amb criteris"
 
-#: www/admin/search.php:92 www/admin/search.php:165
-msgid "matches"
-msgstr "coincidències"
-
-#: www/admin/search.php:102 www/admin/unsubscribe.php:130
+#: www/admin/search.php:101 www/admin/unsubscribe.php:130
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:33
 #: www/top/topusers.php:69
 #, fuzzy
 msgid "User name"
 msgstr "Nom d'usuari:"
 
-#: www/admin/search.php:103 www/admin/unsubscribe.php:131
+#: www/admin/search.php:102 www/admin/unsubscribe.php:131
 #: www/admin/useredit.php:117 www/include/user_home.php:45
 #: www/project/admin/massadd.php:102 www/project/admin/massfinish.php:81
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:34
@@ -3735,23 +3736,26 @@ msgstr "Nom d'usuari:"
 msgid "Real name"
 msgstr "Nom real"
 
-#: www/admin/search.php:104 www/admin/unsubscribe.php:132
+#: www/admin/search.php:103 www/admin/unsubscribe.php:132
 msgid "Email"
 msgstr "Correu electrònic"
 
-#: www/admin/search.php:105
+#: www/admin/search.php:104
 msgid "Member since"
 msgstr "Membre des de"
 
-#: www/admin/search.php:164
-msgid "Group search with criteria"
-msgstr "Cerca de grups amb criteris"
+#: www/admin/search.php:163
+#, fuzzy, php-format
+msgid "Group search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "Group search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "Cerca d'usuari amb criteris"
+msgstr[1] "Cerca d'usuari amb criteris"
 
-#: www/admin/search.php:174
+#: www/admin/search.php:172
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:175
+#: www/admin/search.php:173
 msgid "Registered"
 msgstr "Registrat"
 
@@ -5871,8 +5875,8 @@ msgid "Lists"
 msgstr "Llistes"
 
 #: www/include/Layout.class.php:597 www/include/LayoutSF.class.php:828
-#: www/include/menuSF.php:143 www/include/project_home.php:341
-#: www/include/project_home.php:342 www/survey/include/SurveyHTML.class.php:53
+#: www/include/menuSF.php:143 www/include/project_home.php:342
+#: www/include/project_home.php:343 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:571
 #: www/themes/gforge/Theme.class.php:546
@@ -5880,7 +5884,7 @@ msgid "Surveys"
 msgstr "Enquestes"
 
 #: www/include/Layout.class.php:611 www/include/LayoutSF.class.php:840
-#: www/include/menuSF.php:151 www/include/project_home.php:350
+#: www/include/menuSF.php:151 www/include/project_home.php:351
 #: www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:587
 #: www/themes/gforge/Theme.class.php:560
@@ -6218,10 +6222,12 @@ msgstr "Pagina inicial del projecte"
 msgid "There are no public trackers available"
 msgstr "No hi rastrejadors públics disponibles"
 
-#: www/include/project_home.php:277
-#, php-format
-msgid "<strong>%1$s</strong> open / <strong>%2$s</strong> total"
-msgstr "<strong>%1$s</strong> oberts /<strong>%2$s</strong> total"
+#: www/include/project_home.php:277 www/include/project_summary.php:141
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgstr[0] "<strong>%1$s</strong> oberts /<strong>%2$s</strong> total"
+msgstr[1] "<strong>%1$s</strong> oberts /<strong>%2$s</strong> total"
 
 #: www/include/project_home.php:288
 msgid "Public Forums"
@@ -6249,35 +6255,34 @@ msgstr "DocManager: Gestor de documentació"
 msgid "Mailing Lists"
 msgstr "Llistes d'enviament de correus"
 
-#: www/include/project_home.php:313
-msgid "public mailing lists"
-msgstr "llistes de correu públiques"
+#: www/include/project_home.php:314
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> public mailing list)"
+msgid_plural "(<strong>%1$s</strong> public mailing lists)"
+msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
 
-#: www/include/project_home.php:321
+#: www/include/project_home.php:322
 msgid "Task Manager"
 msgstr "Gestor de tasques"
 
-#: www/include/project_home.php:326
+#: www/include/project_home.php:327
 msgid "There are no public subprojects available"
 msgstr "No hi ha subprojectes públics disponibles"
 
-#: www/include/project_home.php:343
+#: www/include/project_home.php:344
 msgid "surveys"
 msgstr "enquestes"
 
-#: www/include/project_home.php:351 www/register/projectinfo.php:171
+#: www/include/project_home.php:352 www/register/projectinfo.php:171
 #: www/scm/admin/index.php:40 www/scm/include/scm_utils.php:44
 #: www/scm/index.php:33 www/scm/reporting/index.php:33 www/scm/viewvc.php:139
 msgid "SCM Repository"
 msgstr "Repositori SCM"
 
-#: www/include/project_home.php:386 www/include/project_home.php:387
+#: www/include/project_home.php:387 www/include/project_home.php:388
 msgid "Anonymous FTP Space"
 msgstr "Espai FTP anònim"
-
-#: www/include/project_summary.php:141
-msgid "open"
-msgstr "obre"
 
 #: www/include/tool_reports.php:54 www/pm/index.php:70
 #: www/reporting/usersummary.php:58 www/tracker/ind.php:43
@@ -8728,15 +8733,21 @@ msgstr ""
 msgid "Request to join project"
 msgstr ""
 
-#: www/project/request.php:59
+#: www/project/request.php:61
 msgid ""
-"You can request to join a project by clicking the submit button. An "
+"You can request to join a project by clicking the submit button. The "
 "administrator will be emailed to approve or deny your request."
-msgstr ""
+msgid_plural ""
+"You can request to join a project by clicking the submit button. The "
+"administrators will be emailed to approve or deny your request."
+msgstr[0] ""
+msgstr[1] ""
 
-#: www/project/request.php:62
+#: www/project/request.php:64
 msgid "If you want, you can send a comment to the administrator:"
-msgstr ""
+msgid_plural "If you want, you can send a comment to the administrators:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/project/stats/index.php:35 www/project/stats/index.php:46
 #: www/reporting/projectact.php:54 www/reporting/projectact.php:57
@@ -10153,14 +10164,17 @@ msgid "Add This Survey"
 msgstr "Afegeix aquesta enquesta"
 
 #: www/survey/admin/add_survey.php:101 www/survey/admin/edit_question.php:113
-#: www/survey/admin/edit_survey.php:141
+#: www/survey/admin/edit_survey.php:142
 msgid "Show Existing Questions"
 msgstr "Mostra les preguntes existents"
 
-#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:144
+#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
 #: www/survey/include/SurveyHTML.class.php:334
-msgid "Existing Surveys"
-msgstr "Enquestes existents"
+#, fuzzy
+msgid "Existing Survey"
+msgid_plural "Existing Surveys"
+msgstr[0] "Enquestes existents"
+msgstr[1] "Enquestes existents"
 
 #: www/survey/admin/edit_question.php:36
 #: www/survey/include/SurveyHTML.class.php:107
@@ -10299,9 +10313,11 @@ msgid "NOTE: use these question_id's when you create a new survey"
 msgstr "NOTA: useu aquests id's_pregunta quan creeu una nova enquesta"
 
 #: www/survey/admin/show_questions.php:56
-#, php-format
-msgid "%1$s questions found"
-msgstr "S'han trobat %1$s preguntes"
+#, fuzzy, php-format
+msgid "%1$s question found"
+msgid_plural "%1$s questions found"
+msgstr[0] "S'han trobat %1$s preguntes"
+msgstr[1] "S'han trobat %1$s preguntes"
 
 #: www/survey/admin/show_results.php:58
 msgid "Survey Results"
@@ -10331,9 +10347,8 @@ msgstr "Mitjana"
 
 #: www/survey/admin/show_results_aggregate.php:156
 #: www/survey/admin/show_results_aggregate.php:226
-#: www/survey/include/SurveyHTML.class.php:684
-#, php-format
-msgid "View All %1$s Comments"
+#, fuzzy
+msgid "View All Comments"
 msgstr "Visualitza tots els comentaris %1$s"
 
 #: www/survey/admin/show_results_aggregate.php:161
@@ -10350,9 +10365,11 @@ msgid "Survey Inserted"
 msgstr "Enquesta inserida"
 
 #: www/survey/admin/survey_utils.php:33
-#, php-format
-msgid "%1$s surveys found"
-msgstr "S'han trobat %1$s enquestes"
+#, fuzzy, php-format
+msgid "%1$s survey found"
+msgid_plural "%1$s surveys found"
+msgstr[0] "S'han trobat %1$s enquestes"
+msgstr[1] "S'han trobat %1$s enquestes"
 
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 msgid "This Group Has Turned Off Surveys."
@@ -10431,6 +10448,13 @@ msgstr "Compte - esteu a punt de votar per segon cop en aquesta enquesta."
 #: www/survey/include/SurveyHTML.class.php:586
 msgid "No Votes"
 msgstr "No hi ha vots"
+
+#: www/survey/include/SurveyHTML.class.php:684
+#, fuzzy, php-format
+msgid "View All %1$s Comment"
+msgid_plural "View All %1$s Comments"
+msgstr[0] "Visualitza tots els comentaris %1$s"
+msgstr[1] "Visualitza tots els comentaris %1$s"
 
 #: www/survey/privacy.php:39
 msgid ""
@@ -11328,6 +11352,21 @@ msgstr ""
 #: www/tracker/tracker.php:435
 msgid "Artifact Deleted Successfully"
 msgstr ""
+
+#~ msgid "public mailing lists"
+#~ msgstr "llistes de correu públiques"
+
+#~ msgid "open"
+#~ msgstr "obre"
+
+#~ msgid "Group search with criteria"
+#~ msgstr "Cerca de grups amb criteris"
+
+#~ msgid "matches"
+#~ msgstr "coincidències"
+
+#~ msgid "<strong>%1$s</strong> projects in result set."
+#~ msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
 
 #~ msgid "Site has SCM enabled, but no SCM was chosen."
 #~ msgstr "El lloc té l'SCM habilitat, però no s'ha escollit cap SCM."

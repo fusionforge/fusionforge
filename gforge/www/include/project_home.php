@@ -274,7 +274,7 @@ if ($project->usesTracker()) {
 			echo '<p />
 		&nbsp;-&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 		'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-		( '.sprintf(_('<strong>%1$s</strong> open / <strong>%2$s</strong> total'), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .' )<br />'.
+		'.sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
 		db_result($result, $j, 'description');
 		}
 	}
@@ -310,7 +310,8 @@ if ($project->usesMail()) {
 	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/mail/?group_id='.$group_id.'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Lists')));
 	print '&nbsp;'._('Mailing Lists').'</a>';
-	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> "._('public mailing lists')." )";
+	$n = project_get_mail_list_count($group_id);
+	printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
 }
 
 // ##################### Task Manager

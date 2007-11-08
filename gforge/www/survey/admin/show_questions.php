@@ -53,7 +53,7 @@ Function  ShowResultsEditQuestion($result) {
 	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>" .sprintf(_('%1$s questions found'), $rows)."</h3>";
+	echo "<h3>" .sprintf(ngettext('%1$s question found', '%1$s questions found', $rows), $rows)."</h3>";
 
 	echo  "<table border=\"0\">\n";
 	/*  Create  the  headers  */

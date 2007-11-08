@@ -153,7 +153,7 @@ for ($i=0; $i<$count; $i++) {
 		}// end if (responses to survey question present)
 	} else if ($question_type == "2") { // This is a text-area question.
 		echo db_result($result, 0, "question")."<br />\n";
-		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All %1$s Comments')."</a>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All Comments')."</a>";
 
 	} else if ($question_type == "3") { // 	This is a Yes/No question.
 	  //	Show the Yes/No only if this is the first in a series
@@ -223,7 +223,7 @@ for ($i=0; $i<$count; $i++) {
 	} else if ($question_type == "5") { // This is a text-field question.
 		echo db_result($result, 0, "question")."<br />\n";
 
-		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All %1$s Comments')."</a>";
+		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">"._('View All Comments')."</a>";
 
 	}
 

@@ -254,7 +254,7 @@ if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 	$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 	
 	}
-$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount);
+$html_limit .= sprintf(ngettext('<strong>%1$s</strong> project in result set.', '<strong>%1$s</strong> projects in result set.', $querytotalcount), $querytotalcount);
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {

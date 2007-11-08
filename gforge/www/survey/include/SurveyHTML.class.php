@@ -331,7 +331,7 @@ class SurveyHTML extends Error {
 		global $user_id;
 		global $group_id;
 
-		$ret = '<h2>'. _('Existing Surveys'). '</h2>';
+		$ret = '<h2>'. ngettext('Existing Survey', 'Existing Surveys', count($surveys)). '</h2>';
 
 		/* Head information */
 		if ($show_id) {
@@ -681,7 +681,7 @@ class SurveyHTML extends Error {
 				$ret.='<ul><li><a href="show_results.php?survey_id='.$Survey->getID().
 					'&amp;question_id='.$Question->getID().
 					'&amp;group_id='.$group_id.'">'.
-					sprintf(_('View All %1$s Comments'), $totalCount).
+					sprintf(ngettext('View All %1$s Comment', 'View All %1$s Comments', $totalCount), $totalCount).
 					'</a></ul><p/>';
 			}
 		

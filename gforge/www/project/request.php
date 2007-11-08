@@ -56,10 +56,12 @@ if ($submit) {
 site_project_header(array('title'=>_('Request to join project'),'group'=>$group_id,'toptab'=>'summary'));
 
 ?>
-<p><?php echo _('You can request to join a project by clicking the submit button. An administrator will be emailed to approve or deny your request.'); ?></p>
+<p><?php 
+$nbadmins = count($group()->getAdmins());
+echo ngettext('You can request to join a project by clicking the submit button. The administrator will be emailed to approve or deny your request.', 'You can request to join a project by clicking the submit button. The administrators will be emailed to approve or deny your request.', $nbadmins); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 <p>
-<?php echo _('If you want, you can send a comment to the administrator:'); ?><br>
+<?php echo ngettext('If you want, you can send a comment to the administrator:', 'If you want, you can send a comment to the administrators:',$nbadmins); ?><br>
 <textarea name="comments" rows="15" cols="60"></textarea>
 </p>
 <p>

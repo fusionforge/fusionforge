@@ -88,8 +88,7 @@ if ($usersearch) {
 	}
 	$result = db_query($sql);
 
-	print '<p><strong>' ._('User search with criteria').' "<em>'.$search.'</em>": '
-	      .db_numrows($result) .' '. _('matches').'</strong></p>';
+	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', $search, db_numrows($result)), db_numrows($result)).'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 
@@ -161,8 +160,7 @@ if (getStringFromRequest('groupsearch')) {
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";
 	}
-	print '<p><strong>' ._('Group search with criteria').'"<em>'.$search.'</em>" '.$crit_desc.': '
-	      .db_numrows($result).' '._('matches').'</strong></p>';
+	print '<p><strong>' .sprintf(ngettext('Group search with criteria <em>%1$s</em>: %2$s match', 'Group search with criteria <em>%1$s</em>: %2$s matches', $search, db_numrows($result)), db_numrows($result)).'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();

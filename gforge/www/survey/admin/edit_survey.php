@@ -134,6 +134,7 @@ function show_questions() {
 $sql="SELECT * FROM surveys WHERE group_id='$group_id'";
 
 $result=db_query($sql);
+$numrows=db_numrows($result);
 
 ?>
 <p>
@@ -141,7 +142,7 @@ $result=db_query($sql);
 <input type="button" name="none" value="<?php echo _('Show Existing Questions'); ?>" onclick="show_questions()" />
 </form></p>
 <p>&nbsp;</p>
-<h2><?php echo _('Existing Surveys'); ?></h2>
+<h2><?php echo ngettext('Existing Survey', 'Existing Surveys', $numrows) ?></h2>
 <?php
 
 ShowResultsEditSurvey($result);

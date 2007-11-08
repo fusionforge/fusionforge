@@ -137,9 +137,9 @@ function project_summary($group_id,$mode,$no_table) {
 			for ($j = 0; $j < $rows; $j++) {
 				$return .= '<p>
 				&nbsp;-&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
-				'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-				( <strong>'. db_result($result, $j, 'open_count') .' '._('open').' / '. db_result($result, $j, 'count') . _('total').' </strong> )<br />'.
-				db_result($result, $j, 'description') . '</p>';
+				  '&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a> ' ;
+				$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
+				$return .= '</p>';
 			}   
 		}
 	}

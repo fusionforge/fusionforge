@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 17:18+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2007-11-08 10:51+0100\n"
+"PO-Revision-Date: 2007-11-08 10:48+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -89,7 +89,6 @@ msgstr ""
 
 #: common/forum/Forum.class.php:462 common/forum/Forum.class.php:496
 #: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:304
-#, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "Solo puede monitorizar si está autenticado."
 
@@ -123,9 +122,8 @@ msgid "Forum"
 msgstr "Foro"
 
 #: common/forum/ForumFactory.class.php:145
-#, fuzzy
 msgid "Forum not found"
-msgstr "Encuesta no existe."
+msgstr "Foro no existe."
 
 #: common/forum/ForumMessage.class.php:71
 msgid "ForumMessage:: No Valid Forum Object"
@@ -216,7 +214,6 @@ msgstr "FRSPackage::Update: El nombre del paquete sólo puede ser alfanumérico"
 #: common/include/Error.class.php:131 common/include/Group.class.php:429
 #: common/include/Group.class.php:503 www/include/exit.php:39
 #: www/news/admin/index.php:348
-#, fuzzy
 msgid "Permission denied."
 msgstr "Permiso Denegado"
 
@@ -274,7 +271,6 @@ msgid "Please give more comprehensive licensing description"
 msgstr "Por favor, describa la licencia de modo más comprensible.\""
 
 #: common/include/Group.class.php:424 common/include/Group.class.php:498
-#, fuzzy
 msgid "Could not get permission."
 msgstr "No puedo obtener permiso"
 
@@ -468,12 +464,12 @@ msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:276
 #, php-format
-msgid "Your request to join the %1$s project was denied by the administrator."
+msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:290
 #, php-format
-msgid "Your request to join the %1$s project was granted by the administrator."
+msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr ""
 
 #: common/include/User.class.php:232
@@ -846,7 +842,7 @@ msgstr "Documentos"
 
 #: common/reporting/report_utils.php:158 common/reporting/report_utils.php:171
 #: www/include/Layout.class.php:583 www/include/LayoutSF.class.php:816
-#: www/include/menuSF.php:135 www/include/project_home.php:320
+#: www/include/menuSF.php:135 www/include/project_home.php:321
 #: www/project/stats/project_stats_utils.php:86
 #: www/project/stats/project_stats_utils.php:146
 #: www/project/stats/project_stats_utils.php:203
@@ -1162,7 +1158,7 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:300 www/admin/groupedit.php:108
 #: www/admin/grouplist.php:87 www/admin/pluginman.php:178
-#: www/admin/search.php:106 www/admin/search.php:176
+#: www/admin/search.php:105 www/admin/search.php:174
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
 #: www/news/admin/index.php:129 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
@@ -1231,7 +1227,7 @@ msgid "Pending task manager items notification"
 msgstr "Notificación de tareas pendientes"
 
 #: cronjobs/send_pending_items_mail.php:78
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This mail is sent to you to remind you of pending/overdue tasks. \n"
 "The task manager item #%1$s is pending: \n"
@@ -1256,7 +1252,7 @@ msgid "Pending tracker  items notification"
 msgstr "Notificación de registro pendiente"
 
 #: cronjobs/send_pending_items_mail.php:121
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This mail is sent to you to remind you of pending/overdue tracker items. The "
 "item #%1$s is pending:\n"
@@ -1301,7 +1297,7 @@ msgstr ""
 
 #: deb-specific/index_std.php:7 plugins/webcalendar/www/index2.php:56
 #: www/export/projnews.php:82 www/forum/include/ForumHTML.class.php:77
-#: www/include/project_home.php:406 www/index_std.php:62
+#: www/include/project_home.php:407 www/index_std.php:62
 msgid "Latest News"
 msgstr "Últimas noticias"
 
@@ -1601,8 +1597,10 @@ msgstr "Más <strong>%1$s</strong>proyectos en esta categoría."
 #: plugins/projects_hierarchy/www/softwaremap.php:267
 #: www/softwaremap/trove_list.php:257
 #, php-format
-msgid "<strong>%1$s</strong> projects in result set."
-msgstr "<strong>%1$s</strong> proyectos en esta categoría."
+msgid "<strong>%1$s</strong> project in result set."
+msgid_plural "<strong>%1$s</strong> projects in result set."
+msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
+msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:397
 msgid "Project Tree"
@@ -1630,9 +1628,8 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38 www/admin/configman.php:35
 #: www/admin/cronman.php:33 www/admin/index.php:36 www/admin/pluginman.php:34
 #: www/admin/vhost.php:106 www/include/menuSF.php:37
-#, fuzzy
 msgid "Site admin"
-msgstr "Site Admin"
+msgstr ""
 
 #: plugins/quota_management/www/quota.php:185
 msgid "Projects ressources use"
@@ -1685,7 +1682,6 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:223
 #: plugins/quota_management/www/quota.php:326
 #: plugins/quota_management/www/quota.php:394
-#: www/include/project_summary.php:141
 msgid "total"
 msgstr "total"
 
@@ -2175,7 +2171,6 @@ msgid "Return"
 msgstr "Volver"
 
 #: www/account/change_email.php:41
-#, fuzzy
 msgid "Invalid email address."
 msgstr "Dirección de correo electrónico inválida"
 
@@ -2213,7 +2208,6 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid "Email change"
 msgstr "Cambio de dirección de correo electrónico completado"
 
@@ -2384,7 +2378,6 @@ msgid "Welcome"
 msgstr "Bienvenid@s"
 
 #: www/account/index.php:107
-#, fuzzy
 msgid "Account options:"
 msgstr "Informacion de la cuenta"
 
@@ -2889,7 +2882,7 @@ msgstr "Modificar el %1$s abajo:"
 #: www/pm/admin/index.php:268 www/pm/admin/index.php:307
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:235 www/project/admin/roleedit.php:258
-#: www/project/request.php:66 www/register/projectinfo.php:196
+#: www/project/request.php:68 www/register/projectinfo.php:196
 #: www/survey/include/SurveyHTML.class.php:551 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:51
@@ -2942,8 +2935,9 @@ msgid "Error creating group object"
 msgstr "Error creando el objeto grupo"
 
 #: www/admin/approve-pending.php:56
-msgid "Approving Group:"
-msgstr "Aprobando Grupo:"
+#, php-format
+msgid "Approving Group: %1$s"
+msgstr "Aprobando Grupo: %1$s"
 
 #: www/admin/approve-pending.php:104
 msgid "Error during group rejection"
@@ -3071,9 +3065,8 @@ msgid "Attribute"
 msgstr ""
 
 #: www/admin/configman.php:189
-#, fuzzy
 msgid "On"
-msgstr "Opn"
+msgstr ""
 
 #: www/admin/configman.php:189
 msgid "Off"
@@ -3271,10 +3264,9 @@ msgstr "Nombre de Grupo (pulsa para editar)"
 msgid "Register Time"
 msgstr "Fecha de registro"
 
-#: www/admin/grouplist.php:86 www/admin/search.php:173
+#: www/admin/grouplist.php:86 www/admin/search.php:171
 #: www/admin/useredit.php:241 www/project/admin/index.php:261
 #: www/project/admin/massadd.php:103 www/project/admin/massfinish.php:82
-#, fuzzy
 msgid "Unix name"
 msgstr "Nombre Unix"
 
@@ -3478,7 +3470,6 @@ msgstr ""
 
 #: www/admin/massmail.php:77 www/admin/massmail.php:83
 #: www/include/menuSF.php:42
-#, fuzzy
 msgid "Massmail admin"
 msgstr "Administración de Correos"
 
@@ -3544,8 +3535,8 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr "Programar el envío de correo"
 
-#: www/admin/massmail.php:144 www/admin/search.php:101
-#: www/admin/search.php:172 www/docman/admin/index.php:351 www/my/index.php:74
+#: www/admin/massmail.php:144 www/admin/search.php:100
+#: www/admin/search.php:170 www/docman/admin/index.php:351 www/my/index.php:74
 #: www/my/index.php:122 www/my/index.php:177
 #: www/project/admin/editimages.php:262
 #: www/tracker/admin/form-addcanned.php:22 www/tracker/browse.php:138
@@ -3712,45 +3703,46 @@ msgid "Admin Search Results"
 msgstr "Admin Resultado de la Busqueda"
 
 #: www/admin/search.php:91
-msgid "User search with criteria"
-msgstr "Buscar usuarios con este criterio"
+#, fuzzy, php-format
+msgid "User search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "Buscar usuarios con este criterio"
+msgstr[1] "Buscar usuarios con este criterio"
 
-#: www/admin/search.php:92 www/admin/search.php:165
-msgid "matches"
-msgstr "coincide"
-
-#: www/admin/search.php:102 www/admin/unsubscribe.php:130
+#: www/admin/search.php:101 www/admin/unsubscribe.php:130
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:33
 #: www/top/topusers.php:69
-#, fuzzy
 msgid "User name"
 msgstr "Nombre de Usuario:"
 
-#: www/admin/search.php:103 www/admin/unsubscribe.php:131
+#: www/admin/search.php:102 www/admin/unsubscribe.php:131
 #: www/admin/useredit.php:117 www/include/user_home.php:45
 #: www/project/admin/massadd.php:102 www/project/admin/massfinish.php:81
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:34
 #: www/top/topusers.php:70
 msgid "Real name"
-msgstr "nombre Real"
+msgstr "Nombre real"
 
-#: www/admin/search.php:104 www/admin/unsubscribe.php:132
+#: www/admin/search.php:103 www/admin/unsubscribe.php:132
 msgid "Email"
 msgstr "Correo"
 
-#: www/admin/search.php:105
+#: www/admin/search.php:104
 msgid "Member since"
 msgstr "Miembro desde"
 
-#: www/admin/search.php:164
-msgid "Group search with criteria"
-msgstr "Criterio de Búsqueda del Grupo"
+#: www/admin/search.php:163
+#, fuzzy, php-format
+msgid "Group search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "Group search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "Buscar usuarios con este criterio"
+msgstr[1] "Buscar usuarios con este criterio"
 
-#: www/admin/search.php:174
+#: www/admin/search.php:172
 msgid "Full Name"
 msgstr "Nombre completo"
 
-#: www/admin/search.php:175
+#: www/admin/search.php:173
 msgid "Registered"
 msgstr "Registrado"
 
@@ -4492,7 +4484,6 @@ msgstr ""
 
 #: www/forum/admin/ForumAdmin.class.php:79 www/forum/admin/index.php:83
 #: www/forum/admin/monitor.php:45
-#, fuzzy
 msgid "Add forum"
 msgstr "Crear foro"
 
@@ -4505,7 +4496,6 @@ msgstr ""
 #: www/forum/admin/ForumAdmin.class.php:224
 #: www/forum/admin/ForumAdmin.class.php:242
 #: www/forum/admin/ForumAdmin.class.php:271 www/forum/attachment.php:79
-#, fuzzy
 msgid "Error getting Forum"
 msgstr "Fue un error creando el foro."
 
@@ -4548,7 +4538,6 @@ msgstr "Confirma el Borrado"
 
 #: www/forum/admin/ForumAdmin.class.php:439 www/forum/forum.php:61
 #: www/forum/message.php:64
-#, fuzzy
 msgid "Error getting new Forum"
 msgstr "Fue un error creando el foro."
 
@@ -4670,7 +4659,6 @@ msgid "Edit a Message"
 msgstr ""
 
 #: www/forum/admin/index.php:318
-#, fuzzy
 msgid "Error Getting ForumHTML"
 msgstr "Fue un error creando el foro."
 
@@ -4699,7 +4687,6 @@ msgstr ""
 
 #: www/forum/attachment.php:160 www/forum/forum.php:140
 #: www/forum/message.php:90
-#, fuzzy
 msgid "Error getting new ForumHTML"
 msgstr "Fue un error creando el foro."
 
@@ -5070,7 +5057,6 @@ msgstr "Fecha de la Publicación"
 #: www/frs/admin/editrelease.php:247 www/frs/admin/qrs.php:195
 #: www/frs/admin/showreleases.php:103
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:36
-#, fuzzy
 msgid "Release name"
 msgstr "Nombre de la Versión"
 
@@ -5191,11 +5177,11 @@ msgid "Delete File"
 msgstr "Borrar Fichero"
 
 #: www/frs/admin/editrelease.php:398
-#, fuzzy, php-format
+#, php-format
 msgid "There is %1$s user monitoring this package."
 msgid_plural "There are %1$s users monitoring this package."
-msgstr[0] "Hay %1$s usuario(s) monitorizando este paquete."
-msgstr[1] "Hay %1$s usuario(s) monitorizando este paquete."
+msgstr[0] "Hay %1$s usuario monitorizando este paquete."
+msgstr[1] "Hay %1$s usuarios monitorizando este paquete."
 
 #: www/frs/admin/index.php:81
 msgid "Added Package"
@@ -5247,7 +5233,6 @@ msgid "Releases"
 msgstr "Versiones"
 
 #: www/frs/admin/index.php:146 www/frs/admin/showreleases.php:102
-#, fuzzy
 msgid "Package name"
 msgstr "Nombre del Paquete"
 
@@ -5862,8 +5847,8 @@ msgid "Lists"
 msgstr "Listas"
 
 #: www/include/Layout.class.php:597 www/include/LayoutSF.class.php:828
-#: www/include/menuSF.php:143 www/include/project_home.php:341
-#: www/include/project_home.php:342 www/survey/include/SurveyHTML.class.php:53
+#: www/include/menuSF.php:143 www/include/project_home.php:342
+#: www/include/project_home.php:343 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:571
 #: www/themes/gforge/Theme.class.php:546
@@ -5871,7 +5856,7 @@ msgid "Surveys"
 msgstr "Encuestas"
 
 #: www/include/Layout.class.php:611 www/include/LayoutSF.class.php:840
-#: www/include/menuSF.php:151 www/include/project_home.php:350
+#: www/include/menuSF.php:151 www/include/project_home.php:351
 #: www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:587
 #: www/themes/gforge/Theme.class.php:560
@@ -5965,7 +5950,6 @@ msgid "Error - missing parameters"
 msgstr "Error - faltan parámetros"
 
 #: www/include/exit.php:65
-#, fuzzy
 msgid "Error - missing required parameters"
 msgstr "Error - faltan parámetros"
 
@@ -6078,7 +6062,6 @@ msgid "Approve pending projects"
 msgstr "Aprobando los Projectos Pendientes"
 
 #: www/include/menuSF.php:41
-#, fuzzy
 msgid "News admin approval"
 msgstr "Administración de Noticias"
 
@@ -6209,10 +6192,12 @@ msgstr "Página de inicio del Proyecto"
 msgid "There are no public trackers available"
 msgstr "No hay trackers públicos disponibles"
 
-#: www/include/project_home.php:277
-#, php-format
-msgid "<strong>%1$s</strong> open / <strong>%2$s</strong> total"
-msgstr "%1$s abierto /%2$s total"
+#: www/include/project_home.php:277 www/include/project_summary.php:141
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgstr[0] "%1$s abierto /%2$s total"
+msgstr[1] "%1$s abierto /%2$s total"
 
 #: www/include/project_home.php:288
 msgid "Public Forums"
@@ -6222,7 +6207,7 @@ msgstr "Foros Públicos"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
-msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
+msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
 #: www/include/project_home.php:293
@@ -6240,35 +6225,34 @@ msgstr "Gestión de doc.: Documentación del proyecto"
 msgid "Mailing Lists"
 msgstr "Listas de Correo"
 
-#: www/include/project_home.php:313
-msgid "public mailing lists"
-msgstr "listas de correo públicas"
+#: www/include/project_home.php:314
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> public mailing list)"
+msgid_plural "(<strong>%1$s</strong> public mailing lists)"
+msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
+msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: www/include/project_home.php:321
+#: www/include/project_home.php:322
 msgid "Task Manager"
 msgstr "Gestión de Tareas"
 
-#: www/include/project_home.php:326
+#: www/include/project_home.php:327
 msgid "There are no public subprojects available"
 msgstr "No hay subproyectos públicos disponibles"
 
-#: www/include/project_home.php:343
+#: www/include/project_home.php:344
 msgid "surveys"
 msgstr "encuestas"
 
-#: www/include/project_home.php:351 www/register/projectinfo.php:171
+#: www/include/project_home.php:352 www/register/projectinfo.php:171
 #: www/scm/admin/index.php:40 www/scm/include/scm_utils.php:44
 #: www/scm/index.php:33 www/scm/reporting/index.php:33 www/scm/viewvc.php:139
 msgid "SCM Repository"
 msgstr "Repositorio SCM"
 
-#: www/include/project_home.php:386 www/include/project_home.php:387
+#: www/include/project_home.php:387 www/include/project_home.php:388
 msgid "Anonymous FTP Space"
 msgstr "Espacio FTP Anónimo"
-
-#: www/include/project_summary.php:141
-msgid "open"
-msgstr "abierto"
 
 #: www/include/tool_reports.php:54 www/pm/index.php:70
 #: www/reporting/usersummary.php:58 www/tracker/ind.php:43
@@ -6332,7 +6316,6 @@ msgid "Skills Profile"
 msgstr "Experiencia"
 
 #: www/include/user_home.php:40
-#, fuzzy
 msgid "Login name"
 msgstr "Nombre de usuario:"
 
@@ -6489,7 +6472,6 @@ msgid "Add This List"
 msgstr "Añadir esta lista"
 
 #: www/mail/admin/index.php:167 www/project/admin/index.php:213
-#, fuzzy
 msgid "Mail admin"
 msgstr "Administración de Correos"
 
@@ -6806,7 +6788,6 @@ msgstr ""
 
 #: www/news/admin/index.php:99 www/news/admin/index.php:246
 #: www/project/admin/index.php:216
-#, fuzzy
 msgid "News admin"
 msgstr "Administración de Noticias"
 
@@ -7080,7 +7061,6 @@ msgid "POSTING fetch FAILED"
 msgstr "Obtención de Publicación FALLIDA"
 
 #: www/people/editjob.php:163 www/people/viewjob.php:60
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "No existe esta publicación en este proyecto"
 
@@ -7482,12 +7462,10 @@ msgstr "Ver Calendario"
 #: www/pm/mod_task.php:114 www/tracker/add.php:64 www/tracker/browse.php:298
 #: www/tracker/browse.php:448 www/tracker/detail.php:77
 #: www/tracker/mod-limited.php:85 www/tracker/mod.php:122
-#, fuzzy
 msgid "Assigned to"
 msgstr "Asignado a"
 
 #: www/pm/add_task.php:113 www/pm/detail_task.php:95 www/pm/mod_task.php:124
-#, fuzzy
 msgid "Dependent on task"
 msgstr "Depende de la Tarea"
 
@@ -7548,7 +7526,6 @@ msgstr ""
 "related items will be changed to the new name."
 
 #: www/pm/admin/index.php:283
-#, fuzzy
 msgid "Add a new project"
 msgstr "Añadir un Subproyecto"
 
@@ -7771,7 +7748,6 @@ msgid "Period"
 msgstr "Versión"
 
 #: www/pm/calendar.php:244
-#, fuzzy
 msgid "One month"
 msgstr "Último mes"
 
@@ -7845,9 +7821,8 @@ msgid "This Project Has Turned Off The Task Manager"
 msgstr "Usar Gestor de Tareas"
 
 #: www/pm/include/ProjectGroupHTML.class.php:52
-#, fuzzy
 msgid "Add task"
-msgstr "Añade Tarea"
+msgstr "Añadir Tarea"
 
 #: www/pm/include/ProjectGroupHTML.class.php:66
 msgid "Download as CSV"
@@ -8112,7 +8087,6 @@ msgstr ""
 
 #: www/project/admin/database.php:47 www/project/admin/editgroupinfo.php:40
 #: www/snapshots.php:25 www/tarballs.php:26
-#, fuzzy
 msgid "Error creating group"
 msgstr "Error creando el objeto grupo"
 
@@ -8371,9 +8345,9 @@ msgid "User Removed Successfully"
 msgstr "Usuario Eliminado Correctamente"
 
 #: www/project/admin/index.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Project Admin: %1$s"
-msgstr "Resumen de Administración"
+msgstr "Resumen de Administración: %1$s"
 
 #: www/project/admin/index.php:177
 msgid "Misc. Project Information"
@@ -8412,32 +8386,26 @@ msgid "Tool Admin"
 msgstr "Herramienta de Administración"
 
 #: www/project/admin/index.php:207
-#, fuzzy
 msgid "Tracker admin"
 msgstr "Administración del Registro"
 
 #: www/project/admin/index.php:210
-#, fuzzy
 msgid "Doc manager admin"
 msgstr "Administración de Documentos"
 
 #: www/project/admin/index.php:219
-#, fuzzy
 msgid "Task manager admin"
 msgstr "Administración de Tareas"
 
 #: www/project/admin/index.php:222
-#, fuzzy
 msgid "Forum admin"
 msgstr "Administración de Foros"
 
 #: www/project/admin/index.php:225
-#, fuzzy
 msgid "FRS admin"
 msgstr "Administración de Ficheros"
 
 #: www/project/admin/index.php:228
-#, fuzzy
 msgid "SCM admin"
 msgstr "Administración de Control de Versiones de Código"
 
@@ -8458,9 +8426,8 @@ msgid "Edit Observer"
 msgstr "Editar Observador"
 
 #: www/project/admin/index.php:294 www/project/admin/massadd.php:104
-#, fuzzy
 msgid "Add user"
-msgstr "Añade usuario"
+msgstr "Añadir usuario"
 
 #: www/project/admin/index.php:297 www/project/admin/massadd.php:81
 #: www/project/admin/massfinish.php:71
@@ -8549,7 +8516,6 @@ msgid "Group Change History"
 msgstr "Historial de Cambios del Proyecto"
 
 #: www/project/admin/project_admin_utils.php:188
-#, fuzzy
 msgid "No changes"
 msgstr "No Cambiar"
 
@@ -8713,15 +8679,21 @@ msgstr ""
 msgid "Request to join project"
 msgstr ""
 
-#: www/project/request.php:59
+#: www/project/request.php:61
 msgid ""
-"You can request to join a project by clicking the submit button. An "
+"You can request to join a project by clicking the submit button. The "
 "administrator will be emailed to approve or deny your request."
-msgstr ""
+msgid_plural ""
+"You can request to join a project by clicking the submit button. The "
+"administrators will be emailed to approve or deny your request."
+msgstr[0] ""
+msgstr[1] ""
 
-#: www/project/request.php:62
+#: www/project/request.php:64
 msgid "If you want, you can send a comment to the administrator:"
-msgstr ""
+msgid_plural "If you want, you can send a comment to the administrators:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/project/stats/index.php:35 www/project/stats/index.php:46
 #: www/reporting/projectact.php:54 www/reporting/projectact.php:57
@@ -8922,7 +8894,7 @@ msgid ""
 msgstr ""
 
 #: www/register/projectinfo.php:167
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As there is only one SCM system, then this will be selected automatically. "
 "<strong>%1$s</strong> will be selected."
@@ -10078,7 +10050,6 @@ msgstr "Añadir una Cuestión"
 #: www/survey/admin/show_results_csv.php:37
 #: www/survey/admin/show_results_individual.php:40
 #: www/survey/admin/survey.php:40
-#, fuzzy
 msgid "Permission denied"
 msgstr "Permiso Denegado"
 
@@ -10153,14 +10124,17 @@ msgid "Add This Survey"
 msgstr "Añade esta Encuesta"
 
 #: www/survey/admin/add_survey.php:101 www/survey/admin/edit_question.php:113
-#: www/survey/admin/edit_survey.php:141
+#: www/survey/admin/edit_survey.php:142
 msgid "Show Existing Questions"
 msgstr "Mostrar Preguntas Existentes"
 
-#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:144
+#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
 #: www/survey/include/SurveyHTML.class.php:334
-msgid "Existing Surveys"
-msgstr "Encuestas existentes"
+#, fuzzy
+msgid "Existing Survey"
+msgid_plural "Existing Surveys"
+msgstr[0] "Encuestas existentes"
+msgstr[1] "Encuestas existentes"
 
 #: www/survey/admin/edit_question.php:36
 #: www/survey/include/SurveyHTML.class.php:107
@@ -10302,9 +10276,11 @@ msgstr ""
 "NOTA: usa estos indentificadores de encuestas cuando crees una nueva encuesta"
 
 #: www/survey/admin/show_questions.php:56
-#, php-format
-msgid "%1$s questions found"
-msgstr "%1$s preguntas encontradas"
+#, fuzzy, php-format
+msgid "%1$s question found"
+msgid_plural "%1$s questions found"
+msgstr[0] "%1$s preguntas encontradas"
+msgstr[1] "%1$s preguntas encontradas"
 
 #: www/survey/admin/show_results.php:58
 msgid "Survey Results"
@@ -10334,9 +10310,8 @@ msgstr "Media"
 
 #: www/survey/admin/show_results_aggregate.php:156
 #: www/survey/admin/show_results_aggregate.php:226
-#: www/survey/include/SurveyHTML.class.php:684
-#, fuzzy, php-format
-msgid "View All %1$s Comments"
+#, fuzzy
+msgid "View All Comments"
 msgstr "Ver Comentarios"
 
 #: www/survey/admin/show_results_aggregate.php:161
@@ -10353,9 +10328,11 @@ msgid "Survey Inserted"
 msgstr "Encuesta Insertada"
 
 #: www/survey/admin/survey_utils.php:33
-#, php-format
-msgid "%1$s surveys found"
-msgstr "%1$s encuestas encontradas"
+#, fuzzy, php-format
+msgid "%1$s survey found"
+msgid_plural "%1$s surveys found"
+msgstr[0] "%1$s encuestas encontradas"
+msgstr[1] "%1$s encuestas encontradas"
 
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 msgid "This Group Has Turned Off Surveys."
@@ -10434,6 +10411,13 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:586
 msgid "No Votes"
 msgstr "Sin votos"
+
+#: www/survey/include/SurveyHTML.class.php:684
+#, fuzzy, php-format
+msgid "View All %1$s Comment"
+msgid_plural "View All %1$s Comments"
+msgstr[0] "Ver Comentarios"
+msgstr[1] "Ver Comentarios"
 
 #: www/survey/privacy.php:39
 msgid ""
@@ -11330,6 +11314,21 @@ msgstr "Falló el borrado del registro"
 #: www/tracker/tracker.php:435
 msgid "Artifact Deleted Successfully"
 msgstr "Registro borrado correctamente."
+
+#~ msgid "public mailing lists"
+#~ msgstr "listas de correo públicas"
+
+#~ msgid "open"
+#~ msgstr "abierto"
+
+#~ msgid "Group search with criteria"
+#~ msgstr "Criterio de Búsqueda del Grupo"
+
+#~ msgid "matches"
+#~ msgstr "coincide"
+
+#~ msgid "<strong>%1$s</strong> projects in result set."
+#~ msgstr "<strong>%1$s</strong> proyectos en esta categoría."
 
 #~ msgid "Site has SCM enabled, but no SCM was chosen."
 #~ msgstr "El SCM está habilitado, pero no se eligió ningún SCM."

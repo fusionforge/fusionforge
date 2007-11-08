@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-07 17:18+0100\n"
+"POT-Creation-Date: 2007-11-08 10:51+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,13 +454,13 @@ msgstr ""
 "你能在这里核准这一个请求：http://%2$s/project/admin/?group_id=%3$s"
 
 #: common/include/GroupJoinRequest.class.php:276
-#, php-format
-msgid "Your request to join the %1$s project was denied by the administrator."
+#, fuzzy, php-format
+msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr "您请求加入 %1$s 项目被管理人员否决。"
 
 #: common/include/GroupJoinRequest.class.php:290
 #, fuzzy, php-format
-msgid "Your request to join the %1$s project was granted by the administrator."
+msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr "您请求加入 %1$s 项目被管理人员否决。"
 
 #: common/include/User.class.php:232
@@ -825,7 +825,7 @@ msgstr "文件"
 
 #: common/reporting/report_utils.php:158 common/reporting/report_utils.php:171
 #: www/include/Layout.class.php:583 www/include/LayoutSF.class.php:816
-#: www/include/menuSF.php:135 www/include/project_home.php:320
+#: www/include/menuSF.php:135 www/include/project_home.php:321
 #: www/project/stats/project_stats_utils.php:86
 #: www/project/stats/project_stats_utils.php:146
 #: www/project/stats/project_stats_utils.php:203
@@ -1136,7 +1136,7 @@ msgstr "Text Area"
 
 #: common/tracker/ArtifactExtraField.class.php:300 www/admin/groupedit.php:108
 #: www/admin/grouplist.php:87 www/admin/pluginman.php:178
-#: www/admin/search.php:106 www/admin/search.php:176
+#: www/admin/search.php:105 www/admin/search.php:174
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
 #: www/news/admin/index.php:129 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
@@ -1272,7 +1272,7 @@ msgstr ""
 
 #: deb-specific/index_std.php:7 plugins/webcalendar/www/index2.php:56
 #: www/export/projnews.php:82 www/forum/include/ForumHTML.class.php:77
-#: www/include/project_home.php:406 www/index_std.php:62
+#: www/include/project_home.php:407 www/index_std.php:62
 msgid "Latest News"
 msgstr "最新消息"
 
@@ -1571,9 +1571,11 @@ msgstr "找到超过 <strong>%1$s</strong> 个项目"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:267
 #: www/softwaremap/trove_list.php:257
-#, php-format
-msgid "<strong>%1$s</strong> projects in result set."
-msgstr "找到 <strong>%1$s</strong> 个项目"
+#, fuzzy, php-format
+msgid "<strong>%1$s</strong> project in result set."
+msgid_plural "<strong>%1$s</strong> projects in result set."
+msgstr[0] "找到 <strong>%1$s</strong> 个项目"
+msgstr[1] "找到 <strong>%1$s</strong> 个项目"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:397
 msgid "Project Tree"
@@ -1656,7 +1658,6 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:223
 #: plugins/quota_management/www/quota.php:326
 #: plugins/quota_management/www/quota.php:394
-#: www/include/project_summary.php:141
 msgid "total"
 msgstr "总共"
 
@@ -2825,7 +2826,7 @@ msgstr "修改 %1$s 如下："
 #: www/pm/admin/index.php:268 www/pm/admin/index.php:307
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:235 www/project/admin/roleedit.php:258
-#: www/project/request.php:66 www/register/projectinfo.php:196
+#: www/project/request.php:68 www/register/projectinfo.php:196
 #: www/survey/include/SurveyHTML.class.php:551 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:51
@@ -2878,7 +2879,8 @@ msgid "Error creating group object"
 msgstr "创建群组对象时发生错误"
 
 #: www/admin/approve-pending.php:56
-msgid "Approving Group:"
+#, fuzzy, php-format
+msgid "Approving Group: %1$s"
 msgstr "审核中群组："
 
 #: www/admin/approve-pending.php:104
@@ -3207,7 +3209,7 @@ msgstr "群组名称 (编辑)"
 msgid "Register Time"
 msgstr "注册时间"
 
-#: www/admin/grouplist.php:86 www/admin/search.php:173
+#: www/admin/grouplist.php:86 www/admin/search.php:171
 #: www/admin/useredit.php:241 www/project/admin/index.php:261
 #: www/project/admin/massadd.php:103 www/project/admin/massfinish.php:82
 #, fuzzy
@@ -3476,8 +3478,8 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr "群发邮件安排"
 
-#: www/admin/massmail.php:144 www/admin/search.php:101
-#: www/admin/search.php:172 www/docman/admin/index.php:351 www/my/index.php:74
+#: www/admin/massmail.php:144 www/admin/search.php:100
+#: www/admin/search.php:170 www/docman/admin/index.php:351 www/my/index.php:74
 #: www/my/index.php:122 www/my/index.php:177
 #: www/project/admin/editimages.php:262
 #: www/tracker/admin/form-addcanned.php:22 www/tracker/browse.php:138
@@ -3647,21 +3649,20 @@ msgid "Admin Search Results"
 msgstr "管理搜索结果."
 
 #: www/admin/search.php:91
-msgid "User search with criteria"
-msgstr "依照条件搜索用户"
+#, fuzzy, php-format
+msgid "User search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "依照条件搜索用户"
+msgstr[1] "依照条件搜索用户"
 
-#: www/admin/search.php:92 www/admin/search.php:165
-msgid "matches"
-msgstr "符合"
-
-#: www/admin/search.php:102 www/admin/unsubscribe.php:130
+#: www/admin/search.php:101 www/admin/unsubscribe.php:130
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:33
 #: www/top/topusers.php:69
 #, fuzzy
 msgid "User name"
 msgstr "名称："
 
-#: www/admin/search.php:103 www/admin/unsubscribe.php:131
+#: www/admin/search.php:102 www/admin/unsubscribe.php:131
 #: www/admin/useredit.php:117 www/include/user_home.php:45
 #: www/project/admin/massadd.php:102 www/project/admin/massfinish.php:81
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:34
@@ -3669,23 +3670,26 @@ msgstr "名称："
 msgid "Real name"
 msgstr "真实姓名"
 
-#: www/admin/search.php:104 www/admin/unsubscribe.php:132
+#: www/admin/search.php:103 www/admin/unsubscribe.php:132
 msgid "Email"
 msgstr "Email"
 
-#: www/admin/search.php:105
+#: www/admin/search.php:104
 msgid "Member since"
 msgstr "帐号创建日期"
 
-#: www/admin/search.php:164
-msgid "Group search with criteria"
-msgstr "依照条件搜索群组"
+#: www/admin/search.php:163
+#, fuzzy, php-format
+msgid "Group search with criteria <em>%1$s</em>: %2$s match"
+msgid_plural "Group search with criteria <em>%1$s</em>: %2$s matches"
+msgstr[0] "依照条件搜索用户"
+msgstr[1] "依照条件搜索用户"
 
-#: www/admin/search.php:174
+#: www/admin/search.php:172
 msgid "Full Name"
 msgstr "全名"
 
-#: www/admin/search.php:175
+#: www/admin/search.php:173
 msgid "Registered"
 msgstr "注册"
 
@@ -5759,8 +5763,8 @@ msgid "Lists"
 msgstr "邮件列表"
 
 #: www/include/Layout.class.php:597 www/include/LayoutSF.class.php:828
-#: www/include/menuSF.php:143 www/include/project_home.php:341
-#: www/include/project_home.php:342 www/survey/include/SurveyHTML.class.php:53
+#: www/include/menuSF.php:143 www/include/project_home.php:342
+#: www/include/project_home.php:343 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:571
 #: www/themes/gforge/Theme.class.php:546
@@ -5768,7 +5772,7 @@ msgid "Surveys"
 msgstr "调查"
 
 #: www/include/Layout.class.php:611 www/include/LayoutSF.class.php:840
-#: www/include/menuSF.php:151 www/include/project_home.php:350
+#: www/include/menuSF.php:151 www/include/project_home.php:351
 #: www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:587
 #: www/themes/gforge/Theme.class.php:560
@@ -6103,10 +6107,12 @@ msgstr "项目首页"
 msgid "There are no public trackers available"
 msgstr "目前没有公开的跟踪项目"
 
-#: www/include/project_home.php:277
-#, php-format
-msgid "<strong>%1$s</strong> open / <strong>%2$s</strong> total"
-msgstr "开启中 <strong>%1$s</strong>  / 总共<strong>%2$s</strong>"
+#: www/include/project_home.php:277 www/include/project_summary.php:141
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgstr[0] "开启中 <strong>%1$s</strong>  / 总共<strong>%2$s</strong>"
+msgstr[1] "开启中 <strong>%1$s</strong>  / 总共<strong>%2$s</strong>"
 
 #: www/include/project_home.php:288
 msgid "Public Forums"
@@ -6134,35 +6140,34 @@ msgstr "文件管理：项目文件"
 msgid "Mailing Lists"
 msgstr "邮件列表"
 
-#: www/include/project_home.php:313
-msgid "public mailing lists"
-msgstr "公开的邮件列表"
+#: www/include/project_home.php:314
+#, fuzzy, php-format
+msgid "(<strong>%1$s</strong> public mailing list)"
+msgid_plural "(<strong>%1$s</strong> public mailing lists)"
+msgstr[0] "找到 <strong>%1$s</strong> 个项目"
+msgstr[1] "找到 <strong>%1$s</strong> 个项目"
 
-#: www/include/project_home.php:321
+#: www/include/project_home.php:322
 msgid "Task Manager"
 msgstr "任务管理"
 
-#: www/include/project_home.php:326
+#: www/include/project_home.php:327
 msgid "There are no public subprojects available"
 msgstr "目前没有公开的子项目"
 
-#: www/include/project_home.php:343
+#: www/include/project_home.php:344
 msgid "surveys"
 msgstr "问卷"
 
-#: www/include/project_home.php:351 www/register/projectinfo.php:171
+#: www/include/project_home.php:352 www/register/projectinfo.php:171
 #: www/scm/admin/index.php:40 www/scm/include/scm_utils.php:44
 #: www/scm/index.php:33 www/scm/reporting/index.php:33 www/scm/viewvc.php:139
 msgid "SCM Repository"
 msgstr "SCM Repository"
 
-#: www/include/project_home.php:386 www/include/project_home.php:387
+#: www/include/project_home.php:387 www/include/project_home.php:388
 msgid "Anonymous FTP Space"
 msgstr "匿名FTP"
-
-#: www/include/project_summary.php:141
-msgid "open"
-msgstr "启用"
 
 #: www/include/tool_reports.php:54 www/pm/index.php:70
 #: www/reporting/usersummary.php:58 www/tracker/ind.php:43
@@ -8549,17 +8554,27 @@ msgstr "您的请求已经被提交。"
 msgid "Request to join project"
 msgstr "请求参与项目"
 
-#: www/project/request.php:59
+#: www/project/request.php:61
+#, fuzzy
 msgid ""
-"You can request to join a project by clicking the submit button. An "
+"You can request to join a project by clicking the submit button. The "
 "administrator will be emailed to approve or deny your request."
-msgstr ""
+msgid_plural ""
+"You can request to join a project by clicking the submit button. The "
+"administrators will be emailed to approve or deny your request."
+msgstr[0] ""
+"藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您"
+"的请求。"
+msgstr[1] ""
 "藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您"
 "的请求。"
 
-#: www/project/request.php:62
+#: www/project/request.php:64
+#, fuzzy
 msgid "If you want, you can send a comment to the administrator:"
-msgstr "需要的话，您可以向管理员发送一条附言："
+msgid_plural "If you want, you can send a comment to the administrators:"
+msgstr[0] "需要的话，您可以向管理员发送一条附言："
+msgstr[1] "需要的话，您可以向管理员发送一条附言："
 
 #: www/project/stats/index.php:35 www/project/stats/index.php:46
 #: www/reporting/projectact.php:54 www/reporting/projectact.php:57
@@ -9960,14 +9975,17 @@ msgid "Add This Survey"
 msgstr "添加这个问卷"
 
 #: www/survey/admin/add_survey.php:101 www/survey/admin/edit_question.php:113
-#: www/survey/admin/edit_survey.php:141
+#: www/survey/admin/edit_survey.php:142
 msgid "Show Existing Questions"
 msgstr "显示已经存在的问题"
 
-#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:144
+#: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
 #: www/survey/include/SurveyHTML.class.php:334
-msgid "Existing Surveys"
-msgstr "已经存在的问卷"
+#, fuzzy
+msgid "Existing Survey"
+msgid_plural "Existing Surveys"
+msgstr[0] "已经存在的问卷"
+msgstr[1] "已经存在的问卷"
 
 #: www/survey/admin/edit_question.php:36
 #: www/survey/include/SurveyHTML.class.php:107
@@ -10096,9 +10114,11 @@ msgid "NOTE: use these question_id's when you create a new survey"
 msgstr "注意：当您创造新问卷时，利用这些问题编号"
 
 #: www/survey/admin/show_questions.php:56
-#, php-format
-msgid "%1$s questions found"
-msgstr "找到 %1$s 个问题"
+#, fuzzy, php-format
+msgid "%1$s question found"
+msgid_plural "%1$s questions found"
+msgstr[0] "找到 %1$s 个问题"
+msgstr[1] "找到 %1$s 个问题"
 
 #: www/survey/admin/show_results.php:58
 msgid "Survey Results"
@@ -10128,9 +10148,8 @@ msgstr "平均"
 
 #: www/survey/admin/show_results_aggregate.php:156
 #: www/survey/admin/show_results_aggregate.php:226
-#: www/survey/include/SurveyHTML.class.php:684
-#, php-format
-msgid "View All %1$s Comments"
+#, fuzzy
+msgid "View All Comments"
 msgstr "浏览全部 %1$s 评论"
 
 #: www/survey/admin/show_results_aggregate.php:161
@@ -10147,9 +10166,11 @@ msgid "Survey Inserted"
 msgstr "问卷添加了"
 
 #: www/survey/admin/survey_utils.php:33
-#, php-format
-msgid "%1$s surveys found"
-msgstr "找到 %1$s 个问卷"
+#, fuzzy, php-format
+msgid "%1$s survey found"
+msgid_plural "%1$s surveys found"
+msgstr[0] "找到 %1$s 个问卷"
+msgstr[1] "找到 %1$s 个问卷"
 
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 msgid "This Group Has Turned Off Surveys."
@@ -10228,6 +10249,13 @@ msgstr "警告 - 您在本问卷大概投了两次票。"
 #: www/survey/include/SurveyHTML.class.php:586
 msgid "No Votes"
 msgstr "没有评分"
+
+#: www/survey/include/SurveyHTML.class.php:684
+#, fuzzy, php-format
+msgid "View All %1$s Comment"
+msgid_plural "View All %1$s Comments"
+msgstr[0] "浏览全部 %1$s 评论"
+msgstr[1] "浏览全部 %1$s 评论"
 
 #: www/survey/privacy.php:39
 msgid ""
@@ -11098,6 +11126,21 @@ msgstr "定制类型删除失败"
 #: www/tracker/tracker.php:435
 msgid "Artifact Deleted Successfully"
 msgstr "定制类型成功删除"
+
+#~ msgid "public mailing lists"
+#~ msgstr "公开的邮件列表"
+
+#~ msgid "open"
+#~ msgstr "启用"
+
+#~ msgid "Group search with criteria"
+#~ msgstr "依照条件搜索群组"
+
+#~ msgid "matches"
+#~ msgstr "符合"
+
+#~ msgid "<strong>%1$s</strong> projects in result set."
+#~ msgstr "找到 <strong>%1$s</strong> 个项目"
 
 #~ msgid "Site has SCM enabled, but no SCM was chosen."
 #~ msgstr "网站有启动SCM，但是没有SCM被选择。"
