@@ -1,3 +1,9 @@
+2007-11-09  Roland Mas  <lolando@debian.org>
+
+	* common/include/PluginManager.class.php: Fixed undefined variable
+	bug detected by a PHP notice.
+	* www/include/project_home.php: Ditto.
+
 2007-11-07  Roland Mas  <lolando@debian.org>
 
 	* common/include/GroupJoinRequest.class.php: New

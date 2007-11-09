@@ -91,6 +91,7 @@ class PluginManager extends Error {
 	 *
 	 */
 	function LoadPlugin ($p_name) {
+		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
 		$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
@@ -101,7 +102,12 @@ class PluginManager extends Error {
 				require_once ($filename) ;
 			} else {
 				// we can't find the plugin so we remove it from the array
-				unset($this->plugins_data[$p_id]);
+                                foreach ($plugins_data as $i => $n) {
+                                        if ($n == $p_name) {
+                                                $p_id = $i;
+                                        }
+                                }
+ 				unset($this->plugins_data[$p_id]);
 			}
 		}
 		return true ;

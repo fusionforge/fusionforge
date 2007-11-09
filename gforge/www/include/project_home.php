@@ -110,6 +110,7 @@ if (db_numrows($res_admin) > 0) {
 	?>
 	<span class="develtitle"><?php echo _('Project Admins'); ?>:</span><br />
 	<?php
+		$started_developers = false;
 		while ($row_admin = db_fetch_array($res_admin)) {
 			if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
 				$started_developers=true;
