@@ -56,7 +56,7 @@ echo notepad_func();
 <?php } ?>
 	<table border="0" width="80%">
 		<tr>
-			<td><strong><?php echo _('Date') ?>:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
+			<td><strong><?php echo _('Date') ?>:</strong><br /><?php echo date( _('Y-m-d H:i'), $ah->getOpenDate() ); ?></td>
 			<td><strong><?php echo _('Priority') ?>:</strong><br /><?php echo $ah->getPriority(); ?></td>
 		</tr>
 
@@ -136,8 +136,8 @@ if ($group->usesPM()) {
 				$projectid = $taskinfo['group_project_id'];
 				$groupid   = $taskinfo['group_id'];
 				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-				$startdate = date($sys_datefmt, $taskinfo['start_date']);
-				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
+				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
+				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
 						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&project_task_id='.$taskid.

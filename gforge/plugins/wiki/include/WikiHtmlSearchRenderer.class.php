@@ -49,7 +49,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		$dateFormat = $GLOBALS['sys_datefmt'];
+		$dateFormat = _('Y-m-d H:i');
 		
 		$group = group_get_object($this->groupId);
 		$group_name = $group->getUnixName();

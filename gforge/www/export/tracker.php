@@ -111,7 +111,7 @@ if ($group_id && $atid) {
 ?>
 	<artifact id="<?php echo $alist[$i]->getID(); ?>">
 		<submitted_by><?php echo $alist[$i]->getSubmittedUnixName(); ?></submitted_by>
-		<submitted_date><?php echo date( $sys_datefmt, $alist[$i]->getOpenDate() ); ?></submitted_date>
+		<submitted_date><?php echo date( _('Y-m-d H:i'), $alist[$i]->getOpenDate() ); ?></submitted_date>
 		<artifact_type id="<?php echo $ath->getID(); ?>"><?php echo $ath->getID(); ?></artifact_type>
 		<assigned_to><?php echo $alist[$i]->getAssignedRealName(); ?></assigned_to>
 		<priority id="<?php echo $alist[$i]->getPriority(); ?>"><?php echo $alist[$i]->getPriority(); ?></priority>

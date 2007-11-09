@@ -117,7 +117,7 @@ while ($grp = db_fetch_array($res)) {
 	
 	$time_display = "";
 	if ($grp['register_time'] != 0) {
-		$time_display = date($sys_datefmt,$grp['register_time']);
+		$time_display = date(_('Y-m-d H:i'),$grp['register_time']);
 	}
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 	echo '<td><a href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';

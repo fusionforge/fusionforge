@@ -159,7 +159,7 @@ if ( $num_packages < 1) {
 				}
 
 				$cell_data[] = array('&nbsp;<strong>
-				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
+				'.date(_('Y-m-d H:i'), $package_release['release_date'] ) .'</strong>',
 				'colspan="4" align="center"');
 					
 				print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);

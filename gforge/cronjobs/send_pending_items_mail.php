@@ -92,14 +92,13 @@ Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $us
 
 function send_pending_tracker_items_mail(){
 	global $sys_default_domain;
-	global $sys_datefmt;
 	/* first, get all the items that are considered overdue */
 	$time = time();
 	$sql = 	'SELECT artifact_id, submitted_by, group_id, assigned_to, summary,  details, description,  assigned_realname, submitted_realname, status_name, category_name, group_name, group_artifact_id, open_date	FROM artifact_vw a NATURAL JOIN artifact_group_list agl	WHERE (agl.due_period+a.open_date) < '.$time.' AND	a.status_id=1';	
 	$res=db_query($sql);
 	
 	for ($tmp=0; $tmp<db_numrows($res); $tmp++) {
-		$realopendate=date($sys_datefmt, db_result($res,$tmp,'open_date'));
+		$realopendate=date(_('Y-m-d H:i'), db_result($res,$tmp,'open_date'));
 		$status_name=db_result($res,$tmp,'status_name');
 		$details=db_result($res,$tmp,'detail');
 		$summary= db_result($res,$tmp,'summary');

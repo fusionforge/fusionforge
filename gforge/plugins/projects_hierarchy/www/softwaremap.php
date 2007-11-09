@@ -320,7 +320,7 @@ if(@$_SESSION['cat'] != 't'){
 				print '</span></td>'."\n".'<td align="right"><span style="font-family:arial,helvetica">'; // now the right side of the display
 				print 'Activity Percentile: <strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 				print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
-				print '<br />Register Date: <strong>'.date($sys_datefmt,$row_grp['register_time']).'</strong>';
+				print '<br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 				print '</span></td></tr>';
 		/*
 		                if ($row_grp['jobs_count']) {

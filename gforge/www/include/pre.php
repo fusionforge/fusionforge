@@ -171,8 +171,6 @@ $session_hash
 $Language
 $LUSER - Logged in user object
 $HTML
-$sys_datefmt
-$sys_shortdatefmt
 
 */
 

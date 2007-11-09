@@ -1206,13 +1206,11 @@ class Artifact extends Error {
 	 *	@return	boolean	success.
 	 */
 	function mailFollowup($type, $more_addresses=false, $changes='') {
-		global $sys_datefmt;
-
 		if (!$changes) {
 			$changes=array();
 		}
 		
-		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
+		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 				"&aid=". $this->getID() .
@@ -1307,7 +1305,7 @@ class Artifact extends Error {
 						$body .= $this->marker('details',$changes);
 					}
 					$body .= "Comment By: ". db_result($result2,$i,'realname') . " (".db_result($result2,$i,'user_name').")".
-					"\nDate: ". date( $sys_datefmt,db_result($result2,$i,'adddate') ).
+					"\nDate: ". date( _('Y-m-d H:i'),db_result($result2,$i,'adddate') ).
 					"\n\nMessage:".
 					"\n".util_unconvert_htmlspecialchars( db_result($result2,$i,'body') ).
 					"\n\n----------------------------------------------------------------------";

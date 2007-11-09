@@ -48,11 +48,11 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 	<tr>
 		<td>
 		<strong><?php echo _('Start Date') ?>:</strong><br />
-		<?php echo date($sys_shortdatefmt, $pt->getStartDate() ); ?>
+		<?php echo date(_('Y-m-d'), $pt->getStartDate() ); ?>
 		</td>
 		<td>
 		<strong><?php echo _('End Date') ?>:</strong><br />
-		<?php echo date($sys_shortdatefmt, $pt->getEndDate() ); ?>
+		<?php echo date(_('Y-m-d'), $pt->getEndDate() ); ?>
 		</td>
 	</tr>
 

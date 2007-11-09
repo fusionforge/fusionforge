@@ -58,12 +58,12 @@ function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
 }
 
 function report_weeks_box($Report, $name='week', $selected=false) {
-	global $sys_shortdatefmt, $Language;
+	global $Language;
 	$arr =& $Report->getWeekStartArr();
 
 	$arr2=array();
 	for ($i=0; $i<count($arr); $i++) {
-		$arr2[$i]=date($sys_shortdatefmt, $arr[$i]) .' '._('to').' '. date($sys_shortdatefmt, ($arr[$i]+6*24*60*60));
+		$arr2[$i]=date(_('Y-m-d'), $arr[$i]) .' '._('to').' '. date(_('Y-m-d'), ($arr[$i]+6*24*60*60));
 	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);

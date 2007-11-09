@@ -113,7 +113,7 @@ if ($usersearch) {
 				<td>'.format_name($row['user_name'], $row['status']).'</td>
 				<td>'.$row['realname'].'</td>
 				<td>'.$row['email'].'</td>
-				<td>'.date($sys_datefmt, $row['add_date']).'</td>
+				<td>'.date(_('Y-m-d H:i'), $row['add_date']).'</td>
 				<td style="text-align:center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
 				</tr>
 			'; 
@@ -187,7 +187,7 @@ if (getStringFromRequest('groupsearch')) {
 				<td><a href="groupedit.php?group_id='.$row['group_id'].'">'.$row['group_id'].'</a></td>
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>
-				<td>'.date($sys_datefmt, $row['register_time']).'</td>
+				<td>'.date(_('Y-m-d H:i'), $row['register_time']).'</td>
 				<td style="text-align:center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
 				</tr>
 			';

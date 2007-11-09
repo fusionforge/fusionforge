@@ -80,7 +80,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'._('Open Date').':</strong><br />
-			'. date($sys_datefmt,db_result($result,0,'post_date')) .'
+			'. date(_('Y-m-d H:i'),db_result($result,0,'post_date')) .'
 		</td><td>
 			<strong>'._('For project').':<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>

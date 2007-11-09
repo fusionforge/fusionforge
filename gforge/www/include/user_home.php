@@ -83,7 +83,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 	<td>
 	<?php echo _('Site Member Since') ?>
 	</td>
-	<td><strong><?php print date($sys_datefmt, $user->getAddDate()); ?></strong>
+	<td><strong><?php print date(_('Y-m-d H:i'), $user->getAddDate()); ?></strong>
 	<?php
 
 	if ($sys_use_ratings) {

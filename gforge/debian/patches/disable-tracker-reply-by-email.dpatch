@@ -12,7 +12,7 @@ diff -urNad gforge~/common/tracker/Artifact.class.php gforge/common/tracker/Arti
  			$changes=array();
  		}
  		
--		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
+-		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). 
 -			"\nYou can respond by visiting: ".
 -			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 -				"&aid=". $this->getID() .
@@ -22,7 +22,7 @@ diff -urNad gforge~/common/tracker/Artifact.class.php gforge/common/tracker/Arti
 -			"\n(enter your response here)".
 -			"\n".ARTIFACT_MAIL_MARKER.
 -			"\n\n".
-+		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). "\n".
++		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). "\n".
 +// 			"\nYou can respond by visiting: ".
 +// 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 +// 				"&aid=". $this->getID() .

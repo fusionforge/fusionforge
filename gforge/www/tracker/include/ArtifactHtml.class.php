@@ -47,7 +47,6 @@ class ArtifactHtml extends Artifact {
 
 
 	function showMessages() {
-		global $sys_datefmt;
 		global $Language;
 		$result= $this->getMessages();
 		$rows=db_numrows($result);
@@ -60,7 +59,7 @@ class ArtifactHtml extends Artifact {
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>
-'._('Date').': '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
+'._('Date').': '. date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'
 '._('Sender').': ';
 				if(db_result($result,$i,'user_id') == 100) {
 					echo db_result($result,$i,'realname');
@@ -79,7 +78,7 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showHistory() {
-		global $sys_datefmt,$artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr, $Language;
+		global $artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr, $Language;
 		$result=$this->getHistory();
 		$rows= db_numrows($result);
 
@@ -110,7 +109,7 @@ class ArtifactHtml extends Artifact {
 
 				} else if ($field == 'close_date') {
 
-					echo date($sys_datefmt,db_result($result, $i, 'old_value'));
+					echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
 
 				} else {
 
@@ -118,7 +117,7 @@ class ArtifactHtml extends Artifact {
 
 				}
 				echo '</td>'.
-					'<td>'. date($sys_datefmt,db_result($result, $i, 'entrydate')) .'</td>'.
+					'<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'entrydate')) .'</td>'.
 					'<td>'. db_result($result, $i, 'user_name'). '</td></tr>';
 			}
 

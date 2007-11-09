@@ -71,7 +71,7 @@ $res = db_query($sql);
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '<tr '. $HTML->boxGetAltRowStyle($i+1) .'>
-		<td>'. date($sys_datefmt, db_result($res,$i,'rundate')).'</td>
+		<td>'. date(_('Y-m-d H:i'), db_result($res,$i,'rundate')).'</td>
 		<td>'. $cron_arr[db_result($res,$i,'job')].'</td>
 		<td>'. nl2br(db_result($res,$i,'output')).'</td></tr>';
 

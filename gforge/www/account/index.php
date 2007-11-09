@@ -119,7 +119,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 
 <tr valign="top">
 <td><?php echo _('Member since:'); ?> </td>
-<td><strong><?php print date($sys_datefmt,$u->getAddDate()); ?></strong></td>
+<td><strong><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></strong></td>
 </tr>
 <tr valign="top">
 <td><?php echo _('User ID:'); ?> </td>

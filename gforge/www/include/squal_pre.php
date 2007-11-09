@@ -54,8 +54,6 @@ require_once('common/include/system/'.$sys_account_manager_type.'.class.php');
 $SYS=new $sys_account_manager_type();
 
 
-$sys_datefmt = "m/d/y H:i";
-
 // #### Connect to db
 
 db_connect();

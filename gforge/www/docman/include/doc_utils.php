@@ -154,7 +154,7 @@ function docman_footer($params) {
  * docman_display_documents - Recursive function to show the documents inside the groups tree
  */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
-	global $selected_doc_group_id,$Language,$sys_datefmt;
+	global $selected_doc_group_id,$Language;
 
 	$selected_doc_group_id=getIntFromRequest('selected_doc_group_id');
 	
@@ -215,8 +215,8 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					}
 					$tooltip = $docs[$j]->getFileName() . " (" .
 								($docs[$j]->getUpdated() ?
-								date($sys_datefmt, $docs[$j]->getUpdated()) :
-								date($sys_datefmt,$docs[$j]->getCreated()))  .
+								date(_('Y-m-d H:i'), $docs[$j]->getUpdated()) :
+								date(_('Y-m-d H:i'),$docs[$j]->getCreated()))  .
 								") ";
 					if ($docs[$j]->getFilesize() > 1024) {
 						$tooltip .= floor($docs[$j]->getFilesize()/1024) . "KB";

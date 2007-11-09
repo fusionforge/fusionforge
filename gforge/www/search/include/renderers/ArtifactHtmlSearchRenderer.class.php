@@ -57,7 +57,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		$groupId = $this->groupId;
-		$dateFormat = $GLOBALS['sys_datefmt'];
+		$dateFormat = _('Y-m-d H:i');
 		
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {

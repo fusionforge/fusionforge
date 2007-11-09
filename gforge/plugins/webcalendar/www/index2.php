@@ -4,7 +4,7 @@ require_once('../../env.inc.php');
 require_once('pre.php');
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -44,7 +44,7 @@ function forum_header($params) {
 				}
 				echo '
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
-				<strong>'._('Date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
+				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
 				<strong>'._('Project').':</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>

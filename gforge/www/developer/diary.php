@@ -45,7 +45,7 @@ if ($diary_user) {
 		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
 		$res=db_query($sql);
 
-		echo $HTML->boxTop(_('Date').": ".date($sys_datefmt, db_result($res,$i,'date_posted')));
+		echo $HTML->boxTop(_('Date').": ".date(_('Y-m-d H:i'), db_result($res,$i,'date_posted')));
 		if (!$res || db_numrows($res) < 1) {
 			echo _('Entry Not Found For This User');
 		} else {
@@ -83,7 +83,7 @@ if ($diary_user) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'&amp;diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</a></td>'.
-				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
+				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
 		<tr><td colspan="2" class="tablecontent">&nbsp;</td></tr>';

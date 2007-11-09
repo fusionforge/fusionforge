@@ -4,6 +4,10 @@
 	bug detected by a PHP notice.
 	* www/include/project_home.php: Ditto.
 
+	* Replaced $sys_datefmt with a localised format (lots of changes).
+	* Ditto with $sys_shortdatefmt.
+	* Removed unused $sys_strftimefmt.
+
 2007-11-07  Roland Mas  <lolando@debian.org>
 
 	* common/include/GroupJoinRequest.class.php: New

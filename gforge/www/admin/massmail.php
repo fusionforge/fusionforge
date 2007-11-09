@@ -158,7 +158,7 @@ while ($row = db_fetch_array($res)) {
 	<td>'.$row['id'].'</td>
 	<td>'.$row['type'].'</td>
 	<td>'.$row['subject'].'</td>
-	<td>'.date($sys_datefmt, $row['queued_date']).'</td>
+	<td>'.date(_('Y-m-d H:i'), $row['queued_date']).'</td>
 	<td> '.$row['last_userid'].'</td>
 	</tr>
 	';

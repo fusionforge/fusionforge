@@ -71,12 +71,12 @@ if (session_loggedin()) {
 		</td>
 		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
 		<?php
-		echo date($sys_datefmt, $ah->getOpenDate() );
+		echo date(_('Y-m-d H:i'), $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
 			echo '<br /><strong>'._('Date Closed').':</strong><br />'
-				.date($sys_datefmt, $close_date);
+				.date(_('Y-m-d H:i'), $close_date);
 		}
 		?>
 		</td>
@@ -208,8 +208,8 @@ if ($group->usesPM()) {
 				$projectid = $taskinfo['group_project_id'];
 				$groupid   = $taskinfo['group_id'];
 				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-				$startdate = date($sys_datefmt, $taskinfo['start_date']);
-				$enddate   = date($sys_datefmt, $taskinfo['end_date']);
+				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
+				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
 						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.

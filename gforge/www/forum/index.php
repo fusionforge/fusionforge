@@ -84,7 +84,7 @@ if ($group_id) {
 				<td>'.$farr[$j]->getDescription().'</td>
 				<td style="text-align:center">'.$farr[$j]->getThreadCount().'</td>
 				<td style="text-align:center">'. $farr[$j]->getMessageCount() .'</td>
-				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td>
+				<td>'.  date(_('Y-m-d H:i'),$farr[$j]->getMostRecentDate()) .'</td>
 				<td style="text-align:center">'. $modlvl  .'</td></tr>';
 		}
 	}

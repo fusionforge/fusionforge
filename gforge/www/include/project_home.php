@@ -57,7 +57,7 @@ if($GLOBALS['sys_use_trove']) {
 }
 
 // registration date
-print(_('Registered:&nbsp;') . date($sys_datefmt, $project->getStartDate()));
+print(_('Registered:&nbsp;') . date(_('Y-m-d H:i'), $project->getStartDate()));
 
 // Get the activity percentile
 // CB hide stats if desired

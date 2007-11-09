@@ -73,7 +73,7 @@ function news_footer($params) {
 }
 
 function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
-	global $sys_datefmt,$sys_news_group,$Language;
+	global $sys_news_group,$Language;
 	if (!$group_id) {
 		$group_id=$sys_news_group;
 	}
@@ -134,7 +134,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong>';
 				}
-				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'post_date')).'</em><br /></li>';
+				$return .= ' &nbsp; <em>'. date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</em><br /></li>';
 			} else {
 				if ($show_forum) {
 					$return .= '
@@ -148,7 +148,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					<br />&nbsp;';
 				}
 				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'realname') .' - '.
-					date($sys_datefmt,db_result($result,$i,'post_date')). '</em>' .
+					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')). '</em>' .
 					$proj_name . $summ_txt;
 
 				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
@@ -210,7 +210,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 }
 
 function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
-	global $sys_datefmt,$Language;
+	global $Language;
 	/*
 		Show a the latest news for a portal
 	*/
@@ -252,7 +252,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 			$return .= '
 				<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
 				<br /><em>'. db_result($result,$i,'realname') .' - '.
-					date($sys_datefmt,db_result($result,$i,'post_date')) . $proj_name . '</em>
+					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) . $proj_name . '</em>
 				'. $summ_txt .'<hr width="100%" size="1" />';
 		}
 	}

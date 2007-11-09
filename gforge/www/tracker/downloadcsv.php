@@ -73,9 +73,9 @@ for ($i=0; $i<count($at_arr); $i++) {
 		$at_arr[$i]->getSubmittedRealName().'",'.
 		$at_arr[$i]->getAssignedTo().',"'.
 		$at_arr[$i]->getAssignedRealName().'","'.
-		date($sys_datefmt,$at_arr[$i]->getOpenDate()).'","'.
-		date($sys_datefmt,$at_arr[$i]->getCloseDate()).'","'.
-		date($sys_datefmt,$at_arr[$i]->getLastModifiedDate()).'","'.
+		date(_('Y-m-d H:i'),$at_arr[$i]->getOpenDate()).'","'.
+		date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()).'","'.
+		date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()).'","'.
 		$at_arr[$i]->getSummary().'"';
 
 	//

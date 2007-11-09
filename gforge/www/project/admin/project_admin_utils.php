@@ -149,7 +149,7 @@ function show_grouphistory ($group_id) {
 		show the group_history rows that are relevant to 
 		this group_id
 	*/
-	global $sys_datefmt, $Language;
+	global $Language;
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
 	
@@ -177,7 +177,7 @@ function show_grouphistory ($group_id) {
 				echo db_result($result, $i, 'old_value');
 			}			
 			echo '</td>'.
-				'<td>'.date($sys_datefmt,db_result($result, $i, 'adddate')).'</td>'.
+				'<td>'.date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')).'</td>'.
 				'<td>'.db_result($result, $i, 'user_name').'</td></tr>';
 		}		   
 

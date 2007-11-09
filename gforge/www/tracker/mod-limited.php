@@ -66,12 +66,12 @@ if (session_loggedin()) {
 		</td>
 		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
 		<?php
-		echo date($sys_datefmt, $ah->getOpenDate() );
+		echo date(_('Y-m-d H:i'), $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
 			echo '<br /><strong>'._('Date Closed').':</strong><br />'
-				 .date($sys_datefmt, $close_date);
+				 .date(_('Y-m-d H:i'), $close_date);
 		}
 		?>
 		</td>

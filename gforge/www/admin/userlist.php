@@ -97,7 +97,7 @@ function show_users_list ($result) {
 		echo $usr['firstname'].' '.$usr['lastname'].' ('.$usr['user_name'].')</a>';
 		echo '</td>';
 		echo '<td width="15%" style="text-align:center">';
-		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
+		echo ($usr['add_date'] ? date(_('Y-m-d H:i'), $usr['add_date']) : '-');
 		echo '</td>';
 		echo '<td width="15%" style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/developer/?form_dev='.$usr['user_id'].'">[' ._('DevProfile'). ']</a></td>';
 		echo '<td width="15%" style="text-align:center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' ._('Activate'). ']</a></td>';

@@ -152,8 +152,6 @@ function login($userid, $passwd) {
 	$Language=new BaseLanguage();
 	$Language->loadLanguage("English"); // TODO use the user's default language
 	setlocale (LC_TIME, _('en_US'));
-	$sys_strftimefmt = _('%Y %B %e  %H:%M');
-	$sys_datefmt = _('Y-m-d H:i');
 
 	$res = session_login_valid($userid, $passwd);
 	

@@ -25,7 +25,7 @@ require_once('www/forum/admin/ForumAdmin.class.php');
 require_once('www/forum/include/AttachManager.class.php');
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -65,7 +65,7 @@ function forum_header($params) {
 				}
 				echo '
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
-				<strong>'._('Date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
+				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
 				<strong>'._('Project').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>
@@ -174,7 +174,7 @@ class ForumHTML extends Error {
 	 * @return 	returns the html output
 	 */
 	function showPendingMessage ( &$msg) {
-		global $sys_datefmt,$Language,$HTML,$group_id;
+		global $Language,$HTML,$group_id;
 
 		$am = new AttachManager();
 		$ret_val = $am->PrintHelperFunctions();
@@ -192,7 +192,7 @@ class ForumHTML extends Error {
 					'.
 		html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 		$bold_begin. $msg->getSubject() . $bold_end .'&nbsp; '.
-		'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
+		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
 			</tr>
 			<tr>
@@ -212,7 +212,7 @@ class ForumHTML extends Error {
 		in the format appropriate for the nested messages
 
 		*/
-		global $sys_datefmt,$Language,$HTML,$group_id;
+		global $Language,$HTML,$group_id;
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -239,7 +239,7 @@ class ForumHTML extends Error {
 		$msg->getID() .'&group_id='.$group_id.'">'.
 		html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 		$bold_begin. $msg->getSubject() .' [ '._('reply').' ]'. $bold_end .'</a> &nbsp; '.
-		'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
+		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
 			</tr>
 			<tr>
@@ -333,7 +333,7 @@ class ForumHTML extends Error {
 
 
 	function showNestedMessages ( &$msg_arr, $msg_id ) {
-		global $total_rows,$sys_datefmt;
+		global $total_rows;
 
 		$rows=count($msg_arr["$msg_id"]);
 		$ret_val='';
@@ -378,7 +378,7 @@ class ForumHTML extends Error {
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 			*/
-		global $total_rows,$sys_datefmt,$forum_id,$current_message,$group_id;
+		global $total_rows,$forum_id,$current_message,$group_id;
 
 		$rows=count($msg_arr["$msg_id"]);
 		$ret_val = "";
@@ -426,7 +426,7 @@ class ForumHTML extends Error {
 
 				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
 				'<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$msg_arr["$msg_id"][$i]->getPosterName().'/">'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</a></td>'.
-				'<td>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
+				'<td>'.date(_('Y-m-d H:i'), $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
 					/*

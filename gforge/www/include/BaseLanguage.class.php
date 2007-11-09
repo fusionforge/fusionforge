@@ -552,9 +552,6 @@ function setup_gettext_from_browser() {
 	}
 
 	setlocale (LC_TIME, _('en_US'));
-	$sys_strftimefmt = _('%Y %B %e  %H:%M');
-	$sys_datefmt = _('Y-m-d H:i');
-	$sys_shortdatefmt = _('Y-m-d');
 }
 
 function setup_gettext_for_user($user) {
@@ -562,9 +559,6 @@ function setup_gettext_for_user($user) {
 	$Language->loadLanguageID($user->getLanguage());
 
 	setlocale (LC_TIME, _('en_US'));
-	$sys_strftimefmt = _('%Y %B %e  %H:%M');
-	$sys_datefmt = _('Y-m-d H:i');
-	$sys_shortdatefmt = _('Y-m-d');
 }
 
 // Local Variables:

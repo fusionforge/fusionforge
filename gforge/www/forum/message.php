@@ -105,7 +105,7 @@ if ($msg_id) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
 	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$fm->getPosterName().'/">'. $fm->getPosterName() .'</a>)<br />';
-	echo _('DATE').': '. date($sys_datefmt, $fm->getPostDate()) .'<br />';
+	echo _('DATE').': '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '<br/>';
@@ -180,7 +180,7 @@ if ($msg_id) {
 		*/
 		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</td>'.
 			'<td>'. $msg->getPosterRealName() .'</td>'.
-			'<td>'. date($sys_datefmt,$msg->getPostDate()) .'</td></tr>';
+			'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
 
 		if ($msg->hasFollowups()) {
 			$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);

@@ -70,7 +70,7 @@ if ($type=='snippet') {
 				'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/download.php?type=snippet&amp;id='.
 				db_result($result,$i,'snippet_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
-				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
+				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
 				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
@@ -161,7 +161,7 @@ if ($type=='snippet') {
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=packagever&amp;id='.
 				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'.
-				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
+				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
 				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').

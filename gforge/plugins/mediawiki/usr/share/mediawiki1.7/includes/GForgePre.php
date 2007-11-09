@@ -208,9 +208,6 @@ if (session_loggedin()) {
 }
 
 setlocale (LC_TIME, _('en_US'));
-$sys_strftimefmt = _('%Y %B %e  %H:%M');
-$sys_datefmt = _('Y-m-d H:i');
-$sys_shortdatefmt = _('Y-m-d');
 
 /*
 
@@ -221,8 +218,6 @@ $session_hash
 $Language
 $LUSER - Logged in user object
 $HTML
-$sys_datefmt
-$sys_shortdatefmt
 
 */
 

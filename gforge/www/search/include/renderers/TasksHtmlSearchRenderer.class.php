@@ -50,7 +50,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		$dateFormat = $GLOBALS['sys_datefmt'];
+		$dateFormat = _('Y-m-d H:i');
 		
 		$return = '';
 		$rowColor = 0;

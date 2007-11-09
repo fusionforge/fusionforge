@@ -187,7 +187,7 @@ if (!session_loggedin()) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
-				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
+				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
 		<tr><td colspan="2" class="tablecontent">';

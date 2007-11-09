@@ -81,7 +81,6 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function showRelatedArtifacts() {
-		global $sys_datefmt;
 		global $Language;
 		$res=$this->getRelatedArtifacts();
 
@@ -112,7 +111,7 @@ class ProjectTaskHTML extends ProjectTask {
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id').'">'.db_result($res,$i,'summary').'</a></td>
 					<td>'. db_result($res,$i,'name') .'</td>
-					<td>'. date($sys_datefmt,db_result($res,$i,'open_date')) .'</td>'.
+					<td>'. date(_('Y-m-d H:i'),db_result($res,$i,'open_date')) .'</td>'.
 					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'"></td>' : '').
 					'</tr>';
 			}
@@ -128,7 +127,6 @@ class ProjectTaskHTML extends ProjectTask {
 		/*
 			Show the details rows from task_history
 		*/
-		global $sys_datefmt;
 		global $Language;
 	
 		$result=$this->getMessages();
@@ -150,7 +148,7 @@ class ProjectTaskHTML extends ProjectTask {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'. nl2br(db_result($result, $i, 'body')).'</td>
-					<td valign="TOP">'.date($sys_datefmt,db_result($result, $i, 'postdate')).'</td>
+					<td valign="TOP">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
 					<td valign="TOP">'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
 
@@ -168,7 +166,6 @@ class ProjectTaskHTML extends ProjectTask {
 			show the project_history rows that are 
 			relevant to this project_task_id, excluding details
 		*/
-		global $sys_datefmt;
 		global $Language;
 
 		$result=$this->getHistory();
@@ -216,7 +213,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 				}
 				echo '</td>
-					<td>'. date($sys_datefmt,db_result($result, $i, 'mod_date')) .'</td>
+					<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'mod_date')) .'</td>
 					<td>'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
 

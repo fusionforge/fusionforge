@@ -158,7 +158,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			<td>'.$f->getDescription().'</td>
 			<td style="text-align:center">'.$f->getThreadCount().'</td>
 			<td style="text-align:center">'. $f->getMessageCount() .'</td>
-			<td>'.  date($sys_datefmt,$f->getMostRecentDate()) .'</td>
+			<td>'.  date(_('Y-m-d H:i'),$f->getMostRecentDate()) .'</td>
 			<td>' . $newcontent . '</td></tr>';
 	}
 }

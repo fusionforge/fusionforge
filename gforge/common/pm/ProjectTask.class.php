@@ -1107,7 +1107,7 @@ class ProjectTask extends Error {
 			$body .= "\n\nFollow-Ups:";
 			for ($i=0; $i<$rows;$i++) {
 				$body .= "\n\n-------------------------------------------------------";
-				$body .= "\nDate: ". date($GLOBALS['sys_datefmt'],db_result($result2,$i,'postdate'));
+				$body .= "\nDate: ". date(_('Y-m-d H:i'),db_result($result2,$i,'postdate'));
 				$body .= "\nBy: ".db_result($result2,$i,'user_name');
 				$body .= "\n\nComment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
 			}

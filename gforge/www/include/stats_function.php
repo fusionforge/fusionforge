@@ -15,7 +15,6 @@ require_once('HTML_Graphs.php');
  * stats_sf_stats() - Get SourceForge stats
  */
 function stats_sf_stats() {
-	global $sys_datefmt;
 /*
 	pages/day
 */
@@ -84,7 +83,7 @@ function stats_sf_stats() {
 
 		for ($i=0;$i<$rows;$i++) {
 			//convert the dates and add to an array
-			$dates[$i]=date($sys_datefmt,db_result($result,$i,0));
+			$dates[$i]=date(_('Y-m-d H:i'),db_result($result,$i,0));
 		}
 		GraphIt($dates,$count,'New Projects Added Each Week');
 	}
@@ -107,7 +106,7 @@ function stats_sf_stats() {
 
 		for ($i=0;$i<$rows;$i++) {
 			//convert the dates and add to an array
-			$dates[$i]=date($sys_datefmt,db_result($result,$i,0));
+			$dates[$i]=date(_('Y-m-d H:i'),db_result($result,$i,0));
 		}
 		GraphIt($dates,$count,'New Users Added Each Week');
 	}

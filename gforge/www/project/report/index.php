@@ -198,7 +198,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 			echo "\n\t\t";
 		
 			echo '<td>'.GetTime( time() - db_result($artifacts, $m, 'open_date'))	.'</td>';
-		#	echo '<td>'. date($sys_datefmt,db_result($artifacts, $m, 'open_date')).'</td>';
+		#	echo '<td>'. date(_('Y-m-d H:i'),db_result($artifacts, $m, 'open_date')).'</td>';
 
 			$messages=db_query("select adddate FROM artifact_message_user_vw ".
 						"WHERE artifact_id='".db_result($artifacts, $m, 'artifact_id')."' ".

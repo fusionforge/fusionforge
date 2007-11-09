@@ -247,7 +247,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	echo '
 	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 	<td>&nbsp;</td>
-	<td>'.date($sys_datefmt,db_result($res,$i,'report_date')).'</td>
+	<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'report_date')).'</td>
 	<td>'.db_result($res,$i,'hours').'</td>
 	<td>'.db_result($res,$i,'category_name').'</td>
 	<td>'.db_result($res,$i,'realname').'</td>

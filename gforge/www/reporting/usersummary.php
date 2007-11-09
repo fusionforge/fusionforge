@@ -124,7 +124,7 @@ if (!$res || db_numrows($res) < 1) {
 				<td>'.db_result($res,$i,'status_name').'</td>
 				<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
 				<td>'.number_format((db_result($res,$i,'hours')-db_result($res,$i,'remaining_hrs')),1).'</td>
-				<td>'.date($sys_datefmt,db_result($res,$i,'end_date')).'</td>
+				<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'end_date')).'</td>
 				</tr>';
 
 		$task=db_result($res,$i,'project_task_id');

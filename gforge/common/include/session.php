@@ -473,14 +473,12 @@ function session_set() {
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to 
 //setup languages
 function session_continue($sessionKey) {
-	global $session_ser, $Language, $sys_strftimefmt, $sys_datefmt;
+	global $session_ser, $Language;
 	$session_ser = $sessionKey;
 	session_set();
  	$Language=new BaseLanguage();
 	$Language->loadLanguage("English"); // TODO use the user's default language
 	setlocale (LC_TIME, _('en_US'));
-	$sys_strftimefmt = _('%Y %B %e  %H:%M');
-	$sys_datefmt = _('Y-m-d H:i');
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;

@@ -1130,10 +1130,10 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 		} else if ($field_name == 'assigned_to') {
 			$old_value =  user_getname($old_value);
 		} else if ($field == 'close_date') {
-			$old_value =  date($GLOBALS['sys_datefmt'], $old_value);
+			$old_value =  date(_('Y-m-d H:i'), $old_value);
 		}
 		
-		//$date = date($GLOBALS['sys_datefmt'], $date);
+		//$date = date(_('Y-m-d H:i'), $date);
 		
 		$result[] = array(
 					"field_name"	=> $field_name,

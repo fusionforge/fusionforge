@@ -49,7 +49,7 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getCommitEntries($Query,$group_id) {
-		global $Language, $sys_shortdatefmt;
+		global $Language;
 
 		$group = &group_get_object($group_id);
 		$DBResult = db_query($Query);
@@ -67,7 +67,7 @@ class svntrackerPlugin extends Plugin {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file'],$Row['actual_version']). '</td>'.
-				'<td>'. date($sys_shortdatefmt, $Row['svn_date']).'</td>'.
+				'<td>'. date(_('Y-m-d'), $Row['svn_date']).'</td>'.
 				'<td>'. $this->getDiffLink($group->getUnixName(),
 						$Row['file'],
 						$Row['prev_version'],

@@ -328,7 +328,7 @@ if ($art_arr && count($art_arr) > 0) {
 			'</a></td>';
 		if ($display_col['open_date'])
 			echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
-				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>';
+				date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
 		if ($display_col['status'])
 			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
 		if ($display_col['priority'])

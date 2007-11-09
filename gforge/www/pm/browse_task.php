@@ -196,10 +196,10 @@ if ($rows < 1) {
 		if ($display_col['summary'])
 			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>';
 		if ($display_col['start_date']) 
-			echo '<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>';
+			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() ).'</td>';
 		if ($display_col['end_date']) 
 			echo '<td>'. (($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 )?'<strong>* ':'&nbsp; ') .
-				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>';
+				date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate() ).'</strong></td>';
 		if ($display_col['percent_complete']) 
 			echo '<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>';
 		if ($display_col['category']) 
@@ -232,9 +232,9 @@ if ($rows < 1) {
 				$pt_arr[$i]->getID() .'"> ':'').
 				$pt_arr[$i]->getID() .'</td>'.
 				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
+				'<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() ).'</td>'.
 				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
+					date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate() ).'</strong></td>'.
 				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 				echo '
 				<tr>'.
@@ -263,7 +263,7 @@ if ($rows < 1) {
 						echo '
 						<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($j) .'>
 							<td>'. nl2br(db_result($result, $j, 'body')).'</td>
-							<td valign="TOP">'.date($sys_datefmt,db_result($result, $j, 'postdate')).'</td>
+							<td valign="TOP">'.date(_('Y-m-d H:i'),db_result($result, $j, 'postdate')).'</td>
 							<td valign="TOP">'.db_result($result, $j, 'user_name').'</td></tr>';
 					}
 		

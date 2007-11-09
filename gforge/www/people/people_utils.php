@@ -427,7 +427,7 @@ function people_show_category_jobs($category_id) {
 }
 
 function people_show_job_list($result) {
-	global $sys_datefmt, $Language;
+	global $Language;
 	//takes a result set from a query and shows the jobs
 
 	//query must contain 'group_id', 'job_id', 'title', 'category_name' and 'status_name'
@@ -453,7 +453,7 @@ function people_show_job_list($result) {
 					db_result($result,$i,'job_id') .'">'.
 					db_result($result,$i,'title') .'</a></td><td>'.
 					db_result($result,$i,'category_name') .'</td><td>'.
-					date($sys_datefmt,db_result($result,$i,'post_date')) .
+					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) .
 					'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
 					db_result($result,$i,'group_name') .'</a></td></tr>';
 		}
