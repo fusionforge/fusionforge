@@ -99,6 +99,7 @@ class ForumFactory extends Error {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$public_flag='=1';
+				$exists = '';
 			} else {
 				$public_flag='<3';
 				if ($perm->isForumAdmin()) {
@@ -116,6 +117,7 @@ class ForumFactory extends Error {
 			}
 		} else {
 			$public_flag='=1';
+			$exists = '';
 		}
 
 		if ($sys_database_type == "mysql") {

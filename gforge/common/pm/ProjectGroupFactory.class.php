@@ -96,6 +96,7 @@ class ProjectGroupFactory extends Error {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$public_flag='=1';
+				$exists = '';
 			} else {
 				$public_flag='<3';
 				if ($perm->isPMAdmin()) {
@@ -113,6 +114,7 @@ class ProjectGroupFactory extends Error {
 			}
 		} else {
 			$public_flag='=1';
+			$exists = '';
 		}
 
 		$sql="SELECT *

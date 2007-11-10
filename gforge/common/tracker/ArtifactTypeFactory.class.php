@@ -93,6 +93,7 @@ class ArtifactTypeFactory extends Error {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$public_flag='=1';
+				$exists = '';
 			} else {
 				$public_flag='<3';
 				if ($perm->isArtifactAdmin()) {
@@ -110,6 +111,7 @@ class ArtifactTypeFactory extends Error {
 			}
 		} else {
 			$public_flag='=1';
+			$exists = '';
 		}
 
 		$sql="SELECT * FROM artifact_group_list_vw
