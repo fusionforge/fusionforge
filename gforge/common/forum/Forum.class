@@ -157,6 +157,7 @@ class Forum extends Error {
 		}
 
 
+
 		// This is a hack to allow non-site-wide-admins to post
 		// news.  The news/submit.php checks for proper permissions.
 		// This needs to be revisited.
@@ -206,7 +207,6 @@ class Forum extends Error {
 		}
 		db_commit();
 		return true;
-	
 	}
 
 	/**

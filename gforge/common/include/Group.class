@@ -1948,6 +1948,7 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function approve(&$user) {
+
 		if ($this->getStatus()=='A') {
 			$this->setError("Group already active");
 			return false;
