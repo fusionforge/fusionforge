@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 	if (!$res) {
 		$feedback = $group->getErrorMessage();
 	} else {
-		$feedback .= _('Group information updated');
+		$feedback = _('Group information updated');
 	}
 
 	// This is done so plugins can enable/disable themselves from the project
