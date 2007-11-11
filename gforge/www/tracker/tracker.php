@@ -59,6 +59,7 @@ switch (getStringFromRequest('func')) {
 
 		*/
 		$ah=new ArtifactHtml($ath);
+		$feedback = '';
 		if (!$ah || !is_object($ah)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error('ERROR','Artifact Could Not Be Created');
@@ -220,7 +221,8 @@ switch (getStringFromRequest('func')) {
 		$details = getStringFromRequest('details');
 		$new_artifact_type_id = getIntFromRequest('new_artifact_type_id');
 		$extra_fields = getStringFromRequest('extra_fields');
-	
+		$was_error = false;
+		
 		/*
 			Technicians can modify limited fields - to be certain
 			no one is hacking around, we override any fields they don't have
