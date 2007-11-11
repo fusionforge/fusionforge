@@ -53,7 +53,7 @@ function activate_group($group_id) {
 		return false;
 	}
 
-	$feedback .= _('Approving Group: %1$s'). $group->getUnixName().'<br />';
+	$feedback .= sprintf(_('Approving Group: %1$s'), $group->getUnixName()).'<br />';
 
 	if (!$group->approve(session_get_user())) {
 		$feedback .= $group->getErrorMessage().'<br />';
