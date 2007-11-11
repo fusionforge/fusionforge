@@ -818,7 +818,8 @@ class Artifact extends Error {
 
 		// Array to record which properties were changed
 		$changes = array();
-
+		$update  = false;
+		
 		db_begin();
 
 		//
@@ -1187,9 +1188,9 @@ class Artifact extends Error {
 	 *
 	 */
 	function marker($prop_name,$changes,$extra_field_id=0) {
-		if ($prop_name == 'extra_fields' && $changes[$prop_name][$extra_field_id]) {
+		if ($prop_name == 'extra_fields' && isset($changes[$prop_name][$extra_field_id])) {
 			return '>';
-		} else if ($prop_name != 'extra_fields' && $changes[$prop_name]) {
+		} else if ($prop_name != 'extra_fields' && isset($changes[$prop_name])) {
 			return '>';
 		} else {
 			return '';
@@ -1249,6 +1250,7 @@ class Artifact extends Error {
 			$monitor_ids =& $this->ArtifactType->getMonitorIds();
 		}
 
+		$emails = array();
 		if ($more_addresses) {
 			$emails[] = $more_addresses;
 		}
@@ -1382,7 +1384,7 @@ class Artifact extends Error {
 			// for these types, the associated value comes straight
 			case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 			case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
-				$value = $efd[$efid];
+				$value = isset($efd[$efid]) ? $efd[$efid]: '';
 				break;
 
 			// the other types have and ID or an array of IDs associated to them
