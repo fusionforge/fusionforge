@@ -92,7 +92,7 @@ class GforgeWikiPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			$group_id=$params['group'];
 		        $group = &group_get_object($group_id);
-			if ( $GLOBALS['use_wikiplugin'] == 1 ) {
+			if ( getIntFromRequest('use_wikiplugin') == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
 				$group->setPluginUse ( $this->name, false );
@@ -113,7 +113,7 @@ class GforgeWikiPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "userisactivecheckboxpost") {
 			$user = $params['user'];
-			if ( $GLOBALS['use_wikiplugin'] == 1 ) {
+			if ( getIntFromRequest('use_wikiplugin') == 1 ) {
 				$user->setPluginUse ( $this->name );
 			} else {
 				$user->setPluginUse ( $this->name, false );
