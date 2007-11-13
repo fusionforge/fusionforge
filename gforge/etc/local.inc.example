@@ -74,8 +74,8 @@ $sys_path_to_scmweb='/usr/lib/gforge/bin/';
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
 //to the database.
 $sys_dbhost='';
-$sys_dbname='alexandria';
-$sys_dbuser='www';
+$sys_dbname='gforge';
+$sys_dbuser='gforge';
 // You can also specify a database port if you're using something other than 5432
 //$sys_dbport='4242';
 $sys_server='pgsql';

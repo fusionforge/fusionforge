@@ -1,4 +1,4 @@
-#!/usr/bin/php -f
+#!/usr/bin/php
 <?php
 /**
  * GForge Installation Dependency Setup
@@ -101,8 +101,8 @@ function installArk() {
 }
 
 if (count($argv) < 2) {
-	echo "Usage: pre-install.php [RHEL4|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
-    check_version();
+	echo "Usage: gforge-preinstall.php [RHEL4|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
+	//check_version();
 } else {
     $platform = $argv[1];
 
