@@ -47,18 +47,29 @@ if (!$group || !is_object($group)) {
 site_project_header(array('title'=>_('Activity'),'group'=>$group_id,'toptab'=>'activity'));
 
 $ids=array();
-$ids[]='commit';
-$ids[]='trackeropen';
-$ids[]='trackerclose';
-$ids[]='frsrelease';
-$ids[]='forumpost';
-
 $texts=array();
-$texts[]=_('Commits');
-$texts[]=_('Tracker Opened');
-$texts[]=_('Tracker Closed');
-$texts[]=_('FRS Release');
-$texts[]=_('Forum Post');
+
+if ($GLOBALS['sys_use_scm']) {
+	$ids[]='commit';
+	$texts[]=_('Commits');
+}
+
+if ($GLOBALS['sys_use_tracker']) {
+	$ids[]='trackeropen';
+	$texts[]=_('Tracker Opened');
+	$ids[]='trackerclose';
+	$texts[]=_('Tracker Closed');
+}
+
+if ($GLOBALS['sys_use_frs']) {
+	$ids[]='frsrelease';
+	$texts[]=_('FRS Release');
+}
+
+if ($GLOBALS['sys_use_forum']) {
+	$ids[]='forumpost';
+	$texts[]=_('Forum Post');
+}
 
 if (count($show) < 1) {
 	$show=$ids;
