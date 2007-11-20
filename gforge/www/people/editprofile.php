@@ -21,6 +21,7 @@ if (!$sys_use_people) {
 
 $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
+$feedback = '';
 
 if (session_loggedin()) {
 
