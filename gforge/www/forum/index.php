@@ -38,9 +38,9 @@ if ($group_id) {
 
 	$farr =& $ff->getForums();
 
-	if ( count($farr) == 1 ) {
-  		Header("Location:http://".$sys_default_domain."/forum/forum.php?forum_id=".$farr[0]->getID());
-	exit();
+	if ( $farr !== false && count($farr) == 1 ) {
+  		Header("Location: http://".$sys_default_domain.$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=".$farr[0]->getID());
+		exit();
 	}
 
 	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
