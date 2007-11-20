@@ -59,7 +59,7 @@ function pm_header($params) {
 			$gantt_title = _('Gantt Chart');
 			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 			$labels[] = $gantt_title;
-			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace("/\s/e" , "_" , $gantt_title)
+			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace('/\s/' , '_' , $gantt_title)
 			. '\', \'' . $gantt_winopt . '\'); return false;';
 		}
 		//upload/download as CSV files
