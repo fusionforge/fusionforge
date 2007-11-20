@@ -220,6 +220,9 @@ class ForumHTML extends Error {
 		if ($this->Forum->getSavedDate() < $msg->getPostDate()) {
 			$bold_begin='<strong>';
 			$bold_end='</strong>';
+		} else {
+			$bold_begin = '';
+			$bold_end = '';
 		}
 		$am = new AttachManager();
 		$fa = new ForumAdmin();
@@ -533,6 +536,8 @@ class ForumHTML extends Error {
 function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 	global $Language,$sys_default_domain,$group_id;
 
+	$body = '';
+	
 	if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
 		$http = "https://";
 	} else {
@@ -550,7 +555,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		?>
 <div align="center">
 <form "enctype="multipart/form-data"
-	action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>&group_id=<?php echo $group_id; ?>"
+	action="<? echo $GLOBALS['sys_urlprefix'] ?>/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>&group_id=<?php echo $group_id; ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="post_message" value="y" /> <input type="hidden"
 	name="thread_id" value="<?php echo $thread_id; ?>" /> <input
@@ -570,6 +575,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 
 		<?php
+		$GLOBALS['editor_was_set_up']=false;
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
