@@ -92,7 +92,7 @@ if ($msg_id) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
-	forum_header(array('title'=>db_result($result,0,'subject'),'forum_id'=>$forum_id));
+	forum_header(array('title'=>$fm->getSubject(),'forum_id'=>$forum_id));
 
 	$title_arr=array();
 	$title_arr[]=_('Message').': '.$msg_id;
