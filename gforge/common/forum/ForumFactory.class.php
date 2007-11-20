@@ -144,8 +144,8 @@ class ForumFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result) {
-			$this->setError(_('Forum not found').db_error());
-			return false;
+			$this->setError(_('Forum not found').' : '.db_error());
+			$this->forums = false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
