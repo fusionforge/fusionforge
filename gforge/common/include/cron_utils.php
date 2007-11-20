@@ -70,32 +70,38 @@ function chrootCommand($command) {
 }
 
 //
-//  Create lock file so long running jobs don't overlap
+//  Create lock via semaphore so long running jobs don't overlap
 //
 //  Parameters
 //  $name - Name of cron job to use in the lock file name
 //
-//	Return code
-//  true - lock file create successfully
-//  false - file already exists
-//	IMPORTANT - There tmp dir should have write access to create the lock
 function cron_create_lock($name) {
-	$sem = sem_get (ftok ($name, 'g'), 1, 0600, 1) ;
-	return sem_acquire ($sem);
+        global $cron_utils_sem ;
+        if (! $cron_utils_sem[$name]) {
+                $token = ftok ($name, 'g');
+                $cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
+        }
+        return sem_acquire ($cron_utils_sem[$name]);
 }
 
 //
-//  Delete lock file created by cron_create_lock
+//  Delete lock created by cron_create_lock
 //
 //  Parameters
 //  $name - Name of cron job to use in the lock file name
 //
-//	Return code
-//  true - lock file deleted successfully
-//  false - error deleting file
 function cron_remove_lock($name) {
-	$sem = sem_get (ftok ($name, 'g')) ;
-	return sem_release ($sem);
+        global $cron_utils_sem ;
+        if (! $cron_utils_sem[$name]) {
+                $token = ftok ($name, 'g');
+                $cron_utils_sem[$name] = sem_get ($token, 1, 0600, 0) ;
+        }
+	return sem_release ($cron_utils_sem[$name]);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

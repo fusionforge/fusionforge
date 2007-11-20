@@ -1,3 +1,8 @@
+2007-11-20  Roland Mas  <lolando@debian.org>
+
+	* common/include/cron_utils.php: Made the semaphore handling a bit
+	more robust.
+
 2007-11-09  Roland Mas  <lolando@debian.org>
 
 	* common/include/PluginManager.class.php: Fixed undefined variable
