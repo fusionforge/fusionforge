@@ -221,7 +221,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	$order_name_arr[]=_('Monitored Forums');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 	$forumsForUser = new ForumsForUser(session_get_user());
-	$forums =& $forumsForUser->getMonitoredForums();
+	$forums = $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
 		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any forums.').'</strong></center></td></tr>';
 	} else {
