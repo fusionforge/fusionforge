@@ -153,7 +153,7 @@ class Permission extends Error {
 				return true;
 			}
 		} else {
-			$this->data_array =& db_fetch_array($res);
+			$this->data_array = db_fetch_array($res);
 			if (trim($this->data_array['admin_flags']) == 'A') {
 				$this->is_admin=true;
 			} else {
