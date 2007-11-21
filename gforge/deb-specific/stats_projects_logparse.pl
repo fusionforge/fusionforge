@@ -80,7 +80,7 @@ foreach $server ( @webservers ) {
 	
 		   ## 1=ip  2=date 3=file_uri 4=return_code 5=bytes 6=referer 
 
-		$_ =~ m/^([\d\.]+).*\[(.+)\]\s\"GET (.+) HTTP.+\" (\d\d\d) (\d+|\-) \"([^\"]+)\/\/(.*)\/$\"/;
+		$_ =~ m/^([\d\.:]+).*\[(.+)\]\s\"GET (.+) HTTP.+\" (\d\d\d) (\d+|\-) \"([^\"]+)\/\/(.*)\/$\"/;
 
 		$filepath = $3;
 		$code = $4;

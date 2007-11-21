@@ -1,5 +1,8 @@
 2007-11-21  Roland Mas  <lolando@debian.org>
 
+	* deb-specific/stats_projects_logparse.pl: Parse IPv6 addresses as
+	well as IPv4.
+
 	* common/include/session.php: Made session_check_ip() able to
 	compare IPv6 addresses as well as IPv4 ones.
 
