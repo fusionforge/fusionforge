@@ -30,14 +30,7 @@ require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # Our SQL functions
 &debug ("You'll see some debugging info during this installation.") ;
 &debug ("Do not worry unless told otherwise.") ;
 
-if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
-} else {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
-}
-die "Cannot connect to database: $!" if ( ! $dbh );
-
-# debug "Connected to the database OK." ;
+&db_connect ;
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
@@ -2073,21 +2066,12 @@ eval {
 #
 # This is a hack to disconnect and reconnect the DB and solve the problem
 #
-$dbh->rollback ;
-$dbh->disconnect ;
+    $dbh->rollback ;
+    &db_disconnect ;
+    &db_connect ;
 
-$dbh=();
-
-if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
-} else {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
-}
-die "Cannot connect to database: $!" if ( ! $dbh );
-
-# debug "Connected to the database OK." ;
-$dbh->{AutoCommit} = 0;
-$dbh->{RaiseError} = 1;
+    $dbh->{AutoCommit} = 0;
+    $dbh->{RaiseError} = 1;
 
     $version = &get_db_version ;
     $target = "4.0.2-0+5" ;
@@ -2783,7 +2767,7 @@ if ($@) {
 }
 
 $dbh->rollback ;
-$dbh->disconnect ;
+&db_disconnect ;
 
 sub get_pg_version () {
     my $command;
@@ -2878,3 +2862,12 @@ sub update_with_sql ( $ ) {
     }
 }
 
+sub db_connect ( ) {
+    $dbh = DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd")
+	or die "Cannot connect to database: $!" ;
+    # debug "Connected to the database OK." ;
+}
+
+sub db_disconnect ( ) {
+      $dbh->disconnect ;
+}
