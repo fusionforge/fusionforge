@@ -54,18 +54,11 @@ case "$target" in
     configure-files)
 	# Tell PostgreSQL to let us use the database
 	db_passwd=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
-	ip_address=$(grep ^ip_address= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 
-	if [ "$db_host" == "127.0.0.1" -o "$db_host" == "localhost" ]
-	then
-	    # Otherwise the line wouldn't be used
-	    # And postgres auth would fail
-	    ip_address=127.0.0.1
-	fi
         # PostgreSQL configuration for versions from 7.3 on
 	cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
 	cur=$(mktemp /tmp/$pattern)
@@ -75,7 +68,7 @@ case "$target" in
 		perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host.*gforge_passwd\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
 		cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    elif grep -q "^### Next line inserted by GForge install" ${pg_hba_dir}/pg_hba.conf.gforge-new ; then
-		perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### Next line inserted by GForge install\nhost $db_name $db_user $ip_address 255.255.255.255 password/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### Next line inserted by GForge install\nhost $db_name $db_user [0-9. ]+ password/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
 		cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	    else
 		perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host $db_name $db_user.*password\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
@@ -89,7 +82,7 @@ case "$target" in
 	rm -f $cur
 	
 	cur=$(mktemp /tmp/$pattern)
-	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 password\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nlocal $db_name $db_user md5\nlocal $db_name gforge_nss trust\nlocal $db_name gforge_mta md5\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	rm -f $cur
 	

@@ -1,3 +1,9 @@
+2007-11-21  Roland Mas  <lolando@debian.org>
+
+	* deb-specific/install-db.sh: Setup database for access through
+	the Unix socket rather than TCP socket (in order to lighten the
+	dependency on IP addresses).
+
 2007-11-20  Roland Mas  <lolando@debian.org>
 
 	* common/include/cron_utils.php: Made the semaphore handling a bit

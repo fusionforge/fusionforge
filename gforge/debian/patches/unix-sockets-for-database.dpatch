@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gforge~/etc/httpd.d/httpd.secrets gforge/etc/httpd.d/httpd.secrets
+--- gforge~/etc/httpd.d/httpd.secrets	2007-11-21 15:13:43.000000000 +0100
++++ gforge/etc/httpd.d/httpd.secrets	2007-11-21 15:15:06.000000000 +0100
+@@ -1,7 +1,7 @@
+ # PLEASE DO NOT REMOVE THIS LINE
+ 
+ SetEnv sys_localinc {sys_localinc}
+-SetEnv sys_gfdbhost {db_host}
++# SetEnv sys_gfdbhost {db_host}
+ SetEnv sys_gfdbport {db_port}
+ SetEnv sys_gfdbname {db_name}
+ SetEnv sys_gfdbuser {db_user}

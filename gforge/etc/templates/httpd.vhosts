@@ -1,4 +1,4 @@
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
 	ServerName {vhost_name}
 	VirtualDocumentRoot {docdir}
         VirtualScriptAlias {cgidir}

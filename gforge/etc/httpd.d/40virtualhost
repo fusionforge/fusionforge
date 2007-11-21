@@ -1,7 +1,7 @@
 #
 # * hosts
 #
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
 	ServerName {domain_name}
 	ServerAlias *.{domain_name}
 	VirtualDocumentRoot {gforge_chroot}{groupdir}/%1/htdocs

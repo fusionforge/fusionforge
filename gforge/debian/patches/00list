@@ -6,3 +6,4 @@
 ##add-project-before-description-hook
 ##fix-lists-url
 use-snoopy-from-distro
+unix-sockets-for-database

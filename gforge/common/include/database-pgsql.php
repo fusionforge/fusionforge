@@ -55,8 +55,9 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 		$string .= " password=$password";
 	if ($host != "") {
 		$string .= " host=$host";
-		if ($port != "")
-			$string .= " port=$port";
+	}
+	if ($port != "") {
+		$string .= " port=$port";
 	}
 	return $string;
 }
@@ -396,5 +397,10 @@ function db_drop_sequence_if_exists ($tn) {
 		echo db_error();
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

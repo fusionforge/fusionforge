@@ -1,5 +1,5 @@
 # CVS HTTP SSL vhosts
-<VirtualHost {ip_address}:443>
+<VirtualHost *:443>
 	ServerName cvs.{domain_name}
   	ServerAlias cvs.*.{domain_name}
 	DocumentRoot {gforge_chroot}{groupdir}/

@@ -2,7 +2,7 @@
 # List host
 #
 # HTTPS
-<VirtualHost {ip_address}:443>
+<VirtualHost *:443>
   ServerName {lists_host}
   AddHandler cgi-script .cgi
 

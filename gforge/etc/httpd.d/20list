@@ -2,7 +2,7 @@
 # List host
 #
 # HTTP
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
   ServerName {lists_host}
   AddHandler cgi-script .cgi
 

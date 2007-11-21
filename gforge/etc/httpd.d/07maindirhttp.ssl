@@ -1,5 +1,5 @@
 # HTTPS
-<VirtualHost {ip_address}:443>
+<VirtualHost *:443>
 	ServerName {domain_name}
 	ServerAlias www.{domain_name}
 	ServerAdmin {server_admin}

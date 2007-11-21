@@ -1,4 +1,4 @@
 # SCM HTTP vhost
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
   ServerName {scm_host}
   DocumentRoot {usr_share_gforge}/scm

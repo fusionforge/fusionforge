@@ -3,7 +3,7 @@
 #
 # This example is so beautiful that I keep it
 # And can be used in a better way e.g. creating a cvs directory by group
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
 	ServerName cvs.{domain_name}
 	ServerAlias cvs.*.{domain_name}
 	DocumentRoot {gforge_chroot}{groupdir}/

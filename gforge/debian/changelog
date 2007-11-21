@@ -1,3 +1,12 @@
+gforge (4.6.99+svn6206+noip-1) unstable; urgency=low
+
+  * debian/patches/unix-sockets-for-database.dpatch: Use Unix sockets to
+    connect to the PostgreSQL server.
+  * Apache virtual hosts are now available on every IP address, so they'll
+    still work on dual-stack (IPv4 and IPv6) boxes.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 21 Nov 2007 17:07:11 +0100
+
 gforge (4.6.99+svn6206-0+1) unstable; urgency=low
 
   * New SVN snapshot (r6206).  Includes lots of fixes for PHP warnings,

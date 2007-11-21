@@ -1,7 +1,7 @@
 #
 # Download host
 #
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
   ServerName {download_host}
   DocumentRoot {var_lib_gforge}/download
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge

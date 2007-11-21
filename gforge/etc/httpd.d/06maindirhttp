@@ -1,5 +1,5 @@
 # HTTP
-<VirtualHost {ip_address}:80>
+<VirtualHost *:80>
 	ServerName {domain_name}
 	ServerAlias www.{domain_name}
 	ServerAdmin {server_admin}

@@ -1,4 +1,4 @@
 # SCM HTTP SSL vhost
-<VirtualHost {ip_address}:443>
+<VirtualHost *:443>
   ServerName {scm_host}
   DocumentRoot {usr_share_gforge}/scm
