@@ -247,8 +247,13 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 /**
  *	session_check_ip() - Check 2 IP addresses for match
  *
- *	This function checks that IP addresses match with the
- *	given fuzz factor (within 255.255.0.0 subnet).
+ *	This function checks that IP addresses match
+ *
+ *      IPv4 addresses are allowed to match with some
+ *	fuzz factor (within 255.255.0.0 subnet).
+ *
+ *      For IPv6 addresses, no fuzz is needed since there's
+ *      usually no NAT in IPv6.
  *
  *	@param		string	The old IP address
  *	@param		string	The new IP address
@@ -256,14 +261,27 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
  *	@access private
  */
 function session_check_ip($oldip,$newip) {
-	$eoldip = explode(".",$oldip);
-	$enewip = explode(".",$newip);
-
-	// ## require same class b subnet
-	if (($eoldip[0]!=$enewip[0])||($eoldip[1]!=$enewip[1])) {
-		return 0;
+	if (strstr ($oldip, ':')) {
+		// Old IP is IPv6
+		if (strstr ($newip, ':')) {
+			// New IP is IPv6 too
+			return ($oldip == $newip) ;
+		} else {
+			return false ;
+		}
 	} else {
-		return 1;
+		// Old IP is IPv4
+		if (strstr ($newip, ':')) {
+			// New IP is IPv6
+			return false ;
+		} else {
+			$eoldip = explode(".",$oldip);
+			$enewip = explode(".",$newip);
+			
+			// require same class b subnet
+			return ( ($eoldip[0] == $enewip[0]) 
+				 && ($eoldip[1] == $enewip[1]) ) ;
+		}
 	}
 }
 
@@ -526,5 +544,10 @@ function session_loggedin() {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
