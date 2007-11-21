@@ -19,12 +19,7 @@ my $scm_file = $file_dir . "/dumps/$scm.dump";
 
 if($verbose) {print ("\nConnecting to database");}
 
-if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
-} else {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
-}
-die "Cannot connect to database: $!" if ( ! $dbh );
+&db_connect ;
 
 if($verbose) {print ("\nGetting group list");}
 

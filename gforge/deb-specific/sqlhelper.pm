@@ -29,7 +29,7 @@ use subs qw/ &get_plugin_id &remove_plugin_from_groups
     &drop_index_if_exists &drop_sequence_if_exists
     &drop_view_if_exists &bump_sequence_to &update_plugin_db_version
     &get_plugin_db_version &debug &create_plugin_metadata_table
-    &is_lesser &is_greater/ ;
+    &is_lesser &is_greater &db_connect &db_disconnect / ;
 
 sub get_plugin_id ( $$ ) ;
 sub remove_plugin_from_groups ( $$ ) ;
@@ -47,6 +47,8 @@ sub create_plugin_metadata_table ( $$$ ) ;
 sub is_lesser ( $$ ) ;
 sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
+sub db_connect ( ) ;
+sub db_disconnect ( ) ;
 
 sub table_exists ( $$ ) {
     my $dbh = shift or die "Not enough arguments" ;

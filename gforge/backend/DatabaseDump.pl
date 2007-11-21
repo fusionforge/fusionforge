@@ -10,6 +10,8 @@ use DBI;
 use Sys::Hostname;
 use POSIX qw(strftime);
 
+require ("/usr/lib/gforge/lib/include.pl") ; 
+
 &open_log_file;
 
 # All of the files that we will be creating
@@ -29,17 +31,7 @@ foreach(@file_array) {
 
 my ($foo, $bar, $x);
 	
-# open up database include file and get the database variables
-open(FILE, $db_include) || die "Can't open $db_include: $!\n";
-while ($x = <FILE>) {
-	($foo, $bar) = split /=/, $x;
-	if ($foo) { eval $x; }
-}
-close(FILE);
-
-# connect to the database
-$dbh ||= DBI->connect("DBI:mysql:$sys_dbname:$sys_dbhost", "$sys_dbuser", "$sys_dbpasswd");
-
+&db_connect ;
 
 print("Dumping Table Data\n");
 

@@ -26,6 +26,7 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
 require ("/etc/gforge/local.pl") ; 
 require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # Our SQL functions
+require ("/usr/lib/gforge/lib/include.pl");  # Some other functions
 
 &debug ("You'll see some debugging info during this installation.") ;
 &debug ("Do not worry unless told otherwise.") ;
@@ -2860,14 +2861,4 @@ sub update_with_sql ( $ ) {
         &debug ("Committing.") ;
         $dbh->commit () ;
     }
-}
-
-sub db_connect ( ) {
-    $dbh = DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd")
-	or die "Cannot connect to database: $!" ;
-    # debug "Connected to the database OK." ;
-}
-
-sub db_disconnect ( ) {
-      $dbh->disconnect ;
 }

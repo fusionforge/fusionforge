@@ -31,13 +31,18 @@ sub parse_local_inc {
 ##############################
 # Database Connect Functions
 ##############################
-sub db_connect {
-	&parse_local_inc;
-	
-	# connect to the database
-	$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost", "$sys_dbuser", "$sys_dbpasswd");
+sub db_connect ( ) {
+    &parse_local_inc;
 
-	die "Cannot connect to database: $!" if ( ! $dbh );
+    $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd") ;
+    if (! $dbh) {
+	die "Error while connecting to database: $!" ;
+    }
+}
+
+sub db_disconnect ( ) {
+      $dbh->disconnect ;
+      $dbh = "" ;
 }
 
 sub db_drop_table_if_exists {

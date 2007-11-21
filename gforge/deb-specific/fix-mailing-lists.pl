@@ -17,13 +17,9 @@ use vars qw// ;
 sub debug ( $ ) ;
 
 require ("/etc/gforge/local.pl") ;
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
-if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
-} else {
-$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
-}
-die "Cannot connect to database: $!" if ( ! $dbh );
+&db_connect ;
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
