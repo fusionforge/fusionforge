@@ -1,8 +1,9 @@
-gforge (4.6.99+svn6175+something-0+1) unstable; urgency=low
+gforge (4.6.99+svn6206-0+1) unstable; urgency=low
 
-  * New SVN snapshot.
+  * New SVN snapshot (r6206).  Includes lots of fixes for PHP warnings,
+    and some internationalisation work.
 
- -- Roland Mas <lolando@debian.org>  Wed, 07 Nov 2007 13:36:28 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 21 Nov 2007 17:02:20 +0100
 
 gforge (4.6.99+svn6169-1) unstable; urgency=high
 
