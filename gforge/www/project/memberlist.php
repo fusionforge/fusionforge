@@ -61,6 +61,7 @@ if($GLOBALS['sys_use_people']) {
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 $res_memb = db_query($query);
+$i=0;
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo "<tr ".$HTML->boxGetAltRowStyle($i++).">";
 	if ( trim($row_memb['admin_flags'])=='A' ) {
@@ -69,10 +70,10 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		echo "\t\t<td>".$row_memb['realname']."</td>\n";
 	}
 	echo "
-		<td align=\"center\"><a href=\"/users/".$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
+		<td align=\"center\"><a href=\"$GLOBALS[sys_urlprefix]/users/".$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
 		<td align=\"center\">".$row_memb['role']."</td>";
 	if($GLOBALS['sys_use_people']) {
-		echo "<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=".$row_memb['user_id']."\">"._('View')."</a></td>";
+		echo "<td align=\"center\"><a href=\"$GLOBALS[sys_urlprefix]/people/viewprofile.php?user_id=".$row_memb['user_id']."\">"._('View')."</a></td>";
 	}
 	echo "</tr>";
 }

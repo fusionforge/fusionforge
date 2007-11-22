@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6214-0+1) unstable; urgency=low
+gforge (4.6.99+svn6215-0+1) unstable; urgency=low
 
-  * New SVN snapshot (r6214).  Includes lots of fixes for PHP warnings,
+  * New SVN snapshot (r6215).  Includes lots of fixes for PHP warnings,
     some internationalisation work, and fixes for IPv6 compatibility.
   * Apache virtual hosts are now available on every IP address, so they'll
     still work on dual-stack (IPv4 and IPv6) boxes.
