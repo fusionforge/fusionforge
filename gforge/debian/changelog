@@ -1,15 +1,13 @@
-gforge (4.6.99+svn6206-0+2) unstable; urgency=low
+gforge (4.6.99+svn6214-0+1) unstable; urgency=low
 
-  * New SVN snapshot (r6206).  Includes lots of fixes for PHP warnings,
-    and some internationalisation work.
+  * New SVN snapshot (r6214).  Includes lots of fixes for PHP warnings,
+    some internationalisation work, and fixes for IPv6 compatibility.
   * Apache virtual hosts are now available on every IP address, so they'll
     still work on dual-stack (IPv4 and IPv6) boxes.
-  * A few functions and scripts now understand IPv6 addresses as well as
-    IPv4, too.
   * debian/patches/unix-sockets-for-database.dpatch: Use Unix sockets to
     connect to the PostgreSQL server.
 
- -- Roland Mas <lolando@debian.org>  Wed, 21 Nov 2007 18:09:35 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 21 Nov 2007 19:14:28 +0100
 
 gforge (4.6.99+svn6169-1) unstable; urgency=high
 
