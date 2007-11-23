@@ -1,3 +1,7 @@
+2007-11-23  Roland Mas  <lolando@debian.org>
+
+	* gforge/www/themes/gforge/images/icon.png: New file.
+
 2007-11-21  Roland Mas  <lolando@debian.org>
 
 	* deb-specific/stats_projects_logparse.pl: Parse IPv6 addresses as
