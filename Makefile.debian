@@ -36,7 +36,7 @@ cleangf:		# Clean debian files of gforge build                         #
 	@rm -f gforge*.deb sourceforge*.deb gforge*.changes gforge*.upload gforge*.build gforge*.dsc gforge*[^g].tar.gz gforge*.diff.gz gforge*.asc
 	@echo cleangf Done
 build:			# Build debian gforge packages                               #
-	cd gforge ; debclean; $(dchcmd) ; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(gfversion)
+	cd gforge ; debclean; $(dchcmd) ; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian | cpio -pdumvB ../gforge-$(gfversion)
 	cd gforge-$(gfversion); debuild $(debuildopts); fakeroot debian/rules clean
 	rm -rf gforge-$(gfversion)
 upload:			# Upload gforge packages on where=<server> using dput        #
