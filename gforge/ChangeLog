@@ -1,5 +1,8 @@
 2007-11-23  Roland Mas  <lolando@debian.org>
 
+	* www/project/admin/group_trove.php: Removed undefined variable
+	warning.
+
 	* www/snippet/submit.php: Removed undefined variable warning, and
 	made a few strings translatable.
 

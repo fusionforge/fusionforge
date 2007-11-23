@@ -38,11 +38,10 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 // Check for submission. If so, make changes and redirect
 
 if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
-	// XXX ogi: What's $rm_id?
 	 if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	 }
-	group_add_history ('Changed Trove',$rm_id,$group_id);
+	group_add_history ('Changed Trove',$group_id,$group_id);
 
 	// there is at least a $root1[xxx]
 	$allroots = array();
@@ -111,5 +110,10 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 <?php
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
