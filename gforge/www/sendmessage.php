@@ -106,6 +106,15 @@ if ($toaddress) {
 	$titleaddress = db_result($result,0,'user_name');
 }
 
+if (session_loggedin()) {
+	$user  =& session_get_user();
+	$name  = $user->getRealName();
+	$email = $user->getEmail();
+} else {
+	$name  = '';
+	$email = '';
+}
+
 $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
 ?>
@@ -118,14 +127,14 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
-<strong><?php echo _('Your Email Address') ?>:</strong><br />
-<input type="text" name="email" size="30" maxlength="255" value="" />
-<p />
 <strong><?php echo _('Your Name') ?>:</strong><br />
-<input type="text" name="name" size="30" maxlength="40" value="" />
+<input type="text" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
+<p />
+<strong><?php echo _('Your Email Address') ?>:</strong><br />
+<input type="text" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
 <p />
 <strong><?php echo _('Subject') ?>:</strong><br />
-<input type="text" name="subject" size="30" maxlength="255" value="<?php echo $subject; ?>" />
+<input type="text" name="subject" size="60" maxlength="255" value="" />
 <p />
 <strong><?php echo _('Message') ?>:</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>
