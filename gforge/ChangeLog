@@ -1,5 +1,8 @@
 2007-11-23  Roland Mas  <lolando@debian.org>
 
+	* www/snippet/submit.php: Removed undefined variable warning, and
+	made a few strings translatable.
+
 	* gforge/www/themes/gforge/images/icon.png: New file.
 
 2007-11-21  Roland Mas  <lolando@debian.org>

@@ -43,10 +43,10 @@ if (session_loggedin()) {
 				htmlspecialchars($description)."','$type','$language','$license')";
 			$result=db_query($sql);
 			if (!$result) {
-				$feedback .= _('ERROR DOING SNIPPET INSERT!');
+				$feedback = _('ERROR DOING SNIPPET INSERT!');
 				echo db_error();
 			} else {
-				$feedback .= ' Snippet Added Successfully. ';
+				$feedback = _('Snippet Added Successfully.');
 				$snippet_id=db_insertid($result,'snippet','snippet_id');
 				/*
 					create the snippet version
@@ -57,15 +57,15 @@ if (session_loggedin()) {
 						time()."','".htmlspecialchars($code)."')";
 				$result=db_query($sql);
 				if (!$result) {
-					$feedback .= ' ERROR DOING SNIPPET VERSION INSERT! ';
+					$feedback = _('ERROR DOING SNIPPET VERSION INSERT!');
 					echo db_error();
 				} else {
-					$feedback .= _('Snippet Added Successfully.');
+					$feedback = _('Snippet Added Successfully.');
 				}
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error('Error','Error - Go back and fill in all the information');
+			exit_error(_('Error'),_('Error - Go back and fill in all the information'));
 		}
 
 	}
@@ -136,5 +136,10 @@ if (session_loggedin()) {
 	exit_not_logged_in();
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
