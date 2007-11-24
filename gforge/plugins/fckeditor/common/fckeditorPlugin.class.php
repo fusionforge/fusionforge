@@ -28,8 +28,6 @@
  *
  */
 
-require_once($GLOBALS['sys_plugins_path']."fckeditor/www/fckeditor.php");
-
 class fckeditorPlugin extends Plugin {
 	function fckeditorPlugin () {
 		$this->Plugin() ;
@@ -48,7 +46,16 @@ class fckeditorPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, $params) {
-		global $group_id,$Language, $G_SESSION, $HTML,$sys_default_domain ;
+		global $group_id, $sys_default_domain ;
+
+		if (file_exists ("/usr/share/fckeditor/fckeditor.php")) {
+			$use_system_fckeditor = true ;
+			require_once("/usr/share/fckeditor/fckeditor.php");
+		} else {
+			$use_system_fckeditor = false ;
+			require_once($GLOBALS['sys_plugins_path']."fckeditor/www/fckeditor.php");
+		}
+
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			$group = &group_get_object($group_id);
@@ -89,7 +96,12 @@ class fckeditorPlugin extends Plugin {
 				} else {
 					$oFCKeditor = new FCKeditor('body') ;
 				}
-				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/plugins/' . $this->name . '/';
+				if ($use_system_fckeditor) {
+					$oFCKeditor->BasePath = $http . $sys_default_domain  . '/fckeditor/';
+					$oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/config.js"  ;
+				} else {
+					$oFCKeditor->BasePath = $http . $sys_default_domain  . '/plugins/' . $this->name . '/';
+				}
 				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
 				$oFCKeditor->Width = $params['width'];
 				$oFCKeditor->Height = $params['height'];

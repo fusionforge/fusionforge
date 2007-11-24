@@ -6,5 +6,4 @@
 ##add-project-before-description-hook
 ##fix-lists-url
 use-snoopy-from-distro
-use-fckeditor-from-distro
 unix-sockets-for-database

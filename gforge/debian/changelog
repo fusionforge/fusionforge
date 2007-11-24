@@ -1,8 +1,10 @@
 gforge (4.6.99+svn6225+something-0) unstable; urgency=low
 
-  * Moving target tracking SVN.
+  * Moving target, tracking upstream SVN.
+  * Removed debian/patches/use-fckeditor-from-distro.dpatch, since
+    run-time detection was added upstream.
 
- -- Roland Mas <lolando@debian.org>  Sat, 24 Nov 2007 10:30:45 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 24 Nov 2007 11:36:25 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 

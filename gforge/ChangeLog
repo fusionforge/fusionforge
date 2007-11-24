@@ -1,5 +1,13 @@
 2007-11-24  Roland Mas  <lolando@debian.org>
 
+	* etc/httpd.d/06maindirhttp: Setup alias directive for /fckeditor/
+	in case it's installed system-wide.
+	* etc/httpd.d/07maindirhttp.ssl: Ditto.
+
+	* plugins/fckeditor/common/fckeditorPlugin.class.php: Add run-time
+	detection of an FCKeditor installed system-wide.  Use it when
+	present, otherwise keep using the local copy.
+
 	* www/include/trove.php: Removed undefined index warnings, and
 	made a few strings translatable.
 
