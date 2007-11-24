@@ -1,0 +1,62 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## use-fckeditor-from-distro.dpatch by Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Use the FCKeditor class as provided by the libphp-fckeditor Debian package
+## DP: instead of shipping a local one.
+
+@DPATCH@
+diff -urNad gforge~/etc/httpd.d/06maindirhttp gforge/etc/httpd.d/06maindirhttp
+--- gforge~/etc/httpd.d/06maindirhttp	2007-11-21 17:58:58.000000000 +0100
++++ gforge/etc/httpd.d/06maindirhttp	2007-11-24 00:37:35.000000000 +0100
+@@ -55,5 +55,12 @@
+ 	<IfModule apache_ssl.c>
+ 		SSLDisable
+ 	</IfModule>
++
++        Alias /fckeditor/ /usr/share/fckeditor/
++        <Directory "/usr/share/fckeditor/">
++            Options Indexes MultiViews FollowSymLinks
++            AllowOverride None
++            Order allow,deny
++        </Directory>
+ </VirtualHost>
+ 
+diff -urNad gforge~/etc/httpd.d/07maindirhttp.ssl gforge/etc/httpd.d/07maindirhttp.ssl
+--- gforge~/etc/httpd.d/07maindirhttp.ssl	2007-11-21 17:58:58.000000000 +0100
++++ gforge/etc/httpd.d/07maindirhttp.ssl	2007-11-24 00:37:35.000000000 +0100
+@@ -57,5 +57,12 @@
+ 		SSLEnable
+ 		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+ 	</IfModule>
++
++        Alias /fckeditor/ /usr/share/fckeditor/
++        <Directory "/usr/share/fckeditor/">
++            Options Indexes MultiViews FollowSymLinks
++            AllowOverride None
++            Order allow,deny
++        </Directory>
+ </VirtualHost>
+ 
+diff -urNad gforge~/plugins/fckeditor/common/fckeditorPlugin.class.php gforge/plugins/fckeditor/common/fckeditorPlugin.class.php
+--- gforge~/plugins/fckeditor/common/fckeditorPlugin.class.php	2007-10-24 10:47:33.000000000 +0200
++++ gforge/plugins/fckeditor/common/fckeditorPlugin.class.php	2007-11-24 00:41:15.000000000 +0100
+@@ -28,7 +28,7 @@
+  *
+  */
+ 
+-require_once($GLOBALS['sys_plugins_path']."fckeditor/www/fckeditor.php");
++require_once("/usr/share/fckeditor/fckeditor.php");
+ 
+ class fckeditorPlugin extends Plugin {
+ 	function fckeditorPlugin () {
+@@ -89,7 +89,8 @@
+ 				} else {
+ 					$oFCKeditor = new FCKeditor('body') ;
+ 				}
+-				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/plugins/' . $this->name . '/';
++                                $oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/config.js"  ;				
++				$oFCKeditor->BasePath = $http . $sys_default_domain  . '/fckeditor/';
+ 				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
+ 				$oFCKeditor->Width = $params['width'];
+ 				$oFCKeditor->Height = $params['height'];

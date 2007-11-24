@@ -70,7 +70,7 @@ install: build
 	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/etc/
 	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/*
 	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/debian
-	ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www
+	# ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www
 	chown www-data:www-data $(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins
 	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/sbin/*
 	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/bin/*
@@ -85,9 +85,6 @@ install: build
 	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins-extra/usr/share/doc/gforge-plugins-extra/README.mediawiki
 	# cvstracker plugin
 	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/svntracker/postcommit.example
-	# fckeditor plugin
-	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/fckeditor/www/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.pl
-	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/connectors/php/Commands/helpers/*.cgi
 	# webcalendar plugin
 	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/webcalendar/www/includes/settings.php \
 		$(CURDIR)/debian/gforge-plugins-extra/var/lib/gforge/www/plugins/webcalendar/www/includes
@@ -276,6 +273,12 @@ install: build
 
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done
+
+	# Remove FCKeditor class from binary packages (provided by fckeditor)
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/fckeditor/www/*
+	# ...and add GForge-specific config
+	mkdir -p $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www/plugins/fckeditor/
+	cp deb-specific/fckeditor/config.js $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www/plugins/fckeditor/
 
 	# Remove potential SCM artefacts from binary packages
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr | xargs rm -rf ; done

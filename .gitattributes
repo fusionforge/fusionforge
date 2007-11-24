@@ -32,6 +32,7 @@ gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
 gforge/db/timetracking-init.sql -text
+gforge/deb-specific/fckeditor/config.js -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
 gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text
@@ -60,6 +61,7 @@ gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
 gforge/debian/gforge-web-apache2.prerm.dsfh-in -text
 gforge/debian/gforge-web-apache2.templates.dsfh-in -text
 gforge/debian/patches/unix-sockets-for-database.dpatch -text
+gforge/debian/patches/use-fckeditor-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/cs.po -text
 gforge/debian/po/de.po -text

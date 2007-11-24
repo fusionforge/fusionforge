@@ -39,7 +39,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-plugins-extra
 Architecture: all
-Depends: gforge-common, php5-cli, python, python-subversion, libphp-snoopy
+Depends: gforge-common, php5-cli, python, python-subversion, libphp-snoopy, fckeditor
 Conflicts: sourceforge, gforge-plugin-scmccase
 Description: collaborative development tool - extra plugins
  GForge provides many tools to aid collaboration in a

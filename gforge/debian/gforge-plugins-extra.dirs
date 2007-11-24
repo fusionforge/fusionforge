@@ -4,7 +4,7 @@ usr/share/gforge/etc/templates
 usr/share/gforge/etc/httpd.d
 usr/share/gforge/etc/local.d
 usr/share/gforge/plugins
-usr/share/gforge/www
+usr/share/gforge/www/plugins/fckeditor/www
 usr/share/gforge/www/include
 usr/sbin
 var/lib/gforge/www/plugins
