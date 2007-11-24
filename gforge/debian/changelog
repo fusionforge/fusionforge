@@ -1,13 +1,20 @@
-gforge (4.6.99+svn6215-0+1) unstable; urgency=low
+gforge (4.6.99+svn6219-1+2) unstable; urgency=low
 
-  * New SVN snapshot (r6215).  Includes lots of fixes for PHP warnings,
+  * Re-add a prerm script for the scmsvn plugin, which had somehow been
+    lost.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2007 22:14:17 +0100
+
+gforge (4.6.99+svn6219-1) unstable; urgency=low
+
+  * New SVN snapshot (r6219).  Includes lots of fixes for PHP warnings,
     some internationalisation work, and fixes for IPv6 compatibility.
   * Apache virtual hosts are now available on every IP address, so they'll
     still work on dual-stack (IPv4 and IPv6) boxes.
   * debian/patches/unix-sockets-for-database.dpatch: Use Unix sockets to
     connect to the PostgreSQL server.
 
- -- Roland Mas <lolando@debian.org>  Wed, 21 Nov 2007 19:14:28 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2007 10:25:40 +0100
 
 gforge (4.6.99+svn6169-1) unstable; urgency=high
 

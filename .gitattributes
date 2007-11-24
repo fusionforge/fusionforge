@@ -49,6 +49,7 @@ gforge/debian/gforge-plugin-scmcvs.prerm -text
 gforge/debian/gforge-plugin-scmsvn.cron.d -text
 gforge/debian/gforge-plugin-scmsvn.dirs -text
 gforge/debian/gforge-plugin-scmsvn.postinst -text
+gforge/debian/gforge-plugin-scmsvn.prerm -text
 gforge/debian/gforge-plugins-extra.dirs -text
 gforge/debian/gforge-web-apache2.config.dsfh-in -text
 gforge/debian/gforge-web-apache2.cron.d -text
