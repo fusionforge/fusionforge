@@ -532,8 +532,8 @@ class Group extends Error {
 		if (!$use_pm) {
 			$use_pm=0;
 		}
-		if (!$use_pm_depend) {
-			$use_pm_depend=0;
+		if (!$use_pm_depend_box) {
+			$use_pm_depend_box=0;
 		}
 		if (!$use_scm) {
 			$use_scm=0;
@@ -543,9 +543,6 @@ class Group extends Error {
 		}
 		if (!$use_docman) {
 			$use_docman=0;
-		}
-		if (!$send_all_tasks) {
-			$send_all_tasks=0;
 		}
 		if (!$use_ftp) {
 			$use_ftp=0;
