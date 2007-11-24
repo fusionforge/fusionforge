@@ -57,7 +57,7 @@ $ath->header(array ('title'=>_('Submit')));
 		<td valign="top"><input type="submit" name="submit" value="'. _('Submit').'" /></td>
 	</tr>';
 	
-	$ath->renderExtraFields(true,'none');
+	$ath->renderExtraFields(array(),true,'none');
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>

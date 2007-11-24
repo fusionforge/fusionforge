@@ -122,6 +122,10 @@ class ArtifactTypeHtml extends ArtifactType {
 		$keys=array_keys($efarr);
 		for ($k=0; $k<count($keys); $k++) {
 			$i=$keys[$k];
+
+			if (!isset($selected[$efarr[$i]['extra_field_id']])) 
+				$selected[$efarr[$i]['extra_field_id']] = '';
+
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100,$show_any,$text_any);
 

@@ -606,7 +606,7 @@ class Artifact extends Error {
 	 *
 	 *  @return array of email addresses monitoring this Artifact.
 	 */
-	function &getMonitorIds() {
+	function getMonitorIds() {
 		$res=db_query("SELECT user_id
 			FROM artifact_monitor 
 			WHERE artifact_id='". $this->getID() ."'");
