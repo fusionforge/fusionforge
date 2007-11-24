@@ -76,13 +76,13 @@ if (session_loggedin()) {
 	   			$result=db_query($sql);
 	   			if (!$result) {
 					db_rollback();
-	   				$feedback .= ' '._('ERROR doing insert').' ';
+	   				$feedback = ' '._('ERROR doing insert').' ';
 	   			} else {
 					db_commit();
-	   				$feedback .= ' '._('News Added.').' ';
+	   				$feedback = ' '._('News Added.').' ';
 	   			}
 		} else {
-			$feedback .= ' '._('ERROR - both subject and body are required').' ';
+			$feedback = ' '._('ERROR - both subject and body are required').' ';
 		}
 	}
 

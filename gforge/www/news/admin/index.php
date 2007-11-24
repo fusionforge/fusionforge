@@ -141,8 +141,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['group'] = $group_id;
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don�t have any plugin for text editor, display a simple textarea edit box
+		if (!isset($GLOBALS['editor_was_set_up'])) {
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
