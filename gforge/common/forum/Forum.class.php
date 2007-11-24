@@ -683,7 +683,7 @@ class Forum extends Error {
 				//
 				//  You must have a role in the project if this forum is not public
 				//
-				if ($this->getCurrentUserPerm() >= 0) {
+				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 0) {
 					return true;
 				} else {
 					return false;
