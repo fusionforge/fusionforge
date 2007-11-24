@@ -220,6 +220,7 @@ if ($editdoc && $docid) {
 		//echo '<input type="hidden" name="editor" value="editor">';
 		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
 		/*
+		$params = array () ;
 		$params['name'] = 'data';
 		$params['width'] = "800";
 		$params['height'] = "500";

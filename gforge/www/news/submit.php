@@ -111,17 +111,19 @@ if (session_loggedin()) {
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
-		
-		$params['name'] = 'details';
-		$params['width'] = "600";
-		$params['height'] = "300";
-		$params['group'] = $group_id;
-		plugin_hook("text_editor",$params);
-		if (!isset($GLOBALS['editor_was_set_up'])) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
-		}
-		unset($GLOBALS['editor_was_set_up']);
+	
+	$params = array() ;
+	$params['name'] = 'details';
+	$params['width'] = "600";
+	$params['height'] = "300";
+	$params['body'] = "";
+	$params['group'] = $group_id;
+	plugin_hook("text_editor",$params);
+	if (!isset($GLOBALS['editor_was_set_up'])) {
+		//if we don't have any plugin for text editor, display a simple textarea edit box
+		echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
+	}
+	unset($GLOBALS['editor_was_set_up']);
 	echo '<input type="submit" name="submit" value="'._('Submit').'" />
 		</form></p>';
 

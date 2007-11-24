@@ -133,7 +133,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<strong>'._('Subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').'<br />';
-			
+		
+		$params = array () ;
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";
@@ -278,6 +279,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
 		<strong>'._('Details').':</strong><br />';
 		
+		$params = array () ;
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";

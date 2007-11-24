@@ -53,6 +53,8 @@ function setEditorValue( instanceName, text )
 ';
 echo '</script>';
 echo '<form name="theform">';
+$params = array () ;
+$params['body'] = '';
 $params['name'] = 'data';
 $params['width'] = "800";
 $params['height'] = "500";

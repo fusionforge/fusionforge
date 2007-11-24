@@ -1,5 +1,7 @@
 2007-11-24  Roland Mas  <lolando@debian.org>
 
+	* www/news/submit.php: Removed undefined index warning.
+
 	* etc/httpd.d/06maindirhttp: Setup alias directive for /fckeditor/
 	in case it's installed system-wide.
 	* etc/httpd.d/07maindirhttp.ssl: Ditto.
