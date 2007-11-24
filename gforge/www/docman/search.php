@@ -22,6 +22,9 @@ require_once('include/doc_utils.php');
 require_once('common/docman/DocumentFactory.class.php');
 require_once('common/docman/DocumentGroupFactory.class.php');
 
+$group_id = getIntFromRequest('group_id');
+$language_id = getIntFromRequest('language_id');
+
 if (!$group_id) {
     exit_no_group();
 }
