@@ -244,7 +244,7 @@ echo '
 
 	echo '
 	<tr>
-		<td align="right">'._('Order by').':&nbsp;<a href="javascript:help_window('.$GLOBALS['sys_urlprefix'].'\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
+		<td align="right">'._('Order by').':&nbsp;<a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td>'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
