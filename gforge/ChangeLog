@@ -1,3 +1,11 @@
+2007-11-24  Roland Mas  <lolando@debian.org>
+
+	* www/include/trove.php: Removed undefined index warnings, and
+	made a few strings translatable.
+
+	* common/include/Group.class.php: Removed undefined variable
+	warnings.
+
 2007-11-23  Roland Mas  <lolando@debian.org>
 
 	* www/project/admin/group_trove.php: Removed undefined variable

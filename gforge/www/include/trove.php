@@ -200,7 +200,7 @@ function trove_getallroots() {
  */
 function trove_catselectfull($node,$selected,$name) {
 	print "<br /><select name=\"$name\">";
-	print '  <option value="0">None Selected'."</option>\n";
+	print '  <option value="0">'._('None Selected')."</option>\n";
 	$res_cat = db_query("
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
@@ -249,15 +249,15 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		$need_close_ul_tag = 1;
 	}
 
-	// first unset the vars were using here
-	$proj_discrim_used='';
+	// first initialise the vars we're using here
+	$proj_discrim_used=array();
 	$isfirstdiscrim = 1;
 	while ($row_trovecat = db_fetch_array($res_trovecat)) {
 		$folders = explode(" :: ",$row_trovecat['fullpath']);
 		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
 		$folders_len = count($folders);
 		// if first in discrim print root category
-		if (!$proj_discrim_used[$folders_ids[0]]) {
+		if (!array_key_exists($folders_ids[0], $proj_discrim_used)) {
 			if (!$isfirstdiscrim) {
 				$return .= "</li>\n";
 			}
@@ -273,7 +273,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 			}
 		}
 		// then print the stuff
-		if ($proj_discrim_used[$folders_ids[0]]) {
+		if (array_key_exists($folders_ids[0], $proj_discrim_used)) {
 			$return .= ', ';
 		}
 
@@ -288,7 +288,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 
 		if ($a_filter) {
 			if ($filterisalreadyapplied) {
-				$return .= ' <strong>(Now Filtering)</strong> ';
+				$return .= ' <strong>'._('(Now Filtering)').'</strong> ';
 			} else {
 				$return .= ' <a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='
 					 .$form_cat;
@@ -297,7 +297,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 				} else {
 					$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
 				}
-				$return .= '">[Filter]</a> ';
+				$return .= '">'._('[Filter]').'</a> ';
 			}
 		}
 		$proj_discrim_used[$folders_ids[0]] = 1;
@@ -346,5 +346,10 @@ function trove_getfullpath($node) {
 	}
 	return $return;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
