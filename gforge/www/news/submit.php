@@ -104,7 +104,7 @@ if (session_loggedin()) {
 		'<p>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<strong>'._('For project').': '.$group->getPublicName().'</strong>
+		<strong>'._('For project').' '.$group->getPublicName().'</strong>
 		<input type="hidden" name="post_changes" value="y" /></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />

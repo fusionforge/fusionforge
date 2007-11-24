@@ -39,7 +39,7 @@
 			Show a pop-up box to choose the possible statuses that this element will map to
 			-->
 			<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) { ?>
-			<strong><?php echo _('Status'); ?>:</strong><br />
+			<strong><?php echo _('Status'); ?></strong><br />
 			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
 			<?php } ?>
 

@@ -267,7 +267,7 @@ echo '
 echo'
 <table width="100%" class="tablecontent">
 	<tr>
-		<td>'._('Assignee').':</a><br />'. $tech_box .'</td>
+		<td>'._('Assignee').'</a><br />'. $tech_box .'</td>
 		<td>';
 		if (!$ath->usesCustomStatuses()) {
 			echo _('State').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,_('Any'));
@@ -288,7 +288,7 @@ echo '
 		</td>
 	</tr>
 	<tr>
-		<td>'._('Order by').':<br />
+		<td>'._('Order by').'<br />
 		'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
 		<td>&nbsp;<br />

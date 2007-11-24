@@ -28,7 +28,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Category') ?>:</strong><br />
+		<strong><?php echo _('Category') ?></strong><br />
 		<?php echo $pt->getCategoryName(); ?>
 		</td>
 	</tr>
@@ -99,12 +99,12 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td>
-		<strong><?php echo _('Hours') ?>:</strong><br />
+		<strong><?php echo _('Hours') ?></strong><br />
 		<?php echo $pt->getHours(); ?>
 		</td>
 
 		<td>
-		<strong><?php echo _('Status') ?>:</strong><br />
+		<strong><?php echo _('Status') ?></strong><br />
 		<?php
 		echo $pt->getStatusName();
 		?>

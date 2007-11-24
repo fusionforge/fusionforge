@@ -106,7 +106,7 @@ if (session_loggedin()) {
 		<!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a> -->
 	</td>
 
-	<td><strong><?php echo _('Category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Category'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
                 <!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a> -->

@@ -235,8 +235,8 @@ if (session_loggedin()) {
 echo '
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
 	<input type="hidden" name="set" value="custom" />
-	<td>'._('Assignee').':&nbsp;<br />'. $tech_box .'</td>'.
-	'<td>'._('State').':&nbsp;<br />'. $status_box .'</td>';
+	<td>'._('Assignee').'<br />'. $tech_box .'</td>'.
+	'<td>'._('Status').'<br />'. $status_box .'</td>';
 	echo '
 </tr>
 
@@ -244,7 +244,7 @@ echo '
 
 	echo '
 	<tr>
-		<td align="right">'._('Order by').':&nbsp;<a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
+		<td align="right">'._('Order by').' <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td>'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .

@@ -71,27 +71,27 @@ if ($group_id && $job_id) {
 		</td></tr>
 
 		<tr><td>
-			<strong>'._('Contact Info').':<br />
+			<strong>'._('Contact Info').'<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
 		</td><td>
-			<strong>'._('Status').':</strong><br />
+			<strong>'._('Status').'</strong><br />
 			'. db_result($result,0,'status_name') .'
 		</td></tr>
 
 		<tr><td>
-			<strong>'._('Open Date').':</strong><br />
+			<strong>'._('Open Date').'</strong><br />
 			'. date(_('Y-m-d H:i'),db_result($result,0,'post_date')) .'
 		</td><td>
-			<strong>'._('For project').':<br />
+			<strong>'._('For project').'<br />
 			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
 		</td></tr>
 
 		<tr><td colspan="2">
-			<strong>'._('Long Description').':</strong><p>
+			<strong>'._('Long Description').'</strong><p>
 			'. nl2br(db_result($result,0,'description')) .'</p>
 		</td></tr>
 		<tr><td colspan="2">
-		<h2>'._('Required Skills').':</h2>';
+		<h2>'._('Required Skills').'</h2>';
 
 		//now show the list of desired skills
 		echo people_show_job_inventory($job_id).'</td></tr></table>';

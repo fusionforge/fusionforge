@@ -248,7 +248,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Status') ?>:</strong></td>
+	<td><strong><?php echo _('Status') ?></strong></td>
 	<td>
 		<?php
 			echo frs_show_status_popup('status_id',$frsr->getStatus());

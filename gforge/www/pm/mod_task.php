@@ -40,7 +40,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 
 	<tr>
 		<td>
-			<strong><?php echo _('Category') ?>:</strong><br />
+			<strong><?php echo _('Category') ?></strong><br />
 			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
@@ -140,7 +140,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 		</td>
 
 		<td>
-		<strong><?php echo _('Status') ?>:</strong><br />
+		<strong><?php echo _('Status') ?></strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
@@ -157,7 +157,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 		</td>
 
 		<td>
-		<strong><?php echo _('Status') ?>:</strong><br />
+		<strong><?php echo _('Status') ?></strong><br />
 		<?php
 //		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>

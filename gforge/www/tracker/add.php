@@ -53,7 +53,7 @@ $ath->header(array ('title'=>_('Submit')));
 		</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>'._('For project').':</strong><br />'.$group->getPublicName().'</td>
+		<td valign="top"><strong>'._('For project').'</strong><br />'.$group->getPublicName().'</td>
 		<td valign="top"><input type="submit" name="submit" value="'. _('Submit').'" /></td>
 	</tr>';
 	

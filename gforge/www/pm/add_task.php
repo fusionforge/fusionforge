@@ -33,7 +33,7 @@ echo notepad_func();
 
 	<tr>
 		<td>
-		<strong><?php echo _('Category') ?>:</strong><br />
+		<strong><?php echo _('Category') ?></strong><br />
 		<?php echo $pg->categoryBox('category_id'); ?> <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(<?php echo _('admin') ?>)</a>
 		</td>
 

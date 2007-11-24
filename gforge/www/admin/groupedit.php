@@ -105,7 +105,7 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <table>
 <tr>
 <td>
-<?php echo _('Status') ?>:
+<?php echo _('Status') ?>
 </td>
 <td>
 <?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES

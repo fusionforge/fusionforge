@@ -157,12 +157,12 @@ if (!$_status) {
 echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
 	<table width="10%" border="0" class="tableheading">
 	<tr>
-		<td>'._('Assignee').':<br />'. $tech_box .'</td>
-		<td>'._('Status').':<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
-		<td>'._('Category').':<br />'. $cat_box .'</td>
-		<td>'._('Sort On').':<br />'. $order_box .'</td>
-		<td>'._('Resolution').':<br />'. $dispres_box .'</td>
-		<td>'._('Size').':<br />'. $size_box .'</td>
+		<td>'._('Assignee').'<br />'. $tech_box .'</td>
+		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td>'._('Category').'<br />'. $cat_box .'</td>
+		<td>'._('Sort On').'<br />'. $order_box .'</td>
+		<td>'._('Resolution').'<br />'. $dispres_box .'</td>
+		<td>'._('Size').'<br />'. $size_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form>';
 

@@ -126,13 +126,13 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 
-		<strong>'._('Status').':</strong><br />
+		<strong>'._('Status').'</strong><br />
 		<input type="radio" name="status" value="0" checked="checked" /> '._('Displayed').'<br />
 		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
 
-		<strong>'._('Subject').':</strong><br />
+		<strong>'._('Subject').'</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
-		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').'<br />';
+		<strong>'._('Details').'</strong>'.notepad_button('document.forms[1].details').'<br />';
 		
 		$params = array () ;
 		$params['name'] = 'details';

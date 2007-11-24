@@ -168,10 +168,10 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		<p /><form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
-		<strong>'._('Category').':</strong><br />
+		<strong>'._('Category').'</strong><br />
 		'. people_job_category_box('category_id',db_result($result,0,'category_id')) .'
 		<p>
-		<strong>'._('Status').':</strong><br />
+		<strong>'._('Status').'</strong><br />
 		'. people_job_status_box('status_id',db_result($result,0,'status_id')) .'</p>
 		<p>
 		<strong>'._('Short Description').':</strong><br />

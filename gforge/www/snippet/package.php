@@ -141,7 +141,7 @@ function show_add_snippet_box() {
 		<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a>-->
 	</td>
 
-	<td><strong><?php echo _('Category') ?>:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo _('Category') ?></strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
 		<!-- <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a>-->
