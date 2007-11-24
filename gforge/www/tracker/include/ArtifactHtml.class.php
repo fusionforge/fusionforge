@@ -40,7 +40,7 @@ class ArtifactHtml extends Artifact {
 		$title_arr[] = _('Detailed description');
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>'. util_line_wrap ( $result, 120,"\n"). '</pre></td></tr>';
+		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle(0) .'><td><pre>'. util_line_wrap ( $result, 120,"\n"). '</pre></td></tr>';
 
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
