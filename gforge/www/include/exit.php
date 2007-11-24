@@ -15,9 +15,9 @@
  * @param		string	Error title
  * @param		string	Error text
  */
-function exit_error($title,$text="") {
+function exit_error($title,$text="", $toptab='') {
 	global $HTML,$group_id, $Language;
-	$HTML->header(array('title'=>_('Exiting with error'),'group'=>$group_id));
+	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	print '<span class="error">'.$title.'</span><p>'.htmlspecialchars($text) .'</p>';
 	$HTML->footer(array());
 	exit;

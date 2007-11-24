@@ -50,7 +50,7 @@ $group_id = getIntFromRequest("group_id");
 $sql = "SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id='$user_id' and fg.group_forum_id=mon.forum_id";
 $result = db_query($sql);
 if (!$result || db_numrows($result) < 1) {
-	exit_error(_('You have no monitored forums'),_('You are not monitoring any forums.').' '.db_error());
+	exit_error(_('You have no monitored forums'),_('You are not monitoring any forums.').' '.db_error(), 'forums');
 }
 
 //now, i need to create a forum object per each forum that the user is monitoring
