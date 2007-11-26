@@ -32,7 +32,7 @@ require_once('common/include/User.class.php');
 $expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 
 if (!$expl_pathinfo[2]) {
-	exit_error($Language->getText('general','error'),$Language->getText('users','no_user_name'));
+	exit_error(_('Error'),_('No User Name Provided'));
 }
 
 //get the user object based on the user_name in the URL
@@ -40,7 +40,7 @@ $user =& user_get_object_by_name($expl_pathinfo[2]);
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-	exit_error($Language->getText('users','user_not_exist_title'),$Language->getText('users','user_not_exist_text'));
+	exit_error(_('That user does not exist.'),_('Invalid User'));
 
 } else {
 
@@ -50,5 +50,10 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	include ('user_home.php');
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

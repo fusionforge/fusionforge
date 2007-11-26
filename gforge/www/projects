@@ -63,4 +63,9 @@ if (!$group_id || !$project) {
 	}
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
