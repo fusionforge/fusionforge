@@ -6,7 +6,7 @@ locales="eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh
 
 rm translations/gforge.pot
 
-find -name \*.php \
+find -type f -\( -name \*.php -or -name users -or -name projects -\) \
     | grep -v -e {arch} -e svn-base \
     | grep -v ^./plugins/wiki \
     | LANG=C sort \
