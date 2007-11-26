@@ -19,7 +19,6 @@
  * @param		string	The bar colors
  */
 function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
-	global $Language;
 	$result1=db_query($sql1);
 	$result2=db_query($sql2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
@@ -73,7 +72,6 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	global $what;
 	global $period;
 	global $span;
-	global $Language;
 
 	print '<form method="get" action="'.getStringFromServer('PHP_SELF').'#b">';
 
@@ -104,5 +102,10 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	print ' <input type="submit" value="'._('Show').'" />';
 	print "</form>\n";
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

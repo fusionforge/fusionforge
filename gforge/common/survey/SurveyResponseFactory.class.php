@@ -71,7 +71,6 @@ class SurveyResponseFactory extends Error {
          *      @param  int     The survey_id
 	 */
 	function SurveyResponseFactory(&$Survey, &$Question ) { 
-		global $Language;
 		$this->Error();
 
 		if (!$Survey || !is_object($Survey)) {
@@ -132,8 +131,6 @@ class SurveyResponseFactory extends Error {
  	 *	@return	array	The array of Survey Response objects.
 	 */
 	function &getSurveyResponses() {
-		global $Language;
-	
 		/* We alread have it */
 		if ($this->Responses) {
 			return $this->Responses;

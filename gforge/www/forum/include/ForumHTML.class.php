@@ -25,7 +25,7 @@ require_once('www/forum/admin/ForumAdmin.class.php');
 require_once('www/forum/include/AttachManager.class.php');
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -174,7 +174,7 @@ class ForumHTML extends Error {
 	 * @return 	returns the html output
 	 */
 	function showPendingMessage ( &$msg) {
-		global $Language,$HTML,$group_id;
+		global $HTML,$group_id;
 
 		$am = new AttachManager();
 		$ret_val = $am->PrintHelperFunctions();
@@ -212,7 +212,7 @@ class ForumHTML extends Error {
 		in the format appropriate for the nested messages
 
 		*/
-		global $Language,$HTML,$group_id;
+		global $HTML,$group_id;
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -273,7 +273,6 @@ class ForumHTML extends Error {
 	 */
 
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
-		global $Language;
 		$return_val = '
 			
 			<p>
@@ -315,8 +314,6 @@ class ForumHTML extends Error {
 	 */
 
 	function LinkAttachForm() {
-		global $Language;
-
 		$poststarttime = time();
 		$posthash = md5($poststarttime . user_getid() );
 		echo "
@@ -450,7 +447,7 @@ class ForumHTML extends Error {
 	 */
 
 	function showEditForm(&$msg) {
-		global $Language,$sys_default_domain;
+		global $sys_default_domain;
 
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();
@@ -535,7 +532,7 @@ class ForumHTML extends Error {
 }
 
 function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-	global $Language,$sys_default_domain,$group_id;
+	global $sys_default_domain,$group_id;
 
 	$body = '';
 	

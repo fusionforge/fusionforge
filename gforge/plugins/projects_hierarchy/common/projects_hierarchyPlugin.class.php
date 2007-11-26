@@ -41,7 +41,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $use_projects_hierarchyplugin,$G_SESSION,$HTML,$Language;
+		global $use_projects_hierarchyplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("projects_hierarchy")) {
@@ -103,7 +103,6 @@ class projects_hierarchyPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			global $Language;
 			// this displays the link in the user´s profile page to it´s personal projects_hierarchy (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
@@ -114,7 +113,6 @@ class projects_hierarchyPlugin extends Plugin {
 					<a href="/plugins/projects_hierarchy/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal projects_hierarchy') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			global $Language;
 			// this displays the link in the project admin options page to it´s  projects_hierarchy administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);

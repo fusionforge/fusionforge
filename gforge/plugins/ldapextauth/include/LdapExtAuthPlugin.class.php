@@ -51,7 +51,7 @@ class LdapextauthPlugin extends Plugin {
 	}
 	
 	function CallHook ($hookname, $params) {
-		global $Language, $HTML ;
+		global $HTML ;
 		
 		$loginname = $params['loginname'] ;
 		$passwd = $params['passwd'] ;
@@ -70,7 +70,7 @@ class LdapextauthPlugin extends Plugin {
 	}
 
 	function AuthUser ($loginname, $passwd) {
-		global $feedback,$Language;
+		global $feedback;
 	
 		if (!$this->ldap_conn) {
 			$this->ldap_conn = ldap_connect ($this->ldap_server,

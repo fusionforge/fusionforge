@@ -685,7 +685,6 @@ class ProjectTask extends Error {
 		//for msproject users - ms project has more complex logic than gforge
 		return true;
 
-		global $Language;
 		if ($depend_on_id == $original_id) {
 			$this->setError(_('Circular Dependency Detected\''));
 	 		return false;
@@ -1126,5 +1125,10 @@ class ProjectTask extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

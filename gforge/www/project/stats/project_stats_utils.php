@@ -48,7 +48,6 @@ function week_to_dates( $week, $year = 0 ) {
    // stats_project_daily
 function stats_project_daily( $group_id, $span = 7 ) {
 	global $HTML;
-	global $Language;
 
 	//
 	//	We now only have 30 & 7-day views
@@ -120,7 +119,6 @@ function stats_project_daily( $group_id, $span = 7 ) {
    // stats_project_monthly
 function stats_project_monthly( $group_id ) {
 	global $HTML;
-	global $Language;
 	$res = db_query("
 		SELECT * FROM stats_project_months 
 		WHERE group_id='$group_id'
@@ -178,7 +176,6 @@ function stats_project_monthly( $group_id ) {
 
 function stats_project_all( $group_id ) {
 	global $HTML;
-	global $Language;
 	$res = db_query("
 		SELECT *
 		FROM stats_project_all_vw
@@ -250,5 +247,10 @@ function period2sql($period_name,$span,$field_name) {
 
 	return "AND $field_name>=" . (string)($time_now-$seconds) ." \n";
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

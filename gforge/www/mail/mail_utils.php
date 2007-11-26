@@ -11,7 +11,7 @@
 
 
 function mail_header($params) {
-	global $Language, $HTML, $group_id;
+	global $HTML, $group_id;
 
 	if ($group_id) {
 		//required for site_project_header
@@ -49,5 +49,10 @@ function mail_header($params) {
 function mail_footer($params) {
 	site_project_footer($params);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

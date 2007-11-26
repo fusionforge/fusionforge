@@ -14,7 +14,7 @@ require_once('pre.php');
 
 // the header that displays for the user portion of the plugin
 function projects_hierarchy_Project_Header($params) {                                                                                                                                         
-	global $DOCUMENT_ROOT,$HTML,$id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$id;                                                                            
 	$params['toptab']='projects_hierarchy'; 
 	$params['group']=$id;
 	
@@ -26,7 +26,7 @@ function projects_hierarchy_Project_Header($params) {
 
 // the header that displays for the project portion of the plugin
 function projects_hierarchy_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$user_id;                                                                            
 	$params['toptab']='projects_hierarchy'; 
 	$params['user']=$user_id;
 
@@ -106,5 +106,10 @@ function projects_hierarchy_User_Header($params) {
 	}	 
 	
 	site_project_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

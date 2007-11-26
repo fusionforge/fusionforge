@@ -29,7 +29,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function header($params) {
-		global $HTML, $Language, $sys_use_tracker;
+		global $HTML, $sys_use_tracker;
 		if (!$sys_use_tracker) {
 			exit_disabled();
 		}
@@ -78,7 +78,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function adminHeader($params) {
-		global $Language,$HTML;
+		global $HTML;
 		echo $this->header($params);
 		$group_id= $this->Group->getID();
 
@@ -276,7 +276,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		box and choices	
 	 */	
 	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
-		global $Language;
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -316,7 +315,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		radio buttons
 	 */	
 	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
-		global $Language;
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -347,7 +345,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		radio multiselectbox
 	 */	
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
-		global $Language;
 		$arr =& $this->getExtraFieldElements($extra_field_id);
 		if (!$checked) {
 			$checked=array();
@@ -390,7 +387,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
-		global $Language;
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
@@ -424,7 +420,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	
 	 */
 	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='none') {
-		global $Language;
 		if ($text_100=='none'){
 			$text_100=_('None');
 		}
@@ -432,5 +427,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

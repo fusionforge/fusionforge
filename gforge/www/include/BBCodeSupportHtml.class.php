@@ -12,8 +12,6 @@ class BBCodeSupportHtml extends BBCodeSupport {
 	
 	
 	function prepareJavascript($form_name, $text_field_name){
-		global $Language;
-		
 		$javascript_ready = 1;
 		?>
 				
@@ -212,8 +210,6 @@ class BBCodeSupportHtml extends BBCodeSupport {
 	}
 	
 	function displayBBCodeHelpTools(){
-		global $Language;
-		
 		?>
 		
 		<table width="450" border="0" cellspacing="0" cellpadding="2">
@@ -306,4 +302,10 @@ class BBCodeSupportHtml extends BBCodeSupport {
 
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

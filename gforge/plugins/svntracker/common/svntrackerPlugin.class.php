@@ -49,8 +49,6 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getCommitEntries($Query,$group_id) {
-		global $Language;
-
 		$group = &group_get_object($group_id);
 		$DBResult = db_query($Query);
 		$Rows= db_numrows($DBResult);
@@ -92,7 +90,6 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getTitleArr() {
-		global $Language;
 		$title_arr=array();
 		$title_arr[]=_('Filename');
 		$title_arr[]=_('Date');
@@ -148,7 +145,7 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		global $sys_default_domain,$Language;
+		global $sys_default_domain;
 		return '<a href="/plugins/scmsvn/viewcvs.php/'.
 			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'">'.
@@ -232,7 +229,7 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, $params) {
-		global $group_id,$Language, $G_SESSION, $HTML, $use_svntrackerplugin,$aid ;
+		global $group_id, $G_SESSION, $HTML, $use_svntrackerplugin,$aid ;
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			$group = &group_get_object($group_id);

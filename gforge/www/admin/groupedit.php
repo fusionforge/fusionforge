@@ -43,7 +43,6 @@ if (!$group || !is_object($group)) {
 function do_update(&$group, $is_public, $status, $license,
 		   $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
-	global $Language;
 
 	db_begin();
 
@@ -239,5 +238,10 @@ if ($group->usesSCM()) {
 echo show_grouphistory($group->getID());
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -201,7 +201,6 @@ class ArtifactType extends Error {
 	function create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
 
-		global $Language;
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
@@ -543,7 +542,6 @@ class ArtifactType extends Error {
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
-		global $Language;
 		if (session_loggedin()) {
 
 			$user_id=user_getid();
@@ -1045,8 +1043,6 @@ class ArtifactType extends Error {
 	 */
 	function update($name,$description,$email_all,$email_address,
 		$due_period, $status_timeout,$use_resolution,$submit_instructions,$browse_instructions) {
-
-		global $Language;
 
 		if (!$this->userIsAdmin()) {
 			$this->setPermissionDeniedError();

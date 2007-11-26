@@ -78,8 +78,6 @@ class TimeEntry extends Error {
      */
     function create($projectTaskId, $week, $daysAdjust, $timeCode, $hours)
     {
-	global $Language;
-
         $report_date=($week + ($days_adjust*REPORT_DAY_SPAN))+(12*60*60);
         $res=db_query("INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)
                        VALUES ('".user_getid()."','$week','$report_date','$projectTaskId','$timeCode','$hours')");
@@ -157,5 +155,10 @@ class TimeEntry extends Error {
     {
     }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

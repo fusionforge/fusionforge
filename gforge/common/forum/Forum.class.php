@@ -74,7 +74,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function Forum(&$Group, $group_forum_id=false, $arr=false) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Forum"));
@@ -128,7 +127,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1,$moderation_level=0) {
-		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;
@@ -211,7 +209,7 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
-		global $Language, $sys_database_type;
+		global $sys_database_type;
 
 		if ($sys_database_type == "mysql") {
 			$sql="
@@ -457,7 +455,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function setMonitor() {
-		global $Language;
 		if (!session_loggedin()) {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
@@ -491,7 +488,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function stopMonitor() {
-		global $Language;
 		if (!session_loggedin()) {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
@@ -522,7 +518,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function savePlace() {
-		global $Language;
 		if (!session_loggedin()) {
 			$this->setError(_('You Can Only Save Your Place If You Are Logged In'));
 			return false;
@@ -573,7 +568,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to='',$moderation_level=0) {
-		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
 			return false;

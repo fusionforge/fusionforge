@@ -108,7 +108,7 @@ class BBCodeSupport extends Error {
 	 */
 	function displayText($text, $bbcode_uid)
 	{
-		global $Language, $HTML;		
+		global $HTML;		
 		
 		// First: If there isn't a "[" and a "]" in the message, don't bother.
 		if (!(strpos($text, "[") && strpos($text, "]"))){
@@ -628,5 +628,10 @@ function replace_list_items($text, $bbcode_uid)
 
 	return $text;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

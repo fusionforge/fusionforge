@@ -125,7 +125,6 @@ class MantisPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			global $Language;
 			// this displays the link in the user´s profile page to it´s personal Mantis (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
@@ -136,7 +135,6 @@ class MantisPlugin extends Plugin {
 					<a href="'.$GLOBALS['sys_urlprefix'].'/plugins/mantis/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Mantis') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			global $Language;
 			// this displays the link in the project admin options page to it´s  Mantis administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);

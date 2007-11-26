@@ -100,8 +100,6 @@ class ArtifactExtraField extends Error {
 	 *  @return 	true on success / false on failure.
 	 */
 	function create($name,$field_type,$attribute1,$attribute2,$is_required=0,$alias='') {
-		global $Language;
-
 		//
 		//	data validation
 		//
@@ -289,7 +287,6 @@ class ArtifactExtraField extends Error {
 	 *	@return	array	types.
 	 */
 	function getAvailableTypes() {
-		global $Language;
 		return array(
 			1=>_('Select Box'),
 			2=>_('Check Box'),
@@ -340,8 +337,6 @@ class ArtifactExtraField extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$attribute1,$attribute2,$is_required=0,$alias="") {
-		global $Language;
-
 		if (!$this->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -440,8 +435,6 @@ class ArtifactExtraField extends Error {
 	 *	@return	bool	true if alias is valid, false otherwise and it sets the corresponding error
 	 */
 	function validateAlias($alias) {
-		global $Language;
-
 		// these are reserved alias names
 		static $reserved_alias = array(
 			"project",
@@ -516,5 +509,10 @@ class ArtifactExtraField extends Error {
 		return $alias;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

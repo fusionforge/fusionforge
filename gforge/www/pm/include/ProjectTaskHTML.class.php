@@ -41,7 +41,6 @@ class ProjectTaskHTML extends ProjectTask {
 
 
 	function showDependentTasks () {
-		global $Language;
 		$sql="SELECT project_task.project_task_id,project_task.summary 
 			FROM project_task,project_dependencies 
 			WHERE project_task.project_task_id=project_dependencies.project_task_id 
@@ -81,7 +80,6 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function showRelatedArtifacts() {
-		global $Language;
 		$res=$this->getRelatedArtifacts();
 
 		$rows=db_numrows($res);
@@ -127,8 +125,6 @@ class ProjectTaskHTML extends ProjectTask {
 		/*
 			Show the details rows from task_history
 		*/
-		global $Language;
-	
 		$result=$this->getMessages();
 		$rows=db_numrows($result);
 
@@ -166,8 +162,6 @@ class ProjectTaskHTML extends ProjectTask {
 			show the project_history rows that are 
 			relevant to this project_task_id, excluding details
 		*/
-		global $Language;
-
 		$result=$this->getHistory();
 		$rows=db_numrows($result);
 
@@ -226,5 +220,10 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

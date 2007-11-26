@@ -117,8 +117,6 @@ class Document extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($filename,$filetype,$data,$doc_group,$title,$language_id,$description) {
-
-		global $Language;
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -201,7 +199,6 @@ class Document extends Error {
 	 *	@return	boolean	success
 	 */
 	function fetchData($docid) {
-		global $Language;
 		$res=db_query("SELECT * FROM docdata_vw
 			WHERE docid='$docid'
 			AND group_id='". $this->Group->getID() ."'");
@@ -455,7 +452,6 @@ class Document extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
-		global $Language;
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -537,5 +533,10 @@ class Document extends Error {
 		return true;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

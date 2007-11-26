@@ -54,7 +54,6 @@ class SurveyResponse extends Error {
 	 *  @return boolean	success.
 	 */
 	function SurveyResponse(&$Group, $arr=false) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
@@ -86,7 +85,6 @@ class SurveyResponse extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($user_id, $survey_id, $question_id, $response) {
-		global $Language;
 		$group_id = $this->Group->GetID();
 		$now = time();
  

@@ -41,7 +41,7 @@ site_admin_header(array('title'=>_('Site admin')));
  * @param string	the path to the plugins conf dir
  */
 function printSelection($checked,$pluginpath) {
-	global $Language,$feedback,$sys_etc_path;
+	global $feedback,$sys_etc_path;
 	
 	$config_files = array(); // array that'll have the config files
 	$i = 0;
@@ -127,7 +127,7 @@ function getVars($filedata) {
  * @param unknown_type $filepath
  */
 function updateVars($vars,$filepath) {
-	global $Language,$feedback;
+	global $feedback;
 	
 	$filedata = file_get_contents($filepath);
 	$lines = explode("\n",$filedata);

@@ -42,7 +42,6 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 function check_file_size($size) {
 	global $feedback;
-	global $Language;
 
 	if (($size > 20) && ($size < 256000)) {
 		return true;
@@ -57,7 +56,6 @@ function store_file($id, $input_file) {
 	global $group_id;
 	global $description;
 	global $feedback;
-	global $Language;
 
 	if (!util_check_fileupload($input_file)) {
 		exit_error("Error","Invalid filename");
@@ -308,5 +306,10 @@ for ($i=0; $i<$rows; $i++) {
 echo $GLOBALS['HTML']->listTableBottom();
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

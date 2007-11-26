@@ -84,8 +84,6 @@ class ArtifactHistory extends Error {
 	 *  @return id on success / false on failure.
 	 * /
 	function create($name, $auto_assign_to) {
-		global $Language;
-		
 		//
 		//	data validation
 		//
@@ -170,5 +168,10 @@ class ArtifactHistory extends Error {
 	}
 	*/
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

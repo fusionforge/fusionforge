@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class FrsGroupSearchEngine extends GroupSearchEngine {
 	
 	function FrsGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', _('This project\'s releases'));
 	}
 	
@@ -27,5 +26,10 @@ class FrsGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -22,7 +22,7 @@ class SmilieSupportHtml extends SmilieSupport {
 	//
 	function displaySmiliesList($number_of_smilies_per_row=5)
 	{
-		global $SMILIES, $Language, $sys_default_domain;
+		global $SMILIES, $sys_default_domain;
 		
 		$num_smilies = count($SMILIES);
 		
@@ -94,5 +94,10 @@ class SmilieSupportHtml extends SmilieSupport {
 
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

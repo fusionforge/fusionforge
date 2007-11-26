@@ -26,7 +26,7 @@
  */
 
 function report_header($title) {
-	global $HTML,$sys_name,$Language;
+	global $HTML,$sys_name;
 	echo $HTML->header(array('title'=>" "._('Reporting').": " . $title));
 	if (isset($GLOBALS['feedback'])) {
 		echo html_feedback_top($GLOBALS['feedback']);
@@ -43,7 +43,6 @@ function report_footer() {
 }
 
 function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
-	global $Language;
 	if ($suppress_daily) {
 		$vals=array(2,3);
 		$titles=array(_('Weekly'),
@@ -58,7 +57,6 @@ function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
 }
 
 function report_weeks_box($Report, $name='week', $selected=false) {
-	global $Language;
 	$arr =& $Report->getWeekStartArr();
 
 	$arr2=array();
@@ -70,7 +68,6 @@ function report_weeks_box($Report, $name='week', $selected=false) {
 }
 
 function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
-	global $Language;
 	$days[]='0.0';
 	$days[]='1';
 	$days[]='2';
@@ -91,7 +88,6 @@ function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
 }
 
 function report_months_box($Report, $name='month', $selected=false) {
-	global $Language;
 	$arr =& $Report->getMonthStartArr();
 
 	$arr2=array();
@@ -145,7 +141,6 @@ function report_group_box($name='g_id', $selected='1') {
 }
 
 function report_area_box($name='area', $selected='1') {
-	global $Language;
 	$arr[]='tracker';
 	$arr[]='forum';
 	$arr[]='docman';
@@ -161,7 +156,6 @@ function report_area_box($name='area', $selected='1') {
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
-	global $Language;
 	$arr[]=_('Bugs');
 	$arr[]=_('Support');
 	$arr[]=_('Patches');
@@ -215,5 +209,10 @@ function report_pie_arr($labels, $vals) {
 	}
 	
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

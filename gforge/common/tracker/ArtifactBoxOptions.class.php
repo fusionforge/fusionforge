@@ -85,7 +85,6 @@ class ArtifactBoxOptions extends Error {
 	 */
 	
 	function create($name,$id) {
-		global $Language;
 //settype($id,"integer");	
 		//
 		//	data validation
@@ -207,5 +206,10 @@ class ArtifactBoxOptions extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

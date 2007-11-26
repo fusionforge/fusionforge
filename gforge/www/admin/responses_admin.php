@@ -35,7 +35,6 @@ require_once('www/project/admin/project_admin_utils.php');
 site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
 
 function check_select_value($value, $type) {
-	global $Language;
 	if( $value == "100" ) {
 		print("<span class=\"important\">".sprintf(_('You can\'t %1$s \"None\"!'), $GLOBALS['type'])."</span><br />\n");
 	}
@@ -132,5 +131,10 @@ if( $action == "Edit" ) {
 }
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

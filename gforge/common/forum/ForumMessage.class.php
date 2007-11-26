@@ -65,7 +65,6 @@ class ForumMessage extends Error {
 	 *	@return	boolean	success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
-		global $Language;
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('ForumMessage:: No Valid Forum Object'));
@@ -175,8 +174,6 @@ class ForumMessage extends Error {
 	*/
 	
 	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
-		global $Language;
-		
 		if ($is_followup_to != 0) {
 			
 			//was posted in reply to another thread
@@ -255,8 +252,6 @@ class ForumMessage extends Error {
 	*/
 	
 	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false) {
-		global $Language;
-		
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
@@ -336,7 +331,6 @@ class ForumMessage extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false) {
-		global $Language;
 		if (!$body || !$subject) {
 			$this->setError(_('Must Include A Message Body And Subject'));
 			return false;
@@ -418,7 +412,6 @@ class ForumMessage extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchData($msg_id) {
-		global $Language;
 		$res=db_query("SELECT * FROM forum_user_vw
 			WHERE msg_id='$msg_id'
 			AND group_forum_id='". $this->Forum->getID() ."'");
@@ -438,7 +431,6 @@ class ForumMessage extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchModeratedData($msg_id) {
-		global $Language;
 		$res=db_query("SELECT * FROM forum_pending_user_vw
 			WHERE msg_id='$msg_id'
 			AND group_forum_id='". $this->Forum->getID() ."'");
@@ -592,7 +584,6 @@ class ForumMessage extends Error {
 	 *	@return	int	The count of deleted messages.
 	 */
 	function delete() {
-		global $Language;
 		$msg_id=$this->getID();
 		if (!$msg_id) {
 			$this->setError(_('Invalid Message ID'));
@@ -653,7 +644,6 @@ class ForumMessage extends Error {
 	 *	@return boolean success.
 	 */
 	function sendNotice($has_attach=false) {
-		global $Language;
 		$ids =& $this->Forum->getMonitoringIDs();
 
 		//
@@ -726,8 +716,6 @@ class ForumMessage extends Error {
 	 *	@return boolean success.
 	 */
 	function sendNewModeratedMsgNotice() {
-		global $Language;
-
 		$ids =& $this->Forum->getForumAdminIDs();
 		
 		//
@@ -827,8 +815,6 @@ class ForumMessage extends Error {
 	 *	@return boolean success.
 	 */
 	function sendAttachNotice($attach_id) {
-		global $Language;
-		
 		if ($attach_id) {
 			$ids =& $this->Forum->getMonitoringIDs();
 
@@ -880,5 +866,10 @@ class ForumMessage extends Error {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

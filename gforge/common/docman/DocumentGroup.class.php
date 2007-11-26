@@ -99,7 +99,6 @@ class DocumentGroup extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($name,$parent_doc_group=0) {
-		global $Language;
 		//
 		//	data validation
 		//
@@ -153,7 +152,6 @@ class DocumentGroup extends Error {
 	 *	@return boolean.
 	 */
 	function fetchData($id) {
-		global $Language;
 		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
@@ -207,8 +205,6 @@ class DocumentGroup extends Error {
 	 *  @return boolean.
 	 */
 	function update($name,$parent_doc_group) {
-		global $Language;
-
 		$perm =& $this->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -318,5 +314,10 @@ class DocumentGroup extends Error {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

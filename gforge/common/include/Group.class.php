@@ -284,8 +284,6 @@ class Group extends Error {
 	 *  @param	string	The purpose of the group.
 	 */
 	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1') {
-		global $Language;
-
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
@@ -416,8 +414,6 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function updateAdmin(&$user, $is_public, $license, $type_id, $unix_box, $http_domain) {
-		global $Language;
-
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
@@ -490,7 +486,6 @@ class Group extends Error {
 		$new_doc_address,$send_all_docs,$logo_image_id,
 		$enable_pserver,$enable_anonscm,
 		$use_ftp,$use_tracker,$use_frs,$use_stats) {
-		global $Language;
 
 		$perm =& $this->getPermission($user);
 
@@ -664,7 +659,7 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function setStatus(&$user, $status) {
-		global $Language,$SYS;
+		global $SYS;
 
 		$perm =& $this->getPermission($user);
 		if (!$perm || !is_object($perm)) {
@@ -851,8 +846,6 @@ class Group extends Error {
 	 * @param	string The name of the new SCM_BOX
 	 */
 	function setSCMBox($scm_box) {
-		global $Language;
-
 		if ($scm_box) {
 			db_begin();
 			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
@@ -1282,8 +1275,6 @@ class Group extends Error {
 	}
 
 	function delete($sure,$really_sure,$really_really_sure) {
-		global $Language;
-
 		if (!$sure || !$really_sure || !$really_really_sure) {
 			$this->setMissingParamsError();
 			return false;
@@ -1504,7 +1495,7 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function addUser($user_unix_name,$role_id) {
-		global $Language,$SYS;
+		global $SYS;
 		/*
 			Admins can add users to groups
 		*/
@@ -1658,7 +1649,7 @@ class Group extends Error {
 	 *	@return	boolean	success.
 	 */ 
 	function removeUser($user_id) {
-		global $Language,$SYS,$sys_database_type;
+		global $SYS,$sys_database_type;
 
 		if ($user_id==user_getid()) {
 			//users can remove themselves
@@ -1764,7 +1755,7 @@ class Group extends Error {
 	 *	@return	boolean	success.
 	 */	 
 	function updateUser($user_id,$role_id) {
-		global $Language,$SYS;
+		global $SYS;
 
 		$perm =& $this->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
@@ -2288,7 +2279,7 @@ function getUnixStatus() {
  *	@return	boolean success.
  */
 function setUnixStatus($status) {
-	global $Language,$SYS;
+	global $SYS;
 	db_begin();
 	$res=db_query("
 		UPDATE groups 

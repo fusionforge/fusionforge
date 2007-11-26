@@ -29,7 +29,7 @@ class ASelectextauthPlugin extends Plugin {
 	}
 	
 	function CallHook ($hookname, $params) {
-		global $Language, $HTML ;
+		global $HTML ;
 		
 		switch ($hookname) {
 		case "session_set_entry":
@@ -47,7 +47,7 @@ class ASelectextauthPlugin extends Plugin {
 	}
 
 	function AuthUser ($loginname, $passwd) {
-		global $feedback,$Language;
+		global $feedback;
 	
 		if(!$loginname) {						
 			return false;
@@ -75,5 +75,10 @@ class ASelectextauthPlugin extends Plugin {
 		
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

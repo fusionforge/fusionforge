@@ -33,7 +33,7 @@
 */
 
 function project_admin_header($params) {
-	global $group_id,$feedback,$HTML,$Language;
+	global $group_id,$feedback,$HTML;
 
 	$params['toptab']='admin';
 	$params['group']=$group_id;
@@ -149,7 +149,6 @@ function show_grouphistory ($group_id) {
 		show the group_history rows that are relevant to 
 		this group_id
 	*/
-	global $Language;
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
 	
@@ -250,9 +249,12 @@ function random_pwgen() {
 }
 
 function permissions_blurb() {
-	global $Language;
-	
 	return _('<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn\'t have specific permission (currently equivalent to \'-\')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>');
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

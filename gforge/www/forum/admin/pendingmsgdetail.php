@@ -41,7 +41,7 @@ $msg_id = getIntFromRequest("msg_id");
 $group_id = getIntFromRequest('group_id');
 $forum_id = getIntFromRequest("forum_id");
 
-global $Language,$HTML;
+global $HTML;
 
 $fa = new ForumAdmin();
 
@@ -82,5 +82,10 @@ if ($fa->Authorized($group_id)) {
 	exit_permission_denied();
 }
 
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

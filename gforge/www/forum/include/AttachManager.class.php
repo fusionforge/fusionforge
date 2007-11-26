@@ -170,8 +170,6 @@ class AttachManager extends Error {
 	 *
 	 */
 	function AddToDBOnly($userid, $dateline, $filename, $filedata, $filesize, $visible, $filehash, $mimetype) {
-		global $Language;
-		
 		$result=db_query("SELECT max(msg_id) AS id FROM forum");
 		if (!$result || db_numrows($result) < 1) {
 			$this->messages[] = _('Couldn\'t get message id');
@@ -204,7 +202,6 @@ class AttachManager extends Error {
 	 *
 	 */
 	function attach($attach,$group_id,$update=0,$msg_id=0) {
-		global $Language;
 		global $_FILES;
 
 		$attachment = trim($attach['tmp_name']);

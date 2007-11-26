@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class NewsGroupSearchEngine extends GroupSearchEngine {
 	
 	function NewsGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_NEWS, 'NewsHtmlSearchRenderer', _('This project\'s news'));
 	}
 	
@@ -27,5 +26,10 @@ class NewsGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

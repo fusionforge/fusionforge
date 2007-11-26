@@ -143,8 +143,6 @@ class Layout extends Error {
 	}
 
 	function header($params) {
-		global $Language;
-
 		$this->headerStart($params); ?>
 <body>
 		<?php
@@ -152,7 +150,6 @@ class Layout extends Error {
 	}
 
 	function bodyHeader($params){
-		global $Language;
 		?>
 <div class="header">
 <table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
@@ -288,7 +285,6 @@ if (isset($params['group']) && $params['group']) {
 
 <?php
 	global $sys_show_source;
-	global $Language;
 	if ($sys_show_source) {
 		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '._('Show source').' </a>';
 	}
@@ -416,7 +412,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function outerTabs($params) {
-		global $Language,$sys_use_trove,$sys_use_snippet,$sys_use_people;
+		global $sys_use_trove,$sys_use_snippet,$sys_use_people;
 
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';
@@ -516,9 +512,6 @@ if (isset($params['group']) && $params['group']) {
 	 *	@param	string	Is the group we should look up get title info
 	 */
 	function projectTabs($toptab,$group) {
-
-		global $Language;
-
 		// get group info using the common result set
 		$project =& group_get_object($group);
 		if (!$project || !is_object($project)) {
@@ -748,7 +741,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function searchBox() {
-		global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+		global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
 		if(get_magic_quotes_gpc()) {
 			$defaultWords = stripslashes($words);
@@ -811,7 +804,6 @@ if (isset($params['group']) && $params['group']) {
 	}
 	
 	function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
-		global $Language;
 		 // display the searchmask
 		print '
 		<form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">

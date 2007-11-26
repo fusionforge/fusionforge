@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class TrackersGroupSearchEngine extends GroupSearchEngine {
 	
 	function TrackersGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', _('This project\'s trackers'));
 	}
 	
@@ -27,5 +26,10 @@ class TrackersGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

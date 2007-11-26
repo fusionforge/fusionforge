@@ -32,8 +32,6 @@
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_add($table, $unit, $primary_key) {
-	global $Language;
-
 	// This query may return no rows, but the field names are needed.
 	$result = db_query('SELECT * FROM '.$table.' WHERE '.$primary_key.'=0');
 	$fields = array();
@@ -72,8 +70,6 @@ function admin_table_add($table, $unit, $primary_key) {
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_postadd($table, $unit, $primary_key) {
-	global $Language;
-	
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
@@ -104,8 +100,6 @@ function admin_table_postadd($table, $unit, $primary_key) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
-	global $Language;
-	
 	if ($unit == "processor") {
 		$result = db_numrows(db_query("SELECT processor_id FROM frs_file WHERE processor_id = $id"));
 		if ($result > 0) {
@@ -158,8 +152,6 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
-	global $Language;
-
 	$sql = "DELETE FROM $table WHERE $primary_key=$id";
 	if (db_query($sql)) {
 		printf(_('%1$s successfully deleted.'), ucfirst(getUnitLabel($unit)));
@@ -177,8 +169,6 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
-	global $Language;
-
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
 	if ($result) {
@@ -218,7 +208,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_postedit($table, $unit, $primary_key, $id) {
-	global $HTTP_POST_VARS, $Language;
+	global $HTTP_POST_VARS;
 
 	$sql = 'UPDATE '.$table.' SET ';
 	while (list($var, $val) = each($HTTP_POST_VARS)) {
@@ -244,7 +234,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
  *	@param $primary_key - the primary key of the table
  */
 function admin_table_show($table, $unit, $primary_key) {
-        global $HTML, $Language;
+        global $HTML;
 
         $result = db_query("SELECT * FROM $table ORDER BY $primary_key");
 
@@ -339,5 +329,10 @@ switch (getStringFromRequest('function')) {
 echo admin_table_show($table, $unit, $primary_key);
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

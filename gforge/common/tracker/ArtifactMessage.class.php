@@ -84,8 +84,6 @@ class ArtifactMessage extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($body,$by=false) {
-		global $Language;
-		
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
@@ -195,5 +193,10 @@ class ArtifactMessage extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

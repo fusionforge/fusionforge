@@ -45,7 +45,6 @@ if (!session_loggedin()) {
 	 */
 
 function goodbye($msg) {
-	global $Language;
 	site_header(array('title'=>_('Attachments')));
 	html_feedback_top($msg);
 	echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
@@ -63,7 +62,6 @@ $pending = getStringFromRequest("pending");
 $msg_id = getIntFromRequest("msg_id");
 $group_id = getIntFromRequest("group_id");
 $forum_id = getIntFromRequest("forum_id");
-global $Language;
 
 if ( !($forum_id) || !($group_id) ) {
 	exit_missing_param();
@@ -227,5 +225,10 @@ if (!$pending) { //we don't care for the pending attach counter, it's just for a
 	db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
 }
 
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

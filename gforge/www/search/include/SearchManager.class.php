@@ -83,8 +83,6 @@ class SearchManager {
 	}
 	
 	function loadSearchEngines() {
-		global $Language;
-		
 		// Specific search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_ARTIFACT,
@@ -162,3 +160,10 @@ class SearchManager {
 	
 	
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

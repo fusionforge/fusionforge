@@ -90,7 +90,7 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 }
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback, $Language;
+	global $feedback;
 	if (session_loggedin()) {
 		// check required fields
 		if (!$skill_id || $skill_id == "xyxy") {
@@ -120,7 +120,6 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 }
 
 function people_show_skill_inventory($user_id) {
-	global $Language;
 	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
 		"FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory ".
 		"WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id ".
@@ -157,7 +156,6 @@ function people_show_skill_inventory($user_id) {
 }
 
 function people_edit_skill_inventory($user_id) {
-	global $Language;
 	$sql="SELECT * FROM people_skill_inventory WHERE user_id='$user_id'";
 	$result=db_query($sql);
 
@@ -208,7 +206,7 @@ function people_edit_skill_inventory($user_id) {
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback, $Language;
+	global $feedback;
 	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id' AND skill_id='$skill_id'";
@@ -234,7 +232,6 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 }
 
 function people_show_job_inventory($job_id) {
-	global $Language;
 	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
 		"FROM people_skill_year,people_skill_level,people_skill,people_job_inventory ".
 		"WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id ".
@@ -282,7 +279,6 @@ function people_verify_job_group($job_id,$group_id) {
 }
 
 function people_get_skill_name($skill_id) {
-	global $Language;
 	$sql="SELECT name FROM people_skill WHERE skill_id='$skill_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
@@ -307,7 +303,7 @@ function people_get_category_name($category_id) {
 // think of a way of turning into valid XHTML without the resulting
 // table looking like poo.
 function people_edit_job_inventory($job_id,$group_id) {
-	global $Language, $HTML;
+	global $HTML;
 	$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id'";
 	$result=db_query($sql);
 
@@ -360,8 +356,6 @@ function people_edit_job_inventory($job_id,$group_id) {
 }
 
 function people_show_category_table() {
-	global $Language;
-
 	//show a list of categories in a table
 	//provide links to drill into a detail page that shows these categories
 
@@ -427,7 +421,6 @@ function people_show_category_jobs($category_id) {
 }
 
 function people_show_job_list($result) {
-	global $Language;
 	//takes a result set from a query and shows the jobs
 
 	//query must contain 'group_id', 'job_id', 'title', 'category_name' and 'status_name'

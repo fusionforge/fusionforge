@@ -45,7 +45,7 @@ class CCasePlugin extends SCM {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $Language, $HTML ;
+		global $HTML ;
 		
 		switch ($hookname) {
 		case "scm_page":
@@ -71,7 +71,7 @@ class CCasePlugin extends SCM {
 	}
 
 	function display_scm_page ($group_id) {
-		global $Language, $HTML ;
+		global $HTML ;
 
 		$project =& group_get_object($group_id);
 		
@@ -163,7 +163,6 @@ if ($project->enableAnonCVS() || !$anonymous) {
 	}
 
 	function display_stats ($params) {
-		global $Language ;
 		$group_id = $params['group_id'] ;
 		$result = db_query("
 			SELECT commits, adds

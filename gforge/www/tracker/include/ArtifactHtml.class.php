@@ -33,7 +33,6 @@ class ArtifactHtml extends Artifact {
 	 * show details preformatted (like followups)
 	 */
 	function showDetails() {
-		global $Language;
 		$result = $this->getDetails();
 
 		$title_arr = array();
@@ -47,7 +46,6 @@ class ArtifactHtml extends Artifact {
 
 
 	function showMessages() {
-		global $Language;
 		$result= $this->getMessages();
 		$rows=db_numrows($result);
 
@@ -78,7 +76,7 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showHistory() {
-		global $artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr, $Language;
+		global $artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr;
 		$result=$this->getHistory();
 		$rows= db_numrows($result);
 
@@ -131,5 +129,10 @@ class ArtifactHtml extends Artifact {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

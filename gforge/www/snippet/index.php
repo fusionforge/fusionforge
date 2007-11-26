@@ -35,7 +35,6 @@ function create_snippet_hash($sql, $field) {
  */
 function snippet_mainpage() {
 	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
-	global $Language;
 	$return =_('<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>').'
 	<br />
 	<p/>
@@ -81,5 +80,10 @@ function snippet_mainpage() {
 snippet_header(array('title'=>_('Snippet Library'), 'header'=>'Snippet Library'));
 echo snippet_mainpage();
 snippet_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

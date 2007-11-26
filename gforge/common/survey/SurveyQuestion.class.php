@@ -55,7 +55,6 @@ class SurveyQuestion extends Error {
 	 *  @return boolean	success.
 	 */
 	function SurveyQuestion(&$Group, $question_id=false, $arr=false) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
@@ -98,8 +97,6 @@ class SurveyQuestion extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($question, $question_type=1) {
-		global $Language;
-
 		if (strlen($question) < 3) {
 			$this->setError(_('Question is too short'));
 			return false;
@@ -139,8 +136,6 @@ class SurveyQuestion extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($question, $question_type=1) {
-		global $Language;
-
 		if (strlen($question) < 3) {
 			$this->setError(_('Question is too short'));
 			return false;
@@ -170,9 +165,6 @@ class SurveyQuestion extends Error {
 	 *	@return	boolean	success.
 	 */
 	function delete() {
-		global $Language;
-
-		
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
@@ -195,7 +187,6 @@ class SurveyQuestion extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($question_id) {
-		global $Language;
 		$group_id = $this->Group->GetID();
 		
 		$sql="SELECT survey_questions.*, survey_question_types.type 

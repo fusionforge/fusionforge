@@ -26,7 +26,7 @@
  */
 
 function scm_header($params) {
-	global $HTML, $Language, $sys_use_scm;
+	global $HTML, $sys_use_scm;
 	if (!$sys_use_scm) {
 		exit_disabled();
 	}
@@ -69,5 +69,10 @@ function scm_footer() {
 	echo '</div>';
 	site_project_footer(array());
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

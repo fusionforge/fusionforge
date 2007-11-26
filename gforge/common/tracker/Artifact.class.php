@@ -109,7 +109,6 @@ class Artifact extends Error {
 	 *  @return	boolean	success.
 	 */
 	function Artifact(&$ArtifactType, $data=false) {
-		global $Language;
 		$this->Error(); 
 
 		$this->ArtifactType =& $ArtifactType;
@@ -166,8 +165,6 @@ class Artifact extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array()) {
-		global $Language;
-		
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -548,7 +545,6 @@ class Artifact extends Error {
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
-		global $Language;
 		if (session_loggedin()) {
 
 			$user_id=user_getid();
@@ -704,7 +700,6 @@ class Artifact extends Error {
 	 *  @return	boolean	success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
-		global $Language;
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
@@ -774,7 +769,6 @@ class Artifact extends Error {
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields=array()) {
 
-		global $Language;
 		/*
 			Field-level permission checking
 		*/
@@ -1366,8 +1360,6 @@ class Artifact extends Error {
 	*	this artifact
 	*/
 	function getExtraFieldDataText() {
-		global $Language;
-
 		// First we get the list of extra fields and the data
 		// associated to the fields
 		$efs = $this->ArtifactType->getExtraFields();
@@ -1399,5 +1391,10 @@ class Artifact extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

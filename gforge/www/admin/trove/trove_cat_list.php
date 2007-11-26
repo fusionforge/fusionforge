@@ -31,7 +31,6 @@ require_once('www/admin/admin_utils.php');
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {
-	global $Language;
 	print ('<br />');
 
 	for ($i=0;$i<$GLOBALS['depth'];$i++) {
@@ -73,5 +72,10 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
 printnode(0,"root");
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -72,7 +72,7 @@ class ForumAdmin extends Error {
 	 */
 	
 	function PrintAdminOptions() {
-		global $Language,$group_id,$forum_id;
+		global $group_id,$forum_id;
 		
 		echo '
 			<p>
@@ -88,7 +88,6 @@ class ForumAdmin extends Error {
 	 */
 	
 	function PrintAdminPendingOption($forum_id) {
-		global $Language;
 		echo '
 			<a href="pending.php?action=view_pending&group_id=' . $this->group_id . '&forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
@@ -175,7 +174,7 @@ class ForumAdmin extends Error {
 	 *  @param  string	 action to execute.
 	 */
 	function ExecuteAction ($action) {
-		global $Language,$HTML;
+		global $HTML;
 		
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');

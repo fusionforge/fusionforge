@@ -317,7 +317,7 @@ class LayoutSF extends Layout {
 	 */
 	function generic_header_start($params) {
 
-		global $G_SESSION, $Language, $sys_name;
+		global $G_SESSION, $sys_name;
 
 		if (!$params['title']) {
 			$params['title'] = $GLOBALS['sys_name'];
@@ -360,7 +360,7 @@ class LayoutSF extends Layout {
 	 * @param	array	Footer parameters array
 	 */
 	function generic_footer($params) {
-		global $Language, $sys_name;
+		global $sys_name;
 		echo '<P><A HREF="'.$GLOBALS['sys_urlprefix'].'/source.php?page_url='.getStringFromServer('PHP_SELF').'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
 
 		global $IS_DEBUG,$QUERY_COUNT;
@@ -403,7 +403,6 @@ class LayoutSF extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		global $Language;
 
 		$this->generic_header_start($params); 
 /*
@@ -706,9 +705,6 @@ $s = ((session_issecure()) ? 's' : '' );
 	 *  @param	string	Any extra text to print out
 	 */
 	function project_tabs($toptab,$group,$extra_text='') {
-
-		global $Language;
-
 		// get group info using the common result set
 		$project=group_get_object($group);
 		if ($project->isError()) {

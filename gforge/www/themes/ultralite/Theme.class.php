@@ -73,7 +73,7 @@ class Theme extends Layout {
 	}
 
 	function searchBox() {
-		global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+		global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
@@ -252,5 +252,10 @@ class Theme extends Layout {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -86,7 +86,7 @@ function util_check_fileupload($filename) {
  *
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='',$send_html_email=false) {
-	global $Language,$sys_bcc_all_email_address,$sys_sendmail_path;
+	global $sys_bcc_all_email_address,$sys_sendmail_path;
 
 	if (!$to) {
 		$to='noreply@'.$GLOBALS['sys_default_domain'];
@@ -474,7 +474,6 @@ function util_make_links ($data='') {
  *
  */
 function show_priority_colors_key() {
-	global $Language;
 	echo '<p /><strong> '._('Priority Colors').':</strong><br />
 
 		<table border="0"><tr>';
@@ -923,4 +922,10 @@ function readfile_chunked($filename, $returnBytes=true) {
 function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/',$dir);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

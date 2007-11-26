@@ -121,8 +121,6 @@ class GroupJoinRequest extends Error {
 	 * @return boolean Success.
 	 */
 	function create($user_id,$comments) {
-		global $Language;
-		
 		$v = new Validator();
 		$v->check($user_id, "user_id");
 		//$v->check($comments, "comments");
@@ -240,7 +238,6 @@ class GroupJoinRequest extends Error {
 	 *	@return boolean	true/false.
 	 */
 	function sendJoinNotice() {
-		global $Language;
 		$user =& session_get_user();
 		$admins =& $this->Group->getAdmins();
 		for ($i=0; $i<count($admins); $i++) {

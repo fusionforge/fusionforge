@@ -87,7 +87,6 @@ class ArtifactExtraFieldElement extends Error {
 	 */
 	
 	function create($name,$status_id=0) {
-		global $Language;
 		//
 		//	data validation
 		//
@@ -233,5 +232,10 @@ class ArtifactExtraFieldElement extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

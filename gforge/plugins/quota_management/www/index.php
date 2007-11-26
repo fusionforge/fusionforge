@@ -13,7 +13,7 @@ require_once ('plugins/quota_management/config.php');
 
 // the header that displays for the user portion of the plugin
 function quota_management_Project_Header($params) {                                                                                                                                         
-	global $DOCUMENT_ROOT,$HTML,$id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$id;                                                                            
 	$params['toptab']='quota_management'; 
 	$params['group']=$id;
 	/*                                                                                                                                                              
@@ -24,7 +24,7 @@ function quota_management_Project_Header($params) {
 
 // the header that displays for the project portion of the plugin
 function quota_management_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$user_id;                                                                            
 	$params['toptab']='quota_management'; 
 	$params['user']=$user_id;
 	/*                                                                                                                                                              
@@ -103,5 +103,10 @@ function quota_management_User_Header($params) {
 	}	 
 	
 	site_project_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

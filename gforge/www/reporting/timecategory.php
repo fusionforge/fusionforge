@@ -31,7 +31,6 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/ReportSetup.class.php');
 
 session_require( array('group'=>$sys_stats_group,'A') );
-global $Language;
 
 $time_code = getStringFromRequest('time_code');
 $category_name = getStringFromRequest('category_name');
@@ -107,5 +106,10 @@ if ($time_code) {
 <?php
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

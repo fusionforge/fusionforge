@@ -31,7 +31,6 @@
  *
  */
 function account_pwvalid($pw) {
-	global $Language;
 	if (strlen($pw) < 6) {
 		$GLOBALS['register_error'] = _('Password must be at least 6 characters.');
 		return 0;
@@ -47,7 +46,6 @@ function account_pwvalid($pw) {
  *
  */
 function account_namevalid($name) {
-	global $Language;
 	// no spaces
 	if (strrpos($name,' ') > 0) {
 		$GLOBALS['register_error'] = _('There cannot be any spaces in the login name.');
@@ -96,7 +94,6 @@ function account_namevalid($name) {
  *
  */
 function account_groupnamevalid($name) {
-	global $Language;
 	if (!account_namevalid($name)) return 0;
 	
 	// illegal names
@@ -241,5 +238,10 @@ function account_group_homedir($group) {
 	//return '/home/groups/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
 	return $GLOBALS['groupdir_prefix'].'/'.$group;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -26,7 +26,6 @@
  */
 
 function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
-	global $Language;
         /*
        		Show list of waiting news items
        	*/
@@ -123,5 +122,10 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

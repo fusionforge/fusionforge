@@ -56,7 +56,6 @@ class SurveyQuestionFactory extends Error {
          *      @param  int     The survey_id
 	 */
 	function SurveyQuestionFactory(&$Group) { 
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No valid Group Object'));
@@ -87,8 +86,6 @@ class SurveyQuestionFactory extends Error {
  	 *	@return	array	The array of Survey Question objects.
 	 */
 	function &getSurveyQuestions() {
-		global $Language;
-
 		/* We alread have it */
 		if ($this->questions) {
 			return $this->questions;

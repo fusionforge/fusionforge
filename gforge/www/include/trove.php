@@ -226,7 +226,6 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
-	global $Language;
 
 	$res_trovecat = db_query("
 		SELECT trove_cat.fullpath AS fullpath,

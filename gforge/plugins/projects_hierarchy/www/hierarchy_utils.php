@@ -61,7 +61,6 @@
 
 
  function type_son_box () {
- 	global $Language;
 	return "<select name='link_type' onchange=\"javascript:" .
 			"if(this.value!= 0){" .
 			"document.formson.son.disabled=false" .
@@ -91,4 +90,9 @@ function get_family($group_id,$family='',$cpt=0){
 	
 	return $family;
 }
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

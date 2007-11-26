@@ -41,7 +41,6 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 function activate_group($group_id) {
 	global $feedback;
-	global $Language;
 
 	$group =& group_get_object($group_id);
 
@@ -234,5 +233,10 @@ echo '
 	';
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -32,7 +32,7 @@
 
 // Menu entry for all admin tasks when logged as site administor
 function menu_site_admin() {
-	global $HTML, $Language, $sys_name;
+	global $HTML, $sys_name;
 	$HTML->menuhtml_top($sys_name." "._('Admin'));
 	$HTML->menu_entry('/admin/',_('Site admin'));
 	$HTML->menu_entry('/admin/grouplist.php',_('Group list admin'));
@@ -94,7 +94,7 @@ function menuhtml_top($title) {
 }
 
 function menu_site_help() {
-	global $HTML, $Language, $sys_name;
+	global $HTML, $sys_name;
 	$HTML->menuhtml_top($sys_name);
 	$HTML->menu_entry('/', _('Home'));
 	$HTML->menu_entry('/snippet/', _('Code&nbsp;Snippets'));
@@ -107,7 +107,7 @@ function menu_site_help() {
 
 
 function menu_project_info($group) {
-	global $HTML, $Language;
+	global $HTML;
 	$project =& group_get_object($group);
 	if ($project->isError()) {
 
@@ -157,7 +157,7 @@ function menu_project_info($group) {
 }
 
 function menu_search() {
-	global $HTML, $Language;
+	global $HTML;
 	$HTML->menuhtml_top(_('Search'));
 	menu_show_search_box();
 	$HTML->menuhtml_bottom();
@@ -196,7 +196,7 @@ function menu_loggedin($page_title) {
 }
 
 function menu_notloggedin() {
-	global $HTML, $Language;
+	global $HTML;
 	$HTML->menuhtml_top('Login Status:');
 	echo "<span class=\"error\">NOT LOGGED IN</span>&nbsp;&nbsp;&nbsp;<br />";
 //	$HTML->menu_entry($GLOBALS['sys_home'].'faq/?group='.$GLOBALS['sys_unix_group_name'].'&amp;question=Why_to_log_in.txt','Why Log In?');

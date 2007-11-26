@@ -49,8 +49,6 @@ function make_arg_cmd_safe($arg) {
  *      @return String the output of the ViewCVS command.
  */
 function viewcvs_execute($repos_name, $repos_type) {
-	global $Language;
-
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
 	
@@ -111,5 +109,10 @@ function viewcvs_execute($repos_name, $repos_type) {
 	ob_end_clean();
 	return $content;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -56,7 +56,6 @@ class MailingListFactory extends Error {
 	 *	@param	object	The Group object to which these mailing lists are associated.
 	 */
 	function MailingListFactory(& $Group) {
-		global $Language;
 		$this->Error();
 		
 		if (!$Group || !is_object($Group)) {
@@ -88,7 +87,6 @@ class MailingListFactory extends Error {
 	 *	@return	array	The array of MailingList objects.
 	 */
 	function &getMailingLists() {
-		global $Language;
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
 		}
@@ -121,5 +119,10 @@ class MailingListFactory extends Error {
 		return $this->mailingLists;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

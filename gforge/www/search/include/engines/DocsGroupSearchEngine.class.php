@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class DocsGroupSearchEngine extends GroupSearchEngine {
 	
 	function DocsGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', _('This project\'s documents'));
 	}
 	
@@ -27,5 +26,10 @@ class DocsGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

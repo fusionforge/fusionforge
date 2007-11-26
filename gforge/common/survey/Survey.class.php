@@ -62,7 +62,6 @@ class Survey extends Error {
 	 *  @return boolean	success.
 	 */
 	function Survey(&$Group, $survey_id=false, $arr=false) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Survey"));
@@ -104,8 +103,6 @@ class Survey extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($survey_title, $add_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
-		global $Language;
-
 		if (!$survey_title) {
 			$this->setError(_('UPDATE FAILED: Survey Title Required'));
 			return false;
@@ -148,8 +145,6 @@ class Survey extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
-		global $Language;
-
 		if (!$survey_title) {
 			$this->setError(_('UPDATE FAILED: Survey Title Required'));
 			return false;
@@ -188,8 +183,6 @@ class Survey extends Error {
 	 *	@return	boolean	success.
 	 */
 	function updateOrder($question_number, $is_up=true) {
-		global $Language;
-		
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
@@ -226,8 +219,6 @@ class Survey extends Error {
 	 *	@return	boolean	success.
 	 */
 	function delete() {
-		global $Language;
-
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
@@ -251,7 +242,6 @@ class Survey extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($survey_id) {
-		global $Language;
 		$group_id = $this->Group->GetID();
 		
 		$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
@@ -575,4 +565,5 @@ class Survey extends Error {
 // mode: php
 // c-file-style: "bsd"
 // End:
+
 ?>

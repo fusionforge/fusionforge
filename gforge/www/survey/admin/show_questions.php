@@ -50,7 +50,6 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 Function  ShowResultsEditQuestion($result) {
 	global $group_id;
-	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
 	echo "<h3>" .sprintf(ngettext('%1$s question found', '%1$s questions found', $rows), $rows)."</h3>";

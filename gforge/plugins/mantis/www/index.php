@@ -12,7 +12,7 @@ require_once ('plugins/mantis/config.php');
 
 // the header that displays for the user portion of the plugin
 function helloworld_Project_Header($params) {                                                                                                                                         
-	global $DOCUMENT_ROOT,$HTML,$id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$id;                                                                            
 	$params['toptab']='mantis'; 
 	$params['group']=$id;
 	/*                                                                                                                                                              
@@ -23,7 +23,7 @@ function helloworld_Project_Header($params) {
 
 // the header that displays for the project portion of the plugin
 function helloworld_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id,$Language;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$user_id;                                                                            
 	$params['toptab']='mantis'; 
 	$params['user']=$user_id;
 	/*                                                                                                                                                              
@@ -152,7 +152,9 @@ function update_mantis_user ($id) {
     }
 }    
      
-    
-    
-    
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

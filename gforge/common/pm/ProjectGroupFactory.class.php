@@ -87,8 +87,6 @@ class ProjectGroupFactory extends Error {
 	 *	@return	array	The array of ProjectGroups.
 	 */
 	function &getProjectGroups() {
-		
-		global $Language;
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}
@@ -139,5 +137,10 @@ class ProjectGroupFactory extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

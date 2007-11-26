@@ -261,7 +261,7 @@ vironment" border="0" /></a>
 	}
 
        function mainMenu($params) {
-		global $Language,$sys_use_trove,$sys_use_snippet,$sys_use_people;
+		global $sys_use_trove,$sys_use_snippet,$sys_use_people;
 		
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';

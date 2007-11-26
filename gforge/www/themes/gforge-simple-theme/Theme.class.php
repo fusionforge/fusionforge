@@ -148,8 +148,6 @@ class Theme extends Error {
 }
 
 function header($params) {
-	global $Language;
-
 	$this->headerStart($params); ?>
 <body>
 
@@ -223,7 +221,6 @@ function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By GForge" on your s
 	border="0" /></a></div>
 <?php
 global $sys_show_source;
-global $Language;
 if ($sys_show_source) {
 	print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '._('Show source').' </a>';
 }
@@ -482,8 +479,6 @@ href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
  *	@param	string	Is the group we should look up get title info
  */
 function projectTabs($toptab,$group) {
-	global $Language;
-
 	// get group info using the common result set
 	$project =& group_get_object($group);
 	if (!$project || !is_object($project)) {
@@ -640,7 +635,7 @@ function projectTabs($toptab,$group) {
 
 
 function searchBox() {
-	global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+	global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
 	if(get_magic_quotes_gpc()) {
 		$defaultWords = stripslashes($words);
@@ -694,7 +689,6 @@ function searchBox() {
 }
 
 function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
-	global $Language;
 	// display the searchmask
 	print '
 		<form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">

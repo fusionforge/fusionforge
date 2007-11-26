@@ -161,7 +161,6 @@ class Theme extends Layout {
   }
 
   function bodyHeader($params){
-        global $Language;
   ?>
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -234,7 +233,6 @@ class Theme extends Layout {
 
 <?php
 global $sys_show_source;
-global $Language;
 if ($sys_show_source) {
     global $SCRIPT_NAME;
     print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . $SCRIPT_NAME . '"> '._('Show source').' </a>';
@@ -373,7 +371,7 @@ if ($sys_show_source) {
     }
 
     function outerTabs($params) {
-        global $Language,$sys_use_trove,$sys_use_snippet,$sys_use_people;
+        global $sys_use_trove,$sys_use_snippet,$sys_use_people;
 
         $TABS_DIRS[]='/';
         $TABS_DIRS[]='/my/';
@@ -466,9 +464,6 @@ if ($sys_show_source) {
      *    @param    string    Is the group we should look up get title info
      */
     function projectTabs($toptab,$group) {
-
-        global $Language;
-
         // get group info using the common result set
         $project =& group_get_object($group);
         if (!$project || !is_object($project)) {
@@ -707,7 +702,7 @@ if ($sys_show_source) {
     }
 
     function searchBox() {
-        global $Language,$words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+        global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
         if(get_magic_quotes_gpc()) {
             $defaultWords = stripslashes($words);
@@ -770,7 +765,6 @@ if ($sys_show_source) {
     }
     
     function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
-        global $Language;
          // display the searchmask
         print '
         <form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">

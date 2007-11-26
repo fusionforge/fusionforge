@@ -51,7 +51,6 @@ $page_title=_('Task Reporting System');
 $bar_colors=array("pink","violet");
 
 function pm_reporting_header($group_id) {
-		global $Language;
 		reports_header($group_id,
 			array('aging','tech','subproject'),
 			array(_('Aging Report'),
@@ -243,5 +242,10 @@ if ($what) {
 	pm_footer(array());
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

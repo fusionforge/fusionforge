@@ -32,8 +32,6 @@ require_once('common/reporting/ReportProjectTime.class.php');
 
 session_require( array('group'=>$sys_stats_group) );
 
-global $Language;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -104,5 +102,10 @@ $a2[]='user';
 }
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

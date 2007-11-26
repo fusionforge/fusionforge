@@ -93,8 +93,6 @@ class ArtifactQuery extends Error {
 	 *  	@return 	true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0) {
-		global $Language;
-		
 		//
 		//	data validation
 		//
@@ -439,7 +437,6 @@ class ArtifactQuery extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='') {
-		global $Language;
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
@@ -515,5 +512,10 @@ class ArtifactQuery extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -10,7 +10,7 @@
  */
 
 function displayUserSkills($user_id, $allowEdit) {
-	GLOBAL $HTML, $Language;
+	global $HTML;
 	$sql = "SELECT * FROM skills_data_types ORDER BY type_id ASC";
 	$result=db_query($sql);
 	$rows = db_numrows($result);
@@ -99,7 +99,7 @@ function displayUserSkills($user_id, $allowEdit) {
 }
 
 function handle_multi_edit($skill_ids) {
-	GLOBAL $HTML, $Language;
+	global $HTML;
 	$numSkills = count($skill_ids);
 	$SQL = "select * from skills_data where skills_data_id in(".$skill_ids[0];
 	for($i = 1; $i < $numSkills; $i++) {
@@ -186,5 +186,10 @@ function handle_multi_edit($skill_ids) {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

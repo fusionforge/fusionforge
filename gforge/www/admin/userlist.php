@@ -38,7 +38,6 @@ $HTML->header(array('title'=>_(': User List')));
  * @param               string  $user_id - the user id to act upon
  */
 function performAction($newStatus, $statusString, $user_id) {
-	global $Language;
 	$u =& user_get_object($user_id);
 	if (!$u || !is_object($u)) {
 		exit_error('Error','Could Not Get User');
@@ -58,7 +57,6 @@ function performAction($newStatus, $statusString, $user_id) {
 }
 
 function show_users_list ($result) {
-	global $Language;
 	echo '<p>' ._('Key') .':
 		<span class="active">'._('Active'). '</span>
 		<span class="deleted">' ._('Deleted') .'</span>
@@ -193,5 +191,10 @@ if (!$group_id) {
 }
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -20,7 +20,7 @@ require_once('common/pm/ProjectGroup.class.php');
 
 function pm_header($params) {
 	// XXX ogi: What to do with these?
-	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$order,$pg,$Language,$sys_use_pm;
+	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$order,$pg,$sys_use_pm;
 
 	if (!$sys_use_pm) {
 		exit_disabled();
@@ -110,7 +110,6 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function percentCompleteBox($name='percent_complete',$selected=0) {
-		global $Language;
 		echo '
 		<select name="'.$name.'">';
 		echo '
@@ -128,7 +127,6 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showMonthBox($name,$select_month=0) {
-		global $Language;
 		echo '
 		<select name="'.$name.'" size="1">';
 		$monthlist = array(
@@ -230,5 +228,10 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

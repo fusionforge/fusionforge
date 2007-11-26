@@ -86,7 +86,6 @@ class ArtifactCanned extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($title, $body) {
-		global $Language;
 		//
 		//	data validation
 		//
@@ -207,5 +206,10 @@ class ArtifactCanned extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

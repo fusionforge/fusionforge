@@ -252,7 +252,6 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		string	What to call the 'Any row' defaults to any
  */
 function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
-	global $Language;
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
@@ -319,7 +318,6 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
  * @param		string	What to call the 'Any row' defaults to any
  */
 function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
-	global $Language;
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
@@ -384,7 +382,6 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
 function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
-	global $Language;
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
@@ -401,7 +398,6 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
  * @param		bool	Whether or not to show the '100 row'
  */
 function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',$show_100=true) {
-	global $Language;
 	$checked_count=count($checked_array);
 	$return .= '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
@@ -452,7 +448,6 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
  * @param		bool	Whether or not to show the '100 row'
  */
 function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true,$text_100='none') {
-	global $Language;
 	$checked_count=count($checked_array);
 	$return ='
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
@@ -528,7 +523,6 @@ function build_priority_select_box ($name='priority', $checked_val='3', $nochang
  * @param		bool	Whether to make 'No Change' selected.
  */
 function html_build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
-	global $Language;
 ?>
 	<select name="<?php echo $name; ?>">
 <?php if($nochange) { ?>
@@ -667,7 +661,7 @@ function site_project_footer($params) {
  *	@param params array() must contain $user_id
  */
 function site_user_header($params) {
-	GLOBAL $HTML,$Language;
+	GLOBAL $HTML;
 
 	/*
 		Check to see if active user
@@ -744,5 +738,10 @@ function html_build_rich_textarea($name,$rows,$cols,$text,$readonly) {
 		.($readonly ? ' readonly' : ' ').'>'
 		. $text . '</textarea>';
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

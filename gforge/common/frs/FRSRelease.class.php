@@ -120,7 +120,6 @@ class FRSRelease extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
-		global $Language;
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -378,8 +377,6 @@ class FRSRelease extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($status,$name,$notes,$changes,$preformatted,$release_date) {
-
-		global $Language;
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -453,5 +450,10 @@ class FRSRelease extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

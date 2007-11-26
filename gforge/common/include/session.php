@@ -128,7 +128,7 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback,$Language;
+	global $feedback;
 
 	if (!$loginname || !$passwd) {
 		$feedback = _('Missing Password Or Users Name');
@@ -144,7 +144,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 }
 
 function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
-	global $feedback,$userstatus,$Language;
+	global $feedback,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
@@ -383,7 +383,7 @@ function session_require($req) {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $G_SESSION,$session_ser,$Language;
+	global $G_SESSION,$session_ser;
 
 	// set session cookie
   //

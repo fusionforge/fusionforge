@@ -51,7 +51,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 
 function docman_header($title,$pagehead,$style='xyz') {
 	
-	global $group_id, $Language, $HTML, $sys_use_docman;
+	global $group_id, $HTML, $sys_use_docman;
 
 	if (!$sys_use_docman) {
 		exit_disabled();
@@ -93,8 +93,6 @@ function docman_header($title,$pagehead,$style='xyz') {
 }
 
 function doc_droplist_count($l_group_id, $language_id, $g) {
-	global $Language;
-
 	if (session_loggedin()) {
 		$perm =& $g->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm) || !$perm->isMember()) {
@@ -154,7 +152,7 @@ function docman_footer($params) {
  * docman_display_documents - Recursive function to show the documents inside the groups tree
  */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
-	global $selected_doc_group_id,$Language;
+	global $selected_doc_group_id;
 
 	$selected_doc_group_id=getIntFromRequest('selected_doc_group_id');
 	

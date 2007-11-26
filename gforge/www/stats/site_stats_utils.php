@@ -106,7 +106,6 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 
 
 function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
-	global $Language;	
 	print '<form action="projects.php" method="get">' . "\n";
 	print '<table width="100%" cellpadding="0" cellspacing="0" class="tableheading">' . "\n";
 
@@ -250,7 +249,6 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 }
 
 function stats_site_projects( $report, $orderby, $projects, $trove ) {
-	global $Language;
 	$i=0;
 	$offset=0;
 	$trove_cat=0;
@@ -347,7 +345,6 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 ?><?php
 
 function stats_site_projects_daily( $span ) {
-	global $Language;
 	$i=0;
 	//
 	//  We now only have 30 & 7-day views
@@ -412,7 +409,6 @@ function stats_site_projects_daily( $span ) {
 }
 
 function stats_site_projects_monthly() {
-	global $Language;
 	$i=0;
 	$sql="SELECT * FROM stats_site_months
 		ORDER BY month DESC";
@@ -469,8 +465,6 @@ function stats_site_projects_monthly() {
 }
 
 function stats_site_aggregate( ) {
-
-	global $Language;
 	$res = db_query("SELECT * FROM stats_site_all_vw", -1, 0, SYS_DB_STATS);
 	$site_totals = db_fetch_array($res);
 
@@ -507,5 +501,9 @@ function stats_site_aggregate( ) {
 	<?php
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

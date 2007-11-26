@@ -32,8 +32,6 @@ require_once('common/reporting/Report.class.php');
 
 session_require( array('group'=>$sys_stats_group) );
 
-global $Language;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -89,5 +87,10 @@ if ($sw) {
 }
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

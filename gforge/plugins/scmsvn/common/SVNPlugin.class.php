@@ -52,7 +52,7 @@ class SVNPlugin extends SCM {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $Language, $HTML ;
+		global $HTML ;
 		
 		switch ($hookname) {
 		case 'scm_page':
@@ -78,7 +78,7 @@ class SVNPlugin extends SCM {
 	}
 
 	function getPage ($group_id) {
-		global $Language, $HTML, $sys_scm_snapshots_path;
+		global $HTML, $sys_scm_snapshots_path;
 
 		$project =& group_get_object($group_id);
 		if (!$project || !is_object($project)) {
@@ -190,7 +190,6 @@ class SVNPlugin extends SCM {
 	}
 
 	function getAdminPage ($params) {
-		global $Language ;
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
 			?>
@@ -200,7 +199,6 @@ class SVNPlugin extends SCM {
 	}
 
 	function getStats ($params) {
-		global $Language ;
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
 		if (!$project || !is_object($project)) {
@@ -233,7 +231,7 @@ class SVNPlugin extends SCM {
 	}
 
 	function getDetailedStats ($params) {
-		global $Language, $HTML;
+		global $HTML;
 		$group_id = $params['group_id'] ;
 
 		$result = db_query('

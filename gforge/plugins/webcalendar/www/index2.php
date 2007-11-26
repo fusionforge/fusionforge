@@ -4,7 +4,7 @@ require_once('../../env.inc.php');
 require_once('pre.php');
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -138,7 +138,7 @@ if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
 echo site_user_footer(array());
 
 function user_belongs_to_group($user_id,$group_id){
-global $HTML,$Language;
+global $HTML;
 $sql = "SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$user_id."' AND user_group.group_id = '".$group_id."' AND role_setting.section_name = 'webcal'";
 		
 //$sql = "SELECT COUNT(*) FROM user_group WHERE user_id = '".$user_id."' AND group_id = '".$group_id."'";	
@@ -163,5 +163,10 @@ if( $row[0] < 1) {
 return $row[0];	
 	
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

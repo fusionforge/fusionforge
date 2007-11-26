@@ -114,8 +114,6 @@ class ArtifactFile extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($filename, $filetype, $filesize, $bin_data, $description='None') {
-
-		global $Language;
 		// Some browsers don't supply mime type if they don't know it
 		if (!$filetype) {
 			// Let's be on safe side?
@@ -316,5 +314,10 @@ class ArtifactFile extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

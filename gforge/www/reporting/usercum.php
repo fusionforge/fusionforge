@@ -30,8 +30,6 @@ require_once('pre.php');
 require_once('common/reporting/report_utils.php');
 require_once('common/reporting/Report.class.php');
 
-global $Language;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -67,5 +65,10 @@ echo report_header(_('Cumulative Users'));
 <?php
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

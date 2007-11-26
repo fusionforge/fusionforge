@@ -131,7 +131,7 @@ class FRSPackage extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$is_public=1) {
-		global $Language,$sys_apache_user,$sys_apache_group;
+		global $sys_apache_user,$sys_apache_group;
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -264,7 +264,6 @@ class FRSPackage extends Error {
 	 *  @return	boolean	success.
 	 */
 	function setMonitor() {
-		global $Language;
 		if (!session_loggedin()) {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
@@ -299,7 +298,6 @@ class FRSPackage extends Error {
 	 *  @return	boolean	success.
 	 */
 	function stopMonitor() {
-		global $Language;
 		if (!session_loggedin()) {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
@@ -367,7 +365,6 @@ class FRSPackage extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($name,$status) {
-		global $Language;
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;

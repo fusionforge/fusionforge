@@ -97,8 +97,6 @@ class ProjectCategory extends Error {
 	 *  @return	boolean success.
 	 */
 	function create($name) {
-
-		global $Language;
 		//
 		//	data validation
 		//
@@ -208,5 +206,10 @@ class ProjectCategory extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

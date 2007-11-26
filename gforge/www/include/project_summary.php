@@ -93,7 +93,6 @@ function project_get_public_forum_message_count($group_id) {
  * @param		bool	Whether to return the results within an HTML table or not
  */
 function project_summary($group_id,$mode,$no_table) {
-	global $Language;
 	if (!$group_id) {
 		return 'Error - No Group ID';
 	}
@@ -264,5 +263,10 @@ function project_summary($group_id,$mode,$no_table) {
 
 	return $return;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

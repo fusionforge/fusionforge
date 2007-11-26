@@ -31,7 +31,6 @@ require_once('common/reporting/report_utils.php');
 require_once('common/reporting/ReportSiteTime.class.php');
 
 session_require( array('group'=>$sys_stats_group) );
-global $Language;
 
 $report=new Report();
 if ($report->isError()) {
@@ -97,5 +96,10 @@ if ($typ =='r') {
 <?php
 }
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

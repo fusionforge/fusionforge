@@ -50,8 +50,6 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getCommitEntries($Query,$group_id) {
-		global $Language;
-
 		$group = &group_get_object($group_id);
 		
 		if (!$group->usesPlugin($this->name)) {
@@ -100,7 +98,6 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getTitleArr() {
-		global $Language;
 		$title_arr=array();
 		$title_arr[]=_('Filename');
 		$title_arr[]=_('Date');
@@ -155,7 +152,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		global $sys_default_domain,$Language;
+		global $sys_default_domain;
 		return '<a href="/scm/viewvc.php/'.
 			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
 			$ActualVersion.'">'.
@@ -263,7 +260,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, $params) {
-		global $group_id,$Language, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
+		global $group_id, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
 		$use_cvstrackerplugin = getIntFromRequest('use_cvstrackerplugin');
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active

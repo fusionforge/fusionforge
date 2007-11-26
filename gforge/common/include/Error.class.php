@@ -127,7 +127,6 @@ class Error {
 	 *
 	 */
 	function setPermissionDeniedError(){
-		global $Language;
 		$this->setError(_('Permission denied.'), ERROR__PERMISSION_DENIED_ERROR);
 	}
 	
@@ -145,7 +144,6 @@ class Error {
 	 *  retrieves the localized error string for Invalid Email and calls exit_error()
 	 */
 	function setInvalidEmailError(){
-		global $Language;
 		$this->setError(_('Invalid Email Address'), ERROR__INVALID_EMAIL_ERROR);
 	}
 	
@@ -166,7 +164,6 @@ class Error {
 	 *
 	 */
 	function setOnUpdateError($result=""){
-		global $Language;
 		$this->setError(sprintf(_('Error On Update:'), $result), ERROR__ON_UPDATE_ERROR);	
 	}
 	
@@ -184,7 +181,6 @@ class Error {
 	 *  retrieves the localized error string for Group ID 
 	 */
 	function setGroupIdError(){
-		global $Language;
 		$this->setError(_('Group_id in db result does not match Group Object'), ERROR__GROUPID_ERROR);
 		
 	}
@@ -203,7 +199,6 @@ class Error {
 	 *  retrieves the localized error string for missing pparams
 	 */
 	function setMissingParamsError(){
-		global $Language;
 		$this->setError(_('Missing Parameters'), ERROR__MISSING_PARAMS_ERROR);
 	}
 	

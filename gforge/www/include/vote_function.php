@@ -127,8 +127,6 @@ function vote_show_release_radios ($vote_on_id,$flag) {
  * @param		int		The survey ID
  */
 function show_survey ($group_id,$survey_id) {
-  global $Language;
-
 /*
 	Select this survey from the database
 */
@@ -460,5 +458,10 @@ function vote_remove_all_ratings_by($user_id) {
 		WHERE rated_by='$user_id'
 	");
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

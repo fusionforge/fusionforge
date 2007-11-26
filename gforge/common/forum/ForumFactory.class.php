@@ -60,7 +60,6 @@ class ForumFactory extends Error {
 	 *	@param	object	The Group object to which this forum is associated.
 	 */
 	function ForumFactory(&$Group) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Forum:: No Valid Group Object'));
@@ -90,7 +89,7 @@ class ForumFactory extends Error {
 	 *	@return	array	The array of Forum objects.
 	 */
 	function &getForums() {
-		global $Language, $sys_database_type;
+		global $sys_database_type;
 
 		if ($this->forums) {
 			return $this->forums;
@@ -155,5 +154,10 @@ class ForumFactory extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

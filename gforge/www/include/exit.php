@@ -16,7 +16,7 @@
  * @param		string	Error text
  */
 function exit_error($title,$text="", $toptab='') {
-	global $HTML,$group_id, $Language;
+	global $HTML,$group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	print '<span class="error">'.$title.'</span><p>'.htmlspecialchars($text) .'</p>';
 	$HTML->footer(array());
@@ -29,7 +29,6 @@ function exit_error($title,$text="", $toptab='') {
  * @param		string	$reason_descr
  */
 function exit_permission_denied($reason_descr='') {
-	global $Language;
 	if(!session_loggedin()) {
 		exit_not_logged_in();
 	} else {
@@ -53,7 +52,6 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	global $Language;
 	exit_error(_('ERROR - No group was chosen or you can\'t access it'),_('No group was chosen or you can\'t access it'));
 }
 
@@ -61,7 +59,6 @@ function exit_no_group() {
  * exit_missing_param() - Exit with missing required parameters error
  */
 function exit_missing_param() {
-	global $Language;
 	exit_error(_('Error - missing parameters'),_('Error - missing required parameters'));
 }
 
@@ -69,7 +66,6 @@ function exit_missing_param() {
  * exit_disabled() - Exit with disabled feature error.
  */
 function exit_disabled() {
-	global $Language;
 	exit_error(_('Error - disabled feature.'),_('The Site Administrator has turned off this feature.'));
 }
 
@@ -77,7 +73,6 @@ function exit_disabled() {
  * exit_form_double_submit() - Exit with double submit error.
  */
 function exit_form_double_submit() {
-	global $Language;
 	exit_error(_('Error - double submit'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
 }
 

@@ -136,9 +136,6 @@ class ProjectGroup extends Error {
 	 *	@return boolean success.
 	 */
 	function create($project_name,$description,$is_public=1,$send_all_posts_to='') {
-
-		global $Language;
-		
 		if (strlen($project_name) < 3) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -354,8 +351,6 @@ class ProjectGroup extends Error {
 	 *	@return boolean success.
 	 */
 	function update($project_name,$description,$send_all_posts_to='') {
-
-		global $Language;
 		if (strlen($project_name) < 3) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -620,5 +615,10 @@ class ProjectGroup extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -65,7 +65,6 @@ class MailingList extends Error {
 	 * @return	boolean	success.
 	 */
 	function MailingList(&$Group, $groupListId = false, $dataArray = false) {
-		global $Language;
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailingList'));
@@ -115,8 +114,6 @@ class MailingList extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false) {
-		global $Language;
-		
 		//
 		//	During the group creation, the current user_id will not match the admin's id
 		//
@@ -221,7 +218,6 @@ Thank you for registering your project with %1$s.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($groupListId) {
-		global $Language;
 		$res=db_query("SELECT * FROM mail_group_list "
 			. "WHERE group_list_id='".$groupListId."' "
 			. "AND group_id='". $this->Group->getID() ."'");
@@ -242,8 +238,6 @@ Thank you for registering your project with %1$s.
 	 *	@return	boolean	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
-		global $Language;
-		
 		if(! $this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -421,5 +415,10 @@ Thank you for registering your project with %1$s.
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

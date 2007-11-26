@@ -31,7 +31,7 @@
 */
 
 function news_header($params) {
-	global $HTML,$group_id,$news_name,$news_id,$sys_news_group,$Language,$sys_use_news;
+	global $HTML,$group_id,$news_name,$news_id,$sys_news_group,$sys_use_news;
 
 	if (!$sys_use_news) {
 		exit_disabled();
@@ -73,7 +73,7 @@ function news_footer($params) {
 }
 
 function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
-	global $sys_news_group,$Language;
+	global $sys_news_group;
 	if (!$group_id) {
 		$group_id=$sys_news_group;
 	}
@@ -210,7 +210,6 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 }
 
 function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
-	global $Language;
 	/*
 		Show a the latest news for a portal
 	*/
@@ -271,5 +270,10 @@ function get_news_name($id) {
 		return db_result($result, 0, 'summary');
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -33,9 +33,7 @@ require_once('common/reporting/ReportSetup.class.php');
 
 session_require( array('group'=>$sys_stats_group,'A') );
 
-global $Language;
-
-	echo report_header(_('Main Page'));
+echo report_header(_('Main Page'));
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 		
 
@@ -64,5 +62,10 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 <?php
 
 echo report_footer();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

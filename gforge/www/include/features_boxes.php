@@ -14,7 +14,7 @@
 require_once('common/include/GForge.class.php');
 
 function show_features_boxes() {
-	GLOBAL $HTML,$Language,$sys_use_ratings;
+	GLOBAL $HTML,$sys_use_ratings;
 	
 	$return = '';
 	$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
@@ -34,8 +34,6 @@ function show_features_boxes() {
 }
 
 function show_top_downloads() {
-
-	global $Language;
 	// TODO yesterday is now defined as two days ago.  Quick fix
 	//      to allow download list to be cached before nightly
 	//      aggregation is done. jbyers 2001.03.19
@@ -113,7 +111,6 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	global $Language;
 	$gforge = new GForge();
 	$return = '';
 	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
@@ -122,7 +119,6 @@ function show_sitestats() {
 }
 
 function show_newest_projects() {
-	global $Language;
 	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
 		"WHERE is_public=1 AND status='A' AND type_id=1 AND register_time > 0 " .
 		"ORDER BY register_time DESC";
@@ -145,7 +141,6 @@ function show_newest_projects() {
 }
 
 function show_highest_ranked_users() {
-	global $Language;
 	//select out the users information to show the top users on the site
 	$sql="SELECT users.user_name,users.realname,user_metric.metric
 		FROM user_metric,users
@@ -166,7 +161,6 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
-	global $Language;
 	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,".
 		"project_weekly_metric.ranking,project_weekly_metric.percentile ".
 		"FROM groups,project_weekly_metric ".
@@ -188,5 +182,10 @@ function show_highest_ranked_projects() {
 	}
 	return $return;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

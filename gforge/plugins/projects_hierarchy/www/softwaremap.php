@@ -365,7 +365,6 @@ else {
 		
 		function aff_tree($tree, $lvl) {
 			global $project_name ;
-			global $Language ;
 			
 			echo "<br/>";
 			$arbre = "" ;

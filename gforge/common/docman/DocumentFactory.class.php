@@ -128,7 +128,6 @@ class DocumentFactory extends Error {
 	 *	@return	array	Document objects.
 	 */
 	function &getDocuments() {
-		global $Language;
 		if (!$this->Documents) {
 			$this->getFromDB();
 		}
@@ -289,5 +288,10 @@ class DocumentFactory extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

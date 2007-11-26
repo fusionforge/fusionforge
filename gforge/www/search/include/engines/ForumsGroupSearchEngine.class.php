@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class ForumsGroupSearchEngine extends GroupSearchEngine {
 	
 	function ForumsGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', _('This project\'s forums'));
 	}
 	
@@ -27,5 +26,10 @@ class ForumsGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

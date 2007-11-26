@@ -352,7 +352,6 @@ class User extends Error {
 	 *	@return true or false
 	 */
 	function sendRegistrationEmail() {
-		global $Language;
 		$message=stripcslashes(sprintf(_('Thank you for registering on the %4$s web site. You have
 account with username %1$s created for you. In order
 to complete your registration, visit the following url: 
@@ -449,7 +448,6 @@ Enjoy the site.
 	 */
 	function update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode) {
-		global $Language;
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
@@ -625,7 +623,7 @@ Enjoy the site.
 	 *	@return	boolean success.
 	 */
 	function setUnixStatus($status) {
-		global $Language,$SYS;
+		global $SYS;
 		db_begin();
 		$res=db_query("
 			UPDATE users 
@@ -857,7 +855,7 @@ Enjoy the site.
 	 *	@return boolean success.
 	 */
 	function setShell($shell) {
-		global $Language,$SYS;
+		global $SYS;
 		$shells = file('/etc/shells');
 		$shells[count($shells)] = "/bin/cvssh";
 		$out_shells = array();
@@ -1164,7 +1162,7 @@ Enjoy the site.
 	 *	@return boolean success.
 	 */
 	function setPasswd($passwd) {
-		global $Language,$SYS;
+		global $SYS;
 		if (!account_pwvalid($passwd)) {
 			$this->setError('Error: '.$GLOBALS['register_error']);
 			return false;

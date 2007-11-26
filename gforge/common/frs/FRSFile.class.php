@@ -90,7 +90,6 @@ class FRSFile extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
-		global $Language;
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSFile Name Must Be At Least 3 Characters'));
 			return false;
@@ -358,8 +357,6 @@ class FRSFile extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
-		global $Language;
-
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
@@ -428,5 +425,10 @@ class FRSFile extends Error {
 		return true;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

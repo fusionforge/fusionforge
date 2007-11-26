@@ -66,7 +66,7 @@ function frs_admin_footer() {
 }
 
 function frs_header($params) {
-	global $group_id,$HTML,$Language,$sys_use_frs;
+	global $group_id,$HTML,$sys_use_frs;
 
 	/*
 		Does this site use FRS?
@@ -142,7 +142,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of the available filetypes
 	*/
-	global $FRS_FILETYPE_RES, $Language;
+	global $FRS_FILETYPE_RES;
 	if (!isset($FRS_FILETYPE_RES)) {
 		$FRS_FILETYPE_RES=db_query("SELECT * FROM frs_filetype");
 	}
@@ -159,7 +159,7 @@ function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of the available processors 
 	*/
-	global $FRS_PROCESSOR_RES, $Language;
+	global $FRS_PROCESSOR_RES;
 	if (!isset($FRS_PROCESSOR_RES)) {
 		$FRS_PROCESSOR_RES=db_query("SELECT * FROM frs_processor");
 	}
@@ -222,5 +222,10 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 		return html_build_select_box ($FRS_PACKAGE_RES,$name,$checked_val,false);
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

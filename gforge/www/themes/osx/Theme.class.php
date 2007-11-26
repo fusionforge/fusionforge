@@ -51,7 +51,7 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		global $Language, $sys_name;
+		global $sys_name;
 
 		$this->headerStart($params); ?>
 
@@ -379,5 +379,10 @@ class Theme extends Layout {
 	 }
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

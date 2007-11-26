@@ -10,7 +10,7 @@ class EIRCPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $Language, $G_SESSION, $HTML, $group_id;
+		global $G_SESSION, $HTML, $group_id;
 		if ($hookname == "usermenu") {
 			$text = "EIRC" ;
 			echo ' | ' . $HTML->PrintSubMenu (array ($text),

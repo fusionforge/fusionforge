@@ -14,7 +14,6 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class TasksGroupSearchEngine extends GroupSearchEngine {
 	
 	function TasksGroupSearchEngine() {
-		global $Language;
 		$this->GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', _('This project\'s tasks'));
 	}
 	
@@ -27,5 +26,10 @@ class TasksGroupSearchEngine extends GroupSearchEngine {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
