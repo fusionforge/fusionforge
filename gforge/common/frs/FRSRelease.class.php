@@ -279,7 +279,6 @@ class FRSRelease extends Error {
 	 *  @return	boolean	success.
 	 */
 	function sendNotice() {
-		global $Language;
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
 		$date = date('Y-m-d H:i',time());
@@ -288,18 +287,25 @@ class FRSRelease extends Error {
 			$proto = "https://";
 		}
 
-		$subject = $Language->getText('frs_release','email_title',array(
-		$this->FRSPackage->Group->getUnixName(),
-		$this->FRSPackage->getName()));
-		$text = stripcslashes($Language->getText('frs_release','email_text',array(
-		$this->FRSPackage->Group->getPublicName(),
-		$this->FRSPackage->Group->getUnixName(),
-		$this->FRSPackage->getName(),
-		"<${proto}".getStringFromServer('HTTP_HOST')."/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
-		$GLOBALS['sys_name'],
-		"<${proto}".getStringFromServer('HTTP_HOST')."/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
-			
+		$subject = sprintf (_('[%1$s Release] %2$s'),
+				    $this->FRSPackage->Group->getUnixName(),
+				    $this->FRSPackage->getName());
+		$text = stripcslashes(sprintf(_("Project %1$s (%2$s) has released a new version of package \"%3$s\".
+You can download it by following this link:
 
+%4$s
+
+You receive this email because you requested to be notified when new
+versions of this package were released. If you don't wish to be
+notified in the future, please login to %5$s and click this link:
+
+%6$s"),
+					      $this->FRSPackage->Group->getPublicName(),
+					      $this->FRSPackage->Group->getUnixName(),
+					      $this->FRSPackage->getName(),
+					      "<${proto}".getStringFromServer('HTTP_HOST')."/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
+					      $GLOBALS['sys_name'],
+					      "<${proto}".getStringFromServer('HTTP_HOST')."/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>"));
 		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);

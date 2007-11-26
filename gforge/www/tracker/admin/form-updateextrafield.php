@@ -5,11 +5,10 @@
 		/*
 			Allow modification of a artifact Selection Box
 		*/
-		$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName())));
+$title = sprintf(_('Modify a custom field in %s'),$ath->getName());
+$ath->adminHeader(array('title'=>$title));
 
-
-		echo '
-			<h2>'.$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName()).'</h2>';
+echo '<h2>'.$title.'</h2>';
 
 		$id = getStringFromRequest('id');
 		$ac = new ArtifactExtraField($ath,$id);
@@ -53,5 +52,10 @@
 		}
 
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

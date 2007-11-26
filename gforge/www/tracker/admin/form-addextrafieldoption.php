@@ -5,15 +5,15 @@
 //
 	$boxid = getIntFromRequest('boxid');
 	$ac = new ArtifactExtraField($ath,$boxid);
-	if (!$ac || !is_object($ac)) {
-		exit_error('Error','Unable to create ArtifactExtraField Object');
-	} elseif ($ac->isError()) {
+if (!$ac || !is_object($ac)) {
+	exit_error('Error','Unable to create ArtifactExtraField Object');
+	} elseif (ac->$title) {
 		exit_error('Error',$ac->getErrorMessage());
-	} else {
-		$efearr=$ath->getExtraFieldElements($boxid);
-		$ath->adminHeader(array ('title'=>_('Manage Custom Fields')));
+	  } else {efearr=$ath->getExtraFieldElements$title$boxid);
+$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
+		$ath->adminHeader(array ('title'=>$title));
 
-		echo "<h3>".$Language->getText('tracker_admin_build_boxes','opt_title',$ath->getName())."</h3>";
+		echo "<h3>".$title."</h3>";
 		echo "<br />";
 		$rows=count($efearr);
 		if ($rows > 0) {
@@ -57,4 +57,9 @@
 		<?php
 		$ath->footer(array());
 	}
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

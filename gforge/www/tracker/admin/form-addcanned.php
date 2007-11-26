@@ -2,9 +2,10 @@
 //
 //  FORM TO ADD CANNED RESPONSES
 //
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_add_canned','title',$ath->getName()).'Add/Change Canned Responses to: '.$ath->getName()));
+$title = sprintf(_('Add/Change Canned Responses to %s'), $ath->getName()) ;
+$ath->adminHeader(array ('title'=>$title));
 
-		echo "<h1>".$Language->getText('tracker_admin_add_canned','title', $ath->getName())."</h1>";
+echo "<h1>".$title."</h1>";
 
 		/*
 			List of existing canned responses
@@ -53,5 +54,10 @@
 		<?php
 
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

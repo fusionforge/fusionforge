@@ -58,7 +58,7 @@ if ($rows>$limit) {
 
 if ($rows < 1) {
 	if ($group_id) {
-		echo '<h2>'.$Language->getText('news', 'nonewsfor', group_getname($group_id)).'</h2>';
+		echo '<h2>'.sprintf(_('No News Found For %s'),group_getname($group_id)).'</h2>';
 	} else {
 		echo '<h2>'._('No News Found').'</h2>';
 	}
@@ -89,5 +89,10 @@ if ($rows < 1) {
 }
 
 news_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

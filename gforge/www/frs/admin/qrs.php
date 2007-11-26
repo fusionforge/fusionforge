@@ -134,10 +134,12 @@ if (getStringFromRequest('submit')) {
 						frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 						?>
 						<p>
-						<?php echo $Language->getText('project_admin_qrs','qrs_info',
-							array('<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
-							'</strong></a>',
-							'<a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.$group_id.'">','</a>')) ?>
+							 <?php 
+							 printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
+								 $GLOBALS['sys_urlprefix'].'/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id,
+								 $GLOBALS['sys_urlprefix'].'/frs/?group_id='.$group_id
+								 )
+							 ?>
 						<?php
 						db_commit();
 						frs_admin_footer(array());

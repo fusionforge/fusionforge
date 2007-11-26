@@ -179,7 +179,7 @@ if ($sys_use_jabber) {
 <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </p>
 <p>
-<?php echo $Language->getText('account_register','mandatory', utils_requiredField()); ?>
+<?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
 </p>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Register'); ?>" />
@@ -187,4 +187,11 @@ if ($sys_use_jabber) {
 </form>
 <p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
 
-<?php $HTML->footer(array()); ?>
+<?php $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

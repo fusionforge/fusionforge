@@ -2,9 +2,11 @@
 //
 //  FORM TO BUILD SELECTION BOXES 
 //
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_build_boxes','title',$ath->getName())));
 
-		echo "<h2>".$Language->getText('tracker_admin_build_boxes','title',$ath->getName())."</h2>";
+$title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
+$ath->adminHeader(array ('title'=>$title));
+
+echo "<h2>".$title."</h2>";
 
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
@@ -120,5 +122,10 @@
 		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
 
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

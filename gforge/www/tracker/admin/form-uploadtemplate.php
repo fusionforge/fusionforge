@@ -1,8 +1,10 @@
 <?php
 
-$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName())));
+$title = sprintf(_('Add/Update template for %s'), $ath->getName()) ;
 
-echo '<h3>'._('Add/Update template').'</h3>';
+$ath->adminHeader(array('title'=>$title));
+
+echo '<h3>'.$title.'</h3>';
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" enctype="multipart/form-data">
 <input type="hidden" name="uploadtemplate" value="1">
@@ -14,5 +16,10 @@ echo '<h3>'._('Add/Update template').'</h3>';
 <?php
 
 $ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

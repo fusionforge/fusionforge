@@ -180,11 +180,11 @@ function menu_valid_html() {
 }
 
 function menu_loggedin($page_title) {
-	global $HTML, $Language, $sys_name;
+	global $HTML, $sys_name;
 	/*
 		Show links appropriate for someone logged in, like account maintenance, etc
 	*/
-	$HTML->menuhtml_top($Language->getText('menu', 'logged_in_as', user_getname()));
+	$HTML->menuhtml_top(sprintf(_('logged in as %s'), user_getname()));
 	$HTML->menu_entry('/my/',_('My Personal Page'));
 	$HTML->menu_entry('/account/',_('My Account'));
 	if (!$GLOBALS['HTTP_POST_VARS']) {

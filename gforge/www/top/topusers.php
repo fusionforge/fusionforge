@@ -98,7 +98,7 @@ while ($row_top = db_fetch_array($res_top)) {
 		print "<span class=\"up\"".sprintf(_('Up %1$s'), $diff)."</span>";
 	}
 	else if ($diff < 0) {
-		print "<span class=\"down\">".$Language->getText('top','down',(0-$diff))."</span>";
+		print "<span class=\"down\">".sprintf(_('Down %1$s'), (0-$diff))."</span>";
 	}
 
 	print '&nbsp;&nbsp;&nbsp;</td></tr>

@@ -2,14 +2,14 @@
 //
 //	FORM TO UPDATE ARTIFACT TYPES
 //
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_update_type','title', $ath->getName())));
+$ath->adminHeader(array ('title'=>sprintf(_('Modify A Group In %s'),$ath->getName())));
 
 		?>
 		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="update_type" value="y" />
 		<p>
-		<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
+		<?php echo _('<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getName();
 		} else { 
@@ -51,5 +51,10 @@
 		<?php
 
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -47,8 +47,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($form_shortname) {
 		if ($form_trove_cat_id == $form_parent) {
-			exit_error($Language->getText(
-					   'admin_trove_cat_edit','error_tove_equal_parent'),
+			exit_error(_("Error: a category can't be the same as its own parent"),
 				   db_error()
 			);
 		} else {
@@ -172,5 +171,10 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <?php
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

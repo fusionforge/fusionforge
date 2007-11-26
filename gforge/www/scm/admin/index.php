@@ -86,8 +86,8 @@ if (getStringFromRequest('submit')) {
 	$scm_plugins = $SCMFactory->getSCMs();
 	if (count($scm_plugins) != 0) {	
 		if (count($scm_plugins) > 1) {
-			echo '<p>'.$Language->getText('scm_index','repos_change_note').'</p>';
-			echo '<table><tbody><tr><td><strong>',$Language->getText('scm_index','scm_repository'),':</strong></td>';
+			echo '<p>'._('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.').'</p>';
+			echo '<table><tbody><tr><td><strong>'._('SCM Repository').'</strong></td>';
 			$checked=true;
 			foreach ($scm_plugins as $plugin) {
 				$myPlugin = plugin_get_object($plugin);
@@ -102,7 +102,7 @@ if (getStringFromRequest('submit')) {
 			echo '</tr></tbody></table>'."\n";
 		}
 	} else {
-		echo '<p>'.$Language->getText('scm_index','no_plugins_error').'</p>';
+		echo '<p>'._('Error - Site has SCM but no plugins registered').'</p>';
 	}
 
 	plugin_hook ("scm_admin_page", $hook_params) ;

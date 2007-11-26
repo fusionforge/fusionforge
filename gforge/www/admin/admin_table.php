@@ -280,9 +280,7 @@ function admin_table_show($table, $unit, $primary_key) {
  * @return name localized label
  */
 function getUnitLabel($unit) {
-	global $Language;
-	$label = $Language->getText('admin_admin_table', 'unit_'.$unit);
-	return $label;
+	return $unit;
 }
 
 

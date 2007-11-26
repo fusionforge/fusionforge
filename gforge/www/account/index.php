@@ -230,14 +230,14 @@ echo $HTML->boxTop(_('Preferences')); ?>
 <?php /*
 <p /><input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
-<?php echo $Language->getText('account_register','remember_me','<a href="'.$GLOBALS['sys_urlprefix'].'/my/">');
+<?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),$GLOBALS['sys_urlprefix'].'/my/');
 */ ?>
 
 <p />
 <?php if ($sys_use_ratings) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
-	<?php echo $Language->getText('account_register','partecipate_peer_ratings','<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$u->getUnixName().'">'); ?>
+		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),$GLOBALS['sys_urlprefix'].'/users/'.$u->getUnixName()); ?>
 <?php } ?>	
 </td></tr>
 <?php 

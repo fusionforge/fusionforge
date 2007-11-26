@@ -175,8 +175,7 @@ class Group extends Error {
 			$perm =& $this->getPermission(session_get_user());
 
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				// cannot use $Language as it is not created yet
-				$this->setError('Permission denied', ERROR__PERMISSION_DENIED_ERROR);
+				$this->setError(_('Permission denied'), ERROR__PERMISSION_DENIED_ERROR);
 				return false;
 			}
 		}

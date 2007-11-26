@@ -28,8 +28,7 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_na
 echo "\n\n";
 
 print '<div align="center">' . "\n";
-print '<h3>'.$Language->getText('stats_index','sitewide_aggregate_statistics
-').'</h3><br />' . "\n";
+print '<h3>'._('Sitewide aggregate statistics').'</h3><br />' . "\n";
 ?>
 
 <hr />

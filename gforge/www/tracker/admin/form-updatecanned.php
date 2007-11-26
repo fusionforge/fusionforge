@@ -2,9 +2,10 @@
 //
 //	FORM TO UPDATE CANNED MESSAGES
 //
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_update_canned','title', $ath->getName())));
+$title = sprintf(_('Modify Canned Responses In %s'),$ath->getName());
+$ath->adminHeader(array ('title'=>$title));
 
-		echo "<h1>".$Language->getText('tracker_admin_update_canned','title', $ath->getName())."</h1>";
+echo "<h1>".$title."</h1>";
 
 		$id = getStringFromRequest('id');
 		$acr = new ArtifactCanned($ath,$id);
@@ -30,5 +31,10 @@
 			<?php
 		}
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

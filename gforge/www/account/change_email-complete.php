@@ -70,7 +70,8 @@ site_user_header(array('title'=>_('Email Change Complete')));
 ?>
 
 <p>
-<?php echo $Language->getText('account_change_email-complete','confirm', array($u->getUnixName(),$u->getEmail(),'&lt;'.$u->getUnixName().'@'.$GLOBALS['sys_users_host'].'&gt')) ?>
+<?php
+printf (_('Welcome, %1$s. Your email change is complete. Your new email address on file is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to this account.'),$u->getUnixName(),$u->getEmail(),$u->getUnixName().'@'.$GLOBALS['sys_users_host'])) ?>
 </p>
 
 <p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo _('Return'); ?></a></p>
@@ -78,5 +79,10 @@ site_user_header(array('title'=>_('Email Change Complete')));
 <?php
 
 site_user_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

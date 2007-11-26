@@ -58,7 +58,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		session_get_user()=user_get_object($user_id,$result);
 	}
 */
-	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname())));
+	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 	$tabcnt=0;	
 	?>
 <script type="text/javascript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/tabber/tabber.js"></script>
@@ -373,5 +373,10 @@ plugin_hook('call_user_cal') ;
 	echo site_user_footer(array());
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

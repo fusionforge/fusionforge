@@ -482,7 +482,7 @@ if ($editdoc && $docid) {
 //	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
 	
-	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),_('Document Manager: Administration'),'admin');
+	docman_header(sprintf(_('Project %s'), $g->getPublicName()),_('Document Manager: Administration'),'admin');
 
 	?> 
 	<h3><?php echo _('Document Manager: Administration') ?></h3>

@@ -34,8 +34,6 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-global $Language;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error('Error',$report->getErrorMessage());
@@ -129,7 +127,7 @@ if ($week) {
 		$respm=db_query($sql);
 	}
 	?>
-<h3><?php echo $Language->getText('reporting_ta','time_entries',date('Y-m-d',$week)); ?></h3>
+		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
 <p><?php
 if ( $sys_database_type == "mysql" ) {
 	$sql="SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, ";

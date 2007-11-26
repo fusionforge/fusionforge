@@ -12,9 +12,9 @@ require_once('www/search/include/engines/GroupSearchEngine.class.php');
 class WikiGroupSearchEngine extends GroupSearchEngine {
 	
 	function WikiGroupSearchEngine() {
-		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_WIKI, 'WikiHtmlSearchRenderer', 
-			$Language->getText('plugin_wiki','wiki'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_WIKI,
+					 'WikiHtmlSearchRenderer', 
+					 _('Wiki'));
 	}
 	
 	function isAvailable($parameters) {

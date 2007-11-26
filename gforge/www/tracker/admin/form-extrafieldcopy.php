@@ -5,8 +5,9 @@
 //
 		$id = getIntFromRequest('id');
 		$fb= new ArtifactExtraField($ath,$id);
-		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_copy','choices_title',$fb->getName())));
-		echo "<h3>".$Language->getText('tracker_admin_copy','choices_title',$fb->getName())."</h3>";
+$title = sprintf(_('Copy choices from custom field %1$s')$fb->getName());
+$ath->adminHeader(array ('title'=>$title);
+		echo "<h3>".$title."</h3>";
 		
 		$efearr =& $ath->getExtraFieldElements($id);
 		for ($i=0; $i<count($efearr); $i++) {
@@ -72,5 +73,10 @@
 		
 		<?php
 		$ath->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

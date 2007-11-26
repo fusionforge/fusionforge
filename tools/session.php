@@ -345,19 +345,19 @@ function session_require($req) {
 		$group =& group_get_object($req['group']);
 
 		if (!$group || !is_object($group)) {
-			exit_error($Language->getText('general','error'),
-				$Language->getText('error','error_creating_group'));
+			exit_error(_('Error'),
+				   _('Error creating group object'));
 		} else if ($group->isError()) {
-			exit_error($Language->getText('general','error'),
+			exit_error(_('Error'),
 				$group->getErrorMessage());
 		}
 
 		$perm =& $group->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm)) {
-			exit_error($Language->getText('general','error'),
-				$Language->getText('error','error_creating_perm'));
+			exit_error(_('Error'),
+				   _('Error creating permission object'));
 		} else if ($perm->isError()) {
-			exit_error($Language->getText('general','error'),
+			exit_error(_('Error'),
 				$perm->getErrorMessage());
 		}
 
@@ -534,5 +534,10 @@ function user_isloggedin() {
 		return false;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

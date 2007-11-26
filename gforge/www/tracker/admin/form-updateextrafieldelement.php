@@ -19,11 +19,11 @@
 		} elseif ($ao->isError()) {
 			exit_error('Error',$ao->getErrorMessage());
 		} else {
-
-			$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','opt_update_title',$ath->getName())));
+			$title = sprintf(_('Modify a custom field element in %s'), $ath->getName()) ;
+			$ath->adminHeader(array('title'=>$title));
 
 			echo '
-				<h2>'.$Language->getText('tracker_admin_build_boxes','opt_update_title',$ath->getName()).'</h2>';
+				<h2>'.$title.'</h2>';
 
 			?>
 			<p>
@@ -53,5 +53,10 @@
 			$ath->footer(array());
 		}
 	}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -24,8 +24,6 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 *
 	 */
 	function WikiHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
-		global $Language;
-		
 		$this->groupId = $groupId;
 		
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
@@ -34,11 +32,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact, 
 			$searchQuery, $groupId, 'wiki');
 		
-		$this->tableHeaders = array(
-			$Language->getText('plugin_wiki', 'pagename'),
-			$Language->getText('plugin_wiki', 'author'),
-			$Language->getText('plugin_wiki', 'date'),
-		);
+		$this->tableHeaders = array(_('Page'),_('Author'), _('Date'));
 	}
 	
 	/**

@@ -117,7 +117,6 @@ if (session_loggedin()) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 					exit_form_double_submit();
 				}
-				$rowsDone = 0;
 
 				for($i = 0; $i < $numItems; $i++) {
 					$title[$i] = substr($title[$i], 0, 100);	/* delimit the title to 100 chars */
@@ -135,8 +134,7 @@ if (session_loggedin()) {
 						$feedback = _('Failed to update skills');
 						break;
 					} else {
-						$rowsDone++;
-						$feedback = $Language->getText('people_editprofile','update_skills_ok', ($rowsDone>1?"s":""));
+						$feedback = ngettext ('Skill updated', 'Skills updated', db_affected_rows($result));
 					}
 				}   /* end for */
 
@@ -187,7 +185,7 @@ if (session_loggedin()) {
 					$feedback .= _('Failed to delete any skills');
 					echo '<h2>'._('Failed to delete any skills').'<h2>';
 				} else {		  
-					$feedback = $Language->getText('people_editprofile','skill_delete_successfully',(db_affected_rows($result)>1?"s":" "));
+					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
 			} else {
 				$sql = "SELECT title FROM skills_data where skills_data_id in(".$skill_delete[0];
@@ -204,11 +202,12 @@ if (session_loggedin()) {
 					people_header(array('title'=>_('Confirm skill delete')));
 
 					echo '<span class="important">'._('Confirm Delete').'</span>';
-					echo $Language->getText('people_editprofile','about_to_delete',($rows > 1?"s":" ")).":<br /><br />";
+					print ngettext('You are about to delete the following skill from the skills database:', 'You are about to delete the following skills from the skills database:', $rows) ;
+					echo "<br />";
 					for($i = 0; $i < $rows; $i++) {
 						echo "<strong>&nbsp;&nbsp;&nbsp;" .db_result($result, $i, 'title') . "</strong><br />";
 					}
-					echo "<br />"._('from the skills database. This action cannot be undone.')."<br /><br />";
+					echo "<br />"._('This action cannot be undone.')."<br /><br />";
 					echo _('Are you <strong>sure</strong> you wish to continue?');
 					
 					echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
@@ -345,5 +344,10 @@ if (session_loggedin()) {
 	*/
 	exit_not_logged_in();
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

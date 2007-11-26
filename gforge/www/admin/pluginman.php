@@ -62,7 +62,7 @@ if (getStringFromRequest('update')) {
 			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
-				$feedback .= $Language->getText('pluginman','userdeleted',db_affected_rows($res));
+				$feedback .= sprintf(ngettext('%d user detached from plugin.', '%d users detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
 		}
 		if (getStringFromRequest('delgroups')) {
@@ -71,7 +71,7 @@ if (getStringFromRequest('update')) {
 			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
-				$feedback .= $Language->getText('pluginman','groupdeleted',db_affected_rows($res));
+				$feedback .= sprintf(ngettext('%d group detached from plugin.', '%d groups detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
 		}
 		$sql = "DELETE FROM plugins WHERE plugin_name = '$pluginname'";

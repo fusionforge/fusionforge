@@ -93,8 +93,11 @@ if (getStringFromRequest("submit")) {
 	$feedback = _('ERROR').': '.$u->getErrorMessage();
 }
 
-$HTML->header(array('title'=>"Lost Password Login"));
-echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
+$title = _("Lost Password Login") ;
+$HTML->header(array('title'=>$title));
+echo '<h2>'.$title.'</h2><p>' ;
+printf (_('Welcome, %s. You may now change your password.'),$u->getUnixName());
+echo '</p>';
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -109,5 +112,10 @@ echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
 <?php
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -32,9 +32,6 @@ require_once('common/include/Group.class.php');
 require_once('common/include/escapingUtils.php');
 require_once('www/include/BaseLanguage.class.php');
 
-$Language=new BaseLanguage();
-$Language->loadLanguage('English');
-
 // Plugins subsystem
 require_once('common/include/Plugin.class.php') ;
 require_once('common/include/PluginManager.class.php') ;

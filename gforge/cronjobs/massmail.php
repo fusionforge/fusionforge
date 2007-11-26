@@ -44,10 +44,6 @@ if (!cron_create_lock(__FILE__)) {
 	exit();
 }
 
-//bad hack to get around Roland's misuse of Language in utils.php
-$Language = new BaseLanguage();
-$Language->loadLanguage($sys_lang);
-
 // Pause between messages, sec
 $SLEEP = 1;
 
@@ -184,5 +180,10 @@ function m_exit($mess = '') {
 	}
 	exit;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

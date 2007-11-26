@@ -124,14 +124,14 @@ $HTML->header(array('title'=>_('Calendar'),'group'=>$group_id));
  *
  */
 function make_task_link($task, $type) {
-	global $HTML, $Language, $group_id, $group_project_id;
-	return '<a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
+	global $HTML, $group_id, $group_project_id;
+	return '<a title="'. sprintf(_('Task summary: %s'), $task->getSummary())
 		. '" href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
 		. '&amp;group_id=' . $group_id
 		. '&amp;group_project_id=' .$group_project_id
 		. '">' . ($type == 'begin' ?
-			  $Language->getText('calendar', 'task_begins', $task->getID()) :
-			  $Language->getText('calendar', 'task_ends', $task->getID()))
+			  sprintf(_('Task %d begins'), $task->getID()) :
+			  sprintf(_('Task %d ends'), $task->getID()) )
 		. '</a>';
 }
 
@@ -322,5 +322,10 @@ if ($type == 'onemonth') {
 }
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

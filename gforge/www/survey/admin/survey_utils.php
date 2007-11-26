@@ -27,7 +27,6 @@
 
 Function  ShowResultsEditSurvey($result) {
 	global $group_id;
-	global $Language;
 	$rows  =  db_NumRows($result);
 	$cols  =  db_NumFields($result);
 	echo "<h3>". sprintf(ngettext('%1$s survey found', '%1$s surveys found', $rows), $rows)."</h3>";
@@ -38,7 +37,7 @@ Function  ShowResultsEditSurvey($result) {
 		/*  Create  the  headers  */
 		echo "<tr class=\"tableheading\">\n";
 		for ($i  =  0;  $i  <  $cols;  $i++)  {
-			echo "<th>".$Language->getText('survey_admin_utils',db_fieldname($result,$i))."</th>\n";
+			echo "<th>".db_fieldname($result,$i)."</th>\n";
 		}
 		echo "</tr>";
 		for($j  =  0;  $j  <  $rows;  $j++)  {
@@ -55,5 +54,9 @@ Function  ShowResultsEditSurvey($result) {
 	}
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

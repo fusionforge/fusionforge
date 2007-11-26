@@ -130,17 +130,15 @@ class GforgeWikiPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			global $Language;
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$user_name = $user->getUnixName();
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/wiki/u/'.urlencode($user_name).'/HomePage">' . $Language->getText('user_home','view_wiki') .'</a></p>';
+					<a href="/wiki/u/'.urlencode($user_name).'/HomePage">' . _('View personal wiki') .'</a></p>';
 			}
 		} elseif ($hookname == 'search_engines') {
-			global $Language;
 			// FIXME: when the hook is called, the group_id is not set.
 			// So I use the global variable instead.
 			$group_id = $GLOBALS['group_id'];
@@ -150,9 +148,9 @@ class GforgeWikiPlugin extends Plugin {
 					$params->addSearchEngine(
 						SEARCH__TYPE_IS_WIKI,
 						new WikiSearchEngine(SEARCH__TYPE_IS_WIKI, 
-							'WikiHtmlSearchRenderer', 
-							$Language->getText('plugin_wiki','searchbox'), $group_id)
-					);
+								     'WikiHtmlSearchRenderer', 
+								     _("This project's wiki"), $group_id)
+						);
 				}
 			}
 		} elseif ($hookname == 'full_search_engines') {

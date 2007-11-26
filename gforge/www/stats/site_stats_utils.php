@@ -45,7 +45,6 @@ function stats_util_sum_array( $sum, $add ) {
  *	and "special project list" respectively
  */
 function stats_generate_trove_pulldown( $selected_id = 0 ) {
-	global $Language;	
 	$res = db_query("
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
@@ -55,8 +54,8 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 		<select name="trovecatid">';
 
 		print '
-			<option value="-2">'.$Language->getString('stats_site_utils','all_projects').'</option>
-			<option value="-1">'.$Language->getString('stats_site_utils','sprecial_project_list').'</option>';
+			<option value="-2">'._('All Projects').'</option>
+			<option value="-1">'._('Special Projects').'</option>';
 
 	while ( $row = db_fetch_array($res) ) {
 		print	'
@@ -80,7 +79,7 @@ function stats_trove_cat_to_name( $trovecatid ) {
 	if ( $row = db_fetch_array($res) ) {
 		return $row["fullpath"];
 	} else { 
-		return " ( $trovecatid $Language->getString('stats_site_utils','returned_no_category')) ";
+		return sprintf(_(" (no category found with ID %d)"), $trovecatid) ;
 	}
 }
 

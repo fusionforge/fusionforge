@@ -30,6 +30,7 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 		<?php
 
 // ########################################## top area, not in box
+
 $res_admin = db_query("SELECT users.user_id,users.user_name,users.realname,user_group.admin_flags
 	FROM users,user_group
 	WHERE user_group.user_id=users.user_id
@@ -82,12 +83,13 @@ if($GLOBALS['sys_use_people']) {
 	if ($jobs_res) {
 		$num=db_numrows($jobs_res);
 			if ($num>0) {
-				print '<br /><br />'._('HELP WANTED: This project is looking for').'  ';
-					if ($num==1) {
-						print '<a href="'.$GLOBALS['sys_urlprefix'].'/people/?group_id='.$group_id.'">'. db_result($jobs_res,0,"name").'(s)</a>';
-					} else {
-						print $Language->getText('project_home','help_wanted_multiple', '<a href="'.$GLOBALS['sys_urlprefix'].'/people/?group_id='.$group_id.'">').' </a>';
-					}
+				print '<br /><br />';
+				printf(
+					ngettext('HELP WANTED: This project is looking for a <a href="%1$s">"%2$s"</a>.',
+						 'HELP WANTED: This project is looking for people to fill <a href="%1$s">several different positions</a>.',
+						 $num),
+					$GLOBALS['sys_urlprefix'].'/people/?group_id='.$group_id,
+					db_result($jobs_res,0,"name"));
 			}
 	}
 }
@@ -426,5 +428,10 @@ plugin_hook('project_home_link',$group_id);
 <?php
 
 site_project_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

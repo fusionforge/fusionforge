@@ -147,10 +147,8 @@ function continue_session($sessionKey) {
  * @return	string	the session key
  */
 function login($userid, $passwd) {
-	global $feedback, $Language, $session_ser;
+	global $feedback, $session_ser;
 		
-	$Language=new BaseLanguage();
-	$Language->loadLanguage("English"); // TODO use the user's default language
 	setlocale (LC_TIME, _('en_US'));
 
 	$res = session_login_valid($userid, $passwd);

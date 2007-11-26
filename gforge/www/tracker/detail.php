@@ -32,7 +32,7 @@ echo notepad_func();
 					}
 					echo '
 					<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
-						html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
+						html_image('ic/'.$img.'','20','20',array()).' '.$key.'</strong></a>';
 					?>&nbsp;<a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 
 				<?php /* } else { ?>
