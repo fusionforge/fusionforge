@@ -231,7 +231,7 @@ class Group extends Error {
 			} else {
 				if (db_numrows($res) < 1) {
 					//function in class we extended
-					$this->setError('Group Not Found');
+					$this->setError(_('Group Not Found'));
 					$this->data_array=array();
 					return false;
 				} else {
@@ -247,8 +247,7 @@ class Group extends Error {
 			$perm =& $this->getPermission(session_get_user());
 
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				// cannot use $Language as it is not created yet
-				$this->setError('Permission denied', ERROR__PERMISSION_DENIED_ERROR);
+				$this->setError(_('Permission denied'), ERROR__PERMISSION_DENIED_ERROR);
 				return false;
 			}
 		}
@@ -263,7 +262,7 @@ class Group extends Error {
 	function fetchData($group_id) {
 		$res = db_query("SELECT * FROM groups WHERE group_id='$group_id'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('fetchData():: '.db_error());
+			$this->setError(sprintf(_('fetchData():: %s'),db_error()));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -287,13 +286,13 @@ class Group extends Error {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
-			$this->setError("Group::create: Group object already exists");
+			$this->setError(_('Group::create: Group object already exists'));
 			return false;
 		} else if (strlen($full_name)<3) {
 			$this->setError(_('Invalid full name'));
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
-			$this->setError(_('Invalid unix name'));
+			$this->setError(_('Invalid Unix name'));
 			return false;
 		} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
 			$this->setError(_('Unix name already taken'));
@@ -311,7 +310,7 @@ class Group extends Error {
 			$this->setError(_('Your project description is too long. Please make it smaller than 256 bytes.'));
 			return false;
 		} else if (!$license) {
-			$this->setError(_('You do not have chosen a license'));
+			$this->setError(_('You have not chosen a license'));
 			return false;
 		} else if ($license!=GROUP_LICENSE_OTHER && $license_other) {
 			$this->setError(_('Conflicting licenses choice'));
@@ -362,14 +361,14 @@ class Group extends Error {
 			");
 	
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('ERROR: Could not create group: '.db_error());
+				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
 	
 			$id = db_insertid($res, 'groups', 'group_id');
 			if (!$id) {
-				$this->setError('ERROR: Could not get group id: '.db_error());
+				$this->setError(sprintf(_('ERROR: Could not get group id: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
@@ -383,7 +382,7 @@ class Group extends Error {
 	
 			$res=db_query($sql);
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('ERROR: Could not add admin to newly created group: '.db_error());
+				$this->setError(sprintf(_('ERROR: Could not add admin to newly created group: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
@@ -437,7 +436,7 @@ class Group extends Error {
 		");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR: DB: Could not change group properties: '.db_error());
+			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error()));
 			db_rollback();
 			return false;
 		}
@@ -501,14 +500,14 @@ class Group extends Error {
 
 		// Validate some values
 		if (!$group_name) {
-			$this->setError('Invalid Group Name');
+			$this->setError(_('Invalid Group Name'));
 			return false;
 		}
 
 		if ($new_doc_address) {
 			$invalid_mails = validate_emails($new_doc_address);
 			if (count($invalid_mails) > 0) {
-				$this->setError('New Doc Address(es) Appeared Invalid: '.implode(',',$invalid_mails));
+				$this->setError(sprintf (ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
 				return false;
 			}
 		}
@@ -560,7 +559,7 @@ class Group extends Error {
 		}
 
 		if (strlen($short_description)>255) {
-			$this->setError('Error updating project information: Maximum length for Project Description is 255 chars.');
+			$this->setError(_('Error updating project information: Maximum length for Project Description is 255 chars.'));
 			return false;
 		}
 
@@ -604,7 +603,7 @@ class Group extends Error {
 		$res = db_query($sql);
 
 		if (!$res) {
-			$this->setError('Error updating project information: '.db_error());
+			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
 			db_rollback();
 			return false;
 		}
@@ -683,7 +682,7 @@ class Group extends Error {
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
 			&& !$allowed_status_changes[$this->getStatus().$status]) {
-			$this->setError('Invalid Status Change');
+			$this->setError(_('Invalid Status Change'));
 			return false;
 		}
 
@@ -694,7 +693,7 @@ class Group extends Error {
 			WHERE group_id='". $this->getID()."'");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR: DB: Could not change group status: '.db_error());
+			$this->setError(sprintf(_('ERROR: DB: Could not change group status: %s'),db_error()));
 			db_rollback();
 			return false;
 		}
@@ -727,7 +726,7 @@ class Group extends Error {
 
 		// Log the audit trail
 		if ($status != $this->getStatus()) {
-			$this->addHistory('status', $this->getStatus());
+			$this->addHistory('Status', $this->getStatus());
 		}
 
 		$this->data_array['status'] = $status;
@@ -857,11 +856,11 @@ class Group extends Error {
 				return true;
 			} else {
 				db_rollback();
-				$this->setError('Couldn\'t insert SCM_BOX to database');
+				$this->setError(_("Couldn't insert SCM_BOX to database"));
 				return false;
 			}
 		} else {
-			$this->setError(_('SCM Box can\'t be empty'));
+			$this->setError(_("SCM Box can't be empty"));
 			return false;
 		}
 	}
@@ -1283,7 +1282,7 @@ class Group extends Error {
 			$this->getID() == 1 ||
 			$this->getID() == $GLOBALS['sys_stats_group'] ||
 			$this->getID() == $GLOBALS['sys_peer_rating_group']) {
-			$this->setError('Cannot Delete System Group');
+			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
 		$perm =& $this->getPermission( session_get_user() );
@@ -1305,7 +1304,6 @@ class Group extends Error {
 		$members =& $this->getMembers();
 		for ($i=0; $i<count($members); $i++) {
 			$this->removeUser($members[$i]->getID());
-//echo 'RemoveMembers'.db_error();
 		}
 		//
 		//	Delete Trackers
@@ -1314,11 +1312,10 @@ class Group extends Error {
 		$at_arr =& $atf->getArtifactTypes();
 		for ($i=0; $i<count($at_arr); $i++) {
 			if (!is_object($at_arr[$i])) {
-				echo "Not Object: ArtifactType: ".$i;
+				printf (_("Not Object: ArtifactType: %d"),$i);
 				continue;
 			}
 			$at_arr[$i]->delete(1,1);
-//echo 'ArtifactTypeFactory'.db_error();
 		}
 		//
 		//	Delete Forums
@@ -1327,7 +1324,7 @@ class Group extends Error {
 		$f_arr =& $ff->getForums();
 		for ($i=0; $i<count($f_arr); $i++) {
 			if (!is_object($f_arr[$i])) {
-				echo "Not Object: Forum: ".$i;
+				printf (_("Not Object: Forum: %d"),$i);
 				continue;
 			}
 			$f_arr[$i]->delete(1,1);
@@ -1340,7 +1337,7 @@ class Group extends Error {
 		$pg_arr =& $pgf->getProjectGroups();
 		for ($i=0; $i<count($pg_arr); $i++) {
 			if (!is_object($pg_arr[$i])) {
-				echo "Not Object: ProjectGroup: ".$i;
+				printf (_("Not Object: ProjectGroup: %d"),$i);
 				continue;
 			}
 			$pg_arr[$i]->delete(1,1);
@@ -1369,7 +1366,7 @@ class Group extends Error {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				echo "Could Not Delete News Forum: ".$Forum->getID();
+				printf (_("Could Not Delete News Forum: %d"),$Forum->getID());
 			}
 		}
 		$res=db_query("DELETE FROM news_bytes WHERE group_id='".$this->getID()."'");
@@ -1403,7 +1400,7 @@ class Group extends Error {
 		$s_arr =& $sf->getSurveys();
 		for ($i=0; $i<count($s_arr); $i++) {
 			if (!is_object($s_arr[$i])) {
-				echo "Not Object: Survey: ".$i;
+				printf (_("Not Object: Survey: %d"),$i);
 				continue;
 			}
 			$s_arr[$i]->delete();
@@ -1416,7 +1413,7 @@ class Group extends Error {
 		$sq_arr =& $sqf->getSurveyQuestions();
 		for ($i=0; $i<count($sq_arr); $i++) {
 			if (!is_object($sq_arr[$i])) {
-				echo "Not Object: SurveyQuestion: ".$i;
+				printf (_("Not Object: SurveyQuestion: %d"),$i);
 				continue;
 			}
 			$sq_arr[$i]->delete();
@@ -1429,11 +1426,11 @@ class Group extends Error {
 		$ml_arr =& $mlf->getMailingLists();
 		for ($i=0; $i<count($ml_arr); $i++) {
 			if (!is_object($ml_arr[$i])) {
-				echo "Not Object: MailingList: ".$i;
+				printf (_("Not Object: MailingList: %d"),$i);
 				continue;
 			}
 			if (!$ml_arr[$i]->delete(1,1)) {
-				$this->setError(_('Could not delete properly the mailing list'));
+				$this->setError(_('Could not properly delete the mailing list'));
 			}
 //echo 'MailingListFactory'.db_error();
 		}
@@ -1520,7 +1517,7 @@ class Group extends Error {
 			//	make sure user is active
 			//
 			if (db_result($res_newuser,0,'status') != 'A') {
-				$this->setError('User is not active. Only active users can be added.');
+				$this->setError(_('User is not active. Only active users can be added.'));
 				db_rollback();
 				return false;
 			}
@@ -1548,7 +1545,7 @@ class Group extends Error {
 
 				//verify the insert worked
 				if (!$res || db_affected_rows($res) < 1) {
-					$this->setError('ERROR: Could Not Add User To Group: '.db_error());
+					$this->setError(sprintf(_('ERROR: Could Not Add User To Group: %s'),db_error()));
 					db_rollback();
 					return false;
 				}
@@ -1575,7 +1572,7 @@ class Group extends Error {
 				//
 				$role = new Role($this,$role_id);
 				if (!$role || !is_object($role)) {
-					$this->setError('Error Getting Role Object');
+					$this->setError(_('Error Getting Role Object'));
 					db_rollback();
 					return false;
 				} elseif ($role->isError()) {
@@ -1598,7 +1595,7 @@ class Group extends Error {
 				$user->fetchData($user->getID());
 				$role = new Role($this,$role_id);
 				if (!$role || !is_object($role)) {
-					$this->setError('Error Getting Role Object');
+					$this->setError(_('Error Getting Role Object'));
 					db_rollback();
 					return false;
 				} elseif ($role->isError()) {
@@ -1628,7 +1625,7 @@ class Group extends Error {
 			//
 			//	user doesn't exist
 			//
-			$this->setError('ERROR: User does not exist');
+			$this->setError(_('ERROR: User does not exist'));
 			db_rollback();
 			return false;
 		}
@@ -1668,7 +1665,7 @@ class Group extends Error {
 			WHERE group_id='".$this->getID()."' 
 			AND user_id='$user_id'");
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR: DB: User not removed.'.db_error());
+			$this->setError(sprintf(_('ERROR: User not removed: %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
@@ -1682,7 +1679,7 @@ class Group extends Error {
 				WHERE group_id='".$this->getID()."') 
 				AND status_id='1' AND assigned_to='$user_id'");
 			if (!$res) {
-				$this->setError('ERROR: DB: artifact.'.db_error());
+				$this->setError(sprintf(_('ERROR: DB: artifact: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
@@ -1715,7 +1712,7 @@ class Group extends Error {
 					AND assigned_to_id='100'");
 			}
 			if (!$res) {
-				$this->setError('ERROR: DB: project_assigned_to 1 - '.db_error());
+				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),1,db_error()));
 				db_rollback();
 				return false;
 			}
@@ -1726,7 +1723,7 @@ class Group extends Error {
 				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."') 
 				AND assigned_to_id='$user_id'");
 			if (!$res) {
-				$this->setError('ERROR: DB: project_assigned_to 2 - '.db_error());
+				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),2,db_error()));
 				db_rollback();
 				return false;
 			}
@@ -1741,7 +1738,7 @@ class Group extends Error {
 				return false;
 			}
 			//audit trail
-			$this->addHistory('removed user',$user_id);
+			$this->addHistory('Removed User',$user_id);
 		}
 		db_commit();
 		return true;
@@ -1765,18 +1762,18 @@ class Group extends Error {
 
 		$role = new Role($this,$role_id);
 		if (!$role || !is_object($role)) {
-			$this->setError('Could Not Get Role');
+			$this->setError(_('Could Not Get Role'));
 			return false;
 		} elseif ($role->isError()) {
-			$this->setError('Role: '.$role->getErrorMessage());
+			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
 		}
 //echo "<h3>Group::updateUser role->setUser($user_id)</h3>";
 		if (!$role->setUser($user_id)) {
-			$this->setError('Role: '.$role->getErrorMessage());
+			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
 		}
-		$this->addHistory('updated user',$user_id);
+		$this->addHistory('Updated User',$user_id);
 		return true;
 	}
 
@@ -1824,10 +1821,10 @@ class Group extends Error {
 				$roleId = db_result($member_res,$i,'role_id');
 
 				if (!$member || !is_object($member)) {
-					$this->setError('Error getting member object');
+					$this->setError(_('Error getting member object'));
 					return false;
 				} else if ($member->isError()) {
-					$this->setError('Error getting member object: '.$member->getErrorMessage());
+					$this->setError(sprintf(_('Error getting member object: %s'),$member->getErrorMessage()));
 					return false;
 				}
 
@@ -1867,7 +1864,7 @@ class Group extends Error {
 	function approve(&$user) {
 
 		if ($this->getStatus()=='A') {
-			$this->setError("Group already active");
+			$this->setError(_("Group already active"));
 			return false;
 		}
 
@@ -1886,16 +1883,16 @@ class Group extends Error {
 		//
 		$ats = new ArtifactTypes($this);
 		if (!$ats || !is_object($ats)) {
-			$this->setError('Error creating ArtifactTypes object');
+			$this->setError(_('Error creating ArtifactTypes object'));
 			db_rollback();
 			return false;
 		} else if ($ats->isError()) {
-			$this->setError('ATS1 '.$ats->getErrorMessage());
+			$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage());
 			db_rollback();
 			return false;
 		}
 		if (!$ats->createTrackers()) {
-			$this->setError('ATS2 '.$ats->getErrorMessage());
+			$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage());
 			db_rollback();
 			return false;
 		}
@@ -1907,19 +1904,19 @@ class Group extends Error {
 		//
 		$f = new Forum($this);
 		if (!$f->create('Open-Discussion','General Discussion',1,'',1,0)) {
-			$this->setError('F1 '.$f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage());
 			db_rollback();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create('Help','Get Public Help',1,'',1,0)) {
-			$this->setError('F2 '.$f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage());
 			db_rollback();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create('Developers','Project Developer Discussion',0,'',1,0)) {
-			$this->setError('F3 '.$f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage());
 			db_rollback();
 			return false;
 		}
@@ -1931,7 +1928,7 @@ class Group extends Error {
 		//
 		$dg = new DocumentGroup($this);
 		if (!$dg->create('Uncategorized Submissions')) {
-			$this->setError('DG1 '.$dg->getErrorMessage());
+			$this->setError(sprintf(_('DG: %s'),$dg->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
@@ -1943,7 +1940,7 @@ class Group extends Error {
 		//
 		$frs = new FRSPackage($this);
 		if (!$frs->create($this->getUnixName())) {
-			$this->setError('FRSP '.$frs->getErrorMessage());
+			$this->setError(sprintf(_('FRSP: %s'),$frs->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
@@ -1955,13 +1952,13 @@ class Group extends Error {
 		//
 		$pg = new ProjectGroup($this);
 		if (!$pg->create('To Do','Things We Have To Do',1)) {
-			$this->setError('PG1 '.$pg->getErrorMessage());
+			$this->setError(sprintf(_('PG%d: %s'),1,$pg->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
 		$pg = new ProjectGroup($this);
 		if (!$pg->create('Next Release','Items For Our Next Release',1)) {
-			$this->setError('PG2 '.$pg->getErrorMessage());
+			$this->setError(sprintf(_('PG%d: %s'),2,$pg->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
@@ -1976,7 +1973,7 @@ class Group extends Error {
 		for ($c=0; $c<count($todo); $c++) {
 			$role = new Role($this);
 			if (!$role->createDefault($todo[$c])) {
-				$this->setError('R'.$c.' '.$role->getErrorMessage());
+				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
 				db_rollback();
 				return false;
 			}
@@ -1993,8 +1990,8 @@ class Group extends Error {
 		if (db_numrows($admin_group) > 0) {
 			$idadmin_group = db_result($admin_group,0,'user_id');
 		}
-		if (!$mlist->create('commits','cvs commits',1,$idadmin_group)) {
-			$this->setError('MailingList: '.$mlist->getErrorMessage());
+		if (!$mlist->create('commits','Commits',1,$idadmin_group)) {
+			$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
@@ -2002,14 +1999,14 @@ class Group extends Error {
 		db_commit();
 
 		$this->sendApprovalEmail();
-		$this->addHistory('approved', 'x');
+		$this->addHistory('Approved', 'x');
 		
 		//plugin webcal
-			//change assistant for webcal
+		//change assistant for webcal
 			
-			$params[0] = $idadmin_group ;
-			$params[1] = $this->getID();
-			plugin_hook('change_cal_permission_default',$params);	
+		$params[0] = $idadmin_group ;
+		$params[1] = $this->getID();
+		plugin_hook('change_cal_permission_default',$params);	
 
 		return true;
 	}
@@ -2032,7 +2029,7 @@ class Group extends Error {
 		");
 
 		if (db_numrows($res_admins) < 1) {
-			$this->setError("Group does not have any administrators.");
+			$this->setError(_("Group does not have any administrators."));
 			return false;
 		}
 
@@ -2103,7 +2100,7 @@ if there is anything we can do to help you.
 		");
 
 		if (db_numrows($res_admins) < 1) {
-			$this->setError("Group does not have any administrators.");
+			$this->setError(_("Group does not have any administrators."));
 			return false;
 		}
 		
@@ -2157,7 +2154,7 @@ Reasons for negative decision:
 				AND users.user_id=user_group.user_id;");
 		
 		if (db_numrows($res) < 1) {
-			$this->setError("There is no administrator to send the mail.");
+			$this->setError(_("There is no administrator to send the mail."));
 			return false;
 		} else {
 			for ($i=0; $i<db_numrows($res) ; $i++) {
@@ -2184,7 +2181,7 @@ http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicN
 				 WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
 
 		if (db_numrows($res) < 1) {
-			$this->setError("Cound not find user who has submitted the project.");
+			$this->setError(_("Cound not find user who has submitted the project."));
 			return false;
 		} else {
 			for ($i=0; $i<db_numrows($res) ; $i++) {
@@ -2288,7 +2285,7 @@ function setUnixStatus($status) {
 	");
 
 	if (!$res) {
-		$this->setError('ERROR - Could Not Update Group Unix Status: '.db_error());
+		$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));
 		db_rollback();
 		return false;
 	} else {
