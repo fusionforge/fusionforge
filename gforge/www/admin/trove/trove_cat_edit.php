@@ -47,7 +47,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($form_shortname) {
 		if ($form_trove_cat_id == $form_parent) {
-			exit_error(_("Error: a category can't be the same as its own parent"),
+			exit_error(_("Error: a category can't be the same as its own parent."),
 				   db_error()
 			);
 		} else {
