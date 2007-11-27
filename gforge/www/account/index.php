@@ -146,7 +146,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 
 <tr valign="top">
 <td><?php echo _('Language:'); ?> </td>
-<td><?php echo html_get_language_popup ($Language,'language',$u->getLanguage()); ?>
+<td><?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
 </td>
 </tr>
 

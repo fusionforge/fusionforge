@@ -125,7 +125,7 @@ if (!isset($ccode) || empty($ccode) || !eregi('^[a-z][a-z]$', $ccode)) {
 </p>
 <p>
 <?php echo _('Language Choice:'); ?><br />
-<?php echo html_get_language_popup ($Language,'language_id',$Language->getLanguageId()); ?>
+<?php echo html_get_language_popup ('language_id', language_name_to_lang_id (choose_language_from_context ()); ?>
 </p>
 <p>
 <?php echo _('Timezone:'); ?><br />

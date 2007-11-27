@@ -96,61 +96,6 @@ class BaseLanguage {
 		}
 	}
 
-	/**
-	 * getText - get a localized string
-	 *
-	 * @param string $pagename name of the current page
-	 * @param string $category key
-	 * @param mixed $args array which will replace the $1, $2, etc before it is returned
-	 */
-	function getText($pagename, $category, $args = '') {
-		if ($args) {
-			for ($i=1, $max = sizeof($args)+1; $i <= $max; $i++) {
-				$patterns[] = '/\$'.$i.'/';
-			}
-			$tstring = preg_replace($patterns, $args, $this->textArray[$pagename][$category]);
-		} else {
-			$tstring = $this->textArray[$pagename][$category];
-		}
-		return $tstring;
-	}
-
-	/**
-	 * getLanguages - returns database result of supported languages
-	 *
-	 * @return resource supported languages
-	 */
-	function getLanguages() {
-		if (!isset($this->languagesRes)) {
-			$this->languagesRes = db_query('SELECT * FROM supported_languages ORDER BY name ASC');
-		}
-		return $this->languagesRes;
-	}
-
-	/**
-	 * getLanguageId - returns the language id corresponding to the language name
-	 *
-	 * @return int language id
-	 */
-	function getLanguageId() {
-		if (!$this->id) {
-			$this->id = db_result(db_query("SELECT language_id FROM supported_languages WHERE classname='".$this->lang."'"), 0, 0) ;
-		}
-		return $this->id ;
-	}
-
-	/**
-	 * getLanguageName - returns the language name corresponding to the language id
-	 *
-	 * @return string language name
-	 */
-	function getLanguageName() {
-		if (!$this->name) {
-			$id = $this->getLanguageId () ;
-			$this->name = db_result(db_query("SELECT name FROM supported_languages WHERE language_id='$id'"), 0, 0) ;
-		}
-		return $this->name ;
-	}
 }
 
 /**
@@ -223,7 +168,7 @@ function getLanguageClassName($acceptedLanguages) {
 	}
 }
 
-function language_code_from_name ($lang) {
+function language_name_to_locale_code ($lang) {
 	$langmap = array (
 		'Basque'              => 'eu_ES',
 		'Bulgarian'           => 'bg_BG',
@@ -253,13 +198,54 @@ function language_code_from_name ($lang) {
 	return $langmap[$lang] ;
 }
 
-function setup_gettext_from_browser() {
+function locale_code_to_language_name ($loc) {
+	$localemap = array (
+		'eu_ES' => 'Basque',
+		'bg_BG' => 'Bulgarian',
+		'ca_ES' => 'Catalan',
+		'zh_TW' => 'Chinese',
+		'nl_NL' => 'Dutch',
+		'en_US' => 'English',
+		'eo' 	=> 'Esperanto',
+		'fr_FR' => 'French',
+		'de_DE' => 'German',
+		'el_GR' => 'Greek',
+		'he_IL' => 'Hebrew',
+		'id_ID' => 'Indonesian',
+		'it_IT' => 'Italian',
+		'ja_JP' => 'Japanese',
+		'ko_KR' => 'Korean',
+		'nb_NO' => 'Norwegian',
+		'pl_PL' => 'Polish',
+		'pt_BR' => 'PortugueseBrazilian',
+		'pt_PT' => 'Portuguese',
+		'ru_RU' => 'Russian',
+		'zh_CN' => 'SimplifiedChinese',
+		'es_ES' => 'Spanish',
+		'sv_SE' => 'Swedish',
+		'th_TH' => 'Thai',
+		) ;
+	return $localemap[$loc] ;
+}
+
+function lang_id_to_language_name ($id) {
+	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
+	return db_result($res, 0, 'classname');
+}
+
+function language_name_to_lang_id ($language) {
+	$res = db_query('SELECT language_id FROM supported_languages WHERE classname=\''.$language.'\'');
+	return db_result($res, 0, 'classname');
+}
+
+function choose_language_from_context () {
 	global $sys_lang ;
 	if (!$sys_lang) {
 		$sys_lang="English";
 	}
 	if (session_loggedin()) {
-		setup_gettext_for_user(session_get_user());
+		$user = session_get_user () ;
+		return (lang_id_to_language_name ($user->getLanguage()) ;
 	} else {
 		//if you aren't logged in, check your browser settings 
 		//and see if we support that language
@@ -269,21 +255,25 @@ function setup_gettext_from_browser() {
 		} else {
 			$classname=$sys_lang;
 		}
-		setup_gettext_from_langname($classname);
+		return $classname;
 	}
 }
 
-function setup_gettext_for_user($user) {
-	setup_gettext_from_lang_id($user->getLanguage());
+function setup_gettext_from_browser() {
+	setup_gettext_from_langname (choose_language_from_context ());
 }
 
-function setup_gettext_from_lang_id($lang_id) {
-	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
-	setup_gettext_from_langname(db_result($res, 0, 'classname'));
+function setup_gettext_for_user ($user) {
+	setup_gettext_from_lang_id ($user->getLanguage());
+}
+
+function setup_gettext_from_lang_id ($lang_id) {
+	$lang = lang_id_to_language_name ($lang_id) ;
+	setup_gettext_from_langname() ;
 }
 
 function setup_gettext_from_langname ($lang) {
-	$locale = language_code_from_name($lang).'.utf8';
+	$locale = locale_code_from_name($lang).'.utf8';
 	setup_gettext_from_locale ($locale) ;
 }
 

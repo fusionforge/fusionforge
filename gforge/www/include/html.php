@@ -126,13 +126,12 @@ function html_image($src,$width,$height,$args,$display=1) {
 /**
  * html_get_language_popup() - Pop up box of supported languages.
  *
- * @param		object	BaseLanguage object.
  * @param		string	The title of the popup box.
  * @param		string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_language_popup ($Language,$title='language_id',$selected='xzxz') {
-	$res=$Language->getLanguages();
+function html_get_language_popup ($title='language_id',$selected='xzxz') {
+	$res = db_query('SELECT * FROM supported_languages ORDER BY name ASC');	
 	return html_build_select_box ($res,$title,$selected,false);
 }
 

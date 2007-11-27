@@ -210,7 +210,7 @@ if (getStringFromRequest('submit')) {
 			<tr>
 				<td>
 				<strong>'. _('Language').' :</strong><br />
-				'. html_get_language_popup($Language,'language_id',1) .'
+				'. html_get_language_popup('language_id',1) .'
 				</td>
 			</tr>
 			<tr>

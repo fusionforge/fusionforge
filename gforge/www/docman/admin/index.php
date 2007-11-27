@@ -252,7 +252,7 @@ if ($editdoc && $docid) {
 		<strong><?php echo _('Language') ?></strong><br />
 		<?php
 
-			echo html_get_language_popup($Language,'language_id',$d->getLanguageID());
+			echo html_get_language_popup('language_id',$d->getLanguageID());
 
 		?></td>
 	</tr>
