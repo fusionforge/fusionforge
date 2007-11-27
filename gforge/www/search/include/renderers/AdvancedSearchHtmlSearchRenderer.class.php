@@ -101,32 +101,32 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		
 		if (in_array('short_forum', $this->selectedParentSections)) {
 			$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_forum'));
-			$html .= $this->getPartResult($renderer, 'short_forum');
+			$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
 		}
 		
 		if (in_array('short_tracker', $this->selectedParentSections)) {
 			$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId,  $this->getSelectedChildSections('short_tracker'));
-			$html .= $this->getPartResult($renderer,  'short_tracker');
+			$html .= $this->getPartResult($renderer,  'short_tracker', _('Tracker Search Results'));
 		}
 		
 		if (in_array('short_pm', $this->selectedParentSections)) {
 			$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_pm'));
-			$html .= $this->getPartResult($renderer, 'short_pm');
+			$html .= $this->getPartResult($renderer, 'short_pm', _('Task Search Results'));
 		}
 
 		if (in_array('short_docman', $this->selectedParentSections)) {
 			$renderer = new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_docman'));
-			$html .= $this->getPartResult($renderer, 'short_docman');
+			$html .= $this->getPartResult($renderer, 'short_docman', _('Documentation Search Results'));
 		}
 
 		if (in_array('short_files', $this->selectedParentSections)) {
 			$renderer = new FilesHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId, $this->getSelectedChildSections('short_files'));
-			$html .= $this->getPartResult($renderer, 'short_files');
+			$html .= $this->getPartResult($renderer, 'short_files', _('Files Search Results'));
 		}
 		
 		if (in_array('short_news', $this->selectedParentSections)) {
 			$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-			$html .= $this->getPartResult($renderer, 'short_news');
+			$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 		}
 
 		return $html.'<br />'; 
@@ -137,11 +137,11 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	* 
   	* @return string result of the renderer
 	*/			
-	function getPartResult($renderer, $section) {
+	function getPartResult($renderer, $section, $title=$section) {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
 		
-		$result .= '<h3><a name="'.$section.'"></a>'.sprintf(_('%1$s Search Result'), $Language->getText('group', $section)).'</h3>';
+		$result .= '<h3><a name="'.$section.'"></a>'.$title.'</h3>';
 		
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
@@ -259,5 +259,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return $sections;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
