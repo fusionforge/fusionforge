@@ -100,24 +100,22 @@ class Theme extends Layout {
      * @param    array    Header parameters array
      */
     function header($params) {
-        global $Language;
-
         if (!$params['title']) {
             $params['title'] =  $GLOBALS['sys_name'];
         } else {
             $params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];
         }
-        print '<?xml version="1.0" encoding="' . $Language->getEncoding(). '"?>';
+        print '<?xml version="1.0" encoding="utf-8"?>';
         ?>
 
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo $Language->getLanguageCode(); ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo _('en'); ?>">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
     <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
@@ -139,15 +137,11 @@ class Theme extends Layout {
     <?php plugin_hook ("javascript",false) ; ?>
     </script>
     <?php
-    /*
-
-    WARNING - changing this font call can affect
-    INTERNATIONALIZATION
-
-    */
-
-    //gets font from Language Object
-    $site_fonts=$GLOBALS['Language']->getFont();
+	      if (_('default_font') != 'default_font') {
+		      $site_fonts = _('default_font');
+	      } else {
+		      $site_fonts = 'helvetica' ;
+	      }
 
     $this->headerCSS();
     ?>

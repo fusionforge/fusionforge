@@ -82,7 +82,7 @@ class Theme extends Error {
 		} else {
 			$params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];
 		}
-		print '<?xml version="1.0" encoding="' . $Language->getEncoding(). '"?>';
+		print '<?xml version="1.0" encoding="utf-8"';
 		?>
 
 <!DOCTYPE html
@@ -90,11 +90,11 @@ class Theme extends Error {
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-	lang="<?php echo $Language->getLanguageCode(); ?>">
+	lang="<?php echo _('en') ?>">
 
 <head>
 <meta http-equiv="Content-Type"
-	content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
+	content="text/html; charset=utf-8" />
 <title><?php echo $params['title']; ?></title>
 <link rel="alternate"
 	title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS"

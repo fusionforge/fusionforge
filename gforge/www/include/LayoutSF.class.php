@@ -327,9 +327,9 @@ class LayoutSF extends Layout {
 		?>
 
 <!-- Server: <?php echo $sys_name; ?> -->
-<html lang="<?php echo $Language->getLanguageCode(); ?>">
+<html lang="<?php echo _('en') ?>">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8 ?>">
     <TITLE><?php echo $params['title']; ?></TITLE>
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/css/gforge.css" />
 	<SCRIPT language="JavaScript">
@@ -405,20 +405,12 @@ class LayoutSF extends Layout {
 	function header($params) {
 
 		$this->generic_header_start($params); 
-/*
-
-
-
-	WARNING - changing this font call can affect
-	INTERNATIONALIZATION
-
-
-*/
-
-
-		//gets font from Language Object
-		$site_fonts=$GLOBALS['Language']->getFont();
-
+		if (_('default_font') != 'default_font') {
+			$site_fonts = _('default_font');
+		} else {
+			$site_fonts = 'helvetica' ;
+		}
+		
 	?>
 
 		<link rel="icon" type="image/png" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/debian-sf-icon.png">

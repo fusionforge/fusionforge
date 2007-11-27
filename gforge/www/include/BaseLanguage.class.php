@@ -97,144 +97,6 @@ class BaseLanguage {
 	}
 
 	/**
-	 * loadLanguageFile - load the localized strings from a file
-	 *
-	 * @param $fname file name
-	 */
-	function loadLanguageFile($fname) {
-		
-		$lines = file($fname, 1);
-
-		$this->cacheDependencies[] = $fname;
-		
-		for( $i=0, $max = sizeof($lines); $i < $max; $i++) {
-			$currentLine = $lines[$i];
-			if (substr($currentLine, 0, 1) == '#') {
-				continue;
-			}
-			// Language files can include others for defaults.
-			// e.g. an English-Canada.tab file might "include English" first,
-			// then override all those whacky American spellings.
-			if (preg_match("/^include ([a-zA-Z]+)/", $currentLine, $matches)) {
-				$dir = dirname($fname);
-				$fileName = $dir.'/'.$matches[1].'.tab';
-				if(file_exists($fileName)) {
-					$this->loadLanguageFile($fileName);
-				}
-			} else {
-				$line = explode("\t", $currentLine, 3);
-
-				if($line && count($line) == 3) {
-					$this->textArray[$line[0]][$line[1]] = chop($line[2]);
-				}
-			}
-		}
-	}
-
-	/**
-	 * loadLanguageID - load the selected language
-	 *
-	 * @param int $languageId language id
-	 */
-	function loadLanguageID($languageId) {
-		$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$languageId.'\'');
-		$this->loadLanguage(db_result($res, 0, 'classname'));
-	}
-
-	/**
-	 * loadLanguage - load localized strings of the selected language
-	 *
-	 * @param string $lang language name
-	 */	
-	function loadLanguage($lang) {
-		setupGettext ($lang) ;
-
-		$cachePath = $this->getLocalizationCachePath($lang);
-
-		if (function_exists('plugin_manager_get_object')) {
-			$pluginManager =& plugin_manager_get_object();
-			$pluginNames = $pluginManager->getPlugins();
-		} else {
-			$pluginNames = array();
-		}
-		if($GLOBALS['sys_localization_enable_caching'] && file_exists($cachePath)) {
-			$this->textArray =& $this->getLocalizationCache($cachePath);
-			$this->lang = $lang ;
-			if(!$GLOBALS['sys_localization_enable_timestamp_checking'] || !$this->isCacheOutdated($cachePath, $pluginNames)) {
-				return;
-			}
-		}
-		$this->dependencies = array();
-		if($lang != 'Base') {
-			$this->loadGlobalLanguage('Base');
-		}
-		$this->loadGlobalLanguage($lang);
-
-		$this->pluginDependencies = array();
-		if ( $lang != 'Base' ) {
-			$this->loadPluginSpecificLanguage('Base', $pluginNames);
-		}
-		$this->loadPluginSpecificLanguage($lang, $pluginNames);
-
-		$this->lang = $lang ;
-		if($GLOBALS['sys_localization_enable_caching']) {
-			$this->writeLocalizationCache($cachePath);
-		}
-	}
-
-	/**
-	 * loadGlobalLanguage - load localized strings of the selected language for the global site
-	 *
-	 * @param string $lang language name
-	 */
-	function loadGlobalLanguage($lang) {
-		global $sys_theme, $sys_urlroot, $sys_etc_path;
-
-		// Customization by language in $sys_urlroot/include/languages/<Language>.tab
-		$fname = $sys_urlroot.'/include/languages/'.$lang.'.tab';
-		$this->loadLanguageFile($fname) ;
-		// Customization by theme by language in $sys_urlroot/themes/<theme_name>/<Language>.tab
-		$ftname = $sys_urlroot.'/themes/'.$sys_theme.'/'.$lang.'.tab' ;
-		if (file_exists ($ftname)) {
-			$this->loadLanguageFile($ftname) ;
-		}
-		// Site-local customizations in $sys_etc_path/languages-local/<Language>.tab
-		$fname = "$sys_etc_path/languages-local/$lang.tab" ;
-		if (file_exists ($fname)) {
-			$this->loadLanguageFile($fname) ;
-		}
-		// Site-local Customization by theme in $sys_etc_path/languages-local/<theme_name>/<Language>.tab
-		$fltname = "$sys_etc_path/languages-local/$sys_theme/$lang.tab";
-		if (file_exists ($fltname)) {
-			$this->loadLanguageFile($fltname) ;
-		}
-	}
-
-	/**
-	 * loadPluginSpecificLanguage - load localized strings of the selected language for installed plugins
-	 *
-	 * @param string $lang language name
-	 */
-	function loadPluginSpecificLanguage($lang, $pluginNames) {
-		if (is_array($pluginNames)) {
-			foreach($pluginNames AS $pluginName) {
-				$plugin =& plugin_get_object($pluginName);
-				if($plugin && !$plugin->isError()) {
-					$languagePath = $plugin->GetLanguagePath().$lang.'.tab';
-					$specificLanguagePath = $plugin->GetSpecificLanguagePath().$lang.'.tab';
-					if(file_exists($languagePath)) {
-						$this->loadLanguageFile($languagePath);
-					}
-					if(file_exists($specificLanguagePath)) {
-						$this->loadLanguageFile($specificLanguagePath);
-					}
-					$this->pluginDependencies[] = $pluginName;
-				}
-			}
-		}
-	}
-
-	/**
 	 * getText - get a localized string
 	 *
 	 * @param string $pagename name of the current page
@@ -289,128 +151,6 @@ class BaseLanguage {
 		}
 		return $this->name ;
 	}
-
-	/**
-	 * getLanguageCode - returns the language code corresponding to the language id
-	 *
-	 * @return string language code
-	 */
-	function getLanguageCode() {
-		if (!$this->code) {
-			$id = $this->getLanguageId () ;
-			$this->code = db_result(db_query("SELECT language_code FROM supported_languages WHERE language_id='$id'"), 0, 0) ;
-		}
-		return $this->code ;
-	}
-
-	/**
-	 * getEncoding - returns the content encoding for the selected language
-	 *
-	 * @return string content encoding
-	 */
-	function getEncoding() {
-		if(isset($this->textArray['conf']['content_encoding'])) {
-			return $this->textArray['conf']['content_encoding'];
-		}
-		else {
-			return '';
-		}
-	}
-
-	/**
-	 * getFont - returns the default font for selected language if exists
-	 *
-	 * @return string the default font
-	 */
-	function getFont() {
-		if(isset($this->textArray['conf']['default_font'])) {
-			return $this->textArray['conf']['default_font'];
-		}
-		else {
-			return '';
-		}
-	}
-
-
-	/* Localization Caching System */
-	
-	/**
-	 * getLocalizationCache - get the localization strings array from cache
-	 *
-	 * @param string $path path of the cache file
-	 * @return array an array containing localization string
-	 */
-	function & getLocalizationCache($cachePath) {
-		$fp = fopen($cachePath, 'r');
-		flock($fp, LOCK_SH);
-		$array = unserialize(fread($fp, filesize($cachePath)));
-		fclose($fp);
-		$this->cacheDependencies =& $array['dependencies'];
-		if(isset($array['pluginDependencies'])) {
-			$this->pluginDependencies =& $array['pluginDependencies'];
-		} else {
-			$this->pluginDependencies = array();
-		}
-		return $array['text'];
-	}
-
-	/**
-	 * writeLocalizationCache - caches the localization array to filesystem
-	 *
-	 * @param string $path path of the cache file
-	 */
-	function writeLocalizationCache($cachePath) {
-		if(posix_getuid() != 0) {
-			$content = array();
-			$content['dependencies'] =& $this->cacheDependencies;
-			$content['pluginDependencies'] =& $this->pluginDependencies;
-			$content['text'] =& $this->textArray;
-			$fp = fopen($cachePath, 'a');
-		    if ($fp == false) {
-            	echo "fopen(".$cachePath.") failed\n";
-                return;
-            }
-			flock($fp, LOCK_EX);
-			ftruncate($fp, 0);
-			$content = serialize($content);
-			fwrite($fp, $content, strlen($content));
-			fclose($fp);
-		}
-	}
-
-	/**
-	 * getLocalizationCachePath - get the path to the localization cache for the selected language
-	 *
-	 * @param string $lang language
-	 * @return string path to the cache file
-	 */
-	function getLocalizationCachePath($lang) {
-		return $GLOBALS['sys_localization_cache_path'].$lang.'.cache';
-	}
-
-	/**
-	 * isCacheOutdated - test if the localization cache is deprecated
-	 *
-	 * @param string $path path of the cache file
-	 * @param array $pluginNames list of installed plugins
-	 * @return boolean true if the cache is deprecated, false if it's still valid
-	 */
-	function isCacheOutdated($cachePath, $pluginNames) {
-		if(count(array_diff($pluginNames, $this->pluginDependencies)) > 0) {
-			return true;
-		}
-		if(!empty($this->cacheDependencies)) {
-			$cacheTimestamp = filemtime($cachePath);
-			$cacheDependencies =& $this->cacheDependencies;
-			for($i = 0, $max = sizeof($cacheDependencies); $i < $max; $i++) {
-				if(file_exists($cacheDependencies[$i]) && $cacheTimestamp < filemtime($cacheDependencies[$i])) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 }
 
 /**
@@ -483,14 +223,7 @@ function getLanguageClassName($acceptedLanguages) {
 	}
 }
 
-
-/**
- * setupGettext - Set up the gettext infrastructure
- * 
- *
- * @param string $lang language name
- */	
-function setupGettext ($lang) {
+function language_code_from_name ($lang) {
 	$langmap = array (
 		'Basque'              => 'eu_ES',
 		'Bulgarian'           => 'bg_BG',
@@ -507,8 +240,6 @@ function setupGettext ($lang) {
 		'Italian'             => 'it_IT',
 		'Japanese'            => 'ja_JP',
 		'Korean'              => 'ko_KR',
-// Even the Unicode consortium doesn't support a Latin locale
-		// 'Latin'            => 'la',
 		'Norwegian'           => 'nb_NO',
 		'Polish'              => 'pl_PL',
 		'PortugueseBrazilian' => 'pt_BR',
@@ -519,22 +250,30 @@ function setupGettext ($lang) {
 		'Swedish'             => 'sv_SE',
 		'Thai'                => 'th_TH',
 		) ;
-		
-	$locale = $langmap[$lang].'.utf8';
+	return $langmap[$lang] ;
+}
+
+/**
+ * setupGettext - Set up the gettext infrastructure
+ * 
+ *
+ * @param string $lang language name
+ */	
+function setupGettext ($lang) {
+	$locale = language_code_from_name($lang).'.utf8';
 	setlocale(LC_ALL, $locale);
+	setlocale (LC_TIME, _('en_US'));
 	bindtextdomain('gforge', '/usr/share/locale/');
 	textdomain('gforge');
 }
 
 function setup_gettext_from_browser() {
-	global $Language, $sys_lang ;
+	global $sys_lang ;
 	if (!$sys_lang) {
 		$sys_lang="English";
 	}
 	if (session_loggedin()) {
-		$LUSER =& session_get_user();
-		$Language=new BaseLanguage();
-		$Language->loadLanguageID($LUSER->getLanguage());
+		setup_gettext_for_user(session_get_user());
 	} else {
 		//if you aren't logged in, check your browser settings 
 		//and see if we support that language
@@ -542,23 +281,19 @@ function setup_gettext_from_browser() {
 		if (getStringFromServer('HTTP_ACCEPT_LANGUAGE')) {
 			$classname=getLanguageClassName(getStringFromServer('HTTP_ACCEPT_LANGUAGE'));
 		} else {
-			$classname='';
-		}
-		if (!$classname) {
 			$classname=$sys_lang;
 		}
-		$Language=new BaseLanguage();
-		$Language->loadLanguage($classname);
+		setupGettext($classname);
 	}
-
-	setlocale (LC_TIME, _('en_US'));
 }
 
 function setup_gettext_for_user($user) {
-	$Language=new BaseLanguage();
-	$Language->loadLanguageID($user->getLanguage());
+	setup_gettext_from_lang_id($user->getLanguage());
+}
 
-	setlocale (LC_TIME, _('en_US'));
+function setup_gettext_from_lang_id($lang_id) {
+	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
+	setupGettext(db_result($res, 0, 'classname'));
 }
 
 // Local Variables:

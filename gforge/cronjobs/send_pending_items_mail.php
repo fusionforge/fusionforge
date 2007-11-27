@@ -72,8 +72,7 @@ function send_pending_pm_items_mail(){
 		for ($usercount=0;$usercount<db_numrows($userres);$usercount++){
 			$mailto=db_result($userres,$usercount,"email");
 			$language=db_result($userres,$usercount,"language");
-			$Lang = new BaseLanguage() ;
-			$Lang->loadLanguageID($language);
+			setup_gettext_from_language_id($language);
 			$subject=_('Pending task manager items notification');
 			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks. 
 The task manager item #%1$s is pending: 
@@ -114,9 +113,8 @@ function send_pending_tracker_items_mail(){
 		for ($usercount=0;$usercount<db_numrows($userres);$usercount++){
 			$mailto=db_result($userres,$usercount,"email");
 			$language=db_result($userres,$usercount,"language");
-			$Lang = new BaseLanguage() ;
-			$Lang->loadLanguageID($language);
-			$subject=_('Pending tracker  items notification');
+			setup_gettext_from_language_id($language);
+			$subject=_('Pending tracker items notification');
 			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tracker items. The item #%1$s is pending:
 Summary: %3$s
 Status: %5$s

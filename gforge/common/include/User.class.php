@@ -337,8 +337,9 @@ class User extends Error {
 			}
 
 			if ($send_mail) {
-				$Language->loadLanguageID($language_id);
+				setup_gettext_from_lang_id($language_id);
 				$this->sendRegistrationEmail();
+				setup_gettext_from_browser() ;
 			}
 
 			db_commit();

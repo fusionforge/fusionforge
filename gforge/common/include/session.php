@@ -494,9 +494,7 @@ function session_continue($sessionKey) {
 	global $session_ser, $Language;
 	$session_ser = $sessionKey;
 	session_set();
- 	$Language=new BaseLanguage();
-	$Language->loadLanguage("English"); // TODO use the user's default language
-	setlocale (LC_TIME, _('en_US'));
+	setup_gettext_from_browser() ;
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;
