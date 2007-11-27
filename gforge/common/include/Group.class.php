@@ -47,7 +47,7 @@ require_once('common/mail/MailingList.class.php');
 require_once('common/mail/MailingListFactory.class.php');
 require_once('common/survey/SurveyFactory.class.php');
 require_once('common/survey/SurveyQuestionFactory.class.php');
-require_once('www/include/BaseLanguage.class.php');
+require_once('common/include/gettext.php');
 
 //the license_id of "Other/proprietary" license
 define('GROUP_LICENSE_OTHER',126);

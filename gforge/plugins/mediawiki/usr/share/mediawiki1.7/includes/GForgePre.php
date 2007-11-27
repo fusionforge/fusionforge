@@ -185,7 +185,7 @@ if (session_loggedin()) {
 
 */
 
-require_once('www/include/BaseLanguage.class.php');
+require_once('common/include/gettext.php');
 
 if (!$sys_lang) {
 	$sys_lang="English";

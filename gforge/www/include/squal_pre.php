@@ -30,7 +30,7 @@ require_once('common/include/Permission.class.php');
 require_once('common/include/utils.php');
 require_once('common/include/Group.class.php');
 require_once('common/include/escapingUtils.php');
-require_once('www/include/BaseLanguage.class.php');
+require_once('common/include/gettext.php');
 
 // Plugins subsystem
 require_once('common/include/Plugin.class.php') ;

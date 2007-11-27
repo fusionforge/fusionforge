@@ -1,3 +1,9 @@
+2007-11-27  Roland Mas  <lolando@debian.org>
+
+	* common/include/gettext.php: Renamed from
+	www/include/BaseLanguage.class.php.  Almost entirely rewritten, to
+	finish the gettext transition.
+
 2007-11-24  Roland Mas  <lolando@debian.org>
 
 	* www/news/submit.php: Removed undefined index warning.

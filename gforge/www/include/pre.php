@@ -157,7 +157,7 @@ if (session_loggedin()) {
 
 */
 
-require_once('www/include/BaseLanguage.class.php');
+require_once('common/include/gettext.php');
 
 setup_gettext_from_browser() ;
 
