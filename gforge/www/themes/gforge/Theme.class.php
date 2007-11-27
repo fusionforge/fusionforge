@@ -823,7 +823,7 @@ if ($sys_show_source) {
                     <td>
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
                             <tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
-                                <td colspan="2">'._('Search in').':</td>
+                                <td colspan="2">'._('Search in').'</td>
                                 <td style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
                             </tr>
                             <tr height="20">
@@ -852,7 +852,7 @@ if ($sys_show_source) {
                             <tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
                             <tr style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
                                 <td cellspacing="0">
-                                    <a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
+                                    <a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
             .'    </td>
                                 <td style="text-align:right">'
             ._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
@@ -865,7 +865,7 @@ if ($sys_show_source) {
                 $return .= '        <input type="checkbox" name="'.urlencode($key).'"';
                 if (isset($GLOBALS[urlencode($key)]))
                 $return .= ' checked="checked" ';
-                $return .= ' /></input>'.$Language->getText('group', $key).'<br />';
+                $return .= ' /></input>'.$group_subsection_names[$key].'<br />';
             }
             else
             foreach($section as $underkey => $undersection) {

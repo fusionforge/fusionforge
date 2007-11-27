@@ -897,7 +897,7 @@ if (isset($params['group']) && $params['group']) {
 							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
 							<tr>
 								<td cellspacing="0">
-									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
+									<a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
 							.'	</td>
 								<td align="right">'
 								._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
@@ -910,7 +910,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
 				if (isset($GLOBALS[urlencode($key)]))
 					$return .= ' checked="checked" ';
-				$return .= ' /></input>'.$Language->getText('group', $key).'<br />';
+				$return .= ' /></input>'.$group_subsection_names[$key].'<br />';
 			}
 			else
 				foreach($section as $underkey => $undersection) {

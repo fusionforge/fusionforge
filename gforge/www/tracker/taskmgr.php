@@ -78,8 +78,7 @@ if (getStringFromRequest('add_to_task')) {
 		}
 	}
 
-	$ath->header(array('titlevals'=>array($ath->getName()),
-		'atid'=>$ath->getID()));
+	$ath->header(array('atid'=>$ath->getID()));
 
 	echo '
 		<h3>'._('Build Relationship Between Tracker Items and Task Manager').'</h3>
@@ -134,8 +133,7 @@ if (getStringFromRequest('add_to_task')) {
 		}
 	}
 
-	$ath->header(array('titlevals'=>array($ath->getName()),
-		'atid'=>$ath->getID()));
+	$ath->header(array('atid'=>$ath->getID()));
 
 	echo '<h3>'._('Build Relationship Between Tracker Items and Task Manager').'</h3>
 		<p><form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">

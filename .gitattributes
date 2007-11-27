@@ -12,6 +12,7 @@ gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
 gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/database-mysql.php -text
+gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cronjobs/ftp_create_group_access.php -text

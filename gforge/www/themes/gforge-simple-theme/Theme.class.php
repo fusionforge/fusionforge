@@ -756,7 +756,7 @@ function createUnderSections($sectionsArray) {
 			}
 		}
 
-		$return .= '<li><fieldset><legend>'.$Language->getText('group', $key).'</legend>'
+		$return .= '<li><fieldset><legend>'.$group_subsection_names[$key].'</legend>'
 							._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
 			<div id="list"><ul>
 							';
@@ -765,7 +765,7 @@ function createUnderSections($sectionsArray) {
 			$return .= '<li><input type="checkbox" name="'.urlencode($key).'"';
 			if (isset($GLOBALS[urlencode($key)]))
 			$return .= ' checked="checked" ';
-			$return .= ' /></input>'.$Language->getText('group', $key).'</li>';
+			$return .= ' /></input>'.$group_subsection_names[$key].'</li>';
 		}
 		else
 		foreach($section as $underkey => $undersection) {
