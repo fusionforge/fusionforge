@@ -408,7 +408,7 @@ function outerTabs($params) {
 		$thistab='admin';
 		$TABS_IDS[]=$thistab;
 		$TABS_DIRS[]='/'.$thistab.'/';
-		$TABS_TITLES[]=$Language->getText('menu',$thistab);
+		$TABS_TITLES[]=_('Admin');
 		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
 			$selected=count($TABS_DIRS)-1;
 		}
@@ -418,7 +418,7 @@ function outerTabs($params) {
 		$thistab='reporting';
 		$TABS_IDS[]=$thistab;
 		$TABS_DIRS[]='/'.$thistab.'/';
-		$TABS_TITLES[]=$Language->getText('menu',$thistab);
+		$TABS_TITLES[]=_('Reporting');
 		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
 			$selected=count($TABS_DIRS)-1;
 		}
