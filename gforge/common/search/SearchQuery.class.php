@@ -96,7 +96,7 @@ class SearchQuery extends Error {
 	function cleanSearchWords($words) {
 		$words = trim($words);
 		if(!$words) {
-			$this->setError('error_criteria_not_specified');
+			$this->setError(_('Error: criteria not specified'));
 			return;
 		}
 		if(is_numeric($words) && $this->implementsSearchById()) {
@@ -106,7 +106,7 @@ class SearchQuery extends Error {
 			$words = strtr($words, array('%' => '', '_' => ''));
 			$words = preg_replace("/[ \t]+/", ' ', $words);
 			if(strlen($words) < 3) {
-				$this->setError('error_search_minlength');
+				$this->setError(_('Error: search query too short'));
 				return;
 			}
 			$this->words = array();
@@ -311,5 +311,10 @@ class SearchQuery extends Error {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

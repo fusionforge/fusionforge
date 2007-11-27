@@ -198,7 +198,6 @@ RESERVED VARIABLES
 
 $conn
 $session_hash
-$Language
 $LUSER - Logged in user object
 $HTML
 

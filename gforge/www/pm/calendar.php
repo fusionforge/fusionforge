@@ -71,8 +71,8 @@ if (!$day) {
 }
 
 
-$months = array(1 => 'january', 'february', 'march', 'april', 'may', 'june',
-		'july', 'august', 'september', 'october', 'november', 'december');
+$months = array(1 => _('January'), _('February'), _('March'), _('April'), _('May'), _('June'),
+		_('July'), _('August'), _('September'), _('October'), _('November'), _('December'));
 
 if ($group_id && $group_project_id) {
 	require_once('common/pm/ProjectTaskFactory.class.php');
@@ -148,14 +148,16 @@ function make_task_link($task, $type) {
  *
  */
 function display_month($m, $y) {
-	global $months, $today, $month, $day, $year, $Language, $HTML,
+	global $months, $today, $month, $day, $year, $HTML,
 		$pt_arr, $group_id, $group_project_id;
-	$dow = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
+	$dow = array(_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'));
+	
+	$tstamp = mktime(0, 0, 0, $m + 1, 0, $y) ;
 
-	$date = getdate(mktime(0, 0, 0, $m + 1, 0, $y));
+	$date = getdate($tstamp);
 	$days_in_month = $date['mday'];
 
-	$date = getdate(mktime(0, 0, 0, $m, 1, $y));
+	$date = getdate($tstamp);
 	$first_dow = $date['wday'];
 
 	$m = $date['mon'];
@@ -163,13 +165,13 @@ function display_month($m, $y) {
 ?>
 	<table align="center" cellpadding="1" cellspacing="1" border="1" width="100%">
 		<tr>
-			<th colspan="7"><?php echo $Language->getText("calendar", $months[$m]) . " $y"; ?></th>
+		 <th colspan="7"><?php echo date (_('F Y'), $tstamp); ?></th>
 		</tr>
 		<tr>
 <?php
 	reset($dow);
 	while (list ($key, $val) = each ($dow)) {
-		print "\t\t\t<th width=\"14%\">" . $Language->getText("calendar", $val) . "</th>\n";
+		print "\t\t\t<th width=\"14%\">$val</th>\n";
 	}
 ?>
 		</tr>
@@ -263,7 +265,7 @@ function display_month($m, $y) {
 				<select name="month">
 <?php
 	for ($i = 1; $i <= 12; $i++) {
-		print "\t\t\t\t<option value=\"$i\"" . ($month == $i ? ' selected="selected"' : '') . ">" . $Language->getText("calendar", $months[$i]) . "</option>\n";
+		print "\t\t\t\t<option value=\"$i\"" . ($month == $i ? ' selected="selected"' : '') . ">" . $months[$i] . "</option>\n";
 	}
 ?>
 				</select>
