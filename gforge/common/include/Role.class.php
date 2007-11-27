@@ -26,6 +26,8 @@
  */
 
 
+require_once ('common/include/rbac_permission_texts.php') ;
+
 class Role extends Error {
 
 	var $data_array;
@@ -243,7 +245,7 @@ class Role extends Error {
 	 *  @return array	Assoc array of values for this section.
 	 */
 	function &getRoleVals($section) {
-		global $Language,$role_vals;
+		global $role_vals;
 
 		//
 		//	Optimization - save array so it is only built once per page view
@@ -254,7 +256,7 @@ class Role extends Error {
 				//
 				//	Build an associative array of these key values + localized description
 				//
-				$role_vals[$section][$this->role_values[$section][$i]]=$Language->getText('rbac_vals',"$section".$this->role_values[$section][$i]);
+				$role_vals[$section][$this->role_values[$section][$i]]=$rbac_permission_names["$section".$this->role_values[$section][$i]];
 			}
 		}
 		return $role_vals[$section];
@@ -605,5 +607,10 @@ class Role extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
