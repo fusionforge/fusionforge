@@ -26,7 +26,7 @@
  */
 
 
-require_once ('common/include/rbac_permission_texts.php') ;
+require_once ('common/include/rbac_texts.php') ;
 
 class Role extends Error {
 

@@ -30,6 +30,7 @@ require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('common/include/Role.class.php');
 require_once('common/include/RoleObserver.class.php');
+require_once('common/include/rbac_texts.php');
 
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
@@ -158,7 +159,7 @@ for ($i=0; $i<count($keys); $i++) {
 					$txt='';
 				}
 				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-				<td>'.$Language->getText('rbac_edit',$keys[$i]).'</td>
+				<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
 					$role->getRoleVals($keys[$i]), 
@@ -176,7 +177,7 @@ for ($i=0; $i<count($keys); $i++) {
 			FROM project_group_list WHERE group_id='$group_id'");
 		for ($q=0; $q<db_numrows($res); $q++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>'.$Language->getText('rbac_edit',$keys[$i]).'</td>
+			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
 			<td>'.db_result($res,$q,'project_name').'</td>
 			<td>'.html_build_select_box_from_assoc(
 				$role->getRoleVals($keys[$i]), 
@@ -210,7 +211,7 @@ for ($i=0; $i<count($keys); $i++) {
 					$txt='';
 				}
 				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-				<td>'.$Language->getText('rbac_edit',$keys[$i]).'</td>
+				<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'name').'</td>
 				<td>'.html_build_select_box_from_assoc(
 					$role->getRoleVals($keys[$i]), 
@@ -229,7 +230,7 @@ for ($i=0; $i<count($keys); $i++) {
 			FROM frs_package WHERE group_id='$group_id'");
 		for ($q=0; $q<db_numrows($res); $q++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>'.$Language->getText('rbac_edit',$keys[$i]).'</td>
+			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
 			<td>'.db_result($res,$q,'name').'</td>
 			<td>'.html_build_select_box_from_assoc(
 				$role->getRoleVals($keys[$i]), 
@@ -244,7 +245,7 @@ for ($i=0; $i<count($keys); $i++) {
 	} else {
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-		<td><strong>'.$Language->getText('rbac_edit',$keys[$i]).'</strong></td>
+		<td><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>-</td>
 		<td>'.html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][0]", $role->getVal($keys[$i],0), false, false ).'</td>
 		</tr>';

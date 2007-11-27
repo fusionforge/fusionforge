@@ -26,7 +26,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('common/include/rbac_permission_texts.php') ;
+require_once ('common/include/rbac_texts.php') ;
 
 class RoleObserver extends Error {
 
