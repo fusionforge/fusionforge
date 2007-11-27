@@ -16,13 +16,6 @@ require_once('www/search/include/renderers/SearchRenderer.class.php');
 class HtmlSearchRenderer extends SearchRenderer {
 
 	/**
-	 * Localization BaseLanguage object
-	 *
-	 * @var object $Language
-	 */
-	var $Language;
-	
-	/**
 	 * Headers of the HTML results table
 	 *
 	 * @var array $tableHeaders
@@ -39,9 +32,6 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @param object $searchQuery SearchQuery instance
 	 */
 	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
-		global $Language;
-		$Language =& $GLOBALS['Language'];
-		
 		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
 	}
 

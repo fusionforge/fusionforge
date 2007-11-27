@@ -75,8 +75,6 @@ class Theme extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function headerStart($params) {
-		global $Language;
-
 		if (!$params['title']) {
 			$params['title'] =  $GLOBALS['sys_name'];
 		} else {
@@ -356,7 +354,7 @@ function listTableBottom() {
 
 
 function outerTabs($params) {
-	global $Language,$sys_use_trove,$sys_use_snippet,$sys_use_people;
+	global $sys_use_trove,$sys_use_snippet,$sys_use_people;
 
 	$selected=0;
 	$TABS_DIRS[]='/';
@@ -725,7 +723,6 @@ function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
 }
 
 function createUnderSections($sectionsArray) {
-	global $Language;
 	$countLines = 0;
 	foreach ($sectionsArray as $section) {
 		if(is_array($section)) {

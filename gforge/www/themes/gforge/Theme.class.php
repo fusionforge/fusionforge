@@ -804,7 +804,6 @@ if ($sys_show_source) {
     }
     
     function createUnderSections($sectionsArray) {
-        global $Language;
         $countLines = 0;
         foreach ($sectionsArray as $section) {
             if(is_array($section)) {

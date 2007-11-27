@@ -69,8 +69,6 @@ class Layout extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function headerStart($params) {
-		global $Language;
-
 		if (!$params['title']) {
 			$params['title'] =  $GLOBALS['sys_name'];
 		} else {
@@ -849,7 +847,6 @@ if (isset($params['group']) && $params['group']) {
 	}
 	
 	function createUnderSections($sectionsArray) {
-		global $Language;
 		$countLines = 0;
 		foreach ($sectionsArray as $section) {
 			if(is_array($section)) {

@@ -491,7 +491,7 @@ function session_set() {
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to 
 //setup languages
 function session_continue($sessionKey) {
-	global $session_ser, $Language;
+	global $session_ser;
 	$session_ser = $sessionKey;
 	session_set();
 	setup_gettext_from_browser() ;

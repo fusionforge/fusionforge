@@ -16,7 +16,7 @@ class Theme extends Layout {
 		{
 		header("Location:".$_POST['menuList']);		
 		}
-		global $Language, $sys_name;
+		global $sys_name;
 		if (!$params['title']) {
 			$params['title'] = "$sys_name";
 		} else {
