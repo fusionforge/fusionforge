@@ -253,20 +253,6 @@ function language_code_from_name ($lang) {
 	return $langmap[$lang] ;
 }
 
-/**
- * setupGettext - Set up the gettext infrastructure
- * 
- *
- * @param string $lang language name
- */	
-function setupGettext ($lang) {
-	$locale = language_code_from_name($lang).'.utf8';
-	setlocale(LC_ALL, $locale);
-	setlocale (LC_TIME, _('en_US'));
-	bindtextdomain('gforge', '/usr/share/locale/');
-	textdomain('gforge');
-}
-
 function setup_gettext_from_browser() {
 	global $sys_lang ;
 	if (!$sys_lang) {
@@ -283,7 +269,7 @@ function setup_gettext_from_browser() {
 		} else {
 			$classname=$sys_lang;
 		}
-		setupGettext($classname);
+		setup_gettext_from_langname($classname);
 	}
 }
 
@@ -293,7 +279,19 @@ function setup_gettext_for_user($user) {
 
 function setup_gettext_from_lang_id($lang_id) {
 	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
-	setupGettext(db_result($res, 0, 'classname'));
+	setup_gettext_from_langname(db_result($res, 0, 'classname'));
+}
+
+function setup_gettext_from_langname ($lang) {
+	$locale = language_code_from_name($lang).'.utf8';
+	setup_gettext_from_locale ($locale) ;
+}
+
+function setup_gettext_from_locale ($locale) {
+	setlocale(LC_ALL, $locale);
+	setlocale (LC_TIME, _('en_US'));
+	bindtextdomain('gforge', '/usr/share/locale/');
+	textdomain('gforge');
 }
 
 // Local Variables:
