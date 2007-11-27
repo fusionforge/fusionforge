@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-27 19:26+0100\n"
-"PO-Revision-Date: 2007-11-27 23:03+0100\n"
+"POT-Creation-Date: 2007-11-27 23:17+0100\n"
+"PO-Revision-Date: 2007-11-27 23:18+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -349,7 +349,9 @@ msgstr[1] "Plusieurs adresses email semblent invalides : %s"
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
-msgstr "Erreur lors de la mise à jour des informations du projet : la description du projet a une longueur maximale de 255 caractères."
+msgstr ""
+"Erreur lors de la mise à jour des informations du projet : la description du "
+"projet a une longueur maximale de 255 caractères."
 
 #: common/include/Group.class.php:606
 #, php-format
@@ -418,7 +420,9 @@ msgstr "Erreur lors de la suppression de la liste de diffusion."
 
 #: common/include/Group.class.php:1520
 msgid "User is not active. Only active users can be added."
-msgstr "Cet utilisateur n'est pas actif.  Seul les utilisateurs actifs peuvent être ajoutés à un groupe."
+msgstr ""
+"Cet utilisateur n'est pas actif.  Seul les utilisateurs actifs peuvent être "
+"ajoutés à un groupe."
 
 #: common/include/Group.class.php:1548
 #, php-format
@@ -869,8 +873,7 @@ msgstr "fr_FR"
 #: common/include/group_section_texts.php:8
 #: common/reporting/report_utils.php:151
 #: plugins/quota_management/www/quota_project.php:93
-#: www/include/Layout.class.php:552 www/include/LayoutSF.class.php:753
-#: www/include/menuSF.php:125 www/include/project_home.php:290
+#: www/include/Layout.class.php:552 www/include/project_home.php:290
 #: www/themes/gforge-simple-theme/Theme.class.php:523
 #: www/themes/gforge/Theme.class.php:499
 msgid "Forums"
@@ -882,8 +885,7 @@ msgstr "Outil de suivi"
 
 #: common/include/group_section_texts.php:10
 #: common/reporting/report_utils.php:153 common/reporting/report_utils.php:165
-#: www/include/Layout.class.php:574 www/include/LayoutSF.class.php:804
-#: www/include/menuSF.php:135 www/include/project_home.php:324
+#: www/include/Layout.class.php:574 www/include/project_home.php:324
 #: www/project/stats/project_stats_utils.php:85
 #: www/project/stats/project_stats_utils.php:144
 #: www/project/stats/project_stats_utils.php:200
@@ -900,8 +902,7 @@ msgid "Documentations"
 msgstr "Documentations"
 
 #: common/include/group_section_texts.php:12 www/frs/include/frs_utils.php:92
-#: www/include/Layout.class.php:618 www/include/LayoutSF.class.php:833
-#: www/include/menuSF.php:154
+#: www/include/Layout.class.php:618
 #: www/themes/gforge-simple-theme/Theme.class.php:597
 #: www/themes/gforge/Theme.class.php:565
 msgid "Files"
@@ -909,9 +910,8 @@ msgstr "Fichiers"
 
 #: common/include/group_section_texts.php:13
 #: plugins/quota_management/www/quota_project.php:78 www/admin/index.php:130
-#: www/include/Layout.class.php:595 www/include/LayoutSF.class.php:822
-#: www/include/menuSF.php:147 www/news/index.php:37 www/news/submit.php:97
-#: www/themes/gforge-simple-theme/Theme.class.php:572
+#: www/include/Layout.class.php:595 www/news/index.php:37
+#: www/news/submit.php:97 www/themes/gforge-simple-theme/Theme.class.php:572
 #: www/themes/gforge/Theme.class.php:542
 msgid "News"
 msgstr "Annonces"
@@ -971,11 +971,9 @@ msgstr "Écriture"
 #: www/forum/include/ForumHTML.class.php:93
 #: www/forum/include/ForumHTML.class.php:104 www/frs/include/frs_utils.php:93
 #: www/include/Layout.class.php:455 www/include/Layout.class.php:535
-#: www/include/LayoutSF.class.php:744 www/include/menuSF.php:36
-#: www/include/menuSF.php:121 www/mail/mail_utils.php:36
-#: www/news/news_utils.php:61 www/pm/include/ProjectGroupHTML.class.php:74
-#: www/pm/index.php:54 www/scm/include/scm_utils.php:54
-#: www/survey/include/SurveyHTML.class.php:54
+#: www/mail/mail_utils.php:36 www/news/news_utils.php:61
+#: www/pm/include/ProjectGroupHTML.class.php:74 www/pm/index.php:54
+#: www/scm/include/scm_utils.php:54 www/survey/include/SurveyHTML.class.php:54
 #: www/survey/include/SurveyHTML.class.php:74 www/survey/survey_utils.php:55
 #: www/survey/survey_utils.php:79
 #: www/themes/gforge-simple-theme/Theme.class.php:409
@@ -1053,8 +1051,7 @@ msgid "Project Manager Admin"
 msgstr "Administration du gestionnaire de tâches"
 
 #: common/include/rbac_texts.php:67 common/reporting/report_utils.php:150
-#: www/include/Layout.class.php:559 www/include/LayoutSF.class.php:758
-#: www/include/menuSF.php:128 www/include/project_home.php:261
+#: www/include/Layout.class.php:559 www/include/project_home.php:261
 #: www/include/project_home.php:262
 #: www/pm/include/ProjectTaskHTML.class.php:101
 #: www/themes/gforge-simple-theme/Theme.class.php:531
@@ -1089,7 +1086,6 @@ msgid "Project Admin"
 msgstr "Administration du projet"
 
 #: common/include/rbac_texts.php:75 www/include/Layout.class.php:602
-#: www/include/LayoutSF.class.php:828 www/include/menuSF.php:151
 #: www/include/project_home.php:354 www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:580
 #: www/themes/gforge/Theme.class.php:549
@@ -1354,7 +1350,6 @@ msgid "Y-m"
 msgstr "m/Y"
 
 #: common/reporting/report_utils.php:152 www/include/Layout.class.php:581
-#: www/include/LayoutSF.class.php:810 www/include/menuSF.php:139
 #: www/include/project_home.php:306
 #: www/themes/gforge-simple-theme/Theme.class.php:556
 #: www/themes/gforge/Theme.class.php:528
@@ -1368,7 +1363,7 @@ msgstr "Documents"
 msgid "Downloads"
 msgstr "Téléchargement"
 
-#: common/reporting/report_utils.php:159 www/include/LayoutSF.class.php:781
+#: common/reporting/report_utils.php:159
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
@@ -1377,7 +1372,7 @@ msgstr "Téléchargement"
 msgid "Bugs"
 msgstr "Bogues"
 
-#: common/reporting/report_utils.php:160 www/include/LayoutSF.class.php:786
+#: common/reporting/report_utils.php:160
 #: www/project/stats/project_stats_utils.php:82
 #: www/project/stats/project_stats_utils.php:141
 #: www/project/stats/project_stats_utils.php:197
@@ -1386,7 +1381,7 @@ msgstr "Bogues"
 msgid "Support"
 msgstr "Support technique"
 
-#: common/reporting/report_utils.php:161 www/include/LayoutSF.class.php:791
+#: common/reporting/report_utils.php:161
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -2138,7 +2133,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:35
 #: plugins/quota_management/www/quota_admin.php:38 www/admin/configman.php:35
 #: www/admin/cronman.php:33 www/admin/index.php:36 www/admin/pluginman.php:34
-#: www/admin/vhost.php:106 www/include/menuSF.php:37
+#: www/admin/vhost.php:106
 msgid "Site admin"
 msgstr "Administration du site"
 
@@ -2601,7 +2596,6 @@ msgstr "Posté par"
 
 #: plugins/webcalendar/www/index2.php:48
 #: www/forum/include/ForumHTML.class.php:69 www/include/Layout.class.php:528
-#: www/include/LayoutSF.class.php:740 www/include/menuSF.php:118
 #: www/my/diary.php:154 www/my/index.php:76 www/my/index.php:124
 #: www/my/index.php:179 www/pm/browse_task.php:107
 #: www/project/report/index.php:136
@@ -2677,7 +2671,11 @@ msgid ""
 "Welcome, %1$s. Your email change is complete. Your new email address on file "
 "is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to "
 "this account."
-msgstr "Bienvenue, %1$s.  Votre changement d'adresse a bien été effectué.  La nouvelle adresse de courrier électronique enregistrée dans votre compte est <strong>%2$s</strong>.  Les courriers envoyés à &lt;%3$s&gt; seront dorénavant redirigée vers cette adresse."
+msgstr ""
+"Bienvenue, %1$s.  Votre changement d'adresse a bien été effectué.  La "
+"nouvelle adresse de courrier électronique enregistrée dans votre compte est "
+"<strong>%2$s</strong>.  Les courriers envoyés à &lt;%3$s&gt; seront "
+"dorénavant redirigée vers cette adresse."
 
 #: www/account/change_email-complete.php:77 www/account/change_email.php:93
 #: www/account/lostpw.php:99 www/account/unsubscribe.php:80
@@ -3036,7 +3034,7 @@ msgid "Login with SSL"
 msgstr "Connexion avec SSL"
 
 #: www/account/login.php:61 www/account/verify.php:101
-#: www/admin/userlist.php:67 www/include/menuSF.php:203
+#: www/admin/userlist.php:67
 msgid "Login"
 msgstr "Identification"
 
@@ -3154,10 +3152,18 @@ msgstr ""
 
 #: www/account/lostpw.php:75
 msgid ""
-"<p>An email has been sent to the address you have on file. Follow the "
-"instructions in the email to change your account password.</p><p><a href=\"/"
-"\">[ Home ]</a></p>"
-msgstr "Un courrier électronique a été envoyé à l'adresse enregistrée dans votre compte.  Veuillez suivre les instructions qu'il contient pour changer le mot de passe de votre compte."
+"An email has been sent to the address you have on file. Follow the "
+"instructions in the email to change your account password."
+msgstr ""
+"Un courrier électronique a été envoyé à l'adresse enregistrée dans votre "
+"compte.  Veuillez suivre les instructions qu'il contient pour changer le mot "
+"de passe de votre compte."
+
+#: www/account/lostpw.php:75 www/include/Layout.class.php:426
+#: www/themes/gforge-simple-theme/Theme.class.php:362
+#: www/themes/gforge/Theme.class.php:381 www/themes/lite/Theme.class.php:268
+msgid "Home"
+msgstr "Accueil"
 
 #: www/account/lostpw.php:85
 msgid ""
@@ -3882,7 +3888,7 @@ msgstr "Afficher les groupes commençant par :&nbsp;"
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr "Rechercher <em>(identifiant, nom unix, nom complet)</em>&nbsp;"
 
-#: www/admin/index.php:113 www/include/menuSF.php:102
+#: www/admin/index.php:113
 msgid "Register New Project"
 msgstr "Nouveau projet"
 
@@ -4011,7 +4017,6 @@ msgstr ""
 "erreur de base de données :"
 
 #: www/admin/massmail.php:77 www/admin/massmail.php:83
-#: www/include/menuSF.php:42
 msgid "Massmail admin"
 msgstr "Administration de l'outil d'envoi de courrier en masse"
 
@@ -4027,7 +4032,10 @@ msgstr "Distributions actives"
 msgid ""
 "Be <span class=\"important\">VERY</span> careful with this form, because "
 "submitting it WILL lead to sending email to lots of users."
-msgstr "Faites <span class=\"important\">TRÈS</span> attention lorsque vous utilisez ce formulaire ; il envoie des courriers électroniques à de nombreux utilisateurs."
+msgstr ""
+"Faites <span class=\"important\">TRÈS</span> attention lorsque vous utilisez "
+"ce formulaire ; il envoie des courriers électroniques à de nombreux "
+"utilisateurs."
 
 #: www/admin/massmail.php:106
 msgid "(select)"
@@ -4251,7 +4259,10 @@ msgstr "Créer"
 msgid ""
 "Refusing to display whole DB,That would display whole DB.  Please use a CLI "
 "query if you wish to do this."
-msgstr "Cette requête afficherait la totalité de la base de données, et je ne peux pas vous laisser faire cela.  Si vous souhaitez réellement le faire, utilisez un logiciel en ligne de commande."
+msgstr ""
+"Cette requête afficherait la totalité de la base de données, et je ne peux "
+"pas vous laisser faire cela.  Si vous souhaitez réellement le faire, "
+"utilisez un logiciel en ligne de commande."
 
 #: www/admin/search.php:45
 msgid "Admin Search Results"
@@ -4341,7 +4352,7 @@ msgid "New category description (VARCHAR 255)"
 msgstr "Description de la nouvelle catégorie (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:50
-msgid "Error: a category can't be the same as its own parent"
+msgid "Error: a category can't be the same as its own parent."
 msgstr "Erreur : une catégorie ne peut être son propre parent."
 
 #: www/admin/trove/trove_cat_edit.php:90
@@ -4819,7 +4830,9 @@ msgstr "Fichier"
 msgid ""
 "Edit the contents to your desire or leave them as they are to remain "
 "unmodified."
-msgstr "Éditez à votre guise le contenu, ou laissez-le tel quel si vous ne souhaitez pas le modifier."
+msgstr ""
+"Éditez à votre guise le contenu, ou laissez-le tel quel si vous ne souhaitez "
+"pas le modifier."
 
 #: www/docman/admin/index.php:252 www/docman/include/doc_utils.php:121
 #: www/docman/new.php:212 www/snippet/package.php:138
@@ -5017,7 +5030,7 @@ msgid "Submit Information"
 msgstr "Soumettre les informations"
 
 #: www/docman/search.php:92 www/include/Layout.class.php:791
-#: www/include/Layout.class.php:815 www/include/menuSF.php:161
+#: www/include/Layout.class.php:815
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:51
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:42
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:42
@@ -5146,7 +5159,9 @@ msgstr "Niveau 2 de modération"
 msgid ""
 "To moderate anonymous posts (if allowed in public forum) and posts from non-"
 "member users."
-msgstr "Pour modérer les articles anonymes (s'ils sont autorisés) et ceux écrits par des utilisateurs non membres du groupe."
+msgstr ""
+"Pour modérer les articles anonymes (s'ils sont autorisés) et ceux écrits par "
+"des utilisateurs non membres du groupe."
 
 #: www/forum/admin/index.php:105 www/forum/admin/index.php:157
 msgid "To moderate ALL posts."
@@ -5402,7 +5417,9 @@ msgstr "Fichier actuel"
 #: www/forum/include/ForumHTML.class.php:290
 #: www/forum/include/ForumHTML.class.php:323
 msgid "Use the \"Browse\" button to find the file you want to attach"
-msgstr "Utiliser le bouton « Parcourir » pour trouver le fichier que vous voulez joindre"
+msgstr ""
+"Utiliser le bouton « Parcourir » pour trouver le fichier que vous voulez "
+"joindre"
 
 #: www/forum/include/ForumHTML.class.php:293
 #: www/forum/include/ForumHTML.class.php:326
@@ -5862,7 +5879,11 @@ msgid ""
 "if you wish, or edit the release. Please note that file(s) may not appear "
 "immediately on the <a href=\"%2$s\">download page</a>. Allow several hours "
 "for propagation."
-msgstr "Vous pouvez maintenant <a href=\"%1$s\"><strong>ajouter des fichiers</strong></a> à cette version, ou la modifier.  Veuillez prendre note que les fichiers peuvent ne pas apparaître immédiatement sur la <a href=\"%2$s\">page de téléchargement</a>, mais que cela prendre quelques heures."
+msgstr ""
+"Vous pouvez maintenant <a href=\"%1$s\"><strong>ajouter des fichiers</"
+"strong></a> à cette version, ou la modifier.  Veuillez prendre note que les "
+"fichiers peuvent ne pas apparaître immédiatement sur la <a href=\"%2$s"
+"\">page de téléchargement</a>, mais que cela prendre quelques heures."
 
 #: www/frs/admin/qrs.php:170
 msgid "Package ID"
@@ -6333,7 +6354,7 @@ msgstr ""
 "Astuce : les styles peuvent être appliqués rapidement sur le texte "
 "sélectionné."
 
-#: www/include/Layout.class.php:84 www/include/LayoutSF.class.php:330
+#: www/include/Layout.class.php:84
 #: www/themes/gforge-simple-theme/Theme.class.php:91
 #: www/themes/gforge/Theme.class.php:115 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
@@ -6347,7 +6368,7 @@ msgstr "fr"
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: www/include/Layout.class.php:162 www/include/menuSF.php:189
+#: www/include/Layout.class.php:162
 #: www/themes/gforge-simple-theme/Theme.class.php:162
 #: www/themes/gforge/Theme.class.php:169 www/themes/osx/Theme.class.php:73
 #: www/themes/ultralite/Theme.class.php:45
@@ -6374,12 +6395,6 @@ msgstr "Nouveau compte"
 msgid "Show source"
 msgstr "Montrer le source"
 
-#: www/include/Layout.class.php:426 www/include/menuSF.php:99
-#: www/themes/gforge-simple-theme/Theme.class.php:362
-#: www/themes/gforge/Theme.class.php:381 www/themes/lite/Theme.class.php:268
-msgid "Home"
-msgstr "Accueil"
-
 #: www/include/Layout.class.php:427
 #: www/themes/gforge-simple-theme/Theme.class.php:366
 #: www/themes/gforge/Theme.class.php:382 www/themes/lite/Theme.class.php:269
@@ -6392,27 +6407,25 @@ msgstr "Ma page"
 msgid "Project&nbsp;Tree"
 msgstr "Arbre des projets"
 
-#: www/include/Layout.class.php:432 www/include/menuSF.php:100
+#: www/include/Layout.class.php:432
 #: www/themes/gforge-simple-theme/Theme.class.php:384
 #: www/themes/gforge/Theme.class.php:387 www/themes/lite/Theme.class.php:274
 msgid "Code&nbsp;Snippets"
 msgstr "Boite à outils"
 
-#: www/include/Layout.class.php:435 www/include/menuSF.php:104
+#: www/include/Layout.class.php:435
 #: www/themes/gforge-simple-theme/Theme.class.php:393
 #: www/themes/gforge/Theme.class.php:390 www/themes/lite/Theme.class.php:277
 msgid "Project&nbsp;Openings"
 msgstr "Demande d'aide"
 
-#: www/include/Layout.class.php:567 www/include/LayoutSF.class.php:798
-#: www/include/menuSF.php:131 www/include/project_home.php:314
+#: www/include/Layout.class.php:567 www/include/project_home.php:314
 #: www/themes/gforge-simple-theme/Theme.class.php:540
 #: www/themes/gforge/Theme.class.php:514
 msgid "Lists"
 msgstr "Listes"
 
-#: www/include/Layout.class.php:588 www/include/LayoutSF.class.php:816
-#: www/include/menuSF.php:143 www/include/project_home.php:345
+#: www/include/Layout.class.php:588 www/include/project_home.php:345
 #: www/include/project_home.php:346 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:564
@@ -6464,23 +6477,6 @@ msgstr "Tout"
 #: www/themes/gforge/Theme.class.php:826 www/themes/gforge/Theme.class.php:857
 msgid "none"
 msgstr "Aucun"
-
-#: www/include/LayoutSF.class.php:375
-#, php-format
-msgid ""
-"This is %1$s.  For more about it, including copyright info, see <a href=\"/"
-"about.php\">this page</a>."
-msgstr ""
-
-#: www/include/LayoutSF.class.php:408 www/include/LayoutSF.class.php:409
-#: www/themes/gforge/Theme.class.php:140 www/themes/gforge/Theme.class.php:141
-#: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
-msgid "default_font"
-msgstr "default_font"
-
-#: www/include/LayoutSF.class.php:748 www/include/project_home.php:253
-msgid "Home Page"
-msgstr "Accueil"
 
 #: www/include/SmilieSupportHtml.class.php:53
 msgid "Smilies's list"
@@ -6586,8 +6582,7 @@ msgstr "Minimum"
 msgid "Highest"
 msgstr "Maximum"
 
-#: www/include/html.php:673 www/include/menuSF.php:188
-#: www/my/bookmark_add.php:31
+#: www/include/html.php:673 www/my/bookmark_add.php:31
 msgid "My Personal Page"
 msgstr "Ma page personnelle"
 
@@ -6598,43 +6593,6 @@ msgstr "Journal et notes"
 #: www/include/html.php:676
 msgid "Register Project"
 msgstr "Enregistrer un projet"
-
-#: www/include/menuSF.php:38
-msgid "Group list admin"
-msgstr "Administration de la liste des groupes"
-
-#: www/include/menuSF.php:39
-msgid "User list admin"
-msgstr "Administration de la liste des utilisateurs"
-
-#: www/include/menuSF.php:40
-msgid "Approve pending projects"
-msgstr "Projets en attente d'approbation"
-
-#: www/include/menuSF.php:41
-msgid "News admin approval"
-msgstr "Annonces en attente d'approbation"
-
-#: www/include/menuSF.php:43
-msgid "People admin"
-msgstr "Administration des personnes"
-
-#: www/include/menuSF.php:187
-#, php-format
-msgid "logged in as %s"
-msgstr "connecté en tant que %s"
-
-#: www/include/menuSF.php:192
-msgid "Bookmark Page"
-msgstr "Ajouter aux signets"
-
-#: www/include/menuSF.php:194
-msgid "Logout"
-msgstr "Se déconnecter"
-
-#: www/include/menuSF.php:204
-msgid "New User via SSL"
-msgstr "Nouvel utilisateur via SSL"
 
 #: www/include/project_home.php:17 www/include/user_home.php:121
 msgid "Project Info"
@@ -6689,8 +6647,12 @@ msgid ""
 msgid_plural ""
 "HELP WANTED: This project is looking for people to fill <a href=\"%1$s"
 "\">several different positions</a>."
-msgstr[0] "NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche un <a href=\"%1$s\">\"%2$s\"</a>"
-msgstr[1] "NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des contributeurs pour <a href=\"%1$s\">différentes positions</a>."
+msgstr[0] ""
+"NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche un <a href=\"%1$s\">\"%2"
+"$s\"</a>"
+msgstr[1] ""
+"NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des contributeurs pour "
+"<a href=\"%1$s\">différentes positions</a>."
 
 #: www/include/project_home.php:108
 msgid "Developer Info"
@@ -6748,6 +6710,10 @@ msgstr "Voir tous les fichiers du projet"
 #: www/include/project_home.php:248
 msgid "Public Areas"
 msgstr "Zones publiques"
+
+#: www/include/project_home.php:253
+msgid "Home Page"
+msgstr "Accueil"
 
 #: www/include/project_home.php:254
 msgid "Project Home Page"
@@ -7749,8 +7715,12 @@ msgstr "Confirmation de l'effacement d'une compétence"
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
-msgstr[0] "Vous êtes sur le point de supprimer la compétence suivante de la base de données :"
-msgstr[1] "Vous êtes sur le point de supprimer les compétences suivantes de la base de données :"
+msgstr[0] ""
+"Vous êtes sur le point de supprimer la compétence suivante de la base de "
+"données :"
+msgstr[1] ""
+"Vous êtes sur le point de supprimer les compétences suivantes de la base de "
+"données :"
 
 #: www/people/editprofile.php:210
 msgid "This action cannot be undone."
@@ -11149,6 +11119,11 @@ msgstr "Ajouter des questions"
 msgid "Error creating permission"
 msgstr "Erreur lors de la création des permissions"
 
+#: www/themes/gforge/Theme.class.php:140 www/themes/gforge/Theme.class.php:141
+#: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
+msgid "default_font"
+msgstr "default_font"
+
 #: www/top/index.php:31
 msgid "Top Projects"
 msgstr "Les meilleurs projets"
@@ -11517,7 +11492,9 @@ msgstr "Modification d'un groupe pour %s"
 #: www/tracker/admin/form-updatetracker.php:12
 msgid ""
 "<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
-msgstr "<strong>Nom&nbsp;:</strong> (exemples&nbsp;: comptes-rendus de réunions, résultats de tests... )"
+msgstr ""
+"<strong>Nom&nbsp;:</strong> (exemples&nbsp;: comptes-rendus de réunions, "
+"résultats de tests... )"
 
 #: www/tracker/admin/form-updatetracker.php:32 www/tracker/admin/ind.php:133
 msgid "Send email on new submission to address"

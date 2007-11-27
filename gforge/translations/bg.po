@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-27 19:26+0100\n"
+"POT-Creation-Date: 2007-11-27 23:17+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -780,8 +780,7 @@ msgstr ""
 #: common/include/group_section_texts.php:8
 #: common/reporting/report_utils.php:151
 #: plugins/quota_management/www/quota_project.php:93
-#: www/include/Layout.class.php:552 www/include/LayoutSF.class.php:753
-#: www/include/menuSF.php:125 www/include/project_home.php:290
+#: www/include/Layout.class.php:552 www/include/project_home.php:290
 #: www/themes/gforge-simple-theme/Theme.class.php:523
 #: www/themes/gforge/Theme.class.php:499
 msgid "Forums"
@@ -793,8 +792,7 @@ msgstr ""
 
 #: common/include/group_section_texts.php:10
 #: common/reporting/report_utils.php:153 common/reporting/report_utils.php:165
-#: www/include/Layout.class.php:574 www/include/LayoutSF.class.php:804
-#: www/include/menuSF.php:135 www/include/project_home.php:324
+#: www/include/Layout.class.php:574 www/include/project_home.php:324
 #: www/project/stats/project_stats_utils.php:85
 #: www/project/stats/project_stats_utils.php:144
 #: www/project/stats/project_stats_utils.php:200
@@ -812,8 +810,7 @@ msgid "Documentations"
 msgstr "Преглед на документите"
 
 #: common/include/group_section_texts.php:12 www/frs/include/frs_utils.php:92
-#: www/include/Layout.class.php:618 www/include/LayoutSF.class.php:833
-#: www/include/menuSF.php:154
+#: www/include/Layout.class.php:618
 #: www/themes/gforge-simple-theme/Theme.class.php:597
 #: www/themes/gforge/Theme.class.php:565
 msgid "Files"
@@ -821,9 +818,8 @@ msgstr "Пакети"
 
 #: common/include/group_section_texts.php:13
 #: plugins/quota_management/www/quota_project.php:78 www/admin/index.php:130
-#: www/include/Layout.class.php:595 www/include/LayoutSF.class.php:822
-#: www/include/menuSF.php:147 www/news/index.php:37 www/news/submit.php:97
-#: www/themes/gforge-simple-theme/Theme.class.php:572
+#: www/include/Layout.class.php:595 www/news/index.php:37
+#: www/news/submit.php:97 www/themes/gforge-simple-theme/Theme.class.php:572
 #: www/themes/gforge/Theme.class.php:542
 msgid "News"
 msgstr "Новини"
@@ -890,11 +886,9 @@ msgstr "Публикуване на обяви"
 #: www/forum/include/ForumHTML.class.php:93
 #: www/forum/include/ForumHTML.class.php:104 www/frs/include/frs_utils.php:93
 #: www/include/Layout.class.php:455 www/include/Layout.class.php:535
-#: www/include/LayoutSF.class.php:744 www/include/menuSF.php:36
-#: www/include/menuSF.php:121 www/mail/mail_utils.php:36
-#: www/news/news_utils.php:61 www/pm/include/ProjectGroupHTML.class.php:74
-#: www/pm/index.php:54 www/scm/include/scm_utils.php:54
-#: www/survey/include/SurveyHTML.class.php:54
+#: www/mail/mail_utils.php:36 www/news/news_utils.php:61
+#: www/pm/include/ProjectGroupHTML.class.php:74 www/pm/index.php:54
+#: www/scm/include/scm_utils.php:54 www/survey/include/SurveyHTML.class.php:54
 #: www/survey/include/SurveyHTML.class.php:74 www/survey/survey_utils.php:55
 #: www/survey/survey_utils.php:79
 #: www/themes/gforge-simple-theme/Theme.class.php:409
@@ -982,8 +976,7 @@ msgid "Project Manager Admin"
 msgstr "Администратори"
 
 #: common/include/rbac_texts.php:67 common/reporting/report_utils.php:150
-#: www/include/Layout.class.php:559 www/include/LayoutSF.class.php:758
-#: www/include/menuSF.php:128 www/include/project_home.php:261
+#: www/include/Layout.class.php:559 www/include/project_home.php:261
 #: www/include/project_home.php:262
 #: www/pm/include/ProjectTaskHTML.class.php:101
 #: www/themes/gforge-simple-theme/Theme.class.php:531
@@ -1022,7 +1015,6 @@ msgid "Project Admin"
 msgstr ""
 
 #: common/include/rbac_texts.php:75 www/include/Layout.class.php:602
-#: www/include/LayoutSF.class.php:828 www/include/menuSF.php:151
 #: www/include/project_home.php:354 www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:580
 #: www/themes/gforge/Theme.class.php:549
@@ -1271,7 +1263,6 @@ msgid "Y-m"
 msgstr ""
 
 #: common/reporting/report_utils.php:152 www/include/Layout.class.php:581
-#: www/include/LayoutSF.class.php:810 www/include/menuSF.php:139
 #: www/include/project_home.php:306
 #: www/themes/gforge-simple-theme/Theme.class.php:556
 #: www/themes/gforge/Theme.class.php:528
@@ -1285,7 +1276,7 @@ msgstr "Документи"
 msgid "Downloads"
 msgstr ""
 
-#: common/reporting/report_utils.php:159 www/include/LayoutSF.class.php:781
+#: common/reporting/report_utils.php:159
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
@@ -1294,7 +1285,7 @@ msgstr ""
 msgid "Bugs"
 msgstr ""
 
-#: common/reporting/report_utils.php:160 www/include/LayoutSF.class.php:786
+#: common/reporting/report_utils.php:160
 #: www/project/stats/project_stats_utils.php:82
 #: www/project/stats/project_stats_utils.php:141
 #: www/project/stats/project_stats_utils.php:197
@@ -1303,7 +1294,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: common/reporting/report_utils.php:161 www/include/LayoutSF.class.php:791
+#: common/reporting/report_utils.php:161
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -2026,7 +2017,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:35
 #: plugins/quota_management/www/quota_admin.php:38 www/admin/configman.php:35
 #: www/admin/cronman.php:33 www/admin/index.php:36 www/admin/pluginman.php:34
-#: www/admin/vhost.php:106 www/include/menuSF.php:37
+#: www/admin/vhost.php:106
 msgid "Site admin"
 msgstr ""
 
@@ -2458,7 +2449,6 @@ msgstr "Публикуване на обяви"
 
 #: plugins/webcalendar/www/index2.php:48
 #: www/forum/include/ForumHTML.class.php:69 www/include/Layout.class.php:528
-#: www/include/LayoutSF.class.php:740 www/include/menuSF.php:118
 #: www/my/diary.php:154 www/my/index.php:76 www/my/index.php:124
 #: www/my/index.php:179 www/pm/browse_task.php:107
 #: www/project/report/index.php:136
@@ -2874,7 +2864,7 @@ msgid "Login with SSL"
 msgstr "Вход (SSL режим)"
 
 #: www/account/login.php:61 www/account/verify.php:101
-#: www/admin/userlist.php:67 www/include/menuSF.php:203
+#: www/admin/userlist.php:67
 msgid "Login"
 msgstr "Вход"
 
@@ -2981,10 +2971,15 @@ msgstr ""
 
 #: www/account/lostpw.php:75
 msgid ""
-"<p>An email has been sent to the address you have on file. Follow the "
-"instructions in the email to change your account password.</p><p><a href=\"/"
-"\">[ Home ]</a></p>"
+"An email has been sent to the address you have on file. Follow the "
+"instructions in the email to change your account password."
 msgstr ""
+
+#: www/account/lostpw.php:75 www/include/Layout.class.php:426
+#: www/themes/gforge-simple-theme/Theme.class.php:362
+#: www/themes/gforge/Theme.class.php:381 www/themes/lite/Theme.class.php:268
+msgid "Home"
+msgstr "Начало"
 
 #: www/account/lostpw.php:85
 msgid ""
@@ -3695,7 +3690,7 @@ msgstr ""
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr ""
 
-#: www/admin/index.php:113 www/include/menuSF.php:102
+#: www/admin/index.php:113
 msgid "Register New Project"
 msgstr "Регистриране на нов проект"
 
@@ -3822,7 +3817,6 @@ msgid "Error Scheduling Mailing, Could not schedule mailing, database error:"
 msgstr ""
 
 #: www/admin/massmail.php:77 www/admin/massmail.php:83
-#: www/include/menuSF.php:42
 msgid "Massmail admin"
 msgstr ""
 
@@ -4149,7 +4143,7 @@ msgid "New category description (VARCHAR 255)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:50
-msgid "Error: a category can't be the same as its own parent"
+msgid "Error: a category can't be the same as its own parent."
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:90
@@ -4808,7 +4802,7 @@ msgid "Submit Information"
 msgstr "Публикуване"
 
 #: www/docman/search.php:92 www/include/Layout.class.php:791
-#: www/include/Layout.class.php:815 www/include/menuSF.php:161
+#: www/include/Layout.class.php:815
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:51
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:42
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:42
@@ -6071,7 +6065,7 @@ msgstr ""
 msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
-#: www/include/Layout.class.php:84 www/include/LayoutSF.class.php:330
+#: www/include/Layout.class.php:84
 #: www/themes/gforge-simple-theme/Theme.class.php:91
 #: www/themes/gforge/Theme.class.php:115 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
@@ -6086,7 +6080,7 @@ msgstr "Отворени"
 msgid "Log Out"
 msgstr "Изход"
 
-#: www/include/Layout.class.php:162 www/include/menuSF.php:189
+#: www/include/Layout.class.php:162
 #: www/themes/gforge-simple-theme/Theme.class.php:162
 #: www/themes/gforge/Theme.class.php:169 www/themes/osx/Theme.class.php:73
 #: www/themes/ultralite/Theme.class.php:45
@@ -6113,12 +6107,6 @@ msgstr "Регистрация"
 msgid "Show source"
 msgstr ""
 
-#: www/include/Layout.class.php:426 www/include/menuSF.php:99
-#: www/themes/gforge-simple-theme/Theme.class.php:362
-#: www/themes/gforge/Theme.class.php:381 www/themes/lite/Theme.class.php:268
-msgid "Home"
-msgstr "Начало"
-
 #: www/include/Layout.class.php:427
 #: www/themes/gforge-simple-theme/Theme.class.php:366
 #: www/themes/gforge/Theme.class.php:382 www/themes/lite/Theme.class.php:269
@@ -6131,27 +6119,25 @@ msgstr "Моята&nbsp;страница"
 msgid "Project&nbsp;Tree"
 msgstr "Каталог"
 
-#: www/include/Layout.class.php:432 www/include/menuSF.php:100
+#: www/include/Layout.class.php:432
 #: www/themes/gforge-simple-theme/Theme.class.php:384
 #: www/themes/gforge/Theme.class.php:387 www/themes/lite/Theme.class.php:274
 msgid "Code&nbsp;Snippets"
 msgstr "Фрагменти"
 
-#: www/include/Layout.class.php:435 www/include/menuSF.php:104
+#: www/include/Layout.class.php:435
 #: www/themes/gforge-simple-theme/Theme.class.php:393
 #: www/themes/gforge/Theme.class.php:390 www/themes/lite/Theme.class.php:277
 msgid "Project&nbsp;Openings"
 msgstr "Помощ"
 
-#: www/include/Layout.class.php:567 www/include/LayoutSF.class.php:798
-#: www/include/menuSF.php:131 www/include/project_home.php:314
+#: www/include/Layout.class.php:567 www/include/project_home.php:314
 #: www/themes/gforge-simple-theme/Theme.class.php:540
 #: www/themes/gforge/Theme.class.php:514
 msgid "Lists"
 msgstr "Пощ.списъци"
 
-#: www/include/Layout.class.php:588 www/include/LayoutSF.class.php:816
-#: www/include/menuSF.php:143 www/include/project_home.php:345
+#: www/include/Layout.class.php:588 www/include/project_home.php:345
 #: www/include/project_home.php:346 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:564
@@ -6204,23 +6190,6 @@ msgstr ""
 #, fuzzy
 msgid "none"
 msgstr "Готово"
-
-#: www/include/LayoutSF.class.php:375
-#, php-format
-msgid ""
-"This is %1$s.  For more about it, including copyright info, see <a href=\"/"
-"about.php\">this page</a>."
-msgstr ""
-
-#: www/include/LayoutSF.class.php:408 www/include/LayoutSF.class.php:409
-#: www/themes/gforge/Theme.class.php:140 www/themes/gforge/Theme.class.php:141
-#: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
-msgid "default_font"
-msgstr ""
-
-#: www/include/LayoutSF.class.php:748 www/include/project_home.php:253
-msgid "Home Page"
-msgstr "Начало"
 
 #: www/include/SmilieSupportHtml.class.php:53
 msgid "Smilies's list"
@@ -6328,8 +6297,7 @@ msgstr ""
 msgid "Highest"
 msgstr ""
 
-#: www/include/html.php:673 www/include/menuSF.php:188
-#: www/my/bookmark_add.php:31
+#: www/include/html.php:673 www/my/bookmark_add.php:31
 msgid "My Personal Page"
 msgstr ""
 
@@ -6340,44 +6308,6 @@ msgstr "Дневник &amp; Бележки"
 #: www/include/html.php:676
 msgid "Register Project"
 msgstr "Регистриране на нов проект"
-
-#: www/include/menuSF.php:38
-msgid "Group list admin"
-msgstr ""
-
-#: www/include/menuSF.php:39
-msgid "User list admin"
-msgstr ""
-
-#: www/include/menuSF.php:40
-msgid "Approve pending projects"
-msgstr ""
-
-#: www/include/menuSF.php:41
-msgid "News admin approval"
-msgstr ""
-
-#: www/include/menuSF.php:43
-#, fuzzy
-msgid "People admin"
-msgstr "Хора"
-
-#: www/include/menuSF.php:187
-#, php-format
-msgid "logged in as %s"
-msgstr ""
-
-#: www/include/menuSF.php:192
-msgid "Bookmark Page"
-msgstr "Отбележи страницата"
-
-#: www/include/menuSF.php:194
-msgid "Logout"
-msgstr "Изход"
-
-#: www/include/menuSF.php:204
-msgid "New User via SSL"
-msgstr "Нов потребител"
 
 #: www/include/project_home.php:17 www/include/user_home.php:121
 msgid "Project Info"
@@ -6483,6 +6413,10 @@ msgstr "Преглед на всички издадени пакети"
 #: www/include/project_home.php:248
 msgid "Public Areas"
 msgstr "Общодостъпни места"
+
+#: www/include/project_home.php:253
+msgid "Home Page"
+msgstr "Начало"
 
 #: www/include/project_home.php:254
 msgid "Project Home Page"
@@ -10762,6 +10696,11 @@ msgstr "Добавяне на въпроси"
 msgid "Error creating permission"
 msgstr "Грешка при създаването на %1$s"
 
+#: www/themes/gforge/Theme.class.php:140 www/themes/gforge/Theme.class.php:141
+#: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
+msgid "default_font"
+msgstr ""
+
 #: www/top/index.php:31
 msgid "Top Projects"
 msgstr ""
@@ -11597,6 +11536,19 @@ msgstr ""
 #, fuzzy
 msgid "Invalid User"
 msgstr "Грешна парола"
+
+#, fuzzy
+#~ msgid "People admin"
+#~ msgstr "Хора"
+
+#~ msgid "Bookmark Page"
+#~ msgstr "Отбележи страницата"
+
+#~ msgid "Logout"
+#~ msgstr "Изход"
+
+#~ msgid "New User via SSL"
+#~ msgstr "Нов потребител"
 
 #, fuzzy
 #~ msgid "You can"
