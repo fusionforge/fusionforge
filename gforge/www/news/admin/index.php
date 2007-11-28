@@ -42,6 +42,8 @@ $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
 
+$feedback = '';
+
 if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 	$status = getIntFromRequest('status');
 	$summary = getStringFromRequest('summary');
