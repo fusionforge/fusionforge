@@ -49,9 +49,9 @@ site_project_header(array('title'=>_('Activity'),'group'=>$group_id,'toptab'=>'a
 $ids=array();
 $texts=array();
 
-if ($GLOBALS['sys_use_scm']) {
-	$ids[]='commit';
-	$texts[]=_('Commits');
+if ($GLOBALS['sys_use_forum']) {
+	$ids[]='forumpost';
+	$texts[]=_('Forum Post');
 }
 
 if ($GLOBALS['sys_use_tracker']) {
@@ -61,14 +61,19 @@ if ($GLOBALS['sys_use_tracker']) {
 	$texts[]=_('Tracker Closed');
 }
 
+if ($GLOBALS['sys_use_news']) {
+	$ids[]='news';
+	$texts[]=_('News');
+}
+
+if ($GLOBALS['sys_use_scm']) {
+	$ids[]='commit';
+	$texts[]=_('Commits');
+}
+
 if ($GLOBALS['sys_use_frs']) {
 	$ids[]='frsrelease';
 	$texts[]=_('FRS Release');
-}
-
-if ($GLOBALS['sys_use_forum']) {
-	$ids[]='forumpost';
-	$texts[]=_('Forum Post');
 }
 
 if (count($show) < 1) {
@@ -132,7 +137,7 @@ if ($rows<1) {
 		}
 		switch ($arr['section']) {
 			case 'commit': {
-				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
+				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
 				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'].' </a>';
 				break;
 			}
@@ -147,13 +152,18 @@ if ($rows<1) {
 				break;
 			}
 			case 'frsrelease': {
-				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
+				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
 				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release '.$arr['description'].'</a>';
 				break;
 			}
 			case 'forumpost': {
-				$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","ALT"=>"Forum"));
+				$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","alt"=>"Forum"));
 				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post '.$arr['description'].'</a>';
+				break;
+			}
+			case 'news': {
+				$icon=html_image("ic/write16w.png","20","20",array("border"=>"0","alt"=>"News"));
+				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.$arr['subref_id'].'">News '.$arr['description'].'</a>';
 				break;
 			}
 		}
