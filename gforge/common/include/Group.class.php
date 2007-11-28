@@ -436,7 +436,7 @@ class Group extends Error {
 		");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error()));
+			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error());
 			db_rollback();
 			return false;
 		}
@@ -1887,12 +1887,12 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		} else if ($ats->isError()) {
-			$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage());
+			$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
 		if (!$ats->createTrackers()) {
-			$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage());
+			$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
@@ -1904,19 +1904,19 @@ class Group extends Error {
 		//
 		$f = new Forum($this);
 		if (!$f->create('Open-Discussion','General Discussion',1,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create('Help','Get Public Help',1,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create('Developers','Project Developer Discussion',0,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage());
+			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
 			db_rollback();
 			return false;
 		}
