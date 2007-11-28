@@ -178,7 +178,7 @@ function setup_gettext_from_lang_id ($lang_id) {
 }
 
 function setup_gettext_from_langname ($lang) {
-	$locale = locale_code_from_name($lang).'.utf8';
+	$locale = language_name_to_locale_code($lang).'.utf8';
 	setup_gettext_from_locale ($locale) ;
 }
 
