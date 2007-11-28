@@ -199,7 +199,7 @@ class ForumAdmin extends Error {
 			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to,$moderation_level)) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
-				$feedback .= _('Forum Info Updated Successfully');
+				$feedback = _('Forum Info Updated Successfully');
 			}
 			return $feedback;
 		}
@@ -229,7 +229,7 @@ class ForumAdmin extends Error {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
-				$feedback .= _('Forum created successfully');
+				$feedback = _('Forum created successfully');
 			}
 			return $feedback;
 		}
@@ -256,7 +256,7 @@ class ForumAdmin extends Error {
 			if (!$count || $fm->isError()) {
 				exit_error(_('Error'),$fm->getErrorMessage());
 			} else {
-				$feedback .= sprintf(_('%1$s messages deleted'), $count);
+				$feedback = sprintf(ngettext('%1$s message deleted', '%1$s messages deleted', $count), $count);
 			}
 			return $feedback;
 		}
@@ -277,7 +277,7 @@ class ForumAdmin extends Error {
 			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
-				$feedback .= _('Successfully Deleted');
+				$feedback = _('Successfully Deleted');
 			}
 			return $feedback;
 		}
