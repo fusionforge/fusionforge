@@ -154,7 +154,7 @@ function locale_code_to_language_name ($loc) {
 	return $localemap[$loc] ;
 }
 
-function lang_id_to_language_name ($id) {
+function lang_id_to_language_name ($lang_id) {
 	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
 	return db_result($res, 0, 'classname');
 }
