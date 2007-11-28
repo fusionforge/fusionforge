@@ -1,3 +1,11 @@
+2007-11-28  Roland Mas  <lolando@debian.org>
+
+	* www/admin/index.php: Removed links to the language
+	administration tools.
+	* www/admin/languages/: Removed that directory, now unused.
+	* deb-specific/db-upgrade.pl: Delete related tmp_lang if it
+	exists.
+
 2007-11-27  Roland Mas  <lolando@debian.org>
 
 	* common/include/gettext.php: Renamed from

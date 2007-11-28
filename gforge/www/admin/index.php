@@ -152,12 +152,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), $GLOBALS['sys_name']); ?></a></li>
 	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>
-	<li><a href="edit_supported_languages.php"><?php echo _('Add, Delete, or Edit Supported Languages'); ?></a></li>
 	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo _('Add, Delete, or Edit Licenses'); ?></a></li>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/admin/languages/loadtabfiles.php"><?php echo _('Translation file tool'); ?></a></li>
 	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/stats/lastlogins.php"><?php echo _('Recent logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>

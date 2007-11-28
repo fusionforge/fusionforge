@@ -2738,6 +2738,18 @@ eval {
       &update_with_sql("20070924-project-perm","4.6.99-2");
       &update_with_sql("20070924-artifact-perm","4.6.99-3");
 	
+    $version = &get_db_version ;
+    $target = "4.6.99-4" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Dropping old translations table") ;
+
+	&drop_table_if_exists ($dbh, "tmp_lang") ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
