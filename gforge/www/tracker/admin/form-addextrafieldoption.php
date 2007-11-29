@@ -5,12 +5,13 @@
 //
 	$boxid = getIntFromRequest('boxid');
 	$ac = new ArtifactExtraField($ath,$boxid);
-if (!$ac || !is_object($ac)) {
-	exit_error('Error','Unable to create ArtifactExtraField Object');
-	} elseif (ac->$title) {
+	if (!$ac || !is_object($ac)) {
+		exit_error('Error','Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
 		exit_error('Error',$ac->getErrorMessage());
-	  } else {efearr=$ath->getExtraFieldElements$title$boxid);
-$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
+	} else {
+	  	$efearr=$ath->getExtraFieldElements($boxid);
+		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array ('title'=>$title));
 
 		echo "<h3>".$title."</h3>";
@@ -51,7 +52,7 @@ $title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		<p>
 		<span class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></span></p>
 		<p>
-		<input type="submit" name="post_changes" value="<?php echo_('Submit') ?>" /></p>
+		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form>
 		</p>
 		<?php
