@@ -71,9 +71,14 @@ if (getStringFromRequest('submit')) {
 	} else {
 		$scm_host = $sys_cvs_host;
 		if ($sys_use_scm && $scm) {
-				$plugin = plugin_get_object($scm);
-				$scm_host = $plugin->getDefaultServer();
+			$plugin = plugin_get_object($scm);
+			$scm_host = $plugin->getDefaultServer();
+		} else if ($sys_use_scm && isset($sys_cvs_host)) {
+			$scm_host = $sys_cvs_host;
+		} else {
+			$scm_host = '';
 		}
+
 		$group = new Group();
 		$u =& session_get_user();
 		$res = $group->create(
