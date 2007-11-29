@@ -174,7 +174,7 @@ function setup_gettext_for_user ($user) {
 
 function setup_gettext_from_lang_id ($lang_id) {
 	$lang = lang_id_to_language_name ($lang_id) ;
-	setup_gettext_from_langname() ;
+	setup_gettext_from_langname($lang) ;
 }
 
 function setup_gettext_from_langname ($lang) {
