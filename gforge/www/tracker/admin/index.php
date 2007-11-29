@@ -22,6 +22,8 @@ require_once('common/tracker/ArtifactExtraFieldElement.class.php');
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
 
+$feedback = '';
+
 if ($group_id && $atid) {
 //
 //		UPDATING A PARTICULAR ARTIFACT TYPE
