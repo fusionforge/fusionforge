@@ -90,7 +90,7 @@ class ArtifactExtraFieldElement extends Error {
 		//
 		//	data validation
 		//
-		if (!$name) {
+		if (trim($name) == '') {
 			$this->setError(_('an element name is required'));
 			return false;
 		}
