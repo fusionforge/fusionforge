@@ -54,7 +54,7 @@ $ccode = getStringFromRequest('ccode');
 
 if ($sys_use_ssl && !session_issecure()) {
 	//force use of SSL for login
-	header('Location: https://'.$HTTP_HOST.$REQUEST_URI);
+	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
 if (!$theme_id || !is_numeric($theme_id)) {
@@ -125,7 +125,7 @@ if (!isset($ccode) || empty($ccode) || !eregi('^[a-z][a-z]$', $ccode)) {
 </p>
 <p>
 <?php echo _('Language Choice:'); ?><br />
-<?php echo html_get_language_popup ('language_id', language_name_to_lang_id (choose_language_from_context ()); ?>
+<?php echo html_get_language_popup ('language_id', language_name_to_lang_id (choose_language_from_context ())); ?>
 </p>
 <p>
 <?php echo _('Timezone:'); ?><br />

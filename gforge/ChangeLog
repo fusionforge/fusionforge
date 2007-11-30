@@ -1,3 +1,8 @@
+2007-11-30  Roland Mas  <lolando@debian.org>
+
+	* www/account/register.php: Fix a syntax error, use appropriate
+	functions to get data from the server.
+
 2007-11-28  Roland Mas  <lolando@debian.org>
 
 	* www/admin/index.php: Removed links to the language
