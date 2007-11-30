@@ -242,6 +242,7 @@ $title[]=_('Unix name');
 $title[]=_('Operations');
 echo $GLOBALS['HTML']->listTableTop($title);
 
+$i = 0 ;
 while ($row_cat = db_fetch_array($res_cat)) {
 
 	$row_cat['group_name'] = htmlspecialchars($row_cat['group_name']);
