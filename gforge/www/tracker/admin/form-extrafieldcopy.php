@@ -5,8 +5,8 @@
 //
 		$id = getIntFromRequest('id');
 		$fb= new ArtifactExtraField($ath,$id);
-$title = sprintf(_('Copy choices from custom field %1$s')$fb->getName());
-$ath->adminHeader(array ('title'=>$title);
+		$title = sprintf(_('Copy choices from custom field %1$s'), $fb->getName());
+		$ath->adminHeader(array ('title'=>$title));
 		echo "<h3>".$title."</h3>";
 		
 		$efearr =& $ath->getExtraFieldElements($id);

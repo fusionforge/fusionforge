@@ -137,9 +137,12 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	* 
   	* @return string result of the renderer
 	*/			
-	function getPartResult($renderer, $section, $title=$section) {
+	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
+		
+		if ($title === '')
+			$title = $section;
 		
 		$result .= '<h3><a name="'.$section.'"></a>'.$title.'</h3>';
 		
