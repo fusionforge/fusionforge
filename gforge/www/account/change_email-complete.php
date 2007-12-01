@@ -71,7 +71,7 @@ site_user_header(array('title'=>_('Email Change Complete')));
 
 <p>
 <?php
-printf (_('Welcome, %1$s. Your email change is complete. Your new email address on file is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to this account.'),$u->getUnixName(),$u->getEmail(),$u->getUnixName().'@'.$GLOBALS['sys_users_host'])) ?>
+printf (_('Welcome, %1$s. Your email change is complete. Your new email address on file is <strong>%2$s</strong>. Mail sent to &lt;%3$s&gt; will now be forwarded to this account.'),$u->getUnixName(),$u->getEmail(),$u->getUnixName().'@'.$GLOBALS['sys_users_host']) ?>
 </p>
 
 <p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php echo _('Return'); ?></a></p>
