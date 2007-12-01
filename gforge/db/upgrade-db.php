@@ -227,7 +227,7 @@ function run_sql_script($filename) {
 		// Check if it is a DROP TABLE
 		if (in_string($query, 'drop table')) {
 			$aux = explode(' ', trim($query));
-			if (count($aux) == 3 || count($aux) == ¾) { // PERFECT!
+			if (count($aux) == 3 || count($aux) == 4) { // PERFECT!
 				drop_table_if_exists($aux[2]);
 			} else {
 				print_r($aux);
