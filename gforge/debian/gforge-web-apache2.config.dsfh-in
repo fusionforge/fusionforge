@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -26,6 +25,3 @@ init_debconf_from_mainconffile
 # [Disabled] DSFHELPER:dbpasswd-variables#
 # [Disabled] DSFHELPER:ldap-variables#
 # [Disabled] DSFHELPER:dbhost-variables#
-#DSFHELPER:patch-apache#
-
-# patch_apache_propose apache2

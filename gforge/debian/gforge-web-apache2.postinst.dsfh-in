@@ -26,7 +26,6 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:handle-mainconffile#
-#DSFHELPER:patch-apache#
 
 case "$1" in
     configure)
@@ -35,8 +34,7 @@ case "$1" in
 	else			# ...or something else if need be.
 	    # Last I was told, the Hurd had no /dev/urandom
 	    # (Correct me if it has changed)
-	    # Suggestions form something more random than $(date) are welcome
-	    tmp=$(date | md5sum | cut -b1-8)
+	    sys_session_key=$(dd if=/dev/random count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
 	fi
 	add_onevar_mainconfile sys_session_key $sys_session_key
 	add_onevar_mainconfile sys_show_source 0
@@ -73,21 +71,32 @@ case "$1" in
 	
         /usr/sbin/gforge-config
 
-        # Patch Apache configuration files
-	# patch_apache_replace apache2
-
 	db_stop
         # Setup our Apache
-	touch /var/lib/gforge/etc/httpd.vhosts  && \
-		chown gforge:gforge /var/lib/gforge/etc/httpd.vhosts && \
+	touch /var/lib/gforge/etc/templates/httpd.vhosts  && \
+		chown gforge:gforge /var/lib/gforge/etc/templates/httpd.vhosts && \
 		/usr/lib/gforge/bin/create-vhosts.sh --norestart
-	/usr/lib/gforge/bin/install-apache.sh configure
 
-	# Set up upload directory
-	#chown www-data:www-data /var/lib/gforge/uploads
-	# Next line done in 20050127-frs-reorg.php
-	#chown www-data:www-data /var/lib/gforge/download
+	# Enable required modules
+	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true
+	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod ssl || true
+	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod env || true
+	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
 	
+	# Enable the Gforge configuration
+	if [ -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
+	    LINK=`ls -l /etc/apache2/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
+	    if [ "$LINK" != "/etc/gforge/httpd.conf" ] ; then 
+		# echo Removing symlink
+		rm -f /etc/apache2/conf.d/gforge.httpd.conf
+	    fi
+	fi
+	if [ -d /etc/apache2/conf.d ] && [ ! -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
+	    ln -s /etc/gforge/httpd.conf /etc/apache2/conf.d/gforge.httpd.conf
+	fi
+	
+	# Make Apache see these new changes
+	invoke-rc.d apache2 restart || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

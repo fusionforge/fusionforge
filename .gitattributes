@@ -60,7 +60,7 @@ gforge/debian/gforge-web-apache2.dirs -text
 gforge/debian/gforge-web-apache2.docs -text
 gforge/debian/gforge-web-apache2.overrides -text
 gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
-gforge/debian/gforge-web-apache2.prerm.dsfh-in -text
+gforge/debian/gforge-web-apache2.prerm -text
 gforge/debian/gforge-web-apache2.templates.dsfh-in -text
 gforge/debian/patches/unix-sockets-for-database.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
