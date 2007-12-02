@@ -31,7 +31,6 @@ case "$1" in
 			/usr/sbin/invoke-rc.d --quiet apache2 reload
 		fi
 	fi
-	/usr/lib/gforge/plugins/scmsvn/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;
