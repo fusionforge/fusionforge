@@ -183,9 +183,6 @@ EOF
 	 	echo "No way found to enable plpgsql on $db_name here" 
 	fi
 
-	# Make sure the database accepts connections from these new users
-	pg_name=postgresql-$pg_version
-	invoke-rc.d ${pg_name} reload
 	# Install/upgrade the database contents (tables and data)
 	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
@@ -202,8 +199,6 @@ EOF
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
-	pg_name=postgresql-$pg_version
-	invoke-rc.d ${pg_name} reload
 	;;
     dump)
 	if [ -e /etc/sourceforge/local.pl ] ; then

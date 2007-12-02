@@ -45,7 +45,8 @@ set -e
 
 case "$1" in
     remove)
-	db_title "Unconfiguring Gforge"
+        # Remove our database
+	/usr/lib/gforge/bin/install-db.sh purge
 
         # Unpatch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh purge-files
@@ -53,8 +54,8 @@ case "$1" in
 	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 	ucf --purge ${pg_hba_dir}/pg_hba.conf
 
-        # DB config removal
-	/usr/lib/gforge/bin/install-db.sh purge
+	pg_name=postgresql-$pg_version
+	invoke-rc.d ${pg_name} reload
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

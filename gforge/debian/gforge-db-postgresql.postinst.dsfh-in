@@ -63,6 +63,10 @@ case "$1" in
 	ucf ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 
+	# Make sure the database accepts connections from these new users
+	pg_name=postgresql-$pg_version
+	invoke-rc.d ${pg_name} reload
+
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure
     ;;
