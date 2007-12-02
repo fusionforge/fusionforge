@@ -66,13 +66,7 @@ configure_libnss_pgsql(){
 #EOF
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 #----------------- DB connection
-#host             = $db_host
-# For socket give the directory to put the socket
-host             = /var/run/postgresql/.s.PGSQL.5432
-port             = 5432
-database         = gforge
-login            = gforge_nss
-passwd           = gforge_nss
+connectionstring = port=5432 user=gforge_nss password=gforge_nss dbname=gforge
 
 #----------------- New possibility including the query directly here ------------------#
 # query
@@ -92,31 +86,6 @@ passwd_uid       = uid
 group_name       = name
 group_gid        = gid
 #--------------------------------------------------------------------------------------#
-
-#----------------- Old Method ------------------#
-# tables
-#passwdtable      = nss_passwd
-#grouptable       = nss_groups
-#groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
-
-# passwd
-#passwd_name      = login
-#passwd_passwd    = passwd
-#passwd_uid       = uid
-#passwd_gid       = gid
-#passwd_gecos     = gecos
-
-#passwd_dir      = homedir
-# New extention that allow concatenation
-#passwd_dir       = ('/home/users/' || login)
-#passwd_shell     = shell
-
-# group
-#group_name       = name
-#group_passwd     = passwd
-#group_gid        = gid
-
-#group_member     = login
 EOF
     chmod 644 /etc/nss-pgsql.conf.gforge-new
 }
