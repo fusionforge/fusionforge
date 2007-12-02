@@ -43,10 +43,10 @@ case "$1" in
 	/usr/lib/gforge/plugins/scmcvs/bin/install-cvs.sh configure
 
 	# Making user group and cvs update from database 
-	/usr/lib/gforge/bin/update-user-group-cvs.sh > /dev/null 2>&1
+	/usr/lib/gforge/plugins/scmcvs/bin/update-user-group-cvs.sh > /dev/null 2>&1
 	rm -f /var/lib/gforge/dumps/*cvs*dump
-	su -s /bin/sh gforge -c /usr/lib/gforge/plugins/scmcvs/bin/cvs_dump.pl
-	/usr/lib/gforge/plugins/scmcvs/bin/cvs_update.pl
+	su -s /bin/sh gforge -c /usr/share/gforge/plugins/scmcvs/cronjobs/cvs_dump.pl
+	/usr/share/gforge/plugins/scmcvs/cronjobs/cvs_update.pl
 
 	if [ ! -e /var/lib/gforge/chroot/cvs ] ; then
 	    cd /var/lib/gforge/chroot
