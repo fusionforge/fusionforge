@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6272-0+1) unstable; urgency=low
+gforge (4.6.99+svn6277-0+1) unstable; urgency=low
 
-  * New SVN snapshot (r6272).  Gettext transition is now complete.
+  * New SVN snapshot (r6277).  Gettext transition is now complete.
   * Removed debian/patches/use-fckeditor-from-distro.dpatch, since
     run-time detection was added upstream.
   * Fix maintainer scripts for gforge-plugin-scmcvs and -scmsvn (no
@@ -9,7 +9,7 @@ gforge (4.6.99+svn6272-0+1) unstable; urgency=low
   * gforge-shell-postgresql now depends on libnss-pgsql2 rather than the
     old libnss-pgsql1.
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2007 11:01:28 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 19:58:12 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 

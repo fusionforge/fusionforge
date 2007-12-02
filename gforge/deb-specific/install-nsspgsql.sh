@@ -65,27 +65,20 @@ configure_libnss_pgsql(){
 #group_member    = login
 #EOF
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
+### NSS Configuration for Gforge
+
 #----------------- DB connection
 connectionstring = port=5432 user=gforge_nss password=gforge_nss dbname=gforge
 
-#----------------- New possibility including the query directly here ------------------#
-# query
-# return the passwd array
-querypasswd      = SELECT login,passwd,uid,gid,gecos,('/var/lib/gforge/chroot/home/users/' || login),shell FROM nss_passwd
-# return the group array whithout list of members
-querygroup       = SELECT name,'x',gid FROM nss_groups
-# return an array of users that are member of a group with gid %d
-querymembers     = SELECT user_name FROM nss_usergroups WHERE gid = %d
-# return an array of numeric gid a user %s is member of except his own gid %d
-queryids         = SELECT gid FROM nss_usergroups WHERE user_name = '%s' AND gid != %d
-#----------------- Only the following tables map are necessary ------------------------#
-# passwd
-passwd_name      = login
-passwd_uid       = uid
-# group
-group_name       = name
-group_gid        = gid
-#--------------------------------------------------------------------------------------#
+#----------------- NSS queries
+getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
+getpwuid        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE uid = \$1
+allusers        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd
+getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE gid = \$1
+getgrnam = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE name = \$1
+getgrgid = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE gid = \$1
+allgroups = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups 
+groups_dyn = SELECT ug.gid FROM nss_usergroups ug, nss_passwd p WHERE ug.uid = p.uid AND p.login = \$1 AND ug.gid <> \$2
 EOF
     chmod 644 /etc/nss-pgsql.conf.gforge-new
 }
