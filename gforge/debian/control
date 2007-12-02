@@ -135,7 +135,7 @@ Description: collaborative development tool - mail tools (using Courier)
 
 Package: gforge-shell-postgresql
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-pgsql1
+Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ssh, libnss-pgsql2
 Provides: gforge-shell
 Conflicts: gforge-shell
 Description: collaborative development tool - shell accounts (using PostgreSQL)
