@@ -12,6 +12,4 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-ucf /etc/bind/named.conf.gforge-new /etc/bind/named.conf
-rm /etc/bind/named.conf.gforge-new
 db_stop
