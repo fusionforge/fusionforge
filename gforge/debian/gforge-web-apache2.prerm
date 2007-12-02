@@ -19,19 +19,8 @@ set -e
 
 case "$1" in
     remove)
-	db_title "Unconfiguring Gforge"
-
-	/usr/lib/gforge/bin/install-apache.sh purge-files
-	ucf /etc/apache/httpd.conf.gforge-new /etc/apache/httpd.conf
-	rm /etc/apache/httpd.conf.gforge-new
-	ucf --purge /etc/apache/httpd.conf
-
-	# Clean debconf after ourselves
-	db_stop
-
-        # Apache config removal
-	/usr/lib/gforge/bin/install-apache.sh purge
-
+	rm -f /etc/apache2/conf.d/gforge.httpd.conf
+	invoke-rc.d apache2 reload || true
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;
