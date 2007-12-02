@@ -32,15 +32,6 @@ setup_vars() {
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
 
-show_vars() {
-    echo "slapd_base_dn      = '$slapd_base_dn'"
-    echo "gforge_base_dn     = '$gforge_base_dn'"
-    echo "slapd_admin_dn     = '$slapd_admin_dn'"
-    echo "slapd_admin_passwd = '$slapd_admin_passwd'"
-    echo "cryptedpasswd      = '$cryptedpasswd'"
-    echo "tmpfile_pattern    = '$tmpfile_pattern'"
-}
-
 # Should I do something for /etc/pam_pgsql.conf ?
 modify_pam_pgsql(){
     echo -n
@@ -75,9 +66,9 @@ configure_libnss_pgsql(){
 #EOF
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 #----------------- DB connection
-host             = $db_host
+#host             = $db_host
 # For socket give the directory to put the socket
-#host            = /tmp
+host             = /var/run/postgresql/.s.PGSQL.5432
 port             = 5432
 database         = gforge
 login            = gforge_nss
@@ -184,7 +175,6 @@ case "$1" in
 	;;
     test|check)
 	setup_vars
-	show_vars
 	check_server
 	;;
     setup)
