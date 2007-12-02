@@ -41,9 +41,10 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+$group =& group_get_object($group_id);
+
 if ($submit) {
 
-	$group =& group_get_object($group_id);
 	$gjr=new GroupJoinRequest($group);
 	$usr=&session_get_user();
 	if (!$gjr->create($usr->getId(),$comments)) {
@@ -57,7 +58,7 @@ site_project_header(array('title'=>_('Request to join project'),'group'=>$group_
 
 ?>
 <p><?php 
-$nbadmins = count($group()->getAdmins());
+$nbadmins = count($group->getAdmins());
 echo ngettext('You can request to join a project by clicking the submit button. The administrator will be emailed to approve or deny your request.', 'You can request to join a project by clicking the submit button. The administrators will be emailed to approve or deny your request.', $nbadmins); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 <p>
