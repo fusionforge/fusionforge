@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-# Source debconf library.
-. /usr/share/debconf/confmodule
-
-ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
-rm /etc/proftpd/proftpd.conf.gforge-new
-db_stop
