@@ -65,8 +65,6 @@ case "$1" in
 
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && /usr/lib/gforge/bin/install-db.sh restore /var/lib/gforge/sf_dump_for_gforge && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ok && /usr/lib/gforge/bin/install-db.sh configure
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ko
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

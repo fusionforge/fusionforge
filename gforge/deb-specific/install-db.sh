@@ -56,7 +56,6 @@ case "$target" in
 	db_passwd=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
-	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 
         # PostgreSQL configuration for versions from 7.3 on
@@ -86,15 +85,9 @@ case "$target" in
 	cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	rm -f $cur
 	
-	# Remove old password file, created by 7.2, not used by 7.3
-	if [ -e /var/lib/postgres/data/gforge_passwd ] ; then
-	    rm -f /var/lib/postgres/data/gforge_passwd
-	fi
-	
 	;;
     configure)
 	# Create the appropriate database user
-	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
 	db_passwd=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
@@ -196,33 +189,18 @@ EOF
 	if [ $p != 0 ] ; then
 	    exit $p
 	fi
-	# Must be root to reorg these files, but only have to do it once
-	[ ! -f /var/lib/gforge/db/20050127-frs-reorg.done ] &&\
-	(/usr/lib/gforge/db/20050127-frs-reorg.php \
-	-d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include &&\
-	touch /var/lib/gforge/db/20050127-frs-reorg.done) || true
-	# Le last line had the bad idea to create a cache file owned by root
-	rm -f /var/cache/gforge/English.cache
-	
 	;;
     purge-files)
 	cp -a ${pg_hba_dir}/pg_hba.conf ${pg_hba_dir}/pg_hba.conf.gforge-new
-        if grep -q "### Next line inserted by GForge install" ${pg_hba_dir}/pg_hba.conf.gforge-new
-        then
-	    perl -pi -e "s/### Next line inserted by GForge install\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
-	    # same problem below with gforge required to be the first host that
-	    # uses password, required for allowing change of db_name.
-	    perl -pi -e "s/^host.*password\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
-	    perl -pi -e "s/^host.*gforge_passwd\n//" ${pg_hba_dir}/pg_hba.conf.gforge-new
-        fi
+	perl -pi -e "BEGIN { undef \$/; } s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\n//ms;" ${pg_hba_dir}/pg_hba.conf.gforge-new
 	;;
     purge)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
-	rm -f /var/lib/postgres/data/gforge_passwd
-	[ -f /var/lib/postgres/data/postmaster.pid ] && kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid) || true
+	pg_name=postgresql-$pg_version
+	invoke-rc.d ${pg_name} reload
 	;;
     dump)
 	if [ -e /etc/sourceforge/local.pl ] ; then
@@ -246,21 +224,11 @@ EOF
 	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
 	;;
     restore)
-	if [ "x$pg_version" != "x" ] 
-	then 
-		pg_name=postgresql-$pg_version
-	else
-		pg_name=postgresql
-	fi
+	pg_name=postgresql-$pg_version
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
-	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
-	if dpkg --compare-versions $pg_version lt 7.3 ; then
-	    localtrust="local all trust"
-	else
-	    localtrust="local all all trust"
-	fi
+	localtrust="local all all trust"
 	echo "### Next line inserted by GForge restore" > $newpg
 	echo "$localtrust" >> $newpg
 	#echo "host all 127.0.0.1 255.255.255.255 trust" >> $newpg
