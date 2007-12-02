@@ -101,7 +101,8 @@ install: build
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmsvn/
 
 	# gforge-plugin-scmcvs
-	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
+	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
 	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs
 	cp -r plugins/scmcvs/bin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
 	cp -r plugins/scmcvs/common/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/common/
@@ -109,7 +110,7 @@ install: build
 	cp -r plugins/scmcvs/etc/plugins/scmcvs/* $(CURDIR)/debian/gforge-plugin-scmcvs/etc/gforge/plugins/scmcvs/
 
 	# gforge-plugin-scmsvn
-	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
 	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs
 	cp -r plugins/scmsvn/bin/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
 	cp -r plugins/scmsvn/common/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/common/
@@ -178,8 +179,6 @@ install: build
 	# move some files from gforge/debian/gforge-web-apache2 to gforge-common as there are needed by postgress upgrade
 	# these files should be moved one day in common/
 
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/languages \
-		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_pre.php \
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_exit.php \
