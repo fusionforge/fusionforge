@@ -25,7 +25,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     configure)
     	# I don't know why I have to do this but somthing locks
@@ -36,7 +35,8 @@ case "$1" in
 
         # Patch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh configure-files
-	replace_file /etc/proftpd/proftpd.conf
+	ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+	rm /etc/proftpd/proftpd.conf.gforge-new
 
         # Setup our FTP
 	/usr/lib/gforge/bin/install-ftp.sh configure 

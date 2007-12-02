@@ -1,4 +1,6 @@
 unpatch_apache(){
 	/usr/lib/gforge/bin/install-apache.sh purge-files
-	propose_update_remove /etc/apache/httpd.conf
+	ucf /etc/apache/httpd.conf.gforge-new /etc/apache/httpd.conf
+	rm /etc/apache/httpd.conf.gforge-new
+	ucf --purge /etc/apache/httpd.conf
 }

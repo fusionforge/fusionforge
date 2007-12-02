@@ -17,16 +17,21 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
         # Unpatch Slapd configuration files
 	/usr/lib/gforge/bin/install-ldap.sh purge-files
-	propose_update_remove /etc/libnss-ldap.conf
-	propose_update_remove /etc/nsswitch.conf
-	propose_update_remove /etc/ldap/slapd.conf
+	ucf /etc/libnss-ldap.conf.gforge-new /etc/libnss-ldap.conf
+	ucf /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
+	ucf /etc/ldap/slapd.conf.gforge-new /etc/ldap/slapd.conf
+	rm /etc/libnss-ldap.conf.gforge-new
+	rm /etc/nsswitch.conf.gforge-new
+	rm /etc/ldap/slapd.conf.gforge-new
+	ucf --purge /etc/libnss-ldap.conf
+	ucf --purge /etc/nsswitch.conf
+	ucf --purge /etc/ldap/slapd.conf
 
 	# Clean debconf after ourselves
 	db_stop

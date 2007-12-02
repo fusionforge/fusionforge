@@ -17,14 +17,15 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh purge-files
-	propose_update_remove /etc/proftpd/proftpd.conf
+	ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+	rm /etc/proftpd/proftpd.conf.gforge-new
+	ucf --purge /etc/proftpd/proftpd.conf
 
 	# Clean debconf after ourselves
 	db_stop

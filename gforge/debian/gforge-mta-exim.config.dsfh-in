@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -14,6 +13,8 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-propose_update_install /etc/aliases
-propose_update_install /etc/exim/exim.conf
+ucf /etc/aliases.gforge-new /etc/aliases
+ucf /etc/exim/exim.conf.gforge-new /etc/exim/exim.conf
+rm /etc/aliases.gforge-new
+rm /etc/exim/exim.conf.gforge-new
 db_stop

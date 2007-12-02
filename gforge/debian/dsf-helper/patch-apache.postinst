@@ -1,6 +1,8 @@
 patch_apache_replace () {
 	for flavour in $* ; do
-		[ -e /etc/php5/$flavour/php.ini ] && replace_file /etc/php5/$flavour/php.ini || true
+		[ -e /etc/php5/$flavour/php.ini ] && ucf /etc/php5/$flavour/php.ini.gforge-new /etc/php5/$flavour/php.ini || true
+		rm /etc/php5/$flavour/php.ini.gforge-new
 	done
-	[ -e /etc/php5/cgi/php.ini ] && replace_file /etc/php5/cgi/php.ini || true
+	[ -e /etc/php5/cgi/php.ini ] && ucf /etc/php5/cgi/php.ini.gforge-new /etc/php5/cgi/php.ini || true
+	rm /etc/php5/cgi/php.ini.gforge-new
 }

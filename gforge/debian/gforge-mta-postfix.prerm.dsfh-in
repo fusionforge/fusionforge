@@ -17,15 +17,18 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Postfix configuration files
 	/usr/lib/gforge/bin/install-postfix.sh purge-files
-	propose_update_remove /etc/aliases
-	propose_update_remove /etc/postfix/main.cf
+	ucf /etc/aliases.gforge-new /etc/aliases
+	ucf /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
+	rm /etc/aliases.gforge-new
+	rm /etc/postfix/main.cf.gforge-new
+	ucf --purge /etc/aliases
+	ucf --purge /etc/postfix/main.cf
 
 	# Clean debconf after ourselves
 	db_stop

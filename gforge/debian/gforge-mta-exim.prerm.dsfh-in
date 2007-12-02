@@ -17,15 +17,18 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Exim configuration files
 	/usr/lib/gforge/bin/install-exim.sh purge-files
-	propose_update_remove /etc/aliases
-	propose_update_remove /etc/exim/exim.conf
+	ucf /etc/aliases.gforge-new /etc/aliases
+	ucf /etc/exim/exim.conf.gforge-new /etc/exim/exim.conf
+	rm /etc/aliases.gforge-new
+	rm /etc/exim/exim.conf.gforge-new
+	ucf --purge /etc/aliases
+	ucf --purge /etc/exim/exim.conf
 
 	# Clean debconf after ourselves
 	db_stop

@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -14,10 +13,14 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-propose_update_install /etc/aliases
-propose_update_install /etc/exim4/exim4.conf
-propose_update_install /etc/exim4/exim4.conf.template
-propose_update_install /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+ucf /etc/aliases.gforge-new /etc/aliases
+ucf /etc/exim4/exim4.conf.gforge-new /etc/exim4/exim4.conf
+ucf /etc/exim4/exim4.conf.template.gforge-new /etc/exim4/exim4.conf.template
+ucf /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+rm /etc/aliases.gforge-new
+rm /etc/exim4/exim4.conf.gforge-new
+rm /etc/exim4/exim4.conf.template.gforge-new
+rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new
 db_stop
 
 

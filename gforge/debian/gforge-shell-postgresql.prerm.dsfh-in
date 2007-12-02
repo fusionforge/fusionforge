@@ -17,15 +17,18 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
         # Unpatch Slapd configuration files
 	/usr/lib/gforge/bin/install-nsspgsql.sh purge-files
-	propose_update_remove /etc/libnss-pgsql.conf
-	propose_update_remove /etc/nsswitch.conf
+	ucf /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
+	ucf /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
+	rm /etc/nss-pgsql.conf.gforge-new
+	rm /etc/nsswitch.conf.gforge-new
+	ucf --purge /etc/libnss-pgsql.conf
+	ucf --purge /etc/nsswitch.conf
 
 	# Clean debconf after ourselves
 	db_stop

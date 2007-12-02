@@ -43,14 +43,15 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     remove)
 	db_title "Unconfiguring Gforge"
 
         # Unpatch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh purge-files
-	propose_update_remove ${pg_hba_dir}/pg_hba.conf
+	ucf ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
+	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
+	ucf --purge ${pg_hba_dir}/pg_hba.conf
 
         # DB config removal
 	/usr/lib/gforge/bin/install-db.sh purge

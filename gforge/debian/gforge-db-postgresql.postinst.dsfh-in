@@ -51,7 +51,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
@@ -61,7 +60,8 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files
-	propose_update_install ${pg_hba_dir}/pg_hba.conf
+	ucf ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
+	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure

@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
-
-propose_update_install /etc/proftpd/proftpd.conf
+ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+rm /etc/proftpd/proftpd.conf.gforge-new
 db_stop

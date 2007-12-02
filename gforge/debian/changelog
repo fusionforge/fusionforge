@@ -8,8 +8,10 @@ gforge (4.6.99+svn6277-0+1) unstable; urgency=low
   * Use Unix domain sockets for NSS-pgsql too.
   * gforge-shell-postgresql now depends on libnss-pgsql2 rather than the
     old libnss-pgsql1.
+  * Switch to using ucf for management of config files, instead of
+    home-grown scripts and functions.
 
- -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 19:58:12 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 20:26:43 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 

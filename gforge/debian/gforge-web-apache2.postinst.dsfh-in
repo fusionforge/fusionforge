@@ -25,7 +25,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 #DSFHELPER:patch-apache#
 

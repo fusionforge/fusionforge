@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -13,5 +12,6 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-propose_update_install /etc/bind/named.conf
+ucf /etc/bind/named.conf.gforge-new /etc/bind/named.conf
+rm /etc/bind/named.conf.gforge-new
 db_stop

@@ -25,15 +25,16 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 case "$1" in
     configure)
 	/usr/sbin/gforge-config
 
         # Patch Postfix configuration files
 	/usr/lib/gforge/bin/install-postfix.sh configure-files
-	replace_file /etc/aliases
-	replace_file /etc/postfix/main.cf
+	ucf /etc/aliases.gforge-new /etc/aliases
+	ucf /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
+	rm /etc/aliases.gforge-new
+	rm /etc/postfix/main.cf.gforge-new
 	/usr/lib/gforge/bin/install-postfix.sh configure
     ;;
 

@@ -85,9 +85,7 @@ EOF
 
 # Purge /etc/nss-pgsql.conf
 purge_libnss_pgsql(){
-    cp -a /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-new
-    perl -pi -e "s/^# Next line added by GForge install\n/#SF#/g" /etc/nss-pgsql.conf.gforge-new
-    perl -pi -e "s/^#SF#.*\n//g" /etc/nss-pgsql.conf.gforge-new
+    echo -n > /etc/nss-pgsql.conf.gforge-new
 }
 
 # Modify /etc/nsswitch.conf
