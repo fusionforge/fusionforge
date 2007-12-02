@@ -10,8 +10,9 @@ gforge (4.6.99+svn6277-0+1) unstable; urgency=low
     old libnss-pgsql1.
   * Switch to using ucf for management of config files, instead of
     home-grown scripts and functions.
+  * More generally, cleaned up the maintainer scripts.
 
- -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 20:26:43 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 22:52:21 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 

@@ -16,14 +16,9 @@ set -e
 #        * <disappearer's-postrm> `disappear' <r>overwrit>r> <new-version>
 # for details, see /usr/share/doc/packaging-manual/
 
-#DSFHELPER:handle-mainconffile#
-
 case "$1" in
     purge)
 	rm -rf /var/lib/gforge
-	delete_mainconffile
-	[ -d /etc/gforge/templates ] && rmdir --ignore-fail-on-non-empty /etc/gforge/templates
-	[ -d /etc/gforge ] && rmdir --ignore-fail-on-non-empty /etc/gforge
 	[ -d /etc/gforge ] && rm -rf /etc/gforge
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)

@@ -22,11 +22,6 @@ fi
 case "$1" in
     remove)
 	rm -f /etc/gforge/local.pl
-        # Clean up cruft left over by past buggy versions...
-	rm -f /etc/gforge/exim.directors
-	rm -f /etc/gforge/exim.directors.template
-	rm -f /usr/lib/gforge/www/ldap.php
-
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;
