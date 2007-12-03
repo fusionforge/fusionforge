@@ -1,6 +1,7 @@
-gforge (4.6.99+svn6277-0+1) unstable; urgency=low
+gforge (4.6.99+svn6301-0+1) unstable; urgency=low
 
-  * New SVN snapshot (r6277).  Gettext transition is now complete.
+  * New SVN snapshot (r6301).  Gettext transition is now complete
+    (including the French translation).  Still lots of cleanups.
   * Removed debian/patches/use-fckeditor-from-distro.dpatch, since
     run-time detection was added upstream.
   * Fix maintainer scripts for gforge-plugin-scmcvs and -scmsvn (no
@@ -12,7 +13,7 @@ gforge (4.6.99+svn6277-0+1) unstable; urgency=low
     home-grown scripts and functions.
   * More generally, cleaned up the maintainer scripts.
 
- -- Roland Mas <lolando@debian.org>  Sat, 01 Dec 2007 22:52:21 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 03 Dec 2007 20:59:24 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 
