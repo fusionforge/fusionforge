@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-27 23:17+0100\n"
-"PO-Revision-Date: 2007-12-02 21:51+0100\n"
+"PO-Revision-Date: 2007-12-03 20:53+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -9474,6 +9474,10 @@ msgid ""
 "unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
+"<h3>5. Nom Unix du projet</h3>\n"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne peut contenir que des lettres (minuscules), des chiffres et des tirets</li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne changera pas tout au long de la vie du projet</li></ul>\n"
+"<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</p>\n"
+"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%1$s</tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur <tt>cvs.nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de version)</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour les recherches partout dans le site</li></ul><p>Nom Unix<br/>"
 
 #: www/register/projectinfo.php:167
 #, php-format
@@ -9630,7 +9634,7 @@ msgid ""
 "<p>If you are sure you want to rebuild all the reporting tables, check the "
 "\"I'm Sure\" box and click the button below.<p>This could take a couple "
 "minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
-msgstr ""
+msgstr "<h3>Initialisation du système de rapports</h3><p>Il peut arriver, si les scripts cron ont rencontré une erreur ou si la base de données a été endommagée, que vous deviez reconstruire les tables utilisées pour le système de rapports</p><p>Si vous êtes certain de vouloir le faire, cochez la case « Je suis sûr » et cliquez sur le bouton ci-dessous.</p><p>Cette opération peut durer plusieurs minutes, donc veuillez ne cliquer QU'UNE SEULE FOIS.<p>"
 
 #: www/reporting/rebuild.php:57
 msgid "I am sure"
@@ -9716,7 +9720,7 @@ msgid ""
 "You can create categories for how time might be spent when completing a "
 "particular task. Examples of categories include \"Meeting\", \"Coding\", "
 "\"Testing\"."
-msgstr ""
+msgstr "Vous pouvez créer des catégories pour décrire à quoi le temps a été passé pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou « programmation », ou « tests »."
 
 #: www/reporting/toolspie.php:45 www/reporting/toolspie.php:56
 msgid "Tool Pie Graphs"
@@ -9790,11 +9794,11 @@ msgstr "Statistiques sur le temps consommé par les utilisateurs"
 msgid ""
 "Note: Changing the repository does not delete the previous repository.  It "
 "only affects the information displayed under the SCM tab."
-msgstr ""
+msgstr "Note : Changer de dépôt ne supprime pas le dépôt précédent.  Cela n'affecte que les informations affichées dans l'onglet « Sources »."
 
 #: www/scm/admin/index.php:105
 msgid "Error - Site has SCM but no plugins registered"
-msgstr ""
+msgstr "Erreur : le site a activé le suivi de versions, mais aucun greffon adéquat n'est installé."
 
 #: www/scm/include/scm_utils.php:42 www/scm/viewvc.php:52
 msgid "Error - This project has turned off SCM."
@@ -9972,7 +9976,7 @@ msgid ""
 "read the site documentation? Did you include your <b>user_id</b> and "
 "<b>user_name?</b> If you are writing about a project, include your "
 "<b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>"
-msgstr ""
+msgstr "Nous utilisons ce formulaire afin d'essayer de limiter le spam.</p><p>Veuillez le remplir complètement et précisément, sans quoi le destinataire risquerait de ne pouvoir vous répondre.</p><p><span class=\"important\"><b>SI VOUS ÉCRIVEZ POUR DEMANDER DE L'AIDE :</b> Avez-vous lu les documentations du site ?  Avez-vous inclus votre identifiant d'utilisateur (<b>user_id</b> et <b>user_name</b>) ?  Si vous écrivez à propos d'un projet, pensez à inclure également le nom du projet et son identifiant du projet (<b>group_id</b>).</span>"
 
 #: www/sendmessage.php:130
 msgid "Your Name"
@@ -10034,7 +10038,7 @@ msgid ""
 "You can use this form repeatedly to keep adding snippets to your package.</"
 "p><p>The \"Snippet Version ID\" is the unique ID number that is shown next "
 "to a specific version of a snippet on the browse pages."
-msgstr ""
+msgstr "Vous pouvez utiliser ce formulaire plusieurs fois, pour ajouter plusieurs extraits de code à votre paquet.</p><p>L'identifiant de version est le numéro unique d'identification qui s'affiche à côté d'une version spécifiqie d'un extrait de code sur les pages de navigation."
 
 #: www/snippet/add_snippet_to_package.php:127
 msgid "Add This Snippet Version ID:"
@@ -10044,7 +10048,7 @@ msgstr "Ajouter cet identifiant de version"
 #: www/snippet/addversion.php:216 www/snippet/package.php:156
 #: www/snippet/submit.php:125
 msgid "Make sure all info is complete and accurate"
-msgstr "Soyez sûrs que toutes les informations sont complètes et exactes"
+msgstr "Assurez-vous que toutes les informations sont complètes et exactes"
 
 #: www/snippet/add_snippet_to_package.php:155 www/snippet/addversion.php:98
 #: www/snippet/addversion.php:218 www/snippet/package.php:158
@@ -10259,7 +10263,7 @@ msgid ""
 "a \"Package\" of snippets. That package can contain multiple, specific "
 "versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>\t<p>You "
 "can browse the snippet library quickly:</p>"
-msgstr ""
+msgstr "<p>Cette section a pour but de vous permettre de partager des échantillons de code, des scripts et des fonctions avec le reste de la communauté.</p><p>Vous pouvez créer un nouvel échantillon, puis le faire évoluer en publiant facilement de nouvelles versions.</p><p>Une fois que des échantillons ont été publiés, il est possible de les rassembler en « paquets ».  Chaque paquet peut contenir différentes versions de différents échantillons de code.</p><h3>Naviguer dans les échantillons</h3><p>Vous pouvez naviguer rapidement dans la bibliothèque d'échantillons :</p>"
 
 #: www/snippet/index.php:45
 msgid "Browse by Language"
@@ -10296,7 +10300,7 @@ msgid ""
 "class=\"important\">Note:</span> You can submit a new version of an existing "
 "package by browsing the library and using the link on the existing package. "
 "You should only use this page if you are submitting an entirely new package."
-msgstr ""
+msgstr "<p>Cette interface vous permet de grouper des échantillons existants en paquets.  Avant de créer des paquets, assurez-vous que les échantillons que vous voulez regrouper sont en place, et notez leurs identifiants.</p><ol><li>Créez un paquet à l'aide de ce formulaire.</li><li><strong>Puis</strong> utilisez le lien « Ajouter des échantillons » pour ajouter des fichiers à votre paquet.</li></ol><p><span class=\"important\">Note :</span> Vous pouvez soumettre une nouvelle version d'un paquet existant en navigant dans la bibliothèque et en utilisant le lien présent près du paquet existant.  Cette page-ci ne sert qu'à créer de nouveaux paquets."
 
 #: www/snippet/package.php:141 www/snippet/submit.php:106
 msgid "Suggest a Language"
@@ -10419,7 +10423,7 @@ msgid ""
 "understand it.</p><p><span class=\"important\">Note:</span> You can submit a "
 "new version of an existing snippet by browsing the library. You should only "
 "use this page if you are submitting an entirely new script or function."
-msgstr ""
+msgstr "Vous pouvez publier un nouvel échantillon de code, afin de le partager avec les autres utilisateurs.  Il vous suffit de renseigner les informations suivantes. Veillez à <strong>donner une description pertinente</strong> et à <strong>commenter votre code</strong>, pour que les autres puissent le lire et le comprendre.</p><p><span class=\"important\">Note :</span> Vous pouvez soumettre une nouvelle version d'un échantillon existant à partir des pages de navigation.  Cette page-ci ne sert qu'à créer de nouveaux échantillons."
 
 #: www/snippet/submit.php:93
 msgid "Script Type"
@@ -10798,7 +10802,7 @@ msgstr ""
 msgid ""
 "If you change a survey after you already have responses, your results pages "
 "could be misleading or messed up"
-msgstr ""
+msgstr "Si vous modifiez un sondage alors que vous avez déjà obtenu des réponses, vos pages de résultats seront peut-être faussées."
 
 #: www/survey/admin/edit_survey.php:110
 msgid "Name of Survey"
@@ -10816,7 +10820,7 @@ msgid ""
 "to your list of questions</strong> so you can view\tthe question id's. Do "
 "<strong>not</strong> include spaces or end your list with a comma.<br /> Ex: "
 "1,2,3,4,5,6,7"
-msgstr ""
+msgstr "Listez les numéros des questions, dans l'ordre souhaité, séparés par des virgules. <strong>Référez-vous à votre liste de questions</strong> pour en visualiser les identifiants. <strong>N'incluez pas</strong> d'espaces dans votre liste, et ne la terminez pas par une virgule.<br>Exemple : « 1,2,3,4,5,6,7 »."
 
 #: www/survey/admin/edit_survey.php:120
 msgid "Is Active"
@@ -11335,7 +11339,7 @@ msgstr "Type de champ supplémentaire"
 
 #: www/tracker/admin/form-addextrafield.php:104
 msgid "Box type technician"
-msgstr ""
+msgstr "Type de boîte : technicien"
 
 #: www/tracker/admin/form-addextrafield.php:106
 #: www/tracker/admin/form-updateextrafield.php:33
@@ -11406,14 +11410,14 @@ msgid ""
 "Choose the template tracker to clone. The site administrator will have to "
 "set up trackers with default values and set permissions properly so you can "
 "access them."
-msgstr ""
+msgstr "Veuillez choisir le modèle d'outil de suivi à cloner.  L'administrateur du site devra au préalable avoir mis en place des outils de suivi avec des valeurs par défaut, et réglé les permissions de manière à ce que vous y ayez accès."
 
 #: www/tracker/admin/form-clonetracker.php:36
 msgid ""
 "WARNING!!! Cloning this tracker will duplicate all the fields and all the "
 "elements from those fields into this tracker. There is nothing to prevent "
 "you from cloning multiple times or making a huge mess. You have been warned!"
-msgstr ""
+msgstr "ATTENTION !  Le clonage de cet outil de suivi va dupliquer tous les champs et tous les éléments de ces champs dans cet outil.  Aucun mécanisme de sécurité ne vous empêche de réaliser des clonages multiples, et de vous retrouver avec un désordre colossal.  Soyez prudent."
 
 #: www/tracker/admin/form-deleteextrafield.php:3
 #, php-format
@@ -11516,11 +11520,11 @@ msgstr ""
 
 #: www/tracker/admin/form-updatetracker.php:43 www/tracker/admin/ind.php:144
 msgid "Free form text for the \"submit new item\" page"
-msgstr ""
+msgstr "Texte libre pour la page de soumission d'un nouvel objet."
 
 #: www/tracker/admin/form-updatetracker.php:46 www/tracker/admin/ind.php:147
 msgid "Free form text for the \"browse items\" page"
-msgstr ""
+msgstr "Texte libre pour la page de navigation."
 
 #: www/tracker/admin/form-uploadtemplate.php:3
 #, php-format
@@ -11553,7 +11557,7 @@ msgid ""
 "a bug report would be an Artifact. You can create as many Artifact Types as "
 "you want, but remember you need to set up categories, groups, and permission "
 "for each type, which can get time-consuming"
-msgstr ""
+msgstr "<h3>Créer un nouvel outil de suivi</h3><p>Vous pouvez utiliser ce système pour suivre à peu près n'importe quel type de données.  Chaque outil de suivi a en effet des listes d'utilisateurs, de groupes, de catégories et de permissions séparées.  Vous pouvez également déplacer des objets d'un outil de suivi à un autre le cas échéant.</p><p>Les outils de suivi sont parfois appelés « trackers » ou « types d'artfacts », et les objets qu'ils servent à manipuler sont des « artefacts ».  Par exemple, un rapport de bogue est un artefact, mais l'outil « Gestionnaire de bogues » est un type d'artefacts.  Vous pouvez définir autant de types d'artefacts que vous le désirez, en gardant à l'esprit que vous devrez définir, pour chacun, des catégories, des groupes, et des permissions, ce qui peut prendre du temps."
 
 #: www/tracker/admin/ind.php:124
 msgid ""
@@ -11831,7 +11835,7 @@ msgid ""
 "No trackers have been set up, or you cannot view them.<p><span class="
 "\"important\">The Admin for this project will have to set up data types "
 "using the %1$s admin page %2$s</span>"
-msgstr ""
+msgstr "Aucun outil de suivi n'a été mis en place, ou vous ne pouvez pas les voir.</p><p><span class=\"important\">L'administrateur de ce projet devra mettre en place les outils de suivi en utilisant %1$sla page d'administration%2$s.</span>"
 
 #: www/tracker/ind.php:38
 msgid "Choose a tracker and you can browse/edit/add items to it."
