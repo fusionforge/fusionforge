@@ -42,9 +42,6 @@ gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
-gforge/debian/dsf-helper/patch-apache.config -text
-gforge/debian/dsf-helper/patch-apache.postinst -text
-gforge/debian/dsf-helper/patch-apache.prerm -text
 gforge/debian/gforge-plugin-scmcvs.cron.d -text
 gforge/debian/gforge-plugin-scmcvs.dirs -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
