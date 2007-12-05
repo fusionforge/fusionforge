@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-10-18 07:37+0200\n"
-"PO-Revision-Date: 2007-10-24 22:51+0930\n"
+"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2007-12-05 12:05+0100\n"
+"PO-Revision-Date: 2007-12-05 13:42+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -601,62 +601,6 @@ msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
 msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung GForge."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid "Migrate to GForge?"
-msgstr "Chuyển sang GForge không?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge. Accordingly, the package has been renamed to 'gforge', and "
-"'sourceforge' is no longer supported or maintained. The transition to GForge "
-"should be rather simple, as most of the work is automated: once this package "
-"has been successfully installed, just install the 'gforge' package."
-msgstr ""
-"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do "
-"lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « "
-"sourceforge » không còn được hỗ trợ hoặc duy trì lại. Tiến trình chuyển tiếp "
-"sang GForge nên là hơi đơn giản, vì phần lớn công việc chạy tự động; một khi "
-"gói này đã được cài đặt, chỉ cần cài đặt gói « gforge »."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"You still have the option not to upgrade to GForge yet, for instance if you "
-"want to back things up beforehand. If you refuse the upgrade, nothing will "
-"happen."
-msgstr ""
-"Bạn vẫn còn có tùy chọn chưa nâng cấp lên GForge, chẳng hạn nếu bạn muốn sao "
-"lưu dữ liệu trước đó. Từ chối nâng cấp thì không có gì sẽ xảy ra."
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid "Sourceforge discontinued"
-msgstr "Sourceforge không còn tiếp tục lại"
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge, and the 'sourceforge' package is now a dummy package to "
-"help install 'gforge'. Once this dummy package and the 'gforge-sourceforge-"
-"transition' are installed, data will be saved so that you can safely "
-"uninstall the 'sourceforge' package and proceed to install 'gforge'."
-msgstr ""
-"SourceForge không còn được duy trì lại là phần mềm tự do : phiên bản tự do "
-"lúc bây giờ có tên GForge. Do đó, tên gói đã trở thành « gforge », và gói « "
-"sourceforge » lúc bây giờ là gói giả để giúp cài đặt « gforge ». Một khi gói "
-"giả này và gói « gforge-sourceforge-transition » đã được cài đặt, dữ liệu sẽ "
-"được lưu để bạn có thể hủy cài đặt an toàn gói « sourceforge » rồi cài đặt « "
-"gforge »."
 
 #. Type: boolean
 #. Description

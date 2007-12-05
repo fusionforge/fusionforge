@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-10-18 07:37+0200\n"
-"PO-Revision-Date: 2007-10-27 11:16+0100\n"
+"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2007-12-05 12:05+0100\n"
+"PO-Revision-Date: 2007-12-05 13:41+0100\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -620,64 +620,6 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/migration.templates:2001
-msgid "Migrate to GForge?"
-msgstr "Migrar para o GForge?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge. Accordingly, the package has been renamed to 'gforge', and "
-"'sourceforge' is no longer supported or maintained. The transition to GForge "
-"should be rather simple, as most of the work is automated: once this package "
-"has been successfully installed, just install the 'gforge' package."
-msgstr ""
-"O SourceForge já não é mantido como software livre; a versão livre tem agora "
-"o nome GForge. Da mesma forma, o pacote Debian também foi renomeado para "
-"'gforge', e o pacote 'sourceforge' já não é suportado ou mantido. A "
-"transição para o GForge deve ser bastante simples, uma vez que a maioria do "
-"trabalho está automatizado: uma vez instalado com sucesso, simplesmente "
-"instale o pacote 'gforge' e as coisas devem correr sem problemas."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"You still have the option not to upgrade to GForge yet, for instance if you "
-"want to back things up beforehand. If you refuse the upgrade, nothing will "
-"happen."
-msgstr ""
-"Você ainda tem a opção de não actualizar para o GForge, por exemplo se "
-"quiser salvaguardar o que tem antes. Se recusar actualizar, nada irá "
-"acontecer."
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid "Sourceforge discontinued"
-msgstr "O Sourceforge foi descontinuado"
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge, and the 'sourceforge' package is now a dummy package to "
-"help install 'gforge'. Once this dummy package and the 'gforge-sourceforge-"
-"transition' are installed, data will be saved so that you can safely "
-"uninstall the 'sourceforge' package and proceed to install 'gforge'."
-msgstr ""
-"O SourceForge já não é mantido como software livre; a versão livre é agora "
-"chamada GForge, e o pacote 'sourceforge' é agora um pacote fictício para "
-"ajudar a instalar o 'gforge'. Quando este pacote fictício e o pacote 'gforge-"
-"sourceforge-transition' estiverem instalados, serão guardados dados para que "
-"possa desinstalar o pacote 'sourceforge' em segurança e prosseguir com a "
-"instalação do 'gforge'."
-
-#. Type: boolean
-#. Description
 #: ../dsf-helper/replace-files.templates:2001
 msgid ""
 "In order for GForge to be operational, some changes are needed in ${file}."
@@ -884,118 +826,3 @@ msgid ""
 msgstr ""
 "Por favor escolha o tema por omissão para as páginas web. Tem de introduzir "
 "um nome válido."
-
-#~ msgid ""
-#~ "The hostname of the server that will host your Gforge packages.  It "
-#~ "should not be the same as your main Gforge host."
-#~ msgstr ""
-#~ "O nome da máquina do servidor que irá alojar os seus pacotes do Gforge. "
-#~ "Não deve ser o mesmo que o seu servidor principal do Gforge."
-
-#~ msgid ""
-#~ "The IP address of the server that will host your Gforge installation. "
-#~ "This is needed for the Apache virtualhosting configuration."
-#~ msgstr ""
-#~ "O endereço IP do servidor que irá guardar a sua instalação do Gforge. "
-#~ "Isto é necessário para a configuração de hosts virtuais no Apache."
-
-#~ msgid ""
-#~ "This Gforge account will have all privileges on the Gforge system.  It is "
-#~ "needed to approve the creation of the projects.  Please type a password "
-#~ "here."
-#~ msgstr ""
-#~ "Esta conta do Gforge terá todos os privilégios no sistema Gforge.  É "
-#~ "necessário aprovar a criação de projectos. Por favor introduza uma "
-#~ "palavra-chave aqui."
-
-#~ msgid "The Gforge administrator password - again"
-#~ msgstr "A palavra-chave do administrador do Gforge - de novo"
-
-#~ msgid ""
-#~ "The connection to the DB system requires a password.  Please choose a "
-#~ "password here."
-#~ msgstr ""
-#~ "A ligação ao sistema de bases de dados necessita de uma palavra chave. "
-#~ "Por favor escolha uma palavra-chave aqui."
-
-#~ msgid "Password used for the database - again"
-#~ msgstr "Palavra-chave utilizada na base de dados - de novo"
-
-#~ msgid "The LDAP host"
-#~ msgstr "O nome da máquina LDAP"
-
-#~ msgid "The hostname of the LDAP server."
-#~ msgstr "O nome da máquina do servidor de LDAP."
-
-#~ msgid "Accepting this option will perform that redirection."
-#~ msgstr "Aceitar esta opção vai realizar essa redirecção."
-
-#~ msgid "LDAP password - again"
-#~ msgstr "Palavra-chave do LDAP - de novo"
-
-#~ msgid "Generate an SSL certificate"
-#~ msgstr "Gerar um certificado SSL"
-
-#~ msgid "Please check ${file}"
-#~ msgstr "Por favor verifique ${file}"
-
-#~ msgid ""
-#~ "The name of the database that will host your GForge database.  This is "
-#~ "needed for virtually all the subpackages."
-#~ msgstr ""
-#~ "O nome da base de dados que irá alojar a sua base de dados do GForge. "
-#~ "Isto é necessário para virtualmente todos os sub-pacotes."
-
-#~ msgid ""
-#~ "The admin username of the database that will host your GForge database.  "
-#~ "This is needed for virtually all the subpackages."
-#~ msgstr ""
-#~ "O nome do administrador da base de dados que irá alojar a sua base de "
-#~ "dados do GForge. É necessário para virtualmente todos os sub-pacotes."
-
-#~ msgid ""
-#~ "The connecton to the DB system requires a password.  Please choose a "
-#~ "password here."
-#~ msgstr ""
-#~ "A ligação ao sistema de bases de dados precisa de uma palavra-passe. Por "
-#~ "favor escolha uma palavra-chave aqui."
-
-#~ msgid ""
-#~ "The hostname of the server that will host your Gforge packages. It should "
-#~ "not be the same as your main Gforge host."
-#~ msgstr ""
-#~ "O nome da máquina do servidor que irá guardar os seus pacotes do Gforge. "
-#~ "Não deve ser o mesmo que o servidor principal do Gforge."
-
-#~ msgid "The stats admin group id"
-#~ msgstr "O identificador do grupo de administradores de estatísticas"
-
-#~ msgid ""
-#~ "The hostname of the server that will host your Gforge mailing-lists. It "
-#~ "should not be the same as your main Gforge host."
-#~ msgstr ""
-#~ "O nome da máquina do servidor que irá guardar as suas listas de email do "
-#~ "Gforge. Não deve ser o mesmo que o seu servidor principal do Gforge."
-
-#~ msgid ""
-#~ "In order for Gforge to fully work, some changes must be made to the "
-#~ "${file} file."
-#~ msgstr ""
-#~ "Para que o Gforge funcione, têm de se fazer algumas alterações ao "
-#~ "ficheiro ${file}."
-
-#~ msgid "Shall I modify ${file} automatically?"
-#~ msgstr "Devo modificar ${file} automaticamente?"
-
-#~ msgid ""
-#~ "The hostname of the server that will host your Gforge user mail "
-#~ "redirector. It should not be the same as your main Gforge host."
-#~ msgstr ""
-#~ "O nome da máquina do servidor onder irá correr o seu redireccionador de "
-#~ "email do Gforge. Não deve ser o mesmo que o servidor principal do Gforge."
-
-#~ msgid "Chinese"
-#~ msgstr "Chinês"
-
-#~ msgid "SimplifiedChinese"
-#~ msgstr "ChinêsSimplificado"

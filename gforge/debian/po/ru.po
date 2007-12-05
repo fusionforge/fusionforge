@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-10-18 07:37+0200\n"
-"PO-Revision-Date: 2007-10-21 18:07+0400\n"
+"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2007-12-05 12:05+0100\n"
+"PO-Revision-Date: 2007-12-05 13:41+0100\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -606,62 +606,6 @@ msgid ""
 msgstr ""
 "Введите имя хоста сервера, который будет обслуживать списки почтовых "
 "рассылок GForge."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid "Migrate to GForge?"
-msgstr "Перейти на GForge?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge. Accordingly, the package has been renamed to 'gforge', and "
-"'sourceforge' is no longer supported or maintained. The transition to GForge "
-"should be rather simple, as most of the work is automated: once this package "
-"has been successfully installed, just install the 'gforge' package."
-msgstr ""
-"SourceForge больше не обслуживается как свободное ПО; свободная версия "
-"теперь называется GForge. Соответственно пакет был переименован в 'gforge', "
-"а 'sourceforge' больше не поддерживается или сопровождается. Переход на "
-"GForge пройдёт довольно просто, так как большая часть работы "
-"автоматизирована: после успешной установки этого пакета, просто установите "
-"пакет 'gforge'."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"You still have the option not to upgrade to GForge yet, for instance if you "
-"want to back things up beforehand. If you refuse the upgrade, nothing will "
-"happen."
-msgstr ""
-"Вы можете не переходить прямо сейчас GForge, например, потому что хотите "
-"сделать резервную копию. Если вы ответите отрицательно, ничего не случиться."
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid "Sourceforge discontinued"
-msgstr "Поддержка Sourceforge прекращена"
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge, and the 'sourceforge' package is now a dummy package to "
-"help install 'gforge'. Once this dummy package and the 'gforge-sourceforge-"
-"transition' are installed, data will be saved so that you can safely "
-"uninstall the 'sourceforge' package and proceed to install 'gforge'."
-msgstr ""
-"SourceForge больше не обслуживается как свободное ПО; свободная версия "
-"теперь называется GForge, а пакет 'sourceforge' теперь только помогает в "
-"переходе к 'gforge'. После установки этого пакета-пустышки и 'gforge-"
-"sourceforge-transition', данные будут сохранены, для того чтобы вы смогли "
-"безопасно удалить пакет 'sourceforge' и продолжить установку 'gforge'."
 
 #. Type: boolean
 #. Description

@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-10-18 07:37+0200\n"
-"PO-Revision-Date: 2007-09-04 14:22+0200\n"
+"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2007-12-05 12:05+0100\n"
+"PO-Revision-Date: 2007-12-05 12:27+0100\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -622,64 +622,6 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../dsf-helper/migration.templates:2001
-msgid "Migrate to GForge?"
-msgstr "Faut-il migrer vers GForge ?"
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge. Accordingly, the package has been renamed to 'gforge', and "
-"'sourceforge' is no longer supported or maintained. The transition to GForge "
-"should be rather simple, as most of the work is automated: once this package "
-"has been successfully installed, just install the 'gforge' package."
-msgstr ""
-"Sourceforge n'est plus maintenu en tant que logiciel libre. La version libre "
-"a été rebaptisée « GForge ».  Les paquets ont été renommés en conséquence, "
-"et le paquet « sourceforge » n'est plus maintenu. La transition vers GForge "
-"est normalement simple, car le plus gros du travail est automatisé. Une fois "
-"que ce paquet a été installé avec succès, vous pouvez installer le paquet "
-"« gforge »."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/migration.templates:2001
-msgid ""
-"You still have the option not to upgrade to GForge yet, for instance if you "
-"want to back things up beforehand. If you refuse the upgrade, nothing will "
-"happen."
-msgstr ""
-"Vous avez toujours la possibilité de ne pas migrer vers GForge tout de "
-"suite, par exemple si vous souhaitez sauvegarder des données auparavant. Si "
-"vous refusez cette migration, rien ne se passera."
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid "Sourceforge discontinued"
-msgstr "Sourceforge n'existe plus"
-
-#. Type: note
-#. Description
-#: ../dsf-helper/migration.templates:3001
-msgid ""
-"SourceForge is no longer maintained as free software; the free version is "
-"now named GForge, and the 'sourceforge' package is now a dummy package to "
-"help install 'gforge'. Once this dummy package and the 'gforge-sourceforge-"
-"transition' are installed, data will be saved so that you can safely "
-"uninstall the 'sourceforge' package and proceed to install 'gforge'."
-msgstr ""
-"SourceForge n'est plus un logiciel libre. Sa version libre a été rebaptisée "
-"« GForge ».  Le paquet « sourceforge » n'est présent que pour faciliter la "
-"migration vers GForge.  Une fois ce paquet, et celui dont il dépend (gforge-"
-"sourceforge-transition), correctement installés, vos données ont été "
-"sauvegardées, et vous pouvez sans problèmes désinstaller le paquet "
-"« sourceforge » et installer « gforge »."
-
-#. Type: boolean
-#. Description
 #: ../dsf-helper/replace-files.templates:2001
 msgid ""
 "In order for GForge to be operational, some changes are needed in ${file}."
@@ -886,131 +828,3 @@ msgid ""
 msgstr ""
 "Veuillez choisir le thème par défaut des pages web. Veillez à indiquer un "
 "nom valable."
-
-#~ msgid ""
-#~ "The hostname of the server that will host your GForge packages.  It "
-#~ "should not be the same as your main GForge host."
-#~ msgstr ""
-#~ "Veuillez indiquer le serveur qui hébergera les paquets GForge. Il devrait "
-#~ "être différent du serveur GForge principal."
-
-#~ msgid ""
-#~ "The IP address of the server that will host your GForge installation. "
-#~ "This is needed for the Apache virtualhosting configuration."
-#~ msgstr ""
-#~ "Veuillez indiquer l'adresse IP du serveur qui hébergera GForge. Cette "
-#~ "information est requise pour la configuration des hôtes virtuels d'Apache."
-
-#~ msgid ""
-#~ "This GForge account will have all privileges on the GForge system.  It is "
-#~ "needed to approve the creation of the projects.  Please type a password "
-#~ "here."
-#~ msgstr ""
-#~ "Le compte de l'administrateur GForge possèdera tous les privilèges sur le "
-#~ "système GForge. Ce compte est nécessaire pour la création de projets. "
-#~ "Veuillez indiquer un mot de passe pour ce compte."
-
-#~ msgid "The GForge administrator password - again:"
-#~ msgstr "Confirmation du mot de passe administrateur :"
-
-#~ msgid ""
-#~ "The connection to the DB system requires a password.  Please choose a "
-#~ "password here."
-#~ msgstr ""
-#~ "Veuillez indiquer le mot de passe à utiliser pour la connexion au serveur "
-#~ "de bases de données."
-
-#~ msgid "Password used for the database - again:"
-#~ msgstr ""
-#~ "Confirmation du mot de passe de connexion au serveur de bases de données :"
-
-#~ msgid "The LDAP host:"
-#~ msgstr "Serveur LDAP :"
-
-#~ msgid "The hostname of the LDAP server."
-#~ msgstr "Veuillez indiquer le nom d'hôte du serveur LDAP."
-
-#~ msgid "Accepting this option will perform that redirection."
-#~ msgstr "Si vous choisissez cette option, la redirection sera mise en place."
-
-#~ msgid "LDAP password - again:"
-#~ msgstr "Confirmation du mot de passe LDAP :"
-
-#~ msgid "Generate an SSL certificate"
-#~ msgstr "Génération d'un certificat SSL"
-
-#~ msgid "Please check ${file}"
-#~ msgstr "Vérification de ${file} indispensable"
-
-#~ msgid ""
-#~ "The name of the database that will host your GForge database.  This is "
-#~ "needed for virtually all the subpackages."
-#~ msgstr ""
-#~ "Veuillez indiquer la base qui contiendra les données de GForge. Cette "
-#~ "information est requise pour la configuration de quasiment tous les sous-"
-#~ "paquets."
-
-#~ msgid ""
-#~ "The admin username of the database that will host your GForge database.  "
-#~ "This is needed for virtually all the subpackages."
-#~ msgstr ""
-#~ "Veuillez indiquer l'identifiant de l'administrateur du serveur de bases "
-#~ "de données qui hébergera la base de données de GForge. Cette information "
-#~ "est requise pour la configuration de quasiment tous les sous-paquets."
-
-#~ msgid ""
-#~ "The connecton to the DB system requires a password.  Please choose a "
-#~ "password here."
-#~ msgstr ""
-#~ "Veuillez indiquer le mot de passe à utiliser pour vous connecter à la "
-#~ "base de données."
-
-#~ msgid ""
-#~ "The hostname of the server that will host your GForge packages. It should "
-#~ "not be the same as your main GForge host."
-#~ msgstr ""
-#~ "Veuillez indiquer le nom du serveur qui hébergera les paquets GForge. Ce "
-#~ "nom ne devrait pas être identique au nom du serveur GForge principal."
-
-#~ msgid ""
-#~ "The hostname of the server that will host your GForge mailing-lists. It "
-#~ "should not be the same as your main GForge host."
-#~ msgstr ""
-#~ "Veuillez indiquer le nom du serveur qui hébergera les listes de diffusion "
-#~ "de GForge. Ce nom ne devrait pas être identique au nom du serveur GForge "
-#~ "principal."
-
-#~ msgid ""
-#~ "In order for GForge to fully work, some changes must be made to the "
-#~ "${file} file."
-#~ msgstr ""
-#~ "Pour que GForge fonctionne complètement, des modifications doivent être "
-#~ "apportées au fichier ${file}."
-
-#~ msgid "Shall I modify ${file} automatically?"
-#~ msgstr "Faut-il modifier ${file} automatiquement ?"
-
-#~ msgid ""
-#~ "The hostname of the server that will host your GForge user mail "
-#~ "redirector. It should not be the same as your main GForge host."
-#~ msgstr ""
-#~ "Veuillez indiquer le nom du serveur qui hébergera le redirecteur de "
-#~ "courrier des utilisateurs. Ce nom ne devrait pas être identique au nom du "
-#~ "serveur GForge principal."
-
-#~ msgid ""
-#~ "English, Bulgarian, Catalan, Chinese, Dutch, Esperanto, French, German, "
-#~ "Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, "
-#~ "Polish, PortugueseBrazilian, Portuguese, Russian, SimplifiedChinese, "
-#~ "Spanish, Swedish, Thai"
-#~ msgstr ""
-#~ "anglais, bulgare, catalan, chinois traditionnel, néerlandais, espéranto, "
-#~ "français, allemand, grec, hébreu, indonésien, italien, japonais, coréen, "
-#~ "latin, norvégien, polonais, portugais du Brésil, portugais, russe, "
-#~ "chinois simplifié, espagnol, suédois, thai"
-
-#~ msgid "Chinese"
-#~ msgstr "chinois (traditionnel)"
-
-#~ msgid "SimplifiedChinese"
-#~ msgstr "chinois (simplifié)"
