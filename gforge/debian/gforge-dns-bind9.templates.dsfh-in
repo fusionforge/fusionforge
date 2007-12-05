@@ -131,22 +131,3 @@ _Description: Do you want a simple DNS setup for GForge?
  separate machines as project servers; it just assumes that
  all the project web directories are on the same server with a single
  SCM server.
-
-Template: gforge/shared/replace_file_remove
-Type: boolean
-Default: false
-_Description: Do you want ${file} to be updated?
- In order for GForge to be fully uninstalled, some changes are needed
- in ${file}.
- .
- This can be done automatically (the current version will be backed up in
- ${file}.gforge-old). Alternatively, the needed changes may be written 
- to another file (${file}.gforge-new) to let you adapt ${file} yourself.
-
-Template: gforge/shared/file_changed
-Type: note
-_Description: ${file} must be checked
- You have chosen to not change ${file} automatically.
- .
- Instead, the suggested changes have been written into ${file}.gforge-new.
- Please check this file and apply the appropriate changes to ${file}.

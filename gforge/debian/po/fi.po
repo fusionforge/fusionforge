@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2007-12-05 12:05+0100\n"
-"PO-Revision-Date: 2007-12-05 12:27+0100\n"
+"POT-Creation-Date: 2007-12-05 13:50+0100\n"
+"PO-Revision-Date: 2007-12-05 13:50+0100\n"
 "Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,14 +14,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Kuoripalvelin:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
@@ -29,21 +29,21 @@ msgstr "Anna GForgen kuoritunnuksia isännöivän palvelimen verkkonimi."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Latauspalvelin:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 msgid ""
 "Please enter the hostname of the server that will host the GForge packages."
 msgstr "Anna GForgen paketteja isännöivän palvelimen verkkonimi."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
@@ -52,14 +52,14 @@ msgstr "Tämän ei tulisi olla GForgen pääpalvelin."
 
 #. Type: string
 #. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "GForge administrator login:"
 msgstr "GForgen ylläpitotunnus:"
@@ -68,8 +68,8 @@ msgstr "GForgen ylläpitotunnus:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
@@ -81,21 +81,21 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr "Valitse tämän tunnuksen nimi."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "IP-osoite:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
@@ -104,21 +104,21 @@ msgstr "Anna GForge-asennusta isännöivän palvelimen IP-osoite."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Tätä tarvitaan Apachen näennäiskoneiden asetukseen."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "GForge administrator password:"
 msgstr "GForgen ylläpitosalasana:"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "Please choose the password for this account."
 msgstr "Valitse tunnuksen salasana."
@@ -131,7 +131,7 @@ msgstr "Valitse tunnuksen salasana."
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -148,7 +148,7 @@ msgstr "Salasanan vahvistus:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -159,14 +159,14 @@ msgstr "Anna salasana uudestaan vahvistuksena."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Initial list of skills:"
 msgstr "Alkuperäinen lista taidoista:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
@@ -179,7 +179,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr "Anna puolipisteillä erotettu lista taitojen nimistä."
@@ -384,72 +384,6 @@ msgstr ""
 "projektien verkkohakemistot ovat samalla palvelimella yhden SCM-serverin "
 "kanssa."
 
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-msgid "Do you want ${file} to be updated?"
-msgstr "Päivitetäänkö ${file}?"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
-msgid ""
-"In order for GForge to be fully uninstalled, some changes are needed in "
-"${file}."
-msgstr ""
-"Jotta GForge saataisiin kokonaan poistettua, tiedostoa ${file} tulee muuttaa."
-
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-msgid ""
-"This can be done automatically (the current version will be backed up in "
-"${file}.gforge-old). Alternatively, the needed changes may be written  to "
-"another file (${file}.gforge-new) to let you adapt ${file} yourself."
-msgstr ""
-"Tämä voidaan tehdä automaattisesti (nykyinen versio kopioidaan nimelle "
-"${file}.gforge-old). Vaihtoehtoisesti tarvittavat muutokset voidaan tehdä "
-"toiseen tiedostoon (${file}.gforge-new), jolloin voit itse muokata tiedostoa "
-"${file}."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid "${file} must be checked"
-msgstr "${file} tulee tarkistaa"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid "You have chosen to not change ${file} automatically."
-msgstr "Olet valinnut, että tiedostoa ${file} ei muokata automaattisesti."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid ""
-"Instead, the suggested changes have been written into ${file}.gforge-new. "
-"Please check this file and apply the appropriate changes to ${file}."
-msgstr ""
-"Sen sijaan ehdotetut muutokset on kirjoitettu tiedostoon ${file}.gforge-new. "
-"Tarkista tämä tiedosto ja tee tarvittavat muutokset tiedostoon ${file}."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
@@ -598,15 +532,6 @@ msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
 msgstr "Anna GForgen postituslistoja isännöivän palvelimen verkkonimi."
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/replace-files.templates:2001
-msgid ""
-"In order for GForge to be operational, some changes are needed in ${file}."
-msgstr ""
-"Jotta GForge saadaan toimintakuntoon, tiedostoon ${file} tulee tehdä joitain "
-"muutoksia."
 
 #. Type: string
 #. Description

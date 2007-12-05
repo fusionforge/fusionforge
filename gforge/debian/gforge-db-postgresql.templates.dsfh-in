@@ -7,8 +7,6 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-#DSFHELPER:replace-files#
-
 #DSFHELPER:common-variables#
 
 Template: gforge/shared/shell_host

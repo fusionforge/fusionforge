@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.1-31\n"
 "Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2007-12-05 12:05+0100\n"
-"PO-Revision-Date: 2007-12-05 13:42+0100\n"
+"POT-Creation-Date: 2007-12-05 13:50+0100\n"
+"PO-Revision-Date: 2007-12-05 13:51+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 #, fuzzy
 #| msgid "Your shell server"
@@ -35,7 +35,7 @@ msgstr "Din skalserver"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 #, fuzzy
 #| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
@@ -45,7 +45,7 @@ msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #, fuzzy
 #| msgid "Your download server"
@@ -54,7 +54,7 @@ msgstr "Din hämtningsserver"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #, fuzzy
 #| msgid "The hostname of the server that will host your Gforge shell accounts"
 msgid ""
@@ -63,7 +63,7 @@ msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
@@ -72,14 +72,14 @@ msgstr ""
 
 #. Type: string
 #. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 #, fuzzy
 #| msgid "The Gforge administrator login"
@@ -90,8 +90,8 @@ msgstr "Gforge-administratörens användarnamn"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 #, fuzzy
@@ -107,14 +107,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 #, fuzzy
 #| msgid "Your IP address"
@@ -123,7 +123,7 @@ msgstr "Din IP-adress"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 #, fuzzy
 #| msgid "The hostname of the server that will host your Gforge shell accounts"
@@ -134,14 +134,14 @@ msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 #, fuzzy
 #| msgid "The Gforge administrator password"
@@ -150,7 +150,7 @@ msgstr "Gforge-administratörens lösenord"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 #, fuzzy
 #| msgid "Please re-type the password for confirmation."
@@ -165,7 +165,7 @@ msgstr "Mata in lösenordet igen för bekräftelse."
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -184,7 +184,7 @@ msgstr "Mata in lösenordet igen för bekräftelse."
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -195,7 +195,7 @@ msgstr "Mata in lösenordet igen för bekräftelse."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 #, fuzzy
 #| msgid "The initial list of skills"
@@ -204,7 +204,7 @@ msgstr "Initiala listan av färdigheter"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 #, fuzzy
 #| msgid ""
@@ -224,7 +224,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
@@ -482,91 +482,6 @@ msgstr ""
 "burkar för dina projektservrar, den antar att du har alla projektens "
 "webbkataloger på samma server och en enda server för SCM."
 
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-msgid "Do you want ${file} to be updated?"
-msgstr "Vill du att ${file} ska uppdateras?"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
-#, fuzzy
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
-msgid ""
-"In order for GForge to be fully uninstalled, some changes are needed in "
-"${file}."
-msgstr ""
-"För att Gforge ska fullständigt avinstalleras måste vissa ändringar göras i "
-"filen ${file}."
-
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-#, fuzzy
-#| msgid ""
-#| "I can either do them for you (and backup the current version in ${file}."
-#| "gforge-old), or write the changes to another file (${file}.gforge-new) "
-#| "and let you propagate the changes to ${file} yourself."
-msgid ""
-"This can be done automatically (the current version will be backed up in "
-"${file}.gforge-old). Alternatively, the needed changes may be written  to "
-"another file (${file}.gforge-new) to let you adapt ${file} yourself."
-msgstr ""
-"Jag kan göra dem åt dig (och säkerhetskopiera den nuvarande versionen i "
-"${file}.gforge-old) eller skriva ner ändringarna till en annan fil (${file}."
-"gforge-new) och låta dig göra ändringarna i ${file}."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid "${file} must be checked"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-#, fuzzy
-#| msgid "Shall I modify the ${file} automatically?"
-msgid "You have chosen to not change ${file} automatically."
-msgstr "Ska jag ändra ${file} automatiskt?"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-#, fuzzy
-#| msgid ""
-#| "You have chosen not to let the Gforge package update the ${file} file.  "
-#| "Very well, I have not changed it.  Instead, I have written the suggested "
-#| "changes into ${file}.gforge-new. Please check this file and apply the "
-#| "appropriate changes to ${file}."
-msgid ""
-"Instead, the suggested changes have been written into ${file}.gforge-new. "
-"Please check this file and apply the appropriate changes to ${file}."
-msgstr ""
-"Du har valt att inte låta Gforge-paketet uppdatera filen ${file}.  Ok då, "
-"jag ska inte ändra den.  Istället har jag skrivit de rekommenderade "
-"ändringarna till ${file}.gforge-new. Vänligen kontrollera den filen och "
-"verkställ de lämpliga ändringarna till ${file}."
-
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
@@ -756,19 +671,6 @@ msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
 msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
-
-#. Type: boolean
-#. Description
-#: ../dsf-helper/replace-files.templates:2001
-#, fuzzy
-#| msgid ""
-#| "In order for Gforge to be fully deinstalled, some changes must be made to "
-#| "the ${file} file."
-msgid ""
-"In order for GForge to be operational, some changes are needed in ${file}."
-msgstr ""
-"För att Gforge ska fullständigt avinstalleras måste vissa ändringar göras i "
-"filen ${file}."
 
 #. Type: string
 #. Description

@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2007-12-05 12:05+0100\n"
-"PO-Revision-Date: 2007-12-05 13:41+0100\n"
+"POT-Creation-Date: 2007-12-05 13:50+0100\n"
+"PO-Revision-Date: 2007-12-05 13:51+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@skolelinux.no>\n"
 "Language-Team: debian-l10n-dutch <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Shell-server:"
@@ -37,7 +37,7 @@ msgstr "Shell-server:"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:4001
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
@@ -49,7 +49,7 @@ msgstr ""
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Downloadserver:"
@@ -58,7 +58,7 @@ msgstr "Downloadserver:"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 msgid ""
 "Please enter the hostname of the server that will host the GForge packages."
 msgstr ""
@@ -67,7 +67,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:7001
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
@@ -78,7 +78,7 @@ msgstr "Dit dient te verschillen van de hoofd-GForge-server."
 #  Default
 #. Type: string
 #. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
@@ -87,7 +87,7 @@ msgstr "admin"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "GForge administrator login:"
 msgstr "Gebruikersnaam GForge-beheerder:"
@@ -98,8 +98,8 @@ msgstr "Gebruikersnaam GForge-beheerder:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
@@ -111,7 +111,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9002
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr "Wat is de gebruikersnaam voor deze account?"
@@ -120,7 +120,7 @@ msgstr "Wat is de gebruikersnaam voor deze account?"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "IP-adres:"
@@ -129,7 +129,7 @@ msgstr "IP-adres:"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
@@ -139,7 +139,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Dit is nodig voor om de 'virtual hosting' van Apache in te stellen."
@@ -148,7 +148,7 @@ msgstr "Dit is nodig voor om de 'virtual hosting' van Apache in te stellen."
 #  Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "GForge administrator password:"
 msgstr "Wachtwoord van de GForge-beheerder:"
@@ -157,7 +157,7 @@ msgstr "Wachtwoord van de GForge-beheerder:"
 #  Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
 #: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "Please choose the password for this account."
 msgstr "Wat is het wachtwoord van deze account?"
@@ -172,7 +172,7 @@ msgstr "Wat is het wachtwoord van deze account?"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -191,7 +191,7 @@ msgstr "Wachtwoordbevestiging:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../gforge-dns-bind9.templates.dsfh-in:4001
 #: ../gforge-dns-bind9.templates.dsfh-in:7001
 #: ../gforge-dns-bind9.templates.dsfh-in:13001
@@ -204,7 +204,7 @@ msgstr "Ter bevestiging dient het wachtwoord nogmaals ingevoerd te worden."
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Initial list of skills:"
 msgstr "Initiële lijst van vaardigheden:"
@@ -213,7 +213,7 @@ msgstr "Initiële lijst van vaardigheden:"
 #  Description
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
@@ -226,7 +226,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:13001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 #: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
@@ -461,83 +461,6 @@ msgstr ""
 "dat alle project-webmappen op dezelfde server staan, en dat u een enkele "
 "server heeft voor bronbeheer (SCM)."
 
-#  Type: boolean
-#  Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-msgid "Do you want ${file} to be updated?"
-msgstr "Wilt u dat ${file} bijgewerkt wordt?"
-
-#  Type: boolean
-#  Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:3001
-msgid ""
-"In order for GForge to be fully uninstalled, some changes are needed in "
-"${file}."
-msgstr ""
-"Om de GForge installatie te vervolledigen dient ${file} aangepast te worden."
-
-#  Type: boolean
-#  Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:17001
-#: ../dsf-helper/replace-files.templates:2001
-#: ../dsf-helper/replace-files.templates:3001
-msgid ""
-"This can be done automatically (the current version will be backed up in "
-"${file}.gforge-old). Alternatively, the needed changes may be written  to "
-"another file (${file}.gforge-new) to let you adapt ${file} yourself."
-msgstr ""
-"Dit kan automatisch gedaan worden (in dat geval wordt een reservekopie van "
-"de huidige versie opgeslagen in ${file}.gforge-old), Of u kunt de nodige "
-"aanpassingen naar een nieuw bestand (${file}.gforge-new) laten wegschrijven "
-"en vervolgens ${file} handmatig aanpassen."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid "${file} must be checked"
-msgstr "${file} moet gecontroleerd worden"
-
-#  Type: boolean
-#  Description
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid "You have chosen to not change ${file} automatically."
-msgstr "U heeft ervoor gekozen om ${file} niet automatisch aan te passen."
-
-#  Type: note
-#  Description
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:18001
-#: ../dsf-helper/replace-files.templates:4001
-msgid ""
-"Instead, the suggested changes have been written into ${file}.gforge-new. "
-"Please check this file and apply the appropriate changes to ${file}."
-msgstr ""
-"De voorgestelde veranderingen zijn in plaats hiervan weggeschreven naar "
-"${file}.gforge-new. Gelieve dit bestand na te kijken en de toepasselijke "
-"veranderingen door te voeren in ${file}."
-
 #  Type: string
 #  Description
 #. Type: string
@@ -723,16 +646,6 @@ msgid ""
 "lists."
 msgstr ""
 "Wat is de computernaam van de server die de GForge-e-maillijsten gaat hosten?"
-
-#  Type: boolean
-#  Description
-#. Type: boolean
-#. Description
-#: ../dsf-helper/replace-files.templates:2001
-msgid ""
-"In order for GForge to be operational, some changes are needed in ${file}."
-msgstr ""
-"Om GForge volledig operationeel te maken dient ${file} aangepast te worden."
 
 #  Type: string
 #  Description

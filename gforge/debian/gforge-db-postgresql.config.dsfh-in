@@ -3,7 +3,6 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
