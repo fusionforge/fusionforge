@@ -24,7 +24,7 @@ case "$1" in
 
 	# Unpatch Bind configuration files
 	/usr/lib/gforge/bin/install-dns.sh purge-files
-	ucf /etc/bind/named.conf.gforge-new /etc/bind/named.conf
+	ucf --debconf-ok /etc/bind/named.conf.gforge-new /etc/bind/named.conf
 	rm /etc/bind/named.conf.gforge-new
 	ucf --purge /etc/bind/named.conf
 	

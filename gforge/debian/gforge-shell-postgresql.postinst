@@ -31,8 +31,8 @@ case "$1" in
 
         # Patch NSS configuration files
 	/usr/lib/gforge/bin/install-nsspgsql.sh configure-files
-	ucf /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
-	ucf /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
+	ucf --debconf-ok /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
+	ucf --debconf-ok /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
 	rm /etc/nss-pgsql.conf.gforge-new
 	rm /etc/nsswitch.conf.gforge-new
 

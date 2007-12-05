@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6301-0+1) unstable; urgency=low
+gforge (4.6.99+svn6301-0+2) unstable; urgency=low
 
   * New SVN snapshot (r6301).  Gettext transition is now complete
     (including the French translation).  Still lots of cleanups.
@@ -10,10 +10,11 @@ gforge (4.6.99+svn6301-0+1) unstable; urgency=low
   * gforge-shell-postgresql now depends on libnss-pgsql2 rather than the
     old libnss-pgsql1.
   * Switch to using ucf for management of config files, instead of
-    home-grown scripts and functions.
+    home-grown scripts and functions.  Re-use Debconf instance if one
+    exists.
   * More generally, cleaned up the maintainer scripts.
 
- -- Roland Mas <lolando@debian.org>  Mon, 03 Dec 2007 20:59:24 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 05 Dec 2007 11:12:40 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 

@@ -23,7 +23,7 @@ case "$1" in
 
 	# Unpatch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh purge-files
-	ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+	ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
 	rm /etc/proftpd/proftpd.conf.gforge-new
 	ucf --purge /etc/proftpd/proftpd.conf
 

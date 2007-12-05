@@ -13,8 +13,8 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-ucf /etc/aliases.gforge-new /etc/aliases
-ucf /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
+ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
+ucf --debconf-ok /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
 rm /etc/aliases.gforge-new
 rm /etc/postfix/main.cf.gforge-new
 db_stop

@@ -60,7 +60,7 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files
-	ucf ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
+	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 
 	# Make sure the database accepts connections from these new users

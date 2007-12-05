@@ -27,15 +27,11 @@ set -e
 
 case "$1" in
     configure)
-    	# I don't know why I have to do this but somthing locks
-	# If I don't add this db_stop ????
-	# This might be something to do with gforge-config
-    	db_stop
 	/usr/sbin/gforge-config
 
         # Patch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh configure-files
-	ucf /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+	ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
 	rm /etc/proftpd/proftpd.conf.gforge-new
 
         # Setup our FTP

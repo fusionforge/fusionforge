@@ -31,8 +31,8 @@ case "$1" in
 
         # Patch Postfix configuration files
 	/usr/lib/gforge/bin/install-postfix.sh configure-files
-	ucf /etc/aliases.gforge-new /etc/aliases
-	ucf /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
+	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
+	ucf --debconf-ok /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
 	rm /etc/aliases.gforge-new
 	rm /etc/postfix/main.cf.gforge-new
 	/usr/lib/gforge/bin/install-postfix.sh configure
