@@ -1,9 +1,5 @@
 # List of patches to apply
 # This one was used for testing and is not included in gforge upstream
-#taskdetailview
-##remove-ads
 ##disable-tracker-reply-by-email
-##add-project-before-description-hook
-##fix-lists-url
 use-snoopy-from-distro
 unix-sockets-for-database
