@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # 
 # Generate CVS repositories snapshots.
 # Suppose that the repository can be checkout using '.' as module.

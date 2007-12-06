@@ -1,3 +1,10 @@
+2007-12-06  Roland Mas  <lolando@debian.org>
+
+	* plugins/scmsvn/cronjobs/snapshots.sh: Change interpreter to bash
+	since the script uses behaviour not implemented by all /bin/sh
+	variants.
+	* plugins/scmcvs/cronjobs/snapshots.sh: Ditto.
+
 2007-11-30  Roland Mas  <lolando@debian.org>
 
 	* www/admin/useredit.php: Removed undefined variable warning.
