@@ -95,6 +95,7 @@ case "$target" in
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
+SET LC_MESSAGES = 'C' ;
 CREATE USER $db_user WITH PASSWORD '$db_passwd' ;
 EOF
 	then
@@ -112,6 +113,7 @@ EOF
 	    exit 1
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
+SET LC_MESSAGES = 'C' ;
 CREATE USER gforge_nss WITH PASSWORD 'gforge_nss' ;
 EOF
 	then
@@ -129,6 +131,7 @@ EOF
 	    exit 1
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
+SET LC_MESSAGES = 'C' ;
 CREATE USER gforge_mta WITH PASSWORD 'gforge_mta' ;
 EOF
 	then
@@ -150,23 +153,26 @@ EOF
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if ! exist_db $db_name ; then
-		if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
-	    	&& [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    	; then
-	    	# Creation OK 
-	    	echo -n ""
-	    	rm -f $tmp1 $tmp2
+		if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<EOF \
+	    	    && [ "$(tail -n +2 $tmp1 | head -1)" = 'CREATE DATABASE' ] ; 
+SET LC_MESSAGES = 'C' ;
+CREATE DATABASE $db_name WITH ENCODING 'UNICODE' ;
+EOF
+		then
+  	    	    # Creation OK 
+	    	    echo -n ""
+	    	    rm -f $tmp1 $tmp2
 		else
-	    	echo "Cannot create PostgreSQL database...  This shouldn't have happened."
-	    	echo "Maybe a problem in your PostgreSQL configuration?"
-	    	echo "Please report a bug to the Debian bug tracking system"
-	    	echo "Please include the following output:"
-	    	echo "createdb's STDOUT:"
-	    	cat $tmp1
-	    	echo "createdb's STDERR:"
-	    	cat $tmp2
-	    	rm -f $tmp1 $tmp2
-	    	exit 1
+	    	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
+	    	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    	    echo "Please report a bug to the Debian bug tracking system"
+	    	    echo "Please include the following output:"
+	    	    echo "CREATE DATABASE's STDOUT:"
+	    	    cat $tmp1
+	    	    echo "CREATE DATABASE's STDERR:"
+	    	    cat $tmp2
+	    	    rm -f $tmp1 $tmp2
+	    	    exit 1
 		fi
 	fi
 	
