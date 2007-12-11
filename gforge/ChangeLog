@@ -1,3 +1,8 @@
+2007-12-11  Roland Mas  <lolando@debian.org>
+
+	* common/include/Group.class.php: Include realname and username of
+	the person who requests a project in the email sent to the admins.
+
 2007-12-06  Roland Mas  <lolando@debian.org>
 
 	* plugins/scmsvn/cronjobs/snapshots.sh: Change interpreter to bash

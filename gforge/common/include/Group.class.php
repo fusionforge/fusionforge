@@ -2146,6 +2146,18 @@ Reasons for negative decision:
 	 *	@access public.
 	 */
 	function sendNewProjectNotificationEmail() {
+		// Get the user who wants to register the project
+		$res = db_query("SELECT u.user_id
+				 FROM users u, user_group ug
+				 WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
+
+		if (db_numrows($res) < 1) {
+			$this->setError(_("Could not find user who has submitted the project."));
+			return false;
+		}
+		
+		$submitter =& user_get_object(db_result($res,0,'user_id'));
+
 
 		$res = db_query("SELECT users.email, users.language, users.user_id
 	 			FROM users,user_group
@@ -2156,40 +2168,31 @@ Reasons for negative decision:
 		if (db_numrows($res) < 1) {
 			$this->setError(_("There is no administrator to send the mail."));
 			return false;
-		} else {
-			for ($i=0; $i<db_numrows($res) ; $i++) {
-				$admin_email = db_result($res,$i,'email') ;
-				$admin =& user_get_object(db_result($res,$i,'user_id'));
-				setup_gettext_for_user ($admin) ;
+		}
 
-				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+		for ($i=0; $i<db_numrows($res) ; $i++) {
+			$admin_email = db_result($res,$i,'email') ;
+			$admin =& user_get_object(db_result($res,$i,'user_id'));
+			setup_gettext_for_user ($admin) ;
+			
+			$message=stripcslashes(sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
 License: %4$s
+Submitter: %6$s (%7$s)
 
 Please visit the following URL to approve or reject this project:
-http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
-				util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
-				setup_gettext_from_browser () ;
-			}
+http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'], $submitter->getRealName(), $submitter->getUnixName()));
+			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
+			setup_gettext_from_browser () ;
 		}
 		
-		// Get the email of the user who wants to register the project
-		$res = db_query("SELECT u.email, u.language, u.user_id
-				 FROM users u, user_group ug
-				 WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
 
-		if (db_numrows($res) < 1) {
-			$this->setError(_("Cound not find user who has submitted the project."));
-			return false;
-		} else {
-			for ($i=0; $i<db_numrows($res) ; $i++) {
-				$email = db_result($res, $i, 'email');
-				$user =& user_get_object(db_result($res,$i,'user_id'));
-				setup_gettext_for_user ($user) ;
+		$email = $submitter->getEmail() ;
+		setup_gettext_for_user ($submitter) ;
 				
-				$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+		$message=stripcslashes(sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
@@ -2197,13 +2200,10 @@ License: %4$s
 
 The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
 				
-				util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
-				setup_gettext_from_browser () ;
-			}
-		}
+		util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
+		setup_gettext_from_browser () ;
 		
-
-	  return true;
+		return true;
 	}
 }
 
