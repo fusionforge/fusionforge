@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-27 23:17+0100\n"
+"POT-Creation-Date: 2007-12-11 10:56+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,9 +104,9 @@ msgid "Forum::savePlace()"
 msgstr "Forum::savePlace()"
 
 #: common/forum/Forum.class.php:607 common/include/Error.class.php:167
-#: common/mail/MailingList.class.php:255 www/news/admin/index.php:87
-#: www/news/admin/index.php:206 www/news/admin/index.php:217
-#: www/news/admin/index.php:239
+#: common/mail/MailingList.class.php:255 www/news/admin/index.php:89
+#: www/news/admin/index.php:208 www/news/admin/index.php:219
+#: www/news/admin/index.php:241
 #, php-format
 msgid "Error On Update:"
 msgstr "Fout bij bewerken:"
@@ -216,7 +216,7 @@ msgstr ""
 
 #: common/include/Error.class.php:130 common/include/Group.class.php:424
 #: common/include/Group.class.php:497 www/include/exit.php:38
-#: www/news/admin/index.php:350
+#: www/news/admin/index.php:352
 #, fuzzy
 msgid "Permission denied."
 msgstr "Toegang geweigerd"
@@ -622,18 +622,23 @@ msgstr ""
 msgid "%1$s Project Denied"
 msgstr "%1$s Project afgewezen"
 
-#: common/include/Group.class.php:2157
+#: common/include/Group.class.php:2155
+msgid "Could not find user who has submitted the project."
+msgstr ""
+
+#: common/include/Group.class.php:2169
 msgid "There is no administrator to send the mail."
 msgstr ""
 
-#: common/include/Group.class.php:2165
-#, php-format
+#: common/include/Group.class.php:2178
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
 "Project Full Name:  %2$s\n"
 "Submitted Description: %3$s\n"
 "License: %4$s\n"
+"Submitter: %6$s (%7$s)\n"
 "\n"
 "Please visit the following URL to approve or reject this project:\n"
 "http://%5$s/admin/approve-pending.php"
@@ -647,16 +652,12 @@ msgstr ""
 "Volg deze URL om de aanvraag goed of af te keuren:\n"
 "http://%5$s/admin/approve-pending.php"
 
-#: common/include/Group.class.php:2173 common/include/Group.class.php:2200
+#: common/include/Group.class.php:2187 common/include/Group.class.php:2203
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Nieuw %1$s project ingediend"
 
-#: common/include/Group.class.php:2184
-msgid "Cound not find user who has submitted the project."
-msgstr ""
-
-#: common/include/Group.class.php:2192
+#: common/include/Group.class.php:2195
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -897,9 +898,10 @@ msgid "Files"
 msgstr "Bestanden"
 
 #: common/include/group_section_texts.php:13
-#: plugins/quota_management/www/quota_project.php:78 www/admin/index.php:130
-#: www/include/Layout.class.php:595 www/news/index.php:37
-#: www/news/submit.php:97 www/themes/gforge-simple-theme/Theme.class.php:572
+#: plugins/quota_management/www/quota_project.php:78 www/activity/index.php:66
+#: www/admin/index.php:130 www/include/Layout.class.php:595
+#: www/news/index.php:37 www/news/submit.php:97
+#: www/themes/gforge-simple-theme/Theme.class.php:572
 #: www/themes/gforge/Theme.class.php:542
 msgid "News"
 msgstr "Nieuws"
@@ -1093,7 +1095,7 @@ msgid "Webcal"
 msgstr ""
 
 #: common/include/rbac_texts.php:74 www/admin/approve-pending.php:156
-#: www/admin/useredit.php:252
+#: www/admin/useredit.php:253
 msgid "Project Admin"
 msgstr "Project beheer"
 
@@ -1319,8 +1321,8 @@ msgstr "Per dag"
 #: common/reporting/report_utils.php:64
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:74
 #: plugins/svntracker/common/svntrackerPlugin.class.php:68
-#: www/activity/index.php:108 www/activity/index.php:109
-#: www/activity/index.php:129 www/news/admin/news_admin_utils.php:44
+#: www/activity/index.php:113 www/activity/index.php:114
+#: www/activity/index.php:134 www/news/admin/news_admin_utils.php:44
 #: www/pm/detail_task.php:51 www/pm/detail_task.php:55
 #: www/reporting/timeadd.php:130
 msgid "Y-m-d"
@@ -1548,8 +1550,8 @@ msgstr "Geen enqu&ecirc;tevraag gevonden"
 #: www/mail/admin/index.php:163 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:202 www/mail/index.php:23 www/mail/index.php:30
 #: www/mail/index.php:32 www/mail/index.php:43 www/mail/mail_utils.php:25
-#: www/my/rmproject.php:50 www/news/admin/index.php:109
-#: www/news/admin/index.php:259 www/people/viewjob.php:109
+#: www/my/rmproject.php:50 www/news/admin/index.php:111
+#: www/news/admin/index.php:261 www/people/viewjob.php:109
 #: www/pm/include/ProjectGroupHTML.class.php:40
 #: www/project/admin/database.php:47 www/project/admin/database.php:49
 #: www/project/admin/editgroupinfo.php:39
@@ -1565,7 +1567,7 @@ msgstr "Geen enqu&ecirc;tevraag gevonden"
 #: www/survey/admin/show_results.php:137
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 #: www/tarballs.php:25 www/tarballs.php:28 www/tarballs.php:34
-#: www/tarballs.php:37 www/tracker/admin/index.php:51
+#: www/tarballs.php:37 www/tracker/admin/index.php:53
 #: www/tracker/admin/updates.php:141 www/tracker/tracker.php:15
 #: www/tracker/tracker.php:30 www/users:35
 msgid "Error"
@@ -1685,12 +1687,12 @@ msgstr "Tekstgebied"
 #: www/admin/grouplist.php:87 www/admin/pluginman.php:178
 #: www/admin/search.php:105 www/admin/search.php:174
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
-#: www/news/admin/index.php:129 www/people/editjob.php:174
+#: www/news/admin/index.php:131 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
 #: www/pm/detail_task.php:107 www/pm/ganttpage.php:161 www/pm/mod_task.php:143
 #: www/pm/mod_task.php:160 www/reporting/usersummary.php:105
 #: www/tracker/admin/form-addextrafield.php:102
-#: www/tracker/admin/form-addextrafieldoption.php:48
+#: www/tracker/admin/form-addextrafieldoption.php:49
 #: www/tracker/admin/form-updateextrafieldelement.php:42
 #: www/tracker/browse.php:239
 msgid "Status"
@@ -2017,7 +2019,7 @@ msgstr ""
 #: www/docman/admin/index.php:458 www/forum/admin/index.php:185
 #: www/forum/admin/index.php:195 www/frs/admin/deletepackage.php:73
 #: www/frs/admin/deleterelease.php:83 www/frs/admin/index.php:173
-#: www/frs/admin/showreleases.php:117 www/news/admin/index.php:131
+#: www/frs/admin/showreleases.php:117 www/news/admin/index.php:133
 #: www/people/people_utils.php:185 www/people/people_utils.php:335
 #: www/people/skills_utils.php:36 www/people/skills_utils.php:94
 #: www/pm/admin/index.php:390 www/pm/admin/index.php:401
@@ -2490,7 +2492,7 @@ msgstr "Naam"
 msgid "Adds"
 msgstr "Toevoegingen"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:229 www/activity/index.php:54
+#: plugins/scmcvs/common/CVSPlugin.class.php:229 www/activity/index.php:71
 #: www/tracker/detail.php:202 www/tracker/mod-limited.php:182
 #: www/tracker/mod.php:275
 msgid "Commits"
@@ -3272,11 +3274,15 @@ msgstr ""
 "<p>Om je registratie af te ronden dien je nu in te loggen. Je account wordt "
 "dan geactiveerd voor normaal gebruik.</p>"
 
-#: www/activity/index.php:47 www/activity/index.php:101
-#: www/activity/index.php:119 www/include/Layout.class.php:546
+#: www/activity/index.php:47 www/activity/index.php:106
+#: www/activity/index.php:124 www/include/Layout.class.php:546
 #: www/themes/gforge-simple-theme/Theme.class.php:516
 #: www/themes/gforge/Theme.class.php:493
 msgid "Activity"
+msgstr ""
+
+#: www/activity/index.php:54
+msgid "Forum Post"
 msgstr ""
 
 #: www/activity/index.php:59
@@ -3287,19 +3293,15 @@ msgstr ""
 msgid "Tracker Closed"
 msgstr ""
 
-#: www/activity/index.php:66
+#: www/activity/index.php:76
 msgid "FRS Release"
 msgstr ""
 
-#: www/activity/index.php:71
-msgid "Forum Post"
-msgstr ""
-
-#: www/activity/index.php:92
+#: www/activity/index.php:97
 msgid "No Activity Found"
 msgstr ""
 
-#: www/activity/index.php:102 www/project/stats/index.php:53
+#: www/activity/index.php:107 www/project/stats/index.php:53
 #: www/reporting/groupadded.php:57 www/reporting/groupcum.php:57
 #: www/reporting/projectact.php:63 www/reporting/projecttime.php:73
 #: www/reporting/siteact.php:60 www/reporting/sitetime.php:69
@@ -3310,7 +3312,7 @@ msgstr ""
 msgid "Start"
 msgstr "Start"
 
-#: www/activity/index.php:103 www/project/stats/index.php:54
+#: www/activity/index.php:108 www/project/stats/index.php:54
 #: www/reporting/groupadded.php:58 www/reporting/groupcum.php:58
 #: www/reporting/projectact.php:64 www/reporting/projecttime.php:74
 #: www/reporting/siteact.php:61 www/reporting/sitetime.php:70
@@ -3321,12 +3323,12 @@ msgstr "Start"
 msgid "End"
 msgstr "Eind"
 
-#: www/activity/index.php:118 www/reporting/projecttime.php:87
+#: www/activity/index.php:123 www/reporting/projecttime.php:87
 #: www/reporting/sitetime.php:82 www/reporting/sitetimebar.php:85
 msgid "Time"
 msgstr "Tijd"
 
-#: www/activity/index.php:120 www/pm/include/ProjectTaskHTML.class.php:139
+#: www/activity/index.php:125 www/pm/include/ProjectTaskHTML.class.php:139
 #: www/pm/include/ProjectTaskHTML.class.php:178
 #: www/project/admin/project_admin_utils.php:164
 #: www/tracker/include/ArtifactHtml.class.php:89
@@ -3350,7 +3352,7 @@ msgstr "Toevoegen"
 #: www/admin/admin_table.php:195 www/forum/include/ForumHTML.class.php:522
 #: www/my/rmproject.php:90 www/people/editprofile.php:150
 #: www/people/editprofile.php:220 www/pm/mod_task.php:229
-#: www/register/projectinfo.php:196 www/reporting/timeadd.php:188
+#: www/register/projectinfo.php:201 www/reporting/timeadd.php:188
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -3404,18 +3406,19 @@ msgstr "Wijzig de %1$s hieronder:"
 #: www/admin/admin_table.php:193 www/admin/cronman.php:47
 #: www/admin/index.php:124 www/admin/userlist.php:187
 #: www/include/vote_function.php:267 www/my/bookmark_add.php:53
-#: www/my/bookmark_edit.php:64 www/news/admin/index.php:152
-#: www/news/admin/index.php:297 www/news/news_utils.php:54
+#: www/my/bookmark_edit.php:64 www/news/admin/index.php:154
+#: www/news/admin/index.php:299 www/news/news_utils.php:54
 #: www/news/submit.php:127 www/pm/add_task.php:41 www/pm/add_task.php:123
 #: www/pm/add_task.php:137 www/pm/admin/index.php:222
 #: www/pm/admin/index.php:268 www/pm/admin/index.php:307
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:259
-#: www/project/request.php:68 www/register/projectinfo.php:196
+#: www/project/request.php:69 www/register/projectinfo.php:201
 #: www/survey/include/SurveyHTML.class.php:551 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:52
 #: www/tracker/admin/form-addextrafield.php:114
+#: www/tracker/admin/form-addextrafieldoption.php:55
 #: www/tracker/admin/form-clonetracker.php:38
 #: www/tracker/admin/form-extrafieldcopy.php:71
 #: www/tracker/admin/form-updatecanned.php:29
@@ -3446,7 +3449,7 @@ msgstr "nieuwe toevoegen"
 #: www/survey/include/SurveyHTML.class.php:419
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
-#: www/tracker/admin/form-addextrafieldoption.php:31
+#: www/tracker/admin/form-addextrafieldoption.php:32
 msgid "Edit"
 msgstr "Wijzigen"
 
@@ -3520,7 +3523,7 @@ msgstr "ja"
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:181 www/news/admin/index.php:277
+#: www/admin/approve-pending.php:181 www/news/admin/index.php:279
 #: www/project/admin/index.php:325
 msgid "Reject"
 msgstr "Afwijzen"
@@ -3557,7 +3560,12 @@ msgstr "Licentie anders:"
 msgid "Pending reason:"
 msgstr "Reden in behandeling:"
 
-#: www/admin/approve-pending.php:231
+#: www/admin/approve-pending.php:226
+#, fuzzy, php-format
+msgid "Submitted by %1$s (%2$s)"
+msgstr "Ingediend door"
+
+#: www/admin/approve-pending.php:243
 msgid "Approve All On This Page"
 msgstr "Keur alles op deze pagina goed"
 
@@ -3928,50 +3936,42 @@ msgid "Site Mailings Maintenance"
 msgstr "Site mailings onderhoud"
 
 #: www/admin/index.php:155
-msgid "Add, Delete, or Edit Supported Languages"
-msgstr "Toevoegen, Verwijderen, of Wijzigen van ondersteunde talen"
-
-#: www/admin/index.php:156
 msgid "Add, Delete, or Edit File Types"
 msgstr "Toevoegen, Verwijderen, of Bewerken van file types"
 
-#: www/admin/index.php:157
+#: www/admin/index.php:156
 msgid "Add, Delete, or Edit Processors"
 msgstr "Toevoegen, Verwijderen, of Wijzigen van processoren"
 
-#: www/admin/index.php:158
+#: www/admin/index.php:157
 msgid "Add, Delete, or Edit Themes"
 msgstr "Toevoegen, Verwijderen, of Wijzigen van thema's"
 
-#: www/admin/index.php:159
+#: www/admin/index.php:158
 msgid "Add, Delete, or Edit Licenses"
 msgstr "Toevoegen, Verwijderen, of Wijzigen van licenties"
 
-#: www/admin/index.php:160
-msgid "Translation file tool"
-msgstr "Vertalingsbestanden beheer"
-
-#: www/admin/index.php:161
+#: www/admin/index.php:159
 msgid "Recent logins"
 msgstr "Recente logins"
 
-#: www/admin/index.php:162
+#: www/admin/index.php:160
 msgid "Cron Manager"
 msgstr "Cronbeheer"
 
-#: www/admin/index.php:163
+#: www/admin/index.php:161
 msgid "Plugin Manager"
 msgstr ""
 
-#: www/admin/index.php:164
+#: www/admin/index.php:162
 msgid "Config Manager"
 msgstr ""
 
-#: www/admin/index.php:173
+#: www/admin/index.php:171
 msgid "Virtual Host Admin Tool"
 msgstr "Virtuele Host beheer"
 
-#: www/admin/index.php:177
+#: www/admin/index.php:175
 msgid "Project Database Administration"
 msgstr "Project database beheer"
 
@@ -4044,7 +4044,7 @@ msgstr "Ontwikkelaars (test)"
 
 #: www/admin/massmail.php:122 www/admin/massmail.php:146
 #: www/developer/diary.php:52 www/developer/diary.php:79
-#: www/news/admin/index.php:133 www/news/admin/index.php:278
+#: www/news/admin/index.php:135 www/news/admin/index.php:280
 #: www/news/admin/news_admin_utils.php:63 www/news/submit.php:110
 #: www/sendmessage.php:136
 msgid "Subject"
@@ -5071,9 +5071,11 @@ msgid "Error Getting ForumMessage"
 msgstr "Fout bij het toevoegen van een forum"
 
 #: www/forum/admin/ForumAdmin.class.php:259
-#, php-format
-msgid "%1$s messages deleted"
-msgstr "%1$s berichten verwijderd"
+#, fuzzy, php-format
+msgid "%1$s message deleted"
+msgid_plural "%1$s messages deleted"
+msgstr[0] "%1$s berichten verwijderd"
+msgstr[1] "%1$s berichten verwijderd"
 
 #: www/forum/admin/ForumAdmin.class.php:280 www/pm/admin/index.php:159
 #: www/reporting/timeadd.php:80
@@ -6755,7 +6757,7 @@ msgstr "Er zijn geen openbare subprojecten beschikbaar"
 msgid "surveys"
 msgstr "Enqu&ecirc;tes"
 
-#: www/include/project_home.php:355 www/register/projectinfo.php:171
+#: www/include/project_home.php:355 www/register/projectinfo.php:176
 #: www/scm/admin/index.php:40 www/scm/admin/index.php:90
 #: www/scm/include/scm_utils.php:44 www/scm/index.php:33
 #: www/scm/reporting/index.php:33 www/scm/viewvc.php:139
@@ -7145,8 +7147,8 @@ msgstr "Voeg een nieuw item toe"
 msgid "Update An Entry"
 msgstr "Item bewerken"
 
-#: www/my/diary.php:158 www/news/admin/index.php:135
-#: www/news/admin/index.php:280 www/news/submit.php:113
+#: www/my/diary.php:158 www/news/admin/index.php:137
+#: www/news/admin/index.php:282 www/news/submit.php:113
 msgid "Details"
 msgstr ""
 
@@ -7315,27 +7317,27 @@ msgstr "Nieuwere versies"
 msgid "Older Releases"
 msgstr "Oudere versies"
 
-#: www/news/admin/index.php:89 www/news/admin/index.php:208
+#: www/news/admin/index.php:91 www/news/admin/index.php:210
 msgid "NewsByte Updated."
 msgstr "Nieuwsitem gewijzigd."
 
-#: www/news/admin/index.php:99 www/news/admin/index.php:247
+#: www/news/admin/index.php:101 www/news/admin/index.php:249
 #: www/project/admin/index.php:216
 #, fuzzy
 msgid "News admin"
 msgstr "Nieuwsbeheer"
 
-#: www/news/admin/index.php:109 www/news/admin/index.php:259
+#: www/news/admin/index.php:111 www/news/admin/index.php:261
 #, fuzzy
 msgid "NewsByte not found"
 msgstr "Geen."
 
-#: www/news/admin/index.php:116 www/news/admin/index.php:266
+#: www/news/admin/index.php:118 www/news/admin/index.php:268
 #, php-format
 msgid "Approve a NewsByte For Project: %1$s"
 msgstr "Nieuwsitem goedkeuren voor project: %1$s"
 
-#: www/news/admin/index.php:125 www/news/admin/index.php:272
+#: www/news/admin/index.php:127 www/news/admin/index.php:274
 #: www/pm/detail_task.php:26 www/pm/mod_task.php:36
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:46
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:38
@@ -7344,11 +7346,11 @@ msgstr "Nieuwsitem goedkeuren voor project: %1$s"
 msgid "Submitted by"
 msgstr "Ingediend door"
 
-#: www/news/admin/index.php:130
+#: www/news/admin/index.php:132
 msgid "Displayed"
 msgstr "Zichtbaar"
 
-#: www/news/admin/index.php:151
+#: www/news/admin/index.php:153
 #, php-format
 msgid ""
 "If this item is on the %1$s home page and you edit it, it will be removed "
@@ -7357,35 +7359,35 @@ msgstr ""
 "Als dit item op de %1$s home pagina staat en je wijzigt het zal het van de "
 "home pagina verwijderd worden."
 
-#: www/news/admin/index.php:167 www/news/admin/news_admin_utils.php:76
+#: www/news/admin/index.php:169 www/news/admin/news_admin_utils.php:76
 msgid "No Queued Items Found"
 msgstr "Geen klaarstaande items gevonden voor project"
 
-#: www/news/admin/index.php:170
+#: www/news/admin/index.php:172
 msgid "List of News Submitted for Project"
 msgstr "Deze nieuws items staan klaar voor project"
 
-#: www/news/admin/index.php:220
+#: www/news/admin/index.php:222
 msgid "NewsByte Deleted."
 msgstr "Nieuwsitem verwijderd."
 
-#: www/news/admin/index.php:242
+#: www/news/admin/index.php:244
 msgid "NewsBytes Rejected."
 msgstr "Nieuwsitems afgewezen."
 
-#: www/news/admin/index.php:271
+#: www/news/admin/index.php:273
 msgid "Submitted for group"
 msgstr "Ingediend voor groep"
 
-#: www/news/admin/index.php:275
+#: www/news/admin/index.php:277
 msgid "Approve For Front Page"
 msgstr "Goedkeuren voor voorpagina"
 
-#: www/news/admin/index.php:276
+#: www/news/admin/index.php:278
 msgid "Do Nothing"
 msgstr "Niet doen"
 
-#: www/news/admin/index.php:350
+#: www/news/admin/index.php:352
 #, php-format
 msgid ""
 "You have to be an admin on the project you are editing or a member of the %s "
@@ -9261,15 +9263,15 @@ msgstr ""
 msgid "Contact"
 msgstr "Contact"
 
-#: www/project/request.php:52
+#: www/project/request.php:53
 msgid "Your request has been submitted."
 msgstr "Je verzoek is verstuurd."
 
-#: www/project/request.php:56
+#: www/project/request.php:57
 msgid "Request to join project"
 msgstr "Verzoek om aan project deel te nemen"
 
-#: www/project/request.php:61
+#: www/project/request.php:62
 #, fuzzy
 msgid ""
 "You can request to join a project by clicking the submit button. The "
@@ -9286,7 +9288,7 @@ msgstr[1] ""
 "submit knop te klikken. Er wordt dan een email gestuurd naar een beheerder "
 "om je verzoek te behandelen."
 
-#: www/project/request.php:64
+#: www/project/request.php:65
 msgid "If you want, you can send a comment to the administrator:"
 msgid_plural "If you want, you can send a comment to the administrators:"
 msgstr[0] ""
@@ -9372,11 +9374,11 @@ msgstr "Levensduur"
 msgid "Statistics for All Time"
 msgstr "Statistieken voor de hele levensduur"
 
-#: www/register/projectinfo.php:97
+#: www/register/projectinfo.php:102
 msgid "Registration complete"
 msgstr "Registratie compleet"
 
-#: www/register/projectinfo.php:101
+#: www/register/projectinfo.php:106
 #, php-format
 msgid ""
 "Your project has been submitted to the %1$s administrators. Within 72 hours, "
@@ -9386,11 +9388,11 @@ msgstr ""
 "Je projectaanvraag is ingediend bij de  %1$s beheerder. Binnen 72 uur "
 "ontvang je een beslissing over de aanvraag, en verdere instructies.</p>"
 
-#: www/register/projectinfo.php:123
+#: www/register/projectinfo.php:128
 msgid "Project Information"
 msgstr "Project informatie"
 
-#: www/register/projectinfo.php:126
+#: www/register/projectinfo.php:131
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -9400,14 +9402,14 @@ msgstr ""
 "worden. Lees onderstaande omschrijvingen goed, en vul volledige en "
 "begrijpelijke gegevens in. Alle velden hieronder zijn verplicht."
 
-#: www/register/projectinfo.php:131
+#: www/register/projectinfo.php:136
 msgid ""
 "<h3>1. Project full name</h3>You should start with specifying the name of "
 "your project. The \"Full Name\" is descriptive, and has no arbitrary "
 "restrictions (except a 40 character limit).<p/>Full Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:135
+#: www/register/projectinfo.php:140
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -9426,7 +9428,7 @@ msgstr ""
 "resources op de bedoelde wijze worden aangewend. Deze omschrijving is niet "
 "bedoeld als een openbare project samenvatting.</strong>"
 
-#: www/register/projectinfo.php:141
+#: www/register/projectinfo.php:146
 #, fuzzy, php-format
 msgid "<h3>3. License</h3>"
 msgstr ""
@@ -9450,7 +9452,7 @@ msgstr ""
 "verantwoordelijk voor juridische discrepanties aangaande je licentie."
 "<p><strong>Licenties</strong>"
 
-#: www/register/projectinfo.php:146
+#: www/register/projectinfo.php:151
 msgid ""
 "<p>If you selected \"other\", please provide an explanation along with a "
 "description of your license. Realize that other licenses may not be "
@@ -9459,7 +9461,7 @@ msgid ""
 "OpenSource definition.</p>"
 msgstr ""
 
-#: www/register/projectinfo.php:152
+#: www/register/projectinfo.php:157
 msgid ""
 "<h3>4. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -9473,7 +9475,7 @@ msgstr ""
 "samenvatting (stap 2), gebruik een compacte. maar pakkende omschrijving. "
 "Maximum lengte is 255 tekens."
 
-#: www/register/projectinfo.php:157
+#: www/register/projectinfo.php:162
 #, php-format
 msgid ""
 "<h3>5. Project Unix Name</h3>In addition to full project name, you will need "
@@ -9491,7 +9493,7 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 
-#: www/register/projectinfo.php:167
+#: www/register/projectinfo.php:172
 #, fuzzy, php-format
 msgid ""
 "As there is only one SCM system, then this will be selected automatically. "
@@ -9500,7 +9502,7 @@ msgstr ""
 "Als er maar &eacute;&eacute;n SCM beschikbaar is wordt deze automatisch "
 "gekozen. De keuze is <strong>%1$s</strong>."
 
-#: www/register/projectinfo.php:170
+#: www/register/projectinfo.php:175
 msgid ""
 "<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
@@ -9779,8 +9781,8 @@ msgid "Task Status"
 msgstr "Taakstatus"
 
 #: www/reporting/usersummary.php:100
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:153
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:160
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:156
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:163
 #, php-format
 msgid "No matches found"
 msgstr "Niets gevonden"
@@ -9906,8 +9908,8 @@ msgstr "Beheer zoekresultaten"
 msgid "News Search Results"
 msgstr "%1$s zoekresultaat"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:151
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:158
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:154
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:161
 #, php-format
 msgid "No matches found - No sections available (check your permissions)"
 msgstr "Niets gevonden - geen secties beschikbaar (controleer je rechten)"
@@ -11360,7 +11362,7 @@ msgid "Custom Fields Defined"
 msgstr "Gedefinieerde extra velden"
 
 #: www/tracker/admin/form-addextrafield.php:24
-#: www/tracker/admin/form-addextrafieldoption.php:22
+#: www/tracker/admin/form-addextrafieldoption.php:23
 msgid "Elements Defined"
 msgstr "Gedefinieerde elementen"
 
@@ -11444,20 +11446,20 @@ msgstr ""
 msgid "Delete template"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:13
+#: www/tracker/admin/form-addextrafieldoption.php:14
 #, php-format
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:36
+#: www/tracker/admin/form-addextrafieldoption.php:37
 msgid "You have not defined any elements"
 msgstr "Je hebt geen enkel element gedefinieerd"
 
-#: www/tracker/admin/form-addextrafieldoption.php:42
+#: www/tracker/admin/form-addextrafieldoption.php:43
 msgid "Add New Element"
 msgstr "Nieuw element toevoegen"
 
-#: www/tracker/admin/form-addextrafieldoption.php:52
+#: www/tracker/admin/form-addextrafieldoption.php:53
 msgid "Once you add a new element, it cannot be deleted"
 msgstr ""
 "Nadat je een nieuw extra element hebt aangemaakt kan het niet meer "
@@ -11636,7 +11638,7 @@ msgstr "Publiek beschikbaar"
 msgid "Allow non-logged-in postings"
 msgstr "Berichten toestaan zonder ingelogd te zijn"
 
-#: www/tracker/admin/index.php:130
+#: www/tracker/admin/index.php:132
 msgid "Successfully Deleted."
 msgstr "Verwijderd."
 
@@ -12063,6 +12065,12 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 msgid "Invalid User"
 msgstr "Ongeldige gebruiker"
+
+#~ msgid "Add, Delete, or Edit Supported Languages"
+#~ msgstr "Toevoegen, Verwijderen, of Wijzigen van ondersteunde talen"
+
+#~ msgid "Translation file tool"
+#~ msgstr "Vertalingsbestanden beheer"
 
 #, fuzzy
 #~ msgid "Group list admin"
