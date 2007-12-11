@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6301-0+3) unstable; urgency=low
+gforge (4.6.99+svn6313-1) unstable; urgency=low
 
-  * New SVN snapshot (r6301).  Gettext transition is now complete
+  * New SVN snapshot (r6313).  Gettext transition is now complete
     (including the French translation).  Still lots of cleanups.
   * Removed debian/patches/use-fckeditor-from-distro.dpatch, since
     run-time detection was added upstream.
@@ -16,7 +16,7 @@ gforge (4.6.99+svn6301-0+3) unstable; urgency=low
   * Fixed handling of localised error messages from the PostgreSQL server
     (closes: #283849).
 
- -- Roland Mas <lolando@debian.org>  Tue, 11 Dec 2007 19:46:48 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 11 Dec 2007 21:21:23 +0100
 
 gforge (4.6.99+svn6225-1) unstable; urgency=low
 
