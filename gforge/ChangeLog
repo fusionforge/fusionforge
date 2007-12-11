@@ -2,6 +2,8 @@
 
 	* common/include/Group.class.php: Include realname and username of
 	the person who requests a project in the email sent to the admins.
+	* www/admin/approve-pending.php: Ditto, in the list of pending
+	projects.
 
 2007-12-06  Roland Mas  <lolando@debian.org>
 

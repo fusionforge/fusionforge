@@ -215,6 +215,18 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
+	$res = db_query("SELECT u.user_id
+			 FROM users u, user_group ug
+			 WHERE ug.group_id='".$row_grp['group_id']."' AND u.user_id=ug.user_id;");
+	
+	if (db_numrows($res) >= 1) {
+		$submitter =& user_get_object(db_result($res,0,'user_id'));
+		
+		echo '<p>'
+			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
+			.'</p>' ;
+	}
+	
 	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";
 
 }
