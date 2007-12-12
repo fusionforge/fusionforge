@@ -28,6 +28,7 @@ require_once('common/pm/ProjectGroupFactory.class.php');
 require_once('common/pm/ProjectTaskFactory.class.php');
 
 $group_project_id = getIntFromRequest('group_project_id');
+$project_task_id = getIntFromRequest('project_task_id');
 $aid = getIntFromRequest('aid');
 
 $a=new Artifact($ath,$aid);

@@ -1,5 +1,8 @@
 2007-12-12  Roland Mas  <lolando@debian.org>
 
+	* www/tracker/taskmgr.php: Fetch project_task_id parameter from
+	request.
+
 	* deb-specific/db-upgrade.pl: Unregister obsolete themes, and
 	register new ones.
 
