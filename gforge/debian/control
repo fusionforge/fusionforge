@@ -135,9 +135,10 @@ Description: collaborative development tool - mail tools (using Courier)
 
 Package: gforge-shell-postgresql
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, ssh, libnss-pgsql2
+Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, openssh-server, libnss-pgsql2
 Provides: gforge-shell
 Conflicts: gforge-shell
+Recommends: nscd
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  GForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -192,7 +193,7 @@ Description: collaborative development tool - mailing-lists (using Mailman)
 
 Package: gforge-plugin-scmcvs
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy
 Description: collaborative development tool - CVS plugin
  GForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -207,7 +208,7 @@ Provides: gforge-plugin-scm
 
 Package: gforge-plugin-scmsvn
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, subversion, subversion-tools, viewcvs, python-subversion, python (>= 2.3), php5-cli
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, viewcvs, python-subversion, python (>= 2.3), php5-cli
 Description: collaborative development tool - Subversion plugin
  GForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

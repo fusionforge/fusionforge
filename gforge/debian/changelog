@@ -1,8 +1,12 @@
 gforge (4.6.99+svn6313+something-0) UNRELEASED; urgency=low
 
   * Tracking SVN.
+  * The SCM plugins now depend on some gforge-shell, since they're useless
+    without it anyway.
+  * Updated gforge-shell-postgresql dependency to point to openssh-server
+    rather than ssh.  Also added a recommendation on nscd.
 
- -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 09:53:57 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 11:41:00 +0100
 
 gforge (4.6.99+svn6313-1) unstable; urgency=low
 

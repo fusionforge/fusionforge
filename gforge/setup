@@ -391,7 +391,13 @@ CHROOT=''
 HOMEPATH=/home
 GROUPPATH=/home/groups
 CVSPATH=/cvsroot
+if [ ! -e /cvsroot ] && [ -e /var/lib/gforge/chroot/cvsroot ] ; then
+    CVSPATH=/var/lib/gforge/chroot/cvsroot
+fi
 SVNPATH=/svnroot
+if [ ! -e /svnroot ] && [ -e /var/lib/gforge/chroot/svnroot ] ; then
+    SVNPATH=/var/lib/gforge/chroot/svnroot
+fi
 SHAREDIR=`pwd`
 LIBDIR=`pwd`
 CONFFILEOUTDIR=$ETCDIR
