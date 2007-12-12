@@ -1,5 +1,8 @@
 2007-12-12  Roland Mas  <lolando@debian.org>
 
+	* deb-specific/db-upgrade.pl: Unregister obsolete themes, and
+	register new ones.
+
 	* setup: Look for CVS and Subversion repositories in
 	/var/lib/gforge/chroot, if they're not found in the root
 	directory.

@@ -2750,6 +2750,55 @@ eval {
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.6.99-5" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Updating available themes") ;
+
+	my @obsolete_themes = qw/ classic debian savannah
+                                  savannah_codex savannah_forest
+                                  savannah_reverse savannah_sad
+                                  savannah_savannah savannah_slashd
+                                  savannah_startrek
+                                  savannah_transparent savannah_water
+                                  savannah_www.gnu.org
+                                  savannah_darkslate forged kde
+                                  darkaqua / ;
+
+	my $otids = join (',', map { "'$_'" } @obsolete_themes) ;
+	
+	$query = "UPDATE users SET theme_id=1 WHERE theme_id IN
+                     (SELECT theme_id FROM themes WHERE dirname IN ($otids))" ;
+	push @reqlist, $query;
+	
+	$query = "DELETE FROM themes WHERE dirname IN ($otids)" ;
+	push @reqlist, $query;
+
+	my %new_themes = (
+	    'gforge-classic'      => 'GForge classic',
+	    'gforge-simple-theme' => 'GForge simple',
+	    'lite'                => 'GForge lite'
+	    ) ;
+
+	foreach my $dir (sort keys %new_themes) {
+	    $query = "INSERT INTO themes (dirname, fullname) VALUES ('$dir', '$new_themes{$dir}')" ;
+	    push @reqlist, $query;
+	}
+
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # &debug ($query) ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
