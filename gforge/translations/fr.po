@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-11 10:56+0100\n"
-"PO-Revision-Date: 2007-12-11 10:58+0100\n"
+"PO-Revision-Date: 2007-12-12 09:53+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -332,7 +332,7 @@ msgstr "Accès non permis"
 #: common/include/Group.class.php:439
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr "Erreur lors de la mise à jour des propriétés du groupe"
+msgstr "Erreur lors de la mise à jour des propriétés du groupe : %s"
 
 #: common/include/Group.class.php:503
 msgid "Invalid Group Name"
@@ -450,7 +450,7 @@ msgstr "Erreur de base de données : artifact : %s"
 #: common/include/Group.class.php:1715 common/include/Group.class.php:1726
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
-msgstr "Erreur de base de données : project_assigned_to : %s"
+msgstr "Erreur de base de données : project_assigned_to : %d / %s"
 
 #: common/include/Group.class.php:1765
 msgid "Could Not Get Role"
@@ -616,7 +616,7 @@ msgid ""
 "Reasons for negative decision:\n"
 "\n"
 msgstr ""
-"La candidature de votre projet a été rejetée.\n"
+"La candidature de votre projet %3$s a été rejetée.\n"
 "\n"
 "Nom long du projet :  %1$s\n"
 "Nom UNIX du projet : %2$s\n"
@@ -6831,15 +6831,15 @@ msgstr "Forums de discussion"
 #, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
-msgstr[0] "<strong>%1$s</strong> message"
-msgstr[1] "<strong>%1$s</strong> messages"
+msgstr[0] "<strong>%d</strong> message"
+msgstr[1] "<strong>%d</strong> messages"
 
 #: www/include/project_home.php:296
 #, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "<strong>%1$s</strong> forum"
-msgstr[1] "<strong>%1$s</strong> forums"
+msgstr[0] "<strong>%d</strong> forum"
+msgstr[1] "<strong>%d</strong> forums"
 
 #: www/include/project_home.php:307
 msgid "DocManager: Project Documentation"
@@ -7996,18 +7996,7 @@ msgid ""
 "</p><p>If you're a project admin, log in and submit help wanted requests "
 "through your project administration page.</p><p>To suggest new job "
 "categories, submit a request via the support manager.</p>"
-msgstr ""
-"<p>Le système « Demande d'aide » est destiné aux offres non commerciales de "
-"postes pour volontaires. Tout usage commercial de ce système d'annonces est "
-"interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à "
-"ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en "
-"premier. (Les administrateurs de projets peuvent toujours soumettre une "
-"nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories "
-"pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes "
-"administrateur de projet, identifiez-vous et soumettez des demandes d'aide à "
-"travers l'interface d'administration de votre projet.</p><p>Pour suggérer de "
-"nouvelles catégories, soumettez votre demande via le gestionnaire de support."
-"</p>"
+msgstr "<p>Le système « Demande d'aide » de %1$s est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>"
 
 #: www/people/index.php:67
 msgid "Last posts"
@@ -9066,14 +9055,7 @@ msgid ""
 "locations available in the map. Simultaneous categorization in a specific "
 "category AND a parent category will result in only the more specific "
 "categorization being accepted</p>."
-msgstr ""
-"<h3>Éditer la catégorisation</h3><p>Choisissez jusqu'à trois catégories pour "
-"ce projet dans chacune des arborescences de classement.  Vous pouvez bien "
-"entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</"
-"p><p>Important : les projets doivent être classés dans la catégorie la plus "
-"spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une "
-"catégorie spécifique et une plus générique, seule la catégorie la plus "
-"spécifique sera conservée.</p>\n"
+msgstr "<h3>Éditer la catégorisation</h3><p>Choisissez jusqu'à trois catégories pour ce projet dans chacune des arborescences de classement.  Vous pouvez bien entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</p><p>Important : les projets doivent être classés dans la catégorie la plus spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une catégorie spécifique et une plus générique, seule la catégorie la plus spécifique sera conservée.</p>"
 
 #: www/project/admin/group_trove.php:107
 msgid "Update All Category Changes"
@@ -11218,8 +11200,8 @@ msgstr "Questions de ce sondage"
 #, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
-msgstr[0] "%1$s question trouvée"
-msgstr[1] "%1$s questions trouvées"
+msgstr[0] "%d question trouvée"
+msgstr[1] "%d questions trouvées"
 
 #: www/survey/include/SurveyHTML.class.php:338
 msgid "Survey ID"

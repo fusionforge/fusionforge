@@ -1,3 +1,9 @@
+gforge (4.6.99+svn6313+something-0) UNRELEASED; urgency=low
+
+  * Tracking SVN.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 09:53:57 +0100
+
 gforge (4.6.99+svn6313-1) unstable; urgency=low
 
   * New SVN snapshot (r6313).  Gettext transition is now complete
