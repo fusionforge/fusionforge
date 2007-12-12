@@ -8,8 +8,9 @@ gforge (4.6.99+svn6313+something-0) UNRELEASED; urgency=low
     rather than ssh.  Also added a recommendation on nscd.
   * Updated the list of registered themes to match what's actually
     available (closes: #395026).
+  * Handle "/" characters in values for the config file (closes: #420511).
 
- -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 17:22:35 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 17:37:10 +0100
 
 gforge (4.6.99+svn6313-1) unstable; urgency=low
 
