@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-11 10:56+0100\n"
-"PO-Revision-Date: 2007-03-13 19:44+0100\n"
+"PO-Revision-Date: 2007-12-13 10:34+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6719,11 +6719,11 @@ msgid "There are no public trackers available"
 msgstr "Es sind keine öffentlichen Tracker verfügbar"
 
 #: www/include/project_home.php:280 www/include/project_summary.php:140
-#, fuzzy, php-format
+#, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgstr[0] "%1$s offen/%2$s gesamt"
-msgstr[1] "%1$s offen/%2$s gesamt"
+msgstr[0] "(<strong>%1$s</strong> offen / <strong>%2$s</strong> gesamt)"
+msgstr[1] "(<strong>%1$s</strong> offen / <strong>%2$s</strong> gesamt)"
 
 #: www/include/project_home.php:291
 msgid "Public Forums"
@@ -6737,10 +6737,10 @@ msgstr[0] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 
 #: www/include/project_home.php:296
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
+msgstr[0] "<strong>%1$s</strong> Projekt in der Ergebnisliste."
 msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 
 #: www/include/project_home.php:307
@@ -7188,9 +7188,9 @@ msgid "You Have No Diary Entries"
 msgstr "Sie haben keine Terminkalendereinträge"
 
 #: www/my/index.php:61
-#, fuzzy, php-format
+#, php-format
 msgid "Personal Page For %s"
-msgstr "Meine persönliche Seite"
+msgstr "Persönliche Seite für %s"
 
 #: www/my/index.php:67
 msgid "Assigned Artifacts"
@@ -7259,9 +7259,8 @@ msgid "My Projects"
 msgstr "Meine Projekte"
 
 #: www/my/index.php:325
-#, fuzzy
 msgid "My Roles"
-msgstr "Rolle"
+msgstr "Meine Rolle"
 
 #: www/my/index.php:345
 msgid "You're not a member of any active projects"
@@ -7339,7 +7338,6 @@ msgstr ""
 
 #: www/news/admin/index.php:101 www/news/admin/index.php:249
 #: www/project/admin/index.php:216
-#, fuzzy
 msgid "News admin"
 msgstr "News-Admin"
 
@@ -7445,9 +7443,9 @@ msgstr ""
 "suchen und Nachrichten posten</p>"
 
 #: www/news/index.php:61
-#, fuzzy, php-format
+#, php-format
 msgid "No News Found For %s"
-msgstr "Keine Neuigkeiten gefunden"
+msgstr "Keine Neuigkeiten gefunden für %s"
 
 #: www/news/index.php:63
 msgid "No News Found"
@@ -7617,7 +7615,6 @@ msgid "POSTING fetch FAILED"
 msgstr "POSTING Abruf FEHLGESCHLAGEN"
 
 #: www/people/editjob.php:163 www/people/viewjob.php:60
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "Kein solches Posting für dieses Projekt"
 
@@ -8369,14 +8366,13 @@ msgid "December"
 msgstr "Dezember"
 
 #: www/pm/calendar.php:113
-#, fuzzy
 msgid "Calendar"
 msgstr "Kalender"
 
 #: www/pm/calendar.php:128
-#, fuzzy, php-format
+#, php-format
 msgid "Task summary: %s"
-msgstr "Zusammenfassung des Auftrags"
+msgstr "Zusammenfassung des Auftrags %s"
 
 #: www/pm/calendar.php:133
 #, fuzzy, php-format
@@ -8994,34 +8990,28 @@ msgid "Tool Admin"
 msgstr "Tool Administrator"
 
 #: www/project/admin/index.php:207
-#, fuzzy
 msgid "Tracker admin"
 msgstr "Tracker Administrator"
 
 #: www/project/admin/index.php:210
-#, fuzzy
 msgid "Doc manager admin"
-msgstr "Dokumenten-Manager Admin"
+msgstr "Dokumenten-Manager Administrator"
 
 #: www/project/admin/index.php:219
-#, fuzzy
 msgid "Task manager admin"
 msgstr "Task-Manager Administrator"
 
 #: www/project/admin/index.php:222
-#, fuzzy
 msgid "Forum admin"
-msgstr "Forum-Admin"
+msgstr "Forum Administrator"
 
 #: www/project/admin/index.php:225
-#, fuzzy
 msgid "FRS admin"
-msgstr "FRS Admin"
+msgstr "FRS Administrator"
 
 #: www/project/admin/index.php:228
-#, fuzzy
 msgid "SCM admin"
-msgstr "SCM-Admin"
+msgstr "SCM Administrator"
 
 #: www/project/admin/index.php:245
 msgid "Group Members"
@@ -9132,7 +9122,6 @@ msgid "Group Change History"
 msgstr "Gruppenänderungsverlauf"
 
 #: www/project/admin/project_admin_utils.php:187
-#, fuzzy
 msgid "No changes"
 msgstr "Keine Änderung"
 

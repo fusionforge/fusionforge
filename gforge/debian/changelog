@@ -1,7 +1,8 @@
 gforge (4.6.99+svn6313+something-0) UNRELEASED; urgency=low
 
   * Tracking SVN.  This includes a bugfix for the creation of a relation
-    between a tracker item and a task (closes: #376095).
+    between a tracker item and a task (closes: #376095), and a few German
+    localisation updates (closes: #375526).
   * The SCM plugins now depend on some gforge-shell, since they're useless
     without it anyway.
   * Updated gforge-shell-postgresql dependency to point to openssh-server
@@ -10,7 +11,7 @@ gforge (4.6.99+svn6313+something-0) UNRELEASED; urgency=low
     available (closes: #395026).
   * Handle "/" characters in values for the config file (closes: #420511).
 
- -- Roland Mas <lolando@debian.org>  Wed, 12 Dec 2007 17:37:10 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Dec 2007 10:35:24 +0100
 
 gforge (4.6.99+svn6313-1) unstable; urgency=low
 
