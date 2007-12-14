@@ -1,3 +1,10 @@
+gforge (4.6.99+svn6319-3) unstable; urgency=low
+
+  * gforge-mta-postfix.config: don't try to replace files unless their
+    replacements have been generated.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Dec 2007 17:20:11 +0100
+
 gforge (4.6.99+svn6319-2) unstable; urgency=low
 
   * Fixed dependencies to add at least one real package before virtual
