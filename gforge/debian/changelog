@@ -1,3 +1,10 @@
+gforge (4.6.99+svn6319-2) unstable; urgency=low
+
+  * Fixed dependencies to add at least one real package before virtual
+    ones. 
+
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Dec 2007 13:12:15 +0100
+
 gforge (4.6.99+svn6319-1) unstable; urgency=low
 
   * New SVN snapshot (r6319).  This includes a bugfix for the creation of
